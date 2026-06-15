@@ -1,46 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=id
-fetched_at: 2026-06-08T05:36:07.587882+00:00
-title: "Agen ReAct dari awal dengan Gemini dan LangGraph \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ja
+fetched_at: 2026-06-15T06:30:19.475125+00:00
+title: "Gemini \u3068 LangGraph \u3092\u4f7f\u7528\u3057\u3066 ReAct \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u3092\u30bc\u30ed\u304b\u3089\u4f5c\u6210\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Kirim masukan
+フィードバックを送信
 
-# Agen ReAct dari awal dengan Gemini dan LangGraph
+# Gemini と LangGraph を使用して ReAct エージェントをゼロから作成する
 
-LangGraph adalah framework untuk membangun aplikasi LLM stateful, sehingga menjadi pilihan yang baik untuk membuat Agen ReAct (Reasoning and Acting).
+LangGraph はステートフルな LLM アプリケーションを構築するためのフレームワークであり、ReAct（推論と行動）エージェントの構築に適しています。
 
-Agen ReAct menggabungkan penalaran LLM dengan eksekusi tindakan. Agen ini berpikir secara berulang, menggunakan alat, dan bertindak berdasarkan pengamatan untuk mencapai sasaran pengguna, serta menyesuaikan pendekatan secara dinamis. Diperkenalkan dalam ["ReAct: Synergizing Reasoning and Acting
-in Language Models"](https://arxiv.org/abs/2210.03629) (2023), pola ini
-mencoba meniru pemecahan masalah yang fleksibel dan mirip manusia melalui alur kerja yang kaku.
+ReAct エージェントは、LLM の推論とアクションの実行を組み合わせます。ユーザーの目標を達成するために、反復的に思考し、ツールを使用し、観察に基づいて行動し、アプローチを動的に適応させます。「["ReAct: Synergizing Reasoning and Acting
+in Language Models"](https://arxiv.org/abs/2210.03629)」（2023 年）で紹介されたこのパターンは、厳格なワークフローではなく、人間のような柔軟な問題解決を反映しようとしています。
 
-LangGraph menawarkan agen ReAct bawaan ([`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)),
-yang sangat berguna saat Anda memerlukan lebih banyak kontrol dan penyesuaian untuk penerapan ReAct. Panduan ini akan menunjukkan versi yang disederhanakan.
+LangGraph には、ReAct エージェント（[`create_react_agent`](https://langchain-ai.github.io/langgraph/reference/prebuilt/#langgraph.prebuilt.chat_agent_executor.create_react_agent)）が組み込まれています。これは、ReAct 実装の制御とカスタマイズを強化する必要がある場合に役立ちます。このガイドでは、簡略化されたバージョンを示します。
 
-Agen model LangGraph sebagai grafik menggunakan tiga komponen utama:
+LangGraph は、次の 3 つの主要なコンポーネントを使用してエージェントをグラフとしてモデル化します。
 
-- `State`: Struktur data bersama (biasanya `TypedDict` atau `Pydantic BaseModel`) yang mewakili snapshot saat ini dari aplikasi.
-- `Nodes`: Mengenkode logika agen Anda. Agen ini menerima Status saat ini sebagai input, melakukan beberapa komputasi atau efek samping, dan menampilkan Status yang diperbarui, seperti panggilan LLM atau panggilan alat.
-- `Edges`: Menentukan `Node` berikutnya yang akan dieksekusi berdasarkan `State` saat ini, sehingga memungkinkan logika kondisional dan transisi tetap.
+- `State`: アプリケーションの現在のスナップショットを表す共有データ構造（通常は `TypedDict` または `Pydantic BaseModel`）。
+- `Nodes`: エージェントのロジックをエンコードします。現在の State を入力として受け取り、計算または副作用を実行して、更新された State（LLM 呼び出しやツール呼び出しなど）を返します。
+- `Edges`: 現在の `State` に基づいて実行する次の `Node` を定義し、条件付きロジックと固定遷移を可能にします。
 
-Jika belum memiliki Kunci API, Anda bisa mendapatkannya dari [Google AI
-Studio](https://aistudio.google.com/app/apikey?hl=id).
+API キーをまだ取得していない場合は、[Google AI
+Studio](https://aistudio.google.com/apikey?hl=ja) から取得できます。
 
 ```
 pip install langgraph langchain-google-genai geopy requests
 ```
 
-Tetapkan kunci API Anda dalam variabel lingkungan `GEMINI_API_KEY`.
+環境変数 `GEMINI_API_KEY` に API キーを設定します。
 
 ```
 import os
@@ -49,12 +47,12 @@ import os
 api_key = os.getenv("GEMINI_API_KEY")
 ```
 
-Untuk lebih memahami cara menerapkan agen ReAct menggunakan LangGraph, panduan ini akan membahas contoh praktis. Anda akan membuat agen yang tujuannya adalah menggunakan alat untuk menemukan cuaca saat ini untuk lokasi tertentu.
+LangGraph を使用して ReAct エージェントを実装する方法をよりよく理解するために、このガイドでは実践的な例を紹介します。ツールを使用して、指定された場所の現在の天気を調べるエージェントを作成します。
 
-Untuk agen cuaca ini, `State` akan mempertahankan histori percakapan yang sedang berlangsung (sebagai daftar pesan) dan penghitung (sebagai bilangan bulat) untuk jumlah langkah yang diambil, untuk tujuan ilustrasi.
+この天気エージェントでは、`State` は継続的な会話履歴（メッセージのリストとして）と、実行されたステップ数のカウンタ（整数として）を保持します。これは説明のためのものです。
 
-LangGraph menyediakan fungsi helper, `add_messages`, untuk memperbarui daftar pesan status. Fungsi ini berfungsi sebagai [peredam](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers),
-mengambil daftar saat ini, ditambah pesan baru, dan menampilkan daftar gabungan. Fungsi ini menangani pembaruan berdasarkan ID pesan dan secara default menggunakan perilaku "hanya tambahkan" untuk pesan baru yang belum dilihat.
+LangGraph には、状態メッセージ リストを更新するためのヘルパー関数 `add_messages` が用意されています。これは[リデューサー](https://langchain-ai.github.io/langgraph/concepts/low_level/#reducers)として機能し、
+現在のリストと新しいメッセージを受け取り、結合されたリストを返します。メッセージ ID で更新を処理し、新しい未確認のメッセージに対してはデフォルトで「追加のみ」の動作になります。
 
 ```
 from typing import Annotated,Sequence, TypedDict
@@ -68,7 +66,7 @@ class AgentState(TypedDict):
     number_of_steps: int
 ```
 
-Selanjutnya, tentukan alat cuaca Anda.
+次に、天気ツールを定義します。
 
 ```
 from langchain_core.tools import tool
@@ -107,7 +105,7 @@ def get_weather_forecast(location: str, date: str):
 tools = [get_weather_forecast]
 ```
 
-Sekarang, inisialisasi model dan ikat alat ke model.
+次に、モデルを初期化し、ツールをモデルにバインドします。
 
 ```
 from datetime import datetime
@@ -130,16 +128,14 @@ res=model.invoke(f"What is the weather in Berlin on {datetime.today()}?")
 print(res)
 ```
 
-Langkah terakhir sebelum Anda dapat menjalankan agen adalah menentukan node dan edge.
-Dalam contoh ini, Anda memiliki dua node dan satu edge.
+エージェントを実行する前の最後のステップは、ノードとエッジを定義することです。
+この例では、2 つのノードと 1 つのエッジがあります。
 
-- Node `call_tool` yang menjalankan metode alat Anda. LangGraph memiliki node bawaan
-  untuk ini yang disebut
-  [ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/).
-- Node `call_model` yang menggunakan `model_with_tools` untuk memanggil model.
-- Edge `should_continue` yang menentukan apakah akan memanggil alat atau model.
+- ツールメソッドを実行する `call_tool` ノード。[ToolNode](https://langchain-ai.github.io/langgraph/how-tos/tool-calling/)
+- `model_with_tools` を使用してモデルを呼び出す `call_model` ノード。
+- ツールを呼び出すかモデルを呼び出すかを決定する `should_continue` エッジ。
 
-Jumlah node dan edge tidak tetap. Anda dapat menambahkan node dan edge sebanyak yang Anda inginkan ke grafik. Misalnya, Anda dapat menambahkan node untuk menambahkan output terstruktur atau node verifikasi/refleksi mandiri untuk memeriksa output model sebelum memanggil alat atau model.
+ノードとエッジの数は固定されていません。グラフには必要な数のノードとエッジを追加できます。たとえば、構造化された出力を追加するノードや、ツールまたはモデルを呼び出す前にモデルの出力を確認する自己検証/反射ノードを追加できます。
 
 ```
 from langchain_core.messages import ToolMessage
@@ -183,7 +179,7 @@ def should_continue(state: AgentState):
     return "continue"
 ```
 
-Dengan semua komponen agen siap, Anda kini dapat merakitnya.
+エージェントのすべてのコンポーネントが準備できたので、組み立てることができます。
 
 ```
 from langgraph.graph import StateGraph, END
@@ -219,7 +215,7 @@ workflow.add_edge("tools", "llm")
 graph = workflow.compile()
 ```
 
-Anda dapat memvisualisasikan grafik menggunakan metode `draw_mermaid_png`.
+`draw_mermaid_png` メソッドを使用してグラフを可視化できます。
 
 ```
 from IPython.display import Image, display
@@ -227,9 +223,9 @@ from IPython.display import Image, display
 display(Image(graph.get_graph().draw_mermaid_png()))
 ```
 
-![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=id)
+![png](https://ai.google.dev/static/gemini-api/docs/images/langgraph-react-agent_16_0.png?hl=ja)
 
-Sekarang jalankan agen.
+エージェントを実行します。
 
 ```
 from datetime import datetime
@@ -242,7 +238,7 @@ for state in graph.stream(inputs, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Anda kini dapat melanjutkan percakapan, meminta cuaca di kota lain, atau meminta perbandingan.
+会話を続けたり、別の都市の天気を尋ねたり、比較をリクエストしたりできます。
 
 ```
 state["messages"].append(("user", "Would it be warmer in Munich?"))
@@ -252,12 +248,12 @@ for state in graph.stream(state, stream_mode="values"):
     last_message.pretty_print()
 ```
 
-Kirim masukan
+フィードバックを送信
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Terakhir diperbarui pada 2026-05-19 UTC.
+最終更新日 2026-06-10 UTC。
 
-Ada masukan untuk kami?
+ご意見をお聞かせください
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-19 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-10 UTC。"],[],[]]

@@ -1,47 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=id
-fetched_at: 2026-06-08T05:30:01.827524+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=zh-TW
+fetched_at: 2026-06-15T06:20:16.724629+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Kirim masukan
+提供意見
 
-# Pemahaman video
+# 影片解讀
 
-> Untuk mempelajari pembuatan video, lihat panduan [Veo](https://ai.google.dev/gemini-api/docs/video?hl=id).
+> 如要瞭解如何生成影片，請參閱 [Veo](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw) 指南。
 
-Model Gemini dapat memproses video, sehingga memungkinkan banyak kasus penggunaan developer yang belum pernah ada sebelumnya yang secara historis memerlukan model khusus domain.
-Beberapa kemampuan penglihatan Gemini mencakup kemampuan untuk: mendeskripsikan, menyegmentasikan, dan mengekstrak informasi dari video, menjawab pertanyaan tentang konten video, dan merujuk ke stempel waktu tertentu dalam video.
+Gemini 模型可處理影片，因此許多前沿開發人員可使用這些模型，不必再像過去一樣，需要特定領域的模型。Gemini 的部分視覺功能包括：描述、區隔及擷取影片資訊、回答影片內容相關問題，以及參照影片中的特定時間戳記。
 
-Anda dapat memberikan video sebagai input ke Gemini dengan cara berikut:
+你可以透過下列方式將影片提供給 Gemini：
 
-| Metode masukan | Ukuran maks | Kasus penggunaan yang direkomendasikan |
+| 輸入法 | 大小上限 | 建議用途 |
 | --- | --- | --- |
-| [File API](#upload-video) | 20 GB (berbayar) / 2 GB (gratis) | File besar (100 MB+), video panjang (10 menit+), file yang dapat digunakan kembali. |
-| [Pendaftaran Cloud Storage](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=id#registration) | 2 GB (per file, tanpa batas penyimpanan) | File besar (100 MB+), video panjang (10 menit+), file persisten yang dapat digunakan kembali. |
-| [Data Sebaris](#inline-video) | < 100MB | File kecil (<100 MB), durasi singkat (<1 menit), input satu kali. |
-| [URL YouTube](#youtube) | T/A | Video YouTube publik. |
+| [檔案 API](#upload-video) | 20 GB (付費) / 2 GB (免費) | 大型檔案 (100 MB 以上)、長影片 (10 分鐘以上)、可重複使用的檔案。 |
+| [Cloud Storage 註冊](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw#registration) | 2 GB (每個檔案，無儲存空間限制) | 大型檔案 (100 MB 以上)、長影片 (10 分鐘以上)、可重複使用的永久檔案。 |
+| [內嵌資料](#inline-video) | < 100MB | 小型檔案 (小於 100 MB)、短時間 (小於 1 分鐘)、一次性輸入。 |
+| [YouTube 網址](#youtube) | 不適用 | 公開的 YouTube 影片。 |
 
-> **Catatan:** [File API](#upload-video) direkomendasikan untuk sebagian besar kasus penggunaan, terutama untuk file yang berukuran lebih dari 100 MB atau saat Anda ingin menggunakan kembali file di beberapa permintaan.
+> **注意：**建議在大多數情況下使用 [File API](#upload-video)，尤其是檔案大小超過 100 MB，或是您想在多個要求中重複使用檔案時。
 
-Untuk mempelajari metode input file lainnya, seperti menggunakan URL eksternal atau file yang disimpan di Google Cloud, lihat panduan [Metode input file](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=id).
+如要瞭解其他檔案輸入方法，例如使用外部網址或儲存在 Google Cloud 中的檔案，請參閱[檔案輸入方法](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=zh-tw)指南。
 
-### Mengupload file video
+### 上傳影片檔案
 
-Kode berikut mendownload video contoh, menguploadnya menggunakan [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=id),
-menunggu pemrosesannya selesai, lalu menggunakan referensi file yang diupload untuk
-meringkas video.
+下列程式碼會下載影片樣本、使用 [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=zh-tw) 上傳影片、等待處理完成，然後使用上傳的檔案參照來總結影片內容。
 
 ### Python
 
@@ -180,18 +177,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 jq ".steps[].content[0].text" response.json
 ```
 
-Selalu gunakan Files API jika total ukuran permintaan (termasuk file, perintah teks, petunjuk sistem, dll.) lebih besar dari 20 MB, durasi video signifikan, atau jika Anda ingin menggunakan video yang sama dalam beberapa perintah.
-File API menerima format file video secara langsung.
+如果要求總大小 (包括檔案、文字提示詞、系統指令等) 超過 20 MB、影片時間長度較長，或您打算在多個提示詞中使用相同影片，請一律使用 Files API。File API 可直接接受影片檔案格式。
 
-Untuk mempelajari lebih lanjut cara menggunakan file media, lihat
-[Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=id).
+如要進一步瞭解如何處理媒體檔案，請參閱 [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=zh-tw)。
 
-### Meneruskan data video secara inline
+### 內嵌傳遞影片資料
 
-Daripada mengupload file video menggunakan File API, Anda dapat meneruskan video yang lebih kecil langsung dalam permintaan. Opsi ini cocok untuk
-video yang lebih pendek dengan total ukuran permintaan di bawah 20 MB.
+您可以直接在要求中傳遞較小的影片，不必使用 File API 上傳影片檔案。這適合總要求大小小於 20 MB 的短片。
 
-Berikut contoh cara memberikan data video inline:
+以下是提供內嵌影片資料的範例：
 
 ### Python
 
@@ -270,9 +264,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }' 2> /dev/null
 ```
 
-### URL YouTube yang memenuhi syarat
+### 傳送 YouTube 網址
 
-Anda dapat meneruskan URL YouTube langsung ke Gemini API sebagai bagian dari permintaan Anda sebagai berikut:
+您可以將 YouTube 網址直接傳遞至 Gemini API，做為要求的一部分，如下所示：
 
 ### Python
 
@@ -332,16 +326,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }' 2> /dev/null
 ```
 
-**Batasan:**
+**限制：**
 
-- Untuk paket gratis, Anda tidak dapat mengupload lebih dari 8 jam video YouTube per hari.
-- Untuk paket berbayar, tidak ada batasan berdasarkan durasi video.
-- Untuk model sebelum Gemini 2.5, Anda hanya dapat mengupload 1 video per permintaan. Untuk model Gemini 2.5 dan yang lebih baru, Anda dapat mengupload maksimal 10 video per permintaan.
-- Anda hanya dapat mengupload video publik (bukan video pribadi atau tidak publik).
+- 免費方案每天最多只能上傳 8 小時的 YouTube 影片。
+- 付費方案則沒有影片長度限制。
+- 如果是 Gemini 2.5 之前的模型，每次要求只能上傳 1 部影片。如果是 Gemini 2.5 以上版本，每個要求最多可上傳 10 部影片。
+- 你只能上傳公開影片，無法上傳私人或不公開影片。
 
-## Lihat stempel waktu dalam konten
+## 參考內容中的時間戳記
 
-Anda dapat mengajukan pertanyaan tentang titik waktu tertentu dalam video menggunakan stempel waktu dalam bentuk `MM:SS`.
+你可以使用 `MM:SS` 格式的時間戳記，詢問影片中特定時間點的問題。
 
 ### Python
 
@@ -361,12 +355,11 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
 ```
 
-## Mengekstrak insight mendetail dari video
+## 從影片擷取詳細洞察資料
 
-Model Gemini menawarkan kemampuan canggih untuk memahami konten video dengan memproses informasi dari aliran **audio dan visual**. Dengan demikian, Anda dapat mengekstrak serangkaian detail yang kaya, termasuk membuat deskripsi tentang apa yang terjadi dalam video dan menjawab pertanyaan tentang kontennya.
+Gemini 模型可處理**音訊和影像**串流中的資訊，因此具備強大的影片內容解讀能力。這項功能可讓你擷取豐富的詳細資料，包括生成影片內容的說明，以及回答相關問題。
 
-Untuk deskripsi visual, model mengambil sampel video dengan kecepatan **1 frame per detik** (FPS). Frekuensi sampling default ini berfungsi dengan baik untuk sebagian besar konten, tetapi perhatikan bahwa frekuensi ini mungkin tidak menangkap detail dalam video dengan gerakan cepat atau perubahan adegan yang cepat.
-Untuk konten dengan gerakan tinggi seperti itu, pertimbangkan untuk [menetapkan kecepatan frame kustom](#custom-frame-rate).
+如要生成視覺描述，模型會以**每秒 1 個影格** (FPS) 的速率對影片取樣。這個預設取樣率適用於大多數內容，但請注意，如果影片有快速動作或場景快速變換，可能就會錯過細節。對於這類高動態內容，建議[設定自訂影格率](#custom-frame-rate)。
 
 ### Python
 
@@ -386,9 +379,9 @@ const prompt = "Describe the key events in this video, providing both audio and 
 PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
 ```
 
-## Format video yang didukung
+## 支援的影片格式
 
-Gemini mendukung jenis MIME format video berikut:
+Gemini 支援下列影片格式 MIME 類型：
 
 - `video/mp4`
 - `video/mpeg`
@@ -400,49 +393,45 @@ Gemini mendukung jenis MIME format video berikut:
 - `video/wmv`
 - `video/3gpp`
 
-## Detail teknis tentang video
+## 影片技術詳細資料
 
-- **Model & konteks yang didukung**: Semua Gemini dapat memproses data video.
-  - Model dengan jendela konteks 1 juta token dapat memproses video berdurasi hingga 1 jam pada resolusi media default atau berdurasi 3 jam pada resolusi media rendah.
-- **Pemrosesan File API**: Saat menggunakan File API, video disimpan pada 1 frame per detik (FPS) dan audio diproses pada 1 Kbps (satu saluran).
-  Stempel waktu ditambahkan setiap detik.
-  - Kecepatan ini dapat berubah di masa mendatang untuk meningkatkan kualitas inferensi.
-- **Penghitungan token**: Setiap detik video di-tokenisasi sebagai berikut:
-  - Frame individual (diambil sampel pada 1 FPS):
-    - Jika `media_resolution` disetel ke rendah, frame akan di-tokenisasi pada 66 token per frame.
-    - Jika tidak, frame akan di-tokenisasi pada 258 token per frame.
-  - Audio: 32 token per detik.
-  - Metadata juga disertakan.
-  - Total: Sekitar 300 token per detik video pada resolusi media default, atau 100 token per detik video pada resolusi media rendah.
-- **Resolusi sedang**: Gemini 3 memperkenalkan kontrol terperinci atas pemrosesan visi multimodal dengan parameter `media_resolution`. Parameter
-  `media_resolution` menentukan
-  **jumlah maksimum token yang dialokasikan per gambar input atau frame video.**
-  Resolusi yang lebih tinggi meningkatkan kemampuan model untuk membaca teks kecil atau mengidentifikasi detail kecil, tetapi meningkatkan penggunaan token dan latensi.
+- **支援的模型和脈絡**：所有 Gemini 模型都能處理影片資料。
+  - 支援 100 萬個詞元的脈絡窗口模型，可以處理長達 1 小時的影片 (預設媒體解析度)，或長達 3 小時的影片 (低媒體解析度)。
+- **File API 處理**：使用 File API 時，影片會以每秒 1 個影格 (FPS) 的速度儲存，音訊則會以 1 Kbps (單一聲道) 的速度處理。系統每秒都會新增時間戳記。
+  - 為提升推論品質，這些費率日後可能會有所變動。
+- **符記計算**：每秒影片會轉換為以下符記：
+  - 個別影格 (以 1 FPS 取樣)：
+    - 如果 `media_resolution` 設為低，每個影格會產生 66 個權杖。
+    - 否則，每個影格會以 258 個權杖進行權杖化。
+  - 音訊：每秒 32 個權杖。
+  - 也包含中繼資料。
+  - 總計：預設媒體解析度下，每秒影片約 300 個權杖；低媒體解析度下，每秒影片約 100 個權杖。
+- **中等解析度**：Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理。`media_resolution` 參數會決定每個輸入圖片或影片影格分配的詞元數量上限。解析度越高，模型就越能辨識細小文字或細節，但也會增加詞元用量和延遲時間。
 
-  perhitungan, lihat panduan [token](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=id).
-- **Format stempel waktu**: Saat merujuk ke momen tertentu dalam video di perintah Anda, gunakan format `MM:SS` (misalnya, `01:15` untuk 1 menit 15 detik).
-- **Praktik terbaik**:
+  計算方式，請參閱[權杖](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-tw)指南。
+- **時間戳記格式**：在提示中提及影片的特定時間點時，請使用 `MM:SS` 格式 (例如 `01:15` 代表 1 分 15 秒)。
+- **最佳做法**：
 
-  - Gunakan hanya satu video per permintaan perintah untuk mendapatkan hasil yang optimal.
-  - Jika menggabungkan teks dan satu video, tempatkan perintah teks *setelah* bagian video dalam array `input`.
-  - Perhatikan bahwa urutan tindakan cepat mungkin kehilangan detail karena kecepatan pengambilan sampel 1 FPS. Pertimbangkan untuk memperlambat klip tersebut jika perlu.
+  - 為獲得最佳結果，每個提示要求只能使用一部影片。
+  - 如果結合文字和單一影片，請將文字提示詞放在 `input` 陣列的影片部分*之後*。
+  - 請注意，由於取樣率為每秒 1 幀，快速動作序列可能會遺失細節。如有需要，請考慮放慢這類片段的速度。
 
-## Langkah berikutnya
+## 後續步驟
 
-Panduan ini menunjukkan cara mengupload file video dan membuat output teks dari input video. Untuk mempelajari lebih lanjut, lihat referensi berikut:
+本指南說明如何上傳影片檔案，並從影片輸入內容生成文字輸出內容。如要進一步瞭解相關內容，請參閱下列資源：
 
-- [Petunjuk sistem](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=id#system-instructions):
-  Petunjuk sistem memungkinkan Anda mengarahkan perilaku model berdasarkan kebutuhan dan kasus penggunaan spesifik Anda.
-- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=id): Pelajari lebih lanjut cara mengupload dan mengelola file untuk digunakan dengan Gemini.
-- [Strategi perintah file](https://ai.google.dev/gemini-api/docs/interactions/files?hl=id#prompt-guide): Gemini API mendukung perintah dengan data teks, gambar, audio, dan video, yang juga dikenal sebagai perintah multimodal.
-- [Panduan keamanan](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=id): Terkadang model AI generatif menghasilkan output yang tidak terduga, seperti output yang tidak akurat, bias, atau menyinggung. Pemrosesan pasca dan evaluasi manusia sangat penting untuk membatasi risiko bahaya dari output tersebut.
+- [系統指令](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=zh-tw#system-instructions)：
+  系統指令可根據特定需求和用途，引導模型行為。
+- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=zh-tw)：進一步瞭解如何上傳及管理檔案，以供 Gemini 使用。
+- [檔案提示策略](https://ai.google.dev/gemini-api/docs/interactions/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也就是多模態提示。
+- [安全注意事項](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：有時生成式 AI 模型會產生出乎意料的輸出內容，例如不正確、有偏誤或令人反感的內容。後續處理和人工評估是不可或缺的環節，有助於降低這類輸出內容造成危害的風險。
 
-Kirim masukan
+提供意見
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Terakhir diperbarui pada 2026-05-09 UTC.
+上次更新時間：2026-05-09 (世界標準時間)。
 
-Ada masukan untuk kami?
+想進一步說明嗎？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-05-09 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-09 (世界標準時間)。"],[],[]]

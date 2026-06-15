@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl
-fetched_at: 2026-06-08T05:39:28.628420+00:00
-title: "Agent Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it
+fetched_at: 2026-06-15T06:29:50.163471+00:00
+title: "Agente Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Prześlij opinię
+Invia feedback
 
-# Agent Antigravity
+# Agente Antigravity
 
-Agent Antigravity to zarządzany agent do zwykłych obciążeń w interfejsie Gemini API. Pojedyncze wywołanie interfejsu API zapewnia dostęp do agenta, który rozumuje, wykonuje kod, zarządza plikami i przegląda internet w bezpiecznym środowisku Linux Sandbox hostowanym przez Google.
+L'agente Antigravity è un agente gestito per uso generico sull'API Gemini. Una singola chiamata API ti fornisce un agente che ragiona, esegue codice, gestisce file e naviga sul web all'interno della tua sandbox Linux sicura, ospitata da Google.
 
-Jest oparty na modelu Gemini 3.5 Flash i korzysta z tego samego środowiska co Antigravity IDE. Dostępne w ramach [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pl) i [Google AI Studio](https://aistudio.google.com?hl=pl).
+È basato su Gemini 3.5 Flash e utilizza lo stesso harness dell'IDE Antigravity. Disponibile tramite l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=it) e [Google AI Studio](https://aistudio.google.com?hl=it).
 
 ### Python
 
@@ -68,29 +68,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Uprawnienia
+## Funzionalità
 
-Każde wywołanie może udostępnić piaskownicę systemu Linux i rozpocząć pętlę używania narzędzi. Agent planuje, działa, obserwuje wyniki i powtarza te czynności, aż zadanie zostanie wykonane.
+Ogni chiamata può eseguire il provisioning di una sandbox Linux e avvia un loop di utilizzo degli strumenti. L'agente pianifica, agisce, osserva i risultati e ripete l'operazione finché l'attività non è completata.
 
-- **Wykonywanie kodu:** uruchamiaj polecenia Bash, Python i Node.js. instalować pakiety, przeprowadzać testy i tworzyć aplikacje.
-- **Zarządzanie plikami:** odczytywanie, zapisywanie, edytowanie, wyszukiwanie i wyświetlanie listy plików w piaskownicy. Pliki są zachowywane podczas interakcji.
-- **Dostęp do internetu:** wyszukiwanie w Google i pobieranie adresów URL w celu uzyskania danych.
-- **Kompaktowanie kontekstu:** automatyczne kompaktowanie kontekstu (wyzwalane przy około 135 tys. tokenów) w celu obsługi długotrwałych sesji wieloetapowych bez utraty kontekstu i przekraczania limitów tokenów.
+- **Esecuzione del codice:** esegui comandi Bash, Python e Node.js. Installa pacchetti, esegui test, crea app.
+- **Gestione dei file:** leggi, scrivi, modifica, cerca ed elenca i file nella sandbox. I file vengono mantenuti tra le interazioni.
+- **Accesso web:** Ricerca Google e recupero di URL per i dati.
+- **Compattazione del contesto:** compattazione automatica del contesto (attivata a circa 135.000 token) per supportare sessioni a più turni di lunga durata senza perdere il contesto o raggiungere i limiti di token.
 
-Więcej informacji o korzystaniu z wielu tur i transmitowaniu znajdziesz w [krótkim wprowadzeniu](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pl).
+Per informazioni sull'utilizzo a più turni e sullo streaming, consulta la [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it).
 
-## Obsługiwane narzędzia
+## Strumenti supportati
 
-Domyślnie agent ma dostęp do `code_execution`, `google_search` i `url_context`. Narzędzia systemu plików są włączane automatycznie, gdy określisz parametr `environment`. Parametr `tools` musisz podać tylko wtedy, gdy dostosowujesz lub ograniczasz domyślny zestaw.
+Per impostazione predefinita, l'agente ha accesso a `code_execution`, `google_search` e `url_context`. Gli strumenti del filesystem vengono attivati automaticamente quando specifichi il parametro `environment`. Devi specificare il parametro `tools` solo quando personalizzi o limiti l'insieme predefinito.
 
-| Narzędzie | Wpisz wartość | Opis |
+| Strumento | Valore del tipo | Descrizione |
 | --- | --- | --- |
-| Wykonanie kodu | `code_execution` | Uruchamiaj polecenia powłoki (bash, Python, Node) z przechwytywaniem stdout/stderr. |
-| Wyszukiwarka Google | `google_search` | wyszukiwać w sieci publicznej, |
-| Kontekst adresu URL | `url_context` | pobierać i odczytywać strony internetowe, |
-| System plików | *(włączone za pomocą `environment`)* | odczytywać, zapisywać, edytować, wyszukiwać i wyświetlać listę plików w piaskownicy; Nie ma oddzielnego typu narzędzia. Jest włączany automatycznie, gdy ustawiona jest opcja `environment`. |
+| Esecuzione del codice | `code_execution` | Esegui i comandi della shell (bash, Python, Node) con acquisizione di stdout/stderr. |
+| Ricerca Google | `google_search` | Cerca sul web pubblico. |
+| Contesto URL | `url_context` | Recupera e leggi le pagine web. |
+| Filesystem | *(attivato tramite `environment`)* | Leggi, scrivi, modifica, cerca ed elenca i file nella sandbox. Nessun tipo di strumento separato; attivato automaticamente quando è impostato `environment`. |
 
-Aby ograniczyć agenta do określonych narzędzi, przekaż tylko te, których potrzebujesz:
+Per limitare l'agente a strumenti specifici, trasmetti solo quelli di cui hai bisogno:
 
 ### Python
 
@@ -150,9 +150,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Wielomodalne wprowadzanie danych
+## Input multimodale
 
-Agent Antigravity obsługuje dane wejściowe multimodalne. Obecnie obsługiwane są tylko dane wejściowe `text` i `image`. Obrazy muszą być podane jako ciągi tekstowe zakodowane w formacie base64 (`data`).
+L'agente Antigravity supporta gli input multimodali. Al momento sono supportati solo gli input `text` e `image`. Le immagini devono essere fornite come stringhe con codifica base64 in linea (`data`).
 
 ### Python
 
@@ -226,69 +226,69 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }"
 ```
 
-## Dostosowywanie agenta
+## Personalizzare l'agente
 
-Możesz rozszerzyć możliwości agenta Antigravity, dostosowując jego instrukcje, narzędzia i środowisko. Agent obsługuje natywne dla systemu plików podejście do dostosowywania: możesz zamontować pliki, takie jak `AGENTS.md`, zawierające instrukcje i umiejętności w `.agents/skills/` bezpośrednio w piaskownicy lub przekazać konfigurację w linii w momencie interakcji. Możesz iteracyjnie zmieniać konfigurację w tekście, a potem zapisać ją jako agenta zarządzanego, gdy będzie gotowa.
+Puoi estendere l'agente Antigravity personalizzando le istruzioni, gli strumenti e l'ambiente. L'agente supporta un approccio di personalizzazione nativo del filesystem: puoi montare file come `AGENTS.md` per istruzioni e competenze in `.agents/skills/` direttamente nella sandbox o trasmettere la configurazione in linea al momento dell'interazione. Puoi eseguire l'iterazione sulla configurazione in linea e poi salvarla come agente gestito quando è tutto pronto.
 
-Szczegółowe informacje o tworzeniu niestandardowych agentów znajdziesz w artykule [Building Managed Agents](https://ai.google.dev/gemini-api/docs/custom-agents?hl=pl) (Tworzenie zarządzanych agentów).
+Per informazioni dettagliate su come creare agenti personalizzati, consulta [Creare agenti gestiti](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it).
 
-## Środowiska
+## Ambienti
 
-Każde wywołanie tworzy lub ponownie wykorzystuje piaskownicę systemu Linux. Parametr `environment` może przyjmować 3 formy:
+Ogni chiamata crea o riutilizza una sandbox Linux. Il parametro `environment` assume tre forme:
 
-| Formularz | Opis |
+| Postura | Descrizione |
 | --- | --- |
-| `"remote"` | Utwórz nową piaskownicę z ustawieniami domyślnymi. |
-| `"env_abc123"` | Użyj ponownie istniejącego środowiska według identyfikatora, zachowując wszystkie pliki i stan. |
-| `{...}` | Pełna `EnvironmentConfig` z niestandardowymi źródłami i regułami sieciowymi. |
+| `"remote"` | Esegui il provisioning di una nuova sandbox con le impostazioni predefinite. |
+| `"env_abc123"` | Riutilizza un ambiente esistente per ID, conservando tutti i file e lo stato. |
+| `{...}` | `EnvironmentConfig` completo con origini personalizzate e regole di rete. |
 
-Szczegółowe informacje o źródłach (Git, GCS, wbudowane), sieciach, cyklu życia i limitach zasobów znajdziesz w sekcji [Środowiska](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl).
+Per informazioni dettagliate su origini (Git, GCS, in linea), networking, ciclo di vita e limiti di risorse, consulta [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it).
 
-## Dostępność i ceny
+## Disponibilità e prezzi
 
-Agent Antigravity jest dostępny w wersji podglądowej w ramach [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pl) w Google AI Studio i Gemini API.
+L'agente Antigravity è disponibile in anteprima tramite l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=it) in Google AI Studio e l'API Gemini.
 
-Ceny są oparte na [modelu płatności według wykorzystania](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#pricing-for-agents), który zależy od tokenów bazowego modelu Gemini i narzędzi używanych przez agenta. W przeciwieństwie do standardowego żądania czatu, które generuje pojedynczy wynik, interakcja Antigravity to przepływ pracy oparty na agentach. Pojedyncze żądanie wywołuje autonomiczne pętle rozumowania, wykonywania narzędzi, uruchamiania kodu i zarządzania plikami.
+I prezzi seguono un [modello con pagamento a consumo](https://ai.google.dev/gemini-api/docs/pricing?hl=it#pricing-for-agents) basato sui token del modello Gemini sottostante e sugli strumenti utilizzati dall'agente. A differenza di una richiesta di chat standard che produce un singolo output, un'interazione Antigravity è un workflow agentico. Una singola richiesta attiva un loop autonomo di ragionamento, esecuzione di strumenti, esecuzione di codice e gestione dei file.
 
-### Szacunkowy koszt
+### Costi stimati
 
-Koszty zależą od złożoności zadania. Pracownik obsługi klienta samodzielnie określa, ile wywołań narzędzi, wykonań kodu i operacji na plikach jest potrzebnych. Poniższe szacunki są oparte na przebiegach.
+I costi variano in base alla complessità dell'attività. L'agente determina autonomamente il numero di chiamate di strumenti, esecuzioni di codice e operazioni sui file necessari. Le seguenti stime si basano sulle esecuzioni.
 
-| Kategoria zadania | Tokeny wejściowe | Tokeny wyjściowe | Typowy koszt |
+| Categoria di attività | Token di input | Token di output | Costo tipico |
 | --- | --- | --- | --- |
-| **Badania i synteza informacji** | 100 tys.–500 tys. | 10–40 tys. | 0,30–1,00 USD |
-| **Generowanie dokumentów i treści** | 100 tys.–500 tys. | 15–50 tys. | 0,30–1,30 PLN |
-| **Projektowanie procesów i systemów** | 100–400 tys. | 10–30 tys. | 0,25–0,80 USD |
-| **Przetwarzanie i analiza danych** | 300 tys.–3 mln | 30 tys.–150 tys. | 0,70–3,25 PLN |
+| **Ricerca e sintesi delle informazioni** | 100.000-500.000 | 10.000-40.000 | 0,30-1,00 $ |
+| **Generazione di documenti e contenuti** | 100.000-500.000 | 15.000-50.000 | 0,30-1,30 $ |
+| **Progettazione di processi e sistemi** | 100.000-400.000 | 10.000-30.000 | 0,25-0,80 $ |
+| **Elaborazione e analisi dei dati** | 300.000-3.000.000 | 30.000-150.000 | 0,70-3,25 $ |
 
-Zwykle w pamięci podręcznej jest przechowywanych 50–70% tokenów wejściowych. Złożone przepływy pracy agenta z wieloma wywołaniami narzędzi mogą w ramach jednej interakcji zgromadzić 3–5 mln tokenów, co wiąże się z kosztem do 5 USD.
+In genere, il 50-70% dei token di input viene memorizzato nella cache. I workflow di agenti complessi con molte chiamate di strumenti possono accumulare 3-5 milioni di token in una singola interazione, con costi fino a circa 5 $.
 
-**Obliczenia środowiskowe** (procesor, pamięć, wykonywanie w piaskownicy) **nie są rozliczane** w okresie wersji testowej.
+Il **calcolo dell'ambiente** (CPU, memoria, esecuzione della sandbox) **non viene fatturato** durante il periodo di anteprima.
 
-## Ograniczenia
+## Limitazioni
 
-- **Stan wersji testowej:** agent Antigravity i interfejs Interactions API są dostępne w wersji testowej. Funkcje i schematy mogą ulec zmianie.
-- **Nieobsługiwana konfiguracja generowania:** te parametry nie są obsługiwane i zwracają błąd 400: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
-- **Uporządkowane dane wyjściowe:** agent Antigravity nie obsługuje uporządkowanych danych wyjściowych.
-- **Niedostępne narzędzia:** `file_search`, `computer_use`, `google_maps`, `function_calling` i `mcp` nie są jeszcze obsługiwane.
-- **Narzędzie systemu plików:** obecnie nie ma narzędzia systemu plików. Jest ona częścią `environment`.
-- **Informacje:** agent nie obsługuje `background=True` i wymaga `store=True`.
-- **Nieobsługiwane typy multimodalne.** Dane wejściowe w postaci audio, wideo i dokumentów nie są obecnie obsługiwane. Dozwolone są tylko tekst i obraz.
+- **Stato di anteprima:** l'agente Antigravity e l'API Interactions sono in anteprima. Le funzionalità e gli schemi potrebbero cambiare.
+- **Configurazione di generazione non supportata:** i seguenti parametri non sono supportati e restituiscono un errore 400: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
+- **Output strutturato:** l'agente Antigravity non supporta gli output strutturati.
+- **Strumenti non disponibili:** `file_search`, `computer_use`, `google_maps`, `function_calling` e `mcp` non sono ancora supportati.
+- **Strumento del filesystem:** al momento non è disponibile alcuno strumento del filesystem. Fa parte di `environment`.
+- **Sfondo:** l'agente non supporta l'utilizzo di `background=True` e richiede `store=True`.
+- **Tipi multimodali non supportati.** Al momento gli input audio, video e documenti non sono supportati. Sono consentiti solo testo e immagini.
 
-## Co dalej?
+## Passaggi successivi
 
-- [Szybki start:](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pl) rozmowy wieloetapowe i streaming.
-- [Tworzenie agentów niestandardowych:](https://ai.google.dev/gemini-api/docs/custom-agents?hl=pl) instrukcje niestandardowe, umiejętności i zapisywanie agentów.
-- [Środowiska:](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl) konfiguracja piaskownicy, źródła, sieć.
-- [Agent Deep Research:](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=pl) zadania badawcze o dłuższej formie.
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=pl): bazowy interfejs API.
+- [Guida rapida](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it): conversazioni a più turni e streaming.
+- [Creare agenti personalizzati](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it): istruzioni, competenze e salvataggio degli agenti personalizzati.
+- [Ambienti](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it): configurazione della sandbox, origini, networking.
+- [Deep Research](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=it): attività di ricerca di lunga durata.
+- [API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=it): l'API sottostante.
 
-Prześlij opinię
+Invia feedback
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Ostatnia aktualizacja: 2026-05-20 UTC.
+Ultimo aggiornamento 2026-05-20 UTC.
 
-Chcesz przekazać coś jeszcze?
+Vuoi dirci altro?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-20 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-20 UTC."],[],[]]

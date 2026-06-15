@@ -1,68 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ko
-fetched_at: 2026-06-08T05:29:03.952031+00:00
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=hi
+fetched_at: 2026-06-15T06:22:42.440490+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-의견 보내기
+सुझाव भेजें
 
-# 토큰 이해 및 집계
+# टोकन को समझना और उनकी गिनती करना
 
-Gemini 및 기타 생성형 AI 모델은 *토큰* 이라는 세분화된 수준에서 입력 및 출력을 처리합니다.
+Gemini और जनरेटिव एआई के अन्य मॉडल, इनपुट और आउटपुट को *टोकन* नाम की ग्रैनुलैरिटी पर प्रोसेस करते हैं.
 
-**Gemini 모델의 경우 토큰은 약 4자에 해당합니다.
-100개의 토큰은 약 60~80개의 영어 단어와 같습니다.**
+**Gemini मॉडल के लिए, एक टोकन करीब चार वर्णों के बराबर होता है.
+100 टोकन, अंग्रेज़ी के करीब 60 से 80 शब्दों के बराबर होते हैं.**
 
-## 토큰 정보
+## टोकन के बारे में जानकारी
 
-토큰은 단일 문자(예: `z`) 또는 전체 단어(예: `cat`)일 수 있습니다. 긴 단어는 여러 토큰으로 나뉩니다. 모델에서 사용하는 모든 토큰 집합을 어휘라고 하며, 텍스트를 토큰으로 분할하는 프로세스를 *토큰화* 라고 합니다.
+टोकन, `z` जैसे सिंगल वर्ण या `cat` जैसे पूरे शब्द हो सकते हैं. लंबे शब्दों को कई टोकन में बांटा जाता है. मॉडल के इस्तेमाल किए जाने वाले सभी टोकन के सेट को शब्दावली कहा जाता है. साथ ही, टेक्स्ट को टोकन में बांटने की प्रोसेस को *टोकनाइज़ेशन* कहा जाता है.
 
-결제가 사용 설정된 경우 Gemini API 호출의 [비용](https://ai.google.dev/pricing?hl=ko)은
-입력 및 출력 토큰 수에 따라 결정되므로 토큰을
-집계하는 방법을 알아두면 유용합니다.
+बिलिंग की सुविधा चालू होने पर, [Gemini API को कॉल करने की लागत](https://ai.google.dev/pricing?hl=hi) इनपुट और आउटपुट टोकन की संख्या के हिसाब से तय की जाती है. इसलिए, टोकन की गिनती करने का तरीका जानना मददगार साबित हो सकता है.
 
-Colab에서 토큰 집계를 사용해 볼 수 있습니다.
+हमारे Colab में, टोकन की गिनती करने की सुविधा आज़माई जा सकती है.
 
 |  |  |  |
 | --- | --- | --- |
-| [ai.google.dev에서 보기](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | [Colab 노트북 사용해 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) | [GitHub에서 노트북 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) |
+| [ai.google.dev पर देखें](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | [Colab notebook आज़माएं](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=hi) | [GitHub पर notebook देखें](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=hi) |
 
-## 토큰 집계
+## टोकन की गिनती करना
 
-텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력 및 출력은 토큰화됩니다.
+Gemini API के सभी इनपुट और आउटपुट को टोकनाइज़ किया जाता है. इनमें टेक्स्ट, इमेज फ़ाइलें, और टेक्स्ट के अलावा अन्य फ़ॉर्मैट शामिल हैं.
 
-다음과 같은 방법으로 토큰을 집계할 수 있습니다.
+टोकन की गिनती इन तरीकों से की जा सकती है:
 
-- **요청의 입력
-  으로 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ko)를 호출합니다.**  
-   이렇게 하면 *입력에만* 있는 총 토큰 수가 반환됩니다. 모델에 입력을 보내기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
-- **`generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용합니다.**  
-   이렇게 하면
-  토큰의 총 수(*입력과 출력 모두*)가 반환됩니다. `total_token_count`.  
-   또한 입력 및 출력의 토큰 수를 별도로 반환합니다. `prompt_token_count` (입력 토큰) 및 `candidates_token_count`(출력 토큰)
+- **अनुरोध के इनपुट
+  के साथ [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=hi) को कॉल करें.**  
+   इससे, *सिर्फ़ इनपुट* में मौजूद टोकन की कुल संख्या मिलती है. अनुरोधों का साइज़ देखने के लिए, मॉडल को इनपुट भेजने से पहले यह कॉल किया जा सकता है.
+- **`generate_content` को कॉल करने के बाद, `response` ऑब्जेक्ट पर मौजूद `usage_metadata` एट्रिब्यूट का इस्तेमाल करें.**  
+   इससे, *इनपुट और आउटपुट*, दोनों में मौजूद टोकन की कुल संख्या मिलती है: `total_token_count`.  
+   इससे, इनपुट और आउटपुट के टोकन की संख्या अलग-अलग भी मिलती है: `prompt_token_count` (इनपुट टोकन) और `candidates_token_count` (आउटपुट टोकन).
 
-  [사고 모델을 사용하는 경우 사고 과정에서 사용된 토큰이 `thoughts_token_count`에 반환됩니다.](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) [컨텍스트 캐싱을 사용하는 경우 캐시된 토큰 수는 `cached_content_token_count`에 있습니다.](https://ai.google.dev/gemini-api/docs/caching?hl=ko)
+  अगर किसी ऐसे मॉडल का इस्तेमाल किया जा रहा है जो [सोच-समझकर
+  जवाब](https://ai.google.dev/gemini-api/docs/thinking?hl=hi) देता है, तो सोचने की
+  प्रोसेस के दौरान इस्तेमाल किए गए टोकन, `thoughts_token_count` में दिखते हैं. साथ ही, अगर
+  [कॉन्टेक्स्ट कैशिंग](https://ai.google.dev/gemini-api/docs/caching?hl=hi) का इस्तेमाल किया जा रहा है, तो कैश मेमोरी में सेव किए गए टोकन
+  की संख्या, `cached_content_token_count` में दिखेगी.
 
-### 텍스트 토큰 집계
+### टेक्स्ट टोकन की गिनती करना
 
-텍스트 전용 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트의 토큰 수 (`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
+अगर सिर्फ़ टेक्स्ट वाले इनपुट के साथ `count_tokens` को कॉल किया जाता है, तो इससे *सिर्फ़ इनपुट* में मौजूद टेक्स्ट के टोकन की संख्या (`total_tokens`) मिलती है. अनुरोधों का साइज़ देखने के लिए, `generate_content` को कॉल करने से पहले यह कॉल किया जा सकता है.
 
-또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+`generate_content` को कॉल करने और फिर `response` ऑब्जेक्ट पर मौजूद `usage_metadata` एट्रिब्यूट का इस्तेमाल करके, ये जानकारी भी पाई जा सकती है:
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
+- इनपुट (`prompt_token_count`), कैश मेमोरी में सेव किए गए कॉन्टेंट (`cached_content_token_count`), और आउटपुट (`candidates_token_count`) के टोकन की संख्या
+- सोचने की प्रोसेस के लिए टोकन की संख्या (`thoughts_token_count`)
+- *इनपुट और आउटपुट* , दोनों में मौजूद टोकन की कुल संख्या (`total_token_count`)
 
 ### Python
 
@@ -109,7 +110,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 ctx := context.Background()
@@ -137,17 +138,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### 멀티턴 (채팅) 토큰 집계
+### मल्टी-टर्न (चैट) टोकन की गिनती करना
 
-채팅 기록으로 `count_tokens`를 호출하면 채팅의 각 역할에서 텍스트의 총 토큰 수 (`total_tokens`)가 반환됩니다.
+अगर चैट के इतिहास के साथ `count_tokens` को कॉल किया जाता है, तो इससे चैट में हर रोल के टेक्स्ट के टोकन की कुल संख्या (`total_tokens`) मिलती है.
 
-또 다른 방법은 `send_message`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+`send_message` को कॉल करने और फिर `response` ऑब्जेक्ट पर मौजूद `usage_metadata` एट्रिब्यूट का इस्तेमाल करके, ये जानकारी भी पाई जा सकती है:
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
+- इनपुट (`prompt_token_count`), कैश मेमोरी में सेव किए गए कॉन्टेंट (`cached_content_token_count`), और आउटपुट (`candidates_token_count`) के टोकन की संख्या
+- सोचने की प्रोसेस के लिए टोकन की संख्या (`thoughts_token_count`)
+- *इनपुट और आउटपुट* , दोनों में मौजूद टोकन की कुल संख्या (`total_token_count`)
 
-다음 대화 턴의 크기를 파악하려면 `count_tokens`를 호출할 때 기록에 추가해야 합니다.
+बातचीत के अगले टर्न का साइज़ समझने के लिए, `count_tokens` को कॉल करते समय, आपको इसे इतिहास में जोड़ना होगा.
 
 ### Python
 
@@ -235,7 +236,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 ctx := context.Background()
@@ -273,33 +274,33 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### 멀티모달 토큰 집계
+### मल्टीमॉडल टोकन की गिनती करना
 
-텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력은 토큰화됩니다. Gemini API에서 처리하는 동안 멀티모달 입력의 토큰화에 관한 다음 주요사항을 참고하세요.
+Gemini API के सभी इनपुट को टोकनाइज़ किया जाता है. इनमें टेक्स्ट, इमेज फ़ाइलें, और टेक्स्ट के अलावा अन्य फ़ॉर्मैट शामिल हैं. Gemini API से प्रोसेस करने के दौरान, मल्टीमॉडल इनपुट के टोकनाइज़ेशन के बारे में ये मुख्य बातें ध्यान में रखें:
 
-- 두 치수가 모두 384픽셀 이하인 이미지 입력은 258개의 토큰으로 집계됩니다. 한쪽 또는 양쪽 치수가 더 큰 이미지는 필요에 따라 768x768픽셀의 타일로 잘리고 크기가 조정되며, 각 타일은 258개의 토큰으로 집계됩니다.
-- 동영상 및 오디오 파일은 다음과 같은 고정 비율로 토큰으로 변환됩니다. 동영상은 초당 263개의 토큰, 오디오는 초당 32개의 토큰입니다.
+- दोनों डाइमेंशन में <=384 पिक्सल वाली इमेज इनपुट को 258 टोकन के तौर पर गिना जाता है. एक या दोनों डाइमेंशन में बड़ी इमेज को ज़रूरत के हिसाब से क्रॉप और स्केल करके, 768x768 पिक्सल की टाइल में बदला जाता है. हर टाइल को 258 टोकन के तौर पर गिना जाता है.
+- वीडियो और ऑडियो फ़ाइलों को इन तय दरों पर टोकन में बदला जाता है: वीडियो के लिए 263 टोकन प्रति सेकंड और ऑडियो के लिए 32 टोकन प्रति सेकंड.
 
-#### 미디어 해상도
+#### मीडिया रिज़ॉल्यूशन
 
-[Gemini 3 모델](https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-3)은
-멀티모달 비전 처리에 대한 세밀한 제어 기능을 `media_resolution` 파라미터를 사용하여 제공합니다. `media_resolution` 파라미터는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수** 를 결정합니다.
-해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
+[Gemini 3 मॉडल](https://ai.google.dev/gemini-api/docs/models?hl=hi#gemini-3) में,
+मल्टीमॉडल विज़न प्रोसेसिंग पर ज़्यादा कंट्रोल मिलता है, `media_resolution` पैरामीटर की मदद से. `media_resolution` पैरामीटर, **हर इनपुट इमेज या वीडियो फ़्रेम के लिए, तय किए गए टोकन की ज़्यादा से ज़्यादा संख्या** तय करता है.
+ज़्यादा रिज़ॉल्यूशन से, मॉडल को बारीक टेक्स्ट पढ़ने या छोटी-छोटी जानकारी की पहचान करने में मदद मिलती है. हालांकि, इससे टोकन का इस्तेमाल और इंतज़ार का समय बढ़ जाता है.
 
-파라미터 및 토큰 계산에 미치는 영향에 관한 자세한 내용은
-[미디어 해상도](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko) 가이드를 참고하세요.
+पैरामीटर और इससे टोकन की गिनती पर पड़ने वाले असर के बारे में ज़्यादा जानने के लिए,
+[मीडिया रिज़ॉल्यूशन](https://ai.google.dev/gemini-api/docs/media-resolution?hl=hi) की गाइड देखें.
 
-#### 이미지 파일
+#### इमेज फ़ाइलें
 
-텍스트 및 이미지 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트와 이미지의 결합된 토큰 수 (`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 선택적으로 텍스트와 파일에서 `count_tokens`를 별도로 호출할 수도 있습니다.
+अगर टेक्स्ट और इमेज वाले इनपुट के साथ `count_tokens` को कॉल किया जाता है, तो इससे *सिर्फ़ इनपुट* में मौजूद टेक्स्ट और इमेज के टोकन की कुल संख्या (`total_tokens`) मिलती है. अनुरोधों का साइज़ देखने के लिए, `generate_content` को कॉल करने से पहले यह कॉल किया जा सकता है. इसके अलावा, टेक्स्ट और फ़ाइल के लिए अलग-अलग `count_tokens` को कॉल किया जा सकता है.
 
-또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+`generate_content` को कॉल करने और फिर `response` ऑब्जेक्ट पर मौजूद `usage_metadata` एट्रिब्यूट का इस्तेमाल करके, ये जानकारी भी पाई जा सकती है:
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
+- इनपुट (`prompt_token_count`), कैश मेमोरी में सेव किए गए कॉन्टेंट (`cached_content_token_count`), और आउटपुट (`candidates_token_count`) के टोकन की संख्या
+- सोचने की प्रोसेस के लिए टोकन की संख्या (`thoughts_token_count`)
+- *इनपुट और आउटपुट* , दोनों में मौजूद टोकन की कुल संख्या (`total_token_count`)
 
-File API에서 업로드된 이미지를 사용하는 예:
+File API से अपलोड की गई इमेज का इस्तेमाल करने वाला उदाहरण:
 
 ### Python
 
@@ -358,7 +359,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 ctx := context.Background()
@@ -399,7 +400,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-이미지를 인라인 데이터로 제공하는 예:
+इनलाइन डेटा के तौर पर इमेज उपलब्ध कराने वाला उदाहरण:
 
 ### Python
 
@@ -456,7 +457,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 ctx := context.Background()
@@ -496,20 +497,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### 동영상 또는 오디오 파일
+#### वीडियो या ऑडियो फ़ाइलें
 
-오디오와 동영상은 각각 다음과 같은 고정 비율로 토큰으로 변환됩니다.
+ऑडियो और वीडियो, दोनों को इन तय दरों पर टोकन में बदला जाता है:
 
-- 동영상: 초당 토큰 263개
-- 오디오: 초당 토큰 32개
+- वीडियो: 263 टोकन प्रति सेकंड
+- ऑडियो: 32 टोकन प्रति सेकंड
 
-텍스트 및 동영상/오디오 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트와 동영상/오디오 파일의 결합된 토큰 수(`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 선택적으로 텍스트와 파일에서 `count_tokens`를 별도로 호출할 수도 있습니다.
+अगर टेक्स्ट और वीडियो/ऑडियो वाले इनपुट के साथ `count_tokens` को कॉल किया जाता है, तो इससे *सिर्फ़ इनपुट* में मौजूद टेक्स्ट और वीडियो/ऑडियो फ़ाइल के टोकन की कुल संख्या (`total_tokens`) मिलती है. अनुरोधों का साइज़ देखने के लिए, `generate_content` को कॉल करने से पहले यह कॉल किया जा सकता है. इसके अलावा, टेक्स्ट और फ़ाइल के लिए अलग-अलग `count_tokens` को कॉल किया जा सकता है.
 
-또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+`generate_content` को कॉल करने और फिर `response` ऑब्जेक्ट पर मौजूद `usage_metadata` एट्रिब्यूट का इस्तेमाल करके, ये जानकारी भी पाई जा सकती है:
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`).
+- इनपुट (`prompt_token_count`), कैश मेमोरी में सेव किए गए कॉन्टेंट (`cached_content_token_count`), और आउटपुट (`candidates_token_count`) के टोकन की संख्या
+- सोचने की प्रोसेस के लिए टोकन की संख्या (`thoughts_token_count`)
+- *इनपुट और आउटपुट* , दोनों में मौजूद टोकन की कुल संख्या (`total_token_count`).
 
 ### Python
 
@@ -582,7 +583,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 ctx := context.Background()
@@ -634,9 +635,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-### 사고 토큰 집계
+### सोच-समझकर जवाब देने वाले मॉडल के टोकन की गिनती करना
 
-사고를 사용 설정하면 응답 가격은 출력 토큰과 사고 토큰의 합계입니다. `thoughtsTokenCount` 필드 (또는 SDK에 상응하는 필드)에서 생성된 총 사고 토큰 수를 가져올 수 있습니다.
+सोच-समझकर जवाब देने वाले मॉडल की सुविधा चालू करने पर, जवाब की कीमत, आउटपुट टोकन और सोच-समझकर जवाब देने वाले मॉडल के टोकन की कुल संख्या के बराबर होती है. जनरेट किए गए सोच-समझकर जवाब देने वाले मॉडल के टोकन की कुल संख्या, `thoughtsTokenCount` फ़ील्ड (या SDK के बराबर) से देखी जा सकती है.
 
 ### Python
 
@@ -654,7 +655,7 @@ console.log(`Thoughts tokens: ${response.usageMetadata.thoughtsTokenCount}`);
 console.log(`Output tokens: ${response.usageMetadata.candidatesTokenCount}`);
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 // ...
@@ -662,15 +663,13 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-사고 모델은 최종 응답의 품질을 개선하기 위해 전체 사고를 생성한 후 사고 과정을 파악할 수 있도록 [요약](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#summaries)을 출력합니다. 따라서 API는 요약만 출력하더라도 모델이 요약을 만들기 위해 생성하는 전체 사고 토큰을 기준으로 가격을 책정합니다.
+सोच-समझकर जवाब देने वाले मॉडल, फ़ाइनल जवाब की क्वालिटी बेहतर बनाने के लिए, पूरी तरह से सोच-समझकर जवाब जनरेट करते हैं. इसके बाद, सोचने की प्रोसेस के बारे में जानकारी देने के लिए, [खास जानकारी](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#summaries) आउटपुट करते हैं. इसलिए, API, कीमत तय करने के लिए, मॉडल के जनरेट किए गए सोच-समझकर जवाब देने वाले मॉडल के टोकन का इस्तेमाल करता है. भले ही, API सिर्फ़ खास जानकारी आउटपुट करता हो.
 
-[Gemini 사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) 가이드에서 사고를 구성하는 방법을 자세히 알아보세요.
+Gemini की सोच-समझकर जवाब देने वाले मॉडल की [गाइड](https://ai.google.dev/gemini-api/docs/thinking?hl=hi) में, सोच-समझकर जवाब देने वाले मॉडल को कॉन्फ़िगर करने के तरीके के बारे में ज़्यादा जानें.
 
-## 컨텍스트 윈도우
+## कॉन्टेक्स्ट विंडो
 
-Gemini API를 통해 사용할 수 있는 모델에는 토큰으로 측정되는 컨텍스트 윈도우가 있습니다. 컨텍스트 윈도우는 제공할 수 있는 입력의 양과 모델이 생성할 수 있는 출력의 양을 정의합니다.
-컨텍스트 윈도우의 크기를 [`models.get` 엔드포인트](https://ai.google.dev/api/rest/v1/models/get?hl=ko)
-를 호출하거나 [모델 문서](https://ai.google.dev/gemini-api/docs/models?hl=ko)에서 확인할 수 있습니다.
+Gemini API के ज़रिए उपलब्ध मॉडल में, कॉन्टेक्स्ट विंडो होती हैं. इन्हें टोकन में मापा जाता है. कॉन्टेक्स्ट विंडो से यह तय होता है कि कितना इनपुट दिया जा सकता है और मॉडल कितना आउटपुट जनरेट कर सकता है. `[`models.get` एंडपॉइंट](https://ai.google.dev/api/rest/v1/models/get?hl=hi) को कॉल करके या [मॉडल के दस्तावेज़](https://ai.google.dev/gemini-api/docs/models?hl=hi) में देखकर, कॉन्टेक्स्ट विंडो का साइज़ तय किया जा सकता है.
 
 ### Python
 
@@ -699,7 +698,7 @@ async function main() {
 await main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 ctx := context.Background()
@@ -715,12 +714,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-의견 보내기
+सुझाव भेजें
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-최종 업데이트: 2026-06-04(UTC)
+आखिरी बार 2026-06-04 (UTC) को अपडेट किया गया.
 
-의견을 전달하고 싶나요?
+क्या आपको हमें और कुछ बताना है?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-04(UTC)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-04 (UTC) को अपडेट किया गया."],[],[]]

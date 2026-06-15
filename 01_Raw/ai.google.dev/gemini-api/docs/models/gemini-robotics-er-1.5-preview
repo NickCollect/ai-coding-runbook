@@ -1,49 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=zh-CN
-fetched_at: 2026-06-08T05:38:13.275095+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.5-preview?hl=hi
+fetched_at: 2026-06-15T06:31:58.444115+00:00
 title: "Gemini Robotics-ER 1.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-发送反馈
+सुझाव भेजें
 
 # Gemini Robotics-ER 1.5
 
-Gemini Robotics-ER 1.5 是一款视觉-语言模型 (VLM)，可将 Gemini 的智能体功能引入机器人技术。它专为物理世界中的高级推理而设计，可让机器人解读复杂的视觉数据、执行空间推理，并根据自然语言命令规划行动。
+Gemini Robotics-ER 1.5, विज़न-लैंग्वेज मॉडल (वीएलएम) है. यह Gemini की एजेंटिक क्षमताओं को रोबोटिक्स में इस्तेमाल करने की सुविधा देता है. इसे असली दुनिया में बेहतर तरीके से सोचने-समझने के लिए डिज़ाइन किया गया है. इससे रोबोट, मुश्किल विज़ुअल डेटा को समझ पाते हैं, जगह के हिसाब से सोच-विचार कर पाते हैं, और नैचुरल लैंग्वेज में दिए गए निर्देशों के हिसाब से काम कर पाते हैं.
 
-[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview&hl=zh-cn)
+[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.5-preview&hl=hi)
 
-## 文档
+## दस्तावेज़
 
-如需全面了解功能和功能，请访问[机器人](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-cn)页面。
+सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [रोबोटिक्स](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=hi) पेज पर जाएं.
 
 ## gemini-robotics-er-1.5-preview
 
-| 属性 | 说明 |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| id\_card 模型代码 | `gemini-robotics-er-1.5-preview` |
-| 保存支持的数据类型 | **输入源**  文本、图片、视频、音频  **输出**  文本 |
-| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  1,048,576  **输出 token 限制**  65536 |
-| handyman功能 | **音频生成**  不受支持  **批量 API**  不受支持  **缓存**  不受支持  **代码执行**  支持  **函数调用**  支持  **依托 Google 地图进行接地**  不受支持  **图片生成**  不受支持  **Live API**  不受支持  **搜索接地**  支持  **结构化输出**  支持  **思考型**  支持  **网址上下文**  支持 |
-| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-robotics-er-1.5-preview` |
-| calendar\_month最新更新 | 2025 年 9 月 |
-| cognition\_2知识截点 | 2025 年 1 月 |
+| id\_cardमॉडल कोड | `gemini-robotics-er-1.5-preview` |
+| saveइस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो  **आउटपुट**  टेक्स्ट |
+| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
+| handymanसुविधाएँ | **ऑडियो जनरेट करने की सुविधा**  काम नहीं करता है  **Batch API**  काम नहीं करता है  **कैश मेमोरी में सेव होना**  काम नहीं करता है  **कोड को चलाने की सुविधा**  काम करता है  **फ़ंक्शन कॉलिंग**  काम करता है  **Google Maps की मदद से जवाब पाना**  काम नहीं करता है  **इमेज जनरेट करना**  काम नहीं करता है  **Live API**  काम नहीं करता है  **भरोसेमंद स्रोतों से जानकारी लेना**  काम करता है  **स्ट्रक्चर्ड आउटपुट**  काम करता है  **सोच-विचार करना**  काम करता है  **यूआरएल का कॉन्टेक्स्ट**  काम करता है |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - झलक देखें: `gemini-robotics-er-1.5-preview` |
+| calendar\_monthनया अपडेट | सितंबर 2025 |
+| cognition\_2जानकारी न मिलना | जनवरी 2025 |
 
-发送反馈
+सुझाव भेजें
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-最后更新时间 (UTC)：2026-04-29。
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-需要向我们提供更多信息？
+क्या आपको हमें और कुछ बताना है?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=it
-fetched_at: 2026-06-08T05:38:49.663665+00:00
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar
+fetched_at: 2026-06-15T06:30:48.181385+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Invia feedback
+إرسال ملاحظات
 
-# Combinare strumenti integrati e chiamate di funzione
+# الجمع بين الأدوات المضمّنة وميزة "استدعاء الدوال"
 
-Gemini consente di combinare [strumenti integrati](https://ai.google.dev/gemini-api/docs/tools?hl=it), come `google_search`, e [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) (note anche come *strumenti personalizzati*) in una singola generazione conservando ed esponendo la cronologia del contesto delle chiamate allo strumento. Le combinazioni di strumenti integrati e personalizzati consentono workflow complessi e agentivi in cui, ad esempio, il modello può basarsi sui dati web in tempo reale prima di chiamare la logica di business specifica.
+يسمح Gemini بالجمع بين [الأدوات المضمّنة](https://ai.google.dev/gemini-api/docs/tools?hl=ar)، مثل `google_search`، وميزة [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) (المعروفة أيضًا باسم *الأدوات المخصّصة*) في عملية إنشاء واحدة من خلال الاحتفاظ بسجلّ سياق استدعاءات الأدوات وعرضه. تسمح مجموعات الأدوات المضمّنة والمخصّصة بسير عمل معقّد ومستقل، حيث يمكن للطراز، على سبيل المثال، أن يستند إلى بيانات الويب في الوقت الفعلي قبل استدعاء منطق نشاطك التجاري المحدّد.
 
-Ecco un esempio che consente combinazioni di strumenti integrati e personalizzati con `google_search` e una funzione personalizzata `getWeather`:
+في ما يلي مثال يوضّح كيفية تفعيل مجموعات الأدوات المضمّنة والمخصّصة باستخدام `google_search` ودالة مخصّصة `getWeather`:
 
 ### Python
 
@@ -110,7 +110,7 @@ for part in response_2.candidates[0].content.parts:
         print(part.text)
 ```
 
-### Javascript
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -198,7 +198,7 @@ async function run() {
 run();
 ```
 
-### Vai
+### انتقال
 
 ```
 package main
@@ -387,65 +387,65 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
 }'
 ```
 
-## Come funziona
+## آلية العمل
 
-I modelli Gemini 3 utilizzano la *circolazione del contesto dello strumento* per consentire combinazioni di strumenti integrati e personalizzati. La circolazione del contesto dello strumento consente di conservare ed esporre il contesto degli strumenti integrati e condividerlo con gli strumenti personalizzati nella stessa chiamata da un turno all'altro.
+تستخدم طُرز Gemini 3 ميزة *تداول سياق الأداة* لتفعيل مجموعات الأدوات المضمّنة والمخصّصة. تتيح ميزة "تداول سياق الأداة" الاحتفاظ بسياق الأدوات المضمّنة وعرضه ومشاركته مع الأدوات المخصّصة في نفس الاستدعاء من دور إلى آخر.
 
-### Attivare la combinazione di strumenti
+### تفعيل ميزة "الجمع بين الأدوات"
 
-- Devi impostare il flag `include_server_side_tool_invocations` su `true` per attivare la circolazione del contesto dello strumento.
-- Includi [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=it#function-declarations), insieme agli
-  strumenti integrati che vuoi utilizzare, per attivare il comportamento di combinazione.
-  - Se non includi `function_declarations`, la circolazione del contesto dello strumento continuerà ad agire sugli strumenti integrati inclusi, a condizione che il flag sia impostato.
+- يجب ضبط العلامة `include_server_side_tool_invocations` على `true` لتفعيل ميزة "تداول سياق الأداة".
+- يجب تضمين [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#function-declarations)، بالإضافة إلى الأدوات المضمّنة التي تريد استخدامها، لتفعيل سلوك الجمع بين الأدوات.
+  - إذا لم يتم تضمين `function_declarations`، ستظل ميزة "تداول سياق الأداة" تعمل على الأدوات المضمّنة المضمّنة، طالما تم ضبط العلامة.
 
-### Parti restituite dall'API
+### الأجزاء التي تعرضها واجهة برمجة التطبيقات
 
-In una singola risposta, l'API restituisce le parti `toolCall` e `toolResponse` per la chiamata allo strumento integrato. Per la chiamata di funzione (strumento personalizzato), l'API restituisce la parte di chiamata `functionCall`, a cui l'utente fornisce la parte `functionResponse` nel turno successivo.
+في ردّ واحد، تعرض واجهة برمجة التطبيقات الجزأين `toolCall` و`toolResponse` لاستدعاء الأداة المضمّنة. بالنسبة إلى استدعاء الدالة (الأداة المخصّصة)، تعرض واجهة برمجة التطبيقات جزء استدعاء `functionCall`، الذي يقدّم المستخدم له جزء `functionResponse` في الدور التالي.
 
-- `toolCall` e `toolResponse`: l'API restituisce queste parti per conservare il contesto degli strumenti eseguiti sul lato server e il risultato della loro esecuzione per il turno successivo.
-- `functionCall` e `functionResponse`: l'API invia la chiamata di funzione all'
-  utente per completarla e l'utente restituisce il risultato nella
-  risposta della funzione (queste parti sono standard per tutte le [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) nell'API Gemini, non sono specifiche della
-  funzionalità di combinazione di strumenti).
-- ([Solo strumento di esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it))
-  `executableCode` e `codeExecutionResult`:
-  Quando utilizzi lo strumento di esecuzione del codice, anziché `functionCall` e
-  `functionResponse`, l'API restituisce `executableCode` (il codice generato
-  dal modello che deve essere eseguito) e `codeExecutionResult` (il
-  risultato del codice eseguibile).
+- `toolCall` و`toolResponse`: تعرض واجهة برمجة التطبيقات هذين الجزأين للاحتفاظ بسياق الأدوات التي يتم تشغيلها من جهة الخادم ونتيجة تنفيذها في الدور التالي.
+- `functionCall` و`functionResponse`: ترسل واجهة برمجة التطبيقات استدعاء الدالة إلى
+  المستخدم لملء البيانات، ويرسل المستخدم النتيجة مرة أخرى في
+  ردّ الدالة (هذه الأجزاء عادية لجميع ميزات [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) في Gemini API، وليست فريدة لميزة
+  الجمع بين الأدوات).
+- ([أداة تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) فقط)
+  `executableCode` و`codeExecutionResult`:
+  عند استخدام أداة تنفيذ الرموز البرمجية، بدلاً من `functionCall` و
+  `functionResponse`، تعرض واجهة برمجة التطبيقات `executableCode` (الرمز البرمجي الذي تم إنشاؤه
+  بواسطة الطراز والمقصود تنفيذه) و`codeExecutionResult` (الـ
+  نتيجة الرمز البرمجي القابل للتنفيذ).
 
-Devi restituire tutte le parti, inclusi tutti i [campi](#critical-fields) che
-contengono, al modello a ogni turno per mantenere il contesto e attivare le combinazioni di strumenti.
+يجب إعادة جميع الأجزاء، بما في ذلك جميع الـ [حقول](#critical-fields) التي
+تحتوي عليها، إلى الطراز في كل دور للحفاظ على السياق وتفعيل ميزة "الجمع بين الأدوات"
+.
 
-### Campi critici nelle parti restituite
+### الحقول المهمة في الأجزاء المعروضة
 
-Alcune [parti restituite dall'API](#api-returns-parts) includeranno i campi `id`,
-`tool_type` e `thought_signature`. Questi campi sono fondamentali per mantenere il contesto dello strumento (e quindi per le combinazioni di strumenti); devi restituire tutte le parti *come indicato nella risposta* nelle richieste successive.
+ستتضمّن بعض [الأجزاء التي تعرضها واجهة برمجة التطبيقات](#api-returns-parts) الحقول `id` و
+`tool_type` و`thought_signature`. تُعدّ هذه الحقول مهمة للحفاظ على سياق الأداة (وبالتالي مهمة لميزة "الجمع بين الأدوات")؛ ويجب إعادة جميع الأجزاء *كما هي موضّحة في الردّ* في طلباتك اللاحقة.
 
-- `id`: un identificatore univoco che mappa una chiamata alla relativa risposta. `id` viene **impostato su
-  tutte le risposte alle chiamate di funzione**, indipendentemente dalla circolazione del contesto dello strumento.
-  Devi *fornire* lo stesso `id` nella risposta della funzione
-  che l'API fornisce nella chiamata di funzione. Gli strumenti integrati condividono automaticamente l'`id` tra la chiamata allo strumento e la risposta dello strumento.
-  - Trovato in tutte le parti correlate allo strumento: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
-- `tool_type`: identifica lo strumento specifico in uso; il nome letterale dello strumento integrato (ad es. `URL_CONTEXT`) o della funzione (ad es. `getWeather`).
-  - Trovato nelle parti `toolCall` e `toolResponse`.
-- `thought_signature`: il contesto criptato effettivo incorporato in **ogni parte restituita dall'API**. Il contesto non può essere ricostruito senza le firme di pensiero; se non restituisci le firme di pensiero per tutte le parti in ogni turno, il modello genererà un errore.
-  - Trovato in *tutte* le parti.
+- `id`: معرّف فريد يربط استدعاءً بردّه. `id` يتم **ضبطه في
+  جميع ردود استدعاء الدالة**، بغض النظر عن ميزة "تداول سياق الأداة".
+  يجب *تقديم* `id` نفسه في ردّ الدالة
+  الذي تقدّمه واجهة برمجة التطبيقات في استدعاء الدالة. تشارك الأدوات المضمّنة تلقائيًا `id` بين استدعاء الأداة وردّ الأداة.
+  - يظهر في جميع الأجزاء ذات الصلة بالأداة: `toolCall` و`toolResponse` و`functionCall` و`functionResponse` و`executableCode` و `codeExecutionResult`
+- `tool_type`: يحدّد الأداة المحدّدة المستخدَمة، أي اسم الأداة المضمّنة الحرفي (مثل `URL_CONTEXT`) أو اسم الدالة (مثل `getWeather`).
+  - يظهر في الجزأين `toolCall` و`toolResponse`.
+- `thought_signature`: السياق المشفّر الفعلي المضمّن في **كل جزء تعرضه واجهة برمجة التطبيقات**. لا يمكن إعادة إنشاء السياق بدون توقيعات الأفكار؛ وإذا لم يتم عرض توقيعات الأفكار لجميع الأجزاء في كل دور، سيحدث خطأ في الطراز.
+  - يظهر في *جميع* الأجزاء.
 
-### Dati specifici dello strumento
+### البيانات الخاصة بالأداة
 
-Alcuni strumenti integrati restituiscono argomenti di dati visibili all'utente specifici per il tipo di strumento.
+تعرض بعض الأدوات المضمّنة وسيطات بيانات مرئية للمستخدم خاصة بنوع الأداة.
 
-| Strumento | Argomenti della chiamata allo strumento visibili all'utente (se presenti) | Risposta dello strumento visibile all'utente (se presente) |
+| الأداة | وسيطات استدعاء الأداة المرئية للمستخدم (إن وُجدت) | ردّ الأداة المرئي للمستخدم (إن وُجد) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` URL da sfogliare | `urls_metadata` `retrieved_url`: URL sfogliati `url_retrieval_status`: stato di navigazione |
-| **FILE\_SEARCH** | Nessuno | Nessuno |
+| **URL\_CONTEXT** | `urls` عناوين URL التي سيتم تصفّحها | `urls_metadata` `retrieved_url`: عناوين URL التي تم تصفّحها `url_retrieval_status`: حالة التصفّح |
+| **FILE\_SEARCH** | بدون | بدون |
 
-## Esempio di struttura della richiesta di combinazione di strumenti
+## مثال على بنية طلب الجمع بين الأدوات
 
-La seguente struttura della richiesta mostra la struttura della richiesta del prompt: "Qual è la città più a nord degli Stati Uniti? Che tempo fa oggi?". Combina tre strumenti: gli strumenti integrati di Gemini `google_search` e `code_execution` e una funzione personalizzata `get_weather`.
+تعرض بنية الطلب التالية بنية طلب الرسالة الفورية: "ما هي المدينة الواقعة في أقصى شمال الولايات المتحدة؟ وما حالة الطقس فيها اليوم؟". يجمع هذا الطلب بين ثلاث أدوات: الأداتان المضمّنتان في Gemini `google_search` و`code_execution`، ودالة مخصّصة `get_weather`.
 
 ```
 {
@@ -514,52 +514,49 @@ La seguente struttura della richiesta mostra la struttura della richiesta del pr
 }
 ```
 
-## Token e prezzi
+## الرموز المميّزة والأسعار
 
-Tieni presente che le parti `toolCall` e `toolResponse` nelle richieste vengono conteggiate nel `prompt_token_count`. Poiché questi passaggi intermedi dello strumento sono ora visibili e ti vengono restituiti, fanno parte della cronologia delle conversazioni. Questo vale solo per il
-caso per *richieste*, non per *risposte*.
+يُرجى العِلم أنّ الجزأين `toolCall` و`toolResponse` في الطلبات يتم احتسابهما ضمن `prompt_token_count`. بما أنّ خطوات الأداة الوسيطة هذه أصبحت مرئية ويتم عرضها لك، فهي جزء من سجلّ المحادثة. ينطبق ذلك على *الطلبات* فقط، وليس *الردود*.
 
-Lo strumento Ricerca Google è un'eccezione a questa regola. La Ricerca Google applica già
-il proprio modello di prezzi a livello di query, quindi i token non sono
-addebitati due volte (vedi la pagina [dei prezzi](https://ai.google.dev/gemini-api/docs/pricing?hl=it)).
+تُستثنى أداة "بحث Google" من هذه القاعدة. تطبّق "بحث Google" نموذج التسعير الخاص بها على مستوى طلب البحث، لذا لا يتم تحصيل رسوم مضاعفة على الرموز المميّزة (راجِع صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar)).
 
-Per ulteriori informazioni, consulta la pagina [Token](https://ai.google.dev/gemini-api/docs/tokens?hl=it).
+يُرجى قراءة صفحة [الرموز المميّزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) لمزيد من المعلومات.
 
-## Limitazioni
+## القيود
 
-- Impostazione predefinita della modalità `VALIDATED` (la modalità `AUTO` non è supportata) quando il flag `include_server_side_tool_invocations` è attivato
-- Gli strumenti integrati come `google_search` si basano sulle informazioni relative alla località e all'ora corrente, quindi se `system_instruction` o `function_declaration.description` contengono informazioni su località e ora in conflitto, la funzionalità di combinazione di strumenti potrebbe non funzionare correttamente.
+- يتم تلقائيًا استخدام وضع `VALIDATED` (وضع `AUTO` غير متاح) عند تفعيل العلامة `include_server_side_tool_invocations`
+- تعتمد الأدوات المضمّنة، مثل `google_search`، على معلومات الموقع الجغرافي والوقت الحالي، لذا إذا كانت `system_instruction` أو `function_declaration.description` تتضمّن معلومات متضاربة عن الموقع الجغرافي والوقت، قد لا تعمل ميزة "الجمع بين الأدوات" بشكل جيد.
 
-## Strumenti supportati
+## الأدوات المتاحة
 
-La circolazione del contesto dello strumento standard si applica agli strumenti lato server (integrati).
-L'esecuzione del codice è anche uno strumento lato server, ma ha una propria soluzione integrata per la circolazione del contesto. L'utilizzo del computer e le chiamate di funzione sono strumenti lato client e hanno anche soluzioni integrate per la circolazione del contesto.
+ينطبق التداول العادي لسياق الأداة على الأدوات من جهة الخادم (المضمّنة).
+تُعدّ أداة تنفيذ الرموز البرمجية أيضًا أداة من جهة الخادم، ولكنّها تتضمّن حلاً مضمّنًا خاصًا بها لتداول السياق. تُعدّ أداة استخدام الكمبيوتر وميزة "استدعاء الدوال" أدوات من جهة العميل، وتتضمّنان أيضًا حلولاً مضمّنة لتداول السياق.
 
-| Strumento | Lato di esecuzione | Supporto per la circolazione del contesto |
+| الأداة | جهة التنفيذ | إتاحة ميزة "تداول السياق" |
 | --- | --- | --- |
-| [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) | Lato server | Supportato |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it) | Lato server | Supportato |
-| [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) | Lato server | Supportato |
-| [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it) | Lato server | Supportato |
-| [Esecuzione del codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it) | Lato server | Supportato (integrato, utilizza le parti `executableCode` e `codeExecutionResult`) |
-| [Utilizzo del computer](https://ai.google.dev/gemini-api/docs/computer-use?hl=it) | Lato client | Supportato (integrato, utilizza le parti `functionCall` e `functionResponse`) |
-| [Funzioni personalizzate](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) | Lato client | Supportato (integrato, utilizza le parti `functionCall` e `functionResponse`) |
+| [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) | جهة الخادم | متاحة |
+| [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar) | جهة الخادم | متاحة |
+| [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) | جهة الخادم | متاحة |
+| [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar) | جهة الخادم | متاحة |
+| [تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) | جهة الخادم | متاحة (مضمّنة، تستخدم الجزأين `executableCode` و`codeExecutionResult`) |
+| [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) | من جهة العميل | متاحة (مضمّنة، تستخدم الجزأين `functionCall` و`functionResponse`) |
+| [الدوال المخصّصة](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) | من جهة العميل | متاحة (مضمّنة، تستخدم الجزأين `functionCall` و`functionResponse`) |
 
-## Passaggi successivi
+## الخطوات التالية
 
-- Scopri di più sulle [chiamate di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it) nell'API Gemini.
-- Esplora gli strumenti supportati:
-  - [Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)
-  - [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)
-  - [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)
+- مزيد من المعلومات عن [ميزة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) في Gemini API
+- استكشاف الأدوات المتاحة:
+  - [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)
+  - [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar)
+  - [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)
+  - [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)
 
-Invia feedback
+إرسال ملاحظات
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-05-29 UTC.
+تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Vuoi dirci altro?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

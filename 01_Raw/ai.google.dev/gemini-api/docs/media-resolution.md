@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi
-fetched_at: 2026-06-08T05:27:23.206663+00:00
+source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja
+fetched_at: 2026-06-15T06:23:25.192572+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Độ phân giải của nội dung nghe nhìn
+# メディアの解像度
 
-Tham số `media_resolution` kiểm soát cách Gemini API xử lý thông tin đầu vào đa phương tiện như hình ảnh, video và tài liệu PDF bằng cách xác định **số lượng token tối đa** được phân bổ cho thông tin đầu vào đa phương tiện, cho phép bạn cân bằng chất lượng phản hồi với độ trễ và chi phí. Để biết các chế độ cài đặt, giá trị mặc định và cách các giá trị này tương ứng với mã thông báo, hãy xem phần [Số lượng mã thông báo](#token-counts).
+`media_resolution` パラメータは、メディア入力に割り当てられる**トークンの最大数**を決定することで、Gemini API が画像、動画、PDF ドキュメントなどのメディア入力を処理する方法を制御します。これにより、回答の品質とレイテンシ、費用のバランスを取ることができます。さまざまな設定、デフォルト値、トークンとの対応については、[トークン数](#token-counts)のセクションをご覧ください。
 
-Bạn có thể định cấu hình độ phân giải của nội dung nghe nhìn theo 2 cách:
+メディアの解像度を構成するには、次の 2 つの方法があります。
 
-- [Theo phần](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi#per-part-media-resolution) (chỉ Gemini 3)
-- [Trên toàn cầu](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi#global-media-resolution) cho toàn bộ yêu cầu `generateContent` (tất cả các mô hình đa phương thức)
+- [パーツごと](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#per-part-media-resolution)（Gemini 3 のみ）
+- [グローバル](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#global-media-resolution): `generateContent` リクエスト全体（すべてのマルチモーダル モデル）
 
-## Độ phân giải của từng phần nội dung nghe nhìn (chỉ Gemini 3)
+## パートごとのメディア解像度（Gemini 3 のみ）
 
-Gemini 3 cho phép bạn đặt độ phân giải của nội dung nghe nhìn cho từng đối tượng nội dung nghe nhìn trong yêu cầu của mình, giúp tối ưu hoá mức sử dụng mã thông báo một cách chi tiết. Bạn có thể kết hợp các cấp độ phân giải trong một yêu cầu duy nhất. Ví dụ: sử dụng độ phân giải cao cho một sơ đồ phức tạp và độ phân giải thấp cho một hình ảnh theo ngữ cảnh đơn giản. Chế độ cài đặt này sẽ ghi đè mọi cấu hình chung cho một phần cụ thể. Để biết chế độ cài đặt mặc định, hãy xem phần [Số lượng mã thông báo](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi#token-counts).
+Gemini 3 では、リクエスト内の個々のメディア オブジェクトのメディア解像度を設定できるため、トークン使用量をきめ細かく最適化できます。1 つのリクエストで解像度レベルを混在させることができます。たとえば、複雑な図には高解像度を使用し、シンプルなコンテキスト画像には低解像度を使用します。この設定は、特定の部分のグローバル構成をオーバーライドします。デフォルト設定については、[トークン数](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#token-counts)セクションをご覧ください。
 
 ### Python
 
@@ -131,9 +131,9 @@ curl -s -X POST \
   -d @request.json
 ```
 
-## Độ phân giải nội dung nghe nhìn trên toàn cầu
+## グローバル メディアの解像度
 
-Bạn có thể đặt độ phân giải mặc định cho tất cả các phần nội dung nghe nhìn trong một yêu cầu bằng cách sử dụng `GenerationConfig`. Tính năng này được tất cả các mô hình đa phương thức hỗ trợ. Nếu một yêu cầu bao gồm cả chế độ cài đặt chung và [chế độ cài đặt theo từng phần](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi#per-part-media-resolution), thì chế độ cài đặt theo từng phần sẽ được ưu tiên cho mặt hàng cụ thể đó.
+`GenerationConfig` を使用すると、リクエスト内のすべてのメディア要素のデフォルトの解像度を設定できます。これは、すべてのマルチモーダル モデルでサポートされています。リクエストにグローバル設定と[パーツごとの設定](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#per-part-media-resolution)の両方が含まれている場合、その特定のアイテムについてはパーツごとの設定が優先されます。
 
 ### Python
 
@@ -201,83 +201,83 @@ curl -s -X POST \
   }'
 ```
 
-## Các giá trị độ phân giải có thể sử dụng
+## 使用可能な解決策の値
 
-Gemini API xác định các cấp độ sau đây cho độ phân giải của nội dung nghe nhìn:
+Gemini API は、メディアの解像度について次のレベルを定義しています。
 
-- `MEDIA_RESOLUTION_UNSPECIFIED`: Chế độ cài đặt mặc định. Số lượng mã thông báo cho cấp độ này có sự khác biệt đáng kể giữa Gemini 3 và các mô hình Gemini trước đó.
-- `MEDIA_RESOLUTION_LOW`: Số lượng mã thông báo thấp hơn, giúp xử lý nhanh hơn và giảm chi phí, nhưng ít chi tiết hơn.
-- `MEDIA_RESOLUTION_MEDIUM`: Cân bằng giữa mức độ chi tiết, chi phí và độ trễ.
-- `MEDIA_RESOLUTION_HIGH`: Số lượng mã thông báo cao hơn, cung cấp nhiều thông tin chi tiết hơn để mô hình hoạt động, nhưng phải trả giá bằng độ trễ và chi phí tăng lên.
-- `MEDIA_RESOLUTION_ULTRA_HIGH` (Chỉ theo phần): Số lượng mã thông báo cao nhất, bắt buộc đối với các trường hợp sử dụng cụ thể, chẳng hạn như [sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi).
+- `MEDIA_RESOLUTION_UNSPECIFIED`: デフォルト設定。このレベルのトークン数は、Gemini 3 と以前の Gemini モデルで大きく異なります。
+- `MEDIA_RESOLUTION_LOW`: トークン数が少なく、処理が高速でコストが低いが、詳細が少ない。
+- `MEDIA_RESOLUTION_MEDIUM`: 詳細、費用、レイテンシのバランス。
+- `MEDIA_RESOLUTION_HIGH`: トークン数が多いほど、モデルが処理する詳細が増えますが、レイテンシと費用が増加します。
+- `MEDIA_RESOLUTION_ULTRA_HIGH`（パーツごと）: トークン数が最も多く、[コンピュータの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)などの特定のユースケースで必要です。
 
-Xin lưu ý rằng `MEDIA_RESOLUTION_HIGH` mang lại hiệu suất tối ưu cho hầu hết các trường hợp sử dụng.
+`MEDIA_RESOLUTION_HIGH` はほとんどのユースケースで最適なパフォーマンスを提供します。
 
-Số lượng mã thông báo chính xác được tạo cho mỗi cấp độ này phụ thuộc vào cả **loại nội dung nghe nhìn** (Hình ảnh, Video, PDF) và **phiên bản mô hình**.
+これらの各レベルで生成されるトークンの正確な数は、**メディアタイプ**（画像、動画、PDF）と**モデル バージョン**の両方によって異なります。
 
-## Số lượng mã thông báo
+## トークン数
 
-Các bảng dưới đây tóm tắt số lượng mã thông báo gần đúng cho từng giá trị `media_resolution` và loại nội dung nghe nhìn cho mỗi họ mô hình.
+次の表は、モデル ファミリーごとに、各 `media_resolution` 値とメディアタイプのおおよそのトークン数をまとめたものです。
 
-**Các mô hình Gemini 3**
+**Gemini 3 モデル**
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **MediaResolution** | **Image** | **Video** | **PDF** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (Mặc định) | 1120 | 70 | 560 |
-| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + Văn bản gốc |
-| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + Văn bản gốc |
-| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + Văn bản gốc |
-| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | Không áp dụng | Không áp dụng |
+| **MediaResolution** | **画像** | **動画** | **PDF** |
+| `MEDIA_RESOLUTION_UNSPECIFIED`（デフォルト） | 1120 | 70 | 560 |
+| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2,240 | なし | なし |
 
-**Các mô hình Gemini 2.5**
+**Gemini 2.5 モデル**
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **MediaResolution** | **Image** | **Video** | **PDF (Bản quét)** | **PDF (Gốc)** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (Mặc định) | 256 + Pan & Scan (~2048) | 256 | 256 + OCR | 256 + Văn bản gốc |
-| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + Văn bản gốc |
-| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + Văn bản gốc |
-| `MEDIA_RESOLUTION_HIGH` | 256 + Pan & Scan | 256 | 256 + OCR | 256 + Văn bản gốc |
+| **MediaResolution** | **画像** | **動画** | **PDF（スキャン）** | **PDF（ネイティブ）** |
+| `MEDIA_RESOLUTION_UNSPECIFIED`（デフォルト） | 256 + パン＆スキャン（~2048） | 256 | 256 + OCR | 256 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_HIGH` | 256 + パン＆スキャン | 256 | 256 + OCR | 256 + ネイティブ テキスト |
 
-## Chọn độ phân giải phù hợp
+## 適切な解決策の選択
 
-- **Mặc định (`UNSPECIFIED`):** Bắt đầu bằng chế độ mặc định. Được điều chỉnh để có sự cân bằng tốt về chất lượng, độ trễ và chi phí cho hầu hết các trường hợp sử dụng phổ biến.
-- **`LOW`:** Sử dụng cho các trường hợp mà chi phí và độ trễ là yếu tố quan trọng nhất, còn chi tiết ở mức độ chi tiết không quan trọng bằng.
-- **`MEDIUM` / `HIGH`:** Tăng độ phân giải khi tác vụ yêu cầu bạn hiểu rõ các chi tiết phức tạp trong nội dung nghe nhìn. Điều này thường cần thiết cho việc phân tích hình ảnh phức tạp, đọc biểu đồ hoặc hiểu tài liệu dày đặc.
-- **`ULTRA HIGH`** – Chỉ áp dụng cho chế độ cài đặt theo phần. Nên dùng cho một số trường hợp sử dụng cụ thể, chẳng hạn như khi dùng máy tính hoặc khi kết quả kiểm thử cho thấy có sự cải tiến rõ rệt so với `HIGH`.
-- **Kiểm soát theo phần (Gemini 3):** Tối ưu hoá mức sử dụng mã thông báo. Ví dụ: trong một câu lệnh có nhiều hình ảnh, hãy dùng `HIGH` cho một sơ đồ phức tạp và `LOW` hoặc `MEDIUM` cho các hình ảnh theo bối cảnh đơn giản hơn.
+- **デフォルト（`UNSPECIFIED`）:** デフォルトから開始します。これは、最も一般的なユースケースで品質、レイテンシ、費用のバランスが取れるように調整されています。
+- **`LOW`:** 費用とレイテンシが最優先で、詳細な情報はそれほど重要ではないシナリオで使用します。
+- **`MEDIUM` / `HIGH`:** メディア内の複雑な詳細を理解する必要があるタスクでは、解像度を上げます。これは、複雑な視覚分析、チャートの読み取り、密度の高いドキュメントの理解に必要になることがよくあります。
+- **`ULTRA HIGH`** - パーツごとの設定でのみ使用できます。パソコンでの使用など、特定のユースケースや、テストで `HIGH` よりも明確な改善が見られる場合に推奨されます。
+- **部分ごとの制御（Gemini 3）:** トークンの使用量を最適化します。たとえば、複数の画像を含むプロンプトでは、複雑な図には `HIGH` を使用し、シンプルなコンテキスト画像には `LOW` または `MEDIUM` を使用します。
 
-**Chế độ cài đặt được đề xuất**
+**推奨設定**
 
-Sau đây là danh sách các chế độ cài đặt độ phân giải nội dung nghe nhìn được đề xuất cho từng loại nội dung nghe nhìn được hỗ trợ.
+以下に、サポートされている各メディアタイプに推奨されるメディア解像度設定を示します。
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **Loại nội dung nghe nhìn** | **Chế độ cài đặt đề xuất** | **Số mã thông báo tối đa** | **Hướng dẫn sử dụng** |
-| **Hình ảnh** | `MEDIA_RESOLUTION_HIGH` | 1120 | Bạn nên dùng chế độ này cho hầu hết các tác vụ phân tích hình ảnh để đảm bảo chất lượng tối đa. |
-| **Tệp PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | Tối ưu cho việc hiểu tài liệu; chất lượng thường đạt đến mức tối đa ở `medium`. Việc tăng lên `high` hiếm khi cải thiện kết quả OCR cho các tài liệu tiêu chuẩn. |
-| **Video** (Chung) | `MEDIA_RESOLUTION_LOW` (hoặc `MEDIA_RESOLUTION_MEDIUM`) | 70 (mỗi khung hình) | **Lưu ý:** Đối với video, chế độ cài đặt `low` và `medium` được xử lý giống nhau (70 token) để tối ưu hoá việc sử dụng ngữ cảnh. Điều này là đủ cho hầu hết các nhiệm vụ nhận dạng và mô tả hành động. |
-| **Video** (Nhiều văn bản) | `MEDIA_RESOLUTION_HIGH` | 280 (mỗi khung hình) | Chỉ bắt buộc khi trường hợp sử dụng liên quan đến việc đọc văn bản dày đặc (OCR) hoặc các chi tiết nhỏ trong khung hình video. |
+| **メディアタイプ** | **推奨設定** | **最大トークン数** | **使用に関するガイダンス** |
+| **画像検索** | `MEDIA_RESOLUTION_HIGH` | 1120 | 品質を最大限に高めるために、ほとんどの画像分析タスクにおすすめします。 |
+| **PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | ドキュメントの理解に最適です。通常、品質は `medium` で飽和します。`high` に増やしても、標準ドキュメントの OCR 結果が改善されることはほとんどありません。 |
+| **動画**（全般） | `MEDIA_RESOLUTION_LOW`（または `MEDIA_RESOLUTION_MEDIUM`） | 70（フレームあたり） | **注:** 動画の場合、コンテキストの使用を最適化するために、`low` と `medium` の設定は同じ（70 個のトークン）として扱われます。ほとんどのアクション認識と説明のタスクにはこれで十分です。 |
+| **動画**（テキストが多い） | `MEDIA_RESOLUTION_HIGH` | 280（フレームあたり） | ユースケースで、密度の高いテキスト（OCR）や動画フレーム内の細部を読み取る場合にのみ必要です。 |
 
-Luôn kiểm thử và đánh giá mức tác động của các chế độ cài đặt độ phân giải khác nhau đối với ứng dụng cụ thể của bạn để tìm ra sự cân bằng tốt nhất giữa chất lượng, độ trễ và chi phí.
+さまざまな解像度設定が特定のアプリケーションに与える影響を常にテストして評価し、品質、レイテンシ、費用の最適なトレードオフを見つけてください。
 
-## Bản tóm tắt về khả năng tương thích giữa các phiên bản
+## バージョンの互換性の概要
 
-- Enum `MediaResolution` có sẵn cho tất cả các mô hình hỗ trợ đầu vào đa phương tiện.
-- Số lượng mã thông báo liên kết với mỗi cấp enum **khác nhau** giữa các mô hình Gemini 3 và các phiên bản Gemini trước đó.
-- Việc đặt `media_resolution` trên từng đối tượng `Part` **chỉ dành cho các mô hình Gemini 3**.
+- `MediaResolution` 列挙型は、メディア入力をサポートするすべてのモデルで使用できます。
+- 各列挙型レベルに関連付けられているトークン数は、Gemini 3 モデルとそれ以前の Gemini バージョンで**異なります**。
+- 個々の `Part` オブジェクトに `media_resolution` を設定できるのは、**Gemini 3 モデルのみ**です。
 
-## Các bước tiếp theo
+## 次のステップ
 
-- Tìm hiểu thêm về các khả năng đa phương thức của Gemini API trong các hướng dẫn về [hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi), [hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi) và [hiểu tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi).
+- Gemini API のマルチモーダル機能の詳細については、[画像理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)、[動画理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[ドキュメント理解](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)の各ガイドをご覧ください。
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-05-19 UTC.
+最終更新日 2026-05-19 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-19 UTC。"],[],[]]

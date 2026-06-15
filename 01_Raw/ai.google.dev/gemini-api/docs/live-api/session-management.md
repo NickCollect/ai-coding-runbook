@@ -1,52 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=es-419
-fetched_at: 2026-06-08T05:26:57.980957+00:00
-title: "Administraci\u00f3n de sesiones con la API de Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja
+fetched_at: 2026-06-15T06:21:18.919063+00:00
+title: "Live API \u3092\u4f7f\u7528\u3057\u305f\u30bb\u30c3\u30b7\u30e7\u30f3\u7ba1\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Enviar comentarios
+フィードバックを送信
 
-# Administración de sesiones con la API de Live
+# Live API を使用したセッション管理
 
-En la API de Live, una sesión hace referencia a una conexión persistente
-en la que la entrada y la salida se transmiten de forma continua a través de la misma
-conexión (obtén más información sobre [cómo funciona](https://ai.google.dev/gemini-api/docs/live?hl=es-419)).
-Este diseño de sesión único permite una latencia baja y admite funciones únicas, pero también puede presentar desafíos, como límites de tiempo de sesión y finalización anticipada.
-En esta guía, se describen estrategias para superar los desafíos de administración de sesiones que pueden surgir cuando se usa la API de Live.
+Live API では、セッションとは、入力と出力が同じ接続で継続的にストリーミングされる永続的な接続を指します（[仕組み](https://ai.google.dev/gemini-api/docs/live?hl=ja)をご覧ください）。この独自のセッション設計により、低レイテンシが実現し、独自の機能がサポートされますが、セッションの制限時間や早期終了などの問題も発生する可能性があります。このガイドでは、Live API の使用時に発生する可能性のあるセッション管理の課題を克服するための戦略について説明します。
 
-## Duración de la sesión
+## セッションの有効期間
 
-Sin compresión, las sesiones solo de audio se limitan a 15 minutos y las sesiones de audio y video se limitan a 2 minutos. Si se superan estos límites
-se finalizará la sesión (y, por lo tanto, la conexión), pero puedes usar
-[la compresión de la ventana de contexto](#context-window-compression) para extender las sesiones por
-un tiempo ilimitado.
+圧縮なしの場合、音声のみのセッションは 15 分、音声と動画のセッションは 2 分に制限されます。これらの上限を超えるとセッション（接続）が終了しますが、[コンテキスト ウィンドウの圧縮](#context-window-compression)を使用すると、セッションを無制限に延長できます。
 
-La duración de una conexión también está limitada a unos 10 minutos. Cuando finaliza la conexión, también finaliza la sesión. En este caso, puedes
-configurar una sola sesión para que permanezca activa en varias conexiones mediante la
-[reanudación de la sesión](#session-resumption).
-También recibirás un [mensaje de GoAway](#goaway-message) antes de que finalice la
-conexión, lo que te permitirá realizar más acciones.
+接続の有効期間も約 10 分に制限されています。接続が終了すると、セッションも終了します。この場合、[セッションの再開](#session-resumption)を使用して、複数の接続でアクティブな状態を維持するように 1 つのセッションを構成できます。接続が終了する前に [GoAway メッセージ](#goaway-message)も届くため、さらなるアクションを実行できます。
 
-## Compresión de la ventana de contexto
+## コンテキスト ウィンドウの圧縮
 
-Para habilitar sesiones más largas y evitar la finalización abrupta de la conexión, puedes
-habilitar la compresión de la ventana de contexto configurando el campo [contextWindowCompression](https://ai.google.dev/api/live?hl=es-419#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
-como parte de la configuración de la sesión.
+セッションを長くして、接続が突然終了しないようにするには、セッション構成の一部として [contextWindowCompression](https://ai.google.dev/api/live?hl=ja#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) フィールドを設定して、コンテキスト ウィンドウの圧縮を有効にします。
 
-En [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=es-419#contextwindowcompressionconfig), puedes configurar un
-[mecanismo de ventana deslizante](https://ai.google.dev/api/live?hl=es-419#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
-y la [cantidad de tokens](https://ai.google.dev/api/live?hl=es-419#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
-que activan la compresión.
+[ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=ja#contextwindowcompressionconfig) では、[スライディング ウィンドウ メカニズム](https://ai.google.dev/api/live?hl=ja#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)と、圧縮をトリガーする[トークン数](https://ai.google.dev/api/live?hl=ja#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)を構成できます。
 
 ### Python
 
@@ -73,18 +57,13 @@ const config = {
 };
 ```
 
-## Reanudación de sesión
+## セッションの再開
 
-Para evitar la finalización de la sesión cuando el servidor restablece periódicamente la conexión WebSocket, configura el campo [sessionResumption](https://ai.google.dev/api/live?hl=es-419#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
-dentro de la [configuración de configuración](https://ai.google.dev/api/live?hl=es-419#BidiGenerateContentSetup).
+サーバーが WebSocket 接続を定期的にリセットしたときにセッションが終了しないようにするには、[設定構成](https://ai.google.dev/api/live?hl=ja#BidiGenerateContentSetup)内の [sessionResumption](https://ai.google.dev/api/live?hl=ja#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) フィールドを構成します。
 
-Si pasas esta configuración, el
-servidor enviará mensajes de [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=es-419#SessionResumptionUpdate)
-, que se pueden usar para reanudar la sesión pasando el último token de reanudación
-como el [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=es-419#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle)
-de la conexión posterior.
+この構成を渡すと、サーバーは [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=ja#SessionResumptionUpdate) メッセージを送信します。このメッセージは、後続の接続の [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=ja#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) として最後の再開トークンを渡すことで、セッションの再開に使用できます。
 
-Los tokens de reanudación son válidos durante 2 horas después de la finalización de la última sesión.
+再開トークンは、最後のセッションの終了後 2 時間有効です。
 
 ### Python
 
@@ -219,11 +198,9 @@ async function main() {
 main();
 ```
 
-## Cómo recibir un mensaje antes de que se desconecte la sesión
+## セッションが切断される前にメッセージを受信する
 
-El servidor envía un mensaje de [GoAway](https://ai.google.dev/api/live?hl=es-419#GoAway) que indica que la conexión actual finalizará pronto. Este mensaje incluye [timeLeft](https://ai.google.dev/api/live?hl=es-419#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left),
-que indica el tiempo restante y te permite realizar más acciones antes de que la
-conexión finalice como ABORTED.
+サーバーは、現在の接続がまもなく終了することを示す [GoAway](https://ai.google.dev/api/live?hl=ja#GoAway) メッセージを送信します。このメッセージには、残り時間を示す [timeLeft](https://ai.google.dev/api/live?hl=ja#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left) が含まれています。接続が ABORTED として終了する前に、さらなるアクションを実行できます。
 
 ### Python
 
@@ -246,10 +223,9 @@ for (const turn of turns) {
 }
 ```
 
-## Cómo recibir un mensaje cuando se completa la generación
+## 生成が完了したときにメッセージを受信する
 
-El servidor envía un mensaje de [generationComplete](https://ai.google.dev/api/live?hl=es-419#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
-que indica que el modelo terminó de generar la respuesta.
+サーバーは、モデルがレスポンスの生成を完了したことを示す [generationComplete](https://ai.google.dev/api/live?hl=ja#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete) メッセージを送信します。
 
 ### Python
 
@@ -271,19 +247,16 @@ for (const turn of turns) {
 }
 ```
 
-## ¿Qué sigue?
+## 次のステップ
 
-Explora más formas de trabajar con la API de Live en la guía completa de
-[capacidades](https://ai.google.dev/gemini-api/docs/live?hl=es-419),
-la página [Uso de herramientas](https://ai.google.dev/gemini-api/docs/live-tools?hl=es-419) o el
-[libro de recetas de la API de Live](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=es-419).
+Live API を使用するその他の方法については、[機能](https://ai.google.dev/gemini-api/docs/live?hl=ja)ガイド、[ツールの使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=ja)ページ、[Live API クックブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=ja)をご覧ください。
 
-Enviar comentarios
+フィードバックを送信
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última actualización: 2026-06-01 (UTC)
+最終更新日 2026-06-01 UTC。
 
-¿Quieres brindar más información?
+ご意見をお聞かせください
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-01 (UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]

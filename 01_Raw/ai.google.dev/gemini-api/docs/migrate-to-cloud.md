@@ -1,41 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=pl
-fetched_at: 2026-06-08T05:37:20.732774+00:00
-title: "Interfejs Gemini Developer API a\u00a0platforma agent\u00f3w Gemini Enterprise \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=zh-TW
+fetched_at: 2026-06-15T06:33:22.691554+00:00
+title: "Gemini Developer API \u8207 Gemini Enterprise Agent Platform \u7684\u6bd4\u8f03 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Prześlij opinię
+提供意見
 
-# Interfejs Gemini Developer API a platforma agentów Gemini Enterprise
+# Gemini Developer API 與 Gemini Enterprise Agent Platform 的比較
 
-Podczas tworzenia rozwiązań generatywnej AI za pomocą Gemini Google oferuje 2 interfejsy API:
-[Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=pl) i [Gemini Enterprise Agent Platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=pl).
+使用 Gemini 開發生成式 AI 解決方案時，Google 提供兩種 API 產品：[Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=zh-tw) 和 [Gemini Enterprise Agent Platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=zh-tw)。
 
-Gemini Developer API to najszybsza droga do tworzenia, wdrażania i skalowania aplikacji opartych na Gemini. Większość programistów powinna korzystać z Gemini Developer API, chyba że potrzebuje określonych kontroli dla przedsiębiorstw.
+透過 Gemini Developer API，您就能以最快速度建構、正式推出及擴充 Gemini 輔助應用程式。除非需要特定企業控制項，否則大多數開發人員都應使用 Gemini 開發人員 API。
 
-Gemini Enterprise Agent Platform oferuje kompleksowy ekosystem funkcji i usług gotowych do użycia w przedsiębiorstwie, które umożliwiają tworzenie i wdrażanie aplikacji generatywnej AI opartych na Google Cloud Platform.
+Gemini Enterprise Agent Platform 提供全方位的企業級功能和服務生態系統，可建構及部署由 Google Cloud Platform 支援的生成式 AI 應用程式。
 
-Niedawno uprościliśmy migrację między tymi usługami. Zarówno Gemini
-Developer API, jak i Gemini Enterprise Agent Platform API są teraz dostępne za pomocą ujednoliconego
-[pakietu Google Gen AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=pl).
+我們最近簡化了這兩項服務之間的遷移作業。現在可透過統一的 [Google Gen AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw) 存取 Gemini 開發人員 API 和 Gemini Enterprise Agent Platform API。
 
-## Porównanie kodu
+## 程式碼比較
 
-Na tej stronie znajdziesz porównanie kodu w przewodnikach Szybki start dotyczących Gemini Developer API i Gemini Enterprise Agent Platform w przypadku generowania tekstu.
+本頁面會並列比較 Gemini Developer API 和 Gemini Enterprise Agent Platform 的文字生成快速入門導覽程式碼。
 
 ### Python
 
-Dostęp do usług Gemini Developer API i Gemini Enterprise Agent Platform możesz uzyskać za pomocą biblioteki `google-genai`. Instrukcje instalacji `google-genai` znajdziesz na stronie [bibliotek](https://ai.google.dev/gemini-api/docs/libraries?hl=pl).
+您可以透過 `google-genai` 程式庫存取 Gemini 開發人員 API 和 Gemini Enterprise Agent Platform 服務。如需安裝 `google-genai` 的操作說明，請參閱[程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)頁面。
 
 ### Gemini Developer API
 
@@ -65,9 +62,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript i TypeScript
+### JavaScript 和 TypeScript
 
-Dostęp do usług Gemini Developer API i Gemini Enterprise Agent Platform możesz uzyskać za pomocą biblioteki `@google/genai`. Instrukcje instalacji `@google/genai` znajdziesz na stronie [bibliotek](https://ai.google.dev/gemini-api/docs/libraries?hl=pl).
+您可以透過 `@google/genai`程式庫存取 Gemini Developer API 和 Gemini Enterprise Agent Platform 服務。如需安裝 `@google/genai` 的操作說明，請參閱[程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)頁面。
 
 ### Gemini Developer API
 
@@ -110,7 +107,7 @@ main();
 
 ### Go
 
-Dostęp do usług Gemini Developer API i Gemini Enterprise Agent Platform możesz uzyskać za pomocą biblioteki `google.golang.org/genai`. Instrukcje instalacji `google.golang.org/genai` znajdziesz na stronie [bibliotek](https://ai.google.dev/gemini-api/docs/libraries?hl=pl).
+您可以透過 `google.golang.org/genai`程式庫存取 Gemini Developer API 和 Gemini Enterprise Agent Platform 服務。如需安裝 `google.golang.org/genai` 的操作說明，請參閱[程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)頁面。
 
 ### Gemini Developer API
 
@@ -171,46 +168,40 @@ func main() {
 }
 ```
 
-### Inne przypadki użycia i platformy
+### 其他用途和平台
 
-Więcej informacji o innych platformach i przypadkach użycia znajdziesz w przewodnikach dotyczących konkretnych przypadków użycia w dokumentacji [Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=pl)
-i dokumentacji [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=pl).
+如要瞭解其他平台和用途，請參閱 [Gemini 開發人員 API 說明文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)和 [Gemini Enterprise Agent Platform 說明文件](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=zh-tw)中的特定用途指南。
 
-## Wskazówki dotyczące migracji
+## 遷移注意事項
 
-Podczas migracji:
+遷移時：
 
-- Do uwierzytelniania musisz używać kont usługi Google Cloud. Więcej informacji znajdziesz w [dokumentacji Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=pl).
-- Możesz użyć dotychczasowego projektu Google Cloud
-  (tego samego, którego używasz do generowania klucza interfejsu API) lub możesz
-  [utworzyć nowy projekt Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=pl).
-- Obsługiwane regiony mogą się różnić w zależności od tego, czy używasz Gemini Developer API czy Gemini Enterprise Agent Platform API. Zapoznaj się z listą
-  [obsługiwanych regionów w przypadku generatywnej AI w Google Cloud](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=pl).
-- Wszystkie modele utworzone w Google AI Studio trzeba ponownie wytrenować w Gemini Enterprise Agent Platform.
+- 您必須使用 Google Cloud 服務帳戶進行驗證。詳情請參閱 [Gemini Enterprise Agent Platform 說明文件](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=zh-tw)。
+- 你可以使用現有的 Google Cloud 專案 (與產生 API 金鑰時使用的專案相同)，也可以[建立新的 Google Cloud 專案](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=zh-tw)。
+- Gemini Developer API 和 Gemini Enterprise Agent Platform API 支援的區域可能不同。請參閱[支援 Google Cloud 生成式 AI 的區域清單](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=zh-tw)。
+- 在 Google AI Studio 中建立的模型必須在 Gemini Enterprise Agent Platform 中重新訓練。
 
-Jeśli nie musisz już używać klucza Gemini API w Gemini Developer API, postępuj zgodnie ze sprawdzonymi metodami zapewniania bezpieczeństwa i usuń go.
+如果不再需要使用 Gemini API 金鑰存取 Gemini Developer API，請遵循安全性最佳做法刪除金鑰。
 
-Aby usunąć klucz interfejsu API:
+刪除 API 金鑰的做法如下：
 
-1. Otwórz stronę
-   [danych logowania do interfejsu Google Cloud API](https://console.cloud.google.com/apis/credentials?hl=pl).
-2. Znajdź klucz interfejsu API, który chcesz usunąć, i kliknij ikonę **Działania**.
-3. Kliknij **Usuń klucz interfejsu API**.
-4. W oknie **Usuń dane logowania** kliknij **Usuń**.
+1. 開啟 [Google Cloud API 憑證](https://console.cloud.google.com/apis/credentials?hl=zh-tw)頁面。
+2. 找出要刪除的 API 金鑰，然後點選「動作」圖示。
+3. 選取「刪除 API 金鑰」。
+4. 在「刪除憑證」強制回應中，選取「刪除」。
 
-   Rozpowszechnienie usunięcia klucza interfejsu API zajmuje kilka minut. Po zakończeniu rozpowszechniania cały ruch korzystający z usuniętego klucza interfejsu API jest odrzucany.
+   刪除 API 金鑰需要幾分鐘的時間才會生效。作業完畢後，凡是使用已刪除 API 金鑰的流量都會遭拒。
 
-## Dalsze kroki
+## 後續步驟
 
-- Więcej informacji o rozwiązaniach generatywnej AI w Gemini Enterprise Agent Platform znajdziesz w artykule
-  [Generatywna AI w Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/multimodal/overview?hl=pl).
+- 如要進一步瞭解 Gemini Enterprise Agent Platform 的生成式 AI 解決方案，請參閱[這篇文章](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/multimodal/overview?hl=zh-tw)。
 
-Prześlij opinię
+提供意見
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Ostatnia aktualizacja: 2026-05-19 UTC.
+上次更新時間：2026-05-19 (世界標準時間)。
 
-Chcesz przekazać coś jeszcze?
+想進一步說明嗎？
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-19 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

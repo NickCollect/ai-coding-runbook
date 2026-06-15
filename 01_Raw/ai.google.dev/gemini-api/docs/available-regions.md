@@ -1,272 +1,274 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=pl
-fetched_at: 2026-06-08T05:27:15.838377+00:00
-title: "Regiony, w kt\u00f3rych dost\u0119pne s\u0105 Google AI Studio i Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=ar
+fetched_at: 2026-06-15T06:21:31.461587+00:00
+title: "\u0627\u0644\u0645\u0646\u0627\u0637\u0642 \u0627\u0644\u062a\u064a \u062a\u062a\u0648\u0641\u0651\u0631 \u0641\u064a\u0647\u0627 \u0645\u064a\u0632\u0627\u062a Google AI Studio \u0648Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Prześlij opinię
+إرسال ملاحظات
 
-# Regiony, w których dostępne są Google AI Studio i Gemini API
+# المناطق التي تتوفّر فيها ميزات Google AI Studio وGemini API
 
-Jeśli ta strona wyświetliła się podczas próby uzyskania dostępu do [Google AI Studio](https://aistudio.google.com/?hl=pl), może to być spowodowane jedną z tych przyczyn:
+إذا وصلت إلى هذه الصفحة أثناء محاولة الوصول إلى [Google AI Studio](https://aistudio.google.com/?hl=ar)، قد
+يرجع ذلك إلى أحد الأسباب التالية:
 
-- **Ograniczenia regionalne:** Google AI Studio nie jest dostępne w Twoim regionie. Listę obsługiwanych regionów znajdziesz w sekcji poniżej.
-- **Wymagania dotyczące wieku:** nie spełniasz minimalnego wymagania dotyczącego wieku (18 lat), aby uzyskać dostęp do tej usługi.
-- **Potwierdzenie własności konta:** możesz mieć dostęp do usługi, ale nie [zweryfikowano jeszcze Twojego wieku](https://support.google.com/accounts/answer/10071085?hl=pl) na koncie Google.
+- **القيود الإقليمية**: لا يتوفّر Google AI Studio في منطقتك. يُرجى الرجوع إلى القسم أدناه للاطّلاع على قائمة بالمناطق المتاحة.
+- **السنّ المسموح به**: أنت لا تستوفي الحدّ الأدنى للسنّ المسموح به (18 عامًا أو أكثر) للوصول إلى هذه الخدمة.
+- **تأكيد الحساب**: قد يكون بإمكانك الوصول إلى الخدمة، ولكن لم يتم بعد [إثبات عمرك](https://support.google.com/accounts/answer/10071085?hl=ar) في حسابك على Google.
 
-Więcej informacji o wymaganiach znajdziesz w [Warunkach korzystania z usługi](https://ai.google.dev/gemini-api/terms?hl=pl).
+لمزيد من التفاصيل حول المتطلبات، يُرجى مراجعة [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar).
 
-## Regiony, w których działa ta usługa
+## المناطق المتاحة
 
-Interfejs Gemini API i Google AI Studio są dostępne w tych krajach i regionach. Jeśli nie mieszkasz w jednym z tych krajów lub regionów, wypróbuj [interfejs Gemini API na platformie Agent Platform w Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=pl):
+يتوفّر Gemini API وGoogle AI Studio في البلدان والمناطق التالية. إذا لم تكن مقيمًا في أحد هذه البلدان أو المناطق، جرِّب الـ
+[Gemini API في Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=ar):
 
-- Albania
-- Algieria
-- Samoa Amerykańskie
-- Andora
-- Angola
-- Anguilla
-- Antarktyka
-- Antigua i Barbuda
-- Argentyna
-- Armenia
-- Aruba
-- Australia
-- Austria
-- Azerbejdżan
-- Bahamy
-- Bahrajn
-- Bangladesz
-- Barbados
-- Belgia
-- Belize
-- Benin
-- Bermudy
-- Bhutan
-- Boliwia
-- Bośnia i Hercegowina
-- Botswana
-- Brazylia
-- Brytyjskie Terytorium Oceanu Indyjskiego
-- Brytyjskie Wyspy Dziewicze
-- Brunei
-- Bułgaria
-- Burkina Faso
-- Burundi
-- Republika Zielonego Przylądka
-- Kambodża
-- Kamerun
-- Kanada
-- Holandia Karaibska
-- Kajmany
-- Republika Środkowoafrykańska
-- Czad
-- Chile
-- Wyspa Bożego Narodzenia
-- Wyspy Kokosowe (Keelinga)
-- Kolumbia
-- Komory
-- Wyspy Cooka
-- Kostaryka
-- Wybrzeże Kości Słoniowej
-- Chorwacja
-- Curaçao
-- Czechy
-- Demokratyczna Republika Konga
-- Dania
-- Dżibuti
-- Dominika
-- Dominikana
-- Ekwador
-- Egipt
-- Salwador
-- Gwinea Równikowa
-- Erytrea
-- Estonia
-- Eswatini
-- Etiopia
-- Falklandy (Malwiny)
-- Wyspy Owcze
-- Fidżi
-- Finlandia
-- Francja
-- Gujana Francuska
-- Gabon
-- Gambia
-- Gruzja
-- Niemcy
-- Ghana
-- Gibraltar
-- Grecja
-- Grenlandia
-- Grenada
-- Guam
-- Gwatemala
-- Guernsey
-- Gwinea
-- Gwinea Bissau
-- Gujana
-- Haiti
-- Wyspy Heard i McDonalda
-- Honduras
-- Węgry
-- Islandia
-- Indie
-- Indonezja
-- Irak
-- Irlandia
-- Wyspa Man
-- Izrael
-- Włochy
-- Jamajka
-- Japonia
-- Jersey
-- Jordania
-- Kazachstan
-- Kenia
-- Kiribati
-- Kosowo
-- Kuwejt
-- Kirgistan
-- Laos
-- Łotwa
-- Liban
-- Lesoto
-- Liberia
-- Libia
-- Liechtenstein
-- Litwa
-- Luksemburg
-- Madagaskar
-- Malawi
-- Malezja
-- Malediwy
-- Mali
-- Malta
-- Wyspy Marshalla
-- Mauretania
-- Mauritius
-- Meksyk
-- Mikronezja
-- Mołdawia
-- Monako
-- Mongolia
-- Czarnogóra
-- Montserrat
-- Maroko
-- Mozambik
-- Namibia
-- Nauru
-- Nepal
-- Holandia
-- Nowa Kaledonia
-- Nowa Zelandia
-- Nikaragua
-- Niger
-- Nigeria
-- Niue
-- Wyspa Norfolk
-- Macedonia Północna
-- Mariany Północne
-- Norwegia
-- Oman
-- Pakistan
-- Palau
-- Palestyna
-- Panama
-- Papua-Nowa Gwinea
-- Paragwaj
-- Peru
-- Filipiny
-- Pitcairn
-- Polska
-- Portugalia
-- Portoryko
-- Katar
-- Cypr
-- Republika Konga
-- Rumunia
-- Rwanda
-- Reunion
-- Saint-Barthélemy
-- Wyspa Świętej Heleny, Wyspa Wniebowstąpienia i Tristan da Cunha
-- Saint Kitts i Nevis
-- Saint Lucia
-- Saint-Pierre i Miquelon
-- Saint Vincent i Grenadyny
-- Samoa
-- San Marino
-- Wyspy Świętego Tomasza i Książęca
-- Arabia Saudyjska
-- Senegal
-- Serbia
-- Seszele
-- Sierra Leone
-- Singapur
-- Słowacja
-- Słowenia
-- Wyspy Salomona
-- Somalia
-- Republika Południowej Afryki
-- Georgia Południowa i Sandwich Południowy
-- Korea Południowa
-- Sudan Południowy
-- Hiszpania
-- Sri Lanka
-- Sudan
-- Surinam
-- Szwecja
-- Szwajcaria
-- Tajwan
-- Tadżykistan
-- Tanzania
-- Tajlandia
-- Timor Wschodni
-- Togo
-- Tokelau
-- Tonga
-- Trynidad i Tobago
-- Tunezja
-- Turkmenistan
-- Turks i Caicos
-- Tuvalu
-- Turcja
-- Uganda
-- Ukraina
-- Zjednoczone Emiraty Arabskie
-- Wielka Brytania
-- Stany Zjednoczone
-- Dalekie Wyspy Mniejsze Stanów Zjednoczonych
-- Urugwaj
-- Wyspy Dziewicze Stanów Zjednoczonych
-- Uzbekistan
-- Vanuatu
-- Watykan
-- Wenezuela
-- Wietnam
-- Wallis i Futuna
-- Sahara Zachodnia
-- Jemen
-- Zambia
-- Zimbabwe
-- Wyspy Alandzkie
+- ألبانيا
+- الجزائر
+- ساموا الأمريكية
+- أندورا
+- أنغولا
+- أنغويلا
+- أنتاركتيكا
+- أنتيغوا وبربودا
+- الأرجنتين
+- أرمينيا
+- أروبا
+- أستراليا
+- النمسا
+- أذربيجان
+- جزر البهاما
+- البحرين
+- بنغلاديش
+- بربادوس
+- بلجيكا
+- بليز
+- بنين
+- برمودا
+- بوتان
+- بوليفيا
+- البوسنة والهرسك
+- بوتسوانا
+- البرازيل
+- الإقليم البريطاني في المحيط الهندي
+- جزر فيرجن البريطانية
+- بروناي
+- بلغاريا
+- بوركينا فاسو
+- بوروندي
+- الرأس الأخضر
+- كمبوديا
+- الكاميرون
+- كندا
+- هولندا الكاريبية
+- جزر كايمان
+- جمهورية إفريقيا الوسطى
+- تشاد
+- تشيلي
+- جزيرة كريسماس
+- جزر كوكوس (كيلينغ)
+- كولومبيا
+- جزر القمر
+- جزر كوك
+- كوستاريكا
+- ساحل العاج
+- كرواتيا
+- كوراساو
+- جمهورية التشيك
+- جمهورية الكونغو الديمقراطية
+- الدانمارك
+- جيبوتي
+- دومينيكا
+- جمهورية الدومينيكان
+- الإكوادور
+- مصر
+- السلفادور
+- غينيا الاستوائية
+- إريتريا
+- إستونيا
+- إسواتيني
+- إثيوبيا
+- جزر فوكلاند - جزر مالفيناس
+- جزر فارو
+- فيجي
+- فنلندا
+- فرنسا
+- غويانا الفرنسية
+- الغابون
+- غامبيا
+- جورجيا
+- ألمانيا
+- غانا
+- جبل طارق
+- اليونان
+- غرينلاند
+- غرينادا
+- غوام
+- غواتيمالا
+- غيرنزي
+- غينيا
+- غينيا بيساو
+- غيانا
+- هايتي
+- جزيرة هيرد وجزر ماكدونالد
+- هندوراس
+- هنغاريا
+- آيسلندا
+- الهند
+- إندونيسيا
+- العراق
+- أيرلندا
+- جزيرة مان
+- إسرائيل
+- إيطاليا
+- جامايكا
+- اليابان
+- جيرسي
+- الأردن
+- كازاخستان
+- كينيا
+- كيريباتي
+- كوسوفو
+- الكويت
+- قيرغيزستان
+- لاوس
+- لاتفيا
+- لبنان
+- ليسوتو
+- ليبريا
+- ليبيا
+- ليختنشتاين
+- ليتوانيا
+- لوكسمبورغ
+- مدغشقر
+- مالاوي
+- ماليزيا
+- جزر المالديف
+- مالي
+- مالطا
+- جزر مارشال
+- موريتانيا
+- موريشيوس
+- المكسيك
+- ميكرونيزيا
+- مولدوفا
+- موناكو
+- منغوليا
+- الجبل الأسود
+- مونتسيرات
+- المغرب
+- موزمبيق
+- ناميبيا
+- ناورو
+- نيبال
+- هولندا
+- كاليدونيا الجديدة
+- نيوزيلندا
+- نيكاراغوا
+- النيجر
+- نيجيريا
+- نيوي
+- جزيرة نورفولك
+- مقدونيا الشمالية
+- جزر ماريانا الشمالية
+- النرويج
+- عُمان
+- باكستان
+- بالاو
+- فلسطين
+- بنما
+- بابوا غينيا الجديدة
+- باراغواي
+- بيرو
+- الفلبين
+- جزر بيتكيرن
+- بولندا
+- البرتغال
+- بورتوريكو
+- قطر
+- جمهورية قبرص
+- جمهورية الكونغو
+- رومانيا
+- رواندا
+- ريونيون
+- سان بارتيلمي
+- سانت هيلينا وأسينشيون وتريستان دا كونا
+- سانت كيتس ونيفيس
+- سانت لوسيا
+- سان بيير وميكلون
+- سانت فنسنت وجزر غرينادين
+- ساموا
+- سان مارينو
+- ساو تومي وبرينسيبي
+- المملكة العربية السعودية
+- السنغال
+- صربيا
+- سيشل
+- سيراليون
+- سنغافورة
+- سلوفاكيا
+- سلوفينيا
+- جزر سليمان
+- الصومال
+- جنوب إفريقيا
+- جورجيا الجنوبية وجزر ساندويتش الجنوبية
+- كوريا الجنوبية
+- جنوب السودان
+- إسبانيا
+- سريلانكا
+- السودان
+- سورينام
+- السويد
+- سويسرا
+- تايوان
+- طاجيكستان
+- تنزانيا
+- تايلاند
+- تيمور - ليشتي
+- توغو
+- توكيلو
+- تونغا
+- ترينيداد وتوباغو
+- تونس
+- تركمانستان
+- جزر توركس وكايكوس
+- توفالو
+- تركيا
+- أوغندا
+- أوكرانيا
+- الإمارات العربية المتحدة
+- المملكة المتحدة
+- الولايات المتحدة
+- جزر الولايات المتحدة الصغيرة النائية
+- أوروغواي
+- جزر فيرجن الأمريكية
+- أوزباكستان
+- فانواتو
+- الفاتيكان
+- فنزويلا
+- فيتنام
+- جزر والس وفوتونا
+- الصحراء الغربية
+- اليمن
+- زامبيا
+- زيمبابوي
+- جزر أولان
 
-Prześlij opinię
+إرسال ملاحظات
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ostatnia aktualizacja: 2026-04-29 UTC.
+تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
 
-Chcesz przekazać coś jeszcze?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

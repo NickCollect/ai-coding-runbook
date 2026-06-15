@@ -1,145 +1,116 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=es-419
-fetched_at: 2026-06-08T05:30:41.730132+00:00
-title: "Orientaci\u00f3n sobre seguridad y facticidad \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-guidance?hl=he
+fetched_at: 2026-06-15T06:21:14.652344+00:00
+title: "\u05d4\u05e0\u05d7\u05d9\u05d5\u05ea \u05d1\u05e0\u05d5\u05e9\u05d0 \u05d1\u05d8\u05d9\u05d7\u05d5\u05ea \u05d5\u05d3\u05d9\u05d5\u05e7 \u05e2\u05d5\u05d1\u05d3\u05ea\u05d9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Enviar comentarios
+שליחת משוב
 
-# Orientación sobre seguridad y facticidad
+# הנחיות בנושא בטיחות ודיוק עובדתי
 
-Los modelos de inteligencia artificial generativa son herramientas potentes, pero no están exentos de limitaciones. Su versatilidad y aplicabilidad a veces pueden generar resultados inesperados, como resultados imprecisos, sesgados u ofensivos. El procesamiento posterior y la evaluación manual rigurosa son esenciales para limitar el riesgo de daño de esos resultados.
+מודלים של בינה מלאכותית גנרטיבית הם כלים רבי עוצמה, אבל יש להם מגבלות. הגמישות והישימות שלהם עלולות לפעמים להוביל לתוצאות לא צפויות, כמו תוצאות לא מדויקות, מוטות או פוגעניות. עיבוד תמונה (Post Processing) והערכה ידנית קפדנית חיוניים כדי לצמצם את הסיכון לנזק שעלול להיגרם מהתוצאות האלה.
 
-Los modelos que proporciona la API de Gemini se pueden usar para una amplia variedad de aplicaciones de IA generativa y procesamiento de lenguaje natural (NLP). El uso de estas
-funciones solo está disponible a través de la API de Gemini o la app web
-de Google AI Studio. El uso de la API de Gemini también está sujeto a la [Política de Uso Prohibido de IA Generativas](https://policies.google.com/terms/generative-ai/use-policy?hl=es-419) y a las
-[Condiciones del Servicio de la API de Gemini](https://ai.google.dev/terms?hl=es-419).
+אפשר להשתמש במודלים שמסופקים על ידי Gemini API למגוון רחב של אפליקציות של AI גנרטיבי ועיבוד שפה טבעית (NLP). השימוש בפונקציות האלה זמין רק דרך Gemini API או אפליקציית האינטרנט של Google AI Studio. השימוש ב-Gemini API כפוף גם [למדיניות בנושא שימוש אסור ב-AI גנרטיבי](https://policies.google.com/terms/generative-ai/use-policy?hl=he) ול[תנאים ולהגבלות של Gemini API](https://ai.google.dev/terms?hl=he).
 
-Parte de lo que hace que los modelos de lenguaje grandes (LLM) sean tan útiles es que son herramientas creativas que pueden abordar muchas tareas de lenguaje diferentes. Lamentablemente, esto también implica que los modelos de lenguaje grandes pueden generar resultados inesperados, incluyendo contenido ofensivo, insensible o incorrecto desde el punto de vista fáctico.
-Además, la increíble versatilidad de estos modelos es lo que dificulta la predicción exacta de los tipos de resultados no deseados que podrían producir. Si bien la
-API de Gemini se diseñó teniendo en cuenta los [principios de IA
-de Google](https://ai.google/principles/?hl=es-419), la responsabilidad de aplicar estos modelos de manera responsable recae en los desarrolladores. Para ayudar a los desarrolladores a crear aplicaciones seguras y responsables, la API de Gemini tiene algunos filtros de contenido integrados, así como parámetros de configuración de seguridad ajustables en 4 dimensiones de daño. Consulta la
-[guía de parámetros de configuración de seguridad](https://ai.google.dev/gemini-api/docs/safety-settings?hl=es-419) para obtener más información. También ofrece la Fundamentación con la Búsqueda de Google habilitada para mejorar la veracidad, aunque esto se puede inhabilitar para los desarrolladores cuyos casos de uso son más creativos y no buscan información.
+אחד הדברים שהופכים מודלים גדולים של שפה (LLM) לשימושיים כל כך הוא שהם כלים יצירתיים שיכולים לטפל במשימות שונות שקשורות לשפה. לצערנו, המשמעות היא גם שמודלים גדולים של שפה יכולים ליצור פלט שלא ציפיתם לו, כולל טקסט פוגעני, חסר רגישות או לא מדויק מבחינה עובדתית.
+בנוסף, הרבגוניות המדהימה של המודלים האלה היא גם מה שמקשה על חיזוי מדויק של סוגי הפלט הלא רצויים שהם עשויים ליצור. ‫Gemini API תוכנן בהתאם [לכללי ה-AI של Google](https://ai.google/principles/?hl=he), אבל האחריות לשימוש במודלים האלה בצורה אחראית מוטלת על המפתחים. כדי לעזור למפתחים ליצור אפליקציות בטוחות ואחראיות, ל-Gemini API יש סינון תוכן מובנה וגם הגדרות בטיחות שניתנות להתאמה אישית ב-4 מימדים של נזק. מידע נוסף זמין במדריך בנושא [הגדרות בטיחות](https://ai.google.dev/gemini-api/docs/safety-settings?hl=he). בנוסף, הוא מציע Grounding עם חיפוש Google מופעל כדי לשפר את הדיוק העובדתי, אבל אפשר להשבית את התכונה הזו למפתחים שהתרחישים שלהם יצירתיים יותר ולא קשורים לחיפוש מידע.
 
-El objetivo de este documento es presentarte algunos riesgos de seguridad que pueden surgir cuando se usan LLM y recomendar las nuevas recomendaciones de diseño y desarrollo de seguridad. (Ten en cuenta que las leyes y los reglamentos también pueden imponer restricciones, pero esas consideraciones están fuera del alcance de esta guía).
+המסמך הזה נועד להציג לכם כמה סיכוני בטיחות שעלולים להתעורר כשמשתמשים במודלים של שפה גדולה (LLM), ולהמליץ על המלצות חדשות לתכנון ולפיתוח של בטיחות. (חשוב לזכור שחוקים ותקנות עשויים להטיל הגבלות גם כן, אבל שיקולים כאלה הם מעבר להיקף המדריך הזה).
 
-Se recomiendan los siguientes pasos cuando se compilan aplicaciones con LLM:
+מומלץ לבצע את השלבים הבאים כשמפתחים אפליקציות עם מודלים גדולים של שפה (LLM):
 
-- Comprender los riesgos de seguridad de tu aplicación
-- Considerar realizar ajustes para mitigar los riesgos de seguridad
-- Realizar pruebas de seguridad adecuadas según tu caso de uso
-- Solicitar comentarios de los usuarios y supervisar el uso
+- הסבר על סיכוני הבטיחות של האפליקציה
+- שוקלים לבצע שינויים כדי לצמצם את סיכוני הבטיחות
+- ביצוע בדיקות בטיחות שמתאימות לתרחיש השימוש
+- בקשת משוב מהמשתמשים ומעקב אחר השימוש
 
-Las fases de ajuste y prueba deben ser iterativas hasta que alcances el rendimiento adecuado para tu aplicación.
+שלבי ההתאמה והבדיקה צריכים להיות איטרטיביים עד שתגיעו לביצועים שמתאימים לאפליקציה שלכם.
 
-![Ciclo de implementación del modelo](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=es-419)
+![מחזור ההטמעה של המודל](https://ai.google.dev/static/gemini-api/docs/images/safety_diagram.png?hl=he)
 
-## Comprende los riesgos de seguridad de tu aplicación
+## הסבר על סיכוני הבטיחות באפליקציה
 
-En este contexto, la seguridad se define como la capacidad de un LLM para evitar causar daño a sus usuarios, por ejemplo, generando lenguaje tóxico o contenido que promueva estereotipos. Los modelos disponibles a través de la API de Gemini se diseñaron teniendo en cuenta los [principios de la IA de Google](https://ai.google/principles/?hl=es-419) y su uso está sujeto a la [Política de Uso Prohibido de IA Generativas](https://policies.google.com/terms/generative-ai/use-policy?hl=es-419). La API proporciona filtros de seguridad integrados para ayudar a abordar algunos problemas comunes de los modelos de lenguaje, como el lenguaje tóxico y la incitación al odio o a la violencia, y se esfuerza por lograr la inclusión y evitar los estereotipos. Sin embargo, cada aplicación puede plantear un conjunto diferente de riesgos para sus usuarios. Por lo tanto, como propietario de la aplicación, eres responsable de conocer a tus usuarios y los posibles daños que puede causar tu aplicación, y de asegurarte de que tu aplicación use LLM de forma segura y responsable.
+בהקשר הזה, בטיחות מוגדרת כיכולת של מודל שפה גדול (LLM) להימנע מגרימת נזק למשתמשים שלו, למשל על ידי יצירת שפה רעילה או תוכן שמקדם סטריאוטיפים. המודלים שזמינים דרך Gemini API תוכננו בהתאם [לעקרונות ה-AI של Google](https://ai.google/principles/?hl=he), והשימוש בהם כפוף [למדיניות בנושא שימוש אסור ב-AI גנרטיבי](https://policies.google.com/terms/generative-ai/use-policy?hl=he). ה-API מספק מסנני בטיחות מובנים שעוזרים לטפל בבעיות נפוצות במודלים של שפה, כמו שפה רעילה ודברי שטנה, ופועל למען הכללה והימנעות מסטריאוטיפים. עם זאת, כל אפליקציה עלולה להציב בפני המשתמשים שלה קבוצה שונה של סיכונים. לכן, כבעלי האפליקציה, אתם אחראים להכיר את המשתמשים שלכם ואת הנזקים הפוטנציאליים שהאפליקציה עלולה לגרום, ולוודא שהאפליקציה משתמשת במודלים של שפה בצורה בטוחה ואחראית.
 
-Como parte de esta evaluación, debes considerar la probabilidad de que se produzcan daños y determinar su gravedad y los pasos de mitigación. Por ejemplo, una app que genera ensayos basados en eventos fácticos debería tener más cuidado para evitar la información errónea, en comparación con una app que genera historias de ficción para el entretenimiento. Una buena manera de comenzar a explorar los posibles riesgos de seguridad es investigar a tus usuarios finales y a otras personas que podrían verse afectadas por los resultados de tu aplicación. Esto puede adoptar muchas formas, como investigar estudios de vanguardia en el dominio de tu app, observar cómo las personas usan apps similares o realizar un estudio de usuarios, una encuesta o entrevistas informales con usuarios potenciales.
+במסגרת ההערכה הזו, צריך לקחת בחשבון את הסבירות להתרחשות נזק, ולקבוע את חומרת הנזק ואת השלבים לצמצום הסיכון. לדוגמה, אפליקציה שמייצרת חיבורים על סמך אירועים עובדתיים צריכה להיזהר יותר מלהפיץ מידע מוטעה, בהשוואה לאפליקציה שמייצרת סיפורים בדיוניים למטרות בידור. דרך טובה להתחיל לבדוק את סיכוני הבטיחות הפוטנציאליים היא לחקור את משתמשי הקצה ואת האנשים האחרים שעשויים להיות מושפעים מהתוצאות של האפליקציה. אפשר לעשות את זה בדרכים שונות, כולל מחקר של מחקרים מתקדמים בתחום האפליקציה, צפייה בשימוש של אנשים באפליקציות דומות, הפעלת מחקר משתמשים, סקר או ראיונות לא רשמיים עם משתמשים פוטנציאליים.
 
-### Sugerencias avanzadas
+### טיפים מתקדמים
 
-- Habla con una combinación diversa de usuarios potenciales dentro de tu público objetivo sobre tu aplicación y su propósito previsto para obtener una perspectiva más amplia sobre los riesgos potenciales y ajustar los criterios de diversidad según sea necesario.
-- El [Marco de Administración de Riesgos de IA](https://www.nist.gov/itl/ai-risk-management-framework)
-  publicado por el
-  Instituto Nacional de Estándares y Tecnología (NIST) del Gobierno de EE.UU. proporciona orientación más
-  detallada y recursos de aprendizaje adicionales para la administración de riesgos de IA.
-- La publicación de DeepMind sobre los
-  [riesgos éticos y sociales de los daños de los modelos de lenguaje](https://arxiv.org/abs/2112.04359)
-  describe en detalle las formas en que las aplicaciones de modelos de lenguaje
-  pueden causar daño.
+- כדאי לשוחח עם מגוון רחב של משתמשים פוטנציאליים בקרב אוכלוסיית היעד שלכם על האפליקציה ועל המטרה שלה, כדי לקבל נקודת מבט רחבה יותר על סיכונים פוטנציאליים ולשנות את קריטריוני הגיוון לפי הצורך.
+- [המסגרת הרעיונית לניהול סיכונים ב-AI](https://www.nist.gov/itl/ai-risk-management-framework) שפורסמה על ידי המכון הלאומי לתקנים וטכנולוגיה (NIST) של ממשלת ארה"ב מספקת הנחיות מפורטות יותר ומשאבים נוספים ללמידה על ניהול סיכונים ב-AI.
+- בפרסום של DeepMind בנושא [סיכונים אתיים וחברתיים לנזק ממודלי שפה](https://arxiv.org/abs/2112.04359) מתוארות בפירוט הדרכים שבהן אפליקציות של מודלי שפה יכולות לגרום נזק.
 
-## Considera realizar ajustes para mitigar los riesgos de seguridad y veracidad
+## שוקלים לבצע שינויים כדי לצמצם את הסיכונים שקשורים לבטיחות ולדיוק העובדות
 
-Ahora que comprendes los riesgos, puedes decidir cómo mitigarlos. Determinar qué riesgos priorizar y qué tanto debes hacer para intentar prevenirlos es una decisión fundamental, similar a la clasificación de errores en un proyecto de software. Una vez que hayas determinado las prioridades, puedes comenzar a pensar en los tipos de mitigaciones que serían más apropiados. A menudo, los cambios simples pueden marcar la diferencia y reducir los riesgos.
+אחרי שמבינים את הסיכונים, אפשר להחליט איך לצמצם אותם. קביעת סדר העדיפויות של הסיכונים והיקף הפעולות שצריך לבצע כדי לנסות למנוע אותם היא החלטה קריטית, בדומה למיון באגים בפרויקט תוכנה. אחרי שקובעים את סדר העדיפויות, אפשר להתחיל לחשוב על סוגי הפעולות לצמצום הסיכונים שיהיו הכי מתאימים. לעיתים קרובות, שינויים פשוטים יכולים לעשות את ההבדל ולהפחית את הסיכונים.
 
-Por ejemplo, cuando diseñes una aplicación, considera lo siguiente:
+לדוגמה, כשמעצבים אפליקציה, כדאי לקחת בחשבון את הדברים הבאים:
 
-- **Ajustar el resultado del modelo** para reflejar mejor lo que es aceptable en el contexto de tu aplicación. El ajuste puede hacer que el resultado del modelo sea más predecible y coherente y, por lo tanto, puede ayudar a mitigar ciertos riesgos.
-- **Proporcionar un método de entrada que facilite resultados más seguros.** La entrada exacta que le das a un LLM puede marcar la diferencia en la calidad del resultado.
-  Experimentar con instrucciones de entrada para encontrar lo que funciona de forma más segura en tu caso de uso vale la pena, ya que luego puedes proporcionar una UX que lo facilite. Por ejemplo, puedes restringir a los usuarios para que elijan solo de una lista desplegable de instrucciones de entrada o ofrecer sugerencias emergentes con frases descriptivas que hayas encontrado que funcionan de forma segura en el contexto de tu aplicación.
-- **Bloquear las entradas no seguras y filtrar el resultado antes de que se muestre al usuario.** En situaciones simples, se pueden usar listas de entidades bloqueadas para identificar y bloquear palabras o frases no seguras en las instrucciones o respuestas, o bien requerir que los revisores humanos modifiquen o bloqueen manualmente ese contenido.
-- **Usar clasificadores entrenados para etiquetar cada instrucción con posibles daños o señales adversas.** Luego, se pueden emplear diferentes estrategias para administrar la solicitud en función del tipo de daño que se detectó. Por ejemplo, si la entrada es de evidente naturaleza adversaria o abusiva, se puede bloquear y, en su lugar, emitir una respuesta predeterminada.
-  **Sugerencia avanzada:** Si las señales determinan que el resultado es dañino, la aplicación puede emplear las siguientes opciones:
+- **שיפור הפלט של המודל** כדי שישקף טוב יותר את מה שמקובל בהקשר של האפליקציה. שיפור הפלט יכול להפוך אותו ליותר צפוי ועקבי, ולכן יכול לעזור לצמצם סיכונים מסוימים.
+- **שימוש בשיטת קלט שמספקת פלט בטוח יותר.** הקלט המדויק שנותנים למודל שפה גדול (LLM) יכול להשפיע על איכות הפלט.
+  כדאי להתנסות בהנחיות קלט כדי לגלות מה הכי בטוח לשימוש בתרחיש הספציפי שלכם, וכך תוכלו לספק חוויית משתמש שתקל על כך. לדוגמה, אפשר להגביל את המשתמשים כך שיוכלו לבחור רק מתוך רשימה נפתחת של הנחיות קלט, או להציע הצעות קופצות עם ביטויים תיאוריים שזוהו כבטוחים לשימוש בהקשר של האפליקציה.
+- **חסימת קלט לא בטוח וסינון הפלט לפני שהוא מוצג למשתמש.** במקרים פשוטים, אפשר להשתמש ברשימות חסימה כדי לזהות ולחסום מילים או ביטויים לא בטוחים בהנחיות או בתשובות, או לדרוש מבודקים אנושיים לשנות או לחסום תוכן כזה באופן ידני.
+- **שימוש בסיווגים מאומנים כדי לתייג כל הנחיה עם נזקים פוטנציאליים או אותות עוינים.** אפשר להשתמש באסטרטגיות שונות כדי לטפל בבקשה בהתאם לסוג הנזק שזוהה. לדוגמה, אם הקלט הוא בעל אופי עוין או פוגע באופן בולט, יכול להיות שהוא ייחסם ובמקומו תוצג תגובה מוכנה מראש.
+  **טיפ מתקדם:** אם האותות קובעים שהפלט מזיק, האפליקציה יכולה להשתמש באפשרויות הבאות:
 
-  - Proporcionar un mensaje de error o una salida predeterminada.
-  - Vuelve a probar la instrucción, en caso de que se genere una salida segura alternativa, ya que, a veces, la misma instrucción generará resultados diferentes.
-- **Implementar medidas de protección contra el uso indebido deliberado** , como asignar a cada usuario un ID único e imponer un límite en el volumen de consultas de usuarios que se pueden enviar en un período determinado. Otra medida de protección es intentar protegerse contra la posible inserción de instrucciones. La inserción de instrucciones, al igual que la inserción de SQL, es una forma en que los usuarios maliciosos diseñan una instrucción de entrada que manipula el resultado del modelo, por ejemplo, enviando una instrucción de entrada que le indica al modelo que ignore cualquier ejemplo anterior. Consulta la
-  [Política de Uso Prohibido de IA Generativas](https://policies.google.com/terms/generative-ai/use-policy?hl=es-419)
-  para obtener detalles sobre el uso indebido deliberado.
-- **Ajustar la funcionalidad a algo que sea inherentemente de menor riesgo.**
-  Las tareas que tienen un alcance más limitado (p.ej., extraer palabras clave de pasajes de texto) o que tienen una mayor supervisión humana (p.ej., generar contenido de formato corto que revisará una persona) suelen representar un riesgo menor. Por lo tanto, por ejemplo, en lugar de crear una aplicación para escribir una respuesta de correo electrónico desde cero, puedes limitarla a expandir un esquema o sugerir frases alternativas.
-- **Ajustar los parámetros de configuración de seguridad de contenido dañino para disminuir la probabilidad de que veas respuestas que podrían ser perjudiciales.** La API de Gemini proporciona parámetros de configuración de seguridad que puedes ajustar durante la fase de creación de prototipos para determinar si tu aplicación requiere una configuración de seguridad más o menos restrictiva. Puedes ajustar estos parámetros en cinco categorías de filtros para restringir o permitir ciertos tipos de contenido. Consulta la [guía de parámetros de configuración de seguridad](https://ai.google.dev/gemini-api/docs/safety-settings?hl=es-419) para obtener información sobre
-  los parámetros de configuración de seguridad ajustables disponibles a través de la API de Gemini.
-- **Habilita la Fundamentación con la Búsqueda de Google para disminuir las posibles imprecisiones o alucinaciones fácticas**. Recuerda que muchos modelos de IA son experimentales y pueden presentar información imprecisa desde el punto de vista fáctico, alucinar o producir resultados problemáticos. La función Fundamentación con la Búsqueda de Google conecta el modelo de Gemini con contenido web en tiempo real y funciona con todos los idiomas disponibles. Esto permite que Gemini proporcione respuestas más precisas y cite fuentes verificables más allá de la fecha límite de conocimiento de los modelos.
+  - לספק הודעת שגיאה או פלט מוכן מראש של סקריפט.
+  - כדאי לנסות שוב את ההנחיה, למקרה שיופק פלט בטוח חלופי, כי לפעמים אותה הנחיה תניב פלטים שונים.
+- **הטמעת אמצעי הגנה מפני שימוש לרעה מכוון**, כמו הקצאת מזהה ייחודי לכל משתמש והגבלת נפח השאילתות של המשתמשים שאפשר לשלוח בפרק זמן נתון. אמצעי הגנה נוסף הוא ניסיון להגן מפני החדרת הנחיות אפשרית. הזרקת פרומפטים, בדומה להזרקת SQL, היא דרך שבה משתמשים זדוניים יכולים לעצב פרומפט קלט שמשפיע על הפלט של המודל. לדוגמה, הם יכולים לשלוח פרומפט קלט שמורה למודל להתעלם מכל הדוגמאות הקודמות. פרטים על שימוש לרעה מכוון מופיעים [במדיניות בנושא שימוש אסור ב-AI גנרטיבי](https://policies.google.com/terms/generative-ai/use-policy?hl=he).
+- **שינוי הפונקציונליות למשהו שבאופן מובנה כרוך בסיכון נמוך יותר.**
+  משימות בהיקף מצומצם יותר (למשל, חילוץ מילות מפתח מקטעי טקסט) או כאלה שכוללות פיקוח אנושי רב יותר (למשל, יצירת תוכן קצר שייבדק על ידי אדם), בדרך כלל כרוכות בסיכון נמוך יותר. לדוגמה, במקום ליצור אפליקציה לכתיבת תשובה לאימייל מאפס, אפשר להגביל אותה להרחבת טיוטה או להצעת ניסוחים חלופיים.
+- **שינוי הגדרות הבטיחות מפני תוכן פוגעני כדי להקטין את הסיכוי שתראו תשובות שעלולות להיות מזיקות.** ב-Gemini API יש הגדרות בטיחות שאפשר לשנות בשלב יצירת אב טיפוס, כדי לקבוע אם האפליקציה דורשת הגדרת בטיחות מגבילה יותר או פחות. אתם יכולים לשנות את ההגדרות האלה בחמש קטגוריות של מסננים כדי להגביל או לאפשר סוגים מסוימים של תוכן. ב[מדריך להגדרות הבטיחות](https://ai.google.dev/gemini-api/docs/safety-settings?hl=he) מוסבר על הגדרות הבטיחות שניתנות להתאמה אישית דרך Gemini API.
+- **כדי לצמצם את הסיכון לאי-דיוקים עובדתיים או להזיות, מומלץ להפעיל את התכונה 'עיגון באמצעות חיפוש Google'**. חשוב לזכור שמודלים רבים של AI הם ניסיוניים, ויכול להיות שהם יציגו מידע לא מדויק מבחינה עובדתית, יפיקו הזיות או יציגו תוצאות בעייתיות בדרכים אחרות. התכונה 'עיגון באמצעות חיפוש Google' מחברת את מודל Gemini לתוכן מהאינטרנט שמתעדכן בזמן אמת, והיא פועלת בכל השפות הזמינות. כך Gemini יכול לספק תשובות מדויקות יותר ולצטט מקורות שאפשר לאמת, מעבר לתאריך סף הידע של המודלים.
 
-## Realiza pruebas de seguridad adecuadas según tu caso de uso
+## ביצוע בדיקות בטיחות שמתאימות לתרחיש השימוש
 
-Las pruebas son una parte fundamental de la compilación de aplicaciones sólidas y seguras, pero la extensión, el alcance y las estrategias para las pruebas variarán. Por ejemplo, es probable que un generador de haikus solo por diversión plantee riesgos menos graves que, por ejemplo, una aplicación diseñada para que la usen los bufetes de abogados para resumir documentos legales y ayudar a redactar contratos. Sin embargo, el generador de haikus puede ser usado por una variedad más amplia de usuarios, lo que significa que el potencial de intentos adversarios o incluso entradas dañinas no deseadas puede ser mayor. El contexto de implementación también es importante. Por ejemplo, una aplicación con resultados que revisan expertos humanos antes de que se tome cualquier medida podría considerarse menos propensa a producir resultados dañinos que la aplicación idéntica sin esa supervisión.
+בדיקות הן חלק חשוב בפיתוח אפליקציות חזקות ובטוחות, אבל היקף הבדיקות, התחום שלהן והאסטרטגיות שלהן משתנים. לדוגמה, סביר להניח שאפליקציה שיוצרת שירי הייקו רק בשביל הכיף תציב סיכונים פחות חמורים מאפליקציה שמיועדת לשימוש של משרדי עורכי דין כדי לסכם מסמכים משפטיים ולעזור בניסוח חוזים. אבל יכול להיות שמגוון המשתמשים באפליקציה שיוצרת שירי הייקו יהיה רחב יותר, מה שאומר שהפוטנציאל לניסיונות התנגדות או אפילו לקלט מזיק לא מכוון יכול להיות גדול יותר. גם הקשר ההטמעה חשוב. לדוגמה, יכול להיות שאפליקציה עם פלטים שנבדקים על ידי מומחים אנושיים לפני שננקטת פעולה כלשהי תיחשב כבעלת סיכוי נמוך יותר ליצור פלטים מזיקים מאפליקציה זהה ללא פיקוח כזה.
 
-No es raro pasar por varias iteraciones de realizar cambios y pruebas antes de sentir confianza de que estás listo para lanzar, incluso para aplicaciones que tienen un riesgo relativamente bajo. Hay dos tipos de pruebas que son particularmente útiles para las aplicaciones de IA:
+לא נדיר לעבור כמה איטרציות של ביצוע שינויים ובדיקות לפני שמרגישים בטוחים שמוכנים להשיק, גם כשמדובר באפליקציות עם סיכון נמוך יחסית. יש שני סוגים של בדיקות ששימושיות במיוחד לאפליקציות מבוססות-AI:
 
-- **La evaluación comparativa de seguridad** implica diseñar métricas de seguridad que reflejen las formas en que tu aplicación podría ser insegura en el contexto de cómo es probable que se use y, luego, probar qué tan bien se desempeña tu aplicación en las métricas con conjuntos de datos de evaluación. Es una buena práctica pensar en los niveles mínimos aceptables de las métricas de seguridad antes de realizar las pruebas para que 1) puedas evaluar los resultados de las pruebas en función de esas expectativas y 2) puedas recopilar el conjunto de datos de evaluación en función de las pruebas que evalúan las métricas que más te interesan.
+- **השוואה של רמת הבטיחות** כוללת תכנון של מדדי בטיחות שמשקפים את האופנים שבהם האפליקציה עלולה להיות לא בטוחה בהקשר של האופן שבו סביר שהיא תשמש, ולאחר מכן בדיקה של הביצועים של האפליקציה במדדים באמצעות מערכי נתונים להערכה. מומלץ לחשוב על הרמות המינימליות של מדדי הבטיחות לפני הבדיקה, כדי ש-1) תוכלו להעריך את תוצאות הבדיקה בהשוואה לציפיות האלה ו-2) תוכלו לאסוף את מערך הנתונים של ההערכה על סמך הבדיקות שמעריכות את המדדים שהכי חשובים לכם.
 
-  **Sugerencias avanzadas:**
+  **טיפים מתקדמים:**
 
-  - Ten cuidado de no depender demasiado de los enfoques “listos para usar”, ya que es probable que necesites compilar tus propios conjuntos de datos de prueba con evaluadores humanos para que se adapten por completo al contexto de tu aplicación.
-  - Si tienes más de una métrica, deberás decidir cómo compensarás si un cambio genera mejoras para una métrica en detrimento de otra. Al igual que con otras ingenierías de rendimiento, es posible que desees enfocarte en el rendimiento en el peor de los casos en tu conjunto de evaluación en lugar del rendimiento promedio.
-- **Las pruebas adversarias** implican intentar romper tu aplicación de forma proactiva. El objetivo es identificar los puntos débiles para que puedas tomar medidas para solucionarlos según corresponda. Las pruebas adversarias pueden requerir mucho tiempo y esfuerzo de los evaluadores con experiencia en tu aplicación, pero cuanto más lo hagas, mayores serán tus posibilidades de detectar problemas, en especial aquellos que ocurren con poca frecuencia o solo después de ejecuciones repetidas de la aplicación.
+  - חשוב להיזהר מלהסתמך יתר על המידה על גישות מוכנות מראש, כי סביר להניח שתצטרכו ליצור מערכי נתונים משלכם לבדיקה באמצעות בודקים אנושיים, כדי להתאים אותם באופן מלא להקשר של האפליקציה שלכם.
+  - אם יש לכם יותר ממדד אחד, תצטרכו להחליט איך תתפשרו אם שינוי מסוים יוביל לשיפור במדד אחד אבל לפגיעה במדד אחר. כמו בהנדסת ביצועים אחרת, יכול להיות שתרצו להתמקד בביצועים במקרה הגרוע ביותר בסט ההערכה שלכם, ולא בביצועים הממוצעים.
+- **בדיקה אדברסרית** כוללת ניסיון יזום לפרוץ לאפליקציה. המטרה היא לזהות נקודות חולשה כדי שתוכלו לנקוט צעדים לתיקון שלהן לפי הצורך. בדיקה אדברסרית יכולה לדרוש זמן ומאמץ משמעותיים מצד בודקים עם מומחיות באפליקציה שלכם – אבל ככל שתבצעו יותר בדיקות כאלה, כך יגדל הסיכוי שתזהו בעיות, במיוחד בעיות שמתרחשות לעיתים רחוקות או רק אחרי הפעלה חוזרת של האפליקציה.
 
-  - Las pruebas adversarias son un método para evaluar de manera sistemática un modelo de AA con la intención de aprender cómo se comporta cuando se le proporcionan entradas maliciosas o inadvertidamente dañinas:
-    - Una entrada puede ser maliciosa cuando está claro que está diseñada para producir una salida insegura o dañina, por ejemplo, pedirle a un modelo de generación de texto que genere una diatriba de odio sobre una religión en particular.
-    - Una entrada es inadvertidamente dañina cuando la entrada en sí puede ser inocua, pero produce una salida dañina, por ejemplo, pedirle a un modelo de generación de texto que describa a una persona de una etnia en particular y recibir una salida racista.
-  - Lo que distingue una prueba adversaria de una evaluación estándar es la composición de los datos que se usan para la prueba. Para las pruebas adversarias, selecciona
-    datos de prueba que tengan más probabilidades de generar resultados problemáticos de
-    l modelo. Esto significa probar el comportamiento del modelo para todos los tipos de daños posibles, incluidos ejemplos poco comunes o inusuales y casos extremos que sean relevantes para las políticas de seguridad. También debe incluir diversidad en las diferentes dimensiones de una oración, como la estructura, el significado y la longitud. Puedes consultar las prácticas de [IA responsable de Google
-    en cuanto a la
-    equidad](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=es-419)
-    para obtener más detalles sobre qué tener en cuenta cuando compilas un conjunto de datos de prueba.
-    **Sugerencias avanzadas:**
-  - Usa [pruebas automatizadas](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=es-419)
-    en lugar del método tradicional de reclutar personas en “equipos
-    rojos” para intentar romper tu aplicación. En las pruebas automatizadas, el “equipo rojo” es otro modelo de lenguaje que encuentra texto de entrada que genera resultados dañinos del modelo que se está probando.
+  - בדיקה אדברסרית היא שיטה להערכה שיטתית של מודל ML במטרה ללמוד איך הוא מתנהג כשמספקים לו קלט זדוני או קלט שגורם נזק בטעות:
+    - קלט יכול להיות זדוני אם הוא נועד באופן ברור ליצור פלט לא בטוח או מזיק – למשל, אם מבקשים ממודל ליצירת טקסט ליצור נאום שטנה על דת מסוימת.
+    - קלט מזיק לא מכוון הוא קלט שאולי נראה תמים, אבל יוצר פלט מזיק. לדוגמה, אם מבקשים ממודל ליצירת טקסט לתאר אדם ממוצא אתני מסוים ומקבלים פלט גזעני.
+  - מה שמבדיל בין בדיקה אדברסרית לבין הערכה רגילה הוא הרכב הנתונים שמשמשים לבדיקה. בבדיקות אדברסריות, בוחרים נתוני בדיקה שסביר להניח שיגרמו למודל להפיק פלט בעייתי. המשמעות היא בדיקה של התנהגות המודל בכל סוגי הנזקים האפשריים, כולל דוגמאות נדירות או לא רגילות ומקרים חריגים שרלוונטיים למדיניות הבטיחות. הוא צריך לכלול גם מגוון בממדים השונים של משפט, כמו מבנה, משמעות ואורך. מידע נוסף על מה שצריך לקחת בחשבון כשיוצרים מערך נתונים לבדיקה זמין במאמר בנושא [שיטות מומלצות של Google לשימוש אחראי ב-AI: הוגנות](https://ai.google/responsibilities/responsible-ai-practices/?category=fairness&hl=he).
+    **טיפים למתקדמים:**
+  - מומלץ להשתמש ב[בדיקות אוטומטיות](https://www.deepmind.com/blog/red-teaming-language-models-with-language-models?hl=he) במקום בשיטה המסורתית של גיוס אנשים ל 'צוותים אדומים' כדי לנסות לפרוץ לאפליקציה. בבדיקות אוטומטיות, 'הצוות האדום' הוא מודל שפה נוסף שמאתר טקסט קלט שגורם למודל שנבדק להפיק פלט מזיק.
 
-## Supervisa para detectar problemas
+## מעקב אחר בעיות
 
-Sin importar cuánto pruebes y mitigues, nunca podrás garantizar la perfección, así que planifica con anticipación cómo detectarás y abordarás los problemas que surjan. Los enfoques comunes incluyen configurar un canal supervisado para que los usuarios compartan comentarios (p.ej., calificación de me gusta o no me gusta) y realizar un estudio de usuarios para solicitar comentarios de forma proactiva de una combinación diversa de usuarios, lo que es especialmente valioso si los patrones de uso son diferentes de las expectativas.
+לא משנה כמה תבדקו ותנסו לצמצם את הסיכונים, לא תוכלו להבטיח שהכל יהיה מושלם. לכן, חשוב לתכנן מראש איך תזהו בעיות שיתעוררו ואיך תתמודדו איתן. בין הגישות הנפוצות: הגדרת ערוץ בפיקוח שבו המשתמשים יכולים לשתף משוב (למשל, דירוג עם לייק או דיסלייק), וביצוע מחקר על התנהגות משתמשים כדי לקבל משוב באופן יזום ממגוון משתמשים – זה חשוב במיוחד אם דפוסי השימוש שונים מהצפוי.
 
-### Sugerencias avanzadas
+### טיפים מתקדמים
 
-- Cuando los usuarios envían comentarios a los productos de IA, pueden mejorar en gran medida el rendimiento de la IA y la experiencia del usuario con el tiempo, por ejemplo, ayudándote a elegir mejores ejemplos para el ajuste de instrucciones. En el
-  [capítulo Comentarios y control](https://pair.withgoogle.com/chapter/feedback-controls/)
-  de la [guía Personas y la IA de Google](https://pair.withgoogle.com/guidebook/chapters)
-  , se destacan las consideraciones clave que se deben tener en cuenta cuando se diseñan
-  mecanismos de comentarios.
+- כשמשתמשים שולחים משוב על מוצרי AI, זה יכול לשפר מאוד את הביצועים של ה-AI ואת חוויית המשתמש לאורך זמן. למשל, המשוב יכול לעזור לכם לבחור דוגמאות טובות יותר לשיפור ההנחיות. [בפרק 'משוב ושליטה'](https://pair.withgoogle.com/chapter/feedback-controls/) [במדריך של Google בנושא אנשים ו-AI](https://pair.withgoogle.com/guidebook/chapters) מפורטים שיקולים חשובים שכדאי לקחת בחשבון כשמעצבים מנגנוני משוב.
 
-## Próximos pasos
+## השלבים הבאים
 
-- Consulta la
-  [guía de parámetros de configuración de seguridad](https://ai.google.dev/gemini-api/docs/safety-settings?hl=es-419) para obtener información sobre los parámetros de configuración de seguridad ajustables
-  disponibles a través de la API de Gemini.
-- Consulta la [introducción a las instrucciones](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=es-419) para comenzar a
-  escribir tus primeras instrucciones.
+- במדריך [הגדרות הבטיחות](https://ai.google.dev/gemini-api/docs/safety-settings?hl=he) מוסבר על הגדרות הבטיחות שניתנות להתאמה אישית דרך Gemini API.
+- כדי להתחיל לכתוב את ההנחיות הראשונות, אפשר לעיין [בהקדמה לכתיבת הנחיות](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=he).
 
-Enviar comentarios
+שליחת משוב
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Última actualización: 2026-06-05 (UTC)
+עדכון אחרון: 2026-06-05 (שעון UTC).
 
-¿Quieres brindar más información?
+רוצה לתת לנו משוב?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-05 (UTC)"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-05 (שעון UTC)."],[],[]]

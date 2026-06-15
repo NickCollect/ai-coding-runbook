@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419
-fetched_at: 2026-06-08T05:38:11.440555+00:00
+fetched_at: 2026-06-15T06:29:35.641037+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

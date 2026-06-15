@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=ja
-fetched_at: 2026-06-08T05:32:16.394460+00:00
-title: "Google \u30de\u30c3\u30d7\u306b\u3088\u308b\u30b0\u30e9\u30a6\u30f3\u30c7\u30a3\u30f3\u30b0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=vi
+fetched_at: 2026-06-15T06:24:33.820060+00:00
+title: "C\u0103n c\u1ee9 v\u00e0o Google Maps \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# Google マップによるグラウンディング
+# Căn cứ vào Google Maps
 
-Google マップによるグラウンディングは、Gemini の生成機能と、Google マップの豊富で事実に基づいた最新のデータを接続します。この機能により、デベロッパーは位置情報を認識する機能をアプリに簡単に組み込むことができます。ユーザーのクエリに Google マップのデータに関連するコンテキストが含まれている場合、Gemini モデルは Google マップを活用して、ユーザーが指定した場所やおおよその現在地に関連する、事実に基づいた最新の回答を提供します。
+Tính năng Kết nối với Google Maps kết hợp các khả năng tạo sinh của Gemini với dữ liệu phong phú, thực tế và mới nhất của Google Maps. Tính năng này giúp nhà phát triển dễ dàng kết hợp chức năng nhận biết vị trí vào ứng dụng của họ. Khi một truy vấn của người dùng có ngữ cảnh liên quan đến dữ liệu Maps, mô hình Gemini sẽ tận dụng Google Maps để cung cấp câu trả lời chính xác và mới nhất, phù hợp với vị trí cụ thể hoặc khu vực khái quát mà người dùng chỉ định.
 
-- **正確で位置情報を認識した回答:** Google マップの広範で最新のデータを活用して、地理的に特定のクエリに対応します。
-- **パーソナライズの強化:** ユーザーが提供した位置情報に基づいて、おすすめ情報や情報をカスタマイズします。
+- **Câu trả lời chính xác, nhận biết vị trí:** Tận dụng dữ liệu phong phú và mới nhất của Google Maps cho các truy vấn cụ thể về mặt địa lý.
+- **Cá nhân hoá nâng cao:** Điều chỉnh đề xuất và thông tin dựa trên vị trí do người dùng cung cấp.
 
-## 始める
+## Bắt đầu
 
-この例では、Google マップによるグラウンディングをアプリケーションに統合して、ユーザーのクエリに対して正確な位置情報認識応答を提供する方法を示します。このプロンプトでは、ユーザーの現在地（省略可）に基づいてローカルのおすすめを尋ねています。これにより、Gemini モデルは Google マップのデータを使用できます。
+Ví dụ này minh hoạ cách tích hợp tính năng Kết nối với Google Maps vào ứng dụng của bạn để cung cấp câu trả lời chính xác, nhận biết vị trí cho các truy vấn của người dùng. Lời nhắc yêu cầu các đề xuất tại địa phương kèm theo vị trí không bắt buộc của người dùng, cho phép mô hình Gemini sử dụng dữ liệu của Google Maps.
 
 ### Python
 
@@ -120,38 +120,38 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Google マップによるグラウンディングの仕組み
+## Cách hoạt động của tính năng Kết nối với Google Maps
 
-Google マップによるグラウンディングは、Maps API をグラウンディング ソースとして使用して、Gemini API を Google Geo エコシステムと統合します。ユーザーのクエリに地理的コンテキストが含まれている場合、Gemini モデルは Google マップによるグラウンディング ツールを呼び出すことができます。その後、モデルは、指定された場所に関連する Google マップのデータに基づいて回答を生成できます。
+Tính năng Kết nối với Google Maps tích hợp Gemini API với hệ sinh thái Địa lý của Google bằng cách sử dụng Maps API làm nguồn kết nối. Khi truy vấn của người dùng chứa ngữ cảnh địa lý, mô hình Gemini có thể gọi công cụ Kết nối với Google Maps. Sau đó, mô hình này có thể tạo câu trả lời dựa trên dữ liệu của Google Maps liên quan đến vị trí được cung cấp.
 
-このプロセスには通常、次の手順が含まれます。
+Quá trình này thường bao gồm:
 
-1. **ユーザー クエリ:** ユーザーがアプリケーションにクエリを送信します。このクエリには、地理的コンテキストが含まれる可能性があります（例: 「近くのカフェ」、「サンフランシスコの博物館」）。
-2. **ツール呼び出し:** Gemini モデルは、地理的な意図を認識して、Google マップによるグラウンディング ツールを呼び出します。このツールには、ユーザーの `latitude` と `longitude` を指定できます。このツールはテキスト検索ツールで、ローカル クエリ（「近くの」）では座標が使用され、特定のクエリやローカル以外のクエリでは明示的な位置情報の影響を受けにくいという点で、マップでの検索と同様の動作をします。
-3. **データ取得:** Google マップによるグラウンディング サービスは、関連情報（場所、レビュー、写真、住所、営業時間など）について Google マップにクエリを送信します。
-4. **グラウンディングされた生成:** 取得されたマップデータは、Gemini モデルの回答に反映され、事実の正確性と関連性が確保されます。
-5. **レスポンスとアノテーション:** モデルは、Google マップのソースにリンクするインライン アノテーションを含むテキスト レスポンスを返します。これにより、デベロッパーは引用を表示できます。
+1. **Truy vấn của người dùng:** Người dùng gửi một truy vấn đến ứng dụng của bạn, có thể bao gồm ngữ cảnh địa lý (ví dụ: "quán cà phê gần tôi", "bảo tàng ở San Francisco").
+2. **Gọi công cụ:** Mô hình Gemini, nhận ra ý định địa lý, sẽ gọi công cụ Kết nối với Google Maps. Bạn có thể cung cấp `latitude` và `longitude` của người dùng cho công cụ này. Công cụ này là một công cụ tìm kiếm bằng văn bản và hoạt động tương tự như tìm kiếm trên Maps, trong đó các truy vấn tại địa phương ("gần tôi") sẽ sử dụng toạ độ, trong khi các truy vấn cụ thể hoặc không phải tại địa phương sẽ không bị ảnh hưởng bởi vị trí rõ ràng.
+3. **Truy xuất dữ liệu:** Dịch vụ Kết nối với Google Maps truy vấn Google Maps để tìm thông tin liên quan (ví dụ: địa điểm, bài đánh giá, ảnh, địa chỉ, giờ mở cửa).
+4. **Tạo dựa trên dữ liệu:** Dữ liệu Maps đã truy xuất được dùng để cung cấp thông tin cho câu trả lời của mô hình Gemini, đảm bảo tính chính xác và mức độ liên quan.
+5. **Câu trả lời và chú thích:** Mô hình này trả về một câu trả lời bằng văn bản kèm theo chú thích nội tuyến liên kết đến các nguồn trên Google Maps, cho phép nhà phát triển hiển thị trích dẫn.
 
-## Google マップによるグラウンディングを使用する理由とタイミング
+## Lý do và thời điểm nên sử dụng tính năng Kết nối với Google Maps
 
-Google マップによるグラウンディングは、正確で最新の場所固有の情報を必要とするアプリケーションに最適です。Google マップの 2 億 5,000 万を超える世界中の場所に関する広範なデータベースに裏打ちされた、関連性の高いパーソナライズされたコンテンツを提供することで、ユーザー エクスペリエンスを向上させます。
+Tính năng Kết nối với Google Maps là lựa chọn lý tưởng cho những ứng dụng yêu cầu thông tin chính xác, mới nhất và cụ thể theo vị trí. Tính năng này giúp nâng cao trải nghiệm người dùng bằng cách cung cấp nội dung phù hợp và được cá nhân hoá dựa trên cơ sở dữ liệu phong phú của Google Maps về hơn 250 triệu địa điểm trên toàn thế giới.
 
-Google マップによるグラウンディングは、アプリで次のことを行う必要がある場合に使用します。
+Bạn nên sử dụng tính năng Kết nối với Google Maps khi ứng dụng của bạn cần:
 
-- 地域固有の質問に対して完全かつ正確に回答します。
-- 会話型の旅行プランナーやローカルガイドを構築する。
-- 現在地と、レストランやショップなどのユーザー設定に基づいて、スポットをおすすめします。
-- ソーシャル サービス、小売サービス、フード デリバリー サービス向けの位置情報認識エクスペリエンスを作成します。
+- Cung cấp câu trả lời đầy đủ và chính xác cho các câu hỏi cụ thể về địa lý.
+- Xây dựng trình lập kế hoạch chuyến đi và hướng dẫn viên địa phương theo dạng trò chuyện.
+- Đề xuất các điểm tham quan dựa trên vị trí và lựa chọn ưu tiên của người dùng, chẳng hạn như nhà hàng hoặc cửa hàng.
+- Tạo trải nghiệm nhận biết vị trí cho các dịch vụ giao đồ ăn, bán lẻ hoặc mạng xã hội.
 
-Google マップによるグラウンディングは、「近くの最高のコーヒー ショップ」を見つけたり、道順を取得したりするなど、近接性と現在の事実データが重要なユースケースで優れています。
+Tính năng Kết nối với Google Maps hoạt động hiệu quả trong các trường hợp sử dụng mà khoảng cách và dữ liệu thực tế hiện tại là rất quan trọng, chẳng hạn như tìm "quán cà phê ngon nhất gần tôi" hoặc nhận chỉ đường.
 
-## ユースケース
+## Trường hợp sử dụng
 
-Google マップによるグラウンディングは、さまざまな位置情報認識ユースケースをサポートしています。
+Tính năng Kết nối với Google Maps hỗ trợ nhiều trường hợp sử dụng nhận biết vị trí.
 
-### 場所に関する質問への対応
+### Xử lý các câu hỏi cụ thể về địa điểm
 
-特定の場所について詳細な質問をすると、Google ユーザーのクチコミやその他のマップデータに基づいて回答が得られます。
+Đặt câu hỏi chi tiết về một địa điểm cụ thể để nhận câu trả lời dựa trên bài đánh giá của người dùng Google và các dữ liệu khác trên Maps.
 
 ### Python
 
@@ -224,9 +224,9 @@ async function main() {
 main();
 ```
 
-### 位置情報に基づくパーソナライズの提供
+### Cung cấp tính năng cá nhân hoá dựa trên vị trí
 
-ユーザーの好みや特定の地域に合わせたおすすめを取得します。
+Nhận các đề xuất phù hợp với lựa chọn ưu tiên của người dùng và một khu vực địa lý cụ thể.
 
 ### Python
 
@@ -299,9 +299,9 @@ async function main() {
 main();
 ```
 
-### 旅程の計画を支援する
+### Hỗ trợ lập kế hoạch cho hành trình
 
-旅行アプリに最適な、さまざまな場所の経路と情報を含む複数日間のプランを生成します。
+Tạo kế hoạch nhiều ngày kèm theo chỉ đường và thông tin về nhiều địa điểm, phù hợp với các ứng dụng du lịch.
 
 ### Python
 
@@ -367,91 +367,96 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## サービスの使用要件
+## Yêu cầu về việc sử dụng dịch vụ
 
-このセクションでは、Google マップによるグラウンディングのサービス使用要件について説明します。
+Phần này mô tả các yêu cầu về việc sử dụng dịch vụ cho tính năng Kết nối với Google Maps.
 
-### Google マップのソースの使用についてユーザーに通知する
+### Thông báo cho người dùng về việc sử dụng các nguồn trên Google Maps
 
-Google マップのグラウンディングされた結果ごとに、各レスポンスをサポートするソース アノテーションが `model_output` ステップのコンテンツ ブロックに提供されます。次のメタデータが返されます。
+Với mỗi kết quả dựa trên dữ liệu của Google Maps, bạn sẽ nhận được chú thích nguồn trên các khối nội dung của bước `model_output` hỗ trợ từng câu trả lời. Siêu dữ liệu sau đây sẽ được trả về:
 
-- ソース URL
-- name
+- URL nguồn
+- tên
 
-「Google マップによるグラウンディング」の結果を表示する場合は、関連する Google マップのソースを指定し、ユーザーに次の情報を通知する必要があります。
+Khi trình bày kết quả từ tính năng Kết nối với Google Maps, bạn phải chỉ định các nguồn liên kết trên Google Maps và thông báo cho người dùng của bạn về những điều sau:
 
-- Google マップのソースは、ソースがサポートする生成コンテンツの直後に示す必要があります。この生成されたコンテンツは、Google マップによるグラウンディングの結果ともいいます。
-- Google マップのソースは、1 回のユーザー操作で表示できる必要があります。
+- Các nguồn trên Google Maps phải xuất hiện ngay sau nội dung được tạo mà các nguồn đó hỗ trợ. Nội dung được tạo này còn được gọi là Kết quả dựa trên dữ liệu của Google Maps.
+- Người dùng phải xem được các nguồn trên Google Maps trong một lượt tương tác của người dùng.
 
-### Google マップへのリンクを含む Google マップのソースを表示する
+### Hiển thị các nguồn trên Google Maps kèm theo đường liên kết đến Google Maps
 
-各ソース アノテーションについて、次の要件に沿ってリンクのプレビューを生成する必要があります。
+Đối với mỗi chú thích nguồn, bạn phải tạo bản xem trước đường liên kết theo các yêu cầu sau:
 
-- Google マップのテキストでの[帰属表示に関するガイドライン](#maps-attribution-guidelines)に従って、各ソースを Google マップに帰属させます。
-- レスポンスで提供されたソース名を表示します。
-- アノテーションの `url` を使用してソースにリンクします。
+- Ghi công từng nguồn cho Google Maps theo nguyên tắc ghi công văn bản của Google Maps
+  .
+- Hiển thị tên nguồn được cung cấp trong câu trả lời.
+- Liên kết đến nguồn bằng `url` trong chú thích.
 
-### Google マップのテキストでの帰属表示に関するガイドライン
+### Nguyên tắc ghi công văn bản của Google Maps
 
-テキストでソースを Google マップに帰属させる場合は、次のガイドラインに従ってください。
+Khi bạn ghi công các nguồn cho Google Maps bằng văn bản, hãy tuân theo các nguyên tắc sau:
 
-- 「Google Maps」というテキストは一切変更しないでください。
-  - Google マップの文字の大小は変更しないでください。
-  - Google マップを複数行に折り返さないでください。
-  - Google マップを他の言語にローカライズしないでください。
-  - HTML 属性 translate="no" を使用して、ブラウザが Google マップを翻訳しないようにします。
+- Không sửa đổi văn bản Google Maps theo bất kỳ cách nào:
+  - Không thay đổi cách viết hoa của Google Maps.
+  - Không chuyển Google Maps sang nhiều dòng.
+  - Không bản địa hoá Google Maps sang ngôn ngữ khác.
+  - Ngăn trình duyệt dịch Google Maps bằng cách sử dụng thuộc tính HTML translate="no".
 
-Google マップのデータ プロバイダとそのライセンス条項について詳しくは、[Google マップと Google Earth の法的通知](https://www.google.com/help/legalnotices_maps/?hl=ja)をご覧ください。
+Để biết thêm thông tin về một số nhà cung cấp dữ liệu của Google Maps và các
+điều khoản cấp phép của họ, hãy xem [thông báo pháp lý của Google Maps và Google Earth](https://www.google.com/help/legalnotices_maps/?hl=vi).
 
-## ベスト プラクティス
+## Các phương pháp hay nhất
 
-- **ユーザーの位置情報を指定する:** 最も関連性の高いパーソナライズされたレスポンスを提供するため、ユーザーの位置情報がわかっている場合は、`google_maps` ツール構成に常に `latitude` と `longitude` を含めます。
-- **エンドユーザーに通知する:** Google マップのデータがクエリの回答に使用されていることを、特にツールが有効になっている場合は、エンドユーザーに明確に通知します。
-- **不要な場合はオフに切り替え:** Google マップによるグラウンディングはデフォルトでオフになっています。パフォーマンスと費用を最適化するため、クエリに明確な地理的コンテキストがある場合にのみ有効（`"tools": [{"type": "google_maps"}]`）にします。
+- **Cung cấp vị trí của người dùng:** Để có câu trả lời phù hợp và được cá nhân hoá nhất, hãy luôn thêm `latitude` và `longitude` vào cấu hình công cụ `google_maps` khi bạn biết vị trí của người dùng.
+- **Thông báo cho người dùng cuối:** Thông báo rõ ràng cho người dùng cuối rằng dữ liệu của Google Maps đang được sử dụng để trả lời các truy vấn của họ, đặc biệt là khi công cụ này được bật.
+- **Tắt khi không cần:** Tính năng Kết nối với Google Maps sẽ tắt theo mặc định. Chỉ bật tính năng này (`"tools": [{"type": "google_maps"}]`) khi một truy vấn có a
+  ngữ cảnh địa lý rõ ràng để tối ưu hoá hiệu suất và chi phí.
 
-## 制限事項
+## Các điểm hạn chế
 
-- Google マップによるグラウンディングは、現在、英語のプロンプトとレスポンスのみをサポートしています。
-- このツールは、一部の地域ではご利用いただけない場合があります。
-- 結果は、位置情報の精度と利用可能な Google マップのデータによって異なる場合があります。
-- **地理的範囲:** Google マップによるグラウンディングはグローバルに利用できます。
-- **デフォルトの状態:** Google マップによるグラウンディング ツールはデフォルトでオフになっています。API リクエストで明示的に有効にする必要があります。
+- Tính năng Kết nối với Google Maps hiện chỉ hỗ trợ lời nhắc và câu trả lời bằng tiếng Anh.
+- Công cụ này có thể không dùng được ở một số khu vực.
+- Kết quả có thể khác nhau dựa trên độ chính xác của vị trí và dữ liệu Maps hiện có.
+- **Phạm vi địa lý:** Tính năng Kết nối với Google Maps có trên toàn cầu.
+- **Trạng thái mặc định:** Công cụ Kết nối với Google Maps sẽ tắt theo mặc định.
+  Bạn phải bật công cụ này một cách rõ ràng trong các yêu cầu API.
 
-## 料金とレート制限
+## Giá và hạn mức về giá
 
-Google マップによるグラウンディングの料金はクエリに基づいています。現在のレートは **$25 / 1,000 個のグラウンディングされたプロンプト**です。無料枠では、1 日あたり最大 500 件のリクエストも利用できます。プロンプトが Google マップのグラウンディングされた結果（つまり、Google マップのソースを少なくとも 1 つ含む結果）を少なくとも 1 つ正常に返した場合にのみ、リクエストは割り当てにカウントされます。1 つのリクエストから複数のクエリが Google マップに送信された場合、レート制限に対して 1 つのリクエストとしてカウントされます。
+Giá của tính năng Kết nối với Google Maps dựa trên các truy vấn. Mức giá hiện tại là **25 USD / 1.000 lời nhắc bám sát nguồn**. Cấp miễn phí cũng có tối đa 500 yêu cầu mỗi ngày. Một yêu cầu chỉ được tính vào hạn mức khi một lời nhắc trả về thành công ít nhất một kết quả dựa trên dữ liệu của Google Maps (tức là kết quả chứa ít nhất một nguồn trên Google Maps). Nếu nhiều truy vấn được gửi đến Google Maps từ một yêu cầu, thì yêu cầu đó sẽ được tính là một yêu cầu theo hạn mức về giá.
 
-料金の詳細については、[Gemini API の料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)をご覧ください。
+Để biết thông tin chi tiết về giá, hãy xem [trang giá của Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=vi).
 
-## サポートされているモデル
+## Mô hình được hỗ trợ
 
-次のモデルは、Google マップによるグラウンディングをサポートしています。
+Các mô hình sau đây hỗ trợ tính năng Kết nối với Google Maps:
 
-| モデル | Google マップによるグラウンディング |
+| Mô hình | Kết nối với Google Maps |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ✔️ |
-| [Gemini 3.1 Pro プレビュー版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ |
-| [Gemini 3 Flash プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ja) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ja) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ja) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi) | ✔️ |
+| [Bản xem trước Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
+| [Bản xem trước Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
 
-## サポートされているツールの組み合わせ
+## Các cách kết hợp công cụ được hỗ trợ
 
-Gemini 3 モデルは、組み込みツール（Google マップによるグラウンディングなど）とカスタムツール（関数呼び出し）の組み合わせをサポートしています。詳しくは、[ツールの組み合わせ](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=ja)のページをご覧ください。
+Các mô hình Gemini 3 hỗ trợ kết hợp các công cụ tích hợp (như Kết nối với Google Maps) với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang về các cách kết hợp công cụ
+.
 
-## 次のステップ
+## Bước tiếp theo
 
-- その他の[利用可能なツール](https://ai.google.dev/gemini-api/docs/tools?hl=ja)について学習する。
-- 責任ある AI のベスト プラクティスと Gemini API の安全フィルタの詳細については、[安全設定ガイド](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ja)をご覧ください。
+- Tìm hiểu về các [công cụ khác hiện có](https://ai.google.dev/gemini-api/docs/tools?hl=vi).
+- Để tìm hiểu thêm về các phương pháp hay nhất về AI có trách nhiệm và bộ lọc an toàn của Gemini API, hãy xem [hướng dẫn về chế độ cài đặt An toàn](https://ai.google.dev/gemini-api/docs/safety-settings?hl=vi).
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-06-01 UTC。
+Cập nhật lần gần đây nhất: 2026-06-01 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]

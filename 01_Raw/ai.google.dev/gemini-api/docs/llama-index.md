@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=vi
-fetched_at: 2026-06-08T05:39:32.298659+00:00
-title: "T\u00e1c nh\u00e2n nghi\u00ean c\u1ee9u b\u1eb1ng Gemini v\u00e0 LlamaIndex \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=ar
+fetched_at: 2026-06-15T06:29:00.403255+00:00
+title: "\u0648\u0643\u064a\u0644 \u0627\u0644\u0628\u062d\u062b \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini \u0648LlamaIndex \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# Tác nhân nghiên cứu bằng Gemini và LlamaIndex
+# وكيل البحث باستخدام Gemini وLlamaIndex
 
-LlamaIndex là một khung để xây dựng các tác nhân tri thức bằng cách sử dụng các mô hình ngôn ngữ lớn (LLM) được kết nối với dữ liệu của bạn. Ví dụ này cho bạn thấy cách xây dựng quy trình công việc nhiều tác nhân cho Tác nhân nghiên cứu. Trong LlamaIndex, [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
-là các khối xây dựng của hệ thống tác nhân và nhiều tác nhân.
+‫LlamaIndex هو إطار عمل لإنشاء وكلاء معرفة باستخدام نماذج لغوية كبيرة مرتبطة ببياناتك. يوضّح لك هذا المثال كيفية إنشاء سير عمل يتضمّن عدّة وكلاء
+لوكلاء البحث. في LlamaIndex، تشكّل [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
+المكوّنات الأساسية للوكلاء والأنظمة المتعددة الوكلاء.
 
-Bạn cần có khoá Gemini API. Nếu chưa có, bạn có thể
-[lấy khoá này trong Google AI Studio](https://aistudio.google.com/app/apikey?hl=vi).
-Trước tiên, hãy cài đặt tất cả các thư viện LlamaIndex cần thiết. LlamaIndex sử dụng gói `google-genai` nâng cao.
+يجب أن يكون لديك مفتاح Gemini API. إذا لم يكن لديك حساب، يمكنك
+[إنشاء حساب في Google AI Studio](https://aistudio.google.com/apikey?hl=ar).
+أولاً، ثبِّت جميع مكتبات LlamaIndex المطلوبة. تستخدم LlamaIndex حزمة `google-genai` في الخلفية.
 
 ```
 pip install llama-index llama-index-utils-workflow llama-index-llms-google-genai llama-index-tools-google
 ```
 
-## Thiết lập Gemini trong LlamaIndex
+## إعداد Gemini في LlamaIndex
 
-Công cụ của bất kỳ tác nhân LlamaIndex nào cũng là một LLM (mô hình ngôn ngữ lớn) xử lý quá trình suy luận và xử lý văn bản. Ví dụ này sử dụng Gemini 3 Flash. Hãy nhớ [đặt khoá API làm
-biến môi trường](https://ai.google.dev/gemini-api/docs/api-key?hl=vi).
+محرك أي وكيل LlamaIndex هو نموذج لغوي كبير (LLM) يتعامل مع الاستدلال ومعالجة النصوص. يستخدم هذا المثال Gemini 3 Flash. تأكَّد من [ضبط مفتاح واجهة برمجة التطبيقات كمتغيّر بيئة](https://ai.google.dev/gemini-api/docs/api-key?hl=ar).
 
 ```
 import os
@@ -44,11 +44,11 @@ assert 'GEMINI_API_KEY' in os.environ
 llm = GoogleGenAI(model="gemini-3.5-flash")
 ```
 
-## Công cụ xây dựng
+## أدوات الإنشاء
 
-Các tác nhân sử dụng công cụ để tương tác với thế giới bên ngoài, chẳng hạn như tìm kiếm trên web hoặc lưu trữ thông tin. [Các công cụ trong LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
-có thể là các hàm Python thông thường hoặc được nhập từ `ToolSpecs`.
-Gemini đi kèm với một công cụ tích hợp để sử dụng Google Tìm kiếm, được sử dụng ở đây.
+تستخدم البرامج الآلية الأدوات للتفاعل مع العالم الخارجي، مثل البحث على الويب أو تخزين المعلومات. يمكن أن تكون [الأدوات في LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
+عبارة عن دوال Python عادية، أو يمكن استيرادها من `ToolSpecs` حالي.
+يتضمّن Gemini أداة مدمجة لاستخدام "بحث Google"، وهي الأداة المستخدَمة هنا.
 
 ```
 from google.genai import types
@@ -63,21 +63,22 @@ llm_with_search = GoogleGenAI(
 )
 ```
 
-Bây giờ, hãy kiểm thử thực thể LLM bằng một truy vấn yêu cầu tìm kiếm. Hướng dẫn này giả định một vòng lặp sự kiện đang chạy (chẳng hạn như `python -m asyncio` hoặc Google Colab).
+اختبِر الآن مثيل النموذج اللغوي الكبير باستخدام طلب بحث يتطلّب البحث. يفترض هذا الدليل
+حلقة أحداث نشطة (مثل `python -m asyncio` أو Google Colab).
 
 ```
 response = await llm_with_search.acomplete("What's the weather like today in Biarritz?")
 print(response)
 ```
 
-Tác nhân nghiên cứu sẽ sử dụng các hàm Python làm công cụ. Có rất nhiều cách để bạn xây dựng một hệ thống thực hiện tác vụ này. Trong ví dụ này, bạn sẽ sử dụng những nội dung sau:
+سيستخدم "وكيل البحث" دوال Python كأدوات. هناك العديد من الطرق التي يمكنك اتّباعها لإنشاء نظام ينفّذ هذه المهمة. في هذا المثال، ستستخدم ما يلي:
 
-1. `search_web` sử dụng Gemini với Google Tìm kiếm để tìm kiếm thông tin trên web về chủ đề đã cho.
-2. `record_notes` lưu kết quả nghiên cứu tìm thấy trên web vào trạng thái để các công cụ khác có thể sử dụng.
-3. `write_report` viết báo cáo bằng thông tin do `ResearchAgent` tìm thấy
-4. `review_report` xem xét báo cáo và đưa ra ý kiến phản hồi.
+1. تستخدم `search_web` Gemini مع "بحث Google" للبحث على الويب عن معلومات حول الموضوع المحدّد.
+2. تحفظ `record_notes` الأبحاث التي تم العثور عليها على الويب في الحالة حتى تتمكّن الأدوات الأخرى من استخدامها.
+3. تكتب `write_report` التقرير باستخدام المعلومات التي عثر عليها `ResearchAgent`
+4. `review_report` يراجع التقرير ويقدّم ملاحظات.
 
-Lớp `Context` chuyển trạng thái giữa các tác nhân/công cụ và mỗi tác nhân sẽ có quyền truy cập vào trạng thái hiện tại của hệ thống.
+تمرِّر فئة `Context` الحالة بين الوكلاء/الأدوات، وسيتمكّن كل وكيل من الوصول إلى الحالة الحالية للنظام.
 
 ```
 from llama_index.core.workflow import Context
@@ -112,18 +113,18 @@ async def review_report(ctx: Context, review: str) -> str:
     return "Report reviewed."
 ```
 
-## Xây dựng trợ lý nhiều tác nhân
+## إنشاء مساعد متعدد الوكلاء
 
-Để xây dựng hệ thống nhiều tác nhân, bạn hãy xác định các tác nhân và tương tác của chúng.
-Hệ thống của bạn sẽ có 3 tác nhân:
+لإنشاء نظام متعدد الوكلاء، عليك تحديد الوكلاء وتفاعلاتهم.
+سيتضمّن نظامك ثلاثة وكلاء:
 
-1. `ResearchAgent` tìm kiếm thông tin trên web về chủ đề đã cho.
-2. `WriteAgent` viết báo cáo bằng thông tin do `ResearchAgent` tìm thấy.
-3. `ReviewAgent` xem xét báo cáo và đưa ra ý kiến phản hồi.
+1. تجري أداة `ResearchAgent` عمليات بحث على الويب للعثور على معلومات حول الموضوع المحدّد.
+2. يكتب `WriteAgent` التقرير باستخدام المعلومات التي يعثر عليها `ResearchAgent`.
+3. `ReviewAgent` يراجع التقرير ويقدّم ملاحظات.
 
-Ví dụ này sử dụng lớp `AgentWorkflow` để tạo một hệ thống nhiều tác nhân sẽ thực thi các tác nhân này theo thứ tự. Mỗi tác nhân lấy một `system_prompt` cho biết tác nhân đó nên làm gì và đề xuất cách làm việc với các tác nhân khác.
+يستخدم هذا المثال الفئة `AgentWorkflow` لإنشاء نظام متعدد الوكلاء سيتم تنفيذه بالترتيب. يتلقّى كل وكيل `system_prompt` يخبره بما يجب أن يفعله، ويقترح عليه كيفية العمل مع الوكلاء الآخرين.
 
-Bạn có thể tuỳ ý hỗ trợ hệ thống nhiều tác nhân bằng cách chỉ định những tác nhân khác mà hệ thống có thể trao đổi bằng `can_handoff_to` (nếu không, hệ thống sẽ tự tìm hiểu).
+يمكنك اختياريًا مساعدة نظامك المتعدد الوكلاء من خلال تحديد الوكلاء الآخرين الذين يمكنه التحدث إليهم باستخدام `can_handoff_to` (إذا لم تفعل ذلك، سيحاول النظام تحديد ذلك بنفسه).
 
 ```
 from llama_index.core.agent.workflow import (
@@ -173,7 +174,7 @@ review_agent = FunctionAgent(
 )
 ```
 
-Các tác nhân đã được xác định, giờ đây bạn có thể tạo `AgentWorkflow` và kích hoạt.
+تم تحديد الوكلاء، ويمكنك الآن إنشاء `AgentWorkflow` وتشغيله.
 
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
@@ -189,7 +190,7 @@ agent_workflow = AgentWorkflow(
 )
 ```
 
-Trong quá trình thực thi quy trình công việc, bạn có thể truyền trực tuyến các sự kiện, lệnh gọi công cụ và bản cập nhật vào bảng điều khiển.
+أثناء تنفيذ سير العمل، يمكنك بث الأحداث واستدعاءات الأدوات والتحديثات إلى وحدة التحكّم.
 
 ```
 from llama_index.core.agent.workflow import (
@@ -237,7 +238,7 @@ async for event in handler.stream_events():
         print(f"  With arguments: {event.tool_kwargs}")
 ```
 
-Sau khi quy trình công việc hoàn tất, bạn có thể in kết quả cuối cùng của báo cáo, cũng như trạng thái xem xét cuối cùng của tác nhân xem xét.
+بعد اكتمال سير العمل، يمكنك طباعة الناتج النهائي للتقرير، بالإضافة إلى حالة المراجعة النهائية من وكيل المراجعة.
 
 ```
 state = await handler.ctx.store.get("state")
@@ -245,28 +246,24 @@ print("Report Content:\n", state["report_content"])
 print("\n------------\nFinal Review:\n", state["review"])
 ```
 
-## Tiến xa hơn với quy trình công việc tuỳ chỉnh
+## الاستفادة من ميزات إضافية مع مهام سير العمل المخصّصة
 
-`AgentWorkflow` là một cách tuyệt vời để bắt đầu với hệ thống nhiều tác nhân. Nhưng nếu bạn cần kiểm soát nhiều hơn thì sao? Bạn có thể xây dựng quy trình công việc từ đầu. Dưới đây là một số lý do bạn nên xây dựng quy trình làm việc của riêng mình:
+تُعدّ `AgentWorkflow` طريقة رائعة للبدء باستخدام الأنظمة المتعدّدة الوكلاء. ولكن ماذا لو كنت بحاجة إلى المزيد من التحكّم؟ يمكنك إنشاء سير عمل من البداية. في ما يلي بعض الأسباب التي قد تدفعك إلى إنشاء سير عمل خاص بك:
 
-- **Kiểm soát nhiều hơn đối với quy trình**: Bạn có thể quyết định chính xác đường dẫn mà các tác nhân của bạn
-  sẽ thực hiện. Điều này bao gồm việc tạo vòng lặp, đưa ra quyết định tại một số điểm nhất định hoặc để các tác nhân làm việc song song trên các tác vụ khác nhau.
-- **Sử dụng dữ liệu phức tạp**: Vượt ra ngoài văn bản thuần tuý. Quy trình công việc tuỳ chỉnh cho phép bạn sử dụng dữ liệu có cấu trúc hơn, chẳng hạn như đối tượng JSON hoặc lớp tuỳ chỉnh, cho dữ liệu đầu vào và đầu ra.
-- **Làm việc với nhiều loại nội dung đa phương tiện**: Xây dựng các tác nhân có thể hiểu và xử lý
-  không chỉ văn bản mà còn cả hình ảnh, âm thanh và video.
-- **Lập kế hoạch thông minh hơn**: Bạn có thể thiết kế một quy trình công việc trước tiên tạo một
-  kế hoạch chi tiết trước khi các tác nhân bắt đầu làm việc. Điều này hữu ích cho các tác vụ phức tạp đòi hỏi nhiều bước.
-- **Cho phép tự sửa lỗi**: Tạo các tác nhân có thể xem xét công việc của chính mình. Nếu kết quả đầu ra không đủ tốt, tác nhân có thể thử lại, tạo một vòng lặp cải thiện cho đến khi kết quả hoàn hảo.
+- **التحكّم بشكل أكبر في العملية**: يمكنك تحديد المسار الدقيق الذي تتّبعه برامجك. ويشمل ذلك إنشاء حلقات أو اتّخاذ قرارات في نقاط معيّنة أو جعل الوكلاء يعملون بالتوازي على مهام مختلفة.
+- **استخدام بيانات معقّدة**: يمكنك استخدام بيانات أكثر من النص العادي. تتيح لك سير العمل المخصّصة استخدام المزيد من البيانات المنظَّمة، مثل عناصر JSON أو الفئات المخصّصة، للإدخالات والمخرجات.
+- **التعامل مع وسائط مختلفة**: يمكنك إنشاء وكلاء يمكنهم فهم النصوص والصور والمحتوى الصوتي والفيديوهات ومعالجتها.
+- **تخطيط أكثر ذكاءً**: يمكنك تصميم سير عمل ينشئ أولاً خطة تفصيلية قبل أن يبدأ الموظفون العمل. ويفيد هذا في المهام المعقّدة التي تتطلّب عدّة خطوات.
+- **تفعيل ميزة "التصحيح الذاتي"**: يمكنك إنشاء وكلاء يمكنهم مراجعة عملهم. إذا لم تكن النتيجة جيدة بما فيه الكفاية، يمكن للوكيل المحاولة مرة أخرى، ما يؤدي إلى إنشاء حلقة من التحسينات إلى أن تصبح النتيجة مثالية.
 
-Để tìm hiểu thêm về Quy trình công việc của LlamaIndex, hãy xem [Tài liệu
-về quy trình công việc của LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
+لمزيد من المعلومات حول LlamaIndex Workflows، اطّلِع على [مستندات LlamaIndex Workflows](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-05-19 UTC.
+تاريخ التعديل الأخير: 2026-06-10 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-19 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-10 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

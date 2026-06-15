@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=zh-CN
-fetched_at: 2026-06-08T05:30:57.269547+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=de
+fetched_at: 2026-06-15T06:28:05.817992+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-发送反馈
+Feedback geben
 
-# 使用 Google 搜索建立依据
+# Fundierung mit der Google Suche
 
-依托 Google 搜索进行接地，为 Gemini 模型连接实时网络内容，并支持所有可用语言。这样一来，Gemini 就可以提供更准确的回答，并引用知识截点之后的可验证来源。
+Die Fundierung mit der Google Suche verbindet das Gemini-Modell mit Web-Inhalten in Echtzeit und funktioniert mit allen verfügbaren Sprachen. So kann Gemini genauere Antworten geben und überprüfbare Quellen über den Wissensstand hinaus zitieren.
 
-接地有助于您构建可执行以下操作的应用：
+Mit der Fundierung können Sie Anwendungen erstellen, die Folgendes können:
 
-- **提高事实准确性**：根据真实世界的信息生成回答，减少模型幻觉。
-- **获取实时信息**：回答有关近期活动和主题的问题。
-- **提供引用**：通过显示模型声明的来源来建立用户信任。
+- **Sachliche Richtigkeit erhöhen**:Reduzieren Sie Modellhalluzinationen, indem Sie Antworten auf realen Informationen basieren.
+- **Auf Echtzeitinformationen zugreifen**:Beantworten Sie Fragen zu aktuellen Ereignissen und Themen.
+- **Zitate angeben**:Bauen Sie Vertrauen bei Nutzern auf, indem Sie die Quellen für die Aussagen des Modells angeben.
 
 ### Python
 
@@ -73,21 +73,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## “依托 Google 搜索进行接地”功能的运作方式
+## So funktioniert die Fundierung mit der Google Suche
 
-启用 `google_search` 工具后，模型会自动处理搜索、处理和引用信息的整个工作流程。
+Wenn Sie das Tool `google_search` aktivieren, verarbeitet das Modell den gesamten Workflow der Suche, Verarbeitung und Zitation von Informationen automatisch.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=zh-cn)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=de)
 
-1. **用户提示**：您的应用在启用 `google_search` 工具的情况下，将用户提示发送到 Gemini API。
-2. **提示分析**：模型会分析提示，并确定 Google 搜索是否可以改进回答。
-3. **Google 搜索**：如果需要，模型会自动生成一个或多个搜索查询并执行这些查询。
-4. **搜索结果处理**：模型处理搜索结果，综合信息并生成回答。
-5. **以搜索结果为依据的回答**：API 会返回以搜索结果为依据的最终且用户友好的回答。此回答包含模型的文本答案（内嵌 `annotations`，其中包含引用），以及包含搜索查询和搜索建议的 `google_search_call` 和 `google_search_result` 步骤。
+1. **Nutzer-Prompt**:Ihre Anwendung sendet einen Nutzer-Prompt an die Gemini API, wobei das Tool `google_search` aktiviert ist.
+2. **Promptanalyse**:Das Modell analysiert den Prompt und ermittelt, ob eine Google Suche die Antwort verbessern kann.
+3. **Google Suche**:Bei Bedarf generiert das Modell automatisch eine oder mehrere Suchanfragen und führt sie aus.
+4. **Verarbeitung der Suchergebnisse**:Das Modell verarbeitet die Suchergebnisse, fasst die Informationen zusammen und formuliert eine Antwort.
+5. **Fundierte Antwort**:Die API gibt eine endgültige, nutzerfreundliche Antwort zurück, die auf den Suchergebnissen basiert. Diese Antwort enthält die Textantwort des Modells mit Inline-`annotations`, die die Zitate enthalten, sowie die Schritte `google_search_call` und `google_search_result` mit den Suchanfragen und Suchvorschlägen.
 
-## 了解接地响应
+## Antwort zur Fundierung verstehen
 
-如果成功进行了事实依据核查，模型生成的文本输出会在文本内容块中直接包含内嵌的 `annotations`。这些注释提供了引用信息，可将回答的各个部分与其来源相关联。
+Wenn eine Antwort erfolgreich fundiert wurde, enthält die Textausgabe des Modells Inline-`annotations` direkt im Textinhaltsblock. Diese Annotationen enthalten Zitationsinformationen, die Teile der Antwort mit ihren Quellen verknüpfen.
 
 ```
 {
@@ -146,18 +146,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-响应中的关键字段：
+Die wichtigsten Felder in der Antwort:
 
-- `google_search_call`：包含模型执行的搜索 `queries`。
-- `google_search_result`：包含 `search_suggestions`，这是一个用于在界面中呈现搜索建议的 HTML 代码段。如需了解完整的使用要求，请参阅[服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn#grounding-with-google-search)。
-- `text`（含 `annotations`）：模型合成的回答，其中包含内嵌引用。每个 `url_citation` 注释都将一段文字（由 `start_index` 和 `end_index` 定义）链接到源网址。这是创建内嵌引文的关键。
+- `google_search_call` : Enthält die `queries`, die das Modell ausgeführt hat.
+- `google_search_result` : Enthält `search_suggestions`, ein HTML-Snippet zum Rendern von Suchvorschlägen in Ihrer UI. Die vollständigen Nutzungsanforderungen sind
+  in den [Nutzungsbedingungen](https://ai.google.dev/gemini-api/terms?hl=de#grounding-with-google-search) aufgeführt.
+- `text` mit `annotations` : Die synthetisierte Antwort des Modells mit Inline-Zitaten. Jede `url_citation`-Annotation verknüpft ein Textsegment (definiert durch `start_index` und `end_index`) mit einer Quell-URL. Dies ist der Schlüssel zum Erstellen von Inline-Zitaten.
 
-依托 Google 搜索进行接地还可以与[网址上下文工具](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=zh-cn)搭配使用，以便基于公开 Web 数据和您提供的特定网址来生成回答。
+Die Fundierung mit der Google Suche kann auch in Kombination mit dem [URL
+Kontexttool](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=de) verwendet werden, um Antworten sowohl auf
+öffentlichen Webdaten als auch auf den von Ihnen angegebenen URLs zu fundieren.
 
-## 使用内嵌引用注明来源
+## Quellen mit Inline-Zitaten angeben
 
-该 API 会在文本内容块上返回内嵌 `url_citation` 注释，让您可以完全控制如何在用户界面中显示来源。
-每条注释都包含 `start_index` 和 `end_index`，用于标识注释引用的文本部分。下面介绍了如何提取和显示这些数据。
+Die API gibt Inline-`url_citation`-Annotationen für den Textinhaltsblock zurück, sodass Sie die vollständige Kontrolle darüber haben, wie Sie Quellen in Ihrer Benutzeroberfläche anzeigen.
+Jede Annotation enthält `start_index` und `end_index`, um anzugeben, auf welchen Teil des Texts sie sich bezieht. So können Sie sie extrahieren und anzeigen.
 
 ### Python
 
@@ -200,7 +203,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-输出将显示文本及其引用：
+Die Ausgabe zeigt den Text gefolgt von den Zitaten:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final. This victory marks Spain's record fourth European Championship title.
@@ -212,46 +215,55 @@ Citations:
     Cited text: "This victory marks Spain's record fourth European Championship title."
 ```
 
-## 价格
+## Preise
 
-如果您将“依托 Google 搜索进行接地”与 Gemini 3 搭配使用，则系统会针对模型决定执行的每项搜索查询向您的项目收取费用。如果模型决定执行多个搜索查询来回答单个提示（例如，在同一次 API 调用中搜索 `"UEFA Euro 2024 winner"` 和 `"Spain vs England Euro 2024 final
-score"`），则该请求会被计为两次工具使用次数。出于结算目的，我们在统计唯一查询时会忽略空白的网页搜索查询。此结算模式仅适用于 Gemini 3 模型；如果您将搜索关联标准答案功能与 Gemini 2.5 或更旧的模型搭配使用，系统会按提示向您的项目收取费用。
+Wenn Sie die Fundierung mit der Google Suche mit Gemini 3 verwenden, wird Ihrem Projekt jede Suchanfrage in Rechnung gestellt, die das Modell ausführt. Wenn das Modell beschließt,
+mehrere Suchanfragen auszuführen, um eine einzelne Anfrage zu beantworten (z. B.
+die Suche nach `"UEFA Euro 2024 winner"` und `"Spain vs England Euro 2024 final
+score"` im selben API-Aufruf), zählt dies als zwei kostenpflichtige Nutzungen des Tools
+für diese Anfrage. Für Abrechnungszwecke werden leere Websuchanfragen bei der Zählung eindeutiger Anfragen ignoriert. Dieses Abrechnungsmodell gilt nur für Gemini 3-Modelle. Wenn Sie die Suchfundierung mit Gemini 2.5 oder älteren Modellen verwenden, wird Ihrem Projekt pro Prompt in Rechnung gestellt.
 
-如需详细了解价格信息，请参阅 [Gemini API 价格页面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)。
+Ausführliche Preisinformationen finden Sie auf der Seite [Gemini API-Preise
+page](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
 
-## 支持的模型
+## Unterstützte Modelle
 
-您可以在[模型概览](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)页面上找到完整的功能。
+Die vollständigen Funktionen finden Sie auf der [Modell
+übersichts](https://ai.google.dev/gemini-api/docs/models?hl=de)seite.
 
-| 模型 | 使用 Google 搜索建立依据 |
+| Modell | Fundierung mit der Google Suche |
 | --- | --- |
 | Gemini 3.5 Flash | ✔️ |
-| Gemini 3.1 Flash Image 预览版 | ✔️ |
-| Gemini 3 Pro 预览版 | ✔️ |
-| Gemini 3 Pro Image 预览版 | ✔️ |
-| Gemini 3 Flash 预览版 | ✔️ |
+| Gemini 3.1 Flash Image (Vorabversion) | ✔️ |
+| Gemini 3.1 Pro (Vorabversion) | ✔️ |
+| Gemini 3 Pro Image (Vorabversion) | ✔️ |
+| Gemini 3 Flash (Vorabversion) | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
-| Gemini 2.5 Flash-Lite | ✔️ |
+| Gemini 2.5 Flash Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## 支持的工具组合
+## Unterstützte Toolkombinationen
 
-您可以将“依托 Google 搜索进行接地”与其他工具（例如[代码执行](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=zh-cn)和 [网址 上下文](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=zh-cn)）搭配使用，以实现更复杂的用例。
+Sie können die Fundierung mit der Google Suche mit anderen Tools wie
+[der Codeausführung](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=de) und
+[dem URL-Kontext](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=de) kombinieren, um komplexere
+Anwendungsfälle zu ermöglichen.
 
-Gemini 3 模型支持将内置工具（例如“使用 Google 搜索进行接地”）与自定义工具（函数调用）相结合。如需了解详情，请参阅[工具组合](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=zh-cn)页面。
+Gemini 3-Modelle unterstützen die Kombination von integrierten Tools (z. B. Fundierung mit der Google Suche) mit benutzerdefinierten Tools (Funktionsaufrufe). Weitere Informationen finden Sie auf der
+[Seite Toolkombinationen](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=de).
 
-## 后续步骤
+## Nächste Schritte
 
-- 了解其他可用工具，例如[函数调用](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-cn)。
-- 了解如何使用 [网址 上下文工具](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=zh-cn)通过特定网址扩充提示。
+- Weitere Informationen zu anderen verfügbaren Tools wie [Funktionsaufrufen](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=de)
+- Informationen zum Erweitern von Prompts mit bestimmten URLs mithilfe des [URL-Kontexttools](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=de)
 
-发送反馈
+Feedback geben
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-最后更新时间 (UTC)：2026-05-28。
+Zuletzt aktualisiert: 2026-05-28 (UTC).
 
-需要向我们提供更多信息？
+Haben Sie Feedback für uns?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-28。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-28 (UTC)."],[],[]]

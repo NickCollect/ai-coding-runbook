@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar
-fetched_at: 2026-06-08T05:34:00.255784+00:00
-title: "\u0627\u0644\u0628\u064a\u0626\u0627\u062a \u0641\u064a \u0627\u0644\u0648\u0643\u0644\u0627\u0621 \u0627\u0644\u0645\u064f\u062f\u0627\u0631\u064a\u0646 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko
+fetched_at: 2026-06-15T06:24:29.633514+00:00
+title: "\uad00\ub9ac\ud615 \uc5d0\uc774\uc804\ud2b8\uc758 \ud658\uacbd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-إرسال ملاحظات
+의견 보내기
 
-# البيئات في الوكلاء المُدارين
+# 관리형 에이전트의 환경
 
-البيئات هي صناديق حماية مُدارة في Linux تمنح الوكلاء مكانًا معزولاً لتنفيذ الرموز البرمجية والاحتفاظ بالملفات. وهي منفصلة عن سياق التفاعل، لذا يمكنك إعادة استخدام البيئة نفسها في تفاعلات متعددة أو البدء من جديد في أي وقت.
+환경은 에이전트가 코드를 실행하고 파일을 유지할 수 있는 격리된 공간을 제공하는 관리형 Linux 샌드박스입니다. 상호작용 컨텍스트와 분리되어 있으므로 여러 상호작용에서 동일한 환경을 재사용하거나 언제든지 새로 시작할 수 있습니다.
 
-يوضّح المثال التالي كيفية إنشاء تفاعل مع بيئة بعيدة جديدة واسترداد رقم تعريفها:
+다음 예에서는 새로운 원격 환경으로 상호작용을 만들고 ID를 검색하는 방법을 보여줍니다.
 
 ### Python
 
@@ -68,17 +68,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## المَعلمة `environment`
+## `environment` 매개변수
 
-تقبل المَعلمة `environment` ثلاثة أشكال:
+`environment` 매개변수는 세 가지 형식을 허용합니다.
 
-| النموذج | مثال | حالات الاستخدام |
+| 자세 | 예 | 용도 |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | توفير صندوق حماية جديد |
-| رقم تعريف البيئة | `environment="env_abc123"` | إعادة استخدام صندوق حماية حالي مع جميع ملفاته وحِزمه |
-| كائن الإعداد | `environment={...}` | توفير صندوق حماية جديد مع مصادر أو قواعد شبكة أو كليهما |
+| `"remote"` | `environment="remote"` | 새 샌드박스를 프로비저닝합니다. |
+| 환경 ID | `environment="env_abc123"` | 모든 파일과 패키지가 포함된 기존 샌드박스를 재사용합니다. |
+| 구성 객체 | `environment={...}` | 소스 또는 네트워크 규칙 또는 둘 다 포함된 새 샌드박스를 프로비저닝합니다. |
 
-توضّح الأمثلة التالية الطرق الثلاث لاستخدام المَعلمة `environment`.
+다음 예에서는 `environment` 매개변수를 사용하는 세 가지 방법을 보여줍니다.
 
 ### Python
 
@@ -209,10 +209,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## ضبط بيئة
+## 환경 구성
 
-إحدى طرق إعداد بيئة هي إخبار الوكيل بما تحتاج إلى تثبيته.
-يتولّى الوكيل حلّ التبعيات وتحديد المشاكل وحلّها. بعد أن تصبح البيئة جاهزة، احفظ `environment_id` وأعِد استخدامه.
+환경을 설정하는 한 가지 방법은 에이전트에 설치해야 하는 항목을 알려주는 것입니다.
+종속성 확인 및 문제 해결을 처리합니다. 환경이 준비되면 `environment_id`를 저장하고 재사용합니다.
 
 ### Python
 
@@ -290,15 +290,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### الربط من مصدر
+### 소스에서 마운트
 
-إذا كنت تعرف الملفات التي يحتاجها الوكيل بالضبط، يمكنك ربطها في طلب واحد بدلاً من تكرار العملية. يقبل كائن إعداد `environment` مصفوفة `sources` تتضمّن ثلاثة أنواع:
+에이전트에 필요한 파일을 정확히 알고 있다면 반복하는 대신 단일 호출로 마운트합니다. `environment` 구성 객체는 세 가지 유형의 `sources` 배열을 허용합니다.
 
-| نوع المصدر | قيمة `type` | الوصف | الحدّ |
+| 소스 유형 | `type` 값 | 설명 | 한도 |
 | --- | --- | --- | --- |
-| مستودع Git | `repository` | يستنسخ مستودعًا من عنوان URL إلى صندوق الحماية في `target`. | 500 ميغابايت |
-| Cloud Storage | `gcs` | ينسخ ملفًا أو دليلًا من Cloud Storage إلى صندوق الحماية في `target`. | 2 غيغابايت |
-| محتوى مضمّن | `inline` | يكتب محتوى نصيًا خامًا في ملف في صندوق الحماية في `target`. | 1 ميغابايت لكل ملف، و2 ميغابايت إجمالاً |
+| Git 저장소 | `repository` | URL에서 저장소를 `target`의 샌드박스로 클론합니다. | 500 MB |
+| Cloud Storage | `gcs` | Cloud Storage에서 `target`의 샌드박스로 파일 또는 디렉터리를 복사합니다. | 2 GB |
+| 인라인 콘텐츠 | `inline` | `target`의 샌드박스에 있는 파일에 원시 텍스트 콘텐츠를 씁니다. | 파일당 1MB, 총 2MB |
 
 ### Python
 
@@ -404,16 +404,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-يمكنك الجمع بين الطريقتَين: ربط المصادر المعروفة بشكلٍ إعلاني، ثم تكرار العملية باستخدام تفاعلات المتابعة لتثبيت الحِزم أو تشغيل النصوص البرمجية للإعداد. لا يمكنك ضبط الجذر (`/`) كهدف عند إضافة مصدر مخصّص، ويجب دائمًا تحديد دليل فرعي.
+알려진 소스를 선언적으로 마운트한 다음 후속 상호작용으로 반복하여 패키지를 설치하거나 설정 스크립트를 실행하는 두 가지 접근 방식을 결합할 수 있습니다. 커스텀 소스를 추가할 때는 루트 (`/`)를 대상으로 설정할 수 없으며 항상 하위 디렉터리를 지정해야 합니다.
 
-### المصادر الخاصة
+### 비공개 소스
 
-يمكنك أيضًا التنزيل من مستودعات Github الخاصة أو حِزم Cloud Storage الخاصة عن طريق إضافة بيانات الاعتماد في إعدادات الشبكة:
+네트워크 구성에 사용자 인증 정보를 추가하여 비공개 GitHub 저장소 또는 비공개 Cloud Storage 버킷에서 다운로드할 수도 있습니다.
 
-بالنسبة إلى **مستودعات Git الخاصة**، استخدِم `Basic` المصادقة مع
-[رمز الوصول الشخصي في GitHub
-(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-يمكنك ترميز الرمز المميّز باستخدام `x-oauth-basic` كاسم المستخدم:
+**비공개 Git 저장소**의 경우 `Basic` 인증을
+사용하여 [GitHub 개인 액세스 토큰
+(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)을 사용합니다.
+`x-oauth-basic`을 사용자 이름으로 사용하여 토큰을 인코딩합니다.
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -519,7 +519,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-بالنسبة إلى **حِزم Cloud Storage الخاصة**، استخدِم رمزًا مميّزًا عاديًا من نوع OAuth 2.0 Bearer:
+**비공개 Cloud Storage 버킷**의 경우 표준 OAuth 2.0 Bearer 토큰을 사용합니다.
 
 ```
 gcloud auth print-access-token
@@ -625,25 +625,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## البرامج المثبَّتة مسبقًا
+## 사전 설치된 소프트웨어
 
-يعمل صندوق الحماية على Ubuntu ويأتي مع أوقات تشغيل وحِزم شائعة مثبَّتة مسبقًا. يمكن للوكيل تثبيت حِزم إضافية في وقت التشغيل باستخدام `pip
-install` أو `npm install`. تظل الحِزم المثبَّتة أثناء التفاعل محفوظة عند إعادة استخدام `environment_id` نفسه.
+샌드박스는 Ubuntu에서 실행되며 런타임과 일반 패키지가 사전 설치되어 제공됩니다. 에이전트는 `pip
+install` 또는 `npm install`을 사용하여 런타임에 추가 패키지를 설치할 수 있습니다. 상호작용 중에 설치된 패키지는 동일한 `environment_id`를 재사용할 때 유지됩니다.
 
-| الفئة | الحِزم المثبَّتة مسبقًا |
+| 카테고리 | 사전 설치 패키지 |
 | --- | --- |
-| **أدوات UNIX** | `curl` و`wget` و`git` و`rsync` و`unzip` و`ripgrep` و`fd-find` و`gawk` و`bc` و`tree` و`which` و`lsof` و`htop` و`jq` و`iproute2` و`procps` و`gcloud CLI` |
-| **Python 3.12** | `numpy` و`pandas` و`requests` و`google-genai` و`beautifulsoup4` و`pyyaml` و`ast-grep-cli` |
-| **Node.js 22** | `create-next-app` و`create-vite` و`typescript` |
+| **UNIX 도구** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
+| **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## إعدادات الشبكة
+## 네트워크 구성
 
-تتضمّن البيئات تلقائيًا إمكانية الوصول إلى الشبكة الصادرة بدون أي قيود. استخدِم الحقل `network` لحظر الزيارات الصادرة إلى نطاقات معيّنة. تحدّد كل قاعدة `domain` وكائن `transform` اختياريًا لإضافة عناوين إلى الطلبات المطابقة. يمكن أن تكون هذه العناوين فريدة لكل تفاعل، ويمكنك تعديلها للبيئة نفسها.
+기본적으로 환경에는 무제한 아웃바운드 네트워크 액세스 권한이 있습니다. `network` 필드를 사용하여 아웃바운드 트래픽을 특정 도메인으로 제한합니다. 각 규칙은 일치하는 요청에 헤더를 삽입할 `domain` 및 선택적 `transform` 객체를 지정합니다. 이러한 헤더는 상호작용마다 고유할 수 있으며 동일한 환경에 대해 업데이트할 수 있습니다.
 
-| الحقل | النوع | الوصف |
+| 필드 | 유형 | 설명 |
 | --- | --- | --- |
-| `domain` | `string` | النطاق المطلوب مطابقته استخدِم اسم مضيف مطابقًا أو `*` لجميع النطاقات. |
-| `transform` | `object` | كائن يحتوي على أزواج مفتاح/قيمة مسطّحة تمثّل العناوين المطلوب إضافتها إلى الطلبات المطابقة، مثلاً `{"Authorization": "Bearer ..."}`. |
+| `domain` | `string` | 일치시킬 도메인입니다. 정확한 호스트 이름 또는 모든 도메인에 `*`를 사용합니다. |
+| `transform` | `object` | 일치하는 요청에 삽입할 헤더를 나타내는 평면 키-값 쌍이 포함된 객체입니다(예: `{"Authorization": "Bearer ..."}`). |
 
 ### Python
 
@@ -733,15 +733,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-عند ضبط قائمة مسموح بها، لا يُسمح إلا بالطلبات الموجّهة إلى النطاقات المُدرَجة بشكلٍ صريح. يمكنك استخدام أحرف البدل لمطابقة النطاقات الفرعية (مثلاً، `{"domain":
-"*.example.com"}`)، ولكن يُرجى العِلم أنّ ذلك لا يطابق النطاق الرئيسي
-`example.com`، الذي يجب إضافته بشكلٍ منفصل. للسماح بجميع الزيارات الأخرى، مثل
-توجيه النطاقات غير المُدرَجة بدون إضافة عناوين، أضِف `{"domain": "*"}` كإدخال
-شامل.
+허용 목록이 설정되면 명시적으로 나열된 도메인에 대한 요청만 허용됩니다. 와일드 카드를 사용하여 하위 도메인을 일치시킬 수 있지만 (예: `{"domain":
+"*.example.com"}`), 루트 도메인
+`example.com`은 별도로 추가해야 합니다. 삽입된 헤더 없이 나열되지 않은 도메인 라우팅과 같은 다른 모든 트래픽을 허용하려면 `{"domain": "*"}`을
+캐치올 항목으로 추가합니다.
 
-### بيانات الاعتماد
+### 사용자 인증 정보
 
-يمكنك إضافة بيانات اعتماد ليستخدمها وكيلك عن طريق إضافة عمليات تحويل العناوين. يتم إدخال بيانات الاعتماد في عناوين HTTP المعنيّة من خلال وكيل الخروج، ولا يتم عرضها مطلقًا داخل صندوق الحماية كمتغيّرات بيئية أو ملفات.
+헤더 변환을 추가하여 에이전트가 사용할 사용자 인증 정보를 추가할 수 있습니다. 사용자 인증 정보는 이그레스 프록시에 의해 각 HTTP 헤더에 삽입되며 샌드박스 내에서 환경 변수 또는 파일로 노출되지 않습니다.
 
 ### Python
 
@@ -835,9 +834,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### إيقاف إمكانية الوصول إلى الشبكة
+### 네트워크 액세스 사용 중지
 
-لحظر جميع إمكانية الوصول إلى الشبكة الصادرة، اضبط `network` على `disabled`:
+모든 아웃바운드 네트워크 액세스를 차단하려면 `network`를 `disabled`로 설정합니다.
 
 ### Python
 
@@ -894,21 +893,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## دورة حياة البيئة
+## 환경 수명 주기
 
-تتّبِع البيئات دورة الحياة التالية:
+환경은 다음 수명 주기를 따릅니다.
 
-| الحالة | السلوك |
+| 주 | 행동 |
 | --- | --- |
-| **تم الإنشاء** | يتم توفيرها عندما يحدّد أحد التفاعلات `environment: "remote"` أو كائن إعداد. |
-| **نشطة** | تكون قيد التشغيل أثناء تقدّم التفاعل. |
-| **غير مستخدَم من قِبل أي برنامج حاليًا** | يتم أخذ لقطة تلقائية وإيقافها بعد 15 دقيقة من عدم النشاط. |
-| **بلا إنترنت** | يتم الاحتفاظ بها لمدة 7 أيام منذ آخر نشاط. يمكن استئنافها عن طريق تمرير رقم تعريفها. |
-| **تم الحذف** | تمت إزالتها من النظام. |
+| **생성 시간** | 상호작용에서 `environment: "remote"` 또는 구성 객체를 지정할 때 프로비저닝됩니다. |
+| **활성** | 상호작용이 진행되는 동안 실행됩니다. |
+| **유휴** | 15분 동안 활동이 없으면 자동 스냅샷이 생성되고 중지됩니다. |
+| **오프라인** | 마지막 활성 후 7일 동안 보관됩니다. ID를 전달하여 재개할 수 있습니다. |
+| **삭제됨** | 시스템에서 삭제되었습니다. |
 
-## تنزيل الملفات من البيئة
+## 환경에서 파일 다운로드
 
-ينشئ الوكيل ملفات داخل صندوق الحماية أثناء التنفيذ. يمكنك تنزيل لقطة البيئة الكاملة كملف tar باستخدام Files API:
+에이전트는 실행 중에 샌드박스 내에 파일을 만듭니다. Files API를 사용하여 전체 환경 스냅샷을 tar 파일로 다운로드할 수 있습니다.
 
 ### Python
 
@@ -1004,41 +1003,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   -o snapshot.tar
 ```
 
-## الأسعار والمراجع
+## 가격 및 리소스
 
-تعمل كل بيئة مع تخصيصات موارد ثابتة:
+각 환경은 고정 리소스 할당으로 실행됩니다.
 
-| المورد | القيمة |
+| 리소스 | 값 |
 | --- | --- |
-| **وحدة المعالجة المركزية** | 4 أنوية |
-| **الذاكرة** | 16 غيغابايت |
+| **CPU** | 4코어 |
+| **메모리** | 16 GB |
 
-**لا يتم تحصيل رسوم** مقابل حوسبة البيئة (وحدة المعالجة المركزية والذاكرة وتنفيذ صندوق الحماية) خلال فترة المعاينة. راجِع
-[الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#pricing-for-agents) لمعرفة
-تكاليف الرموز المميّزة للوكيل.
+환경 컴퓨팅 (CPU, 메모리, 샌드박스 실행)은 프리뷰 기간 동안 **청구되지 않습니다**. 에이전트 토큰 비용은
+[가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing-for-agents)을
+참조하세요.
 
-## القيود
+## 제한사항
 
-- **حالة المعاينة:** البيئات والوكلاء المُدارون في مرحلة المعاينة. قد تتغيّر الميزات والمخططات.
-- **حجم المصدر المضمّن:** يقتصر حجم المصادر المضمّنة على 1 ميغابايت لكل ملف، و2 ميغابايت إجمالاً لجميع الملفات.
-- **حجم المصدر**: يقتصر حجم مستودعات Git على 500 ميغابايت ومستودعات Cloud Storage على 2 غيغابايت.
-- **بدء تشغيل البيئة:** يستغرق توفير بيئة جديدة ما يصل إلى 5 ثوانٍ تقريبًا. قد يؤدي استخدام مستودعات مصادر كبيرة إلى زيادة هذا الوقت.
-- **تنسيقات الملفات المتوافقة:** يقتصر الوكيل حاليًا على قراءة الملفات النصية وملفات الصور. ولا تتوفّر بعد إمكانية قراءة الملفات الثنائية.
-- **لا يمكن الربط من الجذر:** لا يمكنك ضبط الجذر (`/`) كهدف عند إضافة مصدر مخصّص، ويجب دائمًا تحديد دليل فرعي.
+- **프리뷰 상태:** 환경 및 관리형 에이전트는 프리뷰 버전입니다. 기능 및 스키마는 변경될 수 있습니다.
+- **인라인 소스 크기:** 인라인 소스는 파일당 1MB, 모든 파일에서 총 2MB로 제한됩니다.
+- **소스 크기**: Git 저장소는 500MB로 제한되고 Cloud Storage 저장소는 2GB로 제한됩니다.
+- **환경 시작:** 새 환경을 프로비저닝하는 데 최대 5초가 걸립니다. 소스 저장소의 크기가 크면 이 시간이 늘어날 수 있습니다.
+- **파일 지원:** 에이전트는 현재 텍스트 및 이미지 파일 읽기로 제한됩니다. 바이너리 파일 지원은 아직 제공되지 않습니다.
+- **루트에서 마운트 안 됨:** 커스텀 소스를 추가할 때는 루트 (`/`)를 대상으로 설정할 수 없으며 항상 하위 디렉터리를 지정해야 합니다.
 
-## الخطوات التالية
+## 다음 단계
 
-- [نظرة عامة على الوكلاء](https://ai.google.dev/gemini-api/docs/agents?hl=ar): تعرَّف على المفاهيم الأساسية للوكلاء المُدارين.
-- [دليل البدء السريع](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar): ابدأ في إنشاء محادثات متعددة الأدوار وبث المحتوى.
-- [وكيل Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar): استكشِف الإمكانات والأدوات والأسعار للوكيل التلقائي.
-- [إنشاء وكلاء مخصّصين](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ar): حدِّد الوكلاء الخاصين بك باستخدام `AGENTS.md` و`SKILL.md`.
+- [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko): 관리형 에이전트의 핵심 개념에 대해 알아봅니다.
+- [빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko): 멀티턴 대화 및 스트리밍으로 빌드를 시작합니다.
+- [Antigravity 에이전트](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko): 기본 에이전트의 기능, 도구, 가격 책정을 살펴봅니다.
+- [커스텀 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): `AGENTS.md` 및 `SKILL.md`를 사용하여 자체 에이전트를 정의합니다.
 
-إرسال ملاحظات
+의견 보내기
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-تاريخ التعديل الأخير: 2026-05-20 (حسب التوقيت العالمي المتفَّق عليه)
+최종 업데이트: 2026-05-20(UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+의견을 전달하고 싶나요?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-20 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-20(UTC)"],[],[]]

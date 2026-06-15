@@ -1,37 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=th
-fetched_at: 2026-06-08T05:39:21.889405+00:00
-title: "\u0e22\u0e49\u0e32\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e44\u0e1b\u0e22\u0e31\u0e07 Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=es-419
+fetched_at: 2026-06-15T06:30:16.482628+00:00
+title: "Migra al SDK de IA generativa de Google \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-# ย้ายข้อมูลไปยัง Google GenAI SDK
+# Migra al SDK de IA generativa de Google
 
-เราได้เปิดตัวชุดไลบรารีใหม่ที่เรียกว่า [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=th) ตั้งแต่การเปิดตัว Gemini 2.0 ในช่วงปลายปี 2024
-ซึ่งมีประสบการณ์การใช้งานที่ดียิ่งขึ้นสำหรับนักพัฒนาแอปผ่าน
-สถาปัตยกรรมไคลเอ็นต์ที่[อัปเดต](https://ai.google.dev/gemini-api/docs/migrate?hl=th#client) และ
-[ช่วยลดความซับซ้อนในการเปลี่ยนผ่าน](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=th)ระหว่างเวิร์กโฟลว์ของนักพัฒนาแอป
-และองค์กร
+A partir del lanzamiento de Gemini 2.0 a fines de 2024, presentamos un nuevo conjunto de
+bibliotecas llamado el [SDK de GenAI de Google](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419). Ofrece
+una experiencia mejorada para desarrolladores a través de
+una [arquitectura de cliente actualizada](https://ai.google.dev/gemini-api/docs/migrate?hl=es-419#client) y
+[simplifica la transición](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=es-419) entre los flujos de trabajo para desarrolladores
+y empresas.
 
-[ตอนนี้ Google GenAI SDK พร้อมให้บริการแก่ผู้ใช้ทั่วไป (GA) ในทุกแพลตฟอร์มที่รองรับ](https://ai.google.dev/gemini-api/docs/libraries?hl=th#new-libraries) หากคุณใช้[ไลบรารีเดิม](https://ai.google.dev/gemini-api/docs/libraries?hl=th#previous-sdks)ของเรา เราขอแนะนำอย่างยิ่งให้
-ย้ายข้อมูล
+El SDK de GenAI de Google ahora está disponible de forma [general](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#new-libraries) en todas las plataformas compatibles. Si usas una de nuestras [bibliotecas heredadas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#previous-sdks), te recomendamos que
+migres.
 
-คู่มือนี้มีตัวอย่างโค้ดที่ย้ายข้อมูลแล้วทั้งก่อนและหลังเพื่อช่วยให้คุณเริ่มต้นใช้งานได้
+En esta guía, se proporcionan ejemplos de código migrado antes y después para ayudarte a comenzar.
 
-## การติดตั้ง
+## Instalación
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -51,7 +52,7 @@ npm install @google/generative-ai
 go get github.com/google/generative-ai-go
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -71,16 +72,16 @@ npm install @google/genai
 go get google.golang.org/genai
 ```
 
-## การเข้าถึง API
+## Acceso a la API
 
-SDK เก่าจะจัดการไคลเอ็นต์ API เบื้องหลังโดยปริยายโดยใช้วิธีการเฉพาะกิจต่างๆ ซึ่งทำให้จัดการไคลเอ็นต์และข้อมูลเข้าสู่ระบบได้ยาก
-ตอนนี้คุณโต้ตอบผ่านออบเจ็กต์ `Client` ส่วนกลาง ออบเจ็กต์ `Client` นี้ทำหน้าที่เป็นจุดแรกเข้าเดียวสำหรับบริการ API ต่างๆ (เช่น `models`, `chats`, `files`, `tunings`) ซึ่งส่งเสริมความสอดคล้องและลดความซับซ้อนในการจัดการข้อมูลเข้าสู่ระบบและการกำหนดค่าในการเรียก API ต่างๆ
+El SDK anterior controlaba de forma implícita el cliente de la API en segundo plano con una variedad de métodos ad hoc. Esto dificultaba la administración del cliente y las credenciales.
+Ahora, interactúas a través de un objeto `Client` central. Este objeto `Client` actúa como un único punto de entrada para varios servicios de la API (p.ej., `models`, `chats`, `files`, `tunings`), lo que promueve la coherencia y simplifica la administración de credenciales y configuración en diferentes llamadas a la API.
 
-**ก่อน (การเข้าถึง API ที่รวมศูนย์น้อยกว่า)**
+**Antes (acceso a la API menos centralizado)**
 
 ### Python
 
-SDK เก่าไม่ได้ใช้ออบเจ็กต์ไคลเอ็นต์ระดับบนสุดอย่างชัดเจนสำหรับการเรียก API ส่วนใหญ่ คุณจะต้องสร้างอินสแตนซ์และโต้ตอบกับออบเจ็กต์ `GenerativeModel` โดยตรง
+El SDK anterior no usaba de forma explícita un objeto cliente de nivel superior para la mayoría de las llamadas a la API. Creabas instancias de objetos `GenerativeModel` y interactuabas con ellos directamente.
 
 ```
 import google.generativeai as genai
@@ -93,7 +94,7 @@ chat = model.start_chat(...)
 
 ### JavaScript
 
-แม้ว่า `GoogleGenerativeAI` จะเป็นจุดศูนย์กลางสำหรับโมเดลและการแชท แต่ฟังก์ชันการทำงานอื่นๆ เช่น การจัดการไฟล์และการจัดการแคช มักจะต้องนำเข้าและสร้างอินสแตนซ์ของคลาสไคลเอ็นต์ที่แยกกันโดยสิ้นเชิง
+Si bien `GoogleGenerativeAI` era un punto central para los modelos y el chat, otras funcionalidades, como la administración de archivos y caché, a menudo requerían importar y crear instancias de clases de cliente completamente separadas.
 
 ```
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -115,7 +116,7 @@ const cache = await cacheManager.create(...);
 
 ### Go
 
-ฟังก์ชัน `genai.NewClient` สร้างไคลเอ็นต์ แต่โดยทั่วไปแล้วการดำเนินการกับโมเดล Generative จะเรียกใช้ในอินสแตนซ์ `GenerativeModel` ที่แยกกันซึ่งได้จากไคลเอ็นต์นี้ คุณอาจเข้าถึงบริการอื่นๆ ผ่านแพ็กเกจหรือรูปแบบที่แตกต่างกัน
+La función `genai.NewClient` creó un cliente, pero las operaciones del modelo generativo se llamaban, por lo general, en una instancia `GenerativeModel` separada obtenida de este cliente. Se podía acceder a otros servicios a través de paquetes o patrones distintos.
 
 ```
 import (
@@ -136,7 +137,7 @@ cs := model.StartChat()
 uploadedFile, err := fileClient.UploadFile(...)
 ```
 
-**หลัง (ออบเจ็กต์ไคลเอ็นต์ที่รวมศูนย์)**
+**Después (objeto cliente centralizado)**
 
 ### Python
 
@@ -183,17 +184,17 @@ uploadedFile, err := client.Files.Upload(...)
 tuningJob, err := client.Tunings.Tune(...)
 ```
 
-## การตรวจสอบสิทธิ์
+## Autenticación
 
-ทั้งไลบรารีเดิมและไลบรารีใหม่จะตรวจสอบสิทธิ์โดยใช้คีย์ API คุณสามารถ
-[สร้าง](https://aistudio.google.com/app/apikey?hl=th)คีย์ API ใน Google AI
-Studio ได้
+Las bibliotecas heredadas y nuevas se autentican con claves de API. Puedes
+[crear](https://aistudio.google.com/apikey?hl=es-419) tu clave de API en Google AI
+Studio.
 
-**ก่อน**
+**Antes**
 
 ### Python
 
-SDK เก่าจะจัดการออบเจ็กต์ไคลเอ็นต์ API โดยปริยาย
+El SDK anterior controlaba de forma implícita el objeto cliente de la API.
 
 ```
 import google.generativeai as genai
@@ -211,7 +212,7 @@ const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 
 ### Go
 
-นำเข้าไลบรารีของ Google ดังนี้
+Importa las bibliotecas de Google:
 
 ```
 import (
@@ -220,18 +221,18 @@ import (
 )
 ```
 
-สร้างไคลเอ็นต์ดังนี้
+Crea el cliente:
 
 ```
 client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
-เมื่อใช้ Google GenAI SDK คุณจะต้องสร้างไคลเอ็นต์ API ก่อน ซึ่งจะใช้ในการเรียก API
-SDK ใหม่จะดึงคีย์ API จากตัวแปรสภาพแวดล้อม `GEMINI_API_KEY` หากคุณไม่ได้ส่งคีย์ไปยังไคลเอ็นต์
+Con el SDK de GenAI de Google, primero creas un cliente de la API, que se usa para llamar a la API.
+El nuevo SDK tomará tu clave de API de las variables de entorno `GEMINI_API_KEY` si no pasas una al cliente.
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
@@ -255,13 +256,13 @@ const ai = new GoogleGenAI({apiKey: "GEMINI_API_KEY"});
 
 ### Go
 
-นำเข้าไลบรารี GenAI ดังนี้
+Importa la biblioteca de GenAI:
 
 ```
 import "google.golang.org/genai"
 ```
 
-สร้างไคลเอ็นต์ดังนี้
+Crea el cliente:
 
 ```
 client, err := genai.NewClient(ctx, &genai.ClientConfig{
@@ -269,15 +270,15 @@ client, err := genai.NewClient(ctx, &genai.ClientConfig{
 })
 ```
 
-## สร้างเนื้อหา
+## Generar contenido,
 
-### ข้อความ
+### Texto
 
-**ก่อน**
+**Antes**
 
 ### Python
 
-ก่อนหน้านี้ไม่มีออบเจ็กต์ไคลเอ็นต์ คุณเข้าถึง API ผ่านออบเจ็กต์ `GenerativeModel` โดยตรง
+Anteriormente, no había objetos cliente, y accedías a las APIs directamente a través de objetos `GenerativeModel`.
 
 ```
 import google.generativeai as genai
@@ -321,11 +322,11 @@ if err != nil {
 printResponse(resp) // utility for printing response parts
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
-Google GenAI SDK ใหม่ให้สิทธิ์เข้าถึงเมธอด API ทั้งหมดผ่านออบเจ็กต์ `Client` ยกเว้นกรณีพิเศษที่เก็บสถานะ (`chat` และ `session` ของ Live API) ฟังก์ชันเหล่านี้ทั้งหมดเป็นฟังก์ชันที่ไม่เก็บสถานะ ออบเจ็กต์ที่แสดงผลจะเป็นคลาส `pydantic` เพื่อความสะดวกและสม่ำเสมอ
+El nuevo SDK de GenAI de Google proporciona acceso a todos los métodos de la API a través del objeto `Client`. A excepción de algunos casos especiales con estado (`chat` y `session` de la API en vivo), todas son funciones sin estado. Para mayor utilidad y uniformidad, los objetos que se muestran son clases `pydantic`.
 
 ```
 from google import genai
@@ -371,9 +372,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### รูปภาพ
+### Imagen
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -443,11 +444,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
-SDK ใหม่มีฟีเจอร์อำนวยความสะดวกมากมายเช่นเดียวกับ SDK เดิม เช่น ระบบจะแปลงออบเจ็กต์ `PIL.Image` โดยอัตโนมัติ
+Muchas de las mismas funciones de conveniencia existen en el nuevo SDK. Por ejemplo, los objetos `PIL.Image` se convierten automáticamente.
 
 ```
 from google import genai
@@ -517,9 +518,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### สตรีมมิง
+### Transmisión
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -576,7 +577,7 @@ for {
 }
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -632,9 +633,9 @@ for result, err := range client.Models.GenerateContentStream(
 }
 ```
 
-## การกำหนดค่า
+## Configuración
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -701,11 +702,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
-สำหรับเมธอดทั้งหมดใน SDK ใหม่ ระบบจะระบุอาร์กิวเมนต์ที่จำเป็นเป็นอาร์กิวเมนต์คีย์เวิร์ด และระบุอินพุตที่ไม่บังคับทั้งหมดในอาร์กิวเมนต์ `config` คุณระบุอาร์กิวเมนต์การกำหนดค่าเป็นพจนานุกรม Python หรือคลาส `Config` ในเนมสเปซ `google.genai.types` ก็ได้ คำจำกัดความทั้งหมดในโมดูล `types` จะเป็นคลาส `pydantic` เพื่อความสะดวกและสม่ำเสมอ
+Para todos los métodos del nuevo SDK, los argumentos obligatorios se proporcionan como argumentos de palabra clave. Todas las entradas opcionales se proporcionan en el argumento `config`. Los argumentos de configuración se pueden especificar como diccionarios de Python o clases `Config` en el espacio de nombres `google.genai.types`. Para mayor utilidad y uniformidad, todas las definiciones dentro del módulo `types` son clases `pydantic`.
 
 ```
 from google import genai
@@ -781,11 +782,11 @@ if err != nil {
 debugPrint(result) // utility for printing response
 ```
 
-## การตั้งค่าความปลอดภัย
+## Configuración de seguridad
 
-สร้างการตอบกลับด้วยการตั้งค่าความปลอดภัยดังนี้
+Genera una respuesta con la configuración de seguridad:
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -833,7 +834,7 @@ try {
 }
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -885,9 +886,9 @@ console.log("Finish reason:", response.candidates[0].finishReason);
 console.log("Safety ratings:", response.candidates[0].safetyRatings);
 ```
 
-## Async
+## Asíncrono
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -900,12 +901,12 @@ response = model.generate_content_async(
 )
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
-หากต้องการใช้ SDK ใหม่กับ `asyncio` จะมีการติดตั้งใช้งาน `async`
-แยกกันสำหรับทุกเมธอดภายใต้ `client.aio`
+Para usar el nuevo SDK con `asyncio`, hay una implementación `async`
+separada de cada método en `client.aio`.
 
 ```
 from google import genai
@@ -918,11 +919,11 @@ response = await client.aio.models.generate_content(
 )
 ```
 
-## แชท
+## Chat
 
-เริ่มแชทและส่งข้อความไปยังโมเดลดังนี้
+Inicia un chat y envía un mensaje al modelo:
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -998,7 +999,7 @@ if err != nil {
 printResponse(res) // utility for printing the response
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1073,9 +1074,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-## การเรียกใช้ฟังก์ชัน
+## Llamada a función
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1102,11 +1103,11 @@ response = model.generate_content("What is the weather in San Francisco?")
 function_call = response.candidates[0].parts[0].function_call
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
-ใน SDK ใหม่ การเรียกใช้ฟังก์ชันอัตโนมัติจะเป็นค่าเริ่มต้น ซึ่งคุณจะปิดใช้ได้ดังนี้
+En el nuevo SDK, la llamada a función automática es el valor predeterminado. Aquí, la inhabilitas.
 
 ```
 from google import genai
@@ -1136,13 +1137,13 @@ response = client.models.generate_content(
 function_call = response.candidates[0].content.parts[0].function_call
 ```
 
-### การเรียกใช้ฟังก์ชันอัตโนมัติ
+### Llamada a función automática
 
-**ก่อน**
+**Antes**
 
 ### Python
 
-SDK เก่ารองรับการเรียกใช้ฟังก์ชันอัตโนมัติในการแชทเท่านั้น ใน SDK ใหม่ ลักษณะการทำงานนี้จะเป็นค่าเริ่มต้นใน `generate_content`
+El SDK anterior solo admite la llamada a función automática en el chat. En el nuevo SDK, este es el comportamiento predeterminado en `generate_content`.
 
 ```
 import google.generativeai as genai
@@ -1160,7 +1161,7 @@ chat = model.start_chat(
 result = chat.send_message("What is the weather in San Francisco?")
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1181,11 +1182,11 @@ response = client.models.generate_content(
 )
 ```
 
-## การดำเนินการกับโค้ด
+## Ejecución de código
 
-การดำเนินการกับโค้ดเป็นเครื่องมือที่ช่วยให้โมเดลสร้างโค้ด Python เรียกใช้โค้ด และแสดงผลลัพธ์
+La ejecución de código es una herramienta que permite que el modelo genere código de Python, lo ejecute y muestre el resultado.
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1222,7 +1223,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1266,13 +1267,13 @@ console.log("-".repeat(80));
 console.log("\n", response.text);
 ```
 
-## การเชื่อมต่อแหล่งข้อมูลของ Search
+## Fundamentación con la Búsqueda
 
-`GoogleSearch` (Gemini>=2.0) และ `GoogleSearchRetrieval` (Gemini < 2.0) เป็น
-เครื่องมือที่ช่วยให้โมเดลดึงข้อมูลเว็บสาธารณะเพื่อเชื่อมต่อแหล่งข้อมูล ซึ่งขับเคลื่อนโดย
-Google
+`GoogleSearch` (Gemini>=2.0) y `GoogleSearchRetrieval` (Gemini < 2.0) son
+herramientas que permiten que el modelo recupere datos web públicos para la fundamentación, con tecnología de
+Google.
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1286,7 +1287,7 @@ response = model.generate_content(
 )
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1309,17 +1310,17 @@ response = client.models.generate_content(
 )
 ```
 
-## การตอบสนองของ JSON
+## Respuesta JSON
 
-สร้างคำตอบในรูปแบบ JSON ดังนี้
+Genera respuestas en formato JSON.
 
-**ก่อน**
+**Antes**
 
 ### Python
 
-เมื่อระบุ `response_schema` และตั้งค่า
-`response_mime_type="application/json"` ผู้ใช้จะจำกัดให้โมเดล
-สร้างการตอบกลับ `JSON` ตามโครงสร้างที่กำหนดได้
+Si especifican un `response_schema` y establecen
+`response_mime_type="application/json"`, los usuarios pueden restringir el modelo para que
+produzca una respuesta `JSON` que siga una estructura determinada.
 
 ```
 import google.generativeai as genai
@@ -1382,11 +1383,11 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
-SDK ใหม่ใช้คลาส `pydantic` เพื่อระบุสคีมา (แม้ว่าคุณจะส่ง `genai.types.Schema` หรือ `dict` ที่เทียบเท่ากันได้) SDK จะแยกวิเคราะห์ JSON ที่แสดงผลและแสดงผลลัพธ์ใน `response.parsed` หากทำได้ หากคุณระบุคลาส `pydantic` เป็นสคีมา SDK จะแปลง `JSON` นั้นเป็นอินสแตนซ์ของคลาส
+El nuevo SDK usa clases `pydantic` para proporcionar el esquema (aunque puedes pasar un `genai.types.Schema` o un `dict` equivalente). Cuando sea posible, el SDK analizará el JSON que se muestra y mostrará el resultado en `response.parsed`. Si proporcionaste una clase `pydantic` como esquema, el SDK convertirá ese `JSON` en una instancia de la clase.
 
 ```
 from google import genai
@@ -1443,13 +1444,13 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## ไฟล์
+## Archivos
 
-### อัปโหลด
+### Subir
 
-อัปโหลดไฟล์ดังนี้
+Sube un archivo:
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1473,7 +1474,7 @@ response = model.generate_content([
 print(response.text)
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1501,11 +1502,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### แสดงรายการและรับ
+### Obtener y generar listas
 
-แสดงรายการไฟล์ที่อัปโหลดและรับไฟล์ที่อัปโหลดด้วยชื่อไฟล์ดังนี้
+Genera una lista de los archivos subidos y obtén un archivo subido con un nombre de archivo:
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1518,7 +1519,7 @@ for file in genai.list_files():
 file = genai.get_file(name=file.name)
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1532,11 +1533,11 @@ for file in client.files.list():
 file = client.files.get(name=file.name)
 ```
 
-### ลบ
+### Borrar
 
-ลบไฟล์ดังนี้
+Borra un archivo:
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1550,7 +1551,7 @@ dummy_file = genai.upload_file(path='dummy.txt')
 file = genai.delete_file(name=dummy_file.name)
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1566,11 +1567,11 @@ dummy_file = client.files.upload(file='dummy.txt')
 response = client.files.delete(name=dummy_file.name)
 ```
 
-## การแคชบริบท
+## El almacenamiento de contexto en caché
 
-การแคชบริบทช่วยให้ผู้ใช้ส่งเนื้อหาไปยังโมเดลได้ครั้งเดียว แคชโทเค็นอินพุต แล้วอ้างอิงโทเค็นที่แคชไว้ในการเรียกครั้งต่อๆ ไปเพื่อลดค่าใช้จ่าย
+El almacenamiento de contexto en caché permite que el usuario pase el contenido al modelo una vez, almacene en caché los tokens de entrada y, luego, haga referencia a los tokens almacenados en caché en llamadas posteriores para reducir el costo.
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1642,7 +1643,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1724,11 +1725,11 @@ const response = await ai.models.generateContent({
 console.log("Response text:", response.text);
 ```
 
-## นับโทเค็น
+## Cuenta tokens
 
-นับจำนวนโทเค็นในคำขอดังนี้
+Cuenta la cantidad de tokens en una solicitud.
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1770,7 +1771,7 @@ response = model.count_tokens(
  // { promptTokenCount: 11, candidatesTokenCount: 124, totalTokenCount: 135 }
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1805,11 +1806,11 @@ const generateResponse = await ai.models.generateContent({
 console.log(generateResponse.usageMetadata);
 ```
 
-## สร้างรูปภาพ
+## Generar imágenes
 
-สร้างรูปภาพดังนี้
+Genera imágenes:
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1828,7 +1829,7 @@ gen_images = imagen.generate_images(
 )
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1853,11 +1854,11 @@ for n, image in enumerate(gen_images.generated_images):
         image.image.image_bytes)
 ```
 
-## ฝังเนื้อหา
+## Incorpora contenido
 
-สร้างการฝังเนื้อหาดังนี้
+Genera incorporaciones de contenido.
 
-**ก่อน**
+**Antes**
 
 ### Python
 
@@ -1885,7 +1886,7 @@ const result = await model.embedContent("Hello world!");
 console.log(result.embedding);
 ```
 
-**หลัง**
+**Después**
 
 ### Python
 
@@ -1915,12 +1916,12 @@ const result = await ai.models.embedContent({
 console.log(result.embeddings);
 ```
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-อัปเดตล่าสุด 2026-06-01 UTC
+Última actualización: 2026-06-10 (UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+¿Quieres brindar más información?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-01 UTC"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-10 (UTC)"],[],[]]

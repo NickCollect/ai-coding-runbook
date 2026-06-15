@@ -1,43 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=zh-TW
-fetched_at: 2026-06-08T05:30:10.773024+00:00
-title: "Interactions API\uff1a\u91cd\u5927\u8b8a\u66f4\u9077\u79fb\u6307\u5357 (2026 \u5e74 5 \u6708) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi
+fetched_at: 2026-06-15T06:22:16.284542+00:00
+title: "Interactions API: H\u01b0\u1edbng d\u1eabn di chuy\u1ec3n c\u00e1c thay \u0111\u1ed5i c\u00f3 th\u1ec3 g\u00e2y ra l\u1ed7i (th\u00e1ng 5 n\u0103m 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-# Interactions API：重大變更遷移指南 (2026 年 5 月)
+# Interactions API: Hướng dẫn di chuyển các thay đổi có thể gây ra lỗi (tháng 5 năm 2026)
 
-`v1beta` Interactions API 導入破壞性變更，重新架構 API 形狀，以支援飛行中導引和非同步工具呼叫等未來能力。本頁說明異動內容，並提供異動前後的程式碼範例，協助您完成遷移。變更分為兩類：
+API `v1beta` Interactions đang giới thiệu các thay đổi có thể gây lỗi, giúp tái cấu trúc hình dạng API để hỗ trợ các chức năng trong tương lai như chỉ đạo giữa chuyến bay và các lệnh gọi công cụ không đồng bộ. Trang này giải thích những thay đổi và cung cấp các ví dụ về mã trước và sau để giúp bạn di chuyển. Có 2 danh mục thay đổi:
 
-1. [**步驟結構定義**](#steps-schema)：新的 `steps` 陣列會取代 `outputs` 陣列，提供每個互動回合的結構化時間軸。
-2. [**輸出格式設定**](#output-format-config)：新的多型 `response_format` 會整合所有輸出格式控制項，並移除 `response_mime_type`。
+1. [**Giản đồ bước**](#steps-schema): Một mảng `steps` mới sẽ thay thế mảng `outputs`, cung cấp một dòng thời gian có cấu trúc của từng lượt tương tác.
+2. [**Cấu hình định dạng đầu ra**](#output-format-config): `response_format` đa hình mới sẽ hợp nhất tất cả các chế độ kiểm soát định dạng đầu ra và xoá `response_mime_type`.
 
-請按照「[如何遷移至新版結構定義](#how-to-migrate)」一文中的步驟，更新整合服務。
+Làm theo các bước trong phần [Cách di chuyển sang giản đồ mới](#how-to-migrate) để cập nhật quy trình tích hợp.
 
-## 核心異動：`outputs` 改為 `steps`
+## Thay đổi cốt lõi: `outputs` thành `steps`
 
-新結構定義會將 `outputs` 陣列替換為 `steps` 陣列。
+Lược đồ mới sẽ thay thế mảng `outputs` bằng mảng `steps`.
 
-- **舊版**：回覆會傳回平面 `outputs` 陣列，只包含模型生成的內容。
-- **新結構定義**：回覆會傳回 `steps` 陣列，其中包含具有型別鑑別器的結構化步驟。
+- **Cũ**: Các phản hồi trả về một mảng `outputs` phẳng chỉ chứa nội dung do mô hình tạo.
+- **Lược đồ mới**: Các phản hồi trả về một mảng `steps` chứa các bước có cấu trúc với bộ phân biệt loại.
 
-`POST /interactions` 只會傳回輸出步驟。`GET /interactions/{id}`
-會傳回完整步驟時間軸，包括初始 `user_input` 步驟。
+`POST /interactions` chỉ trả về các bước đầu ra. `GET /interactions/{id}` trả về toàn bộ dòng thời gian của bước, bao gồm cả bước `user_input` ban đầu.
 
-### 基本輸入/輸出 (一元)
+### Đầu vào/đầu ra cơ bản (đơn vị)
 
-#### 之前 (舊版)
+#### Trước (cũ)
 
 ### Python
 
@@ -89,7 +88,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### 之後 (新結構定義)
+#### Sau (lược đồ mới)
 
 ### Python
 
@@ -116,7 +115,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-[sdk-convenience]：/gemini-api/docs/interactions#convenience-properties
+[sdk-convenience]: /gemini-api/docs/interactions#convenience-properties
 
 ### REST
 
@@ -171,11 +170,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### 函式呼叫
+### Gọi hàm
 
-要求結構維持不變，但回應會以結構化步驟取代平面 `outputs` 內容。
+Cấu trúc yêu cầu vẫn không thay đổi, nhưng phản hồi sẽ thay thế nội dung `outputs` dạng phẳng bằng các bước có cấu trúc.
 
-#### 之前 (舊版)
+#### Trước (cũ)
 
 ### Python
 
@@ -220,7 +219,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### 之後 (新結構定義)
+#### Sau (lược đồ mới)
 
 ### Python
 
@@ -268,11 +267,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### 伺服器端工具
+### Công cụ phía máy chủ
 
-伺服器端工具 (例如 Google 搜尋或程式碼執行) 現在會在 `steps` 陣列中產生特定步驟類型。舊版架構會在 `outputs` 陣列中將這些作業傳回為特定內容類型，新版架構則會將這些作業移至 `steps` 陣列。下列範例使用 Google 搜尋。
+Các công cụ phía máy chủ (chẳng hạn như Google Tìm kiếm hoặc Thực thi mã) hiện tạo ra các loại bước cụ thể trong mảng `steps`. Mặc dù giản đồ cũ trả về các thao tác này dưới dạng các loại nội dung cụ thể trong mảng `outputs`, nhưng giản đồ mới sẽ di chuyển các thao tác này vào mảng `steps`. Các ví dụ sau đây sử dụng Google Tìm kiếm.
 
-#### 之前 (舊版)
+#### Trước (cũ)
 
 ### Python
 
@@ -346,7 +345,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### 之後 (新結構定義)
+#### Sau (lược đồ mới)
 
 ### Python
 
@@ -430,11 +429,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### 串流
+### Phát trực tiếp
 
-串流會公開新的事件類型：
+Tính năng phát trực tuyến cho thấy các loại sự kiện mới:
 
-#### 新事件類型
+#### Loại sự kiện mới
 
 - `interaction.created`
 - `interaction.completed`
@@ -444,22 +443,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 - `step.delta`
 - `step.stop`
 
-#### 已淘汰的事件類型
+#### Loại sự kiện không còn được dùng
 
-上述新事件會取代下列舊版事件類型：
+Các loại sự kiện cũ sau đây sẽ được thay thế bằng các sự kiện mới được liệt kê ở trên:
 
 - `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
 - `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → 取代為 `interaction.in_progress`、`interaction.requires_action` 等。
+- `interaction.status_update` → được thay thế bằng `interaction.in_progress`, `interaction.requires_action`, v.v.
 
-**串流函式呼叫**：使用串流函式呼叫時，`step.start` 事件會傳送函式名稱，而 `step.delta` 事件會將引數串流為部分 JSON 字串 (使用 `arguments_delta`)。您必須累計這些差異，才能取得完整引數。這與一元呼叫不同，因為您會一次收到完整的函式呼叫物件。
+**Truyền trực tuyến lệnh gọi hàm**: Khi dùng tính năng truyền trực tuyến với lệnh gọi hàm, sự kiện `step.start` sẽ gửi tên hàm và các sự kiện `step.delta` sẽ truyền trực tuyến các đối số dưới dạng chuỗi JSON một phần (bằng cách dùng `arguments_delta`). Bạn phải tích luỹ các phần chênh lệch này để nhận được đầy đủ các đối số. Điều này khác với các lệnh gọi đơn nguyên, trong đó bạn nhận được toàn bộ đối tượng lệnh gọi hàm cùng một lúc.
 
-#### 範例
+#### Ví dụ
 
-##### 之前 (舊版)
+##### Trước (Cũ)
 
 ### Python
 
@@ -526,7 +525,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### 之後 (新結構定義)
+##### Sau (Giản đồ mới)
 
 ### Python
 
@@ -603,29 +602,29 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### 無狀態對話記錄
+### Lịch sử cuộc trò chuyện không trạng thái
 
-如果您在用戶端手動管理對話記錄 (無狀態用途)，就必須更新先前回合的串連方式。
+Nếu quản lý nhật ký trò chuyện theo cách thủ công ở phía máy khách (trường hợp sử dụng không trạng thái), bạn phải cập nhật cách xâu chuỗi các lượt trước đó.
 
-- **舊版**：開發人員通常會從回覆中收集 `outputs` 陣列，並在下一個回合中將其傳回 `input` 欄位。
-- **新架構**：現在您應該從回應中收集 `steps` 陣列，並將其傳遞至下一個要求的 `input` 欄位，將新的使用者輪流轉移附加為 `user_input` 步驟。
+- **Cũ**: Nhà phát triển thường thu thập mảng `outputs` từ các phản hồi và gửi lại trong trường `input` ở lượt tiếp theo.
+- **Lược đồ mới**: Giờ đây, bạn nên thu thập mảng `steps` từ phản hồi và truyền mảng đó vào trường `input` của yêu cầu tiếp theo, đồng thời thêm lượt tương tác mới của người dùng dưới dạng một bước `user_input`.
 
-## 輸出格式設定：`response_format` 變更
+## Cấu hình định dạng đầu ra: Các thay đổi về `response_format`
 
-更新後的 API 會將所有輸出格式控制項整合為統一的多型 `response_format` 欄位。這項做法可集中管理頂層的輸出設定，並讓 `generation_config` 專注於模型行為 (例如溫度參數、Top-P 和思考)。
+API được cập nhật sẽ hợp nhất tất cả các chế độ kiểm soát định dạng đầu ra thành một trường `response_format` đa hình, hợp nhất. Điều này tập trung cấu hình đầu ra ở cấp cao nhất và giữ cho `generation_config` tập trung vào hành vi của mô hình (chẳng hạn như nhiệt độ, top\_p và suy nghĩ).
 
-### 主要異動
+### Thay đổi quan trọng
 
-- **API 會移除 `response_mime_type`。**現在，您可以在 `response_format` 內為每個格式項目指定 MIME 類型。
-- **`response_format` 現在是多型物件 (或陣列)。**每個項目都有 `type` 鑑別器 (`text`、`audio`、`image`) 和類型專屬欄位。如要要求多種輸出模態，請傳遞格式項目的陣列。
-- **`image_config`已從「`generation_config`」移至「`response_format`」。**
-  現在，您可以在 `response_format` 項目中指定圖片輸出設定，例如 `aspect_ratio` 和 `image_size`，並使用 `"type": "image"`。
+- **API sẽ xoá `response_mime_type`.** Giờ đây, bạn chỉ định loại MIME cho mỗi mục định dạng bên trong `response_format`.
+- **`response_format` hiện là một đối tượng (hoặc mảng) đa hình.** Mỗi mục nhập có một thuộc tính phân biệt `type` (`text`, `audio`, `image`) và các trường dành riêng cho từng loại. Để yêu cầu nhiều phương thức đầu ra, hãy truyền một mảng các mục nhập định dạng.
+- **`image_config` di chuyển từ `generation_config` sang `response_format`.**
+  Giờ đây, bạn có thể chỉ định các chế độ cài đặt đầu ra của hình ảnh như `aspect_ratio` và `image_size` trong mục `response_format` bằng `"type": "image"`.
 
-### 結構化輸出內容 (JSON)
+### Đầu ra có cấu trúc (JSON)
 
-新結構定義會移除 `response_mime_type` 欄位。請改為在 `response_format` 物件中指定 MIME 類型和 JSON 結構定義，並使用 `"type": "text"`。
+Giản đồ mới sẽ xoá trường `response_mime_type`. Thay vào đó, hãy chỉ định loại MIME và giản đồ JSON bên trong một đối tượng `response_format` bằng `"type": "text"`.
 
-#### 之前 (舊版)
+#### Trước (cũ)
 
 ### Python
 
@@ -681,7 +680,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### 之後 (新結構定義)
+#### Sau (lược đồ mới)
 
 ### Python
 
@@ -752,11 +751,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### 圖片設定
+### Cấu hình hình ảnh
 
-新結構定義會從 `generation_config` 中移除 `image_config`。您現在可以在 `"type": "image"` 的 `response_format` 項目中指定圖片輸出設定。
+Giản đồ mới sẽ xoá `image_config` khỏi `generation_config`. Giờ đây, bạn chỉ định chế độ cài đặt đầu ra hình ảnh trong một mục `response_format` bằng `"type": "image"`.
 
-#### 之前 (舊版)
+#### Trước (cũ)
 
 ### Python
 
@@ -805,7 +804,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### 之後 (新結構定義)
+#### Sau (lược đồ mới)
 
 ### Python
 
@@ -858,50 +857,50 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-如要要求多種輸出模態 (例如同時輸出文字和音訊)，請將格式項目陣列傳遞至 `response_format`，而非單一物件。
+Để yêu cầu nhiều phương thức đầu ra (ví dụ: cả văn bản và âm thanh), hãy truyền một mảng các mục định dạng đến `response_format` thay vì một đối tượng duy nhất.
 
-## 如何遷移至新結構定義
+## Cách di chuyển sang giản đồ mới
 
-### SDK 使用者
+### Người dùng SDK
 
-升級至最新版 SDK (Python ≥2.0.0、JavaScript ≥2.0.0)。SDK 會自動選擇採用新架構，您只需要更新讀取回應的方式 (請參閱上方的範例)，不必變更任何程式碼。請注意，這些 SDK 版本僅支援新結構定義。在 2026 年 6 月 8 日移除舊版結構定義前，舊版 SDK (Python 1.x.x、JavaScript 1.x.x) 仍可繼續運作。
+Nâng cấp lên phiên bản SDK mới nhất (Python ≥2.0.0, JavaScript ≥2.0.0). SDK sẽ tự động chọn sử dụng giản đồ mới — không cần mã thay đổi ngoài việc cập nhật cách đọc phản hồi (xem ví dụ ở trên). Xin lưu ý rằng chỉ lược đồ mới được hỗ trợ trong các phiên bản SDK này. Các phiên bản SDK cũ (Python 1.x.x, JavaScript 1.x.x) sẽ tiếp tục hoạt động cho đến khi lược đồ cũ bị xoá vào **ngày 8 tháng 6 năm 2026**.
 
-### REST API 使用者
+### Người dùng API REST
 
-在要求中加入 `Api-Revision: 2026-05-20` 標頭，即可立即採用新結構定義。**5 月 26 日**後，所有要求都會預設使用新結構定義。您可以使用 `Api-Revision: 2026-05-07` 暫時停用，但 **6 月 8 日**後，API 就會永久移除舊版結構定義。
+Thêm tiêu đề `Api-Revision: 2026-05-20` vào các yêu cầu của bạn để chọn sử dụng lược đồ mới ngay bây giờ. Sau **ngày 26 tháng 5**, giản đồ mới sẽ trở thành giản đồ mặc định cho tất cả các yêu cầu. Bạn có thể tạm thời chọn không sử dụng `Api-Revision: 2026-05-07` cho đến **ngày 8 tháng 6**. Sau ngày này, API sẽ xoá vĩnh viễn giản đồ cũ.
 
-### 時間軸
+### Dòng thời gian
 
-| 日期 | 階段 | SDK 使用者 | REST API 使用者 |
+| Ngày | Pha ban đầu | Người dùng SDK | Người dùng API REST |
 | --- | --- | --- | --- |
-| **5 月 7 日** | 啟用 | 推出新版 SDK (Python ≥2.0.0、JS ≥2.0.0)。升級即可自動取得新結構定義。 | 新增 `Api-Revision: 2026-05-20` 標頭即可選擇加入。預設值仍為舊版。 |
-| **5 月 26 日** | 預設翻轉 | 如果已升級，則無須採取任何行動。舊版 SDK (Python 1.x.x、JS 1.x.x) 仍可運作，但會傳回舊版的回覆。 | 新結構定義現在為預設值。傳送 `Api-Revision: 2026-05-07` 標頭即可停用。 |
-| **6 月 8 日** | 日落 | Python 1.x.x 和 JS 1.x.x SDK 版本會中斷 Interactions API 呼叫。 | 已移除 Interactions API 的舊版結構定義。系統會忽略 `Api-Revision` 標頭。 |
+| **Ngày 7 tháng 5** | Chọn sử dụng | Đã có phiên bản SDK mới (Python ≥2.0.0, JS ≥2.0.0). Nâng cấp để tự động nhận giản đồ mới. | Thêm tiêu đề `Api-Revision: 2026-05-20` để chọn sử dụng. Giá trị mặc định vẫn là giá trị cũ. |
+| **Ngày 26 tháng 5** | Lật mặc định | Bạn không cần làm gì nếu đã nâng cấp. Các SDK cũ (Python 1.x.x, JS 1.x.x) vẫn hoạt động nhưng trả về các phản hồi cũ. | Giờ đây, giản đồ mới là giản đồ mặc định. Gửi tiêu đề `Api-Revision: 2026-05-07` để chọn không sử dụng. |
+| **Ngày 8 tháng 6** | Hoàng hôn | Các phiên bản SDK Python 1.x.x và JS 1.x.x sẽ bị lỗi đối với các lệnh gọi Interactions API. | Xoá giản đồ cũ cho Interactions API. Tiêu đề `Api-Revision` bị bỏ qua. |
 
-## 遷移檢查清單
+## Danh sách kiểm tra di chuyển
 
-### 步驟結構定義 (`steps`)
+### Lược đồ các bước (`steps`)
 
-- 更新程式碼，從 `steps` 陣列而非 `outputs` 讀取回應內容。[查看範例](#basic-unary)。
-- 確認程式碼可處理 `user_input` 和 `model_output` 步驟類型。[查看範例](#basic-unary)。
-- (函式呼叫) 更新程式碼，在 `steps` 陣列中找出 `function_call` 步驟。[查看範例](#function-calling)。
-- (伺服器端工具) 更新程式碼，處理工具專屬步驟 (例如 `google_search_call`、`google_search_result`)。[查看範例](#server-side-tools)。
-- (無狀態記錄) 更新記錄管理，在下一個要求的 `input` 欄位中傳遞 `steps` 陣列。[查看詳細資料](#stateless-history)。
-- (僅限串流) 更新用戶端，監聽新的 SSE 事件類型 (`interaction.created`、`step.delta` 等)。[查看範例](#streaming)。
+- Cập nhật mã để đọc nội dung phản hồi từ mảng `steps` thay vì `outputs`. [Xem ví dụ](#basic-unary).
+- Xác minh rằng mã của bạn xử lý cả hai loại bước `user_input` và `model_output`. [Xem ví dụ](#basic-unary).
+- (Gọi hàm) Cập nhật mã để tìm các bước `function_call` trong mảng `steps`. [Xem ví dụ](#function-calling).
+- (Công cụ phía máy chủ) Cập nhật mã để xử lý các bước dành riêng cho công cụ (ví dụ: `google_search_call`, `google_search_result`). [Xem ví dụ](#server-side-tools).
+- (Stateless History) Cập nhật tính năng quản lý nhật ký để truyền mảng `steps` trong trường `input` của yêu cầu tiếp theo. [Xem chi tiết](#stateless-history).
+- (Chỉ truyền phát trực tiếp) Cập nhật ứng dụng để theo dõi các loại sự kiện SSE mới (`interaction.created`, `step.delta`, v.v.). [Xem ví dụ](#streaming).
 
-### 輸出格式設定 (`response_format`)
+### Cấu hình định dạng đầu ra (`response_format`)
 
-- 將 `response_format` 內的 `mime_type` 欄位替換為 `response_mime_type`。[查看範例](#structured-output)。
-- 將現有的 `response_format` JSON 結構定義包裝在 `{"type": "text", "schema": ...}` 物件中。[查看範例](#structured-output)。
-- (圖像生成) 將 `image_config` 從 `generation_config` 移至 `response_format` 中的 `{"type": "image", ...}` 項目。[查看範例](#image-config)。
-- (多模態) 要求多個輸出模態時，請將 `response_format` 從單一物件轉換為陣列。
+- Thay thế `response_mime_type` bằng trường `mime_type` bên trong `response_format`. [Xem ví dụ](#structured-output).
+- Bao bọc giản đồ JSON `response_format` hiện có bên trong một đối tượng `{"type": "text", "schema": ...}`. [Xem ví dụ](#structured-output).
+- (Tạo hình ảnh) Di chuyển `image_config` từ `generation_config` sang một mục `{"type": "image", ...}` trong `response_format`. [Xem ví dụ](#image-config).
+- (Đa phương thức) Chuyển đổi `response_format` từ một đối tượng thành một mảng khi yêu cầu nhiều phương thức đầu ra.
 
-提供意見
+Gửi ý kiến phản hồi
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-上次更新時間：2026-06-01 (世界標準時間)。
+Cập nhật lần gần đây nhất: 2026-06-01 UTC.
 
-想進一步說明嗎？
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-01 (世界標準時間)。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]

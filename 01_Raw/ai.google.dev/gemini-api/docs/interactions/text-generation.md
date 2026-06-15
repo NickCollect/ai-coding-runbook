@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ko
-fetched_at: 2026-06-08T05:34:32.892995+00:00
+fetched_at: 2026-06-15T06:23:59.018367+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

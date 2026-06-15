@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=de
-fetched_at: 2026-06-08T05:39:45.927528+00:00
-title: "Bilder mit Imagen generieren \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=ar
+fetched_at: 2026-06-15T06:33:32.223304+00:00
+title: "\u0625\u0646\u0634\u0627\u0621 \u0635\u0648\u0631 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Feedback geben
+إرسال ملاحظات
 
-# Bilder mit Imagen generieren
+# إنشاء صور باستخدام Imagen
 
-Imagen ist das High-Fidelity-Modell zur Bildgenerierung von Google, mit dem sich realistische und hochwertige Bilder aus Text-Prompts generieren lassen. Alle generierten Bilder enthalten ein SynthID-Wasserzeichen. Weitere Informationen zu den verfügbaren Imagen-Modellvarianten finden Sie im Abschnitt [Modellversionen](#model-versions).
+‫Imagen هو نموذج من Google لإنشاء صور عالية الدقة، وهو قادر على إنشاء صور واقعية وعالية الجودة من الطلبات النصية. تتضمّن جميع الصور التي يتم إنشاؤها علامة SynthID مائية. لمزيد من المعلومات عن صيغ نموذج Imagen المتاحة، يُرجى الاطّلاع على قسم [إصدارات النموذج](#model-versions).
 
-## Bilder mit den Imagen-Modellen generieren
+## إنشاء صور باستخدام نماذج Imagen
 
-In diesem Beispiel wird gezeigt, wie Sie Bilder mit einem [Imagen-Modell](https://deepmind.google/technologies/imagen/?hl=de) generieren:
+يوضّح هذا المثال كيفية إنشاء صور باستخدام [نموذج Imagen](https://deepmind.google/technologies/imagen/?hl=ar):
 
 ### Python
 
@@ -75,7 +75,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -132,364 +132,374 @@ curl -X POST \
       }'
 ```
 
-![KI-generiertes Bild eines Roboters mit einem roten Skateboard](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=de)
+![صورة من إنشاء الذكاء الاصطناعي لروبوت يحمل لوح تزلّج أحمر](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=ar)
 
-KI-generiertes Bild eines Roboters, der ein rotes Skateboard hält
+صورة من إنشاء الذكاء الاصطناعي لروبوت يحمل لوح تزلّج أحمر
 
-### Imagen-Konfiguration
+### إعدادات Imagen
 
-Imagen unterstützt derzeit nur Prompts in englischer Sprache und die folgenden Parameter:
+تتيح Imagen حاليًا كتابة الطلبات باللغة الإنجليزية فقط، بالإضافة إلى استخدام المَعلمات التالية:
 
-- `numberOfImages`: Die Anzahl der zu generierenden Bilder, von 1 bis 4 (einschließlich).
-  Der Standardwert ist 4.
-- `imageSize`: Die Größe des generierten Bildes. Dies wird nur für die Modelle „Standard“ und „Ultra“ unterstützt. Die unterstützten Werte sind `1K` und `2K`.
-  Der Standardwert ist `1K`.
-- `aspectRatio`: Ändert das Seitenverhältnis des generierten Bildes. Unterstützte Werte sind `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` und `"16:9"`. Der Standardwert ist `"1:1"`.
-- `personGeneration`: Das Modell darf Bilder von Personen generieren. Folgende Werte werden unterstützt:
+- ‫`numberOfImages`: عدد الصور المطلوب إنشاؤها، من 1 إلى 4 (شاملة).
+  القيمة التلقائية هي 4.
+- `imageSize`: حجم الصورة من إنشاء الذكاء الاصطناعي التوليدي تتوفّر هذه الميزة فقط في طرازَي Standard وUltra. القيمتان المسموح بإدراجهما هما `1K` و`2K`.
+  القيمة التلقائية هي `1K`.
+- `aspectRatio`: لتغيير نسبة العرض إلى الارتفاع في الصورة التي تم إنشاؤها القيم المسموح بها هي `"1:1"` و`"3:4"` و`"4:3"` و`"9:16"` و`"16:9"`. القيمة التلقائية هي
+  `"1:1"`.
+- ‫`personGeneration`: السماح للنموذج بإنشاء صور لأشخاص يمكن استخدام القيم التالية:
 
-  - `"dont_allow"`: Generierung von Bildern von Personen blockieren.
-  - `"allow_adult"`: Bilder von Erwachsenen, aber nicht von Kindern generieren. Das ist die Standardeinstellung.
-  - `"allow_all"`: Bilder generieren, die Erwachsene und Kinder enthalten.
+  - `"dont_allow"`: لحظر إنشاء صور لأشخاص
+  - `"allow_adult"`: إنشاء صور لبالغين فقط، وليس لأطفال هذا هو الخيار التلقائي.
+  - ‫`"allow_all"`: إنشاء صور تتضمّن بالغين وأطفالاً
 
-## Imagen-Prompt-Anleitung
+## دليل كتابة الطلبات في Imagen
 
-In diesem Abschnitt des Imagen-Leitfadens erfahren Sie, wie sich durch Ändern einer Text-zu-Bild-Eingabeaufforderung unterschiedliche Ergebnisse erzielen lassen. Außerdem finden Sie Beispiele für Bilder, die Sie erstellen können.
+يوضّح لك هذا القسم من دليل Imagen كيفية تعديل طلب نصي لإنشاء صورة
+للحصول على نتائج مختلفة، بالإضافة إلى أمثلة على الصور التي يمكنك إنشاؤها.
 
-### Grundlagen zum Schreiben von Prompts
+### أساسيات كتابة الطلبات
 
-Ein guter Prompt ist beschreibend und klar und verwendet aussagekräftige Keywords und Modifikatoren. Beginnen Sie mit dem **Motiv**, dem **Kontext** und dem **Stil**.
+يجب أن يكون الطلب جيدًا وواضحًا ووصفيًا، وأن يستخدم كلمات رئيسية ومعدِّلات ذات صلة. ابدأ بالتفكير في **الموضوع** و**السياق** و**الأسلوب**.
 
-![Eingabeaufforderung mit Akzent auf Motiv, Kontext und Stil](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=de)
+![طلب مع التركيز على الموضوع والسياق والأسلوب](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=ar)
 
-Bildtext: Eine *Skizze* (**Stil**) eines *modernen Wohngebäudes* (**Motiv**) umgeben von *Wolkenkratzern* (**Kontext und Hintergrund**).
+نص الصورة: *رسم تخطيطي* (**الأسلوب**) *لمبنى سكني حديث*
+(**الموضوع**) محاط *بناطحات سحاب* (**السياق والخلفية**).
 
-1. **Thema:** Das Erste, woran Sie bei jeder Eingabeaufforderung denken müssen, ist das *Motiv*. Das Objekt, eine Person, ein Tier oder eine Landschaft, von der Sie ein Bild möchten.
-2. **Kontext und Hintergrund:** Ebenso wichtig ist der *Hintergrund oder Kontext*, in dem das Motiv platziert wird. Platzieren Sie das Motiv vor verschiedenen Hintergründen. Zum Beispiel ein Studio mit weißem Hintergrund, im Freien oder in Gebäuden.
-3. **Stil:** Fügen Sie abschließend den Stil des gewünschten Bildes hinzu. *Stile* können allgemein (Malerei, Fotografie, Skizzen) oder sehr spezifisch sein (Pastel, Kohlezeichnung, isometrische 3D-Perspektive). Sie können auch Stile kombinieren.
+1. **الموضوع**: أول ما يجب التفكير فيه عند كتابة أي طلب هو
+   *الموضوع*: الكائن أو الشخص أو الحيوان أو المشهد الذي تريد الحصول على صورة له.
+2. **السياق والخلفية:** لا تقلّ أهمية *الخلفية أو السياق*
+   الذي سيتم وضع الموضوع فيه. جرِّب وضع العنصر الأساسي في الصورة أمام مجموعة متنوعة من الخلفيات. على سبيل المثال، استوديو بخلفية بيضاء أو في الخارج أو في بيئات داخلية.
+3. **النمط:** أخيرًا، أضِف نمط الصورة الذي تريده. يمكن أن تكون *الأنماط* عامة (مثل الرسم أو التصوير الفوتوغرافي أو الرسومات التخطيطية) أو دقيقة جدًا (مثل الرسم بالألوان الباستيل أو الرسم بالفحم أو الرسومات ثلاثية الأبعاد المتساوية القياس). يمكنك أيضًا الجمع بين الأنماط.
 
-Nachdem Sie eine erste Version Ihres Prompts geschrieben haben, können Sie ihn verfeinern, indem Sie weitere Details hinzufügen, bis Sie das gewünschte Bild erhalten. Iteration ist wichtig.
-Beginnen Sie mit Ihrer Kernidee und verfeinern und erweitern Sie diese dann, bis das generierte Bild Ihrer Vision entspricht.
+بعد كتابة النسخة الأولى من الطلب، حسِّنه من خلال إضافة المزيد من التفاصيل إلى أن تحصل على الصورة التي تريدها. التكرار مهم.
+ابدأ بتحديد فكرتك الأساسية، ثم حسِّنها ووسّع نطاقها إلى أن تصبح الصورة التي تم إنشاؤها قريبة من فكرتك.
 
 |  |  |  |
 | --- | --- | --- |
-| Fotorealistisches Beispielbild 1   Eingabeaufforderung: Ein Park im Frühling neben einem See | Fotorealistisches Beispielbild 2   Prompt: Ein Park im Frühling neben einem See, **die Sonne geht über dem See unter, goldene Stunde** | Fotorealistisches Beispielbild 3   Prompt: Ein Park im Frühling neben einem See, ***die Sonne geht über dem See unter, goldene Stunde, rote Wildblumen*** |
+| صورة نموذجية واقعية 1   الطلب: حديقة في الربيع بجانب بحيرة | صورة نموذجية واقعية 2   الطلب: حديقة في فصل الربيع بجوار بحيرة، **تغرب الشمس فوق البحيرة، الساعة الذهبية** | صورة نموذجية واقعية 3   الوصف: حديقة في فصل الربيع بجوار بحيرة، ***تغرب الشمس فوق البحيرة، وقت الغروب، زهور برية حمراء*** |
 
-Imagen-Modelle können Ihre Ideen in detaillierte Bilder umwandeln, unabhängig davon, ob Ihre Prompts kurz oder lang und detailliert sind. Verfeinern Sie Ihre Vision durch iterative Prompts und fügen Sie Details hinzu, bis Sie das perfekte Ergebnis erzielen.
+يمكن لنماذج Imagen تحويل أفكارك إلى صور مفصّلة، سواء كانت طلباتك قصيرة أو طويلة ومفصّلة. حسِّنوا رؤيتكم
+من خلال تكرار الطلبات وإضافة التفاصيل إلى أن تحصلوا على النتيجة
+المثالية.
 
 |  |  |
 | --- | --- |
-| Mit kurzen Prompts können Sie schnell ein Bild generieren.  Beispiel für einen kurzen Prompt für Imagen 4   Prompt: Nahaufnahme einer Frau in ihren 20ern, Straßenfotografie, Standbild, gedeckte warme Orangetöne | Mit längeren Prompts können Sie spezifische Details hinzufügen und Ihr Bild erstellen.  Beispiel für einen langen Prompt für Imagen 4   Prompt: Beeindruckendes Foto einer Frau in ihren 20ern, das einen Straßenfotografie-Stil verwendet. Das Bild sollte wie ein Standfoto mit gedeckten, orangefarbenen, warmen Tönen aussehen. |
+| تتيح لك الطلبات القصيرة إنشاء صورة بسرعة.  مثال على طلب قصير في Imagen 4   الطلب: صورة مقرّبة لامرأة في العشرينات من عمرها، تصوير شوارع، لقطة من فيلم، درجات برتقالية دافئة هادئة | تتيح لك الطلبات الأطول إضافة تفاصيل محدّدة وإنشاء صورتك.  مثال على طلب طويل في Imagen 4   الطلب: صورة آسرة لامرأة في العشرينات من عمرها بأسلوب التصوير الفوتوغرافي في الشارع. يجب أن تبدو الصورة مثل لقطة من فيلم بألوان برتقالية دافئة. |
 
-Zusätzliche Tipps zum Verfassen von Prompts für Imagen:
+نصائح إضافية لكتابة الطلبات في Imagen:
 
-- **Beschreibende Sprache verwenden**: Verwenden Sie detaillierte Adjektive und Adverbien, um Imagen ein klares Bild zu vermitteln.
-- **Kontext angeben**: Fügen Sie bei Bedarf Hintergrundinformationen hinzu, damit die KI den Prompt besser versteht.
-- **Auf bestimmte Künstler oder Stile verweisen**: Wenn Sie eine bestimmte Ästhetik im Sinn haben, kann es hilfreich sein, auf bestimmte Künstler oder Kunstrichtungen zu verweisen.
-- **Tools für Prompt Engineering verwenden**: Sie können Tools oder Ressourcen für Prompt Engineering nutzen, um Ihre Prompts zu optimieren und optimale Ergebnisse zu erzielen.
-- **Gesichtsdetails in Ihren persönlichen Fotos und Gruppenfotos optimieren**: Geben Sie Gesichtsdetails als Fokus des Fotos an (z. B. mit dem Wort „Porträt“ im Prompt).
+- **استخدام لغة وصفية**: استخدِم صفات وأحوال مفصّلة لتقديم صورة واضحة إلى Imagen.
+- **توفير السياق**: إذا لزم الأمر، أدرِج معلومات أساسية لمساعدة الذكاء الاصطناعي في فهم طلبك.
+- **الإشارة إلى فنّانين أو أنماط معيّنة**: إذا كان لديك أسلوب جمالي معيّن في ذهنك، يمكن أن تكون الإشارة إلى فنّانين أو حركات فنية معيّنة مفيدة.
+- **استخدام أدوات هندسة الطلبات**: ننصحك باستكشاف أدوات أو مراجع هندسة الطلبات لمساعدتك في تحسين طلباتك وتحقيق أفضل النتائج.
+- **تحسين تفاصيل الوجه في صورك الشخصية وصور المجموعات**: حدِّد تفاصيل الوجه كعنصر أساسي في الصورة (على سبيل المثال، استخدِم كلمة "صورة شخصية" في الطلب).
 
-### Text in Bildern generieren
+### إنشاء نص في الصور
 
-Imagen-Modelle können Text in Bilder einfügen und so mehr kreative Möglichkeiten für die Bildgenerierung eröffnen. Mit den folgenden Tipps können Sie diese Funktion optimal nutzen:
+يمكن لنماذج Imagen إضافة نص إلى الصور، ما يتيح إمكانات إبداعية أكبر في إنشاء الصور. اتّبِع الإرشادات التالية للاستفادة إلى أقصى حدّ من هذه الميزة:
 
-- **Sicher iterieren**: Möglicherweise müssen Sie Bilder mehrmals neu generieren, bis Sie das gewünschte Ergebnis erhalten. Die Textintegration von Imagen wird ständig weiterentwickelt. Manchmal sind mehrere Versuche erforderlich, um die besten Ergebnisse zu erzielen.
-- **Kurz fassen**: Der Text sollte maximal 25 Zeichen umfassen, damit er optimal generiert werden kann.
-- **Mehrere Formulierungen**: Testen Sie zwei oder drei unterschiedliche Formulierungen, um zusätzliche Informationen bereitzustellen. Verwenden Sie nicht mehr als drei Begriffe, um die Komposition übersichtlicher zu gestalten.
+- **التكرار بثقة**: قد تحتاج إلى إعادة إنشاء الصور إلى أن تحصل على المظهر الذي تريده. لا يزال دمج النصوص في Imagen في مرحلة التطوير، وفي بعض الأحيان، قد تؤدي المحاولات المتعددة إلى الحصول على أفضل النتائج.
+- **الاختصار**: يجب أن يتألف النص من 25 حرفًا أو أقل للحصول على أفضل النتائج.
+- **عبارات متعدّدة**: جرِّب استخدام عبارتَين أو ثلاث عبارات مختلفة لتقديم معلومات إضافية. تجنَّب تجاوز ثلاث عبارات للحصول على تركيبات أكثر وضوحًا.
 
-  ![Beispiel für die Textgenerierung mit Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=de)
+  ![مثال على إنشاء نص باستخدام Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=ar)
 
-  Prompt: Ein Poster mit dem Text „Summerland“ in fetter Schrift als Titel. Darunter befindet sich der Slogan „Summer never felt so good“ (Der Sommer hat sich noch nie so gut angefühlt).
-- **Platzierung von Anleitungen**: Imagen kann versuchen, Text wie angegeben zu positionieren, aber es kann zu Abweichungen kommen. Diese Funktion wird kontinuierlich verbessert.
-- **Schriftstil für Inspiration**: Geben Sie einen allgemeinen Schriftstil an, um die Auswahl von Imagen subtil zu beeinflussen. Verlassen Sie sich nicht auf eine genaue Schriftartreplikation, sondern rechnen Sie mit kreativen Interpretationen.
-- **Schriftgröße**: Geben Sie eine Schriftgröße oder eine allgemeine Größenangabe (z. B. *klein*, *mittel*, *groß*) an, um die Generierung der Schriftgröße zu beeinflussen.
+  الطلب: ملصق يتضمّن النص "Summerland" بخط غامق كعنوان، وتحته الشعار "لم يكن الصيف ممتعًا إلى هذا الحد"
+- **توجيه موضع النص**: على الرغم من أنّ Imagen يمكنه محاولة وضع النص في الموضع المطلوب، قد تظهر اختلافات أحيانًا. نعمل باستمرار على تحسين هذه الميزة.
+- **نمط الخط الملهم**: حدِّد نمط خط عامًا للتأثير بشكل طفيف في خيارات Imagen. لا تعتمد على تكرار الخطوط بدقة، ولكن توقَّع تفسيرات إبداعية.
+- **حجم الخط**: حدِّد حجم الخط أو مؤشرًا عامًا للحجم (على سبيل المثال، *صغير* أو *متوسط* أو *كبير*) للتأثير في عملية إنشاء حجم الخط.
 
-### Prompt-Parametrisierung
+### تحديد مَعلمات الطلب
 
-Um die Ausgaberesultate besser zu steuern, kann es hilfreich sein, die Eingaben in Imagen zu parametrisieren. Angenommen, Sie möchten, dass Ihre Kunden Logos für ihr Unternehmen generieren können, und Sie möchten sicherstellen, dass Logos immer auf einem einfarbigen Hintergrund generiert werden. Außerdem möchten Sie die Optionen einschränken, die der Kunde in einem Menü auswählen kann.
+للتحكّم بشكل أفضل في نتائج الإخراج، قد يكون من المفيد تحديد مَعلمات للإدخالات في Imagen. على سبيل المثال، لنفترض أنّك تريد أن يتمكّن عملاؤك من إنشاء شعارات لمؤسساتهم، وأنّك تريد التأكّد من أنّ الشعارات يتم إنشاؤها دائمًا على خلفية بلون موحّد. تريد أيضًا حصر الخيارات التي يمكن للعميل تحديدها من القائمة.
 
-In diesem Beispiel können Sie einen parametrisierten Prompt ähnlich dem folgenden erstellen:
+في هذا المثال، يمكنك إنشاء طلب يتضمّن مَعلمات مشابه لما يلي:
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-In Ihrer benutzerdefinierten Benutzeroberfläche kann der Kunde die Parameter über ein Menü eingeben. Der ausgewählte Wert wird dann in den Prompt eingefügt, den Imagen erhält.
+في واجهة المستخدم المخصّصة، يمكن للعميل إدخال المَعلمات باستخدام قائمة، ويتم ملء الطلب الذي تتلقّاه Imagen بالقيمة التي يختارها.
 
-Beispiel:
+على سبيل المثال:
 
-1. Prompt: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. الطلب: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![Beispiel 1 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=de)
-2. Prompt: `A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![مثال 1 على تحديد مَعلمات الطلب في Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=ar)
+2. الطلب: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![Beispiel 2 für die Parametrisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=de)
-3. Prompt: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![المثال 2 على تحديد معلَمات الطلب في Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=ar)
+3. الطلب: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![Beispiel 3 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=de)
+   ![مثال 3 على تحديد معلَمات الطلب في Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=ar)
 
-### Erweiterte Techniken zum Schreiben von Eingabeaufforderungen
+### أساليب متقدّمة لكتابة الطلبات
 
-Anhand der folgenden Beispiele können Sie anhand von Attributen wie Bilddeskriptoren, Formen und Materialien, historischen Kunstbewegungen und Bildqualitätsmodifikatoren spezifischere Prompts erstellen.
+استخدِم الأمثلة التالية لإنشاء طلبات أكثر تحديدًا استنادًا إلى سمات مثل أوصاف التصوير الفوتوغرافي والأشكال والمواد والحركات الفنية التاريخية ومعدّلات جودة الصورة.
 
-#### Fotografie
+#### تصوير فوتوغرافي
 
-- Eingabeaufforderung enthält: *„Ein Foto von...”*
+- يتضمّن الطلب: *"صورة لـ..."*
 
-Um diesen Stil zu verwenden, beginnen Sie mit der Verwendung von Keywords, die Imagen klar mitteilen, dass Sie nach einem Foto suchen. Starten Sie die Eingabeaufforderungen mit *„Ein Foto von. . .”*. Beispiel:
-
-|  |  |  |
-| --- | --- | --- |
-| Fotorealistisches Beispielbild 1   **Eingabeaufforderung:** Ein Foto von   Kaffeebohnen auf einer Holzoberfläche in einer Küche | Fotorealistisches Beispielbild 2   **Eingabeaufforderung:** Ein Foto von   einer Schokolade auf einem Küchentresen. | Fotorealistisches Beispielbild 3   Prompt: **Ein Foto eines** modernen Gebäudes mit Wasser im Hintergrund |
-
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
-
-##### Fotografische Modifikatotionen
-
-In den folgenden Beispielen sehen Sie mehrere fotospezifische Modifikatoren und Parameter. Sie können mehrere Modifikatoren kombinieren, um eine genauere Steuerung zu erreichen.
-
-1. **Kameranähe**: *aus der Nähe, von weit weg*
-
-   |  |  |
-   | --- | --- |
-   | Beispiel für Bild aus der Nähe   Eingabeaufforderung: Ein Foto von Kaffeebohnen **aus der Nähe** | Beispiel für herausgezoomtes Bild   Eingabeaufforderung: Ein **herausgezoomtes** Foto eines kleinen Beutels mit  Kaffeebohnen in einer unaufgeräumten Küche |
-2. **Kameraposition**: *Luftaufnahme, von unten*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Luftaufnahme   Eingabeaufforderung: **Luftaufnahme** einer Stadt mit Wolkenkratzern | Beispielbild von unten   Eingabeaufforderung: Ein Foto eines Waldstamms mit blauem Himmel **von unten** |
-3. **Beleuchtung**: *natürlich, dramatisch, warm, kalt*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für natürliche Beleuchtung   Prompt: Studiofoto eines modernen Sessels, **natürliche Beleuchtung** | Beispielbild für dramatische Beleuchtung   Eingabeaufforderung: Studiofoto eines modernen Sessels, **dramatische Beleuchtung** |
-4. **Kameraeinstellungen**:  *Bewegungsunschärfe, Weichzeichnung, Bokeh, Hochformat*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Bewegungsunschärfe   Prompt: Foto einer Stadt mit Wolkenkratzern aus dem Inneren eines Autos mit **Bewegungsunschärfe** | Beispielbild für Weichzeichnung   Prompt: **Weichzeichnung** eines Fotos einer Brücke in einer Stadt bei Nacht |
-5. **Objektive**: *35 mm, 50 mm, Fischauge, Weitwinkel, Makro*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Makro   Eingabeaufforderung: Foto eines Blattes, **Makroobjektiv** | Beispielbild für Fischaugenobjektiv   Eingabeaufforderung: Straßenansicht, New York City, **Fischaugenobjektiv** |
-6. **Filmtypen**: *Schwarz-Weiß, Polaroid*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Polaroid   Prompt: Ein **Polaroid-Hochformatbild** eines Hundes mit Sonnenbrille | Beispielbild für Schwarz-Weiß-Foto   Eingabeaufforderung: **Schwarz-Weiß-Foto** eines Hundes mit Sonnenbrille |
-
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
-
-### Illustration und Kunst
-
-- Eingabeaufforderung enthält: *„Eine painting von...”*, *„Eine sketch von...”*
-
-Die Stile variieren von monochromen Stilen wie Bleistift bis hin zu hyperrealistischer digitaler Kunst. Die folgenden Bilder verwenden beispielsweise dieselbe Eingabeaufforderung mit unterschiedlichen Stilen:
-
-*„Eine [art style or creation technique] einer kantigen elektrischen Limousine mit Wolkenkratzern im Hintergrund“*
+لاستخدام هذا النمط، ابدأ باستخدام كلمات رئيسية توضّح
+لـ Imagen أنّك تبحث عن صورة فوتوغرافية. ابدأ طلباتك بعبارة
+*"صورة لـ. . ."*. على سبيل المثال:
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbilder für Kunst   Eingabeaufforderung: Eine **technische Bleistiftskizze** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **Kohlezeichnung** eines kantigen... | Beispielbilder für Kunst   Prompt: Eine **Farbstiftzeichnung** eines kantigen... |
+| صورة نموذجية واقعية 1   الطلب: **صورة** لحبوب قهوة في مطبخ على سطح خشبي | صورة نموذجية واقعية 2   الطلب: **صورة** لقطعة شوكولاتة على منضدة مطبخ | صورة نموذجية واقعية 3   الطلب: **صورة** لمبنى عصري يظهر الماء في الخلفية |
+
+مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي الخاص بها مع نموذج Imagen 4.
+
+##### معدِّلات التصوير الفوتوغرافي
+
+في الأمثلة التالية، يمكنك الاطّلاع على العديد من المعدِّلات والمعلَمات الخاصة بالتصوير. يمكنك الجمع بين معدّلات متعددة للتحكّم بدقة أكبر.
+
+1. **تقريب الكاميرا**: *لقطات مقرّبة من مسافة بعيدة*
+
+   |  |  |
+   | --- | --- |
+   | صورة نموذجية للقطة مقرّبة بالكاميرا   الطلب: صورة **مقرّبة** لحبوب القهوة | صورة عيّنة تم تصغيرها بالكاميرا   الطلب: صورة **تم تصغيرها** لكيس صغير من  حبوب القهوة في مطبخ غير مرتّب |
+2. **موضع الكاميرا** - *من الأعلى، من الأسفل*
+
+   |  |  |
+   | --- | --- |
+   | نموذج صورة جوية   الطلب: **صورة جوية** لمدينة حضرية تضم ناطحات سحاب | صورة نموذجية من الأسفل   الطلب: صورة لمظلة غابة مع سماء زرقاء **من الأسفل** |
+3. **الإضاءة** - *طبيعية، درامية، دافئة، باردة*
+
+   |  |  |
+   | --- | --- |
+   | صورة نموذجية للإضاءة الطبيعية   الطلب: صورة استوديو لكرسي بذراعَين عصري، **إضاءة طبيعية** | صورة نموذجية للإضاءة الدرامية   الطلب: صورة استوديو لكرسي بذراعَين عصري، **إضاءة درامية** |
+4. **إعدادات الكاميرا** *- تمويه الحركة، والتركيز الناعم، والبوكيه، ووضع "بورتريه"*
+
+   |  |  |
+   | --- | --- |
+   | صورة نموذجية لتعتيم الصورة المتحركة   الطلب: صورة لمدينة فيها ناطحات سحاب من داخل سيارة مع **تأثير التمويه الناتج عن الحركة** | صورة نموذجية بتركيز ضعيف   الطلب: **صورة بتركيز خفيف** لجسر في مدينة حضرية ليلاً |
+5. **أنواع العدسات**: *35 ملم و50 ملم وعدسة عين السمكة والزاوية الواسعة وعدسة التقريب*
+
+   |  |  |
+   | --- | --- |
+   | صورة نموذجية تم التقاطها باستخدام عدسة ماكرو   الطلب: صورة ورقة شجر، **عدسة ماكرو** | صورة نموذجية بعدسة عين السمكة   الطلب: تصوير الشوارع، مدينة نيويورك، **عدسة عين السمكة** |
+6. **أنواع الأفلام** - *أبيض وأسود، بولارويد*
+
+   |  |  |
+   | --- | --- |
+   | صورة نموذجية لصورة بولارويد   الطلب: **صورة بولارويد** لكلب يرتدي نظارات شمسية | صورة نموذجية بالأبيض والأسود   الطلب: **صورة بالأبيض والأسود** لكلب يرتدي نظارة شمسية |
+
+مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 4.
+
+### الرسومات التوضيحية والفن
+
+- يتضمّن الطلب: *"painting من..."*، *"sketch من..."*
+
+تتنوّع الأساليب الفنية بين الأساليب أحادية اللون، مثل الرسومات بقلم الرصاص، والفن الرقمي الواقعي جدًا. على سبيل المثال، تستخدم الصور التالية الطلب نفسه مع أنماط مختلفة:
+
+*"صورة [art style or creation technique] لسيارة سيدان كهربائية رياضية ذات تصميم زاوي مع ناطحات سحاب في الخلفية"*
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbilder für Kunst   Eingabeaufforderung: Ein **Pastelbild** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **digitale Kunst** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Ein **Art-dèco-Poster** eines kantigen... |
-
-Bildquelle: Jedes Bild wurde mit dem Imagen 2-Modell über den entsprechenden Text-Prompt generiert.
-
-##### Formen und Materialien
-
-- Eingabeaufforderung: *„...aus...”*, *„...in Form von...”*
-
-Eine der Stärken dieser Technologie ist, dass Sie Bilder erstellen können, die andernfalls schwer oder unmöglich wären. Sie können beispielsweise Ihr Firmenlogo in verschiedenen Materialien und Texturen neu erstellen.
+| صور نماذج فنية   الطلب: **رسم بقلم رصاص** لزاوية... | صور نماذج فنية   الطلب: **رسم بقلم الفحم** لشكل زاوي... | صور نماذج فنية   الطلب: **رسم بقلم رصاص ملون** لزاوية... |
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbild 1 für Formen und Materialien   Eingabeaufforderung: Duffle Bag**aus** Käse | Beispielbild 2 für Formen und Materialien   Prompt: Neonröhren **in Form** eines Vogels | Beispielbild 3 für Formen und Materialien   Eingabeaufforderung: Ein Sessel **aus Papier**, Studiofoto, Origami-Stil |
+| صور نماذج فنية   الطلب: **لوحة باستيل** لـ... | صور نماذج فنية   الطلب: **عمل فني رقمي** يظهر فيه... | صور نماذج فنية   الطلب: **ملصق** على طراز الآرت ديكو يظهر فيه شكل زاوي... |
 
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي الخاص بها مع نموذج Imagen 2.
 
-#### Bezüge auf historische Kunst
+##### الأشكال والمواد
 
-- Eingabeaufforderung: *„...im Stil von...”*
+- يتضمّن الطلب: *"...مصنوع من..."*، *"...على شكل..."*
 
-Bestimmte Stile haben sich im Laufe der Jahre zu einem Mythos entwickelt. Im Folgenden finden Sie einige Ideen für historische Gemälde oder Kunststile, die Sie ausprobieren können.
-
-*„Erstelle ein Bild im Stil von [art period or movement]
-: ein Windpark“*
+من مزايا هذه التكنولوجيا أنّه يمكنك إنشاء صور يصعب أو يستحيل إنشاؤها بطرق أخرى. على سبيل المثال، يمكنك إعادة إنشاء شعار شركتك باستخدام مواد وخامات مختلفة.
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbild für Impressionsismus   Eingabeaufforderung: Generiere ein Bild **im Stil von *einem Gemälde des Impressionismus***: ein Windpark | Beispielbild für Renaissance   Prompt: generate an image **in the style of *a renaissance painting***: a wind farm | Beispielbild für Pop Art   Eingabeaufforderung: Erstelle ein Bild **im Stil von *Pop-Art***: ein Windpark |
+| صورة توضيحية 1 عن الأشكال والمواد   الطلب: حقيبة رياضية كبيرة **مصنوعة من** الجبن | صورة توضيحية 2 عن الأشكال والمواد   الطلب: أنابيب نيون **على شكل** طائر | صورة توضيحية 3 عن الأشكال والمواد   الطلب: كرسي بذراعين **مصنوع من الورق**، صورة استوديو، أسلوب الأوريغامي |
 
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 4.
 
-#### Modifikatoren für die Bildqualität
+#### مراجع فنية تاريخية
 
-Bestimmte Keywords können dem Modell mitteilen, dass Sie nach einem qualitativ hochwertigen Bild suchen. Beispiele für Qualitätsmodifikatoren:
+- يتضمّن الطلب: *"...بأسلوب..."*
 
-- **Allgemeine Modifikatoren**: *hohe Qualität, ansprechend, stilisiert*
-- **Fotos**: *4K, HDR, Studiofoto*
-- **Kunst, Illustration**: *von einem Profi, detailliert*
+وقد أصبحت بعض الأساليب مميّزة على مر السنين. في ما يلي بعض الأفكار حول أنماط اللوحات أو الفنون التاريخية التي يمكنك تجربتها.
 
-Im Folgenden finden Sie einige Beispiele für Eingabeaufforderungen ohne Qualitätsmodifikatoren und die gleiche Aufforderung mit Qualitätsmodifikatoren.
+*"أنشئ صورة بأسلوب [art period or movement]
+: مزرعة رياح"*
+
+|  |  |  |
+| --- | --- | --- |
+| مثال على صورة انطباعية   الطلب: إنشاء صورة **بأسلوب *لوحة انطباعية***: مزرعة رياح | صورة مثال من عصر النهضة   الطلب: أنشئ صورة **بأسلوب *لوحة من عصر النهضة***: مزرعة رياح | مثال على صورة فن البوب   الطلب: أنشئ صورة **بأسلوب *الفن الشعبي***: مزرعة رياح |
+
+مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 4.
+
+#### معدِّلات جودة الصور
+
+يمكن أن تتيح كلمات رئيسية معيّنة للنموذج معرفة أنّك تبحث عن مواد عرض عالية الجودة. تشمل الأمثلة على معدّلات الجودة ما يلي:
+
+- **المعدّلات العامة** - *عالي الجودة، جميل، منمّق*
+- **الصور** - *4K وHDR و"استوديو صور"*
+- **فن، رسم توضيحي** - *من إبداع محترف، تفاصيل دقيقة*
+
+في ما يلي بعض الأمثلة على الطلبات بدون معدّلات جودة والطلب نفسه مع معدّلات جودة.
 
 |  |  |
 | --- | --- |
-| Getreide-Beispielbild ohne Modifikatoren   Eingabeaufforderung (keine Qualitätsmodifikatoren): Ein Foto von einem Getreidehalm | Getreide-Beispielbild mit Modifikatoren   Eingabeaufforderung (mit Qualitätsmodifikatoren): **Schönes 4K-**   Foto eines Getreidehalms **von einem  Profi-Fotografen aufgenommen** |
+| مثال على صورة ذرة بدون معدّلات   الطلب (بدون معدّلات جودة): صورة لساق ذرة | صورة مثال على الذرة مع المعدّلات   الطلب (مع معدّلات الجودة): **صورة جميلة بنطاق عالي الديناميكية بدقة 4K**   لساق ذرة **التقطها   مصوّر محترف** |
 
-Bildquelle: Jedes Bild wurde mit dem entsprechenden Text-Prompt mit dem Imagen 4-Modell generiert.
+مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 4.
 
-#### Seitenverhältnisse
+#### نِسب العرض إلى الارتفاع
 
-Mit der Imagen-Bildgenerierung können Sie fünf verschiedene Bild-Seitenverhältnisse festlegen.
+تتيح لك ميزة إنشاء الصور في Imagen ضبط خمس نِسب عرض إلى ارتفاع مختلفة للصور.
 
-1. **Quadrat** (1:1, Standard) - Ein quadratisches Standardfoto. Typische Anwendungsfälle für dieses Seitenverhältnis sind Beiträge in sozialen Medien.
-2. **Vollbild** (4:3) - Dieses Seitenverhältnis wird häufig in Medien oder in Filmen verwendet.
-   Es bezeichnet auch die Abmessungen der meisten alten (Nicht-Breitbild-)Fernseher und Mittelformatkameras. Es erfasst horizontal mehr von der Szene (im Vergleich zu 1:1), dadurch gehört es zu den bevorzugten Seitenverhältnissen für die Fotografie.
-
-   |  |  |
-   | --- | --- |
-   | Seitenverhältnis-Beispiel   Prompt: Nahaufnahme der Finger eines Musikers, der Klavier spielt, Schwarz-Weiß-Film, Vintage (Seitenverhältnis 4:3) | Seitenverhältnis-Beispiel   Prompt: Ein professionelles Studiofoto von Pommes Frites für ein High-End-Restaurant im Stil einer Lebensmittelzeitschrift (Seitenverhältnis 4:3). |
-3. **Vollbild-Vollbild** (3:4) – Dies ist das um 90 Grad gedrehte Vollbild-Seitenverhältnis. So kann vertikal im Vergleich zum Seitenverhältnis 1:1 mehr von der Szene erfasst werden.
+1. **مربّع** (1:1، الإعداد التلقائي): صورة مربّعة عادية تشمل الاستخدامات الشائعة لنسبة العرض إلى الارتفاع هذه المشاركات على وسائل التواصل الاجتماعي.
+2. **ملء الشاشة** (4:3): تُستخدم نسبة العرض إلى الارتفاع هذه بشكل شائع في الوسائط أو الأفلام.
+   وهي أيضًا أبعاد معظم أجهزة التلفزيون القديمة (غير ذات الشاشة العريضة) وكاميرات التنسيق المتوسط. تتيح هذه النسبة التقاط المزيد من المشهد أفقيًا (مقارنةً بنسبة 1:1)،
+   ما يجعلها نسبة العرض إلى الارتفاع المفضّلة للتصوير الفوتوغرافي.
 
    |  |  |
    | --- | --- |
-   | Seitenverhältnis-Beispiel   Prompt: Eine Frau wandert, Nahaufnahme ihrer Stiefel, die sich in einer Pfütze spiegeln, große Berge im Hintergrund, im Stil einer Werbung, dramatische Blickwinkel (Seitenverhältnis 3:4) | Seitenverhältnis-Beispiel   Prompt: Luftaufnahme eines Flusses, der in einem mystischen Tal fließt (Seitenverhältnis 3:4) |
-4. **Breitbild** (16:9): Dieses Seitenverhältnis hat 4:3 ersetzt und ist heute das gängigste Seitenverhältnis für Fernseher, Monitore und Bildschirme von Smartphones (Querformat).
-   Verwenden Sie dieses Seitenverhältnis, wenn Sie mehr vom Hintergrund erfassen möchten (z. B. malerische Landschaften).
+   | مثال على نسبة العرض إلى الارتفاع   الطلب: صورة مقرّبة لأصابع عازف يعزف على البيانو، فيلم أبيض وأسود، قديم (نسبة عرض إلى ارتفاع 4:3) | مثال على نسبة العرض إلى الارتفاع   الطلب: صورة احترافية في استوديو لبطاطس مقلية لمطعم فاخر، بأسلوب مجلة طعام (نسبة العرض إلى الارتفاع 4:3) |
+3. **ملء الشاشة في الوضع الرأسي** (3:4): هذه هي نسبة العرض إلى الارتفاع في وضع ملء الشاشة بعد تدويرها بمقدار 90 درجة. يتيح ذلك التقاط المزيد من تفاصيل المشهد عموديًا مقارنةً بنسبة العرض إلى الارتفاع 1:1.
 
-   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=de)
+   |  |  |
+   | --- | --- |
+   | مثال على نسبة العرض إلى الارتفاع   الطلب: امرأة تتنزّه، لقطة مقرّبة لحذائها منعكسة في بركة، جبال كبيرة في الخلفية، بأسلوب إعلاني، زوايا درامية (نسبة العرض إلى الارتفاع 3:4) | مثال على نسبة العرض إلى الارتفاع   الطلب: صورة جوية لنهر يتدفق في وادٍ غامض (نسبة العرض إلى الارتفاع 3:4) |
+4. **الشاشة العريضة** (16:9): حلّت هذه النسبة محل 4:3، وهي الآن نسبة العرض إلى الارتفاع الأكثر شيوعًا في أجهزة التلفزيون والشاشات وشاشات الهواتف الجوّالة (الوضع الأفقي).
+   استخدِم نسبة العرض إلى الارتفاع هذه عندما تريد التقاط المزيد من الخلفية (على سبيل المثال، المناظر الطبيعية الخلابة).
 
-   Prompt: Ein Mann ganz in weißer Kleidung, der am Strand sitzt, Nahaufnahme, Lichtverhältnisse einer goldenen Stunde (Seitenverhältnis 16:9)
-5. **Hochformat** (9:16): Dieses Seitenverhältnis entspricht dem Breitbild, aber gedreht. Dabei handelt es sich um ein relativ neues Seitenverhältnis, das in Kurzvideo-Apps beliebt ist (z. B. YouTube Shorts). Verwenden Sie es für hohe Objekte mit stark vertikalen Ausrichtungen wie Gebäude, Bäume, Wasserfälle oder ähnliche Objekte.
+   ![مثال على نسبة العرض إلى الارتفاع](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=ar)
 
-   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=de)
+   الطلب: رجل يرتدي ملابس بيضاء بالكامل ويجلس على الشاطئ، صورة مقربة، إضاءة الساعة الذهبية (نسبة العرض إلى الارتفاع ‎16:9)
+5. **الصورة العمودية** (9:16): هذه النسبة هي شاشة عريضة ولكن تم تدويرها. هذه نسبة عرض إلى ارتفاع جديدة نسبيًا، وقد أصبحت رائجة بفضل تطبيقات الفيديوهات القصيرة (مثل فيديوهات Shorts على YouTube). استخدِم هذا الخيار للأجسام الطويلة ذات الاتجاهات العمودية القوية، مثل المباني أو الأشجار أو الشلالات أو غيرها من الأجسام المشابهة.
 
-   Prompt: ein digitales Rendering eines riesigen Wolkenkratzers, modern,
-   groß, monumental, mit einem schönen Sonnenuntergang im Hintergrund (Seitenverhältnis 9:16)
+   ![مثال على نسبة العرض إلى الارتفاع](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=ar)
 
-#### Fotorealistische Bilder
+   الطلب: تصميم رقمي لناطحة سحاب ضخمة وعصرية
+   وفخمة ومهيبة مع منظر جميل لغروب الشمس في الخلفية (نسبة العرض إلى الارتفاع 9:16)
 
-Verschiedene Versionen des Bildgenerierungsmodells können eine Mischung aus künstlerischer und fotorealistischer Ausgabe bieten. Verwenden Sie die folgende Formulierung in Prompts, um je nach dem zu generierenden Thema eine fotorealistischere Ausgabe zu generieren.
+#### الصور الواقعية
 
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+قد تقدّم الإصدارات المختلفة من نموذج إنشاء الصور مزيجًا من النتائج الفنية والواقعية. استخدِم الكلمات التالية في الطلبات لإنشاء صور واقعية أكثر استنادًا إلى الموضوع الذي تريد إنشاءه.
+
+| حالة الاستخدام | نوع العدسة | الأبعاد البؤرية | تفاصيل إضافية |
 | --- | --- | --- | --- |
-| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
-| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
-| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
-| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
+| الأشخاص (صور شخصية) | التكبير والتصغير | 24-35 مم | فيلم بالأبيض والأسود، فيلم نوار، عمق المجال، لونان (اذكر لونَين) |
+| الطعام والحشرات والنباتات (الأشياء، الطبيعة الصامتة) | وحدة الماكرو | ‫60-105 مم | تفاصيل عالية، تركيز دقيق، إضاءة مضبوطة |
+| الرياضة والحياة البرية (صور متحركة) | التكبير/التصغير باستخدام العدسة المقرّبة | 100-400 مم | سرعة غالق عالية، تتبُّع الحركة |
+| فلكية، مناظر طبيعية (زاوية عريضة) | زاوية عريضة | 10-24mm | أوقات تعرُّض طويلة للضوء، تركيز حاد، تعرُّض طويل للضوء، مياه أو سُحب ناعمة |
 
-##### Porträts
+##### صور شخصية
 
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| حالة الاستخدام | نوع العدسة | الأبعاد البؤرية | تفاصيل إضافية |
 | --- | --- | --- | --- |
-| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
+| الأشخاص (صور شخصية) | التكبير والتصغير | 24-35 مم | فيلم بالأبيض والأسود، فيلم نوار، عمق المجال، لونان (اذكر لونَين) |
 
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Porträts generieren:
+باستخدام عدة كلمات رئيسية من الجدول، يمكن لـ Imagen إنشاء الصور الشخصية التالية:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
+| مثال على تصوير الوجه | مثال على تصوير الوجه | مثال على تصوير الوجه | مثال على تصوير الوجه |
 
-Prompt: *Eine Frau, 35 mm Hochformat, blaue und graue Duotones*  
-Modell: `imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
-
-Eingabeaufforderung: *Eine Frau, 35 mm Hochformat, Film Noir*  
-Modell: `imagen-4.0-generate-001`
-
-##### Objekte
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Objektbilder generieren:
+الطلب: *صورة عمودية لامرأة، 35 ملم، درجات أزرق ورمادي*  
+الطراز: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
+| مثال على تصوير الوجه | مثال على تصوير الوجه | مثال على تصوير الوجه | مثال على تصوير الوجه |
 
-Eingabeaufforderung: *Blatt einer Gebetspflanze, Makroobjektiv, 60 mm*  
-Modell: `imagen-4.0-generate-001`
+الطلب: *امرأة، صورة شخصية 35 ملم، فيلم نوار*  
+النموذج: `imagen-4.0-generate-001`
+
+##### العناصر
+
+| حالة الاستخدام | نوع العدسة | الأبعاد البؤرية | تفاصيل إضافية |
+| --- | --- | --- | --- |
+| الطعام والحشرات والنباتات (الأشياء، الطبيعة الصامتة) | وحدة الماكرو | ‫60-105 مم | تفاصيل عالية، تركيز دقيق، إضاءة مضبوطة |
+
+باستخدام عدة كلمات رئيسية من الجدول، يمكن لـ Imagen إنشاء صور العناصر التالية:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
+| مثال على تصوير الأغراض | مثال على تصوير الأغراض | مثال على تصوير الأغراض | مثال على تصوير الأغراض |
 
-Eingabeaufforderung: *Eine Nudelplatte, 100-mm-Makroobjektiv*  
-Modell: `imagen-4.0-generate-001`
-
-##### Bewegung
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Bewegungsbilder generieren:
+الطلب: *ورقة نبات الصلاة، عدسة ماكرو، 60 ملم*  
+النموذج: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
+| مثال على تصوير الأغراض | مثال على تصوير الأغراض | مثال على تصوير الأغراض | مثال على تصوير الأغراض |
 
-Prompt: *Ein erfolgreicher Touchdown, schnelle Belichtungszeit, Bewegungsverfolgung*  
-Modell: `imagen-4.0-generate-001`
+الطلب: *طبق من المعكرونة، عدسة ماكرو 100 ملم*  
+النموذج: `imagen-4.0-generate-001`
+
+##### حركة
+
+| حالة الاستخدام | نوع العدسة | الأبعاد البؤرية | تفاصيل إضافية |
+| --- | --- | --- | --- |
+| الرياضة والحياة البرية (صور متحركة) | التكبير/التصغير باستخدام العدسة المقرّبة | 100-400 مم | سرعة غالق عالية، تتبُّع الحركة |
+
+باستخدام عدة كلمات رئيسية من الجدول، يمكن لـ Imagen إنشاء الصور المتحركة التالية:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
+| مثال على التصوير الفوتوغرافي للحركة | مثال على التصوير الفوتوغرافي للحركة | مثال على التصوير الفوتوغرافي للحركة | مثال على التصوير الفوتوغرافي للحركة |
 
-Eingabeaufforderung: *Ein Reh läuft im Wald, schnelle Belichtungszeit, Bewegungsverfolgung*  
-Modell: `imagen-4.0-generate-001`
-
-##### Weitwinkel
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Weitwinkelbilder generieren:
+الطلب: *إحراز هدف الفوز، سرعة غالق عالية، تتبُّع الحركة*  
+النموذج: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
+| مثال على التصوير الفوتوغرافي للحركة | مثال على التصوير الفوتوغرافي للحركة | مثال على التصوير الفوتوغرافي للحركة | مثال على التصوير الفوتوغرافي للحركة |
 
-Eingabeaufforderung: *Großer Bergbereich, Querwinkel 10 mm*  
-Modell: `imagen-4.0-generate-001`
+الطلب: *غزال يركض في الغابة، سرعة التقاط عالية، تتبُّع الحركة*  
+النموذج: `imagen-4.0-generate-001`
+
+##### زاوية عريضة
+
+| حالة الاستخدام | نوع العدسة | الأبعاد البؤرية | تفاصيل إضافية |
+| --- | --- | --- | --- |
+| فلكية، مناظر طبيعية (زاوية عريضة) | زاوية عريضة | 10-24mm | أوقات تعرُّض طويلة للضوء، تركيز حاد، تعرُّض طويل للضوء، مياه أو سُحب ناعمة |
+
+باستخدام عدة كلمات رئيسية من الجدول، يمكن لـ Imagen إنشاء الصور التالية بزاوية عريضة:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
+| مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة |
 
-Prompt: *ein Foto des Mondes, Astrofotografie, Weitwinkel 10 mm*  
-Modell: `imagen-4.0-generate-001`
+الطلب: *سلسلة جبال شاسعة، زاوية واسعة للمشهد الطبيعي 10 مم*  
+النموذج: `imagen-4.0-generate-001`
 
-## Modellversionen
+|  |  |  |  |
+| --- | --- | --- | --- |
+| مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة |
 
-### Imagen 4
+الطلب: *صورة للقمر، تصوير فلكي، زاوية واسعة 10 مم*  
+النموذج: `imagen-4.0-generate-001`
 
-| Attribut | Beschreibung |
+## إصدارات النماذج
+
+### Imagen 4
+
+| الموقع | الوصف |
 | --- | --- |
-| id\_cardModellcode | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveUnterstützte Datentypen | **Eingabe**  Text  **Ausgabe**  Bilder |
-| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  480 Tokens (Text)  **Ausgabe von Bildern**  1 bis 4 (Ultra/Standard/Schnell) |
-| calendar\_monthLetzte Aktualisierung | Juni 2025 |
+| id\_cardرمز النموذج | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveأنواع البيانات المتوافقة | **الإدخال**  نص  **الناتج**  الصور |
+| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  ‫480 رمزًا مميزًا (نص)  **الصور الناتجة**  من 1 إلى 4 (Ultra/عادي/السريع) |
+| calendar\_monthآخر تعديل | يونيو 2025 |
 
-### Imagen 3
+### Imagen 3
 
-Das Imagen 3-Modell wurde [eingestellt](https://ai.google.dev/gemini-api/docs/deprecations?hl=de).
+تم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نموذج Imagen 3.
 
-Feedback geben
+إرسال ملاحظات
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Zuletzt aktualisiert: 2026-05-13 (UTC).
+تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)
 
-Haben Sie Feedback für uns?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-13 (UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

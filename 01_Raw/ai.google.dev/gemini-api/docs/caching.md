@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/caching?hl=zh-TW
-fetched_at: 2026-06-08T05:29:57.709456+00:00
+fetched_at: 2026-06-15T06:20:12.107626+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

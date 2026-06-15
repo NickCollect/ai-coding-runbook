@@ -1,44 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=zh-TW
-fetched_at: 2026-06-08T05:37:06.197066+00:00
-title: "\u4f7f\u7528\u5de5\u5177\u642d\u914d Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=tr
+fetched_at: 2026-06-15T06:32:08.146665+00:00
+title: "Live API ile ara\u00e7 kullan\u0131m\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-提供意見
+Geri bildirim gönderin
 
-# 使用工具搭配 Live API
+# Live API ile araç kullanımı
 
-使用工具可讓 Live API 不只是對話，還能執行實際動作並擷取外部內容，同時維持即時連線。您可以使用 Live API 定義工具，例如[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)和 [Google 搜尋](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)。
+Araç kullanımı, gerçek dünyada işlemler gerçekleştirmesine ve gerçek zamanlı bağlantıyı korurken harici bağlamları dahil etmesine olanak tanıyarak Live API'nin sohbetin ötesine geçmesine olanak tanır.
+Live API ile [işlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) ve [Google Arama](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) gibi araçları tanımlayabilirsiniz.
 
-## 支援的工具總覽
+## Desteklenen araçlara genel bakış
 
-以下簡要介紹 Live API 模型可用的工具：
+Live API modelleri için kullanılabilen araçlara kısa bir genel bakış:
 
-| 工具 | Gemini 3.1 Flash Live Preview | Gemini 2.5 Flash Live Preview |
+| Araç | Gemini 3.1 Flash Live Preview | Gemini 2.5 Flash Live Preview |
 | --- | --- | --- |
-| **搜尋** | 支援 | 支援 |
-| **函式呼叫** | 支援 (僅限同步) | 支援 (同步和[非同步](#async-function-calling)) |
-| **Google 地圖** | 不支援 | 不支援 |
-| **程式碼執行** | 不支援 | 不支援 |
-| **網址內容** | 不支援 | 不支援 |
+| **Arama** | Destekleniyor | Destekleniyor |
+| **İşlev çağırma** | Desteklenir (yalnızca eşzamanlı) | Desteklenir (eşzamanlı ve [eşzamansız](#async-function-calling)) |
+| **Google Haritalar** | Desteklenmiyor | Desteklenmiyor |
+| **Kod yürütme** | Desteklenmiyor | Desteklenmiyor |
+| **URL bağlamı** | Desteklenmiyor | Desteklenmiyor |
 
-## 函式呼叫
+## İşlev çağırma
 
-Live API 支援函式呼叫，就像一般內容生成要求一樣。透過函式呼叫，Live API 可以與外部資料和程式互動，大幅提升應用程式的功能。
+Live API, normal içerik oluşturma istekleri gibi işlev çağrılarını destekler. İşlev çağırma, Live API'nin harici veriler ve programlarla etkileşime geçmesini sağlayarak uygulamalarınızın yapabileceklerini büyük ölçüde artırır.
 
-您可以在工作階段設定中定義函式宣告。收到工具呼叫後，用戶端應使用 `session.send_tool_response` 方法，以 `FunctionResponse` 物件清單回應。
+Oturum yapılandırmasının bir parçası olarak işlev tanımlamaları belirleyebilirsiniz.
+Araç çağrıları alındıktan sonra istemci, `session.send_tool_response` yöntemini kullanarak `FunctionResponse` nesnelerinin listesiyle yanıt vermelidir.
 
-詳情請參閱[函式呼叫教學課程](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)。
+Daha fazla bilgi edinmek için [İşlev çağırma eğitimi](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) konusuna bakın.
 
 ### Python
 
@@ -215,13 +217,13 @@ async function main() {
 main();
 ```
 
-模型可以根據單一提示產生多個函式呼叫，以及串連輸出內容所需的程式碼。這段程式碼會在沙箱環境中執行，產生後續的 [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=zh-tw#bidigeneratecontenttoolcall) 訊息。
+Model, tek bir istemden birden fazla işlev çağrısı ve bunların çıkışlarını zincirlemek için gereken kodu oluşturabilir. Bu kod, bir korumalı alan ortamında yürütülerek sonraki [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=tr#bidigeneratecontenttoolcall) mesajlarını oluşturur.
 
-## 非同步函式呼叫
+## Eşzamansız işlev çağrısı
 
-根據預設，函式呼叫會依序執行，也就是說，系統會暫停執行作業，直到每個函式呼叫的結果都可用為止。這可確保系統依序處理函式，也就是說，函式執行期間，您無法繼續與模型互動。
+İşlev çağrısı varsayılan olarak sırayla yürütülür. Bu nedenle, her işlev çağrısının sonuçları kullanılabilir olana kadar yürütme duraklatılır. Bu, işlevler çalıştırılırken modelle etkileşime devam edemeyeceğiniz anlamına gelen sıralı işlemeyi sağlar.
 
-如果不想封鎖對話，可以要求模型非同步執行函式。如要這麼做，請先在函式定義中新增 `behavior`：
+Sohbeti engellemek istemiyorsanız modele işlevleri eşzamansız olarak çalıştırmasını söyleyebilirsiniz. Bunu yapmak için önce işlev tanımlarına bir `behavior` eklemeniz gerekir:
 
 ### Python
 
@@ -245,14 +247,14 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING` 可確保函式以非同步方式執行，同時您可繼續與模型互動。
+`NON-BLOCKING`, işlevin eşzamansız olarak çalışmasını sağlarken modelle etkileşim kurmaya devam edebilirsiniz.
 
-接著，您需要使用 `scheduling` 參數，告知模型在收到 `FunctionResponse` 時的行為。你可以選擇：
+Ardından, `scheduling` parametresini kullanarak modele `FunctionResponse` aldığında nasıl davranması gerektiğini söylemeniz gerekir. Şunlardan birini yapabilir:
 
-- 中斷目前執行的動作，並立即告知你收到的回覆 (`scheduling="INTERRUPT"`)，
-- 請等待裝置完成目前執行的作業 (`scheduling="WHEN_IDLE"`)，
-- 或者，您也可以不採取任何行動，稍後在討論中使用該知識
-  (`scheduling="SILENT"`)
+- Yaptığı işlemi kesintiye uğratıp aldığı yanıtı hemen size bildirir
+  (`scheduling="INTERRUPT"`),
+- Şu anda yaptığı işlemi tamamlamasını bekler (`scheduling="WHEN_IDLE"`),
+- Dilerseniz hiçbir şey yapmayıp bu bilgileri daha sonra tartışmada kullanabilir (`scheduling="SILENT"`)
 
 ### Python
 
@@ -284,9 +286,9 @@ const functionResponse = {
 }
 ```
 
-## 以 Google 搜尋建立基準
+## Google Arama ile Temellendirme
 
-您可以在工作階段設定中啟用「以 Google 搜尋強化事實基礎」。這有助於提高 Live API 的準確度，並避免產生錯覺。詳情請參閱[基礎教學課程](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)。
+Oturum yapılandırmasının bir parçası olarak Google Arama ile Temellendirme'yi etkinleştirebilirsiniz. Bu, Live API'nin doğruluğunu artırır ve halüsinasyonları önler. Daha fazla bilgi edinmek için [Temellendirme eğitimi](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) konusuna bakın.
 
 ### Python
 
@@ -445,9 +447,9 @@ async function main() {
 main();
 ```
 
-## 結合多種工具
+## Birden fazla aracı birleştirme
 
-您可以在 Live API 中結合多種工具，進一步提升應用程式的功能：
+Live API'de birden fazla aracı birleştirerek uygulamanızın özelliklerini daha da artırabilirsiniz:
 
 ### Python
 
@@ -495,17 +497,17 @@ const config = {
 // ... remaining model call
 ```
 
-## 後續步驟
+## Sırada ne var?
 
-- 如要查看更多搭配 Live API 使用工具的範例，請參閱[工具使用食譜](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=zh-tw)。
-- 如要瞭解功能和設定的完整資訊，請參閱[即時 API 功能指南](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-tw)。
+- Araçları Live API ile kullanma hakkında daha fazla örnek için [Araç kullanımı çözüm kitabına](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=tr) göz atın.
+- Özellikler ve yapılandırmalarla ilgili tüm bilgileri [Live API Özellikleri kılavuzundan](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr) edinebilirsiniz.
 
-提供意見
+Geri bildirim gönderin
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-上次更新時間：2026-06-01 (世界標準時間)。
+Son güncelleme tarihi: 2026-06-01 UTC.
 
-想進一步說明嗎？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-01 (世界標準時間)。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-01 UTC."],[],[]]

@@ -1,112 +1,112 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=es-419
-fetched_at: 2026-06-08T05:33:52.987322+00:00
-title: "Configuraci\u00f3n de seguridad \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=ja
+fetched_at: 2026-06-15T06:24:01.987766+00:00
+title: "\u5b89\u5168\u6027\u8a2d\u5b9a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Enviar comentarios
+フィードバックを送信
 
-# Configuración de seguridad
+# 安全性設定
 
-La API de Gemini proporciona parámetros de seguridad que puedes ajustar durante la fase de creación de prototipos para determinar si tu aplicación requiere una configuración de seguridad más o menos restrictiva. Puedes ajustar estos parámetros en cuatro categorías de filtros para restringir o permitir ciertos tipos de contenido.
+Gemini API には、プロトタイピングの段階で調整できる安全性の設定が用意されています。これにより、アプリケーションに対してより厳しいまたは緩い安全性の構成が必要かどうかを判断できます。これらの設定は、4 つのフィルタ カテゴリにわたって調整し、特定の種類のコンテンツを制限または許可できます。
 
-En esta guía, se explica cómo la API de Gemini controla los parámetros de seguridad y el filtrado, y cómo puedes cambiar los parámetros de seguridad de tu aplicación.
+このガイドでは、Gemini API で安全性の設定とフィルタリングがどのように処理されるか、アプリケーションの安全性の設定を変更する方法について説明します。
 
-## Filtros de seguridad
+## 安全フィルタ
 
-Los filtros de seguridad ajustables de la API de Gemini abarcan las siguientes categorías:
+Gemini API の調整可能な安全フィルタは、次のカテゴリを対象としています。
 
-| Categoría | Descripción |
+| カテゴリ | 説明 |
 | --- | --- |
-| Hostigamiento | Comentarios negativos o dañinos dirigidos a la identidad o a los atributos protegidos |
-| Incitación al odio o a la violencia | Contenido obsceno, grosero o irrespetuoso. |
-| Contenido sexualmente explícito | Referencias a actos sexuales o a otro contenido obsceno. |
-| Peligroso | Contenido que promueve, facilita o incita actos dañinos. |
+| 嫌がらせ | アイデンティティや保護対象属性をターゲットとする否定的または有害なコメント。 |
+| ヘイトスピーチ | 失礼、無礼、または不敬なコンテンツ。 |
+| 露骨な性表現 | 性行為やわいせつな内容に関する情報が含まれるコンテンツ。 |
+| 危険 | 有害な行為を促進、助長、または推奨するコンテンツ。 |
 
-Estas categorías se definen en [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=es-419). Puedes usar estos filtros para ajustar lo que sea apropiado para tu caso de uso. Por ejemplo, si estás creando diálogos de videojuegos, puedes considerar aceptable permitir más contenido clasificado como *peligroso* debido a la naturaleza del juego.
+これらのカテゴリは [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=ja) で定義されています。これらのフィルタを使用して、ユースケースに適切なコンテンツとなるように調整できます。たとえば、ゲームの会話を作成する場合、ゲームの性質上、「危険」として評価されたコンテンツをより多く許容することを問題ないとみなす場合があります。
 
-Además de los filtros de seguridad ajustables, la API de Gemini tiene protecciones integradas contra daños fundamentales, como el contenido que pone en peligro la seguridad de los niños.
-Estos tipos de daño siempre se bloquean y no se pueden ajustar.
+Gemini API には、調整可能な安全フィルタに加えて、児童を危険にさらすようなコンテンツなど、重大な有害性に対する保護機能が組み込まれています。
+このような種類の有害性は常にブロックされ、調整することはできません。
 
-### Nivel de filtrado de seguridad del contenido
+### コンテンツの安全フィルタリング レベル
 
-La API de Gemini categoriza el nivel de probabilidad de que el contenido sea inseguro como `HIGH`, `MEDIUM`, `LOW` o `NEGLIGIBLE`.
+Gemini API は、コンテンツが安全でない確率レベルを `HIGH`、`MEDIUM`、`LOW`、`NEGLIGIBLE` に分類します。
 
-La API de Gemini bloquea el contenido en función de la probabilidad de que el contenido sea inseguro y no la gravedad. Es importante saber esto porque algunos contenidos pueden tener una baja probabilidad de ser inseguros, aunque la gravedad del daño pueda seguir siendo alta. Por ejemplo, comparemos las siguientes oraciones:
+Gemini API は、重大度ではなく、コンテンツが安全でない確率に基づいてコンテンツをブロックします。コンテンツによっては、危害の重大度が高くても、安全でない確率が低くなるものもあるため、この点を考慮することが重要です。たとえば、次の文を比較します。
 
-1. El robot me golpeó.
-2. El robot me acuchilló.
+1. ロボットが私をパンチした。
+2. ロボットが私を切り付けた。
 
-La primera oración puede tener una mayor probabilidad de que sea contenido no seguro, pero podrías considerar que la segunda oración es de mayor gravedad en términos de violencia.
-Ahora que entendemos esto, es importante que pruebes y consideres con cuidado cuál es el nivel adecuado de bloqueo necesario para apoyar tus casos de uso clave, para así minimizar al mismo tiempo el daño a los usuarios finales.
+最初の文は安全でない確率が高くなる可能性がありますが、2 つめの文は暴力の観点で重大度が高いとみなすことができます。
+したがって、エンドユーザーへの悪影響を最小限に抑えながら主要なユースケースをサポートするために必要となる、適切なレベルのブロックを慎重にテストし、検討することが重要です。
 
-### Filtrado de seguridad por solicitud
+### リクエストごとの安全フィルタリング
 
-Puedes ajustar los parámetros de seguridad para cada solicitud que realices a la API. Cuando haces una solicitud, el contenido se analiza y se le asigna una calificación de seguridad. La calificación de seguridad incluye la categoría y la probabilidad de la clasificación del daño. Por ejemplo, si el contenido se bloqueó debido a que la categoría de hostigamiento tenía una alta probabilidad, la calificación de seguridad que se muestra tendría una categoría igual a `HARASSMENT` y la probabilidad de daño establecida en `HIGH`.
+API に対するリクエストごとに安全性の設定を調整できます。リクエストを行うと、コンテンツが分析され、安全性評価が割り当てられます。安全性評価には、カテゴリと有害として分類される確率が含まれます。たとえば、「嫌がらせ」カテゴリに対して高い確率で安全でなかったためにコンテンツがブロックされた場合、返される安全性評価のカテゴリは `HARASSMENT`、有害である確率は `HIGH` に設定されます。
 
-Debido a la seguridad inherente del modelo, los filtros adicionales están **desactivados** de forma predeterminada.
-Si eliges habilitarlos, puedes configurar el sistema para que bloquee el contenido en función de su probabilidad de ser inseguro. El comportamiento predeterminado del modelo abarca la mayoría de los casos de uso, por lo que solo debes ajustar estos parámetros si es necesario para tu aplicación.
+モデルには固有の安全性があるため、追加のフィルタはデフォルトで**オフ** になっています。
+有効にする場合は、安全でない確率に基づいてコンテンツをブロックするようにシステムを構成できます。デフォルトのモデルの動作はほとんどのユースケースに対応しているため、アプリケーションで一貫して必要とされる場合にのみ、これらの設定を調整してください。
 
-En la siguiente tabla, se describe la configuración de bloqueo que puedes ajustar para cada categoría. Por ejemplo, si estableces la configuración de bloqueo en **Bloquear poco** para la categoría de **incitación al odio o a la violencia**, se bloqueará todo lo que tenga una alta probabilidad de ser contenido de incitación al odio o a la violencia. Pero se permite cualquier cosa con una probabilidad menor.
+次の表に、カテゴリごとに調整できるブロック設定を示します。たとえば、「**ヘイトスピーチ** 」カテゴリのブロック設定を [**少量をブロック**] に設定した場合、ヘイトスピーチ コンテンツである確率が高いものはすべてブロックされますが、 確率が低いものは許可されます。
 
-| Umbral (Google AI Studio) | Umbral (API) | Descripción |
+| しきい値（Google AI Studio） | しきい値（API） | 説明 |
 | --- | --- | --- |
-| Desactivado | `OFF` | Desactiva el filtro de seguridad. |
-| No bloquear | `BLOCK_NONE` | Mostrar siempre sin importar la probabilidad de que sea contenido no seguro. |
-| Bloquear poco | `BLOCK_ONLY_HIGH` | Bloquear cuando haya una alta probabilidad de que sea contenido no seguro. |
-| Bloquear algunos | `BLOCK_MEDIUM_AND_ABOVE` | Bloquear cuando haya una probabilidad media o alta de que sea contenido no seguro. |
-| Bloquear la mayoría | `BLOCK_LOW_AND_ABOVE` | Bloquear cuando haya una probabilidad baja, media o alta de que sea contenido no seguro. |
-| N/A | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | No se especifica el umbral; se bloquea con el umbral predeterminado. |
+| オフ | `OFF` | 安全フィルタをオフにする |
+| ブロックなし | `BLOCK_NONE` | 安全でないコンテンツである確率に関係なく常に表示する |
+| 少量をブロック | `BLOCK_ONLY_HIGH` | 安全でないコンテンツである確率が高い場合にブロックする |
+| 一部をブロック | `BLOCK_MEDIUM_AND_ABOVE` | 安全でないコンテンツである確率が中程度または高い場合にブロックする |
+| ほとんどをブロック | `BLOCK_LOW_AND_ABOVE` | 安全でないコンテンツである確率が低い場合、中程度の場合、高い場合にブロックする |
+| なし | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | しきい値が指定されていません。デフォルトのしきい値を使用してブロックする |
 
-Si no se establece el umbral, el umbral de bloqueo predeterminado es **Desactivado** para los modelos Gemini 2.5 y 3.
+しきい値が設定されていない場合、Gemini 2.5 モデルと 3 モデルのデフォルトのブロックしきい値は**オフ** です。
 
-Puedes establecer estos parámetros para cada solicitud que realices al servicio generativo.
-Consulta la referencia de la API de [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=es-419#harmblockthreshold)
-para obtener más detalles.
+これらの設定は、生成サービスに対するリクエストごとに設定できます。
+詳細については、[`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=ja#harmblockthreshold) API
+リファレンスをご覧ください。
 
-### Comentarios de seguridad
+### 安全性のフィードバック
 
-[`generateContent`](https://ai.google.dev/api/generate-content?hl=es-419#method:-models.generatecontent)
-muestra una
-[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=es-419#generatecontentresponse) que
-incluye comentarios de seguridad.
+[`generateContent`](https://ai.google.dev/api/generate-content?hl=ja#method:-models.generatecontent)
+は、
+[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#generatecontentresponse)安全性のフィードバックを含む
+を返します。
 
-Los comentarios de los mensajes se incluyen en
-[`promptFeedback`](https://ai.google.dev/api/generate-content?hl=es-419#promptfeedback). Si se establece `promptFeedback.blockReason`, se bloqueó el contenido del mensaje.
+プロンプトのフィードバックは
+[`promptFeedback`](https://ai.google.dev/api/generate-content?hl=ja#promptfeedback)に含まれています。`promptFeedback.blockReason` が設定されている場合、プロンプトのコンテンツはブロックされました。
 
-Los comentarios de los candidatos de respuesta se incluyen en
-[`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=es-419#candidate) y
-[`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=es-419#candidate). Si se bloqueó el contenido de la respuesta y el `finishReason` fue `SAFETY`, puedes inspeccionar `safetyRatings` para obtener más detalles. No se muestra el contenido que se bloqueó.
+レスポンス候補のフィードバックは
+[`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=ja#candidate) と
+[`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=ja#candidate) に含まれています。レスポンス コンテンツがブロックされ、`finishReason` が `SAFETY` の場合は、`safetyRatings` で詳細を確認できます。ブロックされたコンテンツは返されません。
 
-## Ajusta la configuración de seguridad
+## 安全性の設定を調整する
 
-En esta sección, se explica cómo ajustar la configuración de seguridad en Google AI Studio y en tu código.
+このセクションでは、Google AI Studio とコードの両方で安全性の設定を調整する方法について説明します。
 
 ### Google AI Studio
 
-Puedes ajustar la configuración de seguridad en Google AI Studio.
+Google AI Studio で安全性の設定を調整できます。
 
-Haz clic en **Configuración de seguridad** en **Configuración avanzada** en el panel **Configuración de la ejecución** para abrir el modal **Ejecutar configuración de seguridad**. En el modal, puedes usar los controles deslizantes para ajustar el nivel de filtrado de contenido por categoría de seguridad:
+[**実行設定**] パネルの [**詳細設定**] で [**安全性の設定**] をクリックして、[**実行の安全性の設定**] モーダルを開きます。このモーダルでは、スライダーを使用して、安全カテゴリごとにコンテンツ フィルタリング レベルを調整できます。
 
-![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=es-419)
+![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=ja)
 
-Cuando envías una solicitud (por ejemplo, cuando le haces una pregunta al modelo), aparece un mensaje warning
-**Contenido bloqueado** si se bloquea el contenido de la solicitud. Para ver más detalles, mantén el puntero sobre el texto **Contenido bloqueado** para ver la categoría y la probabilidad de la clasificación del daño.
+リクエストを送信すると（モデルに質問するなど）、リクエストのコンテンツがブロックされた場合、warning
+[**Content blocked**] というメッセージが表示されます。詳細を確認するには、[**コンテンツがブロックされました**] というテキストにポインタを合わせると、カテゴリと有害として分類される確率が表示されます。
 
-### Ejemplos de código
+### コードの例
 
-En el siguiente fragmento de código, se muestra cómo establecer la configuración de seguridad en tu llamada a `GenerateContent`. Esto establece el umbral para la categoría de incitación al odio o a la violencia (`HARM_CATEGORY_HATE_SPEECH`). Si estableces esta categoría en `BLOCK_LOW_AND_ABOVE`, se bloqueará cualquier contenido que tenga una probabilidad baja o superior de ser incitación al odio o a la violencia. Para comprender la configuración del umbral, consulta [Filtrado de seguridad
-por solicitud](#safety-filtering-per-request).
+次のコード スニペットは、`GenerateContent` 呼び出しで安全性の設定を行う方法を示しています。これにより、ヘイトスピーチ（`HARM_CATEGORY_HATE_SPEECH`）カテゴリのしきい値が設定されます。このカテゴリを `BLOCK_LOW_AND_ABOVE` に設定すると、ヘイトスピーチである確率が低い以上のコンテンツがブロックされます。しきい値の設定については、[安全フィルタリング
+リクエストごと](#safety-filtering-per-request)をご覧ください。
 
 ### Python
 
@@ -236,26 +236,22 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-## Próximos pasos
+## 次のステップ
 
-- Consulta la [referencia de la API](https://ai.google.dev/api?hl=es-419) para obtener más información sobre la API completa.
-- Revisa la [guía de seguridad](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=es-419) para obtener una descripción general de las consideraciones de seguridad
-  cuando desarrollas con LLMs.
-- Obtén más información sobre la evaluación de la probabilidad en comparación con la gravedad del equipo de [Jigsaw
-  team](https://developers.perspectiveapi.com/s/about-the-api-score).
-- Obtén más información sobre los productos que contribuyen a las soluciones de seguridad, como la
-  [API
-  de Perspective](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
-  \* Puedes usar estos parámetros de seguridad para crear un clasificador de toxicidad. Consulta el [ejemplo
-  de clasificación](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=es-419) para
-  comenzar.
+- API の詳細については、[API リファレンス](https://ai.google.dev/api?hl=ja)をご覧ください。
+- LLM を使用した開発における安全性の考慮事項の概要については、[安全性のガイダンス](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja)をご覧ください。
+- 確率と重大度の評価の詳細については、[Jigsaw
+  チーム](https://developers.perspectiveapi.com/s/about-the-api-score)のブログをご覧ください。
+- [Perspective API などの安全ソリューションに貢献するプロダクトの詳細をご覧ください。](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7)\* これらの安全性の設定を使用して、有害性
+  分類子を作成できます。始めるには、[分類
+  の例](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=ja)をご覧ください。
 
-Enviar comentarios
+フィードバックを送信
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última actualización: 2026-06-01 (UTC)
+最終更新日 2026-06-01 UTC。
 
-¿Quieres brindar más información?
+ご意見をお聞かせください
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-01 (UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]

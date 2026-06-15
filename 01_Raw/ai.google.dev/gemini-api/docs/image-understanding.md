@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi
-fetched_at: 2026-06-08T05:34:24.743121+00:00
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=fr
+fetched_at: 2026-06-15T06:27:21.725292+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Gửi ý kiến phản hồi
+Envoyer des commentaires
 
-# Hiểu hình ảnh
+# Compréhension des images
 
-Các mô hình Gemini được xây dựng từ đầu theo hướng đa phương thức, mở ra nhiều nhiệm vụ xử lý hình ảnh và thị giác máy tính, bao gồm nhưng không giới hạn ở việc chú thích hình ảnh, phân loại và trả lời câu hỏi bằng hình ảnh mà không cần phải huấn luyện các mô hình học máy chuyên biệt.
+Les modèles Gemini sont conçus pour être multimodaux dès le départ, ce qui permet d'effectuer un large éventail de tâches de traitement d'images et de vision par ordinateur, y compris, mais sans s'y limiter, la description d'images, la classification et les systèmes de questions-réponses visuelles, sans avoir à entraîner des modèles de ML spécialisés.
 
-Ngoài các khả năng đa phương thức chung, các mô hình Gemini còn mang đến **độ chính xác cao hơn** cho các trường hợp sử dụng cụ thể như [phát hiện đối tượng](#object-detection), thông qua quá trình huấn luyện bổ sung.
+En plus de leurs capacités multimodales générales, les modèles Gemini offrent une **précision améliorée** pour des cas d'utilisation spécifiques comme la [détection d'objets](#object-detection), grâce à un entraînement supplémentaire.
 
-## Truyền hình ảnh cho Gemini
+## Transmettre des images à Gemini
 
-Bạn có thể cung cấp hình ảnh làm dữ liệu đầu vào cho Gemini bằng 2 phương thức:
+Vous pouvez fournir des images en entrée à Gemini de deux manières :
 
-- [Truyền dữ liệu hình ảnh nội tuyến](#inline-image): Phù hợp với các tệp nhỏ hơn (tổng kích thước yêu cầu nhỏ hơn 20 MB, bao gồm cả câu lệnh).
-- [Tải hình ảnh lên bằng File API](#upload-image): Nên dùng cho các tệp lớn hơn hoặc để dùng lại hình ảnh trong nhiều yêu cầu.
+- [Transmettre des données d'image intégrées](#inline-image) : idéal pour les fichiers plus petits (taille totale de la requête inférieure à 20 Mo, y compris les requêtes).
+- [Importer des images à l'aide de l'API File](#upload-image) : recommandé pour les fichiers volumineux ou pour réutiliser des images dans plusieurs requêtes.
 
-### Truyền dữ liệu hình ảnh cùng dòng
+### Transmettre des données d'image intégrées
 
-Bạn có thể truyền dữ liệu hình ảnh cùng dòng trong yêu cầu đến `generateContent`. Bạn có thể cung cấp dữ liệu hình ảnh dưới dạng chuỗi được mã hoá Base64 hoặc bằng cách đọc trực tiếp các tệp cục bộ (tuỳ thuộc vào ngôn ngữ).
+Vous pouvez transmettre des données d'image intégrées dans la requête à `generateContent`. Vous pouvez fournir des données d'image sous forme de chaînes encodées en base64 ou en lisant directement les fichiers locaux (selon la langue).
 
-Ví dụ sau đây cho thấy cách đọc hình ảnh từ một tệp cục bộ và truyền hình ảnh đó đến API `generateContent` để xử lý.
+L'exemple suivant montre comment lire une image à partir d'un fichier local et la transmettre à l'API `generateContent` pour traitement.
 
 ### Python
 
@@ -142,7 +142,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }' 2> /dev/null
 ```
 
-Bạn cũng có thể tìm nạp hình ảnh từ một URL, chuyển đổi hình ảnh đó thành byte và truyền đến `generateContent` như trong các ví dụ sau.
+Vous pouvez également récupérer une image à partir d'une URL, la convertir en octets et la transmettre à `generateContent`, comme illustré dans les exemples suivants.
 
 ### Python
 
@@ -284,9 +284,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }' 2> /dev/null
 ```
 
-### Tải hình ảnh lên bằng File API
+### Importer des images à l'aide de l'API File
 
-Đối với các tệp lớn hoặc để có thể sử dụng cùng một tệp hình ảnh nhiều lần, hãy sử dụng Files API. Mã sau đây tải một tệp hình ảnh lên, sau đó dùng tệp đó trong một lệnh gọi đến `generateContent`. Hãy xem [hướng dẫn về Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi) để biết thêm thông tin và ví dụ.
+Pour les fichiers volumineux ou pour pouvoir utiliser le même fichier image à plusieurs reprises, utilisez l'API Files. Le code suivant importe un fichier image, puis l'utilise dans un appel à `generateContent`. Pour en savoir plus et obtenir des exemples, consultez le [guide de l'API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr).
 
 ### Python
 
@@ -431,9 +431,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Đưa ra câu lệnh bằng nhiều hình ảnh
+## Créer des requêtes avec plusieurs images
 
-Bạn có thể cung cấp nhiều hình ảnh trong một câu lệnh bằng cách thêm nhiều đối tượng hình ảnh `Part` vào mảng `contents`. Đây có thể là sự kết hợp giữa dữ liệu nội tuyến (tệp cục bộ hoặc URL) và các tham chiếu đến File API.
+Vous pouvez fournir plusieurs images dans une même requête en incluant plusieurs objets `Part` dans le tableau `contents`. Il peut s'agir d'un mélange de données intégrées (fichiers locaux ou URL) et de références à l'API File.
 
 ### Python
 
@@ -618,9 +618,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Phát hiện vật thể
+## Détection d'objets
 
-Các mô hình được huấn luyện để phát hiện các đối tượng trong một hình ảnh và lấy toạ độ hộp giới hạn của các đối tượng đó. Toạ độ, so với kích thước hình ảnh, tỷ lệ thành [0, 1000]. Bạn cần giảm tỷ lệ các toạ độ này dựa trên kích thước hình ảnh gốc.
+Les modèles sont entraînés à détecter les objets dans une image et à obtenir les coordonnées de leur cadre de délimitation. Les coordonnées, par rapport aux dimensions de l'image, sont mises à l'échelle [0, 1000]. Vous devez les remettre à l'échelle en fonction de la taille de votre image d'origine.
 
 ### Python
 
@@ -659,77 +659,238 @@ print("Image size: ", width, height)
 print("Bounding boxes:", converted_bounding_boxes)
 ```
 
-Để xem thêm ví dụ, hãy tham khảo các sổ tay sau trong [Sổ tay về Gemini](https://github.com/google-gemini/cookbook):
+### JavaScript
 
-- [Sổ tay về khả năng nhận biết không gian 2D](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=vi)
-- [Sổ ghi chú thử nghiệm về thao tác trỏ 3D](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=vi)
+```
+import { GoogleGenAI } from "@google/genai";
+import * as fs from "node:fs";
 
-## Định dạng hình ảnh được hỗ trợ
+const ai = new GoogleGenAI({});
+const base64ImageFile = fs.readFileSync("/path/to/image.png", {
+  encoding: "base64",
+});
 
-Gemini hỗ trợ các loại MIME sau đây cho định dạng hình ảnh:
+const response = await ai.models.generateContent({
+  model: "gemini-3.5-flash",
+  contents: [
+    {
+      inlineData: {
+        mimeType: "image/png",
+        data: base64ImageFile,
+      },
+    },
+    "Detect the all of the prominent items in the image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
+  ],
+  config: {
+    responseMimeType: "application/json",
+  },
+});
 
-- PNG – `image/png`
-- JPEG – `image/jpeg`
-- WEBP – `image/webp`
-- HEIC – `image/heic`
-- HEIF – `image/heif`
+const boundingBoxes = JSON.parse(response.text);
+console.log(boundingBoxes);
+// To convert normalized coordinates to absolute pixels:
+// const absY1 = (boundingBoxes[0].box_2d[0] / 1000) * imageHeight;
+// const absX1 = (boundingBoxes[0].box_2d[1] / 1000) * imageWidth;
+```
 
-Để tìm hiểu về các phương thức nhập tệp khác, hãy xem hướng dẫn [Phương thức nhập tệp](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi).
+### Go
 
-## Tính năng
+```
+package main
 
-Tất cả các phiên bản mô hình Gemini đều là mô hình đa phương thức và có thể được sử dụng trong nhiều tác vụ xử lý hình ảnh và thị giác máy tính, bao gồm nhưng không giới hạn ở việc chú thích hình ảnh, trả lời câu hỏi bằng hình ảnh, phân loại hình ảnh và phát hiện đối tượng.
+import (
+    "context"
+    "encoding/json"
+    "fmt"
+    "image"
+    _ "image/png" // Register PNG decoder
+    "log"
+    "os"
 
-Gemini có thể giảm nhu cầu sử dụng các mô hình học máy chuyên biệt, tuỳ thuộc vào yêu cầu về chất lượng và hiệu suất của bạn.
+    "google.golang.org/genai"
+)
 
-Các phiên bản mô hình mới nhất được huấn luyện cụ thể để cải thiện độ chính xác của các tác vụ chuyên biệt ngoài các chức năng chung, chẳng hạn như tính năng [phát hiện đối tượng](#object-detection) nâng cao.
+type BoundingBox struct {
+    Box2D []int  `json:"box_2d"`
+    Label string `json:"label"`
+}
 
-## Hạn chế và thông tin kỹ thuật chính
+func main() {
+    ctx := context.Background()
+    client, err := genai.NewClient(ctx, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-### Giới hạn về tệp
+    imagePath := "/path/to/image.png"
 
-Các mô hình Gemini hỗ trợ tối đa 3.600 tệp hình ảnh cho mỗi yêu cầu.
+    // Open the image to get dimensions
+    file, err := os.Open(imagePath)
+    if err != nil {
+        log.Fatal(err)
+    }
+    defer file.Close()
 
-### Cách tính toán mã thông báo
+    imgConfig, _, err := image.DecodeConfig(file)
+    if err != nil {
+        log.Fatal(err)
+    }
+    width := imgConfig.Width
+    height := imgConfig.Height
 
-- 258 mã thông báo nếu cả hai chiều đều <= 384 pixel.
-  Các hình ảnh lớn hơn được chia thành các ô có kích thước 768x768 pixel, mỗi ô có giá 258 mã thông báo.
+    // Read image bytes
+    imageBytes, err := os.ReadFile(imagePath)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-Công thức sơ bộ để tính số lượng ô như sau:
+    prompt := "Detect the all of the prominent items in the image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."
 
-- Tính kích thước đơn vị cắt xén, xấp xỉ bằng: floor(min(width, height) / 1.5).
-- Chia từng chiều cho kích thước đơn vị cắt và nhân với nhau để có số lượng ô.
+    parts := []*genai.Part{
+        genai.NewPartFromBytes(imageBytes, "image/png"),
+        genai.NewPartFromText(prompt),
+    }
 
-Ví dụ: đối với hình ảnh có kích thước 960x540, kích thước đơn vị cắt sẽ là 360. Chia mỗi chiều cho 360 và số lượng ô là 3 \* 2 = 6.
+    contents := []*genai.Content{
+        genai.NewContentFromParts(parts, genai.RoleUser),
+    }
 
-### Độ phân giải của nội dung nghe nhìn
+    config := &genai.GenerateContentConfig{
+        ResponseMIMEType: "application/json",
+    }
 
-Gemini 3 giới thiệu chế độ kiểm soát chi tiết đối với quy trình xử lý hình ảnh đa phương thức bằng tham số `media_resolution`. Tham số `media_resolution` xác định **số lượng mã thông báo tối đa được phân bổ cho mỗi khung hình đầu vào của hình ảnh hoặc video.**
-Độ phân giải cao hơn giúp cải thiện khả năng đọc văn bản nhỏ hoặc xác định các chi tiết nhỏ của mô hình, nhưng làm tăng mức sử dụng mã thông báo và độ trễ.
+    result, err := client.Models.GenerateContent(
+        ctx,
+        "gemini-3.5-flash",
+        contents,
+        config,
+    )
+    if err != nil {
+        log.Fatal(err)
+    }
 
-Để biết thêm thông tin về tham số này và mức độ ảnh hưởng của tham số này đến việc tính toán mã thông báo, hãy xem hướng dẫn về [độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi).
+    var boundingBoxes []BoundingBox
+    err = json.Unmarshal([]byte(result.Text()), &boundingBoxes)
+    if err != nil {
+        log.Fatal(err)
+    }
 
-## Mẹo và phương pháp hay nhất
+    fmt.Printf("Image size: %d %d
+", width, height)
+    fmt.Println("Bounding boxes:")
+    for _, box := range boundingBoxes {
+        if len(box.Box2D) == 4 {
+            absY1 := int(float64(box.Box2D[0]) / 1000.0 * float64(height))
+            absX1 := int(float64(box.Box2D[1]) / 1000.0 * float64(width))
+            absY2 := int(float64(box.Box2D[2]) / 1000.0 * float64(height))
+            absX2 := int(float64(box.Box2D[3]) / 1000.0 * float64(width))
+            fmt.Printf("- %s: [%d, %d, %d, %d]
+", box.Label, absX1, absY1, absX2, absY2)
+        }
+    }
+}
+```
 
-- Xác minh rằng hình ảnh được xoay đúng cách.
-- Sử dụng hình ảnh rõ ràng, không bị mờ.
-- Khi sử dụng một hình ảnh có văn bản, hãy đặt câu lệnh dạng văn bản *sau* phần hình ảnh trong mảng `contents`.
+### REST
 
-## Bước tiếp theo
+```
+IMG_PATH="/path/to/image.png"
 
-Hướng dẫn này cho bạn biết cách tải tệp hình ảnh lên và tạo đầu ra văn bản từ đầu vào hình ảnh. Để tìm hiểu thêm, hãy xem các tài nguyên sau:
+if [[ "$(base64 --version 2>&1)" = *"FreeBSD"* ]]; then
+  B64FLAGS="--input"
+else
+  B64FLAGS="-w0"
+fi
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi): Tìm hiểu thêm về cách tải lên và quản lý tệp để sử dụng với Gemini.
-- [Hướng dẫn hệ thống](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#system-instructions): Hướng dẫn hệ thống giúp bạn điều hướng hành vi của mô hình dựa trên nhu cầu và trường hợp sử dụng cụ thể của bạn.
-- [Chiến lược đặt câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide): Gemini API hỗ trợ đặt câu lệnh bằng dữ liệu văn bản, hình ảnh, âm thanh và video, còn được gọi là đặt câu lệnh đa phương thức.
-- [Hướng dẫn về an toàn](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=vi): Đôi khi, các mô hình AI tạo sinh tạo ra kết quả không mong muốn, chẳng hạn như kết quả không chính xác, thiên vị hoặc phản cảm. Hậu xử lý và đánh giá của con người là những bước cần thiết để hạn chế nguy cơ gây hại từ những kết quả như vậy.
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent"       -H "x-goog-api-key: $GEMINI_API_KEY"       -H 'Content-Type: application/json'       -X POST       -d '{
+    "contents": [{
+      "parts":[
+        {
+          "inline_data": {
+            "mime_type":"image/png",
+            "data": "'"$(base64 $B64FLAGS $IMG_PATH)"'"
+          }
+        },
+        {"text": "Detect the all of the prominent items in the image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."}
+      ]
+    }],
+    "generationConfig": {
+      "responseMimeType": "application/json"
+    }
+  }' 2> /dev/null
+```
 
-Gửi ý kiến phản hồi
+Pour obtenir d'autres exemples, consultez les notebooks suivants dans le [livre de recettes Gemini](https://github.com/google-gemini/cookbook) :
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+- [Notebook sur la compréhension spatiale 2D](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=fr)
+- [Notebook expérimental de pointage 3D](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=fr)
 
-Cập nhật lần gần đây nhất: 2026-06-01 UTC.
+## Formats d'image compatibles
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Gemini est compatible avec les types MIME suivants pour les formats d'image :
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]
+- PNG - `image/png`
+- JPEG - `image/jpeg`
+- WEBP - `image/webp`
+- HEIC : `image/heic`
+- HEIF - `image/heif`
+
+Pour en savoir plus sur les autres méthodes de saisie de fichiers, consultez le guide [Méthodes de saisie de fichiers](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=fr).
+
+## Capacités
+
+Toutes les versions du modèle Gemini sont multimodales et peuvent être utilisées dans un large éventail de tâches de traitement d'images et de vision par ordinateur, y compris, mais sans s'y limiter, la description d'images, les questions et réponses visuelles, la classification d'images et la détection d'objets.
+
+Gemini peut réduire la nécessité d'utiliser des modèles de ML spécialisés en fonction de vos exigences en termes de qualité et de performances.
+
+Les dernières versions des modèles sont spécifiquement entraînées pour améliorer la précision des tâches spécialisées en plus des capacités génériques, comme la [détection d'objets](#object-detection) améliorée.
+
+## Limites et informations techniques clés
+
+### Limite de fichiers
+
+Les modèles Gemini acceptent un maximum de 3 600 fichiers image par requête.
+
+### Calcul des jetons
+
+- 258 jetons si les deux dimensions sont inférieures ou égales à 384 pixels.
+  Les images plus grandes sont divisées en vignettes de 768 x 768 pixels, chacune coûtant 258 jetons.
+
+Voici une formule approximative pour calculer le nombre de tuiles :
+
+- Calculez la taille de l'unité de recadrage, qui est approximativement égale à : floor(min(width, height) / 1.5).
+- Divisez chaque dimension par la taille de l'unité de recadrage, puis multipliez les résultats pour obtenir le nombre de tuiles.
+
+Par exemple, une image de dimensions 960 x 540 aurait une taille d'unité de recadrage de 360. Divisez chaque dimension par 360 et vous obtiendrez le nombre de tuiles : 3 \* 2 = 6.
+
+### Résolution des contenus multimédias
+
+Gemini 3 introduit un contrôle précis sur le traitement de la vision multimodale avec le paramètre `media_resolution`. Le paramètre `media_resolution` détermine le **nombre maximal de jetons alloués par image ou frame vidéo en entrée**.
+Les résolutions plus élevées améliorent la capacité du modèle à lire du texte fin ou à identifier de petits détails, mais augmentent l'utilisation de jetons et la latence.
+
+Pour en savoir plus sur le paramètre et son impact sur le calcul des jetons, consultez le guide sur la [résolution du contenu multimédia](https://ai.google.dev/gemini-api/docs/media-resolution?hl=fr).
+
+## Conseils et bonnes pratiques
+
+- Vérifiez que les images sont correctement orientées.
+- Utilisez des images claires et non floues.
+- Lorsque vous utilisez une seule image avec du texte, placez le prompt textuel *après* la partie image dans le tableau `contents`.
+
+## Étape suivante
+
+Ce guide vous explique comment importer des fichiers image et générer des sorties de texte à partir d'entrées d'image. Pour en savoir plus, consultez les ressources suivantes :
+
+- [API Files](https://ai.google.dev/gemini-api/docs/files?hl=fr) : découvrez comment importer et gérer des fichiers à utiliser avec Gemini.
+- [Instructions système](https://ai.google.dev/gemini-api/docs/text-generation?hl=fr#system-instructions) : elles vous permettent d'orienter le comportement du modèle en fonction de vos besoins et de vos cas d'utilisation spécifiques.
+- [Stratégies de prompt pour les fichiers](https://ai.google.dev/gemini-api/docs/files?hl=fr#prompt-guide) : l'API Gemini est compatible avec le prompting utilisant des données textuelles, d'image, audio et vidéo, également appelées prompting multimodal.
+- [Consignes de sécurité](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=fr) : les modèles d'IA générative produisent parfois des résultats inattendus, par exemple inexacts, biaisés ou choquants. Le post-traitement et l'évaluation humaine sont essentiels pour limiter le risque de préjudice lié à ces résultats.
+
+Envoyer des commentaires
+
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+
+Dernière mise à jour le 2026/06/11 (UTC).
+
+Voulez-vous nous donner plus d'informations ?
+
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/11 (UTC)."],[],[]]

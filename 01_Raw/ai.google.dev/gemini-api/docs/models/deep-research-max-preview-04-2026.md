@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=vi
-fetched_at: 2026-06-08T05:33:47.131682+00:00
-title: "B\u1ea3n xem tr\u01b0\u1edbc Deep Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=id
+fetched_at: 2026-06-15T06:27:50.710048+00:00
+title: "Pratinjau Deep Research Max \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Gửi ý kiến phản hồi
+Kirim masukan
 
-# Bản xem trước Deep Research Max
+# Pratinjau Deep Research Max
 
-Mức độ toàn diện tối đa cho quá trình thu thập và tổng hợp ngữ cảnh tự động. Deep Research Max được tối ưu hoá cho các cuộc điều tra dài hạn và quan trọng về độ chính xác, tổng hợp thông tin phức tạp từ hàng trăm nguồn công khai trên web và dữ liệu không gian làm việc riêng tư thành các báo cáo toàn diện có trích dẫn. Công cụ này hỗ trợ hoạt động lập kế hoạch cộng tác, hình ảnh trực quan, máy chủ MCP và Tìm tệp.
+Keluasan maksimum untuk pengumpulan dan sintesis konteks otomatis. Deep
+Research Max dioptimalkan untuk penyelidikan yang berjalan lama dan sangat penting akurasinya, yang menyintesis informasi kompleks dari ratusan sumber web publik dan data ruang kerja pribadi menjadi laporan komprehensif yang menyertakan kutipan. Aplikasi ini mendukung perencanaan kolaboratif, visualisasi, server MCP, dan Penelusuran File.
 
-## Tài liệu
+## Dokumentasi
 
-Truy cập trang [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) để xem toàn bộ các tính năng và chức năng.
+Buka halaman [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) untuk mengetahui cakupan lengkap fitur dan kapabilitas.
 
 ## deep-research-max-preview-04-2026
 
-| Thuộc tính | Mô tả |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardMã đại lý | **API Tương tác**  `deep-research-max-preview-04-2026` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh, PDF, Âm thanh, Video  **Đầu ra**  Văn bản (Báo cáo có trích dẫn), Hình ảnh |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Cửa sổ ngữ cảnh đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Xem trước: `deep-research-max-preview-04-2026` |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 4 năm 2026 |
+| Kode agen id\_card | **Interactions API**  `deep-research-max-preview-04-2026` |
+| saveJenis data yang didukung | **Input**  Teks, Gambar, PDF, Audio, Video  **Output**  Teks (Laporan yang Dikutip), Gambar |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Jendela konteks input**  1.048.576  **Batas token output**  65.536 |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `deep-research-max-preview-04-2026` |
+| calendar\_monthPembaruan terbaru | April 2026 |
 
-Gửi ý kiến phản hồi
+Kirim masukan
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Ada masukan untuk kami?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

@@ -1,211 +1,216 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=es-419
-fetched_at: 2026-06-08T05:27:49.155930+00:00
-title: "Crea apps en Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja
+fetched_at: 2026-06-15T06:21:28.564507+00:00
+title: "Google AI Studio \u3067\u30a2\u30d7\u30ea\u3092\u69cb\u7bc9\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Enviar comentarios
+フィードバックを送信
 
-# Crea apps en Google AI Studio
+# Google AI Studio でアプリを構築する
 
-En esta página, se describe cómo usar Google AI Studio para compilar rápidamente (o "vibe
-code") y, luego, implementar apps que prueben las capacidades más recientes de Gemini, como
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=es-419) y la [API
-de Live](https://ai.google.dev/gemini-api/docs/live?hl=es-419). Google AI Studio admite la compilación de **apps web** con entornos de ejecución full stack y **apps nativas para Android** con Kotlin y Jetpack Compose, todo a través de instrucciones en lenguaje natural.
+[[このページでは、Google AI Studio を使用して、Nano Banana や Live API などの Gemini の最新機能を試すアプリをすばやく構築（または「バイブ
+コーディング」）してデプロイする方法について説明します。](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)](https://ai.google.dev/gemini-api/docs/live?hl=ja)Google AI Studio
+では、フルスタック ランタイムを使用した**ウェブアプリ** と、Kotlin と Jetpack Compose を使用した**ネイティブ Android
+アプリ** を、すべて自然言語プロンプトで構築できます。
 
-## Comenzar
+## 始める
 
-Comienza a usar el vibe coding en el [modo de compilación](https://aistudio.google.com/apps?hl=es-419) de Google AI Studio. Puedes comenzar a compilar de varias maneras:
+Google AI Studio の[ビルドモード](https://aistudio.google.com/apps?hl=ja)でバイブ コーディングを開始します。ビルドを開始するには、いくつかの方法があります。
 
-- **Comienza con una instrucción**: En el modo de compilación, usa la casilla de entrada para ingresar una
-  descripción de lo que quieres compilar. Selecciona AI Chips para agregar funciones específicas, como la generación de imágenes o los datos de Google Maps, a tu instrucción. Incluso puedes decir lo que quieres con el botón de voz a texto.
-- **Botón "Voy a tener suerte"**: Si necesitas una chispa creativa, usa el botón "Voy a
-  tener suerte" y Gemini generará una instrucción con una idea de proyecto
-  para que comiences.
-- **Remezcla un proyecto de la galería**: Abre un proyecto de la [Galería
-  de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419) y selecciona **Copiar app**.
+- **プロンプトから始める**: ビルドモードで、入力ボックスを使用して、構築する内容の
+  説明を入力します。[AI チップ] を選択して、画像生成や Google マップデータなどの特定の機能をプロンプトに追加します。音声テキスト変換ボタンを使用して、希望する内容を伝えることもできます。
+- **[I'm Feeling Lucky] button**: クリエイティブなアイデアが必要な場合は、[I'm
+  Feeling Lucky] button を使用すると、Gemini がプロジェクトのアイデアを含むプロンプトを生成して、作業を開始できます。
+- **ギャラリーからプロジェクトをリミックスする**: [App
+  Gallery](https://aistudio.google.com/apps?source=showcase&hl=ja) からプロジェクトを開き、[**アプリをコピー**] を選択します。
 
-Una vez que ejecutes la instrucción, verás que se generan el código y los archivos necesarios, con una vista previa en vivo de tu app que aparece en el lado derecho.
+プロンプトを実行すると、必要なコードとファイルが生成され、アプリのライブプレビューが右側に表示されます。
 
-## ¿Qué se crea?
+## 作成されるもの
 
-Cuando ejecutas la instrucción, AI Studio crea una aplicación completa. Puedes elegir compilar una **app web** o una **app para Android nativa** con el selector de plataformas.
+プロンプトを実行すると、AI Studio によって完全なアプリケーションが作成されます。プラットフォーム
+ピッカーを使用して、**ウェブアプリ** または**ネイティブ Android アプリ** を構築できます。
 
-Para las **apps web** (opción predeterminada), AI Studio crea un entorno full stack que incluye lo siguiente:
+**ウェブアプリ** （デフォルト）の場合、AI Studio は次のものを含むフルスタック環境を作成します。
 
-- **Cliente**: Un frontend web (React es la opción predeterminada)
-- **Servidor**: Un entorno de ejecución de Node.js que permite llamadas seguras a la API,
-  conexiones de bases de datos y el uso de paquetes npm
+- **クライアントサイド**: ウェブ フロントエンド（デフォルトは React）。
+- **サーバーサイド**: 安全な API 呼び出し、
+  データベース接続、npm パッケージの使用を可能にする Node.js ランタイム。
 
-Para las **apps para Android**, AI Studio genera un proyecto de Kotlin y Jetpack Compose
-que puedes obtener una vista previa en un emulador basado en el navegador, instalar en un dispositivo físico
-y publicar en Play Store para realizar pruebas. [Obtén más información para compilar apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419).
+**Android アプリ**の場合、AI Studio は Kotlin と Jetpack Compose のプロジェクトを生成します。
+このプロジェクトは、ブラウザベースのエミュレータでプレビューしたり、実機にインストールしたり、
+テスト用に Google Play ストアに公開したりできます。[詳しくは、Android
+アプリ](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ja)をビルドするをご覧ください。
 
-Para ver el código que se genera, selecciona la pestaña **Código** en el panel de vista previa de la derecha. El **agente de Antigravity** administra de forma inteligente varios archivos en tu pila, lo que garantiza que los cambios se propaguen correctamente.
+生成されたコードを表示するには、右側のプレビュー パネルで [**コード**] タブを選択します。**Antigravity
+エージェント** は、スタック内の複数のファイルをインテリジェントに管理し、変更が正しく伝播されるようにします。
 
-### El agente de Antigravity
+### Antigravity エージェント
 
-El **agente de Antigravity** es la principal funcionalidad de IA dentro de [Google
-Antigravity](https://antigravity.google?hl=es-419), y ahora los componentes principales del
-arnés del agente potencian la experiencia del modo de compilación en Google AI Studio. Va más allá de la simple generación de código, ya que mantiene el contexto de todo el proyecto, administra varios archivos y comprende instrucciones complejas para compilar aplicaciones full stack sólidas.
+**Antigravity エージェント** は、[Google
+Antigravity](https://antigravity.google?hl=ja) の主要な AI 機能であり、エージェントハーネスのコアコンポーネントは Google AI Studio のビルドモードのエクスペリエンスを強化しています。プロジェクト全体のコンテキストを維持し、複数のファイルを管理し、複雑な手順を理解することで、シンプルなコード生成を超えて、堅牢なフルスタック
+アプリケーションを構築します。
 
-Las siguientes son algunas de las funciones clave:
+主な機能は次のとおりです。
 
-- **Reconocimiento del contexto**: Mantiene el contexto de las instrucciones anteriores y los estados de los archivos.
-- **Administración de varios archivos**: Controla las dependencias en varios archivos.
-- **Ejecución verificada**: Verifica las actualizaciones de código para reducir las alucinaciones.
+- **コンテキスト アウェア**: 以前のプロンプトとファイルの状態のコンテキストを維持します。
+- **マルチファイル管理**: 複数のファイル間の依存関係を処理します。
+- **検証済みの実行**: コードの更新を検証して、ハルシネーションを減らします。
 
-## Capacidades full stack
+## フルスタック機能
 
-Google AI Studio libera el poder del ecosistema web moderno, lo que te permite compilar más que solo prototipos del cliente.
+Google AI Studio は、最新のウェブ エコシステムの力を引き出し、クライアントサイドのプロトタイプだけでなく、さまざまなものを構築できます。
 
-- **Entorno de ejecución del servidor y npm**: Usa la amplia biblioteca de paquetes npm. El agente identificará e instalará automáticamente los paquetes según sea necesario para tu app (p.ej., bibliotecas específicas para la visualización de datos o clientes de la API). También puedes solicitar paquetes específicos si lo deseas.
-- **Administración de datos secretos**: Almacena de forma segura claves de API y datos secretos en el
-  **menú Configuración**. Se puede acceder a ellos en el código del servidor, lo que los mantiene a salvo de la exposición del cliente.
-- **Multijugador**: Crea experiencias colaborativas en tiempo real directamente en
-  AI Studio. El entorno de ejecución del servidor administra el estado y las conexiones necesarias para que los usuarios interactúen entre sí.
-- **Firebase Firestore y Authentication**: Aprovisiona y configura automáticamente Firebase,
-  incluida la base de datos de Firestore (almacenamiento de datos persistente) y
-  Firebase Authentication (flujos de acceso, específicamente "Acceder con Google").
-  El agente controla todo el proceso de configuración y hasta escribe el código en tu app para estos servicios.
-- **Integraciones de Google Workspace**: Conecta tu app a las APIs de Google Workspace, como Gmail, Hojas de cálculo, Documentos, Drive, Calendario y mucho más. AI Studio controla automáticamente toda la configuración de OAuth.
+- **サーバーサイド ランタイムと npm**: npm パッケージの豊富なライブラリを使用します。エージェントは、アプリに必要なパッケージ（データ可視化や API クライアント用の特定のライブラリなど）を自動的に識別してインストールします。必要に応じて、特定のパッケージをリクエストすることもできます。
+- **シークレット管理**: API キーとシークレットを
+  [**設定**] メニューに安全に保存します。これらはサーバーサイド コードでアクセスできるため、クライアントサイドに公開されることはありません。
+- **マルチプレイヤー**: AI Studio 内でリアルタイムのコラボレーション エクスペリエンスを直接構築します。サーバーサイド ランタイムは、ユーザーが共同で操作するために必要な状態と接続を管理します。
+- **Firebase Firestore と Authentication**: Firestore データベース（永続的なデータ ストレージ）や Firebase Authentication（ログインフロー、特に「Google でログイン」）など、Firebase を自動的にプロビジョニングして設定します。エージェントは、セットアップ プロセス全体を処理し、これらのサービスのアプリにコードを記述します。
+- **Google Workspace との統合**: アプリを Gmail、スプレッドシート、ドキュメント、ドライブ、カレンダーなどの Google Workspace
+  API に接続します。AI Studio は、すべての OAuth 構成を自動的に処理します。
 
-[Obtén más información para desarrollar apps full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419)
+[詳しくは、フルスタック アプリを開発するをご覧ください。](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ja)
 
-### Apps para Android
+### Android アプリ
 
-También puedes compilar apps nativas para Android con Kotlin y Jetpack Compose.
-Obtén una vista previa de tu app en un emulador de Android basado en el navegador, instálala en un dispositivo físico con ADB en el navegador y publícala en Play Store para realizar pruebas internas.
+Kotlin と Jetpack Compose を使用して、ネイティブ Android
+アプリを構築することもできます。
+ブラウザベースの Android エミュレータでアプリをプレビューし、ブラウザで ADB を使用して実機にインストールして、内部テスト用に Google Play ストアに公開します。
 
-[Obtén más información para compilar apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419)
+[詳しくは、Android アプリをビルドするをご覧ください。](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ja)
 
-## Continúa con la compilación
+## 構築を続行
 
-Una vez que Google AI Studio genere el código inicial de tu aplicación, puedes seguir perfeccionándolo:
+Google AI Studio でアプリケーションの初期コードが生成されたら、次のようにして改良を続けることができます。
 
-### Compila en Google AI Studio
+### Google AI Studio でビルドする
 
-- **Itera con Gemini**: Usa el panel de chat en el **modo de compilación** para pedirle a Gemini
-  que realice modificaciones, agregue funciones nuevas o cambie el estilo.
-- **Edita el código directamente**: Abre la **pestaña Código** en el panel de vista previa para
-  realizar ediciones en vivo.
+- **Gemini で反復する**: **ビルドモード** のチャット パネルを使用して、Gemini に変更、新機能の追加、スタイルの変更を相談します。
+- **コードを直接編集する**: プレビュー パネルで**[コード] タブ**を開いて
+  ライブ編集を行います。
 
-### Desarrolla externamente
+### 外部で開発する
 
-Para flujos de trabajo más avanzados, puedes exportar el código y trabajar en el entorno que prefieras:
+より高度なワークフローの場合は、コードをエクスポートして、任意の環境で作業できます。
 
-- **Descarga y desarrolla de forma local**: Exporta el código generado como un **archivo
-  ZIP** y, luego, impórtalo en tu editor de código.
-- **Envía a GitHub**: Integra el código con tus procesos de desarrollo e
-  implementación existentes. Para ello, envíalo a un **repositorio de GitHub**.
+- **ダウンロードしてローカルで開発する**: 生成されたコードを**ZIP
+  ファイル**としてエクスポートし、コードエディタにインポートします。
+- **GitHub に push する**: コードを**GitHub リポジトリ** に push して、既存の開発プロセスと
+  デプロイプロセスに統合します。
 
-## Características clave
+## 主な機能
 
-Google AI Studio incluye varias funciones para que el proceso de compilación sea intuitivo y visual:
+Google AI Studio には、ビルドプロセスを直感的で視覚的に行うための機能がいくつか用意されています。
 
-- **Crea apps full stack y realiza iteraciones en ellas**: Crea apps full stack con solo
-  una instrucción y realiza iteraciones a través del chat o el **modo de anotación**. El modo de anotación te permite destacar cualquier parte de la IU de tu app y describir el cambio que deseas.
-- **Comparte e implementa tu app**: Puedes compartir tus creaciones con otras personas para
-  colaborar o mostrar tu trabajo. Cuando compartes, las llamadas a la API se incluyen en tus límites de uso. Si usas modelos pagados, es posible que se apliquen costos. Luego, cuando tu app esté lista, impleméntala en Cloud Run.
-- **Galería de apps**: La Galería de apps proporciona una biblioteca visual de ideas de proyectos.
-  Puedes explorar lo que es posible con Gemini, obtener una vista previa de las aplicaciones al instante y remezclarlas para hacerlas tuyas.
+- **フルスタック アプリを作成して反復する**: プロンプトだけでフルスタック アプリを作成し、チャットモードまたは**アノテーション モード**で反復します。アノテーション モードでは、アプリの UI の任意の部分をハイライト表示して、必要な変更を記述できます。
+- **アプリを共有してデプロイする**: 作成したものを他のユーザーと共有して、
+  共同作業を行ったり、成果物を公開したりできます。共有する場合、API 呼び出しは使用量上限にカウントされます。有料モデルを使用する場合は、費用が発生する可能性があります。アプリの準備ができたら、Cloud Run にデプロイします。
+- **アプリギャラリー**: アプリギャラリーには、プロジェクトのアイデアのビジュアル ライブラリが用意されています。Gemini でできることを確認したり、アプリケーションをすぐにプレビューしたり、リミックスして独自のアプリケーションを作成したりできます。
 
-## Implementa o archiva tu app
+## アプリをデプロイまたはアーカイブする
 
-Una vez que tu aplicación esté lista, puedes implementarla:
+アプリケーションの準備ができたら、デプロイできます。
 
-- **Cloud Run**: Implementa tu aplicación como un servicio escalable.
-  Es posible que se apliquen precios para [Google Cloud Run](https://cloud.google.com/run?hl=es-419) según el uso. Para obtener más información sobre la implementación, consulta
-  [Cómo implementar desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419).
-- **GitHub**: Exporta tu proyecto a un repositorio de GitHub.
+- **Cloud Run**: アプリケーションをスケーラブルなサービスとしてデプロイします。
+  [Google Cloud Run](https://cloud.google.com/run?hl=ja) の料金は、使用量に応じて適用される場合があります
+  。デプロイについて詳しくは、
+  [Google AI Studio からデプロイする](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ja)をご覧ください。
+- **GitHub**: プロジェクトを GitHub リポジトリにエクスポートします。
 
-## Limitaciones
+## 制限事項
 
-En esta sección, se enumeran las limitaciones actuales del modo de compilación en Google AI Studio.
+このセクションでは、Google AI Studio のビルドモードの現在の制限について説明します。
 
-### Administración de claves de API
+### API キー管理
 
-Cuando creas una app nueva que usa la API de Gemini, AI Studio configura automáticamente tu clave de API de Gemini como un secreto en el entorno del servidor de la app.
-Puedes ver y administrar esta clave en el panel **Secretos**.
+Gemini API を使用する新しいアプリを作成すると、AI Studio は Gemini API キーをアプリのサーバーサイド環境のシークレットとして自動的に構成します。
+このキーは、[**シークレット**] パネルで表示して管理できます。
 
-- **Configuración automática**: Tu `GEMINI_API_KEY` está configurada para ti. No se requiere configuración manual
-  para comenzar a compilar.
-- **Solo del servidor**: Las claves de API se insertan en el entorno de ejecución del servidor y
-  nunca se incluyen en el código del cliente.
-- **Apps existentes**: En el caso de las apps compiladas antes del 14 de mayo de 2026, el agente actualizará
-  automáticamente tu integración de la API de Gemini al enfoque recomendado del
-  servidor la próxima vez que modifiques las funciones de Gemini de la app.
+- **自動設定**: `GEMINI_API_KEY` が設定されます。ビルドを開始するために手動で
+  構成する必要はありません。
+- **サーバーサイドのみ**: API キーはサーバーサイド ランタイムに挿入され、
+  クライアントサイド コードには含まれません。
+- **既存のアプリ**: 2026 年 5 月 14 日より前に構築されたアプリの場合、アプリの Gemini 機能を変更すると、Gemini API 統合が推奨されるサーバーサイド アプローチに
+  自動的にアップグレードされます。
 
-### Implementación fuera de Google AI Studio
+### Google AI Studio 以外へのデプロイ
 
-- **Cloud Run**: Cuando implementas en Cloud Run desde AI Studio, tu clave de API se
-  incluye de forma segura en el entorno del servidor. La app implementada usará tu clave de API para todas las llamadas a la API de Gemini de los usuarios.
-- **Descarga de ZIP**: Si descargas tu app como un archivo ZIP para ejecutarla
-  en otro lugar, deberás configurar la variable de entorno `GEMINI_API_KEY`en tu entorno de hosting. Dado que las llamadas a la API de Gemini de tu app se realizan desde el código del servidor, la clave no se expone a los usuarios finales.
+- **Cloud Run**: AI Studio から Cloud Run にデプロイすると、API キーがサーバーサイド環境に
+  安全に組み込まれます。デプロイされたアプリは、すべてのユーザーの Gemini API 呼び出しに API キーを使用します。
+- **ZIP ダウンロード**: アプリを ZIP ファイルとしてダウンロードして別の場所で実行する場合は、ホスティング環境で `GEMINI_API_KEY` 環境変数を設定する必要があります。アプリの Gemini API 呼び出しはサーバーサイド コードから行われるため、キーはエンドユーザーに公開されません。
 
-### Error al compartir apps
+### アプリの共有時のエラー
 
-Si compartes tu app y el usuario final se encuentra con un error **403 Access Restricted** cuando usa la URL compartida, puede deberse a uno de los siguientes motivos:
+アプリを共有し、エンドユーザーが共有 URL を使用したときに「**403 Access Restricted**
+」エラーが発生した場合は、次のいずれかの原因が考えられます。
 
-- **Extensiones del navegador**: Es posible que las extensiones de privacidad, como Privacy Badger, bloqueen la app. Inhabilita la extensión para evitar el error.
-- **Problemas de compilación**: Es posible que haya problemas con el código actual. Pídele al agente que "corrija cualquier problema de compilación con el código actual" y, luego, vuelve a compartir la URL.
+- **ブラウザ拡張機能**: Privacy Badger などのプライバシー拡張機能がアプリをブロックしている可能性があります。エラーを回避するには、拡張機能を無効にしてください。
+- **ビルドの問題**: 現在のコードに問題がある可能性があります。エージェントに「現在のコードのビルドの問題を修正する」ように指示してから、URL を再共有してください。
 
-## Preguntas frecuentes
+## よくある質問
 
-### ¿Qué es la compilación en AI Studio?
+### AI Studio のビルドとは何ですか？
 
-AI Studio Build es una plataforma diseñada para llevarte de una simple instrucción a una aplicación potenciada por IA lista para producción con Gemini. Describe lo que quieres compilar con una instrucción y Gemini generará una app por ti. También puedes explorar nuestra galería para ver lo que es posible con la API de Gemini y remezclar apps para hacerlas tuyas.
+AI Studio Build は、シンプルなプロンプトから Gemini を使用した本番環境対応の AI
+搭載アプリケーションを作成するためのプラットフォームです。プロンプトで構築する内容を記述すると、Gemini
+がアプリを生成します。ギャラリーで Gemini API でできることを確認したり、アプリをリミックスして独自のアプリを作成したりすることもできます。
 
-### ¿Cómo controla la compilación mi clave de API de Gemini?
+### ビルドで Gemini API キーはどのように処理されますか？
 
-Cuando creas una app que usa la API de Gemini, AI Studio configura automáticamente tu clave de API de Gemini como un secreto del servidor. Las llamadas a la API de Gemini de tu app se realizan desde el código del servidor con esta clave, por lo que nunca se expone en el navegador. Puedes ver tu clave de API en el panel **Secretos** de Configuración.
+Gemini API を使用するアプリを作成すると、AI Studio は Gemini API キーをサーバーサイド
+シークレットとして自動的に設定します。アプリの Gemini API 呼び出しは、このキーを使用してサーバーサイド
+コードから行われるため、ブラウザに公開されることはありません。API キーは、設定の [**シークレット**] パネルで確認できます。
 
-### ¿Se expone mi clave de API cuando comparto apps?
+### アプリを共有すると API キーが公開されますか？
 
-No. Tu clave de API se almacena como un secreto del servidor y nunca se incluye en el código del cliente. Cuando compartes tu app, otros usuarios pueden usarla, pero no pueden ver tu clave de API.
+いいえ。API キーはサーバーサイド シークレットとして保存され、クライアントサイド
+コードには含まれません。アプリを共有すると、他のユーザーがアプリを使用できるようになりますが、API
+キーは表示されません。
 
-Cuando compartes tus apps con otras personas, las llamadas a la API se incluyen en tus límites de uso.
-Si usas modelos pagados, es posible que se apliquen costos. AI Studio te avisará durante la configuración y antes de compartir si tu app podría generar costos.
+アプリを他のユーザーと共有する場合、API 呼び出しは使用量上限にカウントされます。
+有料モデルを使用する場合は、費用が発生する可能性があります。アプリで費用が発生する可能性がある場合は、設定時と共有前に AI Studio から通知されます。
 
-### ¿Quién puede ver mis apps?
+### アプリを表示できるユーザー
 
-De forma predeterminada, tu app es privada. Puedes compartir tu app con otros usuarios para que la usen. Los usuarios con los que compartes tu app pueden ver su código y bifurcarlo para sus propios fines. Si compartes tu app con permiso de edición, los otros usuarios pueden editar el código de tu app.
+デフォルトでは、アプリは非公開です。アプリを他のユーザーと共有して、使用できるようにすることができます。アプリを共有したユーザーは、アプリのコードを表示して、独自の目的でフォークできます。編集権限を付与してアプリを共有すると、他のユーザーがアプリのコードを編集できます。
 
-### ¿Puedo ejecutar apps fuera de AI Studio?
+### AI Studio の外部でアプリを実行できますか？
 
-Sí. Puedes implementar tu app en
-[Cloud Run](https://cloud.google.com/run?hl=es-419) desde AI Studio, lo que
-le otorga una URL pública con tu clave de API configurada de forma segura en el
-entorno del servidor. También puedes descargar tu app como un archivo ZIP y alojarla en otro lugar. Deberás configurar la variable de entorno `GEMINI_API_KEY` en tu entorno de hosting. Dado que las llamadas a la API de Gemini se realizan desde el código del servidor, tu clave permanece segura.
+はい。AI Studio から
+[Cloud Run](https://cloud.google.com/run?hl=ja) にアプリをデプロイすると、アプリに公開 URL が付与され、API キーが
+サーバーサイド環境に安全に構成されます。アプリを ZIP
+ファイルとしてダウンロードして別の場所でホストすることもできます。ホスティング環境で `GEMINI_API_KEY`
+環境変数を設定する必要があります。Gemini API 呼び出しはサーバーサイド コードから行われるため、キーは安全に保たれます。
 
-Para obtener más información sobre las opciones de implementación, consulta [Cómo implementar desde Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=es-419).
+デプロイ オプションについて詳しくは、[Google AI Studio からデプロイする](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ja)をご覧ください。
 
-### ¿Puedo desarrollar apps de forma local con mis propias herramientas y, luego, compartirlas aquí?
+### 独自のツールを使用してローカルでアプリを開発し、ここで共有できますか？
 
-Esta funcionalidad aún no está disponible. Nos entusiasma admitir más casos de uso para apps en el futuro. Considera enviarnos comentarios si tienes algo específico en mente.
+この機能はまだご利用いただけません。今後、アプリのユースケースをさらにサポートしていく予定です。具体的なご要望がありましたら、フィードバックをお寄せください。
 
-### ¿Cómo puedo usar una base de datos o algún otro almacenamiento con mis apps?
+### アプリでデータベースやその他のストレージを使用するにはどうすればよいですか？
 
-Las apps de AI Studio son apps estándar que se ejecutan en un contenedor de Cloud Run. Puedes usar cualquier solución de almacenamiento a la que puedas conectarte a través de una red, siempre que no haya un firewall que impida el acceso desde un rango de IP dinámico.
+AI Studio アプリは、Cloud Run
+コンテナで実行される標準アプリです。動的 IP 範囲からのアクセスをブロックするファイアウォールがない限り、ネットワーク経由で接続できるストレージ ソリューションを使用できます。
 
-Estamos trabajando para agregar compatibilidad directa con el almacenamiento en el futuro, que podrás configurar directamente en AI Studio.
+今後、ストレージの直接サポートを追加する予定です。これは AI Studio 内で直接構成できます。
 
-### ¿Cómo puedo acceder al micrófono, la cámara web y otras APIs de Navigator?
+### マイク、ウェブカメラ、その他の Navigator API にアクセスするにはどうすればよいですか？
 
-Para asegurarnos de que los usuarios estén al tanto del uso que hace una app de su cámara web o de otros
-dispositivos, requerimos un reconocimiento adicional antes de que la app pueda acceder
-a estas [APIs de Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
-Los creadores de apps pueden agregar estas solicitudes de permiso al archivo `metadata.json` de su app. Por ejemplo:
+視聴者がアプリによるウェブカメラやその他の
+デバイスの使用を認識できるようにするため、アプリがこれらの [Navigator API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)にアクセスする前に、追加の確認を求める必要があります。
+アプリ作成者は、これらの権限リクエストをアプリの `metadata.json`
+ファイルに追加できます。次に例を示します。
 
 ```
 {
@@ -223,66 +228,67 @@ Los creadores de apps pueden agregar estas solicitudes de permiso al archivo `me
 }
 ```
 
-Los valores admitidos para `requestFramePermissions` son un subconjunto de las
-funciones estándar [controladas por políticas](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
+`requestFramePermissions` でサポートされている値は、
+標準の [ポリシーで制御される機能のサブセットです](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md)。
 
-### ¿Cómo puedo usar GitHub con mis apps?
+### アプリで GitHub を使用するにはどうすればよいですか？
 
-La integración de GitHub de AI Studio te permite crear un repositorio para tu trabajo y confirmar tus cambios más recientes. Actualmente, no admitimos la extracción de cambios remotos.
+AI Studio の GitHub 統合を使用すると、作業用のリポジトリを作成して、最新の変更を commit
+できます。現時点では、リモートの変更の pull はサポートされていません。
 
-### ¿Puedo otorgar a otros usuarios acceso de edición a mi app?
+### 他のユーザーにアプリの編集権限を付与できますか？
 
-Todavía no se admite esta opción, pero estará disponible pronto.
+まだサポートされていませんが、近日中にリリースされる予定です。
 
-### ¿Por qué se marcó mi app por incumplimiento de política?
+### アプリがポリシー違反としてフラグ設定されたのはなぜですか？
 
-Tenemos sistemas que revisan automáticamente las apps para garantizar que cumplan con nuestras políticas. Si determinamos que una app incumple nuestras políticas, se quitará de AI Studio. Los incumplimientos de política pueden incluir, entre otros, lo siguiente:
+Google には、アプリがポリシーに準拠しているかどうかを自動的に審査するシステムがあります。アプリがポリシーに違反していることが判明した場合、そのアプリは
+AI Studio から削除されます。ポリシー違反には、次のようなものがあります（これらに限定されません）。
 
-- Apps que contienen software malicioso, phishing o suplantación de identidad
-- Apps que muestran o distribuyen contenido que incumple la política de imágenes de abuso sexual infantil
-- Apps que muestran o distribuyen contenido que incumple la política de acoso
-- Apps que muestran o distribuyen contenido que incumple la política sobre la incitación al odio o a la violencia
-- Apps que muestran o distribuyen contenido que incumple la política de trata de personas
-- Apps que muestran o distribuyen contenido que incumple la política de contenido sexual explícito
-- Apps que muestran o distribuyen contenido que incumple la política de Contenido violento o sangriento
-- Apps que muestran o distribuyen contenido que incumple la política de contenido peligroso o dañino
+- マルウェア、フィッシング、なりすましを含むアプリ
+- 児童への性的虐待の画像に関するポリシーに違反するコンテンツを表示または配信するアプリ
+- ハラスメントに関するポリシーに違反するコンテンツを表示または配信するアプリ
+- ヘイトスピーチに関するポリシーに違反するコンテンツを表示または配信するアプリ
+- 人身売買に関するポリシーに違反するコンテンツを表示または配信するアプリ
+- 性的描写が露骨なコンテンツに関するポリシーに違反するコンテンツを表示または配信するアプリ
+- 暴力的または残虐なコンテンツに関するポリシーに違反するコンテンツを表示または配信するアプリ
+- 有害または危険なポリシーに違反するコンテンツを表示または配信するアプリ
 
-Si tu app se marcó por incumplimiento de política y crees que se trata de un error, puedes enviar una apelación. Los incumplimientos reiterados de nuestras políticas pueden ocasionar la rescisión de tu acceso a AI Studio.
+アプリがポリシー違反としてフラグ設定され、誤りであると思われる場合は、再審査請求を送信できます。ポリシーの度重なる違反が認められた場合、AI
+Studio へのアクセスが停止されることがあります。
 
-### ¿Cuáles son mis responsabilidades como desarrollador de apps?
+### アプリ デベロッパーとしての責任は何ですか？
 
-Como recordatorio, como propietario de tu aplicación, eres responsable de su comportamiento y de todos los datos que maneja. Esto incluye lo siguiente:
+前述のとおり、アプリケーションの所有者として、アプリケーションの動作と処理するすべてのデータに対する責任を負います。これには以下が該当します。
 
-- **Cumplimiento legal y derechos de terceros:** Asegurarte de que tu app cumpla con todas las leyes y reglamentaciones aplicables y no infrinja los derechos de otras personas, incluidos los derechos de propiedad intelectual y derechos de privacidad.
-- **Supervisión de contenido:** Es posible que se aplique el cumplimiento de condiciones adicionales a
-  otros servicios que usa tu app. Por ejemplo,
-  [las Condiciones del Servicio de Google Cloud](https://cloud.google.com/terms?hl=es-419),
-  aplicables a Firestore, requieren que los clientes que alojan contenido de terceros
-  publiquen políticas que definan qué contenido está prohibido (p.ej., contenido
-  ilegal) y supervisen la presencia de ese contenido ilegal.
-- **Implementación segura:** Implementar las medidas de seguridad y las herramientas de moderación necesarias para evitar que se use de forma inadecuada tu aplicación
+- **法令遵守と第三者の権利:** アプリが適用されるすべての法律や規制に準拠し、知的財産権やプライバシーの権利など、他者の権利を侵害しないようにします。
+- **コンテンツのモニタリング:** アプリで使用される
+  他のサービスには、追加利用規約が適用される場合があります。たとえば、
+  [Google Cloud 利用規約](https://cloud.google.com/terms?hl=ja)（
+  Firestore に適用）では、第三者のコンテンツをホストするお客様は、禁止されているコンテンツ（違法な
+  コンテンツなど）を定義するポリシーを公開し、その違法なコンテンツの有無をモニタリングする必要があります。
+- **安全な実装:** アプリケーションの不正使用を防ぐために必要な保護措置とモデレーション ツールを実装します。
 
-Ten en cuenta las [restricciones de uso](https://ai.google.dev/gemini-api/terms?hl=es-419#use-restrictions)
-en las Condiciones del Servicio.
+利用規約の[使用制限](https://ai.google.dev/gemini-api/terms?hl=ja#use-restrictions)
+にご注意ください。
 
-### ¿Qué condiciones se aplican a las apps de la galería de apps en AI Studio?
+### AI Studio のアプリギャラリーのアプリに適用される規約は何ですか？
 
-Las [Condiciones del Servicio Adicionales de la API de Gemini](https://ai.google.dev/gemini-api/terms?hl=es-419)
-se aplican al uso de las apps que aparecen en la galería de apps en AI Studio, a menos que
-se indique lo contrario.
+特に明記されていない限り、AI Studio のアプリギャラリーに掲載されているアプリの使用には、[Gemini API 追加利用規約](https://ai.google.dev/gemini-api/terms?hl=ja)
+が適用されます。
 
-## ¿Qué sigue?
+## 次のステップ
 
-- [Desarrolla apps full stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=es-419) (web)
-- [Compila apps para Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=es-419)
-- Consulta ejemplos en la [Galería de apps](https://aistudio.google.com/apps?source=showcase&hl=es-419).
+- [フルスタック アプリを開発する](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ja)（ウェブ）
+- [Android アプリをビルドする](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ja)
+- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=ja) で例を見る。
 
-Enviar comentarios
+フィードバックを送信
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última actualización: 2026-05-19 (UTC)
+最終更新日 2026-05-19 UTC。
 
-¿Quieres brindar más información?
+ご意見をお聞かせください
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-19 UTC。"],[],[]]

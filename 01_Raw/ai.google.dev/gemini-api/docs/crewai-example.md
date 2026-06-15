@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=ja
-fetched_at: 2026-06-08T05:35:35.448750+00:00
-title: "Gemini \u3068 CrewAI \u3092\u4f7f\u7528\u3057\u305f\u30ab\u30b9\u30bf\u30de\u30fc \u30b5\u30dd\u30fc\u30c8\u306e\u5206\u6790 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=vi
+fetched_at: 2026-06-15T06:31:17.779767+00:00
+title: "Ph\u00e2n t\u00edch d\u1ecbch v\u1ee5 h\u1ed7 tr\u1ee3 kh\u00e1ch h\u00e0ng b\u1eb1ng Gemini v\u00e0 CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# Gemini と CrewAI を使用したカスタマー サポートの分析
+# Phân tích dịch vụ hỗ trợ khách hàng bằng Gemini và CrewAI
 
-[CrewAI](https://docs.crewai.com/introduction) は、連携して複雑な目標を達成する自律型 AI エージェントをオーケストレートするためのフレームワークです。ロール、目標、バックストーリーを指定してエージェントを定義し、タスクを定義できます。
+[CrewAI](https://docs.crewai.com/introduction) là một khung để điều phối các tác nhân AI tự quản cộng tác nhằm đạt được các mục tiêu phức tạp. Nó cho phép bạn xác định các tác nhân bằng cách chỉ định vai trò, mục tiêu và bối cảnh, sau đó xác định các nhiệm vụ cho các tác nhân đó.
 
-この例では、Gemini 3 Flash を使用して、カスタマー サポート データを分析して問題を特定し、プロセス改善を提案するマルチエージェント システムを構築する方法を示します。このシステムは、最高執行責任者（COO）が読むことを想定したレポートを生成します。
+Ví dụ này minh hoạ cách xây dựng một hệ thống đa tác nhân để phân tích dữ liệu hỗ trợ khách hàng nhằm xác định vấn đề và đề xuất các điểm cải tiến quy trình bằng Gemini 3 Flash, tạo một báo cáo dành cho Giám đốc vận hành (COO).
 
-このガイドでは、次のタスクを実行できる AI エージェントの「クルー」を作成する方法について説明します。
+Hướng dẫn này sẽ hướng dẫn bạn cách tạo một "nhóm" gồm các tác nhân AI có thể thực hiện những việc sau:
 
-1. カスタマー サポート データを取得して分析します（この例ではシミュレートされています）。
-2. 繰り返し発生する問題とプロセスのボトルネックを特定します。
-3. 具体的な改善案を提案します。
-4. 調査結果を COO に適した簡潔なレポートにまとめます。
+1. Tìm nạp và phân tích dữ liệu hỗ trợ khách hàng (mô phỏng trong ví dụ này).
+2. Xác định các vấn đề tái diễn và nút thắt cổ chai trong quy trình.
+3. Đề xuất các điểm cải thiện có thể thực hiện.
+4. Tổng hợp các phát hiện thành một báo cáo ngắn gọn phù hợp với COO.
 
-Gemini API キーが必要です。キーがない場合は、[Google AI Studio で取得](https://aistudio.google.com/app/apikey?hl=ja)できます。
+Bạn cần có khoá Gemini API. Nếu chưa có, bạn có thể [tạo một khoá API trong Google AI Studio](https://aistudio.google.com/apikey?hl=vi).
 
 ```
 pip install "crewai[tools]"
 ```
 
-Gemini API キーを `GEMINI_API_KEY` という名前の環境変数として設定し、Gemini モデルを使用するように CrewAI を構成します。
+Đặt khoá Gemini API làm biến môi trường có tên là `GEMINI_API_KEY`, sau đó định cấu hình CrewAI để sử dụng mô hình Gemini.
 
 ```
 import os
@@ -50,13 +50,13 @@ gemini_llm = LLM(
 )
 ```
 
-## コンポーネントを定義する
+## Xác định các thành phần
 
-**ツール**、**エージェント**、**タスク**、**クルー**自体を使用して CrewAI アプリケーションを構築します。以降のセクションでは、これらの各コンポーネントについて説明します。
+Xây dựng các ứng dụng CrewAI bằng **Công cụ**, **Tác nhân**, **Nhiệm vụ** và chính **Nhóm**. Các phần sau đây sẽ giải thích từng thành phần này.
 
-### ツール
+### Công cụ
 
-ツールは、エージェントが外部とやり取りしたり、特定のアクションを実行したりするために使用できる機能です。ここでは、カスタマー サポート データの取得をシミュレートするプレースホルダ ツールを定義します。実際のアプリケーションでは、データベース、API、ファイル システムに接続します。ツールの詳細については、[CrewAI ツールガイド](https://docs.crewai.com/concepts/tools)をご覧ください。
+Công cụ là những chức năng mà các đặc vụ có thể dùng để tương tác với thế giới bên ngoài hoặc thực hiện các hành động cụ thể. Tại đây, bạn xác định một công cụ giữ chỗ để mô phỏng việc tìm nạp dữ liệu hỗ trợ khách hàng. Trong một ứng dụng thực tế, bạn sẽ kết nối với cơ sở dữ liệu, API hoặc hệ thống tệp. Để biết thêm thông tin về các công cụ, hãy xem [hướng dẫn về các công cụ CrewAI](https://docs.crewai.com/concepts/tools).
 
 ```
 from crewai.tools import BaseTool
@@ -86,9 +86,9 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### エージェント
+### Nhân viên hỗ trợ
 
-エージェントは、クルー内の個々の AI ワーカーです。各エージェントには、特定の `role`、`goal`、`backstory`、割り当てられた `llm`、省略可能な `tools` があります。エージェントの詳細については、[CrewAI エージェントのガイド](https://docs.crewai.com/concepts/agents)をご覧ください。
+Tác nhân là những nhân viên AI riêng lẻ trong nhóm của bạn. Mỗi tác nhân có một `role`, `goal`, `backstory` cụ thể, được chỉ định `llm` và `tools` không bắt buộc. Để biết thêm thông tin về trợ lý ảo, hãy xem [hướng dẫn về trợ lý ảo CrewAI](https://docs.crewai.com/concepts/agents).
 
 ```
 from crewai import Agent
@@ -135,9 +135,9 @@ report_writer = Agent(
 )
 ```
 
-### タスク
+### Tasks
 
-タスクは、エージェントの具体的な割り当てを定義します。各タスクには `description` と `expected_output` があり、`agent` に割り当てられます。タスクはデフォルトで順番に実行され、前のタスクのコンテキストが含まれます。タスクの詳細については、[CrewAI タスクガイド](https://docs.crewai.com/concepts/tasks)をご覧ください。
+Các nhiệm vụ xác định những việc cụ thể được giao cho nhân viên hỗ trợ. Mỗi việc cần làm đều có `description`, `expected_output` và được giao cho một `agent`. Theo mặc định, các tác vụ được chạy tuần tự và bao gồm cả bối cảnh của tác vụ trước đó. Để biết thêm thông tin về các tác vụ, hãy xem [hướng dẫn về các tác vụ của CrewAI](https://docs.crewai.com/concepts/tasks).
 
 ```
 from crewai import Task
@@ -196,9 +196,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### Crew
+### Nhóm sản xuất
 
-`Crew` は、エージェントとタスクをまとめ、ワークフロー プロセス（「順次」など）を定義します。
+`Crew` kết hợp các tác nhân và tác vụ, xác định quy trình công việc (chẳng hạn như "tuần tự").
 
 ```
 from crewai import Crew, Process
@@ -211,9 +211,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## クルーを実行する
+## Run the crew
 
-最後に、必要な入力を使用してクルーの実行を開始します。
+Cuối cùng, hãy bắt đầu thực thi nhóm bằng mọi thông tin đầu vào cần thiết.
 
 ```
 # Start the crew's work
@@ -227,17 +227,17 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-スクリプトが実行されます。`Data Analyst` はツールを使用し、`Process
-Optimizer` は調査結果を分析し、`Report Writer` は最終レポートをコンパイルしてコンソールに出力します。`verbose=True` 設定では、各エージェントの詳細な思考プロセスとアクションが表示されます。
+Tập lệnh sẽ thực thi. `Data Analyst` sẽ sử dụng công cụ này, `Process
+Optimizer` sẽ phân tích các kết quả và `Report Writer` sẽ biên soạn báo cáo cuối cùng, sau đó báo cáo này sẽ được in ra bảng điều khiển. Chế độ cài đặt `verbose=True` sẽ cho thấy quy trình suy nghĩ và hành động chi tiết của từng tác nhân.
 
-CrewAI の詳細については、[CrewAI の概要](https://docs.crewai.com/introduction)をご覧ください。
+Để tìm hiểu thêm về CrewAI, hãy xem [giới thiệu về CrewAI](https://docs.crewai.com/introduction).
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-05-19 UTC。
+Cập nhật lần gần đây nhất: 2026-06-10 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-19 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-10 UTC."],[],[]]

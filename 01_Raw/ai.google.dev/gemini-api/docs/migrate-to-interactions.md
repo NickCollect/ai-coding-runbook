@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=id
-fetched_at: 2026-06-08T05:31:39.557748+00:00
+fetched_at: 2026-06-15T06:27:43.428326+00:00
 title: "Bermigrasi ke Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=hi
-fetched_at: 2026-06-08T05:35:48.740400+00:00
-title: "Gemini 2.5 Flash \u0915\u0940 \u091f\u0947\u0915\u094d\u0938\u094d\u091f \u0915\u094b \u0906\u0935\u093e\u091c\u093c \u092e\u0947\u0902 \u092c\u0926\u0932\u0928\u0947 \u0915\u0940 \u0938\u0941\u0935\u093f\u0927\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=pt-BR
+fetched_at: 2026-06-15T06:28:39.118235+00:00
+title: "Convers\u00e3o de texto em voz do Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
-# Gemini 2.5 Flash की टेक्स्ट को आवाज़ में बदलने की सुविधा
+# Conversão de texto em voz do Gemini 2.5 Flash
 
-यह टेक्स्ट को ऑडियो में बदलने वाला सबसे तेज़ इंजन है. इससे बेहतर क्वालिटी का ऑडियो जनरेट होता है. साथ ही, इसमें कम समय लगता है और यह किफ़ायती भी है. Gemini 2.5 Flash TTS, रीयल-टाइम में मदद करने वाले टूल, ज़्यादा शब्दों को बोलकर सुनाने, और बातचीत के ऐसे मामलों के लिए सबसे अच्छा है जिनमें आवाज़ के स्टाइल और गति पर बारीकी से कंट्रोल करने की ज़रूरत होती है.
+Nosso mecanismo mais rápido para síntese de fala de alta fidelidade, que oferece geração de áudio de baixa latência e econômica. O Gemini 2.5 Flash TTS é ideal para assistentes em tempo real, narração de alto volume e casos de uso conversacionais que exigem controle refinado sobre o estilo e o ritmo da voz.
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com?model=gemini-2.5-flash-preview-tts&hl=hi)
+[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-preview-tts&hl=pt-br)
 
-## दस्तावेज़
+## Documentação
 
-सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [लिखे हुए शब्दों को सुनने](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi) की सुविधा से जुड़ी गाइड पढ़ें.
+Consulte o guia [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br) para conferir a cobertura completa de recursos e funcionalidades.
 
 ## gemini-2.5-flash-preview-tts
 
-| प्रॉपर्टी | ब्यौरा |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardमॉडल कोड | `gemini-2.5-flash-preview-tts` |
-| saveइस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट  **आउटपुट**  ऑडियो |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  8,192  **आउटपुट टोकन की सीमा**  16,384 |
-| handymanसुविधाएँ | **ऑडियो जनरेट करने की सुविधा**  काम करता है  **Batch API**  काम करता है  **कैश मेमोरी में सेव होना**  काम नहीं करता है  **कोड को चलाने की सुविधा**  काम नहीं करता है  **फ़ाइल खोजना**  काम नहीं करता है  **फ़ंक्शन कॉलिंग**  काम नहीं करता है  **Google Maps की मदद से जवाब पाना**  काम नहीं करता है  **इमेज जनरेट करना**  काम नहीं करता है  **Live API**  काम नहीं करता है  **भरोसेमंद स्रोतों से जानकारी लेना**  काम नहीं करता है  **स्ट्रक्चर्ड आउटपुट**  काम नहीं करता है  **सोच-विचार करना**  काम नहीं करता है  **यूआरएल का कॉन्टेक्स्ट**  काम नहीं करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - `gemini-2.5-flash-preview-tts` |
-| calendar\_monthनया अपडेट | दिसंबर 2025 |
+| id\_cardCódigo do modelo | `gemini-2.5-flash-preview-tts` |
+| saveTipos de dados com suporte | **Entradas (link em inglês)**  Texto  **Saída**  Áudio |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de token de entrada**  8.192  **Limite de token de saída**  16.384 |
+| handymanRecursos | **Geração de áudio**  Compatível  **API em lote**  Compatível  **Armazenamento em cache**  indisponível  **Execução de código**  indisponível  **Pesquisa de arquivos**  incompatível  **Chamadas de função**  indisponível  **Embasamento com o Google Maps**  indisponível  **Geração de imagens**  indisponível  **API Live**  indisponível  **Embasamento da pesquisa**  indisponível  **Respostas estruturadas**  indisponível  **Raciocínio**  indisponível  **Contexto de URL**  indisponível |
+| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - `gemini-2.5-flash-preview-tts` |
+| calendar\_monthAtualização mais recente | Dezembro de 2025 |
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+Última atualização 2026-04-29 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

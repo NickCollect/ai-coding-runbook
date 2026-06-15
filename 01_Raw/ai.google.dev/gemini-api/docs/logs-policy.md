@@ -1,70 +1,60 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=ja
-fetched_at: 2026-06-08T05:40:23.570827+00:00
-title: "\u30c7\u30fc\u30bf\u30ed\u30ae\u30f3\u30b0\u3068\u5171\u6709 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=fr
+fetched_at: 2026-06-15T06:30:22.079069+00:00
+title: "Journalisation et partage des donn\u00e9es \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-フィードバックを送信
+Envoyer des commentaires
 
-# データロギングと共有
+# Journalisation et partage des données
 
-このページでは、
-[Gemini API ログ](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ja)の保存と管理について説明します。Gemini API ログは、課金が有効になっているプロジェクトのサポート対象の Gemini API 呼び出しから取得される、デベロッパーが所有する
-API データです。ログには、ユーザーのリクエストからモデルのレスポンスまでのプロセス全体が含まれます。
+Cette page décrit le stockage et la gestion des [journaux de l'API Gemini](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=fr), qui sont des données d'API appartenant aux développeurs et provenant des appels d'API Gemini compatibles pour les projets pour lesquels la facturation est activée. Les journaux englobent l'ensemble du processus, de la requête d'un utilisateur à la réponse du modèle.
 
-## 1. 共有できるデータ
+## 1. Données pouvant être partagées
 
-プロジェクト オーナーは、Gemini API 呼び出しのロギングを有効にするかどうかを選択できます。ロギングは、お客様自身が使用するため、または Google とのフィードバックや共有を通じてモデルの継続的な改善に役立てるために使用できます。
+En tant que propriétaire du projet, vous pouvez choisir d'activer la journalisation des appels de l'API Gemini pour votre propre usage, ou pour nous envoyer des commentaires et les partager avec Google afin de nous aider à améliorer continuellement nos modèles.
 
-ロギングを有効にすると、プロダクトの改善とモデルのトレーニングのために次のデータを提供することで、さまざまな分野やユースケースのデベロッパーにとって価値のある AI システムの構築に役立てることができます。
+Si la journalisation est activée, vous pouvez nous aider à créer des systèmes d'IA qui continuent d'être utiles aux développeurs dans différents domaines et cas d'utilisation en choisissant de partager les données suivantes afin d'améliorer nos produits et d'entraîner nos modèles :
 
-- **データセット:** Google AI Studio の [Logs and Datasets] インターフェースを使用して、サポートされている Gemini API 呼び出しから関心のあるログ（リクエスト、レスポンス、メタデータなど）を選択します。データセットに含めることで提供されます。データセットの作成時にオプトアウトすることもできます。
-- **フィードバック:** ログを確認する際に、フィードバックを提供できます。これには、高評価/低評価の評価や、提供するコメントが含まれます。
+- **Ensembles de données** : utilisez l'interface "Journaux et ensembles de données" de Google AI Studio pour choisir les journaux (requêtes, réponses, métadonnées, etc.) qui vous intéressent parmi les appels d'API Gemini compatibles. Ces journaux sont fournis par le biais de l'inclusion dans des ensembles de données, avec la possibilité de les exclure lors de la création de l'ensemble de données.
+- **Commentaires** : lorsque vous examinez des journaux, vous pouvez fournir des commentaires, y compris des notes (pouce vers le haut/bas) et des commentaires écrits.
 
-[[データセットを Google と共有すると、リクエストやレスポンスなど、そのデータセット内のログは「無償サービス」の利用規約に従って処理されます。つまり、データセットは、モデルの改善とトレーニングなど、Google のプロダクト、サービス、機械学習技術の開発と改善に使用される可能性があります。](https://developers.google.com/terms?hl=ja)](https://ai.google.dev/gemini-api/terms?hl=ja#data-use-unpaid)**個人情報や機密情報は含めないでください。**
+Lorsque vous partagez un ensemble de données avec Google, les journaux de cet ensemble de données, y compris les requêtes et les réponses, sont traités conformément à nos [Conditions d'utilisation](https://developers.google.com/terms?hl=fr) pour les [Services non payants](https://ai.google.dev/gemini-api/terms?hl=fr#data-use-unpaid). Cela signifie que l'ensemble de données peut être utilisé pour développer et améliorer les produits, services et technologies de machine learning de Google, y compris pour améliorer et entraîner nos modèles. **N'incluez pas d'informations personnelles, sensibles ou confidentielles.**
 
-## 2. データの使用方法
+## 2. Comment nous utilisons vos données
 
-デフォルトでは、ログは 55 日後に期限切れになります。この期間を過ぎると、ログは使用できなくなります。データセットを作成して、この期間を超えて関心のあるログや価値のあるログを保持し、ダウンストリームのユースケースで使用したり、モデルの改善に任意で貢献したりできます。データセットに保存されたログには有効期限はありませんが、各プロジェクトのデフォルトのストレージ上限は 1,000 ログです。
+Par défaut, les journaux expirent au bout de 55 jours. Elles deviendront indisponibles après cette période. Des ensembles de données peuvent être créés pour conserver les journaux d'intérêt ou de valeur au-delà de cette période, pour des cas d'utilisation en aval et une contribution facultative à l'amélioration des modèles. Les journaux stockés dans les ensembles de données n'ont pas de date d'expiration définie. Toutefois, chaque projet dispose d'une limite de stockage par défaut de 1 000 journaux maximum.
 
-デフォルトでは、ロギングは課金が有効になっているプロジェクトでのみ使用できるため、
-データ使用に関する[規約](https://developers.google.com/terms?hl=ja)
-に従い、ログ内のプロンプトとレスポンスはプロダクトの改善や
-開発には使用されません。
+Par défaut, la journalisation n'étant disponible que pour les projets pour lesquels la facturation est activée, les requêtes et les réponses dans les journaux ne sont pas utilisées pour améliorer ou développer les produits, conformément à nos [Conditions d'utilisation](https://developers.google.com/terms?hl=fr) sur l'utilisation des données.
 
-ログのデータセットを Google と共有することを選択した場合、これらのデータセットは、AI
-システムとアプリケーションが使用されるドメインとコンテキストの多様性をより深く理解するための実際のデモンストレーション
-データとして使用されます。このデータは、モデルの品質の向上や、将来のモデルとサービスのトレーニングと評価に役立てられる可能性があります。[このデータは、無償サービスのデータ使用に関する規約に従って処理されます。](https://ai.google.dev/gemini-api/terms?hl=ja#data-use-unpaid)そのため、人間のレビュアーが、共有した
-API 入出力の読み取り、注釈付け、処理を行う場合があります。モデルの改善にデータを使用する前に、このプロセスの一部として、ユーザーのプライバシーを保護するための措置が
-Google により講じられます。措置には Google アカウント、API キー、およびクラウド
-プロジェクトからのデータの切り離しが含まれます。これらは人間のレビュアーによる読み取りや注記の前に行われます。
+Si vous choisissez de partager des ensembles de données de vos journaux avec Google, ils seront utilisés comme données de démonstration réelles pour mieux comprendre la diversité des domaines et des contextes dans lesquels les systèmes et applications d'IA sont utilisés. Ces données peuvent être utilisées pour améliorer la qualité du modèle, et pour informer l'entraînement et l'évaluation des futurs modèles et services. Ces données sont traitées conformément à nos conditions d'utilisation des données pour les [Services non payants](https://ai.google.dev/gemini-api/terms?hl=fr#data-use-unpaid).
+Par conséquent, des réviseurs humains peuvent lire, annoter et traiter les entrées et sorties d'API que vous partagez. Avant d'utiliser les données pour améliorer les modèles, Google prend des mesures pour protéger la confidentialité des utilisateurs. Entre autres, ces données sont dissociées de votre compte Google, de votre clé API et de votre projet Cloud avant que les réviseurs les voient ou les annotent.
 
-## 3. データの権限
+## 3. Data permissions
 
-API データの提供を有効にすることで、このドキュメントに記載されているように、Google がデータを処理して使用するために必要な権限があることを確認します。**有料サービスを通じて取得した機密情報、機密情報、専有情報を含むログは提供しないでください**
-。API 利用規約の「[コンテンツの送信](https://developers.google.com/terms?hl=ja#b_submission_of_content)」
-に規定されている内容に従って使用者から Google に与えられる許可は、Google による使用に適用される法律で求められる範囲の中で、使用者が本サービスに送信したコンテンツ（たとえばプロンプトや、それに関連したシステム命令、キャッシュに保存されたコンテンツ、画像、動画、文書などのファイル）、および生成された回答にまで範囲が拡大されます。
+En choisissant de partager des données d'API, vous confirmez que vous disposez des autorisations nécessaires pour que Google traite et utilise les données comme décrit dans cette documentation. **Veuillez ne pas partager de journaux contenant des informations sensibles, confidentielles ou propriétaires obtenues par le biais du service payant.**
+La licence que vous accordez à Google dans la section [Envoi de contenu](https://developers.google.com/terms?hl=fr#b_submission_of_content) des Conditions d'utilisation de l'API s'étend également, dans la mesure requise par la loi applicable pour notre utilisation, à tout contenu (par exemple, les requêtes, y compris les instructions système associées, le contenu mis en cache et les fichiers tels que les images, les vidéos ou les documents) que vous envoyez aux Services et à toutes les réponses générées.
 
-## 4. データ共有とフィードバック
+## 4. Partage de données et commentaires
 
-データを例として共有することで、AI 研究、Gemini API、Google AI Studio の最先端技術の発展に貢献できます。これにより、さまざまなコンテキストでモデルを継続的に改善し、さまざまな分野やユースケースのデベロッパーにとって価値のある AI システムを構築できます。
+Vous pouvez nous aider à faire progresser la recherche sur l'IA, l'API Gemini et Google AI Studio en choisissant de partager vos données en tant qu'exemples. Cela nous permettra d'améliorer continuellement nos modèles dans différents contextes et de créer des systèmes d'IA qui restent utiles aux développeurs dans différents domaines et cas d'utilisation.
 
-フィードバックを送信
+Envoyer des commentaires
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最終更新日 2026-06-01 UTC。
+Dernière mise à jour le 2026/06/01 (UTC).
 
-ご意見をお聞かせください
+Voulez-vous nous donner plus d'informations ?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/01 (UTC)."],[],[]]

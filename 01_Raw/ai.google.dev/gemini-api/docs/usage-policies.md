@@ -1,70 +1,65 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=ja
-fetched_at: 2026-06-08T05:27:11.489706+00:00
-title: "\u4e0d\u6b63\u884c\u70ba\u306e\u76e3\u8996 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=zh-TW
+fetched_at: 2026-06-15T06:21:25.729982+00:00
+title: "\u76e3\u63a7\u6feb\u7528\u60c5\u5f62 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-フィードバックを送信
+提供意見
 
-# 不正行為の監視
+# 監控濫用情形
 
-Google は、AI の責任ある開発と使用に取り組んでいます。Gemini API
-の安全性と完全性を確保するため、これらのポリシー ガイドラインを作成しました。
-Gemini API を使用すると、以下のガイドライン、[Gemini API
-追加利用規約](https://ai.google.dev/gemini-api/terms?hl=ja)、生成 AI の[使用禁止
-に関するポリシー](https://policies.google.com/terms/generative-ai/use-policy?hl=ja)に同意したものと見なされます。
+Google 致力於以負責任的方式開發及使用 AI。為確保 Gemini API 的安全性與完整性，我們制定了這些政策規範。使用 Gemini API 即表示您同意遵守下列規範、《[Gemini API 附加服務條款](https://ai.google.dev/gemini-api/terms?hl=zh-tw)》和《[生成式 AI 使用限制政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-tw)》。
 
-## 不正使用のモニタリング方法
+## 我們如何監控濫用情形
 
-Google のトラスト＆セーフティ チームは、自動プロセスと手動プロセスを組み合わせて、Gemini API と Google AI Studio の不正使用の可能性を検出し、ポリシーを適用しています。
+Google 信任與安全團隊會採用自動化和手動程序，偵測 Gemini API 和 Google AI Studio 的潛在濫用情形，以利執行政策。
 
-- **自動検出:** 自動システムは、ヘイトスピーチ、ハラスメント、露骨な性的コンテンツ、危険なコンテンツなど、禁止されている使用に関するポリシーに違反していないか API の使用状況をスキャンします。
-- **手動検出:** プロジェクトで不審なアクティビティが継続的に発生している場合は、Google の権限のある担当者による手動レビューの対象となることがあります。
+- **自動偵測：**自動化系統會掃描 API 使用情形，找出違反《使用限制政策》的行為，例如散布仇恨言論、騷擾、情色露骨內容和危險內容。
+- **手動偵測：**如果專案持續出現可疑活動，授權的 Google 人員可能會標記該專案，以進行手動審查。
 
-## データの取り扱い方法
+## 我們如何處理資料
 
-Google は、サービスの安全性とセキュリティを維持するため、禁止されている使用に関するポリシーの違反を検出して防止する目的で、また、法律や規制で義務付けられている開示を行うために、以下のデータを 55 日間保持します。
+為偵測及防範違反《禁止用途政策》的行為，維護服務安全，以及因應任何法律或法規揭露要求，Google 會保留下列資料 55 天：
 
-- **プロンプト:** API に送信するテキスト プロンプト。
-- **コンテキスト情報:** プロンプトとともに提供する追加のコンテキスト。
-- **出力:** Gemini API によって生成されたレスポンス。
+- **提示：**您提交給 API 的文字提示。
+- **背景資訊：**您在提示中提供的任何其他背景資訊。
+- **輸出：**Gemini API 生成的回覆。
 
-## 潜在的な問題の調査方法
+## 我們如何調查潛在問題
 
-上記の安全フィルタと不正使用検出システムによってプロンプトまたはモデル出力にフラグが設定された場合、Google の権限のある従業員が、事前定義されたガイドラインとポリシーに基づいて、フラグが設定されたコンテンツを評価し、分類または判定を確認または修正することがあります。データへのアクセスは、社内のガバナンス評価およびレビュー管理プラットフォームを通じて、Google の権限のある従業員のみが行うことができます。不正使用のモニタリングのためにデータが記録される場合、そのデータはポリシーの適用とポリシー違反の防止のみを目的として使用されます。
-ポリシーの適用に特化した AI / ML モデル以外の AI / ML モデルのトレーニングやファインチューニングには使用されません。
+如果提示或模型輸出內容遭到上述安全篩選器和濫用偵測系統標記，授權的 Google 員工可能會根據預先定義的規範和政策評估遭標記的內容，並確認或修正分類或判斷結果。只有獲得授權的 Google 員工，才能透過內部治理評估和審查管理平台，存取資料以供人工審查。系統記錄資料以監控濫用行為時，只會用於執行政策和防止違規行為。不會用於訓練或微調任何 AI/機器學習模型，但專門用於執行政策的模型除外。
 
-## ポリシー遵守への取り組み
+## 與您攜手落實政策遵循
 
-Gemini の使用が Google のポリシーに準拠していない場合、Google は次の措置を講じることがあります。
+如果使用 Gemini 時違反政策，我們可能會採取下列措施：
 
-- **連絡:** Google は、お客様のユースケースを把握し、使用状況をポリシーに準拠させる方法を検討するため、メールでご連絡することがあります。
-- **一時的な使用量上限:** Google は Gemini API へのアクセスを制限することがあります。
-- **一時的な停止:** Google は Gemini API へのアクセスを一時的に停止することがあります。
-- **アカウントの閉鎖:** 最終手段として、重大な違反があった場合、Google は Gemini API やその他の Google サービスへのアクセスを永久に閉鎖することがあります。
+- **與您聯絡：**我們可能會透過電子郵件與您聯絡，瞭解您的用途，並探討如何讓您的使用情況符合規定。
+- **暫時性用量限制：**我們可能會調整速率限制，或變更特定要求的回覆模型，藉此限制你對 Gemini API 的存取權。
+- **暫時暫停：**我們可能會暫時暫停你的 Gemini API 存取權。
+- **帳戶停用：**如果嚴重違規，我們可能會永久停用您對 Gemini API 和其他 Google 服務的存取權。
 
-停止またはアカウントの閉鎖について Google からご連絡する場合は、異議申し立てを行うためのリンクも提供します。
+如果我們因停權或停用帳戶事宜與您聯絡，也會提供申訴連結。
 
-## スコープ
+## 範圍
 
-これらのポリシー ガイドラインは、Gemini API と AI Studio の使用に適用されます。
+使用 Gemini API 和 AI Studio 時，必須遵守這些政策規範。
 
-フィードバックを送信
+提供意見
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最終更新日 2026-04-29 UTC。
+上次更新時間：2026-06-09 (世界標準時間)。
 
-ご意見をお聞かせください
+想進一步說明嗎？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-09 (世界標準時間)。"],[],[]]

@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=es-419
-fetched_at: 2026-06-08T05:35:00.255338+00:00
-title: "Embeddings \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=tr
+fetched_at: 2026-06-15T06:25:44.889353+00:00
+title: "Yerle\u015ftirmeler \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Enviar comentarios
+Geri bildirim gönderin
 
-# Embeddings
+# Yerleştirmeler
 
-La API de Gemini ofrece modelos de incorporación para generar incorporaciones de texto, imágenes, video y otro contenido. Estos embeddings resultantes se pueden usar para tareas como la búsqueda semántica, la clasificación y la agrupación, lo que proporciona resultados más precisos y contextuales que los enfoques basados en palabras clave.
+Gemini API, metin, resim, video ve diğer içerikler için yerleştirmeler oluşturmak üzere yerleştirme modelleri sunar. Elde edilen bu yerleştirmeler daha sonra semantik arama, sınıflandırma ve kümeleme gibi görevlerde kullanılabilir. Bu sayede, anahtar kelime tabanlı yaklaşımlara kıyasla daha doğru ve bağlamdan bağımsız sonuçlar elde edilebilir.
 
-El modelo más reciente, `gemini-embedding-2`, es el primer modelo de embeddings multimodal en la API de Gemini. Asigna texto, imágenes, video, audio y documentos a un espacio de embedding unificado, lo que permite la búsqueda, la clasificación y el agrupamiento en clústeres entre modalidades en más de 100 idiomas. Consulta la [sección de embeddings multimodales](#multimodal) para obtener más información. Para los casos de uso de solo texto, `gemini-embedding-001` sigue disponible.
+En yeni model olan `gemini-embedding-2`, Gemini API'deki ilk çok formatlı yerleştirme modelidir. Metin, resim, video, ses ve dokümanları birleştirilmiş bir yerleştirme alanına eşleyerek 100'den fazla dilde farklı formatlarda arama, sınıflandırma ve kümeleme yapılmasını sağlar. Daha fazla bilgi edinmek için [çok formatlı yerleştirmeler bölümüne](#multimodal) bakın. Yalnızca metin içeren kullanım alanlarında `gemini-embedding-001` kullanılmaya devam eder.
 
-La creación de sistemas de generación mejorada por recuperación (RAG) es un caso de uso común para los productos de IA. Las incorporaciones desempeñan un papel clave en la mejora significativa de los resultados del modelo, ya que aumentan la precisión fáctica, la coherencia y la riqueza contextual. Si prefieres usar una solución de RAG administrada, creamos la herramienta [Búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419), que facilita la administración de la RAG y la hace más rentable.
+Veriyle artırılmış üretim (RAG) sistemleri oluşturmak, yapay zeka ürünlerinin yaygın kullanım alanlarından biridir. Gömme işlemleri, model çıkışlarını önemli ölçüde iyileştirerek doğruluk, tutarlılık ve bağlamsal zenginlik açısından daha iyi sonuçlar elde edilmesini sağlar. Yönetilen bir RAG çözümü kullanmayı tercih ederseniz RAG'yi yönetmeyi kolaylaştıran ve daha uygun maliyetli hale getiren [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) aracını geliştirdik.
 
-## Generación de embeddings
+## Yerleştirilmiş öğeler oluşturma
 
-Usa el método `embedContent` para generar embeddings de texto:
+Metin yerleştirmeleri oluşturmak için `embedContent` yöntemini kullanın:
 
 ### Python
 
@@ -120,28 +120,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Especifica el tipo de tarea para mejorar el rendimiento
+## Performansı artırmak için görev türünü belirtin
 
-Puedes usar incorporaciones para una amplia variedad de tareas, desde la clasificación hasta la búsqueda de documentos. Especificar el tipo de tarea correcto ayuda a optimizar los embeddings para las relaciones deseadas, lo que maximiza la precisión y la eficiencia.
+Sınıflandırmadan belge aramaya kadar çeşitli görevler için gömmeleri kullanabilirsiniz. Doğru görev türünü belirtmek, yerleştirmelerin amaçlanan ilişkiler için optimize edilmesine yardımcı olarak doğruluğu ve verimliliği en üst düzeye çıkarır.
 
-### Tipos de tareas con Embeddings 2
+### Embeddings 2 ile görev türleri
 
-Para las tareas de solo texto con `gemini-embedding-2`, te recomendamos que agregues la instrucción de la tarea en tu instrucción. Para ello, debes dar formato a la búsqueda y al documento con el prefijo de tarea correcto.
+`gemini-embedding-2` içeren yalnızca metin görevlerinde, isteminize görev talimatını eklemenizi önemle tavsiye ederiz. Bu işlem, sorguyu ve dokümanı doğru görev önekiyle biçimlendirerek yapılabilir.
 
-En las siguientes tablas, se muestran ejemplos de cómo dar formato a las consultas y los documentos para casos de uso simétricos y asimétricos con el modelo `gemini-embedding-2`.
+Aşağıdaki tablolarda, `gemini-embedding-2` modelini kullanarak simetrik ve asimetrik kullanım alanları için sorguların ve dokümanların nasıl biçimlendirileceğine dair örnekler gösterilmektedir.
 
-**Casos de uso de recuperación (formato asimétrico)**
+**Alma kullanım alanları (Asimetrik biçim)**
 
-En los casos de uso asimétricos, agrega el prefijo de la tarea a la búsqueda y aplica la estructura del documento al contenido que deseas incorporar y recuperar.
+Asimetrik kullanım alanlarında, sorguya görev önekini ekleyin ve yerleştirmek ile almak istediğiniz içerik için belge yapısını uygulayın.
 
-| Caso de uso | Estructura de una consulta | Estructura del documento |
+| Kullanım alanı | Sorgu yapısı | Belge yapısı |
 | --- | --- | --- |
-| Búsqueda | `task: search result | query: {content}` | `title: {title} | text: {content}` Si no hay título, usa `title: none`. |
-| Búsqueda de respuestas | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
-| Verificación de datos | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
-| Recuperación de código | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
+| Arama sorgusu | `task: search result | query: {content}` | `title: {title} | text: {content}` Başlık yoksa `title: none` kullanın. |
+| Soru yanıtlama | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
+| Doğruluk kontrolü | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
+| Kod alma | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
 
-**Ejemplo de uso**
+**Kullanım örneği**
 
 ### Python
 
@@ -160,17 +160,17 @@ def prepare_document(content, title=None):
     return f"title: {title} | text: {content}"
 ```
 
-**Casos de uso de entrada única (formato simétrico)**
+**Tek girişli kullanım alanları (Simetrik biçim)**
 
-En los casos de uso simétricos, para la misma tarea, usa el mismo formato para la búsqueda y el documento.
+Simetrik kullanım alanlarında, aynı görev için sorgu ve belgede aynı biçimlendirmeyi kullanın.
 
-| Caso de uso | Estructura de entrada |
+| Kullanım alanı | Giriş yapısı |
 | --- | --- |
-| Clasificación | `task: classification | query: {content}` |
-| Agrupamiento en clústeres | `task: clustering | query: {content}` |
-| Similitud semántica | `task: sentence similarity | query: {content}` No uses este campo para la búsqueda o la recuperación. Está diseñado para la similitud textual semántica. |
+| Sınıflandırma | `task: classification | query: {content}` |
+| Kümeleme | `task: clustering | query: {content}` |
+| Semantik benzerlik | `task: sentence similarity | query: {content}` Arama veya alma için kullanmayın. Semantik metin benzerliği için tasarlanmıştır. |
 
-**Ejemplo de uso**
+**Kullanım örneği**
 
 ### Python
 
@@ -182,13 +182,13 @@ def prepare_query_and_document(content):
     return f'task: classification | query: {content}'
 ```
 
-Es importante que la tarea se use de forma coherente. Por ejemplo, si los documentos se incorporan con `f'task: classification | query: {content}'`, la búsqueda también se debe incorporar siguiendo este formato de tarea.
+Görevlerin tutarlı bir şekilde kullanılması önemlidir. Örneğin, dokümanlar `f'task: classification | query: {content}'` ile yerleştirilmişse sorgu da bu görev biçimine göre yerleştirilmelidir.
 
-### Tipos de tareas con Embeddings 1
+### Yerleştirme 1 ile görev türleri
 
-Para `gemini-embedding-001`, puedes especificar `task_type` en el método `embedContent`. Para obtener una lista completa de los tipos de tareas admitidos, consulta la tabla [Tipos de tareas admitidos](#supported-task-types).
+`gemini-embedding-001` için `embedContent` yönteminde `task_type` değerini belirtebilirsiniz. Desteklenen görev türlerinin tam listesi için [Desteklenen görev türleri](#supported-task-types) tablosuna bakın.
 
-En el siguiente ejemplo, se muestra cómo puedes usar `SEMANTIC_SIMILARITY` para verificar qué tan similares son en significado las cadenas de texto.
+Aşağıdaki örnekte, `SEMANTIC_SIMILARITY` kullanarak metin dizelerinin anlam olarak ne kadar benzer olduğunu nasıl kontrol edebileceğiniz gösterilmektedir.
 
 ### Python
 
@@ -350,28 +350,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-0
     }'
 ```
 
-Los fragmentos de código mostrarán qué tan similares son los diferentes fragmentos de texto entre sí cuando se ejecuten.
+Kod snippet'leri çalıştırıldığında farklı metin parçalarının birbirine ne kadar benzediğini gösterir.
 
-#### Tipos de tareas compatibles
+#### Desteklenen görev türleri
 
-Tipos de tareas compatibles con `gemini-embedding-001`:
+`gemini-embedding-001` için desteklenen görev türleri:
 
-| Tipo de tarea | Descripción | Ejemplos |
+| Görev türü | Açıklama | Örnekler |
 | --- | --- | --- |
-| **SEMANTIC\_SIMILARITY** | Embeddings optimizados para evaluar la similitud del texto. | Sistemas de recomendación, detección de duplicados |
-| **CLASSIFICATION** | Son embeddings optimizados para clasificar textos según etiquetas predeterminadas. | Análisis de sentimiento y detección de spam |
-| **CLUSTERING** | Embeddings optimizados para agrupar textos en función de sus similitudes. | Organización de documentos, investigación de mercado y detección de anomalías |
-| **RETRIEVAL\_DOCUMENT** | Son embeddings optimizados para la búsqueda de documentos. | Indexar artículos, libros o páginas web para la búsqueda |
-| **RETRIEVAL\_QUERY** | Son embeddings optimizados para las búsquedas generales. Usa `RETRIEVAL_QUERY` para las búsquedas y `RETRIEVAL_DOCUMENT` para los documentos que se recuperarán. | Búsqueda personalizada |
-| **CODE\_RETRIEVAL\_QUERY** | Son embeddings optimizados para recuperar bloques de código en función de consultas en lenguaje natural. Usa `CODE_RETRIEVAL_QUERY` para las consultas y `RETRIEVAL_DOCUMENT` para los bloques de código que se recuperarán. | Sugerencias y búsqueda de código |
-| **QUESTION\_ANSWERING** | Son embeddings para preguntas en un sistema de respuesta de preguntas, optimizados para encontrar documentos que respondan la pregunta. Usa `QUESTION_ANSWERING` para las preguntas y `RETRIEVAL_DOCUMENT` para los documentos que se recuperarán. | Cuadro de chat |
-| **FACT\_VERIFICATION** | Son embeddings para las declaraciones que se deben verificar, optimizados para recuperar documentos que contienen evidencia que respalda o refuta la declaración. Usa `FACT_VERIFICATION` para el texto objetivo y `RETRIEVAL_DOCUMENT` para los documentos que se recuperarán. | Sistemas automatizados de verificación de datos |
+| **SEMANTIC\_SIMILARITY** | Metin benzerliğini değerlendirmek için optimize edilmiş yerleştirmeler. | Öneri sistemleri, yinelenen öğe algılama |
+| **SINIFLANDIRMA** | Metinleri önceden ayarlanmış etiketlere göre sınıflandırmak için optimize edilmiş gömmeler. | Duygu analizi, spam yakalama |
+| **KÜMELEME** (CLUSTERING) | Metinleri benzerliklerine göre kümelemek için optimize edilmiş gömmeler. | Belge düzenleme, pazar araştırması, anormallik algılama |
+| **RETRIEVAL\_DOCUMENT** | Doküman arama için optimize edilmiş yerleştirmeler. | Arama için makaleleri, kitapları veya web sayfalarını dizine ekleme |
+| **RETRIEVAL\_QUERY** | Genel arama sorguları için optimize edilmiş gömmeler. Sorgular için `RETRIEVAL_QUERY`, alınacak dokümanlar için `RETRIEVAL_DOCUMENT` kullanın. | Özel arama ağı |
+| **CODE\_RETRIEVAL\_QUERY** | Doğal dil sorgularına dayalı kod bloklarının alınması için optimize edilmiş gömmeler. Sorgular için `CODE_RETRIEVAL_QUERY`, alınacak kod blokları için `RETRIEVAL_DOCUMENT` kullanın. | Kod önerileri ve arama |
+| **QUESTION\_ANSWERING** | Soru-cevap sistemindeki sorular için yerleştirmeler. Bu yerleştirmeler, soruyu yanıtlayan belgeleri bulmak üzere optimize edilmiştir. Sorular için `QUESTION_ANSWERING`, alınacak belgeler için `RETRIEVAL_DOCUMENT` kullanın. | Chatbox |
+| **FACT\_VERIFICATION** | Doğrulanması gereken ifadeler için yerleştirmeler. İfadeyi destekleyen veya çürüten kanıtlar içeren belgelerin alınması için optimize edilmiştir. Hedef metin için `FACT_VERIFICATION`, alınacak dokümanlar için `RETRIEVAL_DOCUMENT` kullanın. | Otomatik doğruluk kontrolü sistemleri |
 
-## Cómo controlar el tamaño del embedding
+## Yerleştirme boyutunu kontrol etme
 
-Tanto `gemini-embedding-001` como `gemini-embedding-2` se entrenan con la técnica de aprendizaje de representación de Matryoshka (MRL), que enseña a un modelo a aprender incorporaciones de alta dimensión que tienen segmentos iniciales (o prefijos) que también son versiones útiles y más simples de los mismos datos.
+Hem `gemini-embedding-001` hem de `gemini-embedding-2`, bir modele aynı verilerin faydalı, daha basit sürümleri olan başlangıç segmentlerine (veya öneklere) sahip yüksek boyutlu yerleştirmeleri öğrenmeyi öğreten Matryoshka Representation Learning (MRL) tekniği kullanılarak eğitilir.
 
-Usa el parámetro `output_dimensionality` para controlar el tamaño del vector de incorporación de salida. Seleccionar una dimensionalidad de salida más pequeña puede ahorrar espacio de almacenamiento y aumentar la eficiencia de procesamiento para las aplicaciones downstream, sin sacrificar mucho en términos de calidad. De forma predeterminada, ambos modelos generan una incorporación de 3,072 dimensiones, pero puedes truncarla a un tamaño más pequeño sin perder calidad para ahorrar espacio de almacenamiento. Recomendamos usar dimensiones de salida de 768, 1536 o 3072.
+Çıkış yerleştirme vektörünün boyutunu kontrol etmek için `output_dimensionality` parametresini kullanın. Daha küçük bir çıkış boyutu seçmek, depolama alanından tasarruf etmenizi ve sonraki uygulamalar için hesaplama verimliliğini artırmanızı sağlayabilir. Bu sırada kaliteden çok az ödün verilir. Her iki model de varsayılan olarak 3072 boyutlu bir yerleştirme çıktısı verir. Ancak depolama alanından tasarruf etmek için kaliteyi düşürmeden daha küçük bir boyuta kısaltabilirsiniz. 768, 1536 veya 3072 çıkış boyutlarını kullanmanızı öneririz.
 
 ### Python
 
@@ -468,17 +468,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-emb
     }'
 ```
 
-Ejemplo de resultado del fragmento de código:
+Kod snippet'inden örnek çıkış:
 
 ```
 Length of embedding: 768
 ```
 
-## Garantiza la calidad para dimensiones más pequeñas
+## Daha küçük boyutlarda kaliteyi sağlama
 
-Si bien las incorporaciones predeterminadas de 3,072 dimensiones siempre se normalizan, Gemini Embedding 2 también normaliza automáticamente las dimensiones truncadas (p.ej., 768 y 1,536). Esto garantiza que la similitud semántica se calcule a través de la dirección del vector en lugar de la magnitud, lo que proporciona resultados más precisos de inmediato.
+Varsayılan 3.072 boyutlu yerleştirmeler her zaman normalleştirilirken Gemini Embedding 2, kesilmiş boyutları (ör. 768, 1.536) da otomatik olarak normalleştirir. Bu sayede, semantik benzerliğin büyüklük yerine vektör yönü üzerinden hesaplanması sağlanır ve kutudan çıkar çıkmaz daha doğru sonuçlar elde edilir.
 
-**Modelos anteriores**: Si usas `gemini-embedding-001`, debes normalizar manualmente las dimensiones que no sean de 3,072 de la siguiente manera:
+**Eski Modeller**: `gemini-embedding-001` kullanıyorsanız 3072 olmayan boyutları aşağıdaki şekilde manuel olarak normalleştirmeniz gerekir:
 
 ### Python
 
@@ -494,45 +494,45 @@ print(f"Normed embedding length: {len(normed_embedding)}")
 print(f"Norm of normed embedding: {np.linalg.norm(normed_embedding):.6f}") # Should be very close to 1
 ```
 
-Ejemplo de resultado de este fragmento de código:
+Bu kod snippet'inden alınan örnek çıkış:
 
 ```
 Normed embedding length: 768
 Norm of normed embedding: 1.000000
 ```
 
-En la siguiente tabla, se muestran las puntuaciones de MTEB, una comparativa de uso frecuente para los embeddings, para diferentes dimensiones. En particular, el resultado muestra que el rendimiento no está estrictamente vinculado al tamaño de la dimensión del embedding, ya que las dimensiones más bajas logran puntuaciones comparables a las de sus contrapartes de dimensiones más altas.
+Aşağıdaki tabloda, farklı boyutlar için yerleştirmelerde en çok tercih edilen bir karşılaştırma ölçütü olan MTEB puanları gösterilmektedir. Sonuç, performansın kesinlikle yerleştirme boyutunun büyüklüğüne bağlı olmadığını ve daha düşük boyutların, daha yüksek boyutlu benzerleriyle karşılaştırılabilir puanlar elde ettiğini gösteriyor.
 
-| Dimensión del MRL | Puntuación de MTEB (Gemini Embedding 001) |
+| MRL Boyutu | MTEB Puanı (Gemini Embedding 001) |
 | --- | --- |
-| 2048 | 68.16 |
-| 1536 | 68.17 |
-| 768 | 67.99 |
-| 512 | 67.55 |
-| 256 | 66.19 |
-| 128 | 63.31 |
+| 2048 | 68,16 |
+| 1536 | 68,17 |
+| 768 | 67,99 |
+| 512 | 67,55 |
+| 256 | 66,19 |
+| 128 | 63,31 |
 
-## Embeddings multimodales
+## Çok formatlı yerleştirmeler
 
-El modelo `gemini-embedding-2` admite entradas multimodales, lo que te permite incorporar contenido de imágenes, videos, audio y documentos junto con texto. Todas las modalidades se asignan al mismo espacio de embedding, lo que permite la búsqueda y la comparación entre modalidades.
+`gemini-embedding-2` modeli, çok formatlı girişi destekler. Bu sayede metnin yanı sıra resim, video, ses ve belge içeriklerini de yerleştirebilirsiniz. Tüm yöntemler aynı yerleştirme alanına eşlenir. Bu sayede, yöntemler arası arama ve karşılaştırma yapılabilir.
 
-### Modalidades y límites admitidos
+### Desteklenen yöntemler ve sınırlar
 
-El límite máximo general de tokens de entrada es de 8,192 tokens.
+Genel maksimum giriş jetonu sınırı 8.192 jetondur.
 
-| Modalidad | Especificaciones y límites |
+| Yöntem | Özellikler ve sınırlar |
 | --- | --- |
-| **Texto** | Admite hasta 8,192 tokens. |
-| **Imagen** | Máximo de 6 imágenes por solicitud. Formatos admitidos: PNG y JPEG. |
-| **Audio** | La duración máxima es de 180 segundos. Formatos admitidos: MP3 y WAV. |
-| **Video** | La duración máxima es de 120 segundos. Formatos admitidos: MP4 y MOV. Códecs compatibles: H264, H265, AV1 y VP9.  El sistema procesa un máximo de 32 fotogramas por video: los videos cortos (≤32 s) se muestrean a 1 fps, mientras que los videos más largos se muestrean de forma uniforme hasta 32 fotogramas. Las pistas de audio no se procesan en los archivos de video. |
-| **Documentos (PDF)** | Se permite un máximo de 1 archivo por solicitud, con hasta 6 páginas. |
+| **Metin** | En fazla 8.192 jetonu destekler. |
+| **Resim** | İstek başına en fazla 6 resim. Desteklenen biçimler: PNG, JPEG. |
+| **Ses** | Maksimum süre 180 saniyedir. Desteklenen biçimler: MP3, WAV. |
+| **Video** | Maksimum süre 120 saniyedir. Desteklenen biçimler: MP4, MOV. Desteklenen codec'ler: H264, H265, AV1, VP9.  Sistem, video başına en fazla 32 kare işler: Kısa videolar (≤32 sn) 1 FPS'de örneklenirken daha uzun videolar 32 kareye eşit şekilde örneklenir. Ses parçaları, video dosyalarında işlenmez. |
+| **Belgeler (PDF)** | İstek başına en fazla 1 dosya (6 sayfaya kadar). |
 
-### Cómo incorporar imágenes
+### Resimleri yerleştirme
 
-En el siguiente ejemplo, se muestra cómo incorporar una imagen con `gemini-embedding-2`.
+Aşağıdaki örnekte, `gemini-embedding-2` kullanarak resmin nasıl yerleştirileceği gösterilmektedir.
 
-Las imágenes se pueden proporcionar como datos intercalados o como archivos subidos a través de la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419).
+Resimler, satır içi veri olarak veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) üzerinden yüklenen dosyalar olarak sağlanabilir.
 
 ### Python
 
@@ -606,15 +606,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Agregación de la incorporación
+### Yerleştirme toplama
 
-Cuando trabajas con contenido multimodal, la forma en que estructuras tu entrada afecta el resultado de la incorporación:
+Çok formatlı içeriklerle çalışırken girişinizi nasıl yapılandırdığınız, yerleştirme çıkışını etkiler:
 
-- **Varias partes (agregadas):** Si agregas varias entradas directamente al parámetro `contents`, se produce una incorporación agregada para todas las entradas.
-- **Varios objetos `Content` (separados):** Si se incluye cada entrada en un objeto `Content` y se pasan en el parámetro `contents`, se devuelven incorporaciones separadas para cada entrada.
-- **Representación a nivel de la publicación:** Para objetos complejos, como las publicaciones en redes sociales con varios elementos multimedia, recomendamos agregar incorporaciones separadas (por ejemplo, promediándolas) para crear una representación coherente a nivel de la publicación.
+- **Birden fazla bölüm (toplu):** Doğrudan `contents` parametresine birden fazla giriş eklemek, tüm girişler için toplu bir yerleştirme oluşturur.
+- **Birden fazla `Content` nesne (ayrı):** Her girişi bir `Content` nesnesine sarmalayıp `contents` parametresinde iletmek, her giriş için ayrı yerleştirmeler döndürür.
+- **Gönderi düzeyinde temsil:** Birden fazla medya öğesi içeren sosyal medya gönderileri gibi karmaşık nesneler için, tutarlı bir gönderi düzeyinde temsil oluşturmak üzere ayrı yerleştirmeleri (örneğin, ortalama alarak) toplamanızı öneririz.
 
-En el siguiente ejemplo, se muestra cómo crear un embedding agregado para la entrada de texto y la imagen. Solo tienes que agregar varias entradas al parámetro `contents`:
+Aşağıdaki örnekte, metin ve resim girişi için tek bir toplu yerleştirmenin nasıl oluşturulacağı gösterilmektedir. `contents` parametresine birden fazla giriş eklemeniz yeterlidir:
 
 ### Python
 
@@ -700,7 +700,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Por otro lado, si usas objetos `Content` dentro del parámetro `contents`, se devuelven incorporaciones separadas. En este ejemplo, se crean varios embeddings en una sola llamada de embedding:
+Diğer yandan, `contents` parametresinin içinde `Content` nesnelerini kullanırsanız ayrı yerleştirmeler döndürülür. Bu örnekte, tek bir yerleştirme çağrısında birden fazla yerleştirme oluşturulur:
 
 ### Python
 
@@ -791,11 +791,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Cómo incorporar audio
+### Ses yerleştirme
 
-En el siguiente ejemplo, se muestra cómo incorporar un archivo de audio con `gemini-embedding-2`.
+Aşağıdaki örnekte, `gemini-embedding-2` kullanarak ses dosyasının nasıl yerleştirileceği gösterilmektedir.
 
-Los archivos de audio se pueden proporcionar como datos intercalados o como archivos subidos a través de la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419).
+Ses dosyaları, satır içi veri olarak veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenen dosyalar olarak sağlanabilir.
 
 ### Python
 
@@ -869,11 +869,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Cómo incorporar un video
+### Video yerleştirme
 
-En el siguiente ejemplo, se muestra cómo incorporar un video con `gemini-embedding-2`.
+Aşağıdaki örnekte, `gemini-embedding-2` kullanarak videonun nasıl yerleştirileceği gösterilmektedir.
 
-Los videos se pueden proporcionar como datos intercalados o como archivos subidos a través de la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419).
+Videolar, satır içi veri olarak veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenen dosyalar olarak sağlanabilir.
 
 ### Python
 
@@ -947,29 +947,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Si necesitas incorporar videos de más de 120 segundos, puedes dividirlos en segmentos superpuestos y, luego, incorporarlos de forma individual.
+120 saniyeden uzun videoları yerleştirmeniz gerekiyorsa videoyu çakışan segmentlere ayırıp bu segmentleri ayrı ayrı yerleştirebilirsiniz.
 
-### Incorporación de documentos
+### Dokümanları yerleştirme
 
-Los documentos en formato PDF se pueden incorporar directamente. El modelo procesa el contenido visual y de texto de cada página.
+PDF biçimindeki dokümanlar doğrudan yerleştirilebilir. Model, her sayfanın görsel ve metin içeriğini işler.
 
-Los archivos PDF se pueden proporcionar como datos intercalados o como archivos subidos a través de la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419).
+PDF'ler, satır içi veri olarak veya [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenen dosyalar olarak sağlanabilir.
 
-#### Cómo procesa los archivos PDF el modelo
+#### Model, PDF'leri nasıl işler?
 
-Cuando incorporas un PDF, el modelo procesa el documento con funciones visuales y de texto:
+Bir PDF'yi yerleştirdiğinizde model, belgeyi hem görsel hem de metin özelliklerini kullanarak işler:
 
-- **Representación visual:** El modelo renderiza cada página como una imagen, lo que consume **258 tokens** por página.
-- **Extracción de texto:** El modelo extrae texto del documento. En el caso de los **PDFs nativos** (que contienen texto digital), el modelo extrae el texto directamente. En el caso de los **archivos PDF escaneados** (que contienen imágenes de texto), el modelo ejecuta automáticamente el reconocimiento óptico de caracteres (OCR) para extraer el texto.
+- **Görsel gösterim:** Model, her sayfayı resim olarak oluşturur. Bu işlem, sayfa başına **258 jeton** tüketir.
+- **Metin çıkarma:** Model, belgedeki metni çıkarır. **Yerel PDF'ler** (dijital metin içerenler) için model, metni doğrudan ayıklar. **Taranmış PDF'lerde** (metin resimleri içeren) metni ayıklamak için model otomatik olarak optik karakter tanıma (OCR) gerçekleştirir.
 
-Para calcular el recuento total de tokens de un PDF, suma los tokens visuales (258 por página) a los tokens de texto. Tus entradas deben ajustarse al **límite de 8,192 tokens del modelo** (compartido en todas las modalidades). El sistema trunca de forma silenciosa las entradas que superan este límite.
+Bir PDF'nin toplam jeton sayısını hesaplamak için görsel jetonları (sayfa başına 258) metin jetonlarına ekleyin. Girişleriniz,modelin **8.192 jeton sınırını** (tüm yöntemlerde geçerlidir) aşmamalıdır. Sistem, bu sınırı aşan girişleri sessizce keser.
 
-#### Límites de PDF
+#### PDF sınırları
 
-- **Archivos por solicitud:** Puedes enviar un máximo de 1 archivo PDF.
-- **Límite de páginas:** Puedes enviar un máximo de 6 páginas por archivo. Para obtener la mejor calidad, te recomendamos que uses 1 página por PDF.
+- **İstek başına dosya sayısı:** En fazla 1 PDF dosyası gönderebilirsiniz.
+- **Sayfa sınırı:** Dosya başına en fazla 6 sayfa gönderebilirsiniz. En iyi kalite için PDF başına 1 sayfa kullanmanızı önemle tavsiye ederiz.
 
-En el siguiente ejemplo, se muestra cómo incorporar un PDF con `gemini-embedding-2`:
+Aşağıdaki örnekte, `gemini-embedding-2` kullanarak PDF'nin nasıl yerleştirileceği gösterilmektedir:
 
 ### Python
 
@@ -1043,91 +1043,92 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Casos de uso
+## Kullanım alanları
 
-Las incorporaciones de texto son fundamentales para una variedad de casos de uso comunes de la IA, como los siguientes:
+Metin yerleştirmeleri, aşağıdakiler gibi çeşitli yaygın yapay zeka kullanım alanları için çok önemlidir:
 
-- **Generación mejorada por recuperación (RAG):** Los embeddings mejoran la calidad del texto generado, ya que recuperan e incorporan información pertinente en el contexto de un modelo.
-- **Recuperación de información:** Busca el texto o los documentos más similares semánticamente dado un fragmento de texto de entrada.
+- **Veriyle artırılmış üretim (RAG):** Gömme, alakalı bilgileri alıp bir modelin bağlamına dahil ederek oluşturulan metnin kalitesini artırır.
+- **Bilgi alma:** Giriş metni verildiğinde, semantik olarak en benzer metni veya belgeleri arayın.
 
-  [Instructivo de búsqueda de documentostask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
-- **Reclasificación de la búsqueda**: Prioriza los elementos más relevantes calificando semánticamente los resultados iniciales en función de la búsqueda.
+  [Belge arama eğitimitask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
+- **Aramada yeniden sıralama**: İlk sonuçları sorguya göre anlamsal olarak puanlayarak en alakalı öğelere öncelik verin.
 
-  [Instructivo sobre la clasificación de los resultados de la búsquedatask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
-- **Detección de anomalías:** Comparar grupos de embeddings puede ayudar a identificar tendencias ocultas o valores atípicos.
+  [Arama sonuçlarını yeniden sıralama eğitimitask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
+- **Anormallik algılama:** Yerleştirme gruplarını karşılaştırmak, gizli trendleri veya aykırı değerleri belirlemeye yardımcı olabilir.
 
-  [Instructivo sobre detección de anomalíasbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
-- **Clasificación:** Categoriza automáticamente el texto según su contenido, como el análisis de sentimiento o la detección de spam.
+  [Anormallik algılama eğitimibubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
+- **Sınıflandırma:** Metni içeriğine göre otomatik olarak kategorilere ayırın (ör. duygu analizi veya spam algılama).
 
-  [Instructivo de clasificacióntoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
-- **Agrupamiento en clústeres:** Comprende de manera eficaz las relaciones complejas creando clústeres y visualizaciones de tus incorporaciones.
+  [Sınıflandırma eğitimitoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
+- **Kümeleme:** Yerleştirmelerinizin kümelerini ve görselleştirmelerini oluşturarak karmaşık ilişkileri etkili bir şekilde kavrayın.
 
-  [Instructivo de visualización de agrupamiento en clústeresbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
+  [Kümeleme görselleştirme eğitimibubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
 
-## Almacenamiento de embeddings
+## Yerleştirilmiş öğeleri depolama
 
-A medida que llevas los embeddings a producción, es común usar **bases de datos vectoriales** para almacenar, indexar y recuperar de manera eficiente embeddings de alta dimensión. Google Cloud ofrece servicios de datos administrados que se pueden usar para este propósito, incluidos [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=es-419), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=es-419), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=es-419) y [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=es-419).
+Yerleştirmeleri üretime alırken yüksek boyutlu yerleştirmeleri verimli bir şekilde depolamak, dizine eklemek ve almak için **vektör veritabanlarını** kullanmak yaygın bir uygulamadır. Google Cloud, bu amaçla kullanılabilecek yönetilen veri hizmetleri sunar. Bu hizmetler arasında [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=tr), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=tr), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=tr) ve [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=tr) yer alır.
 
-En los siguientes instructivos, se muestra cómo usar otras bases de datos de vectores de terceros con Gemini Embedding.
+Aşağıdaki eğitimlerde, Gemini Embedding ile diğer üçüncü taraf vektör veritabanlarının nasıl kullanılacağı gösterilmektedir.
 
-- [Instructivos de ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
-- [Instructivos de QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
-- [Instructivos de Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
-- [Instructivos de Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
+- [ChromaDB eğitimleribolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
+- [QDrant eğitimleribolt](https://qdrant.tech/documentation/embeddings/gemini/)
+- [Weaviate eğitimleribolt](https://docs.weaviate.io/weaviate/model-providers/google)
+- [Pinecone eğitimleribolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
 
-## Versiones del modelo
+## Model sürümleri
 
 ### Gemini Embedding 2
 
-| Propiedad | Descripción |
+| Mülk | Açıklama |
 | --- | --- |
-| Código del modelo id\_card | **API de Gemini**  `gemini-embedding-2` |
-| saveTipos de datos admitidos | **Entrada**  Texto, imagen, video, audio, PDF  **Resultado**  Incorporaciones de texto |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  8,192  **Tamaño de la dimensión de salida**  Flexible, admite: 128 a 3072, recomendado: 768, 1536 y 3072 |
-| 123versiones | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Estable: `gemini-embedding-2` |
-| calendar\_monthÚltima actualización | Abril de 2026 |
+| id\_cardModel kodu | **Gemini API**  `gemini-embedding-2` |
+| saveDesteklenen veri türleri | **Giriş**  Metin, resim, video, ses, PDF  **Çıkış**  Metin yerleştirmeleri |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  8.192  **Çıkış boyutu**  Esnek, desteklenen boyutlar: 128 - 3072, Önerilen boyutlar: 768, 1536, 3072 |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-embedding-2` |
+| calendar\_monthSon güncelleme | Nisan 2026 |
 
-### Embedding de Gemini
+### Gemini Embedding
 
-| Propiedad | Descripción |
+| Mülk | Açıklama |
 | --- | --- |
-| Código del modelo id\_card | **API de Gemini**  `gemini-embedding-001` |
-| saveTipos de datos admitidos | **Entrada**  Texto  **Resultado**  Incorporaciones de texto |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Límite de tokens de entrada**  2,048  **Tamaño de la dimensión de salida**  Flexible, admite: 128 a 3072, recomendado: 768, 1536 y 3072 |
-| 123versiones | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Estable: `gemini-embedding-001` |
-| calendar\_monthÚltima actualización | Junio de 2025 |
+| id\_cardModel kodu | **Gemini API**  `gemini-embedding-001` |
+| saveDesteklenen veri türleri | **Giriş**  Metin  **Çıkış**  Metin yerleştirmeleri |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  2.048  **Çıkış boyutu**  Esnek, desteklenen boyutlar: 128 - 3072, Önerilen boyutlar: 768, 1536, 3072 |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-embedding-001` |
+| calendar\_monthSon güncelleme | Haziran 2025 |
 
-Para obtener información sobre los modelos de Embeddings que se dieron de baja, visita la página [Bajas](https://ai.google.dev/gemini-api/docs/deprecations?hl=es-419).
+Desteği sonlandırılan Embeddings modelleri için [Desteği Sonlandırılanlar](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr) sayfasını ziyaret edin.
 
-## Migración desde gemini-embedding-001
+## gemini-embedding-001'den taşıma
 
-Los espacios de incorporación entre `gemini-embedding-001` y `gemini-embedding-2` son **incompatibles**. Esto significa que no puedes comparar directamente los embeddings generados por un modelo con los generados por el otro. Si actualizas a `gemini-embedding-2`, debes volver a incorporar todos tus datos existentes.
+`gemini-embedding-001` ile `gemini-embedding-2` arasındaki yerleştirme alanları **uyumlu değildir**. Bu nedenle, bir model tarafından oluşturulan yerleştirmeleri doğrudan diğer model tarafından oluşturulan yerleştirmelerle karşılaştıramazsınız. `gemini-embedding-2` sürümüne yükseltiyorsanız mevcut verilerinizin tamamını yeniden yerleştirmeniz gerekir.
 
-Además de la incompatibilidad, existen otras diferencias notables entre los dos modelos:
+Uyumsuzluğun yanı sıra iki model arasında dikkat çekici başka farklılıklar da vardır:
 
-- **Especificación del tipo de tarea:** Con `gemini-embedding-001`, especificas el tipo de tarea con el parámetro `task_type` (p.ej., `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). Con `gemini-embedding-2`, no se admite el parámetro `task_type`. En su lugar, debes incluir las instrucciones de la tarea directamente en la instrucción para las tareas solo de texto. Consulta [Tipos de tareas con Embeddings 2](#task-types-embeddings-2) para obtener detalles sobre cómo dar formato a las instrucciones para diferentes casos de uso.
-- **Agregación de embeddings:** `gemini-embedding-001` genera embeddings individuales para cada cadena de una lista de entradas. En cambio, `gemini-embedding-2` produce una sola incorporación agregada cuando se proporcionan varias entradas (como texto e imágenes) directamente en una solicitud. Para generar incorporaciones separadas para entradas individuales, incluye cada entrada en un objeto `Content` o usa la [API por lotes](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419#batch-embedding). Consulta [Agregación de la incorporación](#embedding-aggregation) para obtener más información.
-- **Normalización:** Si usas `output_dimensionality` para solicitar incorporaciones con menos de 3,072 dimensiones, `gemini-embedding-2` normaliza automáticamente estas incorporaciones truncadas. Con `gemini-embedding-001`, debes realizar la normalización manual para las dimensiones que no sean 3072. Consulta [Cómo garantizar la calidad en dimensiones más pequeñas](#quality-for-smaller-dimensions) para obtener más información.
+- **Görev türü belirtimi:** `gemini-embedding-001` ile `task_type` parametresini kullanarak görev türünü belirtirsiniz (ör. `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). `gemini-embedding-2` ile `task_type` parametresi desteklenmez. Bunun yerine, yalnızca metin içeren görevler için görev talimatlarını doğrudan isteme eklemelisiniz. Farklı kullanım alanları için istemleri nasıl biçimlendireceğinizle ilgili ayrıntılar için [Embeddings 2 ile görev türleri](#task-types-embeddings-2) başlıklı makaleyi inceleyin.
+- **Yerleştirme toplama:** `gemini-embedding-001`, giriş listesindeki her dize için ayrı yerleştirmeler oluşturur. Buna karşılık,
+  `gemini-embedding-2` birden fazla giriş (ör. metin ve resimler) doğrudan tek bir istekte sağlandığında tek bir toplu yerleştirme oluşturur. Ayrı girişler için ayrı yerleştirmeler oluşturmak üzere her girişi bir `Content` nesnesine sarmalayın veya [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr#batch-embedding)'yi kullanın. Daha fazla bilgi için [Yerleştirme toplama](#embedding-aggregation) bölümüne bakın.
+- **Normalleştirme:** 3.072'den az boyutlu yerleştirmeler istemek için `output_dimensionality` kullanırsanız `gemini-embedding-2`, bu kısaltılmış yerleştirmeleri otomatik olarak normalleştirir. `gemini-embedding-001` ile 3072 dışında kalan boyutlar için manuel normalleştirme yapmanız gerekir. Ayrıntılar için [Daha küçük boyutlarda kaliteyi sağlama](#quality-for-smaller-dimensions) başlıklı makaleyi inceleyin.
 
-## Embeddings por lotes
+## Toplu yerleştirmeler
 
-Si la latencia no es un problema, intenta usar los modelos de Gemini Embeddings con la [API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419#batch-embedding). Esto permite una capacidad de procesamiento mucho mayor con el 50% del precio predeterminado de Embedding.
-Encuentra ejemplos para comenzar en el [recetario de la API de Batch](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
+Gecikme sorun değilse Gemini Embeddings modellerini [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr#batch-embedding) ile kullanmayı deneyin. Bu sayede, varsayılan yerleştirme fiyatının% 50'siyle çok daha yüksek işleme hızı elde edilebilir.
+Başlangıçla ilgili örnekleri [Toplu API yemek kitabında](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb) bulabilirsiniz.
 
-## Aviso de uso responsable
+## Sorumlu kullanım bildirimi
 
-A diferencia de los modelos de IA generativa que crean contenido nuevo, el modelo de Gemini Embedding solo está diseñado para transformar el formato de tus datos de entrada en una representación numérica. Si bien Google es responsable de proporcionar un modelo de incorporación que transforme el formato de tus datos de entrada al formato numérico solicitado, los usuarios conservan la responsabilidad total de los datos que ingresan y las incorporaciones resultantes. Si usas el modelo de Gemini Embedding, confirmas que tienes los derechos necesarios sobre todo el contenido que subas. No generes contenido que infrinja la propiedad intelectual o los derechos de privacidad de otras personas. El uso de este servicio está sujeto a nuestra [Política de Uso Prohibido](https://policies.google.com/terms/generative-ai/use-policy?hl=es-419) y a las [Condiciones del Servicio de Google](https://ai.google.dev/gemini-api/terms?hl=es-419).
+Yeni içerikler oluşturan üretken yapay zeka modellerinin aksine, Gemini Embedding modeli yalnızca giriş verilerinizin biçimini sayısal bir gösterime dönüştürmek için tasarlanmıştır. Google, giriş verilerinizin biçimini istenen sayısal biçime dönüştüren bir yerleştirme modeli sağlamaktan sorumlu olsa da kullanıcılar, girdikleri veriler ve ortaya çıkan yerleştirmelerle ilgili tüm sorumluluğu üstlenir. Gemini Embedding modelini kullanarak, yüklediğiniz tüm içeriklerle ilgili gerekli haklara sahip olduğunuzu onaylarsınız. Başkalarının fikri mülkiyet veya gizlilik haklarını ihlal eden içerikler üretmeyin. Bu hizmeti kullanımınız [Yasaklanan Kullanım Politikamıza](https://policies.google.com/terms/generative-ai/use-policy?hl=tr) ve [Google'ın Hizmet Şartları](https://ai.google.dev/gemini-api/terms?hl=tr)'na tabidir.
 
-## Comienza a crear con embeddings
+## Yerleştirmelerle geliştirmeye başlama
 
-Consulta el [notebook de inicio rápido de las incorporaciones](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) para explorar las capacidades del modelo y aprender a personalizar y visualizar tus incorporaciones.
+Model özelliklerini keşfetmek ve yerleştirmelerinizi nasıl özelleştirip görselleştireceğinizi öğrenmek için [yerleştirme hızlı başlangıç not defterine](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) göz atın.
 
-Enviar comentarios
+Geri bildirim gönderin
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Última actualización: 2026-05-29 (UTC)
+Son güncelleme tarihi: 2026-05-29 UTC.
 
-¿Quieres brindar más información?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-29 (UTC)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-29 UTC."],[],[]]

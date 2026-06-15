@@ -1,48 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=zh-CN
-fetched_at: 2026-06-08T05:36:33.883045+00:00
-title: "Lyria 3 Pro\uff08\u9884\u89c8\u7248\uff09 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=hi
+fetched_at: 2026-06-15T06:31:08.175754+00:00
+title: "Lyria 3 Pro \u0915\u0940 \u091d\u0932\u0915 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-发送反馈
+सुझाव भेजें
 
-# Lyria 3 Pro（预览版）
+# Lyria 3 Pro की झलक
 
-Lyria 3 Pro Preview 是 Google 的旗舰级音乐生成模型。它经过优化，可生成具有复杂结构连贯性的完整歌曲，包括多个主歌、副歌和桥段。它可以根据文本提示或图片输入生成高质量的 48kHz 立体声音频。
+Lyria 3 Pro Preview, Google का मुख्य संगीत जनरेट करने वाला मॉडल है. यह पूरी अवधि के गाने जनरेट करने के लिए ऑप्टिमाइज़ किया गया है. इसमें कई वर्स, कोरस, और ब्रिज शामिल होते हैं. यह टेक्स्ट प्रॉम्प्ट या इमेज इनपुट से, 48kHz स्टीरियो ऑडियो जनरेट करता है, जिसकी क्वालिटी बहुत अच्छी होती है.
 
-[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=lyria-3-pro-preview&hl=zh-cn)
+[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=lyria-3-pro-preview&hl=hi)
 
-## 文档
+## दस्तावेज़
 
-如需全面了解功能和能力，请参阅[音乐生成](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-cn)指南。
+सुविधाओं और उनकी उपलब्धता के बारे में पूरी जानकारी पाने के लिए, [संगीत जनरेट करने की](https://ai.google.dev/gemini-api/docs/music-generation?hl=hi) गाइड पर जाएं.
 
 ## lyria-3-pro-preview
 
-| 属性 | 说明 |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| id\_card模型代码 | `lyria-3-clip-preview` |
-| save支持的数据类型 | **输入**  文本和图片  **输出**  音频 (MP3)、文本（歌词） |
-| token\_auto | **输入令牌限制**  131,072 |
-| handyman功能 | **音频生成**  支持  **批量 API**  不支持  **缓存**  不支持  **代码执行**  不支持  **文件搜索**  不支持  **函数调用**  不支持  **Grounding with Google Maps**  不支持  **图片生成**  不支持  **Live API**  不支持  **搜索接地**  不支持  **结构化输出**  不支持  **思考型**  不支持  **网址上下文**  不支持 |
-| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`lyria-3-clip-preview` - 预览：`lyria-3-pro-preview` |
-| calendar\_month最新更新 | 2026 年 3 月 |
+| id\_cardModel कोड | `lyria-3-clip-preview` |
+| saveSupported डेटा टाइप | **इनपुट**  टेक्स्ट और इमेज  **आउटपुट**  ऑडियो (MP3), टेक्स्ट (बोल) |
+| token\_autoToken की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,31,072 |
+| handymanCapabilities | **ऑडियो जनरेट करना**  काम करता है  **बैच एपीआई**  काम नहीं करता है  **कैश मेमोरी में सेव होना**  काम नहीं करता है  **कोड चलाने की सुविधा**  काम नहीं करता है  **फ़ाइल खोजने की सुविधा**  काम नहीं करता है  **फ़ंक्शन कॉल करने की सुविधा**  काम नहीं करता है  **Google Maps के साथ भरोसेमंद स्रोतों से जानकारी लें**  काम नहीं करता है  **इमेज जनरेट करने की सुविधा**  काम नहीं करता है  **लाइव एपीआई**  काम नहीं करता है  **भरोसेमंद स्रोतों से जानकारी लें**  काम नहीं करता है  **स्ट्रक्चर्ड आउटपुट**  काम नहीं करता है  **प्रोसेस दिखाएं**  काम नहीं करता है  **यूआरएल का कॉन्टेक्स्ट**  काम नहीं करता है |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - प्रीव्यू: `lyria-3-clip-preview` - प्रीव्यू: `lyria-3-pro-preview` |
+| calendar\_monthसबसे नया अपडेट | मार्च 2026 |
 
-发送反馈
+सुझाव भेजें
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-最后更新时间 (UTC)：2026-04-29。
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-需要向我们提供更多信息？
+क्या आपको हमें और कुछ बताना है?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

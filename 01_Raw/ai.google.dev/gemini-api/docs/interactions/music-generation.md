@@ -1,39 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/music-generation?hl=th
-fetched_at: 2026-06-08T05:36:52.796676+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/music-generation?hl=zh-TW
+fetched_at: 2026-06-15T06:33:08.612629+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-ส่งความคิดเห็น
+提供意見
 
-# สร้างเพลงด้วย Lyria 3
+# 使用 Lyria 3 生成音樂
 
-Lyria 3 เป็นกลุ่มโมเดลการสร้างเพลงของ Google ซึ่งพร้อมใช้งานผ่าน Gemini API Lyria 3 ช่วยให้คุณสร้างเสียงสเตอริโอคุณภาพสูง 44.1 kHz จากพรอมต์ข้อความหรือจากรูปภาพได้ โมเดลเหล่านี้ให้ความสอดคล้องเชิงโครงสร้าง ซึ่งรวมถึงเสียงร้อง เนื้อเพลงที่กำหนดเวลา และดนตรีบรรเลงแบบเต็ม
+Lyria 3 是 Google 的音樂生成模型系列，可透過 Gemini API 使用。使用 Lyria 3，你可以根據文字提示或圖片生成高品質的 44.1 kHz 立體聲音訊。這些模型可提供結構一致的內容，包括人聲、歌詞時間碼和完整樂器編曲。
 
-กลุ่ม Lyria 3 มี 2 โมเดล ได้แก่
+Lyria 3 系列包含兩種模型：
 
-| รุ่น | รหัสโมเดล | เหมาะสำหรับ | ระยะเวลา | เอาต์พุต |
+| 型號 | 模型 ID | 適用情境 | 時間長度 | 輸出 |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | คลิปสั้น ลูป ตัวอย่าง | 30 วินาที | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | เพลงแบบเต็มความยาวที่มีท่อน Verse, Chorus และ Bridge | 2-3 นาที (ควบคุมได้โดยใช้พรอมต์) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | 短片、循環播放、預覽 | 30 秒 | MP3 |
+| **Lyria 3 Pro** | `lyria-3-pro-preview` | 包含主歌、副歌和橋段的完整歌曲 | 幾分鐘 (可使用提示控制) | MP3 |
 
-ทั้ง 2 โมเดลสามารถใช้ได้โดยใช้
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=th) ใหม่ ซึ่งรองรับอินพุตหลายรูปแบบ (ข้อความและรูปภาพ) และสร้างเสียง **สเตอริโอความสมจริงสูง 44.1 kHz**
+這兩款模型都可透過新的 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw) 使用，支援多模態輸入 (文字和圖片)，並產生 **44.1 kHz 高精準度立體聲**音訊。
 
-## สร้างคลิปเพลง
+## 生成音樂短片
 
-โมเดล Lyria 3 Clip จะสร้างคลิปความยาว **30 วินาที** เสมอ หากต้องการสร้างคลิป ให้เรียกใช้เมธอด `interactions.create` ด้วยพรอมต์ข้อความ การตอบกลับจะมีเนื้อเพลงและโครงสร้างเพลงที่สร้างขึ้นเสมอ รวมถึงเสียงในสคีมา `steps`
+Lyria 3 Clip 模型一律會生成 **30 秒**片段。如要生成短片，請使用文字提示呼叫 `interactions.create` 方法。回覆一律會包含生成的歌詞和歌曲結構，以及 `steps` 架構中的音訊。
 
 ### Python
 
@@ -95,14 +94,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-คุณสามารถดึงข้อมูลเพลงที่สร้างขึ้นได้โดยใช้พร็อพเพอร์ตี้ `interaction.output_audio` ซึ่งจะแสดงผลบล็อกเสียงที่สร้างขึ้นล่าสุด นอกจากนี้ คุณยังดึงเนื้อเพลงและโครงสร้างของเพลงได้โดยใช้พร็อพเพอร์ตี้ `interaction.output_text` ดูรายละเอียดเกี่ยวกับพร็อพเพอร์ตี้ที่สะดวกได้ที่
-[ภาพรวมของ Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=th#convenience-properties)
+您可以使用 `interaction.output_audio` 屬性擷取生成的音樂資料，該屬性會傳回最後生成的音訊區塊。您也可以使用 `interaction.output_text` 屬性擷取歌曲的歌詞和結構。如要進一步瞭解便利性屬性，請參閱「[互動總覽](https://ai.google.dev/gemini-api/docs/interactions?hl=zh-tw#convenience-properties)」。
 
-## สร้างเพลงแบบเต็มความยาว
+## 生成完整歌曲
 
-ใช้โมเดล `lyria-3-pro-preview` เพื่อสร้างเพลงแบบเต็มความยาวที่ใช้เวลา 2-3 นาที โมเดล Pro เข้าใจโครงสร้างดนตรีและสามารถสร้างเพลงที่มีท่อน Verse, Chorus และ Bridge ที่แตกต่างกันได้ คุณสามารถกำหนด
-ระยะเวลาได้โดยระบุในพรอมต์ (เช่น "สร้างเพลงความยาว 2 นาที") หรือ
-ใช้ [การประทับเวลา](#timing) เพื่อกำหนดโครงสร้าง
+使用 `lyria-3-pro-preview` 模型生成幾分鐘的完整歌曲。Pro 模型可瞭解音樂結構，並創作具有不同段落、副歌和橋段的樂曲。如要調整時長，可以在提示中指定 (例如「創作 2 分鐘的歌曲」)，或使用[時間戳記](#timing)定義結構。
 
 ### Python
 
@@ -135,9 +131,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## เลือกรูปแบบเอาต์พุต
+## 選取輸出格式
 
-โดยค่าเริ่มต้น โมเดล Lyria 3 จะสร้างเสียงในรูปแบบ **MP3** สำหรับ Lyria 3 Pro คุณยังขอเอาต์พุตในรูปแบบ **WAV** ได้ด้วยโดยการตั้งค่า `response_format`
+根據預設，Lyria 3 模型會以 **MP3** 格式生成音訊。如果是 Lyria 3 Pro，您也可以設定 `response_format`，要求以 **WAV** 格式輸出。
 
 ### Python
 
@@ -177,12 +173,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## แยกวิเคราะห์การตอบกลับ
+## 剖析回應
 
-การตอบกลับจาก Lyria 3 มีบล็อกเนื้อหาหลายรายการภายในสคีมา `steps`
-Interactions จะแสดงผลลำดับขั้นตอน โดยขั้นตอน `model_output` จะมีเนื้อหาที่สร้างขึ้น
-บล็อกเนื้อหาข้อความจะมีเนื้อเพลงที่สร้างขึ้นหรือคำอธิบาย JSON ของโครงสร้างเพลง
-บล็อกเนื้อหาที่มีประเภท `audio` จะมีข้อมูลเสียงที่เข้ารหัสแบบ Base64
+Lyria 3 的回覆會在 `steps` 架構中包含多個內容區塊。互動會傳回一系列步驟，其中 `model_output` 步驟包含生成的內容。文字內容區塊包含生成的歌詞，或是歌曲結構的 JSON 說明。`audio` 類型的內容區塊包含 Base64 編碼的音訊資料。
 
 ### Python
 
@@ -226,11 +219,11 @@ if (lyrics) {
 curl ... | jq -r '.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio") | .data' | base64 -d > output.mp3
 ```
 
-#### เนื้อเพลงและเพลงที่สลับกัน
+#### 交錯顯示歌詞和音樂
 
-เนื่องจากเอาต์พุตจาก Lyria 3 มีความซับซ้อน โดยมีขั้นตอนและบล็อกแยกกันสำหรับเนื้อเพลง (ข้อความ) และเพลงเอง (เสียง) พร็อพเพอร์ตี้ที่สะดวกจึงเป็นทางลัดที่รวดเร็วและแนะนำ
+由於 Lyria 3 的輸出內容相當複雜，包含生成歌詞 (文字) 和歌曲本身 (音訊) 的個別步驟和區塊，因此建議使用便利性屬性，快速取得結果。
 
-อย่างไรก็ตาม หากต้องการควบคุมไทม์ไลน์แบบดิบของขั้นตอนที่เซิร์ฟเวอร์แสดงผลแบบเป็นโปรแกรมอย่างเต็มรูปแบบ (เช่น การบันทึกบล็อกเนื้อหาแต่ละรายการเมื่อได้รับ) คุณสามารถวนซ้ำ `steps` ด้วยตนเองแทนได้ดังนี้
+不過，如果您想以程式輔助方式，全面控管伺服器傳回的原始步驟時間軸 (例如在收到個別內容區塊時記錄)，可以手動疊代 `steps`：
 
 ### Python
 
@@ -281,9 +274,9 @@ if (audioData) {
 }
 ```
 
-## สร้างเพลงจากรูปภาพ
+## 根據圖片生成音樂
 
-Lyria 3 รองรับอินพุตหลายรูปแบบ โดยคุณสามารถใส่รูปภาพได้สูงสุด **10 รูป** พร้อมกับพรอมต์ข้อความในรายการ `input` และโมเดลจะแต่งเพลงที่ได้รับแรงบันดาลใจจากเนื้อหาภาพ
+Lyria 3 支援多模態輸入內容，你可以在 `input` 清單中提供最多 **10 張圖片**和文字提示詞，模型就會根據視覺內容創作音樂。
 
 ### Python
 
@@ -350,9 +343,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ใส่เนื้อเพลงที่กำหนดเอง
+## 提供自訂歌詞
 
-คุณสามารถเขียนเนื้อเพลงของคุณเองและใส่ไว้ในพรอมต์ได้ ใช้แท็กส่วนต่างๆ เช่น `[Verse]`, `[Chorus]` และ `[Bridge]` เพื่อช่วยให้โมเดลเข้าใจโครงสร้างเพลง
+你可以自行撰寫歌詞，並加入提示。使用 `[Verse]`、`[Chorus]` 和 `[Bridge]` 等區段標記，協助模型瞭解歌曲結構：
 
 ### Python
 
@@ -429,9 +422,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ควบคุมเวลาและโครงสร้าง
+## 控制時間和結構
 
-คุณสามารถระบุสิ่งที่เกิดขึ้นในบางช่วงเวลาของเพลงได้อย่างแม่นยำโดยใช้การประทับเวลา ซึ่งมีประโยชน์สำหรับการควบคุมเวลาที่เครื่องดนตรีเริ่มเล่น เวลาที่เนื้อเพลงเริ่มร้อง และความคืบหน้าของเพลง
+你可以使用時間戳記，指定歌曲在特定時間點的確切動作。這項功能有助於控制樂器進入的時間、歌詞的傳送時間，以及歌曲的進展方式：
 
 ### Python
 
@@ -484,9 +477,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## สร้างแทร็กดนตรีบรรเลง
+## 生成配樂
 
-สำหรับเพลงประกอบ เกม หรือ Use Case ที่ไม่จำเป็นต้องมีเสียงร้อง คุณสามารถแจ้งให้โมเดลสร้างแทร็กดนตรีบรรเลงเท่านั้นได้
+如要生成背景音樂、遊戲配樂或任何不需要人聲的音樂，可以提示模型生成純音樂曲目：
 
 ### Python
 
@@ -519,9 +512,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## สร้างเพลงในภาษาต่างๆ
+## 生成不同語言的音樂
 
-Lyria 3 จะสร้างเนื้อเพลงในภาษาของพรอมต์ หากต้องการสร้างเพลงที่มีเนื้อเพลงเป็นภาษาฝรั่งเศส ให้เขียนพรอมต์เป็นภาษาฝรั่งเศส โมเดลจะปรับสไตล์การร้องและการออกเสียงให้เข้ากับภาษา
+Lyria 3 會以提示的語言生成歌詞。如要生成法文歌詞的歌曲，請用法文撰寫提示。模型會調整語音風格和發音，配合所選語言。
 
 ### Python
 
@@ -554,30 +547,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ความสามารถของโมเดล
+## 模型智慧
 
-Lyria 3 จะวิเคราะห์กระบวนการพรอมต์ที่โมเดลใช้เหตุผลผ่านโครงสร้างดนตรี (Intro, Verse, Chorus, Bridge ฯลฯ) ตามพรอมต์ของคุณ
-กระบวนการนี้จะเกิดขึ้นก่อนที่จะสร้างเสียง และช่วยให้มั่นใจได้ถึงความสอดคล้องเชิงโครงสร้างและความเป็นดนตรี
+Lyria 3 會分析提示程序，根據提示透過音樂結構 (前奏、主歌、副歌、橋段等) 推理。這項程序會在生成音訊前執行，確保結構一致性和音樂性。
 
-## คำแนะนำในการเขียนพรอมต์
+## 提示撰寫指南
 
-พรอมต์ที่เฉพาะเจาะจงมากขึ้นจะให้ผลลัพธ์ที่ดีขึ้น สิ่งที่คุณใส่ได้เพื่อแนะนำการสร้างมีดังนี้
+提示越具體，結果就越符合需求。你可以加入以下內容，引導系統生成圖片：
 
-- **ประเภท**: ระบุประเภทหรือการผสมผสานของประเภท (เช่น "Lo-fi Hip Hop",
-  "Jazz Fusion", "Cinematic Orchestral")
-- **เครื่องดนตรี**: ระบุชื่อเครื่องดนตรี (เช่น "เปียโน Fender Rhodes",
-  "กีตาร์สไลด์", "เครื่องดรัม TR-808")
-- **BPM**: กำหนดจังหวะ (เช่น "120 BPM", "จังหวะช้าประมาณ 70 BPM")
-- **คีย์/สเกล**: ระบุคีย์ดนตรี (เช่น "ในคีย์ G เมเจอร์", "D ไมเนอร์")
-- **อารมณ์และบรรยากาศ**: ใช้คำคุณศัพท์เชิงพรรณนา (เช่น "คิดถึงอดีต",
-  "ดุดัน", "เหนือจริง", "ชวนฝัน")
-- **โครงสร้าง**: ใช้แท็กต่างๆ เช่น `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`,
-  `[Outro]` หรือการประทับเวลาเพื่อควบคุมความคืบหน้าของเพลง
-- **ระยะเวลา**: โมเดล Clip จะสร้างคลิปความยาว 30 วินาทีเสมอ สำหรับโมเดล Pro ให้ระบุความยาวที่ต้องการในพรอมต์ (เช่น "สร้างเพลงความยาว 2 นาที") หรือใช้การประทับเวลาเพื่อควบคุมระยะเวลา
+- **類型**：指定類型或類型組合 (例如「lo-fi hip hop」、「jazz fusion」、「cinematic orchestral」)。
+- **樂器**：指明樂器名稱 (例如「Fender Rhodes 鋼琴」、「滑音吉他」、「TR-808 鼓機」)。
+- **BPM**：設定節奏 (例如「120 BPM」、「70 BPM 左右的慢節奏」)。
+- **調性/音階**：指定調性 (例如「G 大調」、「D 小調」)。
+- **情緒和氛圍**：使用描述性形容詞 (例如「懷舊」、「激進」、「空靈」、「夢幻」)。
+- **結構**：使用 `[Verse]`、`[Chorus]`、`[Bridge]`、`[Intro]`、`[Outro]` 或時間戳記等標記，控制歌曲的進展。
+- **長度**：短片模型一律會生成 30 秒的短片。如果是 Pro 版，請在提示中指定預期長度 (例如「創作 2 分鐘的歌曲」)，或使用時間戳記控制長度。
 
-### ตัวอย่างพรอมต์
+### 提示詞範例
 
-ตัวอย่างพรอมต์ที่มีประสิทธิภาพมีดังนี้
+以下列舉幾個有效的提示：
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -588,43 +576,37 @@ Lyria 3 จะวิเคราะห์กระบวนการพรอม
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## แนวทางปฏิบัติแนะนำ
+## 最佳做法
 
-- **วนซ้ำด้วย Clip ก่อน** ใช้โมเดล `lyria-3-clip-preview` ที่เร็วกว่าเพื่อทดลองใช้พรอมต์ก่อนที่จะสร้างเพลงแบบเต็มความยาวด้วย `lyria-3-pro-preview`
-- **ใช้คำที่เฉพาะเจาะจง** พรอมต์ที่คลุมเครือจะให้ผลลัพธ์ทั่วไป ระบุเครื่องดนตรี BPM คีย์ อารมณ์ และโครงสร้างเพื่อให้ได้เอาต์พุตที่ดีที่สุด
-- **ใช้ภาษาที่ต้องการ** เขียนพรอมต์ในภาษาที่ต้องการให้เนื้อเพลงเป็น
-- **ใช้แท็กส่วนต่างๆ** แท็ก `[Verse]`, `[Chorus]`, `[Bridge]` จะให้โครงสร้างที่ชัดเจนแก่โมเดลเพื่อทำตาม
-- **แยกเนื้อเพลงออกจากคำแนะนำ** เมื่อใส่เนื้อเพลงที่กำหนดเอง ให้แยกเนื้อเพลงออกจากคำแนะนำเกี่ยวกับทิศทางดนตรีอย่างชัดเจน
+- **先使用 Clip 進行疊代。**使用速度較快的 `lyria-3-clip-preview` 模型測試提示，再使用 `lyria-3-pro-preview` 生成完整長度的內容。
+- 提供**清楚明確**的說明，模糊不清的提示會產生一般結果。提及樂器、BPM、調性、情境和結構，以獲得最佳輸出內容。
+- **語言相符。**以所需語言輸入提示。
+- **使用章節標記。**`[Verse]`、`[Chorus]`、`[Bridge]` 標記可為模型提供明確的結構。
+- **歌詞和指示請分開提供。**提供自訂歌詞時，請清楚區隔歌詞和音樂方向指示。
 
-## ข้อจำกัด
+## 限制
 
-- **ความปลอดภัย**: ระบบจะตรวจสอบพรอมต์ทั้งหมดด้วยตัวกรองความปลอดภัย ระบบจะบล็อกพรอมต์ที่ทริกเกอร์ตัวกรอง ซึ่งรวมถึงพรอมต์ที่ขอเสียงร้องของศิลปินที่เฉพาะเจาะจงหรือการสร้างเนื้อเพลงที่มีลิขสิทธิ์
-- **การใส่ลายน้ำ**: เสียงที่สร้างขึ้นทั้งหมดจะมี
-  [ลายน้ำเสียง SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=th) เพื่อ
-  การระบุ ลายน้ำนี้หูของมนุษย์ไม่สามารถรับรู้ได้และไม่ส่งผลต่อประสบการณ์การฟัง
-- **การแก้ไขแบบผ่านการสนทนาไปมา**: การสร้างเพลงเป็นกระบวนการแบบผ่านการสนทนาไปมาครั้งเดียว
-  Lyria 3 เวอร์ชันปัจจุบันไม่รองรับการแก้ไขซ้ำๆ หรือการปรับแต่งคลิปที่สร้างขึ้นผ่านพรอมต์หลายรายการ
-- **ความยาว**: โมเดล Clip จะสร้างคลิปความยาว 30 วินาทีเสมอ โมเดล Pro จะสร้างเพลงที่ใช้เวลา 2-3 นาที โดยคุณสามารถกำหนดระยะเวลาที่แน่นอนได้ผ่านพรอมต์
-- **ความแน่นอน**: ผลลัพธ์อาจแตกต่างกันไปในแต่ละการเรียกใช้ แม้จะใช้พรอมต์เดียวกันก็ตาม
+- **安全性**：所有提示都會經過安全篩選器檢查。如果提示觸發篩選器，系統就會封鎖提示。包括要求特定藝人聲音的提示，或是生成受著作權保護的歌詞。
+- **浮水印**：所有生成的音訊都會加上 [SynthID 音訊浮水印](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=zh-tw)，以利識別。這種浮水印人耳無法辨識，不會影響聆聽體驗。
+- **多輪編輯**：音樂生成是單輪程序。目前版本的 Lyria 3 不支援透過多個提示，反覆編輯或修正生成的片段。
+- **長度**：Clip 模型一律會生成 30 秒的短片。Pro 模型會生成幾分鐘的歌曲，確切時長取決於提示。
+- **決定性**：即使使用相同提示，每次呼叫的結果也可能不同。
 
-## ขั้นตอนถัดไป
+## 後續步驟
 
-- ตรวจสอบ[ราคา](https://ai.google.dev/gemini-api/docs/interactions/pricing?hl=th)ของโมเดล Lyria 3
-- [ลองสร้างเพลงแบบสตรีมมิงแบบเรียลไทม์
-  ด้วย Lyria RealTime](https://ai.google.dev/gemini-api/docs/interactions/realtime-music-generation?hl=th)
-- สร้างการสนทนาของผู้พูดหลายคนด้วยโมเดล
-  [TTS](https://ai.google.dev/gemini-api/docs/interactions/speech-generation?hl=th)
-- ดูวิธีสร้าง[รูปภาพ](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=th)หรือ[วิดีโอ](https://ai.google.dev/gemini-api/docs/interactions/video?hl=th)
-- ดูวิธีที่ Gemini สามารถ[เข้าใจไฟล์เสียง](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=th)
-- สนทนาแบบเรียลไทม์กับ Gemini โดยใช้
-  [Live API](https://ai.google.dev/gemini-api/docs/interactions/live?hl=th)
+- 查看 Lyria 3 模型的[定價](https://ai.google.dev/gemini-api/docs/interactions/pricing?hl=zh-tw)，
+- 使用 Lyria RealTime [即時串流音樂生成](https://ai.google.dev/gemini-api/docs/interactions/realtime-music-generation?hl=zh-tw)，
+- 使用 [TTS 模型](https://ai.google.dev/gemini-api/docs/interactions/speech-generation?hl=zh-tw)生成多人對話，
+- 瞭解如何生成[圖片](https://ai.google.dev/gemini-api/docs/interactions/image-generation?hl=zh-tw)或[影片](https://ai.google.dev/gemini-api/docs/interactions/video?hl=zh-tw)，
+- 瞭解 Gemini 如何[解讀音訊檔案](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=zh-tw)、
+- 使用 [Live API](https://ai.google.dev/gemini-api/docs/interactions/live?hl=zh-tw) 與 Gemini 即時對話。
 
-ส่งความคิดเห็น
+提供意見
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-อัปเดตล่าสุด 2026-06-01 UTC
+上次更新時間：2026-06-01 (世界標準時間)。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+想進一步說明嗎？
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-01 UTC"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-01 (世界標準時間)。"],[],[]]

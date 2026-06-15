@@ -1,62 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th
-fetched_at: 2026-06-08T05:31:45.049686+00:00
-title: "Gemini 3.1 Pro (\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ko
+fetched_at: 2026-06-15T06:26:48.287867+00:00
+title: "Gemini 3.1 Pro \ud504\ub9ac\ubdf0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-ส่งความคิดเห็น
+의견 보내기
 
-# Gemini 3.1 Pro (เวอร์ชันตัวอย่าง)
+# Gemini 3.1 Pro 프리뷰
 
-Gemini 3.1 Pro เวอร์ชันตัวอย่างสร้างขึ้นเพื่อปรับปรุงประสิทธิภาพและความน่าเชื่อถือของซีรีส์ Gemini 3 Pro
-โดยจะช่วยให้การคิดดีขึ้น ประสิทธิภาพของโทเค็นดีขึ้น
-และมอบประสบการณ์ที่อิงตามข้อเท็จจริงและสอดคล้องกันมากขึ้น โดยได้รับการเพิ่มประสิทธิภาพ
-สำหรับพฤติกรรมและความสามารถในการใช้งานด้านวิศวกรรมซอฟต์แวร์ รวมถึงเวิร์กโฟลว์ของเอเจนต์
-ที่ต้องใช้เครื่องมืออย่างแม่นยำและการดำเนินการแบบหลายขั้นตอนที่เชื่อถือได้ในโดเมนในโลกแห่งความจริง
+Gemini 3 Pro 시리즈의 성능과 안정성을 개선하기 위해 빌드된 Gemini 3.1 Pro 프리뷰는 더 나은 사고력, 향상된 토큰 효율성, 더 사실에 기반한 일관된 경험을 제공합니다. 소프트웨어 엔지니어링 동작과 유용성, 실제 도메인에서 정확한 도구 사용과 안정적인 다단계 실행이 필요한 에이전트 워크플로에 최적화되어 있습니다.
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=th)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=ko)
 
-## เอกสารประกอบ
+## 문서
 
-ไปที่หน้า[คู่มือนักพัฒนาซอฟต์แวร์ Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=th) เพื่อดูข้อมูลครอบคลุมทั้งหมดเกี่ยวกับฟีเจอร์และความสามารถ
+[Gemini 3 개발자 가이드](https://ai.google.dev/gemini-api/docs/gemini-3?hl=ko) 페이지에서 기능과 기능에 관한 전체 내용을 확인하세요.
 
 ## gemini-3.1-pro-preview
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| 속성 | 설명 |
 | --- | --- |
-| รหัสโมเดล id\_card | `gemini-3.1-pro-preview` |
-| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ วิดีโอ เสียง และ PDF  **เอาต์พุต**  ข้อความ |
-| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  1,048,576  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
-| handymanความสามารถ | **การสร้างเสียง**  สิ่งที่ทำไม่ได้  **Batch API**  สิ่งที่ทำได้  **การแคช**  สิ่งที่ทำได้  **การรันโค้ด**  สิ่งที่ทำได้  **ค้นหาไฟล์**  รองรับ (AI Studio เท่านั้น)  **การอนุมานแบบยืดหยุ่น**  สิ่งที่ทำได้  **การเรียกใช้ฟังก์ชัน**  สิ่งที่ทำได้  **การเชื่อมต่อแหล่งข้อมูลกับ Google Maps**  สิ่งที่ทำได้  **การสร้างรูปภาพ**  สิ่งที่ทำไม่ได้  **Live API**  สิ่งที่ทำไม่ได้  **การอนุมานตามลำดับความสำคัญ**  สิ่งที่ทำได้  **การเชื่อมต่อแหล่งข้อมูลของ Search**  สิ่งที่ทำได้  **เอาต์พุตที่มีโครงสร้าง**  สิ่งที่ทำได้  **การคิด**  สิ่งที่ทำได้  **บริบทของ URL**  สิ่งที่ทำได้ |
-| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `gemini-3.1-pro-preview` - ตัวอย่าง: `gemini-3.1-pro-preview-customtools` \* |
-| calendar\_monthการอัปเดตล่าสุด | กุมภาพันธ์ 2026 |
-| cognition\_2การตัดข้อมูล | มกราคม 2025 |
+| id\_card모델 코드 | `gemini-3.1-pro-preview` |
+| save 지원 데이터 유형 | **입력**  텍스트, 이미지, 동영상, 오디오, PDF  **출력**  텍스트 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  1,048,576  **출력 토큰 한도**  65,536 |
+| handyman기능 | **오디오 생성**  지원되지 않음  **Batch API**  지원됨  **캐싱**  지원됨  **코드 실행**  지원됨  **파일 검색**  지원됨 (AI Studio만 해당)  **유연한 추론**  지원됨  **함수 호출**  지원됨  **Google 지도 그라운딩**  지원됨  **이미지 생성**  지원되지 않음  **Live API**  지원되지 않음  **우선순위 추론**  지원됨  **검색 그라운딩**  지원됨  **구조화된 출력**  지원됨  **사고**  지원됨  **URL 컨텍스트**  지원됨 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 미리보기: `gemini-3.1-pro-preview` - 미리보기: `gemini-3.1-pro-preview-customtools` \* |
+| calendar\_month최신 업데이트 | 2026년 2월 |
+| cognition\_2지식 단절 | 2025년 1월 |
 
 #### gemini-3.1-pro-preview-customtools
 
-\* *สำหรับผู้ที่สร้างโดยใช้ทั้ง Bash และเครื่องมือที่กำหนดเอง Gemini 3.1 Pro เวอร์ชันตัวอย่าง
-มาพร้อมกับปลายทางแยกต่างหากที่พร้อมใช้งานผ่าน API ที่ชื่อ
-`gemini-3.1-pro-preview-customtools` ปลายทางนี้จะจัดลำดับความสำคัญของ
-เครื่องมือที่กำหนดเอง (เช่น `view_file` หรือ `search_code`) ได้ดีกว่า*
+\* *bash와 맞춤 도구를 혼합하여 빌드하는 경우 Gemini 3.1 Pro 프리뷰에는 `gemini-3.1-pro-preview-customtools`라는 API를 통해 사용할 수 있는 별도의 엔드포인트가 제공됩니다. 이 엔드포인트는 맞춤 도구 (예: `view_file` 또는 `search_code`)의 우선순위를 지정하는 데 더 적합합니다.*
 
-*โปรดทราบว่าแม้ว่า `gemini-3.1-pro-preview-customtools` จะได้รับการเพิ่มประสิทธิภาพสำหรับเวิร์กโฟลว์แบบเอเจนต์ที่ใช้เครื่องมือที่กำหนดเองและ Bash แต่คุณอาจเห็นความผันผวนด้านคุณภาพในกรณีการใช้งานบางอย่างซึ่งไม่ได้รับประโยชน์จากเครื่องมือดังกล่าว*
+*`gemini-3.1-pro-preview-customtools`은 맞춤 도구와 Bash를 사용하는 에이전트형 워크플로에 최적화되어 있지만 이러한 도구의 이점을 누리지 못하는 일부 사용 사례에서는 품질 변동이 발생할 수 있습니다.*
 
-ส่งความคิดเห็น
+의견 보내기
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-อัปเดตล่าสุด 2026-04-29 UTC
+최종 업데이트: 2026-04-29(UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+의견을 전달하고 싶나요?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

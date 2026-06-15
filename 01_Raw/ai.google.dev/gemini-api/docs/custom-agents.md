@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=zh-CN
-fetched_at: 2026-06-08T05:30:17.088046+00:00
-title: "\u6784\u5efa\u53d7\u7ba1\u4ee3\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=th
+fetched_at: 2026-06-15T06:19:43.787500+00:00
+title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07 Agent \u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-发送反馈
+ส่งความคิดเห็น
 
-# 构建受管代理
+# การสร้าง Agent ที่มีการจัดการ
 
-借助 Gemini API 上的受管智能体，您可以使用自己的指令、技能和数据来扩展 Antigravity 智能体。您可以在 [互动时内嵌自定义智能体](#customize-inline)，也可以将 [配置保存](#save-agent)为受管智能体，并通过 ID 调用该智能体。
+Agent ที่มีการจัดการใน Gemini API ช่วยให้คุณขยาย Agent Antigravity ด้วยคำสั่ง ทักษะ และข้อมูลของคุณเองได้ คุณสามารถ[ปรับแต่งเอเจนต์ในบรรทัด](#customize-inline)ในเวลาที่โต้ตอบ หรือ[บันทึกการกำหนดค่า](#save-agent)เป็นเอเจนต์ที่มีการจัดการซึ่งคุณเรียกใช้ด้วยรหัส
 
-## 自定义 Antigravity 智能体
+## ปรับแต่งเอเจนต์แรงโน้มถ่วง
 
-构建自定义智能体的最快方法是在创建新互动时内嵌传递配置，而无需执行注册步骤。您可以通过以下三种方式扩展智能体：
+วิธีที่เร็วที่สุดในการสร้างเอเจนต์ที่กำหนดเองคือการส่งการกำหนดค่าแบบอินไลน์ขณะสร้างการโต้ตอบใหม่โดยไม่ต้องลงทะเบียน คุณขยาย Agent ได้ 3 วิธีดังนี้
 
-- **系统指令**：通过 `system_instruction` 内嵌传递文本，以塑造行为。
-- **工具**：替换默认工具（代码执行、搜索、网址上下文）。
-- **文件和技能**：将 `AGENTS.md` 和 `SKILL.md` 等文件装载到环境中。
+- **คำสั่งของระบบ**: ส่งข้อความในบรรทัดผ่าน `system_instruction` เพื่อกำหนดลักษณะการทำงาน
+- **เครื่องมือ**: ลบล้างเครื่องมือเริ่มต้น (การดำเนินการโค้ด การค้นหา บริบท URL)
+- **ไฟล์และทักษะ**: เมานต์ไฟล์ เช่น `AGENTS.md` และ `SKILL.md` ลงในสภาพแวดล้อม
 
-以下示例展示了如何内嵌传递所有这三项：
+ตัวอย่างการส่งทั้ง 3 รายการแบบอินไลน์
 
 ### Python
 
@@ -121,22 +121,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-所有内容都在互动时定义。无需先注册任何内容。Antigravity 智能体框架提供运行时（代码执行、文件管理、网络访问），以及您在运行时之上配置的层。
+ทุกอย่างจะกำหนดไว้ในเวลาที่เกิดการโต้ตอบ โดยคุณไม่จำเป็นต้องลงทะเบียนอะไรก่อน ฮาร์เนสของเอเจนต์ Antigravity จะให้รันไทม์ (การรันโค้ด การจัดการไฟล์ การเข้าถึงเว็บ) และเลเยอร์การกำหนดค่าของคุณอยู่ด้านบน
 
-### 工具和系统指令
+### เครื่องมือและวิธีการของระบบ
 
-您可以使用 `system_instruction` 和 `tools` 参数自定义智能体针对特定互动的行为和功能。
+คุณปรับแต่งลักษณะการทำงานและความสามารถของเอเจนต์สำหรับการโต้ตอบที่เฉพาะเจาะจงได้โดยใช้พารามิเตอร์ `system_instruction` และ `tools`
 
-- **系统指令**：使用 `system_instruction` 参数传递内嵌文本，以塑造智能体的行为。如果您想针对每次调用进行快速调整，此方法非常理想。`system_instruction` 和 `AGENTS.md` 是累加的；如果两者都存在，则两者都会应用。
-- **工具**：默认情况下，Antigravity 智能体可以访问 `code_execution`、`google_search` 和 `url_context`。您可以在互动时传递 `tools` 参数来替换此列表。如需详细了解可用工具以及如何使用这些工具，请参阅 [Antigravity 智能体：支持的工具](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn#supported-tools)。
+- **คำสั่งของระบบ**: ใช้พารามิเตอร์ `system_instruction` เพื่อส่งข้อความในบรรทัดที่กำหนดลักษณะการทำงานของเอเจนต์ ซึ่งเหมาะสำหรับการปรับแต่งอย่างรวดเร็วที่คุณต้องการเปลี่ยนแปลงต่อการโทร `system_instruction` และ `AGENTS.md` จะเพิ่มขึ้น โดยทั้ง 2 อย่างจะมีผลเมื่อมีอยู่
+- **เครื่องมือ**: โดยค่าเริ่มต้น เอเจนต์ Antigravity จะมีสิทธิ์เข้าถึง `code_execution`, `google_search` และ `url_context` คุณลบล้างรายการนี้ได้โดยส่งพารามิเตอร์ `tools` ในเวลาที่เกิดการโต้ตอบ ดูรายละเอียดทั้งหมดเกี่ยวกับเครื่องมือที่มีและวิธีใช้ได้ที่[Antigravity Agent: เครื่องมือที่รองรับ](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#supported-tools)
 
-### 基于文件的自定义
+### การปรับแต่งตามไฟล์
 
-#### 智能体目录结构
+#### โครงสร้างไดเรกทอรีของ Agent
 
-虽然您可以内嵌传递配置，但我们建议您在结构化目录中整理智能体的文件。这样可以更轻松地管理、进行版本控制以及装载到智能体的环境中。
+แม้ว่าคุณจะส่งการกำหนดค่าแบบอินไลน์ได้ แต่เราขอแนะนำให้จัดระเบียบไฟล์ของเอเจนต์ในไดเรกทอรีที่มีโครงสร้าง ซึ่งจะช่วยให้จัดการ ควบคุมเวอร์ชัน และติดตั้งในสภาพแวดล้อมของเอเจนต์ได้ง่ายขึ้น
 
-典型的智能体项目目录如下所示：
+ไดเรกทอรีโปรเจ็กต์ของเอเจนต์ทั่วไปมีลักษณะดังนี้
 
 ```
 my-agent/
@@ -147,13 +147,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-Antigravity 运行时会扫描 `.agents/`（以及环境的根目录）以查找这些文件。
+รันไทม์ Antigravity จะสแกน `.agents/` (และรูทของสภาพแวดล้อม) เพื่อหาไฟล์เหล่านี้
 
 #### AGENTS.md
 
-智能体会在启动时自动从环境中加载 `.agents/AGENTS.md`（或 `/.agents/AGENTS.md`）作为系统指令。对于您想要与代码一起进行版本控制的长篇角色定义、详细指南和指令，请使用 `AGENTS.md`。
+เอเจนต์จะโหลด `.agents/AGENTS.md` (หรือ `/.agents/AGENTS.md`) จากสภาพแวดล้อมโดยอัตโนมัติเป็นคำสั่งของระบบเมื่อเริ่มต้น ใช้ `AGENTS.md` สำหรับคำจำกัดความของกลุ่มเป้าหมายแบบยาว หลักเกณฑ์โดยละเอียด และวิธีการที่คุณต้องการควบคุมเวอร์ชันควบคู่ไปกับโค้ด
 
-使用内嵌来源装载 `AGENTS.md`：
+เมานต์ `AGENTS.md` โดยใช้แหล่งข้อมูลในบรรทัด
 
 ### Python
 
@@ -231,9 +231,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### 技能：SKILL.md
+#### ทักษะ: SKILL.md
 
-技能是扩展智能体功能的文件。将它们放在 `.agents/skills/<skill-name>/SKILL.md` 下，框架会自动发现并注册它们。
+ทักษะคือไฟล์ที่ขยายความสามารถของเอเจนต์ วางไว้ใต้ `.agents/skills/<skill-name>/SKILL.md` แล้ว Harness จะค้นหาและลงทะเบียนโดยอัตโนมัติ
 
 ```
 .agents/
@@ -243,7 +243,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         └── SKILL.md
 ```
 
-使用内嵌来源装载技能：
+ติดตั้งทักษะโดยใช้แหล่งข้อมูลในบรรทัด
 
 ### Python
 
@@ -321,15 +321,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-从 `.agents/skills/` 和 `/.agents/skills/` 加载的技能都会自动被发现。
+ระบบจะค้นพบทักษะที่โหลดจาก `.agents/skills/` และ `/.agents/skills/` โดยอัตโนมัติ
 
-## 创建受管智能体
+## สร้าง Agent ที่มีการจัดการ
 
-对配置进行迭代后，您可以使用 `agents.create` 将其创建为受管智能体。这样，您就可以通过 ID 调用智能体，而无需每次都重复配置。
+เมื่อปรับปรุงการกำหนดค่าแล้ว คุณจะสร้างเป็นเอเจนต์ที่มีการจัดการด้วย `agents.create` ได้ ซึ่งช่วยให้คุณเรียกใช้ Agent ตามรหัสได้โดยไม่ต้องกำหนดค่าซ้ำทุกครั้ง
 
-### 从来源配置
+### จากแหล่งที่มา
 
-使用来源指定 `base_agent`、`id`、`system_instruction` 和 `base_environment`。平台会在每次调用时使用您的文件预配新的沙盒。如需了解可用的来源类型（Git、GCS、内嵌），请参阅[环境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)。
+ระบุ `base_agent`, `id`, `system_instruction` และ `base_environment` พร้อมแหล่งที่มา แพลตฟอร์มจะจัดสรรแซนด์บ็อกซ์ใหม่พร้อมไฟล์ของคุณทุกครั้งที่เรียกใช้ ดูประเภทแหล่งข้อมูลที่ใช้ได้ (Git, GCS, อินไลน์) ใน[สภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th)
 
 ### Python
 
@@ -437,9 +437,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### 从现有环境（派生）
+### จากสภาพแวดล้อมที่มีอยู่ (Fork)
 
-使用基本 Antigravity 智能体进行迭代，直到环境正确（软件包已安装，文件已就位），然后将其派生为受管智能体。
+วนซ้ำกับเอเจนต์ Antigravity พื้นฐานจนกว่าสภาพแวดล้อมจะพร้อม (ติดตั้งแพ็กเกจแล้ว วางไฟล์แล้ว) จากนั้นแยกเป็นเอเจนต์ที่มีการจัดการ
 
 ### Python
 
@@ -504,11 +504,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 使用网络规则
+### ด้วยกฎเครือข่าย
 
-您可以在保存受管智能体时锁定出站访问权限或注入凭据。如需了解完整的许可名单架构、凭据模式和通配符，请参阅[环境：网络配置](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn#network-configuration)。
+คุณสามารถล็อกการเข้าถึงขาออกหรือแทรกข้อมูลเข้าสู่ระบบเมื่อบันทึกเอเจนต์ที่มีการจัดการ ดูสคีมารายการที่อนุญาต รูปแบบข้อมูลเข้าสู่ระบบ และสัญลักษณ์แทนทั้งหมดได้ที่[สภาพแวดล้อม: การกำหนดค่าเครือข่าย](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#network-configuration)
 
-以下示例创建了一个只能访问 GitHub 和 PyPI 的 `issue-resolver` 智能体，并为 GitHub 注入了凭据：
+ตัวอย่างต่อไปนี้สร้างเอเจนต์ `issue-resolver` ที่เข้าถึงได้เฉพาะ GitHub และ PyPI โดยมีการแทรกข้อมูลเข้าสู่ระบบสำหรับ GitHub
 
 ### Python
 
@@ -619,9 +619,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## 调用智能体
+## เรียกใช้ Agent
 
-通过创建新互动，使用智能体 ID 调用受管智能体。每次调用都会派生基本环境，因此每次运行都是从干净的状态开始。
+เรียกใช้ Agent ที่มีการจัดการด้วยรหัส Agent โดยสร้างการโต้ตอบใหม่ การเรียกใช้แต่ละครั้งจะแยกสภาพแวดล้อมพื้นฐานออกเป็น 2 ส่วน ดังนั้นการเรียกใช้ทุกครั้งจึงเริ่มต้นจากสภาพแวดล้อมที่สะอาด
 
 ### Python
 
@@ -661,11 +661,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-如需了解多轮对话和流式传输，请参阅[快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)。相同的 `previous_interaction_id` 和 `environment` 模式适用于受管智能体。
+สำหรับการสนทนาแบบหลายรอบและการสตรีม โปรดดู[การเริ่มต้นอย่างรวดเร็ว](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th) รูปแบบ `previous_interaction_id` และ `environment` เดียวกันนี้จะมีผลกับตัวแทนที่มีการจัดการ
 
-## 在调用时替换配置
+## การลบล้างการกำหนดค่าเมื่อเรียกใช้
 
-您可以在创建互动时替换智能体的默认 `system_instruction` 和 `tools`。这样，您就可以针对特定运行修改智能体的行为或功能，而无需更改存储的智能体定义。
+คุณลบล้าง `system_instruction` และ `tools` เริ่มต้นของตัวแทนได้เมื่อสร้างการโต้ตอบ ซึ่งจะช่วยให้คุณแก้ไขลักษณะการทำงานหรือความสามารถของเอเจนต์สำหรับการเรียกใช้ที่เฉพาะเจาะจงได้โดยไม่ต้องเปลี่ยนคำจำกัดความของเอเจนต์ที่จัดเก็บไว้
 
 ### Python
 
@@ -710,11 +710,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 管理智能体
+## จัดการ Agent
 
-您可以列出、获取和删除智能体。
+คุณแสดงรายการ รับ และลบเอเจนต์ได้
 
-### 列出智能体
+### แสดงรายการ Agent
 
 ### Python
 
@@ -742,7 +742,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 获取智能体
+### รับตัวแทน
 
 ### Python
 
@@ -765,9 +765,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### 删除智能体
+### ลบ Agent
 
-删除操作会移除配置。现有环境和智能体创建的互动不受影响。
+การลบจะนำการกำหนดค่าออก สภาพแวดล้อมและการโต้ตอบที่มีอยู่ซึ่งสร้างโดยเอเจนต์จะไม่ได้รับผลกระทบ
 
 ### Python
 
@@ -788,45 +788,45 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 智能体定义参考
+## ข้อมูลอ้างอิงคำจำกัดความของ Agent
 
-| 字段 | 类型 | 是否必需 | 说明 |
+| ช่อง | ประเภท | ต้องระบุ | คำอธิบาย |
 | --- | --- | --- | --- |
-| `id` | 字符串 | 是 | 智能体的唯一标识符。用于调用智能体。 |
-| `description` | 字符串 | 否 | 智能体的人类可读说明。 |
-| `base_agent` | 字符串 | 是 | 基本智能体 ID（例如 `antigravity-preview-05-2026`）。 |
-| `system_instruction` | 字符串 | 否 | 定义行为和角色的系统提示。 |
-| `tools` | 字符串或对象 | 否 | 智能体可以使用的工具，如果省略，则可以访问 `code_execution`、`google_search` 和 `url_context`。 |
-| `base_environment` | 字符串或对象 | 否 | `"remote"`、`environment_id` 或包含 `sources` 和 `network` 的配置对象。请参阅环境。 |
+| `id` | สตริง | ใช่ | ตัวระบุเอเจนต์ที่ไม่ซ้ำกัน ใช้เพื่อเรียกใช้ Agent |
+| `description` | สตริง | ไม่ | คำอธิบายที่มนุษย์อ่านได้ของ Agent |
+| `base_agent` | สตริง | ใช่ | รหัสตัวแทนฐาน (เช่น `antigravity-preview-05-2026`) |
+| `system_instruction` | สตริง | ไม่ | พรอมต์ของระบบที่กำหนดลักษณะการทำงานและตัวตน |
+| `tools` | สตริงหรือออบเจ็กต์ | ไม่ | เครื่องมือที่ตัวแทนใช้ได้ หากละเว้นไว้ ตัวแทนจะมีสิทธิ์เข้าถึง `code_execution`, `google_search` และ `url_context` |
+| `base_environment` | สตริงหรือออบเจ็กต์ | ไม่ | `"remote"`, `environment_id` หรือออบเจ็กต์การกำหนดค่าที่มี `sources` และ `network` ดูสภาพแวดล้อม |
 
-## 迭代工作流
+## เวิร์กโฟลว์การทำซ้ำ
 
-1. 使用基本 Antigravity 智能体进行**原型设计** 。内嵌传递系统指令和环境来源。以交互方式测试指令、技能和环境设置。
-2. **稳定** 环境。安装软件包、装载来源、验证一切正常。
-3. 通过创建新智能体（从来源配置或派生环境）**持久保留** 为受管智能体。
-4. **更新** 智能体定义。更改系统指令、交换技能或添加来源。下一次调用会采用新配置。
+1. **สร้างต้นแบบ**ด้วย Agent Antigravity พื้นฐาน ส่งคำสั่งของระบบและแหล่งที่มาของสภาพแวดล้อมแบบอินไลน์ ทดสอบวิธีการ ทักษะ และการตั้งค่าสภาพแวดล้อมแบบอินเทอร์แอกทีฟ
+2. **รักษาความเสถียร**ของสภาพแวดล้อม ติดตั้งแพ็กเกจ เมานต์แหล่งที่มา และตรวจสอบว่าทุกอย่างทำงานได้
+3. **คงอยู่**ในฐานะเอเจนต์ที่มีการจัดการโดยการสร้างเอเจนต์ใหม่จากแหล่งที่มาหรือโดยการแยกสาขาสภาพแวดล้อม
+4. **อัปเดต**คำจำกัดความของเอเจนต์ เปลี่ยนคำสั่งของระบบ สลับทักษะ หรือเพิ่มแหล่งข้อมูล การเรียกใช้ครั้งถัดไปจะใช้การกำหนดค่าใหม่
 
-## 限制
+## ข้อจำกัด
 
-- **预览版状态**：受管智能体处于预览版状态。功能和架构可能会发生变化。
-- **基本智能体**：只有 `antigravity-preview-05-2026` 受支持作为 `base_agent`。
-- **无版本控制**：智能体版本控制和回滚尚不可用。
-- **无子智能体嵌套**：尚不支持子智能体委托。
-- 您最多可以拥有 1000 个受管智能体。
+- **สถานะเวอร์ชันตัวอย่าง**: เอเจนต์ที่มีการจัดการอยู่ในเวอร์ชันตัวอย่าง ฟีเจอร์และสคีมาอาจมีการเปลี่ยนแปลง
+- **เอเจนต์พื้นฐาน**: รองรับเฉพาะ `antigravity-preview-05-2026` เป็น `base_agent`
+- **ไม่มีการกำหนดเวอร์ชัน**: การกำหนดเวอร์ชันและการย้อนกลับของ Agent ยังไม่พร้อมใช้งาน
+- **ไม่มีการซ้อน Agent ย่อย**: ระบบยังไม่รองรับการมอบสิทธิ์ Agent ย่อย
+- คุณมีตัวแทนที่มีการจัดการได้สูงสุด 1,000 ราย
 
-## 后续步骤
+## ขั้นตอนถัดไป
 
-- [智能体概览](https://ai.google.dev/gemini-api/docs/agents?hl=zh-cn)：了解受管智能体的核心概念。
-- [快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)：开始构建多轮对话和流式传输。
-- [Antigravity 智能体](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn)：探索默认智能体的功能、工具和定价。
-- [智能体环境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=zh-cn)：配置沙盒、来源和网络。
+- [ภาพรวมของ Agent](https://ai.google.dev/gemini-api/docs/agents?hl=th): ดูข้อมูลเกี่ยวกับแนวคิดหลักของ Agent ที่มีการจัดการ
+- [เริ่มต้นใช้งานฉบับย่อ](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th): เริ่มสร้างด้วยการสนทนาแบบหลายรอบและการสตรีม
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th): สำรวจความสามารถ เครื่องมือ และราคาของเอเจนต์เริ่มต้น
+- [สภาพแวดล้อมของเอเจนต์](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th): กำหนดค่าแซนด์บ็อกซ์ แหล่งที่มา และเครือข่าย
 
-发送反馈
+ส่งความคิดเห็น
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-最后更新时间 (UTC)：2026-06-01。
+อัปเดตล่าสุด 2026-06-01 UTC
 
-需要向我们提供更多信息？
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-01。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-01 UTC"],[],[]]

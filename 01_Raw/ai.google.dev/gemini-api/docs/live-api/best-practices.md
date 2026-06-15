@@ -1,58 +1,58 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=id
-fetched_at: 2026-06-08T05:34:03.356285+00:00
-title: "Praktik terbaik Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=pt-BR
+fetched_at: 2026-06-15T06:26:41.661764+00:00
+title: "Pr\u00e1ticas recomendadas da API Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Kirim masukan
+Envie comentários
 
-# Praktik terbaik Live API
+# Práticas recomendadas da API Live
 
-Panduan ini membahas praktik terbaik yang dapat Anda ikuti untuk mengoptimalkan penggunaan Live API.
-Lihat halaman [Memulai Live API](https://ai.google.dev/gemini-api/docs/live?hl=id)
-untuk mengetahui ringkasan dan contoh kode untuk kasus penggunaan umum.
+Este guia aborda as práticas recomendadas que você pode seguir para otimizar o uso da API Live.
+Consulte a página [Introdução à API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br)
+para conferir uma visão geral e exemplos de código para casos de uso comuns.
 
-## Mendesain petunjuk sistem yang jelas
+## Criar instruções claras do sistema
 
-Untuk mendapatkan performa terbaik dari Live API, sebaiknya miliki serangkaian petunjuk sistem (SI) yang jelas dan menentukan persona agen, aturan percakapan, dan batasan, dalam urutan ini.
+Para ter o melhor desempenho da API Live, recomendamos ter um conjunto de instruções do sistema (SIs, na sigla em inglês) bem definido que defina o perfil do agente, as regras de conversação e as barreiras de proteção, nessa ordem.
 
-Untuk hasil terbaik, pisahkan setiap agen ke dalam SI yang berbeda.
+Para melhores resultados, separe cada agente em uma SI distinta.
 
-1. **Tentukan persona agen:** Berikan detail tentang nama, peran, dan karakteristik pilihan agen. Jika Anda ingin menentukan aksen, pastikan untuk juga menentukan bahasa output pilihan (seperti aksen Inggris untuk penutur bahasa Inggris).
-2. **Tentukan aturan percakapan:** Letakkan aturan ini dalam urutan yang Anda harapkan diikuti oleh model. Bedakan antara elemen percakapan satu kali dan loop percakapan. Contoh:
+1. **Especificar o perfil do agente**:forneça detalhes sobre o nome, a função e as características preferidas do agente. Se você quiser especificar o sotaque, também especifique o idioma de saída preferido (por exemplo, um sotaque britânico para um falante de inglês).
+2. **Especificar as regras de conversação**:coloque essas regras na ordem em que você espera que o modelo siga. Delimite entre elementos únicos da conversa e loops de conversação. Por exemplo:
 
-   - **Elemen satu kali:** Kumpulkan detail pelanggan satu kali (seperti nama, lokasi, nomor kartu loyalitas).
-   - **Loop percakapan:** Pengguna dapat membahas rekomendasi, harga, pengembalian, dan pengiriman, serta mungkin ingin berpindah dari satu topik ke topik lain. Beri tahu model bahwa tidak masalah untuk terlibat dalam loop percakapan ini selama pengguna menginginkannya.
-3. **Tentukan panggilan alat dalam alur dalam kalimat yang berbeda:** Misalnya, jika langkah satu kali untuk mengumpulkan detail pelanggan memerlukan pemanggilan fungsi `get_user_info`, Anda dapat mengatakan: *Langkah pertama Anda adalah mengumpulkan informasi pengguna. Pertama, minta pengguna untuk memberikan nama, lokasi, dan nomor kartu loyalitas mereka. Kemudian
-   panggil `get_user_info` dengan detail ini.*
-4. **Tambahkan batasan yang diperlukan:** Berikan batasan percakapan umum yang tidak ingin Anda lakukan oleh model. Jangan ragu untuk memberikan contoh spesifik jika *x* terjadi, Anda ingin model melakukan *y*. Jika Anda masih belum mendapatkan tingkat presisi yang diinginkan, gunakan kata *tidak salah* untuk memandu model agar presisi.
+   - **Elemento único**:colete os detalhes de um cliente uma vez (como nome, local, número do cartão fidelidade).
+   - **Loop de conversação**:o usuário pode discutir recomendações, preços, devoluções e entrega, e pode querer passar de um tópico para outro. Informe ao modelo que ele pode participar desse loop de conversação pelo tempo que o usuário quiser.
+3. **Especificar chamadas de ferramentas em um fluxo em frases distintas**:por exemplo, se uma etapa única para coletar os detalhes de um cliente exigir a invocação de uma função `get_user_info`, você poderá dizer: *Sua primeira etapa é coletar informações do usuário. Primeiro, peça ao usuário que forneça o nome, o local e o número do cartão fidelidade. Em seguida,
+   invoque `get_user_info` com esses detalhes.*
+4. **Adicionar as barreiras de proteção necessárias**:forneça as barreiras de proteção conversacionais gerais que você não quer que o modelo faça. Você pode fornecer exemplos específicos de se *x* acontecer, você quer que o modelo faça *y*. Se você ainda não estiver recebendo o nível de precisão preferido, use a palavra *inequivocamente* para orientar o modelo a ser preciso.
 
-## Menentukan alat dengan tepat
+## Definir ferramentas com precisão
 
-Saat menggunakan alat dengan Live API, berikan spesifikasi dalam definisi alat Anda.
-Pastikan untuk memberi tahu Gemini dalam kondisi apa panggilan alat harus dipanggil. Untuk mengetahui detail selengkapnya, lihat [Definisi alat](#tool-definitions-example) di
-bagian contoh.
+Ao usar ferramentas com a API Live, seja específico nas definições de ferramentas.
+Informe ao Gemini em quais condições uma chamada de ferramenta deve ser invocada. Para mais detalhes, consulte [Definições de ferramentas](#tool-definitions-example) em
+a seção de exemplos.
 
-## Membuat perintah yang efektif
+## Criar comandos eficazes
 
-- **Gunakan perintah yang jelas:** Berikan contoh hal yang harus dan tidak boleh dilakukan model dalam perintah, dan coba batasi perintah menjadi satu perintah per persona atau peran dalam satu waktu. Daripada perintah yang panjang dan terdiri dari beberapa halaman, sebaiknya gunakan chaining perintah. Model ini berperforma terbaik pada tugas dengan satu panggilan fungsi.
-- **Berikan perintah dan informasi awal:** Live API mengharapkan input pengguna sebelum merespons. Agar Live API memulai percakapan, sertakan perintah yang memintanya untuk menyapa pengguna atau memulai percakapan. Sertakan informasi tentang pengguna agar Live API mempersonalisasi sapaan tersebut.
+- **Usar comandos claros**:forneça exemplos do que os modelos devem e não devem fazer nos comandos e tente limitar os comandos a um por perfil ou função por vez. Em vez de comandos longos e de várias páginas, considere usar o encadeamento de comandos. O modelo tem melhor desempenho em tarefas com chamadas de função única.
+- **Fornecer comandos e informações iniciais**:a API Live espera a entrada do usuário antes de responder. Para que a API Live inicie a conversa, inclua um comando pedindo que ela cumprimente o usuário ou inicie a conversa. Inclua informações sobre o usuário para que a API Live personalize essa saudação.
 
-## Menentukan bahasa
+## Especificar idioma
 
-Untuk performa optimal pada `gemini-live-2.5-flash` yang dikaskadekan Live API, pastikan `language_code` API cocok dengan bahasa yang digunakan oleh pengguna.
+Para um desempenho ideal na `gemini-live-2.5-flash` em cascata da API Live, verifique se o `language_code` da API corresponde ao idioma falado pelo usuário.
 
-Jika Anda ingin model merespons dalam bahasa selain bahasa Inggris, sertakan hal berikut sebagai bagian dari petunjuk sistem Anda:
+Se a expectativa for que o modelo responda em um idioma diferente do inglês, inclua o seguinte como parte das instruções do sistema:
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
@@ -60,49 +60,50 @@ RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}
 
 ## Streaming
 
-Saat menerapkan audio real-time, ikuti praktik terbaik berikut:
+Ao implementar áudio em tempo real, siga estas práticas recomendadas:
 
-- **Ukuran Chunk dan Latensi**: Kirim audio dalam chunk berukuran 20 md hingga 40 md.
-- **Penanganan Interupsi**: Saat pengguna berbicara saat model membalas,
-  server akan mengirim pesan `server_content` dengan `"interrupted": true`. Anda harus segera menghapus buffer audio sisi klien untuk mencegah agen terus berbicara dengan pengguna.
+- **Tamanho do bloco e latência**: envie áudio em blocos de 20 ms a 40 ms.
+- **Processamento de interrupção**: quando o usuário fala enquanto o modelo está respondendo,
+  o servidor envia uma mensagem `server_content` com `"interrupted": true`. Você precisa descartar imediatamente o buffer de áudio do lado do cliente para evitar que o agente continue falando com o usuário.
 
-## Pengelolaan konteks
+## Gerenciamento de contexto
 
-Gunakan `ContextWindowCompressionConfig` untuk sesi yang panjang, karena token audio native terakumulasi dengan cepat (sekitar 25 token per detik audio).
+Use `ContextWindowCompressionConfig` para sessões longas, já que os tokens de áudio nativos se acumulam rapidamente (aproximadamente 25 tokens por segundo de áudio).
 
-## Buffering klien
+## Armazenamento em buffer do cliente
 
-Jangan buffer audio input secara signifikan (seperti 1 detik) sebelum mengirim. Kirim chunk kecil (20 md - 100 md) untuk meminimalkan latensi.
+Não armazene em buffer o áudio de entrada significativamente (como 1 segundo) antes de enviar. Envie pequenos blocos (20 ms a 100 ms) para minimizar a latência.
 
-## Pengambilan ulang sampel
+## Reamostragem
 
-Pastikan aplikasi klien Anda mengambil ulang sampel input mikrofon (sering kali 44,1 kHz atau 48 kHz) ke 16 kHz sebelum transmisi.
+Verifique se o aplicativo cliente reamostra a entrada do microfone (geralmente 44,1 kHz ou 48 kHz) para 16 kHz antes da transmissão.
 
-## Pengelolaan sesi
+## Gerenciamento de sessões
 
-Ikuti panduan ini untuk menangani siklus proses sesi dan memastikan pengalaman pengguna yang andal:
+Siga estas diretrizes para processar o ciclo de vida da sessão e garantir uma experiência do usuário confiável:
 
-- **Aktifkan kompresi jendela konteks:** Token audio terakumulasi sekitar 25 token per detik. Tanpa kompresi, sesi khusus audio dibatasi hingga 15 menit dan sesi audio-video hingga 2 menit. Aktifkan
-  [kompresi jendela konteks](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id#context-window-compression)
-  untuk memperpanjang sesi hingga durasi yang tidak terbatas.
-- **Terapkan kelanjutan sesi:** Server dapat secara berkala mereset koneksi WebSocket. Gunakan
-  [kelanjutan sesi](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id#session-resumption)
-  untuk terhubung kembali dengan lancar tanpa kehilangan konteks. Pertahankan token kelanjutan terbaru dari pesan `SessionResumptionUpdate` dan teruskan sebagai pengendali saat menghubungkan kembali. Token kelanjutan berlaku selama 2 jam setelah sesi terakhir berakhir.
-- **Tangani pesan GoAway:** Server mengirim pesan
-  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id#goaway-message) sebelum menghentikan koneksi. Dengarkan pesan ini dan gunakan kolom `timeLeft` untuk mengakhiri atau menghubungkan kembali dengan lancar sebelum koneksi ditutup.
-- **Tangani sinyal generationComplete:** Gunakan
-  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id#generation-complete-message)
-  pesan untuk mengetahui kapan model selesai membuat respons, sehingga
-  aplikasi Anda dapat memperbarui UI atau melanjutkan ke tindakan berikutnya.
+- **Ativar a compactação da janela de contexto**:os tokens de áudio se acumulam a aproximadamente 25 tokens por segundo. Sem compactação, as sessões somente de áudio são limitadas a 15 minutos e as sessões de áudio e vídeo a 2 minutos. Ative
+  [a compactação da janela de contexto](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=pt-br#context-window-compression)
+  para estender as sessões a uma duração ilimitada.
+- **Implementar a retomada da sessão**:o servidor pode redefinir periodicamente a conexão WebSocket. Use
+  [a retomada da sessão](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=pt-br#session-resumption)
+  para se reconectar sem perder o contexto. Mantenha o token de retomada mais recente das mensagens `SessionResumptionUpdate` e transmita-o como o identificador ao se reconectar. Os tokens de retomada são válidos por 2 horas após o término da última sessão.
+- **Processar mensagens GoAway:** o servidor envia uma
+  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=pt-br#goaway-message)
+  antes de encerrar uma conexão. Ouça essa mensagem e use o campo `timeLeft` para concluir ou se reconectar antes que a conexão seja fechada.
+- **Processar sinais generationComplete**:use a
+  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=pt-br#generation-complete-message)
+  mensagem para saber quando o modelo terminou de gerar uma resposta, para que o
+  aplicativo possa atualizar a interface ou continuar com a próxima ação.
 
-Untuk mengetahui detail penerapan, lihat
-[Pengelolaan sesi](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=id).
+Para detalhes da implementação, consulte
+[Gerenciamento de sessões](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=pt-br).
 
-## Contoh
+## Exemplos
 
-Contoh ini menggabungkan praktik terbaik dan
-[panduan untuk desain petunjuk sistem](#system-instruction-guidelines) guna
-memandu performa model sebagai pelatih karier.
+Este exemplo combina as práticas recomendadas e
+[as diretrizes para o design de instruções do sistema](#system-instruction-guidelines) para
+orientar o desempenho do modelo como um coach de carreira.
 
 ```
 **Persona:**
@@ -154,10 +155,10 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### Definisi alat
+### Definições de ferramentas
 
-JSON ini menentukan fungsi relevan yang dipanggil dalam contoh pelatih karier.
-Untuk hasil terbaik saat menentukan fungsi, sertakan nama, deskripsi, parameter, dan kondisi pemanggilan.
+Este JSON define as funções relevantes chamadas no exemplo de coach de carreira.
+Para melhores resultados ao definir funções, inclua os nomes, as descrições, os parâmetros e as condições de invocação.
 
 ```
 [
@@ -247,44 +248,44 @@ Untuk hasil terbaik saat menentukan fungsi, sertakan nama, deskripsi, parameter,
 ]
 ```
 
-## Penetapan harga dan penagihan
+## Preços e faturamento
 
-Gemini Live API menagih secara ketat berdasarkan penggunaan token. Karena Live API mempertahankan sesi WebSocket yang persisten, penagihan mengikuti model gabungan berdasarkan jendela konteks aktif.
+A API Gemini Live é faturada estritamente pelo uso de tokens. Como a API Live mantém uma sessão WebSocket persistente, o faturamento segue um modelo de composição com base na janela de contexto ativa.
 
-### Jendela konteks sesi (biaya gabungan)
+### A janela de contexto da sessão (custos compostos)
 
-API akan menagih Anda per giliran untuk semua token yang ada di jendela konteks sesi. "Giliran" ditentukan sebagai satu input pengguna dan respons model yang sesuai.
+A API cobra por turno todos os tokens presentes na janela de contexto da sessão. Um "turno" é definido como uma entrada do usuário e a resposta correspondente do modelo.
 
-- **Akumulasi:** Jendela konteks mencakup token baru dari giliran saat ini ditambah semua token terakumulasi dari giliran sebelumnya.
-- **Penagihan ulang:** Token sebelumnya diproses ulang dan dipertanggungjawabkan di setiap giliran baru, hingga ukuran jendela konteks yang dikonfigurasi. Saat sesi diperpanjang, biaya per giliran akan meningkat karena histori percakapan diproses ulang.
+- **Acúmulo**:a janela de contexto inclui novos tokens do turno atual e todos os tokens acumulados de turnos anteriores.
+- **Refaturamento**:os tokens anteriores são reprocessados e contabilizados em cada novo turno, até o tamanho da janela de contexto configurada. À medida que uma sessão se estende, o custo por turno aumenta porque o histórico de conversas é reprocessado.
 
-### Token dan transkripsi audio
+### Tokens de áudio e transcrições
 
-Live API bersifat multimodal secara native. API ini mempertahankan histori percakapan sebagai token audio mentah untuk mempertahankan nuansa dan nada akustik.
+A API Live é multimodal nativamente. Ela retém o histórico de conversas como tokens de áudio brutos para preservar a nuance e o tom acústico.
 
-- **Penagihan audio:** API akan menagih Anda untuk token audio native yang terakumulasi dengan tarif input audio standar di setiap giliran.
-- **Biaya tambahan transkripsi:** Jika transkripsi audio ke teks diaktifkan (`inputAudioTranscription` atau `outputAudioTranscription`), API akan menagih semua token teks yang dihasilkan untuk transkripsi dengan tarif output token teks selain biaya token audio standar.
+- **Faturamento de áudio**:a API cobra pelos tokens de áudio nativos acumulados na taxa de entrada de áudio padrão em cada turno.
+- **Taxa extra de transcrição**:quando a transcrição de áudio para texto está ativada (`inputAudioTranscription` ou `outputAudioTranscription`), a API cobra por todos os tokens de texto gerados para transcrição na taxa de saída de token de texto, além dos custos padrão de token de áudio.
 
-### Mengelola biaya dengan batas konteks
+### Gerenciar custos com limites de contexto
 
-Untuk mencegah pertumbuhan biaya yang tidak terbatas dalam sesi yang panjang, konfigurasi ukuran jendela konteks Anda menggunakan `contextWindowCompression`.
+Para evitar o crescimento ilimitado de custos em sessões longas, configure o tamanho da janela de contexto usando `contextWindowCompression`.
 
-Dengan menetapkan pemicu kompresi (misalnya, 25.000 token) dan jendela geser (misalnya, 8.000 token), API akan otomatis mengeluarkan token lama setelah mencapai batas. API kemudian akan menagih giliran berikutnya hanya untuk histori yang dipertahankan ditambah token baru.
+Ao definir um acionador de compactação (por exemplo, 25.000 tokens) e uma janela deslizante (por exemplo, 8.000 tokens), a API remove automaticamente os tokens mais antigos quando o limite é atingido. Em seguida, a API fatura os turnos subsequentes apenas pelo histórico retido e por novos tokens.
 
-### Mode audio proaktif
+### Modo de áudio proativo
 
-Jika Mode Audio Proaktif diaktifkan, token input akan dikenai biaya selama Live API mendengarkan, sedangkan token output hanya dikenai biaya saat API merespons.
+Quando o modo de áudio proativo está ativado, os tokens de entrada são cobrados durante todo o tempo em que a API Live está ouvindo, enquanto os tokens de saída só são cobrados quando a API responde.
 
-- **Catatan untuk Gemini 3.1:** Mode Audio Proaktif tidak didukung di `gemini-3.1-flash-live-preview`. Untuk model ini, Anda hanya akan ditagih untuk audio saat melakukan streaming input secara aktif.
+- **Observação para o Gemini 3.1**:o modo de áudio proativo não é compatível com `gemini-3.1-flash-live-preview`. Para esse modelo, você só será cobrado pelo áudio quando estiver transmitindo a entrada ativamente.
 
-Untuk mengetahui informasi harga mendetail, lihat halaman harga [Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=id).
+Para informações detalhadas sobre preços, consulte a [página de preços da API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br).
 
-Kirim masukan
+Envie comentários
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Terakhir diperbarui pada 2026-06-01 UTC.
+Última atualização 2026-06-01 UTC.
 
-Ada masukan untuk kami?
+Quer enviar seu feedback?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-01 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-01 UTC."],[],[]]

@@ -1,25 +1,25 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=de
-fetched_at: 2026-06-08T05:34:46.219867+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=id
+fetched_at: 2026-06-15T06:24:51.614815+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Feedback geben
+Kirim masukan
 
-# Streaming-Interaktionen
+# Streaming interaksi
 
-Wenn Sie eine Interaktion erstellen, können Sie `stream: true` festlegen, um die Antwort mithilfe von [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE) schrittweise zu streamen.
+Saat membuat Interaksi, Anda dapat menetapkan `stream: true` untuk melakukan streaming respons secara bertahap menggunakan [peristiwa yang dikirim server](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE).
 
 ### Python
 
@@ -112,24 +112,24 @@ event: done
 data: [DONE]
 ```
 
-## Ereignistypen
+## Jenis peristiwa
 
-Jedes Server-Sent Event enthält einen benannten `event_type` und zugehörige JSON-Daten. Die Interactions API verwendet ein symmetrisches Streaming-Modell, bei dem alle Inhalte – Text, Tool-Aufrufe, Denken – über ein konsistentes **schrittbasiertes** Ereignis fließen.
+Setiap peristiwa yang dikirim server mencakup `event_type` bernama dan data JSON terkait. Interactions API menggunakan model streaming simetris tempat semua konten—teks, panggilan alat, pemikiran—mengalir melalui peristiwa **berbasis langkah** yang konsisten.
 
-Jeder Stream folgt diesem Ereignisablauf:
+Setiap aliran mengikuti alur peristiwa ini:
 
-1. `interaction.created`: Die Interaktion wird erstellt und enthält Metadaten (ID, Modell, Status).
-2. Eine Reihe von **Schritten**, die jeweils aus Folgendem bestehen:
-   - Ein `step.start`-Ereignis, das den Schritttyp angibt (z.B. `model_output`, `thought`, `function_call`).
-   - Ein oder mehrere `step.delta`-Ereignisse mit inkrementellen Daten für diesen Schritt.
-   - Ein `step.stop`-Ereignis, das den Schritt als abgeschlossen markiert.
-3. Ein `interaction.completed`-Ereignis mit endgültigen `usage`-Statistiken.
+1. `interaction.created`: Interaksi dibuat, mencakup metadata (ID, model, status).
+2. Serangkaian **langkah**, yang masing-masing terdiri dari:
+   - Peristiwa `step.start`, yang menunjukkan jenis langkah (misalnya, `model_output`, `thought`, `function_call`).
+   - Satu atau beberapa peristiwa `step.delta` dengan data inkremental untuk langkah tersebut.
+   - Peristiwa `step.stop` yang menandai langkah sebagai selesai.
+3. Peristiwa `interaction.completed` dengan statistik `usage` akhir.
 
-Wenn Sie `stream: false` festlegen, gibt die API ein einzelnes `interaction`-Objekt mit einem `steps`-Array zurück. Jedes Element in `steps` ist die vollständig zusammengesetzte Version eines `step.start` → `step.delta`(s) → `step.stop`-Zyklus.
+Jika Anda menetapkan `stream: false`, API akan menampilkan satu objek `interaction` dengan array `steps`. Setiap elemen dalam `steps` adalah versi yang sepenuhnya dirakit dari satu siklus `step.start` → `step.delta`(s) → `step.stop`.
 
 ### `interaction.created`
 
-Wird gesendet, wenn die Interaktion zum ersten Mal erstellt wird. Enthält die Interaktions-ID, das Modell und den ursprünglichen Status.
+Dikirim saat interaksi pertama kali dibuat. Berisi ID interaksi, model, dan status awal.
 
 ```
 event: interaction.created
@@ -138,7 +138,7 @@ data: {"interaction": {"id": "...", "model": "gemini-3-flash-preview", "status":
 
 ### `interaction.status_update`
 
-Signalisiert eine Statusänderung auf Interaktionsebene. Kann zwischen Schritten auftreten.
+Menandakan transisi status tingkat interaksi. Mungkin muncul di antara langkah-langkah.
 
 ```
 event: interaction.status_update
@@ -147,23 +147,23 @@ data: {"interaction_id": "...", "status": "in_progress", "event_type": "interact
 
 ### `step.start`
 
-Markiert den Beginn eines neuen Schritts. Enthält den `type` und `index` des Schritts. Der Schritttyp bestimmt, welche Delta-Typen erwartet werden und wie der Schritt in einer nicht gestreamten Antwort aussieht:
+Menandai awal langkah baru. Berisi `type` dan `index` langkah. Jenis langkah menentukan jenis delta yang diharapkan dan bagaimana langkah tersebut muncul dalam respons non-streaming:
 
-| Schritttyp | Erwartete Delta-Typen | Beschreibung |
+| Jenis Langkah | Jenis Delta yang Diharapkan | Deskripsi |
 | --- | --- | --- |
-| `model_output` | `text`, `image`, `audio` | Der endgültige Antwortinhalt des Modells. |
-| `thought` | `thought_signature`, `thought_summary` | Chain-of-Thought-Logik. `summary` ist nur vorhanden, wenn `thinking_summaries` aktiviert ist. |
-| `function_call` | `arguments_delta` | Eine Anfrage an den Client, eine Funktion auszuführen. Legt den Interaktionsstatus auf `requires_action` fest. |
-| Serverseitige Tools | Variiert je nach Tool | Von der API ausgeführte Tools (z.B. `google_search_call`, `google_search_result`, `code_execution_call`, `code_execution_result`). |
+| `model_output` | `text`, `image`, `audio` | Konten respons akhir model. |
+| `thought` | `thought_signature`, `thought_summary` | Logika alur berpikir. `summary` hanya ada jika `thinking_summaries` diaktifkan. |
+| `function_call` | `arguments_delta` | Permintaan agar klien menjalankan fungsi. Menetapkan status interaksi ke `requires_action`. |
+| Alat sisi server | Bervariasi menurut alat | Alat yang dijalankan oleh API (misalnya, `google_search_call`, `google_search_result`, `code_execution_call`, `code_execution_result`). |
 
-Die vollständige Liste finden Sie in der Referenz zur [Interactions API](https://ai.google.dev/api/interactions?hl=de).
+Lihat [referensi Interactions API](https://ai.google.dev/api/interactions?hl=id) untuk mengetahui daftar lengkapnya.
 
 ```
 event: step.start
 data: {"index": 0, "step": {"type": "model_output"}, "event_type": "step.start"}
 ```
 
-Bei Funktionsaufrufen enthält der Schritt den Funktionsnamen, die ID und leere Argumente `{}`.
+Untuk panggilan fungsi, langkah ini mencakup nama fungsi, ID, dan argumen kosong `{}`
 
 ```
 event: step.start
@@ -172,11 +172,11 @@ data: {"index": 0, "step": {"type": "function_call", "id":"un6k8t18", "name": "g
 
 ### `step.delta`
 
-Inkrementelle Daten für den aktuellen Schritt. Das `delta`-Objekt enthält ein `type`-Feld, das seine Form bestimmt.
+Data inkremental untuk langkah saat ini. Objek `delta` berisi kolom `type` yang menentukan bentuknya.
 
-**Beispiele** :
+**Contoh:**
 
-**`text`**:Inkrementelles Text-Token aus einem `model_output`-Schritt:
+**`text`:** Token teks inkremental dari langkah `model_output`:
 
 ```
 event: step.delta
@@ -186,32 +186,32 @@ event: step.delta
 data: {"index": 0, "delta": {"type": "text", "text": ", and I live in Germany." }, "event_type": "step.delta"}
 ```
 
-**`image`**:Base64-codierte Bilddaten aus einem `model_output`-Schritt:
+**`image`:** Data gambar berenkode Base64 dari langkah `model_output`:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "image", "mime_type": "image/jpeg", "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCg..."}, "event_type": "step.delta"}
 ```
 
-**`thought_summary`:** Zusammenfassung des Denkens aus einem `thought`-Schritt:
+**`thought_summary`:** Konten ringkasan pemikiran dari langkah `thought`:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "thought_summary", "content": {"type": "text", "text": "I need to find the GCD..."}}, "event_type": "step.delta"}
 ```
 
-**`arguments_delta`** : (Teil-)JSON-String für Funktionsaufrufargumente. Muss über Deltas hinweg akkumuliert werden:
+**`arguments_delta`:** String JSON (sebagian) untuk argumen panggilan fungsi. Harus diakumulasikan di seluruh delta:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "arguments_delta", "arguments": "{\"location\": \"San Francisco, CA\"}"}, "event_type": "step.delta"}
 ```
 
-Dies sind einige der häufigsten Delta-Typen. Die vollständige Liste aller Delta-Typen finden Sie in der [Referenz zur Interactions API](https://ai.google.dev/api/interactions?hl=de).
+Ini adalah beberapa jenis delta yang paling umum. Untuk mengetahui daftar lengkap semua jenis delta, lihat [referensi Interactions API](https://ai.google.dev/api/interactions?hl=id).
 
 ### `step.stop`
 
-Markiert das Ende eines Schritts. Enthält den `index` des Schritts.
+Menandai akhir langkah. Berisi `index` langkah.
 
 ```
 event: step.stop
@@ -220,7 +220,7 @@ data: {"index": 0, "event_type": "step.stop"}
 
 ### `interaction.completed`
 
-Wird gesendet, wenn die Interaktion abgeschlossen ist. Enthält das endgültige Interaktionsobjekt mit `usage`-Statistiken. Im nicht gestreamten Modus ist dies das Antwortobjekt der obersten Ebene. Enthält keine `steps` in der Antwort.
+Dikirim saat interaksi selesai. Berisi objek interaksi akhir dengan statistik `usage`. Dalam mode non-streaming, ini adalah objek respons tingkat atas itu sendiri. Tidak menyertakan `steps` dalam respons.
 
 ```
 event: interaction.completed
@@ -229,24 +229,24 @@ data: {"interaction": {"id": "v1_abc123", "status": "completed", "usage": {"tota
 
 ### `error`
 
-Wird gesendet, wenn während der Interaktion ein Fehler auftritt. Enthält ein Fehlerobjekt mit einer Nachricht und einem Code.
+Dikirim saat terjadi error selama interaksi. Berisi objek error dengan pesan dan kode.
 
 ```
 event: error
 data: {"error":{"message":"Deadline expired before operation could complete.","code":"gateway_timeout"},"event_type":"error"}
 ```
 
-## Streaming mit Tools
+## Streaming dengan alat
 
-Die Interactions API unterstützt das Streaming mit clientseitigen Tools (Funktionsaufrufe) und serverseitigen Tools (Google Suche, Codeausführung usw.) in einer einzigen Anfrage. Während des Streamings werden Tool-Aufrufe als typisierte Schritte im Ereignisstream angezeigt. Bei Funktionsaufrufen liefert das `step.start`-Ereignis den Funktionsnamen und `step.delta`-Ereignisse streamen die Argumente als JSON-Strings (`arguments_delta`). Sie müssen diese Deltas akkumulieren, um die vollständigen Argumente zu erhalten.
-Serverseitige Tools wie die Google Suche werden automatisch von der API ausgeführt und erzeugen `google_search_call`- und `google_search_result`-Schritte.
+Interactions API mendukung streaming dengan alat sisi klien (panggilan fungsi) dan alat sisi server (Google Penelusuran, Eksekusi Kode, dll.) dalam satu permintaan. Selama streaming, pemanggilan alat akan muncul sebagai langkah yang diketik dalam aliran peristiwa. Untuk panggilan fungsi, peristiwa `step.start` akan mengirimkan nama fungsi, dan peristiwa `step.delta` akan melakukan streaming argumen sebagai string JSON (`arguments_delta`). Anda harus mengakumulasikan delta ini untuk mendapatkan argumen lengkap.
+Alat sisi server seperti Google Penelusuran dijalankan secara otomatis oleh API, sehingga menghasilkan langkah `google_search_call` dan `google_search_result`.
 
-### Streaming mit Funktionsaufrufen
+### Streaming dengan panggilan fungsi
 
-Um Funktionsaufrufe mit Streaming auszuführen, muss der Client eine Multi-Turn-Unterhaltung verarbeiten:
+Untuk melakukan panggilan fungsi dengan streaming, klien harus menangani percakapan multi-giliran:
 
-1. **Turn 1 (Funktionsanfrage)** : Rufen Sie `interactions.create` mit `stream: true` und Ihren definierten `tools` auf. Die API streamt einen `function_call`-Schritt. Sie müssen die inkrementellen JSON-Strings für Argumente (`arguments_delta`) aus `step.delta`-Ereignissen akkumulieren, bis die Interaktion mit dem Status `requires_action` abgeschlossen ist.
-2. **Turn 2 (Ergebnis senden)** : Rufen Sie `interactions.create` noch einmal auf, übergeben Sie die `previous_interaction_id` (entsprechend der ID der ersten Interaktion) und senden Sie einen `function_result`-Block im `input`-Array. Dadurch wird der Stream fortgesetzt und das Modell kann seine endgültige Antwort generieren.
+1. **Giliran 1 (Permintaan Fungsi):** Panggil `interactions.create` dengan `stream: true` dan `tools` yang Anda tentukan. API akan melakukan streaming langkah `function_call`. Anda harus mengakumulasikan string JSON argumen inkremental (`arguments_delta`) dari peristiwa `step.delta` hingga interaksi selesai dengan status `requires_action`.
+2. **Giliran 2 (Mengirim Hasil):** Panggil `interactions.create` lagi, teruskan `previous_interaction_id` (yang cocok dengan ID interaksi pertama) dan kirim blok `function_result` dalam array `input`. Tindakan ini akan melanjutkan streaming, sehingga model dapat membuat respons akhirnya.
 
 ### Python
 
@@ -405,7 +405,7 @@ if (funcCallId && firstInteractionId && funcCallName) {
 
 ### REST
 
-**Turn 1**:Funktionsaufruf anfordern
+**Giliran 1:** Meminta panggilan fungsi
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -437,7 +437,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Turn 2**:Funktionsergebnis mit `previous_interaction_id` und `call_id` aus Turn 1 senden
+**Giliran 2:** Mengirim hasil fungsi menggunakan `previous_interaction_id` dan `call_id` dari Giliran 1
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -467,9 +467,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Streaming mit mehreren Tools
+### Streaming dengan beberapa alat
 
-Im folgenden Beispiel werden sowohl ein `function`-Tool als auch `google_search` in einer Anfrage verwendet:
+Contoh berikut menggunakan alat `function` dan `google_search` dalam satu permintaan:
 
 ### Python
 
@@ -673,9 +673,9 @@ event: done
 data: [DONE]
 ```
 
-## Streaming mit Denken
+## Streaming dengan pemikiran
 
-Wenn das Modell denkt, erhalten Sie `thought` Schritte mit zwei verschiedenen Delta-Typen: `thought_summary` (inkrementelle Text- oder Bildzusammenfassung) und `thought_signature` (eine verschlüsselte Darstellung der internen Logik des Modells, die als letztes Delta vor `step.stop` gesendet wird). Wenn `thinking_summaries` aktiviert ist, streamen `thought_summary`-Deltas eine Zusammenfassung der Logik des Modells. Weitere Informationen zum Denken finden Sie im [Leitfaden zum Denken](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=de).
+Saat model menggunakan penalaran, Anda akan menerima `thought` langkah dengan dua jenis delta yang berbeda: `thought_summary` (konten ringkasan teks atau gambar inkremental), dan `thought_signature` (representasi terenkripsi dari penalaran internal model, yang dikirim sebagai delta terakhir sebelum `step.stop`). Jika `thinking_summaries` diaktifkan, delta `thought_summary` akan menampilkan respons secara bertahap ringkasan penalaran model. Untuk mengetahui detail selengkapnya tentang pemikiran, lihat panduan [Pemikiran](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=id).
 
 ### Python
 
@@ -776,9 +776,12 @@ data: {"index":1,"step":{"type":"model_output"},"event_type":"step.start"}
 ...
 ```
 
-## Streaming mit Agenten
+## Streaming interaksi latar belakang
 
-Die Interactions API unterstützt Agenten wie Deep Research. Agenten verwenden `background=True` und geben Ergebnisse asynchron zurück. Sie können aber auch Agenteninteraktionen streamen, um Fortschrittsaktualisierungen und Zwischenschritte zu erhalten, sobald sie auftreten. Weitere Informationen finden Sie im [Leitfaden zu Deep Research](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=de).
+Interactions API mendukung model dan agen yang berjalan di latar belakang menggunakan `background=True`. Anda dapat melakukan streaming interaksi latar belakang ini untuk menerima update progres dan langkah-langkah perantara saat terjadi.
+
+Misalnya, saat melakukan streaming agen
+[Deep Research](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=id):
 
 ### Python
 
@@ -898,11 +901,11 @@ event: done
 data: [DONE]
 ```
 
-## Streaming der Bildgenerierung
+## Streaming pembuatan gambar
 
-Die Interactions API unterstützt das gleichzeitige Streaming mehrerer Ausgabemodalitäten. Wenn Sie sowohl `text` als auch `image` im `response_format` anfordern, können Sie verschachtelten Text und generierte Bilder im selben Stream erhalten.
+Interactions API mendukung streaming beberapa modalitas output secara bersamaan. Dengan meminta `text` dan `image` dalam `response_format`, Anda dapat menerima teks yang disisipkan dan gambar yang dibuat dalam aliran yang sama.
 
-Im folgenden Beispiel wird `gemini-3.1-flash-image-preview` (Nano Banana 2) verwendet, um nach Informationen zu suchen und eine Geschichte mit verschachtelten Illustrationen zu generieren.
+Contoh berikut menggunakan `gemini-3.1-flash-image-preview` (Nano Banana 2) untuk menelusuri informasi dan membuat cerita dengan ilustrasi yang disisipkan.
 
 ### Python
 
@@ -1056,24 +1059,24 @@ event: done
 data: [DONE]
 ```
 
-## Umgang mit unbekannten Ereignissen
+## Menangani peristiwa yang tidak dikenal
 
-Gemäß der Versionsverwaltungsrichtlinie der API können im Laufe der Zeit neue Ereignistypen und Delta-Typen hinzugefügt werden. Ihr Code sollte unbekannte Ereignistypen ordnungsgemäß verarbeiten. Protokollieren und überspringen Sie alle Ereignisse, die Sie nicht erkennen, anstatt einen Fehler auszulösen.
+Sesuai dengan kebijakan pembuatan versi API, jenis peristiwa dan jenis delta baru dapat ditambahkan seiring waktu. Kode Anda harus menangani jenis peristiwa yang tidak dikenal dengan baik—catat dan lewati peristiwa yang tidak Anda kenali, bukan menampilkan error.
 
-## Nächste Schritte
+## Langkah berikutnya
 
-- Weitere Informationen zur [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=de).
-- Funktionsaufrufe mit Tools erkunden.
-- Erfahren Sie mehr über [Denken](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=de) für verbesserte Logik
-- Probieren Sie den [Deep Research-Agent](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=de) für zeitaufwendige Aufgaben aus.
-- Alle Ereignistypen und Delta-Typen finden Sie in der [Referenz zur Interactions API](https://ai.google.dev/api/interactions?hl=de).
+- Pelajari [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=id) lebih lanjut.
+- Pelajari [Panggilan fungsi](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=id) dengan alat.
+- Pelajari [Penalaran](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=id) untuk penalaran yang ditingkatkan.
+- Coba [Agen Deep Research](https://ai.google.dev/gemini-api/docs/interactions/deep-research?hl=id) untuk tugas yang berjalan lama.
+- Lihat [referensi Interactions API](https://ai.google.dev/api/interactions?hl=id) untuk mengetahui semua jenis peristiwa dan jenis delta.
 
-Feedback geben
+Kirim masukan
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Zuletzt aktualisiert: 2026-05-21 (UTC).
+Terakhir diperbarui pada 2026-06-08 UTC.
 
-Haben Sie Feedback für uns?
+Ada masukan untuk kami?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-21 (UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-08 UTC."],[],[]]

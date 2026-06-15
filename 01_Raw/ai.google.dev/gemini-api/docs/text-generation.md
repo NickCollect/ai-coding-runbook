@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=tr
-fetched_at: 2026-06-08T05:39:05.305819+00:00
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=ja
+fetched_at: 2026-06-15T06:30:39.076083+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Metin oluşturma
+# テキスト生成
 
-Gemini API, metin, resim, video ve ses girişlerinden metin çıkışı oluşturabilir.
+Gemini API は、テキスト、画像、動画、音声の入力からテキスト出力を生成できます。
 
-Temel bir örnek:
+基本的な例を以下に示します。
 
 ### Python
 
@@ -125,7 +125,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -160,11 +160,11 @@ function main() {
 }
 ```
 
-## Gemini ile düşünme
+## Gemini で考える
 
-Gemini modellerinde genellikle varsayılan olarak ["düşünme"](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) özelliği etkindir. Bu özellik, modelin bir isteğe yanıt vermeden önce akıl yürütmesini sağlar.
+Gemini モデルでは、多くの場合、デフォルトで[「思考」](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)が有効になっています。これにより、モデルはリクエストに応答する前に推論を行うことができます。
 
-Her model, maliyet, gecikme ve zeka üzerinde kontrol sahibi olmanızı sağlayan farklı düşünce yapılandırmalarını destekler. Daha fazla ayrıntı için [düşünme kılavuzuna](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#set-budget) bakın.
+各モデルは、費用、レイテンシ、インテリジェンスを制御できるさまざまな思考構成をサポートしています。詳細については、[思考ガイド](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#set-budget)をご覧ください。
 
 ### Python
 
@@ -296,7 +296,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -336,9 +336,9 @@ function main() {
 }
 ```
 
-## Sistem talimatları ve diğer yapılandırmalar
+## システム指示とその他の設定
 
-Sistem talimatlarıyla Gemini modellerinin davranışını yönlendirebilirsiniz. Bunun için [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerationConfig) nesnesi iletin.
+システム指示を使用して Gemini モデルの動作を制御できます。そのためには、[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを渡します。
 
 ### Python
 
@@ -468,7 +468,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -510,8 +510,7 @@ function main() {
 }
 ```
 
-[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerationConfig)
-nesnesi, [sıcaklık](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerationConfig) gibi varsayılan oluşturma parametrelerini de geçersiz kılmanıza olanak tanır.
+[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを使用すると、[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) などのデフォルトの生成パラメータをオーバーライドすることもできます。
 
 ### Python
 
@@ -525,7 +524,7 @@ response = client.models.generate_content(
     model="gemini-3.5-flash",
     contents=["Explain how AI works"],
     config=types.GenerateContentConfig(
-        temperature=0.1
+        max_output_tokens=1000
     )
 )
 print(response.text)
@@ -543,7 +542,7 @@ async function main() {
     model: "gemini-3.5-flash",
     contents: "Explain how AI works",
     config: {
-      temperature: 0.1,
+      maxOutputTokens: 1000,
     },
   });
   console.log(response.text);
@@ -560,7 +559,7 @@ package main
 import (
   "context"
   "fmt"
-  "os"
+  "log"
   "google.golang.org/genai"
 )
 
@@ -572,14 +571,8 @@ func main() {
       log.Fatal(err)
   }
 
-  temp := float32(0.9)
-  topP := float32(0.5)
-  topK := float32(20.0)
-
   config := &genai.GenerateContentConfig{
-    Temperature:       &temp,
-    TopP:              &topP,
-    TopK:              &topK,
+    MaxOutputTokens:   1000,
     ResponseMIMEType:  "application/json",
   }
 
@@ -606,7 +599,7 @@ public class GenerateContentWithConfig {
 
     Client client = new Client();
 
-    GenerateContentConfig config = GenerateContentConfig.builder().temperature(0.1f).build();
+    GenerateContentConfig config = GenerateContentConfig.builder().maxOutputTokens(1000).build();
 
     GenerateContentResponse response =
         client.models.generateContent("gemini-3.5-flash", "Explain how AI works", config);
@@ -637,14 +630,12 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ge
       "stopSequences": [
         "Title"
       ],
-      "temperature": 1.0,
-      "topP": 0.8,
-      "topK": 10
+      "maxOutputTokens": 1000
     }
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -653,9 +644,7 @@ const apiKey = PropertiesService.getScriptProperties().getProperty('GEMINI_API_K
 
 function main() {
   const generationConfig = {
-    temperature: 1,
-    topP: 0.95,
-    topK: 40,
+    maxOutputTokens: 1000,
     responseFormat: { text: { mimeType: "text/plain" } },
   };
 
@@ -687,11 +676,11 @@ function main() {
 }
 ```
 
-Yapılandırılabilir parametrelerin ve açıklamalarının tam listesi için API referansımızdaki [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerationConfig) bölümüne bakın.
+構成可能なパラメータとその説明の完全なリストについては、API リファレンスの [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) をご覧ください。
 
-## Çok formatlı girişler
+## マルチモーダル入力
 
-Gemini API, çok formatlı girişleri destekler. Bu sayede metinle medya dosyalarını birleştirebilirsiniz. Aşağıdaki örnekte resim sağlama gösterilmektedir:
+Gemini API はマルチモーダル入力をサポートしており、テキストとメディア ファイルを組み合わせることができます。次の例は、画像を提供する方法を示しています。
 
 ### Python
 
@@ -852,7 +841,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   -d "@$TEMP_JSON"
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -899,14 +888,13 @@ function getImageData(url) {
 }
 ```
 
-Resim sağlamanın alternatif yöntemleri ve daha gelişmiş resim işleme hakkında bilgi edinmek için [Görüntü Anlama Rehberimizi](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr) inceleyin.
-API, [doküman](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr) ve [ses](https://ai.google.dev/gemini-api/docs/audio?hl=tr) girişlerini ve bu girişlerin anlaşılmasını da destekler.
+画像を提供する別の方法や、より高度な画像処理については、[画像理解ガイド](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)をご覧ください。この API は、[ドキュメント](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)の入力と理解もサポートしています。
 
-## Yanıtları akış şeklinde gösterme
+## ストリーミング レスポンス
 
-Varsayılan olarak, model yalnızca tüm oluşturma işlemi tamamlandıktan sonra yanıt verir.
+デフォルトでは、モデルは生成プロセス全体が完了した後にのみレスポンスを返します。
 
-Daha akıcı etkileşimler için, [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=tr#v1beta.GenerateContentResponse) örneklerini oluşturuldukça artımlı olarak almak üzere akışı kullanın.
+よりスムーズなインタラクションを実現するには、ストリーミングを使用して、[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) インスタンスが生成されるたびに増分で受信します。
 
 ### Python
 
@@ -1025,7 +1013,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:s
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1060,9 +1048,9 @@ function main() {
 }
 ```
 
-## Çok turlu görüşmeler (sohbet)
+## マルチターンの会話（チャット）
 
-SDK'larımız, birden fazla istem ve yanıt turunu bir sohbette toplama işlevi sunar. Böylece, sohbet geçmişini kolayca takip edebilirsiniz.
+SDK には、複数のプロンプトとレスポンスをチャットに収集する機能が用意されています。これにより、会話の履歴を簡単に追跡できます。
 
 ### Python
 
@@ -1222,7 +1210,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ge
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1270,7 +1258,7 @@ function main() {
 }
 ```
 
-Yayın, çok adımlı görüşmeler için de kullanılabilir.
+ストリーミングはマルチターンの会話にも使用できます。
 
 ### Python
 
@@ -1441,7 +1429,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:st
   }'
 ```
 
-### Apps Komut Dosyası
+### Apps Script
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1489,25 +1477,23 @@ function main() {
 }
 ```
 
-## İstem ipuçları
+## プロンプトに関するヒント
 
-Gemini'dan en iyi şekilde yararlanmayla ilgili öneriler için [istem mühendisliği kılavuzumuza](https://ai.google.dev/gemini/docs/prompting-strategies?hl=tr) göz atın.
+Gemini を最大限に活用するための提案については、[プロンプト エンジニアリング ガイド](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ja)をご覧ください。
 
-## Sırada ne var?
+## 次のステップ
 
-- [Google AI Studio'da Gemini](https://aistudio.google.com?hl=tr)'ı deneyin.
-- JSON benzeri yanıtlar için [yapılandırılmış çıkışlarla](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) deneme yapın.
-- Gemini'ın [görüntü](https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr),
-  [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=tr), [ses](https://ai.google.dev/gemini-api/docs/audio?hl=tr)
-  ve [doküman](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) anlama özelliklerini keşfedin.
-- Çok formatlı [dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide) hakkında bilgi edinin.
+- [Google AI Studio で Gemini](https://aistudio.google.com?hl=ja) を試す。
+- JSON のようなレスポンスの[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を試す。
+- Gemini の[画像](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)、[ドキュメントの理解機能について説明します。](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)
+- マルチモーダル [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)について学習する。
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-05-19 UTC.
+最終更新日 2026-06-10 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-19 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-10 UTC。"],[],[]]

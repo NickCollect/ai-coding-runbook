@@ -1,39 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=ja
-fetched_at: 2026-06-08T05:29:13.770614+00:00
+source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=vi
+fetched_at: 2026-06-15T06:22:29.426003+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# ドキュメントの理解
+# Hiểu tài liệu
 
-Gemini モデルは、ネイティブ ビジョンを使用してドキュメント全体のコンテキストを理解し、PDF 形式のドキュメントを処理できます。これは単なるテキスト抽出にとどまらず、Gemini は次のことができます。
+Các mô hình Gemini có thể xử lý tài liệu ở định dạng PDF, sử dụng thị giác tự nhiên để hiểu toàn bộ ngữ cảnh của tài liệu. Điều này không chỉ dừng lại ở việc trích xuất văn bản mà còn cho phép Gemini:
 
-- テキスト、画像、図、グラフ、表などのコンテンツを分析して解釈します。最大 1,000 ページの長いドキュメントでも可能です。
-- 情報を[構造化された出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)形式で抽出します。
-- ドキュメントの視覚要素とテキスト要素の両方に基づいて、要約を作成し、質問に回答します。
-- レイアウトと書式設定を保持したまま、ドキュメント コンテンツを（HTML などに）書き起こし、ダウンストリーム アプリケーションで使用します。
+- Phân tích và diễn giải nội dung, bao gồm văn bản, hình ảnh, sơ đồ, biểu đồ và bảng, ngay cả trong các tài liệu dài lên đến 1.000 trang.
+- Trích xuất thông tin thành các định dạng [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
+- Tóm tắt và trả lời câu hỏi dựa trên cả yếu tố hình ảnh và văn bản trong tài liệu.
+- Chuyển nội dung tài liệu thành văn bản (ví dụ: sang HTML), giữ nguyên bố cục và định dạng để sử dụng trong các ứng dụng tiếp theo.
 
-PDF 以外のドキュメントも同様に渡すことができますが、Gemini はそれらを通常のテキストとして認識するため、グラフや書式設定などのコンテキストは失われます。
+Bạn cũng có thể truyền các tài liệu không phải là PDF theo cách tương tự, nhưng Gemini sẽ coi các tài liệu đó là văn bản thông thường, do đó sẽ loại bỏ ngữ cảnh như biểu đồ hoặc định dạng.
 
-## PDF データをインラインで渡す
+## Truyền dữ liệu PDF nội tuyến
 
-PDF データを `generateContent` へのリクエストでインラインで渡すことができます。これは、小さなドキュメントや、後続のリクエストでファイルを参照する必要がない一時的な処理に最適です。リクエストのレイテンシを改善し、帯域幅の使用量を削減するため、複数ターンのインタラクションで参照する必要がある大きなドキュメントには[Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja#large-pdfs)
-を使用することをおすすめします。
+Bạn có thể truyền dữ liệu PDF nội tuyến trong yêu cầu đến `generateContent`. Phương thức này phù hợp nhất với các tài liệu nhỏ hơn hoặc quy trình xử lý tạm thời mà bạn không cần tham chiếu tệp trong các yêu cầu tiếp theo. Bạn nên sử dụng [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi#large-pdfs) cho những tài liệu lớn mà bạn cần tham khảo trong các lượt tương tác nhiều vòng để cải thiện độ trễ của yêu cầu và giảm mức sử dụng băng thông.
 
-次の例では、URL から PDF を取得して処理用にバイトに変換する方法を示します。
+Ví dụ sau đây cho bạn thấy cách tìm nạp một tệp PDF từ một URL và chuyển đổi tệp đó thành byte để xử lý:
 
 ### Python
 
@@ -191,7 +190,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-ローカル ファイルから PDF を読み取って処理することもできます。
+Bạn cũng có thể đọc một tệp PDF từ tệp cục bộ để xử lý:
 
 ### Python
 
@@ -292,13 +291,13 @@ func main() {
 }
 ```
 
-## Files API を使用して PDF をアップロードする
+## Tải tệp PDF lên bằng Files API
 
-大きなファイルの場合や、複数のリクエストでドキュメントを再利用する場合は、Files API を使用することをおすすめします。これにより、ファイルのアップロードとモデル リクエストが分離されるため、リクエストのレイテンシが改善され、帯域幅の使用量が削減されます。
+Bạn nên sử dụng Files API cho các tệp lớn hơn hoặc khi bạn dự định dùng lại một tài liệu trong nhiều yêu cầu. Điều này giúp cải thiện độ trễ của yêu cầu và giảm mức sử dụng băng thông bằng cách tách việc tải tệp lên khỏi các yêu cầu về mô hình.
 
-### URL からの大きな PDF
+### Tệp PDF lớn từ URL
 
-File API を使用すると、URL からの大きな PDF ファイルのアップロードと処理を簡素化できます。
+Sử dụng File API để đơn giản hoá việc tải lên và xử lý các tệp PDF lớn từ URL:
 
 ### Python
 
@@ -506,7 +505,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### ローカルに保存された大きな PDF
+### Các tệp PDF lớn được lưu trữ trên thiết bị
 
 ### Python
 
@@ -678,8 +677,7 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-`[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ja)` を呼び出すと、API がアップロードされたファイルを正常に保存したことを確認し、その
-メタデータを取得できます。一意なのは `name`（およびその拡張子である `uri`）のみです。
+Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và lấy siêu dữ liệu của tệp đó bằng cách gọi [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=vi). Chỉ có `name` (và theo đó là `uri`) là duy nhất.
 
 ### Python
 
@@ -711,9 +709,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## 複数の PDF を渡す
+## Truyền nhiều tệp PDF
 
-Gemini API は、ドキュメントとテキスト プロンプトの合計サイズがモデルのコンテキスト ウィンドウ内に収まる限り、1 回のリクエストで複数の PDF ドキュメント（最大 1, 000 ページ）を処理できます。
+Gemini API có thể xử lý nhiều tài liệu PDF (tối đa 1.000 trang) trong một yêu cầu duy nhất, miễn là kích thước kết hợp của các tài liệu và câu lệnh văn bản nằm trong cửa sổ ngữ cảnh của mô hình.
 
 ### Python
 
@@ -965,53 +963,50 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 詳細な技術情報
+## Chi tiết kỹ thuật
 
-Gemini は、最大 50 MB または 1,000 ページの PDF ファイルをサポートしています。この上限は、インライン データと Files API のアップロードの両方に適用されます。ドキュメント ページごとに 258 個のトークンが使用されます。
+Gemini hỗ trợ tệp PDF có kích thước tối đa 50 MB hoặc 1.000 trang. Giới hạn này áp dụng cho cả dữ liệu nội tuyến và nội dung tải lên bằng Files API. Mỗi trang tài liệu tương đương với 258 mã thông báo.
 
-[モデルのコンテキスト ウィンドウ以外に、ドキュメント内のピクセル数に具体的な制限はありませんが、大きなページは元のアスペクト比を維持したまま、最大解像度 3, 072 x 3, 072 に縮小され、小さなページは 768 x 768 ピクセルに拡大されます。](https://ai.google.dev/gemini-api/docs/long-context?hl=ja)サイズが小さいページでは帯域幅以外のコスト削減はなく、解像度が高いページではパフォーマンスの向上はありません。
+Mặc dù không có giới hạn cụ thể về số lượng pixel trong một tài liệu ngoài [cửa sổ ngữ cảnh](https://ai.google.dev/gemini-api/docs/long-context?hl=vi) của mô hình, nhưng các trang lớn hơn sẽ được thu nhỏ xuống độ phân giải tối đa là 3072 x 3072 trong khi vẫn giữ nguyên tỷ lệ khung hình ban đầu, còn các trang nhỏ hơn sẽ được phóng to lên 768 x 768 pixel. Không có mức giảm chi phí cho các trang có kích thước nhỏ hơn, ngoài băng thông hoặc cải thiện hiệu suất cho các trang có độ phân giải cao hơn.
 
-### Gemini 3 モデル
+### Mô hình Gemini 3
 
-Gemini 3 では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。解像度をメディア要素ごとに低、中、高に設定できるようになりました。この追加により、PDF ドキュメントの処理が更新されました。
+Gemini 3 giới thiệu chế độ kiểm soát chi tiết đối với quy trình xử lý hình ảnh đa phương thức bằng tham số `media_resolution`. Giờ đây, bạn có thể đặt độ phân giải thành thấp, trung bình hoặc cao cho từng phần nội dung nghe nhìn. Với việc bổ sung này, quy trình xử lý tài liệu PDF đã được cập nhật:
 
-1. **ネイティブ テキストの組み込み:** PDF にネイティブに埋め込まれたテキストが抽出され、モデルに提供されます。
-2. **課金とトークンのレポート:**
-   - PDF から抽出された**ネイティブ テキスト** に由来するトークンは**課金されません** 。
-   - API レスポンスの `usage_metadata` セクションで、PDF ページ（画像として）の処理から生成されたトークンは、以前のバージョンの一部とは異なり、個別の `DOCUMENT` モダリティではなく、`IMAGE` モダリティでカウントされるようになりました。
+1. **Bao gồm văn bản gốc:** Văn bản được nhúng nguyên bản trong tệp PDF sẽ được trích xuất và cung cấp cho mô hình.
+2. **Báo cáo về việc thanh toán và mã thông báo:**
+   - Bạn **không bị tính phí** cho các token bắt nguồn từ **văn bản gốc** được trích xuất trong tệp PDF.
+   - Trong phần `usage_metadata` của phản hồi API, các mã thông báo được tạo từ việc xử lý các trang PDF (dưới dạng hình ảnh) hiện được tính theo phương thức `IMAGE` chứ không phải phương thức `DOCUMENT` riêng biệt như trong một số phiên bản trước.
 
-メディア解像度パラメータの詳細については、
-[メディア解像度](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja)ガイドをご覧ください。
+Để biết thêm thông tin về tham số độ phân giải của nội dung nghe nhìn, hãy xem hướng dẫn về [Độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi).
 
-### ドキュメント タイプ
+### Các loại tài liệu
 
-技術的には、ドキュメントの理解に TXT、Markdown、HTML、XML などの他の MIME タイプを渡すことができます。ただし、ドキュメント ビジョンは**PDF のみを意味のあるものとして認識します** 。 他のタイプは純粋なテキストとして抽出され、モデルはこれらのファイルのレンダリングで表示される内容を解釈できません。グラフ、図、HTML タグ、Markdown の書式設定など、ファイルタイプ固有のものは失われます。
+Về mặt kỹ thuật, bạn có thể truyền các loại MIME khác để hiểu tài liệu, chẳng hạn như TXT, Markdown, HTML, XML, v.v. Tuy nhiên, tính năng thị giác tài liệu ***chỉ hiểu được PDF một cách có ý nghĩa***. Các loại khác sẽ được trích xuất dưới dạng văn bản thuần tuý và mô hình sẽ không thể diễn giải những gì chúng ta thấy trong quá trình hiển thị các tệp đó. Mọi thông tin cụ thể về loại tệp như biểu đồ, sơ đồ, thẻ HTML, định dạng Markdown, v.v. sẽ bị mất.
 
-他のファイル入力方法については、
-[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
+Để tìm hiểu về các phương thức nhập tệp khác, hãy xem hướng dẫn [Phương thức nhập tệp](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi).
 
-### ベスト プラクティス
+### Các phương pháp hay nhất
 
-最良の結果を得るために、次のことを行います。
+Để có kết quả tốt nhất:
 
-- アップロードする前に、ページを正しい向きに回転させます。
-- ぼやけたページは使用しないでください。
-- 単一のページを使用する場合は、ページの後にテキスト プロンプトを配置します。
+- Xoay các trang theo đúng hướng trước khi tải lên.
+- Tránh các trang bị mờ.
+- Nếu sử dụng một trang duy nhất, hãy đặt câu lệnh văn bản sau trang.
 
-## 次のステップ
+## Bước tiếp theo
 
-詳細については、次のリソースをご覧ください。
+Để tìm hiểu thêm, hãy xem các tài nguyên sau:
 
-- [ファイルのプロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini API は、テキスト、画像、音声、動画データを使用したプロンプト（マルチモーダル プロンプトとも呼ばれます）をサポートしています。
-- [システム指示](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions):
-  システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
+- [Chiến lược đặt câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide): Gemini API hỗ trợ đặt câu lệnh bằng dữ liệu văn bản, hình ảnh, âm thanh và video, còn được gọi là đặt câu lệnh đa phương thức.
+- [Hướng dẫn hệ thống](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#system-instructions): Hướng dẫn hệ thống giúp bạn điều hướng hành vi của mô hình dựa trên nhu cầu và trường hợp sử dụng cụ thể của bạn.
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-06-01 UTC。
+Cập nhật lần gần đây nhất: 2026-06-01 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]

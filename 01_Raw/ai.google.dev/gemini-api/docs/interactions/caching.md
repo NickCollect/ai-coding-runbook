@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/caching?hl=ko
-fetched_at: 2026-06-08T05:36:43.020649+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/caching?hl=fr
+fetched_at: 2026-06-15T06:31:51.436795+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-의견 보내기
+Envoyer des commentaires
 
-# 컨텍스트 캐싱
+# mise en cache du contexte
 
-일반적인 AI 워크플로에서는 동일한 입력 토큰을 모델에 반복적으로 전달할 수 있습니다. Gemini API는 성능과 비용을 최적화하기 위해 암시적 캐싱을 제공합니다.
+Dans un workflow d'IA typique, vous pouvez transmettre les mêmes jetons d'entrée à un modèle à plusieurs reprises. L'API Gemini propose une mise en cache implicite pour optimiser les performances et les coûts.
 
-## 암시적 캐싱
+## Mise en cache implicite
 
-암시적 캐싱은 모든 Gemini 2.5 이상 모델에서 기본적으로 사용 설정됩니다. 요청이 캐시에 적중하면 비용 절감액이 자동으로 전달됩니다. 이를 사용 설정하기 위해 별도로 취해야 할 조치는 없습니다. 컨텍스트 캐싱의 최소 입력 토큰 수는 각 모델의 다음 표에 나와 있습니다.
+La mise en cache implicite est activée par défaut pour tous les modèles Gemini 2.5 et ultérieurs. Nous répercutons automatiquement les économies de coûts si votre requête atteint les caches. Aucune action n'est requise de votre part pour activer cette fonctionnalité. Le nombre minimal de jetons d'entrée pour la mise en cache du contexte est indiqué dans le tableau suivant pour chaque modèle :
 
-| 모델 | 최소 토큰 한도 |
+| Modèle | Limite minimale de jetons |
 | --- | --- |
-| Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro 프리뷰 | 4096 |
-| Gemini 2.5 Flash | 2048 |
-| Gemini 2.5 Pro | 2048 |
+| Gemini 3.5 Flash | 4096 |
+| Preview Gemini 3.1 Pro | 4096 |
+| Gemini 2.0 Flash | 2048 |
+| Gemini 2.5 Pro | 2048 |
 
-암시적 캐시 적중 가능성을 높이려면 다음 안내를 따르세요.
+Pour augmenter les chances d'un succès de cache implicite :
 
-- 프롬프트 시작 부분에 크고 공통적인 콘텐츠를 배치해 보세요.
-- 짧은 시간 내에 유사한 프리픽스를 가진 요청을 전송해 보세요.
+- Essayez de placer les contenus volumineux et courants au début de votre requête.
+- Essayer d'envoyer des requêtes avec un préfixe similaire en peu de temps
 
-응답 객체의 `usage_metadata` (Python) 또는 `usageMetadata` (JavaScript) 필드에서 캐시 적중된 토큰 수를 확인할 수 있습니다.
+Vous pouvez voir le nombre de jetons qui ont été des accès au cache dans le champ `usage_metadata` (Python) ou `usageMetadata` (JavaScript) de l'objet de réponse.
 
-의견 보내기
+Envoyer des commentaires
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-최종 업데이트: 2026-06-02(UTC)
+Dernière mise à jour le 2026/06/02 (UTC).
 
-의견을 전달하고 싶나요?
+Voulez-vous nous donner plus d'informations ?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-02(UTC)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/02 (UTC)."],[],[]]

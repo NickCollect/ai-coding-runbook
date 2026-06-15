@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=ja
-fetched_at: 2026-06-08T05:36:57.216930+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=zh-CN
+fetched_at: 2026-06-15T06:30:42.773837+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-フィードバックを送信
+发送反馈
 
-# Gemini が考えています
+# Gemini 正在思考
 
-[Gemini 3 および 2.5 シリーズのモデル](https://ai.google.dev/gemini-api/docs/models?hl=ja)は、「思考プロセス」を使用して推論と多段階計画の能力を大幅に向上させているため、コーディング、高度な数学、データ分析などの複雑なタスクに非常に効果的です。
+[Gemini 3 和 2.5 系列模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)采用“思考过程”，可显著提升推理和多步规划能力，因此非常适合处理编码、高等数学和数据分析等复杂任务。
 
-思考モデルを使用すると、Gemini は回答する前に内部で推論を行います。Interactions API は、`thought` ステップ（`steps` 配列の関数呼び出し、ユーザー入力、モデル出力とともに時系列で表示される専用ステップ）を介してこの推論を表面化します。
+使用思考模型时，Gemini 会在内部进行推理，然后再做出回答。Interactions API 通过 `thought` 步骤（按时间顺序显示在 `steps` 数组中的专用步骤）展示这种推理过程。
 
-すべての思考ステップには次の 2 つのフィールドが含まれています。
+每个思考步骤都包含两个字段：
 
-| フィールド | 必須 | 説明 |
+| 字段 | 必填 | 说明 |
 | --- | --- | --- |
-| `signature` | ✅ はい | モデルの内部推論状態を暗号化した表現。モデルが最小限の推論を行う場合でも、常に存在します。 |
-| `summary` | ❌ 不可 | 理由を要約したコンテンツ（テキストや画像など）の配列。[`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=ja) 構成、モデルが十分な推論を実行したかどうか、コンテンツ タイプ（画像潜在空間にテキストの要約がない場合など）によっては、空になることがあります。 |
+| `signature` | ✅ 是 | 模型内部推理状态的加密表示形式。始终存在，即使模型执行的推理最少也是如此。 |
+| `summary` | ❌ 否 | 总结推理过程的内容（文本和/或图片）数组。可能会为空，具体取决于 [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=zh-cn) 配置、模型是否进行了足够的推理，或者内容类型（例如，图片潜在空间可能没有文本摘要）。 |
 
-## 思考とのやり取り
+## 与思考的互动
 
-思考モデルとのインタラクションを開始する手順は、他のインタラクション リクエストと同様です。`model` フィールドで、[思考サポート付きのモデル](#thinking-levels)のいずれかを指定します。
+与思考模型互动与任何其他互动请求类似。在 `model` 字段中指定[支持思考的模型](#thinking-levels)之一：
 
 ### Python
 
@@ -75,9 +75,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 思考の要約
+## 思考总结
 
-思考の要約は、モデルの内部推論プロセスに関する分析情報を提供します。デフォルトでは、最終出力のみが返されます。`thinking_summaries` を使用して思考の要約を有効にできます。
+思考总结可提供对模型内部推理过程的洞见。
+默认情况下，仅返回最终输出。您可以使用 `thinking_summaries` 启用思路总结：
 
 ### Python
 
@@ -160,22 +161,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-次のような場合、思考ブロックには**要約のない署名のみ**が含まれることがあります。
+在以下情况下，思想块可能**仅包含签名，而不包含摘要**：
 
-- 単純なリクエスト。モデルが要約を生成するのに十分な推論を行っていない
-- `thinking_summaries: "none"`、要約が明示的に無効になっている場合
-- 画像などの特定の種類の思考コンテンツには、テキストの要約がない場合があります。
+- 简单请求，模型未进行充分推理来生成摘要
+- `thinking_summaries: "none"`，其中明确停用了摘要
+- 某些想法内容类型（例如图片）可能没有文字摘要
 
-コードでは、`summary` が空または存在しない思考ブロックを常に処理する必要があります。
+您的代码应始终处理 `summary` 为空或缺失的思考块。
 
-## 思考を伴うストリーミング
+## 包含思考过程的流式传输
 
-ストリーミングを使用して、生成中に思考の増分要約を受け取ります。思考ブロックは、次の 2 つの異なるデルタタイプでサーバー送信イベント（SSE）を使用して配信されます。
+使用流式传输在生成期间接收增量思维摘要。
+系统会使用服务器发送的事件 (SSE) 传送思路块，其中包含两种不同的增量类型：
 
-| デルタタイプ | 次を含む | 送信日時 |
+| 增量类型 | 包含 | 发送时间 |
 | --- | --- | --- |
-| `thought_summary` | テキストまたは画像の要約コンテンツ | 増分サマリーを含む 1 つ以上のデルタ |
-| `thought_signature` | 暗号署名 | `step.stop` の前の最後の差分処理 |
+| `thought_summary` | 文字或图片摘要内容 | 一个或多个增量（带有增量摘要） |
+| `thought_signature` | 加密签名 | `step.stop`之前的最后一个增量 |
 
 ### Python
 
@@ -278,7 +280,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-ストリーミング レスポンスはサーバー送信イベント（SSE）を使用し、ステップとイベントで構成されます。例:
+流式回答使用服务器发送的事件 (SSE)，由步骤和事件组成，例如：
 
 ```
 event: interaction.created
@@ -309,18 +311,18 @@ event: done
 data: [DONE]
 ```
 
-## 思考の制御
+## 控制思维
 
-Gemini モデルはデフォルトで動的思考を行い、リクエストの複雑さに基づいて推論の労力を自動的に調整します。この動作は、`thinking_level` パラメータを使用して制御できます。
+Gemini 模型默认采用动态思维，会根据请求的复杂程度自动调整推理力度。您可以使用 `thinking_level` 参数控制此行为。
 
-| モデル | デフォルトの思考 | サポートされているレベル |
+| 模型 | 默认思维 | 支持的级别 |
 | --- | --- | --- |
-| gemini-3.1-pro-preview | オン（高） | 低、中、高 |
-| gemini-3-flash-preview | オン（高） | 最小、低、中、高 |
-| gemini-3-pro-preview | オン（高） | 低、高 |
-| gemini-2.5-pro | オン | 低、中、高 |
-| gemini-2.5-flash | オン | 低、中、高 |
-| gemini-2.5-flash-lite | オフ | 低、中、高 |
+| gemini-3.1-pro-preview | 开启（高） | 低、中、高 |
+| gemini-3-flash-preview | 开启（高） | 极低、低、中、高 |
+| gemini-3-pro-preview | 开启（高） | 低、高 |
+| gemini-2.5-pro | 开启 | 低、中、高 |
+| gemini-2.5-flash | 开启 | 低、中、高 |
+| gemini-2.5-flash-lite | 关闭 | 低、中、高 |
 
 ### Python
 
@@ -372,27 +374,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 思考シグネチャ
+## 思考签名
 
-思考シグネチャは、モデルの内部推論を暗号化したものです。マルチターン インタラクション全体で推論の継続性を維持する必要があります。
+思考特征是模型内部推理的加密表示形式。它们需要在多轮互动中保持推理的连续性。
 
-Interactions API を使用すると、`generateContent` API よりもはるかに簡単に思考シグネチャを処理できます。
+与 `generateContent` API 相比，Interactions API 可让处理意念签名变得更加简单。
 
-### ステートフル モード（推奨）
+### 有状态模式（推荐）
 
-デフォルトでは、ステートフル モードで Interactions API を使用すると（`store: true` を設定し、後続のターンで `previous_interaction_id` を渡す）、サーバーはすべての思考ブロックとシグネチャを含む会話の状態を自動的に管理します。このモードでは、署名に関して何もする必要はありません。これらはすべてサーバーサイドで処理されます。
+默认情况下，当您在有状态模式下使用 Interactions API 时（通过设置 `store: true` 并在后续轮次中传递 `previous_interaction_id`），服务器会自动管理对话状态，包括所有思考块和签名。在此模式下，您无需针对签名执行任何操作。它们完全在服务器端处理。
 
-### ステートレス モード
+### 无状态模式
 
-会話の状態を自分で管理し（ステートレス モード）、各リクエストで入力と出力の完全な履歴を渡す場合:
+如果您自行管理对话状态（无状态模式），并在每次请求中传递完整的输入和输出历史记录，请执行以下操作：
 
-- すべての `thought` ブロックは、モデルから受信したとおりに常に再送信しなければなりません。
-- 思考ブロックには、モデルが推論を継続するために必要なシグネチャが含まれているため、履歴から思考ブロックを削除したり変更したりしないでください。
-- セッション内でモデルを切り替える場合でも、前のモデルの思考ブロックを再送信する必要があります。バックエンドが互換性を管理します。
+- 您**必须**始终完全按照从模型收到的方式重新发送所有 `thought` 代码块。
+- 您**不应**从历史记录中移除或修改思考块，因为它们包含模型继续推理所需的签名。
+- 在会话中切换模型时，您仍应重新发送之前模型的思考块。后端会管理兼容性。
 
-## 料金
+## 价格
 
-思考が有効になっている場合、レスポンスの料金は出力トークンと思考トークンの合計です。生成された思考トークンの合計数は、`total_thought_tokens` フィールドから取得できます。
+开启思考功能后，回答价格是输出 token 和思考 token 的总和。您可以从 `total_thought_tokens` 字段获取生成的思考令牌总数。
 
 ### Python
 
@@ -408,32 +410,32 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-思考モデルは、最終的なレスポンスの質を高めるために完全な思考を生成し、思考プロセスに関する分析情報を提供するために[要約](#summaries)を出力します。料金は、API から要約のみが出力される場合でも、モデルが生成する必要がある思考トークンの合計数に基づいて計算されます。
+思考模型会生成完整的想法，以提高最终回答的质量，然后输出[总结](#summaries)，以便深入了解思考过程。尽管 API 只输出摘要，但价格仍基于模型需要生成的完整思考令牌数。
 
-トークンの詳細については、[トークン数のカウント](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=ja)をご覧ください。
+如需详细了解令牌，请参阅[令牌计数](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-cn)指南。
 
-## ベスト プラクティス
+## 最佳做法
 
-次のガイドラインに沿って、思考モデルを効率的に使用します。
+遵循以下准则，可高效使用思考模型。
 
-- **推論を確認する**: 思考の要約を分析して、失敗を理解し、プロンプトを改善します。
-- **思考予算を制御する**: 長い出力に対してモデルの思考を減らすようにプロンプトを送信し、トークンを節約します。
-- **簡単なタスク**: 事実の取得や分類に最小限の思考を使用します（例: 「DeepMind はどこで設立されましたか？」）。
-- **中程度のタスク**: 概念の比較や創造的な推論（電気自動車とハイブリッド車の比較など）には、デフォルトの思考を使用します。
-- **複雑なタスク**: 高度なコーディング、数学、複数ステップの計画（AIME の数学の問題を解くなど）には、最大思考を使用します。
+- **查看推理过程**：分析思维总结，了解失败原因并改进提示。
+- **控制思考预算**：提示模型减少思考，以节省 token。
+- **简单任务**：只需少量思考即可完成事实检索或分类（例如“DeepMind 是在哪里成立的？”）。
+- **中等任务**：使用默认的思考模式来比较概念或进行创意推理（例如，比较电动汽车和混合动力汽车）。
+- **复杂任务**：使用最大思考量来处理高级编码、数学或多步规划任务（例如，解决 AIME 数学问题）。
 
-## 次のステップ
+## 后续步骤
 
-- [テキスト生成](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ja): 基本的なテキスト レスポンス
-- [関数呼び出し](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ja): ツールに接続する
-- [Gemini 3 ガイド](https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=ja): モデル固有の機能
+- [文本生成](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=zh-cn)：基本文本回答
+- [函数调用](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-cn)：连接到工具
+- [Gemini 3 指南](https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=zh-cn)：特定于模型的功能
 
-フィードバックを送信
+发送反馈
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最終更新日 2026-06-01 UTC。
+最后更新时间 (UTC)：2026-06-01。
 
-ご意見をお聞かせください
+需要向我们提供更多信息？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-01。"],[],[]]

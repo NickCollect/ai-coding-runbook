@@ -1,37 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=fr
-fetched_at: 2026-06-08T05:34:18.746234+00:00
-title: "G\u00e9n\u00e9rer de la musique avec Lyria\u00a03 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=he
+fetched_at: 2026-06-15T06:27:14.274300+00:00
+title: "\u05d0\u05d9\u05da \u05d9\u05d5\u05e6\u05e8\u05d9\u05dd \u05de\u05d5\u05d6\u05d9\u05e7\u05d4 \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Envoyer des commentaires
+שליחת משוב
 
-# Générer de la musique avec Lyria 3
+# איך יוצרים מוזיקה באמצעות Lyria 3
 
-Lyria 3 est la famille de modèles de génération de musique de Google, disponible via l'API Gemini. Avec Lyria 3, vous pouvez générer de l'audio stéréo de haute qualité à 44, 1 kHz à partir de requêtes textuelles ou d'images. Ces modèles offrent une cohérence structurelle, y compris les voix, les paroles synchronisées et les arrangements instrumentaux complets.
+‫Lyria 3 היא משפחת המודלים של Google ליצירת מוזיקה, שזמינה דרך Gemini API. עם Lyria 3, אתם יכולים ליצור אודיו סטריאו באיכות גבוהה של 44.1 kHz מהנחיות טקסט או מתמונות. המודלים האלה מספקים קוהרנטיות מבנית, כולל שירה, מילים מתוזמנות ועיבודים מלאים של כלי נגינה.
 
-La famille Lyria 3 comprend deux modèles :
+משפחת Lyria 3 כוללת שני מודלים:
 
-| Modèle | ID du modèle | Application idéale | Durée | Sortie |
+| מודל | מזהה דגם | הכי טוב עבור | משך | פלט |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | Clips courts, boucles, extraits | 30 secondes | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | Chansons complètes avec des couplets, des refrains et des ponts | Quelques minutes (contrôlables via la requête) | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | קליפים קצרים, לופים, תצוגות מקדימות | ‫30 שניות | MP3 |
+| ‫**Lyria 3 Pro** | `lyria-3-pro-preview` | שירים באורך מלא עם בתים, פזמונים וגשרים | כמה דקות (ניתן לשלוט באמצעות ההנחיה) | MP3 |
 
-Les deux modèles peuvent être utilisés avec la méthode `generateContent` standard et la nouvelle [API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=fr), qui accepte les entrées multimodales (texte et images) et produit de l'audio **stéréo haute fidélité à 44,1 kHz**.
+אפשר להשתמש בשני המודלים באמצעות ה-method הרגילה `generateContent` ו-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he) החדש. המודלים תומכים בקלט מולטי-מודאלי (טקסט ותמונות) ומפיקים אודיו **סטריאו באיכות גבוהה של 44.1kHz**.
 
-## Générer un extrait musical
+## יצירת קליפ מוזיקה
 
-Le modèle Lyria 3 Clip génère toujours un extrait de **30 secondes**. Pour générer un clip, appelez la méthode `generateContent` avec une invite textuelle. La réponse inclut toujours les paroles et la structure du morceau générées, ainsi que l'audio.
+מודל Lyria 3 Clip תמיד יוצר קליפ באורך **30 שניות**. כדי ליצור קליפ, קוראים ל-method‏ `generateContent` עם הנחיית טקסט. התשובה תמיד כוללת את המילים שנוצרו ואת מבנה השיר לצד האודיו.
 
 ### Python
 
@@ -184,7 +184,7 @@ curl -s -X POST \
   }'
 ```
 
-### C#
+### C#‎
 
 ```
 using System.Threading.Tasks;
@@ -212,9 +212,9 @@ public class GenerateMusicClip {
 }
 ```
 
-## Générer une chanson complète
+## יצירת שיר באורך מלא
 
-Utilisez le modèle `lyria-3-pro-preview` pour générer des titres complets de quelques minutes. Le modèle Pro comprend la structure musicale et peut créer des compositions avec des couplets, des refrains et des ponts distincts. Vous pouvez influencer la durée en la spécifiant dans votre requête (par exemple, "crée une chanson de deux minutes") ou en utilisant des [codes temporels](#timing) pour définir la structure.
+אפשר להשתמש במודל `lyria-3-pro-preview` כדי ליצור שירים באורך מלא שנמשכים כמה דקות. מודל Pro מבין את המבנה המוזיקלי ויכול ליצור קומפוזיציות עם בתים, פזמונים וגשרים מובחנים. אתם יכולים להשפיע על משך השיר על ידי ציון המשך בהנחיה (למשל, "צור שיר באורך 2 דקות") או על ידי שימוש [בחותמות זמן](#timing) כדי להגדיר את המבנה.
 
 ### Python
 
@@ -278,7 +278,7 @@ curl -s -X POST \
   }'
 ```
 
-### C#
+### C#‎
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -289,9 +289,9 @@ var response = await client.Models.GenerateContentAsync(
 );
 ```
 
-## Sélectionner le format de sortie
+## בחירת פורמט הפלט
 
-Par défaut, les modèles Lyria 3 génèrent de l'audio au format **MP3**. Pour Lyria 3 Pro, vous pouvez également demander le résultat au format **WAV** en définissant `response_format` dans `generationConfig`.
+כברירת מחדל, מודלים של Lyria 3 יוצרים אודיו בפורמט **MP3**. ב-Lyria 3 Pro, אפשר גם לבקש את הפלט בפורמט **WAV** על ידי הגדרת `response_format` ב-`generationConfig`.
 
 ### Python
 
@@ -349,7 +349,7 @@ GenerateContentResponse response = client.models.generateContent(
     config);
 ```
 
-### C#
+### C#‎
 
 ```
 var config = new GenerateContentConfig {
@@ -384,9 +384,9 @@ curl -s -X POST \
   }'
 ```
 
-## Analyser la réponse
+## ניתוח התשובה
 
-La réponse de Lyria 3 comporte plusieurs parties. Les parties textuelles contiennent les paroles générées ou une description JSON de la structure du morceau. Les parties avec `inline_data` contiennent les octets audio.
+התשובה מ-Lyria 3 מכילה כמה חלקים. חלקים של טקסט מכילים את המילים שנוצרו או תיאור JSON של מבנה השיר. החלקים עם `inline_data` מכילים את בייטי האודיו.
 
 ### Python
 
@@ -480,7 +480,7 @@ if (audioData != null) {
 }
 ```
 
-### C#
+### C#‎
 
 ```
 var lyrics = new List<string>();
@@ -512,9 +512,9 @@ if (audioData != null) {
 curl ... | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 -d > output.mp3
 ```
 
-## Générer de la musique à partir d'images
+## יצירת מוזיקה מתמונות
 
-Lyria 3 accepte les entrées multimodales. Vous pouvez fournir jusqu'à **10 images** en plus de votre requête textuelle. Le modèle composera de la musique inspirée du contenu visuel.
+‫Lyria 3 תומך בקלט מרובה-אופנים – אתם יכולים לספק עד **10 תמונות** לצד הנחיית הטקסט, והמודל ייצור מוזיקה בהשראת התוכן החזותי.
 
 ### Python
 
@@ -621,7 +621,7 @@ curl -s -X POST \
   }"
 ```
 
-### C#
+### C#‎
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -635,9 +635,9 @@ var response = await client.Models.GenerateContentAsync(
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/desert_sunset.jpg)
 
-## Fournir des paroles personnalisées
+## ציון מילות שיר מותאמות אישית
 
-Vous pouvez écrire vos propres paroles et les inclure dans la requête. Utilisez des balises de section comme `[Verse]`, `[Chorus]` et `[Bridge]` pour aider le modèle à comprendre la structure du morceau :
+אתם יכולים לכתוב מילים משלכם ולכלול אותן בהנחיה. כדי לעזור למודל להבין את מבנה השיר, כדאי להשתמש בתגי קטע כמו `[Verse]`, `[Chorus]` ו-`[Bridge]`:
 
 ### Python
 
@@ -765,7 +765,7 @@ GenerateContentResponse response = client.models.generateContent(
     prompt);
 ```
 
-### C#
+### C#‎
 
 ```
 var prompt = @"
@@ -816,9 +816,9 @@ curl -s -X POST \
 
 ](https://storage.googleapis.com/generativeai-downloads/songs/Neon%20Echoes_Lyrics.webm)
 
-## Contrôler le timing et la structure
+## שליטה בתזמון ובמבנה
 
-Vous pouvez spécifier exactement ce qui se passe à des moments précis de la chanson à l'aide de codes temporels. Cela permet de contrôler le moment où les instruments entrent en jeu, où les paroles sont diffusées et comment le morceau progresse :
+אתם יכולים לציין בדיוק מה קורה ברגעים מסוימים בשיר באמצעות חותמות זמן. התכונה הזו שימושית כדי לקבוע מתי כלי נגינה נכנסים, מתי המילים מוצגות ואיך השיר מתקדם:
 
 ### Python
 
@@ -898,7 +898,7 @@ GenerateContentResponse response = client.models.generateContent(
     prompt);
 ```
 
-### C#
+### C#‎
 
 ```
 var prompt = @"
@@ -933,9 +933,9 @@ curl -s -X POST \
   }'
 ```
 
-## Générer des pistes instrumentales
+## יצירת טראקים אינסטרומנטליים
 
-Pour la musique de fond, les bandes originales de jeux ou tout cas d'utilisation où les voix ne sont pas nécessaires, vous pouvez demander au modèle de produire des pistes instrumentales uniquement :
+כדי ליצור מוזיקת רקע, פסקולים למשחקים או כל מקרה שימוש אחר שלא דורש שירה, אפשר להנחות את המודל ליצור טראקים אינסטרומנטליים בלבד:
 
 ### Python
 
@@ -979,7 +979,7 @@ GenerateContentResponse response = client.models.generateContent(
         + "video game style. Instrumental only, no vocals.");
 ```
 
-### C#
+### C#‎
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -1005,9 +1005,9 @@ curl -s -X POST \
   }'
 ```
 
-## Générer de la musique dans différentes langues
+## יצירת מוזיקה בשפות שונות
 
-Lyria 3 génère des paroles dans la langue de votre requête. Pour générer une chanson avec des paroles en français, rédigez votre requête en français. Le modèle adapte son style vocal et sa prononciation à la langue.
+‫Lyria 3 יוצר מילים לשירים בשפה שבה כתבתם את ההנחיה. כדי ליצור שיר עם מילים בצרפתית, כותבים את ההנחיה בצרפתית. המודל מתאים את סגנון הקול וההגייה שלו לשפה.
 
 ### Python
 
@@ -1055,7 +1055,7 @@ GenerateContentResponse response = client.models.generateContent(
         + "la guitare acoustique.");
 ```
 
-### C#
+### C#‎
 
 ```
 var response = await client.Models.GenerateContentAsync(
@@ -1082,14 +1082,14 @@ curl -s -X POST \
   }'
 ```
 
-## Intelligence du modèle
+## הבינה של המודל
 
-Lyria 3 analyse le processus de votre requête, où le modèle raisonne à travers la structure musicale (intro, couplet, refrain, pont, etc.) en fonction de votre requête.
-Cela se produit avant la génération de l'audio et garantit la cohérence structurelle et la musicalité.
+מודל Lyria 3 מנתח את תהליך ההנחיה שבו המודל מנמק את המבנה המוזיקלי (פתיחה, בית, פזמון, גשר וכו') על סמך ההנחיה.
+התהליך הזה מתרחש לפני יצירת האודיו, והוא מבטיח עקביות מבנית ומוזיקליות.
 
-## API Interactions
+## Interactions API
 
-Vous pouvez utiliser les modèles Lyria 3 avec l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=fr), une interface unifiée pour interagir avec les modèles et les agents Gemini. Il simplifie la gestion de l'état et des tâches de longue durée pour les cas d'utilisation multimodaux complexes.
+אתם יכולים להשתמש במודלים של Lyria 3 עם [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he), ממשק מאוחד לאינטראקציה עם מודלים וסוכנים של Gemini. הוא מפשט את ניהול המצב ומשימות ארוכות טווח בתרחישי שימוש מורכבים עם כמה אמצעי קלט.
 
 ### Python
 
@@ -1151,75 +1151,78 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Guide sur les requêtes
+## מדריך לכתיבת הנחיות
 
-Votre requête peut être aussi simple que "une chanson folk sur des chats mignons qui évitent les flaques d'eau, avec des voix féminines et le bruit de la pluie", ou plus détaillée et structurée, comme :
+ההנחיה יכולה להיות פשוטה כמו "שיר פולק על חתולים חמודים שנמנעים מלהיכנס לשלוליות,
+שירה של אישה ורעש של גשם", או מפורטת ומובנית יותר
+כמו:
 
-> Un titre synth-pop des années 1980 avec un rythme entraînant, des synthétiseurs scintillants et un refrain accrocheur et entraînant. Le morceau doit avoir une ambiance rétro-futuriste, rappelant les tubes pop classiques des années 80, avec une production moderne et soignée. Le tempo doit être entraînant et dansant, autour de 120 BPM, avec une structure couplet-refrain claire et un refrain instrumental mémorable. Les paroles parlent du sentiment de se préparer pour une fête.
+> טראק סינת'פופ בסגנון שנות ה-80 עם ביט קצבי, סינתיסייזרים מבריקים ופזמון קליט בסגנון המנוני. השיר צריך להיות רטרו-עתידני, עם סאונד מודרני שדומה ללהיטי פופ קלאסיים משנות ה-80. הטמפו צריך להיות קצבי ומתאים לריקוד, בסביבות 120 פעימות בדקה, עם מבנה ברור של בית ופזמון ועם קטע אינסטרומנטלי קליט. מילות השיר מתארות את התחושה של התכוננות למסיבה.
 
-Les requêtes simples et complexes peuvent générer de bons résultats. Nous vous recommandons de tester ces conseils pour trouver ce qui vous convient le mieux.
+הנחיות פשוטות ומורכבות יכולות להניב תוצאות טובות. מומלץ להתנסות בטיפים האלה כדי למצוא את מה שהכי מתאים לכם.
 
-### Genre
+### ז'אנר
 
-Commencez votre requête par le genre de musique que vous souhaitez, comme hip-hop, rock ou rap. Vous pouvez spécifier une combinaison de genres :
+מתחילים את ההנחיה עם ז'אנר המוזיקה הרצוי, כמו היפ-הופ, רוק וראפ. אפשר לציין שילוב של ז'אנרים:
 
-- Un mélange de métal et de rap
-- Un mélange de death metal et d'opéra
-- Morceau classique avec des éléments de drone électronique
-- Musique électronique moderne pour danser (EDM) mélangée à de l'Europop
+- שילוב של מטאל וראפ
+- שילוב של דת' מטאל ואופרה
+- יצירה קלאסית עם אלמנטים אלקטרוניים של צליל רציף
+- מוזיקת דאנס אלקטרונית (EDM) מודרנית עם אלמנטים של יורופופ
 
-Vous pouvez également inclure une époque :
+אפשר גם לשלב תקופה:
 
-- Hip-hop du début des années 90
-- Pop yé-yé française des années 60
-- Expérimentations électroniques des années 80
-- Pop mainstream des années 2000
+- היפ-הופ מתחילת שנות ה-90
+- פופ יי-יי צרפתי משנות ה-60
+- ניסויים אלקטרוניים משנות ה-80
+- פופ מיינסטרים משנות האלפיים
 
-Si vous demandez des genres ou des variantes régionales spécifiques, comme "techno berlinoise" ou "hyphy de la baie de San Francisco", le modèle tentera de capturer cette essence, mais il ne réussira pas toujours.
+אם תבקשו ז'אנרים מותאמים אישית או וריאציות אזוריות, כמו "טכנו ברלינאי" או "הייפי מאזור המפרץ", המודל ינסה לתפוס את המהות הזו, אבל יכול להיות שהוא לא תמיד יצליח.
 
-### Instruments
+### כלי נגינה
 
-Par défaut, Lyria 3 crée des chansons avec les instruments et les outils que vous attendez pour le genre. Vous n'avez pas besoin d'être prescriptif.
+כברירת מחדל, Lyria 3 יוצר שירים עם הכלים והמכשירים שמתאימים לז'אנר. לא צריך לתת הוראות מדויקות.
 
-Toutefois, un morceau de danse n'inclura pas de saxophone, sauf si vous le demandez. Pour obtenir un solo de saxophone, vous devez le demander :
+עם זאת, טראק של מוזיקת דאנס לא יכלול סקסופון אלא אם תבקשו. לכן, אם אתם רוצים סולו סקסופון, אתם צריכים לתת הנחיה:
 
-> Un titre de danse avec un rythme entraînant, des synthétiseurs scintillants et un refrain accrocheur et entraînant. Un solo de saxophone doit être joué pendant le pont.
+> טראק לריקודים עם קצב ממריץ, סינתיסייזרים מבריקים ופזמון קליט וסוחף. סולו סקסופון צריך להופיע במהלך הגשר.
 
-Votre requête peut inclure des instruments spécifiques, leur sonorité et la façon dont ils interagissent les uns avec les autres. Vous pouvez utiliser cette combinaison pour créer certaines ambiances ou textures :
+ההנחיה יכולה לכלול כלים ספציפיים, איך הם נשמעים ואיך הם פועלים אחד עם השני. אפשר להשתמש בשילוב הזה כדי ליצור מצבי רוח או מרקמים מסוימים:
 
-- Une ligne de basse sale et déformée qui se bat contre des charlestons clairs et nets
-- Pads de synthétiseur analogiques chaleureux et gonflés sous une guitare acoustique sèche et intime
-- Un mur de son créé par plusieurs couches de guitares saturées, avec des voix lointaines et enfouies
+- קו בס מלוכלך ומעוות שנאבק עם מצילות היי-האט נקיות וחדות
+- פדים חמים של סינתיסייזר אנלוגי מתגברים מתחת לגיטרה אקוסטית אינטימית ופשוטה
+- קיר של צלילים שנוצר על ידי שכבות רבות של גיטרות פאז, עם שירה רחוקה ומוסתרת
 
-### Structure d'un titre
+### מבנה השיר
 
-Vous pouvez décrire la progression d'un titre dans votre requête. Utilisez des flèches ou une liste pour définir le flux :
+אתם יכולים לתאר בהנחיה את ההתקדמות של השיר. משתמשים בחצים או ברשימה כדי להגדיר את התהליך:
 
-- `[Intro]` -> `[Verse 1]` -> `[Chorus]` -> `[Verse 2]` -> `[Chorus]` ->
-  `[Bridge]` -> `[Outro]`
-- Commence par une introduction au piano calme, monte en puissance pour un couplet fort, retombe dans le silence, puis explose dans le refrain.
+- `[Intro]` -> `[Verse 1]` -> `[Chorus]` -> `[Verse 2]` -> `[Chorus]` ->
+  `[Bridge]` -> `[Outro]`
+- מתחילים עם פתיחה שקטה בפסנתר, עוברים לבית חזק, מגיעים לשקט ואז מתפוצצים בפזמון.
 
-Vous pouvez également spécifier comment les niveaux d'énergie changent entre ces sections :
+אפשר גם לציין איך רמות האנרגיה משתנות בין הקטעים האלה:
 
-- Créez de la tension dans le pré-refrain, puis passez au silence avant un refrain massif et explosif.
-- Crescendo progressif tout au long du morceau, ajoutant un instrument à la fois jusqu'à un mur de son chaotique
-- Arrêt soudain après le pont, suivi d'un refrain a cappella
+- יוצרים מתח לפני הפזמון, ואז עוברים לשקט לפני פזמון עוצמתי וסוחף
+- קצב הולך וגובר לאורך השיר, עם הוספה של כלי נגינה אחד בכל פעם
+  עד שנוצר קיר כאוטי של צלילים
+- הפסקה פתאומית אחרי הגשר, ואז פזמון א-קפלה
 
-Vous pouvez également indiquer l'heure exacte à laquelle vous souhaitez qu'une action se produise :
+אפשר גם להנחות את Google Assistant לבצע פעולה בשעה מסוימת:
 
 - Build to a drop at 12s
-- Quelqu'un dit "quoi" toutes les deux secondes
-- Le refrain commence à 22 s
+- מישהו אומר "מה" כל 2 שניות
+- הפזמון מתחיל ב-0:22
 
-### Paroles
+### מילות השיר
 
-Les voix et les paroles sont générées par défaut. Vous pouvez fournir vos propres paroles, demander à ce qu'il n'y en ait pas (ou qu'il s'agisse d'un instrumental) ou orienter la génération de paroles dans la direction de votre choix.
+השירה והמילים נוצרות כברירת מחדל. אתם יכולים לספק מילים משלכם, לבקש שלא יהיו מילים (או שיהיה קטע אינסטרומנטלי) או לכוון את יצירת המילים לכיוון שאתם רוצים.
 
-Vos paroles seront dans la langue dans laquelle vous rédigez votre requête. Vous pouvez également demander à ce que les paroles soient dans une autre langue, par exemple "Écris les paroles en français".
+המילים של השיר יהיו בשפה שבה כתבתם את ההנחיה. אפשר גם לבקש לכתוב את המילים בשפה אחרת, למשל: "Write the lyrics in French" (כתוב את המילים בצרפתית).
 
-#### Utiliser vos propres paroles
+#### שימוש במילים שלכם
 
-Pour fournir vos propres paroles au modèle, incluez-les dans la requête avec le préfixe "Paroles :" :
+כדי לתת למודל מילות שיר משלכם, צריך לכלול אותן בהנחיה עם הקידומת Lyrics:‎:
 
 ```
 Lyrics:
@@ -1236,51 +1239,52 @@ Go with the flow
 ...
 ```
 
-Vous pouvez ajouter des titres de section comme `[Intro]`, `[Verse 1]`, `[Pre-chorus]`, `[Chorus]` et `[Outro]` au début de certaines parties du titre.
+אפשר להוסיף כותרות לחלקים בשיר, כמו `[Intro]`, `[Verse 1]`, `[Pre-chorus]`, `[Chorus]` ו-`[Outro]`.
 
-Si vous souhaitez qu'un mot ou une ligne soient répétés, comme un écho ou par des choristes, vous pouvez l'inclure entre parenthèses : "Let's go (go)".
+אם רוצים שמילה או שורה יחזרו על עצמן, כמו הד או זמרי ליווי, אפשר לכלול אותן בסוגריים: Let's go (go).
 
-#### Demander au modèle d'écrire des paroles
+#### הנחיה של המודל לכתוב מילים לשיר
 
-Si vous souhaitez que Lyria 3 crée des paroles pour vous, il est préférable d'inclure dans votre requête des détails sur le thème des paroles. Sinon, le modèle devra déduire un sujet à partir de votre requête musicale, et il se peut que le résultat ne soit pas celui que vous souhaitez.
+אם אתם רוצים ש-Lyria 3 ייצור בשבילכם מילים לשיר, מומלץ לכלול בהנחיה פרטים על מה יהיו המילים. אחרת, המודל יצטרך להסיק את הנושא מההנחיה שנתתם לגבי המוזיקה, ויכול להיות שהתוצאה לא תהיה מה שרציתם.
 
-> Les paroles parlent d'un amour perdu et de la douleur d'un cœur brisé. La chanteuse se remémore une relation passée et les souvenirs qui lui reviennent en mémoire.
+> מילות השיר עוסקות באהבה אבודה ובכאב של שברון לב. הזמרת נזכרת במערכת יחסים שהייתה לה בעבר ובזיכרונות שצפים ועולים.
 
-Si vous souhaitez un refrain répété, il est utile de le préciser dans votre requête :
+אם רוצים פזמון חוזר, כדאי לבקש אותו בהנחיה:
 
-> Les paroles parlent d'un amour perdu et de la douleur d'un cœur brisé. La chanteuse se remémore une relation passée et les souvenirs qui lui reviennent en mémoire. Un refrain puissant se concentre sur le fait de surmonter la douleur et de passer à autre chose.
+> מילות השיר עוסקות באהבה אבודה ובכאב של שברון לב. הזמרת נזכרת במערכת יחסים שהייתה לה בעבר ובזיכרונות שצפים ועולים. פזמון עוצמתי שמתמקד בהתגברות על הכאב ובמעבר הלאה.
 
-Lyria 3 orientera automatiquement la structure des paroles vers le type de musique que vous demandez, mais vous pouvez également le préciser dans votre requête. Exemple :
+‫Lyria 3 יכוון אוטומטית את מבנה המילים לסוג המוזיקה שביקשתם, אבל אתם יכולים להדגיש את זה גם בהנחיה. לדוגמה:
 
-> Un titre de musique électronique qui répète la même phrase énergique encore et encore.
+> שיר EDM שחוזר על אותו ביטוי אנרגטי שוב ושוב.
 
-Vous pouvez également demander des effets vocaux qui ne sont pas strictement des paroles, par exemple :
+אפשר גם לתת הנחיות לאפקטים קוליים שהם לא מילים של שיר, למשל:
 
-- Un sample répété d'un film dit "Je n'arrive pas à y croire !" tout au long du titre.
-- Un morceau techno très énergique, juste avant le drop, le son s'arrête complètement et une petite voix dit "Je ne sais pas ce que je fais ici", puis la musique reprend.
-- Le morceau s'ouvre sur une conversation sur les films des années 90, qui seraient meilleurs que ceux d'aujourd'hui. Le titre se transforme ensuite en chanson pop.
+- דגימה חוזרת מסרט עם המילים "I can't believe this!‎" (אני לא מאמין!) לאורך השיר
+- טראק טכנו עם אנרגיה גבוהה, רגע לפני הדרופ הצליל מפסיק לגמרי וקול קטן אומר "I don't know what I'm doing here", ואז המוזיקה מתחילה.
+- השיר מתחיל בשיחה על כך שהסרטים של שנות ה-90 היו טובים יותר מהסרטים של היום. ואז הטראק עובר בצורה חלקה לשיר פופ.
 
-### Chant
+### כולל שירה
 
-Vous pouvez indiquer comment vous souhaitez que les paroles soient présentées. Pour obtenir les meilleurs résultats, spécifiez un profil de chanteur détaillé, en indiquant le genre, le timbre et la tessiture.
+אפשר לתת הנחיה לגבי אופן הצגת המילים. כדי לקבל את התוצאות הטובות ביותר, כדאי לציין פרופיל מפורט של הזמר או הזמרת, כולל מגדר, גוון ומנעד קולי.
 
-- **Soprano féminine** : timbre clair et cristallin, avec une qualité agile et aérienne. Capable d'atteindre des notes aiguës sifflantes avec une texture aérienne et haletante.
-- **Alto féminin** : registre grave riche, chaleureux et rauque. Timbre enfumé avec une touche de fry vocal, soul et résonnant.
-- **Ténor masculin** : voix brillante, perçante et énergique. Timbre juvénile avec une légère nasalité, qui se démarque dans le mix avec une grande puissance de voix.
-- **Baryton masculin** : voix profonde, chocolatée et veloutée. Voix de poitrine résonnante avec un ton doux et mélodieux.
-- **Rockeur usé (homme)** : voix rauque et texturée avec un timbre graveleux, qui rappelle le grunge des années 90. Registre supérieur tendu pour l'intensité émotionnelle.
+- **סופרן נשי**: צליל ברור וצלול עם גוון קליל ומרחף. היא מסוגלת להגיע לתווים גבוהים עם שריקה, עם מרקם אוורירי ונושם.
+- **אלט נשי**: טווח נמוך עשיר, חם וצרוד. גוון עשיר עם נגיעה של קול חרוך, מלא נשמה ומהדהד.
+- **טנור גברי**: בהיר, חודר ואנרגטי. גוון קול צעיר עם
+  נימה קלה של אף, שחותך את המיקס עם עוצמת בלטינג גבוהה.
+- **בריטון גברי**: עמוק, עשיר וקטיפתי. קול עמוק ומהדהד עם נימה מרגיעה.
+- **רוקר מחוספס (גבר)**: צרוד ומחוספס עם גוון חצצי, שמזכיר גראנג' משנות ה-90. טווח עליון מאומץ לעוצמה רגשית.
 
-### Autres paramètres de requête
+### פרמטרים נוספים של הנחיות
 
-Vous pouvez également inclure les paramètres suivants pour affiner davantage votre requête :
+אפשר גם לכלול את הפרמטרים האלה כדי לשפר עוד יותר את ההנחיה:
 
-- **Tonalité/Gamme** : spécifiez une tonalité musicale (par exemple, "en sol majeur", "en ré mineur").
-- **Ambiance** : utilisez des adjectifs descriptifs (par exemple, "nostalgique", "agressif", "éthéré", "rêveur").
-- **Durée** : le modèle Clip produit toujours des extraits de 30 secondes. Pour le modèle Pro, spécifiez la durée souhaitée dans votre requête (par exemple, "crée une chanson de deux minutes") ou utilisez des codes temporels pour contrôler la durée.
+- **טון/סולם**: מציינים טון מוזיקלי (לדוגמה, "בסולם סול מז'ור", "בסולם רה מינור").
+- **מצב רוח ואווירה**: השתמשו בשמות תואר תיאוריים (למשל, "נוסטלגי", "אגרסיבי", "שמימי", "חלומות").
+- **משך**: מודל הקליפים תמיד יוצר קליפים באורך 30 שניות. במודל Pro, מציינים את האורך הרצוי בהנחיה (לדוגמה, 'צור שיר באורך 2 דקות') או משתמשים בחותמות זמן כדי לשלוט במשך.
 
-### Exemples de prompts
+### הנחיות לדוגמה
 
-Voici quelques exemples de requêtes efficaces :
+הנה כמה דוגמאות להנחיות יעילות:
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -1290,37 +1294,37 @@ Voici quelques exemples de requêtes efficaces :
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## Bonnes pratiques
+## שיטות מומלצות
 
-- **Commencez par itérer avec Clip.** Utilisez le modèle `lyria-3-clip-preview` plus rapide pour tester des requêtes avant de vous engager dans une génération complète avec `lyria-3-pro-preview`.
-- **Soyez précis.** Les requêtes vagues produisent des résultats génériques. Pour obtenir les meilleurs résultats, mentionnez les instruments, le tempo, la tonalité, l'humeur et la structure.
-- **Utilisez des tags de section.** Les balises `[Verse]`, `[Chorus]` et `[Bridge]` fournissent au modèle une structure claire à suivre.
-- **Séparez les paroles des instructions.** Lorsque vous fournissez des paroles personnalisées, séparez-les clairement de vos instructions de direction musicale.
+- **כדאי להתחיל עם קליפ.** כדאי להשתמש במודל המהיר יותר `lyria-3-clip-preview` כדי להתנסות בהנחיות לפני שמתחייבים ליצירה באורך מלא באמצעות `lyria-3-pro-preview`.
+- **ספציפיות היא שם המשחק.** הנחיות לא ברורות מניבות תוצאות גנריות. כדי לקבל את הפלט הכי טוב, כדאי לציין את כלי הנגינה, את קצב הפעימות לדקה (BPM), את הסולם, את האווירה ואת המבנה.
+- **כדאי להשתמש בתגי קטע.** תגי `[Verse]`, ‏`[Chorus]` ו-`[Bridge]` מספקים למודל מבנה ברור לפעולה.
+- **מפרידים בין מילות השיר להוראות.** כשמספקים מילים בהתאמה אישית, צריך להפריד אותן בבירור מההוראות לגבי המוזיקה.
 
-## Limites
+## מגבלות
 
-- **Sécurité** : toutes les requêtes sont vérifiées par des filtres de sécurité. Les requêtes qui déclenchent les filtres seront bloquées. Cela inclut les requêtes demandant des voix d'artistes spécifiques ou la génération de paroles protégées par des droits d'auteur.
-- **Filigranes** : tous les contenus audio générés incluent un [filigrane audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=fr) pour l'identification. Ce filigrane est imperceptible à l'oreille humaine et n'affecte pas l'expérience d'écoute.
-- **Édition multitours** : la génération de musique est un processus monotour.
-  L'édition itérative ou l'affinage d'un extrait généré à l'aide de plusieurs prompts ne sont pas pris en charge dans la version actuelle de Lyria 3.
-- **Durée** : le modèle Clip génère toujours des extraits de 30 secondes. Le modèle Pro génère des titres qui durent quelques minutes. La durée exacte peut être influencée par votre requête.
-- **Déterminisme** : les résultats peuvent varier d'un appel à l'autre, même avec le même prompt.
+- **בטיחות**: כל ההנחיות נבדקות על ידי מסנני בטיחות. הנחיות שמפעילות את המסננים ייחסמו. זה כולל הנחיות שמבקשות קולות ספציפיים של אומנים או יצירה של מילות שירים שמוגנות בזכויות יוצרים.
+- **סימני מים**: כל האודיו שנוצר כולל [סימן מים באודיו של SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=he) לצורך זיהוי. סימן המים הזה לא נשמע לאוזן אנושית ולא משפיע על חוויית ההאזנה.
+- **עריכה בכמה שלבים**: יצירת מוזיקה היא תהליך חד-שלבי.
+  בגרסה הנוכחית של Lyria 3 אין תמיכה בעריכה איטרטיבית או בשיפור של קליפ שנוצר באמצעות כמה הנחיות.
+- **אורך**: מודל הקליפים תמיד יוצר קליפים באורך 30 שניות. מודל Pro יוצר שירים באורך של כמה דקות. אפשר להשפיע על האורך המדויק באמצעות ההנחיה.
+- **דטרמיניזם**: התוצאות עשויות להיות שונות בין שיחות, גם אם משתמשים באותה הנחיה.
 
-## Étape suivante
+## המאמרים הבאים
 
-- Consultez les [tarifs](https://ai.google.dev/gemini-api/docs/pricing?hl=fr) des modèles Lyria 3.
-- Essayez la [génération de musique en streaming et en temps réel](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=fr) avec Lyria RealTime.
-- Générez des conversations à plusieurs locuteurs avec les [modèles TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr).
-- Découvrez comment générer des [images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr) ou des [vidéos](https://ai.google.dev/gemini-api/docs/video?hl=fr).
-- Découvrez comment Gemini peut [comprendre les fichiers audio](https://ai.google.dev/gemini-api/docs/audio?hl=fr),
-- Discutez en temps réel avec Gemini à l'aide de l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=fr).
+- בודקים את [התמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he) של מודלים של Lyria 3,
+- כדאי לנסות [יצירת מוזיקה בזמן אמת בסטרימינג](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=he) באמצעות Lyria RealTime,
+- יצירת שיחות עם כמה דוברים באמצעות [מודלים של TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he),
+- [איך יוצרים תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) או [סרטונים](https://ai.google.dev/gemini-api/docs/video?hl=he)
+- [איך Gemini יכול להבין קובצי אודיו](https://ai.google.dev/gemini-api/docs/audio?hl=he),
+- מנהלים שיחה בזמן אמת עם Gemini באמצעות [Live API](https://ai.google.dev/gemini-api/docs/live?hl=he).
 
-Envoyer des commentaires
+שליחת משוב
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Dernière mise à jour le 2026/06/01 (UTC).
+עדכון אחרון: 2026-06-01 (שעון UTC).
 
-Voulez-vous nous donner plus d'informations ?
+רוצה לתת לנו משוב?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/01 (UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-01 (שעון UTC)."],[],[]]

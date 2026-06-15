@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=ar
-fetched_at: 2026-06-08T05:31:09.650722+00:00
+fetched_at: 2026-06-15T06:28:02.716713+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
