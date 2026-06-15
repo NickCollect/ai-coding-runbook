@@ -52,6 +52,7 @@ use crate::request_permissions::RequestPermissionsResponse;
 use crate::request_user_input::RequestUserInputResponse;
 use crate::user_input::UserInput;
 use codex_utils_absolute_path::AbsolutePathBuf;
+use codex_utils_path_uri::PathUri;
 use schemars::JsonSchema;
 use serde::Deserialize;
 use serde::Serialize;
@@ -105,11 +106,45 @@ pub const COLLABORATION_MODE_CLOSE_TAG: &str = "</collaboration_mode>";
 pub const REALTIME_CONVERSATION_OPEN_TAG: &str = "<realtime_conversation>";
 pub const REALTIME_CONVERSATION_CLOSE_TAG: &str = "</realtime_conversation>";
 pub const USER_MESSAGE_BEGIN: &str = "## My request for Codex:";
+const LOCAL_ENVIRONMENT_ID: &str = "local";
 
+// TODO(anp): Replace `TurnEnvironmentSelection` with `PathUri` once path URIs carry environment
+// identifiers.
 #[derive(Debug, Clone, PartialEq)]
 pub struct TurnEnvironmentSelection {
     pub environment_id: String,
-    pub cwd: AbsolutePathBuf,
+    pub cwd: PathUri,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub struct TurnEnvironmentSelections {
+    pub legacy_fallback_cwd: AbsolutePathBuf,
+    pub environments: Vec<TurnEnvironmentSelection>,
+}
+
+impl TurnEnvironmentSelections {
+    pub fn new(
+        legacy_fallback_cwd: AbsolutePathBuf,
+        environments: Vec<TurnEnvironmentSelection>,
+    ) -> Self {
+        let mut settings = Self {
+            legacy_fallback_cwd,
+            environments,
+        };
+        settings.sync_primary_environment_cwd();
+        settings
+    }
+
+    fn sync_primary_environment_cwd(&mut self) {
+        let legacy_fallback_cwd = PathUri::from_abs_path(&self.legacy_fallback_cwd);
+        // Keep remote environments' native cwd instead of replacing it with the local fallback.
+        if let Some(turn_environment) = self.environments.first_mut()
+            && turn_environment.environment_id == LOCAL_ENVIRONMENT_ID
+            && turn_environment.cwd != legacy_fallback_cwd
+        {
+            turn_environment.cwd = legacy_fallback_cwd;
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq, JsonSchema, TS)]
@@ -149,17 +184,26 @@ pub struct W3cTraceContext {
 /// Config payload for refreshing MCP servers.
 #[derive(Debug, Clone, PartialEq)]
 pub struct McpServerRefreshConfig {
+    /// Complete runtime server map after source and thread-scoped resolution.
     pub mcp_servers: Value,
+    /// OAuth credential store mode to use with this server snapshot.
     pub mcp_oauth_credentials_store_mode: Value,
+    pub auth_keyring_backend_kind: Value,
 }
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct ConversationStartParams {
+    /// Overrides the configured realtime architecture for this session only.
+    pub architecture: Option<RealtimeConversationArchitecture>,
+    /// Overrides the configured realtime model for this session only.
+    pub model: Option<String>,
     /// Selects whether the realtime session should produce text or audio output.
     pub output_modality: RealtimeOutputModality,
     pub prompt: Option<Option<String>>,
     pub realtime_session_id: Option<String>,
     pub transport: Option<ConversationStartTransport>,
+    /// Overrides the configured realtime protocol version for this session only.
+    pub version: Option<RealtimeConversationVersion>,
     pub voice: Option<RealtimeVoice>,
 }
 
@@ -364,14 +408,24 @@ pub struct ConversationAudioParams {
 #[derive(Debug, Clone, PartialEq)]
 pub struct ConversationTextParams {
     pub text: String,
+    pub role: ConversationTextRole,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Deserialize, Serialize, JsonSchema, TS)]
+#[serde(rename_all = "snake_case")]
+#[ts(rename_all = "snake_case")]
+pub enum ConversationTextRole {
+    #[default]
+    User,
+    Developer,
 }
 
 /// Persistent thread-settings overrides that can be applied before user input or
 /// on their own.
 #[derive(Debug, Clone, Default, PartialEq)]
 pub struct ThreadSettingsOverrides {
-    /// Updated `cwd` for sandbox/tool calls.
-    pub cwd: Option<AbsolutePathBuf>,
+    /// Updated fallback `cwd` and environments supplied together as a complete pair.
+    pub environments: Option<TurnEnvironmentSelections>,
 
     /// Updated runtime workspace roots used to materialize symbolic
     /// `:workspace_roots` filesystem permissions.
@@ -472,8 +526,6 @@ pub enum Op {
     UserInput {
         /// User input items, see `InputItem`
         items: Vec<UserInput>,
-        /// Optional turn-scoped environments.
-        environments: Option<Vec<TurnEnvironmentSelection>>,
         /// Optional JSON Schema used to constrain the final assistant message for this turn.
         final_output_json_schema: Option<Value>,
         /// Optional turn-scoped Responses API `client_metadata`.
@@ -494,7 +546,7 @@ pub enum Op {
         thread_settings: ThreadSettingsOverrides,
     },
 
-    /// Inter-agent communication that should be recorded as assistant history
+    /// Inter-agent communication that should be recorded as agent-message history
     /// while still using the normal thread submission lifecycle.
     InterAgentCommunication {
         communication: InterAgentCommunication,
@@ -612,7 +664,6 @@ pub enum ThreadMemoryMode {
 impl From<Vec<UserInput>> for Op {
     fn from(value: Vec<UserInput>) -> Self {
         Op::UserInput {
-            environments: None,
             items: value,
             final_output_json_schema: None,
             responsesapi_client_metadata: None,
@@ -681,15 +732,18 @@ impl InterAgentCommunication {
     }
 
     pub fn to_model_input_item(&self) -> ResponseItem {
-        match &self.encrypted_content {
-            Some(encrypted_content) => ResponseItem::AgentMessage {
-                author: self.author.to_string(),
-                recipient: self.recipient.to_string(),
-                content: vec![AgentMessageInputContent::EncryptedContent {
-                    encrypted_content: encrypted_content.clone(),
-                }],
+        let content = match &self.encrypted_content {
+            Some(encrypted_content) => AgentMessageInputContent::EncryptedContent {
+                encrypted_content: encrypted_content.clone(),
             },
-            None => self.to_response_input_item().into(),
+            None => AgentMessageInputContent::InputText {
+                text: self.content.clone(),
+            },
+        };
+        ResponseItem::AgentMessage {
+            author: self.author.to_string(),
+            recipient: self.recipient.to_string(),
+            content: vec![content],
         }
     }
 
@@ -1324,6 +1378,9 @@ pub enum EventMsg {
     CollabResumeBegin(CollabResumeBeginEvent),
     /// Collab interaction: resume end.
     CollabResumeEnd(CollabResumeEndEvent),
+
+    /// Path-based v2 sub-agent activity.
+    SubAgentActivity(SubAgentActivityEvent),
 }
 
 #[derive(Debug, Clone, Copy, Deserialize, Serialize, PartialEq, Eq, JsonSchema, TS, EnumIter)]
@@ -1461,6 +1518,15 @@ pub enum RealtimeConversationVersion {
     V2,
 }
 
+#[derive(Debug, Clone, Copy, Default, Deserialize, Serialize, PartialEq, Eq, JsonSchema, TS)]
+#[serde(rename_all = "snake_case")]
+pub enum RealtimeConversationArchitecture {
+    #[default]
+    #[serde(rename = "realtimeapi")]
+    RealtimeApi,
+    Avas,
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, JsonSchema, TS)]
 pub struct RealtimeConversationStartedEvent {
     pub realtime_session_id: Option<String>,
@@ -1540,6 +1606,12 @@ impl From<CollabResumeBeginEvent> for EventMsg {
 impl From<CollabResumeEndEvent> for EventMsg {
     fn from(event: CollabResumeEndEvent) -> Self {
         EventMsg::CollabResumeEnd(event)
+    }
+}
+
+impl From<SubAgentActivityEvent> for EventMsg {
+    fn from(event: SubAgentActivityEvent) -> Self {
+        EventMsg::SubAgentActivity(event)
     }
 }
 
@@ -2446,12 +2518,12 @@ impl InitialHistory {
 
     pub fn get_resumed_session_sources(&self) -> Option<(SessionSource, Option<ThreadSource>)> {
         let meta = self.get_resumed_session_meta()?;
-        Some((meta.source.clone(), meta.thread_source))
+        Some((meta.source.clone(), meta.thread_source.clone()))
     }
 
     pub fn get_resumed_thread_source(&self) -> Option<ThreadSource> {
         self.get_resumed_session_meta()
-            .and_then(|meta| meta.thread_source)
+            .and_then(|meta| meta.thread_source.clone())
     }
 
     pub fn get_resumed_parent_thread_id(&self) -> Option<ThreadId> {
@@ -2495,20 +2567,23 @@ pub enum SessionSource {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, PartialEq, Eq, JsonSchema, TS)]
-#[serde(rename_all = "snake_case")]
-#[ts(rename_all = "snake_case")]
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq, Eq, JsonSchema, TS)]
+#[serde(try_from = "String", into = "String")]
+#[schemars(with = "String")]
+#[ts(type = "string")]
 pub enum ThreadSource {
     User,
     Subagent,
+    Feature(String),
     MemoryConsolidation,
 }
 
 impl ThreadSource {
-    pub fn as_str(self) -> &'static str {
+    pub fn as_str(&self) -> &str {
         match self {
             ThreadSource::User => "user",
             ThreadSource::Subagent => "subagent",
+            ThreadSource::Feature(feature) => feature,
             ThreadSource::MemoryConsolidation => "memory_consolidation",
         }
     }
@@ -2520,6 +2595,20 @@ impl fmt::Display for ThreadSource {
     }
 }
 
+impl TryFrom<String> for ThreadSource {
+    type Error = String;
+
+    fn try_from(value: String) -> Result<Self, Self::Error> {
+        value.parse()
+    }
+}
+
+impl From<ThreadSource> for String {
+    fn from(value: ThreadSource) -> Self {
+        value.to_string()
+    }
+}
+
 impl FromStr for ThreadSource {
     type Err = String;
 
@@ -2528,7 +2617,7 @@ impl FromStr for ThreadSource {
             "user" => Ok(ThreadSource::User),
             "subagent" => Ok(ThreadSource::Subagent),
             "memory_consolidation" => Ok(ThreadSource::MemoryConsolidation),
-            other => Err(format!("unknown thread source: {other}")),
+            other => Ok(ThreadSource::Feature(other.to_string())),
         }
     }
 }
@@ -2732,6 +2821,7 @@ fn multi_agent_version_from_items(
             RolloutItem::TurnContext(turn_context) => turn_context.multi_agent_version,
             RolloutItem::SessionMeta(_)
             | RolloutItem::ResponseItem(_)
+            | RolloutItem::InterAgentCommunication(_)
             | RolloutItem::Compacted(_)
             | RolloutItem::EventMsg(_) => None,
         })
@@ -2827,6 +2917,8 @@ pub struct SessionMetaLine {
 pub enum RolloutItem {
     SessionMeta(SessionMetaLine),
     ResponseItem(ResponseItem),
+    /// Durable delivery metadata reconstructed as a model-visible `agent_message`.
+    InterAgentCommunication(InterAgentCommunication),
     Compacted(CompactedItem),
     TurnContext(TurnContextItem),
     EventMsg(EventMsg),
@@ -2837,6 +2929,8 @@ pub struct CompactedItem {
     pub message: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub replacement_history: Option<Vec<ResponseItem>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub window_id: Option<u64>,
 }
 
 impl From<CompactedItem> for ResponseItem {
@@ -2884,6 +2978,8 @@ pub struct TurnContextItem {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub file_system_sandbox_policy: Option<FileSystemSandboxPolicy>,
     pub model: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub comp_hash: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub personality: Option<Personality>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -3865,6 +3961,27 @@ pub struct CollabAgentInteractionEndEvent {
     pub status: AgentStatus,
 }
 
+#[derive(Debug, Clone, Copy, Deserialize, Serialize, PartialEq, Eq, JsonSchema, TS)]
+#[serde(rename_all = "snake_case")]
+#[ts(rename_all = "snake_case")]
+pub enum SubAgentActivityKind {
+    Started,
+    Interacted,
+    Interrupted,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize, PartialEq, Eq, JsonSchema, TS)]
+pub struct SubAgentActivityEvent {
+    pub event_id: String,
+    #[serde(default)]
+    pub occurred_at_ms: i64,
+    /// Thread ID of the affected sub-agent.
+    pub agent_thread_id: ThreadId,
+    /// Canonical v2 path of the affected sub-agent.
+    pub agent_path: AgentPath,
+    pub kind: SubAgentActivityKind,
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize, PartialEq, JsonSchema, TS)]
 pub struct CollabWaitingBeginEvent {
     #[serde(default)]
@@ -3992,6 +4109,18 @@ mod tests {
     use std::path::PathBuf;
     use tempfile::NamedTempFile;
     use tempfile::TempDir;
+
+    #[test]
+    fn feature_thread_source_serializes_as_its_app_owned_label() -> Result<()> {
+        let source = ThreadSource::Feature("automation".to_string());
+
+        assert_eq!(serde_json::to_value(&source)?, json!("automation"));
+        assert_eq!(
+            serde_json::from_value::<ThreadSource>(json!("automation"))?,
+            source
+        );
+        Ok(())
+    }
 
     fn sorted_writable_roots(roots: Vec<WritableRoot>) -> Vec<(PathBuf, Vec<PathBuf>)> {
         let mut sorted_roots: Vec<(PathBuf, Vec<PathBuf>)> = roots
@@ -5072,6 +5201,7 @@ mod tests {
 
         assert_eq!(item.network, None);
         assert_eq!(item.file_system_sandbox_policy, None);
+        assert_eq!(item.comp_hash, None);
         Ok(())
     }
 
@@ -5132,6 +5262,7 @@ mod tests {
                 },
             ])),
             model: "gpt-5".to_string(),
+            comp_hash: None,
             personality: None,
             collaboration_mode: None,
             multi_agent_version: None,
