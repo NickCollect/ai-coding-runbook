@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-06-01T05:54:48.484368+00:00
+fetched_at: 2026-06-15T06:17:44.518748+00:00
 fetch_method: mintlify_md
 ---
 
@@ -620,6 +620,95 @@ curl --request POST \
 ```json
 {
   "id": "run-00000000-0000-0000-0000-000000000001"
+}
+```
+
+### Get Agent Usage
+
+/v1/agents//usage
+
+Retrieve token usage for an agent, broken down per run. The response totals usage across every run on the agent and lists usage for each individual run. Token usage matches the `tokenUsage` reported by the team [usage events](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data) endpoint.
+
+#### Path Parameters
+
+`id` string
+
+Unique identifier for the agent (for example, `bc-00000000-0000-0000-0000-000000000001`).
+
+#### Query Parameters
+
+`runId` string (optional)
+
+Scope the response to a single run (for example, `run-00000000-0000-0000-0000-000000000001`). Omit to return usage for every run on the agent. An unknown `runId` returns `404 run_not_found`.
+
+#### Response Fields
+
+`totalUsage` object
+
+Token usage summed across the returned runs. Contains the same fields as each run's `usage` object.
+
+`runs` array
+
+Per-run usage, one entry per run (or a single entry when `runId` is set). Each object contains:
+
+- `id` string - Run identifier (for example, `run-00000000-0000-0000-0000-000000000001`).
+- `usageUuid` string (optional) - Internal usage identifier for the run. Omitted when the run has no recorded usage yet.
+- `usage` object - Token usage for this run:
+  - `inputTokens` number - Input tokens consumed.
+  - `outputTokens` number - Output tokens generated.
+  - `cacheWriteTokens` number - Tokens written to cache.
+  - `cacheReadTokens` number - Tokens read from cache.
+  - `totalTokens` number - Sum of the four token counts above.
+
+Runs without any recorded token usage report zeros across all fields. A run that hasn't produced usage yet still appears in `runs` so you can track it over time.
+
+```bash
+# All runs on the agent
+curl --request GET \
+  --url https://api.cursor.com/v1/agents/bc-00000000-0000-0000-0000-000000000001/usage \
+  -u YOUR_API_KEY:
+
+# A single run
+curl --request GET \
+  --url 'https://api.cursor.com/v1/agents/bc-00000000-0000-0000-0000-000000000001/usage?runId=run-00000000-0000-0000-0000-000000000001' \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "totalUsage": {
+    "inputTokens": 12480,
+    "outputTokens": 3110,
+    "cacheWriteTokens": 18200,
+    "cacheReadTokens": 42600,
+    "totalTokens": 76390
+  },
+  "runs": [
+    {
+      "id": "run-00000000-0000-0000-0000-000000000002",
+      "usageUuid": "00000000-0000-0000-0000-000000000002",
+      "usage": {
+        "inputTokens": 6320,
+        "outputTokens": 1450,
+        "cacheWriteTokens": 7100,
+        "cacheReadTokens": 21300,
+        "totalTokens": 36170
+      }
+    },
+    {
+      "id": "run-00000000-0000-0000-0000-000000000001",
+      "usageUuid": "00000000-0000-0000-0000-000000000001",
+      "usage": {
+        "inputTokens": 6160,
+        "outputTokens": 1660,
+        "cacheWriteTokens": 11100,
+        "cacheReadTokens": 21300,
+        "totalTokens": 40220
+      }
+    }
+  ]
 }
 ```
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-pool
-fetched_at: 2026-06-08T05:24:58.246411+00:00
+fetched_at: 2026-06-15T06:17:44.876063+00:00
 fetch_method: mintlify_md
 ---
 
@@ -432,7 +432,7 @@ The `cursor_self_hosted_worker_session_ends_total` counter includes a `reason` l
 
 **Outbound-only.** Workers connect outbound over HTTPS. No inbound ports or firewall changes required.
 
-**Privacy mode.** Self-hosted Cloud Agents respect Cursor's [privacy mode](/data-use), which enables zero data retention across all model providers. None of your code is stored or used for training.
+**Privacy mode.** Self-hosted Cloud Agents respect Cursor's [Privacy Mode settings](/data-use). When Privacy Mode is enabled, none of your code is used for training.
 
 **Isolation.** Each agent session gets its own dedicated worker. Sessions are not shared across workers.
 

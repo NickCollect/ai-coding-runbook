@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/dashboard
-fetched_at: 2026-05-05T19:55:35.362412+00:00
+fetched_at: 2026-06-15T06:17:43.454393+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,7 +24,7 @@ Configure team-wide preferences and security settings. The settings page include
 
 ### Privacy Settings
 
-Control data sharing preferences for your team. Configure zero data retention policies with AI providers (OpenAI, Anthropic, Google Vertex AI, xAi Grok) and manage team-wide privacy enforcement.
+Control data sharing preferences for your team. Configure whether your data can be used for training, and manage team-wide privacy enforcement.
 
 ### Usage-Based Pricing Settings
 

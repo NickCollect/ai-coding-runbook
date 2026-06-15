@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-06-01T05:54:48.543939+00:00
+fetched_at: 2026-06-15T06:17:44.659054+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ For any path:
 
 1. Choose a trigger, e.g. every hour or when a pull request is opened.
 2. Write a prompt with instructions for the automation.
-3. Choose the tools the agent is able to use, such as Send to Slack, Comment on Pull Request, or tools from MCP.
+3. Choose optional tools the agent is able to use, such as Send to Slack, Comment on Pull Request, or tools from MCP.
 4. Choose whether the automation needs a repository, multiple repositories, or no repository at all.
 5. Create the automation and watch it run!
 
@@ -58,6 +58,8 @@ GitHub and GitLab triggers respond to pull request events, such as when a pull r
 - **Pull request commented** - When someone comments on a PR.
 - **Push to branch** - When commits are pushed to a specific branch outside a pull request.
 - **CI completed** - When a GitHub or GitLab check finishes on a pull request or branch.
+
+Pull request triggers don't run on PRs opened from forks. These runs fail with a "Fork pull requests not supported" error because the branch only exists on the fork, and running external code with the repo's permissions isn't safe. The exception is **Pull request merged** triggers, which still run because they start from the merge commit. To work around this, push the branch to the repo itself and open the PR from there.
 
 ### Slack triggers
 
@@ -103,27 +105,21 @@ PagerDuty triggers run on incident events and can be helpful to automatically tr
 
 Cursor Automations can have tools enabled for richer capabilities around GitHub, Slack, memory, MCP, and more. Automations also include the same base set of tools as other cloud agents. See [Cloud agent capabilities](https://cursor.com/docs/cloud-agent/capabilities.md) for details.
 
-### Open pull request
+### Pull request creation
 
-Lets the agent create a new pull request on GitHub. The agent can write code, create a branch, and open the pull request.
-
-Use this when the automation should make code changes.
+Repo-backed automations can open pull requests after making code changes requested by the automation prompt.
 
 The pull request is opened against the repositories specified for the GitHub or GitLab trigger. For other triggers, it uses the repositories specified by the environment.
 
 ### Comment on pull request
 
-Posts comments on the triggering pull request. Supports top-level review comments and inline code comments.
-
-This action requires a pull request trigger.
+Posts comments on a target pull request. Supports top-level review comments and inline code comments.
 
 If you enable approvals, the agent can also approve, request changes, and dismiss reviews. Otherwise, it can only post comments.
 
 ### Request reviewers
 
-Requests reviewers on the triggering pull request. The agent can use `git`, memory, and other tools to identify domain experts.
-
-This action requires a pull request trigger.
+Requests reviewers on a target pull request. The agent can use `git`, memory, and other tools to identify domain experts.
 
 ### Send to Slack
 
@@ -161,7 +157,13 @@ You can select which model the cloud agent uses for your automation.
 
 ### Repositories
 
-Choose whether the automation needs a repository, multiple repositories, or no repository at all.
+Choose whether the automation needs no repository, one repository, or a multi-repo environment.
+
+The repository setting controls the codebase context for each run:
+
+- **No repository**: The agent does not clone code. Use this for workflows that only need Slack, MCP, webhooks, Linear, or PagerDuty. It cannot edit code or open pull requests.
+- **Single repository**: The agent works in one repository and branch. Use this when the automation should read, review, or change code in one codebase.
+- **Multi-repo environment**: The agent works across the repositories in an environment. Use this when the task spans multiple codebases.
 
 For certain triggers like Slack or cron schedules, Cursor defaults to not using a repository. If your automation should make code changes, specify which repository or repositories agents should work in.
 
@@ -176,12 +178,6 @@ GitHub and GitLab triggers infer the repository from the pull request. For other
 #### Multi-repo automations
 
 Use a multi-repo environment when an automation needs to work across multiple repositories. Select multiple repos when you configure the environment, or choose an existing one from your [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments).
-
-### Automations with no repo
-
-Automations can run without any attached repos. These automations do not clone code. Use them for workflows that only need Slack, MCP, webhooks, Linear, or PagerDuty.
-
-Tools that require code access, such as **Open pull request**, **Comment on pull request**, and **Request reviewers**, are not available without a repository.
 
 ### Permissions
 
