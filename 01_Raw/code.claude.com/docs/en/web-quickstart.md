@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/web-quickstart
-fetched_at: 2026-05-18T05:02:45.080220+00:00
+fetched_at: 2026-06-15T06:17:58.533294+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ Claude Code behaves the same everywhere. What changes is where code executes and
 | **Uses your local config**                   | No, repo only                                                                                                   | Yes                          | Yes                    | Yes for local, no for cloud |
 | **Requires GitHub**                          | Yes, or [bundle a local repo](/en/claude-code-on-the-web#send-local-repositories-without-github) via `--remote` | No                           | No                     | Only for cloud sessions     |
 | **Keeps running if you disconnect**          | Yes                                                                                                             | While terminal stays open    | No                     | Depends on session type     |
-| **[Permission modes](/en/permission-modes)** | Auto accept edits, Plan                                                                                         | Ask, Auto accept edits, Plan | All modes              | Depends on session type     |
+| **[Permission modes](/en/permission-modes)** | Accept edits, Plan, Auto                                                                                        | Ask, Auto accept edits, Plan | All modes              | Depends on session type     |
 | **Network access**                           | Configurable per environment                                                                                    | Your machine's network       | Your machine's network | Depends on session type     |
 
 See the [terminal quickstart](/en/quickstart), [Desktop app](/en/desktop), or [Remote Control](/en/remote-control) docs to set those up.
@@ -125,7 +125,7 @@ With GitHub connected and an environment created, you're ready to submit tasks.
   </Step>
 
   <Step title="Choose a permission mode">
-    The mode dropdown next to the input defaults to **Auto accept edits**, where Claude makes changes and pushes a branch without stopping for approval. Switch to **Plan mode** if you want Claude to propose an approach and wait for your go-ahead before editing files. Cloud sessions don't offer Ask permissions, Auto mode, or Bypass permissions. See [Permission modes](/en/permission-modes) for the full list.
+    The mode dropdown next to the input defaults to **Accept edits**, where Claude makes changes and pushes a branch without stopping for approval. Switch to **Plan mode** if you want Claude to propose an approach and wait for your go-ahead before editing files. Cloud sessions don't offer Ask permissions or Bypass permissions. See [Permission modes](/en/permission-modes) for the full list.
   </Step>
 
   <Step title="Describe the task and submit">

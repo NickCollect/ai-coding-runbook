@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/desktop-quickstart
-fetched_at: 2026-05-25T05:15:53.046117+00:00
+fetched_at: 2026-06-15T06:17:52.706179+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,12 +68,12 @@ With the Code tab open, choose a project and give Claude something to do.
 
     You can also select:
 
-    * **Remote**: Run sessions on Anthropic's cloud infrastructure that continue even if you close the app. Remote sessions use the same infrastructure as [Claude Code on the web](/en/claude-code-on-the-web).
+    * **Remote**: Run sessions on Anthropic's cloud infrastructure that continue even if you close the app. Cloud sessions use the same infrastructure as [Claude Code on the web](/en/claude-code-on-the-web).
     * **SSH**: Connect to a remote machine over SSH, such as your own servers, cloud VMs, or dev containers. Desktop installs Claude Code on the remote machine automatically the first time you connect.
   </Step>
 
   <Step title="Choose a model">
-    Select a model from the dropdown next to the send button. See [models](/en/model-config#available-models) for a comparison of Opus, Sonnet, and Haiku. You can change the model later from the same dropdown.
+    Select a model from the dropdown next to the send button. See [models](/en/model-config#available-models) for a comparison of the available models. You can change the model later from the same dropdown.
   </Step>
 
   <Step title="Tell Claude what to do">

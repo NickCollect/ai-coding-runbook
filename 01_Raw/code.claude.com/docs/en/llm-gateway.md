@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/llm-gateway
-fetched_at: 2026-05-18T05:02:44.837485+00:00
+fetched_at: 2026-06-15T06:17:54.987429+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,6 +19,8 @@ LLM gateways provide a centralized proxy layer between Claude Code and model pro
 * **Cost controls** - Implement budgets and rate limits
 * **Audit logging** - Track all model interactions for compliance
 * **Model routing** - Switch between providers without code changes
+
+This page covers gateway requirements and configuration for the Claude Code CLI. Enterprise Desktop deployments can configure gateway providers via [managed settings](https://support.claude.com/en/articles/12622667-enterprise-configuration). The Claude Desktop app can also run against a self-hosted gateway through the [Cowork on 3P research preview](https://claude.com/docs/cowork/3p/gateway), which uses its own configuration keys.
 
 ## Gateway requirements
 

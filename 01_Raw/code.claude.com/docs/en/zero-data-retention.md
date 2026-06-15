@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/zero-data-retention
-fetched_at: 2026-05-05T19:40:39.833525+00:00
+fetched_at: 2026-06-15T06:17:59.937339+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,9 +10,13 @@ fetch_method: mintlify_md
 
 # Zero data retention
 
-> Learn about Zero Data Retention (ZDR) for Claude Code on Claude for Enterprise, including scope, disabled features, and how to request enablement.
+> Learn about Zero Data Retention (ZDR) for Claude Code, available to qualified accounts on Claude for Enterprise, including scope, disabled features, and how to request enablement.
 
-Zero Data Retention (ZDR) is available for Claude Code when used through Claude for Enterprise. When ZDR is enabled, prompts and model responses generated during Claude Code sessions are processed in real time and not stored by Anthropic after the response is returned, except where needed to comply with law or combat misuse.
+Zero Data Retention (ZDR) for Claude Code is available to qualified accounts on Claude for Enterprise. When ZDR is enabled, prompts and model responses generated during Claude Code sessions are processed in real time and not stored by Anthropic after the response is returned, except where needed to comply with law or combat misuse.
+
+<Note>
+  ZDR is not included in the standard Claude for Enterprise plan and cannot be enabled from your admin settings. It is available to qualified accounts and requires separate enablement by Anthropic. If your organization requires ZDR, [contact sales](https://www.anthropic.com/contact-sales?utm_source=claude_code\&utm_medium=docs\&utm_content=zero_data_retention_request) or your Anthropic account team to confirm eligibility.
+</Note>
 
 ZDR on Claude for Enterprise gives enterprise customers the ability to use Claude Code with zero data retention and access administrative capabilities:
 
@@ -33,7 +37,7 @@ ZDR covers Claude Code inference on Claude for Enterprise.
 
 ### What ZDR covers
 
-ZDR covers model inference calls made through Claude Code on Claude for Enterprise. When you use Claude Code in your terminal, the prompts you send and the responses Claude generates are not retained by Anthropic. This applies regardless of which Claude model is used.
+ZDR covers model inference calls made through Claude Code on Claude for Enterprise. When you use Claude Code in your terminal, the prompts you send and the responses Claude generates are not retained by Anthropic. This applies to every model available to ZDR organizations. Some models require data retention and are not available under ZDR; see [Model availability under ZDR](#model-availability-under-zdr).
 
 ### What ZDR does not cover
 
@@ -51,15 +55,21 @@ ZDR does not extend to the following, even for organizations with ZDR enabled. T
 
 When ZDR is enabled for a Claude Code organization on Claude for Enterprise, certain features that require storing prompts or completions are automatically disabled at the backend level:
 
-| Feature                                                             | Reason                                                                  |
-| ------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| [Claude Code on the Web](/en/claude-code-on-the-web)                | Requires server-side storage of conversation history.                   |
-| [Remote sessions](/en/desktop#remote-sessions) from the Desktop app | Requires persistent session data that includes prompts and completions. |
-| Feedback submission (`/feedback`)                                   | Submitting feedback sends conversation data to Anthropic.               |
+| Feature                                                           | Reason                                                                  |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [Claude Code on the Web](/en/claude-code-on-the-web)              | Requires server-side storage of conversation history.                   |
+| [Cloud sessions](/en/desktop#cloud-sessions) from the Desktop app | Requires persistent session data that includes prompts and completions. |
+| Feedback submission (`/feedback`)                                 | Submitting feedback sends conversation data to Anthropic.               |
 
 These features are blocked in the backend regardless of client-side display. If you see a disabled feature in the Claude Code terminal during startup, attempting to use it returns an error indicating the organization's policies do not allow that action.
 
 Future features may also be disabled if they require storing prompts or completions.
+
+### Model availability under ZDR
+
+Claude Fable 5 is not available for organizations with zero data retention enabled. This model class [requires data retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements), so requests from ZDR organizations cannot be served by it. The model is either absent from the `/model` picker for ZDR organizations or shown as disabled with a notice that disabling ZDR is required, and the server rejects requests for it regardless of client configuration.
+
+Other models remain available under ZDR. Fable 5 is not the default model, and the `best` alias, which resolves to Fable 5 where it is available, resolves to Opus for organizations where it is not, including ZDR organizations.
 
 ## Data retention for policy violations
 

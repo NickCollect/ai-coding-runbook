@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/migration-guide
-fetched_at: 2026-05-11T04:55:25.347866+00:00
+fetched_at: 2026-06-15T06:17:47.533599+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,7 +80,9 @@ After:
 }
 ```
 
-That's it! No other code changes are required.
+**5. Review [breaking changes](#breaking-changes)**
+
+Make any code changes needed to complete the migration.
 
 ### For Python Projects
 
@@ -162,12 +164,14 @@ options = ClaudeAgentOptions(model="claude-opus-4-7", permission_mode="acceptEdi
 
 <CodeGroup>
   ```typescript TypeScript theme={null}
+  import { query } from "@anthropic-ai/claude-agent-sdk";
+
   // BEFORE (v0.0.x) - Used Claude Code's system prompt by default
-  const result = query({ prompt: "Hello" });
+  const before = query({ prompt: "Hello" });
 
   // AFTER (v0.1.0) - Uses minimal system prompt by default
   // To get the old behavior, explicitly request Claude Code's preset:
-  const result = query({
+  const presetResult = query({
     prompt: "Hello",
     options: {
       systemPrompt: { type: "preset", preset: "claude_code" }
@@ -175,7 +179,7 @@ options = ClaudeAgentOptions(model="claude-opus-4-7", permission_mode="acceptEdi
   });
 
   // Or use a custom system prompt:
-  const result = query({
+  const customResult = query({
     prompt: "Hello",
     options: {
       systemPrompt: "You are a helpful coding assistant"
@@ -221,7 +225,9 @@ To run isolated from filesystem settings, pass an empty array:
 
 <CodeGroup>
   ```typescript TypeScript theme={null}
-  const result = query({
+  import { query } from "@anthropic-ai/claude-agent-sdk";
+
+  const isolatedResult = query({
     prompt: "Hello",
     options: {
       settingSources: [] // No filesystem settings loaded
@@ -229,7 +235,7 @@ To run isolated from filesystem settings, pass an empty array:
   });
 
   // Or load only specific sources:
-  const result = query({
+  const projectOnlyResult = query({
     prompt: "Hello",
     options: {
       settingSources: ["project"] // Only project settings

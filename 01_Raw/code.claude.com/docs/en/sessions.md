@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sessions
-fetched_at: 2026-05-25T05:15:53.354210+00:00
+fetched_at: 2026-06-15T06:17:57.431922+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,11 +34,11 @@ Sessions are saved continuously to [local transcript files](#export-and-locate-s
 | `claude --from-pr <number>` | Resumes the session linked to that pull request                    |
 | `/resume`                   | Switches to a different conversation from inside an active session |
 
-Sessions created with [`claude -p`](/en/headless) or the [Agent SDK](/en/agent-sdk/overview) do not appear in the session picker, but you can still resume one by passing its session ID to `claude --resume <session-id>`.
+Sessions created with [`claude -p`](/en/headless) or the [Agent SDK](/en/agent-sdk/overview) do not appear in the session picker, but you can still resume one by passing its session ID to `claude --resume <session-id>`. Run this from the directory the session was started in: session ID lookup is scoped to the current project directory and its git worktrees, so a session created elsewhere reports `No conversation found with session ID: <session-id>`.
 
 ### Where the session picker looks
 
-Sessions are stored per project directory. By default the session picker shows interactive sessions from the current worktree, plus sessions started elsewhere that added the current directory with `/add-dir`. Use `Ctrl+W` to widen to all worktrees of the repository or `Ctrl+A` to widen to every project on this machine.
+Sessions are stored per project directory. By default the session picker shows interactive sessions from the current worktree, plus sessions started elsewhere that added the current directory with `/add-dir`. {/* min-version: 2.1.169 */}From v2.1.169, moving a session with [`/cd`](/en/commands) relocates it to the new directory's project storage, so it appears in that directory's picker afterward. Use `Ctrl+W` to widen to all worktrees of the repository or `Ctrl+A` to widen to every project on this machine.
 
 Selecting a session from another worktree of the same repository resumes it in place. Selecting a session from an unrelated project copies a `cd` and resume command to your clipboard instead.
 

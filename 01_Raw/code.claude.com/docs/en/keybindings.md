@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/keybindings
-fetched_at: 2026-06-01T05:54:51.820814+00:00
+fetched_at: 2026-06-15T06:17:54.820790+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,7 +110,7 @@ Actions available in the `Chat` context:
 | `chat:cancel`         | Escape                            | Cancel current input                                                                                                                                           |
 | `chat:clearInput`     | Ctrl+L                            | Force a full screen redraw, preserving input. In [fullscreen rendering](/en/fullscreen#clear-the-conversation), press twice within two seconds to run `/clear` |
 | `chat:clearScreen`    | Cmd+K                             | In [fullscreen rendering](/en/fullscreen#clear-the-conversation), press twice within two seconds to run `/clear`                                               |
-| `chat:killAgents`     | Ctrl+X Ctrl+K                     | Kill all running [background subagents](/en/sub-agents#run-subagents-in-foreground-or-background) in this session                                              |
+| `chat:killAgents`     | Ctrl+X Ctrl+K                     | Stop all running [background subagents](/en/sub-agents#run-subagents-in-foreground-or-background) in this session                                              |
 | `chat:cycleMode`      | Shift+Tab\*                       | Cycle permission modes                                                                                                                                         |
 | `chat:modelPicker`    | Meta+P                            | Open model picker                                                                                                                                              |
 | `chat:fastMode`       | Meta+O                            | Toggle fast mode                                                                                                                                               |
@@ -184,9 +184,9 @@ Actions available in the `HistorySearch` context:
 
 Actions available in the `Task` context:
 
-| Action            | Default | Description             |
-| :---------------- | :------ | :---------------------- |
-| `task:background` | Ctrl+B  | Background current task |
+| Action            | Default               | Description                                                                                                                                 |
+| :---------------- | :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| `task:background` | Ctrl+B, Ctrl+X Ctrl+B | Background current task. {/* min-version: 2.1.169 */}The Ctrl+X Ctrl+B chord requires v2.1.169 or later and avoids the tmux prefix conflict |
 
 ### Theme actions
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/remote-control
-fetched_at: 2026-06-01T05:54:52.965763+00:00
+fetched_at: 2026-06-15T06:17:56.566226+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,6 +80,8 @@ You can start a Remote Control session from the CLI or the VS Code extension. Th
     ```
 
     This gives you a full interactive session in your terminal that you can also control from claude.ai or the Claude app. Unlike `claude remote-control` (server mode), you can type messages locally while the session is also available remotely.
+
+    As of v2.1.162, a Remote Control indicator stays in the footer below the input box while the connection is up. {/* min-version: 2.1.172 */}From v2.1.172, the indicator reads `/rc active` and is hidden when the terminal is too narrow to fit it; earlier versions always show `Remote Control active`. The indicator text is a link to the session on claude.ai, so you can reopen it from the terminal at any time. Select the indicator with the down arrow key and press Enter to open a status panel with the session URL and a QR code.
   </Tab>
 
   <Tab title="From an existing session">
@@ -95,7 +97,11 @@ You can start a Remote Control session from the CLI or the VS Code extension. Th
     /remote-control My Project
     ```
 
-    This starts a Remote Control session that carries over your current conversation history and displays a session URL and QR code you can use to [connect from another device](#connect-from-another-device). The `--verbose`, `--sandbox`, and `--no-sandbox` flags are not available with this command.
+    This starts a Remote Control session that carries over your current conversation history.
+
+    As of v2.1.162, a Remote Control indicator appears in the footer below the input box and stays visible while the connection is up. {/* min-version: 2.1.172 */}From v2.1.172, the indicator reads `/rc active` and is hidden when the terminal is too narrow to fit it; earlier versions always show `Remote Control active`. The indicator text is a link to the session on claude.ai. Select it with the down arrow key and press Enter, or run `/remote-control` again, to open a status panel with the session URL and a QR code you can use to [connect from another device](#connect-from-another-device).
+
+    The `--verbose`, `--sandbox`, and `--no-sandbox` flags are not available with this command.
   </Tab>
 
   <Tab title="VS Code">
@@ -194,7 +200,7 @@ If notifications don't arrive:
 * **Local process must keep running**: Remote Control runs as a local process. If you close the terminal, quit VS Code, or otherwise stop the `claude` process, the session ends.
 * **Extended network outage**: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run `claude remote-control` again to start a new session.
 * **Ultraplan disconnects Remote Control**: starting an [ultraplan](/en/ultraplan) session disconnects any active Remote Control session because both features occupy the claude.ai/code interface and only one can be connected at a time.
-* **Some commands are local-only**: commands that open an interactive picker in the terminal, such as `/mcp`, `/plugin`, or `/resume`, work only from the local CLI. Commands that produce text output, including `/compact`, `/clear`, `/context`, `/usage`, `/exit`, `/usage-credits`, `/recap`, and `/reload-plugins`, work from mobile and web.
+* **Some commands are local-only**: commands that open an interactive picker in the terminal, such as `/plugin` or `/resume`, work only from the local CLI. Commands that produce text output, including `/compact`, `/clear`, `/context`, `/usage`, `/exit`, `/usage-credits`, `/recap`, and `/reload-plugins`, work from mobile and web. {/* min-version: 2.1.166 */}As of v2.1.166, `/mcp` also works from mobile and web: it returns a text summary of server status instead of opening the picker, and accepts the same `reconnect`, `enable`, and `disable` [subcommands](/en/commands#all-commands) as the local CLI, with one difference: from mobile and web, `/mcp reconnect` with no server name reconnects every server that has failed or needs authentication, while the local CLI requires a server name for `reconnect`.
 
 ## Troubleshooting
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/admin-setup
-fetched_at: 2026-06-08T05:24:58.277319+00:00
+fetched_at: 2026-06-15T06:17:46.884632+00:00
 fetch_method: mintlify_md
 ---
 
@@ -48,7 +48,7 @@ Proxy and firewall requirements in [Network configuration](/en/network-config) a
 
 ## Decide how settings reach devices
 
-Managed settings define policy that takes precedence over local developer configuration. Claude Code looks for them in four places and uses the first one it finds on a given device.
+Managed settings define policy that takes precedence over local developer configuration. Claude Code checks the four sources below in priority order and applies the first one that returns a non-empty configuration.
 
 | Mechanism               | Delivery                                                                                                                                                                                              | Priority | Platforms      |
 | :---------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------- | :------------- |
@@ -107,17 +107,17 @@ Cloud providers expose spend through AWS Cost Explorer, GCP Billing, or Azure Co
 
 On Team, Enterprise, Claude API, and cloud provider plans, Anthropic does not train models on your code or prompts. Your API provider determines retention and compliance posture.
 
-| Topic                     | What to know                                                                    | Where to start                                 |
-| :------------------------ | :------------------------------------------------------------------------------ | :--------------------------------------------- |
-| Data usage policy         | What Anthropic collects, how long it's retained, what's never used for training | [Data usage](/en/data-usage)                   |
-| Zero Data Retention (ZDR) | Nothing stored after the request completes. Available on Claude for Enterprise  | [Zero data retention](/en/zero-data-retention) |
-| Security architecture     | Network model, encryption, authentication, audit trail                          | [Security](/en/security)                       |
+| Topic                     | What to know                                                                                         | Where to start                                 |
+| :------------------------ | :--------------------------------------------------------------------------------------------------- | :--------------------------------------------- |
+| Data usage policy         | What Anthropic collects, how long it's retained, what's never used for training                      | [Data usage](/en/data-usage)                   |
+| Zero Data Retention (ZDR) | Nothing stored after the request completes. Available to qualified accounts on Claude for Enterprise | [Zero data retention](/en/zero-data-retention) |
+| Security architecture     | Network model, encryption, authentication, audit trail                                               | [Security](/en/security)                       |
 
 If you need request-level audit logging or to route traffic by data sensitivity, place an [LLM gateway](/en/llm-gateway) between developers and your provider. For regulatory requirements and certifications, see [Legal and compliance](/en/legal-and-compliance).
 
 ## Verify and onboard
 
-After configuring managed settings, have a developer run `/status` inside Claude Code. The output includes a line beginning with `Enterprise managed settings` followed by the source in parentheses, one of `(remote)`, `(plist)`, `(HKLM)`, `(HKCU)`, or `(file)`. See [Verify active settings](/en/settings#verify-active-settings).
+After configuring managed settings, have a developer run `/status` inside Claude Code. On the **Status** tab, the `Setting sources` line shows `Enterprise managed settings` followed by the source in parentheses, one of `(remote)`, `(plist)`, `(HKLM)`, `(HKCU)`, or `(file)`. See [Verify active settings](/en/settings#verify-active-settings).
 
 Share these resources to help developers get started:
 

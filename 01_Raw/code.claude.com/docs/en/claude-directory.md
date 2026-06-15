@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-directory
-fetched_at: 2026-06-08T05:25:01.927812+00:00
+fetched_at: 2026-06-15T06:17:51.549742+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1498,7 +1498,7 @@ Click a filename to open that node in the explorer above.
 | [`CLAUDE.md`](#ce-claude-md)                        | Project and global | ✓      | Instructions loaded every session                                                                             | [Memory](/en/memory)                                            |
 | [`rules/*.md`](#ce-rules)                           | Project and global | ✓      | Topic-scoped instructions, optionally path-gated                                                              | [Rules](/en/memory#organize-rules-with-claude/rules/)           |
 | [`settings.json`](#ce-settings-json)                | Project and global | ✓      | Permissions, hooks, env vars, model defaults                                                                  | [Settings](/en/settings)                                        |
-| [`settings.local.json`](#ce-settings-local-json)    | Project only       |        | Your personal overrides, auto-gitignored                                                                      | [Settings scopes](/en/settings#settings-files)                  |
+| [`settings.local.json`](#ce-settings-local-json)    | Project only       |        | Your personal overrides, gitignored when Claude Code creates it                                               | [Settings scopes](/en/settings#settings-files)                  |
 | [`.mcp.json`](#ce-mcp-json)                         | Project only       | ✓      | Team-shared MCP servers                                                                                       | [MCP scopes](/en/mcp#mcp-installation-scopes)                   |
 | [`.worktreeinclude`](#ce-worktreeinclude)           | Project only       | ✓      | Gitignored files to copy into new worktrees                                                                   | [Worktrees](/en/worktrees#copy-gitignored-files-into-worktrees) |
 | [`skills/<name>/SKILL.md`](#ce-skills)              | Project and global | ✓      | Reusable prompts invoked with `/name` or auto-invoked                                                         | [Skills](/en/skills)                                            |

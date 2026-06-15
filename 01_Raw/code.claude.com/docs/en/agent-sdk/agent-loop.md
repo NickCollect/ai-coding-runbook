@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/agent-loop
-fetched_at: 2026-06-01T05:54:48.132607+00:00
+fetched_at: 2026-06-15T06:17:46.965259+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ When you start an agent, the SDK runs the same [execution loop that powers Claud
 
 Every agent session follows the same cycle:
 
-<img src="https://mintcdn.com/claude-code/gvy2DIUELtNA8qD3/images/agent-loop-diagram.svg?fit=max&auto=format&n=gvy2DIUELtNA8qD3&q=85&s=192e1bd6c8a2950a16e5ee0b94e27e26" alt="Agent loop: prompt enters, Claude evaluates, branches to tool calls or final answer" width="680" height="150" data-path="images/agent-loop-diagram.svg" />
+<img src="https://mintcdn.com/claude-code/ikqp3_70mqIahteV/images/agent-loop-diagram.svg?fit=max&auto=format&n=ikqp3_70mqIahteV&q=85&s=1c6e8f28d80dba14a7287419656f1237" alt="Diagram of the agent loop: your prompt enters the agentic loop, where Claude evaluates and either requests tool calls, whose results feed back into another evaluation, or returns the final answer" width="720" height="212" data-path="images/agent-loop-diagram.svg" />
 
 1. **Receive prompt.** Claude receives your prompt, along with the system prompt, tool definitions, and conversation history. The SDK yields a [`SystemMessage`](#message-types) with subtype `"init"` containing session metadata.
 2. **Evaluate and respond.** Claude evaluates the current state and determines how to proceed. It may respond with text, request one or more tool calls, or both. The SDK yields an [`AssistantMessage`](#message-types) containing the text and any tool call requests.
@@ -166,15 +166,15 @@ When either limit is hit, the SDK returns a `ResultMessage` with a corresponding
 
 The `effort` option controls how much reasoning Claude applies. Lower effort levels use fewer tokens per turn and reduce cost. Not all models support the effort parameter. See [Effort](https://platform.claude.com/docs/en/build-with-claude/effort) for which models support it.
 
-| Level      | Behavior                          | Good for                                          |
-| :--------- | :-------------------------------- | :------------------------------------------------ |
-| `"low"`    | Minimal reasoning, fast responses | File lookups, listing directories                 |
-| `"medium"` | Balanced reasoning                | Routine edits, standard tasks                     |
-| `"high"`   | Thorough analysis                 | Refactors, debugging                              |
-| `"xhigh"`  | Extended reasoning depth          | Coding and agentic tasks; recommended on Opus 4.7 |
-| `"max"`    | Maximum reasoning depth           | Multi-step problems requiring deep analysis       |
+| Level      | Behavior                          | Good for                                                       |
+| :--------- | :-------------------------------- | :------------------------------------------------------------- |
+| `"low"`    | Minimal reasoning, fast responses | File lookups, listing directories                              |
+| `"medium"` | Balanced reasoning                | Routine edits, standard tasks                                  |
+| `"high"`   | Thorough analysis                 | Refactors, debugging                                           |
+| `"xhigh"`  | Extended reasoning depth          | Coding and agentic tasks; recommended on Fable 5 and Opus 4.7+ |
+| `"max"`    | Maximum reasoning depth           | Multi-step problems requiring deep analysis                    |
 
-If you don't set `effort`, the Python SDK leaves the parameter unset and defers to the model's default behavior. The TypeScript SDK defaults to `"high"`.
+If you don't set `effort`, both SDKs leave the parameter unset and defer to the model's default behavior.
 
 <Note>
   `effort` trades latency and token cost for reasoning depth within each response. [Extended thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking) is a separate feature that produces visible chain-of-thought blocks in the output. They are independent: you can set `effort: "low"` with extended thinking enabled, or `effort: "max"` without it.
@@ -186,14 +186,14 @@ Use lower effort for agents doing simple, well-scoped tasks (like listing files 
 
 The permission mode option (`permission_mode` in Python, `permissionMode` in TypeScript) controls whether the agent asks for approval before using tools:
 
-| Mode                       | Behavior                                                                                                                                                                             |
-| :------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `"default"`                | Tools not covered by allow rules trigger your approval callback; no callback means deny                                                                                              |
-| `"acceptEdits"`            | Auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.); other Bash commands follow default rules                                               |
-| `"plan"`                   | Read-only tools run; Claude explores and produces a plan without editing your source files                                                                                           |
-| `"dontAsk"`                | Never prompts. Tools pre-approved by [permission rules](/en/settings#permission-settings) run, everything else is denied                                                             |
-| `"auto"` (TypeScript only) | Uses a model classifier to approve or deny each tool call. See [Auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) for availability and behavior                      |
-| `"bypassPermissions"`      | Runs all allowed tools without asking. Cannot be used when running as root on Unix. Use only in isolated environments where the agent's actions cannot affect systems you care about |
+| Mode                       | Behavior                                                                                                                                                                                                                                                                                                                                                                                                      |
+| :------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `"default"`                | Tools not covered by allow rules trigger your approval callback; no callback means deny                                                                                                                                                                                                                                                                                                                       |
+| `"acceptEdits"`            | Auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.); other Bash commands follow default rules                                                                                                                                                                                                                                                                        |
+| `"plan"`                   | Claude explores and plans without editing your source files; file edits are never auto-approved and prompt through your `canUseTool` callback                                                                                                                                                                                                                                                                 |
+| `"dontAsk"`                | Never prompts. Tools pre-approved by [permission rules](/en/settings#permission-settings) run, everything else is denied                                                                                                                                                                                                                                                                                      |
+| `"auto"` (TypeScript only) | Uses a model classifier to approve or deny each tool call. See [Auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) for availability and behavior                                                                                                                                                                                                                                               |
+| `"bypassPermissions"`      | Runs all allowed tools without asking, unless an explicit [`ask` rule](/en/settings#permission-settings) matches; see [How permissions are evaluated](/en/agent-sdk/permissions#how-permissions-are-evaluated) for where ask rules sit in the precedence order. Cannot be used when running as root on Unix. Use only in isolated environments where the agent's actions cannot affect systems you care about |
 
 For interactive applications, use `"default"` with a tool approval callback to surface approval prompts. For autonomous agents on a dev machine, `"acceptEdits"` auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.) while still gating other `Bash` commands behind allow rules. Reserve `"bypassPermissions"` for CI, containers, or other isolated environments. See [Permissions](/en/agent-sdk/permissions) for full details.
 
@@ -272,13 +272,13 @@ See [Session management](/en/agent-sdk/sessions) for the full guide on resume, c
 
 When the loop ends, the `ResultMessage` tells you what happened and gives you the output. The `subtype` field (available in both SDKs) is the primary way to check termination state.
 
-| Result subtype                        | What happened                                                                    | `result` field available? |
-| :------------------------------------ | :------------------------------------------------------------------------------- | :-----------------------: |
-| `success`                             | Claude finished the task normally                                                |            Yes            |
-| `error_max_turns`                     | Hit the `maxTurns` limit before finishing                                        |             No            |
-| `error_max_budget_usd`                | Hit the `maxBudgetUsd` limit before finishing                                    |             No            |
-| `error_during_execution`              | An error interrupted the loop (for example, an API failure or cancelled request) |             No            |
-| `error_max_structured_output_retries` | Structured output validation failed after the configured retry limit             |             No            |
+| Result subtype                        | What happened                                                                                                                                                                           | `result` field available? |
+| :------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-----------------------: |
+| `success`                             | Claude finished the task normally                                                                                                                                                       |            Yes            |
+| `error_max_turns`                     | Hit the `maxTurns` limit before finishing                                                                                                                                               |             No            |
+| `error_max_budget_usd`                | Hit the `maxBudgetUsd` limit before finishing                                                                                                                                           |             No            |
+| `error_during_execution`              | An error interrupted the loop (for example, an API failure or cancelled request)                                                                                                        |             No            |
+| `error_max_structured_output_retries` | No valid structured output was produced within the configured retry limit: every attempt failed validation, or a model fallback retracted the completed output with no successful retry |             No            |
 
 The `result` field (the final text output) is only present on the `success` variant, so always check the subtype before reading it. All result subtypes carry `total_cost_usd`, `usage`, `num_turns`, and `session_id` so you can track cost and resume even after errors. In Python, `total_cost_usd` and `usage` are typed as optional and may be `None` on some error paths, so guard before formatting them. See [Tracking costs and usage](/en/agent-sdk/cost-tracking) for details on interpreting the `usage` fields.
 
