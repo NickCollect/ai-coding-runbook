@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/files
-fetched_at: 2026-06-08T05:24:58.664920+00:00
+fetched_at: 2026-06-15T06:17:42.209896+00:00
 fetch_method: mintlify_md
 ---
 
@@ -744,7 +744,7 @@ const anthropic = new Anthropic();
 const files = await anthropic.beta.files.list();
 ```
 
-```csharp C# nocheck
+```csharp C#
 using System;
 using System.Threading.Tasks;
 using Anthropic;

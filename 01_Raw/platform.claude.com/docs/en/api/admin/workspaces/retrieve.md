@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/retrieve
-fetched_at: 2026-06-08T05:25:06.028680+00:00
+fetched_at: 2026-06-15T06:17:50.849552+00:00
 fetch_method: mintlify_md
 ---
 
@@ -98,7 +98,7 @@ Get Workspace
 ```http
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response

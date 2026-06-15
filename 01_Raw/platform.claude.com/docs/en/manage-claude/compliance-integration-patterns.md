@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-integration-patterns
-fetched_at: 2026-05-25T05:15:51.640452+00:00
+fetched_at: 2026-06-15T06:17:44.651954+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Choose between polling and cursor-driven Activity Feed consumption, correlate Co
 ---
 
 <Note>
-  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  To enable the Compliance API, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 <Check>
@@ -79,7 +79,7 @@ Page through until `has_more` is `false`, then persist `first_id` from the final
 
 A production **catch-up** loop fetches activities recorded since your last poll by driving iteration off `has_more` and `first_id`:
 
-```text
+```text nowrap
 cursor = stored_cursor
 loop:
   page = GET /v1/compliance/activities?before_id={cursor}&limit=5000

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/webhooks
-fetched_at: 2026-05-25T05:15:54.836117+00:00
+fetched_at: 2026-06-15T06:17:50.324794+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -40,7 +40,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -54,7 +54,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -68,7 +68,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -82,7 +82,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -96,7 +96,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -110,7 +110,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -124,7 +124,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -138,7 +138,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -152,7 +152,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -166,7 +166,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -176,13 +176,17 @@ fetch_method: mintlify_md
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_created"`
 
@@ -190,13 +194,17 @@ fetch_method: mintlify_md
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_idled"`
 
@@ -204,13 +212,17 @@ fetch_method: mintlify_md
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_terminated"`
 
@@ -222,7 +234,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -236,7 +248,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -250,7 +262,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -264,7 +276,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -278,7 +290,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -296,7 +308,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -314,7 +326,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -332,7 +344,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -360,7 +372,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -374,7 +386,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -388,7 +400,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -402,7 +414,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -416,7 +428,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -430,7 +442,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -444,7 +456,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -458,7 +470,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -472,7 +484,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -486,7 +498,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -500,7 +512,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -510,13 +522,17 @@ fetch_method: mintlify_md
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, session_thread_id, 2 more }`
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_created"`
 
@@ -524,13 +540,17 @@ fetch_method: mintlify_md
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, session_thread_id, 2 more }`
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_idled"`
 
@@ -538,13 +558,17 @@ fetch_method: mintlify_md
 
     - `workspace_id: string`
 
-  - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, type, workspace_id }`
+  - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, session_thread_id, 2 more }`
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
+
+    - `session_thread_id: string`
+
+      ID of the session thread this event refers to.
 
     - `type: "session.thread_terminated"`
 
@@ -556,7 +580,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the session that triggered the event.
 
     - `organization_id: string`
 
@@ -570,7 +594,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -584,7 +608,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -598,7 +622,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault that triggered the event.
 
     - `organization_id: string`
 
@@ -612,7 +636,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -630,7 +654,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -648,7 +672,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -666,7 +690,7 @@ fetch_method: mintlify_md
 
     - `id: string`
 
-      ID of the resource that triggered the event.
+      ID of the vault credential that triggered the event.
 
     - `organization_id: string`
 
@@ -686,7 +710,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -702,7 +726,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -718,7 +742,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -734,7 +758,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -750,7 +774,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -766,7 +790,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -782,7 +806,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -798,7 +822,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -814,7 +838,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -830,7 +854,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -846,7 +870,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -862,7 +886,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
 
@@ -874,13 +898,17 @@ fetch_method: mintlify_md
 
 ### Beta Webhook Session Thread Created Event Data
 
-- `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, session_thread_id, 2 more }`
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_created"`
 
@@ -890,13 +918,17 @@ fetch_method: mintlify_md
 
 ### Beta Webhook Session Thread Idled Event Data
 
-- `BetaWebhookSessionThreadIdledEventData object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionThreadIdledEventData object { id, organization_id, session_thread_id, 2 more }`
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_idled"`
 
@@ -906,13 +938,17 @@ fetch_method: mintlify_md
 
 ### Beta Webhook Session Thread Terminated Event Data
 
-- `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, type, workspace_id }`
+- `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, session_thread_id, 2 more }`
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the session that triggered the event.
 
   - `organization_id: string`
+
+  - `session_thread_id: string`
+
+    ID of the session thread this event refers to.
 
   - `type: "session.thread_terminated"`
 
@@ -926,7 +962,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -942,7 +978,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -958,7 +994,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -978,7 +1014,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -998,7 +1034,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -1018,7 +1054,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault credential that triggered the event.
 
   - `organization_id: string`
 
@@ -1038,7 +1074,7 @@ fetch_method: mintlify_md
 
   - `id: string`
 
-    ID of the resource that triggered the event.
+    ID of the vault that triggered the event.
 
   - `organization_id: string`
 
@@ -1066,7 +1102,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1080,7 +1116,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1094,7 +1130,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1108,7 +1144,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1122,7 +1158,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1136,7 +1172,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1150,7 +1186,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1164,7 +1200,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1178,7 +1214,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1192,7 +1228,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1206,7 +1242,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1216,13 +1252,17 @@ fetch_method: mintlify_md
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadCreatedEventData object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_created"`
 
@@ -1230,13 +1270,17 @@ fetch_method: mintlify_md
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadIdledEventData object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_idled"`
 
@@ -1244,13 +1288,17 @@ fetch_method: mintlify_md
 
       - `workspace_id: string`
 
-    - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, type, workspace_id }`
+    - `BetaWebhookSessionThreadTerminatedEventData object { id, organization_id, session_thread_id, 2 more }`
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
+
+      - `session_thread_id: string`
+
+        ID of the session thread this event refers to.
 
       - `type: "session.thread_terminated"`
 
@@ -1262,7 +1310,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the session that triggered the event.
 
       - `organization_id: string`
 
@@ -1276,7 +1324,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -1290,7 +1338,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -1304,7 +1352,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault that triggered the event.
 
       - `organization_id: string`
 
@@ -1318,7 +1366,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -1336,7 +1384,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -1354,7 +1402,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 
@@ -1372,7 +1420,7 @@ fetch_method: mintlify_md
 
       - `id: string`
 
-        ID of the resource that triggered the event.
+        ID of the vault credential that triggered the event.
 
       - `organization_id: string`
 

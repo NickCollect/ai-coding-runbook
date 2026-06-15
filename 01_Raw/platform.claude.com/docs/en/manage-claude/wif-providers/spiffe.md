@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-providers/spiffe
-fetched_at: 2026-05-11T04:55:25.129822+00:00
+fetched_at: 2026-06-15T06:17:44.224323+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ The trust domain and the issuer URL are independent. The trust domain (`spiffe:/
 
 Confirm `jwt_issuer` is set in SPIRE Server's configuration and points at the discovery provider's public URL. The following example also shows a default JWT-SVID lifetime; SPIRE's built-in default is 5 minutes, which is short enough that continuous rotation is required (see [Run spiffe-helper](#run-spiffe-helper)). Anthropic's token-exchange endpoint rejects any identity token whose lifetime exceeds the federation issuer's configured maximum (1 hour by default; see [Validation rules](/docs/en/manage-claude/wif-reference#validation-rules)). This check applies to every SPIFFE implementation, not just SPIRE, so keep `default_jwt_svid_ttl` (or any per-entry override) at or below that maximum.
 
-```text server.conf
+```text server.conf nowrap
 server {
     trust_domain         = "prod.example.com"
     jwt_issuer           = "https://oidc-discovery.prod.example.com"
@@ -62,7 +62,7 @@ server {
 
 In the OIDC Discovery Provider's configuration, the same hostname must appear under `domains`, and the provider must be able to reach SPIRE Server's API socket. The provider serves the discovery document and JWKS over HTTPS; terminate TLS with its built-in ACME support or front it with a load balancer that does.
 
-```text oidc-discovery-provider.conf
+```text oidc-discovery-provider.conf nowrap
 domains = ["oidc-discovery.prod.example.com"]
 
 server_api {
@@ -99,9 +99,9 @@ Workloads outside Kubernetes use host-level selectors such as `unix:uid:1000` (`
 
 ### Run spiffe-helper
 
-[spiffe-helper](https://github.com/spiffe/spiffe-helper) is a sidecar utility that connects to the SPIRE Agent socket, fetches a JWT-SVID for a given audience, writes it to a file, and re-fetches it before expiry. The helper runs in daemon mode by default; the example below sets `daemon_mode = true` explicitly.
+[spiffe-helper](https://github.com/spiffe/spiffe-helper) is a sidecar utility that connects to the SPIRE Agent socket, fetches a JWT-SVID for a given audience, writes it to a file, and re-fetches it before expiry. The helper runs in daemon mode by default; the following example sets `daemon_mode = true` explicitly.
 
-```text helper.conf
+```text helper.conf nowrap
 agent_address = "/run/spire/sockets/agent.sock"
 cert_dir      = "/var/run/secrets/anthropic.com"
 daemon_mode   = true
@@ -116,7 +116,9 @@ In Kubernetes, run spiffe-helper as a sidecar container that shares a memory-bac
 
 ## Configure Anthropic
 
-Follow the [setup walkthrough](/docs/en/manage-claude/workload-identity-federation#set-up-federation) to register a federation issuer, create an Anthropic service account, and create a federation rule in the Claude Console. Use these SPIFFE-specific values.
+In the Claude Console, open **Settings → Workload identity**, click **Connect workload**, and select **Custom OIDC**. The wizard walks you through registering the issuer, creating a service account, and creating a federation rule.
+
+The wizard creates these resources for you. Use the following values whether you enter them in the wizard or send them to the [Admin API](/docs/en/manage-claude/wif-admin-api):
 
 **Federation issuer:** Register the OIDC Discovery Provider's public URL in `discovery` mode. Anthropic fetches `/.well-known/openid-configuration` from this URL and follows the returned `jwks_uri` to retrieve the trust domain's signing keys.
 
@@ -370,7 +372,7 @@ The Anthropic SDKs can either read the JWT-SVID from the file that spiffe-helper
     </CodeGroup>
   </Tab>
 
-  <Tab title="Callable via the SPIFFE Workload API">
+  <Tab title="Callable through the SPIFFE Workload API">
     Workloads that link a SPIFFE Workload API client directly can skip spiffe-helper and pass the SDK a callable that fetches a fresh JWT-SVID from the agent socket. The SDK invokes the callable before each token exchange, so the workload always presents an unexpired SVID. Go ([go-spiffe](https://github.com/spiffe/go-spiffe)) and Python ([py-spiffe](https://github.com/HewlettPackard/py-spiffe)) have mature Workload API clients.
 
     

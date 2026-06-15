@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/api-and-data-retention
-fetched_at: 2026-05-25T05:15:51.545374+00:00
+fetched_at: 2026-06-15T06:17:44.389365+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,7 +23,7 @@ Anthropic offers two data handling arrangements for the Claude API:
 Different APIs and features have different storage and retention needs. Where an API or feature doesn't require storage of customer prompts or responses, it may be eligible for ZDR. Where an API or feature necessarily requires storage of customer prompts or responses, Anthropic designs for the smallest possible retention footprint. For these features:
 
 - Retained data is never used for model training without your express permission.
-- Only what is technically necessary for the API and feature to work is retained. Conversation content (your prompts and Claude's outputs) is never retained unless explicitly noted.
+- Only what is technically necessary for the API and feature to work is retained. Conversation content (your prompts and Claude's outputs) is not retained by default. Certain models require 30-day data retention; see [Model-specific data retention requirements](#model-specific-data-retention-requirements).
 - Data is purged on the shortest practical TTL, and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
 
 Data accessible through the [Compliance API](/docs/en/manage-claude/compliance-api) follows its own retention model. The [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) retains data for 6 years. Chat, file, and project content from claude.ai follows your organization's retention policy, set in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls).
@@ -32,9 +32,13 @@ In the [feature eligibility table](#feature-eligibility), some features are mark
 
 ## Zero data retention (ZDR) scope
 
+<Warning>
+Claude Fable 5 and Claude Mythos 5 are not available under ZDR; see [Model-specific data retention requirements](#model-specific-data-retention-requirements).
+</Warning>
+
 **What ZDR covers**
 
-- **Certain Claude APIs:** ZDR applies to the Claude Messages and Token Counting APIs
+- **Certain Claude APIs:** ZDR applies to the Claude Messages and Token Counting APIs.
 - **Claude Code:** ZDR applies when used with Commercial organization API keys or through Claude Enterprise (see [Claude Code ZDR docs](https://code.claude.com/docs/en/zero-data-retention))
 
 **What ZDR does NOT cover**
@@ -48,6 +52,14 @@ In the [feature eligibility table](#feature-eligibility), some features are mark
 <Note>
 For the most up-to-date information on what products and features are ZDR-eligible, refer to your contract terms or contact your Anthropic account representative.
 </Note>
+
+## Model-specific data retention requirements
+
+Claude Fable 5 and Claude Mythos 5 are designated [Covered Models](https://support.claude.com/en/articles/15425695) and require 30-day data retention. Zero data retention is not available for Claude Fable 5 or Claude Mythos 5. Requests to either model from an organization whose data retention configuration does not meet this requirement return a `400 invalid_request_error`.
+
+This requirement applies on the Claude API. For Claude Fable 5 on Amazon Bedrock, Vertex AI, and Microsoft Foundry, data retention requirements are set by each platform.
+
+Organizations with a ZDR arrangement can configure data retention at the workspace level in [Claude Console > Settings > Workspaces](https://platform.claude.com/settings/workspaces): open a workspace's **Privacy controls** tab and turn on 30-day data retention for that workspace. This makes Claude Fable 5 and Claude Mythos 5 available in the designated workspace while the organization's other workspaces keep zero data retention. Workspaces without an override follow the organization default.
 
 ## HIPAA readiness
 

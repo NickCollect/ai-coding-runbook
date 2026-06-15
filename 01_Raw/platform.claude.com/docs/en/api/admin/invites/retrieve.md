@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/invites/retrieve
-fetched_at: 2026-05-25T05:15:54.964676+00:00
+fetched_at: 2026-06-15T06:17:50.543932+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,7 +75,7 @@ Get Invite
 ```http
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H 'anthropic-version: 2023-06-01' \
-    -H "X-Api-Key: $ANTHROPIC_ADMIN_API_KEY"
+    -H "Authorization: Bearer $ANTHROPIC_OAUTH_TOKEN"
 ```
 
 #### Response

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/task-budgets
-fetched_at: 2026-06-08T05:24:57.302894+00:00
+fetched_at: 2026-06-15T06:17:40.635587+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-cla
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
 <Note>
-Task budgets are in beta on Claude Opus 4.8 and Claude Opus 4.7. Set the `task-budgets-2026-03-13` beta header to opt in.
+Task budgets are in beta on Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, and Claude Opus 4.7. Set the `task-budgets-2026-03-13` beta header to opt in.
 </Note>
 
 ## When to use task budgets
@@ -287,6 +287,10 @@ The `task_budget` object has three fields:
 ## How the budget countdown works
 
 Claude sees a budget-countdown marker injected server-side throughout the conversation. The marker shows how many tokens remain in the current agentic loop and updates as the model generates thinking, tool calls, and output, and as it processes tool results. Claude uses this signal to pace itself and finish gracefully as the budget is consumed.
+
+<Note>
+**The countdown is visible only to the model.** API responses do not include a remaining-budget field: there is no `task_budget` information in the response `usage` object, and SDKs have no accessor for it. To track spend client-side, sum token usage across the requests in your loop as shown in [Measure your current usage](#measure-your-current-usage), or pass your own figure forward with `remaining` when [carrying a budget across compaction](#carrying-a-budget-across-compaction-with-remaining).
+</Note>
 
 <Warning>
 **The countdown reflects tokens Claude has processed in the current agentic loop, not tokens you resend between turns.** If your client sends the full conversation history on every follow-up request, your client-side token count may differ from the budget Claude is tracking. If you also decrement `remaining` while resending full history, the model sees an under-reported budget and the countdown drops faster than it should, causing Claude to wrap up earlier than the budget actually allows. Set a generous budget and let the model self-regulate against the countdown rather than trying to mirror it client-side.
@@ -559,6 +563,8 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 
 | Model | Support |
 |-------|---------|
+| Claude Fable 5 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Mythos 5 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.8 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.7 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.6 | Not supported |

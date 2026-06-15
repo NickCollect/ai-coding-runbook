@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed
-fetched_at: 2026-05-25T05:15:51.622310+00:00
+fetched_at: 2026-06-15T06:17:44.670972+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,13 +11,7 @@ Retrieve, filter, and paginate your organization's Compliance API Activity Feed.
 ---
 
 <Note>
-  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
-</Note>
-:
-    same wording, but "Activity Feed (this page)" as plain text so this page
-    doesn't link to itself. Keep in sync with content/en/_snippets/compliance-api-availability.mdx. */}
-<Note>
-  The Compliance API is enabled on request. Claude Enterprise organizations have access to the full API; Claude Console organizations have access to the Activity Feed (this page) only. See [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+  To enable the Compliance API, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
 </Note>
 
 <Check>
@@ -135,7 +129,7 @@ A production **backfill** loop pages through older activities by driving iterati
 2. Page through with `after_id=<last_id>` until `has_more` is `false`.
 3. Persist the final `last_id` only after you've stored every page it covers.
 
-```text
+```text nowrap
 cursor = stored_cursor
 loop:
   if cursor is not null:

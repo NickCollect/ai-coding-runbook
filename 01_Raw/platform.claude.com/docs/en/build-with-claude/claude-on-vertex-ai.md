@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-vertex-ai
-fetched_at: 2026-06-08T05:24:59.316547+00:00
+fetched_at: 2026-06-15T06:17:42.961856+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,13 +15,13 @@ The Vertex API for accessing Claude is nearly identical to the [Messages API](/d
 * In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 * In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
 
-Vertex is also supported by Anthropic's official [client SDKs](/docs/en/api/client-sdks). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
+Vertex is also supported by Anthropic's official [client SDKs](/docs/en/cli-sdks-libraries/overview). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
 
 Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [Anthropic Claude models on Vertex AI](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for more information on the setup required and a full walkthrough.
 
 ## Install an SDK for accessing Vertex AI
 
-First, install Anthropic's [client SDK](/docs/en/api/client-sdks) for your language of choice.
+First, install Anthropic's [client SDK](/docs/en/cli-sdks-libraries/overview) for your language of choice.
 
 <Tabs>
 <Tab title="Python">
@@ -51,14 +51,14 @@ go get github.com/anthropics/anthropic-sdk-go
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-vertex:2.35.0")
+implementation("com.anthropic:anthropic-java-vertex:2.40.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-vertex</artifactId>
-    <version>2.35.0</version>
+    <version>2.40.0</version>
 </dependency>
 ```
 
@@ -119,6 +119,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/
 
 | Model                          | Vertex AI API model ID |
 | ------------------------------ | ------------------------ |
+| Claude Fable 5                     | claude-fable-5 |
 | Claude Opus 4.8                    | claude-opus-4-8 |
 | Claude Opus 4.7                    | claude-opus-4-7 |
 | Claude Opus 4.6                  | claude-opus-4-6 |
@@ -348,7 +349,7 @@ The following examples show how to generate text from Claude on Vertex AI:
   ```
 </CodeGroup>
 
-See the [client SDKs](/docs/en/api/client-sdks) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
+See the [client SDKs](/docs/en/cli-sdks-libraries/overview) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
 Claude is also available through [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
 
@@ -386,10 +387,11 @@ For the full feature list with Vertex AI availability, see [Features overview](/
 - Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
 - API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 - Claude Managed Agents
+- Server-side fallback (the [`fallbacks` parameter](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback); use the [client-side fallback pattern](/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) instead)
 
 ### Context window
 
-Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 

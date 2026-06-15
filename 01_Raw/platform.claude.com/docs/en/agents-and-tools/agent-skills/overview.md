@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
-fetched_at: 2026-05-18T05:02:43.035174+00:00
+fetched_at: 2026-06-15T06:17:42.353051+00:00
 fetch_method: mintlify_md
 ---
 
@@ -91,7 +91,7 @@ When you request something that matches a Skill's description, Claude reads SKIL
 
 **Content types: Instructions, code, and resources**. Skills can bundle additional materials:
 
-```text
+```text nowrap
 pdf-skill/
 ├── SKILL.md (main instructions)
 ├── FORMS.md (form-filling guide)

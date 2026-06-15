@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/embeddings
-fetched_at: 2026-05-18T05:02:42.336935+00:00
+fetched_at: 2026-06-15T06:17:40.983980+00:00
 fetch_method: mintlify_md
 ---
 
@@ -99,7 +99,7 @@ print(result.embeddings[1])
 
 `result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the above code, the two embeddings will be printed on the screen:
 
-```text
+```text nowrap
 [-0.013131560757756233, 0.019828535616397858, ...]   # embedding for "Sample text 1"
 [-0.0069352793507277966, 0.020878976210951805, ...]  # embedding for "Sample text 2"
 ```

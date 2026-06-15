@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy
-fetched_at: 2026-06-08T05:24:59.198615+00:00
+fetched_at: 2026-06-15T06:17:42.838314+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ The legacy Amazon Bedrock integration for Claude models, using InvokeModel and C
 This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding. For models available on the Messages-API Bedrock endpoint, see [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), which uses the Messages API at `/anthropic/v1/messages` with SSE streaming. For an Anthropic-operated alternative with AWS Marketplace billing and typically same-day feature access, see [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). Existing Bedrock users can follow the [migration guide](/docs/en/build-with-claude/claude-platform-on-aws#migrating-from-amazon-bedrock).
 </Note>
 
-Calling Claude through Bedrock slightly differs from how you would call Claude on the Claude API directly. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](/docs/en/api/client-sdks).
+Calling Claude through Bedrock slightly differs from how you would call Claude on the Claude API directly. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview).
 
 Note that this guide assumes you have already signed up for an [AWS account](https://portal.aws.amazon.com/billing/signup) and configured programmatic access.
 
@@ -30,7 +30,7 @@ aws sts get-caller-identity
 
 ## Install an SDK for accessing Bedrock
 
-Anthropic's [client SDKs](/docs/en/api/client-sdks) support Bedrock. You can also use an AWS SDK like `boto3` directly.
+Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Bedrock. You can also use an AWS SDK like `boto3` directly.
 
 <Tabs>
 <Tab title="Python">
@@ -60,14 +60,14 @@ go get github.com/anthropics/anthropic-sdk-go/bedrock
 <Tab title="Java">
 <CodeGroup>
 ```groovy Gradle
-implementation("com.anthropic:anthropic-java-bedrock:2.35.0")
+implementation("com.anthropic:anthropic-java-bedrock:2.40.0")
 ```
 
 ```xml Maven
 <dependency>
     <groupId>com.anthropic</groupId>
     <artifactId>anthropic-java-bedrock</artifactId>
-    <version>2.35.0</version>
+    <version>2.40.0</version>
 </dependency>
 ```
 
@@ -131,12 +131,12 @@ Go to the [AWS Console > Bedrock > Model Access](https://console.aws.amazon.com/
 #### API model IDs
 
 <Note>
-  Claude Opus 4.8 and Claude Opus 4.7 are reachable through `InvokeModel` on `bedrock-runtime`.
+  Claude Fable 5, Claude Opus 4.8, and Claude Opus 4.7 are reachable through `InvokeModel` on `bedrock-runtime`.
   These requests are served by the same infrastructure as the
   [Claude in Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock)
   endpoint. For the native Messages API request shape and full feature
-  parity, use that page. Claude Opus 4.8 and Claude Opus 4.7 are omitted from the model table
-  on this page because they do not have ARN-versioned model IDs.
+  parity, use that page. Claude Fable 5, Claude Opus 4.8, and Claude Opus 4.7 are omitted from the model
+  table on this page because they do not have ARN-versioned model IDs.
 </Note>
 
 Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](/docs/en/about-claude/model-deprecations). Lifecycle dates on partner-operated platforms are set by the partner and can differ from the Claude API schedule. For the current retirement date of any model on Amazon Bedrock, see [Amazon Bedrock's model lifecycle page](https://docs.aws.amazon.com/bedrock/latest/userguide/model-lifecycle.html).
@@ -536,21 +536,49 @@ The following examples show how to generate text from Claude on Bedrock:
   ```
 </CodeGroup>
 
-See the [client SDKs](/docs/en/api/client-sdks) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
+See the [client SDKs](/docs/en/cli-sdks-libraries/overview) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
 
 ### Bearer token authentication
 
 You can authenticate with Bedrock using bearer tokens instead of AWS credentials. This is useful in corporate environments where teams need access to Bedrock without managing AWS credentials, IAM roles, or account-level permissions.
-
-<Note>
-Bearer token authentication is supported in the C#, Go, and Java SDKs. The PHP, Python, TypeScript, and Ruby SDKs use AWS SigV4 signing only.
-</Note>
 
 The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment variable, which each SDK detects automatically when resolving credentials from the environment.
 
 To provide a token programmatically:
 
 <CodeGroup>
+
+```python Python nocheck
+from anthropic import AnthropicBedrock
+
+client = AnthropicBedrock(
+    api_key="your-bearer-token",
+    aws_region="us-west-2",
+)
+
+message = client.messages.create(
+    model="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Hello!"}],
+)
+print(message.content)
+```
+
+```typescript TypeScript nocheck
+import AnthropicBedrock from "@anthropic-ai/bedrock-sdk";
+
+const client = new AnthropicBedrock({
+  apiKey: "your-bearer-token",
+  awsRegion: "us-west-2"
+});
+
+const message = await client.messages.create({
+  model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+  max_tokens: 1024,
+  messages: [{ role: "user", content: "Hello!" }]
+});
+console.log(message);
+```
 
 ```csharp C# nocheck
 using Anthropic.Bedrock;
@@ -636,6 +664,39 @@ client.messages().create(params).content().stream()
   .forEach(textBlock -> System.out.println(textBlock.text()));
 ```
 
+```php PHP nocheck
+<?php
+
+use Anthropic\Bedrock;
+
+$client = Bedrock\Client::withApiKey('your-bearer-token', 'us-west-2');
+
+$message = $client->messages->create(
+    maxTokens: 1024,
+    messages: [
+        ['role' => 'user', 'content' => 'Hello!']
+    ],
+    model: 'us.anthropic.claude-sonnet-4-5-20250929-v1:0',
+);
+echo $message->content[0]->text;
+```
+
+```ruby Ruby nocheck
+require "anthropic"
+
+client = Anthropic::BedrockClient.new(
+  api_key: "your-bearer-token",
+  aws_region: "us-west-2"
+)
+
+message = client.messages.create(
+  model: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+  max_tokens: 1024,
+  messages: [{role: "user", content: "Hello!"}]
+)
+puts message.content.first.text
+```
+
 </CodeGroup>
 
 ## Activity logging
@@ -667,6 +728,7 @@ For the full feature list with Amazon Bedrock availability, see [Features overvi
 - Agent infrastructure (Agent Skills, MCP connector, programmatic tool calling)
 - API endpoints (Message Batches, Models, Admin, Compliance, Usage and Cost)
 - Claude Managed Agents
+- Server-side fallback (the [`fallbacks` parameter](/docs/en/build-with-claude/refusals-and-fallback#server-side-fallback); use the [client-side fallback pattern](/docs/en/build-with-claude/refusals-and-fallback#client-side-fallback) instead)
 
 ### PDF support on Bedrock
 
@@ -679,7 +741,7 @@ PDF support is available on Bedrock through both the Converse API and InvokeMode
 
 ### Context window
 
-Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Fable 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](/docs/en/build-with-claude/context-windows) on Amazon Bedrock. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Bedrock limits request payloads to 20 MB. When sending large documents or many images, you may reach this limit before the token limit.
 

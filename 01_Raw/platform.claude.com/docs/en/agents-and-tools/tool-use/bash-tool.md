@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool
-fetched_at: 2026-06-01T05:54:49.791404+00:00
+fetched_at: 2026-06-15T06:17:41.688094+00:00
 fetch_method: mintlify_md
 ---
 
@@ -263,7 +263,7 @@ Restart the session:
 
 Claude can chain commands to complete complex tasks:
 
-```text
+```text nowrap
 User request:
 "Install the requests library and create a simple Python script that
 fetches a joke from an API, then run it."
