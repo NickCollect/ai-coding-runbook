@@ -145,6 +145,10 @@ group (spawned with `start_new_session=True`); the `getpgid()` lookup and the
 per-process terminate/kill fallback are gone. The win32 utilities logger is now
 named `mcp.os.win32.utilities` (was `client.stdio.win32`).
 
+### WebSocket transport removed
+
+The WebSocket transport has been removed: `mcp.client.websocket.websocket_client`, `mcp.server.websocket.websocket_server`, and the `ws` optional dependency extra (`mcp[ws]`) no longer exist. WebSocket was never part of the MCP specification. Use the streamable HTTP transport instead (`mcp.client.streamable_http.streamable_http_client` on the client, `streamable_http_app()` on the server), which supports bidirectional communication with server-to-client streaming over standard HTTP.
+
 ### Removed type aliases and classes
 
 The following deprecated type aliases and classes have been removed from `mcp.types`:
@@ -468,7 +472,7 @@ async def my_tool(x: int, ctx: Context) -> str:
 
 The internal layers (`ToolManager.call_tool`, `Tool.run`, `Prompt.render`, `ResourceTemplate.create_resource`, etc.) now require `context` as a positional argument.
 
-### Registering lowlevel handlers on `MCPServer` (workaround)
+### Registering lowlevel handlers from `MCPServer`
 
 `MCPServer` does not expose public APIs for `subscribe_resource`, `unsubscribe_resource`, or `set_logging_level` handlers. In v1, the workaround was to reach into the private lowlevel server and use its decorator methods:
 
@@ -482,7 +486,7 @@ async def handle_set_logging_level(level: str) -> None:
 mcp._mcp_server.subscribe_resource()(handle_subscribe)  # pyright: ignore[reportPrivateUsage]
 ```
 
-In v2, the lowlevel `Server` no longer has decorator methods (handlers are constructor-only), so the equivalent workaround is `_add_request_handler`:
+In v2, the lowlevel `Server` supports arbitrary request handlers directly via `add_request_handler` (the decorator methods are gone; handlers are otherwise constructor-only). From `MCPServer`, access it via `_lowlevel_server`:
 
 **After (v2):**
 
@@ -501,11 +505,11 @@ async def handle_subscribe(ctx: ServerRequestContext, params: SubscribeRequestPa
     return EmptyResult()
 
 
-mcp._lowlevel_server._add_request_handler("logging/setLevel", handle_set_logging_level)  # pyright: ignore[reportPrivateUsage]
-mcp._lowlevel_server._add_request_handler("resources/subscribe", handle_subscribe)  # pyright: ignore[reportPrivateUsage]
+mcp._lowlevel_server.add_request_handler("logging/setLevel", SetLevelRequestParams, handle_set_logging_level)  # pyright: ignore[reportPrivateUsage]
+mcp._lowlevel_server.add_request_handler("resources/subscribe", SubscribeRequestParams, handle_subscribe)  # pyright: ignore[reportPrivateUsage]
 ```
 
-This is a private API and may change. A public way to register these handlers on `MCPServer` is planned; until then, use this workaround or use the lowlevel `Server` directly.
+`_lowlevel_server` is private and may change. A public way to register these handlers on `MCPServer` is planned; until then, use this workaround or use the lowlevel `Server` directly.
 
 ### `MCPServer`'s `Context` logging: `message` renamed to `data`, `extra` removed
 
@@ -659,6 +663,8 @@ ctx: ClientRequestContext
 # For server-specific context with lifespan and request types
 server_ctx: ServerRequestContext[LifespanContextT, RequestT]
 ```
+
+`ServerRequestContext` is now a standalone dataclass — it no longer subclasses `RequestContext[ServerSession]`. It carries the same fields (`session`, `request_id`, `meta`, `lifespan_context`, `request`, `close_sse_stream`, `close_standalone_sse_stream`), so handler code is unaffected, but `isinstance(ctx, RequestContext)` checks and `RequestContext[ServerSession]` annotations need updating to `ServerRequestContext`.
 
 The high-level `Context` class (injected into `@mcp.tool()` etc.) similarly dropped its `ServerSessionT` parameter: `Context[ServerSessionT, LifespanContextT, RequestT]` → `Context[LifespanContextT, RequestT]`. Both remaining parameters have defaults, so bare `Context` is usually sufficient:
 
@@ -852,6 +858,54 @@ server = Server("my-server", on_list_tools=handle_list_tools)
 ```
 
 If you need to check whether a handler is registered, track this yourself — there is currently no public introspection API.
+
+### Lowlevel `Server`: `add_request_handler` is now public and takes `params_type`
+
+The private `_add_request_handler(method, handler)` escape hatch is now the public `add_request_handler(method, params_type, handler)`, alongside a matching `add_notification_handler`. Each takes a `params_type` model that incoming params are validated against before the handler runs. A message with no `params` member validates `{}` against the model, so handlers never receive `None`: all-optional models arrive with their defaults, and models with required fields reject the message as `INVALID_PARAMS` before the handler runs (matching the Go SDK).
+
+```python
+# Before (v1 / earlier v2 prereleases)
+server._add_request_handler("custom/method", my_handler)
+
+# After (v2)
+server.add_request_handler("custom/method", MyParams, my_handler)
+server.add_notification_handler("notifications/custom", MyNotifyParams, my_notify_handler)
+```
+
+### Lowlevel `Server`: private `_handle_*` dispatch methods removed
+
+`Server._handle_message`, `_handle_request`, and `_handle_notification` have been removed. The receive loop and per-message dispatch now live in `JSONRPCDispatcher` and `ServerRunner`, which `Server.run()` drives internally.
+
+These were private, but some users subclassed `Server` and overrode them to intercept requests. Use middleware instead:
+
+```python
+from collections.abc import Mapping
+from typing import Any
+
+from mcp.server import Server, ServerRequestContext
+from mcp.server.context import CallNext, HandlerResult
+
+
+async def logging_middleware(
+    ctx: ServerRequestContext[Any, Any], method: str, params: Mapping[str, Any] | None, call_next: CallNext
+) -> HandlerResult:
+    print(f"handling {method}")
+    result = await call_next()
+    print(f"done {method}")
+    return result
+
+
+server = Server("my-server", on_call_tool=...)
+server.middleware.append(logging_middleware)
+```
+
+Middleware runs before params validation, so `params` is the raw inbound mapping (or `None`), and it also wraps unknown methods.
+
+### Lowlevel `Server.run(raise_exceptions=True)`: transport errors no longer re-raised
+
+`raise_exceptions=True` now only governs handler exceptions: an exception raised by an `on_*` handler propagates out of `run()`. The JSON-RPC error response is still written to the client first, regardless of the flag.
+
+Previously it also re-raised exceptions yielded by the transport onto the read stream (e.g. JSON parse errors). Those are now debug-logged and dropped regardless of `raise_exceptions`. If you relied on `run()` exiting on a transport-level parse error, that no longer happens.
 
 ### Lowlevel `Server`: decorator-based handlers replaced with constructor `on_*` params
 
@@ -1079,6 +1133,39 @@ from mcp.server import ServerRequestContext
 # but None in notification handlers
 ```
 
+### `ServerSession` is now a thin proxy (no longer a `BaseSession`)
+
+`ServerSession` no longer subclasses `BaseSession`. It is now a small connection-scoped proxy that exposes `send_request`, `send_notification`, the typed convenience helpers (`create_message`, `elicit_form`, `send_log_message`, `send_tool_list_changed`, ...), `client_params`, `protocol_version`, and `check_client_capability`. The receive loop, `initialize` handling, and per-request task isolation that previously lived in `ServerSession` have moved to `JSONRPCDispatcher` and `ServerRunner`.
+
+`ServerSession` is normally constructed for you by `Server.run()` and reached via `ctx.session` in handlers, so most servers are unaffected. If you were constructing or subclassing it directly:
+
+**Constructor change:**
+
+```python
+# Before (v1)
+session = ServerSession(read_stream, write_stream, init_options, stateless=False)
+
+# After (v2)
+session = ServerSession(dispatcher, connection, stateless=False)
+# where `dispatcher` is a JSONRPCDispatcher and `connection` is a Connection
+```
+
+In practice, replace direct `ServerSession` use with `Server.run(read_stream, write_stream, init_options)` and let the framework wire it up.
+
+**Removed from `mcp.server.session`:**
+
+- `InitializationState` enum and `ServerSession._initialization_state` — initialization tracking is now on `Connection` (`connection.initialized` is an `anyio.Event`, `connection.client_params` holds the init params).
+- `ServerRequestResponder` type alias.
+- `ServerSession.incoming_messages` stream — there is no longer a public stream of inbound messages to iterate. Register handlers via the `on_*` constructor params (or `add_request_handler`) and use `Server.middleware` to observe every inbound request and notification (`initialize`, unknown methods, validation failures, and `notifications/initialized` included).
+- `ServerSession.__aenter__` / `__aexit__` — `ServerSession` is no longer an async context manager.
+- The private `_receive_loop`, `_received_request`, `_received_notification`, and `_handle_incoming` overrides — there is nothing to override on `ServerSession` anymore. To intercept inbound messages, use `Server.middleware` (see the `_handle_*` removal section above).
+
+### `BaseSession` / `RequestResponder`: server-side cancellation tracking removed
+
+`BaseSession._in_flight` and the `RequestResponder` members that supported it (`cancel()`, the `cancelled` and `in_flight` properties, the `on_complete` constructor argument, and the internal `CancelScope`) have been removed. These existed to let `ServerSession` cancel a handler when a `CancelledNotification` arrived; `ServerSession` no longer drives a receive loop, so they were dead code. Inbound-cancellation handling for the server now lives in `JSONRPCDispatcher`.
+
+`BaseSession` is still used by `ClientSession`, which never relied on these members. `RequestResponder.respond()` is unchanged.
+
 ### Experimental Tasks support removed
 
 Tasks (SEP-1686) have been removed from the MCP specification and are no longer part of this SDK. The `mcp.client.experimental`, `mcp.server.experimental`, `mcp.shared.experimental`, and `mcp.server.lowlevel.experimental` modules have been removed, along with all `Task*` types, the `tasks` capability fields, `Tool.execution`, and the `experimental` properties on `ClientSession`, `ServerSession`, `Server`, and `ServerRequestContext`.
@@ -1095,27 +1182,35 @@ Tasks are expected to return as a separate MCP extension in a future release.
 
 Previously, the lowlevel `Server` hardcoded `subscribe=False` in resource capabilities even when a `subscribe_resource()` handler was registered. The `subscribe` capability is now dynamically set to `True` when an `on_subscribe_resource` handler is provided. Clients that previously didn't see `subscribe: true` in capabilities will now see it when a handler is registered, which may change client behavior.
 
-### Extra fields no longer allowed on top-level MCP types
+### Unknown request methods now return `-32601` (Method not found)
 
-MCP protocol types no longer accept arbitrary extra fields at the top level. This matches the MCP specification which only allows extra fields within `_meta` objects, not on the types themselves.
+In v1, a request for a method the SDK didn't recognize failed request-union validation and was answered with `-32602` (`"Invalid request parameters"`, empty `data`). Any method the receiver doesn't serve — unrecognized, or a spec method with no registered handler — is now answered with the JSON-RPC-specified `-32601` (`"Method not found"`), with the method name in `data`, on both the server and the client side, in every initialization state. Update anything that matched on the old code for this case.
+
+### Extra fields on MCP types are no longer preserved
+
+In v1, MCP protocol types were configured with `extra="allow"`: unknown fields passed to a constructor or received from a peer were kept on the model and re-serialized on output.
+
+In v2, MCP types silently ignore extra fields. Unknown constructor keyword arguments and unknown keys in wire data are dropped during validation — no error is raised, and the values do not round-trip:
 
 ```python
-# This will now raise a validation error
 from mcp.types import CallToolRequestParams
 
 params = CallToolRequestParams(
     name="my_tool",
     arguments={},
-    unknown_field="value",  # ValidationError: extra fields not permitted
+    unknown_field="value",  # silently ignored, not stored
 )
+"unknown_field" in params.model_dump()  # False
 
-# Extra fields are still allowed in _meta
+# _meta remains the supported place for custom data, per the MCP spec
 params = CallToolRequestParams(
     name="my_tool",
     arguments={},
-    _meta={"my_custom_key": "value", "another": 123},  # OK
+    _meta={"my_custom_key": "value", "another": 123},  # OK, preserved
 )
 ```
+
+If you relied on extra fields round-tripping through MCP types, move that data into `_meta`.
 
 ## New Features
 

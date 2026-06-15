@@ -40,6 +40,7 @@ from mcp.server.streamable_http import (
 )
 from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
 from mcp.server.transport_security import TransportSecuritySettings
+from mcp.shared._compat import resync_tracer
 from mcp.shared._context import RequestContext
 from mcp.shared._context_streams import create_context_streams
 from mcp.shared.message import ClientMessageMetadata, ServerMessageMetadata, SessionMessage
@@ -1187,6 +1188,8 @@ async def test_streamable_http_client_resumption(event_app: tuple[SimpleEventSto
                     # Kill the client session while tool is waiting on lock
                     tg.cancel_scope.cancel()
 
+    await resync_tracer()
+
     async with make_client(app, headers=headers) as httpx_client2:
         async with streamable_http_client(f"{BASE_URL}/mcp", http_client=httpx_client2) as (
             read_stream,
@@ -1691,6 +1694,87 @@ async def test_close_sse_stream_callback_not_provided_for_old_protocol_version()
     assert isinstance(session_msg_new.metadata, ServerMessageMetadata)
     assert session_msg_new.metadata.close_sse_stream is not None
     assert session_msg_new.metadata.close_standalone_sse_stream is not None
+
+
+@pytest.mark.anyio
+async def test_priming_event_not_sent_for_unknown_protocol_version() -> None:
+    """_maybe_send_priming_event treats unrecognized version strings conservatively.
+
+    A garbage version must not be mistaken for a future one (lexicographically
+    "zzz" sorts after every date-shaped revision).
+    """
+    transport = StreamableHTTPServerTransport(
+        "/mcp",
+        event_store=SimpleEventStore(),
+    )
+
+    write_stream, read_stream = anyio.create_memory_object_stream[dict[str, Any]](1)
+
+    try:
+        await transport._maybe_send_priming_event("test-request-id", write_stream, "zzz")
+
+        # Nothing should have been written to the stream
+        assert write_stream.statistics().current_buffer_used == 0
+    finally:
+        await write_stream.aclose()
+        await read_stream.aclose()
+
+
+@pytest.mark.anyio
+async def test_close_sse_stream_callback_not_provided_for_unknown_protocol_version() -> None:
+    """close_sse_stream callbacks are withheld when the client's version is unrecognized."""
+    transport = StreamableHTTPServerTransport(
+        "/mcp",
+        event_store=SimpleEventStore(),
+    )
+
+    mock_message = JSONRPCRequest(jsonrpc="2.0", id="test-1", method="tools/list")
+    mock_request = MagicMock()
+
+    session_msg = transport._create_session_message(mock_message, mock_request, "test-request-id", "zzz")
+
+    assert session_msg.metadata is not None
+    assert isinstance(session_msg.metadata, ServerMessageMetadata)
+    assert session_msg.metadata.close_sse_stream is None
+    assert session_msg.metadata.close_standalone_sse_stream is None
+
+
+@pytest.mark.anyio
+async def test_initialize_with_unknown_protocol_version_gets_no_priming_event(
+    event_app: tuple[SimpleEventStore, Starlette],
+) -> None:
+    """A garbage protocolVersion in initialize params must not trigger priming.
+
+    The priming decision reads the raw body params before any validation, so an
+    unrecognized string must gate conservatively (old-client behavior), not
+    compare lexicographically past "2025-11-25".
+    """
+    event_store, app = event_app
+    init_request = {
+        "jsonrpc": "2.0",
+        "method": "initialize",
+        "params": {
+            "clientInfo": {"name": "test-client", "version": "1.0"},
+            "protocolVersion": "zzz",
+            "capabilities": {},
+        },
+        "id": "init-1",
+    }
+    async with make_client(app) as client:
+        response = await client.post(
+            "/mcp",
+            headers={
+                "Accept": "application/json, text/event-stream",
+                "Content-Type": "application/json",
+            },
+            json=init_request,
+        )
+        assert response.status_code == 200
+
+    # The store must have seen traffic (the initialize response), but no
+    # priming event — priming events are stored with a None payload.
+    assert event_store._events
+    assert all(message is not None for _, _, message in event_store._events)
 
 
 @pytest.mark.anyio
