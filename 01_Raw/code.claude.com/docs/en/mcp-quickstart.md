@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp-quickstart
-fetched_at: 2026-06-08T05:25:05.654746+00:00
+fetched_at: 2026-06-22T06:23:28.349071+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,13 +62,14 @@ The steps are the same for any server: add it, check the connection status, then
 
     The server appears with a status indicator:
 
-    | Status                   | Meaning                                                                                                                                                                       |
-    | :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-    | `✓ Connected`            | Ready to use. This is what you should see for `claude-code-docs`                                                                                                              |
-    | `! Needs authentication` | The server is reachable but needs a browser sign-in, or a token passed with `--header`. See [Connect a server that requires sign-in](#connect-a-server-that-requires-sign-in) |
-    | `✗ Failed to connect`    | Server didn't respond. See [Troubleshooting](#troubleshooting)                                                                                                                |
-    | `✗ Connection error`     | The connection attempt threw an error. See [Troubleshooting](#troubleshooting)                                                                                                |
-    | `⏸ Pending approval`     | A project-scoped server you haven't approved yet. See [Edit .mcp.json directly](#edit-mcp-json-directly)                                                                      |
+    | Status                             | Meaning                                                                                                                                                                       |
+    | :--------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `✓ Connected`                      | Ready to use. This is what you should see for `claude-code-docs`                                                                                                              |
+    | `! Connected · tools fetch failed` | The server connected but couldn't list its tools. Run `claude mcp get <name>` for the error detail                                                                            |
+    | `! Needs authentication`           | The server is reachable but needs a browser sign-in, or a token passed with `--header`. See [Connect a server that requires sign-in](#connect-a-server-that-requires-sign-in) |
+    | `✗ Failed to connect`              | Server didn't respond. See [Troubleshooting](#troubleshooting)                                                                                                                |
+    | `✗ Connection error`               | The connection attempt threw an error. See [Troubleshooting](#troubleshooting)                                                                                                |
+    | `⏸ Pending approval`               | A project-scoped server you haven't approved yet. See [Edit .mcp.json directly](#edit-mcp-json-directly)                                                                      |
   </Step>
 
   <Step title="Use the server">

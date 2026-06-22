@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/fullscreen
-fetched_at: 2026-06-15T06:17:53.674104+00:00
+fetched_at: 2026-06-22T06:23:27.001984+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,7 +46,7 @@ Because the conversation lives in the alternate screen buffer instead of your te
 | :-------------------------------------------------- | :----------------------------------------------------------------------------- | :------------------------------------------------------------------------ |
 | `Cmd+f` or tmux search to find text                 | `Ctrl+o` for transcript mode, then `/` to search or `[` to write to scrollback | [Search and review the conversation](#search-and-review-the-conversation) |
 | Terminal's native click-and-drag to select and copy | In-app selection, copies automatically on mouse release                        | [Use the mouse](#use-the-mouse)                                           |
-| `Cmd`-click to open a URL                           | Click the URL                                                                  | [Use the mouse](#use-the-mouse)                                           |
+| `Cmd`-click to open a URL                           | `Cmd`-click on macOS, `Ctrl`-click elsewhere                                   | [Use the mouse](#use-the-mouse)                                           |
 
 If mouse capture interferes with your workflow, you can [turn it off](#keep-native-text-selection) while keeping the flicker-free rendering.
 
@@ -57,7 +57,7 @@ Fullscreen rendering captures mouse events and handles them inside Claude Code:
 * **Click in the prompt input** to position your cursor anywhere in the text you're typing.
 * **Click a suggestion in the `/` command or `@` file list** to accept it. Hovering highlights the row under your cursor.
 * **Click a collapsed tool result** to expand it and see the full output. Click again to collapse. The tool call and its result expand together. Only messages that have more to show are clickable.
-* **Click a URL or file path** to open it. File paths in tool output, like the ones printed after an Edit or Write, open in your default application. Plain `http://` and `https://` URLs open in your browser. In most terminals this replaces native `Cmd`-click or `Ctrl`-click, which mouse capture intercepts. In the VS Code integrated terminal and similar xterm.js-based terminals, keep using `Cmd`-click. Claude Code defers to the terminal's own link handler there to avoid opening links twice.
+* **Hold `Cmd` on macOS, or `Ctrl` on Linux and Windows, and click a URL or file path** to open it. File paths in tool output, like the ones printed after an Edit or Write, open in your default application. Plain `http://` and `https://` URLs open in your browser. {/* min-version: 2.1.181 */}As of v2.1.181, a plain click without holding `Cmd` or `Ctrl` no longer opens links, matching native terminal behavior. In the VS Code integrated terminal and similar xterm.js-based terminals, Claude Code defers to the terminal's own link handler, which uses the same gesture.
 * **Click and drag** to select text anywhere in the conversation. Double-click selects a word, matching iTerm2's word boundaries so a file path selects as one unit. Triple-click selects the line.
 * **Scroll with the mouse wheel** to move through the conversation.
 
@@ -98,7 +98,7 @@ Set `CLAUDE_CODE_SCROLL_SPEED` to multiply the base scroll distance:
 export CLAUDE_CODE_SCROLL_SPEED=3
 ```
 
-A value of `3` matches the default in `vim` and similar applications. The setting accepts values from 1 to 20, and fractional values below 1 such as `0.5` to slow accelerated trackpad and wheel scrolling in terminals on the native scroll path.
+A value of `3` matches the default in `vim` and similar applications. The setting accepts values from 1 to 20, and fractional values below 1 such as `0.5` to slow accelerated trackpad and wheel scrolling in terminals that already amplify wheel events.
 
 To adjust scroll speed interactively, run `/scroll-speed`. The dialog shows a ruler you can scroll while it is open so you can feel the change immediately. Press `←` and `→` to adjust, `r` to reset to the auto-detected default, and `Enter` to save. The command writes the same value the `CLAUDE_CODE_SCROLL_SPEED` environment variable sets, persisted to `~/.claude/settings.json`. The command is not available in the JetBrains IDE terminal.
 

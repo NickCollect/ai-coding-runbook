@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/overview
-fetched_at: 2026-06-01T05:54:48.646840+00:00
+fetched_at: 2026-06-22T06:23:21.179289+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,10 +11,6 @@ fetch_method: mintlify_md
 # Agent SDK overview
 
 > Build production AI agents with Claude Code as a library
-
-<Note>
-  Starting June 15, 2026, Agent SDK and `claude -p` usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See [Use the Claude Agent SDK with your Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan) for details.
-</Note>
 
 Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript.
 

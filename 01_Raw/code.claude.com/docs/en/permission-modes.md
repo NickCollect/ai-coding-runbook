@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/permission-modes
-fetched_at: 2026-06-15T06:17:55.897857+00:00
+fetched_at: 2026-06-22T06:23:28.667422+00:00
 fetch_method: mintlify_md
 ---
 
@@ -223,6 +223,9 @@ The classifier trusts your working directory and your repo's configured remotes.
 * Modifying shared infrastructure
 * Irreversibly destroying files that existed before the session
 * Force push, or pushing directly to `main`
+* {/* min-version: 2.1.182 */}`git reset --hard`, `git checkout -- .`, `git restore .`, `git clean -fd`, `git stash drop`, or `git stash clear`, which the classifier presumes would discard uncommitted changes
+* `git commit --amend` when the commit at HEAD was not created in this session
+* `terraform destroy`, `pulumi destroy`, `cdk destroy`, or `terragrunt destroy`, and applying a plan that destroys resources
 
 **Allowed by default**:
 
@@ -277,6 +280,8 @@ Repeated blocks usually mean the classifier is missing context about your infras
     1. Before a subagent starts, the delegated task description is evaluated, so a dangerous-looking task is blocked at spawn time.
     2. While the subagent runs, each of its actions goes through the classifier with the same rules as the parent session, and any `permissionMode` in the subagent's frontmatter is ignored.
     3. When the subagent finishes, the classifier reviews its full action history; if that return check flags a concern, a security warning is prepended to the subagent's results.
+
+    Step 1 requires Claude Code v2.1.178 or later. Earlier versions applied the classifier at steps 2 and 3, but did not evaluate the task description before the subagent started.
   </Accordion>
 
   <Accordion title="Cost and latency">

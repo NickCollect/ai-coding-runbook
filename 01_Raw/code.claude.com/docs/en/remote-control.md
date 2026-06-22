@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/remote-control
-fetched_at: 2026-06-15T06:17:56.566226+00:00
+fetched_at: 2026-06-22T06:23:29.493008+00:00
 fetch_method: mintlify_md
 ---
 
@@ -80,8 +80,6 @@ You can start a Remote Control session from the CLI or the VS Code extension. Th
     ```
 
     This gives you a full interactive session in your terminal that you can also control from claude.ai or the Claude app. Unlike `claude remote-control` (server mode), you can type messages locally while the session is also available remotely.
-
-    As of v2.1.162, a Remote Control indicator stays in the footer below the input box while the connection is up. {/* min-version: 2.1.172 */}From v2.1.172, the indicator reads `/rc active` and is hidden when the terminal is too narrow to fit it; earlier versions always show `Remote Control active`. The indicator text is a link to the session on claude.ai, so you can reopen it from the terminal at any time. Select the indicator with the down arrow key and press Enter to open a status panel with the session URL and a QR code.
   </Tab>
 
   <Tab title="From an existing session">
@@ -98,8 +96,6 @@ You can start a Remote Control session from the CLI or the VS Code extension. Th
     ```
 
     This starts a Remote Control session that carries over your current conversation history.
-
-    As of v2.1.162, a Remote Control indicator appears in the footer below the input box and stays visible while the connection is up. {/* min-version: 2.1.172 */}From v2.1.172, the indicator reads `/rc active` and is hidden when the terminal is too narrow to fit it; earlier versions always show `Remote Control active`. The indicator text is a link to the session on claude.ai. Select it with the down arrow key and press Enter, or run `/remote-control` again, to open a status panel with the session URL and a QR code you can use to [connect from another device](#connect-from-another-device).
 
     The `--verbose`, `--sandbox`, and `--no-sandbox` flags are not available with this command.
   </Tab>
@@ -119,6 +115,12 @@ You can start a Remote Control session from the CLI or the VS Code extension. Th
   </Tab>
 </Tabs>
 
+### Check connection status
+
+In an interactive terminal session, a `/rc active` indicator sits in the footer below the input box while the connection is up, and is hidden if the terminal is too narrow to fit it. The indicator text is a link to the session on claude.ai. Select it with the down arrow key and press Enter, or run `/remote-control` again, to open a status panel with the session URL and a QR code you can use to [connect from another device](#connect-from-another-device).
+
+If the connection fails, a notification appears with the failure reason and the indicator disappears from the footer. Run `/remote-control` again to retry.
+
 ### Connect from another device
 
 Once a Remote Control session is active, you have a few ways to connect from another device:
@@ -134,7 +136,7 @@ The remote session title is chosen in this order:
 3. The last meaningful message in existing conversation history
 4. An auto-generated name like `myhost-graceful-unicorn`, where `myhost` is your machine's hostname or the prefix you set with `--remote-control-session-name-prefix`
 
-If you didn't set an explicit name, the title updates to reflect your prompt once you send one. Renaming a session from claude.ai or the Claude app also updates the local title shown in `claude --resume`.
+If you didn't set an explicit name, the title updates to reflect your prompt once you send one. {/* min-version: 2.1.176 */}As of Claude Code v2.1.176, auto-generated titles match the language of your conversation, or the [`language`](/en/settings#available-settings) setting if one is configured. Renaming a session from claude.ai or the Claude app also updates the local title shown in `claude --resume`.
 
 If the environment already has an active session, you'll be asked whether to continue it or start a new one.
 
@@ -162,7 +164,7 @@ Use Remote Control when you're in the middle of local work and want to keep goin
 
 When Remote Control is active, Claude can send push notifications to your phone.
 
-Claude decides when to push. It typically sends one when a long-running task finishes or when it needs a decision from you to continue. You can also request a push in your prompt, for example `notify me when the tests finish`. Beyond the on/off toggle below, there is no per-event configuration.
+Claude decides when to push. It typically sends one when a long-running task finishes or when it needs a decision from you to continue. You can also request a push in your prompt, for example `notify me when the tests finish`. Beyond the two on/off toggles below, there is no per-event configuration.
 
 <Note>
   Mobile push notifications require Claude Code v2.1.110 or later.
@@ -184,7 +186,7 @@ To set up mobile push notifications:
   </Step>
 
   <Step title="Enable push in Claude Code">
-    In your terminal, run `/config` and enable **Push when Claude decides**.
+    In your terminal, run `/config` and enable **Push when Claude decides** for proactive notifications, **Push when actions required** for permission prompts and questions, or both.
   </Step>
 </Steps>
 
@@ -194,13 +196,18 @@ If notifications don't arrive:
 * On iOS, Focus modes and notification summaries can suppress or delay pushes. Check Settings → Notifications → Claude.
 * On Android, aggressive battery optimization can delay delivery. Exempt the Claude app from battery optimization in system settings.
 
+Claude Code skips mobile push notifications while you are typing in or focused on the connected terminal. {/* min-version: 2.1.181 */}As of v2.1.181, you can set [`CLAUDE_CLIENT_PRESENCE_FILE`](/en/env-vars) to a marker file path to extend this to any time you are at the machine, even in another window: notifications are skipped while the file exists. Configure a screen-lock listener or similar tool to create the file when your screen unlocks and delete it when your screen locks.
+
 ## Limitations
 
 * **One remote session per interactive process**: outside of server mode, each Claude Code instance supports one remote session at a time. Use [server mode](#start-a-remote-control-session) to run multiple concurrent sessions from a single process.
 * **Local process must keep running**: Remote Control runs as a local process. If you close the terminal, quit VS Code, or otherwise stop the `claude` process, the session ends.
 * **Extended network outage**: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run `claude remote-control` again to start a new session.
 * **Ultraplan disconnects Remote Control**: starting an [ultraplan](/en/ultraplan) session disconnects any active Remote Control session because both features occupy the claude.ai/code interface and only one can be connected at a time.
-* **Some commands are local-only**: commands that open an interactive picker in the terminal, such as `/plugin` or `/resume`, work only from the local CLI. Commands that produce text output, including `/compact`, `/clear`, `/context`, `/usage`, `/exit`, `/usage-credits`, `/recap`, and `/reload-plugins`, work from mobile and web. {/* min-version: 2.1.166 */}As of v2.1.166, `/mcp` also works from mobile and web: it returns a text summary of server status instead of opening the picker, and accepts the same `reconnect`, `enable`, and `disable` [subcommands](/en/commands#all-commands) as the local CLI, with one difference: from mobile and web, `/mcp reconnect` with no server name reconnects every server that has failed or needs authentication, while the local CLI requires a server name for `reconnect`.
+* **Some commands are local-only**: commands that open an interactive picker in the terminal, such as `/plugin` or `/resume`, work only from the local CLI. The following work from mobile and web:
+  * Text-output commands: `/compact`, `/clear`, `/context`, `/usage`, `/exit`, `/usage-credits`, `/recap`, `/reload-plugins`
+  * {/* min-version: 2.1.166 */}`/mcp`, from v2.1.166: returns a text summary of server status instead of opening the picker, and accepts the `reconnect`, `enable`, and `disable` [subcommands](/en/commands#all-commands). Unlike the local CLI, `/mcp reconnect` without a server name reconnects every server that has failed or needs authentication.
+  * {/* min-version: 2.1.181 */}`/config`, from v2.1.181: pass `key=value` to set a setting, or run it with no argument to list the keys you can set.
 
 ## Troubleshooting
 
@@ -218,12 +225,11 @@ Your cached account information is stale or incomplete. Run `claude auth login` 
 
 ### "Remote Control is not yet enabled for your account"
 
-The eligibility check can fail with certain environment variables present:
+The Remote Control rollout has not reached your account, or your cached entitlements are out of date. If you recently changed plans, run `claude auth logout` then `claude auth login` to refresh them. Run `claude doctor` to see which individual eligibility check failed. Environment-variable conflicts, unreachable checks, and organization policy each produce their own message, so this error means the rollout gate itself.
 
-* `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` or `DISABLE_TELEMETRY`: unset them and try again.
-* `CLAUDE_CODE_USE_BEDROCK`, `CLAUDE_CODE_USE_VERTEX`, or `CLAUDE_CODE_USE_FOUNDRY`: Remote Control requires claude.ai authentication and does not work with third-party providers.
+### "Couldn't verify Remote Control eligibility"
 
-If none of these are set, run `/logout` then `/login` to refresh.
+Claude Code could not reach the feature-flag service to check whether Remote Control is enabled for your account, typically because you are offline or a proxy is blocking the request. Retry once you have network access, or run `claude doctor` for details. The related message "Couldn't verify your organization's Remote Control policy" has the same cause and the same fix. Both messages were added in v2.1.178.
 
 ### "Remote Control is disabled by your organization's policy"
 

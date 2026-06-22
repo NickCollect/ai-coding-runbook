@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/statusline
-fetched_at: 2026-06-01T05:54:53.755204+00:00
+fetched_at: 2026-06-22T06:23:30.689758+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,6 +20,8 @@ Status lines are useful when you:
 * Need to track session costs
 * Work across multiple sessions and need to distinguish them
 * Want git branch and status always visible
+
+The status line renders in its own row above the built-in footer badges and does not replace them. To add clickable link badges to the footer when an ID appears in the conversation, without writing a script, configure [`footerLinksRegexes`](/en/settings#footer-link-badges) instead.
 
 Here's an example of a [multi-line status line](#display-multiple-lines) that displays git info on the first line and a color-coded context bar on the second.
 

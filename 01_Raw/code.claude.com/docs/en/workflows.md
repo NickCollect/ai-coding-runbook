@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/workflows
-fetched_at: 2026-06-15T06:18:00.776398+00:00
+fetched_at: 2026-06-22T06:23:32.658480+00:00
 fetch_method: mintlify_md
 ---
 
@@ -185,6 +185,8 @@ Run `/workflows`, select the run you want to keep, and press `s`. In the save di
 * `~/.claude/workflows/` in your home directory: available in every project, visible only to you
 
 Press Enter to save. The workflow runs as `/<name>` in future sessions from either location.
+
+{/* min-version: 2.1.178 */}In a monorepo with several `.claude/` directories, you can keep workflows alongside the package they apply to. As of v2.1.178, saving to the project location writes to the closest `.claude/workflows/` directory that already exists between your working directory and the repository root, or to the repository root if none exists yet. Project workflows also load from every `.claude/workflows/` along that path, and when more than one defines the same name Claude Code runs the one closest to the working directory.
 
 If a project workflow and a personal workflow share a name, the project one runs.
 
