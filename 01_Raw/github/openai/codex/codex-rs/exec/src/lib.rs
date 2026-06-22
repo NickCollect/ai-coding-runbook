@@ -138,6 +138,7 @@ pub use exec_events::TurnStartedEvent;
 pub use exec_events::Usage;
 pub use exec_events::WebSearchItem;
 use serde_json::Value;
+use std::collections::HashMap;
 use std::future::Future;
 use std::io::IsTerminal;
 use std::io::Read;
@@ -554,6 +555,7 @@ pub async fn run_main(cli: Cli, arg0_paths: Arg0DispatchPaths) -> anyhow::Result
         client_name: "codex_exec".to_string(),
         client_version: env!("CARGO_PKG_VERSION").to_string(),
         experimental_api: true,
+        mcp_server_openai_form_elicitation: false,
         opt_out_notification_methods: Vec::new(),
         channel_capacity: DEFAULT_IN_PROCESS_CHANNEL_CAPACITY,
     };
@@ -889,6 +891,7 @@ async fn run_exec_session(args: ExecRunArgs) -> anyhow::Result<()> {
                         personality: None,
                         output_schema,
                         collaboration_mode: None,
+                        multi_agent_mode: None,
                     },
                 },
                 "turn/start",
@@ -1054,7 +1057,7 @@ fn thread_start_params_from_config(config: &Config) -> ThreadStartParams {
         approvals_reviewer: approvals_reviewer_override_from_config(config),
         sandbox: sandbox.flatten(),
         permissions,
-        config: None,
+        config: thread_config_overrides_from_config(config),
         ephemeral: Some(config.ephemeral),
         thread_source: Some(ThreadSource::User),
         ..ThreadStartParams::default()
@@ -1079,9 +1082,15 @@ fn thread_resume_params_from_config(config: &Config, thread_id: String) -> Threa
         approvals_reviewer: approvals_reviewer_override_from_config(config),
         sandbox: sandbox.flatten(),
         permissions,
-        config: None,
+        config: thread_config_overrides_from_config(config),
         ..ThreadResumeParams::default()
     }
+}
+
+fn thread_config_overrides_from_config(config: &Config) -> Option<HashMap<String, Value>> {
+    config
+        .bypass_hook_trust
+        .then(|| HashMap::from([("bypass_hook_trust".to_string(), Value::Bool(true))]))
 }
 
 fn permissions_selection_from_config(config: &Config) -> Option<String> {
@@ -1416,7 +1425,7 @@ async fn parse_latest_turn_context_cwd(path: &Path) -> Option<PathBuf> {
             continue;
         };
         if let RolloutItem::TurnContext(item) = rollout_line.item {
-            return Some(item.cwd);
+            return Some(item.cwd.into_path_buf());
         }
     }
     None
@@ -1707,6 +1716,15 @@ async fn handle_server_request(
                 request_id,
                 &method,
                 "attestation generation is not supported in exec mode".to_string(),
+            )
+            .await
+        }
+        ServerRequest::CurrentTimeRead { request_id, .. } => {
+            reject_server_request(
+                client,
+                request_id,
+                &method,
+                "external current time is not supported in exec mode".to_string(),
             )
             .await
         }
