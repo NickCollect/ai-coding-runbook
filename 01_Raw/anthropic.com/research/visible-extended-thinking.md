@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/visible-extended-thinking
-fetched_at: 2026-06-15T06:19:20.649641+00:00
+fetched_at: 2026-06-22T06:25:03.755840+00:00
 title: "Claude's extended thinking \\ Anthropic"
 ---
 
@@ -100,7 +100,7 @@ The above is just a short summary of some of our extensive safety work on Claude
 
 ## **Using Claude**
 
-You can use Claude 3.7 Sonnet now at [Claude.ai](http://claude.ai/redirect/website.v1.97eecff1-f7af-4339-b944-4925a6cf3900) or on [our API](https://docs.anthropic.com/en/api/getting-started). And just as Claude can now let you know what it thinks, we hope you’ll let us know what you think, too. Please send your feedback about the new model to [feedback@anthropic.com](mailto:feedback@anthropic.com).
+You can use Claude 3.7 Sonnet now at [Claude.ai](http://claude.ai/redirect/website.v1.cda9e5d6-4911-4806-9ce7-ec55a49758f4) or on [our API](https://docs.anthropic.com/en/api/getting-started). And just as Claude can now let you know what it thinks, we hope you’ll let us know what you think, too. Please send your feedback about the new model to [feedback@anthropic.com](mailto:feedback@anthropic.com).
 
 #### Footnotes
 
@@ -114,16 +114,16 @@ You can use Claude 3.7 Sonnet now at [Claude.ai](http://claude.ai/redirect/websi
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)

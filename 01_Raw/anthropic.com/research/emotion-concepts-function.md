@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/emotion-concepts-function
-fetched_at: 2026-06-15T06:18:32.358456+00:00
+fetched_at: 2026-06-22T06:24:11.785209+00:00
 title: "Emotion concepts and their function in a large language model \\ Anthropic"
 ---
 
@@ -11,8 +11,6 @@ Interpretability
 Apr 2, 2026
 
 [Read the paper](https://transformer-circuits.pub/2026/emotions/index.html)
-
-![Emotion concepts and their function in a large language model](https://www-cdn.anthropic.com/images/4zrzovbb/website/43f063e78cf37ef966329ea28fd1013191cf709a-2000x1125.png)
 
 All modern language models sometimes act like they have emotions. They may say they’re happy to help you, or sorry when they make a mistake. Sometimes they even appear to become frustrated or anxious when struggling with tasks. What’s behind these behaviors? The way modern AI models are trained pushes them to [act like a character](https://www.anthropic.com/research/persona-selection-model) with human-like characteristics. In addition, these models are known to develop rich and generalizable [internal](https://transformer-circuits.pub/2024/scaling-monosemanticity/) [representations](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) of abstract concepts underlying their actions. It may then be natural for them to develop internal machinery that emulates aspects of human psychology, like emotions. If so, this could have profound implications for how we build AI systems and ensure they behave reliably.
 
@@ -139,16 +137,16 @@ Read [the full paper](https://transformer-circuits.pub/2026/emotions/index.html)
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)

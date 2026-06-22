@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/2028-ai-leadership
-fetched_at: 2026-06-15T06:17:59.633686+00:00
+fetched_at: 2026-06-22T06:23:35.563865+00:00
 title: "2028: Two scenarios for global AI leadership \\ Anthropic"
 ---
 
@@ -191,16 +191,16 @@ America and its allies have developed both the world’s most capable frontier A
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)

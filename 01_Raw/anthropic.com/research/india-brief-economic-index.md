@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/india-brief-economic-index
-fetched_at: 2026-06-15T06:18:44.450563+00:00
+fetched_at: 2026-06-22T06:24:20.956135+00:00
 title: "India Country Brief: The Anthropic Economic Index \\ Anthropic"
 ---
 
@@ -110,16 +110,16 @@ Sally Aldous, Jake Eaton, Ria Strasser Galvis, Hanah Ho, Maxim Massenkoff, Peter
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)

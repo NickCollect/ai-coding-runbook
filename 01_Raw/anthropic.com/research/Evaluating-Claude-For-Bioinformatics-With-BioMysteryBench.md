@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench
-fetched_at: 2026-06-15T06:18:34.874529+00:00
+fetched_at: 2026-06-22T06:24:14.336111+00:00
 title: "Evaluating Claude\u2019s bioinformatics research capabilities with BioMysteryBench \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ Science
 
 Apr 29, 2026
 
-![Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench](https://www-cdn.anthropic.com/images/4zrzovbb/website/d6058e0db8e477dc782dacae46e2ec6663d165d9-1000x1000.svg)
+![Evaluating Claude’s bioinformatics research capabilities with BioMysteryBench](https://www-cdn.anthropic.com/images/4zrzovbb/website/2463653e413eb463dbccd43ac34e4844e9adf646-2000x1125.png)
 
 *In this post, Brianna*, *a researcher on the discovery team, shares results from a recent bioinformatics benchmarking effort.*  
   
@@ -92,17 +92,17 @@ Sometimes Claude mirrored human strategies. Perhaps humans have landed on a near
 
 Example 1Example 2
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ec850217c59499f29b36e57853a4c93daf20d021-1920x1080.png)
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8f163ac92606de805573294eaa417e3ec39e38e4-1920x1080.png)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ba4bf7f74aee2623f6217574ec40ba51e45c120d-1920x1080.png)
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6e98b8a8f33638491c1e3a4ffb43cf728d70fc02-1920x1080.png)
 
 Other times, Claude took a completely different route, illustrating there is no strictly correct way to solve these problems and that models may have genuine preferences that diverge from ours.
 
 Example 1Example 2
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/8f163ac92606de805573294eaa417e3ec39e38e4-1920x1080.png)
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ec850217c59499f29b36e57853a4c93daf20d021-1920x1080.png)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/6e98b8a8f33638491c1e3a4ffb43cf728d70fc02-1920x1080.png)
+![](https://www-cdn.anthropic.com/images/4zrzovbb/website/ba4bf7f74aee2623f6217574ec40ba51e45c120d-1920x1080.png)
 
 The examples above showcase a particularly interesting strategy: whereas our human experts used algorithms or databases to identify and annotate properties of a dataset, Claude intuitively recognizes certain patterns or sequences. Admittedly, such clever abstraction is not entirely unique to AI—the first eukaryotic promoter, for example, was discovered when a scientist noticed the sequence “TATA” appearing over and over in sequences upstream of genes. *Intuition* like this has been difficult to build into traditional biology machine learning models, but LLMs might be able to turn up patterns like this at unprecedented scale.
 
@@ -180,19 +180,19 @@ If you are interested in understanding how models perform on difficult verifiabl
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
 
 ## Subscribe to Anthropic Science
 

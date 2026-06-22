@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/how-we-contain-claude
-fetched_at: 2026-06-15T06:17:51.724705+00:00
+fetched_at: 2026-06-22T06:23:34.744332+00:00
 title: "How we contain Claude across products \\ Anthropic"
 ---
 
@@ -26,7 +26,7 @@ The first is to supervise the agent’s behavior via a human-in-the-loop. Claude
 
 The second approach to capping the blast radius—and the focus of much of this post—is containment. Rather than supervising what the agent does, we supervise what it’s *able* to do by enforcing access boundaries through, for example, sandboxes, virtual machines, and egress controls. This is where Anthropic engineering has devoted the most effort, and also where many of the most surprising security failures have occurred.
 
-Over the past two years, we’ve shipped three primary agentic products: [claude.ai](http://claude.ai/redirect/website.v1.ff77d445-cfd2-4259-a19d-bd370cd121c9), Claude Code, and Claude Cowork. Each serves a different audience, requiring a different containment architecture. This article shares what’s held up, what’s broken, and what we’ve learned about agent security along the way.
+Over the past two years, we’ve shipped three primary agentic products: [claude.ai](http://claude.ai/redirect/website.v1.cdbe73f9-f240-463a-a3dc-08711e45d2e0), Claude Code, and Claude Cowork. Each serves a different audience, requiring a different containment architecture. This article shares what’s held up, what’s broken, and what we’ve learned about agent security along the way.
 
 ## **Three types of risk, three components of defense**
 
@@ -60,13 +60,13 @@ Defenses should overlap and complement each other. When environmental defenses a
 
 ## **Patterns for containing agents**
 
-Focusing on the environment layer, we describe three isolation patterns and how they’re tailored for each Claude platform—[claude.ai](http://claude.ai/redirect/website.v1.ff77d445-cfd2-4259-a19d-bd370cd121c9), Claude Code, and Cowork. We arrived at each design gradually, after finding the balance between the capabilities we need from the agent and the degree of intervention required from the user.
+Focusing on the environment layer, we describe three isolation patterns and how they’re tailored for each Claude platform—[claude.ai](http://claude.ai/redirect/website.v1.cdbe73f9-f240-463a-a3dc-08711e45d2e0), Claude Code, and Cowork. We arrived at each design gradually, after finding the balance between the capabilities we need from the agent and the degree of intervention required from the user.
 
 ### **Pattern 1: The ephemeral container (claude.ai code execution)**
 
 Though best known as a chat interface, claude.ai also writes and runs code, generates files, and calls connectors. When Claude runs code inside claude.ai, it does so in a [gVisor](https://en.wikipedia.org/wiki/GVisor) container on isolated infrastructure. The agent is entirely server-side; no code runs on the local machine, and the filesystem is ephemeral (per-session). The blast radius is minimal, but so is the ceiling on what Claude can do—there's no persistent workspace and no access to the user's filesystem.
 
-This also makes [claude.ai](http://claude.ai/redirect/website.v1.ff77d445-cfd2-4259-a19d-bd370cd121c9) subject to a more traditional threat model. We're not protecting user machines from agents; we're protecting our own infrastructure and each tenant from one another. Our pre-launch work for [claude.ai](http://claude.ai/redirect/website.v1.ff77d445-cfd2-4259-a19d-bd370cd121c9) was dominated by traditional security work like network configuration, internal service auth, and orchestration.
+This also makes [claude.ai](http://claude.ai/redirect/website.v1.cdbe73f9-f240-463a-a3dc-08711e45d2e0) subject to a more traditional threat model. We're not protecting user machines from agents; we're protecting our own infrastructure and each tenant from one another. Our pre-launch work for [claude.ai](http://claude.ai/redirect/website.v1.cdbe73f9-f240-463a-a3dc-08711e45d2e0) was dominated by traditional security work like network configuration, internal service auth, and orchestration.
 
 That work reinforced the oldest lesson in security: the weakest layer is the one you built yourself. gVisor and [seccomp](https://en.wikipedia.org/wiki/Seccomp) have been hardened against well-resourced adversaries for far longer than agentic AI has existed, so the review effort went into the newer pieces we'd built around them. We’ll come back to this later, since our custom proxy is also the piece that broke in our most consequential incident.
 

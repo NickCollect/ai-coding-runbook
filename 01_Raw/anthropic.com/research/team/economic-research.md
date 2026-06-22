@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economic-research
-fetched_at: 2026-06-08T05:27:07.999701+00:00
+fetched_at: 2026-06-22T06:24:54.331172+00:00
 title: "Economic Research \\ Anthropic"
 ---
 
@@ -52,6 +52,9 @@ Search
 
 DateCategoryTitle
 
+- [Jun 16, 2026Economic Research
+
+  Agentic coding and persistent returns to expertise](https://www.anthropic.com/research/claude-code-expertise)
 - [May 27, 2026Economic Research
 
   Coding agents in the social sciences](https://www.anthropic.com/research/coding-agents-social-sciences)
@@ -79,8 +82,5 @@ DateCategoryTitle
 - [Jan 15, 2026Economic Research
 
   Anthropic Economic Index report: Economic primitives](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report)
-- [Nov 25, 2025Economic Research
-
-  Estimating AI productivity gains from Claude conversations](https://www.anthropic.com/research/estimating-productivity-gains)
 
 [See more](#)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/a-general-language-assistant-as-a-laboratory-for-alignment
-fetched_at: 2026-06-15T06:18:00.216177+00:00
+fetched_at: 2026-06-22T06:23:35.961535+00:00
 title: "A General Language Assistant as a Laboratory for Alignment \\ Anthropic"
 ---
 
@@ -18,16 +18,16 @@ Given the broad capabilities of large language models, it should be possible to 
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)

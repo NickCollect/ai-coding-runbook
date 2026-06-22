@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/agents-in-biology
-fetched_at: 2026-06-15T06:18:04.466624+00:00
+fetched_at: 2026-06-22T06:23:38.889576+00:00
 title: "Paving the way for agents in biology \\ Anthropic"
 ---
 
@@ -113,21 +113,21 @@ We are especially grateful to Sarah Gurev and Gage Moreno for their help in deve
 
 ## Related content
 
-### Making Claude a chemist
+### Project Fetch: Phase two
 
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
 
-### Coding agents in the social sciences
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
 
-Results from a survey of 1,260 social scientists about AI and coding agent use.
+### Agentic coding and persistent returns to expertise
 
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
 
-### Project Glasswing: An initial update
+### Measuring LLMs’ impact on N-day exploits
 
-An early update on what we've learned from Project Glasswing.
+In cybersecurity, a large fraction of real-world harm comes from N-days: vulnerabilities that have already been publicly disclosed, but only patched on some devices. In this post, we evaluate how much large language models can accelerate and automate the process of developing N-day exploits.
 
-[Read more](https://www.anthropic.com/research/glasswing-initial-update)
+[Read more](https://www.anthropic.com/research/n-days)
 
 ## Subscribe to Anthropic Science
 

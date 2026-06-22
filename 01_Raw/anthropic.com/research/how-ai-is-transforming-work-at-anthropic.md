@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic
-fetched_at: 2026-06-15T06:18:37.259153+00:00
+fetched_at: 2026-06-22T06:24:18.408068+00:00
 title: "How AI Is Transforming Work at Anthropic \\ Anthropic"
 ---
 
@@ -313,16 +313,16 @@ Finally, this research was conducted in August 2025 when Claude Sonnet 4 and Cla
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)

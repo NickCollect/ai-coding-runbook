@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-survey-announcement
-fetched_at: 2026-06-15T06:18:28.635625+00:00
+fetched_at: 2026-06-22T06:24:06.384269+00:00
 title: "Announcing the Anthropic Economic Index Survey  \\ Anthropic"
 ---
 
@@ -22,13 +22,13 @@ In the Anthropic Economic Index Survey, we aim to capture a rich new corpus of q
 
 Collecting these data monthly will enable measurement of not just what people experience and expect, but how quickly their views shift as AI capabilities evolve. Combined with Claude usage data in a [privacy-preserving way](https://www.anthropic.com/research/clio), these first-hand accounts can surface change before it shows up in aggregate labor market data.
 
-The survey launches today. Each month, we will invite a small, randomly selected group of Claude users: anyone with a personal account at least two weeks old may be invited. We will rotate the sample each month so that we hear from as broad a range of people as possible over time. If you’re invited, you’ll see a banner on [claude.ai](http://claude.ai/redirect/website.v1.ff77d445-cfd2-4259-a19d-bd370cd121c9), or get an email if you use Claude primarily on mobile. We’d love you to take part. We plan to publish insights in future Anthropic Economic Index reports and other research briefs. For more information, see the FAQ below.
+The survey launches today. Each month, we will invite a small, randomly selected group of Claude users: anyone with a personal account at least two weeks old may be invited. We will rotate the sample each month so that we hear from as broad a range of people as possible over time. If you’re invited, you’ll see a banner on [claude.ai](http://claude.ai/redirect/website.v1.d51427cf-a669-4a6c-abc9-3e05a0c2d29e), or get an email if you use Claude primarily on mobile. We’d love you to take part. We plan to publish insights in future Anthropic Economic Index reports and other research briefs. For more information, see the FAQ below.
 
 ## Frequently asked questions
 
 **How do I access the study?**
 
-From today, a small random sample of Claude users with accounts at least two weeks old will see an invitation in [claude.ai](http://claude.ai/redirect/website.v1.ff77d445-cfd2-4259-a19d-bd370cd121c9), the Cowork desktop app, or an email if you use Claude only on mobile. We invite a new set of Claude users each month, so if you’re not selected this time, keep an eye out.
+From today, a small random sample of Claude users with accounts at least two weeks old will see an invitation in [claude.ai](http://claude.ai/redirect/website.v1.d51427cf-a669-4a6c-abc9-3e05a0c2d29e), the Cowork desktop app, or an email if you use Claude only on mobile. We invite a new set of Claude users each month, so if you’re not selected this time, keep an eye out.
 
 **What will the study ask me?**
 
@@ -42,16 +42,16 @@ We will analyze the insights from this study as part of our economic research, p
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)

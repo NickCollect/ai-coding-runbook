@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/constitutional-classifiers
-fetched_at: 2026-06-15T06:18:21.345305+00:00
+fetched_at: 2026-06-22T06:24:02.263261+00:00
 title: "Constitutional Classifiers: Defending against universal jailbreaks \\ Anthropic"
 ---
 
@@ -66,13 +66,13 @@ The [full paper](https://arxiv.org/abs/2501.18837) contains all the details abou
 
 ## Constitutional Classifiers live demo
 
-Want to try red teaming Claude yourself? We invite you to try out a [demo of our Constitutional-Classifiers-guarded system](https://claude.ai/redirect/website.v1.ff77d445-cfd2-4259-a19d-bd370cd121c9/constitutional-classifiers) and attempt to jailbreak a version of Claude 3.5 Sonnet that is guarded using our new technique. **[Edit 10 February 2025: The demo is now complete. See below for details].**
+Want to try red teaming Claude yourself? We invite you to try out a [demo of our Constitutional-Classifiers-guarded system](https://claude.ai/redirect/website.v1.d4a89314-b4fa-4dac-b159-114b43e9d3b8/constitutional-classifiers) and attempt to jailbreak a version of Claude 3.5 Sonnet that is guarded using our new technique. **[Edit 10 February 2025: The demo is now complete. See below for details].**
 
 Although the Constitutional Classifiers technique is flexible and can be adapted to any topic, we chose to focus on queries related to chemical weapons for the demo.
 
 Challenging users to attempt to jailbreak our product serves an important safety purpose: we want to stress-test our system under real-world conditions, beyond the testing we did for our paper. This allows us to gather additional data and improve the robustness of the method prior to deploying this method on our production systems in the future.
 
-The [**demo**](https://claude.ai/redirect/website.v1.ff77d445-cfd2-4259-a19d-bd370cd121c9/constitutional-classifiers) will be live from **Feb 3, 2025** to **Feb 10, 2025**. It includes a feedback form where you can contact us to report any successful jailbreaks as well as information on our [Responsible Disclosure Policy](https://www.anthropic.com/responsible-disclosure-policy), which we ask that participants follow. We’ll announce any successes and the general results of the demo in an update to this post.
+The [**demo**](https://claude.ai/redirect/website.v1.d4a89314-b4fa-4dac-b159-114b43e9d3b8/constitutional-classifiers) will be live from **Feb 3, 2025** to **Feb 10, 2025**. It includes a feedback form where you can contact us to report any successful jailbreaks as well as information on our [Responsible Disclosure Policy](https://www.anthropic.com/responsible-disclosure-policy), which we ask that participants follow. We’ll announce any successes and the general results of the demo in an update to this post.
 
 ## 13 February 2025 update: Live demo results
 
@@ -162,16 +162,16 @@ If you’re interested in working on problems such as jailbreak robustness or on
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)

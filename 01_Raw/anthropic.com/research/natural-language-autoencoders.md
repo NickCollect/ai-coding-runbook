@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/natural-language-autoencoders
-fetched_at: 2026-06-15T06:18:54.817083+00:00
+fetched_at: 2026-06-22T06:24:32.911612+00:00
 title: "Natural Language Autoencoders \\ Anthropic"
 ---
 
@@ -64,7 +64,7 @@ For example, in the blackmail test discussed above, we used NLAs to understand w
 
 Claude does not say it thinks it’s being tested in this transcript from our blackmail evaluation, but the NLA explanation reveals its suspicions.
 
-Extending this analysis to other evaluations, NLAs suggest that Claude suspects it’s being tested more often than it lets on. For instance, in a test of whether Claude takes destructive actions while writing code—for example, deleting important files—NLA explanations show signs of evaluation awareness 16% of the time, even though Claude never explicitly verbalizes this. Similarly, on the popular coding benchmark SWE-bench Verified, which we use to determine how capable Claude is, NLAs indicate that Claude is aware it is being evaluated on 26% of problems. In contrast, NLA explanations indicate evaluation awareness on less than 1% of real [claude.ai](http://claude.ai/redirect/website.v1.6567ea67-399a-4df4-b545-b1c143b1b27f) usage that opted in for training.
+Extending this analysis to other evaluations, NLAs suggest that Claude suspects it’s being tested more often than it lets on. For instance, in a test of whether Claude takes destructive actions while writing code—for example, deleting important files—NLA explanations show signs of evaluation awareness 16% of the time, even though Claude never explicitly verbalizes this. Similarly, on the popular coding benchmark SWE-bench Verified, which we use to determine how capable Claude is, NLAs indicate that Claude is aware it is being evaluated on 26% of problems. In contrast, NLA explanations indicate evaluation awareness on less than 1% of real [claude.ai](http://claude.ai/redirect/website.v1.cda9e5d6-4911-4806-9ce7-ec55a49758f4) usage that opted in for training.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fc08005f32ff020f21e598cc72f58768af2bcc4f-1590x1170.png)
 
@@ -110,16 +110,16 @@ Find the [code](https://github.com/kitft/natural_language_autoencoders) on GitHu
 
 ## Related content
 
+### Project Fetch: Phase two
+
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
+
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+### Agentic coding and persistent returns to expertise
+
+[Read more](https://www.anthropic.com/research/claude-code-expertise)
+
 ### Paving the way for agents in biology
 
 [Read more](https://www.anthropic.com/research/agents-in-biology)
-
-### Making Claude a chemist
-
-[Read more](https://www.anthropic.com/research/making-claude-a-chemist)
-
-### Coding agents in the social sciences
-
-Results from a survey of 1,260 social scientists about AI and coding agent use.
-
-[Read more](https://www.anthropic.com/research/coding-agents-social-sciences)
