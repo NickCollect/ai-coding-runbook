@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko
-fetched_at: 2026-06-15T06:24:29.633514+00:00
-title: "\uad00\ub9ac\ud615 \uc5d0\uc774\uc804\ud2b8\uc758 \ud658\uacbd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi
+fetched_at: 2026-06-22T06:29:37.372952+00:00
+title: "M\u00f4i tr\u01b0\u1eddng trong c\u00e1c t\u00e1c nh\u00e2n \u0111\u01b0\u1ee3c qu\u1ea3n l\u00fd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-# 관리형 에이전트의 환경
+# Môi trường trong các tác nhân được quản lý
 
-환경은 에이전트가 코드를 실행하고 파일을 유지할 수 있는 격리된 공간을 제공하는 관리형 Linux 샌드박스입니다. 상호작용 컨텍스트와 분리되어 있으므로 여러 상호작용에서 동일한 환경을 재사용하거나 언제든지 새로 시작할 수 있습니다.
+Môi trường là các hộp cát Linux được quản lý, cung cấp cho các tác nhân một nơi tách biệt để thực thi mã và duy trì các tệp. Các thành phần này tách biệt với bối cảnh tương tác, vì vậy, bạn có thể sử dụng lại cùng một môi trường cho nhiều lượt tương tác hoặc bắt đầu lại từ đầu bất cứ lúc nào.
 
-다음 예에서는 새로운 원격 환경으로 상호작용을 만들고 ID를 검색하는 방법을 보여줍니다.
+Ví dụ sau đây minh hoạ cách tạo một hoạt động tương tác với một môi trường từ xa mới và truy xuất mã nhận dạng của hoạt động đó:
 
 ### Python
 
@@ -68,17 +68,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## `environment` 매개변수
+## Tham số `environment`
 
-`environment` 매개변수는 세 가지 형식을 허용합니다.
+Tham số `environment` chấp nhận 3 dạng:
 
-| 자세 | 예 | 용도 |
+| Biểu mẫu | Ví dụ: | Trường hợp sử dụng |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | 새 샌드박스를 프로비저닝합니다. |
-| 환경 ID | `environment="env_abc123"` | 모든 파일과 패키지가 포함된 기존 샌드박스를 재사용합니다. |
-| 구성 객체 | `environment={...}` | 소스 또는 네트워크 규칙 또는 둘 다 포함된 새 샌드박스를 프로비저닝합니다. |
+| `"remote"` | `environment="remote"` | Cung cấp một hộp cát mới. |
+| Mã môi trường | `environment="env_abc123"` | Sử dụng lại một hộp cát hiện có cùng với tất cả tệp và gói của hộp cát đó. |
+| Đối tượng cấu hình | `environment={...}` | Cung cấp một hộp cát mới có nguồn, quy tắc mạng hoặc cả hai. |
 
-다음 예에서는 `environment` 매개변수를 사용하는 세 가지 방법을 보여줍니다.
+Các ví dụ sau đây minh hoạ 3 cách sử dụng tham số `environment`.
 
 ### Python
 
@@ -209,10 +209,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 환경 구성
+## Định cấu hình môi trường
 
-환경을 설정하는 한 가지 방법은 에이전트에 설치해야 하는 항목을 알려주는 것입니다.
-종속성 확인 및 문제 해결을 처리합니다. 환경이 준비되면 `environment_id`를 저장하고 재사용합니다.
+Một cách để thiết lập môi trường là cho tác nhân phần mềm biết những gì bạn cần cài đặt.
+Nó xử lý việc giải quyết phần phụ thuộc và khắc phục sự cố. Sau khi môi trường đã sẵn sàng, hãy lưu `environment_id` và sử dụng lại.
 
 ### Python
 
@@ -290,15 +290,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 소스에서 마운트
+### Gắn từ một nguồn
 
-에이전트에 필요한 파일을 정확히 알고 있다면 반복하는 대신 단일 호출로 마운트합니다. `environment` 구성 객체는 세 가지 유형의 `sources` 배열을 허용합니다.
+Nếu bạn biết chính xác những tệp mà tác nhân cần, hãy gắn các tệp đó trong một lệnh gọi duy nhất thay vì lặp lại. Đối tượng cấu hình `environment` chấp nhận một mảng `sources` có 3 loại:
 
-| 소스 유형 | `type` 값 | 설명 | 한도 |
+| Loại nguồn | Giá trị `type` | Mô tả | Hạn mức |
 | --- | --- | --- | --- |
-| Git 저장소 | `repository` | URL에서 저장소를 `target`의 샌드박스로 클론합니다. | 500 MB |
-| Cloud Storage | `gcs` | Cloud Storage에서 `target`의 샌드박스로 파일 또는 디렉터리를 복사합니다. | 2 GB |
-| 인라인 콘텐츠 | `inline` | `target`의 샌드박스에 있는 파일에 원시 텍스트 콘텐츠를 씁니다. | 파일당 1MB, 총 2MB |
+| Kho lưu trữ Git | `repository` | Sao chép một kho lưu trữ từ một URL vào hộp cát tại `target`. | 500 MB |
+| Cloud Storage | `gcs` | Sao chép một tệp hoặc thư mục từ Cloud Storage vào hộp cát tại `target`. | 2 GB |
+| Nội dung cùng dòng | `inline` | Ghi nội dung văn bản thô vào một tệp trong hộp cát tại `target`. | 1 MB mỗi tệp, tổng cộng 2 MB |
 
 ### Python
 
@@ -404,16 +404,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-알려진 소스를 선언적으로 마운트한 다음 후속 상호작용으로 반복하여 패키지를 설치하거나 설정 스크립트를 실행하는 두 가지 접근 방식을 결합할 수 있습니다. 커스텀 소스를 추가할 때는 루트 (`/`)를 대상으로 설정할 수 없으며 항상 하위 디렉터리를 지정해야 합니다.
+Bạn có thể kết hợp cả hai phương pháp: khai báo các nguồn đã biết, sau đó lặp lại bằng các hoạt động tương tác tiếp theo để cài đặt các gói hoặc chạy tập lệnh thiết lập. Bạn không thể đặt thư mục gốc (`/`) làm mục tiêu khi thêm một nguồn tuỳ chỉnh, bạn phải luôn chỉ định một thư mục con.
 
-### 비공개 소스
+### Nguồn riêng tư
 
-네트워크 구성에 사용자 인증 정보를 추가하여 비공개 GitHub 저장소 또는 비공개 Cloud Storage 버킷에서 다운로드할 수도 있습니다.
+Bạn cũng có thể tải xuống từ các kho lưu trữ Github riêng tư hoặc các vùng lưu trữ riêng tư trên đám mây bằng cách thêm thông tin đăng nhập vào cấu hình mạng:
 
-**비공개 Git 저장소**의 경우 `Basic` 인증을
-사용하여 [GitHub 개인 액세스 토큰
-(PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)을 사용합니다.
-`x-oauth-basic`을 사용자 이름으로 사용하여 토큰을 인코딩합니다.
+Đối với **kho lưu trữ Git riêng tư**, hãy sử dụng phương thức xác thực `Basic` bằng [Mã thông báo truy cập cá nhân (PAT) của GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+Mã hoá mã thông báo bằng `x-oauth-basic` làm tên người dùng:
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -519,7 +517,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-**비공개 Cloud Storage 버킷**의 경우 표준 OAuth 2.0 Bearer 토큰을 사용합니다.
+Đối với **các bộ chứa riêng tư trong Cloud Storage**, hãy sử dụng mã thông báo Bearer OAuth 2.0 tiêu chuẩn:
 
 ```
 gcloud auth print-access-token
@@ -625,25 +623,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 사전 설치된 소프트웨어
+## Phần mềm được cài đặt sẵn
 
-샌드박스는 Ubuntu에서 실행되며 런타임과 일반 패키지가 사전 설치되어 제공됩니다. 에이전트는 `pip
-install` 또는 `npm install`을 사용하여 런타임에 추가 패키지를 설치할 수 있습니다. 상호작용 중에 설치된 패키지는 동일한 `environment_id`를 재사용할 때 유지됩니다.
+Hộp cát chạy trên Ubuntu và đi kèm với các thời gian chạy và gói chung được cài đặt sẵn. Tác nhân có thể cài đặt các gói bổ sung trong thời gian chạy bằng cách sử dụng `pip
+install` hoặc `npm install`. Các gói được cài đặt trong quá trình tương tác sẽ vẫn tồn tại khi bạn dùng lại cùng một `environment_id`.
 
-| 카테고리 | 사전 설치 패키지 |
+| Danh mục | Các gói được cài đặt sẵn |
 | --- | --- |
-| **UNIX 도구** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **Công cụ UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
 | **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
 | **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## 네트워크 구성
+## Cấu hình mạng
 
-기본적으로 환경에는 무제한 아웃바운드 네트워크 액세스 권한이 있습니다. `network` 필드를 사용하여 아웃바운드 트래픽을 특정 도메인으로 제한합니다. 각 규칙은 일치하는 요청에 헤더를 삽입할 `domain` 및 선택적 `transform` 객체를 지정합니다. 이러한 헤더는 상호작용마다 고유할 수 있으며 동일한 환경에 대해 업데이트할 수 있습니다.
+Theo mặc định, các môi trường có quyền truy cập mạng đi không hạn chế. Sử dụng trường `network` để hạn chế lưu lượng truy cập đi đến các miền cụ thể. Mỗi quy tắc chỉ định một `domain` và một đối tượng `transform` không bắt buộc để chèn tiêu đề vào các yêu cầu trùng khớp. Các tiêu đề này có thể là duy nhất cho mỗi lượt tương tác và bạn có thể cập nhật chúng cho cùng một môi trường.
 
-| 필드 | 유형 | 설명 |
+| Trường | Loại | Mô tả |
 | --- | --- | --- |
-| `domain` | `string` | 일치시킬 도메인입니다. 정확한 호스트 이름 또는 모든 도메인에 `*`를 사용합니다. |
-| `transform` | `object` | 일치하는 요청에 삽입할 헤더를 나타내는 평면 키-값 쌍이 포함된 객체입니다(예: `{"Authorization": "Bearer ..."}`). |
+| `domain` | `string` | Miền cần khớp. Sử dụng tên máy chủ chính xác hoặc `*` cho tất cả các miền. |
+| `transform` | `object` | Đối tượng chứa các cặp khoá-giá trị đơn giản đại diện cho các tiêu đề cần chèn vào các yêu cầu khớp, ví dụ: `{"Authorization": "Bearer ..."}`. |
 
 ### Python
 
@@ -733,14 +731,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-허용 목록이 설정되면 명시적으로 나열된 도메인에 대한 요청만 허용됩니다. 와일드 카드를 사용하여 하위 도메인을 일치시킬 수 있지만 (예: `{"domain":
-"*.example.com"}`), 루트 도메인
-`example.com`은 별도로 추가해야 합니다. 삽입된 헤더 없이 나열되지 않은 도메인 라우팅과 같은 다른 모든 트래픽을 허용하려면 `{"domain": "*"}`을
-캐치올 항목으로 추가합니다.
+Khi bạn đặt danh sách cho phép, chỉ những yêu cầu đến các miền được liệt kê rõ ràng mới được phép. Bạn có thể sử dụng ký tự đại diện để so khớp các miền con (ví dụ: `{"domain":
+"*.example.com"}`), nhưng lưu ý rằng ký tự này không so khớp miền gốc `example.com`. Bạn phải thêm miền gốc riêng. Để cho phép tất cả lưu lượng truy cập khác, chẳng hạn như định tuyến các miền không có trong danh sách mà không có tiêu đề được chèn, hãy thêm `{"domain": "*"}` làm mục nhập chung.
 
-### 사용자 인증 정보
+### Thông tin xác thực
 
-헤더 변환을 추가하여 에이전트가 사용할 사용자 인증 정보를 추가할 수 있습니다. 사용자 인증 정보는 이그레스 프록시에 의해 각 HTTP 헤더에 삽입되며 샌드박스 내에서 환경 변수 또는 파일로 노출되지 않습니다.
+Bạn có thể thêm thông tin đăng nhập để tác nhân sử dụng bằng cách thêm các phép biến đổi tiêu đề. Thông tin đăng nhập được một proxy truyền dữ liệu ra ngoài chèn vào các tiêu đề HTTP tương ứng, thông tin này không bao giờ được hiển thị bên trong hộp cát dưới dạng các biến môi trường hoặc tệp.
 
 ### Python
 
@@ -834,9 +830,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 네트워크 액세스 사용 중지
+### Tắt quyền truy cập mạng
 
-모든 아웃바운드 네트워크 액세스를 차단하려면 `network`를 `disabled`로 설정합니다.
+Để chặn tất cả quyền truy cập vào mạng bên ngoài, hãy đặt `network` thành `disabled`:
 
 ### Python
 
@@ -893,21 +889,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 환경 수명 주기
+## Vòng đời của môi trường
 
-환경은 다음 수명 주기를 따릅니다.
+Môi trường tuân theo vòng đời sau:
 
-| 주 | 행동 |
+| Tiểu bang | Hành vi |
 | --- | --- |
-| **생성 시간** | 상호작용에서 `environment: "remote"` 또는 구성 객체를 지정할 때 프로비저닝됩니다. |
-| **활성** | 상호작용이 진행되는 동안 실행됩니다. |
-| **유휴** | 15분 동안 활동이 없으면 자동 스냅샷이 생성되고 중지됩니다. |
-| **오프라인** | 마지막 활성 후 7일 동안 보관됩니다. ID를 전달하여 재개할 수 있습니다. |
-| **삭제됨** | 시스템에서 삭제되었습니다. |
+| **Đã tạo** | Được cung cấp khi một lượt tương tác chỉ định `environment: "remote"` hoặc một đối tượng cấu hình. |
+| **Đang hoạt động** | Chạy trong khi đang có một lượt tương tác. |
+| **Không hoạt động** | Tự động chụp nhanh và dừng sau 15 phút không hoạt động. |
+| **Ngoại tuyến** | Được giữ lại trong 7 ngày kể từ lần hoạt động gần đây nhất. Có thể tiếp tục bằng cách truyền mã nhận dạng của nó. |
+| **Đã xoá** | Đã xoá khỏi hệ thống. |
 
-## 환경에서 파일 다운로드
+## Tải tệp xuống từ môi trường
 
-에이전트는 실행 중에 샌드박스 내에 파일을 만듭니다. Files API를 사용하여 전체 환경 스냅샷을 tar 파일로 다운로드할 수 있습니다.
+Tác nhân tạo các tệp bên trong hộp cát trong quá trình thực thi. Bạn có thể tải toàn bộ ảnh chụp nhanh môi trường xuống dưới dạng tệp tar bằng Files API:
 
 ### Python
 
@@ -1003,41 +999,39 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   -o snapshot.tar
 ```
 
-## 가격 및 리소스
+## Giá cả và tài nguyên
 
-각 환경은 고정 리소스 할당으로 실행됩니다.
+Mỗi môi trường chạy với mức phân bổ tài nguyên cố định:
 
-| 리소스 | 값 |
+| Tài nguyên | Giá trị |
 | --- | --- |
-| **CPU** | 4코어 |
-| **메모리** | 16 GB |
+| **CPU** | 4 lõi |
+| **Bộ nhớ** | 16 GB |
 
-환경 컴퓨팅 (CPU, 메모리, 샌드박스 실행)은 프리뷰 기간 동안 **청구되지 않습니다**. 에이전트 토큰 비용은
-[가격 책정](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#pricing-for-agents)을
-참조하세요.
+Môi trường điện toán (CPU, bộ nhớ, thực thi hộp cát) **không được tính phí** trong thời gian xem trước. Xem phần [Định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#pricing-for-agents) để biết chi phí mã thông báo của tác nhân.
 
-## 제한사항
+## Các điểm hạn chế
 
-- **프리뷰 상태:** 환경 및 관리형 에이전트는 프리뷰 버전입니다. 기능 및 스키마는 변경될 수 있습니다.
-- **인라인 소스 크기:** 인라인 소스는 파일당 1MB, 모든 파일에서 총 2MB로 제한됩니다.
-- **소스 크기**: Git 저장소는 500MB로 제한되고 Cloud Storage 저장소는 2GB로 제한됩니다.
-- **환경 시작:** 새 환경을 프로비저닝하는 데 최대 5초가 걸립니다. 소스 저장소의 크기가 크면 이 시간이 늘어날 수 있습니다.
-- **파일 지원:** 에이전트는 현재 텍스트 및 이미지 파일 읽기로 제한됩니다. 바이너리 파일 지원은 아직 제공되지 않습니다.
-- **루트에서 마운트 안 됨:** 커스텀 소스를 추가할 때는 루트 (`/`)를 대상으로 설정할 수 없으며 항상 하위 디렉터리를 지정해야 합니다.
+- **Trạng thái xem trước:** Môi trường và nhân viên hỗ trợ được quản lý đang ở trạng thái xem trước. Các tính năng và giản đồ có thể thay đổi.
+- **Kích thước nguồn nội tuyến:** Nguồn nội tuyến bị giới hạn ở mức 1 MB cho mỗi tệp và tổng cộng 2 MB cho tất cả các tệp.
+- **Kích thước nguồn**: Kho lưu trữ Git có giới hạn 500 MB và kho lưu trữ Bộ nhớ đám mây có giới hạn 2 GB.
+- **Khởi động môi trường:** Quá trình cung cấp một môi trường mới mất tối đa khoảng 5 giây. Các kho lưu trữ nguồn lớn có thể làm tăng thời gian này.
+- **Hỗ trợ tệp:** Hiện tại, tác nhân chỉ có thể đọc tệp văn bản và hình ảnh. Tính năng hỗ trợ tệp nhị phân hiện chưa được cung cấp.
+- **Không gắn từ thư mục gốc:** Bạn không thể đặt thư mục gốc (`/`) làm đích đến khi thêm một nguồn tuỳ chỉnh, bạn phải luôn chỉ định một thư mục con.
 
-## 다음 단계
+## Bước tiếp theo
 
-- [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko): 관리형 에이전트의 핵심 개념에 대해 알아봅니다.
-- [빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko): 멀티턴 대화 및 스트리밍으로 빌드를 시작합니다.
-- [Antigravity 에이전트](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko): 기본 에이전트의 기능, 도구, 가격 책정을 살펴봅니다.
-- [커스텀 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): `AGENTS.md` 및 `SKILL.md`를 사용하여 자체 에이전트를 정의합니다.
+- [Tổng quan về tác nhân](https://ai.google.dev/gemini-api/docs/agents?hl=vi): Tìm hiểu về các khái niệm cốt lõi của tác nhân được quản lý.
+- [Bắt đầu nhanh](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi): Bắt đầu xây dựng bằng các cuộc trò chuyện nhiều lượt và tính năng phát trực tuyến.
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi): Khám phá các chức năng, công cụ và giá của tác nhân mặc định.
+- [Tạo tác nhân tuỳ chỉnh](https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi): Xác định tác nhân của riêng bạn bằng cách sử dụng `AGENTS.md` và `SKILL.md`.
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-최종 업데이트: 2026-05-20(UTC)
+Cập nhật lần gần đây nhất: 2026-05-20 UTC.
 
-의견을 전달하고 싶나요?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-20(UTC)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-20 UTC."],[],[]]

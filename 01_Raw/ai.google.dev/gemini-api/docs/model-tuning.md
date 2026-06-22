@@ -1,32 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/model-tuning?hl=tr
-fetched_at: 2026-06-15T06:32:59.854684+00:00
-title: "Gemini API ile ince ayarlar \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/model-tuning?hl=hi
+fetched_at: 2026-06-22T06:33:18.507052+00:00
+title: "Gemini API \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u092c\u0947\u0939\u0924\u0930 \u092c\u0928\u093e\u0928\u093e \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Gemini API ile ince ayarlar
+# Gemini API की मदद से बेहतर बनाना
 
-Gemini 1.5 Flash-001'in Mayıs 2025'te desteği sonlandırılacağından, artık Gemini API veya AI Studio'da ince ayar yapmayı destekleyen bir modelimiz yok. Ancak bu özellik [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/models/gemini-use-supervised-tuning?hl=tr)'da destekleniyor.
+मई 2025 में, Gemini 1.5 Flash-001 को बंद कर दिया जाएगा. इसके बाद, हमारे पास ऐसा कोई
+मॉडल नहीं होगा जो Gemini API या AI Studio में फ़ाइन-ट्यूनिंग की सुविधा देता हो.
+हालांकि, [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/models/gemini-use-supervised-tuning?hl=hi) में यह सुविधा उपलब्ध रहेगी.
 
-Şu anda ince ayar desteği sunmayı planlamıyoruz ancak kullanım alanınız için ince ayar önemliyse [geliştirici forumumuzda görüşlerinizi paylaşabilirsiniz](https://discuss.ai.google.dev/c/gemini-api/4?hl=tr).
+फ़िलहाल, हमारे पास फ़ाइन-ट्यूनिंग की सुविधा उपलब्ध कराने की कोई योजना नहीं है. हालांकि, अगर आपके इस्तेमाल के मामले में फ़ाइन-ट्यूनिंग की सुविधा अहम है, तो कृपया हमारे डेवलपर फ़ोरम पर अपनी राय [शेयर
+करें](https://discuss.ai.google.dev/c/gemini-api/4?hl=hi)
+.
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

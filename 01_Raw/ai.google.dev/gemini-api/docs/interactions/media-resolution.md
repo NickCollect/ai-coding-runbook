@@ -1,31 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=ar
-fetched_at: 2026-06-15T06:29:40.687644+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=zh-TW
+fetched_at: 2026-06-22T06:32:25.219434+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+# Media resolution
 
-إرسال ملاحظات
+The `media_resolution` parameter controls how the Gemini API processes media inputs like images, videos, and PDF documents by determining the **maximum number of tokens** allocated for media inputs, allowing you to balance response quality against latency and cost. For different settings, default values and how they correspond to tokens, see the [Token counts](#token-counts) section.
 
-# درجة دقة الوسائط
+You can configure media resolution for individual media objects (content items) within your request (Gemini 3 only).
 
-يتحكّم المَعلمة `media_resolution` في طريقة معالجة Gemini API لمدخلات الوسائط، مثل الصور والفيديوهات ومستندات PDF، من خلال تحديد **الحد الأقصى لعدد الرموز المميزة** المخصّصة لمدخلات الوسائط، ما يتيح لك تحقيق التوازن بين جودة الردود ووقت الاستجابة والتكلفة. للاطّلاع على الإعدادات المختلفة والقيم التلقائية وكيفية تطابقها مع الرموز المميزة، يُرجى الانتقال إلى قسم [عدد الرموز المميزة](#token-counts).
+## Per-content-item media resolution (Gemini 3 only)
 
-يمكنك ضبط دقة الوسائط لعناصر الوسائط الفردية (عناصر المحتوى) ضمن طلبك (Gemini 3 فقط).
-
-## دقة الوسائط لكل عنصر محتوى (Gemini 3 فقط)
-
-يتيح لك Gemini 3 ضبط دقة الوسائط لكائنات الوسائط الفردية ضمن طلبك، ما يوفّر تحسينًا دقيقًا لاستخدام الرموز المميزة. يمكنك الجمع بين مستويات الدقة في طلب واحد. على سبيل المثال، استخدام دقة عالية لمخطط بياني معقّد ودقة منخفضة لصورة بسيطة ذات صلة بالسياق
+Gemini 3 allows you to set media resolution for individual media objects within your request, offering fine-grained optimisation of token usage. You can mix resolution levels in a single request. For example, using high resolution for a complex diagram and low resolution for a simple contextual image.
 
 ### Python
 
@@ -104,69 +100,69 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## قيم الدقة المتاحة
+## Available resolution values
 
-تحدّد Gemini API المستويات التالية لدقة الوسائط:
+The Gemini API defines the following levels for media resolution:
 
-- `unspecified`: هذا هو الإعداد التلقائي. يختلف عدد الرموز المميزة لهذا المستوى بشكل كبير بين Gemini 3 ونماذج Gemini السابقة.
-- `low`: عدد أقل من الرموز المميزة، ما يؤدي إلى معالجة أسرع وتكلفة أقل، ولكن مع تفاصيل أقل
-- ‫`medium`: توازن بين التفاصيل والتكلفة ووقت الاستجابة
-- ‫`high`: عدد الرموز المميزة أكبر، ما يوفّر تفاصيل أكثر للنموذج للعمل عليها، ولكن على حساب زيادة وقت الاستجابة والتكلفة.
-- ‫`ultra_high` (لكل عنصر محتوى فقط): أعلى عدد من الرموز المميزة، وهو مطلوب لحالات استخدام معيّنة مثل [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=ar).
+- `unspecified`: The default setting. The token count for this level varies significantly between Gemini 3 and earlier Gemini models.
+- `low`: Lower token count, resulting in faster processing and lower cost, but with less detail.
+- `medium`: A balance between detail, cost, and latency.
+- `high`: Higher token count, providing more detail for the model to work with, at the expense of increased latency and cost.
+- `ultra_high` (Per content item only): Highest token count, required for specific use cases such as [computer use](https://ai.google.dev/gemini-api/docs/interactions/computer-use).
 
-يُرجى العِلم أنّ `high` يوفّر الأداء الأمثل لمعظم حالات الاستخدام.
+Note that `high` provides the optimal performance for most use cases.
 
-يعتمد العدد الدقيق للرموز المميزة التي يتم إنشاؤها لكل مستوى من هذه المستويات على كل من **نوع الوسائط** (صورة أو فيديو أو ملف PDF) و**إصدار النموذج**.
+The exact number of tokens generated for each of these levels depends on both the **media type** (Image, Video, PDF) and the **model version**.
 
-## عدد الرموز المميزة
+## Token counts
 
-تلخّص الجداول أدناه عدد الرموز التقريبي لكل قيمة `media_resolution` ونوع وسائط لكل مجموعة نماذج.
+The tables below summarize the approximate token counts for each `media_resolution` value and media type per model family.
 
-**نماذج Gemini 3**
+**Gemini 3 models**
 
-| MediaResolution | صورة | فيديو | PDF |
+| MediaResolution | Image | Video | PDF |
 | --- | --- | --- | --- |
-| `unspecified` (تلقائي) | 1120 | 70 | 560 |
-| `low` | 280 | 70 | ‫280 + نص إعلاني مدمج |
-| `medium` | 560 | 70 | ‫560 + نص إعلاني على المنصة نفسها |
-| `high` | 1120 | 280 | ‫1120 + نص إعلاني على المنصة نفسها |
-| `ultra_high` | 2240 | لا ينطبق | لا ينطبق |
+| `unspecified` (Default) | 1120 | 70 | 560 |
+| `low` | 280 | 70 | 280 + Native Text |
+| `medium` | 560 | 70 | 560 + Native Text |
+| `high` | 1120 | 280 | 1120 + Native Text |
+| `ultra_high` | 2240 | N/A | N/A |
 
-## اختيار درجة الدقة المناسبة
+## Choosing the right resolution
 
-- **تلقائي (`unspecified`):** ابدأ بالخيار التلقائي. تم تحسينها لتحقيق توازن جيد بين الجودة ووقت الاستجابة والتكلفة في معظم حالات الاستخدام الشائعة.
-- **`low`:** استخدِم هذا الخيار في الحالات التي تكون فيها التكلفة ووقت الاستجابة في غاية الأهمية، وتكون التفاصيل الدقيقة أقل أهمية.
-- **`medium` / `high`:** زيادة الدقة عندما تتطلّب المهمة فهم تفاصيل معقّدة في الوسائط وغالبًا ما يكون ذلك ضروريًا لإجراء تحليل مرئي معقّد أو قراءة المخططات أو فهم المستندات الكثيفة.
-- **`ultra_high`**: يتوفّر هذا الخيار فقط لإعدادات كل عنصر من عناصر المحتوى. يُنصح باستخدامها في حالات استخدام معيّنة، مثل استخدام الكمبيوتر أو عندما تُظهر الاختبارات تحسّنًا واضحًا مقارنةً بـ `high`.
-- **التحكّم في كل عنصر من عناصر المحتوى (Gemini 3):** يعمل على تحسين استخدام الرموز المميزة. على سبيل المثال، في طلب يتضمّن صورًا متعددة، استخدِم `high` لرسم تخطيطي معقّد و`low` أو `medium` لصور سياقية أبسط.
+- **Default (`unspecified`):** Start with the default. It's tuned for a good balance of quality, latency, and cost for most common use cases.
+- **`low`:** Use for scenarios where cost and latency are paramount, and fine-grained detail is less critical.
+- **`medium` / `high`:** Increase the resolution when the task requires understanding intricate details within the media. This is often needed for complex visual analysis, chart reading, or dense document comprehension.
+- **`ultra_high`** - Only available for per content item setting. Recommended for specific use cases such as computer use or where testing shows a clear enhancement over `high`.
+- **Per-content-item control (Gemini 3):** Optimizes token usage. For example, in a prompt with multiple images, use `high` for a complex diagram and `low` or `medium` for simpler contextual images.
 
-**الإعدادات المقترَحة**
+**Recommended settings**
 
-في ما يلي قائمة بإعدادات دقة الوسائط المقترَحة لكل نوع من أنواع الوسائط المتوافقة.
+The following lists the recommended media resolution settings for each supported media type.
 
-| نوع الوسائط | الإعداد المقترَح | الحد الأقصى لعدد الرموز المميزة | إرشادات الاستخدام |
+| Media Type | Recommended Setting | Max Tokens | Usage Guidance |
 | --- | --- | --- | --- |
-| **الصور** | `high` | 1120 | يُنصح باستخدامها لمعظم مهام تحليل الصور لضمان الحصول على أعلى جودة. |
-| **ملفات PDF** | `medium` | 560 | الأفضل لفهم المستندات، وعادةً ما تصل الجودة إلى الحد الأقصى عند `medium`. لا تؤدي الزيادة إلى `high` عادةً إلى تحسين نتائج التعرّف البصري على الأحرف للمستندات العادية. |
-| **الفيديو** (عام) | ‫`low` (أو `medium`) | ‫70 (لكل إطار) | **ملاحظة:** بالنسبة إلى الفيديو، يتم التعامل مع إعدادات `low` و`medium` بشكل مماثل (70 رمزًا مميزًا) لتحسين استخدام السياق. وهذا يكفي لمعظم مهام التعرّف على الإجراءات ووصفها. |
-| **الفيديو** (يحتوي على الكثير من النصوص) | `high` | ‫280 (لكل إطار) | يجب توفُّرها فقط عندما تتضمّن حالة الاستخدام قراءة نص كثيف (التعرّف البصري على الأحرف) أو تفاصيل صغيرة ضمن لقطات الفيديو. |
+| **Images** | `high` | 1120 | Recommended for most image analysis tasks to ensure maximum quality. |
+| **PDFs** | `medium` | 560 | Optimal for document understanding; quality typically saturates at `medium`. Increasing to `high` rarely improves OCR results for standard documents. |
+| **Video** (General) | `low` (or `medium`) | 70 (per frame) | **Note:** For video, `low` and `medium` settings are treated identically (70 tokens) to optimize context usage. This is sufficient for most action recognition and description tasks. |
+| **Video** (Text-heavy) | `high` | 280 (per frame) | Required only when the use case involves reading dense text (OCR) or small details within video frames. |
 
-ننصحك دائمًا باختبار وتقييم تأثير إعدادات الدقة المختلفة على تطبيقك للعثور على أفضل حلّ وسط بين الجودة ووقت الاستجابة والتكلفة.
+Always test and evaluate the impact of different resolution settings on your application to find the best trade-off between quality, latency, and cost.
 
-## ملخّص التوافق مع الإصدارات
+## Version compatibility summary
 
-- إنّ ضبط `resolution` على عناصر المحتوى الفردية **متاح حصريًا في نماذج Gemini 3**.
+- Setting the `resolution` on individual content items is **exclusive to Gemini 3 models**.
 
-## الخطوات التالية
+## Next steps
 
-- يمكنك الاطّلاع على مزيد من المعلومات حول إمكانات Gemini API المتعددة الوسائط في أدلة [فهم الصور](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=ar) و[فهم الفيديوهات](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=ar) و[فهم المستندات](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=ar).
+- Learn more about the multimodal capabilities of Gemini API in the [image understanding](https://ai.google.dev/gemini-api/docs/interactions/image-understanding), [video understanding](https://ai.google.dev/gemini-api/docs/interactions/video-understanding) and [document understanding](https://ai.google.dev/gemini-api/docs/interactions/document-processing) guides.
 
-إرسال ملاحظات
+Send feedback
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)
+Last updated 2026-06-18 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Need to tell us more?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

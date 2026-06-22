@@ -1,25 +1,21 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/audio?hl=de
-fetched_at: 2026-06-15T06:32:56.448306+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/audio
+fetched_at: 2026-06-22T06:34:32.576670+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+# Audio understanding
 
-Feedback geben
-
-# Verständnis von Audioinhalten
-
-Gemini kann Audioeingaben analysieren und Textantworten generieren.
+Gemini can analyze audio input and generate text responses.
 
 ### Python
 
@@ -92,26 +88,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Übersicht
+## Overview
 
-Gemini kann Audioeingaben analysieren und verstehen und Textantworten generieren. Dadurch werden folgende Anwendungsfälle ermöglicht:
+Gemini can analyze and understand audio input and generate text responses,
+enabling use cases like:
 
-- Audioinhalte beschreiben, zusammenfassen oder Fragen dazu beantworten
-- Transkription und Übersetzung (Sprache zu Text)
-- Sprecherbestimmung (verschiedene Sprecher identifizieren)
-- Erkennung von Emotionen in Sprache und Musik
-- Bestimmte Segmente mit Zeitstempeln analysieren
+- Describe, summarize, or answer questions about audio content
+- Transcription and translation (speech to text)
+- Speaker diarization (identifying different speakers)
+- Emotion detection in speech and music
+- Analyzing specific segments with timestamps
 
-Informationen zu Sprach- und Videointeraktionen in Echtzeit finden Sie unter
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=de).
-Für spezielle Modelle für die Sprache-zu-Text-Transkription mit Unterstützung für die Echtzeit-Transkription,
-verwenden Sie die [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=de).
+For real-time voice and video interactions, see the
+[Live API](https://ai.google.dev/gemini-api/docs/live).
+For dedicated speech to text models with support for real-time transcription,
+use the [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text).
 
-## Sprache zu Text transkribieren
+## Transcribe speech to text
 
-In diesem Beispiel wird gezeigt, wie Sie Sprache mit
-Zeitstempeln, Sprecherbestimmung und Emotionserkennung mithilfe
-[strukturierter Ausgaben](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=de)transkribieren, übersetzen und zusammenfassen.
+This example shows how to transcribe, translate, and summarize speech with
+timestamps, speaker diarization, and emotion detection using
+[structured outputs](https://ai.google.dev/gemini-api/docs/interactions/structured-output).
 
 ### Python
 
@@ -270,18 +267,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Eine mehrsprachige Gemini App für die Audio-Transkription](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=de)
+![A multilingual audio transcription Gemini app](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif)
 
-## Eingabeaudio
+## Input audio
 
-Sie können Audiodaten auf folgende Arten bereitstellen:
+You can provide audio data in the following ways:
 
-- [Laden Sie eine Audiodatei hoch](#upload-audio), bevor Sie eine Anfrage senden.
-- [Übergeben Sie Inline-Audiodaten](#inline-audio) mit der Anfrage.
+- [Upload an audio file](#upload-audio) before making a request.
+- [Pass inline audio data](#inline-audio) with the request.
 
-### Audiodatei hochladen
+### Upload an audio file
 
-Verwenden Sie die [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=de) für Dateien, die größer als 20 MB sind.
+Use the [Files API](https://ai.google.dev/gemini-api/docs/interactions/files) for files larger than 20 MB.
 
 ### Python
 
@@ -353,9 +350,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Audiodaten inline übergeben
+### Pass audio data inline
 
-Für kleine Audiodateien mit einer Gesamtgröße von weniger als 20 MB:
+For small audio files under 20MB total request size:
 
 ### Python
 
@@ -436,13 +433,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Hinweise zu Inline-Audiodaten:
-\* Die maximale Anfragengröße beträgt insgesamt 20 MB (einschließlich Prompts und aller Dateien).
-\* Wenn Sie die Datei wiederverwenden möchten, [laden Sie sie](#upload-audio) stattdessen hoch.
+Notes on inline audio data:
+\* Maximum request size is 20 MB total (including prompts and all files)
+\* For reuse, [upload the file](#upload-audio) instead
 
-## Transkript erstellen
+## Get a transcript
 
-Wenn Sie ein Transkript erhalten möchten, fragen Sie im Prompt danach:
+To get a transcript, ask for it in the prompt:
 
 ### Python
 
@@ -478,9 +475,9 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-## Auf Zeitstempel verweisen
+## Refer to timestamps
 
-Verwenden Sie das Format `MM:SS`, um auf bestimmte Abschnitte zu verweisen:
+Use `MM:SS` format to reference specific sections:
 
 ### Python
 
@@ -510,9 +507,9 @@ const interaction = await client.interactions.create({
 });
 ```
 
-## Tokens zählen
+## Count tokens
 
-So zählen Sie Tokens in einer Audiodatei:
+Count tokens in an audio file:
 
 ### Python
 
@@ -536,37 +533,37 @@ const response = await client.models.countTokens({
 console.log(response.totalTokens);
 ```
 
-## Unterstützte Audioformate
+## Supported audio formats
 
-- WAV – `audio/wav`
-- MP3 – `audio/mp3`
-- AIFF – `audio/aiff`
-- AAC – `audio/aac`
-- OGG Vorbis – `audio/ogg`
-- FLAC – `audio/flac`
+- WAV - `audio/wav`
+- MP3 - `audio/mp3`
+- AIFF - `audio/aiff`
+- AAC - `audio/aac`
+- OGG Vorbis - `audio/ogg`
+- FLAC - `audio/flac`
 
-## Technische Details zu Audio
+## Technical details about audio
 
-- **Tokens**: 32 Tokens pro Sekunde Audio (1 Minute = 1.920 Tokens)
-- **Nicht-Sprache**: Gemini versteht Geräusche, die keine Sprache sind (Vogelgesang, Sirenen usw.).
-- **Maximale Länge**: 9,5 Stunden Audio pro Prompt
-- **Auflösung**: Auf 16 kbit/s heruntergesampelt
-- **Kanäle**: Mehrkanal-Audio wird zu einem einzelnen Kanal kombiniert.
+- **Tokens**: 32 tokens per second of audio (1 minute = 1,920 tokens)
+- **Non-speech**: Gemini understands non-speech sounds (birdsong, sirens, etc.)
+- **Max length**: 9.5 hours of audio per prompt
+- **Resolution**: Downsampled to 16 Kbps
+- **Channels**: Multi-channel audio combined to single channel
 
-## Nächste Schritte
+## What's next
 
-- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=de): Audiodateien hochladen und verwalten
-- [Systemanweisungen](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=de#system-instructions):
-  Modellverhalten anpassen
-- [Strukturierte Ausgabe](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=de):
-  Transkriptionsergebnisse im JSON-Format abrufen
+- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files): Upload and manage audio files
+- [System instructions](https://ai.google.dev/gemini-api/docs/interactions/text-generation#system-instructions):
+  Customize model behavior
+- [Structured output](https://ai.google.dev/gemini-api/docs/interactions/structured-output):
+  Get transcription results in JSON format
 
-Feedback geben
+Send feedback
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Zuletzt aktualisiert: 2026-05-28 (UTC).
+Last updated 2026-06-18 UTC.
 
-Haben Sie Feedback für uns?
+Need to tell us more?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-28 (UTC)."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

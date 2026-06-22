@@ -1,38 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=he
-fetched_at: 2026-06-15T06:23:10.629030+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/document-processing
+fetched_at: 2026-06-22T06:25:54.563376+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+# Document understanding
 
-שליחת משוב
+Gemini models can process documents in PDF format, using native
+vision to understand entire document contexts. This goes beyond
+just text extraction, allowing Gemini to:
 
-# הבנת מסמכים
+- Analyze and interpret content, including text, images, diagrams,
+  charts, and tables, even in long documents up to 1000 pages.
+- Extract information into [structured output](https://ai.google.dev/gemini-api/docs/interactions/structured-output) formats.
+- Summarize and answer questions based on both the visual and textual elements
+  in a document.
+- Transcribe document content (e.g. to HTML), preserving layouts and
+  formatting, for use in downstream applications.
 
-מודלים של Gemini יכולים לעבד מסמכים בפורמט PDF, באמצעות ראייה מובנית כדי להבין הקשרים של מסמכים שלמים. היכולת הזו לא מסתכמת בחילוץ טקסט, אלא מאפשרת ל-Gemini:
+You can also pass non-PDF documents in the same way but Gemini will see them
+as normal text which will eliminate context like charts or formatting.
 
-- לנתח ולפרש תוכן, כולל טקסט, תמונות, דיאגרמות, תרשימים וטבלאות, גם במסמכים ארוכים של עד 1, 000 עמודים.
-- חילוץ מידע לפורמטים של [פלט מובנה](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=he).
-- לסכם מסמכים ולענות על שאלות על סמך הרכיבים החזותיים והטקסטואליים שלהם.
-- תמלול תוכן המסמך (למשל ל-HTML), תוך שמירה על הפריסות והעיצוב, לשימוש באפליקציות במורד הזרם.
+## Passing PDF data inline
 
-אפשר גם להעביר מסמכים שאינם PDF באותו אופן, אבל Gemini יראה אותם כטקסט רגיל, כך שלא יהיה הקשר כמו תרשימים או עיצוב.
+You can pass PDF data inline in the request. This is best
+suited for smaller documents or temporary processing where you don't need to
+reference the file in subsequent requests. We recommend using the
+[Files API](https://ai.google.dev/gemini-api/docs/interactions/document-processing#large-pdfs)
+for larger documents that you need to refer to in multi-turn interactions to
+improve request latency and reduce bandwidth usage.
 
-## העברת נתוני PDF בתוך השורה
-
-אפשר להעביר נתוני PDF בתוך הבקשה. האפשרות הזו מתאימה במיוחד למסמכים קטנים או לעיבוד זמני שבו אין צורך להפנות לקובץ בבקשות הבאות. מומלץ להשתמש ב-[Files API](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=he#large-pdfs) למסמכים גדולים שצריך להתייחס אליהם באינטראקציות מרובות תורות, כדי לשפר את זמן הטעינה של הבקשה ולצמצם את השימוש ברוחב הפס.
-
-בדוגמה הבאה אפשר לראות איך מעבירים נתוני PDF בשורה:
+The following example shows you how to pass PDF data inline:
 
 ### Python
 
@@ -118,7 +125,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-אפשר גם להעלות קובץ PDF מקומי לעיבוד:
+You can also upload a local PDF file for processing:
 
 ### Python
 
@@ -169,13 +176,15 @@ async function main() {
 main();
 ```
 
-## העלאה של קובצי PDF באמצעות Files API
+## Uploading PDFs using the Files API
 
-מומלץ להשתמש ב-Files API לקבצים גדולים יותר או כשרוצים לעשות שימוש חוזר במסמך בכמה בקשות. הפעולה הזו משפרת את זמן האחזור של הבקשות ומצמצמת את השימוש ברוחב הפס, כי היא מפרידה בין העלאת הקובץ לבין בקשות המודל.
+We recommend you use Files API for larger files or when you intend to reuse a
+document across multiple requests. This improves request latency and reduces
+bandwidth usage by decoupling the file upload from the model requests.
 
-### קובצי PDF גדולים מכתובות URL
+### Large PDFs from URLs
 
-אפשר להשתמש ב-File API כדי לפשט את ההעלאה והעיבוד של קובצי PDF גדולים מכתובות URL:
+Use the File API to simplify uploading and processing large PDF files from URLs:
 
 ### Python
 
@@ -329,7 +338,7 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### קובצי PDF גדולים שמאוחסנים באופן מקומי
+### Large PDFs stored locally
 
 ### Python
 
@@ -450,7 +459,9 @@ echo
 jq ".steps[-1].content[0].text" response.json
 ```
 
-כדי לוודא שה-API שמר בהצלחה את הקובץ שהועלה ולקבל את המטא-נתונים שלו, אפשר לקרוא ל-[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=he). רק `name` (ובאופן עקיף, `uri`) הם ייחודיים.
+You can verify the API successfully stored the uploaded file and get its
+metadata by calling [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get). Only the `name`
+(and by extension, the `uri`) are unique.
 
 ### Python
 
@@ -482,9 +493,11 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## העברת כמה קובצי PDF
+## Passing multiple PDFs
 
-‫Gemini API יכול לעבד כמה מסמכי PDF (עד 1,000 דפים) בבקשה אחת, כל עוד הגודל המשולב של המסמכים וההנחיה הטקסטואלית לא חורג מחלון ההקשר של המודל.
+The Gemini API is capable of processing multiple PDF documents (up to 1000 pages)
+in a single request, as long as the combined size of the documents and the text
+prompt stays within the model's context window.
 
 ### Python
 
@@ -676,49 +689,73 @@ rm "file_info_${DISPLAY_NAME_1}.json"
 rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## פרטים טכניים
+## Technical details
 
-‫Gemini תומך בקובצי PDF בגודל של עד 50MB או עד 1,000 עמודים. המגבלה הזו חלה על נתונים מוטבעים וגם על העלאות באמצעות Files API. כל דף במסמך שווה ל-258 טוקנים.
+Gemini supports PDF files up to 50MB or 1000 pages. This limit applies
+to both inline data and Files API uploads. Each document page is equivalent to 258
+tokens.
 
-אין מגבלות ספציפיות על מספר הפיקסלים במסמך, מלבד [חלון ההקשר](https://ai.google.dev/gemini-api/docs/long-context?hl=he) של המודל. עם זאת, דפים גדולים יותר מצטמצמים לרזולוציה מקסימלית של 3,072x3,072 תוך שמירה על יחס הגובה-רוחב המקורי שלהם, ודפים קטנים יותר מוגדלים לרזולוציה של 768x768 פיקסלים. אין הפחתה בעלויות של דפים בגדלים קטנים יותר, מלבד רוחב פס, או שיפור בביצועים של דפים ברזולוציה גבוהה יותר.
+While there are no specific limits to the number of pixels in a document besides
+the model's [context window](https://ai.google.dev/gemini-api/docs/long-context), larger pages are
+scaled down to a maximum resolution of 3072 x 3072 while preserving their original
+aspect ratio, while smaller pages are scaled up to 768 x 768 pixels. There is no
+cost reduction for pages at lower sizes, other than bandwidth, or performance
+improvement for pages at higher resolution.
 
-### המודלים של Gemini 3
+### Gemini 3 models
 
-‫Gemini 3 מציג שליטה מפורטת בעיבוד של ראייה מולטי-מודאלית באמצעות הפרמטר `media_resolution`. מעכשיו אפשר להגדיר את הרזולוציה לערך נמוך, בינוני או גבוה לכל קטע מדיה בנפרד. בעקבות התוספת הזו, העיבוד של מסמכי PDF עודכן:
+Gemini 3 introduces granular control over multimodal vision processing with the
+`media_resolution` parameter. You can now set the resolution to low, medium, or
+high per individual media part. With this addition, the processing of PDF
+documents has been updated:
 
-1. **הכללת טקסט מקורי:** טקסט שמוטמע באופן מקורי ב-PDF מחולץ ומועבר למודל.
-2. **דיווח על חיובים ועל טוקנים:**
-   - **לא תחויבו** על אסימונים שמקורם ב**טקסט מקורי** שחולץ מקובצי PDF.
-   - בקטע `usage_metadata` בתגובה מה-API, טוקנים שנוצרו מעיבוד של דפי PDF (כתמונות) נספרים עכשיו בשיטת `IMAGE`, ולא בשיטת `DOCUMENT` נפרדת כמו בכמה גרסאות קודמות.
+1. **Native text inclusion:** Text natively embedded in the PDF is extracted
+   and provided to the model.
+2. **Billing & token reporting:**
+   - You are **not charged** for tokens originating from the extracted
+     **native text** in PDFs.
+   - In the `usage_metadata` section of the API response, tokens generated
+     from processing PDF pages (as images) are now counted under the `IMAGE`
+     modality, not a separate `DOCUMENT` modality as in some earlier
+     versions.
 
-### סוגי מסמכים
+### Document types
 
-מבחינה טכנית, אפשר להעביר סוגי MIME אחרים לניתוח מסמכים, כמו TXT,‏ Markdown,‏ HTML,‏ XML וכו'. עם זאת, ***הניתוח של מסמכים מתבצע בצורה משמעותית רק בקובצי PDF***. סוגים אחרים יחולצו כטקסט בלבד, והמודל לא יוכל לפרש את מה שרואים בעיבוד של הקבצים האלה. כל הפרטים הספציפיים לגבי סוג הקובץ, כמו תרשימים, דיאגרמות, תגי HTML, עיצוב Markdown וכו', יאבדו.
+Technically, you can pass other MIME types for document understanding, like
+TXT, Markdown, HTML, XML, etc. However, document vision ***only meaningfully
+understands PDFs***. Other types will be extracted as pure text, and the model
+won't be able to interpret what we see in the rendering of those files. Any
+file-type specifics like charts, diagrams, HTML tags, Markdown formatting, etc.,
+will be lost.
 
-מידע על שיטות אחרות להזנת קבצים זמין במדריך בנושא [שיטות להזנת קבצים](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=he).
+To learn about other file input methods, see the
+[File input methods](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods) guide.
 
-### שיטות מומלצות
+### Best practices
 
-לקבלת התוצאות הטובות ביותר:
+For best results:
 
-- לפני ההעלאה, מסובבים את הדפים לכיוון הנכון.
-- אל תשתמשו בדפים מטושטשים.
-- אם משתמשים בדף יחיד, צריך להציב את הנחיית הטקסט אחרי הדף.
+- Rotate pages to the correct orientation before uploading.
+- Avoid blurry pages.
+- If using a single page, place the text prompt after the page.
 
-## המאמרים הבאים
+## What's next
 
-מידע נוסף זמין במקורות המידע הבאים:
+To learn more, see the following resources:
 
-- [אסטרטגיות לכתיבת הנחיות עם קבצים](https://ai.google.dev/gemini-api/docs/interactions/files?hl=he#prompt-guide): Gemini API תומך בכתיבת הנחיות עם נתוני טקסט, תמונה, אודיו ווידאו, שנקראות גם כתיבת הנחיות מולטי-מודאליות.
-- [הוראות למערכת](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=he#system-instructions):
-  הוראות למערכת מאפשרות לכוון את התנהגות המודל בהתאם לצרכים הספציפיים ולתרחישי השימוש שלכם.
+- [File prompting strategies](https://ai.google.dev/gemini-api/docs/interactions/files#prompt-guide): The
+  Gemini API supports prompting with text, image, audio, and video data, also
+  known as multimodal prompting.
+- [System instructions](https://ai.google.dev/gemini-api/docs/interactions/text-generation#system-instructions):
+  System instructions let you steer the behavior of the model based on your
+  specific needs and use cases.
 
-שליחת משוב
+Send feedback
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-עדכון אחרון: 2026-06-01 (שעון UTC).
+Last updated 2026-06-18 UTC.
 
-רוצה לתת לנו משוב?
+Need to tell us more?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-01 (שעון UTC)."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

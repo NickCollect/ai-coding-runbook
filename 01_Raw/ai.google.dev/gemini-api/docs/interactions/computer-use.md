@@ -1,81 +1,118 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=ar
-fetched_at: 2026-06-15T06:25:11.768382+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/computer-use
+fetched_at: 2026-06-22T06:31:43.919943+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+# Computer Use
 
-إرسال ملاحظات
+Computer Use lets you build browser control agents that interact
+with and automate tasks. Using screenshots, the model can "see" a computer
+screen, and "act" by generating specific UI actions like mouse clicks and
+keyboard inputs. Similar to function calling, you need to write the client-side
+application code to receive and execute the Computer Use actions.
 
-# استخدام الكمبيوتر
+With Computer Use, you can build agents that:
 
-تتيح لك ميزة "استخدام الكمبيوتر" إنشاء وكلاء للتحكّم في المتصفّح يتفاعلون مع المهام وينفّذونها آليًا. باستخدام لقطات الشاشة، يمكن للنموذج "رؤية" شاشة الكمبيوتر و "التصرف" من خلال إنشاء إجراءات معيّنة في واجهة المستخدم، مثل نقرات الماوس وإدخالات لوحة المفاتيح. على غرار ميزة &quot;استدعاء الدالة&quot;، عليك كتابة الرمز البرمجي للتطبيق من جهة العميل لتلقّي إجراءات &quot;استخدام الكمبيوتر&quot; وتنفيذها.
+- Automate repetitive data entry or form filling on websites.
+- Perform automated testing of web applications and user flows
+- Conduct research across various websites (e.g., gathering product
+  information, prices, and reviews from ecommerce sites to inform a purchase)
 
-باستخدام "استخدام الكمبيوتر"، يمكنك إنشاء وكلاء تنفيذ يمكنهم:
+The easiest way to test the Computer Use capability is through the [reference
+implementation](https://github.com/google/computer-use-preview/) or
+[Browserbase demo environment](http://gemini.browserbase.com).
 
-- أتمتة إدخال البيانات المتكرّر أو ملء النماذج على المواقع الإلكترونية
-- إجراء اختبار آلي لتطبيقات الويب وتفاعلات المستخدمين
-- إجراء بحث على مواقع إلكترونية مختلفة (مثل جمع معلومات عن المنتجات وأسعارها ومراجعاتها من مواقع التجارة الإلكترونية لاتخاذ قرار بشأن الشراء)
+## How Computer Use works
 
-أسهل طريقة لاختبار إمكانية "استخدام الكمبيوتر" هي من خلال [التنفيذ المرجعي](https://github.com/google/computer-use-preview/) أو [بيئة العرض التوضيحي في Browserbase](http://gemini.browserbase.com).
+To build a browser control agent with the Computer Use model, implement
+an agent loop that does the following:
 
-## طريقة عمل ميزة "استخدام الكمبيوتر"
+1. [**Send a request to the model**](#send-request)
 
-لإنشاء وكيل للتحكّم في المتصفّح باستخدام نموذج "استخدام الكمبيوتر"، عليك تنفيذ حلقة وكيل تنفّذ ما يلي:
+   - Add the Computer Use tool and optionally any custom user-defined
+     functions or excluded functions to your API request.
+   - Prompt the Computer Use model with the user's request.
+2. [**Receive the model response**](#model-response)
 
-1. [**إرسال طلب إلى النموذج**](#send-request)
+   - The Computer Use model analyzes the user request and screenshot, and
+     generates a response which includes a suggested `function_call`
+     representing a UI action (e.g., "click at coordinate (x,y)" or "type
+     'text'"). For a description of all UI actions supported by the Computer
+     Use model, see [Supported actions](#supported-actions).
+   - The API response may also include a `safety_decision` from an internal
+     safety system that checks the model's proposed action. This
+     `safety_decision` classifies the action as:
+     - **Regular / allowed:** The action is considered safe. This may also
+       be represented by no `safety_decision` being present.
+     - **Requires confirmation (`require_confirmation`):** The model is about to
+       perform an action
+       that may be risky (e.g., clicking on an "accept cookie banner").
+3. [**Execute the received action**](#execute-actions)
 
-   - أضِف أداة &quot;استخدام الكمبيوتر&quot; وأي وظائف مخصّصة يحدّدها المستخدم أو وظائف مستبعَدة إلى طلب بيانات من واجهة برمجة التطبيقات (اختياري).
-   - قدِّم طلب المستخدم إلى نموذج "استخدام الكمبيوتر".
-2. [**تلقّي ردّ النموذج**](#model-response)
+   - Your client-side code receives the `function_call` and any accompanying
+     `safety_decision`.
+     - **Regular / allowed:** If the `safety_decision` indicates regular /
+       allowed (or if no `safety_decision` is present), your client-side
+       code can execute the specified `function_call` in your target
+       environment (e.g., a web browser).
+     - **Requires confirmation:** If the `safety_decision` indicates
+       requires confirmation, your application must prompt the end-user for
+       confirmation before executing the `function_call`. If the user
+       confirms, proceed to execute the action. If the user denies, don't
+       execute the action.
+4. [**Capture the new environment state**](#capture-state)
 
-   - يحلّل نموذج "استخدام الكمبيوتر" طلب المستخدم ولقطة الشاشة، وينشئ ردًا يتضمّن `function_call` مقترحًا يمثّل إجراءً في واجهة المستخدم (مثل "النقر على الإحداثية (س، ص)" أو "كتابة النص"). للاطّلاع على وصف لجميع إجراءات واجهة المستخدم التي يتيحها نموذج استخدام الكمبيوتر، يُرجى الانتقال إلى [الإجراءات المتاحة](#supported-actions).
-   - قد يتضمّن ردّ واجهة برمجة التطبيقات أيضًا `safety_decision` من نظام أمان داخلي يتحقّق من الإجراء المقترَح من النموذج. يصنّف هذا `safety_decision` الإجراء على النحو التالي:
-     - **عادي / مسموح به:** يُعتبر الإجراء آمنًا، وقد لا يظهر الرمز `safety_decision` في هذه الحالة.
-     - **يتطلّب تأكيدًا (`require_confirmation`):** يعني ذلك أنّ النموذج على وشك تنفيذ إجراء قد يكون محفوفًا بالمخاطر (مثل النقر على "بانر ملفات تعريف الارتباط").
-3. [**تنفيذ الإجراء الذي تم تلقّيه**](#execute-actions)
+   - If the action has been executed, your client captures a new screenshot
+     of the GUI and the current URL to send back to the Computer Use model as
+     part of a `function_result`.
+   - If an action was blocked by the safety system or denied confirmation by
+     the user, your application might send a different form of feedback to
+     the model or end the interaction.
 
-   - يتلقّى الرمز البرمجي من جهة العميل `function_call` وأي `safety_decision` مصاحب.
-     - **عادي / مسموح به:** إذا كان `safety_decision` يشير إلى عادي/مسموح به (أو إذا لم يكن `safety_decision` متوفّرًا)، يمكن أن ينفّذ الرمز البرمجي من جهة العميل `function_call` المحدّد في بيئتك المستهدَفة (مثل متصفّح الويب).
-     - **يتطلّب تأكيدًا:** إذا كان `safety_decision` يشير إلى أنّه
-       يتطلّب تأكيدًا، يجب أن يطلب تطبيقك من المستخدم النهائي
-       تأكيدًا قبل تنفيذ `function_call`. إذا أكّد المستخدم، يمكنك المتابعة لتنفيذ الإجراء. إذا رفض المستخدم، لا تنفِّذ الإجراء.
-4. [**تسجيل حالة البيئة الجديدة**](#capture-state)
+This process repeats from step 2 with the model using the new
+screenshot and the ongoing goal to suggest the next action. The loop continues
+until the task is completed, an error occurs, or the process is terminated
+(e.g., due to a "block" safety response or user decision).
 
-   - إذا تم تنفيذ الإجراء، يلتقط تطبيقك لقطة شاشة جديدة لواجهة المستخدم الرسومية وعنوان URL الحالي لإرسالهما مرة أخرى إلى نموذج &quot;استخدام الكمبيوتر&quot; كجزء من `function_result`.
-   - إذا حظر نظام الأمان إجراءً أو رفض المستخدم تأكيده، قد يرسل تطبيقك نوعًا مختلفًا من الملاحظات إلى النموذج أو ينهي التفاعل.
+![Computer Use
+overview](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png)
 
-وتتكرّر هذه العملية بدءًا من الخطوة 2، حيث يستخدم النموذج لقطة الشاشة الجديدة والهدف المستمر لاقتراح الإجراء التالي. تستمر الحلقة إلى أن يتم إكمال المهمة أو يحدث خطأ أو يتم إنهاء العملية (على سبيل المثال، بسبب استجابة أمان "حظر" أو قرار المستخدم).
+## How to implement Computer Use
 
-![نظرة عامة حول استخدام الكمبيوتر](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=ar)
+Before building with the Computer Use tool you will need to set up the
+following:
 
-## كيفية تنفيذ ميزة "استخدام الكمبيوتر"
+- **Secure execution environment:** For safety reasons, you should run your
+  Computer Use agent in a secure and controlled environment (e.g., a sandboxed
+  virtual machine, a container, or a dedicated browser profile with limited
+  permissions).
+- **Client-side action handler:** You will need to implement client-side logic
+  to execute the actions generated by the model and
+  capture screenshots of the environment after each action.
 
-قبل استخدام أداة &quot;استخدام الكمبيوتر&quot;، عليك إعداد ما يلي:
+The examples in this section use a browser as the execution environment
+and [Playwright](https://playwright.dev/) as the client-side action handler. To
+run these samples you must install the necessary dependencies and initialize a
+Playwright browser instance:
 
-- **بيئة التنفيذ الآمنة:** لأسباب تتعلق بالأمان، يجب تشغيل وكيل &quot;استخدام الكمبيوتر&quot; في بيئة آمنة ومراقَبة (مثل جهاز افتراضي في وضع الحماية أو حاوية أو ملف شخصي مخصّص للمتصفّح مع أذونات محدودة).
-- **معالج الإجراءات من جهة العميل:** عليك تنفيذ منطق من جهة العميل لتنفيذ الإجراءات التي ينشئها النموذج والتقاط لقطات شاشة للبيئة بعد كل إجراء.
-
-تستخدِم الأمثلة الواردة في هذا القسم متصفّحًا كبيئة تنفيذ، وتستخدِم [Playwright](https://playwright.dev/) كأداة معالجة الإجراءات من جهة العميل. لتشغيل هذه النماذج، عليك تثبيت التبعيات اللازمة وتهيئة مثيل متصفّح Playwright:
-
-### ‫0. تثبيت Playwright
+### 0. Install Playwright
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-### ‫0. تهيئة مثيل متصفّح Playwright
+### 0. Initialize Playwright browser instance
 
 ```
 from playwright.sync_api import sync_playwright
@@ -103,22 +140,30 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-يتم تضمين نموذج رمز برمجي للتوسيع إلى بيئة Android في قسم [استخدام الدوال المخصّصة التي يحدّدها المستخدم](#custom-functions).
+Sample code for extending to an Android
+environment is included in the [Using custom user-defined
+functions](#custom-functions) section.
 
-### 1. إرسال طلب إلى النموذج
+### 1. Send a request to the model
 
-أضِف أداة "استخدام الكمبيوتر" إلى طلب بيانات من واجهة برمجة التطبيقات وأرسِل طلبًا إلى النموذج يتضمّن هدف المستخدم. يجب استخدام أحد الطُرز المتوافقة مع ميزة "استخدام الكمبيوتر"، وإلا سيظهر لك خطأ:
+Add the Computer Use tool to your API request and send a prompt to the model
+that includes the user's goal. You must use one of the Computer Use supported
+models or you will get an error:
 
 - `gemini-2.5-computer-use-preview-10-2025`
 - `gemini-3-flash-preview`
 
-يمكنك أيضًا إضافة المَعلمات الاختيارية التالية:
+You can also optionally add the following parameters:
 
-- **الإجراءات المستبعَدة:** إذا كانت هناك أي إجراءات من قائمة [إجراءات واجهة المستخدم المتوافقة](#supported-actions) لا تريد أن يتّخذها النموذج، حدِّد هذه الإجراءات على أنّها `excluded_predefined_functions`.
-- **الدوال المعرَّفة من قِبل المستخدم:** بالإضافة إلى أداة "استخدام الكمبيوتر"، قد تحتاج إلى تضمين دوال مخصّصة معرَّفة من قِبل المستخدم.
+- **Excluded actions:** If there are any actions from the list of [Supported
+  UI actions](#supported-actions) that you don't want the model to take,
+  specify these actions as `excluded_predefined_functions`.
+- **User-defined functions:** In addition to the Computer Use tool, you may
+  want to include custom user-defined functions.
 
-يُرجى العِلم أنّه ليس من الضروري تحديد حجم العرض عند إرسال طلب،
-إذ يتوقّع النموذج إحداثيات البكسل التي تم تغيير حجمها لتناسب ارتفاع الشاشة وعرضها.
+Note that there is no need to specify the display size when issuing a request;
+the model predicts pixel coordinates scaled to the height and width of the
+screen.
 
 ### Python
 
@@ -145,14 +190,17 @@ interaction = client.interactions.create(
 print(interaction)
 ```
 
-للاطّلاع على مثال يتضمّن دوال مخصّصة، راجِع [استخدام دوال مخصّصة](#custom-functions).
+For an example with custom functions, see [Using custom
+user-defined functions](#custom-functions).
 
-### 2. تلقّي ردّ النموذج
+### 2. Receive the model response
 
-عند تفعيل أداة &quot;استخدام الكمبيوتر&quot;، سيستجيب النموذج بخطوة واحدة أو أكثر من `function_call` إذا حدّد أنّ إكمال المهمة يتطلّب اتّخاذ إجراءات في واجهة المستخدم.
-تتيح أداة "استخدام الكمبيوتر" تنفيذ عدة وظائف بالتوازي، ما يعني أنّ النموذج يمكنه عرض إجراءات متعددة في رد واحد.
+When the Computer Use tool is enabled, the model will respond with one or more
+`function_call` steps if it determines UI actions are needed to complete the task.
+Computer Use supports parallel function calling, meaning the model can return
+multiple actions in a single turn.
 
-في ما يلي مثال على ردّ النموذج.
+Here is an example model response.
 
 ```
 {
@@ -180,16 +228,26 @@ print(interaction)
 }
 ```
 
-### 3- تنفيذ الإجراءات التي تم تلقّيها
+### 3. Execute the received actions
 
-يجب أن يحلّل الرمز البرمجي لتطبيقك استجابة النموذج، وينفّذ الإجراءات، ويجمع النتائج.
+Your application code needs to parse the model response, execute the actions,
+and collect the results.
 
-يستخرج نموذج التعليمات البرمجية التالي طلبات الدوال من استجابة نموذج "استخدام الكمبيوتر"، ويحوّلها إلى إجراءات يمكن تنفيذها باستخدام Playwright.
-يُخرج النموذج إحداثيات عادية (0-999) بغض النظر عن أبعاد الصورة المدخلة، لذا فإنّ جزءًا من خطوة الترجمة هو تحويل هذه الإحداثيات العادية مرة أخرى إلى قيم البكسل الفعلية.
+The following example code extracts function calls from the Computer Use model
+response, and translates them into actions that can be executed with Playwright.
+The model outputs normalized coordinates (0-999) regardless of the input image
+dimensions, so part of the translation step is converting these normalized
+coordinates back to actual pixel values.
 
-حجم الشاشة المقترَح للاستخدام مع نموذج &quot;استخدام الكمبيوتر&quot; هو (1440, 900)، وسيعمل النموذج مع أي دقة، ولكن قد تتأثر جودة النتائج.
+The recommended screen size for use
+with the Computer Use model is (1440, 900). The model will work with any
+resolution, though the quality of the results may be impacted.
 
-يُرجى العِلم أنّ هذا المثال يتضمّن فقط عملية التنفيذ الخاصة بإجراءات واجهة المستخدم الثلاثة الأكثر شيوعًا: `open_web_browser` و`click_at` و`type_text_at`. بالنسبة إلى حالات الاستخدام في مرحلة الإنتاج، عليك تنفيذ جميع إجراءات واجهة المستخدم الأخرى من قائمة [الإجراءات المتوافقة](#supported-actions) ما لم تُضِفها بشكل صريح كـ `excluded_predefined_functions`.
+Note that this example only includes the implementation for the 3 most common
+UI actions: `open_web_browser`, `click_at`, and `type_text_at`. For
+production use cases, you will need to implement all other UI actions from the
+[Supported actions](#supported-actions) list unless you explicitly add them as
+`excluded_predefined_functions`.
 
 ### Python
 
@@ -253,9 +311,12 @@ def execute_function_calls(interaction, page, screen_width, screen_height):
     return results
 ```
 
-### 4. تسجيل حالة البيئة الجديدة
+### 4. Capture the new environment state
 
-بعد تنفيذ الإجراءات، أرسِل نتيجة تنفيذ الدالة إلى النموذج ليتمكّن من استخدام هذه المعلومات لإنشاء الإجراء التالي. في حال تنفيذ إجراءات متعدّدة (طلبات متوازية)، عليك إرسال `function_result` لكل إجراء في رد المستخدم التالي.
+After executing the actions, send the result of the function execution back to
+the model so it can use this information to generate the next action. If
+multiple actions (parallel calls) were executed, you must send a
+`function_result` for each one in the subsequent user turn.
 
 ### Python
 
@@ -287,15 +348,20 @@ def get_function_responses(page, results):
     return function_responses
 ```
 
-## إنشاء حلقة وكيل
+## Build an agent loop
 
-لتفعيل التفاعلات المتعدّدة الخطوات، ادمِج الخطوات الأربع من قسم [كيفية تنفيذ استخدام الكمبيوتر](#implement-computer-use) في حلقة.
-تذكَّر إدارة سجلّ المحادثات بشكل صحيح من خلال إضافة ردود النموذج وردود الوظيفة.
+To enable multi-step interactions, combine the four steps from the [How to
+implement Computer Use](#implement-computer-use) section into a loop.
+Remember to manage the conversation history correctly by appending both model
+responses and your function responses.
 
-لتشغيل عينة التعليمات البرمجية هذه، عليك إجراء ما يلي:
+To run this code sample you need to:
 
-- ثبِّت [التبعيات اللازمة في Playwright](#implement-computer-use).
-- حدِّد الدوال المساعدة من الخطوتَين [(3) تنفيذ الإجراءات المستلَمة](#execute-actions) و[(4) تسجيل حالة البيئة الجديدة](#capture-state).
+- Install the [necessary Playwright
+  dependencies](#implement-computer-use).
+- Define the helper functions from steps [(3) Execute the received
+  actions](#execute-actions) and [(4) Capture the new environment
+  state](#capture-state).
 
 ### Python
 
@@ -388,9 +454,15 @@ finally:
     playwright.stop()
 ```
 
-## استخدام دوال مخصّصة من تحديد المستخدم
+## Using custom user-defined functions
 
-يمكنك اختياريًا تضمين دوال مخصّصة يحدّدها المستخدم في طلبك لتوسيع وظائف النموذج. يعدّل المثال التالي نموذج استخدام الكمبيوتر وأدواته ليناسب حالات الاستخدام على الأجهزة الجوّالة من خلال تضمين إجراءات مخصّصة يحدّدها المستخدم، مثل `open_app` و`long_press_at` و`go_home`، مع استبعاد الإجراءات الخاصة بالمتصفح. يمكن للنموذج استدعاء هذه الدوال المخصّصة بذكاء إلى جانب إجراءات واجهة المستخدم العادية لإكمال المهام في بيئات غير المتصفّح.
+You can optionally include custom user-defined functions in your request to
+extend the functionality of the model. The following example adapts the Computer Use
+model and tool for mobile use cases by including custom user-defined actions
+like `open_app`, `long_press_at`, and `go_home`, while excluding
+browser-specific actions. The model can intelligently call these custom
+functions alongside standard UI actions to complete tasks in non-browser
+environments.
 
 ### Python
 
@@ -478,33 +550,37 @@ interaction = client.interactions.create(
 print(interaction)
 ```
 
-## إجراءات واجهة المستخدم المتوافقة
+## Supported UI actions
 
-يمكن للنموذج طلب تنفيذ إجراءات واجهة المستخدم التالية باستخدام
-`function_call`. يجب أن ينفّذ الرمز البرمجي من جهة العميل منطق التنفيذ لهذه الإجراءات. يمكنك الاطّلاع على [التنفيذ المرجعي](https://github.com/google/computer-use-preview) للحصول على أمثلة.
+The model can request the following UI actions using a
+`function_call`. Your client-side code must implement the execution logic for
+these actions. See the [reference
+implementation](https://github.com/google/computer-use-preview) for
+examples.
 
-| اسم الأمر | الوصف | الوسيطات (في استدعاء الدالة) | مثال على استدعاء الدالة |
+| Command Name | Description | Arguments (in Function Call) | Example Function Call |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | يفتح متصفّح الويب. | بدون | `{"name": "open_web_browser", "arguments": {}}` |
-| **wait\_5\_seconds** | توقف التنفيذ مؤقتًا لمدة 5 ثوانٍ للسماح بتحميل المحتوى الديناميكي أو إكمال الصور المتحركة. | بدون | `{"name": "wait_5_seconds", "arguments": {}}` |
-| **go\_back** | للانتقال إلى الصفحة السابقة في سجلّ المتصفّح | بدون | `{"name": "go_back", "arguments": {}}` |
-| **go\_forward** | ينتقِل إلى الصفحة التالية في سجلّ المتصفّح. | بدون | `{"name": "go_forward", "arguments": {}}` |
-| **search** | ينتقِل إلى الصفحة الرئيسية لمحرّك البحث التلقائي (مثل Google)، وهو مفيد لبدء مهمة بحث جديدة. | بدون | `{"name": "search", "arguments": {}}` |
-| **navigate** | ينقل المتصفّح مباشرةً إلى عنوان URL المحدّد. | ‫`url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | تنقر هذه السمة على إحداثيات معيّنة في صفحة الويب. وتستند قيمتا x وy إلى شبكة 1000x1000 ويتم تغيير حجمهما ليناسب أبعاد الشاشة. | ‫`y`: عدد صحيح (من 0 إلى 999)، `x`: عدد صحيح (من 0 إلى 999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
-| **hover\_at** | يحرك مؤشر الماوس إلى إحداثيات معيّنة على صفحة الويب. مفيدة لعرض القوائم الفرعية، ويستند المحوران x وy إلى شبكة 1000x1000. | `y`: عدد صحيح (0-999) `x`: عدد صحيح (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | يكتب نصًا في إحداثيات معيّنة، ويتم تلقائيًا محو الحقل أولاً والضغط على مفتاح ENTER بعد الكتابة، ولكن يمكن إيقاف هذه الإعدادات. تستند الإحداثيات x وy إلى شبكة 1000x1000. | ‫`y`: عدد صحيح (0-999)، `x`: عدد صحيح (0-999)، `text`: سلسلة، `press_enter`: قيمة منطقية (اختيارية، القيمة التلقائية هي True)، `clear_before_typing`: قيمة منطقية (اختيارية، القيمة التلقائية هي True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search query", "press_enter": false}}` |
-| **key\_combination** | اضغط على مفاتيح لوحة المفاتيح أو مجموعات المفاتيح، مثل "Control+C" أو "Enter". مفيد لتنفيذ إجراءات (مثل إرسال نموذج باستخدام مفتاح Enter) أو عمليات الحافظة. | ‫`keys`: str (مثلاً 'enter' أو 'control+c'). | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
-| **scroll\_document** | تؤدي إلى تمرير صفحة الويب بأكملها "للأعلى" أو "للأسفل" أو "لليسار" أو "لليمين". | `direction`: str ("up" أو "down" أو "left" أو "right") | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
-| **scroll\_at** | تؤدي هذه السمة إلى تمرير عنصر أو مساحة معيّنة في الإحداثيات (x, y) في الاتجاه المحدّد بمقدار معيّن. تستند الإحداثيات والمقدار (القيمة التلقائية هي 800) إلى شبكة 1000x1000. | `y`: عدد صحيح (0-999)، `x`: عدد صحيح (0-999)، `direction`: سلسلة (up أو down أو left أو right)، `magnitude`: عدد صحيح (0-999، اختياري، القيمة التلقائية 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down", "magnitude": 400}}` |
-| **drag\_and\_drop** | يسحب عنصرًا من إحداثيات البداية (x, y) ويسقطه في إحداثيات الوجهة (destination\_x, destination\_y). تستند جميع الإحداثيات إلى شبكة 1000x1000. | `y`: عدد صحيح (0-999)، `x`: عدد صحيح (0-999)، `destination_y`: عدد صحيح (0-999)، `destination_x`: عدد صحيح (0-999) | `{"name": "drag_and_drop", "arguments": {"y": 100, "x": 100, "destination_y": 500, "destination_x": 500}}` |
+| **open\_web\_browser** | Opens the web browser. | None | `{"name": "open_web_browser", "arguments": {}}` |
+| **wait\_5\_seconds** | Pauses execution for 5 seconds to allow dynamic content to load or animations to complete. | None | `{"name": "wait_5_seconds", "arguments": {}}` |
+| **go\_back** | Navigates to the previous page in the browser's history. | None | `{"name": "go_back", "arguments": {}}` |
+| **go\_forward** | Navigates to the next page in the browser's history. | None | `{"name": "go_forward", "arguments": {}}` |
+| **search** | Navigates to the default search engine's homepage (e.g., Google). Useful for starting a new search task. | None | `{"name": "search", "arguments": {}}` |
+| **navigate** | Navigates the browser directly to the specified URL. | `url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | Clicks at a specific coordinate on the webpage. The x and y values are based on a 1000x1000 grid and are scaled to the screen dimensions. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
+| **hover\_at** | Hovers the mouse at a specific coordinate on the webpage. Useful for revealing sub-menus. x and y are based on a 1000x1000 grid. | `y`: int (0-999) `x`: int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | Types text at a specific coordinate, defaults to clearing the field first and pressing ENTER after typing, but these can be disabled. x and y are based on a 1000x1000 grid. | `y`: int (0-999), `x`: int (0-999), `text`: str, `press_enter`: bool (Optional, default True), `clear_before_typing`: bool (Optional, default True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search query", "press_enter": false}}` |
+| **key\_combination** | Press keyboard keys or combinations, such as "Control+C" or "Enter". Useful for triggering actions (like submitting a form with "Enter") or clipboard operations. | `keys`: str (e.g. 'enter', 'control+c'). | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
+| **scroll\_document** | Scrolls the entire webpage "up", "down", "left", or "right". | `direction`: str ("up", "down", "left", or "right") | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
+| **scroll\_at** | Scrolls a specific element or area at coordinate (x, y) in the specified direction by a certain magnitude. Coordinates and magnitude (default 800) are based on a 1000x1000 grid. | `y`: int (0-999), `x`: int (0-999), `direction`: str ("up", "down", "left", "right"), `magnitude`: int (0-999, Optional, default 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down", "magnitude": 400}}` |
+| **drag\_and\_drop** | Drags an element from a starting coordinate (x, y) and drops it at a destination coordinate (destination\_x, destination\_y). All coordinates are based on a 1000x1000 grid. | `y`: int (0-999), `x`: int (0-999), `destination_y`: int (0-999), `destination_x`: int (0-999) | `{"name": "drag_and_drop", "arguments": {"y": 100, "x": 100, "destination_y": 500, "destination_x": 500}}` |
 
-## السلامة والأمان
+## Safety and security
 
-### تأكيد قرار الأمان
+### Acknowledge safety decision
 
-استنادًا إلى الإجراء، قد يتضمّن ردّ النموذج أيضًا
-`safety_decision` من نظام أمان داخلي يتحقّق من الإجراء المقترَح الذي سيتّخذه النموذج.
+Depending on the action, the model response might also include a
+`safety_decision` from an internal safety system that checks the model's
+proposed action.
 
 ```
 {
@@ -534,9 +610,15 @@ print(interaction)
 }
 ```
 
-إذا كانت قيمة `safety_decision` هي `require_confirmation`، عليك أن تطلب من المستخدم النهائي تأكيد الإجراء قبل تنفيذه، إذ لا تسمح لك [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar) بتجاوز طلبات التأكيد من المستخدم.
+If the `safety_decision` is `require_confirmation`, you must
+ask the end user to confirm before proceeding with executing the action. Per the
+[terms of service](https://ai.google.dev/gemini-api/terms), you are not allowed
+to bypass requests for human confirmation.
 
-يطلب نموذج الرمز هذا من المستخدم النهائي تأكيد الإجراء قبل تنفيذه. وإذا لم يؤكّد المستخدم الإجراء، سيتم إنهاء الحلقة. أما إذا أكّده، فسيتم تنفيذ الإجراء وسيتم وضع علامة `True` على الحقل `safety_acknowledgement`.
+This code sample prompts the end-user for confirmation before executing the
+action. If the user does not confirm the action, the loop terminates. If the
+user confirms the action, the action is executed and the
+`safety_acknowledgement` field is marked as `True`.
 
 ### Python
 
@@ -574,7 +656,8 @@ def execute_function_calls(interaction, page, screen_width, screen_height):
         # ... Execute function call and append to results ...
 ```
 
-إذا أكّد المستخدم ذلك، عليك تضمين إقرار السلامة في `function_result`.
+If the user confirms, you must include the safety acknowledgement in
+your `function_result`.
 
 ```
 ```python
@@ -601,28 +684,50 @@ function_responses.append({
 ```
 ```
 
-### أفضل الممارسات المتعلّقة بالأمان
+### Safety best practices
 
-&quot;استخدام الكمبيوتر&quot; هي أداة جديدة تنطوي على مخاطر جديدة يجب أن ينتبه إليها المطوّرون:
+Computer Use is a novel tool that presents new risks that developers should be
+mindful of:
 
-- **المحتوى غير الموثوق به وعمليات الخداع:** أثناء محاولة النموذج تحقيق هدف المستخدم، قد يعتمد على مصادر غير موثوق بها للحصول على المعلومات والتعليمات من الشاشة. على سبيل المثال، إذا كان هدف المستخدم هو شراء هاتف Pixel
-  وواجه النموذج عملية احتيال بعنوان "احصل على هاتف Pixel مجانًا إذا أكملت استطلاعًا"،
-  هناك احتمال أن يكمل النموذج الاستطلاع.
-- **إجراءات غير مقصودة في بعض الأحيان:** قد يسيء النموذج فهم هدف المستخدم أو محتوى صفحة الويب، ما يؤدي إلى اتخاذ إجراءات غير صحيحة، مثل النقر على الزر الخطأ أو ملء النموذج الخطأ، ويمكن أن يؤدي ذلك إلى فشل المهام أو استخراج البيانات.
-- **انتهاكات السياسة:** يمكن توجيه إمكانات واجهة برمجة التطبيقات، سواء عن قصد أو عن غير قصد، نحو أنشطة تنتهك سياسات Google ([سياسة الاستخدام المحظور للذكاء الاصطناعي التوليدي](https://policies.google.com/terms/generative-ai/use-policy?hl=ar) و[بنود الخدمة الإضافية لواجهة Gemini API](https://ai.google.dev/gemini-api/terms?hl=ar)). ويشمل ذلك الإجراءات التي قد تتداخل مع سلامة النظام أو تعرّض الأمان للخطر أو تتجاوز إجراءات الأمان أو تتحكّم في الأجهزة الطبية وما إلى ذلك.
+- **Untrusted content & scams:** As the model tries to achieve the user's
+  goal, it may rely on untrustworthy sources of information and instructions
+  from the screen. For example, if the user's goal is to purchase a Pixel
+  phone and the model encounters a "Free-Pixel if you complete a survey" scam,
+  there is some chance that the model will complete the survey.
+- **Occasional unintended actions:** The model can misinterpret a user's goal
+  or webpage content, causing it to take incorrect actions like clicking the
+  wrong button or filling the wrong form. This can lead to failed tasks or
+  data exfiltration.
+- **Policy violations:** The API's capabilities could be directed, either
+  intentionally or unintentionally, toward activities that violate Google's
+  policies ([Gen AI Prohibited Use
+  Policy](https://policies.google.com/terms/generative-ai/use-policy) and the
+  [Gemini API Additional Terms of
+  Service](https://ai.google.dev/gemini-api/terms). This includes actions that
+  could interfere with a system's integrity, compromise security, bypass
+  security measures,
+  control medical devices, etc.
 
-لمعالجة هذه المخاطر، يمكنك اتّخاذ إجراءات السلامة التالية واتّباع أفضل الممارسات:
+To address these risks, you can implement the following safety measures and best
+practices:
 
-1. **المشاركة البشرية (HITL):**
+1. **Human-in-the-Loop (HITL):**
 
-   - **تنفيذ تأكيد المستخدم:** عندما تشير استجابة السلامة إلى
-     `require_confirmation`، عليك تنفيذ تأكيد المستخدم قبل
-     التنفيذ. راجِع [الإقرار بقرار السلامة](#safety-decisions) للاطّلاع على نموذج الرمز.
-   - **تقديم تعليمات أمان مخصّصة:** بالإضافة إلى عمليات التحقّق المضمّنة التي تتطلّب تأكيدًا من المستخدم، يمكن للمطوّرين اختياريًا إضافة [تعليمات نظام](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions) مخصّصة تفرض سياسات الأمان الخاصة بهم، إما لحظر إجراءات معيّنة يتّخذها النموذج أو لطلب تأكيد من المستخدم قبل أن يتّخذ النموذج إجراءات معيّنة لا يمكن التراجع عنها. في ما يلي مثال على تعليمات نظام الأمان المخصّصة التي يمكنك تضمينها عند التفاعل مع النموذج.
+   - **Implement user confirmation:** When the safety response indicates
+     `require_confirmation`, you must implement user confirmation before
+     execution. See [Acknowledge safety decision](#safety-decisions) for
+     sample code.
+   - **Provide custom safety instructions:** In addition to the built-in user
+     confirmation checks, developers may optionally add a custom [system
+     instruction](https://ai.google.dev/gemini-api/docs/text-generation#system-instructions)
+     that enforces their own safety policies, either to block certain model
+     actions or require user confirmation before the model takes certain
+     high-stakes irreversible actions. Here is an example of a custom safety
+     system instruction you may include when interacting with the model.
 
-     **أمثلة على تعليمات السلامة:**
+     **Example safety instructions:**
 
-     اضبط قواعد الأمان المخصّصة كتعليمات نظام:
+     Set your custom safety rules as a system instruction:
 
      ```
      ## **RULE 1: Seek User Confirmation (USER_CONFIRMATION)**
@@ -710,42 +815,60 @@ function_responses.append({
      - User confirmation
      - When the task is complete or you have enough information to respond to the user
      ```
-2. **بيئة التنفيذ الآمنة:** شغِّل الوكيل في بيئة آمنة ومحمية
-   للحدّ من تأثيره المحتمل (مثل جهاز افتراضي (VM) محمي، أو حاوية (مثل Docker)، أو ملف شخصي مخصّص للمتصفّح مع أذونات محدودة).
-3. **تنقية الإدخالات:** يجب تنقية جميع النصوص التي ينشئها المستخدمون في الطلبات للحد من خطر التعليمات غير المقصودة أو هجمات حقن الطلبات. هذه الطبقة مفيدة للأمان، ولكنّها لا تحلّ محل بيئة التنفيذ الآمنة.
-4. **ضوابط المحتوى:** استخدِم الضوابط و[واجهات برمجة التطبيقات الخاصة بأمان المحتوى](https://ai.google.dev/gemma/docs/shieldgemma?hl=ar) لتقييم مدخلات المستخدمين ومدخلات الأدوات ومخرجاتها، وردّات الوكيل من حيث الملاءمة، وعمليات حقن الطلبات، ورصد عمليات تجاوز القيود.
-5. **القوائم المسموح بها والقوائم المحظورة:** استخدِم آليات فلترة للتحكّم في الأماكن التي يمكن للنموذج الانتقال إليها والإجراءات التي يمكنه اتّخاذها. تُعدّ القائمة المحظورة التي تتضمّن المواقع الإلكترونية المحظورة نقطة بداية جيدة، بينما تكون القائمة المسموح بها الأكثر تقييدًا أكثر أمانًا.
-6. **إمكانية تتبّع البيانات وتسجيل البيانات:** احتفِظ بسجلات مفصّلة لتصحيح الأخطاء والتدقيق والاستجابة للحوادث. على العميل تسجيل الطلبات، ولقطات الشاشة، والإجراءات التي تقترحها النماذج (function\_call)، وردود الأمان، وجميع الإجراءات التي ينفّذها العميل في النهاية.
-7. **إدارة البيئة:** تأكَّد من اتساق بيئة واجهة المستخدم الرسومية.
-   قد تؤدي النوافذ المنبثقة أو الإشعارات أو التغييرات غير المتوقّعة في التنسيق إلى إرباك النموذج. ابدأ من حالة معروفة ونظيفة لكل مهمة جديدة إذا أمكن ذلك.
+2. **Secure execution environment:** Run your agent in a secure, sandboxed
+   environment to limit its potential impact (e.g., A sandboxed virtual machine
+   (VM), a container (e.g., Docker), or a dedicated browser profile with limited
+   permissions).
+3. **Input sanitization:** Sanitize all user-generated text in prompts to
+   mitigate the risk of unintended instructions or prompt injection. This is a
+   helpful layer of security, but not a replacement for a secure execution
+   environment.
+4. **Content guardrails:** Use guardrails and [content safety
+   APIs](https://ai.google.dev/gemma/docs/shieldgemma) to evaluate user inputs,
+   tool input and output, an agent's response for appropriateness, prompt
+   injection, and jailbreak detection.
+5. **Allowlists and blocklists:** Implement filtering mechanisms to control
+   where the model can navigate and what it can do. A blocklist of prohibited
+   websites is a good starting point, while a more restrictive allowlist is
+   even more secure.
+6. **Observability and logging:** Maintain detailed logs for debugging,
+   auditing, and incident response. Your client should log prompts,
+   screenshots, model-suggested actions (function\_call), safety responses, and
+   all actions ultimately executed by the client.
+7. **Environment management:** Ensure the GUI environment is consistent.
+   Unexpected pop-ups, notifications, or changes in layout can confuse the
+   model. Start from a known, clean state for each new task if possible.
 
-## إصدارات النموذج
+## Model versions
 
-يُرجى العِلم أنّ `gemini-3-flash-preview` يتضمّن ميزة مدمجة
-للاستخدام على الكمبيوتر، ولن تحتاج إلى نموذج منفصل للوصول إلى الأداة.
+Note that `gemini-3-flash-preview` has built-in
+support for Computer Use; you do not need a separate model to access the tool.
 
-| الموقع | الوصف |
+| Property | Description |
 | --- | --- |
-| id\_cardرمز النموذج | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
-| saveأنواع البيانات المتوافقة | **الإدخال**  صورة، نص  **الناتج**  نص |
-| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  128,000  **الحد الأقصى لعدد الرموز المميزة في الناتج**  64,000 |
-| 123الإصدارات | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - معاينة: `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_monthآخر تعديل | أكتوبر 2025 |
+| id\_cardModel code | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
+| saveSupported data types | **Input**  Image, text  **Output**  Text |
+| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens) | **Input token limit**  128,000  **Output token limit**  64,000 |
+| 123Versions | Read the [model version patterns](https://ai.google.dev/gemini-api/docs/models/gemini#model-versions) for more details.  - Preview: `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_monthLatest update | October 2025 |
 
-## الخطوات التالية
+## What's next
 
-- جرِّب استخدام الكمبيوتر في [بيئة العرض التوضيحي Browserbase](http://gemini.browserbase.com).
-- يمكنك الاطّلاع على [التنفيذ المرجعي](https://github.com/google/computer-use-preview) للحصول على مثال على الرمز.
-- مزيد من المعلومات حول أدوات Gemini API الأخرى:
-  - [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=ar)
-  - [تحديد المصدر من خلال "بحث Google"](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=ar)
+- Experiment with Computer Use in the [Browserbase demo
+  environment](http://gemini.browserbase.com).
+- Check out the [Reference
+  implementation](https://github.com/google/computer-use-preview) for example
+  code.
+- Learn about other Gemini API tools:
+  - [Function calling](https://ai.google.dev/gemini-api/docs/interactions/function-calling)
+  - [Grounding with Google Search](https://ai.google.dev/gemini-api/docs/interactions/google-search)
 
-إرسال ملاحظات
+Send feedback
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-تاريخ التعديل الأخير: 2026-06-05 (حسب التوقيت العالمي المتفَّق عليه)
+Last updated 2026-06-18 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Need to tell us more?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-05 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

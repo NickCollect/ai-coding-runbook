@@ -1,88 +1,93 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=vi
-fetched_at: 2026-06-15T06:27:53.381467+00:00
-title: "Nh\u1eadt k\u00fd v\u00e0 t\u1eadp d\u1eef li\u1ec7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ja
+fetched_at: 2026-06-22T06:28:34.486057+00:00
+title: "\u30ed\u30b0\u3068\u30c7\u30fc\u30bf\u30bb\u30c3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Nhật ký và tập dữ liệu
+# ログとデータセット
 
-Hướng dẫn này chứa mọi thông tin bạn cần để bắt đầu bật tính năng ghi nhật ký cho các ứng dụng Gemini API hiện có. Trong hướng dẫn này, bạn sẽ tìm hiểu cách xem nhật ký của một ứng dụng hiện có hoặc ứng dụng mới trong trang tổng quan Google AI Studio để hiểu rõ hơn về hành vi của mô hình và cách người dùng có thể tương tác với các ứng dụng của bạn. Sử dụng tính năng ghi nhật ký để quan sát, gỡ lỗi và *tuỳ ý chia sẻ ý kiến phản hồi về việc sử dụng với Google nhằm giúp cải thiện Gemini trong các trường hợp sử dụng của nhà phát triển*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=vi)
+このガイドでは、既存の Gemini API アプリケーションのロギングを有効にするために必要なすべての情報を提供します。このガイドでは、Google AI Studio ダッシュボードで既存のアプリケーションまたは新しいアプリケーションのログを表示して、モデルの動作やユーザーがアプリケーションを操作する方法を把握する方法について説明します。ロギングを使用して、デベロッパーのユースケース全体で Gemini の改善に役立つように、*使用状況のフィードバック
+を Google と共有します（省略可）*。[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=ja)
 
-Tất cả lệnh gọi API `GenerateContent` và `StreamGenerateContent` đều được hỗ trợ, kể cả những lệnh gọi được thực hiện thông qua các điểm cuối [khả năng tương thích với OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=vi).
+すべての `GenerateContent` および `StreamGenerateContent` API 呼び出しがサポートされています。
+[OpenAI 互換](https://ai.google.dev/gemini-api/docs/openai?hl=ja)
+エンドポイントを介して行われたものを含みます。
 
-## 1. Bật tính năng ghi nhật ký trong Google AI Studio
+## 1. Google AI Studio でロギングを有効にする
 
-Trước khi bắt đầu, hãy đảm bảo bạn có một dự án có bật tính năng thanh toán mà bạn sở hữu.
+始める前に、課金が有効になっているプロジェクトを所有していることを確認してください。
 
-1. Mở trang nhật ký trong [AI Studio](https://aistudio.google.com/logs?hl=vi) của Google.
-2. Chọn dự án của bạn trong trình đơn thả xuống rồi nhấn nút bật để bật tính năng ghi nhật ký cho tất cả các yêu cầu theo mặc định.
+1. Google [AI Studio](https://aistudio.google.com/logs?hl=ja) で [ログ] ページを開きます。
+2. プルダウンからプロジェクトを選択し、[有効にする] ボタンを押して、デフォルトですべてのリクエストのロギングを有効にします。
 
-![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=vi)
+![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=ja)
 
-Bạn có thể bật hoặc tắt tính năng ghi nhật ký cho tất cả dự án hoặc cho các dự án cụ thể, đồng thời thay đổi các lựa chọn ưu tiên này bất cứ lúc nào thông qua Google AI Studio.
+すべてのプロジェクトまたは特定のプロジェクトのロギングを有効または無効にできます。これらの設定は、Google AI Studio でいつでも変更できます。
 
-## 2. Xem nhật ký trong AI Studio
+## 2. AI Studio でログを表示する
 
-1. Chuyển đến [AI Studio](https://aistudio.google.com/logs?hl=vi).
-2. Chọn dự án mà bạn đã bật tính năng ghi nhật ký.
-3. Bạn sẽ thấy nhật ký xuất hiện trong bảng theo thứ tự thời gian đảo ngược.
+1. [AI Studio](https://aistudio.google.com/logs?hl=ja) に移動します。
+2. ロギングを有効にしたプロジェクトを選択します。
+3. ログがテーブルに新しい順に表示されます。
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/nano-banana-logs.gif)
 
-Nhấp vào một mục để xem toàn bộ lượt xem trang của cặp yêu cầu và phản hồi. Bạn có thể kiểm tra toàn bộ câu lệnh, phản hồi hoàn chỉnh từ Gemini và ngữ cảnh từ lượt trò chuyện trước đó. Xin lưu ý rằng mỗi dự án có hạn mức lưu trữ mặc định là tối đa 1.000 nhật ký và nhật ký không được lưu trong tập dữ liệu sẽ hết hạn sau 55 ngày. Nếu dự án của bạn đạt đến hạn mức bộ nhớ, bạn sẽ được nhắc xoá nhật ký.
+エントリをクリックすると、リクエストとレスポンスのペアが全ページに表示されます。完全なプロンプト、Gemini からの完了した回答、前のターンのコンテキストを確認できます。各プロジェクトのデフォルトのストレージ上限は 1,000 ログです。データセットに保存されていないログは 55 日後に期限切れになります。プロジェクトがストレージ上限に達すると、ログを削除するように求められます。
 
-## 3. Tuyển chọn và chia sẻ tập dữ liệu
+## 3. データセットをキュレートして共有する
 
-- Trong bảng nhật ký, hãy tìm thanh bộ lọc ở trên cùng để chọn một thuộc tính cần lọc.
-- Trong chế độ xem nhật ký đã lọc, hãy dùng hộp đánh dấu để chọn tất cả hoặc một số nhật ký.
-- Nhấp vào nút "Tạo tập dữ liệu" xuất hiện ở đầu danh sách.
-- Đặt tên mang tính mô tả và nội dung mô tả (không bắt buộc) cho tập dữ liệu mới.
-- Bạn sẽ thấy tập dữ liệu mà bạn vừa tạo cùng với tập hợp nhật ký được tuyển chọn.
-- Xuất tập dữ liệu để phân tích thêm dưới dạng tệp CSV, JSONL hoặc sang Google Trang tính.
+- ログテーブルの上部にあるフィルタバーで、フィルタするプロパティを選択します。
+- フィルタされたログビューで、チェックボックスを使用して、すべてのログまたは一部のログを選択します。
+- リストの上部に表示される [データセットを作成] ボタンをクリックします。
+- 新しいデータセットにわかりやすい名前と説明（省略可）を付けます。
+- キュレートされたログセットを含む、作成したデータセットが表示されます。
+- データセットを CSV、JSONL ファイルとして、または Google スプレッドシートにエクスポートして、さらに分析します。
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/sales-dataset.gif)
 
-Tập dữ liệu có thể hữu ích cho nhiều trường hợp sử dụng.
+データセットは、さまざまなユースケースで役立ちます。
 
-- **Tuyển chọn các bộ thử thách:** Thúc đẩy những điểm cải tiến trong tương lai nhắm đến những lĩnh vực mà bạn muốn AI cải thiện.
-- **Tuyển chọn các bộ dữ liệu mẫu:** Ví dụ: một mẫu từ việc sử dụng thực tế để tạo phản hồi từ một mô hình khác hoặc một tập hợp các trường hợp đặc biệt để kiểm tra thường xuyên trước khi triển khai.
-- **Tập hợp đánh giá:** Tập hợp đại diện cho mức sử dụng thực tế trên các chức năng quan trọng, để so sánh giữa các mô hình hoặc các lần lặp lại hướng dẫn hệ thống khác.
+- **チャレンジ セットをキュレートする:** AI の改善が必要な領域をターゲットとする今後の改善を推進します。
+- **サンプルセットをキュレートする:** たとえば、実際の使用状況のサンプルを使用して別のモデルからレスポンスを生成したり、デプロイ前のルーチン チェック用のエッジケースのコレクションを作成したりします。
+- **評価セット:** 重要な機能全体で実際の使用状況を表すセット。他のモデルやシステム命令の反復処理と比較します。
 
-Bạn có thể giúp thúc đẩy tiến trình nghiên cứu AI, Gemini API và Google AI Studio bằng cách chọn chia sẻ các tập dữ liệu của mình dưới dạng ví dụ minh hoạ. Điều này cho phép chúng tôi tinh chỉnh các mô hình của mình trong nhiều bối cảnh và tạo ra các hệ thống AI vẫn hữu ích cho nhà phát triển trong nhiều lĩnh vực và ứng dụng
+デモンストレーションの例としてデータセットを共有することで、AI 研究、Gemini API、Google AI Studio の進歩に貢献できます。これにより、さまざまなコンテキストでモデルを改良し、多くの分野やアプリケーションでデベロッパーにとって有用な AI システムを作成できます。
 
-## Các bước tiếp theo và những điều cần kiểm thử
+## 次のステップとテスト内容
 
-Giờ đây, khi đã bật tính năng ghi nhật ký, bạn có thể thử một số thao tác sau:
+ロギングを有効にしたら、次のことを試してください。
 
-- **Tạo mẫu bằng nhật ký phiên:** Tận dụng [AI Studio Build](https://aistudio.google.com/apps?hl=vi) để tạo ứng dụng mã rung và thêm khoá API để bật nhật ký nhật ký người dùng.
-- **Chạy lại nhật ký bằng Gemini Batch API:** Sử dụng các tập dữ liệu để lấy mẫu phản hồi và đánh giá các mô hình hoặc logic ứng dụng bằng cách chạy lại nhật ký thông qua [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
+- **セッション履歴でプロトタイプを作成する:** [AI Studio Build](https://aistudio.google.com/apps?hl=ja) を活用してコードアプリをバイブさせ、API キーを追加してユーザーログの履歴を有効にします。
+- **Gemini Batch API でログを再実行する:** Gemini Batch API を介してログを再実行し、レスポンスのサンプリング
+  とモデルまたはアプリケーション ロジックの評価にデータセットを使用します
+  。
 
-## Khả năng tương thích
+## 互換性
 
-Tính năng ghi nhật ký hiện không được hỗ trợ cho những trường hợp sau:
+現在、次の機能ではロギングはサポートされていません。
 
-- Mô hình Imagen và Veo
-- Mô hình nhúng Gemini
-- Đầu vào chứa video, ảnh GIF hoặc tệp PDF
+- Imagen モデルと Veo モデル
+- Gemini エンベディング モデル
+- 動画、GIF、PDF を含む入力
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-06-01 UTC.
+最終更新日 2026-06-01 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]

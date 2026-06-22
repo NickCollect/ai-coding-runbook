@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar
-fetched_at: 2026-06-15T06:30:48.181385+00:00
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi
+fetched_at: 2026-06-22T06:33:05.627965+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# الجمع بين الأدوات المضمّنة وميزة "استدعاء الدوال"
+# Kết hợp các công cụ tích hợp và tính năng gọi hàm
 
-يسمح Gemini بالجمع بين [الأدوات المضمّنة](https://ai.google.dev/gemini-api/docs/tools?hl=ar)، مثل `google_search`، وميزة [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) (المعروفة أيضًا باسم *الأدوات المخصّصة*) في عملية إنشاء واحدة من خلال الاحتفاظ بسجلّ سياق استدعاءات الأدوات وعرضه. تسمح مجموعات الأدوات المضمّنة والمخصّصة بسير عمل معقّد ومستقل، حيث يمكن للطراز، على سبيل المثال، أن يستند إلى بيانات الويب في الوقت الفعلي قبل استدعاء منطق نشاطك التجاري المحدّد.
+Gemini cho phép kết hợp [các công cụ tích hợp](https://ai.google.dev/gemini-api/docs/tools?hl=vi), chẳng hạn như `google_search` và [lệnh gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) (còn gọi là *công cụ tuỳ chỉnh*) trong một thế hệ bằng cách duy trì và hiển thị nhật ký ngữ cảnh của các lệnh gọi công cụ. Các tổ hợp công cụ tích hợp và tuỳ chỉnh cho phép các quy trình làm việc phức tạp, dựa trên tác nhân, trong đó, chẳng hạn như mô hình có thể tự căn cứ vào dữ liệu web theo thời gian thực trước khi gọi logic kinh doanh cụ thể của bạn.
 
-في ما يلي مثال يوضّح كيفية تفعيل مجموعات الأدوات المضمّنة والمخصّصة باستخدام `google_search` ودالة مخصّصة `getWeather`:
+Dưới đây là ví dụ cho phép kết hợp các công cụ tích hợp và tuỳ chỉnh bằng `google_search` và hàm tuỳ chỉnh `getWeather`:
 
 ### Python
 
@@ -198,7 +198,7 @@ async function run() {
 run();
 ```
 
-### انتقال
+### Go
 
 ```
 package main
@@ -387,65 +387,52 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
 }'
 ```
 
-## آلية العمل
+## Cách hoạt động
 
-تستخدم طُرز Gemini 3 ميزة *تداول سياق الأداة* لتفعيل مجموعات الأدوات المضمّنة والمخصّصة. تتيح ميزة "تداول سياق الأداة" الاحتفاظ بسياق الأدوات المضمّنة وعرضه ومشاركته مع الأدوات المخصّصة في نفس الاستدعاء من دور إلى آخر.
+Các mô hình Gemini 3 sử dụng *vòng tuần hoàn ngữ cảnh công cụ* để cho phép kết hợp các công cụ tuỳ chỉnh và được tích hợp sẵn. Tính năng lưu chuyển ngữ cảnh công cụ giúp duy trì và hiển thị ngữ cảnh của các công cụ tích hợp, đồng thời chia sẻ ngữ cảnh đó với các công cụ tuỳ chỉnh trong cùng một lệnh gọi từ lượt này sang lượt khác.
 
-### تفعيل ميزة "الجمع بين الأدوات"
+### Bật tính năng kết hợp công cụ
 
-- يجب ضبط العلامة `include_server_side_tool_invocations` على `true` لتفعيل ميزة "تداول سياق الأداة".
-- يجب تضمين [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#function-declarations)، بالإضافة إلى الأدوات المضمّنة التي تريد استخدامها، لتفعيل سلوك الجمع بين الأدوات.
-  - إذا لم يتم تضمين `function_declarations`، ستظل ميزة "تداول سياق الأداة" تعمل على الأدوات المضمّنة المضمّنة، طالما تم ضبط العلامة.
+- Bạn phải đặt cờ `include_server_side_tool_invocations` thành `true` để bật tính năng lưu chuyển ngữ cảnh công cụ.
+- Bao gồm [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#function-declarations), cùng với các công cụ tích hợp mà bạn muốn sử dụng, để kích hoạt hành vi kết hợp.
+  - Nếu bạn không thêm `function_declarations`, hoạt động lưu thông bối cảnh công cụ vẫn sẽ tác động đến các công cụ tích hợp sẵn được thêm, miễn là bạn đặt cờ này.
 
-### الأجزاء التي تعرضها واجهة برمجة التطبيقات
+### API trả về các phần
 
-في ردّ واحد، تعرض واجهة برمجة التطبيقات الجزأين `toolCall` و`toolResponse` لاستدعاء الأداة المضمّنة. بالنسبة إلى استدعاء الدالة (الأداة المخصّصة)، تعرض واجهة برمجة التطبيقات جزء استدعاء `functionCall`، الذي يقدّم المستخدم له جزء `functionResponse` في الدور التالي.
+Trong một phản hồi duy nhất, API sẽ trả về các phần `toolCall` và `toolResponse` cho lệnh gọi công cụ tích hợp. Đối với lệnh gọi hàm (công cụ tuỳ chỉnh), API sẽ trả về phần lệnh gọi `functionCall` mà người dùng cung cấp phần `functionResponse` trong lượt tiếp theo.
 
-- `toolCall` و`toolResponse`: تعرض واجهة برمجة التطبيقات هذين الجزأين للاحتفاظ بسياق الأدوات التي يتم تشغيلها من جهة الخادم ونتيجة تنفيذها في الدور التالي.
-- `functionCall` و`functionResponse`: ترسل واجهة برمجة التطبيقات استدعاء الدالة إلى
-  المستخدم لملء البيانات، ويرسل المستخدم النتيجة مرة أخرى في
-  ردّ الدالة (هذه الأجزاء عادية لجميع ميزات [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) في Gemini API، وليست فريدة لميزة
-  الجمع بين الأدوات).
-- ([أداة تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) فقط)
-  `executableCode` و`codeExecutionResult`:
-  عند استخدام أداة تنفيذ الرموز البرمجية، بدلاً من `functionCall` و
-  `functionResponse`، تعرض واجهة برمجة التطبيقات `executableCode` (الرمز البرمجي الذي تم إنشاؤه
-  بواسطة الطراز والمقصود تنفيذه) و`codeExecutionResult` (الـ
-  نتيجة الرمز البرمجي القابل للتنفيذ).
+- `toolCall` và `toolResponse`: API trả về những phần này để duy trì ngữ cảnh về những công cụ được chạy ở phía máy chủ và kết quả thực thi của chúng cho lượt tiếp theo.
+- `functionCall` và `functionResponse`: API gửi lệnh gọi hàm cho người dùng điền thông tin và người dùng gửi kết quả trở lại trong phản hồi hàm (các phần này là tiêu chuẩn đối với tất cả [lệnh gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) trong Gemini API, không chỉ dành riêng cho tính năng kết hợp công cụ).
+- (Chỉ công cụ [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)) `executableCode` và `codeExecutionResult`: Khi sử dụng công cụ Thực thi mã, thay vì `functionCall` và `functionResponse`, API sẽ trả về `executableCode` (mã do mô hình tạo ra nhằm mục đích thực thi) và `codeExecutionResult` (kết quả của mã thực thi).
 
-يجب إعادة جميع الأجزاء، بما في ذلك جميع الـ [حقول](#critical-fields) التي
-تحتوي عليها، إلى الطراز في كل دور للحفاظ على السياق وتفعيل ميزة "الجمع بين الأدوات"
-.
+Bạn phải trả về tất cả các phần, bao gồm cả tất cả [các trường](#critical-fields) mà chúng chứa, cho mô hình ở mỗi lượt để duy trì ngữ cảnh và cho phép kết hợp các công cụ.
 
-### الحقول المهمة في الأجزاء المعروضة
+### Các trường quan trọng trong các phần được trả về
 
-ستتضمّن بعض [الأجزاء التي تعرضها واجهة برمجة التطبيقات](#api-returns-parts) الحقول `id` و
-`tool_type` و`thought_signature`. تُعدّ هذه الحقول مهمة للحفاظ على سياق الأداة (وبالتالي مهمة لميزة "الجمع بين الأدوات")؛ ويجب إعادة جميع الأجزاء *كما هي موضّحة في الردّ* في طلباتك اللاحقة.
+Một số [phần do API trả về](#api-returns-parts) sẽ bao gồm các trường `id`, `tool_type` và `thought_signature`. Những trường này rất quan trọng để duy trì ngữ cảnh của công cụ (do đó, rất quan trọng đối với các tổ hợp công cụ); bạn cần trả về tất cả các phần *như trong phản hồi* trong các yêu cầu tiếp theo.
 
-- `id`: معرّف فريد يربط استدعاءً بردّه. `id` يتم **ضبطه في
-  جميع ردود استدعاء الدالة**، بغض النظر عن ميزة "تداول سياق الأداة".
-  يجب *تقديم* `id` نفسه في ردّ الدالة
-  الذي تقدّمه واجهة برمجة التطبيقات في استدعاء الدالة. تشارك الأدوات المضمّنة تلقائيًا `id` بين استدعاء الأداة وردّ الأداة.
-  - يظهر في جميع الأجزاء ذات الصلة بالأداة: `toolCall` و`toolResponse` و`functionCall` و`functionResponse` و`executableCode` و `codeExecutionResult`
-- `tool_type`: يحدّد الأداة المحدّدة المستخدَمة، أي اسم الأداة المضمّنة الحرفي (مثل `URL_CONTEXT`) أو اسم الدالة (مثل `getWeather`).
-  - يظهر في الجزأين `toolCall` و`toolResponse`.
-- `thought_signature`: السياق المشفّر الفعلي المضمّن في **كل جزء تعرضه واجهة برمجة التطبيقات**. لا يمكن إعادة إنشاء السياق بدون توقيعات الأفكار؛ وإذا لم يتم عرض توقيعات الأفكار لجميع الأجزاء في كل دور، سيحدث خطأ في الطراز.
-  - يظهر في *جميع* الأجزاء.
+- `id`: Giá trị nhận dạng duy nhất liên kết một lệnh gọi với phản hồi của lệnh gọi đó. `id` được **đặt trên tất cả các phản hồi lệnh gọi hàm**, bất kể việc lưu chuyển ngữ cảnh công cụ.
+  Bạn *phải* cung cấp cùng một `id` trong phản hồi của hàm mà API cung cấp trong lệnh gọi hàm. Các công cụ tích hợp sẽ tự động chia sẻ `id` giữa lệnh gọi công cụ và phản hồi công cụ.
+  - Có trong tất cả các phần liên quan đến công cụ: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
+- `tool_type`: Xác định công cụ cụ thể đang được sử dụng; công cụ hoặc (ví dụ: `URL_CONTEXT`) hoặc tên hàm (ví dụ: `getWeather`) theo nghĩa đen được tích hợp sẵn.
+  - Có trong phần `toolCall` và `toolResponse`.
+- `thought_signature`: Nội dung thực tế đã mã hoá được nhúng trong **mỗi phần do API trả về**. Không thể tái tạo ngữ cảnh nếu không có chữ ký tư duy; nếu bạn không trả về chữ ký tư duy cho tất cả các phần trong mỗi lượt, mô hình sẽ gặp lỗi.
+  - Có ở *tất cả* các bộ phận.
 
-### البيانات الخاصة بالأداة
+### Dữ liệu dành riêng cho công cụ
 
-تعرض بعض الأدوات المضمّنة وسيطات بيانات مرئية للمستخدم خاصة بنوع الأداة.
+Một số công cụ tích hợp trả về các đối số dữ liệu mà người dùng có thể thấy, dành riêng cho loại công cụ.
 
-| الأداة | وسيطات استدعاء الأداة المرئية للمستخدم (إن وُجدت) | ردّ الأداة المرئي للمستخدم (إن وُجد) |
+| Công cụ | Đối số gọi công cụ mà người dùng nhìn thấy (nếu có) | Phản hồi của công cụ mà người dùng nhìn thấy (nếu có) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` عناوين URL التي سيتم تصفّحها | `urls_metadata` `retrieved_url`: عناوين URL التي تم تصفّحها `url_retrieval_status`: حالة التصفّح |
-| **FILE\_SEARCH** | بدون | بدون |
+| **URL\_CONTEXT** | `urls` URL cần duyệt xem | `urls_metadata` `retrieved_url`: URL được duyệt qua `url_retrieval_status`: Trạng thái duyệt qua |
+| **FILE\_SEARCH** | Không có | Không có |
 
-## مثال على بنية طلب الجمع بين الأدوات
+## Ví dụ về cấu trúc yêu cầu kết hợp công cụ
 
-تعرض بنية الطلب التالية بنية طلب الرسالة الفورية: "ما هي المدينة الواقعة في أقصى شمال الولايات المتحدة؟ وما حالة الطقس فيها اليوم؟". يجمع هذا الطلب بين ثلاث أدوات: الأداتان المضمّنتان في Gemini `google_search` و`code_execution`، ودالة مخصّصة `get_weather`.
+Cấu trúc yêu cầu sau đây cho thấy cấu trúc yêu cầu của câu lệnh: "Thành phố cực bắc ở Hoa Kỳ là thành phố nào? Thời tiết ở đó hôm nay thế nào?". Công cụ này kết hợp 3 công cụ: các công cụ Gemini tích hợp sẵn `google_search` và `code_execution`, cùng một hàm tuỳ chỉnh `get_weather`.
 
 ```
 {
@@ -514,49 +501,49 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
 }
 ```
 
-## الرموز المميّزة والأسعار
+## Mã thông báo và giá
 
-يُرجى العِلم أنّ الجزأين `toolCall` و`toolResponse` في الطلبات يتم احتسابهما ضمن `prompt_token_count`. بما أنّ خطوات الأداة الوسيطة هذه أصبحت مرئية ويتم عرضها لك، فهي جزء من سجلّ المحادثة. ينطبق ذلك على *الطلبات* فقط، وليس *الردود*.
+Xin lưu ý rằng các phần `toolCall` và `toolResponse` trong yêu cầu được tính vào `prompt_token_count`. Vì các bước trung gian của công cụ này hiện có thể nhìn thấy và được trả về cho bạn, nên chúng là một phần của nhật ký trò chuyện. Điều này chỉ áp dụng cho *yêu cầu*, chứ không áp dụng cho *phản hồi*.
 
-تُستثنى أداة "بحث Google" من هذه القاعدة. تطبّق "بحث Google" نموذج التسعير الخاص بها على مستوى طلب البحث، لذا لا يتم تحصيل رسوم مضاعفة على الرموز المميّزة (راجِع صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar)).
+Công cụ Google Tìm kiếm là một trường hợp ngoại lệ đối với quy tắc này. Google Tìm kiếm đã áp dụng mô hình định giá riêng ở cấp truy vấn, vì vậy, các mã thông báo sẽ không bị tính phí gấp đôi (xem trang [Định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi)).
 
-يُرجى قراءة صفحة [الرموز المميّزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) لمزيد من المعلومات.
+Hãy đọc trang [Mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) để biết thêm thông tin.
 
-## القيود
+## Các điểm hạn chế
 
-- يتم تلقائيًا استخدام وضع `VALIDATED` (وضع `AUTO` غير متاح) عند تفعيل العلامة `include_server_side_tool_invocations`
-- تعتمد الأدوات المضمّنة، مثل `google_search`، على معلومات الموقع الجغرافي والوقت الحالي، لذا إذا كانت `system_instruction` أو `function_declaration.description` تتضمّن معلومات متضاربة عن الموقع الجغرافي والوقت، قد لا تعمل ميزة "الجمع بين الأدوات" بشكل جيد.
+- Chuyển về chế độ `VALIDATED` theo mặc định (chế độ `AUTO` không được hỗ trợ) khi cờ `include_server_side_tool_invocations` được bật
+- Các công cụ tích hợp như `google_search` dựa vào thông tin vị trí và thời gian hiện tại. Vì vậy, nếu `system_instruction` hoặc `function_declaration.description` của bạn có thông tin vị trí và thời gian mâu thuẫn, thì tính năng kết hợp công cụ có thể không hoạt động hiệu quả.
 
-## الأدوات المتاحة
+## Các công cụ được hỗ trợ
 
-ينطبق التداول العادي لسياق الأداة على الأدوات من جهة الخادم (المضمّنة).
-تُعدّ أداة تنفيذ الرموز البرمجية أيضًا أداة من جهة الخادم، ولكنّها تتضمّن حلاً مضمّنًا خاصًا بها لتداول السياق. تُعدّ أداة استخدام الكمبيوتر وميزة "استدعاء الدوال" أدوات من جهة العميل، وتتضمّنان أيضًا حلولاً مضمّنة لتداول السياق.
+Việc lưu thông ngữ cảnh công cụ tiêu chuẩn áp dụng cho các công cụ phía máy chủ (được tích hợp sẵn).
+Thực thi mã cũng là một công cụ phía máy chủ, nhưng có giải pháp tích hợp sẵn riêng để lưu hành bối cảnh. Computer Use và function calling là các công cụ phía máy khách, đồng thời có các giải pháp tích hợp để lưu thông ngữ cảnh.
 
-| الأداة | جهة التنفيذ | إتاحة ميزة "تداول السياق" |
+| Công cụ | Bên thực thi | Hỗ trợ lưu thông theo bối cảnh |
 | --- | --- | --- |
-| [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) | جهة الخادم | متاحة |
-| [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar) | جهة الخادم | متاحة |
-| [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) | جهة الخادم | متاحة |
-| [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar) | جهة الخادم | متاحة |
-| [تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) | جهة الخادم | متاحة (مضمّنة، تستخدم الجزأين `executableCode` و`codeExecutionResult`) |
-| [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) | من جهة العميل | متاحة (مضمّنة، تستخدم الجزأين `functionCall` و`functionResponse`) |
-| [الدوال المخصّصة](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) | من جهة العميل | متاحة (مضمّنة، تستخدم الجزأين `functionCall` و`functionResponse`) |
+| [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) | Phía máy chủ | Được hỗ trợ |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi) | Phía máy chủ | Được hỗ trợ |
+| [Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi) | Phía máy chủ | Được hỗ trợ |
+| [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi) | Phía máy chủ | Được hỗ trợ |
+| [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) | Phía máy chủ | Được hỗ trợ (tích hợp sẵn, sử dụng các phần `executableCode` và `codeExecutionResult`) |
+| [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi) | Phía máy khách | Được hỗ trợ (tích hợp sẵn, sử dụng các phần `functionCall` và `functionResponse`) |
+| [Hàm tuỳ chỉnh](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) | Phía máy khách | Được hỗ trợ (tích hợp sẵn, sử dụng các phần `functionCall` và `functionResponse`) |
 
-## الخطوات التالية
+## Bước tiếp theo
 
-- مزيد من المعلومات عن [ميزة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) في Gemini API
-- استكشاف الأدوات المتاحة:
-  - [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)
-  - [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar)
-  - [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)
-  - [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)
+- Tìm hiểu thêm về tính năng [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) trong Gemini API.
+- Khám phá các công cụ được hỗ trợ:
+  - [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)
+  - [Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)
+  - [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-06-19 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-19 UTC."],[],[]]

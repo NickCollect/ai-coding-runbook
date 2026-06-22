@@ -1,274 +1,276 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=ar
-fetched_at: 2026-06-15T06:21:31.461587+00:00
-title: "\u0627\u0644\u0645\u0646\u0627\u0637\u0642 \u0627\u0644\u062a\u064a \u062a\u062a\u0648\u0641\u0651\u0631 \u0641\u064a\u0647\u0627 \u0645\u064a\u0632\u0627\u062a Google AI Studio \u0648Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=es-419
+fetched_at: 2026-06-22T06:25:13.969418+00:00
+title: "Regiones disponibles para Google AI Studio y la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-إرسال ملاحظات
+Enviar comentarios
 
-# المناطق التي تتوفّر فيها ميزات Google AI Studio وGemini API
+# Regiones disponibles para Google AI Studio y la API de Gemini
 
-إذا وصلت إلى هذه الصفحة أثناء محاولة الوصول إلى [Google AI Studio](https://aistudio.google.com/?hl=ar)، قد
-يرجع ذلك إلى أحد الأسباب التالية:
+Si llegaste a esta página mientras intentabas acceder a [Google AI Studio](https://aistudio.google.com/?hl=es-419), es posible que se
+deba a uno de los siguientes motivos:
 
-- **القيود الإقليمية**: لا يتوفّر Google AI Studio في منطقتك. يُرجى الرجوع إلى القسم أدناه للاطّلاع على قائمة بالمناطق المتاحة.
-- **السنّ المسموح به**: أنت لا تستوفي الحدّ الأدنى للسنّ المسموح به (18 عامًا أو أكثر) للوصول إلى هذه الخدمة.
-- **تأكيد الحساب**: قد يكون بإمكانك الوصول إلى الخدمة، ولكن لم يتم بعد [إثبات عمرك](https://support.google.com/accounts/answer/10071085?hl=ar) في حسابك على Google.
+- **Restricciones regionales**: Google AI Studio no está disponible en tu región. Consulta la sección a continuación para obtener una lista de las regiones admitidas.
+- **Requisitos de edad**: No cumples con el requisito de edad mínima (18 años) para acceder a este servicio.
+- **Verificación de cuenta**: Es posible que tengas acceso al servicio, pero aún no [verificaste tu edad](https://support.google.com/accounts/answer/10071085?hl=es-419) en tu Cuenta de Google.
 
-لمزيد من التفاصيل حول المتطلبات، يُرجى مراجعة [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar).
+Para obtener más detalles sobre los requisitos, consulta nuestras [Condiciones del Servicio](https://ai.google.dev/gemini-api/terms?hl=es-419).
 
-## المناطق المتاحة
+## Regiones disponibles
 
-يتوفّر Gemini API وGoogle AI Studio في البلدان والمناطق التالية. إذا لم تكن مقيمًا في أحد هذه البلدان أو المناطق، جرِّب الـ
-[Gemini API في Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=ar):
+.
 
-- ألبانيا
-- الجزائر
-- ساموا الأمريكية
-- أندورا
-- أنغولا
-- أنغويلا
-- أنتاركتيكا
-- أنتيغوا وبربودا
-- الأرجنتين
-- أرمينيا
-- أروبا
-- أستراليا
-- النمسا
-- أذربيجان
-- جزر البهاما
-- البحرين
-- بنغلاديش
-- بربادوس
-- بلجيكا
-- بليز
-- بنين
-- برمودا
-- بوتان
-- بوليفيا
-- البوسنة والهرسك
-- بوتسوانا
-- البرازيل
-- الإقليم البريطاني في المحيط الهندي
-- جزر فيرجن البريطانية
-- بروناي
-- بلغاريا
-- بوركينا فاسو
-- بوروندي
-- الرأس الأخضر
-- كمبوديا
-- الكاميرون
-- كندا
-- هولندا الكاريبية
-- جزر كايمان
-- جمهورية إفريقيا الوسطى
-- تشاد
-- تشيلي
-- جزيرة كريسماس
-- جزر كوكوس (كيلينغ)
-- كولومبيا
-- جزر القمر
-- جزر كوك
-- كوستاريكا
-- ساحل العاج
-- كرواتيا
-- كوراساو
-- جمهورية التشيك
-- جمهورية الكونغو الديمقراطية
-- الدانمارك
-- جيبوتي
-- دومينيكا
-- جمهورية الدومينيكان
-- الإكوادور
-- مصر
-- السلفادور
-- غينيا الاستوائية
-- إريتريا
-- إستونيا
-- إسواتيني
-- إثيوبيا
-- جزر فوكلاند - جزر مالفيناس
-- جزر فارو
-- فيجي
-- فنلندا
-- فرنسا
-- غويانا الفرنسية
-- الغابون
-- غامبيا
-- جورجيا
-- ألمانيا
-- غانا
-- جبل طارق
-- اليونان
-- غرينلاند
-- غرينادا
-- غوام
-- غواتيمالا
-- غيرنزي
-- غينيا
-- غينيا بيساو
-- غيانا
-- هايتي
-- جزيرة هيرد وجزر ماكدونالد
-- هندوراس
-- هنغاريا
-- آيسلندا
-- الهند
-- إندونيسيا
-- العراق
-- أيرلندا
-- جزيرة مان
-- إسرائيل
-- إيطاليا
-- جامايكا
-- اليابان
-- جيرسي
-- الأردن
-- كازاخستان
-- كينيا
-- كيريباتي
-- كوسوفو
-- الكويت
-- قيرغيزستان
-- لاوس
-- لاتفيا
-- لبنان
-- ليسوتو
-- ليبريا
-- ليبيا
-- ليختنشتاين
-- ليتوانيا
-- لوكسمبورغ
-- مدغشقر
-- مالاوي
-- ماليزيا
-- جزر المالديف
-- مالي
-- مالطا
-- جزر مارشال
-- موريتانيا
-- موريشيوس
-- المكسيك
-- ميكرونيزيا
-- مولدوفا
-- موناكو
-- منغوليا
-- الجبل الأسود
-- مونتسيرات
-- المغرب
-- موزمبيق
-- ناميبيا
-- ناورو
-- نيبال
-- هولندا
-- كاليدونيا الجديدة
-- نيوزيلندا
-- نيكاراغوا
-- النيجر
-- نيجيريا
-- نيوي
-- جزيرة نورفولك
-- مقدونيا الشمالية
-- جزر ماريانا الشمالية
-- النرويج
-- عُمان
-- باكستان
-- بالاو
-- فلسطين
-- بنما
-- بابوا غينيا الجديدة
-- باراغواي
-- بيرو
-- الفلبين
-- جزر بيتكيرن
-- بولندا
-- البرتغال
-- بورتوريكو
-- قطر
-- جمهورية قبرص
-- جمهورية الكونغو
-- رومانيا
-- رواندا
-- ريونيون
-- سان بارتيلمي
-- سانت هيلينا وأسينشيون وتريستان دا كونا
-- سانت كيتس ونيفيس
-- سانت لوسيا
-- سان بيير وميكلون
-- سانت فنسنت وجزر غرينادين
-- ساموا
-- سان مارينو
-- ساو تومي وبرينسيبي
-- المملكة العربية السعودية
-- السنغال
-- صربيا
-- سيشل
-- سيراليون
-- سنغافورة
-- سلوفاكيا
-- سلوفينيا
-- جزر سليمان
-- الصومال
-- جنوب إفريقيا
-- جورجيا الجنوبية وجزر ساندويتش الجنوبية
-- كوريا الجنوبية
-- جنوب السودان
-- إسبانيا
-- سريلانكا
-- السودان
-- سورينام
-- السويد
-- سويسرا
-- تايوان
-- طاجيكستان
-- تنزانيا
-- تايلاند
-- تيمور - ليشتي
-- توغو
-- توكيلو
-- تونغا
-- ترينيداد وتوباغو
-- تونس
-- تركمانستان
-- جزر توركس وكايكوس
-- توفالو
-- تركيا
-- أوغندا
-- أوكرانيا
-- الإمارات العربية المتحدة
-- المملكة المتحدة
-- الولايات المتحدة
-- جزر الولايات المتحدة الصغيرة النائية
-- أوروغواي
-- جزر فيرجن الأمريكية
-- أوزباكستان
-- فانواتو
-- الفاتيكان
-- فنزويلا
-- فيتنام
-- جزر والس وفوتونا
-- الصحراء الغربية
-- اليمن
-- زامبيا
-- زيمبابوي
-- جزر أولان
+La API de Gemini y Google AI Studio están disponibles en los siguientes países y territorios. Si no te encuentras en uno de estos países o territorios, prueba la
+[API de Gemini en Agent Platform de Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=es-419):
 
-إرسال ملاحظات
+- Albania
+- Argelia
+- Samoa Americana
+- Andorra
+- Angola
+- Anguila
+- Antártida
+- Antigua y Barbuda
+- Argentina
+- Armenia
+- Aruba
+- Australia
+- Austria
+- Azerbaiyán
+- Bahamas
+- Baréin
+- Bangladés
+- Barbados
+- Bélgica
+- Belice
+- Benín
+- Bermudas
+- Bután
+- Bolivia
+- Bosnia-Herzegovina
+- Botsuana
+- Brasil
+- Territorio Británico del Océano Índico
+- Islas Vírgenes Británicas
+- Brunéi
+- Bulgaria
+- Burkina Faso
+- Burundi
+- Cabo Verde
+- Camboya
+- Camerún
+- Canadá
+- Caribe Neerlandés
+- Islas Caimán
+- República Centroafricana
+- Chad
+- Chile
+- Isla de Navidad
+- Islas Cocos (Keeling)
+- Colombia
+- Comoras
+- Islas Cook
+- Costa Rica
+- Costa de Marfil
+- Croacia
+- Curazao
+- República Checa
+- República Democrática del Congo
+- Dinamarca
+- Yibuti
+- Dominica
+- República Dominicana
+- Ecuador
+- Egipto
+- El Salvador
+- Guinea Ecuatorial
+- Eritrea
+- Estonia
+- Esuatini
+- Etiopía
+- Islas Malvinas
+- Islas Feroe
+- Fiyi
+- Finlandia
+- Francia
+- Guayana Francesa
+- Gabón
+- Gambia
+- Georgia
+- Alemania
+- Ghana
+- Gibraltar
+- Grecia
+- Groenlandia
+- Granada
+- Guam
+- Guatemala
+- Guernsey
+- Guinea
+- Guinea-Bisáu
+- Guyana
+- Haití
+- Islas Heard y McDonald
+- Honduras
+- Hungría
+- Islandia
+- India
+- Indonesia
+- Irak
+- Irlanda
+- Isla de Man
+- Israel
+- Italia
+- Jamaica
+- Japón
+- Jersey
+- Jordania
+- Kazajistán
+- Kenia
+- Kiribati
+- Kosovo
+- Kuwait
+- Kirguistán
+- Laos
+- Letonia
+- Líbano
+- Lesoto
+- Liberia
+- Libia
+- Liechtenstein
+- Lituania
+- Luxemburgo
+- Madagascar
+- Malaui
+- Malasia
+- Maldivas
+- Mali
+- Malta
+- Islas Marshall
+- Mauritania
+- Mauricio
+- México
+- Micronesia
+- Moldavia
+- Mónaco
+- Mongolia
+- Montenegro
+- Montserrat
+- Marruecos
+- Mozambique
+- Namibia
+- Nauru
+- Nepal
+- Países Bajos
+- Nueva Caledonia
+- Nueva Zelanda
+- Nicaragua
+- Níger
+- Nigeria
+- Niue
+- Isla Norfolk
+- Macedonia del Norte
+- Islas Marianas del Norte
+- Noruega
+- Omán
+- Pakistán
+- Palaos
+- Palestina
+- Panamá
+- Papúa Nueva Guinea
+- Paraguay
+- Perú
+- Filipinas
+- Islas Pitcairn
+- Polonia
+- Portugal
+- Puerto Rico
+- Catar
+- República de Chipre
+- República del Congo
+- Rumania
+- Ruanda
+- Reunión
+- San Bartolomé
+- Santa Elena, Ascensión y Tristán de Acuña
+- San Cristóbal y Nieves
+- Santa Lucía
+- San Pedro y Miquelón
+- San Vicente y las Granadinas
+- Samoa
+- San Marino
+- Santo Tomé y Príncipe
+- Arabia Saudita
+- Senegal
+- Serbia
+- Seychelles
+- Sierra Leona
+- Singapur
+- Eslovaquia
+- Eslovenia
+- Islas Salomón
+- Somalia
+- Sudáfrica
+- Islas Georgias del Sur y Sándwich del Sur
+- Corea del Sur
+- Sudán del Sur
+- España
+- Sri Lanka
+- Sudán
+- Surinam
+- Suecia
+- Suiza
+- Taiwán
+- Tayikistán
+- Tanzania
+- Tailandia
+- Timor Oriental
+- Togo
+- Tokelau
+- Tonga
+- Trinidad y Tobago
+- Túnez
+- Turkmenistán
+- Islas Turcas y Caicos
+- Tuvalu
+- Türkiye
+- Uganda
+- Ucrania
+- Emiratos Árabes Unidos
+- Reino Unido
+- Estados Unidos
+- Islas Ultramarinas Menores de los Estados Unidos
+- Uruguay
+- Islas Vírgenes de los EE.UU.
+- Uzbekistán
+- Vanuatu
+- Ciudad del Vaticano
+- Venezuela
+- Vietnam
+- Wallis y Futuna
+- Sahara Occidental
+- Yemen
+- Zambia
+- Zimbabue
+- Islas Åland
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Enviar comentarios
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Última actualización: 2026-04-29 (UTC)
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+¿Quieres brindar más información?
+
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]

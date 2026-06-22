@@ -1,60 +1,71 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=fr
-fetched_at: 2026-06-15T06:30:22.079069+00:00
-title: "Journalisation et partage des donn\u00e9es \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=pt-BR
+fetched_at: 2026-06-22T06:35:25.737513+00:00
+title: "Registro e compartilhamento de dados \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Envoyer des commentaires
+Envie comentários
 
-# Journalisation et partage des données
+# Registro e compartilhamento de dados
 
-Cette page décrit le stockage et la gestion des [journaux de l'API Gemini](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=fr), qui sont des données d'API appartenant aux développeurs et provenant des appels d'API Gemini compatibles pour les projets pour lesquels la facturation est activée. Les journaux englobent l'ensemble du processus, de la requête d'un utilisateur à la réponse du modèle.
+Esta página descreve o armazenamento e o gerenciamento de
+[registros da API Gemini](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=pt-br), que são dados de
+API de propriedade do desenvolvedor de chamadas da API Gemini compatíveis para projetos com o faturamento ativado. Os registros abrangem todo o processo, desde a solicitação de um usuário até a resposta do modelo.
 
-## 1. Données pouvant être partagées
+## 1. Dados que podem ser compartilhados
 
-En tant que propriétaire du projet, vous pouvez choisir d'activer la journalisation des appels de l'API Gemini pour votre propre usage, ou pour nous envoyer des commentaires et les partager avec Google afin de nous aider à améliorer continuellement nos modèles.
+Como proprietário do projeto, você pode ativar o registro de chamadas da API Gemini para seu próprio uso ou para feedback e compartilhamento com o Google, ajudando a melhorar continuamente nossos modelos.
 
-Si la journalisation est activée, vous pouvez nous aider à créer des systèmes d'IA qui continuent d'être utiles aux développeurs dans différents domaines et cas d'utilisation en choisissant de partager les données suivantes afin d'améliorer nos produits et d'entraîner nos modèles :
+Com o registro ativado, você pode nos ajudar a criar sistemas de IA que continuam sendo valiosos para desenvolvedores em vários campos e casos de uso, contribuindo com os seguintes dados para melhorias de produtos e treinamento de modelos:
 
-- **Ensembles de données** : utilisez l'interface "Journaux et ensembles de données" de Google AI Studio pour choisir les journaux (requêtes, réponses, métadonnées, etc.) qui vous intéressent parmi les appels d'API Gemini compatibles. Ces journaux sont fournis par le biais de l'inclusion dans des ensembles de données, avec la possibilité de les exclure lors de la création de l'ensemble de données.
-- **Commentaires** : lorsque vous examinez des journaux, vous pouvez fournir des commentaires, y compris des notes (pouce vers le haut/bas) et des commentaires écrits.
+- **Conjuntos de dados**:use a interface de registros e conjuntos de dados do Google AI Studio para escolher registros (solicitações, respostas, metadados etc.) de chamadas da API Gemini compatíveis; contribuídos pela inclusão em conjuntos de dados, com a opção de desativar durante a criação do conjunto de dados.
+- **Feedback**:ao analisar os registros, você pode fornecer feedback, incluindo classificações de positivo/negativo e comentários escritos.
 
-Lorsque vous partagez un ensemble de données avec Google, les journaux de cet ensemble de données, y compris les requêtes et les réponses, sont traités conformément à nos [Conditions d'utilisation](https://developers.google.com/terms?hl=fr) pour les [Services non payants](https://ai.google.dev/gemini-api/terms?hl=fr#data-use-unpaid). Cela signifie que l'ensemble de données peut être utilisé pour développer et améliorer les produits, services et technologies de machine learning de Google, y compris pour améliorer et entraîner nos modèles. **N'incluez pas d'informations personnelles, sensibles ou confidentielles.**
+Quando você compartilha um conjunto de dados com o Google, seus registros nesse conjunto, incluindo
+solicitações e respostas, serão processados de acordo com nossos
+[Termos](https://developers.google.com/terms?hl=pt-br) para
+"[Serviços não pagos](https://ai.google.dev/gemini-api/terms?hl=pt-br#data-use-unpaid),"
+o que significa que o conjunto de dados pode ser usado para desenvolver e melhorar produtos, serviços e tecnologias de aprendizado de máquina do Google,
+incluindo aprimorar e
+treinar nossos modelos. **Não inclua informações pessoais, sensíveis ou confidenciais**.
 
-## 2. Comment nous utilisons vos données
+## 2. Como usamos seus dados
 
-Par défaut, les journaux expirent au bout de 55 jours. Elles deviendront indisponibles après cette période. Des ensembles de données peuvent être créés pour conserver les journaux d'intérêt ou de valeur au-delà de cette période, pour des cas d'utilisation en aval et une contribution facultative à l'amélioration des modèles. Les journaux stockés dans les ensembles de données n'ont pas de date d'expiration définie. Toutefois, chaque projet dispose d'une limite de stockage par défaut de 1 000 journaux maximum.
+Os registros expiram após 55 dias por padrão. Eles ficam indisponíveis após esse período. Os conjuntos de dados podem ser criados para reter registros de interesse ou valor além desse período para casos de uso downstream e contribuição opcional para melhorias de modelos. Os registros armazenados em conjuntos de dados não têm datas de validade definidas, mas cada projeto tem um limite de armazenamento padrão de até 1.000 registros.
 
-Par défaut, la journalisation n'étant disponible que pour les projets pour lesquels la facturation est activée, les requêtes et les réponses dans les journaux ne sont pas utilisées pour améliorer ou développer les produits, conformément à nos [Conditions d'utilisation](https://developers.google.com/terms?hl=fr) sur l'utilisation des données.
+Por padrão, como o registro só está disponível para projetos com o faturamento ativado,
+os comandos e as respostas nos registros não são usados para melhoria ou
+desenvolvimento de produtos, de acordo com nossos [Termos](https://developers.google.com/terms?hl=pt-br)
+de uso de dados.
 
-Si vous choisissez de partager des ensembles de données de vos journaux avec Google, ils seront utilisés comme données de démonstration réelles pour mieux comprendre la diversité des domaines et des contextes dans lesquels les systèmes et applications d'IA sont utilisés. Ces données peuvent être utilisées pour améliorer la qualité du modèle, et pour informer l'entraînement et l'évaluation des futurs modèles et services. Ces données sont traitées conformément à nos conditions d'utilisation des données pour les [Services non payants](https://ai.google.dev/gemini-api/terms?hl=fr#data-use-unpaid).
-Par conséquent, des réviseurs humains peuvent lire, annoter et traiter les entrées et sorties d'API que vous partagez. Avant d'utiliser les données pour améliorer les modèles, Google prend des mesures pour protéger la confidentialité des utilisateurs. Entre autres, ces données sont dissociées de votre compte Google, de votre clé API et de votre projet Cloud avant que les réviseurs les voient ou les annotent.
+Se você optar por compartilhar conjuntos de dados dos seus registros com o Google, esses conjuntos serão usados como dados de demonstração do mundo real para entender melhor a diversidade de domínios e contextos em que os sistemas e aplicativos de IA são usados. Esses dados podem ser usados para melhorar a qualidade do modelo e informar o treinamento e a avaliação de modelos e serviços futuros. Esses dados são tratados de acordo com nossos termos de uso de dados para [Serviços não pagos](https://ai.google.dev/gemini-api/terms?hl=pt-br#data-use-unpaid).
+Assim, revisores humanos podem ler, fazer anotações e tratar as entradas e saídas da API que você compartilha. Antes que os dados sejam usados para melhorar o modelo, o Google toma medidas para proteger a privacidade do usuário como parte desse processo. Isso inclui desconectar esses dados da sua Conta do Google, da chave de API e do projeto na nuvem antes que os revisores os vejam ou façam anotações.
 
-## 3. Data permissions
+## 3. Permissões de dados
 
-En choisissant de partager des données d'API, vous confirmez que vous disposez des autorisations nécessaires pour que Google traite et utilise les données comme décrit dans cette documentation. **Veuillez ne pas partager de journaux contenant des informations sensibles, confidentielles ou propriétaires obtenues par le biais du service payant.**
-La licence que vous accordez à Google dans la section [Envoi de contenu](https://developers.google.com/terms?hl=fr#b_submission_of_content) des Conditions d'utilisation de l'API s'étend également, dans la mesure requise par la loi applicable pour notre utilisation, à tout contenu (par exemple, les requêtes, y compris les instructions système associées, le contenu mis en cache et les fichiers tels que les images, les vidéos ou les documents) que vous envoyez aux Services et à toutes les réponses générées.
+Ao ativar a contribuição de dados da API, você confirma que tem as permissões necessárias para que o Google trate e use os dados conforme descrito nesta documentação. **Não contribua com registros que contenham informações sensíveis, confidenciais ou proprietárias obtidas pelo serviço pago**.
+A licença que você concede ao Google na seção "[Envio de conteúdo](https://developers.google.com/terms?hl=pt-br#b_submission_of_content)" nos Termos das APIs também se estende, na medida exigida pela legislação aplicável para nosso uso, a qualquer conteúdo (por exemplo, comandos, incluindo instruções de sistema associadas, conteúdo armazenado em cache e arquivos, como imagens, vídeos ou documentos) que você enviar aos Serviços e a quaisquer respostas geradas.
 
-## 4. Partage de données et commentaires
+## 4. Compartilhamento de dados pessoais e feedback
 
-Vous pouvez nous aider à faire progresser la recherche sur l'IA, l'API Gemini et Google AI Studio en choisissant de partager vos données en tant qu'exemples. Cela nous permettra d'améliorer continuellement nos modèles dans différents contextes et de créer des systèmes d'IA qui restent utiles aux développeurs dans différents domaines et cas d'utilisation.
+Você pode nos ajudar a avançar na fronteira da pesquisa de IA, da API Gemini e do Google AI Studio ativando o compartilhamento de dados como exemplos, permitindo que melhoremos continuamente nossos modelos em vários contextos e criemos sistemas de IA que continuam sendo valiosos para desenvolvedores em vários campos e casos de uso.
 
-Envoyer des commentaires
+Envie comentários
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Dernière mise à jour le 2026/06/01 (UTC).
+Última atualização 2026-06-01 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Quer enviar seu feedback?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/01 (UTC)."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-01 UTC."],[],[]]

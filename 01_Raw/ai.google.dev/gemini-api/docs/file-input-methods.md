@@ -1,29 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=es-419
-fetched_at: 2026-06-15T06:22:34.669638+00:00
+source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=hi
+fetched_at: 2026-06-22T06:25:00.539703+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Enviar comentarios
+सुझाव भेजें
 
-# Métodos de entrada de archivos
+# फ़ाइल इनपुट करने के तरीके
 
-En esta guía, se explican las diferentes formas en que puedes incluir archivos multimedia, como imágenes, audio, video y documentos, cuando realizas solicitudes a la API de Gemini.
-Los nuevos métodos son compatibles con todos los extremos de la API de Gemini, incluidas las APIs de Batch, Interactions y Live.
-Elegir el método correcto depende del tamaño del archivo, dónde se almacenan tus datos actualmente y con qué frecuencia planeas usar el archivo.
+इस गाइड में, Gemini API से अनुरोध करते समय इमेज, ऑडियो, वीडियो, और दस्तावेज़ जैसी मीडिया फ़ाइलें शामिल करने के अलग-अलग तरीके बताए गए हैं.
+नए तरीके, Gemini API के सभी एंडपॉइंट पर काम करते हैं. इनमें बैच, इंटरैक्शन, और Live API शामिल हैं.
+सही तरीका चुनने के लिए, आपको यह देखना होगा कि आपकी फ़ाइल का साइज़ कितना है, आपका डेटा फ़िलहाल कहां सेव है, और आपको फ़ाइल का इस्तेमाल कितनी बार करना है.
 
-La forma más sencilla de incluir un archivo como entrada es leer un archivo local e incluirlo en una instrucción. En el siguiente ejemplo, se muestra cómo leer un archivo PDF local. Los archivos PDF están limitados a 50 MB para este método. Consulta la [tabla de comparación de métodos de entrada](#method-comparison) para obtener una lista completa de los tipos y límites de entrada de archivos.
+किसी फ़ाइल को इनपुट के तौर पर शामिल करने का सबसे आसान तरीका यह है कि किसी लोकल फ़ाइल को पढ़ा जाए और उसे प्रॉम्प्ट में शामिल किया जाए. यहां दिए गए उदाहरण में, किसी स्थानीय PDF फ़ाइल को पढ़ने का तरीका बताया गया है. इस तरीके से अपलोड किए जाने वाले PDF का साइज़ 50 एमबी से ज़्यादा नहीं होना चाहिए. फ़ाइल इनपुट टाइप और सीमाओं की पूरी सूची देखने के लिए, [इनपुट मेथड की तुलना करने वाली टेबल](#method-comparison) देखें.
 
 ### Python
 
@@ -112,26 +112,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   }'
 ```
 
-## Comparación de métodos de entrada
+## इनपुट के तरीकों की तुलना
 
-En la siguiente tabla, se compara cada método de entrada con los límites de archivos y los mejores casos de uso. Ten en cuenta que el límite de tamaño del archivo puede variar según el tipo de archivo y el modelo o el tokenizador que se usen para procesarlo.
+यहां दी गई टेबल में, हर इनपुट तरीके की तुलना फ़ाइल की सीमाओं और सबसे सही इस्तेमाल के उदाहरणों से की गई है. ध्यान दें कि फ़ाइल का साइज़, फ़ाइल टाइप और फ़ाइल को प्रोसेस करने के लिए इस्तेमाल किए गए मॉडल/टोकनाइज़र के हिसाब से अलग-अलग हो सकता है.
 
-| Método | Ideal para | Tamaño máximo de los archivos | Persistencia |
+| तरीका | इन स्थितियों में बेहतर है | अधिकतम फ़ाइल आकार | परसिस्टेंस |
 | --- | --- | --- | --- |
-| **Datos intercalados** | Pruebas rápidas, archivos pequeños y aplicaciones en tiempo real | 100 MB por solicitud o carga útil   (**50 MB para PDFs**) | Ninguna (se envía con cada solicitud) |
-| **Subida de archivos a la API** | Archivos grandes y archivos que se usan varias veces | 2 GB por archivo,   hasta 20 GB por proyecto | 48 horas |
-| **Registro del URI de GCS de la API de File** | Archivos grandes que ya están en Google Cloud Storage y archivos que se usan varias veces | 2 GB por archivo, sin límites de almacenamiento generales | Ninguno (se recupera por solicitud). El registro único puede brindar acceso por hasta 30 días. |
-| **URLs externas** | Datos públicos o datos en buckets de la nube (AWS, Azure, GCS) sin volver a subirlos | 100 MB por solicitud o carga útil | Ninguno (se recupera por solicitud) |
+| **इनलाइन डेटा** | तेज़ी से टेस्टिंग, छोटी फ़ाइलें, रीयल-टाइम ऐप्लिकेशन. | हर अनुरोध/पेलोड के लिए 100 एमबी   (**PDF के लिए 50 एमबी**) | कोई नहीं (हर अनुरोध के साथ भेजा जाता है) |
+| **File API की मदद से अपलोड करना** | बड़ी फ़ाइलें, एक से ज़्यादा बार इस्तेमाल की गई फ़ाइलें. | हर फ़ाइल का साइज़ 2 जीबी और हर प्रोजेक्ट के लिए 20 जीबी तक | 48 घंटे |
+| **File API GCS यूआरआई रजिस्ट्रेशन** | Google Cloud Storage में पहले से मौजूद बड़ी फ़ाइलें और वे फ़ाइलें जिनका इस्तेमाल कई बार किया गया है. | हर फ़ाइल के लिए 2 जीबी, स्टोरेज की कोई सीमा नहीं | कोई नहीं (हर अनुरोध के हिसाब से फ़ेच किया जाता है). एक बार रजिस्टर करने पर, 30 दिनों तक ऐक्सेस मिल सकता है. |
+| **बाहरी यूआरएल** | सार्वजनिक डेटा या क्लाउड बकेट (AWS, Azure, GCS) में मौजूद डेटा को फिर से अपलोड किए बिना. | हर अनुरोध/पे लोड के लिए 100 एमबी | कोई नहीं (हर अनुरोध के हिसाब से फ़ेच किया जाता है) |
 
-## Datos intercalados
+## इनलाइन डेटा
 
-En el caso de archivos más pequeños (menos de 100 MB o 50 MB para archivos PDF), puedes pasar los datos directamente en la carga útil de la solicitud. Este es el método más simple para pruebas rápidas o aplicaciones que manejan datos transitorios en tiempo real. Puedes proporcionar datos como cadenas codificadas en base64 o leer archivos locales directamente.
+छोटी फ़ाइलों (100 एमबी से कम या PDF के लिए 50 एमबी) के लिए, डेटा को सीधे तौर पर अनुरोध के पेलोड में पास किया जा सकता है. यह तुरंत टेस्ट करने या रीयल-टाइम में कुछ समय के लिए उपलब्ध डेटा को मैनेज करने वाले ऐप्लिकेशन के लिए सबसे आसान तरीका है. डेटा को base64 एन्कोड की गई स्ट्रिंग के तौर पर उपलब्ध कराया जा सकता है. इसके अलावा, सीधे तौर पर स्थानीय फ़ाइलों को पढ़कर भी डेटा उपलब्ध कराया जा सकता है.
 
-Para ver un ejemplo de lectura desde un archivo local, consulta el ejemplo al comienzo de esta página.
+किसी स्थानीय फ़ाइल से पढ़ने के उदाहरण के लिए, इस पेज की शुरुआत में दिया गया उदाहरण देखें.
 
-### Recuperar desde una URL
+### किसी यूआरएल से फ़ेच करना
 
-También puedes recuperar un archivo de una URL, convertirlo en bytes y agregarlo a la entrada.
+किसी यूआरएल से फ़ाइल फ़ेच की जा सकती है. साथ ही, उसे बाइट में बदलकर इनपुट में शामिल किया जा सकता है.
 
 ### Python
 
@@ -233,13 +233,13 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## API de Gemini File
+## Gemini File API
 
-La API de File está diseñada para archivos más grandes (hasta 2 GB) o archivos que planeas usar en varias solicitudes.
+File API को बड़ी फ़ाइलों (2 जीबी तक) या उन फ़ाइलों के लिए डिज़ाइन किया गया है जिनका इस्तेमाल आपको कई अनुरोधों में करना है.
 
-### Carga de archivos estándar
+### फ़ाइल अपलोड करने की स्टैंडर्ड सुविधा
 
-Sube un archivo local a la API de Gemini. Los archivos que se suben de esta manera se almacenan temporalmente (48 horas) y se procesan para que el modelo los recupere de manera eficiente.
+Gemini API में कोई लोकल फ़ाइल अपलोड करें. इस तरीके से अपलोड की गई फ़ाइलों को कुछ समय के लिए (48 घंटे) सेव किया जाता है. साथ ही, मॉडल के ज़रिए उन्हें आसानी से ऐक्सेस करने के लिए प्रोसेस किया जाता है.
 
 ### Python
 
@@ -346,42 +346,44 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Registra archivos de Google Cloud Storage
+### Google Cloud Storage की फ़ाइलें रजिस्टर करना
 
-Si tus datos ya están en Google Cloud Storage, no es necesario que los descargues y vuelvas a subirlos. Puedes registrarlo directamente con la API de File.
+अगर आपका डेटा पहले से ही Google Cloud Storage में है, तो आपको उसे डाउनलोड करके फिर से अपलोड करने की ज़रूरत नहीं है. इसे सीधे तौर पर File API के साथ रजिस्टर किया जा सकता है.
 
-1. Otorga acceso de **agente de servicio** a cada bucket
+1. हर बकेट के लिए, **सर्विस एजेंट** को ऐक्सेस दें
 
-   1. Habilita la API de Gemini en tu proyecto de Google Cloud.
-   2. Crea el agente de servicio:
+   1. अपने Google Cloud प्रोजेक्ट में Gemini API चालू करें.
+   2. सर्विस एजेंट बनाएं:
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **Otorga permisos al agente de servicio de la API de Gemini** para leer tus buckets de almacenamiento.
+   3. **Gemini API सेवा एजेंट को, आपके स्टोरेज बकेट पढ़ने की अनुमतियां दें**.
 
-      El usuario debe asignar el [rol de IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=es-419#storage.objectViewer) `Storage Object Viewer` a este agente de servicio en los buckets de almacenamiento específicos que pretende usar.
+      उपयोगकर्ता को उन स्टोरेज बकेट के लिए, इस सेवा एजेंट को `Storage Object Viewer`
+      [IAM भूमिका](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=hi#storage.objectViewer)
+      असाइन करनी होगी जिनका उसे इस्तेमाल करना है.
 
-   Este acceso no vence de forma predeterminada, pero se puede cambiar en cualquier momento. También puedes usar los comandos del [SDK de IAM de Google Cloud Storage](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=es-419) para otorgar permisos.
-2. Autentica tu servicio
+   डिफ़ॉल्ट रूप से, यह ऐक्सेस कभी खत्म नहीं होता. हालांकि, इसे किसी भी समय बदला जा सकता है. अनुमतियां देने के लिए, [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=hi) की कमांड का भी इस्तेमाल किया जा सकता है.
+2. अपनी सेवा की पुष्टि करना
 
-   **Requisitos previos**
+   **ज़रूरी शर्तें**
 
-   - Habilitar API
-   - Crea una cuenta o un agente de servicio con los permisos adecuados.
+   - एपीआई चालू करना
+   - ज़रूरी अनुमतियों के साथ सेवा खाता/एजेंट बनाएं.
 
-   Primero, debes autenticarte como el servicio que tiene permisos de visualizador de objetos de almacenamiento. La forma en que esto sucede depende del entorno en el que se ejecutará tu código de administración de archivos.
+   सबसे पहले, आपको उस सेवा के तौर पर पुष्टि करनी होगी जिसके पास स्टोरेज ऑब्जेक्ट व्यूअर की अनुमतियां हैं. यह इस बात पर निर्भर करता है कि आपका फ़ाइल मैनेजमेंट कोड किस एनवायरमेंट में चलेगा.
 
-   **Fuera de Google Cloud**
+   **Google Cloud के बाहर**
 
-   Si tu código se ejecuta fuera de Google Cloud, por ejemplo, desde tu computadora de escritorio, descarga las credenciales de la cuenta desde la consola de Google Cloud siguiendo estos pasos:
+   अगर आपका कोड Google Cloud के बाहर से चल रहा है, जैसे कि आपका डेस्कटॉप, तो Google Cloud Console से खाते के क्रेडेंशियल डाउनलोड करें. इसके लिए, यह तरीका अपनाएं:
 
-   1. Navega a la [consola de cuentas de servicio](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=es-419).
-   2. Selecciona la cuenta de servicio pertinente.
-   3. Selecciona la pestaña **Claves** y elige **Agregar clave, Crear clave nueva**.
-   4. Elige el tipo de clave **JSON** y anota dónde se descargó el archivo en tu máquina.
+   1. [Service Account console](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=hi) पर जाएं
+   2. काम का सेवा खाता चुनें
+   3. **कुंजियां** टैब को चुनें. इसके बाद, **कुंजी जोड़ें, नई कुंजी बनाएं** को चुनें
+   4. **JSON** फ़ाइल फ़ॉर्मैट वाली कुंजी चुनें. साथ ही, यह नोट करें कि आपके डिवाइस पर फ़ाइल कहां डाउनलोड हुई है.
 
-   Para obtener más detalles, consulta la documentación oficial de Google Cloud sobre la [administración de claves de cuentas de servicio](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=es-419).
+   ज़्यादा जानकारी के लिए, [सेवा खाते की कुंजी के मैनेजमेंट](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=hi) के बारे में Google Cloud का आधिकारिक दस्तावेज़ देखें.
 
-   Luego, usa los siguientes comandos para autenticarte. En estos comandos, se supone que el archivo de tu cuenta de servicio se encuentra en el directorio actual y se llama `service-account.json`.
+   इसके बाद, पुष्टि करने के लिए इन कमांड का इस्तेमाल करें. इन कमांड में यह माना गया है कि आपकी सेवा खाते की फ़ाइल, मौजूदा डायरेक्ट्री में है और उसका नाम `service-account.json` है.
 
    ### Python
 
@@ -419,7 +421,7 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
    });
    ```
 
-   ### CLI
+   ### सीएलआई
 
    ```
    gcloud auth application-default login \
@@ -427,13 +429,13 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **En Google Cloud**
+   **Google Cloud पर**
 
-   Si ejecutas directamente en Google Cloud, por ejemplo, con [Cloud Run functions](https://cloud.google.com/functions?hl=es-419) o una [instancia de Compute Engine](https://cloud.google.com/products/compute?hl=es-419), tendrás credenciales implícitas, pero deberás volver a autenticarte para otorgar los permisos adecuados.
+   अगर Google Cloud में सीधे तौर पर कोई काम किया जा रहा है, जैसे कि [Cloud Run फ़ंक्शन](https://cloud.google.com/functions?hl=hi) या [Compute Engine इंस्टेंस](https://cloud.google.com/products/compute?hl=hi) का इस्तेमाल करके, तो आपके पास इंप्लिसिट क्रेडेंशियल होंगे. हालांकि, सही स्कोप देने के लिए आपको फिर से पुष्टि करनी होगी.
 
    ### Python
 
-   Este código espera que el servicio se ejecute en un entorno en el que se puedan obtener automáticamente las [credenciales predeterminadas de la aplicación](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=es-419), como Cloud Run o Compute Engine.
+   इस कोड के लिए ज़रूरी है कि सेवा ऐसे एनवायरमेंट में चल रही हो जहां [ऐप्लिकेशन के डिफ़ॉल्ट क्रेडेंशियल](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=hi) अपने-आप मिल सकते हों. जैसे, Cloud Run या Compute Engine.
 
    ```
    import google.auth
@@ -448,7 +450,7 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
 
    ### JavaScript
 
-   Este código espera que el servicio se ejecute en un entorno en el que se puedan obtener automáticamente las [credenciales predeterminadas de la aplicación](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=es-419), como Cloud Run o Compute Engine.
+   इस कोड के लिए ज़रूरी है कि सेवा ऐसे एनवायरमेंट में चल रही हो जहां [ऐप्लिकेशन के डिफ़ॉल्ट क्रेडेंशियल](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=hi) अपने-आप मिल सकते हों. जैसे, Cloud Run या Compute Engine.
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -461,17 +463,17 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
    });
    ```
 
-   ### CLI
+   ### सीएलआई
 
-   Este es un comando interactivo. En el caso de servicios como Compute Engine, puedes adjuntar alcances al servicio en ejecución a nivel de la configuración. Consulta la [documentación del servicio administrado por el usuario](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=es-419#using) para ver un ejemplo.
+   यह एक इंटरैक्टिव कमांड है. Compute Engine जैसी सेवाओं के लिए, कॉन्फ़िगरेशन लेवल पर चल रही सेवा से स्कोप अटैच किए जा सकते हैं. उदाहरण के लिए, [उपयोगकर्ता के मैनेज किए गए सेवा दस्तावेज़](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=hi#using) देखें.
 
    ```
    gcloud auth application-default login \
    --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
    ```
-3. Registro de archivos (API de Files)
+3. फ़ाइल रजिस्टर करना (Files API)
 
-   Usa la API de Files para registrar archivos y generar una ruta de acceso a la API de Files que se pueda usar directamente en la API de Gemini.
+   फ़ाइलों को रजिस्टर करने के लिए, Files API का इस्तेमाल करें. साथ ही, Files API का ऐसा पाथ जनरेट करें जिसका इस्तेमाल Gemini API में सीधे तौर पर किया जा सके.
 
    ### Python
 
@@ -504,7 +506,7 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
      print(response.text)
    ```
 
-   ### CLI
+   ### सीएलआई
 
    ```
    access_token=$(gcloud auth application-default print-access-token)
@@ -516,11 +518,11 @@ Si tus datos ya están en Google Cloud Storage, no es necesario que los descargu
        -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
    ```
 
-## URLs externas de HTTP o firmadas
+## एक्सटर्नल एचटीटीपी / सीमित ऐक्सेस वाले यूआरएल
 
-Puedes pasar URLs HTTPS de acceso público o URLs previamente firmadas (compatibles con las [URLs previamente firmadas de S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) y las SAS de Azure) directamente en tu solicitud de generación. La API de Gemini recuperará el contenido de forma segura durante el procesamiento. Esta opción es ideal para archivos de hasta 100 MB que no quieres volver a subir.
+जनरेट करने के अनुरोध में, सार्वजनिक तौर पर ऐक्सेस किए जा सकने वाले एचटीटीपीएस यूआरएल या पहले से हस्ताक्षर किए गए यूआरएल ([S3 Presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html) और Azure SAS के साथ काम करने वाले) सीधे तौर पर पास किए जा सकते हैं. Gemini API, प्रोसेसिंग के दौरान कॉन्टेंट को सुरक्षित तरीके से फ़ेच करेगा. यह 100 एमबी तक की उन फ़ाइलों के लिए सबसे सही है जिन्हें आपको फिर से अपलोड नहीं करना है.
 
-Puedes usar URLs públicas o firmadas como entrada con las URLs en el campo `file_uri`.
+`file_uri` फ़ील्ड में यूआरएल का इस्तेमाल करके, सार्वजनिक या हस्ताक्षर किए गए यूआरएल को इनपुट के तौर पर इस्तेमाल किया जा सकता है.
 
 ### Python
 
@@ -594,20 +596,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
         }'
 ```
 
-### Accesibilidad
+### सुलभता
 
-Verifica que las URLs que proporciones no dirijan a páginas que requieran acceso o estén detrás de un muro de pago. En el caso de las bases de datos privadas, asegúrate de crear una URL firmada con los permisos de acceso y la fecha de vencimiento correctos.
+पुष्टि करें कि आपके दिए गए यूआरएल, ऐसे पेजों पर न ले जाते हों जिन्हें ऐक्सेस करने के लिए लॉगिन करने की ज़रूरत हो या जिन पर paywall लागू हो. निजी डेटाबेस के लिए, पक्का करें कि आपने सही ऐक्सेस अनुमतियों और समयसीमा के साथ हस्ताक्षर किया गया यूआरएल बनाया हो.
 
-### Verificaciones de seguridad
+### सुरक्षा जांच
 
-El sistema realiza una verificación de moderación de contenido en la URL para confirmar que cumple con los estándares de seguridad y políticas (p.ej., contenido no excluido y con muro de pago). Si la URL que proporcionaste no pasa esta verificación, recibirás un `url_retrieval_status` de `URL_RETRIEVAL_STATUS_UNSAFE`.
+सिस्टम, यूआरएल पर कॉन्टेंट मॉडरेशन की जांच करता है.इससे यह पुष्टि की जाती है कि यूआरएल, सुरक्षा और नीति के मानकों के मुताबिक है. जैसे, ऑप्ट आउट न किया गया और पेवॉल वाला कॉन्टेंट. अगर आपके दिए गए यूआरएल की जांच नहीं हो पाती है, तो आपको `url_retrieval_status` में से `URL_RETRIEVAL_STATUS_UNSAFE` मिलेगा.
 
-### Tipos de contenido admitidos
+### इस्तेमाल किए जा सकने वाले कॉन्टेंट टाइप
 
-Esta lista de tipos de archivos admitidos y limitaciones se proporciona como guía inicial y no es exhaustiva. El conjunto efectivo de tipos admitidos está sujeto a cambios y puede variar según el modelo específico y la versión del tokenizador que se usen. Los tipos no admitidos generarán un error.
-Además, actualmente, la recuperación de contenido para estos tipos de archivos solo admite URLs de acceso público.
+यहां दिए गए फ़ाइल टाइप और सीमाओं के बारे में शुरुआती जानकारी दी गई है. इसमें पूरी जानकारी शामिल नहीं है. सपोर्ट किए गए टाइप का सेट बदल सकता है. साथ ही, यह इस्तेमाल किए जा रहे मॉडल और टोकनाइज़र के वर्शन के हिसाब से अलग-अलग हो सकता है. काम न करने वाले टाइप की वजह से गड़बड़ी होगी.
+इसके अलावा, फ़िलहाल इन फ़ाइल टाइप के लिए कॉन्टेंट सिर्फ़ ऐसे यूआरएल से वापस पाया जा सकता है जिन्हें सार्वजनिक तौर पर ऐक्सेस किया जा सकता है.
 
-#### Tipos de archivos de texto
+#### टेक्स्ट फ़ाइल के टाइप
 
 - `text/html`
 - `text/css`
@@ -617,19 +619,19 @@ Además, actualmente, la recuperación de contenido para estos tipos de archivos
 - `text/rtf`
 - `text/javascript`
 
-#### Tipos de archivos de aplicación
+#### ऐप्लिकेशन फ़ाइल के टाइप
 
 - `application/json`
 - `application/pdf`
 
-#### Tipos de archivo de imagen
+#### इमेज फ़ाइल के टाइप
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### Tipos de archivo de video
+#### वीडियो फ़ाइल के टाइप
 
 - `video/mp4`
 - `video/mpeg`
@@ -641,35 +643,35 @@ Además, actualmente, la recuperación de contenido para estos tipos de archivos
 - `video/wmv`
 - `video/3gpp`
 
-## Prácticas recomendadas
+## सबसे सही तरीके
 
-- **Elige el método adecuado:** Usa datos intercalados para archivos pequeños y transitorios.
-  Usa la API de File para los archivos más grandes o que se usan con frecuencia. Usa URLs externas para los datos que ya están alojados en línea.
-- **Especifica tipos de MIME:** Siempre proporciona el tipo de MIME correcto para los datos del archivo para garantizar el procesamiento adecuado.
-- **Manejo de errores:** Implementa el manejo de errores en tu código para administrar posibles problemas, como fallas de red, problemas de acceso a archivos o errores de API.
-- **Administra los permisos de GCS:** Cuando uses el registro de GCS, otorga al agente de servicio de la API de Gemini solo el rol `Storage Object Viewer` necesario en los buckets específicos.
-- **Seguridad de las URLs firmadas:** Asegúrate de que las URLs firmadas tengan un tiempo de vencimiento adecuado y permisos limitados.
+- **सही तरीका चुनें:** छोटी और कुछ समय के लिए इस्तेमाल की जाने वाली फ़ाइलों के लिए, इनलाइन डेटा का इस्तेमाल करें.
+  बड़ी या अक्सर इस्तेमाल की जाने वाली फ़ाइलों के लिए, फ़ाइल एपीआई का इस्तेमाल करें. पहले से ऑनलाइन होस्ट किए गए डेटा के लिए, बाहरी यूआरएल का इस्तेमाल करें.
+- **MIME टाइप तय करें:** फ़ाइल के डेटा को सही तरीके से प्रोसेस करने के लिए, हमेशा सही MIME टाइप दें.
+- **गड़बड़ियों को ठीक करना:** अपने कोड में गड़बड़ी ठीक करने की सुविधा लागू करें, ताकि नेटवर्क फ़ेल होने, फ़ाइल ऐक्सेस करने में आने वाली समस्याओं या एपीआई से जुड़ी गड़बड़ियों जैसी संभावित समस्याओं को मैनेज किया जा सके.
+- **GCS की अनुमतियां मैनेज करें:** GCS रजिस्ट्रेशन का इस्तेमाल करते समय, Gemini API सेवा एजेंट को सिर्फ़ ज़रूरी `Storage Object Viewer` भूमिका दें. ऐसा सिर्फ़ चुनिंदा बकेट के लिए करें.
+- **हस्ताक्षर किए गए यूआरएल की सुरक्षा:** पक्का करें कि हस्ताक्षर किए गए यूआरएल की समयसीमा खत्म होने का समय सही हो और उनके लिए अनुमतियां सीमित हों.
 
-## Limitaciones
+## सीमाएं
 
-- Los límites de tamaño de los archivos varían según el método (consulta la [tabla de comparación](#method-comparison)) y el tipo de archivo.
-- Los datos intercalados aumentan el tamaño de la carga útil de la solicitud.
-- Las cargas de la API de File son temporales y vencen después de 48 horas.
-- La recuperación de URLs externas se limita a 100 MB por carga útil y admite tipos de contenido específicos.
-- El registro de Google Cloud Storage requiere una configuración adecuada de IAM y la administración de tokens de OAuth.
+- फ़ाइल के साइज़ की सीमाएं, अपलोड करने के तरीके ([तुलना करने वाली टेबल](#method-comparison) देखें) और फ़ाइल टाइप के हिसाब से अलग-अलग होती हैं.
+- इनलाइन डेटा से, अनुरोध के पेलोड का साइज़ बढ़ जाता है.
+- फ़ाइल एपीआई के ज़रिए अपलोड की गई फ़ाइलें कुछ समय के लिए होती हैं. ये 48 घंटे बाद मिट जाती हैं.
+- बाहरी यूआरएल से डेटा फ़ेच करने की सुविधा, हर पेलोड के लिए 100 एमबी तक सीमित है. साथ ही, यह सुविधा कुछ खास कॉन्टेंट टाइप के साथ काम करती है.
+- Google Cloud Storage के रजिस्ट्रेशन के लिए, IAM को सही तरीके से सेटअप करना और OAuth टोकन को मैनेज करना ज़रूरी है.
 
-## ¿Qué sigue?
+## आगे क्या करना है
 
-- Intenta escribir tus propias instrucciones multimodales con [Google AI Studio](http://aistudio.google.com/?hl=es-419).
-- Para obtener información sobre cómo incluir archivos en tus instrucciones, consulta las guías de [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=es-419), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=es-419) y [Procesamiento de documentos](https://ai.google.dev/gemini-api/docs/document-processing?hl=es-419).
-- Para obtener más orientación sobre el diseño de instrucciones, como el ajuste de los parámetros de muestreo, consulta la guía de [Estrategias de instrucciones](https://ai.google.dev/gemini-api/docs/prompt-strategies?hl=es-419).
+- [Google AI Studio](http://aistudio.google.com/?hl=hi) का इस्तेमाल करके, मल्टीमॉडल प्रॉम्प्ट लिखने की कोशिश करें.
+- अपने प्रॉम्प्ट में फ़ाइलें शामिल करने के बारे में जानकारी पाने के लिए, [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=hi), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=hi), और [Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=hi) से जुड़ी गाइड देखें.
+- प्रॉम्प्ट डिज़ाइन करने के बारे में ज़्यादा जानकारी के लिए, [प्रॉम्प्ट से जुड़ी रणनीतियां](https://ai.google.dev/gemini-api/docs/prompt-strategies?hl=hi) गाइड देखें. इसमें सैंपलिंग पैरामीटर को ट्यून करने के बारे में भी बताया गया है.
 
-Enviar comentarios
+सुझाव भेजें
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última actualización: 2026-06-01 (UTC)
+आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया.
 
-¿Quieres brindar más información?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-01 (UTC)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया."],[],[]]

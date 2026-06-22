@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=id
-fetched_at: 2026-06-15T06:27:43.428326+00:00
-title: "Bermigrasi ke Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=vi
+fetched_at: 2026-06-22T06:28:59.188718+00:00
+title: "Di chuy\u1ec3n sang Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-# Bermigrasi ke Interactions API
+# Di chuyển sang Interactions API
 
-Panduan ini membantu Anda bermigrasi dari `generateContent` API ke Interactions API.
+Hướng dẫn này giúp bạn di chuyển từ API `generateContent` sang Interactions API.
 
-Interactions API adalah antarmuka standar untuk membangun aplikasi dengan Gemini. API ini dioptimalkan untuk alur kerja agen, pengelolaan status sisi server, dan percakapan multi-giliran multimodal yang kompleks, sekaligus tetap mendukung sepenuhnya permintaan satu giliran tanpa status yang sederhana. Meskipun `generateContent` tetap didukung sepenuhnya, sebaiknya gunakan Interactions API untuk semua pengembangan baru.
+Interactions API là giao diện tiêu chuẩn để tạo ứng dụng bằng Gemini. Nền tảng này được tối ưu hoá cho quy trình công việc dựa trên tác nhân, quản lý trạng thái phía máy chủ và các cuộc trò chuyện phức tạp nhiều lượt, nhiều phương thức, đồng thời vẫn hỗ trợ đầy đủ các yêu cầu đơn giản một lượt không trạng thái. Mặc dù `generateContent` vẫn được hỗ trợ đầy đủ, nhưng bạn nên sử dụng Interactions API cho mọi hoạt động phát triển mới.
 
-### Mengapa harus bermigrasi?
+### Tại sao nên di chuyển?
 
-Interactions API menyediakan cara yang lebih terstruktur dan canggih untuk membangun aplikasi dengan Gemini:
+Interactions API cung cấp một cách thức có cấu trúc và mạnh mẽ hơn để tạo ứng dụng bằng Gemini:
 
-- **Pengelolaan histori sisi server**: Alur multi-giliran yang disederhanakan melalui `previous_interaction_id`. Server mengaktifkan status secara default (`store=true`), tetapi Anda dapat memilih perilaku tanpa status dengan menetapkan `store=false`.
-- **Langkah-langkah eksekusi yang dapat diamati**: Langkah-langkah yang diketik memudahkan proses debug alur yang kompleks dan merender UI untuk peristiwa perantara (seperti pemikiran atau widget penelusuran).
-- **Dibuat untuk alur kerja agen**: Dukungan native untuk penggunaan alat multilangkah, orkestrasi, dan alur penalaran yang kompleks melalui langkah-langkahlah eksekusi yang diketik.
-- **Tugas latar belakang dan berjalan lama**: Mendukung operasi yang memakan waktu seperti Deep Think dan Deep Research ke proses latar belakang menggunakan `background=true`.
+- **Quản lý nhật ký phía máy chủ**: Đơn giản hoá các quy trình nhiều lượt thông qua `previous_interaction_id`. Theo mặc định, máy chủ sẽ bật trạng thái (`store=true`), nhưng bạn có thể chọn hành vi không trạng thái bằng cách đặt `store=false`.
+- **Các bước thực thi có thể quan sát**: Các bước được nhập giúp bạn dễ dàng gỡ lỗi các luồng phức tạp và hiển thị giao diện người dùng cho các sự kiện trung gian (chẳng hạn như suy nghĩ hoặc tiện ích tìm kiếm).
+- **Được xây dựng cho quy trình công việc có tác nhân**: Hỗ trợ nguyên bản cho việc sử dụng công cụ nhiều bước, điều phối và quy trình suy luận phức tạp thông qua các bước thực thi được nhập.
+- **Các thao tác dài hạn và thao tác ở chế độ nền**: Hỗ trợ chuyển các thao tác tốn nhiều thời gian như Deep Think và Deep Research sang các quy trình ở chế độ nền bằng cách sử dụng `background=true`.
 
-## Input/output dasar
+## Đầu vào/đầu ra cơ bản
 
-Bagian ini menunjukkan cara memigrasikan permintaan pembuatan teks sederhana.
+Phần này cho biết cách di chuyển một yêu cầu tạo văn bản đơn giản.
 
-### Sebelum (`generateContent`)
+### Trước (`generateContent`)
 
-`generateContent` API tidak memiliki status dan menampilkan respons secara langsung. Struktur respons menggabungkan output dalam daftar `candidates`, yang masing-masing berisi `content` dengan daftar `parts` yang akan diuraikan.
+API `generateContent` không trạng thái và trả về phản hồi trực tiếp. Cấu trúc phản hồi bao bọc đầu ra trong một danh sách `candidates`, mỗi danh sách chứa `content` với một danh sách `parts` để phân tích cú pháp.
 
 ### Python
 
@@ -105,9 +105,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-Interactions API menampilkan resource interaksi yang disimpan dengan linimasa `steps`. Meskipun Anda dapat memeriksa array `steps` secara manual untuk menemukan peristiwa perantara, Google GenAI SDK menyediakan properti praktis langsung pada objek `Interaction` yang ditampilkan untuk mengakses output akhir.
+Interactions API trả về một tài nguyên tương tác đã lưu trữ với dòng thời gian `steps`. Mặc dù bạn có thể kiểm tra mảng `steps` theo cách thủ công để tìm các sự kiện trung gian, nhưng các SDK AI tạo sinh của Google cung cấp các thuộc tính tiện lợi ngay trên đối tượng `Interaction` được trả về để truy cập vào đầu ra cuối cùng.
 
-Properti praktis yang paling umum adalah **`.output_text`** (String), yang secara otomatis mengekstrak dan menggabungkan blok `TextContent` berurutan di akhir respons model. Meskipun berfungsi dengan baik untuk respons sederhana, properti ini tidak menyertakan blok teks sebelumnya yang dipisahkan oleh konten non-teks (seperti pemikiran, gambar, audio, atau panggilan alat). Untuk respons multimodal yang kompleks atau disisipkan, Anda harus melakukan iterasi secara manual atas `steps`.
+Thuộc tính tiện lợi phổ biến nhất là **`.output_text`** (Chuỗi), tự động trích xuất và kết hợp các khối `TextContent` liên tiếp ở cuối phản hồi của mô hình. Mặc dù hoạt động hoàn hảo đối với các câu trả lời đơn giản, nhưng tính năng này không bao gồm các khối văn bản trước đó được phân tách bằng nội dung không phải văn bản (chẳng hạn như suy nghĩ, hình ảnh, âm thanh hoặc lệnh gọi công cụ). Đối với các phản hồi đa phương thức phức tạp hoặc xen kẽ, bạn phải lặp lại `steps` theo cách thủ công.
 
 ### Python
 
@@ -179,17 +179,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Percakapan multi-giliran
+## Cuộc trò chuyện nhiều lượt
 
-Interactions API menyimpan interaksi secara default, sehingga memungkinkan pengelolaan status sisi server untuk percakapan multi-giliran.
+Theo mặc định, Interactions API lưu trữ các lượt tương tác, cho phép quản lý trạng thái phía máy chủ cho các cuộc trò chuyện nhiều lượt.
 
-### Sebelum (`generateContent`)
+### Trước (`generateContent`)
 
-Di `generateContent`, Anda harus mengelola histori percakapan secara manual menggunakan array `contents` atau helper chat sisi klien.
+Trong `generateContent`, bạn phải quản lý nhật ký trò chuyện theo cách thủ công bằng cách sử dụng mảng `contents` hoặc một trình trợ giúp trò chuyện phía máy khách.
 
 ### Python
 
-**Menggunakan helper chat (direkomendasikan)**
+**Sử dụng trợ lý trò chuyện (nên dùng)**
 
 ```
 from google import genai
@@ -204,7 +204,7 @@ response2 = chat.send_message("What is my name?")
 print(response2.text)
 ```
 
-**Mengelola histori secara manual**
+**Quản lý nhật ký theo cách thủ công**
 
 ```
 from google import genai
@@ -232,7 +232,7 @@ print(response.text)
 
 ### JavaScript
 
-**Menggunakan helper chat (direkomendasikan)**
+**Sử dụng trợ lý trò chuyện (nên dùng)**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -247,7 +247,7 @@ response = await chat.sendMessage({ message: 'What is my name?' });
 console.log(response.text);
 ```
 
-**Mengelola histori secara manual**
+**Quản lý nhật ký theo cách thủ công**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -299,9 +299,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Setelah (Interactions API)
+### Sau (Interactions API)
 
-Interactions API mengelola status di server. Anda melanjutkan percakapan dengan mereferensikan `previous_interaction_id`.
+Interactions API quản lý trạng thái trên máy chủ. Bạn tiếp tục cuộc trò chuyện bằng cách tham chiếu đến `previous_interaction_id`.
 
 ### Python
 
@@ -394,13 +394,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Input multimodal
+## Thông tin đầu vào đa phương thức
 
-Kedua API mendukung input multimodal (teks, gambar, video, dll.).
+Cả hai API này đều hỗ trợ dữ liệu đầu vào đa phương thức (văn bản, hình ảnh, video, v.v.).
 
-### Sebelum (`generateContent`)
+### Trước (`generateContent`)
 
-Di `generateContent`, Anda meneruskan daftar `parts` dalam array `contents`. Respons menampilkan output di `parts` kandidat pertama.
+Trong `generateContent`, bạn truyền một danh sách `parts` trong mảng `contents`. Phản hồi trả về đầu ra trong `parts` của đề xuất đầu tiên.
 
 ### Python
 
@@ -463,9 +463,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Setelah (Interactions API)
+### Sau (Interactions API)
 
-Di Interactions API, Anda meneruskan array ke kolom `input`. Anda mengambil konten output dengan menemukan langkah `model_output` di linimasa.
+Trong Interactions API, bạn sẽ truyền một mảng đến trường `input`. Bạn truy xuất nội dung đầu ra bằng cách tìm bước `model_output` trong dòng thời gian.
 
 ### Python
 
@@ -573,13 +573,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Output terstruktur
+## Đầu ra có cấu trúc
 
-Agar model menampilkan JSON yang sesuai dengan skema tertentu, konfigurasi format respons.
+Để mô hình trả về JSON khớp với một giản đồ cụ thể, hãy định cấu hình định dạng phản hồi.
 
-### Sebelum (`generateContent`)
+### Trước (`generateContent`)
 
-Di `generateContent`, Anda mengonfigurasi format output menggunakan kolom `response_format` yang berada di dalam objek `generationConfig`.
+Trong `generateContent`, bạn định cấu hình định dạng đầu ra bằng cách sử dụng trường `response_format` được lồng bên trong đối tượng `generationConfig`.
 
 ### Python
 
@@ -661,9 +661,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Setelah (Interactions API)
+### Sau (Interactions API)
 
-Di Interactions API, kontrol format output dipindahkan ke array `response_format` tingkat atas.
+Trong Interactions API, các chế độ kiểm soát định dạng đầu ra sẽ chuyển sang mảng `response_format` cấp cao nhất.
 
 ### Python
 
@@ -775,13 +775,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Pembuatan multimodal
+## Tạo nội dung đa phương thức
 
-Saat membuat konten dalam modalitas selain teks (seperti gambar atau audio), perbedaan utamanya adalah cara respons menyusun media yang dibuat.
+Khi tạo nội dung ở các phương thức ngoài văn bản (chẳng hạn như hình ảnh hoặc âm thanh), điểm khác biệt chính là cách câu trả lời cấu trúc nội dung nghe nhìn được tạo.
 
-### Sebelum (`generateContent`)
+### Trước (`generateContent`)
 
-Di `generateContent`, respons menampilkan media yang dibuat langsung di `parts` kandidat, biasanya sebagai data base64 di `inlineData`.
+Trong `generateContent`, phản hồi sẽ trả về nội dung nghe nhìn được tạo trực tiếp trong `parts` của đề xuất, thường là dưới dạng dữ liệu base64 trong `inlineData`.
 
 ```
 # Response structure concept
@@ -806,9 +806,9 @@ Di `generateContent`, respons menampilkan media yang dibuat langsung di `parts` 
 }
 ```
 
-### Setelah (Interactions API)
+### Sau (Interactions API)
 
-Di Interactions API, media yang dibuat muncul sebagai item terpisah dalam array `content` dari langkah `model_output` di linimasa, sehingga mempertahankan alur kronologis interaksi.
+Trong Interactions API, nội dung nghe nhìn được tạo sẽ xuất hiện dưới dạng các mục riêng biệt trong mảng `content` của bước `model_output` trong dòng thời gian, duy trì dòng thời gian của lượt tương tác.
 
 ```
 # Response structure concept
@@ -834,15 +834,15 @@ Di Interactions API, media yang dibuat muncul sebagai item terpisah dalam array 
 }
 ```
 
-Hal ini membuat penguraian respons konsisten dengan cara input dan output teks ditangani—semuanya adalah langkah dalam linimasa.
+Điều này giúp quá trình phân tích cú pháp phản hồi nhất quán với cách xử lý dữ liệu đầu vào và đầu ra văn bản – mọi thứ đều là một bước trong dòng thời gian.
 
-## Alat sisi server
+## Công cụ phía máy chủ
 
-Gemini mendukung alat sisi server bawaan seperti grounding Google Penelusuran. Perbedaan utamanya adalah cara respons merepresentasikan eksekusi alat.
+Gemini hỗ trợ các công cụ phía máy chủ tích hợp sẵn như cơ chế liên kết thực tế của Google Tìm kiếm. Điểm khác biệt chính là cách phản hồi thể hiện quá trình thực thi công cụ.
 
-### Sebelum (`generateContent`)
+### Trước (`generateContent`)
 
-Di `generateContent`, alat sisi server sebagian besar bersifat buram. Anda mengaktifkan alat dan mendapatkan jawaban akhir dengan objek `groundingMetadata` terpisah. Yang terpenting, kutipan tidak sebaris; `groundingSupports` menggunakan indeks karakter untuk memetakan kembali segmen teks ke sumber web di `groundingChunks`.
+Trong `generateContent`, các công cụ phía máy chủ phần lớn đều không rõ ràng. Bạn bật công cụ này và nhận được câu trả lời cuối cùng bằng một đối tượng `groundingMetadata` riêng biệt. Điều quan trọng là các trích dẫn không nằm trên cùng một dòng; `groundingSupports` sử dụng chỉ mục ký tự để ánh xạ các đoạn văn bản trở lại nguồn trên web trong `groundingChunks`.
 
 ### Python
 
@@ -950,11 +950,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Setelah (Interactions API)
+### Sau (Interactions API)
 
-Di Interactions API, alat sisi server memberikan transparansi linimasa penuh. API mencatat panggilan dan hasil sebagai `steps` eksekusi terpisah (`google_search_call` dan `google_search_result`), sehingga menampilkan data yang diambil model secara persis.
+Trong Interactions API, các công cụ phía máy chủ cung cấp thông tin minh bạch đầy đủ về dòng thời gian. API này ghi lại lệnh gọi và kết quả dưới dạng `steps` thực thi riêng biệt (`google_search_call` và `google_search_result`), cho biết chính xác dữ liệu mà mô hình đã truy xuất.
 
-Selain itu, API menampilkan kutipan **sebaris**. Daripada memetakan indeks dari objek metadata terpisah, item teks dalam langkah `model_output` berisi array `annotations` sendiri yang ditautkan langsung ke sumber.
+Ngoài ra, API này trả về các trích dẫn **nội tuyến**. Thay vì ánh xạ các chỉ mục từ một đối tượng siêu dữ liệu riêng biệt, mục văn bản trong bước `model_output` chứa mảng `annotations` riêng liên kết trực tiếp đến nguồn.
 
 ### Python
 
@@ -1065,13 +1065,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Panggilan fungsi
+## Gọi hàm
 
-Struktur panggilan dan hasil fungsi juga telah diubah agar sesuai dengan skema Langkah.
+Cấu trúc của các lệnh gọi hàm và kết quả cũng đã thay đổi để phù hợp với giản đồ Steps.
 
-### Sebelum (`generateContent`)
+### Trước (`generateContent`)
 
-Di `generateContent`, respons menampilkan panggilan fungsi dalam kandidat.
+Trong `generateContent`, phản hồi sẽ trả về các lệnh gọi hàm trong số các đề xuất.
 
 ### Python
 
@@ -1205,9 +1205,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### Setelah (Interactions API)
+### Sau (Interactions API)
 
-Panggilan dan hasil alat kini merupakan langkah terpisah dalam linimasa.
+Lệnh gọi công cụ và kết quả hiện là các bước riêng biệt trong dòng thời gian.
 
 ### Python
 
@@ -1392,15 +1392,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## Streaming
+## Phát trực tiếp
 
-Perbedaan utama dalam streaming adalah Interactions API menggunakan endpoint yang sama dengan `"stream": true` di isi permintaan, sedangkan `generateContent` API mengharuskan panggilan endpoint khusus (`:streamGenerateContent`).
+Điểm khác biệt chính trong tính năng phát trực tuyến là Interactions API sử dụng cùng một điểm cuối với `"stream": true` trong phần nội dung yêu cầu, trong khi `generateContent` API yêu cầu gọi một điểm cuối chuyên dụng (`:streamGenerateContent`).
 
-Selain itu, peristiwa streaming kini menggunakan jenis khusus untuk memantau siklus proses interaksi dan melacak langkah-langkah eksekusi di sepanjang linimasa.
+Ngoài ra, các sự kiện truyền phát trực tiếp hiện sử dụng các loại chuyên biệt để theo dõi vòng đời tương tác và theo dõi các bước thực thi dọc theo dòng thời gian.
 
-### Sebelum (`generateContentStream`)
+### Trước (`generateContentStream`)
 
-Dengan `generateContent`, Anda menggunakan aliran potongan respons.
+Với `generateContent`, bạn sẽ sử dụng một luồng các khối phản hồi.
 
 ### Python
 
@@ -1454,9 +1454,9 @@ event: content.stop
 data: {"event_type": "content.stop", "index": 1}
 ```
 
-### Setelah (Interactions API)
+### Sau (Interactions API)
 
-Di Interactions API, streaming menggunakan Server-Sent Events (SSE) dan jenis delta khusus untuk merepresentasikan langkah-langkah eksekusi saat terjadi.
+Trong Interactions API, tính năng truyền phát trực tiếp sử dụng Server-Sent Events (SSE) và các loại delta chuyên biệt để biểu thị các bước thực thi khi chúng xảy ra.
 
 ### Python
 
@@ -1505,7 +1505,7 @@ for await (const event of stream) {
 
 ### REST
 
-# Contoh output aliran SSE
+# Example SSE stream output
 **event: interaction.created
 data: {"type": "interaction.created", "interaction": {"id": "int\_xyz", "status": "created"}}
 event: interaction.in\_progress
@@ -1515,24 +1515,24 @@ data: {"type": "step.start", "index": 0, "step": {"type": "thought"}}
 event: step.delta
 data: {"type": "step.delta", "index": 0, "delta": {"type": "thought", "text": "User wants an explanation."}}
 event: step.stop
-data: {"type": "step.stop", "index": 0, "status": "done"}}
+data: {"type": "step.stop", "index": 0, "status": "done"}
 event: step.start
 data: {"type": "step.start", "index": 1, "step": {"type": "model\_output"}}
 event: step.delta
 data: {"type": "step.delta", "index": 1, "delta": {"type": "text", "text": "Hello"}}
 event: step.stop
-data: {"type": "step.stop", "index": 1, "status": "done"}}
+data: {"type": "step.stop", "index": 1, "status": "done"}
 event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int\_xyz", "status": "completed", "usage": {"prompt\_tokens": 10, "completion\_tokens": 5, "total\_tokens": 15}}}**
 ```
 
-### Alat streaming dan panggilan fungsi
+### Các công cụ phát trực tuyến và lệnh gọi hàm
 
-Perilaku alat dalam aliran telah berubah secara signifikan dari `generateContent` untuk memberikan kontrol dan visibilitas yang lebih terperinci.
+Cách các công cụ hoạt động trong luồng đã thay đổi đáng kể so với `generateContent` để cung cấp khả năng kiểm soát và khả năng hiển thị chi tiết hơn.
 
-#### Sebelum (`generateContent`)
+#### Trước (`generateContent`)
 
-Dengan `generateContent`, panggilan fungsi streaming tiba lengkap dalam satu potongan. Anda tidak dapat melihat argumen yang dibuat secara real-time, sehingga pengendali hanya memeriksa objek `functionCall` yang lengkap.
+Với `generateContent`, các lệnh gọi hàm truyền trực tuyến sẽ hoàn tất trong một khối duy nhất. Bạn không thể thấy các đối số được tạo theo thời gian thực, vì vậy trình xử lý chỉ cần kiểm tra xem có đối tượng `functionCall` hoàn chỉnh hay không.
 
 ### Python
 
@@ -1596,9 +1596,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 {"candidates": [{"content": {"parts": [{"functionCall": {"name": "get_weather", "args": {"location": "Boston, MA"}}}]}}]}
 ```
 
-#### Setelah (Interactions API)
+#### Sau (Interactions API)
 
-Interactions API melakukan streaming argumen panggilan fungsi karakter demi karakter sebagai peristiwa `arguments`. Seluruh siklus proses alat — pemikiran, panggilan, hasil, dan output — berjalan sebagai serangkaian langkah terpisah.
+Interactions API truyền trực tuyến các đối số lệnh gọi hàm từng ký tự dưới dạng các sự kiện `arguments`. Toàn bộ vòng đời của công cụ (suy nghĩ, lệnh gọi, kết quả và đầu ra) diễn ra dưới dạng một loạt các bước riêng biệt.
 
 ### Python
 
@@ -1743,12 +1743,12 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 256, "completion_tokens": 128, "total_tokens": 384}}}
 ```
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Terakhir diperbarui pada 2026-06-01 UTC.
+Cập nhật lần gần đây nhất: 2026-06-19 UTC.
 
-Ada masukan untuk kami?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-01 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-19 UTC."],[],[]]

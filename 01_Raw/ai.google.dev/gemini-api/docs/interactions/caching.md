@@ -1,50 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/caching?hl=fr
-fetched_at: 2026-06-15T06:31:51.436795+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/caching
+fetched_at: 2026-06-22T06:34:38.241102+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+# Context caching
 
-Envoyer des commentaires
+In a typical AI workflow, you might pass the same input tokens over and over to
+a model. The Gemini API offers implicit caching to optimize performance and costs.
 
-# mise en cache du contexte
+## Implicit caching
 
-Dans un workflow d'IA typique, vous pouvez transmettre les mêmes jetons d'entrée à un modèle à plusieurs reprises. L'API Gemini propose une mise en cache implicite pour optimiser les performances et les coûts.
+Implicit caching is enabled by default for all Gemini 2.5 and newer models. We automatically
+pass on cost savings if your request hits caches. There is nothing you need to do
+in order to enable this. The minimum input
+token count for context caching is listed in the following table for each model:
 
-## Mise en cache implicite
-
-La mise en cache implicite est activée par défaut pour tous les modèles Gemini 2.5 et ultérieurs. Nous répercutons automatiquement les économies de coûts si votre requête atteint les caches. Aucune action n'est requise de votre part pour activer cette fonctionnalité. Le nombre minimal de jetons d'entrée pour la mise en cache du contexte est indiqué dans le tableau suivant pour chaque modèle :
-
-| Modèle | Limite minimale de jetons |
+| Model | Min token limit |
 | --- | --- |
-| Gemini 3.5 Flash | 4096 |
-| Preview Gemini 3.1 Pro | 4096 |
-| Gemini 2.0 Flash | 2048 |
-| Gemini 2.5 Pro | 2048 |
+| Gemini 3.5 Flash | 4096 |
+| Gemini 3.1 Pro Preview | 4096 |
+| Gemini 2.5 Flash | 2048 |
+| Gemini 2.5 Pro | 2048 |
 
-Pour augmenter les chances d'un succès de cache implicite :
+To increase the chance of an implicit cache hit:
 
-- Essayez de placer les contenus volumineux et courants au début de votre requête.
-- Essayer d'envoyer des requêtes avec un préfixe similaire en peu de temps
+- Try putting large and common contents at the beginning of your prompt
+- Try to send requests with similar prefix in a short amount of time
 
-Vous pouvez voir le nombre de jetons qui ont été des accès au cache dans le champ `usage_metadata` (Python) ou `usageMetadata` (JavaScript) de l'objet de réponse.
+You can see the number of tokens which were cache hits in the response object's
+`usage_metadata` (Python) or `usageMetadata` (JavaScript) field.
 
-Envoyer des commentaires
+Send feedback
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Dernière mise à jour le 2026/06/02 (UTC).
+Last updated 2026-06-18 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Need to tell us more?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/02 (UTC)."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

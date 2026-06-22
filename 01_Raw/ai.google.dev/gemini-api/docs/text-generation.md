@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=ja
-fetched_at: 2026-06-15T06:30:39.076083+00:00
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-CN
+fetched_at: 2026-06-22T06:34:10.610529+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-フィードバックを送信
+发送反馈
 
-# テキスト生成
+# 文本生成
 
-Gemini API は、テキスト、画像、動画、音声の入力からテキスト出力を生成できます。
+Gemini API 可以根据文本、图片、视频和音频输入生成文本输出。
 
-基本的な例を以下に示します。
+下面是一个基本示例：
 
 ### Python
 
@@ -125,7 +125,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Apps Script
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -160,11 +160,11 @@ function main() {
 }
 ```
 
-## Gemini で考える
+## 与 Gemini 一起思考
 
-Gemini モデルでは、多くの場合、デフォルトで[「思考」](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)が有効になっています。これにより、モデルはリクエストに応答する前に推論を行うことができます。
+Gemini 模型通常默认启用[“思考”](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)功能，以便模型在回答请求之前进行推理。
 
-各モデルは、費用、レイテンシ、インテリジェンスを制御できるさまざまな思考構成をサポートしています。詳細については、[思考ガイド](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#set-budget)をご覧ください。
+每种模型都支持不同的思考配置，让您可以控制费用、延迟时间和智能程度。如需了解详情，请参阅[思维指南](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#set-budget)。
 
 ### Python
 
@@ -296,7 +296,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Apps Script
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -336,9 +336,9 @@ function main() {
 }
 ```
 
-## システム指示とその他の設定
+## 系统指令和其他配置
 
-システム指示を使用して Gemini モデルの動作を制御できます。そのためには、[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを渡します。
+您可以使用系统指令来引导 Gemini 模型的行为。为此，请传递一个 [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerationConfig) 对象。
 
 ### Python
 
@@ -468,7 +468,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Apps Script
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -510,7 +510,7 @@ function main() {
 }
 ```
 
-[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを使用すると、[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) などのデフォルトの生成パラメータをオーバーライドすることもできます。
+您还可以使用 [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerationConfig) 对象替换默认生成参数，例如 [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerationConfig)。
 
 ### Python
 
@@ -635,7 +635,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ge
   }'
 ```
 
-### Apps Script
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -676,11 +676,11 @@ function main() {
 }
 ```
 
-構成可能なパラメータとその説明の完全なリストについては、API リファレンスの [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) をご覧ください。
+如需查看可配置参数及其说明的完整列表，请参阅 API 参考文档中的 [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerationConfig)。
 
-## マルチモーダル入力
+## 多模态输入
 
-Gemini API はマルチモーダル入力をサポートしており、テキストとメディア ファイルを組み合わせることができます。次の例は、画像を提供する方法を示しています。
+Gemini API 支持多模态输入，让您可以将文本与媒体文件相结合。以下示例演示了如何提供图片：
 
 ### Python
 
@@ -841,7 +841,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   -d "@$TEMP_JSON"
 ```
 
-### Apps Script
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -888,13 +888,13 @@ function getImageData(url) {
 }
 ```
 
-画像を提供する別の方法や、より高度な画像処理については、[画像理解ガイド](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)をご覧ください。この API は、[ドキュメント](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)の入力と理解もサポートしています。
+如需了解提供图片的其他方法和更高级的图片处理功能，请参阅我们的[图片理解指南](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn)。该 API 还支持[文档](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn)、[视频](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn)和[音频](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn)输入和理解。
 
-## ストリーミング レスポンス
+## 流式响应
 
-デフォルトでは、モデルは生成プロセス全体が完了した後にのみレスポンスを返します。
+默认情况下，模型仅在整个生成过程完成后才返回回答。
 
-よりスムーズなインタラクションを実現するには、ストリーミングを使用して、[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) インスタンスが生成されるたびに増分で受信します。
+为了获得更流畅的互动体验，请使用流式传输来逐步接收 [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-cn#v1beta.GenerateContentResponse) 实例（在生成时）。
 
 ### Python
 
@@ -1013,7 +1013,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:s
   }'
 ```
 
-### Apps Script
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1048,9 +1048,9 @@ function main() {
 }
 ```
 
-## マルチターンの会話（チャット）
+## 多轮对话（聊天）
 
-SDK には、複数のプロンプトとレスポンスをチャットに収集する機能が用意されています。これにより、会話の履歴を簡単に追跡できます。
+我们的 SDK 提供相应功能，可将多轮提示和回答收集到聊天中，让您轻松跟踪对话历史记录。
 
 ### Python
 
@@ -1210,7 +1210,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ge
   }'
 ```
 
-### Apps Script
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1258,7 +1258,7 @@ function main() {
 }
 ```
 
-ストリーミングはマルチターンの会話にも使用できます。
+流式传输还可用于多轮对话。
 
 ### Python
 
@@ -1429,7 +1429,7 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:st
   }'
 ```
 
-### Apps Script
+### Apps 脚本
 
 ```
 // See https://developers.google.com/apps-script/guides/properties
@@ -1477,23 +1477,23 @@ function main() {
 }
 ```
 
-## プロンプトに関するヒント
+## 撰写提示的技巧！
 
-Gemini を最大限に活用するための提案については、[プロンプト エンジニアリング ガイド](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ja)をご覧ください。
+如需了解如何充分利用 Gemini，请参阅我们的[提示工程指南](https://ai.google.dev/gemini/docs/prompting-strategies?hl=zh-cn)。
 
-## 次のステップ
+## 后续步骤
 
-- [Google AI Studio で Gemini](https://aistudio.google.com?hl=ja) を試す。
-- JSON のようなレスポンスの[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を試す。
-- Gemini の[画像](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)、[ドキュメントの理解機能について説明します。](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)
-- マルチモーダル [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)について学習する。
+- 在 [Google AI Studio 中试用 Gemini](https://aistudio.google.com?hl=zh-cn)。
+- 尝试使用[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)来生成类似 JSON 的回答。
+- 探索 Gemini 的[图片](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn)、[视频](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn)、[音频](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn)和[文档](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn)理解功能。
+- 了解多模态[文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)。
 
-フィードバックを送信
+发送反馈
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最終更新日 2026-06-10 UTC。
+最后更新时间 (UTC)：2026-06-19。
 
-ご意見をお聞かせください
+需要向我们提供更多信息？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-10 UTC。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-19。"],[],[]]

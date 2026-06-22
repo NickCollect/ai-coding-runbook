@@ -1,38 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=zh-CN
-fetched_at: 2026-06-15T06:30:42.773837+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/thinking
+fetched_at: 2026-06-22T06:35:03.847944+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+# Gemini thinking
 
-发送反馈
+The [Gemini 3 and 2.5 series models](https://ai.google.dev/gemini-api/docs/models) use a
+"thinking process" that significantly improves their reasoning and multi-step
+planning abilities, making them highly effective for complex tasks such as
+coding, advanced mathematics, and data analysis.
 
-# Gemini 正在思考
+When you use a thinking model, Gemini reasons internally before responding. The Interactions API surfaces this reasoning via `thought` steps, dedicated steps that appear chronologically alongside function calls, user inputs or model outputs in the `steps` array.
 
-[Gemini 3 和 2.5 系列模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)采用“思考过程”，可显著提升推理和多步规划能力，因此非常适合处理编码、高等数学和数据分析等复杂任务。
+Every thought step contains two fields:
 
-使用思考模型时，Gemini 会在内部进行推理，然后再做出回答。Interactions API 通过 `thought` 步骤（按时间顺序显示在 `steps` 数组中的专用步骤）展示这种推理过程。
-
-每个思考步骤都包含两个字段：
-
-| 字段 | 必填 | 说明 |
+| Field | Required | Description |
 | --- | --- | --- |
-| `signature` | ✅ 是 | 模型内部推理状态的加密表示形式。始终存在，即使模型执行的推理最少也是如此。 |
-| `summary` | ❌ 否 | 总结推理过程的内容（文本和/或图片）数组。可能会为空，具体取决于 [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=zh-cn) 配置、模型是否进行了足够的推理，或者内容类型（例如，图片潜在空间可能没有文本摘要）。 |
+| `signature` | ✅ Yes | An encrypted representation of the model's internal reasoning state. Always present, even when the model performs minimal reasoning. |
+| `summary` | ❌ No | An array of content (text and/or images) summarizing the reasoning. May be empty depending on the [`thinking_summaries`](https://ai.google.dev/api/interactions-api) config, whether the model performed enough reasoning, or the content type (for example, image latents may not have text summaries). |
 
-## 与思考的互动
+## Interactions with thinking
 
-与思考模型互动与任何其他互动请求类似。在 `model` 字段中指定[支持思考的模型](#thinking-levels)之一：
+Initiating an interaction with a thinking model is similar to any other interaction request. Specify one of the [models with thinking support](#thinking-levels) in the `model` field:
 
 ### Python
 
@@ -75,10 +74,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 思考总结
+## Thought summaries
 
-思考总结可提供对模型内部推理过程的洞见。
-默认情况下，仅返回最终输出。您可以使用 `thinking_summaries` 启用思路总结：
+Thought summaries provide insights into the model's internal reasoning process.
+By default, only the final output is returned. You can enable thought summaries
+with `thinking_summaries`:
 
 ### Python
 
@@ -161,23 +161,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-在以下情况下，思想块可能**仅包含签名，而不包含摘要**：
+A thought block may contain **only a signature with no summary** in these cases:
 
-- 简单请求，模型未进行充分推理来生成摘要
-- `thinking_summaries: "none"`，其中明确停用了摘要
-- 某些想法内容类型（例如图片）可能没有文字摘要
+- Simple requests, where the model didn't reason enough to generate a summary
+- `thinking_summaries: "none"`, where summaries are explicitly disabled
+- Certain thought content types, such as images, may not have text summaries
 
-您的代码应始终处理 `summary` 为空或缺失的思考块。
+Your code should always handle thought blocks where `summary` is empty or absent.
 
-## 包含思考过程的流式传输
+## Streaming with thinking
 
-使用流式传输在生成期间接收增量思维摘要。
-系统会使用服务器发送的事件 (SSE) 传送思路块，其中包含两种不同的增量类型：
+Use streaming to receive incremental thought summaries during generation.
+Thought blocks are delivered using Server-Sent Events (SSE) with two distinct
+delta types:
 
-| 增量类型 | 包含 | 发送时间 |
+| Delta type | Contains | When sent |
 | --- | --- | --- |
-| `thought_summary` | 文字或图片摘要内容 | 一个或多个增量（带有增量摘要） |
-| `thought_signature` | 加密签名 | `step.stop`之前的最后一个增量 |
+| `thought_summary` | Text or image summary content | One or more deltas with incremental summary |
+| `thought_signature` | The cryptographic signature | the last delta before `step.stop` |
 
 ### Python
 
@@ -280,7 +281,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-流式回答使用服务器发送的事件 (SSE)，由步骤和事件组成，例如：
+The streaming response uses Server-Sent Events (SSE) and is composed of steps
+and events, for example:
 
 ```
 event: interaction.created
@@ -311,18 +313,19 @@ event: done
 data: [DONE]
 ```
 
-## 控制思维
+## Controlling thinking
 
-Gemini 模型默认采用动态思维，会根据请求的复杂程度自动调整推理力度。您可以使用 `thinking_level` 参数控制此行为。
+Gemini models engage in dynamic thinking by default, automatically adjusting
+the amount of reasoning effort based on the complexity of the request. You can control this behavior using the `thinking_level` parameter.
 
-| 模型 | 默认思维 | 支持的级别 |
+| Model | Default Thinking | Levels Supported |
 | --- | --- | --- |
-| gemini-3.1-pro-preview | 开启（高） | 低、中、高 |
-| gemini-3-flash-preview | 开启（高） | 极低、低、中、高 |
-| gemini-3-pro-preview | 开启（高） | 低、高 |
-| gemini-2.5-pro | 开启 | 低、中、高 |
-| gemini-2.5-flash | 开启 | 低、中、高 |
-| gemini-2.5-flash-lite | 关闭 | 低、中、高 |
+| gemini-3.1-pro-preview | On (high) | low, medium, high |
+| gemini-3-flash-preview | On (high) | minimal, low, medium, high |
+| gemini-3-pro-preview | On (high) | low, high |
+| gemini-2.5-pro | On | low, medium, high |
+| gemini-2.5-flash | On | low, medium, high |
+| gemini-2.5-flash-lite | Off | low, medium, high |
 
 ### Python
 
@@ -374,27 +377,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 思考签名
+## Thought signatures
 
-思考特征是模型内部推理的加密表示形式。它们需要在多轮互动中保持推理的连续性。
+Thought signatures are encrypted representations of the model's internal reasoning. They are required to maintain reasoning continuity across multi-turn interactions.
 
-与 `generateContent` API 相比，Interactions API 可让处理意念签名变得更加简单。
+The Interactions API makes handling thought signatures much simpler than the `generateContent` API.
 
-### 有状态模式（推荐）
+### Stateful mode (Recommended)
 
-默认情况下，当您在有状态模式下使用 Interactions API 时（通过设置 `store: true` 并在后续轮次中传递 `previous_interaction_id`），服务器会自动管理对话状态，包括所有思考块和签名。在此模式下，您无需针对签名执行任何操作。它们完全在服务器端处理。
+By default, when you use the Interactions API in stateful mode (by setting `store: true` and passing the `previous_interaction_id` in subsequent turns), the server automatically manages the conversation state, including all thought blocks and signatures. In this mode, you do not need to do anything regarding signatures. They are handled entirely on the server side.
 
-### 无状态模式
+### Stateless mode
 
-如果您自行管理对话状态（无状态模式），并在每次请求中传递完整的输入和输出历史记录，请执行以下操作：
+If you are managing the conversation state yourself (stateless mode) and passing the full history of inputs and outputs in each request:
 
-- 您**必须**始终完全按照从模型收到的方式重新发送所有 `thought` 代码块。
-- 您**不应**从历史记录中移除或修改思考块，因为它们包含模型继续推理所需的签名。
-- 在会话中切换模型时，您仍应重新发送之前模型的思考块。后端会管理兼容性。
+- You **MUST** always resend all `thought` blocks exactly as they were received from the model.
+- You should **NOT** remove or modify thought blocks from the history, as they contain the signatures required for the model to continue its reasoning.
+- When switching models within a session, you should still resend the previous model's thought blocks. The backend manages compatibility.
 
-## 价格
+## Pricing
 
-开启思考功能后，回答价格是输出 token 和思考 token 的总和。您可以从 `total_thought_tokens` 字段获取生成的思考令牌总数。
+When thinking is turned on, response pricing is the sum of output
+tokens and thinking tokens. You can get the total number of generated thinking
+tokens from the `total_thought_tokens` field.
 
 ### Python
 
@@ -410,32 +415,35 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-思考模型会生成完整的想法，以提高最终回答的质量，然后输出[总结](#summaries)，以便深入了解思考过程。尽管 API 只输出摘要，但价格仍基于模型需要生成的完整思考令牌数。
+Thinking models generate full thoughts to improve the quality of the final
+response, and then output [summaries](#summaries) to provide insight into the
+thought process. Pricing is based on the full thought tokens the model needs to
+generate, despite only the summary being output from the API.
 
-如需详细了解令牌，请参阅[令牌计数](https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=zh-cn)指南。
+You can learn more about tokens in the [Token counting](https://ai.google.dev/gemini-api/docs/interactions/tokens) guide.
 
-## 最佳做法
+## Best practices
 
-遵循以下准则，可高效使用思考模型。
+Use thinking models efficiently by following these guidelines.
 
-- **查看推理过程**：分析思维总结，了解失败原因并改进提示。
-- **控制思考预算**：提示模型减少思考，以节省 token。
-- **简单任务**：只需少量思考即可完成事实检索或分类（例如“DeepMind 是在哪里成立的？”）。
-- **中等任务**：使用默认的思考模式来比较概念或进行创意推理（例如，比较电动汽车和混合动力汽车）。
-- **复杂任务**：使用最大思考量来处理高级编码、数学或多步规划任务（例如，解决 AIME 数学问题）。
+- **Review reasoning**: Analyze thought summaries to understand failures and improve prompts.
+- **Control thinking budget**: Prompt the model to think less for lengthy outputs to save tokens.
+- **Simple tasks**: Use minimal thinking for fact retrieval or classification (e.g., "Where was DeepMind founded?").
+- **Moderate tasks**: Use default thinking for comparing concepts or creative reasoning (e.g., Compare electric and hybrid cars).
+- **Complex tasks**: Use maximum thinking for advanced coding, math, or multi-step planning (e.g., Solve AIME math problems).
 
-## 后续步骤
+## What's next
 
-- [文本生成](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=zh-cn)：基本文本回答
-- [函数调用](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=zh-cn)：连接到工具
-- [Gemini 3 指南](https://ai.google.dev/gemini-api/docs/interactions/gemini-3?hl=zh-cn)：特定于模型的功能
+- [Text generation](https://ai.google.dev/gemini-api/docs/interactions/text-generation): Basic text responses
+- [Function calling](https://ai.google.dev/gemini-api/docs/interactions/function-calling): Connect to tools
+- [Gemini 3 guide](https://ai.google.dev/gemini-api/docs/interactions/gemini-3): Model-specific features
 
-发送反馈
+Send feedback
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-最后更新时间 (UTC)：2026-06-01。
+Last updated 2026-06-18 UTC.
 
-需要向我们提供更多信息？
+Need to tell us more?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-01。"],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=pt-BR
-fetched_at: 2026-06-15T06:31:05.122513+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=vi
+fetched_at: 2026-06-22T06:33:22.263215+00:00
 title: "Veo 3.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Envie comentários
+Gửi ý kiến phản hồi
 
 # Veo 3.1
 
-Um mecanismo cinematográfico de última geração projetado para storytelling criativo sofisticado e produção de vídeo experimental. O Veo 3.1 é ideal para saída 4K de nível profissional, geração de áudio sincronizada nativamente e movimentos complexos de câmera que exigem o mais alto nível de consistência temporal e controle artístico.
+Một công cụ điện ảnh hiện đại được thiết kế để kể chuyện sáng tạo cao cấp và sản xuất video thử nghiệm. Veo 3.1 phù hợp nhất với đầu ra 4K ở cấp độ chuyên nghiệp, tạo âm thanh được đồng bộ hoá tự nhiên và các chuyển động phức tạp của máy quay đòi hỏi mức độ nhất quán cao nhất về thời gian và khả năng kiểm soát nghệ thuật.
 
-[Testar no Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=pt-br)
+[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=vi)
 
-## Documentação
+## Tài liệu
 
-Acesse a página [Geração de vídeo](https://ai.google.dev/gemini-api/docs/video?hl=pt-br) para conferir todos os recursos e funcionalidades.
+Hãy truy cập vào trang [Tạo video](https://ai.google.dev/gemini-api/docs/video?hl=vi) để xem toàn bộ các tính năng và chức năng.
 
 ## veo-3.1-generate-preview
 
-| Propriedade | Descrição |
+| Thuộc tính | Mô tả |
 | --- | --- |
-| Código do modelo id\_card | **API Gemini**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
-| saveTipos de dados aceitos | **Entrada**  Texto, imagem  **Saída**  Vídeo com áudio |
-| Limites de token\_auto | **Entrada de texto**  1.024 tokens  **Vídeo de saída**  1 |
-| calendar\_monthÚltima atualização | Janeiro de 2026 |
+| id\_cardMã mô hình | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh  **Đầu ra**  Video có âm thanh |
+| token\_autoLimits | **Văn bản đầu vào**  1.024 token  **Video đầu ra**  1 |
+| calendar\_monthNội dung cập nhật mới nhất | Tháng 1 năm 2026 |
 
-Envie comentários
+Gửi ý kiến phản hồi
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Última atualização 2026-04-29 UTC.
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-Quer enviar seu feedback?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

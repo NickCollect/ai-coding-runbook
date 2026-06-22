@@ -1,47 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/whats-new-gemini-3.5?hl=th
-fetched_at: 2026-06-15T06:20:33.925248+00:00
-title: "\u0e21\u0e35\u0e2d\u0e30\u0e44\u0e23\u0e43\u0e2b\u0e21\u0e48\u0e43\u0e19 Gemini 3.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions/whats-new-gemini-3.5
+fetched_at: 2026-06-22T06:26:20.009606+00:00
+title: "What's new in Gemini 3.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+# What's new in Gemini 3.5 Flash
 
-ส่งความคิดเห็น
+Gemini 3.5 Flash is **generally available (GA)**, stable, and ready for scaled
+production use. As our most intelligent Flash model, it delivers sustained
+frontier performance in agentic execution, coding, and long-horizon tasks at
+scale.
 
-# มีอะไรใหม่ใน Gemini 3.5 Flash
+This guide contains an overview of improvements, API changes, and migration
+guidance for Gemini 3.5 Flash.
 
-Gemini 3.5 Flash **พร้อมให้บริการแก่ผู้ใช้ทั่วไป (GA)** มีความเสถียร และพร้อมสำหรับการใช้งานจริงในวงกว้าง
-โมเดล Flash ที่ชาญฉลาดที่สุดของเรามอบประสิทธิภาพระดับแนวหน้าอย่างต่อเนื่องในด้านการดำเนินการแบบเป็น Agent การเขียนโค้ด และงานระยะยาวที่ปรับขนาดได้
+## New model
 
-คำแนะนำนี้มีภาพรวมของการปรับปรุง การเปลี่ยนแปลง API และคำแนะนำในการย้ายข้อมูลสำหรับ Gemini 3.5 Flash
-
-## โมเดลใหม่
-
-| รุ่น | รหัสโมเดล | คำอธิบาย |
+| Model | Model ID | Description |
 | --- | --- | --- |
-| Gemini 3.5 Flash | `gemini-3.5-flash` | โมเดลที่ชาญฉลาดที่สุดของเราเพื่อประสิทธิภาพระดับแนวหน้าอย่างต่อเนื่องในงานแบบเป็น Agent และการเขียนโค้ด |
+| Gemini 3.5 Flash | `gemini-3.5-flash` | Our most intelligent model for sustained frontier performance in agentic and coding tasks. |
 
-Gemini 3.5 Flash รองรับหน้าต่างบริบทโทเค็น 1 ล้านโทเค็น, โทเค็นเอาต์พุตสูงสุด 65,000 โทเค็น
-การคิด และชุดเครื่องมือและฟีเจอร์แพลตฟอร์มเดียวกันกับ Gemini 3 Flash
-ขณะนี้ระบบยังไม่รองรับ[การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th)
+Gemini 3.5 Flash supports the 1M token context window, 65k max output tokens,
+thinking, and the same set of tools and platform features as Gemini 3 Flash.
+[Computer Use](https://ai.google.dev/gemini-api/docs/computer-use) is not supported at this moment.
 
-ดูรายละเอียดทั้งหมดได้ที่[ภาพรวมของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=th)
-โปรดดูราคาใน[หน้าราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#gemini-3.5-flash)
+For complete specs, see the [models overview](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash).
+For pricing, see the [pricing page](https://ai.google.dev/gemini-api/docs/pricing#gemini-3.5-flash).
 
-## คู่มือเริ่มใช้งานฉบับย่อ
+## Quickstart
 
-ตัวอย่างทั้งหมดในคู่มือนี้ใช้ Interactions API นอกจากนี้ยังรองรับ
-GenerateContent API ด้วย โดยจะใช้
-ตัวเลือกการกำหนดค่าและคำแนะนำเดียวกัน
+All examples in this guide use the Interactions API. The
+GenerateContent API is also supported; the
+same configuration options and recommendations apply.
 
 ### Python
 
@@ -88,49 +87,57 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## มีอะไรใหม่
+## What's new
 
-- **ประสิทธิภาพระดับแนวหน้าอย่างต่อเนื่อง:** โมเดล Flash ที่ชาญฉลาดที่สุดของเรา
-  ซึ่งได้รับการเพิ่มประสิทธิภาพสำหรับงานด้าน Agentic AI และการเขียนโค้ดที่ปรับขนาดได้
-- **การดำเนินการของ Agent:** การติดตั้งใช้งาน Agent ย่อย การแก้ปัญหา และลูปของ Agent ที่รวดเร็วที่ปรับขนาดได้
-- **การเขียนโค้ด:** วงจรการเขียนโค้ดแบบวนซ้ำ การสำรวจอย่างรวดเร็ว และการสร้างต้นแบบเพื่อ
-  ทดสอบเส้นทางอื่นและสำรวจโซลูชันแบบไดนามิก
-- **ระยะยาว:** เวิร์กโฟลว์แบบหลายขั้นตอนและการใช้เครื่องมือในวงกว้าง
-- **การคงความคิด:** โมเดลจะคงการให้เหตุผลระดับกลางในการสนทนาหลายรอบโดยอัตโนมัติ ไม่จำเป็นต้องเปลี่ยนแปลง API
-- **ระดับความพยายามเริ่มต้นใหม่:** เปลี่ยนความพยายามในการคิดเริ่มต้นจาก `high` เป็น
-  `medium` ดูรายละเอียดได้ที่[ระดับความพยายามเริ่มต้นใหม่](#default-effort-level)
-- **`low`การคิด**ที่ดียิ่งขึ้น:ตอนนี้ `low` ได้รับการปรับปรุงอย่างมากสำหรับโค้ด
-  และงานที่ต้องใช้เอเจนต์ซึ่งมีขั้นตอนน้อยลง โดยมีคุณภาพสูงขึ้น
-  พร้อมเวลาในการตอบสนองและต้นทุนที่ต่ำลง
-- **การเปิดตัว GA:** โมเดลเสถียรสำหรับการใช้งานจริงที่ปรับขนาดได้
+- **Sustained frontier performance:** Our most intelligent Flash model,
+  optimized for agentic and coding tasks at scale.
+- **Agentic execution:** Sub-agent deployment, problem solving, and rapid
+  agentic loops at scale.
+- **Coding:** Iterative coding cycles, rapid exploration, and prototyping to
+  test alternate paths and dynamically explore solutions.
+- **Long horizon:** Multi-step workflows and tool use at scale.
+- **Thought preservation:** The model maintains intermediate reasoning across
+  multi-turn conversations automatically. No API changes needed.
+- **New default effort level:** Default thinking effort changed from `high` to
+  `medium`. See [New default effort level](#default-effort-level) for details.
+- **Improved `low` thinking:** `low` is now significantly improved for code
+  and agentic tasks that require fewer steps, offering strong quality at lower
+  latency and cost.
+- **GA release:** Stable model for scaled production use.
 
-### การเลือกรุ่น Flash ที่เหมาะสม
+### Choosing the right Flash model
 
-Gemini 3.5 Flash เป็นโมเดล Flash ที่ชาญฉลาดและมากความสามารถที่สุดของเรา อย่างไรก็ตาม
-Use Case ที่แตกต่างกันอาจมีข้อกำหนดด้านต้นทุนและเวลาในการตอบสนองที่แตกต่างกัน
+Gemini 3.5 Flash is our most intelligent and capable Flash model. However,
+different use cases may have different cost and latency requirements.
 
-- **Gemini 3.1 Flash-Lite**: สำหรับงานที่มีปริมาณมากและมีต้นทุนต่ำ ซึ่งไม่จำเป็นต้องใช้ความสามารถในการให้เหตุผลขั้นสูงของ 3.5
-  Flash เราขอแนะนำให้ใช้ [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=th)
-  ซึ่งเป็นโมเดลระยะยาวที่เสถียรและได้รับการเพิ่มประสิทธิภาพเพื่อประสิทธิภาพ ดูรายละเอียดเพิ่มเติมได้ใน[คู่มือนักพัฒนา Flash Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=th#developer_guide)
-- **Gemini 3 Flash เวอร์ชันตัวอย่าง**: แม้ว่าเราจะแนะนำให้ย้ายข้อมูลไปยัง 3.5 Flash เพื่อความเสถียรของ GA และการให้เหตุผลที่ดียิ่งขึ้น แต่[Gemini 3 Flash (เวอร์ชันตัวอย่าง)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th)
-  จะยังคงพร้อมให้บริการสำหรับนักพัฒนาซอฟต์แวร์ที่ต้องการทดสอบกับโมเดลเวอร์ชันตัวอย่างต่อไป
+- **Gemini 3.1 Flash-Lite**: For low cost,
+  high-volume tasks that don't require the advanced reasoning depth of 3.5
+  Flash, we recommend using [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite).
+  It is a stable, long-term model optimized for efficiency. See the
+  [Flash-Lite developer guide](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite#developer_guide)
+  for more details.
+- **Gemini 3 Flash Preview**: While we recommend migrating to 3.5 Flash for
+  GA stability and improved reasoning, [Gemini 3 Flash (Preview)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview)
+  remains available for developers who want to continue testing with the
+  preview model.
 
-## การเปลี่ยนแปลงพฤติกรรม
+## Behavioral changes
 
-### ระดับความพยายามเริ่มต้นใหม่: `medium`
+### New default effort level: `medium`
 
-ตอนนี้ความพยายามในการคิดเริ่มต้นคือ **`medium`** ซึ่งเปลี่ยนจาก `high` ในตัวอย่าง Gemini 3 Flash `medium` ให้ผลลัพธ์ที่ดีมากในงานที่หลากหลาย
-ขณะเดียวกันก็รวดเร็วและประหยัดค่าใช้จ่ายมากขึ้น สำหรับปัญหาที่ซับซ้อน `high`
-จะกระตุ้นให้โมเดลคิดอย่างลึกซึ้งยิ่งขึ้น
+The default thinking effort is now **`medium`**, changed from `high` in Gemini 3
+Flash Preview. `medium` yields very good results across a wide range of tasks
+while being faster and more cost-efficient. For complex problems, `high`
+encourages the model to think more deeply.
 
-| ระดับความพยายาม | กรณีที่ควรใช้ |
+| Effort level | When to use |
 | --- | --- |
-| `minimal` | เพิ่มประสิทธิภาพเพื่อความเร็วในการตอบสนอง กรณีการใช้งานคล้ายแชท คำตอบข้อเท็จจริงแบบรวดเร็ว การเรียกใช้เครื่องมือที่ง่ายขึ้น |
-| `low` | งานเขียนโค้ดและงานที่ต้องใช้เอเจนต์ซึ่งต้องมีเวลาในการตอบสนองที่ต่ำและมีขั้นตอนน้อยลง นอกจากนี้ยังเหมาะกับงานวิเคราะห์และงานเขียนที่ต้องใช้ความคิดด้วย |
-| **`medium` (ค่าเริ่มต้น)** | **คุณภาพดีที่สุดสำหรับงานส่วนใหญ่ แนะนำสำหรับโค้ดที่ซับซ้อนและกรณีการใช้งานแบบเอเจนต์** |
-| `high` | เพิ่มความสามารถของโมเดลในการคิดและใช้เครื่องมือให้สูงสุด เหมาะที่สุดสำหรับการให้เหตุผลที่ซับซ้อน คณิตศาสตร์ที่ยาก และงานโค้ดหรือเอเจนต์ที่ยากที่สุด อนุญาตให้แสดงความคิดที่ยาวขึ้นและเรียกใช้ฟังก์ชัน |
+| `minimal` | Optimized for response speed. Chat-like use cases, quick factual answers, simpler tool calls. |
+| `low` | Code and agentic tasks that require lower latency and fewer steps. Also works well for analysis and writing tasks that require some thinking. |
+| **`medium` (default)** | **Best quality for most tasks. Recommended for complex code and agentic use cases.** |
+| `high` | Maximizes the model's ability to think and use tools. Best for complex reasoning, hard math, and the most difficult code or agent tasks. Allows extended thoughts and function calls. |
 
-หากต้องการลบล้างค่าเริ่มต้น ให้ตั้งค่า `thinking_level` ในการกำหนดค่า ดังนี้
+To override the default, set `thinking_level` in your config:
 
 ### Python
 
@@ -180,51 +187,55 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-ตารางต่อไปนี้แสดงระดับการคิดที่โมเดลแต่ละรายการรองรับ
+The following table shows which thinking levels are supported per model:
 
-| ระดับการคิด | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | คำอธิบาย |
+| Thinking Level | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Description |
 | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | สิ่งที่ทำได้ | สิ่งที่ทำไม่ได้ | รองรับ (ค่าเริ่มต้น) | สิ่งที่ทำได้ | ตรงกับการตั้งค่า "ไม่ต้องคิด" สำหรับคำค้นหาส่วนใหญ่ โปรดทราบว่า `minimal` ไม่รับประกันว่าการคิดจะปิดอยู่ โมเดลอาจให้เหตุผลน้อยมากสำหรับงานที่ซับซ้อน |
-| **`low`** | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | ลดเวลาในการตอบสนองและค่าใช้จ่าย |
-| **`medium`** | รองรับ (ค่าเริ่มต้น) | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | การคิดแบบสมดุลสำหรับงานส่วนใหญ่ |
-| **`high`** | รองรับ (ไดนามิก) | รองรับ (ค่าเริ่มต้น, ไดนามิก) | รองรับ (ไดนามิก) | รองรับ (ค่าเริ่มต้น, ไดนามิก) | เพิ่มความลึกในการให้เหตุผลสูงสุด |
+| **`minimal`** | Supported | Not supported | Supported (Default) | Supported | Matches the "no thinking" setting for most queries. Note, `minimal` does not guarantee that thinking is off, the model may reason very minimally for complex tasks. |
+| **`low`** | Supported | Supported | Supported | Supported | Minimizes latency and cost. |
+| **`medium`** | Supported (Default) | Supported | Supported | Supported | Balanced thinking for most tasks. |
+| **`high`** | Supported (Dynamic) | Supported (Default, Dynamic) | Supported (Dynamic) | Supported (Default, Dynamic) | Maximizes reasoning depth. |
 
-### การเก็บรักษาความคิด
+### Thought preservation
 
-โมเดลจะคงการให้เหตุผลระดับกลางในการสนทนาแบบหลายรอบ
-โดยอัตโนมัติ เมื่อมีอยู่ในประวัติการสนทนา บริบทการให้เหตุผล
-จะส่งต่อ ซึ่งช่วยปรับปรุงประสิทธิภาพในงานที่ซับซ้อนแบบหลายขั้นตอน
-เช่น การแก้ไขข้อบกพร่องแบบวนซ้ำและการปรับโครงสร้างโค้ด ไม่ต้องเปลี่ยนแปลง API
+The model maintains intermediate reasoning across multi-turn conversations
+automatically. When present in the conversation history, reasoning context
+carries forward, which improves performance on complex multi-step tasks
+like iterative debugging and code refactoring. No API changes needed:
 
-- **API การโต้ตอบ**: ระบบจะเก็บความคิดเห็นไว้โดยอัตโนมัติอยู่แล้ว ไม่มี
-  การเปลี่ยนแปลงลักษณะการทำงาน
-- **GenerateContent API**: ตั้งแต่ Gemini 3.5 Flash เป็นต้นไป โมเดลจะใช้
-  บริบทการให้เหตุผลจากเทิร์นก่อนหน้าทั้งหมดเมื่อมี[ลายเซ็นความคิดในประวัติการสนทนา หากต้องการเปิดใช้ฟีเจอร์นี้ ให้ส่งประวัติการสนทนาแบบเต็มที่ไม่มีการแก้ไข (รวมถึงลายเซ็นความคิด](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=th)) ใน `contents`
-  SDK จะจัดการเรื่องนี้โดยอัตโนมัติ
+- **Interactions API**: Thoughts are already preserved automatically. No
+  change in behavior.
+- **GenerateContent API**: Beginning with Gemini 3.5 Flash, the model uses
+  reasoning context from all previous turns when thought signatures are
+  present in the conversation history. To enable this, pass the full,
+  unmodified conversation history (including
+  [thought signatures](https://ai.google.dev/gemini-api/docs/thought-signatures)) in `contents`.
+  The SDKs handle this automatically.
 
-## การอัปเดตพารามิเตอร์และแนวทางปฏิบัติแนะนำใน Gemini 3.x
+## Parameter updates and best practices in Gemini 3.x
 
-ข้อกำหนดต่อไปนี้มีผลกับ**โมเดล Gemini 3.x ทั้งหมด** ซึ่งรวมถึง Gemini 3.5 Flash
+The following apply to **all Gemini 3.x models**, including Gemini 3.5 Flash.
 
-- **`temperature`, `top_p`, `top_k`**: เราขอแนะนำอย่างยิ่งว่าไม่ควรเปลี่ยน
-  ค่าเริ่มต้น ความสามารถในการให้เหตุผลของ Gemini 3 ได้รับการเพิ่มประสิทธิภาพสำหรับการ
-  ตั้งค่าเริ่มต้น
-- ให้ใช้ `thinking_level` แทน `thinking_budget`
-- **การจับคู่การตอบกลับการเรียกฟังก์ชัน**: `id`, `name` และจำนวนการตอบกลับ
-  ต้องตรงกับการเรียกก่อนหน้า
-- **การตอบกลับฟังก์ชันมัลติโมดอล**: ใส่เนื้อหามัลติโมดอลไว้ภายใน
-  การตอบกลับฟังก์ชัน ไม่ใช่นอกการตอบกลับ
-- **วิธีการในบรรทัดในการตอบกลับฟังก์ชัน**: ต่อท้ายข้อความการตอบกลับฟังก์ชัน ไม่ใช่เป็นส่วนแยกต่างหาก
-- **ลดการเรียกใช้เครื่องมือที่ไม่จำเป็น**: ใช้ระดับการคิดที่ต่ำลงหรือทดลอง
-  กับคำสั่งของระบบเพื่อลดการเรียกใช้เครื่องมือในเวิร์กโฟลว์ของเอเจนต์
+- **`temperature`, `top_p`, `top_k`**: we strongly recommend not changing the
+  default values. Gemini 3's reasoning capabilities are optimized for the
+  default settings.
+- Use `thinking_level` instead of `thinking_budget`.
+- **Function calling response matching**: `id`, `name`, and response count
+  must match the preceding calls.
+- **Multimodal function responses**: include multimodal content inside the
+  function response, not outside it.
+- **Inline instructions in function responses**: append to the function
+  response text, not as separate parts.
+- **Reduce unnecessary tool calls**: Use lower thinking levels or experiment
+  with system instructions to reduce tool calls in agentic workflows.
 
-ดูวิธีอัปเดตโค้ดได้ในส่วนต่างๆ ด้านล่าง
+See the sections below for how to update your code.
 
-### พารามิเตอร์การสุ่มตัวอย่าง (ไม่แนะนําอีกต่อไป)
+### Sampling parameters (no longer recommended)
 
-เราไม่แนะนำให้ใช้ `temperature`, `top_p` และ `top_k` กับโมเดล Gemini
-3.x ทั้งหมดอีกต่อไป ความสามารถในการให้เหตุผลของ Gemini 3 ได้รับการเพิ่มประสิทธิภาพสำหรับการตั้งค่าเริ่มต้น
-**นำพารามิเตอร์เหล่านี้ออกจากคำขอทั้งหมด**
+`temperature`, `top_p`, and `top_k` are no longer recommended for all Gemini
+3.x models. Gemini 3's reasoning capabilities are optimized for the default
+settings. **Remove these parameters from all requests.**
 
 ```
 # ⚠️ Remove these parameters (not recommended)
@@ -235,12 +246,12 @@ generation_config = {
 }
 ```
 
-เราขอแนะนำให้กำหนดคำสั่งของระบบด้วยกฎที่ชัดเจนสำหรับกรณีการใช้งานเฉพาะของคุณเพื่อให้มั่นใจถึงความแน่นอน
+To ensure determinism, we recommend defining a system instruction with explicit rules for your specific use case.
 
-### `thinking_budget` (ไม่แนะนำอีกต่อไป)
+### `thinking_budget` (no longer recommended)
 
-เราไม่แนะนำให้ใช้พารามิเตอร์ตัวเลขดิบ `thinking_budget` ในโมเดล Gemini 3.x ทั้งหมดอีกต่อไป
-ให้ใช้สตริง Enum `thinking_level` แทน
+The raw numeric `thinking_budget` parameter is no longer recommended across all
+Gemini 3.x models. Use the `thinking_level` string enum instead.
 
 ```
 # ⚠️ Before (not recommended)
@@ -254,19 +265,20 @@ generation_config = {
 }
 ```
 
-ค่าที่ใช้ได้: `minimal`, `low`, `medium` (ค่าเริ่มต้น) และ `high`
+Available values: `minimal`, `low`, `medium` (default), and `high`.
 
-### การเรียกใช้ฟังก์ชัน: การจับคู่คำตอบที่เข้มงวด
+### Function calling: strict response matching
 
-ปัจจุบัน Interactions API จะแสดงข้อผิดพลาดเมื่อการตอบกลับฟังก์ชันไม่ตรงกัน API GenerateContent ยังไม่แสดงข้อผิดพลาด แต่การตอบกลับที่ไม่ตรงกันจะทำให้โมเดล
-แสดงการตอบกลับที่ว่างเปล่าพร้อม `finish_reason: STOP` ในกรณีส่วนใหญ่ โปรด
-ทำตามรูปแบบต่อไปนี้เสมอ
+The Interactions API already errors on mismatched function responses. The
+GenerateContent API does not yet error, but mismatched responses cause the model
+to return empty responses with `finish_reason: STOP` in most cases. Always
+follow these conventions:
 
-| ข้อกำหนด | รายละเอียด |
+| Requirement | Details |
 | --- | --- |
-| รวม `id` | `FunctionResponse` ทุกรายการต้องมี `id` จาก `FunctionCall` ที่เกี่ยวข้อง |
-| แมตช์ที่ `name` | `name` ในการตอบกลับต้องตรงกับ `name` ในการเรียก |
-| จำนวนการจับคู่ที่ตรงกัน | ส่งคืน `FunctionResponse` 1 รายการสำหรับ `FunctionCall` แต่ละรายการที่ได้รับ |
+| Include `id` | Every `FunctionResponse` must include the `id` from the corresponding `FunctionCall` |
+| Match `name` | The `name` in the response must match the `name` in the call |
+| Match counts | Return exactly one `FunctionResponse` for each `FunctionCall` received |
 
 ### Python
 
@@ -322,12 +334,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### คำตอบของฟังก์ชันมัลติโมดัล
+### Multimodal function responses
 
-เรามักเห็นลูกค้าให้รูปภาพนอกการตอบกลับฟังก์ชัน ซึ่งอาจทำให้โมเดลทํางานอย่างไม่คาดคิด (เช่น การรั่วไหลของความคิด) และส่งผลให้เอาต์พุตมีคุณภาพต่ำลง
-โปรดทำตามคำแนะนำใน[เอกสารประกอบเกี่ยวกับ Multimodal Function Responses API](https://ai.google.dev/gemini-api/docs/interactions/function-calling?example=meeting&hl=th#multimodal)
-แทน และรวมเนื้อหามัลติโมดัลไว้ในส่วนการตอบกลับฟังก์ชันที่คุณส่งไปยังโมเดล โมเดลสามารถประมวลผลเนื้อหามัลติโมดัลนี้ในรอบถัดไป
-เพื่อสร้างคำตอบที่รอบรู้มากขึ้น
+We often see clients provide images outside function response. This can lead to
+unexpected model behavior (e.g. thought leakage) and result in lower quality
+outputs. Follow the recommendation in
+[Multimodal Function Responses API docs](https://ai.google.dev/gemini-api/docs/interactions/function-calling?example=meeting#multimodal)
+instead and include multimodal content in the function response parts that you
+send to the model. The model can process this multimodal content in its next
+turn to produce a more informed response.
 
 ### Python
 
@@ -377,11 +392,12 @@ const finalInteraction = await client.interactions.create({
 });
 ```
 
-### คำสั่งในบรรทัดในคำตอบของฟังก์ชัน
+### Inline instructions in function responses
 
-เรามักเห็นลูกค้าให้คำสั่งเพิ่มเติมพร้อมกับการตอบกลับฟังก์ชัน
-เป็น`Parts`ในภายหลัง ซึ่งอาจทำให้โมเดลทำงานโดยไม่คาดคิด (เช่น การรั่วไหลของความคิด) และส่งผลให้เอาต์พุตมีคุณภาพต่ำลง แต่ให้ต่อท้ายคำสั่งเพิ่มเติม
-ไว้ที่ท้ายข้อความคำตอบของฟังก์ชันโดยคั่นด้วยบรรทัดใหม่ 2 บรรทัด
+We often see clients provide additional instructions along with function responses
+as subsequent `Parts`. This can lead to unexpected model behavior (e.g.
+thought leakage) and result in lower quality outputs. Instead, append any extra
+instructions to the end of the function response text separated by two newlines.
 
 ### Python
 
@@ -421,136 +437,165 @@ const finalInteraction = await client.interactions.create({
 });
 ```
 
-### ลดการเรียกใช้เครื่องมือที่ไม่จำเป็น
+### Reducing unnecessary tool calls
 
-หากพบว่ามีการเรียกใช้เครื่องมือมากเกินไป เทคนิค 2 อย่างต่อไปนี้จะช่วยลดการเรียกใช้เครื่องมือได้
+If you experience an overuse of tool calls, two techniques help minimize them:
 
-1. **เริ่มต้นด้วยการลดระดับการคิด** (`medium`, `low` หรือ `minimal`)
-   ระดับการคิดที่สูงขึ้นจะกระตุ้นให้โมเดลใช้เครื่องมือมากขึ้นเพื่อสำรวจและ
-   ยืนยัน ดังนั้นการลดระดับจึงช่วยลดการเรียกใช้เครื่องมือได้
-2. **เพิ่มคำสั่งของระบบ:** หากยังคงมีการใช้งานมากเกินไปหลังจากปรับ
-   ระดับการคิดแล้ว ให้ลองใช้พรอมต์ที่จำกัดการใช้เครื่องมือ เช่น
+1. **Start by reducing the thinking level** (`medium`, `low`, or `minimal`):
+   Higher thinking levels encourage the model to use more tools to explore and
+   verify, so lowering the level can reduce tool calls.
+2. **Add a system instruction:** If overuse persists after adjusting the
+   thinking level, consider a prompt that restricts tool usage. For example:
 
    ```
    You have a limited action budget of <n> tool calls. Use them efficiently.
    ```
 
-## รายการตรวจสอบการย้ายข้อมูล
+## Migration checklist
 
-**เราขอแนะนำให้อัปเดตเป็น `google-genai` SDK v2.0.0 ขึ้นไป** เวอร์ชันนี้มีการเปลี่ยนแปลงที่ทำให้เกิดข้อขัดข้องใน Interactions API ดูรายละเอียดได้ที่[คำแนะนำในการย้ายข้อมูลการเปลี่ยนแปลงที่ไม่รองรับ](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=th)
+**We strongly recommend updating to `google-genai` SDK v2.0.0 or later.** This
+version introduces breaking changes to the Interactions API. See the
+[breaking changes migration guide](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026) for details.
 
-### ย้ายข้อมูลจาก Gemini 3 Flash เวอร์ชันตัวอย่าง
+### Migrate from Gemini 3 Flash Preview
 
-- อัปเดตชื่อโมเดล: `gemini-3-flash-preview` → `gemini-3.5-flash`
-- ตรวจสอบราคา Gemini 3.5 Flash มีราคาสูงกว่า Gemini 3 Flash
-  เวอร์ชันตัวอย่าง หากกรณีการใช้งานของคุณมีความไวต่อต้นทุนสูง ให้พิจารณาย้ายข้อมูลไปใช้
-  [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=th)
-  แทน ดูรายละเอียดได้ที่[หน้าการกำหนดราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th#gemini-3.5-flash)
-- นำ `temperature`, `top_p`, `top_k` ออกจากไฟล์กำหนดค่า (ไม่แนะนำอีกต่อไป)
-- แทนที่ `thinking_budget` ด้วย `thinking_level`
-- เพิ่ม `id` และ `name` ที่ตรงกันลงในชิ้นส่วน `FunctionResponse` ทั้งหมด
-- ทดสอบพรอมต์ เปลี่ยนความพยายามเริ่มต้นจาก `high` → `medium`; ตรวจสอบ
-  คุณภาพ ความเร็ว และต้นทุน
-- ตอนนี้ระบบจะเปิดใช้การรักษาความคิดโดยค่าเริ่มต้น บริบทการให้เหตุผลจะคงอยู่
-  ในแต่ละรอบ ซึ่งจะช่วยปรับปรุงประสิทธิภาพ แต่ก็อาจเพิ่มการใช้โทเค็น
-- ลดการเรียกใช้เครื่องมือที่ไม่จำเป็น: เริ่มด้วยการลดระดับการคิด
-  (`medium`, `low` หรือ `minimal`) เพิ่มคำสั่งของระบบเพื่อจำกัดเครื่องมือ
-  หากยังมีการใช้งานมากเกินไป
-- ขณะนี้ Gemini 3.5
-  Flash ยังไม่รองรับ[การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th) สำหรับปริมาณงานการใช้คอมพิวเตอร์ ให้ใช้ Gemini 3
-  Flash เวอร์ชันตัวอย่างต่อไป
+- Update model name: `gemini-3-flash-preview` → `gemini-3.5-flash`
+- Review pricing. Gemini 3.5 Flash is more expensive than Gemini 3 Flash
+  Preview. If your use case is highly cost-sensitive, consider migrating to
+  [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite)
+  instead. See the [pricing page](https://ai.google.dev/gemini-api/docs/pricing#gemini-3.5-flash) for details.
+- Remove `temperature`, `top_p`, `top_k` from your config (no longer
+  recommended).
+- Replace `thinking_budget` with `thinking_level`.
+- Add `id` and matching `name` to all `FunctionResponse` parts.
+- Test your prompts. Default effort changed from `high` → `medium`; verify
+  quality, speed, and cost.
+- Thought preservation is now on by default. Reasoning context carries forward
+  across turns, which improves performance but may increase token usage.
+- Reduce unnecessary tool calls: start by reducing the thinking level
+  (`medium`, `low`, or `minimal`); add a system instruction to constrain tool
+  usage if overuse persists.
+- [Computer Use](https://ai.google.dev/gemini-api/docs/computer-use) is not supported in Gemini 3.5
+  Flash at this moment. For Computer Use workloads, continue using Gemini 3
+  Flash Preview.
 
-### ย้ายข้อมูลจาก Gemini 2.5
+### Migrate from Gemini 2.5
 
-ทั้งหมดที่กล่าวมา รวมถึง
+All of the above, plus:
 
-- ลดความซับซ้อนของพรอมต์ หากคุณใช้การออกแบบพรอมต์แบบลูกโซ่ความคิดเพื่อบังคับการให้เหตุผล ให้ลองใช้ `thinking_level: "medium"` หรือ `"high"` กับพรอมต์ที่เรียบง่ายกว่าแทน
-- ทดสอบภาระงาน PDF และสื่อ หากคุณอาศัยลักษณะการทำงานที่เฉพาะเจาะจงสำหรับการแยกวิเคราะห์เอกสารที่มีข้อมูลหนาแน่น ให้ทดสอบ`media_resolution_high`การตั้งค่าเพื่อให้มั่นใจว่าความแม่นยำจะยังคงอยู่ การย้ายข้อมูลไปยังค่าเริ่มต้นของ Gemini 3 อาจเพิ่มการใช้โทเค็นสำหรับ PDF แต่ลดการใช้โทเค็นสำหรับวิดีโอ หากคำขอเกินหน้าต่างบริบท ให้ลด`media_resolution`อย่างชัดเจน ดูรายละเอียดได้ในเอกสาร[ความละเอียดของสื่อ](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=th)
-- ใช้ประโยชน์จาก[การใช้เครื่องมือร่วมกัน](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=th)
-  คุณใช้ Google Search, บริบท URL, การเรียกใช้โค้ด และฟังก์ชันที่กำหนดเองได้
-  ในคำขอเดียวกัน
-- หากใช้การตอบกลับฟังก์ชันแบบมัลติโมดัล ให้ย้ายเนื้อหาแบบมัลติโมดัลไปไว้ใน
-  ส่วนการตอบกลับฟังก์ชัน ไม่ใช่ข้างๆ
-- หากใช้คำสั่งในบรรทัดกับคำตอบของฟังก์ชัน ให้ต่อท้ายคำสั่งเหล่านั้นกับข้อความคำตอบของฟังก์ชันโดยคั่นด้วยบรรทัดใหม่ 2 บรรทัด ไม่ใช่เป็นส่วนแยกต่างหาก
-- Gemini 3.x ไม่รองรับการแบ่งกลุ่มรูปภาพ สำหรับเวิร์กโหลดการแบ่งกลุ่ม ให้ใช้ Gemini 2.5 Flash ต่อโดยปิดการคิด หรือใช้ [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=th)
-- นำ `candidate_count` ออกจากการกำหนดค่า (ไม่รองรับใน Gemini 3.x)
+- Simplify prompts. If you used chain-of-thought prompt engineering to force
+  reasoning, try `thinking_level: "medium"` or `"high"` with simpler prompts
+  instead.
+- Test PDF and media workloads. If you relied on specific behavior for dense
+  document parsing, test the `media_resolution_high` setting to ensure
+  continued accuracy. Migrating to Gemini 3 defaults may also increase token
+  usage for PDFs but decrease it for video; if requests exceed the context
+  window, explicitly reduce the `media_resolution`. See the
+  [media resolution](https://ai.google.dev/gemini-api/docs/interactions/media-resolution) docs for
+  details.
+- Leverage [combined tool use](https://ai.google.dev/gemini-api/docs/interactions/tool-combination).
+  Google Search, URL context, code execution, and custom functions can be used
+  in the same request.
+- If using multimodal function responses, move multimodal content inside
+  function response parts, not alongside them.
+- If using inline instructions with function responses, append them to the
+  function response text separated by two newlines, not as separate parts.
+- Image segmentation is not supported in Gemini 3.x. For segmentation
+  workloads, continue using Gemini 2.5 Flash with thinking off, or
+  [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview).
+- Remove `candidate_count` from your config (not supported in Gemini 3.x)
 
-## ฟีเจอร์ของตระกูล Gemini 3
+## Gemini 3 family features
 
-Gemini 3.5 Flash สืบทอดความสามารถทั้งหมดของตระกูล Gemini 3 ยกเว้นการใช้คอมพิวเตอร์
-ฟีเจอร์ที่เปิดตัวใน Gemini 3 ซึ่งจะยังคงมีอยู่
+Gemini 3.5 Flash inherits all Gemini 3 family capabilities except Computer Use.
+Features introduced in Gemini 3 that carry forward:
 
-- [**การคิด**](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=th)**:** บริบทการให้เหตุผลที่เข้ารหัสจะยังคงอยู่ในการเรียก API อัตโนมัติใน Interactions
-  API และโดยนัยใน GenerateContent
-- [**เอาต์พุตที่มีโครงสร้างพร้อมเครื่องมือ**](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=th)**:** รวมโหมด JSON กับ
-  เครื่องมือในตัว (การค้นหา, บริบท URL, การดำเนินการโค้ด, การเรียกใช้ฟังก์ชัน)
-- [**การตอบกลับฟังก์ชันหลายรูปแบบ**](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=th#multimodal)**:** แสดง
-  รูปภาพ เสียง และสื่ออื่นๆ ในผลการเรียกใช้ฟังก์ชัน
-- [**การดำเนินการโค้ดด้วยรูปภาพ**](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=th#images)**:** ดำเนินการโค้ดที่
-  ประมวลผลและสร้างรูปภาพ
-- [**การใช้เครื่องมือร่วมกัน**](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=th)**:** ใช้เครื่องมือในตัวและการเรียกใช้ฟังก์ชันที่กำหนดเองในคำขอเดียวกัน
-- [**ความละเอียดของสื่อ**](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=th)**:**
-  ควบคุมการจัดสรรโทเค็นสำหรับอินพุตรูปภาพ วิดีโอ และ PDF ได้อย่างละเอียด
-  โมเดล Gemini 3 รองรับการตั้งค่าความละเอียดต่อรายการเนื้อหา (`low`,
-  `medium`, `high`, `ultra_high`) สำหรับพรอมต์ที่มีความเที่ยงตรงแบบผสม
-- [**ลายเซ็นความคิด**](https://ai.google.dev/gemini-api/docs/interactions/thought-signatures?hl=th)**:**
-  การแสดงการให้เหตุผลภายในของโมเดลที่เข้ารหัส ต้องใช้สำหรับการ
-  เรียกใช้ฟังก์ชันแบบหลายรอบในโหมดแบบไม่เก็บสถานะ โดยจะได้รับการจัดการโดยอัตโนมัติจาก
-  Interactions API และ SDK อย่างเป็นทางการ
+- [**Thinking**](https://ai.google.dev/gemini-api/docs/interactions/thinking)**:** Encrypted
+  reasoning context preserved across API calls. Automatic in the Interactions
+  API; implicit in GenerateContent.
+- [**Structured outputs with tools**](https://ai.google.dev/gemini-api/docs/interactions/structured-output)**:** Combine JSON mode with
+  built-in tools (Search, URL context, code execution, function calling).
+- [**Multimodal function responses**](https://ai.google.dev/gemini-api/docs/interactions/function-calling#multimodal)**:** Return
+  images, audio, and other media in function call results.
+- [**Code execution with images**](https://ai.google.dev/gemini-api/docs/interactions/code-execution#images)**:** Execute code that
+  processes and generates images.
+- [**Combined tool use**](https://ai.google.dev/gemini-api/docs/interactions/tool-combination)**:** Use built-in tools and
+  custom function calling in the same request.
+- [**Media resolution**](https://ai.google.dev/gemini-api/docs/interactions/media-resolution)**:**
+  Fine-grained control over token allocation for image, video, and PDF inputs.
+  Gemini 3 models support per-content-item resolution settings (`low`,
+  `medium`, `high`, `ultra_high`) for mixed-fidelity prompts.
+- [**Thought signatures**](https://ai.google.dev/gemini-api/docs/interactions/thought-signatures)**:**
+  Encrypted representations of the model's internal reasoning. Required for
+  multi-turn function calling in stateless mode; managed automatically by the
+  Interactions API and the official SDKs.
 
-## แนวทางปฏิบัติแนะนำในการเขียนพรอมต์
+## Prompting best practices
 
-โมเดล Gemini 3.x เป็นโมเดลการให้เหตุผล ซึ่งจะเปลี่ยนวิธีที่คุณควรใช้พรอมต์
+Gemini 3.x models are reasoning models, which changes how you should prompt.
 
-- **คำสั่งที่แม่นยำ:** ใช้คำสั่งที่กระชับ Gemini 3.x ตอบสนองต่อคำสั่งที่ชัดเจนและตรงไปตรงมาได้ดีที่สุด
-  เทคนิควิศวกรรมพรอมต์ที่ซับซ้อนหรือมีรายละเอียดมากเกินไปซึ่งออกแบบมา
-  สำหรับโมเดลรุ่นเก่าอาจทำให้โมเดลวิเคราะห์มากเกินไป
-- **ความละเอียดของเอาต์พุต:** โดยค่าเริ่มต้น Gemini 3 และ 3.1 จะมีความละเอียดน้อยกว่าและชอบ
-  คำตอบที่ตรงไปตรงมาและมีประสิทธิภาพ หาก Use Case ของคุณต้องใช้ภาษาที่เป็นกันเอง
-  ให้ชี้นำโมเดลอย่างชัดเจนในพรอมต์ (เช่น "อธิบายสิ่งนี้ในฐานะ
-  ผู้ช่วยที่เป็นมิตรและช่างพูด")
-- **การจัดการบริบท:** เมื่อทำงานกับชุดข้อมูลขนาดใหญ่ (เช่น หนังสือทั้งเล่ม ฐานโค้ด หรือวิดีโอยาว) ให้วางคำสั่งหรือคำถามที่เฉพาะเจาะจงไว้ท้ายพรอมต์หลังจากบริบทของข้อมูล ยึดตรรกะของโมเดลโดยเริ่มคำถามด้วยวลี เช่น "จากข้อมูลก่อนหน้า..."
+- **Precise instructions:** Be concise. Gemini 3.x responds best to direct,
+  clear instructions. Verbose or complex prompt engineering techniques designed
+  for older models may cause the model to over-analyze.
+- **Output verbosity:** By default, Gemini 3 and 3.1 is less verbose and prefers
+  direct, efficient answers. If your use case requires a conversational tone,
+  steer the model explicitly in your prompt (for example, "Explain this as a
+  friendly, talkative assistant").
+- **Context management:** When working with large datasets (such as entire
+  books, codebases, or long videos), place your specific instructions or
+  questions at the end of the prompt, after the data context. Anchor the
+  model's reasoning by starting your question with a phrase like, "Based on
+  the preceding information...".
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับกลยุทธ์การออกแบบพรอมต์ได้ใน[คู่มือวิศวกรรมพรอมต์ (Prompt Engineering)](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th)
+Learn more about prompt design strategies in the
+[prompt engineering guide](https://ai.google.dev/gemini-api/docs/prompting-strategies).
 
-## ข้อจำกัด
+## Limitations
 
-- Gemini 3.x ไม่รองรับการแบ่งกลุ่มรูปภาพ สำหรับเวิร์กโหลดการแบ่งกลุ่ม ให้ใช้ Gemini 2.5 Flash ต่อโดยปิดการคิด หรือใช้ [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=th)
+- Image segmentation is not supported in Gemini 3.x. For segmentation
+  workloads, continue using Gemini 2.5 Flash with thinking off, or
+  [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview).
 
-## คำถามที่พบบ่อย
+## FAQ
 
-1. **วันที่สิ้นสุดความรู้ของ Gemini 3.5 Flash คือเมื่อใด** Gemini 3.5 Flash
-   มีวันที่สิ้นสุดความรู้คือเดือนมกราคม 2025 หากต้องการข้อมูลล่าสุด ให้ใช้เครื่องมือ[การอ้างอิงการค้นหา](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=th)
-2. **ขีดจำกัดของหน้าต่างบริบทคืออะไร** Gemini 3.5 Flash รองรับหน้าต่างบริบทของอินพุตขนาด 1 ล้านโทเค็นและโทเค็นเอาต์พุตสูงสุด 65,000 โทเค็น
-3. **โค้ด `thinking_budget` เก่าของฉันจะยังใช้งานได้ไหม** ได้ `thinking_budget`
-   ยังคงรองรับการทำงานร่วมกับเวอร์ชันก่อนหน้า แต่เราขอแนะนำให้ย้ายข้อมูลไปยัง
-   `thinking_level` เพื่อให้ได้ประสิทธิภาพที่คาดการณ์ได้มากขึ้น แต่อย่าใช้ทั้ง 2 อย่างในคำขอเดียวกัน
-4. **Gemini 3.5 Flash รองรับ Batch API ไหม** ได้ ดูรายละเอียดได้ที่คู่มือ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)
-5. **ระบบรองรับการแคชบริบทไหม** ได้ ระบบรองรับ[การแคชบริบท](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=th)
-6. **เครื่องมือใดบ้างที่รองรับ** Gemini 3.5 Flash รองรับ
-   [Google Search](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=th)
-   [การอ้างอิงจาก Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding?hl=th)
-   [การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=th)
-   [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=th)
-   [บริบท URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=th) และ
-   [การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=th)มาตรฐาน
-   รวมถึง
-   [การใช้เครื่องมือร่วมกัน](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=th)
-   [การใช้คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/interactions/computer-use?hl=th)**ไม่**รองรับ
-   ใน Gemini 3.5 Flash
+1. **What is the knowledge cutoff for Gemini 3.5 Flash?** Gemini 3.5 Flash
+   has a knowledge cutoff of January 2025. For more recent information, use the
+   [Search Grounding](https://ai.google.dev/gemini-api/docs/interactions/google-search) tool.
+2. **What are the context window limits?** Gemini 3.5 Flash supports a 1
+   million token input context window and up to 65k output tokens.
+3. **Will my old `thinking_budget` code still work?** Yes, `thinking_budget`
+   is still supported for backward compatibility, but we recommend migrating to
+   `thinking_level` for more predictable performance. Don't use both in the
+   same request.
+4. **Does Gemini 3.5 Flash support the Batch API?** Yes. See the
+   [Batch API](https://ai.google.dev/gemini-api/docs/batch-api) guide for details.
+5. **Is Context Caching supported?** Yes,
+   [Context Caching](https://ai.google.dev/gemini-api/docs/interactions/caching) is supported.
+6. **Which tools are supported?** Gemini 3.5 Flash supports
+   [Google Search](https://ai.google.dev/gemini-api/docs/interactions/google-search),
+   [Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/interactions/maps-grounding),
+   [File Search](https://ai.google.dev/gemini-api/docs/interactions/file-search),
+   [Code Execution](https://ai.google.dev/gemini-api/docs/interactions/code-execution),
+   [URL Context](https://ai.google.dev/gemini-api/docs/interactions/url-context), and
+   standard [Function Calling](https://ai.google.dev/gemini-api/docs/interactions/function-calling),
+   including
+   [combined tool use](https://ai.google.dev/gemini-api/docs/interactions/tool-combination).
+   [Computer Use](https://ai.google.dev/gemini-api/docs/interactions/computer-use) is **not**
+   supported in Gemini 3.5 Flash.
 
-## ขั้นตอนถัดไป
+## Next steps
 
-- ดูข้อมูลเพิ่มเติมเกี่ยวกับกลยุทธ์การออกแบบพรอมต์ได้ใน[คู่มือวิศวกรรมพรอมต์ (Prompt Engineering)](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th)
-- เริ่มต้นใช้งาน [Gemini 3 Cookbook](https://github.com/google-gemini/cookbook)
-- ดูข้อมูลเกี่ยวกับ[การเพิ่มประสิทธิภาพและการอนุมานของ Gemini API](https://ai.google.dev/gemini-api/docs/optimization?hl=th)
+- Learn more about prompt design strategies in the
+  [prompt engineering guide](https://ai.google.dev/gemini-api/docs/prompting-strategies).
+- Get started with the [Gemini 3 Cookbook](https://github.com/google-gemini/cookbook)
+- Learn about [Gemini API optimization and inference](https://ai.google.dev/gemini-api/docs/optimization)
 
-ส่งความคิดเห็น
+Send feedback
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-อัปเดตล่าสุด 2026-06-04 UTC
+Last updated 2026-06-18 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Need to tell us more?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-04 UTC"],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

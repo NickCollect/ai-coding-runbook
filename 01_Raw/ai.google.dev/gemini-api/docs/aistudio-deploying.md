@@ -1,86 +1,81 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ar
-fetched_at: 2026-06-15T06:32:51.204125+00:00
-title: "\u0627\u0644\u0646\u0634\u0631 \u0645\u0646 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=tr
+fetched_at: 2026-06-22T06:34:38.367566+00:00
+title: "Google AI Studio'dan da\u011f\u0131tma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-# النشر من Google AI Studio
+# Google AI Studio'dan dağıtma
 
-يتيح لك Google AI Studio نشر تطبيقاتك المتكاملة مباشرةً من &quot;وضع الإنشاء&quot;. ويوفّر ذلك مسارًا سريعًا من النموذج الأوّلي إلى بيئة إنتاج مُدارة وقابلة للتوسيع.
+Google AI Studio, tam yığın uygulamalarınızı doğrudan Oluşturma Modu'ndan dağıtmanıza olanak tanır. Bu sayede prototipten yönetilen ve ölçeklenebilir bir üretim ortamına hızlı bir şekilde geçebilirsiniz.
 
-## خيارات النشر
+## Dağıtım seçenekleri
 
-لتنفيذ تطبيقك من &quot;وضع الإنشاء&quot; في AI Studio، تعتمد المتطلبات على الفئة التي تستخدمها:
+Uygulamanızı AI Studio'nun Oluşturma Modu'ndan dağıtmak için kullandığınız katmana bağlı olarak aşağıdaki şartları karşılamanız gerekir:
 
-- [**فئة Google Cloud Starter**](https://docs.cloud.google.com/docs/starter-tier?hl=ar):
-  تتيح لك نشر ما يصل إلى تطبيقَين كاملَي الميزات بدون الحاجة إلى إعداد مشروع على السحابة الإلكترونية أو حساب فوترة على Google Cloud.
-- **عملية النشر العادية**: تتطلّب مشروعًا على Google Cloud مرتبطًا بحسابك على AI Studio وتفعيل الفوترة في هذا المشروع.
+- [**Google Cloud Başlangıç Katmanı**](https://docs.cloud.google.com/docs/starter-tier?hl=tr):
+  Google Cloud projesi veya faturalandırma hesabı oluşturmadan 2 tam yığın uygulaması yayınlamanıza olanak tanır.
+- **Standart dağıtım**: AI Studio hesabınıza bağlı bir Google Cloud projesi ve bu projede faturalandırmanın etkinleştirilmesi gerekir.
 
-## لمحة عن "المستوى المبتدئ"
+## Başlangıç Seviyesi hakkında
 
-توفّر &quot;فئة المبتدئين&quot; في Google Cloud مسارًا مبسطًا لنشر التطبيقات على Google Cloud مباشرةً من Google AI Studio بدون الحاجة إلى إعداد بيئة Google Cloud كاملة أو حساب فوترة.
+Google Cloud Başlangıç Katmanı, tam bir Google Cloud ortamı veya faturalandırma hesabı oluşturmadan uygulamaları doğrudan Google AI Studio'dan Google Cloud'a dağıtmak için kolay bir yol sunar.
 
-يؤدي كل عملية نشر في Google AI Studio إلى إنشاء خدمة مقابلة في Cloud Run. تنطبق القيود التالية على الخدمات التي يتم نشرها في Google AI Studio باستخدام "حزمة المبتدئين":
+Her Google AI Studio dağıtımı, Cloud Run'da karşılık gelen bir hizmet oluşturur. Başlangıç Katmanı ile Google AI Studio'da dağıtılan hizmetler için aşağıdaki sınırlamalar geçerlidir:
 
-- يمكنك نشر ما يصل إلى خدمتَين.
-- يتم نشر خدماتك في [منطقة واحدة من مناطق Cloud Run](https://docs.cloud.google.com/run/docs/locations?hl=ar).
+- En fazla iki hizmet dağıtabilirsiniz.
+- Hizmetleriniz [tek bir Cloud Run bölgesinde](https://docs.cloud.google.com/run/docs/locations?hl=tr) dağıtılmış olmalıdır.
 
-## خطوات نشر المستوى المبتدئ
+## Başlangıç Seviyesi dağıtım adımları
 
-بعد تصميم تطبيقك في "وضع الإنشاء"، يمكنك نشره باستخدام "الفئة المبتدئة" باتّباع الخطوات التالية:
+Uygulamanızı Oluşturma modunda tasarladıktan sonra Başlangıç Katmanı ile dağıtın:
 
-1. انقر على زر **نشر** في أعلى يسار الصفحة.
-2. انقر على **البدء**.
-3. انقر على **نشر التطبيق**.
+1. Sağ üst köşedeki **Yayınla** düğmesini tıklayın.
+2. **Get Started**'ı (Başlayın) tıklayın.
+3. **Uygulamayı Yayınla**'yı tıklayın.
 
-بعد اكتمال عملية النشر، يوفّر AI Studio عنوان URL في Cloud Run يمكنك من خلاله الوصول إلى تطبيقك المباشر.
+Dağıtım tamamlandıktan sonra AI Studio, canlı uygulamanıza erişebileceğiniz bir Cloud Run URL'si sağlar.
 
-## النشر العادي
+## Standart dağıtım
 
-مع تطوّر تطبيقاتك، قد تحتاج إلى إمكانات تتجاوز تلك المتاحة في "الفئة المبتدئة"، مثل حصص أكبر أو موارد حوسبة إضافية أو منتجات أخرى من Google Cloud غير متوفّرة في "الفئة المبتدئة". للاستفادة من هذه الإمكانات، يمكنك تحويل مشروعك في "فئة المبتدئين" المُدارة بالكامل إلى مشروع عادي على Google Cloud.
+Uygulamalarınız geliştikçe Başlangıç Katmanı'nın ötesinde özelliklere (ör. daha yüksek kotalar, daha fazla işlem kaynağı veya Başlangıç Katmanı'nda bulunmayan diğer Google Cloud ürünleri) ihtiyacınız olabilir. Bu özelliklerden yararlanmak için tamamen yönetilen Başlangıç Katmanı projenizi standart bir Google Cloud projesine dönüştürebilirsiniz.
 
-يضمن ذلك إمكانية التوسّع بسلاسة بدون فقدان مستوى تقدّمك. اتّبِع الخطوات التالية من أجل
-[إنشاء حساب فوترة على Cloud](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=ar#create-new-billing-account)
-والموافقة رسميًا على بنود خدمة Google Cloud العادية
-و[الترقية إلى مشروع Google Cloud عادي](https://docs.cloud.google.com/docs/starter-tier?hl=ar#upgradee).
-لمزيد من المعلومات، يُرجى الاطّلاع على
-[إعداد الحسابات المدفوعة](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=ar#paid-setup).
+Bu sayede, ilerlemenizi kaybetmeden sorunsuz bir şekilde ölçeklendirme yapabilirsiniz. [Cloud Faturalandırma Hesabı oluşturma](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=tr#create-new-billing-account), standart Google Cloud Hizmet Şartları'nı resmen kabul etme ve [standart Google Cloud projesine yükseltme](https://docs.cloud.google.com/docs/starter-tier?hl=tr#upgradee) adımlarını uygulayın.
+Daha fazla bilgi için [Ücretli hesaplar için kurulum](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=tr#paid-setup) başlıklı makaleyi inceleyin.
 
-لمزيد من المعلومات عن فئات الفوترة، يُرجى الاطّلاع على [الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar).
+Faturalandırma katmanları hakkında daha fazla bilgi edinmek için [Faturalandırma](https://ai.google.dev/gemini-api/docs/billing?hl=tr) başlıklı makaleyi inceleyin.
 
-## حذف طلبك
+## Başvurunuzu silme
 
-إذا لم تعُد بحاجة إلى تطبيقك، يمكنك حذفه في Google AI Studio باتّباع التعليمات التالية:
+Uygulamanıza artık ihtiyacınız yoksa aşağıdaki talimatları uygulayarak Google AI Studio'da silebilirsiniz:
 
-1. في Google AI Studio، انتقِل إلى
-   [صفحة "التطبيقات"](https://aistudio.google.com/app/apps?hl=ar).
-2. في القائمة اليمنى، انقر على **التطبيقات**.
-3. ضع المؤشر فوق التطبيق الذي تريد حذفه.
-4. انقر على رمز سلة المهملات على الجانب الأيسر من الصف لحذف التطبيق.
+1. Google AI Studio'da [Uygulamalar sayfanıza](https://aistudio.google.com/app/apps?hl=tr) gidin.
+2. Sol menüden **Uygulamalar**'ı seçin.
+3. İşaretçiyi silmek istediğiniz uygulamanın üzerine getirin.
+4. Uygulamayı silmek için satırın sağ tarafındaki çöp kutusu simgesini tıklayın.
 
-## الخطوات التالية
+## Sırada ne var?
 
-- [مزيد من المعلومات حول "فئة المبتدئين" في Google Cloud](https://docs.cloud.google.com/docs/starter-tier?hl=ar)
-- [مزيد من المعلومات حول الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar) في Gemini API
+- [Google Cloud Başlangıç Katmanı](https://docs.cloud.google.com/docs/starter-tier?hl=tr) hakkında daha fazla bilgi edinin.
+- Gemini API'de [Faturalandırma](https://ai.google.dev/gemini-api/docs/billing?hl=tr) hakkında bilgi edinin.
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-تاريخ التعديل الأخير: 2026-05-16 (حسب التوقيت العالمي المتفَّق عليه)
+Son güncelleme tarihi: 2026-06-16 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-16 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-16 UTC."],[],[]]

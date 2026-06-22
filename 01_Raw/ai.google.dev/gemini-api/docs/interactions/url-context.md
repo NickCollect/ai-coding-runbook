@@ -1,36 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=es-419
-fetched_at: 2026-06-15T06:20:50.353948+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/url-context
+fetched_at: 2026-06-22T06:26:34.341544+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+# URL context
 
-Enviar comentarios
+The URL context tool lets you provide additional context to the models in the
+form of URLs. By including URLs in your request, the model will access
+the content from those pages (as long as it's not a URL type listed in the
+[limitations section](#limitations)) to inform
+and enhance its response.
 
-# Contexto de URL
+The URL context tool is useful for tasks like the following:
 
-La herramienta de contexto de URL te permite proporcionar contexto adicional a los modelos en forma de URLs. Si incluyes URLs en tu solicitud, el modelo accederá al contenido de esas páginas (siempre y cuando no sea un tipo de URL que se indique en la [sección de limitaciones](#limitations)) para informar y mejorar su respuesta.
+- **Extract Data**: Pull specific info like prices, names, or key
+  findings from multiple URLs.
+- **Compare Documents**: Analyze multiple reports, articles, or PDFs to
+  identify differences and track trends.
+- **Synthesize & Create Content**: Combine information from several source
+  URLs to generate accurate summaries, blog posts, or reports.
+- **Analyze Code & Docs**: Point to a GitHub repository or technical
+  documentation to explain code, generate setup instructions, or answer
+  questions.
 
-La herramienta de contexto de URL es útil para tareas como las siguientes:
-
-- **Extraer datos**: Extrae información específica, como precios, nombres o hallazgos clave
-  de varias URLs.
-- **Comparar documentos**: Analiza varios informes, artículos o PDFs para
-  identificar diferencias y hacer un seguimiento de las tendencias.
-- **Sintetizar y crear contenido**: Combina información de varias URLs de origen para generar resúmenes, entradas de blog o informes precisos.
-- **Analizar código y documentos**: Apunta a un repositorio de GitHub o a documentación técnica para explicar el código, generar instrucciones de configuración o responder preguntas.
-
-En el siguiente ejemplo, se muestra cómo comparar dos recetas de diferentes sitios web.
+The following example shows how to compare two recipes from different websites.
 
 ### Python
 
@@ -62,7 +65,7 @@ for step in interaction.steps:
                             print(f"  - {annotation.title}: {annotation.url}")
 ```
 
-### JavaScript
+### Javascript
 
 ```
 // This will only work for SDK newer than 2.0.0
@@ -115,26 +118,32 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cómo funciona
+## How it works
 
-La herramienta de contexto de URL usa un proceso de recuperación de dos pasos para equilibrar la velocidad, el costo y el acceso a datos actualizados. Cuando proporcionas una URL, la herramienta primero intenta recuperar el contenido de una caché de índice interna. Esto actúa como una caché altamente optimizada. Si una URL no está disponible en el índice (por ejemplo, si es una página muy nueva), la herramienta recurre automáticamente a una recuperación en vivo.
-Esto accede directamente a la URL para recuperar su contenido en tiempo real.
+The URL Context tool uses a two-step retrieval process to
+balance speed, cost, and access to fresh data. When you provide a URL, the tool
+first attempts to fetch the content from an internal index cache. This acts as a
+highly optimized cache. If a URL is not available in the index (for example, if
+it's a very new page), the tool automatically falls back to do a live fetch.
+This directly accesses the URL to retrieve its content in real-time.
 
-## Combinación con otras herramientas
+## Combining with other tools
 
-Puedes combinar la herramienta de contexto de URL con otras herramientas para crear flujos de trabajo más potentes.
+You can combine the URL context tool with other tools to create more powerful
+workflows.
 
-[Los modelos de Gemini 3](#supported-models) admiten la combinación de herramientas integradas
-(como el contexto de URL) con herramientas personalizadas (llamada a funciones). Obtén más información en la
-[página de combinaciones de herramientas](https://ai.google.dev/gemini-api/docs/interactions/tool-combination?hl=es-419).
+[Gemini 3 models](#supported-models) support combining built-in tools
+(like URL Context) with custom tools (function calling). Learn more on the
+[tool combinations](https://ai.google.dev/gemini-api/docs/interactions/tool-combination) page.
 
-### Fundamentación con la búsqueda
+### Grounding with search
 
-Cuando se habilitan el contexto de URL y
-[la fundamentación con la Búsqueda de Google](https://ai.google.dev/gemini-api/docs/grounding?hl=es-419),
-el modelo puede usar sus capacidades de búsqueda para encontrar
-información pertinente en línea y, luego, usar la herramienta de contexto de URL para obtener una comprensión más
-detallada de las páginas que encuentra. Este enfoque es potente para las instrucciones que requieren una búsqueda amplia y un análisis profundo de páginas específicas.
+When both URL context and
+[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/grounding) are enabled,
+the model can use its search capabilities to find
+relevant information online and then use the URL context tool to get a more
+in-depth understanding of the pages it finds. This approach is powerful for
+prompts that require both broad searching and deep analysis of specific pages.
 
 ### Python
 
@@ -160,7 +169,7 @@ for step in interaction.steps:
                 print(content_block.text)
 ```
 
-### JavaScript
+### Javascript
 
 ```
 // This will only work for SDK newer than 2.0.0
@@ -208,21 +217,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Cómo comprender la respuesta
+## Understanding the response
 
-Cuando el modelo usa la herramienta de contexto de URL, su respuesta de texto incluye anotaciones `url_citation` intercaladas en el bloque de contenido de texto. Cada anotación vincula un segmento del texto de respuesta (a través de `start_index` y `end_index`) a la URL de origen de la que se derivó. Esta es la forma principal de mostrar citas en tu
-aplicación. Consulta el [ejemplo principal anterior](#get-started) para obtener información sobre cómo extraerlas.
+When the model uses the URL context tool, its text response includes inline
+`url_citation` annotations on the text content block. Each annotation links a
+segment of the response text (via `start_index` and `end_index`) to the source
+URL it was derived from. This is the primary way to surface citations in your
+application — see the [main example above](#get-started) for how to extract them.
 
-La respuesta también incluye un paso `url_context_result` con metadatos sobre cada intento de recuperación de URL (estado, URL recuperada). Esto es útil, principalmente, para la depuración.
+The response also includes a `url_context_result` step with metadata about each
+URL retrieval attempt (status, retrieved URL). This is mainly useful for
+debugging.
 
-### Controles de seguridad
+### Safety checks
 
-El sistema realiza una verificación de moderación de contenido en las URLs para confirmar que cumplen con los estándares de seguridad. Si una URL no pasa esta verificación, el paso correspondiente
-`url_context_result` mostrará un `status` de `"unsafe"`.
+The system performs a content moderation check on URLs to confirm
+they meet safety standards. If a URL fails this check, the corresponding
+`url_context_result` step will show a `status` of `"unsafe"`.
 
-### Recuento de tokens
+### Token count
 
-El contenido recuperado de las URLs que especificas en tu instrucción se cuenta como parte de los tokens de entrada. Puedes ver el recuento de tokens en el objeto `usage` de la interacción. A continuación, se muestra un ejemplo:
+The content retrieved from the URLs you specify in your prompt is counted
+as part of the input tokens. You can see the token count in the
+`usage` object of the interaction. The following is an example:
 
 ```
 'usage': {
@@ -236,61 +253,66 @@ El contenido recuperado de las URLs que especificas en tu instrucción se cuenta
 }
 ```
 
-El precio por token depende del modelo utilizado. Consulta la
-[página de precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419) para obtener más detalles.
+Price per token depends on the model used, see the
+[pricing](https://ai.google.dev/gemini-api/docs/pricing) page for details.
 
-## Modelos compatibles
+## Supported models
 
-| Modelo | Contexto de URL |
+| Model | URL Context |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=es-419) | ✔️ |
-| [Versión preliminar de Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=es-419) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=es-419) | ✔️ |
-| [Versión preliminar de Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=es-419) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=es-419) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=es-419) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite) | ✔️ |
 
-## Prácticas recomendadas
+## Best Practices
 
-- **Proporciona URLs específicas**: Para obtener los mejores resultados, proporciona URLs directas al
-  contenido que deseas que analice el modelo. El modelo solo recuperará contenido de las URLs que proporciones, no de los vínculos anidados.
-- **Verifica la accesibilidad**: Verifica que las URLs que proporciones no dirijan a
-  páginas que requieran un acceso o que estén detrás de un muro de pago.
-- **Usa la URL completa**: Proporciona la URL completa, incluido el protocolo
-  (p.ej., https://www.google.com en lugar de solo google.com).
+- **Provide specific URLs**: For the best results, provide direct URLs to the
+  content you want the model to analyze. The model will only retrieve content
+  from the URLs you provide, not any content from nested links.
+- **Check for accessibility**: Verify that the URLs you provide don't lead to
+  pages that require a login or are behind a paywall.
+- **Use the complete URL**: Provide the full URL, including the protocol
+  (e.g., https://www.google.com instead of just google.com).
 
-## Limitaciones
+## Limitations
 
-- Límite de solicitudes: La herramienta puede procesar hasta 20 URLs por solicitud.
-- Tamaño del contenido de la URL: El tamaño máximo del contenido recuperado de una sola URL es de 34 MB.
-- Accesibilidad pública: Las URLs deben ser de acceso público en la Web.
-  No se admiten las direcciones de localhost (p.ej., localhost, 127.0.0.1), las redes privadas ni los servicios de tunelización (p.ej., ngrok, pinggy).
-- Solo API de Gemini: El contexto de URL solo está disponible en la API de Gemini, no a través de Gemini Enterprise Agent Platform.
+- Request limit: The tool can process up to 20 URLs per request.
+- URL content size: The maximum size for content retrieved from a single
+  URL is 34MB.
+- Public accessibility: The URLs must be publicly accessible on the web.
+  Localhost addresses (e.g., localhost, 127.0.0.1), private networks, and
+  tunneling services (e.g., ngrok, pinggy) are not supported.
+- Gemini API only: URL Context is only available in the Gemini API, not through
+  Gemini Enterprise Agent Platform.
 
-### Tipos de contenido compatibles y no compatibles
+### Supported and unsupported content types
 
-La herramienta puede extraer contenido de URLs con los siguientes tipos de contenido:
+The tool can extract content from URLs with the following content types:
 
-- Texto (texto/html, aplicación/json, texto/sin formato, texto/xml, texto/css, texto/javascript , texto/csv, texto/rtf)
-- Imagen (imagen/png, imagen/jpeg, imagen/bmp, imagen/webp)
-- PDF (aplicación/pdf)
+- Text (text/html, application/json, text/plain, text/xml, text/css,
+  text/javascript , text/csv, text/rtf)
+- Image (image/png, image/jpeg, image/bmp, image/webp)
+- PDF (application/pdf)
 
-**No** se admiten los siguientes tipos de contenido:
+The following content types are **not** supported:
 
-- Contenido con muro de pago
-- Videos de YouTube (consulta la
-  [comprensión de video](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=es-419#youtube) para obtener información sobre
-  cómo procesar URLs de YouTube)
-- Archivos de Google Workspace, como Documentos o Hojas de cálculo de Google
-- Archivos de audio y video
+- Paywalled content
+- YouTube videos (See
+  [video understanding](https://ai.google.dev/gemini-api/docs/interactions/video-understanding#youtube) to learn
+  how to process YouTube URLs)
+- Google workspace files like Google docs or spreadsheets
+- Video and audio files
 
-Enviar comentarios
+Send feedback
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Última actualización: 2026-05-28 (UTC)
+Last updated 2026-06-18 UTC.
 
-¿Quieres brindar más información?
+Need to tell us more?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-28 (UTC)"],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

@@ -1,27 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ko
-fetched_at: 2026-06-15T06:23:59.018367+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/text-generation
+fetched_at: 2026-06-22T06:31:07.236694+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+# Text generation
 
-의견 보내기
+The Gemini API can generate text output from text, images, video, and audio
+inputs.
 
-# 텍스트 생성
-
-Gemini API는 텍스트, 이미지, 동영상, 오디오 입력에서 텍스트 출력을 생성할 수 있습니다.
-
-다음은 기본 예시입니다.
+Here's a basic example:
 
 ### Python
 
@@ -68,19 +65,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Google GenAI SDK는 반환된 `Interaction` 객체에 편의 속성을 직접 제공하여 모델의 응답에 액세스합니다.
+The Google GenAI SDKs provide convenience properties directly
+on the returned `Interaction` object to access the model's response.
 
-가장 일반적인 도우미는 모델 응답의 마지막 텍스트 블록을 반환하는 **`interaction.output_text`** (문자열)입니다. 응답이 여러 개의 연속된 `TextContent` 블록으로 분할된 경우 자동으로 결합됩니다.
-`.output_text`에는 텍스트가 아닌 콘텐츠 (예: 생각, 이미지, 오디오, 도구 호출)로 구분된 이전 텍스트 블록이 포함되지 않습니다. 복잡하거나 인터리브된 멀티모달 응답의 경우 `steps`를 수동으로 반복해야 합니다. 다른 미디어 편의 속성에 대한 자세한 내용은
-[상호작용 개요](https://ai.google.dev/gemini-api/docs/interactions?hl=ko#convenience-properties)를 참고하세요.
+The most common helper is **`interaction.output_text`** (String), which returns
+the last text blocks in the model's response. If the response is split
+across multiple consecutive `TextContent` blocks, it automatically joins them.
+Note that `.output_text` does not include earlier text blocks separated by
+non-text content (such as thoughts, images, audio, or tool calls). For complex
+or interleaved multimodal responses, you must manually iterate over `steps`
+instead. To learn more about other media convenience properties, see the
+[Interactions overview](https://ai.google.dev/gemini-api/docs/interactions#convenience-properties).
 
-## Gemini로 생각하기
+## Thinking with Gemini
 
-Gemini 모델은 요청에 응답하기 전에 모델이 추론할 수 있도록 ["생각"](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=ko)
-이 기본적으로 사용 설정되어 있는 경우가 많습니다.
+Gemini models often have ["thinking"](https://ai.google.dev/gemini-api/docs/interactions/thinking)
+enabled by default which allows the model to reason before responding to a
+request.
 
-각 모델은 비용, 지연 시간, 인텔리전스를 제어할 수 있는 다양한 생각 구성을 지원합니다. 자세한 내용은
-[생각 가이드](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=ko#set-budget)를 참고하세요.
+Each model supports different thinking configurations which gives you control
+over cost, latency, and intelligence. For more details, see the
+[thinking guide](https://ai.google.dev/gemini-api/docs/interactions/thinking#set-budget).
 
 ### Python
 
@@ -136,9 +141,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 시스템 안내 및 기타 구성
+## System instructions and other configurations
 
-시스템 안내를 사용하여 Gemini 모델의 동작을 안내할 수 있습니다. `system_instruction` 매개변수를 전달하여 모델의 동작을 구성합니다.
+You can guide the behavior of Gemini models with system instructions. Pass
+a `system_instruction` parameter to configure the model's behavior.
 
 ### Python
 
@@ -189,7 +195,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-`generation_config` 매개변수를 사용하여 온도와 같은 기본 생성 매개변수를 재정의할 수도 있습니다.
+You can also override default generation parameters, such as
+temperature, using the `generation_config` parameter.
 
 ### Python
 
@@ -245,12 +252,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-구성 가능한 매개변수와 설명의 전체 목록은 [Interactions API 참조](https://ai.google.dev/api/interactions-api?hl=ko)
-를 참고하세요.
+Refer to the [Interactions API reference](https://ai.google.dev/api/interactions-api)
+for a complete list of configurable parameters and their
+descriptions.
 
-## 멀티모달 입력
+## Multimodal inputs
 
-Gemini API는 멀티모달 입력을 지원하므로 텍스트와 미디어 파일을 결합할 수 있습니다. 다음 예에서는 이미지를 제공하는 방법을 보여줍니다.
+The Gemini API supports multimodal inputs, allowing you to combine text with
+media files. The following example demonstrates providing an image:
 
 ### Python
 
@@ -326,20 +335,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-이미지를 제공하는 대체 방법과 고급 이미지 처리는
-[이미지 이해 가이드](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=ko)를 참고하세요.
-API는 [문서](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=ko), [동영상](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=ko), 및
-[오디오](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=ko) 입력 및 이해도 지원합니다.
+For alternative methods of providing images and more advanced image processing,
+see our [image understanding guide](https://ai.google.dev/gemini-api/docs/interactions/image-understanding).
+The API also supports [document](https://ai.google.dev/gemini-api/docs/interactions/document-processing), [video](https://ai.google.dev/gemini-api/docs/interactions/video-understanding), and
+[audio](https://ai.google.dev/gemini-api/docs/interactions/audio) inputs and understanding.
 
-## 스트리밍 응답
+## Streaming responses
 
-기본적으로 모델은 전체 생성
-프로세스가 완료된 후에만 응답을 반환합니다.
+By default, the model returns a response only after the entire generation
+process is complete.
 
-더 원활한 상호작용을 위해 스트리밍을 사용하여 응답 청크가 생성될 때 처리합니다. 이벤트 유형,
-도구를 사용한 스트리밍, 생각, 에이전트, 이미지 생성을 다루는 포괄적인 가이드는
-전용 [스트리밍 상호작용](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=ko)
-가이드를 참고하세요.
+For more fluid interactions, use streaming to handle response chunks
+as they're generated. For a comprehensive guide covering event types,
+streaming with tools, thinking, agents, and image generation, see the
+dedicated [Streaming interactions](https://ai.google.dev/gemini-api/docs/interactions/streaming)
+guide.
 
 ### Python
 
@@ -400,9 +410,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## 멀티턴 대화
+## Multi-turn conversations
 
-Interactions API는 `previous_interaction_id`를 사용하여 상호작용을 연결하여 멀티턴 대화를 지원합니다. 각 턴은 별도의 상호작용이며 API는 대화 기록을 자동으로 관리합니다.
+The Interactions API supports multi-turn conversations by chaining interactions
+together using `previous_interaction_id`. Each turn is a separate interaction,
+and the API automatically manages conversation history.
 
 ### Python
 
@@ -475,7 +487,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-스트리밍은 `previous_interaction_id`를 스트리밍 메서드와 결합하여 멀티턴 대화에도 사용할 수 있습니다.
+Streaming can also be used for multi-turn conversations by combining
+`previous_interaction_id` with the streaming methods.
 
 ### Python
 
@@ -560,13 +573,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## 스테이트리스(Stateless) 대화
+## Stateless conversations
 
-기본적으로 Interactions API는 `previous_interaction_id`를 사용할 때 서버 측에서 대화 상태를 관리합니다. 하지만 클라이언트 측에서 대화 기록을 직접 관리하여 스테이트리스(Stateless) 모드로 작동할 수도 있습니다.
+By default, the Interactions API manages conversation state server-side when you use `previous_interaction_id`. However, you can also operate in stateless mode by managing the conversation history yourself on the client side.
 
-스테이트리스(Stateless) 모드를 사용하려면 다음 단계를 따르세요. 1. 요청에서 `store=false`를 설정하여 서버 측 저장소를 선택 해제합니다.
-2. 클라이언트 측에서 대화 기록을 **단계** 배열로 유지합니다.
-3. 후속 요청에서 누적된 단계를 `input` 필드에 전달하고 새 턴을 `user_input` 단계로 추가합니다.
+To use stateless mode:
+1. Set `store=false` in your request to opt out of server-side storage.
+2. Maintain the conversation history as an array of **steps** on the client side.
+3. In subsequent requests, pass the accumulated steps in the `input` field, and append your new turn as a `user_input` step.
 
 ### Python
 
@@ -689,31 +703,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## 프롬프트 작성 팁
+## Prompting tips
 
-Gemini를 최대한 활용하기 위한 제안사항은 [프롬프트 엔지니어링 가이드](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ko)를
-참고하세요.
+Consult our [prompt engineering guide](https://ai.google.dev/gemini/docs/prompting-strategies) for
+suggestions on getting the most out of Gemini.
 
-## 다음 단계
+## What's next
 
-- Google AI Studio에서 [Gemini](https://aistudio.google.com?hl=ko)를 사용해 보세요.
-- JSON과 유사한 응답에
-  [구조화된 출력](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=ko)을
-  실험해 보세요.
-- Gemini의 [이미지](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=ko),
-  [동영상](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=ko),
-  [오디오](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=ko) 및
-  [문서](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=ko) 이해 기능을
-  살펴보세요.
-- 멀티모달
-  [파일 프롬프트 전략](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko#prompt-guide)에 대해 알아보세요.
+- Try [Gemini in Google AI Studio](https://aistudio.google.com).
+- Experiment with
+  [structured outputs](https://ai.google.dev/gemini-api/docs/interactions/structured-output) for
+  JSON-like responses.
+- Explore Gemini's [image](https://ai.google.dev/gemini-api/docs/interactions/image-understanding),
+  [video](https://ai.google.dev/gemini-api/docs/interactions/video-understanding),
+  [audio](https://ai.google.dev/gemini-api/docs/interactions/audio) and
+  [document](https://ai.google.dev/gemini-api/docs/interactions/document-processing) understanding
+  capabilities.
+- Learn about multimodal
+  [file prompting strategies](https://ai.google.dev/gemini-api/docs/interactions/files#prompt-guide).
 
-의견 보내기
+Send feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-최종 업데이트: 2026-05-28(UTC)
+Last updated 2026-06-18 UTC.
 
-의견을 전달하고 싶나요?
+Need to tell us more?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-28(UTC)"],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

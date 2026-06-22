@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=zh-TW
-fetched_at: 2026-06-15T06:33:22.691554+00:00
-title: "Gemini Developer API \u8207 Gemini Enterprise Agent Platform \u7684\u6bd4\u8f03 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=ja
+fetched_at: 2026-06-22T06:33:09.540140+00:00
+title: "Gemini Developer API \u3068 Gemini Enterprise Agent Platform \u306e\u6bd4\u8f03 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-提供意見
+フィードバックを送信
 
-# Gemini Developer API 與 Gemini Enterprise Agent Platform 的比較
+# Gemini Developer API と Gemini Enterprise Agent Platform の比較
 
-使用 Gemini 開發生成式 AI 解決方案時，Google 提供兩種 API 產品：[Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=zh-tw) 和 [Gemini Enterprise Agent Platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=zh-tw)。
+Gemini を使用して生成 AI ソリューションを開発する場合、Google は [Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=ja) と [Gemini Enterprise Agent Platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=ja) の 2 つの API プロダクトを提供しています。
 
-透過 Gemini Developer API，您就能以最快速度建構、正式推出及擴充 Gemini 輔助應用程式。除非需要特定企業控制項，否則大多數開發人員都應使用 Gemini 開發人員 API。
+Gemini Developer API は、Gemini を活用したアプリケーションの構築、本番環境への移行、スケーリングを迅速に行うための手段です。特定のエンタープライズ コントロールが必要な場合を除き、ほとんどのデベロッパーは Gemini デベロッパー API を使用する必要があります。
 
-Gemini Enterprise Agent Platform 提供全方位的企業級功能和服務生態系統，可建構及部署由 Google Cloud Platform 支援的生成式 AI 應用程式。
+Gemini Enterprise Agent Platform は、Google Cloud Platform を基盤とする生成 AI アプリケーションの構築とデプロイのための、エンタープライズ対応の機能とサービスの包括的なエコシステムを提供します。
 
-我們最近簡化了這兩項服務之間的遷移作業。現在可透過統一的 [Google Gen AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw) 存取 Gemini 開發人員 API 和 Gemini Enterprise Agent Platform API。
+Google は最近、これらのサービス間の移行を簡素化しました。Gemini Developer API と Gemini Enterprise Agent Platform API の両方に、統合された [Google Gen AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ja) を介してアクセスできるようになりました。
 
-## 程式碼比較
+## コードの比較
 
-本頁面會並列比較 Gemini Developer API 和 Gemini Enterprise Agent Platform 的文字生成快速入門導覽程式碼。
+このページでは、テキスト生成用の Gemini Developer API と Gemini Enterprise Agent Platform のクイックスタートのコードを並べて比較しています。
 
 ### Python
 
-您可以透過 `google-genai` 程式庫存取 Gemini 開發人員 API 和 Gemini Enterprise Agent Platform 服務。如需安裝 `google-genai` 的操作說明，請參閱[程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)頁面。
+Gemini Developer API と Gemini Enterprise Agent Platform の両方のサービスには、`google-genai` ライブラリを介してアクセスできます。`google-genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
 
 ### Gemini Developer API
 
@@ -62,9 +62,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript 和 TypeScript
+### JavaScript と TypeScript
 
-您可以透過 `@google/genai`程式庫存取 Gemini Developer API 和 Gemini Enterprise Agent Platform 服務。如需安裝 `@google/genai` 的操作說明，請參閱[程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)頁面。
+`@google/genai` ライブラリを介して、Gemini Developer API と Gemini Enterprise Agent Platform の両方のサービスにアクセスできます。`@google/genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
 
 ### Gemini Developer API
 
@@ -107,7 +107,7 @@ main();
 
 ### Go
 
-您可以透過 `google.golang.org/genai`程式庫存取 Gemini Developer API 和 Gemini Enterprise Agent Platform 服務。如需安裝 `google.golang.org/genai` 的操作說明，請參閱[程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)頁面。
+`google.golang.org/genai` ライブラリを介して、Gemini Developer API と Gemini Enterprise Agent Platform の両方のサービスにアクセスできます。`google.golang.org/genai` のインストール手順については、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)のページをご覧ください。
 
 ### Gemini Developer API
 
@@ -168,40 +168,40 @@ func main() {
 }
 ```
 
-### 其他用途和平台
+### その他のユースケースとプラットフォーム
 
-如要瞭解其他平台和用途，請參閱 [Gemini 開發人員 API 說明文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)和 [Gemini Enterprise Agent Platform 說明文件](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=zh-tw)中的特定用途指南。
+他のプラットフォームとユースケースについては、[Gemini Developer API ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)と [Gemini Enterprise Agent Platform ドキュメント](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=ja)のユースケース固有のガイドをご覧ください。
 
-## 遷移注意事項
+## 移行に関する考慮事項
 
-遷移時：
+移行すると、次のようになります。
 
-- 您必須使用 Google Cloud 服務帳戶進行驗證。詳情請參閱 [Gemini Enterprise Agent Platform 說明文件](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=zh-tw)。
-- 你可以使用現有的 Google Cloud 專案 (與產生 API 金鑰時使用的專案相同)，也可以[建立新的 Google Cloud 專案](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=zh-tw)。
-- Gemini Developer API 和 Gemini Enterprise Agent Platform API 支援的區域可能不同。請參閱[支援 Google Cloud 生成式 AI 的區域清單](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=zh-tw)。
-- 在 Google AI Studio 中建立的模型必須在 Gemini Enterprise Agent Platform 中重新訓練。
+- 認証には Google Cloud サービス アカウントを使用する必要があります。詳細については、[Gemini Enterprise Agent Platform のドキュメント](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=ja)をご覧ください。
+- 既存の Google Cloud プロジェクト（API キーの生成に使用したプロジェクト）を使用することも、[新しい Google Cloud プロジェクトを作成](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ja)することもできます。
+- サポートされているリージョンは、Gemini Developer API と Gemini Enterprise Agent Platform API で異なる場合があります。[Google Cloud の生成 AI でサポートされているリージョン](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=ja)のリストをご覧ください。
+- Google AI Studio で作成したモデルは、Gemini Enterprise Agent Platform で再トレーニングする必要があります。
 
-如果不再需要使用 Gemini API 金鑰存取 Gemini Developer API，請遵循安全性最佳做法刪除金鑰。
+Gemini Developer API で Gemini API キーを使用する必要がなくなった場合は、セキュリティのベスト プラクティスに従ってキーを削除します。
 
-刪除 API 金鑰的做法如下：
+API キーを削除するには:
 
-1. 開啟 [Google Cloud API 憑證](https://console.cloud.google.com/apis/credentials?hl=zh-tw)頁面。
-2. 找出要刪除的 API 金鑰，然後點選「動作」圖示。
-3. 選取「刪除 API 金鑰」。
-4. 在「刪除憑證」強制回應中，選取「刪除」。
+1. [Google Cloud API 認証情報](https://console.cloud.google.com/apis/credentials?hl=ja)ページを開きます。
+2. 削除する API キーを見つけて、[**操作**] アイコンをクリックします。
+3. [**API キーを削除**] を選択します。
+4. [**認証情報の削除**] モーダルで、[**削除**] を選択します。
 
-   刪除 API 金鑰需要幾分鐘的時間才會生效。作業完畢後，凡是使用已刪除 API 金鑰的流量都會遭拒。
+   API キーの削除が反映されるまでには数分かかることがあります。削除が反映されると、以降その API キーを使ったトラフィックはすべて拒否されます。
 
-## 後續步驟
+## 次のステップ
 
-- 如要進一步瞭解 Gemini Enterprise Agent Platform 的生成式 AI 解決方案，請參閱[這篇文章](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/multimodal/overview?hl=zh-tw)。
+- Gemini Enterprise Agent Platform の生成 AI ソリューションの詳細については、[Gemini Enterprise Agent Platform の生成 AI の概要](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=ja)をご覧ください。
 
-提供意見
+フィードバックを送信
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-上次更新時間：2026-05-19 (世界標準時間)。
+最終更新日 2026-06-18 UTC。
 
-想進一步說明嗎？
+ご意見をお聞かせください
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-18 UTC。"],[],[]]

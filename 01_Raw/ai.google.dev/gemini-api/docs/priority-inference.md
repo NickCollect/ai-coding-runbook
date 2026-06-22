@@ -1,31 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=th
-fetched_at: 2026-06-15T06:28:18.452089+00:00
-title: "\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e32\u0e19\u0e15\u0e32\u0e21\u0e25\u0e33\u0e14\u0e31\u0e1a\u0e04\u0e27\u0e32\u0e21\u0e2a\u0e33\u0e04\u0e31\u0e0d \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr
+fetched_at: 2026-06-22T06:31:00.046473+00:00
+title: "Inf\u00e9rence de la priorit\u00e9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) พร้อมให้บริการในเวอร์ชันพรีวิวแล้วตอนนี้ โดยมีฟีเจอร์การวางแผนร่วมกัน การแสดงภาพข้อมูล การรองรับ MCP และอื่นๆ
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-ส่งความคิดเห็น
+Envoyer des commentaires
 
-# การอนุมานตามลำดับความสำคัญ
+# Inférence de la priorité
 
-Gemini Priority API เป็นระดับการอนุมานแบบพรีเมียมที่ออกแบบมาสำหรับภาระงานที่สำคัญต่อธุรกิจ ซึ่งต้องใช้เวลาในการตอบสนองที่ต่ำกว่าและความน่าเชื่อถือสูงสุดในราคาพรีเมียม การเข้าชมระดับพรีเมียมจะได้รับความสำคัญเหนือการเข้าชม API มาตรฐานและการเข้าชมระดับ Flex
+L'API Gemini Priority est un niveau d'inférence premium conçu pour les charges de travail critiques qui nécessitent une latence plus faible et une fiabilité maximale, à un prix premium. Le trafic de niveau Priorité est prioritaire sur le trafic de niveau Standard et Flex.
 
-การอนุมานแบบลำดับความสำคัญพร้อมให้บริการแก่ผู้ใช้[ระดับที่ 2 และระดับที่ 3](https://ai.google.dev/gemini-api/docs/billing?hl=th#about-billing) ในปลายทาง GenerateContent API
-และ Interactions API
+L'inférence de priorité est disponible pour les utilisateurs de [niveau 2 et 3](https://ai.google.dev/gemini-api/docs/billing?hl=fr#about-billing) dans les points de terminaison de l'API GenerateContent et de l'API Interactions.
 
-## วิธีใช้รายการสำคัญ
+## Utiliser la priorité
 
-หากต้องการใช้ระดับ Priority ให้ตั้งค่าฟิลด์ `service_tier` ในเนื้อหาคำขอเป็น `priority` ระดับเริ่มต้นคือระดับมาตรฐานหากละเว้นฟิลด์นี้
+Pour utiliser le niveau de priorité, définissez le champ `service_tier` dans le corps de la requête sur `priority`. Si le champ est omis, le niveau par défaut est "standard".
 
 ### Python
 
@@ -136,89 +135,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
 }'
 ```
 
-## วิธีการทำงานของการอนุมานแบบพรีเมียม
+## Fonctionnement de l'inférence prioritaire
 
-การอนุมานแบบลำดับความสำคัญจะกำหนดเส้นทางคำขอไปยังคิวการประมวลผลที่มีความสำคัญสูง ซึ่งให้ประสิทธิภาพที่รวดเร็วและคาดการณ์ได้สำหรับแอปพลิเคชันที่แสดงต่อผู้ใช้ กลไกหลักคือการลดระดับฝั่งเซิร์ฟเวอร์อย่างค่อยเป็นค่อยไปเป็นการประมวลผลมาตรฐานสำหรับการเข้าชมที่เกินขีดจำกัดแบบไดนามิก ซึ่งช่วยให้แอปพลิเคชันมีความเสถียรแทนที่จะทำให้คำขอไม่สำเร็จ
+L'inférence prioritaire achemine les requêtes vers des files d'attente de calcul de haute criticité, ce qui permet d'obtenir des performances rapides et prévisibles pour les applications destinées aux utilisateurs. Son mécanisme principal est une rétrogradation côté serveur vers un traitement standard pour le trafic qui dépasse les limites dynamiques, ce qui garantit la stabilité de l'application au lieu de faire échouer la requête.
 
-| ฟีเจอร์ | รายการสำคัญ | มาตรฐาน | Flex | กลุ่ม |
+| Fonctionnalité | Priorité | Standard | Flex | Lot |
 | --- | --- | --- | --- | --- |
-| **การกำหนดราคา** | มากกว่าระดับมาตรฐาน 75-100% | ราคาเต็ม | ส่วนลด 50% | ส่วนลด 50% |
-| **เวลาในการตอบสนอง** | วินาที | วินาทีถึงนาที | นาที (เป้าหมาย 1-15 นาที) | สูงสุด 24 ชั่วโมง |
-| **ความน่าเชื่อถือ** | สูง (ไม่สามารถลดระดับได้) | สูง / สูงปานกลาง | อย่างเต็มที่ (สามารถลดระดับได้) | สูง (สำหรับอัตราการส่งข้อมูล) |
-| **อินเทอร์เฟซ** | แบบซิงโครนัส | แบบซิงโครนัส | แบบซิงโครนัส | แบบอะซิงโครนัส |
+| **Tarifs** | 75 à 100% de plus que Standard | Plein tarif | 50% de remise | 50% de remise |
+| **Latence** | Secondes | De secondes à minutes | Minutes (objectif de 1 à 15 min) | Jusqu'à 24 heures |
+| **Fiabilité** | Élevé (non amovible) | Élevée / Moyenne-haute | Optimisation limitée (désactivable) | Élevée (pour le débit) |
+| **Interface** | Synchrone | Synchrone | Synchrone | Asynchrone |
 
-### สิทธิประโยชน์ที่สำคัญ
+### Principaux avantages
 
-- **เวลาในการตอบสนองต่ำ**: ออกแบบมาให้ใช้เวลาตอบสนองเป็นวินาทีสำหรับเครื่องมือ AI แบบอินเทอร์แอกทีฟที่ผู้ใช้มองเห็น
-- **ความน่าเชื่อถือสูง**: การเข้าชมจะได้รับการปฏิบัติด้วยความสำคัญสูงสุดและ
-  ไม่สามารถลดระดับได้
-- **การลดลงอย่างค่อยเป็นค่อยไป**: การเข้าชมที่เพิ่มขึ้นซึ่งเกินขีดจำกัดแบบไดนามิกจะ
-  ลดระดับลงเป็นระดับมาตรฐานโดยอัตโนมัติเพื่อทำการประมวลผลแทนที่จะทำให้คำขอไม่สำเร็จ
-  ซึ่งจะช่วยป้องกันไม่ให้เกิดการหยุดทำงานของบริการ
-- **ความยุ่งยากต่ำ**: ใช้วิธี `generateContent` แบบซิงโครนัสแบบเดียวกับระดับ
-  มาตรฐานและระดับ Flex
+- **Faible latence** : conçu pour des temps de réponse de l'ordre de la seconde pour les outils d'IA interactifs destinés aux utilisateurs.
+- **Fiabilité élevée** : le trafic est traité avec la plus haute criticité et ne peut en aucun cas être abandonné.
+- **Dégradation élégante** : les pics de trafic dépassant les limites dynamiques sont automatiquement rétrogradés au niveau Standard pour être traités au lieu d'échouer, ce qui évite les interruptions de service.
+- **Friction réduite** : utilise la même méthode `generateContent` synchrone que les niveaux Standard et Flex.
 
-### กรณีการใช้งาน
+### Cas d'utilisation
 
-การประมวลผลแบบพรีเมียมเหมาะอย่างยิ่งสำหรับเวิร์กโฟลว์ที่สำคัญต่อธุรกิจ ซึ่งประสิทธิภาพและความน่าเชื่อถือมีความสำคัญสูงสุด
+Le traitement prioritaire est idéal pour les workflows critiques pour l'entreprise, où les performances et la fiabilité sont primordiales.
 
-- **แอปพลิเคชัน AI แบบอินเทอร์แอกทีฟ**: แชทบ็อตและผู้ช่วยเสมือนสำหรับฝ่ายบริการลูกค้าที่
-  ผู้ใช้จ่ายเงินในราคาพรีเมียมและคาดหวังการตอบสนองที่รวดเร็วและสม่ำเสมอ
-- **กลไกการตัดสินใจแบบเรียลไทม์**: ระบบที่ต้องใช้ผลลัพธ์ที่น่าเชื่อถือสูงและมีเวลาในการตอบสนองต่ำ
-  เช่น การจัดลำดับความสำคัญของตั๋วแบบสดหรือการตรวจจับการฉ้อโกง
-- **ฟีเจอร์สำหรับลูกค้าพรีเมียม**: นักพัฒนาแอปที่ต้องรับประกันวัตถุประสงค์ระดับการให้บริการ
-  ที่สูงขึ้นสำหรับลูกค้าที่ชำระเงิน
+- **Applications d'IA interactives** : chatbots et copilotes du service client où les utilisateurs paient un supplément et s'attendent à des réponses rapides et cohérentes.
+- **Moteurs de décision en temps réel** : systèmes nécessitant des résultats très fiables et à faible latence, comme le triage des tickets en direct ou la détection des fraudes.
+- **Fonctionnalités Premium pour les clients** : pour les développeurs qui doivent garantir des objectifs de niveau de service (SLO) plus élevés pour les clients payants.
 
-### ขีดจำกัดอัตรา
+### Limites de débit
 
-การใช้งานระดับพรีเมียมจะมีขีดจำกัดอัตราของตัวเอง แม้ว่าการใช้งานจะนับรวมใน [ขีดจำกัดอัตราการรับส่งข้อมูลแบบอินเทอร์แอกทีฟโดยรวมก็ตาม](https://aistudio.google.com/rate-limit?hl=th) ขีดจำกัดอัตราเริ่มต้นสำหรับการอนุมานแบบพรีเมียมคือ**ขีดจำกัดอัตรามาตรฐาน 0.3 เท่าสำหรับโมเดล / ระดับ**
+La consommation prioritaire possède ses propres limites de débit, même si la consommation est comptabilisée dans les [limites de débit du trafic interactif global](https://aistudio.google.com/rate-limit?hl=fr). Les limites de débit par défaut pour l'inférence prioritaire sont **0,3 fois la limite de débit standard pour le modèle / le niveau**.
 
-### ตรรกะการลดระดับอย่างค่อยเป็นค่อยไป
+### Logique de rétrogradation progressive
 
-หากมีการใช้งานเกินขีดจำกัดระดับ Priority เนื่องจากความหนาแน่น คำขอที่ล้นจะ**ลดระดับลงเป็นการประมวลผล Standard โดยอัตโนมัติและอย่างค่อยเป็นค่อยไป** แทนที่จะทำให้คำขอไม่สำเร็จด้วยข้อผิดพลาด 503 หรือ 429 ระบบจะเรียกเก็บเงินสำหรับคำขอที่ลดระดับลงในอัตรามาตรฐาน ไม่ใช่อัตราพรีเมียมของระดับพรีเมียม
+Si les limites de priorité sont dépassées en raison d'une congestion, les demandes excédentaires sont **automatiquement et correctement** rétrogradées vers un traitement standard au lieu d'échouer avec une erreur 503 ou 429. Les demandes rétrogradées sont facturées au tarif standard, et non au tarif premium Priority.
 
-### ความรับผิดชอบของไคลเอ็นต์
+### Responsabilité du client
 
-- **การตรวจสอบการตอบสนอง**: นักพัฒนาแอปควรตรวจสอบส่วนหัว `x-gemini-service-tier`
-  ในการตอบสนองของ API เพื่อตรวจหาว่าคำขอถูกลดระดับลงเป็น
-  `standard` บ่อยหรือไม่
-- **การลองใหม่**: ไคลเอ็นต์ต้องใช้ตรรกะการลองใหม่/Exponential Backoff สำหรับ
-  ข้อผิดพลาดมาตรฐาน เช่น `DEADLINE_EXCEEDED`
+- **Surveillance des réponses** : les développeurs doivent surveiller l'en-tête `x-gemini-service-tier` dans la réponse de l'API pour détecter si les requêtes sont fréquemment rétrogradées à `standard`.
+- **Nouvelles tentatives** : les clients doivent implémenter une logique de nouvelle tentative/un intervalle exponentiel entre les tentatives pour les erreurs standards, telles que `DEADLINE_EXCEEDED`.
 
-## การกำหนดราคา
+## Tarifs
 
-การอนุมานแบบพรีเมียมมีราคามากกว่า [API มาตรฐาน](https://ai.google.dev/gemini-api/docs/pricing?hl=th) 75-100% และเรียกเก็บเงินต่อโทเค็น
+L'inférence prioritaire coûte 75 à 100% de plus que l'[API standard](https://ai.google.dev/gemini-api/docs/pricing?hl=fr) et est facturée par jeton.
 
-## โมเดลที่รองรับ
+## Modèles compatibles
 
-โมเดลต่อไปนี้รองรับการอนุมานแบบลำดับความสำคัญ
+Les modèles suivants sont compatibles avec l'inférence prioritaire :
 
-| โมเดล | การอนุมานแบบลำดับความสำคัญ |
+| Modèle | Inférence de la priorité |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=th) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=th) | ✔️ |
-| [Gemini 3.1 Pro เวอร์ชันตัวอย่าง](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th) | ✔️ |
-| [Gemini 3 Flash เวอร์ชันตัวอย่าง](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th) | ✔️ |
-| [Gemini 3 Pro เวอร์ชันตัวอย่างรูปภาพ](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=th) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=th) | ✔️ |
-| [รูปภาพ Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=th) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=fr) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr) | ✔️ |
+| [Preview Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr) | ✔️ |
+| [Preview Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=fr) | ✔️ |
+| [Aperçu de l'image Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=fr) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=fr) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=fr) | ✔️ |
+| [Image Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=fr) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=fr) | ✔️ |
 
-## ขั้นตอนถัดไป
+## Étape suivante
 
-อ่านเกี่ยวกับตัวเลือก[การอนุมานและการเพิ่มประสิทธิภาพ](https://ai.google.dev/gemini-api/docs/optimization?hl=th)อื่นๆ ของ Gemini ได้ที่
+Découvrez les autres options d'[inférence et d'optimisation](https://ai.google.dev/gemini-api/docs/optimization?hl=fr) de Gemini :
 
-- [การอนุมานแบบ Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th) เพื่อลดต้นทุน 50%
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th) สำหรับการประมวลผลแบบอะซิงโครนัสภายใน 24 ชั่วโมง
-- [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) เพื่อลดต้นทุนโทเค็นอินพุต
+- [Flex Inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr) pour réduire les coûts de 50 %.
+- L'[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr) pour le traitement asynchrone sous 24 heures.
+- [Mise en cache du contexte](https://ai.google.dev/gemini-api/docs/caching?hl=fr) pour réduire les coûts liés aux jetons d'entrée.
 
-ส่งความคิดเห็น
+Envoyer des commentaires
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-อัปเดตล่าสุด 2026-05-28 UTC
+Dernière mise à jour le 2026/06/19 (UTC).
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Voulez-vous nous donner plus d'informations ?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-05-28 UTC"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/19 (UTC)."],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=zh-CN
-fetched_at: 2026-06-15T06:20:37.137584+00:00
+fetched_at: 2026-06-22T06:26:37.680820+00:00
 title: "\u901f\u7387\u9650\u5236 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

@@ -1,39 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=pl
-fetched_at: 2026-06-15T06:26:33.222733+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/structured-output
+fetched_at: 2026-06-22T06:30:15.359835+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+# Structured outputs
 
-Prześlij opinię
+You can configure Gemini models to generate responses that adhere to a provided
+JSON Schema. This ensures predictable, type-safe results and simplifies
+extracting structured data from unstructured text.
 
-# Uporządkowane dane wyjściowe
+Using structured outputs is ideal for:
 
-Możesz skonfigurować modele Gemini tak, aby generowały odpowiedzi zgodne z podanym schematem JSON. Zapewnia to przewidywalne i bezpieczne pod względem typów wyniki oraz upraszcza wyodrębnianie uporządkowanych danych z nieuporządkowanego tekstu.
+- **Data extraction:** Pull specific information like names and dates from text.
+- **Structured classification:** Classify text into predefined categories.
+- **Agentic workflows:** Generate structured inputs for tools or APIs.
 
-Uporządkowane dane wyjściowe są idealne w przypadku:
+In addition to supporting JSON Schema in the REST API, the Google GenAI SDKs
+allow defining schemas using
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) and
+[Zod](https://zod.dev/) (JavaScript).
 
-- **Wyodrębnianie danych:** wyodrębnianie z tekstu konkretnych informacji, takich jak imiona i nazwiska czy daty.
-- **Klasyfikacja strukturalna:** klasyfikowanie tekstu według wstępnie zdefiniowanych kategorii.
-- **Przepływy pracy agentów:** generowanie uporządkowanych danych wejściowych dla narzędzi lub interfejsów API.
+## Structured output examples
 
-Oprócz obsługi schematu JSON w interfejsie REST API pakiety Google GenAI SDK umożliwiają definiowanie schematów za pomocą bibliotek [Pydantic](https://docs.pydantic.dev/latest/) (Python) i [Zod](https://zod.dev/) (JavaScript).
+### Recipe Extractor
 
-## Przykłady uporządkowanych danych wyjściowych
-
-### Ekstraktor przepisów
-
-Ten przykład pokazuje, jak wyodrębniać dane strukturalne z tekstu za pomocą podstawowych typów schematu JSON, takich jak `object`, `array`, `string` i `integer`.
+This example demonstrates how to extract structured data from text using basic
+JSON Schema types like `object`, `array`, `string`, and `integer`.
 
 ### Python
 
@@ -197,7 +199,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Przykładowa odpowiedź:**
+**Example Response:**
 
 ```
 {
@@ -225,9 +227,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Moderacja treści
+### Content Moderation
 
-W tym przykładzie użyto `anyOf` w przypadku schematów warunkowych i `enum` w przypadku klasyfikacji, co pozwala na zmianę struktury danych wyjściowych w zależności od treści.
+This example showcases `anyOf` for conditional schemas and `enum` for
+classification, allowing the output structure to vary based on the content.
 
 ### Python
 
@@ -376,7 +379,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Przykładowa odpowiedź:**
+**Example Response:**
 
 ```
 {
@@ -387,9 +390,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Struktury rekurencyjne
+### Recursive Structures
 
-Ten przykład pokazuje, jak zdefiniować schemat rekurencyjny, np. schemat organizacyjny.
+This example illustrates how to define a recursive schema such as an
+organization chart.
 
 ### Python
 
@@ -506,7 +510,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Przykładowa odpowiedź:**
+**Example Response:**
 
 ```
 {
@@ -533,9 +537,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Wyniki strumieniowania
+## Streaming results
 
-Możesz przesyłać strumieniowo dane wyjściowe w formacie strukturalnym, co pozwala rozpocząć przetwarzanie odpowiedzi w trakcie jej generowania. Przesyłane strumieniowo fragmenty to prawidłowe częściowe ciągi JSON, które można połączyć, aby utworzyć końcowy obiekt JSON.
+You can stream structured outputs, allowing you to start processing the
+response as it's being generated. The streamed chunks are valid partial JSON
+strings that can be concatenated to form the final JSON object.
 
 ### Python
 
@@ -603,9 +609,14 @@ for await (const event of stream) {
 }
 ```
 
-## Uporządkowane dane wyjściowe z narzędzi
+## Structured outputs with tools
 
-Gemini 3 umożliwia łączenie danych strukturalnych z wbudowanymi narzędziami, takimi jak [powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/interactions/google-search?hl=pl), [kontekst adresu URL](https://ai.google.dev/gemini-api/docs/interactions/url-context?hl=pl), [wykonywanie kodu](https://ai.google.dev/gemini-api/docs/interactions/code-execution?hl=pl), [wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/interactions/file-search?hl=pl#structured-output) i [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=pl).
+Gemini 3 lets you combine Structured Outputs with built-in tools, including
+[Grounding with Google Search](https://ai.google.dev/gemini-api/docs/interactions/google-search),
+[URL Context](https://ai.google.dev/gemini-api/docs/interactions/url-context),
+[Code Execution](https://ai.google.dev/gemini-api/docs/interactions/code-execution),
+[File Search](https://ai.google.dev/gemini-api/docs/interactions/file-search#structured-output), and
+[Function Calling](https://ai.google.dev/gemini-api/docs/interactions/function-calling).
 
 ### Python
 
@@ -698,79 +709,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Obsługa schematu JSON
+## JSON schema support
 
-Aby wygenerować obiekt JSON, skonfiguruj `response_format` za pomocą obiektu (lub tablicy zawierającej obiekt) typu `text` i ustaw jego `mime_type` na `application/json`. Schemat należy podać w polu `schema`.
+To generate a JSON object, configure `response_format` with an object (or an array containing an object) of type `text` and set its `mime_type` to `application/json`. The schema should be provided in the `schema` field.
 
-Tryb danych wyjściowych w formacie strukturalnym Gemini obsługuje podzbiór specyfikacji [JSON Schema](https://json-schema.org/).
+Gemini's structured output mode supports a subset of the
+[JSON Schema](https://json-schema.org/) specification.
 
-Obsługiwane są te wartości `type`:
+The following values of `type` are supported:
 
-- **`string`**: w przypadku tekstu.
-- **`number`**: w przypadku liczb zmiennoprzecinkowych.
-- **`integer`**: dla liczb całkowitych.
-- **`boolean`**: dla wartości true lub false.
-- **`object`**: w przypadku uporządkowanych danych z parami klucz-wartość.
-- **`array`**: w przypadku list produktów.
-- **`null`**: aby zezwolić na wartość null w przypadku właściwości, w tablicy typów umieść `"null"` (np. `{"type": ["string", "null"]}`).
+- **`string`**: For text.
+- **`number`**: For floating-point numbers.
+- **`integer`**: For whole numbers.
+- **`boolean`**: For true or false values.
+- **`object`**: For structured data with key-value pairs.
+- **`array`**: For lists of items.
+- **`null`**: To allow a property to be null, include `"null"` in the type array (e.g., `{"type": ["string", "null"]}`).
 
-Te właściwości opisowe pomagają modelowi:
+These descriptive properties help guide the model:
 
-- **`title`**: krótki opis właściwości.
-- **`description`**: dłuższy i bardziej szczegółowy opis nieruchomości.
+- **`title`**: A short description of a property.
+- **`description`**: A longer and more detailed description of a property.
 
-### Właściwości związane z typem
+### Type-specific properties
 
-**W przypadku wartości `object`:**
+**For `object` values:**
 
-- **`properties`**: obiekt, w którym każdy klucz jest nazwą właściwości, a każda wartość jest schematem tej właściwości.
-- **`required`**: tablica ciągów znaków zawierająca listę właściwości, które są wymagane.
-- **`additionalProperties`**: określa, czy właściwości, których nie ma na liście `properties`, są dozwolone. Może to być wartość logiczna lub schemat.
+- **`properties`**: An object where each key is a property name and each value is a schema for that property.
+- **`required`**: An array of strings, listing which properties are mandatory.
+- **`additionalProperties`**: Controls whether properties not listed in `properties` are allowed. Can be a boolean or a schema.
 
-**W przypadku wartości `string`:**
+**For `string` values:**
 
-- **`enum`**: zawiera listę określonego zestawu możliwych ciągów znaków w przypadku zadań klasyfikacji.
-- **`format`**: określa składnię ciągu znaków, np. `date-time`, `date`, `time`.
+- **`enum`**: Lists a specific set of possible strings for classification tasks.
+- **`format`**: Specifies a syntax for the string, such as `date-time`, `date`, `time`.
 
-**W przypadku wartości `number` i `integer`:**
+**For `number` and `integer` values:**
 
-- **`enum`**: zawiera listę określonego zestawu możliwych wartości liczbowych.
-- **`minimum`**: minimalna wartość włącznie.
-- **`maximum`**: maksymalna wartość włącznie.
+- **`enum`**: Lists a specific set of possible numeric values.
+- **`minimum`**: The minimum inclusive value.
+- **`maximum`**: The maximum inclusive value.
 
-**W przypadku wartości `array`:**
+**For `array` values:**
 
-- **`items`**: określa schemat wszystkich elementów w tablicy.
-- **`prefixItems`**: definiuje listę schematów dla pierwszych N elementów, co umożliwia tworzenie struktur podobnych do krotek.
-- **`minItems`**: minimalna liczba elementów w tablicy.
-- **`maxItems`**: maksymalna liczba elementów w tablicy.
+- **`items`**: Defines the schema for all items in the array.
+- **`prefixItems`**: Defines a list of schemas for the first N items, allowing for tuple-like structures.
+- **`minItems`**: The minimum number of items in the array.
+- **`maxItems`**: The maximum number of items in the array.
 
-## Uporządkowane dane wyjściowe a wywoływanie funkcji
+## Structured outputs versus function calling
 
-| Funkcja | Główny przypadek użycia |
+| Feature | Primary Use Case |
 | --- | --- |
-| **Ustrukturyzowane dane wyjściowe** | **Formatowanie ostatecznej odpowiedzi** – użyj tej opcji, gdy chcesz, aby *odpowiedź* modelu miała określony format. |
-| **Wywoływanie funkcji** | **Podejmowanie działań podczas rozmowy** Używaj, gdy model musi *poprosić Cię* o wykonanie zadania przed udzieleniem ostatecznej odpowiedzi. |
+| **Structured Outputs** | **Formatting the final response.** Use when you want the model's *answer* in a specific format. |
+| **Function Calling** | **Taking action during conversation.** Use when the model needs to *ask you* to perform a task before providing a final answer. |
 
-## Sprawdzone metody
+## Best practices
 
-- **Jasne opisy:** użyj pola `description`, aby kierować modelem.
-- **Silne typowanie:** używaj konkretnych typów (`integer`, `string`, `enum`).
-- **Inżynieria promptów:** jasno określ, co ma robić model.
-- **Weryfikacja:** chociaż dane wyjściowe są syntaktycznie poprawnym formatem JSON, zawsze weryfikuj wartości w aplikacji.
-- **Obsługa błędów:** wdróż solidną obsługę błędów w przypadku danych wyjściowych zgodnych ze schematem, ale niepoprawnych semantycznie.
+- **Clear descriptions:** Use the `description` field to guide the model.
+- **Strong typing:** Use specific types (`integer`, `string`, `enum`).
+- **Prompt engineering:** Clearly state what you want the model to do.
+- **Validation:** While output is syntactically correct JSON, always validate values in your application.
+- **Error handling:** Implement robust error handling for schema-compliant but semantically incorrect outputs.
 
-## Ograniczenia
+## Limitations
 
-- **Podzbiór schematu:** nie wszystkie funkcje schematu JSON są obsługiwane.
-- **Złożoność schematu:** bardzo duże lub głęboko zagnieżdżone schematy mogą zostać odrzucone.
+- **Schema subset:** Not all JSON Schema features are supported.
+- **Schema complexity:** Very large or deeply nested schemas may be rejected.
 
-Prześlij opinię
+Send feedback
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Ostatnia aktualizacja: 2026-06-05 UTC.
+Last updated 2026-06-18 UTC.
 
-Chcesz przekazać coś jeszcze?
+Need to tell us more?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-05 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

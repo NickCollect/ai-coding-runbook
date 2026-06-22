@@ -1,134 +1,133 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=de
-fetched_at: 2026-06-15T06:31:01.874508+00:00
-title: "Gemini API-Schl\u00fcssel verwenden \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=ja
+fetched_at: 2026-06-22T06:35:32.595824+00:00
+title: "Gemini API \u30ad\u30fc\u3092\u4f7f\u7528\u3059\u308b \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Feedback geben
+フィードバックを送信
 
-# Gemini API-Schlüssel verwenden
+# Gemini API キーを使用する
 
-Wenn Sie die Gemini API verwenden möchten, müssen Sie Ihre Anfragen authentifizieren. Sie können sich mit einem Standard- oder Autorisierungs-API-Schlüssel authentifizieren.
+Gemini API を使用するには、リクエストを認証する必要があります。認証には、標準または認可 API キーを使用できます。
 
-[Gemini API-Schlüssel erstellen oder ansehen](https://aistudio.google.com/apikey?hl=de)
+[Gemini API キーを作成または表示する](https://aistudio.google.com/apikey?hl=ja)
 
-## API-Schlüsseltypen: Standard- und Autorisierungsschlüssel
+## API キーのタイプ: 標準と認可
 
-API-Schlüssel ermöglichen den Zugriff auf die Gemini API, aber ihre Sicherheitsmerkmale unterscheiden sich. Die Gemini API wird von Standard-API-Schlüsseln auf Autorisierungsschlüssel umgestellt, um die Sicherheit zu verbessern:
+API キーは Gemini API へのアクセスを提供しますが、セキュリティ特性は異なります。Gemini API は、セキュリティを強化するために、標準の API キーから認可キーに移行しています。
 
-- **Standard-API-Schlüssel**: Verknüpfen Anfragen mit einem Google Cloud-Projekt für Abrechnungs- und Kontingentzwecke. Mit Standardschlüsseln wird kein Aufrufer identifiziert. Daher ist die Granularität der Berechtigungen und der Zugriffssteuerung, die sie unterstützen können, begrenzt.
-- **Autorisierungsschlüssel**: Direkt an ein Google Cloud-Dienstkonto gebunden. Wenn Sie einen Autorisierungsschlüssel verwenden, werden Ihre Anfragen unter der Identität des verknüpften Dienstkontos verarbeitet. So können Sie den Zugriff detailliert steuern. Autorisierungsschlüssel sind standardmäßig auf die Generative Language API (Gemini API) beschränkt und ermöglichen eine schnelle Durchsetzung bei geleakten Schlüsseln. Die Verwendung von geleakten Schlüsseln, die von unseren Systemen erkannt werden, wird so schnell unterbunden.
+- **標準 API キー**: 課金と割り当てを目的として、リクエストを Google Cloud プロジェクトに関連付けます。標準キーは呼び出し元を識別しないため、サポートできる権限とアクセス制御の粒度が制限されます。
+- **認可（auth）キー**: Google Cloud サービス アカウントに直接バインドされます。認可キーを使用すると、リクエストはバインドされたサービス アカウントの ID で処理され、きめ細かいアクセス制御が可能になります。認証キーはデフォルトで Generative Language API（Gemini API）に制限されており、漏洩したキーの迅速な適用により、Google のシステムで検出された漏洩したキーの使用を迅速に停止します。
 
-Um eine sichere Nutzung zu gewährleisten, wird bei der Gemini API von Standardschlüsseln auf Authentifizierungsschlüssel umgestellt:
+安全な使用を確保するため、Gemini API は標準キーから認証キーに移行します。
 
-- **Standardmäßige Autorisierungsschlüssel**: Alle neuen API-Schlüssel, die in Google AI Studio erstellt werden, werden automatisch als Autorisierungsschlüssel erstellt.
-- **Am 19. Juni 2026**: Die Gemini API lehnt Anfragen von **nicht eingeschränkten Standardschlüsseln** ab. Standard-API-Schlüssel, für die explizite Einschränkungen gelten, funktionieren weiterhin. Diese Einschränkung verhindert die unbefugte Verwendung von Schlüsseln, die möglicherweise öffentlich freigegeben oder mit anderen Diensten verknüpft sind.
-- **September 2026**: Die Gemini API lehnt Anfragen von **Standardschlüsseln** ab. Sie müssen [vor diesem Datum zu Authentifizierungsschlüsseln migrieren](#migrate-to-auth-key), um Dienstunterbrechungen zu vermeiden. Migrieren Sie vor September 2026 zu Authentifizierungsschlüsseln.
+- **認証キーのデフォルト**: Google AI Studio で作成された新しい API キーはすべて、認証キーとして自動的に作成されます。
+- **2026 年 6 月 19 日**: Gemini API は、**制限のない標準キー**からのリクエストを拒否します。明示的な制限が適用されている標準 API キーは引き続き機能します。この制限により、一般公開されている可能性のあるキーや他のサービスにリンクされている可能性のあるキーの不正使用を防ぐことができます。
+- **2026 年 9 月**: Gemini API は**標準キー**からのリクエストを拒否します。サービスの中断を避けるため、この日付より前に[認証キーに移行](#migrate-to-auth-key)する必要があります。2026 年 9 月までに認証鍵に移行してください。
 
-## API-Schlüssel in Google AI Studio verwalten
+## Google AI Studio で API キーを管理する
 
-Sie können Ihre Projekte und Schlüssel direkt in [Google AI Studio](https://aistudio.google.com/apikey?hl=de) verwalten.
+プロジェクトとキーは [Google AI Studio](https://aistudio.google.com/apikey?hl=ja) で直接管理できます。
 
-### Google Cloud-Projekte
+### Google Cloud プロジェクト
 
-Jeder Gemini API-Schlüssel ist mit einem [Google Cloud-Projekt](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=de) verknüpft.
-In Google Cloud-Projekten werden Abrechnung, Mitbearbeiter und Berechtigungen verwaltet. Google AI Studio bietet eine einfache Oberfläche für den Zugriff auf diese Projekte.
+すべての Gemini API キーは [Google Cloud プロジェクト](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ja)に関連付けられています。Google Cloud プロジェクトは、課金、共同編集者、権限を管理します。Google AI Studio は、これらのプロジェクトにアクセスするための軽量インターフェースを提供します。
 
-- **Standardprojekt**: Wenn Sie ein neuer Nutzer sind, werden in Google AI Studio automatisch ein Standard-Google Cloud-Projekt und ein API-Schlüssel erstellt, nachdem Sie die Nutzungsbedingungen akzeptiert haben. Sie können dieses Projekt umbenennen, indem Sie in Ihrem Dashboard zur Ansicht **Projekte** wechseln.
-- **Vorhandene Projekte**: Wenn Sie bereits ein Google Cloud-Konto haben, wird in AI Studio kein Standardprojekt erstellt. Stattdessen müssen Sie Ihre vorhandenen Projekte importieren.
+- **デフォルト プロジェクト**: 新規ユーザーの場合は、利用規約に同意すると、Google AI Studio によってデフォルトの Google Cloud プロジェクトと API キーが自動的に作成されます。このプロジェクトの名前を変更するには、ダッシュボードの [**プロジェクト**] ビューに移動します。
+- **既存のプロジェクト**: Google Cloud アカウントをすでに持っている場合、AI Studio はデフォルトのプロジェクトを作成しません。代わりに、既存のプロジェクトをインポートする必要があります。
 
-### Projekte importieren
+### プロジェクトのインポート
 
-Standardmäßig werden in Google AI Studio nicht alle Ihre Google Cloud-Projekte angezeigt. Sie müssen die Projekte importieren, die Sie verwenden möchten:
+デフォルトでは、Google AI Studio にすべての Google Cloud プロジェクトが表示されるわけではありません。使用するプロジェクトをインポートする必要があります。
 
-1. Rufen Sie [Google AI Studio](https://aistudio.google.com?hl=de) auf.
-2. Öffnen Sie das **Dashboard** im linken Bereich und wählen Sie **Projekte** aus.
-3. Klicken Sie auf die Schaltfläche **Projekte importieren**.
-4. Suchen Sie nach dem Google Cloud-Projekt, das Sie importieren möchten, und wählen Sie es aus. Klicken Sie dann auf **Importieren**.
-5. Rufen Sie nach dem Importieren im Dashboard die Seite **API-Schlüssel** auf, um einen Schlüssel in diesem Projekt zu erstellen.
+1. [Google AI Studio](https://aistudio.google.com?hl=ja) に移動します。
+2. 左側のパネルから [**Dashboard**] を開き、[**Projects**] を選択します。
+3. [**プロジェクトをインポート**] ボタンをクリックします。
+4. インポートする Google Cloud プロジェクトを検索して選択し、[**インポート**] をクリックします。
+5. インポートしたら、ダッシュボードの [**API キー**] ページに移動して、そのプロジェクトにキーを作成します。
 
-### Fehlerbehebung bei Berechtigungen zum Erstellen von Schlüsseln
+### 鍵の作成権限のトラブルシューティング
 
-Wenn die Schaltfläche **API-Schlüssel erstellen** nicht verfügbar ist und die Meldung *Sie sind nicht berechtigt, in diesem Projekt einen Schlüssel zu erstellen* angezeigt wird, fehlen Ihnen die erforderlichen IAM-Berechtigungen.
+[**API キーを作成**] ボタンが使用できず、「このプロジェクトでキーを作成する権限がありません」というメッセージが表示される場合は、必要な IAM 権限がありません。
 
-Bitten Sie Ihren Google Cloud-Projekt- oder Organisationsadministrator, Ihnen eine Rolle mit den folgenden Berechtigungen zuzuweisen, z. B. „Projektbearbeiter“:
+Google Cloud プロジェクトまたは組織の管理者に、次の権限を含むロール（プロジェクト編集者など）の付与を依頼します。
 
-- `resourcemanager.projects.get`: Ermöglicht AI Studio, das Projekt zu überprüfen.
-- `apikeys.keys.create`: Ermöglicht die Schlüsselgenerierung.
-- `serviceusage.services.enable`: Stellt sicher, dass die Generative Language API aktiviert ist.
-- `iam.serviceAccounts.create`: Erforderlich, um das verknüpfte Dienstkonto zu erstellen.
-- `iam.serviceAccountApiKeyBindings.create`: Bindet das Dienstkonto an den API-Schlüssel.
+- `resourcemanager.projects.get`: AI Studio がプロジェクトを検証できるようにします。
+- `apikeys.keys.create`: 鍵の生成を許可します。
+- `serviceusage.services.enable`: Generative Language API が有効になっていることを確認します。
+- `iam.serviceAccounts.create`: リンクされたサービス アカウントの作成に必要です。
+- `iam.serviceAccountApiKeyBindings.create`: サービス アカウントを API キーにバインドします。
 
-Wenn Sie keinen Administratorzugriff erhalten können, können Sie ein neues Google Cloud-Projekt erstellen, das nicht mit einer Organisation verknüpft ist, um Ihre Schlüssel zu generieren.
+管理者権限を取得できない場合は、組織に関連付けられていない新しい Google Cloud プロジェクトを作成して、鍵を生成できます。
 
-## Umgebung einrichten
+## 環境設定
 
-Nachdem Sie einen Schlüssel haben, konfigurieren Sie Ihre Umgebung so, dass er sicher in Ihren Anwendungen verwendet wird.
+キーを取得したら、アプリケーションで安全に使用できるように環境を構成します。
 
-### Umgebungsvariablen verwenden (empfohlen)
+### 環境変数を使用する（推奨）
 
-Legen Sie die Umgebungsvariable `GEMINI_API_KEY` oder `GOOGLE_API_KEY` fest. Die Gemini API-Clientbibliotheken erkennen und verwenden diese Variablen automatisch. Wenn beide festgelegt sind, hat `GOOGLE_API_KEY` Vorrang.
+環境変数 `GEMINI_API_KEY` または `GOOGLE_API_KEY` を設定します。Gemini API クライアント ライブラリは、これらの変数を自動的に検出して使用します。両方を設定した場合は、`GOOGLE_API_KEY` が優先されます。
 
-Wählen Sie Ihr Betriebssystem aus, um die Variable festzulegen:
+オペレーティング システムを選択して変数を設定します。
 
-### Linux/macOS – Bash
+### Linux/macOS - Bash
 
-Prüfen Sie, ob Sie eine Bash-Konfigurationsdatei haben:
+bash 構成ファイルがあるかどうかを確認します。
 
 ```
 ~/.bashrc
 ```
 
-Falls nicht, erstellen Sie eine und öffnen Sie sie:
+存在しない場合は、作成して開きます。
 
 ```
 touch ~/.bashrc && open ~/.bashrc
 ```
 
-Fügen Sie am Ende der Datei den Exportbefehl hinzu:
+ファイルの末尾にエクスポート コマンドを追加します。
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-Speichern Sie die Datei und wenden Sie dann die Änderungen an:
+ファイルを保存し、変更を適用します。
 
 ```
 source ~/.bashrc
 ```
 
-### macOS – Zsh
+### macOS - Zsh
 
-Prüfen Sie, ob Sie eine ZSH-Konfigurationsdatei haben:
+zsh 構成ファイルがあるかどうかを確認します。
 
 ```
 ~/.zshrc
 ```
 
-Falls nicht, erstellen Sie eine und öffnen Sie sie:
+存在しない場合は、作成して開きます。
 
 ```
 touch ~/.zshrc && open ~/.zshrc
 ```
 
-Fügen Sie den Exportbefehl hinzu:
+エクスポート コマンドを追加します。
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-Speichern Sie die Datei und wenden Sie dann die Änderungen an:
+ファイルを保存し、変更を適用します。
 
 ```
 source ~/.zshrc
@@ -136,15 +135,15 @@ source ~/.zshrc
 
 ### Windows
 
-1. Suchen Sie in der Windows-Suchleiste nach „Umgebungsvariablen“.
-2. Klicken Sie im Dialogfeld „Systemeigenschaften“ auf **Umgebungsvariablen**.
-3. Klicken Sie unter **Nutzervariablen** oder **Systemvariablen** auf **Neu…**.
-4. Legen Sie den Variablennamen auf `GEMINI_API_KEY` und den Wert auf Ihren API-Schlüssel fest.
-5. Klicken Sie zum Speichern auf **OK**. Öffnen Sie eine neue Terminalsitzung, um die Variable zu laden.
+1. Windows の検索バーで「環境変数」を検索します。
+2. [システムのプロパティ] ダイアログで [**環境変数**] をクリックします。
+3. [**ユーザー環境変数**] または [**システム環境変数**] で [**新規...**] をクリックします。
+4. 変数名を `GEMINI_API_KEY` に設定し、値を API キーに設定します。
+5. [**OK**] をクリックして保存します。新しいターミナル セッションを開いて変数を読み込みます。
 
-### API-Schlüssel explizit im Code angeben
+### コードで API キーを明示的に指定する
 
-Sie können den API-Schlüssel explizit übergeben, wenn Sie den Client initialisieren. Tun Sie dies nur, wenn Sie keine Umgebungsvariablen verwenden können.
+クライアントを初期化するときに、API キーを明示的に渡すことができます。環境変数を使用できない場合にのみ、これを行います。
 
 ### Python
 
@@ -178,7 +177,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -252,98 +251,98 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-## Sicherheits- und Secret-Verwaltung
+## セキュリティとシークレットの管理
 
-Behandeln Sie Ihren Gemini API-Schlüssel wie ein Passwort. Wenn Ihr Projekt manipuliert wird, können andere das Kontingent Ihres Projekts nutzen, unerwartete Abrechnungsgebühren verursachen und auf private Ressourcen zugreifen.
+Gemini API キーはパスワードと同様に扱ってください。不正使用されると、他のユーザーがプロジェクトの割り当てを消費し、予期しない請求が発生し、プライベート リソースにアクセスする可能性があります。
 
-### Kritische Sicherheitsregeln
+### 重大なセキュリティ ルール
 
-- **Schlüssel vertraulich behandeln**: Checken Sie API-Schlüssel niemals in Quellcodeverwaltungssysteme wie Git ein.
-- **Schlüssel niemals clientseitig in der Produktion preisgeben**: API-Schlüssel dürfen nicht direkt in Web- oder mobilen Apps hartcodiert werden. Schlüssel, die in clientseitigem Code kompiliert werden, können von Nutzern extrahiert werden. Um clientseitige Apps zu schützen, können Sie einen Backend-Proxyserver ausführen, über den die eigentlichen API-Aufrufe erfolgen.
+- **キーの機密性を保持する**: API キーを Git などのソース コントロール システムにチェックインしないでください。
+- **本番環境でクライアントサイドの鍵を公開しない**: ウェブアプリやモバイルアプリに API キーを直接ハードコードしないでください。クライアントサイド コードにコンパイルされたキーは、ユーザーが抽出できます。クライアントサイド アプリを保護するには、バックエンド プロキシ サーバーを実行して実際の API 呼び出しを行います。
 
-### Best Practices für die Secret-Verwaltung
+### シークレット管理のベスト プラクティス
 
-- **Umgebungsvariablen**: Schlüssel werden aus Umgebungsvariablen anstatt aus Konfigurationsdateien gelesen.
-- **Secret Manager**: Speichern Sie Ihre Schlüssel für die Produktion in einem sicheren Secret-Speicher wie [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=de).
-- **Abrechnungsbenachrichtigungen**: Richten Sie in der Google Cloud Console Abrechnungsbenachrichtigungen ein, um benachrichtigt zu werden, wenn die Nutzung oder die Kosten steigen.
+- **環境変数**: 構成ファイルではなく環境変数からキーを読み取ります。
+- **Secret Manager**: 本番環境では、[Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=ja) などの安全なシークレット ストアに鍵を保存します。
+- **課金アラート**: Google Cloud コンソールで課金アラートを設定して、使用量や費用が急増した場合に通知を受け取ります。
 
-### Checkliste für die Reaktion auf Datenlecks
+### リーク対応チェックリスト
 
-Wenn Sie vermuten, dass Ihr API-Schlüssel offengelegt wurde, gehen Sie so vor:
+API キーが漏洩した疑いがある場合:
 
-1. **Neuen Schlüssel generieren**: Erstellen Sie einen Ersatzschlüssel in Google AI Studio oder in der Cloud Console.
-2. **Anwendung aktualisieren**: Stellen Sie Ihren Code mit dem neuen Schlüssel bereit.
-3. **Manipulierten Schlüssel deaktivieren oder löschen**: Deaktivieren Sie den geleakten Schlüssel in der Cloud Console, sobald der neue Schlüssel bestätigt wurde. Löschen Sie den alten Schlüssel erst, wenn der neue Schlüssel vollständig aktiv ist, um Ausfallzeiten der Anwendung zu vermeiden.
-4. **Nutzung prüfen**: Prüfen Sie Abrechnungslogs und API-Nutzung in der Google Cloud Console, um unautorisierte Aktivitäten zu erkennen.
+1. **新しい鍵を生成する**: Google AI Studio または Cloud コンソールで代替鍵を作成します。
+2. **アプリケーションを更新する**: 新しいキーを使用してコードをデプロイします。
+3. **侵害された鍵を無効にするか削除する**: 新しい鍵が検証されたら、Cloud Console で漏洩した鍵を無効にします。アプリケーションのダウンタイムを回避するため、新しい鍵が完全に有効になるまで古い鍵は削除しないでください。
+4. **使用状況の監査**: Google Cloud コンソールで課金ログと API 使用状況を確認して、不正なアクティビティを特定します。
 
-## Schlüssel einschränken und schützen
+## キーの制限と保護
 
-Wenn Sie Ihren API-Schlüsseln Einschränkungen hinzufügen, minimieren Sie den potenziellen Schaden, falls ein Schlüssel manipuliert wird.
+API キーに制限を追加すると、キーが不正使用された場合の影響を最小限に抑えることができます。
 
-### Einschränkungen für den Ursprung von Anfragen anwenden
+### リクエストのオリジン制限を適用する
 
-Mit Ursprungseinschränkungen wird festgelegt, welche IP-Adressen, Websites oder Anwendungen Ihren Schlüssel verwenden dürfen.
+オリジンの制限は、キーを使用できる IP アドレス、ウェブサイト、アプリケーションを制限します。
 
-1. Rufen Sie die [Seite „Anmeldedaten“ in der Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=de) auf.
-2. Wählen Sie Ihr Projekt aus und klicken Sie auf den Namen des API-Schlüssels, den Sie einschränken möchten.
-3. Wählen Sie unter **Anwendungseinschränkungen** die Option **IP-Adressen** (oder den für Ihre Umgebung geeigneten Einschränkungstyp) aus.
-4. Geben Sie die zulässigen IP-Adressen oder ‑Bereiche an und klicken Sie auf **Speichern**.
+1. [Google Cloud コンソールの [認証情報] ページ](https://console.cloud.google.com/apis/credentials?hl=ja)に移動します。
+2. プロジェクトを選択し、制限する API キーの名前をクリックします。
+3. [**アプリケーションの制限**] で、[**IP アドレス**]（または環境に適した制限タイプ）を選択します。
+4. 許可する IP アドレスまたは範囲を指定して、[**保存**] をクリックします。
 
-### Uneingeschränkte Standard-API-Schlüssel sichern
+### 制限のない標準 API キーを保護する
 
-Wenn Sie die Gemini API nach dem 19. Juni 2026 weiterhin verwenden möchten, müssen Sie alle nicht eingeschränkten Schlüssel sichern.
+2026 年 6 月 19 日以降も Gemini API を引き続き使用するには、制限のないキーを保護する必要があります。
 
-#### Schlüssel über AI Studio nur auf die Gemini API beschränken
+#### AI Studio でキーを Gemini API のみに制限する
 
-Wenn Sie den Schlüssel nur für die Gemini API verwenden, können Sie ihn direkt in AI Studio schützen:
+Gemini API にのみキーを使用する場合は、AI Studio で直接保護します。
 
-1. Suchen Sie auf der Seite **API-Schlüssel** in [Google AI Studio](https://aistudio.google.com/api-keys?hl=de) nach Schlüsseln, die mit dem Label **Uneingeschränkt** gekennzeichnet sind.
-2. Bewegen Sie den Mauszeiger auf das Label und klicken Sie im Dialogfeld auf **Einschränkungen hinzufügen**.
-3. Wählen Sie **Nur auf Gemini API beschränken** aus.
-4. Klicken Sie zur Bestätigung auf **Schlüssel einschränken**.
+1. [Google AI Studio](https://aistudio.google.com/api-keys?hl=ja) の [**API キー**] ページで、[**制限なし**] ラベルが付いているキーを探します。
+2. ラベルにカーソルを合わせ、ダイアログで [**制限を追加**] をクリックします。
+3. [**Gemini API のみに制限**] を選択します。
+4. [**キーを制限**] をクリックして確定します。
 
-#### Schlüssel für andere Dienste über die Google Cloud Console einschränken
+#### Google Cloud コンソールで他のサービスの鍵を制限する
 
-Wenn der Schlüssel für andere Google-APIs freigegeben ist (nicht empfohlen), schränken Sie ihn in der Cloud Console ein. **Hinweis: Gemini API-Anfragen mit diesem Schlüssel schlagen fehl, nachdem diese Einschränkungen angewendet wurden.**
+キーが他の Google API と共有されている場合（推奨されません）、Cloud コンソールで制限します。**注: これらの制限が適用されると、このキーを使用する Gemini API リクエストは失敗します。**
 
-1. Rufen Sie die [Seite „Anmeldedaten“ in der Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=de) auf.
-2. Wählen Sie das Projekt und den API-Schlüssel aus.
-3. Wählen Sie unter **API-Einschränkungen** die Option **Schlüssel einschränken** aus.
-4. Wählen Sie im Drop-down-Menü die APIs aus, auf die mit diesem Schlüssel zugegriffen werden soll. Wählen Sie nicht die **Generative Language API** aus.
-5. Klicken Sie auf **Speichern**. Erstellen Sie in AI Studio einen separaten, eingeschränkten Schlüssel, um die Gemini API weiterhin verwenden zu können.
+1. [Google Cloud コンソールの [認証情報] ページ](https://console.cloud.google.com/apis/credentials?hl=ja)に移動します。
+2. プロジェクトと API キーを選択します。
+3. [**API の制限**] で [**キーを制限**] を選択します。
+4. プルダウンから、このキーでアクセスする API を選択します。**Generative Language API** は選択しないでください。
+5. [**保存**] をクリックします。Gemini API を引き続き使用するには、AI Studio で制限付きの個別のキーを作成します。
 
-### Blockierte inaktive Schlüssel
+### 休眠中のキーをブロックする
 
-Ab dem 7. Mai 2026 werden nicht eingeschränkte API-Schlüssel, die über einen längeren Zeitraum nicht verwendet wurden, von der Gemini API blockiert. Für diese Schlüssel wird in AI Studio das Tag **Gesperrt** angezeigt. Sie müssen einen neuen Schlüssel generieren oder einen vorhandenen eingeschränkten Schlüssel verwenden, um fortzufahren.
+2026 年 5 月 7 日以降、Gemini API は長期間使用されていない制限のない API キーをブロックします。これらのキーには、AI Studio で [**Blocked**] タグが表示されます。続行するには、新しいキーを生成するか、既存の制限付きキーを使用する必要があります。
 
-## Zu einem Authentifizierungsschlüssel migrieren
+## 認証キーに移行する
 
-So erstellen Sie einen neuen API-Schlüssel für die Authentifizierung und aktualisieren Ihre Anwendungen:
+新しい認証 API キーを作成してアプリケーションを更新する手順は次のとおりです。
 
-1. Rufen Sie die Seite [AI Studio-API-Schlüssel](https://aistudio.google.com/api-keys?hl=de) auf.
-2. Sehen Sie in der Spalte **Key Type** (Schlüsseltyp) nach, ob Schlüssel als **Standard** aufgeführt sind.
-3. Klicken Sie auf **API-Schlüssel erstellen**, um einen neuen Schlüssel zu generieren. Alle neuen Schlüssel, die in AI Studio erstellt werden, sind automatisch Autorisierungsschlüssel.
-4. Kopieren Sie den neuen API-Schlüssel für die Authentifizierung.
-5. Aktualisieren Sie Ihren Anwendungscode, Ihre Umgebungsvariablen und alle Bereitstellungskonfigurationen, um den neuen API-Schlüssel für die Authentifizierung zu verwenden.
-6. Testen Sie Ihre Anwendung, um zu prüfen, ob sie mit dem neuen Schlüssel ordnungsgemäß funktioniert.
-7. Löschen oder widerrufen Sie nach der Bestätigung Ihren alten Traffic-Schlüssel, um Missbrauch zu verhindern.
+1. [AI Studio API キーのページ](https://aistudio.google.com/api-keys?hl=ja)に移動します。
+2. [**キーのタイプ**] 列で、[**標準**] と表示されているキーを確認します。
+3. [**API キーを作成**] をクリックして、新しいキーを生成します。AI Studio で作成された新しいキーはすべて、認証キーとして自動的に作成されます。
+4. 新しい認証 API キーをコピーします。
+5. 新しい認証 API キーを使用するように、アプリケーション コード、環境変数、デプロイ構成を更新します。
+6. アプリケーションをテストして、新しいキーで正しく動作することを確認します。
+7. 確認が済んだら、古いトラフィック キーを削除または取り消して、不正使用を防ぎます。
 
-## Beschränkungen
+## 制限事項
 
-Für Google AI Studio gelten die folgenden Einschränkungen für die Projekt- und Schlüsselverwaltung:
+Google AI Studio には、プロジェクトとキーの管理に関する次の制限があります。
 
-- Sie können maximal 10 Projekte gleichzeitig über die Seite **Projekte** in Google AI Studio erstellen.
-- Auf den Seiten **API-Schlüssel** und **Projekte** werden maximal 100 Schlüssel und 50 Projekte angezeigt.
-- Es werden nur API-Schlüssel angezeigt, die uneingeschränkt sind oder speziell auf die Generative Language API (Gemini API) beschränkt sind.
+- Google AI Studio の [**プロジェクト**] ページから、一度に最大 10 個のプロジェクトを作成できます。
+- [**API キー**] ページと [**プロジェクト**] ページには、最大 100 個のキーと 50 個のプロジェクトが表示されます。
+- 制限がない API キー、または Generative Language API（Gemini API）に限定して制限されている API キーのみが表示されます。
 
-Für die erweiterte Projektverwaltung oder zum Ändern von Schlüsseln mit anderen Einschränkungen verwenden Sie die [Seite „Anmeldedaten“ in der Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=de).
+高度なプロジェクト管理を行う場合や、他の制限付きで鍵を変更する場合は、[Google Cloud コンソールの [認証情報] ページ](https://console.cloud.google.com/apis/credentials?hl=ja)を使用します。
 
-Feedback geben
+フィードバックを送信
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Zuletzt aktualisiert: 2026-06-11 (UTC).
+最終更新日 2026-06-19 UTC。
 
-Haben Sie Feedback für uns?
+ご意見をお聞かせください
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-11 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-19 UTC。"],[],[]]

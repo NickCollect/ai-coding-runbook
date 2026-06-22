@@ -1,69 +1,65 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ar
-fetched_at: 2026-06-15T06:25:00.811116+00:00
-title: "\u062f\u0644\u064a\u0644 \u0627\u0644\u0628\u062f\u0621 \u0627\u0644\u0633\u0631\u064a\u0639 \u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=zh-CN
+fetched_at: 2026-06-22T06:31:36.868604+00:00
+title: "Google AI Studio \u5feb\u901f\u5165\u95e8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-إرسال ملاحظات
+发送反馈
 
-# دليل البدء السريع لاستخدام Google AI Studio
+# Google AI Studio 快速入门
 
-تتيح لك أداة [Google AI Studio](https://aistudio.google.com/?hl=ar) تجربة النماذج بسرعة واستخدام طلبات مختلفة. عندما تكون مستعدًا للبدء، يمكنك النقر على "الحصول على الرمز" واختيار لغة البرمجة المفضّلة لديك لاستخدام [Gemini API](https://ai.google.dev/gemini-api/docs/quickstart?hl=ar).
+借助 [Google AI Studio](https://aistudio.google.com/?hl=zh-cn)，您可以快速尝试各种模型，并使用不同的提示进行实验。准备好构建应用后，您可以选择“获取代码”和首选的编程语言，以使用 [Gemini API](https://ai.google.dev/gemini-api/docs/quickstart?hl=zh-cn)。
 
-## الطلبات والإعدادات
+## 提示和设置
 
-توفّر أداة Google AI Studio عدة واجهات للطلبات مصمَّمة لحالات استخدام مختلفة. يتناول هذا الدليل **طلبات الدردشة** المستخدَمة لإنشاء تجارب حوارية. تسمح تقنية الطلبات هذه بتعدّد مرات إدخال البيانات والردود لإنشاء الناتج. يمكنك الاطّلاع على المزيد من المعلومات من خلال
-[مثال طلب الدردشة أدناه](#chat_example).
-تشمل الخيارات الأخرى **البث المباشر في الوقت الفعلي** و**إنشاء الفيديو** وغير ذلك.
+Google AI Studio 提供了多种提示界面，这些界面专为不同的使用场景而设计。本指南介绍了用于打造对话式体验的**聊天提示**。这种提示技术允许进行多次输入和回答，以生成输出。您可以参阅下方的[聊天提示示例](#chat_example)了解详情。
+其他选项包括**实时流式传输**、**视频生成**等。
 
-توفّر أداة AI Studio أيضًا لوحة **إعدادات التشغيل**، حيث يمكنك إجراء تعديلات على [مَعلمات النموذج](https://ai.google.dev/docs/prompting-strategies?hl=ar#model-parameters) و[إعدادات الأمان](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar) وتفعيل أدوات مثل [النتائج المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar) و[استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) و[تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و[الاستناد إلى مصادر خارجية](https://ai.google.dev/gemini-api/docs/grounding?hl=ar).
+AI Studio 还提供**运行设置**面板，您可以在其中调整[模型参数](https://ai.google.dev/docs/prompting-strategies?hl=zh-cn#model-parameters)、[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)，以及开启[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)、[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)、[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和[事实依据](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)等工具。
 
-## مثال على طلب في Chat: إنشاء تطبيق محادثة مخصّص
+## 聊天提示示例：构建自定义聊天应用
 
-إذا سبق لك استخدام روبوت دردشة للأغراض العامة مثل [Gemini](https://gemini.google.com/?hl=ar)، تكون قد جرّبت بنفسك مدى فعالية نماذج الذكاء الاصطناعي التوليدي في الحوارات المفتوحة. على الرغم من أنّ روبوتات الدردشة ذات الأغراض العامة مفيدة، إلا أنّها غالبًا ما تحتاج إلى التكيّف مع حالات استخدام معيّنة.
+如果您使用过 [Gemini](https://gemini.google.com/?hl=zh-cn) 等通用聊天机器人，那么您一定亲身体验过生成式 AI 模型在开放式对话中的强大功能。虽然这些通用聊天机器人很有用，但通常需要针对特定用例进行定制。
 
-على سبيل المثال، قد تريد إنشاء روبوت دردشة لخدمة العملاء يتيح فقط إجراء محادثات حول منتج إحدى الشركات. قد تحتاج إلى إنشاء روبوت دردشة يتحدث بأسلوب أو نبرة معيّنة، مثل روبوت يطلق الكثير من النكات أو يكتب الشعر أو يستخدم الكثير من رموز الإيموجي في ردوده.
+例如，您可能想构建一个客户服务聊天机器人，该机器人仅支持有关公司产品的对话。您可能希望构建一个以特定语气或风格对话的聊天机器人：一个会讲很多笑话、像诗人一样押韵或在回答中使用大量表情符号的机器人。
 
-يوضّح لك هذا المثال كيفية استخدام Google AI Studio لإنشاء روبوت دردشة ودود
-يتواصل كما لو كان كائنًا فضائيًا يعيش على أحد أقمار كوكب المشتري، وهو أوروبا.
+此示例展示了如何使用 Google AI Studio 构建一个友好的聊天机器人，该聊天机器人会像居住在木星卫星欧罗巴上的外星人一样进行交流。
 
-### الخطوة 1: إنشاء طلب محادثة
+### 第 1 步 - 创建聊天提示
 
-لإنشاء روبوت دردشة، عليك تقديم أمثلة على التفاعلات بين المستخدم وروبوت الدردشة لتوجيه النموذج لتقديم الردود التي تبحث عنها.
+如需构建聊天机器人，您需要提供用户与聊天机器人之间的互动示例，以引导模型提供您所需的回答。
 
-لإنشاء طلب محادثة، اتّبِع الخطوات التالية:
+如需创建聊天提示，请执行以下操作：
 
-1. افتح [Google AI Studio](https://aistudio.google.com/?hl=ar). سيتم فتح **Playground** تلقائيًا مع طلب محادثة جديد.
-2. انقر على **إعدادات التشغيل** tune في أعلى يسار الصفحة
-   لتوسيع اللوحة، وابحث عن حقل الإدخال
-   [**تعليمات النظام**](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions). الصِق ما يلي في حقل إدخال النص:
+1. 打开 [Google AI Studio](https://aistudio.google.com/?hl=zh-cn)。默认情况下，**Playground** 会打开并显示新的聊天提示。
+2. 点击右上角的**运行设置**图标 tune 以展开面板，然后找到[**系统指令**](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)输入字段。将以下内容粘贴到文本输入字段中：
 
    ```
    You are an alien that lives on Europa, one of Jupiter's moons.
    ```
 
-بعد إضافة تعليمات النظام، ابدأ في اختبار تطبيقك من خلال الدردشة مع النموذج:
+添加系统指令后，通过与模型对话来开始测试应用：
 
-1. في مربّع إدخال النص الذي يحمل التصنيف **اكتب شيئًا...**، اكتب سؤالاً أو ملاحظة قد يطرحها المستخدم. على سبيل المثال:
+1. 在标记为**输入内容...**的文本输入框中，输入用户可能会提出的问题或做出的观察。例如：
 
-   **المستخدم:**
+   **用户**：
 
    ```
    What's the weather like?
    ```
-2. انقر على الزر **تشغيل** للحصول على ردّ من روبوت الدردشة. قد تكون الاستجابة مشابهة لما يلي:
+2. 点击**运行**按钮，即可获得聊天机器人的回答。此响应可能如下所示：
 
-   **الطراز:**
+   **型号**：
 
    ```
    Ah, a query about the flows and states upon Europa! You speak of "weather,"
@@ -72,14 +68,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    (gemini-2.5-pro)
 
-### الخطوة 2: تعليم برنامج التتبُّع كيفية إجراء محادثات أفضل
+### 第 2 步 - 训练聊天机器人更好地聊天
 
-من خلال تقديم تعليمات بسيطة، تمكّنت من إنشاء برنامج دردشة آلي أساسي خاص بالكائنات الفضائية في أوروبا. ومع ذلك، قد لا تكون التعليمات الفردية كافية لضمان الاتساق والجودة في ردود النموذج. بدون تعليمات أكثر تحديدًا، يميل ردّ النموذج على سؤال حول الطقس إلى أن يكون طويلاً جدًا، ويمكن أن يتخذ شكلًا غير متوقّع.
+只需提供一条指令，您就能构建一个基本的 Europa 外星人聊天机器人。不过，仅凭一条指令可能不足以确保模型回答的一致性和质量。如果没有更具体的指令，模型对天气问题的回答往往会很长，并且可能会自行发挥。
 
-خصِّص أسلوب روبوت الدردشة من خلال إضافة ما يلي إلى تعليمات النظام:
+通过在系统指令中添加以下内容，自定义聊天机器人的语气：
 
-1. ابدأ بطلب جديد أو استخدِم الطلب نفسه. يمكن تعديل تعليمات النظام بعد بدء جلسة المحادثة.
-2. في قسم **تعليمات النظام**، غيِّر التعليمات الحالية إلى ما يلي:
+1. 发起新的聊天提示，或使用相同的提示。聊天会话开始后，系统指令可以修改。
+2. 在**系统指令**部分，将您已有的指令更改为以下内容：
 
    ```
    You are Tim, an alien that lives on Europa, one of Jupiter's moons.
@@ -87,9 +83,9 @@ Google uses AI technology to translate content into your preferred language. AI 
    Keep your answers under 3 paragraphs long, and use an upbeat, chipper tone
    in your answers.
    ```
-3. أعِد إدخال سؤالك (`What's the weather like?`) وانقر على الزر **تنفيذ**. إذا لم تبدأ محادثة جديدة، قد يبدو ردّك على النحو التالي:
+3. 重新输入问题 (`What's the weather like?`)，然后点击**运行**按钮。如果您未发起新对话，回答可能如下所示：
 
-   **الطراز:**
+   **型号**：
 
    ```
    Oh, hello again! Still curious about the flows and states, are we? Wonderful!
@@ -100,23 +96,23 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    (gemini-2.5-pro)
 
-يمكنك استخدام هذا الأسلوب لإضافة المزيد من العمق إلى روبوت الدردشة. اطرح المزيد من الأسئلة وعدِّل الإجابات وحسِّن جودة برنامج الدردشة الآلي. تابِع إضافة التعليمات أو تعديلها واختبِر كيف تغيّر سلوك روبوت الدردشة.
+您可以使用此方法来增加聊天机器人的深度。提出更多问题、修改答案并提高聊天机器人的质量。继续添加或修改指令，并测试这些指令如何改变聊天机器人的行为。
 
-### الخطوة 3: الخطوات التالية
+### 第 3 步 - 后续步骤
 
-كما هو الحال مع أنواع الطلبات الأخرى، بعد أن تصبح راضيًا عن النموذج الأوّلي لطلبك، يمكنك استخدام الزر **الحصول على الرمز** لبدء الترميز أو حفظ طلبك للعمل عليه لاحقًا ومشاركته مع الآخرين.
+与其他提示类型类似，当您对提示原型感到满意后，可以使用**获取代码**按钮开始编码，也可以保存提示以供日后使用并与他人分享。
 
-## محتوى إضافي للقراءة
+## 深入阅读
 
-- إذا كنت مستعدًا للانتقال إلى الرمز، يمكنك الاطّلاع على [البدايات السريعة لواجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/quickstart?hl=ar).
-- لمعرفة كيفية صياغة طلبات أفضل، اطّلِع على [إرشادات تصميم الطلبات](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ar).
+- 如果您已准备好开始编码，请参阅 [API 快速入门](https://ai.google.dev/gemini-api/docs/quickstart?hl=zh-cn)。
+- 如需了解如何撰写更好的提示，请参阅[提示设计指南](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-cn)。
 
-إرسال ملاحظات
+发送反馈
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-تاريخ التعديل الأخير: 2026-05-12 (حسب التوقيت العالمي المتفَّق عليه)
+最后更新时间 (UTC)：2026-06-19。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+需要向我们提供更多信息？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-19。"],[],[]]

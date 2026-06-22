@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=ko
-fetched_at: 2026-06-15T06:33:37.499968+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/image-understanding
+fetched_at: 2026-06-22T06:32:48.865153+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+# Image understanding
 
-의견 보내기
+Gemini models are built to be multimodal from the ground up, unlocking a wide
+range of image processing and computer vision tasks including but not limited to
+image captioning, classification, and visual question answering without having
+to train specialized ML models.
 
-# 이미지 이해
+In addition to their general multimodal capabilities, Gemini models offer
+**enhanced accuracy** for specific use cases like [object detection](#object-detection) and [segmentation](#segmentation), through additional
+training.
 
-Gemini 모델은 처음부터 멀티모달로 빌드되어 전문 ML 모델을 학습시키지 않고도 이미지 캡션, 분류, 시각적 질의 응답을 비롯한 다양한 이미지 처리 및 컴퓨터 비전 작업을 수행할 수 있습니다.
+## Passing images to Gemini
 
-Gemini 모델은 일반적인 멀티모달 기능 외에도 추가
-학습을 통해 [객체 감지](#object-detection) 및 [세분화](#segmentation)와 같은 특정 사용 사례에 대해
-**향상된 정확성**을 제공합니다.
+You can provide images as input to Gemini using several methods:
 
-## Gemini에 이미지 전달
+- [Passing image using URL](#url-image): Ideal for publicly accessible images.
+- [Passing inline image data](#inline-image): For base64-encoded image data.
+- [Uploading images using the File API](#upload-image): Recommended for
+  larger files or for reusing images across multiple requests.
 
-다음과 같은 여러 가지 방법을 사용하여 Gemini에 이미지를 입력으로 제공할 수 있습니다.
+### Passing image using URL
 
-- [URL을 사용하여 이미지 전달](#url-image): 공개적으로 액세스할 수 있는 이미지에 적합합니다.
-- [인라인 이미지 데이터 전달](#inline-image): base64로 인코딩된 이미지 데이터의 경우
-- [File API를 사용하여 이미지 업로드](#upload-image): 대용량 파일 또는 여러 요청에서 이미지를 재사용하는 데 권장됩니다.
-
-### URL을 사용하여 이미지 전달
-
-[Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko)를 사용하여 이미지를 업로드하고 요청에 전달할 수 있습니다
-.
+You can upload an image using the [Files API](https://ai.google.dev/gemini-api/docs/interactions/files) and pass it
+in the request:
 
 ### Python
 
@@ -108,9 +108,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 인라인 이미지 데이터 전달
+### Passing inline image data
 
-이미지 데이터를 base64로 인코딩된 문자열로 제공할 수 있습니다.
+You can provide image data as base64-encoded strings:
 
 ### Python
 
@@ -190,9 +190,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### File API를 사용하여 이미지 업로드
+### Uploading images using the File API
 
-대용량 파일의 경우 또는 동일한 이미지 파일을 반복적으로 사용하려면 Files API를 사용하세요. [Files API 가이드](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko)를 참고하세요.
+For large files or to be able to use the same image file repeatedly, use the
+Files API. See the [Files API guide](https://ai.google.dev/gemini-api/docs/interactions/files).
 
 ### Python
 
@@ -266,9 +267,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 여러 이미지로 프롬프트
+## Prompting with multiple images
 
-`input` 배열에 여러 이미지 객체를 포함하여 단일 프롬프트에 여러 이미지를 제공할 수 있습니다.
+You can provide multiple images in a single prompt by including multiple image
+objects in the `input` array:
 
 ### Python
 
@@ -347,9 +349,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 객체 감지
+## Object detection
 
-모델은 이미지에서 객체를 감지하고 경계 상자 좌표를 가져오도록 학습됩니다. 이미지 크기에 상대적인 좌표는 [0, 1000]으로 확장됩니다. 원래 이미지 크기에 따라 이러한 좌표의 크기를 조정해야 합니다.
+Models are trained to detect objects in an
+image and get their bounding box coordinates. The coordinates, relative to image
+dimensions, scale to [0, 1000]. You need to descale these coordinates based on
+your original image size.
 
 ### Python
 
@@ -471,14 +476,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-자세한 예는 [Gemini Cookbook](https://github.com/google-gemini/cookbook)의 다음 노트북을 참고하세요.
+For more examples, check following notebooks in the [Gemini Cookbook](https://github.com/google-gemini/cookbook):
 
-## 세분화
+## Segmentation
 
-Gemini 2.5부터 모델은 항목을 감지할 뿐만 아니라 항목을 세분화하고 윤곽 마스크를 제공합니다.
+Starting with Gemini 2.5, models not only detect items but also segment them
+and provide their contour masks.
 
-모델은 각 항목이 세분화 마스크를 나타내는 JSON 목록을 예측합니다.
-각 항목에는 0~1000 사이의 정규화된 좌표가 있는 `[y0, x0, y1, x1]` 형식의 경계 상자(`box_2d`), 객체를 식별하는 라벨(`label`), 마지막으로 0~255 사이의 값을 갖는 확률 맵인 base64로 인코딩된 png로 경계 상자 내의 세분화 마스크가 있습니다.
+The model predicts a JSON list, where each item represents a segmentation mask.
+Each item has a bounding box ("`box_2d`") in the format `[y0, x0, y1, x1]` with
+normalized coordinates between 0 and 1000, a label ("`label`") that identifies
+the object, and finally the segmentation mask inside the bounding box, as base64
+encoded png that is a probability map with values between 0 and 255.
 
 ### Python
 
@@ -620,13 +629,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![컵케이크가 놓인 테이블, 목재 및 유리 물체가 강조 표시됨](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=ko)
+![A table with cupcakes, with the wooden and glass objects highlighted](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg)
 
-객체 및 세분화 마스크가 있는 세분화 출력 예
+An example segmentation output with objects and segmentation masks
 
-## 지원되는 이미지 형식
+## Supported image formats
 
-Gemini는 다음과 같은 이미지 형식 MIME 유형을 지원합니다.
+Gemini supports the following image format MIME types:
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
@@ -634,66 +643,80 @@ Gemini는 다음과 같은 이미지 형식 MIME 유형을 지원합니다.
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-다른 파일 입력 방법에 관해 알아보려면
-[파일 입력 방법](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods?hl=ko) 가이드를 참고하세요.
+To learn about other file input methods, see the
+[File input methods](https://ai.google.dev/gemini-api/docs/interactions/file-input-methods) guide.
 
-## 기능
+## Capabilities
 
-모든 Gemini 모델 버전은 멀티모달이며 이미지 캡션, 시각적 질의 응답, 이미지 분류, 객체 감지 및 세분화를 비롯한 다양한 이미지 처리 및 컴퓨터 비전 작업에 활용할 수 있습니다.
+All Gemini model versions are multimodal and can be utilized in a wide range
+of image processing and computer vision tasks including but not limited to
+image captioning, visual question and answering, image classification,
+object detection and segmentation.
 
-Gemini는 품질 및 성능 요구사항에 따라 전문 ML 모델을 사용할 필요성을 줄일 수 있습니다.
+Gemini can reduce the need to use specialized ML models depending on your
+quality and performance requirements.
 
-최신 모델 버전은 향상된
-[객체 감지](#object-detection) 및 [세분화](#segmentation)와 같은 일반적인 기능 외에도
-전문 작업의 정확성을 개선하도록 특별히 학습됩니다.
+The latest model versions are specifically trained improve accuracy of
+specialized tasks in addition to generic capabilities, like enhanced
+[object detection](#object-detection) and [segmentation](#segmentation).
 
-## 제한사항 및 주요 기술 정보
+## Limitations and key technical information
 
-### 파일 한도
+### File limit
 
-Gemini 모델은 요청당 최대 3,600개의 이미지 파일을 지원합니다.
+Gemini models support a maximum of 3,600 image files per request.
 
-### 토큰 계산
+### Token calculation
 
-- 두 치수가 모두 384픽셀 이하인 경우 258개의 토큰이 사용됩니다.
-  더 큰 이미지는 768x768픽셀 타일로 바둑판식으로 배열되며 각 타일에는 258개의 토큰이 사용됩니다.
+- 258 tokens if both dimensions <= 384 pixels.
+  Larger images are tiled into 768x768 pixel tiles, each costing 258 tokens.
 
-타일 수를 계산하는 대략적인 공식은 다음과 같습니다.
+A rough formula for calculating the number of tiles is as follows:
 
-- 자르기 단위 크기를 계산합니다. 대략 `floor(min(width, height)` / 1.5)입니다.
-- 각 치수를 자르기 단위 크기로 나누고 곱하여 타일 수를 구합니다.
+- Calculate the crop unit size which is roughly: `floor(min(width, height)` / 1.5).
+- Divide each dimension by the crop unit size and multiply together to get the
+  number of tiles.
 
-예를 들어 크기가 960x540인 이미지의 자르기 단위 크기는 360입니다. 각 치수를 360으로 나누면 타일 수는 3 \* 2 = 6입니다.
+For example, for an image of dimensions 960x540 would have a crop unit size
+of 360. Divide each dimension by 360 and the number of tile is 3 \* 2 = 6.
 
-### 미디어 해상도
+### Media resolution
 
-Gemini 3는 `media_resolution` 파라미터를 통해 멀티모달 비전 처리에 대한 세밀한 제어 기능을 제공합니다. `media_resolution` 파라미터는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수** 를 결정합니다.
-해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
+Gemini 3 introduces granular control over multimodal vision processing with the
+`media_resolution` parameter. The `media_resolution` parameter determines the
+**maximum number of tokens allocated per input image or video frame.**
+Higher resolutions improve the model's ability to
+read fine text or identify small details, but increase token usage and latency.
 
-## 팁 및 권장사항
+## Tips and best practices
 
-- 이미지가 올바르게 회전되었는지 확인합니다.
-- 선명하고 흐릿하지 않은 이미지를 사용합니다.
-- 텍스트가 포함된 단일 이미지를 사용하는 경우 `input` 배열에서 이미지 *앞에* 텍스트 프롬프트를 배치합니다.
+- Verify that images are correctly rotated.
+- Use clear, non-blurry images.
+- When using a single image with text, place the text prompt *before* the image in the `input` array.
 
-## 다음 단계
+## What's next
 
-이 가이드에서는 이미지 파일을 업로드하고 이미지 입력에서 텍스트 출력을 생성하는 방법을 보여줍니다. 자세한 내용은 다음 리소스를 참고하세요.
+This guide shows you how to upload image files and generate text outputs
+from image inputs. To learn more, see the following resources:
 
-- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko): Gemini에서 사용할 파일을 업로드하고 관리하는 방법을 자세히 알아보세요.
-- [시스템 안내](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=ko#system-instructions):
-  시스템 안내를 사용하면 특정 요구사항 및 사용 사례에 따라 모델의 동작을 조정할 수 있습니다.
-- [파일 프롬프트 전략](https://ai.google.dev/gemini-api/docs/interactions/files?hl=ko#prompt-guide): Gemini API는 멀티모달 프롬프트 사용이라고도 하는 텍스트, 이미지, 오디오, 동영상 데이터로 프롬프트를 지원합니다.
-- [안전 가이드](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ko): 생성형
-  AI 모델은 때때로 부정확하거나
-  편향되거나 불쾌감을 주는 출력과 같은 예기치 않은 출력을 생성합니다. 이러한 출력으로 인한 피해 위험을 제한하려면 후처리 및 인간 평가가 필수적입니다.
+- [Files API](https://ai.google.dev/gemini-api/docs/interactions/files): Learn more about uploading and managing files for use with Gemini.
+- [System instructions](https://ai.google.dev/gemini-api/docs/interactions/text-generation#system-instructions):
+  System instructions let you steer the behavior of the model based on your
+  specific needs and use cases.
+- [File prompting strategies](https://ai.google.dev/gemini-api/docs/interactions/files#prompt-guide): The
+  Gemini API supports prompting with text, image, audio, and video data, also
+  known as multimodal prompting.
+- [Safety guidance](https://ai.google.dev/gemini-api/docs/safety-guidance): Sometimes generative
+  AI models produce unexpected outputs, such as outputs that are inaccurate,
+  biased, or offensive. Post-processing and human evaluation are essential to
+  limit the risk of harm from such outputs.
 
-의견 보내기
+Send feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-최종 업데이트: 2026-05-28(UTC)
+Last updated 2026-06-18 UTC.
 
-의견을 전달하고 싶나요?
+Need to tell us more?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-05-28(UTC)"],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

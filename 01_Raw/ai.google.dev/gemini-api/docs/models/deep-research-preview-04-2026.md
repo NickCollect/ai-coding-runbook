@@ -1,45 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=vi
-fetched_at: 2026-06-15T06:32:18.321040+00:00
-title: "B\u1ea3n d\u00f9ng th\u1eed Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=zh-CN
+fetched_at: 2026-06-22T06:32:09.135663+00:00
+title: "Deep Research \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Gửi ý kiến phản hồi
+发送反馈
 
-# Bản dùng thử Deep Research
+# Deep Research 预览版
 
-Một nhà nghiên cứu mạnh mẽ được thiết kế cho các cuộc điều tra tự động, nhiều bước, tổng hợp thông tin phức tạp thành các báo cáo toàn diện có trích dẫn. Mô hình này hỗ trợ lập kế hoạch cộng tác, hình ảnh hoá, máy chủ MCP và Tìm tệp. Mô hình này có hai phiên bản: Deep Research để tăng tốc độ và hiệu quả, và Deep Research Max để tối đa hoá tính toàn diện.
+一款功能强大的智能体研究员，专为自主执行多步骤调查而设计，可将复杂信息整合到内容详尽且附有引用的报告中。此模型支持协作规划、可视化、MCP
+服务器和文件搜索。它有两个版本：Deep Research，注重速度和效率；Deep Research Max，注重全面性。
 
-## Tài liệu
+## 文档
 
-Truy cập trang [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) để xem đầy đủ các tính năng và chức năng.
+如需全面了解功能，请访问 [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 页面
+。
 
 ## deep-research-preview-04-2026
 
-| Thuộc tính | Mô tả |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardMã đại lý | **API Tương tác**  `deep-research-preview-04-2026` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản, Hình ảnh, PDF, Âm thanh, Video  **Đầu ra**  Văn bản (Báo cáo có trích dẫn), Hình ảnh |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Cửa sổ ngữ cảnh đầu vào**  1.048.576  **Giới hạn mã thông báo đầu ra**  65.536 |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Xem trước: `deep-research-preview-04-2026` - Max: `deep-research-max-preview-04-2026` |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 4 năm 2026 |
+| id\_card智能体代码 | **Interactions API**  `deep-research-preview-04-2026` |
+| save支持的数据类型 | **输入**  文本、图片、PDF、音频、视频  **输出**  文本（附有引用的报告）、图片 |
+| token\_autoToken 限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入上下文窗口**  1,048,576  **输出 token 限制**  65,536 |
+| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`deep-research-preview-04-2026` - 上限：`deep-research-max-preview-04-2026` |
+| calendar\_month最后更新时间 | 2026 年 4 月 |
 
-Gửi ý kiến phản hồi
+发送反馈
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+最后更新时间 (UTC)：2026-04-29。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+需要向我们提供更多信息？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

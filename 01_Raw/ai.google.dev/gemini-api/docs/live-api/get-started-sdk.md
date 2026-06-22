@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=vi
-fetched_at: 2026-06-15T06:20:20.203855+00:00
-title: "B\u1eaft \u0111\u1ea7u s\u1eed d\u1ee5ng Gemini Live API b\u1eb1ng Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ko
+fetched_at: 2026-06-22T06:25:10.849492+00:00
+title: "Google \uc0dd\uc131\ud615 AI SDK\ub97c \uc0ac\uc6a9\ud558\uc5ec Gemini Live API \uc2dc\uc791\ud558\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-# Bắt đầu sử dụng Gemini Live API bằng Google GenAI SDK
+# Google 생성형 AI SDK를 사용하여 Gemini Live API 시작하기
 
-Gemini Live API cho phép tương tác hai chiều theo thời gian thực với các mô hình Gemini, hỗ trợ đầu vào âm thanh, video và văn bản cũng như đầu ra âm thanh gốc. Hướng dẫn này giải thích cách tích hợp với API bằng Google GenAI SDK trên máy chủ của bạn.
+Gemini Live API를 사용하면 Gemini 모델과 실시간 양방향 상호작용이 가능하며 오디오, 동영상, 텍스트 입력과 네이티브 오디오 출력을 지원합니다. 이 가이드에서는 서버에서 Google 생성형 AI SDK를 사용하여 API와 통합하는 방법을 설명합니다.
 
-[Dùng Live API trong Google AI Studiomic](https://aistudio.google.com/live?hl=vi)
-[Sao chép ứng dụng mẫu từ GitHubcode](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
-[Sử dụng các kỹ năng của tác nhân lập trìnhterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=vi)
+[Google AI Studio에서 Live API 사용해 보기mic](https://aistudio.google.com/live?hl=ko)
+[GitHub에서 샘플 앱 클론code](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
+[코딩 에이전트 기술 사용하기terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ko)
 
-## Tổng quan
+## 개요
 
-Gemini Live API sử dụng WebSockets để giao tiếp theo thời gian thực. SDK `google-genai` cung cấp một giao diện không đồng bộ cấp cao để quản lý các kết nối này.
+Gemini Live API는 실시간 통신에 WebSockets를 사용합니다. `google-genai` SDK는 이러한 연결을 관리하기 위한 고급 비동기 인터페이스를 제공합니다.
 
-Các khái niệm chính:
+주요 개념
 
-- **Phiên**: Kết nối liên tục với mô hình.
-- **Config**: Thiết lập phương thức (âm thanh/văn bản), giọng nói và hướng dẫn hệ thống.
-- **Đầu vào theo thời gian thực**: Gửi các khung hình âm thanh và video dưới dạng blob.
+- **세션**: 모델에 대한 영구 연결입니다.
+- **구성**: 모달리티 (오디오/텍스트), 음성, 시스템 안내를 설정합니다.
+- **실시간 입력**: 오디오 및 동영상 프레임을 blob으로 전송합니다.
 
-## Kết nối với Live API
+## Live API에 연결
 
-Bắt đầu phiên Live API bằng khoá API:
+API 키로 Live API 세션을 시작합니다.
 
 ### Python
 
@@ -97,9 +97,9 @@ async function main() {
 main();
 ```
 
-## Đang gửi tin nhắn
+## 텍스트 전송 중
 
-Bạn có thể gửi văn bản bằng `send_realtime_input` (Python) hoặc `sendRealtimeInput` (JavaScript).
+텍스트는 `send_realtime_input` (Python) 또는 `sendRealtimeInput` (자바스크립트)을 사용하여 전송할 수 있습니다.
 
 ### Python
 
@@ -115,9 +115,9 @@ session.sendRealtimeInput({
 });
 ```
 
-## Đang gửi âm thanh
+## 오디오 전송
 
-Bạn cần gửi âm thanh dưới dạng dữ liệu PCM thô (âm thanh PCM thô 16 bit, 16 kHz, little-endian).
+오디오는 원시 PCM 데이터 (원시 16비트 PCM 오디오, 16kHz, 리틀 엔디안)로 전송해야 합니다.
 
 ### Python
 
@@ -143,11 +143,12 @@ session.sendRealtimeInput({
 });
 ```
 
-Để biết ví dụ về cách lấy âm thanh từ thiết bị của khách hàng (ví dụ: trình duyệt), hãy xem ví dụ toàn diện trên [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70).
+클라이언트 기기 (예: 브라우저)에서 오디오를 가져오는 방법의 예는
+[GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70)의 포괄적인 예시를 참고하세요.
 
-## Đang gửi video
+## 동영상 전송 중
 
-Khung hình video được gửi dưới dạng hình ảnh riêng lẻ (ví dụ: JPEG hoặc PNG) ở một tốc độ khung hình cụ thể (tối đa 1 khung hình/giây).
+동영상 프레임은 특정 프레임 속도 (초당 최대 1프레임)로 개별 이미지 (예: JPEG 또는 PNG)로 전송됩니다.
 
 ### Python
 
@@ -173,11 +174,11 @@ session.sendRealtimeInput({
 });
 ```
 
-Để biết ví dụ về cách lấy video từ thiết bị của khách hàng (ví dụ: trình duyệt), hãy xem ví dụ toàn diện trên [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120).
+클라이언트 기기 (예: 브라우저)에서 동영상을 가져오는 방법의 예는 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120)의 포괄적인 예시를 참고하세요.
 
-## Nhận âm thanh
+## 오디오 수신 중
 
-Các câu trả lời bằng âm thanh của mô hình được nhận dưới dạng các khối dữ liệu.
+모델의 오디오 응답은 데이터 청크로 수신됩니다.
 
 ### Python
 
@@ -205,11 +206,11 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-Hãy xem ứng dụng mẫu trên GitHub để tìm hiểu cách [nhận âm thanh trên máy chủ](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98) và [phát âm thanh đó trong trình duyệt](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174).
+GitHub의 샘플 앱을 참고하여 서버에서 오디오를 [수신](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98)하고 브라우저에서 [재생](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174)하는 방법을 알아보세요.
 
-## Đang nhận tin nhắn
+## 텍스트 수신 중
 
-Bản chép lời cho cả dữ liệu đầu vào của người dùng và dữ liệu đầu ra của mô hình đều có trong nội dung trên máy chủ.
+사용자 입력과 모델 출력의 스크립트는 서버 콘텐츠에서 확인할 수 있습니다.
 
 ### Python
 
@@ -236,9 +237,9 @@ if (content?.outputTranscription) {
 }
 ```
 
-## Xử lý lệnh gọi công cụ
+## 도구 호출 처리
 
-API này hỗ trợ lệnh gọi công cụ (lệnh gọi hàm). Khi mô hình yêu cầu một lệnh gọi công cụ, bạn phải thực thi hàm và gửi phản hồi trở lại.
+API는 도구 호출 (함수 호출)을 지원합니다. 모델이 도구 호출을 요청하면 함수를 실행하고 응답을 다시 전송해야 합니다.
 
 ### Python
 
@@ -279,20 +280,20 @@ if (response.toolCall) {
 }
 ```
 
-## Bước tiếp theo
+## 다음 단계
 
-- Đọc hướng dẫn đầy đủ về [Các chức năng](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi) của Live API để biết các chức năng và cấu hình chính, bao gồm cả tính năng Phát hiện hoạt động bằng giọng nói và các tính năng âm thanh gốc.
-- Đọc hướng dẫn về [Sử dụng công cụ](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi) để tìm hiểu cách tích hợp Live API với các công cụ và lệnh gọi hàm.
-- Hãy đọc hướng dẫn [Quản lý phiên](https://ai.google.dev/gemini-api/docs/live-session?hl=vi) để quản lý các cuộc trò chuyện kéo dài.
-- Đọc hướng dẫn về [Mã thông báo tạm thời](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=vi) để xác thực an toàn trong các ứng dụng [từ ứng dụng đến máy chủ](#implementation-approach).
-- Để biết thêm thông tin về API WebSockets cơ bản, hãy xem [Tài liệu tham khảo về API WebSockets](https://ai.google.dev/api/live?hl=vi).
+- 음성 활동 감지 및 네이티브 오디오 기능을 비롯한 주요 기능 및 구성은 전체 Live API [기능](https://ai.google.dev/gemini-api/docs/live-guide?hl=ko) 가이드를 참고하세요.
+- [도구 사용](https://ai.google.dev/gemini-api/docs/live-tools?hl=ko) 가이드를 참고하여 Live API를 도구 및 함수 호출과 통합하는 방법을 알아보세요.
+- 장기 실행 대화를 관리하려면 [세션 관리](https://ai.google.dev/gemini-api/docs/live-session?hl=ko) 가이드를 참고하세요.
+- [클라이언트-서버 애플리케이션에서 보안 인증을 하려면 [임시 토큰](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=ko) 가이드를 참고하세요.](#implementation-approach)
+- 기본 WebSockets API에 관한 자세한 내용은 [WebSockets API 참조](https://ai.google.dev/api/live?hl=ko)를 참고하세요.
 
-Gửi ý kiến phản hồi
+의견 보내기
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Cập nhật lần gần đây nhất: 2026-06-01 UTC.
+최종 업데이트: 2026-06-01(UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+의견을 전달하고 싶나요?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-01(UTC)"],[],[]]

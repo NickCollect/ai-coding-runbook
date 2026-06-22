@@ -1,28 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/openai?hl=hi
-fetched_at: 2026-06-15T06:23:35.115430+00:00
-title: "OpenAI \u0915\u0940 \u0938\u0941\u0935\u093f\u0927\u093e \u0915\u0947 \u0938\u093e\u0925 \u0915\u093e\u092e \u0915\u0930\u0924\u093e \u0939\u0948 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/openai?hl=vi
+fetched_at: 2026-06-22T06:25:54.825258+00:00
+title: "Kh\u1ea3 n\u0103ng t\u01b0\u01a1ng th\u00edch v\u1edbi OpenAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-# OpenAI की सुविधा के साथ काम करता है
+# Khả năng tương thích với OpenAI
 
-OpenAI की लाइब्रेरी (Python और TypeScript /
-Javascript) के साथ-साथ, REST API का इस्तेमाल करके Gemini के मॉडल ऐक्सेस किए जा सकते हैं. इसके लिए, आपको कोड की तीन लाइनों को अपडेट करना होगा
-और अपने [Gemini API पासकोड](https://aistudio.google.com/apikey?hl=hi) का इस्तेमाल करना होगा. अगर OpenAI की लाइब्रेरी का इस्तेमाल नहीं किया जा रहा है, तो हमारा सुझाव है कि
-आप
-[Gemini API को सीधे तौर पर कॉल करें](https://ai.google.dev/gemini-api/docs/quickstart?hl=hi).
+Bạn có thể truy cập vào các mô hình Gemini bằng cách sử dụng các thư viện OpenAI (Python và TypeScript/Javascript) cùng với API REST, bằng cách cập nhật 3 dòng mã và sử dụng [khoá Gemini API](https://aistudio.google.com/apikey?hl=vi). Nếu chưa sử dụng thư viện OpenAI, bạn nên gọi [Gemini API trực tiếp](https://ai.google.dev/gemini-api/docs/quickstart?hl=vi).
 
 ### Python
 
@@ -93,18 +89,17 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-क्या बदला है? सिर्फ़ तीन लाइनें!
+Điều gì đã thay đổi? Chỉ có 3 dòng!
 
-- **`api_key="GEMINI_API_KEY"`**: "`GEMINI_API_KEY`" को अपने Gemini
-  API पासकोड से बदलें. यह पासकोड, [Google AI Studio](https://aistudio.google.com?hl=hi) में पाया जा सकता है.
-- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** इससे OpenAI की लाइब्रेरी को यह निर्देश मिलता है कि वह अनुरोधों को डिफ़ॉल्ट यूआरएल के बजाय, Gemini API एंडपॉइंट पर भेजे.
-- **`model="gemini-3.5-flash"`**: Gemini का कोई ऐसा मॉडल चुनें जो इस सुविधा के साथ काम करता हो
+- **`api_key="GEMINI_API_KEY"`**: Thay thế "`GEMINI_API_KEY`" bằng khoá Gemini API thực tế của bạn. Bạn có thể lấy khoá này trong [Google AI Studio](https://aistudio.google.com?hl=vi).
+- **`base_url="https://generativelanguage.googleapis.com/v1beta/openai/"`:** Lệnh này yêu cầu thư viện OpenAI gửi các yêu cầu đến điểm cuối Gemini API thay vì URL mặc định.
+- **`model="gemini-3.5-flash"`**: Chọn một mô hình Gemini tương thích
 
-## सूझ-बूझ वाला मॉडल
+## Tư duy
 
-Gemini के मॉडल को मुश्किल समस्याओं को हल करने के लिए ट्रेन किया गया है. इससे, तर्क करने की क्षमता में काफ़ी सुधार होता है. Gemini API में, [सूझ-बूझ वाले पैरामीटर](https://ai.google.dev/gemini-api/docs/thinking?hl=hi) शामिल हैं. इनसे यह तय किया जा सकता है कि मॉडल को किसी समस्या को हल करने में कितना समय लगेगा.
+Các mô hình Gemini được huấn luyện để suy nghĩ thấu đáo về những vấn đề phức tạp, từ đó cải thiện đáng kể khả năng suy luận. Gemini API đi kèm với [các tham số tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) giúp bạn kiểm soát chi tiết mức độ tư duy của mô hình.
 
-Gemini के अलग-अलग मॉडल में, तर्क करने के लिए अलग-अलग कॉन्फ़िगरेशन होते हैं. यहां बताया गया है कि ये कॉन्फ़िगरेशन, OpenAI के तर्क करने की कोशिशों से कैसे मैप होते हैं:
+Các mô hình Gemini khác nhau có cấu hình suy luận khác nhau. Bạn có thể xem cách các mô hình này tương ứng với nỗ lực suy luận của OpenAI như sau:
 
 | `reasoning_effort` (OpenAI) | `thinking_level` (Gemini 3.1 Pro) | `thinking_level` (Gemini 3.1 Flash-Lite) | `thinking_level` (Gemini 3 Flash) | `thinking_budget` (Gemini 2.5) |
 | --- | --- | --- | --- | --- |
@@ -113,11 +108,9 @@ Gemini के अलग-अलग मॉडल में, तर्क करन
 | `medium` | `medium` | `medium` | `medium` | `8,192` |
 | `high` | `high` | `high` | `high` | `24,576` |
 
-अगर `reasoning_effort` तय नहीं किया जाता है, तो Gemini, मॉडल के
-डिफ़ॉल्ट [लेवल](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#levels) या [बजट](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#set-budget) का इस्तेमाल करता है.
+Nếu bạn không chỉ định `reasoning_effort`, Gemini sẽ sử dụng [cấp](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#levels) hoặc [ngân sách](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#set-budget) mặc định của mô hình.
 
-अगर आपको सूझ-बूझ वाली सुविधा बंद करनी है, तो
-2.5 मॉडल के लिए, `reasoning_effort` को `"none"` पर सेट करें. Gemini 2.5 Pro या 3 मॉडल के लिए, तर्क करने की सुविधा बंद नहीं की जा सकती.
+Nếu muốn tắt tính năng tư duy, bạn có thể đặt `reasoning_effort` thành `"none"` cho các mô hình 2.5. Bạn không thể tắt tính năng suy luận cho các mô hình Gemini 2.5 Pro hoặc 3.
 
 ### Python
 
@@ -191,10 +184,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
   }'
 ```
 
-Gemini के सूझ-बूझ वाले मॉडल, [सोच-समझकर जवाब देते हैं](https://ai.google.dev/gemini-api/docs/thinking?hl=hi#summaries).
-अपने अनुरोध में Gemini के फ़ील्ड शामिल करने के लिए, [`extra_body`](#extra-body) फ़ील्ड का इस्तेमाल किया जा सकता है.
+Các mô hình tư duy của Gemini cũng tạo ra [bản tóm tắt suy nghĩ](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#summaries).
+Bạn có thể sử dụng trường [`extra_body`](#extra-body) để đưa các trường Gemini vào yêu cầu của mình.
 
-ध्यान दें कि `reasoning_effort` और `thinking_level`/`thinking_budget` की सुविधाएं एक जैसी हैं. इसलिए, इनका इस्तेमाल एक साथ नहीं किया जा सकता.
+Xin lưu ý rằng `reasoning_effort` và `thinking_level`/`thinking_budget` có chức năng trùng lặp, nên bạn không thể sử dụng chúng cùng một lúc.
 
 ### Python
 
@@ -270,11 +263,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
       }'
 ```
 
-Gemini 3, चैट पूरी करने वाले एपीआई में, सोच-समझकर जवाब देने की सुविधा के लिए, OpenAI के साथ काम करता है. सोच-समझकर जवाब देने की सुविधा के बारे में पूरी जानकारी, इस [पेज](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=hi#openai) पर देखी जा सकती है.
+Gemini 3 hỗ trợ khả năng tương thích với OpenAI cho chữ ký tư duy trong các API hoàn thành cuộc trò chuyện. Bạn có thể xem ví dụ đầy đủ trên trang [chữ ký tư duy](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi#openai).
 
-## स्ट्रीमिंग
+## Phát trực tiếp
 
-Gemini API, [स्ट्रीमिंग के ज़रिए जवाब देने की सुविधा](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=hi#generate-a-text-stream) के साथ काम करता है.
+Gemini API hỗ trợ [truyền trực tuyến câu trả lời](https://ai.google.dev/gemini-api/docs/text-generation?lang=python&hl=vi#generate-a-text-stream).
 
 ### Python
 
@@ -353,9 +346,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
     }'
 ```
 
-## फ़ंक्शन कॉल करना
+## Gọi hàm
 
-[फ़ंक्शन कॉल करने की सुविधा से, जनरेटिव मॉडल से स्ट्रक्चर्ड डेटा आउटपुट पाना आसान हो जाता है. यह सुविधा, Gemini API में उपलब्ध है.](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=hi)
+Tính năng gọi hàm giúp bạn dễ dàng nhận được dữ liệu có cấu trúc từ các mô hình tạo sinh và được [hỗ trợ trong Gemini API](https://ai.google.dev/gemini-api/docs/function-calling/tutorial?hl=vi).
 
 ### Python
 
@@ -486,10 +479,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions" 
 }'
 ```
 
-## इमेज की बारीक़ी से पहचान
+## Hiểu hình ảnh
 
-Gemini के मॉडल, स्वाभाविक तौर पर मल्टीमॉडल होते हैं. साथ ही, ये विज़न से जुड़े कई सामान्य टास्क में
-[बेहतरीन परफ़ॉर्मेंस देते हैं](https://ai.google.dev/gemini-api/docs/vision?hl=hi).
+Các mô hình Gemini có khả năng đa phương thức tự nhiên và mang lại hiệu suất tốt nhất trong số các mô hình cùng loại đối với [nhiều tác vụ thị giác phổ biến](https://ai.google.dev/gemini-api/docs/vision?hl=vi).
 
 ### Python
 
@@ -618,9 +610,9 @@ bash -c '
 '
 ```
 
-## इमेज जनरेट करें
+## Tạo một hình ảnh
 
-`gemini-2.5-flash-image` या `gemini-3-pro-image-preview` का इस्तेमाल करके कोई इमेज जनरेट करें. `prompt`, `model`, `n`, `size`, और `response_format` जैसे पैरामीटर इस्तेमाल किए जा सकते हैं. यहां या [`extra_body`](#extra-body) सेक्शन में शामिल न किए गए अन्य पैरामीटर को, कंपैटिबिलिटी लेयर अनदेखा कर देगी.
+Tạo hình ảnh bằng `gemini-2.5-flash-image` hoặc `gemini-3-pro-image-preview`. Các thông số được hỗ trợ bao gồm `prompt`, `model`, `n`, `size` và `response_format`. Mọi thông số khác không có trong danh sách này hoặc trong phần [`extra_body`](#extra-body) sẽ bị lớp tương thích bỏ qua một cách âm thầm.
 
 ### Python
 
@@ -687,12 +679,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/images/generations
       }'
 ```
 
-## एक वीडियो जनरेट करो
+## Tạo video
 
-Sora के साथ काम करने वाले `/v1/videos` एंडपॉइंट के ज़रिए, `veo-3.1-generate-preview` का इस्तेमाल करके कोई वीडियो जनरेट करें. टॉप-लेवल के `prompt` और `model` पैरामीटर इस्तेमाल किए जा सकते हैं. `duration_seconds`, `image`, और `aspect_ratio` जैसे अतिरिक्त पैरामीटर, `extra_body` के साथ पास किए जाने चाहिए. सभी उपलब्ध पैरामीटर देखने के लिए, [`extra_body`](#extra-body) सेक्शन
-देखें.
+Tạo video bằng `veo-3.1-generate-preview` thông qua điểm cuối `/v1/videos` tương thích với Sora. Các tham số cấp cao nhất được hỗ trợ là `prompt` và `model`. Bạn phải truyền các tham số bổ sung như `duration_seconds`, `image` và `aspect_ratio` bằng `extra_body`. Xem phần [`extra_body`](#extra-body) để biết tất cả các tham số có sẵn.
 
-वीडियो जनरेट करने में ज़्यादा समय लगता है. यह सुविधा, एक ऑपरेशन आईडी दिखाती है. इस आईडी की मदद से, वीडियो जनरेट होने की प्रोसेस की स्थिति देखी जा सकती है.
+Tạo video là một thao tác thực hiện lâu và trả về một mã thao tác mà bạn có thể thăm dò để biết trạng thái hoàn tất.
 
 ### Python
 
@@ -747,9 +738,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos" \
   -F "prompt=A cinematic drone shot of a waterfall"
 ```
 
-### वीडियो की स्थिति देखना
+### Kiểm tra trạng thái video
 
-वीडियो जनरेट करने की प्रोसेस एसिंक्रोनस होती है. वीडियो जनरेट होने की प्रोसेस की स्थिति देखने और वीडियो जनरेट होने के बाद, उसका फ़ाइनल यूआरएल पाने के लिए, `GET /v1/videos/{id}` का इस्तेमाल करें:
+Quá trình tạo video diễn ra không đồng bộ. Sử dụng `GET /v1/videos/{id}` để thăm dò trạng thái và truy xuất URL cuối cùng của video khi hoàn tất:
 
 ### Python
 
@@ -813,9 +804,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/videos/VIDEO_ID" \
   -H "Authorization: Bearer $GEMINI_API_KEY"
 ```
 
-## ऑडियो की बारीक़ी से पहचान
+## Hiểu được âm thanh
 
-ऑडियो इनपुट का विश्लेषण करना:
+Phân tích đầu vào âm thanh:
 
 ### Python
 
@@ -928,9 +919,9 @@ bash -c '
 '
 ```
 
-## स्ट्रक्चर्ड आउटपुट
+## Đầu ra có cấu trúc
 
-Gemini के मॉडल, आपकी तय की गई किसी भी [स्ट्रक्चर में JSON ऑब्जेक्ट आउटपुट कर सकते हैं](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi).
+Các mô hình Gemini có thể xuất các đối tượng JSON theo [cấu trúc mà bạn xác định](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
 
 ### Python
 
@@ -991,10 +982,9 @@ const event = completion.choices[0].message.parsed;
 console.log(event);
 ```
 
-## एंबेड करना
+## Mục nhúng
 
-टेक्स्ट एंबेडिंग से, टेक्स्ट स्ट्रिंग के बीच के संबंध का पता चलता है. इसे [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=hi) का इस्तेमाल करके जनरेट किया जा सकता है.
-मल्टीमॉडल एंबेडिंग के लिए `gemini-embedding-2-preview` या सिर्फ़ टेक्स्ट एंबेडिंग के लिए `gemini-embedding-001` का इस्तेमाल किया जा सकता है.
+Vectơ nhúng văn bản đo lường mức độ liên quan của các chuỗi văn bản và có thể được tạo bằng [Gemini API](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi). Bạn có thể dùng `gemini-embedding-2-preview` cho các mục nhúng đa phương thức hoặc `gemini-embedding-001` cho các mục nhúng chỉ có văn bản.
 
 ### Python
 
@@ -1050,18 +1040,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/openai/embeddings" \
 
 ## Batch API
 
-OpenAI की लाइब्रेरी का इस्तेमाल करके, [बैच जॉब](https://ai.google.dev/gemini-api/docs/batch-mode?hl=hi) बनाए जा सकते हैं, उन्हें सबमिट किया जा सकता है, और उनकी स्थिति देखी जा सकती है.
+Bạn có thể tạo [công việc hàng loạt](https://ai.google.dev/gemini-api/docs/batch-mode?hl=vi), gửi công việc và kiểm tra trạng thái của công việc bằng thư viện OpenAI.
 
-इसके लिए, आपको JSONL फ़ाइल को OpenAI के इनपुट फ़ॉर्मैट में तैयार करना होगा. उदाहरण के लिए:
+Bạn sẽ cần chuẩn bị tệp JSONL ở định dạng đầu vào của OpenAI. Ví dụ:
 
 ```
 {"custom_id": "request-1", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.5-flash", "messages": [{"role": "user", "content": "Tell me a one-sentence joke."}]}}
 {"custom_id": "request-2", "method": "POST", "url": "/v1/chat/completions", "body": {"model": "gemini-3.5-flash", "messages": [{"role": "user", "content": "Why is the sky blue?"}]}}
 ```
 
-बैच के लिए OpenAI की कंपैटिबिलिटी की मदद से, बैच बनाया जा सकता है, जॉब की स्थिति पर नज़र रखी जा सकती है, और बैच के नतीजे देखे जा सकते हैं.
+Khả năng tương thích với OpenAI cho Batch hỗ trợ việc tạo một lô, giám sát trạng thái công việc và xem kết quả lô.
 
-फ़िलहाल, अपलोड और डाउनलोड के लिए कंपैटिबिलिटी की सुविधा उपलब्ध नहीं है. [इसके बजाय, यहां दिए गए उदाहरण में, फ़ाइलें अपलोड और डाउनलोड करने के लिए `genai` क्लाइंट का इस्तेमाल किया गया है. यह तरीका, Gemini [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=hi#input-file) का इस्तेमाल करने के दौरान भी लागू होता है.](https://ai.google.dev/gemini-api/docs/files?hl=hi)
+Hiện tại, chúng tôi chưa hỗ trợ khả năng tương thích cho việc tải lên và tải xuống. Thay vào đó, ví dụ sau đây sử dụng ứng dụng `genai` để tải lên và tải xuống [tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi), giống như khi sử dụng [Batch API](https://ai.google.dev/gemini-api/docs/batch-mode?hl=vi#input-file) của Gemini.
 
 ### Python
 
@@ -1107,7 +1097,7 @@ for line in file_content.splitlines():
     print(line)
 ```
 
-OpenAI SDK की मदद से, [Batch API का इस्तेमाल करके एंबेडिंग भी जनरेट की जा सकती हैं](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi#batch-embeddings). इसके लिए, JSONL फ़ाइल में `create` तरीके के `endpoint` फ़ील्ड को एंबेडिंग एंडपॉइंट के साथ-साथ, `url` और `model` कुंजियों को बदलें:
+SDK OpenAI cũng hỗ trợ [tạo các mục nhúng bằng Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi#batch-embeddings). Để thực hiện việc này, hãy thay đổi trường `endpoint` của phương thức `create` thành một điểm cuối nhúng, cũng như các khoá `url` và `model` trong tệp JSONL:
 
 ```
 # JSONL file using embeddings model and endpoint
@@ -1124,12 +1114,11 @@ batch = openai_client.batches.create(
 )
 ```
 
-पूरे उदाहरण के लिए, OpenAI की कंपैटिबिलिटी कुकबुक का [बैच एंबेडिंग जनरेशन](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb)
-सेक्शन देखें.
+Hãy xem phần [Tạo nhiều vectơ nhúng cùng lúc](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb) trong sổ tay tương thích của OpenAI để biết ví dụ hoàn chỉnh.
 
-## Flex और Priority इन्फ़रेंस
+## Suy luận linh hoạt và ưu tiên
 
-Gemini API, नाम और लॉजिक के मामले में OpenAI के `service_tier` पैरामीटर से मेल खाता है. यह Flex और Priority इन्फ़रेंस टियर, दोनों के लिए सीमाएं लागू करता है और ट्रैफ़िक को सही तरीके से डायरेक्ट करता है.
+API Gemini có tên và logic tương ứng với tham số `service_tier` của OpenAI, đồng thời thực thi các giới hạn và chuyển hướng lưu lượng truy cập một cách hiệu quả cho cả các cấp suy luận Linh hoạt và Ưu tiên.
 
 ### Python
 
@@ -1152,38 +1141,38 @@ completion = client.chat.completions.create(
 print(completion)
 ```
 
-अगर `service_tier` को साफ़ तौर पर असाइन नहीं किया जाता है, तो यह डिफ़ॉल्ट रूप से `standard` पर सेट होता है. यह OpenAI के लिए `default` के बराबर है.
-इन्फ़रेंस टियर के बारे में ज़्यादा जानने के लिए, [ऑप्टिमाइज़ेशन](https://ai.google.dev/gemini-api/docs/optimization?hl=hi) से जुड़ा दस्तावेज़ पढ़ें.
+Khi không được chỉ định rõ ràng, `service_tier` sẽ mặc định là `standard`, tương đương với `default` đối với OpenAI.
+Tìm hiểu thêm về các cấp suy luận trong tài liệu [Tối ưu hoá](https://ai.google.dev/gemini-api/docs/optimization?hl=vi).
 
-## `extra_body` का इस्तेमाल करके, Gemini की सुविधाएं चालू करना
+## Bật các tính năng của Gemini bằng `extra_body`
 
-Gemini की कई ऐसी सुविधाएं हैं जो OpenAI के मॉडल में उपलब्ध नहीं हैं. हालांकि, `extra_body` फ़ील्ड का इस्तेमाल करके, इन सुविधाओं को चालू किया जा सकता है.
+Có một số tính năng được Gemini hỗ trợ nhưng không có trong các mô hình OpenAI. Tuy nhiên, bạn có thể bật các tính năng này bằng cách sử dụng trường `extra_body`.
 
-| पैरामीटर | टाइप | एंडपॉइंट | ब्यौरा |
+| Tham số | Loại | Điểm cuối | Mô tả |
 | --- | --- | --- | --- |
-| **`cached_content`** | टेक्स्ट | Chat | यह Gemini के सामान्य कॉन्टेंट कैश से जुड़ा है. |
-| **`thinking_config`** | ऑब्जेक्ट | Chat | यह Gemini के ThinkingConfig से जुड़ा है. |
-| **`aspect_ratio`** | टेक्स्ट | इमेज | आउटपुट आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात). जैसे, `"16:9"`, `"1:1"`, `"9:16"`. |
-| **`generation_config`** | ऑब्जेक्ट | इमेज | Gemini जनरेशन कॉन्फ़िग ऑब्जेक्ट. जैसे, `{"responseModalities": ["IMAGE"], "candidateCount": 2}`. |
-| **`safety_settings`** | सूची | इमेज | सुरक्षा थ्रेशोल्ड के लिए कस्टम फ़िल्टर. जैसे, `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`. |
-| **`tools`** | सूची | इमेज | ग्राउंडिंग की सुविधा चालू करता है. जैसे, `[{"google_search": {}}]`. यह सुविधा, सिर्फ़ `gemini-3-pro-image-preview` के लिए उपलब्ध है. |
-| **`aspect_ratio`** | टेक्स्ट | वीडियो | आउटपुट वीडियो के डाइमेंशन (`16:9` लैंडस्केप के लिए, `9:16` पोर्ट्रेट के लिए). अगर यह तय नहीं किया जाता है, तो `size` से मैप होता है. |
-| **`resolution`** | टेक्स्ट | वीडियो | आउटपुट रिज़ॉल्यूशन (`720p`, `1080p`, `4K`). ध्यान दें: `1080p` और `4K` से अपसैंपलर पाइपलाइन ट्रिगर होती है. |
-| **`duration_seconds`** | पूर्णांक | वीडियो | जनरेशन की अवधि (वैल्यू: `4`, `6`, `8`). `reference_images`, इंटरपोलेशन या एक्सटेंशन का इस्तेमाल करते समय, इसकी वैल्यू `8` होनी चाहिए. |
-| **`frame_rate`** | टेक्स्ट | वीडियो | वीडियो आउटपुट के लिए फ़्रेम रेट. जैसे, `"24"`. |
-| **`input_reference`** | टेक्स्ट | वीडियो | वीडियो जनरेट करने के लिए रेफ़रंस इनपुट. |
-| **`extend_video_id`** | टेक्स्ट | वीडियो | पहले से मौजूद किसी वीडियो को बढ़ाने के लिए उसका आईडी. |
-| **`negative_prompt`** | टेक्स्ट | वीडियो | शामिल न किए जाने वाले आइटम. जैसे, `"shaky camera"`. |
-| **`seed`** | पूर्णांक | वीडियो | डिटरमिनिस्टिक जनरेशन के लिए पूर्णांक. |
-| **`style`** | टेक्स्ट | वीडियो | विज़ुअल स्टाइलिंग (`cinematic` डिफ़ॉल्ट, सोशल मीडिया के लिए ऑप्टिमाइज़ किया गया `creative`). |
-| **`person_generation`** | टेक्स्ट | वीडियो | लोगों की इमेज जनरेट करने की सुविधा को कंट्रोल करता है (`allow_adult`, `allow_all`, `dont_allow`). |
-| **`reference_images`** | सूची | वीडियो | स्टाइल/कैरेक्टर रेफ़रंस के लिए ज़्यादा से ज़्यादा तीन इमेज (base64 ऐसेट). |
-| **`image`** | टेक्स्ट | वीडियो | वीडियो जनरेट करने की प्रोसेस को कंडीशन करने के लिए, base64 कोड में बदली गई शुरुआती इनपुट इमेज. |
-| **`last_frame`** | ऑब्जेक्ट | वीडियो | इंटरपोलेशन के लिए फ़ाइनल इमेज (`image` को पहले फ़्रेम के तौर पर इस्तेमाल करना ज़रूरी है). |
+| **`cached_content`** | Văn bản | Trò chuyện | Tương ứng với bộ nhớ đệm nội dung chung của Gemini. |
+| **`thinking_config`** | Đối tượng | Trò chuyện | Tương ứng với ThinkingConfig của Gemini. |
+| **`aspect_ratio`** | Văn bản | Hình ảnh | Tỷ lệ khung hình đầu ra (ví dụ: `"16:9"`, `"1:1"`, `"9:16"`). |
+| **`generation_config`** | Đối tượng | Hình ảnh | Đối tượng cấu hình tạo của Gemini (ví dụ: `{"responseModalities": ["IMAGE"], "candidateCount": 2}`). |
+| **`safety_settings`** | Danh sách | Hình ảnh | Bộ lọc ngưỡng an toàn tuỳ chỉnh (ví dụ: `[{"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE"}]`). |
+| **`tools`** | Danh sách | Hình ảnh | Cho phép căn cứ (ví dụ: `[{"google_search": {}}]`). Chỉ dành cho `gemini-3-pro-image-preview`. |
+| **`aspect_ratio`** | Văn bản | Video | Kích thước của video đầu ra (`16:9` cho chế độ ngang, `9:16` cho chế độ dọc). Bản đồ từ `size` nếu không được chỉ định. |
+| **`resolution`** | Văn bản | Video | Độ phân giải đầu ra (`720p`, `1080p`, `4K`). Lưu ý: `1080p` và `4K` kích hoạt quy trình tăng độ phân giải. |
+| **`duration_seconds`** | Số nguyên | Video | Độ dài của thế hệ (giá trị: `4`, `6`, `8`). Phải là `8` khi sử dụng `reference_images`, nội suy hoặc phần mở rộng. |
+| **`frame_rate`** | Văn bản | Video | Tốc độ khung hình cho video đầu ra (ví dụ: `"24"`). |
+| **`input_reference`** | Văn bản | Video | Đầu vào tham chiếu để tạo video. |
+| **`extend_video_id`** | Văn bản | Video | Mã nhận dạng của video hiện có cần mở rộng. |
+| **`negative_prompt`** | Văn bản | Video | Các mục cần loại trừ (ví dụ: `"shaky camera"`). |
+| **`seed`** | Số nguyên | Video | Số nguyên để tạo một cách xác định. |
+| **`style`** | Văn bản | Video | Kiểu hiển thị (`cinematic` mặc định, `creative` được tối ưu hoá cho mạng xã hội). |
+| **`person_generation`** | Văn bản | Video | Kiểm soát việc tạo hình ảnh về con người (`allow_adult`, `allow_all`, `dont_allow`). |
+| **`reference_images`** | Danh sách | Video | Tối đa 3 hình ảnh tham khảo về phong cách/nhân vật (thành phần base64). |
+| **`image`** | Văn bản | Video | Hình ảnh đầu vào ban đầu được mã hoá Base64 để điều kiện hoá quá trình tạo video. |
+| **`last_frame`** | Đối tượng | Video | Hình ảnh cuối cùng để nội suy (yêu cầu `image` làm khung hình đầu tiên). |
 
-### `extra_body` का इस्तेमाल करने का उदाहरण
+### Ví dụ sử dụng `extra_body`
 
-`cached_content` सेट करने के लिए, `extra_body` का इस्तेमाल करने का उदाहरण यहां दिया गया है:
+Sau đây là một ví dụ về cách dùng `extra_body` để đặt `cached_content`:
 
 ### Python
 
@@ -1221,9 +1210,9 @@ for chunk in stream:
     print(chunk.usage.to_dict())
 ```
 
-## मॉडल की सूची पाना
+## Liệt kê các mô hình
 
-उपलब्ध Gemini मॉडल की सूची पाना:
+Xem danh sách các mô hình Gemini hiện có:
 
 ### Python
 
@@ -1267,9 +1256,9 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models \
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## कोई मॉडल वापस पाना
+## Truy xuất một mô hình
 
-Gemini का कोई मॉडल वापस पाना:
+Truy xuất mô hình Gemini:
 
 ### Python
 
@@ -1310,24 +1299,22 @@ curl https://generativelanguage.googleapis.com/v1beta/openai/models/gemini-3.5-f
 -H "Authorization: Bearer GEMINI_API_KEY"
 ```
 
-## मौजूदा सीमाएं
+## Các điểm hạn chế hiện tại
 
-फ़िलहाल, OpenAI की लाइब्रेरी के लिए सहायता की सुविधा बीटा वर्शन में है. हम इस सुविधा को बेहतर बनाने पर काम कर रहे हैं.
+Chúng tôi vẫn đang trong giai đoạn thử nghiệm đối với các thư viện OpenAI trong khi mở rộng phạm vi hỗ trợ tính năng.
 
-अगर आपको काम करने वाले पैरामीटर, आने वाली सुविधाओं या Gemini का इस्तेमाल शुरू करने में आ रही
-किसी समस्या के बारे में कुछ पूछना है, तो हमारे [डेवलपर फ़ोरम](https://discuss.ai.google.dev/c/gemini-api/4?hl=hi) में शामिल हों.
+Nếu bạn có thắc mắc về các tham số được hỗ trợ, các tính năng sắp ra mắt hoặc gặp phải bất kỳ vấn đề nào khi bắt đầu sử dụng Gemini, hãy tham gia [Diễn đàn dành cho nhà phát triển](https://discuss.ai.google.dev/c/gemini-api/4?hl=vi) của chúng tôi.
 
-## आगे क्या करना है
+## Bước tiếp theo
 
-ज़्यादा जानकारी वाले
-उदाहरण देखने के लिए, हमारी [OpenAI कंपैटिबिलिटी Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=hi) आज़माएं.
+Hãy thử [Colab tương thích với OpenAI](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_OpenAI_Compatibility.ipynb?hl=vi) của chúng tôi để xem các ví dụ chi tiết hơn.
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
+Cập nhật lần gần đây nhất: 2026-06-19 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-19 UTC."],[],[]]

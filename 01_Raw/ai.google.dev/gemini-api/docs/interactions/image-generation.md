@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/interactions/image-generation
-fetched_at: 2026-06-08T05:28:54.271622+00:00
+fetched_at: 2026-06-22T06:28:10.579067+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -446,6 +446,7 @@ can include the following:
 | --- | --- |
 | Up to 10 images of objects with high-fidelity to include in the final image | Up to 6 images of objects with high-fidelity to include in the final image |
 | Up to 4 images of characters to maintain character consistency | Up to 5 images of characters to maintain character consistency |
+| N/A | Up to 3 images to be used as style references |
 
 ### Python
 
@@ -2860,12 +2861,7 @@ Choose the model best suited for your specific use case.
 
 In addition to using Gemini's built-in image generation capabilities, you can
 also access [Imagen](https://ai.google.dev/gemini-api/docs/imagen), our specialized image generation
-model, through the Gemini API.
-
-Imagen 4 should be your go-to model when starting to generate images
-with Imagen. Choose Imagen 4 Ultra for advanced
-use-cases or when you need the best image quality (note that can only generate
-one image at a time).
+model, through the Gemini API. Plan to migrate before the shutdown date.
 
 ## What's next
 
@@ -2877,8 +2873,8 @@ Send feedback
 
 Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Last updated 2026-06-01 UTC.
+Last updated 2026-06-18 UTC.
 
 Need to tell us more?
 
-[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-01 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

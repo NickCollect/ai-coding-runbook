@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=pt-BR
-fetched_at: 2026-06-15T06:25:29.946366+00:00
-title: "Modelo Gemini Embedding 2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-2?hl=it
+fetched_at: 2026-06-22T06:31:06.637756+00:00
+title: "Modello Gemini Embedding 2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Envie comentários
+Invia feedback
 
-# Modelo Gemini Embedding 2
+# Modello Gemini Embedding 2
 
-Nosso primeiro modelo de embeddings multimodais, que oferece um mapeamento numérico eficiente de texto, imagens, vídeo, áudio e PDFs em um único espaço de embeddings unificado. O modelo Gemini Embedding 2 é ideal para pesquisa semântica entre modalidades, recuperação de documentos e sistemas de recomendação que exigem cálculos de similaridade rápidos e escalonáveis em grandes conjuntos de dados multimodais.
+Il nostro primo modello di embedding multimodale, che fornisce una mappatura numerica efficiente di testo, immagini, video, audio e PDF in un unico spazio di embedding unificato. Il modello Gemini Embedding 2 è ideale per la ricerca semantica cross-modale, il recupero di documenti e i sistemi di raccomandazione che richiedono calcoli di similarità rapidi e scalabili su grandi set di dati multimodali.
 
-## Documentação
+## Documentazione
 
-Acesse a página [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br) para conferir a cobertura completa
-de recursos e funcionalidades.
+Visita la pagina [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=it) per una copertura completa
+di funzionalità e capacità.
 
 ## gemini-embedding-2
 
-| Propriedade | Descrição |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardCódigo do modelo | **API Gemini**  `gemini-embedding-2` |
-| saveTipos de dados com suporte | **Entrada**  Texto, imagem, vídeo, áudio, PDF  **Saída**  Embeddings de textos |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de token de entrada**  8.192  **Tamanho da dimensão de saída**  Flexível, com suporte para: 128 a 3.072. Recomendado: 768, 1.536, 3.072 |
-| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Estável: `gemini-embedding-2` |
-| calendar\_monthAtualização mais recente | Abril de 2026 |
+| id\_cardCodice modello | **API Gemini**  `gemini-embedding-2` |
+| saveTipi di dati supportati | **Input**  Testo, immagine, video, audio, PDF  **Output**  Text embedding |
+| token\_autoLimiti di token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  8192  **Dimensione della dimensione di output**  Flessibile, supporta: 128 - 3072, consigliato: 768, 1536, 3072 |
+| 123Versioni | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Stabile: `gemini-embedding-2` |
+| calendar\_monthUltimo aggiornamento | Aprile 2026 |
 
-Envie comentários
+Invia feedback
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última atualização 2026-04-29 UTC.
+Ultimo aggiornamento 2026-04-29 UTC.
 
-Quer enviar seu feedback?
+Vuoi dirci altro?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]

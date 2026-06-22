@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=it
-fetched_at: 2026-06-15T06:26:26.282774+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.0-flash-lite?hl=pt-BR
+fetched_at: 2026-06-22T06:29:46.990818+00:00
 title: "Gemini 2.0 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Invia feedback
+Envie comentários
 
 # Gemini 2.0 Flash-Lite
 
 ## gemini-2.0-flash-lite
 
-| Proprietà | Descrizione |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_cardModel code | `gemini-2.0-flash-lite` |
-| saveSupported data types | **Input**  Audio, immagini, video e testo  **Output**  Testo |
-| token\_autoToken limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  1.048.576  **Limite di token di output**  8.192 |
-| handymanCapabilities | **Generazione di audio**  Non supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Supportato  **Esecuzione del codice**  Non supportato  **Ricerca di file**  Non supportato  **Chiamata di funzione**  Supportato  **Fondatezza con Google Maps**  Non supportato  **Generazione di immagini**  Non supportato  **API live**  Non supportato  **Fondatezza della Ricerca**  Non supportato  **Output strutturati**  Supportato  **In pensiero**  Non supportato  **Contesto URL**  Non supportato |
-| 123Versions | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - *Arresto*: `gemini-2.0-flash-lite` - *Arresto*: `gemini-2.0-flash-lite-001` |
-| calendar\_monthLatest update | Febbraio 2025 |
-| cognition\_2Knowledge cutoff | Agosto 2024 |
+| Código do modelo id\_card | `gemini-2.0-flash-lite` |
+| saveTipos de dados aceitos | **Entradas** (link em inglês)  Áudio, imagens, vídeo e texto  **Saída**  Texto |
+| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  1.048.576  **Limite de token de saída**  8.192 |
+| handymanRecursos | **Geração de áudio**  incompatível  **API Batch**  Compatível  **Armazenamento em cache**  Compatível  **Execução de código**  incompatível  **Pesquisa de arquivos**  incompatível  **Chamadas de função**  Compatível  **Embasamento com o Google Maps**  incompatível  **Geração de imagens**  incompatível  **API Live**  incompatível  **Embasamento da pesquisa**  incompatível  **Respostas estruturadas**  Compatível  **Pensamento**  Não aceito  **Contexto do URL**  incompatível |
+| Versões 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - *Desligar*: `gemini-2.0-flash-lite` - *Desligar*: `gemini-2.0-flash-lite-001` |
+| calendar\_monthÚltima atualização | Fevereiro de 2025 |
+| cognition\_2Limite de conhecimento | Agosto de 2024 |
 
-Invia feedback
+Envie comentários
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Ultimo aggiornamento 2026-06-01 UTC.
+Última atualização 2026-06-01 UTC.
 
-Vuoi dirci altro?
+Quer enviar seu feedback?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-01 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-01 UTC."],[],[]]

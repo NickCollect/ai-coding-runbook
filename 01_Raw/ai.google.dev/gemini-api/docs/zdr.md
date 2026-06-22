@@ -1,61 +1,61 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=ar
-fetched_at: 2026-06-15T06:24:08.192480+00:00
-title: "\u0639\u062f\u0645 \u0627\u0644\u0627\u062d\u062a\u0641\u0627\u0638 \u0628\u0623\u064a \u0628\u064a\u0627\u0646\u0627\u062a \u0641\u064a Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=pl
+fetched_at: 2026-06-22T06:30:46.048457+00:00
+title: "Brak przechowywania danych w\u00a0interfejsie Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-إرسال ملاحظات
+Prześlij opinię
 
-# عدم الاحتفاظ بأي بيانات في Gemini Developer API
+# Brak przechowywania danych w interfejsie Gemini Developer API
 
-توضّح هذه الصفحة تفاصيل ما يُعرف عادةً باسم "عدم الاحتفاظ بالبيانات" في Gemini Developer API.
+Na tej stronie znajdziesz szczegółowe informacje o tzw. „zerowym przechowywaniu danych” w interfejsie Gemini Developer API.
 
-## قيود التدريب
+## Ograniczenie trenowania
 
-كما هو موضّح في [بنود خدمة Gemini API](https://ai.google.dev/gemini-api/terms?hl=ar)، عندما تستخدم "الخدمات المدفوعة"، لا تستخدم Google طلباتك (بما في ذلك تعليمات النظام المرتبطة بها والمحتوى المخزّن مؤقتًا والملفات، مثل الصور أو الفيديوهات أو المستندات) أو ردودك لتحسين منتجاتنا. يمكنك الاطّلاع على تعريف "الخدمات المدفوعة" [هنا](https://ai.google.dev/gemini-api/terms?hl=ar#paid-services).
+Zgodnie z [Warunkami korzystania z Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl), gdy korzystasz z usług płatnych, Google nie używa Twoich promptów (w tym powiązanych instrukcji systemowych, treści w pamięci podręcznej i plików, takich jak obrazy, filmy czy dokumenty) ani odpowiedzi do ulepszania naszych usług. Usługi płatne są zdefiniowane [tutaj](https://ai.google.dev/gemini-api/terms?hl=pl#paid-services).
 
-## الاحتفاظ ببيانات العملاء وتحقيق هدف عدم الاحتفاظ بالبيانات
+## Przechowywanie danych klientów i osiąganie zerowego poziomu przechowywania danych
 
-يتم عادةً الاحتفاظ ببيانات العملاء لفترات زمنية محدودة في الحالات والشروط التالية. لتحقيق هدف عدم الاحتفاظ بالبيانات، على العملاء اتّخاذ إجراءات معيّنة أو تجنُّب ميزات معيّنة ضمن كل من المجالات التالية:
+Dane klientów są zwykle przechowywane przez ograniczony czas w tych sytuacjach i na tych warunkach: Aby osiągnąć zerowy okres przechowywania danych, klienci muszą podjąć określone działania lub unikać określonych funkcji w każdym z tych obszarów:
 
-- **تسجيل الطلبات لمراقبة إساءة الاستخدام**: كما هو موضّح في [بنود الخدمة الإضافية الخاصة بـ Gemini API](https://ai.google.dev/gemini-api/terms?hl=ar)، تسجّل Google الطلبات والردود لفترة زمنية محدودة فقط بهدف رصد أي انتهاكات [لسياسة الاستخدام المحظور](https://policies.google.com/terms/generative-ai/use-policy?hl=ar) في "الخدمات المدفوعة". عند الموافقة على طلبك بشأن ميزة "البيانات الصفرية" لمشروع معيّن، تتم إزالة كل محتوى المستخدمين (الطلبات والاستجابات) والبيانات الوصفية التي يمكن التعرّف منها على الهوية (مثل عناوين IP ومعرّفات حسابات Google) قبل تسجيلها. يتم وضع علامة على السجلّ الناتج باعتباره معقّمًا ولا يحتوي على أي بيانات تكشف هويّة المستخدم، ما يضمن التكافؤ مع ميزة "عدم الاحتفاظ بالبيانات" في "منصة وكلاء Gemini Enterprise".
-- **تحديد المصدر من خلال &quot;بحث Google&quot;**: كما هو موضّح في [بنود الخدمة الإضافية الخاصة بواجهة برمجة التطبيقات Gemini](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-search)، تخزّن Google الطلبات والمعلومات السياقية والنتائج التي تم إنشاؤها لمدة ثلاثين (30) يومًا بغرض إنشاء نتائج مستندة إلى معلومات من مصادر موثوقة واقتراحات بحث.
-  قد يتم استخدام هذه المعلومات المخزَّنة لتصحيح الأخطاء واختبار الأنظمة التي تتيح التأسيس. **لا يمكن إيقاف تخزين هذه المعلومات إذا كنت تستخدم ميزة تحديد المصدر من خلال "بحث Search".**
-- **استخدام "خرائط Google" كمصدر**: كما هو موضّح في [بنود الخدمة الإضافية الخاصة بواجهة برمجة تطبيقات Gemini](https://ai.google.dev/gemini-api/terms?hl=ar)، تخزّن Google الطلبات والمعلومات السياقية والنتائج التي يتم إنشاؤها لمدة ثلاثين (30) يومًا بغرض إنشاء نتائج مستنِدة إلى بيانات. لا يجوز استخدام هذه المعلومات المخزّنة إلا لأغراض هندسة الموثوقية، مثل تصحيح الأخطاء في حال حدوث مشاكل في الخدمة.
-  **لا يمكن إيقاف تخزين هذه المعلومات إذا كنت تستخدم ميزة استخدام "خرائط Google" كمصدر.**
-- **واجهة برمجة التطبيقات Interactions API**: تدير هذه الواجهة حالة المحادثة النشطة لتفعيل المحادثات المتعددة الأدوار. **بشكلٍ تلقائي، تتيح Interactions API تخزين الحالة**. لضمان عدم ترك أي أثر للبيانات، عليك ضبط المَعلمة `store` بشكل صريح على `false` في طلبات واجهة برمجة التطبيقات لإيقاف الاحتفاظ بالحالة التلقائية.
-- **Live API**: تتيح واجهة برمجة التطبيقات هذه التي تحتفظ بالحالة إعادة الاتصال في الوقت الفعلي من خلال تخزين حالة المحادثة. لتحقيق عدم الاحتفاظ بالبيانات، **لا تضبط
-  SessionResumptionConfig**. في حال إنشاء معرّف جلسة، يتم الاحتفاظ بحالة المحادثة (بما في ذلك النص والصوت والفيديو) لمدة تصل إلى 24 ساعة.
-- **File API Storage**: تتيح واجهة File API للمستخدمين تحميل مواد عرض كبيرة.
-  يتم تخزين الملفات في وضع السكون إلى أن يحذفها المستخدم أو إلى أن تنتهي صلاحيتها.
-  إنّ استخدام File API مستقل عن تسجيل ZDR، ويجب أن يحذف المستخدمون الملفات يدويًا لضمان عدم ترك أي أثر للبيانات.
-- **التخزين المؤقت للسياق الواضح**: يمكن للمستخدمين تخزين مجموعات البيانات الكبيرة مؤقتًا يدويًا (مثل الفيديوهات الطويلة أو مكتبات المستندات) باستخدام الحقل `cached_content`. مع أنّ سجلّات هذه الطلبات تتّبع سياسات تجاهل البيانات غير الضرورية، يتم تخزين السياق المخزّن مؤقتًا باستخدام `ttl` أو `expire_time` يحدّدهما المستخدم. لتحقيق معدل استخدام بيانات مطلقًا، لا تستخدم ميزة cached\_content.
-- **التخزين المؤقت الضمني في الذاكرة**: تخزِّن نماذج Gemini البيانات مؤقتًا في الذاكرة تلقائيًا لتقليل وقت الاستجابة والتكلفة على المطوّرين. تكون هذه البيانات محفوظة في ذاكرة الوصول العشوائي (RAM) فقط (وليس في حالة عدم النشاط)، ويتم عزلها على مستوى المشروع، ويكون لها مدة بقاء 24 ساعة.
-  **لا ينتهك هذا الإجراء سياسة الاحتفاظ بالبيانات بدون تخزينها.**
+- **Rejestrowanie promptów na potrzeby monitorowania nadużyć**: zgodnie z [Dodatkowymi warunkami korzystania z usług Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl) w przypadku usług płatnych Google rejestruje prompty i odpowiedzi przez ograniczony czas wyłącznie w celu wykrywania naruszeń [zasad dotyczących niedozwolonych zastosowań](https://policies.google.com/terms/generative-ai/use-policy?hl=pl). Gdy Twoja prośba o ZDR w przypadku konkretnego projektu zostanie zatwierdzona, wszystkie treści użytkowników (prompty i odpowiedzi) oraz metadane umożliwiające identyfikację (takie jak adresy IP i identyfikatory kont Google) zostaną usunięte przed rejestrowaniem. Powstały rekord jest oznaczony jako oczyszczony i nie zawiera żadnych danych użytkownika możliwego do zidentyfikowania, co zapewnia zgodność z platformą agentów Gemini Enterprise z zerowym okresem przechowywania danych.
+- **Powiązanie ze źródłem informacji przy użyciu wyszukiwarki Google**: zgodnie z [Dodatkowymi warunkami korzystania z Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl#grounding-with-google-search) Google przechowuje prompty, informacje kontekstowe i wygenerowane dane wyjściowe przez 30 dni w celu tworzenia wyników opartych na powiązaniu ze źródłem informacji i sugestii wyszukiwania.
+  Te zapisane informacje mogą być używane do debugowania i testowania systemów obsługujących uziemienie. **Jeśli korzystasz z powiązania ze źródłem informacji przy użyciu wyszukiwarki Google, nie możesz wyłączyć zapisywania tych informacji.**
+- **Powiązanie ze źródłem informacji przy użyciu Map Google**: zgodnie z [Dodatkowymi warunkami korzystania z Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl) Google przechowuje prompty, informacje kontekstowe i wygenerowane dane wyjściowe przez 30 dni w celu tworzenia powiązanych ze źródłem informacji wyników. Te przechowywane informacje mogą być używane wyłącznie do celów związanych z inżynierią niezawodności, np. do debugowania w przypadku problemów z usługą.
+  **Jeśli korzystasz z powiązania ze źródłem informacji przy użyciu Map Google, nie możesz wyłączyć przechowywania tych informacji.**
+- **Interfejs Interactions API:** zarządza aktywnym stanem rozmowy, aby umożliwić wielokrotne tury. **Domyślnie interfejs Interactions API umożliwia przechowywanie stanu**. Aby zapewnić brak śladu danych, musisz w żądaniach do interfejsu API wyraźnie ustawić parametr `store` na `false`, aby zrezygnować z domyślnego przechowywania stanu.
+- **Live API**: ten interfejs API z zachowywaniem stanu umożliwia ponowne połączenie w czasie rzeczywistym dzięki przechowywaniu stanu rozmowy. Aby osiągnąć zerowy okres przechowywania danych, **nie konfiguruj
+  SessionResumptionConfig**. Jeśli zostanie wygenerowany identyfikator sesji, stan rozmowy (w tym tekst, dźwięk i wideo) jest przechowywany przez maksymalnie 24 godziny.
+- **File API Storage**: interfejs File API umożliwia użytkownikom przesyłanie dużych zasobów.
+  Pliki są przechowywane w stanie spoczynku, dopóki nie zostaną usunięte przez użytkownika lub nie wygasną.
+  Korzystanie z interfejsu File API jest niezależne od rejestrowania ZDR. Aby zapewnić brak śladów danych, użytkownicy muszą ręcznie usuwać pliki.
+- **Jawne buforowanie kontekstu:** użytkownicy mogą ręcznie buforować duże zbiory danych (np. długie filmy lub biblioteki dokumentów) za pomocą pola `cached_content`. Chociaż dzienniki tych żądań są zgodne z zasadami usuwania danych ZDR, sam kontekst zapisany w pamięci podręcznej jest przechowywany z określonym przez użytkownika `ttl` lub `expire_time`. Aby osiągnąć absolutne zero danych, nie korzystaj z funkcji cached\_content.
+- **Niejawne buforowanie w pamięci:** domyślnie modele Gemini buforują dane w pamięci, aby zmniejszyć opóźnienia i koszty dla deweloperów. Te dane są przechowywane wyłącznie w pamięci RAM (nie w spoczynku), są odizolowane na poziomie projektu i mają 24-godzinny czas życia.
+  **Nie narusza to zasady zerowego przechowywania danych.**
 
-## الخطوات التالية
+## Co dalej?
 
-- [مزيد من المعلومات حول سياسة الاستخدام المحظور للذكاء الاصطناعي التوليدي](https://policies.google.com/terms/generative-ai/use-policy?hl=ar)
-- راجِع [بنود الخدمة الإضافية الخاصة بـ Gemini API](https://ai.google.dev/gemini-api/terms?hl=ar).
-- إذا كنت بحاجة إلى أدوات تحكّم ذاتية الخدمة في ZDR على مستوى المؤسسة، يُرجى الاطّلاع على [دليل منصة وكيل Gemini Enterprise
-  Zero Data Retention](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=ar).
+- Dowiedz się więcej o [zasadach dotyczących niedozwolonych zastosowań generatywnej AI](https://policies.google.com/terms/generative-ai/use-policy?hl=pl).
+- Zapoznaj się z [Dodatkowymi warunkami korzystania z Gemini API](https://ai.google.dev/gemini-api/terms?hl=pl).
+- Jeśli potrzebujesz ustawień ZDR klasy korporacyjnej, które możesz samodzielnie konfigurować, zapoznaj się z [przewodnikiem po platformie agentów Gemini Enterprise
+  Zero Data Retention](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=pl).
 
-إرسال ملاحظات
+Prześlij opinię
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)
+Ostatnia aktualizacja: 2026-05-28 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Chcesz przekazać coś jeszcze?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-28 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-28 UTC."],[],[]]

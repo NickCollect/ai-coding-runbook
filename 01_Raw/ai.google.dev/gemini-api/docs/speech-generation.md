@@ -1,49 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=it
-fetched_at: 2026-06-15T06:26:53.508044+00:00
+source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-BR
+fetched_at: 2026-06-22T06:31:50.656690+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Invia feedback
+Envie comentários
 
-# Generazione di sintesi vocale (TTS)
+# Geração de conversão de texto em voz (TTS)
 
-L'API Gemini può trasformare l'input di testo in audio con una o più voci
-utilizzando le funzionalità di generazione di sintesi vocale (TTS) di Gemini.
-La generazione di sintesi vocale (TTS) è *[controllabile](#controllable)*, il che significa che puoi utilizzare il linguaggio naturale per strutturare le interazioni e guidare lo *stile*, l'*accento*, il *ritmo* e il *tono* dell'audio.
+A API Gemini pode transformar entradas de texto em áudio de um ou vários locutores usando os recursos de geração de texto em voz (TTS) do Gemini.
+A geração de conversão de texto em voz (TTS) é *[controlável](#controllable)*, ou seja, você pode usar a linguagem natural para estruturar interações e orientar o *estilo*, o *sotaque*, o *ritmo* e o *tom* do áudio.
 
-[Prova in Google AI Studio](https://aistudio.google.com/apps/bundled/voice-library?showPreview=truew&hl=it)
+[Testar no Google AI Studio](https://aistudio.google.com/apps/bundled/voice-library?showPreview=truew&hl=pt-br)
 
-La funzionalità TTS è diversa dalla generazione vocale fornita tramite l'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it), progettata per audio interattivi e non strutturati, nonché per input e output multimodali. Mentre l'API Live eccelle
-in contesti conversazionali dinamici, la sintesi vocale tramite l'API Gemini
-è pensata per scenari che richiedono una recitazione esatta del testo con un controllo
-preciso su stile e suono, come la generazione di podcast o audiolibri.
+A capacidade de TTS é diferente da geração de fala fornecida pela [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br), que foi projetada para áudio interativo e não estruturado, além de entradas e saídas multimodais. Embora a API Live seja excelente em contextos de conversação dinâmica, a TTS pela API Gemini é feita para cenários que exigem recitação exata de texto com controle refinado sobre estilo e som, como geração de podcasts ou audiolivros.
 
-Questa guida mostra come generare audio con un solo relatore e con più relatori dal testo.
+Este guia mostra como gerar áudio de um ou vários locutores com base em texto.
 
-## Prima di iniziare
+## Antes de começar
 
-Assicurati di utilizzare una variante del modello Gemini con funzionalità di sintesi vocale (TTS) di Gemini, come indicato nella sezione [Modelli supportati](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it#supported-models). Per risultati ottimali, valuta quale modello si adatta meglio al tuo caso d'uso specifico.
+Use uma variante do modelo do Gemini com recursos de conversão de texto em voz (TTS) do Gemini, conforme listado na seção [Modelos compatíveis](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br#supported-models). Para resultados ideais, considere qual modelo se adapta melhor ao seu caso de uso específico.
 
-Prima di iniziare a creare, ti consigliamo di [testare i modelli Gemini TTS in AI Studio](https://aistudio.google.com/generate-speech?hl=it).
+Talvez seja útil [testar os modelos do Gemini TTS no AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br) antes de começar a criar.
 
-## TTS con un solo speaker
+## TTS com um único locutor
 
-Per convertire il testo in audio con un solo oratore, imposta la modalità di risposta su "audio" e passa un oggetto `SpeechConfig` con `VoiceConfig` impostato.
-Dovrai scegliere un nome per la voce tra le [voci di output](#voices) predefinite.
+Para converter texto em áudio de um único falante, defina a modalidade de resposta como "audio" e transmita um objeto `SpeechConfig` com `VoiceConfig` definido.
+Escolha um nome de voz entre as [vozes de saída](#voices) pré-criadas.
 
-Questo esempio salva l'audio di output del modello in un file wave:
+Este exemplo salva o áudio de saída do modelo em um arquivo wave:
 
 ### Python
 
@@ -166,12 +162,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-t
 ffmpeg -f s16le -ar 24000 -ac 1 -i out.pcm out.wav
 ```
 
-## TTS multilingue
+## TTS com vários falantes
 
-Per l'audio multi-speaker, avrai bisogno di un oggetto `MultiSpeakerVoiceConfig` con
-ogni oratore (fino a 2) configurato come `SpeakerVoiceConfig`.
-Devi definire ogni `speaker` con gli stessi nomi utilizzati nel
-[prompt](#controllable):
+Para áudio com vários falantes, você vai precisar de um objeto `MultiSpeakerVoiceConfig` com
+cada falante (até dois) configurado como um `SpeakerVoiceConfig`.
+Defina cada `speaker` com os mesmos nomes usados no
+[comando](#controllable):
 
 ### Python
 
@@ -345,11 +341,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-t
 ffmpeg -f s16le -ar 24000 -ac 1 -i out.pcm out.wav
 ```
 
-## Controllare lo stile del discorso con i prompt
+## Controlar o estilo de fala com comandos
 
-Puoi controllare stile, tono, accento e ritmo utilizzando prompt in linguaggio naturale
-o [tag audio](#transcript-tags) per la sintesi vocale di una o più persone.
-Ad esempio, in un prompt con un solo oratore, puoi dire:
+Você pode controlar o estilo, o tom, o sotaque e o ritmo usando comandos em linguagem natural
+ou [tags de áudio](#transcript-tags) para TTS com um ou vários locutores.
+Por exemplo, em um comando de um único falante, você pode dizer:
 
 ```
 Say in an spooky voice:
@@ -357,9 +353,7 @@ Say in an spooky voice:
 [whisper] Something wicked this way comes"
 ```
 
-In un prompt con più speaker, fornisci al modello il nome di ciascuno e
-la trascrizione corrispondente. Puoi anche fornire indicazioni per ogni oratore
-singolarmente:
+Em um comando com vários locutores, forneça ao modelo o nome de cada um e a transcrição correspondente. Você também pode dar orientações individuais para cada locutor:
 
 ```
 Make Speaker1 sound tired and bored, and Speaker2 sound excited and happy:
@@ -368,15 +362,11 @@ Speaker1: So... [yawn] what's on the agenda today?
 Speaker2: You're never going to guess!
 ```
 
-Prova a utilizzare un'[opzione vocale](#voices) che corrisponda allo stile o all'emozione che vuoi trasmettere, per enfatizzarla ancora di più. Nel prompt precedente, ad esempio,
-il tono affannoso di *Encelado* potrebbe enfatizzare "stanco" e "annoiato", mentre
-il tono allegro di *Puck* potrebbe completare "entusiasta" e "felice".
+Use uma [opção de voz](#voices) que corresponda ao estilo ou à emoção que você quer transmitir para enfatizar ainda mais. No comando anterior, por exemplo, a voz ofegante de *Encélado* pode enfatizar "cansado" e "entediado", enquanto o tom alegre de *Puck* pode complementar "animado" e "feliz".
 
-## Generazione di un prompt per la conversione in audio in corso…
+## Gerar um comando para converter em áudio
 
-I modelli TTS generano solo audio, ma puoi utilizzare
-[altri modelli](https://ai.google.dev/gemini-api/docs/models?hl=it) per generare prima una trascrizione,
-quindi trasmetterla al modello TTS per la lettura ad alta voce.
+Os modelos de TTS só geram áudio, mas você pode usar [outros modelos](https://ai.google.dev/gemini-api/docs/models?hl=pt-br) para gerar uma transcrição primeiro e depois passar essa transcrição para o modelo de TTS ler em voz alta.
 
 ### Python
 
@@ -470,135 +460,222 @@ const response = await ai.models.generateContent({
 await main();
 ```
 
-## Opzioni vocali
+## Streaming de geração de fala
 
-I modelli TTS supportano le seguenti 30 opzioni vocali nel campo `voice_name`:
+É possível transmitir o áudio gerado enquanto ele é criado pelo modelo. Isso é útil para reduzir a latência percebida.
+
+### Python
+
+```
+from google import genai
+from google.genai import types
+
+client = genai.Client()
+
+response_stream = client.models.generate_content_stream(
+   model="gemini-3.1-flash-tts-preview",
+   contents="Say cheerfully: Have a wonderful day!",
+   config=types.GenerateContentConfig(
+      response_modalities=["AUDIO"],
+      speech_config=types.SpeechConfig(
+         voice_config=types.VoiceConfig(
+            prebuilt_voice_config=types.PrebuiltVoiceConfig(
+               voice_name='Kore',
+            )
+         )
+      ),
+   )
+)
+
+for chunk in response_stream:
+   try:
+      data = chunk.candidates[0].content.parts[0].inline_data.data
+      # data contains raw PCM bytes (24kHz, 1-channel, 16-bit)
+      # Process the audio chunk (e.g., play it or write to a file)
+   except (IndexError, AttributeError):
+      pass
+```
+
+### JavaScript
+
+```
+import {GoogleGenAI} from '@google/genai';
+
+async function main() {
+   const ai = new GoogleGenAI({});
+
+   const responseStream = await ai.models.generateContentStream({
+      model: "gemini-3.1-flash-tts-preview",
+      contents: [{ parts: [{ text: 'Say cheerfully: Have a wonderful day!' }] }],
+      config: {
+            responseModalities: ['AUDIO'],
+            speechConfig: {
+               voiceConfig: {
+                  prebuiltVoiceConfig: { voiceName: 'Kore' },
+               },
+            },
+      },
+   });
+
+   for await (const chunk of responseStream) {
+      const data = chunk.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
+      if (data) {
+         const audioBuffer = Buffer.from(data, 'base64');
+         // Process the audio buffer
+      }
+   }
+}
+await main();
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-tts-preview:streamGenerateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+        "contents": [{
+          "parts":[{
+            "text": "Say cheerfully: Have a wonderful day!"
+          }]
+        }],
+        "generationConfig": {
+          "responseModalities": ["AUDIO"],
+          "speechConfig": {
+            "voiceConfig": {
+              "prebuiltVoiceConfig": {
+                "voiceName": "Kore"
+              }
+            }
+          }
+        }
+    }'
+```
+
+## Opções de voz
+
+Os modelos de TTS são compatíveis com as seguintes 30 opções de voz no campo `voice_name`:
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr** - *Luminoso* | **Puck** - *Upbeat* | **Caronte**: *informativa* |
-| **Kore** -- *Firm* | **Fenrir**: *eccitabile* | **Leda** - *Giovane* |
-| **Orus** -- *Azienda* | **Aoede** - *Breezy* | **Callirrhoe**: *informale* |
-| **Autonoe** -- *Luminoso* | **Enceladus** - *Breathy* | **Iapetus** -- *Cancella* |
-| **Umbriel**: *tranquillo* | **Algieba** - *Smooth* | **Despina** -- *Smooth* |
-| **Erinome** -- *Cancella* | **Algenib** - *Gravelly* | **Rasalgethi** -- *Priorità informativa* |
-| **Laomedeia** - *Upbeat* | **Achernar** - *Soft* | **Alnilam** -- *Firm* |
-| **Schedar** -- *Even* | **Gacrux** - *Per adulti* | **Pulcherrima** -- *Inoltra* |
-| **Achird** -- *Amichevole* | **Zubenelgenubi** - *Casual* | **Vindemiatrix** - *Delicato* |
-| **Sadachbia** - *Vivace* | **Sadaltager** -- *Knowledgeable* | **Sulafat** - *Calda* |
+| **Zephyr**: *Brilhante* | **Puck**: *Upbeat* | **Charon**: *informativa* |
+| **Kore**: *firme* | **Fenrir**: *Excitável* | **Leda**: *Juventude* |
+| **Orus**: *Firm* | **Aoede**: *Breezy* | **Callirrhoe** -- *Tranquila* |
+| **Autonoe**: *Bright* | **Enceladus**: *Breathy* | **Iapetus**: *Limpar* |
+| **Umbriel**: *tranquilo* | **Algieba**: *Suave* | **Despina**: *Smooth* |
+| **Erinome**: *Limpar* | **Algenib**: *Gravelly* | **Rasalgethi**: *informativa* |
+| **Laomedeia**: *Upbeat* | **Achernar**: *Soft* | **Alnilam**: *Firme* |
+| **Schedar**: *Even* | **Gacrux**: *Adulto* | **Pulcherrima**: *projetada* |
+| **Achird**: *Friendly* | **Zubenelgenubi**: *Casual* | **Vindemiatrix**: *Gentil* |
+| **Sadachbia**: *Lively* | **Sadaltager**: *Conhecimento* | **Sulafat**: *quente* |
 
-Puoi ascoltare tutte le opzioni vocali in
-[AI Studio](https://aistudio.google.com/generate-speech?hl=it).
+Você pode ouvir todas as opções de voz no [AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br).
 
-## Lingue supportate
+## Idiomas compatíveis
 
-I modelli di sintesi vocale rilevano automaticamente la lingua di input. Sono supportate le seguenti lingue:
+Os modelos de TTS detectam automaticamente o idioma de entrada. Os seguintes idiomas são aceitos:
 
-| Lingua | Codice BCP-47 | Lingua | Codice BCP-47 |
+| Idioma | Código BCP-47 | Idioma | Código BCP-47 |
 | --- | --- | --- | --- |
-| Arabo | ar | Filippino | fil |
-| Bengalese | bn | Finlandese | fi |
-| Olandese | nl | Galiziano | gl |
-| Inglese | it | Georgiano | ka |
-| Francese | fr | Greco | el |
-| Tedesco | de | Gujarati | gu |
-| Hindi | hi | Creolo haitiano | ht |
-| Indonesiano | id | Ebraico | lui |
-| Italiano | it | Ungherese | hu |
-| Giapponese | ja | Islandese | è |
-| Coreano | ko | Giavanese | jv |
-| Marathi | mr | Kannada | kn |
-| Polacco | pl | Konkani | kok |
-| Portoghese | pt | Lao | lo |
-| Rumeno | ro | Latino | la |
-| Russo | ru | Lettone | lv |
-| Spagnolo | es | Lituano | lt |
-| Tamil | ta | Lussemburghese | lb |
-| Telugu | te | Macedone | mk |
-| Thailandese | th | Maithili | mai |
-| Turco | tr | Malgascio | mg |
-| Ucraino | uk | Malese | ms |
-| Vietnamita | vi | Malayalam | ml |
-| Afrikaans | af | Mongolo | mn |
-| Albanese | sq | Nepalese | ne |
-| Amarico | am | Norvegese, bokmål | nb |
-| Armeno | hy | Norvegese, nynorsk | nn |
-| Azero | az | Odia | o |
+| Árabe | ar | Filipino | fil |
+| Bengali | bn | Finlandês | fi |
+| Holandês | nl | Galego | gl |
+| Inglês | en | Georgiano | ka |
+| Francês | fr | Grego | el |
+| Alemão | de | Gujarati | gu |
+| Hindi | hi | Crioulo haitiano | ht |
+| Indonésio | ID | Hebraico | ele |
+| Italiano | it | Húngaro | hu |
+| Japonês | ja | Islandês | é |
+| Coreano | ko | Javanês | jv |
+| Marati | mr | Canarês | kn |
+| Polonês | pl | Concani | kok |
+| Português | pt | Laosiano | lo |
+| Romeno | ro | Latim | la |
+| Russo | ru | Letão | lv |
+| Espanhol | es | Lituano | lt |
+| Tâmil | ta | Luxemburguês | lb |
+| Télugo | te | Macedônio | mk |
+| Tailandês | th | Maithili | mai |
+| Turco | tr | Malgaxe | mg |
+| Ucraniano | uk | Malaio | ms |
+| Vietnamita | vi | Malaiala | ml |
+| Africâner | af | Mongol | mn |
+| Albanês | sq | Nepalês | ne |
+| Amárico | sou | Norueguês (Bokmål) | nb |
+| Armênio | hy | Norueguês (Nynorsk) | nn |
+| Azerbaijano | az | Oriá | ou |
 | Basco | eu | Pashto | ps |
-| Bielorusso | be | Persiano | fa |
-| Bulgaro | bg | Punjabi | pa |
-| Birmano | my | Serbo | sr |
-| Catalano | ca | Sindhi | sd |
-| Cebuano | ceb | Singalese | si |
-| Cinese, mandarino | cmn | Slovacco | sk |
-| Croato | h | Sloveno | sl |
-| Ceco | cs | Swahili | sw |
-| Danese | da | Svedese | sv |
-| Estone | et | Urdu | UK |
+| Bielorrusso | be | Persa | fa |
+| Búlgaro | bg | Punjabi | pa |
+| Birmanês | my | Sérvio | sr |
+| Catalão | ca | Sindi | sd |
+| Cebuano | ceb | Cingalês | si |
+| Chinês, mandarim | cmn | Eslovaco | sk |
+| Croata | h | Esloveno | sl |
+| Tcheco | cs | Suaíli | sw |
+| Dinamarquês | da | Sueco | sv |
+| Estoniano | et | Urdu | ur |
 
-## Modelli supportati
+## Modelos compatíveis
 
-| Modello | Unico relatore | Multispeaker |
+| Modelo | Falante único | Multifone |
 | --- | --- | --- |
-| [Anteprima di Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=it) | ✔️ | ✔️ |
-| [Gemini 2.5 Flash Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=it) | ✔️ | ✔️ |
-| [Gemini 2.5 Pro Preview TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=it) | ✔️ | ✔️ |
+| [Pré-lançamento do Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=pt-br) | ✔️ | ✔️ |
+| [Pré-lançamento do Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=pt-br) | ✔️ | ✔️ |
+| [Pré-lançamento da TTS do Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=pt-br) | ✔️ | ✔️ |
 
-## Guida ai prompt
+## Guia de comandos
 
-Il modello **Gemini Native Audio Generation Text-to-Speech (TTS)** si differenzia dai modelli TTS tradizionali perché utilizza un modello linguistico di grandi dimensioni che sa ***non solo cosa dire, ma anche come dirlo***.
+O modelo **Gemini Native Audio Generation Text-to-Speech (TTS)** se diferencia dos modelos tradicionais de TTS por usar um modelo de linguagem grande que sabe ***não apenas o que dizer, mas também como dizer***.
 
-Il modello interpreterà in modo nativo una trascrizione e determinerà come
-devono essere pronunciate le parole. Trascrizioni semplici senza ulteriori
-richieste che suonino naturali. Tuttavia, Gemini TTS è dotato anche di strumenti che puoi utilizzare per
-guidarlo.
+O modelo interpreta uma transcrição e determina como suas palavras devem ser entregues. Transcrição simples sem comandos adicionais soa natural. Mas o TTS do Gemini também vem com ferramentas que você pode usar para
+direcioná-lo.
 
-Lo scopo di questa guida è fornire indicazioni fondamentali e stimolare idee per lo sviluppo di esperienze audio. Inizieremo con i **tag** per un controllo rapido in linea, per poi esplorare le **strutture di prompt** avanzate per una direzione completa delle prestazioni.
+O objetivo deste guia é oferecer uma orientação fundamental e despertar ideias ao desenvolver experiências de áudio. Vamos começar com **Tags** para controle inline rápido e, em seguida, explorar **estruturas de solicitação** avançadas para orientação de desempenho total.
 
-### Tag audio
+### Tags de áudio
 
-I tag sono modificatori incorporati come `[whispers]` o `[laughs]` che ti offrono un controllo granulare sulla pubblicazione. Puoi utilizzarli per modificare il tono, il ritmo e
-l'atmosfera emotiva di una riga o di una sezione della trascrizione. Puoi anche usarli per
-aggiungere interiezioni e altri suoni non verbali alla performance, come
-`[cough]`, `[sighs]` o `[gasp]`.
+As tags são modificadores inline, como `[whispers]` ou `[laughs]`, que oferecem controle granular sobre a veiculação. Use-as para mudar o tom, o ritmo e a
+vibe emocional de uma linha ou seção da transcrição. Você também pode usar esses recursos para
+adicionar interjeições e alguns outros sons não verbais à performance, como
+`[cough]`, `[sighs]` ou `[gasp]`.
 
-Non esiste un elenco esaustivo dei tag che funzionano e di quelli che non funzionano. Ti consigliamo di
-sperimentare con diverse emozioni ed espressioni per vedere come cambia l'output.
+Não há uma lista exaustiva do que funciona ou não. Recomendamos testar diferentes emoções e expressões para ver como a saída muda.
 
-Se la trascrizione non è in inglese, per ottenere risultati ottimali ti consigliamo di
-utilizzare comunque i tag audio in inglese.
+Se a transcrição não estiver em inglês, recomendamos que você use tags de áudio em inglês para ter os melhores resultados.
 
-**Utilizzare i tag audio in modo creativo**
+**Use a criatividade com as tags de áudio**
 
-Per mostrare il tipo di variabilità che puoi ottenere con i tag audio, ecco una serie di esempi che dicono la stessa cosa, ma la pronuncia cambia in base ai tag utilizzati.
+Para mostrar o tipo de variabilidade que você pode ter com as tags de áudio, aqui estão alguns exemplos que dizem a mesma coisa, mas a entrega muda com base nas tags usadas.
 
-Puoi modificare l'enfasi della recitazione aggiungendo tag all'inizio di una
-riga per rendere l'oratore entusiasta, annoiato o riluttante:
+Você pode mudar a ênfase da entrega adicionando tags no início de uma
+linha para deixar o falante animado, entediado ou relutante:
 
-- `[excitedly]` Ciao, sono un nuovo modello di sintesi vocale e posso dire le cose
-  in molti modi diversi. Come posso aiutarti?
-- `[bored]` Ciao, sono un nuovo modello di sintesi vocale…
-- `[reluctantly]` Ciao, sono un nuovo modello di sintesi vocale…
+- `[excitedly]` Olá! Sou um novo modelo de conversão de texto em voz e posso dizer as coisas de várias maneiras diferentes. Como posso ajudar?
+- `[bored]` Olá, sou um novo modelo de conversão de texto em voz…
+- `[reluctantly]` Olá, sou um novo modelo de conversão de texto em voz…
 
-I tag possono essere utilizzati anche per modificare il ritmo della pronuncia o per combinare il ritmo
-con l'enfasi:
+As tags também podem ser usadas para mudar o ritmo da entrega ou combinar ritmo com ênfase:
 
-- `[very fast]` Ciao, sono un nuovo modello di sintesi vocale…
-- `[very slow]` Ciao, sono un nuovo modello di sintesi vocale…
-- `[sarcastically, one painfully slow word at a time]` Ciao, sono un nuovo modello di sintesi vocale…
+- `[very fast]` Olá, sou um novo modelo de conversão de texto em voz…
+- `[very slow]` Olá, sou um novo modelo de conversão de texto em voz…
+- `[sarcastically, one painfully slow word at a time]` Olá, sou um novo modelo de conversão de texto em voz…
 
-Hai anche il controllo preciso su sezioni specifiche, il che significa che puoi sussurrare
-una parte e urlarne un'altra.
+Você também tem controle preciso sobre seções específicas, o que significa que pode sussurrar
+uma parte e gritar outra.
 
-- `[whispers]` Ciao, sono un nuovo modello di sintesi vocale `[shouting]` e posso
-  dire le cose in molti modi diversi. `[whispers]` Come posso aiutarti oggi?
+- `[whispers]` Olá, sou um novo modelo de conversão de texto em voz, `[shouting]` e posso
+  dizer coisas de várias maneiras diferentes. `[whispers]` Como posso ajudar hoje?
 
-Puoi anche sperimentare qualsiasi idea creativa tu voglia:
+Você também pode testar qualquer ideia criativa:
 
-- `[like a cartoon dog]` Ciao, sono un nuovo modello di sintesi vocale…
-- `[like dracula]` Ciao, sono un nuovo modello di sintesi vocale…
+- `[like a cartoon dog]` Olá, sou um novo modelo de conversão de texto em voz…
+- `[like dracula]` Olá, sou um novo modelo de conversão de texto em voz…
 
-I tag di uso comune includono:
+As tags usadas com frequência incluem:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
@@ -607,31 +684,24 @@ I tag di uso comune includono:
 | `[mischievously]` | `[panicked]` | `[sarcastic]` | `[serious]` |
 | `[shouting]` | `[tired]` | `[trembling]` | `[whispers]` |
 
-I tag consentono di controllare in modo rapido e semplice la pubblicazione della trascrizione. Per un controllo
-ancora maggiore, puoi combinarli con un prompt di contesto per impostare il tono
-e l'atmosfera generale della performance.
+As tags oferecem controle rápido e fácil sobre a entrega da transcrição. Para ter ainda mais controle, combine-os com um comando de contexto para definir o tom e a vibe geral da performance.
 
-### Prompt avanzati
+### Criação avançada de comandos
 
-Puoi considerare un prompt avanzato come un'istruzione di sistema che il modello deve
-seguire. È un modo per fornire al modello più contesto e controllo sulle
-prestazioni.
+Pense em um comando avançado como uma instrução do sistema para o modelo seguir. É uma maneira de dar ao modelo mais contexto e controle sobre o desempenho.
 
-Un prompt efficace include idealmente i seguenti elementi che si combinano per
-creare una performance eccezionale:
+Um comando robusto inclui os seguintes elementos que se unem para criar uma ótima performance:
 
-- **Profilo audio**: definisce una persona per la voce, definendo un'identità, un archetipo e qualsiasi altra caratteristica come età, background e così via.
-- **Scena**: prepara il terreno. Descrive sia l'ambiente fisico sia l'"atmosfera".
-- **Note del regista**: indicazioni sul rendimento in cui puoi specificare quali
-  istruzioni sono importanti da tenere a mente per il tuo talento virtuale. Alcuni esempi sono
-  lo stile, la respirazione, il ritmo, l'articolazione e l'accento.
-- **Contesto di esempio**: fornisce al modello un punto di partenza contestuale, in modo che l'attore virtuale entri in scena in modo naturale.
-- **Trascrizione**: il testo che il modello pronuncerà. Per ottenere il massimo rendimento,
-  ricorda che l'argomento e lo stile di scrittura della trascrizione devono essere correlati alle
-  indicazioni che stai dando.
-- **Tag audio**: modificatori che puoi inserire in una trascrizione per cambiare la modalità di riproduzione di una parte del testo, ad esempio `[whispers]` o `[shouting]`.
+- **Perfil de áudio**: estabelece uma persona para a voz, definindo uma identidade de personagem, um arquétipo e outras características, como idade, histórico etc.
+- **Cena**: define o cenário. Descreve o ambiente físico e a "vibe".
+- **Observações do diretor**: orientações de performance em que você pode detalhar quais instruções são importantes para o talento virtual. Exemplos são estilo, respiração, ritmo, articulação e sotaque.
+- **Exemplo de contexto**: dá ao modelo um ponto de partida contextual para que seu ator virtual entre na cena que você configurou de forma natural.
+- **Transcrição**: o texto que o modelo vai falar. Para obter os melhores resultados,
+  lembre-se de que o tema da transcrição e o estilo de escrita devem estar de acordo com as
+  instruções que você está fornecendo.
+- **Tags de áudio**: modificadores que podem ser inseridos em uma transcrição para mudar a forma como essa parte do texto é entregue, como `[whispers]` ou `[shouting]`.
 
-Prompt completo di esempio:
+Exemplo de comando completo:
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -670,19 +740,18 @@ just sat there pretending to work... stop it. Seriously, I see you.
 two... let's go!
 ```
 
-### Strategie di prompting dettagliate
+### Estratégias detalhadas de comandos
 
-Analizziamo ogni elemento del prompt.
+Vamos detalhar cada elemento do comando.
 
-#### Profilo audio
+#### Perfil de áudio
 
-Descrivi brevemente la personalità del personaggio.
+Descreva brevemente a personalidade do personagem.
 
-- **Nome.** Assegnare un nome al personaggio aiuta a dare un contesto al modello e a migliorare la qualità della performance. Fai riferimento al personaggio per nome quando imposti la scena e il contesto.
-- **Ruolo.** Identità e archetipo principali del personaggio che si manifestano
-  nella scena. Ad es. DJ radiofonico, podcaster, giornalista, ecc.
+- **Nome.** Dar um nome ao personagem ajuda a fundamentar o modelo e a melhorar a performance. Refira-se ao personagem pelo nome ao definir a cena e o contexto.
+- **Papel**. Identidade principal e arquétipo do personagem que está atuando na cena. Por exemplo, DJ de rádio, podcaster, repórter de notícias etc.
 
-Esempi:
+Exemplos:
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -694,15 +763,11 @@ Esempi:
 ## "The Beauty Influencer"
 ```
 
-#### Scena
+#### Cenário
 
-Imposta il contesto della scena, inclusi posizione, stato d'animo e dettagli ambientali
-che stabiliscono il tono e l'atmosfera. Descrivi cosa sta succedendo intorno al
-personaggio e come lo influenza. La scena fornisce il contesto ambientale
-per l'intera interazione e guida la recitazione in modo sottile
-e organico.
+Defina o contexto da cena, incluindo local, clima e detalhes ambientais que estabelecem o tom e a vibe. Descreva o que está acontecendo ao redor do personagem e como isso o afeta. A cena fornece o contexto ambiental para toda a interação e orienta a atuação de maneira sutil e orgânica.
 
-Esempi:
+Exemplos:
 
 ```
 ## THE SCENE: The London Studio
@@ -721,18 +786,15 @@ deadened by plush velvet curtains and a heavy rug, but there is a
 distinct "proximity effect."
 ```
 
-#### Note del regista
+#### Observações do diretor
 
-Questa sezione fondamentale include indicazioni specifiche sul rendimento. Puoi saltare tutti gli altri elementi, ma ti consigliamo di includere questo elemento.
+Esta seção importante inclui orientações específicas sobre performance. Você pode pular todos os outros elementos, mas recomendamos que inclua este.
 
-Definisci solo ciò che è importante per il rendimento, facendo attenzione a non
-specificare eccessivamente. Troppe regole rigide limiteranno la creatività dei modelli e potrebbero
-comportare un rendimento peggiore. Bilancia la descrizione del ruolo e della scena con le
-regole di performance specifiche.
+Defina apenas o que é importante para a performance, tomando cuidado para não especificar demais. Muitas regras restritas limitam a criatividade dos modelos e podem resultar em uma performance pior. Equilibre a descrição da função e da cena com as regras de performance específicas.
 
-Le indicazioni più comuni sono **Stile, Ritmo e Accento**, ma il modello non è limitato a queste e non le richiede. Puoi includere istruzioni personalizzate per coprire eventuali dettagli aggiuntivi importanti per il tuo rendimento e fornire tutti i dettagli necessari.
+As instruções mais comuns são **Estilo, ritmo e sotaque**, mas o modelo não se limita a elas nem as exige. Inclua instruções personalizadas para abordar outros detalhes importantes para sua performance e entre em detalhes conforme necessário.
 
-Ad esempio:
+Exemplo:
 
 ```
 ### DIRECTOR'S NOTES
@@ -745,20 +807,17 @@ delivery influencers use in short form videos.
 Accent: Southern california valley girl from Laguna Beach |
 ```
 
-**Stile:**
+**Estilo**:
 
-Imposta il tono e lo stile del discorso generato. Includi elementi come allegro,
-energetico, rilassato, annoiato e così via per guidare la performance. Fornisci una descrizione
-e tutti i dettagli necessari: *"Entusiasmo contagioso. L'ascoltatore
-deve sentirsi parte di un evento comunitario enorme ed entusiasmante".* funziona
-meglio di dire semplicemente *"energetico ed entusiasta".*
+Define o tom e o estilo da fala gerada. Inclua coisas como "animado",
+"enérgico", "relaxado", "entediado" etc. para orientar a performance. Seja descritivo e
+forneça o máximo de detalhes possível: *"Entusiasmo contagiante. O ouvinte precisa sentir que faz parte de um evento comunitário enorme e emocionante".* funciona melhor do que simplesmente dizer *"enérgico e entusiasmado".*
 
-Puoi anche provare termini popolari nel settore del voiceover, come "sorriso
-vocale". Puoi sovrapporre tutte le caratteristiche di stile che vuoi.
+Você pode até tentar termos populares no setor de narração, como "sorriso vocal". Você pode combinar quantas características de estilo quiser.
 
-Esempi:
+Exemplos:
 
-Simple Emotion
+Emoção simples
 
 ```
 DIRECTORS NOTES
@@ -767,7 +826,7 @@ Style: Frustrated and angry developer who can't get the build to run.
 ...
 ```
 
-Maggiore profondità
+Mais profundidade
 
 ```
 DIRECTORS NOTES
@@ -776,7 +835,7 @@ Style: Sassy GenZ beauty YouTuber, who mostly creates content for YouTube Shorts
 ...
 ```
 
-Complesso
+Complexo
 
 ```
 DIRECTORS NOTES
@@ -787,11 +846,11 @@ always raised to keep the tone bright, sunny, and explicitly inviting.
 elongated vowels on excitement words (e.g., "Beauuutiful morning").
 ```
 
-**Accento:**
+**Destaque**:
 
-Descrivi l'accento che preferisci. Più specifico è il prompt, migliori sono i risultati. Ad esempio, utilizza "*Accento inglese britannico come si sente a Croydon, Inghilterra*" anziché "*Accento britannico*".
+Descreva o sotaque desejado. Quanto mais específico for o comando, melhores serão os resultados. Por exemplo, use "*Sotaque britânico como o ouvido em Croydon, Inglaterra*" em vez de "*Sotaque britânico*".
 
-Esempi:
+Exemplos:
 
 ```
 ### DIRECTORS NOTES
@@ -807,13 +866,13 @@ Accent: Jaz is a DJ from Brixton, London
 ...
 ```
 
-**Pacing:**
+**Ritmo:**
 
-Il ritmo generale e la sua variazione nel corso del brano.
+Ritmo geral e variação de ritmo ao longo da matéria.
 
-Esempi:
+Exemplos:
 
-Semplice
+Simples
 
 ```
 ### DIRECTORS NOTES
@@ -822,7 +881,7 @@ Pacing: Speak as fast as possible
 ...
 ```
 
-Più profondità
+Mais profundidade
 
 ```
 ### DIRECTORS NOTES
@@ -831,7 +890,7 @@ Pacing: Speaks at a faster, energetic pace, keeping up with fast paced music.
 ...
 ```
 
-Complesso
+Complexo
 
 ```
 ### DIRECTORS NOTES
@@ -840,11 +899,9 @@ Pacing: The "Drift": The tempo is incredibly slow and liquid. Words bleed into e
 ...
 ```
 
-#### Tag di trascrizione e audio
+#### Tags de transcrição e áudio
 
-La trascrizione è costituita dalle parole esatte che il modello pronuncerà. Un tag audio è una parola
-tra parentesi quadre che indica come deve essere pronunciata una frase, un cambio
-di tono o un'interiezione.
+A transcrição é o texto exato que o modelo vai falar. Uma tag de áudio é uma palavra entre colchetes que indica como algo deve ser dito, uma mudança de tom ou uma interjeição.
 
 ```
 ### TRANSCRIPT
@@ -855,53 +912,45 @@ at that point.
 [cough] Well, [sighs] I guess it doesn't matter now.
 ```
 
-**Prova**
+**Experimente**
 
-Prova alcuni di questi esempi su
-[AI Studio](https://aistudio.google.com/generate-speech?hl=it), gioca con la nostra
-[app TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=it) e lascia che
-Gemini ti metta nei panni del regista. Tieni a mente questi suggerimenti per ottenere ottime
-performance vocali:
+Teste alguns desses exemplos no [AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br), use nosso [app TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=pt-br) e deixe o Gemini assumir a direção. Confira algumas dicas para fazer ótimas performances vocais:
 
-- Ricorda di mantenere la coerenza dell'intera richiesta: il copione e la regia vanno di pari passo per creare una performance eccezionale.
-- Non sentirti in dovere di descrivere tutto. A volte, lasciare al modello lo spazio per colmare le lacune aiuta a rendere il testo più naturale. (proprio come un attore di talento)
-- Se ti senti bloccato, chiedi a Gemini di aiutarti a creare il copione o la performance.
+- Não se esqueça de manter todo o comando coerente. O roteiro e a direção trabalham juntos para criar uma ótima performance.
+- Não é necessário descrever tudo. Às vezes, dar espaço para o modelo preencher as lacunas ajuda a manter a naturalidade. (Assim como um ator talentoso)
+- Se você estiver com dificuldades, peça ajuda ao Gemini para criar seu roteiro ou apresentação.
 
-## Limitazioni
+## Limitações
 
-- I modelli TTS possono ricevere solo input di testo e generare output audio.
-- Una sessione TTS ha un limite di [finestra contestuale](https://ai.google.dev/gemini-api/docs/long-context?hl=it) di
-  32.000 token.
-- Consulta la sezione [Lingue](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it#languages) per informazioni sulle lingue supportate.
-- La sintesi vocale non supporta lo streaming.
+- Os modelos de TTS só podem receber entradas de texto e gerar saídas de áudio.
+- Uma sessão de TTS tem um limite de [janela de contexto](https://ai.google.dev/gemini-api/docs/long-context?hl=pt-br) de 32 mil tokens.
+- Consulte a seção [Idiomas](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br#languages) para saber quais idiomas são aceitos.
+- A TTS não oferece suporte a streaming para modelos anteriores à versão 3.1. O streaming é compatível com `gemini-3.1-flash-tts-preview` e versões mais recentes.
 
-I seguenti vincoli si applicano in modo specifico quando si utilizza il modello di anteprima Gemini 3.1 Flash
-TTS per la generazione di voce:
+As restrições a seguir se aplicam especificamente ao usar o modelo de prévia da TTS do Gemini 3.1 Flash para geração de voz:
 
-- **Incoerenza della voce con le istruzioni del prompt:** l'output del modello potrebbe non
-  corrispondere sempre rigorosamente al relatore selezionato, facendo sì che l'audio suoni
-  in modo diverso dal previsto. Per evitare toni non corrispondenti (ad esempio una voce maschile profonda che tenta di parlare come una bambina), assicurati che il tono e il contesto del prompt siano in linea con il profilo del relatore selezionato.
-- **Qualità degli output più lunghi:** la qualità e la coerenza della voce potrebbero iniziare a
-  diminuire con gli output generati più lunghi di qualche minuto. Ti
-  consigliamo di dividere le trascrizioni in parti più piccole.
-- **Restituzione occasionale di token di testo**:il modello a volte restituisce token di testo anziché token audio, causando l'esito negativo della richiesta del server con un errore `500`. Poiché questo si verifica in modo casuale in una percentuale molto piccola di richieste,
-  devi implementare una logica di ripetizione automatica nella tua applicazione per gestirle.
-- **Rifiuti errati del classificatore di prompt**:i prompt vaghi potrebbero non attivare il classificatore di sintesi vocale, con conseguente rifiuto della richiesta (`PROHIBITED_CONTENT`) o indurre il modello a leggere ad alta voce le istruzioni di stile e le note del regista. Convalida i prompt aggiungendo un preambolo chiaro
-  che istruisca il modello a sintetizzare il discorso e indica esplicitamente dove inizia
-  la trascrizione effettiva.
+- **Inconsistência de voz com as instruções do comando**:a saída do modelo nem sempre corresponde ao falante selecionado, fazendo com que o áudio soe diferente do esperado. Para evitar tons incompatíveis (como uma voz masculina grave tentando falar como uma menina), verifique se o tom e o contexto da sua solicitação escrita estão naturalmente alinhados ao perfil do locutor selecionado.
+- **Qualidade de saídas mais longas**:a qualidade e a consistência da fala podem começar a variar em saídas geradas com mais de alguns minutos. Recomendamos dividir as transcrições em partes menores.
+- **Retornos ocasionais de tokens de texto**:o modelo às vezes retorna tokens de texto
+  em vez de tokens de áudio, fazendo com que o servidor falhe na solicitação com um erro `500`. Como isso ocorre aleatoriamente em uma porcentagem muito pequena de solicitações,
+  implemente uma lógica de nova tentativa automática no aplicativo para lidar
+  com esses casos.
+- **Rejeições falsas do classificador de comandos**:comandos vagos podem não acionar o classificador de síntese de voz, resultando em uma solicitação rejeitada (`PROHIBITED_CONTENT`) ou fazendo com que o modelo leia em voz alta suas instruções de estilo e observações do diretor. Valide seus comandos adicionando um preâmbulo claro
+  instruindo o modelo a sintetizar a fala e rotulando explicitamente onde a
+  transcrição falada real começa.
 
-## Passaggi successivi
+## A seguir
 
-- Prova il [cookbook per la generazione audio](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_TTS.ipynb?hl=it).
-- L'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it) di Gemini offre opzioni di generazione audio interattive che puoi alternare ad altre modalità.
-- Per lavorare con gli *input* audio, consulta la guida [Comprensione dell'audio](https://ai.google.dev/gemini-api/docs/audio?hl=it).
+- Confira o [livro de receitas de geração de áudio](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_TTS.ipynb?hl=pt-br).
+- A [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) do Gemini oferece opções interativas de geração de áudio que podem ser intercaladas com outras modalidades.
+- Para trabalhar com *entradas* de áudio, consulte o guia [Compreensão de áudio](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br).
 
-Invia feedback
+Envie comentários
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Ultimo aggiornamento 2026-05-19 UTC.
+Última atualização 2026-06-19 UTC.
 
-Vuoi dirci altro?
+Quer enviar seu feedback?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-19 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-19 UTC."],[],[]]

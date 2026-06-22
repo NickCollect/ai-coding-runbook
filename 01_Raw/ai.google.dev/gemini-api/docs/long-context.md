@@ -1,132 +1,151 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=ja
-fetched_at: 2026-06-15T06:33:02.780703+00:00
-title: "\u9577\u3044\u30b3\u30f3\u30c6\u30ad\u30b9\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/long-context?hl=es-419
+fetched_at: 2026-06-22T06:34:35.701826+00:00
+title: "Contexto largo \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) がプレビュー版で利用可能になりました。共同プランニング、可視化、MCP サポートなどが含まれています。
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-フィードバックを送信
+Enviar comentarios
 
-# 長いコンテキスト
+# Contexto largo
 
-多くの Gemini モデルには、100 万トークン以上の大きなコンテキスト ウィンドウが搭載されています。これまで、大規模言語モデル（LLM）は、一度にモデルに渡すことができるテキスト（またはトークン）の量によって大幅に制限されていました。Gemini の長いコンテキスト ウィンドウは、多くの新しいユースケースとデベロッパー パラダイムを実現します。
+Muchos modelos de Gemini incluyen ventanas de contexto grandes de 1 millón o más tokens.
+Históricamente, los modelos de lenguaje grandes (LLMs) estaban limitados de manera significativa por la cantidad de texto (o tokens) que se podían pasar al modelo a la vez.
+La ventana de contexto largo de Gemini desbloquea muchos casos de uso y paradigmas de desarrolladores nuevos.
 
-[テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja)や[マルチモーダル入力](https://ai.google.dev/gemini-api/docs/vision?hl=ja)などのケースですでに使用しているコードは、長いコンテキストでも変更せずに使用できます。
+El código que ya usas para casos como la [generación de
+texto](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419) o las [entradas
+multimodales](https://ai.google.dev/gemini-api/docs/vision?hl=es-419) funcionará sin cambios con un contexto largo.
 
-このドキュメントでは、100 万トークン以上のコンテキスト ウィンドウを備えたモデルを使用して実現できることの概要について説明します。このページでは、コンテキスト ウィンドウの概要を説明し、デベロッパーが長いコンテキストについて考える方法、長いコンテキストの実際のユースケース、長いコンテキストの使用を最適化する方法について説明します。
+En este documento, se ofrece una descripción general de lo que puedes lograr con modelos con ventanas de contexto de 1 millón o más tokens. En la página, se ofrece una breve descripción general de una ventana de contexto y se explora cómo los desarrolladores deben pensar en el contexto largo, varios casos de uso reales para un contexto largo y formas de optimizar el uso del contexto largo.
 
-特定のモデルのコンテキスト ウィンドウ サイズについては、[モデル](https://ai.google.dev/gemini-api/docs/models?hl=ja)のページをご覧ください。
+Para conocer los tamaños de las ventanas de contexto de modelos específicos, consulta la
+[página Modelos](https://ai.google.dev/gemini-api/docs/models?hl=es-419).
 
-## コンテキスト ウィンドウとは
+## ¿Qué es una ventana de contexto?
 
-Gemini モデルを使用する基本的な方法は、情報（コンテキスト）をモデルに渡して、モデルが回答を生成することです。コンテキスト ウィンドウは短期記憶に似ています。人間の短期記憶に保存できる情報量には限界があり、生成モデルにも同じことが言えます。
+La forma básica de usar los modelos de Gemini es pasar información (contexto) al modelo, que luego generará una respuesta. Una analogía para la ventana de contexto es la memoria a corto plazo. Hay una cantidad limitada de información que se puede almacenar en la memoria a corto plazo de una persona, y lo mismo sucede con los modelos generativos.
 
-モデルの仕組みについて詳しくは、[生成モデルガイド](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja#under-the-hood)をご覧ください。
+Puedes obtener más información sobre cómo funcionan los modelos en nuestra [guía
+de modelos generativos](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=es-419#under-the-hood).
 
-## 長いコンテキストを利用する
+## Comienza a usar el contexto largo
 
-以前のバージョンの生成モデルでは、一度に 8,000 個のトークンしか処理できませんでした。新しいモデルはさらに進化し、32,000 個または 128,000 個のトークンを受け入れることができます。Gemini は 100 万個のトークンを処理できる最初のモデルです。
+Las versiones anteriores de los modelos generativos solo podían procesar 8,000 tokens a la vez. Los modelos más nuevos ampliaron esta capacidad al aceptar 32,000 o incluso 128,000 tokens. Gemini es el primer modelo capaz de aceptar 1 millón de tokens.
 
-実際には、100 万個のトークンは次のようになります。
+En la práctica, 1 millón de tokens se vería de la siguiente manera:
 
-- 50,000 行のコード（1 行あたり 80 文字として）
-- 過去 5 年間に送信したすべてのテキスト メッセージ
-- 平均的な長さの英語の小説 8 冊分
-- 平均的な長さのポッドキャスト エピソードの文字起こしが 200 件以上
+- 50,000 líneas de código (con los 80 caracteres estándar por línea)
+- Todos los mensajes de texto que enviaste en los últimos 5 años
+- 8 novelas en inglés de longitud promedio
+- Transcripciones de más de 200 episodios de podcasts de longitud promedio
 
-他の多くのモデルで一般的なコンテキスト ウィンドウが小さい場合は、古いメッセージを任意に削除する、コンテンツを要約する、ベクトル データベースで RAG を使用する、プロンプトをフィルタしてトークンを節約するなどの戦略が必要になることがよくあります。
+Las ventanas de contexto más limitadas que son comunes en muchos otros modelos suelen requerir estrategias como descartar arbitrariamente mensajes antiguos, resumir contenido, usar RAG con bases de datos vectoriales o filtrar instrucciones para guardar tokens.
 
-これらの手法は特定のシナリオでは引き続き有効ですが、Gemini の広範なコンテキスト ウィンドウでは、関連するすべての情報を事前に提供するという、より直接的なアプローチが可能です。Gemini モデルは大規模なコンテキスト機能を備えた専用モデルであるため、強力なコンテキスト内学習を実現します。たとえば、コンテキスト内の教材（500 ページの参照文法、辞書、約 400 の並列文）のみを使用して、Gemini は英語からカラマン語（200 人未満の話し手しかいないパプア語）への翻訳を学習しました。その品質は、同じ教材を使用する人間の学習者と同程度です。これは、Gemini の長いコンテキストによって実現したパラダイム シフトを示しており、堅牢なコンテキスト内学習を通じて新たな可能性を切り開いています。
+Si bien estas técnicas siguen siendo valiosas en situaciones específicas, la extensa ventana de contexto de Gemini invita a un enfoque más directo: proporcionar toda la información pertinente por adelantado. Debido a que los modelos de Gemini se crearon con capacidades de contexto masivas, demuestran un aprendizaje en contexto potente. Por
+ejemplo, con solo materiales instructivos en contexto (una gramática de referencia de 500
+páginas, un diccionario y ≈400 oraciones paralelas), Gemini
+[aprendió a traducir](https://storage.googleapis.com/deepmind-media/gemini/gemini_v1_5_report.pdf)
+del inglés al kalamang (un idioma papúa con
+menos de 200 hablantes) con una calidad similar a la de un estudiante humano que usa los mismos
+materiales. Esto ilustra el cambio de paradigma que permite el contexto largo de Gemini, lo que potencia nuevas posibilidades a través de un aprendizaje en contexto sólido.
 
-## 長いコンテキストのユースケース
+## Casos de uso de contexto largo
 
-ほとんどの生成モデルの標準的なユースケースは依然としてテキスト入力ですが、Gemini モデル ファミリーでは、マルチモーダル ユースケースの新しいパラダイムが実現されます。これらのモデルは、テキスト、動画、音声、画像をネイティブに理解できます。[マルチモーダル ファイル形式を受け取る Gemini API](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=ja) も用意されています。
+Si bien el caso de uso estándar para la mayoría de los modelos generativos sigue siendo la entrada de texto, la familia de modelos de Gemini permite un nuevo paradigma de casos de uso multimodales. Estos modelos pueden comprender de forma nativa texto, video, audio e imágenes. Se acompañan de la [API de Gemini que acepta tipos de archivos multimodales para mayor comodidad.](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=es-419)
 
-### 長いテキスト
+### Texto de formato largo
 
-テキストが LLM の支えるインテリジェンス レイヤであることは明らかです。前述のように、LLM の実際の制限の多くは、特定のタスクを行うのに十分なコンテキスト ウィンドウがないためでした。検索拡張生成（RAG）などの技術が急速に普及し、モデルに関連するコンテキスト情報を動的に提供できるようになりました。コンテキスト ウィンドウがさらに大きくなり、新しいユースケースを実現する新しい手法が登場しています。
+El texto demostró ser la capa de inteligencia que sustenta gran parte del impulso en torno a los LLMs. Como se mencionó anteriormente, gran parte de la limitación práctica de los LLMs se debía a que no tenían una ventana de contexto lo suficientemente grande como para realizar ciertas tareas. Esto llevó a la adopción rápida de la generación mejorada de recuperación (RAG) y otras técnicas que proporcionan de forma dinámica al modelo información contextual relevante. Ahora, con ventanas de contexto más y más grandes, hay nuevas técnicas disponibles que permiten casos de uso nuevos.
 
-テキストベースの長いコンテキストの新しいユースケースと標準的なユースケースとしては、次のようなものがあります。
+Estos son algunos casos de uso emergentes y estándar para el contexto largo basado en texto:
 
-- 大規模なテキスト コーパスの要約
-  - 以前のコンテキスト モデルの要約オプションでは、新しいトークンがモデルに渡されるときに、以前のセクションの状態を保持するために、スライディング ウィンドウなどの手法が必要でした。
-- 質問と回答
-  - これまではコンテキストの量が限られ、モデルの事実的な再現率が低いため、RAG でのみ可能でした。
-- エージェント ワークフロー
-  - テキストは、エージェントがこれまでに行ったことや行うべきことを記録する方法の基盤ですが、実際の状況やエージェントの目標に関する十分な情報がないため、信頼性に限界があります。
+- Resumir grandes corpus de texto
+  - Las opciones de resumen anteriores con modelos de contexto más pequeños requerirían una ventana deslizante o alguna otra técnica para mantener el estado de las secciones anteriores a medida que se pasan tokens nuevos al modelo.
+- Preguntas y respuestas
+  - Históricamente, esto solo era posible con RAG, dada la cantidad limitada de contexto y el bajo recuerdo fáctico de los modelos.
+- Flujos de trabajo con agentes
+  - El texto es la base de cómo los agentes mantienen el estado de lo que hicieron y lo que necesitan hacer; no tener suficiente información sobre el mundo y el objetivo del agente es una limitación en la confiabilidad de los agentes
 
-[多ショット コンテキスト内学習](https://arxiv.org/pdf/2404.11018)は、長いコンテキスト モデルによって実現される最もユニークな機能の一つです。研究によると、一般的な「シングルショット」または「マルチショット」のパラダイム（モデルにタスクの 1 つまたは数個の例を提示し、それを数百、数千、数十万の例にスケールアップする）を採用すると、新しいモデル機能につながる可能性があります。このマルチショット アプローチは、特定のタスク用にファインチューニングされたモデルと同様のパフォーマンスを発揮することも示されています。Gemini モデルのパフォーマンスが本番環境へのロールアウトにまだ不十分なユースケースでは、マルチショット アプローチを試すことができます。後述の長いコンテキストの最適化のセクションで説明するように、コンテキスト キャッシュを使用すると、この種の入力トークン ワークロードがはるかに経済的に実現可能になり、場合によってはレイテンシがさらに短くなります。
+El [aprendizaje en contexto con muchas tomas](https://arxiv.org/pdf/2404.11018) es una de las capacidades más únicas que permiten los modelos de contexto largos. La investigación demostró que tomar el paradigma de ejemplo común de “una sola toma” o “varias tomas”, en el que se le presenta al modelo uno o algunos ejemplos de una tarea, y aumentarlo a cientos, miles o incluso cientos de miles de ejemplos, puede generar capacidades de modelo nuevas. También se demostró que este enfoque de varias tomas funciona de manera similar a los modelos que se ajustaron para una tarea específica. Para los casos de uso en los que el rendimiento de un modelo de Gemini aún no es suficiente para una implementación de producción, puedes probar el enfoque de varias tomas. Como verás más adelante en la sección de optimización de contexto largo, la caché de contexto hace que este tipo de carga de trabajo de token de entrada alta sea mucho más factible económicamente y, en algunos casos, incluso tenga una latencia más baja.
 
-### 長い動画
+### Video de formato largo
 
-動画コンテンツの有用性は、長い間、メディア自体のアクセス性の欠如によって制限されていました。コンテンツの概要をつかむのは難しく、文字起こしでは動画のニュアンスが伝わらないことが多かったためです。また、ほとんどのツールは、画像、テキスト、音声を同時に処理できません。Gemini では、長いコンテキストのテキスト機能を、マルチモーダル入力に関する質問を推論して回答する能力に置き換え、パフォーマンスを維持しています。
+La utilidad del contenido de video se vio limitada durante mucho tiempo por la falta de accesibilidad del medio en sí. Era difícil hojear el contenido, las transcripciones a menudo no capturaban los matices de un video y la mayoría de las herramientas no procesan imágenes, texto y audio juntos. Con Gemini, las capacidades de texto de contexto largo se traducen en la capacidad de razonar y responder preguntas sobre entradas multimodales con un rendimiento sostenido.
 
-動画の長いコンテキストの新しいユースケースと標準のユースケースとしては、次のようなものがあります。
+Estos son algunos casos de uso emergentes y estándar para contextos de video largos:
 
-- 動画に関する質問と回答
-- ビデオメモリ（[Google の Project Astra](https://deepmind.google/technologies/gemini/project-astra/?hl=ja)）
-- 動画字幕作成
-- 動画レコメンデーション システム: 新しいマルチモーダル理解によって既存のメタデータを拡充
-- データと関連する動画のメタデータの集合を調べ、視聴者に関連しない動画の部分を削除するように動画をカスタマイズ
-- 動画コンテンツの管理
-- リアルタイムのビデオ処理
+- Preguntas y respuestas sobre videos
+- Memoria de video, como se muestra con [el Project Astra de Google](https://deepmind.google/technologies/gemini/project-astra/?hl=es-419)
+- Subtitulado de videos
+- Sistemas de recomendación de videos, mediante el enriquecimiento de los metadatos existentes con una nueva comprensión multimodal
+- Personalización de videos, mediante la observación de un corpus de datos y los metadatos de video asociados, y luego la eliminación de partes de los videos que no son pertinentes para el usuario
+- Moderación de contenido de video
+- Procesamiento de video en tiempo real
 
-動画を扱う場合は、[動画がトークンに変換される仕組み](https://ai.google.dev/gemini-api/docs/tokens?hl=ja#media-token)を検討することが重要です。これは課金と使用量の上限に影響します。動画ファイルによるプロンプトの詳細については、[プロンプト ガイド](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=ja#prompting-with-videos)をご覧ください。
+Cuando trabajes con videos, es importante tener en cuenta cómo los [videos se
+procesan en tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419#media-token), lo que afecta la
+facturación y los límites de uso. Puedes obtener más información sobre las instrucciones con archivos de video en
+la [guía de instrucciones](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=es-419#prompting-with-videos).
 
-### 長い音声
+### Audio de formato largo
 
-Gemini モデルは、音声を理解できる最初のネイティブ マルチモーダル大規模言語モデルです。これまで、音声を処理するためには、音声入力モデルやテキスト文字変換モデルなど、複数のドメイン固有のモデルを連結するという典型的なデベロッパー ワークフローがありました。これにより、複数のラウンドトリップ リクエストの実行に必要なレイテンシが増加し、複数モデルのセットアップで接続されていないアーキテクチャに起因するパフォーマンスの低下が発生しました。
+Los modelos de Gemini fueron los primeros modelos de lenguaje grandes multimodales de forma nativa que podían comprender audio. Históricamente, el flujo de trabajo típico de los desarrolladores implicaba unir varios modelos específicos del dominio, como un modelo de voz a texto y un modelo de texto a texto, para procesar audio. Esto generó una latencia adicional requerida para realizar varias solicitudes de ida y vuelta y un rendimiento reducido que suele atribuirse a arquitecturas desconectadas de la configuración de varios modelos.
 
-音声コンテキストの新しい標準的なユースケースとしては、次のようなものがあります。
+Estos son algunos casos de uso emergentes y estándar para el contexto de audio:
 
-- リアルタイムの音声文字変換と翻訳
-- ポッドキャスト / 動画に関する質問と回答
-- 会議の文字起こしと要約
-- 音声アシスタント
+- Transcripciones y traducciones en tiempo real
+- Preguntas y respuestas sobre podcasts o videos
+- Transcripción y resumen de reuniones
+- Asistentes de voz
 
-音声ファイルによるプロンプトの詳細については、[プロンプト ガイド](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=ja#prompting-with-videos)をご覧ください。
+Puedes obtener más información sobre las instrucciones con archivos de audio en la [guía
+de instrucciones](https://ai.google.dev/gemini-api/docs/prompting_with_media?lang=python&hl=es-419#prompting-with-videos).
 
-## 長いコンテキストの最適化
+## Optimizaciones de contexto largo
 
-長いコンテキストと Gemini モデルを使用する場合の主な最適化は、[コンテキスト キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)を使用することです。これまでは、1 つのリクエストで大量のトークンを処理することができず、コストも大きな制約となっていました。ユーザーが 10 個の PDF、動画、業務用のファイルをアップロードするチャットアプリを使用している場合、従来は、これらのリクエストを処理するために、より複雑な検索拡張生成（RAG）ツール / フレームワークを使用し、コンテキスト ウィンドウに移動されたトークンに対して多額の料金が発生していました。現在では、ユーザーがアップロードしたファイルをキャッシュに保存し、保存料金を時間単位で支払うことができるようになりました。たとえば、Gemini Flash のリクエストあたりの入出力コストは、標準の入出力コストの約 4 分の 1 です。そのため、ユーザーがデータとチャットすることは、デベロッパーにとっても大きなコスト削減になります。
+La optimización principal cuando se trabaja con contexto largo y los modelos de Gemini
+es usar [el almacenamiento en caché de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=es-419). Además de la imposibilidad anterior de procesar muchos tokens en una sola solicitud, la otra restricción principal era el costo. Si tienes una app de "chat con tus datos" en la que un usuario carga 10 archivos PDF, un video y algunos documentos de trabajo, históricamente, tendrías que trabajar con una herramienta o un framework de generación mejorada de recuperación (RAG) más complejos para procesar estas solicitudes y pagar una cantidad significativa por los tokens que se mueven a la ventana de contexto. Ahora, puedes almacenar en caché los archivos que sube el usuario y pagar para almacenarlos por hora. El costo de entrada / salida por solicitud con Gemini Flash, por ejemplo, es aproximadamente 4 veces menor que el costo estándar de entrada / salida, por lo que si el usuario chatea con sus datos lo suficiente, se generará un gran ahorro de costos para ti como desarrollador.
 
-## 長いコンテキストの制限
+## Limitaciones de contexto largo
 
-このガイドのさまざまなセクションで、Gemini モデルがさまざまな「干し草の山から針を探す」検索に対して高いパフォーマンスを達成する方法について説明しました。これらのテストでは、検出対象が 1 つの針である最も基本的な設定を検討しています。複数の「針」や特定の情報が含まれている場合は、モデルの精度が変わります。パフォーマンスはコンテキストによって大きく異なる場合があります。適切な情報を取得することとコストの間には、本質的なトレードオフがあるため、この点は考慮する必要があります。1 回のクエリで約 99% の精度を得ることができますが、そのクエリを送信するたびに入力トークンの費用を支払う必要があります。100 個の情報を取り出すときに 99% のパフォーマンスが必要であれば、100 個のリクエストを送信する必要があります。これは、コンテキスト キャッシュによって、パフォーマンスを維持しながら Gemini モデルの使用に関連する費用を大幅に削減できる例です。
+En varias secciones de esta guía, hablamos sobre cómo los modelos de Gemini logran un alto rendimiento en varias evaluaciones de recuperación de aguja en un pajar. Estas pruebas consideran la configuración más básica, en la que tienes una sola aguja que buscas. En los casos en los que puedas tener varias “agujas” o información específica que buscas, el modelo no funciona con la misma exactitid. El rendimiento puede variar en gran medida según el contexto. Es importante tener en cuenta que existe una compensación inherente entre obtener la información correcta y el costo. Puedes obtener aproximadamente un 99% en una sola consulta, pero debes pagar el costo del token de entrada cada vez que envías esa consulta. Por lo tanto, para recuperar 100 datos, si necesitas un rendimiento del 99%, es probable que debas enviar 100 solicitudes. Este es un buen ejemplo de dónde el almacenamiento en caché de contexto puede reducir significativamente el costo asociado con el uso de modelos de Gemini y, al mismo tiempo, mantener un rendimiento alto.
 
-## よくある質問
+## Preguntas frecuentes
 
-### コンテキスト ウィンドウにクエリを配置するのに最適な場所はどこですか？
+### ¿Cuál es el mejor lugar para colocar mi consulta en la ventana de contexto?
 
-ほとんどの場合、特にコンテキストの合計が長い場合は、プロンプトの最後にクエリや質問を配置する（他のすべてのコンテキストの後）と、モデルのパフォーマンスが向上します。
+En la mayoría de los casos, en especial si el contexto total es largo, el rendimiento del modelo será mejor si colocas tu consulta o pregunta al final de la instrucción (después de todo el contexto).
 
-### クエリにトークンを追加すると、モデルのパフォーマンスが低下しますか？
+### ¿Pierdo rendimiento del modelo cuando agrego más tokens a una consulta?
 
-一般に、モデルにトークンを渡す必要がない場合は、渡さないようにするのが最善です。ただし、情報を含む大きなトークンがあり、その情報について質問したい場合は、モデルがその情報を抽出する能力は非常に高いです（多くの場合、精度は 99% に達します）。
+En general, si no necesitas que se pasen tokens al modelo, es mejor evitar pasarlos. Sin embargo, si tienes una gran cantidad de tokens con información y quieres hacer preguntas sobre esa información, el modelo es muy capaz de extraer esa información (hasta un 99% de exactitud en muchos casos).
 
-### 長いコンテキスト クエリの費用を削減するにはどうすればよいですか？
+### ¿Cómo puedo reducir mi costo con consultas de contexto largo?
 
-何度も再利用したいトークン / コンテキストのセットがある場合は、[コンテキストのキャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)を使用すると、その情報に関する質問に関連する費用を削減できます。
+Si tienes un conjunto similar de tokens o contexto que deseas volver a usar muchas
+veces, [el almacenamiento en caché de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=es-419) puede ayudar a reducir los costos
+asociados con hacer preguntas sobre esa información.
 
-### コンテキストの長さはモデルのレイテンシに影響しますか？
+### ¿La longitud del contexto afecta la latencia del modelo?
 
-リクエストのサイズに関係なく、特定のリクエストには一定のレイテンシがありますが、一般的に、クエリが長いほどレイテンシ（最初のトークンまでの時間）が長くなります。
+Hay una cantidad fija de latencia en cualquier solicitud determinada, independientemente del tamaño, pero, en general, las consultas más largas tendrán una latencia más alta (tiempo hasta el primer token).
 
-フィードバックを送信
+Enviar comentarios
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-最終更新日 2026-04-29 UTC。
+Última actualización: 2026-06-19 (UTC)
 
-ご意見をお聞かせください
+¿Quieres brindar más información?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-19 (UTC)"],[],[]]

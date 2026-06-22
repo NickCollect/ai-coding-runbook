@@ -1,35 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=vi
-fetched_at: 2026-06-15T06:31:13.755057+00:00
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=th
+fetched_at: 2026-06-22T06:36:29.235651+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=th) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Gửi ý kiến phản hồi
+ส่งความคิดเห็น
 
 # Files API
 
-Gemini có thể xử lý nhiều loại dữ liệu đầu vào, bao gồm văn bản, hình ảnh và âm thanh cùng một lúc.
+Gemini สามารถจัดการข้อมูลอินพุตประเภทต่างๆ ได้พร้อมกัน ซึ่งรวมถึงข้อความ รูปภาพ และเสียง
 
-Hướng dẫn này trình bày cách xử lý các tệp nội dung nghe nhìn bằng Files API. Các thao tác cơ bản đều giống nhau đối với tệp âm thanh, hình ảnh, video, tài liệu và các loại tệp được hỗ trợ khác.
+คู่มือนี้จะแสดงวิธีทำงานกับไฟล์สื่อโดยใช้ Files API
+การดำเนินการพื้นฐานจะเหมือนกันสำหรับไฟล์เสียง รูปภาพ วิดีโอ เอกสาร และ
+ไฟล์ประเภทอื่นๆ ที่รองรับ
 
-Để biết hướng dẫn về câu lệnh cho tệp, hãy xem phần [Hướng dẫn về câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
+ดูคำแนะนำในการใช้พรอมต์สำหรับไฟล์ได้ที่ส่วน[คู่มือการใช้พรอมต์สำหรับไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide)
 
-## Tải tệp lên
+## อัปโหลดไฟล์
 
-Bạn có thể dùng Files API để tải một tệp đa phương tiện lên. Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm cả tệp, câu lệnh văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 100 MB. Đối với tệp PDF, giới hạn là 50 MB.
+คุณใช้ Files API เพื่ออัปโหลดไฟล์สื่อได้ ใช้ Files API เสมอเมื่อขนาดคำขอทั้งหมด (รวมถึงไฟล์ พรอมต์ข้อความ คำสั่งของระบบ ฯลฯ) ใหญ่กว่า 100 MB สำหรับไฟล์ PDF จะมีขีดจำกัดอยู่ที่ 50 MB
 
-Đoạn mã sau đây tải một tệp lên rồi dùng tệp đó trong một lệnh gọi đến `generateContent`.
+โค้ดต่อไปนี้จะอัปโหลดไฟล์ แล้วใช้ไฟล์ในการเรียกไปยัง
+`generateContent`
 
 ### Python
 
@@ -156,9 +159,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Lấy siêu dữ liệu cho một tệp
+## รับข้อมูลเมตาของไฟล์
 
-Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và nhận siêu dữ liệu của tệp đó bằng cách gọi `files.get`.
+คุณสามารถยืนยันว่า API จัดเก็บไฟล์ที่อัปโหลดเรียบร้อยแล้วและรับข้อมูลเมตาของไฟล์ได้โดยการเรียก `files.get`
 
 ### Python
 
@@ -226,9 +229,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Liệt kê các tệp đã tải lên
+## แสดงรายการไฟล์ที่อัปโหลด
 
-Đoạn mã sau đây lấy danh sách tất cả các tệp đã tải lên:
+โค้ดต่อไปนี้จะรับรายการไฟล์ทั้งหมดที่อัปโหลด
 
 ### Python
 
@@ -281,9 +284,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Xoá tệp đã tải lên
+## ลบไฟล์ที่อัปโหลด
 
-Các tệp sẽ tự động bị xoá sau 48 giờ. Bạn cũng có thể xoá tệp đã tải lên theo cách thủ công:
+ระบบจะลบไฟล์โดยอัตโนมัติหลังจากผ่านไป 48 ชั่วโมง นอกจากนี้ คุณยังลบไฟล์ที่อัปโหลดด้วยตนเองได้โดยทำดังนี้
 
 ### Python
 
@@ -335,191 +338,219 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Thông tin về việc sử dụng
+## ข้อมูลการใช้งาน
 
-Bạn có thể dùng Files API để tải lên và tương tác với các tệp đa phương tiện. Files API cho phép bạn lưu trữ tối đa 20 GB tệp cho mỗi dự án, với kích thước tối đa cho mỗi tệp là 2 GB. Các tệp được lưu trữ trong 48 giờ. Trong thời gian đó, bạn có thể dùng API để lấy siêu dữ liệu về các tệp, nhưng không thể tải các tệp xuống.
-Files API được cung cấp miễn phí ở mọi khu vực có Gemini API.
+คุณใช้ Files API เพื่ออัปโหลดและโต้ตอบกับไฟล์สื่อได้ Files API
+ช่วยให้คุณจัดเก็บไฟล์ได้สูงสุด 20 GB ต่อโปรเจ็กต์ โดยแต่ละไฟล์ต้องมีขนาดไม่เกิน 2 GB
+ระบบจะจัดเก็บไฟล์ไว้เป็นเวลา 48 ชั่วโมง ในระหว่างนั้น คุณจะ
+ใช้ API เพื่อรับข้อมูลเมตาเกี่ยวกับไฟล์ได้ แต่จะดาวน์โหลดไฟล์ไม่ได้
+Files API พร้อมให้บริการโดยไม่มีค่าใช้จ่ายในทุกภูมิภาคที่มี Gemini API พร้อมให้บริการ
 
-## Chiến lược nhắc nhở về tệp
+## กลยุทธ์การแจ้งไฟล์
 
-Phần này cung cấp hướng dẫn và các phương pháp hay nhất để sử dụng tệp đa phương tiện với câu lệnh cho Gemini API.
+ส่วนนี้จะให้คำแนะนำและแนวทางปฏิบัติแนะนำในการใช้ไฟล์สื่อกับ
+พรอมต์สำหรับ Gemini API
 
-Việc có thể sử dụng nhiều loại dữ liệu trong câu lệnh giúp bạn linh hoạt hơn về những việc bạn có thể giải quyết bằng Gemini API. Ví dụ: bạn có thể gửi cho mô hình một bức ảnh về một bữa ăn ngon và yêu cầu mô hình viết một bài đăng ngắn trên blog về bữa ăn đó.
+การใช้ข้อมูลประเภทต่างๆ ในพรอมต์จะช่วยให้คุณมีความยืดหยุ่นมากขึ้นในแง่ของงานที่สามารถจัดการได้ด้วย Gemini API ตัวอย่างเช่น คุณสามารถส่งรูปภาพอาหารแสนอร่อยให้โมเดลและขอให้โมเดลเขียนบล็อกสั้นๆ เกี่ยวกับอาหารนั้น
 
 |  |  |
 | --- | --- |
-| **Câu lệnh** | **Đáp** |
-| Viết một bài đăng ngắn gọn, hấp dẫn trên blog dựa trên bức ảnh này. Bài đăng đó phải có nội dung mô tả về bữa ăn trong ảnh và kể về hành trình chuẩn bị bữa ăn của tôi.   Bánh quy | Chuẩn bị sẵn bữa ăn là một cách tuyệt vời để tiết kiệm thời gian và tiền bạc, đồng thời cũng có thể giúp bạn ăn uống lành mạnh hơn. Bữa ăn này là một ví dụ điển hình về một bữa ăn lành mạnh và ngon miệng mà bạn có thể dễ dàng chuẩn bị trước.  Bữa ăn này có cơm gạo lứt, rau củ nướng và gà sốt teriyaki. Gạo lứt là một loại carbohydrate phức tạp và lành mạnh, giúp bạn có năng lượng bền bỉ. Rau củ nướng là một cách tuyệt vời để bổ sung vitamin và khoáng chất hằng ngày, còn món gà teriyaki là một lựa chọn ngon miệng và giàu protein.  Món ăn này cũng rất dễ chế biến. Bạn chỉ cần nấu cơm gạo lứt, nướng rau và nấu món gà sốt teriyaki. Sau khi nấu xong, hãy chia thức ăn vào các hộp đựng và bảo quản trong tủ lạnh. Sau đó, bạn có thể lấy hộp đựng và đi làm vào những buổi sáng bận rộn!  Nếu bạn đang tìm một bữa ăn lành mạnh và ngon miệng mà có thể dễ dàng chuẩn bị trước, thì đây là một lựa chọn tuyệt vời. Món ăn này giàu dinh dưỡng và hương vị, chắc chắn sẽ giúp bạn cảm thấy no và hài lòng.  Chúc bạn chuẩn bị được những bữa ăn lành mạnh và ngon miệng! |
+| **พรอมต์** | **การตอบกลับ** |
+| เขียนบล็อกโพสต์สั้นๆ ที่น่าสนใจโดยอิงจากรูปภาพนี้ โดยควรมี คำอธิบายเกี่ยวกับอาหารในรูปภาพและพูดถึงเส้นทางการเตรียมอาหารของฉัน   คุกกี้ | การเตรียมอาหารล่วงหน้าเป็นวิธีที่ยอดเยี่ยมในการประหยัดเวลาและเงิน รวมถึงยังช่วยให้คุณกินอาหารที่ดีต่อสุขภาพได้ด้วย เมนูนี้เป็นตัวอย่างที่ดีของอาหารเพื่อสุขภาพที่อร่อยและเตรียมล่วงหน้าได้ง่าย  มื้อนี้มีข้าวกล้อง ผักย่าง และไก่เทริยากิ ข้าวกล้องเป็นคาร์โบไฮเดรตเชิงซ้อนที่มีประโยชน์ต่อสุขภาพซึ่งจะให้ พลังงานแก่คุณอย่างต่อเนื่อง ผักย่างเป็นวิธีที่ยอดเยี่ยมในการรับวิตามินและแร่ธาตุในแต่ละวัน ส่วนไก่เทอริยากิก็เป็นตัวเลือกที่อร่อยและ มีโปรตีนสูง  นอกจากนี้ เมนูนี้ยังเตรียมได้ง่ายมาก เพียงแค่หุงข้าวกล้อง ย่าง ผัก และทำไก่เทอริยากิ เมื่อทุกอย่างพร้อมแล้ว ให้แบ่งใส่กล่องเตรียมอาหารแล้วเก็บไว้ในตู้เย็น จากนั้นคุณก็หยิบกล่องไปทานในเช้าวันที่เร่งรีบได้เลย  หากคุณกำลังมองหาอาหารเพื่อสุขภาพที่อร่อยและเตรียมล่วงหน้าได้ง่าย อาหารมื้อนี้เป็นตัวเลือกที่ยอดเยี่ยม อัดแน่นไปด้วย สารอาหารและรสชาติ และจะช่วยให้คุณรู้สึกอิ่มและพึงพอใจ  ขอให้คุณเตรียมอาหารได้อย่างอร่อยและดีต่อสุขภาพ |
 
-Nếu gặp khó khăn khi nhận được kết quả mong muốn từ những câu lệnh sử dụng tệp đa phương tiện, bạn có thể áp dụng một số chiến lược để đạt được kết quả mong muốn. Các phần sau đây cung cấp các phương pháp thiết kế và mẹo khắc phục sự cố để cải thiện câu lệnh sử dụng dữ liệu đầu vào đa phương thức.
+หากพบปัญหาในการรับเอาต์พุตที่ต้องการจากพรอมต์ที่ใช้ไฟล์สื่อ
+คุณสามารถใช้กลยุทธ์บางอย่างเพื่อช่วยให้ได้ผลลัพธ์ที่ต้องการ
+ส่วนต่อไปนี้จะอธิบายแนวทางการออกแบบและเคล็ดลับในการแก้ปัญหา
+เพื่อปรับปรุงพรอมต์ที่ใช้ข้อมูลหลายรูปแบบ
 
-Bạn có thể cải thiện câu lệnh đa phương thức bằng cách làm theo các phương pháp hay nhất sau:
+คุณปรับปรุงพรอมต์มัลติโมดัลได้โดยทำตามแนวทางปฏิบัติแนะนำต่อไปนี้
 
-- ### [Kiến thức cơ bản về thiết kế câu lệnh](#specific-instructions)
+- ### [ข้อมูลพื้นฐานเกี่ยวกับการออกแบบพรอมต์](#specific-instructions)
 
-  - **Đưa ra chỉ dẫn cụ thể**: Soạn thảo chỉ dẫn rõ ràng và ngắn gọn để giảm thiểu khả năng hiểu sai.
-  - **Thêm một vài ví dụ vào câu lệnh:** Sử dụng một vài ví dụ thực tế để minh hoạ những gì bạn muốn đạt được.
-  - **Chia nhỏ từng bước**: Chia các việc phức tạp thành những mục tiêu phụ dễ quản lý, hướng dẫn mô hình thực hiện quy trình.
-  - **Chỉ định định dạng đầu ra**: Trong câu lệnh, hãy yêu cầu đầu ra ở định dạng bạn muốn, chẳng hạn như markdown, JSON, HTML, v.v.
-  - **Đặt hình ảnh lên trước đối với câu lệnh có một hình ảnh**: Mặc dù Gemini có thể xử lý hình ảnh và văn bản đầu vào theo bất kỳ thứ tự nào, nhưng đối với câu lệnh có một hình ảnh, Gemini có thể hoạt động hiệu quả hơn nếu hình ảnh (hoặc video) đó được đặt trước câu lệnh dạng văn bản. Tuy nhiên, đối với những câu lệnh yêu cầu hình ảnh phải được xen kẽ với văn bản để có ý nghĩa, hãy sử dụng bất kỳ thứ tự nào tự nhiên nhất.
-- ### [Khắc phục sự cố về câu lệnh đa phương thức](#troubleshooting)
+  - **ระบุคำสั่งอย่างชัดเจน**: สร้างคำสั่งที่ชัดเจนและกระชับซึ่งมีโอกาสน้อยที่จะเกิดการตีความผิด
+  - **เพิ่มตัวอย่าง 2-3 รายการลงในพรอมต์:** ใช้ตัวอย่างแบบ Few-Shot ที่สมจริงเพื่อแสดงให้เห็นสิ่งที่คุณต้องการทำให้สำเร็จ
+  - **แบ่งย่อยเป็นขั้นตอน**: แบ่งงานที่ซับซ้อนออกเป็นเป้าหมายย่อยที่จัดการได้ เพื่อนำทางโมเดลผ่านกระบวนการ
+  - **ระบุรูปแบบเอาต์พุต**: ในพรอมต์ ให้ขอให้เอาต์พุตอยู่ในรูปแบบที่คุณต้องการ เช่น Markdown, JSON, HTML และอื่นๆ
+  - **วางรูปภาพไว้ก่อนสำหรับพรอมต์ที่มีรูปภาพเดียว**: แม้ว่า Gemini จะจัดการอินพุตรูปภาพและข้อความได้ทุกรูปแบบ แต่สำหรับพรอมต์ที่มีรูปภาพเดียว รูปภาพ (หรือวิดีโอ) นั้นอาจทำงานได้ดีกว่าหากวางไว้ก่อนพรอมต์ข้อความ อย่างไรก็ตาม สำหรับพรอมต์ที่ต้องใช้รูปภาพซึ่งสอดแทรกกับข้อความอย่างมากเพื่อให้เข้าใจได้ ให้ใช้ลำดับใดก็ได้ที่ดูเป็นธรรมชาติที่สุด
+- ### [การแก้ปัญหาพรอมต์แบบมัลติโมดอล](#troubleshooting)
 
-  - **Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh:** Đưa ra gợi ý về những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin.
-  - **Nếu đầu ra của mô hình quá chung chung (không đủ phù hợp với đầu vào là hình ảnh/video):** Khi bắt đầu câu lệnh, hãy thử yêu cầu mô hình mô tả(các) hình ảnh hoặc video trước khi đưa ra hướng dẫn về nhiệm vụ, hoặc thử yêu cầu mô hình tham khảo nội dung trong hình ảnh.
-  - **Cách khắc phục sự cố về phần bị lỗi:** Yêu cầu mô hình mô tả hình ảnh hoặc giải thích lý do để đánh giá mức độ hiểu biết ban đầu của mô hình.
-  - **Nếu câu lệnh của bạn tạo ra nội dung ảo:** Hãy thử giảm chế độ cài đặt nhiệt độ hoặc yêu cầu mô hình cung cấp nội dung mô tả ngắn hơn để mô hình ít có khả năng suy đoán thêm chi tiết.
-  - **Điều chỉnh các thông số lấy mẫu:** Thử nghiệm với các chế độ cài đặt nhiệt độ và lựa chọn top-k khác nhau để điều chỉnh khả năng sáng tạo của mô hình.
+  - **หากโมเดลไม่ได้ดึงข้อมูลจากส่วนที่เกี่ยวข้องของรูปภาพ** ให้บอกใบ้ว่าคุณต้องการให้พรอมต์ดึงข้อมูลจากส่วนใดของรูปภาพ
+  - **หากเอาต์พุตโมเดลเป็นแบบทั่วไปมากเกินไป (ไม่ปรับให้เข้ากับอินพุตรูปภาพ/วิดีโอมากพอ):** ที่จุดเริ่มต้นของพรอมต์ ให้ลองขอให้โมเดลอธิบายรูปภาพหรือวิดีโอก่อนที่จะให้คำสั่งงาน หรือลองขอให้โมเดลอ้างอิงถึงสิ่งที่อยู่ในรูปภาพ
+  - **หากต้องการแก้ปัญหาว่าส่วนใดล้มเหลว:** ขอให้โมเดลอธิบายรูปภาพ หรือขอให้โมเดลอธิบายเหตุผลเพื่อวัดความเข้าใจเริ่มต้นของโมเดล
+  - **หากพรอมต์ทำให้เกิดเนื้อหาที่โมเดลแต่งขึ้น** ให้ลองลดการตั้งค่าอุณหภูมิหรือขอให้โมเดลอธิบายสั้นลง เพื่อลดโอกาสที่โมเดลจะคาดการณ์รายละเอียดเพิ่มเติม
+  - **การปรับพารามิเตอร์การสุ่มตัวอย่าง:** ทดลองใช้การตั้งค่าอุณหภูมิและการเลือกแบบ Top-k ที่แตกต่างกันเพื่อปรับความคิดสร้างสรรค์ของโมเดล
 
-### Đưa ra hướng dẫn cụ thể
+### ระบุคำสั่งให้ชัดเจน
 
-Câu lệnh sẽ hiệu quả nhất khi rõ ràng và chi tiết. Nếu bạn có một kết quả cụ thể trong đầu, thì tốt hơn là bạn nên đưa yêu cầu đó vào câu lệnh để đảm bảo bạn nhận được kết quả mình muốn.
+พรอมต์จะประสบความสำเร็จมากที่สุดเมื่อมีความชัดเจนและละเอียด หากคุณมีผลลัพธ์ที่เฉพาะเจาะจงในใจ
+ควรระบุข้อกำหนดนั้นในพรอมต์
+เพื่อให้มั่นใจว่าคุณจะได้รับผลลัพธ์ที่ต้องการ
 
-Đối với hình ảnh này về một bảng thông tin tại sân bay, nếu chỉ yêu cầu mô hình "mô tả hình ảnh này", thì mô hình có thể tạo ra một nội dung mô tả chung chung. Nếu cần mô hình phân tích cú pháp thời gian và thành phố trong hình ảnh, bạn có thể đưa yêu cầu đó trực tiếp vào câu lệnh.
+สำหรับรูปภาพกระดานแสดงข้อมูลที่สนามบินนี้ การขอให้โมเดล "อธิบายรูปภาพนี้"
+อาจสร้างคำอธิบายทั่วไป หากต้องการให้โมเดลแยกวิเคราะห์
+เวลาและเมืองจากรูปภาพ คุณสามารถใส่คำขอนั้นลงในพรอมต์ได้โดยตรง
 
-| Câu lệnh | Câu trả lời của mô hình |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Mô tả hình ảnh này. | Hình ảnh cho thấy bảng thông tin chuyến bay hạ cánh và khởi hành tại sân bay. |
+| อธิบายรูปภาพนี้ | รูปภาพแสดงตารางเที่ยวบินขาเข้าและขาออกของสนามบิน |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Lịch trình du lịch Phân tích thời gian và thành phố từ bảng thông tin tại sân bay trong hình ảnh này thành một danh sách. | - 10:50 Moscow - 11:05 Edinburgh - 11:05 London - 11:10 Bucharest - 11:30 Kiev - 11:35 Dublin - 11:45 Đông Midlands - 12:15 Sofia - 12:30 London - 12:30 Newcastle - 12:40 St Petersburg - 12:40 London - 12:45 Manchester |
+| ตารางเวลาการเดินทาง แยกวิเคราะห์เวลาและเมืองจากบอร์ดสนามบินที่แสดงในรูปภาพนี้เป็นรายการ | - 10:50 มอสโก - 11:05 เอดินบะระ - 11:05 ลอนดอน - 11:10 บูคาเรสต์ - 11:30 น. เคียฟ - 11:35 ดับลิน - 11:45 อีสต์มิดแลนส์ - 12:15 โซเฟีย - 12:30 ลอนดอน - 12:30 น. นิวคาสเซิล - 12:40 เซนต์ปีเตอร์สเบิร์ก - 12:40 ลอนดอน - 12:45 แมนเชสเตอร์ |
 
-### Thêm một vài ví dụ
+### เพิ่มตัวอย่าง
 
-Mô hình Gemini có thể chấp nhận nhiều dữ liệu đầu vào mà mô hình có thể dùng làm ví dụ để hiểu được đầu ra bạn muốn. Việc thêm những ví dụ này có thể giúp mô hình xác định các mẫu và áp dụng mối quan hệ giữa hình ảnh và câu trả lời đã cho vào ví dụ mới. Đây còn được gọi là học "từ một vài dữ liệu".
+โมเดล Gemini รับอินพุตได้หลายรายการ ซึ่งสามารถใช้เป็นตัวอย่างเพื่อทำความเข้าใจเอาต์พุตที่คุณต้องการ การเพิ่มตัวอย่างเหล่านี้จะช่วยให้โมเดลระบุรูปแบบและใช้
+ความสัมพันธ์ระหว่างรูปภาพและคำตอบที่ระบุกับตัวอย่างใหม่ได้ ซึ่งเรียกอีกอย่างว่า
+การเรียนรู้แบบ "Few-Shot"
 
-Trong ví dụ bên dưới, đầu ra ban đầu được viết dưới dạng câu và cũng chứa quốc gia (Brazil). Giả sử bạn muốn đầu ra ở một định dạng hoặc kiểu khác và bạn chỉ muốn thành phố chứ không phải quốc gia. Việc thêm một vài ví dụ vào câu lệnh có thể hướng mô hình phản hồi theo cách bạn muốn.
+ในตัวอย่างด้านล่าง เอาต์พุตเริ่มต้นเขียนในรูปแบบประโยคและมีประเทศ (บราซิล) สมมติว่าคุณต้องการเอาต์พุตในรูปแบบหรือสไตล์อื่น และต้องการเฉพาะเมือง ไม่ใช่ประเทศ การเพิ่มตัวอย่างแบบ Few-Shot ลงในพรอมต์จะช่วยให้โมเดลตอบสนองในแบบที่คุณต้องการได้
 
-| **Câu lệnh** | **Phản hồi của mô hình** |
+| **พรอมต์** | **คำตอบของโมเดล** |
 | --- | --- |
-| Lịch trình du lịch Xác định thành phố cùng với địa danh. | Địa danh này là tượng Chúa Kitô Cứu thế ở Rio de Janeiro, Brazil. |
+| ตารางเวลาการเดินทาง ระบุเมืองพร้อมกับสถานที่สำคัญ | สถานที่สำคัญคือรูปปั้นพระคริสต์ผู้ไถ่ในรีโอเดจาเนโร ประเทศบราซิล |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Xác định thành phố cùng với địa danh. đấu trường La Mã | thành phố: Rome, địa danh: Đấu trường La Mã. |
-| Tử Cấm Thành | thành phố: Bắc Kinh, địa danh: Tử Cấm Thành |
-| tử cấm thành | thành phố: Rio de Janeiro, địa danh: Tượng Chúa Kitô Cứu thế |
+| ระบุเมืองพร้อมกับสถานที่สำคัญ โคลอสเซียม | เมือง: โรม, สถานที่สำคัญ: โคลอสเซียม |
+| นครต้องห้าม | เมือง: ปักกิ่ง สถานที่สำคัญ: พระราชวังต้องห้าม |
+| forbidden-city | เมือง: รีโอเดจาเนโร, สถานที่สำคัญ: รูปปั้นพระคริสต์ผู้ไถ่ |
 
-### Phân tích từng bước
+### ดูรายละเอียดทีละขั้นตอน
 
-Đối với những tác vụ phức tạp như những tác vụ đòi hỏi cả khả năng hiểu biết trực quan và lý luận, bạn nên chia tác vụ thành các bước nhỏ hơn và đơn giản hơn. Ngoài ra, bạn cũng có thể yêu cầu trực tiếp mô hình "suy nghĩ từng bước" trong câu lệnh của mình để đạt được hiệu quả.
+สำหรับงานที่ซับซ้อน เช่น งานที่ต้องใช้ทั้งความเข้าใจด้านภาพและการให้เหตุผล การแบ่งงานออกเป็นขั้นตอนย่อยๆ ที่ตรงไปตรงมามากขึ้นอาจเป็นวิธีที่มีประโยชน์ หรือคุณอาจขอให้โมเดล "คิดทีละขั้นตอน" ในพรอมต์โดยตรงก็ได้
 
-| Câu lệnh | Câu trả lời của mô hình |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Khi nào tôi sẽ hết giấy vệ sinh? | Bạn chỉ còn 3 lượt quay nữa. |
+| กระดาษชำระจะหมดเมื่อใด | คุณจะเหลือรีลเพียง 3 รายการในเร็วๆ นี้ |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| 1. Trước tiên, hãy đếm xem có bao nhiêu cuộn giấy vệ sinh trong bức ảnh này.  2. Sau đó, hãy xác định lượng giấy vệ sinh mà một người thường dùng mỗi ngày.  3. Tính toán thời gian sử dụng hết số giấy vệ sinh này. | 1. Có 3 cuộn giấy vệ sinh trong bức ảnh này.  2. Một người thường dùng khoảng 20 tờ giấy vệ sinh mỗi ngày.  3. Nếu mỗi cuộn có 200 tờ, thì mỗi cuộn sẽ dùng được khoảng 10 ngày. Do đó, 3 cuộn giấy sẽ dùng được khoảng một tháng. |
+| 1. ก่อนอื่น ให้นับม้วนกระดาษชำระในรูปภาพนี้  2. จากนั้นให้พิจารณาว่าโดยทั่วไปแล้วคนเราใช้กระดาษชำระวันละเท่าไร  3. คำนวณว่ากระดาษชำระม้วนนี้จะใช้ได้นานเท่าใด | 1. ในรูปภาพนี้มีม้วนกระดาษชำระ 3 ม้วน  2. โดยทั่วไปแล้ว คนเราใช้กระดาษชำระประมาณ 20 แผ่นต่อวัน  3. หากกระดาษชำระแต่ละม้วนมี 200 แผ่น กระดาษชำระแต่ละม้วนจะใช้ได้ประมาณ 10 วัน ดังนั้น กระดาษชำระ 3 ม้วนจะใช้ได้ประมาณ 1 เดือน |
 
-Các bài toán hoặc những loại bài toán có lời văn khác là những lựa chọn phù hợp để yêu cầu mô hình suy nghĩ từng bước.
+โจทย์คณิตศาสตร์หรือโจทย์ประเภทอื่นๆ เป็นตัวเลือกที่ยอดเยี่ยมในการขอให้โมเดลคิดแบบทีละขั้นตอน
 
-| **Câu lệnh** | **Đáp** |
+| **พรอมต์** | **การตอบกลับ** |
 | --- | --- |
-| Số hạng thứ 4 trong dãy số này là bao nhiêu? | -135 |
+| พจน์ที่ 4 ในลำดับคืออะไร | -135 |
 
-Câu trả lời của mô hình không chính xác. Một số cách để cải thiện vấn đề này là yêu cầu mô hình phân tích vấn đề trước khi trả lời câu lệnh.
+คำตอบจากโมเดลไม่ถูกต้อง วิธีปรับปรุงเรื่องนี้คือการขอให้โมเดลแยกวิเคราะห์ปัญหา
+ก่อนตอบพรอมต์
 
-| **Câu lệnh** | **Đáp** |
+| **พรอมต์** | **การตอบกลับ** |
 | --- | --- |
-| Trước tiên, hãy phân tích cú pháp công thức trong hình ảnh.  Sau đó, dựa vào công thức, hãy trả lời câu hỏi "số hạng thứ 4 trong dãy số là gì?". | *Nhấp để mở rộng kết quả* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Thay n = 4 vào công thức:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Chúng ta không biết giá trị của b(3), vì vậy hãy thay n = 3 vào công thức:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Chúng ta không biết giá trị của b(2), nên hãy thay n = 2 vào công thức:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Chúng ta biết giá trị của b(1) là 15, vì vậy hãy thay thế giá trị này vào công thức:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Bây giờ, chúng ta đã biết giá trị của b(2), hãy thay thế giá trị đó vào công thức cho b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Giờ đây, khi đã biết giá trị của b(3), hãy thay thế giá trị đó vào công thức cho b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Do đó, số hạng thứ 4 trong dãy số là -405. |
+| แยกวิเคราะห์สูตรในรูปภาพก่อน  จากนั้นตอบคำถาม "พจน์ที่ 4 ในลำดับคืออะไร" โดยอิงตามสูตร | *คลิกเพื่อขยายผลลัพธ์* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. แทนที่ n = 4 ในสูตร  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. เราไม่ทราบค่าของ b(3) ดังนั้นให้แทนค่า n = 3 ลงในสูตร  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. เราไม่ทราบค่าของ b(2) จึงแทนค่า n = 2 ลงในสูตร  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. เรารู้ว่าค่าของ b(1) คือ 15 ดังนั้นให้แทนค่าลงในสูตร  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. ตอนนี้เราทราบค่าของ b(2) แล้ว ให้แทนค่าลงในสูตรสำหรับ b(3) ดังนี้  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. ตอนนี้เราทราบค่าของ b(3) แล้ว ให้แทนค่าลงในสูตรสำหรับ b(4) ดังนี้  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   ดังนั้น พจน์ที่ 4 ในลำดับคือ -405 |
 
-Câu trả lời của mô hình này là chính xác. Để câu trả lời hợp lý hơn nữa, bạn có thể yêu cầu mô hình suy nghĩ từng bước.
+คำตอบของโมเดลนี้ถูกต้องแล้ว แต่หากต้องการให้คำตอบมีประสิทธิภาพมากยิ่งขึ้น
+คุณสามารถขอให้โมเดลคิดทีละขั้นตอนได้
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Số hạng thứ 4 trong dãy số này là bao nhiêu? Hãy suy nghĩ từng bước. | Số hạng đầu tiên là 15.  Số hạng thứ hai là b(1) \* (-3) = 15 \* (-3) = -45.  Số hạng thứ ba là b(2) \* (-3) = -45 \* (-3) = 135.  Số hạng thứ tư là b(3) \* (-3) = 135 \* (-3) = -405. |
+| พจน์ที่ 4 ในลำดับคืออะไร คิดทีละขั้นตอน | โดยพจน์แรกคือ 15  พจน์ที่ 2 คือ b(1) \* (-3) = 15 \* (-3) = -45  พจน์ที่ 3 คือ b(2) \* (-3) = -45 \* (-3) = 135  พจน์ที่ 4 คือ b(3) \* (-3) = 135 \* (-3) = -405 |
 
-### Chỉ định định dạng đầu ra
+### ระบุรูปแบบเอาต์พุต
 
-Một vấn đề thường gặp là nhu cầu về đầu ra của mô hình ở một định dạng nhất định (ví dụ: markdown, JSON, HTML), đặc biệt nếu đầu ra của mô hình cần được một tác vụ hạ nguồn tiếp nhận. Bạn có thể thử tạo kết quả ở định dạng đó bằng cách hướng dẫn mô hình thực hiện trong câu lệnh. Dưới đây là hai ví dụ:
+ปัญหาที่พบบ่อยคือความจำเป็นที่เอาต์พุตของโมเดลต้องอยู่ในรูปแบบที่แน่นอน
+(เช่น Markdown, JSON, HTML) โดยเฉพาะอย่างยิ่งหากเอาต์พุตของโมเดลต้อง
+นำไปใช้ในงานที่ต่อเนื่อง คุณสามารถลองสร้างเอาต์พุตในรูปแบบนั้น
+ได้โดยสั่งให้โมเดลทำเช่นนั้นภายในพรอมต์ ตัวอย่าง 2 รายการมีดังนี้
 
-| Câu lệnh | Câu trả lời của mô hình |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Phân tích bảng trong hình ảnh này thành định dạng markdown | | Chủ đề | Trạng thái | Thời gian | Ngày bắt đầu | Đến hạn |  | ------- | ------ | ---- | ---------- | ------ |  | Toán học | Đã hoàn thành | 1,5 giờ | 29/11/2023 | 1/12/2023 |  | Địa lý | Đã hoàn tất | 30 phút | 2/12/2023 | 4/12/2023 |  | Vật lý | Đang tiến hành | 2 giờ | 3/12/2023 | 5/12/2023 |  | Sinh học | Chưa bắt đầu | 6 giờ | 2/11/2016 | 6/12/2023 | |
+| แยกวิเคราะห์ตารางในรูปภาพนี้เป็นรูปแบบ Markdown | | Subject | Status | Time | Start date | Due on |  | ------- | ------ | ---- | ---------- | ------ |  | คณิตศาสตร์ | เสร็จแล้ว | 1.5 ชม. | 29/11/2023 | 1/12/2023 |  | ภูมิศาสตร์ | เสร็จแล้ว | 30 นาที | 2/12/2023 | 4/12/2023 |  | ฟิสิกส์ | อยู่ระหว่างดำเนินการ | 2 ชั่วโมง | 03/12/2023 | 05/12/2023 |  | ชีววิทยา | ยังไม่เริ่ม | 6 ชม. | 02/11/2016 | 06/12/2023 | |
 
-| **Câu lệnh** | **Phản hồi của mô hình** |
+| **พรอมต์** | **คำตอบของโมเดล** |
 | --- | --- |
-| Cung cấp danh sách tất cả các thuộc tính sau:  thành phần, loại món ăn, có phải là món chay hay không, ở định dạng JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| ระบุรายการแอตทริบิวต์ต่อไปนี้ทั้งหมด  ส่วนผสม ประเภทอาหาร มังสวิรัติหรือไม่ ในรูปแบบ JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### Đặt hình ảnh lên trước cho câu lệnh một hình ảnh
+### วางรูปภาพไว้ก่อนสำหรับพรอมต์แบบรูปภาพเดียว
 
-Mặc dù Gemini có thể diễn giải hình ảnh và văn bản theo bất kỳ thứ tự nào trong câu lệnh, nhưng việc đặt một hình ảnh trước câu lệnh dạng văn bản có thể mang lại kết quả tốt hơn.
-Trong các mẫu sau, bạn sẽ nhận thấy hình ảnh xuất hiện trước văn bản trong mỗi câu lệnh.
+แม้ว่า Gemini จะตีความรูปภาพและข้อความในพรอมต์ได้ตามลำดับใดก็ได้ แต่การวาง
+รูปภาพเดี่ยวไว้ก่อนพรอมต์ข้อความอาจให้ผลลัพธ์ที่ดีกว่า
+ในตัวอย่างต่อไปนี้ คุณจะเห็นว่ารูปภาพจะมาก่อนข้อความในแต่ละพรอมต์
 
-### Khắc phục sự cố với câu lệnh đa phương thức
+### การแก้ปัญหาพรอมต์มัลติโมดัล
 
-Bạn có thể cần khắc phục sự cố về câu lệnh nếu không nhận được phản hồi hữu ích. Bạn có thể thử một số chiến lược sau.
+คุณอาจต้องแก้ปัญหาพรอมต์หากไม่ได้รับคำตอบที่เป็นประโยชน์
+ต่อไปนี้คือกลยุทธ์บางอย่างที่คุณลองใช้ได้
 
-#### Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh
+#### หากโมเดลไม่ได้ดึงข้อมูลจากส่วนที่เกี่ยวข้องของรูปภาพ
 
-Để nhận được câu trả lời cụ thể hơn, bạn có thể chỉ ra những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin để đưa ra câu trả lời.
+หากต้องการคำตอบที่เจาะจงมากขึ้น คุณสามารถระบุลักษณะของรูปภาพ
+ที่ต้องการให้พรอมต์ดึงข้อมูลมาใช้ในการตอบกลับได้
 
-| Câu lệnh | Câu trả lời của mô hình |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Những chiếc tã này sẽ dùng được bao nhiêu ngày cho một em bé? | Số tã này sẽ dùng được trong 198 ngày. |
+| ผ้าอ้อมเหล่านี้จะใช้ได้นานกี่วันสำหรับทารก | ผ้าอ้อมจะใช้ได้ 198 วันก่อนที่จะหมด |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Tôi có thể dùng hết số tã này trong bao lâu?  Dùng trọng lượng ghi trên hộp để xác định độ tuổi của trẻ và dùng tổng số tã trong hộp.  Chia tổng số tã cho số lượng tã mà trẻ dùng mỗi ngày. | Hộp này có 198 chiếc tã. Trên hộp ghi rằng tã dành cho trẻ nặng từ 10 đến 17 kg.  Trẻ em trung bình trong khoảng cân nặng này có thể từ 1 đến 2 tuổi.  Một đứa trẻ 2 tuổi thường dùng 6 chiếc tã mỗi ngày, do đó, số tã này sẽ dùng được khoảng 33 ngày (198/6). |
+| ผ้าอ้อมเหล่านี้จะใช้ได้นานเท่าใดก่อนที่จะหมด  ใช้น้ำหนักที่แสดงบนกล่องเพื่อกำหนดอายุของเด็ก และใช้จำนวนผ้าอ้อมทั้งหมดในกล่อง  นำจำนวนทั้งหมดมาหารด้วยจำนวนผ้าอ้อมที่เด็กใช้ต่อวัน | กล่องมีผ้าอ้อม 198 ชิ้น กล่องระบุว่าผ้าอ้อมนี้เหมาะสำหรับเด็กที่มีน้ำหนัก 22-37 ปอนด์  เด็กที่มีน้ำหนักในช่วงนี้โดยเฉลี่ยมักจะมีอายุระหว่าง 1-2 ปี  โดยปกติแล้วเด็กอายุ 2 ขวบจะใช้ผ้าอ้อม 6 ผืนต่อวัน ดังนั้นผ้าอ้อมจะใช้ได้ประมาณ 33 วัน (198/6) |
 
-#### Nếu đầu ra của mô hình quá chung chung và không đủ phù hợp với dữ liệu đầu vào là hình ảnh
+#### หากเอาต์พุตโมเดลเป็นแบบทั่วไปมากเกินไปและไม่ปรับให้เข้ากับอินพุตรูปภาพ
 
-Để giúp mô hình điều chỉnh câu trả lời cho(các) hình ảnh, hãy thử yêu cầu mô hình mô tả hình ảnh trước khi thực hiện nhiệm vụ suy luận.
+หากต้องการช่วยให้โมเดลปรับแต่งคำตอบให้เหมาะกับรูปภาพ ให้ลองขอให้โมเดลอธิบายรูปภาพก่อนที่จะดำเนินการให้เหตุผล
 
-| Câu lệnh | Câu trả lời của mô hình |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Điểm chung giữa những hình ảnh này là gì? | Cả 4 hình ảnh đều là ví dụ về ảnh phong cảnh. |
+| รูปภาพเหล่านี้มีอะไรที่เหมือนกัน | รูปภาพทั้ง 4 รูปเป็นตัวอย่างของการถ่ายภาพทิวทัศน์ |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Trước tiên, hãy mô tả chi tiết nội dung trong từng hình ảnh. Điểm chung giữa những hình ảnh này là gì? | Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm. Hình ảnh thứ ba cho thấy một cuộn giấy vệ sinh. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố.  Điểm chung giữa những hình ảnh này là tất cả đều là ví dụ về không gian trung gian. Không gian trung gian là những nơi hoặc tình huống nằm giữa hai nơi hoặc tình huống khác. Chúng thường mang đến cảm giác không chắc chắn hoặc mơ hồ.  Hình ảnh đầu tiên cho thấy người ở giữa đang ở nhà và đang đi du lịch. Hình ảnh thứ hai cho thấy hành lang giữa hai cửa hàng. Hình ảnh thứ ba là giấy vệ sinh, có thể tượng trưng cho phòng tắm. Phòng tắm là không gian chuyển tiếp giữa khu vực riêng tư và khu vực công cộng. Đó là nơi chúng ta chuẩn bị bước vào hoặc rời khỏi thế giới bên ngoài.  Hình ảnh thứ tư cho thấy biển ở trạng thái giữa bình lặng và bão tố.  Không gian liminal có thể vừa thú vị vừa bất an. Chúng có thể là nơi bắt đầu hoặc kết thúc. Đó có thể là nơi để suy ngẫm hoặc nơi để hành động. |
+| ก่อนอื่น ให้อธิบายสิ่งที่อยู่ในรูปภาพแต่ละรูปโดยละเอียด รูปภาพเหล่านี้มีอะไรที่เหมือนกัน | รูปภาพแรกแสดงภาพคนกำลังจัดกระเป๋าเดินทาง ภาพที่ 2 แสดงทางเดินที่ว่างเปล่าในห้างสรรพสินค้า ภาพที่ 3 แสดงม้วนกระดาษชำระ รูปภาพที่ 4 แสดงทะเลที่มืดครึ้มและมีพายุ  สิ่งที่เหมือนกันในรูปภาพเหล่านี้คือทั้งหมดเป็นตัวอย่างของพื้นที่กึ่งกลาง พื้นที่กึ่งกลางคือสถานที่หรือสถานการณ์ที่อยู่ระหว่างสถานที่หรือสถานการณ์อื่นๆ 2 อย่าง โดยมักมีลักษณะของความไม่แน่นอนหรือความคลุมเครือ  รูปภาพแรกแสดงให้เห็นว่าบุคคลที่อยู่ตรงกลางกำลังอยู่บ้านและกำลังเดินทาง รูปภาพที่ 2 แสดงทางเดินระหว่างร้านค้า 2 ร้าน รูปภาพที่ 3 เป็นรูปกระดาษชำระ ซึ่งแสดงถึงห้องน้ำได้ ห้องน้ำเป็นพื้นที่เปลี่ยนผ่านระหว่างพื้นที่ส่วนตัว และพื้นที่สาธารณะ เป็นสถานที่ที่เราเตรียมตัวเพื่อเข้าหรือออกจากโลกภายนอก  ภาพที่ 4 แสดงให้เห็นทะเลที่อยู่ระหว่างความสงบกับความปั่นป่วน  พื้นที่กึ่งกลางอาจทั้งน่าตื่นเต้นและน่ากังวลใจ อาจเป็นจุดเริ่มต้นใหม่หรือจุดสิ้นสุด อาจเป็นที่ที่ใช้ทบทวนหรือที่ที่ใช้ลงมือทำ |
 
-Bạn cũng có thể thử yêu cầu mô hình tham khảo nội dung trong hình ảnh một cách rõ ràng.
+นอกจากนี้ คุณยังลองถามโมเดลอย่างชัดเจนให้ดูสิ่งที่อยู่ในรูปภาพได้ด้วย
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Điểm chung giữa những hình ảnh này là gì? Tham khảo nội dung trong hình ảnh trong câu trả lời của bạn. | Tất cả hình ảnh đều liên quan đến du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali, hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, hình ảnh thứ ba cho thấy một chồng giấy vệ sinh và hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Tất cả những hình ảnh này đều liên quan đến du lịch vì đây đều là những thứ mà mọi người cần hoặc sử dụng khi đi du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý, đây là việc mà mọi người làm khi đi du lịch. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, đây là nơi mà mọi người thường đến để mua đồ cho chuyến đi của mình. Hình ảnh thứ ba cho thấy một chồng giấy vệ sinh, đây là thứ mà mọi người thường sử dụng khi đi du lịch. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố, đây là điều mà mọi người thường gặp phải khi đi du lịch. |
+| รูปภาพเหล่านี้มีอะไรที่เหมือนกัน อ้างอิงสิ่งที่อยู่ในรูปภาพในคำตอบ | รูปภาพทั้งหมดเกี่ยวข้องกับการเดินทาง รูปภาพแรกแสดงบุคคลที่กำลังจัดกระเป๋าเดินทาง รูปภาพที่ 2 แสดง ทางเดินที่ว่างเปล่าในห้างสรรพสินค้า รูปภาพที่ 3 แสดงกระดาษชำระที่วางซ้อนกัน และรูปภาพที่ 4 แสดง ทะเลที่มืดครึ้มและมีพายุ  รูปภาพเหล่านี้เกี่ยวข้องกับการเดินทางทั้งหมดเนื่องจากเป็นสิ่งที่ผู้คนต้องการหรือใช้เมื่อ เดินทาง รูปภาพแรกแสดงให้เห็นบุคคลกำลังจัดกระเป๋าเดินทาง ซึ่งเป็นสิ่งที่ผู้คนทำเมื่อ กำลังจะเดินทาง รูปภาพที่ 2 แสดงทางเดินที่ว่างเปล่าในห้างสรรพสินค้า ซึ่งเป็นสถานที่ที่ผู้คน มักจะไปซื้อของสำหรับทริป รูปภาพที่ 3 แสดงกระดาษชำระที่ซ้อนกัน ซึ่งเป็นสิ่งที่ผู้คนมักใช้เมื่อเดินทาง รูปภาพที่ 4 แสดงทะเลที่มืดครึ้มและมีพายุ ซึ่งเป็น สิ่งที่ผู้คนมักพบเจอเมื่อเดินทาง |
 
-Các mẹo tương tự cũng áp dụng cho kết quả sáng tạo từ hình ảnh. Trong ví dụ sau đây về chú thỏ, việc yêu cầu rõ ràng mô hình đưa các khía cạnh trong hình ảnh vào có thể cải thiện kết quả.
+เคล็ดลับเดียวกันนี้ใช้ได้กับเอาต์พุตครีเอทีฟโฆษณาจากรูปภาพ ในตัวอย่างต่อไปนี้ที่มี
+กระต่าย การขอให้โมเดลรวมองค์ประกอบจากรูปภาพอย่างชัดเจนจะช่วย
+ปรับปรุงเอาต์พุตได้
 
-| Câu lệnh | Câu trả lời của mô hình |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Bạn có thể viết cho tôi một bài thơ về hình ảnh này không? | Chú thỏ nhỏ, mềm mại và có màu nâu,  Nhảy qua cánh đồng, lên và xuống.  Tai dài, đuôi nhỏ,  Bạn là sinh vật đáng yêu nhất trong tất cả.  Bạn gặm cỏ, cỏ xanh và ngọt,  Và nhảy đi khi thấy tôi.  Nhưng tôi sẽ luôn là bạn của bạn,  Thỏ con, cho đến tận cùng. |
+| ช่วยแต่งกลอนเกี่ยวกับรูปภาพนี้ให้หน่อยได้ไหม | กระต่ายน้อยตัวนุ่มสีน้ำตาล  กระโดดไปมาในทุ่ง  หูยาว หางสั้น  เจ้าเป็นสัตว์ที่น่ารักที่สุดในบรรดาสัตว์ทั้งหมด  เจ้าแทะหญ้าเขียวหวาน  แล้วกระโดดหนีเมื่อเห็นฉัน  แต่ฉันจะเป็นเพื่อนของเธอเสมอ  กระต่ายน้อย จนกว่าจะถึงวันสุดท้าย |
 
-| **Câu lệnh mới** | **Cải thiện phản hồi** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Bạn có thể viết cho tôi một bài thơ giàu hình ảnh và kịch tính về thông tin về hình ảnh này, đồng thời cho biết vị trí không? | Chú thỏ nhỏ trên bãi cỏ xanh,  Đôi tai dài, thính nhạy.  Chú nhìn thấy gì ngoài kia,  Ở nơi xa xôi mà chú đang ngắm nhìn?  Có phải là màu xanh dương của đại dương,  Lấp lánh dưới ánh nắng?  Hay là những con sóng vỗ bờ và gầm thét,  Một nhịp điệu mà bạn yêu thích?  Thỏ con ơi, hãy nói thật cho ta biết,  Điều gì thu hút con đến vậy?  Có phải làn gió mặn,  Hay tiếng hải âu kêu làm con thích thú?  Có lẽ là do sự rộng lớn của tất cả,  Một thế giới vừa rộng lớn vừa nhỏ bé.  Một nơi mà những giấc mơ có thể bay bổng,  Và những cuộc phiêu lưu có thể nảy mầm.  Thỏ con ơi, ta tự hỏi giấc mơ của con là gì,  Khi con ngồi trên cỏ, thật thanh bình.  Bạn có khao khát khám phá biển sâu,  Hay ở trên đất liền, nơi bạn có thể nhảy?  Dù là gì đi chăng nữa, thỏ con ơi,  Hãy giữ cho ngọn lửa tò mò luôn cháy sáng.  Trong những ước mơ và khát vọng của bạn,  Có một thế giới đang chờ bạn sáng tạo. |
+| ช่วยแต่งกลอนที่บรรยายและน่าทึ่งเกี่ยวกับรูปภาพนี้พร้อมระบุสถานที่ได้ไหม | กระต่ายน้อยบนพื้นหญ้า  หูยาวเฟื้อย  เจ้ามองเห็นอะไร  ที่ไกลสุดสายตา  เป็นสีครามของท้องทะเล  ที่ส่องประกายยามต้องแสงอาทิตย์  หรือคลื่นที่ซัดสาดและคำราม  จังหวะที่คุณชื่นชอบ  กระต่ายน้อยบอกฉันหน่อย  อะไรที่ดึงดูดความสนใจของเธอ  ลมเค็ม  หรือเสียงร้องของนกนางนวลที่ทำให้เพลิน  อาจเป็นเพราะความกว้างใหญ่ของทุกสิ่ง  โลกที่ทั้งใหญ่และเล็ก  ที่ซึ่งความฝันสามารถโลดแล่น  และปลูกฝังการผจญภัยได้  กระต่ายน้อย ฉันสงสัยว่าเธอฝันถึงอะไร  ขณะนั่งอยู่บนหญ้าอย่างเงียบสงบ  เธออยากสำรวจความลึก  หรือจะอยู่บนบกที่เธอสามารถกระโดดได้  ไม่ว่าจะเป็นอะไรก็ตาม เจ้ากระต่ายน้อย  จงรักษาประกายแห่งความสงสัยให้ส่องสว่างต่อไป  เพราะในความฝันและความปรารถนา  มีโลกที่รอให้คุณสร้างสรรค์ |
 
-#### Khắc phục sự cố về phần nào của câu lệnh không hoạt động
+#### การแก้ปัญหาว่าส่วนใดของพรอมต์ที่ล้มเหลว
 
-Có thể khó biết liệu một câu lệnh có thất bại hay không vì mô hình không **hiểu được hình ảnh** ngay từ đầu, hoặc nếu mô hình hiểu được hình ảnh nhưng không thực hiện đúng **các bước suy luận** sau đó.
-Để phân biệt những lý do đó, hãy yêu cầu mô hình mô tả nội dung trong hình ảnh.
+การทราบว่าพรอมต์ล้มเหลวเนื่องจากโมเดล**ไม่เข้าใจรูปภาพ**ตั้งแต่แรก หรือโมเดลเข้าใจรูปภาพแต่ไม่ได้ทำ**ขั้นตอนการให้เหตุผล**ที่ถูกต้องในภายหลังอาจเป็นเรื่องยาก
+หากต้องการแยกแยะเหตุผลเหล่านั้น ให้ขอให้โมเดลอธิบายสิ่งที่อยู่ในรูปภาพ
 
-Trong ví dụ sau, nếu mô hình phản hồi bằng một món ăn nhẹ có vẻ bất ngờ khi kết hợp với trà (ví dụ: bỏng ngô), trước tiên, bạn có thể khắc phục sự cố để xác định xem mô hình có nhận dạng chính xác rằng hình ảnh có chứa trà hay không.
+ในตัวอย่างต่อไปนี้ หากโมเดลตอบกลับด้วยของว่างที่ดูน่าประหลาดใจเมื่อจับคู่กับชา (เช่น ป๊อปคอร์น) คุณสามารถแก้ปัญหาเบื้องต้นเพื่อพิจารณาว่าโมเดลจดจำได้อย่างถูกต้องว่ารูปภาพมีชาหรือไม่
 
-| Câu lệnh | Lời nhắc để khắc phục sự cố |
+| พรอมต์ | พรอมต์สำหรับการแก้ปัญหา |
 | --- | --- |
-| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Mô tả nội dung trong hình ảnh này. |
+| ฉันจะทำของว่างอะไรได้บ้างใน 1 นาทีที่กินกับสิ่งนี้ได้ | อธิบายสิ่งที่อยู่ในรูปภาพนี้ |
 
-Một chiến lược khác là yêu cầu mô hình giải thích lý do. Điều này có thể giúp bạn thu hẹp phạm vi để xác định phần nào trong quá trình suy luận bị lỗi (nếu có).
+อีกกลยุทธ์หนึ่งคือการขอให้โมเดลอธิบายเหตุผล ซึ่งจะช่วยให้คุณ
+จำกัดส่วนของการให้เหตุผลที่ผิดพลาดได้ หากมี
 
-| Câu lệnh | Lời nhắc để khắc phục sự cố |
+| พรอมต์ | พรอมต์สำหรับการแก้ปัญหา |
 | --- | --- |
-| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? Vui lòng giải thích lý do. |
+| ฉันจะทำของว่างอะไรได้บ้างใน 1 นาทีที่กินกับสิ่งนี้ได้ | ฉันจะทำของว่างอะไรได้บ้างใน 1 นาทีที่กินกับสิ่งนี้ได้ โปรดให้เหตุผล |
 
-## Bước tiếp theo
+## ขั้นตอนถัดไป
 
-- Hãy thử viết câu lệnh đa phương thức của riêng bạn bằng [Google AI Studio](http://aistudio.google.com?hl=vi).
-- Để biết thông tin về cách sử dụng Gemini Files API để tải tệp đa phương tiện lên và đưa tệp đó vào câu lệnh, hãy xem hướng dẫn về [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=vi), [Xử lý âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và [Xử lý tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi).
-- Để biết thêm hướng dẫn về cách thiết kế câu lệnh, chẳng hạn như điều chỉnh các thông số lấy mẫu, hãy xem trang [Chiến lược tạo câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
+- ลองเขียนพรอมต์มัลติโมดัลของคุณเองโดยใช้ [Google AI
+  Studio](http://aistudio.google.com?hl=th)
+- ดูข้อมูลเกี่ยวกับการใช้ Gemini Files API สำหรับ
+  การอัปโหลดไฟล์สื่อและการรวมไฟล์เหล่านั้นไว้ในพรอมต์ได้ที่คำแนะนำเกี่ยวกับ
+  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=th), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=th) และ
+  [การประมวลผลเอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th)
+- ดูคำแนะนำเพิ่มเติมเกี่ยวกับการออกแบบพรอมต์ เช่น การปรับพารามิเตอร์การสุ่มตัวอย่าง ได้ที่หน้า[กลยุทธ์พรอมต์](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th)
 
-Gửi ý kiến phản hồi
+ส่งความคิดเห็น
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Cập nhật lần gần đây nhất: 2026-06-10 UTC.
+อัปเดตล่าสุด 2026-06-19 UTC
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-10 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-19 UTC"],[],[]]

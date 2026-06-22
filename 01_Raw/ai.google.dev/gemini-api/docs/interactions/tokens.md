@@ -1,45 +1,54 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/tokens?hl=vi
-fetched_at: 2026-06-15T06:33:26.588733+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/tokens
+fetched_at: 2026-06-22T06:35:35.631261+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+# Understand and count tokens
 
-Gửi ý kiến phản hồi
+Gemini and other generative AI models process input and output at a granularity
+called a *token*.
 
-# Tìm hiểu và đếm mã thông báo
+**For Gemini models, a token is equivalent to about 4 characters.
+100 tokens is equal to about 60-80 English words.**
 
-Gemini và các mô hình AI tạo sinh khác xử lý dữ liệu đầu vào và đầu ra ở mức độ chi tiết được gọi là *mã thông báo*.
+## About tokens
 
-**Đối với các mô hình Gemini, một mã thông báo tương đương với khoảng 4 ký tự.
-100 mã thông báo tương đương với khoảng 60 đến 80 từ tiếng Anh.**
+Tokens can be single characters like `z` or whole words like `cat`. Long words
+are broken up into several tokens. The set of all tokens used by the model is
+called the vocabulary, and the process of splitting text into tokens is called
+*tokenization*.
 
-## Giới thiệu về mã thông báo
+When billing is enabled, the [cost of a call to the Gemini API](https://ai.google.dev/pricing) is
+determined in part by the number of input and output tokens, so knowing how to
+count tokens can be helpful.
 
-Mã thông báo có thể là các ký tự đơn như `z` hoặc toàn bộ từ như `cat`. Các từ dài được chia thành nhiều mã thông báo. Tập hợp tất cả các mã thông báo mà mô hình sử dụng được gọi là từ vựng và quy trình phân tách văn bản thành mã thông báo được gọi là *mã hoá*.
+## Count tokens
 
-Khi bật tính năng thanh toán, [chi phí của một lệnh gọi đến Gemini API](https://ai.google.dev/pricing?hl=vi) sẽ được xác định một phần dựa trên số lượng mã thông báo đầu vào và đầu ra. Vì vậy, việc biết cách đếm mã thông báo có thể hữu ích.
+All input to and output from the Gemini API is tokenized, including text, image
+files, and other non-text modalities.
 
-## Đếm mã thông báo
+You can count tokens in the following ways:
 
-Tất cả dữ liệu đầu vào và đầu ra từ Gemini API đều được mã hoá thành mã thông báo, bao gồm cả văn bản, tệp hình ảnh và các phương thức không phải văn bản khác.
+- **Call `count_tokens` with the input of the request.** Returns the total
+  number of tokens in *the input only*. Make this call before sending input
+  to check the size of your requests.
+- **Use the `usage` on the interaction response.** Returns token
+  counts for input (`total_input_tokens`), output (`total_output_tokens`),
+  thinking (`total_thought_tokens`), cached content
+  (`total_cached_tokens`), tool use (`total_tool_use_tokens`),
+  and total (`total_tokens`).
 
-Bạn có thể đếm mã thông báo theo những cách sau:
-
-- **Gọi `count_tokens` bằng dữ liệu đầu vào của yêu cầu.** Trả về tổng số mã thông báo trong *chỉ đầu vào*. Hãy thực hiện lệnh gọi này trước khi gửi dữ liệu đầu vào để kiểm tra kích thước của các yêu cầu.
-- **Sử dụng `usage` trên câu trả lời tương tác.** Trả về số lượng mã thông báo cho dữ liệu đầu vào (`total_input_tokens`), dữ liệu đầu ra (`total_output_tokens`), suy nghĩ (`total_thought_tokens`), nội dung được lưu vào bộ nhớ đệm (`total_cached_tokens`), việc sử dụng công cụ (`total_tool_use_tokens`) và tổng số (`total_tokens`).
-
-### Đếm mã thông báo văn bản
+### Count text tokens
 
 ### Python
 
@@ -100,9 +109,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### Đếm mã thông báo nhiều lượt
+### Count multi-turn tokens
 
-Đếm số lượng token trong nhật ký trò chuyện bằng cách sử dụng `previous_interaction_id`:
+Count tokens across conversation history using `previous_interaction_id`:
 
 ### Python
 
@@ -148,16 +157,17 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### Đếm mã thông báo đa phương thức
+### Count multimodal tokens
 
-Mọi dữ liệu đầu vào cho Gemini API đều được mã hoá thành mã thông báo, bao gồm cả hình ảnh, video và âm thanh.
-Những điểm chính về việc mã hoá:
+All input to the Gemini API is tokenized, including images, video, and audio.
+Key points about tokenization:
 
-- **Hình ảnh**: Hình ảnh có kích thước ≤384 pixel ở cả hai chiều được tính là 258 mã thông báo. Các hình ảnh lớn hơn được chia thành các ô có kích thước 768x768 pixel, mỗi ô được tính là 258 mã thông báo.
-- **Video**: 263 mã thông báo mỗi giây
-- **Âm thanh**: 32 mã thông báo mỗi giây
+- **Images**: Images ≤384 pixels in both dimensions count as 258 tokens. Larger
+  images are tiled into 768x768 pixel tiles, each counting as 258 tokens.
+- **Video**: 263 tokens per second
+- **Audio**: 32 tokens per second
 
-#### Mã thông báo hình ảnh
+#### Image tokens
 
 ### Python
 
@@ -203,7 +213,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**Ví dụ về dữ liệu nội tuyến:**
+**Inline data example:**
 
 ### Python
 
@@ -228,7 +238,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Mã thông báo video
+#### Video tokens
 
 ### Python
 
@@ -261,7 +271,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Mã thông báo âm thanh
+#### Audio tokens
 
 ### Python
 
@@ -287,9 +297,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### Đếm mã thông báo hướng dẫn hệ thống
+### Count system instruction tokens
 
-Các chỉ dẫn hệ thống được tính là một phần của mã thông báo đầu vào:
+System instructions are counted as part of the input tokens:
 
 ### Python
 
@@ -305,9 +315,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### Đếm mã thông báo công cụ
+### Count tool tokens
 
-Các công cụ (hàm, thực thi mã, Google Tìm kiếm) cũng được tính:
+Tools (functions, code execution, Google Search) are also counted:
 
 ### Python
 
@@ -337,11 +347,12 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## Cửa sổ ngữ cảnh
+## Context window
 
-Mỗi mô hình Gemini đều có số lượng mã thông báo tối đa mà mô hình đó có thể xử lý. Cửa sổ ngữ cảnh xác định giới hạn kết hợp của mã thông báo đầu vào và đầu ra.
+Each Gemini model has a maximum number of tokens it can handle. The context
+window defines the combined limit of input and output tokens.
 
-### Lấy kích thước cửa sổ ngữ cảnh theo phương thức lập trình
+### Get context window size programmatically
 
 ### Python
 
@@ -361,20 +372,20 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-Tìm kích thước cửa sổ ngữ cảnh trên trang [các mô hình](https://ai.google.dev/gemini-api/docs/models?hl=vi).
+Find context window sizes on the [models](https://ai.google.dev/gemini-api/docs/models) page.
 
-## Bước tiếp theo
+## What's next
 
-- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/interactions/text-generation?hl=vi): Các kiến thức cơ bản về việc tạo văn bản
-- [Lưu vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/interactions/caching?hl=vi): Giảm chi phí bằng cách lưu vào bộ nhớ đệm
-- [Giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi): Tìm hiểu về chi phí
+- [Text generation](https://ai.google.dev/gemini-api/docs/interactions/text-generation): Generation basics
+- [Caching](https://ai.google.dev/gemini-api/docs/interactions/caching): Reduce costs with caching
+- [Pricing](https://ai.google.dev/gemini-api/docs/pricing): Understand costs
 
-Gửi ý kiến phản hồi
+Send feedback
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Cập nhật lần gần đây nhất: 2026-06-01 UTC.
+Last updated 2026-06-18 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Need to tell us more?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

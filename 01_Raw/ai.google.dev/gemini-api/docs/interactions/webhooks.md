@@ -1,52 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/webhooks?hl=pl
-fetched_at: 2026-06-15T06:23:03.489132+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/webhooks?hl=vi
+fetched_at: 2026-06-22T06:24:55.197006+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl) jest teraz dostępna w wersji testowej z funkcjami planowania współpracy, wizualizacji, obsługi MCP i nie tylko.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+# Webhooks
 
-Prześlij opinię
+Webhooks allow the Gemini API to push real-time notifications to your server
+when asynchronous or Long-Running Operations (LROs) complete. This replaces the
+need to poll the API for status updates, reducing latency and overhead.
 
-# Webhooki
+Webhooks are available for operations like [Batch](https://ai.google.dev/gemini-api/docs/batch-api) jobs,
+[Interactions](https://ai.google.dev/gemini-api/docs/interactions) and [video generation](https://ai.google.dev/gemini-api/docs/video).
 
-Webhooki umożliwiają interfejsowi Gemini API wysyłanie powiadomień w czasie rzeczywistym na Twój serwer po zakończeniu operacji asynchronicznych lub długotrwałych. Eliminuje to konieczność sondowania interfejsu API w celu uzyskania aktualizacji stanu, co zmniejsza opóźnienia i obciążenie.
+## How it works
 
-Webhooki są dostępne w przypadku operacji takich jak [zadania wsadowe](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl),
-[interakcje](https://ai.google.dev/gemini-api/docs/interactions?hl=pl) i [generowanie filmów](https://ai.google.dev/gemini-api/docs/video?hl=pl).
+Instead of polling `GET /operations` repeatedly to check if a job is finished,
+you can configure Gemini API Webhooks to send an HTTP POST request to your
+listener URL immediately upon an event trigger.
 
-## Jak to działa
+The Gemini API supports two ways to configure webhooks:
 
-Zamiast wielokrotnie sondować `GET /operations`, aby sprawdzić, czy zadanie zostało zakończone, możesz skonfigurować webhooki Gemini API tak, aby natychmiast po wywołaniu zdarzenia wysyłały żądanie HTTP POST na adres URL odbiornika.
+- [**Static webhooks**](#static-webhooks): Project-level endpoints configured
+  with the Gemini [WebhookService API](https://ai.google.dev/api). Good for global integrations (e.g., notifying Slack, syncing a
+  database, etc.).
+- [**Dynamic webhooks**](#dynamic-webhooks): Request-level overrides passing a
+  webhook URL in the configuration payload of a specific jobs call. Ideal for
+  routing specific jobs to dedicated endpoints.
 
-Interfejs Gemini API obsługuje 2 sposoby konfigurowania webhooków:
+## Static webhooks
 
-- [**Webhooki statyczne**](#static-webhooks): punkty końcowe na poziomie projektu skonfigurowane
-  za pomocą interfejsu Gemini [WebhookService API](https://ai.google.dev/api?hl=pl). Dobrze sprawdzają się w przypadku integracji globalnych (np. powiadamiania Slacka, synchronizowania bazy danych itp.).
-- [**Webhooki dynamiczne**](#dynamic-webhooks): zastąpienia na poziomie żądania, które przekazują adres URL
-  webhooka w ładunku konfiguracji konkretnego wywołania zadania. Idealne do kierowania konkretnych zadań do dedykowanych punktów końcowych.
+Static webhooks are registered for a whole [project](https://ai.google.dev/gemini-api/docs/api-key#google-cloud-projects) and trigger for any matching
+event.
 
-## Webhooki statyczne
+### Create a webhook
 
-Webhooki statyczne są rejestrowane dla całego [projektu](https://ai.google.dev/gemini-api/docs/api-key?hl=pl#google-cloud-projects) i są wywoływane w przypadku każdego pasującego
-zdarzenia.
+You can create endpoints using the SDK or REST API.
 
-### Tworzenie webhooka
-
-Punkty końcowe możesz tworzyć za pomocą pakietu SDK lub interfejsu API REST.
-
-**WAŻNE**: podczas tworzenia webhooka interfejs API zwraca **obiekt tajny podpisywania**
-**tylko raz**. Aby później weryfikować podpisy, musisz bezpiecznie przechowywać ten obiekt (np. w zmiennych środowiskowych). Jeśli utracisz obiekt tajny podpisywania, musisz go
-[zmienić](#rotate-signing-secret).
+**IMPORTANT**: When creating a webhook, the API returns a **signing secret**
+**only once**. You must store this securely (e.g. in your environment variables)
+to verify signatures later. If you lose the signing secret, you'll have to
+[rotate](#rotate-signing-secret) it.
 
 ### Python
 
@@ -102,12 +105,12 @@ curl -X POST \
   }'
 ```
 
-Więcej informacji o konfigurowaniu serwera do odbierania danych znajdziesz w sekcji
-[Obsługa żądań webhooków](#handle-webhook-requests).
+For details on setting up your server to receive data, see the
+[Handle webhook requests](#handle-webhook-requests) section.
 
-### Pobieranie webhooka
+### Get a webhook
 
-Pobierz szczegóły konkretnego webhooka według jego nazwy zasobu.
+Retrieve details about a specific webhook by its resource name.
 
 ### Python
 
@@ -149,9 +152,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Wyświetlanie listy webhooków
+### List webhooks
 
-Wyświetl listę wszystkich skonfigurowanych webhooków w bieżącym projekcie z opcjonalną paginacją.
+List all configured webhooks for the current project, with optional pagination.
 
 ### Python
 
@@ -192,9 +195,10 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Aktualizowanie webhooka
+### Update a webhook
 
-Zaktualizuj właściwości istniejącego webhooka, takie jak nazwa wyświetlana, docelowy identyfikator URI lub subskrybowane zdarzenia.
+Update an existing webhook's properties such as the display name, target URI, or
+subscribed events.
 
 ### Python
 
@@ -244,9 +248,10 @@ curl -X PATCH \
   }'
 ```
 
-### Usuwanie webhooka
+### Delete a webhook
 
-Usuń punkt końcowy webhooka z projektu. Spowoduje to zatrzymanie dostarczania przyszłych zdarzeń do tego punktu końcowego.
+Remove a webhook endpoint from the project. This stops future event deliveries
+to that endpoint.
 
 ### Python
 
@@ -284,12 +289,13 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Rotacja obiektu tajnego podpisywania
+### Rotate a signing secret
 
-Wykonaj rotację obiektu tajnego podpisywania dla webhooka. Możesz skonfigurować, czy wcześniej aktywne obiekty tajne mają zostać unieważnione natychmiast, czy po 24-godzinnym okresie przejściowym.
+Rotate the signing secret for a webhook. You can configure whether previously
+active secrets are revoked immediately or after a 24-hour grace period.
 
-**WAŻNE**: nowy obiekt tajny podpisywania jest zwracany **tylko raz** w momencie rotacji
-czasu. Zanim zaktualizujesz logikę weryfikacji, bezpiecznie go przechowuj.
+**IMPORTANT**: The new signing secret is returned **only once** at rotation
+time. Store it securely before updating your verification logic.
 
 ### Python
 
@@ -342,14 +348,18 @@ curl -X POST \
   }'
 ```
 
-### Obsługa żądań webhooków na serwerze
+### Handle webhook requests on a server
 
-Gdy wystąpi zdarzenie, które subskrybujesz, Twój adres URL webhooka otrzyma żądanie HTTP POST. Aby uniknąć ponowienia, punkt końcowy musi odpowiedzieć kodem stanu 2xx w ciągu kilku sekund. Aby zapewnić dostarczenie, interfejs Gemini API automatycznie ponawia nieudane żądania przez 24 godziny, używając algorytmu wzrastający czas do ponowienia.
+When an event happens that you're subscribed to, your webhook URL will receive
+an HTTP POST request. Your endpoint must respond with a 2xx status
+code within a few seconds to avoid a retry. To ensure delivery, the Gemini API
+automatically retries failed requests for 24 hours using exponential backoff.
 
-Gemini ściśle przestrzega specyfikacji [standardowych webhooków](https://github.com/standard-webhooks/standard-webhooks) w przypadku
-nagłówków bezpieczeństwa. Zweryfikuj ładunek na serwerze za pomocą podpisów nagłówków podpisanych i przechowywanego statycznego obiektu tajnego podpisywania. Informacje o ładunku znajdziesz w sekcji dotyczącej [koperty webhooka](#webhook-envelope).
+Gemini strictly follows the [Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks) specification for
+security headers. Verify the payload on your server using the signed header
+signatures and your stored static signing secret. See the [Webhook envelope](#webhook-envelope) section for the payload information.
 
-Oto przykład użycia Flask do odbiornika HTTP:
+Here is an example using Flask for the HTTP listener:
 
 ### Python
 
@@ -442,14 +452,16 @@ app.listen(8000, () => {
 });
 ```
 
-## Webhooki dynamiczne
+## Dynamic webhooks
 
-Webhooki dynamiczne umożliwiają powiązanie punktu końcowego webhooka z **konkretną konfiguracją
-żądania**, co jest idealne w przypadku kolejek orkiestracji agentów. Webhooki dynamiczne używają asymetrycznych podpisów JWKS klucza publicznego zamiast symetrycznych obiektów tajnych.
+Dynamic webhooks allow you to bind a webhook endpoint to a **specific request
+configuration**, ideal for agent-orchestration queues. Dynamic webhooks leverage
+asymmetric public-key JWKS signatures instead of symmetric secrets.
 
-### Przesyłanie żądania dynamicznego
+### Submit a dynamic request
 
-Podczas wywoływania zadania asynchronicznego (np. tworzenia zadania wsadowego) dodaj `webhook_config`.
+Add a `webhook_config` when triggering an asynchronous job (e.g., creating a
+Batch).
 
 ### Python
 
@@ -519,10 +531,11 @@ curl -X POST \
   }'
 ```
 
-### Weryfikowanie podpisów dynamicznych (JWKS)
+### Verify dynamic signatures (JWKS)
 
-Żądania webhooków dynamicznych emitują podpis tokena sieciowego JSON (JWT). Odbiornik
-musi wyodrębnić podpis i zweryfikować go za pomocą [punktów końcowych certyfikatu publicznego Google](https://www.googleapis.com/oauth2/v3/certs).
+Dynamic webhook requests emit a JSON Web Token (JWT) signature. Your listener
+must extract the signature and verify it using [Google's public certificate
+endpoints](https://www.googleapis.com/oauth2/v3/certs).
 
 ### Python
 
@@ -623,11 +636,14 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 });
 ```
 
-## Koperta webhooka
+## Webhook envelope
 
-Aby uniknąć przeciążenia przepustowości, webhooki Gemini używają modelu **cienki ładunek** do dostarczania danych. Dostawy wysyłają migawkę zawierającą szczegóły stanu i wskaźniki wyników, a nie sam plik wyjściowy.
+To avoid bandwidth congestion, Gemini webhooks use a **thin payload** model to
+deliver data.
+deliveries send a snapshot containing status details and pointers to results,
+rather than the raw output file itself.
 
-Oto przykład formatu ładunku:
+Here is an example payload format:
 
 ```
 {
@@ -641,42 +657,46 @@ Oto przykład formatu ładunku:
 }
 ```
 
-## Informacje o katalogu zdarzeń
+## Event catalog reference
 
-W przypadku obsługiwanych zadań wywoływane są te zdarzenia:
+The following events are triggered for supporting jobs:
 
-| Typ zdarzenia | Wyzwalacz | Element ładunku (`data`) |
+| Event type | Trigger | Payload item (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | Przetwarzanie zostało zakończone. | `id`, `output_file_uri` |
-| `batch.cancelled` | Użytkownik anulował żądanie | `id` |
-| `batch.expired` | Zadanie wsadowe nie zostało przetworzone (zakończone) w ciągu 24 godzin | `id` |
-| `batch.failed` | Nie udało się wykonać zadania wsadowego (błąd systemu lub weryfikacji). | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | Wywołanie funkcji, użytkownik musi coś zrobić | `id` |
-| `interaction.completed` | Operacja LRO w interfejsie Interactions API zakończyła się powodzeniem | `id` |
-| `interaction.failed` | Nie udało się wykonać operacji LRO w interfejsie Interactions API (błąd systemu lub weryfikacji). | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | Operacja LRO w interfejsie Interactions API została anulowana | `id` |
-| `video.generated` | Operacja LRO generowania filmu została zakończona. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | Processing finished successfully. | `id`, `output_file_uri` |
+| `batch.cancelled` | User cancelled request | `id` |
+| `batch.expired` | Batch has not been processed (finished) in 24h timeframe | `id` |
+| `batch.failed` | Batch job failed (system or validation error). | `id`, `error_code`, `error_message` |
+| `interaction.requires_action` | Function call, user needs to do something | `id` |
+| `interaction.completed` | LRO in interactions API succeeded | `id` |
+| `interaction.failed` | LRO in interactions API failed (system or validation error). | `id`, `error_code`, `error_message` |
+| `interaction.cancelled` | LRO in interactions API cancelled | `id` |
+| `video.generated` | Video generation LRO completed. | `id`, `output_file_uri`, `file_name` |
 
-## Sprawdzone metody
+## Best practices
 
-Aby zapewnić niezawodne i skalowalne działanie:
+To ensure reliable, scalable operation:
 
-- **Ścisłe sprawdzanie ochrony przed powtórzeniem**: wszystkie żądania zawierają `webhook-timestamp`
-  nagłówek. Zawsze sprawdzaj tę sygnaturę czasową w warstwie konfiguracji serwera, aby odrzucać ładunki starsze niż **5 minut** (aby ograniczyć ataki typu replay).
-- **Przetwarzanie asynchroniczne**: natychmiast po wykryciu prawidłowego
-  podpisu odpowiedz `2xx OK` i wewnętrznie umieść operacje analizowania w kolejce. Długie czasy wstrzymania odbiornika spowodują uruchomienie cyklu ponawiania dostarczania.
-- **Obsługa deduplikacji**: standardowe webhooki dostarczają dane co najmniej raz. Aby obsługiwać potencjalne duplikaty w przepływach o większym natężeniu ruchu, użyj spójnego nagłówka `webhook-id`.
+- **Strict replay protection check**: All requests carry a `webhook-timestamp`
+  header. Always validate this timestamp on your server configuration layer to
+  reject payloads older than **5 minutes** (to mitigate replay attacks).
+- **Process asynchronously**: Respond with `2xx OK` immediately upon valid
+  signature detection, and queue parsing operations internally. Prolonged listener
+  hold times will trigger a delivery retry cycle.
+- **Deduplication handling**: Standard webhooks deliver "At-least-once". Use the
+  consistent `webhook-id` header to handle potential duplicates in higher
+  congestion flows.
 
-## Co dalej?
+## What's next?
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=pl): używaj webhooków do automatyzowania punktów końcowych o dużej liczbie żądań.
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch): Utilize webhooks to automate high volume endpoints.
 
-Prześlij opinię
+Send feedback
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Ostatnia aktualizacja: 2026-05-28 UTC.
+Last updated 2026-06-18 UTC.
 
-Chcesz przekazać coś jeszcze?
+Need to tell us more?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-28 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

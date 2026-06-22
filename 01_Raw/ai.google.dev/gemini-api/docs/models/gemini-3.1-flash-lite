@@ -1,45 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pt-BR
-fetched_at: 2026-06-15T06:25:54.220280+00:00
-title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=fr
+fetched_at: 2026-06-22T06:29:56.146173+00:00
+title: "Gemini\u00a03.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+La [recherche approfondie Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=fr) est désormais disponible en preview avec la planification collaborative, la visualisation, la compatibilité MCP et plus encore.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Envie comentários
+Envoyer des commentaires
 
-# Gemini 3.1 Flash-Lite
+# Gemini 3.1 Flash-Lite
 
-O Gemini 3.1 Flash-Lite é um modelo multimodal de baixa latência e econômico
-otimizado para tarefas leves e de alta frequência. O modelo aceita entradas de texto, imagem, vídeo, áudio e PDF e foi projetado para fluxos de trabalho agênticos de alto volume, extração de dados simples e aplicativos em que a latência e o custo da API são as principais restrições.
+Gemini 3.1 Flash-Lite est un modèle multimodal à faible latence et économique, optimisé pour les tâches légères à haute fréquence. Le modèle accepte les entrées de type texte, image, vidéo, audio et PDF. Il est conçu pour les workflows agentiques à volume élevé, l'extraction de données simples et les applications où la latence et le coût de l'API sont les principales contraintes.
 
-[Testar no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=pt-br)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=fr)
 
 ## gemini-3.1-flash-lite
 
-| Propriedade | Descrição |
+| Propriété | Description |
 | --- | --- |
-| Código do modelo id\_card | `gemini-3.1-flash-lite` |
-| saveTipos de dados aceitos | **Entradas** (link em inglês)  Texto, imagem, vídeo, áudio e PDF  **Saída**  Texto |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de tokens de entrada**  1.048.576  **Limite de token de saída**  65.536 |
-| handymanRecursos | **Geração de áudio**  incompatível  **API Batch**  Compatível  **Armazenamento em cache**  Compatível  **Execução de código**  Compatível  **Uso do computador**  incompatível  **Pesquisa de arquivos**  Compatível  **Inferência flexível**  Compatível  **Chamadas de função**  Compatível  **Embasamento com o Google Maps**  Compatível  **Geração de imagens**  incompatível  **API Live**  incompatível  **Inferência de prioridade**  Compatível  **Embasamento da pesquisa**  Compatível  **Saídas estruturadas**  Compatível  **Raciocínio**  Compatível  **Contexto do URL**  Compatível |
-| Versões do 123 | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - `Stable: gemini-3.1-flash-lite` |
-| calendar\_monthÚltima atualização | Maio de 2026 |
-| cognition\_2Limite de conhecimento | Janeiro de 2025 |
+| Code du modèle id\_card | `gemini-3.1-flash-lite` |
+| Types de données acceptés pour save | **Entrées**  Texte, image, vidéo, audio et PDF  **Résultat**  Texte |
+| token\_autoLimites de jetons[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  1 048 576  **Limite de jetons de sortie**  65 536 |
+| handyman Fonctionnalités | **Génération audio**  Not supported  **API Batch**  Compatible  **Mise en cache**  Compatible  **Exécution de code**  Compatible  **Utilisation de l'ordinateur**  Not supported  **Recherche de fichiers**  Compatible  **Inférence Flex**  Compatible  **Appel de fonction**  Compatible  **Ancrage avec Google Maps**  Compatible  **Génération d'images**  Not supported  **API Live**  Not supported  **Inférence prioritaire**  Compatible  **Ancrage de recherche**  Compatible  **Sorties structurées**  Compatible  **Raisonnement**  Compatible  **Contexte de l'URL**  Compatible |
+| Versions 123 | Pour en savoir plus, consultez les [schémas de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - `Stable: gemini-3.1-flash-lite` |
+| calendar\_monthDernière mise à jour | Mai 2026 |
+| cognition\_2Date limite des connaissances | Janvier 2025 |
 
-## Guia para desenvolvedores
+## Guide du développeur
 
-O Gemini 3.1 Flash-Lite é ideal para lidar com tarefas simples em grande escala. Confira alguns casos de uso mais adequados para o Gemini 3.1 Flash-Lite:
+Gemini 3.1 Flash-Lite est idéal pour gérer des tâches simples à grande échelle. Voici quelques cas d'utilisation les mieux adaptés à Gemini 3.1 Flash-Lite :
 
-- **Tradução**: tradução rápida, barata e de alto volume, como o processamento de mensagens de chat, avaliações e tíquetes de suporte em grande escala. Você pode usar instruções do sistema para restringir a saída apenas ao texto traduzido, sem comentários extras:
+- **Traduction** : traduction rapide, économique et à grand volume, comme le traitement à grande échelle des messages de chat, des avis et des demandes d'assistance. Vous pouvez utiliser des instructions système pour limiter le résultat au texte traduit, sans aucun commentaire supplémentaire :
 
   ```
   from google import genai
@@ -57,9 +56,7 @@ O Gemini 3.1 Flash-Lite é ideal para lidar com tarefas simples em grande escala
 
   print(response.text)
   ```
-- **Transcrição**: processe gravações, notas de voz ou qualquer conteúdo de áudio
-  em que você precise de uma transcrição de texto sem iniciar um pipeline
-  separado de conversão de voz em texto. Compatível com entradas multimodais, para que você possa transmitir arquivos de áudio diretamente para transcrição:
+- **Transcription** : traitez des enregistrements, des notes vocales ou tout contenu audio pour lequel vous avez besoin d'une transcription textuelle sans avoir à créer un pipeline de reconnaissance vocale distinct. Il est compatible avec les entrées multimodales. Vous pouvez donc transmettre directement des fichiers audio pour la transcription :
 
   ```
   from google import genai
@@ -79,7 +76,7 @@ O Gemini 3.1 Flash-Lite é ideal para lidar com tarefas simples em grande escala
 
   print(response.text)
   ```
-- **Tarefas de agente e extração de dados leves**: extração de entidades, classificação e pipelines de processamento de dados leves com saída JSON estruturada. Por exemplo, extrair dados estruturados de uma avaliação do cliente de e-commerce:
+- **Tâches agentiques légères et extraction de données** : extraction d'entités, classification et pipelines de traitement de données légers compatibles avec une sortie JSON structurée. Par exemple, extraire des données structurées d'un avis client sur un site d'e-commerce :
 
   ```
   from google import genai
@@ -107,7 +104,7 @@ O Gemini 3.1 Flash-Lite é ideal para lidar com tarefas simples em grande escala
 
   print(response.text)
   ```
-- **Processamento e resumo de documentos**: analise PDFs e retorne resumos concisos, como para criar um pipeline de processamento de documentos ou triar rapidamente arquivos recebidos:
+- **Traitement et résumé de documents** : analysez des PDF et renvoyez des résumés concis, par exemple pour créer un pipeline de traitement de documents ou trier rapidement les fichiers entrants :
 
   ```
   from google import genai
@@ -134,7 +131,7 @@ O Gemini 3.1 Flash-Lite é ideal para lidar com tarefas simples em grande escala
 
   print(response.text)
   ```
-- **Roteamento de modelo**: use um modelo de baixa latência e baixo custo como um classificador que roteia consultas para o modelo apropriado com base na complexidade da tarefa. Esse é um padrão real em produção. A [CLI do Gemini](https://geminicli.com/docs/core/#model-fallback) de código aberto usa o Flash-Lite para classificar a complexidade das tarefas e encaminhar para o Flash ou o Pro de acordo com a necessidade.
+- **Routage de modèles** : utilisez un modèle à faible latence et à faible coût comme classificateur qui route les requêtes vers le modèle approprié en fonction de la complexité de la tâche. Il s'agit d'un véritable modèle de production : la [CLI Gemini](https://geminicli.com/docs/core/#model-fallback) Open Source utilise Flash-Lite pour classer la complexité des tâches et les acheminer vers Flash ou Pro en conséquence.
 
   ```
   from google import genai
@@ -187,7 +184,7 @@ O Gemini 3.1 Flash-Lite é ideal para lidar com tarefas simples em grande escala
 
   print(response.text)
   ```
-- **Raciocínio**: para melhorar a acurácia de tarefas que se beneficiam do raciocínio detalhado, configure o raciocínio para que o modelo gaste mais computação no raciocínio interno antes de produzir a saída final:
+- **Raisonnement** : pour améliorer la justesse des tâches qui bénéficient d'un raisonnement étape par étape, configurez le raisonnement afin que le modèle consacre davantage de ressources de calcul au raisonnement interne avant de produire le résultat final :
 
   ```
   from google import genai
@@ -206,12 +203,12 @@ O Gemini 3.1 Flash-Lite é ideal para lidar com tarefas simples em grande escala
   print(response.text)
   ```
 
-Envie comentários
+Envoyer des commentaires
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Última atualização 2026-05-27 UTC.
+Dernière mise à jour le 2026/05/27 (UTC).
 
-Quer enviar seu feedback?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-27 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/05/27 (UTC)."],[],[]]

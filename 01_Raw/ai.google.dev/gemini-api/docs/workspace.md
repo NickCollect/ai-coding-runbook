@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=de
-fetched_at: 2026-06-15T06:30:58.739477+00:00
-title: "Mit Ihrem Workspace-Konto auf Google AI Studio zugreifen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=ko
+fetched_at: 2026-06-22T06:33:24.591412+00:00
+title: "Workspace \uacc4\uc815\uc73c\ub85c Google AI \uc2a4\ud29c\ub514\uc624\uc5d0 \uc561\uc138\uc2a4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de) ist jetzt in der Vorabversion mit Funktionen wie gemeinsamer Planung, Visualisierung und MCP-Unterstützung verfügbar.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Feedback geben
+의견 보내기
 
-# Mit Ihrem Workspace-Konto auf Google AI Studio zugreifen
+# Workspace 계정으로 Google AI 스튜디오에 액세스
 
-Alle [Google Workspace](https://workspace.google.com?hl=de)-Nutzer haben standardmäßig Zugriff auf AI Studio. Wenn Sie Workspace-Nutzer sind und mit AI Studio beginnen möchten, lesen Sie die [AI Studio-Kurzanleitung](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=de).
+모든 [Google Workspace](https://workspace.google.com?hl=ko) 사용자는 기본적으로 AI Studio에 액세스할 수 있습니다. Workspace 사용자이고 AI Studio를 시작하려면 [AI Studio 빠른 시작](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ko)을 확인하세요.
 
-## Fehlerbehebung
+## 문제 해결
 
-Wenn der Zugriff auf AI Studio für Ihr Google Workspace-Konto deaktiviert ist, wird möglicherweise eine Fehlermeldung wie die folgende angezeigt:
+Google Workspace 계정에서 AI Studio 액세스가 사용 중지된 경우 다음과 같은 오류가 표시될 수 있습니다.
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-Wenn Sie der Meinung sind, dass Sie Zugriff auf AI Studio haben sollten, wenden Sie sich an Ihren Workspace-Administrator.
+AI Studio에 액세스할 수 있어야 한다고 생각되면 Workspace 관리자에게 문의하세요.
 
-## AI Studio für Workspace-Nutzer aktivieren
+## Workspace 사용자를 위한 AI Studio 사용 설정
 
-Als Google Workspace-Administrator können Sie festlegen, wer AI Studio verwenden darf:
+Google Workspace 관리자는 AI Studio를 사용할 수 있는 사용자를 관리할 수 있습니다.
 
-- AI Studio ist standardmäßig für alle Versionen aktiviert.
-- Sie können AI Studio für Nutzergruppen in oder innerhalb von Organisationseinheiten deaktivieren oder aktivieren.
-- Google Workspace for Education-Versionen: Nutzer unter 18 Jahren können AI Studio nicht mit ihren Google Workspace for Education-Konten verwenden. Das gilt auch dann, wenn die AI Studio-Einstellung aktiviert ist. Weitere Informationen finden Sie im Hilfeartikel [Altersabhängige Zugriffseinstellungen für Google-Dienste festlegen](https://support.google.com/a/answer/10651918?hl=de).
+- AI Studio는 모든 버전에서 기본적으로 사용 설정되어 있습니다.
+- 조직 단위 전체 또는 조직 단위 내에서 사용자 집합에 대해 AI Studio를 사용 중지하거나 사용 설정할 수 있습니다.
+- Google Workspace for Education 버전: 만 18세 미만의 사용자는 Google Workspace for Education 계정으로 AI Studio를 사용할 수 없습니다. AI Studio 설정이 사용 설정된 경우에도 마찬가지입니다. 자세한 내용은 [연령별로 Google 서비스에 대한 액세스 권한 관리하기](https://support.google.com/a/answer/10651918?hl=ko)를 참고하세요.
 
-Informationen zum Aktivieren oder Deaktivieren von AI Studio für Nutzer in Ihrer Organisation finden Sie unter [Google AI Studio für Nutzer aktivieren oder deaktivieren](https://support.google.com/a/answer/15004095?hl=de).
+조직의 사용자에 대해 AI Studio를 사용 설정 또는 사용 중지하려면 [사용자별로 Google AI Studio 사용 설정 또는 사용 중지하기](https://support.google.com/a/answer/15004095?hl=ko)를 참고하세요.
 
-Feedback geben
+의견 보내기
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Zuletzt aktualisiert: 2026-04-29 (UTC).
+최종 업데이트: 2026-04-29(UTC)
 
-Haben Sie Feedback für uns?
+의견을 전달하고 싶나요?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]

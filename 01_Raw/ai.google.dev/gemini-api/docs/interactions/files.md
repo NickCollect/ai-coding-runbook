@@ -1,39 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions/files?hl=it
-fetched_at: 2026-06-15T06:29:57.637508+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions/files
+fetched_at: 2026-06-22T06:36:13.171958+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+- [Home](https://ai.google.dev/)
+- [Gemini API](https://ai.google.dev/gemini-api)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview)
+- [Docs](https://ai.google.dev/gemini-api/docs)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Send feedback
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions/interactions-overview?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+# Files API
 
-Invia feedback
+Gemini can handle various types of input data, including text, images, and
+audio, at the same time.
 
-# API Files
+This guide shows you how to work with media files using the Files API. The
+basic operations are the same for audio files, images, videos, documents, and
+other supported file types.
 
-Gemini può gestire contemporaneamente vari tipi di dati di input, tra cui testo, immagini e audio.
+For file prompting guidance, check out the [File prompt guide](https://ai.google.dev/gemini-api/docs/interactions/files#prompt-guide) section.
 
-Questa guida mostra come utilizzare i file multimediali utilizzando l'API Files. Le
-operazioni di base sono le stesse per file audio, immagini, video, documenti e
-altri tipi di file supportati.
+## Upload a file
 
-Per indicazioni sui prompt dei file, consulta la sezione [Guida ai prompt dei file](https://ai.google.dev/gemini-api/docs/interactions/files?hl=it#prompt-guide).
+You can use the Files API to upload a media file. Always use the Files API when
+the total request size (including the files, text prompt, system instructions,
+etc.) is larger than 100 MB. For PDF files, the limit is 50 MB.
 
-## Carica un file
-
-Puoi utilizzare l'API Files per caricare un file multimediale. Utilizza sempre l'API Files quando
-la dimensione totale della richiesta (inclusi i file, il prompt di testo, le istruzioni di sistema,
-ecc.) è superiore a 100 MB. Per i file PDF, il limite è 50 MB.
-
-Il seguente codice carica un file e lo utilizza in una chiamata a
+The following code uploads a file and then uses the file in a call to
 `interactions.create`.
 
 ### Python
@@ -168,9 +165,10 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## Recuperare i metadati di un file
+## Get metadata for a file
 
-Puoi verificare che l'API abbia archiviato correttamente il file caricato e recuperare i relativi metadati chiamando `files.get`.
+You can verify that the API successfully stored the uploaded file and get its
+metadata by calling `files.get`.
 
 ### Python
 
@@ -238,9 +236,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Elencare i file caricati
+## List uploaded files
 
-Il seguente codice recupera un elenco di tutti i file caricati:
+The following code gets a list of all the files uploaded:
 
 ### Python
 
@@ -293,9 +291,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Eliminare i file caricati
+## Delete uploaded files
 
-I file vengono eliminati automaticamente dopo 48 ore. Puoi anche eliminare manualmente un file caricato:
+Files are automatically deleted after 48 hours. You can also manually delete an
+uploaded file:
 
 ### Python
 
@@ -347,223 +346,241 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/$name \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Informazioni sull'utilizzo
+## Usage info
 
-Puoi utilizzare l'API Files per caricare e interagire con i file multimediali. L'API Files
-consente di archiviare fino a 20 GB di file per progetto, con una dimensione massima
-di 2 GB per file. I file vengono archiviati per 48 ore. Durante questo periodo, puoi
-utilizzare l'API per ottenere i metadati dei file, ma non puoi scaricarli.
-L'API Files è disponibile senza costi in tutte le regioni in cui è disponibile l'API Gemini.
+You can use the Files API to upload and interact with media files. The Files API
+lets you store up to 20 GB of files per project, with a per-file maximum
+size of 2 GB. Files are stored for 48 hours. During that time, you can
+use the API to get metadata about the files, but you can't download the files.
+The Files API is available at no cost in all regions where the Gemini API is
+available.
 
-## Strategie di richiesta di file
+## File prompting strategies
 
-Questa sezione fornisce indicazioni e best practice per l'utilizzo di file multimediali con
-prompt per l'API Gemini.
+This section provides guidance and best practices for using media files with
+prompts for the Gemini API.
 
-La possibilità di utilizzare vari tipi di dati nei prompt offre maggiore
-flessibilità in termini di attività che puoi svolgere con l'API Gemini. Ad
-esempio, puoi inviare al modello la foto di un pasto delizioso e chiedergli di scrivere
-un breve post del blog sul pasto.
+Being able to use various types of data in your prompts gives you more
+flexibility in terms of what tasks you can tackle with the Gemini API. For
+example, you can send the model a photo of a delicious meal and ask it to write
+a short blog about the meal.
 
 |  |  |
 | --- | --- |
-| **Prompt** | **Risposta** |
-| Scrivi un post del blog breve e coinvolgente basato su questa immagine. Dovrebbe includere una descrizione del pasto nella foto e parlare del mio percorso di preparazione dei pasti.   Cookie | Preparare i pasti in anticipo è un ottimo modo per risparmiare tempo e denaro e può anche aiutarti a mangiare in modo più sano. Questo pasto è un ottimo esempio di piatto sano e delizioso che può essere preparato in anticipo.  Questo pasto include riso integrale, verdure arrosto e pollo teriyaki. Il riso integrale è un carboidrato sano e complesso che ti darà energia costante. Le verdure arrosto sono un ottimo modo per assumere la dose giornaliera di vitamine e minerali, mentre il pollo teriyaki è un'opzione deliziosa e ricca di proteine.  Anche questo pasto è semplice da preparare. Cuoci il riso integrale, arrostisci le verdure e prepara il pollo teriyaki. Una volta cotto tutto, dividi il cibo in contenitori per la preparazione dei pasti e conservali in frigorifero. Così potrai prendere un contenitore e andare via nelle mattine più frenetiche.  Se stai cercando un pasto sano e delizioso che possa essere preparato in anticipo, questa è un'ottima opzione. È ricco di nutrienti e sapore e ti farà sentire sazio e soddisfatto.  Buona preparazione di pasti sani e deliziosi. |
+| **Prompt** | **Response** |
+| Write a short, engaging blog post based on this picture. It should include a description of the meal in the photo and talk about my journey meal prepping.   Cookies | Meal prepping is a great way to save time and money, and it can also help you to eat healthier. This meal is a great example of a healthy and delicious meal that can be prepped ahead of time.  This meal features brown rice, roasted vegetables, and chicken teriyaki. The brown rice is a healthy and complex carbohydrate that will give you sustained energy. The roasted vegetables are a great way to get your daily dose of vitamins and minerals, and the chicken teriyaki is a delicious and protein-rich option.  This meal is also straightforward to prepare. Simply cook the brown rice, roast the vegetables, and cook the chicken teriyaki. Once everything is cooked, divide it into meal prep containers and store them in the refrigerator. You can then grab a container and go on busy mornings!  If you're looking for a healthy and delicious meal that can be prepped ahead of time, this meal is a great option. It's packed with nutrients and flavor, and it's sure to keep you feeling full and satisfied.  Here's to healthy and delicious meal prepping! |
 
-Se hai difficoltà a ottenere l'output desiderato dai prompt che utilizzano
-file multimediali, esistono alcune strategie che possono aiutarti a ottenere i risultati
-che desideri. Le sezioni seguenti forniscono approcci di progettazione e suggerimenti per la risoluzione dei problemi
-per migliorare i prompt che utilizzano input multimodali.
+If you are having trouble getting the output you want from prompts that use
+media files, there are some strategies that can help you get the results you
+want. The following sections provide design approaches and troubleshooting
+tips for improving prompts that use multimodal input.
 
-Puoi migliorare i prompt multimodali seguendo queste best practice:
+You can improve your multimodal prompts by following these best practices:
 
-- ### [Principi fondamentali della progettazione dei prompt](#specific-instructions)
+- ### [Prompt design fundamentals](#specific-instructions)
 
-  - **Fornisci istruzioni specifiche**: crea istruzioni chiare e concise che lascino poco spazio a interpretazioni errate.
-  - **Aggiungi alcuni esempi al prompt**:utilizza esempi few-shot realistici per illustrare ciò che vuoi ottenere.
-  - **Suddividi l'attività passo passo**: dividi le attività complesse in sotto-obiettivi gestibili, guidando il modello nel processo.
-  - **Specifica il formato di output**: nel prompt, chiedi che l'output sia nel formato che preferisci, ad esempio Markdown, JSON, HTML e altri.
-  - **Inserisci prima l'immagine per i prompt con una sola immagine**: anche se Gemini può gestire input di immagini e testo in qualsiasi ordine, per i prompt contenenti una sola immagine, potrebbe funzionare meglio se l'immagine (o il video) viene inserita prima del prompt di testo. Tuttavia, per i prompt che richiedono che le immagini siano altamente intercalate con i testi per avere un senso, utilizza l'ordine più naturale.
-- ### [Risoluzione dei problemi relativi al prompt multimodale](#troubleshooting)
+  - **Be specific in your instructions**: Craft clear and concise instructions that leave minimal room for misinterpretation.
+  - **Add a few examples to your prompt:** Use realistic few-shot examples to illustrate what you want to achieve.
+  - **Break it down step-by-step**: Divide complex tasks into manageable sub-goals, guiding the model through the process.
+  - **Specify the output format**: In your prompt, ask for the output to be in the format you want, like Markdown, JSON, HTML and more.
+  - **Put your image first for single-image prompts**: While Gemini can handle image and text inputs in any order, for prompts containing a single image, it might perform better if that image (or video) is placed before the text prompt. However, for prompts that require images to be highly interleaved with texts to make sense, use whatever order is most natural.
+- ### [Troubleshooting your multimodal prompt](#troubleshooting)
 
-  - **Se il modello non estrae informazioni dalla parte pertinente dell'immagine**:fornisci suggerimenti sugli aspetti dell'immagine da cui vuoi che il prompt estragga informazioni.
-  - **Se l'output del modello è troppo generico (non abbastanza personalizzato in base all'input di immagine/video):** all'inizio del prompt, prova a chiedere al modello di descrivere l'immagine o le immagini o il video prima di fornire l'istruzione dell'attività oppure prova a chiedere al modello di fare riferimento a ciò che è presente nell'immagine.
-  - **Per risolvere il problema relativo alla parte non riuscita**:chiedi al modello di descrivere l'immagine o di spiegare il suo ragionamento per valutare la comprensione iniziale del modello.
-  - **Se il prompt genera contenuti di allucinazione**:prova a ridurre l'impostazione della temperatura o a chiedere al modello descrizioni più brevi, in modo che sia meno probabile che estrapoli ulteriori dettagli.
-  - **Ottimizzazione dei parametri di campionamento**:sperimenta diverse impostazioni di temperatura e selezioni top-k per regolare la creatività del modello.
+  - **If the model is not drawing information from the relevant part of the image:** Drop hints with which aspects of the image you want the prompt to draw information from.
+  - **If the model output is too generic (not tailored enough to the image/video input):** At the start of the prompt, try asking the model to describe the image(s) or video before providing the task instruction, or try asking the model to refer to what's in the image.
+  - **To troubleshoot which part failed:** Ask the model to describe the image, or ask the model to explain its reasoning, to gauge the model's initial understanding.
+  - **If your prompt results in hallucinated content:** Try dialing down the temperature setting or asking the model for shorter descriptions so that it's less likely to extrapolate additional details.
+  - **Tuning the sampling parameters:** Experiment with different temperature settings and top-k selections to adjust the model's creativity.
 
-### Fornisci istruzioni specifiche
+### Be specific in your instructions
 
-I prompt hanno più successo quando sono chiari e dettagliati. Se hai in mente un output specifico, è meglio includere questo requisito nel prompt per assicurarti di ottenere l'output che desideri.
+Prompts have the most success when they are clear and detailed. If you have a
+specific output in mind, it's better to include that requirement in the prompt
+to ensure you get the output you want.
 
-Per questa immagine di un tabellone di un aeroporto, chiedere al modello di "descrivere questa
-immagine" potrebbe generare una descrizione generica. Se hai bisogno che il modello analizzi
-l'ora e la città dall'immagine, puoi includere la richiesta direttamente nel
+For this image of an airport board, asking the model to just "describe this
+image" could generate a general description. If you need the model to parse the
+time and city from the image, you can include that request directly in your
 prompt.
 
-| Prompt | Risposta del modello |
+| Prompt | Model response |
 | --- | --- |
-| Descrivi questa immagine. | L'immagine mostra un tabellone degli arrivi e delle partenze di un aeroporto. |
+| Describe this image. | The image shows an airport arrivals and departures board. |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **Updated prompt** | **Improved response** |
 | --- | --- |
-| Orario di viaggio Analizza l'ora e la città dal tabellone dell'aeroporto mostrato in questa immagine in un elenco. | - 10:50 Mosca - 11:05 Edimburgo - 11:05 Londra - 11:10 Bucarest - 11:30 Kiev - 11:35 Dublino - 11:45 East Midlands - 12:15 Sofia - 12:30 Londra - 12:30 Newcastle - 12:40 San Pietroburgo - 12:40 Londra - 12:45 Manchester |
+| Travel timetable Parse the time and city from the airport board shown in this image into a list. | - 10:50 Moscow - 11:05 Edinburgh - 11:05 London - 11:10 Bucharest - 11:30 Kiev - 11:35 Dublin - 11:45 East Midlands - 12:15 Sofia - 12:30 London - 12:30 Newcastle - 12:40 St Petersburg - 12:40 London - 12:45 Manchester |
 
-### Aggiungi alcuni esempi
+### Add a few examples
 
-Il modello Gemini può accettare più input che può utilizzare come esempi per comprendere l'output che desideri. L'aggiunta di questi esempi può aiutare il modello a identificare i pattern e applicare la relazione tra le immagini e le risposte fornite al nuovo esempio. Questo è anche chiamato apprendimento "few-shot".
+The Gemini model can accept multiple inputs which it can use as examples to
+understand the output you want. Adding these examples can help the model
+identify the patterns and apply the relationship between the given images and
+responses to the new example. This is also called "few-shot" learning.
 
-Nell'esempio seguente, l'output iniziale è scritto sotto forma di frase e contiene anche il paese (Brasile). Supponiamo che tu voglia l'output in un formato o stile diverso e che tu voglia solo la città, non il paese. L'aggiunta di esempi few-shot al prompt può indirizzare il modello a rispondere nel modo desiderato.
+In the following example, the initial output is written in sentence form,
+and also contains the country (Brazil). Suppose you want the output in a
+different format or style, and you want only the city, not the country. Adding
+few-shot examples to your prompt can steer the model to respond in the way you
+want.
 
-| **Prompt** | **Risposta del modello** |
+| **Prompt** | **Model response** |
 | --- | --- |
-| Orario di viaggio Determina la città insieme al punto di riferimento. | Il punto di riferimento è la statua del Cristo Redentore a Rio de Janeiro, in Brasile. |
+| Travel timetable Determine the city along with the landmark. | The landmark is the Christ the Redeemer statue in Rio de Janeiro, Brazil. |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **Updated prompt** | **Improved response** |
 | --- | --- |
-| Determina la città insieme al punto di riferimento. colosseo | città: Roma, monumento: il Colosseo. |
-| Città proibita | città: Pechino, punto di riferimento: Città Proibita |
-| forbidden-city | città: Rio de Janeiro, punto di riferimento: statua del Cristo Redentore |
+| Determine the city along with the landmark. colosseum | city: Rome, landmark: the Colosseum. |
+| Forbidden City | city: Beijing, landmark: Forbidden City |
+| forbidden-city | city: Rio de Janeiro, landmark: Christ the Redeemer statue |
 
-### Analizza passo passo
+### Break it down step-by-step
 
-Per attività complesse come quelle che richiedono sia la comprensione visiva sia il ragionamento, può essere utile suddividere l'attività in passaggi più piccoli e semplici. In alternativa, potrebbe essere efficace anche se
-chiedi direttamente al modello di "pensare passo dopo passo" nel prompt.
+For complex tasks like the ones that require both visual understanding and
+reasoning, it can be helpful to split the task into smaller, more
+straightforward steps. Alternatively, it could also be effective if you
+directly ask the model to "think step by step" in your prompt.
 
-| Prompt | Risposta del modello |
+| Prompt | Model response |
 | --- | --- |
-| Quando finirà la carta igienica? | Presto ti rimarranno solo 3 rotoli. |
+| When will I run out of toilet paper? | Soon, you only have 3 rolls left. |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **Updated prompt** | **Improved response** |
 | --- | --- |
-| 1. Per prima cosa, conta quanti rotoli di carta igienica ci sono in questa immagine. 2. Poi, determina la quantità di carta igienica che una persona media utilizza al giorno. 3. Calcola per quanto tempo dureranno questi rotoli di carta igienica. | 1. In questa immagine ci sono tre rotoli di carta igienica. 2. Una persona media utilizza circa 20 fogli di carta igienica al giorno. 3. Se ogni rotolo contiene 200 fogli, durerà circa 10 giorni. Pertanto, i tre rotoli dureranno circa un mese. |
+| 1. First, count how many toilet paper rolls are in this picture. 2. Then, determine how much toilet paper a typical person uses per day. 3. Calculate how long these rolls of toilet paper will last. | 1. There are 3 rolls of toilet paper in this picture. 2. A typical person uses about 20 sheets of toilet paper per day. 3. If each roll contains 200 sheets, then each roll will last for about 10 days. Therefore, the 3 rolls will last for about a month. |
 
-I problemi di matematica o altri tipi di problemi con enunciato sono ottimi candidati per chiedere al modello di pensare passo dopo passo.
+Math problems or other types of word problems are great candidates for asking
+the model to think step-by-step.
 
-| **Prompt** | **Risposta** |
+| **Prompt** | **Response** |
 | --- | --- |
-| Qual è il quarto termine della sequenza? | -135 |
+| What is the 4th term in the sequence? | -135 |
 
-La risposta del modello non è corretta. Alcuni modi per migliorare questo aspetto sono chiedere
-al modello di analizzare il problema prima di rispondere al prompt.
+The response from the model is incorrect. Some ways to improve this is to ask
+the model to parse the problem before answering the prompt.
 
-| **Prompt** | **Risposta** |
+| **Prompt** | **Response** |
 | --- | --- |
-| Analizza prima la formula nell'immagine.  Quindi, in base alla formula, rispondi alla domanda "Qual è il quarto termine della sequenza?". | *Fai clic per espandere il risultato* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Sostituisci n = 4 nella formula: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Non conosciamo il valore di b(3), quindi sostituiamo n = 3 nella formula: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Non conosciamo il valore di b(2), quindi sostituiamo n = 2 nella formula: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Sappiamo che il valore di b(1) è 15, quindi sostituiscilo nella formula: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Ora che conosciamo il valore di b(2), sostituiscilo nella formula per b(3): $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Ora che conosciamo il valore di b(3), sostituiscilo nella formula per b(4): $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Pertanto, il quarto termine della sequenza è -405. |
+| Parse the formula in the image first.  Then based on the formula, answer "what's the 4th term in the sequence?". | *Click to expand the result* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Substitute n = 4 into the formula: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. We don't know the value of b(3), so substitute n = 3 into the formula: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. We don't know the value of b(2), so substitute n = 2 into the formula: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. We know the value of b(1) is 15, so substitute it into the formula: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Now that we know the value of b(2), substitute it into the formula for b(3): $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Now that we know the value of b(3), substitute it into the formula for b(4): $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Therefore, the 4th term in the sequence is -405. |
 
-La risposta del modello è corretta. Per renderla ancora più snella,
-puoi chiedere al modello di procedere passo dopo passo.
+This model response is correct - now to make the response even more streamlined,
+you can ask the model to to think step-by-step.
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **Updated prompt** | **Improved response** |
 | --- | --- |
-| Qual è il quarto termine della sequenza? Pensa passo dopo passo. | Il primo termine è 15.  Il secondo termine è b(1) \* (-3) = 15 \* (-3) = -45.  Il terzo termine è b(2) \* (-3) = -45 \* (-3) = 135.  Il quarto termine è b(3) \* (-3) = 135 \* (-3) = -405. |
+| What is the 4th term in the sequence? Think step by step. | The first term is 15.  The second term is b(1) \* (-3) = 15 \* (-3) = -45.  The third term is b(2) \* (-3) = -45 \* (-3) = 135.  The fourth term is b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### Specifica il formato di output
+### Specify the output format
 
-Un problema comune è la necessità che l'output del modello sia in un determinato formato
-(ad es. Markdown, JSON, HTML), soprattutto se l'output del modello deve
-essere inserito in un'attività a valle. Puoi provare a produrre output in questo formato
-chiedendo al modello di farlo all'interno del prompt. Di seguito sono riportati due
-esempi:
+A common problem is the need for model output to be in a certain format
+(e.g. Markdown, JSON, HTML), especially if the model output needs to
+be ingested by a downstream task. You can try to produce output in that format
+by instructing the model to do so within the prompt. The following are two
+examples:
 
-| Prompt | Risposta del modello |
+| Prompt | Model response |
 | --- | --- |
-| Analizza la tabella in questa immagine nel formato Markdown | ```none | Materia | Stato | Tempo | Data di inizio | Scadenza | | ------- | ------ | ---- | ---------- | ------ | | Matematica | Completato | 1,5 ore | 29/11/2023 | 1/12/2023 | | Geografia | Completato | 30 minuti | 2/12/2023 | 4/12/2023 | | Fisica | In corso | 2 ore | 3/12/2023 | 5/12/2023 | | Biologia | Non iniziato | 6 ore | 2/11/2016 | 6/12/2023 | ``` |
+| Parse the table in this image into Markdown format | ```none | Subject | Status | Time | Start date | Due on | | ------- | ------ | ---- | ---------- | ------ | | Math | Done | 1.5 hrs | 11/29/2023 | 12/1/2023 | | Geography | Done | 30 min | 12/2/2023 | 12/4/2023 | | Physics | In progress | 2 hrs | 12/3/2023 | 12/5/2023 | | Biology | Not started | 6 hrs | 11/2/2016 | 12/6/2023 | ``` |
 
-| **Prompt** | **Risposta del modello** |
+| **Prompt** | **Model response** |
 | --- | --- |
-| Fornisci un elenco di tutti i seguenti attributi:  ingredienti, tipo di cucina, vegetariano o meno, in formato JSON | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
+| Provide a list of all the following attributes:  ingredients, type of cuisine, vegetarian or not, in JSON format | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
 
-### Inserisci prima l'immagine per i prompt con una sola immagine
+### Put your image first for single-image prompts
 
-Sebbene Gemini possa interpretare immagini e testo in qualsiasi ordine all'interno di un prompt, inserire
-una singola immagine prima del prompt di testo potrebbe portare a risultati migliori.
-Negli esempi seguenti, noterai che l'immagine viene prima del testo in
-ogni prompt.
+While Gemini can interpret image and text in any order within a prompt, placing
+a single image before the text prompt might lead to better results.
+In the following samples, you'll notice the image comes first before the text in
+each prompt.
 
-### Risolvere i problemi relativi al prompt multimodale
+### Troubleshooting your multimodal prompt
 
-Se non ricevi una risposta utile, potresti dover risolvere i problemi relativi al prompt. Ecco alcune strategie che puoi provare.
+You might need to troubleshoot your prompt if you are not getting a helpful
+response. Here are a few strategies you could try.
 
-#### Se il modello non estrae informazioni dalla parte pertinente dell'immagine
+#### If the model is not drawing information from the relevant part of the image
 
-Per ottenere una risposta più specifica, puoi indicare gli aspetti dell'immagine
-da cui vuoi che il prompt estragga le informazioni per elaborare la risposta.
+To get a more specific response, you can point out which aspects of the image
+you want the prompt to draw information from to inform its response.
 
-| Prompt | Risposta del modello |
+| Prompt | Model response |
 | --- | --- |
-| Per quanti giorni dureranno questi pannolini per un bambino? | I pannolini dureranno 198 giorni prima di esaurirsi. |
+| How many days will these diapers last a baby? | The diapers will last for 198 days before they run out. |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **Updated prompt** | **Improved response** |
 | --- | --- |
-| Quanto dureranno questi pannolini prima che finiscano?  Utilizza il peso indicato sulla confezione per determinare l'età del bambino e il numero totale di pannolini nella confezione.  Dividi il numero totale per il numero di pannolini che il bambino usa al giorno. | La scatola contiene 198 pannolini. Sulla scatola è indicato che i pannolini sono adatti a un bambino di peso compreso tra 10 e 17 kg.  Il bambino medio in questa fascia di peso ha probabilmente un'età compresa tra 1 e 2 anni.  Un bambino di 2 anni in genere usa 6 pannolini al giorno, quindi i pannolini dureranno circa 33 giorni (198/6). |
+| How long will these diapers last before I run out?  Use the weight shown on the box to determine the child's age, and use the total number of diapers in the box.  Divide the total number by how many diapers the child goes through per day. | The box contains 198 diapers. The box states the diapers are for a child weighing 22-37 lbs.  The average child in this weight range is likely between 1 and 2 years old.  A 2-year-old typically goes through 6 diapers per day, therefore, the diapers will last around 33 days (198/6). |
 
-#### Se l'output del modello è troppo generico e non sufficientemente personalizzato in base all'input dell'immagine
+#### If the model output is too generic and not tailored enough to the image input
 
-Per aiutare il modello a personalizzare la risposta in base alle immagini, prova a chiedergli di descriverle prima di eseguire il compito di ragionamento.
+To help the model tailor its response to the image(s), try asking it to describe
+the images before performing its reasoning task.
 
-| Prompt | Risposta del modello |
+| Prompt | Model response |
 | --- | --- |
-| Cosa hanno in comune queste immagini? | Tutte e quattro le immagini sono esempi di fotografia paesaggistica. |
+| What is in common between these images? | All four images are examples of landscape photography. |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **Updated prompt** | **Improved response** |
 | --- | --- |
-| Per prima cosa, descrivi in dettaglio i contenuti di ogni immagine. Che cosa hanno in comune queste immagini? | La prima immagine mostra una persona che prepara una valigia. La seconda immagine mostra un corridoio vuoto in un centro commerciale. La terza immagine mostra un rotolo di carta igienica. La quarta immagine mostra un mare scuro e tempestoso.  Il punto in comune tra queste immagini è che sono tutti esempi di spazi liminali. Gli spazi liminali sono luoghi o situazioni che si trovano tra due altri luoghi o situazioni. Sono spesso caratterizzati da un senso di incertezza o ambiguità.  La prima immagine mostra la persona tra la casa e il viaggio. La seconda immagine mostra il corridoio tra due negozi. La terza immagine è di carta igienica, che può rappresentare un bagno. Il bagno è uno spazio di transizione tra la sfera privata e quella pubblica. È un luogo in cui ci prepariamo a entrare o uscire dal mondo esterno.  La quarta immagine mostra il mare in una condizione intermedia tra calma e tempesta.  Gli spazi liminali possono essere sia entusiasmanti che inquietanti. Possono essere un luogo di nuovi inizi o di fine. Possono essere un luogo di riflessione o di azione. |
+| First, describe what's in each image in detail. What's in common between these images? | The first image shows a person packing a suitcase. The second image shows an empty hallway in a shopping mall. The third image shows a roll of toilet paper. The fourth image shows a dark and stormy sea.  The commonality between these images is that they are all examples of liminal spaces. Liminal spaces are places or situations that are in between two other places or situations. They are often characterized by a sense of uncertainty or ambiguity.  The first image shows the person in between being at home and being on a trip. The second image shows the hallway in between two stores. The third image is of toilet paper, which can represent a bathroom. A bathroom is a transitional space between private and public realms. It's a place where we prepare ourselves to enter or leave the outside world.  The fourth image shows the sea in between being calm and being stormy.  Liminal spaces can be both exciting and unsettling. They can be a place of new beginning or a place of endings. They can be a place of reflection or a place of action. |
 
-Puoi anche provare a chiedere esplicitamente al modello di fare riferimento a ciò che è presente nell'immagine.
+You can also try explicitly asking the model to refer to what's in the image.
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **Updated prompt** | **Improved response** |
 | --- | --- |
-| Cosa hanno in comune queste immagini? Fai riferimento ai contenuti delle immagini nella risposta. | Tutte le immagini sono correlate ai viaggi. La prima immagine mostra una persona che prepara una valigia, la seconda mostra un corridoio vuoto in un centro commerciale, la terza mostra una pila di carta igienica e la quarta mostra un mare scuro e tempestoso.  Queste immagini sono tutte correlate ai viaggi perché sono tutte cose che le persone hanno bisogno o usano quando viaggiano. La prima immagine mostra una persona che prepara una valigia, un'attività che si svolge prima di un viaggio. La seconda immagine mostra un corridoio vuoto in un centro commerciale, un luogo in cui le persone vanno spesso per comprare cose per i loro viaggi. La terza immagine mostra una pila di carta igienica, un oggetto che le persone usano spesso quando sono in viaggio. La quarta immagine mostra un mare scuro e tempestoso, che è qualcosa che le persone incontrano spesso quando viaggiano. |
+| What is in common between these images? Refer to what's in the images in your response. | All of the images are related to travel. The first image shows a person packing a suitcase, the second image shows an empty hallway in a shopping mall, the third image shows a stack of toilet paper, and the fourth image shows a dark and stormy sea.  These images are all related to travel because they are all things that people need or use when they travel. The first image shows a person packing a suitcase, which is something that people do when they are going on a trip. The second image shows an empty hallway in a shopping mall, which is a place where people often go to buy things for their trips. The third image shows a stack of toilet paper, which is something that people often use when they are traveling. The fourth image shows a dark and stormy sea, which is something that people often encounter when they are traveling. |
 
-Gli stessi suggerimenti valgono per l'output creativo delle immagini. Nel seguente esempio con
-il coniglio, chiedere esplicitamente al modello di includere aspetti dell'immagine può
-migliorare l'output.
+The same tips work for creative output from images. In the following example with
+the rabbit, explicitly asking the model to include aspects from the image can
+improve the output.
 
-| Prompt | Risposta del modello |
+| Prompt | Model response |
 | --- | --- |
-| Puoi scrivermi una poesia su questa immagine? | Coniglietto, così morbido e marrone,  che salti nel campo, su e giù.  Le tue orecchie così lunghe, la tua coda così piccola,  sei la creatura più carina di tutte.  Mangi l'erba, così verde e dolce,  E scappi via quando mi vedi.  Ma sarò sempre tuo amico,  Coniglietto, fino alla fine. |
+| Can you write me a poem about this image? | Little bunny, so soft and brown,  Hopping through the field, up and down.  Your ears so long, your tail so small,  You're the cutest creature of them all.  You nibble on the grass, so green and sweet,  And hop away when you see me.  But I'll always be your friend,  Little bunny, until the very end. |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **Updated prompt** | **Improved response** |
 | --- | --- |
-| Puoi scrivermi una poesia descrittiva e drammatica su questa immagine e includere la posizione? | Coniglietto sul prato,  orecchie lunghe e attente.  Cosa vedi laggiù,  in lontananza, dove fissi lo sguardo?  È l'azzurro dell'oceano,  che brilla sotto il sole?  O le onde che si infrangono e ruggiscono,  un ritmo che adori?  Coniglietto, dimmi la verità,  Cosa cattura così tanto la tua attenzione?  È la brezza salmastra,  O i gridi dei gabbiani che ti piacciono?  Forse è la vastità di tutto,  Un mondo così grande e piccolo.  Un luogo dove i sogni possono vagare,  E le avventure possono essere seminate.  Coniglietto, mi chiedo cosa sogni,  mentre siedi sull'erba, così sereno.  Desideri esplorare le profondità  o rimanere sulla terraferma, dove puoi saltare?  Qualunque cosa sia, piccolo coniglietto,  mantieni viva quella scintilla di meraviglia.  Perché nei tuoi sogni e nelle tue aspirazioni,  C'è un mondo che aspetta la tua creazione. |
+| Can you write me a descriptive and dramatic poem about this image and include the location? | Little bunny on the green,  Ears so long, so keen.  What do you see out there,  In the distance, where you stare?  Is it the ocean blue,  Sparkling in the sun's hue?  Or the waves that crash and roar,  A rhythm that you adore?  Little bunny, tell me true,  What captures your attention so?  Is it the salty breeze,  Or the seagulls' cries that please?  Perhaps it's the vastness of it all,  A world so big and small.  A place where dreams can roam,  And adventures can be sown.  Little bunny, I wonder what you dream,  As you sit on the grass, so serene.  Do you yearn to explore the deep,  Or stay on land, where you can leap?  Whatever it may be, little bunny,  Keep that spark of wonder burning brightly.  For in your dreams and aspirations,  Lies a world waiting for your creation. |
 
-#### Risoluzione dei problemi relativi alla parte del prompt non riuscita
+#### Troubleshooting which part of the prompt failed
 
-Può essere difficile sapere se un prompt non è andato a buon fine perché il modello
-non ha **compreso l'immagine** fin dall'inizio o se ha compreso l'immagine
-ma non ha eseguito i **passaggi di ragionamento** corretti in seguito.
-Per distinguere tra questi motivi, chiedi al modello di descrivere cosa c'è nell'immagine.
+It can be hard to know whether a prompt failed because the model
+didn't **understand the image** to begin with, or if it did understand the image
+but did not perform the correct **reasoning steps** afterward.
+To disambiguate between those reasons, ask the model to describe what's in the image.
 
-Nell'esempio seguente, se il modello risponde con uno snack che sembra sorprendente
-se abbinato al tè (ad es. popcorn), puoi prima risolvere il problema per determinare
-se il modello ha riconosciuto correttamente che l'immagine contiene tè.
+In the following example, if the model responds with a snack that seems surprising
+when paired with tea (e.g. popcorn), you can first troubleshoot to determine
+whether the model correctly recognized that the image contains tea.
 
-| Prompt | Richiesta di risoluzione dei problemi |
+| Prompt | Prompt for troubleshooting |
 | --- | --- |
-| Qual è uno spuntino che posso preparare in 1 minuto e che si abbini bene a questo? | Descrivi i contenuti di questa immagine. |
+| What's a snack I can make in 1 minute that would go well with this? | Describe what's in this image. |
 
-Un'altra strategia è chiedere al modello di spiegare il suo ragionamento. In questo modo puoi
-restringere la parte del ragionamento che non ha funzionato, se presente.
+Another strategy is to ask the model to explain its reasoning. That can help you
+narrow down which part of the reasoning broke down, if any.
 
-| Prompt | Richiesta di risoluzione dei problemi |
+| Prompt | Prompt for troubleshooting |
 | --- | --- |
-| Qual è uno spuntino che posso preparare in 1 minuto e che si abbini bene a questo? | Qual è uno spuntino che posso preparare in 1 minuto e che si abbini bene a questo? Spiega perché. |
+| What's a snack I can make in 1 minute that would go well with this? | What's a snack I can make in 1 minute that would go well with this? Please explain why. |
 
-## Passaggi successivi
+## What's next
 
-- Prova a scrivere i tuoi prompt multimodali utilizzando [Google AI
-  Studio](http://aistudio.google.com?hl=it).
-- Per informazioni sull'utilizzo dell'API Gemini Files per caricare file multimediali e includerli nei prompt, consulta le guide [Vision](https://ai.google.dev/gemini-api/docs/interactions/vision?hl=it), [Audio](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=it) ed [Elaborazione dei documenti](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=it).
-- Per ulteriori indicazioni sulla progettazione dei prompt, ad esempio sulla regolazione dei parametri di campionamento, consulta la pagina
-  [Strategie per i prompt](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it).
+- Try writing your own multimodal prompts using [Google AI
+  Studio](http://aistudio.google.com).
+- For information on using the Gemini Files API for
+  uploading media files and including them in your prompts, see the
+  [Vision](https://ai.google.dev/gemini-api/docs/interactions/vision), [Audio](https://ai.google.dev/gemini-api/docs/interactions/audio), and
+  [Document processing](https://ai.google.dev/gemini-api/docs/interactions/document-processing) guides.
+- For more guidance on prompt design, like tuning sampling parameters, see the
+  [Prompt strategies](https://ai.google.dev/gemini-api/docs/prompting-strategies) page.
 
-Invia feedback
+Send feedback
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
 
-Ultimo aggiornamento 2026-06-02 UTC.
+Last updated 2026-06-18 UTC.
 
-Vuoi dirci altro?
+Need to tell us more?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-02 UTC."],[],[]]
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I need","missingTheInformationINeed","thumb-down"],["Too complicated / too many steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples / code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated 2026-06-18 UTC."],[],[]]

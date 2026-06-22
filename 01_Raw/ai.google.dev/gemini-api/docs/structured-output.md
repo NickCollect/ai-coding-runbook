@@ -1,39 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=he
-fetched_at: 2026-06-15T06:22:51.073590+00:00
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ja
+fetched_at: 2026-06-22T06:26:03.428594+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) is now available in preview with collaborative planning, visualization, MCP support, and more.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-שליחת משוב
+フィードバックを送信
 
-# פלטים מובנים
+# 構造化出力
 
-אתם יכולים להגדיר מודלים של Gemini כדי ליצור תשובות שתואמות ל-JSON Schema שסיפקתם. כך תוכלו לקבל תוצאות צפויות ובטוחות מבחינת סוג הנתונים, ולפשט את תהליך החילוץ של נתונים מובנים מטקסט לא מובנה.
+提供された JSON スキーマに準拠したレスポンスを生成するように Gemini モデルを構成できます。これにより、予測可能でタイプセーフな結果が得られ、非構造化テキストから構造化データを簡単に抽出できます。
 
-שימוש בפלט מובנה מתאים במיוחד למקרים הבאים:
+構造化出力の使用は、次のような場合に最適です。
 
-- **חילוץ נתונים:** חילוץ מידע ספציפי כמו שמות ותאריכים מטקסט.
-- **סיווג מובנה:** סיווג טקסט לקטגוריות מוגדרות מראש.
-- **תהליכי עבודה מבוססי-סוכן:** יצירת קלט מובנה לכלים או לממשקי API.
+- **データ抽出:** テキストから名前や日付などの特定の情報を抽出します。
+- **構造化分類:** テキストを事前定義されたカテゴリに分類します。
+- **エージェント ワークフロー:** ツールまたは API の構造化入力を生成します。
 
-בנוסף לתמיכה בסכימת JSON ב-API בארכיטקטורת REST, ערכות ה-SDK של Google GenAI מאפשרות להגדיר סכימות בקלות באמצעות [Pydantic](https://docs.pydantic.dev/latest/) (Python) ו-[Zod](https://zod.dev/) (JavaScript).
+[[Google GenAI SDK は、REST API での JSON スキーマのサポートに加えて、
+Pydantic](https://docs.pydantic.dev/latest/)（Python）と
+Zod](https://zod.dev/)（JavaScript）を使用してスキーマを簡単に定義できます。
 
-## דוגמאות לפלט מובנה
+## 構造化出力の例
 
-### כלי לחילוץ מתכונים
+### レシピ エクストラクタ
 
-בדוגמה הזו מוסבר איך לחלץ נתונים מובנים מטקסט באמצעות סוגים בסיסיים של סכימת JSON, כמו `object`, `array`, `string` ו-`integer`.
+この例では、`object`、`array`、`string`、`integer` などの基本的な JSON スキーマタイプを使用して、テキストから構造化データを抽出する方法を示します。
 
 ### Python
 
@@ -264,7 +266,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }'
 ```
 
-**דוגמה לתשובה:**
+**レスポンスの例:**
 
 ```
 {
@@ -319,9 +321,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }
 ```
 
-### ניהול תוכן
+### コンテンツの管理
 
-בדוגמה הזו מוצגים `anyOf` לסכימות מותנות ו-`enum` לסיווג, כדי לאפשר למבנה הפלט להשתנות בהתאם לתוכן.
+この例では、条件付きスキーマに `anyOf` を、分類に `enum` を使用して、コンテンツに応じて出力構造を変更する方法を示します。
 
 ### Python
 
@@ -548,9 +550,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }
 ```
 
-### מבנים רקורסיביים
+### 再帰的構造
 
-בדוגמה הזו מוסבר איך מגדירים סכימה רקורסיבית, כמו תרשים ארגוני.
+この例では、組織図などの再帰的スキーマを定義する方法を示します。
 
 ### Python
 
@@ -713,7 +715,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }'
 ```
 
-**דוגמה לתשובה:**
+**レスポンスの例:**
 
 ```
 {
@@ -740,11 +742,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }
 ```
 
-## סטרימינג
+## ストリーミング
 
-אתם יכולים להזרים פלט מובנה, וכך להתחיל לעבד את התגובה בזמן שהיא נוצרת, בלי לחכות לסיום יצירת הפלט כולו. כך אפשר לשפר את הביצועים של האפליקציה.
+構造化出力をストリーミングできます。これにより、出力全体が完了するのを待たずに、レスポンスの生成と同時に処理を開始できます。これにより、アプリケーションの体感パフォーマンスを向上させることができます。
 
-החלקים שמוזרמים יהיו מחרוזות JSON חלקיות ותקינות, שאפשר לשרשר כדי ליצור את אובייקט ה-JSON הסופי והמלא.
+ストリーミングされたチャンクは有効な部分的な JSON 文字列であり、連結して最終的な完全な JSON オブジェクトを形成できます。
 
 ### Python
 
@@ -800,9 +802,9 @@ for await (const chunk of stream) {
 }
 ```
 
-## פלט מובנה עם כלים
+## ツールを使用した構造化出力
 
-‫Gemini 3 מאפשר לכם לשלב פלט מובנה עם כלים מובנים, כולל [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he),‏ [URL Context](https://ai.google.dev/gemini-api/docs/url-context?hl=he),‏ [Code Execution](https://ai.google.dev/gemini-api/docs/code-execution?hl=he),‏ [File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=he#structured-output) ו-[Function Calling](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
+[[[[[Gemini 3 では、構造化出力を、Google 検索によるグラウンディング、URL コンテキスト、コード実行、ファイル検索、関数呼び出しなどの組み込みツールと組み合わせることができます。](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)](https://ai.google.dev/gemini-api/docs/file-search?hl=ja#structured-output)](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)
 
 ### Python
 
@@ -907,101 +909,101 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-## תמיכה בסכימת JSON
+## JSON スキーマのサポート
 
-כדי ליצור אובייקט JSON, מגדירים את `response_format` בהגדרות היצירה. הסכימה צריכה להיות [סכימת JSON](https://json-schema.org/) תקינה שמתארת את פורמט הפלט הרצוי.
+JSON オブジェクトを生成するには、生成構成で `response_format` を設定します。スキーマは、目的の出力形式を記述する有効な [JSON スキーマ](https://json-schema.org/)である必要があります。
 
-לאחר מכן המודל ייצור תשובה שהיא מחרוזת JSON תקינה מבחינת תחביר, שתואמת לסכימה שסופקה. כשמשתמשים בפלט מובנה, המודל ייצור פלט באותו סדר של המפתחות בסכימה.
+モデルは、指定されたスキーマに一致する構文的に有効な JSON 文字列であるレスポンスを生成します。構造化出力を使用しているときは、スキーマ内のキーと同じ順序で出力を生成します。
 
-מצב הפלט המובנה של Gemini תומך בחלק ממפרט [JSON Schema](https://json-schema.org).
+Gemini の構造化出力モードは、[JSON スキーマ](https://json-schema.org)仕様のサブセットをサポートしています。
 
-יש תמיכה בערכים הבאים של `type`:
+`type` の次の値がサポートされています。
 
-- ‫**`string`**: לטקסט.
-- ‫**`number`**: למספרים בשיטת נקודה צפה.
-- ‫**`integer`**: למספרים שלמים.
-- ‫**`boolean`**: לערכים מסוג True/False.
-- ‫**`object`**: לנתונים מובְנים עם צמדי מפתח/ערך.
-- ‫**`array`**: לרשימות של פריטים.
-- ‫**`null`**: כדי לאפשר שמאפיין יהיה null, צריך לכלול את `"null"` במערך הסוגים (לדוגמה, `{"type": ["string", "null"]}`).
+- **`string`**: テキストの場合。
+- **`number`**: 浮動小数点数の場合。
+- **`integer`**: 整数の場合。
+- **`boolean`**: true/false 値の場合。
+- **`object`**: Key-Value ペアを含む構造化データの場合。
+- **`array`**: アイテムのリストの場合。
+- **`null`**: プロパティを null にできるようにするには、タイプ配列に `"null"` を含めます（例: `{"type": ["string", "null"]}`）。
 
-מאפייני התיאור האלה עוזרים להנחות את המודל:
+これらの記述プロパティは、モデルのガイドに役立ちます。
 
-- ‫**`title`**: תיאור קצר של מאפיין.
-- **`description`**: תיאור ארוך ומפורט יותר של נכס.
+- **`title`**: プロパティの簡単な説明。
+- **`description`**: プロパティの詳細な説明。
 
-### מאפיינים ספציפיים לסוג
+### タイプ固有のプロパティ
 
-**לערכים של `object`:**
+**`object` 値の場合:**
 
-- ‫**`properties`**: אובייקט שבו כל מפתח הוא שם מאפיין וכל ערך הוא סכימה של המאפיין הזה.
-- ‫**`required`**: מערך של מחרוזות שמפרט את המאפיינים שחובה להגדיר.
-- ‫**`additionalProperties`**: קובעת אם מותר להשתמש בנכסים שלא מופיעים ב-`properties`. יכול להיות ערך בוליאני או סכמה.
+- **`properties`**: 各キーがプロパティ名で、各値がそのプロパティのスキーマであるオブジェクト。
+- **`required`**: 必須プロパティを一覧表示する文字列の配列。
+- **`additionalProperties`**: `properties` にリストされていないプロパティを許可するかどうかを制御します。ブール値またはスキーマを指定できます。
 
-**לערכים של `string`:**
+**`string` 値の場合:**
 
-- ‫**`enum`**: רשימה של קבוצה ספציפית של מחרוזות אפשריות למשימות סיווג.
-- ‫**`format`**: מציין תחביר למחרוזת, כמו `date-time`, ‏`date`, ‏`time`.
+- **`enum`**: 分類タスクに使用できる文字列の特定のセットを一覧表示します。
+- **`format`**: `date-time`、`date`、`time` など、文字列の構文を指定します。
 
-**לערכים `number` ו-`integer`:**
+**`number` 値と `integer` 値の場合:**
 
-- ‫**`enum`**: רשימה של קבוצה ספציפית של ערכים נומריים אפשריים.
-- ‫**`minimum`**: ערך המינימום כולל.
-- ‫**`maximum`**: הערך המקסימלי כולל.
+- **`enum`**: 使用できる数値の特定のセットを一覧表示します。
+- **`minimum`**: 最小値（包括的）。
+- **`maximum`**: 最大値（包括的）。
 
-**לערכים של `array`:**
+**`array` 値の場合:**
 
-- ‫**`items`**: הגדרת הסכימה של כל הפריטים במערך.
-- ‫**`prefixItems`**: מגדיר רשימה של סכימות עבור הפריטים הראשונים, ומאפשר מבנים דמויי-tuple.
-- ‫**`minItems`**: המספר המינימלי של פריטים במערך.
-- ‫**`maxItems`**: המספר המקסימלי של פריטים במערך.
+- **`items`**: 配列内のすべてのアイテムのスキーマを定義します。
+- **`prefixItems`**: 最初の N 個のアイテムのスキーマのリストを定義し、タプルに似た構造を可能にします。
+- **`minItems`**: 配列内のアイテムの最小数。
+- **`maxItems`**: 配列内のアイテムの最大数。
 
-## תמיכה במודלים
+## モデルサポート
 
-המודלים הבאים תומכים בפלט מובנה:
+次のモデルは構造化出力をサポートしています。
 
-| מודל | פלט מובנה |
+| モデル | 構造化出力 |
 | --- | --- |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| ‫Gemini 3.1 Pro Preview | ✔️ |
+| Gemini 3.1 Pro プレビュー版 | ✔️ |
 | Gemini 3.5 Flash | ✔️ |
-| ‫Gemini 3.1 Flash-Lite Preview | ✔️ |
-| Gemini ‎2.5 Pro | ✔️ |
-| Gemini ‎2.5 Flash | ✔️ |
+| Gemini 3.1 Flash-Lite プレビュー版 | ✔️ |
+| Gemini 2.5 Pro | ✔️ |
+| Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
-| ‫Gemini ‎2.0 Flash | ✔️\* |
+| Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* שימו לב: כדי להגדיר את המבנה המועדף ב-Gemini 2.0, צריך להוסיף רשימה מפורשת של `propertyOrdering` בקלט ה-JSON. אפשר למצוא דוגמה ב[ספר המתכונים](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb) הזה.*
+*\* Gemini 2.0 では、優先する構造を定義するために、JSON 入力に明示的な `propertyOrdering` リストが必要です。この[クックブック](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb)で例を確認できます。*
 
-## פלט מובנה לעומת קריאה להפעלת פונקציות
+## 構造化出力と関数呼び出し
 
-גם פלט מובנה וגם קריאה לפונקציה משתמשים בסכימות JSON, אבל הם משמשים למטרות שונות:
+構造化出力と関数呼び出しはどちらも JSON スキーマを使用しますが、目的が異なります。
 
-| תכונה | תרחיש שימוש ראשי |
+| 機能 | 主なユースケース |
 | --- | --- |
-| **פלט מובנה** | **עיצוב התשובה הסופית למשתמש.** משתמשים בזה כשרוצים ש*התשובה* של המודל תהיה בפורמט ספציפי (למשל, שליפת נתונים ממסמך כדי לשמור אותם במסד נתונים). |
-| **בקשה להפעלת פונקציה** | **ביצוע פעולות במהלך השיחה** משתמשים בזה כשהמודל צריך *לשאול אתכם* לבצע משימה (למשל, 'קבלת נתוני מזג האוויר הנוכחיים') לפני שהוא יכול לספק תשובה סופית. |
+| **構造化出力** | **ユーザーへの最終的なレスポンスのフォーマット。**モデルの回答を特定の形式にする場合（ドキュメントからデータを抽出してデータベースに保存する場合など）に使用します。 |
+| **関数呼び出し** | **会話中のアクションの実行。**最終的な回答を提供するために、モデルがタスクの実行をユーザーに依頼する必要がある場合（「現在の天気を取得する」など）に使用します。 |
 
-## שיטות מומלצות
+## ベスト プラクティス
 
-- **תיאורים ברורים:** משתמשים בשדה `description` בסכימה כדי לספק למודל הוראות ברורות לגבי מה מייצגת כל מאפיין. זה חיוני כדי להנחות את פלט המודל.
-- **הקלדה חזקה:** מומלץ להשתמש בסוגים ספציפיים (`integer`, ‏ `string`, ‏ `enum`) בכל הזדמנות. אם לפרמטר יש קבוצה מוגבלת של ערכים תקינים, משתמשים ב-`enum`.
-- **הנדסת הנחיות:** בהנחיה צריך לציין בבירור מה רוצים שהמודל יעשה. לדוגמה: "תמצת את המידע הבא מהטקסט..." או "סווג את המשוב הזה לפי הסכימה שצירפתי...".
-- **אימות:** למרות שהפלט המובנה מבטיח שקובץ ה-JSON יהיה תקין מבחינת התחביר, הוא לא מבטיח שהערכים יהיו תקינים מבחינה סמנטית. תמיד צריך לאמת את הפלט הסופי בקוד האפליקציה לפני שמשתמשים בו.
-- **טיפול בשגיאות:** כדאי להטמיע טיפול חזק בשגיאות באפליקציה כדי לנהל בצורה תקינה מקרים שבהם הפלט של המודל עומד בדרישות הסכימה, אבל לא בדרישות הלוגיקה העסקית.
+- **明確な説明:** スキーマの `description` フィールドを使用して、各プロパティが何を表すかについて明確な手順をモデルに提供します。これは、モデルの出力をガイドするうえで重要です。
+- **厳密な型指定:** できる限り具体的な型（`integer`、`string`、`enum`）を使用します。パラメータの有効な値のセットが限られている場合は、`enum` を使用します。
+- **プロンプト エンジニアリング:** プロンプトで、モデルに実行してほしいことを明確に記述します。たとえば、「テキストから次の情報を抽出してください」や「提供されたスキーマに従ってこのフィードバックを分類してください」などです。
+- **検証:** 構造化出力では構文的に正しい JSON が保証されますが、値が意味的に正しいことは保証されません。最終的な出力は、使用する前に必ずアプリケーション コードで検証してください。
+- **エラー処理:** モデルの出力がスキーマに準拠していても、ビジネス ロジックの要件を満たしていない場合を適切に処理するために、アプリケーションに堅牢なエラー処理を実装します。
 
-## מגבלות
+## 制限事項
 
-- **קבוצת משנה של סכימה:** לא כל התכונות של מפרט סכימת ה-JSON נתמכות. המודל מתעלם ממאפיינים שלא נתמכים.
-- **מורכבות הסכימה:** יכול להיות שממשק ה-API ידחה סכימות גדולות מאוד או סכימות עם קינון עמוק. אם נתקלים בשגיאות, כדאי לפשט את הסכימה על ידי קיצור שמות המאפיינים, צמצום הקינון או הגבלת מספר האילוצים.
+- **スキーマのサブセット:** JSON スキーマ仕様のすべての機能がサポートされているわけではありません。サポートされていないプロパティは無視されます。
+- **スキーマの複雑さ:** API は、非常に大きいスキーマやネストが深いスキーマを拒否する可能性があります。エラーが発生した場合は、プロパティ名を短くしたり、ネストを減らしたり、制約の数を制限したりして、スキーマを簡略化してみてください。
 
-שליחת משוב
+フィードバックを送信
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-עדכון אחרון: 2026-06-05 (שעון UTC).
+最終更新日 2026-06-19 UTC。
 
-רוצה לתת לנו משוב?
+ご意見をお聞かせください
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-05 (שעון UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-19 UTC。"],[],[]]

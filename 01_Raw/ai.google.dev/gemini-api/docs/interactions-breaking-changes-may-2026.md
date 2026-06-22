@@ -1,42 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=vi
-fetched_at: 2026-06-15T06:22:16.284542+00:00
-title: "Interactions API: H\u01b0\u1edbng d\u1eabn di chuy\u1ec3n c\u00e1c thay \u0111\u1ed5i c\u00f3 th\u1ec3 g\u00e2y ra l\u1ed7i (th\u00e1ng 5 n\u0103m 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=hi
+fetched_at: 2026-06-22T06:26:56.924582+00:00
+title: "Interactions API: \u092e\u093e\u0907\u0917\u094d\u0930\u0947\u0936\u0928 \u0917\u093e\u0907\u0921 \u092e\u0947\u0902 \u092c\u0921\u093c\u0947 \u092c\u0926\u0932\u093e\u0935 (\u092e\u0908 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-# Interactions API: Hướng dẫn di chuyển các thay đổi có thể gây ra lỗi (tháng 5 năm 2026)
+# Interactions API: माइग्रेशन गाइड में बड़े बदलाव (मई 2026)
 
-API `v1beta` Interactions đang giới thiệu các thay đổi có thể gây lỗi, giúp tái cấu trúc hình dạng API để hỗ trợ các chức năng trong tương lai như chỉ đạo giữa chuyến bay và các lệnh gọi công cụ không đồng bộ. Trang này giải thích những thay đổi và cung cấp các ví dụ về mã trước và sau để giúp bạn di chuyển. Có 2 danh mục thay đổi:
+`v1beta` Interactions API में कुछ बड़े बदलाव किए जा रहे हैं. इससे एपीआई के स्ट्रक्चर में बदलाव होगा. ऐसा इसलिए किया जा रहा है, ताकि आने वाले समय में, फ़्लाइट के बीच में बदलाव करने और टूल कॉल को एसिंक्रोनस तरीके से इस्तेमाल करने जैसी सुविधाओं को सपोर्ट किया जा सके. इस पेज पर बताया गया है कि क्या बदलाव हो रहा है. साथ ही, माइग्रेट करने में आपकी मदद करने के लिए, कोड के पहले और बाद के उदाहरण दिए गए हैं. बदलावों की दो कैटगरी हैं:
 
-1. [**Giản đồ bước**](#steps-schema): Một mảng `steps` mới sẽ thay thế mảng `outputs`, cung cấp một dòng thời gian có cấu trúc của từng lượt tương tác.
-2. [**Cấu hình định dạng đầu ra**](#output-format-config): `response_format` đa hình mới sẽ hợp nhất tất cả các chế độ kiểm soát định dạng đầu ra và xoá `response_mime_type`.
+1. [**कदमों का स्कीमा**](#steps-schema): एक नया `steps` ऐरे, `outputs` ऐरे की जगह लेता है. इससे हर इंटरैक्शन टर्न की स्ट्रक्चर्ड टाइमलाइन मिलती है.
+2. [**आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन**](#output-format-config): एक नया पॉलीमॉर्फ़िक `response_format`, आउटपुट फ़ॉर्मैट के सभी कंट्रोल को एक साथ जोड़ता है और `response_mime_type` को हटाता है.
 
-Làm theo các bước trong phần [Cách di chuyển sang giản đồ mới](#how-to-migrate) để cập nhật quy trình tích hợp.
+अपने इंटिग्रेशन को अपडेट करने के लिए, [नए स्कीमा पर माइग्रेट करने का तरीका](#how-to-migrate) में दिया गया तरीका अपनाएं.
 
-## Thay đổi cốt lõi: `outputs` thành `steps`
+## मुख्य बदलाव: `outputs` से `steps`
 
-Lược đồ mới sẽ thay thế mảng `outputs` bằng mảng `steps`.
+नए स्कीमा में, `outputs` ऐरे की जगह `steps` ऐरे का इस्तेमाल किया जाता है.
 
-- **Cũ**: Các phản hồi trả về một mảng `outputs` phẳng chỉ chứa nội dung do mô hình tạo.
-- **Lược đồ mới**: Các phản hồi trả về một mảng `steps` chứa các bước có cấu trúc với bộ phân biệt loại.
+- **लेगसी**: जवाब में, `outputs` का एक फ़्लैट कलेक्शन मिलता था. इसमें सिर्फ़ मॉडल से जनरेट किया गया कॉन्टेंट होता था.
+- **नया स्कीमा**: जवाबों में `steps` अरे दिखता है. इसमें टाइप डिसक्रिमिनेटर के साथ स्ट्रक्चर्ड चरण शामिल होते हैं.
 
-`POST /interactions` chỉ trả về các bước đầu ra. `GET /interactions/{id}` trả về toàn bộ dòng thời gian của bước, bao gồm cả bước `user_input` ban đầu.
+`POST /interactions` सिर्फ़ आउटपुट के चरण दिखाता है. `GET /interactions/{id}`
+यह फ़ंक्शन, पूरे चरण की टाइमलाइन दिखाता है. इसमें शुरुआती `user_input` चरण भी शामिल है.
 
-### Đầu vào/đầu ra cơ bản (đơn vị)
+### बेसिक इनपुट/आउटपुट (यूनरी)
 
-#### Trước (cũ)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -88,7 +89,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Sau (lược đồ mới)
+#### (नए स्कीमा) के बाद
 
 ### Python
 
@@ -170,11 +171,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Gọi hàm
+### फ़ंक्शन कॉलिंग
 
-Cấu trúc yêu cầu vẫn không thay đổi, nhưng phản hồi sẽ thay thế nội dung `outputs` dạng phẳng bằng các bước có cấu trúc.
+अनुरोध का स्ट्रक्चर पहले जैसा ही रहता है. हालांकि, जवाब में फ़्लैट `outputs` कॉन्टेंट की जगह स्ट्रक्चर्ड चरणों को दिखाया जाता है.
 
-#### Trước (cũ)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -219,7 +220,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### Sau (lược đồ mới)
+#### (नए स्कीमा) के बाद
 
 ### Python
 
@@ -267,11 +268,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Công cụ phía máy chủ
+### सर्वर-साइड टूल
 
-Các công cụ phía máy chủ (chẳng hạn như Google Tìm kiếm hoặc Thực thi mã) hiện tạo ra các loại bước cụ thể trong mảng `steps`. Mặc dù giản đồ cũ trả về các thao tác này dưới dạng các loại nội dung cụ thể trong mảng `outputs`, nhưng giản đồ mới sẽ di chuyển các thao tác này vào mảng `steps`. Các ví dụ sau đây sử dụng Google Tìm kiếm.
+सर्वर-साइड टूल (जैसे, Google Search या कोड एक्ज़ीक्यूशन) अब `steps` ऐरे में कुछ खास तरह के चरण दिखाते हैं. लेगसी स्कीमा में, इन कार्रवाइयों को `outputs` कलेक्शन में खास कॉन्टेंट टाइप के तौर पर दिखाया जाता था. हालांकि, नए स्कीमा में इन्हें `steps` कलेक्शन में ले जाया जाता है. यहां दिए गए उदाहरणों में, Google Search का इस्तेमाल किया गया है.
 
-#### Trước (cũ)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -345,7 +346,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Sau (lược đồ mới)
+#### (नए स्कीमा) के बाद
 
 ### Python
 
@@ -429,11 +430,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Phát trực tiếp
+### स्ट्रीमिंग
 
-Tính năng phát trực tuyến cho thấy các loại sự kiện mới:
+स्ट्रीमिंग से नए इवेंट टाइप का पता चलता है:
 
-#### Loại sự kiện mới
+#### इवेंट के नए टाइप
 
 - `interaction.created`
 - `interaction.completed`
@@ -443,22 +444,22 @@ Tính năng phát trực tuyến cho thấy các loại sự kiện mới:
 - `step.delta`
 - `step.stop`
 
-#### Loại sự kiện không còn được dùng
+#### इवेंट के ऐसे टाइप जो अब काम नहीं करते
 
-Các loại sự kiện cũ sau đây sẽ được thay thế bằng các sự kiện mới được liệt kê ở trên:
+ऊपर दिए गए नए इवेंट, लेगसी इवेंट के इन टाइप की जगह इस्तेमाल किए जाते हैं:
 
 - `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
 - `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → được thay thế bằng `interaction.in_progress`, `interaction.requires_action`, v.v.
+- `interaction.status_update` → इसकी जगह `interaction.in_progress`, `interaction.requires_action` वगैरह का इस्तेमाल किया जाता है
 
-**Truyền trực tuyến lệnh gọi hàm**: Khi dùng tính năng truyền trực tuyến với lệnh gọi hàm, sự kiện `step.start` sẽ gửi tên hàm và các sự kiện `step.delta` sẽ truyền trực tuyến các đối số dưới dạng chuỗi JSON một phần (bằng cách dùng `arguments_delta`). Bạn phải tích luỹ các phần chênh lệch này để nhận được đầy đủ các đối số. Điều này khác với các lệnh gọi đơn nguyên, trong đó bạn nhận được toàn bộ đối tượng lệnh gọi hàm cùng một lúc.
+**फ़ंक्शन कॉल की स्ट्रीमिंग**: फ़ंक्शन कॉल के साथ स्ट्रीमिंग का इस्तेमाल करने पर, `step.start` इवेंट फ़ंक्शन का नाम दिखाता है. साथ ही, `step.delta` इवेंट, आर्ग्युमेंट को `arguments_delta` का इस्तेमाल करके, आंशिक JSON स्ट्रिंग के तौर पर स्ट्रीम करते हैं. पूरे आर्ग्युमेंट पाने के लिए, आपको इन डेल्टा को इकट्ठा करना होगा. यह यूनेरी कॉल से अलग है, जहां आपको फ़ंक्शन कॉल ऑब्जेक्ट एक साथ मिलता है.
 
-#### Ví dụ
+#### उदाहरण
 
-##### Trước (Cũ)
+##### पहले (लेगसी)
 
 ### Python
 
@@ -525,7 +526,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### Sau (Giản đồ mới)
+##### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -602,29 +603,29 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### Lịch sử cuộc trò chuyện không trạng thái
+### स्टेटलेस बातचीत का इतिहास
 
-Nếu quản lý nhật ký trò chuyện theo cách thủ công ở phía máy khách (trường hợp sử dụng không trạng thái), bạn phải cập nhật cách xâu chuỗi các lượt trước đó.
+अगर क्लाइंट साइड पर बातचीत के इतिहास को मैन्युअल तरीके से मैनेज किया जाता है (स्टेटलेस इस्तेमाल का उदाहरण), तो आपको यह अपडेट करना होगा कि पिछले टर्न को कैसे स्ट्रिंग किया जाता है.
 
-- **Cũ**: Nhà phát triển thường thu thập mảng `outputs` từ các phản hồi và gửi lại trong trường `input` ở lượt tiếp theo.
-- **Lược đồ mới**: Giờ đây, bạn nên thu thập mảng `steps` từ phản hồi và truyền mảng đó vào trường `input` của yêu cầu tiếp theo, đồng thời thêm lượt tương tác mới của người dùng dưới dạng một bước `user_input`.
+- **लेगसी**: डेवलपर अक्सर जवाबों से `outputs` ऐरे इकट्ठा करते थे और उन्हें अगले टर्न में `input` फ़ील्ड में वापस भेजते थे.
+- **नया स्कीमा**: अब आपको जवाब से `steps` कलेक्शन करना होगा और इसे अगले अनुरोध के `input` फ़ील्ड में पास करना होगा. साथ ही, उपयोगकर्ता के नए टर्न को `user_input` चरण के तौर पर जोड़ना होगा.
 
-## Cấu hình định dạng đầu ra: Các thay đổi về `response_format`
+## आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन: `response_format` बदलाव
 
-API được cập nhật sẽ hợp nhất tất cả các chế độ kiểm soát định dạng đầu ra thành một trường `response_format` đa hình, hợp nhất. Điều này tập trung cấu hình đầu ra ở cấp cao nhất và giữ cho `generation_config` tập trung vào hành vi của mô hình (chẳng hạn như nhiệt độ, top\_p và suy nghĩ).
+अपडेट किए गए एपीआई में, आउटपुट फ़ॉर्मैट कंट्रोल को एक ही, बहुरूपी `response_format` फ़ील्ड में शामिल किया गया है. इससे आउटपुट कॉन्फ़िगरेशन को टॉप लेवल पर सेट किया जा सकता है. साथ ही, `generation_config` को मॉडल के व्यवहार (जैसे कि टेंपरेचर, top\_p, और गहराई से विचार) पर फ़ोकस करने में मदद मिलती है.
 
-### Thay đổi quan trọng
+### मुख्य बदलाव
 
-- **API sẽ xoá `response_mime_type`.** Giờ đây, bạn chỉ định loại MIME cho mỗi mục định dạng bên trong `response_format`.
-- **`response_format` hiện là một đối tượng (hoặc mảng) đa hình.** Mỗi mục nhập có một thuộc tính phân biệt `type` (`text`, `audio`, `image`) và các trường dành riêng cho từng loại. Để yêu cầu nhiều phương thức đầu ra, hãy truyền một mảng các mục nhập định dạng.
-- **`image_config` di chuyển từ `generation_config` sang `response_format`.**
-  Giờ đây, bạn có thể chỉ định các chế độ cài đặt đầu ra của hình ảnh như `aspect_ratio` và `image_size` trong mục `response_format` bằng `"type": "image"`.
+- **एपीआई, `response_mime_type` को हटा देता है.** अब `response_format` में हर फ़ॉर्मैट एंट्री के लिए, एमआईएमई टाइप तय किया जा सकता है.
+- **`response_format` अब एक पॉलीमॉर्फिक ऑब्जेक्ट (या ऐरे) है.** हर एंट्री में `type` डिस्क्रिमिनेटर (`text`, `audio`, `image`) और टाइप के हिसाब से फ़ील्ड होते हैं. एक से ज़्यादा आउटपुट मोडेलिटी का अनुरोध करने के लिए, फ़ॉर्मैट एंट्री का एक कलेक्शन पास करें.
+- **`image_config` को `generation_config` से `response_format` में ले जाया गया.**
+  अब `"type": "image"` के साथ `response_format` एंट्री में, इमेज आउटपुट की सेटिंग तय की जा सकती हैं. जैसे, `aspect_ratio` और `image_size`.
 
-### Đầu ra có cấu trúc (JSON)
+### स्ट्रक्चर्ड आउटपुट (JSON)
 
-Giản đồ mới sẽ xoá trường `response_mime_type`. Thay vào đó, hãy chỉ định loại MIME và giản đồ JSON bên trong một đối tượng `response_format` bằng `"type": "text"`.
+नए स्कीमा में `response_mime_type` फ़ील्ड नहीं है. इसके बजाय, `"type": "text"` के साथ `response_format` ऑब्जेक्ट में एमआईएमई टाइप और JSON स्कीमा बताएं.
 
-#### Trước (cũ)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -680,7 +681,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Sau (lược đồ mới)
+#### (नए स्कीमा) के बाद
 
 ### Python
 
@@ -751,11 +752,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Cấu hình hình ảnh
+### इमेज कॉन्फ़िगरेशन
 
-Giản đồ mới sẽ xoá `image_config` khỏi `generation_config`. Giờ đây, bạn chỉ định chế độ cài đặt đầu ra hình ảnh trong một mục `response_format` bằng `"type": "image"`.
+नए स्कीमा में, `generation_config` से `image_config` को हटा दिया गया है. अब आपको `response_format` एंट्री में `"type": "image"` के साथ, इमेज आउटपुट सेटिंग तय करनी होंगी.
 
-#### Trước (cũ)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -804,7 +805,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Sau (lược đồ mới)
+#### (नए स्कीमा) के बाद
 
 ### Python
 
@@ -857,50 +858,163 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-Để yêu cầu nhiều phương thức đầu ra (ví dụ: cả văn bản và âm thanh), hãy truyền một mảng các mục định dạng đến `response_format` thay vì một đối tượng duy nhất.
+### ऑडियो कॉन्फ़िगरेशन
 
-## Cách di chuyển sang giản đồ mới
+नए स्कीमा में, `response_modalities: ["audio"]` को `"type": "audio"` की `response_format` एंट्री से बदल दिया जाता है.
 
-### Người dùng SDK
+#### पहले (लेगसी)
 
-Nâng cấp lên phiên bản SDK mới nhất (Python ≥2.0.0, JavaScript ≥2.0.0). SDK sẽ tự động chọn sử dụng giản đồ mới — không cần mã thay đổi ngoài việc cập nhật cách đọc phản hồi (xem ví dụ ở trên). Xin lưu ý rằng chỉ lược đồ mới được hỗ trợ trong các phiên bản SDK này. Các phiên bản SDK cũ (Python 1.x.x, JavaScript 1.x.x) sẽ tiếp tục hoạt động cho đến khi lược đồ cũ bị xoá vào **ngày 8 tháng 6 năm 2026**.
+### Python
 
-### Người dùng API REST
+```
+interaction = client.interactions.create(
+    model="gemini-3.1-flash-tts-preview",
+    input="Say cheerfully: Have a wonderful day!",
+    response_modalities=["audio"],
+    generation_config={
+        "speech_config": [
+            {"voice": "Kore"}
+        ]
+    }
+)
+```
 
-Thêm tiêu đề `Api-Revision: 2026-05-20` vào các yêu cầu của bạn để chọn sử dụng lược đồ mới ngay bây giờ. Sau **ngày 26 tháng 5**, giản đồ mới sẽ trở thành giản đồ mặc định cho tất cả các yêu cầu. Bạn có thể tạm thời chọn không sử dụng `Api-Revision: 2026-05-07` cho đến **ngày 8 tháng 6**. Sau ngày này, API sẽ xoá vĩnh viễn giản đồ cũ.
+### JavaScript
 
-### Dòng thời gian
+```
+const interaction = await client.interactions.create({
+    model: 'gemini-3.1-flash-tts-preview',
+    input: 'Say cheerfully: Have a wonderful day!',
+    response_modalities: ['audio'],
+    generation_config: {
+        speech_config: [
+            { voice: 'Kore' }
+        ]
+    },
+});
+```
 
-| Ngày | Pha ban đầu | Người dùng SDK | Người dùng API REST |
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gemini-3.1-flash-tts-preview",
+    "input": "Say cheerfully: Have a wonderful day!",
+    "response_modalities": ["audio"],
+    "generation_config": {
+      "speech_config": [
+        { "voice": "Kore" }
+      ]
+    }
+  }'
+```
+
+#### (नए स्कीमा) के बाद
+
+### Python
+
+```
+interaction = client.interactions.create(
+    model="gemini-3.1-flash-tts-preview",
+    input="Say cheerfully: Have a wonderful day!",
+    # response_modalities is removed — use response_format
+    response_format={
+        "type": "audio"
+    },
+    generation_config={
+        "speech_config": [
+            {"voice": "Kore"}
+        ]
+    }
+)
+```
+
+### JavaScript
+
+```
+const interaction = await client.interactions.create({
+    model: 'gemini-3.1-flash-tts-preview',
+    input: 'Say cheerfully: Have a wonderful day!',
+    // response_modalities is removed — use response_format
+    response_format: {
+        type: 'audio'
+    },
+    generation_config: {
+        speech_config: [
+            { voice: 'Kore' }
+        ]
+    },
+});
+```
+
+### REST
+
+```
+# Opt-in needed before May 26th
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Api-Revision: 2026-05-20" \
+  -d '{
+    "model": "gemini-3.1-flash-tts-preview",
+    "input": "Say cheerfully: Have a wonderful day!",
+    "response_format": {
+      "type": "audio"
+    },
+    "generation_config": {
+      "speech_config": [
+        { "voice": "Kore" }
+      ]
+    }
+  }'
+```
+
+अगर आपको आउटपुट के लिए एक से ज़्यादा मोडालिटी (उदाहरण के लिए, टेक्स्ट और ऑडियो एक साथ) का अनुरोध करना है, तो `response_format` को एक ऑब्जेक्ट के बजाय फ़ॉर्मैट एंट्री का ऐरे पास करें.
+
+## नए स्कीमा पर माइग्रेट करने का तरीका
+
+### एसडीके का इस्तेमाल करने वाले लोग
+
+एसडीके टूल के नए वर्शन पर अपग्रेड करें (Python ≥2.0.0, JavaScript ≥2.0.0). एसडीके, आपको नए स्कीमा में अपने-आप ऑप्ट-इन कर देता है. इसके लिए, कोड में किसी तरह का बदलाव करने की ज़रूरत नहीं होती. आपको सिर्फ़ यह अपडेट करना होता है कि जवाबों को कैसे पढ़ा जाए. इसके उदाहरण ऊपर दिए गए हैं. ध्यान दें कि इन एसडीके वर्शन में सिर्फ़ नया स्कीमा काम करता है. एसडीके के पुराने वर्शन (Python 1.x.x, JavaScript 1.x.x) **8 जून, 2026** को लेगसी स्कीमा हटाए जाने तक काम करते रहेंगे.
+
+### REST API का इस्तेमाल करने वाले लोग
+
+नए स्कीमा में ऑप्ट-इन करने के लिए, अपने अनुरोधों में `Api-Revision: 2026-05-20` हेडर जोड़ें. **26 मई** के बाद, सभी अनुरोधों के लिए नया स्कीमा डिफ़ॉल्ट रूप से लागू हो जाएगा. `Api-Revision: 2026-05-07` का इस्तेमाल करके, कुछ समय के लिए ऑप्ट आउट किया जा सकता है. ऐसा **8 जून** तक किया जा सकता है. इसके बाद, एपीआई लेगसी स्कीमा को हमेशा के लिए हटा देगा.
+
+### टाइमलाइन
+
+| तारीख | फ़ेज़ (चरण) | एसडीके का इस्तेमाल करने वाले लोग | REST API का इस्तेमाल करने वाले लोग |
 | --- | --- | --- | --- |
-| **Ngày 7 tháng 5** | Chọn sử dụng | Đã có phiên bản SDK mới (Python ≥2.0.0, JS ≥2.0.0). Nâng cấp để tự động nhận giản đồ mới. | Thêm tiêu đề `Api-Revision: 2026-05-20` để chọn sử dụng. Giá trị mặc định vẫn là giá trị cũ. |
-| **Ngày 26 tháng 5** | Lật mặc định | Bạn không cần làm gì nếu đã nâng cấp. Các SDK cũ (Python 1.x.x, JS 1.x.x) vẫn hoạt động nhưng trả về các phản hồi cũ. | Giờ đây, giản đồ mới là giản đồ mặc định. Gửi tiêu đề `Api-Revision: 2026-05-07` để chọn không sử dụng. |
-| **Ngày 8 tháng 6** | Hoàng hôn | Các phiên bản SDK Python 1.x.x và JS 1.x.x sẽ bị lỗi đối với các lệnh gọi Interactions API. | Xoá giản đồ cũ cho Interactions API. Tiêu đề `Api-Revision` bị bỏ qua. |
+| **7 मई** | ऑप्ट-इन करें | SDK टूल का नया वर्शन उपलब्ध है (Python ≥2.0.0, JS ≥2.0.0). नए स्कीमा को अपने-आप लागू करने के लिए, अपग्रेड करें. | ऑप्ट इन करने के लिए, `Api-Revision: 2026-05-20` हेडर जोड़ें. डिफ़ॉल्ट सेटिंग, लेगसी ही रहेगी. |
+| **26 मई** | डिफ़ॉल्ट फ़्लिप | अगर आपने पहले ही अपग्रेड कर लिया है, तो आपको कुछ करने की ज़रूरत नहीं है. पुराने SDK (Python 1.x.x, JS 1.x.x) अब भी काम करते हैं, लेकिन लेगसी जवाब देते हैं. | नया स्कीमा अब डिफ़ॉल्ट रूप से उपलब्ध है. ऑप्ट आउट करने के लिए, `Api-Revision: 2026-05-07` हेडर भेजें. |
+| **8 जून** | सूर्यास्त | Python 1.x.x और JS 1.x.x SDK वर्शन के लिए, Interactions API कॉल काम नहीं करेंगे. | Interactions API के लिए, लेगसी स्कीमा हटा दिया गया है. `Api-Revision` हेडर को अनदेखा किया गया. |
 
-## Danh sách kiểm tra di chuyển
+## माइग्रेशन की चेकलिस्ट
 
-### Lược đồ các bước (`steps`)
+### Steps स्कीमा (`steps`)
 
-- Cập nhật mã để đọc nội dung phản hồi từ mảng `steps` thay vì `outputs`. [Xem ví dụ](#basic-unary).
-- Xác minh rằng mã của bạn xử lý cả hai loại bước `user_input` và `model_output`. [Xem ví dụ](#basic-unary).
-- (Gọi hàm) Cập nhật mã để tìm các bước `function_call` trong mảng `steps`. [Xem ví dụ](#function-calling).
-- (Công cụ phía máy chủ) Cập nhật mã để xử lý các bước dành riêng cho công cụ (ví dụ: `google_search_call`, `google_search_result`). [Xem ví dụ](#server-side-tools).
-- (Stateless History) Cập nhật tính năng quản lý nhật ký để truyền mảng `steps` trong trường `input` của yêu cầu tiếp theo. [Xem chi tiết](#stateless-history).
-- (Chỉ truyền phát trực tiếp) Cập nhật ứng dụng để theo dõi các loại sự kiện SSE mới (`interaction.created`, `step.delta`, v.v.). [Xem ví dụ](#streaming).
+- `outputs` के बजाय `steps` ऐरे से जवाब का कॉन्टेंट पढ़ने के लिए, कोड अपडेट करें. [उदाहरण देखें](#basic-unary).
+- पुष्टि करें कि आपका कोड, `user_input` और `model_output`, दोनों तरह के चरणों को मैनेज करता हो. [उदाहरण देखें](#basic-unary).
+- (फ़ंक्शन कॉल करना) `steps` ऐरे में `function_call` चरणों को ढूंढने के लिए कोड अपडेट करें. [उदाहरण देखें](#function-calling).
+- (सर्वर-साइड टूल) टूल के हिसाब से कोड अपडेट करें, ताकि टूल से जुड़े चरणों को पूरा किया जा सके. जैसे, `google_search_call`, `google_search_result`. [उदाहरण देखें](#server-side-tools).
+- (स्टेटलेस इतिहास) इतिहास को मैनेज करने की सुविधा को अपडेट करें, ताकि अगले अनुरोध के `input` फ़ील्ड में `steps` ऐरे को पास किया जा सके. [जानकारी देखें](#stateless-history).
+- (सिर्फ़ स्ट्रीमिंग के लिए) नए एसएसई इवेंट टाइप (`interaction.created`, `step.delta` वगैरह) सुनने के लिए, क्लाइंट को अपडेट करें. [उदाहरण देखें](#streaming).
 
-### Cấu hình định dạng đầu ra (`response_format`)
+### आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन (`response_format`)
 
-- Thay thế `response_mime_type` bằng trường `mime_type` bên trong `response_format`. [Xem ví dụ](#structured-output).
-- Bao bọc giản đồ JSON `response_format` hiện có bên trong một đối tượng `{"type": "text", "schema": ...}`. [Xem ví dụ](#structured-output).
-- (Tạo hình ảnh) Di chuyển `image_config` từ `generation_config` sang một mục `{"type": "image", ...}` trong `response_format`. [Xem ví dụ](#image-config).
-- (Đa phương thức) Chuyển đổi `response_format` từ một đối tượng thành một mảng khi yêu cầu nhiều phương thức đầu ra.
+- `response_mime_type` को `response_format` में मौजूद `mime_type` फ़ील्ड से बदलें. [उदाहरण देखें](#structured-output).
+- अपने मौजूदा `response_format` JSON स्कीमा को `{"type": "text", "schema": ...}` ऑब्जेक्ट में रैप करें. [उदाहरण देखें](#structured-output).
+- (इमेज जनरेट करने की सुविधा) `image_config` को `generation_config` से `response_format` में मौजूद `{"type": "image", ...}` एंट्री में ले जाएं. [उदाहरण देखें](#image-config).
+- (स्पीच जनरेशन) `response_modalities=["audio"]` को `response_format` में मौजूद `{"type": "audio"}` एंट्री से बदलें. [उदाहरण देखें](#audio-config).
+- (टेक्स्ट, इमेज, और वीडियो वगैरह का इस्तेमाल करके) एक से ज़्यादा आउटपुट मोड का अनुरोध करते समय, किसी एक ऑब्जेक्ट से `response_format` को ऐरे में बदलें.
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Cập nhật lần gần đây nhất: 2026-06-01 UTC.
+आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया."],[],[]]
