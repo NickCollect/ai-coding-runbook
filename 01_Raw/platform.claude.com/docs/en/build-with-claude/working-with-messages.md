@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/working-with-messages
-fetched_at: 2026-06-15T06:17:40.479135+00:00
+fetched_at: 2026-06-22T06:23:22.022842+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1192,9 +1192,22 @@ Claude can read both text and images in requests. Images can be supplied using t
 }
 ```
 
-## Tool use and computer use
+## Next steps
 
-See the [tool use guide](/docs/en/agents-and-tools/tool-use/overview) for examples of how to use tools with the Messages API.
-See the [computer use guide](/docs/en/agents-and-tools/tool-use/computer-use-tool) for examples of how to control desktop computer environments with the Messages API.
-For guaranteed JSON output, see [Structured Outputs](/docs/en/build-with-claude/structured-outputs).
-For an advisory token budget across a full agentic loop, set `output_config.task_budget`; see [Task budgets](/docs/en/build-with-claude/task-budgets).
+<CardGroup cols={2}>
+  <Card title="Stop reasons and fallback" icon="list" href="/docs/en/build-with-claude/handling-stop-reasons">
+    Handle each `stop_reason` value and decide what to do when a response ends.
+  </Card>
+  <Card title="Tool use with Claude" icon="wrench" href="/docs/en/agents-and-tools/tool-use/overview">
+    Give Claude tools to call external services and APIs from within the Messages API.
+  </Card>
+  <Card title="Computer use tool" icon="computer" href="/docs/en/agents-and-tools/tool-use/computer-use-tool">
+    Control desktop computer environments with the Messages API.
+  </Card>
+  <Card title="Structured outputs" icon="code-brackets" href="/docs/en/build-with-claude/structured-outputs">
+    Get guaranteed, schema-validated JSON output from Claude.
+  </Card>
+  <Card title="Task budgets" icon="gauge" href="/docs/en/build-with-claude/task-budgets">
+    Set an advisory token budget across a full agentic loop with `output_config.task_budget`.
+  </Card>
+</CardGroup>

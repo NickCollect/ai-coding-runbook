@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/list
-fetched_at: 2026-06-15T06:17:55.053533+00:00
+fetched_at: 2026-06-22T06:23:33.745694+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,10 +13,6 @@ compliance review. Results are sorted chronologically (time ascending)
 by created_at, with ties broken by id.
 
 ### Query Parameters
-
-- `user_ids: array of string`
-
-  Filter to chats created by specific users. **Required**; pass 1–10 user IDs per request. Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.
 
 - `after_id: optional string`
 
@@ -54,25 +50,29 @@ by created_at, with ties broken by id.
 
 - `project_ids: optional array of string`
 
-  Filter by project IDs (accepts `claude_proj_...`). Enumerate IDs via `GET /v1/compliance/apps/projects`.
+  Filter by project IDs (accepts `claude_proj_...`). Enumerate IDs via `GET /v1/compliance/apps/projects`. Requires user_ids[]; not supported for org-wide queries.
 
 - `updated_at: optional object { gt, gte, lt, lte }`
 
   - `gt: optional string`
 
-    Filter chats updated after this time (RFC 3339 format)
+    Filter chats updated after this time (RFC 3339 format). Requires user_ids[]; not supported for org-wide queries.
 
   - `gte: optional string`
 
-    Filter chats updated at or after this time (RFC 3339 format)
+    Filter chats updated at or after this time (RFC 3339 format). Requires user_ids[]; not supported for org-wide queries.
 
   - `lt: optional string`
 
-    Filter chats updated before this time (RFC 3339 format)
+    Filter chats updated before this time (RFC 3339 format). Requires user_ids[]; not supported for org-wide queries.
 
   - `lte: optional string`
 
-    Filter chats updated at or before this time (RFC 3339 format)
+    Filter chats updated at or before this time (RFC 3339 format). Requires user_ids[]; not supported for org-wide queries.
+
+- `user_ids: optional array of string`
+
+  Filter to chats created by specific users (max 10 per request). Omit for an org-wide query. Enumerate IDs via `GET /v1/compliance/organizations/{org_uuid}/users`.
 
 ### Header Parameters
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/workload-identity-federation
-fetched_at: 2026-06-15T06:17:44.015017+00:00
+fetched_at: 2026-06-22T06:23:25.006680+00:00
 fetch_method: mintlify_md
 ---
 
@@ -85,7 +85,7 @@ The **Connect workload** wizard creates all three resources (the issuer, the ser
   </Step>
 </Steps>
 
-To manage these resources programmatically, see [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api).
+To manage these resources programmatically, see [Manage WIF with the Admin API](/docs/en/manage-claude/wif-admin-api) for the curl walkthrough, or see the [Service accounts API reference](/docs/en/api/admin/service_accounts), [Federation issuers API reference](/docs/en/api/admin/federation_issuers), and [Federation rules API reference](/docs/en/api/admin/federation_rules) for complete parameter details and response schemas.
 
 ## Authenticate from your workload
 

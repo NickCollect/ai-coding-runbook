@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
-fetched_at: 2026-06-15T06:17:41.867477+00:00
+fetched_at: 2026-06-22T06:23:23.144698+00:00
 fetch_method: mintlify_md
 ---
 
@@ -26,7 +26,7 @@ This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-
 
 ## Model compatibility
 
-Programmatic tool calling requires `code_execution_20260120`, which is supported on the following models:
+Programmatic tool calling requires `code_execution_20260120` or later, which is supported on the following models:
 
 | Model |
 |-------|

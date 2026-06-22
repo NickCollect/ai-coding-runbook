@@ -1,17 +1,20 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/token-counting
-fetched_at: 2026-06-15T06:17:42.212651+00:00
+fetched_at: 2026-06-22T06:23:23.369097+00:00
 fetch_method: mintlify_md
 ---
 
 # Token counting
 
+Count the tokens in a message before you send it to Claude. Use token counts to manage rate limits and costs, make model routing decisions, and fit prompts to a target length.
+
 ---
 
-Token counting enables you to determine the number of tokens in a message before sending it to Claude, helping you make informed decisions about your prompts and usage. With token counting, you can
+Token counting lets you determine the number of tokens in a message before you send it to Claude. This helps you make informed decisions about your prompts and usage. With token counting, you can:
+
 - Proactively manage rate limits and costs
 - Make smart model routing decisions
-- Optimize prompts to be a specific length
+- Optimize prompts to a specific length
 
 <Note>
 This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
@@ -1635,3 +1638,22 @@ Token counting is **free to use** but subject to requests per minute rate limits
     No, token counting provides an estimate without using caching logic. While you may provide `cache_control` blocks in your token counting request, prompt caching only occurs during actual message creation.
   
 </section>
+
+---
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Count message tokens" icon="code" href="/docs/en/api/messages-count-tokens">
+    Read the full API reference for the token counting endpoint.
+  </Card>
+  <Card title="Context windows" icon="arrows-maximize" href="/docs/en/build-with-claude/context-windows">
+    Use token counts to keep prompts within a model's context window.
+  </Card>
+  <Card title="Rate limits" icon="gauge" href="/docs/en/api/rate-limits">
+    Check token counts before you send a request to stay within your usage tier.
+  </Card>
+  <Card title="Prompt caching" icon="database" href="/docs/en/build-with-claude/prompt-caching">
+    Reduce cost and latency on repeated prompts by caching prompt prefixes.
+  </Card>
+</CardGroup>

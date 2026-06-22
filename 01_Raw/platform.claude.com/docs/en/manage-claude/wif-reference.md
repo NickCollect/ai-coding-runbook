@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-reference
-fetched_at: 2026-06-15T06:17:44.046300+00:00
+fetched_at: 2026-06-22T06:23:25.086841+00:00
 fetch_method: mintlify_md
 ---
 
@@ -148,6 +148,8 @@ A federation rule's `oauth_scope` is a ceiling: the minted token can never excee
 ## Validation rules
 
 Anthropic enforces these constraints when you create or update issuers and rules, and when verifying an incoming JWT at exchange time.
+
+For complete parameter details and response schemas, see the [Service accounts API reference](/docs/en/api/admin/service_accounts), [Federation issuers API reference](/docs/en/api/admin/federation_issuers), and [Federation rules API reference](/docs/en/api/admin/federation_rules).
 
 ### Resource fields
 
