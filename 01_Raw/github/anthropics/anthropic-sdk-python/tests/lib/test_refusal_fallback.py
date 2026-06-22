@@ -119,7 +119,7 @@ class TestRefusalFallback:
         # a `fallback` seam block is prepended at the model boundary — the same
         # block shape the streaming splice emits
         assert [block.to_dict() for block in result.content] == [
-            {"type": "fallback", "from": {"model": "primary-model"}, "to": {"model": "fallback-model"}}
+            {"type": "fallback", "from": {"model": "primary-model"}, "to": {"model": "fallback-model"}, "trigger": {"type": "refusal", "category": None}}
         ]
         bodies = request_bodies(respx_mock)
         assert [body["model"] for body in bodies] == ["primary-model", "fallback-model"]
@@ -235,8 +235,8 @@ class TestRefusalFallback:
         assert state.index == 1
         # one seam per model boundary, in hop order, ahead of the served content
         assert [block.to_dict() for block in result.content] == [
-            {"type": "fallback", "from": {"model": "primary-model"}, "to": {"model": "mid-model"}},
-            {"type": "fallback", "from": {"model": "mid-model"}, "to": {"model": "last-model"}},
+            {"type": "fallback", "from": {"model": "primary-model"}, "to": {"model": "mid-model"}, "trigger": {"type": "refusal", "category": None}},
+            {"type": "fallback", "from": {"model": "mid-model"}, "to": {"model": "last-model"}, "trigger": {"type": "refusal", "category": None}},
             {"type": "text", "text": "ok"},
         ]
         bodies = request_bodies(respx_mock)
@@ -261,7 +261,7 @@ class TestRefusalFallback:
 
         assert result.model == "last-model"
         assert [block.to_dict() for block in result.content] == [
-            {"type": "fallback", "from": {"model": "mid-model"}, "to": {"model": "last-model"}},
+            {"type": "fallback", "from": {"model": "mid-model"}, "to": {"model": "last-model"}, "trigger": {"type": "refusal", "category": None}},
             {"type": "text", "text": "ok"},
         ]
         bodies = request_bodies(respx_mock)
@@ -317,7 +317,8 @@ class TestRefusalFallback:
         client = make_sync_client(middleware=[BetaRefusalFallbackMiddleware([{"model": "fallback-model"}])])
 
         with pytest.raises(
-            AnthropicError, match=r"Sending the `fallbacks:` request param is not supported when using the `BetaRefusalFallbackMiddleware`\. You should either remove the middleware and send `fallbacks:` with the `server-side-fallback-2026-06-01` beta header to let the API handle refusal fallbacks, or omit the `fallbacks:` param if you'd like `BetaRefusalFallbackMiddleware` to handle fallbacks on the client side\."
+            AnthropicError,
+            match=r"Sending the `fallbacks:` request param is not supported when using the `BetaRefusalFallbackMiddleware`\. You should either remove the middleware and send `fallbacks:` with the `server-side-fallback-2026-06-01` beta header to let the API handle refusal fallbacks, or omit the `fallbacks:` param if you'd like `BetaRefusalFallbackMiddleware` to handle fallbacks on the client side\.",
         ):
             create_message(client, fallbacks=[{"model": "server-fallback"}])
         # the error is raised before any request is sent
@@ -416,6 +417,61 @@ class TestBetaHeader:
         assert beta_headers(respx_mock) == ["interleaved-thinking-2025-05-14, fallback-credit-2026-06-01"]
 
 
+def helper_headers(respx_mock: MockRouter) -> list[list[str]]:
+    calls = cast("list[MockRequestCall]", respx_mock.calls)
+    return [call.request.headers.get_list("x-stainless-helper") for call in calls]
+
+
+class TestHelperTelemetry:
+    @pytest.mark.respx(base_url=base_url)
+    def test_tags_the_original_and_fallback_requests(self, respx_mock: MockRouter) -> None:
+        respx_mock.post("/v1/messages").mock(
+            side_effect=[refusal("primary-model", "credit-token"), message("fallback-model")]
+        )
+        client = make_sync_client(middleware=[BetaRefusalFallbackMiddleware([{"model": "fallback-model"}])])
+        create_message(client)
+        assert helper_headers(respx_mock) == [
+            ["fallback-refusal-middleware"],
+            ["fallback-refusal-middleware"],
+        ]
+
+    @pytest.mark.respx(base_url=base_url)
+    def test_appends_to_a_helper_tag_already_on_the_request(self, respx_mock: MockRouter) -> None:
+        respx_mock.post("/v1/messages").mock(side_effect=[message("primary-model")])
+        client = make_sync_client(middleware=[BetaRefusalFallbackMiddleware([{"model": "fallback-model"}])])
+        client.beta.messages.create(
+            model="primary-model",
+            max_tokens=1024,
+            messages=[{"role": "user", "content": "hi"}],
+            extra_headers={"X-Stainless-Helper": "BetaToolRunner"},
+        )
+        assert helper_headers(respx_mock) == [["BetaToolRunner, fallback-refusal-middleware"]]
+
+    @pytest.mark.respx(base_url=base_url)
+    def test_does_not_tag_requests_it_passes_through(self, respx_mock: MockRouter) -> None:
+        respx_mock.post("/v1/messages").mock(side_effect=[message("primary-model")])
+        client = make_sync_client(middleware=[BetaRefusalFallbackMiddleware([{"model": "fallback-model"}])])
+        # the GA surface is not applicable to this middleware
+        client.messages.create(
+            model="primary-model",
+            max_tokens=1024,
+            messages=[{"role": "user", "content": "hi"}],
+        )
+        assert helper_headers(respx_mock) == [[]]
+
+    @pytest.mark.respx(base_url=base_url)
+    async def test_async_tags_the_original_and_fallback_requests(self, respx_mock: MockRouter) -> None:
+        respx_mock.post("/v1/messages").mock(
+            side_effect=[refusal("primary-model", "credit-token"), message("fallback-model")]
+        )
+        client = make_async_client(middleware=[BetaRefusalFallbackMiddleware([{"model": "fallback-model"}])])
+        await create_message_async(client)
+        assert helper_headers(respx_mock) == [
+            ["fallback-refusal-middleware"],
+            ["fallback-refusal-middleware"],
+        ]
+
+
 class TestAsyncRefusalFallback:
     @pytest.mark.respx(base_url=base_url)
     async def test_retries_a_refusal_with_the_fallback_params_and_credit_token(self, respx_mock: MockRouter) -> None:
@@ -428,7 +484,7 @@ class TestAsyncRefusalFallback:
 
         assert result.model == "fallback-model"
         assert [block.to_dict() for block in result.content] == [
-            {"type": "fallback", "from": {"model": "primary-model"}, "to": {"model": "fallback-model"}}
+            {"type": "fallback", "from": {"model": "primary-model"}, "to": {"model": "fallback-model"}, "trigger": {"type": "refusal", "category": None}}
         ]
         bodies = request_bodies(respx_mock)
         assert [body["model"] for body in bodies] == ["primary-model", "fallback-model"]

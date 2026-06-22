@@ -28,7 +28,9 @@ from ..._response import APIResponse, AsyncAPIResponse
 from ..._streaming import Stream, AsyncStream, ServerSentEvent
 from ..._exceptions import AnthropicError
 from ..._middleware import CallNext, Middleware, AsyncCallNext
+from ..._base_client import merge_headers
 from ...types.message import Message
+from .._stainless_helpers import helper_header
 from ...types.beta.beta_message import BetaMessage
 from ...types.anthropic_beta_param import AnthropicBetaParam
 from ...types.beta.beta_fallback_param import BetaFallbackParam
@@ -178,8 +180,9 @@ class BetaRefusalFallbackMiddleware(Middleware):
         start_index = self._start_index(state)
         pin = self._make_pin(state)
 
-        # Send the configured betas on this and every hop request derived from it.
-        request = _append_betas(request, self._betas)
+        # Send the configured betas on this and every hop request derived from it,
+        # and tag this and every hop with the middleware's helper telemetry.
+        request = _with_middleware_headers(request, self._betas)
 
         # The seam blocks this middleware splices into streams are client-side
         # markers — the server rejects them as unknown tags — so a history that
@@ -219,10 +222,11 @@ class BetaRefusalFallbackMiddleware(Middleware):
             index += 1
             pin(index)
             token = _credit_token(message)
+            category = _refusal_category(message)
             res = call_next(request.copy(body=_merged_body(body, self._fallbacks[index], token)))
             if res.http_response.is_success:
                 to_model = str(self._fallbacks[index]["model"])
-                seams.append(_seam_block(from_model, to_model))
+                seams.append(_seam_block(from_model, to_model, category))
                 from_model = to_model
 
         if seams and res.http_response.is_success:
@@ -244,8 +248,9 @@ class BetaRefusalFallbackMiddleware(Middleware):
         start_index = self._start_index(state)
         pin = self._make_pin(state)
 
-        # Send the configured betas on this and every hop request derived from it.
-        request = _append_betas(request, self._betas)
+        # Send the configured betas on this and every hop request derived from it,
+        # and tag this and every hop with the middleware's helper telemetry.
+        request = _with_middleware_headers(request, self._betas)
 
         # The seam blocks this middleware splices into streams are client-side
         # markers — the server rejects them as unknown tags — so a history that
@@ -285,10 +290,11 @@ class BetaRefusalFallbackMiddleware(Middleware):
             index += 1
             pin(index)
             token = _credit_token(message)
+            category = _refusal_category(message)
             res = await call_next(request.copy(body=_merged_body(body, self._fallbacks[index], token)))
             if res.http_response.is_success:
                 to_model = str(self._fallbacks[index]["model"])
-                seams.append(_seam_block(from_model, to_model))
+                seams.append(_seam_block(from_model, to_model, category))
                 from_model = to_model
 
         if seams and res.http_response.is_success:
@@ -694,6 +700,9 @@ class _Refusal(BaseModel):
     token: Optional[str]
     """The minted credit token; `None` for a token-less start-of-stream refusal."""
 
+    category: Optional[str]
+    """The policy category that triggered the refusal; `None` when not surfaced."""
+
     has_prefill_claim: bool
     usage: Dict[str, Any]
     event: Dict[str, Any]
@@ -865,6 +874,7 @@ class _HopReader:
                     self.outcome = _HopOutcome(
                         refused=_Refusal(
                             token=token,
+                            category=details.get("category") if details is not None else None,
                             has_prefill_claim=details is not None and details.get("fallback_has_prefill_claim") is True,
                             usage=usage,
                             event=event,
@@ -1062,7 +1072,7 @@ class _ChainState:
                     {
                         "type": "content_block_start",
                         "index": seam_index,
-                        "content_block": _seam_block(self.from_model, to_model),
+                        "content_block": _seam_block(self.from_model, to_model, self.last_refusal.category),
                     },
                 ),
                 _emit("content_block_stop", {"type": "content_block_stop", "index": seam_index}),
@@ -1325,20 +1335,20 @@ def _strip_seam_blocks(body: dict[str, Any]) -> dict[str, Any]:
     return {**body, "messages": stripped_messages}
 
 
-def _append_betas(request: APIRequest, betas: tuple[AnthropicBetaParam, ...]) -> APIRequest:
-    """A copy of `request` with `betas` appended to its `anthropic-beta` header,
-    skipping values already present (set by the caller or another middleware).
+def _with_middleware_headers(request: APIRequest, betas: tuple[AnthropicBetaParam, ...]) -> APIRequest:
+    """A copy of `request` with `betas` appended to its `anthropic-beta` header
+    (skipping values already present) and the middleware's helper-telemetry tag
+    appended to `x-stainless-helper`. Single `request.copy()` for both.
     """
     # httpx.Headers for the case-insensitive read; Omit-valued entries can't be
     # the beta header's value and are carried over untouched below.
     current = httpx.Headers({k: v for k, v in request.headers.items() if isinstance(v, str)}).get("anthropic-beta", "")
     existing = {value.strip() for value in current.split(",")}
     additions = dict.fromkeys(str(beta) for beta in betas if str(beta) not in existing)
-    if not additions:
-        return request
     headers = {k: v for k, v in request.headers.items() if k.lower() != "anthropic-beta"}
-    headers["anthropic-beta"] = ", ".join(filter(None, [current, *additions]))
-    return request.copy(headers=headers)
+    if current or additions:
+        headers["anthropic-beta"] = ", ".join(filter(None, [current, *additions]))
+    return request.copy(headers=merge_headers(headers, helper_header("fallback-refusal-middleware")))
 
 
 def _credit_token(message: Message | BetaMessage) -> str | None:
@@ -1348,9 +1358,21 @@ def _credit_token(message: Message | BetaMessage) -> str | None:
     return None
 
 
-def _seam_block(from_model: str, to_model: str) -> dict[str, Any]:
+def _refusal_category(message: Message | BetaMessage) -> str | None:
+    """The policy category that caused the refusal; only the beta surface carries one."""
+    if isinstance(message, BetaMessage) and message.stop_details is not None:
+        return message.stop_details.category
+    return None
+
+
+def _seam_block(from_model: str, to_model: str, category: str | None) -> dict[str, Any]:
     """The synthetic `fallback` content block marking one model boundary."""
-    return {"type": "fallback", "from": {"model": from_model}, "to": {"model": to_model}}
+    return {
+        "type": "fallback",
+        "from": {"model": from_model},
+        "to": {"model": to_model},
+        "trigger": {"type": "refusal", "category": category},
+    }
 
 
 def _seamed_http_response(original: httpx.Response, seams: list[dict[str, Any]]) -> httpx.Response | None:
