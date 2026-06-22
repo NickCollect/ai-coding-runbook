@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/permissions
-fetched_at: 2026-05-05T19:55:37.442240+00:00
+fetched_at: 2026-06-22T06:23:24.768375+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,7 @@ Controls read access to files and directories. Supports glob patterns.
 
 **Format:** `Write(pathOrGlob)`
 
-Controls write access to files and directories. Supports glob patterns. When using in print mode, `--force` is required to write files.
+Controls write access to files and directories. Supports glob patterns. Print mode can use write and shell tools. Use `permissions.allow`, `permissions.deny`, and `--force` to control what runs without prompts.
 
 | Example               | Description                           |
 | --------------------- | ------------------------------------- |

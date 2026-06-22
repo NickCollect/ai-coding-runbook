@@ -1,21 +1,27 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/my-machines
-fetched_at: 2026-05-05T19:55:38.311597+00:00
+fetched_at: 2026-06-22T06:23:24.960959+00:00
 fetch_method: mintlify_md
 ---
 
 # My Machines
 
-My Machines lets you run Cloud Agents on a machine you already use: your laptop, a devbox, or a remote VM. It is the fastest way to give Cloud Agents access to your local repo, dependencies, build cache, and private network.
+My Machines lets a specific user run Cloud Agent tool calls on a machine they already use: a laptop, devbox, or remote VM. Use it when that machine is the desired execution environment for a repo.
 
 A worker on your machine opens an outbound connection to Cursor. The agent loop runs in Cursor's cloud, but terminal commands, file edits, browser actions, and other tool calls execute on your machine. No inbound ports or firewall changes are required.
+
+Cursor-managed Cloud Agents are the recommended path for most teams, including
+teams that need access to private networks. You can use network allowlists,
+Tailscale or similar clients, and private connectivity for supported source
+control paths without operating your own worker. See [Choose where Cloud
+Agents run](https://cursor.com/docs/cloud-agent/choose-runtime.md).
 
 Use My Machines when you want to:
 
 - Use a devbox or remote workstation that already has your repo and tools
-- Run Cloud Agents against services only available from your network
-- Keep build caches, test outputs, and secrets on your machine
-- Try self-hosted Cloud Agents quickly
+- Execute tool calls on one user's machine for a specific repo
+- Reuse machine-local state that you do not want to recreate in a cloud environment
+- Try the worker model before building a centrally managed pool
 
 For org-wide worker fleets, see [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md).
 

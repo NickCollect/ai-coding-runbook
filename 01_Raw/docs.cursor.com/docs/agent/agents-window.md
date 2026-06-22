@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/agents-window
-fetched_at: 2026-05-05T19:55:36.022511+00:00
+fetched_at: 2026-06-22T06:23:24.412377+00:00
 fetch_method: mintlify_md
 ---
 
@@ -34,6 +34,7 @@ The following features are available in the Agents Window:
 - **New diffs view:** review and commit changes, and manage PRs without leaving Cursor.
 - **Parallel agents:** run many parallel agents in the cloud (and work with them from your phone, web, Slack, GitHub, and Linear).
 - **Easier handoff between local and cloud:** quickly move an agent from cloud to local to iterate quickly, and move it back to the cloud so it keeps working on its own.
+- **Cloud subagents:** hand off a task to a [cloud subagent](https://cursor.com/docs/subagents.md#cloud-subagents) with `/in-cloud`, or `/babysit` a PR, so long-running work runs on its own VM and branch while you keep working locally.
 - **Worktrees:** [run agents in isolated Git checkouts](https://cursor.com/docs/configuration/worktrees.md) so each task has its own files and changes.
 
 ## Choosing Between Agents Window and Editor

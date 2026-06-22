@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-06-08T05:24:59.301772+00:00
+fetched_at: 2026-06-22T06:23:26.727402+00:00
 fetch_method: mintlify_md
 ---
 
@@ -52,8 +52,10 @@ SDK runs follow the same pricing, request pools, and Privacy Mode rules as runs 
 ## Installation
 
 ```bash
-uv pip install cursor-sdk
+pip install cursor-sdk
 ```
+
+Requires Python 3.10 or later.
 
 ## Quick start
 
@@ -604,17 +606,19 @@ run = agent.send(
 
 Pass `mode="plan"` or `mode="agent"` to control whether a run explores and plans first or implements changes directly. See [Plan mode](https://cursor.com/help/ai-features/plan-mode.md) for what plan mode does in the product.
 
-Set `mode` on `Agent.create()` to seed the first run. On follow-up `agent.send()` calls, omit `mode` to keep the conversation's current mode, or pass `mode` to switch for that run only.
+Set `mode` in `AgentOptions` passed to `Agent.create()` to seed the first run. On follow-up `agent.send()` calls, omit `mode` to keep the conversation's current mode, or pass `mode` to switch for that run only.
 
 ```python
-from cursor_sdk import Agent, CloudAgentOptions, CloudRepository, SendOptions
+from cursor_sdk import Agent, AgentOptions, CloudAgentOptions, CloudRepository, SendOptions
 
 with Agent.create(
-    model="composer-2.5",
-    mode="plan",
-    cloud=CloudAgentOptions(
-        repos=[CloudRepository(url="https://github.com/your-org/your-repo")],
-    ),
+    AgentOptions(
+        model="composer-2.5",
+        mode="plan",
+        cloud=CloudAgentOptions(
+            repos=[CloudRepository(url="https://github.com/your-org/your-repo")],
+        ),
+    )
 ) as agent:
     agent.send("Design the auth refactor").wait()
     agent.send(
@@ -965,7 +969,7 @@ print(composer.parameters if composer else [])
 
 Preset `variants` on each `SDKModel` already contain valid `params`, so you can copy them into a `ModelSelection`.
 
-`Cursor.repositories.list()` returns the SCM repositories (GitHub, GitLab, Azure DevOps, depending on what's connected) available for cloud agents on the calling account or team. Each item exposes a `url`. Use these to populate `CloudAgentOptions.repos`.
+`Cursor.repositories.list()` returns the SCM repositories (GitHub, GitLab, Bitbucket, Azure DevOps, depending on what's connected) available for cloud agents on the calling account or team. Each item exposes a `url`. Use these to populate `CloudAgentOptions.repos`.
 
 ## MCP servers
 
@@ -974,6 +978,7 @@ Agents can pick up MCP servers from inline definitions, project/user settings, p
 ```python
 from cursor_sdk import (
     Agent,
+    AgentOptions,
     HttpMcpServerConfig,
     LocalAgentOptions,
     McpAuth,
@@ -981,18 +986,20 @@ from cursor_sdk import (
 )
 
 agent = Agent.create(
-    model="composer-2.5",
-    local=LocalAgentOptions(cwd="."),
-    mcp_servers={
-        "docs": HttpMcpServerConfig(
-            url="https://example.com/mcp",
-            auth=McpAuth(client_id="client-id", scopes=["read", "write"]),
-        ),
-        "filesystem": StdioMcpServerConfig(
-            command="npx",
-            args=["-y", "@modelcontextprotocol/server-filesystem", "."],
-        ),
-    },
+    AgentOptions(
+        model="composer-2.5",
+        local=LocalAgentOptions(cwd="."),
+        mcp_servers={
+            "docs": HttpMcpServerConfig(
+                url="https://example.com/mcp",
+                auth=McpAuth(client_id="client-id", scopes=["read", "write"]),
+            ),
+            "filesystem": StdioMcpServerConfig(
+                command="npx",
+                args=["-y", "@modelcontextprotocol/server-filesystem", "."],
+            ),
+        },
+    )
 )
 ```
 
@@ -1027,6 +1034,7 @@ Cloud agents accept authenticated MCP configs inline too. Cloud MCP supports HTT
 ```python
 from cursor_sdk import (
     Agent,
+    AgentOptions,
     CloudAgentOptions,
     CloudRepository,
     HttpMcpServerConfig,
@@ -1034,21 +1042,23 @@ from cursor_sdk import (
 )
 
 agent = Agent.create(
-    model="composer-2.5",
-    cloud=CloudAgentOptions(
-        repos=[CloudRepository(url="https://github.com/your-org/your-repo")],
-    ),
-    mcp_servers={
-        "linear": HttpMcpServerConfig(
-            url="https://mcp.linear.app/mcp",
-            headers={"Authorization": "Bearer linear_pat_xxx"},
+    AgentOptions(
+        model="composer-2.5",
+        cloud=CloudAgentOptions(
+            repos=[CloudRepository(url="https://github.com/your-org/your-repo")],
         ),
-        "github": StdioMcpServerConfig(
-            command="npx",
-            args=["-y", "@modelcontextprotocol/server-github"],
-            env={"GITHUB_TOKEN": "ghp_xxx"},
-        ),
-    },
+        mcp_servers={
+            "linear": HttpMcpServerConfig(
+                url="https://mcp.linear.app/mcp",
+                headers={"Authorization": "Bearer linear_pat_xxx"},
+            ),
+            "github": StdioMcpServerConfig(
+                command="npx",
+                args=["-y", "@modelcontextprotocol/server-github"],
+                env={"GITHUB_TOKEN": "ghp_xxx"},
+            ),
+        },
+    )
 )
 ```
 
@@ -1063,22 +1073,24 @@ See [MCP](https://cursor.com/docs/mcp.md) for the full config format and [Cloud 
 Define named subagents that the main agent can spawn via the `Agent` tool. Pass them inline:
 
 ```python
-from cursor_sdk import Agent, AgentDefinition, LocalAgentOptions
+from cursor_sdk import Agent, AgentDefinition, AgentOptions, LocalAgentOptions
 
 agent = Agent.create(
-    model="composer-2.5",
-    local=LocalAgentOptions(cwd="."),
-    agents={
-        "code-reviewer": AgentDefinition(
-            description="Expert code reviewer for quality and security.",
-            prompt="Review code for bugs, security issues, and proven approaches.",
-            model="inherit",
-        ),
-        "test-writer": AgentDefinition(
-            description="Writes tests for code changes.",
-            prompt="Write comprehensive tests for the given code.",
-        ),
-    },
+    AgentOptions(
+        model="composer-2.5",
+        local=LocalAgentOptions(cwd="."),
+        agents={
+            "code-reviewer": AgentDefinition(
+                description="Expert code reviewer for quality and security.",
+                prompt="Review code for bugs, security issues, and proven approaches.",
+                model="inherit",
+            ),
+            "test-writer": AgentDefinition(
+                description="Writes tests for code changes.",
+                prompt="Write comprehensive tests for the given code.",
+            ),
+        },
+    )
 )
 ```
 
@@ -1086,7 +1098,42 @@ Subagents committed to the repo at `.cursor/agents/*.md` (with `name`, `descript
 
 ### Nested subagents
 
-Subagents can spawn their own subagents. When a subagent uses the `Agent` tool, it reaches the same subagent executor the parent has, so a parent can delegate to a subagent that delegates further. Each level sees the same set of named subagents. Nesting works out of the box; you don't configure anything to turn it on.
+Subagents can spawn their own subagents, within a nesting limit. When a subagent uses the `Agent` tool, it reaches the same subagent executor the parent has, so a parent can delegate to a subagent that delegates further. Each level sees the same set of named subagents. The top-level agent and its direct subagents can launch subagents, but a subagent launched by another subagent can't launch further ones.
+
+## Custom tools
+
+Custom tools let you expose Python functions to local agents without standing up a separate MCP server. Pass them on `LocalAgentOptions.custom_tools`.
+
+```python
+from cursor_sdk import Agent, CustomTool, CustomToolContext, LocalAgentOptions
+
+def get_deployment_status(args, context: CustomToolContext):
+    service = args["service"]
+    return f"Service {service} is healthy."
+
+with Agent.create(
+    model="composer-2.5",
+    local=LocalAgentOptions(
+        cwd=".",
+        custom_tools={
+            "get_deployment_status": CustomTool(
+                description="Look up the current deployment status for a service.",
+                input_schema={
+                    "type": "object",
+                    "properties": {
+                        "service": {"type": "string", "description": "Service name"},
+                    },
+                    "required": ["service"],
+                },
+                execute=get_deployment_status,
+            ),
+        },
+    ),
+) as agent:
+    agent.send("Is the checkout service healthy?").wait()
+```
+
+`execute` receives the parsed arguments and a `CustomToolContext` with `tool_call_id` when available. It can return a string, a JSON-compatible value, or a mapping with a `content` list. Custom tools are local agents only.
 
 ## Hooks
 
@@ -1198,6 +1245,9 @@ The Python SDK accepts helper dataclasses and raw dictionaries. Dataclasses use 
 | `cwd`             | `str \| os.PathLike \| Sequence[str \| os.PathLike]` | `None`  | Workspace path or paths.                                                                    |
 | `setting_sources` | `Sequence[SettingSource]`                            | `None`  | Ambient settings layers: `"project"`, `"user"`, `"team"`, `"mdm"`, `"plugins"`, or `"all"`. |
 | `sandbox_options` | `SandboxOptions \| Mapping[str, Any]`                | `None`  | Local sandbox options.                                                                      |
+| `store`           | `LocalAgentStoreConfig \| Mapping[str, Any]`         | `None`  | Local store config passed to the bridge.                                                    |
+| `auto_review`     | `bool`                                               | `None`  | Route local tool calls through Auto-review when the connected backend supports it.          |
+| `custom_tools`    | `Mapping[str, CustomTool \| Mapping[str, Any]]`      | `None`  | [Custom tools](https://cursor.com/docs/sdk/python.md#custom-tools) exposed to local agents. |
 
 ### CloudAgentOptions
 
@@ -1218,6 +1268,19 @@ The Python SDK accepts helper dataclasses and raw dictionaries. Dataclasses use 
 | `prompt`      | `str`                                                            | *required*  | System prompt for the subagent.                                                                  |
 | `model`       | `str \| ModelSelection \| Mapping[str, Any] \| "inherit"`        | `"inherit"` | Model override. Pass `"inherit"` to use the parent's selection.                                  |
 | `mcp_servers` | `Sequence[str \| AgentDefinitionMcpServer \| Mapping[str, Any]]` | `None`      | MCP servers available to this subagent. Names reference servers from the parent's `mcp_servers`. |
+
+### CustomTool
+
+```python
+@dataclass
+class CustomTool:
+    execute: Callable[[Mapping[str, Any], CustomToolContext], Any]
+    description: str | None = None
+    input_schema: Mapping[str, Any] | None = None
+
+class CustomToolContext:
+    tool_call_id: str | None = None
+```
 
 ### ModelSelection
 
@@ -1294,6 +1357,12 @@ class SDKImage:
     dimension: SDKImageDimension | Mapping[str, Any] | None = None
 
     @classmethod
+    def from_url(cls, url: str, dimension=None) -> SDKImage: ...
+
+    @classmethod
+    def from_data(cls, data: bytes | str, mime_type: str, dimension=None) -> SDKImage: ...
+
+    @classmethod
     def url_image(cls, url: str, dimension=None) -> SDKImage: ...
 
     @classmethod
@@ -1303,7 +1372,7 @@ class SDKImage:
     def from_file(cls, path, *, mime_type=None, dimension=None) -> SDKImage: ...
 ```
 
-Pass either a remote `url` or base64 `data` with a `mime_type`. `from_file()` reads a file from disk and base64-encodes it.
+Pass either a remote `url` or base64 `data` with a `mime_type`. `from_data()` accepts bytes or a base64 string. `from_file()` reads a file from disk and base64-encodes it.
 
 ### SettingSource
 
@@ -1330,7 +1399,9 @@ class ListResult(Generic[T]):
     items: list[T]
     next_cursor: str = ""
 
+    def to_dict(self) -> dict[str, Any]: ...
     def has_next_page(self) -> bool: ...
+    def next_page_info(self) -> dict[str, str]: ...
     def get_next_page(self) -> ListResult[T]: ...
     def auto_paging_iter(self) -> Iterator[T]: ...
 ```
@@ -1461,6 +1532,7 @@ cursor-sdk-bridge --help
 
 - Tool-call payload schemas are intentionally not strongly typed.
 - Inline MCP servers are not persisted across `Agent.resume()`. Pass them again on resume if needed.
+- Custom tools (`local.custom_tools`) are local agents only.
 - Artifact download is not implemented for local agents.
 - `local.setting_sources` (and the file-based MCP and subagent paths it gates) does not apply to cloud agents. Cloud always loads `project`, `team`, and `plugins`.
 - Hooks are file-based only (`.cursor/hooks.json`). No programmatic callbacks.

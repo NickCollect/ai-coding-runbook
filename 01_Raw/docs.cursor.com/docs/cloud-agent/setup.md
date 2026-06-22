@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-06-15T06:17:44.900459+00:00
+fetched_at: 2026-06-22T06:23:25.076003+00:00
 fetch_method: mintlify_md
 ---
 
@@ -57,11 +57,17 @@ This gives you predictable defaults at the team level while still letting indivi
 
 ### Agent-driven setup (recommended)
 
-You will be asked to connect your GitHub or GitLab account and select one or more repositories.
+Cursor can set up your dev environment in the cloud in less than 10 minutes. Start guided setup from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments) or from the [Agents Window](https://cursor.com/docs/agent/agents-window.md) in the Cursor desktop app.
+
+You will be asked to connect your GitHub, GitLab, Azure DevOps, or Bitbucket account and select one or more repositories.
 
 Then, you provide Cursor with the environment variables and secrets it will need to install dependencies and run the code.
 
-Finally, after Cursor has installed dependencies and verified the code is working, you can save a snapshot of its virtual machine to be reused for future agents.
+As the agent works, you can watch its progress in a shared terminal session while it handles setup tasks like installing dependencies. After Cursor has installed dependencies and verified the code is working, you can save a snapshot of its virtual machine.
+
+![Cloud environment setup in a shared terminal session](https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/changelog/cloud-environment-setup.png)
+
+The snapshot is reusable, so future cloud agents start up faster and can test changes by running your software. Commit the configuration to `.cursor/environment.json` so your whole team benefits.
 
 ### Manual setup with Dockerfile (advanced)
 
@@ -84,7 +90,7 @@ Here's an example `.cursor/environment.json` referencing a `.cursor/Dockerfile` 
 }
 ```
 
-If your repo needs Docker or Tailscale, see [Running Docker](https://cursor.com/docs/cloud-agent/setup.md#running-docker) and [Running Tailscale](https://cursor.com/docs/cloud-agent/setup.md#running-tailscale) below.
+If your repo needs Docker, Tailscale, or Cloudflare Tunnel, see [Running Docker](https://cursor.com/docs/cloud-agent/setup.md#running-docker), [Running Tailscale](https://cursor.com/docs/cloud-agent/setup.md#running-tailscale), and [Running Cloudflare Tunnel](https://cursor.com/docs/cloud-agent/setup.md#running-cloudflare-tunnel) below.
 
 You configure the environment with a Dockerfile; you do not get direct access to the remote machine.
 
@@ -341,6 +347,8 @@ RUN echo "ubuntu:ubuntu" | chpasswd
 
 Tailscale does not work in its default networking mode in Cloud agent VMs. Use userspace networking mode instead.
 
+This lets the agent reach private services and data stores through your tailnet without exposing those services to the public internet.
+
 Start `tailscaled` with:
 
 ```bash
@@ -362,6 +370,26 @@ After that, run your usual `tailscale up ...` flow.
 If you want a working reference, some customers have used [`tailscale-orb`](https://circleci.com/developer/orbs/orb/orbiously/tailscale#commands-connect) successfully because its Docker mode follows this pattern.
 
 Userspace networking does not let the VM appear as a tailnet exit node.
+
+## Running Cloudflare Tunnel
+
+Cloudflare Tunnel works in Cloud Agent VMs because `cloudflared` runs in userspace.
+
+Use this pattern when a Cloud Agent needs to reach a private HTTP service in a VPC or intranet:
+
+- Install `cloudflared` in your environment Dockerfile or update script.
+- Run a `cloudflared` connector inside your private network.
+- Route an authenticated hostname, such as `vpc.example.com`, through the tunnel to the private origin.
+- Add that hostname to the Cloud Agent network allowlist if your environment uses restricted egress.
+- Store the Cloudflare Access service token values as Cursor Secrets. For example, use `CF_ACCESS_CLIENT_ID` and `CF_ACCESS_CLIENT_SECRET`.
+
+The Cloud Agent can then call the private service over normal HTTPS with the `CF-Access-Client-Id` and `CF-Access-Client-Secret` headers. The connector makes the outbound connection to Cloudflare and forwards the request to your private origin. Your services and data stores stay on your private network, and the connector does not need inbound ports open.
+
+For private TCP services, such as databases, configure a Cloudflare TCP Access app and run `cloudflared access tcp` in your startup command. Point your app or test command at the local listener that `cloudflared` creates.
+
+Keep tunnel tokens and Access service token secrets in Cursor Secrets, not in
+your repository. Rotate them after testing if they were created for a proof of
+concept.
 
 
 ---

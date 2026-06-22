@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/overview
-fetched_at: 2026-05-05T19:55:37.164854+00:00
+fetched_at: 2026-06-22T06:23:24.710530+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ Use print mode for non-interactive scenarios like scripts, CI pipelines, or auto
 
 ```bash
 # Run with specific prompt and model
-agent -p "find and fix performance issues" --model "gpt-5.2"
+agent -p "find and fix performance issues" --model "gpt-5"
 
 # Use with git changes included for review
 agent -p "review these changes for security issues" --output-format text
@@ -73,7 +73,7 @@ Pick up your Cloud Agent tasks on web or mobile at [cursor.com/agents](https://c
 Resume previous conversations to maintain context across multiple interactions:
 
 ```bash
-# List all previous chats
+# Open previous chats and resume one
 agent ls
 
 # Resume latest conversation
@@ -92,9 +92,9 @@ Configure command execution settings with `/sandbox` or the `--sandbox <mode>` f
 
 [Media](https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/uploads/sandox.mp4)
 
-## Max Mode
+## Max mode
 
-Toggle [Max Mode](https://cursor.com/help/ai-features/max-mode.md) on models that support it using `/max-mode [on|off]`.
+Toggle [Max Mode](https://cursor.com/help/ai-features/max-mode.md) on models that support it using `/max-mode`.
 
 [Media](https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/uploads/max-mode.mp4)
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/using
-fetched_at: 2026-05-05T19:55:37.741810+00:00
+fetched_at: 2026-06-22T06:23:24.813174+00:00
 fetch_method: mintlify_md
 ---
 
@@ -59,7 +59,7 @@ Previous messages can be accessed using arrow up (ArrowUp) where you can cycle t
 - Ctrl+D — Exit the CLI. Follows standard shell behavior, requiring a double-press to exit.
 - Ctrl+J or +Enter — Universal alternatives for inserting newlines that work in all terminals.
 
-Shift+Enter works in iTerm2, Ghostty, Kitty, Warp, and Zed. For tmux users, use Ctrl+J instead. See [Terminal Setup](https://cursor.com/docs/cli/reference/terminal-setup.md) for configuration options and troubleshooting.
+Shift+Enter works in iTerm2, Ghostty, Kitty, Warp, and Zed. For tmux users, use Ctrl+J instead. See [Terminal setup](https://cursor.com/docs/cli/reference/terminal-setup.md) for configuration options and troubleshooting.
 
 ### Review
 
@@ -67,7 +67,7 @@ Review changes with Ctrl+R. Press i to add follow-up instructions. Use ArrowUp/A
 
 ### Selecting context
 
-Select files and folders to include in context with @. Free up space in the context window by running `/compress`.
+Select files and folders to include in context with @. Free up space in the context window by running `/summarize`. `/compress` remains an alias.
 
 ## Cloud Agent handoff
 
@@ -80,18 +80,18 @@ Push your conversation to a [Cloud Agent](https://cursor.com/docs/cloud-agent.md
 
 ## CLI worktrees
 
-Pass `--worktree` to run the agent in a new Git worktree instead of editing your current checkout directly. Cursor creates these checkouts under `~/.cursor/worktrees`, alongside worktrees created from the editor.
+Pass `-w` or `--worktree [name]` to run the agent in a new Git worktree instead of editing your current checkout directly. Cursor creates these checkouts under `~/.cursor/worktrees/<reponame>/<name>`, alongside worktrees created from the editor. If you omit `name`, Cursor generates one.
 
 Cursor cleans up CLI worktrees with the same retention rules it uses for editor worktrees. For cleanup settings and limits, see [How are old worktrees cleaned up?](https://cursor.com/docs/configuration/worktrees.md#how-are-old-worktrees-cleaned-up).
 
 Combine `--workspace <path>` when you need an explicit repository root. Otherwise the CLI uses the current working directory. `--worktree` only changes where the agent makes file edits inside that project.
 
 ```bash
-# Create a temporary worktree from the current repository
+# Create a temporary worktree from the current repository with a generated name
 agent --worktree "upgrade the test runner and fix any broken snapshots"
 
-# Target a repository from anywhere, but keep the changes isolated
-agent --workspace ~/src/my-app --worktree "fix the flaky auth test and open a PR"
+# Create a named worktree from another repository
+agent --workspace ~/src/my-app --worktree auth-fix "fix the flaky auth test and open a PR"
 ```
 
 ## History
@@ -100,7 +100,7 @@ Continue from an existing thread with `--resume [thread id]` to load prior conte
 
 To resume the most recent conversation, use `agent resume`, `--continue`, or the `/resume` slash command.
 
-You can also run `agent ls` to see a list of previous conversations.
+You can also run `agent ls` to open previous chats and resume one.
 
 ## Command approval
 

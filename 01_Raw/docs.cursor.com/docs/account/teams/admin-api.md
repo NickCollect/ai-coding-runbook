@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-06-08T05:24:57.611193+00:00
+fetched_at: 2026-06-22T06:23:24.209580+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ The Admin API lets you programmatically access your team's data, including membe
 - The Admin API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication) with your API key as the username.
 - For details on creating API keys, authentication methods, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
 
-For org-wide actions across your teams, see [Organizations](https://cursor.com/docs/enterprise/organizations.md) and the [Organization Admin API](https://cursor.com/docs/account/organizations/organization-admin-api.md).
+For org-wide actions across your teams, see [Organizations](https://cursor.com/docs/enterprise/organizations.md) and the [Organization API](https://cursor.com/docs/account/organizations/organization-admin-api.md).
 
 ## Endpoints
 

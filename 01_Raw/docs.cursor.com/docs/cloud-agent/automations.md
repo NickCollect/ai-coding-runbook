@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-06-15T06:17:44.659054+00:00
+fetched_at: 2026-06-22T06:23:24.874495+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,9 @@ Automations can be used to automate tasks like [reviewing recent PR commits for 
 
 ## Getting started
 
-Create a new automation in the [Agents Window](https://cursor.com/docs/agent/agents-window.md), at [cursor.com/automations](/automations), or start from a template in the [Cursor Marketplace](/marketplace/automations).
+Create a new automation in the [Agents Window](https://cursor.com/docs/agent/agents-window.md), at [cursor.com/automations](/automations), with the `/automate` skill from a local agent session, or from a template in the [Cursor Marketplace](/marketplace/automations).
+
+The `/automate` skill lets you describe the workflow you want in plain language. Cursor configures the automation's triggers, instructions, and tools for you.
 
 For any path:
 
@@ -20,7 +22,7 @@ For any path:
 2. Write a prompt with instructions for the automation.
 3. Choose optional tools the agent is able to use, such as Send to Slack, Comment on Pull Request, or tools from MCP.
 4. Choose whether the automation needs a repository, multiple repositories, or no repository at all.
-5. Create the automation and watch it run!
+5. Save and activate the automation.
 
 ## Billing
 
@@ -59,6 +61,16 @@ GitHub and GitLab triggers respond to pull request events, such as when a pull r
 - **Push to branch** - When commits are pushed to a specific branch outside a pull request.
 - **CI completed** - When a GitHub or GitLab check finishes on a pull request or branch.
 
+Automations can also be triggered from the following GitHub issue, review, and workflow events:
+
+- **Issue comment** - When a comment is made on a non-PR issue.
+- **PR review comment** - When an inline comment is left on a pull request diff.
+- **PR review submitted** - When a PR review is submitted.
+- **Review thread updated** - When a review thread on a pull request is marked resolved or unresolved.
+- **Workflow run completed** - When a GitHub Actions workflow run finishes on a pull request or branch.
+
+The [Cursor Marketplace](/marketplace/automations) includes templates for [triaging failed GitHub Actions](/marketplace/automations/triage-github-workflow-failures) and [fixing pull request review comments](/marketplace/automations/autofix-pr-review-comments).
+
 Pull request triggers don't run on PRs opened from forks. These runs fail with a "Fork pull requests not supported" error because the branch only exists on the fork, and running external code with the repo's permissions isn't safe. The exception is **Pull request merged** triggers, which still run because they start from the merge commit. To work around this, push the branch to the repo itself and open the PR from there.
 
 ### Slack triggers
@@ -68,6 +80,7 @@ Slack triggers respond to events from the [Cursor Slack integration](https://cur
 Only public Slack channels are visible to Slack triggers at this time.
 
 - **New message in channel** - When a message is sent to a connected Slack channel. Without a message filter, the trigger only fires on top-level channel messages. Add a keyword or regex filter if you want runs from threaded replies as well.
+- **Emoji reaction** - When someone reacts to a Slack message with a specific emoji.
 - **Channel created** - When a new public Slack channel is created in your workspace.
 
 ### Webhook triggers
@@ -107,7 +120,7 @@ Cursor Automations can have tools enabled for richer capabilities around GitHub,
 
 ### Pull request creation
 
-Repo-backed automations can open pull requests after making code changes requested by the automation prompt.
+Repo-backed automations can open pull requests after making code changes requested by the automation prompt. This tool is enabled by default for every automation.
 
 The pull request is opened against the repositories specified for the GitHub or GitLab trigger. For other triggers, it uses the repositories specified by the environment.
 
@@ -147,7 +160,15 @@ Memories let the agent read and write persistent notes across runs for the same 
 
 Memories are enabled by default but can be disabled. Memories can be viewed and edited from the tool configuration UI.
 
+Agents can delete outdated memory files during automation runs. You can also delete memory files from the tool configuration UI.
+
 Memories persist across runs and should be used with caution if your automation handles untrusted input. Inputs may lead to misleading or malicious memories that unintentionally impact future automation runs.
+
+### Computer use
+
+Computer use lets cloud agents kicked off by automations use a computer just like a developer would. That means automations can operate a browser, produce screenshots or recordings, or use your internal services. It is included by default for every automation.
+
+To make sure computer use is effective, ensure that you've configured a development environment for your automation. You can then ask for a demo in your automation instructions when you want the agent to show its work. For example, tell the agent to include a short screen recording after it changes a user-facing flow.
 
 ## Automation settings
 

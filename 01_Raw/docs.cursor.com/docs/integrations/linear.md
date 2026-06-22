@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/linear
-fetched_at: 2026-05-05T19:55:40.217861+00:00
+fetched_at: 2026-06-22T06:23:25.693948+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,13 +22,13 @@ settings are available to non-admin members.
 3. Connect your Linear workspace and select team
 4. Click *Authorize*
 5. Complete any remaining Cloud Agent setup in Cursor:
-   - Connect GitHub and select default repository
+   - Connect a repository provider and select a default repository
    - Enable usage-based pricing
    - Confirm privacy settings
 
 ### Account linking
 
-First use prompts account linking between Cursor and Linear. GitHub connection required for PR creation.
+First use prompts account linking between Cursor and Linear. A repository provider connection is required for PR creation.
 
 ## How to use
 

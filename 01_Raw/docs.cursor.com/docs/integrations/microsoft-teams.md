@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/microsoft-teams
-fetched_at: 2026-05-18T05:02:44.463033+00:00
+fetched_at: 2026-06-22T06:23:25.614011+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ With Cursor's integration for Microsoft Teams, you can use [Cloud Agents](https:
 
 4. After installing in Microsoft Teams, you'll be redirected back to Cursor to finalize setup
 
-   1. Connect GitHub or GitLab, if you haven't connected a repository provider yet
+   1. Connect GitHub, GitLab, Azure DevOps, or Bitbucket, if you haven't connected a repository provider yet
    2. Enable usage-based pricing
    3. Confirm privacy settings
 

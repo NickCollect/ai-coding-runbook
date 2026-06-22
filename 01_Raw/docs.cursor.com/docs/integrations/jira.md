@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/jira
-fetched_at: 2026-06-01T05:54:49.012753+00:00
+fetched_at: 2026-06-22T06:23:25.573302+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,7 +17,7 @@ Before you install the Jira integration, make sure you have:
 - Jira Commercial Cloud with Rovo enabled
 - Admin access to the Jira site where you want to install the app
 - Cursor admin access to the team you want to connect
-- GitHub or GitLab connected to Cursor for repository access and pull requests
+- GitHub, GitLab, Azure DevOps, or Bitbucket connected to Cursor for repository access and pull requests
 
 The Cursor Jira integration is currently available only on Cursor Teams and
 Enterprise plans.
@@ -47,7 +47,7 @@ FedRAMP (including Government Cloud) instances.
 
 9. Complete any remaining Cloud Agent setup in Cursor:
 
-   - Connect GitHub or GitLab
+   - Connect GitHub, GitLab, Azure DevOps, or Bitbucket
    - Enable usage-based pricing
    - Confirm privacy settings
    - Choose a default repository, model, and base branch (under Cloud Agents settings in the Cursor Dashboard)
@@ -71,7 +71,7 @@ To connect each user:
 2. A prompt will appear to connect the account
 3. Follow the link to connect the Jira account to a Cursor account associated with the team
 4. Complete any remaining Cloud Agent setup in Cursor:
-   - Connect GitHub or GitLab if you haven't connected a repository provider yet
+   - Connect GitHub, GitLab, Azure DevOps, or Bitbucket if you haven't connected a repository provider yet
    - Choose a default repository, model, and base branch (under *My Settings* Cloud Agents settings in the Cursor Dashboard)
 
 ## How to use
@@ -226,7 +226,7 @@ It depends on the authentication mode you choose. Service account authentication
 
 ### What else needs to be set up before Cursor can create PRs?
 
-Connect GitHub or GitLab to Cursor and make sure Cloud Agent settings include the repositories, models, and base branches your team wants to use.
+Connect GitHub, GitLab, Azure DevOps, or Bitbucket to Cursor and make sure Cloud Agent settings include the repositories, models, and base branches your team wants to use.
 
 ### How do users continue a conversation with Cursor?
 

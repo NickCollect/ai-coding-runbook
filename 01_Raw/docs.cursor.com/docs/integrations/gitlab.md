@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/gitlab
-fetched_at: 2026-06-08T05:24:58.469157+00:00
+fetched_at: 2026-06-22T06:23:25.560961+00:00
 fetch_method: mintlify_md
 ---
 
@@ -93,6 +93,10 @@ Available for Enterprise customers. Run a reverse proxy tunnel on-premises that 
 **Security:** HTTPS encryption, service account access tokens
 
 **Drawbacks:** Introduces additional complexity, maintenance requirements, and potential security considerations compared to more direct connection methods
+
+## Protected Git Scopes
+
+Lock your GitLab group or namespace to your Cursor organization so only your teams can use its repositories with Cloud Agents, automations, and Bugbot. Protecting a scope requires the GitLab Owner role. See [Protected Git Scopes](https://cursor.com/docs/enterprise/model-and-integration-management.md#protected-git-scopes).
 
 ## Next steps
 

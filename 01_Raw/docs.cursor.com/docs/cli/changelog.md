@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-06-15T06:17:44.184256+00:00
+fetched_at: 2026-06-22T06:23:24.673808+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,9 +12,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 
 ### Terminal experience
 
-- **Plain terminal rendering with native scrollback.** Completed turns live in the terminal's real scrollback instead of a constantly repainted screen. Scroll while the agent works without flicker; selection, tmux, and SSH scrollback behave natively.
 - **Cleaner edit display.** File edits render borderless (an `Editing`/`Edited` header plus the diff), with memoized diff rendering so large edits don't slow the UI.
-- **Zen mode with conversation summaries.** An optional minimal view keeps your messages and answers visible and collapses tool activity into one-line summaries.
 - **Faster, richer resume picker.** Session metadata is cached so `/resume` (Ctrl+Y) opens quickly even on network filesystems, with Created and Last updated columns and reliable ordering.
 - **Working status pinned above the prompt.** Progress, token counts (with an optional elapsed-time display), and hints stay in one stable place.
 - **Long shell output truncates from the top.** You see the latest output of a streaming command, not the oldest.

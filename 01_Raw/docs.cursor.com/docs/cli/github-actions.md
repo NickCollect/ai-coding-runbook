@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/github-actions
-fetched_at: 2026-05-05T19:55:36.783515+00:00
+fetched_at: 2026-06-22T06:23:24.615229+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Basic setup:
   env:
     CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
   run: |
-    agent -p "Your prompt here" --model gpt-5.2
+    agent -p "Your prompt here" --model gpt-5
 ```
 
 For Windows runners, use PowerShell: `irm 'https://cursor.com/install?win32=true' | iex`

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-pool
-fetched_at: 2026-06-15T06:17:44.876063+00:00
+fetched_at: 2026-06-22T06:23:25.047082+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,19 +8,27 @@ fetch_method: mintlify_md
 
 Self-Hosted Pool is for Enterprise teams that want Cloud Agents to run inside company-managed infrastructure. Instead of each developer starting a worker on a personal machine, admins operate a pool of workers that can be assigned to agents across the organization.
 
+Self-hosted pools are an infrastructure-ownership choice. They do not move the agent loop out of Cursor's cloud. The worker executes terminal commands, file edits, browser actions, and other tool calls in your infrastructure while Cursor handles orchestration, model access, and the Cloud Agent experience.
+
+Cursor-managed Cloud Agents are the recommended path for most teams, including
+teams that need private network access. Use managed environments with network
+controls, Tailscale or a similar client, or private connectivity for supported
+source control paths before taking on a worker fleet. See [Choose where Cloud
+Agents run](https://cursor.com/docs/cloud-agent/choose-runtime.md).
+
 Use a pool when you need:
 
 - Centrally managed workers for a team or organization
 - Service account authentication instead of individual browser logins
 - Kubernetes, autoscaling, or fleet management
 - Labels that route work to the right environment, team, repo, or hardware profile
-- Enterprise controls around network access, secrets, build outputs, and monitoring
+- Company-owned hosts for tool execution, build outputs, worker logs, and monitoring
 
 For a fast personal setup, see [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md).
 
 ## How it works
 
-A worker opens a long-lived outbound HTTPS connection to Cursor's cloud. The agent loop (inference and planning) runs in Cursor's cloud and sends tool calls over this connection. The worker executes those tool calls locally in your infrastructure: terminal commands, file edits, browser actions, and access to internal services.
+A worker opens a long-lived outbound HTTPS connection to Cursor's cloud. The agent loop, including inference and planning, runs in Cursor's cloud and sends tool calls over this connection. The worker executes those tool calls in your infrastructure: terminal commands, file edits, browser actions, and access to internal services.
 
 Your repos, build caches, secrets, and tool execution stay in your environment while Cursor handles orchestration, model access, and the Cloud Agent experience. Cloud Agent [artifacts](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#artifacts), like screenshots and videos, are uploaded to Cursor so you can view them in PRs and the dashboard.
 
@@ -486,6 +494,7 @@ Yes. Configure MCP servers through the Cloud Agents dashboard. See the
 
 ## Related
 
+- [Choose where Cloud Agents run](https://cursor.com/docs/cloud-agent/choose-runtime.md)
 - [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md)
 - [Kubernetes deployment guide](https://cursor.com/docs/cloud-agent/self-hosted-k8s.md)
 - [Self-hosted Cloud Agents cookbook](https://github.com/cursor/cookbook/tree/main/self-hosted-cloud-agent) (EC2, ECS, EKS reference deployments)

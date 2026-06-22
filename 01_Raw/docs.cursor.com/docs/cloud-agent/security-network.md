@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security-network
-fetched_at: 2026-06-08T05:24:58.166339+00:00
+fetched_at: 2026-06-22T06:23:25.041277+00:00
 fetch_method: mintlify_md
 ---
 
@@ -45,6 +45,10 @@ This works automatically for all Cloud Agents. No setup is required.
 
 If your repository enforces branch protection rules that require signed commits, Cloud Agent PRs satisfy those rules without extra configuration.
 
+## Protected Git Scopes
+
+Team admins can lock a Git organization to your Cursor organization so only your teams can start Cloud Agents on its repositories. See [Protected Git Scopes](https://cursor.com/docs/enterprise/model-and-integration-management.md#protected-git-scopes).
+
 ## What you should know
 
 1. Grant read-write privileges to our GitHub app for repos you want to edit. We use this to clone the repo and make changes.
@@ -82,6 +86,20 @@ Switching back to **Indefinite** stops further conversation deletions but doesn'
 ## Network access
 
 Control which network resources your Cloud Agents can reach. These settings are available on the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents) for individual users, saved environments, and team admins.
+
+### Private network access
+
+Cloud Agents do not need to run on your hardware to reach private resources. For services in a VPC or intranet, use Tailscale userspace networking, Cloudflare Tunnel, or a similar private-network client in the Cloud Agent environment. See [Running Tailscale](https://cursor.com/docs/cloud-agent/setup.md#running-tailscale) and [Running Cloudflare Tunnel](https://cursor.com/docs/cloud-agent/setup.md#running-cloudflare-tunnel) for setup notes.
+
+With either Tailscale or Cloudflare Tunnel, your private services do not need to accept inbound traffic from the public internet. The agent connects through an authenticated network path, while the service stays on your private network.
+
+Cloudflare Tunnel is a good fit when the agent can reach the private service through an authenticated HTTPS hostname. A connector in your network dials out to Cloudflare, and the Cloud Agent calls that hostname like any other external URL. You can protect the hostname with Cloudflare Access service tokens, store the token values as Cursor Secrets, and add the hostname to your Cloud Agent allowlist.
+
+For TCP targets such as private databases, use a tunnel client that exposes a local TCP listener in the agent environment. The agent then connects to `localhost`, while the tunnel forwards traffic to the private origin.
+
+For private GitHub Enterprise Server, GitLab Enterprise, source control APIs, and related webhook traffic, Enterprise teams can use [private connectivity](https://cursor.com/docs/enterprise/private-connectivity.md) with AWS PrivateLink or Cloudflare Tunnel.
+
+Use [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md) or [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md) when you want to own the machine that executes agent tool calls, not as the default path for private network access. See [Choose where Cloud Agents run](https://cursor.com/docs/cloud-agent/choose-runtime.md) for the comparison.
 
 ### Access modes
 
@@ -202,7 +220,7 @@ If your organization uses firewall rules or IP allowlists to control network acc
 
 ### Git egress proxy and IP allow list
 
-Cursor supports a similar but distinct feature to [use a git egress proxy for IP allow lists](https://cursor.com/docs/integrations/github.md#ip-allow-list-configuration). This proxy routes all git traffic through a narrower set of IPs and works across all git hosts, including GitHub and GitLab.
+Cursor supports a similar but distinct feature to [use a git egress proxy for IP allow lists](https://cursor.com/docs/integrations/github.md#ip-allow-list-configuration). This proxy routes all git traffic through a narrower set of IPs and works across all git hosts, including GitHub, GitLab, Azure DevOps, and Bitbucket.
 
 For git hosts specifically, we recommend the IP allow list configuration described in the link above, as it integrates directly with the Cursor GitHub app.
 

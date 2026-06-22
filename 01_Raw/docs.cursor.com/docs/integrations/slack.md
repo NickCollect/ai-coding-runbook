@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/slack
-fetched_at: 2026-06-08T05:24:58.508168+00:00
+fetched_at: 2026-06-22T06:23:25.639073+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ With Cursor's integration for Slack, you can use [Cloud Agents](https://cursor.c
 
 4. After installing in Slack, you'll be redirected back to Cursor to finalize setup
 
-   1. Connect GitHub (if not already connected) and pick a default repository
+   1. Connect a repository provider (if not already connected) and pick a default repository
    2. Enable usage-based pricing
    3. Confirm privacy settings
 

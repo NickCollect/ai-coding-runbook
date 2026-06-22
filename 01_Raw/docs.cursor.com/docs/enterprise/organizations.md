@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organizations
-fetched_at: 2026-06-08T05:24:58.418715+00:00
+fetched_at: 2026-06-22T06:23:25.338420+00:00
 fetch_method: mintlify_md
 ---
 
@@ -53,9 +53,9 @@ Organizations add org-level administration on top of team-level roles. Org admin
 
 Team admin access does not automatically grant org admin access. Users can also have different roles at each layer. For example, a user can be an org admin while only being a member of specific teams.
 
-## Organization Admin API
+## Organization API
 
-For org-level automation, use the [Organization Admin API](https://cursor.com/docs/account/organizations/organization-admin-api.md).
+For org-level automation, use the [Organization API](https://cursor.com/docs/account/organizations/organization-admin-api.md).
 
 ## Related docs
 

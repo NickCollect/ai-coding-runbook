@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/github
-fetched_at: 2026-06-15T06:17:45.435495+00:00
+fetched_at: 2026-06-22T06:23:25.476321+00:00
 fetch_method: mintlify_md
 ---
 
@@ -136,6 +136,10 @@ The GitHub app requests the following permissions to support Cursor features:
 | **Organization custom properties** | Surface organization-defined repository metadata in filtering                |
 
 All permissions follow the principle of least privilege.
+
+## Protected Git Scopes
+
+Lock your GitHub organization to your Cursor organization so only your teams can use its repositories with Cloud Agents, automations, and Bugbot. Protecting a scope requires GitHub organization owner or admin access. See [Protected Git Scopes](https://cursor.com/docs/enterprise/model-and-integration-management.md#protected-git-scopes).
 
 ## Troubleshooting
 

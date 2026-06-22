@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/terminal
-fetched_at: 2026-06-01T05:54:48.264842+00:00
+fetched_at: 2026-06-22T06:23:24.573146+00:00
 fetch_method: mintlify_md
 ---
 
@@ -275,7 +275,6 @@ Choose how sandboxed commands access the network:
 | **MCP Allowlist**            | MCP tools that run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox; in **Allowlist** mode, they run normally without sandbox restrictions.         |
 | **Browser Protection**       | Prevent Cursor from automatically running [Browser](https://cursor.com/docs/agent/tools/browser.md) tools.                                                                               |
 | **File-Deletion Protection** | Prevent Cursor from deleting files automatically.                                                                                                                                        |
-| **Dotfile Protection**       | Prevent Cursor from modifying dot files like .gitignore automatically.                                                                                                                   |
 | **External-File Protection** | Prevent Cursor from creating or modifying files outside of the workspace automatically.                                                                                                  |
 
 ## Enterprise controls

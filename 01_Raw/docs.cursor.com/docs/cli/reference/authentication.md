@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/authentication
-fetched_at: 2026-06-01T05:54:48.312297+00:00
+fetched_at: 2026-06-22T06:23:24.720532+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,11 +23,11 @@ agent status
 agent logout
 ```
 
-The login command will open your default browser and prompt you to authenticate with your Cursor account. Once completed, your credentials are securely stored locally.
+The login command opens your default browser and prompts you to authenticate with your Cursor account. Set `NO_OPEN_BROWSER=1` to print the login URL without opening a browser. Once complete, your credentials are securely stored locally.
 
 ## API key authentication
 
-For automation, scripts, or CI/CD environments, use API key authentication:
+For automation, scripts, or CI environments, use API key authentication:
 
 ### Step 1: Generate an API key
 
@@ -67,8 +67,7 @@ This command will display:
 ## Troubleshooting
 
 - **"Not authenticated" errors:** Run `agent login` or ensure your API key is correctly set
-- **SSL certificate errors:** Use the `--insecure` flag for development environments
-- **Endpoint issues:** Use the `--endpoint` flag to specify a custom API endpoint
+- **Browser doesn't open:** Run `NO_OPEN_BROWSER=1 agent login` and open the printed URL manually
 
 
 ---

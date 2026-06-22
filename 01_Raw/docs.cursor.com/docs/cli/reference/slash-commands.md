@@ -1,38 +1,49 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/slash-commands
-fetched_at: 2026-05-05T19:55:37.484105+00:00
+fetched_at: 2026-06-22T06:23:24.773077+00:00
 fetch_method: mintlify_md
 ---
 
 # Slash commands
 
-| Command                 | Description                                                                                                         |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| `/plan`                 | Switch to Plan mode to design your approach before coding                                                           |
-| `/ask`                  | Switch to Ask mode for read-only exploration                                                                        |
-| `/model <model>`        | Set or list models                                                                                                  |
-| `/auto-run [state]`     | Toggle auto-run (default) or set \[on\|off\|status]                                                                 |
-| `/sandbox`              | Configure sandbox mode and network access settings                                                                  |
-| `/max-mode [on\|off]`   | Toggle max mode on models that support it                                                                           |
-| `/new-chat`             | Start a new chat session                                                                                            |
-| `/vim`                  | Toggle Vim keys                                                                                                     |
-| `/help [command]`       | Show help (/help \[cmd])                                                                                            |
-| `/feedback <message>`   | Share feedback with the team                                                                                        |
-| `/resume <chat>`        | Resume a previous chat by folder name                                                                               |
-| `/usage`                | View Cursor streaks and usage stats                                                                                 |
-| `/about`                | Show environment and CLI setup details                                                                              |
-| `/max-mode [on\|off]`   | Toggle max mode on models that support it                                                                           |
-| `/copy-request-id`      | Copy last request ID to clipboard                                                                                   |
-| `/copy-conversation-id` | Copy conversation ID to clipboard                                                                                   |
-| `/logout`               | Sign out from Cursor                                                                                                |
-| `/quit`                 | Exit                                                                                                                |
-| `/setup-terminal`       | Auto-configure terminal keybindings (see [Terminal Setup](https://cursor.com/docs/cli/reference/terminal-setup.md)) |
-| `/mcp list`             | Browse, enable, and configure MCP servers                                                                           |
-| `/mcp enable <name>`    | Enable an MCP server                                                                                                |
-| `/mcp disable <name>`   | Disable an MCP server                                                                                               |
-| `/rules`                | Create new rules or edit existing rules                                                                             |
-| `/commands`             | Create new commands or edit existing commands                                                                       |
-| `/compress`             | Summarize conversation to free context space                                                                        |
+| Command                                | Description                                                                                                            |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `/model [filter]`                      | Select a model. Press `Tab` to edit.                                                                                   |
+| `/run-everything [on\|off\|status]`    | Toggle Run Everything or show its status. `/auto-run` is an alias.                                                     |
+| `/plan [prompt]`                       | Switch to Plan mode, show the current plan, or submit a prompt in Plan mode                                            |
+| `/ask`                                 | Toggle Ask mode for read-only questions                                                                                |
+| `/debug [prompt]`                      | Toggle Debug mode or submit a prompt in Debug mode                                                                     |
+| `/logs`                                | Show the debug log path and copy it to the clipboard                                                                   |
+| `/update`                              | Update Cursor Agent to the latest version                                                                              |
+| `/max-mode`                            | Toggle max mode on the selected model                                                                                  |
+| `/rename <name>`                       | Rename the current chat session                                                                                        |
+| `/clear`                               | Start a new chat session. `/new`, `/new-chat`, and `/newchat` are aliases.                                             |
+| `/resume`                              | Open recent chats and resume one                                                                                       |
+| `/fork`                                | Fork the current chat into a new session                                                                               |
+| `/summarize`                           | Summarize the conversation to reduce context. `/compress` is an alias.                                                 |
+| `/context`                             | Show what's consuming the context window, broken down by category                                                      |
+| `/rewind`                              | Jump back to a previous message                                                                                        |
+| `/vim`                                 | Toggle Vim keys                                                                                                        |
+| `/line-numbers`                        | Toggle line numbers in code blocks                                                                                     |
+| `/show-thinking`                       | Toggle thinking block display                                                                                          |
+| `/status-indicators`                   | Toggle terminal title status indicators                                                                                |
+| `/shell [command]`                     | Enter Shell Mode. `/sh` and `/run` are aliases.                                                                        |
+| `/about`                               | Show CLI version, system, and account info. Also copies it to the clipboard.                                           |
+| `/setup-terminal`                      | Configure terminal newline keybindings. See [Terminal setup](https://cursor.com/docs/cli/reference/terminal-setup.md). |
+| `/help [command]`                      | Show help. Use `/help <command>` for command details.                                                                  |
+| `/feedback <message>`                  | Share feedback with the team                                                                                           |
+| `/open`                                | Open the repository's Git root in Cursor. `/cursor` is an alias.                                                       |
+| `/copy-request-id`                     | Copy the last request ID to the clipboard                                                                              |
+| `/copy-conversation-id`                | Copy the current conversation ID to the clipboard                                                                      |
+| `/logout`                              | Sign out from Cursor                                                                                                   |
+| `/quit`                                | Exit                                                                                                                   |
+| `/exit`                                | Exit                                                                                                                   |
+| `/mcp [list\|list-tools] [identifier]` | Manage MCP servers and list tools for a server                                                                         |
+| `/plugin [subcommand]`                 | Manage plugins and marketplaces                                                                                        |
+| `/config`                              | Configure CLI settings interactively                                                                                   |
+| `/copy`                                | Copy a previous user message to the clipboard                                                                          |
+| `/sandbox`                             | Configure sandbox mode and network access settings                                                                     |
+| `/bedrock [subcommand]`                | Configure Bedrock when the Bedrock feature is enabled                                                                  |
 
 
 ---

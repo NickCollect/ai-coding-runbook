@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/configuration
-fetched_at: 2026-05-05T19:55:37.486758+00:00
+fetched_at: 2026-06-22T06:23:24.785664+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,8 +39,21 @@ Override with environment variables:
 
 | Field                                 | Type    | Description                                                             |
 | :------------------------------------ | :------ | :---------------------------------------------------------------------- |
+| `channel`                             | string  | Release channel used for CLI updates                                    |
 | `model`                               | object  | Selected model configuration                                            |
+| `maxMode`                             | boolean | Persisted preference for max mode in the model picker                   |
 | `hasChangedDefaultModel`              | boolean | CLI-managed model override flag                                         |
+| `notifications`                       | boolean | Send a terminal notification when the agent finishes or needs input     |
+| `hints`                               | boolean | Show CLI hints while the agent is working                               |
+| `rewind`                              | boolean | Enable `/rewind` to restore an earlier message in the session           |
+| `suggestNextPrompt`                   | boolean | Suggest a follow-up prompt at the end of each turn                      |
+| `display.showLineNumbers`             | boolean | Show line numbers in rendered code blocks                               |
+| `display.showThinkingBlocks`          | boolean | Render model thinking blocks when available                             |
+| `display.showStatusIndicators`        | boolean | Enable terminal title status indicators                                 |
+| `display.showStatusLineRunningTime`   | boolean | Show elapsed running time in the status line                            |
+| `approvalMode`                        | string  | Approval mode: `allowlist` or `unrestricted`                            |
+| `sandbox.mode`                        | string  | Sandbox mode override                                                   |
+| `sandbox.networkAccess`               | string  | Network access setting for sandbox mode                                 |
 | `network.useHttp1ForAgent`            | boolean | Use HTTP/1.1 instead of HTTP/2 for agent connections (default: `false`) |
 | `attribution.attributeCommitsToAgent` | boolean | Add "Made with Cursor" trailer to Agent commits (default: `true`)       |
 | `attribution.attributePRsToAgent`     | boolean | Add "Made with Cursor" footer to Agent PRs (default: `true`)            |
@@ -105,8 +118,8 @@ You can select a model for the CLI using the `/model` slash command.
 
 ```bash
 /model auto
-/model gpt-5.2
-/model sonnet-4.5-thinking
+/model gpt-5
+/model sonnet-4-thinking
 ```
 
 See the [Slash commands](https://cursor.com/docs/cli/reference/slash-commands.md) docs for other commands.

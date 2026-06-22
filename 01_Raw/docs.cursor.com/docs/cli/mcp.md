@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/mcp
-fetched_at: 2026-05-05T19:55:37.069110+00:00
+fetched_at: 2026-06-22T06:23:24.713423+00:00
 fetch_method: mintlify_md
 ---
 
@@ -68,7 +68,7 @@ Enable an MCP server:
 agent mcp enable <identifier>
 ```
 
-You can also use the `/mcp enable <name>` slash command in interactive mode.
+This adds the server to the local approved list.
 
 ### Disable MCP server
 
@@ -78,9 +78,9 @@ Disable an MCP server:
 agent mcp disable <identifier>
 ```
 
-You can also use the `/mcp disable <name>` slash command in interactive mode.
+Disabled servers won't load or prompt for approval.
 
-MCP server names with spaces are supported in all `/mcp` commands.
+MCP server names with spaces are supported in CLI commands and `/mcp list-tools`.
 
 ## Using MCP with Agent
 
