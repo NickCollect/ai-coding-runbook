@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/messages
-fetched_at: 2026-06-22T06:23:33.748964+00:00
+fetched_at: 2026-06-29T05:25:21.172706+00:00
 fetch_method: mintlify_md
 ---
 
@@ -122,17 +122,21 @@ Retrieves message history and file metadata for a specific chat.
 
       Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-  - `content: array of object { text, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
+  - `content: array of object { text, truncated, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
 
     Content blocks within the message
 
-    - `Text object { text, type }`
+    - `Text object { text, truncated, type }`
 
       Text content block.
 
       - `text: string`
 
         Text content from human or assistant
+
+      - `truncated: boolean`
+
+        True when `text` was shortened by the server's fixed per-string bound (1 MiB) on the remote-sessions messages endpoint. Always false on chat text blocks.
 
       - `type: "text"`
 
@@ -328,7 +332,7 @@ Retrieves message history and file metadata for a specific chat.
 
 - `user: object { id, email_address }`
 
-  User information
+  User information for compliance responses.
 
   - `id: string`
 
@@ -442,17 +446,21 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages
 
       Artifact version ID e.g. 'claude_artifact_version_abc123'
 
-  - `content: array of object { text, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
+  - `content: array of object { text, truncated, type }  or object { id, input, integration_name, 4 more }  or object { content, integration_name, is_error, 5 more }`
 
     Content blocks within the message
 
-    - `Text object { text, type }`
+    - `Text object { text, truncated, type }`
 
       Text content block.
 
       - `text: string`
 
         Text content from human or assistant
+
+      - `truncated: boolean`
+
+        True when `text` was shortened by the server's fixed per-string bound (1 MiB) on the remote-sessions messages endpoint. Always false on chat text blocks.
 
       - `type: "text"`
 

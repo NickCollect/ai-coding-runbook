@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/list
-fetched_at: 2026-05-25T05:15:56.097502+00:00
+fetched_at: 2026-06-29T05:25:20.723485+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,9 +10,19 @@ fetch_method: mintlify_md
 
 List organizations under the parent organization.
 
-Returns a list of organizations sorted by creation date in ascending order.
-This endpoint does not support pagination and will return an error if the
-response would exceed 1,000 organizations.
+Returns organizations sorted by creation date in ascending order. Use
+`limit` and `page` to paginate: each response includes `has_more` and a
+`next_page` token to pass on the next request.
+
+### Query Parameters
+
+- `limit: optional number`
+
+  Maximum results (default: 1000, max: 1000)
+
+- `page: optional string`
+
+  Opaque pagination token from a previous response's `next_page` field. Pass this to retrieve the next page of results. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ### Header Parameters
 
@@ -36,6 +46,14 @@ response would exceed 1,000 organizations.
 
     Unique identifier for the organization (UUID format)
 
+- `has_more: boolean`
+
+  Whether more records exist beyond the current result set
+
+- `next_page: optional string`
+
+  Token to retrieve the next page. Use this as the 'page' parameter in your next request
+
 ### Example
 
 ```http
@@ -49,10 +67,12 @@ curl https://api.anthropic.com/v1/compliance/organizations \
 {
   "data": [
     {
-      "created_at": "created_at",
-      "name": "name",
-      "uuid": "uuid"
+      "created_at": "2025-03-12T18:22:41.123456+00:00",
+      "name": "Acme Corp",
+      "uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde"
     }
-  ]
+  ],
+  "has_more": true,
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```

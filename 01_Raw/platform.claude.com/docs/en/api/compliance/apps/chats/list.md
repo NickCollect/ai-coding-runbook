@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/list
-fetched_at: 2026-06-22T06:23:33.745694+00:00
+fetched_at: 2026-06-29T05:25:21.117267+00:00
 fetch_method: mintlify_md
 ---
 
@@ -126,7 +126,7 @@ by created_at, with ties broken by id.
 
   - `user: object { id, email_address }`
 
-    User information for the chat creator
+    User information for compliance responses.
 
     - `id: string`
 
@@ -138,7 +138,7 @@ by created_at, with ties broken by id.
 
 - `first_id: string`
 
-  First chat ID in the current result set. To get the previous page, use this as before_id in your next request
+  Opaque pagination cursor for the first chat in the current result set. Pass as `before_id` on the next request to page backwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 - `has_more: boolean`
 
@@ -146,7 +146,7 @@ by created_at, with ties broken by id.
 
 - `last_id: string`
 
-  Last chat ID in the current result set. To get the next page, use this as after_id in your next request
+  Opaque pagination cursor for the last chat in the current result set. Pass as `after_id` on the next request to page forwards. Clients should treat this value as an opaque string and not attempt to parse or interpret its contents, as the format may change without notice.
 
 ### Example
 
@@ -177,7 +177,7 @@ curl https://api.anthropic.com/v1/compliance/apps/chats \
     }
   ],
   "has_more": false,
-  "first_id": "claude_chat_abc123",
-  "last_id": "claude_chat_abc123"
+  "first_id": "eyJrIjogImNyZWF0ZWRfYXQiLCAidCI6ICIyMDI1LTA2LTA3VDA4OjA5OjEwKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLTIzNDUtNjc4OS1hYmNkLWVmMDEyMzQ1Njc4OSJ9",
+  "last_id": "eyJrIjogImNyZWF0ZWRfYXQiLCAidCI6ICIyMDI1LTA2LTA3VDA4OjA5OjEwKzAwOjAwIiwgImlkIjogImFiY2RlZjAxLTIzNDUtNjc4OS1hYmNkLWVmMDEyMzQ1Njc4OSJ9"
 }
 ```

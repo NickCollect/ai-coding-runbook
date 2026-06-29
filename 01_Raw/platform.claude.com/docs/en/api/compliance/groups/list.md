@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/groups/list
-fetched_at: 2026-05-25T05:15:56.402678+00:00
+fetched_at: 2026-06-29T05:25:20.999541+00:00
 fetch_method: mintlify_md
 ---
 
@@ -83,18 +83,19 @@ curl https://api.anthropic.com/v1/compliance/groups \
 {
   "data": [
     {
-      "id": "id",
-      "created_at": "created_at",
-      "description": "description",
-      "name": "name",
+      "id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
+      "created_at": "2025-03-12T18:22:41.123456",
+      "description": "All members of the engineering organization",
+      "name": "Engineering Team",
       "roles": [
-        "string"
+        "rbac_role_01SGBg3kEnZrdsVR2QmyJbvD",
+        "rbac_role_01HtCd4mFoAseWS3RnzKcwE7"
       ],
-      "source_type": "source_type",
-      "updated_at": "updated_at"
+      "source_type": "scim",
+      "updated_at": "2025-03-14T09:05:17.456789"
     }
   ],
   "has_more": true,
-  "next_page": "next_page"
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```

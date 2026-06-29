@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/usage-cost-api
-fetched_at: 2026-06-22T06:23:25.311840+00:00
+fetched_at: 2026-06-29T05:25:13.698982+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Programmatically access your organization's API usage and cost data with the Usa
 ---
 
 <Tip>
-**The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
+  **The Admin API is unavailable for individual accounts.** To collaborate with teammates and add members, set up your organization in **Console → Settings → Organization**.
 </Tip>
 
 The Usage & Cost Admin API provides programmatic and granular access to historical API usage and cost data for your organization. This data is similar to the information available in the [Usage](/usage) and [Cost](/cost) pages of the Claude Console.
@@ -21,7 +21,7 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
 * **Accurate Usage Tracking:** Get precise token counts and usage patterns instead of relying solely on response token counting
 * **Cost Reconciliation:** Match internal records with Anthropic billing for finance and accounting teams
 * **Product performance and improvement:** Monitor product performance while measuring if changes to the system have improved it, or setup alerting
-* **[Rate limit](/docs/en/api/rate-limits) and [Priority Tier](/docs/en/api/service-tiers#get-started-with-priority-tier) optimization:** Optimize features like [prompt caching](/docs/en/build-with-claude/prompt-caching) or specific prompts to make the most of one’s allocated capacity, or purchase dedicated capacity.
+* **[Rate limit](/docs/en/api/rate-limits) and [Priority Tier](/docs/en/api/service-tiers#existing-priority-tier-commitments) optimization:** Optimize features like [prompt caching](/docs/en/build-with-claude/prompt-caching) or specific prompts to make the most of your allocated capacity.
 * **Advanced Analysis:** Perform deeper data analysis than what's available in Console
 
 <Check>
@@ -31,17 +31,17 @@ This API enables you to better monitor, analyze, and optimize your Claude implem
 Claude Enterprise organizations use an Analytics API key with a different API instead; see [Which API do you need?](#which-api-do-you-need).
 
 <Note>
-**Claude Platform on AWS:** The programmatic Usage and Cost API endpoints are not currently available. View usage and cost data on the **Usage** and **Cost** pages in the Claude Console instead.
+  **Claude Platform on AWS:** The programmatic Usage and Cost API endpoints are not currently available. View usage and cost data on the **Usage** and **Cost** pages in the Claude Console instead.
 </Note>
 
 ## Which API do you need?
 
 Anthropic provides cost and usage reporting through two APIs, depending on which Claude product your organization manages:
 
-| Your organization                        | API                                                                 | Key type                             |
-| ---------------------------------------- | ------------------------------------------------------------------- | ------------------------------------ |
-| Claude Console (Claude Platform) | The Usage and Cost Admin API described on this page                 | Admin API key (`sk-ant-admin01-...`) |
-| Claude Enterprise (claude.ai)            | The [Claude Enterprise Analytics API](/docs/en/api/admin/analytics) cost and usage endpoints | Analytics API key                    |
+| Your organization                | API                                                                                          | Key type                             |
+| -------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------ |
+| Claude Console (Claude Platform) | The Usage and Cost Admin API described on this page                                          | Admin API key (`sk-ant-admin01-...`) |
+| Claude Enterprise (claude.ai)    | The [Claude Enterprise Analytics API](/docs/en/api/admin/analytics) cost and usage endpoints | Analytics API key                    |
 
 Claude Enterprise parent organizations do not appear in Claude Console and carry no Admin API keys, so for them the Analytics API key is the only path to this data. See [Analytics APIs](/docs/en/manage-claude/analytics-api) for how to create each key type and which plans the Claude Enterprise cost data applies to.
 
@@ -53,15 +53,19 @@ Leading observability platforms offer ready-to-use integrations for monitoring y
   <Card title="CloudZero" icon="chart" href="https://docs.cloudzero.com/docs/connections-anthropic">
     Cloud intelligence platform for tracking and forecasting costs
   </Card>
+
   <Card title="Datadog" icon="chart" href="https://docs.datadoghq.com/integrations/anthropic/">
     LLM Observability with automatic tracing and monitoring
   </Card>
+
   <Card title="Grafana Cloud" icon="chart" href="https://grafana.com/docs/grafana-cloud/monitor-infrastructure/integrations/integration-reference/integration-anthropic/">
     Agentless integration for easy LLM observability with out-of-the-box dashboards and alerts
   </Card>
+
   <Card title="Honeycomb" icon="polygon" href="https://docs.honeycomb.io/integrations/anthropic-usage-monitoring/">
     Advanced querying and visualization through OpenTelemetry
   </Card>
+
   <Card title="Vantage" icon="chart" href="https://docs.vantage.sh/connecting_anthropic">
     FinOps platform for LLM cost & usage observability
   </Card>
@@ -84,7 +88,8 @@ bucket_width=1d" \
   **Set a User-Agent header for integrations**
 
   If you're building an integration, set your User-Agent header to help us understand usage patterns:
-  ```text
+
+  ```text wrap
   User-Agent: YourApp/1.0.0 (https://yourapp.com)
   ```
 </Tip>
@@ -95,10 +100,10 @@ Track token consumption across your organization with detailed breakdowns by mod
 
 ### Key concepts
 
-- **Time buckets**: Aggregate usage data in fixed intervals (`1m`, `1h`, or `1d`)
-- **Token tracking**: Measure uncached input, cached input, cache creation, and output tokens
-- **Filtering & grouping**: Filter by API key, workspace, model, service tier, context window, [data residency](/docs/en/manage-claude/data-residency), or speed (beta), and group results by these dimensions
-- **Server tool usage**: Track usage of server-side tools like web search
+* **Time buckets**: Aggregate usage data in fixed intervals (`1m`, `1h`, or `1d`)
+* **Token tracking**: Measure uncached input, cached input, cache creation, and output tokens
+* **Filtering & grouping**: Filter by API key, workspace, model, service tier, context window, [data residency](/docs/en/manage-claude/data-residency), or speed (beta), and group results by these dimensions
+* **Server tool usage**: Track usage of server-side tools like web search
 
 For complete parameter details and response schemas, see the [Usage API reference](/docs/en/api/admin-api/usage-cost/get-messages-usage-report).
 
@@ -146,9 +151,9 @@ bucket_width=1d" \
 ```
 
 <Tip>
-To retrieve your organization's API key IDs, use the [List API Keys](/docs/en/api/admin-api/apikeys/list-api-keys) endpoint.
+  To retrieve your organization's API key IDs, use the [List API Keys](/docs/en/api/admin-api/apikeys/list-api-keys) endpoint.
 
-To retrieve your organization's workspace IDs, use the [List Workspaces](/docs/en/api/admin-api/workspaces/list-workspaces) endpoint, or find your organization's workspace IDs in the Claude Console.
+  To retrieve your organization's workspace IDs, use the [List Workspaces](/docs/en/api/admin-api/workspaces/list-workspaces) endpoint, or find your organization's workspace IDs in the Claude Console.
 </Tip>
 
 #### Data residency
@@ -180,7 +185,7 @@ bucket_width=1d" \
 ```
 
 <Note>
-Models released before February 2026 (prior to Claude Opus 4.6 and Claude Sonnet 4.6) don't support the `inference_geo` request parameter, so their usage reports return `"not_available"` for this dimension. You can use `not_available` as a filter value in `inference_geos[]` to target those models.
+  Models released before February 2026 (prior to Claude Opus 4.6 and Claude Sonnet 4.6) don't support the `inference_geo` request parameter, so their usage reports return `"not_available"` for this dimension. You can use `not_available` as a filter value in `inference_geos[]` to target those models.
 </Note>
 
 #### Fast mode (research preview)
@@ -214,16 +219,16 @@ bucket_width=1d" \
 ```
 
 <Note>
-Both the `speeds[]` filter and the `speed` group_by value require the `fast-mode-2026-02-01` beta header.
+  Both the `speeds[]` filter and the `speed` group\_by value require the `fast-mode-2026-02-01` beta header.
 </Note>
 
 ### Time granularity limits
 
-| Granularity | Default Limit | Maximum Limit | Use Case |
-|-------------|---------------|---------------|----------|
-| `1m` | 60 buckets | 1440 buckets | Real-time monitoring |
-| `1h` | 24 buckets | 168 buckets | Daily patterns |
-| `1d` | 7 buckets | 31 buckets | Weekly/monthly reports |
+| Granularity | Default Limit | Maximum Limit | Use Case               |
+| ----------- | ------------- | ------------- | ---------------------- |
+| `1m`        | 60 buckets    | 1440 buckets  | Real-time monitoring   |
+| `1h`        | 24 buckets    | 168 buckets   | Daily patterns         |
+| `1d`        | 7 buckets     | 31 buckets    | Weekly/monthly reports |
 
 ## Cost API
 
@@ -231,10 +236,10 @@ Retrieve service-level cost breakdowns in USD with the `/v1/organizations/cost_r
 
 ### Key concepts
 
-- **Currency**: All costs in USD, reported as decimal strings in lowest units (cents)
-- **Cost types**: Track token usage, web search, and code execution costs
-- **Grouping**: Group costs by workspace or description for detailed breakdowns. When grouping by `description`, responses include parsed fields like `model` and `inference_geo`
-- **Time buckets**: Daily granularity only (`1d`)
+* **Currency**: All costs in USD, reported as decimal strings in lowest units (cents)
+* **Cost types**: Track token usage, web search, and code execution costs
+* **Grouping**: Group costs by workspace or description for detailed breakdowns. When grouping by `description`, responses include parsed fields like `model` and `inference_geo`
+* **Time buckets**: Daily granularity only (`1d`)
 
 For complete parameter details and response schemas, see the [Cost API reference](/docs/en/api/admin-api/usage-cost/get-cost-report).
 
@@ -287,30 +292,36 @@ page=page_xyz..." \
 
 Explore detailed implementations in [Claude Cookbook](https://platform.claude.com/cookbooks):
 
-- **Daily usage reports**: Track token consumption trends
-- **Cost attribution**: Allocate expenses by workspace for chargebacks
-- **Cache efficiency**: Measure and optimize prompt caching
-- **Budget monitoring**: Set up alerts for spending thresholds
-- **CSV export**: Generate reports for finance teams
+* **Daily usage reports**: Track token consumption trends
+* **Cost attribution**: Allocate expenses by workspace for chargebacks
+* **Cache efficiency**: Measure and optimize prompt caching
+* **Budget monitoring**: Set up alerts for spending thresholds
+* **CSV export**: Generate reports for finance teams
 
 ## Frequently asked questions
 
 ### How fresh is the data?
+
 Usage and cost data typically appears within 5 minutes of API request completion, though delays may occasionally be longer.
 
 ### What's the recommended polling frequency?
+
 The API supports polling once per minute for sustained use. For short bursts (e.g., downloading paginated data), more frequent polling is acceptable. Cache results for dashboards that need frequent updates.
 
 ### How do I track code execution usage?
+
 Code execution costs appear in the cost endpoint grouped under `Code Execution Usage` in the description field. Code execution is not included in the usage endpoint.
 
 ### How do I track Priority Tier usage?
+
 Filter or group by `service_tier` in the usage endpoint and look for the `priority` value. Priority Tier costs are not available in the cost endpoint.
 
 ### What happens with Workbench usage?
+
 API usage from the Workbench is not associated with an API key, so `api_key_id` will be `null` even when grouping by that dimension.
 
 ### How is the default workspace represented?
+
 Usage and costs attributed to the default workspace have a `null` value for `workspace_id`.
 
 ### How do I get per-user cost breakdowns for Claude Code?
@@ -318,14 +329,15 @@ Usage and costs attributed to the default workspace have a `null` value for `wor
 Use the [Claude Code Analytics API](/docs/en/manage-claude/claude-code-analytics-api), which provides per-user estimated costs and productivity metrics without the performance limitations of breaking down costs by many API keys. For general API usage with many keys, use the [Usage API](#usage-api) to track token consumption as a cost proxy.
 
 ## See also
+
 The Usage and Cost APIs can be used to help you deliver a better experience for your users, help you manage costs, and preserve your rate limit. Learn more about some of these other features:
 
-- [Admin API](/docs/en/manage-claude/admin-api)
-- [Admin API reference](/docs/en/api/admin)
-- [Analytics APIs](/docs/en/manage-claude/analytics-api) - Which analytics API and key type your organization needs
-- [Pricing](/docs/en/about-claude/pricing)
-- [Prompt caching](/docs/en/build-with-claude/prompt-caching) - Optimize costs with caching
-- [Batch processing](/docs/en/build-with-claude/batch-processing) - 50% discount on batch requests
-- [Rate limits](/docs/en/api/rate-limits) - Understand usage tiers
-- [Rate Limits API](/docs/en/manage-claude/rate-limits-api) - Read your configured rate limits
-- [Data residency](/docs/en/manage-claude/data-residency) - Control inference geography
+* [Admin API](/docs/en/manage-claude/admin-api)
+* [Admin API reference](/docs/en/api/admin)
+* [Analytics APIs](/docs/en/manage-claude/analytics-api) - Which analytics API and key type your organization needs
+* [Pricing](/docs/en/about-claude/pricing)
+* [Prompt caching](/docs/en/build-with-claude/prompt-caching) - Optimize costs with caching
+* [Batch processing](/docs/en/build-with-claude/batch-processing) - 50% discount on batch requests
+* [Rate limits](/docs/en/api/rate-limits) - Understand usage tiers
+* [Rate Limits API](/docs/en/manage-claude/rate-limits-api) - Read your configured rate limits
+* [Data residency](/docs/en/manage-claude/data-residency) - Control inference geography

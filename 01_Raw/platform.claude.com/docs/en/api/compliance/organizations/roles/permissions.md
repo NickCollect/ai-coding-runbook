@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/roles/permissions
-fetched_at: 2026-05-25T05:15:56.302302+00:00
+fetched_at: 2026-06-29T05:25:20.849666+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,13 +75,13 @@ curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE
 {
   "data": [
     {
-      "action": "action",
-      "resource_id": "resource_id",
-      "resource_type": "resource_type"
+      "action": "claude_code",
+      "resource_id": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+      "resource_type": "organization"
     }
   ],
   "has_more": true,
-  "next_page": "next_page"
+  "next_page": "cGFnZV90b2tlbl9leGFtcGxlXzE3MzQ1Njc4OTA="
 }
 ```
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/retrieve
-fetched_at: 2026-06-08T05:25:08.638806+00:00
+fetched_at: 2026-06-29T05:25:21.467324+00:00
 fetch_method: mintlify_md
 ---
 
@@ -97,21 +97,21 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
 ```json
 {
-  "id": "id",
-  "attachments_count": 0,
-  "chats_count": 0,
-  "created_at": "2019-12-27T18:11:19.117Z",
+  "id": "claude_proj_01Nm7PqRsTuVwXyZaBcDeFgH",
+  "attachments_count": 3,
+  "chats_count": 14,
+  "created_at": "2025-03-12T18:22:41.123456Z",
   "deleted_at": "2019-12-27T18:11:19.117Z",
-  "description": "description",
-  "instructions": "instructions",
+  "description": "Planning and research for the Q3 launch",
+  "instructions": "Focus on concise, actionable answers.",
   "is_private": true,
-  "name": "name",
-  "organization_id": "organization_id",
-  "organization_uuid": "organization_uuid",
-  "updated_at": "2019-12-27T18:11:19.117Z",
+  "name": "Q3 Product Launch",
+  "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
+  "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
+  "updated_at": "2025-03-14T09:05:17.456789Z",
   "user": {
-    "id": "id",
-    "email_address": "email_address"
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "email_address": "jane.doe@example.com"
   }
 }
 ```
