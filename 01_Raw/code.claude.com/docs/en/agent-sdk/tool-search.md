@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/tool-search
-fetched_at: 2026-06-15T06:17:49.062971+00:00
+fetched_at: 2026-06-29T05:25:11.445829+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,7 @@ This approach solves two challenges as tool libraries scale:
 * **Context efficiency:** Tool definitions can consume large portions of the context window (50 tools can use 10-20K tokens), leaving less room for actual work.
 * **Tool selection accuracy:** Tool selection accuracy degrades with more than 30-50 tools loaded at once.
 
-Tool search is enabled by default. This page covers [how it works](#how-tool-search-works), how to [configure it](#configure-tool-search), and how to [optimize tool discovery](#optimize-tool-discovery).
+Tool search is enabled by default.
 
 ## How tool search works
 

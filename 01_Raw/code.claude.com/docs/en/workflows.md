@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/workflows
-fetched_at: 2026-06-22T06:23:32.658480+00:00
+fetched_at: 2026-06-29T05:25:22.777883+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,13 +21,6 @@ fetch_method: mintlify_md
 A dynamic workflow is a JavaScript script that orchestrates [subagents](/en/sub-agents) at scale. Claude writes the script for the task you describe, and a runtime executes it in the background while your session stays responsive.
 
 Reach for a workflow when a task needs more agents than one conversation can coordinate, or when you want the orchestration codified as a script you can read and rerun. Examples include a codebase-wide bug sweep, a 500-file migration, a research question that needs sources cross-checked against each other, and a hard plan worth drafting from several independent angles before you commit to one.
-
-This page covers how to:
-
-* Decide [when to use a workflow](#when-to-use-a-workflow) instead of subagents or skills
-* [Run a bundled workflow](#run-a-bundled-workflow) with `/deep-research`
-* [Have Claude write a workflow](#have-claude-write-a-workflow) for your task and save it
-* Understand [how a workflow runs](#how-a-workflow-runs) and [manage runs](#manage-runs)
 
 ## When to use a workflow
 
@@ -102,16 +95,17 @@ Workflows run in the background, so the session stays responsive while agents wo
 
 The progress view shows each phase with its agent counts, token totals, and elapsed time. The footer lists the key for each action:
 
-| Key            | Action                                                                                              |
-| :------------- | :-------------------------------------------------------------------------------------------------- |
-| `↑` / `↓`      | Select a phase or agent                                                                             |
-| `Enter` or `→` | Drill into the selected phase, then into an agent to read its prompt, recent tool calls, and result |
-| `Esc`          | Back out one level                                                                                  |
-| `j` / `k`      | Scroll within the agent detail when it overflows                                                    |
-| `p`            | Pause or resume the run                                                                             |
-| `x`            | Stop the selected agent, or stop the whole workflow when focus is on the run                        |
-| `r`            | Restart the selected running agent                                                                  |
-| `s`            | [Save](#save-the-workflow-for-reuse) the run's script as a command                                  |
+| Key            | Action                                                                                                  |
+| :------------- | :------------------------------------------------------------------------------------------------------ |
+| `↑` / `↓`      | Select a phase or agent                                                                                 |
+| `Enter` or `→` | Drill into the selected phase, then into an agent to read its prompt, recent tool calls, and result     |
+| `Esc`          | Back out one level                                                                                      |
+| `j` / `k`      | Scroll within the agent detail when it overflows                                                        |
+| `f`            | {/* min-version: 2.1.186 */}Filter the agent list in the selected phase by status. Press again to cycle |
+| `p`            | Pause or resume the run                                                                                 |
+| `x`            | Stop the selected agent, or stop the whole workflow when focus is on the run                            |
+| `r`            | Restart the selected running agent                                                                      |
+| `s`            | [Save](#save-the-workflow-for-reuse) the run's script as a command                                      |
 
 ## Have Claude write a workflow
 

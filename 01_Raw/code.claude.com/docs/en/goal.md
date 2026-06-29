@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/goal
-fetched_at: 2026-06-08T05:25:04.537785+00:00
+fetched_at: 2026-06-29T05:25:16.282520+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,13 +24,6 @@ Use a goal for substantial work with a verifiable end state:
 * Implementing a design doc until all acceptance criteria hold
 * Splitting a large file into focused modules until each is under a size budget
 * Working through a labeled issue backlog until the queue is empty
-
-This page covers how to:
-
-* [Compare ways to keep a session running](#compare-ways-to-keep-a-session-running): `/loop`, Stop hooks, and auto mode
-* [Set a goal](#set-a-goal) and [write an effective condition](#write-an-effective-condition)
-* [Check status](#check-status), [clear early](#clear-a-goal), and [run non-interactively](#run-non-interactively)
-* See [how evaluation works](#how-evaluation-works) and [requirements](#requirements)
 
 ## Compare ways to keep a session running
 

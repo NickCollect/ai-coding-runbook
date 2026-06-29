@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/checkpointing
-fetched_at: 2026-05-25T05:15:52.936376+00:00
+fetched_at: 2026-06-29T05:25:12.460590+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,6 +46,10 @@ The rewind menu lists each prompt you sent during the session. Select the point 
 After restoring the conversation or choosing Summarize from here, the original prompt from the selected message is restored into the input field so you can re-send or edit it.
 
 Choosing Summarize up to here leaves you at the end of the conversation with the input empty.
+
+#### Rewind past a cleared conversation
+
+If you ran `/clear` earlier in the same Claude Code process, the rewind menu shows an additional entry at the top of the list labeled `/resume <session-id> (previous session)`. Select it to resume the conversation that was active before `/clear` ran. The entry is available until you exit Claude Code or resume a different session, and requires Claude Code v2.1.191 or later. On earlier versions, run `/resume` and pick the previous session from the list instead.
 
 #### Restore vs. summarize
 

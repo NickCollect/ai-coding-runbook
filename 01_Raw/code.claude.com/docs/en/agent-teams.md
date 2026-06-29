@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-teams
-fetched_at: 2026-06-22T06:23:23.110778+00:00
+fetched_at: 2026-06-29T05:25:11.581731+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,13 +23,6 @@ Unlike [subagents](/en/sub-agents), which run within a single session and can on
 <Note>
   This page describes agent teams as of v2.1.178. With `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS` set, spawning a teammate no longer needs a setup step, and cleanup happens automatically when the session exits. Before v2.1.178, you asked Claude to create and name a team first, and Claude used the `TeamCreate` and `TeamDelete` tools to set it up and remove it. Both tools no longer exist. The `team_name` input on the Agent tool is accepted but ignored, and the `team_name` field in `TaskCreated`, `TaskCompleted`, and `TeammateIdle` [hook payloads](/en/hooks#taskcreated) carries the session-derived name and is deprecated.
 </Note>
-
-This page covers:
-
-* [When to use agent teams](#when-to-use-agent-teams), including best use cases and how they compare with subagents
-* [Starting a team](#start-your-first-agent-team)
-* [Controlling teammates](#control-your-agent-team), including display modes, task assignment, and delegation
-* [Best practices for parallel work](#best-practices)
 
 ## When to use agent teams
 
@@ -113,7 +106,11 @@ Agent teams support two display modes:
   `tmux` has known limitations on certain operating systems and traditionally works best on macOS. Using `tmux -CC` in iTerm2 is the suggested entrypoint into `tmux`.
 </Note>
 
-The default is `"in-process"`. Before v2.1.179 the default was `"auto"`, so upgraded sessions that previously opened split panes now stay in one terminal unless you set the mode explicitly. Set `"auto"` to enable split panes when you're already running inside a tmux session or your terminal is iTerm2, falling back to in-process otherwise. The `"tmux"` setting enables split-pane mode and auto-detects whether to use tmux or iTerm2 based on your terminal. To override, set [`teammateMode`](/en/settings#available-settings) in `~/.claude/settings.json`:
+The default is `"in-process"`. Before v2.1.179 the default was `"auto"`, so upgraded sessions that previously opened split panes now stay in one terminal unless you set the mode explicitly. Set `"auto"` to enable split panes when you're already running inside a tmux session or your terminal is iTerm2, falling back to in-process otherwise. The `"tmux"` setting enables split-pane mode and auto-detects whether to use tmux or iTerm2 based on your terminal.
+
+{/* min-version: 2.1.186 */}As of v2.1.186, set `"iterm2"` to use iTerm2 native split panes explicitly. This mode requires the [`it2` CLI](https://github.com/mkusaka/it2) and shows an error with the install command if `it2` is missing. The setup prompt that offers to install `it2` or switch to tmux appears under `"auto"` or `"tmux"` when your terminal is iTerm2 and tmux is available as a fallback.
+
+To override the default, set [`teammateMode`](/en/settings#available-settings) in `~/.claude/settings.json`:
 
 ```json theme={null}
 {
@@ -142,6 +139,8 @@ each teammate.
 ```
 
 Teammates don't inherit the lead's `/model` selection by default. To change the model used when the prompt doesn't specify one, set **Default teammate model** in `/config`. Pick **Default (leader's model)** to have teammates follow the lead's current model.
+
+{/* min-version: 2.1.186 */}Teammates inherit the lead's [effort level](/en/model-config#adjust-effort-level). In split-pane mode this applies from v2.1.186; earlier versions did not pass the lead's session effort to split-pane teammates.
 
 ### Require plan approval for teammates
 

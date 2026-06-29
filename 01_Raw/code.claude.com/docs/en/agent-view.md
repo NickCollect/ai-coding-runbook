@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-view
-fetched_at: 2026-06-22T06:23:23.586220+00:00
+fetched_at: 2026-06-29T05:25:11.870580+00:00
 fetch_method: mintlify_md
 ---
 
@@ -78,7 +78,7 @@ You can use `claude agents` as your primary entry point instead of `claude`: dis
 
 Run `claude agents` to open agent view. It takes over the full terminal and lists every session grouped by state, with pinned sessions and the ones that need you at the top. Each row shows the session's name, current activity, and how long ago it last changed.
 
-By default the list shows every background session you've started, across all your projects. A session working in one repository and another in a different worktree both appear here, regardless of which directory you opened agent view from. To narrow the list to one project, pass `--cwd` (requires Claude Code v2.1.141 or later):
+By default the list shows every background session you've started, across all your projects. A session working in one repository and another in a different worktree both appear here, regardless of which directory you opened agent view from. To narrow the list to one project, pass `--cwd`, which requires Claude Code v2.1.141 or later:
 
 ```bash theme={null}
 claude agents --cwd ~/projects/my-app
@@ -192,7 +192,9 @@ Pressing `←` on an empty prompt works from any Claude Code session, not only o
 
 ### Organize the list
 
-Agent view groups sessions so the ones that need input are at the top, with `Ready for review` and `Needs input` above `Working` and `Completed`. These group names don't map one-to-one to the [states](#read-session-state) above: a session moves to `Ready for review` when it has an open pull request, and `Completed` collects finished, failed, and stopped sessions together. Press `Ctrl+S` to group by directory instead. Your choice persists across runs.
+Agent view groups sessions so the ones that need input are at the top, with `Ready for review` and `Needs input` above `Working` and `Completed`. These group names don't map one-to-one to the [states](#read-session-state) above: a session moves to `Ready for review` when it has an open pull request, and `Completed` collects finished, failed, and stopped sessions together.
+
+Press `Ctrl+S` to group by directory instead. Your choice persists across runs.
 
 Within a group:
 
@@ -263,7 +265,7 @@ Prefix or mention parts of the prompt to control how the session starts:
 | `#<number>` or a pull request URL | If a session is already working on that PR, select it instead of dispatching                                                                                   |
 | `Shift+Enter`                     | Dispatch and immediately attach to the new session                                                                                                             |
 
-A small set of commands run in agent view itself instead of dispatching: `/exit` and `/quit` close agent view, and `/logout` signs you out. Every other command and skill is sent to a new background session as its first prompt.
+A small set of commands run in agent view itself instead of dispatching: `/exit` and `/quit` close agent view, `/logout` signs you out, and `/model` sets the [dispatch model](#set-the-model). Skills, your own commands, and prompt-expanding built-ins such as `/init` are sent to a new background session as their first prompt. Other built-in commands show an `attach to a session to run it` hint instead.
 
 Packaging a recurring task as a [skill](/en/skills) lets you start the same workflow from agent view repeatedly without retyping the prompt.
 
@@ -296,11 +298,11 @@ Configuration flags from the original launch carry through to the backgrounded s
 
 Directories you added during the session with [`/add-dir`](/en/permissions#additional-directories-grant-file-access-not-configuration) also carry through.
 
-Carrying `--allow-dangerously-skip-permissions` through keeps `bypassPermissions` reachable in the backgrounded session, but it does not grant anything new. The mode still requires the same one-time interactive acceptance described in [Permission mode, model, and effort](#permission-mode-model-and-effort) before any session can use it.
+Carrying `--allow-dangerously-skip-permissions` through keeps `bypassPermissions` reachable in the backgrounded session, but it doesn't grant anything new. The mode still requires the same one-time interactive acceptance described in [Permission mode, model, and effort](#permission-mode-model-and-effort) before any session can use it.
 
 ### From your shell
 
-Pass `--bg` to start a session that goes straight to the background:
+Pass `--bg` or its long form `--background` to start a session that goes straight to the background:
 
 ```bash theme={null}
 claude --bg "investigate the flaky SettingsChangeDetector test"
@@ -342,9 +344,9 @@ Press `Enter` to start the job. The same job can also be launched directly from 
 claude --bg --exec 'pytest -x'
 ```
 
-The command runs as a PTY-backed job and appears as a row in agent view, with the most recent line of output as its status. A shell job runs the command in place of Claude, so no model is invoked and the output is not sent to any session.
+The command runs as a PTY-backed job and appears as a row in agent view, with the most recent line of output as its status. A shell job runs the command in place of Claude, so no model is invoked and the output isn't sent to any session.
 
-To see the output, attach to the row, press `Space` to peek without attaching, or run `claude logs <id>` from your shell. The captured output stays in memory and is not written to disk. The row and its output clean up automatically about five minutes after the command exits, so read it before then if you need the result.
+To see the output, attach to the row, press `Space` to peek without attaching, or run `claude logs <id>` from your shell. The captured output stays in memory and isn't written to disk. The row and its output clean up automatically about five minutes after the command exits, so read it before then if you need the result.
 
 ### How file edits are isolated
 
@@ -372,7 +374,7 @@ To turn off worktree isolation for a repository where git worktrees are impracti
 
 Outside a git repository, sessions write to the working directory directly and aren't isolated from each other, so avoid dispatching parallel sessions that edit the same files. If you use a different version control system, configure a [`WorktreeCreate` hook](/en/worktrees#non-git-version-control) and Claude isolates edits the same way it does for git.
 
-Deleting a session in agent view (`Ctrl+X` twice) removes a worktree Claude created for it, including any uncommitted changes, so merge or push the changes you want to keep first. Deleting from the shell with [`claude rm`](#manage-sessions-from-the-shell) keeps a worktree that has uncommitted changes and prints its path so you can clean it up yourself. A worktree you created yourself and started the session inside is left in place either way.
+Deleting a session in agent view with `Ctrl+X` twice removes a worktree Claude created for it, including any uncommitted changes, so merge or push the changes you want to keep first. Deleting from the shell with [`claude rm`](#manage-sessions-from-the-shell) keeps a worktree that has uncommitted changes and prints its path so you can clean it up yourself. A worktree you created yourself and started the session inside is left in place either way.
 
 To find a session's worktree path, peek the session or attach and check its working directory.
 
@@ -380,7 +382,18 @@ A [subagent](/en/sub-agents) the background session spawns inherits the session'
 
 ### Set the model
 
-The model name shown in the agent view header is the dispatch default. New sessions you start from the input use this model, which comes from the [`model` setting](/en/settings#available-settings) in your user settings. Set it by selecting a model in the [`/model` picker](/en/model-config), or edit the setting directly. To override it for the whole agent view session, pass `--model` when opening agent view. See [Permission mode, model, and effort](#permission-mode-model-and-effort).
+The model name shown in the agent view header is the dispatch default. New sessions you start from the input use this model, which comes from the [`model` setting](/en/settings#available-settings) in your user settings. Set it by selecting a model in the [`/model` picker](/en/model-config), or edit the setting directly.
+
+To override the dispatch default for the whole agent view session, pass `--model` when opening agent view. See [Permission mode, model, and effort](#permission-mode-model-and-effort).
+
+To change the dispatch default from inside agent view, type `/model` followed by a model name in the dispatch input and press `Enter`. The header updates to show that model with a `(session)` marker, and sessions you dispatch afterward use it. Type `/model default` to clear the override and return to the dispatch default. This override lasts for the rest of the current `claude agents` run, doesn't write to your settings file, and requires Claude Code v2.1.172 or later. {/* min-version: 2.1.172 */} The following example dispatches one session on Opus and the next on Sonnet:
+
+```text theme={null}
+/model opus
+refactor auth
+/model sonnet
+run the test suite
+```
 
 Each background session can run on a different model. To override it for one session:
 
@@ -390,7 +403,9 @@ Each background session can run on a different model. To override it for one ses
 
 ### Permission mode, model, and effort
 
-A background session reads its [settings](/en/settings) from the directory it runs in, the same as if you had started `claude` there.
+A background session reads its [settings](/en/settings) from the directory it runs in, the same as if you had started `claude` there. This includes [`env` values](/en/settings#available-settings) in project settings, so an `ANTHROPIC_MODEL` or provider variable set there applies to background sessions in that directory.
+
+Cloud provider selection, such as `CLAUDE_CODE_USE_BEDROCK` or `CLAUDE_CODE_USE_VERTEX`, and `ANTHROPIC_DEFAULT_*_MODEL` aliases follow the shell that dispatched the session. Gateway endpoint variables such as `ANTHROPIC_BASE_URL` and its paired `ANTHROPIC_AUTH_TOKEN` don't. See [the supervisor process](#the-supervisor-process) for how background sessions source provider settings and credentials.
 
 The [permission mode](/en/permissions) depends on how you started the session. Backgrounding an existing session with `/bg` or `←` keeps the current permission mode, so a session you switched to `acceptEdits` or `auto` stays in that mode after detaching. Dispatching from the agent view input or running `claude --bg` from your shell uses the `defaultMode` from that directory's settings, or the `permissionMode` from the dispatched [subagent's frontmatter](/en/sub-agents#supported-frontmatter-fields).
 
@@ -402,7 +417,7 @@ To set defaults for every session you dispatch from agent view, pass any of `--p
 claude agents --permission-mode plan --model opus --effort high
 ```
 
-`--agent` sets the [subagent](/en/sub-agents) used when a dispatch prompt does not name one, either with `@name` or as the first word. It defaults to the [`agent` setting](/en/settings#available-settings) if one is set, otherwise the built-in catch-all `claude` agent. Naming a subagent in the dispatch input overrides both.
+`--agent` sets the [subagent](/en/sub-agents) used when a dispatch prompt doesn't name one, either with `@name` or as the first word. It defaults to the [`agent` setting](/en/settings#available-settings) if one is set, otherwise the built-in catch-all `claude` agent. Naming a subagent in the dispatch input overrides both.
 
 `claude agents` also accepts `--dangerously-skip-permissions` as shorthand for `--permission-mode bypassPermissions`, and `--allow-dangerously-skip-permissions` to make `bypassPermissions` available in each dispatched session's `Shift+Tab` cycle without starting in that mode. Both match the [top-level CLI flags](/en/cli-reference).
 
@@ -434,7 +449,7 @@ Agent view accepts the same configuration flags as `claude` for loading settings
 | [`--mcp-config <file-or-json>`](/en/mcp)                                                         | Load MCP servers from a config file or JSON string                             |
 | `--strict-mcp-config`                                                                            | Use only the MCP servers from `--mcp-config`, ignoring other MCP configuration |
 
-Repeat `--add-dir`, `--plugin-dir`, or `--mcp-config` once per value. The space-separated form, such as `--add-dir a b c`, is not supported with `claude agents`.
+Repeat `--add-dir`, `--plugin-dir`, or `--mcp-config` once per value. The space-separated form, such as `--add-dir a b c`, isn't supported with `claude agents`.
 
 The following example opens agent view with a settings override and one extra directory:
 
@@ -468,13 +483,17 @@ Every session listed in agent view is considered a background session, whether o
 
 Background sessions are hosted by a per-user supervisor process, separate from your terminal and from agent view. The supervisor starts automatically the first time you background a session or open agent view, and you don't manage it directly.
 
-The supervisor and its sessions authenticate with the same credentials as your interactive sessions and make no additional network connections beyond the model API.
+The supervisor keeps one pre-warmed worker process ready so a dispatch from agent view or `claude --bg` starts without the delay of a cold launch. When you dispatch, the supervisor assigns the pre-warmed worker to your session, applies that session's directory, settings, and credentials to it, and then starts a replacement for the next dispatch. If no healthy pre-warmed worker is available, the supervisor launches a fresh process instead.
+
+The supervisor and its sessions authenticate with the same stored credentials as your interactive sessions and make no additional network connections beyond the model API. Provider selection variables such as `CLAUDE_CODE_USE_BEDROCK` and `ANTHROPIC_DEFAULT_*_MODEL` aliases are read from the shell that dispatched each session and are applied to its worker.
+
+{/* min-version: 2.1.174 */}A background session doesn't inherit gateway endpoint variables such as `ANTHROPIC_BASE_URL`, the equivalent Bedrock, Vertex, and Foundry base URL variables, or a paired `ANTHROPIC_AUTH_TOKEN` from the shell that started the supervisor or from the dispatching shell. The session uses your stored credentials and any `env` values in the project directory's [settings](/en/settings) instead. To point background sessions in a project at an [LLM gateway](/en/llm-gateway), set `ANTHROPIC_BASE_URL` in that project's `.claude/settings.json` `env` block rather than exporting it in your shell. Before v2.1.174, a background session inherited these variables from the supervisor's launch shell, so it could use the gateway you had configured in that shell instead of the one configured for the project directory.
 
 Each background session is its own Claude Code process, managed by the supervisor rather than tied to your terminal. A session that's actively working, waiting for your input, or has a terminal attached keeps its process running. A running background shell command, subagent, dynamic workflow, or monitor counts as active work, so a long-running process such as a dev server keeps the session alive.
 
 Once a session finishes and sits unattached for about an hour, the supervisor stops its process to free resources. A session you have [pinned](#organize-the-list) with `Ctrl+T` is exempt and keeps its process running while idle. The transcript and state stay on disk either way, and the next time you attach, peek, or reply to a stopped session, the supervisor starts a fresh process from where it left off. When every session has finished and no terminal is connected, the supervisor itself exits and starts again the next time you need it.
 
-An empty row left over from pressing `←` that was never given a prompt is removed entirely after about five minutes so the list clears on its own. Sessions started with `claude --bg` and sessions waiting on a setup prompt such as a trust dialog are not removed this way.
+An empty row left over from pressing `←` that was never given a prompt is removed entirely after about five minutes so the list clears on its own. Sessions started with `claude --bg` and sessions waiting on a setup prompt such as a trust dialog aren't removed this way.
 
 When the host runs low on memory, the supervisor stops idle non-pinned sessions first and stops idle pinned ones only if that freed nothing.
 
@@ -509,7 +528,7 @@ To turn off background agents and agent view entirely, set the `disableAgentView
 
 If `claude agents` prints a count followed by your configured subagents and then exits, agent view is unavailable in your environment. Earlier versions didn't open agent view in every environment, including when connected through Bedrock, Vertex AI, or Foundry. Run `claude update` to install the latest version.
 
-If agent view still does not open after updating, check whether it has been [turned off](#turn-off-agent-view) by a setting or environment variable.
+If agent view still doesn't open after updating, check whether it has been [turned off](#turn-off-agent-view) by a setting or environment variable.
 
 ### Agent view opens with no sessions
 
@@ -527,7 +546,7 @@ The dispatch input expects a task description, not a conversational opener. A pr
 
 Shutting down or restarting your machine stops running background sessions, so they show as failed when you next open agent view. Attach, peek, or reply to any of them and the session restarts from where it left off.
 
-Sleep alone does not cause this. Sessions are preserved across sleep and the supervisor reconnects to them on wake.
+Sleep alone doesn't cause this. Sessions are preserved across sleep and the supervisor reconnects to them on wake.
 
 ### Agent view says the background service did not respond
 
@@ -539,7 +558,19 @@ claude daemon stop --any --keep-workers
 
 The new supervisor reconnects to the running sessions. Without `--keep-workers`, the command ends the background sessions too. The `--any` flag confirms you want to stop a supervisor that started on demand rather than as an installed service, which is the default.
 
-On Windows, if the supervisor does not respond to the stop request, the command prints its process ID. End that process with `taskkill /PID <pid>` to finish the recovery. Background sessions are still preserved when you passed `--keep-workers`.
+On Windows, if the supervisor doesn't respond to the stop request, the command prints its process ID. End that process with `taskkill /PID <pid>` to finish the recovery. Background sessions are still preserved when you passed `--keep-workers`.
+
+### Dispatch fails with `Could not resolve authentication method`
+
+{/* min-version: 2.1.174 */}If a background dispatch fails with `Could not resolve authentication method` while interactive sessions authenticate normally, the worker that received the dispatch did not pick up credentials. On v2.1.174 and later the supervisor supplies a fresh credential snapshot when it assigns a [pre-warmed worker](#the-supervisor-process), so this error means no stored credential was available to the supervisor process itself. Confirm you have run `/login` or configured an API key, then stop the supervisor:
+
+```bash theme={null}
+claude daemon stop --any --keep-workers
+```
+
+The next `claude agents` or `claude --bg` starts a fresh supervisor that reads your stored credentials. If you authenticate with an environment variable such as `ANTHROPIC_API_KEY` rather than `/login`, run that next command from a shell where the variable is set.
+
+See the [error reference](/en/errors#could-not-resolve-authentication-method) for the full list of causes and fixes. Before v2.1.174, a pre-warmed worker that sat idle could surface this error when it was assigned to a dispatch even when your credentials were valid. Upgrade to recover.
 
 ### Background sessions cannot read Desktop, Documents, or Downloads on macOS
 

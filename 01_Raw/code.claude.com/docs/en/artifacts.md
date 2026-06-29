@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/artifacts
-fetched_at: 2026-06-22T06:23:23.864657+00:00
+fetched_at: 2026-06-29T05:25:11.938725+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,15 +23,6 @@ An artifact is a live, interactive web page that Claude Code publishes from your
 <Frame>
   <img src="https://mintcdn.com/claude-code/kaHIYYMIYMYPxQg9/images/artifacts-viewer.png?fit=max&auto=format&n=kaHIYYMIYMYPxQg9&q=85&s=dbfd671cdb0d15f49f808b9e89778fe1" alt="An artifact open in a browser at claude.ai/code/artifact. The viewer header shows the artifact title acme-funnel-fix, a Share button, and the author avatar. The Share menu is open with the Always share latest version toggle, a version picker reading Sharing version 2, an Everyone at Acme audience selector, and a Copy link button. Below the header, the artifact page shows two mobile mockups side by side, a funnel chart, and a row of metric cards." width="2511" height="1890" data-path="images/artifacts-viewer.png" />
 </Frame>
-
-This page covers how to:
-
-* Decide [when to use an artifact](#when-to-use-an-artifact)
-* [Create](#create-an-artifact), [update](#update-an-artifact), and [share](#share-an-artifact) an artifact
-* Apply [prompting patterns](#what-you-can-build) for richer pages
-* [Apply your own design system](#improve-the-visual-design) so artifacts match your product's branding
-* Understand the [page constraints](#page-constraints) and [availability requirements](#availability)
-* [Disable](#disable-artifacts) or [manage artifacts for your organization](#manage-artifacts-for-your-organization)
 
 ## When to use an artifact
 
@@ -177,7 +168,7 @@ Artifacts require every condition below. When one is not met, Claude writes a lo
 
 | Requirement         | Available when                                                                                                                                                                                                                                    |
 | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Plan                | Team or Enterprise. On Team plans, artifacts are on by default. On Enterprise plans, an admin [enables them](#manage-artifacts-for-your-organization) in claude.ai admin settings.                                                                |
+| Plan                | Team or Enterprise. On Team plans, artifacts are on by default. On Enterprise plans, an Owner [enables them](#manage-artifacts-for-your-organization) in claude.ai admin settings.                                                                |
 | Authentication      | Signed in to claude.ai with `/login`. Sessions using an API key, [gateway token](/en/llm-gateway), or cloud-provider credential cannot publish.                                                                                                   |
 | Model provider      | Anthropic API. Not available on [Amazon Bedrock](/en/amazon-bedrock), [Google Cloud Vertex AI](/en/google-vertex-ai), or [Microsoft Foundry](/en/microsoft-foundry).                                                                              |
 | Organization policy | Customer-managed encryption keys (CMEK), HIPAA, and [Zero Data Retention](/en/zero-data-retention) are not enabled for the organization.                                                                                                          |
@@ -195,7 +186,7 @@ To turn artifacts off for your own sessions regardless of your organization's se
 
 ## Manage artifacts for your organization
 
-Admins on Team and Enterprise plans control artifacts from [claude.ai admin settings](https://claude.ai/admin-settings/claude-code). Artifact content is stored on Anthropic-operated infrastructure and is visible only to authenticated members of the publishing organization.
+Owners on Team and Enterprise plans control artifacts from [claude.ai admin settings](https://claude.ai/admin-settings/claude-code). Artifact content is stored on Anthropic-operated infrastructure and is visible only to authenticated members of the publishing organization.
 
 ### Enable or disable artifacts
 
