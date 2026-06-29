@@ -1,56 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=ar
-fetched_at: 2026-06-22T06:34:16.381014+00:00
-title: "\u0627\u0644\u0645\u0644\u0627\u062d\u0638\u0627\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/feedback-policies?hl=vi
+fetched_at: 2026-06-29T05:28:49.717713+00:00
+title: "Ph\u1ea3n h\u1ed3i \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# الملاحظات
+# Phản hồi
 
-## التصويت على الإعدادات المفضّلة المضمّنة
+## Bình chọn lựa chọn ưu tiên cùng dòng
 
-في Google AI Studio، قد تظهر لك أحيانًا مقارنة جنبًا إلى جنب بين ردّين مختلفين على طلبك. وهي جزء من نظام التصويت المضمّن حسب التفضيلات. سيُطلب منك اختيار الردّ المفضّل لديك. ويساعدنا ذلك في
-معرفة النماذج التي يجد المستخدمون نتائجها الأكثر فائدة.
+Trong Google AI Studio, đôi khi bạn có thể thấy bản so sánh song song của 2 câu trả lời khác nhau cho câu lệnh của mình. Đây là một phần trong hệ thống Bình chọn lựa chọn ưu tiên trong dòng của chúng tôi. Bạn sẽ được yêu cầu chọn câu trả lời mà mình muốn. Điều này giúp chúng tôi hiểu được những kết quả đầu ra nào của mô hình mà người dùng thấy hữu ích nhất.
 
-### لماذا نفعل ذلك؟
+### Vì sao chúng tôi làm vậy?
 
-نحن نعمل باستمرار على تحسين نماذج الذكاء الاصطناعي وخدماتنا. تساعدنا ملاحظاتك التي يتم إرسالها من خلال ميزة "التصويت المضمّن حسب الأفضلية" في توفير وتحسين وتطوير منتجات Google وخدماتها وتكنولوجيات تعلُّم الآلة، بما في ذلك ميزات Google ومنتجاتها وخدماتها المخصّصة للمؤسسات، وذلك بما يتوافق مع [بنود الخدمة الإضافية الخاصة بواجهة برمجة التطبيقات Gemini](https://ai.google.dev/gemini-api/terms?hl=ar) و[سياسة الخصوصية](https://policies.google.com/privacy?hl=ar).
+Chúng tôi không ngừng nỗ lực cải thiện các mô hình và dịch vụ AI của mình. Ý kiến phản hồi của bạn thông qua tính năng Bình chọn lựa chọn ưu tiên trong dòng giúp chúng tôi cung cấp, cải thiện và phát triển các sản phẩm, dịch vụ cũng như công nghệ học máy của Google (bao gồm cả các tính năng, sản phẩm và dịch vụ dành cho doanh nghiệp của Google) theo [Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi) và [Chính sách quyền riêng tư](https://policies.google.com/privacy?hl=vi).
 
-### ما هي البيانات المضمَّنة في "الملاحظات"؟
+### Những dữ liệu nào có trong phần Phản hồi?
 
-لاتّخاذ قرارات مدروسة بشأن نماذجنا، نجمع بيانات معيّنة عند مشاركتك في ميزة &quot;التصويت المضمّن على الخيارات المفضّلة&quot;:
+Để đưa ra quyết định sáng suốt về các mô hình của chúng tôi, chúng tôi sẽ thu thập một số dữ liệu khi bạn tham gia hoạt động Bình chọn lựa chọn ưu tiên trong dòng:
 
-- **الطلبات والردود:** نسجّل جميع الطلبات والردود، بما في ذلك أي محتوى تم تحميله، في المحادثة التي أرسلت ملاحظات بشأنها. نسجّل أيضًا خيارَي الردّ اللذين اخترتهما. يساعدنا ذلك في فهم سياق إعداداتك المفضّلة.
-- **تصويتك:** نسجّل الردّ الذي فضّلته. هذا هو جوهر الملاحظات التي نجمعها.
-- **تفاصيل الاستخدام:** تشمل هذه المعلومات النموذج الذي أنشأ الرد وتفاصيل فنية وتشغيلية أخرى حول استخدامك لهذه الميزة.
+- **Câu lệnh và câu trả lời:** Chúng tôi ghi lại tất cả câu lệnh và câu trả lời (bao gồm cả mọi nội dung được tải lên) trong cuộc trò chuyện mà bạn đã gửi ý kiến phản hồi. Chúng tôi cũng ghi lại 2 lựa chọn phản hồi mà bạn đã chọn. Điều này giúp chúng tôi hiểu rõ hơn về bối cảnh sở thích của bạn.
+- **Lựa chọn của bạn:** Chúng tôi ghi lại câu trả lời mà bạn thích hơn. Đây là cốt lõi của ý kiến phản hồi mà chúng tôi đang thu thập.
+- **Thông tin chi tiết về việc sử dụng:** Thông tin này bao gồm thông tin về mô hình đã tạo câu trả lời và các thông tin chi tiết khác về kỹ thuật và hoạt động liên quan đến việc bạn sử dụng tính năng này.
 
-### خصوصيتك
+### Quyền riêng tư của bạn
 
-نحن نراعي خصوصيتك بجدية. وكجزء من هذه العملية، تتّخذ Google خطوات لحماية خصوصيتك. ويشمل ذلك إلغاء ربط هذه البيانات بحسابك على Google ومفتاح واجهة برمجة التطبيقات ومشروعك على السحابة الإلكترونية قبل أن يراها المراجعون أو يضيفوا تعليقات توضيحية إليها. **يُرجى عدم إرسال ملاحظات حول محادثات تتضمّن معلومات حساسة أو سرية أو شخصية.**
+Chúng tôi rất coi trọng quyền riêng tư của bạn. Trong quá trình này, Google sẽ thực hiện các bước để bảo vệ quyền riêng tư của bạn. trong đó có cả việc huỷ mối liên kết giữa dữ liệu này và Tài khoản Google, khoá API cũng như dự án trên đám mây của bạn trước khi nhân viên đánh giá xem xét hoặc chú thích dữ liệu đó. **Đừng gửi ý kiến phản hồi về những cuộc trò chuyện có chứa thông tin nhạy cảm, thông tin mật hoặc thông tin cá nhân.**
 
-### إلغاء الاشتراك
+### Chọn Không tham gia
 
-سيتوفّر لك خيار تخطّي التصويت على التفضيلات المضمّنة عند ظهوره.
+Bạn có thể bỏ qua tính năng Bỏ phiếu ưu tiên trong dòng khi tính năng này xuất hiện.
 
-نشكرك على مساعدتنا في تحسين Google AI Studio.
+Cảm ơn bạn đã giúp chúng tôi cải thiện Google AI Studio!
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-04-29 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]

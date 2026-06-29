@@ -1,125 +1,116 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=it
-fetched_at: 2026-06-22T06:27:17.085089+00:00
-title: "Panoramica degli agenti \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=es-419
+fetched_at: 2026-06-29T05:39:01.772690+00:00
+title: "Descripci\u00f3n general de los agentes \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Invia feedback
+Enviar comentarios
 
-# Panoramica degli agenti
+# Descripción general de los agentes
 
-Gli agenti gestiti sull'API Gemini ti offrono un'interfaccia di agente
-configurabile. Una singola chiamata API esegue il provisioning di un sandbox Linux in cui l'agente ragiona,
-esegue il codice, gestisce i file e naviga sul web in modo autonomo.
+Los agentes administrados en la API de Gemini te brindan un arnés de agente configurable. Una sola llamada a la API aprovisiona una zona de pruebas de Linux en la que el agente razona, ejecuta código, administra archivos y navega por la Web de forma autónoma.
 
 [rocket\_launch
 
-Guida rapida
+Guía de inicio rápido
 
-Effettua la tua prima chiamata con un agente, trasmetti in streaming le risposte e crea un agente personalizzato.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=it)
+Realiza tu primera llamada al agente, transmite respuestas y crea un agente personalizado.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=es-419)
 [smart\_toy
 
-Agente Antigravity
+Agente de Antigravity
 
-Funzionalità, strumenti, input multimodale e prezzi per l'agente predefinito.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it)
+Funciones, herramientas, entrada multimodal y precios para el agente predeterminado.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419)
 [experiment
 
-Agent in AI Studio
+Agentes en AI Studio
 
-Playground visivo per la prototipazione di agenti senza scrivere codice.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=it)
+Entorno de pruebas visual para crear prototipos de agentes sin escribir código.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=es-419)
 
-## Agenti gestiti disponibili
+## Agentes administrados disponibles
 
-- **[Agente antigravità](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it)**: agente gestito per uso generico basato su Gemini 3.5 Flash. Esegue il codice, gestisce i file e
-  cerca sul web all'interno di una sandbox Linux sicura ospitata da Google. Puoi
-  estenderlo con istruzioni, competenze e dati personalizzati per
-  [creare un agente personalizzato](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it).
-- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it)**: agente di ricerca autonomo
-  che pianifica, esegue e sintetizza attività di ricerca in più fasi per casi d'uso
-  come analisi di mercato, due diligence e revisioni della letteratura.
+- **[Agente de Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419)**: Agente administrado
+  de uso general con tecnología de Gemini 3.5 Flash. Ejecuta código, administra archivos y busca en la Web dentro de una zona de pruebas segura de Linux alojada por Google. Puedes
+  extenderlo con tus propias instrucciones, habilidades y datos para
+  [crear un agente personalizado](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419).
+- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419)**: Agente de investigación autónomo
+  que planifica, ejecuta y sintetiza tareas de investigación de varios pasos para casos de uso
+  como análisis de mercado, diligencia debida y revisiones de literatura.
 
-## Sicurezza e best practice
+## Seguridad y prácticas recomendadas
 
-Ogni agente viene eseguito in un ambiente sandbox isolato a livello di sistema operativo.
-Per impostazione predefinita, la sandbox ha accesso alla rete in uscita senza restrizioni. Puoi
-limitare o disattivare l'accesso alla rete utilizzando una lista consentita.
+Cada agente se ejecuta en un entorno de zona de pruebas aislado a nivel del SO.
+De forma predeterminada, la zona de pruebas tiene acceso de red saliente sin restricciones. Puedes restringir o inhabilitar el acceso a la red con una lista de entidades permitidas.
 
-### Accesso alla rete
+### Acceso a la red
 
-Per impostazione predefinita, gli ambienti hanno accesso alla rete in uscita senza limitazioni. Utilizza una
-`network` lista consentita per limitare il traffico in uscita a domini specifici o
-pattern jolly. Per i dettagli della configurazione, vedi
-[Lista consentita di rete](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=it#network_allow_list) (AI
-Studio) o [Regole di rete](https://ai.google.dev/gemini-api/docs/custom-agents?hl=it#with_network_rules)
+De forma predeterminada, los entornos tienen acceso de red saliente sin restricciones. Usa una lista de entidades permitidas `network` para restringir el tráfico saliente a dominios específicos o patrones comodín. Para obtener detalles sobre la configuración, consulta
+[Lista de entidades permitidas de red](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=es-419#network_allow_list) (AI
+Studio) o [Reglas de red](https://ai.google.dev/gemini-api/docs/custom-agents?hl=es-419#with_network_rules)
 (API).
 
-### API e strumenti esterni
+### Herramientas y APIs externas
 
-Puoi collegare strumenti e API esterni per estendere l'agente. Utilizza solo strumenti
-provenienti da fonti attendibili e limita le autorizzazioni al minimo necessario. Le credenziali
-possono essere inserite in modo sicuro tramite le trasformazioni delle intestazioni del proxy in uscita e non vengono mai
-esposte all'interno della sandbox. L'agente può utilizzare qualsiasi credenziale a cui ha accesso,
-quindi fornisci solo le credenziali di cui vuoi concedere l'ambito completo.
+Puedes conectar herramientas y APIs externas para extender el agente. Usa solo herramientas de fuentes confiables y permisos de alcance al mínimo requerido. Las credenciales se pueden insertar de forma segura a través de transformaciones de encabezado de proxy de salida y nunca se exponen dentro de la zona de pruebas. El agente puede usar cualquier credencial a la que tenga acceso, por lo que solo debes proporcionar credenciales cuyo alcance completo estés dispuesto a otorgar.
 
-- Utilizza service account o chiavi API con privilegi minimi.
-- Preferisci i token di breve durata alle chiavi di lunga durata.
-- Fornisci solo le credenziali di cui vuoi concedere l'ambito completo.
-- Ruota le credenziali in base a una pianificazione regolare.
+- Usa cuentas de servicio o claves de API con privilegios mínimos.
+- Prefiere los tokens de corta duración a las claves de larga duración.
+- Solo proporciona credenciales cuyo alcance completo estés dispuesto a otorgar.
+- Rota las credenciales con regularidad.
 
-Per informazioni dettagliate sulla configurazione delle trasformazioni delle intestazioni, vedi
-[Credenziali](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#credentials).
+Para obtener detalles sobre la configuración de las transformaciones de encabezado, consulta
+[Credenciales](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419#credentials).
 
-### Supervisione umana
+### Supervisión humana
 
-Verifica sempre gli output (codice generato, trasformazioni dei dati, modifiche alla configurazione) prima di eseguirne il deployment, soprattutto per le attività che modificano i dati o interagiscono con sistemi esterni.
+Siempre verifica los resultados (código generado, transformaciones de datos, cambios de configuración) antes de implementarlos, en especial para las tareas que modifican datos o interactúan con sistemas externos.
 
-## Prezzi
+## Precios
 
-Gli agenti gestiti utilizzano un [modello a pagamento a consumo](https://ai.google.dev/gemini-api/docs/pricing?hl=it#pricing-for-agents) basato sui token del modello Gemini e sull'utilizzo degli strumenti. Una singola interazione può attivare più cicli di ragionamento, in genere consumando da 100.000 a 3 milioni di token. Il calcolo dell'ambiente **non viene fatturato** durante l'anteprima. Consulta i [costi stimati](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=it#availability-and-pricing) per le suddivisioni per attività.
+Los agentes administrados usan un [modelo de pago por uso](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419#pricing-for-agents) basado en tokens del modelo de Gemini y uso de herramientas. Una sola interacción puede activar varios bucles de razonamiento, que suelen consumir entre 100,000 y 3 millones de tokens. El procesamiento del entorno **no se factura** durante la versión preliminar. Consulta los [costos estimados](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419#availability-and-pricing) para los desgloses por tarea.
 
-## Limiti
+## Límites
 
-| Limite | Descrizione |
+| Límite | Descripción |
 | --- | --- |
-| **Durata dell'ambiente** | Gli ambienti vengono eliminati definitivamente dopo 7 giorni di inattività. |
-| **VM Spin-down** | Le VM vengono arrestate dopo un breve periodo di inattività per risparmiare risorse. La richiesta successiva ripristina lo stato (con un avvio a freddo). |
-| **Software preinstallato** | Ambiente basato su Ubuntu con Python 3.12 e Node.js 22. Per maggiori informazioni sull'immagine di base dell'ambiente, consulta [Software preinstallato](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#pre-installed-software). |
-| **Max agents** | Puoi avere fino a 1000 agenti gestiti. |
+| **Tiempo de actividad del entorno** | Los entornos se borran de forma permanente después de 7 días de inactividad. |
+| **Apagado de VM** | Las VMs se apagan después de un breve período de inactividad para conservar los recursos. La siguiente solicitud restablece el estado (con un inicio en frío). |
+| **Software preinstalado** | Entorno basado en Ubuntu con Python 3.12 y Node.js 22. Para obtener más información sobre la imagen base del entorno, consulta [Software preinstalado](https://ai.google.dev/gemini-api/docs/agent-environment?hl=es-419#pre-installed-software). |
+| **Cantidad máxima de agentes** | Puedes tener hasta 1,000 agentes administrados. |
 
-## Framework degli agenti
+## Frameworks de agentes
 
-Puoi anche creare agenti con Gemini utilizzando questi framework e SDK:
+También puedes crear agentes con Gemini usando estos frameworks y SDKs:
 
-- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=it): crea
-  flussi di applicazioni complessi e con stato e sistemi multi-agente utilizzando strutture
-  di grafici.
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=it): collega gli agenti Gemini ai tuoi dati privati per flussi di lavoro migliorati con RAG.
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=it): orchestra agenti AI autonomi collaborativi
-  che interpretano ruoli.
-- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=it): crea
-  interfacce utente e agenti basati sull'AI in JavaScript/TypeScript.
-- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): un framework
-  open source per creare e orchestrare agenti di IA interoperabili.
-- [**SDK Antigravity**](https://antigravity.google/product/antigravity-sdk?hl=it): crea
-  agenti AI autonomi utilizzando gli stessi strumenti, lo stesso ciclo di agenti e la stessa gestione del contesto
-  che alimentano Google Antigravity, programmabile in Python.
+- [**\*\*LangChain / LangGraph\*\***](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=es-419): Crea
+  flujos de aplicaciones complejos con estado y sistemas multiagente con estructuras de gráficos.
+- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=es-419): Conecta agentes de Gemini a
+  tus datos privados para flujos de trabajo mejorados con RAG.
+- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=es-419): Organiza agentes de IA autónomos y colaborativos que interpretan roles.
+- [**SDK de IA de Vercel**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=es-419): Crea
+  interfaces de usuario y agentes con tecnología de IA en JavaScript o TypeScript.
+- [**\*\*ADK de Google\*\***](https://google.github.io/adk-docs/get-started/python/): Es un
+  framework de código abierto para crear y organizar agentes de IA
+  interoperables.
+- [**SDK de Antigravity**](https://antigravity.google/product/antigravity-sdk?hl=es-419): Crea
+  agentes de IA autónomos con las mismas herramientas, bucle de agente y administración de contexto
+  que impulsan Google Antigravity, programable en Python.
 
-Invia feedback
+Enviar comentarios
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Ultimo aggiornamento 2026-05-20 UTC.
+Última actualización: 2026-05-20 (UTC)
 
-Vuoi dirci altro?
+¿Quieres brindar más información?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-20 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-20 (UTC)"],[],[]]

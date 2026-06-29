@@ -1,71 +1,61 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=pt-BR
-fetched_at: 2026-06-22T06:35:25.737513+00:00
-title: "Registro e compartilhamento de dados \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=he
+fetched_at: 2026-06-29T05:30:09.225456+00:00
+title: "\u05e8\u05d9\u05e9\u05d5\u05dd \u05d5\u05e9\u05d9\u05ea\u05d5\u05e3 \u05e0\u05ea\u05d5\u05e0\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Envie comentários
+שליחת משוב
 
-# Registro e compartilhamento de dados
+# רישום ושיתוף נתונים
 
-Esta página descreve o armazenamento e o gerenciamento de
-[registros da API Gemini](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=pt-br), que são dados de
-API de propriedade do desenvolvedor de chamadas da API Gemini compatíveis para projetos com o faturamento ativado. Os registros abrangem todo o processo, desde a solicitação de um usuário até a resposta do modelo.
+בדף הזה מפורטות ההנחיות לאחסון ולניהול של [יומני Gemini API](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=he), שהם נתוני API בבעלות המפתחים, מתוך קריאות נתמכות ל-Gemini API בפרויקטים שהחיוב מופעל בהם. היומנים
+כוללים את כל התהליך, מהבקשה של המשתמש ועד לתשובה של המודל.
 
-## 1. Dados que podem ser compartilhados
+## 1. הנתונים שאפשר לשתף
 
-Como proprietário do projeto, você pode ativar o registro de chamadas da API Gemini para seu próprio uso ou para feedback e compartilhamento com o Google, ajudando a melhorar continuamente nossos modelos.
+בעלי פרויקטים יכולים להסכים לרישום ביומן של קריאות ל-Gemini API, לשימוש עצמי או למשוב ולשיתוף עם Google כדי לעזור לנו לשפר באופן מתמיד את המודלים שלנו.
 
-Com o registro ativado, você pode nos ajudar a criar sistemas de IA que continuam sendo valiosos para desenvolvedores em vários campos e casos de uso, contribuindo com os seguintes dados para melhorias de produtos e treinamento de modelos:
+אם תפעילו את הרישום ביומן, תוכלו לעזור לנו לבנות מערכות AI שימשיכו להיות שימושיות למפתחים בתחומים שונים ולתרחישי שימוש שונים. לשם כך, תוכלו לבחור לתרום את הנתונים הבאים לשיפור המוצר ולאימון המודלים:
 
-- **Conjuntos de dados**:use a interface de registros e conjuntos de dados do Google AI Studio para escolher registros (solicitações, respostas, metadados etc.) de chamadas da API Gemini compatíveis; contribuídos pela inclusão em conjuntos de dados, com a opção de desativar durante a criação do conjunto de dados.
-- **Feedback**:ao analisar os registros, você pode fornecer feedback, incluindo classificações de positivo/negativo e comentários escritos.
+- **מערכי נתונים:** אפשר להשתמש בממשק Logs and Datasets של Google AI Studio כדי לבחור יומנים (בקשות, תשובות, מטא-נתונים וכו') שמעניינים אתכם מתוך קריאות נתמכות ל-Gemini API. היומנים האלה נכללים במערכי נתונים, ויש לכם אפשרות לבטל את ההסכמה במהלך יצירת מערך הנתונים.
+- **משוב:** כשבודקים את היומנים, אפשר לספק משוב, כולל דירוג לייק/דיסלייק ותגובות בכתב.
 
-Quando você compartilha um conjunto de dados com o Google, seus registros nesse conjunto, incluindo
-solicitações e respostas, serão processados de acordo com nossos
-[Termos](https://developers.google.com/terms?hl=pt-br) para
-"[Serviços não pagos](https://ai.google.dev/gemini-api/terms?hl=pt-br#data-use-unpaid),"
-o que significa que o conjunto de dados pode ser usado para desenvolver e melhorar produtos, serviços e tecnologias de aprendizado de máquina do Google,
-incluindo aprimorar e
-treinar nossos modelos. **Não inclua informações pessoais, sensíveis ou confidenciais**.
+כשמשתפים מערך נתונים עם Google, היומנים במערך הנתונים הזה, כולל בקשות ותשובות, יעברו עיבוד בהתאם [לתנאים](https://developers.google.com/terms?hl=he) שלנו בנושא [שירותים ללא תשלום](https://ai.google.dev/gemini-api/terms?hl=he#data-use-unpaid). כלומר, יכול להיות שנשתמש במערך הנתונים כדי לפתח ולשפר את המוצרים, השירותים וטכנולוגיות למידת המכונה של Google, כולל שיפור והדרכה של המודלים שלנו. **חשוב לא לכלול מידע אישי, רגיש או סודי.**
 
-## 2. Como usamos seus dados
+## 2. איך אנחנו משתמשים בנתונים שלכם
 
-Os registros expiram após 55 dias por padrão. Eles ficam indisponíveis após esse período. Os conjuntos de dados podem ser criados para reter registros de interesse ou valor além desse período para casos de uso downstream e contribuição opcional para melhorias de modelos. Os registros armazenados em conjuntos de dados não têm datas de validade definidas, mas cada projeto tem um limite de armazenamento padrão de até 1.000 registros.
+כברירת מחדל, תוקף היומנים יפוג אחרי 55 ימים. הם לא יהיו זמינים יותר אחרי התקופה הזו. אפשר ליצור מערכי נתונים כדי לשמור יומנים של נתונים מעניינים או בעלי ערך מעבר לתקופה הזו, לשימוש בתרחישי שימוש בהמשך ולתרומה אופציונלית לשיפורים במודל. ליומנים שמאוחסנים במערכי נתונים אין תאריכי תפוגה מוגדרים, אבל לכל פרויקט יש מגבלת אחסון שמוגדרת כברירת מחדל של עד 1,000 יומנים.
 
-Por padrão, como o registro só está disponível para projetos com o faturamento ativado,
-os comandos e as respostas nos registros não são usados para melhoria ou
-desenvolvimento de produtos, de acordo com nossos [Termos](https://developers.google.com/terms?hl=pt-br)
-de uso de dados.
+כברירת מחדל, מאחר שהרישום ביומן זמין רק לפרויקטים שמופעל בהם חיוב, ההנחיות והתשובות ביומנים לא משמשות לשיפור או לפיתוח המוצר, בהתאם [לתנאים](https://developers.google.com/terms?hl=he) שלנו בנושא שימוש בנתונים.
 
-Se você optar por compartilhar conjuntos de dados dos seus registros com o Google, esses conjuntos serão usados como dados de demonstração do mundo real para entender melhor a diversidade de domínios e contextos em que os sistemas e aplicativos de IA são usados. Esses dados podem ser usados para melhorar a qualidade do modelo e informar o treinamento e a avaliação de modelos e serviços futuros. Esses dados são tratados de acordo com nossos termos de uso de dados para [Serviços não pagos](https://ai.google.dev/gemini-api/terms?hl=pt-br#data-use-unpaid).
-Assim, revisores humanos podem ler, fazer anotações e tratar as entradas e saídas da API que você compartilha. Antes que os dados sejam usados para melhorar o modelo, o Google toma medidas para proteger a privacidade do usuário como parte desse processo. Isso inclui desconectar esses dados da sua Conta do Google, da chave de API e do projeto na nuvem antes que os revisores os vejam ou façam anotações.
+אם תבחרו לשתף עם Google מערכי נתונים של היומנים שלכם, מערכי הנתונים האלה ישמשו כנתוני הדגמה מהעולם האמיתי כדי להבין טוב יותר את המגוון של הדומיינים וההקשרים שבהם נעשה שימוש במערכות ובאפליקציות של AI. הנתונים האלה עשויים לשמש לשיפור איכות המודלים, ולספק מידע לאימון ולהערכה של מודלים ושירותים עתידיים. הנתונים האלה מעובדים בהתאם לתנאי השימוש בנתונים שלנו עבור [שירותים ללא תשלום](https://ai.google.dev/gemini-api/terms?hl=he#data-use-unpaid).
+לכן, יכול להיות שבודקים אנושיים יקראו את נתוני הקלט והפלט של ה-API ששיתפתם, יוסיפו להם הערות ויעבדו אותם. לפני ש-Google משתמשת בנתונים כדי לשפר את המודל, היא מבצעת פעולות כדי להגן על פרטיות המשתמשים במסגרת התהליך הזה. לדוגמה, אנחנו מנתקים את הנתונים האלה מחשבון Google, ממפתח ה-API ומפרויקט הענן לפני שהבודקים רואים אותם או מוסיפים להם הערות.
 
-## 3. Permissões de dados
+## 3. הרשאות גישה לנתונים
 
-Ao ativar a contribuição de dados da API, você confirma que tem as permissões necessárias para que o Google trate e use os dados conforme descrito nesta documentação. **Não contribua com registros que contenham informações sensíveis, confidenciais ou proprietárias obtidas pelo serviço pago**.
-A licença que você concede ao Google na seção "[Envio de conteúdo](https://developers.google.com/terms?hl=pt-br#b_submission_of_content)" nos Termos das APIs também se estende, na medida exigida pela legislação aplicável para nosso uso, a qualquer conteúdo (por exemplo, comandos, incluindo instruções de sistema associadas, conteúdo armazenado em cache e arquivos, como imagens, vídeos ou documentos) que você enviar aos Serviços e a quaisquer respostas geradas.
+הצטרפות לשיתוף נתוני API מהווה אישור מצידך לכך שיש לך את ההרשאות הנדרשות כדי ש-Google תוכל לעבד את הנתונים ולהשתמש בהם כפי שמתואר במסמך הזה. **חשוב לא לשתף יומנים שמכילים מידע רגיש, סודי או קנייני שהתקבל באמצעות השירות בתשלום**.
+הרישיון שאתם מעניקים ל-Google במסגרת הקטע [שליחת תוכן](https://developers.google.com/terms?hl=he#b_submission_of_content) בתנאי השימוש ב-API חל גם על כל תוכן שאתם שולחים לשירותים (למשל, הנחיות, כולל הוראות מערכת משויכות, תוכן שמור במטמון וקבצים כמו תמונות, סרטונים או מסמכים) ועל כל התגובות שנוצרות, במידה הנדרשת לפי הדין החל לשימוש שלנו.
 
-## 4. Compartilhamento de dados pessoais e feedback
+## 4. שיתוף נתונים ומשוב
 
-Você pode nos ajudar a avançar na fronteira da pesquisa de IA, da API Gemini e do Google AI Studio ativando o compartilhamento de dados como exemplos, permitindo que melhoremos continuamente nossos modelos em vários contextos e criemos sistemas de IA que continuam sendo valiosos para desenvolvedores em vários campos e casos de uso.
+אתם יכולים לעזור לנו לקדם את המחקר בתחום ה-AI, את Gemini API ואת Google AI Studio. לשם כך, אתם יכולים להביע הסכמה לשיתוף הנתונים שלכם כדוגמאות, כדי שנוכל לשפר באופן מתמשך את המודלים שלנו בהקשרים שונים ולבנות מערכות AI שממשיכות להיות שימושיות למפתחים בתחומים שונים ובתרחישי שימוש שונים.
 
-Envie comentários
+שליחת משוב
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Última atualização 2026-06-01 UTC.
+עדכון אחרון: 2026-06-01 (שעון UTC).
 
-Quer enviar seu feedback?
+רוצה לתת לנו משוב?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-01 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-01 (שעון UTC)."],[],[]]

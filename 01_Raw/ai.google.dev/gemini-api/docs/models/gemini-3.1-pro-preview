@@ -1,65 +1,56 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=it
-fetched_at: 2026-06-22T06:31:44.844888+00:00
-title: "Gemini 3.1 Pro (anteprima) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he
+fetched_at: 2026-06-29T05:33:42.047157+00:00
+title: "\u202bGemini 3.1 Pro Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Invia feedback
+שליחת משוב
 
-# Gemini 3.1 Pro (anteprima)
+# ‫Gemini 3.1 Pro Preview
 
-Progettato per perfezionare le prestazioni e l'affidabilità della serie Gemini 3 Pro,
-Gemini 3.1 Pro Preview offre un ragionamento migliore, un'efficienza
-dei token migliorata e un'esperienza più concreta e coerente dal punto di vista dei fatti. È ottimizzato
-per il comportamento e l'usabilità dell'ingegneria del software, nonché per i workflow agentici
-che richiedono un utilizzo preciso degli strumenti e un'esecuzione affidabile in più passaggi in domini
-reali.
+גרסת טרום-ההשקה של Gemini 3.1 Pro נועדה לשפר את הביצועים והמהימנות של סדרת Gemini 3 Pro. היא מספקת חשיבה רציונלית משופרת, יעילות טובה יותר בשימוש באסימונים וחוויה מבוססת יותר ועקבית מבחינה עובדתית. הוא מותאם להתנהגות של מהנדסי תוכנה ולשימושיות, וגם לתהליכי עבודה מבוססי-סוכנים שדורשים שימוש מדויק בכלי והפעלה מהימנה של כמה שלבים בתחומים בעולם האמיתי.
 
-[Prova in Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=it)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=he)
 
-## Documentazione
+## מאמרי עזרה
 
-Visita la pagina della [Guida per sviluppatori di Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=it) per una copertura completa di funzionalità e capacità.
+בדף [מדריך למפתחים של Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=he) מפורטות כל התכונות והיכולות.
 
 ## gemini-3.1-pro-preview
 
-| Proprietà | Descrizione |
+| נכס | תיאור |
 | --- | --- |
-| Codice modello id\_card | `gemini-3.1-pro-preview` |
-| saveTipi di dati supportati | **Input**  Testo, immagine, video, audio e PDF  **Output**  Testo |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  1.048.576  **Limite di token di output**  65.536 |
-| handymanFunzionalità | **Generazione di audio**  Non supportato  **API batch**  Supportato  **Memorizzazione nella cache**  Supportato  **Esecuzione di codice**  Supportato  **Ricerca file**  Supportato (solo AI Studio)  **Inferenza flessibile**  Supportato  **Chiamata di funzione**  Supportato  **Grounding con Google Maps**  Supportato  **Generazione di immagini**  Non supportato  **API Live**  Non supportato  **Inferenza della priorità**  Supportato  **Fondatezza della Ricerca**  Supportato  **Output strutturati**  Supportato  **Ragionamento**  Supportato  **Contesto URL**  Supportato |
-| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Anteprima: `gemini-3.1-pro-preview` - Anteprima: `gemini-3.1-pro-preview-customtools` \* |
-| calendar\_monthUltimo aggiornamento | Febbraio 2026 |
-| cognition\_2Knowledge cutoff | Gennaio 2025 |
+| id\_cardקוד מודל | `gemini-3.1-pro-preview` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונה, סרטון, אודיו ו-PDF  **פלט**  טקסט |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  1,048,576  **מגבלת טוקנים של פלט**  65,536 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  לא נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  נתמך (ב-AI Studio בלבד)  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  לא נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  נתמך  **[הסקת מסקנות גמישה](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he)**  נתמך  **[הסקת עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he)**  נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-3.1-pro-preview` - תצוגה מקדימה: `gemini-3.1-pro-preview-customtools` \* |
+| calendar\_monthהעדכון האחרון | פברואר 2026 |
+| cognition\_2תאריך סף הידע | ינואר 2025 |
 
 #### gemini-3.1-pro-preview-customtools
 
-\* *Per chi crea con un mix di bash e strumenti personalizzati, l'anteprima di Gemini 3.1 Pro
-è dotata di un endpoint separato disponibile tramite l'API chiamato
-`gemini-3.1-pro-preview-customtools`. Questo endpoint è più efficace nell'assegnare la priorità
-ai tuoi strumenti personalizzati (ad esempio `view_file` o `search_code`).*
+\* *למי שמשתמש בשילוב של bash וכלים בהתאמה אישית, גרסת טרום ההשקה של Gemini 3.1 Pro כוללת נקודת קצה (endpoint) נפרדת שזמינה דרך ה-API בשם `gemini-3.1-pro-preview-customtools`. נקודת הקצה הזו טובה יותר בתעדוף של הכלים המותאמים אישית שלכם (לדוגמה, `view_file` או `search_code`).*
 
-*Tieni presente che, sebbene `gemini-3.1-pro-preview-customtools` sia ottimizzato per i flussi di lavoro
-che utilizzano strumenti personalizzati e bash, potresti notare fluttuazioni della qualità in
-alcuni casi d'uso che non traggono vantaggio da questi strumenti.*
+*חשוב לזכור ש-`gemini-3.1-pro-preview-customtools` מותאם לאוטומציה של תהליכי עבודה שמשתמשים בכלים מותאמים אישית וב-Bash, אבל יכול להיות שתהיה תנודתיות באיכות בחלק מתרחישי השימוש שלא מפיקים תועלת מהכלים האלה.*
 
-Invia feedback
+שליחת משוב
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+עדכון אחרון: 2026-06-23 (שעון UTC).
 
-Vuoi dirci altro?
+רוצה לתת לנו משוב?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-23 (שעון UTC)."],[],[]]

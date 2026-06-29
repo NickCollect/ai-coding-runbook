@@ -1,87 +1,97 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=hi
-fetched_at: 2026-06-22T06:36:21.235787+00:00
-title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=vi
+fetched_at: 2026-06-29T05:32:27.724075+00:00
+title: "Ng\u1eef c\u1ea3nh URL \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) is now available in preview with collaborative planning, visualization, MCP support, and more.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-सुझाव भेजें
+Gửi ý kiến phản hồi
 
-# यूआरएल का कॉन्टेक्स्ट
+# Ngữ cảnh URL
 
-यूआरएल कॉन्टेक्स्ट टूल की मदद से, मॉडल को यूआरएल के तौर पर ज़्यादा कॉन्टेक्स्ट दिया जा सकता है. अपने अनुरोध में यूआरएल शामिल करके, मॉडल उन पेजों का कॉन्टेंट ऐक्सेस कर पाएगा. हालांकि, ऐसा तब ही होगा, जब वह यूआरएल, [सीमाएं सेक्शन](#limitations) में दिए गए यूआरएल टाइप में शामिल न हो. इससे मॉडल को जवाब देने और उसे बेहतर बनाने में मदद मिलेगी.
+Công cụ bối cảnh URL cho phép bạn cung cấp thêm bối cảnh cho các mô hình dưới dạng URL. Bằng cách đưa URL vào yêu cầu, mô hình sẽ truy cập vào nội dung của những trang đó (miễn là đó không phải là loại URL được liệt kê trong [phần hạn chế](#limitations)) để cung cấp thông tin và cải thiện câu trả lời của mô hình.
 
-यूआरएल कॉन्टेक्स्ट टूल, इन जैसे कामों के लिए मददगार होता है:
+Công cụ ngữ cảnh URL rất hữu ích cho những tác vụ như sau:
 
-- **डेटा निकालना**: एक से ज़्यादा यूआरएल से, कीमत, नाम या मुख्य नतीजे जैसी खास जानकारी पाना.
-- **दस्तावेज़ों की तुलना करना**: अंतरों का पता लगाने और रुझानों को ट्रैक करने के लिए, एक से ज़्यादा रिपोर्ट, लेख या PDF का विश्लेषण करें.
-- **कॉन्टेंट बनाना और जानकारी इकट्ठा करना**: सटीक जवाब, ब्लॉग पोस्ट या रिपोर्ट जनरेट करने के लिए, अलग-अलग सोर्स यूआरएल से जानकारी इकट्ठा करें.
-- **कोड और दस्तावेज़ों का विश्लेषण करना**: कोड के बारे में बताने, सेटअप के निर्देश जनरेट करने या सवालों के जवाब देने के लिए, GitHub रिपॉज़िटरी या तकनीकी दस्तावेज़ की ओर इशारा करें.
+- **Trích xuất dữ liệu**: Lấy thông tin cụ thể như giá, tên hoặc phát hiện chính từ nhiều URL.
+- **So sánh tài liệu**: Phân tích nhiều báo cáo, bài viết hoặc tệp PDF để xác định điểm khác biệt và theo dõi xu hướng.
+- **Tổng hợp và tạo nội dung**: Kết hợp thông tin từ nhiều URL nguồn để tạo bản tóm tắt, bài đăng trên blog hoặc báo cáo chính xác.
+- **Phân tích mã và tài liệu**: Chỉ đến một kho lưu trữ trên GitHub hoặc tài liệu kỹ thuật để giải thích mã, tạo hướng dẫn thiết lập hoặc trả lời câu hỏi.
 
-यहां दिए गए उदाहरण में, अलग-अलग वेबसाइटों की दो रेसिपी की तुलना करने का तरीका बताया गया है.
+Ví dụ sau đây cho thấy cách so sánh hai công thức nấu ăn trên các trang web khác nhau.
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
-from google.genai.types import Tool, GenerateContentConfig
 
 client = genai.Client()
-model_id = "gemini-3.5-flash"
-
-tools = [
-  {"url_context": {}},
-]
 
 url1 = "https://www.foodnetwork.com/recipes/ina-garten/perfect-roast-chicken-recipe-1940592"
 url2 = "https://www.allrecipes.com/recipe/21151/simple-whole-roast-chicken/"
 
-response = client.models.generate_content(
-    model=model_id,
-    contents=f"Compare the ingredients and cooking times from the recipes at {url1} and {url2}",
-    config=GenerateContentConfig(
-        tools=tools,
-    )
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input=f"Compare the ingredients and cooking times from the recipes at {url1} and {url2}",
+    tools=[{"type": "url_context"}]
 )
 
-for each in response.candidates[0].content.parts:
-    print(each.text)
-
-# For verification, you can inspect the metadata to see which URLs the model retrieved
-print(response.candidates[0].url_context_metadata)
+# Print the model's text response and its source annotations
+for step in interaction.steps:
+    if step.type == "model_output":
+        for content_block in step.content:
+            if content_block.type == "text":
+                print(content_block.text)
+                if content_block.annotations:
+                    print("\nSources:")
+                    for annotation in content_block.annotations:
+                        if annotation.type == "url_citation":
+                            print(f"  - {annotation.title}: {annotation.url}")
 ```
 
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
 async function main() {
-  const response = await ai.models.generateContent({
+  const interaction = await client.interactions.create({
     model: "gemini-3.5-flash",
-    contents: [
-        "Compare the ingredients and cooking times from the recipes at https://www.foodnetwork.com/recipes/ina-garten/perfect-roast-chicken-recipe-1940592 and https://www.allrecipes.com/recipe/21151/simple-whole-roast-chicken/",
-    ],
-    config: {
-      tools: [{urlContext: {}}],
-    },
+    input: "Compare the ingredients and cooking times from the recipes at https://www.foodnetwork.com/recipes/ina-garten/perfect-roast-chicken-recipe-1940592 and https://www.allrecipes.com/recipe/21151/simple-whole-roast-chicken/",
+    tools: [{ type: "url_context" }]
   });
-  console.log(response.text);
 
-  // For verification, you can inspect the metadata to see which URLs the model retrieved
-  console.log(response.candidates[0].urlContextMetadata)
+  // Print the model's text response and its source annotations
+  for (const step of interaction.steps) {
+    if (step.type === 'model_output') {
+      for (const contentBlock of step.content) {
+        if (contentBlock.type === 'text') {
+          console.log(contentBlock.text);
+          if (contentBlock.annotations) {
+            console.log("\nSources:");
+            for (const annotation of contentBlock.annotations) {
+              if (annotation.type === 'url_citation') {
+                console.log(`  - ${annotation.title}: ${annotation.url}`);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 await main();
@@ -90,93 +100,81 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+# Specifies the API revision to avoid breaking changes when they become default
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-      "contents": [
-          {
-              "parts": [
-                  {"text": "Compare the ingredients and cooking times from the recipes at https://www.foodnetwork.com/recipes/ina-garten/perfect-roast-chicken-recipe-1940592 and https://www.allrecipes.com/recipe/21151/simple-whole-roast-chicken/"}
-              ]
-          }
-      ],
-      "tools": [
-          {
-              "url_context": {}
-          }
-      ]
-  }' > result.json
-
-cat result.json
+      "model": "gemini-3.5-flash",
+      "input": "Compare the ingredients and cooking times from the recipes at https://www.foodnetwork.com/recipes/ina-garten/perfect-roast-chicken-recipe-1940592 and https://www.allrecipes.com/recipe/21151/simple-whole-roast-chicken/",
+      "tools": [{"type": "url_context"}]
+  }'
 ```
 
-## यह कैसे काम करता है
+## Cách hoạt động
 
-यूआरएल कॉन्टेक्स्ट टूल, डेटा को दो चरणों में इकट्ठा करता है. इससे, तेज़ी से डेटा इकट्ठा करने, कम लागत, और नए डेटा को ऐक्सेस करने के बीच संतुलन बनाए रखने में मदद मिलती है. यूआरएल देने पर, यह टूल सबसे पहले इंटरनल इंडेक्स कैश मेमोरी से कॉन्टेंट फ़ेच करने की कोशिश करता है. यह एक ऑप्टिमाइज़ की गई कैश मेमोरी के तौर पर काम करता है. अगर कोई यूआरएल इंडेक्स में उपलब्ध नहीं है (उदाहरण के लिए, अगर यह बहुत नया पेज है), तो टूल अपने-आप लाइव फ़ेच करने लगता है.
-यह सीधे तौर पर यूआरएल को ऐक्सेस करता है, ताकि रीयल टाइम में उसका कॉन्टेंट वापस पाया जा सके.
+Công cụ Bối cảnh URL sử dụng quy trình truy xuất gồm hai bước để cân bằng tốc độ, chi phí và quyền truy cập vào dữ liệu mới. Khi bạn cung cấp một URL, công cụ này sẽ cố gắng tìm nạp nội dung từ bộ nhớ đệm chỉ mục nội bộ trước tiên. Thư mục này đóng vai trò là một bộ nhớ đệm được tối ưu hoá cao. Nếu một URL không có trong chỉ mục (ví dụ: nếu đó là một trang rất mới), thì công cụ này sẽ tự động quay lại để tìm nạp trực tiếp.
+Thao tác này truy cập trực tiếp vào URL để truy xuất nội dung của URL đó theo thời gian thực.
 
-## अन्य टूल के साथ इस्तेमाल करना
+## Kết hợp với các công cụ khác
 
-यूआरएल के कॉन्टेक्स्ट की जानकारी देने वाले टूल को अन्य टूल के साथ मिलाकर, ज़्यादा बेहतर वर्कफ़्लो बनाए जा सकते हैं.
+Bạn có thể kết hợp công cụ bối cảnh URL với các công cụ khác để tạo quy trình làm việc hiệu quả hơn.
 
-[Gemini 3 मॉडल](#supported-models), कस्टम टूल (फ़ंक्शन कॉलिंग) के साथ-साथ, बिल्ट-इन टूल (जैसे, यूआरएल कॉन्टेक्स्ट) को एक साथ इस्तेमाल करने की सुविधा देते हैं. [टूल के कॉम्बिनेशन](https://ai.google.dev/gemini-api/docs/tool-combination?hl=hi) पेज पर जाकर, इस बारे में ज़्यादा जानें.
+[Các mô hình Gemini 3](#supported-models) hỗ trợ việc kết hợp các công cụ tích hợp sẵn (chẳng hạn như URL Context) với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
 
-### खोज के नतीजों से जानकारी पाना
+### Bám sát nguồn bằng tính năng tìm kiếm
 
-यूआरएल कॉन्टेक्स्ट और [Google Search से जानकारी पाना](https://ai.google.dev/gemini-api/docs/grounding?hl=hi), दोनों चालू होने पर मॉडल, खोज से जुड़ी सुविधाओं का इस्तेमाल करके ऑनलाइन काम की जानकारी ढूंढ सकता है. इसके बाद, यूआरएल कॉन्टेक्स्ट टूल का इस्तेमाल करके, खोजे गए पेजों के बारे में ज़्यादा जानकारी पा सकता है. यह तरीका उन प्रॉम्प्ट के लिए बहुत कारगर है जिनमें व्यापक खोज और खास पेजों का बारीकी से विश्लेषण, दोनों की ज़रूरत होती है.
+Khi cả ngữ cảnh URL và tính năng [Bám sát nguồn bằng Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/grounding?hl=vi) đều được bật, mô hình có thể sử dụng các khả năng tìm kiếm của mình để tìm thông tin liên quan trên mạng, sau đó sử dụng công cụ ngữ cảnh URL để hiểu rõ hơn về các trang mà mô hình tìm thấy. Phương pháp này rất hiệu quả đối với những câu lệnh yêu cầu cả tìm kiếm trên diện rộng và phân tích chuyên sâu các trang cụ thể.
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
-from google.genai.types import Tool, GenerateContentConfig, GoogleSearch, UrlContext
 
 client = genai.Client()
-model_id = "gemini-3.5-flash"
 
-tools = [
-      {"url_context": {}},
-      {"google_search": {}}
-  ]
-
-response = client.models.generate_content(
-    model=model_id,
-    contents="Give me three day events schedule based on YOUR_URL. Also let me know what needs to taken care of considering weather and commute.",
-    config=GenerateContentConfig(
-        tools=tools,
-    )
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="Give me three day events schedule based on YOUR_URL. Also let me know what needs to taken care of considering weather and commute.",
+    tools=[
+        {"type": "url_context"},
+        {"type": "google_search"}
+    ]
 )
 
-for each in response.candidates[0].content.parts:
-    print(each.text)
-# get URLs retrieved for context
-print(response.candidates[0].url_context_metadata)
+for step in interaction.steps:
+    if step.type == "model_output":
+        for content_block in step.content:
+            if content_block.type == "text":
+                print(content_block.text)
 ```
 
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
 async function main() {
-  const response = await ai.models.generateContent({
+  const interaction = await client.interactions.create({
     model: "gemini-3.5-flash",
-    contents: [
-        "Give me three day events schedule based on YOUR_URL. Also let me know what needs to taken care of considering weather and commute.",
-    ],
-    config: {
-      tools: [
-        {urlContext: {}},
-        {googleSearch: {}}
-        ],
-    },
+    input: "Give me three day events schedule based on YOUR_URL. Also let me know what needs to taken care of considering weather and commute.",
+    tools: [
+      { type: "url_context" },
+      { type: "google_search" }
+    ]
   });
-  console.log(response.text);
-  // To get URLs retrieved for context
-  console.log(response.candidates[0].urlContextMetadata)
+
+  for (const step of interaction.steps) {
+    if (step.type === 'model_output') {
+      for (const contentBlock of step.content) {
+        if (contentBlock.type === 'text') console.log(contentBlock.text);
+      }
+    }
+  }
 }
 
 await main();
@@ -185,146 +183,95 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+# Specifies the API revision to avoid breaking changes when they become default
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-      "contents": [
-          {
-              "parts": [
-                  {"text": "Give me three day events schedule based on YOUR_URL. Also let me know what needs to taken care of considering weather and commute."}
-              ]
-          }
-      ],
+      "model": "gemini-3.5-flash",
+      "input": "Give me three day events schedule based on YOUR_URL. Also let me know what needs to taken care of considering weather and commute.",
       "tools": [
-          {
-              "url_context": {}
-          },
-          {
-              "google_search": {}
-          }
+          {"type": "url_context"},
+          {"type": "google_search"}
       ]
-  }' > result.json
-
-cat result.json
+  }'
 ```
 
-## जवाब को समझना
+## Hiểu rõ câu trả lời
 
-जब मॉडल, यूआरएल कॉन्टेक्स्ट टूल का इस्तेमाल करता है, तो जवाब में `url_context_metadata` ऑब्जेक्ट शामिल होता है. इस ऑब्जेक्ट में उन यूआरएल की सूची होती है जिनसे मॉडल ने कॉन्टेंट को फिर से हासिल किया है. साथ ही, इसमें हर यूआरएल से कॉन्टेंट को फिर से हासिल करने की कोशिश का स्टेटस भी होता है. यह ऑब्जेक्ट, पुष्टि करने और डीबग करने के लिए काम का होता है.
+Khi mô hình sử dụng công cụ ngữ cảnh URL, câu trả lời bằng văn bản của mô hình sẽ có chú thích `url_citation` nội tuyến trên khối nội dung văn bản. Mỗi chú thích liên kết một đoạn văn bản phản hồi (thông qua `start_index` và `end_index`) với URL nguồn mà đoạn văn bản đó được lấy từ. Đây là cách chính để hiển thị trích dẫn trong ứng dụng của bạn – hãy xem [ví dụ chính ở trên](#get-started) để biết cách trích xuất các trích dẫn này.
 
-यहां जवाब के उस हिस्से का उदाहरण दिया गया है. जवाब के कुछ हिस्सों को छोटा करने के लिए हटाया गया है:
+Phản hồi cũng bao gồm một bước `url_context_result` có siêu dữ liệu về từng lần truy xuất URL (trạng thái, URL đã truy xuất). Điều này chủ yếu hữu ích cho việc gỡ lỗi.
+
+### Kiểm tra an toàn
+
+Hệ thống sẽ kiểm tra nội dung của các URL để xác nhận rằng các URL đó đáp ứng các tiêu chuẩn an toàn. Nếu một URL không vượt qua được bước kiểm tra này, bước `url_context_result` tương ứng sẽ cho thấy `status` của `"unsafe"`.
+
+### Số lượng mã thông báo
+
+Nội dung được truy xuất từ các URL mà bạn chỉ định trong câu lệnh sẽ được tính là một phần của mã thông báo đầu vào. Bạn có thể xem số lượng mã thông báo trong đối tượng `usage` của lượt tương tác. Sau đây là một ví dụ:
 
 ```
-{
-  "candidates": [
-    {
-      "content": {
-        "parts": [
-          {
-            "text": "... \n"
-          }
-        ],
-        "role": "model"
-      },
-      ...
-      "url_context_metadata": {
-        "url_metadata": [
-          {
-            "retrieved_url": "https://www.foodnetwork.com/recipes/ina-garten/perfect-roast-chicken-recipe-1940592",
-            "url_retrieval_status": "URL_RETRIEVAL_STATUS_SUCCESS"
-          },
-          {
-            "retrieved_url": "https://www.allrecipes.com/recipe/21151/simple-whole-roast-chicken/",
-            "url_retrieval_status": "URL_RETRIEVAL_STATUS_SUCCESS"
-          }
-        ]
-      }
-    }
-  ]
+'usage': {
+  'output_tokens': 45,
+  'input_tokens': 27,
+  'input_tokens_details': [{'modality': 'TEXT', 'token_count': 27}],
+  'thoughts_tokens': 31,
+  'tool_use_input_tokens': 10309,
+  'tool_use_input_tokens_details': [{'modality': 'TEXT', 'token_count': 10309}],
+  'total_tokens': 10412
 }
 ```
 
-इस ऑब्जेक्ट के बारे में पूरी जानकारी के लिए , [`UrlContextMetadata` एपीआई के बारे में जानकारी](https://ai.google.dev/api/generate-content?hl=hi#UrlContextMetadata) देखें.
+Giá mỗi mã thông báo phụ thuộc vào mô hình được sử dụng, hãy xem trang [định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) để biết thông tin chi tiết.
 
-### सुरक्षा जांच
+## Mô hình được hỗ trợ
 
-सिस्टम, यूआरएल पर कॉन्टेंट मॉडरेशन की जांच करता है. इससे यह पुष्टि की जाती है कि यूआरएल, सुरक्षा मानकों के मुताबिक है. अगर आपके दिए गए यूआरएल की पुष्टि नहीं हो पाती है, तो आपको `url_retrieval_status` में से `URL_RETRIEVAL_STATUS_UNSAFE` मिलेगा.
-
-### टोकन की संख्या
-
-आपके प्रॉम्प्ट में दिए गए यूआरएल से हासिल किए गए कॉन्टेंट को, इनपुट टोकन के तौर पर गिना जाता है. आपको मॉडल के आउटपुट के [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=hi#UsageMetadata) ऑब्जेक्ट में, अपने प्रॉम्प्ट और टूल के इस्तेमाल के लिए टोकन की संख्या दिख सकती है. यहां आउटपुट का एक उदाहरण दिया गया है:
-
-```
-'usage_metadata': {
-  'candidates_token_count': 45,
-  'prompt_token_count': 27,
-  'prompt_tokens_details': [{'modality': <MediaModality.TEXT: 'TEXT'>,
-    'token_count': 27}],
-  'thoughts_token_count': 31,
-  'tool_use_prompt_token_count': 10309,
-  'tool_use_prompt_tokens_details': [{'modality': <MediaModality.TEXT: 'TEXT'>,
-    'token_count': 10309}],
-  'total_token_count': 10412
-  }
-```
-
-हर टोकन की कीमत, इस्तेमाल किए गए मॉडल पर निर्भर करती है. ज़्यादा जानकारी के लिए, [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi) वाला पेज देखें.
-
-## इन मॉडल के साथ काम करता है
-
-| मॉडल | यूआरएल का कॉन्टेक्स्ट |
+| Mô hình | Ngữ cảnh URL |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=hi) | ✔️ |
-| [Gemini 3.1 Pro की झलक](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=hi) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi) | ✔️ |
-| [Gemini 3 Flash की झलक](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=hi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=hi) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=hi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=hi) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi) | ✔️ |
+| [Bản dùng thử Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=vi) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
+| [Bản dùng thử Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=vi) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
 
-## सबसे सही तरीके
+## Các phương pháp hay nhất
 
-- **खास यूआरएल दें**: बेहतर नतीजे पाने के लिए, उस कॉन्टेंट के डायरेक्ट यूआरएल दें जिसका विश्लेषण आपको मॉडल से कराना है. मॉडल सिर्फ़ आपके दिए गए यूआरएल से कॉन्टेंट हासिल करेगा. वह नेस्ट किए गए लिंक से कोई कॉन्टेंट हासिल नहीं करेगा.
-- **पक्का करें कि यूआरएल ऐक्सेस किए जा सकते हों**: पुष्टि करें कि आपके दिए गए यूआरएल, ऐसे पेजों पर रीडायरेक्ट न करते हों जिन्हें ऐक्सेस करने के लिए लॉग इन करने या पैसे चुकाने की ज़रूरत होती है.
-- **पूरा यूआरएल इस्तेमाल करें**: पूरा यूआरएल दें. इसमें प्रोटोकॉल भी शामिल होना चाहिए
-  (जैसे, सिर्फ़ google.com के बजाय https://www.google.com).
+- **Cung cấp URL cụ thể**: Để có kết quả tốt nhất, hãy cung cấp URL trực tiếp đến nội dung mà bạn muốn mô hình phân tích. Mô hình này sẽ chỉ truy xuất nội dung từ những URL mà bạn cung cấp, chứ không truy xuất nội dung từ các đường liên kết lồng nhau.
+- **Kiểm tra khả năng tiếp cận**: Xác minh rằng các URL bạn cung cấp không dẫn đến những trang yêu cầu đăng nhập hoặc nằm sau tường phí.
+- **Sử dụng URL đầy đủ**: Cung cấp URL đầy đủ, bao gồm cả giao thức (ví dụ: https://www.google.com thay vì chỉ google.com).
 
-## सीमाएं
+## Các điểm hạn chế
 
-- फ़ंक्शन कॉलिंग: फ़िलहाल, फ़ंक्शन कॉलिंग के साथ टूल इस्तेमाल करने की सुविधा काम नहीं करती. जैसे, यूआरएल कॉन्टेक्स्ट, Google Search के साथ ग्राउंडिंग वगैरह.
-- अनुरोध की सीमा: यह टूल, हर अनुरोध में ज़्यादा से ज़्यादा 20 यूआरएल प्रोसेस कर सकता है.
-- यूआरएल के कॉन्टेंट का साइज़: किसी एक यूआरएल से लिए गए कॉन्टेंट का साइज़ 34 एमबी से ज़्यादा नहीं होना चाहिए.
-- सार्वजनिक तौर पर ऐक्सेस किया जा सकने वाला यूआरएल: यूआरएल ऐसे होने चाहिए जिन्हें वेब पर सार्वजनिक तौर पर ऐक्सेस किया जा सके.
-  लोकलहोस्ट पते (जैसे, localhost, 127.0.0.1), निजी नेटवर्क, और टनलिंग सेवाएं (जैसे, ngrok, pinggy) काम नहीं करती हैं.
-- सिर्फ़ Gemini API के लिए: यूआरएल कॉन्टेक्स्ट की सुविधा सिर्फ़ Gemini API में उपलब्ध है. यह Gemini Enterprise Agent Platform के ज़रिए उपलब्ध नहीं है.
+- Giới hạn yêu cầu: Công cụ này có thể xử lý tối đa 20 URL cho mỗi yêu cầu.
+- Kích thước nội dung URL: Kích thước tối đa cho nội dung được truy xuất từ một URL duy nhất là 34 MB.
+- Khả năng truy cập công khai: Các URL phải truy cập được công khai trên web.
+  Không được hỗ trợ địa chỉ máy chủ cục bộ (ví dụ: localhost, 127.0.0.1), mạng riêng tư và dịch vụ tạo đường hầm (ví dụ: ngrok, pinggy).
+- Chỉ có trong Gemini API: Bối cảnh URL chỉ có trong Gemini API, chứ không có trong Nền tảng tác nhân Gemini Enterprise.
 
-### इस्तेमाल किए जा सकने वाले और इस्तेमाल न किए जा सकने वाले कॉन्टेंट टाइप
+### Các loại nội dung được hỗ trợ và không được hỗ trợ
 
-यह टूल, इन तरह के कॉन्टेंट वाले यूआरएल से कॉन्टेंट निकाल सकता है:
+Công cụ này có thể trích xuất nội dung từ các URL có những loại nội dung sau:
 
-- टेक्स्ट (text/html, application/json, text/plain, text/xml, text/css,
-  text/javascript , text/csv, text/rtf)
-- इमेज (image/png, image/jpeg, image/bmp, image/webp)
+- Văn bản (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
+- Hình ảnh (image/png, image/jpeg, image/bmp, image/webp)
 - PDF (application/pdf)
 
-इस तरह के कॉन्टेंट के लिए, यह सुविधा **काम नहीं करती**:
+Các loại nội dung sau đây **không** được hỗ trợ:
 
-- Paywall की गई सामग्री
-- YouTube वीडियो (YouTube यूआरएल प्रोसेस करने का तरीका जानने के लिए, [वीडियो समझने की सुविधा](https://ai.google.dev/gemini-api/docs/video-understanding?hl=hi#youtube) देखें)
-- Google Workspace की फ़ाइलें, जैसे कि Google Docs या स्प्रेडशीट
-- वीडियो और ऑडियो फ़ाइलें
+- Nội dung có tường phí
+- Video trên YouTube (Xem phần [hiểu video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#youtube) để tìm hiểu cách xử lý URL của YouTube)
+- Các tệp trên Google Workspace như tài liệu hoặc bảng tính trên Google
+- Tệp video và âm thanh
 
-## आगे क्या करना है
+Gửi ý kiến phản hồi
 
-- ज़्यादा उदाहरणों के लिए, [यूआरएल कॉन्टेक्स्ट कुकबुक](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=hi#url-context) देखें.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-सुझाव भेजें
+Cập nhật lần gần đây nhất: 2026-06-22 UTC.
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया.
-
-क्या आपको हमें और कुछ बताना है?
-
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-22 UTC."],[],[]]

@@ -1,65 +1,95 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=tr
-fetched_at: 2026-06-22T06:28:02.151072+00:00
-title: "Gemini 3.1 Flash Live Preview \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=it
+fetched_at: 2026-06-29T05:38:25.221494+00:00
+title: "Anteprima live di Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Geri bildirim gönderin
+Invia feedback
 
-# Gemini 3.1 Flash Live Preview
+# Anteprima live di Gemini 3.1 Flash
 
-Gemini 3.1 Flash Live Preview, düşük gecikmeli, sesli yanıtlar için optimize edilmiş bir modelimizdir. Akustik nüans algılama, sayısal hassasiyet ve çok formatlı farkındalık özellikleriyle anlık diyalog ve ses öncelikli yapay zeka uygulamaları için idealdir.
+L'anteprima di Gemini 3.1 Flash Live è il nostro modello audio-audio a bassa latenza ottimizzato
+per dialoghi in tempo reale e applicazioni AI vocali con rilevamento di sfumature acustiche,
+precisione numerica e consapevolezza multimodale.
 
-[Google AI Studio'da deneme](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=tr)
+[Prova in Google AI Studio](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=it)
 
-## Belgeler
+## Documentazione
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr) kılavuzunu ziyaret edin.
+Visita la guida all'[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it) per una copertura completa
+di funzionalità e capacità.
 
 ## gemini-3.1-flash-live-preview
 
-| Mülk | Açıklama |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_cardModel kodu | `gemini-3.1-flash-live-preview` |
-| saveDesteklenen veri türleri | **Girişler**  Metin, resim, ses, video  **Çıkış**  Metin ve ses |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  131.072  **Çıkış jetonu sınırı**  65.536 |
-| handymanÖzellikler | **Ses üretimi**  Destekleniyor  **Batch API**  Desteklenmiyor  **Önbelleğe alma**  Desteklenmiyor  **Kod yürütme**  Desteklenmiyor  **Dosya arama**  Desteklenmiyor  **İşlev çağırma**  Destekleniyor  **Google Haritalar ile Temellendirme**  Desteklenmiyor  **Görüntü üretme**  Desteklenmiyor  **Live API**  Destekleniyor  **Arama temellendirme**  Destekleniyor  **Yapılandırılmış çıkışlar**  Desteklenmiyor  **Düşünme** (Thinking)  Destekleniyor  **URL bağlamı**  Desteklenmiyor |
-| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Önizleme: `gemini-3.1-flash-live-preview` |
-| calendar\_monthSon güncelleme | Mart 2026 |
-| cognition\_2Son güncel bilgi tarihi | Ocak 2025 |
+| Codice modello id\_card | `gemini-3.1-flash-live-preview` |
+| saveTipi di dati supportati | **Input**  Testo, immagini, audio, video  **Output**  Testo e audio |
+| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  131.072  **Limite di token di output**  65.536 |
+| handymanFunzionalità | **[Generazione di audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it)**  Supportato  **[Memorizzazione nella cache](https://ai.google.dev/gemini-api/docs/caching?hl=it)**  Non supportato  **[Esecuzione di codice](https://ai.google.dev/gemini-api/docs/code-execution?hl=it)**  Non supportato  **[Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it)**  Non supportato  **[Chiamata di funzione](https://ai.google.dev/gemini-api/docs/function-calling?hl=it)**  Supportato  **[Grounding con Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=it)**  Non supportato  **[Generazione di immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it)**  Non supportato  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it)**  Supportato  **[Fondatezza della Ricerca](https://ai.google.dev/gemini-api/docs/google-search?hl=it)**  Supportato  **[Output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it)**  Non supportato  **[Pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it)**  Supportato  **[Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it)**  Non supportato |
+| speedOpzioni di consumo | **[API batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it)**  Non supportato |
+| Versioni 123 | Leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions) per ulteriori dettagli.  - Anteprima: `gemini-3.1-flash-live-preview` |
+| calendar\_monthUltimo aggiornamento | Marzo 2026 |
+| cognition\_2Knowledge cutoff | Gennaio 2025 |
 
-## Gemini 2.5 Flash Live'dan geçiş
+## Migrazione da Gemini 2.5 Flash Live
 
-Gemini 3.1 Flash Live Preview, düşük gecikmeli ve anlık diyalog için optimize edilmiştir.
-`gemini-2.5-flash-native-audio-preview-12-2025`'ten taşıma yaparken aşağıdakileri göz önünde bulundurun:
+L'anteprima di Gemini 3.1 Flash Live è ottimizzata per un dialogo in tempo reale a bassa latenza.
+Quando esegui la migrazione da `gemini-2.5-flash-native-audio-preview-12-2025`, tieni presente
+quanto segue:
 
-- **Model dizesi**: Model dizesini `gemini-2.5-flash-native-audio-preview-12-2025` yerine `gemini-3.1-flash-live-preview` olarak güncelleyin.
-- **Düşünme yapılandırması**: Gemini 3.1, `thinkingBudget` yerine `thinkingLevel` (`minimal`, `low`, `medium` ve `high` gibi ayarlarla) kullanır.
-  Varsayılan ayar, en düşük gecikme süresi için optimizasyon yapmak üzere `minimal` şeklindedir. [Düşünme seviyeleri ve bütçeler](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#levels-budgets) başlıklı makaleyi inceleyin.
-- **Sunucu etkinlikleri**: Tek bir [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentservercontent) etkinliği artık aynı anda birden fazla içerik bölümü (ör. ses parçaları ve transkript) içerebilir. Eksik içerik olmaması için kodunuzu her etkinlikteki tüm bölümleri işleyecek şekilde güncelleyin.
-- **Müşteri içeriği**: `send_client_content` yalnızca ilk bağlam geçmişini başlatmak için desteklenir ([`history_config`](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentSetup) içinde [`initial_history_in_client_content`](https://ai.google.dev/api/live?hl=tr#HistoryConfig) ayarlanmalıdır). Sohbet sırasında metin güncellemeleri göndermek için [`send_realtime_input`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentrealtimeinput) kullanın. [Artımlı içerik güncellemeleri](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#incremental-updates) bölümünü inceleyin.
-- **Dönüş kapsamı**: `TURN_INCLUDES_ONLY_ACTIVITY` yerine varsayılan olarak [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=tr#turncoverage) kullanılır. Modelin dönüşü artık algılanan ses etkinliğini ve tüm video karelerini içeriyor. Uygulamanız şu anda sürekli bir video kareleri akışı gönderiyorsa ek maliyetlerden kaçınmak için uygulamanızı yalnızca ses etkinliği olduğunda video kareleri gönderecek şekilde güncelleyebilirsiniz.
-- **Asenkron işlev çağrısı**: Henüz desteklenmiyor. İşlev çağırma yalnızca eşzamanlıdır. Model, araç yanıtını gönderene kadar yanıt vermeye başlamaz. [Eşzamansız işlev çağırma](https://ai.google.dev/gemini-api/docs/live-tools?hl=tr#async-function-calling) başlıklı makaleyi inceleyin.
-- **Proaktif ses ve duygusal diyalog**: Bu özellikler henüz Gemini 3.1 Flash Live'da desteklenmemektedir. Bu özelliklerle ilgili tüm yapılandırmaları kodunuzdan kaldırın. [Proaktif ses](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#proactive-audio) ve [Duygusal diyalog](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#affective-dialog) başlıklı makalelere bakın.
+- **Stringa del modello**: aggiorna la stringa del modello da
+  `gemini-2.5-flash-native-audio-preview-12-2025` a
+  `gemini-3.1-flash-live-preview`.
+- **Configurazione del pensiero**: Gemini 3.1 utilizza `thinkingLevel` (con impostazioni
+  come `minimal`, `low`, `medium` e `high`) anziché `thinkingBudget`.
+  Il valore predefinito è `minimal` per l'ottimizzazione per la latenza più bassa. Vedi
+  [Livelli e budget di pensiero](https://ai.google.dev/gemini-api/docs/thinking?hl=it#levels-budgets).
+- **Eventi server**: un singolo
+  [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=it#bidigeneratecontentservercontent)
+  evento ora può contenere più parti di contenuti contemporaneamente (ad esempio,
+  blocchi audio e trascrizione). Aggiorna il codice per elaborare tutte le parti di ogni
+  evento per evitare di perdere contenuti.
+- **Contenuti del cliente**: `send_client_content` è supportato solo per l'inserimento
+  della cronologia del contesto iniziale (richiede l'impostazione
+  di [`initial_history_in_client_content`](https://ai.google.dev/api/live?hl=it#HistoryConfig) in
+  [`history_config`](https://ai.google.dev/api/live?hl=it#BidiGenerateContentSetup)). Utilizza
+  [`send_realtime_input`](https://ai.google.dev/api/live?hl=it#bidigeneratecontentrealtimeinput) per inviare
+  aggiornamenti di testo durante la conversazione. Consulta
+  [Aggiornamenti incrementali dei contenuti](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#incremental-updates).
+- **Svolta**: il valore predefinito è
+  [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=it#turncoverage) anziché
+  `TURN_INCLUDES_ONLY_ACTIVITY`. Il turno del modello ora include l'attività audio rilevata e tutti i fotogrammi video. Se la tua applicazione invia attualmente un flusso costante di frame video, ti consigliamo di aggiornarla in modo che invii i frame video solo quando è presente attività audio per evitare costi aggiuntivi.
+- **Chiamata di funzione asincrona**: non ancora supportata. La chiamata di funzione è
+  solo sincrona. Il modello non inizierà a rispondere finché non avrai inviato
+  la risposta dello strumento. Vedi
+  [Chiamata di funzione asincrona](https://ai.google.dev/gemini-api/docs/live-tools?hl=it#async-function-calling).
+- **Audio proattivo e dialogo affettivo**: queste funzionalità non sono ancora
+  supportate in Gemini 3.1 Flash Live. Rimuovi dal codice qualsiasi configurazione per queste
+  funzionalità. Vedi
+  [Audio proattivo](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#proactive-audio) e
+  [Dialogo empatico](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#affective-dialog).
 
-Ayrıntılı özellik karşılaştırması için yetenekler kılavuzundaki [Model karşılaştırma](https://ai.google.dev/gemini-api/docs/live-guide?hl=tr#model-comparison) tablosunu inceleyin.
+Per un confronto dettagliato delle funzionalità, consulta la tabella
+[Confronto modelli](https://ai.google.dev/gemini-api/docs/live-guide?hl=it#model-comparison) nella
+guida alle funzionalità.
 
-Geri bildirim gönderin
+Invia feedback
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Son güncelleme tarihi: 2026-04-29 UTC.
+Ultimo aggiornamento 2026-06-23 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Vuoi dirci altro?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-23 UTC."],[],[]]

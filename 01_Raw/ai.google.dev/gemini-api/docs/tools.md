@@ -1,108 +1,98 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tools?hl=ar
-fetched_at: 2026-06-22T06:36:24.024027+00:00
-title: "\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \"\u0627\u0644\u0623\u062f\u0648\u0627\u062a\" \u0645\u0639 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tools?hl=de
+fetched_at: 2026-06-29T05:31:34.249106+00:00
+title: "Tools mit der Gemini API verwenden \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-إرسال ملاحظات
+Feedback geben
 
-# استخدام "الأدوات" مع Gemini API
+# Tools mit der Gemini API verwenden
 
-توسّع الأدوات إمكانات نماذج Gemini، ما يتيح لها اتّخاذ إجراءات في العالم الحقيقي والوصول إلى المعلومات في الوقت الفعلي وتنفيذ مهام حسابية معقّدة. يمكن للنماذج استخدام الأدوات في كلٍّ من التفاعلات العادية لطلب البيانات والاستجابة لها و
-جلسات البث في الوقت الفعلي باستخدام [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=ar).
+Tools erweitern die Funktionen von Gemini-Modellen und ermöglichen es ihnen, Aktionen in der realen Welt auszuführen, auf Echtzeitinformationen zuzugreifen und komplexe Berechnungsaufgaben zu erledigen. Modelle können Tools sowohl bei Standard-Anfrage-Antwort-Interaktionen als auch bei Echtzeit-Streaming-Sitzungen über die [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=de) verwenden.
 
-الأدوات هي إمكانات محدّدة (مثل "بحث Google" أو "تنفيذ الرموز البرمجية") يمكن للنموذج استخدامها للإجابة عن الطلبات. توفر Gemini API مجموعة من الأدوات المُدارة بالكامل والمضمّنة، أو يمكنك تحديد أدوات مخصّصة باستخدام [ميزة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
+Tools sind bestimmte Funktionen (z. B. Google Suche oder Codeausführung), die ein Modell verwenden kann, um Anfragen zu beantworten. Die Gemini API bietet eine Reihe von vollständig verwalteten, integrierten Tools. Sie können aber auch benutzerdefinierte Tools mit [Funktionsaufruf](https://ai.google.dev/gemini-api/docs/function-calling?hl=de) definieren.
 
-لإنشاء أنظمة متعدّدة الخطوات وموجّهة نحو تحقيق هدف، يُرجى الاطّلاع على [نظرة عامة على الوكلاء](https://ai.google.dev/gemini-api/docs/agents?hl=ar).
+Informationen zum Erstellen von mehrstufigen, zielorientierten Systemen finden Sie in der [Übersicht über Agents](https://ai.google.dev/gemini-api/docs/agents?hl=de).
 
-## الأدوات المضمّنة المتاحة
+## Verfügbare integrierte Tools
 
-| الأداة | الوصف | حالات الاستخدام |
+| Tool | Beschreibung | Anwendungsfälle |
 | --- | --- | --- |
-| [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) | تحديد مصادر الردود استنادًا إلى الأحداث والحقائق الحالية من الويب للحدّ من الهلوسة | \- الإجابة عن أسئلة حول الأحداث الأخيرة   \- التأكّد من الحقائق باستخدام مصادر متنوّعة |
-| [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar) | إنشاء مساعدين يمكنهم التعرّف على الموقع الجغرافي والعثور على الأماكن والحصول على الاتجاهات وتقديم سياق محلي غني | \- تخطيط برامج السفر التي تتضمّن محطات توقف متعدّدة   \- العثور على المؤسسات المحلية استنادًا إلى معايير المستخدم |
-| [تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) | السماح للنموذج بكتابة رموز Python البرمجية وتشغيلها لحلّ المسائل الرياضية أو معالجة البيانات بدقة | \- حلّ المعادلات الرياضية المعقّدة   \- معالجة بيانات النصوص وتحليلها بدقة |
-| [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) | توجيه النموذج لقراءة المحتوى وتحليله من صفحات ويب أو مستندات معيّنة | \- الإجابة عن الأسئلة استنادًا إلى عناوين URL أو مستندات معيّنة   \- استرداد المعلومات من صفحات ويب مختلفة |
-| [استخدام الكمبيوتر (إصدار تجريبي)](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) | السماح لـ Gemini بعرض شاشة وإنشاء إجراءات للتفاعل مع واجهات مستخدم متصفّح الويب (التنفيذ من جهة العميل) | \- أتمتة مهام سير العمل المتكرّرة المستندة إلى الويب   \- اختبار واجهات مستخدم تطبيقات الويب |
-| [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar) | فهرسة مستنداتك والبحث فيها لتفعيل ميزة "التوليد المعزّز بالاسترجاع" (RAG) | - البحث في الأدلة الفنية   - الإجابة عن الأسئلة حول البيانات الخاصة |
+| [Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de) | Antworten auf aktuelle Ereignisse und Fakten aus dem Web stützen, um Halluzinationen zu reduzieren. | \- Fragen zu aktuellen Ereignissen beantworten   \- Fakten mit verschiedenen Quellen abgleichen |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de) | Erstellen Sie standortbezogene Assistenten, die Orte finden, Wegbeschreibungen abrufen und umfassende lokale Informationen bereitstellen können. | – Reisepläne mit mehreren Zwischenstopps erstellen   – Lokale Unternehmen anhand von Nutzerkriterien finden |
+| [Codeausführung](https://ai.google.dev/gemini-api/docs/code-execution?hl=de) | Das Modell darf Python-Code schreiben und ausführen, um mathematische Probleme zu lösen oder Daten genau zu verarbeiten. | \- Komplexe mathematische Gleichungen lösen   \- Textdaten präzise verarbeiten und analysieren |
+| [URL-Kontext](https://ai.google.dev/gemini-api/docs/url-context?hl=de) | Weisen Sie das Modell an, Inhalte von bestimmten Webseiten oder Dokumenten zu lesen und zu analysieren. | – Fragen basierend auf bestimmten URLs oder Dokumenten beantworten   – Informationen von verschiedenen Webseiten abrufen |
+| [Computernutzung (Vorschau)](https://ai.google.dev/gemini-api/docs/computer-use?hl=de) | Gemini kann einen Bildschirm ansehen und Aktionen generieren, um mit Webbrowser-Benutzeroberflächen zu interagieren (clientseitige Ausführung). | – Automatisieren von sich wiederholenden webbasierten Workflows   – Testen von Benutzeroberflächen von Webanwendungen |
+| [Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de) | Sie können Ihre eigenen Dokumente indexieren und durchsuchen, um Retrieval-Augmented Generation (RAG) zu ermöglichen. | – Suche in technischen Handbüchern   – Question Answering über proprietäre Daten |
 
-يمكنك الاطّلاع على [صفحة الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#pricing_for_tools) لمعرفة تفاصيل
-التكاليف المرتبطة بأدوات معيّنة.
+Weitere Informationen zu den Kosten für bestimmte Tools finden Sie auf der [Preisseite](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing_for_tools).
 
-## طريقة تنفيذ الأدوات
+## So funktioniert die Toolausführung
 
-تسمح الأدوات للنموذج بطلب إجراءات أثناء المحادثة. يختلف سير العمل استنادًا إلى ما إذا كانت الأداة مضمّنة (تُديرها Google) أو مخصّصة (تُديرها أنت).
+Mithilfe von Tools kann das Modell während einer Unterhaltung Aktionen anfordern. Der Ablauf hängt davon ab, ob das Tool integriert (von Google verwaltet) oder benutzerdefiniert (von Ihnen verwaltet) ist.
 
-### سير عمل الأدوات المضمّنة
+### Ablauf integrierter Tools
 
-بالنسبة إلى الأدوات المضمّنة (مثل "بحث Google" و"خرائط Google" و"سياق عنوان URL" و"البحث عن الملفات" و"تنفيذ الرموز البرمجية")، تتم العملية بالكامل في طلب بيانات من واجهة برمجة التطبيقات واحد:
+Bei integrierten Tools (Google Suche, Google Maps, URL-Kontext, Dateisuche, Codeausführung) erfolgt der gesamte Prozess in einem API-Aufruf:
 
-1. **أنت** تُرسِل طلبًا: "ما هو الجذر التربيعي لأحدث سعر لسهم GOOG؟"
-2. يقرّر **Gemini** أنّه بحاجة إلى أدوات وينفّذها على خوادم Google (على سبيل المثال، يبحث عن سعر السهم، ثم يشغّل رمز Python البرمجي لحساب الجذر التربيعي).
-3. يُرسِل **Gemini** الردّ النهائي استنادًا إلى نتائج الأداة.
+1. **Sie** senden einen Prompt: „Was ist die Quadratwurzel des aktuellen Aktienkurses von GOOG?“
+2. **Gemini** entscheidet, dass Tools benötigt werden, und führt sie auf den Servern von Google aus (z.B. wird nach dem Aktienkurs gesucht und dann Python-Code ausgeführt, um die Quadratwurzel zu berechnen).
+3. **Gemini** sendet die endgültige Antwort zurück, die auf den Tool-Ergebnissen basiert.
 
-### سير عمل الأدوات المخصّصة (استدعاء الدوال)
+### Benutzerdefinierter Toolablauf (Funktionsaufrufe)
 
-بالنسبة إلى الأدوات المخصّصة وميزة "استخدام الكمبيوتر"، يتولّى تطبيقك تنفيذها:
+Bei benutzerdefinierten Tools und der Computerverwendung übernimmt Ihre Anwendung die Ausführung:
 
-1. **أنت** تُرسِل طلبًا مع إعلانات الدوال (الأدوات).
-2. قد يُرسِل **Gemini** استجابة JSON منظَّمة لاستدعاء دالة معيّنة
-   (على سبيل المثال، `{"name": "get_order_status", "args": {"order_id": "123"}}`)،
-   مع تضمين `id` فريد دائمًا.
-3. **أنت** تنفّذ الدالة في تطبيقك أو بيئتك.
-4. **أنت** تُرسِل نتائج الدالة إلى Gemini، مع تضمين `id` نفسه الذي تم استخدامه في استدعاء الدالة،
-5. يستخدم **Gemini** النتائج لإنشاء ردّ نهائي أو استدعاء أداة أخرى.
+1. **Sie** senden einen Prompt zusammen mit Funktionsdeklarationen (Tools).
+2. **Gemini** kann strukturiertes JSON zurückgeben, um eine bestimmte Funktion aufzurufen (z. B. `{"name": "get_order_status", "args": {"order_id": "123"}}`), immer mit einer eindeutigen `id`.
+3. **Sie** führen die Funktion in Ihrer Anwendung oder Umgebung aus.
+4. **Sie** senden die Funktionsergebnisse mit demselben `id` wie beim Funktionsaufruf zurück an Gemini.
+5. **Gemini** verwendet die Ergebnisse, um eine endgültige Antwort oder einen weiteren Tool-Aufruf zu generieren.
 
-مزيد من المعلومات في [دليل استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
+Weitere Informationen finden Sie im [Leitfaden zu Funktionsaufrufen](https://ai.google.dev/gemini-api/docs/function-calling?hl=de).
 
-### سير عمل الجمع بين الأدوات المضمّنة والمخصّصة
+### Ablauf zum Kombinieren integrierter und benutzerdefinierter Tools
 
-[بالنسبة إلى الطلبات التي تجمع بين الأدوات المضمّنة والأدوات المخصّصة (استدعاء الدوال)، يستخدم النموذج ميزة تداول سياق الأداة لتنسيق التنفيذ في بيئات مختلفة:](https://ai.google.dev/gemini-api/docs/toold-combination?hl=ar)
+Bei Anfragen, in denen integrierte und benutzerdefinierte Tools (Funktionsaufrufe) kombiniert werden, verwendet das Modell [Tool-Kontextzirkulation](https://ai.google.dev/gemini-api/docs/toold-combination?hl=de), um die Ausführung in verschiedenen Umgebungen zu koordinieren:
 
-1. **أنت** تُرسِل طلبًا وتُعلن عن الأدوات المضمّنة والدوال المخصّصة التي تريد تفعيلها، مع ضبط علامة لتفعيل ميزة الجمع بين الأدوات.
-2. ينفّذ **Gemini** الأدوات المضمّنة ويُرجع النتيجة إلى المستخدم إذا تم إنشاء أي استدعاءات للدوال من جهة العميل (يعتمد ترتيب التنفيذ على الطلب وما يقرّره النموذج). ويُرسِل ردًا يتضمّن ما يلي:
-   - تأكيد استدعاء الأداة
-   - نتائج استجابة الأداة (قد تظهر بعد استجابة JSON إذا أنشأ النموذج استدعاءَين متوازيين للدوال)
-   - استجابة JSON منظَّمة لاستدعاء الدالة
-   - توقيعات الأفكار المشفّرة للحفاظ على السياق
-3. **أنت** تنفّذ الدالة في تطبيقك أو بيئتك.
-4. **أنت** تُرسِل جميع أجزاء ردّ Gemini، بالإضافة إلى نتائج استدعاء الدالة.
-5. ينشئ **Gemini** الردّ النهائي باستخدام جميع السياقات المجمّعة.
+1. **Sie** senden einen Prompt und deklarieren die integrierten Tools und benutzerdefinierten Funktionen, die Sie aktivieren möchten. Dabei legen Sie ein Flag fest, um die Unterstützung von Kombinationen zu aktivieren.
+2. **Gemini** führt integrierte Tools aus und übergibt die Kontrolle an den Nutzer, wenn clientseitige Funktionsaufrufe generiert werden. Welche Aktion zuerst ausgeführt wird, hängt vom Prompt und der Entscheidung des Modells ab. Es wird eine Antwort mit Folgendem zurückgesendet:
+   - Bestätigung des Tool-Aufrufs
+   - Ergebnisse der Tool-Antwort (diese können nach dem JSON-Code stehen, wenn das Modell zwei parallele Funktionsaufrufe generiert hat)
+   - Strukturierter JSON-Code zum Aufrufen Ihrer Funktion
+   - Verschlüsselte Gedanken-Signaturen, um den Kontext beizubehalten
+3. **Sie** führen die Funktion in Ihrer Anwendung oder Umgebung aus.
+4. **Sie** geben alle Teile der Antwort von Gemini sowie die Ergebnisse Ihres Funktionsaufrufs zurück.
+5. **Gemini** generiert die endgültige Antwort anhand des gesamten kombinierten Kontexts.
 
-يُرجى قراءة [دليل الجمع بين الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar) للتعرّف على
-كيفية تفعيل ميزة الجمع بين الأدوات المضمّنة والمخصّصة، والاطّلاع على أمثلة عن
-تداول السياق.
+Im [Leitfaden zur Kombination von Tools](https://ai.google.dev/gemini-api/docs/tool-combination?hl=de) erfahren Sie, wie Sie die Unterstützung für die Kombination von integrierten und benutzerdefinierten Tools aktivieren und wie der Kontext weitergegeben wird.
 
-## المُخرجات المنظَّمة مقابل استدعاء الدوال
+## Strukturierte Ausgaben im Vergleich zu Funktionsaufrufen
 
-يوفّر Gemini طريقتَين لإنشاء مُخرجات منظَّمة. استخدِم [ميزة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar) عندما يحتاج النموذج إلى تنفيذ خطوة وسيطة من خلال الاتصال بأدواتك أو أنظمة البيانات الخاصة بك. استخدِم
-[ميزة "المُخرجات المنظَّمة"](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar) عندما تحتاج بدقة إلى أن يلتزم
-الردّ النهائي للنموذج بمخطط معيّن، مثل عرض
-واجهة مستخدم مخصّصة.
+Gemini bietet zwei Methoden zum Generieren strukturierter Ausgaben. Verwenden Sie [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de), wenn das Modell einen Zwischenschritt ausführen muss, indem es eine Verbindung zu Ihren eigenen Tools oder Datensystemen herstellt. Verwenden Sie [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de), wenn die endgültige Antwort des Modells unbedingt einem bestimmten Schema entsprechen muss, z. B. zum Rendern einer benutzerdefinierten Benutzeroberfläche.
 
-## المُخرجات المنظَّمة مع الأدوات
+## Strukturierte Ausgaben mit Tools
 
-يمكنك الجمع بين ميزة "[المُخرجات المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)" والأدوات المضمّنة لضمان أن تلتزم ردود النموذج المستندة إلى البيانات أو العمليات الحسابية الخارجية بمخطط صارم.
+Sie können [strukturierte Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de) mit integrierten Tools kombinieren, um sicherzustellen, dass Modellantworten, die auf externen Daten oder Berechnungen basieren, einem strengen Schema entsprechen.
 
-يمكنك الاطّلاع على [المُخرجات المنظَّمة مع الأدوات](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=ar#structured_outputs_with_tools)
-للحصول على أمثلة عن الرموز البرمجية.
+Codebeispiele finden Sie unter [Strukturierte Ausgaben mit Tools](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=de#structured_outputs_with_tools).
 
-إرسال ملاحظات
+Feedback geben
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+Zuletzt aktualisiert: 2026-04-29 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Haben Sie Feedback für uns?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-04-29 (UTC)."],[],[]]

@@ -1,44 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=vi
-fetched_at: 2026-06-22T06:31:40.981918+00:00
-title: "M\u00f4 h\u00ecnh Gemini 2.5 Computer Use \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=id
+fetched_at: 2026-06-29T05:34:17.447704+00:00
+title: "Model Penggunaan Komputer Gemini 2.5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Gửi ý kiến phản hồi
+Kirim masukan
 
-# Mô hình Gemini 2.5 Computer Use
+# Model Penggunaan Komputer Gemini 2.5
 
-Một mô hình có khả năng đại diện được thiết kế để tương tác trực tiếp với giao diện, cho phép Gemini nhận biết và điều hướng môi trường kỹ thuật số. Tính năng Sử dụng máy tính của Gemini 2.5 phù hợp nhất với việc tự động hoá trình duyệt, các tác vụ phần mềm nhiều bước và kiểm thử giao diện người dùng đòi hỏi khả năng suy luận bằng hình ảnh và kiểm soát con trỏ chính xác.
+Model kemampuan agen yang dirancang untuk interaksi antarmuka langsung, sehingga Gemini dapat memahami dan menavigasi lingkungan digital. Penggunaan Komputer Gemini 2.5 paling cocok untuk otomatisasi browser, tugas software multi-langkah, dan pengujian UI yang memerlukan penalaran visual dan kontrol kursor yang presisi.
 
-## Tài liệu
+## Dokumentasi
 
-Hãy truy cập vào trang [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi) để xem toàn bộ các tính năng và khả năng.
+Buka halaman [Penggunaan komputer](https://ai.google.dev/gemini-api/docs/computer-use?hl=id) untuk mengetahui cakupan lengkap
+fitur dan kemampuannya.
 
 ## gemini-2.5-computer-use-preview-10-2025
 
-| Thuộc tính | Mô tả |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardMã mô hình | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Hình ảnh, văn bản  **Output**  Văn bản |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  128.000  **Giới hạn mã thông báo đầu ra**  64.000 |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm thông tin.  - Xem trước: `gemini-2.5-computer-use-preview-10-2025` |
-| calendar\_monthNội dung cập nhật mới nhất | Tháng 10 năm 2025 |
+| id\_cardKode model | **Gemini API**  `gemini-2.5-computer-use-preview-10-2025` |
+| saveJenis data yang didukung | **Input**  Gambar, teks  **Output**  Teks |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  128.000  **Batas token output**  64.000 |
+| 123Versi | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `gemini-2.5-computer-use-preview-10-2025` |
+| calendar\_monthPembaruan terbaru | Oktober 2025 |
 
-Gửi ý kiến phản hồi
+Kirim masukan
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Cập nhật lần gần đây nhất: 2026-04-29 UTC.
+Terakhir diperbarui pada 2026-04-29 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Ada masukan untuk kami?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-04-29 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-04-29 UTC."],[],[]]

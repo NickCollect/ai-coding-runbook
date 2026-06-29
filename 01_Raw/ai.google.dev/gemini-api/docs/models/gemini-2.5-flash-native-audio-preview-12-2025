@@ -1,50 +1,54 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=pt-BR
-fetched_at: 2026-06-22T06:31:03.420639+00:00
-title: "Pr\u00e9via din\u00e2mica do Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=th
+fetched_at: 2026-06-29T05:35:32.096838+00:00
+title: "\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e02\u0e2d\u0e07 Gemini 2.5 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Envie comentários
+ส่งความคิดเห็น
 
-# Prévia dinâmica do Gemini 2.5 Flash
+# เวอร์ชันตัวอย่างของ Gemini 2.5 Flash
 
-A API Live permite interações de voz e vídeo em tempo real e com baixa latência com o Gemini 2.5 Flash. Ela processa fluxos contínuos de áudio, vídeo ou texto para oferecer respostas faladas imediatas e semelhantes às humanas, criando uma experiência de conversa natural para os usuários.
+Live API ช่วยให้โต้ตอบด้วยเสียงและวิดีโอแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำกับ
+Gemini 2.5 Flash ได้ โดยจะประมวลผลสตรีมเสียง วิดีโอ หรือข้อความอย่างต่อเนื่องเพื่อ
+ให้คำตอบที่พูดได้ทันทีและเหมือนมนุษย์ ซึ่งจะสร้างประสบการณ์
+การสนทนาที่เป็นธรรมชาติสำหรับผู้ใช้
 
-[Testar no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=pt-br)
+[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-native-audio-preview-12-2025&hl=th)
 
-## Documentação
+## เอกสารประกอบ
 
-Acesse o guia da [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) para conferir a cobertura completa
-de recursos e funcionalidades.
+ไปที่คู่มือ [Live API](https://ai.google.dev/gemini-api/docs/live?hl=th) เพื่อดูความครอบคลุมทั้งหมด
+ของฟีเจอร์และความสามารถ
 
 ## gemini-2.5-flash-native-audio-preview-12-2025
 
-| Propriedade | Descrição |
+| พร็อพเพอร์ตี้ | คำอธิบาย |
 | --- | --- |
-| id\_cardCódigo do modelo | `gemini-2.5-flash-native-audio-preview-12-2025` |
-| saveTipos de dados compatíveis | **Entradas**  Áudio, vídeo, texto  **Saída**  Áudio e texto |
-| token\_autoLimites de token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pt-br) | **Limite de token de entrada**  131.072  **Limite de token de saída**  8.192 |
-| handymanRecursos | **Geração de áudio**  Compatível  **API em lote**  Indisponível  **Armazenamento em cache**  Indisponível  **Execução de código**  Indisponível  **Pesquisa de arquivos**  Incompatível  **Chamadas de função**  Compatível  **Embasamento com o Google Maps**  Indisponível  **Geração de imagens**  Indisponível  **API Live**  Compatível  **Embasamento da pesquisa**  Compatível  **Respostas estruturadas**  Indisponível  **Raciocínio**  Compatível  **Contexto de URL**  Indisponível |
-| 123Versões | Leia os [padrões de versão do modelo](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br#model-versions) para mais detalhes.  - Visualização: `gemini-2.5-flash-native-audio-preview-12-2025` |
-| calendar\_monthAtualização mais recente | Setembro de 2025 |
-| cognition\_2Limite de conhecimento | Janeiro de 2025 |
+| รหัสโมเดล id\_card | `gemini-2.5-flash-native-audio-preview-12-2025` |
+| บันทึกประเภทข้อมูลที่รองรับ | **อินพุต**  เสียง วิดีโอ ข้อความ  **เอาต์พุต**  เสียงและข้อความ |
+| token\_autoขีดจำกัดของโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072  **ขีดจำกัดโทเค็นเอาต์พุต**  8,192 |
+| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  สิ่งที่ทำได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  สิ่งที่ทำไม่ได้  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  ไม่รองรับ  **[การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  สิ่งที่ทำไม่ได้  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  สิ่งที่ทำไม่ได้  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  สิ่งที่ทำได้  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  สิ่งที่ทำไม่ได้  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำได้  **[บริบทของ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  สิ่งที่ทำไม่ได้ |
+| speedตัวเลือกการรับชม | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานแบบยืดหยุ่น](https://ai.google.dev/gemini-api/docs/flex-inference?hl=th)**  สิ่งที่ทำไม่ได้  **[การอนุมานตามลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)**  สิ่งที่ทำไม่ได้ |
+| 123เวอร์ชัน | อ่านรายละเอียดเพิ่มเติมได้ใน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)  - ตัวอย่าง: `gemini-2.5-flash-native-audio-preview-12-2025` |
+| calendar\_monthการอัปเดตล่าสุด | กันยายน 2025 |
+| cognition\_2การตัดข้อมูล | มกราคม 2025 |
 
-Envie comentários
+ส่งความคิดเห็น
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última atualização 2026-04-29 UTC.
+อัปเดตล่าสุด 2026-06-23 UTC
 
-Quer enviar seu feedback?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-23 UTC"],[],[]]

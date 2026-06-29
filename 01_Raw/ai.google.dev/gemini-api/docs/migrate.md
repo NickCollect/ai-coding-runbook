@@ -1,32 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=zh-CN
-fetched_at: 2026-06-22T06:35:20.998918+00:00
-title: "\u8fc1\u79fb\u5230 Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=pl
+fetched_at: 2026-06-29T05:31:57.983315+00:00
+title: "Migracja do pakietu Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-发送反馈
+Prześlij opinię
 
-# 迁移到 Google GenAI SDK
+# Migracja do pakietu Google GenAI SDK
 
-从 2024 年末发布的 Gemini 2.0 开始，我们推出了一组名为 [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-cn) 的新库。它通过[更新的客户端架构](https://ai.google.dev/gemini-api/docs/migrate?hl=zh-cn#client)提供改进的开发者体验，并[简化开发者工作流程与企业工作流程之间的过渡](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=zh-cn)。
+Pod koniec 2024 r. wraz z wydaniem Gemini 2.0 wprowadziliśmy nowy zestaw
+bibliotek o nazwie [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=pl). Dzięki [zaktualizowanej architekturze klienta](https://ai.google.dev/gemini-api/docs/migrate?hl=pl#client) zapewnia on lepsze wrażenia deweloperom i [upraszcza przejście](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=pl) między przepływami pracy deweloperów a przepływami pracy w przedsiębiorstwie.
 
-Google GenAI SDK 现已在所有受支持的平台上[正式发布 (GA)](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-cn#new-libraries)。如果您使用的是我们的某个[旧版库](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-cn#previous-sdks)，我们强烈建议您进行迁移。
+Google GenAI SDK jest teraz w [ogólnej dostępności (GA)](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#new-libraries) na wszystkich obsługiwanych
+platformach. Jeśli używasz jednej z naszych [starszych bibliotek](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#previous-sdks), zdecydowanie zalecamy
+migrację.
 
-本指南提供了迁移前后的代码示例，可帮助您入门。
+W tym przewodniku znajdziesz przykłady kodu przed i po migracji, które pomogą Ci zacząć.
 
-## 安装
+## Instalacja
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -46,7 +49,7 @@ npm install @google/generative-ai
 go get github.com/google/generative-ai-go
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -66,16 +69,16 @@ npm install @google/genai
 go get google.golang.org/genai
 ```
 
-## API 访问权限
+## Dostęp API
 
-旧版 SDK 使用各种临时方法在后台隐式处理 API 客户端。这使得管理客户端和凭据变得困难。
-现在，您可以通过中央 `Client` 对象进行互动。此 `Client` 对象充当各种 API 服务（例如 `models`、`chats`、`files`、`tunings`）的单一入口点，有助于在不同的 API 调用中保持一致性，并简化凭据和配置管理。
+Stary pakiet SDK niejawnie obsługiwał klienta API w tle za pomocą różnych metod ad hoc. Utrudniało to zarządzanie klientem i danymi logowania.
+Teraz możesz wchodzić w interakcje za pomocą centralnego obiektu `Client`. Ten obiekt `Client` działa jako pojedynczy punkt wejścia dla różnych usług API (np. `models`, `chats`, `files`, `tunings`), co zwiększa spójność i upraszcza zarządzanie danymi logowania i konfiguracją w różnych wywołaniach API.
 
-**之前（API 访问权限不太集中）**
+**Przed (mniej scentralizowany dostęp do interfejsu API)**
 
 ### Python
 
-旧版 SDK 未明确使用顶级客户端对象来处理大多数 API 调用。您将直接实例化 `GenerativeModel` 对象并与之交互。
+Stary pakiet SDK nie używał jawnie obiektu klienta najwyższego poziomu w przypadku większości wywołań API. Bezpośrednio tworzyłeś instancje obiektów `GenerativeModel` i wchodziłeś z nimi w interakcje.
 
 ```
 import google.generativeai as genai
@@ -88,7 +91,7 @@ chat = model.start_chat(...)
 
 ### JavaScript
 
-虽然 `GoogleGenerativeAI` 是模型和聊天功能的中心点，但文件和缓存管理等其他功能通常需要导入和实例化完全独立的客户端类。
+Chociaż `GoogleGenerativeAI` był centralnym punktem dla modeli i czatu, inne funkcje, takie jak zarządzanie plikami i pamięcią podręczną, często wymagały importowania i tworzenia instancji całkowicie oddzielnych klas klientów.
 
 ```
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -110,7 +113,7 @@ const cache = await cacheManager.create(...);
 
 ### Go
 
-`genai.NewClient` 函数创建了一个客户端，但生成模型操作通常是在从该客户端获取的单独 `GenerativeModel` 实例上调用的。其他服务可能通过不同的软件包或模式进行访问。
+Funkcja `genai.NewClient` tworzyła klienta, ale operacje na modelu generatywnym były zwykle wywoływane w oddzielnej instancji `GenerativeModel` uzyskanej od tego klienta. Dostęp do innych usług mógł być uzyskiwany za pomocą odrębnych pakietów lub wzorców.
 
 ```
 import (
@@ -131,7 +134,7 @@ cs := model.StartChat()
 uploadedFile, err := fileClient.UploadFile(...)
 ```
 
-**之后（集中式客户端对象）**
+**Po (scentralizowany obiekt klienta)**
 
 ### Python
 
@@ -178,15 +181,17 @@ uploadedFile, err := client.Files.Upload(...)
 tuningJob, err := client.Tunings.Tune(...)
 ```
 
-## 身份验证
+## Uwierzytelnianie
 
-旧版库和新版库均使用 API 密钥进行身份验证。您可以在 Google AI Studio 中[创建](https://aistudio.google.com/apikey?hl=zh-cn) API 密钥。
+Zarówno starsze, jak i nowe biblioteki uwierzytelniają się za pomocą kluczy API. Klucz API możesz
+[utworzyć](https://aistudio.google.com/apikey?hl=pl) w Google AI
+Studio.
 
-**之前**
+**Przed**
 
 ### Python
 
-旧版 SDK 会隐式处理 API 客户端对象。
+Stary pakiet SDK niejawnie obsługiwał obiekt klienta API.
 
 ```
 import google.generativeai as genai
@@ -204,7 +209,7 @@ const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 
 ### Go
 
-导入 Google 库：
+Zaimportuj biblioteki Google:
 
 ```
 import (
@@ -213,18 +218,18 @@ import (
 )
 ```
 
-创建客户端：
+Utwórz klienta:
 
 ```
 client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 ```
 
-**之后**
+**Po**
 
 ### Python
 
-借助 Google GenAI SDK，您可以先创建一个 API 客户端，然后使用该客户端调用 API。
-如果您未向客户端传递 API 密钥，新 SDK 将从 `GEMINI_API_KEY` 环境变量中获取您的 API 密钥。
+W Google GenAI SDK najpierw tworzysz klienta API, który jest używany do wywoływania interfejsu API.
+Jeśli nie przekażesz klucza API do klienta, nowy pakiet SDK pobierze go ze zmiennych środowiskowych `GEMINI_API_KEY`.
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
@@ -248,13 +253,13 @@ const ai = new GoogleGenAI({apiKey: "GEMINI_API_KEY"});
 
 ### Go
 
-导入 GenAI 库：
+Zaimportuj bibliotekę GenAI:
 
 ```
 import "google.golang.org/genai"
 ```
 
-创建客户端：
+Utwórz klienta:
 
 ```
 client, err := genai.NewClient(ctx, &genai.ClientConfig{
@@ -262,15 +267,15 @@ client, err := genai.NewClient(ctx, &genai.ClientConfig{
 })
 ```
 
-## 生成内容
+## Generuj treści
 
-### 文字
+### Tekst
 
-**之前**
+**Przed**
 
 ### Python
 
-之前，没有客户端对象，您可以通过 `GenerativeModel` 对象直接访问 API。
+Wcześniej nie było obiektów klienta. Dostęp do interfejsów API uzyskiwano bezpośrednio za pomocą obiektów `GenerativeModel`.
 
 ```
 import google.generativeai as genai
@@ -314,11 +319,12 @@ if err != nil {
 printResponse(resp) // utility for printing response parts
 ```
 
-**之后**
+**Po**
 
 ### Python
 
-新的 Google GenAI SDK 通过 `Client` 对象提供对所有 API 方法的访问权限。除了少数有状态的特殊情况（`chat` 和实时 API `session`），这些都是无状态函数。为了实用性和一致性，返回的对象是 `pydantic` 类。
+Nowy Google GenAI SDK zapewnia dostęp do wszystkich metod API za pomocą obiektu `Client`. Z wyjątkiem kilku przypadków specjalnych ze stanem (`chat` i
+sesje live-api `session`s) są to funkcje bezstanowe. Dla wygody i spójności zwracane obiekty są klasami `pydantic`.
 
 ```
 from google import genai
@@ -364,9 +370,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### 图片
+### Obraz
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -436,11 +442,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**之后**
+**Po**
 
 ### Python
 
-新版 SDK 中包含许多相同的便利功能。例如，系统会自动转换 `PIL.Image` 对象。
+W nowym pakiecie SDK dostępnych jest wiele tych samych funkcji ułatwiających pracę. Na przykład obiekty `PIL.Image` są automatycznie konwertowane.
 
 ```
 from google import genai
@@ -510,9 +516,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### 流式
+### Streaming
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -569,7 +575,7 @@ for {
 }
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -625,9 +631,9 @@ for result, err := range client.Models.GenerateContentStream(
 }
 ```
 
-## 配置
+## Konfiguracja
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -694,11 +700,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**之后**
+**Po**
 
 ### Python
 
-对于新 SDK 中的所有方法，必需实参都以关键字实参的形式提供。所有可选输入都通过 `config` 实参提供。配置实参可以指定为 Python 字典或 `google.genai.types` 命名空间中的 `Config` 类。为了实现实用性和一致性，`types` 模块中的所有定义都是 `pydantic` 类。
+W przypadku wszystkich metod w nowym pakiecie SDK wymagane argumenty są podawane jako argumenty słów kluczowych. Wszystkie opcjonalne dane wejściowe są podawane w argumencie `config`. Argumenty konfiguracji można określić jako słowniki Pythona lub klasy `Config` w przestrzeni nazw `google.genai.types`. Dla wygody i spójności wszystkie definicje w module `types` są klasami `pydantic`.
 
 ```
 from google import genai
@@ -774,11 +780,11 @@ if err != nil {
 debugPrint(result) // utility for printing response
 ```
 
-## 安全设置
+## Ustawienia bezpieczeństwa
 
-通过安全设置生成回答：
+Wygeneruj odpowiedź z ustawieniami bezpieczeństwa:
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -826,7 +832,7 @@ try {
 }
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -878,9 +884,9 @@ console.log("Finish reason:", response.candidates[0].finishReason);
 console.log("Safety ratings:", response.candidates[0].safetyRatings);
 ```
 
-## 异步
+## Dane asynchroniczne
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -893,11 +899,12 @@ response = model.generate_content_async(
 )
 ```
 
-**之后**
+**Po**
 
 ### Python
 
-如需将新 SDK 与 `asyncio` 搭配使用，请在 `client.aio` 下单独实现每个方法 `async`。
+Aby używać nowego pakietu SDK z `asyncio`, dostępna jest oddzielna `async`
+implementacja każdej metody w `client.aio`.
 
 ```
 from google import genai
@@ -910,11 +917,11 @@ response = await client.aio.models.generate_content(
 )
 ```
 
-## 聊天
+## Czat
 
-开始对话并向模型发送消息：
+Rozpocznij czat i wyślij wiadomość do modelu:
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -990,7 +997,7 @@ if err != nil {
 printResponse(res) // utility for printing the response
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1065,9 +1072,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-## 函数调用
+## Wywoływanie funkcji
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1094,11 +1101,11 @@ response = model.generate_content("What is the weather in San Francisco?")
 function_call = response.candidates[0].parts[0].function_call
 ```
 
-**之后**
+**Po**
 
 ### Python
 
-在新 SDK 中，自动函数调用是默认设置。在此处，您可以停用该功能。
+W nowym pakiecie SDK domyślnie włączone jest automatyczne wywoływanie funkcji. Tutaj je wyłączasz.
 
 ```
 from google import genai
@@ -1128,13 +1135,13 @@ response = client.models.generate_content(
 function_call = response.candidates[0].content.parts[0].function_call
 ```
 
-### 自动函数调用
+### Automatyczne wywoływanie funkcji
 
-**之前**
+**Przed**
 
 ### Python
 
-旧版 SDK 仅支持在聊天中自动调用函数。在新版 SDK 中，这是 `generate_content` 中的默认行为。
+Stary pakiet SDK obsługuje automatyczne wywoływanie funkcji tylko na czacie. W nowym pakiecie SDK jest to domyślne działanie w `generate_content`.
 
 ```
 import google.generativeai as genai
@@ -1152,7 +1159,7 @@ chat = model.start_chat(
 result = chat.send_message("What is the weather in San Francisco?")
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1173,11 +1180,11 @@ response = client.models.generate_content(
 )
 ```
 
-## 代码执行
+## Wykonanie kodu
 
-代码执行是一种工具，可让模型生成 Python 代码、运行代码并返回结果。
+Wykonanie kodu to narzędzie, które umożliwia modelowi generowanie kodu Pythona, uruchamianie go i zwracanie wyniku.
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1214,7 +1221,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1258,11 +1265,13 @@ console.log("-".repeat(80));
 console.log("\n", response.text);
 ```
 
-## 搜索接地
+## Szukaj groundingu
 
-`GoogleSearch`（Gemini>=2.0）和 `GoogleSearchRetrieval`（Gemini < 2.0）是可让模型检索公开网络数据以进行接地处理的工具，由 Google 提供支持。
+`GoogleSearch` (Gemini>=2.0) i `GoogleSearchRetrieval` (Gemini < 2.0) to
+narzędzia, które umożliwiają modelowi pobieranie publicznych danych internetowych na potrzeby groundingu, obsługiwane przez
+Google.
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1276,7 +1285,7 @@ response = model.generate_content(
 )
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1299,15 +1308,17 @@ response = client.models.generate_content(
 )
 ```
 
-## JSON 响应
+## Odpowiedź JSON
 
-以 JSON 格式生成答案。
+Generuj odpowiedzi w formacie JSON.
 
-**之前**
+**Przed**
 
 ### Python
 
-通过指定 `response_schema` 并设置 `response_mime_type="application/json"`，用户可以限制模型生成遵循给定结构的 `JSON` 回答。
+Określając `response_schema` i ustawiając
+`response_mime_type="application/json"`, użytkownicy mogą ograniczyć model do
+generowania odpowiedzi `JSON` zgodnie z daną strukturą.
 
 ```
 import google.generativeai as genai
@@ -1370,11 +1381,11 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**之后**
+**Po**
 
 ### Python
 
-新版 SDK 使用 `pydantic` 类来提供架构（不过您可以传递 `genai.types.Schema` 或等效的 `dict`）。如果可能，SDK 会解析返回的 JSON，并以 `response.parsed` 形式返回结果。如果您提供 `pydantic` 类作为架构，SDK 会将该 `JSON` 转换为该类的实例。
+Nowy pakiet SDK używa klas `pydantic` do udostępniania schematu (możesz jednak przekazać `genai.types.Schema` lub równoważny `dict`). Jeśli to możliwe, pakiet SDK przeanalizuje zwrócony kod JSON i zwróci wynik w `response.parsed`. Jeśli jako schemat podasz klasę `pydantic`, pakiet SDK przekonwertuje ten kod `JSON` na instancję klasy.
 
 ```
 from google import genai
@@ -1431,13 +1442,13 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## 文件
+## Pliki
 
-### 上传
+### Prześlij
 
-上传文件：
+Prześlij plik:
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1461,7 +1472,7 @@ response = model.generate_content([
 print(response.text)
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1489,11 +1500,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### 列出和获取
+### Wyświetl listę i pobierz
 
-列出已上传的文件并获取具有特定文件名的已上传文件：
+Wyświetl listę przesłanych plików i pobierz przesłany plik o danej nazwie:
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1506,7 +1517,7 @@ for file in genai.list_files():
 file = genai.get_file(name=file.name)
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1520,11 +1531,11 @@ for file in client.files.list():
 file = client.files.get(name=file.name)
 ```
 
-### 删除
+### Usuń
 
-删除文件：
+Usuń plik:
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1538,7 +1549,7 @@ dummy_file = genai.upload_file(path='dummy.txt')
 file = genai.delete_file(name=dummy_file.name)
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1554,11 +1565,11 @@ dummy_file = client.files.upload(file='dummy.txt')
 response = client.files.delete(name=dummy_file.name)
 ```
 
-## 上下文缓存
+## Buforowanie kontekstu
 
-借助上下文缓存，用户只需将内容传递给模型一次，即可缓存输入 token，然后在后续调用中引用缓存的 token，从而降低费用。
+Buforowanie kontekstu umożliwia użytkownikowi jednorazowe przekazanie treści do modelu, zapisanie tokenów wejściowych w pamięci podręcznej, a następnie odwoływanie się do tokenów w pamięci podręcznej w kolejnych wywołaniach, aby obniżyć koszty.
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1630,7 +1641,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1712,11 +1723,11 @@ const response = await ai.models.generateContent({
 console.log("Response text:", response.text);
 ```
 
-## 统计 token 数量
+## Zliczaj tokeny
 
-统计请求中的 token 数量。
+Zlicz liczbę tokenów w żądaniu.
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1758,7 +1769,7 @@ response = model.count_tokens(
  // { promptTokenCount: 11, candidatesTokenCount: 124, totalTokenCount: 135 }
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1793,11 +1804,11 @@ const generateResponse = await ai.models.generateContent({
 console.log(generateResponse.usageMetadata);
 ```
 
-## 生成图片
+## Generuj obrazy
 
-生成图片：
+Generuj obrazy:
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1816,7 +1827,7 @@ gen_images = imagen.generate_images(
 )
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1841,11 +1852,11 @@ for n, image in enumerate(gen_images.generated_images):
         image.image.image_bytes)
 ```
 
-## 嵌入内容
+## Osadzaj treści
 
-生成内容嵌入。
+Generuj osadzenia treści.
 
-**之前**
+**Przed**
 
 ### Python
 
@@ -1873,7 +1884,7 @@ const result = await model.embedContent("Hello world!");
 console.log(result.embedding);
 ```
 
-**之后**
+**Po**
 
 ### Python
 
@@ -1903,12 +1914,12 @@ const result = await ai.models.embedContent({
 console.log(result.embeddings);
 ```
 
-发送反馈
+Prześlij opinię
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-最后更新时间 (UTC)：2026-06-19。
+Ostatnia aktualizacja: 2026-06-22 UTC.
 
-需要向我们提供更多信息？
+Chcesz przekazać coś jeszcze?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-19。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-22 UTC."],[],[]]

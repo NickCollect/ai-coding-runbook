@@ -1,107 +1,109 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=vi
-fetched_at: 2026-06-22T06:36:11.676800+00:00
+source_url: https://ai.google.dev/gemini-api/docs/image-generation?hl=hi
+fetched_at: 2026-06-29T05:27:38.871410+00:00
 title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-# Tạo hình ảnh bằng Nano Banana
+# Nano Banana की मदद से इमेज जनरेट करने की सुविधा
 
-Đưa ra câu lệnh để tạo nguyên mẫu cho các ứng dụng đầy đủ chức năng, hoàn chỉnh về giao diện người dùng và xem Nano Banana 2 được tích hợp với các công cụ, dữ liệu trong thế giới thực và hệ sinh thái Gemini. Tất cả những việc này đều diễn ra trước khi bạn viết một dòng mã.
+पूरी तरह से काम करने वाले और यूज़र इंटरफ़ेस (यूआई) से जुड़े सभी ज़रूरी कॉम्पोनेंट वाले ऐप्लिकेशन का प्रोटोटाइप बनाने के लिए प्रॉम्प्ट दें. साथ ही, Nano Banana 2 को असल दुनिया के टूल, डेटा, और Gemini के ईकोसिस्टम के साथ इंटिग्रेट होते हुए देखें. यह सब, कोड की एक लाइन लिखने से पहले ही हो जाता है.
 
-- [Dùng thử ứng dụng Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=vi)
-- Hoặc tạo hình ảnh của riêng bạn từ câu lệnh:
+- [Nano Banana 2 ऐप्लिकेशन आज़माना](https://aistudio.google.com/apps/bundled/pet_passport?hl=hi)
+- इसके अलावा, प्रॉम्प्ट का इस्तेमाल करके भी सर्वे बनाया जा सकता है:
 
-- ![tạp chí](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
-  ![khôi phục](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![quả chuối](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-  ![quán cà phê](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
-  ![bài viết](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
-  ![chó](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
-  ![đẳng cự](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
-- ![tạp chí](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+- ![पत्रिका](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![लंदन](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  ![पहले जैसा करें](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  ![केला](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+  ![कैफ़े](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  ![लेख](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  ![कुत्ता](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ![आइसोमेट्रिक](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+- ![पत्रिका](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Do Nano Banana 2 tạo
+  Nano Banana 2 की मदद से जनरेट किया गया
 
-  **Câu lệnh:** "Ảnh chụp một trang bìa tạp chí bóng bẩy, trang bìa màu xanh dương tối giản có dòng chữ Nano Banana lớn và đậm. Văn bản có phông chữ có chân và lấp đầy khung hiển thị. Không có văn bản nào khác. Phía trước văn bản là ảnh chân dung một người mặc chiếc váy thanh lịch và tối giản. Cô bé đang cầm số 2 một cách tinh nghịch, đây là tâm điểm của bức ảnh.
+  **प्रॉम्प्ट:** "ग्लॉसी मैगज़ीन के कवर की एक फ़ोटो. नीले रंग के इस कवर पर, बड़े और बोल्ड अक्षरों में Nano Banana लिखा है. टेक्स्ट, सेरिफ़ फ़ॉन्ट में है और पूरे व्यू में दिखता है. कोई और टेक्स्ट नहीं. टेक्स्ट के सामने, एक व्यक्ति का पोर्ट्रेट है. इसमें वह व्यक्ति, स्लीक और कम डिज़ाइन वाली ड्रेस पहने हुए है. वह मज़ाकिया अंदाज़ में नंबर 2 को पकड़े हुए है, जो फ़ोकल पॉइंट है.
     
-  Đặt số phát hành và ngày "tháng 2 năm 2026" ở góc cùng với mã vạch. Tạp chí này nằm trên một chiếc kệ dựa vào bức tường trát vữa màu cam, bên trong một cửa hàng thiết kế."
+  बारकोड के साथ-साथ, कोने में "फ़रवरी 2026" की तारीख और समस्या नंबर डालें. पत्रिका, डिज़ाइनर स्टोर में प्लास्टर की गई नारंगी रंग की दीवार के पास मौजूद शेल्फ़ पर रखी है."
 
-  Tạo [ảnh chụp sản phẩm chuyên nghiệp](#4_product_mockups_commercial_photography) trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=vi)
-- ![london](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=hi) में, [प्रॉडक्ट की प्रोफ़ेशनल फ़ोटो](#4_product_mockups_commercial_photography) जनरेट करना
+- ![लंदन](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro की मदद से जनरेट किया गया
 
-  **Câu lệnh:** "Tạo một cảnh hoạt hình 3D thu nhỏ, rõ nét, đẳng cự, góc nhìn 45° từ trên xuống về London, có các địa danh và yếu tố kiến trúc tiêu biểu nhất. Sử dụng các hoạ tiết tinh tế, mềm mại với chất liệu PBR chân thực, ánh sáng và bóng đổ nhẹ nhàng, sống động. Tích hợp điều kiện thời tiết hiện tại trực tiếp vào môi trường thành phố để tạo ra một bầu không khí sống động. Sử dụng bố cục tối giản, gọn gàng với nền có màu đồng nhất và dịu nhẹ. Ở phía trên cùng ở giữa, hãy đặt tiêu đề "London" bằng văn bản in đậm cỡ lớn, một biểu tượng thời tiết nổi bật bên dưới, sau đó là ngày (chữ nhỏ) và nhiệt độ (chữ cỡ trung). Tất cả văn bản phải được căn giữa với khoảng cách nhất quán và có thể hơi chồng lên phần trên của các toà nhà."
+  **प्रॉम्प्ट:** "लंदन का साफ़-सुथरा, 45° टॉप-डाउन आइसोमेट्रिक मिनिएचर 3D कार्टून सीन दिखाओ. इसमें लंदन के सबसे मशहूर लैंडमार्क और आर्किटेक्चरल एलिमेंट शामिल हों. सॉफ़्ट और बेहतर टेक्सचर का इस्तेमाल करें. साथ ही, असली जैसे दिखने वाले पीबीआर मटीरियल और हल्की, असली जैसी रोशनी और छायाएं इस्तेमाल करें. शहर के माहौल में मौसम की मौजूदा स्थितियों को सीधे तौर पर इंटिग्रेट करें, ताकि माहौल को और भी ज़्यादा दिलचस्प बनाया जा सके. साफ़-सुथरे और मिनिमलिस्ट कंपोज़िशन का इस्तेमाल करें. साथ ही, हल्के और एक रंग वाले बैकग्राउंड का इस्तेमाल करें. सबसे ऊपर बीच में, बड़े और बोल्ड टेक्स्ट में "लंदन" टाइटल दिखाएं. इसके नीचे, मौसम का आइकॉन दिखाएं. इसके बाद, तारीख (छोटे टेक्स्ट में) और तापमान (मीडियम टेक्स्ट में) दिखाएं. सभी टेक्स्ट को बीच में अलाइन किया जाना चाहिए. साथ ही, उनके बीच एक जैसा स्पेस होना चाहिए. इसके अलावा, टेक्स्ट, इमारतों के ऊपरी हिस्सों पर हल्का-सा ओवरलैप हो सकता है."
 
-  Tìm hiểu thêm về tính năng [căn cứ vào thông tin tìm kiếm](#use-with-grounding) và dùng thử tính năng này trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=vi)
-- ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  [खोज के नतीजों के आधार पर जवाब जनरेट करने की सुविधा](#use-with-grounding) के बारे में ज़्यादा जानें. साथ ही, इसे [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=hi) में आज़माएं
+- ![क्वेट्ज़ल](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Do Nano Banana 2 tạo
+  Nano Banana 2 की मदद से जनरेट किया गया
 
-  **Câu lệnh:** "Sử dụng tính năng tìm kiếm hình ảnh để tìm hình ảnh chính xác về chim đuôi quạt rực rỡ. Tạo một hình nền đẹp mắt cho chú chim này theo tỷ lệ 3:2, có hiệu ứng chuyển màu tự nhiên từ trên xuống dưới và bố cục tối giản."
+  **प्रॉम्प्ट:** "इमेज सर्च की सुविधा का इस्तेमाल करके, शानदार क्वेट्ज़ल पक्षी की सटीक इमेज ढूंढो. इस पक्षी का 3:2 वाला एक सुंदर वॉलपेपर बनाओ. इसमें ऊपर से नीचे तक नैचुरल ग्रेडिएंट हो और कंपोज़िशन कम से कम हो."
 
-  Sử dụng tính năng [Tìm kiếm hình ảnh](#image-search) trên Google cùng với Nano Banana 2. Dùng thử trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=vi)
-- ![quả chuối](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  Nano Banana 2 के साथ, Google [इमेज खोज](#image-search) की ग्राउंडिंग सुविधा का इस्तेमाल करें. [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=hi) में जाकर इसे आज़माएं
+- ![केला](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro की मदद से जनरेट किया गया
 
-  **Câu lệnh:** "Đặt biểu trưng này lên một quảng cáo cao cấp cho nước hoa có mùi chuối. Biểu trưng được tích hợp hoàn hảo vào chai."
+  **प्रॉम्प्ट:** "इस लोगो को केले की खुशबू वाले परफ़्यूम के प्रीमियम विज्ञापन पर लगाओ. लोगो को बोतल में अच्छी तरह से इंटिग्रेट किया गया है."
 
-  Dùng thử tính năng [giữ lại chi tiết có độ trung thực cao](#5_high-fidelity_detail_preservation) của Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=vi)
-- ![quán cà phê](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=hi) में, Nano Banana की [ज़्यादा सटीक जानकारी बनाए रखने की सुविधा](#5_high-fidelity_detail_preservation) आज़माएं
+- ![कैफ़े](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro की मदद से जनरेट किया गया
 
-  **Câu lệnh:** "Một bức ảnh chụp cảnh sinh hoạt thường ngày tại một quán cà phê đông đúc phục vụ bữa sáng. Ở tiền cảnh là một người đàn ông trong phim hoạt hình có mái tóc màu xanh dương, một trong số những người này là bản phác thảo bằng bút chì, người còn lại là nhân vật hoạt hình bằng đất sét"
+  **प्रॉम्प्ट:** "नाश्ता परोसने वाले एक व्यस्त कैफ़े की रोज़मर्रा की गतिविधि की फ़ोटो. फ़ोरग्राउंड में नीले बालों वाला एक ऐनिमे व्यक्ति है. इनमें से एक व्यक्ति पेंसिल स्केच है, दूसरा क्लेमेशन व्यक्ति है"
 
-  Thử nghiệm nhiều [phong cách nghệ thuật](#3_style_transfer) bằng Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=vi)
-- ![bài viết](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=hi) में Nano Banana की मदद से, अलग-अलग [आर्टिस्टिक स्टाइल](#3_style_transfer) के साथ एक्सपेरिमेंट करना
+- ![लेख](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro की मदद से जनरेट किया गया
 
-  **Câu lệnh:** "Dùng tính năng tìm kiếm để biết phản ứng của mọi người về việc ra mắt Gemini 3 Flash. Hãy dùng thông tin này để viết một bài viết ngắn về chủ đề đó (có tiêu đề). Trả về ảnh của bài viết như xuất hiện trong một tạp chí bóng bẩy tập trung vào thiết kế. Đây là ảnh chụp một trang giấy được gấp lại, cho thấy bài viết về Gemini 3 Flash. Một ảnh chính. Dòng tiêu đề có chân."
+  **प्रॉम्प्ट:** "Gemini 3 Flash को लॉन्च करने के फ़ैसले पर लोगों की क्या प्रतिक्रिया है, यह जानने के लिए खोज का इस्तेमाल करो. इस जानकारी का इस्तेमाल करके, इसके बारे में एक छोटा लेख लिखो. इसमें हेडिंग भी शामिल करो. इस लेख की ऐसी फ़ोटो दिखाओ जो डिज़ाइन पर फ़ोकस करने वाली ग्लॉसी मैगज़ीन में दिखाई गई हो. यह एक फ़ोटो है. इसमें एक पेज को मोड़ा गया है. इसमें Gemini 3 Flash के बारे में लेख दिखाया गया है. एक हीरो फ़ोटो. सेरिफ़ फ़ॉन्ट में हेडलाइन."
 
-  Tạo [văn bản chính xác](#3_accurate_text_in_images) từ [nội dung tìm kiếm](#use-with-grounding). Dùng thử Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=vi)
-- ![chó](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  [खोज](#use-with-grounding) से [सही टेक्स्ट](#3_accurate_text_in_images) जनरेट करना. [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=hi) में Nano Banana आज़माएँ
+- ![कुत्ता](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Do Nano Banana Pro tạo
+  Nano Banana Pro की मदद से जनरेट किया गया
 
-  **Câu lệnh:** "Một biểu tượng đại diện cho một chú chó dễ thương. Nền có màu trắng. Tạo các biểu tượng theo phong cách 3D nhiều màu sắc và có kết cấu. Không có văn bản."
+  **प्रॉम्प्ट:** "एक प्यारे कुत्ते को दिखाने वाला आइकॉन. बैकग्राउंड का रंग सफ़ेद है. आइकॉन को रंगीन और टेक्टाइल 3D स्टाइल में बनाओ. कोई टेक्स्ट नहीं है."
 
-  Tạo [biểu tượng, hình dán và thành phần](#2_stylized_illustrations_stickers) bằng Nano Banana trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=vi)
-- ![đẳng cự](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=hi) में Nano Banana की मदद से, [आइकॉन, स्टिकर, और ऐसेट](#2_stylized_illustrations_stickers) जनरेट करना
+- ![आइसोमेट्रिक](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Do Nano Banana 2 tạo
+  Nano Banana 2 की मदद से जनरेट किया गया
 
-  **Câu lệnh:** "Tạo một bức ảnh có góc nhìn hoàn toàn đẳng cự. Đây không phải là một bức ảnh thu nhỏ, mà là một bức ảnh chụp tình cờ có góc nhìn hoàn toàn đẳng cự. Đây là bức ảnh về một khu vườn hiện đại tuyệt đẹp. Có một bể bơi lớn có hình số 2 và dòng chữ: Nano Banana 2."
+  **प्रॉम्प्ट:** "ऐसी फ़ोटो बनाओ जो पूरी तरह से आइसोमेट्रिक हो. यह कोई छोटी इमेज नहीं है, बल्कि एक फ़ोटो है. यह फ़ोटो, आइसोमेट्रिक व्यू में ली गई है. यह एक खूबसूरत मॉडर्न गार्डन की फ़ोटो है. इसमें दो के आकार का एक बड़ा पूल है. साथ ही, इसमें Nano Banana 2 लिखा है."
 
-  Thử [tạo hình ảnh siêu thực](#1_photorealistic_scenes) trong [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=vi)
+  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=hi) में, [फ़ोटो जैसी दिखने वाली इमेज जनरेट करने की सुविधा](#1_photorealistic_scenes) आज़माएं
 
-**Nano Banana** là tên gọi của các tính năng tạo hình ảnh gốc của Gemini.
-Gemini có thể tạo và xử lý hình ảnh theo cách đàm thoại bằng văn bản, hình ảnh, video hoặc kết hợp các loại nội dung này. Điều này giúp bạn tạo, chỉnh sửa và lặp lại các hình ảnh với khả năng kiểm soát chưa từng có.
+Gemini में इमेज जनरेट करने की सुविधा को **Nano Banana** कहा जाता है.
+Gemini, बातचीत के दौरान टेक्स्ट, इमेज, वीडियो या इनके कॉम्बिनेशन का इस्तेमाल करके इमेज जनरेट और प्रोसेस कर सकता है. इससे आपको विज़ुअल बनाने, उनमें बदलाव करने, और उन्हें बेहतर बनाने में मदद मिलती है.
 
-Nano Banana đề cập đến 3 mô hình riêng biệt có trong Gemini API:
+Nano Banana, Gemini API में उपलब्ध तीन अलग-अलग मॉडल को कहते हैं:
 
-- **Nano Banana 2**: Mô hình [Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=vi) (`gemini-3.1-flash-image`). Mô hình này là phiên bản hiệu suất cao của Gemini 3 Pro Image, được tối ưu hoá về tốc độ và các trường hợp sử dụng của nhà phát triển với khối lượng lớn.
-- **Nano Banana Pro**: Mô hình [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=vi) (`gemini-3-pro-image`). Mô hình này được thiết kế để sản xuất tài sản chuyên nghiệp, sử dụng khả năng suy luận nâng cao ("Tư duy") để làm theo các chỉ dẫn phức tạp và hiển thị văn bản có độ trung thực cao.
-- **Nano Banana**: Mô hình [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=vi) (`gemini-2.5-flash-image`). Mô hình này được thiết kế để có tốc độ và hiệu suất cao, đồng thời được tối ưu hoá cho các tác vụ có khối lượng lớn và độ trễ thấp.
+- **Nano Banana 2**: यह [Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=hi)
+  मॉडल (`gemini-3.1-flash-image`) है. यह मॉडल, Gemini 3 Pro Image मॉडल की तुलना में ज़्यादा कारगर है. इसे बेहतर और तुरंत जवाब देने के लिए डिज़ाइन किया गया है. साथ ही, यह डेवलपर के लिए ज़्यादा फ़ायदेमंद है.
+- **Nano Banana Pro**: यह [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=hi) मॉडल है
+  (`gemini-3-pro-image`). इस मॉडल को प्रोफ़ेशनल ऐसेट प्रोडक्शन के लिए डिज़ाइन किया गया है. यह मुश्किल निर्देशों को समझने और सटीक टेक्स्ट जनरेट करने के लिए, ऐडवांस रीज़निंग ("सोचना") का इस्तेमाल करता है.
+- **Nano Banana**: यह [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=hi) मॉडल (`gemini-2.5-flash-image`) है. इस मॉडल को तेज़ी से और बेहतर तरीके से काम करने के लिए डिज़ाइन किया गया है. इसे ऐसे टास्क के लिए ऑप्टिमाइज़ किया गया है जिनमें ज़्यादा डेटा की ज़रूरत होती है और जिन्हें रीयल-टाइम में पूरा करने की ज़रूरत नहीं होती.
 
-Tất cả hình ảnh được tạo đều có [hình mờ SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=vi).
+जनरेट की गई सभी इमेज में [SynthID वॉटरमार्क](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=hi) शामिल होता है.
 
-## Tạo hình ảnh (chuyển văn bản thành hình ảnh)
+## इमेज जनरेट करने की प्रोसेस (टेक्स्ट प्रॉम्प्ट से इमेज जनरेट करने की प्रोसेस)
 
 ### Python
 
@@ -158,7 +160,7 @@ async function main() {
 main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -290,15 +292,15 @@ curl -s -X POST \
   }'
 ```
 
-## Chỉnh sửa hình ảnh (chuyển văn bản và hình ảnh thành hình ảnh)
+## इमेज में बदलाव करना (टेक्स्ट और इमेज से इमेज जनरेट करना)
 
-**Lời nhắc**: Hãy đảm bảo rằng bạn có các quyền cần thiết đối với mọi hình ảnh mà bạn tải lên.
-Bạn không được tạo nội dung vi phạm quyền của người khác, kể cả video hoặc hình ảnh lừa gạt, quấy rối hoặc gây hại. Khi sử dụng dịch vụ AI tạo sinh này, bạn phải tuân theo [Chính sách về các hành vi bị cấm khi sử dụng](https://policies.google.com/terms/generative-ai/use-policy?hl=vi) của chúng tôi.
+**याद रखें**: पक्का करें कि आपके पास, अपलोड की जाने वाली किसी भी इमेज से जुड़े सभी ज़रूरी अधिकार हों.
+ऐसा कॉन्टेंट जनरेट न करें जिससे किसी के अधिकारों का उल्लंघन होता हो. इसमें ऐसे वीडियो या इमेज शामिल हैं जो धोखा देने, उत्पीड़न करने या नुक़सान पहुँचाने के मक़सद बनाए गए हों. जनरेटिव एआई की इस सेवा के इस्तेमाल पर, हमारी [जनरेटिव एआई के इस्तेमाल से जुड़ी पाबंदी की नीति](https://policies.google.com/terms/generative-ai/use-policy?hl=hi) लागू होती है.
 
-Cung cấp hình ảnh và sử dụng câu lệnh dạng văn bản để thêm, xoá hoặc sửa đổi các phần tử, thay đổi kiểu hoặc điều chỉnh phân loại màu.
+कोई इमेज दें और टेक्स्ट प्रॉम्प्ट का इस्तेमाल करके, एलिमेंट जोड़ें, हटाएं या उनमें बदलाव करें. इसके अलावा, स्टाइल बदलें या कलर ग्रेडिंग अडजस्ट करें.
 
-Ví dụ sau đây minh hoạ việc tải hình ảnh được mã hoá `base64` lên.
-Đối với nhiều hình ảnh, tải trọng lớn hơn và các loại MIME được hỗ trợ, hãy xem trang [Hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi).
+यहां दिए गए उदाहरण में, `base64` कोड में बदले गए इमेज अपलोड करने का तरीका बताया गया है.
+एक से ज़्यादा इमेज, बड़े पेलोड, और काम करने वाले MIME टाइप के लिए, [इमेज को समझना](https://ai.google.dev/gemini-api/docs/image-understanding?hl=hi) पेज देखें.
 
 ### Python
 
@@ -373,7 +375,7 @@ async function main() {
 main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -541,9 +543,9 @@ curl -s -X POST \
     }"
 ```
 
-### Chỉnh sửa hình ảnh nhiều lượt
+### सिलसिलेवार बातचीत से इमेज में बदलाव करने की सुविधा
 
-Tiếp tục tạo và chỉnh sửa hình ảnh theo cách trò chuyện. Trò chuyện hoặc cuộc trò chuyện nhiều lượt là cách nên dùng để lặp lại hình ảnh. Ví dụ sau đây cho thấy một câu lệnh để tạo bản đồ hoạ thông tin về quá trình quang hợp.
+बातचीत के दौरान, इमेज जनरेट करने और उनमें बदलाव करने की सुविधा का इस्तेमाल जारी रखें. इमेज को बेहतर बनाने के लिए, चैट या सिलसिलेवार बातचीत का इस्तेमाल करने का सुझाव दिया जाता है. यहां दिए गए उदाहरण में, फ़ोटोसिंथिसिस के बारे में इन्फ़ोग्राफ़िक जनरेट करने के लिए प्रॉम्प्ट दिखाया गया है.
 
 ### Python
 
@@ -607,7 +609,7 @@ for (const part of response.candidates[0].content.parts) {
 }
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -775,11 +777,11 @@ curl -s -X POST \
   }'
 ```
 
-![Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=vi)
+![फ़ोटोसिंथेसिस के बारे में एआई से जनरेट किया गया इन्फ़ोग्राफ़िक](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=hi)
 
-Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp
+प्रकाश संश्लेषण के बारे में एआई से जनरेट किया गया इन्फ़ोग्राफ़िक
 
-Sau đó, bạn có thể dùng cùng một cuộc trò chuyện để thay đổi ngôn ngữ trên hình ảnh thành tiếng Tây Ban Nha.
+इसके बाद, उसी चैट का इस्तेमाल करके ग्राफ़िक में मौजूद भाषा को स्पैनिश में बदला जा सकता है.
 
 ### Python
 
@@ -833,7 +835,7 @@ for (const part of response.candidates[0].content.parts) {
 }
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 message = "Update this infographic to be in Spanish. Do not change any other elements of the image."
@@ -973,33 +975,33 @@ curl -s -X POST \
   }'
 ```
 
-![Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp bằng tiếng Tây Ban Nha](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=vi)
+![फ़ोटोसिंथिसिस के बारे में स्पैनिश में एआई से जनरेट किया गया इन्फ़ोग्राफ़िक](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=hi)
 
-Bản đồ hoạ thông tin do AI tạo về quá trình quang hợp bằng tiếng Tây Ban Nha
+स्पैनिश में फ़ोटोसिंथिसिस का एआई से जनरेट किया गया इन्फ़ोग्राफ़िक
 
-## Tính năng mới với các mô hình Gemini 3 Image
+## Gemini 3 के इमेज मॉडल की नई सुविधाएं
 
-Gemini 3 cung cấp các mô hình tạo và chỉnh sửa hình ảnh tiên tiến. Gemini 3.1 Flash Image được tối ưu hoá về tốc độ và các trường hợp sử dụng với khối lượng lớn, còn Gemini 3 Pro Image được tối ưu hoá cho việc sản xuất tài sản chuyên nghiệp.
-Được thiết kế để giải quyết những quy trình công việc khó khăn nhất thông qua khả năng suy luận nâng cao, các mô hình này có thể thực hiện xuất sắc những nhiệm vụ tạo và sửa đổi phức tạp, nhiều lượt.
+Gemini 3 में, इमेज जनरेट करने और उनमें बदलाव करने के लिए बेहतरीन मॉडल उपलब्ध हैं. Gemini 3.1 Flash Image को तेज़ी से काम करने और ज़्यादा से ज़्यादा इस्तेमाल के लिए ऑप्टिमाइज़ किया गया है. वहीं, Gemini 3 Pro Image को प्रोफ़ेशनल ऐसेट बनाने के लिए ऑप्टिमाइज़ किया गया है.
+इन्हें मुश्किल से मुश्किल वर्कफ़्लो को पूरा करने के लिए डिज़ाइन किया गया है. ये ऐडवांस रीज़निंग की मदद से, मुश्किल और सिलसिलेवार बातचीत वाले टास्क को आसानी से पूरा कर सकते हैं. साथ ही, ये क्रिएटिव कॉन्टेंट बनाने और उसमें बदलाव करने से जुड़े टास्क को भी आसानी से पूरा कर सकते हैं.
 
-- **Đầu ra có độ phân giải cao**: Khả năng tạo hình ảnh 1K, 2K và 4K được tích hợp sẵn.
-  - **Hình ảnh Gemini 3.1 Flash** có độ phân giải nhỏ hơn là 512 (0,5K).
-- **Kết xuất văn bản nâng cao**: Có khả năng tạo văn bản dễ đọc, cách điệu cho đồ hoạ thông tin, thực đơn, sơ đồ và thành phần tiếp thị.
-- **Bám sát nguồn bằng Google Tìm kiếm**: Mô hình có thể sử dụng Google Tìm kiếm làm công cụ để xác minh thông tin và tạo hình ảnh tạo sinh dựa trên dữ liệu theo thời gian thực (ví dụ: bản đồ thời tiết hiện tại, biểu đồ cổ phiếu, sự kiện gần đây).
-  - **Hình ảnh Gemini 3.1 Flash** bổ sung tính năng tích hợp Bám sát nguồn bằng Google Tìm kiếm cho Hình ảnh cùng với Tìm kiếm trên web.
-- **Chế độ Tư duy**: Mô hình này sử dụng quy trình "tư duy" để suy luận thông qua các câu lệnh phức tạp. Công cụ này tạo ra "hình ảnh ý tưởng" tạm thời (có thể nhìn thấy ở phần phụ trợ nhưng không tính phí) để tinh chỉnh bố cục trước khi tạo ra thành phẩm chất lượng cao cuối cùng.
-- **Tối đa 14 hình ảnh tham khảo**: Giờ đây, bạn có thể kết hợp tối đa 14 hình ảnh tham khảo để tạo ra hình ảnh cuối cùng.
-- **Tỷ lệ khung hình mới**: Gemini 3.1 Flash Image bổ sung [tỷ lệ khung hình](#aspect_ratios_and_image_size) 1:4, 4:1, 1:8 và 8:1.
+- **हाई रिज़ॉल्यूशन में आउटपुट**: 1K, 2K, और 4K विज़ुअल जनरेट करने की सुविधाएं पहले से मौजूद हैं.
+  - **Gemini 3.1 Flash Image** में, 512 (0.5K) रिज़ॉल्यूशन वाली छोटी इमेज जोड़ने की सुविधा मिलती है.
+- **ऐडवांस टेक्स्ट रेंडरिंग**: यह इन्फ़ोग्राफ़िक, मेन्यू, डायग्राम, और मार्केटिंग ऐसेट के लिए, पढ़ने में आसान और स्टाइल वाला टेक्स्ट जनरेट कर सकता है.
+- **Google Search से जानकारी पाना**: मॉडल, Google Search का इस्तेमाल एक टूल के तौर पर कर सकता है.इससे उसे तथ्यों की पुष्टि करने और रीयल-टाइम डेटा के आधार पर इमेज जनरेट करने में मदद मिलती है. जैसे, मौजूदा मौसम के मैप, स्टॉक चार्ट, हाल ही के इवेंट.
+  - **Gemini 3.1 Flash Image** में, वेब सर्च के साथ-साथ इमेज के लिए Google Search के साथ ग्राउंडिंग की सुविधा को इंटिग्रेट किया गया है.
+- **सोच-विचार वाला मोड**: इस मोड में मॉडल, मुश्किल प्रॉम्प्ट के जवाब देने के लिए "सोच-विचार" की प्रोसेस का इस्तेमाल करता है. यह अच्छी क्वालिटी का फ़ाइनल आउटपुट जनरेट करने से पहले, "सोच वाली इमेज" (बैकएंड में दिखती हैं, लेकिन इनके लिए शुल्क नहीं लिया जाता) जनरेट करता है, ताकि कंपोज़िशन को बेहतर बनाया जा सके.
+- **ज़्यादा से ज़्यादा 14 रेफ़रंस इमेज**: अब फ़ाइनल इमेज बनाने के लिए, ज़्यादा से ज़्यादा 14 रेफ़रंस इमेज को एक साथ इस्तेमाल किया जा सकता है.
+- **नए आसपेक्ट रेशियो**: Gemini 3.1 Flash Image में 1:4, 4:1, 1:8, और 8:1 [आसपेक्ट रेशियो](#aspect_ratios_and_image_size) जोड़े गए हैं.
 
-### Sử dụng tối đa 14 hình ảnh tham khảo
+### ज़्यादा से ज़्यादा 14 रेफ़रंस इमेज इस्तेमाल करें
 
-Các mô hình hình ảnh Gemini 3 cho phép bạn kết hợp tối đa 14 hình ảnh tham khảo. 14 hình ảnh này có thể bao gồm:
+Gemini 3 के इमेज मॉडल की मदद से, ज़्यादा से ज़्यादा 14 रेफ़रंस इमेज को मिक्स किया जा सकता है. इन 14 इमेज में, यहां दी गई इमेज शामिल हो सकती हैं:
 
-| Hình ảnh Gemini 3.1 Flash | Hình ảnh Gemini 3 Pro |
+| Gemini 3.1 Flash की इमेज | Gemini 3 Pro की इमेज |
 | --- | --- |
-| Tối đa 10 hình ảnh về các đối tượng có độ trung thực cao để đưa vào hình ảnh cuối cùng | Tối đa 6 hình ảnh về các đối tượng có độ trung thực cao để đưa vào hình ảnh cuối cùng |
-| Tối đa 4 hình ảnh về nhân vật để đảm bảo tính nhất quán cho nhân vật | Tối đa 5 hình ảnh về nhân vật để đảm bảo tính nhất quán cho nhân vật |
-| Không áp dụng | Tối đa 3 hình ảnh được dùng làm hình ảnh tham khảo về kiểu |
+| फ़ाइनल इमेज में शामिल करने के लिए, ज़्यादा से ज़्यादा 10 ऑब्जेक्ट की हाई-फ़िडेलिटी वाली इमेज | फ़ाइनल इमेज में शामिल करने के लिए, ज़्यादा से ज़्यादा छह ऑब्जेक्ट की हाई-फ़िडेलिटी वाली इमेज |
+| कैरेक्टर की कंसिस्टेंसी बनाए रखने के लिए, ज़्यादा से ज़्यादा चार इमेज | किरदारों की ज़्यादा से ज़्यादा पांच इमेज, ताकि किरदार का लुक बरक़रार रखा जा सके |
+| लागू नहीं | स्टाइल के रेफ़रंस के तौर पर इस्तेमाल करने के लिए, ज़्यादा से ज़्यादा तीन इमेज |
 
 ### Python
 
@@ -1116,7 +1118,7 @@ const response = await ai.models.generateContent({
 main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -1318,15 +1320,15 @@ curl -s -X POST \
     }"
 ```
 
-![Ảnh chụp nhóm nhân viên văn phòng do AI tạo](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=vi)
+![एआई से जनरेट की गई ऑफ़िस ग्रुप फ़ोटो](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=hi)
 
-Ảnh chụp nhóm văn phòng do AI tạo
+एआई से जनरेट की गई ऑफ़िस ग्रुप फ़ोटो
 
-### Bám sát nguồn bằng Google Tìm kiếm
+### Google Search से सटीक जानकारी पाने की सुविधा
 
-Sử dụng [công cụ Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) để tạo hình ảnh dựa trên thông tin theo thời gian thực, chẳng hạn như dự báo thời tiết, biểu đồ cổ phiếu hoặc sự kiện gần đây.
+[Google Search टूल](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) का इस्तेमाल करके, रीयल-टाइम जानकारी के आधार पर इमेज जनरेट करें. जैसे, मौसम के पूर्वानुमान, स्टॉक चार्ट या हाल ही में हुई घटनाएँ.
 
-Xin lưu ý rằng khi sử dụng tính năng Liên kết thực tế với Google Tìm kiếm để tạo hình ảnh, kết quả tìm kiếm dựa trên hình ảnh sẽ không được chuyển đến mô hình tạo và sẽ bị loại trừ khỏi câu trả lời (xem phần [Liên kết thực tế với Google Tìm kiếm cho hình ảnh](#image-search))
+ध्यान दें कि इमेज जनरेट करने के लिए, Google Search की मदद से भरोसेमंद स्रोतों से जानकारी लेने की सुविधा का इस्तेमाल करते समय, इमेज पर आधारित खोज के नतीजों को जनरेशन मॉडल को नहीं भेजा जाता है. साथ ही, उन्हें जवाब में शामिल नहीं किया जाता है. इसके बारे में ज़्यादा जानने के लिए, [इमेज के लिए Google Search की मदद से भरोसेमंद स्रोतों से जानकारी लेना](#image-search) लेख पढ़ें
 
 ### Python
 
@@ -1515,22 +1517,22 @@ curl -s -X POST \
   }'
 ```
 
-![Biểu đồ thời tiết 5 ngày do AI tạo cho San Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=vi)
+![सैन फ़्रांसिस्को के लिए, एआई से बनाया गया पाँच दिनों का मौसम चार्ट](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=hi)
 
-Biểu đồ thời tiết 5 ngày do AI tạo cho San Francisco
+सैन फ़्रांसिस्को के मौसम की जानकारी देने वाला पांच दिनों का चार्ट, जिसे एआई ने जनरेट किया है
 
-Phản hồi này bao gồm `groundingMetadata` chứa các trường bắt buộc sau:
+जवाब में `groundingMetadata` शामिल है. इसमें ये ज़रूरी फ़ील्ड शामिल हैं:
 
-- **`searchEntryPoint`**: Chứa HTML và CSS để hiển thị các đề xuất tìm kiếm bắt buộc.
-- **`groundingChunks`**: Trả về 3 nguồn hàng đầu trên web được dùng để làm cơ sở cho hình ảnh được tạo
+- **`searchEntryPoint`**: इसमें ज़रूरी खोज के सुझावों को रेंडर करने के लिए एचटीएमएल और सीएसएस शामिल होता है.
+- **`groundingChunks`**: इससे जनरेट की गई इमेज के लिए, सबसे ज़्यादा इस्तेमाल किए गए तीन वेब सोर्स मिलते हैं
 
-### Bám sát nguồn bằng Google Tìm kiếm hình ảnh (3.1 Flash)
+### इमेज के लिए Google Search की मदद से, ज़्यादा जानकारी पाना (3.1 Flash)
 
-Tính năng Bám sát nguồn bằng Google Tìm kiếm cho hình ảnh cho phép các mô hình sử dụng hình ảnh trên web được truy xuất thông qua Google Tìm kiếm làm bối cảnh trực quan để tạo hình ảnh. Tìm kiếm hình ảnh là một loại tìm kiếm mới trong công cụ Bám sát nguồn bằng Google Tìm kiếm hiện có, hoạt động cùng với tính năng [Web Search](#use-with-grounding) tiêu chuẩn.
+Google Search की मदद से इमेज के लिए ग्राउंडिंग की सुविधा, मॉडल को Google Search से मिली वेब इमेज का इस्तेमाल करने की अनुमति देती है. इससे इमेज जनरेट करने के लिए विज़ुअल कॉन्टेक्स्ट मिलता है. इमेज सर्च, Google Search की मदद से जानकारी पाने वाले मौजूदा टूल में खोज का एक नया टाइप है. यह स्टैंडर्ड [वेब सर्च](#use-with-grounding) के साथ काम करता है.
 
-Để bật tính năng Tìm kiếm bằng hình ảnh, hãy định cấu hình công cụ `googleSearch` trong yêu cầu API của bạn và chỉ định `imageSearch` trong đối tượng `searchTypes`. Bạn có thể sử dụng tính năng Tìm kiếm hình ảnh độc lập hoặc cùng với tính năng Tìm kiếm trên web.
+इमेज सर्च की सुविधा चालू करने के लिए, अपने एपीआई अनुरोध में `googleSearch` टूल को कॉन्फ़िगर करें. साथ ही, `searchTypes` ऑब्जेक्ट में `imageSearch` को तय करें. इमेज सर्च का इस्तेमाल, वेब सर्च के साथ या अलग से किया जा सकता है.
 
-Xin lưu ý rằng bạn không thể dùng tính năng Grounding with Google Search cho hình ảnh để tìm kiếm người.
+ध्यान दें कि इमेज के लिए, Google Search से मिली जानकारी का इस्तेमाल करके लोगों को नहीं खोजा जा सकता.
 
 ### Python
 
@@ -1599,7 +1601,7 @@ async function main() {
 main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -1757,33 +1759,33 @@ curl -s -X POST \
   }'
 ```
 
-**Yêu cầu về việc hiển thị**
+**विज्ञापन दिखाने के लिए ज़रूरी शर्तें**
 
-Khi sử dụng tính năng Tìm kiếm bằng hình ảnh trong tính năng Bám sát nguồn bằng Google Tìm kiếm, bạn phải tuân thủ các điều kiện sau:
+Google Search के साथ इमेज या कैमरे की मदद से खोज करने की सुविधा का इस्तेमाल करते समय, आपको इन शर्तों का पालन करना होगा:
 
-- **Ghi nhận nguồn**: Bạn phải cung cấp một đường liên kết đến trang web chứa hình ảnh nguồn ("trang chứa", không phải tệp hình ảnh) theo cách mà người dùng sẽ nhận ra đó là một đường liên kết.
-- **Điều hướng trực tiếp**: Nếu chọn hiển thị hình ảnh nguồn, bạn phải cung cấp một đường dẫn trực tiếp, chỉ cần nhấp một lần từ hình ảnh nguồn đến trang web nguồn chứa hình ảnh đó. Bạn không được phép triển khai bất kỳ phương thức nào khác làm chậm trễ hoặc che giấu quyền truy cập của người dùng cuối vào trang web nguồn, bao gồm nhưng không giới hạn ở bất kỳ đường dẫn nhiều lượt nhấp nào hoặc việc sử dụng trình xem hình ảnh trung gian.
+- **सोर्स एट्रिब्यूशन**: आपको उस वेबपेज का लिंक देना होगा जिस पर सोर्स इमेज मौजूद है. यह "कंटेनिंग पेज" होना चाहिए, न कि इमेज फ़ाइल. यह लिंक इस तरह से दिया जाना चाहिए कि उपयोगकर्ता इसे लिंक के तौर पर पहचान सके.
+- **सीधे तौर पर नेविगेट करना**: अगर आपको सोर्स इमेज भी दिखानी हैं, तो आपको सोर्स इमेज से सोर्स वेबपेज तक सीधे तौर पर एक क्लिक में पहुंचने का पाथ देना होगा. ऐसा कोई भी तरीका इस्तेमाल करने की अनुमति नहीं है जिससे सोर्स वेबपेज को ऐक्सेस करने में उपयोगकर्ता को देरी हो या उसे ऐक्सेस करने में मुश्किल हो. इसमें कई क्लिक वाले पाथ या इंटरमीडिएट इमेज व्यूअर का इस्तेमाल करना शामिल है. हालांकि, इसमें इनके अलावा और भी चीज़ें शामिल हो सकती हैं.
 
-**Đáp**
+**जवाब**
 
-Đối với các câu trả lời có căn cứ sử dụng tính năng tìm kiếm hình ảnh, API cung cấp thông tin ghi nhận quyền tác giả và siêu dữ liệu rõ ràng để liên kết đầu ra của API với các nguồn đã xác minh. Các trường khoá trong đối tượng `groundingMetadata` bao gồm:
+इमेज सर्च का इस्तेमाल करके भरोसेमंद स्रोतों से मिली जानकारी के आधार पर जवाब देने के लिए, एपीआई साफ़ तौर पर एट्रिब्यूशन और मेटाडेटा उपलब्ध कराता है. इससे, इसके आउटपुट को पुष्टि किए गए स्रोतों से लिंक किया जा सकता है. `groundingMetadata` ऑब्जेक्ट में मौजूद मुख्य फ़ील्ड में ये शामिल हैं:
 
-- **`imageSearchQueries`**: Các cụm từ tìm kiếm cụ thể mà mô hình sử dụng cho ngữ cảnh trực quan (tìm kiếm hình ảnh).
-- **`groundingChunks`**: Chứa thông tin nguồn cho các kết quả đã truy xuất.
-  Đối với các nguồn hình ảnh, những nguồn này sẽ được trả về dưới dạng URL chuyển hướng bằng cách sử dụng một loại đoạn hình ảnh mới. Khối này bao gồm:
+- **`imageSearchQueries`**: मॉडल ने विज़ुअल कॉन्टेक्स्ट (इमेज खोज) के लिए जिन क्वेरी का इस्तेमाल किया है.
+- **`groundingChunks`**: इसमें खोज के नतीजों के सोर्स की जानकारी होती है.
+  इमेज सोर्स के लिए, इन्हें रीडायरेक्ट यूआरएल के तौर पर दिखाया जाएगा. इसके लिए, इमेज के नए चंक टाइप का इस्तेमाल किया जाएगा. इस चंक में ये शामिल हैं:
 
-  - **`uri`**: URL trang web để phân bổ (trang đích).
-  - **`image_uri`**: URL trực tiếp của hình ảnh.
-- **`groundingSupports`**: Cung cấp các mối liên kết cụ thể để liên kết nội dung được tạo với nguồn trích dẫn có liên quan trong các đoạn.
-- **`searchEntryPoint`**: Bao gồm chip "Google Tìm kiếm" có chứa HTML và CSS tuân thủ để hiển thị Đề xuất tìm kiếm.
+  - **`uri`**: एट्रिब्यूशन के लिए वेब पेज का यूआरएल (लैंडिंग पेज).
+  - **`image_uri`**: इमेज का डायरेक्ट यूआरएल.
+- **`groundingSupports`**: यह जनरेट किए गए कॉन्टेंट को उसके उद्धरण के सोर्स से लिंक करने वाले खास मैपिंग उपलब्ध कराता है.
+- **`searchEntryPoint`**: इसमें "Google Search" चिप शामिल होती है. इसमें Search के सुझाव दिखाने के लिए, ज़रूरी शर्तों के मुताबिक एचटीएमएल और सीएसएस शामिल होती है.
 
-### Tạo hình ảnh từ video (3.1 Flash)
+### वीडियो से इमेज जनरेट करने की सुविधा (3.1 Flash)
 
-Tính năng tạo hình ảnh từ video cho phép bạn tạo hình ảnh mới bằng cách sử dụng bối cảnh của video làm thông tin tham khảo đa phương thức. Điều này hữu ích khi tạo hình thu nhỏ chất lượng cao cho video, áp phích điện ảnh, bản đồ hoạ thông tin tóm tắt hoặc tác phẩm nghệ thuật mới lấy cảm hứng từ một cảnh trong video.
+वीडियो से इमेज जनरेट करने की सुविधा की मदद से, वीडियो के कॉन्टेक्स्ट का इस्तेमाल करके नई इमेज जनरेट की जा सकती हैं. इसके लिए, मल्टीमॉडल रेफ़रंस का इस्तेमाल किया जाता है. इस सुविधा का इस्तेमाल, अच्छी क्वालिटी वाले वीडियो थंबनेल, फ़िल्मी पोस्टर, खास जानकारी देने वाले इन्फ़ोग्राफ़िक या वीडियो सीन से प्रेरित नए आर्टवर्क बनाने के लिए किया जा सकता है.
 
-Trong quá trình tạo, mô hình sẽ phân tích các khung hình video trong ngữ cảnh (tối đa là 131.072 mã thông báo theo giới hạn mã thông báo đầu vào của mô hình) để trích xuất các chủ đề trực quan và sự kiện chính, sau đó sử dụng các chủ đề và sự kiện này cùng với câu lệnh bằng văn bản của bạn để tổng hợp hình ảnh đầu ra.
+इमेज जनरेट करते समय मॉडल, वीडियो फ़्रेम का विश्लेषण करता है. इसके लिए, वह मॉडल के इनपुट टोकन की सीमा (1,31,072 टोकन) तक के कॉन्टेक्स्ट का इस्तेमाल करता है. इससे उसे विज़ुअल थीम और मुख्य इवेंट निकालने में मदद मिलती है. इसके बाद, वह इन थीम और इवेंट का इस्तेमाल आपके टेक्स्ट प्रॉम्प्ट के साथ करता है, ताकि आउटपुट इमेज को सिंथेसाइज़ किया जा सके.
 
-Bạn có thể truyền trực tiếp [URL công khai trên YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi#youtube) trong yêu cầu API hoặc tải tệp video cục bộ lên bằng [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi).
+एपीआई अनुरोध में सीधे तौर पर सार्वजनिक [YouTube यूआरएल](https://ai.google.dev/gemini-api/docs/video-understanding?hl=hi#youtube) पास किए जा सकते हैं. इसके अलावा, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल करके, स्थानीय वीडियो फ़ाइलें अपलोड की जा सकती हैं.
 
 ### Python
 
@@ -1856,7 +1858,7 @@ async function main() {
 main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -2039,15 +2041,15 @@ curl -s -X POST \
   }'
 ```
 
-![Bản đồ hoạ thông tin do AI tạo từ một video trên YouTube](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=vi)
+![YouTube वीडियो से एआई की मदद से जनरेट किया गया इन्फ़ोग्राफ़िक](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=hi)
 
-Ảnh đồ hoạ do AI tạo từ một video trên YouTube
+YouTube वीडियो से जनरेट किया गया एआई इन्फ़ोग्राफ़िक
 
-### Tạo hình ảnh có độ phân giải lên đến 4K
+### 4K रिज़ॉल्यूशन तक की इमेज जनरेट करना
 
-Các mô hình hình ảnh Gemini 3 tạo ra 1.000 hình ảnh theo mặc định nhưng cũng có thể xuất ra hình ảnh 2K, 4K và 512 (0, 5K) (chỉ có Gemini 3.1 Flash Image). Để tạo thành phần có độ phân giải cao hơn, hãy chỉ định `image_size` trong `generation_config`.
+Gemini 3 के इमेज मॉडल, डिफ़ॉल्ट रूप से 1,000 इमेज जनरेट करते हैं. हालांकि, ये 2,000, 4,000, और 512 (0.5 हज़ार) इमेज भी जनरेट कर सकते हैं. Gemini 3.1 Flash Image सिर्फ़ 512 (0.5 हज़ार) इमेज जनरेट कर सकता है. ज़्यादा रिज़ॉल्यूशन वाली ऐसेट जनरेट करने के लिए, `generation_config` में `image_size` की वैल्यू डालें.
 
-Bạn phải sử dụng chữ "K" viết hoa (ví dụ: 1K, 2K, 4K). Giá trị `512` không sử dụng hậu tố "K". Các thông số viết thường (ví dụ: 1k) sẽ bị từ chối.
+आपको कैपिटल लेटर में 'K' का इस्तेमाल करना होगा. जैसे, 1K, 2K, 4K. `512` वैल्यू में 'K' सफ़िक्स का इस्तेमाल नहीं किया गया है. छोटे अक्षरों वाले पैरामीटर (जैसे, 1k) स्वीकार नहीं किए जाएंगे.
 
 ### Python
 
@@ -2122,7 +2124,7 @@ async function main() {
 main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -2286,19 +2288,19 @@ curl -s -X POST \
   }'
 ```
 
-Sau đây là một ví dụ về hình ảnh được tạo từ câu lệnh này:
+इस प्रॉम्प्ट से जनरेट की गई इमेज का उदाहरण यहां दिया गया है:
 
-![Bản phác thảo giải phẫu theo phong cách Da Vinci do AI tạo về một con bướm vua bị mổ xẻ.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=vi)
+![एआई से जनरेट किया गया, दा विंची की स्टाइल में मोनार्क तितली के शरीर के अंगों का ऐनाटॉमिकल स्केच.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=hi)
 
-Bản phác thảo giải phẫu theo phong cách Da Vinci do AI tạo về một con bướm vua bị mổ xẻ.
+एआई से जनरेट किया गया, दा विंची के स्टाइल में मोनार्क तितली के शरीर के अंगों का स्केच.
 
-### Quá trình tư duy
+### सोचने की प्रोसेस
 
-Mô hình hình ảnh Gemini 3 là mô hình tư duy sử dụng quy trình suy luận ("Tư duy") cho các câu lệnh phức tạp. Tính năng này được bật theo mặc định và không thể tắt trong API. Để tìm hiểu thêm về quy trình suy nghĩ, hãy xem hướng dẫn [Quy trình suy nghĩ của Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=vi).
+Gemini 3 के इमेज मॉडल, सूझ-बूझ वाले मॉडल होते हैं. ये मुश्किल प्रॉम्प्ट के लिए, गहराई से विश्लेषण प्रोसेस ("गहराई से विचार") का इस्तेमाल करते हैं. यह सुविधा डिफ़ॉल्ट रूप से चालू रहती है. इसे एपीआई में बंद नहीं किया जा सकता. सोचने की प्रोसेस के बारे में ज़्यादा जानने के लिए, [Gemini की सोचने की प्रोसेस](https://ai.google.dev/gemini-api/docs/thinking?hl=hi) गाइड देखें.
 
-Mô hình này tạo tối đa 2 hình ảnh tạm thời để kiểm thử bố cục và logic. Hình ảnh cuối cùng trong phần Suy nghĩ cũng là hình ảnh được kết xuất cuối cùng.
+यह मॉडल, कंपोज़िशन और लॉजिक की जांच करने के लिए, दो इंटरिम इमेज जनरेट करता है. 'सोच रहा है' सेक्शन में मौजूद आखिरी इमेज, रेंडर की गई फ़ाइनल इमेज भी होती है.
 
-Bạn có thể xem những suy nghĩ dẫn đến việc tạo ra hình ảnh cuối cùng.
+आपके पास यह देखने का विकल्प होता है कि किन विचारों के आधार पर फ़ाइनल इमेज जनरेट की गई है.
 
 ### Python
 
@@ -2364,11 +2366,11 @@ foreach (var candidate in response.Candidates) {
 }
 ```
 
-#### Kiểm soát các cấp độ tư duy
+#### सूझ-बूझ वाले मॉडल के लेवल को कंट्रोल करना
 
-Với Gemini 3.1 Flash Image, bạn có thể kiểm soát mức độ tư duy mà mô hình sử dụng để cân bằng chất lượng và độ trễ. `thinkingLevel` mặc định là `minimal` và các cấp độ được hỗ trợ là `minimal` và `high`. Việc đặt `thinkingLevel` thành `minimal` sẽ mang lại các phản hồi có độ trễ thấp nhất. Lưu ý rằng tư duy tối thiểu không có nghĩa là mô hình hoàn toàn không sử dụng tư duy.
+Gemini 3.1 Flash Image की मदद से, यह कंट्रोल किया जा सकता है कि मॉडल, क्वालिटी और लेटेन्सी को बैलेंस करने के लिए कितना समय लेता है. डिफ़ॉल्ट `thinkingLevel` `minimal` है. साथ ही, `minimal` और `high` लेवल इस्तेमाल किए जा सकते हैं. `thinkingLevel` को `minimal` पर सेट करने से, कम से कम इंतज़ार के समय में जवाब मिलते हैं. ध्यान दें कि कम सोच-विचार करने का मतलब यह नहीं है कि मॉडल बिलकुल भी सोच-विचार नहीं करता.
 
-Bạn có thể thêm giá trị boolean `includeThoughts` để xác định xem suy nghĩ được mô hình tạo có được trả về trong phản hồi hay vẫn bị ẩn.
+`includeThoughts` बूलियन वैल्यू को जोड़ा जा सकता है. इससे यह तय किया जा सकता है कि मॉडल के जनरेट किए गए विचार, जवाब में दिखाए जाएं या छिपे रहें.
 
 ### Python
 
@@ -2435,7 +2437,7 @@ async function main() {
 main();
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 package main
@@ -2607,19 +2609,19 @@ curl -s -X POST \
   }'
 ```
 
-Xin lưu ý rằng các mã thông báo tư duy sẽ được tính phí bất kể `includeThoughts` được đặt thành `true` hay `false`, vì [quy trình tư duy](#thinking-process) luôn diễn ra theo mặc định cho dù bạn có xem quy trình đó hay không.
+ध्यान दें कि थिंकिंग टोकन के लिए बिलिंग की जाती है. भले ही, `includeThoughts` को `true` या `false` पर सेट किया गया हो. ऐसा इसलिए, क्योंकि [जवाब ढूंढने की प्रोसेस](#thinking-process) हमेशा डिफ़ॉल्ट रूप से होती है. भले ही, आपने इस प्रोसेस को देखा हो या नहीं.
 
-#### Chữ ký suy nghĩ
+#### सोच से जुड़े हस्ताक्षर
 
-Chữ ký suy nghĩ là biểu diễn được mã hoá của quy trình suy nghĩ nội bộ của mô hình và được dùng để duy trì bối cảnh suy luận trong các lượt tương tác nhiều lượt. Tất cả các phản hồi đều có trường `thought_signature`. Theo nguyên tắc chung, nếu nhận được chữ ký suy nghĩ trong phản hồi của mô hình, bạn nên truyền lại chính xác chữ ký đó như khi nhận được khi gửi nhật ký cuộc trò chuyện trong lượt tiếp theo. Nếu không truyền tải được chữ ký ý tưởng, phản hồi có thể không thành công. Hãy xem tài liệu về [chữ ký tư duy](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi) để biết thêm thông tin giải thích về chữ ký nói chung.
+थॉट सिग्नेचर, मॉडल की इंटरनल थॉट प्रोसेस के एन्क्रिप्ट किए गए वर्शन होते हैं. इनका इस्तेमाल, एक से ज़्यादा बार किए गए इंटरैक्शन में तर्क के कॉन्टेक्स्ट को बनाए रखने के लिए किया जाता है. सभी जवाबों में `thought_signature` फ़ील्ड शामिल होता है. सामान्य तौर पर, अगर आपको मॉडल के जवाब में थॉट सिग्नेचर मिलता है, तो आपको उसे अगले टर्न में बातचीत का इतिहास भेजते समय, ठीक उसी तरह वापस भेजना चाहिए जिस तरह से वह मिला था. सोच के सिग्नेचर को शेयर न करने पर, जवाब जनरेट नहीं किया जा सकता. सिग्नेचर के बारे में ज़्यादा जानकारी के लिए, [थॉट सिग्नेचर](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=hi) का दस्तावेज़ देखें.
 
-Sau đây là cách hoạt động của chữ ký tư duy:
+सोच से हस्ताक्षर करने की सुविधा इस तरह काम करती है:
 
-- Tất cả các phần `inline_data` có hình ảnh `mimetype` nằm trong phản hồi đều phải có chữ ký.
-- Nếu có một số phần văn bản ở đầu (trước bất kỳ hình ảnh nào) ngay sau phần suy nghĩ, thì phần văn bản đầu tiên cũng phải có chữ ký.
-- Nếu `inline_data` các phần có hình ảnh `mimetype` là một phần của suy nghĩ, thì chúng sẽ không có chữ ký.
+- जवाब में शामिल इमेज `mimetype` के साथ सभी `inline_data` हिस्सों में हस्ताक्षर होना चाहिए.
+- अगर जवाब की शुरुआत में (किसी इमेज से पहले) कुछ टेक्स्ट है, तो पहले टेक्स्ट वाले हिस्से में भी हस्ताक्षर होना चाहिए.
+- अगर `inline_data` इमेज वाले हिस्से `mimetype`, विचारों का हिस्सा हैं, तो उन पर हस्ताक्षर नहीं होंगे.
 
-Đoạn mã sau đây cho thấy ví dụ về vị trí có chữ ký suy nghĩ:
+यहां दिए गए कोड में, थॉट सिग्नेचर शामिल करने का एक उदाहरण दिखाया गया है:
 
 ```
 [
@@ -2679,179 +2681,182 @@ Sau đây là cách hoạt động của chữ ký tư duy:
 ]
 ```
 
-## Các chế độ tạo hình ảnh khác
+## इमेज जनरेट करने के अन्य मोड
 
-Gemini hỗ trợ các chế độ tương tác khác với hình ảnh dựa trên cấu trúc câu lệnh và ngữ cảnh, bao gồm:
+Gemini, इमेज के साथ इंटरैक्ट करने के अन्य मोड के साथ काम करता है. ये मोड, प्रॉम्प्ट के स्ट्रक्चर और कॉन्टेक्स्ट पर आधारित होते हैं. इनमें ये मोड शामिल हैं:
 
-- **Văn bản thành hình ảnh và văn bản (xen kẽ):** Tạo ra hình ảnh kèm theo văn bản liên quan.
-  - Ví dụ về câu lệnh: "Tạo một công thức minh hoạ cho món paella."
-- **Hình ảnh và văn bản sang hình ảnh và văn bản (xen kẽ)**: Sử dụng hình ảnh và văn bản đầu vào để tạo hình ảnh và văn bản mới có liên quan.
-  - Ví dụ về câu lệnh: (Với hình ảnh một căn phòng có đồ nội thất) "Những màu sắc nào khác của ghế sofa sẽ phù hợp với không gian của tôi? Bạn có thể cập nhật hình ảnh không?"
+- **टेक्स्ट से इमेज और टेक्स्ट (इंटरलीव्ड):** इससे इमेज और उससे जुड़ा टेक्स्ट मिलता है.
+  - प्रॉम्प्ट का उदाहरण: "पाएला की रेसिपी को तस्वीरों के साथ दिखाओ."
+- **इमेज और टेक्स्ट से इमेज और टेक्स्ट (इंटरलीव्ड)**: यह सुविधा, इनपुट इमेज और टेक्स्ट का इस्तेमाल करके, उनसे मिलती-जुलती नई इमेज और टेक्स्ट बनाती है.
+  - प्रॉम्प्ट का उदाहरण: (फ़र्नीचर वाले कमरे की इमेज के साथ) "मेरे कमरे में और किस रंग के सोफ़े अच्छे लगेंगे? क्या तुम इमेज को अपडेट कर सकते हो?"
 
-## Tạo hàng loạt hình ảnh
+## एक साथ कई इमेज जनरेट करना
 
-Nếu cần tạo nhiều hình ảnh, bạn có thể sử dụng [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi). Bạn sẽ nhận được [hạn mức tốc độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi) cao hơn để đổi lấy thời gian xử lý lên đến 24 giờ.
+अगर आपको कई इमेज जनरेट करनी हैं, तो [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi) का इस्तेमाल करें. आपको 24 घंटे के अंदर जवाब मिलने की गारंटी के साथ, [रेट लिमिट](https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi) ज़्यादा मिलती हैं.
 
-Tham khảo [Tài liệu về tính năng tạo hình ảnh bằng Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi#image-generation) và [sách hướng dẫn](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=vi) để xem các ví dụ và mã về hình ảnh bằng Batch API.
+Batch API की मदद से इमेज जनरेट करने के उदाहरण और कोड के लिए, [Batch API की मदद से इमेज जनरेट करने से जुड़े दस्तावेज़](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi#image-generation) और [कुकबुक](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=hi) देखें.
 
-## Hướng dẫn và chiến lược đặt câu lệnh
+## प्रॉम्प्ट से जुड़ी गाइड और रणनीतियां
 
-Để tạo thành thạo hình ảnh, bạn cần nắm vững một nguyên tắc cơ bản:
+इमेज जनरेट करने की सुविधा का बेहतर तरीके से इस्तेमाल करने के लिए, आपको एक बुनियादी सिद्धांत के बारे में पता होना चाहिए:
 
-> **Mô tả cảnh, đừng chỉ liệt kê từ khoá.**
-> Điểm mạnh cốt lõi của mô hình này là khả năng hiểu ngôn ngữ một cách sâu sắc. Một đoạn văn mô tả, tường thuật sẽ hầu như luôn tạo ra hình ảnh tốt hơn và nhất quán hơn so với một danh sách các từ rời rạc.
+> **सिर्फ़ कीवर्ड की सूची न बनाएं, बल्कि सीन के बारे में जानकारी दें.**
+> मॉडल की मुख्य ताकत, भाषा को गहराई से समझने की क्षमता है. किसी कहानी या ब्यौरे वाले पैराग्राफ़ से, शब्दों की सूची की तुलना में हमेशा बेहतर और ज़्यादा सटीक इमेज जनरेट होती है.
 
-### Câu lệnh để tạo hình ảnh
+### इमेज जनरेट करने के लिए प्रॉम्प्ट
 
-Các chiến lược sau đây sẽ giúp bạn tạo câu lệnh hiệu quả để tạo ra chính xác những hình ảnh mà bạn đang tìm kiếm.
+यहां दी गई रणनीतियों की मदद से, ऐसे असरदार प्रॉम्प्ट बनाए जा सकते हैं जिनसे आपको मनमुताबिक इमेज मिलें.
 
-#### Nhiếp ảnh
+#### फ़ोटोग्राफ़ी
 
-Để có hình ảnh chân thực, hãy sử dụng các thuật ngữ nhiếp ảnh. Đề cập đến góc camera, loại ống kính, ánh sáng và các chi tiết nhỏ để hướng dẫn mô hình tạo ra kết quả chân thực.
+असली जैसी इमेज पाने के लिए, फ़ोटोग्राफ़ी से जुड़े शब्दों का इस्तेमाल करें. कैमरे के ऐंगल, लेंस के टाइप, रोशनी, और बारीकियों के बारे में बताएं, ताकि मॉडल को असली जैसी इमेज बनाने में मदद मिल सके.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| Ảnh chụp cận cảnh chân dung một nghệ nhân gốm Nhật Bản lớn tuổi với những nếp nhăn sâu do ánh nắng và nụ cười ấm áp, thấu hiểu. Ông đang kiểm tra kỹ lưỡng một chiếc bát trà mới tráng men. Khung cảnh là xưởng cơ khí mộc mạc, tràn ngập ánh nắng của ông. Khung cảnh được chiếu sáng bằng ánh sáng dịu nhẹ của giờ vàng, chiếu qua một cửa sổ, làm nổi bật kết cấu mịn của đất sét. Chụp bằng ống kính chân dung 85mm, tạo ra một phông nền mềm mại, mờ ảo (bokeh). Tâm trạng tổng thể là thanh bình và điêu luyện. Hướng dọc. | Nghệ nhân gốm sứ Nhật Bản lớn tuổi |
+| जापानी मूल के एक बुजुर्ग सेरेमिस्ट के क्लोज़-अप पोर्ट्रेट की फ़ोटो. उनके चेहरे पर गहरी झुर्रियां हैं और वे मुस्कुरा रहे हैं. वह हाल ही में ग्लेज किए गए टी-बाउल की सावधानी से जांच कर रहा है. इस फ़ोटो में, उन्हें धूप से भरे अपने वर्कशॉप में काम करते हुए दिखाया गया है. सीन में, खिड़की से आ रही हल्की, गोल्डन आवर की रोशनी से मिट्टी का बारीक टेक्सचर हाइलाइट हो रहा है. इस फ़ोटो को 85 मि॰मी॰ पोर्ट्रेट लेंस से कैप्चर किया गया है. इससे बैकग्राउंड हल्का और धुंधला (बोकेह) हो जाता है. कुल मिलाकर, माहौल शांत और शानदार होना चाहिए. वर्टिकल पोर्ट्रेट ओरिएंटेशन. | जापान की बुज़ुर्ग महिला सिरेमिक आर्टिस्ट |
 
-#### Hình minh hoạ và hình dán cách điệu
+#### स्टाइलिश इलस्ट्रेशन और स्टिकर
 
-Để tạo hình dán, biểu tượng hoặc thành phần, hãy nêu rõ kiểu và yêu cầu nền trắng.
+स्टिकर, आइकॉन या ऐसेट बनाने के लिए, स्टाइल के बारे में साफ़ तौर पर बताएं. साथ ही, सफ़ेद बैकग्राउंड का अनुरोध करें.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| Hình dán theo phong cách kawaii về một chú gấu trúc đỏ vui vẻ đang đội một chiếc mũ tre nhỏ. Nó đang nhai một chiếc lá tre xanh. Thiết kế này có đường viền rõ ràng, đậm nét, kỹ thuật đổ bóng đơn giản và bảng màu sống động. Nền phải có màu trắng. | Hình dán gấu trúc đỏ theo phong cách Kawaii |
+| खुश दिख रहे लाल पांडा का कावई स्टाइल वाला स्टिकर. इसने बांस की छोटी सी टोपी पहनी है. वह हरे रंग की बांस की पत्ती खा रहा है. इस डिज़ाइन में बोल्ड और साफ़ आउटलाइन, सामान्य सेल-शेडिंग, और वाइब्रेंट कलर पैलेट का इस्तेमाल किया गया है. बैकग्राउंड का रंग सफ़ेद होना चाहिए. | प्यारा रेड पांडा स्टिकर |
 
-#### Văn bản chính xác trong hình ảnh
+#### इमेज में मौजूद टेक्स्ट सटीक होना चाहिए
 
-Gemini có khả năng kết xuất văn bản vượt trội. Nêu rõ văn bản, kiểu phông chữ (mô tả) và thiết kế tổng thể. Sử dụng Gemini 3 Pro Image để sản xuất tài sản chuyên nghiệp.
+Gemini, टेक्स्ट को रेंडर करने में माहिर है. टेक्स्ट, फ़ॉन्ट स्टाइल (जानकारी के साथ), और पूरी डिज़ाइन के बारे में साफ़ तौर पर बताएं. प्रोफ़ेशनल ऐसेट बनाने के लिए, Gemini 3 Pro Image का इस्तेमाल करें.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| Tạo một biểu trưng tối giản, hiện đại cho quán cà phê có tên "The Daily Grind". Văn bản phải sử dụng phông chữ sans-serif rõ ràng và in đậm. Bảng phối màu là đen và trắng. Đặt biểu trưng vào một vòng tròn. Sử dụng hạt cà phê một cách khéo léo. | Biểu trưng của quán cà phê |
+| 'द डेली ग्राइंड' नाम की कॉफ़ी शॉप के लिए, आधुनिक और मिनिमलिस्ट लोगो बनाओ. टेक्स्ट, साफ़, बोल्ड, और बिना सेरिफ़ वाले फ़ॉन्ट में होना चाहिए. कलर स्कीम ब्लैक ऐंड व्हाइट है. लोगो को सर्कल में रखें. कॉफ़ी बीन का इस्तेमाल समझदारी से करें. | कॉफ़ी शॉप का लोगो |
 
-#### Bản mô phỏng sản phẩm và ảnh chụp thương mại
+#### प्रॉडक्ट के मॉकअप और कमर्शल फ़ोटोग्राफ़ी
 
-Phù hợp để tạo ảnh chụp sản phẩm chuyên nghiệp, rõ ràng cho thương mại điện tử, quảng cáo hoặc hoạt động xây dựng thương hiệu.
+यह ई-कॉमर्स, विज्ञापन या ब्रैंडिंग के लिए, साफ़-सुथरे और प्रोफ़ेशनल प्रॉडक्ट शॉट बनाने के लिए सबसे सही है.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| Ảnh chụp sản phẩm có độ phân giải cao, được chiếu sáng trong phòng chụp ảnh về một chiếc cốc cà phê bằng gốm tối giản màu đen mờ, được đặt trên bề mặt bê tông đánh bóng. Ánh sáng được thiết lập bằng hộp hắt sáng ba điểm, được thiết kế để tạo ra những điểm sáng dịu nhẹ, khuếch tán và loại bỏ bóng đổ gắt. Góc camera là góc chụp 45 độ hơi cao để làm nổi bật các đường nét gọn gàng của sản phẩm. Siêu chân thực, với tiêu điểm rõ nét vào hơi nước bốc lên từ cà phê. Ảnh hình vuông. | Ảnh chụp sản phẩm cốc cà phê gốm |
+| स्टूडियो में ली गई प्रॉडक्ट की हाई रिज़ॉल्यूशन फ़ोटो. इसमें मैट ब्लैक रंग का, सिरेमिक से बना एक छोटा कॉफ़ी मग दिखाया गया है. इसे पॉलिश की गई कंक्रीट की सतह पर रखा गया है. लाइटिंग के लिए, तीन पॉइंट वाला सॉफ़्टबॉक्स सेटअप इस्तेमाल किया गया है. इससे फ़ोटो में हल्की और फैली हुई हाइलाइट मिलती है. साथ ही, गहरे हिस्सों को हल्का किया जा सकता है. कैमरे का ऐंगल थोड़ा ऊपर की ओर 45 डिग्री पर है, ताकि इसकी साफ़ लाइनें दिखाई जा सकें. कॉफ़ी से निकलती भाप पर फ़ोकस किया गया है. स्क्वेयर इमेज. | सिरेमिक कॉफ़ी मग का प्रॉडक्ट शॉट |
 
-#### Thiết kế tối giản và không gian âm
+#### मिनिमलिस्ट और नेगेटिव स्पेस डिज़ाइन
 
-Rất phù hợp để tạo nền cho trang web, bản trình bày hoặc tài liệu tiếp thị có văn bản được đặt lên trên.
+यह वेबसाइटों, प्रज़ेंटेशन या मार्केटिंग के ऐसे मटीरियल के लिए बैकग्राउंड बनाने के लिए बेहतरीन है जहां टेक्स्ट को ओवरले किया जाएगा.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| Bức ảnh tối giản có một chiếc lá phong đỏ duy nhất, tinh tế nằm ở góc dưới bên phải khung hình. Nền là một canvas rộng lớn, trống trải và có màu trắng nhạt, tạo ra khoảng trống đáng kể cho văn bản. Ánh sáng dịu nhẹ, phân tán từ phía trên bên trái. Ảnh hình vuông. | Thiết kế tối giản với lá phong đỏ |
+| यह एक मिनीमलिस्ट कंपोज़िशन है. इसमें मेपल का एक पतला लाल पत्ता दिखाया गया है. इसे फ़्रेम के नीचे दाईं ओर रखा गया है. बैकग्राउंड में, ऑफ़-व्हाइट रंग का एक बड़ा और खाली कैनवस है. इससे टेक्स्ट के लिए काफ़ी नेगेटिव स्पेस मिलता है. ऊपर बाईं ओर से हल्की रोशनी आ रही है. स्क्वेयर इमेज. | मेपल के लाल पत्ते वाला सादा डिज़ाइन |
 
-#### Nghệ thuật tuần tự (Bảng phân cảnh / Truyện tranh)
+#### सीक्वेंशियल आर्ट (कॉमिक पैनल / स्टोरीबोर्ड)
 
-Dựa trên tính nhất quán của nhân vật và nội dung mô tả cảnh để tạo các bảng cho việc kể chuyện bằng hình ảnh. Để đảm bảo độ chính xác về văn bản và khả năng kể chuyện, những câu lệnh này hoạt động hiệu quả nhất với Gemini 3.1 Pro và Gemini 3.1 Flash Image.
+यह किरदार की कंसिस्टेंसी और सीन के ब्यौरे के आधार पर, विज़ुअल स्टोरीटेलिंग के लिए पैनल बनाता है. टेक्स्ट और कहानी कहने की क्षमता के मामले में, ये प्रॉम्प्ट Gemini 3.1 Pro और Gemini 3.1 Flash Image के साथ सबसे अच्छे तरीके से काम करते हैं.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Người đàn ông đeo kính trắng   Hình ảnh đầu vào   **Câu lệnh:** Tạo một truyện tranh gồm 3 khung theo phong cách nghệ thuật noir thô ráp, sử dụng mực đen trắng có độ tương phản cao. Đặt nhân vật vào một cảnh hài hước. | Bảng truyện tranh xã hội đen khắc nghiệt |
+| **इनपुट इमेज:**  सफ़ेद चश्मा पहने हुए व्यक्ति की इमेज   इनपुट इमेज   **प्रॉम्प्ट:** तीन पैनल वाली एक कॉमिक बनाओ. यह कॉमिक, नोइर आर्ट स्टाइल में होनी चाहिए. साथ ही, इसमें हाई-कंट्रास्ट वाले ब्लैक ऐंड व्हाइट इंक का इस्तेमाल किया गया हो. किरदार को मज़ेदार सीन में दिखाओ. | ग्रिटी नॉइर कॉमिक पैनल |
 
-#### Bám sát nguồn bằng Google Tìm kiếm
+#### Google Search से सटीक जानकारी पाने की सुविधा
 
-Sử dụng Google Tìm kiếm để tạo hình ảnh dựa trên thông tin gần đây hoặc thông tin theo thời gian thực.
-Điều này hữu ích cho tin tức, thông tin thời tiết và các chủ đề khác nhạy cảm về thời gian.
+Google Search का इस्तेमाल करके, हाल ही की या रीयल-टाइम जानकारी के आधार पर इमेज जनरेट करें.
+यह सुविधा, खबरों, मौसम की जानकारी, और समय के हिसाब से ज़रूरी अन्य विषयों के लिए फ़ायदेमंद है.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| Tạo một hình ảnh đơn giản nhưng phong cách về trận đấu tối qua của Arsenal tại giải Champions League | Đồ hoạ tỷ số bóng đá của Arsenal |
+| चैंपियन लीग में पिछली रात हुए Arsenal के गेम का एक आसान लेकिन स्टाइलिश ग्राफ़िक बनाओ | आर्सेनल के फ़ुटबॉल स्कोर का ग्राफ़िक |
 
-### Câu lệnh chỉnh sửa hình ảnh
+### इमेज में बदलाव करने के लिए प्रॉम्प्ट
 
-Những ví dụ này cho thấy cách cung cấp hình ảnh cùng với câu lệnh văn bản để chỉnh sửa, tạo thành phần và chuyển kiểu.
+इन उदाहरणों में, इमेज में बदलाव करने, कंपोज़िशन बनाने, और स्टाइल ट्रांसफ़र करने के लिए, टेक्स्ट प्रॉम्प्ट के साथ इमेज देने का तरीका दिखाया गया है.
 
-#### Thêm và xoá phần tử
+#### एलिमेंट जोड़ना और हटाना
 
-Cung cấp một hình ảnh và mô tả thay đổi bạn muốn. Mô hình sẽ khớp với phong cách, ánh sáng và góc nhìn của hình ảnh gốc.
+कोई इमेज दें और उसमें किए जाने वाले बदलाव के बारे में बताएं. मॉडल, ओरिजनल इमेज की स्टाइल, रोशनी, और पर्सपेक्टिव से मेल खाएगा.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Một bức ảnh chân thực về một chú mèo lông xù màu gừng...   Hình ảnh đầu vào   **Câu lệnh:** Dựa vào hình ảnh chú mèo của tôi mà bạn cung cấp, vui lòng thêm một chiếc mũ phù thuỷ nhỏ bằng len trên đầu chú mèo. Hãy chỉnh sửa sao cho đối tượng trông như đang ngồi thoải mái và phù hợp với ánh sáng dịu nhẹ của bức ảnh. | Mèo đội mũ phù thuỷ |
+| **इनपुट इमेज:**  फ़्लफ़ी अदरक बिल्ली की असल जैसी दिखने वाली तस्वीर...   इनपुट इमेज   **प्रॉम्प्ट:** मेरी बिल्ली की दी गई इमेज का इस्तेमाल करके, कृपया उसके सिर पर बुनी हुई एक छोटी विज़र्ड हैट जोड़ें. ऐसा दिखाएं कि वह आराम से बैठी हो और फ़ोटो की हल्की रोशनी से मेल खाती हो. | जादूगर वाली टोपी पहने हुए बिल्ली |
 
-#### Chỉnh sửa cụ thể (Tạo mặt nạ ngữ nghĩa)
+#### इनपेंटिंग (सिमैंटिक मास्किंग)
 
-Xác định "mặt nạ" bằng cách trò chuyện để chỉnh sửa một phần cụ thể của hình ảnh mà không ảnh hưởng đến phần còn lại.
+इमेज के किसी खास हिस्से में बदलाव करने के लिए, बातचीत के दौरान "मास्क" तय करें. इससे इमेज के बाकी हिस्सों में कोई बदलाव नहीं होगा.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Một cảnh quay rộng về một phòng khách hiện đại, đủ ánh sáng...   Hình ảnh đầu vào   **Câu lệnh:** Dựa vào hình ảnh phòng khách được cung cấp, hãy chỉ thay đổi chiếc ghế sofa màu xanh dương thành một chiếc ghế sofa Chesterfield bằng da màu nâu theo phong cách cổ điển. Giữ nguyên phần còn lại của căn phòng, bao gồm cả gối trên ghế sofa và ánh sáng. | Phòng khách có ghế sofa bằng da màu nâu |
+| **इनपुट इमेज:**  एक मॉडर्न और अच्छी रोशनी वाले लिविंग रूम का वाइड शॉट...   इनपुट इमेज   **प्रॉम्प्ट:** लिविंग रूम की दी गई इमेज का इस्तेमाल करके, सिर्फ़ नीले रंग के सोफ़े को विंटेज स्टाइल वाले, भूरे रंग के लेदर चेस्टरफ़ील्ड सोफ़े में बदलो. कमरे के बाकी हिस्से में कोई बदलाव न करें. जैसे, सोफ़े पर रखे तकिए और रोशनी की व्यवस्था. | ब्राउन लेदर सोफ़े वाला लिविंग रूम |
 
-#### Chuyển đổi kiểu
+#### स्टाइल ट्रांसफ़र
 
-Cung cấp một hình ảnh và yêu cầu mô hình tạo lại nội dung của hình ảnh đó theo một phong cách nghệ thuật khác.
+कोई इमेज दें और मॉडल से कहें कि वह उसके कॉन्टेंट को किसी दूसरी कलात्मक स्टाइल में फिर से बनाए.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Một bức ảnh chân thực, có độ phân giải cao về một con phố nhộn nhịp trong thành phố...   Hình ảnh đầu vào   **Câu lệnh:** Biến bức ảnh chụp một đường phố hiện đại trong thành phố vào ban đêm thành phong cách nghệ thuật của bức tranh "Đêm đầy sao" của Vincent van Gogh. Giữ nguyên bố cục ban đầu của các toà nhà và ô tô, nhưng kết xuất tất cả các phần tử bằng những nét vẽ xoáy tròn, đắp nổi và bảng màu ấn tượng gồm màu xanh dương đậm và màu vàng tươi. | Đường phố theo phong cách Đêm đầy sao |
+| **इनपुट इमेज:**  शहर की व्यस्त सड़क की, असल जैसी दिखने वाली हाई-रिज़ॉल्यूशन फ़ोटो...   इनपुट इमेज   **प्रॉम्प्ट:** रात के समय की आधुनिक शहर की सड़क की दी गई फ़ोटो को, विंसेंट वैन गॉग की 'तारों भरी रात' की कलात्मक स्टाइल में बदलो. इमारतों और कारों की ओरिजनल कंपोज़िशन को बनाए रखें. हालांकि, सभी एलिमेंट को घुमावदार, इंपैस्टो ब्रशलस्ट्रोक और गहरे नीले और चमकीले पीले रंग के ड्रामैटिक पैलेट के साथ रेंडर करें. | तारों भरी रात की शैली में शहर की सड़क |
 
-#### Bố cục nâng cao: Kết hợp nhiều hình ảnh
+#### एडवांस कंपोज़िशन: एक साथ कई इमेज जोड़ना
 
-Cung cấp nhiều hình ảnh làm bối cảnh để tạo một cảnh ghép mới. Đây là lựa chọn hoàn hảo cho bản mô phỏng sản phẩm hoặc ảnh ghép sáng tạo.
+एक नई कंपोज़िट इमेज बनाने के लिए, कॉन्टेक्स्ट के तौर पर कई इमेज उपलब्ध कराएं. यह प्रॉडक्ट के मॉकअप या क्रिएटिव कोलाज के लिए सबसे सही है.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Ảnh chụp chuyên nghiệp chiếc váy hoa mùa hè màu xanh dương...   Đầu vào 1: Váy   Ảnh toàn thân của một người phụ nữ búi tóc...   Đầu vào 2: Người mẫu   **Câu lệnh:** Tạo một bức ảnh thời trang chuyên nghiệp cho thương mại điện tử. Lấy chiếc váy hoa màu xanh dương trong hình ảnh đầu tiên và cho người phụ nữ trong hình ảnh thứ hai mặc chiếc váy đó. Tạo một bức ảnh toàn thân chân thực về người phụ nữ mặc chiếc váy, với ánh sáng và bóng đổ được điều chỉnh cho phù hợp với môi trường ngoài trời. | Ảnh chụp thương mại điện tử về thời trang |
+| **इनपुट इमेज:**  नीले रंग की फ़्लोरल समर ड्रेस की प्रोफ़ेशनल फ़ोटो...   इनपुट 1: ड्रेस   पूरी फ़ोटो में एक महिला को दिखाया गया है. उसने अपने बालों का बन बनाया है...   इनपुट 2: मॉडल   **प्रॉम्प्ट:** ई-कॉमर्स फ़ैशन की एक प्रोफ़ेशनल फ़ोटो बनाओ. पहली इमेज में दिख रही नीले रंग की फ़्लोरल ड्रेस को दूसरी इमेज में दिख रही महिला को पहनाओ. कपड़े पहने हुए महिला की बिलकुल असली दिखने वाली फ़ुल-बॉडी इमेज जनरेट करो. इसमें रोशनी और परछाई को इस तरह से अडजस्ट किया गया हो कि वह बाहर के माहौल से मेल खाए. | फ़ैशन ई-कॉमर्स शॉट |
 
-#### Giữ lại chi tiết có độ trung thực cao
+#### बारीकियों को हाई फ़िडेलिटी में बनाए रखना
 
-Để đảm bảo các chi tiết quan trọng (chẳng hạn như khuôn mặt hoặc biểu trưng) được giữ nguyên trong quá trình chỉnh sửa, hãy mô tả chi tiết các chi tiết đó cùng với yêu cầu chỉnh sửa của bạn.
+बदलाव करते समय, यह पक्का करें कि ज़रूरी जानकारी (जैसे कि चेहरा या लोगो) सुरक्षित रहे. इसके लिए, बदलाव करने के अनुरोध के साथ-साथ, इनके बारे में ज़्यादा जानकारी दें.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Ảnh chân dung chuyên nghiệp của một phụ nữ có mái tóc nâu và đôi mắt xanh dương...   Đầu vào 1: Phụ nữ   Một biểu trưng đơn giản, hiện đại với các chữ cái &quot;G&quot; và &quot;A&quot;...   Đầu vào 2: Biểu trưng   **Câu lệnh:** Lấy hình ảnh đầu tiên của người phụ nữ có mái tóc nâu, mắt xanh và biểu cảm trung tính. Thêm biểu trưng trong hình ảnh thứ hai vào áo thun đen của cô ấy. Đảm bảo khuôn mặt và các đặc điểm của người phụ nữ hoàn toàn không thay đổi. Biểu trưng phải trông như được in tự nhiên trên vải, theo các nếp gấp của áo. | Người phụ nữ mặc áo thun có biểu trưng |
+| **इनपुट इमेज:**  भूरे बालों और नीली आँखों वाली महिला का प्रोफ़ेशनल हेडशॉट...   इनपुट 1: महिला   &#39;G&#39; और &#39;A&#39; अक्षरों वाला एक सादा और आधुनिक लोगो...   इनपुट 2: लोगो   **प्रॉम्प्ट:** भूरे बालों, नीली आंखों, और सामान्य चेहरे के भाव वाली महिला की पहली इमेज जनरेट करो. दूसरी इमेज में मौजूद लोगो को उसकी काली टी-शर्ट पर जोड़ो. पक्का करें कि महिला के चेहरे और नैन-नक़्श में कोई बदलाव न हो. लोगो ऐसा दिखना चाहिए कि उसे शर्ट के फ़ैब्रिक पर नैचुरल तरीके से प्रिंट किया गया हो. साथ ही, वह शर्ट के फ़ोल्ड के हिसाब से भी दिखना चाहिए. | टी-शर्ट पर लोगो वाली महिला |
 
-#### Tạo cảm giác sống động cho một đối tượng
+#### किसी चीज़ को दिलचस्प बनाना
 
-Tải một bản phác thảo hoặc bản vẽ thô lên và yêu cầu mô hình tinh chỉnh thành một hình ảnh hoàn chỉnh.
+कोई रफ़ स्केच या ड्राइंग अपलोड करें और मॉडल से उसे बेहतर इमेज में बदलने के लिए कहें.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Bản phác thảo một chiếc ô tô   Bản phác thảo sơ bộ về một chiếc ô tô   **Câu lệnh:** Biến bản phác thảo bằng bút chì thô này về một chiếc xe hơi tương lai thành một bức ảnh bóng bẩy về chiếc xe ý tưởng đã hoàn thiện trong phòng trưng bày. Giữ nguyên các đường nét mượt mà và kiểu dáng thấp trong bản phác thảo, nhưng thêm sơn màu xanh dương ánh kim và ánh sáng viền neon. | Ảnh đã chỉnh sửa của chiếc xe ý tưởng |
+| **इनपुट इमेज:**  कार का स्केच   कार का रफ़ स्केच   **प्रॉम्प्ट:** आने वाले समय की कार के इस पेंसिल स्केच को, शोरूम में रखी गई कॉन्सेप्ट कार की शानदार फ़ोटो में बदलो. स्केच में मौजूद पतली लाइनों और लो प्रोफ़ाइल को बनाए रखें. हालांकि, इसमें मेटैलिक नीले रंग का पेंट और नियॉन रिम लाइटिंग जोड़ें. | कॉन्सेप्ट कार की शानदार फ़ोटो |
 
-#### Đảm bảo tính nhất quán của nhân vật: Chế độ xem 360 độ
+#### कैरेक्टर की स्टाइल एक जैसी रखना: 360 व्यू
 
-Bạn có thể tạo chế độ xem 360 độ của một nhân vật bằng cách liên tục đưa ra câu lệnh cho các góc khác nhau. Để có kết quả tốt nhất, hãy thêm những hình ảnh đã tạo trước đó vào các câu lệnh tiếp theo để duy trì tính nhất quán. Đối với những tư thế phức tạp, hãy thêm một hình ảnh tham khảo về tư thế mong muốn.
+अलग-अलग ऐंगल से प्रॉम्प्ट देकर, किसी किरदार के 360 डिग्री व्यू जनरेट किए जा सकते हैं. बेहतर नतीजे पाने के लिए, बाद के प्रॉम्प्ट में पहले जनरेट की गई इमेज शामिल करें, ताकि एक जैसी इमेज जनरेट की जा सकें. मुश्किल पोज़ के लिए, अपनी पसंद के पोज़ की रेफ़रंस इमेज शामिल करें.
 
-| **Câu lệnh** | **Nội dung tạo sinh** |
+| **प्रॉम्प्ट** | **जनरेट किया गया आउटपुट** |
 | --- | --- |
-| **Hình ảnh đầu vào:**  Đầu vào ban đầu của một người đàn ông đeo kính trắng   Hình ảnh gốc   **Câu lệnh:** Chân dung của người đàn ông này trong phòng chụp ảnh, trên nền trắng, nhìn nghiêng sang phải | Đầu ra của một người đàn ông đeo kính trắng đang nhìn sang phải   Người đàn ông đeo kính trắng nhìn sang phải   Ảnh chân dung một người đàn ông đeo kính trắng đang nhìn về phía trước   Người đàn ông đeo kính trắng nhìn về phía trước |
+| **इनपुट इमेज:**  सफ़ेद चश्मा पहने हुए व्यक्ति की ओरिजनल इमेज   ओरिजनल इमेज   **प्रॉम्प्ट:** इस आदमी का स्टूडियो पोर्ट्रेट, जिसमें वह सफ़ेद बैकग्राउंड के सामने खड़ा हो और उसकी प्रोफ़ाइल दाईं ओर दिख रही हो | सफ़ेद चश्मा पहने हुए व्यक्ति की दाईं ओर देखते हुए इमेज का आउटपुट   सफ़ेद चश्मा पहने हुए व्यक्ति की दाईं ओर देखते हुए फ़ोटो   सफ़ेद चश्मा पहने हुए व्यक्ति की आगे की ओर देखते हुए इमेज   सफ़ेद चश्मा पहने हुए व्यक्ति की सामने की ओर देखते हुए फ़ोटो |
 
-### Các phương pháp hay nhất
+### सबसे सही तरीके
 
-Để nâng kết quả từ tốt lên xuất sắc, hãy kết hợp những chiến lược chuyên nghiệp này vào quy trình làm việc của bạn.
+अपने नतीजों को बेहतर बनाने के लिए, इन पेशेवर रणनीतियों को अपने वर्कफ़्लो में शामिल करें.
 
-- **Càng cụ thể càng tốt:** Bạn càng cung cấp nhiều thông tin chi tiết, bạn càng có nhiều quyền kiểm soát. Thay vì "áo giáp giả tưởng", hãy mô tả nó: "áo giáp dạng tấm của người lùn được chạm khắc hoa văn lá bạc, có cổ áo cao và cầu vai có hình đôi cánh chim ưng".
-- **Cung cấp bối cảnh và ý định:** Giải thích *mục đích* của hình ảnh. Mức độ hiểu biết của mô hình về ngữ cảnh sẽ ảnh hưởng đến kết quả đầu ra cuối cùng. Ví dụ: "Tạo một biểu trưng cho một thương hiệu chăm sóc da tối giản, cao cấp" sẽ mang lại kết quả tốt hơn so với chỉ "Tạo một biểu trưng".
-- **Lặp lại và tinh chỉnh:** Đừng mong đợi một hình ảnh hoàn hảo ngay từ lần thử đầu tiên. Sử dụng tính chất đàm thoại của mô hình để thực hiện các thay đổi nhỏ. Tiếp tục đưa ra các câu lệnh như "Tuyệt vời, nhưng bạn có thể điều chỉnh ánh sáng ấm hơn một chút không?" hoặc "Giữ nguyên mọi thứ, nhưng thay đổi biểu cảm của nhân vật sao cho nghiêm túc hơn."
-- **Sử dụng hướng dẫn từng bước:** Đối với những cảnh phức tạp có nhiều phần tử, hãy chia câu lệnh thành các bước. "Trước tiên, hãy tạo một hình nền là khu rừng yên bình, mờ sương vào lúc bình minh. Sau đó, ở tiền cảnh, hãy thêm một bàn thờ bằng đá cổ được phủ đầy rêu.
-  Cuối cùng, hãy đặt một thanh kiếm phát sáng duy nhất lên trên bàn thờ."
-- **Sử dụng "Câu lệnh phủ định ngữ nghĩa":** Thay vì nói "không có ô tô", hãy mô tả cảnh mong muốn một cách tích cực: "một con đường vắng vẻ, không có dấu hiệu giao thông".
-- **Kiểm soát Camera:** Sử dụng ngôn ngữ nhiếp ảnh và điện ảnh để kiểm soát bố cục. Các thuật ngữ như `wide-angle shot`, `macro shot`, `low-angle
-  perspective`.
+- **ज़्यादा से ज़्यादा जानकारी दें:** जितनी ज़्यादा जानकारी दी जाएगी, आपको उतना ही ज़्यादा कंट्रोल मिलेगा. "फ़ैंटसी आर्मर" के बजाय, इसके बारे में जानकारी दें: "सिल्वर लीफ़ पैटर्न से बना, नक्काशी किया हुआ, और सजावटी एल्विन प्लेट आर्मर. इसमें फ़ैल्कन के पंखों के आकार के ऊँचे कॉलर और पॉल्ड्रॉन हैं."
+- **कॉन्टेक्स्ट और मकसद बताएं:** इमेज का *मकसद* बताएं. कॉन्टेक्स्ट को समझने की मॉडल की क्षमता, फ़ाइनल आउटपुट पर असर डालेगी. उदाहरण के लिए, "एक हाई-एंड, कम से कम डिज़ाइन वाले स्किनकेयर ब्रैंड के लिए लोगो बनाओ" प्रॉम्प्ट से, "एक लोगो बनाओ" प्रॉम्प्ट की तुलना में बेहतर नतीजे मिलेंगे.
+- **बदलाव करना और बेहतर बनाना:** पहली बार में ही बेहतरीन इमेज मिलने की उम्मीद न रखें. मॉडल की बातचीत वाली सुविधा का इस्तेमाल करके, छोटे-मोटे बदलाव करें. इसके बाद, "यह बहुत अच्छा है, लेकिन क्या रोशनी को थोड़ा और बेहतर किया जा सकता है?" या "सब कुछ वैसा ही रखो, लेकिन किरदार के चेहरे के भाव को थोड़ा और गंभीर बनाओ" जैसे प्रॉम्प्ट का इस्तेमाल करें.
+- **सिलसिलेवार निर्देशों का इस्तेमाल करें:** कई एलिमेंट वाले जटिल सीन के लिए, अपने प्रॉम्प्ट को चरणों में बांटें. "सबसे पहले, सुबह के समय शांत और धुंधले जंगल का बैकग्राउंड बनाओ. इसके बाद, फ़ोरग्राउंड में काई से ढका हुआ पत्थर का एक पुराना वेदी जोड़ो.
+  आखिर में, वेदी के ऊपर एक चमकती हुई तलवार रख दो."
+- **"सिमैंटिक नेगेटिव प्रॉम्प्ट" का इस्तेमाल करें:** "कोई कार नहीं" कहने के बजाय, अपनी पसंद के सीन के बारे में सकारात्मक तरीके से बताएं: "एक खाली, सुनसान सड़क जिस पर ट्रैफ़िक का कोई निशान नहीं है."
+- **कैमरे को कंट्रोल करना:** कंपोज़िशन को कंट्रोल करने के लिए, फ़ोटोग्राफ़ी और सिनमैटिक भाषा का इस्तेमाल करें. `wide-angle shot`, `macro shot`, `low-angle
+  perspective` जैसे शब्द.
 
-## Các điểm hạn chế
+## सीमाएं
 
-- Để có hiệu suất tốt nhất, hãy sử dụng các ngôn ngữ sau: tiếng Anh, tiếng Ả Rập (Ai Cập), tiếng Đức (Đức), tiếng Tây Ban Nha (Mexico), tiếng Pháp (Pháp), tiếng Hindi (Ấn Độ), tiếng Indonesia (Indonesia), tiếng Ý (Ý), tiếng Nhật (Nhật Bản), tiếng Hàn (Hàn Quốc), tiếng Bồ Đào Nha (Brazil), tiếng Nga (Nga), tiếng Ukraina (Ukraina), tiếng Việt (Việt Nam), tiếng Trung (Trung Quốc).
-- Tính năng tạo hình ảnh không hỗ trợ dữ liệu đầu vào bằng âm thanh. Chỉ Gemini 3.1 Flash Image mới hỗ trợ dữ liệu đầu vào là video.
-- Không phải lúc nào mô hình cũng tạo ra chính xác số lượng hình ảnh mà người dùng yêu cầu một cách rõ ràng.
-- `gemini-2.5-flash-image` hoạt động hiệu quả nhất khi có tối đa 3 hình ảnh làm dữ liệu đầu vào, trong khi `gemini-3-pro-image` hỗ trợ 5 hình ảnh có độ trung thực cao và tổng cộng tối đa 14 hình ảnh. `gemini-3.1-flash-image` hỗ trợ độ tương đồng ký tự lên đến 4 ký tự và độ trung thực lên đến 10 đối tượng trong một quy trình duy nhất.
-- Khi tạo văn bản cho một hình ảnh, Gemini hoạt động hiệu quả nhất nếu bạn tạo văn bản trước rồi yêu cầu tạo hình ảnh có văn bản đó.
-- `gemini-3.1-flash-image` Tính năng Bám sát nguồn bằng Google Tìm kiếm hiện không hỗ trợ việc sử dụng hình ảnh thực tế về con người từ tìm kiếm trên web.
-- Tất cả hình ảnh được tạo đều có [hình mờ SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=vi).
+- बेहतरीन परफ़ॉर्मेंस के लिए, इन भाषाओं का इस्तेमाल करें: EN, ar-EG, de-DE, es-MX,
+  fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
+- इमेज जनरेट करने की सुविधा, ऑडियो इनपुट के साथ काम नहीं करती. वीडियो इनपुट सिर्फ़ Gemini 3.1 Flash Image के लिए इस्तेमाल किए जा सकते हैं.
+- मॉडल, हमेशा उतनी ही इमेज जनरेट नहीं करेगा जितनी उपयोगकर्ता ने मांगी हैं.
+- `gemini-2.5-flash-image` के लिए, इनपुट के तौर पर ज़्यादा से ज़्यादा तीन इमेज इस्तेमाल की जा सकती हैं. वहीं, `gemini-3-pro-image` के लिए, अच्छी क्वालिटी वाली पांच इमेज और कुल 14 इमेज इस्तेमाल की जा सकती हैं. `gemini-3.1-flash-image` एक ही वर्कफ़्लो में, ज़्यादा से ज़्यादा चार वर्णों के मिलते-जुलते होने और ज़्यादा से ज़्यादा 10 ऑब्जेक्ट के सटीक होने की सुविधा देता है.
+- किसी इमेज के लिए टेक्स्ट जनरेट करते समय, Gemini सबसे अच्छा काम तब करता है, जब पहले टेक्स्ट जनरेट किया जाए और फिर टेक्स्ट के साथ इमेज जनरेट करने के लिए कहा जाए.
+- `gemini-3.1-flash-image` फ़िलहाल, Google Search की मदद से भरोसेमंद स्रोतों से जानकारी लेने की सुविधा, वेब खोज से लोगों की असल दुनिया की इमेज का इस्तेमाल करने की सुविधा के साथ काम नहीं करती.
+- जनरेट की गई सभी इमेज में [SynthID वॉटरमार्क](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=hi) शामिल होता है.
 
-## Cấu hình không bắt buộc
+## वैकल्पिक कॉन्फ़िगरेशन
 
-Bạn có thể tuỳ ý định cấu hình các phương thức phản hồi và tỷ lệ khung hình của đầu ra của mô hình trong trường `config` của các lệnh gọi `generate_content`.
+आपके पास `generate_content` कॉल के `config` फ़ील्ड में, मॉडल के आउटपुट के जवाब देने के तरीके और आसपेक्ट रेशियो को कॉन्फ़िगर करने का विकल्प होता है.
 
-### Loại kết quả
+### आउटपुट प्रकार
 
-Theo mặc định, mô hình sẽ trả về các phản hồi bằng văn bản và hình ảnh (tức là `response_modalities=['Text', 'Image']`). Bạn có thể định cấu hình phản hồi để chỉ trả về hình ảnh mà không có văn bản bằng cách sử dụng `response_modalities=['Image']`.
+मॉडल डिफ़ॉल्ट रूप से, टेक्स्ट और इमेज वाले जवाब देता है
+(जैसे, `response_modalities=['Text', 'Image']`).
+`response_modalities=['Image']` का इस्तेमाल करके, जवाब को सिर्फ़ इमेज दिखाने के लिए कॉन्फ़िगर किया जा सकता है.
 
 ### Python
 
@@ -2877,7 +2882,7 @@ const response = await ai.models.generateContent({
   });
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 result, _ := client.Models.GenerateContent(
@@ -2934,10 +2939,10 @@ curl -s -X POST \
   }'
 ```
 
-### Tỷ lệ khung hình và kích thước hình ảnh
+### आस्पेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) और इमेज का साइज़
 
-Theo mặc định, mô hình sẽ điều chỉnh kích thước hình ảnh đầu ra cho phù hợp với kích thước hình ảnh đầu vào của bạn, hoặc tạo ra các hình vuông 1:1.
-Bạn có thể kiểm soát tỷ lệ khung hình của hình ảnh đầu ra bằng cách sử dụng trường `aspect_ratio` trong `response_format` trong yêu cầu phản hồi, như minh hoạ ở đây:
+मॉडल, डिफ़ॉल्ट रूप से आउटपुट इमेज के साइज़ को आपकी इनपुट इमेज के साइज़ से मैच करता है. इसके अलावा, यह 1:1 स्क्वेयर जनरेट करता है.
+जवाब के अनुरोध में, `response_format` फ़ील्ड में मौजूद `aspect_ratio` फ़ील्ड का इस्तेमाल करके, आउटपुट इमेज के आसपेक्ट रेशियो (लंबाई-चौड़ाई का अनुपात) को कंट्रोल किया जा सकता है. इसे यहां दिखाया गया है:
 
 ### Python
 
@@ -2992,7 +2997,7 @@ const response_gemini3 = await ai.models.generateContent({
   });
 ```
 
-### Go
+### ऐप पर जाएं
 
 ```
 // For gemini-2.5-flash-image
@@ -3124,11 +3129,11 @@ curl -s -X POST \
   }'
 ```
 
-Các tỷ lệ hiện có và kích thước của hình ảnh được tạo được liệt kê trong các bảng sau:
+उपलब्ध अलग-अलग रेशियो और जनरेट की गई इमेज के साइज़ की जानकारी, यहां दी गई टेबल में दी गई है:
 
-### 3.1 Hình ảnh Flash
+### 3.1 Flash Image
 
-| Tỷ lệ khung hình | Độ phân giải 512 | 500 token | Độ phân giải 1K | 1.000 token | Độ phân giải 2K | 2.000 token | Độ phân giải 4K | 4.000 token |
+| आसपेक्ट रेशियो | 512 रिज़ॉल्यूशन | 500 टोकन | 1K रिज़ॉल्यूशन | 1,000 टोकन | 2K रिज़ॉल्यूशन | 2,000 टोकन | 4K रिज़ॉल्यूशन | 4 हज़ार टोकन |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2048x2048 | 1680 | 4096x4096 | 2520 |
 | **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
@@ -3147,7 +3152,7 @@ Các tỷ lệ hiện có và kích thước của hình ảnh được tạo đ
 
 ### 3.1 Pro Image
 
-| Tỷ lệ khung hình | Độ phân giải 1K | 1.000 token | Độ phân giải 2K | 2.000 token | Độ phân giải 4K | 4.000 token |
+| आसपेक्ट रेशियो | 1K रिज़ॉल्यूशन | 1,000 टोकन | 2K रिज़ॉल्यूशन | 2,000 टोकन | 4K रिज़ॉल्यूशन | 4 हज़ार टोकन |
 | --- | --- | --- | --- | --- | --- | --- |
 | **1:1** | 1024x1024 | 1120 | 2048x2048 | 1120 | 4096x4096 | 2000 |
 | **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
@@ -3160,9 +3165,9 @@ Các tỷ lệ hiện có và kích thước của hình ảnh được tạo đ
 | **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
 | **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
 
-### Hình ảnh Gemini 2.5 Flash
+### Gemini 2.5 Flash की इमेज
 
-| Tỷ lệ khung hình | Độ phân giải | Mã thông báo |
+| आसपेक्ट रेशियो | रिज़ॉल्यूशन | टोकन |
 | --- | --- | --- |
 | 1:1 | 1024x1024 | 1290 |
 | 2:3 | 832x1248 | 1290 |
@@ -3175,30 +3180,31 @@ Các tỷ lệ hiện có và kích thước của hình ảnh được tạo đ
 | 16:9 | 1344x768 | 1290 |
 | 21:9 | 1536x672 | 1290 |
 
-## Lựa chọn mô hình
+## मॉडल चुनना
 
-Chọn mô hình phù hợp nhất với trường hợp sử dụng cụ thể của bạn.
+इस्तेमाल के अपने उदाहरण के लिए, सबसे सही मॉडल चुनें.
 
-- **Hình ảnh Gemini 3.1 Flash (Nano Banana 2)** nên là mô hình tạo hình ảnh mà bạn ưu tiên sử dụng, vì đây là mô hình có hiệu suất và trí thông minh toàn diện tốt nhất để cân bằng chi phí và độ trễ. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.1-flash-image) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=vi) của mô hình để biết thêm thông tin chi tiết.
-- **Hình ảnh do Gemini 3 Pro tạo (Nano Banana Pro)** được thiết kế để tạo tài sản chuyên nghiệp và xử lý các chỉ dẫn phức tạp. Mô hình này có tính năng liên kết với thế giới thực bằng Google Tìm kiếm, quy trình "Suy nghĩ" mặc định giúp tinh chỉnh thành phần trước khi tạo và có thể tạo hình ảnh có độ phân giải lên đến 4K. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3-pro-image) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=vi) của mô hình để biết thêm thông tin chi tiết.
-- **Hình ảnh Gemini 2.5 Flash (Nano Banana)** được thiết kế để mang lại tốc độ và hiệu quả. Mô hình này được tối ưu hoá cho các tác vụ có khối lượng lớn, độ trễ thấp và tạo hình ảnh ở độ phân giải 1024px. Hãy xem trang [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-2.5-flash-image) và [khả năng](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=vi) của mô hình để biết thêm thông tin chi tiết.
+- **Gemini 3.1 Flash Image (Nano Banana 2)** को इमेज जनरेट करने के लिए इस्तेमाल करें. यह सबसे अच्छा मॉडल है. यह कीमत और लेटेंसी के बीच संतुलन बनाए रखता है. ज़्यादा जानकारी के लिए, मॉडल की [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#gemini-3.1-flash-image) और [क्षमताएं](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=hi) वाला पेज देखें.
+- **Gemini 3 Pro Image (Nano Banana Pro)** को प्रोफ़ेशनल ऐसेट प्रोडक्शन और मुश्किल निर्देशों के लिए डिज़ाइन किया गया है. इस मॉडल में ये सुविधाएं हैं:
+  Google Search का इस्तेमाल करके, असल दुनिया से जुड़ी जानकारी देना. इसमें "सोचना" प्रोसेस डिफ़ॉल्ट रूप से शामिल होती है. यह प्रोसेस, जवाब जनरेट करने से पहले कंपोज़िशन को बेहतर बनाती है. साथ ही, यह 4K रिज़ॉल्यूशन तक की इमेज जनरेट कर सकता है. ज़्यादा जानकारी के लिए, मॉडल की [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#gemini-3-pro-image) और [क्षमताएं](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=hi) वाला पेज देखें.
+- **Gemini 2.5 Flash Image (Nano Banana)** को तेज़ी से और असरदार तरीके से काम करने के लिए डिज़ाइन किया गया है. इस मॉडल को, कम समय में ज़्यादा काम करने के लिए ऑप्टिमाइज़ किया गया है. यह 1024 पिक्सल के रिज़ॉल्यूशन में इमेज जनरेट करता है. ज़्यादा जानकारी के लिए, मॉडल की [कीमत](https://ai.google.dev/gemini-api/docs/pricing?hl=hi#gemini-2.5-flash-image) और [क्षमताएं](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=hi) पेज देखें.
 
-### Trường hợp sử dụng Imagen
+### Imagen का इस्तेमाल कब करें
 
-Ngoài việc sử dụng các tính năng tạo hình ảnh tích hợp của Gemini, bạn cũng có thể truy cập vào [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi), mô hình tạo hình ảnh chuyên biệt của chúng tôi, thông qua Gemini API. Lên kế hoạch di chuyển trước ngày ngừng hoạt động.
+Gemini में इमेज जनरेट करने की सुविधा के साथ-साथ, Gemini API के ज़रिए [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=hi) को भी ऐक्सेस किया जा सकता है. यह इमेज जनरेट करने वाला हमारा खास मॉडल है. बंद होने की तारीख से पहले माइग्रेट करने का प्लान बनाएं.
 
-## Bước tiếp theo
+## आगे क्या करना है
 
-- Bạn có thể tìm thêm ví dụ và mã mẫu trong [hướng dẫn sổ tay nấu ăn](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=vi).
-- Hãy xem [hướng dẫn về Veo](https://ai.google.dev/gemini-api/docs/video?hl=vi) để tìm hiểu cách tạo video bằng Gemini API.
-- Để tìm hiểu thêm về các mô hình Gemini, hãy xem phần [Các mô hình Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi).
+- ज़्यादा उदाहरण और कोड सैंपल देखने के लिए, [कुकबुक गाइड](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=hi) देखें.
+- Gemini API की मदद से वीडियो जनरेट करने का तरीका जानने के लिए, [Veo गाइड](https://ai.google.dev/gemini-api/docs/video?hl=hi) देखें.
+- Gemini के मॉडल के बारे में ज़्यादा जानने के लिए, [Gemini के मॉडल](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi) लेख पढ़ें.
 
-Gửi ý kiến phản hồi
+सुझाव भेजें
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Cập nhật lần gần đây nhất: 2026-06-19 UTC.
+आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-19 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया."],[],[]]

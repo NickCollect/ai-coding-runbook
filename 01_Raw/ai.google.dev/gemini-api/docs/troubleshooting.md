@@ -1,150 +1,151 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/troubleshooting?hl=he
-fetched_at: 2026-06-22T06:33:15.533804+00:00
-title: "\u05de\u05d3\u05e8\u05d9\u05da \u05dc\u05e4\u05ea\u05e8\u05d5\u05df \u05d1\u05e2\u05d9\u05d5\u05ea \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/troubleshooting?hl=tr
+fetched_at: 2026-06-29T05:28:34.040303+00:00
+title: "Sorun giderme k\u0131lavuzu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-שליחת משוב
+Geri bildirim gönderin
 
-# מדריך לפתרון בעיות
+# Sorun giderme kılavuzu
 
-המדריך הזה יעזור לכם לאבחן ולפתור בעיות נפוצות שמתעוררות כשקוראים ל-Gemini API. יכול להיות שתיתקלו בבעיות בשירות הקצה העורפי של Gemini API או בערכות ה-SDK של הלקוח. ערכות ה-SDK ללקוחות שלנו מבוססות על קוד פתוח במאגרים הבאים:
+Gemini API'yi çağırırken ortaya çıkan yaygın sorunları teşhis edip çözmenize yardımcı olması için bu kılavuzu kullanın. Gemini API arka uç hizmeti veya istemci SDK'ları ile ilgili sorunlarla karşılaşabilirsiniz. İstemci SDK'larımız aşağıdaki depolarda açık kaynaklıdır:
 
 - [python-genai](https://github.com/googleapis/python-genai)
 - [js-genai](https://github.com/googleapis/js-genai)
 - [go-genai](https://github.com/googleapis/go-genai)
 
-אם נתקלתם בבעיות במפתח API, ודאו שהגדרתם אותו בצורה נכונה לפי [מדריך ההגדרה של מפתח API](https://ai.google.dev/gemini-api/docs/api-key?hl=he).
+API anahtarıyla ilgili sorunlarla karşılaşırsanız [API anahtarı kurulum kılavuzuna](https://ai.google.dev/gemini-api/docs/api-key?hl=tr) göre API anahtarınızı doğru şekilde ayarladığınızı doğrulayın.
 
-## קודי שגיאה של שירות הקצה העורפי של Gemini API
+## Gemini API arka uç hizmeti hata kodları
 
-בטבלה הבאה מפורטים קודי שגיאה נפוצים של ה-Backend שאולי תיתקלו בהם, יחד עם הסברים לגבי הסיבות להם ושלבים לפתרון בעיות:
+Aşağıdaki tabloda, karşılaşabileceğiniz yaygın arka uç hata kodları, nedenlerinin açıklamaları ve sorun giderme adımları listelenmiştir:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **קוד HTTP** | **סטטוס** | **תיאור** | **דוגמה** | **המוצר** |
-| 400 | INVALID\_ARGUMENT | גוף הבקשה לא תקין. | יש שגיאת הקלדה או שדה חובה חסר בבקשה. | כדאי לעיין ב[הפניית ה-API](https://ai.google.dev/api?hl=he) כדי לראות את פורמט הבקשה, דוגמאות וגרסאות נתמכות. שימוש בתכונות מגרסת API חדשה יותר עם נקודת קצה ישנה יותר עלול לגרום לשגיאות. |
-| 400 | FAILED\_PRECONDITION | התוכנית בחינם של Gemini API לא זמינה במדינה שלך. צריך להפעיל את החיוב בפרויקט ב-Google AI Studio. | אתם שולחים בקשה באזור שבו לא נתמך מסלול חינמי, ולא הפעלתם חיוב בפרויקט שלכם ב-Google AI Studio. | כדי להשתמש ב-Gemini API, תצטרכו להגדיר תוכנית בתשלום באמצעות [Google AI Studio](https://aistudio.google.com/apikey?hl=he). |
-| 403 | PERMISSION\_DENIED | למפתח ה-API שלכם אין את ההרשאות הנדרשות. | אתם משתמשים במפתח API שגוי. אתם מנסים להשתמש במודל שעבר התאמה בלי לעבור [אימות תקין](https://ai.google.dev/gemini-api/docs/model-tuning?hl=he). | צריך לוודא שמפתח ה-API מוגדר ושיש לו את הגישה הנכונה, וגם לוודא שאתם עוברים אימות תקין כדי להשתמש במודלים מכווננים. |
-| 404 | NOT\_FOUND | המשאב המבוקש לא נמצא. | לא נמצא קובץ תמונה, אודיו או וידאו שההפניה אליו מופיעה בבקשה. | צריך לבדוק אם כל [הפרמטרים בבקשה תקפים](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=he#check-api) לגרסת ה-API שלכם. |
-| 429 | RESOURCE\_EXHAUSTED | חרגת ממגבלת הקצב. | אתם שולחים יותר מדי בקשות לדקה באמצעות Gemini API בתוכנית בחינם. | מוודאים שלא חרגתם מ[מגבלת הקצב](https://ai.google.dev/gemini-api/docs/rate-limits?hl=he) של המודל. אם צריך, [מבקשים להגדיל את המכסה](https://ai.google.dev/gemini-api/docs/rate-limits?hl=he#request-rate-limit-increase). |
-| 499 | בוטלה | הפעולה בוטלה, בדרך כלל על ידי המתקשר. | הלקוח סגר את החיבור לפני שה-API סיים להגיב. | בודקים אם הלקוח או תשתית הרשת סוגרים את החיבור לפני הזמן (למשל, בגלל זמן קצוב לתפוגה בצד הלקוח). |
-| 500 | פנימי | קרתה שגיאה לא צפויה בצד של Google. | הקשר של הקלט ארוך מדי. | כדאי לבדוק את [דף הסטטוס של Gemini API](https://aistudio.google.com/status?hl=he) כדי לראות אם יש תקריות שמתרחשות כרגע. כדאי לצמצם את הקשר של הקלט או לעבור באופן זמני למודל אחר (למשל מ-Gemini 2.5 Pro ל-Gemini 2.5 Flash) ולבדוק אם זה עוזר. אפשר גם להמתין קצת ולנסות שוב לשלוח את הבקשה. אם הבעיה נמשכת אחרי שמנסים שוב, אפשר לדווח עליה באמצעות הכפתור **שליחת משוב** ב-Google AI Studio. |
-| 503 | UNAVAILABLE | יכול להיות שהשירות עמוס מדי או מושבת באופן זמני. | השירות לא זמין כרגע בגלל עומס. | כדאי לבדוק את [דף הסטטוס של Gemini API](https://aistudio.google.com/status?hl=he) כדי לראות אם יש תקריות שמתרחשות כרגע. עוברים באופן זמני למודל אחר (למשל מ-Gemini 2.5 Pro ל-Gemini 2.5 Flash) ובודקים אם זה עובד. אפשר גם להמתין קצת ולנסות שוב לשלוח את הבקשה. אם הבעיה נמשכת אחרי שמנסים שוב, אפשר לדווח עליה באמצעות הכפתור **שליחת משוב** ב-Google AI Studio. |
-| 504 | DEADLINE\_EXCEEDED | השירות לא יכול לסיים את העיבוד עד למועד האחרון. | ההנחיה (או ההקשר) גדולה מדי לעיבוד בזמן. | כדי להימנע מהשגיאה הזו, צריך להגדיר ערך גבוה יותר של 'זמן קצוב לתפוגה' בבקשת הלקוח. |
+| **HTTP Kodu** | **Durum** | **Açıklama** | **Örnek** | **Çözüm** |
+| 400 | INVALID\_ARGUMENT | İstek metni yanlış biçimlendirilmiş. | İsteğinizde yazım hatası var veya zorunlu bir alan eksik. | İstek biçimi, örnekler ve desteklenen sürümler için [API referansına](https://ai.google.dev/api?hl=tr) bakın. Daha yeni bir API sürümündeki özellikleri daha eski bir uç nokta ile kullanmak hatalara neden olabilir. |
+| 400 | FAILED\_PRECONDITION | Gemini API ücretsiz katmanı ülkenizde kullanılamıyor. Lütfen Google AI Studio'da projenizde faturalandırmayı etkinleştirin. | Ücretsiz katmanın desteklenmediği bir bölgede istekte bulunuyorsunuz ve Google AI Studio'da projenizde faturalandırmayı etkinleştirmediniz. | Gemini API'yi kullanmak için [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'yu kullanarak ücretli bir plan oluşturmanız gerekir. |
+| 403 | PERMISSION\_DENIED | API anahtarınız gerekli izinlere sahip değil. | Yanlış API anahtarını kullanıyorsunuz veya [uygun kimlik doğrulama](https://ai.google.dev/gemini-api/docs/model-tuning?hl=tr) işleminden geçmeden ayarlanmış bir modeli kullanmaya çalışıyorsunuz. | API anahtarınızın ayarlandığından ve doğru erişime sahip olduğundan emin olun. Ayrıca, ince ayarlı modelleri kullanmak için uygun kimlik doğrulama sürecinden geçtiğinizden emin olun. |
+| 404 | NOT\_FOUND | İstenen kaynak bulunamadı. | İsteğinizde referans verilen bir resim, ses veya video dosyası bulunamadı. | İsteğinizdeki tüm [parametrelerin API sürümünüz için geçerli olup olmadığını](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=tr#check-api) kontrol edin. |
+| 429 | RESOURCE\_EXHAUSTED | API'nin hız sınırlarından birini (RPM, TPM, RPD, harcama vb.) aştınız. | Çok fazla istek gönderiyor, çok fazla jeton kullanıyor veya hesabınızın fatura geçmişi ve katmanı için harcamaya dayalı sınırları aşıyor olabilirsiniz. | Modelin [hız sınırları](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr) dahilinde olduğunuzu doğrulayın. Bekleyin ve kısa bir süre sonra tekrar deneyin. İsteklerinizin sıklığını veya boyutunu azaltın. Gerekirse [hız sınırı artışı isteyin](https://ai.google.dev/gemini-api/docs/rate-limits?hl=tr#request-rate-limit-increase). |
+| 499 | İPTAL EDİLDİ | İşlem, genellikle arayan tarafından iptal edildi. | İstemci, API yanıt vermeyi tamamlamadan önce bağlantıyı kapattı. | İstemcinizin veya ağ altyapınızın bağlantıyı erken kapatıp kapatmadığını kontrol edin (ör. istemci tarafında zaman aşımı nedeniyle). |
+| 500 | ŞİRKET İÇİ | Google'dan kaynaklanan beklenmeyen bir hata oluştu. | Giriş bağlamınız çok uzun. | Devam eden olaylar için [Gemini API durum sayfasını](https://aistudio.google.com/status?hl=tr) kontrol edin. Giriş bağlamınızı azaltın veya geçici olarak başka bir modele (ör. Gemini 2.5 Pro'dan Gemini 2.5 Flash'e) geçip sorunun çözülüp çözülmediğini kontrol edin. Dilerseniz biraz bekleyip isteğinizi yeniden deneyebilirsiniz. Yeniden denedikten sonra sorun devam ederse lütfen Google AI Studio'daki **Geri bildirim gönder** düğmesini kullanarak sorunu bildirin. |
+| 503 | UNAVAILABLE | Hizmet geçici olarak aşırı yüklü veya kapalı olabilir. | Hizmetin kapasitesi geçici olarak dolmuş olabilir. | Devam eden olaylar için [Gemini API durum sayfasını](https://aistudio.google.com/status?hl=tr) kontrol edin. Geçici olarak başka bir modele (ör. Gemini 2.5 Pro'dan Gemini 2.5 Flash'e) geçip çalışıp çalışmadığını kontrol edin. Dilerseniz biraz bekleyip isteğinizi yeniden deneyebilirsiniz. Yeniden denedikten sonra sorun devam ederse lütfen Google AI Studio'daki **Geri bildirim gönder** düğmesini kullanarak sorunu bildirin. |
+| 504 | DEADLINE\_EXCEEDED | Hizmet, işleme işlemini son tarihe kadar tamamlayamıyor. | İsteminiz (veya bağlamınız), zamanında işlenemeyecek kadar büyük. | Bu hatayı önlemek için istemci isteğinizde daha büyük bir "zaman aşımı" ayarlayın. |
 
-## בדיקה של שגיאות בפרמטרים של המודל בקריאות ל-API
+## API çağrılarınızda model parametresi hataları olup olmadığını kontrol edin
 
-מוודאים שהפרמטרים של המודל נמצאים בטווח הערכים הבא:
+Model parametrelerinizin aşağıdaki değerler içinde olduğunu doğrulayın:
 
 |  |  |
 | --- | --- |
-| **פרמטר של מודל** | **ערכים (טווח)** |
-| מספר המועמדים | ‫1-8 (מספר שלם) |
-| טמפרטורה | ‫0.0-1.0 |
-| מספר מקסימלי של טוקנים בפלט | אפשר להיעזר ב[דף המודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he) כדי לקבוע את המספר המקסימלי של טוקנים למודל שבו אתם משתמשים. |
-| TopP | ‫0.0-1.0 |
+| **Model parametresi** | **Değerler (aralık)** |
+| Aday sayısı | 1-8 (tam sayı) |
+| Sıcaklık | 0,0-1,0 |
+| Maksimum çıkış jetonu sayısı | Kullandığınız modelin maksimum jeton sayısını belirlemek için [modeller sayfasını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr) kullanın. |
+| TopP | 0,0-1,0 |
 
-בנוסף לבדיקת ערכי הפרמטרים, חשוב לוודא שאתם משתמשים ב[גרסת ה-API](https://ai.google.dev/gemini-api/docs/api-versions?hl=he) הנכונה (למשל, `/v1` או `/v1beta`) ובמודל שתומך בתכונות שאתם צריכים. לדוגמה, אם תכונה מסוימת נמצאת בגרסת בטא, היא תהיה זמינה רק בגרסת API‏ `/v1beta`.
+Parametre değerlerini kontrol etmenin yanı sıra doğru [API sürümünü](https://ai.google.dev/gemini-api/docs/api-versions?hl=tr) (ör. `/v1` veya `/v1beta`) ve ihtiyacınız olan özellikleri destekleyen modeli kullandığınızdan emin olun. Örneğin, bir özellik beta sürümündeyse yalnızca `/v1beta` API sürümünde kullanılabilir.
 
-## בדיקה אם יש לכם את הדגם הנכון
+## Doğru modele sahip olup olmadığınızı kontrol etme
 
-ודאו שאתם משתמשים במודל נתמך שמופיע ב[דף המודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he).
+[Modeller sayfamızda](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr) listelenen desteklenen bir modeli kullandığınızı doğrulayın.
 
-## זמן אחזור ארוך יותר או שימוש גבוה יותר בטוקנים עם מודלים 2.5
+## 2.5 modellerinde daha yüksek gecikme veya jeton kullanımı
 
-אם אתם רואים שהחביון או השימוש באסימונים גבוהים יותר במודלים 2.5 Flash ו-Pro, יכול להיות שהסיבה לכך היא ש**החשיבה מופעלת כברירת מחדל** כדי לשפר את האיכות. אם אתם רוצים לתת עדיפות למהירות או לצמצם עלויות, אתם יכולים לשנות את ההגדרות של החשיבה או להשבית אותה.
+2.5 Flash ve Pro modellerinde daha yüksek gecikme süresi veya jeton kullanımı gözlemliyorsanız bunun nedeni, kaliteyi artırmak için **düşünme özelliğinin varsayılan olarak etkinleştirilmiş** olması olabilir. Hıza öncelik veriyorsanız veya maliyetleri en aza indirmeniz gerekiyorsa düşünme sürecini ayarlayabilir ya da devre dışı bırakabilirsiniz.
 
-ב[דף החשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he#set-budget) אפשר למצוא הנחיות וקוד לדוגמה.
+Yol gösterici bilgiler ve örnek kod için [düşünme sayfasına](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#set-budget) bakın.
 
-## בעיות בטיחות
+## Güvenlik sorunları
 
-אם מופיעה הודעה שהנחיה נחסמה בגלל הגדרת בטיחות בקריאה ל-API, צריך לבדוק את ההנחיה בהתאם למסננים שהגדרתם בקריאה ל-API.
+API çağrınızdaki bir güvenlik ayarı nedeniyle istemin engellendiğini görürseniz istemi, API çağrısında ayarladığınız filtrelere göre inceleyin.
 
-אם מופיע הסמל `BlockedReason.OTHER`, יכול להיות שהשאילתה או התשובה מפרות את [התנאים וההגבלות](https://ai.google.dev/terms?hl=he) או שהן לא נתמכות.
+`BlockedReason.OTHER` simgesini görüyorsanız sorgu veya yanıt, [Hizmet Şartları](https://ai.google.dev/terms?hl=tr)'nı ihlal ediyor ya da başka bir şekilde desteklenmiyor olabilir.
 
-## בעיה בהקראה
+## Okuma sorunu
 
-אם המודל מפסיק ליצור פלט בגלל הסיבה RECITATION, המשמעות היא שהפלט מהמודל עשוי להיות דומה לנתונים מסוימים. כדי לפתור את הבעיה, כדאי לנסות להפוך את ההנחיה או ההקשר לייחודיים ככל האפשר ולהשתמש ברמת אקראיות גבוהה יותר.
+Modelin, RECITATION (Tekrar) nedeniyle çıkış oluşturmayı durdurduğunu görüyorsanız bu, model çıkışının belirli verilere benzeyebileceği anlamına gelir. Bu sorunu düzeltmek için istemi / bağlamı mümkün olduğunca benzersiz hale getirmeyi ve daha yüksek bir sıcaklık kullanmayı deneyin.
 
-## בעיה של טוקנים חוזרים
+## Tekrarlanan jeton sorunu
 
-אם אתם רואים טוקנים של פלט שחוזרים על עצמם, נסו את ההצעות הבאות כדי לצמצם או לבטל אותם.
+Çıkış jetonlarının tekrarlandığını görüyorsanız bunları azaltmak veya tamamen ortadan kaldırmak için aşağıdaki önerileri deneyin.
 
-| תיאור | סיבה | הצעה לפתרון עקיף |
+| Açıklama | Neden | Önerilen geçici çözüm |
 | --- | --- | --- |
-| מקפים חוזרים בטבלאות Markdown | זה יכול לקרות כשהתוכן בטבלה ארוך, כי המודל מנסה ליצור טבלת Markdown עם יישור חזותי. עם זאת, היישור ב-Markdown לא נחוץ כדי שהעיבוד יהיה תקין. | כדי לתת למודל הנחיות ספציפיות ליצירת טבלאות בפורמט Markdown, צריך להוסיף הוראות בהנחיה. לספק דוגמאות שפועלות לפי ההנחיות האלה. אפשר גם לנסות לשנות את הטמפרטורה. כדי ליצור קוד או פלט מובנה מאוד כמו טבלאות Markdown, עדיף להשתמש ברמת אקראיות גבוהה (‎>= 0.8).  זו דוגמה להנחיות שאפשר להוסיף להנחיה כדי למנוע את הבעיה הזו:     ```           # Markdown Table Format                      * Separator line: Markdown tables must include a separator line below             the header row. The separator line must use only 3 hyphens per             column, for example: |---|---|---|. Using more hypens like             ----, -----, ------ can result in errors. Always             use |:---|, |---:|, or |---| in these separator strings.              For example:              | Date | Description | Attendees |             |---|---|---|             | 2024-10-26 | Annual Conference | 500 |             | 2025-01-15 | Q1 Planning Session | 25 |            * Alignment: Do not align columns. Always use |---|.             For three columns, use |---|---|---| as the separator line.             For four columns use |---|---|---|---| and so on.            * Conciseness: Keep cell content brief and to the point.            * Never pad column headers or other cells with lots of spaces to             match with width of other content. Only a single space on each side             is needed. For example, always do "| column name |" instead of             "| column name                |". Extra spaces are wasteful.             A markdown renderer will automatically take care displaying             the content in a visually appealing form. ``` |
-| טוקנים חוזרים בטבלאות Markdown | בדומה למקפים החוזרים, זה קורה כשהמודל מנסה ליישר חזותית את התוכן של הטבלה. ההזחה ב-Markdown לא נדרשת כדי שהעיבוד יהיה תקין. | - נסו להוסיף להנחיית המערכת הוראות כמו אלה:      ```               FOR TABLE HEADINGS, IMMEDIATELY ADD ' |' AFTER THE TABLE HEADING.   ``` - כדאי לנסות לשנות את הטמפרטורה. טמפרטורות גבוהות יותר (>= 0.8)   עוזרות בדרך כלל למנוע חזרות או כפילויות בתוצאה. |
-| שורה חדשה חוזרת (`\n`) בפלט מובנה | אם קלט המודל מכיל רצפי Unicode או רצפי escape כמו `\u` או `\t`, יכול להיות שיופיעו שורות חדשות חוזרות. | - בודקים אם יש רצפי escape אסורים ומחליפים אותם בתווי UTF-8 בהנחיה. לדוגמה, אם בדוגמאות של JSON יש רצף escape של `\u`   , המודל עלול להשתמש בו גם בפלט שלו. - לתת למודל הוראות לגבי יציאות מותרות. מוסיפים הוראה למערכת כמו זו:      ```               In quoted strings, the only allowed escape sequences are \\, \n, and \". Instead of \u escapes, use UTF-8.   ``` |
-| טקסט שחוזר על עצמו בשימוש בפלט מובנה | אם הפלט של המודל כולל את השדות בסדר שונה מזה של הסכימה המובנית שהוגדרה, הדבר עלול להוביל לחזרה על טקסט. | - אל תציינו את סדר השדות בהנחיה. - הופכים את כל שדות הפלט לשדות חובה. |
-| קריאות חוזרות לכלי | זה יכול לקרות אם המודל מאבד את ההקשר של מחשבות קודמות או אם הוא קורא לנקודת קצה לא זמינה שהוא נאלץ לקרוא לה. | להנחות את המודל לשמור על מצב בתוך תהליך החשיבה שלו. מוסיפים את ההוראה הזו לסוף ההוראות למערכת:    ```         When thinking silently: ALWAYS start the thought with a brief         (one sentence) recap of the current progress on the task. In         particular, consider whether the task is already done. ``` |
-| טקסט חוזר שלא מהווה חלק מפלט מובנה | זה יכול לקרות אם המודל נתקע בבקשה שהוא לא יכול לפתור. | - אם התכונה 'חשיבה' מופעלת, אל תתנו הוראות מפורשות לגבי אופן החשיבה על פתרון בעיה. פשוט מבקשים את הפלט הסופי. - נסו טמפרטורה גבוהה יותר >= 0.8. - מוסיפים הוראות כמו "תמציתיות", "לא לחזור על עצמך" או "לספק את התשובה פעם אחת". |
+| Markdown tablolarında tekrarlanan tireler | Model, görsel olarak hizalanmış bir Markdown tablosu oluşturmaya çalıştığı için tablonun içeriği uzun olduğunda bu durum ortaya çıkabilir. Ancak Markdown'da doğru oluşturma için hizalama gerekli değildir. | İsteminizde, modele Markdown tabloları oluşturmayla ilgili belirli yönergeler verecek talimatlar ekleyin. Bu yönergelere uygun örnekler verin. Sıcaklığı ayarlamayı da deneyebilirsiniz. Kod oluşturma veya Markdown tabloları gibi çok yapılandırılmış çıkışlar için yüksek sıcaklık değerlerinin daha iyi sonuç verdiği görülmüştür (>= 0,8).  Bu sorunu önlemek için isteminize ekleyebileceğiniz yönergelerle ilgili örnekleri aşağıda bulabilirsiniz:     ```           # Markdown Table Format                      * Separator line: Markdown tables must include a separator line below             the header row. The separator line must use only 3 hyphens per             column, for example: |---|---|---|. Using more hypens like             ----, -----, ------ can result in errors. Always             use |:---|, |---:|, or |---| in these separator strings.              For example:              | Date | Description | Attendees |             |---|---|---|             | 2024-10-26 | Annual Conference | 500 |             | 2025-01-15 | Q1 Planning Session | 25 |            * Alignment: Do not align columns. Always use |---|.             For three columns, use |---|---|---| as the separator line.             For four columns use |---|---|---|---| and so on.            * Conciseness: Keep cell content brief and to the point.            * Never pad column headers or other cells with lots of spaces to             match with width of other content. Only a single space on each side             is needed. For example, always do "| column name |" instead of             "| column name                |". Extra spaces are wasteful.             A markdown renderer will automatically take care displaying             the content in a visually appealing form. ``` |
+| Markdown tablolarında tekrarlanan jetonlar | Tekrarlanan tirelere benzer şekilde, bu durum model tablo içeriklerini görsel olarak hizalamaya çalıştığında ortaya çıkar. Doğru oluşturma için Markdown'da hizalama gerekmez. | - Sistem isteminize aşağıdakiler gibi talimatlar eklemeyi deneyin:      ```               FOR TABLE HEADINGS, IMMEDIATELY ADD ' |' AFTER THE TABLE HEADING.   ``` - Sıcaklığı ayarlamayı deneyin. Daha yüksek sıcaklıklar (>= 0,8), çıkıştaki tekrarları veya kopyaları ortadan kaldırmaya yardımcı olur. |
+| Yapılandırılmış çıkışta tekrar eden yeni satırlar (`\n`) | Model girişi, `\u` veya `\t` gibi Unicode ya da kaçış dizileri içerdiğinde tekrarlanan yeni satırlara yol açabilir. | - İsteminizde yasaklanmış kaçış dizilerini UTF-8 karakterleriyle değiştirin. Örneğin, JSON örneklerinizdeki `\u`   kaçış dizisi, modelin çıkışında da bunları kullanmasına neden olabilir. - Modele izin verilen kaçış karakterleri hakkında talimat verin. Aşağıdaki gibi bir sistem talimatı ekleyin:      ```               In quoted strings, the only allowed escape sequences are \\, \n, and \". Instead of \u escapes, use UTF-8.   ``` |
+| Yapılandırılmış çıktı kullanılarak metnin tekrar edilmesi | Model çıkışında alanların sırası, tanımlanan yapılandırılmış şemadan farklı olduğunda metin tekrarı oluşabilir. | - İsteminizde alanların sırasını belirtmeyin. - Tüm çıkış alanlarını zorunlu hale getirin. |
+| Tekrarlanan araç çağrısı | Bu durum, modelin önceki düşüncelerin bağlamını kaybetmesi ve/veya kullanılamayan bir uç noktayı çağırmaya zorlanması durumunda ortaya çıkabilir. | Modele, düşünce sürecinde durumu koruması talimatını verin. Bunu sistem talimatlarınızın sonuna ekleyin:    ```         When thinking silently: ALWAYS start the thought with a brief         (one sentence) recap of the current progress on the task. In         particular, consider whether the task is already done. ``` |
+| Yapılandırılmış çıktının parçası olmayan tekrarlayan metin | Bu durum, modelin çözemediği bir istekte takılıp kalması halinde ortaya çıkabilir. | - Düşünme özelliği etkinse talimatlarda bir sorunu nasıl düşüneceğinizle ilgili açıkça emir vermeyin. Yalnızca son çıktıyı isteyin. - Daha yüksek bir sıcaklık (ör. >= 0,8) deneyin. - "Kısa ve öz ol", "Kendini tekrar etme" veya "Cevabı bir kez ver" gibi talimatlar ekleyin. |
 
-## מפתחות API חסומים או לא תקינים
+## Engellenmiş veya çalışmayan API anahtarları
 
-בקטע הזה מוסבר איך לבדוק אם מפתח Gemini API שלכם חסום ומה אפשר לעשות כדי לפתור את הבעיה.
+Bu bölümde, Gemini API anahtarınızın engellenip engellenmediğini nasıl kontrol edeceğiniz ve bu durumda ne yapmanız gerektiği açıklanmaktadır.
 
-### למה מפתחות נחסמים
+### Anahtarların neden engellendiğini anlama
 
-זיהינו פרצת אבטחה שבה חלק ממפתחות ה-API נחשפו באופן ציבורי. כדי להגן על הנתונים שלכם ולמנוע גישה לא מורשית, חסמנו באופן יזום את הגישה ל-Gemini API של מפתחות ידועים שדלפו.
+Bazı API anahtarlarının herkese açık olarak kullanılabildiği bir güvenlik açığı tespit ettik. Verilerinizi korumak ve yetkisiz erişimi önlemek için, sızdırıldığı bilinen bu anahtarların Gemini API'ye erişimini proaktif olarak engelledik.
 
-### איך בודקים אם המפתחות מושפעים
+### Anahtarlarınızın etkilenip etkilenmediğini onaylayın
 
-אם ידוע שמפתח נחשף, אי אפשר יותר להשתמש בו עם Gemini API. אתם יכולים להשתמש ב-[Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=he) כדי לבדוק אם יש מפתחות API שחסימתם מונעת מהם לבצע קריאות ל-Gemini API, וליצור מפתחות חדשים. יכול להיות שתוצג גם השגיאה הבאה כשמנסים להשתמש במפתחות האלה:
+Anahtarınızın sızdırıldığı biliniyorsa bu anahtarı artık Gemini API ile kullanamazsınız. API anahtarlarınızdan herhangi birinin Gemini API'yi çağırmasının engellenip engellenmediğini görmek ve yeni anahtarlar oluşturmak için [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=tr)'yu kullanabilirsiniz. Bu anahtarları kullanmaya çalışırken aşağıdaki hatayı da görebilirsiniz:
 
 ```
 Your API key was reported as leaked. Please use another API key.
 ```
 
-### פעולה למפתחות API חסומים
+### Engellenen API anahtarları için işlem
 
-מומלץ ליצור מפתחות API חדשים לשילובים של Gemini API באמצעות [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=he). מומלץ מאוד לבדוק את שיטות הניהול של מפתחות ה-API כדי לוודא שהמפתחות החדשים מאובטחים ולא נחשפים לציבור.
+[Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=tr)'yu kullanarak Gemini API entegrasyonlarınız için yeni API anahtarları oluşturmanız gerekir. Yeni anahtarlarınızın güvenli bir şekilde saklandığından ve herkese açık olmadığından emin olmak için API anahtarı yönetim uygulamalarınızı gözden geçirmenizi önemle tavsiye ederiz.
 
-### חיובים לא צפויים בגלל פגיעות
+### Güvenlik açığı nedeniyle beklenmedik ücretler
 
-[שליחת פנייה בנושא חיוב](https://console.cloud.google.com/support/chat?hl=he). צוות החיוב שלנו מטפל בבעיה הזו, ונעדכן אותך בהקדם האפשרי.
+[Faturalandırma konusunda destek kaydı gönderin](https://console.cloud.google.com/support/chat?hl=tr).
+Fatura ekibimiz bu konu üzerinde çalışıyor. Güncellemeleri en kısa sürede sizinle paylaşacağız.
 
-### אמצעי האבטחה של Google למפתחות שנחשפו
+### Google'ın sızdırılan anahtarlara yönelik güvenlik önlemleri
 
-**איך Google תעזור לי לאבטח את החשבון מפני חריגה מהתקציב ושימוש לרעה אם מפתחות ה-API שלי ידלפו?**
+**API anahtarlarım sızdırılırsa Google, hesabımın maliyet aşımı ve kötüye kullanımdan korunmasına nasıl yardımcı olacak?**
 
-- אנחנו עוברים למצב שבו כשמבקשים מפתח חדש באמצעות [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=he), המערכת מנפיקה מפתחות API שמוגבלים כברירת מחדל לשימוש ב-Google AI Studio בלבד, ולא מקבלת מפתחות משירותים אחרים.
-  כך תוכלו למנוע שימוש לא מכוון במפתחות שונים.
-- כברירת מחדל, אנחנו חוסמים מפתחות API שדלפו ונעשה בהם שימוש ב-Gemini API, כדי למנוע שימוש לרעה בעלויות ובנתוני האפליקציה.
-- תוכלו לראות את הסטטוס של מפתחות ה-API ב-[Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=he). אם נזהה שמפתחות ה-API שלכם נחשפו, נעדכן אתכם באופן יזום כדי שתוכלו לפעול באופן מיידי.
+- [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=tr)'yu kullanarak yeni bir anahtar istediğinizde API anahtarları vermeye başlıyoruz. Bu anahtarlar varsayılan olarak yalnızca Google AI Studio ile sınırlı olacak ve diğer hizmetlerden gelen anahtarlar kabul edilmeyecek.
+  Bu, yanlışlıkla anahtar kullanımını önlemeye yardımcı olur.
+- Sızdırılan ve Gemini API ile kullanılan API anahtarlarını varsayılan olarak engelliyoruz. Böylece maliyetin ve uygulama verilerinizin kötüye kullanılmasını önlemeye yardımcı oluyoruz.
+- API anahtarlarınızın durumunu [Google AI Studio](https://ai.google.dev/gemini-api/docs/api-keys?hl=tr)'da bulabilirsiniz. API anahtarlarınızın sızdırıldığını tespit ettiğimizde ise hemen harekete geçmeniz için proaktif olarak sizinle iletişime geçeriz.
 
-## שיפור הפלט של המודל
+## Model çıktısını iyileştirme
 
-כדי לקבל פלט איכותי יותר מהמודל, כדאי לנסות לכתוב הנחיות מובנות יותר. בדף [מדריך להנדסת הנחיות](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=he) מוסברים כמה מושגים בסיסיים, אסטרטגיות ושיטות מומלצות שיעזרו לכם להתחיל.
+Daha kaliteli model çıkışları için daha yapılandırılmış istemler yazmayı deneyin. [İstem mühendisliği rehberi](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr) sayfasında, başlamanıza yardımcı olacak bazı temel kavramlar, stratejiler ve en iyi uygulamalar tanıtılmaktadır.
 
-## הסבר על מגבלות הטוקנים
+## Jeton sınırlarını anlama
 
-כדאי לעיין ב[מדריך האסימונים](https://ai.google.dev/gemini-api/docs/tokens?hl=he) כדי להבין טוב יותר איך לספור אסימונים ומהן המגבלות שלהם.
+Jetonların nasıl sayılacağını ve sınırlarını daha iyi anlamak için [Jeton kılavuzumuzu](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) inceleyin.
 
-## בעיות מוכרות
+## Bilinen sorunlar
 
-- ה-API תומך רק במספר שפות נבחרות. אם תשלחו הנחיות בשפות שלא נתמכות, יכול להיות שתקבלו תשובות לא צפויות או שהתשובות ייחסמו. [כאן](https://ai.google.dev/gemini-api/docs/models?hl=he#supported-languages) אפשר לראות את השפות שזמינות לעדכונים.
+- API yalnızca belirli dilleri destekler. Desteklenmeyen dillerde istem göndermek beklenmedik veya hatta engellenen yanıtlar üretebilir. Güncellemeler için [kullanılabilir dilleri](https://ai.google.dev/gemini-api/docs/models?hl=tr#supported-languages) inceleyin.
 
-## דיווח על באג
+## Hata bildir
 
-אם יש לכם שאלות, אתם יכולים להצטרף לדיון ב[פורום המפתחים של Google AI](https://discuss.ai.google.dev?hl=he).
+Sorularınız varsa [Google Yapay Zeka geliştirici forumunda](https://discuss.ai.google.dev?hl=tr) tartışmaya katılın.
 
-שליחת משוב
+Geri bildirim gönderin
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-עדכון אחרון: 2026-06-10 (שעון UTC).
+Son güncelleme tarihi: 2026-06-23 UTC.
 
-רוצה לתת לנו משוב?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-10 (שעון UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-23 UTC."],[],[]]

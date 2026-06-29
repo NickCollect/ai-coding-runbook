@@ -1,81 +1,80 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=tr
-fetched_at: 2026-06-22T06:34:38.367566+00:00
-title: "Google AI Studio'dan da\u011f\u0131tma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=hi
+fetched_at: 2026-06-29T05:29:27.680536+00:00
+title: "Google AI Studio \u0938\u0947 \u0921\u093f\u092a\u094d\u0932\u0949\u092f \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Google AI Studio'dan dağıtma
+# Google AI Studio से डिप्लॉय करना
 
-Google AI Studio, tam yığın uygulamalarınızı doğrudan Oluşturma Modu'ndan dağıtmanıza olanak tanır. Bu sayede prototipten yönetilen ve ölçeklenebilir bir üretim ortamına hızlı bir şekilde geçebilirsiniz.
+Google AI Studio की मदद से, फ़ुल-स्टैक ऐप्लिकेशन को सीधे तौर पर बिल्ड मोड से डिप्लॉय किया जा सकता है. इससे प्रोटोटाइप से लेकर मैनेज किए जा सकने वाले और बड़े पैमाने पर इस्तेमाल किए जा सकने वाले प्रोडक्शन एनवायरमेंट तक तेज़ी से पहुंचा जा सकता है.
 
-## Dağıtım seçenekleri
+## डिप्लॉयमेंट के विकल्प
 
-Uygulamanızı AI Studio'nun Oluşturma Modu'ndan dağıtmak için kullandığınız katmana bağlı olarak aşağıdaki şartları karşılamanız gerekir:
+AI Studio के बिल्ड मोड से ऐप्लिकेशन डिप्लॉय करने के लिए, ज़रूरी शर्तें इस बात पर निर्भर करती हैं कि आपने कौनसी सदस्यता ली है:
 
-- [**Google Cloud Başlangıç Katmanı**](https://docs.cloud.google.com/docs/starter-tier?hl=tr):
-  Google Cloud projesi veya faturalandırma hesabı oluşturmadan 2 tam yığın uygulaması yayınlamanıza olanak tanır.
-- **Standart dağıtım**: AI Studio hesabınıza bağlı bir Google Cloud projesi ve bu projede faturalandırmanın etkinleştirilmesi gerekir.
+- [**Google Cloud का स्टार्टर टियर**](https://docs.cloud.google.com/docs/starter-tier?hl=hi):
+  इसकी मदद से, Google Cloud प्रोजेक्ट या बिलिंग खाता सेट अप किए बिना, ज़्यादा से ज़्यादा दो फ़ुल-स्टैक ऐप्लिकेशन पब्लिश किए जा सकते हैं.
+- **स्टैंडर्ड डिप्लॉयमेंट**: इसके लिए, आपके AI Studio खाते से लिंक किया गया Google Cloud प्रोजेक्ट होना चाहिए. साथ ही, उस प्रोजेक्ट पर बिलिंग की सुविधा चालू होनी चाहिए.
 
-## Başlangıç Seviyesi hakkında
+## Starter टियर के बारे में जानकारी
 
-Google Cloud Başlangıç Katmanı, tam bir Google Cloud ortamı veya faturalandırma hesabı oluşturmadan uygulamaları doğrudan Google AI Studio'dan Google Cloud'a dağıtmak için kolay bir yol sunar.
+Google Cloud के स्टार्टर टियर की मदद से, Google AI Studio से सीधे Google Cloud पर ऐप्लिकेशन डिप्लॉय किए जा सकते हैं. इसके लिए, आपको Google Cloud का पूरा एनवायरमेंट या बिलिंग खाता सेट अप करने की ज़रूरत नहीं होती.
 
-Her Google AI Studio dağıtımı, Cloud Run'da karşılık gelen bir hizmet oluşturur. Başlangıç Katmanı ile Google AI Studio'da dağıtılan hizmetler için aşağıdaki sınırlamalar geçerlidir:
+Google AI Studio में हर डिप्लॉयमेंट, Cloud Run में एक सेवा बनाता है. Google AI Studio में स्टार्टर टियर के साथ डिप्लॉय की गई सेवाओं पर, ये सीमाएं लागू होती हैं:
 
-- En fazla iki hizmet dağıtabilirsiniz.
-- Hizmetleriniz [tek bir Cloud Run bölgesinde](https://docs.cloud.google.com/run/docs/locations?hl=tr) dağıtılmış olmalıdır.
+- ज़्यादा से ज़्यादा दो सेवाएं डिप्लॉय की जा सकती हैं.
+- आपकी सेवाएं, [Cloud Run के एक ही क्षेत्र](https://docs.cloud.google.com/run/docs/locations?hl=hi) में डिप्लॉय की गई हों.
 
-## Başlangıç Seviyesi dağıtım adımları
+## Starter Tier को डिप्लॉय करने का तरीका
 
-Uygulamanızı Oluşturma modunda tasarladıktan sonra Başlangıç Katmanı ile dağıtın:
+बिल्ड मोड में ऐप्लिकेशन डिज़ाइन करने के बाद, उसे स्टार्टर टियर के साथ डिप्लॉय करें:
 
-1. Sağ üst köşedeki **Yayınla** düğmesini tıklayın.
-2. **Get Started**'ı (Başlayın) tıklayın.
-3. **Uygulamayı Yayınla**'yı tıklayın.
+1. सबसे ऊपर दाएं कोने में मौजूद, **पब्लिश करें** बटन पर क्लिक करें.
+2. **शुरू करें** पर क्लिक करें.
+3. **ऐप्लिकेशन पब्लिश करें** पर क्लिक करें.
 
-Dağıtım tamamlandıktan sonra AI Studio, canlı uygulamanıza erişebileceğiniz bir Cloud Run URL'si sağlar.
+डिप्लॉयमेंट पूरा होने के बाद, AI Studio एक Cloud Run यूआरएल देता है. इस यूआरएल से, लाइव ऐप्लिकेशन को ऐक्सेस किया जा सकता है.
 
-## Standart dağıtım
+## स्टैंडर्ड डिप्लॉयमेंट
 
-Uygulamalarınız geliştikçe Başlangıç Katmanı'nın ötesinde özelliklere (ör. daha yüksek kotalar, daha fazla işlem kaynağı veya Başlangıç Katmanı'nda bulunmayan diğer Google Cloud ürünleri) ihtiyacınız olabilir. Bu özelliklerden yararlanmak için tamamen yönetilen Başlangıç Katmanı projenizi standart bir Google Cloud projesine dönüştürebilirsiniz.
+आपके ऐप्लिकेशन के बेहतर होने के साथ-साथ, आपको स्टार्टर टियर से ज़्यादा सुविधाओं की ज़रूरत पड़ सकती है. जैसे, ज़्यादा कोटा, ज़्यादा कंप्यूट संसाधन या Google Cloud के ऐसे अन्य प्रॉडक्ट जो स्टार्टर टियर में उपलब्ध नहीं हैं. इन सुविधाओं को अनलॉक करने के लिए, पूरी तरह से मैनेज किए जाने वाले Starter Tier प्रोजेक्ट को स्टैंडर्ड Google क्लाउड प्रोजेक्ट में बदला जा सकता है.
 
-Bu sayede, ilerlemenizi kaybetmeden sorunsuz bir şekilde ölçeklendirme yapabilirsiniz. [Cloud Faturalandırma Hesabı oluşturma](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=tr#create-new-billing-account), standart Google Cloud Hizmet Şartları'nı resmen kabul etme ve [standart Google Cloud projesine yükseltme](https://docs.cloud.google.com/docs/starter-tier?hl=tr#upgradee) adımlarını uygulayın.
-Daha fazla bilgi için [Ücretli hesaplar için kurulum](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=tr#paid-setup) başlıklı makaleyi inceleyin.
+इससे यह पक्का होता है कि आपकी प्रोग्रेस में कोई रुकावट नहीं आएगी. [Cloud Billing खाता बनाने](https://docs.cloud.google.com/billing/docs/how-to/create-billing-account?hl=hi#create-new-billing-account), Google Cloud की सेवा की मानक शर्तों को औपचारिक तौर पर स्वीकार करने, और [Google Cloud के स्टैंडर्ड प्रोजेक्ट पर अपग्रेड करने](https://docs.cloud.google.com/docs/starter-tier?hl=hi#upgradee) के लिए, यह तरीका अपनाएं. ज़्यादा जानकारी के लिए, [पैसे चुकाकर इस्तेमाल किए जाने वाले खातों का सेटअप](https://docs.cloud.google.com/billing/docs/in-product-billing-setup?hl=hi#paid-setup) देखें.
 
-Faturalandırma katmanları hakkında daha fazla bilgi edinmek için [Faturalandırma](https://ai.google.dev/gemini-api/docs/billing?hl=tr) başlıklı makaleyi inceleyin.
+बिलिंग टियर के बारे में ज़्यादा जानने के लिए, [बिलिंग](https://ai.google.dev/gemini-api/docs/billing?hl=hi) पर जाएं.
 
-## Başvurunuzu silme
+## अपना आवेदन मिटाना
 
-Uygulamanıza artık ihtiyacınız yoksa aşağıdaki talimatları uygulayarak Google AI Studio'da silebilirsiniz:
+अगर आपको अब अपने ऐप्लिकेशन की ज़रूरत नहीं है, तो Google AI Studio में जाकर इसे मिटाया जा सकता है. इसके लिए, यह तरीका अपनाएं:
 
-1. Google AI Studio'da [Uygulamalar sayfanıza](https://aistudio.google.com/app/apps?hl=tr) gidin.
-2. Sol menüden **Uygulamalar**'ı seçin.
-3. İşaretçiyi silmek istediğiniz uygulamanın üzerine getirin.
-4. Uygulamayı silmek için satırın sağ tarafındaki çöp kutusu simgesini tıklayın.
+1. Google AI Studio में, अपने [ऐप्लिकेशन पेज](https://aistudio.google.com/app/apps?hl=hi) पर जाएं.
+2. बाईं ओर मौजूद मेन्यू में जाकर, **ऐप्लिकेशन** को चुनें.
+3. जिस ऐप्लिकेशन को मिटाना है उस पर पॉइंटर घुमाएं.
+4. ऐप्लिकेशन को मिटाने के लिए, लाइन की दाईं ओर मौजूद ट्रैश कैन आइकॉन पर क्लिक करें.
 
-## Sırada ne var?
+## आगे क्या करना है
 
-- [Google Cloud Başlangıç Katmanı](https://docs.cloud.google.com/docs/starter-tier?hl=tr) hakkında daha fazla bilgi edinin.
-- Gemini API'de [Faturalandırma](https://ai.google.dev/gemini-api/docs/billing?hl=tr) hakkında bilgi edinin.
+- [Google Cloud Starter Tier](https://docs.cloud.google.com/docs/starter-tier?hl=hi) के बारे में ज़्यादा जानें.
+- Gemini API में [बिलिंग](https://ai.google.dev/gemini-api/docs/billing?hl=hi) के बारे में पढ़ें.
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-06-16 UTC.
+आखिरी बार 2026-06-16 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-16 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-16 (UTC) को अपडेट किया गया."],[],[]]

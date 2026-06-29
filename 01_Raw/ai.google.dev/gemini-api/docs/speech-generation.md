@@ -1,82 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-BR
-fetched_at: 2026-06-22T06:31:50.656690+00:00
-title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-TW
+fetched_at: 2026-06-29T05:35:57.393168+00:00
+title: "\u751f\u6210\u6587\u5b57\u8f49\u8a9e\u97f3\u6a94\u6848 (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) is now available in preview with collaborative planning, visualization, MCP support, and more.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Envie comentários
+提供意見
 
-# Geração de conversão de texto em voz (TTS)
+# 生成文字轉語音檔案 (TTS)
 
-A API Gemini pode transformar entradas de texto em áudio de um ou vários locutores usando os recursos de geração de texto em voz (TTS) do Gemini.
-A geração de conversão de texto em voz (TTS) é *[controlável](#controllable)*, ou seja, você pode usar a linguagem natural para estruturar interações e orientar o *estilo*, o *sotaque*, o *ritmo* e o *tom* do áudio.
+Gemini API 可使用 Gemini 文字轉語音 (TTS) 生成功能，將文字輸入內容轉換為單人或多人語音。文字轉語音 (TTS) 生成功能*[可控制](#controllable)*，也就是說，你可以使用自然語言建構互動，並引導音訊的*風格*、*口音*、*語速*和*語氣*。
 
-[Testar no Google AI Studio](https://aistudio.google.com/apps/bundled/voice-library?showPreview=truew&hl=pt-br)
+TTS 功能與透過 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw) 提供的語音生成功能不同，後者專為互動式非結構化音訊，以及多模態輸入和輸出內容而設計。Live API 擅長處理動態對話情境，而 Gemini API 的 TTS 則適用於需要準確朗讀文字，並精細控制風格和聲音的情境，例如生成 Podcast 或有聲書。
 
-A capacidade de TTS é diferente da geração de fala fornecida pela [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br), que foi projetada para áudio interativo e não estruturado, além de entradas e saídas multimodais. Embora a API Live seja excelente em contextos de conversação dinâmica, a TTS pela API Gemini é feita para cenários que exigem recitação exata de texto com controle refinado sobre estilo e som, como geração de podcasts ou audiolivros.
+本指南說明如何從文字生成單人或多人語音。
 
-Este guia mostra como gerar áudio de um ou vários locutores com base em texto.
+## 事前準備
 
-## Antes de começar
+請務必使用支援 Gemini 文字轉語音 (TTS) 功能的 Gemini 2.5 模型變體，如「[支援的模型](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw#supported-models)」一節所述。為獲得最佳結果，請考慮哪種模型最適合您的特定用途。
 
-Use uma variante do modelo do Gemini com recursos de conversão de texto em voz (TTS) do Gemini, conforme listado na seção [Modelos compatíveis](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br#supported-models). Para resultados ideais, considere qual modelo se adapta melhor ao seu caso de uso específico.
+建議您 [在 AI Studio 中測試 Gemini 2.5 TTS 模型]
 
-Talvez seja útil [testar os modelos do Gemini TTS no AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br) antes de começar a criar.
+## 單一說話者文字轉語音
 
-## TTS com um único locutor
+如要將文字轉換為單一說話者的音訊，請將回應模式設為「audio」，並傳遞含有語音名稱的 `speech_config` 物件。您必須從預先建立的[輸出語音](#voices)中選擇語音名稱。
 
-Para converter texto em áudio de um único falante, defina a modalidade de resposta como "audio" e transmita um objeto `SpeechConfig` com `VoiceConfig` definido.
-Escolha um nome de voz entre as [vozes de saída](#voices) pré-criadas.
-
-Este exemplo salva o áudio de saída do modelo em um arquivo wave:
+這個範例會將模型的輸出音訊儲存為 Wave 檔案：
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
 import wave
+import base64
 
-# Set up the wave file to save the output:
 def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
-   with wave.open(filename, "wb") as wf:
-      wf.setnchannels(channels)
-      wf.setsampwidth(sample_width)
-      wf.setframerate(rate)
-      wf.writeframes(pcm)
+    with wave.open(filename, "wb") as wf:
+        wf.setnchannels(channels)
+        wf.setsampwidth(sample_width)
+        wf.setframerate(rate)
+        wf.writeframes(pcm)
 
 client = genai.Client()
 
-response = client.models.generate_content(
-   model="gemini-3.1-flash-tts-preview",
-   contents="Say cheerfully: Have a wonderful day!",
-   config=types.GenerateContentConfig(
-      response_modalities=["AUDIO"],
-      speech_config=types.SpeechConfig(
-         voice_config=types.VoiceConfig(
-            prebuilt_voice_config=types.PrebuiltVoiceConfig(
-               voice_name='Kore',
-            )
-         )
-      ),
-   )
+interaction = client.interactions.create(
+    model="gemini-3.1-flash-tts-preview",
+    input="Say cheerfully: Have a wonderful day!",
+    response_format={"type": "audio"},
+    generation_config={
+        "speech_config": [
+            {"voice": "Kore"}
+        ]
+    }
 )
 
-data = response.candidates[0].content.parts[0].inline_data.data
-
-file_name='out.wav'
-wave_file(file_name, data) # Saves the file to current directory
+wave_file('out.wav', base64.b64decode(interaction.output_audio.data))
 ```
 
 ### JavaScript
@@ -108,26 +95,22 @@ async function saveWaveFile(
 }
 
 async function main() {
-   const ai = new GoogleGenAI({});
+   const client = new GoogleGenAI({});
 
-   const response = await ai.models.generateContent({
+   const interaction = await client.interactions.create({
       model: "gemini-3.1-flash-tts-preview",
-      contents: [{ parts: [{ text: 'Say cheerfully: Have a wonderful day!' }] }],
-      config: {
-            responseModalities: ['AUDIO'],
-            speechConfig: {
-               voiceConfig: {
-                  prebuiltVoiceConfig: { voiceName: 'Kore' },
-               },
-            },
+      input: "Say cheerfully: Have a wonderful day!",
+      response_format: { type: 'audio' },
+      generation_config: {
+         speech_config: [
+            { voice: 'Kore' }
+         ]
       },
-   });
+    });
 
-   const data = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-   const audioBuffer = Buffer.from(data, 'base64');
+   const audioBuffer = Buffer.from(interaction.output_audio.data, 'base64');
 
-   const fileName = 'out.wav';
-   await saveWaveFile(fileName, audioBuffer);
+   await saveWaveFile('out.wav', audioBuffer);
 }
 await main();
 ```
@@ -135,48 +118,36 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-tts-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
-  -X POST \
   -H "Content-Type: application/json" \
   -d '{
-        "contents": [{
-          "parts":[{
-            "text": "Say cheerfully: Have a wonderful day!"
-          }]
-        }],
-        "generationConfig": {
-          "responseModalities": ["AUDIO"],
-          "speechConfig": {
-            "voiceConfig": {
-              "prebuiltVoiceConfig": {
-                "voiceName": "Kore"
-              }
-            }
-          }
-        },
-        "model": "gemini-3.1-flash-tts-preview",
-    }' | jq -r '.candidates[0].content.parts[0].inlineData.data' | \
-          base64 --decode >out.pcm
-# You may need to install ffmpeg.
-ffmpeg -f s16le -ar 24000 -ac 1 -i out.pcm out.wav
+    "model": "gemini-3.1-flash-tts-preview",
+    "input": "Say cheerfully: Have a wonderful day!",
+    "response_format": {
+       "type": "audio"
+     },
+    "generation_config": {
+      "speech_config": [
+        { "voice": "Kore" }
+      ]
+    }
+  }'
 ```
 
-## TTS com vários falantes
+您可以使用 `interaction.output_audio` 屬性擷取產生的音訊資料，該屬性會傳回最後產生的音訊區塊。如要進一步瞭解便利屬性，請參閱「[互動總覽](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw#convenience-properties)」。
 
-Para áudio com vários falantes, você vai precisar de um objeto `MultiSpeakerVoiceConfig` com
-cada falante (até dois) configurado como um `SpeakerVoiceConfig`.
-Defina cada `speaker` com os mesmos nomes usados no
-[comando](#controllable):
+## 多位說話者文字轉語音
+
+如要使用多說話者音訊，您需要 `multi_speaker_voice_config` 物件，並將每個說話者 (最多 2 位) 設定為 `speaker_voice_config`。您必須使用[提示](#controllable)中使用的相同名稱定義每個 `speaker`：
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
 import wave
+import base64
 
-# Set up the wave file to save the output:
 def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
    with wave.open(filename, "wb") as wf:
       wf.setnchannels(channels)
@@ -190,40 +161,19 @@ prompt = """TTS the following conversation between Joe and Jane:
          Joe: How's it going today Jane?
          Jane: Not too bad, how about you?"""
 
-response = client.models.generate_content(
-   model="gemini-3.1-flash-tts-preview",
-   contents=prompt,
-   config=types.GenerateContentConfig(
-      response_modalities=["AUDIO"],
-      speech_config=types.SpeechConfig(
-         multi_speaker_voice_config=types.MultiSpeakerVoiceConfig(
-            speaker_voice_configs=[
-               types.SpeakerVoiceConfig(
-                  speaker='Joe',
-                  voice_config=types.VoiceConfig(
-                     prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                        voice_name='Kore',
-                     )
-                  )
-               ),
-               types.SpeakerVoiceConfig(
-                  speaker='Jane',
-                  voice_config=types.VoiceConfig(
-                     prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                        voice_name='Puck',
-                     )
-                  )
-               ),
-            ]
-         )
-      )
-   )
-)
+ interaction = client.interactions.create(
+     model="gemini-3.1-flash-tts-preview",
+     input=prompt,
+     response_format={"type": "audio"},
+     generation_config={
+         "speech_config": [
+             {"speaker": "Joe", "voice": "Kore"},
+             {"speaker": "Jane", "voice": "Puck"}
+         ]
+     }
+ )
 
-data = response.candidates[0].content.parts[0].inline_data.data
-
-file_name='out.wav'
-wave_file(file_name, data) # Saves the file to current directory
+wave_file('out.wav', base64.b64decode(interaction.output_audio.data))
 ```
 
 ### JavaScript
@@ -255,43 +205,27 @@ async function saveWaveFile(
 }
 
 async function main() {
-   const ai = new GoogleGenAI({});
+   const client = new GoogleGenAI({});
 
    const prompt = `TTS the following conversation between Joe and Jane:
          Joe: How's it going today Jane?
          Jane: Not too bad, how about you?`;
 
-   const response = await ai.models.generateContent({
+   const interaction = await client.interactions.create({
       model: "gemini-3.1-flash-tts-preview",
-      contents: [{ parts: [{ text: prompt }] }],
-      config: {
-            responseModalities: ['AUDIO'],
-            speechConfig: {
-               multiSpeakerVoiceConfig: {
-                  speakerVoiceConfigs: [
-                        {
-                           speaker: 'Joe',
-                           voiceConfig: {
-                              prebuiltVoiceConfig: { voiceName: 'Kore' }
-                           }
-                        },
-                        {
-                           speaker: 'Jane',
-                           voiceConfig: {
-                              prebuiltVoiceConfig: { voiceName: 'Puck' }
-                           }
-                        }
-                  ]
-               }
-            }
-      }
+      input: prompt,
+      response_format: { type: 'audio' },
+      generation_config: {
+         speech_config: [
+            { speaker: 'Joe', voice: 'Kore' },
+            { speaker: 'Jane', voice: 'Puck' }
+         ]
+      },
    });
 
-   const data = response.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-   const audioBuffer = Buffer.from(data, 'base64');
+   const audioBuffer = Buffer.from(interaction.output_audio.data, 'base64');
 
-   const fileName = 'out.wav';
-   await saveWaveFile(fileName, audioBuffer);
+   await saveWaveFile('out.wav', audioBuffer);
 }
 
 await main();
@@ -300,119 +234,75 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-tts-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
-  -X POST \
   -H "Content-Type: application/json" \
   -d '{
-  "contents": [{
-    "parts":[{
-      "text": "TTS the following conversation between Joe and Jane:
-                Joe: Hows it going today Jane?
-                Jane: Not too bad, how about you?"
-    }]
-  }],
-  "generationConfig": {
-    "responseModalities": ["AUDIO"],
-    "speechConfig": {
-      "multiSpeakerVoiceConfig": {
-        "speakerVoiceConfigs": [{
-            "speaker": "Joe",
-            "voiceConfig": {
-              "prebuiltVoiceConfig": {
-                "voiceName": "Kore"
-              }
-            }
-          }, {
-            "speaker": "Jane",
-            "voiceConfig": {
-              "prebuiltVoiceConfig": {
-                "voiceName": "Puck"
-              }
-            }
-          }]
-      }
-    }
-  },
   "model": "gemini-3.1-flash-tts-preview",
-}' | jq -r '.candidates[0].content.parts[0].inlineData.data' | \
-    base64 --decode > out.pcm
-# You may need to install ffmpeg.
-ffmpeg -f s16le -ar 24000 -ac 1 -i out.pcm out.wav
+  "input": "TTS the following conversation between Joe and Jane: Joe: Hows it going today Jane? Jane: Not too bad, how about you?",
+  "response_format": {
+       "type": "audio"
+     },
+  "generation_config": {
+    "speech_config": [
+      { "speaker": "Joe", "voice": "Kore" },
+      { "speaker": "Jane", "voice": "Puck" }
+    ]
+  }
+}'
 ```
 
-## Controlar o estilo de fala com comandos
+## 使用提示控制說話風格
 
-Você pode controlar o estilo, o tom, o sotaque e o ritmo usando comandos em linguagem natural
-ou [tags de áudio](#transcript-tags) para TTS com um ou vários locutores.
-Por exemplo, em um comando de um único falante, você pode dizer:
+無論是單人還是多人 TTS，都能使用自然語言提示詞控制風格、語氣、口音和語速。舉例來說，在單一說話者的提示中，你可以說：
 
 ```
-Say in an spooky voice:
-"By the pricking of my thumbs... [short pause]
-[whisper] Something wicked this way comes"
+Say in an spooky whisper:
+"By the pricking of my thumbs...
+Something wicked this way comes"
 ```
 
-Em um comando com vários locutores, forneça ao modelo o nome de cada um e a transcrição correspondente. Você também pode dar orientações individuais para cada locutor:
+在多位說話者的提示中，請提供每位說話者的姓名和對應的轉錄稿。你也可以個別為每位講者提供指引：
 
 ```
 Make Speaker1 sound tired and bored, and Speaker2 sound excited and happy:
 
-Speaker1: So... [yawn] what's on the agenda today?
+Speaker1: So... what's on the agenda today?
 Speaker2: You're never going to guess!
 ```
 
-Use uma [opção de voz](#voices) que corresponda ao estilo ou à emoção que você quer transmitir para enfatizar ainda mais. No comando anterior, por exemplo, a voz ofegante de *Encélado* pode enfatizar "cansado" e "entediado", enquanto o tom alegre de *Puck* pode complementar "animado" e "feliz".
+試著使用符合你想傳達風格或情緒的[語音選項](#voices)，進一步強調重點。舉例來說，在先前的提示中，*土衛二*的喘息聲可能強調「疲倦」和「無聊」，而*帕克*的歡快語氣則可襯托「興奮」和「開心」。
 
-## Gerar um comando para converter em áudio
+## 生成提示，將文字轉換為語音
 
-Os modelos de TTS só geram áudio, mas você pode usar [outros modelos](https://ai.google.dev/gemini-api/docs/models?hl=pt-br) para gerar uma transcrição primeiro e depois passar essa transcrição para o modelo de TTS ler em voz alta.
+TTS 模型只會輸出音訊，但您可以先使用[其他模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-tw)生成轉錄稿，然後將轉錄稿傳遞至 TTS 模型朗讀。
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
 
 client = genai.Client()
 
-transcript = client.models.generate_content(
+transcript_interaction = client.interactions.create(
    model="gemini-3.5-flash",
-   contents="""Generate a short transcript around 100 words that reads
+   input="""Generate a short transcript around 100 words that reads
             like it was clipped from a podcast by excited herpetologists.
-            The hosts names are Dr. Anya and Liam.""").text
-
-response = client.models.generate_content(
-   model="gemini-3.1-flash-tts-preview",
-   contents=transcript,
-   config=types.GenerateContentConfig(
-      response_modalities=["AUDIO"],
-      speech_config=types.SpeechConfig(
-         multi_speaker_voice_config=types.MultiSpeakerVoiceConfig(
-            speaker_voice_configs=[
-               types.SpeakerVoiceConfig(
-                  speaker='Dr. Anya',
-                  voice_config=types.VoiceConfig(
-                     prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                        voice_name='Kore',
-                     )
-                  )
-               ),
-               types.SpeakerVoiceConfig(
-                  speaker='Liam',
-                  voice_config=types.VoiceConfig(
-                     prebuilt_voice_config=types.PrebuiltVoiceConfig(
-                        voice_name='Puck',
-                     )
-                  )
-               ),
-            ]
-         )
-      )
-   )
+            The hosts names are Dr. Anya and Liam."""
 )
+transcript = transcript_interaction.output_text
 
-# ...Code to handle audio output
+tts_interaction = client.interactions.create(
+   model="gemini-3.1-flash-tts-preview",
+   input=transcript,
+   response_format={"type": "audio"},
+   generation_config={
+      "speech_config": [
+         {"speaker": "Dr. Anya", "voice": "Kore"},
+         {"speaker": "Liam", "voice": "Puck"}
+      ]
+   }
+)
 ```
 
 ### JavaScript
@@ -420,80 +310,60 @@ response = client.models.generate_content(
 ```
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
 async function main() {
 
-const transcript = await ai.models.generateContent({
+const transcriptInteraction = await client.interactions.create({
    model: "gemini-3.5-flash",
-   contents: "Generate a short transcript around 100 words that reads like it was clipped from a podcast by excited herpetologists. The hosts names are Dr. Anya and Liam.",
+   input: "Generate a short transcript around 100 words that reads like it was clipped from a podcast by excited herpetologists. The hosts names are Dr. Anya and Liam.",
    })
 
-const response = await ai.models.generateContent({
+const ttsInteraction = await client.interactions.create({
    model: "gemini-3.1-flash-tts-preview",
-   contents: transcript,
-   config: {
-      responseModalities: ['AUDIO'],
-      speechConfig: {
-         multiSpeakerVoiceConfig: {
-            speakerVoiceConfigs: [
-                   {
-                     speaker: "Dr. Anya",
-                     voiceConfig: {
-                        prebuiltVoiceConfig: {voiceName: "Kore"},
-                     }
-                  },
-                  {
-                     speaker: "Liam",
-                     voiceConfig: {
-                        prebuiltVoiceConfig: {voiceName: "Puck"},
-                    }
-                  }
-                ]
-              }
-            }
-      }
+   input: transcriptInteraction.output_text,
+   response_format: { type: 'audio' },
+   generation_config: {
+      speech_config: [
+         { speaker: "Dr. Anya", voice: "Kore" },
+         { speaker: "Liam", voice: "Puck" }
+      ]
+   }
   });
 }
-// ..JavaScript code for exporting .wav file for output audio
 
 await main();
 ```
 
-## Streaming de geração de fala
+## 串流語音生成
 
-É possível transmitir o áudio gerado enquanto ele é criado pelo modelo. Isso é útil para reduzir a latência percebida.
+您可以設定 `stream: true`，在模型生成音訊時串流播放。
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
+import base64
 
 client = genai.Client()
 
-response_stream = client.models.generate_content_stream(
-   model="gemini-3.1-flash-tts-preview",
-   contents="Say cheerfully: Have a wonderful day!",
-   config=types.GenerateContentConfig(
-      response_modalities=["AUDIO"],
-      speech_config=types.SpeechConfig(
-         voice_config=types.VoiceConfig(
-            prebuilt_voice_config=types.PrebuiltVoiceConfig(
-               voice_name='Kore',
-            )
-         )
-      ),
-   )
+stream = client.interactions.create(
+    model="gemini-3.1-flash-tts-preview",
+    input="Say cheerfully: Have a wonderful day!",
+    response_format={"type": "audio"},
+    generation_config={
+        "speech_config": [
+            {"voice": "Kore"}
+        ]
+    },
+    stream=True
 )
 
-for chunk in response_stream:
-   try:
-      data = chunk.candidates[0].content.parts[0].inline_data.data
-      # data contains raw PCM bytes (24kHz, 1-channel, 16-bit)
-      # Process the audio chunk (e.g., play it or write to a file)
-   except (IndexError, AttributeError):
-      pass
+for event in stream:
+    if event.event_type == "step.delta":
+        if event.delta.type == "audio":
+            audio_data = base64.b64decode(event.delta.data)
+            # Process the audio chunk (e.g. play it or write to a file)
 ```
 
 ### JavaScript
@@ -502,26 +372,26 @@ for chunk in response_stream:
 import {GoogleGenAI} from '@google/genai';
 
 async function main() {
-   const ai = new GoogleGenAI({});
+   const client = new GoogleGenAI({});
 
-   const responseStream = await ai.models.generateContentStream({
+   const stream = await client.interactions.create({
       model: "gemini-3.1-flash-tts-preview",
-      contents: [{ parts: [{ text: 'Say cheerfully: Have a wonderful day!' }] }],
-      config: {
-            responseModalities: ['AUDIO'],
-            speechConfig: {
-               voiceConfig: {
-                  prebuiltVoiceConfig: { voiceName: 'Kore' },
-               },
-            },
+      input: "Say cheerfully: Have a wonderful day!",
+      response_format: { type: 'audio' },
+      generation_config: {
+         speech_config: [
+            { voice: 'Kore' }
+         ]
       },
+      stream: true
    });
 
-   for await (const chunk of responseStream) {
-      const data = chunk.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-      if (data) {
-         const audioBuffer = Buffer.from(data, 'base64');
-         // Process the audio buffer
+   for await (const event of stream) {
+      if (event.event_type === 'step.delta') {
+         if (event.delta.type === 'audio') {
+            const audioBuffer = Buffer.from(event.delta.data, 'base64');
+            // Process the audio buffer
+         }
       }
    }
 }
@@ -531,151 +401,140 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-tts-preview:streamGenerateContent" \
-  -H "x-goog-api-key: $GEMINI_API_KEY" \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{
-        "contents": [{
-          "parts":[{
-            "text": "Say cheerfully: Have a wonderful day!"
-          }]
-        }],
-        "generationConfig": {
-          "responseModalities": ["AUDIO"],
-          "speechConfig": {
-            "voiceConfig": {
-              "prebuiltVoiceConfig": {
-                "voiceName": "Kore"
-              }
-            }
-          }
-        }
-    }'
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"       -H "x-goog-api-key: $GEMINI_API_KEY"       -H "Content-Type: application/json"       -H "Api-Revision: 2026-05-20"       --no-buffer       -d '{
+    "model": "gemini-3.1-flash-tts-preview",
+    "input": "Say cheerfully: Have a wonderful day!",
+    "response_format": {
+      "type": "audio"
+    },
+    "generation_config": {
+      "speech_config": [
+        { "voice": "Kore" }
+      ]
+    },
+    "stream": true
+  }'
 ```
 
-## Opções de voz
+## 語音選項
 
-Os modelos de TTS são compatíveis com as seguintes 30 opções de voz no campo `voice_name`:
+TTS 模型在 `voice_name` 欄位中支援下列 30 個語音選項：
 
 |  |  |  |
 | --- | --- | --- |
-| **Zephyr**: *Brilhante* | **Puck**: *Upbeat* | **Charon**: *informativa* |
-| **Kore**: *firme* | **Fenrir**: *Excitável* | **Leda**: *Juventude* |
-| **Orus**: *Firm* | **Aoede**: *Breezy* | **Callirrhoe** -- *Tranquila* |
-| **Autonoe**: *Bright* | **Enceladus**: *Breathy* | **Iapetus**: *Limpar* |
-| **Umbriel**: *tranquilo* | **Algieba**: *Suave* | **Despina**: *Smooth* |
-| **Erinome**: *Limpar* | **Algenib**: *Gravelly* | **Rasalgethi**: *informativa* |
-| **Laomedeia**: *Upbeat* | **Achernar**: *Soft* | **Alnilam**: *Firme* |
-| **Schedar**: *Even* | **Gacrux**: *Adulto* | **Pulcherrima**: *projetada* |
-| **Achird**: *Friendly* | **Zubenelgenubi**: *Casual* | **Vindemiatrix**: *Gentil* |
-| **Sadachbia**: *Lively* | **Sadaltager**: *Conhecimento* | **Sulafat**: *quente* |
+| **Zephyr** - *Bright* | **Puck** - *Upbeat* | **Charon** - *獲得了實用的資訊* |
+| **韓國** -- *Firm* | **Fenrir** - *興奮* | **Leda** - *年輕* |
+| **Orus** -- *Firm* | **Aoede** - *Breezy* | **Callirrhoe** - *隨和* |
+| **Autonoe** -- *Bright* | **Enceladus** -- *Breathy* | **Iapetus** -- *清除* |
+| **Umbriel** -- *Easy-going* | **Algieba** - *平滑* | **Despina** -- *Smooth* |
+| **Erinome** -- *Clear* | **Algenib** -- *Gravelly* | **Rasalgethi** -- *實用資訊* |
+| **Laomedeia** - *Upbeat* | **Achernar** -- *Soft* | **Alnilam** - *Firm* |
+| **Schedar** -- *Even* | **Gacrux** - *成人內容* | **Pulcherrima** - *Forward* |
+| **Achird** - *友善* | **Zubenelgenubi** - *Casual* | **Vindemiatrix** -- *Gentle* |
+| **Sadachbia** -- *Lively* | **Sadaltager** - *知識豐富* | **Sulafat** - *溫暖* |
 
-Você pode ouvir todas as opções de voz no [AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br).
+你可以在
 
-## Idiomas compatíveis
+## 支援的語言
 
-Os modelos de TTS detectam automaticamente o idioma de entrada. Os seguintes idiomas são aceitos:
+TTS 模型會自動偵測輸入語言。支援的語言如下：
 
-| Idioma | Código BCP-47 | Idioma | Código BCP-47 |
+| 語言 | BCP-47 代碼 | 語言 | BCP-47 代碼 |
 | --- | --- | --- | --- |
-| Árabe | ar | Filipino | fil |
-| Bengali | bn | Finlandês | fi |
-| Holandês | nl | Galego | gl |
-| Inglês | en | Georgiano | ka |
-| Francês | fr | Grego | el |
-| Alemão | de | Gujarati | gu |
-| Hindi | hi | Crioulo haitiano | ht |
-| Indonésio | ID | Hebraico | ele |
-| Italiano | it | Húngaro | hu |
-| Japonês | ja | Islandês | é |
-| Coreano | ko | Javanês | jv |
-| Marati | mr | Canarês | kn |
-| Polonês | pl | Concani | kok |
-| Português | pt | Laosiano | lo |
-| Romeno | ro | Latim | la |
-| Russo | ru | Letão | lv |
-| Espanhol | es | Lituano | lt |
-| Tâmil | ta | Luxemburguês | lb |
-| Télugo | te | Macedônio | mk |
-| Tailandês | th | Maithili | mai |
-| Turco | tr | Malgaxe | mg |
-| Ucraniano | uk | Malaio | ms |
-| Vietnamita | vi | Malaiala | ml |
-| Africâner | af | Mongol | mn |
-| Albanês | sq | Nepalês | ne |
-| Amárico | sou | Norueguês (Bokmål) | nb |
-| Armênio | hy | Norueguês (Nynorsk) | nn |
-| Azerbaijano | az | Oriá | ou |
-| Basco | eu | Pashto | ps |
-| Bielorrusso | be | Persa | fa |
-| Búlgaro | bg | Punjabi | pa |
-| Birmanês | my | Sérvio | sr |
-| Catalão | ca | Sindi | sd |
-| Cebuano | ceb | Cingalês | si |
-| Chinês, mandarim | cmn | Eslovaco | sk |
-| Croata | h | Esloveno | sl |
-| Tcheco | cs | Suaíli | sw |
-| Dinamarquês | da | Sueco | sv |
-| Estoniano | et | Urdu | ur |
+| 阿拉伯文 | ar | 菲律賓文 | fil |
+| 孟加拉文 | bn | 芬蘭文 | fi |
+| 荷蘭文 | nl | 加里西亞文 | gl |
+| 英文 | en | 喬治亞文 | ka |
+| 法文 | fr | 希臘文 | el |
+| 德文 | de | 古吉拉特文 | gu |
+| 北印度文 | hi | 海地克里奧爾文 | ht |
+| 印尼文 | id | 希伯來文 | 他 |
+| 義大利文 | it | 匈牙利文 | hu |
+| 日文 | ja | 冰島文 | 為 |
+| 韓文 | ko | 爪哇語 | jv |
+| 馬拉地文 | mr | 卡納達文 | kn |
+| 波蘭文 | pl | 貢根文 | kok |
+| 葡萄牙文 | pt | 寮文 | lo |
+| 羅馬尼亞文 | ro | 拉丁 | la |
+| 俄文 | ru | 拉脫維亞文 | lv |
+| 西班牙文 | es | 立陶宛文 | lt |
+| 泰米爾文 | ta | 盧森堡文 | lb |
+| 泰盧固文 | te | 馬其頓文 | mk |
+| 泰文 | th | 邁蒂利文 | mai |
+| 土耳其文 | tr | 馬達加斯加文 | mg |
+| 烏克蘭文 | uk | 馬來文 | 毫秒 |
+| 越南文 | vi | 馬拉雅拉姆文 | ml |
+| 南非荷蘭文 | af | 蒙古文 | mn |
+| 阿爾巴尼亞文 | sq | 尼泊爾文 | ne |
+| 阿姆哈拉文 | am | 挪威文 (巴克摩) | nb |
+| 亞美尼亞文 | hy | 挪威文 (新挪威文) | nn |
+| 亞塞拜然文 | az | 歐利亞文 | 或 |
+| 巴斯克文 | eu | 普什圖文 | ps |
+| 白俄羅斯語 | be | 波斯文 | fa |
+| 保加利亞文 | bg | 旁遮普文 | pa |
+| 緬甸文 | my | 塞爾維亞文 | sr |
+| 加泰隆尼亞文 | ca | 信德文 | sd |
+| 宿霧文 | ceb | 錫蘭文 | si |
+| 中文 (國語) | cmn | 斯洛伐克文 | sk |
+| 克羅埃西亞文 | 時 | 斯洛維尼亞文 | sl |
+| 捷克文 | cs | 史瓦西里文 | sw |
+| 丹麥文 | da | 瑞典文 | sv |
+| 愛沙尼亞文 | et | 烏都文 | ur |
 
-## Modelos compatíveis
+## 支援的模型
 
-| Modelo | Falante único | Multifone |
+| 模型 | 單一說話者 | 多位說話者 |
 | --- | --- | --- |
-| [Pré-lançamento do Gemini 3.1 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=pt-br) | ✔️ | ✔️ |
-| [Pré-lançamento do Gemini 2.5 Flash TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=pt-br) | ✔️ | ✔️ |
-| [Pré-lançamento da TTS do Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=pt-br) | ✔️ | ✔️ |
+| [Gemini 3.1 Flash TTS 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=zh-tw) | ✔️ | ✔️ |
+| [Gemini 2.5 Flash 預先發布版 TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-preview-tts?hl=zh-tw) | ✔️ | ✔️ |
+| [Gemini 2.5 Pro 預先發布版 TTS](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro-preview-tts?hl=zh-tw) | ✔️ | ✔️ |
 
-## Guia de comandos
+## 提示撰寫指南
 
-O modelo **Gemini Native Audio Generation Text-to-Speech (TTS)** se diferencia dos modelos tradicionais de TTS por usar um modelo de linguagem grande que sabe ***não apenas o que dizer, mas também como dizer***.
+**Gemini 原生語音生成 Text-to-Speech (TTS)** 模型與傳統 TTS 模型不同，它使用的大型語言模型不僅知道***要說什麼，也知道該怎麼說***。
 
-O modelo interpreta uma transcrição e determina como suas palavras devem ser entregues. Transcrição simples sem comandos adicionais soa natural. Mas o TTS do Gemini também vem com ferramentas que você pode usar para
-direcioná-lo.
+您可以將進階提示視為模型要遵循的系統指令。這項功能可為模型提供更多脈絡，並控管模型效能。
 
-O objetivo deste guia é oferecer uma orientação fundamental e despertar ideias ao desenvolver experiências de áudio. Vamos começar com **Tags** para controle inline rápido e, em seguida, explorar **estruturas de solicitação** avançadas para orientação de desempenho total.
+如要解鎖這項功能，使用者可以將自己視為導演，為虛擬配音員設定場景。如要製作提示，建議考慮下列元件：**聲音設定檔**，定義角色的核心特徵和原型；**場景說明**，建立實體環境和情緒「氛圍」；**導演筆記**，提供更精確的風格、口音和節奏控制等演出指導。
 
-### Tags de áudio
+使用者可以提供細微的指示，例如精確的地域口音、特定的副語言特徵 (例如氣音) 或語速，讓模型運用情境感知功能，生成極具動態、自然且富有表現力的音訊。為獲得最佳成效，建議**轉錄稿**和導演提示保持一致，*讓「誰說了什麼」*與「說了什麼」和「怎麼說」相符。
 
-As tags são modificadores inline, como `[whispers]` ou `[laughs]`, que oferecem controle granular sobre a veiculação. Use-as para mudar o tom, o ritmo e a
-vibe emocional de uma linha ou seção da transcrição. Você também pode usar esses recursos para
-adicionar interjeições e alguns outros sons não verbais à performance, como
-`[cough]`, `[sighs]` ou `[gasp]`.
+本指南旨在提供基本指引，並激發您在使用 Gemini TTS 音訊生成功能開發音訊體驗時的靈感。我們很期待看到你的作品！
 
-Não há uma lista exaustiva do que funciona ou não. Recomendamos testar diferentes emoções e expressões para ver como a saída muda.
+### 音訊標記
 
-Se a transcrição não estiver em inglês, recomendamos que você use tags de áudio em inglês para ter os melhores resultados.
+標記是 `[whispers]` 或 `[laughs]` 等內嵌修飾符，可讓您精細控管放送方式。你可以使用這些提示變更轉錄稿中某一行或某一段的語氣、步調和情緒氛圍。你也可以使用這些音效，在表演中加入插語和其他非語言聲音，例如 `[cough]`、`[sighs]` 或 `[gasp]`。
 
-**Use a criatividade com as tags de áudio**
+我們無法提供完整清單，說明哪些標記有效，哪些無效。建議您嘗試使用不同的情緒和表情，看看輸出結果有何變化。
 
-Para mostrar o tipo de variabilidade que você pode ter com as tags de áudio, aqui estão alguns exemplos que dizem a mesma coisa, mas a entrega muda com base nas tags usadas.
+如果轉錄稿不是英文，建議您仍使用英文音訊標記，以獲得最佳結果。
 
-Você pode mudar a ênfase da entrega adicionando tags no início de uma
-linha para deixar o falante animado, entediado ou relutante:
+**善用音訊標記**
 
-- `[excitedly]` Olá! Sou um novo modelo de conversão de texto em voz e posso dizer as coisas de várias maneiras diferentes. Como posso ajudar?
-- `[bored]` Olá, sou um novo modelo de conversão de texto em voz…
-- `[reluctantly]` Olá, sou um novo modelo de conversão de texto em voz…
+為展現音訊標記可帶來的多樣性，我們提供一系列範例，這些範例的內容相同，但傳達方式會因使用的標記而異。
 
-As tags também podem ser usadas para mudar o ritmo da entrega ou combinar ritmo com ênfase:
+你可以在行首加入標記，改變語氣，讓講者顯得興奮、無聊或不情願：
 
-- `[very fast]` Olá, sou um novo modelo de conversão de texto em voz…
-- `[very slow]` Olá, sou um novo modelo de conversão de texto em voz…
-- `[sarcastically, one painfully slow word at a time]` Olá, sou um novo modelo de conversão de texto em voz…
+- `[excitedly]`你好，我是新的文字轉語音模型，可以透過多種方式說話。你今天想做什麼呢？
+- `[bored]`你好，我是全新的文字轉語音模型…
+- `[reluctantly]`你好，我是全新的文字轉語音模型…
 
-Você também tem controle preciso sobre seções específicas, o que significa que pode sussurrar
-uma parte e gritar outra.
+標記也可以用來改變朗讀速度，或結合速度和強調：
 
-- `[whispers]` Olá, sou um novo modelo de conversão de texto em voz, `[shouting]` e posso
-  dizer coisas de várias maneiras diferentes. `[whispers]` Como posso ajudar hoje?
+- `[very fast]`你好，我是全新的文字轉語音模型…
+- `[very slow]`你好，我是全新的文字轉語音模型…
+- `[sarcastically, one painfully slow word at a time]` 你好，我是新的文字轉語音模型…
 
-Você também pode testar qualquer ideia criativa:
+你也可以精確控制特定段落，例如以氣音說出某一段，另一段則大聲喊叫。
 
-- `[like a cartoon dog]` Olá, sou um novo modelo de conversão de texto em voz…
-- `[like dracula]` Olá, sou um novo modelo de conversão de texto em voz…
+- `[whispers]`你好，我是新的文字轉語音模型，`[shouting]`可以透過多種方式說話。`[whispers]` 今天需要什麼協助嗎？
 
-As tags usadas com frequência incluem:
+您也可以嘗試任何廣告素材構想：
+
+- `[like a cartoon dog]`你好，我是全新的文字轉語音模型…
+- `[like dracula]`你好，我是全新的文字轉語音模型…
+
+常用的標記包括：
 
 |  |  |  |  |
 | --- | --- | --- | --- |
@@ -684,24 +543,20 @@ As tags usadas com frequência incluem:
 | `[mischievously]` | `[panicked]` | `[sarcastic]` | `[serious]` |
 | `[shouting]` | `[tired]` | `[trembling]` | `[whispers]` |
 
-As tags oferecem controle rápido e fácil sobre a entrega da transcrição. Para ter ainda mais controle, combine-os com um comando de contexto para definir o tom e a vibe geral da performance.
+標記可快速控制轉錄稿的傳送方式。如要進一步控管，可以搭配情境提示，設定表演的整體基調和氛圍。
 
-### Criação avançada de comandos
+### 提示結構
 
-Pense em um comando avançado como uma instrução do sistema para o modelo seguir. É uma maneira de dar ao modelo mais contexto e controle sobre o desempenho.
+完善的提示應包含下列元素，共同打造出色的演出：
 
-Um comando robusto inclui os seguintes elementos que se unem para criar uma ótima performance:
+- **語音設定檔**：建立語音角色，定義角色身分、原型和任何其他特徵，例如年齡、背景等。
+- **場景**：設定舞台。描述實體環境和「氛圍」。
+- **導演筆記**：提供成效指引，方便你細分虛擬藝人應注意的重要指示。例如風格、呼吸、節奏、咬字和口音。
+- **情境範例**：為模型提供情境起點，讓虛擬演員自然進入您設定的場景。
+- **轉錄稿**：模型會朗讀的文字。為獲得最佳效能，請注意轉錄稿主題和寫作風格應與你提供的指示相關。
+- **語音標記**：可插入轉錄稿的修飾符，用來變更文字的傳達方式，例如 `[whispers]` 或 `[shouting]`。
 
-- **Perfil de áudio**: estabelece uma persona para a voz, definindo uma identidade de personagem, um arquétipo e outras características, como idade, histórico etc.
-- **Cena**: define o cenário. Descreve o ambiente físico e a "vibe".
-- **Observações do diretor**: orientações de performance em que você pode detalhar quais instruções são importantes para o talento virtual. Exemplos são estilo, respiração, ritmo, articulação e sotaque.
-- **Exemplo de contexto**: dá ao modelo um ponto de partida contextual para que seu ator virtual entre na cena que você configurou de forma natural.
-- **Transcrição**: o texto que o modelo vai falar. Para obter os melhores resultados,
-  lembre-se de que o tema da transcrição e o estilo de escrita devem estar de acordo com as
-  instruções que você está fornecendo.
-- **Tags de áudio**: modificadores que podem ser inseridos em uma transcrição para mudar a forma como essa parte do texto é entregue, como `[whispers]` ou `[shouting]`.
-
-Exemplo de comando completo:
+完整提示範例：
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -723,7 +578,7 @@ always raised to keep the tone bright, sunny, and explicitly inviting.
 vowels on excitement words (e.g., "Beauuutiful morning").
 
 Pace: Speaks at an energetic pace, keeping up with the fast music.  Speaks
-with A "bouncing" cadence. High-speed delivery with fluid transitions — no dead
+with A "bouncing" cadence. High-speed delivery with fluid transitions - no dead
 air, no gaps.
 
 Accent: Jaz is from Brixton, London
@@ -733,25 +588,24 @@ Jaz is the industry standard for Top 40 radio, high-octane event promos, or any
 script that requires a charismatic Estuary accent and 11/10 infectious energy.
 
 #### TRANSCRIPT
-[excitedly] Yes, massive vibes in the studio! You are locked in and it is
-absolutely popping off in London right now. If you're stuck on the tube, or
-just sat there pretending to work... stop it. Seriously, I see you.
-[shouting] Turn this up! We've got the project roadmap landing in three,
-two... let's go!
+Yes, massive vibes in the studio! You are locked in and it is absolutely
+popping off in London right now. If you're stuck on the tube, or just sat
+there pretending to work... stop it. Seriously, I see you. Turn this up!
+We've got the project roadmap landing in three, two... let's go!
 ```
 
-### Estratégias detalhadas de comandos
+### 詳細的提示策略
 
-Vamos detalhar cada elemento do comando.
+將提示的每個元素細分成以下內容：
 
-#### Perfil de áudio
+#### 音訊格式設定
 
-Descreva brevemente a personalidade do personagem.
+簡要描述角色的特徵。
 
-- **Nome.** Dar um nome ao personagem ajuda a fundamentar o modelo e a melhorar a performance. Refira-se ao personagem pelo nome ao definir a cena e o contexto.
-- **Papel**. Identidade principal e arquétipo do personagem que está atuando na cena. Por exemplo, DJ de rádio, podcaster, repórter de notícias etc.
+- **名稱**：為角色命名有助於模型掌握角色特徵，並提升效能。設定場景和情境時，請使用角色名稱
+- **角色**：角色在場景中扮演的核心身分和原型，例如電台 DJ、Podcast 創作者、新聞記者等。
 
-Exemplos:
+範例：
 
 ```
 # AUDIO PROFILE: Jaz R.
@@ -763,11 +617,11 @@ Exemplos:
 ## "The Beauty Influencer"
 ```
 
-#### Cenário
+#### 場景
 
-Defina o contexto da cena, incluindo local, clima e detalhes ambientais que estabelecem o tom e a vibe. Descreva o que está acontecendo ao redor do personagem e como isso o afeta. A cena fornece o contexto ambiental para toda a interação e orienta a atuação de maneira sutil e orgânica.
+設定場景的背景資訊，包括地點、情緒和環境細節，以確立基調和氛圍。描述角色周遭發生的情況，以及這些情況對角色的影響。場景會為整個互動提供環境背景資訊，並以細微的自然方式引導表演。
 
-Exemplos:
+範例：
 
 ```
 ## THE SCENE: The London Studio
@@ -786,15 +640,15 @@ deadened by plush velvet curtains and a heavy rug, but there is a
 distinct "proximity effect."
 ```
 
-#### Observações do diretor
+#### 導演附註
 
-Esta seção importante inclui orientações específicas sobre performance. Você pode pular todos os outros elementos, mas recomendamos que inclua este.
+這個重要章節包含具體的成效指引。您可以略過所有其他元素，但建議您加入這個元素。
 
-Defina apenas o que é importante para a performance, tomando cuidado para não especificar demais. Muitas regras restritas limitam a criatividade dos modelos e podem resultar em uma performance pior. Equilibre a descrição da função e da cena com as regras de performance específicas.
+請只定義對效能有重要影響的項目，並小心不要過度指定。如果設下太多嚴格規則，模型創意就會受到限制，成效也可能因此變差。在角色和場景說明中，加入具體的演出規則。
 
-As instruções mais comuns são **Estilo, ritmo e sotaque**, mas o modelo não se limita a elas nem as exige. Inclua instruções personalizadas para abordar outros detalhes importantes para sua performance e entre em detalhes conforme necessário.
+最常見的指示是**風格、節奏和口音**，但模型不限於這些指示，也不需要這些指示。您可以視需要加入自訂指令，涵蓋對成效有重要影響的其他詳細資料，並盡可能詳細說明。
 
-Exemplo:
+例如：
 
 ```
 ### DIRECTOR'S NOTES
@@ -807,17 +661,15 @@ delivery influencers use in short form videos.
 Accent: Southern california valley girl from Laguna Beach |
 ```
 
-**Estilo**:
+**樣式：**
 
-Define o tom e o estilo da fala gerada. Inclua coisas como "animado",
-"enérgico", "relaxado", "entediado" etc. para orientar a performance. Seja descritivo e
-forneça o máximo de detalhes possível: *"Entusiasmo contagiante. O ouvinte precisa sentir que faz parte de um evento comunitário enorme e emocionante".* funciona melhor do que simplesmente dizer *"enérgico e entusiasmado".*
+設定生成語音的語氣和風格。包括歡快、充滿活力、放鬆、無聊等，引導表演。請盡可能詳細說明，並視需要提供詳細資料：*「熱情洋溢，聽眾應該感覺自己是盛大熱鬧社群活動的一份子。」*比「充滿活力和熱情」更貼切。
 
-Você pode até tentar termos populares no setor de narração, como "sorriso vocal". Você pode combinar quantas características de estilo quiser.
+你甚至可以嘗試配音產業常用的術語，例如「聲音微笑」。你可以視需要疊加多種風格特徵。
 
-Exemplos:
+範例：
 
-Emoção simples
+簡單情緒
 
 ```
 DIRECTORS NOTES
@@ -826,7 +678,7 @@ Style: Frustrated and angry developer who can't get the build to run.
 ...
 ```
 
-Mais profundidade
+更深入
 
 ```
 DIRECTORS NOTES
@@ -835,7 +687,7 @@ Style: Sassy GenZ beauty YouTuber, who mostly creates content for YouTube Shorts
 ...
 ```
 
-Complexo
+複雜
 
 ```
 DIRECTORS NOTES
@@ -846,11 +698,11 @@ always raised to keep the tone bright, sunny, and explicitly inviting.
 elongated vowels on excitement words (e.g., "Beauuutiful morning").
 ```
 
-**Destaque**:
+**口音：**
 
-Descreva o sotaque desejado. Quanto mais específico for o comando, melhores serão os resultados. Por exemplo, use "*Sotaque britânico como o ouvido em Croydon, Inglaterra*" em vez de "*Sotaque britânico*".
+描述所選口音。描述得越具體，結果就越符合需求。例如，使用「*英國克羅伊登的英式英語口音*」而非「*英國口音*」。
 
-Exemplos:
+範例：
 
 ```
 ### DIRECTORS NOTES
@@ -862,17 +714,17 @@ Accent: Southern california valley girl from Laguna Beach
 ```
 ### DIRECTORS NOTES
 ...
-Accent: Jaz is a DJ from Brixton, London
+Accent: Jaz is a from Brixton, London
 ...
 ```
 
-**Ritmo:**
+**使用速度：**
 
-Ritmo geral e variação de ritmo ao longo da matéria.
+整部作品的整體節奏和節奏變化。
 
-Exemplos:
+範例：
 
-Simples
+簡潔
 
 ```
 ### DIRECTORS NOTES
@@ -881,7 +733,7 @@ Pacing: Speak as fast as possible
 ...
 ```
 
-Mais profundidade
+更深入
 
 ```
 ### DIRECTORS NOTES
@@ -890,7 +742,7 @@ Pacing: Speaks at a faster, energetic pace, keeping up with fast paced music.
 ...
 ```
 
-Complexo
+複雜
 
 ```
 ### DIRECTORS NOTES
@@ -899,58 +751,39 @@ Pacing: The "Drift": The tempo is incredibly slow and liquid. Words bleed into e
 ...
 ```
 
-#### Tags de transcrição e áudio
+**歡迎試試**
 
-A transcrição é o texto exato que o modelo vai falar. Uma tag de áudio é uma palavra entre colchetes que indica como algo deve ser dito, uma mudança de tom ou uma interjeição.
+在 [TTS 應用程式](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=zh-tw)中試試這些範例，讓 Gemini 帶你體驗導演的感覺。請記住下列訣竅，錄製出色的歌唱表演：
 
-```
-### TRANSCRIPT
+- 請務必確保提示內容一致，因為腳本和指示是製作優質表演的關鍵。
+- 不必鉅細靡遺地描述所有內容，有時讓模型填補空白處，反而能產生更自然的結果。(就像才華洋溢的演員)
+- 如果遇到任何難題，可以向 Gemini 尋求協助，製作劇本或表演。
 
-I know right, [sarcastically] I couldn't believe it. [whispers] She should have totally left
-at that point.
+## 限制
 
-[cough] Well, [sighs] I guess it doesn't matter now.
-```
+- TTS 模型只能接收文字輸入內容，並生成音訊輸出內容。
+- TTS 工作階段的[脈絡窗口](https://ai.google.dev/gemini-api/docs/long-context?hl=zh-tw)限制為 3.2 萬個詞元。
+- 如需語言支援資訊，請參閱「[語言](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw#languages)」一節。
+- TTS 不支援串流，但使用 `gemini-3.1-flash-tts-preview` 時除外。
 
-**Experimente**
+使用 Gemini 3.1 Flash TTS 預先發布版模型生成語音時，須遵守下列限制：
 
-Teste alguns desses exemplos no [AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br), use nosso [app TTS](http://aistudio.google.com/app/apps/bundled/synergy_intro?hl=pt-br) e deixe o Gemini assumir a direção. Confira algumas dicas para fazer ótimas performances vocais:
+- **語音與提示指令不一致：**模型輸出內容不一定會完全符合所選語音，因此音訊聽起來可能與預期不同。為避免語調不一致 (例如深沉的男聲試圖模仿年輕女孩的聲音)，請確保提示的書面語氣和情境與所選講者的個人資料自然一致。
+- **較長輸出內容的品質：**如果生成輸出內容的時間超過幾分鐘，語音品質和一致性可能會開始下降。建議將轉錄稿分割為多個小型檔案。
+- **偶爾會傳回文字權杖：**模型偶爾會傳回文字權杖，而非音訊權杖，導致伺服器因 `500` 錯誤而無法處理要求。由於這類情況只會在極少數要求中隨機發生，因此您應在應用程式中實作自動重試邏輯，以便處理這些要求。
+- **提示分類器誤拒：**如果提示內容含糊不清，可能無法觸發語音合成分類器，導致要求遭拒 (`PROHIBITED_CONTENT`)，或導致模型大聲朗讀你的風格指示和導演筆記。請加入清楚的前言，指示模型合成語音，並明確標示實際語音轉錄稿的開頭，藉此驗證提示。
 
-- Não se esqueça de manter todo o comando coerente. O roteiro e a direção trabalham juntos para criar uma ótima performance.
-- Não é necessário descrever tudo. Às vezes, dar espaço para o modelo preencher as lacunas ajuda a manter a naturalidade. (Assim como um ator talentoso)
-- Se você estiver com dificuldades, peça ajuda ao Gemini para criar seu roteiro ou apresentação.
+## 後續步驟
 
-## Limitações
+- Gemini 的 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw) 提供互動式音訊生成選項，可與其他模態交錯使用。
+- 如要使用音訊*輸入*，請參閱「[音訊理解](https://ai.google.dev/gemini-api/docs/audio?hl=zh-tw)」指南。
 
-- Os modelos de TTS só podem receber entradas de texto e gerar saídas de áudio.
-- Uma sessão de TTS tem um limite de [janela de contexto](https://ai.google.dev/gemini-api/docs/long-context?hl=pt-br) de 32 mil tokens.
-- Consulte a seção [Idiomas](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pt-br#languages) para saber quais idiomas são aceitos.
-- A TTS não oferece suporte a streaming para modelos anteriores à versão 3.1. O streaming é compatível com `gemini-3.1-flash-tts-preview` e versões mais recentes.
+提供意見
 
-As restrições a seguir se aplicam especificamente ao usar o modelo de prévia da TTS do Gemini 3.1 Flash para geração de voz:
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-- **Inconsistência de voz com as instruções do comando**:a saída do modelo nem sempre corresponde ao falante selecionado, fazendo com que o áudio soe diferente do esperado. Para evitar tons incompatíveis (como uma voz masculina grave tentando falar como uma menina), verifique se o tom e o contexto da sua solicitação escrita estão naturalmente alinhados ao perfil do locutor selecionado.
-- **Qualidade de saídas mais longas**:a qualidade e a consistência da fala podem começar a variar em saídas geradas com mais de alguns minutos. Recomendamos dividir as transcrições em partes menores.
-- **Retornos ocasionais de tokens de texto**:o modelo às vezes retorna tokens de texto
-  em vez de tokens de áudio, fazendo com que o servidor falhe na solicitação com um erro `500`. Como isso ocorre aleatoriamente em uma porcentagem muito pequena de solicitações,
-  implemente uma lógica de nova tentativa automática no aplicativo para lidar
-  com esses casos.
-- **Rejeições falsas do classificador de comandos**:comandos vagos podem não acionar o classificador de síntese de voz, resultando em uma solicitação rejeitada (`PROHIBITED_CONTENT`) ou fazendo com que o modelo leia em voz alta suas instruções de estilo e observações do diretor. Valide seus comandos adicionando um preâmbulo claro
-  instruindo o modelo a sintetizar a fala e rotulando explicitamente onde a
-  transcrição falada real começa.
+上次更新時間：2026-06-22 (世界標準時間)。
 
-## A seguir
+想進一步說明嗎？
 
-- Confira o [livro de receitas de geração de áudio](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_TTS.ipynb?hl=pt-br).
-- A [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) do Gemini oferece opções interativas de geração de áudio que podem ser intercaladas com outras modalidades.
-- Para trabalhar com *entradas* de áudio, consulte o guia [Compreensão de áudio](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br).
-
-Envie comentários
-
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
-
-Última atualização 2026-06-19 UTC.
-
-Quer enviar seu feedback?
-
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-19 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-22 (世界標準時間)。"],[],[]]

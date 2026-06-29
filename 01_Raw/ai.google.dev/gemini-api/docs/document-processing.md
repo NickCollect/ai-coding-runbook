@@ -1,323 +1,197 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=ar
-fetched_at: 2026-06-22T06:27:54.698606+00:00
-title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=ja
+fetched_at: 2026-06-29T05:40:45.907638+00:00
+title: "\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\u306e\u7406\u89e3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) is now available in preview with collaborative planning, visualization, MCP support, and more.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-إرسال ملاحظات
+フィードバックを送信
 
-# فهم المستندات
+# ドキュメントの理解
 
-يمكن لنماذج Gemini معالجة المستندات بتنسيق PDF باستخدام ميزة &quot;الرؤية الأصلية&quot; لفهم سياقات المستندات بأكملها. يتجاوز ذلك مجرد استخراج النص، ما يتيح لـ Gemini ما يلي:
+Gemini モデルは、ネイティブ ビジョンを使用してドキュメント全体のコンテキストを理解し、PDF 形式のドキュメントを処理できます。これは単なるテキスト抽出にとどまらず、Gemini は次のことができます。
 
-- تحليل المحتوى وتفسيره، بما في ذلك النصوص والصور والمخططات والرسومات البيانية والجداول، حتى في المستندات الطويلة التي تصل إلى 1,000 صفحة
-- استخراج المعلومات بتنسيقات [النتائج المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)
-- تلخيص المستندات والإجابة عن الأسئلة استنادًا إلى العناصر المرئية والنصية فيها
-- تحويل محتوى المستند إلى نص (مثل HTML)، مع الحفاظ على التنسيقات والتصميمات، لاستخدامه في التطبيقات اللاحقة
+- テキスト、画像、図、グラフ、表などのコンテンツを分析して解釈します。最大 1,000 ページの長いドキュメントでも可能です。
+- 情報を抽出して[構造化された出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)形式にします。
+- ドキュメント内の視覚要素とテキスト要素の両方に基づいて、要約を作成し、質問に回答します。
+- レイアウトと書式設定を保持したまま、ドキュメント コンテンツを（HTML などに）書き起こし、ダウンストリーム アプリケーションで使用します。
 
-يمكنك أيضًا ضبط مستندات غير PDF بالطريقة نفسها، ولكن سيتعامل معها Gemini كنص عادي، ما سيؤدي إلى إزالة السياق، مثل الرسوم البيانية أو التنسيق.
+PDF 以外のドキュメントも同じように渡すことができますが、Gemini はそれらを通常のテキストとして認識するため、グラフや書式設定などのコンテキストは失われます。
 
-## تمرير بيانات ملف PDF مضمّنة
+## PDF データをインラインで渡す
 
-يمكنك تمرير بيانات PDF مضمّنة في الطلب إلى `generateContent`. هذه الطريقة هي الأنسب للمستندات الصغيرة أو المعالجة المؤقتة التي لا تحتاج فيها إلى الرجوع إلى الملف في الطلبات اللاحقة. ننصحك باستخدام [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar#large-pdfs)
-للمستندات الأكبر حجمًا التي تحتاج إلى الرجوع إليها في المحادثات المتعددة الأدوار
-لتحسين وقت استجابة الطلب وتقليل معدل نقل البيانات.
+リクエストで PDF データをインラインで渡すことができます。これは、小さなドキュメントや、後続のリクエストでファイルを参照する必要がない一時的な処理に最適です。複数ターンのインタラクションで参照する必要がある大きなドキュメントには、
+[Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja#large-pdfs)
+を使用して
+リクエストのレイテンシを改善し、帯域幅の使用量を削減することをおすすめします。
 
-يوضّح المثال التالي كيفية استرداد ملف PDF من عنوان URL وتحويله إلى وحدات بايت لمعالجته:
+次の例は、PDF データをインラインで渡す方法を示しています。
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
-import httpx
+import base64
 
 client = genai.Client()
 
-doc_url = "https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019_3_art_0_py4t4l_convrt.pdf"
+with open('path/to/document.pdf', 'rb') as f:
+    pdf_bytes = f.read()
 
-# Retrieve and encode the PDF byte
-doc_data = httpx.get(doc_url).content
-
-prompt = "Summarize this document"
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3.5-flash",
-    contents=[
-        types.Part.from_bytes(
-            data=doc_data,
-            mime_type='application/pdf',
-        ),
-        prompt
+    input=[
+        {
+            "type": "document",
+            "data": base64.b64encode(pdf_bytes).decode('utf-8'),
+            "mime_type": "application/pdf"
+        },
+        {"type": "text", "text": "Summarize this document"}
     ]
 )
 
-print(response.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
+import * as fs from "node:fs";
 
-const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
+const ai = new GoogleGenAI({});
 
 async function main() {
-    const pdfResp = await fetch('https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019_3_art_0_py4t4l_convrt.pdf')
-        .then((response) => response.arrayBuffer());
-
-    const contents = [
-        { text: "Summarize this document" },
-        {
-            inlineData: {
-                mimeType: 'application/pdf',
-                data: Buffer.from(pdfResp).toString("base64")
-            }
-        }
-    ];
-
-    const response = await ai.models.generateContent({
-        model: "gemini-3.5-flash",
-        contents: contents
+    const pdfData = fs.readFileSync("path/to/document.pdf", {
+        encoding: "base64"
     });
-    console.log(response.text);
+
+    const interaction = await ai.interactions.create({
+        model: "gemini-3.5-flash",
+        input: [
+            { type: "text", text: "Summarize this document" },
+            {
+                type: "document",
+                data: pdfData,
+                mime_type: "application/pdf"
+            }
+        ]
+    });
+    console.log(interaction.output_text);
 }
 
 main();
 ```
 
-### Go
-
-```
-package main
-
-import (
-    "context"
-    "fmt"
-    "io"
-    "net/http"
-    "os"
-    "google.golang.org/genai"
-)
-
-func main() {
-
-    ctx := context.Background()
-    client, _ := genai.NewClient(ctx, &genai.ClientConfig{
-        APIKey:  os.Getenv("GEMINI_API_KEY"),
-        Backend: genai.BackendGeminiAPI,
-    })
-
-    pdfResp, _ := http.Get("https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019_3_art_0_py4t4l_convrt.pdf")
-    var pdfBytes []byte
-    if pdfResp != nil && pdfResp.Body != nil {
-        pdfBytes, _ = io.ReadAll(pdfResp.Body)
-        pdfResp.Body.Close()
-    }
-
-    parts := []*genai.Part{
-        &genai.Part{
-            InlineData: &genai.Blob{
-                MIMEType: "application/pdf",
-                Data:     pdfBytes,
-            },
-        },
-        genai.NewPartFromText("Summarize this document"),
-    }
-
-    contents := []*genai.Content{
-        genai.NewContentFromParts(parts, genai.RoleUser),
-    }
-
-    result, _ := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.5-flash",
-        contents,
-        nil,
-    )
-
-    fmt.Println(result.Text())
-}
-```
-
 ### REST
 
 ```
-DOC_URL="https://discovery.ucl.ac.uk/id/eprint/10089234/1/343019_3_art_0_py4t4l_convrt.pdf"
-PROMPT="Summarize this document"
-DISPLAY_NAME="base64_pdf"
+PDF_PATH="path/to/document.pdf"
 
-# Download the PDF
-wget -O "${DISPLAY_NAME}.pdf" "${DOC_URL}"
-
-# Check for FreeBSD base64 and set flags accordingly
 if [[ "$(base64 --version 2>&1)" = *"FreeBSD"* ]]; then
   B64FLAGS="--input"
 else
   B64FLAGS="-w0"
 fi
 
-# Base64 encode the PDF
-ENCODED_PDF=$(base64 $B64FLAGS "${DISPLAY_NAME}.pdf")
-
-# Generate content using the base64 encoded PDF
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GOOGLE_API_KEY" \
-    -H 'Content-Type: application/json' \
-    -X POST \
-    -d '{
-      "contents": [{
-        "parts":[
-          {"inline_data": {"mime_type": "application/pdf", "data": "'"$ENCODED_PDF"'"}},
-          {"text": "'$PROMPT'"}
-        ]
-      }]
-    }' 2> /dev/null > response.json
-
-cat response.json
-echo
-
-jq ".candidates[].content.parts[].text" response.json
-
-# Clean up the downloaded PDF
-rm "${DISPLAY_NAME}.pdf"
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "input": [
+      {
+        "type": "document",
+        "data": "'$(base64 $B64FLAGS $PDF_PATH)'",
+        "mime_type": "application/pdf"
+      },
+      {"type": "text", "text": "Summarize this document"}
+    ]
+  }'
 ```
 
-يمكنك أيضًا قراءة ملف PDF من ملف محلي للمعالجة:
+ローカルの PDF ファイルをアップロードして処理することもできます。
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
-import pathlib
 
 client = genai.Client()
 
-# Retrieve and encode the PDF byte
-filepath = pathlib.Path('file.pdf')
+uploaded_file = client.files.upload(file="file.pdf")
 
-prompt = "Summarize this document"
-response = client.models.generate_content(
-  model="gemini-3.5-flash",
-  contents=[
-      types.Part.from_bytes(
-        data=filepath.read_bytes(),
-        mime_type='application/pdf',
-      ),
-      prompt])
-print(response.text)
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input=[
+        {"type": "document", "uri": uploaded_file.uri, "mime_type": uploaded_file.mime_type},
+        {"type": "text", "text": "Summarize this document"}
+    ]
+)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
-import * as fs from 'fs';
 
-const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
+const ai = new GoogleGenAI({});
 
 async function main() {
-    const contents = [
-        { text: "Summarize this document" },
-        {
-            inlineData: {
-                mimeType: 'application/pdf',
-                data: Buffer.from(fs.readFileSync("content/343019_3_art_0_py4t4l_convrt.pdf")).toString("base64")
-            }
-        }
-    ];
-
-    const response = await ai.models.generateContent({
-        model: "gemini-3.5-flash",
-        contents: contents
+    const uploadedFile = await ai.files.upload({
+        file: "file.pdf",
+        config: { mime_type: "application/pdf" }
     });
-    console.log(response.text);
+
+    const interaction = await ai.interactions.create({
+        model: "gemini-3.5-flash",
+        input: [
+            { type: "text", text: "Summarize this document" },
+            {
+                type: "document",
+                uri: uploadedFile.uri,
+                mime_type: uploadedFile.mime_type
+            }
+        ]
+    });
+    console.log(interaction.output_text);
 }
 
 main();
 ```
 
-### Go
+## Files API を使用して PDF をアップロードする
 
-```
-package main
+大きなファイルの場合や、複数のリクエストでドキュメントを再利用する場合は、Files API を使用することをおすすめします。これにより、ファイルのアップロードがモデル リクエストから切り離され、リクエストのレイテンシが改善され、帯域幅の使用量が削減されます。
 
-import (
-    "context"
-    "fmt"
-    "os"
-    "google.golang.org/genai"
-)
+### URL からの大きな PDF
 
-func main() {
-
-    ctx := context.Background()
-    client, _ := genai.NewClient(ctx, &genai.ClientConfig{
-        APIKey:  os.Getenv("GEMINI_API_KEY"),
-        Backend: genai.BackendGeminiAPI,
-    })
-
-    pdfBytes, _ := os.ReadFile("path/to/your/file.pdf")
-
-    parts := []*genai.Part{
-        &genai.Part{
-            InlineData: &genai.Blob{
-                MIMEType: "application/pdf",
-                Data:     pdfBytes,
-            },
-        },
-        genai.NewPartFromText("Summarize this document"),
-    }
-    contents := []*genai.Content{
-        genai.NewContentFromParts(parts, genai.RoleUser),
-    }
-
-    result, _ := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.5-flash",
-        contents,
-        nil,
-    )
-
-    fmt.Println(result.Text())
-}
-```
-
-## تحميل ملفات PDF باستخدام Files API
-
-ننصحك باستخدام واجهة برمجة التطبيقات Files API للملفات الأكبر حجمًا أو عندما تريد إعادة استخدام مستند في طلبات متعددة. يؤدي ذلك إلى تحسين وقت استجابة الطلبات وتقليل معدّل نقل البيانات من خلال فصل عملية تحميل الملف عن طلبات النموذج.
-
-### ملفات PDF كبيرة من عناوين URL
-
-استخدِم File API لتسهيل تحميل ملفات PDF الكبيرة ومعالجتها من عناوين URL:
+File API を使用すると、URL から大きな PDF ファイルを簡単にアップロードして処理できます。
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
 import io
 import httpx
 
 client = genai.Client()
 
-long_context_pdf_path = "https://www.nasa.gov/wp-content/uploads/static/history/alsj/a17/A17_FlightPlan.pdf"
+long_context_pdf_path = "https://arxiv.org/pdf/2312.11805"
 
-# Retrieve and upload the PDF using the File API
 doc_io = io.BytesIO(httpx.get(long_context_pdf_path).content)
 
 sample_doc = client.files.upload(
-  # You can pass a path or a file-like object here
   file=doc_io,
   config=dict(
     mime_type='application/pdf')
@@ -325,22 +199,26 @@ sample_doc = client.files.upload(
 
 prompt = "Summarize this document"
 
-response = client.models.generate_content(
-  model="gemini-3.5-flash",
-  contents=[sample_doc, prompt])
-print(response.text)
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input=[
+        {"type": "document", "uri": sample_doc.uri, "mime_type": sample_doc.mime_type},
+        {"type": "text", "text": prompt}
+    ]
+)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-import { createPartFromUri, GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
+const ai = new GoogleGenAI({});
 
 async function main() {
 
-    const pdfBuffer = await fetch("https://www.nasa.gov/wp-content/uploads/static/history/alsj/a17/A17_FlightPlan.pdf")
+    const pdfBuffer = await fetch("https://arxiv.org/pdf/2312.11805")
         .then((response) => response.arrayBuffer());
 
     const fileBlob = new Blob([pdfBuffer], { type: 'application/pdf' });
@@ -352,7 +230,6 @@ async function main() {
         },
     });
 
-    // Wait for the file to be processed.
     let getFile = await ai.files.get({ name: file.name });
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
@@ -367,88 +244,26 @@ async function main() {
         throw new Error('File processing failed.');
     }
 
-    // Add the file to the contents.
-    const content = [
-        'Summarize this document',
-    ];
-
-    if (file.uri && file.mimeType) {
-        const fileContent = createPartFromUri(file.uri, file.mimeType);
-        content.push(fileContent);
-    }
-
-    const response = await ai.models.generateContent({
+    const interaction = await ai.interactions.create({
         model: 'gemini-3.5-flash',
-        contents: content,
+        input: [
+            { type: "document", uri: file.uri, mime_type: file.mime_type },
+            { type: "text", text: "Summarize this document" }
+        ],
     });
 
-    console.log(response.text);
+    console.log(interaction.output_text);
 
 }
 
 main();
 ```
 
-### Go
-
-```
-package main
-
-import (
-  "context"
-  "fmt"
-  "io"
-  "net/http"
-  "os"
-  "google.golang.org/genai"
-)
-
-func main() {
-
-  ctx := context.Background()
-  client, _ := genai.NewClient(ctx, &genai.ClientConfig{
-    APIKey:  os.Getenv("GEMINI_API_KEY"),
-    Backend: genai.BackendGeminiAPI,
-  })
-
-  pdfURL := "https://www.nasa.gov/wp-content/uploads/static/history/alsj/a17/A17_FlightPlan.pdf"
-  localPdfPath := "A17_FlightPlan_downloaded.pdf"
-
-  respHttp, _ := http.Get(pdfURL)
-  defer respHttp.Body.Close()
-
-  outFile, _ := os.Create(localPdfPath)
-  defer outFile.Close()
-
-  _, _ = io.Copy(outFile, respHttp.Body)
-
-  uploadConfig := &genai.UploadFileConfig{MIMEType: "application/pdf"}
-  uploadedFile, _ := client.Files.UploadFromPath(ctx, localPdfPath, uploadConfig)
-
-  promptParts := []*genai.Part{
-    genai.NewPartFromURI(uploadedFile.URI, uploadedFile.MIMEType),
-    genai.NewPartFromText("Summarize this document"),
-  }
-  contents := []*genai.Content{
-    genai.NewContentFromParts(promptParts, genai.RoleUser), // Specify role
-  }
-
-    result, _ := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.5-flash",
-        contents,
-        nil,
-    )
-
-  fmt.Println(result.Text())
-}
-```
-
 ### REST
 
 ```
-PDF_PATH="https://www.nasa.gov/wp-content/uploads/static/history/alsj/a17/A17_FlightPlan.pdf"
-DISPLAY_NAME="A17_FlightPlan"
+PDF_PATH="https://arxiv.org/pdf/2312.11805"
+DISPLAY_NAME="Gemini_paper"
 PROMPT="Summarize this document"
 
 # Download the PDF from the provided URL
@@ -464,7 +279,7 @@ tmp_header_file=upload-header.tmp
 
 # Initial resumable request defining metadata.
 # The upload url is in the response headers dump them to a file.
-curl "${BASE_URL}/upload/v1beta/files?key=${GOOGLE_API_KEY}" \
+curl "https://generativelanguage.googleapis.com/upload/v1beta/files?key=${GEMINI_API_KEY}" \
   -D upload-header.tmp \
   -H "X-Goog-Upload-Protocol: resumable" \
   -H "X-Goog-Upload-Command: start" \
@@ -483,74 +298,77 @@ curl "${upload_url}" \
   -H "X-Goog-Upload-Command: upload, finalize" \
   --data-binary "@${DISPLAY_NAME}.pdf" 2> /dev/null > file_info.json
 
-file_uri=$(jq ".file.uri" file_info.json)
+file_uri=$(jq -r ".file.uri" file_info.json)
 echo "file_uri: ${file_uri}"
 
-# Now generate content using that file
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GOOGLE_API_KEY" \
+# Create payload JSON file for safety
+cat << EOF > payload.json
+{
+  "model": "gemini-3.5-flash",
+  "input": [
+    {"type": "text", "text": "${PROMPT}"},
+    {"type": "document", "uri": "${file_uri}", "mime_type": "application/pdf"}
+  ]
+}
+EOF
+
+# Now create an interaction using that file
+curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
-    -d '{
-      "contents": [{
-        "parts":[
-          {"text": "'$PROMPT'"},
-          {"file_data":{"mime_type": "application/pdf", "file_uri": '$file_uri'}}]
-        }]
-      }' 2> /dev/null > response.json
+    -d @payload.json 2> /dev/null > response.json
 
 cat response.json
 echo
 
-jq ".candidates[].content.parts[].text" response.json
+jq ".steps[-1].content[0].text" response.json
 
-# Clean up the downloaded PDF
+# Clean up
 rm "${DISPLAY_NAME}.pdf"
+rm payload.json
 ```
 
-### ملفات PDF كبيرة مخزَّنة على الجهاز
+### ローカルに保存されている大きな PDF
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
 import pathlib
-import httpx
 
 client = genai.Client()
 
-# Retrieve and encode the PDF byte
 file_path = pathlib.Path('large_file.pdf')
-
-# Upload the PDF using the File API
 sample_file = client.files.upload(
     file=file_path,
 )
 
-prompt="Summarize this document"
-
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3.5-flash",
-    contents=[sample_file, "Summarize this document"])
-print(response.text)
+    input=[
+        {"type": "document", "uri": sample_file.uri, "mime_type": sample_file.mime_type},
+        {"type": "text", "text": "Summarize this document"}
+    ]
+)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-import { createPartFromUri, GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
+const ai = new GoogleGenAI({});
 
 async function main() {
     const file = await ai.files.upload({
-        file: 'path-to-localfile.pdf'
+        file: 'path-to-localfile.pdf',
         config: {
             displayName: 'A17_FlightPlan.pdf',
         },
     });
 
-    // Wait for the file to be processed.
     let getFile = await ai.files.get({ name: file.name });
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
@@ -565,81 +383,32 @@ async function main() {
         throw new Error('File processing failed.');
     }
 
-    // Add the file to the contents.
-    const content = [
-        'Summarize this document',
-    ];
-
-    if (file.uri && file.mimeType) {
-        const fileContent = createPartFromUri(file.uri, file.mimeType);
-        content.push(fileContent);
-    }
-
-    const response = await ai.models.generateContent({
+    const interaction = await ai.interactions.create({
         model: 'gemini-3.5-flash',
-        contents: content,
+        input: [
+            { type: "document", uri: file.uri, mime_type: file.mime_type },
+            { type: "text", text: "Summarize this document" }
+        ],
     });
 
-    console.log(response.text);
+    console.log(interaction.output_text);
 
 }
 
 main();
 ```
 
-### Go
-
-```
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    "google.golang.org/genai"
-)
-
-func main() {
-
-    ctx := context.Background()
-    client, _ := genai.NewClient(ctx, &genai.ClientConfig{
-        APIKey:  os.Getenv("GEMINI_API_KEY"),
-        Backend: genai.BackendGeminiAPI,
-    })
-    localPdfPath := "/path/to/file.pdf"
-
-    uploadConfig := &genai.UploadFileConfig{MIMEType: "application/pdf"}
-    uploadedFile, _ := client.Files.UploadFromPath(ctx, localPdfPath, uploadConfig)
-
-    promptParts := []*genai.Part{
-        genai.NewPartFromURI(uploadedFile.URI, uploadedFile.MIMEType),
-        genai.NewPartFromText("Give me a summary of this pdf file."),
-    }
-    contents := []*genai.Content{
-        genai.NewContentFromParts(promptParts, genai.RoleUser),
-    }
-
-    result, _ := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.5-flash",
-        contents,
-        nil,
-    )
-
-    fmt.Println(result.Text())
-}
-```
-
 ### REST
 
 ```
+PDF_PATH="path/to/large_file.pdf"
 NUM_BYTES=$(wc -c < "${PDF_PATH}")
 DISPLAY_NAME=TEXT
 tmp_header_file=upload-header.tmp
 
 # Initial resumable request defining metadata.
 # The upload url is in the response headers dump them to a file.
-curl "${BASE_URL}/upload/v1beta/files?key=${GEMINI_API_KEY}" \
+curl "https://generativelanguage.googleapis.com/upload/v1beta/files?key=${GEMINI_API_KEY}" \
   -D upload-header.tmp \
   -H "X-Goog-Upload-Protocol: resumable" \
   -H "X-Goog-Upload-Command: start" \
@@ -661,26 +430,27 @@ curl "${upload_url}" \
 file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 
-# Now generate content using that file
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GOOGLE_API_KEY" \
+# Now create an interaction using that file
+curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
     -d '{
-      "contents": [{
-        "parts":[
-          {"text": "Can you add a few more lines to this poem?"},
-          {"file_data":{"mime_type": "application/pdf", "file_uri": '$file_uri'}}]
-        }]
-      }' 2> /dev/null > response.json
+      "model": "gemini-3.5-flash",
+      "input": [
+        {"type": "document", "uri": '$file_uri', "mime_type": "application/pdf"},
+        {"type": "text", "text": "Can you add a few more lines to this poem?"}
+      ]
+    }' 2> /dev/null > response.json
 
 cat response.json
 echo
 
-jq ".candidates[].content.parts[].text" response.json
+jq ".steps[-1].content[0].text" response.json
 ```
 
-يمكنك التأكّد من أنّ واجهة برمجة التطبيقات خزّنت الملف الذي تم تحميله بنجاح والحصول على بياناته الوصفية من خلال طلب [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ar). `name`
-(وبالتالي `uri`) فقط هما المعرّفان الفريدان.
+`[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ja)` を呼び出すと、API がアップロードされたファイルを正常に保存したことを確認し、その
+メタデータを取得できます。一意なのは `name`（およびその拡張子である `uri`）のみです。
 
 ### Python
 
@@ -690,10 +460,10 @@ import pathlib
 
 client = genai.Client()
 
-fpath = pathlib.Path('example.txt')
+fpath = pathlib.Path('example.pdf')
 fpath.write_text('hello')
 
-file = client.files.upload(file='example.txt')
+file = client.files.upload(file='example.pdf')
 
 file_info = client.files.get(name=file.name)
 print(file_info.model_dump_json(indent=4))
@@ -702,19 +472,19 @@ print(file_info.model_dump_json(indent=4))
 ### REST
 
 ```
-name=$(jq ".file.name" file_info.json)
+name=$(jq -r ".file.name" file_info.json)
 # Get the file of interest to check state
-curl https://generativelanguage.googleapis.com/v1beta/files/$name > file_info.json
+curl "https://generativelanguage.googleapis.com/v1beta/$name?key=$GEMINI_API_KEY" > file_info.json
 # Print some information about the file you got
-name=$(jq ".file.name" file_info.json)
+name=$(jq -r ".name" file_info.json)
 echo name=$name
-file_uri=$(jq ".file.uri" file_info.json)
+file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## تمرير ملفات PDF متعددة
+## 複数の PDF を渡す
 
-بإمكان Gemini API معالجة مستندات PDF متعددة (تصل إلى 1, 000 صفحة) في طلب واحد، طالما أنّ الحجم المجمّع للمستندات وطلب النص يقع ضمن قدرة الاستيعاب للنموذج.
+Gemini API は、ドキュメントとテキスト プロンプトの合計サイズがモデルのコンテキスト ウィンドウ内に収まる限り、1 回のリクエストで複数の PDF ドキュメント（最大 1, 000 ページ）を処理できます。
 
 ### Python
 
@@ -728,7 +498,6 @@ client = genai.Client()
 doc_url_1 = "https://arxiv.org/pdf/2312.11805"
 doc_url_2 = "https://arxiv.org/pdf/2403.05530"
 
-# Retrieve and upload both PDFs using the File API
 doc_data_1 = io.BytesIO(httpx.get(doc_url_1).content)
 doc_data_2 = io.BytesIO(httpx.get(doc_url_2).content)
 
@@ -743,20 +512,24 @@ sample_pdf_2 = client.files.upload(
 
 prompt = "What is the difference between each of the main benchmarks between these two papers? Output these in a table."
 
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3.5-flash",
-    contents=[sample_pdf_1, sample_pdf_2, prompt]
+    input=[
+        {"type": "document", "uri": sample_pdf_1.uri, "mime_type": sample_pdf_1.mime_type},
+        {"type": "document", "uri": sample_pdf_2.uri, "mime_type": sample_pdf_2.mime_type},
+        {"type": "text", "text": prompt}
+    ]
 )
 
-print(response.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-import { createPartFromUri, GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: "GEMINI_API_KEY" });
+const ai = new GoogleGenAI({});
 
 async function uploadRemotePDF(url, displayName) {
     const pdfBuffer = await fetch(url)
@@ -771,7 +544,6 @@ async function uploadRemotePDF(url, displayName) {
         },
     });
 
-    // Wait for the file to be processed.
     let getFile = await ai.files.get({ name: file.name });
     while (getFile.state === 'PROCESSING') {
         getFile = await ai.files.get({ name: file.name });
@@ -790,100 +562,22 @@ async function uploadRemotePDF(url, displayName) {
 }
 
 async function main() {
-    const content = [
-        'What is the difference between each of the main benchmarks between these two papers? Output these in a table.',
-    ];
+    const file1 = await uploadRemotePDF("https://arxiv.org/pdf/2312.11805", "PDF 1");
+    const file2 = await uploadRemotePDF("https://arxiv.org/pdf/2403.05530", "PDF 2");
 
-    let file1 = await uploadRemotePDF("https://arxiv.org/pdf/2312.11805", "PDF 1")
-    if (file1.uri && file1.mimeType) {
-        const fileContent = createPartFromUri(file1.uri, file1.mimeType);
-        content.push(fileContent);
-    }
-    let file2 = await uploadRemotePDF("https://arxiv.org/pdf/2403.05530", "PDF 2")
-    if (file2.uri && file2.mimeType) {
-        const fileContent = createPartFromUri(file2.uri, file2.mimeType);
-        content.push(fileContent);
-    }
-
-    const response = await ai.models.generateContent({
+    const interaction = await ai.interactions.create({
         model: 'gemini-3.5-flash',
-        contents: content,
+        input: [
+            { type: "document", uri: file1.uri, mime_type: file1.mime_type },
+            { type: "document", uri: file2.uri, mime_type: file2.mime_type },
+            { type: "text", text: "What is the difference between each of the main benchmarks between these two papers? Output these in a table." }
+        ],
     });
 
-    console.log(response.text);
+    console.log(interaction.output_text);
 }
 
 main();
-```
-
-### Go
-
-```
-package main
-
-import (
-    "context"
-    "fmt"
-    "io"
-    "net/http"
-    "os"
-    "google.golang.org/genai"
-)
-
-func main() {
-
-    ctx := context.Background()
-    client, _ := genai.NewClient(ctx, &genai.ClientConfig{
-        APIKey:  os.Getenv("GEMINI_API_KEY"),
-        Backend: genai.BackendGeminiAPI,
-    })
-
-    docUrl1 := "https://arxiv.org/pdf/2312.11805"
-    docUrl2 := "https://arxiv.org/pdf/2403.05530"
-    localPath1 := "doc1_downloaded.pdf"
-    localPath2 := "doc2_downloaded.pdf"
-
-    respHttp1, _ := http.Get(docUrl1)
-    defer respHttp1.Body.Close()
-
-    outFile1, _ := os.Create(localPath1)
-    _, _ = io.Copy(outFile1, respHttp1.Body)
-    outFile1.Close()
-
-    respHttp2, _ := http.Get(docUrl2)
-    defer respHttp2.Body.Close()
-
-    outFile2, _ := os.Create(localPath2)
-    _, _ = io.Copy(outFile2, respHttp2.Body)
-    outFile2.Close()
-
-    uploadConfig1 := &genai.UploadFileConfig{MIMEType: "application/pdf"}
-    uploadedFile1, _ := client.Files.UploadFromPath(ctx, localPath1, uploadConfig1)
-
-    uploadConfig2 := &genai.UploadFileConfig{MIMEType: "application/pdf"}
-    uploadedFile2, _ := client.Files.UploadFromPath(ctx, localPath2, uploadConfig2)
-
-    promptParts := []*genai.Part{
-        genai.NewPartFromURI(uploadedFile1.URI, uploadedFile1.MIMEType),
-        genai.NewPartFromURI(uploadedFile2.URI, uploadedFile2.MIMEType),
-        genai.NewPartFromText("What is the difference between each of the " +
-                              "main benchmarks between these two papers? " +
-                              "Output these in a table."),
-    }
-    contents := []*genai.Content{
-        genai.NewContentFromParts(promptParts, genai.RoleUser),
-    }
-
-    modelName := "gemini-3.5-flash"
-    result, _ := client.Models.GenerateContent(
-        ctx,
-        modelName,
-        contents,
-        nil,
-    )
-
-    fmt.Println(result.Text())
-}
 ```
 
 ### REST
@@ -900,19 +594,21 @@ upload_pdf() {
   local doc_url="$1"
   local display_name="$2"
 
+  echo "Downloading ${display_name} from ${doc_url}..." >&2
   # Download the PDF
-  wget -O "${display_name}.pdf" "${doc_url}"
+  wget -O "${display_name}.pdf" "${doc_url}" 2> /dev/null
 
   local MIME_TYPE=$(file -b --mime-type "${display_name}.pdf")
   local NUM_BYTES=$(wc -c < "${display_name}.pdf")
 
-  echo "MIME_TYPE: ${MIME_TYPE}"
-  echo "NUM_BYTES: ${NUM_BYTES}"
+  echo "MIME_TYPE: ${MIME_TYPE}" >&2
+  echo "NUM_BYTES: ${NUM_BYTES}" >&2
 
-  local tmp_header_file=upload-header.tmp
+  local tmp_header_file="upload-header-${display_name}.tmp"
 
   # Initial resumable request
-  curl "${BASE_URL}/upload/v1beta/files?key=${GOOGLE_API_KEY}" \
+  # Using GEMINI_API_KEY instead of GOOGLE_API_KEY
+  curl "https://generativelanguage.googleapis.com/upload/v1beta/files?key=${GEMINI_API_KEY}" \
     -D "${tmp_header_file}" \
     -H "X-Goog-Upload-Protocol: resumable" \
     -H "X-Goog-Upload-Command: start" \
@@ -924,6 +620,8 @@ upload_pdf() {
   local upload_url=$(grep -i "x-goog-upload-url: " "${tmp_header_file}" | cut -d" " -f2 | tr -d "\r")
   rm "${tmp_header_file}"
 
+  echo "Upload URL for ${display_name}: ${upload_url}" >&2
+
   # Upload the PDF
   curl "${upload_url}" \
     -H "Content-Length: ${NUM_BYTES}" \
@@ -931,8 +629,8 @@ upload_pdf() {
     -H "X-Goog-Upload-Command: upload, finalize" \
     --data-binary "@${display_name}.pdf" 2> /dev/null > "file_info_${display_name}.json"
 
-  local file_uri=$(jq ".file.uri" "file_info_${display_name}.json")
-  echo "file_uri for ${display_name}: ${file_uri}"
+  local file_uri=$(jq -r ".file.uri" "file_info_${display_name}.json")
+  echo "file_uri for ${display_name}: ${file_uri}" >&2
 
   # Clean up the downloaded PDF
   rm "${display_name}.pdf"
@@ -946,72 +644,84 @@ file_uri_1=$(upload_pdf "${DOC_URL_1}" "${DISPLAY_NAME_1}")
 # Upload the second PDF
 file_uri_2=$(upload_pdf "${DOC_URL_2}" "${DISPLAY_NAME_2}")
 
-# Now generate content using both files
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GOOGLE_API_KEY" \
+# Create payload JSON file for safety
+cat << EOF > payload_multi.json
+{
+  "model": "gemini-3.5-flash",
+  "input": [
+    {"type": "document", "uri": "${file_uri_1}", "mime_type": "application/pdf"},
+    {"type": "document", "uri": "${file_uri_2}", "mime_type": "application/pdf"},
+    {"type": "text", "text": "${PROMPT}"}
+  ]
+}
+EOF
+
+# Now create an interaction using both files
+# Using GEMINI_API_KEY instead of GOOGLE_API_KEY
+curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
-    -d '{
-      "contents": [{
-        "parts":[
-          {"file_data": {"mime_type": "application/pdf", "file_uri": '$file_uri_1'}},
-          {"file_data": {"mime_type": "application/pdf", "file_uri": '$file_uri_2'}},
-          {"text": "'$PROMPT'"}
-        ]
-      }]
-    }' 2> /dev/null > response.json
+    -d @payload_multi.json 2> /dev/null > response.json
 
 cat response.json
 echo
 
-jq ".candidates[].content.parts[].text" response.json
+jq ".steps[-1].content[0].text" response.json
+
+# Clean up
+rm payload_multi.json
+rm "file_info_${DISPLAY_NAME_1}.json"
+rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## التفاصيل الفنية
+## 詳細な技術情報
 
-يمكن استخدام ملفات PDF بحجم يصل إلى 50 ميغابايت أو 1,000 صفحة في Gemini. وينطبق هذا الحد الأقصى على كلّ من البيانات المضمّنة وعمليات التحميل باستخدام Files API. تعادل كل صفحة مستند 258 رمزًا مميزًا.
+Gemini は、最大 50 MB または 1,000 ページの PDF ファイルをサポートしています。この上限は、インライン データと Files API のアップロードの両方に適用されます。ドキュメント ページ 1 ページは 258 トークンに相当します。
 
-مع أنّه لا توجد حدود معيّنة لعدد وحدات البكسل في المستند باستثناء [قدرة استيعاب](https://ai.google.dev/gemini-api/docs/long-context?hl=ar) النموذج، يتم تصغير حجم الصفحات الأكبر إلى دقة قصوى تبلغ 3072 × 3072 مع الحفاظ على نسبة العرض إلى الارتفاع الأصلية، بينما يتم تكبير حجم الصفحات الأصغر إلى 768 × 768 بكسل. لا يتم خفض التكلفة للصفحات ذات الأحجام الأصغر، باستثناء معدل نقل البيانات، ولا يتم تحسين الأداء للصفحات ذات الدقة الأعلى.
+[モデルのコンテキスト ウィンドウ以外に、ドキュメント内のピクセル数に具体的な制限はありませんが、大きなページは元のアスペクト比を維持したまま、最大解像度 3, 072 x 3, 072 に縮小され、小さなページは 768 x 768 ピクセルに拡大されます。](https://ai.google.dev/gemini-api/docs/long-context?hl=ja)サイズが小さいページでは帯域幅以外のコスト削減はなく、解像度が高いページではパフォーマンスの向上はありません。
 
-### نماذج Gemini 3
+### Gemini 3 モデル
 
-يقدّم Gemini 3 تحكّمًا دقيقًا في معالجة الصور المتعددة الوسائط باستخدام المَعلمة
-`media_resolution`. يمكنك الآن ضبط دقة العرض على منخفضة أو متوسطة أو عالية لكل جزء من الوسائط. بعد إضافة هذه الميزة، تم تعديل طريقة معالجة مستندات PDF على النحو التالي:
+Gemini 3 では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。解像度をメディア要素ごとに低、中、高に設定できるようになりました。この追加により、PDF ドキュメントの処理が更新されました。
 
-1. **تضمين النص الأصلي:** يتم استخراج النص المضمّن في ملف PDF وتقديمه إلى النموذج.
-2. **الفوترة وإعداد التقارير عن الرموز المميزة:**
-   - **لا يتم تحصيل رسوم** منك مقابل الرموز المميزة التي مصدرها **النص الأصلي** المستخرَج من ملفات PDF.
-   - في قسم `usage_metadata` من استجابة واجهة برمجة التطبيقات، يتم الآن احتساب الرموز المميزة التي تم إنشاؤها من معالجة صفحات PDF (كصور) ضمن طريقة العرض `IMAGE`، وليس ضمن طريقة العرض المنفصلة `DOCUMENT` كما كان الحال في بعض الإصدارات السابقة.
+1. **ネイティブ テキストの組み込み:** PDF にネイティブに埋め込まれたテキストが抽出され、モデルに提供されます。
+2. **課金とトークン レポート:**
+   - PDF で抽出された**ネイティブ テキスト** から生成されたトークンは**課金されません** 。
+   - API レスポンスの `usage_metadata` セクションで、PDF ページ（画像として）の処理から生成されたトークンは、以前のバージョンの一部のように個別の `DOCUMENT` モダリティではなく、`IMAGE` モダリティでカウントされるようになりました。
 
-لمزيد من التفاصيل حول مَعلمة دقة الوسائط، راجِع دليل [دقة الوسائط](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar).
+メディア解像度パラメータの詳細については、
+[メディア解像度](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja)ガイドをご覧ください。
 
-### أنواع المستندات
+### ドキュメント タイプ
 
-من الناحية الفنية، يمكنك ضبط أنواع MIME أخرى لفهم المستندات، مثل TXT وMarkdown وHTML وXML وما إلى ذلك، ولكن خدمة &quot;التعرّف البصري على المستندات&quot; ***لا تفهم سوى ملفات PDF***. سيتم استخراج الأنواع الأخرى كنص عادي، ولن يتمكّن النموذج من تفسير ما نراه في عرض هذه الملفات. سيتم فقدان أي تفاصيل خاصة بنوع الملف، مثل الرسوم البيانية والمخططات وعلامات HTML وتنسيق Markdown وما إلى ذلك.
+技術的には、TXT、Markdown、HTML、XML など、ドキュメント理解のための他の MIME タイプを渡すことができます。ただし、ドキュメント ビジョンは**PDF のみを意味のある方法で理解します** 。 他のタイプは純粋なテキストとして抽出され、モデルはこれらのファイルのレンダリングで表示される内容を解釈できません。グラフ、図、HTML タグ、Markdown の書式設定など、ファイルタイプ固有の詳細は失われます。
 
-للتعرّف على طرق إدخال الملفات الأخرى، يُرجى الاطّلاع على دليل [طرق إدخال الملفات](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar).
+他のファイル入力方法については、
+[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
 
-### أفضل الممارسات
+### ベスト プラクティス
 
-للحصول على أفضل النتائج:
+最良の結果を得るために、次のことを行います。
 
-- يمكنك تدوير الصفحات إلى الاتجاه الصحيح قبل تحميلها.
-- تجنَّب الصفحات غير الواضحة.
-- في حال استخدام صفحة واحدة، ضَع طلب النص بعد الصفحة.
+- アップロードする前に、ページを正しい向きに回転させます。
+- ぼやけたページは使用しないでください。
+- 単一のページを使用する場合は、ページの後にテキスト プロンプトを配置します。
 
-## الخطوات التالية
+## 次のステップ
 
-لمزيد من المعلومات، يُرجى الاطّلاع على المراجع التالية:
+詳細については、次のリソースをご覧ください。
 
-- [استراتيجيات إنشاء الطلبات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide): تتيح واجهة Gemini API إمكانية إنشاء الطلبات باستخدام بيانات نصية وصور وملفات صوتية وفيديوهات، ويُعرف ذلك أيضًا باسم إنشاء الطلبات المتعددة الوسائط.
-- [تعليمات النظام](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions):
-  تتيح لك تعليمات النظام توجيه سلوك النموذج استنادًا إلى احتياجاتك وحالات الاستخدام المحدّدة.
+- [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini API は、テキスト、画像、音声、動画データを使用したプロンプト（マルチモーダル プロンプトとも呼ばれます）をサポートしています。
+- [システム指示](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions):
+  システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
 
-إرسال ملاحظات
+フィードバックを送信
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-تاريخ التعديل الأخير: 2026-06-19 (حسب التوقيت العالمي المتفَّق عليه)
+最終更新日 2026-06-22 UTC。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+ご意見をお聞かせください
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-22 UTC。"],[],[]]

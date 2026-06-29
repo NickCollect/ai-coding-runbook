@@ -1,36 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=zh-TW
-fetched_at: 2026-06-22T06:27:59.701257+00:00
-title: "\u4f7f\u7528 Live API \u7ba1\u7406\u5de5\u4f5c\u968e\u6bb5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de
+fetched_at: 2026-06-29T05:40:03.139846+00:00
+title: "Sitzungsverwaltung mit der Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-提供意見
+Feedback geben
 
-# 使用 Live API 管理工作階段
+# Sitzungsverwaltung mit der Live API
 
-在 Live API 中，工作階段是指持續連線，輸入和輸出內容會透過同一連線持續串流 (進一步瞭解[運作方式](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw))。這種獨特的工作階段設計可實現低延遲，並支援獨特功能，但也會帶來一些挑戰，例如工作階段時間限制和提早終止。本指南涵蓋相關策略，可協助您克服使用 Live API 時可能發生的工作階段管理問題。
+In der Live API bezieht sich eine Sitzung auf eine dauerhafte Verbindung, über die Ein- und Ausgaben kontinuierlich über dieselbe Verbindung gestreamt werden. [Weitere Informationen](https://ai.google.dev/gemini-api/docs/live?hl=de)
+Dieses einzigartige Sitzungsdesign ermöglicht eine geringe Latenz und unterstützt einzigartige Funktionen, kann aber auch zu Problemen wie Sitzungszeitlimits und vorzeitiger Beendigung führen.
+In dieser Anleitung werden Strategien zur Bewältigung der Herausforderungen bei der Sitzungsverwaltung beschrieben, die bei der Verwendung der Live API auftreten können.
 
-## 工作階段生命週期
+## Sitzungsdauer
 
-如果沒有壓縮，純音訊通話時間上限為 15 分鐘，音訊和視訊通話時間上限為 2 分鐘。如果超過這些限制，工作階段 (以及連線) 就會終止，但您可以使用[內容視窗壓縮](#context-window-compression)功能，將工作階段延長至無限時間。
+Ohne Komprimierung sind reine Audio-Sitzungen auf 15 Minuten und Audio-Video-Sitzungen auf 2 Minuten begrenzt. Wenn Sie diese Limits überschreiten, wird die Sitzung (und damit die Verbindung) beendet. Sie können jedoch die [Kontextfensterkomprimierung](#context-window-compression) verwenden, um Sitzungen unbegrenzt zu verlängern.
 
-連線的生命週期也有所限制，大約為 10 分鐘。連線終止時，工作階段也會終止。在這種情況下，您可以設定單一工作階段，透過[工作階段續傳](#session-resumption)在多個連線中保持有效。連線結束前，您也會收到 [GoAway 訊息](#goaway-message)，可採取進一步行動。
+Die Lebensdauer einer Verbindung ist ebenfalls auf etwa 10 Minuten begrenzt. Wenn die Verbindung beendet wird, wird auch die Sitzung beendet. In diesem Fall können Sie eine einzelne Sitzung so konfigurieren, dass sie über mehrere Verbindungen hinweg aktiv bleibt. Verwenden Sie dazu die [Sitzungswiederaufnahme](#session-resumption).
+Sie erhalten außerdem eine [GoAway-Nachricht](#goaway-message), bevor die Verbindung beendet wird. So können Sie weitere Maßnahmen ergreifen.
 
-## 壓縮脈絡窗口
+## Komprimierung des Kontextfensters
 
-如要延長工作階段時間，避免連線突然終止，您可以啟用內容視窗壓縮功能，方法是在工作階段設定中設定 [contextWindowCompression](https://ai.google.dev/api/live?hl=zh-tw#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) 欄位。
+Wenn Sie längere Sitzungen ermöglichen und ein abruptes Beenden der Verbindung vermeiden möchten, können Sie die Kontextfensterkomprimierung aktivieren, indem Sie das Feld [contextWindowCompression](https://ai.google.dev/api/live?hl=de#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) als Teil der Sitzungskonfiguration festlegen.
 
-在 [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=zh-tw#contextwindowcompressionconfig) 中，您可以設定[滑動視窗機制](https://ai.google.dev/api/live?hl=zh-tw#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)和觸發壓縮的[權杖數量](https://ai.google.dev/api/live?hl=zh-tw#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)。
+In der [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=de#contextwindowcompressionconfig) können Sie einen [Sliding-Window-Mechanismus](https://ai.google.dev/api/live?hl=de#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window) und die [Anzahl der Tokens](https://ai.google.dev/api/live?hl=de#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens) konfigurieren, die die Komprimierung auslösen.
 
 ### Python
 
@@ -57,13 +60,13 @@ const config = {
 };
 ```
 
-## 繼續工作階段
+## Sitzungswiederaufnahme
 
-如要防止伺服器定期重設 WebSocket 連線時終止工作階段，請在[設定設定](https://ai.google.dev/api/live?hl=zh-tw#BidiGenerateContentSetup)中設定 [sessionResumption](https://ai.google.dev/api/live?hl=zh-tw#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) 欄位。
+Um zu verhindern, dass die Sitzung beendet wird, wenn der Server die WebSocket-Verbindung regelmäßig zurücksetzt, konfigurieren Sie das Feld [sessionResumption](https://ai.google.dev/api/live?hl=de#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) in der [Einrichtungskonfiguration](https://ai.google.dev/api/live?hl=de#BidiGenerateContentSetup).
 
-傳遞這項設定會導致伺服器傳送 [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=zh-tw#SessionResumptionUpdate) 訊息，這些訊息可用於恢復工作階段，方法是將最後一個恢復權杖做為後續連線的 [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=zh-tw#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) 傳遞。
+Wenn diese Konfiguration übergeben wird, sendet der Server [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=de#SessionResumptionUpdate)-Nachrichten, die verwendet werden können, um die Sitzung fortzusetzen. Dazu muss das letzte Fortsetzungstoken als [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=de#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) der nachfolgenden Verbindung übergeben werden.
 
-在最後一個工作階段終止後，續傳權杖的有效時間為 2 小時。
+Fortsetzungstokens sind nach dem Beenden der letzten Sitzung 2 Stunden lang gültig.
 
 ### Python
 
@@ -198,9 +201,9 @@ async function main() {
 main();
 ```
 
-## 在工作階段中斷前收到訊息
+## Eine Nachricht erhalten, bevor die Verbindung zur Sitzung getrennt wird
 
-伺服器會傳送「GoAway」[GoAway](https://ai.google.dev/api/live?hl=zh-tw#GoAway)訊息，表示目前的連線即將終止。這則訊息包含 [timeLeft](https://ai.google.dev/api/live?hl=zh-tw#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left)，指出剩餘時間，並讓您在連線因 ABORTED 而終止前採取進一步行動。
+Der Server sendet eine [GoAway](https://ai.google.dev/api/live?hl=de#GoAway)-Nachricht, die signalisiert, dass die aktuelle Verbindung bald beendet wird. Diese Nachricht enthält die [timeLeft](https://ai.google.dev/api/live?hl=de#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left), die die verbleibende Zeit angibt. So können Sie weitere Maßnahmen ergreifen, bevor die Verbindung als „ABORTED“ beendet wird.
 
 ### Python
 
@@ -223,9 +226,9 @@ for (const turn of turns) {
 }
 ```
 
-## 在生成完成時收到訊息
+## Benachrichtigung erhalten, wenn die Generierung abgeschlossen ist
 
-伺服器會傳送 [generationComplete](https://ai.google.dev/api/live?hl=zh-tw#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete) 訊息，表示模型已完成生成回覆。
+Der Server sendet eine [generationComplete](https://ai.google.dev/api/live?hl=de#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)-Nachricht, die signalisiert, dass das Modell die Antwort generiert hat.
 
 ### Python
 
@@ -247,16 +250,16 @@ for (const turn of turns) {
 }
 ```
 
-## 後續步驟
+## Nächste Schritte
 
-如要進一步瞭解如何使用 Live API，請參閱[完整的功能](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw)指南、[工具使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-tw)頁面或 [Live API 教戰手冊](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=zh-tw)。
+Weitere Informationen zur Verwendung der Live API finden Sie im vollständigen [Leitfaden zu den Funktionen](https://ai.google.dev/gemini-api/docs/live?hl=de), auf der Seite [Tool-Verwendung](https://ai.google.dev/gemini-api/docs/live-tools?hl=de) oder im [Live API-Kochbuch](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=de).
 
-提供意見
+Feedback geben
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-上次更新時間：2026-06-01 (世界標準時間)。
+Zuletzt aktualisiert: 2026-06-01 (UTC).
 
-想進一步說明嗎？
+Haben Sie Feedback für uns?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-01 (世界標準時間)。"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-01 (UTC)."],[],[]]

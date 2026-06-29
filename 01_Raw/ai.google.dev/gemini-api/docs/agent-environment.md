@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=vi
-fetched_at: 2026-06-22T06:29:37.372952+00:00
-title: "M\u00f4i tr\u01b0\u1eddng trong c\u00e1c t\u00e1c nh\u00e2n \u0111\u01b0\u1ee3c qu\u1ea3n l\u00fd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=de
+fetched_at: 2026-06-29T05:34:08.835178+00:00
+title: "Umgebungen in verwalteten KI-Agenten \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Tính năng Nghiên cứu chuyên sâu của Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) hiện đang ở giai đoạn xem trước, với các tính năng lập kế hoạch cộng tác, hình ảnh hoá, hỗ trợ MCP và nhiều tính năng khác.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-# Môi trường trong các tác nhân được quản lý
+# Umgebungen in verwalteten KI-Agenten
 
-Môi trường là các hộp cát Linux được quản lý, cung cấp cho các tác nhân một nơi tách biệt để thực thi mã và duy trì các tệp. Các thành phần này tách biệt với bối cảnh tương tác, vì vậy, bạn có thể sử dụng lại cùng một môi trường cho nhiều lượt tương tác hoặc bắt đầu lại từ đầu bất cứ lúc nào.
+Umgebungen sind verwaltete Linux-Sandboxes, die Agenten einen isolierten Ort bieten, um Code auszuführen und Dateien zu speichern. Sie sind vom Interaktionskontext entkoppelt, sodass Sie dieselbe Umgebung für mehrere Interaktionen verwenden oder jederzeit neu beginnen können.
 
-Ví dụ sau đây minh hoạ cách tạo một hoạt động tương tác với một môi trường từ xa mới và truy xuất mã nhận dạng của hoạt động đó:
+Das folgende Beispiel zeigt, wie Sie eine Interaktion mit einer neuen Remote-Umgebung erstellen und ihre ID abrufen:
 
 ### Python
 
@@ -60,7 +60,6 @@ console.log(`Environment ID: ${interaction.environment_id}`);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": "Install pandas and matplotlib, verify the imports, and print the versions.",
@@ -68,17 +67,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Tham số `environment`
+## Der Parameter `environment`
 
-Tham số `environment` chấp nhận 3 dạng:
+Der Parameter `environment` akzeptiert drei Formen:
 
-| Biểu mẫu | Ví dụ: | Trường hợp sử dụng |
+| Formular | Beispiel | Anwendung |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | Cung cấp một hộp cát mới. |
-| Mã môi trường | `environment="env_abc123"` | Sử dụng lại một hộp cát hiện có cùng với tất cả tệp và gói của hộp cát đó. |
-| Đối tượng cấu hình | `environment={...}` | Cung cấp một hộp cát mới có nguồn, quy tắc mạng hoặc cả hai. |
+| `"remote"` | `environment="remote"` | Eine neue Sandbox bereitstellen. |
+| Umgebungs-ID | `environment="env_abc123"` | Eine vorhandene Sandbox mit allen Dateien und Paketen wiederverwenden. |
+| Konfigurationsobjekt | `environment={...}` | Eine neue Sandbox mit Quellen, Netzwerkregeln oder beidem bereitstellen. |
 
-Các ví dụ sau đây minh hoạ 3 cách sử dụng tham số `environment`.
+Die folgenden Beispiele zeigen die drei Möglichkeiten, den Parameter `environment` zu verwenden.
 
 ### Python
 
@@ -169,7 +168,6 @@ console.log(interaction.output_text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": [{"type": "text", "text": "Write a hello world script."}],
@@ -180,7 +178,6 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d "{
     \"agent\": \"antigravity-preview-05-2026\",
     \"input\": [{\"type\": \"text\", \"text\": \"Modify the script to accept a name argument.\"}],
@@ -192,7 +189,6 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": [{"type": "text", "text": "List all files and summarize the project."}],
@@ -209,10 +205,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Định cấu hình môi trường
+## Umgebung konfigurieren
 
-Một cách để thiết lập môi trường là cho tác nhân phần mềm biết những gì bạn cần cài đặt.
-Nó xử lý việc giải quyết phần phụ thuộc và khắc phục sự cố. Sau khi môi trường đã sẵn sàng, hãy lưu `environment_id` và sử dụng lại.
+Eine Möglichkeit, eine Umgebung einzurichten, besteht darin, dem Agenten mitzuteilen, was installiert werden muss.
+Er kümmert sich um die Auflösung von Abhängigkeiten und die Fehlerbehebung. Sobald die Umgebung bereit ist, speichern Sie die `environment_id` und verwenden Sie sie wieder.
 
 ### Python
 
@@ -282,7 +278,6 @@ console.log(interaction.output_text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": "Install pandas, matplotlib, and seaborn. Verify all imports work and print the installed versions.",
@@ -290,15 +285,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Gắn từ một nguồn
+### Aus einer Quelle einbinden
 
-Nếu bạn biết chính xác những tệp mà tác nhân cần, hãy gắn các tệp đó trong một lệnh gọi duy nhất thay vì lặp lại. Đối tượng cấu hình `environment` chấp nhận một mảng `sources` có 3 loại:
+Wenn Sie genau wissen, welche Dateien der Agent benötigt, binden Sie sie in einem einzigen Aufruf ein, anstatt sie zu durchlaufen. Das Konfigurationsobjekt `environment` akzeptiert ein `sources`-Array mit drei Typen:
 
-| Loại nguồn | Giá trị `type` | Mô tả | Hạn mức |
+| Quelltyp | `type`-Wert | Beschreibung | Limit |
 | --- | --- | --- | --- |
-| Kho lưu trữ Git | `repository` | Sao chép một kho lưu trữ từ một URL vào hộp cát tại `target`. | 500 MB |
-| Cloud Storage | `gcs` | Sao chép một tệp hoặc thư mục từ Cloud Storage vào hộp cát tại `target`. | 2 GB |
-| Nội dung cùng dòng | `inline` | Ghi nội dung văn bản thô vào một tệp trong hộp cát tại `target`. | 1 MB mỗi tệp, tổng cộng 2 MB |
+| Git-Repository | `repository` | Klonen Sie ein Repository von einer URL in die Sandbox unter `target`. | 500 MB |
+| Cloud Storage | `gcs` | Kopiert eine Datei oder ein Verzeichnis aus Cloud Storage in die Sandbox unter `target`. | 2 GB |
+| Inline-Inhalte | `inline` | Schreibt unformatierten Textinhalt in eine Datei in der Sandbox unter `target`. | 1 MB pro Datei, insgesamt 2 MB |
 
 ### Python
 
@@ -377,7 +372,6 @@ console.log(interaction.output_text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": "List all files under /workspace and describe what you find.",
@@ -404,14 +398,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Bạn có thể kết hợp cả hai phương pháp: khai báo các nguồn đã biết, sau đó lặp lại bằng các hoạt động tương tác tiếp theo để cài đặt các gói hoặc chạy tập lệnh thiết lập. Bạn không thể đặt thư mục gốc (`/`) làm mục tiêu khi thêm một nguồn tuỳ chỉnh, bạn phải luôn chỉ định một thư mục con.
+Sie können beide Ansätze kombinieren: Binden Sie bekannte Quellen deklarativ ein und durchlaufen Sie sie dann mit Folgeinteraktionen, um Pakete zu installieren oder Einrichtungs-Skripts auszuführen. Sie können das Stammverzeichnis (`/`) nicht als Ziel festlegen, wenn Sie eine benutzerdefinierte Quelle hinzufügen. Sie müssen immer ein Unterverzeichnis angeben.
 
-### Nguồn riêng tư
+### Private Quellen
 
-Bạn cũng có thể tải xuống từ các kho lưu trữ Github riêng tư hoặc các vùng lưu trữ riêng tư trên đám mây bằng cách thêm thông tin đăng nhập vào cấu hình mạng:
+Sie können auch aus privaten GitHub-Repositories oder privaten Cloud Storage-Buckets herunterladen, indem Sie die Anmeldedaten in der Netzwerkkonfiguration hinzufügen:
 
-Đối với **kho lưu trữ Git riêng tư**, hãy sử dụng phương thức xác thực `Basic` bằng [Mã thông báo truy cập cá nhân (PAT) của GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-Mã hoá mã thông báo bằng `x-oauth-basic` làm tên người dùng:
+Verwenden Sie für **private Git-Repositories** die `Basic` Authentifizierung mit Ihrem
+[persönlichen GitHub-Zugriffstoken
+(Personal Access Token, PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
+Codieren Sie das Token mit `x-oauth-basic` als Nutzernamen:
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -487,7 +483,6 @@ const interaction = await client.interactions.create({
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": "Run the test for my backend app and fix any issue.",
@@ -517,7 +512,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Đối với **các bộ chứa riêng tư trong Cloud Storage**, hãy sử dụng mã thông báo Bearer OAuth 2.0 tiêu chuẩn:
+Verwenden Sie für **private Cloud Storage-Buckets** ein standardmäßiges OAuth 2.0-Inhabertoken:
 
 ```
 gcloud auth print-access-token
@@ -593,7 +588,6 @@ const interaction = await client.interactions.create({
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": "Analyze the discrepancies across the data in workspace",
@@ -623,25 +617,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Phần mềm được cài đặt sẵn
+## Vorinstallierte Software
 
-Hộp cát chạy trên Ubuntu và đi kèm với các thời gian chạy và gói chung được cài đặt sẵn. Tác nhân có thể cài đặt các gói bổ sung trong thời gian chạy bằng cách sử dụng `pip
-install` hoặc `npm install`. Các gói được cài đặt trong quá trình tương tác sẽ vẫn tồn tại khi bạn dùng lại cùng một `environment_id`.
+Die Sandbox wird unter Ubuntu ausgeführt und enthält vorinstallierte Laufzeiten und gängige Pakete. Der Agent kann zur Laufzeit zusätzliche Pakete mit `pip
+install` oder `npm install` installieren. Pakete, die während einer Interaktion installiert wurden, bleiben erhalten, wenn Sie dieselbe `environment_id` wiederverwenden.
 
-| Danh mục | Các gói được cài đặt sẵn |
+| Kategorie | Vorinstallierte Pakete |
 | --- | --- |
-| **Công cụ UNIX** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
+| **UNIX-Tools** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
 | **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
 | **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
 
-## Cấu hình mạng
+## Netzwerkkonfiguration
 
-Theo mặc định, các môi trường có quyền truy cập mạng đi không hạn chế. Sử dụng trường `network` để hạn chế lưu lượng truy cập đi đến các miền cụ thể. Mỗi quy tắc chỉ định một `domain` và một đối tượng `transform` không bắt buộc để chèn tiêu đề vào các yêu cầu trùng khớp. Các tiêu đề này có thể là duy nhất cho mỗi lượt tương tác và bạn có thể cập nhật chúng cho cùng một môi trường.
+Standardmäßig haben Umgebungen uneingeschränkten ausgehenden Netzwerkzugriff. Mit dem Feld `network` können Sie den ausgehenden Traffic auf bestimmte Domains beschränken. Jede Regel gibt eine `domain` und ein optionales `transform`-Objekt an, um Header in übereinstimmende Anfragen einzufügen. Diese Header können für jede Interaktion eindeutig sein und Sie können sie für dieselbe Umgebung aktualisieren.
 
-| Trường | Loại | Mô tả |
+| Feld | Typ | Beschreibung |
 | --- | --- | --- |
-| `domain` | `string` | Miền cần khớp. Sử dụng tên máy chủ chính xác hoặc `*` cho tất cả các miền. |
-| `transform` | `object` | Đối tượng chứa các cặp khoá-giá trị đơn giản đại diện cho các tiêu đề cần chèn vào các yêu cầu khớp, ví dụ: `{"Authorization": "Bearer ..."}`. |
+| `domain` | `string` | Domain, die übereinstimmen muss. Verwenden Sie einen genauen Hostnamen oder `*` für alle Domains. |
+| `transform` | `object` | Objekt mit flachen Schlüssel/Wert-Paaren, die Header darstellen, die in übereinstimmende Anfragen eingefügt werden sollen, z.B. `{"Authorization": "Bearer ..."}`. |
 
 ### Python
 
@@ -709,7 +703,6 @@ console.log(interaction.output_text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": [{"type": "text", "text": "Fetch the latest issues from the GitHub API for my-org/my-repo."}],
@@ -731,12 +724,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Khi bạn đặt danh sách cho phép, chỉ những yêu cầu đến các miền được liệt kê rõ ràng mới được phép. Bạn có thể sử dụng ký tự đại diện để so khớp các miền con (ví dụ: `{"domain":
-"*.example.com"}`), nhưng lưu ý rằng ký tự này không so khớp miền gốc `example.com`. Bạn phải thêm miền gốc riêng. Để cho phép tất cả lưu lượng truy cập khác, chẳng hạn như định tuyến các miền không có trong danh sách mà không có tiêu đề được chèn, hãy thêm `{"domain": "*"}` làm mục nhập chung.
+Wenn eine Zulassungsliste festgelegt ist, sind nur Anfragen an explizit aufgeführte Domains zulässig. Sie können Platzhalter verwenden, um Subdomains abzugleichen (z.B. `{"domain":
+"*.example.com"}`), aber beachten Sie, dass dies nicht mit der Stammdomain
+`example.com` übereinstimmt, die separat hinzugefügt werden muss. Wenn Sie allen anderen Traffic zulassen möchten, z. B. das Weiterleiten nicht aufgeführter Domains ohne eingefügte Header, fügen Sie `{"domain": "*"}` als
+Catch-all-Eintrag hinzu.
 
-### Thông tin xác thực
+### Anmeldedaten
 
-Bạn có thể thêm thông tin đăng nhập để tác nhân sử dụng bằng cách thêm các phép biến đổi tiêu đề. Thông tin đăng nhập được một proxy truyền dữ liệu ra ngoài chèn vào các tiêu đề HTTP tương ứng, thông tin này không bao giờ được hiển thị bên trong hộp cát dưới dạng các biến môi trường hoặc tệp.
+Sie können Anmeldedaten für Ihren Agenten hinzufügen, indem Sie Header-Transformationen hinzufügen. Die Anmeldedaten werden von einem Egress-Proxy in die entsprechenden HTTP-Header eingefügt. Sie werden in der Sandbox niemals als Umgebungsvariablen oder Dateien verfügbar gemacht.
 
 ### Python
 
@@ -810,7 +805,6 @@ console.log(interaction.output_text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": "List the files in gs://my-bucket/reports/ using the GCS JSON API.",
@@ -830,9 +824,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Tắt quyền truy cập mạng
+### Netzwerkzugriff deaktivieren
 
-Để chặn tất cả quyền truy cập vào mạng bên ngoài, hãy đặt `network` thành `disabled`:
+Wenn Sie den gesamten ausgehenden Netzwerkzugriff blockieren möchten, legen Sie für `network` den Wert `disabled` fest:
 
 ### Python
 
@@ -878,7 +872,6 @@ console.log(interaction.output_text);
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": "Analyze the local files only.",
@@ -889,21 +882,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Vòng đời của môi trường
+## Lebenszyklus der Umgebung
 
-Môi trường tuân theo vòng đời sau:
+Umgebungen folgen diesem Lebenszyklus:
 
-| Tiểu bang | Hành vi |
+| Bundesland | Verhalten |
 | --- | --- |
-| **Đã tạo** | Được cung cấp khi một lượt tương tác chỉ định `environment: "remote"` hoặc một đối tượng cấu hình. |
-| **Đang hoạt động** | Chạy trong khi đang có một lượt tương tác. |
-| **Không hoạt động** | Tự động chụp nhanh và dừng sau 15 phút không hoạt động. |
-| **Ngoại tuyến** | Được giữ lại trong 7 ngày kể từ lần hoạt động gần đây nhất. Có thể tiếp tục bằng cách truyền mã nhận dạng của nó. |
-| **Đã xoá** | Đã xoá khỏi hệ thống. |
+| **Erstellt** | Wird bereitgestellt, wenn in einer Interaktion `environment: "remote"` oder ein Konfigurationsobjekt angegeben ist. |
+| **Aktiv** | Wird ausgeführt, während eine Interaktion läuft. |
+| **Inaktiv** | Automatische Momentaufnahme und Beendigung nach 15 Minuten Inaktivität. |
+| **Offline** | Wird 7 Tage nach der letzten Aktivität beibehalten. Kann durch Übergeben der ID fortgesetzt werden. |
+| **Gelöscht** | Aus dem System entfernt. |
 
-## Tải tệp xuống từ môi trường
+## Dateien aus der Umgebung herunterladen
 
-Tác nhân tạo các tệp bên trong hộp cát trong quá trình thực thi. Bạn có thể tải toàn bộ ảnh chụp nhanh môi trường xuống dưới dạng tệp tar bằng Files API:
+Der Agent erstellt während der Ausführung Dateien in der Sandbox. Mit der Files API können Sie die vollständige Momentaufnahme der Umgebung als TAR-Datei herunterladen:
 
 ### Python
 
@@ -987,7 +980,6 @@ console.log(fs.readdirSync("extracted_env_snapshot"));
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
--H "Api-Revision: 2026-05-20" \
 -d '{
     "agent": "antigravity-preview-05-2026",
     "input": "Write a file environments_test.txt with content '\''Environments'\'' inside the sandbox.",
@@ -999,39 +991,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   -o snapshot.tar
 ```
 
-## Giá cả và tài nguyên
+## Preise und Ressourcen
 
-Mỗi môi trường chạy với mức phân bổ tài nguyên cố định:
+Jede Umgebung wird mit festen Ressourcenzuweisungen ausgeführt:
 
-| Tài nguyên | Giá trị |
+| Ressource | Wert |
 | --- | --- |
-| **CPU** | 4 lõi |
-| **Bộ nhớ** | 16 GB |
+| **CPU** | 4 Kerne |
+| **Arbeitsspeicher** | 16 GB |
 
-Môi trường điện toán (CPU, bộ nhớ, thực thi hộp cát) **không được tính phí** trong thời gian xem trước. Xem phần [Định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#pricing-for-agents) để biết chi phí mã thông báo của tác nhân.
+Die Umgebungskosten für Compute (CPU, Arbeitsspeicher, Sandbox-Ausführung) werden während der Vorabversion **nicht in Rechnung gestellt**. Informationen zu den Kosten für
+Agent-Tokens finden Sie unter
+[Preise](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing-for-agents).
 
-## Các điểm hạn chế
+## Beschränkungen
 
-- **Trạng thái xem trước:** Môi trường và nhân viên hỗ trợ được quản lý đang ở trạng thái xem trước. Các tính năng và giản đồ có thể thay đổi.
-- **Kích thước nguồn nội tuyến:** Nguồn nội tuyến bị giới hạn ở mức 1 MB cho mỗi tệp và tổng cộng 2 MB cho tất cả các tệp.
-- **Kích thước nguồn**: Kho lưu trữ Git có giới hạn 500 MB và kho lưu trữ Bộ nhớ đám mây có giới hạn 2 GB.
-- **Khởi động môi trường:** Quá trình cung cấp một môi trường mới mất tối đa khoảng 5 giây. Các kho lưu trữ nguồn lớn có thể làm tăng thời gian này.
-- **Hỗ trợ tệp:** Hiện tại, tác nhân chỉ có thể đọc tệp văn bản và hình ảnh. Tính năng hỗ trợ tệp nhị phân hiện chưa được cung cấp.
-- **Không gắn từ thư mục gốc:** Bạn không thể đặt thư mục gốc (`/`) làm đích đến khi thêm một nguồn tuỳ chỉnh, bạn phải luôn chỉ định một thư mục con.
+- **Vorabversion**:Umgebungen und verwaltete Agenten sind in der Vorabversion verfügbar. Funktionen und Schemas können sich ändern.
+- **Größe der Inline-Quelle**:Inline-Quellen sind auf 1 MB pro Datei und insgesamt 2 MB für alle Dateien beschränkt.
+- **Quellgröße**: Git-Repositories sind auf 500 MB und Cloud Storage-Repositories auf 2 GB beschränkt.
+- **Umgebungsstart**:Die Bereitstellung einer neuen Umgebung dauert bis zu 5 Sekunden. Bei großen Quell-Repositories kann diese Zeit länger sein.
+- **Dateiformate**:Der Agent kann derzeit nur Text- und Bilddateien lesen. Die Unterstützung für Binärdateien ist noch nicht verfügbar.
+- **Keine Einbindung aus dem Stammverzeichnis:** Sie können das Stammverzeichnis (`/`) nicht als Ziel festlegen, wenn Sie eine benutzerdefinierte Quelle hinzufügen. Sie müssen immer ein Unterverzeichnis angeben.
 
-## Bước tiếp theo
+## Nächste Schritte
 
-- [Tổng quan về tác nhân](https://ai.google.dev/gemini-api/docs/agents?hl=vi): Tìm hiểu về các khái niệm cốt lõi của tác nhân được quản lý.
-- [Bắt đầu nhanh](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=vi): Bắt đầu xây dựng bằng các cuộc trò chuyện nhiều lượt và tính năng phát trực tuyến.
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=vi): Khám phá các chức năng, công cụ và giá của tác nhân mặc định.
-- [Tạo tác nhân tuỳ chỉnh](https://ai.google.dev/gemini-api/docs/custom-agents?hl=vi): Xác định tác nhân của riêng bạn bằng cách sử dụng `AGENTS.md` và `SKILL.md`.
+- [Übersicht über Agenten](https://ai.google.dev/gemini-api/docs/agents?hl=de): Informationen zu den grundlegenden Konzepten verwalteter Agenten.
+- [Schnellstart](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de): Mit mehrstufigen Unterhaltungen und Streaming beginnen.
+- [Antigravity-Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de): Funktionen, Tools und Preise für den Standardagenten.
+- [Benutzerdefinierte Agenten erstellen](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de): Definieren Sie Ihre eigenen Agenten mit `AGENTS.md` und `SKILL.md`.
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Cập nhật lần gần đây nhất: 2026-05-20 UTC.
+Zuletzt aktualisiert: 2026-06-22 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Haben Sie Feedback für uns?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-20 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-22 (UTC)."],[],[]]

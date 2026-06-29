@@ -1,10 +1,10 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/nanobanana?hl=es-419
-fetched_at: 2026-05-05T19:47:10.621483+00:00
+fetched_at: 2026-06-29T05:34:17.604132+00:00
 title: "Nano Banana (generaci\u00f3n de im\u00e1genes) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 

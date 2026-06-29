@@ -1,228 +1,202 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id
-fetched_at: 2026-06-22T06:28:25.523647+00:00
-title: "Strategi desain prompt \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr
+fetched_at: 2026-06-29T05:33:10.370895+00:00
+title: "H\u0131zl\u0131 tasar\u0131m stratejileri \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id) kini tersedia dalam pratinjau dengan perencanaan kolaboratif, visualisasi, dukungan MCP, dan lainnya.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Kirim masukan
+Geri bildirim gönderin
 
-# Strategi desain prompt
+# Hızlı tasarım stratejileri
 
-*Desain prompt* adalah proses pembuatan perintah, atau permintaan dalam bahasa alami,
-yang mendapatkan respons yang akurat dan berkualitas tinggi dari model bahasa.
+*İstem tasarımı*, dil modelinden doğru ve yüksek kaliteli yanıtlar alınmasını sağlayan istemler veya doğal dil istekleri oluşturma sürecidir.
 
-Halaman ini memperkenalkan konsep dasar, strategi, dan praktik terbaik untuk membantu Anda mulai mendesain perintah agar dapat memanfaatkan model AI Gemini secara maksimal.
+Bu sayfada, Gemini yapay zeka modellerinden en iyi şekilde yararlanmak için istem tasarlamaya başlamanıza yardımcı olacak temel kavramlar, stratejiler ve en iyi uygulamalar tanıtılmaktadır.
 
-## Panduan perintah khusus topik
+## Konuya özel istem kılavuzları
 
-Mencari strategi perintah yang lebih spesifik? Lihat panduan perintah lainnya di:
+Daha spesifik istem stratejileri mi arıyorsunuz? Aşağıdaki konularda diğer istem kılavuzlarımıza göz atın:
 
-- [Memberikan perintah dengan file media](https://ai.google.dev/gemini-api/docs/files?hl=id#prompt-guide)
-- Perintah untuk pembuatan gambar dengan [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=id#imagen-prompt-guide) dan [Pembuatan Gambar Native Gemini](https://ai.google.dev/gemini-api/docs/image-generation?hl=id#prompt-guide)
-- [Memberikan perintah untuk pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id#prompt-guide)
+- [Medya dosyalarıyla istem oluşturma](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide)
+- [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=tr#imagen-prompt-guide) ve [Gemini Native Image Generation](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr#prompt-guide) ile görüntü üretme istemleri
+- [Video üretimi için istem girme](https://ai.google.dev/gemini-api/docs/video?hl=tr#prompt-guide)
 
-Anda dapat menemukan contoh perintah lainnya di [galeri perintah](https://ai.google.dev/gemini-api/prompts?hl=id) yang dimaksudkan untuk menampilkan banyak konsep yang dibagikan dalam panduan ini secara interaktif.
+Bu kılavuzda paylaşılan birçok kavramı etkileşimli olarak sergilemek için tasarlanan [istem galerisinde](https://ai.google.dev/gemini-api/prompts?hl=tr) diğer örnek istemleri bulabilirsiniz.
 
-## Petunjuk yang jelas dan spesifik
+## Net ve spesifik talimatlar
 
-Cara yang efektif dan efisien untuk menyesuaikan perilaku model adalah dengan memberikan instruksi yang jelas dan spesifik. Petunjuk dapat berupa pertanyaan,
-tugas langkah demi langkah, atau serumit memetakan pengalaman dan pola pikir pengguna.
+Model davranışını özelleştirmenin etkili ve verimli bir yolu, modele net ve spesifik talimatlar vermektir. Talimatlar soru, adım adım görevler şeklinde veya kullanıcının deneyimini ve düşünce yapısını haritalandırmak kadar karmaşık olabilir.
 
-### Input
+### Giriş
 
-Input adalah teks yang diperlukan dalam perintah yang harus diberikan respons oleh model. Input dapat berupa pertanyaan yang menjadi model jawaban (masukan pertanyaan), tugas yang dilakukan model (masukan tugas), suatu entitas model beroperasi (input entitas), atau sebagian input yang diselesaikan model atau berlanjut (input penyelesaian).
+Giriş, istemde modelin yanıt vermesini istediğiniz zorunlu metindir. Girişler; modelin yanıtladığı bir soru (soru girişi), modelin gerçekleştirdiği bir görev (görev girişi), modelin üzerinde işlem yaptığı bir varlık (varlık girişi) veya modelin tamamladığı ya da devam ettirdiği kısmi giriş (tamamlama girişi) olabilir.
 
-| **Jenis input** | **Perintah** | **Output yang dihasilkan** |
+| **Giriş türü** | **İstem** | **Üretilen çıkış** |
 | --- | --- | --- |
-| Pertanyaan | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
-| Tugas | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
-| Entitas | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
+| Soru | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
+| Görev | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
+| Varlık | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
 
-#### Penyelesaian input sebagian
+#### Kısmi giriş tamamlama
 
-Model bahasa generatif berfungsi seperti alat pelengkapan otomatis canggih. Jika Anda menyediakan konten sebagian, model dapat memberikan konten lainnya atau yang dianggapnya sebagai kelanjutan dari konten tersebut sebagai respons. Saat melakukannya, jika Anda menyertakan contoh atau konteks, model dapat mempertimbangkan contoh atau konteks tersebut.
+Üretken dil modelleri, gelişmiş bir otomatik tamamlama aracı gibi çalışır. Kısmi içerik sağladığınızda model, içeriğin geri kalanını veya içeriğin devamı olduğunu düşündüğü kısmı yanıt olarak verebilir. Bunu yaparken örnek veya bağlam eklerseniz model bu örnekleri ya da bağlamı dikkate alabilir.
 
-Contoh berikut memberikan perintah dengan petunjuk dan input entity:
-
-|  |
-| --- |
-| **Perintah:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **Respons:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
-
-Meskipun model melakukan seperti yang diminta, menuliskan petunjuk dalam bahasa alami terkadang dapat menjadi tantangan dan menyisakan banyak hal untuk interpretasi model. Misalnya, menu restoran mungkin berisi banyak item. Untuk mengurangi ukuran respons JSON, Anda mungkin ingin menghilangkan item yang tidak dipesan. Dalam hal ini, Anda dapat memberikan contoh dan awalan respons, lalu membiarkan model melengkapinya:
+Aşağıdaki örnekte, talimat ve öğe girişi içeren bir istem sağlanmaktadır:
 
 |  |
 | --- |
-| **Perintah:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **Respons:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
+| **İstem:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **Yanıt:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
 
-Perhatikan bagaimana "cheeseburger" dikecualikan dari output karena bukan bagian
-dari pesanan.
-
-Meskipun Anda dapat menentukan format objek respons JSON sederhana menggunakan perintah, sebaiknya gunakan fitur [output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id) Gemini API saat menentukan Skema JSON yang lebih kompleks untuk respons.
-
-### Batasan
-
-Tentukan batasan apa pun dalam membaca perintah atau membuat respons. Anda dapat
-memberi tahu model apa yang boleh dan tidak boleh dilakukan. Misalnya, Anda dapat menentukan batasan
-dalam perintah tentang panjang ringkasan yang Anda inginkan:
+Model, isteneni yapmasına rağmen talimatları doğal dilde yazmak bazen zor olabilir ve modelin yorumuna çok şey bırakır.
+Örneğin, bir restoranın menüsünde birçok öğe olabilir. JSON yanıtının boyutunu küçültmek için sipariş edilmeyen öğeleri atlamak isteyebilirsiniz. Bu durumda, bir örnek ve yanıt öneki verebilir, modelin bunu tamamlamasına izin verebilirsiniz:
 
 |  |
 | --- |
-| **Perintah:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **Respons:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
+| **İstem:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **Yanıt:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
 
-### Format respons
+"Cheeseburger"ın siparişin bir parçası olmadığı için çıkıştan nasıl hariç tutulduğuna dikkat edin.
 
-Anda dapat memberikan petunjuk yang menentukan format respons. Misalnya, Anda dapat meminta agar respons diformat sebagai tabel, daftar berbutir, presentasi singkat, kata kunci, kalimat, atau paragraf. Petunjuk sistem berikut memberi tahu model untuk memberikan respons yang lebih komunikatif:
+Basit JSON yanıt nesnelerinin biçimini istemleri kullanarak belirtebilseniz de yanıt için daha karmaşık bir JSON şeması belirtirken Gemini API'nin [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) özelliğini kullanmanızı öneririz.
 
-|  |
-| --- |
-| **Petunjuk sistem**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **Perintah**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **Respons:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
+### Sınırlamalar
 
-#### Memformat respons dengan strategi penyelesaian
-
-[Strategi penyelesaian](#completion) juga dapat membantu memformat respons.
-Contoh berikut meminta model untuk membuat garis besar esai:
+İstemin okunması veya yanıt oluşturulmasıyla ilgili kısıtlamaları belirtin. Modele ne yapıp ne yapmaması gerektiğini söyleyebilirsiniz. Örneğin, istemde özetin ne kadar uzun olmasını istediğinize dair bir kısıtlama belirtebilirsiniz:
 
 |  |
 | --- |
-| **Perintah:**    ``` Create an outline for an essay about hummingbirds. ```  **Respons:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
+| **İstem:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **Yanıt:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
 
-Perintah tidak menentukan format untuk garis besar dan model telah memilih format untuk Anda. Agar model mengembalikan garis besar dalam format tertentu, Anda dapat menambahkan teks yang mewakili awal garis besar dan membiarkan model menyelesaikannya berdasarkan pola yang Anda mulai.
+### Yanıt biçimi
 
-|  |
-| --- |
-| **Perintah:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **Respons:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
-
-## Prompt zero-shot vs few-shot
-
-Anda dapat menyertakan contoh dalam prompt yang menunjukkan tampilan penerapannya dengan benar pada model. Model mencoba mengidentifikasi pola dan hubungan dari contoh-contoh tersebut dan menerapkannya saat membuat respons. Perintah yang berisi beberapa contoh disebut perintah *few-shot*, sedangkan perintah yang tidak memberikan contoh disebut perintah *zero-shot*. Prompt few-shot sering digunakan
-untuk mengatur pemformatan, frasa, cakupan, atau pola umum respons model. Gunakan contoh yang spesifik dan bervariasi untuk membantu model mempersempit fokusnya dan menghasilkan hasil yang lebih akurat.
-
-Sebaiknya selalu sertakan contoh sedikit tembakan dalam perintah Anda. Perintah tanpa
-contoh sedikit tembakan cenderung kurang efektif. Bahkan, Anda dapat menghapus
-petunjuk dari perintah jika contoh Anda cukup jelas dalam menunjukkan
-tugas yang sedang dilakukan.
-
-Petunjuk zero-shot berikut meminta model untuk memilih penjelasan terbaik.
+Yanıtın biçimini belirten talimatlar verebilirsiniz. Örneğin, yanıtın tablo, madde işaretli liste, kısa tanıtım, anahtar kelimeler, cümle veya paragraf olarak biçimlendirilmesini isteyebilirsiniz. Aşağıdaki sistem talimatı, modele yanıtında daha sohbet tarzında olmasını söylüyor:
 
 |  |
 | --- |
-| **Perintah:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Respons:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
+| **Sistem talimatı**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **İstem**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **Yanıt:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
 
-Jika kasus penggunaan Anda memerlukan model untuk menghasilkan respons yang ringkas, Anda dapat menyertakan
-contoh dalam perintah yang memberikan preferensi pada respons yang ringkas.
+#### Tamamlama stratejisiyle yanıtları biçimlendirme
 
-Perintah berikut memberikan dua contoh yang menunjukkan preferensi terhadap penjelasan yang lebih singkat. Dalam respons, Anda dapat melihat bahwa contoh memandu model untuk memilih penjelasan yang lebih pendek (`Explanation2`) dibandingkan dengan penjelasan yang lebih panjang (`Explanation1`) seperti sebelumnya.
-
-|  |
-| --- |
-| **Perintah:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Respons:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
-
-### Jumlah contoh yang optimal
-
-Model seperti Gemini sering kali dapat memahami pola menggunakan beberapa contoh, meskipun Anda mungkin perlu bereksperimen dengan jumlah contoh yang akan diberikan dalam perintah untuk mendapatkan hasil terbaik. Pada saat yang sama, jika Anda menyertakan terlalu banyak contoh, model mungkin akan mulai [melebihi](https://developers.google.com/machine-learning/glossary?hl=id#overfitting) respons terhadap contoh.
-
-### Format yang konsisten
-
-Pastikan struktur dan pemformatan contoh few-shot sama untuk menghindari respons dengan format yang tidak diinginkan. Salah satu tujuan utama menambahkan contoh few-shot dalam perintah adalah untuk menunjukkan format respons kepada model. Oleh karena itu, penting untuk memastikan format yang konsisten di semua contoh, terutama dengan memperhatikan tag XML, spasi kosong, baris baru, dan pemisah contoh.
-
-## Tambahkan konteks
-
-Anda dapat menyertakan petunjuk dan informasi dalam perintah yang diperlukan model
-untuk memecahkan masalah, bukan mengasumsikan bahwa model memiliki semua informasi
-yang diperlukan. Informasi kontekstual ini membantu model memahami batasan dan detail tugas yang Anda minta.
-
-Contoh berikut meminta model untuk memberikan panduan pemecahan masalah untuk router:
+[Tamamlama stratejisi](#completion), yanıtın biçimlendirilmesine de yardımcı olabilir.
+Aşağıdaki örnekte, modelden bir deneme taslağı oluşturması isteniyor:
 
 |  |
 | --- |
-| **Perintah:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **Respons:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+| **İstem:**    ``` Create an outline for an essay about hummingbirds. ```  **Yanıt:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
 
-Responsnya terlihat seperti informasi pemecahan masalah umum yang tidak spesifik
-untuk router atau status lampu indikator LED.
-
-Guna menyesuaikan respons untuk router tertentu, Anda dapat menambahkan prompt dalam panduan pemecahan masalah router sebagai konteks yang dirujuk saat memberikan respons.
+İstemde taslağın biçimi belirtilmediği için model sizin için bir biçim seçti. Modelin belirli bir biçimde taslak döndürmesini sağlamak için taslağın başlangıcını temsil eden metin ekleyebilir ve başlattığınız kalıba göre modeli tamamlayabilirsiniz.
 
 |  |
 | --- |
-| **Perintah:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **Respons:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+| **İstem:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **Yanıt:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
 
-## Menguraikan perintah menjadi komponen
+## Sıfır görevli ve çok görevli istemler
 
-Untuk kasus penggunaan yang memerlukan perintah kompleks, Anda dapat membantu model mengelola kompleksitas ini dengan memecah perintah menjadi komponen yang lebih sederhana.
+İstemde, modelin doğru yanıtın nasıl göründüğünü anlamasına yardımcı olacak örnekler ekleyebilirsiniz. Model, örneklerdeki kalıpları ve ilişkileri belirlemeye çalışır ve yanıt oluştururken bunları uygular. Birkaç örnek içeren istemlere *az görevli* istemler, örnek içermeyen istemlere ise *sıfır görevli* istemler denir. Az görevli istemler genellikle model yanıtlarının biçimlendirmesini, ifade biçimini, kapsamını veya genel kalıbını düzenlemek için kullanılır. Modelin odak noktasını daraltmasına ve daha doğru sonuçlar üretmesine yardımcı olmak için spesifik ve çeşitli örnekler kullanın.
 
-1. **Memecah petunjuk:** Daripada memiliki banyak petunjuk dalam satu perintah, buat satu perintah per petunjuk. Anda dapat memilih perintah mana yang akan diproses berdasarkan input pengguna.
-2. **Rangkai perintah:** Untuk tugas kompleks yang melibatkan beberapa langkah berurutan,
-   jadikan setiap langkah sebagai perintah dan rangkai perintah tersebut secara berurutan. Dalam rangkaian perintah berurutan ini, output satu perintah dalam urutan menjadi input perintah berikutnya. Output perintah terakhir dalam urutan
-   adalah output akhir.
-3. **Respons gabungan:** Penggabungan adalah saat Anda ingin melakukan berbagai tugas paralel pada berbagai bagian data dan menggabungkan hasilnya untuk menghasilkan output akhir. Misalnya, Anda dapat memberi tahu model untuk melakukan satu
-   operasi pada bagian pertama data, melakukan operasi lain pada bagian data
-   lainnya, dan menggabungkan hasilnya.
+İstemlerinize her zaman birkaç görevli örnek eklemenizi öneririz. Az görevli örnekler içermeyen istemlerin etkili olma olasılığı daha düşüktür. Hatta örnekleriniz, söz konusu görevi gösterme konusunda yeterince netse isteminizden talimatları kaldırabilirsiniz.
 
-## Bereksperimen dengan parameter model
+Aşağıdaki sıfır görevli istemde modelden en iyi açıklamayı seçmesi isteniyor.
 
-Setiap panggilan yang Anda kirim ke model menyertakan parameter value yang mengontrol cara model menghasilkan respons. Model ini dapat memberikan hasil yang berbeda untuk parameter value yang berbeda. Bereksperimenlah dengan parameter value yang berbeda untuk mendapatkan nilai terbaik untuk tugas. Parameter yang tersedia untuk model yang berbeda mungkin berbeda. Parameter yang paling umum adalah sebagai berikut:
+|  |
+| --- |
+| **İstem:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Yanıt:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
 
-1. **Token output maks:** Menentukan jumlah maksimum token yang dapat
-   dibuat dalam respons. Token terdiri atas sekitar empat karakter. 100
-   token setara dengan sekitar 60-80 kata.
-2. **Temperatur:** Temperatur mengontrol tingkat keacakan dalam pemilihan token. Temperatur digunakan untuk pengambilan sampel selama pembuatan respons, yang terjadi saat `topP` dan `topK` diterapkan. Temperatur yang lebih rendah cocok untuk perintah yang memerlukan respons yang lebih deterministik atau kurang terbuka, sedangkan temperatur yang lebih tinggi dapat memberikan hasil yang lebih beragam atau kreatif. Temperatur 0 bersifat deterministik, yang berarti bahwa respons probabilitas tertinggi akan selalu dipilih.
-3. **`topK`:** Parameter `topK` mengubah cara model memilih token untuk output. Nilai `topK` 1 berarti token yang dipilih adalah yang paling mungkin di antara semua token dalam kosakata model (disebut juga greedy decoding), sedangkan nilai `topK` 3 berarti token berikutnya dipilih dari antara 3 token yang paling mungkin menggunakan temperatur. Untuk setiap langkah pemilihan token, token `topK` dengan probabilitas tertinggi akan diambil sampelnya. Token kemudian difilter lebih lanjut berdasarkan `topP` dengan token akhir yang dipilih menggunakan pengambilan sampel temperatur.
-4. **`topP`:** Parameter `topP` mengubah cara model memilih token untuk output. Token dipilih dari yang paling mungkin hingga yang paling tidak mungkin hingga jumlah probabilitasnya sama dengan nilai `topP`. Misalnya, jika token A, B, dan C memiliki probabilitas 0,3, 0,2, dan 0,1 serta nilai `topP` adalah 0,5, maka model akan memilih A atau B sebagai token berikutnya dengan menggunakan temperatur dan mengecualikan C sebagai kandidat. Nilai `topP` default adalah 0,95.
-5. **`stop_sequences`:** Tetapkan urutan penghentian untuk
-   memberi tahu model agar berhenti membuat konten. Urutan penghentian dapat berupa
-   urutan karakter apa pun. Coba hindari penggunaan urutan karakter yang
-   mungkin muncul dalam konten yang dihasilkan.
+Kullanım alanınızda modelin kısa yanıtlar üretmesi gerekiyorsa isteme kısa yanıtları tercih eden örnekler ekleyebilirsiniz.
 
-## Strategi iterasi prompt
+Aşağıdaki istemde, daha kısa açıklamalara öncelik verildiğini gösteren iki örnek yer alıyor. Yanıtta, örneklerin modeli daha önce yaptığı gibi daha uzun açıklama (`Explanation1`) yerine daha kısa açıklamayı (`Explanation2`) seçmeye yönlendirdiği görülüyor.
 
-Desain prompt terkadang memerlukan beberapa iterasi sebelum
-Anda mendapatkan respons yang diinginkan secara konsisten. Bagian ini memberikan
-panduan tentang beberapa hal yang dapat Anda coba saat melakukan iterasi pada perintah Anda:
+|  |
+| --- |
+| **İstem:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **Yanıt:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
 
-1. **Gunakan frasa yang berbeda:** Penggunaan kata atau frasa yang berbeda dalam perintah Anda sering kali menghasilkan respons yang berbeda dari model meskipun semuanya memiliki arti yang sama. Jika Anda tidak mendapatkan hasil yang diharapkan dari perintah Anda, coba
-   susun ulang perintah tersebut.
+### İdeal örnek sayısı
+
+Gemini gibi modeller, birkaç örnek kullanarak kalıpları tespit edebilir. Ancak en iyi sonuçları elde etmek için istemde sağlanan örneklerin sayısıyla denemeler yapmanız gerekebilir. Aynı zamanda, çok fazla örnek eklerseniz model, yanıtı örneklere [aşırı uydurmaya](https://developers.google.com/machine-learning/glossary?hl=tr#overfitting) başlayabilir.
+
+### Tutarlı format
+
+İstenmeyen biçimlerde yanıtlar almamak için birkaç görevli örneklerin yapısının ve biçimlendirmesinin aynı olduğundan emin olun. İstemlere birkaç görevli örnek eklemenin temel amaçlarından biri, modele yanıt biçimini göstermektir. Bu nedenle, özellikle XML etiketlerine, boşluklara, yeni satırlara ve örnek ayırıcılara dikkat ederek tüm örneklerde tutarlı bir biçim sağlamak önemlidir.
+
+## Bağlam bilgisi ekleyin
+
+Modelin gerekli tüm bilgilere sahip olduğunu varsaymak yerine, bir isteme talimatlar ve bilgiler ekleyerek modelin bir sorunu çözmesini sağlayabilirsiniz. Bu bağlamsal bilgiler, modelin istediğiniz işle ilgili kısıtlamaları ve ayrıntıları anlamasına yardımcı olur.
+
+Aşağıdaki örnekte, modelden bir yönlendiriciyle ilgili sorun giderme talimatları vermesi isteniyor:
+
+|  |
+| --- |
+| **İstem:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **Yanıt:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+
+Yanıtta, yönlendiriciye veya LED gösterge ışıklarının durumuna özgü olmayan genel sorun giderme bilgileri yer alıyor.
+
+Yanıtı belirli bir yönlendirici için özelleştirmek istiyorsanız isteme, yanıt verirken başvurması için yönlendiricinin sorun giderme kılavuzunu bağlam olarak ekleyebilirsiniz.
+
+|  |
+| --- |
+| **İstem:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **Yanıt:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+
+## İstemleri bileşenlere ayırma
+
+Karmaşık istemler gerektiren kullanım alanlarında, öğeleri daha basit bileşenlere ayırarak modelin bu karmaşıklığı yönetmesine yardımcı olabilirsiniz.
+
+1. **Talimatları bölme:** Tek bir istemde çok sayıda talimat vermek yerine her talimat için ayrı bir istem oluşturun. Kullanıcının girişine göre hangi istemin işleneceğini seçebilirsiniz.
+2. **İstemleri zincirleme:** Sıralı birden fazla adım içeren karmaşık görevler için her adımı istem olarak girin ve istemleri bir sırayla zincirleyin. Bu sıralı istem zincirinde, dizideki bir istemin çıkışı bir sonraki istemin girişi olur. Dizideki son istemin çıkışı, nihai çıkıştır.
+3. **Yanıtları toplama:** Toplama, verilerin farklı bölümlerinde farklı paralel görevler gerçekleştirmek ve sonuçları toplayarak nihai çıktıyı oluşturmak istediğinizde yapılır. Örneğin, modele verilerin ilk bölümünde bir işlem, verilerin geri kalanında başka bir işlem yapmasını ve sonuçları toplamasını söyleyebilirsiniz.
+
+## Model parametreleriyle denemeler yapma
+
+Bir modele gönderdiğiniz her çağrı, modelin nasıl yanıt üreteceğini kontrol eden parametre değerleri içerir. Model, farklı parametre değerleri için farklı sonuçlar üretebilir. Görev için en iyi değerleri elde etmek üzere farklı parametre değerleriyle denemeler yapın. Farklı modeller için kullanılabilen parametreler farklı olabilir. En yaygın parametreler şunlardır:
+
+1. **Maksimum çıkış jetonu sayısı:** Yanıtta oluşturulabilecek maksimum jeton sayısını belirtir. Bir jeton, yaklaşık dört karakterden oluşur. 100 jeton yaklaşık 60-80 kelimeye denk gelir.
+2. **Sıcaklık:** Sıcaklık, jeton seçimindeki rastgelelik derecesini kontrol eder. Sıcaklık, yanıt üretimi sırasında örnekleme için kullanılır. Bu işlem, `topP` ve `topK` uygulandığında gerçekleşir. Düşük sıcaklıklar, daha kontrollü veya daha az açık uçlu yanıt gerektiren istemler için tercih edilir. Yüksek sıcaklıklar ise daha çeşitli veya yaratıcı sonuçlar sunabilir. Sıcaklık 0 olduğunda her zaman en yüksek olasılıklı yanıt seçilir.
+3. **`topK`:** `topK` parametresi, modelin çıkış için jetonları nasıl seçeceğini değiştirir. `topK` değeri 1 olduğunda, seçilen jeton modelin sözlüğündeki tüm jetonlar arasında en olası olanıdır (açgözlü kod çözme olarak da adlandırılır). `topK` değeri 3 olduğunda ise bir sonraki jeton, sıcaklık kullanılarak en olası 3 jeton arasından seçilir. Her jeton seçme adımında, en yüksek olasılıklara sahip `topK` jeton örneklenir. Jetonlar daha sonra `topP`'ye göre daha da filtrelenir ve son jeton, sıcaklık örnekleme kullanılarak seçilir.
+4. **`topP`:** `topP` parametresi, modelin çıkış için jetonları nasıl seçeceğini değiştirir. Jetonlar, olasılıklarının toplamı `topP` değerine eşit olana kadar en olasıdan en az olasıya doğru seçilir. Örneğin, A, B ve C jetonlarının olasılığı 0,3, 0,2 ve 0,1 ise ve `topP` değeri 0,5 ise model, sıcaklığı kullanarak sonraki jeton olarak A veya B'yi seçer ve C'yi aday olarak hariç tutar. Varsayılan `topP` değeri 0,95'tir.
+5. **`stop_sequences`:** Modeli içerik oluşturmayı durdurmaya yönlendirmek için durdurma sırası ayarlayın. Durdurma dizisi herhangi bir karakter dizisi olabilir. Oluşturulan içerikte görünebilecek karakter dizilerini kullanmaktan kaçının.
+
+## İstem tekrarlama stratejileri
+
+İstemin tasarımı, istediğiniz yanıtı tutarlı bir şekilde almadan önce bazen birkaç yineleme gerektirebilir. Bu bölümde, istemlerinizi yinelerken deneyebileceğiniz bazı yöntemler hakkında bilgi verilmektedir:
+
+1. **Farklı ifadeler kullanın:** İstemlerinizde farklı kelimeler veya ifadeler kullanmak, aynı anlama gelseler bile modelden genellikle farklı yanıtlar almanızı sağlar. İsteminizden beklediğiniz sonuçları alamıyorsanız isteminizi yeniden ifade etmeyi deneyin.
 
    |  |
    | --- |
    | ``` Version 1: How do I bake a pie?  Version 2: Suggest a recipe for a pie.  Version 3: What's a good pie recipe? ``` |
-2. **Beralih ke tugas analog:** Jika Anda tidak dapat membuat model agar mengikuti petunjuk untuk suatu tugas, coba berikan petunjuk untuk tugas analog yang mencapai hasil yang sama.
+2. **Benzer bir göreve geçin:** Modelin bir görevle ilgili talimatlarınızı uygulamasını sağlayamıyorsanız aynı sonucu veren benzer bir görevle ilgili talimatlar vermeyi deneyin.
 
-   Perintah ini memberi tahu model untuk mengategorikan buku dengan menggunakan kategori yang telah ditentukan:
-
-   |  |
-   | --- |
-   | **Perintah:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **Respons:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
-
-   Responsnya benar, tetapi modelnya tidak tetap dalam batas opsi. Anda juga ingin membuat model untuk merespons hanya dengan salah satu opsi, bukan
-   menggunakan kalimat lengkap. Dalam hal ini, Anda dapat menulis ulang petunjuk sebagai
-   pertanyaan pilihan ganda dan meminta model untuk memilih opsi.
+   Bu istemde, modelden önceden tanımlanmış kategorileri kullanarak bir kitabı sınıflandırması isteniyor:
 
    |  |
    | --- |
-   | **Perintah:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
+   | **İstem:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **Yanıt:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
+
+   Yanıt doğru ancak model, seçeneklerin sınırları içinde kalmadı. Ayrıca, modelin tam cümleyle yanıt vermek yerine yalnızca seçeneklerden birini kullanarak yanıt vermesini istiyorsunuz. Bu durumda, talimatları çoktan seçmeli soru olarak yeniden ifade edebilir ve modelden bir seçenek belirlemesini isteyebilirsiniz.
+
+   |  |
+   | --- |
+   | **İstem:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
 
    - thriller
    - sci-fi
    - mythology
    - biography
-     **Respons:**
+     **Yanıt:**
 
      ```
      The correct answer is mythology.
      ```
 
      (gemini-2.5-flash)
-   - **Mengubah urutan konten perintah:** Urutan konten dalam perintah terkadang dapat memengaruhi respons. Coba ubah urutan konten dan lihat pengaruhnya terhadap respons.
+   - **İstem içeriğinin sırasını değiştirme:** İstemdeki içeriğin sırası bazen yanıtı etkileyebilir. İçerik sırasını değiştirmeyi deneyin ve bunun yanıtı nasıl etkilediğini görün.
 
      ```
      Version 1:
@@ -241,60 +215,51 @@ panduan tentang beberapa hal yang dapat Anda coba saat melakukan iterasi pada pe
      [context]
      ```
 
-## Respons penggantian
+## Yedek yanıtlar
 
-Respons penggantian adalah respons yang ditampilkan oleh model saat prompt
-atau respons memicu filter keamanan. Contoh respons penggantian adalah
-"Saya tidak dapat membantu, karena saya hanya model bahasa".
+Yedek yanıt, istem veya yanıt bir güvenlik filtresini tetiklediğinde model tarafından döndürülen yanıttır. Yedek yanıta örnek olarak "Yalnızca bir dil modeli olduğum için bu konuda yardımcı olamıyorum." verilebilir.
 
-Jika model merespons dengan respons penggantian, coba tingkatkan suhu.
+Model, yedek yanıtla karşılık veriyorsa sıcaklığı artırmayı deneyin.
 
-## Perujukan dan eksekusi kode
+## Temellendirme ve kod yürütme
 
-Gemini dapat menggunakan alat untuk menghindari halusinasi dalam skenario yang berpotensi menghasilkan respons yang salah.
+Gemini, aksi takdirde yanlış yanıtlar verebileceği senaryolarda halüsinasyonları önlemek için araçları kullanabilir.
 
-[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) menghubungkan model Gemini ke konten web real-time, dan harus diaktifkan setiap kali model mungkin perlu mengetahui fakta-fakta yang tidak jelas atau terbaru.
+[Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr), Gemini modelini gerçek zamanlı web içeriğine bağlar ve modelin belirsiz veya güncel bilgileri bilmesi gerektiğinde etkinleştirilmelidir.
 
-[Alat eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id) Gemini memungkinkan model membuat dan menjalankan kode Python, dan harus diaktifkan setiap kali model perlu melakukan perhitungan, penghitungan, atau kalkulasi apa pun.
+Gemini'ın [kod yürütme aracı](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr), modelin Python kodu oluşturup çalıştırmasını sağlar ve modelin herhangi bir aritmetik, sayma veya hesaplama işlemi yapması gerektiğinde etkinleştirilmelidir.
 
 ## Gemini 3
 
-[Model Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=id#gemini-3) dirancang untuk penalaran dan pemahaman petunjuk yang canggih.
-Model ini merespons perintah yang langsung, terstruktur dengan baik, dan mendefinisikan tugas serta batasan dengan jelas. Praktik berikut direkomendasikan untuk
-hasil optimal dengan Gemini 3:
+[Gemini 3 modelleri](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-3), gelişmiş akıl yürütme ve talimatları uygulama için tasarlanmıştır.
+Bu modeller, doğrudan, iyi yapılandırılmış ve görevi ve kısıtlamaları net bir şekilde tanımlayan istemlere en iyi yanıtı verir. Gemini 3 ile en iyi sonuçları almak için aşağıdaki uygulamalar önerilir:
 
-### Prinsip inti perintah
+### Temel istem ilkeleri
 
-- **Tulis dengan tepat dan langsung:** Nyatakan tujuan Anda dengan jelas dan ringkas. Hindari
-  bahasa yang tidak perlu atau terlalu persuasif.
-- **Gunakan struktur yang konsisten:** Gunakan pembatas yang jelas untuk memisahkan berbagai bagian perintah Anda. Tag gaya XML (misalnya, `<context>`, `<task>`) atau heading Markdown efektif. Pilih satu format dan gunakan secara konsisten dalam satu perintah.
-- **Tentukan parameter:** Jelaskan secara eksplisit setiap istilah atau parameter yang ambigu.
-- **Mengontrol kejelasan output:** Secara default, model Gemini 3 memberikan jawaban yang langsung dan efisien. Jika Anda memerlukan respons yang lebih bersifat percakapan atau lebih mendetail,
-  Anda harus secara eksplisit memintanya dalam petunjuk Anda.
-- **Tangani input multimodal secara koheren:** Saat menggunakan teks, gambar, audio, atau
-  video, perlakukan input tersebut sebagai input kelas yang sama. Pastikan petunjuk Anda dengan jelas
-  mereferensikan setiap modalitas sesuai kebutuhan.
-- **Prioritaskan petunjuk penting:** Tempatkan batasan perilaku penting, definisi peran (persona), dan persyaratan format output dalam Petunjuk Sistem atau di awal perintah pengguna.
-- **Struktur untuk konteks panjang:** Saat memberikan konteks dalam jumlah besar (misalnya, dokumen, kode), berikan semua konteks terlebih dahulu. Tempatkan petunjuk atau pertanyaan spesifik Anda di *akhir* perintah.
-- **Konteks penanda:** Setelah blok data yang besar, gunakan frasa transisi
-  yang jelas untuk menghubungkan konteks dan kueri Anda, seperti "Berdasarkan
-  informasi di atas..."
+- **Net ve doğrudan olun:** Hedefinizi açık ve kısa bir şekilde belirtin. Gereksiz veya aşırı ikna edici dil kullanmaktan kaçının.
+- **Tutarlı bir yapı kullanın:** İsteminizin farklı bölümlerini ayırmak için net sınırlayıcılar kullanın. XML tarzı etiketler (ör. `<context>`, `<task>`) veya Markdown başlıkları etkili olur. Tek bir istemde tutarlı bir şekilde kullanmak için bir biçim seçin.
+- **Parametreleri tanımlayın:** Belirsiz terimleri veya parametreleri açıkça açıklayın.
+- **Çıkış ayrıntı düzeyini kontrol etme:** Gemini 3 modelleri varsayılan olarak doğrudan ve verimli yanıtlar verir. Daha sohbet tarzında veya ayrıntılı bir yanıt istiyorsanız talimatlarınızda bunu açıkça belirtmeniz gerekir.
+- **Çok formatlı girişleri tutarlı bir şekilde işleme:** Metin, resim, ses veya video kullanırken bunları eşit sınıf girişler olarak ele alın. Talimatlarınızda her bir yönteme gerektiği şekilde açıkça atıfta bulunduğunuzdan emin olun.
+- **Önemli talimatlara öncelik verin:** Temel davranışsal kısıtlamaları, rol tanımlarını (persona) ve çıkış biçimi gereksinimlerini Sistem Talimatı'na veya kullanıcı isteminin en başına yerleştirin.
+- **Uzun bağlamlar için yapı:** Büyük miktarda bağlam (ör. dokümanlar, kod) sağlarken önce tüm bağlamı sağlayın. Belirli talimatlarınızı veya sorularınızı istemin en *sonuna* yerleştirin.
+- **Bağlamı sabitleme:** Büyük bir veri bloğundan sonra, bağlam ile sorgunuz arasında köprü kurmak için net bir geçiş ifadesi kullanın. Örneğin, "Yukarıdaki bilgilere göre..."
 
-### Strategi Gemini 3 Flash
+### Gemini 3 Flash stratejileri
 
-- **Akurasi hari ini:** Tambahkan klausa berikut ke petunjuk sistem untuk membantu model memperhatikan bahwa hari ini berada pada tahun 2026:
+- **Güncel gün doğruluğu:** Modelin, güncel günün 2026'da olduğuna dikkat etmesine yardımcı olmak için sistem talimatlarına aşağıdaki maddeyi ekleyin:
 
   ```
   For time-sensitive user queries that require up-to-date information, you
   MUST follow the provided current time (date and year) when formulating
   search queries in tool calls. Remember it is 2026 this year.
   ```
-- **Akurasi batas informasi:** Tambahkan klausa berikut ke petunjuk sistem agar model mengetahui batas informasinya:
+- **Son güncel bilgi tarihi doğruluğu:** Modeli son güncel bilgi tarihi konusunda bilgilendirmek için sistem talimatlarına aşağıdaki tümceyi ekleyin:
 
   ```
   Your knowledge cutoff date is January 2025.
   ```
-- **Performa perujukan:** Tambahkan klausa berikut ke petunjuk sistem (dengan pengeditan jika sesuai) untuk meningkatkan kemampuan model dalam merujuk respons pada konteks yang diberikan:
+- **Temellendirme performansı:** Modelin yanıtları sağlanan bağlamda temellendirme becerisini artırmak için sistem talimatlarına aşağıdaki ifadeyi ekleyin (gerekli yerlerde düzenlemeler yaparak):
 
   ```
   You are a strictly grounded assistant limited to the information provided in
@@ -310,17 +275,17 @@ hasil optimal dengan Gemini 3:
   the context, you must state that the information is not available.
   ```
 
-### Meningkatkan penalaran dan perencanaan
+### Akıl yürütme ve planlamayı geliştirme
 
-Model seri Gemini 2.5 dan 3 secara otomatis membuat teks "pemikiran" internal untuk meningkatkan performa penalaran. Oleh karena itu, umumnya tidak perlu membuat model menguraikan, merencanakan, atau menjelaskan langkah-langkah penalaran dalam respons yang ditampilkan. Untuk masalah yang memerlukan penalaran berat, permintaan sederhana seperti "Berpikir keras sebelum menjawab" dapat meningkatkan performa, meskipun dengan biaya token pemikiran tambahan.
+Gemini 2.5 ve 3 serisi modeller, akıl yürütme performansını artırmak için otomatik olarak dahili "düşünme" metni oluşturur. Bu nedenle, döndürülen yanıtta modelin ana hatlarını, planını veya ayrıntılı gerekçelendirme adımlarını belirtmek genellikle gerekli değildir. Yoğun muhakeme gerektiren sorunlarda, "Yanıt vermeden önce çok iyi düşün" gibi basit istekler, ek düşünme jetonları karşılığında performansı artırabilir.
 
-Lihat dokumentasi [Proses berpikir Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=id) untuk mengetahui detail selengkapnya.
+Daha fazla ayrıntı için [Gemini düşünme süreci](https://ai.google.dev/gemini-api/docs/thinking?hl=tr) dokümanlarını inceleyin.
 
-### Contoh perintah terstruktur
+### Yapılandırılmış istem örnekleri
 
-Penggunaan tag atau Markdown membantu model membedakan antara petunjuk, konteks, dan tugas.
+Etiket veya Markdown kullanmak, modelin talimatlar, bağlam ve görevler arasında ayrım yapmasına yardımcı olur.
 
-**Contoh XML:**
+**XML örneği:**
 
 ```
 <role>
@@ -341,7 +306,7 @@ You are a helpful assistant.
 </task>
 ```
 
-**Contoh Markdown:**
+**Markdown örneği:**
 
 ```
 # Identity
@@ -355,12 +320,11 @@ You are a senior solution architect.
 Return a single code block.
 ```
 
-### Contoh template yang menggabungkan praktik terbaik
+### En iyi uygulamaları birleştiren örnek şablon
 
-Template ini mencakup prinsip inti untuk memberikan perintah dengan Gemini 3. Selalu
-pastikan untuk melakukan iterasi dan modifikasi untuk kasus penggunaan spesifik Anda.
+Bu şablon, Gemini 3 ile istem yazmayla ilgili temel ilkeleri içerir. Kullanım alanınıza göre her zaman yineleme ve değişiklik yapmayı unutmayın.
 
-**Petunjuk Sistem:**
+**Sistem Talimatı:**
 
 ```
 <role>
@@ -387,7 +351,7 @@ Structure your response as follows:
 </output_format>
 ```
 
-**Perintah Pengguna:**
+**Kullanıcı İstemi:**
 
 ```
 <context>
@@ -403,41 +367,41 @@ Remember to think step-by-step before answering.
 </final_instruction>
 ```
 
-## Alur kerja agentic
+## Temsilci tabanlı iş akışları
 
-Untuk alur kerja agentik yang mendalam, sering kali diperlukan petunjuk khusus untuk mengontrol cara model bernalar, merencanakan, dan menjalankan tugas. Meskipun Gemini memberikan performa umum yang kuat, agen yang kompleks sering kali mengharuskan Anda mengonfigurasi pertimbangan antara biaya komputasi (latensi dan token) dan akurasi tugas.
+Derin etkileşimli iş akışlarında, modelin görevleri nasıl gerekçelendireceğini, planlayacağını ve yürüteceğini kontrol etmek için genellikle belirli talimatlar gerekir. Gemini genel olarak güçlü bir performans sunsa da karmaşık ajanlar genellikle hesaplama maliyeti (gecikme ve jetonlar) ile görev doğruluğu arasındaki dengeyi yapılandırmanızı gerektirir.
 
-Saat mendesain perintah untuk agen, pertimbangkan dimensi perilaku berikut yang dapat Anda arahkan di agen:
+Ajanlar için istem tasarlarken ajanda yönlendirebileceğiniz aşağıdaki davranış boyutlarını göz önünde bulundurun:
 
-### Penalaran dan strategi
+### Muhakeme ve strateji
 
-Konfigurasi cara model berpikir dan merencanakan sebelum mengambil tindakan.
+Modelin işlem yapmadan önce nasıl düşüneceği ve planlayacağıyla ilgili yapılandırma.
 
-- **Dekomposisi logis:** Menentukan seberapa menyeluruh model harus menganalisis batasan, prasyarat, dan urutan operasi.
-- **Diagnosis masalah**: Mengontrol kedalaman analisis saat mengidentifikasi penyebab dan penggunaan penalaran abduktif model. Menentukan apakah model harus menerima jawaban yang paling jelas atau menjelajahi penjelasan yang kompleks dan kurang mungkin.
-- **Kelengkapan informasi:** Kompromi antara menganalisis setiap kebijakan dan dokumen yang tersedia versus memprioritaskan efisiensi dan kecepatan.
+- **Mantıksal ayrıştırma:** Modelin kısıtlamaları, ön koşulları ve işlem sırasını ne kadar ayrıntılı bir şekilde analiz etmesi gerektiğini tanımlar.
+- **Sorun teşhisi**: Nedenler belirlenirken analiz derinliğini ve modelin abdüktif akıl yürütme kullanımını kontrol eder. Modelin en belirgin cevabı kabul edip etmeyeceğini veya karmaşık, daha az olası açıklamaları inceleyip incelemeyeceğini belirler.
+- **Bilgi kapsamlılığı:** Mevcut her politikayı ve belgeyi analiz etmek ile verimliliğe ve hıza öncelik vermek arasındaki denge.
 
-### Eksekusi dan keandalan
+### Yürütme ve güvenilirlik
 
-Konfigurasi cara agen beroperasi secara mandiri dan menangani hambatan.
+Ajanın bağımsız olarak çalışması ve engelleri aşmasıyla ilgili yapılandırma.
 
-- **Kemampuan beradaptasi:** Cara model bereaksi terhadap data baru. Menentukan apakah harus mematuhi rencana awalnya secara ketat atau langsung mengubah rencana saat pengamatan bertentangan dengan asumsi.
-- **Persistensi dan Pemulihan:** Tingkat upaya model untuk mengoreksi sendiri kesalahan. Persistensi tinggi meningkatkan tingkat keberhasilan, tetapi berisiko menimbulkan biaya token atau loop yang lebih tinggi.
-- **Penilaian Risiko:** Logika untuk mengevaluasi konsekuensi. Secara eksplisit membedakan antara tindakan eksplorasi berisiko rendah (baca) dan perubahan status berisiko tinggi (tulis).
+- **Uyarlanabilirlik:** Modelin yeni verilere nasıl tepki verdiği. Başlangıç planına sıkı sıkıya bağlı kalıp kalmayacağını veya gözlemler varsayımlarla çeliştiğinde hemen değişip değişmeyeceğini belirler.
+- **Kalıcılık ve Kurtarma:** Modelin hataları kendi kendine düzeltme girişimi. Yüksek kalıcılık, başarı oranlarını artırır ancak daha yüksek jeton maliyetleri veya döngüler riski taşır.
+- **Risk Değerlendirmesi:** Sonuçları değerlendirme mantığı. Düşük riskli keşif işlemleri (okuma) ile yüksek riskli durum değişiklikleri (yazma) arasında açıkça ayrım yapar.
 
-### Interaksi dan output
+### Etkileşim ve çıktı
 
-Konfigurasi cara agen berkomunikasi dengan pengguna dan memformat hasil.
+Ajanın kullanıcıyla nasıl iletişim kuracağı ve sonuçları nasıl biçimlendireceğiyle ilgili yapılandırma.
 
-- **Ambiguitas dan penanganan izin:** Menentukan kapan model diizinkan untuk membuat asumsi dan kapan model harus menjeda eksekusi untuk meminta klarifikasi atau izin kepada pengguna.
-- **Panjang Teks:** Mengontrol volume teks yang dihasilkan bersamaan dengan panggilan alat. Hal ini menentukan apakah model menjelaskan tindakannya kepada pengguna atau tetap diam selama eksekusi.
-- **Presisi dan kelengkapan:** Tingkat kecermatan output yang diperlukan. Menentukan apakah model harus menyelesaikan setiap kasus ekstrem dan memberikan angka yang tepat atau apakah perkiraan kasar dapat diterima.
+- **Belirsizlik ve izin işleme:** Modelin ne zaman varsayımda bulunmasına izin verildiğini, ne zaman yürütmeyi duraklatıp kullanıcıdan açıklama veya izin istemesi gerektiğini tanımlar.
+- **Ayrıntı düzeyi:** Araç çağrılarıyla birlikte oluşturulan metinlerin hacmini kontrol eder. Bu, modelin işlemlerini kullanıcıya açıklayıp açıklamayacağını veya yürütme sırasında sessiz kalıp kalmayacağını belirler.
+- **Hassasiyet ve eksiksizlik:** Çıkışın gerekli doğruluğu. Modelin her uç durumu çözmesi ve tam rakamlar sağlaması gerekip gerekmediğini veya yaklaşık tahminlerin kabul edilip edilmeyeceğini belirtir.
 
-### Template petunjuk sistem
+### Sistem talimatı şablonu
 
-Petunjuk sistem berikut adalah contoh yang telah dievaluasi oleh peneliti untuk meningkatkan performa pada tolok ukur agentik di mana model harus mematuhi buku peraturan yang kompleks dan berinteraksi dengan pengguna. Hal ini mendorong agen untuk bertindak sebagai pemberi alasan dan perencana yang kuat, menerapkan perilaku tertentu di seluruh dimensi yang tercantum di atas, dan mewajibkan model untuk merencanakan secara proaktif sebelum mengambil tindakan apa pun.
+Aşağıdaki sistem talimatı, modelin karmaşık bir kural kitabına uyması ve kullanıcıyla etkileşimde bulunması gereken, araştırmacılar tarafından değerlendirilmiş bir örnektir. Bu örnek, agentic karşılaştırma testlerinde performansı artırmak için kullanılmıştır. Bu istem, ajanı güçlü bir muhakeme ve planlama aracı olarak hareket etmeye teşvik eder, yukarıda listelenen boyutlarda belirli davranışları zorunlu kılar ve modelin herhangi bir işlem yapmadan önce proaktif olarak plan yapmasını gerektirir.
 
-Anda dapat menyesuaikan template ini agar sesuai dengan batasan kasus penggunaan spesifik Anda.
+Bu şablonu, kullanım alanınızla ilgili kısıtlamalara uyacak şekilde uyarlayabilirsiniz.
 
 ```
 You are a very strong reasoner and planner. Use these critical instructions to structure your plans, thoughts, and responses.
@@ -485,20 +449,19 @@ Before taking any action (either tool calls *or* responses to the user), you mus
 9) Inhibit your response: only take an action after all the above reasoning is completed. Once you've taken an action, you cannot take it back.
 ```
 
-## Langkah berikutnya
+## Sonraki adımlar
 
-- Setelah Anda memahami desain perintah dengan lebih baik, coba tulis perintah Anda sendiri menggunakan [Google AI Studio](http://aistudio.google.com?hl=id).
-- Untuk mempelajari multimodal prompting, lihat
-  [Membuat perintah dengan file media](https://ai.google.dev/gemini-api/docs/files?hl=id#prompt-guide).
-- Untuk mempelajari perintah gambar, lihat panduan perintah [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=id#prompt-guide) dan [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=id#imagen-prompt-guide).
-- Untuk mempelajari perintah video, lihat [panduan perintah Veo](https://ai.google.dev/gemini-api/docs/video?hl=id#prompt-guide).
+- İstem tasarımını daha iyi anladığınıza göre [Google AI Studio](http://aistudio.google.com?hl=tr)'yu kullanarak kendi istemlerinizi yazmayı deneyin.
+- Çok formatlı istemler hakkında bilgi edinmek için [Medya dosyalarıyla istem oluşturma](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide) başlıklı makaleyi inceleyin.
+- Resimleri istem olarak kullanma hakkında bilgi edinmek için [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr#prompt-guide) ve [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=tr#imagen-prompt-guide) istem kılavuzlarına bakın.
+- Video istemi hakkında bilgi edinmek için [Veo istem rehberini](https://ai.google.dev/gemini-api/docs/video?hl=tr#prompt-guide) inceleyin.
 
-Kirim masukan
+Geri bildirim gönderin
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Terakhir diperbarui pada 2026-06-10 UTC.
+Son güncelleme tarihi: 2026-06-10 UTC.
 
-Ada masukan untuk kami?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-10 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-10 UTC."],[],[]]

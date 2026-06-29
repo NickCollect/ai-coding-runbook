@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=ko
-fetched_at: 2026-06-22T06:33:24.591412+00:00
-title: "Workspace \uacc4\uc815\uc73c\ub85c Google AI \uc2a4\ud29c\ub514\uc624\uc5d0 \uc561\uc138\uc2a4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=pl
+fetched_at: 2026-06-29T05:32:12.762275+00:00
+title: "Dost\u0119p do Google AI Studio za pomoc\u0105 konta Workspace \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-의견 보내기
+Prześlij opinię
 
-# Workspace 계정으로 Google AI 스튜디오에 액세스
+# Dostęp do Google AI Studio za pomocą konta Workspace
 
-모든 [Google Workspace](https://workspace.google.com?hl=ko) 사용자는 기본적으로 AI Studio에 액세스할 수 있습니다. Workspace 사용자이고 AI Studio를 시작하려면 [AI Studio 빠른 시작](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ko)을 확인하세요.
+Wszyscy użytkownicy [Google Workspace](https://workspace.google.com?hl=pl) mają domyślnie dostęp do AI Studio. Jeśli korzystasz z Workspace i chcesz zacząć używać AI Studio, zapoznaj się z [krótkim przewodnikiem po AI Studio](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=pl).
 
-## 문제 해결
+## Rozwiązywanie problemów
 
-Google Workspace 계정에서 AI Studio 액세스가 사용 중지된 경우 다음과 같은 오류가 표시될 수 있습니다.
+Jeśli dostęp do AI Studio jest wyłączony na Twoim koncie Google Workspace, możesz zobaczyć taki błąd:
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-AI Studio에 액세스할 수 있어야 한다고 생각되면 Workspace 관리자에게 문의하세요.
+Jeśli uważasz, że przysługuje Ci dostęp do AI Studio, skontaktuj się z administratorem Workspace.
 
-## Workspace 사용자를 위한 AI Studio 사용 설정
+## Włączanie AI Studio dla użytkowników Workspace
 
-Google Workspace 관리자는 AI Studio를 사용할 수 있는 사용자를 관리할 수 있습니다.
+Jako administrator Google Workspace możesz kontrolować, kto może korzystać z AI Studio:
 
-- AI Studio는 모든 버전에서 기본적으로 사용 설정되어 있습니다.
-- 조직 단위 전체 또는 조직 단위 내에서 사용자 집합에 대해 AI Studio를 사용 중지하거나 사용 설정할 수 있습니다.
-- Google Workspace for Education 버전: 만 18세 미만의 사용자는 Google Workspace for Education 계정으로 AI Studio를 사용할 수 없습니다. AI Studio 설정이 사용 설정된 경우에도 마찬가지입니다. 자세한 내용은 [연령별로 Google 서비스에 대한 액세스 권한 관리하기](https://support.google.com/a/answer/10651918?hl=ko)를 참고하세요.
+- AI Studio jest domyślnie włączone we wszystkich wersjach.
+- Możesz włączać i wyłączać AI Studio dla grup użytkowników w różnych jednostkach organizacyjnych lub w ich obrębie.
+- Wersje Google Workspace for Education: użytkownicy poniżej 18 roku życia nie mogą korzystać z AI Studio na swoich kontach Google Workspace for Education. To ograniczenie obowiązuje, nawet jeśli ustawienie AI Studio jest włączone. Więcej informacji znajdziesz w artykule [Kontrolowanie dostępu do usług Google na podstawie wieku](https://support.google.com/a/answer/10651918?hl=pl).
 
-조직의 사용자에 대해 AI Studio를 사용 설정 또는 사용 중지하려면 [사용자별로 Google AI Studio 사용 설정 또는 사용 중지하기](https://support.google.com/a/answer/15004095?hl=ko)를 참고하세요.
+Aby włączyć lub wyłączyć AI Studio dla użytkowników w organizacji, zapoznaj się z artykułem [Włączanie i wyłączanie Google AI Studio na kontach użytkowników](https://support.google.com/a/answer/15004095?hl=pl).
 
-의견 보내기
+Prześlij opinię
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-최종 업데이트: 2026-04-29(UTC)
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-의견을 전달하고 싶나요?
+Chcesz przekazać coś jeszcze?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-04-29(UTC)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

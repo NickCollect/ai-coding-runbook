@@ -1,33 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=zh-CN
-fetched_at: 2026-06-22T06:25:32.095158+00:00
-title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=th
+fetched_at: 2026-06-29T05:38:11.191379+00:00
+title: "\u0e04\u0e39\u0e48\u0e21\u0e37\u0e2d\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e19\u0e31\u0e01\u0e1e\u0e31\u0e12\u0e19\u0e32\u0e0b\u0e2d\u0e1f\u0e15\u0e4c\u0e41\u0e27\u0e23\u0e4c Gemini 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) is now available in preview with collaborative planning, visualization, MCP support, and more.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [generateContent API](https://ai.google.dev/gemini-api/docs/generate-content?hl=zh-cn)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
 
-发送反馈
+ส่งความคิดเห็น
 
-# Gemini 3 开发者指南
+# คู่มือสำหรับนักพัฒนาซอฟต์แวร์ Gemini 3
 
-Gemini 3 是我们迄今为止最智能的模型系列，建立在前沿推理技术基础上。它旨在通过掌握 Agentic Workflows、自主编码和复杂的多模态任务，将任何想法变为现实。本指南介绍了 Gemini 3 模型系列的主要功能，以及如何充分利用这些功能。
+Gemini 3 เป็นกลุ่มผลิตภัณฑ์โมเดลที่ชาญฉลาดที่สุดของเราในปัจจุบัน ซึ่งสร้างขึ้นจากพื้นฐานของการให้เหตุผลที่ล้ำสมัย โดยได้รับการออกแบบมาเพื่อทำให้ทุกไอเดียเป็นจริงได้ด้วยการเชี่ยวชาญเวิร์กโฟลว์แบบ Agentic AI, การเขียนโค้ดอัตโนมัติ และงานที่ซับซ้อนแบบหลายรูปแบบ
+คู่มือนี้จะครอบคลุมฟีเจอร์หลักของกลุ่มผลิตภัณฑ์โมเดล Gemini 3 และวิธีใช้ฟีเจอร์ดังกล่าวให้เกิดประโยชน์สูงสุด
 
-[试用 Gemini 3.1 Pro 预览版](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=zh-cn)
-[试用 Gemini 3 Flash 预览版](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-preview&hl=zh-cn)
-[试用 Gemini 3.1 Flash-Lite](https://aistudio.google.com/prompts/new_chat?model=gemini-3-flash-lite&hl=zh-cn)
-[试用 Nano Banana 2](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image-preview&hl=zh-cn)
+สำรวจ[คอลเล็กชันแอป Gemini 3](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=th) เพื่อ
+ดูวิธีที่โมเดลจัดการการให้เหตุผลขั้นสูง การเขียนโค้ดอัตโนมัติ และงานที่ซับซ้อน
+แบบหลายรูปแบบ
 
-探索我们的 [Gemini 3 应用合集](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=zh-cn)，了解该模型如何处理高级推理、自主编码和复杂的多模态任务。
-
-只需编写几行代码，即可开始使用：
+เริ่มต้นด้วยโค้ด 2-3 บรรทัดดังนี้
 
 ### Python
 
@@ -36,12 +33,12 @@ from google import genai
 
 client = genai.Client()
 
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3.1-pro-preview",
-    contents="Find the race condition in this multi-threaded C++ snippet: [code here]",
+    input="Find the race condition in this multi-threaded C++ snippet: [code here]",
 )
 
-print(response.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
@@ -49,15 +46,15 @@ print(response.text)
 ```
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
 async function run() {
-  const response = await ai.models.generateContent({
+  const interaction = await client.interactions.create({
     model: "gemini-3.1-pro-preview",
-    contents: "Find the race condition in this multi-threaded C++ snippet: [code here]",
+    input: "Find the race condition in this multi-threaded C++ snippet: [code here]",
   });
 
-  console.log(response.text);
+  console.log(interaction.output_text);
 }
 
 run();
@@ -66,74 +63,72 @@ run();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
-  -X POST \
   -d '{
-    "contents": [{
-      "parts": [{"text": "Find the race condition in this multi-threaded C++ snippet: [code here]"}]
-    }]
+    "model": "gemini-3.1-pro-preview",
+    "input": "Find the race condition in this multi-threaded C++ snippet: [code here]"
   }'
 ```
 
-## Gemini 3 系列隆重登场
+## ขอแนะนำ Gemini 3 Series
 
-Gemini 3.1 Pro 最适合需要广泛的世界知识和跨模态高级推理能力的复杂任务。
+Gemini 3.1 Pro เหมาะที่สุดสำหรับงานที่ซับซ้อนซึ่งต้องใช้ความรู้เกี่ยวกับโลกในวงกว้างและการให้เหตุผลขั้นสูงในรูปแบบต่างๆ
 
-Gemini 3 Flash 是我们最新的 3 系列模型，具有专业级智能，但速度和价格与 Flash 相当。
+Gemini 3 Flash เป็นโมเดลล่าสุดในซีรีส์ 3 ที่มีความสามารถระดับ Pro ในด้านความชาญฉลาดด้วยความเร็วและราคาของ Flash
 
-Nano Banana Pro（也称为 Gemini 3 Pro Image）是我们最高品质的图片生成模型，而 Nano Banana 2（也称为 Gemini 3.1 Flash Image）则是高容量、高效率、价格更低的同类模型。
+Nano Banana Pro (หรือที่เรียกว่า Gemini 3 Pro Image) เป็นโมเดลการสร้างรูปภาพคุณภาพสูงสุด และ Nano Banana 2 (หรือที่เรียกว่า Gemini 3.1 Flash Image) เป็นโมเดลที่มีประสิทธิภาพสูงและมีปริมาณงานสูงในราคาที่ต่ำกว่า
 
-Gemini 3.1 Flash-Lite 是我们专为高性价比和高数据量任务而构建的主力模型。
+Gemini 3.1 Flash-Lite เป็นโมเดลที่ใช้งานได้หลากหลายซึ่งสร้างขึ้นเพื่อประสิทธิภาพด้านต้นทุนและงานที่มีปริมาณงานสูง
 
-| 模型 ID | 上下文窗口（输入 / 输出） | 知识截点 | 定价（输入 / 输出）\* |
+ปัจจุบันโมเดล Gemini 3 ทั้งหมดอยู่ในเวอร์ชันตัวอย่าง
+
+| รหัสโมเดล | หน้าต่างบริบท (อินพุต / เอาต์พุต) | การตัดข้อมูล | การกำหนดราคา (อินพุต / เอาต์พุต)\* |
 | --- | --- | --- | --- |
-| **gemini-3.1-flash-lite** | 100 万 / 6.4 万 | 2025 年 1 月 | 0.25 美元（文本、图片、视频）、0.50 美元（音频）/1.50 美元 |
-| **gemini-3.1-flash-image-preview** | 128k / 32k | 2025 年 1 月 | 0.25 美元（文本输入）/0.067 美元（图片输出）\*\* |
-| **gemini-3.1-pro-preview** | 100 万 / 6.4 万 | 2025 年 1 月 | 2 美元 / 12 美元（<20 万个 token）  4 美元 / 18 美元（>20 万个 token） |
-| **gemini-3-flash-preview** | 100 万 / 6.4 万 | 2025 年 1 月 | $0.50 / $3 |
-| **gemini-3-pro-image-preview** | 65k / 32k | 2025 年 1 月 | $2（文本输入）/ $0.134（图片输出）\*\* |
+| **gemini-3.1-flash-lite** | 1 ล้าน / 64,000 | ม.ค. 2025 | $0.25 (ข้อความ รูปภาพ วิดีโอ), $0.50 (เสียง) / $1.50 |
+| **gemini-3.1-flash-image-preview** | 128,000 / 32,000 | ม.ค. 2025 | $0.25 (อินพุตข้อความ) / $0.067 (เอาต์พุตรูปภาพ)\*\* |
+| **gemini-3.1-pro-preview** | 1 ล้าน / 64,000 | ม.ค. 2025 | $2 / $12 (<200,000 โทเค็น)   $4 / $18 (>200,000 โทเค็น) |
+| **gemini-3-flash-preview** | 1 ล้าน / 64,000 | ม.ค. 2025 | $0.50 / $3 |
+| **gemini-3-pro-image-preview** | 65,000 / 32,000 | ม.ค. 2025 | $2 (อินพุตข้อความ) / $0.134 (เอาต์พุตรูปภาพ)\*\* |
 
-*\* 除非另有说明，否则价格是指每 100 万个 token 的费用。*
-*\*\* 图片价格因分辨率而异。如需了解详情，请参阅[价格页面](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)。*
+*\* การกำหนดราคาต่อ 1 ล้านโทเค็น เว้นแต่จะระบุไว้เป็นอย่างอื่น*
+*\*\* การกำหนดราคารูปภาพจะแตกต่างกันไปตามความละเอียด ดูรายละเอียดได้ใน[หน้าราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th)*
 
-如需详细了解限制、价格和其他信息，请参阅[模型页面](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn)。
+ดูขีดจำกัดโดยละเอียด การกำหนดราคา และข้อมูลเพิ่มเติมได้ใน
+[หน้าโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th)
 
-## Gemini 3 中的新 API 功能
+## ฟีเจอร์ใหม่ของ API ใน Gemini 3
 
-Gemini 3 引入了新的参数，旨在让开发者更好地控制延迟时间、费用和多模态保真度。
+Gemini 3 ขอแนะนำพารามิเตอร์ใหม่ที่ออกแบบมาเพื่อให้นักพัฒนาแอปควบคุมเวลาในการตอบสนอง ต้นทุน และความถูกต้องของข้อมูลหลายรูปแบบได้มากขึ้น
 
-### 思考等级
+### ระดับการคิด
 
-Gemini 3 系列模型默认使用动态思考来对提示进行推理。您可以使用 `thinking_level` 参数，该参数可控制模型在生成回答之前执行的内部推理过程的**最大**深度。Gemini 3 将这些级别视为相对的思考许可，而不是严格的令牌保证。
+โมเดล Gemini 3 Series ใช้การคิดแบบไดนามิกเป็นค่าเริ่มต้นเพื่อใช้เหตุผลกับพรอมต์ คุณสามารถใช้พารามิเตอร์ `thinking_level` ซึ่งควบคุมความลึก**สูงสุด** ของกระบวนการให้เหตุผลภายในของโมเดลก่อนที่จะสร้างคำตอบ Gemini 3 ถือว่าระดับเหล่านี้เป็นค่าเผื่อสัมพัทธ์สำหรับการคิด ไม่ใช่การรับประกันโทเค็นที่เข้มงวด
 
-如果未指定 `thinking_level`，Gemini 3 将默认使用 `high`。如果不需要复杂的推理，您可以将模型的思考水平限制为 `low`，以获得更快、延迟更低的回答。
+หากไม่ได้ระบุ `thinking_level` ไว้ Gemini 3 จะใช้ `high` เป็นค่าเริ่มต้น หากไม่จำเป็นต้องใช้การให้เหตุผลที่ซับซ้อน คุณสามารถจำกัดระดับการคิดของโมเดลเป็น `low` เพื่อให้ได้คำตอบที่เร็วขึ้นและมีเวลาในการตอบสนองที่สั้นลง
 
-| 思考等级 | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | 说明 |
+| ระดับการคิด | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | คำอธิบาย |
 | --- | --- | --- | --- | --- |
-| **`minimal`** | 不受支持 | 支持（默认） | 支持 | 与大多数查询的“不思考”设置相匹配。对于复杂的编码任务，该模型可能思考得非常少。最大限度地缩短聊天应用或高吞吐量应用的延迟时间。请注意，`minimal` 并不保证思考已关闭。 |
-| **`low`** | 支持 | 支持 | 支持 | 最大限度地缩短延迟时间并降低费用。最适合简单的指令遵循、聊天或高吞吐量应用。 |
-| **`medium`** | 支持 | 支持 | 支持 | 平衡的思考能力，适合处理大多数任务。 |
-| **`high`** | 支持（默认，动态） | 支持（动态） | 支持（默认，动态） | 最大限度地提高推理深度。模型可能需要更长时间才能生成第一个（非思考）输出令牌，但输出结果会经过更仔细的推理。 |
+| **`minimal`** | ไม่รองรับ | สิ่งที่ทำได้ (ค่าเริ่มต้น) | สิ่งที่ทำได้ | ตรงกับการตั้งค่า "ไม่คิด" สำหรับการค้นหาส่วนใหญ่ โมเดลอาจคิดน้อยมากสำหรับงานเขียนโค้ดที่ซับซ้อน ลดเวลาในการตอบสนองสำหรับแอปพลิเคชันแชทหรือแอปพลิเคชันที่มีการส่งข้อความปริมาณมาก โปรดทราบว่า `minimal` ไม่ได้รับประกันว่าจะปิดการคิด |
+| **`low`** | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | ลดเวลาในการตอบสนองและต้นทุน เหมาะที่สุดสำหรับการทำตามคำสั่งง่ายๆ การแชท หรือแอปพลิเคชันที่มีปริมาณงานสูง |
+| **`medium`** | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | การคิดที่สมดุลสำหรับงานส่วนใหญ่ |
+| **`high`** | สิ่งที่ทำได้ (ค่าเริ่มต้น, ไดนามิก) | สิ่งที่ทำได้ (ไดนามิก) | สิ่งที่ทำได้ (ค่าเริ่มต้น, ไดนามิก) | เพิ่มความลึกในการให้เหตุผลให้สูงสุด โมเดลอาจใช้เวลานานขึ้นอย่างมากในการ เข้าถึงโทเค็นเอาต์พุตแรก (ที่ไม่ใช่การคิด) แต่เอาต์พุตจะได้รับการพิจารณาอย่างรอบคอบมากขึ้น |
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
 
 client = genai.Client()
 
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3.1-pro-preview",
-    contents="How does AI work?",
-    config=types.GenerateContentConfig(
-        thinking_config=types.ThinkingConfig(thinking_level="low")
-    ),
+    input="How does AI work?",
+    generation_config={"thinking_level": "low"},
 )
 
-print(response.text)
+print(interaction.output_text)
 ```
 
 ### JavaScript
@@ -141,394 +136,58 @@ print(response.text)
 ```
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
-const response = await ai.models.generateContent({
+const interaction = await client.interactions.create({
     model: "gemini-3.1-pro-preview",
-    contents: "How does AI work?",
-    config: {
-      thinkingConfig: {
-        thinkingLevel: "low",
-      }
+    input: "How does AI work?",
+    generation_config: {
+      thinking_level: "low",
     },
   });
 
-console.log(response.text);
+console.log(interaction.output_text);
 ```
 
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
-  -X POST \
   -d '{
-    "contents": [{
-      "parts": [{"text": "How does AI work?"}]
-    }],
-    "generationConfig": {
-      "thinkingConfig": {
-        "thinkingLevel": "low"
-      }
+    "model": "gemini-3.1-pro-preview",
+    "input": "How does AI work?",
+    "generation_config": {
+      "thinking_level": "low"
     }
   }'
 ```
 
-### 媒体分辨率
+### อุณหภูมิ
 
-Gemini 3 引入了使用 `media_resolution` 参数对多模态视觉处理进行精细控制的功能。分辨率越高，模型读取细小文字或识别细微细节的能力就越强，但 token 用量和延迟时间也会增加。`media_resolution` 参数用于确定**为每个输入图片或视频帧分配的 token 数量上限**。
+สำหรับโมเดล Gemini 3 ทั้งหมด เราขอแนะนำอย่างยิ่งให้ตั้งค่าพารามิเตอร์อุณหภูมิเป็นค่าเริ่มต้นที่ `1.0`
 
-现在，您可以针对单独的媒体部分或全局（通过 `generation_config`，超高分辨率不支持全局设置）将分辨率设置为 `media_resolution_low`、`media_resolution_medium`、`media_resolution_high` 或 `media_resolution_ultra_high`。如果未指定，模型会根据媒体类型使用最佳默认值。
+แม้ว่าโมเดลก่อนหน้านี้มักจะได้รับประโยชน์จากการปรับอุณหภูมิเพื่อควบคุมความคิดสร้างสรรค์เทียบกับความแน่นอน แต่ความสามารถในการให้เหตุผลของ Gemini 3 ได้รับการปรับให้เหมาะกับการตั้งค่าเริ่มต้น การเปลี่ยนอุณหภูมิ (ตั้งค่าต่ำกว่า 1.0) อาจทำให้เกิดลักษณะการทำงานที่ไม่คาดคิด เช่น การวนซ้ำหรือประสิทธิภาพลดลง โดยเฉพาะอย่างยิ่งในงานทางคณิตศาสตร์หรือการให้เหตุผลที่ซับซ้อน
 
-**推荐设置**
+### ลายเซ็นความคิด
 
-| 媒体类型 | 推荐设置 | 最大token数 | 使用指南 |
-| --- | --- | --- | --- |
-| **图片** | `media_resolution_high` | 1120 | 建议用于大多数图片分析任务，以确保获得最高质量的结果。 |
-| **PDF** | `media_resolution_medium` | 560 | 非常适合文档理解；质量通常在 `medium` 时达到饱和。将该值增加到 `high` 很少能提高标准文档的 OCR 结果。 |
-| **视频**（常规） | `media_resolution_low`（或 `media_resolution_medium`） | 70（每帧） | **注意**：对于视频，`low` 和 `medium` 设置的处理方式相同（70 个 token），以优化上下文使用。这足以满足大多数动作识别和描述任务的需求。 |
-| **视频**（文字较多） | `media_resolution_high` | 280（每帧） | 仅当用例涉及读取视频帧中的密集文本 (OCR) 或细微细节时才需要。 |
+โมเดล Gemini 3 ใช้ลายเซ็นความคิดเพื่อรักษาบริบทการให้เหตุผลในการเรียก API ลายเซ็นเหล่านี้เป็นการแสดงที่เข้ารหัสของกระบวนการคิดภายในของโมเดล
+
+- **โหมด Stateful (แนะนำ)**: เมื่อใช้ Interactions API ในโหมด Stateful (ระบุ `previous_interaction_id`) เซิร์ฟเวอร์จะจัดการประวัติการสนทนาและลายเซ็นความคิดโดยอัตโนมัติ
+- **โหมด Stateless**: หากคุณจัดการประวัติการสนทนาด้วยตนเอง คุณต้องใส่บล็อกความคิดพร้อมลายเซ็นในคำขอที่ตามมาเพื่อตรวจสอบความถูกต้อง
+
+ดูข้อมูลโดยละเอียดได้ในหน้า [ลายเซ็นความคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)
+
+### เอาต์พุตที่มีโครงสร้างพร้อมเครื่องมือ
+
+โมเดล Gemini 3 ช่วยให้คุณรวม[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)เข้ากับเครื่องมือในตัว ซึ่งรวมถึง
+[การเชื่อมต่อแหล่งข้อมูลกับ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th), [บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th), [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) และ [การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
-import base64
-
-# The media_resolution parameter is currently only available in the v1alpha API version.
-client = genai.Client(http_options={'api_version': 'v1alpha'})
-
-response = client.models.generate_content(
-    model="gemini-3.1-pro-preview",
-    contents=[
-        types.Content(
-            parts=[
-                types.Part(text="What is in this image?"),
-                types.Part(
-                    inline_data=types.Blob(
-                        mime_type="image/jpeg",
-                        data=base64.b64decode("..."),
-                    ),
-                    media_resolution={"level": "media_resolution_high"}
-                )
-            ]
-        )
-    ]
-)
-
-print(response.text)
-```
-
-### JavaScript
-
-```
-import { GoogleGenAI } from "@google/genai";
-
-// The media_resolution parameter is currently only available in the v1alpha API version.
-const ai = new GoogleGenAI({ apiVersion: "v1alpha" });
-
-async function run() {
-  const response = await ai.models.generateContent({
-    model: "gemini-3.1-pro-preview",
-    contents: [
-      {
-        parts: [
-          { text: "What is in this image?" },
-          {
-            inlineData: {
-              mimeType: "image/jpeg",
-              data: "...",
-            },
-            mediaResolution: {
-              level: "media_resolution_high"
-            }
-          }
-        ]
-      }
-    ]
-  });
-
-  console.log(response.text);
-}
-
-run();
-```
-
-### REST
-
-```
-curl "https://generativelanguage.googleapis.com/v1alpha/models/gemini-3.1-pro-preview:generateContent" \
-  -H "x-goog-api-key: $GEMINI_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -X POST \
-  -d '{
-    "contents": [{
-      "parts": [
-        { "text": "What is in this image?" },
-        {
-          "inlineData": {
-            "mimeType": "image/jpeg",
-            "data": "..."
-          },
-          "mediaResolution": {
-            "level": "media_resolution_high"
-          }
-        }
-      ]
-    }]
-  }'
-```
-
-### 温度
-
-对于所有 Gemini 3 模型，我们强烈建议将温度参数保留为默认值 `1.0`。
-
-虽然之前的模型通常可以通过调整温度来控制创造性与确定性，但 Gemini 3 的推理能力已针对默认设置进行了优化。更改温度（将其设置为低于 1.0）可能会导致意外行为（例如循环或性能下降），尤其是在复杂的数学或推理任务中。
-
-### 思维签名
-
-Gemini 3 使用[思维签名](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=zh-cn)来维持 API 调用之间的推理上下文。这些签名是模型内部思维过程的加密表示形式。为确保模型维持推理能力，您必须在请求中将这些签名原样返回给模型：
-
-- **函数调用（严格）**：API 会对“当前回合”强制执行严格的验证。缺少签名会导致 400 错误。
-- **文本/聊天**：验证并非强制执行，但省略签名会降低模型的推理能力和回答质量。
-- **图片生成/编辑（严格）**：API 会对所有模型部分（包括 `thoughtSignature`）强制执行严格的验证。缺少签名会导致 400 错误。
-
-#### 函数调用（严格验证）
-
-当 Gemini 生成 `functionCall` 时，它会依赖 `thoughtSignature` 在下一轮中正确处理工具的输出。“当前轮次”包括自上次标准 **User** `text` 消息以来发生的所有模型 (`functionCall`) 和用户 (`functionResponse`) 步骤。
-
-- **单个函数调用**：`functionCall` 部分包含签名，您必须返回该签名。
-- **并行函数调用**：只有列表中的第一个 `functionCall` 部分会包含签名。您必须按收到的确切顺序退回这些部件。
-- **多步（顺序）**：如果模型调用某个工具、收到结果，然后（在同一轮次内）调用*另一个*工具，则**两个**函数调用都有签名。您必须返回历史记录中**所有**累积的签名。
-
-#### 文字和流式传输
-
-对于标准聊天或文本生成，系统不保证会添加签名。
-
-- **非流式传输**：回答的最终内容部分可能包含 `thoughtSignature`，但并非始终存在。如果返回了此类对象，您应将其发送回去，以保持最佳性能。
-- **流式传输**：如果生成了签名，它可能会在包含空文本部分的最终块中到达。请确保您的流解析器即使在文本字段为空时也会检查签名。
-
-#### 图片生成和修改
-
-对于 `gemini-3-pro-image-preview` 和 `gemini-3.1-flash-image-preview`，思维签名对于对话式编辑至关重要。当您要求模型修改图片时，模型会依赖上一轮的 `thoughtSignature` 来了解原始图片的构图和逻辑。
-
-- **编辑**：签名保证在回答的思路 (`text` 或 `inlineData`) 之后的第一部分以及后续的每个 `inlineData` 部分中。您必须返回所有这些签名，以免出错。
-
-#### 代码示例
-
-#### 多步骤函数调用（顺序）
-
-用户在一个回合中提出了需要两个单独步骤（查看航班 -> 预订出租车）的问题。  
-  
-**第 1 步：模型调用航班工具。**  
-模型返回签名 `<Sig_A>`
-
-```
-// Model Response (Turn 1, Step 1)
-  {
-    "role": "model",
-    "parts": [
-      {
-        "functionCall": { "name": "check_flight", "args": {...} },
-        "thoughtSignature": "<Sig_A>" // SAVE THIS
-      }
-    ]
-  }
-```
-
-**第 2 步：用户发送航班结果**  
-我们必须发送回 `<Sig_A>`，以保持模型的思路。
-
-```
-// User Request (Turn 1, Step 2)
-[
-  { "role": "user", "parts": [{ "text": "Check flight AA100..." }] },
-  {
-    "role": "model",
-    "parts": [
-      { 
-        "functionCall": { "name": "check_flight", "args": {...} },
-        "thoughtSignature": "<Sig_A>" // REQUIRED
-      }
-    ]
-  },
-  { "role": "user", "parts": [{ "functionResponse": { "name": "check_flight", "response": {...} } }] }
-]
-```
-
-**第 3 步：模型调用出租车工具**  
-模型通过 `<Sig_A>` 记住航班延误，现在决定预订出租车。它会生成一个*新*签名 `<Sig_B>`。
-
-```
-// Model Response (Turn 1, Step 3)
-{
-  "role": "model",
-  "parts": [
-    {
-      "functionCall": { "name": "book_taxi", "args": {...} },
-      "thoughtSignature": "<Sig_B>" // SAVE THIS
-    }
-  ]
-}
-```
-
-**第 4 步：用户发送出租车结果**  
-如需完成此轮对话，您必须发送整个链：`<Sig_A>` 和 `<Sig_B>`。
-
-```
-// User Request (Turn 1, Step 4)
-[
-  // ... previous history ...
-  { 
-    "role": "model", 
-    "parts": [
-       { "functionCall": { "name": "check_flight", ... }, "thoughtSignature": "<Sig_A>" }
-    ]
-  },
-  { "role": "user", "parts": [{ "functionResponse": {...} }] },
-  { 
-    "role": "model", 
-    "parts": [
-       { "functionCall": { "name": "book_taxi", ... }, "thoughtSignature": "<Sig_B>" }
-    ]
-  },
-  { "role": "user", "parts": [{ "functionResponse": {...} }] }
-]
-```
-
-#### 并行函数调用
-
-用户问：“查询巴黎和伦敦的天气。”模型在一个回答中返回了两个函数调用。
-
-```
-// User Request (Sending Parallel Results)
-[
-  {
-    "role": "user",
-    "parts": [
-      { "text": "Check the weather in Paris and London." }
-    ]
-  },
-  {
-    "role": "model",
-    "parts": [
-      // 1. First Function Call has the signature
-      {
-        "functionCall": { "name": "check_weather", "args": { "city": "Paris" } },
-        "thoughtSignature": "<Signature_A>" 
-      },
-      // 2. Subsequent parallel calls DO NOT have signatures
-      {
-        "functionCall": { "name": "check_weather", "args": { "city": "London" } }
-      } 
-    ]
-  },
-  {
-    "role": "user",
-    "parts": [
-      // 3. Function Responses are grouped together in the next block
-      {
-        "functionResponse": { "name": "check_weather", "response": { "temp": "15C" } }
-      },
-      {
-        "functionResponse": { "name": "check_weather", "response": { "temp": "12C" } }
-      }
-    ]
-  }
-]
-```
-
-#### 文本/上下文推理（无验证）
-
-用户提出的问题需要进行上下文推理，但不能使用外部工具。虽然未经过严格验证，但包含签名有助于模型针对后续问题保持推理链。
-
-```
-// User Request (Follow-up question)
-[
-  {
-    "role": "user",
-    "parts": [{ "text": "What are the risks of this investment?" }]
-  },
-  {
-    "role": "model",
-    "parts": [
-      {
-        "text": "I need to calculate the risk step-by-step. First, I'll look at volatility...",
-        "thoughtSignature": "<Signature_C>" // Recommended to include
-      }
-    ]
-  },
-  {
-    "role": "user",
-    "parts": [{ "text": "Summarize that in one sentence." }]
-  }
-]
-```
-
-#### 图片生成与编辑
-
-对于图片生成，签名会经过严格验证。签名会显示在**第一部分**（文字或图片）和**所有后续图片部分**中。所有签名都必须在下一轮中返回。
-
-```
-// Model Response (Turn 1)
-{
-  "role": "model",
-  "parts": [
-    // 1. First part ALWAYS has a signature (even if text)
-    {
-      "text": "I will generate a cyberpunk city...",
-      "thoughtSignature": "<Signature_D>"
-    },
-    // 2. ALL InlineData (Image) parts ALWAYS have signatures
-    {
-      "inlineData": { ... }, 
-      "thoughtSignature": "<Signature_E>"
-    },
-  ]
-}
-
-// User Request (Turn 2 - Requesting an Edit)
-{
-  "contents": [
-    // History must include ALL signatures received
-    {
-      "role": "user",
-      "parts": [{ "text": "Generate a cyberpunk city" }]
-    },
-    {
-      "role": "model",
-      "parts": [
-         { "text": "...", "thoughtSignature": "<Signature_D>" },
-         { "inlineData": "...", "thoughtSignature": "<Signature_E>" },
-      ]
-    },
-    // New User Prompt
-    {
-      "role": "user",
-      "parts": [{ "text": "Make it daytime." }]
-    }
-  ]
-}
-```
-
-#### 从其他模型迁移
-
-如果您要从其他模型（例如 Gemini 2.5）转移对话轨迹，或者注入并非由 Gemini 3 生成的自定义函数调用，则您将没有有效的签名。
-
-如需在这些特定场景中绕过严格验证，请使用以下特定虚拟字符串填充相应字段：`"thoughtSignature": "context_engineering_is_the_way
-to_go"`
-
-### 使用工具生成结构化输出
-
-借助 Gemini 3 模型，您可以将[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)与内置工具（包括[依托 Google 搜索进行接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)、[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)、[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)）结合使用。
-
-### Python
-
-```
-from google import genai
-from google.genai import types
 from pydantic import BaseModel, Field
 from typing import List
 
@@ -539,19 +198,21 @@ class MatchResult(BaseModel):
 
 client = genai.Client()
 
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3.1-pro-preview",
-    contents="Search for all details for the latest Euro.",
-    config={
-        "tools": [
-            {"google_search": {}},
-            {"url_context": {}}
-        ],
-        "response_format": {"text": {"mime_type": "application/json", "schema": MatchResult.model_json_schema()}},
-    },  
+    input="Search for all details for the latest Euro.",
+    tools=[
+        {"type": "google_search"},
+        {"type": "url_context"}
+    ],
+    response_format={
+        "type": "text",
+        "mime_type": "application/json",
+        "schema": MatchResult.model_json_schema()
+    },
 )
 
-result = MatchResult.model_validate_json(response.text)
+result = MatchResult.model_validate_json(interaction.output_text)
 print(result)
 ```
 
@@ -559,31 +220,42 @@ print(result)
 
 ```
 import { GoogleGenAI } from "@google/genai";
-import { z } from "zod";
-import { zodToJsonSchema } from "zod-to-json-schema";
+import * as z from "zod";
 
-const ai = new GoogleGenAI({});
+const matchJsonSchema = {
+  type: "object",
+  properties: {
+    winner: { type: "string", description: "The name of the winner." },
+    final_match_score: { type: "string", description: "The final score." },
+    scorers: {
+      type: "array",
+      items: { type: "string" },
+      description: "The name of the scorer."
+    }
+  },
+  required: ["winner", "final_match_score", "scorers"]
+};
 
-const matchSchema = z.object({
-  winner: z.string().describe("The name of the winner."),
-  final_match_score: z.string().describe("The final score."),
-  scorers: z.array(z.string()).describe("The name of the scorer.")
-});
+const matchSchema = z.fromJSONSchema(matchJsonSchema);
+
+const client = new GoogleGenAI({});
 
 async function run() {
-  const response = await ai.models.generateContent({
+  const interaction = await client.interactions.create({
     model: "gemini-3.1-pro-preview",
-    contents: "Search for all details for the latest Euro.",
-    config: {
-      tools: [
-        { googleSearch: {} },
-        { urlContext: {} }
-      ],
-      responseFormat: { text: { mimeType: "application/json", schema: zodToJsonSchema(matchSchema) } },
+    input: "Search for all details for the latest Euro.",
+    tools: [
+      { type: "google_search" },
+      { type: "url_context" }
+    ],
+    response_format: {
+        type: "text",
+        mime_type: "application/json",
+        schema: matchJsonSchema
     },
   });
 
-  const match = matchSchema.parse(JSON.parse(response.text));
+  const match = matchSchema.parse(JSON.parse(interaction.output_text));
   console.log(match);
 }
 
@@ -593,23 +265,20 @@ run();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
-  -X POST \
   -d '{
-    "contents": [{
-      "parts": [{"text": "Search for all details for the latest Euro."}]
-    }],
+    "model": "gemini-3.1-pro-preview",
+    "input": "Search for all details for the latest Euro.",
     "tools": [
-      {"googleSearch": {}},
-      {"urlContext": {}}
+      {"type": "google_search"},
+      {"type": "url_context"}
     ],
-    "generationConfig": {
-"responseFormat": {
-  "text": {
-    "mimeType": "application/json",
-    "schema": {
+    "response_format": {
+        "type": "text",
+        "mime_type": "application/json",
+        "schema": {
             "type": "object",
             "properties": {
                 "winner": {"type": "string", "description": "The name of the winner."},
@@ -619,48 +288,54 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
                     "items": {"type": "string"},
                     "description": "The name of the scorer."
                 }
-  }
-}
-},
+            },
             "required": ["winner", "final_match_score", "scorers"]
         }
     }
   }'
 ```
 
-### 图片生成
+### การสร้างรูปภาพ
 
-借助 Gemini 3.1 Flash Image 和 Gemini 3 Pro Image，您可以根据文本提示生成和编辑图片。它会使用推理功能“思考”提示，并检索实时数据（例如天气预报或股市图表），然后使用 [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)接地功能，最后生成高保真图片。
+Gemini 3.1 Flash Image และ Gemini 3 Pro Image ช่วยให้คุณสร้างและแก้ไขรูปภาพจากพรอมต์ข้อความได้ โดยใช้
+การให้เหตุผลเพื่อ "คิด" ผ่านพรอมต์ และดึงข้อมูลแบบเรียลไทม์ เช่น
+พยากรณ์อากาศหรือแผนภูมิหุ้น ก่อนที่จะใช้การเชื่อมต่อแหล่งข้อมูลกับ [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) ก่อนที่จะสร้างรูปภาพที่มีความถูกต้องสูง
 
-**新增和改进的功能**：
+**ความสามารถใหม่และที่ได้รับการปรับปรุง**
 
-- **4K 和文本渲染**：生成清晰易读的文本和图表，分辨率最高可达 2K 和 4K。
-- **接地生成**：使用 `google_search` 工具验证事实，并根据现实世界的信息生成图像。Gemini 3.1 Flash Image 支持 Google *图片*搜索接地。
-- **对话式智能修图**：只需提出更改要求（例如“将背景改为日落”），即可进行多轮图片编辑。此工作流程依赖于**思考签名**，以在多轮对话中保留视觉上下文。
+- **การแสดงผล 4K และข้อความ:** สร้างข้อความและแผนภูมิที่คมชัดและอ่านง่ายด้วยความละเอียดสูงสุด 2K และ 4K
+- **การสร้างที่เชื่อมต่อแหล่งข้อมูล:** ใช้เครื่องมือ `google_search` เพื่อยืนยันข้อเท็จจริงและสร้างภาพตามข้อมูลในโลกแห่งความเป็นจริง การเชื่อมต่อแหล่งข้อมูลกับ Google *Image* Search พร้อมใช้งานสำหรับ Gemini 3.1 Flash Image
+- **การแก้ไขแบบผ่านการสนทนาไปมา:** แก้ไขรูปภาพหลายครั้งได้เพียงแค่ขอให้เปลี่ยนแปลง (เช่น "เปลี่ยนพื้นหลังให้เป็นภาพพระอาทิตย์ตก") เวิร์กโฟลว์นี้อาศัย**ลายเซ็นความคิด** เพื่อรักษาบริบทภาพระหว่างการสนทนา
 
-如需详细了解宽高比、编辑工作流程和配置选项，请参阅[图片生成指南](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)。
+ดูรายละเอียดทั้งหมดเกี่ยวกับสัดส่วนภาพ เวิร์กโฟลว์การแก้ไข และตัวเลือกการกำหนดค่า
+ได้ใน[คู่มือการสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
+import base64
 
 client = genai.Client()
 
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3-pro-image-preview",
-    contents="Generate an infographic of the current weather in Tokyo.",
-    config=types.GenerateContentConfig(
-        tools=[{"google_search": {}}],
-        response_format={"image": {"aspect_ratio": "16:9", "image_size": "4K"}}
-    )
+    input="Generate an infographic of the current weather in Tokyo.",
+    tools=[{"type": "google_search"}],
+    response_format={
+        "type": "image",
+        "aspect_ratio": "16:9",
+        "image_size": "4K"
+    }
 )
 
-image_parts = [part for part in response.parts if part.inline_data]
+from PIL import Image
+import io
 
-if image_parts:
-    image = image_parts[0].as_image()
+generated_image = interaction.output_image
+if generated_image:
+    image_data = base64.b64decode(generated_image.data)
+    image = Image.open(io.BytesIO(image_data))
     image.save('weather_tokyo.png')
     image.show()
 ```
@@ -671,30 +346,23 @@ if image_parts:
 import { GoogleGenAI } from "@google/genai";
 import * as fs from "node:fs";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
 async function run() {
-  const response = await ai.models.generateContent({
+  const interaction = await client.interactions.create({
     model: "gemini-3-pro-image-preview",
-    contents: "Generate a visualization of the current weather in Tokyo.",
-    config: {
-      tools: [{ googleSearch: {} }],
-      responseFormat: {
-    image: {
-        aspectRatio: "16:9",
-        imageSize: "4K"
-      }
-  }
+    input: "Generate a visualization of the current weather in Tokyo.",
+    tools: [{ type: "google_search" }],
+    response_format: {
+      type: "image",
+      aspect_ratio: "16:9",
+      image_size: "4K"
     }
   });
 
-  for (const part of response.candidates[0].content.parts) {
-    if (part.inlineData) {
-      const imageData = part.inlineData.data;
-      const buffer = Buffer.from(imageData, "base64");
-      fs.writeFileSync("weather_tokyo.png", buffer);
-    }
-  }
+  const buffer = Buffer.from(interaction.output_image.data, 'base64');
+
+  fs.writeFileSync('weather_tokyo.png', buffer);
 }
 
 run();
@@ -703,41 +371,38 @@ run();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
-  -X POST \
   -d '{
-    "contents": [{
-      "parts": [{"text": "Generate a visualization of the current weather in Tokyo."}]
-    }],
-    "tools": [{"googleSearch": {}}],
-    "generationConfig": {
-        "responseFormat": {
-    "image": {
-          "aspectRatio": "16:9",
-          "imageSize": "4K"
-      }
-  }
+    "model": "gemini-3-pro-image-preview",
+    "input": "Generate a visualization of the current weather in Tokyo.",
+    "tools": [{"type": "google_search"}],
+    "response_format": {
+        "type": "image",
+        "aspect_ratio": "16:9",
+        "image_size": "4K"
     }
   }'
 ```
 
-**示例回答**
+**ตัวอย่างคำตอบ**
 
-![东京天气](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=zh-cn)
+![สภาพอากาศ โตเกียว](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=th)
 
-### 使用图片执行代码
+### การเรียกใช้โค้ดพร้อมรูปภาพ
 
-Gemini 3 Flash 可以将视觉视为主动调查，而不仅仅是静态浏览。通过将推理与[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)相结合，该模型会制定计划，然后编写并执行 Python 代码，逐步放大、剪裁、批注或以其他方式处理图片，以便直观地验证其答案。
+Gemini 3 Flash สามารถมองเห็นเป็นกระบวนการตรวจสอบที่ใช้งานอยู่ ไม่ใช่แค่การมองผ่านๆ ด้วยการรวมการให้เหตุผลเข้ากับการ[เรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) โมเดลจะกำหนดแผน จากนั้นเขียนและ
+เรียกใช้โค้ด Python เพื่อซูม ครอบตัด ใส่คำอธิบายประกอบ หรือจัดการรูปภาพอื่นๆ
+ทีละขั้นตอนเพื่อเชื่อมต่อคำตอบกับข้อมูลภาพ
 
-**应用场景**：
+**Use cases**
 
-- **缩放和检查**：模型会隐式检测到细节过小（例如，读取远处的仪表或序列号），并编写代码来裁剪和重新检查该区域，以获得更高的分辨率。
-- **可视化数学和绘图**：模型可以使用代码运行多步计算（例如，对收据上的商品进行求和，或根据提取的数据生成 Matplotlib 图表）。
-- **图片批注**：模型可以直接在图片上绘制箭头、边界框或其他批注，以回答“此商品应放在哪里？”等空间问题。
+- **ซูมและตรวจสอบ:** โมเดลจะตรวจหาโดยนัยเมื่อรายละเอียดมีขนาดเล็กเกินไป (เช่น การอ่านมาตรวัดหรือหมายเลขซีเรียลที่อยู่ไกลออกไป) และเขียนโค้ดเพื่อครอบตัดและตรวจสอบพื้นที่อีกครั้งด้วยความละเอียดที่สูงขึ้น
+- **คณิตศาสตร์และการพล็อตภาพ:** โมเดลสามารถทำการคำนวณหลายขั้นตอนโดยใช้โค้ด (เช่น การรวมรายการในใบเสร็จ หรือการสร้างแผนภูมิ Matplotlib จากข้อมูลที่แยกออกมา)
+- **คำอธิบายประกอบรูปภาพ:** โมเดลสามารถวาดลูกศร กรอบล้อมรอบ หรือคำอธิบายประกอบอื่นๆ ลงในรูปภาพโดยตรงเพื่อตอบคำถามเชิงพื้นที่ เช่น "ควรวางรายการนี้ไว้ที่ใด"
 
-如需启用视觉思维，请将[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)配置为工具。模型会在需要时自动使用代码来处理图片。
+หากต้องการเปิดใช้การคิดเชิงภาพ ให้กำหนดค่า [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) เป็นเครื่องมือ โมเดลจะใช้โค้ดเพื่อจัดการรูปภาพโดยอัตโนมัติเมื่อจำเป็น
 
 ### Python
 
@@ -747,6 +412,7 @@ from google.genai import types
 import requests
 from PIL import Image
 import io
+import base64
 
 image_path = "https://goo.gle/instrument-img"
 image_bytes = requests.get(image_path).content
@@ -754,26 +420,30 @@ image = types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg")
 
 client = genai.Client()
 
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3-flash-preview",
-    contents=[
+    input=[
         image,
         "Zoom into the expression pedals and tell me how many pedals are there?"
     ],
-    config=types.GenerateContentConfig(
-        tools=[types.Tool(code_execution=types.ToolCodeExecution)]
-    ),
+    tools=[{"type": "code_execution"}],
 )
 
-for part in response.candidates[0].content.parts:
-    if part.text is not None:
-        print(part.text)
-    if part.executable_code is not None:
-        print(part.executable_code.code)
-    if part.code_execution_result is not None:
-        print(part.code_execution_result.output)
-    if part.as_image() is not None:
-        display(Image.open(io.BytesIO(part.as_image().image_bytes)))
+from IPython.display import display
+from PIL import Image
+import io
+
+for step in interaction.steps:
+    if step.type == "model_output":
+        for content_block in step.content:
+            if content_block.type == "text":
+                print(content_block.text)
+            elif content_block.type == "image":
+                 display(Image.open(io.BytesIO(base64.b64decode(content_block.data))))
+    elif step.type == "code_execution_call":
+        print(step.code)
+    elif step.type == "code_execution_result":
+        print(step.output)
 ```
 
 ### JavaScript
@@ -781,7 +451,7 @@ for part in response.candidates[0].content.parts:
 ```
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
 async function main() {
   const imageUrl = "https://goo.gle/instrument-img";
@@ -789,33 +459,33 @@ async function main() {
   const imageArrayBuffer = await response.arrayBuffer();
   const base64ImageData = Buffer.from(imageArrayBuffer).toString("base64");
 
-  const result = await ai.models.generateContent({
+  const interaction = await client.interactions.create({
     model: "gemini-3-flash-preview",
-    contents: [
+    input: [
       {
-        inlineData: {
-          mimeType: "image/jpeg",
-          data: base64ImageData,
-        },
+        type: "image",
+        mime_type: "image/jpeg",
+        data: base64ImageData,
       },
       {
+        type: "text",
         text: "Zoom into the expression pedals and tell me how many pedals are there?",
       },
     ],
-    config: {
-      tools: [{ codeExecution: {} }],
-    },
+    tools: [{ type: "code_execution" }],
   });
 
-  for (const part of result.candidates[0].content.parts) {
-    if (part.text) {
-      console.log("Text:", part.text);
-    }
-    if (part.executableCode) {
-      console.log("Code:", part.executableCode.code);
-    }
-    if (part.codeExecutionResult) {
-      console.log("Output:", part.codeExecutionResult.output);
+  for (const step of interaction.steps) {
+    if (step.type === "model_output") {
+      for (const contentBlock of step.content) {
+        if (contentBlock.type === "text") {
+          console.log("Text:", contentBlock.text);
+        }
+      }
+    } else if (step.type === "code_execution_call") {
+      console.log("Code:", step.code);
+    } else if (step.type === "code_execution_result") {
+      console.log("Output:", step.output);
     }
   }
 }
@@ -842,215 +512,155 @@ else
   IMAGE_B64=$(curl -sL "$IMG_URL" | base64 -w0)
 fi
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
-    -X POST \
     -d '{
-      "contents": [{
-        "parts":[
+      "model": "'$MODEL'",
+      "input": [
             {
-              "inline_data": {
-                "mime_type":"'"$MIME_TYPE"'",
-                "data": "'"$IMAGE_B64"'"
-              }
+              "type": "image",
+              "mime_type":"'"$MIME_TYPE"'",
+              "data": "'"$IMAGE_B64"'"
             },
-            {"text": "Zoom into the expression pedals and tell me how many pedals are there?"}
-        ]
-      }],
-      "tools": [{"code_execution": {}}]
+            {"type": "text", "text": "Zoom into the expression pedals and tell me how many pedals are there?"}
+      ],
+      "tools": [{"type": "code_execution"}]
     }'
 ```
 
-如需详细了解如何执行包含图片的代码，请参阅[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn#images)。
+ดูรายละเอียดเพิ่มเติมเกี่ยวกับการเรียกใช้โค้ดพร้อมรูปภาพได้ที่ [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th#images)
 
-### 多模态函数响应
+### คำตอบของฟังก์ชันแบบหลายรูปแบบ
 
-[多模态函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#multimodal)功能可让用户获得包含多模态对象的函数响应，从而更好地利用模型的函数调用功能。标准函数调用仅支持基于文本的函数响应：
+[การเรียกใช้ฟังก์ชันแบบหลายรูปแบบ](https://ai.google.dev/gemini-api/docs/function-calling?hl=th#multimodal)
+ช่วยให้ผู้ใช้ได้รับคำตอบของฟังก์ชันที่มี
+ออบเจ็กต์แบบหลายรูปแบบ ซึ่งช่วยให้ใช้ความสามารถในการเรียกใช้ฟังก์ชัน
+ของโมเดลได้ดียิ่งขึ้น การเรียกใช้ฟังก์ชันมาตรฐานรองรับเฉพาะคำตอบของฟังก์ชันแบบข้อความเท่านั้น
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
-from google.genai import types
-
 import requests
+import base64
 
 client = genai.Client()
 
-# This is a manual, two turn multimodal function calling workflow:
-
-# 1. Define the function tool
-get_image_declaration = types.FunctionDeclaration(
-  name="get_image",
-  description="Retrieves the image file reference for a specific order item.",
-  parameters={
-      "type": "object",
-      "properties": {
-          "item_name": {
-              "type": "string",
-              "description": "The name or description of the item ordered (e.g., 'instrument')."
-          }
-      },
-      "required": ["item_name"],
-  },
-)
-tool_config = types.Tool(function_declarations=[get_image_declaration])
-
-# 2. Send a message that triggers the tool
-prompt = "Show me the instrument I ordered last month."
-response_1 = client.models.generate_content(
-  model="gemini-3-flash-preview",
-  contents=[prompt],
-  config=types.GenerateContentConfig(
-      tools=[tool_config],
-  )
-)
-
-# 3. Handle the function call
-function_call = response_1.function_calls[0]
-requested_item = function_call.args["item_name"]
-print(f"Model wants to call: {function_call.name}")
-
-# Execute your tool (e.g., call an API)
-# (This is a mock response for the example)
-print(f"Calling external tool for: {requested_item}")
-
-function_response_data = {
-  "image_ref": {"$ref": "instrument.jpg"},
+# 1. Define the tool
+get_image_tool = {
+    "type": "function",
+    "name": "get_image",
+    "description": "Retrieves the image file reference for a specific order item.",
+    "parameters": {
+        "type": "object",
+        "properties": {
+            "item_name": {
+                "type": "string",
+                "description": "The name or description of the item ordered (e.g., 'instrument')."
+            }
+        },
+        "required": ["item_name"],
+    },
 }
+
+# 2. Send the request with tools
+interaction_1 = client.interactions.create(
+    model="gemini-3-flash-preview",
+    input="Show me the instrument I ordered last month.",
+    tools=[get_image_tool],
+)
+
+# 3. Find the function call step
+fc_step = next(s for s in interaction_1.steps if s.type == "function_call")
+print(f"Tool Call: {fc_step.name}({fc_step.arguments})")
+
+# Execute tool (fetch image)
 image_path = "https://goo.gle/instrument-img"
 image_bytes = requests.get(image_path).content
-function_response_multimodal_data = types.FunctionResponsePart(
-  inline_data=types.FunctionResponseBlob(
-    mime_type="image/jpeg",
-    display_name="instrument.jpg",
-    data=image_bytes,
-  )
+image_b64 = base64.b64encode(image_bytes).decode("utf-8")
+
+# 4. Send multimodal function result back
+interaction_2 = client.interactions.create(
+    model="gemini-3-flash-preview",
+    previous_interaction_id=interaction_1.id,
+    input=[{
+        "type": "function_result",
+        "name": fc_step.name,
+        "call_id": fc_step.id,
+        "result": [
+            {"type": "text", "text": "instrument.jpg"},
+            {
+                "type": "image",
+                "mime_type": "image/jpeg",
+                "data": image_b64,
+            }
+        ]
+    }],
+    tools=[get_image_tool]
 )
 
-# 4. Send the tool's result back
-# Append this turn's messages to history for a final response.
-history = [
-  types.Content(role="user", parts=[types.Part(text=prompt)]),
-  response_1.candidates[0].content,
-  types.Content(
-    role="user",
-    parts=[
-        types.Part.from_function_response(
-          name=function_call.name,
-          response=function_response_data,
-          parts=[function_response_multimodal_data]
-        )
-    ],
-  )
-]
-
-response_2 = client.models.generate_content(
-  model="gemini-3-flash-preview",
-  contents=history,
-  config=types.GenerateContentConfig(
-      tools=[tool_config],
-      thinking_config=types.ThinkingConfig(include_thoughts=True)
-  ),
-)
-
-print(f"\nFinal model response: {response_2.text}")
+print(f"\nFinal model response: {interaction_2.output_text}")
 ```
 
 ### JavaScript
 
 ```
-import { GoogleGenAI, Type } from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 
-const client = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const client = new GoogleGenAI({});
 
-// This is a manual, two turn multimodal function calling workflow:
-// 1. Define the function tool
-const getImageDeclaration = {
-  name: 'get_image',
-  description: 'Retrieves the image file reference for a specific order item.',
-  parameters: {
-    type: Type.OBJECT,
-    properties: {
-      item_name: {
-        type: Type.STRING,
-        description: "The name or description of the item ordered (e.g., 'instrument').",
-      },
+const getImageTool = {
+    type: 'function',
+    name: 'get_image',
+    description: 'Retrieves the image file reference for a specific order item.',
+    parameters: {
+        type: 'object',
+        properties: {
+            item_name: {
+                type: 'string',
+                description: "The name or description of the item ordered (e.g., 'instrument').",
+            },
+        },
+        required: ['item_name'],
     },
-    required: ['item_name'],
-  },
 };
 
-const toolConfig = {
-  functionDeclarations: [getImageDeclaration],
-};
-
-// 2. Send a message that triggers the tool
-const prompt = 'Show me the instrument I ordered last month.';
-const response1 = await client.models.generateContent({
-  model: 'gemini-3-flash-preview',
-  contents: prompt,
-  config: {
-    tools: [toolConfig],
-  },
+const interaction1 = await client.interactions.create({
+    model: 'gemini-3-flash-preview',
+    input: 'Use the get_image tool to show me the instrument I ordered last month.',
+    tools: [getImageTool],
 });
 
-// 3. Handle the function call
-const functionCall = response1.functionCalls[0];
-const requestedItem = functionCall.args.item_name;
-console.log(`Model wants to call: ${functionCall.name}`);
+const fcStep = interaction1.steps.find(s => s.type === 'function_call');
+console.log(`Tool Call: ${fcStep.name}(${JSON.stringify(fcStep.arguments)})`);
 
-// Execute your tool (e.g., call an API)
-// (This is a mock response for the example)
-console.log(`Calling external tool for: ${requestedItem}`);
-
-const functionResponseData = {
-  image_ref: { $ref: 'instrument.jpg' },
-};
-
-const imageUrl = "https://goo.gle/instrument-img";
+const imageUrl = 'https://goo.gle/instrument-img';
 const response = await fetch(imageUrl);
 const imageArrayBuffer = await response.arrayBuffer();
 const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
 
-const functionResponseMultimodalData = {
-  inlineData: {
-    mimeType: 'image/jpeg',
-    displayName: 'instrument.jpg',
-    data: base64ImageData,
-  },
-};
-
-// 4. Send the tool's result back
-// Append this turn's messages to history for a final response.
-const history = [
-  { role: 'user', parts: [{ text: prompt }] },
-  response1.candidates[0].content,
-  {
-    role: 'tool',
-    parts: [
-      {
-        functionResponse: {
-          name: functionCall.name,
-          response: functionResponseData,
-          parts: [functionResponseMultimodalData],
-        },
-      },
-    ],
-  },
-];
-
-const response2 = await client.models.generateContent({
-  model: 'gemini-3-flash-preview',
-  contents: history,
-  config: {
-    tools: [toolConfig],
-    thinkingConfig: { includeThoughts: true },
-  },
+const interaction2 = await client.interactions.create({
+    model: 'gemini-3-flash-preview',
+    previous_interaction_id: interaction1.id,
+    input: [{
+        type: 'function_result',
+        name: fcStep.name,
+        call_id: fcStep.id,
+        result: [
+            { type: 'text', text: 'instrument.jpg' },
+            {
+                type: 'image',
+                mime_type: 'image/jpeg',
+                data: base64ImageData,
+            }
+        ]
+    }],
+    tools: [getImageTool]
 });
 
-console.log(`\nFinal model response: ${response2.text}`);
+console.log(`\nFinal model response: ${interaction2.output_text}`);
 ```
 
 ### REST
@@ -1072,44 +682,39 @@ else
   IMAGE_B64=$(curl -sL "$IMG_URL" | base64 -w0)
 fi
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent" \
+# 1. First interaction (triggers function call)
+# curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+#   -H "x-goog-api-key: $GEMINI_API_KEY" \
+#   -H 'Content-Type: application/json' \
+#   -d '{ "model": "gemini-3-flash-preview", "input": "Show me the instrument I ordered last month.", "tools": [...] }'
+
+# 2. Send multimodal function result back (Replace INTERACTION_ID and CALL_ID)
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
-  -X POST \
   -d '{
-    "contents": [
-      ...,
-      {
-        "role": "user",
-        "parts": [
+    "model": "gemini-3-flash-preview",
+    "previous_interaction_id": "INTERACTION_ID",
+    "input": [{
+      "type": "function_result",
+      "name": "get_image",
+      "call_id": "CALL_ID",
+      "result": [
+        { "type": "text", "text": "instrument.jpg" },
         {
-            "functionResponse": {
-              "name": "get_image",
-              "response": {
-                "image_ref": {
-                  "$ref": "instrument.jpg"
-                }
-              },
-              "parts": [
-                {
-                  "inlineData": {
-                    "displayName": "instrument.jpg",
-                    "mimeType":"'"$MIME_TYPE"'",
-                    "data": "'"$IMAGE_B64"'"
-                  }
-                }
-              ]
-            }
-          }
-        ]
-      }
-    ]
+          "type": "image",
+          "mime_type": "'"$MIME_TYPE"'",
+          "data": "'"$IMAGE_B64"'"
+        }
+      ]
+    }]
   }'
 ```
 
-### 结合使用内置工具和函数调用
+### รวมเครื่องมือในตัวและการเรียกใช้ฟังก์ชัน
 
-Gemini 3 允许在同一 API 调用中使用内置工具（如 Google 搜索、网址上下文和[更多](https://ai.google.dev/gemini-api/docs/tools?hl=zh-cn)）和自定义[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)工具，从而实现更复杂的工作流程。如需了解详情，请参阅[工具组合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)页面。
+Gemini 3 อนุญาตให้ใช้เครื่องมือในตัว (เช่น Google Search, บริบท URL
+และ [อื่นๆ](https://ai.google.dev/gemini-api/docs/tools?hl=th)) และเครื่องมือการเรียกใช้[ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ที่กำหนดเองในการเรียก API เดียวกัน ซึ่งช่วยให้เวิร์กโฟลว์มีความซับซ้อนมากขึ้น
 
 ### Python
 
@@ -1120,6 +725,7 @@ from google.genai import types
 client = genai.Client()
 
 getWeather = {
+    "type": "function",
     "name": "getWeather",
     "description": "Gets the weather for a requested city.",
     "parameters": {
@@ -1134,51 +740,33 @@ getWeather = {
     },
 }
 
-response = client.models.generate_content(
+interaction = client.interactions.create(
     model="gemini-3-flash-preview",
-    contents="What is the northernmost city in the United States? What's the weather like there today?",
-    config=types.GenerateContentConfig(
-      tools=[
-        types.Tool(
-          google_search=types.ToolGoogleSearch(),  # Built-in tool
-          function_declarations=[getWeather]       # Custom tool
-        ),
-      ],
-      include_server_side_tool_invocations=True
-    ),
+    input="What is the northernmost city in the United States? What's the weather like there today?",
+    tools=[
+        {"type": "google_search"},
+        getWeather
+    ],
 )
 
-history = [
-    types.Content(
-        role="user",
-        parts=[types.Part(text="What is the northernmost city in the United States? What's the weather like there today?")]
-    ),
-    response.candidates[0].content,
-    types.Content(
-        role="user",
-        parts=[types.Part(
-            function_response=types.FunctionResponse(
-                name="getWeather",
-                response={"response": "Very cold. 22 degrees Fahrenheit."},
-                id=response.candidates[0].content.parts[2].function_call.id
-            )
-        )]
+fc_step = next((s for s in interaction.steps if s.type == "function_call"), None)
+
+if fc_step:
+    result = {"response": "Very cold. 22 degrees Fahrenheit."}
+
+    final_interaction = client.interactions.create(
+        model="gemini-3-flash-preview",
+        input=[
+            {"type": "function_result", "name": fc_step.name, "call_id": fc_step.id, "result": result}
+        ],
+        tools=[
+            {"type": "google_search"},
+            getWeather
+        ],
+        previous_interaction_id=interaction.id,
     )
-]
 
-response_2 = client.models.generate_content(
-    model="gemini-3-flash-preview",
-    contents=history,
-    config=types.GenerateContentConfig(
-      tools=[
-        types.Tool(
-          google_search=types.ToolGoogleSearch(),
-          function_declarations=[getWeather]
-        ),
-      ],
-      include_server_side_tool_invocations=True
-    ),
-)
+    print(final_interaction.output_text)
 ```
 
 ### JavaScript
@@ -1188,118 +776,118 @@ import { GoogleGenAI, Type } from '@google/genai';
 
 const client = new GoogleGenAI({});
 
-const getWeather = {
-    name: "getWeather",
-    description: "Get the weather in a given location",
-    parameters: {
-        type: "OBJECT",
-        properties: {
-            location: {
-                type: "STRING",
-                description: "The city and state, e.g. San Francisco, CA"
-            }
-        },
-        required: ["location"]
-    }
+const getWeatherDeclaration = {
+  type: 'function',
+  name: 'getWeather',
+  description: 'Gets the weather for a requested city.',
+  parameters: {
+    type: Type.OBJECT,
+    properties: {
+      city: {
+        type: Type.STRING,
+        description: 'The city and state, e.g. Utqiaġvik, Alaska',
+      },
+    },
+    required: ['city'],
+  },
 };
 
-async function run() {
-    const model = client.models.generateContent({
-        model: "gemini-3-flash-preview",
-    });
+const interaction = await client.interactions.create({
+  model: 'gemini-3-flash-preview',
+  input: "What is the northernmost city in the United States? What's the weather like there today?",
+  tools: [
+    { type: "google_search" },
+    getWeatherDeclaration
+  ],
+});
 
-    const tools = [
-      { googleSearch: {} },
-      { functionDeclarations: [getWeather] }
-    ];
-    const toolConfig = { includeServerSideToolInvocations: true };
+const fcStep = interaction.steps.find(s => s.type === 'function_call');
 
-    const result1 = await model.generateContent({
-        contents: [{role: "user", parts: [{text: "What is the northernmost city in the United States? What's the weather like there today?"}]}],
-        tools: tools,
-        toolConfig: toolConfig,
-    });
+if (fcStep) {
+  const result = { response: "Very cold. 22 degrees Fahrenheit." };
 
-    const response1 = result1.response;
-    const functionCallId = response1.candidates[0].content.parts.find(p => p.functionCall)?.functionCall?.id;
+  const finalInteraction = await client.interactions.create({
+    model: 'gemini-3-flash-preview',
+    input: [
+      { type: 'function_result', name: fcStep.name, call_id: fcStep.id, result: result }
+    ],
+    tools: [
+      { type: "google_search" },
+      getWeatherDeclaration
+    ],
+    previous_interaction_id: interaction.id,
+  });
 
-    const history = [
-        {
-            role: "user",
-            parts:[{text: "What is the northernmost city in the United States? What's the weather like there today?"}]
-        },
-        response1.candidates[0].content,
-        {
-            role: "user",
-            parts: [{
-                functionResponse: {
-                    name: "getWeather",
-                    response: {response: "Very cold. 22 degrees Fahrenheit."},
-                    id: functionCallId
-                }
-            }]
-        }
-    ];
-
-    const result2 = await model.generateContent({
-        contents: history,
-        tools: tools,
-        toolConfig: toolConfig,
-    });
+  console.log(finalInteraction.output_text);
 }
-
-run();
 ```
 
-## 从 Gemini 2.5 迁移
+## การย้ายข้อมูลจาก Gemini 2.5
 
-Gemini 3 是我们迄今为止功能最强大的模型系列，与 Gemini 2.5 相比，性能有了显著提升。迁移时，请考虑以下事项：
+Gemini 3 เป็นกลุ่มผลิตภัณฑ์โมเดลที่มากความสามารถที่สุดของเราในปัจจุบัน และมีการปรับปรุงทีละขั้นตอนเมื่อเทียบกับ Gemini 2.5 เมื่อย้ายข้อมูล โปรดพิจารณาสิ่งต่อไปนี้
 
-- **思考**：如果您之前使用复杂的提示工程（例如思维链）来强制 Gemini 2.5 进行推理，不妨尝试使用 Gemini 3 和 `thinking_level: "high"` 以及简化的提示。
-- **温度设置**：如果现有代码明确设置了温度（尤其是设置为较低值以实现确定性输出），建议移除此参数并使用 Gemini 3 的默认值 1.0，以避免在处理复杂任务时出现潜在的循环问题或性能下降。
-- **PDF 和文档理解**：如果您之前依赖特定行为进行密集文档解析，请测试新的 `media_resolution_high` 设置，以确保准确率不受影响。
-- **token 消耗**：迁移到 Gemini 3 默认设置可能会**增加** PDF 的 token 使用量，但会**减少**视频的 token 使用量。如果请求现在因默认分辨率较高而超出上下文窗口，建议明确降低媒体分辨率。
-- **图像分割**：Gemini 3 Pro 或 Gemini 3 Flash 不支持图像分割功能（返回对象的像素级遮罩）。对于需要原生图像分割功能的工作负载，我们建议继续使用 Gemini 2.5 Flash 并关闭思考功能，或者使用 [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-cn)。
-- **电脑使用**：Gemini 3 Pro 和 Gemini 3 Flash 支持[电脑使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)。与 2.5 系列不同，您无需使用单独的模型即可访问“计算机使用”工具。
-- **工具支持**：Gemini 3 模型现在支持[将内置工具与函数调用相结合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)。Gemini 3 模型现在还支持[地图定位](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)。
-- **候选答案数量**：Gemini 3 模型不支持 `candidateCount > 1`。将此参数设置为大于 `1` 的值将返回 400 错误。
+- **การคิด:** หากก่อนหน้านี้คุณใช้เทคนิควิศวกรรมพรอมต์ที่ซับซ้อน (เช่น
+  Chain of Thought) เพื่อบังคับให้ Gemini 2.5 ใช้เหตุผล ให้ลองใช้ Gemini 3 ที่มี
+  `thinking_level: "high"` และพรอมต์ที่ง่ายขึ้น
+- **การตั้งค่าอุณหภูมิ:** หากโค้ดที่มีอยู่ตั้งค่าอุณหภูมิอย่างชัดเจน (โดยเฉพาะค่าต่ำสำหรับเอาต์พุตที่แน่นอน) เราขอแนะนำให้นำพารามิเตอร์นี้ออกและใช้ค่าเริ่มต้นของ Gemini 3 ที่ 1.0 เพื่อหลีกเลี่ยงปัญหาการวนซ้ำที่อาจเกิดขึ้นหรือประสิทธิภาพลดลงในงานที่ซับซ้อน
+- **ความเข้าใจ PDF และเอกสาร:** หากคุณอาศัยลักษณะการทำงานที่เฉพาะเจาะจงสำหรับการแยกวิเคราะห์เอกสารที่มีข้อมูลหนาแน่น ให้ทดสอบการตั้งค่า `media_resolution_high` ใหม่เพื่อให้มั่นใจในความถูกต้องอย่างต่อเนื่อง
+- **การใช้โทเค็น:** การย้ายข้อมูลไปยังค่าเริ่มต้นของ Gemini 3 อาจ**เพิ่ม** การใช้โทเค็นสำหรับ PDF แต่**ลด** การใช้โทเค็นสำหรับวิดีโอ หากคำขอเกินหน้าต่างบริบทเนื่องจากความละเอียดเริ่มต้นสูงขึ้น เราขอแนะนำให้ลดความละเอียดของสื่ออย่างชัดเจน
+- **การแบ่งส่วนรูปภาพ:** Gemini 3 Pro หรือ Gemini 3 Flash ไม่รองรับความสามารถในการแบ่งส่วนรูปภาพ (การแสดงผลมาสก์ระดับพิกเซลสำหรับออบเจ็กต์) สำหรับ
+  เวิร์กโหลดที่ต้องใช้การแบ่งส่วนรูปภาพในตัว เราขอแนะนำให้ใช้ Gemini 2.5 Flash ต่อไปโดยปิดการคิด หรือใช้ [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=th)
+- **การใช้คอมพิวเตอร์:** Gemini 3 Pro และ Gemini 3 Flash รองรับ[การใช้
+  คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th) คุณไม่จำเป็นต้องใช้โมเดลแยกต่างหากเพื่อเข้าถึงเครื่องมือการใช้คอมพิวเตอร์ ซึ่งแตกต่างจากซีรีส์ 2.5
+- **การรองรับเครื่องมือ**: [ตอนนี้โมเดล Gemini 3 รองรับการรวมเครื่องมือในตัวเข้ากับการเรียกใช้ฟังก์ชันแล้ว](https://ai.google.dev/gemini-api/docs/tool-combination?hl=th) [โมเดล
+  Gemini 3](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th) ยังรองรับการเชื่อมต่อแหล่งข้อมูลกับ Maps
+  แล้วด้วย
 
-## OpenAI 兼容性
+## ความเข้ากันได้กับ OpenAI
 
-对于使用 [OpenAI 兼容层](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn)的用户，标准参数（OpenAI 的 `reasoning_effort`）会自动映射到 Gemini (`thinking_level`) 等效参数。
+สำหรับผู้ใช้ที่ใช้เลเยอร์ความเข้ากันได้กับ [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th)
+ระบบจะจับคู่พารามิเตอร์มาตรฐาน (พารามิเตอร์ `reasoning_effort` ของ OpenAI) กับ
+พารามิเตอร์ที่เทียบเท่าของ Gemini (`thinking_level`) โดยอัตโนมัติ
 
-## 提示最佳实践
+## แนวทางปฏิบัติแนะนำในการใช้พรอมต์
 
-Gemini 3 是一种推理模型，因此您需要改变提示方式。
+Gemini 3 เป็นโมเดลการให้เหตุผล ซึ่งจะเปลี่ยนวิธีที่คุณควรใช้พรอมต์
 
-- **精确的指令**：输入提示应简洁明了。Gemini 3 最适合回答直接、清晰的指令。它可能会过度分析用于旧模型的详细或过于复杂的提示工程技术。
-- **输出详细程度**：默认情况下，Gemini 3 的输出详细程度较低，更倾向于提供直接有效的答案。如果您的应用场景需要更口语化或更“健谈”的角色设定，您必须在提示中明确引导模型（例如，“以友好健谈的助理身份解释此内容”）。
-- **上下文管理**：处理大型数据集（例如整本书、代码库或长视频）时，请将具体指令或问题放在提示末尾的数据上下文之后。通过以“根据以上信息…”之类的短语开头提问，将模型的推理锚定到提供的数据。
+- **คำแนะนำที่แม่นยำ:** ใช้พรอมต์อินพุตที่กระชับ Gemini 3 ตอบสนองได้ดีที่สุดต่อคำแนะนำที่ชัดเจนและตรงไปตรงมา โมเดลอาจวิเคราะห์เทคนิควิศวกรรมพรอมต์ (Prompt Engineering) ที่ละเอียดหรือซับซ้อนเกินไปซึ่งใช้กับโมเดลเก่ามากเกินไป
+- **ความละเอียดของเอาต์พุต:** โดยค่าเริ่มต้น Gemini 3 จะมีความละเอียดน้อยกว่าและชอบให้คำตอบที่ตรงไปตรงมาและมีประสิทธิภาพ หาก Use Case ของคุณต้องใช้บุคลิกที่สนทนาหรือ "ช่างพูด" มากขึ้น คุณต้องนำโมเดลไปในทิศทางนั้นอย่างชัดเจนในพรอมต์ (เช่น "อธิบายเรื่องนี้ในฐานะผู้ช่วยที่เป็นมิตรและช่างพูด")
+- **การจัดการบริบท:** เมื่อทำงานกับชุดข้อมูลขนาดใหญ่ (เช่น หนังสือทั้งเล่ม
+  ฐานโค้ด หรือวิดีโอขนาดยาว) ให้วางคำแนะนำหรือคำถามที่เฉพาะเจาะจงไว้ที่
+  ส่วนท้ายของพรอมต์ หลังจากบริบทข้อมูล ยึดการให้เหตุผลของโมเดลกับข้อมูลที่ให้ไว้โดยเริ่มคำถามด้วยวลี เช่น "จากข้อมูลข้างต้น..."
 
-如需详细了解提示设计策略，请参阅[提示工程指南](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=zh-cn)。
+ดูข้อมูลเพิ่มเติมเกี่ยวกับกลยุทธ์การออกแบบพรอมต์ได้ใน[คู่มือวิศวกรรมพรอมต์ (Prompt Engineering)](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th)
 
-## 常见问题解答
+## คำถามที่พบบ่อย
 
-1. **Gemini 3 的知识截点是什么？**Gemini 3 模型的知识截点为 2025 年 1 月。如需了解最新信息，请使用[搜索接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)工具。
-2. **上下文窗口有哪些限制？**Gemini 3 模型支持 100 万个 token 输入的上下文窗口，以及支持最多 64,000 个 token 输出。
-3. **Gemini 3 是否有免费层级？**Gemini API 中有 Gemini 3 Flash `gemini-3-flash-preview` 和 3.1 Flash-Lite `gemini-3.1-flash-lite` 的免费层级。您可以在 Google AI Studio 中免费试用 Gemini 3.1 Pro 和 3 Flash，但 Gemini API 中没有 `gemini-3.1-pro-preview` 的免费层级。
-4. **我的旧版 `thinking_budget` 代码是否仍然有效？**可以，为了实现向后兼容性，我们仍支持 `thinking_budget`，但建议您迁移到 `thinking_level`，以获得更可预测的性能。请勿在同一请求中同时使用这两个参数。
-5. **Gemini 3 是否支持 Batch API？**是的，Gemini 3 支持[批量 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)。
-6. **是否支持上下文缓存？**支持。Gemini 3 支持[上下文缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)。
-7. **Gemini 3 支持哪些工具？**Gemini 3 支持 [Google 搜索](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)、[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)、[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)、[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和 [网址 上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)。它还支持标准[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)，以便您使用自己的自定义工具，并[与内置工具搭配使用](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)。
-8. **什么是 `gemini-3.1-pro-preview-customtools`？**如果您使用的是 `gemini-3.1-pro-preview`，但该模型忽略了您的自定义工具，而偏向于使用 Bash 命令，请尝试改用 `gemini-3.1-pro-preview-customtools` 模型。如需了解详情，请点击[此处](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn#gemini-31-pro-preview-customtools)。
+1. **การตัดข้อมูลของ Gemini 3 คือเมื่อใด** โมเดล Gemini 3 มีการตัดข้อมูลในเดือนมกราคม 2025 หากต้องการข้อมูลล่าสุด ให้ใช้เครื่องมือ
+   [การเชื่อมต่อแหล่งข้อมูลกับ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
+2. **ขีดจำกัดของหน้าต่างบริบทคือเท่าใด** โมเดล Gemini 3 รองรับหน้าต่างบริบทอินพุต 1 ล้านโทเค็นและเอาต์พุตสูงสุด 64,000 โทเค็น
+3. **Gemini 3 มีแพ็กเกจฟรีไหม** Gemini 3 Flash `gemini-3-flash-preview` มีแพ็กเกจฟรีใน Gemini API คุณสามารถลองใช้ Gemini 3.1 Pro และ 3 Flash ได้โดยไม่มีค่าใช้จ่ายใน Google AI Studio แต่ `gemini-3.1-pro-preview` ใน Gemini API ไม่มีแพ็กเกจฟรี
+4. **โค้ด `thinking_budget` เก่าของฉันจะยังใช้งานได้ไหม** ได้ `thinking_budget` ยังคงได้รับการรองรับเพื่อความเข้ากันได้แบบย้อนกลับ แต่เราขอแนะนำให้ย้ายข้อมูลไปใช้ `thinking_level` เพื่อให้ได้ประสิทธิภาพที่คาดการณ์ได้มากขึ้น อย่าใช้ทั้ง 2 อย่างในคำขอเดียวกัน
+5. **Gemini 3 รองรับ Batch API ไหม** ใช่ Gemini 3 รองรับ
+   [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)
+6. **ระบบรองรับการแคชบริบทไหม** ใช่ [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) รองรับสำหรับ Gemini 3
+7. **Gemini 3 รองรับเครื่องมือใดบ้าง** Gemini 3 รองรับ
+   [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th),
+   [การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th),
+   [การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th),
+   [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) และ
+   [บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th) นอกจากนี้ ยังรองรับ
+   การเรียกใช้[ฟังก์ชันมาตรฐาน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)สำหรับ
+   เครื่องมือที่กำหนดเองของคุณเอง และเมื่อใช้
+   [ร่วมกับเครื่องมือในตัว](https://ai.google.dev/gemini-api/docs/tool-combination?hl=th)
+8. **คืออะไร`gemini-3.1-pro-preview-customtools`?** หากคุณใช้
+   `gemini-3.1-pro-preview` และโมเดลไม่สนใจเครื่องมือที่กำหนดเอง แต่เลือกใช้
+   คำสั่ง Bash ให้ลองใช้โมเดล `gemini-3.1-pro-preview-customtools` แทน
+   ดูข้อมูลเพิ่มเติมได้[ที่นี่][customtools-model]
 
-## 后续步骤
+ส่งความคิดเห็น
 
-- 开始使用 [Gemini 3 Cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started.ipynb?hl=zh-cn#templateParams=%7B%22MODEL_ID%22:+%22gemini-3-pro-preview%22%7D)
-- 请参阅有关[思考级别](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_thinking_REST.ipynb?hl=zh-cn#gemini3)以及如何从思考预算迁移到思考级别的专用 Cookbook 指南。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-发送反馈
+อัปเดตล่าสุด 2026-06-22 UTC
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-最后更新时间 (UTC)：2026-06-19。
-
-需要向我们提供更多信息？
-
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-19。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-22 UTC"],[],[]]

@@ -1,29 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=ar
-fetched_at: 2026-05-05T20:45:23.161631+00:00
-title: "\u0648\u0643\u064a\u0644 Deep Research \u0641\u064a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=ja
+fetched_at: 2026-06-29T05:30:46.272859+00:00
+title: "Gemini Deep Research \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-تتوفّر الآن ميزة [Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) في إصدار تجريبي يتضمّن ميزات التخطيط التعاوني والتصوّر ودعم MCP والمزيد.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-إرسال ملاحظات
+フィードバックを送信
 
-# وكيل Deep Research في Gemini
+# Gemini Deep Research エージェント
 
-يخطّط وكيل Deep Research من Gemini وينفّذ ويجمع مهام البحث المتعدّدة الخطوات بشكل مستقل. يستند هذا المنتج إلى Gemini، ويتيح التنقّل في مساحات شاسعة من المعلومات المعقّدة لإنشاء تقارير مفصّلة مع ذكر المصادر. تتيح لك الإمكانات الجديدة التخطيط بشكل تعاوني مع الوكيل، والربط بأدوات خارجية باستخدام خوادم MCP، وتضمين رسومات توضيحية (مثل المخططات والرسوم البيانية)، وتقديم المستندات مباشرةً كمدخلات.
+Gemini Deep Research エージェントは、複数ステップのリサーチタスクを自律的に計画、実行、統合します。Gemini
+を搭載し、複雑な情報環境をナビゲートして、引用付きの詳細なレポートを作成します。新しい機能により、エージェントと共同で計画を立てたり、MCP
+サーバーを使用して外部ツールに接続したり、可視化（グラフなど）を含めたり、ドキュメントを直接入力として提供したりできます。
 
-تتضمّن مهام البحث عمليات بحث وقراءة متكرّرة، وقد تستغرق عدة دقائق لإكمالها. يجب استخدام التنفيذ في الخلفية (ضبط `background=true`) لتشغيل الوكيل بشكل غير متزامن وطلب النتائج أو بث التحديثات. لمزيد من التفاصيل، اطّلِع على مقالة [التعامل مع المهام التي تستغرق وقتًا طويلاً](#long-running-tasks).
+リサーチタスクには、反復的な検索と読み取りが含まれ、完了までに数分かかることがあります。エージェントを非同期で実行して結果をポーリングまたはストリーミングするには、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)（`background=true`を設定）
+を使用する必要があります。詳細については、
+[長時間実行タスクの処理](#long-running-tasks)をご覧ください。
 
-يوضّح المثال التالي كيفية بدء مهمة بحث في الخلفية
-والتحقّق من النتائج.
+次の例は、バックグラウンドでリサーチタスクを開始して結果をポーリングする方法を示しています。
 
 ### Python
 
@@ -44,7 +47,7 @@ print(f"Research started: {interaction.id}")
 while True:
     interaction = client.interactions.get(interaction.id)
     if interaction.status == "completed":
-        print(interaction.outputs[-1].text)
+        print(interaction.steps[-1].content[0].text)
         break
     elif interaction.status == "failed":
         print(f"Research failed: {interaction.error}")
@@ -70,7 +73,7 @@ console.log(`Research started: ${interaction.id}`);
 while (true) {
     const result = await client.interactions.get(interaction.id);
     if (result.status === 'completed') {
-        console.log(result.outputs[result.outputs.length - 1].text);
+        console.log(result.steps.at(-1).content[0].text);
         break;
     } else if (result.status === 'failed') {
         console.log(`Research failed: ${result.error}`);
@@ -98,21 +101,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## الإصدارات المتوافقة
+## サポート対象のバージョン
 
-يتوفّر وكيل Deep Research بإصدارَين:
+Deep Research エージェントには次の 2 つのバージョンがあります。
 
-- **Deep Research** (`deep-research-preview-04-2026`): تم تصميمه ليكون سريعًا وفعّالاً، وهو مثالي لعرضه في واجهة مستخدم العميل.
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): أقصى قدر من الشمولية لعملية جمع السياق وتلخيصه بشكل آلي
+- **Deep Research** （`deep-research-preview-04-2026`）: スピードと効率性を重視した設計で、クライアント UI にストリーミングするのに最適です。
+- **Deep Research Max** （`deep-research-max-preview-04-2026`）: コンテキストの自動収集と統合を最大限に包括的に行います。
 
-## التخطيط التعاوني
+## 共同計画
 
-تمنحك ميزة "التخطيط التعاوني" إمكانية التحكّم في اتجاه البحث
-قبل أن يبدأ الوكيل عمله. عند تفعيل هذه الميزة، يعرض الوكيل خطة بحث مقترَحة بدلاً من تنفيذها على الفور. يمكنك بعد ذلك مراجعة الخطة أو تعديلها أو الموافقة عليها من خلال التفاعلات المتعدّدة الأدوار.
+共同計画では、エージェントが作業を開始する前に、調査の方向性を制御できます。有効にすると、エージェントはすぐに実行するのではなく、提案されたリサーチプランを返します。その後、マルチターンのインタラクションを通じてプランを確認、変更、承認できます。
 
-### الخطوة 1: طلب خطة
+### ステップ 1: プランをリクエストする
 
-اضبط `collaborative_planning=True` في التفاعل الأول. يعرض الوكيل خطة بحث بدلاً من تقرير كامل.
+最初のインタラクションで `collaborative_planning=True` を設定します。エージェントは完全なレポートではなく、リサーチプランを返します。
 
 ### Python
 
@@ -136,7 +138,7 @@ plan_interaction = client.interactions.create(
 # Wait for and retrieve the plan
 while (result := client.interactions.get(id=plan_interaction.id)).status != "completed":
     time.sleep(5)
-print(result.outputs[-1].text)
+print(result.steps[-1].content[0].text)
 ```
 
 ### JavaScript
@@ -157,7 +159,7 @@ let result;
 while ((result = await client.interactions.get(planInteraction.id)).status !== 'completed') {
     await new Promise(r => setTimeout(r, 5000));
 }
-console.log(result.outputs[result.outputs.length - 1].text);
+console.log(result.steps.at(-1).content[0].text);
 ```
 
 ### REST
@@ -178,9 +180,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### الخطوة 2: تحسين الخطة (اختيارية)
+### ステップ 2: プランを修正する（省略可）
 
-استخدِم `previous_interaction_id` لمواصلة المحادثة وتكرار الخطة. اضغط على `collaborative_planning=True` للبقاء في وضع التخطيط.
+`previous_interaction_id` を使用して会話を続け、プランを反復処理します。`collaborative_planning=True` を維持して、計画モードを維持します。
 
 ### Python
 
@@ -200,7 +202,7 @@ refined_plan = client.interactions.create(
 
 while (result := client.interactions.get(id=refined_plan.id)).status != "completed":
     time.sleep(5)
-print(result.outputs[-1].text)
+print(result.steps[-1].content[0].text)
 ```
 
 ### JavaScript
@@ -222,7 +224,7 @@ let result;
 while ((result = await client.interactions.get(refinedPlan.id)).status !== 'completed') {
     await new Promise(r => setTimeout(r, 5000));
 }
-console.log(result.outputs[result.outputs.length - 1].text);
+console.log(result.steps.at(-1).content[0].text);
 ```
 
 ### REST
@@ -244,9 +246,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### الخطوة 3: الموافقة والتنفيذ
+### ステップ 3: 承認して実行する
 
-اضبط القيمة على `collaborative_planning=False` (أو احذفها) للموافقة على الخطة وبدء البحث.
+`collaborative_planning=False` に設定（または省略）して、プランを承認し、調査を開始します。
 
 ### Python
 
@@ -266,7 +268,7 @@ final_report = client.interactions.create(
 
 while (result := client.interactions.get(id=final_report.id)).status != "completed":
     time.sleep(5)
-print(result.outputs[-1].text)
+print(result.steps[-1].content[0].text)
 ```
 
 ### JavaScript
@@ -288,7 +290,7 @@ let result;
 while ((result = await client.interactions.get(finalReport.id)).status !== 'completed') {
     await new Promise(r => setTimeout(r, 5000));
 }
-console.log(result.outputs[result.outputs.length - 1].text);
+console.log(result.steps.at(-1).content[0].text);
 ```
 
 ### REST
@@ -310,19 +312,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## التمثيل البصري
+## Visualization
 
-عندما تكون قيمة `visualization` هي `"auto"`، يمكن للوكيل إنشاء رسومات بيانية ومخططات وعناصر مرئية أخرى لدعم نتائج البحث.
-يتم تضمين الصور التي تم إنشاؤها في نواتج الردود ويتم بثها كقيم
-`image` دلتا. للحصول على أفضل النتائج، اطلب بشكل صريح تضمين عناصر مرئية في طلب البحث، مثلاً "تضمين رسوم بيانية تعرض المؤشرات بمرور الوقت" أو "إنشاء رسومات تقارن الحصة السوقية". يؤدي ضبط `visualization` على
-`"auto"` إلى تفعيل هذه الإمكانية، ولكن لا ينشئ الوكيل مرئيات إلا
-عندما يطلبها الطلب.
+`visualization` が `"auto"` に設定されている場合、エージェントは調査結果をサポートするグラフやその他の視覚要素を生成できます。生成された画像はレスポンス ステップに含まれ、`image` デルタとしてストリーミングされます。最適な結果を得るには、クエリで視覚要素を明示的にリクエストします（例: 「経時的な傾向を示すグラフを含める」、「マーケット シェアを比較するグラフを生成する」）。`visualization` を
+`"auto"` に設定すると、この機能が有効になりますが、エージェントはプロンプトでリクエストされた場合にのみ視覚要素を生成します。
 
 ### Python
 
 ```
 import base64
-from IPython.display import Image, display
 
 interaction = client.interactions.create(
     agent="deep-research-preview-04-2026",
@@ -339,15 +337,14 @@ print(f"Research started: {interaction.id}")
 while (result := client.interactions.get(id=interaction.id)).status != "completed":
     time.sleep(5)
 
-for output in result.outputs:
-    if output.type == "text":
-        print(output.text)
-    elif output.type == "image" and output.data:
-        image_bytes = base64.b64decode(output.data)
-        print(f"Received image: {len(image_bytes)} bytes")
-        # To display in a Jupyter notebook:
-        # from IPython.display import display, Image
-        # display(Image(data=image_bytes))
+for step in result.steps:
+    if step.type == "model_output":
+        for content_item in step.content:
+            if content_item.type == "text":
+                print(content_item.text)
+            elif content_item.type == "image" and content_item.data:
+                image_bytes = base64.b64decode(content_item.data)
+                print(f"Received image: {len(image_bytes)} bytes")
 ```
 
 ### JavaScript
@@ -374,11 +371,15 @@ while ((result = await client.interactions.get(interaction.id)).status !== 'comp
     await new Promise(r => setTimeout(r, 5000));
 }
 
-for (const output of result.outputs) {
-    if (output.type === 'text') {
-        console.log(output.text);
-    } else if (output.type === 'image' && output.data) {
-        console.log(`[Image Output: ${output.data.substring(0, 20)}...]`);
+for (const step of result.steps) {
+    if (step.type === 'model_output') {
+        for (const contentItem of step.content) {
+            if (contentItem.type === 'text') {
+                console.log(contentItem.text);
+            } else if (contentItem.type === 'image' && contentItem.data) {
+                console.log(`[Image Output: ${contentItem.data.substring(0, 20)}...]`);
+            }
+        }
     }
 }
 ```
@@ -400,21 +401,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## الأدوات المتوافقة
+## サポートされているツール
 
-تتيح ميزة Deep Research استخدام أدوات متعددة مضمّنة وخارجية. بشكل تلقائي (عند عدم توفير المَعلمة `tools`)، يمكن للوكيل الوصول إلى &quot;بحث Google&quot; و&quot;سياق عنوان URL&quot; و&quot;تنفيذ الرمز&quot;. يمكنك تحديد الأدوات بشكل صريح لحظر إمكانات الوكيل أو توسيعها.
+Deep Research は、複数の組み込みツールと外部ツールをサポートしています。デフォルトでは（`tools` パラメータが指定されていない場合）、エージェントは Google 検索、URL コンテキスト、コード実行にアクセスできます。ツールを明示的に指定して、エージェントの機能を制限または拡張できます。
 
-| الأداة | نوع القيمة | الوصف |
+| ツール | Type 値 | 説明 |
 | --- | --- | --- |
-| بحث Google | `google_search` | البحث في شبكة الويب المتاحة للجميع يكون مفعَّلاً تلقائيًا. |
-| سياق عنوان URL | `url_context` | قراءة محتوى صفحة الويب وتلخيصه يكون مفعَّلاً تلقائيًا. |
-| تنفيذ الرموز البرمجية | `code_execution` | تنفيذ الرموز البرمجية لإجراء العمليات الحسابية وتحليل البيانات يكون مفعَّلاً تلقائيًا. |
-| خادم MCP | `mcp_server` | الربط بخوادم MCP البعيدة للوصول إلى الأدوات الخارجية |
-| البحث عن الملفات | `file_search` | البحث في مجموعات مستنداتك المحمّلة |
+| Google 検索 | `google_search` | 公開ウェブを検索します。デフォルトで有効。 |
+| URL コンテキスト | `url_context` | ウェブページ コンテンツを読み取って要約します。デフォルトで有効。 |
+| コードを実行する | `code_execution` | コードを実行して計算とデータ分析を行います。デフォルトで有効。 |
+| MCP サーバー | `mcp_server` | 外部ツールにアクセスするために、リモート MCP サーバーに接続します。 |
+| ファイル検索 | `file_search` | アップロードしたドキュメント コーパスを検索します。 |
 
-### بحث Google
+### Google 検索
 
-تفعيل "بحث Google" بشكلٍ صريح كالأداة الوحيدة:
+Google 検索を唯一のツールとして明示的に有効にします。
 
 ### Python
 
@@ -452,9 +453,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### سياق عنوان URL
+### URL コンテキスト
 
-امنح الوكيل إذن قراءة وتلخيص صفحات ويب معيّنة:
+エージェントが特定のウェブページを読み取って要約できるようにします。
 
 ### Python
 
@@ -492,9 +493,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### تنفيذ الرموز البرمجية
+### コードを実行する
 
-السماح للوكيل بتنفيذ الرموز لإجراء العمليات الحسابية وتحليل البيانات:
+エージェントが計算とデータ分析のためにコードを実行できるようにします。
 
 ### Python
 
@@ -525,26 +526,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "agent": "deep-research-preview-04-2026",
     "input": "Calculate the 50th Fibonacci number.",
+    "agent": "deep-research-preview-04-2026",
     "tools": [{"type": "code_execution"}],
     "background": true
 }'
 ```
 
-### خوادم MCP
+### MCP サーバー
 
-قدِّم الخادم `name` و`url` في إعدادات الأدوات. يمكنك أيضًا تمرير بيانات اعتماد المصادقة وتقييد الأدوات التي يمكن للوكيل استدعاؤها.
+ツール構成でサーバーの `name` と `url` を指定します。認証情報を渡して、エージェントが呼び出すことができるツールを制限することもできます。
 
-| الحقل | النوع | مطلوب | الوصف |
+| フィールド | 型 | 必須 / 省略可 | 説明 |
 | --- | --- | --- | --- |
-| `type` | `string` | نعم | يجب أن تكون `"mcp_server"`. |
-| `name` | `string` | لا | اسم معروض لخادم MCP. |
-| `url` | `string` | لا | عنوان URL الكامل لنقطة نهاية خادم MCP |
-| `headers` | `object` | لا | أزواج المفتاح والقيمة التي يتم إرسالها كعناوين HTTP مع كل طلب إلى الخادم (على سبيل المثال، رموز المصادقة المميزة). |
-| `allowed_tools` | `array` | لا | تحديد الأدوات التي يمكن للوكيل استدعاؤها من الخادم |
+| `type` | `string` | ○ | `"mcp_server"` を指定します。 |
+| `name` | `string` | いいえ | MCP サーバーの表示名。 |
+| `url` | `string` | いいえ | MCP サーバー エンドポイントの完全な URL。 |
+| `headers` | `object` | いいえ | サーバーへのリクエストごとに HTTP ヘッダーとして送信される Key-Value ペア（認証トークンなど）。 |
+| `allowed_tools` | `array` | いいえ | エージェントが呼び出すことができるサーバーのツールを制限します。 |
 
-#### الاستخدام الأساسي
+#### 基本的な使用方法
 
 ### Python
 
@@ -603,9 +604,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### البحث عن الملفات
+### ファイル検索
 
-امنح الوكيل إذن الوصول إلى بياناتك الخاصة باستخدام أداة [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar).
+[ファイル検索ツールを使用して、エージェントが独自のデータにアクセスできるようにします。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
 
 ### Python
 
@@ -657,11 +658,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## إمكانية التوجيه والتنسيق
+## 操作性と書式設定
 
-يمكنك توجيه ناتج الوكيل من خلال تقديم تعليمات تنسيق محدّدة في طلبك. يتيح لك ذلك تنظيم التقارير في أقسام وأقسام فرعية محدّدة، أو تضمين جداول البيانات، أو تعديل النبرة لتناسب شرائح جمهور مختلفة (مثل "فنية" أو "تنفيذية" أو "عادية").
+プロンプトで特定の書式設定手順を指定することで、エージェントの出力を操作できます。これにより、レポートを特定のセクションと
+サブセクションに構造化したり、データテーブルを含めたり、さまざまなユーザー（例:
+「技術者向け」、「経営幹部向け」、「カジュアル」）に合わせてトーンを調整したりできます。
 
-حدِّد تنسيق الناتج المطلوب بشكل واضح في النص الذي تدخله.
+入力テキストで目的の出力形式を明示的に定義します。
 
 ### Python
 
@@ -714,9 +717,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## إدخالات متعددة الوسائط
+## マルチモーダル入力
 
-تتيح ميزة Deep Research إدخال طلبات متعددة الوسائط، بما في ذلك الصور والمستندات (ملفات PDF)، ما يسمح للوكيل بتحليل المحتوى المرئي وإجراء بحث مستنِد إلى الويب مع مراعاة السياق الذي توفّره الطلبات.
+Deep Research は、画像やドキュメント（PDF）などのマルチモーダル入力をサポートしています。これにより、エージェントは視覚的なコンテンツを分析し、提供された入力に基づいてウェブベースの調査を行うことができます。
 
 ### Python
 
@@ -738,6 +741,7 @@ interaction = client.interactions.create(
         {"type": "text", "text": prompt},
         {
             "type": "image",
+            "mime_type": "image/jpeg",
             "uri": "https://storage.googleapis.com/generativeai-downloads/images/generated_elephants_giraffes_zebras_sunset.jpg"
         }
     ],
@@ -750,7 +754,7 @@ print(f"Research started: {interaction.id}")
 while True:
     interaction = client.interactions.get(interaction.id)
     if interaction.status == "completed":
-        print(interaction.outputs[-1].text)
+        print(interaction.steps[-1].content[0].text)
         break
     elif interaction.status == "failed":
         print(f"Research failed: {interaction.error}")
@@ -777,6 +781,7 @@ const interaction = await client.interactions.create({
         { type: 'text', text: prompt },
         {
             type: 'image',
+            mime_type: "image/jpeg",
             uri: 'https://storage.googleapis.com/generativeai-downloads/images/generated_elephants_giraffes_zebras_sunset.jpg'
         }
     ],
@@ -789,7 +794,7 @@ console.log(`Research started: ${interaction.id}`);
 while (true) {
     const result = await client.interactions.get(interaction.id);
     if (result.status === 'completed') {
-        console.log(result.outputs[result.outputs.length - 1].text);
+        console.log(result.steps.at(-1).content[0].text);
         break;
     } else if (result.status === 'failed') {
         console.log(`Research failed: ${result.error}`);
@@ -809,7 +814,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 -d '{
     "input": [
         {"type": "text", "text": "Analyze the interspecies dynamics and behavioral risks present in the provided image of the African watering hole. Specifically, investigate the symbiotic relationship between the avian species and the pachyderms shown, and conduct a risk assessment for the reticulated giraffes based on their drinking posture relative to the specific predator visible in the foreground."},
-        {"type": "image", "uri": "https://storage.googleapis.com/generativeai-downloads/images/generated_elephants_giraffes_zebras_sunset.jpg"}
+        {"type": "image", "mime_type": "image/jpeg", "uri": "https://storage.googleapis.com/generativeai-downloads/images/generated_elephants_giraffes_zebras_sunset.jpg"}
     ],
     "agent": "deep-research-preview-04-2026",
     "background": true
@@ -820,9 +825,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### فهم المستندات
+### ドキュメントの理解
 
-تمرير المستندات مباشرةً كإدخال متعدد الوسائط يحلّل الوكيل المستندات المقدَّمة ويجري بحثًا استنادًا إلى محتواها.
+ 
+
+ドキュメントをマルチモーダル入力として直接渡します。エージェントは提供されたドキュメントを分析し、その内容に基づいて調査を行います。
 
 ### Python
 
@@ -883,29 +890,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## التعامل مع المهام الطويلة المدى
+## 長時間実行タスクの処理
 
-‫Deep Research هي عملية متعددة الخطوات تشمل التخطيط والبحث والقراءة والكتابة. يتجاوز هذا الإجراء عادةً حدود المهلة الزمنية العادية لطلبات البيانات المتزامنة من واجهة برمجة التطبيقات.
+Deep Research は、計画、検索、読み取り、書き込みを含む複数ステップのプロセスです。通常、このサイクルは同期 API 呼び出しの標準タイムアウト上限を超えます。
 
-على الموظفين استخدام `background=True`. تعرض واجهة برمجة التطبيقات عنصر `Interaction` جزئيًا على الفور. يمكنك استخدام السمة `id` لاسترداد تفاعل مع استطلاع. ستنتقل حالة التفاعل من
-`in_progress` إلى `completed` أو `failed`.
+エージェントは `background=True` を使用する必要があります。API は部分的な `Interaction` オブジェクトをすぐに返します。`id` プロパティを使用して、ポーリング用のインタラクションを取得できます。インタラクションの状態は `in_progress` から `completed` または `failed` に遷移します。バックグラウンド タスクの管理に関する包括的なガイドについては、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)をご覧ください。
 
-### البث
+### ストリーミング
 
-تتيح ميزة Deep Research إمكانية البث المباشر لتلقّي آخر المعلومات في الوقت الفعلي حول تقدّم البحث، بما في ذلك ملخّصات الأفكار والنص الناتج والصور التي تم إنشاؤها.
-يجب ضبط `stream=True` و`background=True`.
+Deep Research は、思考の要約、テキスト出力、生成された画像など、調査の進捗状況に関するリアルタイムの更新情報を受信するためのストリーミングをサポートしています。
+`stream=True` と `background=True` を設定する必要があります。
 
-لتلقّي خطوات الاستدلال الوسيطة (الأفكار) وإشعارات التقدّم، عليك تفعيل **ملخّصات التفكير** من خلال ضبط `thinking_summaries` على `"auto"` في `agent_config`. وبدون ذلك، قد لا يوفّر البث سوى النتائج النهائية.
+中間的な推論ステップ（思考）と進捗状況の更新情報を受け取るには、
+`agent_config` で `thinking_summaries` を
+`"auto"` に設定して、**思考の要約** を有効にする必要があります。これがないと、ストリームは最終結果のみを提供する可能性があります。
 
-#### أنواع أحداث البث
+#### ストリーム イベントのタイプ
 
-| نوع الحدث | نوع التغيير | الوصف |
+| イベントの種類 | デルタタイプ | 説明 |
 | --- | --- | --- |
-| `content.delta` | `thought_summary` | خطوة الاستدلال الوسيطة من الوكيل |
-| `content.delta` | `text` | جزء من النص النهائي الناتج |
-| `content.delta` | `image` | صورة تم إنشاؤها (مشفرة بترميز base64) |
+| `step.delta` | `thought` | エージェントからの中間的な推論ステップ。 |
+| `step.delta` | `text` | 最終的なテキスト出力の一部。 |
+| `step.delta` | `image` | 生成された画像（base64 でエンコード）。 |
 
-يبدأ المثال التالي مهمة بحث ويعالج البث مع إعادة الاتصال تلقائيًا. يتتبّع هذا الإجراء `interaction_id` و`last_event_id`، وبالتالي، إذا انقطع الاتصال (على سبيل المثال، بعد انتهاء مهلة الـ 600 ثانية)، يمكنه استئناف العملية من حيث توقّفت.
+次の例では、リサーチタスクを開始し、自動再接続でストリームを処理します。`interaction_id` と `last_event_id` をトラッキングすることで、接続が切断された場合（600 秒のタイムアウト後など）に、中断したところから再開できます。
 
 ### Python
 
@@ -920,17 +928,17 @@ is_complete = False
 
 def process_stream(stream):
     global interaction_id, last_event_id, is_complete
-    for chunk in stream:
-        if chunk.event_type == "interaction.start":
-            interaction_id = chunk.interaction.id
-        if chunk.event_id:
-            last_event_id = chunk.event_id
-        if chunk.event_type == "content.delta":
-            if chunk.delta.type == "text":
-                print(chunk.delta.text, end="", flush=True)
-            elif chunk.delta.type == "thought_summary":
-                print(f"Thought: {chunk.delta.content.text}", flush=True)
-        elif chunk.event_type in ("interaction.complete", "error"):
+    for event in stream:
+        if event.event_type == "interaction.created":
+            interaction_id = event.interaction.id
+        if event.event_id:
+            last_event_id = event.event_id
+        if event.event_type == "step.delta":
+            if event.delta.type == "text":
+                print(event.delta.text, end="", flush=True)
+            elif event.delta.type == "thought":
+                print(f"Thought: {event.delta.text}", flush=True)
+        elif event.event_type in ("interaction.completed", "interaction.error"):
             is_complete = True
 
 stream = client.interactions.create(
@@ -965,18 +973,18 @@ let lastEventId;
 let isComplete = false;
 
 async function processStream(stream) {
-    for await (const chunk of stream) {
-        if (chunk.event_type === 'interaction.start') {
-            interactionId = chunk.interaction.id;
+    for await (const event of stream) {
+        if (event.type === 'interaction.created') {
+            interactionId = event.interaction.id;
         }
-        if (chunk.event_id) lastEventId = chunk.event_id;
-        if (chunk.event_type === 'content.delta') {
-            if (chunk.delta.type === 'text') {
-                process.stdout.write(chunk.delta.text);
-            } else if (chunk.delta.type === 'thought_summary') {
-                console.log(`Thought: ${chunk.delta.content.text}`);
+        if (event.event_id) lastEventId = event.event_id;
+        if (event.type === 'step.delta') {
+            if (event.delta.type === 'text') {
+                process.stdout.write(event.delta.text);
+            } else if (event.delta.type === 'thought') {
+                console.log(`Thought: ${event.delta.text}`);
             }
-        } else if (['interaction.complete', 'error'].includes(chunk.event_type)) {
+        } else if (['interaction.completed', 'interaction.error'].includes(event.type)) {
             isComplete = true;
         }
     }
@@ -1026,9 +1034,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## أسئلة المتابعة والتفاعلات
+## フォローアップの質問とインタラクション
 
-يمكنك مواصلة المحادثة بعد أن يرسل لك موظف الدعم التقرير النهائي باستخدام `previous_interaction_id`. يتيح لك ذلك طلب توضيح أو تلخيص أو تفصيل أقسام معيّنة من البحث بدون إعادة تشغيل المهمة بأكملها.
+`previous_interaction_id` を使用すると、エージェントが最終レポートを返した後も会話を続けることができます。これにより、タスク全体を再開することなく、調査の特定のセクションについて説明、要約、詳細をリクエストできます。
 
 ### Python
 
@@ -1044,7 +1052,7 @@ interaction = client.interactions.create(
     previous_interaction_id="COMPLETED_INTERACTION_ID"
 )
 
-print(interaction.outputs[-1].text)
+print(interaction.steps[-1].content[0].text)
 ```
 
 ### JavaScript
@@ -1055,7 +1063,7 @@ const interaction = await client.interactions.create({
     model: 'gemini-3.1-pro-preview',
     previous_interaction_id: 'COMPLETED_INTERACTION_ID'
 });
-console.log(interaction.outputs[interaction.outputs.length - 1].text);
+console.log(interaction.steps.at(-1).content[0].text);
 ```
 
 ### REST
@@ -1071,28 +1079,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## حالات استخدام Gemini Deep Research Agent
+## Gemini Deep Research エージェントを使用するケース
 
-‫Deep Research هي **وكيل**، وليست مجرد نموذج. وهي الأنسب لأحمال العمل التي تتطلّب أسلوب "محلّل جاهز للاستخدام" بدلاً من المحادثة ذات وقت الاستجابة المنخفض.
+Deep Research は単なるモデルではなく、**エージェント** です。レイテンシの低いチャットではなく、「アナリスト
+イン ア ボックス」のアプローチが必要なワークロードに最適です。
 
-| الميزة | نماذج Gemini العادية | ‫Gemini Deep Research Agent |
+| 機能 | 標準の Gemini モデル | Gemini Deep Research エージェント |
 | --- | --- | --- |
-| **وقت الاستجابة** | الثواني | الدقائق (غير متزامنة/في الخلفية) |
-| **المعالجة** | إنشاء -> الناتج | التخطيط -> البحث -> القراءة -> التكرار -> الإخراج |
-| **الناتج** | نص حواري ورموز وملخّصات قصيرة | التقارير التفصيلية والتحليلات الطويلة وجداول المقارنة |
-| **الأفضل لـ** | برامج الدردشة الآلية واستخراج المعلومات والكتابة الإبداعية | تحليل السوق، وبذل العناية الواجبة، ومراجعات الأبحاث، والتحليل التنافسي |
+| **レイテンシ** | 秒 | 分（非同期/バックグラウンド） |
+| **プロセス** | 生成 -> 出力 | 計画 -> 検索 -> 読み取り -> 反復 -> 出力 |
+| **出力** | 会話テキスト、コード、短い要約 | 詳細なレポート、長文分析、比較表 |
+| **最適な用途** | chatbot、抽出、クリエイティブ ライティング | 市場分析、デュー デリジェンス、文献レビュー、競合状況の把握 |
 
-## إعدادات الوكيل
+## エージェントの構成
 
-تستخدم ميزة Deep Research المَعلمة `agent_config` للتحكّم في السلوك.
-مرِّرها كقاموس يتضمّن الحقول التالية:
+Deep Research は、`agent_config` パラメータを使用して動作を制御します。
+次のフィールドを含むディクショナリとして渡します。
 
-| الحقل | النوع | القيمة التلقائية | الوصف |
+| フィールド | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `type` | `string` | مطلوب | يجب أن تكون `"deep-research"`. |
-| `thinking_summaries` | `string` | `"none"` | اضبط القيمة على `"auto"` لتلقّي خطوات الاستدلال الوسيطة أثناء البث. اضبط القيمة على `"none"` لإيقافها. |
-| `visualization` | `string` | `"auto"` | اضبط القيمة على `"auto"` لتفعيل المخططات والصور التي ينشئها الوكيل. اضبط القيمة على `"off"` لإيقافها. |
-| `collaborative_planning` | `boolean` | `false` | اضبط هذا الخيار على `true` لتفعيل مراجعة الخطة المتعددة الجولات قبل بدء البحث. |
+| `type` | `string` | 必須 | `"deep-research"` を指定します。 |
+| `thinking_summaries` | `string` | `"none"` | ストリーミング中に中間的な推論ステップを受け取るには、`"auto"` に設定します。無効にするには、`"none"` に設定します。 |
+| `visualization` | `string` | `"auto"` | エージェントが生成したグラフや画像を有効にするには、`"auto"` に設定します。無効にするには、`"off"` に設定します。 |
+| `collaborative_planning` | `boolean` | `false` | 調査を開始する前にマルチターンのプランレビューを有効にするには、`true` に設定します。 |
 
 ### Python
 
@@ -1147,63 +1156,64 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## التوفّر والأسعار
+## 提供状況と価格
 
-يمكنك الوصول إلى وكيل البحث العميق من Gemini باستخدام Interactions API في Google AI Studio وGemini API.
+Gemini Deep Research エージェントには、Google AI Studio の Interactions API と Gemini API を使用してアクセスできます。
 
-تتّبع الأسعار [نموذج الدفع حسب الاستخدام](https://ai.google.dev/gemini-api/docs/pricing?hl=ar#pricing-for-agents) استنادًا إلى نماذج Gemini الأساسية والأدوات المحدّدة التي يستخدمها الوكيل. على عكس طلبات المحادثة العادية التي تؤدي إلى نتيجة واحدة، فإنّ مهمة Deep Research هي سير عمل قائم على الوكالة. يؤدي طلب واحد إلى تشغيل حلقة مستقلة من التخطيط والبحث والقراءة والاستنتاج.
+料金は、基盤となる Gemini モデルとエージェントが使用する特定のツールに基づく[従量課金制モデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)です。リクエストが 1
+つの出力につながる標準のチャット リクエストとは異なり、Deep Research タスクはエージェント型ワークフローです。1
+つのリクエストで、計画、検索、読み取り、推論の自律的なループがトリガーされます。
 
-### التكاليف المقدَّرة
+### 推定費用
 
-تختلف التكاليف حسب مدى تفصيل البحث المطلوب. يحدّد الوكيل بشكل مستقل مقدار القراءة والبحث اللازمَين للإجابة عن طلبك.
+費用は、必要な調査の深さによって異なります。エージェントは、プロンプトに回答するために必要な読み取りと検索の量を自律的に決定します。
 
-- **‫Deep Research** (`deep-research-preview-04-2026`): بالنسبة إلى طلب بحث نموذجي يتطلّب تحليلًا معتدلاً، قد يستخدم الوكيل حوالي 80 طلب بحث و250 ألف رمز مميز للإدخال (يتم تخزين حوالي %50 إلى %70 منها مؤقتًا) و60 ألف رمز مميز للإخراج.
-  - **الإجمالي المقدّر:** من 1.00 إلى 3.00 دولار أمريكي لكل مهمة
-- **‫Deep Research Max** (`deep-research-max-preview-04-2026`): لإجراء تحليل معمّق للمشهد التنافسي أو العناية الواجبة الشاملة، قد يستخدم الوكيل ما يصل إلى 160 طلب بحث و900 ألف رمز مميز للإدخال (يتم تخزين %50 إلى %70 منها مؤقتًا) و80 ألف رمز مميز للإخراج.
-  - **الإجمالي المقدّر:** من 3.00 إلى 7.00 دولار أمريكي لكل مهمة
+- **Deep Research** （`deep-research-preview-04-2026`）: 中程度の分析が必要な一般的なクエリの場合、エージェントは ~80 件の検索クエリ、~25 万個の入力トークン（~50 ～ 70% がキャッシュ）、~6 万個の出力トークンを使用する可能性があります。
+  - **合計:** 1 タスクあたり ~$1.00 ～$3.00
+- **Deep Research Max** （`deep-research-max-preview-04-2026`）: 競合状況の詳細な分析や広範なデュー デリジェンスの場合、エージェントは最大で ~160 件の検索クエリ、~90 万個の入力トークン（~50 ～ 70% がキャッシュ）、~8 万個の出力トークンを使用する可能性があります。
+  - **合計:** 1 タスクあたり ~$3.00 ～$7.00
 
-## اعتبارات السلامة
+## 安全上の考慮事項
 
-يتطلّب منح أحد العملاء إذن الوصول إلى الويب وملفاتك الخاصة مراعاة دقيقة لمخاطر الأمان.
+エージェントにウェブや非公開ファイルへのアクセスを許可する場合は、安全上のリスクを慎重に検討する必要があります。
 
-- **حقن الطلبات باستخدام الملفات:** يقرأ الوكيل محتوى الملفات التي تقدّمها. تأكَّد من أنّ المستندات التي تم تحميلها (ملفات PDF وملفات نصية) واردة من مصادر موثوقة. قد يحتوي ملف ضار على نص مخفي مصمّم للتلاعب بمخرجات الوكيل.
-- **مخاطر المحتوى على الويب:** يبحث الوكيل في شبكة الويب المتاحة للجميع. على الرغم من أنّنا نطبّق فلاتر أمان قوية، هناك خطر من أن يواجه الوكيل صفحات ويب ضارة ويعالجها. ننصحك بمراجعة `citations` الواردة
-  في الردّ للتأكّد من المصادر.
-- **استخراج البيانات:** توخَّ الحذر عند الطلب من الوكيل تلخيص بيانات داخلية حساسة إذا كنت تسمح له أيضًا بتصفّح الويب.
+- **ファイルを使用したプロンプト インジェクション:** エージェントは、提供されたファイルの内容を読み取ります。アップロードされたドキュメント（PDF、テキスト ファイル）が信頼できるソースからのものであることを確認してください。悪意のあるファイルには、エージェントの出力を操作するように設計された隠しテキストが含まれている可能性があります。
+- **ウェブ コンテンツのリスク:** エージェントは公開ウェブを検索します。堅牢な安全フィルタを実装していますが、エージェントが悪意のあるウェブページに遭遇して処理するリスクがあります。レスポンスで提供される `citations` を確認して、ソースを検証することをおすすめします。
+- **データ漏洩:** エージェントにウェブの閲覧を許可している場合は、機密性の高い内部データの要約をリクエストする際に注意してください。
 
-## أفضل الممارسات
+## ベスト プラクティス
 
-- **طلب معلومات غير معروفة:** يمكنك توجيه الوكيل بشأن كيفية التعامل مع البيانات المفقودة.
-  على سبيل المثال، أضِف *"إذا لم تتوفّر أرقام محدّدة لعام 2025،
-  اذكر بوضوح أنّها توقّعات أو غير متوفّرة بدلاً من
-  تقديرها"* إلى طلبك.
-- **توفير السياق:** يمكنك توجيه بحث الوكيل من خلال تقديم معلومات أساسية أو قيود مباشرةً في طلب الإدخال.
-- **استخدام التخطيط التعاوني:** بالنسبة إلى طلبات البحث المعقّدة، فعِّل التخطيط التعاوني لمراجعة خطة البحث وتحسينها قبل تنفيذها.
-- **إدخالات متعددة الوسائط:** يتيح Deep Research Agent إدخالات متعددة الوسائط.
-  استخدِم هذه الميزة بحذر، لأنّها تزيد التكاليف وتزيد من خطر تجاوز قدرة الاستيعاب.
+- **不明な情報のプロンプト:** 不足しているデータの処理方法をエージェントに指示します。
+  たとえば、プロンプトに*「2025 年の具体的な数値が利用できない場合は、
+  推定するのではなく、予測または利用できないことを
+  明示的に示す」*を追加します。
+- **コンテキストを提供する:** 入力プロンプトで背景情報や制約を直接指定して、エージェントの調査をグラウンディングします。
+- **共同計画を使用する:** 複雑なクエリの場合は、共同計画を有効にして、実行前にリサーチプランを確認して修正します。
+- **マルチモーダル入力:** Deep Research エージェントはマルチモーダル入力をサポートしています。
+  費用が増加し、コンテキスト ウィンドウのオーバーフローのリスクが高まるため、慎重に使用してください。
 
-## القيود
+## 制限事項
 
-- **حالة الإصدار التجريبي**: تتوفّر Interactions API في إصدار تجريبي عام. قد تتغيّر الميزات والمخططات.
-- **أدوات مخصّصة:** لا يمكنك حاليًا توفير أدوات مخصّصة لاستخدامها مع "استدعاء الدوال"، ولكن يمكنك استخدام خوادم MCP (بروتوكول سياق النموذج) عن بُعد مع وكيل "البحث العميق".
-- **الناتج المنظَّم:** لا يتيح Deep Research Agent حاليًا
-  الناتج المنظَّم.
-- **الحد الأقصى لمدة البحث:** يبلغ الحد الأقصى لمدة البحث التي يمكن أن يستغرقها وكيل Deep Research‏ 60 دقيقة. من المفترض أن تكتمل معظم المهام في غضون 20 دقيقة.
-- **متطلبات المتجر:** يتطلّب تنفيذ الوكيل باستخدام `background=True` توفّر `store=True`.
-- **بحث Google:** تكون ميزة [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) مفعّلة تلقائيًا، وتسري [قيود محدّدة](https://ai.google.dev/gemini-api/terms?hl=ar#use-restrictions2) على النتائج المستندة إلى معلومات من العالم الحقيقي.
+- **カスタムツール:** 現在、カスタムの関数呼び出しツールを提供することはできませんが、Deep Research エージェントでリモート MCP（Model Context Protocol）サーバーを使用できます。
+- **構造化出力:** Deep Research エージェントは現在、構造化出力をサポートしていません。
+- **最大調査時間:** Deep Research エージェントの最大調査時間は 60 分です。ほとんどのタスクは 20 分以内に完了します。
+- **ストアの要件:** `background=True` を使用したエージェントの実行には `store=True` が必要です。
+- **Google 検索:** [Google
+  検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)はデフォルトで有効になっており、[グラウンディングされた結果には
+  特定の](https://ai.google.dev/gemini-api/terms?hl=ja#use-restrictions2)
+  制限が適用されます。
 
-## الخطوات التالية
+## 次のステップ
 
-- [مزيد من المعلومات حول Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=ar)
-- جرِّب [Deep Research في كتاب وصفات Gemini API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Deep_Research.ipynb?hl=ar).
-- تعرَّف على كيفية استخدام بياناتك الخاصة باستخدام أداة [البحث في الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar).
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の詳細について学習する。
+- [ファイル検索ツールを使用して独自のデータを使用する方法を学習する。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
 
-إرسال ملاحظات
+フィードバックを送信
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)
+最終更新日 2026-06-26 UTC。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+ご意見をお聞かせください
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-04-29 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-26 UTC。"],[],[]]

@@ -1,57 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=pt-BR
-fetched_at: 2026-06-22T06:32:28.214147+00:00
-title: "Bibliotecas da API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=he
+fetched_at: 2026-06-29T05:28:20.472508+00:00
+title: "\u05e1\u05e4\u05e8\u05d9\u05d5\u05ea Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-O [Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) já está disponível em pré-lançamento com planejamento colaborativo, visualização, suporte a MCP e muito mais.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Envie comentários
+שליחת משוב
 
-# Bibliotecas da API Gemini
+# ספריות Gemini API
 
-Ao criar com a API Gemini, recomendamos usar o **SDK da IA generativa do Google**.
-Essas são as bibliotecas oficiais e prontas para produção que desenvolvemos e mantemos
-para as linguagens mais usadas. Eles estão em [Disponibilidade geral](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br#new-libraries) e são usados em toda a nossa documentação e exemplos oficiais.
+כשמפתחים באמצעות Gemini API, מומלץ להשתמש ב-**Google GenAI SDK**.
+אלה ספריות רשמיות שמוכנות לשימוש בסביבת ייצור, שאנחנו מפתחים ומתחזקים עבור השפות הפופולריות ביותר. הם נמצאים ב[זמינות כללית](https://ai.google.dev/gemini-api/docs/libraries?hl=he#new-libraries) ומשמשים בכל הדוגמאות והמסמכים הרשמיים שלנו.
 
-Se você nunca usou a API Gemini, siga nosso [guia de início rápido](https://ai.google.dev/gemini-api/docs/quickstart?hl=pt-br) para começar.
+אם זו הפעם הראשונה שאתם משתמשים ב-Gemini API, כדאי לעיין ב[מדריך לתחילת העבודה](https://ai.google.dev/gemini-api/docs/get-started?hl=he).
 
-## Suporte e instalação de idiomas
+## שפות נתמכות והתקנה
 
-O SDK da IA generativa do Google está disponível para as linguagens Python, JavaScript/TypeScript, Go e
-Java. É possível instalar a biblioteca de cada linguagem usando gerenciadores de pacotes ou acessar os repositórios do GitHub para mais informações:
+‫Google GenAI SDK זמין לשפות Python, ‏ JavaScript/TypeScript, ‏ Go ו-Java. אפשר להתקין את הספרייה של כל שפה באמצעות מנהלי חבילות, או להיכנס למאגרי GitHub שלהן כדי לקבל מידע נוסף:
 
 ### Python
 
-- Biblioteca: [`google-genai`](https://pypi.org/project/google-genai)
-- Repositório do GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
-- Instalação: `pip install google-genai`
+- ספרייה: [`google-genai`](https://pypi.org/project/google-genai)
+- מאגר GitHub: ‏ [googleapis/python-genai](https://github.com/googleapis/python-genai)
+- התקנה: `pip install google-genai`
 
 ### JavaScript
 
-- Biblioteca: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
-- Repositório do GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
-- Instalação: `npm install @google/genai`
+- ספרייה: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
+- מאגר GitHub: ‏ [googleapis/js-genai](https://github.com/googleapis/js-genai)
+- התקנה: `npm install @google/genai`
 
 ### Go
 
-- Biblioteca: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
-- Repositório do GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
-- Instalação: `go get google.golang.org/genai`
+- ספרייה: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
+- מאגר GitHub: ‏ [googleapis/go-genai](https://github.com/googleapis/go-genai)
+- התקנה: `go get google.golang.org/genai`
 
 ### Java
 
-- Biblioteca: `google-genai`
-- Repositório do GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
-- Instalação: se você estiver usando o Maven, adicione o seguinte às dependências:
+- ספרייה: `google-genai`
+- מאגר GitHub: ‏ [googleapis/java-genai](https://github.com/googleapis/java-genai)
+- התקנה: אם משתמשים ב-Maven, מוסיפים את הקוד הבא ליחסי התלות:
 
 ```
 <dependencies>
@@ -63,51 +61,45 @@ Java. É possível instalar a biblioteca de cada linguagem usando gerenciadores 
 </dependencies>
 ```
 
-### C#
+### C#‎
 
-- Biblioteca: `Google.GenAI`
-- Repositório do GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
-- Instalação: `dotnet add package Google.GenAI`
+- ספרייה: `Google.GenAI`
+- מאגר GitHub: ‏ [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
+- התקנה: `dotnet add package Google.GenAI`
 
-## Disponibilidade geral
+## זמינות לכלל המשתמשים (GA)
 
-Em maio de 2025, o SDK da IA generativa do Google atingiu a disponibilidade geral (GA) em
-todas as plataformas compatíveis e é a biblioteca recomendada para acessar a API Gemini.
-Elas são estáveis, têm suporte total para uso em produção e são mantidas ativamente.
-Eles oferecem acesso aos recursos mais recentes e a melhor performance ao trabalhar com o Gemini.
+החל ממאי 2025, ערכת Google GenAI SDK זמינה לכלל המשתמשים (GA) בכל הפלטפורמות הנתמכות, והיא הספרייה המומלצת לגישה ל-Gemini API.
+הן יציבות, נתמכות באופן מלא לשימוש בשלב הייצור ומתעדכנות באופן פעיל.
+הם מספקים גישה לתכונות העדכניות ביותר ומציעים את הביצועים הטובים ביותר בעבודה עם Gemini.
 
-Se você estiver usando uma das nossas bibliotecas legadas,
-recomendamos migrar para ter acesso aos recursos mais recentes e
-aproveitar o melhor desempenho ao trabalhar com o Gemini. Consulte a seção [bibliotecas legadas](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br#previous-sdks) para mais informações.
+אם אתם משתמשים באחת מהספריות מדור קודם שלנו, מומלץ מאוד לבצע מיגרציה כדי שתוכלו לגשת לתכונות העדכניות ביותר וליהנות מהביצועים הטובים ביותר בעבודה עם Gemini. מידע נוסף זמין בקטע בנושא [ספריות מדור קודם](https://ai.google.dev/gemini-api/docs/libraries?hl=he#previous-sdks).
 
-## Bibliotecas legadas e migração
+## ספריות קודמות והעברה
 
-Se você estiver usando uma das nossas bibliotecas legadas, recomendamos que
-[migre para as novas bibliotecas](https://ai.google.dev/gemini-api/docs/migrate?hl=pt-br).
+אם אתם משתמשים באחת מהספריות הקודמות שלנו, מומלץ [לעבור לספריות החדשות](https://ai.google.dev/gemini-api/docs/migrate?hl=he).
 
-As bibliotecas legadas não oferecem acesso a recursos recentes, como a [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) e o [Veo](https://ai.google.dev/gemini-api/docs/video?hl=pt-br), e serão descontinuadas em 30 de novembro de 2025.
+הספריות מדור קודם לא מספקות גישה לתכונות חדשות (כמו [Live API](https://ai.google.dev/gemini-api/docs/live?hl=he) ו-[Veo](https://ai.google.dev/gemini-api/docs/video?hl=he)), והן יוצאו משימוש החל מ-30 בנובמבר 2025.
 
-O status de suporte de cada biblioteca legada varia, conforme detalhado na tabela a seguir:
+סטטוס התמיכה של כל ספרייה מהדור הקודם משתנה, והוא מפורט בטבלה הבאה:
 
-| Idioma | Biblioteca legada | Status de compatibilidade | Biblioteca recomendada |
+| שפה | ספרייה מדור קודם | סטטוס התמיכה | ספרייה מומלצת |
 | --- | --- | --- | --- |
-| **Python** | `google-generativeai` | Não mantido ativamente | `google-genai` |
-| **JavaScript/TypeScript** | `@google/generativeai` | Não é mantido ativamente | `@google/genai` |
-| **Go** | `google.golang.org/generative-ai` | Não é mantido ativamente | `google.golang.org/genai` |
-| **Dart e Flutter** | `google_generative_ai` | Não mantido ativamente | Use o [Genkit Dart](https://genkit.dev/docs/dart/get-started/) ou o [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
-| **Swift** | `generative-ai-swift` | Não é mantido ativamente | Usar o [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=pt-br) |
-| **Android** | `generative-ai-android` | Não mantido ativamente | Usar o [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=pt-br) |
+| **Python** | `google-generativeai` | לא מתבצע תחזוקה פעילה | `google-genai` |
+| ‫**JavaScript/TypeScript** | `@google/generativeai` | לא מתבצע תחזוקה פעילה | `@google/genai` |
+| **Go** | `google.golang.org/generative-ai` | לא מתבצע תחזוקה פעילה | `google.golang.org/genai` |
+| **Dart ו-Flutter** | `google_generative_ai` | לא מתבצע תחזוקה פעילה | משתמשים ב-[Genkit Dart](https://genkit.dev/docs/dart/get-started/) או ב-[Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
+| **Swift** | `generative-ai-swift` | לא מתבצע תחזוקה פעילה | שימוש ב-[Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=he) |
+| **Android** | `generative-ai-android` | לא מתבצע תחזוקה פעילה | שימוש ב-[Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=he) |
 
-**Observação para desenvolvedores Java**:não havia um SDK Java legado fornecido pelo Google para a API Gemini. Portanto, não é necessário migrar de uma biblioteca anterior do Google. Você
-pode começar diretamente com a nova biblioteca na seção
-[Suporte a idiomas e instalação](#install).
+**הערה למפתחי Java:** לא הייתה גרסה קודמת של Java SDK שסופקה על ידי Google ל-Gemini API, ולכן לא נדרש מעבר מספרייה קודמת של Google. אפשר להתחיל ישירות עם הספרייה החדשה בקטע [תמיכה בשפות והתקנה](#install).
 
-Envie comentários
+שליחת משוב
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Última atualização 2026-05-28 UTC.
+עדכון אחרון: 2026-06-22 (שעון UTC).
 
-Quer enviar seu feedback?
+רוצה לתת לנו משוב?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-28 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-22 (שעון UTC)."],[],[]]

@@ -1,62 +1,62 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=he
-fetched_at: 2026-06-22T06:32:37.951513+00:00
-title: "\u05d4\u05d2\u05d3\u05e8\u05ea \u05e2\u05d5\u05d6\u05e8 \u05ea\u05db\u05e0\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Gemini MCP \u05d5-Skills \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-TW
+fetched_at: 2026-06-29T05:29:31.043756+00:00
+title: "\u4f7f\u7528 Gemini MCP \u548c Skills \u8a2d\u5b9a\u7a0b\u5f0f\u8a2d\u8a08\u52a9\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) זמין עכשיו בתצוגה מקדימה עם תכונות כמו תכנון שיתופי, ויזואליזציה, תמיכה ב-MCP ועוד.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-שליחת משוב
+提供意見
 
-# הגדרת עוזר תכנות באמצעות Gemini MCP ו-Skills
+# 使用 Gemini MCP 和 Skills 設定程式設計助理
 
-עוזרים מבוססי-AI לכתיבת קוד הם כלים יעילים, אבל יש להם מגבלות – נתוני האימון שלהם מוגבלים לתאריך מסוים, ולכן הם לא כוללים תכונות ושינויים חדשים בממשקי API. ללא גישה למסמכים ספציפיים ל-Gemini, יכול להיות שהסוכנים יציעו דפוסים כלליים במקום גישות אופטימליות.
+AI 程式碼輔助功能雖然強大，但仍有其限制，例如訓練資料會在特定日期截止，因此無法提供新的 API 功能和變更。如果無法存取 Gemini 專屬文件，服務專員可能會建議一般模式，而非最佳化方法。
 
-כדי שהעוזר האישי לתכנות יהיה מעודכן ב-Gemini API המתפתח ובשימוש המומלץ בו, מומלץ להגדיר את **Gemini Docs MCP** ולשפר את הסביבה באמצעות **Gemini API Skills**. אפשר להשתמש בכל אחד מהכלים האלה בנפרד, אבל הם נועדו לעבוד יחד כדי לספק כיסוי מלא.
+為確保程式設計助理能跟上不斷演進的 Gemini API 和建議用法，建議您設定 **Gemini 文件 MCP**，並使用 **Gemini API 技能**強化環境。這些工具可獨立使用，但設計宗旨是搭配運作，提供完整涵蓋範圍。
 
-## חיבור Gemini Docs MCP
+## 連結 Gemini Docs MCP
 
-‫Gemini מארח שרת Model Context Protocol‏ (MCP) ציבורי בכתובת `https://gemini-api-docs-mcp.dev`. חיבור סוכן התכנות לשרת הזה מבטיח שלכל השאילתות תהיה גישה לממשקי ה-API העדכניים, לעדכוני הקוד ולדוגמאות אופטימליות להגדרות.
+Gemini 會在 `https://gemini-api-docs-mcp.dev`代管公開的 Model Context Protocol (MCP) 伺服器。將程式碼編寫代理程式連線至這個伺服器，可確保所有查詢都能存取最新的 API、程式碼更新和最佳設定範例。
 
-כדי להתקין את השרת, מריצים את הפקודה הבאה בטרמינל של הסוכן או בשורש הפרויקט:
+在代理程式的終端機或專案根目錄中執行下列指令，安裝伺服器：
 
 ```
 npx add-mcp "https://gemini-api-docs-mcp.dev"
 ```
 
-השרת הזה מוסיף פונקציה `search_documentation` שהסוכן יכול להשתמש בה כדי לאחזר הגדרות API ודפוסי שילוב בזמן אמת מקובצי התיעוד הרשמיים של Gemini.
+這個伺服器會新增 `search_documentation` 函式，讓代理程式從官方 Gemini 說明文件檔案擷取即時 API 定義和整合模式。
 
-## הוספת מיומנויות פיתוח API
+## 新增 API 開發技能
 
-הכישורים מספקים **כללים ושיטות מומלצות מובנים** (כמו אכיפה של גרסאות ה-SDK והמודל הנכונות) ישירות בהקשר של העוזר הדיגיטלי. היכולת פועלת יחד עם שירות ה-MCP של Gemini Docs: אם התקנתם את שניהם, היכולת משתמשת בשירות ה-MCP לתיעוד, אבל גם אם לא התקנתם את ה-MCP, היא תאחזר את `llms.txt` מ-`ai.google.dev` כחלופה.
+技能會直接在助理的環境中提供**內建規則和最佳做法** (例如強制使用正確的 SDK 和目前模型版本)，這項技能會與 Gemini Docs MCP 服務搭配運作：如果兩者都已安裝，這項技能會使用 MCP 服務取得說明文件；即使未安裝 MCP，這項技能也會從 `ai.google.dev` 擷取 `llms.txt` 做為備援。
 
-כדי להתקין את המיומנויות האלה, אפשר להשתמש באחד מהכלים הנתמכים הבאים. הוראות ההתקנה של שניהם מופיעות מתחת לכל מודול מיומנות:
+如要安裝這些技能，可以使用下列任一支援的工具。每個技能模組下方都有安裝說明：
 
-- ‫**[skills.sh](https://skills.sh)**: מומלץ. התקן הפתוח להתנהגויות ניידות של סוכנים.
-- ‫**[Context7](https://context7.com)**: נתמך עבור משתמשים שכבר משתמשים במערכת האקולוגית של Context7.
+- **[skills.sh](https://skills.sh)**：建議使用。可攜式代理程式行為的開放標準。
+- **[Context7](https://context7.com)**：支援已使用 Context7 生態系統的使用者。
 
 ### gemini-api-dev
 
-מיומנות בסיסית לפיתוח ב-Gemini למטרות כלליות. במאמר הזה מפורטות שיטות מומלצות וקישורים למסמכים בנושאים הבאים:
+這是開發一般用途 Gemini 應用程式的基礎技能。這項技能提供下列項目的文件和最佳做法：
 
-- ניתוב הנחיות למודלים עדכניים (לדוגמה, Gemini 3.1 Pro/Flash) והימנעות ממודלים שיצאו משימוש
-- כתיבת הנחיות מולטי-מודאליות, שימוש בפונקציות, פלט מובנה ודפוסי שילוב נפוצים
+- 將提示詞傳送至目前模型 (例如 Gemini 3.1 Pro/Flash)，並避開已淘汰的模型
+- 多模態提示、函式呼叫、結構化輸出內容和常見的整合模式
 
-#### התקנה באמצעות skills.sh
+#### 使用 skills.sh 安裝
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev --global
 ```
 
-#### הטמעה באמצעות Context7
+#### 使用 Context7 安裝
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-api-dev
@@ -64,19 +64,19 @@ npx ctx7 skills install /google-gemini/gemini-skills gemini-api-dev
 
 ### gemini-live-api-dev
 
-מיומנות בפיתוח אפליקציות AI בממשק שיחה בזמן אמת באמצעות Gemini Live API. במאמר הזה מפורטות שיטות מומלצות וקישורים למסמכים בנושאים הבאים:
+這項技能可協助您使用 Gemini Live API 建構即時對話式 AI 應用程式。這項技能提供下列項目的文件和最佳做法：
 
-- חיבורי WebSocket לסטרימינג עם השהיה נמוכה
-- סטרימינג של אודיו, וידאו וטקסט
-- זיהוי פעילות קולית ותמיכה בהתפרצות לשיחה
+- 用於低延遲串流的 WebSocket 連線
+- 串流音訊、影片和文字
+- 語音活動偵測和插話支援
 
-#### התקנה באמצעות skills.sh
+#### 使用 skills.sh 安裝
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-live-api-dev --global
 ```
 
-#### הטמעה באמצעות Context7
+#### 使用 Context7 安裝
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-live-api-dev
@@ -84,87 +84,87 @@ npx ctx7 skills install /google-gemini/gemini-skills gemini-live-api-dev
 
 ### gemini-interactions-api
 
-מיומנות בפיתוח אפליקציות באמצעות [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he). ‫Interactions API הוא ממשק מאוחד לאינטראקציה עם מודלים וסוכנים של Gemini, שמיועד לאפליקציות שמבוססות על סוכנים. המיומנות הזו כוללת:
+使用 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 建構應用程式的技能。Interactions API 是與 Gemini 模型和代理互動的統一介面，專為代理應用程式設計。這項技能涵蓋的主題包括：
 
-- יצירת טקסט, שיחה עם זיכרון וסטרימינג
-- בקשה להפעלת פונקציה, פלט מובנה ויצירת תמונות
-- ביצוע ברקע וסוכני Deep Research
-- ניהול מצב השיחה בצד השרת
-- דפוסי SDK ב-Python וב-TypeScript
+- 生成文字、進行多輪對話及串流
+- 函式呼叫、結構化輸出內容和圖像生成
+- 背景執行和 Deep Research 代理
+- 伺服器端對話狀態管理
+- Python 和 TypeScript SDK 模式
 
-#### התקנה באמצעות skills.sh
+#### 使用 skills.sh 安裝
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
 ```
 
-#### הטמעה באמצעות Context7
+#### 使用 Context7 安裝
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-interactions-api
 ```
 
-## אימות התקנה
+## 驗證安裝
 
-אחרי ההתקנה, צריך לוודא שעוזר התכנות יכול להתחבר לשרת ה-MCP של Gemini Docs ולהשתמש במיומנויות שהתקנתם.
+安裝完成後，請確認程式碼輔助工具可以連線至 Gemini Docs MCP 伺服器，並使用您安裝的技能。
 
-### 1. אימות התנהגות הנציג
+### 1. 驗證服務專員行為
 
-הדרך הכי אמינה לאמת היא לשאול את הנציג שאלה טכנית לגבי Gemini API.
+如要驗證，最可靠的方式是向服務專員詢問有關 Gemini API 的技術問題。
 
-**הנחיה:** "איך משתמשים בשמירת מטמון של הקשר עם Gemini API?"
+**提示：**「如何使用 Gemini API 的脈絡快取功能？」
 
-הגדרה מוצלחת תאפשר לכם:
+設定成功後，系統會：
 
-- **מספקים קוד מדויק**: מפנים לשיטות ספציפיות של Gemini כמו `cacheContent` או `cachedContents.create` מנקודות הקצה העדכניות.
-- **שימוש בכלי MCP**: צריך להראות שהוא מחובר ל**שרת ה-MCP של Gemini Docs** או שהוא משתמש בכלי `search_documentation` כדי לאחזר נתונים.
-- **הפעלת מיומנויות שנטענו**: הצגת אינדיקטור של 'שימוש במיומנות: gemini-api-dev' (אם מסתמכים על wrapper משני).
+- **提供準確的程式碼**：從最新端點參照特定 Gemini 方法，例如 `cacheContent` 或 `cachedContents.create`。
+- **使用 MCP 工具**：顯示工具已連線至 **Gemini 文件 MCP 伺服器**，或使用 `search_documentation` 工具擷取資料。
+- **叫用已載入的技能**：顯示「使用技能：gemini-api-dev」指標 (如果依附於次要包裝函式)。
 
-### 2. אימות המניפסטים והכלים
+### 2. 驗證表現和工具
 
-אם הסוכן נותן תשובה כללית או גנרית, משתמשים בפקודות הספציפיות Discovery או Status עבור הסביבה שלכם כדי לוודא שה-Docs MCP או המיומנות נטענו לזיכרון.
+如果代理程式提供一般或通用答案，請使用環境專用的 Discovery 或 Status 指令，確認 Docs MCP 或技能已載入記憶體。
 
-| סביבה | אימות MCP | אימות כישורים |
+| 環境 | MCP 驗證 | 技能驗證 |
 | --- | --- | --- |
-| **Claude Code** | מקלידים `/mcp` בטרמינל כדי לראות את השרתים הפעילים ואת כלי `search_documentation`. | מקלידים `/skills` במסוף כדי לראות רשימה של כל קובצי המניפסט הפעילים. |
-| **Cursor** | עוברים אל **הגדרות > תכונות > MCP**. מוודאים שהשרת מחובר. | פותחים את **ההגדרות > כללים**. מוודאים שהמיומנות מופיעה בקטע 'הסוכן מחליט'. |
-| **Antigravity** | בודקים את סטטוס ה-MCP בסרגל הצד **התאמות אישיות > חיבורים**. | מקלידים `/skills list` או מסמנים את סרגל הצד **התאמות אישיות > כללים**. |
-| ‫**Gemini CLI** | מריצים את `gemini mcp list` או משתמשים ב-`/mcp list`. | מריצים את הפקודה `gemini skills list` או משתמשים בפקודה דרך שורת הפקודות `/skills` במהלך הפגישה. |
-| **Copilot** | מקלידים `@gemini /mcp` כדי לראות רשימה של מחברים פעילים לנתונים. | מקלידים `@gemini /skills` (או `/skills`) כדי לראות את התוספים הפעילים. |
+| **Claude Code** | 在終端機中輸入 `/mcp`，即可查看有效伺服器和 `search_documentation` 工具。 | 在終端機中輸入 `/skills`，即可列出所有有效資訊清單。 |
+| **游標** | 依序前往「設定」>「功能」>「MCP」。確認伺服器已「連線」。 | 依序開啟「設定」>「規則」。確認技能是否顯示在「Agent Decides」下方。 |
+| **Antigravity** | 檢查「自訂」>「連結」側欄中的 MCP 狀態。 | 輸入 `/skills list` 或查看「自訂」>「規則」側欄。 |
+| **Gemini CLI** | 執行 `gemini mcp list` 或使用 `/mcp list`。 | 執行 `gemini skills list` 或在工作階段中使用 `/skills` 斜線指令。 |
+| **Copilot** | 輸入 `@gemini /mcp` 即可列出有效的資料連接器。 | 輸入 `@gemini /skills` (或 `/skills`) 即可查看有效擴充功能。 |
 
-## פתרון בעיות
+## 疑難排解
 
-אם הסוכן שלכם מספק רק מידע כללי או לא מזהה שיטות ספציפיות ל-Gemini, כדאי לבדוק את הדברים הבאים:
+如果代理程式只提供一般資訊，或無法辨識 Gemini 專屬方法，請檢查下列事項：
 
-### הסוכן לא זיהה את המיומנות
+### 代理程式未探索到技能
 
-רוב הסוכנים מוסיפים לאינדקס את הכישורים רק בהפעלה.
+大多數代理程式只會在啟動時為技能建立索引。
 
-**תיקון:** מפעילים מחדש את סביבת הפיתוח המשולבת (IDE) (Cursor/VS Code) או יוצאים מהסוכן מבוסס-הטרמינל (Claude Code) ופותחים אותו מחדש.
+**修正方式：**完全重新啟動 IDE (Cursor/VS Code)，或結束並重新開啟終端機型代理程式 (Claude Code)。
 
-### סכסוך גלובלי לעומת סכסוך מקומי
+### 全球與區域衝突
 
-אם התקנתם באמצעות הדגל `--global`, יכול להיות שהסוכן מתעלם ממנו לטובת כללים ספציפיים לפרויקט.
+如果您使用 `--global` 旗標安裝代理程式，代理程式可能會忽略該旗標，改用專案專屬規則。
 
-**פתרון:** נסו להתקין את היכולת ישירות בתיקיית הבסיס של הפרויקט בלי הדגל global:
+**修正：**嘗試直接將技能安裝到專案根目錄，不要使用全域標記：
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev
 ```
 
-## משאבים
+## 資源
 
-- [מיומנויות של Gemini API ב-GitHub](https://github.com/google-gemini/gemini-skills)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=he)
-- [מדריך למתחילים](https://ai.google.dev/gemini-api/docs/quickstart?hl=he)
-- [ספריות](https://ai.google.dev/gemini-api/docs/libraries?hl=he)
+- [GitHub 上的 Gemini API 技能](https://github.com/google-gemini/gemini-skills)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw)
+- [開始使用](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-tw)
+- [程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)
 
-שליחת משוב
+提供意見
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-עדכון אחרון: 2026-06-19 (שעון UTC).
+上次更新時間：2026-06-22 (世界標準時間)。
 
-רוצה לתת לנו משוב?
+想進一步說明嗎？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-19 (שעון UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-22 (世界標準時間)。"],[],[]]

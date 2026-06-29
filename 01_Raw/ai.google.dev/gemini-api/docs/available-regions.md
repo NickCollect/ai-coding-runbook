@@ -1,276 +1,274 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=es-419
-fetched_at: 2026-06-22T06:25:13.969418+00:00
-title: "Regiones disponibles para Google AI Studio y la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/available-regions?hl=hi
+fetched_at: 2026-06-29T05:40:27.658820+00:00
+title: "Google AI Studio \u0914\u0930 Gemini API \u0915\u0947 \u0932\u093f\u090f \u0909\u092a\u0932\u092c\u094d\u0927 \u091c\u0917\u0939\u0947\u0902 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) ya está disponible en versión preliminar con planificación colaborativa, visualización, compatibilidad con MCP y mucho más.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Enviar comentarios
+सुझाव भेजें
 
-# Regiones disponibles para Google AI Studio y la API de Gemini
+# Google AI Studio और Gemini API के लिए उपलब्ध जगहें
 
-Si llegaste a esta página mientras intentabas acceder a [Google AI Studio](https://aistudio.google.com/?hl=es-419), es posible que se
-deba a uno de los siguientes motivos:
+अगर आपको [Google AI Studio](https://aistudio.google.com/?hl=hi) को ऐक्सेस करते समय यह पेज दिख रहा है, तो इसकी वजह इनमें से कोई एक हो सकती है:
 
-- **Restricciones regionales**: Google AI Studio no está disponible en tu región. Consulta la sección a continuación para obtener una lista de las regiones admitidas.
-- **Requisitos de edad**: No cumples con el requisito de edad mínima (18 años) para acceder a este servicio.
-- **Verificación de cuenta**: Es posible que tengas acceso al servicio, pero aún no [verificaste tu edad](https://support.google.com/accounts/answer/10071085?hl=es-419) en tu Cuenta de Google.
+- **देश/इलाके के हिसाब से पाबंदियां**: Google AI Studio आपके देश/इलाके में उपलब्ध नहीं है. इस सुविधा का इस्तेमाल करने वाले देशों/इलाकों की सूची देखने के लिए, यहां दिया गया सेक्शन देखें.
+- **उम्र से जुड़ी ज़रूरी शर्तें**: इस सेवा को ऐक्सेस करने के लिए, आपकी उम्र 18 साल या उससे ज़्यादा होनी चाहिए.
+- **खाते की पुष्टि**: ऐसा हो सकता है कि आपके पास सेवा का ऐक्सेस हो, लेकिन आपने अब तक अपने Google खाते में [अपनी उम्र की पुष्टि](https://support.google.com/accounts/answer/10071085?hl=hi) न की हो.
 
-Para obtener más detalles sobre los requisitos, consulta nuestras [Condiciones del Servicio](https://ai.google.dev/gemini-api/terms?hl=es-419).
+ज़रूरी शर्तों के बारे में ज़्यादा जानने के लिए, [सेवा की शर्तें](https://ai.google.dev/gemini-api/terms?hl=hi) देखें.
 
-## Regiones disponibles
+## उपलब्ध क्षेत्र
 
-.
+का इस्तेमाल करके, **Colab इंस्टेंस** की लोकेशन देखी जा सकती है
 
-La API de Gemini y Google AI Studio están disponibles en los siguientes países y territorios. Si no te encuentras en uno de estos países o territorios, prueba la
-[API de Gemini en Agent Platform de Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=es-419):
+Gemini API और Google AI Studio इन देशों और इलाकों में उपलब्ध हैं. अगर आप इनमें से किसी देश या इलाके में नहीं हैं, तो [Gemini Enterprise एजेंट प्लैटफ़ॉर्म में Gemini API](https://cloud.google.com/gemini-enterprise-agent-platform?hl=hi) का इस्तेमाल करें:
 
-- Albania
-- Argelia
-- Samoa Americana
-- Andorra
-- Angola
-- Anguila
-- Antártida
-- Antigua y Barbuda
-- Argentina
-- Armenia
-- Aruba
-- Australia
-- Austria
-- Azerbaiyán
-- Bahamas
-- Baréin
-- Bangladés
-- Barbados
-- Bélgica
-- Belice
-- Benín
-- Bermudas
-- Bután
-- Bolivia
-- Bosnia-Herzegovina
-- Botsuana
-- Brasil
-- Territorio Británico del Océano Índico
-- Islas Vírgenes Británicas
-- Brunéi
-- Bulgaria
-- Burkina Faso
-- Burundi
-- Cabo Verde
-- Camboya
-- Camerún
-- Canadá
-- Caribe Neerlandés
-- Islas Caimán
-- República Centroafricana
-- Chad
-- Chile
-- Isla de Navidad
-- Islas Cocos (Keeling)
-- Colombia
-- Comoras
-- Islas Cook
-- Costa Rica
-- Costa de Marfil
-- Croacia
-- Curazao
-- República Checa
-- República Democrática del Congo
-- Dinamarca
-- Yibuti
-- Dominica
-- República Dominicana
-- Ecuador
-- Egipto
-- El Salvador
-- Guinea Ecuatorial
-- Eritrea
-- Estonia
-- Esuatini
-- Etiopía
-- Islas Malvinas
-- Islas Feroe
-- Fiyi
-- Finlandia
-- Francia
-- Guayana Francesa
-- Gabón
-- Gambia
-- Georgia
-- Alemania
-- Ghana
-- Gibraltar
-- Grecia
-- Groenlandia
-- Granada
-- Guam
-- Guatemala
-- Guernsey
-- Guinea
-- Guinea-Bisáu
-- Guyana
-- Haití
-- Islas Heard y McDonald
-- Honduras
-- Hungría
-- Islandia
-- India
-- Indonesia
-- Irak
-- Irlanda
-- Isla de Man
-- Israel
-- Italia
-- Jamaica
-- Japón
-- Jersey
-- Jordania
-- Kazajistán
-- Kenia
-- Kiribati
-- Kosovo
-- Kuwait
-- Kirguistán
-- Laos
-- Letonia
-- Líbano
-- Lesoto
-- Liberia
-- Libia
-- Liechtenstein
-- Lituania
-- Luxemburgo
-- Madagascar
-- Malaui
-- Malasia
-- Maldivas
-- Mali
-- Malta
-- Islas Marshall
-- Mauritania
-- Mauricio
-- México
-- Micronesia
-- Moldavia
-- Mónaco
-- Mongolia
-- Montenegro
-- Montserrat
-- Marruecos
-- Mozambique
-- Namibia
-- Nauru
-- Nepal
-- Países Bajos
-- Nueva Caledonia
-- Nueva Zelanda
-- Nicaragua
-- Níger
-- Nigeria
-- Niue
-- Isla Norfolk
-- Macedonia del Norte
-- Islas Marianas del Norte
-- Noruega
-- Omán
-- Pakistán
-- Palaos
-- Palestina
-- Panamá
-- Papúa Nueva Guinea
-- Paraguay
-- Perú
-- Filipinas
-- Islas Pitcairn
-- Polonia
-- Portugal
-- Puerto Rico
-- Catar
-- República de Chipre
-- República del Congo
-- Rumania
-- Ruanda
-- Reunión
-- San Bartolomé
-- Santa Elena, Ascensión y Tristán de Acuña
-- San Cristóbal y Nieves
-- Santa Lucía
-- San Pedro y Miquelón
-- San Vicente y las Granadinas
-- Samoa
-- San Marino
-- Santo Tomé y Príncipe
-- Arabia Saudita
-- Senegal
-- Serbia
-- Seychelles
-- Sierra Leona
-- Singapur
-- Eslovaquia
-- Eslovenia
-- Islas Salomón
-- Somalia
-- Sudáfrica
-- Islas Georgias del Sur y Sándwich del Sur
-- Corea del Sur
-- Sudán del Sur
-- España
-- Sri Lanka
-- Sudán
-- Surinam
-- Suecia
-- Suiza
-- Taiwán
-- Tayikistán
-- Tanzania
-- Tailandia
-- Timor Oriental
-- Togo
-- Tokelau
-- Tonga
-- Trinidad y Tobago
-- Túnez
-- Turkmenistán
-- Islas Turcas y Caicos
-- Tuvalu
-- Türkiye
-- Uganda
-- Ucrania
-- Emiratos Árabes Unidos
-- Reino Unido
-- Estados Unidos
-- Islas Ultramarinas Menores de los Estados Unidos
-- Uruguay
-- Islas Vírgenes de los EE.UU.
-- Uzbekistán
-- Vanuatu
-- Ciudad del Vaticano
-- Venezuela
-- Vietnam
-- Wallis y Futuna
-- Sahara Occidental
-- Yemen
-- Zambia
-- Zimbabue
-- Islas Åland
+- अल्बानिया
+- अल्जीरिया
+- अमेरिकन समोआ
+- एंडोरा
+- अंगोला
+- एंग्विला
+- अंटार्कटिका
+- एंटीगुआ और बारबुडा
+- अर्जेंटीना
+- आर्मेनिया
+- अरूबा
+- ऑस्ट्रेलिया
+- ऑस्ट्रिया
+- अज़रबैजान
+- बहामा
+- बहरीन
+- बांग्लादेश
+- बारबाडोस
+- बेल्जियम
+- बेलीज़
+- बेनिन
+- बरमूडा
+- भूटान
+- बोलिविया
+- बोस्निया और हर्ज़ेगोविना
+- बोत्सवाना
+- ब्राज़ील
+- ब्रिटिश हिंद महासागरीय क्षेत्र
+- ब्रिटिश वर्जिन द्वीप समूह
+- ब्रुनेई
+- बुल्गारिया
+- बुर्किना फ़ासो
+- बुरूंडी
+- केप वर्ड
+- कंबोडिया
+- कैमरून
+- कनाडा
+- कैरेबियन नीदरलैंड्स
+- केमैन द्वीप समूह
+- मध्य अफ़्रीकी गणराज्य
+- चाड
+- चिली
+- क्रिसमस द्वीप
+- कोकोस (कीलिंग) द्वीप समूह
+- कोलंबिया
+- कोमोरोस
+- कुक द्वीप समूह
+- कोस्टा रिका
+- आइवरी कोस्ट
+- क्रोएशिया
+- कुराकाओ
+- चेक गणराज्य
+- कॉन्गो लोकतांत्रिक गणराज्य
+- डेनमार्क
+- जिबूती
+- डॉमिनिक
+- डॉमिनिकन रिपब्लिक
+- इक्वाडोर
+- मिस्र
+- अल सल्वाडोर
+- इक्वेटोरियल गिनी
+- इरिट्रिया
+- एस्टोनिया
+- एस्वातिनी
+- इथियोपिया
+- फ़ॉकलैंड द्वीप समूह (ईसलास माल्विनस)
+- फ़ैरो द्वीप समूह
+- फ़िजी
+- फ़िनलैंड
+- फ़्रांस
+- फ़्रेंच गियाना
+- गैबोन
+- गांबिया
+- जॉर्जिया
+- जर्मनी
+- घाना
+- जिब्राल्टर
+- ग्रीस
+- ग्रीनलैंड
+- ग्रेनाडा
+- गुआम
+- ग्वाटेमाला
+- गर्नज़ी
+- गिनी
+- गिनी-बिसाउ
+- गुयाना
+- हैती
+- हर्ड द्वीप और मैक्डॉनल्ड द्वीप समूह
+- होंडुरास
+- हंगरी
+- आइसलैंड
+- भारत
+- इंडोनेशिया
+- इराक
+- आयरलैंड
+- आइल ऑफ़ मैन
+- इज़रायल
+- इटली
+- जमैका
+- जापान
+- जर्सी
+- जॉर्डन
+- कज़ाकस्तान
+- केन्या
+- किरिबाती
+- कोसोवो
+- कुवैत
+- किर्गिस्तान
+- लाओस
+- लातविया
+- लेबनान
+- लेसोथो
+- लाइबेरिया
+- लीबिया
+- लिख्तेंस्ताइन
+- लिथुआनिया
+- लक्ज़मबर्ग
+- मेडागास्कर
+- मलावी
+- मलेशिया
+- मालदीव
+- माली
+- माल्टा
+- मार्शल द्वीप समूह
+- मॉरेटेनिया
+- मॉरीशस
+- मेक्सिको
+- माइक्रोनेशिया
+- मोल्डोवा
+- मोनाको
+- मंगोलिया
+- मॉन्टेनेग्रो
+- मोंसेर्राट
+- मोरक्को
+- मोज़ांबिक
+- नामीबिया
+- नौरू
+- नेपाल
+- नीदरलैंड्स
+- न्यू कैलेडोनिया
+- न्यूज़ीलैंड
+- निकारागुआ
+- नाइजर
+- नाइजीरिया
+- नियू
+- नॉरफ़ॉक द्वीप
+- उत्तर मैसेडोनिया
+- उत्तरी मारियाना द्वीप समूह
+- नॉर्वे
+- ओमान
+- पाकिस्तान
+- पलाऊ
+- फ़िलिस्तीन
+- पनामा
+- पापुआ न्यू गिनी
+- पराग्वे
+- पेरू
+- फ़िलिपींस
+- पिटकेर्न द्वीप समूह
+- पोलैंड
+- पुर्तगाल
+- प्योर्तो रिको
+- कतर
+- साइप्रस गणराज्य
+- कॉन्गो गणराज्य
+- रोमानिया
+- रवांडा
+- रियूनियन
+- सेंट बार्थलेमी
+- सेंट हेलेना, असेंशन, और ट्रिस्टन ड कूना
+- सेंट किट्स और नेविस
+- सेंट लूसिया
+- सेंट पियरे और मिकलॉन
+- सेंट विंसेंट और ग्रेनाडीन
+- समोआ
+- सैन मरीनो
+- साओ टोम और प्रिंसिपे
+- सऊदी अरब
+- सेनेगल
+- सर्बिया
+- सेशेल्ज़
+- सिएरा लियॉन
+- सिंगापुर
+- स्लोवाकिया
+- स्लोवेनिया
+- सोलोमन आइलैंड्स
+- सोमालिया
+- दक्षिण अफ़्रीका
+- दक्षिण जॉर्जिया और दक्षिण सैंडविच द्वीप समूह
+- दक्षिण कोरिया
+- दक्षिण सूडान
+- स्पेन
+- श्रीलंका
+- सूडान
+- सूरीनाम
+- स्वीडन
+- स्विट्ज़रलैंड
+- ताइवान
+- ताजिकिस्तान
+- तंज़ानिया
+- थाईलैंड
+- पूर्वी तिमोर
+- टोगो
+- टोकेलौ
+- टोंगा
+- त्रिनिदाद और टोबैगो
+- ट्यूनीशिया
+- तुर्कमेनिस्तान
+- तुर्क और कैकोस द्वीप समूह
+- तुवालू
+- तुर्किये
+- युगांडा
+- यूक्रेन
+- संयुक्त अरब अमीरात
+- यूनाइटेड किंगडम
+- अमेरिका
+- अमेरिकन माइनर आउटलाइंग द्वीप समूह
+- उरुग्वे
+- अमेरिकन वर्जिन द्वीप समूह
+- उज़्बेकिस्तान
+- वनूआतू
+- वेटिकन सिटी
+- वेनेज़ुएला
+- वियतनाम
+- वॉलिस और फ़्यूचूना
+- पश्चिमी सहारा
+- यमन
+- ज़ाम्बिया
+- ज़िम्बाब्वे
+- ऑलैंड द्वीप समूह
 
-Enviar comentarios
+सुझाव भेजें
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última actualización: 2026-04-29 (UTC)
+आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
 
-¿Quieres brindar más información?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]

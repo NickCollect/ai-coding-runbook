@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-TW
-fetched_at: 2026-06-22T06:32:18.726151+00:00
-title: "\u5f48\u6027\u63a8\u8ad6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl
+fetched_at: 2026-06-29T05:32:24.655422+00:00
+title: "Elastyczne wnioskowanie \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-提供意見
+Prześlij opinię
 
-# 彈性推論
+# Elastyczne wnioskowanie
 
-Gemini Flex API 是推論層級，與標準費率相比，可節省 50% 的成本，但延遲時間不固定，且盡力提供服務。這項 API 適用於可容許延遲的工作負載，需要同步處理，但不需要標準 API 的即時效能。
+Gemini Flex API to poziom wnioskowania, który oferuje o 50% niższe koszty w porównaniu ze stawkami standardowymi. W zamian za to zapewnia zmienne opóźnienie i dostępność na zasadzie „najlepszej jakości”. Jest przeznaczony do zadań, które są odporne na opóźnienia i wymagają przetwarzania synchronicznego, ale nie potrzebują wydajności w czasie rzeczywistym, jaką zapewnia standardowy interfejs API.
 
-## 如何使用 Flex
+## Jak korzystać z Flex
 
-如要使用彈性層級，請在要求主體中將 `service_tier` 指定為 `flex`。如果省略這個欄位，要求會預設使用標準層級。
+Aby używać warstwy Flex, w żądaniu określ `service_tier` jako `flex`. Jeśli to pole zostanie pominięte, żądania będą domyślnie korzystać z poziomu standardowego.
 
 ### Python
 
@@ -31,457 +31,131 @@ from google import genai
 
 client = genai.Client()
 
-try:
-    response = client.models.generate_content(
-        model="gemini-3.5-flash",
-        contents="Analyze this dataset for trends...",
-        config={"service_tier": "flex"},
-    )
-    print(response.text)
-except Exception as e:
-    print(f"Flex request failed: {e}")
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="Analyze this dataset for trends...",
+    service_tier='flex'
+)
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
-import {GoogleGenAI} from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
 async function main() {
-  try {
-    const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
-      contents: "Analyze this dataset for trends...",
-      config: { serviceTier: "flex" },
+    const interaction = await client.interactions.create({
+        model: 'gemini-3.5-flash',
+        input: 'Analyze this dataset for trends...',
+        service_tier: 'flex'
     });
-    console.log(response.text);
-  } catch (e) {
-    console.log(`Flex request failed: ${e}`);
-  }
+    console.log(interaction.output_text);
 }
-
 await main();
 ```
 
-### Go
-
-```
-package main
-
-import (
-    "context"
-    "fmt"
-    "log"
-    "google.golang.org/genai"
-)
-
-func main() {
-    ctx := context.Background()
-    client, err := genai.NewClient(ctx, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    result, err := client.Models.GenerateContent(
-        ctx,
-        "gemini-3.5-flash",
-        genai.Text("Analyze this dataset for trends..."),
-        &genai.GenerateContentConfig{
-            ServiceTier: "flex",
-        },
-    )
-    if err != nil {
-        log.Printf("Flex request failed: %v", err)
-        return
-    }
-    fmt.Println(result.Text())
-}
-```
-
 ### REST
 
 ```
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
--H "Content-Type: application/json" \
--d '{
-  "contents": [{
-    "parts":[{"text": "Summarize the latest research on quantum computing."}]
-  }],
-  "service_tier": "flex"
-}'
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "Content-Type: application/json" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -d '{
+      "model": "gemini-3.5-flash",
+      "input": "Analyze this dataset for trends...",
+      "service_tier": "flex"
+  }'
 ```
 
-## Flex 推論的運作方式
+## Jak działa wnioskowanie Flex
 
-Gemini Flex 推論功能可彌補標準 API 與 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw) 24 小時處理時間之間的落差。這項服務會利用離峰時段的「可卸除」運算容量，為背景任務和循序工作流程提供符合成本效益的解決方案。
+Wnioskowanie Gemini Flex wypełnia lukę między standardowym interfejsem API a 24-godzinnym czasem realizacji [interfejsu Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl). Wykorzystuje moc obliczeniową poza godzinami szczytu, którą można „odłączyć”, aby zapewnić ekonomiczne rozwiązanie do zadań w tle i sekwencyjnych przepływów pracy.
 
-| 功能 | Flex | 優先順序 | 標準 | 批次 |
+| Funkcja | Flex | Priorytet | Standardowe | Wsad |
 | --- | --- | --- | --- | --- |
-| **定價** | 50% 折扣 | 比 Standard 方案多 75% 至 100% | 原價 | 50% 折扣 |
-| **延遲** | 分鐘 (目標：1 到 15 分鐘) | 低 (秒) | 秒到分鐘 | 長達 24 小時 |
-| **穩定性** | 盡可能提供最佳服務 (可卸載) | 高 (不會脫落) | 高 / 中高 | 高 (處理量) |
-| **介面** | 同步 | 同步 | 同步 | 非同步 |
+| **Ceny** | 50% zniżki | 75–100% więcej niż w przypadku wersji Standard | Pełna cena | 50% zniżki |
+| **Opóźnienie** | Minuty (docelowo 1–15 minut) | Niska (sekundy) | Sekundy na minuty | Do 24 godzin |
+| **Niezawodność** | Możliwie najlepsza obsługa (możliwość odrzucenia) | Wysoka (nie gubią sierści) | Wysoki / dość wysoki | Wysoki (przepustowość) |
+| **Interfejs** | Synchroniczna | Synchroniczna | Synchroniczna | Asynchroniczny |
 
-### 主要優點
+### Główne zalety
 
-- **成本效益**：大幅節省非正式評估、背景代理程式和資料擴充的費用。
-- **輕鬆上手**：不必管理批次物件、工作 ID 或輪詢，只要在現有要求中新增單一參數即可。
-- **同步工作流程**：適合用於連續 API 鏈，其中下一個要求取決於前一個要求的輸出內容，因此比 Batch 更適合代理功能工作流程。
+- **Oszczędność kosztów:** znaczne oszczędności w przypadku ocen środowisk nieprodukcyjnych, agentów działających w tle i wzbogacania danych.
+- **Łatwe wdrożenie:** wystarczy dodać jeden parametr do istniejących żądań.
+- **Synchroniczne procesy**: idealne w przypadku sekwencyjnych łańcuchów interfejsów API, w których kolejne żądanie zależy od wyniku poprzedniego, co czyni je bardziej elastycznymi niż procesy wsadowe w przypadku procesów agentowych.
 
-### 用途
+### Przypadki użycia
 
-- **離線評估**：執行「LLM 做為評估者」迴歸測試或排行榜。
-- **背景代理**：可接受延遲幾分鐘的循序工作，例如更新客戶關係管理系統、建立個人資料或內容審查。
-- **預算不足的研究**：學術實驗需要在預算有限的情況下使用大量權杖。
+- **Oceny offline:** przeprowadzanie testów regresji lub tworzenie tabel wyników z użyciem dużego modelu językowego jako sędziego.
+- **Agenci działający w tle:** sekwencyjne zadania, takie jak aktualizacje CRM, tworzenie profili czy moderowanie treści, w przypadku których dopuszczalne są kilkuminutowe opóźnienia.
+- **Badania z ograniczonym budżetem:** eksperymenty akademickie, które wymagają dużej liczby tokenów przy ograniczonym budżecie.
 
-### 頻率限制
+### Ograniczenia liczby żądań
 
-彈性推論流量會計入一般[速率限制](https://aistudio.google.com/rate-limit?hl=zh-tw)，不會像 [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw) 一樣提供擴展速率限制。
+Ruch związany z elastycznym wnioskowaniem jest wliczany do ogólnych [limitów szybkości](https://aistudio.google.com/rate-limit?hl=pl). Nie oferuje on rozszerzonych limitów szybkości, takich jak [interfejs Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl).
 
-### 可卸除容量
+### Rozmiar z możliwością zmniejszenia
 
-彈性流量的優先順序較低，如果標準流量突然暴增，系統可能會搶先處理或清除 Flex 請求，確保高優先順序使用者有足夠的容量。如要瞭解高優先順序推論，請參閱「[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)」一文。
+Ruch elastyczny jest traktowany z niższym priorytetem. Jeśli nastąpi nagły wzrost standardowego ruchu, żądania Flex mogą zostać wyprzedzone lub usunięte, aby zapewnić przepustowość użytkownikom o wysokim priorytecie. Jeśli szukasz wnioskowania o wysokim priorytecie, zapoznaj się z sekcją [Wnioskowanie priorytetowe](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl).
 
-### 錯誤代碼
+### Kody błędów
 
-如果彈性容量不足或系統壅塞，API 會傳回標準錯誤代碼：
+Gdy elastyczna przepustowość jest niedostępna lub system jest przeciążony, interfejs API zwraca standardowe kody błędów:
 
-- **503 Service Unavailable**：系統目前已達容量上限。
-- **429 要求數量過多**：頻率限制或資源耗盡。
+- **503 Usługa niedostępna:** system jest obecnie zajęty.
+- **429 Zbyt wiele żądań:** przekroczono limity częstotliwości lub wyczerpano zasoby.
 
-### 客戶責任
+### Odpowiedzialność klienta
 
-- **沒有伺服器端備用方案**：為避免產生非預期費用，如果彈性容量已滿，系統不會自動將彈性要求升級為標準層級。
-- **重試**：您必須自行實作用戶端重試邏輯，並採用指數輪詢策略。
-- **逾時**：由於 Flex 請求可能會排隊等候，建議將用戶端逾時時間延長至 10 分鐘以上，以免連線過早關閉。
+- **Brak opcji zapasowej po stronie serwera:** aby zapobiec nieoczekiwanym opłatom, system nie będzie automatycznie uaktualniać żądania Flex do poziomu Standard, jeśli pula Flex jest pełna.
+- **Ponowne próby:** musisz wdrożyć własną logikę ponownych prób po stronie klienta ze wzrastającym czasem do ponowienia.
+- **Przekroczenia limitu czasu:** ponieważ żądania elastyczne mogą znajdować się w kolejce, zalecamy zwiększenie limitów czasu po stronie klienta do co najmniej 10 minut, aby uniknąć przedwczesnego zamknięcia połączenia.
 
-## 調整逾時時間
+## Dostosowywanie okien limitu czasu
 
-您可以為 REST API 和用戶端程式庫設定個別要求的逾時時間，但只有在使用用戶端程式庫時，才能設定全域逾時時間。
+Możesz skonfigurować limity czasu dla poszczególnych żądań w przypadku interfejsu REST API i bibliotek klienta.
+Zawsze upewnij się, że limit czasu po stronie klienta obejmuje zamierzony okres oczekiwania serwera (np. ponad 600 s w przypadku elastycznych kolejek oczekiwania). Pakiety SDK oczekują wartości czasu oczekiwania w milisekundach.
 
-請務必確保用戶端逾時涵蓋預期的伺服器等待時間範圍 (例如 Flex 等候佇列為 600 秒以上)。SDK 逾時值應以毫秒為單位。
-
-### 每個要求的逾時時間
-
-### Python
-
-```
-from google import genai
-
-client = genai.Client()
-
-try:
-    response = client.models.generate_content(
-        model="gemini-3.5-flash",
-        contents="why is the sky blue?",
-        config={
-            "service_tier": "flex",
-            "http_options": {"timeout": 900000}
-        },
-    )
-except Exception as e:
-    print(f"Flex request failed: {e}")
-
-# Example with streaming
-try:
-    response = client.models.generate_content_stream(
-        model="gemini-3.5-flash",
-        contents=["List 5 ideas for a sci-fi movie."],
-        config={
-            "service_tier": "flex",
-            "http_options": {"timeout": 60000}
-        }
-        # Per-request timeout for the streaming operation
-    )
-    for chunk in response:
-        print(chunk.text, end="")
-
-except Exception as e:
-    print(f"An error occurred during streaming: {e}")
-```
-
-### JavaScript
-
-```
- import {GoogleGenAI} from '@google/genai';
-
- const client = new GoogleGenAI({});
-
- async function main() {
-     try {
-         const response = await client.models.generateContent({
-             model: "gemini-3.5-flash",
-             contents: "why is the sky blue?",
-             config: {
-               serviceTier: "flex",
-               httpOptions: {timeout: 900000}
-             },
-         });
-     } catch (e) {
-         console.log(`Flex request failed: ${e}`);
-     }
-
-     // Example with streaming
-     try {
-         const response = await client.models.generateContentStream({
-             model: "gemini-3.5-flash",
-             contents: ["List 5 ideas for a sci-fi movie."],
-             config: {
-                 serviceTier: "flex",
-                 httpOptions: {timeout: 60000}
-             },
-         });
-         for await (const chunk of response.stream) {
-             process.stdout.write(chunk.text());
-         }
-     } catch (e) {
-         console.log(`An error occurred during streaming: ${e}`);
-     }
- }
-
- await main();
-```
-
-### Go
-
-```
-package main
-
-import (
-    "context"
-    "fmt"
-    "log"
-    "time"
-
-    "google.golang.org/api/iterator"
-    "google.golang.org/genai"
-)
-
-func main() {
-    ctx := context.Background()
-    client, err := genai.NewClient(ctx, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer client.Close()
-
-    timeoutCtx, cancel := context.WithTimeout(ctx, 900*time.Second)
-    defer cancel()
-
-    _, err = client.Models.GenerateContent(
-        timeoutCtx,
-        "gemini-3.5-flash",
-        genai.Text("why is the sky blue?"),
-        &genai.GenerateContentConfig{
-            ServiceTier: "flex",
-        },
-    )
-    if err != nil {
-        fmt.Printf("Flex request failed: %v\n", err)
-    }
-
-    // Example with streaming
-    streamTimeoutCtx, streamCancel := context.WithTimeout(ctx, 60*time.Second)
-    defer streamCancel()
-
-    iter := client.Models.GenerateContentStream(
-        streamTimeoutCtx,
-        "gemini-3.5-flash",
-        genai.Text("List 5 ideas for a sci-fi movie."),
-        &genai.GenerateContentConfig{
-            ServiceTier: "flex",
-        },
-    )
-    for {
-        response, err := iter.Next()
-        if err == iterator.Done {
-            break
-        }
-        if err != nil {
-            fmt.Printf("An error occurred during streaming: %v\n", err)
-            break
-        }
-        fmt.Print(response.Candidates[0].Content.Parts[0])
-    }
-}
-```
-
-### REST
-
-發出 REST 呼叫時，您可以結合使用 HTTP 標頭和 `curl` 選項來控制逾時：
-
-- **`X-Server-Timeout` 標頭 (伺服器端逾時)**：這個標頭會向 Gemini API 伺服器建議偏好的逾時時間長度 (預設為 600 秒)。伺服器會盡量遵守這項要求，但不保證一定會成功。值應以秒為單位。
-- **`--max-time` in `curl` (用戶端逾時)**：`curl --max-time
-  <seconds>` 選項會為 `curl` 等待整個作業完成的時間設定硬性限制 (以秒為單位)。這是用戶端安全措施。
-
-```
- # Set a server timeout hint of 120 seconds and a client-side curl timeout of 125 seconds.
- curl --max-time 125 \
-   -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
-   -H "Content-Type: application/json" \
-   -H "X-Server-Timeout: 120" \
-   -d '{
-   "contents": [{
-     "parts":[{"text": "Summarize the latest research on quantum computing."}]
-   }],
-   "service_tier": "flex"
- }'
-```
-
-### 全域逾時
-
-如要讓透過特定 `genai.Client` 執行個體 (僅限用戶端程式庫) 發出的所有 API 呼叫都採用預設逾時，您可以在使用 `http_options` 和 `genai.types.HttpOptions` 初始化用戶端時設定這項功能。
+### Limity czasu poszczególnych żądań
 
 ### Python
 
 ```
 from google import genai
-from google.genai import types
 
-global_timeout_ms = 120000
+client = genai.Client(http_options={"timeout": 900000})
 
-client_with_global_timeout = genai.Client(
-    http_options=types.HttpOptions(timeout=global_timeout_ms)
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="why is the sky blue?",
+    service_tier="flex",
 )
-
-try:
-    # Calling generate_content using global timeout...
-    response = client_with_global_timeout.models.generate_content(
-        model="gemini-3.5-flash",
-        contents="Summarize the history of AI development since 2000.",
-        config={"service_tier": "flex"},
-    )
-    print(response.text)
-
-    # A per-request timeout will *override* the global timeout for that specific call.
-    shorter_timeout = 30000
-    response = client_with_global_timeout.models.generate_content(
-        model="gemini-3.5-flash",
-        contents="Provide a very brief definition of machine learning.",
-        config={
-            "service_tier": "flex",
-            "http_options":{"timeout": shorter_timeout}
-        }  # Overrides the global timeout
-    )
-
-    print(response.text)
-
-except TimeoutError:
-    print(
-        f"A GenerateContent call timed out. Check if the global or per-request timeout was exceeded."
-    )
-except Exception as e:
-    print(f"An error occurred: {e}")
 ```
 
 ### JavaScript
 
 ```
-import {GoogleGenAI} from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 
-const globalTimeoutMs = 120000;
-
-const clientWithGlobalTimeout = new GoogleGenAI({httpOptions: {timeout: globalTimeoutMs}});
+const client = new GoogleGenAI({});
 
 async function main() {
-    try {
-        // Calling generate_content using global timeout...
-        const response1 = await clientWithGlobalTimeout.models.generateContent({
-            model: "gemini-3.5-flash",
-            contents: "Summarize the history of AI development since 2000.",
-            config: { serviceTier: "flex" },
-        });
-        console.log(response1.text());
-
-        // A per-request timeout will *override* the global timeout for that specific call.
-        const shorterTimeout = 30000;
-        const response2 = await clientWithGlobalTimeout.models.generateContent({
-            model: "gemini-3.5-flash",
-            contents: "Provide a very brief definition of machine learning.",
-            config: {
-                serviceTier: "flex",
-                httpOptions: {timeout: shorterTimeout}
-            }  // Overrides the global timeout
-        });
-
-        console.log(response2.text());
-
-    } catch (e) {
-        if (e.name === 'TimeoutError' || e.message?.includes('timeout')) {
-            console.log(
-                "A GenerateContent call timed out. Check if the global or per-request timeout was exceeded."
-            );
-        } else {
-            console.log(`An error occurred: ${e}`);
-        }
-    }
+    const interaction = await client.interactions.create({
+        model: "gemini-3.5-flash",
+        input: "why is the sky blue?",
+        service_tier: "flex",
+    }, {timeout: 900000});
 }
 
 await main();
 ```
 
-### Go
+## Wdrażanie ponownych prób
 
-```
- package main
-
- import (
-     "context"
-     "fmt"
-     "log"
-     "time"
-
-     "google.golang.org/genai"
- )
-
- func main() {
-     ctx := context.Background()
-     client, err := genai.NewClient(ctx, nil)
-     if err != nil {
-         log.Fatal(err)
-     }
-     defer client.Close()
-
-     model := client.GenerativeModel("gemini-3.5-flash")
-
-     // Go uses context for timeouts, not client options.
-     // Set a default timeout for requests.
-     globalTimeout := 120 * time.Second
-     fmt.Printf("Using default timeout of %v seconds.\n", globalTimeout.Seconds())
-
-     fmt.Println("Calling generate_content (using default timeout)...")
-     ctx1, cancel1 := context.WithTimeout(ctx, globalTimeout)
-     defer cancel1()
-     resp1, err := model.GenerateContent(ctx1, genai.Text("Summarize the history of AI development since 2000."), &genai.GenerateContentConfig{ServiceTier: "flex"})
-     if err != nil {
-         log.Printf("Request 1 failed: %v", err)
-     } else {
-         fmt.Println("GenerateContent 1 successful.")
-         fmt.Println(resp1.Text())
-     }
-
-     // A different timeout can be used for other requests.
-     shorterTimeout := 30 * time.Second
-     fmt.Printf("\nCalling generate_content with a shorter timeout of %v seconds...\n", shorterTimeout.Seconds())
-     ctx2, cancel2 := context.WithTimeout(ctx, shorterTimeout)
-     defer cancel2()
-     resp2, err := model.GenerateContent(ctx2, genai.Text("Provide a very brief definition of machine learning."), &genai.GenerateContentConfig{
-         ServiceTier: "flex",
-     })
-     if err != nil {
-         log.Printf("Request 2 failed: %v", err)
-     } else {
-         fmt.Println("GenerateContent 2 successful.")
-         fmt.Println(resp2.Text())
-     }
- }
-```
-
-## 實作重試機制
-
-由於 Flex 可捨棄，且會因 503 錯誤而失敗，以下範例說明如何選擇性地實作重試邏輯，以繼續處理失敗的要求：
+Usługa Flex jest podatna na błędy i może zwracać błędy 503. Oto przykład opcjonalnego wdrożenia logiki ponawiania, aby kontynuować obsługę nieudanych żądań:
 
 ### Python
 
@@ -494,169 +168,101 @@ client = genai.Client()
 def call_with_retry(max_retries=3, base_delay=5):
     for attempt in range(max_retries):
         try:
-            return client.models.generate_content(
+            return client.interactions.create(
                 model="gemini-3.5-flash",
-                contents="Analyze this batch statement.",
-                config={"service_tier": "flex"},
+                input="Analyze this batch statement.",
+                service_tier="flex",
             )
         except Exception as e:
-            # Check for 503 Service Unavailable or 429 Rate Limits
-            print(e.code)
             if attempt < max_retries - 1:
                 delay = base_delay * (2 ** attempt) # Exponential Backoff
                 print(f"Flex busy, retrying in {delay}s...")
                 time.sleep(delay)
             else:
-                # Fallback to standard on last strike (Optional)
                 print("Flex exhausted, falling back to Standard...")
-                return client.models.generate_content(
+                return client.interactions.create(
                     model="gemini-3.5-flash",
-                    contents="Analyze this batch statement."
+                    input="Analyze this batch statement."
                 )
 
-# Usage
-response = call_with_retry()
-print(response.text)
+interaction = call_with_retry()
+print(interaction.output_text)
 ```
 
 ### JavaScript
 
 ```
- import {GoogleGenAI} from '@google/genai';
+import { GoogleGenAI } from '@google/genai';
 
- const ai = new GoogleGenAI({});
+const ai = new GoogleGenAI({});
 
- async function sleep(ms) {
-   return new Promise(resolve => setTimeout(resolve, ms));
- }
+async function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
- async function callWithRetry(maxRetries = 3, baseDelay = 5) {
-   for (let attempt = 0; attempt < maxRetries; attempt++) {
-     try {
-       console.log(`Attempt ${attempt + 1}: Calling Flex tier...`);
-       const response = await ai.models.generateContent({
-         model: "gemini-3.5-flash",
-         contents: "Analyze this batch statement.",
-         config: { serviceTier: 'flex' },
-       });
-       return response;
-     } catch (e) {
-       if (attempt < maxRetries - 1) {
-         const delay = baseDelay * (2 ** attempt);
-         console.log(`Flex busy, retrying in ${delay}s...`);
-         await sleep(delay * 1000);
-       } else {
-         console.log("Flex exhausted, falling back to Standard...");
-         return await ai.models.generateContent({
-           model: "gemini-3.5-flash",
-           contents: "Analyze this batch statement.",
-         });
-       }
-     }
-   }
- }
+async function callWithRetry(maxRetries = 3, baseDelay = 5) {
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      console.log(`Attempt ${attempt + 1}: Calling Flex tier...`);
+      const interaction = await ai.interactions.create({
+        model: "gemini-3.5-flash",
+        input: "Analyze this batch statement.",
+        service_tier: 'flex',
+      });
+      return interaction;
+    } catch (e) {
+      if (attempt < maxRetries - 1) {
+        const delay = baseDelay * (2 ** attempt);
+        console.log(`Flex busy, retrying in ${delay}s...`);
+        await sleep(delay * 1000);
+      } else {
+        console.log("Flex exhausted, falling back to Standard...");
+        return await ai.interactions.create({
+          model: "gemini-3.5-flash",
+          input: "Analyze this batch statement.",
+        });
+      }
+    }
+  }
+}
 
- async function main() {
-     const response = await callWithRetry();
-     console.log(response.text);
- }
+async function main() {
+    const interaction = await callWithRetry();
+    console.log(interaction.output_text);
+}
 
- await main();
+await main();
 ```
 
-### Go
+## Ceny
 
-```
- package main
+Wnioskowanie elastyczne kosztuje 50% [standardowej ceny interfejsu API](https://ai.google.dev/gemini-api/docs/pricing?hl=pl) i jest rozliczane za token.
 
- import (
-     "context"
-     "fmt"
-     "log"
-     "math"
-     "time"
+## Obsługiwane modele
 
-     "google.golang.org/genai"
- )
+Te modele obsługują wnioskowanie Flex:
 
- func callWithRetry(ctx context.Context, client *genai.Client, maxRetries int, baseDelay time.Duration) (*genai.GenerateContentResponse, error) {
-     modelName := "gemini-3.5-flash"
-     content := genai.Text("Analyze this batch statement.")
-     flexConfig := &genai.GenerateContentConfig{
-         ServiceTier: "flex",
-     }
-
-     for attempt := 0; attempt < maxRetries; attempt++ {
-         log.Printf("Attempt %d: Calling Flex tier...", attempt+1)
-         resp, err := client.Models.GenerateContent(ctx, modelName, content, flexConfig)
-         if err == nil {
-             return resp, nil
-         }
-
-         log.Printf("Attempt %d failed: %v", attempt+1, err)
-
-         if attempt < maxRetries-1 {
-             delay := time.Duration(float64(baseDelay) * math.Pow(2, float64(attempt)))
-             log.Printf("Flex busy, retrying in %v...", delay)
-             time.Sleep(delay)
-         } else {
-             log.Println("Flex exhausted, falling back to Standard...")
-             return client.Models.GenerateContent(ctx, modelName, content)
-         }
-     }
-     return nil, fmt.Errorf("retries exhausted") // Should not be reached
- }
-
- func main() {
-     ctx := context.Background()
-     client, err := genai.NewClient(ctx, nil)
-     if err != nil {
-         log.Fatal(err)
-     }
-     defer client.Close()
-
-     resp, err := callWithRetry(ctx, client, 3, 5*time.Second)
-     if err != nil {
-         log.Fatalf("Failed after retries: %v", err)
-     }
-     fmt.Println(resp.Text())
- }
-```
-
-## 定價
-
-彈性推論的價格為[標準 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw) 的 50%，並以權杖為單位計費。
-
-## 支援的模型
-
-下列模型支援 Flex 推論：
-
-| 模型 | 彈性推論 |
+| Model | Elastyczne wnioskowanie |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3 Pro Image 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pl) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl) | ✔️ |
+| [Gemini 3.1 Pro (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pl) | ✔️ |
+| [Gemini 3 Flash (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pl) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pl) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pl) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pl) | ✔️ |
 
-## 後續步驟
+## Co dalej?
 
-如要瞭解 Gemini 的其他[推論和最佳化](https://ai.google.dev/gemini-api/docs/optimization?hl=zh-tw)選項，請參閱：
+- [Wnioskowanie o priorytecie](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl) w przypadku bardzo małego opóźnienia.
+- [Tokeny:](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) dowiedz się więcej o tokenach.
 
-- [優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)，實現超低延遲。
-- [批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)：在 24 小時內進行非同步處理。
-- [脈絡快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)功能，可降低輸入的權杖費用。
+Prześlij opinię
 
-提供意見
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Ostatnia aktualizacja: 2026-06-22 UTC.
 
-上次更新時間：2026-06-19 (世界標準時間)。
+Chcesz przekazać coś jeszcze?
 
-想進一步說明嗎？
-
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-19 (世界標準時間)。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-22 UTC."],[],[]]

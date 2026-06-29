@@ -1,43 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=hi
-fetched_at: 2026-06-22T06:26:56.924582+00:00
-title: "Interactions API: \u092e\u093e\u0907\u0917\u094d\u0930\u0947\u0936\u0928 \u0917\u093e\u0907\u0921 \u092e\u0947\u0902 \u092c\u0921\u093c\u0947 \u092c\u0926\u0932\u093e\u0935 (\u092e\u0908 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=ar
+fetched_at: 2026-06-29T05:39:19.771334+00:00
+title: "\u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a Interactions API: \u062f\u0644\u064a\u0644 \u0646\u0642\u0644 \u0627\u0644\u062a\u063a\u064a\u064a\u0631\u0627\u062a \u063a\u064a\u0631 \u0627\u0644\u0645\u062a\u0648\u0627\u0641\u0642\u0629 (\u0645\u0627\u064a\u0648 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini की Deep Research की सुविधा](https://ai.google.dev/gemini-api/docs/deep-research?hl=hi) अब झलक के तौर पर उपलब्ध है. इसमें साथ मिलकर प्लान बनाने, विज़ुअलाइज़ेशन, एमसीपी के साथ काम करने की सुविधा वगैरह शामिल है.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-सुझाव भेजें
+إرسال ملاحظات
 
-# Interactions API: माइग्रेशन गाइड में बड़े बदलाव (मई 2026)
+# واجهة برمجة التطبيقات Interactions API: دليل نقل التغييرات غير المتوافقة (مايو 2026)
 
-`v1beta` Interactions API में कुछ बड़े बदलाव किए जा रहे हैं. इससे एपीआई के स्ट्रक्चर में बदलाव होगा. ऐसा इसलिए किया जा रहा है, ताकि आने वाले समय में, फ़्लाइट के बीच में बदलाव करने और टूल कॉल को एसिंक्रोनस तरीके से इस्तेमाल करने जैसी सुविधाओं को सपोर्ट किया जा सके. इस पेज पर बताया गया है कि क्या बदलाव हो रहा है. साथ ही, माइग्रेट करने में आपकी मदद करने के लिए, कोड के पहले और बाद के उदाहरण दिए गए हैं. बदलावों की दो कैटगरी हैं:
+تُجري واجهة برمجة التطبيقات Interactions API في الإصدار `v1beta` تغييرات غير متوافقة مع الإصدارات السابقة تؤدي إلى إعادة هيكلة شكل واجهة برمجة التطبيقات لدعم الإمكانات المستقبلية، مثل التوجيه أثناء الرحلة واستدعاءات الأدوات غير المتزامنة. توضّح هذه الصفحة التغييرات وتوفّر أمثلة على الرموز البرمجية قبل وبعد التغييرات لمساعدتك في نقل البيانات. هناك فئتان من التغييرات:
 
-1. [**कदमों का स्कीमा**](#steps-schema): एक नया `steps` ऐरे, `outputs` ऐरे की जगह लेता है. इससे हर इंटरैक्शन टर्न की स्ट्रक्चर्ड टाइमलाइन मिलती है.
-2. [**आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन**](#output-format-config): एक नया पॉलीमॉर्फ़िक `response_format`, आउटपुट फ़ॉर्मैट के सभी कंट्रोल को एक साथ जोड़ता है और `response_mime_type` को हटाता है.
+1. [**مخطط الخطوات**](#steps-schema): تحلّ مصفوفة `steps` جديدة محلّ مصفوفة
+   `outputs`، ما يوفّر مخططًا زمنيًا منظّمًا لكل دورة تفاعل.
+2. [**إعداد تنسيق الإخراج**](#output-format-config): يوحّد متعدد الأشكال الجديد
+   `response_format` جميع عناصر التحكّم في تنسيق الإخراج ويزيل
+   `response_mime_type`.
 
-अपने इंटिग्रेशन को अपडेट करने के लिए, [नए स्कीमा पर माइग्रेट करने का तरीका](#how-to-migrate) में दिया गया तरीका अपनाएं.
+اتّبِع الخطوات الواردة في [كيفية نقل البيانات إلى المخطط الجديد](#how-to-migrate) لتعديل عملية التكامل.
 
-## मुख्य बदलाव: `outputs` से `steps`
+## التغيير الأساسي: من `outputs` إلى `steps`
 
-नए स्कीमा में, `outputs` ऐरे की जगह `steps` ऐरे का इस्तेमाल किया जाता है.
+يستبدل المخطط الجديد مصفوفة `outputs` بمصفوفة `steps`.
 
-- **लेगसी**: जवाब में, `outputs` का एक फ़्लैट कलेक्शन मिलता था. इसमें सिर्फ़ मॉडल से जनरेट किया गया कॉन्टेंट होता था.
-- **नया स्कीमा**: जवाबों में `steps` अरे दिखता है. इसमें टाइप डिसक्रिमिनेटर के साथ स्ट्रक्चर्ड चरण शामिल होते हैं.
+- **الإصدار القديم**: كانت الردود تعرض مصفوفة `outputs` مسطّحة لا تحتوي إلا على المحتوى الذي تم إنشاؤه بواسطة النموذج.
+- **المخطط الجديد**: تعرض الردود مصفوفة `steps` تحتوي على خطوات منظّمة مع مميّزات النوع.
 
-`POST /interactions` सिर्फ़ आउटपुट के चरण दिखाता है. `GET /interactions/{id}`
-यह फ़ंक्शन, पूरे चरण की टाइमलाइन दिखाता है. इसमें शुरुआती `user_input` चरण भी शामिल है.
+لا يعرض `POST /interactions` سوى خطوات الإخراج. يعرض `GET /interactions/{id}` المخطط الزمني الكامل للخطوات، بما في ذلك خطوة `user_input` الأولية.
 
-### बेसिक इनपुट/आउटपुट (यूनरी)
+### الإدخال/الإخراج الأساسي (أحادي)
 
-#### पहले (लेगसी)
+#### قبل (الإصدار القديم)
 
 ### Python
 
@@ -64,7 +66,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.outputs[-1].text);
 ```
 
-### REST
+### راحة
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -89,7 +91,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### (नए स्कीमा) के बाद
+#### بعد (المخطط الجديد)
 
 ### Python
 
@@ -116,9 +118,9 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-[sdk-convenience]: /gemini-api/docs/interactions#convenience-properties
+[sdk-convenience]: /gemini-api/docs/interactions-overview#sdk-sugar
 
-### REST
+### راحة
 
 ```
 # Opt-in needed before May 26th
@@ -171,11 +173,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### फ़ंक्शन कॉलिंग
+### استدعاء الدالة
 
-अनुरोध का स्ट्रक्चर पहले जैसा ही रहता है. हालांकि, जवाब में फ़्लैट `outputs` कॉन्टेंट की जगह स्ट्रक्चर्ड चरणों को दिखाया जाता है.
+يبقى هيكل الطلب بدون تغيير، ولكن يستبدل الردّ محتوى `outputs` المسطّح بخطوات منظّمة.
 
-#### पहले (लेगसी)
+#### قبل (الإصدار القديم)
 
 ### Python
 
@@ -197,7 +199,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 // Response
@@ -220,7 +222,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### (नए स्कीमा) के बाद
+#### بعد (المخطط الجديد)
 
 ### Python
 
@@ -242,7 +244,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 // POST Response
@@ -268,11 +270,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### सर्वर-साइड टूल
+### أدوات من جهة الخادم
 
-सर्वर-साइड टूल (जैसे, Google Search या कोड एक्ज़ीक्यूशन) अब `steps` ऐरे में कुछ खास तरह के चरण दिखाते हैं. लेगसी स्कीमा में, इन कार्रवाइयों को `outputs` कलेक्शन में खास कॉन्टेंट टाइप के तौर पर दिखाया जाता था. हालांकि, नए स्कीमा में इन्हें `steps` कलेक्शन में ले जाया जाता है. यहां दिए गए उदाहरणों में, Google Search का इस्तेमाल किया गया है.
+تنتج الأدوات من جهة الخادم (مثل "بحث Google" أو "تنفيذ الرموز البرمجية") الآن أنواعًا معيّنة من الخطوات في مصفوفة `steps`. في حين أنّ المخطط القديم كان يعرض هذه العمليات كأنواع محتوى معيّنة ضِمن مصفوفة `outputs`، ينقلها المخطط الجديد إلى مصفوفة `steps`. تستخدِم الأمثلة التالية "بحث Google".
 
-#### पहले (लेगसी)
+#### قبل (الإصدار القديم)
 
 ### Python
 
@@ -298,7 +300,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -346,7 +348,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### (नए स्कीमा) के बाद
+#### بعد (المخطط الجديد)
 
 ### Python
 
@@ -372,7 +374,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 # Opt-in needed before May 26th
@@ -430,11 +432,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### स्ट्रीमिंग
+### البث
 
-स्ट्रीमिंग से नए इवेंट टाइप का पता चलता है:
+يعرض البث أنواعًا جديدة من الأحداث:
 
-#### इवेंट के नए टाइप
+#### أنواع الأحداث الجديدة
 
 - `interaction.created`
 - `interaction.completed`
@@ -444,22 +446,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 - `step.delta`
 - `step.stop`
 
-#### इवेंट के ऐसे टाइप जो अब काम नहीं करते
+#### أنواع الأحداث التي تم إيقافها
 
-ऊपर दिए गए नए इवेंट, लेगसी इवेंट के इन टाइप की जगह इस्तेमाल किए जाते हैं:
+يتم استبدال أنواع الأحداث القديمة التالية بالأحداث الجديدة المذكورة أعلاه:
 
-- `interaction.start` → `interaction.created`
-- `content.start` → `step.start`
-- `content.delta` → `step.delta`
-- `content.stop` → `step.stop`
-- `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → इसकी जगह `interaction.in_progress`, `interaction.requires_action` वगैरह का इस्तेमाल किया जाता है
+- `interaction.start` ← `interaction.created`
+- `content.start` ← `step.start`
+- `content.delta` ← `step.delta`
+- `content.stop` ← `step.stop`
+- `interaction.complete` ← `interaction.completed`
+- `interaction.status_update` ← تم استبدالها بـ `interaction.in_progress` و`interaction.requires_action` وما إلى ذلك
 
-**फ़ंक्शन कॉल की स्ट्रीमिंग**: फ़ंक्शन कॉल के साथ स्ट्रीमिंग का इस्तेमाल करने पर, `step.start` इवेंट फ़ंक्शन का नाम दिखाता है. साथ ही, `step.delta` इवेंट, आर्ग्युमेंट को `arguments_delta` का इस्तेमाल करके, आंशिक JSON स्ट्रिंग के तौर पर स्ट्रीम करते हैं. पूरे आर्ग्युमेंट पाने के लिए, आपको इन डेल्टा को इकट्ठा करना होगा. यह यूनेरी कॉल से अलग है, जहां आपको फ़ंक्शन कॉल ऑब्जेक्ट एक साथ मिलता है.
+**استدعاءات الدوال في البث**: عند استخدام البث مع استدعاء الدوال،
+يقدّم الحدث `step.start` اسم الدالة، وتعمل أحداث `step.delta` على
+بثّ الوسيطات كسلاسل JSON جزئية (باستخدام `arguments_delta`). يجب
+تجميع هذه التغييرات الجزئية للحصول على الوسيطات الكاملة. يختلف ذلك عن الاستدعاءات الأحادية التي تتلقّى فيها كائن استدعاء الدالة الكامل مرة واحدة.
 
-#### उदाहरण
+#### أمثلة
 
-##### पहले (लेगसी)
+##### قبل (الإصدار القديم)
 
 ### Python
 
@@ -496,7 +501,7 @@ for await (const chunk of stream) {
 }
 ```
 
-### REST
+### راحة
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -526,7 +531,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### बाद में (नया स्कीमा)
+##### بعد (المخطط الجديد)
 
 ### Python
 
@@ -561,7 +566,7 @@ for await (const event of stream) {
 }
 ```
 
-### REST
+### راحة
 
 ```
  # Opt-in needed before May 26th
@@ -603,29 +608,30 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### स्टेटलेस बातचीत का इतिहास
+### سجلّ المحادثات بدون حالة
 
-अगर क्लाइंट साइड पर बातचीत के इतिहास को मैन्युअल तरीके से मैनेज किया जाता है (स्टेटलेस इस्तेमाल का उदाहरण), तो आपको यह अपडेट करना होगा कि पिछले टर्न को कैसे स्ट्रिंग किया जाता है.
+إذا كنت تدير سجلّ المحادثات يدويًا على جانب العميل (حالة الاستخدام بدون حالة)، عليك تعديل طريقة ربط الأدوار السابقة.
 
-- **लेगसी**: डेवलपर अक्सर जवाबों से `outputs` ऐरे इकट्ठा करते थे और उन्हें अगले टर्न में `input` फ़ील्ड में वापस भेजते थे.
-- **नया स्कीमा**: अब आपको जवाब से `steps` कलेक्शन करना होगा और इसे अगले अनुरोध के `input` फ़ील्ड में पास करना होगा. साथ ही, उपयोगकर्ता के नए टर्न को `user_input` चरण के तौर पर जोड़ना होगा.
+- **الإصدار القديم**: غالبًا ما كان المطوّرون يجمعون مصفوفة `outputs` من الردود ويعيدون إرسالها في حقل `input` في الدور التالي.
+- **المخطط الجديد**: عليك الآن جمع مصفوفة `steps` من الردّ وتمريرها في حقل `input` للطلب التالي، مع إلحاق دورة المستخدم الجديدة كخطوة `user_input`.
 
-## आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन: `response_format` बदलाव
+## إعداد تنسيق الإخراج: تغييرات `response_format`
 
-अपडेट किए गए एपीआई में, आउटपुट फ़ॉर्मैट कंट्रोल को एक ही, बहुरूपी `response_format` फ़ील्ड में शामिल किया गया है. इससे आउटपुट कॉन्फ़िगरेशन को टॉप लेवल पर सेट किया जा सकता है. साथ ही, `generation_config` को मॉडल के व्यवहार (जैसे कि टेंपरेचर, top\_p, और गहराई से विचार) पर फ़ोकस करने में मदद मिलती है.
+يوحّد الإصدار المعدَّل من واجهة برمجة التطبيقات جميع عناصر التحكّم في تنسيق الإخراج في حقل `response_format` موحّد ومتعدد الأشكال. يؤدي ذلك إلى مركزة إعداد الإخراج على المستوى الأعلى ويحافظ على تركيز `generation_config` على سلوك النموذج (مثل درجة العشوائية وأعلى احتمال تراكمي والتفكير).
 
-### मुख्य बदलाव
+### أهم التغييرات
 
-- **एपीआई, `response_mime_type` को हटा देता है.** अब `response_format` में हर फ़ॉर्मैट एंट्री के लिए, एमआईएमई टाइप तय किया जा सकता है.
-- **`response_format` अब एक पॉलीमॉर्फिक ऑब्जेक्ट (या ऐरे) है.** हर एंट्री में `type` डिस्क्रिमिनेटर (`text`, `audio`, `image`) और टाइप के हिसाब से फ़ील्ड होते हैं. एक से ज़्यादा आउटपुट मोडेलिटी का अनुरोध करने के लिए, फ़ॉर्मैट एंट्री का एक कलेक्शन पास करें.
-- **`image_config` को `generation_config` से `response_format` में ले जाया गया.**
-  अब `"type": "image"` के साथ `response_format` एंट्री में, इमेज आउटपुट की सेटिंग तय की जा सकती हैं. जैसे, `aspect_ratio` और `image_size`.
+- **تزيل واجهة برمجة التطبيقات `response_mime_type`.** يمكنك الآن تحديد نوع MIME لكل إدخال تنسيق ضِمن `response_format`.
+- **أصبح `response_format` الآن كائنًا (أو مصفوفة) متعدد الأشكال.** يحتوي كل إدخال على مميّز `type` (`text` أو `audio` أو `image`) وحقول خاصة بالنوع. لطلب أوضاع إخراج متعددة، مرِّر مصفوفة من إدخالات التنسيق.
+- **ينتقل `image_config` من `generation_config` إلى `response_format`.**
+  يمكنك الآن تحديد إعدادات إخراج الصور، مثل `aspect_ratio` و`image_size`
+  في إدخال `response_format` مع `"type": "image"`.
 
-### स्ट्रक्चर्ड आउटपुट (JSON)
+### ناتج منظَّم (JSON)
 
-नए स्कीमा में `response_mime_type` फ़ील्ड नहीं है. इसके बजाय, `"type": "text"` के साथ `response_format` ऑब्जेक्ट में एमआईएमई टाइप और JSON स्कीमा बताएं.
+يزيل المخطط الجديد حقل `response_mime_type`. بدلاً من ذلك، حدِّد نوع MIME ومخطط JSON ضِمن كائن `response_format` مع `"type": "text"`.
 
-#### पहले (लेगसी)
+#### قبل (الإصدار القديم)
 
 ### Python
 
@@ -663,7 +669,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.outputs[-1].text);
 ```
 
-### REST
+### راحة
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -681,7 +687,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### (नए स्कीमा) के बाद
+#### بعد (المخطط الجديد)
 
 ### Python
 
@@ -729,7 +735,7 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-### REST
+### راحة
 
 ```
 # Opt-in needed before May 26th
@@ -752,11 +758,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### इमेज कॉन्फ़िगरेशन
+### إعدادات الصور
 
-नए स्कीमा में, `generation_config` से `image_config` को हटा दिया गया है. अब आपको `response_format` एंट्री में `"type": "image"` के साथ, इमेज आउटपुट सेटिंग तय करनी होंगी.
+يزيل المخطط الجديد `image_config` من `generation_config`. يمكنك الآن تحديد إعدادات إخراج الصور
+في إدخال `response_format`مع `"type": "image"`.
 
-#### पहले (लेगसी)
+#### قبل (الإصدار القديم)
 
 ### Python
 
@@ -788,7 +795,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### REST
+### راحة
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -805,7 +812,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### (नए स्कीमा) के बाद
+#### بعد (المخطط الجديد)
 
 ### Python
 
@@ -839,7 +846,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### REST
+### راحة
 
 ```
 # Opt-in needed before May 26th
@@ -858,11 +865,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### ऑडियो कॉन्फ़िगरेशन
+### إعدادات الصوت
 
-नए स्कीमा में, `response_modalities: ["audio"]` को `"type": "audio"` की `response_format` एंट्री से बदल दिया जाता है.
+يستبدل المخطط الجديد `response_modalities: ["audio"]` بإدخال `response_format` من `"type": "audio"`.
 
-#### पहले (लेगसी)
+#### قبل (الإصدار القديم)
 
 ### Python
 
@@ -894,7 +901,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### REST
+### راحة
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$GEMINI_API_KEY" \
@@ -911,7 +918,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### (नए स्कीमा) के बाद
+#### بعد (المخطط الجديد)
 
 ### Python
 
@@ -949,7 +956,7 @@ const interaction = await client.interactions.create({
 });
 ```
 
-### REST
+### راحة
 
 ```
 # Opt-in needed before May 26th
@@ -970,51 +977,53 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-अगर आपको आउटपुट के लिए एक से ज़्यादा मोडालिटी (उदाहरण के लिए, टेक्स्ट और ऑडियो एक साथ) का अनुरोध करना है, तो `response_format` को एक ऑब्जेक्ट के बजाय फ़ॉर्मैट एंट्री का ऐरे पास करें.
+لطلب أوضاع إخراج متعددة (على سبيل المثال، النص والصوت معًا)، مرِّر مصفوفة من إدخالات التنسيق إلى `response_format` بدلاً من كائن واحد.
 
-## नए स्कीमा पर माइग्रेट करने का तरीका
+## كيفية نقل البيانات إلى المخطط الجديد
 
-### एसडीके का इस्तेमाल करने वाले लोग
+### مستخدِمو حزمة تطوير البرامج (SDK)
 
-एसडीके टूल के नए वर्शन पर अपग्रेड करें (Python ≥2.0.0, JavaScript ≥2.0.0). एसडीके, आपको नए स्कीमा में अपने-आप ऑप्ट-इन कर देता है. इसके लिए, कोड में किसी तरह का बदलाव करने की ज़रूरत नहीं होती. आपको सिर्फ़ यह अपडेट करना होता है कि जवाबों को कैसे पढ़ा जाए. इसके उदाहरण ऊपर दिए गए हैं. ध्यान दें कि इन एसडीके वर्शन में सिर्फ़ नया स्कीमा काम करता है. एसडीके के पुराने वर्शन (Python 1.x.x, JavaScript 1.x.x) **8 जून, 2026** को लेगसी स्कीमा हटाए जाने तक काम करते रहेंगे.
+رقِّ إلى أحدث إصدار من حزمة تطوير البرامج (Python ≥2.0.0 وJavaScript ≥2.0.0). تختارك حزمة تطوير البرامج (SDK) تلقائيًا في المخطط الجديد، ولا تحتاج إلى إجراء أي تغييرات على الرمز البرمجي بخلاف تعديل طريقة قراءة الردود (راجِع الأمثلة أعلاه). يُرجى العِلم أنّه لا يتم دعم سوى المخطط الجديد في إصدارات حزمة تطوير البرامج (SDK) هذه. ستستمر إصدارات حزمة تطوير البرامج (SDK) الأقدم (Python 1.x.x وJavaScript 1.x.x) في العمل إلى أن تتم إزالة المخطط القديم في **8 يونيو 2026**.
 
-### REST API का इस्तेमाल करने वाले लोग
+### مستخدِمو REST API
 
-नए स्कीमा में ऑप्ट-इन करने के लिए, अपने अनुरोधों में `Api-Revision: 2026-05-20` हेडर जोड़ें. **26 मई** के बाद, सभी अनुरोधों के लिए नया स्कीमा डिफ़ॉल्ट रूप से लागू हो जाएगा. `Api-Revision: 2026-05-07` का इस्तेमाल करके, कुछ समय के लिए ऑप्ट आउट किया जा सकता है. ऐसा **8 जून** तक किया जा सकता है. इसके बाद, एपीआई लेगसी स्कीमा को हमेशा के लिए हटा देगा.
+أضِف العنوان `Api-Revision: 2026-05-20` إلى طلباتك للاشتراك في المخطط الجديد الآن. بعد **26 مايو** ، يصبح المخطط الجديد هو المخطط التلقائي لجميع
+الطلبات. يمكنك إيقاف الاشتراك مؤقتًا باستخدام `Api-Revision: 2026-05-07`
+حتى **8 يونيو**، عندما تزيل واجهة برمجة التطبيقات المخطط القديم نهائيًا.
 
-### टाइमलाइन
+### المخطط الزمني
 
-| तारीख | फ़ेज़ (चरण) | एसडीके का इस्तेमाल करने वाले लोग | REST API का इस्तेमाल करने वाले लोग |
+| التاريخ | المرحلة | مستخدِمو حزمة تطوير البرامج (SDK) | مستخدِمو REST API |
 | --- | --- | --- | --- |
-| **7 मई** | ऑप्ट-इन करें | SDK टूल का नया वर्शन उपलब्ध है (Python ≥2.0.0, JS ≥2.0.0). नए स्कीमा को अपने-आप लागू करने के लिए, अपग्रेड करें. | ऑप्ट इन करने के लिए, `Api-Revision: 2026-05-20` हेडर जोड़ें. डिफ़ॉल्ट सेटिंग, लेगसी ही रहेगी. |
-| **26 मई** | डिफ़ॉल्ट फ़्लिप | अगर आपने पहले ही अपग्रेड कर लिया है, तो आपको कुछ करने की ज़रूरत नहीं है. पुराने SDK (Python 1.x.x, JS 1.x.x) अब भी काम करते हैं, लेकिन लेगसी जवाब देते हैं. | नया स्कीमा अब डिफ़ॉल्ट रूप से उपलब्ध है. ऑप्ट आउट करने के लिए, `Api-Revision: 2026-05-07` हेडर भेजें. |
-| **8 जून** | सूर्यास्त | Python 1.x.x और JS 1.x.x SDK वर्शन के लिए, Interactions API कॉल काम नहीं करेंगे. | Interactions API के लिए, लेगसी स्कीमा हटा दिया गया है. `Api-Revision` हेडर को अनदेखा किया गया. |
+| **‫7 مايو** | اشتراك | يتوفّر إصدار جديد من حزمة تطوير البرامج (SDK) (Python ≥2.0.0 وJS ≥2.0.0). رقِّ للحصول على المخطط الجديد تلقائيًا. | أضِف العنوان `Api-Revision: 2026-05-20` للاشتراك. يبقى المخطط القديم هو المخطط التلقائي. |
+| **‫26 مايو** | قلب تلقائي | لا يلزم اتّخاذ أي إجراء إذا تم الترقية من قبل. تستمر حزم تطوير البرامج (SDK) الأقدم (Python 1.x.x وJS 1.x.x) في العمل ولكنها تعرض الردود القديمة. | أصبح المخطط الجديد هو المخطط التلقائي الآن. أرسِل العنوان `Api-Revision: 2026-05-07` لإيقاف الاشتراك. |
+| **‫8 يونيو** | الغروب | ستتوقف إصدارات حزمة تطوير البرامج (SDK) من Python 1.x.x وJS 1.x.x عن العمل لاستدعاءات Interactions API. | تمت إزالة المخطط القديم لواجهة برمجة التطبيقات Interactions API. تم تجاهل العنوان `Api-Revision`. |
 
-## माइग्रेशन की चेकलिस्ट
+## قائمة التحقق من الترحيل
 
-### Steps स्कीमा (`steps`)
+### مخطط الخطوات (`steps`)
 
-- `outputs` के बजाय `steps` ऐरे से जवाब का कॉन्टेंट पढ़ने के लिए, कोड अपडेट करें. [उदाहरण देखें](#basic-unary).
-- पुष्टि करें कि आपका कोड, `user_input` और `model_output`, दोनों तरह के चरणों को मैनेज करता हो. [उदाहरण देखें](#basic-unary).
-- (फ़ंक्शन कॉल करना) `steps` ऐरे में `function_call` चरणों को ढूंढने के लिए कोड अपडेट करें. [उदाहरण देखें](#function-calling).
-- (सर्वर-साइड टूल) टूल के हिसाब से कोड अपडेट करें, ताकि टूल से जुड़े चरणों को पूरा किया जा सके. जैसे, `google_search_call`, `google_search_result`. [उदाहरण देखें](#server-side-tools).
-- (स्टेटलेस इतिहास) इतिहास को मैनेज करने की सुविधा को अपडेट करें, ताकि अगले अनुरोध के `input` फ़ील्ड में `steps` ऐरे को पास किया जा सके. [जानकारी देखें](#stateless-history).
-- (सिर्फ़ स्ट्रीमिंग के लिए) नए एसएसई इवेंट टाइप (`interaction.created`, `step.delta` वगैरह) सुनने के लिए, क्लाइंट को अपडेट करें. [उदाहरण देखें](#streaming).
+- عدِّل الرمز البرمجي لقراءة محتوى الردّ من مصفوفة `steps` بدلاً من `outputs`. [اطّلع على أمثلة](#basic-unary).
+- تأكَّد من أنّ الرمز البرمجي يعالج نوعَي الخطوات `user_input` و`model_output`. [اطّلع على أمثلة](#basic-unary).
+- (استدعاء الدالة) عدِّل الرمز البرمجي للعثور على خطوات `function_call` في مصفوفة `steps`. [اطّلع على أمثلة](#function-calling).
+- (أدوات من جهة الخادم) عدِّل الرمز البرمجي لمعالجة الخطوات الخاصة بالأداة (مثل `google_search_call` و`google_search_result`). [اطّلِع على أمثلة](#server-side-tools).
+- (السجلّ بدون حالة) عدِّل إدارة السجلّ لتمرير مصفوفة `steps` في حقل `input` للطلب التالي. [اطّلع على التفاصيل](#stateless-history).
+- (البث فقط) عدِّل العميل للاستماع إلى أنواع أحداث SSE الجديدة (`interaction.created` و`step.delta` وما إلى ذلك). [اطّلع على أمثلة](#streaming).
 
-### आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन (`response_format`)
+### إعداد تنسيق الإخراج (`response_format`)
 
-- `response_mime_type` को `response_format` में मौजूद `mime_type` फ़ील्ड से बदलें. [उदाहरण देखें](#structured-output).
-- अपने मौजूदा `response_format` JSON स्कीमा को `{"type": "text", "schema": ...}` ऑब्जेक्ट में रैप करें. [उदाहरण देखें](#structured-output).
-- (इमेज जनरेट करने की सुविधा) `image_config` को `generation_config` से `response_format` में मौजूद `{"type": "image", ...}` एंट्री में ले जाएं. [उदाहरण देखें](#image-config).
-- (स्पीच जनरेशन) `response_modalities=["audio"]` को `response_format` में मौजूद `{"type": "audio"}` एंट्री से बदलें. [उदाहरण देखें](#audio-config).
-- (टेक्स्ट, इमेज, और वीडियो वगैरह का इस्तेमाल करके) एक से ज़्यादा आउटपुट मोड का अनुरोध करते समय, किसी एक ऑब्जेक्ट से `response_format` को ऐरे में बदलें.
+- استبدِل `response_mime_type` بحقل `mime_type` ضِمن `response_format`. [اطّلع على أمثلة](#structured-output).
+- غلِّف مخطط JSON الحالي `response_format` ضِمن كائن `{"type": "text", "schema": ...}`. [اطّلع على أمثلة](#structured-output).
+- (إنشاء الصور) انقل `image_config` من `generation_config` إلى إدخال `{"type": "image", ...}` في `response_format`. [اطّلع على أمثلة](#image-config).
+- (إنشاء الكلام) استبدِل `response_modalities=["audio"]` بإدخال `{"type": "audio"}` في `response_format`. [اطّلع على أمثلة](#audio-config).
+- (متعدد الوسائط) حوِّل `response_format` من كائن واحد إلى مصفوفة عند طلب أوضاع إخراج متعددة.
 
-सुझाव भेजें
+إرسال ملاحظات
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया.
+تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)
 
-क्या आपको हमें और कुछ बताना है?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

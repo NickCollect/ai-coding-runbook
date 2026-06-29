@@ -1,47 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=zh-CN
-fetched_at: 2026-06-22T06:32:09.135663+00:00
-title: "Deep Research \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=he
+fetched_at: 2026-06-29T05:31:35.825790+00:00
+title: "\u05ea\u05e6\u05d5\u05d2\u05d4 \u05de\u05e7\u05d3\u05d9\u05de\u05d4 \u05e9\u05dc Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 现已推出预览版，支持协作规划、可视化、MCP 等功能。
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-发送反馈
+שליחת משוב
 
-# Deep Research 预览版
+# תצוגה מקדימה של Deep Research
 
-一款功能强大的智能体研究员，专为自主执行多步骤调查而设计，可将复杂信息整合到内容详尽且附有引用的报告中。此模型支持协作规划、可视化、MCP
-服务器和文件搜索。它有两个版本：Deep Research，注重速度和效率；Deep Research Max，注重全面性。
+חוקר סוכני רב-עוצמה שנועד לחקירות אוטונומיות בכמה שלבים, שבהן מידע מורכב מסוכם לדוחות מקיפים עם ציטוטים. המודל הזה תומך בתכנון שיתופי, בתצוגה חזותית, בשרתי MCP ובחיפוש קבצים. הוא מגיע בשתי גרסאות: Deep Research למהירות ויעילות, ו-Deep Research Max לכיסוי מקיף.
 
-## 文档
+## מאמרי עזרה
 
-如需全面了解功能，请访问 [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 页面
-。
+מידע מלא על התכונות והיכולות זמין בדף [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=he).
 
 ## deep-research-preview-04-2026
 
-| 属性 | 说明 |
+| נכס | תיאור |
 | --- | --- |
-| id\_card智能体代码 | **Interactions API**  `deep-research-preview-04-2026` |
-| save支持的数据类型 | **输入**  文本、图片、PDF、音频、视频  **输出**  文本（附有引用的报告）、图片 |
-| token\_autoToken 限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入上下文窗口**  1,048,576  **输出 token 限制**  65,536 |
-| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`deep-research-preview-04-2026` - 上限：`deep-research-max-preview-04-2026` |
-| calendar\_month最后更新时间 | 2026 年 4 月 |
+| id\_cardקוד הסוכן | **Interactions API**  `deep-research-preview-04-2026` |
+| saveסוגי נתונים נתמכים | **קלט**  טקסט, תמונה, PDF, אודיו, וידאו  **פלט**  טקסט (דוחות עם ציטוטים), תמונות |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **חלון הקשר של הקלט**  1,048,576  **מגבלת אסימונים בפלט**  65,536 |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `deep-research-preview-04-2026` - מקסימום: `deep-research-max-preview-04-2026` |
+| calendar\_monthהעדכון האחרון | אפריל 2026 |
 
-发送反馈
+שליחת משוב
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最后更新时间 (UTC)：2026-04-29。
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-需要向我们提供更多信息？
+רוצה לתת לנו משוב?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

@@ -1,0 +1,514 @@
+---
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=vi
+fetched_at: 2026-06-29T05:39:06.822867+00:00
+title: "T\u00ednh n\u0103ng m\u1edbi trong Gemini 3.5 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+---
+
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+
+Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+
+Gửi ý kiến phản hồi
+
+# Tính năng mới trong Gemini 3.5 Flash
+
+Gemini 3.5 Flash đã **phát hành rộng rãi (GA)**, ổn định và sẵn sàng để sử dụng trong quy trình sản xuất quy mô lớn. Là mô hình Flash thông minh nhất của chúng tôi, Gemini 2.0 Flash mang lại hiệu suất vượt trội và bền vững trong việc thực thi tác vụ, lập trình và thực hiện các tác vụ dài hạn ở quy mô lớn.
+
+Hướng dẫn này cung cấp thông tin tổng quan về các điểm cải tiến, thay đổi về API và hướng dẫn di chuyển cho Gemini 3.5 Flash.
+
+## Mô hình mới
+
+| Mô hình | Mã kiểu máy | Mô tả |
+| --- | --- | --- |
+| Gemini 3.5 Flash | `gemini-3.5-flash` | Mô hình thông minh nhất của chúng tôi, mang lại hiệu suất vượt trội trong các tác vụ liên quan đến tác nhân và lập trình. |
+
+Gemini 3.5 Flash hỗ trợ cửa sổ ngữ cảnh 1 triệu token, tối đa 65.000 token đầu ra, khả năng tư duy và cùng một bộ công cụ cũng như các tính năng của nền tảng như Gemini 3 Flash, bao gồm cả [Sử dụng máy tính (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi).
+Để biết đầy đủ thông số kỹ thuật, hãy xem [tổng quan về các mô hình](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi).
+Để biết giá, hãy xem [trang giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.5-flash).
+
+## Bắt đầu nhanh
+
+Tất cả ví dụ trong hướng dẫn này đều sử dụng GenerateContent API. API Tương tác cũng được hỗ trợ; các lựa chọn và đề xuất về cấu hình tương tự cũng được áp dụng.
+
+### Python
+
+```
+from google import genai
+
+client = genai.Client()
+
+response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    contents="Explain how parallel agentic execution works in three sentences.",
+)
+print(response.text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({});
+
+async function main() {
+  const response = await ai.models.generateContent({
+    model: "gemini-3.5-flash",
+    contents: "Explain how parallel agentic execution works in three sentences.",
+  });
+  console.log(response.text);
+}
+
+main();
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "contents": [{
+      "parts": [{"text": "Explain how parallel agentic execution works in three sentences."}]
+    }]
+  }'
+```
+
+## Tính năng mới
+
+- **Hiệu suất vượt trội bền vững:** Mô hình Flash thông minh nhất của chúng tôi, được tối ưu hoá cho các tác vụ lập trình và tác nhân ở quy mô lớn.
+- **Thực thi dựa trên tác nhân:** Triển khai tác nhân phụ, giải quyết vấn đề và các vòng lặp dựa trên tác nhân nhanh chóng trên quy mô lớn.
+- **Lập trình:** Các chu kỳ lập trình lặp đi lặp lại, khám phá nhanh và tạo mẫu để kiểm thử các đường dẫn thay thế và khám phá các giải pháp một cách linh hoạt.
+- **Dài hạn:** Quy trình làm việc nhiều bước và sử dụng công cụ ở quy mô lớn.
+- **Bảo lưu suy nghĩ:** Mô hình tự động duy trì quá trình suy luận trung gian trong các cuộc trò chuyện nhiều lượt. Không cần thay đổi API.
+- **Mức độ nỗ lực mặc định mới:** Mức độ nỗ lực suy nghĩ mặc định đã thay đổi từ `high` thành `medium`. Hãy xem phần [Mức độ nỗ lực mặc định mới](#default-effort-level) để biết thông tin chi tiết.
+- **Cải thiện khả năng tư duy của `low`:** Giờ đây, `low` đã được cải thiện đáng kể cho mã và các tác vụ dựa trên tác nhân đòi hỏi ít bước hơn, mang lại chất lượng cao với độ trễ và chi phí thấp hơn.
+- **Bản phát hành GA:** Mô hình ổn định để sử dụng trong sản xuất trên quy mô lớn.
+
+### Chọn mô hình Flash phù hợp
+
+Gemini 3.5 Flash là mô hình Flash thông minh và mạnh mẽ nhất của chúng tôi. Tuy nhiên, các trường hợp sử dụng khác nhau có thể có các yêu cầu khác nhau về chi phí và độ trễ.
+
+- **Gemini 3.1 Flash-Lite**: Đối với những tác vụ có chi phí thấp, số lượng lớn mà không yêu cầu khả năng suy luận chuyên sâu của 3.5 Flash, bạn nên sử dụng [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi).
+  Đây là một mô hình ổn định, lâu dài và được tối ưu hoá để mang lại hiệu quả. Hãy xem [hướng dẫn dành cho nhà phát triển Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi#developer_guide) để biết thêm thông tin chi tiết.
+- **Gemini 3 Flash (Bản dùng thử)**: Mặc dù bạn nên chuyển sang 3.5 Flash để có độ ổn định và khả năng suy luận tốt hơn, nhưng [Gemini 3 Flash (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) vẫn được cung cấp cho những nhà phát triển muốn tiếp tục thử nghiệm với mô hình dùng thử này.
+
+## Thay đổi về hành vi
+
+### Mức độ nỗ lực mặc định mới: `medium`
+
+Giờ đây, mức độ nỗ lực tư duy mặc định là **`medium`**, thay đổi từ `high` trong Gemini 3 Flash Preview. `medium` mang lại kết quả rất tốt trong nhiều loại nhiệm vụ, đồng thời nhanh hơn và tiết kiệm chi phí hơn. Đối với các vấn đề phức tạp, `high` khuyến khích mô hình suy nghĩ sâu sắc hơn.
+
+| Mức độ nỗ lực | Trường hợp sử dụng |
+| --- | --- |
+| `minimal` | Tối ưu hoá để tăng tốc độ phản hồi. Các trường hợp sử dụng tương tự như trò chuyện, câu trả lời nhanh về thông tin thực tế, lệnh gọi công cụ đơn giản hơn. |
+| `low` | Mã và các tác vụ dựa trên tác nhân đòi hỏi độ trễ thấp hơn và ít bước hơn. Cũng phù hợp với các nhiệm vụ phân tích và viết lách đòi hỏi tư duy. |
+| **`medium` (mặc định)** | **Chất lượng tốt nhất cho hầu hết các tác vụ. Được đề xuất cho mã phức tạp và các trường hợp sử dụng có tác nhân.** |
+| `high` | Tối đa hoá khả năng suy nghĩ và sử dụng các công cụ của mô hình. Phù hợp nhất với những nhiệm vụ phức tạp về suy luận, toán học khó và mã hoặc tác nhân khó nhất. Cho phép mở rộng suy nghĩ và gọi hàm. |
+
+Để ghi đè giá trị mặc định, hãy đặt `thinking_level` trong cấu hình của bạn:
+
+### Python
+
+```
+from google import genai
+from google.genai import types
+
+client = genai.Client()
+
+response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    contents="Prove that the square root of 2 is irrational.",
+    config=types.GenerateContentConfig(
+        thinking_config=types.ThinkingConfig(thinking_level="high")
+    ),
+)
+
+print(response.text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+
+const ai = new GoogleGenAI({});
+
+async function main() {
+  const response = await ai.models.generateContent({
+    model: "gemini-3.5-flash",
+    contents: "Prove that the square root of 2 is irrational.",
+    config: {
+      thinkingConfig: {
+        thinkingLevel: "HIGH",
+      },
+    },
+  });
+  console.log(response.text);
+}
+
+main();
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "contents": [{
+      "parts": [{"text": "Prove that the square root of 2 is irrational."}]
+    }],
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingLevel": "HIGH"
+      }
+    }
+  }'
+```
+
+Bảng sau đây cho biết những cấp độ tư duy được hỗ trợ cho mỗi mô hình:
+
+| Cấp độ tư duy | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Mô tả |
+| --- | --- | --- | --- | --- | --- |
+| **`minimal`** | Được hỗ trợ | Không được hỗ trợ | Được hỗ trợ (Mặc định) | Được hỗ trợ | Phù hợp với chế độ cài đặt "không suy nghĩ" cho hầu hết các cụm từ tìm kiếm. Xin lưu ý rằng `minimal` không đảm bảo rằng tính năng suy nghĩ sẽ tắt, mô hình có thể suy luận ở mức tối thiểu cho các tác vụ phức tạp. |
+| **`low`** | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Giảm thiểu độ trễ và chi phí. |
+| **`medium`** | Được hỗ trợ (Mặc định) | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Tư duy cân bằng cho hầu hết các nhiệm vụ. |
+| **`high`** | Được hỗ trợ (Động) | Được hỗ trợ (Mặc định, Động) | Được hỗ trợ (Động) | Được hỗ trợ (Mặc định, Động) | Tối đa hoá độ sâu suy luận. |
+
+### Bảo tồn suy nghĩ
+
+Mô hình này tự động duy trì lập luận trung gian trong các cuộc trò chuyện nhiều lượt. Khi có trong nhật ký trò chuyện, ngữ cảnh suy luận sẽ được chuyển tiếp, giúp cải thiện hiệu suất đối với các tác vụ phức tạp gồm nhiều bước như gỡ lỗi lặp đi lặp lại và tái cấu trúc mã. Không cần thay đổi API:
+
+- **Interactions API**: Suy nghĩ đã được lưu tự động. Không có thay đổi nào về hành vi.
+- **GenerateContent API**: Bắt đầu từ Gemini 3.5 Flash, mô hình này sẽ sử dụng ngữ cảnh suy luận từ tất cả các lượt trước đó khi chữ ký tư duy xuất hiện trong nhật ký trò chuyện. Để bật tính năng này, hãy truyền toàn bộ nhật ký cuộc trò chuyện chưa được sửa đổi (bao gồm cả [chữ ký suy nghĩ](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi)) trong `contents`.
+  Các SDK sẽ tự động xử lý việc này.
+
+## Thông tin cập nhật về tham số và các phương pháp hay nhất trong Gemini 3.x
+
+Những điều sau đây áp dụng cho **tất cả các mô hình Gemini 3.x**, bao gồm cả Gemini 3.5 Flash.
+
+- **`temperature`, `top_p`, `top_k`**: bạn không nên thay đổi các giá trị mặc định. Khả năng suy luận của Gemini 3 được tối ưu hoá cho các chế độ cài đặt mặc định.
+- Sử dụng `thinking_level` thay vì `thinking_budget`.
+- **So khớp phản hồi gọi hàm**: `id`, `name` và số lượng phản hồi phải khớp với các lệnh gọi trước đó.
+- **Phản hồi bằng hàm đa phương thức**: bao gồm nội dung đa phương thức bên trong phản hồi bằng hàm, chứ không phải bên ngoài.
+- **Hướng dẫn nội tuyến trong câu trả lời của hàm**: thêm vào văn bản câu trả lời của hàm, chứ không phải là các phần riêng biệt.
+- **Giảm số lượng lệnh gọi công cụ không cần thiết**: Sử dụng các cấp độ tư duy thấp hơn hoặc thử nghiệm với các chỉ dẫn hệ thống để giảm số lượng lệnh gọi công cụ trong quy trình làm việc dựa trên tác nhân.
+
+Hãy xem các phần bên dưới để biết cách cập nhật mã.
+
+### Tham số lấy mẫu (không còn được đề xuất)
+
+`temperature`, `top_p` và `top_k` không còn được đề xuất cho tất cả các mô hình Gemini 3.x nữa. Khả năng suy luận của Gemini 3 được tối ưu hoá cho các chế độ cài đặt mặc định. **Xoá các thông số này khỏi tất cả yêu cầu.**
+
+```
+# ⚠️ Remove these parameters (not recommended)
+config = types.GenerateContentConfig(
+    temperature=0.7,
+    top_p=0.9,
+    top_k=40
+)
+```
+
+Để đảm bảo tính xác định, bạn nên xác định một chỉ dẫn hệ thống có các quy tắc rõ ràng cho trường hợp sử dụng cụ thể của mình.
+
+### `thinking_budget` (không nên dùng nữa)
+
+Bạn không nên dùng thông số `thinking_budget` dạng số thô trên tất cả các mô hình Gemini 3.x nữa. Thay vào đó, hãy dùng enum chuỗi `thinking_level`.
+
+```
+# ⚠️ Before (not recommended)
+config = types.GenerateContentConfig(
+    thinking_config=types.ThinkingConfig(thinking_budget=7500)
+)
+
+# ✅ After
+config = types.GenerateContentConfig(
+    thinking_config=types.ThinkingConfig(thinking_level="medium")
+)
+```
+
+Các giá trị có thể là: `minimal`, `low`, `medium` (mặc định) và `high`.
+
+### Gọi hàm: so khớp phản hồi nghiêm ngặt
+
+Interactions API đã báo lỗi về các phản hồi hàm không khớp. API GenerateContent chưa báo lỗi, nhưng các phản hồi không khớp sẽ khiến mô hình trả về các phản hồi trống có `finish_reason: STOP` trong hầu hết các trường hợp. Luôn tuân thủ các quy ước sau:
+
+| Yêu cầu | Thông tin chi tiết |
+| --- | --- |
+| Đã tính `id` | Mỗi `FunctionResponse` phải bao gồm `id` từ `FunctionCall` tương ứng |
+| Ván `name` | `name` trong phản hồi phải khớp với `name` trong lệnh gọi |
+| Số lượng trùng khớp | Trả về đúng một `FunctionResponse` cho mỗi `FunctionCall` nhận được |
+
+### Python
+
+```
+# ✅ Include matching id and name in the function response
+final_response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    config=config,
+    contents=[
+        *previous_contents,
+        response.candidates[0].content,
+        types.Content(role="user", parts=[
+            types.Part.from_function_response(
+                name=tool_call.name,
+                response={"result": result},
+                id=tool_call.id,
+            )
+        ]),
+    ],
+)
+```
+
+### JavaScript
+
+```
+// ✅ Include matching id and name in the function response
+const functionResponsePart = {
+  functionResponse: {
+    name: toolCall.name,
+    response: { result: result },
+    id: toolCall.id,
+  },
+};
+
+const finalResponse = await ai.models.generateContent({
+  model: "gemini-3.5-flash",
+  contents: [
+    ...previousContents,
+    { role: "model", parts: [{ functionCall: toolCall }] },
+    { role: "user", parts: [functionResponsePart] },
+  ],
+  config: config,
+});
+```
+
+### REST
+
+```
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+    "contents": [
+      {"role": "user", "parts": [{"text": "..."}]},
+      {"role": "model", "parts": [{"functionCall": {"name": "my_function", "args": {...}}}]},
+      {"role": "user", "parts": [{"functionResponse": {"name": "my_function", "id": "call_id", "response": {"result": "..."}}}]}
+    ]
+  }'
+```
+
+### Phản hồi của hàm đa phương thức
+
+Chúng tôi thường thấy các ứng dụng cung cấp hình ảnh bên ngoài phản hồi của hàm. Điều này có thể dẫn đến hành vi không mong muốn của mô hình (ví dụ: rò rỉ suy nghĩ) và dẫn đến kết quả đầu ra có chất lượng thấp hơn. Thay vào đó, hãy làm theo đề xuất trong [tài liệu về Multimodal Function Responses API](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=vi#multimodal) và đưa nội dung đa phương thức vào các phần phản hồi của hàm mà bạn gửi đến mô hình. Mô hình có thể xử lý nội dung đa phương thức này trong lượt tiếp theo để đưa ra câu trả lời có nhiều thông tin hơn.
+
+### Python
+
+```
+# ✅ Include multimodal content in the function response
+final_response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    config=config,
+    contents=[
+        *previous_contents,
+        response.candidates[0].content,
+        types.Content(role="user", parts=[
+            types.Part.from_function_response(
+                name=tool_call.name,
+                response={
+                    "result": "instrument.jpg",
+                    "image": base64_image_data,
+                },
+                id=tool_call.id,
+            )
+        ]),
+    ],
+)
+```
+
+### JavaScript
+
+```
+// ✅ Include multimodal content in the function response
+const finalResponse = await ai.models.generateContent({
+  model: "gemini-3.5-flash",
+  contents: [
+    ...previousContents,
+    { role: "model", parts: [{ functionCall: toolCall }] },
+    {
+      role: "user",
+      parts: [{
+        functionResponse: {
+          name: toolCall.name,
+          id: toolCall.id,
+          response: {
+            result: "instrument.jpg",
+            image: base64ImageData,
+          },
+        },
+      }],
+    },
+  ],
+  config: config,
+});
+```
+
+### Hướng dẫn cùng dòng trong câu trả lời của hàm
+
+Chúng ta thường thấy các ứng dụng cung cấp thêm hướng dẫn cùng với các phản hồi của hàm dưới dạng `Parts` tiếp theo. Điều này có thể dẫn đến hành vi không mong muốn của mô hình (ví dụ: rò rỉ suy nghĩ) và dẫn đến kết quả đầu ra có chất lượng thấp hơn. Thay vào đó, hãy thêm mọi hướng dẫn bổ sung vào cuối văn bản phản hồi của hàm, được phân tách bằng hai dòng mới.
+
+### Python
+
+```
+# ✅ Append inline instructions to the end of the function response separated by two newlines
+result_text = f"{json.dumps(result)}\n\n<your inline instructions>"
+
+final_response = client.models.generate_content(
+    model="gemini-3.5-flash",
+    config=config,
+    contents=[
+        *previous_contents,
+        response.candidates[0].content,
+        types.Content(role="user", parts=[
+            types.Part.from_function_response(
+                name=tool_call.name,
+                response={"result": result_text},
+                id=tool_call.id,
+            )
+        ]),
+    ],
+)
+```
+
+### JavaScript
+
+```
+// ✅ Append inline instructions to the end of the function response separated by two newlines
+const resultText = `${JSON.stringify(result)}\n\n<your inline instructions>`;
+
+const finalResponse = await ai.models.generateContent({
+  model: "gemini-3.5-flash",
+  contents: [
+    ...previousContents,
+    { role: "model", parts: [{ functionCall: toolCall }] },
+    {
+      role: "user",
+      parts: [{
+        functionResponse: {
+          name: toolCall.name,
+          id: toolCall.id,
+          response: { result: resultText },
+        },
+      }],
+    },
+  ],
+  config: config,
+});
+```
+
+### Giảm các lệnh gọi công cụ không cần thiết
+
+Nếu bạn gặp phải tình trạng sử dụng quá nhiều lệnh gọi công cụ, thì có 2 kỹ thuật giúp giảm thiểu tình trạng này:
+
+1. **Bắt đầu bằng cách giảm cấp độ tư duy** (`medium`, `low` hoặc `minimal`): Cấp độ tư duy càng cao thì mô hình càng được khuyến khích sử dụng nhiều công cụ hơn để khám phá và xác minh. Vì vậy, việc giảm cấp độ có thể giảm số lượng lệnh gọi công cụ.
+2. **Thêm một chỉ dẫn hệ thống:** Nếu tình trạng sử dụng quá mức vẫn tiếp diễn sau khi điều chỉnh mức độ tư duy, hãy cân nhắc sử dụng một câu lệnh hạn chế việc sử dụng công cụ. Ví dụ:
+
+   ```
+   You have a limited action budget of <n> tool calls. Use them efficiently.
+   ```
+
+## Danh sách kiểm tra cho quy trình di chuyển
+
+### Di chuyển từ Gemini 3 Flash (Bản xem trước)
+
+- Cập nhật tên mô hình: `gemini-3-flash-preview` → `gemini-3.5-flash`
+- Xem lại giá. Gemini 3.5 Flash có giá cao hơn Gemini 3 Flash (Bản dùng thử). Nếu trường hợp sử dụng của bạn rất nhạy cảm về chi phí, hãy cân nhắc việc di chuyển sang [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi). Hãy xem [trang giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.5-flash) để biết thông tin chi tiết.
+- Xoá `temperature`, `top_p`, `top_k` khỏi cấu hình của bạn (không còn được đề xuất nữa).
+- Thay thế `thinking_budget` với `thinking_level`.
+- Thêm `id` và `name` tương ứng vào tất cả các phần `FunctionResponse`.
+- Kiểm thử câu lệnh. Đã thay đổi mức độ nỗ lực mặc định từ `high` → `medium`; xác minh chất lượng, tốc độ và chi phí.
+- Tính năng lưu giữ suy nghĩ hiện được bật theo mặc định. Ngữ cảnh suy luận được chuyển tiếp qua các lượt, giúp cải thiện hiệu suất nhưng có thể làm tăng mức sử dụng mã thông báo.
+- Giảm số lượng lệnh gọi công cụ không cần thiết: bắt đầu bằng cách giảm mức độ tư duy (`medium`, `low` hoặc `minimal`); thêm một chỉ dẫn hệ thống để hạn chế việc sử dụng công cụ nếu tình trạng sử dụng quá mức vẫn tiếp diễn.
+- [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi) được hỗ trợ.
+
+### Di chuyển từ Gemini 2.5
+
+Tất cả các phương án trên, cộng thêm:
+
+- Đơn giản hoá câu lệnh. Nếu bạn đã sử dụng kỹ thuật thiết kế câu lệnh theo chuỗi suy luận để buộc suy luận, hãy thử `thinking_level: "medium"` hoặc `"high"` bằng các câu lệnh đơn giản hơn.
+- Kiểm thử tải PDF và nội dung nghe nhìn. Nếu bạn dựa vào hành vi cụ thể để phân tích cú pháp tài liệu dày đặc, hãy kiểm tra chế độ cài đặt `media_resolution_high` để đảm bảo độ chính xác liên tục. Việc di chuyển sang chế độ mặc định Gemini 3 cũng có thể làm tăng mức sử dụng mã thông báo cho tệp PDF nhưng giảm mức sử dụng mã thông báo cho video; nếu các yêu cầu vượt quá cửa sổ ngữ cảnh, hãy giảm rõ ràng `media_resolution`. Hãy xem tài liệu về [độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi) để biết thông tin chi tiết.
+- Tận dụng [việc sử dụng kết hợp các công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
+  Bạn có thể sử dụng Google Tìm kiếm, ngữ cảnh URL, hoạt động thực thi mã và các hàm tuỳ chỉnh trong cùng một yêu cầu.
+- Nếu sử dụng câu trả lời đa phương thức của hàm, hãy di chuyển nội dung đa phương thức vào bên trong các phần câu trả lời của hàm, chứ không phải bên cạnh các phần đó.
+- Nếu sử dụng hướng dẫn nội tuyến với các phản hồi của hàm, hãy thêm hướng dẫn đó vào văn bản phản hồi của hàm, cách nhau bằng hai dòng mới, chứ không phải là các phần riêng biệt.
+- Gemini 3.x không hỗ trợ tính năng phân đoạn hình ảnh. Đối với các khối lượng công việc phân đoạn, hãy tiếp tục sử dụng Gemini 2.5 Flash khi tắt chế độ tư duy hoặc [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=vi).
+- Xoá `candidate_count` khỏi cấu hình (không được hỗ trợ trong Gemini 3.x)
+
+## Các tính năng dành cho gia đình của Gemini 3
+
+Gemini 3.5 Flash kế thừa mọi chức năng của nhóm mô hình Gemini 3, bao gồm cả chức năng Sử dụng máy tính.
+Các tính năng được giới thiệu trong Gemini 3 và vẫn được duy trì:
+
+- [**Suy nghĩ**](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**:** Bối cảnh suy luận được mã hoá và duy trì trên các lệnh gọi API. Tự động trong Interactions API; ngầm trong GenerateContent.
+- [**Đầu ra có cấu trúc bằng các công cụ**](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**:** Kết hợp chế độ JSON với các công cụ tích hợp (Tìm kiếm, bối cảnh URL, thực thi mã, gọi hàm).
+- [**Phản hồi bằng hàm đa phương thức**](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#multimodal)**:** Trả về hình ảnh, âm thanh và nội dung nghe nhìn khác trong kết quả gọi hàm.
+- [**Thực thi mã bằng hình ảnh**](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi#images)**:** Thực thi mã xử lý và tạo hình ảnh.
+- [**Kết hợp sử dụng công cụ**](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi)**:** Sử dụng các công cụ tích hợp và tính năng gọi hàm tuỳ chỉnh trong cùng một yêu cầu.
+- [**Độ phân giải của nội dung nghe nhìn**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi)**:**
+  Kiểm soát chi tiết việc phân bổ mã thông báo cho dữ liệu đầu vào là hình ảnh, video và PDF.
+  Các mô hình Gemini 3 hỗ trợ chế độ cài đặt độ phân giải theo từng mục nội dung (`low`, `medium`, `high`, `ultra_high`) cho câu lệnh có độ trung thực hỗn hợp.
+- [**Chữ ký suy nghĩ**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi)**:**
+  Biểu thị được mã hoá về quá trình suy luận nội bộ của mô hình. Bắt buộc đối với chức năng gọi nhiều lượt; được các SDK chính thức quản lý tự động.
+
+## Các phương pháp hay nhất để viết câu lệnh
+
+Các mô hình Gemini 3.x là mô hình suy luận, điều này thay đổi cách bạn nên đưa ra câu lệnh.
+
+- **Hướng dẫn chính xác:** Trình bày ngắn gọn. Gemini 3.x phản hồi tốt nhất khi nhận được chỉ dẫn trực tiếp và rõ ràng. Các kỹ thuật thiết kế câu lệnh phức tạp hoặc dài dòng được thiết kế cho các mô hình cũ có thể khiến mô hình phân tích quá mức.
+- **Mức độ chi tiết của câu trả lời:** Theo mặc định, Gemini 3.x ít chi tiết hơn và ưu tiên các câu trả lời trực tiếp, hiệu quả. Nếu trường hợp sử dụng của bạn yêu cầu giọng điệu trò chuyện, hãy hướng dẫn rõ ràng cho mô hình trong câu lệnh của bạn (ví dụ: "Giải thích điều này với tư cách là một trợ lý thân thiện và hay trò chuyện").
+- **Quản lý bối cảnh:** Khi làm việc với các tập dữ liệu lớn (chẳng hạn như toàn bộ sách, cơ sở mã hoặc video dài), hãy đặt hướng dẫn hoặc câu hỏi cụ thể của bạn ở cuối câu lệnh, sau bối cảnh dữ liệu. Cố định lập luận của mô hình bằng cách bắt đầu câu hỏi bằng một cụm từ như "Dựa trên thông tin trước đó...".
+
+Tìm hiểu thêm về các chiến lược thiết kế câu lệnh trong [hướng dẫn kỹ thuật tạo câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
+
+## Các điểm hạn chế
+
+- Gemini 3.x không hỗ trợ tính năng phân đoạn hình ảnh. Đối với các khối lượng công việc phân đoạn, hãy tiếp tục sử dụng Gemini 2.5 Flash khi tắt chế độ tư duy hoặc [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=vi).
+
+## Câu hỏi thường gặp
+
+1. **Điểm cắt kiến thức của Gemini 3.5 Flash là khi nào?** Gemini 3.5 Flash có điểm cắt kiến thức là tháng 1 năm 2025. Để biết thông tin mới nhất, hãy sử dụng công cụ [Tìm kiếm thông tin cơ sở](https://ai.google.dev/gemini-api/docs/google-search?hl=vi).
+2. **Hạn mức cửa sổ ngữ cảnh là bao nhiêu?** Gemini 3.5 Flash hỗ trợ cửa sổ ngữ cảnh đầu vào 1 triệu token và tối đa 65.000 token đầu ra.
+3. **Mã `thinking_budget` cũ của tôi có còn hoạt động không?** Có, `thinking_budget` vẫn được hỗ trợ để đảm bảo khả năng tương thích ngược, nhưng bạn nên di chuyển sang `thinking_level` để có hiệu suất dễ dự đoán hơn. Đừng sử dụng cả hai trong cùng một yêu cầu.
+4. **Gemini 3.5 Flash có hỗ trợ Batch API không?** Có. Hãy xem hướng dẫn về [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi) để biết thông tin chi tiết.
+5. **Context Caching có được hỗ trợ không?** Có, [Tính năng lưu vào bộ nhớ đệm theo bối cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi) được hỗ trợ.
+6. **Những công cụ nào được hỗ trợ?** Gemini 3.5 Flash hỗ trợ [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Kết nối với Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi), [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) tiêu chuẩn, bao gồm cả [sử dụng kết hợp các công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
+   Gemini 3.5 Flash **không** hỗ trợ tính năng [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi).
+
+## Các bước tiếp theo
+
+- Tìm hiểu thêm về các chiến lược thiết kế câu lệnh trong [hướng dẫn kỹ thuật tạo câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
+- Làm quen với [Sổ tay Gemini 3](https://github.com/google-gemini/cookbook)
+- Tìm hiểu về [hoạt động tối ưu hoá và suy luận của Gemini API](https://ai.google.dev/gemini-api/docs/optimization?hl=vi)
+
+Gửi ý kiến phản hồi
+
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+
+Cập nhật lần gần đây nhất: 2026-06-24 UTC.
+
+Bạn muốn chia sẻ thêm với chúng tôi?
+
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-24 UTC."],[],[]]

@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ko
-fetched_at: 2026-06-22T06:34:25.953425+00:00
-title: "Live API\ub97c \uc0ac\uc6a9\ud55c \ub3c4\uad6c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/tools?hl=vi
+fetched_at: 2026-06-29T05:30:58.158839+00:00
+title: "S\u1eed d\u1ee5ng c\u00f4ng c\u1ee5 v\u1edbi Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-# Live API를 사용한 도구
+# Sử dụng công cụ với Live API
 
-도구 사용을 통해 Live API는 실시간 연결을 유지하면서 실제 작업을 수행하고 외부 컨텍스트를 가져올 수 있으므로 단순한 대화를 넘어설 수 있습니다.
-Live API를 사용하여 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko) 및 [Google 검색](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)과 같은 도구를 정의할 수 있습니다.
+Tính năng sử dụng công cụ cho phép Live API không chỉ dừng lại ở việc trò chuyện mà còn có thể thực hiện các hành động trong thế giới thực và lấy ngữ cảnh bên ngoài trong khi vẫn duy trì kết nối theo thời gian thực.
+Bạn có thể xác định các công cụ như [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) và [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/grounding?hl=vi) bằng Live API.
 
-## 지원되는 도구 개요
+## Tổng quan về các công cụ được hỗ trợ
 
-다음은 Live API 모델에 사용할 수 있는 도구에 대한 간략한 개요입니다.
+Sau đây là thông tin tổng quan ngắn gọn về các công cụ có sẵn cho mô hình Live API:
 
-| 도구 | Gemini 3.1 Flash 실시간 미리보기 | Gemini 2.5 Flash 실시간 미리보기 |
+| Công cụ | Bản xem trước Gemini 3.1 Flash Live | Bản xem trước trực tiếp Gemini 2.5 Flash |
 | --- | --- | --- |
-| **검색** | 지원됨 | 지원됨 |
-| **함수 호출** | 지원됨 (동기만 해당) | 지원됨 (동기 및 [비동기](#async-function-calling)) |
-| **Google 지도** | 지원되지 않음 | 지원되지 않음 |
-| **코드 실행** | 지원되지 않음 | 지원되지 않음 |
-| **URL 컨텍스트** | 지원되지 않음 | 지원되지 않음 |
+| **Tìm kiếm** | Được hỗ trợ | Được hỗ trợ |
+| **Gọi hàm** | Được hỗ trợ (chỉ đồng bộ) | Được hỗ trợ (đồng bộ và [không đồng bộ](#async-function-calling)) |
+| **Google Maps** | Không được hỗ trợ | Không được hỗ trợ |
+| **Thực thi mã** | Không được hỗ trợ | Không được hỗ trợ |
+| **Bối cảnh URL** | Không được hỗ trợ | Không được hỗ trợ |
 
-## 함수 호출
+## Gọi hàm
 
-Live API는 일반 콘텐츠 생성 요청과 마찬가지로 함수 호출을 지원합니다. 함수 호출을 사용하면 Live API가 외부 데이터 및 프로그램과 상호작용하여 애플리케이션이 할 수 있는 작업을 크게 늘릴 수 있습니다.
+Live API hỗ trợ chức năng gọi, giống như các yêu cầu tạo nội dung thông thường. Tính năng gọi hàm cho phép Live API tương tác với dữ liệu và chương trình bên ngoài, giúp tăng đáng kể những gì ứng dụng của bạn có thể thực hiện.
 
-세션 구성의 일부로 함수 선언을 정의할 수 있습니다.
-도구 호출을 수신한 후 클라이언트는 `session.send_tool_response` 메서드를 사용하여 `FunctionResponse` 객체 목록으로 응답해야 합니다.
+Bạn có thể xác định các khai báo hàm trong cấu hình phiên.
+Sau khi nhận được lệnh gọi công cụ, ứng dụng khách phải phản hồi bằng một danh sách các đối tượng `FunctionResponse` bằng phương thức `session.send_tool_response`.
 
-자세한 내용은 [함수 호출 튜토리얼](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)을 참고하세요.
+Hãy xem [Hướng dẫn gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) để tìm hiểu thêm.
 
 ### Python
 
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -217,13 +217,13 @@ async function main() {
 main();
 ```
 
-모델은 단일 프롬프트에서 여러 함수 호출과 출력을 연결하는 데 필요한 코드를 생성할 수 있습니다. 이 코드는 샌드박스 환경에서 실행되어 후속 [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=ko#bidigeneratecontenttoolcall) 메시지를 생성합니다.
+Từ một câu lệnh duy nhất, mô hình có thể tạo nhiều lệnh gọi hàm và mã cần thiết để liên kết các đầu ra của chúng. Mã này thực thi trong một môi trường hộp cát, tạo ra các thông báo [BidiGenerateContentToolCall](https://ai.google.dev/api/live?hl=vi#bidigeneratecontenttoolcall) tiếp theo.
 
-## 비동기 함수 호출
+## Gọi hàm không đồng bộ
 
-함수 호출은 기본적으로 순차적으로 실행됩니다. 즉, 각 함수 호출의 결과가 나올 때까지 실행이 일시중지됩니다. 이렇게 하면 순차적 처리가 보장되므로 함수가 실행되는 동안 모델과 계속 상호작용할 수 없습니다.
+Theo mặc định, tính năng gọi hàm sẽ thực thi tuần tự, tức là quá trình thực thi sẽ tạm dừng cho đến khi có kết quả của từng lệnh gọi hàm. Điều này đảm bảo quá trình xử lý tuần tự, tức là bạn sẽ không thể tiếp tục tương tác với mô hình trong khi các hàm đang chạy.
 
-대화를 차단하지 않으려면 모델에 함수를 비동기적으로 실행하도록 요청하면 됩니다. 이렇게 하려면 먼저 함수 정의에 `behavior`을 추가해야 합니다.
+Nếu không muốn chặn cuộc trò chuyện, bạn có thể yêu cầu mô hình chạy các hàm không đồng bộ. Để làm như vậy, trước tiên bạn cần thêm một `behavior` vào định nghĩa hàm:
 
 ### Python
 
@@ -233,7 +233,7 @@ turn_on_the_lights = {"name": "turn_on_the_lights", "behavior": "NON_BLOCKING"} 
 turn_off_the_lights = {"name": "turn_off_the_lights"} # turn_off_the_lights will still pause all interactions with the model
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality, Behavior } from '@google/genai';
@@ -247,13 +247,13 @@ const turn_off_the_lights = {name: "turn_off_the_lights"}
 const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights] }]
 ```
 
-`NON-BLOCKING`는 함수가 비동기적으로 실행되도록 보장하며, 사용자는 모델과 계속 상호작용할 수 있습니다.
+`NON-BLOCKING` đảm bảo hàm chạy không đồng bộ trong khi bạn có thể tiếp tục tương tác với mô hình.
 
-그런 다음 `scheduling` 매개변수를 사용하여 모델이 `FunctionResponse`를 수신할 때 어떻게 작동해야 하는지 알려야 합니다. 다음 중 하나일 수 있습니다.
+Sau đó, bạn cần cho mô hình biết cách hoạt động khi nhận được `FunctionResponse` bằng cách sử dụng tham số `scheduling`. Bạn có thể:
 
-- 진행 중인 작업을 중단하고 즉시 받은 대답을 알려줍니다(`scheduling="INTERRUPT"`).
-- 현재 실행 중인 작업(`scheduling="WHEN_IDLE"`)이 완료될 때까지 기다립니다.
-- 또는 아무것도 하지 않고 나중에 토론에서 해당 지식을 사용합니다(`scheduling="SILENT"`).
+- Tạm dừng những gì đang làm và cho bạn biết ngay về câu trả lời mà nó nhận được (`scheduling="INTERRUPT"`),
+- Chờ đến khi hoàn tất việc đang làm (`scheduling="WHEN_IDLE"`),
+- Hoặc không làm gì cả và sử dụng kiến thức đó vào lúc khác trong cuộc thảo luận (`scheduling="SILENT"`)
 
 ### Python
 
@@ -269,7 +269,7 @@ const tools = [{ functionDeclarations: [turn_on_the_lights, turn_off_the_lights]
   )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality, Behavior, FunctionResponseScheduling } from '@google/genai';
@@ -285,9 +285,9 @@ const functionResponse = {
 }
 ```
 
-## Google 검색을 사용하는 그라운딩
+## Dựa trên kết quả của Google Tìm kiếm
 
-세션 구성의 일부로 Google 검색을 사용한 그라운딩을 사용 설정할 수 있습니다. 이렇게 하면 Live API의 정확도가 높아지고 엉뚱한 대답이 방지됩니다. 자세한 내용은 [그라운딩 튜토리얼](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)을 참고하세요.
+Bạn có thể bật tính năng Grounding bằng Google Tìm kiếm trong quá trình định cấu hình phiên. Điều này giúp tăng độ chính xác của Live API và ngăn chặn hiện tượng ảo giác. Hãy xem [hướng dẫn về việc tiếp đất](https://ai.google.dev/gemini-api/docs/grounding?hl=vi) để tìm hiểu thêm.
 
 ### Python
 
@@ -335,7 +335,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -446,9 +446,9 @@ async function main() {
 main();
 ```
 
-## 여러 도구 결합
+## Kết hợp nhiều công cụ
 
-Live API 내에서 여러 도구를 결합하여 애플리케이션의 기능을 더욱 강화할 수 있습니다.
+Bạn có thể kết hợp nhiều công cụ trong Live API, từ đó tăng cường hơn nữa các chức năng của ứng dụng:
 
 ### Python
 
@@ -472,7 +472,7 @@ config = {"response_modalities": ["AUDIO"], "tools": tools}
 # ... remaining model call
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 const prompt = `Hey, I need you to do two things for me.
@@ -496,17 +496,17 @@ const config = {
 // ... remaining model call
 ```
 
-## 다음 단계
+## Bước tiếp theo
 
-- [도구 사용 쿠크북](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ko)에서 Live API로 도구를 사용하는 예시를 자세히 확인하세요.
-- [Live API 기능 가이드](https://ai.google.dev/gemini-api/docs/live-guide?hl=ko)에서 기능 및 구성에 관한 전체 내용을 확인하세요.
+- Hãy xem thêm các ví dụ về cách sử dụng công cụ với Live API trong [Sổ tay về cách sử dụng công cụ](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=vi).
+- Xem toàn bộ thông tin về các tính năng và cấu hình trong [hướng dẫn về Các chức năng của Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=vi).
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-최종 업데이트: 2026-06-01(UTC)
+Cập nhật lần gần đây nhất: 2026-06-01 UTC.
 
-의견을 전달하고 싶나요?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-01(UTC)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]

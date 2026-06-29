@@ -1,49 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=it
-fetched_at: 2026-06-22T06:25:38.927905+00:00
-title: "Modello Gemini Embedding \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-embedding-001?hl=tr
+fetched_at: 2026-06-29T05:39:58.455058+00:00
+title: "Gemini Embedding modeli \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=it) è ora disponibile in anteprima con pianificazione collaborativa, visualizzazione, supporto MCP e altro ancora.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Invia feedback
+Geri bildirim gönderin
 
-# Modello Gemini Embedding
+# Gemini Embedding modeli
 
-Un motore specializzato per la rappresentazione vettoriale ad alta dimensione, che fornisce
-una mappatura numerica efficiente di testo e immagini. Il modello Gemini Embedding è
-ideale per la ricerca semantica, il recupero di documenti e i sistemi di raccomandazione che
-richiedono calcoli di similarità rapidi e scalabili su grandi set di dati.
+Yüksek boyutlu vektör temsili için özel bir motor. Metin ve resimlerin verimli sayısal eşlemesini sağlar. Gemini Embedding modeli; büyük veri kümelerinde hızlı ve ölçeklenebilir benzerlik hesaplamaları gerektiren semantik arama, doküman alma ve öneri sistemleri için en uygun modeldir.
 
-## Documentazione
+## Belgeler
 
-Visita la pagina [Incorporamenti](https://ai.google.dev/gemini-api/docs/embeddings?hl=it) per una copertura completa
-di funzionalità e capacità.
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr) sayfasını ziyaret edin.
 
 ## gemini-embedding-001
 
-| Proprietà | Descrizione |
+| Mülk | Açıklama |
 | --- | --- |
-| Codice modello id\_card | **API Gemini**  `gemini-embedding-001` |
-| saveTipi di dati supportati | **Ingresso**  Testo  **Output**  Text embedding |
-| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  2048  **Dimensioni della dimensione di output**  Flessibile, supporta: 128 - 3072, consigliato: 768, 1536, 3072 |
-| Versioni 123 | Per ulteriori dettagli, leggi i [pattern delle versioni del modello](https://ai.google.dev/gemini-api/docs/models/gemini?hl=it#model-versions).  - Stabile: `gemini-embedding-001` |
-| calendar\_monthUltimo aggiornamento | Giugno 2025 |
+| id\_cardModel kodu | **Gemini API**  `gemini-embedding-001` |
+| saveDesteklenen veri türleri | **Giriş**  Metin  **Çıkış**  Metin yerleştirmeleri |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  2.048  **Çıkış boyutu**  Esnek, desteklenen boyutlar: 128 - 3072, Önerilen boyutlar: 768, 1536, 3072 |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-embedding-001` |
+| calendar\_monthSon güncelleme | Haziran 2025 |
 
-Invia feedback
+Geri bildirim gönderin
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ultimo aggiornamento 2026-04-29 UTC.
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-Vuoi dirci altro?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

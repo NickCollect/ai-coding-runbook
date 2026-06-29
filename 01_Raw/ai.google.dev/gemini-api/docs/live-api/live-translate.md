@@ -1,44 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=ko
-fetched_at: 2026-06-22T06:27:35.526717+00:00
-title: "Gemini Live API\ub97c \uc0ac\uc6a9\ud55c \uc2e4\uc2dc\uac04 \ubc88\uc5ed \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=es-419
+fetched_at: 2026-06-29T05:37:34.145159+00:00
+title: "Traducci\u00f3n instant\u00e1nea con la API de Gemini Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko)를 이제 공동 계획, 시각화, MCP 지원 등과 함께 미리보기로 이용할 수 있습니다.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-의견 보내기
+Enviar comentarios
 
-# Gemini Live API를 사용한 실시간 번역
+# Traducción instantánea con la API de Gemini Live
 
-Gemini Live API는 [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=ko) 모델을 사용하여 70개 이상의 언어 간에 지연 시간이 짧은 실시간 통역을 지원합니다. 번역 설정으로 Live API를 구성하면 한 언어로 오디오를 스트리밍하고 다른 언어로 번역된 오디오 출력을 수신하여 원활한 실시간 음성 간 번역을 지원할 수 있습니다.
+La API de Gemini Live admite la traducción de voz a voz en tiempo real y con baja latencia entre más de 70 idiomas con el modelo [`gemini-3.5-live-translate-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-live-translate-preview?hl=es-419). Si configuras la API de Live con parámetros de configuración de traducción, puedes transmitir audio en un idioma y recibir la salida de audio traducida en otro idioma, lo que permite una traducción de voz a voz en tiempo real sin problemas.
 
-[Google AI Studio에서 실시간 번역 사용해 보기mic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=ko)
-[GitHub에서 예시 앱 클론하기code](https://github.com/google-gemini/gemini-live-api-examples)
-[코딩 에이전트 기술 사용하기terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ko#gemini-live-api-dev)
+[Probar Live Translate en Google AI Studiomic](https://aistudio.google.com/live?model=gemini-3.5-live-translate-preview&hl=es-419)
+[Clonar la app de ejemplo desde GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[Usar las habilidades del agente de programaciónterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=es-419#gemini-live-api-dev)
 
-## 실시간 상담사 vs. 실시간 번역
+## Agente en vivo vs. Traducción en vivo
 
-두 기능 모두 Live API를 사용하지만 Live 번역의 사고 모델은 대화형 실시간 에이전트 상호작용과 다릅니다.
+Si bien ambos usan la API de Live, el modelo mental de la Traducción en vivo es diferente de las interacciones conversacionales en tiempo real con agentes.
 
-| 실제 상담사 | 실시간 번역 |
+| Agente en vivo | Traducción instantánea |
 | --- | --- |
-| **모델이 어시스턴트 역할을 합니다.** 사용자를 대신하여 듣고, 추론하고, 작업을 실행합니다. | **모델이 통역사 역할을 합니다.** 실시간 번역기 파이프라인처럼 작동합니다. |
-| **턴 기반 상호작용을 사용합니다.** 일시중지, 의도 감지에 의존하며 중단 처리를 지원합니다. | **연속 스트림 처리를 사용합니다.** 화자가 순서를 기다리지 않고 말하는 대로 번역합니다. |
-| **도구 및 에이전트를 지원합니다.** 함수 호출, Google 검색, 지침에 대한 기본 지원 | **번역만 지원합니다.** 순수한 낮은 지연 시간 번역입니다. 도구나 안내는 지원되지 않습니다. |
-| **완전한 멀티모달** 텍스트, 오디오, 동영상, 이미지 입력을 지원합니다. | **오디오가 제한됨.** 엄격한 실시간 지연 시간 기준을 보장하기 위해 입력이 오디오로 제한됩니다. |
-| **세부 구성.** 생성, 음성, 도구, 시스템 안내를 사용합니다. | **간소화된 구성.** `target_language_code` 및 `echo_target_language`과 같은 전환 버튼을 설정합니다. |
+| **El modelo actúa como asistente.** Escucha, razona y realiza acciones en tu nombre. | **El modelo actúa como intérprete** y se comporta como una canalización de traducción en tiempo real. |
+| **Utiliza interacciones basadas en turnos.** Se basa en pausas, detección de intención y controla las interrupciones. | **Utiliza el procesamiento de transmisión continuo.** Traduce mientras el orador habla sin esperar turnos. |
+| **Admite herramientas y agentes.** Compatibilidad nativa con llamadas a funciones, la Búsqueda de Google y las instrucciones. | **Solo admite la traducción.** Traducción pura de baja latencia; no se admiten herramientas ni instrucciones. |
+| **Es completamente multimodal.** Admite entradas de texto, audio, video e imagen. | **Audio restringido.** La entrada se limita al audio para garantizar umbrales estrictos de latencia en tiempo real. |
+| **Configuración detallada:** Usa instrucciones de generación, voz, herramientas y sistema. | **Configuración simplificada:** Establece `target_language_code` y activa o desactiva opciones como `echo_target_language`. |
 
-## 시작하기
+## Comenzar
 
-다음 예에서는 클라이언트를 초기화하고 번역 구성으로 Live API에 연결하는 방법을 보여줍니다.
+En los siguientes ejemplos, se muestra cómo inicializar un cliente y conectarse a la API de Live con una configuración de traducción.
 
 ### Python
 
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -133,7 +133,7 @@ async function main() {
 main();
 ```
 
-### WebSocket
+### WebSockets
 
 ```
 const API_KEY = "YOUR_API_KEY";
@@ -185,15 +185,15 @@ websocket.onmessage = (event) => {
 };
 ```
 
-## 오디오 전송
+## Cómo enviar audio
 
-번역을 위해 음성 입력을 스트리밍하려면 원시 리틀 엔디안 16비트 PCM 오디오를 전송합니다.
+Para transmitir entradas de voz para la traducción, debes enviar audio PCM sin procesar de 16 bits, little-endian.
 
-- **입력 오디오 형식**: 16kHz의 원시 16비트 PCM (모노, little-endian)
-- **출력 오디오 형식**: 24kHz의 원시 16비트 PCM (모노, little-endian)
-- **청크 크기 및 지연 시간**: 오디오를 100ms 청크로 전송합니다.
+- **Formato de audio de entrada**: PCM sin procesar de 16 bits a 16 kHz (mono, little-endian).
+- **Formato de audio de salida**: PCM sin procesar de 16 bits a 24 kHz (mono, little-endian).
+- **Tamaño de fragmento y latencia**: Envía audio en fragmentos de 100 ms.
 
-다음 예에서는 세션에 오디오 청크를 전송하는 방법을 보여줍니다.
+En los siguientes ejemplos, se muestra cómo enviar fragmentos de audio a la sesión.
 
 ### Python
 
@@ -207,7 +207,7 @@ await session.send_realtime_input(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 // Assuming 'chunk' is a Buffer of raw PCM audio
@@ -219,7 +219,7 @@ session.sendRealtimeInput({
 });
 ```
 
-### WebSocket
+### WebSockets
 
 ```
 // Assuming 'chunk' is a Buffer of raw PCM audio
@@ -238,23 +238,23 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## 구성
+## Configuración
 
-번역을 사용 설정하려면 세션 설정 중에 `generationConfig` 내에서 `translationConfig`을 지정해야 합니다.
+Para habilitar la traducción, debes especificar `translationConfig` dentro de `generationConfig` durante la configuración de la sesión.
 
-### 설정 메시지 구성
+### Configura los mensajes
 
-`generationConfig`는 스크립트를 사용 설정하기 위해 다음 필드를 지원합니다.
+`generationConfig` admite los siguientes campos para habilitar las transcripciones:
 
-- **`inputAudioTranscription`**: 있는 경우 모델이 입력 오디오의 텍스트 스크립트를 전송할 수 있도록 지원하는 객체입니다.
-- **`outputAudioTranscription`**: 있는 경우 모델이 출력 (번역된) 오디오의 텍스트 스크립트를 전송할 수 있도록 지원하는 객체입니다.
+- **`inputAudioTranscription`**: Es un objeto que, cuando está presente, permite que el modelo envíe transcripciones de texto del audio de entrada.
+- **`outputAudioTranscription`**: Es un objeto que, cuando está presente, permite que el modelo envíe transcripciones de texto del audio de salida (traducido).
 
-`translationConfig`는 다음 필드를 지원합니다.
+El objeto `translationConfig` admite los siguientes campos:
 
-- **`targetLanguageCode`**: 모델이 번역할 언어의 [BCP-47 언어 코드](#supported-languages)입니다 (예: 폴란드어의 경우 `"pl"`, 스페인어의 경우 `"es"`). 기본값은 `"en"`입니다.
-- **`echoTargetLanguage`**: 이미 대상 언어로 되어 있는 입력 오디오를 처리하는 방법을 나타내는 불리언입니다. `true`로 설정하면 모델이 이미 타겟 언어로 되어 있는 입력 오디오를 에코 (앵무새)합니다. `false`로 설정하면 입력 음성이 이미 대상 언어인 경우 모델이 무음으로 유지됩니다. 기본값은 `false`입니다.
+- **`targetLanguageCode`**: Es el [código de idioma BCP-47](#supported-languages) del idioma al que deseas que se traduzca el modelo (p.ej., `"pl"` para y `"es"` para español). La configuración predeterminada es `"en"`.
+- **`echoTargetLanguage`**: Es un valor booleano que indica cómo se debe controlar el audio de entrada que ya está en el idioma de destino. Si se configura como `true`, el modelo repetirá el audio de entrada que ya está en el idioma de destino. Si se configura como `false`, el modelo permanecerá en silencio cuando el discurso de entrada ya esté en el idioma de destino. El valor predeterminado es `false`.
 
-다음은 설정 메시지 구조의 예입니다.
+A continuación, se muestra un ejemplo de la estructura del mensaje de configuración:
 
 ```
 "setup": {
@@ -273,19 +273,19 @@ function sendAudioChunk(chunk) {
 }
 ```
 
-## 클라이언트 측 애플리케이션용 임시 토큰
+## Tokens efímeros para aplicaciones del cliente
 
-클라이언트-서버 애플리케이션의 경우 [임시 토큰](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ko) (현재 `v1alpha`에 있음)을 사용하여 API 키가 노출되지 않도록 할 수 있습니다.
+En el caso de las aplicaciones cliente-servidor, puedes usar [tokens efímeros](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=es-419) (actualmente en `v1alpha`) para evitar exponer tu clave de API.
 
-실시간 번역에서 임시 토큰을 사용하는 경우:
+Cuando se usan tokens efímeros con la Traducción instantánea, sucede lo siguiente:
 
-1. `v1alpha` 엔드포인트를 사용해야 합니다.
-2. **구성 잠금:** 기본적으로 서버의 토큰 생성 제약 조건에 `translationConfig`를 지정해야 합니다. 이렇게 하면 번역 구성이 잠겨 클라이언트가 조작할 수 없습니다.
-3. **구성 잠금 해제:** 클라이언트 측에서 `translationConfig`를 설정할 수 있도록 하려면 (예: 사용자가 타겟 언어를 선택할 수 있도록) 토큰 생성 요청에서 이를 생략하고 대신 `"lock_additional_fields": []`를 설정해야 합니다. 이렇게 하면 클라이언트 측에서 설정할 수 있도록 `translationConfig`이 잠금 해제됩니다.
+1. Debes usar el extremo `v1alpha`.
+2. **Configuración de bloqueo:** De forma predeterminada, debes especificar el `translationConfig` en las restricciones de creación de tokens en tu servidor. Esto garantiza que la configuración de traducción esté bloqueada y que el cliente no pueda manipularla.
+3. **Configuración de desbloqueo:** Si deseas poder establecer `translationConfig` en el cliente (por ejemplo, para permitir que un usuario elija su propio idioma objetivo), debes omitirlo en la solicitud de creación de tokens y establecer `"lock_additional_fields": []` en su lugar. Esto desbloqueará `translationConfig` para que se configure en el cliente.
 
-### 제약이 있는 임시 토큰 만들기
+### Cómo crear un token efímero restringido
 
-다음 예에서는 번역 제약 조건이 있는 임시 토큰을 만드는 방법을 보여줍니다.
+En los siguientes ejemplos, se muestra cómo crear un token efímero con restricciones de traducción.
 
 ### Python
 
@@ -317,7 +317,7 @@ token = client.auth_tokens.create(
 )
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -348,74 +348,74 @@ const token = await client.authTokens.create({
 });
 ```
 
-## 제한사항
+## Limitaciones
 
-- **입력 모달리티**: 번역에는 오디오 입력만 지원됩니다. 텍스트 입력은 지원되지 않습니다.
-- **음성 복제**: 음성 복제가 일관되지 않을 수 있습니다. 긴 일시중지 후 음성이 바뀔 수 있고, 음성이 시작되는 방식에 따라 잘못된 성별이 할당될 수 있으며, 여러 화자가 빠르게 대화하는 동안 한 음성으로 멈출 수 있습니다.
-- **언어 감지**: 언어 감지는 강한 억양, 유사한 언어 (예: 스페인어와 포르투갈어), 빠른 언어 전환에 어려움을 겪습니다. **참고:** 이는 입력 스크립트에만 영향을 미칩니다. 언어 코드와 최종 번역은 여전히 정확해야 합니다.
-- **백그라운드 오디오**: 모델은 노이즈와 음악을 필터링하여 깨끗한 음성을 생성하도록 설계되었지만 일부 백그라운드 오디오는 무시되지 않을 수 있습니다.
-- **Echo Target Language**: `echoTargetLanguage: true`의 경우 입력 오디오가 이미 대상 언어인 경우 배경 소음이나 음악으로 인해 번역된 오디오에 아티팩트가 발생할 수 있습니다.
+- **Modalidades de entrada**: Solo se admite la entrada de audio para la traducción. No se admite la entrada de texto.
+- **Replicación de voz**: La replicación de voz puede ser incoherente. Las voces pueden cambiar después de pausas largas, asignar el género incorrecto según cómo comienza el discurso o quedarse atascadas en una voz durante conversaciones rápidas con varios oradores.
+- **Detección de idioma**: La detección de idioma tiene dificultades con los acentos marcados, los idiomas similares (p. ej., español y portugués) o los cambios rápidos de idioma. **Nota:** Esto solo debería afectar la transcripción de entrada. Los códigos de idioma y la traducción final deben seguir siendo precisos.
+- **Audio de fondo**: El modelo está diseñado para filtrar el ruido y la música y producir un discurso limpio, pero es posible que no se ignore todo el audio de fondo.
+- **Echo Target Language**: Cuando `echoTargetLanguage: true`, el ruido de fondo o la música pueden introducir artefactos en el audio traducido si el audio de entrada ya está en el idioma de destino.
 
-## 지원 언어
+## Idiomas admitidos
 
-실시간 번역에 지원되는 언어는 다음과 같습니다.
+Los siguientes idiomas son compatibles con la Traducción instantánea.
 
-| 언어 | BCP-47 코드 | 언어 | BCP-47 코드 |
+| Idioma | Código BCP-47 | Idioma | Código BCP-47 |
 | --- | --- | --- | --- |
-| 아프리칸스어 | af | 카자흐어 | kk |
-| 아칸어 | AK | 크메르어 | km |
-| 알바니아어 | sq | 키냐르완다어 | rw |
-| 암하라어 | am | 한국어 | ko |
-| 아랍어 | ar | 라오어 | lo |
-| 아르메니아어 | hy | 라트비아어 | lv |
-| 아제르바이잔어 | az | 리투아니아어 | lt |
-| 바스크어 | eu | 마케도니아어 | mk |
-| 벨라루스어 | be | 말레이어 | ms |
-| 뱅골어 | bn | 말라얄람어 | ml |
-| 불가리아어 | bg | 마라타어 | mr |
-| 버마어(미얀마) | my | 몽골어 | mn |
-| 카탈로니아어 | ca | 네팔어 | ne |
-| 중국어(간체) | zh-Hans | 노르웨이어 | 아니요, nb |
-| 중국어(번체) | zh-Hant | 페르시아어 | fa |
-| 크로아티아어 | 시간 | 폴란드어 | pl |
-| 체코어 | cs | 포르투갈어(브라질) | pt-BR |
-| 덴마크어 | da | 포르투갈어(포르투갈) | pt-PT |
-| 네덜란드어 | nl | 펀자브어 | pa |
-| 영어 | en | 루마니아어 | ro |
-| 에스토니아어 | et | 러시아어 | ru |
-| 필리핀어 | fil | 세르비아어 | sr |
-| 핀란드어 | fi | 신드어 | sd |
-| 프랑스어 | fr | 싱할라어 | si |
-| 갈리시아어 | gl | 슬로바키아어 | sk |
-| 조지아어 | ka | 슬로베니아어 | sl |
-| 독일어 | de | 스페인어 | es |
-| 그리스어 | el | 순다어 | su |
-| 구자라트어 | gu | 스와힐리어 | sw |
-| 하우사어 | ha | 스웨덴어 | sv |
-| 히브리어 | he | 타밀어 | ta |
-| 힌디어 | hi | 텔루구어 | te |
-| 헝가리어 | hu | 태국어 | th |
-| 아이슬란드어 | is | 튀르키예어 | tr |
-| 인도네시아어 | id | 우크라이나어 | uk |
-| 이탈리아어 | it | 우르두어 | ur |
-| 일본어 | ja | 우즈베크어 | uz |
-| 자바어 | jv | 베트남어 | vi |
-| 칸나다어 | kn | 줄루어 | zu |
+| Afrikaans | af | Kazajo | kk |
+| Akan | ak | Jemer | km |
+| Albanés | sq | Kiñarwanda | rw |
+| Amárico | am | Coreano | ko |
+| Árabe | ar | Laosiano | lo |
+| Armenio | hy | Letón | lv |
+| Azerí | az | Lituano | lt |
+| Vasco | eu | Macedonio | mk |
+| Bielorruso | be | Malayo | ms |
+| Bengalí | bn | Malayalam | ml |
+| Búlgaro | bg | Marathi | mr |
+| Birmano (Birmania) | my | Mongol | mn |
+| Catalán | ca | Nepalí | ne |
+| Chino (simplificado) | zh-Hans | Noruego | no, nb |
+| Chino (tradicional) | zh-Hant | Persa | fa |
+| Croata | h | Polaco | pl |
+| Checo | cs | Portugués (Brasil) | pt-BR |
+| Danés | da | Portugués (Portugal) | pt-PT |
+| Holandés | nl | Punyabí | pa |
+| Inglés | en | Rumano | ro |
+| Estonio | et | Ruso | ru |
+| Filipino | fil | Serbio | sr |
+| Finlandés | fi | Sindhi | sd |
+| Francés | fr | Cingalés | si |
+| Gallego | gl | Eslovaco | sk |
+| Georgiano | ka | Esloveno | sl |
+| Alemán | de | Español | es |
+| Griego | el | Sundanés | su |
+| Gujarati | gu | Suajili | sw |
+| Hausa | ha | Sueco | sv |
+| Hebreo | él | Tamil | ta |
+| Hindi | hi | Telugu | te |
+| Húngaro | hu | Tailandés | th |
+| Islandés | es | Turco | tr |
+| Indonesio | id | Ucraniano | uk |
+| Italiano | it | Urdu | ur |
+| Japonés | ja | Uzbeko | uz |
+| Javanés | jv | Vietnamita | vi |
+| Canarés | kn | Zulú | zu |
 
-## 다음 단계
+## ¿Qué sigue?
 
-- Live API [기능](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ko) 가이드를 전체적으로 읽어 보세요.
-- [SDK 시작하기](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ko) 가이드를 읽어보세요.
-- [WebSocket 시작하기](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=ko) 가이드를 읽어보세요.
-- 클라이언트-서버 애플리케이션에서 보안 인증을 위해 [임시 토큰](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ko) 가이드를 읽어보세요.
-- GitHub에서 [Live API examples](https://github.com/google-gemini/gemini-live-api-examples)를 클론합니다.
+- Lee la guía completa de [Funciones](https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=es-419) de la API de Live.
+- Lee la guía [Cómo comenzar a usar el SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=es-419).
+- Lee la guía [Comienza a usar WebSockets](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=es-419).
+- Lee la guía sobre [tokens efímeros](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=es-419) para obtener información sobre la autenticación segura en aplicaciones cliente-servidor.
+- Clona los [ejemplos de la API en vivo](https://github.com/google-gemini/gemini-live-api-examples) desde GitHub.
 
-의견 보내기
+Enviar comentarios
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-최종 업데이트: 2026-06-09(UTC)
+Última actualización: 2026-06-09 (UTC)
 
-의견을 전달하고 싶나요?
+¿Quieres brindar más información?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-09(UTC)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-09 (UTC)"],[],[]]

@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=zh-TW
-fetched_at: 2026-06-22T06:30:31.320141+00:00
-title: "Deep Research \u9810\u89bd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-pro-preview-12-2025?hl=tr
+fetched_at: 2026-06-29T05:37:11.416629+00:00
+title: "Deep Research \u00f6nizlemesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw) 現已推出預先發布版，提供協作規劃、視覺化、MCP 支援等功能。
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-提供意見
+Geri bildirim gönderin
 
-# Deep Research 預覽
+# Deep Research önizlemesi
 
-這項強大的代理式研究工具可自主執行多步驟調查，並將複雜資訊統整為附有出處的完整報告。這款模型採用 Gemini 3.1 Pro 技術，可從數百個公開網路來源和私人 Workspace 資料 (例如 Gmail 和雲端硬碟) 中擷取資訊，並進行準確度至關重要的分析，非常適合長時間執行的工作。
+Karmaşık bilgileri kapsamlı ve alıntılanmış raporlar hâlinde sentezleyen, bağımsız ve çok adımlı araştırmalar için tasarlanmış güçlü bir asenkron yapay zeka araştırmacısı. Gemini 3.1 Pro tarafından desteklenen bu model, uzun süren görevler ve yüzlerce herkese açık web kaynağı ile Gmail ve Drive gibi özel Workspace verilerinde doğruluk açısından kritik analizler için optimize edilmiştir.
 
-## 說明文件
+## Belgeler
 
-如要全面瞭解功能與能力，請前往「[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-tw)」頁面。
+Özellikler ve işlevler hakkında kapsamlı bilgi için [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) sayfasını ziyaret edin.
 
 ## deep-research-pro-preview-12-2025
 
-| 屬性 | 說明 |
+| Mülk | Açıklama |
 | --- | --- |
-| id\_card代理程式碼 | **互動 API**  `deep-research-pro-preview-12-2025` |
-| save支援的資料類型 | **輸入功率**  文字、圖片、PDF、音訊、影片  **輸出內容**  文字 (引用報告) |
-| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入脈絡窗口**  1,048,576  **輸出詞元限制**  65,536 |
-| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 預覽：`deep-research-pro-preview-12-2025` |
-| calendar\_month最新更新 | 2025 年 12 月 |
+| id\_cardTemsilci kodu | **Interactions API**  `deep-research-pro-preview-12-2025` |
+| saveDesteklenen veri türleri | **Giriş**  Metin, Resim, PDF, Ses, Video  **Çıkış**  Metin (Alıntılanan Raporlar) |
+| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş bağlam penceresi**  1.048.576  **Çıkış jetonu sınırı**  65.536 |
+| 123Sürümleri | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Önizleme: `deep-research-pro-preview-12-2025` |
+| calendar\_monthSon güncelleme | Aralık 2025 |
 
-提供意見
+Geri bildirim gönderin
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Son güncelleme tarihi: 2026-04-29 UTC.
 
-想進一步說明嗎？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-04-29 UTC."],[],[]]

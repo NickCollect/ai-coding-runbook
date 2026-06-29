@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=tr
-fetched_at: 2026-06-22T06:27:30.715681+00:00
-title: "Webhook'lar \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=fr
+fetched_at: 2026-06-29T05:38:23.060471+00:00
+title: "Webhooks \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Gemini Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) artık işbirlikçi planlama, görselleştirme, MCP desteği ve daha fazlasıyla önizleme sürümünde kullanılabilir.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-Geri bildirim gönderin
+Envoyer des commentaires
 
-# Webhook'lar
+# Webhooks
 
-Webhook'lar, eşzamansız veya uzun süren işlemler (LRO) tamamlandığında Gemini API'nin sunucunuza gerçek zamanlı bildirimler göndermesine olanak tanır. Bu, durum güncellemeleri için API'ye yoklama yapma ihtiyacını ortadan kaldırarak gecikmeyi ve ek yükü azaltır.
+Les webhooks permettent à l'API Gemini d'envoyer des notifications en temps réel à votre serveur lorsque des opérations asynchrones ou de longue durée (LRO) sont terminées. Cela évite d'interroger l'API pour obtenir des mises à jour de l'état, ce qui réduit la latence et la surcharge.
 
-Web kancaları, [toplu](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr) işler, [etkileşimler](https://ai.google.dev/gemini-api/docs/interactions?hl=tr) ve [video oluşturma](https://ai.google.dev/gemini-api/docs/video?hl=tr) gibi işlemler için kullanılabilir.
+Les Webhooks sont disponibles pour des opérations telles que les tâches [Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr), les [interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) et la [génération de vidéos](https://ai.google.dev/gemini-api/docs/video?hl=fr).
 
-## İşleyiş şekli
+## Fonctionnement
 
-Bir işin tamamlanıp tamamlanmadığını kontrol etmek için `GET /operations`'i tekrar tekrar yoklamak yerine, bir etkinlik tetiklendiğinde Gemini API Web kancalarını dinleyici URL'nize hemen bir HTTP POST isteği gönderecek şekilde yapılandırabilirsiniz.
+Au lieu d'interroger `GET /operations` à plusieurs reprises pour vérifier si un job est terminé, vous pouvez configurer les Webhooks de l'API Gemini pour qu'ils envoient une requête HTTP POST à votre URL d'écouteur immédiatement après le déclenchement d'un événement.
 
-Gemini API, webhook'ları yapılandırmak için iki yöntemi destekler:
+L'API Gemini permet de configurer les webhooks de deux manières :
 
-- [**Statik webhook'lar**](#static-webhooks): Gemini [WebhookService API](https://ai.google.dev/api?hl=tr) ile yapılandırılmış proje düzeyinde uç noktalar. Küresel entegrasyonlar için uygundur (ör. Slack'e bildirim gönderme, veritabanı senkronize etme vb.).
-- [**Dinamik webhook'lar**](#dynamic-webhooks): Belirli bir iş çağrısının yapılandırma yükünde webhook URL'si ileten istek düzeyinde geçersiz kılmalar. Belirli işleri özel uç noktalara yönlendirmek için idealdir.
+- [**Webhooks statiques**](#static-webhooks) : points de terminaison au niveau du projet configurés avec l'[API WebhookService](https://ai.google.dev/api?hl=fr) de Gemini. Idéal pour les intégrations mondiales (par exemple, envoyer une notification Slack, synchroniser une base de données, etc.).
+- [**Webhooks dynamiques**](#dynamic-webhooks) : remplacements au niveau de la requête transmettant une URL de webhook dans la charge utile de configuration d'un appel de jobs spécifique. Idéal pour acheminer des tâches spécifiques vers des points de terminaison dédiés.
 
-## Statik web kancaları
+## Webhooks statiques
 
-Statik webhook'lar, tüm [proje](https://ai.google.dev/gemini-api/docs/api-key?hl=tr#google-cloud-projects) için kaydedilir ve eşleşen tüm etkinlikler için tetiklenir.
+Les webhooks statiques sont enregistrés pour un [projet](https://ai.google.dev/gemini-api/docs/api-key?hl=fr#google-cloud-projects) entier et se déclenchent pour tout événement correspondant.
 
-### Webhook oluşturma
+### Créer un webhook
 
-SDK veya REST API'yi kullanarak uç noktalar oluşturabilirsiniz.
+Vous pouvez créer des points de terminaison à l'aide du SDK ou de l'API REST.
 
-**ÖNEMLİ**: API, webhook oluştururken **imza gizli anahtarını**
-**yalnızca bir kez** döndürür. İmzaları daha sonra doğrulamak için bunu güvenli bir şekilde (ör. ortam değişkenlerinizde) saklamanız gerekir. İmzalama gizli anahtarını kaybederseniz [döndürmeniz](#rotate-signing-secret) gerekir.
+**IMPORTANT** : Lorsque vous créez un webhook, l'API renvoie un **secret de signature**
+**une seule fois**. Vous devez stocker cette clé de manière sécurisée (par exemple, dans vos variables d'environnement) pour valider les signatures ultérieurement. Si vous perdez le code secret de signature, vous devrez le [faire pivoter](#rotate-signing-secret).
 
 ### Python
 
@@ -96,11 +96,11 @@ curl -X POST \
   }'
 ```
 
-Sunucunuzu veri alacak şekilde ayarlama hakkında ayrıntılı bilgi için [Webhook isteklerini işleme](#handle-webhook-requests) bölümüne bakın.
+Pour savoir comment configurer votre serveur afin qu'il reçoive des données, consultez la section [Gérer les requêtes de webhook](#handle-webhook-requests).
 
-### Webhook alma
+### Obtenir un webhook
 
-Kaynak adına göre belirli bir webhook hakkında ayrıntıları alın.
+Récupérez les détails d'un webhook spécifique à l'aide de son nom de ressource.
 
 ### Python
 
@@ -142,9 +142,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Webhook'ları listeleme
+### Lister les webhooks
 
-Geçerli proje için yapılandırılmış tüm webhook'ları isteğe bağlı sayfalama ile listeleyin.
+Répertorie tous les Webhooks configurés pour le projet en cours, avec une pagination facultative.
 
 ### Python
 
@@ -185,9 +185,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Webhook'u güncelleme
+### Mettre à jour un webhook
 
-Mevcut bir webhook'un görünen ad, hedef URI veya abone olunan etkinlikler gibi özelliklerini güncelleyin.
+Mettez à jour les propriétés d'un webhook existant, telles que le nom à afficher, l'URI cible ou les événements auxquels il est abonné.
 
 ### Python
 
@@ -237,9 +237,9 @@ curl -X PATCH \
   }'
 ```
 
-### Webhook silme
+### Supprimer un webhook
 
-Projeden bir webhook uç noktasını kaldırma. Bu işlem, gelecekteki etkinliklerin ilgili uç noktaya teslim edilmesini durdurur.
+Supprimez un point de terminaison de webhook du projet. Cela empêche les futurs événements d'être envoyés à ce point de terminaison.
 
 ### Python
 
@@ -277,11 +277,11 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### İmzalama gizli anahtarını döndürme
+### Effectuer une rotation d'un secret de signature
 
-Bir webhook için imzalama gizli anahtarını değiştirin. Daha önce etkin olan sırların hemen mi yoksa 24 saatlik ek süre sonunda mı iptal edileceğini yapılandırabilirsiniz.
+Faites tourner le secret de signature d'un webhook. Vous pouvez configurer la révocation des secrets précédemment actifs immédiatement ou après un délai de grâce de 24 heures.
 
-**ÖNEMLİ**: Yeni imzalama gizli anahtarı, döndürme sırasında **yalnızca bir kez** döndürülür. Doğrulama mantığınızı güncellemeden önce güvenli bir şekilde saklayın.
+**IMPORTANT** : Le nouveau secret de signature n'est renvoyé qu'**une seule fois** lors de la rotation. Stockez-le de manière sécurisée avant de mettre à jour votre logique de validation.
 
 ### Python
 
@@ -334,13 +334,13 @@ curl -X POST \
   }'
 ```
 
-### Webhook isteklerini sunucuda işleme
+### Gérer les requêtes webhook sur un serveur
 
-Abone olduğunuz bir etkinlik gerçekleştiğinde webhook URL'niz bir HTTP POST isteği alır. Yeniden denemeyi önlemek için uç noktanız birkaç saniye içinde 2xx durum koduyla yanıt vermelidir. Teslimatı sağlamak için Gemini API, başarısız olan istekleri eksponansiyel geri yükleme kullanarak 24 saat boyunca otomatik olarak yeniden dener.
+Lorsqu'un événement auquel vous êtes abonné se produit, votre URL de webhook reçoit une requête HTTP POST. Votre point de terminaison doit répondre avec un code d'état 2xx dans un délai de quelques secondes pour éviter une nouvelle tentative. Pour garantir la diffusion, l'API Gemini relance automatiquement les requêtes ayant échoué pendant 24 heures à l'aide d'un intervalle exponentiel entre les tentatives.
 
-Gemini, güvenlik başlıkları için [Standart Web Kancaları](https://github.com/standard-webhooks/standard-webhooks) spesifikasyonuna sıkı sıkıya uyar. İmzalanmış başlık imzalarını ve depolanan statik imzalama gizli anahtarınızı kullanarak sunucunuzdaki yükü doğrulayın. Yük bilgileri için [Webhook zarfı](#webhook-envelope) bölümüne bakın.
+Gemini suit scrupuleusement la spécification [Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks) pour les en-têtes de sécurité. Validez la charge utile sur votre serveur à l'aide des signatures d'en-tête signé et de votre secret de signature statique stocké. Pour en savoir plus sur la charge utile, consultez la section [Enveloppe du webhook](#webhook-envelope).
 
-HTTP dinleyicisi için Flask'i kullanan bir örneği aşağıda bulabilirsiniz:
+Voici un exemple utilisant Flask pour l'écouteur HTTP :
 
 ### Python
 
@@ -368,12 +368,14 @@ def gemini_callback():
 
     # Process thin payload contents
     if event.get("type") == "batch.succeeded":
-        print(f"Batch completed! ID: {event["data"]["id"]}")
+        print(f"Batch completed! ID: {event['data']['id']}")
         if event["data"].get("output_file_uri"):
             # For batch jobs with input file
-            print(f"Batch file: {event["data"]["output_file_uri"]}")
-    elif (event.type == "video.generated"):
-        print(f"Video generated! URI: {event["data"]["output_file_uri"]}")
+            print(f"Batch file: {event['data']['output_file_uri']}")
+    elif event.get("type") == "interaction.completed":
+        print(f"Interaction completed! ID: {event['data']['id']}")
+    elif event.get("type") == "video.generated":
+        print(f"Video generated! URI: {event['data']['output_file_uri']}")
 
     return jsonify({"status": "received"}), 200
 
@@ -413,6 +415,8 @@ app.post("/gemini-callback", async (req, res) => {
                     // For batch jobs with input file
                     console.log(`Batch file: ${event.data.output_file_uri}`);
                 }
+            } else if (event.type === "interaction.completed") {
+                console.log(`Interaction completed! ID: ${event.data.id}`);
             } else if (event.type === "video.generated") {
                 console.log(`Video generated! URI: ${event.data.output_file_uri}`);
             }
@@ -429,79 +433,84 @@ app.listen(8000, () => {
 });
 ```
 
-## Dinamik webhook'lar
+## Webhooks dynamiques
 
-Dinamik webhook'lar, bir webhook uç noktasını **belirli bir istek yapılandırmasına** bağlamanıza olanak tanır. Bu özellik, aracı düzenleme kuyrukları için idealdir. Dinamik webhook'lar, simetrik gizli diziler yerine asimetrik ortak anahtar JWKS imzalarından yararlanır.
+Les webhooks dynamiques vous permettent d'associer un point de terminaison de webhook à une **configuration de requête spécifique**, ce qui est idéal pour les files d'attente d'orchestration d'agents. Les Webhooks dynamiques utilisent des signatures JWKS à clé publique asymétrique au lieu de secrets symétriques.
 
-### Dinamik istek gönderme
+### Envoyer une requête dynamique
 
-Eşzamansız bir işi (ör. toplu iş oluşturma) tetiklerken `webhook_config` ekleyin.
+Ajoutez un `webhook_config` lorsque vous déclenchez un job asynchrone (par exemple, lorsque vous créez un lot).
 
 ### Python
 
 ```
+# This will only work for SDK newer than 2.0.0
 from google import genai
-from google.genai import types
 
 client = genai.Client()
 
-file_batch_job = client.batches.create(
-    model="gemini-3.5-flash",
-    src="files/uploaded_file_id",
-    config={
-        "display_name": "My Setup",
-        "webhook_config": {
-            "uris": ["https://my-api.com/gemini-webhook-dynamic"],
-            "user_metadata":{"job_group": "nightly-eval", "priority": "high"}
-        }
+response = client.interactions.create(
+    model='gemini-3.5-flash',
+    input='Tell me a short joke about programming.',
+    background=True, # Required when webhook_config is specified
+    webhook_config={
+        'uris': ["https://my-api.com/gemini-webhook-dynamic"],
+        'user_metadata': {"job_group": "nightly-eval", "priority": "high"}
     }
 )
+
+print(f"Interaction created! ID: {response.id}")
+print(f"Status: {response.status}")
 ```
 
 ### JavaScript
 
 ```
+// This will only work for SDK newer than 2.0.0
 import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI();
 
-async function createBatchWithWebhook() {
-  const fileBatchJob = await client.batches.create({
+async function createInteractionWithWebhook() {
+  const response = await client.interactions.create({
     model: "gemini-3.5-flash",
-    src: "files/uploaded_file_id",
-    config: {
-      displayName: "My Setup",
-      webhookConfig: {
-        uris: ["https://my-api.com/gemini-webhook-dynamic"],
-        user_metadata: {"job_group": "nightly-eval", "priority": "high"}
-      },
+    input: "Tell me a short joke about programming.",
+    background: true, // Required when webhook_config is specified
+    webhook_config: {
+      uris: ["https://my-api.com/gemini-webhook-dynamic"],
+      user_metadata: { job_group: "nightly-eval", priority: "high" },
     },
   });
+
+  console.log(`Interaction created! ID: ${response.id}`);
+  console.log(`Status: ${response.status}`);
 }
+
+createInteractionWithWebhook();
 ```
 
 ### REST
 
 ```
+# Specifies the API revision to avoid breaking changes when they become default
 curl -X POST \
-  "https://generativelanguage.googleapis.com/v1/models/gemini-3.5-flash:batchCreate" \
+  "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -d '{
-    "src": "files/uploaded_file_id",
-    "config": {
-      "display_name": "My Setup",
-      "webhook_config": {
-        "uris": ["https://my-api.com/gemini-webhook-dynamic"],
-        "user_metadata": {"job_group": "nightly-eval", "priority": "high"}
-      }
+    "model": "gemini-3.5-flash",
+    "input": "Tell me a short joke about programming.",
+    "background": true,
+    "webhook_config": {
+      "uris": ["https://my-api.com/gemini-webhook-dynamic"],
+      "user_metadata": {"job_group": "nightly-eval", "priority": "high"}
     }
   }'
 ```
 
-### Dinamik imzaları (JWKS) doğrulama
+### Valider les signatures dynamiques (JWKS)
 
-Dinamik webhook istekleri, JSON Web Token (JWT) imzası yayar. Dinleyiciniz, imzayı ayıklamalı ve [Google'ın ortak sertifika uç noktalarını](https://www.googleapis.com/oauth2/v3/certs) kullanarak doğrulamalıdır.
+Les requêtes de webhook dynamiques émettent une signature JSON Web Token (JWT). Votre écouteur doit extraire la signature et la valider à l'aide des [points de terminaison du certificat public de Google](https://www.googleapis.com/oauth2/v3/certs).
 
 ### Python
 
@@ -602,11 +611,11 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 });
 ```
 
-## Webhook zarfı
+## Enveloppe de webhook
 
-Gemini webhook'ları, bant genişliği tıkanıklığını önlemek için veri iletmek üzere **ince yük** modeli kullanır. Teslimatlar, ham çıkış dosyasının kendisi yerine durum ayrıntılarını ve sonuçlara yönelik işaretçileri içeren bir anlık görüntü gönderir.
+Pour éviter la congestion de la bande passante, les Webhooks Gemini utilisent un modèle de **charge utile légère** pour fournir des données. Les livraisons envoient un instantané contenant des informations sur l'état et des pointeurs vers les résultats, plutôt que le fichier de sortie brut lui-même.
 
-Aşağıda örnek bir yük biçimi verilmiştir:
+Voici un exemple de format de charge utile :
 
 ```
 {
@@ -620,41 +629,40 @@ Aşağıda örnek bir yük biçimi verilmiştir:
 }
 ```
 
-## Etkinlik kataloğu referansı
+## Documentation de référence sur le catalogue d'événements
 
-Destekleyici işler için aşağıdaki etkinlikler tetiklenir:
+Les événements suivants sont déclenchés pour les jobs associés :
 
-| Etkinlik türü | Tetikleyici | Yük öğesi (`data`) |
+| Type d'événement | Déclencheur | Élément de charge utile (`data`) |
 | --- | --- | --- |
-| `batch.succeeded` | İşlem başarıyla tamamlandı. | `id`, `output_file_uri` |
-| `batch.cancelled` | Kullanıcı isteği iptal etti | `id` |
-| `batch.expired` | Toplu işlem 24 saat içinde işlenmedi (tamamlanmadı) | `id` |
-| `batch.failed` | Toplu iş başarısız oldu (sistem veya doğrulama hatası). | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | İşlev çağrısı, kullanıcının bir işlem yapması gerekiyor | `id` |
-| `interaction.completed` | Etkileşimler API'sindeki LRO başarılı oldu | `id` |
-| `interaction.failed` | Etkileşimler API'sindeki LRO başarısız oldu (sistem veya doğrulama hatası). | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | Etkileşimler API'sindeki LRO iptal edildi | `id` |
-| `video.generated` | Video üretme LRO'su tamamlandı. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | Le traitement s'est terminé avec succès. | `id`, `output_file_uri` |
+| `batch.cancelled` | Demande annulée par l'utilisateur | `id` |
+| `batch.expired` | Le lot n'a pas été traité (terminé) dans un délai de 24 heures | `id` |
+| `batch.failed` | Échec du job par lot (erreur système ou de validation). | `id`, `error_code`, `error_message` |
+| `interaction.requires_action` | Appel de fonction, l'utilisateur doit effectuer une action | `id` |
+| `interaction.completed` | LRO réussi dans l'API Interactions | `id` |
+| `interaction.failed` | Échec de l'opération de longue durée dans l'API Interactions (erreur système ou de validation). | `id`, `error_code`, `error_message` |
+| `interaction.cancelled` | LRO annulée dans l'API Interactions | `id` |
+| `video.generated` | La génération de la vidéo LRO est terminée. | `id`, `output_file_uri`, `file_name` |
 
-## En iyi uygulamalar
+## Bonnes pratiques
 
-Güvenilir ve ölçeklenebilir bir işlem sağlamak için:
+Pour garantir un fonctionnement fiable et évolutif :
 
-- **Sıkı yeniden oynatma koruması kontrolü**: Tüm istekler `webhook-timestamp`
-  başlığı taşır. Yeniden oynatma saldırılarını azaltmak için **5 dakikadan** eski yükleri reddetmek üzere bu zaman damgasını her zaman sunucu yapılandırma katmanınızda doğrulayın.
-- **İşlemi eşzamansız olarak yapın**: Geçerli imza algılandığında hemen `2xx OK` ile yanıt verin ve ayrıştırma işlemlerini dahili olarak sıraya alın. Dinleyicinin uzun süre beklemesi, teslimatın yeniden denenmesi döngüsünü tetikler.
-- **Yinelenen öğeleri işleme**: Standart webhook'lar "en az bir kez" teslimat yapar. Daha yüksek trafik akışlarında olası yinelenenleri işlemek için tutarlı `webhook-id` üstbilgisini kullanın.
+- **Vérification stricte de la protection contre la relecture** : toutes les requêtes comportent un en-tête `webhook-timestamp`. Validez toujours ce code temporel au niveau de la configuration de votre serveur pour rejeter les charges utiles plus anciennes que **5 minutes** (afin d'atténuer les attaques par relecture).
+- **Traitez de manière asynchrone** : répondez avec `2xx OK` immédiatement après la détection d'une signature valide et mettez en file d'attente les opérations d'analyse en interne. Si l'auditeur maintient le doigt appuyé pendant une longue période, un cycle de nouvelle tentative de livraison se déclenche.
+- **Gestion de la déduplication** : les Webhooks standards sont de type "au moins une fois". Utilisez l'en-tête `webhook-id` cohérent pour gérer les doublons potentiels dans les flux à forte congestion.
 
-## Sırada ne var?
+## Étape suivante
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=tr): Yüksek hacimli uç noktaları otomatikleştirmek için webhook'ları kullanın.
+- [API Batch](https://ai.google.dev/gemini-api/docs/batch?hl=fr) : utilisez des Webhooks pour automatiser les points de terminaison à volume élevé.
 
-Geri bildirim gönderin
+Envoyer des commentaires
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-Son güncelleme tarihi: 2026-06-19 UTC.
+Dernière mise à jour le 2026/06/22 (UTC).
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Voulez-vous nous donner plus d'informations ?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-19 UTC."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/22 (UTC)."],[],[]]
