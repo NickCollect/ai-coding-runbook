@@ -38,8 +38,7 @@ from dataclasses import dataclass
 from typing import Any, Literal, TypeVar
 
 import pytest
-
-from mcp.shared.version import KNOWN_PROTOCOL_VERSIONS
+from mcp_types.version import KNOWN_PROTOCOL_VERSIONS
 
 SpecVersion = Literal["2025-11-25", "2026-07-28"]
 """A protocol version the suite parametrizes over. Both values are typed even though only one is
@@ -63,9 +62,7 @@ CONNECTABLE_TRANSPORTS: tuple[Transport, ...] = ("in-memory", "sse", "streamable
 
 TRANSPORT_SPEC_VERSIONS: dict[Transport, tuple[SpecVersion, ...]] = {
     "sse": ("2025-11-25",),
-    # Temporary lock: the in-memory transport has no modern entry point yet, so it cannot
-    # negotiate the newer revision. Remove once an in-memory factory for the modern path lands.
-    "in-memory": ("2025-11-25",),
+    "in-memory": ("2025-11-25", "2026-07-28"),
     # At the newer revision the protocol-version header check runs before the stateless branch is
     # taken, so a stateless connection at that revision behaves identically to the stateful one.
     # Locked to avoid a redundant matrix column; revisit if the header/stateless ordering changes.
@@ -94,12 +91,6 @@ _TASKS_DEFERRAL = (
     "Tasks have been removed from the draft spec and from this SDK; they are expected to return "
     "as a separate MCP extension. These 2025-11-25 requirements are tracked but intentionally "
     "unimplemented."
-)
-
-_MODERN_NOTIFY_DROP = (
-    "The modern single-exchange dispatch context no-ops notify() on the streamable-http driver; "
-    "handler-emitted logging/progress notifications never reach the per-request SSE response. "
-    "Passes once SSE response mode lands."
 )
 
 
@@ -252,6 +243,7 @@ REQUIREMENTS: dict[str, Requirement] = {
         source=f"{SPEC_BASE_URL}/basic/lifecycle#initialization",
         behavior="The client's name, version, and title are visible to server handlers after initialization.",
         removed_in="2026-07-28",
+        superseded_by="lifecycle:envelope:stamped-on-every-request",
         note="initialize handshake removed at 2026-07-28; per-request _meta envelope replaces it.",
         arm_exclusions=(ArmExclusion(reason="requires-session", transport="streamable-http-stateless"),),
     ),
@@ -262,6 +254,7 @@ REQUIREMENTS: dict[str, Requirement] = {
             "(sampling, elicitation, roots)."
         ),
         removed_in="2026-07-28",
+        superseded_by="lifecycle:envelope:stamped-on-every-request",
         note="initialize handshake removed at 2026-07-28; per-request _meta envelope replaces it.",
         arm_exclusions=(ArmExclusion(reason="requires-session", transport="streamable-http-stateless"),),
     ),
@@ -394,6 +387,82 @@ REQUIREMENTS: dict[str, Requirement] = {
             "bare-ClientSession seam; the high-level Client + HTTP-seam scan in "
             "hosting:http:legacy-no-modern-vocabulary covers the same vocabulary set"
         ),
+    ),
+    "lifecycle:envelope:stamped-on-every-request": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic#_meta",
+        behavior=(
+            "Every client→server request on a modern-negotiated session carries "
+            "_meta.{protocolVersion,clientInfo,clientCapabilities}; notifications do not."
+        ),
+        added_in="2026-07-28",
+        supersedes=("lifecycle:initialize:client-info", "lifecycle:initialize:client-capabilities"),
+    ),
+    "lifecycle:envelope:header-matches-meta": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic/transports/streamable-http#headers",
+        behavior="On HTTP, the MCP-Protocol-Version header on every POST matches _meta.protocolVersion in the body.",
+        transports=("streamable-http", "streamable-http-stateless"),
+        added_in="2026-07-28",
+        note="HTTP-only: the header is a streamable-http transport concern; stdio and in-memory carry no headers.",
+    ),
+    "lifecycle:discover:basic": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic/lifecycle#discover",
+        behavior=(
+            "Calling discover() sends server/discover with no params and returns a typed DiscoverResult "
+            "carrying protocolVersion, capabilities, serverInfo and the cache hint fields."
+        ),
+        added_in="2026-07-28",
+    ),
+    "lifecycle:discover:retry-on-32022": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic/lifecycle#version-errors",
+        behavior=(
+            "When server/discover returns -32022 UnsupportedProtocolVersion, the client retries once with "
+            "the intersection of error.data.supported and its own modern versions; an empty intersection raises."
+        ),
+        added_in="2026-07-28",
+    ),
+    "lifecycle:discover:fallback-method-not-found": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic/transports/stdio#backward-compatibility",
+        behavior=(
+            "When server/discover returns any JSON-RPC error or a bare HTTP 4xx, an auto-negotiating "
+            "client falls back to the legacy initialize handshake and the connection succeeds at a "
+            "handshake-era version (legacy servers reject the probe with various codes)."
+        ),
+        added_in="2026-07-28",
+    ),
+    "lifecycle:discover:network-error-raises": Requirement(
+        source="sdk",
+        behavior=(
+            "A network/connection error during server/discover propagates to the caller without "
+            "falling back to initialize; any rpc-error or 4xx falls back (legacy servers reject the "
+            "probe with various codes). An outage is never an era verdict."
+        ),
+        transports=("streamable-http", "streamable-http-stateless"),
+        added_in="2026-07-28",
+        note="HTTP-only: distinguishes transport-level failures from server-side rejection.",
+    ),
+    "lifecycle:mode:legacy-never-probes": Requirement(
+        source="sdk",
+        behavior=(
+            "A Client constructed with mode='legacy' sends initialize as its first request "
+            "and never sends server/discover."
+        ),
+        added_in="2026-07-28",
+    ),
+    "lifecycle:mode:pin-never-handshakes": Requirement(
+        source="sdk",
+        behavior=(
+            "A Client constructed with mode='2026-07-28' sends no initialize and no server/discover; its "
+            "first wire request is the caller's first call, carrying the full _meta envelope."
+        ),
+        added_in="2026-07-28",
+    ),
+    "lifecycle:mode:prior-discover-zero-rtt": Requirement(
+        source="sdk",
+        behavior=(
+            "A Client constructed with prior_discover=<DiscoverResult> sends no negotiation traffic; "
+            "server_info and capabilities are populated from the prior result."
+        ),
+        added_in="2026-07-28",
     ),
     # ═══════════════════════════════════════════════════════════════════════════
     # Protocol primitives: cancellation, timeout, progress, errors, _meta
@@ -581,7 +650,6 @@ REQUIREMENTS: dict[str, Requirement] = {
             "Progress notifications emitted by a handler during a request are delivered to the caller's "
             "progress callback, in order, with their progress, total, and message."
         ),
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
     ),
     "protocol:progress:token-injected": Requirement(
         source=f"{SPEC_BASE_URL}/basic/utilities/progress#progress-flow",
@@ -594,7 +662,11 @@ REQUIREMENTS: dict[str, Requirement] = {
     "protocol:progress:token-unique": Requirement(
         source=f"{SPEC_BASE_URL}/basic/utilities/progress#progress-flow",
         behavior=("Concurrent in-flight requests that each supply a progress callback carry distinct progress tokens."),
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
+        note=(
+            "Tested as the consequence: each callback receives only its own request's progress under "
+            "interleaved emission. Token distinctness is the JSON-RPC mechanism for that; the in-process "
+            "direct dispatcher carries the callback per-request without a wire-level token."
+        ),
     ),
     "protocol:progress:monotonic": Requirement(
         source=f"{SPEC_BASE_URL}/basic/utilities/progress#progress-flow",
@@ -607,7 +679,6 @@ REQUIREMENTS: dict[str, Requirement] = {
                 "handler that emits non-increasing values has them forwarded to the callback unchanged."
             ),
         ),
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
     ),
     "protocol:progress:stops-after-completion": Requirement(
         source=f"{SPEC_BASE_URL}/basic/utilities/progress#behavior-requirements",
@@ -745,7 +816,6 @@ REQUIREMENTS: dict[str, Requirement] = {
             "Log notifications emitted by a tool handler during execution reach the client's logging "
             "callback before the tool result returns."
         ),
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
     ),
     "tools:call:progress": Requirement(
         source=f"{SPEC_BASE_URL}/basic/utilities/progress#progress-flow",
@@ -753,7 +823,6 @@ REQUIREMENTS: dict[str, Requirement] = {
             "Progress notifications emitted by a tool handler reach the caller's progress callback before "
             "the tool result returns."
         ),
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
     ),
     "tools:call:sampling-roundtrip": Requirement(
         source=f"{SPEC_BASE_URL}/client/sampling#creating-messages",
@@ -974,14 +1043,12 @@ REQUIREMENTS: dict[str, Requirement] = {
             "The Context logging helpers (debug/info/warning/error) send log message notifications at the "
             "corresponding severity."
         ),
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
     ),
     "mcpserver:context:progress": Requirement(
         source="sdk",
         behavior=(
             "Context.report_progress sends a progress notification against the requesting client's progress token."
         ),
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
     ),
     "mcpserver:context:elicit": Requirement(
         source="sdk",
@@ -1339,7 +1406,6 @@ REQUIREMENTS: dict[str, Requirement] = {
     "logging:message:all-levels": Requirement(
         source=f"{SPEC_BASE_URL}/server/utilities/logging#log-levels",
         behavior="All eight RFC 5424 severity levels are deliverable as log message notifications.",
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
     ),
     "logging:message:fields": Requirement(
         source=f"{SPEC_BASE_URL}/server/utilities/logging#log-message-notifications",
@@ -1347,7 +1413,6 @@ REQUIREMENTS: dict[str, Requirement] = {
             "A log message sent by a server handler is delivered to the client's logging callback with its "
             "severity level, logger name, and data."
         ),
-        known_failures=(KnownFailure(spec_version="2026-07-28", note=_MODERN_NOTIFY_DROP, issue=None),),
     ),
     "logging:message:filtered": Requirement(
         source=f"{SPEC_BASE_URL}/server/utilities/logging#setting-log-level",
@@ -1965,16 +2030,6 @@ REQUIREMENTS: dict[str, Requirement] = {
             note=(
                 "MCPServer never sends list_changed notifications on registration changes, so a connected "
                 "client cannot learn that the set changed without polling."
-            ),
-        ),
-        known_failures=(
-            KnownFailure(
-                spec_version="2026-07-28",
-                note=(
-                    "List-mutation assertions hold; only the sentinel ctx.info() never reaches the client. "
-                    + _MODERN_NOTIFY_DROP
-                ),
-                issue=None,
             ),
         ),
     ),
@@ -3273,6 +3328,19 @@ REQUIREMENTS: dict[str, Requirement] = {
         transports=("streamable-http",),
         note="Only observable over streamable HTTP: headers are derived from the body envelope at the transport seam.",
     ),
+    "client-transport:http:custom-param-headers": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic/transports/streamable-http#custom-headers-from-tool-parameters",
+        behavior=(
+            "On a tools/call, a client mirrors each argument annotated with x-mcp-header in the tool's "
+            "inputSchema into an Mcp-Param-<name> header -- string as-is, integer as decimal, boolean as "
+            "true/false, base64-sentinel-wrapped when not header-safe -- omitting null or absent arguments and "
+            "never mirroring unannotated parameters. The schema is taken from the tool's last list_tools entry; "
+            "a tool the client never listed emits no Mcp-Param-* headers."
+        ),
+        added_in="2026-07-28",
+        transports=("streamable-http",),
+        note="Only observable over streamable HTTP: headers are derived from the cached tool schema at the seam.",
+    ),
     "client-transport:http:stateless-ignores-session-id": Requirement(
         source=f"{SPEC_2026_BASE_URL}/basic/transports#stateless-request-headers",
         behavior=(
@@ -3576,6 +3644,64 @@ REQUIREMENTS: dict[str, Requirement] = {
             "Untestable negative through the public API: there is no path to inject a token obtained "
             "elsewhere into the auth provider's state, so the absence cannot be observed end to end."
         ),
+    ),
+    "client-auth:identity-assertion": Requirement(
+        source="sdk",
+        behavior=(
+            "The identity-assertion provider (SEP-990) presents an enterprise IdP-issued ID-JAG to the MCP "
+            "authorization server via the RFC 7523 jwt-bearer grant, with no authorize or registration step, "
+            "and the issued bearer token authorizes subsequent requests."
+        ),
+        transports=("streamable-http",),
+        note="OAuth is HTTP-only.",
+    ),
+    "client-auth:identity-assertion:assertion-callback": Requirement(
+        source="sdk",
+        behavior=(
+            "The identity-assertion provider sources the ID-JAG from its async assertion_provider callback, "
+            "invoked with the authorization server's issuer as audience and the MCP server's resource "
+            "identifier, and sends it as `assertion` on the RFC 7523 jwt-bearer request."
+        ),
+        transports=("streamable-http",),
+        note="OAuth is HTTP-only.",
+    ),
+    "client-auth:identity-assertion:issuer-pinning": Requirement(
+        source="sdk",
+        behavior=(
+            "The identity-assertion provider's authorization server is configuration: metadata is "
+            "fetched only from the configured issuer's RFC 8414 well-known, the resource server is "
+            "never consulted for AS selection, and the ID-JAG and client secret are not sent unless "
+            "that metadata validates."
+        ),
+        transports=("streamable-http",),
+        note="OAuth is HTTP-only.",
+    ),
+    "client-auth:identity-assertion:disabled-rejected": Requirement(
+        source="sdk",
+        behavior=(
+            "When the authorization server has the identity-assertion grant disabled, the token endpoint "
+            "rejects it with unsupported_grant_type and the connection fails rather than issuing a token."
+        ),
+        transports=("streamable-http",),
+        note="OAuth is HTTP-only.",
+    ),
+    "client-auth:identity-assertion:invalid-assertion": Requirement(
+        source="sdk",
+        behavior=(
+            "A jwt-bearer request whose ID-JAG the authorization server rejects surfaces as an OAuth error "
+            "and the connection fails rather than proceeding with a bearer token."
+        ),
+        transports=("streamable-http",),
+        note="OAuth is HTTP-only.",
+    ),
+    "client-auth:identity-assertion:metadata-advertised": Requirement(
+        source="sdk",
+        behavior=(
+            "When the identity-assertion grant is enabled, the authorization-server metadata advertises the "
+            "jwt-bearer grant type and the id-jag grant profile in authorization_grant_profiles_supported."
+        ),
+        transports=("streamable-http",),
+        note="OAuth is HTTP-only.",
     ),
     # ═══════════════════════════════════════════════════════════════════════════
     # stdio transport

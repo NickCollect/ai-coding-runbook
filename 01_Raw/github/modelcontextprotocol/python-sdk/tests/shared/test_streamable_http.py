@@ -17,15 +17,32 @@ from urllib.parse import urlparse
 
 import anyio
 import httpx
+import mcp_types as types
 import pytest
 from anyio.streams.memory import MemoryObjectReceiveStream, MemoryObjectSendStream
 from httpx_sse import ServerSentEvent
+from mcp_types import (
+    DEFAULT_NEGOTIATED_VERSION,
+    INVALID_PARAMS,
+    INVALID_REQUEST,
+    CallToolRequestParams,
+    CallToolResult,
+    InitializeResult,
+    JSONRPCRequest,
+    ListToolsResult,
+    PaginatedRequestParams,
+    ReadResourceRequestParams,
+    ReadResourceResult,
+    TextContent,
+    TextResourceContents,
+    Tool,
+)
 from starlette.applications import Starlette
 from starlette.requests import Request
 from starlette.routing import Mount
 from starlette.types import Message, Scope
 
-from mcp import MCPError, types
+from mcp import MCPError
 from mcp.client import ClientRequestContext
 from mcp.client.session import ClientSession
 from mcp.client.streamable_http import StreamableHTTPTransport, streamable_http_client
@@ -48,22 +65,6 @@ from mcp.shared._compat import resync_tracer
 from mcp.shared._context_streams import create_context_streams
 from mcp.shared.message import ClientMessageMetadata, ServerMessageMetadata, SessionMessage
 from mcp.shared.session import RequestResponder
-from mcp.types import (
-    DEFAULT_NEGOTIATED_VERSION,
-    INVALID_PARAMS,
-    INVALID_REQUEST,
-    CallToolRequestParams,
-    CallToolResult,
-    InitializeResult,
-    JSONRPCRequest,
-    ListToolsResult,
-    PaginatedRequestParams,
-    ReadResourceRequestParams,
-    ReadResourceResult,
-    TextContent,
-    TextResourceContents,
-    Tool,
-)
 from tests.interaction.transports import StreamingASGITransport
 
 # Test constants
@@ -1635,84 +1636,6 @@ async def test_handle_sse_event_skips_empty_data() -> None:
 
 
 @pytest.mark.anyio
-async def test_priming_event_not_sent_for_old_protocol_version() -> None:
-    """_maybe_send_priming_event skips for old protocol versions (backwards compat)."""
-    # Create a transport with an event store
-    transport = StreamableHTTPServerTransport(
-        "/mcp",
-        event_store=SimpleEventStore(),
-    )
-
-    # Create a mock stream writer
-    write_stream, read_stream = anyio.create_memory_object_stream[dict[str, Any]](1)
-
-    try:
-        # Call _maybe_send_priming_event with OLD protocol version - should NOT send
-        await transport._maybe_send_priming_event("test-request-id", write_stream, "2025-06-18")
-
-        # Nothing should have been written to the stream
-        assert write_stream.statistics().current_buffer_used == 0
-
-        # Now test with NEW protocol version - should send
-        await transport._maybe_send_priming_event("test-request-id-2", write_stream, "2025-11-25")
-
-        # Should have written a priming event
-        assert write_stream.statistics().current_buffer_used == 1
-    finally:
-        await write_stream.aclose()
-        await read_stream.aclose()
-
-
-@pytest.mark.anyio
-async def test_priming_event_not_sent_without_event_store() -> None:
-    """_maybe_send_priming_event returns early when no event_store is configured."""
-    # Create a transport WITHOUT an event store
-    transport = StreamableHTTPServerTransport("/mcp")
-
-    # Create a mock stream writer
-    write_stream, read_stream = anyio.create_memory_object_stream[dict[str, Any]](1)
-
-    try:
-        # Call _maybe_send_priming_event - should return early without sending
-        await transport._maybe_send_priming_event("test-request-id", write_stream, "2025-11-25")
-
-        # Nothing should have been written to the stream
-        assert write_stream.statistics().current_buffer_used == 0
-    finally:
-        await write_stream.aclose()
-        await read_stream.aclose()
-
-
-@pytest.mark.anyio
-async def test_priming_event_includes_retry_interval() -> None:
-    """_maybe_send_priming_event includes the retry field when retry_interval is set."""
-    # Create a transport with an event store AND retry_interval
-    transport = StreamableHTTPServerTransport(
-        "/mcp",
-        event_store=SimpleEventStore(),
-        retry_interval=5000,
-    )
-
-    # Create a mock stream writer
-    write_stream, read_stream = anyio.create_memory_object_stream[dict[str, Any]](1)
-
-    try:
-        # Call _maybe_send_priming_event with new protocol version
-        await transport._maybe_send_priming_event("test-request-id", write_stream, "2025-11-25")
-
-        # Should have written a priming event with retry field
-        assert write_stream.statistics().current_buffer_used == 1
-
-        # Read the event and verify it has retry field
-        event = await read_stream.receive()
-        assert "retry" in event
-        assert event["retry"] == 5000
-    finally:
-        await write_stream.aclose()
-        await read_stream.aclose()
-
-
-@pytest.mark.anyio
 async def test_close_sse_stream_callback_not_provided_for_old_protocol_version() -> None:
     """close_sse_stream callbacks are only provided for protocol versions that support polling."""
     # Create a transport with an event store
@@ -1742,30 +1665,6 @@ async def test_close_sse_stream_callback_not_provided_for_old_protocol_version()
     assert isinstance(session_msg_new.metadata, ServerMessageMetadata)
     assert session_msg_new.metadata.close_sse_stream is not None
     assert session_msg_new.metadata.close_standalone_sse_stream is not None
-
-
-@pytest.mark.anyio
-async def test_priming_event_not_sent_for_unknown_protocol_version() -> None:
-    """_maybe_send_priming_event treats unrecognized version strings conservatively.
-
-    A garbage version must not be mistaken for a future one (lexicographically
-    "zzz" sorts after every date-shaped revision).
-    """
-    transport = StreamableHTTPServerTransport(
-        "/mcp",
-        event_store=SimpleEventStore(),
-    )
-
-    write_stream, read_stream = anyio.create_memory_object_stream[dict[str, Any]](1)
-
-    try:
-        await transport._maybe_send_priming_event("test-request-id", write_stream, "zzz")
-
-        # Nothing should have been written to the stream
-        assert write_stream.statistics().current_buffer_used == 0
-    finally:
-        await write_stream.aclose()
-        await read_stream.aclose()
 
 
 @pytest.mark.anyio

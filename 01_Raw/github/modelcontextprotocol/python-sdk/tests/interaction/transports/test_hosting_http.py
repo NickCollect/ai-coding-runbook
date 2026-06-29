@@ -11,11 +11,7 @@ import pytest
 from anyio.lowlevel import checkpoint
 from httpx_sse import ServerSentEvent, aconnect_sse
 from inline_snapshot import snapshot
-
-from mcp.server import Server, ServerRequestContext
-from mcp.server.transport_security import TransportSecuritySettings
-from mcp.shared.version import MODERN_PROTOCOL_VERSIONS
-from mcp.types import (
+from mcp_types import (
     CLIENT_CAPABILITIES_META_KEY,
     CLIENT_INFO_META_KEY,
     INVALID_PARAMS,
@@ -36,6 +32,10 @@ from mcp.types import (
     SubscribeRequestParams,
     TextContent,
 )
+from mcp_types.version import MODERN_PROTOCOL_VERSIONS
+
+from mcp.server import Server, ServerRequestContext
+from mcp.server.transport_security import TransportSecuritySettings
 from tests.interaction._connect import (
     base_headers,
     initialize_body,
@@ -73,7 +73,7 @@ def _server() -> Server:
         """Registered so the resources subscribe sub-capability is advertised; the client never subscribes."""
         raise NotImplementedError
 
-    return Server(
+    return Server(  # pyright: ignore[reportDeprecated]
         "hosted",
         on_list_tools=list_tools,
         on_call_tool=call_tool,
@@ -206,7 +206,7 @@ async def test_unsupported_protocol_version_rejection_body_contains_the_sniffed_
         response = await http.post(
             "/mcp",
             json={"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {"_meta": meta}},
-            headers=base_headers() | {"mcp-protocol-version": bad},
+            headers=base_headers() | {"mcp-protocol-version": bad, "mcp-method": "tools/list"},
         )
 
     assert response.status_code == 400

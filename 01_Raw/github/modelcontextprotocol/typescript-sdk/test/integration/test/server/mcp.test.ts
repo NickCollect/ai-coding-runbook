@@ -1,6 +1,12 @@
 import { Client } from '@modelcontextprotocol/client';
-import type { Notification, TextContent } from '@modelcontextprotocol/core';
-import { getDisplayName, InMemoryTransport, ProtocolErrorCode, UriTemplate, UrlElicitationRequiredError } from '@modelcontextprotocol/core';
+import type { Notification, TextContent } from '@modelcontextprotocol/core-internal';
+import {
+    getDisplayName,
+    InMemoryTransport,
+    ProtocolErrorCode,
+    UriTemplate,
+    UrlElicitationRequiredError
+} from '@modelcontextprotocol/core-internal';
 import { completable, McpServer, ResourceTemplate } from '@modelcontextprotocol/server';
 import { afterEach, beforeEach, describe, expect, test } from 'vitest';
 import * as z from 'zod/v4';
@@ -2728,8 +2734,12 @@ describe('Zod v4', () => {
                     }
                 })
             ).rejects.toMatchObject({
-                code: ProtocolErrorCode.ResourceNotFound,
-                message: expect.stringContaining('not found')
+                // SEP-2164: resources/read miss is −32602 Invalid Params on the wire
+                // (every protocol revision); the encode seam maps a handler-thrown
+                // −32002 to −32602, and `data.uri` echoes the requested URI.
+                code: ProtocolErrorCode.InvalidParams,
+                message: expect.stringMatching(/not found/i),
+                data: { uri: 'test://nonexistent' }
             });
         });
 

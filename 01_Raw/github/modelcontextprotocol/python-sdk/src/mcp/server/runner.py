@@ -14,14 +14,29 @@ the `Connection`, the driver tears it down.
 from __future__ import annotations
 
 import logging
-from collections.abc import Awaitable, Mapping, Sequence
+from collections.abc import Awaitable, Mapping
 from dataclasses import KW_ONLY, dataclass
-from functools import cached_property, partial, reduce
+from functools import cached_property, partial
 from typing import TYPE_CHECKING, Any, Generic, cast
 
 import anyio
 import anyio.abc
-from opentelemetry.trace import SpanKind, StatusCode
+from mcp_types import (
+    CLIENT_CAPABILITIES_META_KEY,
+    CLIENT_INFO_META_KEY,
+    INTERNAL_ERROR,
+    INVALID_PARAMS,
+    METHOD_NOT_FOUND,
+    PROTOCOL_VERSION_META_KEY,
+    ErrorData,
+    Implementation,
+    InitializeRequestParams,
+    InitializeResult,
+    RequestParams,
+    RequestParamsMeta,
+)
+from mcp_types import methods as _methods
+from mcp_types.version import HANDSHAKE_PROTOCOL_VERSIONS, LATEST_HANDSHAKE_VERSION, LATEST_MODERN_VERSION
 from pydantic import BaseModel, ValidationError
 from typing_extensions import TypeVar
 
@@ -29,31 +44,12 @@ from mcp.server.connection import Connection
 from mcp.server.context import CallNext, HandlerResult, ServerMiddleware, ServerRequestContext
 from mcp.server.models import InitializationOptions
 from mcp.server.session import ServerSession
-from mcp.shared._otel import extract_trace_context, otel_span
 from mcp.shared._stream_protocols import ReadStream, WriteStream
-from mcp.shared.dispatcher import DispatchContext, Dispatcher, DispatchMiddleware, OnNotify, OnRequest
+from mcp.shared.dispatcher import DispatchContext, Dispatcher, OnNotify, OnRequest
 from mcp.shared.exceptions import MCPError
-from mcp.shared.jsonrpc_dispatcher import JSONRPCDispatcher, handler_exception_to_error_data
+from mcp.shared.jsonrpc_dispatcher import JSONRPCDispatcher
 from mcp.shared.message import ServerMessageMetadata, SessionMessage
 from mcp.shared.transport_context import TransportContext
-from mcp.shared.version import SUPPORTED_PROTOCOL_VERSIONS
-from mcp.types import (
-    INTERNAL_ERROR,
-    INVALID_PARAMS,
-    LATEST_PROTOCOL_VERSION,
-    METHOD_NOT_FOUND,
-    ErrorData,
-    Implementation,
-    InitializeRequestParams,
-    InitializeResult,
-    JSONRPCError,
-    JSONRPCRequest,
-    JSONRPCResponse,
-    RequestId,
-    RequestParams,
-    RequestParamsMeta,
-)
-from mcp.types import methods as _methods
 
 if TYPE_CHECKING:
     from mcp.server.lowlevel.server import Server
@@ -63,11 +59,10 @@ __all__ = [
     "ServerMiddleware",
     "ServerRunner",
     "aclose_shielded",
-    "otel_middleware",
+    "modern_on_request",
     "serve_connection",
     "serve_loop",
     "serve_one",
-    "to_jsonrpc_response",
 ]
 
 logger = logging.getLogger(__name__)
@@ -91,58 +86,6 @@ def _extract_meta(params: Mapping[str, Any] | None) -> RequestParamsMeta | None:
         return RequestParams.model_validate(params, by_name=False).meta
     except ValidationError:
         return None
-
-
-def otel_middleware(next_on_request: OnRequest) -> OnRequest:
-    """Dispatch-tier middleware that wraps each request in an OpenTelemetry span.
-
-    Mirrors the span shape of the existing `Server._handle_request`: span name
-    `"MCP handle <method> [<target>]"`, `mcp.method.name` attribute, W3C
-    trace context extracted from `params._meta` (SEP-414), and an ERROR
-    status if the handler raises.
-    """
-
-    async def wrapped(
-        dctx: DispatchContext[TransportContext], method: str, params: Mapping[str, Any] | None
-    ) -> dict[str, Any]:
-        target: str | None
-        match params:
-            case {"name": str() as target}:
-                pass
-            case _:
-                target = None
-        parent: Any | None
-        match params:
-            case {"_meta": {**meta}}:
-                parent = extract_trace_context(meta)
-            case _:
-                parent = None
-        span_name = f"MCP handle {method}{f' {target}' if target else ''}"
-        # `otel_middleware` wraps `on_request` only, so `request_id` is always set.
-        attributes = {"mcp.method.name": method, "jsonrpc.request.id": str(dctx.request_id)}
-        with otel_span(
-            span_name,
-            kind=SpanKind.SERVER,
-            attributes=attributes,
-            context=parent,
-            record_exception=False,
-            set_status_on_exception=False,
-        ) as span:
-            try:
-                return await next_on_request(dctx, method, params)
-            except MCPError as e:
-                span.set_status(StatusCode.ERROR, e.error.message)
-                raise
-            except ValidationError:
-                # Mirror the sanitized wire response; pydantic messages carry client input.
-                span.set_status(StatusCode.ERROR, "Invalid request parameters")
-                raise
-            except Exception as e:
-                span.record_exception(e)
-                span.set_status(StatusCode.ERROR, str(e))
-                raise
-
-    return wrapped
 
 
 def _dump_result(result: Any) -> dict[str, Any]:
@@ -180,24 +123,12 @@ async def aclose_shielded(connection: Connection) -> None:
         )
 
 
-async def to_jsonrpc_response(request_id: RequestId, coro: Awaitable[dict[str, Any]]) -> JSONRPCResponse | JSONRPCError:
-    """Await ``coro`` and wrap its outcome as the JSON-RPC reply for ``request_id``.
-
-    The exception-to-wire boundary for the request-per-call drivers
-    (`serve_one`, the modern HTTP entry). `MCPError` and `ValidationError`
-    map via the shared `handler_exception_to_error_data` ladder; any other
-    exception is logged and surfaced as `INTERNAL_ERROR` so handler internals
-    never reach the wire.
-    """
-    try:
-        result = await coro
-    except Exception as exc:
-        error = handler_exception_to_error_data(exc)
-        if error is None:
-            logger.exception("request handler raised")
-            error = ErrorData(code=INTERNAL_ERROR, message="Internal server error")
-        return JSONRPCError(jsonrpc="2.0", id=request_id, error=error)
-    return JSONRPCResponse(jsonrpc="2.0", id=request_id, result=result)
+def _apply_middleware(
+    middleware: ServerMiddleware[Any], call_next: CallNext, ctx: ServerRequestContext[Any, Any]
+) -> Awaitable[HandlerResult]:
+    """Adapt one middleware to the `CallNext` shape: bind `call_next`, take
+    `ctx` at call time so a rewritten context flows down the chain."""
+    return middleware(ctx, call_next)
 
 
 @dataclass
@@ -210,17 +141,10 @@ class ServerRunner(Generic[LifespanT]):
     _: KW_ONLY
     init_options: InitializationOptions | None = None
     """`InitializeResult` payload. Defaults to `server.create_initialization_options()`."""
-    dispatch_middleware: Sequence[DispatchMiddleware] = (otel_middleware,)
 
     @cached_property
     def on_request(self) -> OnRequest:
-        """`_on_request` wrapped in `dispatch_middleware`, outermost-first.
-
-        Dispatch-tier middleware sees raw `(dctx, method, params) -> dict` and
-        wraps everything - initialize, METHOD_NOT_FOUND, validation failures
-        included.
-        """
-        return reduce(lambda h, mw: mw(h), reversed(self.dispatch_middleware), self._on_request)
+        return self._on_request
 
     @cached_property
     def on_notify(self) -> OnNotify:
@@ -234,15 +158,17 @@ class ServerRunner(Generic[LifespanT]):
     ) -> dict[str, Any]:
         meta = _extract_meta(params)
         version = self.connection.protocol_version
-        ctx = self._make_context(dctx, meta, version)
-        is_spec_method = method in _methods.SPEC_CLIENT_METHODS
+        ctx = self._make_context(dctx, method, params, meta, version)
 
-        async def _inner() -> HandlerResult:
+        async def _inner(ctx: ServerRequestContext[LifespanT, Any]) -> HandlerResult:
+            # Read method/params off `ctx` so a middleware that rewrote them via
+            # `call_next(replace(ctx, ...))` reaches lookup and the handler.
+            method, params = ctx.method, ctx.params
             # Pinned compat: spec methods are surface-validated before lookup,
             # so malformed params are INVALID_PARAMS even with no handler
             # registered. Custom methods miss the monolith map and fall through
             # to `entry.params_type` exactly as before.
-            if is_spec_method:
+            if method in _methods.SPEC_CLIENT_METHODS:
                 try:
                     _methods.validate_client_request(method, version, params)
                 except KeyError:
@@ -251,7 +177,7 @@ class ServerRunner(Generic[LifespanT]):
             # the gate become a per-version legacy path then. Initialize runs inline
             # (read loop parked), so awaiting the peer anywhere on this path deadlocks.
             if method == "initialize":
-                return self._handle_initialize(params)
+                return self._serialize(method, version, self._handle_initialize(params))
             # Methods without a handler are METHOD_NOT_FOUND regardless of
             # initialization state: JSON-RPC 2.0 reserves -32601 for "not
             # available on this server", and clients probing a server before
@@ -270,28 +196,22 @@ class ServerRunner(Generic[LifespanT]):
             if isinstance(result, ErrorData):
                 # Raise inside the chain so middleware observes the failure.
                 raise MCPError.from_error_data(result)
-            return result
+            # Dump and serialize inside the chain so the OpenTelemetry span (the
+            # outermost middleware) records a failing handler return shape too.
+            return self._serialize(method, version, result)
 
-        call = self._compose_server_middleware(ctx, method, params, _inner)
-        result = _dump_result(await call())
-        # TODO(L56): reject resultType values outside {"complete", "input_required"} unless the
-        # corresponding extension is in this request's _meta clientCapabilities.extensions; the
-        # explicit MUST-reject is client-side (basic/index.mdx ResultType), this enforces it proactively.
-        if is_spec_method:
-            try:
-                result = _methods.serialize_server_result(method, version, result)
-            except KeyError:
-                # Middleware short-circuited a wrong-version spec method without
-                # calling `call_next`; it owns the result shape.
-                pass
-            except ValidationError:
-                # Server bug, not client fault. Detail stays in the server log:
-                # pydantic messages echo the result body.
-                logger.exception("handler for %r returned an invalid result", method)
-                raise MCPError(code=INTERNAL_ERROR, message="Handler returned an invalid result") from None
+        call = self._compose_server_middleware(_inner)
+        # `_inner` already produced the wire dict; a middleware that short-circuited
+        # without `call_next` is trusted to return its own well-formed result.
+        result = _dump_result(await call(ctx))
         if method == "initialize":
             # Commit only on chain success, so a middleware veto leaves no state.
             # Race-free: the read loop is parked until this call returns.
+            # TODO: this re-reads the wire `params`, so a middleware that rewrote
+            # `ctx.params` (or `ctx.method`, or short-circuited without `call_next`)
+            # can leave `connection.protocol_version` out of step with the
+            # `InitializeResult` `_inner` produced. Resolve when `initialize` becomes
+            # a built-in handler so commit and result derive from one negotiation.
             self.connection.client_params, self.connection.protocol_version = self._negotiate_initialize(params)
         return result
 
@@ -303,9 +223,10 @@ class ServerRunner(Generic[LifespanT]):
     ) -> None:
         meta = _extract_meta(params)
         version = self.connection.protocol_version
-        ctx = self._make_context(dctx, meta, version)
+        ctx = self._make_context(dctx, method, params, meta, version)
 
-        async def _inner() -> None:
+        async def _inner(ctx: ServerRequestContext[LifespanT, Any]) -> None:
+            method, params = ctx.method, ctx.params
             if method in _methods.SPEC_CLIENT_NOTIFICATION_METHODS:
                 try:
                     _methods.validate_client_notification(method, version, params)
@@ -335,33 +256,33 @@ class ServerRunner(Generic[LifespanT]):
                 return
             await entry.handler(ctx, typed_params)
 
-        call = self._compose_server_middleware(ctx, method, params, _inner)
+        call = self._compose_server_middleware(_inner)
         try:
-            await call()
+            await call(ctx)
         except Exception:
             # A crashing handler must not cancel the dispatcher's task group;
             # middleware saw the raise out of call_next() first.
             logger.exception("notification handler for %r raised", method)
 
-    def _compose_server_middleware(
-        self,
-        ctx: ServerRequestContext[LifespanT, Any],
-        method: str,
-        params: Mapping[str, Any] | None,
-        inner: CallNext,
-    ) -> CallNext:
+    def _compose_server_middleware(self, inner: CallNext) -> CallNext:
         """Wrap `inner` in `Server.middleware`, outermost-first.
 
         Shared by `_on_request` and `_on_notify` so the same middleware chain
-        observes every inbound message.
+        observes every inbound message. The composed callable takes the `ctx`
+        at call time, so a middleware can rewrite it for the rest of the chain.
         """
         call = inner
-        for mw in reversed(self.server.middleware):
-            call = partial(mw, ctx, method, params, call)
+        for middleware in reversed(self.server.middleware):
+            call = partial(_apply_middleware, middleware, call)
         return call
 
     def _make_context(
-        self, dctx: DispatchContext[TransportContext], meta: RequestParamsMeta | None, protocol_version: str
+        self,
+        dctx: DispatchContext[TransportContext],
+        method: str,
+        params: Mapping[str, Any] | None,
+        meta: RequestParamsMeta | None,
+        protocol_version: str,
     ) -> ServerRequestContext[LifespanT, Any]:
         # TODO(L54): remove for Context rework. Reads the SHTTP per-request
         # data off the raw `dctx.message_metadata` carrier; replace with the
@@ -380,6 +301,8 @@ class ServerRunner(Generic[LifespanT]):
         return ServerRequestContext(
             session=session,
             lifespan_context=self.lifespan_state,
+            method=method,
+            params=params,
             request_id=dctx.request_id,
             meta=meta,
             protocol_version=protocol_version,
@@ -389,11 +312,33 @@ class ServerRunner(Generic[LifespanT]):
         )
 
     @staticmethod
+    def _serialize(method: str, version: str, result: HandlerResult) -> dict[str, Any]:
+        """Dump a handler result to the wire dict, serializing spec methods.
+
+        Runs inside the middleware chain so the OpenTelemetry span observes a
+        failing return shape (unsupported type, malformed spec result) as an
+        error rather than closing on a request that the client sees fail.
+        """
+        dumped = _dump_result(result)
+        # TODO(L56): reject resultType values outside {"complete", "input_required"} unless the
+        # corresponding extension is in this request's _meta clientCapabilities.extensions; the
+        # explicit MUST-reject is client-side (basic/index.mdx ResultType), this enforces it proactively.
+        if method not in _methods.SPEC_CLIENT_METHODS:
+            return dumped
+        try:
+            return _methods.serialize_server_result(method, version, dumped)
+        except ValidationError:
+            # Server bug, not client fault. Detail stays in the server log:
+            # pydantic messages echo the result body.
+            logger.exception("handler for %r returned an invalid result", method)
+            raise MCPError(code=INTERNAL_ERROR, message="Handler returned an invalid result") from None
+
+    @staticmethod
     def _negotiate_initialize(params: Mapping[str, Any] | None) -> tuple[InitializeRequestParams, str]:
         """Validate `initialize` params and pick the protocol version."""
         init = InitializeRequestParams.model_validate(params or {}, by_name=False)
         requested = init.protocol_version
-        negotiated = requested if requested in SUPPORTED_PROTOCOL_VERSIONS else LATEST_PROTOCOL_VERSION
+        negotiated = requested if requested in HANDSHAKE_PROTOCOL_VERSIONS else LATEST_HANDSHAKE_VERSION
         return init, negotiated
 
     def _handle_initialize(self, params: Mapping[str, Any] | None) -> InitializeResult:
@@ -473,22 +418,49 @@ async def serve_loop(
 
 async def serve_one(
     server: Server[LifespanT],
-    request: JSONRPCRequest,
+    dctx: DispatchContext[TransportContext],
+    method: str,
+    params: Mapping[str, Any] | None,
     *,
     connection: Connection,
-    dctx: DispatchContext[TransportContext],
     lifespan_state: LifespanT,
-) -> JSONRPCResponse | JSONRPCError:
-    """Handle a single ``request`` and return its JSON-RPC reply.
+) -> dict[str, Any]:
+    """Handle a single request ``(method, params)`` and return its result dict.
 
-    The single-exchange driver: builds the kernel, runs `on_request` once for
-    `request` under `dctx`, maps the outcome to a `JSONRPCResponse` /
-    `JSONRPCError` via `to_jsonrpc_response`, and tears down
-    `connection.exit_stack` (shielded) on the way out. The entry constructs
-    the (born-ready) `Connection` and the `dctx`; this only consumes them.
+    The single-exchange driver: builds the kernel, runs `on_request` once under
+    `dctx`, and tears down `connection.exit_stack` (shielded) on the way out.
+    The entry constructs the (born-ready) `Connection` and the `dctx`; this
+    only consumes them.
+
+    Raises whatever the handler chain raises (`MCPError` / `ValidationError` /
+    unmapped); callers own the exception-to-wire mapping.
     """
     runner = ServerRunner(server, connection, lifespan_state)
     try:
-        return await to_jsonrpc_response(request.id, runner.on_request(dctx, request.method, request.params))
+        return await runner.on_request(dctx, method, params)
     finally:
         await aclose_shielded(connection)
+
+
+def modern_on_request(server: Server[LifespanT], lifespan_state: LifespanT) -> OnRequest:
+    """Return an `OnRequest` callback that serves each call via `serve_one` with a fresh per-request `Connection`.
+
+    Wire this into the server side of a `DirectDispatcher` peer-pair to drive an
+    in-process server on the modern per-request-envelope path (each request
+    carries protocol version, client info, and capabilities in `params._meta`;
+    no `initialize` handshake). Like `serve_one`, this raises whatever the
+    handler chain raises - the dispatcher owns the exception-to-error mapping.
+    """
+
+    async def handle(
+        dctx: DispatchContext[TransportContext], method: str, params: Mapping[str, Any] | None
+    ) -> dict[str, Any]:
+        meta = (params or {}).get("_meta", {})
+        connection = Connection.from_envelope(
+            meta.get(PROTOCOL_VERSION_META_KEY, LATEST_MODERN_VERSION),
+            meta.get(CLIENT_INFO_META_KEY),
+            meta.get(CLIENT_CAPABILITIES_META_KEY),
+        )
+        return await serve_one(server, dctx, method, params, connection=connection, lifespan_state=lifespan_state)
+
+    return handle

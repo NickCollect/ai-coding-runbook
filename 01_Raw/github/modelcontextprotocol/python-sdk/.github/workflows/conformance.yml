@@ -15,15 +15,21 @@ permissions:
 
 env:
   # Pinned conformance harness package spec (passed verbatim to `npx --yes`).
-  # Use a published version, e.g. @modelcontextprotocol/conformance@0.2.0-alpha.5.
+  # Use a published version, e.g. @modelcontextprotocol/conformance@0.2.0-alpha.7.
   # Bump deliberately and reconcile both
   # .github/actions/conformance/expected-failures*.yml files in the same change.
   #
-  # TODO: replace with @modelcontextprotocol/conformance@0.2.0-alpha.5 once
-  # https://github.com/modelcontextprotocol/conformance/pull/357 publishes, and
-  # drop CONFORMANCE_PKG_SHA256 plus the fetch-and-verify step below.
-  CONFORMANCE_PKG: "https://pkg.pr.new/@modelcontextprotocol/conformance@65fcd39"
-  CONFORMANCE_PKG_SHA256: "9a381d7083f8be2fe7ae44efeca54530f18c61425805ddaf9cd88915efcc1574"
+  # Temporarily pinned to the pkg.pr.new build of conformance main@b18aa918
+  # (the merge of #371, which fixes the http-custom-headers fixture's
+  # spec-forbidden `number`-typed x-mcp-header annotations) — no published
+  # release includes it yet. Pinned by commit SHA so the tarball cannot move
+  # under us; CONFORMANCE_PKG_SHA256 pins the bytes and the fetch-and-verify
+  # step below downloads, checks the digest, and repoints CONFORMANCE_PKG at the
+  # verified local copy. Repin to the next published @modelcontextprotocol/
+  # conformance release (>0.2.0-alpha.7) once it ships, then drop
+  # CONFORMANCE_PKG_SHA256 and the fetch-and-verify steps.
+  CONFORMANCE_PKG: "https://pkg.pr.new/@modelcontextprotocol/conformance@b18aa918"
+  CONFORMANCE_PKG_SHA256: "e9f6bc25085b4692e988cbdbd024a4203d54a52a6aaa065376cf8ecaa09bb680"
 
 jobs:
   server-conformance:
@@ -84,6 +90,10 @@ jobs:
         with:
           node-version: 24
       - name: Fetch and verify conformance harness
+        # Only when CONFORMANCE_PKG is a URL: download, check the recorded
+        # sha256, and re-point CONFORMANCE_PKG at the verified local tarball.
+        # When CONFORMANCE_PKG is a registry spec, this step is a no-op (npm's
+        # own integrity check applies).
         run: |
           case "$CONFORMANCE_PKG" in
             https://*)
@@ -94,15 +104,20 @@ jobs:
           esac
       - run: uv sync --frozen --all-extras --package mcp
       - name: Run client conformance (all suite)
+        # The harness runs all scenarios via unbounded Promise.all; with 40
+        # scenarios on a 2-core runner the slowest one (sse-retry, which has a
+        # real-time SSE reconnect wait) needs more than the 30s default budget.
         run: >-
           npx --yes "$CONFORMANCE_PKG" client
           --command 'uv run --frozen python .github/actions/conformance/client.py'
           --suite all
+          --timeout 60000
           --expected-failures ./.github/actions/conformance/expected-failures.yml
       - name: Run client conformance (2026-07-28 wire, all suite)
         run: >-
           npx --yes "$CONFORMANCE_PKG" client
           --command 'uv run --frozen python .github/actions/conformance/client.py'
           --suite all
+          --timeout 60000
           --spec-version 2026-07-28
           --expected-failures ./.github/actions/conformance/expected-failures.2026-07-28.yml

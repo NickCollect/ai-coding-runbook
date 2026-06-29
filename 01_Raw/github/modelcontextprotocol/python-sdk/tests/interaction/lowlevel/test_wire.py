@@ -11,17 +11,10 @@ malformed JSON-RPC requests that the typed client API cannot produce.
 """
 
 import anyio
+import mcp_types as types
 import pytest
 from inline_snapshot import snapshot
-
-from mcp import MCPError, types
-from mcp.client import ClientRequestContext, ClientSession
-from mcp.client._memory import InMemoryTransport
-from mcp.client.client import Client
-from mcp.server import Server, ServerRequestContext
-from mcp.shared.memory import create_client_server_memory_streams
-from mcp.shared.message import SessionMessage
-from mcp.types import (
+from mcp_types import (
     CONNECTION_CLOSED,
     INVALID_PARAMS,
     CallToolRequest,
@@ -36,6 +29,14 @@ from mcp.types import (
     ListRootsResult,
     TextContent,
 )
+
+from mcp import MCPError
+from mcp.client import ClientRequestContext, ClientSession
+from mcp.client._memory import InMemoryTransport
+from mcp.client.client import Client
+from mcp.server import Server, ServerRequestContext
+from mcp.shared.memory import create_client_server_memory_streams
+from mcp.shared.message import SessionMessage
 from tests.interaction._helpers import RecordingTransport, _RecordingReadStream
 from tests.interaction._requirements import requirement
 
@@ -65,11 +66,11 @@ async def test_request_ids_are_unique_and_never_null() -> None:
     """
     recording = RecordingTransport(InMemoryTransport(_echo_server()))
 
-    async with Client(recording) as client:
+    async with Client(recording, mode="legacy") as client:
         await client.list_tools()
         await client.call_tool("echo", {})
         await client.call_tool("echo", {})
-        await client.send_ping()
+        await client.send_ping()  # pyright: ignore[reportDeprecated]
 
     sent = [message.message for message in recording.sent]
     request_ids = [message.id for message in sent if isinstance(message, JSONRPCRequest)]
@@ -95,9 +96,9 @@ async def test_notifications_are_never_answered() -> None:
 
     recording = RecordingTransport(InMemoryTransport(_echo_server()))
 
-    async with Client(recording, list_roots_callback=list_roots) as client:
+    async with Client(recording, mode="legacy", list_roots_callback=list_roots) as client:
         await client.send_roots_list_changed()  # pyright: ignore[reportDeprecated]
-        await client.send_ping()
+        await client.send_ping()  # pyright: ignore[reportDeprecated]
 
     sent = [message.message for message in recording.sent]
     sent_request_ids = [message.id for message in sent if isinstance(message, JSONRPCRequest)]
@@ -134,7 +135,7 @@ async def test_exactly_one_initialized_notification_is_sent_after_the_handshake(
     """
     recording = RecordingTransport(InMemoryTransport(_echo_server()))
 
-    async with Client(recording) as client:
+    async with Client(recording, mode="legacy") as client:
         await client.list_tools()
 
     sent_methods = [
@@ -261,7 +262,7 @@ async def test_set_level_with_an_unrecognized_value_is_answered_with_invalid_par
         """Registered so the logging capability is advertised; never called -- params validation fails first."""
         raise NotImplementedError
 
-    server = Server("logger", on_set_logging_level=set_logging_level)
+    server = Server("logger", on_set_logging_level=set_logging_level)  # pyright: ignore[reportDeprecated]
     errors: list[ErrorData] = []
 
     async with create_client_server_memory_streams() as (client_streams, server_streams):

@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { Project } from 'ts-morph';
 
-import { schemaParamRemovalTransform } from '../../../src/migrations/v1-to-v2/transforms/schemaParamRemoval.js';
-import type { TransformContext } from '../../../src/types.js';
+import { schemaParamRemovalTransform } from '../../../src/migrations/v1-to-v2/transforms/schemaParamRemoval';
+import type { TransformContext } from '../../../src/types';
 
 const ctx: TransformContext = { projectType: 'client' };
 
@@ -63,6 +63,19 @@ describe('schema-param-removal transform', () => {
         expect(result).toContain('MyCustomSchema');
     });
 
+    it('does not remove a non-MCP schema from extra.sendRequest() for a custom method', () => {
+        const input = [
+            `import { MySchema } from './my-schemas';`,
+            `const result = await extra.sendRequest({ method: 'acme/x', params }, MySchema);`,
+            ''
+        ].join('\n');
+        const result = applyTransform(input);
+        // The schema arg and its import must be left alone — only MCP-imported
+        // *Schema identifiers are stripped (same guard as the request/callTool path).
+        expect(result).toContain("extra.sendRequest({ method: 'acme/x', params }, MySchema)");
+        expect(result).toContain(`import { MySchema } from './my-schemas';`);
+    });
+
     it('is idempotent', () => {
         const input = [
             `import { CallToolResultSchema } from '@modelcontextprotocol/sdk/types.js';`,
@@ -116,5 +129,41 @@ describe('schema-param-removal transform', () => {
         ].join('\n');
         const result = applyTransform(input);
         expect(result).not.toMatch(/import.*CallToolResultSchema/);
+    });
+
+    it('removes a literal undefined schema slot from callTool when an options argument follows', () => {
+        const input = [
+            `import { Client } from '@modelcontextprotocol/sdk/client/index.js';`,
+            `const result = await client.callTool({ name: 'add', arguments: { a: 1 } }, undefined, { onprogress: cb });`,
+            ''
+        ].join('\n');
+        const result = applyTransform(input);
+        expect(result).toContain("client.callTool({ name: 'add', arguments: { a: 1 } }, { onprogress: cb })");
+        expect(result).not.toContain(', undefined,');
+    });
+
+    it('removes a literal undefined schema slot from request when an options argument follows', () => {
+        const input = [
+            `import { Client } from '@modelcontextprotocol/sdk/client/index.js';`,
+            `const result = await client.request({ method: 'tools/call', params: {} }, undefined, { timeout: 5000 });`,
+            ''
+        ].join('\n');
+        const result = applyTransform(input);
+        expect(result).toContain("client.request({ method: 'tools/call', params: {} }, { timeout: 5000 })");
+        expect(result).not.toContain(', undefined,');
+    });
+
+    it('does not strip undefined from request()/callTool() in a file with no MCP imports', () => {
+        // `request`/`callTool` are common non-MCP method names; without an MCP signal in the file the
+        // codemod must not touch them, or it would shift `someHttpClient.request(payload, undefined, opts)`.
+        const input = [`const r = await someHttpClient.request(payload, undefined, { timeout: 5000 });`, ''].join('\n');
+        const result = applyTransform(input);
+        expect(result).toContain('someHttpClient.request(payload, undefined, { timeout: 5000 })');
+    });
+
+    it('leaves a 2-arg callTool(params, undefined) unchanged (already valid as options in v2)', () => {
+        const input = [`await client.callTool({ name: 'add' }, undefined);`, ''].join('\n');
+        const result = applyTransform(input);
+        expect(result).toContain('undefined');
     });
 });

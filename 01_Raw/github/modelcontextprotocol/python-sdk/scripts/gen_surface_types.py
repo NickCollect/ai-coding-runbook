@@ -1,7 +1,7 @@
 """Regenerate the per-version wire-shape surface packages from vendored schemas.
 
 Runs `datamodel-code-generator` over each `schema/PINNED.json` entry and
-writes the result to `src/mcp/types/v<version>/__init__.py` with only the
+writes the result to `src/mcp-types/mcp_types/v<version>/__init__.py` with only the
 fixes the raw output needs: a small JSON pre-patch for the known
 `number`-as-`integer` schema.json defect, a header, full URLs for the spec's
 site-absolute doc links, and per-version epilogue aliases. Run with
@@ -23,7 +23,7 @@ from typing import Any
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCHEMA_DIR = REPO_ROOT / "schema"
-TYPES_DIR = REPO_ROOT / "src" / "mcp" / "types"
+TYPES_DIR = REPO_ROOT / "src" / "mcp-types" / "mcp_types"
 
 # schema.ts -> schema.json renders TypeScript `number` as JSON Schema
 # `integer` at these sites; patch the JSON before codegen so floats validate.
@@ -85,7 +85,15 @@ SCHEMA_PATCHES: dict[str, list[tuple[str, Any, Any]]] = {
 OPEN_CLASSES: dict[str, frozenset[str]] = {
     "2025-11-25": frozenset({"Meta", "InputSchema", "OutputSchema", "Result", "GetTaskPayloadResult", "Data"}),
     "2026-07-28": frozenset(
-        {"MetaObject", "NotificationMetaObject", "RequestMetaObject", "InputSchema", "OutputSchema", "Result"}
+        {
+            "MetaObject",
+            "NotificationMetaObject",
+            "RequestMetaObject",
+            "SubscriptionsListenResultMeta",
+            "InputSchema",
+            "OutputSchema",
+            "Result",
+        }
     ),
 }
 
@@ -142,7 +150,7 @@ def run_codegen(schema_path: Path, output_path: Path) -> None:
             "--output", str(output_path),
             "--output-model-type", "pydantic_v2.BaseModel",
             "--target-python-version", "3.10",
-            "--base-class", "mcp.types._wire_base.WireModel",
+            "--base-class", "mcp_types._wire_base.WireModel",
             "--snake-case-field", "--remove-special-field-name-prefix",
             "--use-annotated", "--use-field-description", "--use-schema-description",
             "--enum-field-as-literal", "all",
