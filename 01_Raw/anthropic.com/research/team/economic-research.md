@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economic-research
-fetched_at: 2026-06-22T06:24:54.331172+00:00
+fetched_at: 2026-06-29T05:27:02.369635+00:00
 title: "Economic Research \\ Anthropic"
 ---
 
@@ -52,6 +52,9 @@ Search
 
 DateCategoryTitle
 
+- [Jun 26, 2026Economic Research
+
+  Anthropic Economic Index report: Cadences](https://www.anthropic.com/research/economic-index-june-2026-report)
 - [Jun 16, 2026Economic Research
 
   Agentic coding and persistent returns to expertise](https://www.anthropic.com/research/claude-code-expertise)
@@ -79,8 +82,5 @@ DateCategoryTitle
 - [Jan 15, 2026Economic Research
 
   Anthropic Economic Index: New building blocks for understanding AI use](https://www.anthropic.com/research/economic-index-primitives)
-- [Jan 15, 2026Economic Research
-
-  Anthropic Economic Index report: Economic primitives](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report)
 
 [See more](#)

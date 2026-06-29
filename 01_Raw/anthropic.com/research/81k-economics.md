@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/81k-economics
-fetched_at: 2026-06-22T06:23:40.387959+00:00
+fetched_at: 2026-06-29T05:25:40.925131+00:00
 title: "What 81,000 people told us about the economics of AI \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Apr 22, 2026
 
 [Read the PDF](https://cdn.sanity.io/files/4zrzovbb/website/3a8d990bc90098038eabd77b0d12ff636ed58d50.pdf)
 
-![What 81,000 people told us about the economics of AI](https://www-cdn.anthropic.com/images/4zrzovbb/website/60d39963d844bc1104a780c762c540c9ba1baefe-1000x1000.svg)
+![What 81,000 people told us about the economics of AI](https://www-cdn.anthropic.com/images/4zrzovbb/website/5e085cd595dd3b69fe11d9204987ae8e8da51fda-2000x1125.png)
 
 ### Key findings:
 
@@ -102,6 +102,18 @@ There are key caveats to our analysis, owing to the nature of the data. First, o
 
 Still, the interviews surface real insights about people’s feelings around the economics of AI, showing how qualitative data can surface quantitative hypotheses. And the large share of economic-related concerns is a strong signal in itself.
 
+### Citation
+
+```
+@online{massenkoff2026interviewer,
+author = {Maxim Massenkoff and Saffron Huang},
+title = {What 81,000 people told us about the economics of AI},
+date = {2026-04-22},
+year = {2026},
+url = {anthropic.com/research/81k-economics},
+}
+```
+
 ### Appendix
 
 See the final section of the [linked PDF](https://cdn.sanity.io/files/4zrzovbb/website/3a8d990bc90098038eabd77b0d12ff636ed58d50.pdf).
@@ -126,6 +138,12 @@ Additionally, we thank Miriam Chaum, Ankur Rathi, Santi Ruiz, and David Saunders
 
 ## Related content
 
+### Anthropic Economic Index report: Cadences
+
+In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
+
+[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+
 ### Project Fetch: Phase two
 
 We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
@@ -134,8 +152,6 @@ We report results from our latest test of whether Claude can help Anthropic empl
 
 ### Agentic coding and persistent returns to expertise
 
+This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
+
 [Read more](https://www.anthropic.com/research/claude-code-expertise)
-
-### Paving the way for agents in biology
-
-[Read more](https://www.anthropic.com/research/agents-in-biology)

@@ -1,7 +1,7 @@
 ---
 source_url: https://www.anthropic.com/research/critical-infrastructure-defense
-fetched_at: 2026-06-22T06:23:59.173649+00:00
-title: "Experimenting with AI to defend critical infrastructure \\ Anthropic"
+fetched_at: 2026-06-29T05:26:11.608054+00:00
+title: "AI to defend critical infrastructure \\ Anthropic"
 ---
 
 Frontier Red Team
@@ -38,6 +38,12 @@ We are grateful to Loc Truong and Kristopher Willis at PNNL for leading this pro
 
 ## Related content
 
+### Anthropic Economic Index report: Cadences
+
+In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
+
+[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+
 ### Project Fetch: Phase two
 
 We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
@@ -46,11 +52,9 @@ We report results from our latest test of whether Claude can help Anthropic empl
 
 ### Agentic coding and persistent returns to expertise
 
+This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
+
 [Read more](https://www.anthropic.com/research/claude-code-expertise)
-
-### Paving the way for agents in biology
-
-[Read more](https://www.anthropic.com/research/agents-in-biology)
 
 ## Subscribe to the Frontier Red Team newsletter
 
