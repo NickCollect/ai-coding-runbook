@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/parameters
-fetched_at: 2026-06-22T06:23:24.763396+00:00
+fetched_at: 2026-06-29T05:25:13.449540+00:00
 fetch_method: mintlify_md
 ---
 
@@ -47,6 +47,7 @@ Global options can be used with any command:
 | `about`                       | Display version, system, and account info                         | `agent about`                       |
 | `models`                      | List available models for this account                            | `agent models`                      |
 | `mcp`                         | Manage MCP servers                                                | `agent mcp`                         |
+| `sandbox`                     | Configure sandbox mode or run one command in a sandbox (hidden)   | `agent sandbox enable`              |
 | `worker`                      | Start a private cloud worker that runs agents in your environment | `agent worker start`                |
 | `acp`                         | Start ACP server mode (advanced, hidden command)                  | `agent acp`                         |
 | `update`                      | Update Cursor Agent to the latest version                         | `agent update`                      |
@@ -78,6 +79,29 @@ Manage MCP servers configured for Cursor Agent.
 
 All MCP commands support `-h, --help` for command-specific help.
 
+## Sandbox
+
+Configure sandbox mode or run one command in a sandbox.
+
+| Subcommand            | Description                                          | Usage                   |
+| --------------------- | ---------------------------------------------------- | ----------------------- |
+| `enable`              | Enable sandbox mode for command execution            | `agent sandbox enable`  |
+| `disable`             | Disable sandbox mode and use allowlist mode          | `agent sandbox disable` |
+| `reset`               | Reset sandbox configuration to defaults              | `agent sandbox reset`   |
+| `run <cmd> [args...]` | Run a command in a sandbox with workspace read/write | `agent sandbox run ls`  |
+| `help [command]`      | Display help for command                             | `agent sandbox help`    |
+
+| Command       | Option                          | Description                                                        |
+| ------------- | ------------------------------- | ------------------------------------------------------------------ |
+| `sandbox run` | `--allow-paths <paths>`         | Comma-separated list of extra read/write paths                     |
+| `sandbox run` | `--readonly-paths <paths>`      | Comma-separated list of extra read-only paths                      |
+| `sandbox run` | `--blocked-patterns <patterns>` | Comma-separated list of gitignore-style patterns to block          |
+| `sandbox run` | `--sandbox`                     | Run with the workspace read/write sandbox policy (default: `true`) |
+| `sandbox run` | `--network`                     | Enable network access in the sandbox (default: `false`)            |
+| `sandbox run` | `--sb-debug`                    | Write sandbox debug logs to a temp folder and print the path       |
+
+All sandbox commands support `-h, --help` for command-specific help.
+
 ## Worker
 
 Start a private cloud worker that connects to Cursor and runs agents in your environment.
@@ -88,22 +112,22 @@ Start a private cloud worker that connects to Cursor and runs agents in your env
 | `debug`          | Run private worker preflight diagnostics for auth, privacy, and routing | `agent worker debug` |
 | `help [command]` | Display help for command                                                | `agent worker help`  |
 
-| Option                             | Description                                                                                         |
-| ---------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `--auth-token-file <path>`         | Path to a file containing the worker auth token                                                     |
-| `--worker-dir <path>`              | Workspace root to expose to agents. Repeatable. The first value is the assignment identity.         |
-| `--management-addr <address>`      | Listen address for `/healthz`, `/readyz`, and `/metrics`                                            |
-| `--label <key=value>`              | Add a worker label. Can be used multiple times. Can't be used with `--labels-file`.                 |
-| `--labels-file <path>`             | Path to a JSON or TOML labels file. Can also use `CURSOR_WORKER_LABELS_FILE`.                       |
-| `--idle-release-timeout <seconds>` | Seconds the worker may stay connected after becoming idle. Default `0` disables idle-based release. |
-| `--pool`                           | Register for pool assignment. One cloud agent claims the worker at a time.                          |
-| `--single-use`                     | Legacy alias for `--pool`                                                                           |
-| `--pool-name <name>`               | Pool label for pool workers. Requires `--pool` or `--single-use`. Defaults to `default`.            |
-| `--name <name>`                    | Custom display name. Defaults to the machine hostname.                                              |
-| `--data-dir <path>`                | Base directory for logs, artifacts, and recording data                                              |
-| `--debug`                          | Print worker debug diagnostics before starting bridge mode                                          |
-| `--verbose`                        | Enable verbose startup logs for `agent worker start`                                                |
-| `--json`                           | Output the `agent worker debug` report as JSON                                                      |
+| Command        | Option                             | Description                                                                                         |
+| -------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `worker`       | `--auth-token-file <path>`         | Path to a file containing the worker auth token                                                     |
+| `worker`       | `--worker-dir <path>`              | Workspace root to expose to agents. Repeatable. The first value is the assignment identity.         |
+| `worker`       | `--management-addr <address>`      | Listen address for `/healthz`, `/readyz`, and `/metrics`                                            |
+| `worker`       | `--label <key=value>`              | Add a worker label. Can be used multiple times. Can't be used with `--labels-file`.                 |
+| `worker`       | `--labels-file <path>`             | Path to a JSON or TOML labels file. Can also use `CURSOR_WORKER_LABELS_FILE`.                       |
+| `worker`       | `--idle-release-timeout <seconds>` | Seconds the worker may stay connected after becoming idle. Default `0` disables idle-based release. |
+| `worker`       | `--pool`                           | Register for pool assignment. One cloud agent claims the worker at a time.                          |
+| `worker`       | `--single-use`                     | Legacy alias for `--pool`                                                                           |
+| `worker`       | `--pool-name <name>`               | Pool label for pool workers. Requires `--pool` or `--single-use`. Defaults to `default`.            |
+| `worker`       | `--name <name>`                    | Custom display name. Defaults to the machine hostname.                                              |
+| `worker`       | `--data-dir <path>`                | Base directory for logs, artifacts, and recording data                                              |
+| `worker`       | `--debug`                          | Print worker debug diagnostics before starting bridge mode                                          |
+| `worker start` | `--verbose`                        | Enable verbose startup logs                                                                         |
+| `worker debug` | `--json`                           | Output the debug report as JSON                                                                     |
 
 ## Command-specific options
 

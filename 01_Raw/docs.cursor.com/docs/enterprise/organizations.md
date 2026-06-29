@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organizations
-fetched_at: 2026-06-22T06:23:25.338420+00:00
+fetched_at: 2026-06-29T05:25:13.965464+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,6 +32,8 @@ See [Pooled usage](https://cursor.com/docs/enterprise/pooled-usage.md) for detai
 
 Organization Groups help you organize users across teams. Organization Groups are useful for org-wide cohorts such as Engineering, Contractors, or Pilot Users. Members can belong to multiple teams, so organization admins can apply settings to the same cohort regardless of each user's team membership.
 
+See [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md) for setup, SCIM mapping, membership management, and group-level controls.
+
 ## How limits and permissions combine
 
 Users may have different effective settings, such as usage limits and allowed models, across organization-level groups and team-level directory groups. Cursor reconciles these settings with a "most permissive wins" model.
@@ -60,6 +62,7 @@ For org-level automation, use the [Organization API](https://cursor.com/docs/acc
 ## Related docs
 
 - [Enterprise overview](https://cursor.com/docs/enterprise.md)
+- [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md)
 - [Identity & access management](https://cursor.com/docs/enterprise/identity-and-access-management.md)
 - [SCIM](https://cursor.com/docs/account/teams/scim.md)
 - [Admin API](https://cursor.com/docs/account/teams/admin-api.md)

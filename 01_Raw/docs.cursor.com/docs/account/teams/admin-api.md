@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-06-22T06:23:24.209580+00:00
+fetched_at: 2026-06-29T05:25:12.919350+00:00
 fetch_method: mintlify_md
 ---
 
@@ -513,6 +513,17 @@ Filter by user email address
 
 Filter by service account ID
 
+`hostingType` string
+
+Filter cloud agent (background agent) runs by where they executed. Use this to isolate inference spend for self-hosted agents from Cursor-hosted runs. Accepted values:
+
+- `CLOUD` - Cursor-hosted runs
+- `SELF_HOSTED` - any self-hosted run (a self-hosted pool worker or a personal "My Machine" worker)
+- `SELF_HOSTED_POOL` - team self-hosted pool workers only
+- `SELF_HOSTED_MACHINE` - personal "My Machine" workers only
+
+An unrecognized `hostingType` value returns a `400` error rather than an empty result, so a typo can't be mistaken for genuinely zero self-hosted spend. This filter covers inference spend only; self-hosted compute runs on your own machines and is never metered by Cursor.
+
 #### Response Fields
 
 Each object in `usageEvents` contains:
@@ -681,6 +692,21 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
     "endDate": 1751003762359
   }
 }
+```
+
+**Self-hosted agent spend example:**
+
+```bash
+curl -X POST https://api.cursor.com/teams/filtered-usage-events \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "startDate": 1748411762359,
+    "endDate": 1751003762359,
+    "hostingType": "SELF_HOSTED",
+    "page": 1,
+    "pageSize": 10
+  }'
 ```
 
 ### Set User Spend Limit

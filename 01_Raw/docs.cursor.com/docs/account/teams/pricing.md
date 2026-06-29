@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/pricing
-fetched_at: 2026-06-15T06:17:43.563542+00:00
+fetched_at: 2026-06-29T05:25:13.135050+00:00
 fetch_method: mintlify_md
 ---
 
@@ -77,7 +77,10 @@ The Cursor Token Rate applies to all tokens: input, output, and cached tokens. T
 
 Cursor bills per active paid seat, not pre-allocated seats. Add, remove, upgrade, or downgrade users anytime and billing will adjust based on seat type.
 
-Refunds appear as account credit on your next invoice. Your renewal date stays the same.
+- Adding a member mid-cycle creates a pro-rated charge
+- Removing a member who used credits keeps the seat occupied until the cycle ends
+- Billing adjustments appear as account credit on a future invoice when applicable
+- Your renewal date stays the same
 
 ## Spending controls
 
@@ -113,6 +116,7 @@ All prices are per million tokens. Teams are charged at public list API prices +
 | [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs)                           | Google    | $2    | -           | $0.2       | $12    | Hidden by default; Native image generation model optimized for speed, flexibility, and contextual understanding; Text input and output priced the same as Gemini 3 Pro; Image output: $120/1M tokens (\~$0.134 per 1K/2K image, \~$0.24 per 4K image); Preview models may change before becoming stable and have more restrictive rate limits                                                                                            |
 | [Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs)                                       | Google    | $2    | -           | $0.2       | $12    | -                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs)                                     | Google    | $1.5  | -           | $0.15      | $9     | -                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| [GLM 5.2](https://z.ai)                                                                       | Z.ai      | $1.4  | -           | $0.26      | $4.4   | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | [GPT-5](https://openai.com/index/gpt-5/)                                                      | OpenAI    | $1.25 | -           | $0.125     | $10    | Hidden by default; Agentic and reasoning capabilities; Available reasoning effort variant is gpt-5-high                                                                                                                                                                                                                                                                                                                                  |
 | [GPT-5 Fast](https://openai.com/index/gpt-5/)                                                 | OpenAI    | $2.5  | -           | $0.25      | $20    | Hidden by default; Faster speed but 2x price; Available reasoning effort variants are gpt-5-high-fast, gpt-5-low-fast                                                                                                                                                                                                                                                                                                                    |
 | [GPT-5 Mini](https://openai.com/index/gpt-5/)                                                 | OpenAI    | $0.25 | -           | $0.025     | $2     | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                        |

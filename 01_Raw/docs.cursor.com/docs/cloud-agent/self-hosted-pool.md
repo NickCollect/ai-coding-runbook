@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted-pool
-fetched_at: 2026-06-22T06:23:25.047082+00:00
+fetched_at: 2026-06-29T05:25:13.705090+00:00
 fetch_method: mintlify_md
 ---
 
-# Self-Hosted Pool
+# Self-Hosted Agents
 
 Self-Hosted Pool is for Enterprise teams that want Cloud Agents to run inside company-managed infrastructure. Instead of each developer starting a worker on a personal machine, admins operate a pool of workers that can be assigned to agents across the organization.
 

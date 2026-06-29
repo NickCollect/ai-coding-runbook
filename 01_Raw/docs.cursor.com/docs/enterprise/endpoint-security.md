@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/endpoint-security
-fetched_at: 2026-05-25T05:15:51.043057+00:00
+fetched_at: 2026-06-29T05:25:13.882546+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,13 +14,16 @@ Add the following processes and paths to your security product's exclusion list.
 
 ### Windows
 
-**Processes:**
+**Processes:** each process has a user install path and a system install path. Add the path that matches your install type.
 
-| Process            | User install path                                                                                | System install path                                                                     |
-| ------------------ | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- |
-| `Cursor.exe`       | `%LOCALAPPDATA%\Programs\cursor\Cursor.exe`                                                      | `%ProgramFiles%\cursor\Cursor.exe`                                                      |
-| `rg.exe`           | `%LOCALAPPDATA%\Programs\cursor\resources\app\node_modules\@vscode\ripgrep\bin\rg.exe`           | `%ProgramFiles%\cursor\resources\app\node_modules\@vscode\ripgrep\bin\rg.exe`           |
-| `inno_updater.exe` | `%LOCALAPPDATA%\Programs\cursor\resources\app\node_modules\cursor-inno-updater\inno_updater.exe` | `%ProgramFiles%\cursor\resources\app\node_modules\cursor-inno-updater\inno_updater.exe` |
+| Process            | Install type | Path                                                                                             |
+| ------------------ | ------------ | ------------------------------------------------------------------------------------------------ |
+| `Cursor.exe`       | User         | `%LOCALAPPDATA%\Programs\cursor\Cursor.exe`                                                      |
+| `Cursor.exe`       | System       | `%ProgramFiles%\cursor\Cursor.exe`                                                               |
+| `rg.exe`           | User         | `%LOCALAPPDATA%\Programs\cursor\resources\app\node_modules\@vscode\ripgrep\bin\rg.exe`           |
+| `rg.exe`           | System       | `%ProgramFiles%\cursor\resources\app\node_modules\@vscode\ripgrep\bin\rg.exe`                    |
+| `inno_updater.exe` | User         | `%LOCALAPPDATA%\Programs\cursor\resources\app\node_modules\cursor-inno-updater\inno_updater.exe` |
+| `inno_updater.exe` | System       | `%ProgramFiles%\cursor\resources\app\node_modules\cursor-inno-updater\inno_updater.exe`          |
 
 **Paths:**
 
@@ -28,6 +31,7 @@ Add the following processes and paths to your security product's exclusion list.
 | --------------------------------- | --------------------------------------------------------- |
 | `%LOCALAPPDATA%\Programs\cursor\` | Application binaries and bundled modules (user install)   |
 | `%ProgramFiles%\cursor\`          | Application binaries and bundled modules (system install) |
+| `%APPDATA%\Cursor\`               | User data, settings, and workspace storage                |
 
 ### macOS
 

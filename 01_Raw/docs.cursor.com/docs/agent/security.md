@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/security
-fetched_at: 2026-06-01T05:54:48.153458+00:00
+fetched_at: 2026-06-29T05:25:13.236235+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,11 +20,7 @@ Agents can modify workspace files without approval, except for configuration fil
 
 **Warning:** If you have auto-reload enabled, agent changes might execute before you can review them.
 
-By default, terminal commands need your approval. You can either enable a broader [Run Mode](https://cursor.com/docs/agent/tools/terminal.md#run-mode), or add them to your allowlist to get them to run without approval.
-
-You can enable auto-approval if you accept the risk. On Cursor 3.6 and above, **Auto-review** is the recommended default. It runs allowlisted calls, sandboxes what it can, and sends anything else through an LLM classifier that decides allow or block based on safety and how well the call matches your intent. To see the step-by-step flow, read [how Auto-review decides](https://cursor.com/docs/agent/tools/terminal.md#how-auto-review-works). **Run Everything** runs every call without screening; pick it when you want zero prompting and no classifier in the loop. **Allowlist** and **Allowlist (with Sandbox)** are the older modes and rely on an [allowlist](https://cursor.com/docs/agent/tools/terminal.md#protection-settings) of terminal commands and MCP tools. All four modes are best-effort; bypasses are possible. Manage modes and allowlists in **Cursor Settings > Agents > Run Mode** or [`permissions.json`](https://cursor.com/docs/reference/permissions.md).
-
-Cursor 3.6 adds **Auto-review** as the default Run Mode. Before Cursor 3.5, the older modes appeared as **Run in Sandbox**, **Ask Every Time**, and **Run Everything**.
+By default, terminal commands need your approval. To let trusted calls run without prompting, configure [Run Modes](https://cursor.com/docs/agent/security/run-modes.md). They range from a simple allowlist to the **Auto-review** classifier, and they're best-effort guardrails rather than a hard security boundary.
 
 ## Third-party tool calls
 

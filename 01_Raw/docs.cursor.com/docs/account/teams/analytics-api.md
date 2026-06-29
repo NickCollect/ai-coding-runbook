@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics-api
-fetched_at: 2026-05-05T19:55:35.496756+00:00
+fetched_at: 2026-06-29T05:25:13.028057+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 The Analytics API provides comprehensive insights into your team's Cursor usage, including AI-assisted coding metrics, active users, model usage, and more.
 
-- The Analytics API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication). You must generate an admin-scoped API key (with `admin:*` scope) from your [team settings page](https://cursor.com/settings).
+- The Analytics API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication). You must generate an admin-scoped API key (with `admin:*` scope) from [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api).
 - For details on authentication, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
 - **Availability**: Only for enterprise teams
 

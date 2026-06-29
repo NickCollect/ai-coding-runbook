@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/reference/permissions
-fetched_at: 2026-06-01T05:54:49.881965+00:00
+fetched_at: 2026-06-29T05:25:15.250038+00:00
 fetch_method: mintlify_md
 ---
 
 # permissions.json reference
 
-Use `permissions.json` to configure MCP tool and terminal command allowlists and to steer the [Auto-review mode](https://cursor.com/docs/agent/tools/terminal.md#run-mode) classifier so tools run without approval.
+Use `permissions.json` to configure MCP tool and terminal command allowlists and to steer the [Auto-review mode](https://cursor.com/docs/agent/security/run-modes.md#run-mode) classifier so tools run without approval.
 
 When `permissions.json` defines an allowlist, it **overrides** the corresponding in-app allowlist in Cursor Settings. The in-app allowlist editor becomes read-only for that allowlist type.
 
@@ -76,7 +76,7 @@ Entries that do not contain a `:` are ignored.
 
 ## `autoRun` configuration
 
-The `autoRun` object steers the LLM classifier that gates Shell, MCP, and Fetch tool calls when [Auto-review mode](https://cursor.com/docs/agent/tools/terminal.md#run-mode) is active. It has no effect in **Allowlist**, **Allowlist (with Sandbox)**, or **Run Everything**.
+The `autoRun` object steers the LLM classifier that gates shell, MCP, and Fetch tool calls when [Auto-review mode](https://cursor.com/docs/agent/security/run-modes.md#run-mode) is active. It has no effect in **Allowlist** or **Run Everything**.
 
 | Field                | Type       | Description                                                                                                                     |
 | :------------------- | :--------- | :------------------------------------------------------------------------------------------------------------------------------ |
@@ -220,7 +220,7 @@ The effective config is the concatenation of both files:
 
 ## Notes
 
-- **Run Mode required.** `permissions.json` only takes effect when Run Mode is enabled in Cursor Settings (**Auto-review**, **Allowlist**, **Allowlist (with Sandbox)**, or **Run Everything**). `autoRun` instructions are only consulted in **Auto-review** mode. Before Cursor 3.5, allowlists were not consulted in the deprecated **Ask Every Time** mode.
+- **Run Mode required.** `permissions.json` only takes effect when Run Mode is enabled in Cursor Settings (**Auto-review**, **Allowlist**, or **Run Everything**). `autoRun` instructions are only consulted in **Auto-review** mode. Before Cursor 3.5, allowlists were not consulted in the deprecated **Ask Every Time** mode.
 - **Not a security boundary.** Allowlists and `autoRun` instructions are best-effort convenience. They are not a security guarantee. See [agent security](https://cursor.com/docs/agent/security.md) for details.
 - **Override IDE, merge files.** When `permissions.json` defines a key, it fully replaces the in-app allowlist for that type. Entries from per-user and per-repo files are concatenated; IDE entries are not merged in.
 - **IDE display.** When `permissions.json` controls an allowlist, the corresponding settings section becomes read-only and shows the file-defined entries. The "Add to allowlist" option is hidden.

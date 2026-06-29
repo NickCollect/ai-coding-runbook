@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/reference/sandbox
-fetched_at: 2026-05-05T19:55:43.737689+00:00
+fetched_at: 2026-06-29T05:25:15.333199+00:00
 fetch_method: mintlify_md
 ---
 
 # sandbox.json reference
 
-Configure [sandbox](https://cursor.com/docs/agent/tools/terminal.md#sandbox) behavior with a `sandbox.json` file to control network access, filesystem paths, and more.
+Configure [sandbox](https://cursor.com/docs/agent/security/run-modes.md#sandboxing) behavior with a `sandbox.json` file to control network access, filesystem paths, and more.
 
 ## File locations
 
@@ -90,7 +90,7 @@ SSL certificate paths and `~/.ssh` are always readable.
 
 ## Environment variables
 
-In addition to the configuration above, Cursor injects environment variables into sandboxed child processes — including `CURSOR_SANDBOX`, `CURSOR_ORIG_UID`, and `CURSOR_ORIG_GID`. See [Terminal: Environment variables](https://cursor.com/docs/agent/tools/terminal.md#environment-variables) for the full list and usage guidance.
+In addition to the configuration above, Cursor injects environment variables into sandboxed child processes, including `CURSOR_SANDBOX`, `CURSOR_ORIG_UID`, and `CURSOR_ORIG_GID`. See [Run Modes: Environment variables](https://cursor.com/docs/agent/security/run-modes.md#environment-variables) for the full list and usage guidance.
 
 ## Examples
 

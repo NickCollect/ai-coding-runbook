@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-06-22T06:23:24.673808+00:00
+fetched_at: 2026-06-29T05:25:13.408234+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,53 @@ fetch_method: mintlify_md
 
 The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent --version` to check your installed version, and `agent update` to upgrade in place.
 
-## June 9, 2026 release
+## June 22, 2026
+
+### Auto-review
+
+- **Auto-review run mode.** Cursor's Auto-review run mode comes to the CLI: a middle ground between Allowlist and Run Everything that keeps the agent moving with fewer approval prompts. Shell, MCP, and Fetch calls are checked in order: allowlisted calls run immediately, calls that can be sandboxed run in the sandbox, and the rest go to a classifier that allows the call, tries a different approach, or asks you to approve. Turn it on with `--auto-review`, in `/config`, or with `/auto-review`, and steer the classifier with `allow`/`block` instructions in `permissions.json`.
+
+### Workspaces
+
+- **Named multi-directory workspaces.** Run the agent across several repositories at once: add directories mid-session with `/add-dir`, save the set with `/save-workspace`, reload it later with `/load-workspace`, or start scoped with `--workspace`.
+
+### Commands
+
+- **`/rewind` is on by default.** The turn-by-turn undo timeline no longer needs turning on in `/config`.
+- **`/vim` anywhere in the prompt.** Trigger inline Vim editing from any position, not just an empty prompt.
+- **Richer `/copy`.** Pick a single step of a multi-step reply from a per-step picker, copy the agent's responses alongside your own messages, and copy long replies without the terminal stalling.
+- **`/logs` on shared machines.** Debug logs are written per user so multi-user hosts don't hit permission errors, and the `/logs` path lingers on screen longer.
+
+### Terminal experience
+
+- **Prompt history is per conversation.** Up-arrow recalls what you typed in this session instead of a single history shared across every chat.
+- **The jobs list shows everything running.** Foreground shells and subagents appear in the jobs pager alongside background tasks.
+- **Steadier rendering.** Mermaid diagrams stay drawn after a turn finishes, long shell-output previews clip instead of wrapping, and the screen clears once per resize instead of twice.
+- **Your draft survives the resume picker.** Cancelling `/resume` keeps what you had already typed.
+- **Plan editing.** Esc returns to Vim normal mode while you revise a plan.
+
+### Reliability
+
+- **Lower memory in long sessions.** Fixed a leak where per-turn abort signals held on to conversation state.
+- **No crash on missing approval state.** Sessions tolerate credential stores that haven't recorded an approval mode yet.
+
+### MCP and skills
+
+- **Editor-provided MCP servers are trusted.** MCP servers passed in over the Agent Client Protocol (Zed and other editors) load instead of being silently dropped.
+- **MCP tools survive a plugin reload.** The MCP lease refreshes after a plugin reloads, so its tools no longer wedge with "Not connected" errors.
+- **Skills found through symlinks.** The skills menu follows symlinked directories when discovering skills.
+
+### Install and updates
+
+- **Reliable channel switching.** Switching release channels applies on the first try and immediately fetches the target channel's build.
+- **Windows and shim fixes.** The Windows launcher matches timestamped version directories, and the `cursor` shim no longer errors on shells that treat unset variables as failures.
+
+### Enterprise and team controls
+
+- **Team gating for Auto-review.** Admins control whether Auto-review is available to their members.
+- **Stable self-hosted worker identity.** `worker start` waits for the bridge to connect before reporting ready, and workers keep a stable logical ID scoped per authenticated user, so fleets on shared machines match the right worker to the right person.
+
+## June 9, 2026
 
 ### Terminal experience
 
@@ -45,7 +91,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **Team-managed MCP servers.** Centrally configured servers load reliably, with server group selection; MCP tool policy is decoupled from the terminal auto-run setting.
 - **MCP OAuth over SSH.** The CLI shows port-forwarding instructions when authenticating a remote MCP server from an SSH session.
 
-## May 20, 2026 release
+## May 20, 2026
 
 - **Composer 2.5 is the default model** for new CLI sessions.
 - **`/summarize`.** Renamed from `/compress` to match the IDE; `/compact` and `/compress` remain as aliases, and aliases execute directly.
@@ -57,7 +103,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **Readable diffs in light mode.** Character-level diff highlights are legible on light terminal themes.
 - **Hooks accept payloads over stdin.** Avoids argv length limits and keeps payloads out of process listings.
 
-## May 14, 2026 release
+## May 14, 2026
 
 - **Vim visual mode.** Visual selection with delete and change operators; the active Vim mode shows in the footer.
 - **Ctrl+G opens your prompt in `$EDITOR`.** Compose long prompts in your real editor and drop the result back into the prompt bar.
@@ -72,7 +118,7 @@ The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent 
 - **tmux focus awareness.** The prompt cursor stops blinking in unfocused panes (with `focus-events on`).
 - **Pathological diffs render safely.** Very long lines are capped before syntax highlighting, so minified files can't stall the UI.
 
-## May 7, 2026 release
+## May 7, 2026
 
 - **Plugin marketplaces.** Add a marketplace by git URL (`/plugin marketplace add`), browse and manage marketplaces by scope, see which marketplace each plugin came from, and load local plugin dirs with `--plugin-dir`. Plugins imported from Claude Code appear alongside native ones.
 - **Ctrl+L clears the screen** like a shell: clears screen and scrollback, keeps your session running.

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security-network
-fetched_at: 2026-06-22T06:23:25.041277+00:00
+fetched_at: 2026-06-29T05:25:13.636217+00:00
 fetch_method: mintlify_md
 ---
 
@@ -230,6 +230,13 @@ If you need to add the proxy IPs directly to an allowlist, use these addresses:
 184.73.225.134
 3.209.66.12
 52.44.113.131
+```
+
+### Cursor Review IPs
+
+If your team uses Cloud Agents alongside [Cursor Review](https://cursor.com/docs/review.md), allowlist these additional IPs on top of the git egress proxy IPs above:
+
+```text
 34.192.39.182
 50.16.106.255
 44.217.29.124

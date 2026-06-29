@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-06-22T06:23:26.664288+00:00
+fetched_at: 2026-06-29T05:25:15.291258+00:00
 fetch_method: mintlify_md
 ---
 
@@ -184,7 +184,7 @@ const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
   model: {
     id: "composer-2.5",
-    params: [{ id: "thinking", value: "high" }],
+    params: [{ id: "fast", value: "true" }],
   },
   local: { cwd: process.cwd() },
 });
@@ -394,7 +394,7 @@ The `model` you pass to `agent.send()` overrides the agent's selection for that 
 
 ```typescript
 const run = await agent.send("Plan the refactor", {
-  model: { id: "composer-2.5", params: [{ id: "thinking", value: "high" }] },
+  model: { id: "composer-2.5", params: [{ id: "fast", value: "true" }] },
 });
 
 console.log(agent.model);  // updated to the override after the send succeeds
@@ -998,11 +998,11 @@ const composer = models.find((model) => model.id === "composer-2.5");
 console.log(composer?.parameters);
 // [
 //   {
-//     id: "thinking",
-//     displayName: "Thinking",
+//     id: "fast",
+//     displayName: "Fast",
 //     values: [
-//       { value: "low", displayName: "Low" },
-//       { value: "high", displayName: "High" },
+//       { value: "false" },
+//       { value: "true", displayName: "Fast" },
 //     ],
 //   },
 // ]
@@ -1015,7 +1015,7 @@ const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
   model: {
     id: "composer-2.5",
-    params: [{ id: "thinking", value: "high" }],
+    params: [{ id: "fast", value: "true" }],
   },
   local: { cwd: process.cwd() },
 });
@@ -1025,18 +1025,18 @@ const agent = await Agent.create({
 
 - **Discover, don't hard-code.** Call `Cursor.models.list()` at startup (or once per process) and cache the result. Model ids and parameter shapes can change as new models ship.
 - **Pass parameters explicitly when the model expects them.** A model whose `parameters` array is non-empty is a parameterized model. Send the params you want; otherwise the run uses each parameter's first allowed value, which may not match what you intend.
-- **Resolve by capability, not id.** If you want "the current default with high reasoning" rather than a specific model, look it up:
+- **Resolve by capability, not id.** If you want "the current default in fast mode" rather than a specific model, look it up:
 
   ```typescript
   const models = await Cursor.models.list();
-  const composer = models.find((m) => m.id === "composer-2");
-  const reasoning = composer?.parameters?.find((p) => p.id === "thinking");
-  const high = reasoning?.values.find((v) => v.value === "high")?.value;
+  const composer = models.find((m) => m.id === "composer-2.5");
+  const fast = composer?.parameters?.find((p) => p.id === "fast");
+  const fastValue = fast?.values.find((v) => v.value === "true")?.value;
 
   const model = composer
     ? {
         id: composer.id,
-        params: high ? [{ id: "thinking", value: high }] : undefined,
+        params: fastValue ? [{ id: "fast", value: fastValue }] : undefined,
       }
     : { id: "auto" };
   ```
@@ -1318,7 +1318,7 @@ When you enable the sandbox, the SDK constrains every shell tool call and shell-
 ```typescript
 const agent = await Agent.create({
   apiKey: process.env.CURSOR_API_KEY!,
-  model: { id: "composer-2" },
+  model: { id: "composer-2.5" },
   local: {
     cwd: process.cwd(),
     sandboxOptions: { enabled: true },
@@ -1438,7 +1438,7 @@ async function getAgent(key: string, savedId?: string): Promise<SDKAgent> {
       })
     : await Agent.create({
         apiKey: process.env.CURSOR_API_KEY!,
-        model: { id: "composer-2" },
+        model: { id: "composer-2.5" },
         local: { cwd: process.cwd() },
       });
 

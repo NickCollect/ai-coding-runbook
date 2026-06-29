@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/deployment-patterns
-fetched_at: 2026-06-01T05:54:48.806562+00:00
+fetched_at: 2026-06-29T05:25:13.799412+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,9 +51,9 @@ The file format is:
 
 | Key                 | Type       | Required | Meaning                                                                                                                                                                                                                                                                                              |
 | :------------------ | :--------- | :------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `terminalAllowlist` | `string[]` | No       | Terminal commands that may run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox. Each entry is matched against the full command string.                                                                                                                         |
-| `mcpAllowlist`      | `string[]` | No       | MCP tools that may run without approval. In **Allowlist (with Sandbox)** mode, these run outside the sandbox. Each entry uses `server:tool` syntax.                                                                                                                                                  |
-| `autoRun`           | `object`   | No       | Steers the **Auto-review** mode classifier with natural-language `allow_instructions` and `block_instructions` arrays. Applies to Shell, MCP, and Fetch calls in Cursor 3.6 and above. See the [permissions.json reference](https://cursor.com/docs/reference/permissions.md#autorun-configuration). |
+| `terminalAllowlist` | `string[]` | No       | Terminal commands that may run without approval. With sandboxing enabled, supported terminal commands outside the allowlist can run in the sandbox. Each entry is matched against the full command string.                                                                                           |
+| `mcpAllowlist`      | `string[]` | No       | MCP tools that may run without approval. MCP tools do not run inside the local sandbox. Each entry uses `server:tool` syntax.                                                                                                                                                                        |
+| `autoRun`           | `object`   | No       | Steers the **Auto-review** mode classifier with natural-language `allow_instructions` and `block_instructions` arrays. Applies to shell, MCP, and Fetch calls in Cursor 3.6 and above. See the [permissions.json reference](https://cursor.com/docs/reference/permissions.md#autorun-configuration). |
 
 `mcpAllowlist` entries support these forms:
 

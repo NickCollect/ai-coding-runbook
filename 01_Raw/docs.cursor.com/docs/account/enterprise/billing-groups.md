@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/enterprise/billing-groups
-fetched_at: 2026-06-08T05:24:57.609702+00:00
+fetched_at: 2026-06-29T05:25:12.833756+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 [Billing groups](https://cursor.com/dashboard/members?subtab=billing-groups) allow Enterprise admins to understand and manage spend across groups of users. This functionality is useful for reporting, internal chargebacks, and budgeting.
 
-For org-level groups across linked teams, see [Organizations](https://cursor.com/docs/enterprise/organizations.md).
+For org-level cohorts across linked teams, see [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md).
 
 ## Billing group architecture
 

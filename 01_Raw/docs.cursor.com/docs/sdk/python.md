@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-06-22T06:23:26.727402+00:00
+fetched_at: 2026-06-29T05:25:15.416595+00:00
 fetch_method: mintlify_md
 ---
 
@@ -196,7 +196,7 @@ from cursor_sdk import Agent, LocalAgentOptions, ModelParameterValue, ModelSelec
 agent = Agent.create(
     model=ModelSelection(
         id="composer-2.5",
-        params=[ModelParameterValue(id="thinking", value="high")],
+        params=[ModelParameterValue(id="fast", value="true")],
     ),
     local=LocalAgentOptions(cwd="."),
 )
@@ -433,7 +433,7 @@ To send images alongside text:
 run = agent.send(
     {
         "text": "What's in this screenshot?",
-        "images": [{"data": base64_png, "mimeType": "image/png"}],
+        "images": [{"data": base64_png, "mime_type": "image/png"}],
     }
 )
 ```
@@ -594,7 +594,7 @@ run = agent.send(
     SendOptions(
         model=ModelSelection(
             id="composer-2.5",
-            params=[ModelParameterValue(id="thinking", value="high")],
+            params=[ModelParameterValue(id="fast", value="true")],
         ),
     ),
 )
@@ -957,11 +957,11 @@ composer = next((model for model in models if model.id == "composer-2.5"), None)
 print(composer.parameters if composer else [])
 # [
 #   ModelParameterDefinition(
-#       id="thinking",
-#       display_name="Thinking",
+#       id="fast",
+#       display_name="Fast",
 #       values=(
-#           ModelParameterDefinitionValue(value="low", display_name="Low"),
-#           ModelParameterDefinitionValue(value="high", display_name="High"),
+#           ModelParameterDefinitionValue(value="false"),
+#           ModelParameterDefinitionValue(value="true", display_name="Fast"),
 #       ),
 #   ),
 # ]
@@ -1494,7 +1494,7 @@ agent = Agent.resume("bc-00000000-0000-0000-0000-000000000001")
 try:
     agent.send("Also add tests for the auth middleware.")
 except AgentBusyError:
-    runs = Agent.list_runs(agent.agent_id, runtime="cloud", limit=1)
+    runs = Agent.list_runs(agent.agent_id, {"runtime": "cloud", "limit": 1})
     active = runs.items[0] if runs.items else None
     if active is not None and active.status == "running":
         active.cancel()

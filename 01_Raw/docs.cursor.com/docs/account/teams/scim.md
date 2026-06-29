@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/scim
-fetched_at: 2026-06-08T05:24:57.729563+00:00
+fetched_at: 2026-06-29T05:25:13.082228+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ fetch_method: mintlify_md
 
 SCIM 2.0 provisioning automatically manages your team members and directory groups through your identity provider. Available on Enterprise plans with SSO enabled, [contact sales](https://cursor.com/contact-sales?source=docs-scim) to get access.
 
-If you also manage multiple linked teams, see [Organizations](https://cursor.com/docs/enterprise/organizations.md) for org-level controls.
+If you also manage multiple linked teams, see [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md) for org-level cohorts and group controls.
 
 ## Prerequisites
 
