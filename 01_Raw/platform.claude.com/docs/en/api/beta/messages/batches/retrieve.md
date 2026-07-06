@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/messages/batches/retrieve
-fetched_at: 2026-06-15T06:17:45.622153+00:00
+fetched_at: 2026-07-06T05:04:27.845191+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ fetch_method: mintlify_md
 
 This endpoint is idempotent and can be used to poll for Message Batch completion. To access the results of a Message Batch, make a request to the `results_url` field in the response.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Path Parameters
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions
-fetched_at: 2026-06-29T05:25:14.158977+00:00
+fetched_at: 2026-07-06T05:04:27.155461+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,9 +12,9 @@ fetch_method: mintlify_md
 
 [Legacy] Create a Text Completion.
 
-The Text Completions API is a legacy API. We recommend using the [Messages API](https://docs.claude.com/en/api/messages) going forward.
+The Text Completions API is a legacy API. We recommend using the [Messages API](https://platform.claude.com/docs/en/api/messages) going forward.
 
-Future models and features will not be compatible with Text Completions. See our [migration guide](https://docs.claude.com/en/api/migrating-from-text-completions-to-messages) for guidance in migrating from Text Completions to Messages.
+Future models and features will not be compatible with Text Completions. See our [migration guide](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) for guidance in migrating from Text Completions to Messages.
 
 ### Header Parameters
 
@@ -96,11 +96,15 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more`
+  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
 
     The model that will complete your prompt.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+    - `"claude-sonnet-5"`
+
+      High-performance model for coding and agents
 
     - `"claude-fable-5"`
 
@@ -182,7 +186,7 @@ Future models and features will not be compatible with Text Completions. See our
   Assistant:"
   ```
 
-  See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and our guide to [prompt design](https://docs.claude.com/en/docs/intro-to-prompting) for more details.
+  See [prompt validation](https://platform.claude.com/docs/en/build-with-claude/working-with-messages) and our guide to [prompt design](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview) for more details.
 
 - `metadata: optional Metadata`
 
@@ -206,7 +210,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   Whether to incrementally stream the response using server-sent events.
 
-  See [streaming](https://docs.claude.com/en/api/streaming) for details.
+  See [streaming](https://platform.claude.com/docs/en/build-with-claude/streaming) for details.
 
 - `temperature: optional number`
 
@@ -252,11 +256,15 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more`
+    - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"`
+
+        High-performance model for coding and agents
 
       - `"claude-fable-5"`
 
@@ -389,11 +397,15 @@ curl https://api.anthropic.com/v1/complete \
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more`
+    - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
 
       The model that will complete your prompt.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"`
+
+        High-performance model for coding and agents
 
       - `"claude-fable-5"`
 

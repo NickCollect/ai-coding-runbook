@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/rate_limits
-fetched_at: 2026-06-15T06:17:51.413475+00:00
+fetched_at: 2026-07-06T05:04:33.283168+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,19 +24,19 @@ are not listed; use `GET /v1/organizations/rate_limits` to see those.
 
 ### Query Parameters
 
-- `group_type: optional "model_group" or "batch" or "token_count" or 3 more`
+- `group_type: optional "batch" or "files" or "model_group" or 3 more`
 
   Filter by group type.
 
-  - `"model_group"`
-
   - `"batch"`
-
-  - `"token_count"`
 
   - `"files"`
 
+  - `"model_group"`
+
   - `"skills"`
+
+  - `"token_count"`
 
   - `"web_search"`
 
@@ -50,19 +50,19 @@ are not listed; use `GET /v1/organizations/rate_limits` to see those.
 
   Rate-limit entries for the workspace, one per group that has at least one override.
 
-  - `group_type: "model_group" or "batch" or "token_count" or 3 more`
+  - `group_type: "batch" or "files" or "model_group" or 3 more`
 
     The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-    - `"model_group"`
-
     - `"batch"`
-
-    - `"token_count"`
 
     - `"files"`
 
+    - `"model_group"`
+
     - `"skills"`
+
+    - `"token_count"`
 
     - `"web_search"`
 
@@ -110,7 +110,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 {
   "data": [
     {
-      "group_type": "model_group",
+      "group_type": "batch",
       "limits": [
         {
           "org_limit": 0,
@@ -138,19 +138,19 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 
     Rate-limit entries for the workspace, one per group that has at least one override.
 
-    - `group_type: "model_group" or "batch" or "token_count" or 3 more`
+    - `group_type: "batch" or "files" or "model_group" or 3 more`
 
       The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-      - `"model_group"`
-
       - `"batch"`
-
-      - `"token_count"`
 
       - `"files"`
 
+      - `"model_group"`
+
       - `"skills"`
+
+      - `"token_count"`
 
       - `"web_search"`
 

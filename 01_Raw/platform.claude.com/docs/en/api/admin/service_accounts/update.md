@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/service_accounts/update
-fetched_at: 2026-06-22T06:23:31.974205+00:00
+fetched_at: 2026-07-06T05:04:35.249658+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,13 +36,13 @@ API keys are not accepted.
 
   Replaces the description. Omit to leave unchanged; send `null` to clear (the field is stored as an empty string).
 
-- `organization_role: optional "developer" or "admin"`
+- `organization_role: optional "admin" or "developer"`
 
   Replaces the org-level role. Omit or send `null` to leave unchanged.
 
-  - `"developer"`
-
   - `"admin"`
+
+  - `"developer"`
 
 ### Returns
 
@@ -81,13 +81,13 @@ API keys are not accepted.
 
     Admin-chosen slug identifier.
 
-  - `organization_role: "developer" or "admin"`
+  - `organization_role: "admin" or "developer"`
 
     Org-level role. A federation rule may only be created or retargeted to grant `org:admin` scope when this is `admin`. A rule granting `org:admin` whose target is later demoted to `developer` is rejected at token exchange. Rules granting `org:admin` are managed in the Console.
 
-    - `"developer"`
-
     - `"admin"`
+
+    - `"developer"`
 
   - `type: "service_account"`
 
@@ -122,7 +122,7 @@ curl https://api.anthropic.com/v1/organizations/service_accounts/$SERVICE_ACCOUN
   "created_by_actor_id": "created_by_actor_id",
   "description": "description",
   "name": "ci-deploy-bot",
-  "organization_role": "developer",
+  "organization_role": "admin",
   "type": "service_account",
   "updated_at": "2024-10-30T23:58:27.427722Z",
   "updated_by_actor_id": "updated_by_actor_id"

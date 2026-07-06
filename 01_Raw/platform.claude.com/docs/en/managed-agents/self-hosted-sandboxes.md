@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/self-hosted-sandboxes
-fetched_at: 2026-06-29T05:25:12.948249+00:00
+fetched_at: 2026-07-06T05:04:25.337878+00:00
 fetch_method: mintlify_md
 ---
 
@@ -203,9 +203,12 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
         Run this on the worker host.
 
         ```bash
-        VERSION=1.12.0
+        VERSION=1.15.0
         OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-        ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
+        case $(uname -m) in
+          x86_64) ARCH=amd64 ;;
+          aarch64) ARCH=arm64 ;;
+        esac
         curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
           | sudo tar -xz -C /usr/local/bin ant
         ```
@@ -229,7 +232,7 @@ Choose **always-on** for the simplest setup: a long-running process polls the qu
 
         ```text
         FROM your-base-image
-        ARG ANT_VERSION=1.12.0
+        ARG ANT_VERSION=1.15.0
         ARG TARGETARCH
         RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
             curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \

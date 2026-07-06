@@ -1,12 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/tunnel_certificates/create
-fetched_at: 2026-06-15T06:17:53.225083+00:00
+fetched_at: 2026-07-06T05:04:36.177547+00:00
 fetch_method: mintlify_md
 ---
 
 ## Create Tunnel Certificate
 
 **post** `/v1/organizations/tunnels/{tunnel_id}/certificates`
+
+**Deprecated.** This Admin API endpoint is superseded by `/v1/tunnels` on the Claude API and will be removed after a migration window. New integrations should use [`/v1/tunnels`](/docs/en/api/beta/tunnels) with the `anthropic-beta: mcp-tunnels-2026-06-22` header and a WIF token carrying the `workspace:manage_tunnels` scope. Existing integrations continue to work with the `mcp-tunnels-2026-05-19` header and `org:manage_tunnels` scope during the migration window.
 
 Register a public CA certificate for the tunnel.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/delete
-fetched_at: 2026-06-22T06:23:31.507989+00:00
+fetched_at: 2026-07-06T05:04:34.931374+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,8 +10,9 @@ fetch_method: mintlify_md
 
 Delete a per-user spend limit override.
 
-The member falls back to any inherited cap at that period. Seat-tier,
-group, and organization-level rows cannot be deleted via this endpoint.
+The member falls back to any inherited spend limit at that period.
+Seat-tier, group, and organization-level rows cannot be deleted via
+this endpoint.
 
 ### Path Parameters
 

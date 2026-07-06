@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/agent-setup
-fetched_at: 2026-06-29T05:25:12.659534+00:00
+fetched_at: 2026-07-06T05:04:25.176043+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,9 +28,11 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 | `tools`       | The tools available to the agent. Combines [pre-built agent tools](/docs/en/managed-agents/tools), [MCP tools](/docs/en/managed-agents/mcp-connector), and [custom tools](/docs/en/managed-agents/tools#custom-tools).                                                                                           |
 | `mcp_servers` | [MCP servers](/docs/en/managed-agents/mcp-connector) that provide standardized third-party capabilities.                                                                                                                                                                                                         |
 | `skills`      | [Skills](/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure.                                                                                                                                                                                                        |
-| `multiagent`  | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent sessions](/docs/en/managed-agents/multi-agent).                                                                                                                                                                         |
+| `multiagent`  | A coordinator declaration listing the agents this agent can delegate to. See [Multi-agent sessions](/docs/en/managed-agents/multi-agent).                                                                                                                                                                        |
 | `description` | A description of what the agent does.                                                                                                                                                                                                                                                                            |
 | `metadata`    | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                 |
+
+You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. See [Override agent configuration for a session](/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session).
 
 ## Create an agent
 
@@ -161,7 +163,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
 </CodeGroup>
 
 <Tip>
-  To use Claude Opus 4.8, Claude Opus 4.7, or Claude Opus 4.6 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.7 and Claude Opus 4.6 is deprecated; see [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models) for removal dates and behavior.
+  To use Claude Opus 4.8 or Claude Opus 4.7 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.7 is deprecated; see [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models) for the removal date and behavior.
 </Tip>
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields. The `version` starts at 1 and increments each time an update changes the agent.

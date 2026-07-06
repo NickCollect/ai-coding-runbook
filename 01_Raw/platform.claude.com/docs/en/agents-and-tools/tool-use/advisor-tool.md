@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool
-fetched_at: 2026-06-29T05:25:11.227742+00:00
+fetched_at: 2026-07-06T05:04:23.354809+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,6 +41,7 @@ The executor model (the top-level `model` field) and the advisor model (the `mod
 | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Claude Haiku 4.5 (claude-haiku-4-5-20251001) | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
 | Claude Sonnet 4.6 (claude-sonnet-4-6)        | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6) Claude Sonnet 4.6 (claude-sonnet-4-6) |
+| Claude Sonnet 5 (claude-sonnet-5)            | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
 | Claude Opus 4.6 (claude-opus-4-6)            | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7) Claude Opus 4.6 (claude-opus-4-6)                                       |
 | Claude Opus 4.7 (claude-opus-4-7)            | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |
 | Claude Opus 4.8 (claude-opus-4-8)            | Claude Fable 5 (claude-fable-5) Claude Mythos 5 (claude-mythos-5) Claude Opus 4.8 (claude-opus-4-8) Claude Opus 4.7 (claude-opus-4-7)                                                                         |

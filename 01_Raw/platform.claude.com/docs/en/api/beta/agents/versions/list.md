@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/agents/versions/list
-fetched_at: 2026-06-15T06:17:46.107934+00:00
+fetched_at: 2026-07-06T05:04:28.370818+00:00
 fetch_method: mintlify_md
 ---
 
@@ -130,11 +130,15 @@ List Agent Versions
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
+      - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"`
+
+          High-performance model for coding and agents
 
         - `"claude-fable-5"`
 

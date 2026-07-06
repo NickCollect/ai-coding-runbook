@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-06-29T05:25:12.601897+00:00
+fetched_at: 2026-07-06T05:04:24.995421+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,9 +43,12 @@ This guide walks you through creating an agent, setting up an environment, start
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.12.0
+    VERSION=1.15.0
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
-    ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
+    case $(uname -m) in
+      x86_64) ARCH=amd64 ;;
+      aarch64) ARCH=arm64 ;;
+    esac
     curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
       | sudo tar -xz -C /usr/local/bin ant
     ```
@@ -91,7 +94,7 @@ ant --version
 
   <Tab title="Java">
     ```groovy Gradle
-    implementation("com.anthropic:anthropic-java:2.40.0")
+    implementation("com.anthropic:anthropic-java:2.47.1")
     ```
   </Tab>
 
@@ -888,5 +891,9 @@ When you send a user event, Claude Managed Agents:
 
   <Card title="Session event stream" icon="lightning" href="/docs/en/managed-agents/events-and-streaming">
     Handle events and steer the agent mid-execution
+  </Card>
+
+  <Card title="Scheduled deployments" icon="arrows-clockwise" href="/docs/en/managed-agents/scheduled-deployments">
+    Run your agent on a recurring cron schedule
   </Card>
 </CardGroup>

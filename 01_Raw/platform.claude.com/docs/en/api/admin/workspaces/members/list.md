@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/members/list
-fetched_at: 2026-06-15T06:17:51.065419+00:00
+fetched_at: 2026-07-06T05:04:33.133531+00:00
 fetch_method: mintlify_md
 ---
 
@@ -52,19 +52,19 @@ List Workspace Members
 
     ID of the Workspace.
 
-  - `workspace_role: "workspace_user" or "workspace_developer" or "workspace_restricted_developer" or 2 more`
+  - `workspace_role: "workspace_admin" or "workspace_billing" or "workspace_developer" or 2 more`
 
     Role of the Workspace Member.
 
-    - `"workspace_user"`
+    - `"workspace_admin"`
+
+    - `"workspace_billing"`
 
     - `"workspace_developer"`
 
     - `"workspace_restricted_developer"`
 
-    - `"workspace_admin"`
-
-    - `"workspace_billing"`
+    - `"workspace_user"`
 
 - `first_id: string`
 

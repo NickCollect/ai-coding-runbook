@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/external_keys/validate
-fetched_at: 2026-06-15T06:17:51.835002+00:00
+fetched_at: 2026-07-06T05:04:33.902228+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,13 +27,13 @@ message if it failed or timed out.
 
   Error message when status is `failure`. Null otherwise.
 
-- `status: "success" or "failure"`
+- `status: "failure" or "success"`
 
   `success` — encrypt/decrypt roundtrip succeeded. `failure` — the roundtrip failed or timed out; see `error`.
 
-  - `"success"`
-
   - `"failure"`
+
+  - `"success"`
 
 - `type: "external_key_validation"`
 

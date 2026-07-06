@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/invites/create
-fetched_at: 2026-06-15T06:17:50.475776+00:00
+fetched_at: 2026-07-06T05:04:32.678538+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,17 +16,17 @@ Create Invite
 
   Email of the User.
 
-- `role: "user" or "developer" or "billing" or "claude_code_user"`
+- `role: "billing" or "claude_code_user" or "developer" or "user"`
 
   Role for the invited User. Cannot be "admin".
-
-  - `"user"`
-
-  - `"developer"`
 
   - `"billing"`
 
   - `"claude_code_user"`
+
+  - `"developer"`
+
+  - `"user"`
 
 ### Returns
 
@@ -48,29 +48,29 @@ Create Invite
 
     RFC 3339 datetime string indicating when the Invite was created.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
 
-  - `status: "accepted" or "expired" or "deleted" or "pending"`
+    - `"developer"`
+
+    - `"user"`
+
+  - `status: "accepted" or "deleted" or "expired" or "pending"`
 
     Status of the Invite.
 
     - `"accepted"`
 
-    - `"expired"`
-
     - `"deleted"`
+
+    - `"expired"`
 
     - `"pending"`
 

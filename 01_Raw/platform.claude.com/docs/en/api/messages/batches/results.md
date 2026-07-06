@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/results
-fetched_at: 2026-06-29T05:25:14.546068+00:00
+fetched_at: 2026-07-06T05:04:27.471604+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ Streams the results of a Message Batch as a `.jsonl` file.
 
 Each line in the file is a JSON object containing the result of a single request in the Message Batch. Results are not guaranteed to be in the same order as requests. Use the `custom_id` field to match results to requests.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Path Parameters
 
@@ -727,11 +727,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-          - `"claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 12 more`
+          - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 13 more`
 
             The model that will complete your prompt.
 
             See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+            - `"claude-sonnet-5"`
+
+              High-performance model for coding and agents
 
             - `"claude-fable-5"`
 

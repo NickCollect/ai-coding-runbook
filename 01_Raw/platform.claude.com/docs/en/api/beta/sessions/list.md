@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/list
-fetched_at: 2026-06-15T06:17:46.816220+00:00
+fetched_at: 2026-07-06T05:04:28.977259+00:00
 fetch_method: mintlify_md
 ---
 
@@ -178,11 +178,15 @@ List Sessions
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-        - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
+        - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more`
 
           The model that will power your agent.
 
           See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+          - `"claude-sonnet-5"`
+
+            High-performance model for coding and agents
 
           - `"claude-fable-5"`
 
@@ -688,6 +692,10 @@ List Sessions
 
   Opaque cursor for the next page. Null when no more results.
 
+- `prev_page: optional string`
+
+  Opaque cursor for the previous page. Null when on the first page. Pass as the `page` parameter to navigate backward.
+
 ### Example
 
 ```http
@@ -866,6 +874,7 @@ curl https://api.anthropic.com/v1/sessions \
       "deployment_id": "deployment_id"
     }
   ],
-  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo=",
+  "prev_page": "page_MjAyNS0wNS0xM1QwMDowMDowMFo="
 }
 ```

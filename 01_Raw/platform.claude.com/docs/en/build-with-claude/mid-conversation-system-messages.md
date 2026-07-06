@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/mid-conversation-system-messages
-fetched_at: 2026-06-29T05:25:11.631413+00:00
+fetched_at: 2026-07-06T05:04:23.845973+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,7 @@ System instructions normally live in the top-level `system` field, ahead of ever
 Mid-conversation system messages close that gap. You append a `{"role": "system"}` message at the point in the conversation where the new instruction becomes relevant, instead of editing the top-level `system` field. The cached prefix stays the same, so the next request still reads it from cache, and the new instruction is still applied as a system instruction rather than as ordinary user text.
 
 <Note>
-  Mid-conversation system messages are available on the Claude API and [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). They are not available on [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), or [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
+  Mid-conversation system messages are available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). They are not available on [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock) or [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai).
 
   This feature is available on Claude Opus 4.8 only. No beta header is required.
 </Note>

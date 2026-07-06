@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
-fetched_at: 2026-06-29T05:25:11.163897+00:00
+fetched_at: 2026-07-06T05:04:23.235751+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,6 +32,7 @@ The code execution tool is available on the following models:
 | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | Claude Fable 5 (claude-fable-5)                                                                     | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Mythos 5 (claude-mythos-5)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Sonnet 5 (claude-sonnet-5)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Opus 4.8 (claude-opus-4-8)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Opus 4.7 (claude-opus-4-7)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 | Claude Opus 4.6 (claude-opus-4-6)                                                                   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
@@ -55,7 +56,7 @@ Code execution is available on:
 
 * **Claude API** (Anthropic)
 * **[Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws)**
-* **[Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry)**
+* **[Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry)** (requires a [Hosted on Anthropic deployment](/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure))
 
 Code execution is not currently available on Amazon Bedrock or Google Cloud.
 
@@ -398,7 +399,7 @@ The Python environment can process various file types uploaded through the Files
 
   ```typescript TypeScript
   import Anthropic, { toFile } from "@anthropic-ai/sdk";
-  import { createReadStream } from "fs";
+  import { createReadStream } from "node:fs";
 
   const client = new Anthropic();
   // ...
@@ -692,7 +693,7 @@ When Claude creates files during code execution, you can retrieve these files us
 
   ```typescript TypeScript
   import Anthropic from "@anthropic-ai/sdk";
-  import { writeFile } from "fs/promises";
+  import { writeFile } from "node:fs/promises";
 
   const client = new Anthropic();
   // ...

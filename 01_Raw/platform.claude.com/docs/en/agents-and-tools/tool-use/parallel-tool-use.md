@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/parallel-tool-use
-fetched_at: 2026-06-29T05:25:11.009500+00:00
+fetched_at: 2026-07-06T05:04:22.982784+00:00
 fetch_method: mintlify_md
 ---
 
@@ -209,11 +209,11 @@ The following script sends a request that should trigger parallel tool calls, ve
 
     if (toolUses.length > 1) {
       console.log("✓ Parallel tool calls detected!");
-      toolUses.forEach((tool) => {
+      for (const tool of toolUses) {
         if (tool.type === "tool_use") {
           console.log(`  - ${tool.name}: ${JSON.stringify(tool.input)}`);
         }
-      });
+      }
     } else {
       console.log("✗ No parallel tool calls detected");
     }

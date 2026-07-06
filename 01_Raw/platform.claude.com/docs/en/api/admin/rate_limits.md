@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rate_limits
-fetched_at: 2026-06-15T06:17:52.043434+00:00
+fetched_at: 2026-07-06T05:04:35.057219+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,19 +18,19 @@ and contains the set of limiter values that apply to it.
 
 ### Query Parameters
 
-- `group_type: optional "model_group" or "batch" or "token_count" or 3 more`
+- `group_type: optional "batch" or "files" or "model_group" or 3 more`
 
   Filter by group type.
 
-  - `"model_group"`
-
   - `"batch"`
-
-  - `"token_count"`
 
   - `"files"`
 
+  - `"model_group"`
+
   - `"skills"`
+
+  - `"token_count"`
 
   - `"web_search"`
 
@@ -48,19 +48,19 @@ and contains the set of limiter values that apply to it.
 
   Rate-limit entries for the organization, one per group.
 
-  - `group_type: "model_group" or "batch" or "token_count" or 3 more`
+  - `group_type: "batch" or "files" or "model_group" or 3 more`
 
     The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-    - `"model_group"`
-
     - `"batch"`
-
-    - `"token_count"`
 
     - `"files"`
 
+    - `"model_group"`
+
     - `"skills"`
+
+    - `"token_count"`
 
     - `"web_search"`
 
@@ -104,7 +104,7 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
 {
   "data": [
     {
-      "group_type": "model_group",
+      "group_type": "batch",
       "limits": [
         {
           "type": "type",
@@ -131,19 +131,19 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
 
     Rate-limit entries for the organization, one per group.
 
-    - `group_type: "model_group" or "batch" or "token_count" or 3 more`
+    - `group_type: "batch" or "files" or "model_group" or 3 more`
 
       The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-      - `"model_group"`
-
       - `"batch"`
-
-      - `"token_count"`
 
       - `"files"`
 
+      - `"model_group"`
+
       - `"skills"`
+
+      - `"token_count"`
 
       - `"web_search"`
 

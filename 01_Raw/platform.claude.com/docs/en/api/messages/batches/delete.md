@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/messages/batches/delete
-fetched_at: 2026-05-25T05:15:51.964944+00:00
+fetched_at: 2026-07-06T05:04:27.498945+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ Delete a Message Batch.
 
 Message Batches can only be deleted once they've finished processing. If you'd like to delete an in-progress batch, you must first cancel it.
 
-Learn more about the Message Batches API in our [user guide](https://docs.claude.com/en/docs/build-with-claude/batch-processing)
+Learn more about the Message Batches API in our [user guide](https://platform.claude.com/docs/en/build-with-claude/batch-processing)
 
 ### Path Parameters
 

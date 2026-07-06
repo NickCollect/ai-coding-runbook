@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/cost_report/retrieve
-fetched_at: 2026-06-15T06:17:51.948826+00:00
+fetched_at: 2026-07-06T05:04:34.056329+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,13 +27,13 @@ Get Cost Report
 
   Time buckets that end before this RFC 3339 timestamp will be returned.
 
-- `group_by: optional array of "workspace_id" or "description"`
+- `group_by: optional array of "description" or "workspace_id"`
 
   Group by any subset of the available options.
 
-  - `"workspace_id"`
-
   - `"description"`
+
+  - `"workspace_id"`
 
 - `limit: optional number`
 
@@ -77,17 +77,17 @@ Get Cost Report
 
         - `"200k-1M"`
 
-      - `cost_type: "tokens" or "web_search" or "code_execution" or "session_usage"`
+      - `cost_type: "code_execution" or "session_usage" or "tokens" or "web_search"`
 
         Type of cost. `null` if not grouping by description.
-
-        - `"tokens"`
-
-        - `"web_search"`
 
         - `"code_execution"`
 
         - `"session_usage"`
+
+        - `"tokens"`
+
+        - `"web_search"`
 
       - `currency: string`
 
@@ -106,27 +106,27 @@ Get Cost Report
 
         Model name used. `null` if not grouping by description or for non-token costs.
 
-      - `service_tier: "standard" or "batch"`
+      - `service_tier: "batch" or "standard"`
 
         Service tier used. `null` if not grouping by description or for non-token costs.
 
-        - `"standard"`
-
         - `"batch"`
 
-      - `token_type: "uncached_input_tokens" or "output_tokens" or "cache_read_input_tokens" or 2 more`
+        - `"standard"`
+
+      - `token_type: "cache_creation.ephemeral_1h_input_tokens" or "cache_creation.ephemeral_5m_input_tokens" or "cache_read_input_tokens" or 2 more`
 
         Type of token. `null` if not grouping by description or for non-token costs.
-
-        - `"uncached_input_tokens"`
-
-        - `"output_tokens"`
-
-        - `"cache_read_input_tokens"`
 
         - `"cache_creation.ephemeral_1h_input_tokens"`
 
         - `"cache_creation.ephemeral_5m_input_tokens"`
+
+        - `"cache_read_input_tokens"`
+
+        - `"output_tokens"`
+
+        - `"uncached_input_tokens"`
 
       - `workspace_id: string`
 

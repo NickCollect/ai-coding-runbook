@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/users/list
-fetched_at: 2026-06-15T06:17:50.725224+00:00
+fetched_at: 2026-07-06T05:04:32.814575+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,19 +50,19 @@ List Users
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"user"`
 
   - `type: "user"`
 

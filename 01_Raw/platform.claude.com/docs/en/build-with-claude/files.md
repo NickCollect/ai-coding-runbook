@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/files
-fetched_at: 2026-06-29T05:25:11.811682+00:00
+fetched_at: 2026-07-06T05:04:24.031272+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ The Files API lets you upload and manage files to use with the Claude API withou
 
 Referencing a `file_id` in a Messages request is supported on all models that support the given file type. [Images](/docs/en/build-with-claude/vision) are supported on all current Claude models. For [PDFs](/docs/en/build-with-claude/pdf-support) and [other file types with the code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility), see the linked pages for model support.
 
-The Files API is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). It is not currently available on Amazon Bedrock or Google Cloud.
+The Files API is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Microsoft Foundry, the Files API requires a [Hosted on Anthropic deployment](/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure). It is not currently available on Amazon Bedrock or Google Cloud.
 
 ## How the Files API works
 
@@ -264,7 +264,7 @@ Once uploaded, reference the file using its `file_id`:
   var response = await client.Beta.Messages.Create(
       new MessageCreateParams
       {
-          Model = Messages::Model.ClaudeOpus4_6,
+          Model = Messages::Model.ClaudeOpus4_8,
           MaxTokens = 1024,
           Betas = [AnthropicBeta.FilesApi2025_04_14],
           Messages =
@@ -290,7 +290,7 @@ Once uploaded, reference the file using its `file_id`:
   ```go Go
   msg, err := client.Beta.Messages.New(context.Background(),
   	anthropic.BetaMessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus4_6,
+  		Model:     anthropic.ModelClaudeOpus4_8,
   		MaxTokens: 1024,
   		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
   		Messages: []anthropic.BetaMessageParam{
@@ -470,7 +470,7 @@ For file types that are not supported as `document` blocks (.csv, .txt, .md, .do
   ```
 
   ```typescript TypeScript
-  import fs from "fs/promises";
+  import fs from "node:fs/promises";
 
   const anthropic = new Anthropic();
 

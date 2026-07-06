@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/streaming
-fetched_at: 2026-06-29T05:25:10.712335+00:00
+fetched_at: 2026-07-06T05:04:22.662462+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,11 +22,7 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
     --model claude-opus-4-8 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello"}' \
-    | while IFS= read -r event; do
-        [[ $event == *'"text_delta"'* ]] || continue
-        text=${event#*'"text":"'}
-        printf '%b' "${text%\"*}"
-      done
+    | jq -rj 'select(.delta.type? == "text_delta") | .delta.text'
   ```
 
   ```python Python

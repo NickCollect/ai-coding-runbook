@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview
-fetched_at: 2026-06-29T05:25:10.850550+00:00
+fetched_at: 2026-07-06T05:04:22.841565+00:00
 fetch_method: mintlify_md
 ---
 
@@ -283,6 +283,7 @@ When you use `tools`, the API also automatically includes a special system promp
 | Claude Opus 4.5                                                                                            | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
 | Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations))                                   | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
 | Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations))                | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |
+| Claude Sonnet 5                                                                                            | `auto`, `none`***`any`, `tool` | 354 tokens***474 tokens            |
 | Claude Sonnet 4.6                                                                                          | `auto`, `none`***`any`, `tool` | 497 tokens***589 tokens            |
 | Claude Sonnet 4.5                                                                                          | `auto`, `none`***`any`, `tool` | 496 tokens***588 tokens            |
 | Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))  | `auto`, `none`***`any`, `tool` | 313 tokens***315 tokens            |

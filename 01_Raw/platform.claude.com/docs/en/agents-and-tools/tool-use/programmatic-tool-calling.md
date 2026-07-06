@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/programmatic-tool-calling
-fetched_at: 2026-06-29T05:25:11.547189+00:00
+fetched_at: 2026-07-06T05:04:23.743832+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,11 +37,12 @@ Programmatic tool calling requires `code_execution_20260120` or later, which is 
 | Claude Opus 4.8 (claude-opus-4-8)              |
 | Claude Opus 4.7 (claude-opus-4-7)              |
 | Claude Opus 4.6 (claude-opus-4-6)              |
+| Claude Sonnet 5 (claude-sonnet-5)              |
 | Claude Sonnet 4.6 (claude-sonnet-4-6)          |
 | Claude Opus 4.5 (claude-opus-4-5-20251101)     |
 | Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) |
 
-For the full code execution tool version matrix, see the [code execution tool model compatibility table](/docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility). Programmatic tool calling is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). It is not currently available on Amazon Bedrock or Google Cloud.
+For the full code execution tool version matrix, see the [code execution tool model compatibility table](/docs/en/agents-and-tools/tool-use/code-execution-tool#model-compatibility). Programmatic tool calling is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Microsoft Foundry, programmatic tool calling requires a [Hosted on Anthropic deployment](/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure). It is not currently available on Amazon Bedrock or Google Cloud.
 
 ## Quick start
 
@@ -1357,6 +1358,15 @@ Claude's code receives this error and can handle it appropriately.
 * **Tool choice:** You cannot force programmatic calling of a specific tool through `tool_choice`
 * **Parallel tool use:** `disable_parallel_tool_use: true` is not supported with programmatic calling
 
+### Input schema limitations
+
+Custom tools whose `input_schema` contains a recursive `$ref` (a reference cycle, such as a schema that refers to itself) cannot be enabled for programmatic calling. Including a code execution tool version in `allowed_callers` for such a tool causes the request to fail with a `400 invalid_request_error` whose message contains `Circular $ref detected`. The same schema is accepted for direct tool calling.
+
+To work around this, do one of the following:
+
+* Keep the tool direct-only by omitting `allowed_callers` (or setting it to `["direct"]`). Other tools in the same request can still use programmatic calling.
+* Remove the cycle from the schema. For example, unroll the recursion to a fixed depth and describe any deeper nesting in the `description` of the innermost level, or replace the recursive property with a plain `{"type": "object"}` whose `description` explains the expected shape.
+
 ### Tool restrictions
 
 The following tools cannot be called programmatically:
@@ -1551,7 +1561,7 @@ Anthropic's programmatic tool calling is a managed version of sandboxed executio
 * Enabled with a tool definition, with no infrastructure to run
 * Environment and instructions optimized for Claude
 
-Consider using Anthropic's managed solution if you're using the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), or [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
+Consider using Anthropic's managed solution if you're using the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), or [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). On Microsoft Foundry, programmatic tool calling requires a [Hosted on Anthropic deployment](/docs/en/build-with-claude/claude-in-microsoft-foundry#additional-features-not-supported-when-hosted-on-azure).
 
 ## Data retention
 

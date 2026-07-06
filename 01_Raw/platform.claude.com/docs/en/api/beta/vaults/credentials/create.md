@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/create
-fetched_at: 2026-06-15T06:17:49.491269+00:00
+fetched_at: 2026-07-06T05:04:30.364094+00:00
 fetch_method: mintlify_md
 ---
 
@@ -182,7 +182,7 @@ Create Credential
 
       - `"static_bearer"`
 
-  - `BetaManagedAgentsEnvironmentVariableCreateParams object { networking, secret_name, secret_value, type }`
+  - `BetaManagedAgentsEnvironmentVariableCreateParams object { networking, secret_name, secret_value, 2 more }`
 
     Parameters for creating an environment variable credential.
 
@@ -221,6 +221,18 @@ Create Credential
     - `type: "environment_variable"`
 
       - `"environment_variable"`
+
+    - `injection_location: optional BetaManagedAgentsInjectionLocationParams`
+
+      Where in the outbound request the secret value may be substituted.
+
+      - `body: optional boolean`
+
+        Substitute when the placeholder appears in the request body.
+
+      - `header: optional boolean`
+
+        Substitute when the placeholder appears in a request header value.
 
 - `display_name: optional string`
 
@@ -324,9 +336,21 @@ Create Credential
 
         - `"static_bearer"`
 
-    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { networking, secret_name, type }`
+    - `BetaManagedAgentsEnvironmentVariableAuthResponse object { injection_location, networking, secret_name, type }`
 
       Environment variable credential details. The secret value is never returned.
+
+      - `injection_location: BetaManagedAgentsInjectionLocationResponse`
+
+        Where in the outbound request the secret value is substituted.
+
+        - `body: boolean`
+
+          Whether the placeholder is substituted in the request body.
+
+        - `header: boolean`
+
+          Whether the placeholder is substituted in request header values.
 
       - `networking: BetaManagedAgentsUnrestrictedCredentialNetworkingResponse or BetaManagedAgentsLimitedCredentialNetworkingResponse`
 

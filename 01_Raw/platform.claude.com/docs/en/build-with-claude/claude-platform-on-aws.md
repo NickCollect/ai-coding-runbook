@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws
-fetched_at: 2026-06-29T05:25:12.603330+00:00
+fetched_at: 2026-07-06T05:04:24.933385+00:00
 fetch_method: mintlify_md
 ---
 
@@ -283,14 +283,14 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Claude P
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java-aws:2.40.0")
+    implementation("com.anthropic:anthropic-java-aws:2.47.1")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-aws</artifactId>
-      <version>2.40.0</version>
+      <version>2.47.1</version>
     </dependency>
     ```
   </Tab>
@@ -322,6 +322,7 @@ The following models are available on Claude Platform on AWS:
 | Claude Opus 4.8   | claude-opus-4-8   |
 | Claude Opus 4.7   | claude-opus-4-7   |
 | Claude Opus 4.6   | claude-opus-4-6   |
+| Claude Sonnet 5   | `claude-sonnet-5` |
 | Claude Sonnet 4.6 | claude-sonnet-4-6 |
 | Claude Opus 4.5   | claude-opus-4-5   |
 | Claude Sonnet 4.5 | claude-sonnet-4-5 |

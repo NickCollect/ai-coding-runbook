@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/agents/create
-fetched_at: 2026-06-29T05:25:15.101463+00:00
+fetched_at: 2026-07-06T05:04:28.137927+00:00
 fetch_method: mintlify_md
 ---
 
@@ -82,17 +82,21 @@ Create Agent
 
   Model identifier. Accepts the [model string](https://platform.claude.com/docs/en/about-claude/models/overview#latest-models-comparison), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
-  - `BetaManagedAgentsModel = "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string`
+  - `BetaManagedAgentsModel = "claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more or string`
 
     The model that will power your agent.
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
+    - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more`
 
       The model that will power your agent.
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+      - `"claude-sonnet-5"`
+
+        High-performance model for coding and agents
 
       - `"claude-fable-5"`
 
@@ -468,11 +472,15 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-      - `"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more`
+      - `"claude-sonnet-5" or "claude-fable-5" or "claude-opus-4-8" or 9 more`
 
         The model that will power your agent.
 
         See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+        - `"claude-sonnet-5"`
+
+          High-performance model for coding and agents
 
         - `"claude-fable-5"`
 

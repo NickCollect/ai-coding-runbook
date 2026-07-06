@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/api_keys/list
-fetched_at: 2026-06-15T06:17:51.496705+00:00
+fetched_at: 2026-07-06T05:04:33.675717+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,17 +30,17 @@ List API Keys
 
   Defaults to `20`. Ranges from `1` to `1000`.
 
-- `status: optional "active" or "inactive" or "archived" or "expired"`
+- `status: optional "active" or "archived" or "expired" or "inactive"`
 
   Filter by API key status.
 
   - `"active"`
 
-  - `"inactive"`
-
   - `"archived"`
 
   - `"expired"`
+
+  - `"inactive"`
 
 - `workspace_id: optional string`
 
@@ -82,17 +82,17 @@ List API Keys
 
     Partially redacted hint for the API key.
 
-  - `status: "active" or "inactive" or "archived" or "expired"`
+  - `status: "active" or "archived" or "expired" or "inactive"`
 
     Status of the API key.
 
     - `"active"`
 
-    - `"inactive"`
-
     - `"archived"`
 
     - `"expired"`
+
+    - `"inactive"`
 
   - `type: "api_key"`
 

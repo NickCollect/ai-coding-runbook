@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
-fetched_at: 2026-06-29T05:25:10.348330+00:00
+fetched_at: 2026-07-06T05:04:22.243229+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1510,7 +1510,7 @@ A `tool_use` response can also contain a `server_tool_use` block whose `id` has 
 }
 ```
 
-The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends `but no web_fetch tool was provided`. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response's `content` starts with the result block that answers the previous response's `server_tool_use` `id`.
+The continuation is a user message of `tool_result` blocks, one for every `tool_use` block in the response (see [Handle tool calls](/docs/en/agents-and-tools/tool-use/handle-tool-calls)), with two extra rules: that message must contain nothing except the `tool_result` blocks, and the request must keep the same `tools` array. A resume request that no longer defines the waiting server tool fails with a 400 whose message ends ``but no `web_fetch` tool was provided``. The API attaches your results to the still-open assistant turn, runs the deferred server tool (for paused code execution, resumes it), and continues the turn. For a server tool Claude called directly, the next response's `content` starts with the result block that answers the previous response's `server_tool_use` `id`.
 
 ```json The follow-up user message
 {

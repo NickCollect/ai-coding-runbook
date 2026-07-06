@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/prompt-caching
-fetched_at: 2026-06-29T05:25:11.830218+00:00
+fetched_at: 2026-07-06T05:04:23.946039+00:00
 fetch_method: mintlify_md
 ---
 
@@ -228,21 +228,23 @@ By default, the cache has a 5-minute lifetime. The cache is refreshed for no add
 
 Prompt caching introduces a new pricing structure. The table below shows the price per million tokens for each supported model:
 
-| Model                                                                                                      | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
-| ---------------------------------------------------------------------------------------------------------- | ----------------- | --------------- | --------------- | ---------------------- | ------------- |
-| Claude Fable 5                                                                                             | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok              | $50 / MTok    |
-| Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing))                                  | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok              | $50 / MTok    |
-| Claude Opus 4.8                                                                                            | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
-| Claude Opus 4.7                                                                                            | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
-| Claude Opus 4.6                                                                                            | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
-| Claude Opus 4.5                                                                                            | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
-| Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations))                                   | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok           | $75 / MTok    |
-| Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations))                | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok           | $75 / MTok    |
-| Claude Sonnet 4.6                                                                                          | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok           | $15 / MTok    |
-| Claude Sonnet 4.5                                                                                          | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok           | $15 / MTok    |
-| Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))  | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok           | $15 / MTok    |
-| Claude Haiku 4.5                                                                                           | $1 / MTok         | $1.25 / MTok    | $2 / MTok       | $0.10 / MTok           | $5 / MTok     |
-| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)) | $0.80 / MTok      | $1 / MTok       | $1.60 / MTok    | $0.08 / MTok           | $4 / MTok     |
+| Model                                                                                                         | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
+| ------------------------------------------------------------------------------------------------------------- | ----------------- | --------------- | --------------- | ---------------------- | ------------- |
+| Claude Fable 5                                                                                                | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok              | $50 / MTok    |
+| Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing))                                     | $10 / MTok        | $12.50 / MTok   | $20 / MTok      | $1 / MTok              | $50 / MTok    |
+| Claude Opus 4.8                                                                                               | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
+| Claude Opus 4.7                                                                                               | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
+| Claude Opus 4.6                                                                                               | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
+| Claude Opus 4.5                                                                                               | $5 / MTok         | $6.25 / MTok    | $10 / MTok      | $0.50 / MTok           | $25 / MTok    |
+| Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations))                                      | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok           | $75 / MTok    |
+| Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations))                   | $15 / MTok        | $18.75 / MTok   | $30 / MTok      | $1.50 / MTok           | $75 / MTok    |
+| Claude Sonnet 5 [through August 31, 2026](/docs/en/about-claude/pricing#claude-sonnet-5-introductory-pricing) | $2 / MTok         | $2.50 / MTok    | $4 / MTok       | $0.20 / MTok           | $10 / MTok    |
+| Claude Sonnet 5 starting September 1, 2026                                                                    | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok           | $15 / MTok    |
+| Claude Sonnet 4.6                                                                                             | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok           | $15 / MTok    |
+| Claude Sonnet 4.5                                                                                             | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok           | $15 / MTok    |
+| Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))     | $3 / MTok         | $3.75 / MTok    | $6 / MTok       | $0.30 / MTok           | $15 / MTok    |
+| Claude Haiku 4.5                                                                                              | $1 / MTok         | $1.25 / MTok    | $2 / MTok       | $0.10 / MTok           | $5 / MTok     |
+| Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))    | $0.80 / MTok      | $1 / MTok       | $1.60 / MTok    | $0.08 / MTok           | $4 / MTok     |
 
 <Note>
   The table above reflects the following pricing multipliers for prompt caching:
@@ -507,7 +509,7 @@ Automatic caching uses the same underlying caching infrastructure. Pricing, mini
 * If the last block is not eligible as an automatic cache breakpoint target, the system silently walks backwards to find the nearest eligible block. If none is found, caching is skipped.
 
 <Note>
-  Automatic caching is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta). Bedrock and Google Cloud do not support automatic caching.
+  Automatic caching is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry). Bedrock and Google Cloud do not support automatic caching.
 </Note>
 
 ***
@@ -581,12 +583,12 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 
 ### Cache limitations
 
-On the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta), the minimum cacheable prompt length is:
+On the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), the minimum cacheable prompt length is:
 
 * 512 tokens for Claude Fable 5 and [Claude Mythos 5](https://anthropic.com/glasswing)
 * 2,048 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing) and Claude Opus 4.7
 * 4,096 tokens for Claude Opus 4.6 and Claude Opus 4.5
-* 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)), Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)), and Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))
+* 1,024 tokens for Claude Opus 4.8, Claude Sonnet 5, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)), Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)), and Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations))
 * 4,096 tokens for Claude Haiku 4.5
 * 2,048 tokens for Claude Haiku 3.5 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations))
 
@@ -733,10 +735,10 @@ For more detailed information, see the [extended thinking documentation](/docs/e
 ### Cache storage and sharing
 
 <Warning>
-  As of February 5, 2026, prompt caching uses [workspace](/docs/en/manage-claude/workspaces)-level isolation instead of organization-level isolation. Caches are isolated per workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Google Cloud maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
+  As of February 5, 2026, prompt caching uses [workspace](/docs/en/manage-claude/workspaces)-level isolation instead of organization-level isolation. Caches are isolated per workspace, ensuring data separation between workspaces within the same organization. This applies to the Claude API, Claude Platform on AWS, and Microsoft Foundry; Bedrock and Google Cloud maintain organization-level cache isolation. If you use multiple workspaces, review your caching strategy to account for this difference.
 </Warning>
 
-* **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. As of February 5, 2026, caches are also isolated per workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta); Bedrock and Google Cloud continue to use organization-level isolation only.
+* **Organization and workspace isolation:** Caches are isolated between organizations. Different organizations never share caches, even if they use identical prompts. As of February 5, 2026, caches are also isolated per workspace within an organization on the Claude API, Claude Platform on AWS, and Microsoft Foundry; Bedrock and Google Cloud continue to use organization-level isolation only.
 
 * **Exact matching:** Cache hits require 100% identical prompt segments, including all text and images up to and including the block marked with cache control.
 
@@ -792,7 +794,7 @@ If experiencing unexpected behavior:
 If you find that 5 minutes is too short, Anthropic also offers a 1-hour cache duration [at additional cost](#pricing).
 
 <Note>
-  The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (legacy)](/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry) (beta).
+  The 1-hour cache duration is available on the Claude API, [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), [Amazon Bedrock](/docs/en/build-with-claude/claude-in-amazon-bedrock), [Amazon Bedrock (legacy)](/docs/en/build-with-claude/claude-on-amazon-bedrock-legacy), [Google Cloud](/docs/en/build-with-claude/claude-on-vertex-ai), and [Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry).
 </Note>
 
 To use the extended cache, include `ttl` in the `cache_control` definition like this:
@@ -3127,7 +3129,7 @@ The following code snippets showcase various prompt caching patterns. These exam
 
 Prompt caching (both automatic and explicit) is ZDR eligible. Anthropic does not store the raw text of your prompts or Claude's responses.
 
-KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations and, on the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta), between workspaces within an organization.
+KV (key-value) cache representations and cryptographic hashes of cached content are held in memory only and are not stored at rest. Cached entries have a minimum lifetime of 5 minutes (standard) or 1 hour (extended), after which they are promptly, though not immediately, deleted. Cache entries are isolated between organizations and, on the Claude API, Claude Platform on AWS, and Microsoft Foundry, between workspaces within an organization.
 
 For ZDR eligibility across all features, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 
@@ -3234,7 +3236,7 @@ For ZDR eligibility across all features, see [API and data retention](/docs/en/m
 
     1. Cache keys are generated using a cryptographic hash of the prompts up to the cache control point. This means only requests with identical prompts can access a specific cache.
 
-    2. On the Claude API, Claude Platform on AWS, and Microsoft Foundry (beta), caches are isolated per workspace within an organization. On Bedrock and Google Cloud, caches are isolated per organization. In every case, caches are never shared across organizations, even for identical prompts. See [Cache storage and sharing](#cache-storage-and-sharing) for details.
+    2. On the Claude API, Claude Platform on AWS, and Microsoft Foundry, caches are isolated per workspace within an organization. On Bedrock and Google Cloud, caches are isolated per organization. In every case, caches are never shared across organizations, even for identical prompts. See [Cache storage and sharing](#cache-storage-and-sharing) for details.
 
     3. The caching mechanism is designed to maintain the integrity and privacy of each unique conversation or context.
 

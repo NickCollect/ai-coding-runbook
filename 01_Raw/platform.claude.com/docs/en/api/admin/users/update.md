@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/users/update
-fetched_at: 2026-06-15T06:17:50.730852+00:00
+fetched_at: 2026-07-06T05:04:32.888347+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,17 +18,17 @@ Update User
 
 ### Body Parameters
 
-- `role: "user" or "developer" or "billing" or "claude_code_user"`
+- `role: "billing" or "claude_code_user" or "developer" or "user"`
 
   New role for the User. Cannot be "admin".
-
-  - `"user"`
-
-  - `"developer"`
 
   - `"billing"`
 
   - `"claude_code_user"`
+
+  - `"developer"`
+
+  - `"user"`
 
 ### Returns
 
@@ -50,19 +50,19 @@ Update User
 
     Name of the User.
 
-  - `role: "user" or "developer" or "billing" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
 
     Organization role of the User.
 
-    - `"user"`
-
-    - `"developer"`
+    - `"admin"`
 
     - `"billing"`
 
-    - `"admin"`
-
     - `"claude_code_user"`
+
+    - `"developer"`
+
+    - `"user"`
 
   - `type: "user"`
 

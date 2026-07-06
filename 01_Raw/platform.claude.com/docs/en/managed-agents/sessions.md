@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/sessions
-fetched_at: 2026-06-29T05:25:12.882666+00:00
+fetched_at: 2026-07-06T05:04:25.276040+00:00
 fetch_method: mintlify_md
 ---
 
@@ -194,6 +194,65 @@ To pin a session to a specific agent version, pass an object. This lets you cont
     agent: {type: :agent, id: agent.id, version: 1},
     environment_id: environment.id
   )
+  ```
+</CodeGroup>
+
+### Override agent configuration for a session
+
+You can pass `agent` in three forms: an agent ID string, a pinned-version object (`type: "agent"`), or an overrides object. The overrides form changes parts of the agent's configuration for a single session. Use it to try a different model or grant an extra tool in one session without versioning the agent. For the overrides form, set `type` to `agent_with_overrides` and pass the agent's `id` and optionally a `version` (omit `version` to use the agent's latest version). Then include any of `model`, `system`, `tools`, `mcp_servers`, or `skills` with the values the session should use.
+
+Each overridable field follows the same three rules:
+
+* **Omit the field:** The session inherits the value from the agent version it references.
+
+* **Set the field to `null`, or to an empty array for list fields:** The session runs with that field cleared. This rule applies in full to `system`, `mcp_servers`, and `skills`. There are two exceptions:
+
+  * `model` is never clearable. A session always needs a model, so `model: null` returns a 400 `agent_model_required` error.
+  * Clearing `tools` returns a 400 error when the session's effective `skills` is non-empty, because skills require the `read` tool. Otherwise, `tools: null` and `tools: []` clear the field.
+
+* **Set the field to a value:** The value replaces the agent's value in full. Overrides never merge with the agent's configuration, so a `tools` override must list every tool the session should have.
+
+Overrides apply only to the session you create. They do not modify the agent resource or create a new agent version, so other sessions that reference the same agent are unaffected.
+
+In the response, the `agent` object reflects the configuration the session runs with after the overrides are applied. Its `id` and `version` still identify the agent and version the overrides are applied to. This lets you trace a session back to its base agent.
+
+<CodeGroup defaultLanguage="CLI">
+  ```bash cURL
+  override_session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d @- <<EOF
+  {
+    "agent": {
+      "type": "agent_with_overrides",
+      "id": "$AGENT_ID",
+      "model": {"id": "claude-sonnet-5"},
+      "system": null
+    },
+    "environment_id": "$ENVIRONMENT_ID"
+  }
+  EOF
+  )
+  jq '.agent | {id, version, model, system}' <<< "$override_session"
+  OVERRIDE_SESSION_ID=$(jq -r '.id' <<< "$override_session")
+  ```
+
+  ```bash CLI
+  # The response's `agent` is the resolved snapshot: each override replaces that
+  # field for this session only, and the agent resource keeps its id and version.
+  ant beta:sessions create \
+    --transform 'agent.{id,version,model,system}' \
+    --format json <<YAML
+  agent:
+    type: agent_with_overrides
+    id: $AGENT_ID
+    model:
+      id: claude-sonnet-5
+    system: null
+  environment_id: $ENVIRONMENT_ID
+  YAML
   ```
 </CodeGroup>
 
@@ -432,3 +491,5 @@ Creating a session provisions the environment's sandbox but does not start any w
 See [Session event stream](/docs/en/managed-agents/events-and-streaming) for how to stream the agent's responses and handle tool confirmations.
 
 See [Session statuses](/docs/en/managed-agents/session-operations#session-statuses) for the statuses a session moves through, and [Session operations](/docs/en/managed-agents/session-operations) for retrieving, listing, updating, archiving, and deleting sessions.
+
+To create sessions automatically on a recurring schedule, see [Scheduled deployments](/docs/en/managed-agents/scheduled-deployments).

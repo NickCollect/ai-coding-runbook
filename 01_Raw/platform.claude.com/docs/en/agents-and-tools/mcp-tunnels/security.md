@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/security
-fetched_at: 2026-06-29T05:25:12.290360+00:00
+fetched_at: 2026-07-06T05:04:24.687684+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,7 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
   </Step>
 
   <Step title="Archive the tunnel">
-    Archiving invalidates the tunnel token and detaches the domain. In the Console, [archive the tunnel](/docs/en/agents-and-tools/mcp-tunnels/console#archive-a-tunnel) from the **MCP tunnels** list. To archive over the API instead, see [Archive a tunnel](/docs/en/api/admin/mcp_tunnels/archive).
+    Archiving invalidates the tunnel token and detaches the domain. In the Console, [archive the tunnel](/docs/en/agents-and-tools/mcp-tunnels/console#archive-a-tunnel) from the **MCP tunnels** list. To archive over the API instead, see [Archive a tunnel](/docs/en/api/beta/tunnels/archive).
   </Step>
 
   <Step title="Contact Anthropic">

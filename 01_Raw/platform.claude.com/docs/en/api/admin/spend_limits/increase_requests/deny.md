@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/increase_requests/deny
-fetched_at: 2026-06-22T06:23:31.740143+00:00
+fetched_at: 2026-07-06T05:04:35.049957+00:00
 fetch_method: mintlify_md
 ---
 
@@ -49,11 +49,11 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
   - `created_at: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -119,11 +119,11 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `currency: string`
 
-    - `period: "monthly" or "daily" or "weekly"`
-
-      - `"monthly"`
+    - `period: "daily" or "monthly" or "weekly"`
 
       - `"daily"`
+
+      - `"monthly"`
 
       - `"weekly"`
 
@@ -179,13 +179,13 @@ Idempotent on `denied`; denying an already-`approved` request returns
 
     - `spend_limit_id: string`
 
-  - `status: "pending" or "approved" or "denied"`
-
-    - `"pending"`
+  - `status: "approved" or "denied" or "pending"`
 
     - `"approved"`
 
     - `"denied"`
+
+    - `"pending"`
 
   - `type: "spend_limit_increase_request"`
 
@@ -231,8 +231,8 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
       "type": "user_actor",
       "user_id": "user_id"
     },
-    "amount": "amount",
-    "currency": "currency",
+    "amount": "50000",
+    "currency": "USD",
     "period": "monthly",
     "period_to_date_spend": "period_to_date_spend",
     "scope": {
@@ -245,7 +245,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limit_increase_requests/$S
     },
     "spend_limit_id": "spend_limit_id"
   },
-  "status": "pending",
+  "status": "approved",
   "type": "spend_limit_increase_request"
 }
 ```

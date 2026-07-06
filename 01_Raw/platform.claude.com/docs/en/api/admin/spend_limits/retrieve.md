@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/retrieve
-fetched_at: 2026-06-22T06:23:31.492115+00:00
+fetched_at: 2026-07-06T05:04:34.925834+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,11 +28,11 @@ Retrieve a spend limit by ID.
 
   - `currency: string`
 
-  - `period: "monthly" or "daily" or "weekly"`
-
-    - `"monthly"`
+  - `period: "daily" or "monthly" or "weekly"`
 
     - `"daily"`
+
+    - `"monthly"`
 
     - `"weekly"`
 
@@ -95,9 +95,9 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/$SPEND_LIMIT_ID \
 ```json
 {
   "id": "id",
-  "amount": "amount",
+  "amount": "50000",
   "created_at": "2019-12-27T18:11:19.117Z",
-  "currency": "currency",
+  "currency": "USD",
   "period": "monthly",
   "scope": {
     "type": "user",
