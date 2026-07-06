@@ -1,5 +1,36 @@
 # @modelcontextprotocol/core
 
+## 2.0.0-beta.2
+
+### Patch Changes
+
+- [#2405](https://github.com/modelcontextprotocol/typescript-sdk/pull/2405) [`f172626`](https://github.com/modelcontextprotocol/typescript-sdk/commit/f172626a8e98b2ae2f0f690e4afb4dc74dbf6011) Thanks [@mattzcarey](https://github.com/mattzcarey)! - Ship CommonJS builds alongside ESM. Each package now emits both `.mjs`/`.d.mts`
+  and `.cjs`/`.d.cts` (via tsdown `format: ['esm', 'cjs']`), and its `exports` map
+  adds a `require` condition so `require('@modelcontextprotocol/…')` works from
+  CommonJS consumers. Output extensions are normalized across all packages
+  (`@modelcontextprotocol/core` moves from `.js`/`.d.ts` to `.mjs`/`.d.mts`); the
+  public import paths are unchanged.
+
+## 2.0.0-beta.1
+
+### Patch Changes
+
+- [#2402](https://github.com/modelcontextprotocol/typescript-sdk/pull/2402) [`a400259`](https://github.com/modelcontextprotocol/typescript-sdk/commit/a4002596b914c675d17ac22471d1287976dbb52a) Thanks [@felixweinberger](https://github.com/felixweinberger)! - First beta release of SDK v2 with support for the MCP 2026-07-28 specification
+  revision. See the migration guides for upgrading from v1
+  (`docs/migration/upgrade-to-v2.md`) and adopting the 2026-07-28 revision
+  (`docs/migration/support-2026-07-28.md`).
+
+## 2.0.0-alpha.2
+
+### Major Changes
+
+- [#2400](https://github.com/modelcontextprotocol/typescript-sdk/pull/2400) [`3c02ffb`](https://github.com/modelcontextprotocol/typescript-sdk/commit/3c02ffb5d9bb4da59028c70cc58987303b310074) Thanks [@felixweinberger](https://github.com/felixweinberger)! - Align the published schema set with the 2026-07-28 surface: removes the
+  `RequestMetaEnvelopeSchema` export; adds `SubscriptionFilterSchema`, the
+  `SubscriptionsListen*` request/result schemas, and the
+  `SubscriptionsAcknowledged*` notification schemas. The bundled schemas now
+  match `@modelcontextprotocol/client` and `@modelcontextprotocol/server` of
+  the same release.
+
 ## 2.0.0-alpha.1
 
 ### Minor Changes

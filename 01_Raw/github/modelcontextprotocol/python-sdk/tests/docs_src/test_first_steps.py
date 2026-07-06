@@ -1,4 +1,4 @@
-"""`docs/tutorial/first-steps.md`: every claim the page makes, proved against the real SDK."""
+"""`docs/get-started/first-steps.md`: every claim the page makes, proved against the real SDK."""
 
 import pytest
 from inline_snapshot import snapshot
@@ -89,9 +89,9 @@ async def test_the_three_primitive_capabilities_are_always_declared() -> None:
         # The exact dictionary the page prints from `model_dump(exclude_none=True)`.
         assert declared.model_dump(exclude_none=True) == snapshot(
             {
-                "prompts": {"list_changed": False},
-                "resources": {"subscribe": False, "list_changed": False},
-                "tools": {"list_changed": False},
+                "prompts": {"list_changed": True},
+                "resources": {"subscribe": True, "list_changed": True},
+                "tools": {"list_changed": True},
             }
         )
     async with Client(MCPServer("Empty")) as client:

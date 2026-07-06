@@ -262,3 +262,204 @@ describe('handler-registration transform', () => {
         expect(result.diagnostics.length).toBe(0);
     });
 });
+
+describe('custom and schema-derived handler arguments (B4)', () => {
+    function applyWithDiagnostics(code: string) {
+        const project = new Project({ useInMemoryFileSystem: true });
+        const sourceFile = project.createSourceFile('test.ts', code);
+        const result = handlerRegistrationTransform.apply(sourceFile, { projectType: 'server' });
+        return { text: sourceFile.getFullText(), result };
+    }
+
+    it('marks a setNotificationHandler whose first argument is a schema expression', () => {
+        const code = [
+            `import { Server } from '@modelcontextprotocol/sdk/server/index.js';`,
+            `server.setNotificationHandler(schemas.SelectionChanged, handler);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        const diag = result.diagnostics.find(d => d.insertComment && d.message.includes('setNotificationHandler'));
+        expect(diag).toBeDefined();
+        expect(diag?.message).toContain('three-argument custom form');
+        expect(diag?.advisoryOnly).toBe(true);
+    });
+
+    it('leaves template-literal method arguments alone (valid v2 form)', () => {
+        const code = [
+            `import { Server } from '@modelcontextprotocol/sdk/server/index.js';`,
+            'server.setRequestHandler(`${NS}/search`, { params: P }, handler);',
+            'client.removeNotificationHandler(`notifications/${kind}`);',
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        expect(result.diagnostics).toHaveLength(0);
+    });
+
+    it('leaves string-method setNotificationHandler calls alone', () => {
+        const code = [
+            `import { Server } from '@modelcontextprotocol/sdk/server/index.js';`,
+            `server.setNotificationHandler('notifications/custom', { params: P }, handler);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        expect(result.diagnostics).toHaveLength(0);
+    });
+
+    it('rewrites removeRequestHandler(Schema.shape.method.value) to the method string', () => {
+        const code = [
+            `import { PingRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `server.removeRequestHandler(PingRequestSchema.shape.method.value);`,
+            ''
+        ].join('\n');
+        const { text } = applyWithDiagnostics(code);
+        expect(text).toContain(`removeRequestHandler('ping')`);
+        expect(text).not.toContain('PingRequestSchema');
+    });
+
+    it('marks removeNotificationHandler with an unresolvable schema-derived argument', () => {
+        const code = [
+            `import { Server } from '@modelcontextprotocol/sdk/server/index.js';`,
+            `server.removeNotificationHandler(localSchema.shape.method.value);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        expect(result.diagnostics.some(d => d.insertComment && d.message.includes('method string'))).toBe(true);
+    });
+});
+
+describe('same-file identifier schema resolution (B6, #30)', () => {
+    function applyWithDiagnostics(code: string) {
+        const project = new Project({ useInMemoryFileSystem: true });
+        const sourceFile = project.createSourceFile('test.ts', code);
+        const result = handlerRegistrationTransform.apply(sourceFile, { projectType: 'server' });
+        return { text: sourceFile.getFullText(), result };
+    }
+
+    it('resolves a local const alias of a spec schema to the method string', () => {
+        const code = [
+            `import { ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `const S = ListToolsRequestSchema;`,
+            `server.setRequestHandler(S, handler);`,
+            ''
+        ].join('\n');
+        const { text, result } = applyWithDiagnostics(code);
+        expect(text).toContain(`setRequestHandler('tools/list', handler)`);
+        expect(result.diagnostics.some(d => d.message.includes('Custom method handler'))).toBe(false);
+    });
+
+    it('still marks local variables that do not resolve to a spec schema', () => {
+        const code = [
+            `import { Server } from '@modelcontextprotocol/sdk/server/index.js';`,
+            `const S = myCustomSchema;`,
+            `server.setRequestHandler(S, handler);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        expect(result.diagnostics.some(d => d.message.includes('Custom method handler'))).toBe(true);
+    });
+});
+
+describe('variable-hop guard rails (B6 review)', () => {
+    function applyB6(code: string) {
+        const project = new Project({ useInMemoryFileSystem: true });
+        const sourceFile = project.createSourceFile('test.ts', code);
+        const result = handlerRegistrationTransform.apply(sourceFile, { projectType: 'server' });
+        return { text: sourceFile.getFullText(), result };
+    }
+
+    it('routes local aliases of removed task schemas to the removal guidance', () => {
+        const code = [
+            `import { ListTasksRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `const T = ListTasksRequestSchema;`,
+            `server.setRequestHandler(T, handler);`,
+            ''
+        ].join('\n');
+        const { result } = applyB6(code);
+        expect(result.diagnostics.some(d => d.message.includes('removed in v2 (SEP-2663)'))).toBe(true);
+        expect(result.diagnostics.some(d => d.message.includes('Custom method handler'))).toBe(false);
+    });
+
+    it('keeps the custom marker when the name is shadowed', () => {
+        const code = [
+            `import { ListToolsRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `const S = ListToolsRequestSchema;`,
+            `function inner() {`,
+            `    const S = myCustomSchema;`,
+            `    server.setRequestHandler(S, handler);`,
+            `}`,
+            ''
+        ].join('\n');
+        const { text, result } = applyB6(code);
+        expect(text).not.toContain(`setRequestHandler('tools/list'`);
+        expect(result.diagnostics.some(d => d.message.includes('Custom method handler'))).toBe(true);
+    });
+});
+
+describe('stale registration-schema references (analysis: mcp-servers/memory)', () => {
+    function applyWithDiagnostics(code: string) {
+        const project = new Project({ useInMemoryFileSystem: true });
+        const sourceFile = project.createSourceFile('test.ts', code);
+        const result = handlerRegistrationTransform.apply(sourceFile, { projectType: 'server' });
+        return { text: sourceFile.getFullText(), result };
+    }
+
+    it('flags a request schema used as a setRequestHandler-mock assertion arg with the method string', () => {
+        const code = [
+            `import { SubscribeRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `const schemas = inner.setRequestHandler.mock.calls.map((c) => c[0]);`,
+            `expect(schemas).toContain(SubscribeRequestSchema);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        const diag = result.diagnostics.find(
+            d => d.message.includes('SubscribeRequestSchema') && d.message.includes("'resources/subscribe'")
+        );
+        expect(diag).toBeDefined();
+    });
+
+    it('flags a schema passed to a registration-lookup helper', () => {
+        const code = [
+            `import { UnsubscribeRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `const c = inner.setRequestHandler.mock.calls.find((x) => x[0] === s);`,
+            `handlerFor(inner, UnsubscribeRequestSchema);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        expect(result.diagnostics.some(d => d.message.includes("'resources/unsubscribe'"))).toBe(true);
+    });
+
+    it('does NOT flag a request schema used as a schema (.parse) — property-access base', () => {
+        const code = [
+            `import { CallToolRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `server.setRequestHandler(CallToolRequestSchema, async () => ({ content: [] }));`,
+            `const parsed = CallToolRequestSchema.parse(x);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        expect(result.diagnostics.some(d => d.message.includes('no longer the setRequestHandler'))).toBe(false);
+    });
+
+    it('does NOT flag in a file that performs no handler registration', () => {
+        const code = [
+            `import { SubscribeRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `someValidator(SubscribeRequestSchema);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        expect(result.diagnostics.some(d => d.message.includes('no longer the setRequestHandler'))).toBe(false);
+    });
+
+    it('does NOT flag a schema consumed by a validator when setRequestHandler is only a real registration', () => {
+        // The file registers a handler for real (a call the pass rewrites); an unrelated schema-consuming
+        // call like validateSchema(S) / zodToJsonSchema(S) is not a stale registration key — only a
+        // setRequestHandler MOCK/lookup reference signals that surviving schema refs are stale.
+        const code = [
+            `import { CallToolRequestSchema, SubscribeRequestSchema } from '@modelcontextprotocol/sdk/types.js';`,
+            `server.setRequestHandler(CallToolRequestSchema, async () => ({ content: [] }));`,
+            `validateSchema(SubscribeRequestSchema);`,
+            ''
+        ].join('\n');
+        const { result } = applyWithDiagnostics(code);
+        expect(result.diagnostics.some(d => d.message.includes('no longer the setRequestHandler'))).toBe(false);
+    });
+});

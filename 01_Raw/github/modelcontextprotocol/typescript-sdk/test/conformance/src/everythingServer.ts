@@ -186,6 +186,63 @@ function createMcpServer() {
         })
     );
 
+    // SEP-2575 `server-stateless` diagnostic fixtures: the scenario hardcodes
+    // these three tool names, and at conformance alpha.8 (conformance#372) the
+    // checks behind them fail as untestable when the names are missing.
+
+    // Requires the `sampling` client capability via an MRTR createMessage
+    // input request; the scenario calls it with empty clientCapabilities and
+    // expects -32021 over HTTP 400.
+    mcpServer.registerTool(
+        'test_missing_capability',
+        {
+            description: 'SEP-2575: requires the `sampling` client capability (drives the -32021 undeclared-capability rejection)',
+            inputSchema: z.object({})
+        },
+        async (_args, ctx): Promise<CallToolResult | InputRequiredResult> => {
+            if (ctx.mcpReq.inputResponses?.['llm_answer'] === undefined) {
+                return inputRequired({
+                    inputRequests: {
+                        llm_answer: inputRequired.createMessage({
+                            messages: [{ role: 'user', content: { type: 'text', text: 'Reply with the single word: pong' } }],
+                            maxTokens: 16
+                        })
+                    }
+                });
+            }
+            return { content: [{ type: 'text', text: 'sampling round-trip complete' }] };
+        }
+    );
+
+    // A plain successful call: the check only asserts that the response stream
+    // carries no independent top-level JSON-RPC request. It must not elicit
+    // (the scenario declares no `elicitation` capability); the referee's own
+    // reference server does not elicit here either.
+    mcpServer.registerTool(
+        'test_streaming_elicitation',
+        {
+            description: 'SEP-2575: yields a response stream carrying no independent top-level JSON-RPC requests',
+            inputSchema: z.object({})
+        },
+        async (): Promise<CallToolResult> => ({
+            content: [{ type: 'text', text: 'stream observed: result frames only, no top-level requests' }]
+        })
+    );
+
+    // `ctx.mcpReq.log` is gated on the request's `_meta.logLevel`; the scenario
+    // omits it and asserts no notifications/message frame appears.
+    mcpServer.registerTool(
+        'test_logging_tool',
+        {
+            description: 'SEP-2575: logs via ctx.mcpReq.log so the no-log-without-logLevel rule is exercised',
+            inputSchema: z.object({})
+        },
+        async (_args, ctx): Promise<CallToolResult> => {
+            await ctx.mcpReq.log('info', 'test_logging_tool ran (delivered only when the request set _meta.logLevel)');
+            return { content: [{ type: 'text', text: 'logged through the request-scoped, logLevel-gated channel' }] };
+        }
+    );
+
     // Simple text tool
     mcpServer.registerTool(
         'test_simple_text',
@@ -716,9 +773,10 @@ function createMcpServer() {
     // Diagnostic tools for the input-required conformance scenarios. Each tool
     // is written write-once style: it returns `inputRequired(...)` until the
     // retried request carries the responses it needs (read from
-    // `ctx.mcpReq.inputResponses` / `ctx.mcpReq.requestState`), then completes.
-    // These tools are only meaningful toward 2026-07-28 requests; calling them
-    // on a 2025-era session fails loudly at the server seam by design.
+    // `ctx.mcpReq.inputResponses` / `ctx.mcpReq.requestState()`), then completes.
+    // The conformance scenarios drive them on 2026-07-28 requests; on a
+    // 2025-era session the default legacy shim would fulfil them by pushing
+    // real server→client requests instead.
 
     // Basic elicitation round trip. Also exercised by the result-type,
     // missing-input-response, ignore-extra-params and validate-input
@@ -821,10 +879,10 @@ function createMcpServer() {
                     requestState: await requestStateCodec.mint({ tool: 'request_state', nonce: randomUUID() })
                 });
             }
-            // The seam-level verify hook has already proven integrity by the
-            // time the handler runs; calling `verify` again here just yields
-            // the payload (and would re-reject if it somehow had not).
-            const state = ctx.mcpReq.requestState === undefined ? undefined : await requestStateCodec.verify(ctx.mcpReq.requestState, ctx);
+            // The seam-level verify hook has already proven integrity AND
+            // decoded the payload by the time the handler runs — the typed
+            // accessor returns it directly.
+            const state = ctx.mcpReq.requestState<Record<string, unknown>>();
             if (state === undefined) {
                 throw new ProtocolError(ProtocolErrorCode.InvalidParams, 'Invalid requestState: missing or failed integrity verification');
             }
@@ -878,7 +936,7 @@ function createMcpServer() {
             inputSchema: z.object({})
         },
         async (_args, ctx): Promise<CallToolResult | InputRequiredResult> => {
-            const state = ctx.mcpReq.requestState === undefined ? undefined : await requestStateCodec.verify(ctx.mcpReq.requestState, ctx);
+            const state = ctx.mcpReq.requestState<Record<string, unknown>>();
             const round = state?.tool === 'multi_round' && typeof state.round === 'number' ? state.round : 0;
             if (round === 0) {
                 return inputRequired({
@@ -928,7 +986,7 @@ function createMcpServer() {
             inputSchema: z.object({})
         },
         async (_args, ctx): Promise<CallToolResult | InputRequiredResult> => {
-            if (ctx.mcpReq.requestState !== undefined && acceptedContent(ctx.mcpReq.inputResponses, 'confirm') !== undefined) {
+            if (ctx.mcpReq.requestState() !== undefined && acceptedContent(ctx.mcpReq.inputResponses, 'confirm') !== undefined) {
                 return { content: [{ type: 'text', text: 'integrity-ok: requestState verified' }] };
             }
             return inputRequired({

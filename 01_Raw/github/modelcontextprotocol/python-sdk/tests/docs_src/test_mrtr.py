@@ -1,4 +1,4 @@
-"""`docs/advanced/multi-round-trip.md`: every claim the page makes, proved against the real SDK."""
+"""`docs/handlers/multi-round-trip.md`: every claim the page makes, proved against the real SDK."""
 
 import pytest
 from inline_snapshot import snapshot
@@ -10,13 +10,18 @@ from mcp_types import (
     CreateMessageRequestParams,
     ElicitRequest,
     ElicitRequestFormParams,
+    ElicitRequestParams,
     ElicitResult,
+    GetPromptResult,
     InputRequiredResult,
+    PromptMessage,
     TextContent,
 )
 
-from docs_src.mrtr import tutorial001, tutorial002, tutorial003
+from docs_src.mrtr import tutorial001, tutorial002, tutorial003, tutorial004, tutorial005
 from mcp import Client, MCPError
+from mcp.client import ClientRequestContext
+from mcp.server.mcpserver import InvalidRequestState
 
 # See test_index.py for why this is a per-module mark and not a conftest hook.
 pytestmark = [pytest.mark.anyio, pytest.mark.filterwarnings("error::mcp.MCPDeprecationWarning")]
@@ -109,3 +114,84 @@ def test_fulfil_refuses_a_request_it_cannot_answer() -> None:
     request = CreateMessageRequest(params=CreateMessageRequestParams(messages=[], max_tokens=64))
     with pytest.raises(NotImplementedError, match="sampling/createMessage"):
         tutorial002.fulfil(request)
+
+
+async def test_a_prompt_returns_an_input_required_result_on_the_first_round() -> None:
+    """tutorial004: `prompts/get` participates in the same flow — the `@mcp.prompt()` function
+    returns the `InputRequiredResult` itself."""
+    async with Client(tutorial004.mcp) as client:
+        result = await client.session.get_prompt("briefing", allow_input_required=True)
+        assert result == snapshot(
+            InputRequiredResult(
+                result_type="input_required",
+                input_requests={
+                    "audience": ElicitRequest(
+                        method="elicitation/create",
+                        params=ElicitRequestFormParams(
+                            mode="form",
+                            message="Who is the briefing for?",
+                            requested_schema={
+                                "type": "object",
+                                "properties": {"audience": {"type": "string"}},
+                                "required": ["audience"],
+                            },
+                        ),
+                    )
+                },
+            )
+        )
+
+
+async def _answer_audience(context: ClientRequestContext, params: ElicitRequestParams) -> ElicitResult:
+    return ElicitResult(action="accept", content={"audience": "the board"})
+
+
+async def test_the_prompt_auto_loop_returns_the_final_messages() -> None:
+    """tutorial004 + the page's client-side claim: `get_prompt` drives the same loop, so the
+    caller sees only the complete `GetPromptResult`."""
+    async with Client(tutorial004.mcp, elicitation_callback=_answer_audience) as client:
+        result = await client.get_prompt("briefing")
+        assert result == snapshot(
+            GetPromptResult(
+                description="Draft a briefing tuned to its audience.",
+                messages=[
+                    PromptMessage(
+                        role="user",
+                        content=TextContent(type="text", text="Write a briefing for the board."),
+                    )
+                ],
+            )
+        )
+
+
+def test_a_custom_codec_round_trips_what_it_sealed() -> None:
+    """tutorial005: `unseal(seal(payload))` returns the payload; the token itself is opaque hex."""
+    codec = tutorial005.EnvelopeCodec(tutorial005.unwrap_data_key())
+    token = codec.seal(b"round-1")
+    assert token.startswith(tutorial005.PREFIX)
+    assert b"round-1" not in token.encode()
+    assert codec.unseal(token) == b"round-1"
+
+
+def test_a_custom_codec_raises_invalid_request_state_for_any_bad_token() -> None:
+    """tutorial005: any token the codec did not mint intact raises `InvalidRequestState`."""
+    codec = tutorial005.EnvelopeCodec(tutorial005.unwrap_data_key())
+    token = codec.seal(b"round-1")
+    with pytest.raises(InvalidRequestState):
+        codec.unseal(token + "00")
+    with pytest.raises(InvalidRequestState):
+        codec.unseal("not-a-token")
+
+
+def test_a_custom_codec_rejects_every_alias_of_a_minted_token() -> None:
+    """tutorial005: only the exact minted string verifies; rewritten spellings of it do not."""
+    codec = tutorial005.EnvelopeCodec(tutorial005.unwrap_data_key())
+    token = codec.seal(b"round-1")
+    body = token.removeprefix(tutorial005.PREFIX)
+    for alias in (
+        body,  # prefix stripped
+        tutorial005.PREFIX + body.upper(),  # non-canonical hex case
+        tutorial005.PREFIX + body[:8] + " " + body[8:],  # whitespace bytes.fromhex would skip
+    ):
+        with pytest.raises(InvalidRequestState):
+            codec.unseal(alias)

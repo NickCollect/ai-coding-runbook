@@ -10,14 +10,25 @@
 # scenarios start passing and MUST be removed from this list (the runner fails
 # on stale entries), so the baseline burns down per milestone.
 
-client:
-  # --- Pre-existing scenarios that fail on checks added after conformance 0.1.15 ---
-  # SEP-990 (enterprise-managed authorization extension): no fixture handler /
-  # client support for the token-exchange + JWT bearer flow.
-  - auth/enterprise-managed-authorization
+client: []
 
 server:
-  # --- Draft-spec scenarios (in `--suite draft`; the `active` suite is green) ---
-  # SEP-2322 (multi-round-trip requests / IncompleteResult): the prompt pipeline
-  # cannot return InputRequiredResult from MCPServer yet (tools/call can).
-  - input-required-result-non-tool-request
+  # SEP-2663 (io.modelcontextprotocol/tasks): the SDK does not implement the
+  # tasks extension yet. These extension-tagged scenarios are selected only by
+  # the bare `--suite all` leg — extension scenarios never match a
+  # --spec-version filter and the active/draft suites exclude them — so these
+  # entries are inert for the other legs that read this file.
+  #
+  # `tasks-status-notifications` is intentionally NOT listed: the harness
+  # skips it unconditionally (pending its rewrite against subscriptions/
+  # listen), and a baseline entry for a scenario with no failing checks is
+  # flagged stale.
+  - tasks-lifecycle
+  - tasks-capability-negotiation
+  - tasks-wire-fields
+  - tasks-request-state-removal
+  - tasks-mrtr-input
+  - tasks-request-headers
+  - tasks-dispatch-and-envelope
+  - tasks-required-task-error
+  - tasks-mrtr-composition

@@ -33,6 +33,10 @@ export type {
     ToolCallback
 } from './server/mcp';
 export { McpServer, ResourceTemplate } from './server/mcp';
+// Runtime-neutral Bearer authentication for web-standard hosts; the Express
+// middleware in @modelcontextprotocol/express adapts the same core.
+export type { BearerAuthOptions, OAuthTokenVerifier } from './server/middleware/bearerAuth';
+export { bearerAuthChallengeResponse, requireBearerAuth, verifyBearerToken } from './server/middleware/bearerAuth';
 export type { HostHeaderValidationResult } from './server/middleware/hostHeaderValidation';
 export { hostHeaderValidationResponse, localhostAllowedHostnames, validateHostHeader } from './server/middleware/hostHeaderValidation';
 export type { OriginValidationResult } from './server/middleware/originValidation';
@@ -82,9 +86,10 @@ export type { CacheHint, CacheScope } from '@modelcontextprotocol/core-internal'
 
 // Multi round-trip requests (protocol revision 2026-07-28): the authoring
 // helpers a handler uses to request additional client input by returning an
-// input-required result instead of sending a server→client request.
-export type { InputRequiredSpec } from '@modelcontextprotocol/core-internal';
-export { acceptedContent, inputRequired } from '@modelcontextprotocol/core-internal';
+// input-required result instead of sending a server→client request, and the
+// typed readers for the responses a retried request carries back.
+export type { InputRequiredSpec, InputResponseView } from '@modelcontextprotocol/core-internal';
+export { acceptedContent, inputRequired, inputResponse } from '@modelcontextprotocol/core-internal';
 
 // re-export curated public API from core
 export * from '@modelcontextprotocol/core-internal/public';

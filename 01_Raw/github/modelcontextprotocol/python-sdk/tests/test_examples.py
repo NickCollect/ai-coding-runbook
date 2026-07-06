@@ -93,7 +93,6 @@ async def test_desktop(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         assert "file2.txt" in content.text
 
 
-# TODO(v2): Change back to README.md when v2 is released.
 # `--8<--` include directives lint clean as Python, so pages built from
 # `docs_src/` includes cost nothing here; the real validation of those files is
 # pyright + ruff + tests/docs_src/.
@@ -101,10 +100,15 @@ async def test_desktop(tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
     "example",
     list(
         find_examples(
-            "README.v2.md",
+            "README.md",
             "docs/index.md",
-            "docs/installation.md",
-            "docs/tutorial",
+            "docs/whats-new.md",
+            "docs/protocol-versions.md",
+            "docs/deprecated.md",
+            "docs/troubleshooting.md",
+            "docs/get-started",
+            "docs/servers",
+            "docs/handlers",
             "docs/run",
             "docs/client",
             "docs/advanced",

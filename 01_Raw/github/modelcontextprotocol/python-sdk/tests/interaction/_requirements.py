@@ -474,6 +474,25 @@ REQUIREMENTS: dict[str, Requirement] = {
             "never reused within the session."
         ),
     ),
+    "protocol:request-id:caller-supplied": Requirement(
+        source="sdk",
+        behavior=(
+            "A caller can supply the id of a request it sends, so the id is known before any response "
+            "arrives; subscriptions/listen streams are demultiplexed by exactly that id."
+        ),
+        note=(
+            f"The demux-by-listen-request-id obligation is the spec's "
+            f"({SPEC_2026_BASE_URL}/basic/patterns/subscriptions#receiving-notifications); supplying the "
+            "id up front is the SDK surface that makes it satisfiable."
+        ),
+        added_in="2026-07-28",
+        deferred=(
+            "No public API surface yet: the capability exists at the dispatcher seam "
+            "(CallOptions['request_id'], unit-tested there), but ClientSession.send_request does not "
+            "expose it. The public consumer arrives with the client-side listen driver (Client.listen), "
+            "whose interaction tests will exercise it end to end."
+        ),
+    ),
     "protocol:notifications:no-response": Requirement(
         source=f"{SPEC_BASE_URL}/basic#notifications",
         behavior=(
@@ -484,14 +503,32 @@ REQUIREMENTS: dict[str, Requirement] = {
     "protocol:cancel:abort-signal": Requirement(
         source=f"{SPEC_BASE_URL}/basic/utilities/cancellation#cancellation-flow",
         behavior=(
-            "Cancelling an in-flight request through the client API sends notifications/cancelled with "
-            "the request id and fails the local call."
+            "Abandoning an in-flight request client-side (cancelling the task awaiting it) cancels the "
+            "request itself: the server-side handler stops and the session serves later requests "
+            "normally."
         ),
-        deferred=(
-            "Not implemented in the SDK: there is no public client-side API to cancel an in-flight "
-            "request; cancellation requires hand-constructing the notification (which is how "
-            "protocol:cancel:in-flight exercises the receiving side)."
+        note=(
+            "The per-transport wire spelling (frame vs response-stream close) is pinned separately by "
+            "protocol:cancel:stream-frame and the client-transport:http:cancel-* pair."
         ),
+        arm_exclusions=(
+            ArmExclusion(
+                reason="requires-session",
+                transport="streamable-http-stateless",
+                note=(
+                    "The 2025-era cancel frame POSTs on a fresh per-request transport that shares no "
+                    "in-flight state with the blocked request, so the handler is never interrupted."
+                ),
+            ),
+        ),
+    ),
+    "protocol:cancel:abort-scoped": Requirement(
+        source=f"{SPEC_BASE_URL}/basic/utilities/cancellation#behavior-requirements",
+        behavior=(
+            "Abandoning one in-flight request cancels only that request: a concurrent request on the "
+            "same connection keeps running and returns its result."
+        ),
+        arm_exclusions=(ArmExclusion(reason="requires-session", transport="streamable-http-stateless"),),
     ),
     "protocol:cancel:handler-abort-propagates": Requirement(
         source=f"{SPEC_BASE_URL}/basic/utilities/cancellation#behavior-requirements",
@@ -549,6 +586,16 @@ REQUIREMENTS: dict[str, Requirement] = {
             ArmExclusion(reason="server-initiated-request", transport="streamable-http-stateless"),
             ArmExclusion(reason="server-initiated-request", spec_version="2026-07-28"),
         ),
+    ),
+    "protocol:cancel:stream-frame": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic/patterns/cancellation#transport-specific-cancellation",
+        behavior=(
+            "On stream (stdio-shaped) wires at 2026-07-28, abandoning an in-flight request sends exactly "
+            "one notifications/cancelled naming its request id - streams keep the frame spelling of "
+            "cancellation that streamable HTTP dropped."
+        ),
+        added_in="2026-07-28",
+        note="Exercised over the in-memory stream pair, the same dual-era wire stdio serves.",
     ),
     "protocol:cancel:unknown-id-ignored": Requirement(
         source=f"{SPEC_BASE_URL}/basic/utilities/cancellation#error-handling",
@@ -2384,6 +2431,69 @@ REQUIREMENTS: dict[str, Requirement] = {
         ),
     ),
     # ═══════════════════════════════════════════════════════════════════════════
+    # Extensions (SEP-2133): client-side result claims and the capability ad
+    # ═══════════════════════════════════════════════════════════════════════════
+    "extensions:client:claimed-result-resolved": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic#resulttype",
+        behavior=(
+            "A tools/call answered with an extension-claimed resultType is finished by the owning "
+            "ClientExtension's claim resolver, and Client.call_tool returns the resolver's ordinary "
+            "CallToolResult. The resolver may send follow-up requests through the session it is handed."
+        ),
+        added_in="2026-07-28",
+    ),
+    "extensions:client:claimed-result-undeclared-invalid": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic#resulttype",
+        behavior=(
+            "A resultType unrecognized by the client is invalid: a claimed shape delivered to a client that "
+            "did not construct the owning extension fails result validation (the supported set is core plus "
+            "declared claims, never more)."
+        ),
+        added_in="2026-07-28",
+        note=(
+            "Known leniency: the monolith result surface still accepts an unknown tag when the payload "
+            "also parses as a complete core result (open result_type, extras ignored). Rejecting tags "
+            "outside core plus active claims is a tracked follow-up ruling."
+        ),
+    ),
+    "extensions:client:capability-ad:gates-server-behaviour": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic#resulttype",
+        behavior=(
+            "The per-request _meta capability ad carries each declared extension's identifier and settings, "
+            "and is what entitles the server to substitute that extension's claimed shapes: a server "
+            "extension gating on the ad sees the declared settings, and refuses a non-declaring client with "
+            "-32021 (missing required client capability)."
+        ),
+        added_in="2026-07-28",
+    ),
+    "extensions:client:capability-ad:legacy-omits-claimed": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic#resulttype",
+        behavior=(
+            "On a legacy connection no claim can activate, and the initialize capability ad omits "
+            "claim-bearing identifiers in the same breath (claim-less identifiers still advertise), so the "
+            "client never advertises an extension whose claimed shapes it would reject."
+        ),
+        removed_in="2026-07-28",
+        note=(
+            "The legacy-era half of the ad/claims coupling: only a handshake connection can exhibit it, so "
+            "the version window ends where the modern era begins."
+        ),
+        arm_exclusions=(ArmExclusion(reason="requires-session", transport="streamable-http-stateless"),),
+    ),
+    "extensions:client:notification-binding-delivery": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic#resulttype",
+        behavior=(
+            "A vendor server notification bound by a ClientExtension's NotificationBinding is validated "
+            "against the binding's params type and delivered to its handler serially, in dispatch order."
+        ),
+        added_in="2026-07-28",
+        deferred=(
+            "Covered at session tier by tests/client/test_session_notification_bindings.py: no public "
+            "server-side surface emits vendor-method notifications (ServerNotification is a closed union), "
+            "and HTTP-modern arrival additionally needs the subscriptions/listen client runtime."
+        ),
+    ),
+    # ═══════════════════════════════════════════════════════════════════════════
     # Transports (in-suite coverage)
     # ═══════════════════════════════════════════════════════════════════════════
     "transport:streamable-http:stateful": Requirement(
@@ -3193,6 +3303,30 @@ REQUIREMENTS: dict[str, Requirement] = {
         transports=("streamable-http",),
         note="Only observable over HTTP: Accept is an HTTP request header.",
     ),
+    "client-transport:http:cancel-closes-stream": Requirement(
+        source=f"{SPEC_2026_BASE_URL}/basic/transports/streamable-http#cancellation",
+        behavior=(
+            "At 2026-07-28, abandoning an in-flight request closes that request's own POST stream and "
+            "posts nothing further: no notifications/cancelled reaches the server (the revision defines "
+            "no client-to-server notifications), and the server treats the disconnect as cancellation "
+            "of exactly that request."
+        ),
+        transports=("streamable-http",),
+        added_in="2026-07-28",
+        supersedes=("client-transport:http:cancel-posts-frame",),
+        note="HTTP-only by nature: the response stream that closing constitutes the signal is an HTTP exchange.",
+    ),
+    "client-transport:http:cancel-posts-frame": Requirement(
+        source=f"{SPEC_BASE_URL}/basic/utilities/cancellation#cancellation-flow",
+        behavior=(
+            "At 2025-era revisions, abandoning an in-flight request POSTs exactly one "
+            "notifications/cancelled naming its request id."
+        ),
+        transports=("streamable-http",),
+        removed_in="2026-07-28",
+        superseded_by="client-transport:http:cancel-closes-stream",
+        note="HTTP-only by nature: pins that the frame travels as its own POST on the legacy HTTP wire.",
+    ),
     "client-transport:http:concurrent-streams": Requirement(
         source="sdk",
         behavior="Multiple concurrent POST-initiated SSE streams each deliver their response to the right caller.",
@@ -3340,6 +3474,19 @@ REQUIREMENTS: dict[str, Requirement] = {
         added_in="2026-07-28",
         transports=("streamable-http",),
         note="Only observable over streamable HTTP: headers are derived from the cached tool schema at the seam.",
+    ),
+    "client-transport:http:vendor-name-param-header": Requirement(
+        source="sdk",
+        behavior=(
+            "A vendor request type declaring name_param mirrors that wire-params key into the Mcp-Name "
+            "header of its outgoing HTTP request, with no client-side registration of the method."
+        ),
+        added_in="2026-07-28",
+        transports=("streamable-http",),
+        note=(
+            "SDK mechanism honouring the per-extension Mcp-Name requirements (e.g. SEP-2663 mandates the "
+            "header for tasks/*); only observable over streamable HTTP, where headers exist."
+        ),
     ),
     "client-transport:http:stateless-ignores-session-id": Requirement(
         source=f"{SPEC_2026_BASE_URL}/basic/transports#stateless-request-headers",

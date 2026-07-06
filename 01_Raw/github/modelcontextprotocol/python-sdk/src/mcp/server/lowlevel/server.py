@@ -38,7 +38,7 @@ from __future__ import annotations
 
 import logging
 import warnings
-from collections.abc import AsyncIterator, Awaitable, Callable
+from collections.abc import AsyncIterator, Awaitable, Callable, Mapping
 from contextlib import AbstractAsyncContextManager, asynccontextmanager
 from dataclasses import dataclass
 from importlib.metadata import version as importlib_version
@@ -59,9 +59,10 @@ from mcp.server.auth.middleware.bearer_auth import BearerAuthBackend, RequireAut
 from mcp.server.auth.provider import OAuthAuthorizationServerProvider, TokenVerifier
 from mcp.server.auth.routes import build_resource_metadata_url, create_auth_routes, create_protected_resource_routes
 from mcp.server.auth.settings import AuthSettings
+from mcp.server.caching import CacheableMethod, CacheHint, validate_cache_hints
 from mcp.server.context import HandlerResult, ServerMiddleware, ServerRequestContext
 from mcp.server.models import InitializationOptions
-from mcp.server.runner import serve_loop
+from mcp.server.runner import serve_dual_era_loop
 from mcp.server.streamable_http import EventStore
 from mcp.server.streamable_http_manager import StreamableHTTPASGIApp, StreamableHTTPSessionManager
 from mcp.server.transport_security import TransportSecuritySettings
@@ -140,6 +141,7 @@ class Server(Generic[LifespanResultT]):
         instructions: str | None = None,
         website_url: str | None = None,
         icons: list[types.Icon] | None = None,
+        cache_hints: Mapping[CacheableMethod, CacheHint] | None = None,
         lifespan: Callable[
             [Server[LifespanResultT]],
             AbstractAsyncContextManager[LifespanResultT],
@@ -222,6 +224,7 @@ class Server(Generic[LifespanResultT]):
         instructions: str | None = None,
         website_url: str | None = None,
         icons: list[types.Icon] | None = None,
+        cache_hints: Mapping[CacheableMethod, CacheHint] | None = None,
         lifespan: Callable[
             [Server[LifespanResultT]],
             AbstractAsyncContextManager[LifespanResultT],
@@ -313,6 +316,7 @@ class Server(Generic[LifespanResultT]):
         instructions: str | None = None,
         website_url: str | None = None,
         icons: list[types.Icon] | None = None,
+        cache_hints: Mapping[CacheableMethod, CacheHint] | None = None,
         lifespan: Callable[
             [Server[LifespanResultT]],
             AbstractAsyncContextManager[LifespanResultT],
@@ -420,6 +424,9 @@ class Server(Generic[LifespanResultT]):
         self.instructions = instructions
         self.website_url = website_url
         self.icons = icons
+        # Per-method `ttl_ms`/`cache_scope` fills, applied by `ServerRunner`
+        # after the handler returns; fields the handler set explicitly win.
+        self.cache_hints: dict[str, CacheHint] = validate_cache_hints(cache_hints)
         self.lifespan = lifespan
         self._request_handlers: dict[str, HandlerEntry[LifespanResultT]] = {}
         self._notification_handlers: dict[str, HandlerEntry[LifespanResultT]] = {}
@@ -434,6 +441,10 @@ class Server(Generic[LifespanResultT]):
         # Context/middleware rework (covariant `Context[L]`, outbound seam) before
         # v2 final.
         self.middleware: list[ServerMiddleware[LifespanResultT]] = [OpenTelemetryMiddleware()]
+        # SEP-2133 extension settings advertised under `ServerCapabilities.extensions`
+        # (identifier -> settings). Higher layers (e.g. `MCPServer(extensions=...)`)
+        # populate it; `get_capabilities` reads it when no explicit map is passed.
+        self.extensions: dict[str, dict[str, Any]] = {}
         logger.debug("Initializing server %r", name)
 
         _spec_requests: list[tuple[str, type[BaseModel], RequestHandler[LifespanResultT, Any] | None]] = [
@@ -521,8 +532,15 @@ class Server(Generic[LifespanResultT]):
         self,
         notification_options: NotificationOptions | None = None,
         experimental_capabilities: dict[str, dict[str, Any]] | None = None,
+        extensions: dict[str, dict[str, Any]] | None = None,
     ) -> InitializationOptions:
-        """Create initialization options from this server instance."""
+        """Create initialization options from this server instance.
+
+        `extensions` advertises SEP-2133 extension support under
+        `ServerCapabilities.extensions`; keys are extension identifiers (e.g.
+        `io.modelcontextprotocol/ui`), values are per-extension settings.
+        Defaults to `self.extensions`, which higher layers populate.
+        """
         return InitializationOptions(
             server_name=self.name,
             server_version=self.version if self.version else _package_version("mcp"),
@@ -531,6 +549,7 @@ class Server(Generic[LifespanResultT]):
             capabilities=self.get_capabilities(
                 notification_options or NotificationOptions(),
                 experimental_capabilities or {},
+                extensions if extensions is not None else self.extensions,
             ),
             instructions=self.instructions,
             website_url=self.website_url,
@@ -541,8 +560,24 @@ class Server(Generic[LifespanResultT]):
         self,
         notification_options: NotificationOptions | None = None,
         experimental_capabilities: dict[str, dict[str, Any]] | None = None,
+        extensions: dict[str, dict[str, Any]] | None = None,
+        *,
+        protocol_version: str | None = None,
     ) -> types.ServerCapabilities:
-        """Convert existing handlers to a ServerCapabilities object."""
+        """Convert existing handlers to a ServerCapabilities object.
+
+        `extensions` is the SEP-2133 extension map (identifier -> settings)
+        advertised under `ServerCapabilities.extensions`; it defaults to
+        `self.extensions`.
+
+        `protocol_version` makes the subscription-delivered bits era-honest:
+        at 2026-07-28+ versions, change notifications are delivered only on
+        `subscriptions/listen` streams, so the `listChanged` flags and
+        `resources.subscribe` derive from whether that method is served -
+        `notification_options` and the legacy `resources/subscribe` handler
+        (which the modern wire cannot dispatch) are ignored. When omitted, the
+        handshake-era derivation applies unchanged.
+        """
         notification_options = notification_options or NotificationOptions()
         prompts_capability = None
         resources_capability = None
@@ -550,20 +585,29 @@ class Server(Generic[LifespanResultT]):
         logging_capability = None
         completions_capability = None
 
+        if protocol_version in MODERN_PROTOCOL_VERSIONS:
+            listen_served = "subscriptions/listen" in self._request_handlers
+            prompts_changed = tools_changed = resources_changed = subscribe = listen_served
+        else:
+            prompts_changed = notification_options.prompts_changed
+            tools_changed = notification_options.tools_changed
+            resources_changed = notification_options.resources_changed
+            subscribe = "resources/subscribe" in self._request_handlers
+
         # Set prompt capabilities if handler exists
         if "prompts/list" in self._request_handlers:
-            prompts_capability = types.PromptsCapability(list_changed=notification_options.prompts_changed)
+            prompts_capability = types.PromptsCapability(list_changed=prompts_changed)
 
         # Set resource capabilities if handler exists
         if "resources/list" in self._request_handlers:
             resources_capability = types.ResourcesCapability(
-                subscribe="resources/subscribe" in self._request_handlers,
-                list_changed=notification_options.resources_changed,
+                subscribe=subscribe,
+                list_changed=resources_changed,
             )
 
         # Set tool capabilities if handler exists
         if "tools/list" in self._request_handlers:
-            tools_capability = types.ToolsCapability(list_changed=notification_options.tools_changed)
+            tools_capability = types.ToolsCapability(list_changed=tools_changed)
 
         # Set logging capabilities if handler exists
         if "logging/setLevel" in self._request_handlers:
@@ -579,6 +623,7 @@ class Server(Generic[LifespanResultT]):
             tools=tools_capability,
             logging=logging_capability,
             experimental=experimental_capabilities,
+            extensions=extensions if extensions is not None else (self.extensions or None),
             completions=completions_capability,
         )
         return capabilities
@@ -612,7 +657,7 @@ class Server(Generic[LifespanResultT]):
         """
         return types.DiscoverResult(
             supported_versions=list(MODERN_PROTOCOL_VERSIONS),
-            capabilities=self.get_capabilities(),
+            capabilities=self.get_capabilities(protocol_version=ctx.protocol_version),
             server_info=self.server_info,
             instructions=self.instructions,
         )
@@ -644,12 +689,14 @@ class Server(Generic[LifespanResultT]):
     ) -> None:
         """Serve a single connection over the given streams until the read side closes.
 
-        Thin wrapper over `serve_loop`: enters the server lifespan,
-        then drives the loop. Transports with their own lifespan owner
-        (the streamable-HTTP manager) call `serve_loop` directly instead.
+        Thin wrapper over `serve_dual_era_loop`: enters the server lifespan,
+        then drives the loop, serving the legacy handshake era and the modern
+        per-request-envelope era (the first era-distinctive message to succeed
+        locks the connection). Transports with their own lifespan owner (the
+        streamable-HTTP manager) call `serve_loop` directly instead.
         """
         async with self.lifespan(self) as lifespan_context:
-            await serve_loop(
+            await serve_dual_era_loop(
                 self,
                 read_stream,
                 write_stream,

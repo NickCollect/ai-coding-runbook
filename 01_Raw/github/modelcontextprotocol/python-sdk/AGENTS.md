@@ -12,8 +12,7 @@
   shim) must be documented in `docs/migration.md`.
 - `v1.x` is the release branch for the current stable line. Backport PRs target
   this branch and use a `[v1.x]` title prefix.
-- `README.md` is frozen at v1 (a pre-commit hook rejects edits). Edit
-  `README.v2.md` instead.
+- `README.md` documents v2. The v1 README lives on the `v1.x` branch.
 
 ## Package Management
 
@@ -139,9 +138,10 @@ rather than adding new standalone sections.
 ## Documentation
 
 When a change affects public API or user-visible behaviour, update the relevant
-page(s) under `docs/` in the same PR. Docs are organised by topic
-(`tutorial/`, `client/`, `run/`, `advanced/`) — find the page covering the
-feature you touched rather than adding a new one.
+page(s) under `docs/` in the same PR. Docs are organised by the `nav:` sections
+in `mkdocs.yml` (Get started, Servers, Inside your handler, Running your server,
+Clients, Advanced), not by the on-disk directory names. Find the page covering
+the feature you touched in `mkdocs.yml` rather than adding a new one.
 
 ## Formatting & Type Checking
 

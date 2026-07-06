@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import base64
 import inspect
-from collections.abc import AsyncIterator, Awaitable, Callable, Iterable
+from collections.abc import AsyncIterator, Awaitable, Callable, Iterable, Mapping, Sequence
 from contextlib import AbstractAsyncContextManager, asynccontextmanager
 from typing import Any, Generic, Literal, TypeVar, overload
 
@@ -13,10 +13,13 @@ import pydantic_core
 from mcp_types import (
     INTERNAL_ERROR,
     INVALID_PARAMS,
+    METHOD_NOT_FOUND,
+    MISSING_REQUIRED_CLIENT_CAPABILITY,
     Annotations,
     BlobResourceContents,
     CallToolRequestParams,
     CallToolResult,
+    ClientCapabilities,
     CompleteRequestParams,
     CompleteResult,
     Completion,
@@ -28,6 +31,7 @@ from mcp_types import (
     ListResourcesResult,
     ListResourceTemplatesResult,
     ListToolsResult,
+    MissingRequiredClientCapabilityErrorData,
     PaginatedRequestParams,
     ReadResourceRequestParams,
     ReadResourceResult,
@@ -54,7 +58,15 @@ from mcp.server.auth.middleware.auth_context import AuthContextMiddleware
 from mcp.server.auth.middleware.bearer_auth import BearerAuthBackend, RequireAuthMiddleware
 from mcp.server.auth.provider import OAuthAuthorizationServerProvider, ProviderTokenVerifier, TokenVerifier
 from mcp.server.auth.settings import AuthSettings
-from mcp.server.context import ServerRequestContext
+from mcp.server.caching import CacheableMethod, CacheHint
+from mcp.server.context import HandlerResult, ServerRequestContext
+from mcp.server.extension import (
+    Extension,
+    MethodBinding,
+    RequestHandler,
+    compose_tool_call_interceptor,
+    validate_extension_identifier,
+)
 from mcp.server.lowlevel.helper_types import ReadResourceContents
 from mcp.server.lowlevel.server import LifespanResultT, Server
 from mcp.server.lowlevel.server import lifespan as default_lifespan
@@ -71,10 +83,12 @@ from mcp.server.mcpserver.resources import (
 from mcp.server.mcpserver.tools import Tool, ToolManager
 from mcp.server.mcpserver.utilities.context_injection import find_context_parameter
 from mcp.server.mcpserver.utilities.logging import configure_logging, get_logger
+from mcp.server.request_state import RequestStateBoundary, RequestStateSecurity
 from mcp.server.sse import SseServerTransport
 from mcp.server.stdio import stdio_server
 from mcp.server.streamable_http import EventStore
 from mcp.server.streamable_http_manager import StreamableHTTPSessionManager
+from mcp.server.subscriptions import InMemorySubscriptionBus, ListenHandler, SubscriptionBus
 from mcp.server.transport_security import TransportSecuritySettings
 from mcp.shared.exceptions import MCPError
 from mcp.shared.uri_template import UriTemplate
@@ -121,6 +135,15 @@ class Settings(BaseSettings, Generic[LifespanResultT]):
     auth: AuthSettings | None
 
 
+_MISSING_AUDIENCE = (
+    "request_state_security is configured but this server has no name. Sealed\n"
+    "requestState carries the server name as an audience claim, so state minted by\n"
+    "another service that shares the same keys is rejected; unnamed servers would\n"
+    "all stamp the same placeholder and the check would mean nothing. Name the\n"
+    'server (MCPServer("my-service", ...)) or set RequestStateSecurity(audience=...).'
+)
+
+
 def lifespan_wrapper(
     app: MCPServer[LifespanResultT],
     lifespan: Callable[[MCPServer[LifespanResultT]], AbstractAsyncContextManager[LifespanResultT]],
@@ -148,6 +171,7 @@ class MCPServer(Generic[LifespanResultT]):
         *,
         tools: list[Tool] | None = None,
         resources: list[Resource] | None = None,
+        extensions: Sequence[Extension] | None = None,
         debug: bool = False,
         log_level: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO",
         warn_on_duplicate_resources: bool = True,
@@ -157,6 +181,9 @@ class MCPServer(Generic[LifespanResultT]):
         lifespan: Callable[[MCPServer[LifespanResultT]], AbstractAsyncContextManager[LifespanResultT]] | None = None,
         auth: AuthSettings | None = None,
         resource_security: ResourceSecurity = DEFAULT_RESOURCE_SECURITY,
+        request_state_security: RequestStateSecurity | None = None,
+        cache_hints: Mapping[CacheableMethod, CacheHint] | None = None,
+        subscriptions: SubscriptionBus | None = None,
     ):
         self._resource_security = resource_security
         self.settings = Settings(
@@ -176,6 +203,10 @@ class MCPServer(Generic[LifespanResultT]):
             resources=resources, warn_on_duplicate_resources=self.settings.warn_on_duplicate_resources
         )
         self._prompt_manager = PromptManager(warn_on_duplicate_prompts=self.settings.warn_on_duplicate_prompts)
+        # The subscriptions/listen fan-out seam (2026-07-28). The default bus is
+        # in-process; pass an `SubscriptionBus` implementation over an external pub/sub
+        # backend to fan events out across replicas.
+        self._subscriptions: SubscriptionBus = subscriptions if subscriptions is not None else InMemorySubscriptionBus()
         self._lowlevel_server = Server(
             name=name or "mcp-server",
             title=title,
@@ -184,6 +215,7 @@ class MCPServer(Generic[LifespanResultT]):
             website_url=website_url,
             icons=icons,
             version=version,
+            cache_hints=cache_hints,
             on_list_tools=self._handle_list_tools,
             on_call_tool=self._handle_call_tool,
             on_list_resources=self._handle_list_resources,
@@ -191,10 +223,22 @@ class MCPServer(Generic[LifespanResultT]):
             on_list_resource_templates=self._handle_list_resource_templates,
             on_list_prompts=self._handle_list_prompts,
             on_get_prompt=self._handle_get_prompt,
+            on_subscriptions_listen=ListenHandler(self._subscriptions),
             # TODO(Marcelo): It seems there's a type mismatch between the lifespan type from an MCPServer and Server.
             # We need to create a Lifespan type that is a generic on the server type, like Starlette does.
             lifespan=(lifespan_wrapper(self, self.settings.lifespan) if self.settings.lifespan else default_lifespan),  # type: ignore
         )
+        # Ordering: inside OpenTelemetry (spans record the sealed wire form),
+        # outside extension interceptors (extensions see plaintext).
+        if request_state_security is None:
+            security = RequestStateSecurity.ephemeral()
+        else:
+            # A supplied policy usually means shared keys, where the audience claim is
+            # what separates services; an unnamed server would stamp the placeholder.
+            if not name and request_state_security.audience is None:
+                raise ValueError(_MISSING_AUDIENCE)
+            security = request_state_security
+        self._lowlevel_server.middleware.append(RequestStateBoundary(security, default_audience=self.name))
         # Validate auth configuration
         if self.settings.auth is not None:
             if auth_server_provider and token_verifier:  # pragma: no cover
@@ -214,6 +258,11 @@ class MCPServer(Generic[LifespanResultT]):
 
         # Configure logging
         configure_logging(self.settings.log_level)
+
+        self._extensions: list[Extension] = []
+        for extension in extensions or ():
+            self._apply_extension(extension)
+        self._install_extension_interceptor()
 
     @property
     def name(self) -> str:
@@ -254,6 +303,44 @@ class MCPServer(Generic[LifespanResultT]):
             RuntimeError: If called before streamable_http_app() has been called.
         """
         return self._lowlevel_server.session_manager
+
+    def _apply_extension(self, extension: Extension) -> None:
+        """Apply one opt-in extension's contributions through the public surface.
+
+        Registers its tools/resources/methods and advertises its settings under
+        `ServerCapabilities.extensions[extension.identifier]`. Extensions are fixed
+        at construction, so this is private; the `tools/call` interceptor is
+        composed once afterwards by `_install_extension_interceptor`.
+        """
+        identifier = getattr(extension, "identifier", None)
+        validate_extension_identifier(identifier, owner=type(extension).__name__)
+        if any(e.identifier == identifier for e in self._extensions):
+            raise ValueError(f"Extension {identifier!r} is already registered")
+        self._extensions.append(extension)
+
+        for tool in extension.tools():
+            self.add_tool(tool.fn, meta=tool.meta, **tool.kwargs)
+        for resource in extension.resources():
+            self.add_resource(resource.resource)
+        for method in extension.methods():
+            if self._lowlevel_server.get_request_handler(method.method) is not None:
+                raise ValueError(
+                    f"Extension {identifier!r} binds method {method.method!r}, which is already "
+                    "registered; extension methods are additive and cannot replace another handler"
+                )
+            handler = _version_gated(method) if method.protocol_versions is not None else method.handler
+            self._lowlevel_server.add_request_handler(method.method, method.params_type, handler)
+
+        self._lowlevel_server.extensions[extension.identifier] = extension.settings()
+
+    def _install_extension_interceptor(self) -> None:
+        """Compose every extension's `tools/call` interceptor into one middleware.
+
+        Installed only when at least one extension overrides `intercept_tool_call`,
+        so a server with purely additive extensions adds no middleware.
+        """
+        if any(type(e).intercept_tool_call is not Extension.intercept_tool_call for e in self._extensions):
+            self._lowlevel_server.middleware.append(compose_tool_call_interceptor(self._extensions))
 
     @overload
     def run(self, transport: Literal["stdio"] = ...) -> None: ...
@@ -316,7 +403,7 @@ class MCPServer(Generic[LifespanResultT]):
     async def _handle_call_tool(
         self, ctx: ServerRequestContext[LifespanResultT], params: CallToolRequestParams
     ) -> CallToolResult | InputRequiredResult:
-        context = Context(request_context=ctx, mcp_server=self, input_params=params)
+        context = Context(request_context=ctx, mcp_server=self, input_params=params, subscriptions=self._subscriptions)
         try:
             return await self.call_tool(params.name, params.arguments or {}, context)
         except MCPError:
@@ -331,14 +418,16 @@ class MCPServer(Generic[LifespanResultT]):
 
     async def _handle_read_resource(
         self, ctx: ServerRequestContext[LifespanResultT], params: ReadResourceRequestParams
-    ) -> ReadResourceResult:
-        context = Context(request_context=ctx, mcp_server=self, input_params=params)
+    ) -> ReadResourceResult | InputRequiredResult:
+        context = Context(request_context=ctx, mcp_server=self, input_params=params, subscriptions=self._subscriptions)
         try:
             results = await self.read_resource(params.uri, context)
         except ResourceNotFoundError as err:
             raise MCPError(code=INVALID_PARAMS, message=str(err), data={"uri": str(params.uri)})
         except ResourceError as err:
             raise MCPError(code=INTERNAL_ERROR, message=str(err), data={"uri": str(params.uri)})
+        if isinstance(results, InputRequiredResult):
+            return results
         contents: list[TextResourceContents | BlobResourceContents] = []
         for item in results:
             if isinstance(item.content, bytes):
@@ -373,8 +462,8 @@ class MCPServer(Generic[LifespanResultT]):
 
     async def _handle_get_prompt(
         self, ctx: ServerRequestContext[LifespanResultT], params: GetPromptRequestParams
-    ) -> GetPromptResult:
-        context = Context(request_context=ctx, mcp_server=self, input_params=params)
+    ) -> GetPromptResult | InputRequiredResult:
+        context = Context(request_context=ctx, mcp_server=self, input_params=params, subscriptions=self._subscriptions)
         return await self.get_prompt(params.name, params.arguments, context)
 
     async def list_tools(self) -> list[MCPTool]:
@@ -399,7 +488,7 @@ class MCPServer(Generic[LifespanResultT]):
     ) -> CallToolResult | InputRequiredResult:
         """Call a tool by name with arguments."""
         if context is None:
-            context = Context(mcp_server=self)
+            context = Context(mcp_server=self, subscriptions=self._subscriptions)
         return await self._tool_manager.call_tool(name, arguments, context, convert_result=True)
 
     async def list_resources(self) -> list[MCPResource]:
@@ -438,20 +527,29 @@ class MCPServer(Generic[LifespanResultT]):
 
     async def read_resource(
         self, uri: AnyUrl | str, context: Context[LifespanResultT, Any] | None = None
-    ) -> Iterable[ReadResourceContents]:
+    ) -> Iterable[ReadResourceContents] | InputRequiredResult:
         """Read a resource by URI.
+
+        An `InputRequiredResult` returned by a resource template function is
+        passed through unchanged (the 2026-07-28 multi-round-trip flow); the
+        retry's answers arrive on `ctx.input_responses`, with
+        `ctx.request_state` carrying the echoed opaque state.
 
         Raises:
             ResourceNotFoundError: If no resource or template matches the URI.
             ResourceError: If template creation or resource reading fails.
         """
         if context is None:
-            context = Context(mcp_server=self)
+            context = Context(mcp_server=self, subscriptions=self._subscriptions)
         resource = await self._resource_manager.get_resource(uri, context)
+        if isinstance(resource, InputRequiredResult):
+            return resource
 
         try:
             content = await resource.read()
             return [ReadResourceContents(content=content, mime_type=resource.mime_type, meta=resource.meta)]
+        except MCPError:
+            raise
         except Exception as exc:
             logger.exception(f"Error getting resource {uri}")
             # If an exception happens when reading the resource, we should not leak the exception to the client.
@@ -638,6 +736,9 @@ class MCPServer(Generic[LifespanResultT]):
         The function can return:
         - str for text content
         - bytes for binary content
+        - an InputRequiredResult (template resources only; passed through
+          unchanged for the 2026-07-28 multi-round-trip flow — read
+          `ctx.input_responses` on the retry)
         - other types will be converted to JSON
 
         If the URI contains parameters (e.g. "resource://{param}"), it is
@@ -785,6 +886,17 @@ class MCPServer(Generic[LifespanResultT]):
         """
         self._prompt_manager.add_prompt(prompt)
 
+    def remove_prompt(self, name: str) -> None:
+        """Remove a prompt from the server by name.
+
+        Args:
+            name: The name of the prompt to remove
+
+        Raises:
+            ValueError: If the prompt does not exist
+        """
+        self._prompt_manager.remove_prompt(name)
+
     def prompt(
         self,
         name: str | None = None,
@@ -793,6 +905,11 @@ class MCPServer(Generic[LifespanResultT]):
         icons: list[Icon] | None = None,
     ) -> Callable[[_CallableT], _CallableT]:
         """Decorator to register a prompt.
+
+        The function returns the prompt messages (a string, `Message`, dict,
+        or a sequence of these), or an `InputRequiredResult` to request
+        client input first (the 2026-07-28 multi-round-trip flow — read
+        `ctx.input_responses` on the retry).
 
         Args:
             name: Optional name for the prompt (defaults to function name)
@@ -1134,21 +1251,78 @@ class MCPServer(Generic[LifespanResultT]):
 
     async def get_prompt(
         self, name: str, arguments: dict[str, Any] | None = None, context: Context[LifespanResultT, Any] | None = None
-    ) -> GetPromptResult:
-        """Get a prompt by name with arguments."""
+    ) -> GetPromptResult | InputRequiredResult:
+        """Get a prompt by name with arguments.
+
+        An `InputRequiredResult` returned by the prompt function is passed
+        through unchanged (the 2026-07-28 multi-round-trip flow); the retry's
+        answers arrive on `ctx.input_responses`, with `ctx.request_state`
+        carrying the echoed opaque state.
+        """
         if context is None:
-            context = Context(mcp_server=self)
+            context = Context(mcp_server=self, subscriptions=self._subscriptions)
         try:
             prompt = self._prompt_manager.get_prompt(name)
             if not prompt:
                 raise ValueError(f"Unknown prompt: {name}")
 
-            messages = await prompt.render(arguments, context)
+            rendered = await prompt.render(arguments, context)
+            if isinstance(rendered, InputRequiredResult):
+                return rendered
 
             return GetPromptResult(
                 description=prompt.description,
-                messages=pydantic_core.to_jsonable_python(messages),
+                messages=pydantic_core.to_jsonable_python(rendered),
             )
+        except MCPError:
+            raise
         except Exception as e:
             logger.exception(f"Error getting prompt {name}")
             raise ValueError(str(e)) from e
+
+
+def _version_gated(method: MethodBinding) -> RequestHandler:
+    """Wrap a method handler so a request at a disallowed protocol version is rejected.
+
+    The low-level `_request_handlers` dict is keyed by method only, so per-version
+    scoping is enforced here rather than at the runner's boundary table.
+    """
+    versions = method.protocol_versions
+    assert versions is not None
+
+    async def gated(ctx: ServerRequestContext[Any, Any], params: Any) -> HandlerResult:
+        if ctx.protocol_version not in versions:
+            raise MCPError(code=METHOD_NOT_FOUND, message="Method not found", data=method.method)
+        return await method.handler(ctx, params)
+
+    return gated
+
+
+def require_client_extension(ctx: ServerRequestContext[Any, Any], identifier: str) -> None:
+    """Assert the connected client declared support for `identifier`.
+
+    Call this from an extension's handler or `intercept_tool_call` before
+    offering extension-specific behaviour. Raises `MCPError` with the
+    `-32021` (missing required client capability) code and a
+    `requiredCapabilities` payload when the client did not declare the
+    extension, per SEP-2133.
+
+    Args:
+        ctx: The current request context.
+        identifier: The extension identifier the client must have declared.
+
+    Raises:
+        MCPError: With code `MISSING_REQUIRED_CLIENT_CAPABILITY` if the client
+            did not advertise `identifier`.
+    """
+    client_params = ctx.session.client_params
+    declared = client_params.capabilities.extensions if client_params else None
+    if not declared or identifier not in declared:
+        data = MissingRequiredClientCapabilityErrorData(
+            required_capabilities=ClientCapabilities(extensions={identifier: {}})
+        )
+        raise MCPError(
+            code=MISSING_REQUIRED_CLIENT_CAPABILITY,
+            message=f"Client did not declare required extension {identifier!r}",
+            data=data.model_dump(by_alias=True, mode="json", exclude_none=True),
+        )
