@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-06-22T06:24:56.927153+00:00
+fetched_at: 2026-07-06T05:06:04.568172+00:00
 title: "Frontier Red Team \\ Anthropic"
 ---
 
@@ -10,15 +10,17 @@ title: "Frontier Red Team \\ Anthropic"
 
 The Frontier Red Team stress-tests AI systems to understand the full extent of their current capabilities and anticipate what comes next. We provide evidence-based analysis about AI’s implications for cybersecurity, national security, and autonomous systems.
 
-Research
+Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
-## Project Deal
+Frontier Red Team
 
-We created a marketplace for employees in our San Francisco office, with one big twist. We tasked Claude with buying, selling and negotiating on our colleagues’ behalf.
+## Project Fetch: Phase two
 
-[Read more](https://www.anthropic.com/features/project-deal)
+We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated (and amusing) robotics tasks.
 
-[](https://cdn.sanity.io/files/4zrzovbb/website/94b7269de5df2e0c81d941bc88181db7980d1f9f.mp4)
+[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+
+[](https://cdn.sanity.io/files/4zrzovbb/website/7c87b95dea9287e1900110b24d343d0f401fa7b0.mp4)
 
 ## Publications
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economic-research
-fetched_at: 2026-06-29T05:27:02.369635+00:00
+fetched_at: 2026-07-06T05:06:06.318172+00:00
 title: "Economic Research \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ title: "Economic Research \\ Anthropic"
 
 The Economic Research team studies how AI is reshaping the economy, including work, productivity, and economic opportunity. Through rigorous data collection and analysis, we track AI's real-world economic effects and publish research that helps policymakers, businesses, and the public understand and prepare for the changes ahead.
 
-Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
+Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
 ### What We Do
 

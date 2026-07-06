@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/societal-impacts
-fetched_at: 2026-06-08T05:27:09.151220+00:00
+fetched_at: 2026-07-06T05:06:08.548480+00:00
 title: "Societal Impacts Research \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ title: "Societal Impacts Research \\ Anthropic"
 
 Working closely with the Anthropic Policy and Safeguards teams, Societal Impacts is a technical research team that explores how AI is used in the real world.
 
-Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)
+Research teams:[Alignment](https://www.anthropic.com/research/team/alignment)[Economic Research](https://www.anthropic.com/research/team/economic-research)[Interpretability](https://www.anthropic.com/research/team/interpretability)[Societal Impacts](https://www.anthropic.com/research/team/societal-impacts)[Frontier Red Team](https://www.anthropic.com/research/team/frontier-red-team)
 
 ![Video thumbnail](https://cdn.sanity.io/images/4zrzovbb/website/4f268223739d63a56f89b21a45559ba82392e8e0-1280x720.jpg)
 
