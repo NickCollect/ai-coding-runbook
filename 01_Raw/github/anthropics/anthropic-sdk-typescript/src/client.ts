@@ -29,6 +29,8 @@ export type { Middleware, MiddlewareContext, MiddlewareNext } from './core/middl
 export type { APIRequest } from './core/api';
 import * as Pagination from './core/pagination';
 import {
+  type BidirectionalPageCursorParams,
+  BidirectionalPageCursorResponse,
   type PageCursorParams,
   PageCursorResponse,
   type PageParams,
@@ -232,6 +234,7 @@ import {
   WebFetchTool20250910,
   WebFetchTool20260209,
   WebFetchTool20260309,
+  WebFetchTool20260318,
   WebFetchToolResultBlock,
   WebFetchToolResultBlockParam,
   WebFetchToolResultErrorBlock,
@@ -241,6 +244,7 @@ import {
   WebSearchResultBlockParam,
   WebSearchTool20250305,
   WebSearchTool20260209,
+  WebSearchTool20260318,
   WebSearchToolRequestError,
   WebSearchToolResultBlock,
   WebSearchToolResultBlockContent,
@@ -1583,6 +1587,12 @@ export declare namespace Anthropic {
   export import PageCursor = Pagination.PageCursor;
   export { type PageCursorParams as PageCursorParams, type PageCursorResponse as PageCursorResponse };
 
+  export import BidirectionalPageCursor = Pagination.BidirectionalPageCursor;
+  export {
+    type BidirectionalPageCursorParams as BidirectionalPageCursorParams,
+    type BidirectionalPageCursorResponse as BidirectionalPageCursorResponse,
+  };
+
   export {
     Completions as Completions,
     type Completion as Completion,
@@ -1744,6 +1754,7 @@ export declare namespace Anthropic {
     type WebFetchTool20250910 as WebFetchTool20250910,
     type WebFetchTool20260209 as WebFetchTool20260209,
     type WebFetchTool20260309 as WebFetchTool20260309,
+    type WebFetchTool20260318 as WebFetchTool20260318,
     type WebFetchToolResultBlock as WebFetchToolResultBlock,
     type WebFetchToolResultBlockParam as WebFetchToolResultBlockParam,
     type WebFetchToolResultErrorBlock as WebFetchToolResultErrorBlock,
@@ -1753,6 +1764,7 @@ export declare namespace Anthropic {
     type WebSearchResultBlockParam as WebSearchResultBlockParam,
     type WebSearchTool20250305 as WebSearchTool20250305,
     type WebSearchTool20260209 as WebSearchTool20260209,
+    type WebSearchTool20260318 as WebSearchTool20260318,
     type WebSearchToolRequestError as WebSearchToolRequestError,
     type WebSearchToolResultBlock as WebSearchToolResultBlock,
     type WebSearchToolResultBlockContent as WebSearchToolResultBlockContent,

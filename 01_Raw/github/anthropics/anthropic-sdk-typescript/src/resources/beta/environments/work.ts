@@ -372,11 +372,6 @@ export interface BetaSelfHostedWork {
   metadata: { [key: string]: string };
 
   /**
-   * Session instance JWT secret (only included in certain retrieval paths)
-   */
-  secret: string | null;
-
-  /**
    * RFC 3339 timestamp when work execution started
    */
   started_at: string | null;

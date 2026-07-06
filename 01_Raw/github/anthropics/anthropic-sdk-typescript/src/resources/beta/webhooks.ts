@@ -18,6 +18,175 @@ export class Webhooks extends APIResource {
   }
 }
 
+export interface BetaWebhookAgentArchivedEventData {
+  /**
+   * ID of the agent that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'agent.archived';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookAgentCreatedEventData {
+  /**
+   * ID of the agent that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'agent.created';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookAgentDeletedEventData {
+  /**
+   * ID of the agent that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'agent.deleted';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookAgentUpdatedEventData {
+  /**
+   * ID of the agent that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'agent.updated';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentArchivedEventData {
+  /**
+   * ID of the deployment that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment.archived';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentCreatedEventData {
+  /**
+   * ID of the deployment that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment.created';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentDeletedEventData {
+  /**
+   * ID of the deployment that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment.deleted';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentPausedEventData {
+  /**
+   * ID of the deployment that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment.paused';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentRunFailedEventData {
+  /**
+   * ID of the deployment run that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment_run.failed';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentRunStartedEventData {
+  /**
+   * ID of the deployment run that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment_run.started';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentRunSucceededEventData {
+  /**
+   * ID of the deployment run that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment_run.succeeded';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentUnpausedEventData {
+  /**
+   * ID of the deployment that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment.unpaused';
+
+  workspace_id: string;
+}
+
+export interface BetaWebhookDeploymentUpdatedEventData {
+  /**
+   * ID of the deployment that triggered the event.
+   */
+  id: string;
+
+  organization_id: string;
+
+  type: 'deployment.updated';
+
+  workspace_id: string;
+}
+
 export interface BetaWebhookEvent {
   /**
    * Unique event identifier for idempotency.
@@ -60,7 +229,20 @@ export type BetaWebhookEventData =
   | BetaWebhookVaultCredentialArchivedEventData
   | BetaWebhookVaultCredentialDeletedEventData
   | BetaWebhookVaultCredentialRefreshFailedEventData
-  | BetaWebhookSessionUpdatedEventData;
+  | BetaWebhookSessionUpdatedEventData
+  | BetaWebhookAgentCreatedEventData
+  | BetaWebhookAgentArchivedEventData
+  | BetaWebhookAgentDeletedEventData
+  | BetaWebhookDeploymentPausedEventData
+  | BetaWebhookDeploymentRunFailedEventData
+  | BetaWebhookDeploymentCreatedEventData
+  | BetaWebhookDeploymentUpdatedEventData
+  | BetaWebhookDeploymentUnpausedEventData
+  | BetaWebhookAgentUpdatedEventData
+  | BetaWebhookDeploymentArchivedEventData
+  | BetaWebhookDeploymentRunStartedEventData
+  | BetaWebhookDeploymentDeletedEventData
+  | BetaWebhookDeploymentRunSucceededEventData;
 
 export interface BetaWebhookSessionArchivedEventData {
   /**
@@ -417,6 +599,19 @@ export interface UnwrapWebhookEvent {
 
 export declare namespace Webhooks {
   export {
+    type BetaWebhookAgentArchivedEventData as BetaWebhookAgentArchivedEventData,
+    type BetaWebhookAgentCreatedEventData as BetaWebhookAgentCreatedEventData,
+    type BetaWebhookAgentDeletedEventData as BetaWebhookAgentDeletedEventData,
+    type BetaWebhookAgentUpdatedEventData as BetaWebhookAgentUpdatedEventData,
+    type BetaWebhookDeploymentArchivedEventData as BetaWebhookDeploymentArchivedEventData,
+    type BetaWebhookDeploymentCreatedEventData as BetaWebhookDeploymentCreatedEventData,
+    type BetaWebhookDeploymentDeletedEventData as BetaWebhookDeploymentDeletedEventData,
+    type BetaWebhookDeploymentPausedEventData as BetaWebhookDeploymentPausedEventData,
+    type BetaWebhookDeploymentRunFailedEventData as BetaWebhookDeploymentRunFailedEventData,
+    type BetaWebhookDeploymentRunStartedEventData as BetaWebhookDeploymentRunStartedEventData,
+    type BetaWebhookDeploymentRunSucceededEventData as BetaWebhookDeploymentRunSucceededEventData,
+    type BetaWebhookDeploymentUnpausedEventData as BetaWebhookDeploymentUnpausedEventData,
+    type BetaWebhookDeploymentUpdatedEventData as BetaWebhookDeploymentUpdatedEventData,
     type BetaWebhookEvent as BetaWebhookEvent,
     type BetaWebhookEventData as BetaWebhookEventData,
     type BetaWebhookSessionArchivedEventData as BetaWebhookSessionArchivedEventData,

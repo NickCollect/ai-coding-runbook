@@ -117,6 +117,19 @@ import {
 } from './user-profiles';
 import * as WebhooksAPI from './webhooks';
 import {
+  BetaWebhookAgentArchivedEventData,
+  BetaWebhookAgentCreatedEventData,
+  BetaWebhookAgentDeletedEventData,
+  BetaWebhookAgentUpdatedEventData,
+  BetaWebhookDeploymentArchivedEventData,
+  BetaWebhookDeploymentCreatedEventData,
+  BetaWebhookDeploymentDeletedEventData,
+  BetaWebhookDeploymentPausedEventData,
+  BetaWebhookDeploymentRunFailedEventData,
+  BetaWebhookDeploymentRunStartedEventData,
+  BetaWebhookDeploymentRunSucceededEventData,
+  BetaWebhookDeploymentUnpausedEventData,
+  BetaWebhookDeploymentUpdatedEventData,
   BetaWebhookEvent,
   BetaWebhookEventData,
   BetaWebhookSessionArchivedEventData,
@@ -432,6 +445,7 @@ import {
   BetaWebFetchTool20250910,
   BetaWebFetchTool20260209,
   BetaWebFetchTool20260309,
+  BetaWebFetchTool20260318,
   BetaWebFetchToolResultBlock,
   BetaWebFetchToolResultBlockParam,
   BetaWebFetchToolResultErrorBlock,
@@ -441,6 +455,7 @@ import {
   BetaWebSearchResultBlockParam,
   BetaWebSearchTool20250305,
   BetaWebSearchTool20260209,
+  BetaWebSearchTool20260318,
   BetaWebSearchToolRequestError,
   BetaWebSearchToolResultBlock,
   BetaWebSearchToolResultBlockContent,
@@ -458,11 +473,17 @@ import {
 } from './messages/messages';
 import * as SessionsAPI from './sessions/sessions';
 import {
+  BetaManagedAgentsAgentMessagePreview,
   BetaManagedAgentsAgentParams,
+  BetaManagedAgentsAgentThinkingPreview,
+  BetaManagedAgentsAgentWithOverridesParams,
   BetaManagedAgentsBranchCheckout,
   BetaManagedAgentsCacheCreationUsage,
   BetaManagedAgentsCommitCheckout,
   BetaManagedAgentsDeletedSession,
+  BetaManagedAgentsDeltaContent,
+  BetaManagedAgentsDeltaEvent,
+  BetaManagedAgentsDeltaType,
   BetaManagedAgentsFileResourceParams,
   BetaManagedAgentsGitHubRepositoryResourceParams,
   BetaManagedAgentsMemoryStoreResourceParam,
@@ -477,7 +498,9 @@ import {
   BetaManagedAgentsSessionStats,
   BetaManagedAgentsSessionUpdatedEvent,
   BetaManagedAgentsSessionUsage,
-  BetaManagedAgentsSessionsPageCursor,
+  BetaManagedAgentsSessionsBidirectionalPageCursor,
+  BetaManagedAgentsStartEvent,
+  BetaManagedAgentsStartEventPreview,
   BetaManagedAgentsSystemContentBlock,
   BetaManagedAgentsSystemMessageEvent,
   BetaManagedAgentsUserToolResultEvent,
@@ -561,7 +584,8 @@ export type AnthropicBeta =
   | 'cache-diagnosis-2026-04-07'
   | 'thinking-token-count-2026-05-13'
   | 'server-side-fallback-2026-06-01'
-  | 'fallback-credit-2026-06-01';
+  | 'fallback-credit-2026-06-01'
+  | 'agent-memory-2026-07-22';
 
 export interface BetaAPIError {
   message: string;
@@ -884,6 +908,7 @@ export declare namespace Beta {
     type BetaWebFetchTool20250910 as BetaWebFetchTool20250910,
     type BetaWebFetchTool20260209 as BetaWebFetchTool20260209,
     type BetaWebFetchTool20260309 as BetaWebFetchTool20260309,
+    type BetaWebFetchTool20260318 as BetaWebFetchTool20260318,
     type BetaWebFetchToolResultBlock as BetaWebFetchToolResultBlock,
     type BetaWebFetchToolResultBlockParam as BetaWebFetchToolResultBlockParam,
     type BetaWebFetchToolResultErrorBlock as BetaWebFetchToolResultErrorBlock,
@@ -893,6 +918,7 @@ export declare namespace Beta {
     type BetaWebSearchResultBlockParam as BetaWebSearchResultBlockParam,
     type BetaWebSearchTool20250305 as BetaWebSearchTool20250305,
     type BetaWebSearchTool20260209 as BetaWebSearchTool20260209,
+    type BetaWebSearchTool20260318 as BetaWebSearchTool20260318,
     type BetaWebSearchToolRequestError as BetaWebSearchToolRequestError,
     type BetaWebSearchToolResultBlock as BetaWebSearchToolResultBlock,
     type BetaWebSearchToolResultBlockContent as BetaWebSearchToolResultBlockContent,
@@ -980,11 +1006,17 @@ export declare namespace Beta {
 
   export {
     Sessions as Sessions,
+    type BetaManagedAgentsAgentMessagePreview as BetaManagedAgentsAgentMessagePreview,
     type BetaManagedAgentsAgentParams as BetaManagedAgentsAgentParams,
+    type BetaManagedAgentsAgentThinkingPreview as BetaManagedAgentsAgentThinkingPreview,
+    type BetaManagedAgentsAgentWithOverridesParams as BetaManagedAgentsAgentWithOverridesParams,
     type BetaManagedAgentsBranchCheckout as BetaManagedAgentsBranchCheckout,
     type BetaManagedAgentsCacheCreationUsage as BetaManagedAgentsCacheCreationUsage,
     type BetaManagedAgentsCommitCheckout as BetaManagedAgentsCommitCheckout,
     type BetaManagedAgentsDeletedSession as BetaManagedAgentsDeletedSession,
+    type BetaManagedAgentsDeltaContent as BetaManagedAgentsDeltaContent,
+    type BetaManagedAgentsDeltaEvent as BetaManagedAgentsDeltaEvent,
+    type BetaManagedAgentsDeltaType as BetaManagedAgentsDeltaType,
     type BetaManagedAgentsFileResourceParams as BetaManagedAgentsFileResourceParams,
     type BetaManagedAgentsGitHubRepositoryResourceParams as BetaManagedAgentsGitHubRepositoryResourceParams,
     type BetaManagedAgentsMemoryStoreResourceParam as BetaManagedAgentsMemoryStoreResourceParam,
@@ -999,10 +1031,12 @@ export declare namespace Beta {
     type BetaManagedAgentsSessionStats as BetaManagedAgentsSessionStats,
     type BetaManagedAgentsSessionUpdatedEvent as BetaManagedAgentsSessionUpdatedEvent,
     type BetaManagedAgentsSessionUsage as BetaManagedAgentsSessionUsage,
+    type BetaManagedAgentsStartEvent as BetaManagedAgentsStartEvent,
+    type BetaManagedAgentsStartEventPreview as BetaManagedAgentsStartEventPreview,
     type BetaManagedAgentsSystemContentBlock as BetaManagedAgentsSystemContentBlock,
     type BetaManagedAgentsSystemMessageEvent as BetaManagedAgentsSystemMessageEvent,
     type BetaManagedAgentsUserToolResultEvent as BetaManagedAgentsUserToolResultEvent,
-    type BetaManagedAgentsSessionsPageCursor as BetaManagedAgentsSessionsPageCursor,
+    type BetaManagedAgentsSessionsBidirectionalPageCursor as BetaManagedAgentsSessionsBidirectionalPageCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionRetrieveParams as SessionRetrieveParams,
     type SessionUpdateParams as SessionUpdateParams,
@@ -1139,6 +1173,19 @@ export declare namespace Beta {
 
   export {
     Webhooks as Webhooks,
+    type BetaWebhookAgentArchivedEventData as BetaWebhookAgentArchivedEventData,
+    type BetaWebhookAgentCreatedEventData as BetaWebhookAgentCreatedEventData,
+    type BetaWebhookAgentDeletedEventData as BetaWebhookAgentDeletedEventData,
+    type BetaWebhookAgentUpdatedEventData as BetaWebhookAgentUpdatedEventData,
+    type BetaWebhookDeploymentArchivedEventData as BetaWebhookDeploymentArchivedEventData,
+    type BetaWebhookDeploymentCreatedEventData as BetaWebhookDeploymentCreatedEventData,
+    type BetaWebhookDeploymentDeletedEventData as BetaWebhookDeploymentDeletedEventData,
+    type BetaWebhookDeploymentPausedEventData as BetaWebhookDeploymentPausedEventData,
+    type BetaWebhookDeploymentRunFailedEventData as BetaWebhookDeploymentRunFailedEventData,
+    type BetaWebhookDeploymentRunStartedEventData as BetaWebhookDeploymentRunStartedEventData,
+    type BetaWebhookDeploymentRunSucceededEventData as BetaWebhookDeploymentRunSucceededEventData,
+    type BetaWebhookDeploymentUnpausedEventData as BetaWebhookDeploymentUnpausedEventData,
+    type BetaWebhookDeploymentUpdatedEventData as BetaWebhookDeploymentUpdatedEventData,
     type BetaWebhookEvent as BetaWebhookEvent,
     type BetaWebhookEventData as BetaWebhookEventData,
     type BetaWebhookSessionArchivedEventData as BetaWebhookSessionArchivedEventData,

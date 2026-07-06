@@ -95,9 +95,8 @@ export interface AgentToolContext {
   /** Base directory for resolving relative tool paths. */
   workdir: string;
   /**
-   * When `false` (default), the file tools reject absolute paths and paths
-   * that escape `workdir` (symlinks resolved). Does **not** constrain
-   * {@link betaBashTool}.
+   * When `false` (default), the file tools reject paths that resolve outside
+   * `workdir` (symlinks resolved). Does **not** constrain {@link betaBashTool}.
    */
   unrestrictedPaths?: boolean;
   /**
@@ -161,12 +160,14 @@ export function betaAgentToolset20260401(ctx: AgentToolContext): BetaRunnableToo
 }
 
 /**
- * Resolve `p` relative to `ctx.workdir`. Unless `unrestrictedPaths` is set,
- * absolute inputs are rejected and the **canonical** path is returned — every
- * symlink in `p` (including the leaf, even a dangling one) is resolved before
- * the workdir check, and the resolved path is what the tool then operates on, so
- * a symlink inside the workdir that points outside it can neither pass the check
- * nor be followed afterwards. See the trust model on {@link AgentToolContext}.
+ * Resolve `p` against `ctx.workdir`. Absolute and relative inputs go through
+ * the same canonicalise-then-contain check — an absolute path that lands inside
+ * the workdir is permitted, only paths that resolve *outside* are rejected.
+ * Every symlink in `p` (including the leaf, even a dangling one) is resolved
+ * before the workdir check, and the resolved path is what the tool then operates
+ * on, so a symlink inside the workdir that points outside it can neither pass
+ * the check nor be followed afterwards. See the trust model on
+ * {@link AgentToolContext}.
  *
  * Residual TOCTOU: a component could still be swapped for a symlink between this
  * call and the eventual `fs` operation. Closing that fully needs per-component
@@ -589,6 +590,9 @@ export function betaGlobTool(ctx: AgentToolContext): BetaRunnableTool {
       if (!ctx.unrestrictedPaths && pat.split(/[\\/]/).includes('..')) {
         throw new ToolError('glob: ".." is not permitted in the pattern');
       }
+      // Compare canonical against canonical: a workdir that is itself a
+      // symlink would otherwise falsely reject every realpath'd match below.
+      const realRoot = ctx.unrestrictedPaths ? root : await fs.realpath(root).catch(() => root);
       const matches: { path: string; mtime: number }[] = [];
       try {
         // Native `fs.glob` (Node 22+). `exclude` prunes the noisy dirs the
@@ -600,9 +604,22 @@ export function betaGlobTool(ctx: AgentToolContext): BetaRunnableTool {
         })) {
           if (!entry.isFile()) continue;
           const full = path.join(entry.parentPath, entry.name);
-          // Defense in depth: drop any match that resolved outside the search
-          // root (e.g. via a symlinked directory in the tree) when confined.
-          if (!ctx.unrestrictedPaths && !isWithin(root, full)) continue;
+          // Drop any match that resolves outside the search root. A pattern
+          // that *names* a symlinked directory (the model controls the
+          // pattern, and the bash tool in the same session can plant the
+          // link) makes `fs.glob` descend through it and report entries with
+          // the raw parent path, so a lexical check on `full` alone would
+          // pass `root/link_out/secret` even though it lives outside the
+          // jail. Resolve-failure (ELOOP, EACCES, a racing unlink) is a deny.
+          if (!ctx.unrestrictedPaths) {
+            let real: string;
+            try {
+              real = await fs.realpath(full);
+            } catch {
+              continue;
+            }
+            if (!isWithin(realRoot, real)) continue;
+          }
           let mtime = 0;
           try {
             mtime = (await fs.stat(full)).mtimeMs;
