@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/how-claude-code-works
-fetched_at: 2026-06-15T06:17:54.673260+00:00
+fetched_at: 2026-07-06T05:04:33.068259+00:00
 fetch_method: mintlify_md
 ---
 
@@ -180,7 +180,6 @@ Claude Code can teach you how to use it. Ask questions like "how do I set up hoo
 Built-in commands also guide you through setup:
 
 * `/init` walks you through creating a CLAUDE.md for your project
-* `/agents` helps you configure custom subagents
 * `/doctor` diagnoses common issues with your installation
 
 ### It's a conversation

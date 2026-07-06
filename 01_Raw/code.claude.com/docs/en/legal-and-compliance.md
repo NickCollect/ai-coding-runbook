@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/legal-and-compliance
-fetched_at: 2026-06-22T06:23:28.101771+00:00
+fetched_at: 2026-07-06T05:04:33.401173+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,7 +23,7 @@ Your use of Claude Code is subject to:
 
 ### Commercial agreements
 
-Whether you're using the Claude API directly (1P) or accessing it through Amazon Bedrock or Google Vertex (3P), your existing commercial agreement will apply to Claude Code usage, unless we've mutually agreed otherwise.
+Whether you're using the Claude API directly (1P) or accessing it through Amazon Bedrock or Google Cloud's Agent Platform (3P), your existing commercial agreement will apply to Claude Code usage, unless we've mutually agreed otherwise.
 
 ## Compliance
 

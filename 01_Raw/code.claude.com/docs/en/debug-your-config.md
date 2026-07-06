@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/debug-your-config
-fetched_at: 2026-06-29T05:25:14.315106+00:00
+fetched_at: 2026-07-06T05:04:31.691191+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,21 +18,20 @@ For installation, authentication, and connectivity problems, see [Troubleshoot i
 
 ## See what loaded into context
 
-The `/context` command shows everything occupying the context window for the current session, broken down by category: system prompt, memory files, skills, MCP tools, and conversation messages. Run it first to confirm whether your `CLAUDE.md`, rules, or skill descriptions are present at all.
+The `/context` command shows everything occupying the context window for the current session, broken down by category: system prompt, memory files, skills, custom subagents with the source each loaded from, MCP tools, and conversation messages. Run it first to confirm whether your `CLAUDE.md`, rules, or skill descriptions are present at all.
 
 For detail on a specific category, follow up with the dedicated command:
 
-| Command          | Shows                                                                                                        |
-| :--------------- | :----------------------------------------------------------------------------------------------------------- |
-| `/memory`        | Which `CLAUDE.md` and rules files loaded, plus auto-memory entries                                           |
-| `/skills`        | Available skills from project, user, and plugin sources                                                      |
-| `/agents`        | Configured subagents and their settings                                                                      |
-| `/hooks`         | Active hook configurations                                                                                   |
-| `/mcp`           | Connected MCP servers and their status                                                                       |
-| `/permissions`   | Resolved allow and deny rules currently in effect                                                            |
-| `/doctor`        | Configuration diagnostics: invalid keys, schema errors, installation health                                  |
-| `/debug [issue]` | Enables debug logging for the session and prompts Claude to diagnose using the log output and settings paths |
-| `/status`        | Active settings sources, including whether managed settings are in effect                                    |
+| Command          | Shows                                                                                                                                                                                                                                    |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/memory`        | Which `CLAUDE.md` and rules files loaded, plus auto-memory entries                                                                                                                                                                       |
+| `/skills`        | Available skills from project, user, and plugin sources                                                                                                                                                                                  |
+| `/hooks`         | Active hook configurations                                                                                                                                                                                                               |
+| `/mcp`           | Connected MCP servers and their status                                                                                                                                                                                                   |
+| `/permissions`   | Resolved allow and deny rules currently in effect                                                                                                                                                                                        |
+| `/doctor`        | Configuration diagnostics: invalid keys, schema errors, installation health. {/* min-version: 2.1.196 */}As of v2.1.196, also reports duplicate [subagent](/en/sub-agents) names defined in the same scope and marks which one is active |
+| `/debug [issue]` | Enables debug logging for the session and prompts Claude to diagnose using the log output and settings paths                                                                                                                             |
+| `/status`        | Active settings sources, including whether managed settings are in effect                                                                                                                                                                |
 
 If a memory file is missing from `/memory`, check its location against [how CLAUDE.md files load](/en/memory#how-claude-md-files-load). Subdirectory `CLAUDE.md` files load on demand when Claude reads a file in that directory with the Read tool, not at session start.
 
@@ -74,7 +73,7 @@ If `/hooks` shows the hook but it still does not fire, the next step is to watch
 
 ## Test against a clean configuration
 
-{/* min-version: 2.1.169 */}Start with [`claude --safe-mode`](/en/cli-reference#cli-flags), which launches a session with all customizations disabled, including `CLAUDE.md`, skills, plugins, hooks, MCP servers, and custom commands and agents. Authentication, model selection, built-in tools, and permissions work normally. If the problem disappears in safe mode, one of those surfaces is the cause; use the targeted checks above to find which. Managed settings deployed by your organization still partially apply, so policy-configured hooks and status line run even in safe mode.
+{/* min-version: 2.1.169 */}Start with [`claude --safe-mode`](/en/cli-reference#cli-flags), which launches a session with all customizations disabled, including `CLAUDE.md`, skills, plugins, hooks, MCP servers, and custom commands and agents. Authentication, model selection, built-in tools, and permissions work normally. If the problem disappears in safe mode, one of those surfaces is the cause; use the targeted checks above to find which. Safe mode still applies managed hooks and settings policy from your organization. Managed plugins, skills, CLAUDE.md, and MCP servers are turned off.
 
 If the problem persists in safe mode, or your settings themselves are suspect, compare against a session that loads nothing from your usual setup. Point [`CLAUDE_CONFIG_DIR`](/en/env-vars) at an empty directory to bypass everything under `~/.claude`, and launch from a directory that has no `.claude` folder, `.mcp.json`, or `CLAUDE.md` so project configuration is also skipped.
 

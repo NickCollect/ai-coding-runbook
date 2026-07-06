@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/communications-kit
-fetched_at: 2026-06-15T06:17:52.197728+00:00
+fetched_at: 2026-07-06T05:04:30.901288+00:00
 fetch_method: mintlify_md
 ---
 
@@ -308,8 +308,9 @@ Works for whole directories too.
 Sometimes you want Claude to ask before every edit. Sometimes you just want
 it to ship. You shouldn't have to pick one forever.
 
-*Shift+Tab* cycles through how much leash Claude gets: *default* asks before
-risky stuff, *acceptEdits* lets file edits and common filesystem commands
+*Shift+Tab* cycles through how much Claude can do without asking: *Manual* (the
+`default` setting value) asks before each action, *acceptEdits* lets file
+edits and common filesystem commands
 flow through while still checking before other shell commands, and *plan*
 proposes changes for your approval before anything is touched. Plan mode is
 the trust-builder, so start there for anything touching multiple files.
