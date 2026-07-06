@@ -1,179 +1,154 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id
-fetched_at: 2026-06-29T05:37:28.167348+00:00
+source_url: https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja
+fetched_at: 2026-07-06T05:17:33.327285+00:00
 title: "Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Kirim masukan
+フィードバックを送信
 
 # Interactions API
 
-Interactions API adalah antarmuka baru kami dan cara paling mudah untuk membangun dengan model dan agen Gemini. Mulai Juni 2026, API ini Tersedia Secara Umum dan merupakan antarmuka yang direkomendasikan untuk semua project baru.
+Interactions API は、Gemini モデルとエージェントを構築する最も簡単な方法を提供する新しいインターフェースです。2026 年 6 月の時点で、一般提供が開始され、すべての新しいプロジェクトで推奨されるインターフェースとなっています。
 
-Meskipun kini dianggap sebagai API lama, API [`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=id) asli tetap didukung sepenuhnya.
+現在ではレガシーと見なされていますが、元の [`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ja) API は引き続き完全にサポートされています。
 
-## Mengapa menggunakan Interactions API?
+## Interactions API を使用する理由
 
-- **Kemampuan baru langsung digunakan**: Status percakapan sisi server opsional menggunakan `previous_interaction_id`, langkah-langkah eksekusi yang dapat diamati untuk proses debug dan rendering UI, serta [eksekusi di latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id) untuk tugas yang berjalan lama menggunakan `background=true`.
-- **Biaya lebih rendah dengan rasio hit cache yang lebih tinggi**: Pengelolaan status sisi server memungkinkan penyimpanan cache konteks yang lebih efisien di seluruh giliran, sehingga mengurangi biaya token untuk percakapan multi-giliran.
-- **Dibuat untuk model dan agen canggih**: Dibuat khusus untuk model pemikiran, penggunaan alat multi-langkah, dan alur penalaran yang kompleks — menyederhanakan proses pembuatan, proses debug, dan orkestrasi aplikasi agentik.
-- **Satu API untuk model dan agen**: Satu antarmuka terpadu untuk memanggil model dan agen Gemini secara langsung seperti Deep Research dan agen yang dikelola kustom — tidak ada endpoint atau pola terpisah yang perlu dipelajari.
-- **Tempat peluncuran fitur baru**: Ke depannya, model dan kemampuan baru di luar keluarga utama, beserta kemampuan dan alat agentik baru, akan diluncurkan di Interactions API.
+- **すぐに使える新機能**: `previous_interaction_id` を使用したサーバーサイドの会話状態（オプション）、デバッグと UI レンダリング用の実行ステップのモニタリング、`background=true` を使用した長時間実行タスクの[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)。
+- **キャッシュ ヒット率の向上によるコスト削減**: サーバーサイドの状態管理により、ターン間でコンテキスト キャッシュをより効率的に使用できるため、マルチターンの会話のトークン費用を削減できます。
+- **フロンティア モデルとエージェント向けに構築**: 思考モデル、多段階のツール使用、複雑な推論フロー向けに特別に構築されており、エージェント アプリケーションの構築、デバッグ、オーケストレーションのプロセスを簡素化します。
+- **モデルとエージェント用の単一の API**: Gemini モデルとエージェント（Deep Research やカスタム マネージド エージェントなど）を直接呼び出すための統合インターフェース。個別のエンドポイントやパターンを学習する必要はありません。
+- **新機能のリリース場所**: 今後、コア メインライン ファミリー以外の新しいモデルと機能、新しいエージェント機能とツールは、Interactions API でリリースされます。
 
-Secara default, Interactions API menyimpan permintaan sehingga Anda dapat memanfaatkan fitur pengelolaan status sisi server dengan menggunakan
-`previous_interaction_id`. Anda dapat memilih untuk menggunakan perilaku tanpa status dengan menyetel
-`store=false`. Lihat bagian [retensi data](#data-storage-retention) untuk
-mengetahui detailnya.
+デフォルトでは、Interactions API はリクエストを保存するため、`previous_interaction_id` を使用してサーバーサイドの状態管理機能を活用できます。`store=false` を設定すると、ステートレス動作を有効にできます。詳細については、[データの保持](#data-storage-retention)をご覧ください。
 
-## Mulai
+## 始める
 
-- **Siapkan agen coding Anda**: Hubungkan ke **MCP Dokumen Gemini** dan instal
-  keterampilan `gemini-interactions-api` untuk memberi asisten Anda akses langsung ke
-  praktik terbaik dan dokumen developer terbaru.
-  [Menyiapkan agen coding Anda →](https://ai.google.dev/gemini-api/docs/coding-agents?hl=id)
-- **Bermigrasi dari `generateContent`**: Jika Anda memiliki integrasi yang sudah ada,
-  ikuti [Panduan Migrasi](https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=id) untuk
-  beralih ke Interactions API.
-- **Mulai**: Mulai di [Panduan Memulai Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=id).
+- **コーディング エージェントを設定する**: **Gemini Docs MCP** に接続し、`gemini-interactions-api` スキルをインストールして、アシスタントが最新のデベロッパー ドキュメントとベスト プラクティスに直接アクセスできるようにします。[コーディング エージェントを設定する →](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ja)
+- **`generateContent` から移行する**: 既存の統合がある場合は、[移行ガイド](https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=ja)に沿って Interactions API に移行します。
+- **スタートガイド**: [Interactions API スタートガイド](https://ai.google.dev/gemini-api/docs/get-started?hl=ja)をご覧ください。
 
-### Panduan Fitur
+### 機能ガイド
 
-Pelajari kemampuan spesifik Interactions API melalui panduan ini. Anda dapat menggunakan tombol di halaman ini untuk beralih antara generateContent dan Interactions API:
+以下のガイドで Interactions API の具体的な機能をご確認ください。これらのページの切り替えを使用して、generateContent API と Interactions API を切り替えることができます。
 
-- [Pembuatan teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id)
-- [Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)
-- [Pemahaman gambar](https://ai.google.dev/gemini-api/docs/image-understanding?hl=id)
-- [Pemahaman audio](https://ai.google.dev/gemini-api/docs/audio?hl=id)
-- [Pemahaman video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id)
-- [Pemrosesan dokumen](https://ai.google.dev/gemini-api/docs/document-processing?hl=id)
-- [Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)
-- [Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)
-- [Agen Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id)
-- [Inferensi fleksibel](https://ai.google.dev/gemini-api/docs/flex-inference?hl=id)
-- [Inferensi prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id)
+- [テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja)
+- [画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)
+- [画像の理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)
+- [音声の理解](https://ai.google.dev/gemini-api/docs/audio?hl=ja)
+- [動画に関する理解を深める](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)
+- [ドキュメント処理](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)
+- [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)
+- [構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)
+- [Deep Research エージェント](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja)
+- [Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)
+- [候補の推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)
 
-## Cara kerja Interactions API
+## Interactions API の仕組み
 
-Interactions API berpusat pada resource inti: [**`Interaction`**](https://ai.google.dev/api/interactions-api?hl=id#Resource:Interaction). `Interaction` mewakili giliran yang selesai dalam percakapan atau tugas. Objek ini berfungsi sebagai catatan sesi, yang berisi seluruh histori interaksi sebagai urutan **langkah-langkah eksekusi** secara kronologis. Langkah-langkah ini mencakup pemikiran model, panggilan dan hasil alat sisi server atau sisi klien (seperti `function_call` dan `function_result`), serta `model_output` akhir. Resource yang disimpan (diambil melalui `interactions.get`) juga mencakup langkah-langkah `user_input` untuk konteks lengkap, meskipun respons `interactions.create` hanya menampilkan langkah-langkah yang dibuat model.
+Interactions API は、[**`Interaction`**](https://ai.google.dev/api/interactions-api?hl=ja#Resource:Interaction) というコアリソースを中心に構成されています。`Interaction` は、会話またはタスクの完全なターンを表します。セッション レコードとして機能し、インタラクションの履歴全体を **実行ステップ**の時系列順のシーケンスとして含みます。これらのステップには、モデルの思考、サーバーサイドまたはクライアントサイドのツール呼び出しと結果（`function_call` や `function_result` など）、最終的な `model_output` が含まれます。保存されたリソース（`interactions.get` で取得）には、完全なコンテキストの `user_input` ステップも含まれますが、`interactions.create` レスポンスはモデル生成ステップのみを返します。
 
-Saat melakukan panggilan ke
-[`interactions.create`](https://ai.google.dev/api/interactions-api?hl=id#CreateInteraction), Anda
-membuat resource `Interaction` baru.
+[`interactions.create`](https://ai.google.dev/api/interactions-api?hl=ja#CreateInteraction) を呼び出すと、新しい `Interaction` リソースが作成されます。
 
-### Pengelolaan status sisi server
+### サーバーサイドの状態管理
 
-Anda dapat menggunakan `id` dari interaksi yang telah selesai dalam panggilan berikutnya menggunakan parameter
-`previous_interaction_id` untuk melanjutkan percakapan. Server menggunakan ID ini untuk mengambil histori percakapan, sehingga Anda tidak perlu mengirim ulang seluruh histori chat.
+`previous_interaction_id` パラメータを使用して、完了したインタラクションの `id` を後続の呼び出しで使用し、会話を続けることができます。サーバーはこの ID を使用して会話履歴を取得するため、チャット履歴全体を再送信する必要がなくなります。
 
-Parameter `previous_interaction_id` hanya mempertahankan histori percakapan (input dan output)
-menggunakan `previous_interaction_id`. Parameter lainnya adalah **cakupan interaksi**
-dan hanya berlaku untuk interaksi tertentu yang sedang Anda buat:
+`previous_interaction_id` パラメータは、`previous_interaction_id` を使用して会話履歴（入力と出力）のみを保持します。他のパラメータは**インタラクション スコープ**であり、現在生成している特定のインタラクションにのみ適用されます。
 
 - `tools`
 - `system_instruction`
-- `generation_config` (termasuk `thinking_level`, `temperature`, dll.)
+- `generation_config`（`thinking_level`、`temperature` などを含む）
 
-Artinya, Anda harus menentukan ulang parameter ini di setiap interaksi baru jika ingin menerapkannya. Pengelolaan status sisi server ini bersifat opsional; Anda juga dapat beroperasi dalam mode tanpa status dengan mengirimkan histori percakapan lengkap di setiap permintaan.
+つまり、これらのパラメータを適用する場合は、新しいインタラクションごとに再指定する必要があります。このサーバーサイドの状態管理は省略可能です。各リクエストで完全な会話履歴を送信して、ステートレス モードで動作することもできます。
 
-### Penyimpanan dan retensi data
+### データ ストレージと保持
 
-Secara default, API menyimpan semua objek Interaksi (`store=true`) untuk menyederhanakan penggunaan fitur pengelolaan status sisi server (dengan `previous_interaction_id`), [eksekusi latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id) (menggunakan `background=true`), dan tujuan kemampuan pengamatan.
+デフォルトでは、API はすべての Interaction オブジェクト（`store=true`）を保存します。これは、サーバーサイドの状態管理機能（`previous_interaction_id` を使用）、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)（`background=true` を使用）、オブザーバビリティの目的での使用を簡素化するためです。
 
-- **Paket Berbayar**: Sistem menyimpan interaksi selama **55 hari**.
-- **Paket Gratis**: Sistem menyimpan interaksi selama **1 hari**.
+- **有料プラン**: システムはインタラクションを **55 日間**保持します。
+- **無料枠**: 1 日間、インタラクションが保持されます。
 
-Jika tidak menginginkannya, Anda dapat
-menetapkan `store=false` dalam permintaan Anda. Kontrol ini terpisah dari pengelolaan status
-; Anda dapat menonaktifkan penyimpanan untuk interaksi apa pun. Namun, perhatikan bahwa
-`store=false` tidak kompatibel dengan [eksekusi di latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id) dan mencegah penggunaan
-`previous_interaction_id` untuk giliran berikutnya.
+この動作を希望しない場合は、リクエストで `store=false` を設定できます。このコントロールは状態管理とは別のもので、あらゆるインタラクションでストレージをオプトアウトできます。ただし、`store=false` は[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)と互換性がなく、以降のターンで `previous_interaction_id` を使用できなくなります。
 
-Anda dapat menghapus interaksi tersimpan kapan saja menggunakan metode penghapusan yang ada di
-[Referensi API](https://ai.google.dev/api/interactions-api?hl=id). Anda hanya dapat menghapus interaksi jika Anda mengetahui ID interaksi.
+保存されたインタラクションは、[API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)にある削除メソッドを使用して、いつでも削除できます。やり取りを削除できるのは、やり取り ID がわかっている場合のみです。
 
-Setelah periode retensi berakhir, data Anda akan dihapus secara otomatis.
+保持期間が終了すると、データは自動的に削除されます。
 
-Sistem memproses objek Interaction sesuai dengan [terms](https://ai.google.dev/gemini-api/terms?hl=id).
+システムは、[条件](https://ai.google.dev/gemini-api/terms?hl=ja)に従って Interaction オブジェクトを処理します。
 
-## Praktik terbaik
+## ベスト プラクティス
 
-- **Rasio hit cache**: Menggunakan `previous_interaction_id` untuk melanjutkan percakapan memungkinkan sistem lebih mudah memanfaatkan penyimpanan dalam cache implisit untuk histori percakapan, yang meningkatkan performa dan mengurangi biaya.
-- **Mencampur interaksi**: Anda memiliki fleksibilitas untuk mencampur dan mencocokkan interaksi Agen dan Model dalam percakapan. Misalnya, Anda dapat menggunakan agen khusus, seperti agen Deep Research, untuk pengumpulan data awal, lalu menggunakan model Gemini standar untuk tugas lanjutan seperti meringkas atau memformat ulang, dengan menautkan langkah-langkah ini dengan `previous_interaction_id`.
+- **キャッシュ ヒット率**: `previous_interaction_id` を使用して会話を継続すると、システムは会話履歴の暗黙的なキャッシュ保存をより簡単に利用できるようになり、パフォーマンスが向上し、費用が削減されます。
+- **インタラクションの組み合わせ**: 会話内でエージェントとモデルのインタラクションを柔軟に組み合わせることができます。たとえば、初期のデータ収集には Deep Research エージェントなどの特殊なエージェントを使用し、要約や再フォーマットなどの後続のタスクには標準の Gemini モデルを使用し、これらの手順を `previous_interaction_id` でリンクできます。
 
-## Model & agen yang didukung
+## サポートされているモデルとエージェント
 
-| Nama Model | Jenis | ID Model |
+| モデル名 | タイプ | モデル ID |
 | --- | --- | --- |
-| Gemini 3.5 Flash | Model | `gemini-3.5-flash` |
-| Pratinjau Gemini 3.1 Pro | Model | `gemini-3.1-pro-preview` |
-| Gemini 3.1 Flash-Lite | Model | `gemini-3.1-flash-lite` |
-| Pratinjau Gemini 3 Flash | Model | `gemini-3-flash-preview` |
-| Gemini 2.5 Pro | Model | `gemini-2.5-pro` |
-| Gemini 2.5 Flash | Model | `gemini-2.5-flash` |
-| Gemini 2.5 Flash-lite | Model | `gemini-2.5-flash-lite` |
-| Gemini 3 Pro Image | Model | `gemini-3-pro-image` |
-| Gambar Gemini 3.1 Flash | Model | `gemini-3.1-flash-image` |
-| Pratinjau Gemini 3.1 Flash TTS | Model | `gemini-3.1-flash-tts-preview` |
-| Gemma 4 31B IT | Model | `gemma-4-31b-it` |
-| Gemma 4 26B MoE IT | Model | `gemma-4-26b-a4b-it` |
-| Pratinjau Klip Lyria 3 | Model | `lyria-3-clip-preview` |
-| Pratinjau Lyria 3 Pro | Model | `lyria-3-pro-preview` |
-| Pratinjau Deep Research | Agen | `deep-research-preview-04-2026` |
-| Pratinjau Deep Research | Agen | `deep-research-max-preview-04-2026` |
-| Pratinjau Antigravity | Agen | `antigravity-preview-05-2026` |
+| Gemini 3.5 Flash | モデル | `gemini-3.5-flash` |
+| Gemini 3.1 Pro プレビュー版 | モデル | `gemini-3.1-pro-preview` |
+| Gemini 3.1 Flash-Lite | モデル | `gemini-3.1-flash-lite` |
+| Gemini 3 Flash プレビュー | モデル | `gemini-3-flash-preview` |
+| Gemini 2.5 Pro | モデル | `gemini-2.5-pro` |
+| Gemini 2.5 Flash | モデル | `gemini-2.5-flash` |
+| Gemini 2.5 Flash-lite | モデル | `gemini-2.5-flash-lite` |
+| Gemini 3 Pro Image | モデル | `gemini-3-pro-image` |
+| Gemini 3.1 Flash Image | モデル | `gemini-3.1-flash-image` |
+| Gemini 3.1 Flash TTS プレビュー | モデル | `gemini-3.1-flash-tts-preview` |
+| Gemma 4 31B IT | モデル | `gemma-4-31b-it` |
+| Gemma 4 26B MoE IT | モデル | `gemma-4-26b-a4b-it` |
+| Lyria 3 クリップのプレビュー | モデル | `lyria-3-clip-preview` |
+| Lyria 3 Pro プレビュー | モデル | `lyria-3-pro-preview` |
+| Deep Research プレビュー | エージェント | `deep-research-preview-04-2026` |
+| Deep Research プレビュー | エージェント | `deep-research-max-preview-04-2026` |
+| Antigravity のプレビュー | エージェント | `antigravity-preview-05-2026` |
 
 ## SDK
 
-Anda dapat menggunakan Google GenAI SDK versi terbaru untuk mengakses
-Interactions API.
+Interactions API にアクセスするには、最新バージョンの Google GenAI SDK を使用します。
 
-- Di Python, ini adalah paket `google-genai` dari versi `2.3.0` dan seterusnya.
-- Di JavaScript, ini adalah paket `@google/genai` dari versi `2.3.0` dan seterusnya.
+- Python では、これは `2.3.0` バージョン以降の `google-genai` パッケージです。
+- JavaScript では、これは `2.3.0` バージョン以降の `@google/genai` パッケージです。
 
-Anda dapat mempelajari lebih lanjut cara menginstal SDK di halaman
-[Libraries](https://ai.google.dev/gemini-api/docs/libraries?hl=id).
+SDK のインストール方法について詳しくは、[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja) ページをご覧ください。
 
-## Batasan
+## 制限事項
 
-- **MCP Jarak Jauh**: Gemini 3 tidak mendukung MCP jarak jauh, fitur ini akan segera hadir.
+- **リモート MCP**: Gemini 3 はリモート MCP をサポートしていません。近日中にサポート予定です。
 
-Fitur berikut didukung oleh API
-[`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=id), tetapi **belum tersedia** di Interactions API:
+次の機能は [`generateContent`](https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ja) API でサポートされていますが、Interactions API では**まだ利用できません**。
 
-- **[Metadata video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id)**: Kolom `video_metadata`, yang digunakan untuk menetapkan interval
-  klip dan kecepatan frame kustom untuk pemahaman video.
-- **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id)**
-- **[Panggilan fungsi otomatis (Python)](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=id#automatic_function_calling_python_only)**
-- **[Penyimpanan dalam cache eksplisit](https://ai.google.dev/gemini-api/docs/caching?hl=id)**: Perhatikan bahwa penyimpanan dalam cache implisit sisi server tersedia di Interactions API
-  melalui `previous_interaction_id`.
+- **[動画メタデータ](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)**: 動画の理解のためにクリッピング間隔とカスタム フレームレートを設定するために使用される `video_metadata` フィールド。
+- **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)**
+- **[自動関数呼び出し（Python）](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=ja#automatic_function_calling_python_only)**
+- **[明示的なキャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)**: サーバーサイドの暗黙的なキャッシュ保存は、`previous_interaction_id` を介して Interactions API で利用できます。
 
-## Masukan
+## フィードバック
 
-Masukan Anda sangat penting untuk pengembangan Interactions API.
-Sampaikan pendapat Anda, laporkan bug, atau minta fitur di
-[Forum Komunitas Developer AI Google](https://discuss.ai.google.dev/c/gemini-api/4?hl=id) kami.
+皆様からのフィードバックは、Interactions API の開発に不可欠です。ご意見やバグの報告、機能のリクエストについては、[Google AI デベロッパー コミュニティ フォーラム](https://discuss.ai.google.dev/c/gemini-api/4?hl=ja)をご利用ください。
 
-## Langkah berikutnya
+## 次のステップ
 
-- Coba [notebook mulai cepat Interactions API](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=id).
-- Pelajari lebih lanjut [Agen Deep Research Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=id).
+- [Interactions API クイックスタート ノートブック](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_interactions_api.ipynb?hl=ja)をお試しください。
+- [Gemini Deep Research エージェント](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja)の詳細を確認する。
 
-Kirim masukan
+フィードバックを送信
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Terakhir diperbarui pada 2026-06-26 UTC.
+最終更新日 2026-06-26 UTC。
 
-Ada masukan untuk kami?
+ご意見をお聞かせください
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-26 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-26 UTC。"],[],[]]

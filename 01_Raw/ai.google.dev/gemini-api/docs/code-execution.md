@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=pl
-fetched_at: 2026-06-29T05:36:02.562270+00:00
-title: "Wykonanie kodu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/code-execution?hl=ko
+fetched_at: 2026-07-06T05:15:58.261588+00:00
+title: "\ucf54\ub4dc \uc2e4\ud589 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Prześlij opinię
+의견 보내기
 
-# Wykonanie kodu
+# 코드 실행
 
-Interfejs Gemini API udostępnia narzędzie do wykonywania kodu, które umożliwia modelowi generowanie i uruchamianie kodu w Pythonie. Model może następnie iteracyjnie uczyć się na podstawie wyników wykonania kodu, aż uzyska ostateczne dane wyjściowe. Możesz używać wykonywania kodu do tworzenia aplikacji, które korzystają z rozumowania opartego na kodzie. Możesz na przykład używać wykonywania kodu do rozwiązywania równań lub przetwarzania tekstu. Możesz też używać [bibliotek](#supported-libraries) dołączonych do środowiska wykonywania kodu, aby wykonywać bardziej wyspecjalizowane zadania.
+Gemini API는 모델이 Python 코드를 생성하고 실행할 수 있는 코드 실행 도구를 제공합니다. 그런 다음 모델은 최종 출력을 도출할 때까지 코드 실행 결과를 통해 반복적으로 학습할 수 있습니다. 코드 실행을 사용하여 코드 기반 추론의 이점을 활용하는 애플리케이션을 빌드할 수 있습니다. 예를 들어 코드 실행을 사용하여 방정식을 풀거나 텍스트를 처리할 수 있습니다. 코드 실행 환경에 포함된 [라이브러리](#supported-libraries)를 사용하여 더 전문적인 작업을 실행할 수도 있습니다.
 
-Gemini może wykonywać kod tylko w języku Python. Nadal możesz poprosić Gemini o wygenerowanie kodu w innym języku, ale model nie może użyć narzędzia do wykonywania kodu, aby go uruchomić.
+Gemini는 Python으로만 코드를 실행할 수 있습니다. 다른 언어로 코드를 생성해 달라고 Gemini에 요청할 수는 있지만 모델이 코드 실행 도구를 사용하여 코드를 실행할 수는 없습니다.
 
-## Włączanie wykonywania kodu
+## 코드 실행 사용 설정
 
-Aby włączyć wykonywanie kodu, skonfiguruj narzędzie do wykonywania kodu w modelu. Dzięki temu model może generować i uruchamiać kod.
+코드 실행을 사용 설정하려면 모델에서 코드 실행 도구를 구성하세요. 이를 통해 모델이 코드를 생성하고 실행할 수 있습니다.
 
 ### Python
 
@@ -51,7 +51,7 @@ for step in interaction.steps:
         print(step.result)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -93,7 +93,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Dane wyjściowe mogą wyglądać mniej więcej tak (sformatowane dla lepszej czytelności):
+출력은 가독성을 위해 서식이 지정된 다음과 같이 표시될 수 있습니다.
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -142,25 +142,25 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-Te dane wyjściowe łączą kilka części treści, które model zwraca podczas wykonywania kodu:
+이 출력은 코드 실행을 사용할 때 모델이 반환하는 여러 콘텐츠 부분을 결합합니다.
 
-- `text`: tekst wbudowany wygenerowany przez model
-- `code_execution_call`: kod wygenerowany przez model, który ma zostać wykonany.
-- `code_execution_result`: wynik wykonania kodu
+- `text`: 모델에서 생성된 인라인 텍스트
+- `code_execution_call`: 실행 목적으로 모델에서 생성된 코드
+- `code_execution_result`: 실행 가능한 코드의 결과
 
-## Wykonanie kodu z obrazami (Gemini 3)
+## 이미지를 사용한 코드 실행 (Gemini 3)
 
-Model Gemini 3 Flash może teraz pisać i uruchamiać kod Pythona, aby aktywnie manipulować obrazami i je sprawdzać.
+이제 Gemini 3 Flash 모델이 Python 코드를 작성하고 실행하여 이미지를 적극적으로 조작하고 검사할 수 있습니다.
 
-**Przypadki użycia**
+**사용 사례**
 
-- **Powiększanie i sprawdzanie:** model automatycznie wykrywa, kiedy szczegóły są zbyt małe (np. odczytywanie odległego wskaźnika), i pisze kod, aby przyciąć i ponownie zbadać obszar w wyższej rozdzielczości.
-- **Matematyka wizualna:** model może wykonywać wieloetapowe obliczenia za pomocą kodu (np. sumować pozycje na paragonie).
-- **Adnotacje do obrazów:** model może dodawać adnotacje do obrazów, aby odpowiadać na pytania, np. rysować strzałki wskazujące relacje.
+- **확대 및 검사**: 모델은 세부정보가 너무 작을 때(예: 멀리 있는 게이지를 읽는 경우) 이를 암시적으로 감지하고 더 높은 해상도로 영역을 잘라 다시 검사하는 코드를 작성합니다.
+- **시각적 수학**: 모델은 코드를 사용하여 다단계 계산을 실행할 수 있습니다 (예: 영수증의 항목 합계).
+- **이미지 주석**: 모델은 질문에 답하기 위해 이미지를 주석으로 달 수 있습니다(예: 관계를 보여주는 화살표를 그림).
 
-## Włączanie wykonywania kodu za pomocą obrazów
+## 이미지를 사용한 코드 실행 사용 설정
 
-Wykonywanie kodu z obrazami jest oficjalnie obsługiwane w Gemini 3 Flash. Możesz aktywować to działanie, włączając zarówno wykonywanie kodu jako narzędzia, jak i myślenie.
+이미지를 사용한 코드 실행은 Gemini 3 Flash에서 공식적으로 지원됩니다. 도구로서의 코드 실행과 사고를 모두 사용 설정하면 이 동작을 활성화할 수 있습니다.
 
 ### Python
 
@@ -198,7 +198,7 @@ for step in interaction.steps:
         print(step.result)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -281,9 +281,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d @payload.json
 ```
 
-## Używanie wykonywania kodu w interakcjach wieloetapowych
+## 멀티턴 상호작용에서 코드 실행 사용
 
-Możesz też używać wykonywania kodu w ramach wieloetapowej rozmowy za pomocą `previous_interaction_id`.
+`previous_interaction_id`을 사용하여 멀티턴 대화의 일부로 코드 실행을 사용할 수도 있습니다.
 
 ### Python
 
@@ -318,7 +318,7 @@ for step in interaction2.steps:
         print(step.result)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -382,73 +382,73 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Wejście/wyjście (I/O)
+## 입력/출력 (I/O)
 
-Począwszy od [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#gemini-2.0-flash), wykonywanie kodu obsługuje wprowadzanie plików i wyświetlanie wykresów. Dzięki tym możliwościom wprowadzania i wyprowadzania danych możesz przesyłać pliki CSV i tekstowe, zadawać pytania dotyczące tych plików i generować wykresy [Matplotlib](https://matplotlib.org/) w ramach odpowiedzi. Pliki wyjściowe są zwracane w odpowiedzi jako obrazy w treści.
+[Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#gemini-2.0-flash)부터 코드 실행은 파일 입력과 그래프 출력을 지원합니다. 이러한 입력 및 출력 기능을 사용하면 CSV 파일과 텍스트 파일을 업로드하고 파일에 대해 질문하고 [Matplotlib](https://matplotlib.org/) 그래프를 대답의 일부로 생성할 수 있습니다. 출력 파일은 응답에 인라인 이미지로 반환됩니다.
 
-### Ceny operacji wejścia/wyjścia
+### I/O 가격 책정
 
-W przypadku korzystania z wejścia/wyjścia wykonywania kodu naliczane są opłaty za tokeny wejściowe i wyjściowe:
+코드 실행 I/O를 사용하면 입력 토큰과 출력 토큰에 대한 요금이 청구됩니다.
 
-**Tokeny wejściowe:**
+**입력 토큰:**
 
-- Prompt użytkownika
+- 사용자 프롬프트
 
-**Tokeny wyjściowe:**
+**출력 토큰:**
 
-- Kod wygenerowany przez model
-- Wynik wykonania kodu w środowisku kodu
-- Tokeny myślenia
-- Podsumowanie wygenerowane przez model
+- 모델에서 생성된 코드
+- 코드 환경의 코드 실행 출력
+- 사고 토큰
+- 모델에서 생성된 요약
 
-### Szczegóły wejścia/wyjścia
+### I/O 세부정보
 
-Podczas pracy z operacjami wejścia-wyjścia związanymi z wykonywaniem kodu pamiętaj o tych szczegółach technicznych:
+코드 실행 I/O를 사용할 때는 다음 기술 세부정보에 유의하세요.
 
-- Maksymalny czas działania środowiska kodu to 30 sekund.
-- Jeśli środowisko kodu wygeneruje błąd, model może zdecydować się na ponowne wygenerowanie kodu. Może się to zdarzyć maksymalnie 5 razy.
-- Maksymalny rozmiar pliku wejściowego jest ograniczony przez okno tokenów modelu. Jeśli prześlesz plik, który przekracza maksymalne okno kontekstu modelu, interfejs API zwróci błąd.
-- Wykonywanie kodu działa najlepiej w przypadku plików tekstowych i CSV.
-- Plik wejściowy można przekazać jako dane wbudowane lub przesłać za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl), a plik wyjściowy jest zawsze zwracany jako dane wbudowane.
+- 코드 환경의 최대 런타임은 30초입니다.
+- 코드 환경에서 오류가 발생하면 모델이 코드 출력을 재생성할 수 있습니다. 이러한 상황은 최대 5번까지 발생할 수 있습니다.
+- 최대 파일 입력 크기는 모델 토큰 창에 의해 제한됩니다. 모델의 최대 컨텍스트 윈도우를 초과하는 파일을 업로드하면 API에서 오류를 반환합니다.
+- 코드 실행은 텍스트 및 CSV 파일에서 가장 잘 작동합니다.
+- 입력 파일은 인라인 데이터로 전달하거나 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 사용하여 업로드할 수 있으며, 출력 파일은 항상 인라인 데이터로 반환됩니다.
 
-## Płatności
+## 결제
 
-Włączenie wykonywania kodu z interfejsu Gemini API nie wiąże się z dodatkowymi opłatami.
-Opłata zostanie naliczona według aktualnej stawki za tokeny wejściowe i wyjściowe na podstawie używanego modelu Gemini.
+Gemini API에서 코드 실행을 사용 설정하는 데에는 추가 비용이 발생하지 않습니다.
+사용 중인 Gemini 모델에 따라 입력 및 출력 토큰의 현재 요율로 비용이 청구됩니다.
 
-Oto kilka dodatkowych informacji o płatnościach za wykonywanie kodu:
+코드 실행의 청구에 대해 몇 가지 중요한 사항은 다음과 같습니다.
 
-- Opłata jest naliczana tylko raz za tokeny wejściowe przekazywane do modelu i za tokeny wyjściowe zwracane przez model.
-- Tokeny reprezentujące wygenerowany kod są liczone jako tokeny wyjściowe. Wygenerowany kod może zawierać tekst i wyniki multimodalne, takie jak obrazy.
-- Wyniki wykonania kodu są również liczone jako tokeny wyjściowe.
+- 모델에 전달하는 입력 토큰에 대해서는 비용이 한 번만 청구되며, 모델에서 사용자에게 반환하는 최종 출력 토큰에 대해서는 비용이 청구됩니다.
+- 생성된 코드를 나타내는 토큰은 출력 토큰으로 계산됩니다. 생성된 코드에는 텍스트 및 멀티모달 출력(예: 이미지)이 포함될 수 있습니다.
+- 코드 실행 결과도 출력 토큰으로 집계됩니다.
 
-Model rozliczeń przedstawia ten diagram:
+결제 모델은 다음 다이어그램에 나와 있습니다.
 
-![model rozliczeniowy wykonania kodu,](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=pl)
+![코드 실행 청구 모델](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=ko)
 
-- Opłaty są naliczane według aktualnej stawki za tokeny wejściowe i wyjściowe na podstawie używanego modelu Gemini.
-- Jeśli Gemini używa wykonania kodu podczas generowania odpowiedzi, oryginalny prompt, wygenerowany kod i wynik wykonania kodu są oznaczone jako *tokeny pośrednie* i rozliczane jako *tokeny wejściowe*.
-- Gemini generuje podsumowanie i zwraca wygenerowany kod, wynik wykonania kodu oraz ostateczne podsumowanie. Są one rozliczane jako *tokeny wyjściowe*.
-- Interfejs Gemini API uwzględnia w odpowiedzi API pośrednią liczbę tokenów, dzięki czemu wiesz, dlaczego otrzymujesz dodatkowe tokeny wejściowe poza początkowym promptem.
+- 사용 중인 Gemini 모델에 따라 입력 및 출력 토큰의 현재 요율로 비용이 청구됩니다.
+- 응답을 생성할 때 Gemini에 코드 실행이 사용되는 경우 원본 프롬프트, 생성된 코드, 실행된 코드 결과가 *중간 토큰* 라벨로 표시되고 *입력 토큰*으로 청구됩니다.
+- 그런 후 Gemini가 요약을 생성하고 생성된 코드, 실행된 코드 결과, 최종 요약을 반환합니다. 이러한 토큰은 *출력 토큰*으로 청구됩니다.
+- Gemini API에는 API 응답에 중간 토큰 수가 포함되기 때문에 초기 프롬프트 이상으로 추가된 입력 토큰이 발생하는 이유를 알 수 있습니다.
 
-## Ograniczenia
+## 제한사항
 
-- Model może tylko generować i wykonywać kod. Nie może zwracać innych artefaktów, takich jak pliki multimedialne.
-- W niektórych przypadkach włączenie wykonywania kodu może prowadzić do regresji w innych obszarach danych wyjściowych modelu (np. w pisaniu opowiadań).
-- Różne modele mają różną zdolność do skutecznego wykonywania kodu.
+- 모델은 코드를 생성 및 실행할 수만 있습니다. 미디어 파일과 같은 다른 아티팩트는 반환할 수 없습니다.
+- 일부 경우에 코드 실행을 사용 설정하면 모델 출력의 다른 영역(예: 스토리 작성)에서 성능이 저하될 수 있습니다.
+- 다양한 모델이 코드 실행을 성공적으로 사용하는 능력에는 약간의 차이가 있습니다.
 
-## Obsługiwane kombinacje narzędzi
+## 지원되는 도구 조합
 
-Narzędzie do wykonywania kodu można połączyć z [powiązaniem ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl), aby obsługiwać bardziej złożone przypadki użycia.
+코드 실행 도구를 [Google 검색을 사용한 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)과 결합하여 더 복잡한 사용 사례를 지원할 수 있습니다.
 
-Modele Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak wykonywanie kodu) z narzędziami niestandardowymi (wywoływanie funkcji).
+Gemini 3 모델은 코드 실행과 같은 기본 제공 도구와 맞춤 도구(함수 호출)의 조합을 지원합니다.
 
-## Obsługiwane biblioteki
+## 지원되는 라이브러리
 
-Środowisko wykonawcze kodu zawiera te biblioteki:
+코드 실행 환경에는 다음 라이브러리가 포함됩니다.
 
 - attrs
-- szachy
+- 체스
 - contourpy
 - fpdf
 - geopandas
@@ -463,9 +463,9 @@ Modele Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak wykony
 - numpy
 - opencv-python
 - openpyxl
-- przygotowywanie pakietów
-- pandy
-- poduszka
+- 패키징
+- pandas
+- pillow
 - protobuf
 - pylatex
 - pyparsing
@@ -477,29 +477,29 @@ Modele Gemini 3 obsługują łączenie wbudowanych narzędzi (takich jak wykony
 - scikit-learn
 - scipy
 - seaborn
-- sześć
+- 육
 - striprtf
 - sympy
-- tabelaryzować
+- tabulate
 - tensorflow
 - toolz
 - xlrd
 
-Nie możesz instalować własnych bibliotek.
+사용자의 고유 라이브러리는 설치할 수 없습니다.
 
-## Co dalej?
+## 다음 단계
 
-- Wypróbuj
-- Dowiedz się więcej o innych narzędziach Gemini API:
-  - [Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)
-  - [Powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)
+- 다음과 같은
+- 다른 Gemini API 도구 알아보기:
+  - [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)
+  - [Google 검색으로 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)
 
-Prześlij opinię
+의견 보내기
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Ostatnia aktualizacja: 2026-06-22 UTC.
+최종 업데이트: 2026-06-22(UTC)
 
-Chcesz przekazać coś jeszcze?
+의견을 전달하고 싶나요?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-22 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-22(UTC)"],[],[]]

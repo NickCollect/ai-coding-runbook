@@ -1,78 +1,76 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=ar
-fetched_at: 2026-06-29T05:36:18.972255+00:00
-title: "\u062f\u0644\u064a\u0644 \u0627\u0644\u0628\u062f\u0621 \u0627\u0644\u0633\u0631\u064a\u0639 \u0644\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=pl
+fetched_at: 2026-07-06T05:13:49.252687+00:00
+title: "Kr\u00f3tkie wprowadzenie do Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-إرسال ملاحظات
+Prześlij opinię
 
-# دليل البدء السريع لاستخدام Google AI Studio
+# Krótkie wprowadzenie do Google AI Studio
 
-تتيح لك أداة [Google AI Studio](https://aistudio.google.com/?hl=ar) تجربة
-النماذج بسرعة واستخدام طلبات مختلفة. عندما تصبحون مستعدين للإنشاء، يمكنكم اختيار "الحصول على الرمز البرمجي" ولغة البرمجة المفضّلة لاستخدام [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=ar).
+[Google AI Studio](https://aistudio.google.com/?hl=pl) pozwala szybko testować
+modele i eksperymentować z różnymi promptami. Gdy wszystko będzie gotowe, możesz kliknąć „Pobierz kod” i wybrać preferowany język programowania, aby używać interfejsu [Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=pl).
 
-## الطلبات والإعدادات
+## Prompty i ustawienia
 
-توفّر أداة Google AI Studio عدة واجهات للطلبات المصمّمة لحالات استخدام مختلفة. يغطّي هذا الدليل **طلبات المحادثة** المستخدَمة لإنشاء
-تجارب حوارية. تسمح هذه التقنية بتلقّي عدة مدخلات
-وتقديم عدة ردود لإنشاء الناتج. يمكنكم معرفة المزيد من خلال
-[مثال طلب المحادثة أدناه](#chat_example).
-تشمل الخيارات الأخرى **البث في الوقت الفعلي** و**إنشاء الفيديوهات** و
-المزيد.
+Google AI Studio udostępnia kilka interfejsów promptów, które są przeznaczone do różnych zastosowań. Ten przewodnik omawia **prompty czatu**, które służą do tworzenia
+trybów konwersacyjnych. Ta technika promptowania umożliwia generowanie danych wyjściowych na podstawie wielu tur wprowadzania danych
+i odpowiedzi. Więcej informacji znajdziesz w naszym
+[przykładzie prompta czatu poniżej](#chat_example).
+Inne opcje to m.in. **przesyłanie strumieniowe w czasie rzeczywistym** i **generowanie filmów**
+.
 
-توفر أداة AI Studio أيضًا لوحة **إعدادات التشغيل** التي يمكنكم من خلالها إجراء
-تعديلات على [مَعلمات النموذج](https://ai.google.dev/docs/prompting-strategies?hl=ar#model-parameters)،
-[إعدادات الأمان](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar)، وتفعيل أدوات مثل
-[الناتج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)، [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)، [تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)، و[التثبيت](https://ai.google.dev/gemini-api/docs/grounding?hl=ar).
+AI Studio udostępnia też panel **Ustawienia uruchamiania** , w którym możesz dostosować
+[parametry modelu](https://ai.google.dev/docs/prompting-strategies?hl=pl#model-parameters),
+[ustawienia bezpieczeństwa](https://ai.google.dev/gemini-api/docs/safety-settings?hl=pl) i włączyć narzędzia takie jak
+[dane wyjściowe w postaci ustrukturyzowanej](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl), [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl), [wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl) i [ugruntowanie](https://ai.google.dev/gemini-api/docs/grounding?hl=pl).
 
-## مثال على طلب محادثة: إنشاء تطبيق محادثة مخصّص
+## Przykład prompta czatu: tworzenie niestandardowej aplikacji czatu
 
-إذا سبق لكم استخدام روبوت دردشة متعدد الأغراض مثل
-[Gemini](https://gemini.google.com/?hl=ar)، فقد اختبرتم بأنفسكم مدى فعالية نماذج الذكاء الاصطناعي التوليدي في الحوارات المفتوحة. على الرغم من أنّ روبوتات الدردشة متعددة الأغراض هذه مفيدة، غالبًا ما يجب تخصيصها لحالات استخدام معيّنة.
+Jeśli korzystasz z czatbota ogólnego przeznaczenia, takiego jak
+[Gemini](https://gemini.google.com/?hl=pl), wiesz, jak potężne mogą być modele
+generatywnej AI w przypadku otwartych dialogów. Chociaż te czatboty ogólnego przeznaczenia są przydatne, często trzeba je dostosować do konkretnych zastosowań.
 
-على سبيل المثال، قد تريدون إنشاء روبوت دردشة لخدمة العملاء لا يتيح إلا المحادثات التي تتناول منتجًا معيّنًا للشركة. قد تريدون إنشاء روبوت دردشة يتحدث بأسلوب أو نبرة معيّنة، مثل روبوت يطلق الكثير من النكات أو يتحدث بأسلوب الشاعر أو يستخدم الكثير من الرموز الإيموجي في إجاباته.
+Możesz na przykład utworzyć czatbota obsługi klienta, który obsługuje tylko rozmowy dotyczące produktu firmy. Możesz też utworzyć czatbota, który mówi w określonym tonie lub stylu: bota, który żartuje, rymuje jak poeta lub używa w odpowiedziach wielu emoji.
 
-يوضّح لكم هذا المثال كيفية استخدام Google AI Studio لإنشاء روبوت دردشة ودود يتواصل كما لو كان كائنًا فضائيًا يعيش على أحد أقمار كوكب المشتري، وهو أوروبا.
+Ten przykład pokazuje, jak używać Google AI Studio do tworzenia przyjaznego czatbota, który komunikuje się tak, jakby był kosmitą mieszkającym na jednym z księżyców Jowisza – Europie.
 
-### الخطوة 1: إنشاء طلب محادثة
+### Krok 1. Utwórz prompt na czacie
 
-لإنشاء روبوت دردشة، يجب تقديم أمثلة على التفاعلات بين المستخدم وروبوت الدردشة لتوجيه النموذج إلى تقديم الردود المطلوبة.
+Aby utworzyć czatbota, musisz podać przykłady interakcji między użytkownikiem a czatbotem, aby model mógł udzielać odpowiedzi, których oczekujesz.
 
-لإنشاء طلب محادثة، اتّبِعوا الخطوات التالية:
+Aby utworzyć prompt na czacie:
 
-1. افتحوا [Google AI Studio](https://aistudio.google.com/?hl=ar). سيتم فتح **ساحة اللعب** تلقائيًا مع طلب محادثة جديد.
-2. انقروا على **إعدادات التشغيل** tune في أعلى يسار الشاشة
-   لتوسيع اللوحة، وابحثوا عن
-   [**تعليمات النظام**](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions)
-   حقل الإدخال. الصقوا ما يلي في حقل إدخال النص:
+1. Otwórz [Google AI Studio](https://aistudio.google.com/?hl=pl). Domyślnie otworzy się **plac zabaw** z nowym promptem na czacie.
+2. W prawym górnym rogu kliknij **Ustawienia uruchamiania** tune , aby rozwinąć panel, i znajdź pole do wprowadzania danych [**Instrukcje systemowe**](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl#system-instructions). Wklej w polu tekstowym ten tekst:
 
    ```
    You are an alien that lives on Europa, one of Jupiter's moons.
    ```
 
-بعد إضافة تعليمات النظام، ابدأوا اختبار تطبيقكم من خلال التحدّث مع النموذج:
+Po dodaniu instrukcji systemowych zacznij testować aplikację, rozmawiając z modelem:
 
-1. في مربّع إدخال النص الذي يحمل العنوان **اكتب شيئًا...** ، اكتبوا سؤالاً أو
-   ملاحظة قد يطرحها المستخدم. على سبيل المثال:
+1. W polu tekstowym oznaczonym **Wpisz coś...** wpisz pytanie lub
+   obserwację, którą może zadać użytkownik. Na przykład:
 
-   **المستخدم:**
+   **Użytkownik:**
 
    ```
    What's the weather like?
    ```
-2. انقروا على الزر **تشغيل** للحصول على ردّ من روبوت الدردشة. قد يكون هذا الردّ على النحو التالي:
+2. Aby uzyskać odpowiedź od czatbota, kliknij przycisk **Uruchom**. Odpowiedź może wyglądać tak:
 
-   **النموذج:**
+   **Model:**
 
    ```
    Ah, a query about the flows and states upon Europa! You speak of "weather,"
@@ -81,14 +79,14 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    (gemini-2.5-pro)
 
-### الخطوة 2: تعليم روبوت الدردشة التحدّث بشكل أفضل
+### Krok 2. Naucz bota lepiej rozmawiać
 
-من خلال تقديم تعليمات واحدة، تمكّنتم من إنشاء روبوت دردشة أساسي للكائن الفضائي في أوروبا. ومع ذلك، قد لا تكون التعليمات الواحدة كافية لضمان الاتساق والجودة في ردود النموذج. بدون تعليمات أكثر تحديدًا، يميل ردّ النموذج على سؤال حول الطقس إلى أن يكون طويلاً جدًا، ويمكن أن يتخذ شكلًا مختلفًا.
+Dzięki jednej instrukcji udało Ci się utworzyć podstawowego czatbota kosmitę z Europy. Jednak jedna instrukcja może nie wystarczyć, aby zapewnić spójność i jakość odpowiedzi modelu. Bez bardziej szczegółowych instrukcji odpowiedź modelu na pytanie o pogodę jest zwykle bardzo długa i może być nieprzewidywalna.
 
-خصّصوا نبرة روبوت الدردشة من خلال إضافة تعليمات النظام:
+Dostosuj ton czatbota, dodając instrukcje systemowe:
 
-1. ابدأوا طلب محادثة جديدًا أو استخدموا الطلب نفسه. يمكن تعديل تعليمات النظام بعد بدء جلسة المحادثة.
-2. في قسم **تعليمات النظام** ، غيِّروا التعليمات الحالية إلى ما يلي:
+1. Rozpocznij nowy prompt na czacie lub użyj tego samego. Instrukcje systemowe można modyfikować po rozpoczęciu sesji czatu.
+2. W sekcji **Instrukcje systemowe** zmień dotychczasowe instrukcje na te:
 
    ```
    You are Tim, an alien that lives on Europa, one of Jupiter's moons.
@@ -96,9 +94,9 @@ Google uses AI technology to translate content into your preferred language. AI 
    Keep your answers under 3 paragraphs long, and use an upbeat, chipper tone
    in your answers.
    ```
-3. أعيدوا إدخال سؤالكم (`What's the weather like?`) وانقروا على الزر **تشغيل**. إذا لم تبدأوا محادثة جديدة، قد يبدو ردّكم على النحو التالي:
+3. Ponownie wpisz pytanie (`What's the weather like?`) i kliknij przycisk **Uruchom**. Jeśli nie rozpoczniesz nowego czatu, odpowiedź może wyglądać tak:
 
-   **النموذج:**
+   **Model:**
 
    ```
    Oh, hello again! Still curious about the flows and states, are we? Wonderful!
@@ -109,24 +107,24 @@ Google uses AI technology to translate content into your preferred language. AI 
 
    (gemini-2.5-pro)
 
-يمكنكم استخدام هذا النهج لإضافة المزيد من التفاصيل إلى روبوت الدردشة. اطرحوا المزيد من الأسئلة وعدّلوا الإجابات وحسّنوا جودة روبوت الدردشة. واصلوا إضافة التعليمات أو تعديلها واختبروا كيف تغيّر سلوك روبوت الدردشة.
+Możesz użyć tej metody, aby dodać czatbotowi więcej głębi. Zadawaj więcej pytań, edytuj odpowiedzi i poprawiaj jakość czatbota. Dodawaj lub modyfikuj instrukcje i sprawdzaj, jak zmieniają one zachowanie czatbota.
 
-### الخطوة 3: الخطوات التالية
+### Krok 3. Dalsze czynności
 
-على غرار أنواع الطلبات الأخرى، بعد إنشاء نموذج أولي للطلب بما يرضيكم، يمكنكم استخدام الزر **الحصول على الرمز البرمجي** لبدء الترميز أو حفظ الطلب للعمل عليه لاحقًا ومشاركته مع الآخرين.
+Podobnie jak w przypadku innych typów promptów, gdy prototyp prompta będzie Ci odpowiadać, możesz kliknąć przycisk **Pobierz kod** , aby rozpocząć kodowanie, lub zapisać prompta, aby pracować nad nim później i udostępnić go innym.
 
-## محتوى إضافي للقراءة
+## Więcej informacji
 
-- إذا كنتم مستعدين للانتقال إلى الرمز البرمجي، اطّلِعوا على [أدلة البدء في واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/get-started?hl=ar).
-- للتعرّف على كيفية إنشاء طلبات أفضل، اطّلِعوا على [إرشادات
-  تصميم الطلبات](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ar).
+- Jeśli chcesz przejść do kodu, zapoznaj się z przewodnikami dla początkujących dotyczącymi interfejsu [API
+  Get started guides](https://ai.google.dev/gemini-api/docs/get-started?hl=pl).
+- Aby dowiedzieć się, jak tworzyć lepsze prompty, zapoznaj się z [wytycznymi dotyczącymi projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
 
-إرسال ملاحظات
+Prześlij opinię
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)
+Ostatnia aktualizacja: 2026-06-22 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Chcesz przekazać coś jeszcze?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-22 UTC."],[],[]]

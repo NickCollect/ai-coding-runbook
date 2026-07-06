@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=ar
-fetched_at: 2026-06-29T05:37:47.552755+00:00
+fetched_at: 2026-07-06T05:19:07.653994+00:00
 title: "\u0641\u0647\u0645 \u0627\u0644\u0635\u0648\u0631 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

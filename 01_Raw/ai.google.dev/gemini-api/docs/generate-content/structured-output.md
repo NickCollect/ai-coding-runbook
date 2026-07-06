@@ -1,42 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=es-419
-fetched_at: 2026-06-29T05:37:08.789090+00:00
-title: "Resultados estructurados \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=ar
+fetched_at: 2026-07-06T05:15:20.876607+00:00
+title: "\u0627\u0644\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0645\u0646\u0638\u064e\u0651\u0645\u0629 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Enviar comentarios
+إرسال ملاحظات
 
-# Resultados estructurados
+# النتائج المنظَّمة
 
-Puedes configurar los modelos de Gemini para generar respuestas que cumplan con un esquema JSON proporcionado. Esto garantiza resultados predecibles y seguros para el tipo, y simplifica la extracción de datos estructurados de texto no estructurado.
+يمكنك ضبط نماذج Gemini لإنشاء ردود تتوافق مع مخطط JSON المقدَّم. يضمن ذلك الحصول على نتائج متوقّعة وآمنة من حيث النوع، كما يسهّل استخراج البيانات المنظَّمة من النصوص غير المنظَّمة.
 
-El uso de resultados estructurados es ideal para lo siguiente:
+يُعدّ استخدام المُخرجات المنظَّمة مثاليًا للحالات التالية:
 
-- **Extracción de datos:** Extrae información específica, como nombres y fechas, del texto.
-- **Clasificación estructurada:** Clasifica el texto en categorías predefinidas.
-- **Flujos de trabajo de agentes:** Genera entradas estructuradas para herramientas o APIs.
+- **استخراج البيانات:** استخراج معلومات محدّدة، مثل الأسماء والتواريخ، من النص
+- **التصنيف المنظَّم:** تصنيف النص ضِمن فئات محدَّدة مسبقًا
+- **سير عمل الذكاء الاصطناعي الوكيل:** إنشاء مدخلات منظَّمة للأدوات أو واجهات برمجة التطبيقات
 
-Además de admitir el esquema JSON en la API de REST, los SDK de GenAI de Google
-facilitan la definición de esquemas con
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) y
-[Zod](https://zod.dev/) (JavaScript).
+بالإضافة إلى إتاحة استخدام JSON Schema في REST API، تسهّل حِزم تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي تحديد المخططات باستخدام [Pydantic](https://docs.pydantic.dev/latest/) (لغة Python) و[Zod](https://zod.dev/) (لغة JavaScript).
 
-## Ejemplos de resultados estructurados
+## أمثلة على الناتج المنظَّم
 
-### Extractor de recetas
+### أداة استخراج وصفات الطعام
 
-En este ejemplo, se muestra cómo extraer datos estructurados del texto con tipos básicos de esquema JSON, como `object`, `array`, `string` y `integer`.
+يوضّح هذا المثال كيفية استخراج البيانات المنظَّمة من النص باستخدام أنواع JSON Schema الأساسية، مثل `object` و`array` و`string` و`integer`.
 
 ### Python
 
@@ -267,7 +264,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }'
 ```
 
-**Respuesta de ejemplo:**
+**مثال على الرد:**
 
 ```
 {
@@ -322,9 +319,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }
 ```
 
-### Moderación de contenido
+### الإشراف على المحتوى
 
-En este ejemplo, se muestra `anyOf` para esquemas condicionales y `enum` para la clasificación, lo que permite que la estructura de resultado varíe según el contenido.
+يعرض هذا المثال `anyOf` للمخططات الشرطية و`enum` للتصنيف، ما يسمح بتغيير بنية الإخراج استنادًا إلى المحتوى.
 
 ### Python
 
@@ -551,9 +548,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }
 ```
 
-### Estructuras recursivas
+### البُنى التكرارية
 
-En este ejemplo, se muestra cómo definir un esquema recursivo, como un organigrama.
+يوضّح هذا المثال كيفية تحديد مخطط تكراري، مثل المخطط التنظيمي.
 
 ### Python
 
@@ -716,7 +713,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }'
 ```
 
-**Respuesta de ejemplo:**
+**مثال على الرد:**
 
 ```
 {
@@ -743,11 +740,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }
 ```
 
-## Transmisión
+## البث
 
-Puedes transmitir resultados estructurados, lo que te permite comenzar a procesar la respuesta a medida que se genera, sin tener que esperar a que se complete toda la salida. Esto puede mejorar el rendimiento percibido de tu aplicación.
+يمكنك بث النتائج المنظَّمة، ما يتيح لك بدء معالجة الرد أثناء إنشائه، بدون الحاجة إلى انتظار اكتمال الناتج بالكامل. يمكن أن يؤدي ذلك إلى تحسين الأداء المُدرَك لتطبيقك.
 
-Los fragmentos transmitidos serán cadenas JSON parciales válidas, que se pueden concatenar para formar el objeto JSON final y completo.
+ستكون الأجزاء التي يتم بثها عبارة عن سلاسل JSON جزئية صالحة، ويمكن ربطها لتكوين كائن JSON النهائي الكامل.
 
 ### Python
 
@@ -803,14 +800,10 @@ for await (const chunk of stream) {
 }
 ```
 
-## Resultados estructurados con herramientas
+## مُخرجات منظَّمة باستخدام الأدوات
 
-Gemini 3 te permite combinar resultados estructurados con herramientas integradas, como
-[Fundamentación con la Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419),
-[contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419),
-[ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419),
-[búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419#structured-output), y
-[llamada a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419).
+يتيح لك Gemini 3 الجمع بين "النتائج المنظَّمة" والأدوات المضمّنة، بما في ذلك
+[تحديد المصدر من خلال "بحث Search"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) و[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) و[تطبيق الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و[البحث في الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar#structured-output) و[استدعاء الدالة](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
 
 ### Python
 
@@ -915,101 +908,101 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-## Compatibilidad con el esquema JSON
+## التوافق مع مخطّط JSON
 
-Para generar un objeto JSON, establece `response_format` en la configuración de generación. El esquema debe ser un [esquema JSON](https://json-schema.org/) válido que describa el formato de salida deseado.
+لإنشاء عنصر JSON، اضبط `response_format` في إعدادات الإنشاء. يجب أن يكون المخطط [مخطط JSON](https://json-schema.org/) صالحًا يصف تنسيق الإخراج المطلوب.
 
-Luego, el modelo generará una respuesta que sea una cadena JSON sintácticamente válida que coincida con el esquema proporcionado. Cuando se usan resultados estructurados, el modelo producirá resultados en el mismo orden que las claves del esquema.
+سينشئ النموذج بعد ذلك استجابة عبارة عن سلسلة JSON صالحة نحويًا وتتطابق مع المخطط المقدَّم. عند استخدام مخرجات منظَّمة، سينتج النموذج مخرجات بالترتيب نفسه الذي تظهر به المفاتيح في المخطط.
 
-El modo de salida estructurada de Gemini admite un subconjunto de la especificación del [esquema JSON](https://json-schema.org).
+يتوافق وضع الإخراج المنظَّم في Gemini مع مجموعة فرعية من مواصفات [مخطط JSON](https://json-schema.org).
 
-Se admiten los siguientes valores de `type`:
+في ما يلي القيم المسموح بها لـ `type`:
 
-- **`string`**: Para texto
-- **`number`**: Para números de punto flotante
-- **`integer`**: Para números enteros
-- **`boolean`**: Para valores verdaderos o falsos
-- **`object`**: Para datos estructurados con pares clave-valor
-- **`array`**: Para listas de elementos
-- **`null`**: Para permitir que una propiedad sea nula, incluye `"null"` en el array de tipos (p.ej., `{"type": ["string", "null"]}`).
+- **`string`**: للنص
+- **`number`**: للأرقام ذات الفاصلة العائمة
+- ‫**`integer`**: للأعداد الصحيحة
+- **`boolean`**: للقيم الصحيحة أو الخاطئة
+- **`object`**: للبيانات المنظَّمة التي تتضمّن أزواجًا من المفاتيح والقيم
+- **`array`**: تُستخدَم مع قوائم العناصر.
+- **`null`**: للسماح بأن تكون قيمة السمة فارغة، أدرِج `"null"` في مصفوفة النوع (مثل `{"type": ["string", "null"]}`).
 
-Estas propiedades descriptivas ayudan a guiar el modelo:
+تساعد هذه الخصائص الوصفية في توجيه النموذج:
 
-- **`title`**: Una breve descripción de una propiedad
-- **`description`**: Una descripción más larga y detallada de una propiedad
+- **`title`**: وصف مختصر لسمة.
+- ‫**`description`**: وصف أطول وأكثر تفصيلاً للمكان المخصّص للاستئجار
 
-### Propiedades específicas del tipo
+### السمات الخاصة بأنواع محدّدة
 
-**Para valores:**`object`
+**بالنسبة إلى قيم `object`:**
 
-- **`properties`**: Un objeto en el que cada clave es un nombre de propiedad y cada valor es un esquema para esa propiedad
-- **`required`**: Un array de cadenas que indica qué propiedades son obligatorias
-- **`additionalProperties`**: Controla si se permiten las propiedades que no aparecen en `properties`. Puede ser un valor booleano o un esquema.
+- **`properties`**: عنصر يكون فيه كل مفتاح اسم خاصية وكل قيمة مخططًا لهذه الخاصية.
+- استبدِل **`required`** بمصفوفة من السلاسل التي تسرد السمات الإلزامية.
+- ‫**`additionalProperties`**: يتحكّم هذا الحقل في ما إذا كان مسموحًا بالسمات غير المدرَجة في `properties`. يمكن أن تكون قيمة منطقية أو مخططًا.
 
-**Para valores `string`:**
+**بالنسبة إلى قيم `string`:**
 
-- **`enum`**: Enumera un conjunto específico de cadenas posibles para tareas de clasificación.
-- **`format`**: Especifica una sintaxis para la cadena, como `date-time`, `date` y `time`.
+- **`enum`**: تعرض هذه السمة مجموعة محدّدة من السلاسل المحتملة لمهام التصنيف.
+- **`format`**: تحدّد هذه السمة بنية السلسلة، مثل `date-time` أو `date` أو `time`.
 
-**Para valores `number` y `integer`:**
+**بالنسبة إلى القيمتَين `number` و`integer`:**
 
-- **`enum`**: Enumera un conjunto específico de valores numéricos posibles.
-- **`minimum`**: El valor inclusivo mínimo
-- **`maximum`**: El valor inclusivo máximo
+- **`enum`**: تعرض مجموعة معيّنة من القيم الرقمية المحتملة.
+- ‫**`minimum`**: تمثّل الحد الأدنى للقيمة الشاملة.
+- ‫**`maximum`**: تمثّل الحدّ الأقصى للقيمة الشاملة.
 
-**Para `array` valores:**
+**بالنسبة إلى قيم `array`:**
 
-- **`items`**: Define el esquema para todos los elementos del array.
-- **`prefixItems`**: Define una lista de esquemas para los primeros N elementos, lo que permite estructuras similares a tuplas.
-- **`minItems`**: La cantidad mínima de elementos en el array
-- **`maxItems`**: La cantidad máxima de elementos en el array
+- ‫**`items`**: تحدّد هذه السمة المخطط لجميع العناصر في المصفوفة.
+- ‫**`prefixItems`**: تحدّد هذه الكلمة الرئيسية قائمة بمخططات أول N عناصر، ما يسمح بإنشاء بنى تشبه الصفوف.
+- ‫**`minItems`**: الحد الأدنى لعدد العناصر في المصفوفة
+- ‫**`maxItems`**: الحد الأقصى لعدد العناصر في المصفوفة
 
-## Compatibilidad con modelos
+## النماذج المتوافقة
 
-Los siguientes modelos admiten resultados estructurados:
+تتيح النماذج التالية إخراج البيانات المنظَّمة:
 
-| Modelo | Resultados estructurados |
+| الطراز | المُخرجات المنظَّمة |
 | --- | --- |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Versión preliminar de Gemini 3.1 Pro | ✔️ |
+| معاينة Gemini 3.1 Pro | ✔️ |
 | Gemini 3.5 Flash | ✔️ |
-| Versión preliminar de Gemini 3.1 Flash-Lite | ✔️ |
+| معاينة Gemini 3.1 Flash-Lite | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* Ten en cuenta que Gemini 2.0 requiere una lista `propertyOrdering` explícita dentro de la entrada JSON para definir la estructura preferida. Puedes encontrar un ejemplo en este [libro de recetas](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb).*
+*\* يُرجى العِلم أنّ Gemini 2.0 يتطلّب قائمة `propertyOrdering` صريحة ضمن إدخال JSON لتحديد البنية المفضّلة. يمكنك الاطّلاع على مثال في [كتاب الطبخ](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb) هذا.*
 
-## Resultados estructurados en comparación con la llamada a función
+## المخرجات المنظَّمة مقابل استدعاء الدالة
 
-Tanto los resultados estructurados como la llamada a función usan esquemas JSON, pero tienen propósitos diferentes:
+تستخدم كلّ من النتائج المنظَّمة واستدعاء الدوال مخططات JSON، ولكنّها تخدم أغراضًا مختلفة:
 
-| Función | Caso de uso principal |
+| الميزة | حالة الاستخدام الأساسية |
 | --- | --- |
-| **Resultados estructurados** | **Dar formato a la respuesta final para el usuario.** Usa esta opción cuando quieras que la *respuesta* del modelo tenga un formato específico (p.ej., extraer datos de un documento para guardarlos en una base de datos). |
-| **Llamada a función** | **Realizar acciones durante la conversación.** Usa esta opción cuando el modelo necesite *pedirte* que realices una tarea (p.ej., "obtener el clima actual") antes de que pueda proporcionar una respuesta final. |
+| **المُخرجات المنظَّمة** | **تنسيق الرد النهائي للمستخدم:** استخدِم هذه الأداة عندما تريد أن يكون *ردّ* النموذج بتنسيق معيّن (مثل استخراج البيانات من مستند لحفظها في قاعدة بيانات). |
+| **استدعاء الدوال** | **اتّخاذ إجراء أثناء المحادثة** استخدِم هذه الحالة عندما يحتاج النموذج إلى *أن يطلب منك* تنفيذ مهمة (مثل "الحصول على حالة الطقس الحالية") قبل أن يتمكّن من تقديم إجابة نهائية. |
 
-## Prácticas recomendadas
+## أفضل الممارسات
 
-- **Descripciones claras:** Usa el campo `description` en tu esquema para proporcionar instrucciones claras al modelo sobre lo que representa cada propiedad. Esto es fundamental para guiar el resultado del modelo.
-- **Tipos seguros:** Usa tipos específicos (`integer`, `string`, `enum`) siempre que sea posible. Si un parámetro tiene un conjunto limitado de valores válidos, usa un `enum`.
-- **Ingeniería de instrucciones:** Indica claramente en tu instrucción lo que quieres que haga el modelo. Por ejemplo, "Extrae la siguiente información del texto..." o "Clasifica estos comentarios según el esquema proporcionado...".
-- **Validación:** Si bien el resultado estructurado garantiza que el JSON sea sintácticamente correcto, no garantiza que los valores sean semánticamente correctos. Siempre valida el resultado final en el código de tu aplicación antes de usarlo.
-- **Manejo de errores:** Implementa un manejo de errores sólido en tu aplicación para administrar correctamente los casos en los que el resultado del modelo, aunque cumpla con el esquema, no cumpla con los requisitos de tu lógica empresarial.
+- **أوصاف واضحة:** استخدِم الحقل `description` في المخطط لتقديم تعليمات واضحة للنموذج بشأن ما تمثله كل سمة. هذا أمر بالغ الأهمية لتوجيه ناتج النموذج.
+- **الكتابة القوية:** استخدِم أنواعًا محدّدة (`integer` و`string` و`enum`) كلما أمكن ذلك. إذا كانت إحدى المَعلمات تتضمّن مجموعة محدودة من القيم الصالحة، استخدِم `enum`.
+- **هندسة الطلبات:** حدِّد بوضوح في طلبك ما تريد أن يفعله النموذج، مثل "استخرِج المعلومات التالية من النص..." أو "صنِّف هذه الملاحظات وفقًا للمخطط المقدَّم...".
+- **التحقّق من الصحة:** على الرغم من أنّ الناتج المنظَّم يضمن أن يكون ملف JSON صحيحًا من الناحية النحوية، إلا أنّه لا يضمن أن تكون القيم صحيحة من الناحية الدلالية. يجب دائمًا التحقّق من صحة الناتج النهائي في رمز تطبيقك قبل استخدامه.
+- **معالجة الأخطاء:** نفِّذ إجراءات فعالة لمعالجة الأخطاء في تطبيقك من أجل إدارة الحالات التي قد لا يستوفي فيها ناتج النموذج متطلبات منطق نشاطك التجاري، على الرغم من توافقه مع المخطط.
 
-## Limitaciones
+## القيود
 
-- **Subconjunto de esquemas:** No se admiten todas las funciones de la especificación del esquema JSON. El modelo ignora las propiedades no compatibles.
-- **Complejidad del esquema:** Es posible que la API rechace esquemas muy grandes o anidados en profundidad. Si encuentras errores, intenta simplificar tu esquema acortando los nombres de las propiedades, reduciendo el anidamiento o limitando la cantidad de restricciones.
+- **مجموعة فرعية من المخطط:** لا تتوافق بعض ميزات مواصفات JSON Schema. يتجاهل النموذج الخصائص غير المتوافقة.
+- **تعقيد المخطط:** قد ترفض واجهة برمجة التطبيقات المخططات الكبيرة جدًا أو المتداخلة بشكل كبير. في حال مواجهة أخطاء، جرِّب تبسيط المخطط عن طريق تقصير أسماء السمات أو تقليل التداخل أو الحدّ من عدد القيود.
 
-Enviar comentarios
+إرسال ملاحظات
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última actualización: 2026-06-23 (UTC)
+تاريخ التعديل الأخير: 2026-06-23 (حسب التوقيت العالمي المتفَّق عليه)
 
-¿Quieres brindar más información?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-23 (UTC)"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-23 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

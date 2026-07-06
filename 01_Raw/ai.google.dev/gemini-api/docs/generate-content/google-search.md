@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=fr
-fetched_at: 2026-06-29T05:28:54.219134+00:00
-title: "Ancrage avec la recherche\u00a0Google \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=ja
+fetched_at: 2026-07-06T05:10:10.621822+00:00
+title: "Google \u691c\u7d22\u306b\u3088\u308b\u30b0\u30e9\u30a6\u30f3\u30c7\u30a3\u30f3\u30b0 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envoyer des commentaires
+フィードバックを送信
 
-# Ancrage avec la recherche Google
+# Google 検索によるグラウンディング
 
-L'ancrage avec la Recherche Google permet d'associer le modèle Gemini à des contenus Web en temps réel et fonctionne avec toutes les langues disponibles. Cela permet à Gemini de fournir des réponses plus précises et de citer des sources vérifiables au-delà de sa date limite de connaissances.
+Google 検索によるグラウンディングは、Gemini モデルをリアルタイムのウェブ コンテンツに接続し、利用可能なすべての言語で機能します。これにより、Gemini はより正確な回答を提供して、ナレッジ カットオフ以降の検証可能な情報源を引用することができます。
 
-L'ancrage vous aide à créer des applications qui peuvent :
+グラウンディングは、次のことができるアプリケーションの構築に役立ちます。
 
-- **Améliorer la justesse factuelle** : réduisez les hallucinations du modèle en basant les réponses sur des informations réelles.
-- **Accéder à des informations en temps réel** : répondez à des questions sur des événements et des sujets récents.
-- **Fournir des citations** : renforcez la confiance des utilisateurs en indiquant les sources des affirmations du modèle.
+- **事実の正確性を高める:** 回答を実世界の情報に基づいて生成することで、モデルのハルシネーションを減らします。
+- **リアルタイムの情報にアクセスする:** 最近の出来事やトピックに関する質問に答えます。
+- **引用を提供する:** モデルの主張の出典を示すことで、ユーザーの信頼を築きます。
 
 ### Python
 
@@ -99,23 +99,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-Pour en savoir plus, essayez le [notebook de l'outil de recherche](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=fr).
+詳しくは、[検索ツール ノートブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ja)をご覧ください。
 
-## Fonctionnement de l'ancrage avec la recherche Google
+## Google 検索によるグラウンディングの仕組み
 
-Lorsque vous activez l'outil `google_search`, le modèle gère automatiquement l'ensemble du workflow de recherche, de traitement et de citation des informations.
+`google_search` ツールを有効にすると、モデルは情報の検索、処理、引用のワークフロー全体を自動的に処理します。
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=fr)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=ja)
 
-1. **Invite de l'utilisateur** : votre application envoie l'invite d'un utilisateur à l'API Gemini avec l'outil `google_search` activé.
-2. **Analyse de l'invite** : le modèle analyse l'invite et détermine si une recherche Google peut améliorer la réponse.
-3. **Recherche Google** : si nécessaire, le modèle génère automatiquement une ou plusieurs requêtes de recherche et les exécute.
-4. **Traitement des résultats de recherche** : le modèle traite les résultats de recherche, synthétise les informations et formule une réponse.
-5. **Réponse ancrée** : l'API renvoie une réponse finale et conviviale qui est ancrée dans les résultats de recherche. Cette réponse inclut la réponse textuelle du modèle et `groundingMetadata` avec les requêtes de recherche, les résultats Web et les citations.
+1. **ユーザー プロンプト:** アプリケーションは、`google_search` ツールを有効にして、ユーザーのプロンプトを Gemini API に送信します。
+2. **プロンプトの分析:** モデルがプロンプトを分析し、Google 検索で回答を改善できるかどうかを判断します。
+3. **Google 検索:** 必要に応じて、モデルは 1 つ以上の検索クエリを自動的に生成して実行します。
+4. **検索結果の処理:** モデルが検索結果を処理し、情報を合成して回答を作成します。
+5. **グラウンディングされたレスポンス:** API は、検索結果に基づいてグラウンディングされた、最終的なユーザー フレンドリーなレスポンスを返します。このレスポンスには、モデルのテキスト回答と、検索クエリ、ウェブ検索結果、引用を含む `groundingMetadata` が含まれます。
 
-## Comprendre la réponse d'ancrage
+## グラウンディング レスポンスについて
 
-Lorsqu'une réponse est correctement ancrée, elle inclut un champ `groundingMetadata`. Ces données structurées sont essentielles pour vérifier les affirmations et créer une expérience de citation enrichie dans votre application.
+レスポンスが正常にグラウンディングされると、レスポンスに `groundingMetadata` フィールドが含まれます。この構造化データは、請求を検証し、アプリケーションでリッチな引用エクスペリエンスを構築するために不可欠です。
 
 ```
 {
@@ -157,20 +157,18 @@ Lorsqu'une réponse est correctement ancrée, elle inclut un champ `groundingMet
 }
 ```
 
-L'API Gemini renvoie les informations suivantes avec `groundingMetadata` :
+Gemini API は、`groundingMetadata` で次の情報を返します。
 
-- `webSearchQueries` : tableau des requêtes de recherche utilisées. Cela est utile pour le débogage et la compréhension du processus de raisonnement du modèle.
-- `searchEntryPoint` : contient le code HTML et CSS permettant d'afficher les suggestions de recherche requises. Les exigences d'utilisation complètes sont détaillées dans les [Conditions d'
-  utilisation](https://ai.google.dev/gemini-api/terms?hl=fr#grounding-with-google-search).
-- `groundingChunks` : tableau d'objets contenant les sources Web (`uri` et `title`).
-- `groundingSupports` : tableau de blocs permettant de connecter la réponse `text` du modèle aux sources dans `groundingChunks`. Chaque bloc associe un `segment` de texte (défini par `startIndex` et `endIndex`) à un ou plusieurs `groundingChunkIndices`. Il s'agit de la clé pour créer des citations intégrées.
+- `webSearchQueries` : 使用された検索クエリの配列。これは、モデルの推論プロセスをデバッグして理解するのに役立ちます。
+- `searchEntryPoint` : 必要な検索候補をレンダリングするための HTML と CSS が含まれています。使用要件の詳細は、[利用規約](https://ai.google.dev/gemini-api/terms?hl=ja#grounding-with-google-search)をご覧ください。
+- `groundingChunks` : ウェブソース（`uri` と `title`）を含むオブジェクトの配列。
+- `groundingSupports` : モデル レスポンス `text` を `groundingChunks` のソースに接続するチャンクの配列。各チャンクは、テキスト `segment`（`startIndex` と `endIndex` で定義）を 1 つ以上の `groundingChunkIndices` にリンクします。これが、インライン引用を作成するための鍵となります。
 
-L'ancrage avec la recherche Google peut également être utilisé en combinaison avec l'outil de contexte d'[URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) pour ancrer les réponses à la fois dans les données Web publiques
-et dans les URL spécifiques que vous fournissez.
+Google 検索によるグラウンディングは、[URL コンテキスト ツール](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)と組み合わせて使用することもできます。これにより、一般公開されているウェブデータと、指定した特定の URL の両方で回答をグラウンディングできます。
 
-## Attribuer des sources avec des citations intégrées
+## インライン引用による出典の明示
 
-L'API renvoie des données de citation structurées, ce qui vous permet de contrôler entièrement la façon dont vous affichez les sources dans votre interface utilisateur. Vous pouvez utiliser les champs `groundingSupports` et `groundingChunks` pour lier directement les affirmations du modèle à leurs sources. Voici un schéma courant pour traiter les métadonnées afin de créer une réponse avec des citations intégrées cliquables.
+API は構造化された引用データを返すため、ユーザー インターフェースでソースを表示する方法を完全に制御できます。`groundingSupports` フィールドと `groundingChunks` フィールドを使用して、モデルのステートメントをソースに直接リンクできます。メタデータを処理して、クリック可能なインライン引用を含むレスポンスを作成する一般的なパターンは次のとおりです。
 
 ### Python
 
@@ -245,62 +243,55 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-La nouvelle réponse avec des citations intégrées se présentera comme suit :
+インライン引用を含む新しい回答は次のようになります。
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## Tarifs
+## 料金
 
-Lorsque vous utilisez l'ancrage avec la recherche Google avec Gemini 3, votre projet est facturé pour chaque requête de recherche que le modèle décide d'exécuter. Si le modèle décide d'
-exécuter plusieurs requêtes de recherche pour répondre à une seule invite (par exemple,
-en recherchant `"UEFA Euro 2024 winner"` et `"Spain vs England Euro 2024 final
-score"` dans le même appel d'API), cela compte comme deux utilisations facturables de l'outil
-pour cette requête. À des fins de facturation, nous ignorons les requêtes de recherche Web vides lors du comptage des requêtes uniques. Ce modèle de facturation ne s'applique qu'aux modèles Gemini 3. Lorsque vous utilisez l'ancrage de recherche avec Gemini 2.5 ou des modèles plus anciens, votre projet est facturé par invite.
+Gemini 3 で Google 検索によるグラウンディングを使用すると、モデルが実行すると判断した検索クエリごとにプロジェクトに課金されます。モデルが 1 つのプロンプトに回答するために複数の検索クエリを実行すると判断した場合（たとえば、同じ API 呼び出し内で `"UEFA Euro 2024 winner"` と `"Spain vs England Euro 2024 final
+score"` を検索する場合）、そのリクエストに対してツールの有料使用が 2 回カウントされます。請求の目的で、一意のクエリをカウントする際に空のウェブ検索クエリは無視されます。この課金モデルは Gemini 3 モデルにのみ適用されます。Gemini 2.5 以前のモデルで検索グラウンディングを使用する場合、プロジェクトはプロンプトごとに課金されます。
 
-Pour en savoir plus sur les tarifs, consultez la page [Tarifs de l'API Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=fr).
+料金の詳細については、[Gemini API の料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)をご覧ください。
 
-## Modèles compatibles
+## サポートされているモデル
 
-Vous trouverez toutes les fonctionnalités sur la page de présentation du [modèle
-vue d'ensemble](https://ai.google.dev/gemini-api/docs/models?hl=fr).
+完全な機能については、[モデルの概要](https://ai.google.dev/gemini-api/docs/models?hl=ja)ページをご覧ください。
 
-| Modèle | Ancrage avec la recherche Google |
+| モデル | Google 検索によるグラウンディング |
 | --- | --- |
 | Gemini 3.5 Flash | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Preview Gemini 3.1 Flash-Lite | ✔️ |
-| Preview Gemini 3.1 Pro | ✔️ |
-| Preview Gemini 3 Pro | ✔️ |
-| Preview Gemini 3 Flash | ✔️ |
-| Preview Gemini 3.1 Flash-Lite | ✔️ |
+| Gemini 3.1 Flash Image プレビュー版 | ✔️ |
+| Gemini 3.1 Pro プレビュー版 | ✔️ |
+| Gemini 3 Pro Image プレビュー | ✔️ |
+| Gemini 3 Flash プレビュー | ✔️ |
+| Gemini 3.1 Flash-Lite プレビュー版 | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
-| Gemini 2.0 Flash | ✔️ |
+| Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## Combinaisons d'outils compatibles
+## サポートされているツールの組み合わせ
 
-Vous pouvez utiliser l'ancrage avec la recherche Google avec d'autres outils tels que
-[l'exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr) et
-[le contexte d'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) pour gérer des cas d'utilisation plus complexes.
+[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)や [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)などの他のツールと Google 検索によるグラウンディングを組み合わせて、より複雑なユースケースに対応できます。
 
-Les modèles Gemini 3 sont compatibles avec la combinaison d'outils intégrés (tels que l'ancrage avec la recherche Google) et d'outils personnalisés (appels de fonction). Pour en savoir plus, consultez la
-[page Combinaisons d'outils](https://ai.google.dev/gemini-api/docs/tool-combination?hl=fr).
+Gemini 3 モデルは、組み込みツール（Google 検索によるグラウンディングなど）とカスタムツール（関数呼び出し）の組み合わせをサポートしています。詳しくは、[ツールの組み合わせ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)のページをご覧ください。
 
-## Étape suivante
+## 次のステップ
 
-- [Essayez l'ancrage avec la recherche Google dans le livre de recettes de l'API Gemini.](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=fr)
-- Découvrez d'autres outils disponibles, tels que les [appels de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr).
-- [Découvrez comment augmenter les invites avec des URL spécifiques à l'aide de l'outil de contexte d'URL.](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)
+- [Gemini API クックブックの Google 検索によるグラウンディング](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=ja)を試す。
+- [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)など、その他の利用可能なツールについて学習する。
+- [URL コンテキスト ツール](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)を使用して、特定の URL でプロンプトを補強する方法について説明します。
 
-Envoyer des commentaires
+フィードバックを送信
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Dernière mise à jour le 2026/06/23 (UTC).
+最終更新日 2026-06-23 UTC。
 
-Voulez-vous nous donner plus d'informations ?
+ご意見をお聞かせください
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/23 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-23 UTC。"],[],[]]

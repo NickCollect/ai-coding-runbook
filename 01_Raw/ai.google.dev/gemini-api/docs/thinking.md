@@ -1,37 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=tr
-fetched_at: 2026-06-29T05:38:51.576336+00:00
-title: "Gemini d\u00fc\u015f\u00fcncesi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=ja
+fetched_at: 2026-07-06T05:19:34.451861+00:00
+title: "Gemini \u306e\u601d\u8003 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Gemini düşüncesi
+# Gemini の思考
 
-[Gemini 3 ve 2.5 serisi modeller](https://ai.google.dev/gemini-api/docs/models?hl=tr), akıl yürütme ve çok adımlı planlama yeteneklerini önemli ölçüde geliştiren bir "düşünme süreci" kullanır. Bu sayede kodlama, ileri matematik ve veri analizi gibi karmaşık görevlerde oldukça etkili olurlar.
+[Gemini 3 シリーズと 2.5 シリーズのモデル](https://ai.google.dev/gemini-api/docs/models?hl=ja)は、
+「思考プロセス」を使用して推論とマルチステップ
+プランニングの能力を大幅に向上させています。これにより、コーディング、高度な数学、データ分析などの複雑なタスクで非常に効果的です。
 
-Düşünme modeli kullandığınızda Gemini, yanıt vermeden önce dahili olarak akıl yürütür. Etkileşimler API'si, bu gerekçeyi `thought` adımları aracılığıyla gösterir. Bu adımlar, `steps` dizisindeki işlev çağrıları, kullanıcı girişleri veya model çıkışlarıyla birlikte kronolojik olarak görünür.
+思考モデルを使用すると、Gemini はレスポンスを返す前に内部で推論を行います。Interactions API は、この推論を `thought` ステップで表示します。これは、`steps` 配列内の関数呼び出し、ユーザー入力、モデル出力とともに時系列で表示される専用のステップです。
 
-Her düşünce adımı iki alan içerir:
+思考ステップには次の 2 つのフィールドがあります。
 
-| Alan | Zorunlu | Açıklama |
+| フィールド | 必須 | 説明 |
 | --- | --- | --- |
-| `signature` | ✅ Evet | Modelin dahili muhakeme durumunun şifrelenmiş temsili. Model en az muhakeme yaptığında bile her zaman mevcuttur. |
-| `summary` | ❌ Hayır | Gerekçeyi özetleyen bir dizi içerik (metin ve/veya resim). [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=tr) yapılandırmasına, modelin yeterli akıl yürütme yapıp yapmadığına veya içerik türüne (ör. görüntü latents'lerinde metin özetleri olmayabilir) bağlı olarak boş olabilir. |
+| `signature` | ✅ はい | モデルの内部推論状態を暗号化した表現。モデルが最小限の推論を行う場合でも常に存在します。 |
+| `summary` | ❌ いいえ | 推論を要約するコンテンツ（テキストや画像）の配列。[`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=ja) 構成、モデルが十分な推論を行ったかどうか、コンテンツ タイプ（画像レイテンシにテキストの要約がない場合など）によって空になることがあります。 |
 
-## Düşünceyle etkileşimler
+## 思考とのインタラクション
 
-Bir düşünce modeliyle etkileşim başlatmak, diğer etkileşim isteklerine benzer. `model` alanında [düşünme desteği olan modellerden](#thinking-levels) birini belirtin:
+思考モデルとのインタラクションを開始する手順は、他のインタラクション リクエストと同様です。`model` フィールドで、[思考をサポートするモデル](#thinking-levels)のいずれかを指定します。
 
 ### Python
 
@@ -73,10 +75,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Düşünce özetleri
+## 思考の要約
 
-Düşünce özetleri, modelin dahili akıl yürütme süreci hakkında bilgi verir.
-Varsayılan olarak yalnızca son çıktı döndürülür. `thinking_summaries` ile düşünce özetlerini etkinleştirebilirsiniz:
+思考の要約は、モデルの内部推論プロセスに関する分析情報を提供します。
+デフォルトでは、最終出力のみが返されます。`thinking_summaries` を使用して思考の要約を有効にできます。
 
 ### Python
 
@@ -158,23 +160,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Düşünce bloğu, aşağıdaki durumlarda **yalnızca özet içermeyen bir imza** içerebilir:
+思考ブロックには、次のような場合に**要約のない署名のみ** が含まれることがあります。
 
-- Modelin özet oluşturmak için yeterince gerekçe sunmadığı basit istekler
-- `thinking_summaries: "none"`, özetlerin açıkça devre dışı bırakıldığı yerler
-- Resim gibi belirli düşünce içerik türlerinde metin özetleri olmayabilir.
+- モデルが要約を生成するのに十分な推論を行わなかった簡単なリクエスト
+- `thinking_summaries: "none"`: 要約が明示的に無効になっている場合
+- 画像など、特定の思考コンテンツ タイプにはテキストの要約がない場合がある
 
-Kodunuz, `summary` değerinin boş veya eksik olduğu düşünce bloklarını her zaman işlemelidir.
+コードでは、`summary` が空または存在しない思考ブロックを常に処理する必要があります。
 
-## Düşünerek yayın yapma
+## 思考を伴うストリーミング
 
-Oluşturma sırasında artımlı düşünce özetleri almak için akışı kullanın.
-Düşünce blokları, iki farklı delta türüyle Server-Sent Events (SSE) kullanılarak yayınlanır:
+ストリーミングを使用して、生成中に段階的な思考の要約を受け取ります。
+思考ブロックは、サーバー送信イベント（SSE）を使用して配信されます。デルタタイプは 2 つあります。
 
-| Delta türü | Şunu içerir: | Gönderildiğinde |
+| デルタタイプ | 次を含む | 送信されるタイミング |
 | --- | --- | --- |
-| `thought_summary` | Metin veya resim özet içeriği | Artımlı özet içeren bir veya daha fazla delta |
-| `thought_signature` | Kriptografik imza | `step.stop` tarihinden önceki son değişiklik |
+| `thought_summary` | テキストまたは画像の要約コンテンツ | 段階的な要約を含む 1 つ以上のデルタ |
+| `thought_signature` | 暗号署名 | `step.stop` の前の最後のデルタ |
 
 ### Python
 
@@ -276,7 +278,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Akış yanıtı, sunucu tarafından gönderilen etkinlikleri (SSE) kullanır ve adımlar ile etkinliklerden oluşur. Örneğin:
+ストリーミング レスポンスはサーバー送信イベント（SSE）を使用し、ステップとイベントで構成されます。例:
 
 ```
 event: interaction.created
@@ -307,19 +309,20 @@ event: done
 data: [DONE]
 ```
 
-## Düşünceleri kontrol etme
+## 思考の制御
 
-Gemini modelleri, varsayılan olarak dinamik düşünme özelliğini kullanır ve isteğin karmaşıklığına göre akıl yürütme çabasını otomatik olarak ayarlar. Bu davranışı `thinking_level` parametresini kullanarak kontrol edebilirsiniz.
+Gemini モデルはデフォルトで動的思考を行い、リクエストの複雑さに応じて推論の労力を自動的に調整します。この動作は、`thinking_level` パラメータを使用して制御できます。
 
-| Model | Varsayılan Düşünme | Desteklenen Seviyeler |
+| モデル | デフォルトの思考 | サポートされているレベル |
 | --- | --- | --- |
-| gemini-3.1-pro-preview | Açık (yüksek) | düşük, orta, yüksek |
-| gemini-3-flash-preview | Açık (yüksek) | düşük, orta, yüksek |
-| gemini-3-pro-preview | Açık (yüksek) | düşük, yüksek |
-| gemini-3.5-flash | Açık (orta) | düşük, orta, yüksek |
-| gemini-2.5-pro | Açık | düşük, orta, yüksek |
-| gemini-2.5-flash | Açık | düşük, orta, yüksek |
-| gemini-2.5-flash-lite | Kapalı | düşük, orta, yüksek |
+| gemini-3.1-pro-preview | オン（高） | 低、中、高 |
+| gemini-3.1-flash-lite-image | オン（最小） | 最小、高 |
+| gemini-3-flash-preview | オン（高） | 最小、低、中、高 |
+| gemini-3-pro-preview | オン（高） | 低、高 |
+| gemini-3.5-flash | オン（中） | 最小、低、中、高 |
+| gemini-2.5-pro | オン | 低、中、高 |
+| gemini-2.5-flash | オン | 低、中、高 |
+| gemini-2.5-flash-lite | オフ | 低、中、高 |
 
 ### Python
 
@@ -370,27 +373,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Düşünce imzaları
+## 思考シグネチャ
 
-Düşünce imzaları, modelin dahili muhakemesinin şifrelenmiş gösterimleridir. Çok aşamalı etkileşimlerde muhakeme sürekliliğini korumaları gerekir.
+思考シグネチャは、モデルの内部推論を暗号化したものです。マルチターン インタラクションで推論の継続性を維持するために必要です。
 
-Etkileşimler API'si, `generateContent` API'ye kıyasla düşünce imzalarını işlemeyi çok daha kolay hale getirir.
+Interactions API を使用すると、`generateContent` API よりも思考シグネチャの処理がはるかに簡単になります。
 
-### Durumlu mod (önerilir)
+### ステートフル モード（推奨）
 
-Durumlu modda Etkileşimler API'sini kullandığınızda (`store: true` ayarlanarak ve sonraki dönüşlerde `previous_interaction_id` iletilerek) sunucu, tüm düşünce blokları ve imzalar dahil olmak üzere görüşme durumunu otomatik olarak yönetir. Bu modda imzalarla ilgili herhangi bir işlem yapmanız gerekmez. Tamamen sunucu tarafında işlenirler.
+デフォルトでは、ステートフル モードで Interactions API を使用する場合（`store: true` を設定し、後続のターンで `previous_interaction_id` を渡す場合）、サーバーはすべての思考ブロックと署名を含む会話の状態を自動的に管理します。このモードでは、署名に関して何もする必要はありません。サーバー側で完全に処理されます。
 
-### Durumsuz mod
+### ステートレス モード
 
-Sohbet durumunu kendiniz yönetiyorsanız (durum bilgisiz mod) ve her istekte giriş ve çıkışların tam geçmişini iletiyorsanız:
+会話の状態を自分で管理し（ステートレス モード）、各リクエストで入力と出力の完全な履歴を渡す場合:
 
-- Tüm `thought` bloklarını modelden alındığı şekilde **MUTLAKA** yeniden göndermelisiniz.
-- Modelin akıl yürütmeye devam etmesi için gereken imzaları içerdiğinden, geçmişteki düşünce bloklarını **KALDIRMAMALI** veya değiştirmemelisiniz.
-- Bir oturumda modeller arasında geçiş yaparken önceki modelin düşünce bloklarını yine de yeniden göndermeniz gerekir. Uyumluluk, arka uç tarafından yönetilir.
+- モデルから受信したとおりに、すべての `thought` ブロックを常に再送信する**必要があります** 。
+- モデルが推論を続行するために必要な署名が含まれているため、履歴から思考ブロックを削除または変更**しないでください** 。
+- セッション内でモデルを切り替える場合は、前のモデルの思考ブロックを再送信する必要があります。バックエンドで互換性が管理されます。
 
-## Fiyatlandırma
+## 料金
 
-Düşünme etkinleştirildiğinde yanıt fiyatı, çıkış jetonlarının ve düşünme jetonlarının toplamıdır. Oluşturulan düşünme jetonlarının toplam sayısını `total_thought_tokens` alanından alabilirsiniz.
+思考がオンの場合、レスポンスの料金は出力トークンと思考トークンの合計です。生成された思考トークンの合計数は、`total_thought_tokens` フィールドから取得できます。
 
 ### Python
 
@@ -406,32 +409,34 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-Düşünme modelleri, nihai yanıtın kalitesini artırmak için tam düşünceler üretir ve ardından düşünce süreci hakkında bilgi vermek için [özetler](#summaries) oluşturur. Fiyatlandırma, API'den yalnızca özet çıkışı yapılmasına rağmen modelin oluşturması gereken tam düşünce jetonlarına göre belirlenir.
+思考モデルは、最終的な
+レスポンスの品質を高めるために完全な思考を生成し、思考プロセスに関する
+分析情報を提供するために[要約](#summaries)を出力します。料金は、API から出力されるのは要約のみですが、モデルが生成する必要がある完全な思考トークンに基づきます。
 
-Jetonlar hakkında daha fazla bilgiyi [Jeton sayımı](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) kılavuzunda bulabilirsiniz.
+トークンの詳細については、[トークンのカウント](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)ガイドをご覧ください。
 
-## En iyi uygulamalar
+## ベスト プラクティス
 
-Aşağıdaki yönergeleri uygulayarak düşünce modellerini verimli bir şekilde kullanın.
+次のガイドラインに沿って、思考モデルを効率的に使用してください。
 
-- **Gerekçeyi inceleme**: Hataları anlamak ve istemleri iyileştirmek için düşünce özetlerini analiz edin.
-- **Düşünme bütçesini kontrol etme**: Jeton tasarrufu için uzun çıktılarda modelin daha az düşünmesini sağlayın.
-- **Basit görevler**: Bilgi alma veya sınıflandırma için düşük düşünme düzeyini kullanın (ör. "DeepMind nerede kuruldu?").
-- **Denetleme görevleri**: Kavramları karşılaştırmak veya yaratıcı akıl yürütme için varsayılan düşünceyi kullanın (ör. elektrikli ve hibrit arabaları karşılaştırın).
-- **Karmaşık görevler**: Gelişmiş kodlama, matematik veya çok adımlı planlama (ör. AIME matematik problemlerini çözme) için maksimum düşünme özelliğini kullanın.
+- **推論を確認する**: 思考の要約を分析して、失敗を把握し、プロンプトを改善します。
+- **思考予算を管理する**: 長い出力の場合は、モデルの思考を減らすようにプロンプトを設定して、トークンを節約します。
+- **簡単なタスク**: 事実の取得や分類には、最小限または低レベルの思考を使用します（例: 「DeepMind はどこで設立されましたか？」）。
+- **中程度のタスク**: 概念の比較や創造的な推論には、デフォルトの思考を使用します（例: 電気自動車とハイブリッド車の比較）。
+- **複雑なタスク**: 高度なコーディング、数学、マルチステップ プランニングには、最大限の思考を使用します（例: AIME の数学の問題を解く）。
 
-## Sırada ne var?
+## 次のステップ
 
-- [Metin üretme](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr): Temel metin yanıtları
-- [İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr): Araçlara bağlanma
-- [Gemini 3 rehberi](https://ai.google.dev/gemini-api/docs/gemini-3?hl=tr): Modele özgü özellikler
+- [テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja): 基本的なテキスト レスポンス
+- [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja): ツールに接続する
+- [Gemini 3 ガイド](https://ai.google.dev/gemini-api/docs/gemini-3?hl=ja): モデル固有の機能
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-06-24 UTC.
+最終更新日 2026-07-01 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-24 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-01 UTC。"],[],[]]

@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=tr
-fetched_at: 2026-06-29T05:41:39.518869+00:00
-title: "Jetonlar\u0131 anlama ve sayma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ar
+fetched_at: 2026-07-06T05:18:52.618243+00:00
+title: "\u0641\u0647\u0645 \u0627\u0644\u0631\u0645\u0648\u0632 \u0627\u0644\u0645\u0645\u064a\u0651\u0632\u0629 \u0648\u0639\u062f\u0651\u0647\u0627 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-# Jetonları anlama ve sayma
+# فهم الرموز المميّزة وعدّها
 
-Gemini ve diğer üretken yapay zeka modelleri, giriş ve çıkışı *token* adı verilen bir ayrıntı düzeyinde işler.
+تعالج نماذج Gemini ونماذج الذكاء الاصطناعي التوليدي الأخرى الإدخالات والمخرجات بدقة تُعرف باسم *الرمز المميز*.
 
-**Gemini modellerinde bir jeton yaklaşık 4 karaktere eşittir.
-100 jeton yaklaşık 60-80 İngilizce kelimeye eşittir.**
+**في نماذج Gemini، يعادل الرمز المميز 4 أحرف تقريبًا.
+ويساوي 100 رمز مميز حوالي 60 إلى 80 كلمة باللغة الإنجليزية.**
 
-## Jetonlar hakkında
+## لمحة عن الرموز المميّزة
 
-Jetonlar, `z` gibi tek karakterler veya `cat` gibi tam kelimeler olabilir. Uzun kelimeler
-birkaç jetona ayrılır. Model tarafından kullanılan tüm jetonlar kümesine sözlük, metni jetonlara bölme işlemine ise *jetonlaştırma* adı verilir.
+يمكن أن تكون الرموز المميّزة أحرفًا مفردة، مثل `z`، أو كلمات كاملة، مثل `cat`. ويتم تقسيم الكلمات الطويلة إلى عدة رموز مميّزة. تُعرف مجموعة جميع الرموز المميّزة التي يستخدمها النموذج باسم المفردات، وتُعرف عملية تقسيم النص إلى رموز مميّزة باسم *الترميز*.
 
-Faturalandırma etkinleştirildiğinde [Gemini API'ye yapılan bir çağrının maliyeti](https://ai.google.dev/pricing?hl=tr) kısmen giriş ve çıkış jetonlarının sayısına göre belirlenir. Bu nedenle, jetonları nasıl sayacağınızı bilmek faydalı olabilir.
+عند تفعيل الفوترة، يتم تحديد [تكلفة طلب إلى Gemini API](https://ai.google.dev/pricing?hl=ar) جزئيًا من خلال عدد الرموز المميّزة للإدخال والإخراج، لذا قد يكون من المفيد معرفة كيفية
+عدّ الرموز المميّزة.
 
-## Parça sayma
+## عدّ الرموز المميّزة
 
-Metin, resim dosyaları ve metin dışı diğer formatlar da dahil olmak üzere Gemini API'ye yapılan tüm girişler ve API'den alınan tüm çıkışlar jetonlaştırılır.
+يتم ترميز جميع الإدخالات والمخرجات من Gemini API، بما في ذلك النصوص وملفات الصور والوسائط الأخرى غير النصية.
 
-Jetonları aşağıdaki yöntemlerle sayabilirsiniz:
+يمكنك عدّ الرموز المميّزة بالطرق التالية:
 
-- **İsteği girerek `count_tokens` işlevini çağırın.** *Yalnızca girişteki* toplam jeton sayısını döndürür. İsteklerinizin boyutunu kontrol etmek için giriş göndermeden önce bu aramayı yapın.
-- **Etkileşim yanıtında `usage` simgesini kullanın.** Giriş (`total_input_tokens`), çıkış (`total_output_tokens`), düşünme (`total_thought_tokens`), önbelleğe alınmış içerik (`total_cached_tokens`), araç kullanımı (`total_tool_use_tokens`) ve toplam (`total_tokens`) için jeton sayılarını döndürür.
+- **استدعاء `count_tokens` مع إدخال الطلب** تعرض هذه الدالة إجمالي عدد الرموز المميّزة في *الإدخال فقط*. يمكنك إجراء هذا الاستدعاء قبل إرسال الإدخال للتحقّق من حجم طلباتك.
+- **استخدام `usage` في استجابة التفاعل** تعرض هذه الدالة عدد الرموز المميّزة للإدخال (`total_input_tokens`) والإخراج (`total_output_tokens`) والتفكير (`total_thought_tokens`) والمحتوى المخزّن مؤقتًا (`total_cached_tokens`) واستخدام الأدوات (`total_tool_use_tokens`) والإجمالي (`total_tokens`).
 
-### Metin jetonlarını sayma
+### عدّ الرموز المميّزة للنص
 
 ### Python
 
@@ -99,9 +99,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### Çok aşamalı etkileşim parçalarını sayma
+### عدّ الرموز المميّزة للمحادثات المترابطة
 
-`previous_interaction_id` kullanarak sohbet geçmişindeki jetonları sayın:
+يمكنك عدّ الرموز المميّزة في سجلّ المحادثات باستخدام `previous_interaction_id`:
 
 ### Python
 
@@ -147,16 +147,16 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### Çok formatlı parçaları sayma
+### عدّ الرموز المميّزة المتعددة الوسائط
 
-Resim, video ve ses dahil olmak üzere Gemini API'ye yapılan tüm girişler jetonlaştırılır.
-Tokenleştirme hakkında önemli noktalar:
+يتم ترميز جميع الإدخالات إلى Gemini API، بما في ذلك الصور والفيديوهات والمحتوى الصوتي.
+في ما يلي نقاط أساسية حول الترميز:
 
-- **Resimler**: Her iki boyutta da ≤384 piksel olan resimler 258 jeton olarak sayılır. Daha büyük resimler, 768x768 piksellik parçalar halinde döşenir ve her parça 258 jeton olarak sayılır.
-- **Video**: Saniyede 263 jeton
-- **Ses**: Saniyede 32 parça
+- **الصور**: يتم احتساب 258 رمزًا مميزًا للصور التي يبلغ حجمها ‎384×384 بكسل أو أقل في كلا البُعدَين. ويتم تقسيم الصور الأكبر حجمًا إلى مربّعات بحجم ‎768×768 بكسل، ويتم احتساب 258 رمزًا مميزًا لكل مربّع.
+- **الفيديو**: 263 رمزًا مميزًا في الثانية
+- **المحتوى الصوتي**: 32 رمزًا مميزًا في الثانية
 
-#### Resim jetonları
+#### الرموز المميّزة للصور
 
 ### Python
 
@@ -202,7 +202,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**Satır içi veri örneği:**
+**مثال على البيانات المضمّنة:**
 
 ### Python
 
@@ -227,7 +227,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Video jetonları
+#### الرموز المميّزة للفيديوهات
 
 ### Python
 
@@ -260,7 +260,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### Ses jetonları
+#### الرموز المميّزة للمحتوى الصوتي
 
 ### Python
 
@@ -286,9 +286,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### Sistem talimatı jetonlarını sayma
+### عدّ الرموز المميّزة لتعليمات النظام
 
-Sistem talimatları, giriş jetonları kapsamında sayılır:
+يتم احتساب تعليمات النظام كجزء من الرموز المميّزة للإدخال:
 
 ### Python
 
@@ -304,9 +304,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### Araç jetonlarını sayma
+### عدّ الرموز المميّزة للأدوات
 
-Araçlar (işlevler, kod yürütme, Google Arama) da sayılır:
+يتم أيضًا احتساب الأدوات (الدوال وتنفيذ التعليمات البرمجية و"بحث Google"):
 
 ### Python
 
@@ -336,11 +336,11 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## Bağlam penceresi
+## قدرة الاستيعاب
 
-Her Gemini modelinin işleyebileceği maksimum jeton sayısı vardır. Bağlam penceresi, giriş ve çıkış jetonlarının birleşik sınırını tanımlar.
+لكل نموذج من نماذج Gemini عدد أقصى من الرموز المميّزة التي يمكنه معالجتها. وتحدّد قدرة الاستيعاب الحدّ المجمّع للرموز المميّزة للإدخال والإخراج.
 
-### Bağlam penceresi boyutunu programatik olarak alma
+### الحصول على حجم قدرة الاستيعاب آليًا
 
 ### Python
 
@@ -360,20 +360,20 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-Bağlam penceresi boyutlarını [modeller](https://ai.google.dev/gemini-api/docs/models?hl=tr) sayfasında bulabilirsiniz.
+يمكنك الاطّلاع على أحجام قدرة الاستيعاب في صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
 
-## Sırada ne var?
+## الخطوات التالية
 
-- [Metin üretme](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr): Üretimle ilgili temel bilgiler
-- [Önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr): Önbelleğe alma ile maliyetleri azaltma
-- [Fiyatlandırma](https://ai.google.dev/gemini-api/docs/pricing?hl=tr): Maliyetleri anlama
+- [إنشاء النص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar): أساسيات الإنشاء
+- [التخزين المؤقت](https://ai.google.dev/gemini-api/docs/caching?hl=ar): خفض التكاليف باستخدام التخزين المؤقت
+- [التسعير](https://ai.google.dev/gemini-api/docs/pricing?hl=ar): التعرّف على التكاليف
 
-Geri bildirim gönderin
+إرسال ملاحظات
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Son güncelleme tarihi: 2026-06-22 UTC.
+تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-22 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

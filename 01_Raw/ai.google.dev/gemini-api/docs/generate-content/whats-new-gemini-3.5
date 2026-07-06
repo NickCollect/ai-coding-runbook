@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=vi
-fetched_at: 2026-06-29T05:39:06.822867+00:00
-title: "T\u00ednh n\u0103ng m\u1edbi trong Gemini 3.5 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/whats-new-gemini-3.5?hl=pl
+fetched_at: 2026-07-06T05:21:07.502431+00:00
+title: "Nowo\u015bci w\u00a0Gemini\u00a03.5 Flash \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Gửi ý kiến phản hồi
+Prześlij opinię
 
-# Tính năng mới trong Gemini 3.5 Flash
+# Nowości w Gemini 3.5 Flash
 
-Gemini 3.5 Flash đã **phát hành rộng rãi (GA)**, ổn định và sẵn sàng để sử dụng trong quy trình sản xuất quy mô lớn. Là mô hình Flash thông minh nhất của chúng tôi, Gemini 2.0 Flash mang lại hiệu suất vượt trội và bền vững trong việc thực thi tác vụ, lập trình và thực hiện các tác vụ dài hạn ở quy mô lớn.
+Model Gemini 3.5 Flash jest **ogólnie dostępny**, stabilny i gotowy do użycia w produkcji na dużą skalę. To nasz najbardziej inteligentny model Flash, który zapewnia stałą, przełomową wydajność w zakresie wykonywania zadań przez agentów, kodowania i zadań długoterminowych na dużą skalę.
 
-Hướng dẫn này cung cấp thông tin tổng quan về các điểm cải tiến, thay đổi về API và hướng dẫn di chuyển cho Gemini 3.5 Flash.
+Ten przewodnik zawiera omówienie ulepszeń, zmian w interfejsie API i wskazówki dotyczące migracji w przypadku Gemini 3.5 Flash.
 
-## Mô hình mới
+## Nowy model
 
-| Mô hình | Mã kiểu máy | Mô tả |
+| Model | Identyfikator modelu | Opis |
 | --- | --- | --- |
-| Gemini 3.5 Flash | `gemini-3.5-flash` | Mô hình thông minh nhất của chúng tôi, mang lại hiệu suất vượt trội trong các tác vụ liên quan đến tác nhân và lập trình. |
+| Gemini 3.5 Flash | `gemini-3.5-flash` | Nasz najbardziej inteligentny model, który zapewnia stałą, przełomową wydajność w przypadku zadań agentowych i kodowania. |
 
-Gemini 3.5 Flash hỗ trợ cửa sổ ngữ cảnh 1 triệu token, tối đa 65.000 token đầu ra, khả năng tư duy và cùng một bộ công cụ cũng như các tính năng của nền tảng như Gemini 3 Flash, bao gồm cả [Sử dụng máy tính (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi).
-Để biết đầy đủ thông số kỹ thuật, hãy xem [tổng quan về các mô hình](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi).
-Để biết giá, hãy xem [trang giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.5-flash).
+Gemini 3.5 Flash obsługuje okno kontekstu o wielkości 1 mln tokenów, maksymalnie 65 tys. tokenów wyjściowych, funkcję myślenia oraz ten sam zestaw narzędzi i funkcji platformy co Gemini 3 Flash, w tym [korzystanie z komputera (wersja testowa)](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl).
+Pełne specyfikacje znajdziesz w [omówieniu modeli](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pl).
+Cennik znajdziesz na [tej stronie](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#gemini-3.5-flash).
 
-## Bắt đầu nhanh
+## Krótkie wprowadzenie
 
-Tất cả ví dụ trong hướng dẫn này đều sử dụng GenerateContent API. API Tương tác cũng được hỗ trợ; các lựa chọn và đề xuất về cấu hình tương tự cũng được áp dụng.
+Wszystkie przykłady w tym przewodniku korzystają z interfejsu GenerateContent API. Obsługiwany jest też interfejs Interactions API. Obowiązują te same opcje konfiguracji i rekomendacje.
 
 ### Python
 
@@ -83,39 +83,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-## Tính năng mới
+## Nowości
 
-- **Hiệu suất vượt trội bền vững:** Mô hình Flash thông minh nhất của chúng tôi, được tối ưu hoá cho các tác vụ lập trình và tác nhân ở quy mô lớn.
-- **Thực thi dựa trên tác nhân:** Triển khai tác nhân phụ, giải quyết vấn đề và các vòng lặp dựa trên tác nhân nhanh chóng trên quy mô lớn.
-- **Lập trình:** Các chu kỳ lập trình lặp đi lặp lại, khám phá nhanh và tạo mẫu để kiểm thử các đường dẫn thay thế và khám phá các giải pháp một cách linh hoạt.
-- **Dài hạn:** Quy trình làm việc nhiều bước và sử dụng công cụ ở quy mô lớn.
-- **Bảo lưu suy nghĩ:** Mô hình tự động duy trì quá trình suy luận trung gian trong các cuộc trò chuyện nhiều lượt. Không cần thay đổi API.
-- **Mức độ nỗ lực mặc định mới:** Mức độ nỗ lực suy nghĩ mặc định đã thay đổi từ `high` thành `medium`. Hãy xem phần [Mức độ nỗ lực mặc định mới](#default-effort-level) để biết thông tin chi tiết.
-- **Cải thiện khả năng tư duy của `low`:** Giờ đây, `low` đã được cải thiện đáng kể cho mã và các tác vụ dựa trên tác nhân đòi hỏi ít bước hơn, mang lại chất lượng cao với độ trễ và chi phí thấp hơn.
-- **Bản phát hành GA:** Mô hình ổn định để sử dụng trong sản xuất trên quy mô lớn.
+- **Stała, przełomowa wydajność:** nasz najbardziej inteligentny model Flash, zoptymalizowany pod kątem zadań związanych z agentami i kodowaniem na dużą skalę.
+- **Wykonanie przez agenta:** wdrażanie subagentów, rozwiązywanie problemów i szybkie pętle agenta na dużą skalę.
+- **Kodowanie:** iteracyjne cykle kodowania, szybkie eksplorowanie i prototypowanie, aby testować alternatywne ścieżki i dynamicznie eksplorować rozwiązania.
+- **Długoterminowe:** wieloetapowe przepływy pracy i korzystanie z narzędzi na dużą skalę.
+- **Zachowywanie myśli:** model automatycznie zachowuje pośrednie rozumowanie w wieloetapowych rozmowach. Nie wymaga to żadnych zmian w interfejsie API.
+- **Nowy domyślny poziom wysiłku:** domyślny wysiłek związany z myśleniem zmieniono z `high` na `medium`. Więcej informacji znajdziesz w sekcji [Nowy domyślny poziom nakładu pracy](#default-effort-level).
+- **Ulepszone myślenie `low`:** `low` jest teraz znacznie ulepszony w przypadku kodu i zadań agenta, które wymagają mniej kroków, oferując wysoką jakość przy mniejszym opóźnieniu i koszcie.
+- **Wersja GA:** stabilny model do użytku produkcyjnego na dużą skalę.
 
-### Chọn mô hình Flash phù hợp
+### Wybór odpowiedniego modelu Flash
 
-Gemini 3.5 Flash là mô hình Flash thông minh và mạnh mẽ nhất của chúng tôi. Tuy nhiên, các trường hợp sử dụng khác nhau có thể có các yêu cầu khác nhau về chi phí và độ trễ.
+Gemini 3.5 Flash to nasz najbardziej inteligentny i wydajny model Flash. Jednak różne przypadki użycia mogą mieć różne wymagania dotyczące kosztów i opóźnień.
 
-- **Gemini 3.1 Flash-Lite**: Đối với những tác vụ có chi phí thấp, số lượng lớn mà không yêu cầu khả năng suy luận chuyên sâu của 3.5 Flash, bạn nên sử dụng [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi).
-  Đây là một mô hình ổn định, lâu dài và được tối ưu hoá để mang lại hiệu quả. Hãy xem [hướng dẫn dành cho nhà phát triển Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi#developer_guide) để biết thêm thông tin chi tiết.
-- **Gemini 3 Flash (Bản dùng thử)**: Mặc dù bạn nên chuyển sang 3.5 Flash để có độ ổn định và khả năng suy luận tốt hơn, nhưng [Gemini 3 Flash (Bản dùng thử)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) vẫn được cung cấp cho những nhà phát triển muốn tiếp tục thử nghiệm với mô hình dùng thử này.
+- **Gemini 3.1 Flash-Lite:** do tanich zadań o dużej objętości, które nie wymagają zaawansowanego rozumowania modelu 3.5 Flash, zalecamy używanie [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl).
+  Jest to stabilny model długoterminowy zoptymalizowany pod kątem wydajności. Więcej informacji znajdziesz w [przewodniku dla programistów dotyczącym Flash Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl#developer_guide).
+- **Gemini 3 Flash (wersja testowa):** zalecamy przejście na model 3.5 Flash, który jest bardziej stabilny i zapewnia lepsze rozumowanie. [Gemini 3 Flash (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pl) jest nadal dostępny dla deweloperów, którzy chcą kontynuować testowanie z użyciem modelu w wersji testowej.
 
-## Thay đổi về hành vi
+## Zmiany w zachowaniu
 
-### Mức độ nỗ lực mặc định mới: `medium`
+### Nowy domyślny poziom nakładu pracy: `medium`
 
-Giờ đây, mức độ nỗ lực tư duy mặc định là **`medium`**, thay đổi từ `high` trong Gemini 3 Flash Preview. `medium` mang lại kết quả rất tốt trong nhiều loại nhiệm vụ, đồng thời nhanh hơn và tiết kiệm chi phí hơn. Đối với các vấn đề phức tạp, `high` khuyến khích mô hình suy nghĩ sâu sắc hơn.
+Domyślny poziom wysiłku obliczeniowego to teraz **`medium`**, a w Gemini 3 Flash w wersji testowej wynosił `high`. `medium` daje bardzo dobre wyniki w przypadku wielu różnych zadań, a przy tym jest szybszy i bardziej opłacalny. W przypadku złożonych problemów `high`
+zachęca model do głębszego zastanowienia się.
 
-| Mức độ nỗ lực | Trường hợp sử dụng |
+| Poziom wysiłku | Kiedy używać |
 | --- | --- |
-| `minimal` | Tối ưu hoá để tăng tốc độ phản hồi. Các trường hợp sử dụng tương tự như trò chuyện, câu trả lời nhanh về thông tin thực tế, lệnh gọi công cụ đơn giản hơn. |
-| `low` | Mã và các tác vụ dựa trên tác nhân đòi hỏi độ trễ thấp hơn và ít bước hơn. Cũng phù hợp với các nhiệm vụ phân tích và viết lách đòi hỏi tư duy. |
-| **`medium` (mặc định)** | **Chất lượng tốt nhất cho hầu hết các tác vụ. Được đề xuất cho mã phức tạp và các trường hợp sử dụng có tác nhân.** |
-| `high` | Tối đa hoá khả năng suy nghĩ và sử dụng các công cụ của mô hình. Phù hợp nhất với những nhiệm vụ phức tạp về suy luận, toán học khó và mã hoặc tác nhân khó nhất. Cho phép mở rộng suy nghĩ và gọi hàm. |
+| `minimal` | Zoptymalizowany pod kątem szybkości reakcji. Zastosowania podobne do czatu, szybkie odpowiedzi na pytania o fakty, prostsze wywołania narzędzi. |
+| `low` | Kod i zadania agenta, które wymagają krótszego czasu oczekiwania i mniejszej liczby kroków. Sprawdza się też w przypadku zadań analitycznych i pisarskich, które wymagają pewnego zastanowienia. |
+| **`medium` (domyślnie)** | **Najwyższa jakość w przypadku większości zadań. Zalecany w przypadku złożonego kodu i zastosowań związanych z agentami.** |
+| `high` | Maksymalizuje zdolność modelu do myślenia i korzystania z narzędzi. Najlepszy do złożonego rozumowania, trudnych obliczeń matematycznych i najtrudniejszych zadań związanych z kodem lub agentem. Umożliwia rozszerzone myślenie i wywoływanie funkcji. |
 
-Để ghi đè giá trị mặc định, hãy đặt `thinking_level` trong cấu hình của bạn:
+Aby zastąpić wartość domyślną, ustaw `thinking_level` w konfiguracji:
 
 ### Python
 
@@ -178,39 +179,39 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-Bảng sau đây cho biết những cấp độ tư duy được hỗ trợ cho mỗi mô hình:
+W tabeli poniżej znajdziesz informacje o tym, które poziomy myślenia są obsługiwane w poszczególnych modelach:
 
-| Cấp độ tư duy | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Mô tả |
+| Poziom myślenia | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Opis |
 | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | Được hỗ trợ | Không được hỗ trợ | Được hỗ trợ (Mặc định) | Được hỗ trợ | Phù hợp với chế độ cài đặt "không suy nghĩ" cho hầu hết các cụm từ tìm kiếm. Xin lưu ý rằng `minimal` không đảm bảo rằng tính năng suy nghĩ sẽ tắt, mô hình có thể suy luận ở mức tối thiểu cho các tác vụ phức tạp. |
-| **`low`** | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Giảm thiểu độ trễ và chi phí. |
-| **`medium`** | Được hỗ trợ (Mặc định) | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Tư duy cân bằng cho hầu hết các nhiệm vụ. |
-| **`high`** | Được hỗ trợ (Động) | Được hỗ trợ (Mặc định, Động) | Được hỗ trợ (Động) | Được hỗ trợ (Mặc định, Động) | Tối đa hoá độ sâu suy luận. |
+| **`minimal`** | Obsługiwane | Nieobsługiwane | Obsługiwane (domyślnie) | Obsługiwane | W przypadku większości zapytań odpowiada ustawieniu „bez myślenia”. Pamiętaj, że `minimal` nie gwarantuje wyłączenia myślenia. W przypadku złożonych zadań model może przeprowadzać bardzo ograniczone rozumowanie. |
+| **`low`** | Obsługiwane | Obsługiwane | Obsługiwane | Obsługiwane | Minimalizuje opóźnienie i koszty. |
+| **`medium`** | Obsługiwane (domyślnie) | Obsługiwane | Obsługiwane | Obsługiwane | Zrównoważone myślenie w przypadku większości zadań. |
+| **`high`** | Obsługiwane (dynamiczne) | Obsługiwane (domyślne, dynamiczne) | Obsługiwane (dynamiczne) | Obsługiwane (domyślne, dynamiczne) | Zwiększa głębokość rozumowania. |
 
-### Bảo tồn suy nghĩ
+### Zachowanie myśli
 
-Mô hình này tự động duy trì lập luận trung gian trong các cuộc trò chuyện nhiều lượt. Khi có trong nhật ký trò chuyện, ngữ cảnh suy luận sẽ được chuyển tiếp, giúp cải thiện hiệu suất đối với các tác vụ phức tạp gồm nhiều bước như gỡ lỗi lặp đi lặp lại và tái cấu trúc mã. Không cần thay đổi API:
+Model automatycznie zachowuje pośrednie wnioskowanie w rozmowach wieloetapowych. Jeśli w historii rozmowy znajduje się kontekst rozumowania, jest on przenoszony dalej, co zwiększa wydajność w przypadku złożonych zadań wieloetapowych, takich jak iteracyjne debugowanie i refaktoryzacja kodu. Nie musisz wprowadzać żadnych zmian w interfejsie API:
 
-- **Interactions API**: Suy nghĩ đã được lưu tự động. Không có thay đổi nào về hành vi.
-- **GenerateContent API**: Bắt đầu từ Gemini 3.5 Flash, mô hình này sẽ sử dụng ngữ cảnh suy luận từ tất cả các lượt trước đó khi chữ ký tư duy xuất hiện trong nhật ký trò chuyện. Để bật tính năng này, hãy truyền toàn bộ nhật ký cuộc trò chuyện chưa được sửa đổi (bao gồm cả [chữ ký suy nghĩ](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi)) trong `contents`.
-  Các SDK sẽ tự động xử lý việc này.
+- **Interfejs API interakcji:** myśli są już automatycznie zachowywane. Brak zmiany w działaniu.
+- **Interfejs GenerateContent API:** począwszy od modelu Gemini 3.5 Flash, gdy w historii rozmów znajdują się sygnatury myśli, model używa kontekstu rozumowania ze wszystkich poprzednich tur. Aby to włączyć, przekaż pełną, niezmienioną historię rozmowy (w tym [sygnatury myśli](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pl)) w parametrze `contents`.
+  Pakiety SDK obsługują to automatycznie.
 
-## Thông tin cập nhật về tham số và các phương pháp hay nhất trong Gemini 3.x
+## Aktualizacje parametrów i sprawdzone metody w Gemini 3.x
 
-Những điều sau đây áp dụng cho **tất cả các mô hình Gemini 3.x**, bao gồm cả Gemini 3.5 Flash.
+Poniższe informacje dotyczą **wszystkich modeli Gemini 3.x**, w tym Gemini 3.5 Flash.
 
-- **`temperature`, `top_p`, `top_k`**: bạn không nên thay đổi các giá trị mặc định. Khả năng suy luận của Gemini 3 được tối ưu hoá cho các chế độ cài đặt mặc định.
-- Sử dụng `thinking_level` thay vì `thinking_budget`.
-- **So khớp phản hồi gọi hàm**: `id`, `name` và số lượng phản hồi phải khớp với các lệnh gọi trước đó.
-- **Phản hồi bằng hàm đa phương thức**: bao gồm nội dung đa phương thức bên trong phản hồi bằng hàm, chứ không phải bên ngoài.
-- **Hướng dẫn nội tuyến trong câu trả lời của hàm**: thêm vào văn bản câu trả lời của hàm, chứ không phải là các phần riêng biệt.
-- **Giảm số lượng lệnh gọi công cụ không cần thiết**: Sử dụng các cấp độ tư duy thấp hơn hoặc thử nghiệm với các chỉ dẫn hệ thống để giảm số lượng lệnh gọi công cụ trong quy trình làm việc dựa trên tác nhân.
+- **`temperature`, `top_p`, `top_k`**: zdecydowanie zalecamy, aby nie zmieniać wartości domyślnych. Funkcje rozumowania Gemini 3 są zoptymalizowane pod kątem ustawień domyślnych.
+- Używaj zasady `thinking_level` zamiast `thinking_budget`.
+- **Dopasowywanie odpowiedzi wywoływania funkcji:** `id`, `name` i liczba odpowiedzi muszą być zgodne z poprzednimi wywołaniami.
+- **Odpowiedzi funkcji multimodalnych:** umieszczaj treści multimodalne w odpowiedzi funkcji, a nie poza nią.
+- **Instrukcje wbudowane w odpowiedzi funkcji:** dołączaj do tekstu odpowiedzi funkcji, a nie jako osobne części.
+- **Ograniczanie niepotrzebnych wywołań narzędzi:** używaj niższych poziomów myślenia lub eksperymentuj z instrukcjami systemowymi, aby ograniczyć wywołania narzędzi w przepływach pracy agenta.
 
-Hãy xem các phần bên dưới để biết cách cập nhật mã.
+W sekcjach poniżej znajdziesz informacje o tym, jak zaktualizować kod.
 
-### Tham số lấy mẫu (không còn được đề xuất)
+### Parametry próbkowania (nie są już zalecane)
 
-`temperature`, `top_p` và `top_k` không còn được đề xuất cho tất cả các mô hình Gemini 3.x nữa. Khả năng suy luận của Gemini 3 được tối ưu hoá cho các chế độ cài đặt mặc định. **Xoá các thông số này khỏi tất cả yêu cầu.**
+`temperature`, `top_p` i `top_k` nie są już zalecane w przypadku wszystkich modeli Gemini 3.x. Możliwości rozumowania Gemini 3 są zoptymalizowane pod kątem ustawień domyślnych. **Usuń te parametry ze wszystkich żądań.**
 
 ```
 # ⚠️ Remove these parameters (not recommended)
@@ -221,11 +222,11 @@ config = types.GenerateContentConfig(
 )
 ```
 
-Để đảm bảo tính xác định, bạn nên xác định một chỉ dẫn hệ thống có các quy tắc rõ ràng cho trường hợp sử dụng cụ thể của mình.
+Aby zapewnić determinizm, zalecamy zdefiniowanie instrukcji systemowej z wyraźnymi regułami dla konkretnego przypadku użycia.
 
-### `thinking_budget` (không nên dùng nữa)
+### `thinking_budget` (niezalecane)
 
-Bạn không nên dùng thông số `thinking_budget` dạng số thô trên tất cả các mô hình Gemini 3.x nữa. Thay vào đó, hãy dùng enum chuỗi `thinking_level`.
+Surowy parametr liczbowy `thinking_budget` nie jest już zalecany we wszystkich modelach Gemini 3.x. Zamiast tego użyj wyliczenia ciągu znaków `thinking_level`.
 
 ```
 # ⚠️ Before (not recommended)
@@ -239,17 +240,18 @@ config = types.GenerateContentConfig(
 )
 ```
 
-Các giá trị có thể là: `minimal`, `low`, `medium` (mặc định) và `high`.
+Dostępne wartości: `minimal`, `low`, `medium` (domyślna) i `high`.
 
-### Gọi hàm: so khớp phản hồi nghiêm ngặt
+### Wywoływanie funkcji: ścisłe dopasowywanie odpowiedzi
 
-Interactions API đã báo lỗi về các phản hồi hàm không khớp. API GenerateContent chưa báo lỗi, nhưng các phản hồi không khớp sẽ khiến mô hình trả về các phản hồi trống có `finish_reason: STOP` trong hầu hết các trường hợp. Luôn tuân thủ các quy ước sau:
+Interfejs API interakcji już zgłasza błędy w przypadku niezgodnych odpowiedzi funkcji. Interfejs GenerateContent API nie zgłasza jeszcze błędów, ale niedopasowane odpowiedzi powodują, że model w większości przypadków zwraca puste odpowiedzi z wartością `finish_reason: STOP`. Zawsze
+stosuj te konwencje:
 
-| Yêu cầu | Thông tin chi tiết |
+| Wymaganie | Szczegóły |
 | --- | --- |
-| Đã tính `id` | Mỗi `FunctionResponse` phải bao gồm `id` từ `FunctionCall` tương ứng |
-| Ván `name` | `name` trong phản hồi phải khớp với `name` trong lệnh gọi |
-| Số lượng trùng khớp | Trả về đúng một `FunctionResponse` cho mỗi `FunctionCall` nhận được |
+| Dodaj `id` | Każdy element `FunctionResponse` musi zawierać element `id` z odpowiedniego elementu `FunctionCall`. |
+| Mecz `name` | Wartość `name` w odpowiedzi musi być zgodna z wartością `name` w wywołaniu. |
+| Liczba dopasowań | Zwróć dokładnie 1 `FunctionResponse` za każde otrzymane `FunctionCall`. |
 
 ### Python
 
@@ -311,9 +313,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Phản hồi của hàm đa phương thức
+### Odpowiedzi funkcji multimodalnych
 
-Chúng tôi thường thấy các ứng dụng cung cấp hình ảnh bên ngoài phản hồi của hàm. Điều này có thể dẫn đến hành vi không mong muốn của mô hình (ví dụ: rò rỉ suy nghĩ) và dẫn đến kết quả đầu ra có chất lượng thấp hơn. Thay vào đó, hãy làm theo đề xuất trong [tài liệu về Multimodal Function Responses API](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=vi#multimodal) và đưa nội dung đa phương thức vào các phần phản hồi của hàm mà bạn gửi đến mô hình. Mô hình có thể xử lý nội dung đa phương thức này trong lượt tiếp theo để đưa ra câu trả lời có nhiều thông tin hơn.
+Często zdarza się, że klienci przesyłają obrazy poza odpowiedzią funkcji. Może to prowadzić do nieoczekiwanego zachowania modelu (np. wycieku myśli) i obniżać jakość wyników. Zamiast tego postępuj zgodnie z zaleceniami w [dokumentacji interfejsu API odpowiedzi funkcji multimodalnych](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=pl#multimodal) i uwzględnij treści multimodalne w częściach odpowiedzi funkcji, które wysyłasz do modelu. Model może przetworzyć te treści multimodalne w kolejnej turze, aby wygenerować bardziej precyzyjną odpowiedź.
 
 ### Python
 
@@ -366,9 +368,10 @@ const finalResponse = await ai.models.generateContent({
 });
 ```
 
-### Hướng dẫn cùng dòng trong câu trả lời của hàm
+### Instrukcje wbudowane w odpowiedzi funkcji
 
-Chúng ta thường thấy các ứng dụng cung cấp thêm hướng dẫn cùng với các phản hồi của hàm dưới dạng `Parts` tiếp theo. Điều này có thể dẫn đến hành vi không mong muốn của mô hình (ví dụ: rò rỉ suy nghĩ) và dẫn đến kết quả đầu ra có chất lượng thấp hơn. Thay vào đó, hãy thêm mọi hướng dẫn bổ sung vào cuối văn bản phản hồi của hàm, được phân tách bằng hai dòng mới.
+Często zdarza się, że klienci podają dodatkowe instrukcje wraz z odpowiedziami funkcji
+w kolejnych `Parts`. Może to prowadzić do nieoczekiwanego zachowania modelu (np. wycieku myśli) i obniżać jakość wyników. Zamiast tego dołącz dodatkowe instrukcje na końcu tekstu odpowiedzi funkcji, oddzielając je dwoma znakami nowego wiersza.
 
 ### Python
 
@@ -419,96 +422,97 @@ const finalResponse = await ai.models.generateContent({
 });
 ```
 
-### Giảm các lệnh gọi công cụ không cần thiết
+### Ograniczanie zbędnych wywołań narzędzi
 
-Nếu bạn gặp phải tình trạng sử dụng quá nhiều lệnh gọi công cụ, thì có 2 kỹ thuật giúp giảm thiểu tình trạng này:
+Jeśli zauważysz nadmierne wykorzystanie wywołań narzędzi, możesz je zminimalizować za pomocą 2 technik:
 
-1. **Bắt đầu bằng cách giảm cấp độ tư duy** (`medium`, `low` hoặc `minimal`): Cấp độ tư duy càng cao thì mô hình càng được khuyến khích sử dụng nhiều công cụ hơn để khám phá và xác minh. Vì vậy, việc giảm cấp độ có thể giảm số lượng lệnh gọi công cụ.
-2. **Thêm một chỉ dẫn hệ thống:** Nếu tình trạng sử dụng quá mức vẫn tiếp diễn sau khi điều chỉnh mức độ tư duy, hãy cân nhắc sử dụng một câu lệnh hạn chế việc sử dụng công cụ. Ví dụ:
+1. **Zacznij od obniżenia poziomu myślenia** (`medium`, `low` lub `minimal`):
+   wyższe poziomy myślenia zachęcają model do korzystania z większej liczby narzędzi do eksplorowania i weryfikowania, więc obniżenie poziomu może zmniejszyć liczbę wywołań narzędzi.
+2. **Dodaj instrukcję systemową:** jeśli po dostosowaniu poziomu myślenia nadmierne wykorzystanie się utrzymuje, rozważ użycie promptu, który ogranicza korzystanie z narzędzia. Na przykład:
 
    ```
    You have a limited action budget of <n> tool calls. Use them efficiently.
    ```
 
-## Danh sách kiểm tra cho quy trình di chuyển
+## Lista kontrolna migracji
 
-### Di chuyển từ Gemini 3 Flash (Bản xem trước)
+### Przejście z Gemini 3 Flash (wersja testowa)
 
-- Cập nhật tên mô hình: `gemini-3-flash-preview` → `gemini-3.5-flash`
-- Xem lại giá. Gemini 3.5 Flash có giá cao hơn Gemini 3 Flash (Bản dùng thử). Nếu trường hợp sử dụng của bạn rất nhạy cảm về chi phí, hãy cân nhắc việc di chuyển sang [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi). Hãy xem [trang giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-3.5-flash) để biết thông tin chi tiết.
-- Xoá `temperature`, `top_p`, `top_k` khỏi cấu hình của bạn (không còn được đề xuất nữa).
-- Thay thế `thinking_budget` với `thinking_level`.
-- Thêm `id` và `name` tương ứng vào tất cả các phần `FunctionResponse`.
-- Kiểm thử câu lệnh. Đã thay đổi mức độ nỗ lực mặc định từ `high` → `medium`; xác minh chất lượng, tốc độ và chi phí.
-- Tính năng lưu giữ suy nghĩ hiện được bật theo mặc định. Ngữ cảnh suy luận được chuyển tiếp qua các lượt, giúp cải thiện hiệu suất nhưng có thể làm tăng mức sử dụng mã thông báo.
-- Giảm số lượng lệnh gọi công cụ không cần thiết: bắt đầu bằng cách giảm mức độ tư duy (`medium`, `low` hoặc `minimal`); thêm một chỉ dẫn hệ thống để hạn chế việc sử dụng công cụ nếu tình trạng sử dụng quá mức vẫn tiếp diễn.
-- [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi) được hỗ trợ.
+- Zaktualizuj nazwę modelu: `gemini-3-flash-preview` → `gemini-3.5-flash`
+- Sprawdź ceny. Gemini 3.5 Flash jest droższy niż Gemini 3 Flash (wersja testowa). Jeśli Twój przypadek użycia jest bardzo wrażliwy na koszty, rozważ migrację do [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl). Szczegółowe informacje znajdziesz na [stronie z cennikiem](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#gemini-3.5-flash).
+- Usuń z konfiguracji elementy `temperature`, `top_p` i `top_k` (nie jest to już zalecane).
+- Zastąp `thinking_budget` tekstem `thinking_level`.
+- Dodaj `id` i pasujący znak `name` do wszystkich części `FunctionResponse`.
+- Testuj prompty. Domyślny nakład pracy zmieniono z `high` na `medium`. Sprawdź jakość, szybkość i koszt.
+- Zachowywanie myśli jest teraz domyślnie włączone. Kontekst rozumowania jest przenoszony między turami, co zwiększa wydajność, ale może zwiększyć wykorzystanie tokenów.
+- Ogranicz niepotrzebne wywołania narzędzi: zacznij od zmniejszenia poziomu myślenia (`medium`, `low` lub `minimal`); jeśli nadużywanie narzędzi będzie się utrzymywać, dodaj instrukcję systemową, która ograniczy ich używanie.
+- [Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl) jest obsługiwane.
 
-### Di chuyển từ Gemini 2.5
+### Przenoszenie z Gemini 2.5
 
-Tất cả các phương án trên, cộng thêm:
+Wszystkie powyższe funkcje oraz dodatkowo:
 
-- Đơn giản hoá câu lệnh. Nếu bạn đã sử dụng kỹ thuật thiết kế câu lệnh theo chuỗi suy luận để buộc suy luận, hãy thử `thinking_level: "medium"` hoặc `"high"` bằng các câu lệnh đơn giản hơn.
-- Kiểm thử tải PDF và nội dung nghe nhìn. Nếu bạn dựa vào hành vi cụ thể để phân tích cú pháp tài liệu dày đặc, hãy kiểm tra chế độ cài đặt `media_resolution_high` để đảm bảo độ chính xác liên tục. Việc di chuyển sang chế độ mặc định Gemini 3 cũng có thể làm tăng mức sử dụng mã thông báo cho tệp PDF nhưng giảm mức sử dụng mã thông báo cho video; nếu các yêu cầu vượt quá cửa sổ ngữ cảnh, hãy giảm rõ ràng `media_resolution`. Hãy xem tài liệu về [độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi) để biết thông tin chi tiết.
-- Tận dụng [việc sử dụng kết hợp các công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
-  Bạn có thể sử dụng Google Tìm kiếm, ngữ cảnh URL, hoạt động thực thi mã và các hàm tuỳ chỉnh trong cùng một yêu cầu.
-- Nếu sử dụng câu trả lời đa phương thức của hàm, hãy di chuyển nội dung đa phương thức vào bên trong các phần câu trả lời của hàm, chứ không phải bên cạnh các phần đó.
-- Nếu sử dụng hướng dẫn nội tuyến với các phản hồi của hàm, hãy thêm hướng dẫn đó vào văn bản phản hồi của hàm, cách nhau bằng hai dòng mới, chứ không phải là các phần riêng biệt.
-- Gemini 3.x không hỗ trợ tính năng phân đoạn hình ảnh. Đối với các khối lượng công việc phân đoạn, hãy tiếp tục sử dụng Gemini 2.5 Flash khi tắt chế độ tư duy hoặc [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=vi).
-- Xoá `candidate_count` khỏi cấu hình (không được hỗ trợ trong Gemini 3.x)
+- Uprość prompty. Jeśli do wymuszenia rozumowania używasz techniki promptowania „chain-of-thought”, spróbuj zamiast tego użyć `thinking_level: "medium"` lub `"high"` z prostszymi promptami.
+- Testowanie zadań związanych z plikami PDF i multimediami. Jeśli w przypadku analizowania dokumentów o dużej gęstości informacji polegasz na określonym działaniu, przetestuj ustawienie `media_resolution_high`, aby zapewnić dalszą dokładność. Przejście na domyślne ustawienia Gemini 3 może też zwiększyć wykorzystanie tokenów w przypadku plików PDF, ale zmniejszyć je w przypadku filmów. Jeśli żądania przekraczają okno kontekstu, wyraźnie zmniejsz `media_resolution`. Szczegóły znajdziesz w dokumentacji dotyczącej [rozdzielczości multimediów](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pl).
+- Korzystaj z [połączenia narzędzi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl).
+  W tym samym żądaniu można używać wyszukiwarki Google, kontekstu adresu URL, wykonywania kodu i funkcji niestandardowych.
+- Jeśli używasz odpowiedzi funkcji multimodalnych, przenieś treści multimodalne do części odpowiedzi funkcji, a nie obok nich.
+- Jeśli używasz instrukcji w tekście z odpowiedziami funkcji, dołącz je do tekstu odpowiedzi funkcji, oddzielając je dwoma znakami nowego wiersza, a nie jako osobne części.
+- Segmentacja obrazów nie jest obsługiwana w Gemini 3.x. W przypadku zadań związanych z segmentacją nadal używaj Gemini 2.5 Flash z wyłączoną funkcją myślenia lub [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl).
+- Usuń `candidate_count` z konfiguracji (nie jest obsługiwany w Gemini 3.x)
 
-## Các tính năng dành cho gia đình của Gemini 3
+## Funkcje rodzinne Gemini 3
 
-Gemini 3.5 Flash kế thừa mọi chức năng của nhóm mô hình Gemini 3, bao gồm cả chức năng Sử dụng máy tính.
-Các tính năng được giới thiệu trong Gemini 3 và vẫn được duy trì:
+Model Gemini 3.5 Flash ma wszystkie funkcje rodziny modeli Gemini 3, w tym korzystanie z komputera.
+Funkcje wprowadzone w Gemini 3, które są nadal dostępne:
 
-- [**Suy nghĩ**](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**:** Bối cảnh suy luận được mã hoá và duy trì trên các lệnh gọi API. Tự động trong Interactions API; ngầm trong GenerateContent.
-- [**Đầu ra có cấu trúc bằng các công cụ**](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**:** Kết hợp chế độ JSON với các công cụ tích hợp (Tìm kiếm, bối cảnh URL, thực thi mã, gọi hàm).
-- [**Phản hồi bằng hàm đa phương thức**](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#multimodal)**:** Trả về hình ảnh, âm thanh và nội dung nghe nhìn khác trong kết quả gọi hàm.
-- [**Thực thi mã bằng hình ảnh**](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi#images)**:** Thực thi mã xử lý và tạo hình ảnh.
-- [**Kết hợp sử dụng công cụ**](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi)**:** Sử dụng các công cụ tích hợp và tính năng gọi hàm tuỳ chỉnh trong cùng một yêu cầu.
-- [**Độ phân giải của nội dung nghe nhìn**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=vi)**:**
-  Kiểm soát chi tiết việc phân bổ mã thông báo cho dữ liệu đầu vào là hình ảnh, video và PDF.
-  Các mô hình Gemini 3 hỗ trợ chế độ cài đặt độ phân giải theo từng mục nội dung (`low`, `medium`, `high`, `ultra_high`) cho câu lệnh có độ trung thực hỗn hợp.
-- [**Chữ ký suy nghĩ**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=vi)**:**
-  Biểu thị được mã hoá về quá trình suy luận nội bộ của mô hình. Bắt buộc đối với chức năng gọi nhiều lượt; được các SDK chính thức quản lý tự động.
+- [**Myślenie:**](https://ai.google.dev/gemini-api/docs/thinking?hl=pl) zaszyfrowany kontekst rozumowania jest zachowywany podczas wywołań interfejsu API. Automatyczne w przypadku interfejsu Interactions API; domyślne w przypadku interfejsu GenerateContent.
+- [**Ustrukturyzowane dane wyjściowe z narzędziami:**](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl) połącz tryb JSON z wbudowanymi narzędziami (wyszukiwanie, kontekst adresu URL, wykonywanie kodu, wywoływanie funkcji).
+- [**Odpowiedzi funkcji multimodalnych:**](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl#multimodal) zwracanie obrazów, dźwięku i innych multimediów w wynikach wywołań funkcji.
+- [**Wykonanie kodu z obrazami:**](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl#images) wykonuj kod, który przetwarza i generuje obrazy.
+- [**Łączenie narzędzi:**](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl) używaj wbudowanych narzędzi i wywoływania funkcji niestandardowych w tym samym żądaniu.
+- [**Rozdzielczość multimediów:**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=pl) precyzyjna kontrola nad przydzielaniem tokenów do obrazów, filmów i plików PDF.
+  Modele Gemini 3 obsługują ustawienia rozdzielczości poszczególnych elementów treści (`low`,`medium`, `high`, `ultra_high`) w przypadku promptów o różnej jakości.
+- [**Sygnatury myśli:**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pl) zaszyfrowane reprezentacje wewnętrznego rozumowania modelu. Wymagane w przypadku wieloetapowego wywoływania funkcji; zarządzane automatycznie przez oficjalne pakiety SDK.
 
-## Các phương pháp hay nhất để viết câu lệnh
+## Sprawdzone metody dotyczące promptów
 
-Các mô hình Gemini 3.x là mô hình suy luận, điều này thay đổi cách bạn nên đưa ra câu lệnh.
+Modele Gemini 3.x to modele rozumowania, co zmienia sposób, w jaki należy je promptować.
 
-- **Hướng dẫn chính xác:** Trình bày ngắn gọn. Gemini 3.x phản hồi tốt nhất khi nhận được chỉ dẫn trực tiếp và rõ ràng. Các kỹ thuật thiết kế câu lệnh phức tạp hoặc dài dòng được thiết kế cho các mô hình cũ có thể khiến mô hình phân tích quá mức.
-- **Mức độ chi tiết của câu trả lời:** Theo mặc định, Gemini 3.x ít chi tiết hơn và ưu tiên các câu trả lời trực tiếp, hiệu quả. Nếu trường hợp sử dụng của bạn yêu cầu giọng điệu trò chuyện, hãy hướng dẫn rõ ràng cho mô hình trong câu lệnh của bạn (ví dụ: "Giải thích điều này với tư cách là một trợ lý thân thiện và hay trò chuyện").
-- **Quản lý bối cảnh:** Khi làm việc với các tập dữ liệu lớn (chẳng hạn như toàn bộ sách, cơ sở mã hoặc video dài), hãy đặt hướng dẫn hoặc câu hỏi cụ thể của bạn ở cuối câu lệnh, sau bối cảnh dữ liệu. Cố định lập luận của mô hình bằng cách bắt đầu câu hỏi bằng một cụm từ như "Dựa trên thông tin trước đó...".
+- **Dokładne instrukcje:** zadbaj o zwięzłość. Gemini 3.x najlepiej reaguje na bezpośrednie i jasne instrukcje. Rozbudowane lub złożone techniki inżynierii promptów zaprojektowane dla starszych modeli mogą powodować nadmierną analizę przez model.
+- **Poziom szczegółowości danych wyjściowych:** domyślnie Gemini 3.x jest mniej szczegółowy i preferuje bezpośrednie, zwięzłe odpowiedzi. Jeśli Twój przypadek użycia wymaga konwersacyjnego tonu, wyraźnie nakieruj model w prompcie (np. „Wyjaśnij to jako przyjazny, rozmowny asystent”).
+- **Zarządzanie kontekstem:** podczas pracy z dużymi zbiorami danych (takimi jak całe książki, bazy kodu lub długie filmy) umieszczaj konkretne instrukcje lub pytania na końcu promptu, po kontekście danych. Ukotwicz rozumowanie modelu, zaczynając pytanie od wyrażenia „Na podstawie
+  powyższych informacji…”.
 
-Tìm hiểu thêm về các chiến lược thiết kế câu lệnh trong [hướng dẫn kỹ thuật tạo câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
+Więcej informacji o strategiach projektowania promptów znajdziesz w [przewodniku po inżynierii promptów](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl).
 
-## Các điểm hạn chế
+## Ograniczenia
 
-- Gemini 3.x không hỗ trợ tính năng phân đoạn hình ảnh. Đối với các khối lượng công việc phân đoạn, hãy tiếp tục sử dụng Gemini 2.5 Flash khi tắt chế độ tư duy hoặc [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=vi).
+- Segmentacja obrazów nie jest obsługiwana w Gemini 3.x. W przypadku zadań związanych z segmentacją nadal używaj Gemini 2.5 Flash z wyłączoną funkcją myślenia lub [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=pl).
 
-## Câu hỏi thường gặp
+## Najczęstsze pytania
 
-1. **Điểm cắt kiến thức của Gemini 3.5 Flash là khi nào?** Gemini 3.5 Flash có điểm cắt kiến thức là tháng 1 năm 2025. Để biết thông tin mới nhất, hãy sử dụng công cụ [Tìm kiếm thông tin cơ sở](https://ai.google.dev/gemini-api/docs/google-search?hl=vi).
-2. **Hạn mức cửa sổ ngữ cảnh là bao nhiêu?** Gemini 3.5 Flash hỗ trợ cửa sổ ngữ cảnh đầu vào 1 triệu token và tối đa 65.000 token đầu ra.
-3. **Mã `thinking_budget` cũ của tôi có còn hoạt động không?** Có, `thinking_budget` vẫn được hỗ trợ để đảm bảo khả năng tương thích ngược, nhưng bạn nên di chuyển sang `thinking_level` để có hiệu suất dễ dự đoán hơn. Đừng sử dụng cả hai trong cùng một yêu cầu.
-4. **Gemini 3.5 Flash có hỗ trợ Batch API không?** Có. Hãy xem hướng dẫn về [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi) để biết thông tin chi tiết.
-5. **Context Caching có được hỗ trợ không?** Có, [Tính năng lưu vào bộ nhớ đệm theo bối cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi) được hỗ trợ.
-6. **Những công cụ nào được hỗ trợ?** Gemini 3.5 Flash hỗ trợ [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Kết nối với Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi), [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) tiêu chuẩn, bao gồm cả [sử dụng kết hợp các công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
-   Gemini 3.5 Flash **không** hỗ trợ tính năng [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi).
+1. **Jaka jest granica wiedzy w przypadku Gemini 3.5 Flash?** Gemini 3.5 Flash
+   ma granicę wiedzy w styczniu 2025 r. Aby uzyskać najnowsze informacje, skorzystaj z narzędzia [Search Grounding](https://ai.google.dev/gemini-api/docs/google-search?hl=pl).
+2. **Jakie są limity okna kontekstu?** Gemini 3.5 Flash obsługuje okno kontekstu z 1 mln tokenów wejściowych i do 65 tys. tokenów wyjściowych.
+3. **Czy mój stary kod `thinking_budget` będzie nadal działać?** Tak, `thinking_budget` jest nadal obsługiwany ze względu na zgodność z wcześniejszymi rozwiązaniami, ale zalecamy przejście na `thinking_level`, aby uzyskać bardziej przewidywalną skuteczność. Nie używaj obu tych parametrów w tym samym żądaniu.
+4. **Czy Gemini 3.5 Flash obsługuje interfejs Batch API?** Tak. Szczegółowe informacje znajdziesz w przewodniku po [interfejsie Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl).
+5. **Czy buforowanie kontekstu jest obsługiwane?** Tak, [buforowanie kontekstowe](https://ai.google.dev/gemini-api/docs/caching?hl=pl) jest obsługiwane.
+6. **Które narzędzia są obsługiwane?** Gemini 3.5 Flash obsługuje [wyszukiwarkę Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl), [powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl), [wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl), [wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl), [kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl) i standardowe [wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl), w tym [korzystanie z połączonych narzędzi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl).
+   [Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl) jest **niedostępne** w Gemini 3.5 Flash.
 
-## Các bước tiếp theo
+## Dalsze kroki
 
-- Tìm hiểu thêm về các chiến lược thiết kế câu lệnh trong [hướng dẫn kỹ thuật tạo câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
-- Làm quen với [Sổ tay Gemini 3](https://github.com/google-gemini/cookbook)
-- Tìm hiểu về [hoạt động tối ưu hoá và suy luận của Gemini API](https://ai.google.dev/gemini-api/docs/optimization?hl=vi)
+- Więcej informacji o strategiach projektowania promptów znajdziesz w [przewodniku po inżynierii promptów](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pl).
+- Pierwsze kroki z [Gemini 3 Cookbook](https://github.com/google-gemini/cookbook)
+- Więcej informacji o [optymalizacji i wnioskowaniu w Gemini API](https://ai.google.dev/gemini-api/docs/optimization?hl=pl)
 
-Gửi ý kiến phản hồi
+Prześlij opinię
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Cập nhật lần gần đây nhất: 2026-06-24 UTC.
+Ostatnia aktualizacja: 2026-06-24 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Chcesz przekazać coś jeszcze?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-24 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-24 UTC."],[],[]]

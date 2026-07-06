@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=zh-CN
-fetched_at: 2026-06-29T05:34:34.675120+00:00
-title: "\u4e34\u65f6\u4ee4\u724c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ar
+fetched_at: 2026-07-06T05:12:46.237151+00:00
+title: "\u0627\u0644\u0631\u0645\u0648\u0632 \u0627\u0644\u0645\u0645\u064a\u0651\u0632\u0629 \u0627\u0644\u0645\u0624\u0642\u062a\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-发送反馈
+إرسال ملاحظات
 
-# 临时令牌
+# الرموز المميّزة المؤقتة
 
-临时令牌是短期有效的身份验证令牌，用于通过 [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) 访问 Gemini API。它们旨在增强从用户设备直接连接到 API（[客户端到服务器](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn#implementation-approach)的实现）时的安全性。与标准 API 密钥一样，临时令牌可以从 Web 浏览器或移动应用等客户端应用中提取。不过，由于临时令牌会快速过期且可以受到限制，因此它们可显著降低生产环境中的安全风险。当您直接从客户端应用访问 Live API 时，应使用它们来增强 API 密钥安全性。
+الرموز المميزة المؤقتة هي رموز مميزة قصيرة الأمد للمصادقة تُستخدَم للوصول إلى Gemini API من خلال [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). وهي مصمَّمة لتعزيز الأمان عند الربط مباشرةً من جهاز المستخدم بواجهة برمجة التطبيقات (تنفيذ [من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach)). مثل مفاتيح واجهة برمجة التطبيقات العادية، يمكن استخراج الرموز المميزة المؤقتة من التطبيقات من جهة العميل، مثل متصفّحات الويب أو تطبيقات الأجهزة الجوّالة. ولكن بما أنّ الرموز المميزة المؤقتة تنتهي صلاحيتها بسرعة ويمكن حصر استخدامها، فإنّها تقلّل بشكل كبير من المخاطر الأمنية في بيئة التشغيل الفعلي. يجب استخدامها عند الوصول إلى Live API مباشرةً من التطبيقات من جهة العميل لتحسين أمان مفتاح واجهة برمجة التطبيقات.
 
-## 临时令牌的工作原理
+## طريقة عمل الرموز المميزة المؤقتة
 
-临时令牌的大致运作方式如下：
+في ما يلي كيفية عمل الرموز المميزة المؤقتة على مستوى عالٍ:
 
-1. 您的客户端（例如 Web 应用）向后端进行身份验证。
-2. 您的后端向 Gemini API 的配置服务请求临时令牌。
-3. Gemini API 会签发短期有效的令牌。
-4. 您的后端会将令牌发送给客户端，以用于与 Live API 的 WebSocket 连接。您可以通过将 API 密钥替换为临时令牌来实现此目的。
-5. 然后，客户端会像使用 API 密钥一样使用该令牌。
+1. يتم مصادقة العميل (مثل تطبيق الويب) مع الخلفية.
+2. يطلب الخلفية رمزًا مميّزًا مؤقتًا من خدمة التوفير في Gemini API.
+3. يصدر Gemini API رمزًا مميزًا صالحًا لفترة قصيرة.
+4. يرسل الخلفية الرمز المميّز إلى العميل لإجراء اتصالات WebSocket بواجهة Live API. يمكنك إجراء ذلك عن طريق استبدال مفتاح واجهة برمجة التطبيقات برمز مميّز مؤقت.
+5. يستخدم العميل بعد ذلك الرمز المميز كما لو كان مفتاح واجهة برمجة تطبيقات.
 
-![临时令牌概览](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=zh-cn)
+![نظرة عامة على الرموز المميزة المؤقتة](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=ar)
 
-这有助于提高安全性，因为即使令牌被提取，其有效期也很短，不像部署在客户端的长效 API 密钥。由于客户端直接向 Gemini 发送数据，因此这还可以缩短延迟时间，并避免后端需要代理实时数据。
+يؤدي ذلك إلى تعزيز الأمان لأنّ الرمز المميز يكون صالحًا لفترة قصيرة حتى إذا تم استخراجه، على عكس مفتاح واجهة برمجة التطبيقات الذي يكون صالحًا لفترة طويلة ويتم نشره من جهة العميل. وبما أنّ العميل يرسل البيانات مباشرةً إلى Gemini، يؤدي ذلك أيضًا إلى تحسين وقت الاستجابة وتجنُّب الحاجة إلى أن تعمل الخلفيات كوكيل للبيانات في الوقت الفعلي.
 
-## 创建临时令牌
+## إنشاء رمز مميّز مؤقت
 
-以下是一个简化示例，展示了如何从 Gemini 获取临时令牌。
-默认情况下，您将有 1 分钟的时间来使用此请求 (`newSessionExpireTime`) 中的令牌启动新的 Live API 会话，并有 30 分钟的时间通过该连接发送消息 (`expireTime`)。
+في ما يلي مثال مبسّط على كيفية الحصول على رمز مميّز مؤقت من Gemini.
+بشكلٍ تلقائي، سيكون لديك دقيقة واحدة لبدء جلسات جديدة في Live API باستخدام الرمز المميّز من هذا الطلب (`newSessionExpireTime`)، و30 دقيقة لإرسال الرسائل عبر هذا الاتصال (`expireTime`).
 
 ### Python
 
@@ -82,10 +82,12 @@ const token = await client.authTokens.create({
   });
 ```
 
-有关 `expireTime` 值限制、默认值和其他字段规范，请参阅 [API 参考](https://ai.google.dev/api/live?hl=zh-cn#ephemeral-auth-tokens)。
-在 `expireTime` 时间范围内，您需要每 10 分钟重新连接一次通话（即使 `uses: 1`，也可以使用同一令牌完成此操作）。[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn#session-resumption)
+للاطّلاع على قيود القيمة التلقائية `expireTime` والإعدادات التلقائية ومواصفات الحقول الأخرى، يُرجى الرجوع إلى
+[مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens).
+خلال الإطار الزمني `expireTime`، عليك
+[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=ar#session-resumption) إعادة ربط المكالمة كل 10 دقائق (يمكن إجراء ذلك باستخدام الرمز المميز نفسه حتى إذا كان `uses: 1`).
 
-还可以将临时令牌锁定到一组配置。这可能有助于进一步提高应用的安全性，并将系统指令保留在服务器端。
+يمكن أيضًا ربط رمز مميّز مؤقت بمجموعة من الإعدادات. قد يكون ذلك مفيدًا لتعزيز أمان تطبيقك والحفاظ على تعليمات نظامك على الخادم.
 
 ### Python
 
@@ -143,13 +145,14 @@ const token = await client.authTokens.create({
 // You'll need to pass the value under token.name back to your client to use it
 ```
 
-您还可以锁定部分字段，如需了解详情，请参阅 [SDK 文档](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)。
+يمكنك أيضًا قفل مجموعة فرعية من الحقول، راجِع [مستندات حزمة SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
+للحصول على مزيد من المعلومات.
 
-## 使用临时令牌连接到 Live API
+## الربط بواجهة Live API باستخدام رمز مميز مؤقت
 
-获得临时令牌后，您可以使用它，就像使用 API 密钥一样（但请注意，它仅适用于实时 API，并且仅适用于 `v1alpha` 版本的 API）。
+بعد الحصول على رمز مميّز مؤقت، يمكنك استخدامه كما لو كان مفتاح واجهة برمجة تطبيقات (ولكن تذكَّر أنّه يعمل فقط مع واجهة برمجة التطبيقات المباشرة، ومع الإصدار `v1alpha` من واجهة برمجة التطبيقات فقط).
 
-仅当部署遵循[客户端到服务器实现](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn#implementation-approach)方法的应用时，使用临时令牌才有意义。
+لا يضيف استخدام الرموز المميزة المؤقتة قيمة إلا عند نشر التطبيقات التي تتّبع نهج [التنفيذ من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach).
 
 ### JavaScript
 
@@ -179,29 +182,29 @@ async function main() {
 main();
 ```
 
-如需查看更多示例，请参阅 [Live API 使用入门](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn)。
+يمكنك الاطّلاع على [بدء استخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للحصول على مزيد من الأمثلة.
 
-## 最佳做法
+## أفضل الممارسات
 
-- 使用 `expire_time` 参数设置较短的过期时长。
-- 令牌会过期，需要重新启动配置流程。
-- 验证您自己的后端的安全身份验证。临时令牌的安全性仅取决于您的后端身份验证方法。
-- 一般来说，应避免使用临时令牌进行后端到 Gemini 的连接，因为此路径通常被认为是安全的。
+- اضبط مدة انتهاء صلاحية قصيرة باستخدام المَعلمة `expire_time`.
+- تنتهي صلاحية الرموز المميزة، ما يتطلّب إعادة بدء عملية توفير المتطلبات اللازمة.
+- تأكَّد من أنّ عملية المصادقة الآمنة متوافقة مع الخلفية البرمجية الخاصة بك، لأنّ الرموز المميزة المؤقتة لن تكون آمنة إلا إذا كانت طريقة المصادقة في الخلفية البرمجية آمنة.
+- بشكل عام، تجنَّب استخدام الرموز المميزة المؤقتة للاتصالات بين الخلفية وGemini، لأنّ هذا المسار يُعدّ آمنًا عادةً.
 
-## 限制
+## القيود
 
-临时令牌目前仅与 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn) 兼容。
+تتوافق الرموز المميزة المؤقتة مع [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) فقط في الوقت الحالي.
 
-## 后续步骤
+## الخطوات التالية
 
-- 如需了解详情，请参阅 Live API [参考文档](https://ai.google.dev/api/live?hl=zh-cn#ephemeral-auth-tokens)中的临时令牌。
+- يمكنك الاطّلاع على [مرجع](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens) Live API بشأن الرموز المميزة المؤقتة للحصول على مزيد من المعلومات.
 
-发送反馈
+إرسال ملاحظات
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-最后更新时间 (UTC)：2026-06-12。
+تاريخ التعديل الأخير: 2026-06-12 (حسب التوقيت العالمي المتفَّق عليه)
 
-需要向我们提供更多信息？
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-12。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

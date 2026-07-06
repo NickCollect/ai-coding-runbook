@@ -1,60 +1,75 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=vi
-fetched_at: 2026-06-29T05:35:35.086720+00:00
-title: "Kh\u00f4ng gi\u1eef l\u1ea1i d\u1eef li\u1ec7u trong Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/zdr?hl=zh-CN
+fetched_at: 2026-07-06T05:14:27.221385+00:00
+title: "Gemini Developer API \u4e2d\u7684\u96f6\u6570\u636e\u4fdd\u7559 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Gửi ý kiến phản hồi
+发送反馈
 
-# Không giữ lại dữ liệu trong Gemini Developer API
+# Gemini Developer API 中的零数据保留
 
-Trang này trình bày chi tiết về điều thường được gọi là "không lưu giữ dữ liệu" trong Gemini Developer API.
+本页面详细介绍了 Gemini Developer API 中通常所说的“零数据保留”。
 
-## Quy định hạn chế về hoạt động huấn luyện
+## 训练限制
 
-Như đã nêu trong [Điều khoản dịch vụ của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi), khi bạn sử dụng Dịch vụ có tính phí, Google sẽ không sử dụng câu lệnh của bạn (bao gồm cả hướng dẫn hệ thống liên quan, nội dung được lưu vào bộ nhớ đệm và các tệp như hình ảnh, video hoặc tài liệu) hoặc câu trả lời để cải thiện sản phẩm của chúng tôi. Dịch vụ trả phí được định nghĩa [tại đây](https://ai.google.dev/gemini-api/terms?hl=vi#paid-services).
+如 [Gemini API 服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn) 中所述，当您
+使用付费服务时，Google 不会使用您的提示（包括关联的系统
+说明、缓存的内容以及图片、视频或文档等文件）或
+回答来改进我们的产品。付费服务的定义见
+[此处](https://ai.google.dev/gemini-api/terms?hl=zh-cn#paid-services)。
 
-## Việc giữ lại dữ liệu khách hàng và đạt được mục tiêu không giữ lại dữ liệu
+## 客户数据保留和实现零数据保留
 
-Dữ liệu khách hàng thường được lưu giữ trong một khoảng thời gian giới hạn trong các trường hợp và điều kiện sau. Để đạt được mục tiêu không lưu giữ dữ liệu, khách hàng phải thực hiện các hành động cụ thể hoặc tránh sử dụng các tính năng cụ thể trong từng lĩnh vực sau:
+在以下场景和条件下，客户数据通常会保留有限的时间。若要实现零数据保留，客户必须在以下各个方面采取特定措施或避免使用特定功能：
 
-- **Ghi nhật ký câu lệnh để giám sát hành vi sai trái**: Như đã nêu trong [Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi), đối với Dịch vụ có trả phí, Google chỉ ghi nhật ký câu lệnh và câu trả lời trong một khoảng thời gian giới hạn để phát hiện các hành vi vi phạm [Chính sách về các hành vi bị cấm khi sử dụng](https://policies.google.com/terms/generative-ai/use-policy?hl=vi). Khi yêu cầu của bạn về ZDR cho một dự án cụ thể được phê duyệt, tất cả nội dung của người dùng (câu lệnh và câu trả lời) và siêu dữ liệu nhận dạng (chẳng hạn như địa chỉ IP và mã nhận dạng Tài khoản Google) sẽ bị xoá trước khi ghi nhật ký. Bản ghi kết quả được đánh dấu là đã được dọn dẹp và không chứa dữ liệu người dùng có thể nhận dạng được, đảm bảo tính tương đồng với chính sách Giữ lại dữ liệu bằng 0 của Nền tảng tác nhân Gemini Enterprise.
-- **Dựa trên kết quả của Google Tìm kiếm**: Như đã nêu trong [Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi#grounding-with-google-search), Google lưu trữ câu lệnh, thông tin theo ngữ cảnh và kết quả được tạo trong vòng 30 ngày cho mục đích tạo kết quả dựa trên thông tin thực tế và đề xuất tìm kiếm.
-  Thông tin được lưu trữ này có thể được dùng để gỡ lỗi và kiểm thử các hệ thống hỗ trợ việc tiếp đất. **Bạn không thể tắt tính năng lưu trữ thông tin này nếu sử dụng tính năng Dựa trên kết quả của Google Tìm kiếm.**
-- **Kết nối với Google Maps**: Như đã nêu trong [Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi), Google lưu trữ câu lệnh, thông tin theo ngữ cảnh và đầu ra được tạo trong vòng 30 ngày cho mục đích tạo kết quả dựa trên thông tin thực tế. Thông tin được lưu trữ này chỉ có thể được dùng cho hoạt động kỹ thuật về độ tin cậy, chẳng hạn như gỡ lỗi trong trường hợp có vấn đề về dịch vụ.
-  **Bạn không thể tắt tính năng lưu trữ thông tin này nếu sử dụng tính năng Kết nối với Google Maps.**
-- **Interactions API**: Interactions API quản lý trạng thái hoạt động của một cuộc trò chuyện để cho phép nhiều lượt tương tác. **Theo mặc định, Interactions API cho phép lưu trữ trạng thái**. Để đảm bảo không có dấu vết dữ liệu, bạn phải đặt rõ ràng tham số `store` thành `false` trong các yêu cầu API để chọn không tham gia giữ lại trạng thái mặc định.
-- **Live API**: API có trạng thái này cho phép kết nối lại theo thời gian thực bằng cách lưu trữ trạng thái cuộc trò chuyện. Để đạt được mục tiêu không lưu giữ dữ liệu, hãy **không định cấu hình SessionResumptionConfig**. Nếu một phiên được tạo, trạng thái trò chuyện (bao gồm văn bản, âm thanh và video) sẽ được giữ lại trong tối đa 24 giờ.
-- **Bộ nhớ File API**: File API cho phép người dùng tải các tài sản lớn lên.
-  Các tệp được lưu trữ ở trạng thái không hoạt động cho đến khi người dùng xoá hoặc cho đến khi hết hạn.
-  Việc sử dụng File API không phụ thuộc vào nhật ký ZDR; người dùng phải xoá tệp theo cách thủ công để đảm bảo không có dấu vết dữ liệu.
-- **Lưu vào bộ nhớ đệm ngữ cảnh rõ ràng**: Người dùng có thể lưu thủ công các tập dữ liệu lớn (ví dụ: video dài hoặc thư viện tài liệu) vào bộ nhớ đệm bằng trường `cached_content`. Mặc dù nhật ký của các yêu cầu này tuân theo chính sách loại bỏ ZDR, nhưng bản thân ngữ cảnh được lưu vào bộ nhớ đệm sẽ được lưu trữ bằng `ttl` hoặc `expire_time` do người dùng xác định. Để đạt được mức sử dụng dữ liệu bằng 0 tuyệt đối, đừng sử dụng tính năng cached\_content.
-- **Lưu vào bộ nhớ đệm ngầm trong bộ nhớ**: Theo mặc định, các mô hình Gemini lưu dữ liệu vào bộ nhớ đệm trong bộ nhớ để giảm độ trễ và chi phí cho nhà phát triển. Dữ liệu này hoàn toàn nằm trong RAM (không ở trạng thái tĩnh), được tách biệt ở cấp dự án và có TTL là 24 giờ.
-  **Điều này không vi phạm chính sách Không lưu giữ dữ liệu.**
+- **用于滥用行为监控的提示日志记录**：如[Gemini API
+  附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)中所述，对于付费服务，Google
+  会在有限的一段时间内记录提示和回答，仅用于检测
+  违反[使用限制
+  政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)的行为。当您针对特定项目的 ZDR 请求获得批准后，所有用户内容（提示和回答）和可识别的元数据（例如 IP 地址和 Google 账号 ID）都会在记录之前清除。生成的记录会被标记为已清理，并且不包含任何可识别的用户数据，确保与 Gemini Enterprise Agent Platform 零数据保留保持一致。
+- **依托 Google 搜索进行接地**：如[Gemini API 附加
+  服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn#grounding-with-google-search)中所述，Google
+  会存储提示、上下文信息和生成的输出内容三十 (30)
+  天，以用于创建有依据的结果和搜索建议。
+  这些存储的信息可用于调试和测试支持接地的系统。**如果您使用“依托 Google 搜索进行接地”，则无法禁止存储此信息。**
+- **Grounding with Google Maps**：如 [Gemini API 附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)中所述，Google 会存储提示、上下文信息和生成的输出内容三十 (30) 天，以用于创建有依据的结果。这些存储的信息可能仅用于可靠性工程，例如在出现服务问题时进行调试。**如果您使用“Grounding with Google Maps”，则无法禁止存储此信息。**
+- **Interactions API**：Interactions API 可管理对话的活跃状态，以实现多轮对话。**默认情况下，Interactions API 会启用状态存储** 。为确保零数据足迹，您必须在 API 请求中将 `store` 参数显式设置为 `false`，以选择停用默认状态保留。
+- **Live API**：此有状态 API 通过存储
+  对话状态来实现实时重新连接。若要实现零数据保留，**请勿配置 SessionResumptionConfig** 。如果生成了会话句柄，对话状态（包括文本、音频和视频）最多会保留 24 小时。
+- **File API 存储**：借助 File API，用户可以上传大型素材资源。
+  文件会以静态方式存储，直到用户删除或过期为止。
+  File API 的使用与 ZDR 日志记录无关；用户必须手动删除文件，以确保零数据足迹。
+- **显式上下文缓存**：用户可以使用 `cached_content` 字段手动缓存大型数据集（例如
+  长视频或文档库）。虽然这些请求的日志遵循 ZDR 丢弃政策，但缓存的上下文本身会使用用户定义的 `ttl` 或 `expire_time` 进行存储。若要实现绝对零数据足迹，请勿使用 cached\_content 功能。
+- **隐式内存缓存**：默认情况下，Gemini 模型会将数据缓存在
+  内存中，以缩短延迟时间并降低开发者的费用。此数据严格存储在 RAM 中（而非静态存储），在项目级层进行隔离，并且 TTL 为 24 小时。
+  **这不会违反零数据保留。**
 
-## Bước tiếp theo
+## 后续步骤
 
-- Tìm hiểu về [Chính sách về các hành vi bị cấm khi sử dụng AI tạo sinh](https://policies.google.com/terms/generative-ai/use-policy?hl=vi).
-- Xem [Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi).
-- Nếu bạn cần các chế độ kiểm soát ZDR tự phục vụ ở cấp doanh nghiệp, hãy xem [hướng dẫn về Nền tảng tác nhân Gemini Enterprise
-  Giữ lại dữ liệu bằng không](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=vi).
+- 了解[生成式 AI 使用限制
+  政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)。
+- 查看 [Gemini API 附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)。
+- 如果您需要企业级自助式 ZDR 控制功能，请参阅 [Gemini Enterprise Agent Platform
+  零数据保留
+  指南](https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/zero-data-retention?hl=zh-cn)。
 
-Gửi ý kiến phản hồi
+发送反馈
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Cập nhật lần gần đây nhất: 2026-05-28 UTC.
+最后更新时间 (UTC)：2026-05-28。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+需要向我们提供更多信息？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-05-28 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-28。"],[],[]]

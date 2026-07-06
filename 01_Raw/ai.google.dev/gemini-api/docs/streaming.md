@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=vi
-fetched_at: 2026-06-29T05:40:59.909982+00:00
-title: "L\u01b0\u1ee3t t\u01b0\u01a1ng t\u00e1c khi ph\u00e1t tr\u1ef1c tuy\u1ebfn \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=ja
+fetched_at: 2026-07-06T05:17:23.241922+00:00
+title: "\u30b9\u30c8\u30ea\u30fc\u30df\u30f3\u30b0 \u30a4\u30f3\u30bf\u30e9\u30af\u30b7\u30e7\u30f3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-# Lượt tương tác khi phát trực tuyến
+# ストリーミング インタラクション
 
-Khi tạo một Lượt tương tác, bạn có thể đặt `stream: true` để truyền trực tuyến phản hồi theo gia số bằng cách sử dụng [sự kiện do máy chủ gửi](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE).
+インタラクションを作成するときに `stream: true` を設定すると、[サーバー送信イベント](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)（SSE）を使用してレスポンスを段階的にストリーミングできます。
 
 ### Python
 
@@ -110,24 +110,24 @@ event: done
 data: [DONE]
 ```
 
-## Loại sự kiện
+## イベントタイプ
 
-Mỗi sự kiện do máy chủ gửi đều bao gồm một `event_type` được đặt tên và dữ liệu JSON được liên kết. API Tương tác sử dụng mô hình truyền trực tuyến đối xứng, trong đó tất cả nội dung (văn bản, lệnh gọi công cụ, suy nghĩ) đều truyền qua một sự kiện **dựa trên bước** nhất quán.
+各サーバー送信イベントには、`event_type` という名前と関連する JSON データが含まれます。Interactions API は、すべてのコンテンツ（テキスト、ツール呼び出し、思考）が一貫した**ステップベース** のイベントを介して流れる対称ストリーミング モデルを使用します。
 
-Mỗi luồng tuân theo quy trình sự kiện này:
+各ストリームは次のイベントフローに従います。
 
-1. `interaction.created`: Lượt tương tác được tạo, bao gồm siêu dữ liệu (mã nhận dạng, mô hình, trạng thái).
-2. Một loạt **bước**, mỗi bước bao gồm:
-   - Sự kiện `step.start`, cho biết loại bước (ví dụ: `model_output`, `thought`, `function_call`).
-   - Một hoặc nhiều sự kiện `step.delta` có dữ liệu gia tăng cho bước đó.
-   - Sự kiện `step.stop` đánh dấu bước là hoàn tất.
-3. Sự kiện `interaction.completed` có số liệu thống kê `usage` cuối cùng.
+1. `interaction.created`: インタラクションが作成され、メタデータ（ID、モデル、ステータス）が含まれます。
+2. 一連の**ステップ**。各ステップは次の要素で構成されます:
+   - `step.start` イベント。ステップタイプ（`model_output`、`thought`、`function_call` など）を示します。
+   - そのステップの増分データを含む 1 つ以上の `step.delta` イベント。
+   - ステップが完了したことを示す `step.stop` イベント。
+3. 最終的な `usage` 統計情報を含む `interaction.completed` イベント。
 
-Khi bạn đặt `stream: false`, API sẽ trả về một đối tượng `interaction` duy nhất có mảng `steps`. Mỗi phần tử trong `steps` là phiên bản được lắp ráp đầy đủ của một chu kỳ `step.start` → `step.delta`(s) → `step.stop`.
+`stream: false` を設定すると、API は `steps` 配列を含む単一の `interaction` オブジェクトを返します。`steps` 内の各要素は、`step.start` → `step.delta`(s) → `step.stop` サイクルの完全に組み立てられたバージョンです。
 
 ### `interaction.created`
 
-Được gửi khi lượt tương tác được tạo lần đầu tiên. Chứa mã nhận dạng lượt tương tác, mô hình và trạng thái ban đầu.
+インタラクションが最初に作成されたときに送信されます。インタラクション ID、モデル、初期ステータスが含まれます。
 
 ```
 event: interaction.created
@@ -136,7 +136,7 @@ data: {"interaction": {"id": "...", "model": "gemini-3-flash-preview", "status":
 
 ### `interaction.status_update`
 
-Báo hiệu quá trình chuyển đổi trạng thái ở cấp lượt tương tác. Có thể xuất hiện giữa các bước.
+インタラクション レベルのステータス遷移を示します。ステップ間に表示されることがあります。
 
 ```
 event: interaction.status_update
@@ -145,23 +145,23 @@ data: {"interaction_id": "...", "status": "in_progress", "event_type": "interact
 
 ### `step.start`
 
-Đánh dấu sự bắt đầu của một bước mới. Chứa `type` và `index` của bước. Loại bước xác định các loại delta dự kiến và cách bước xuất hiện trong phản hồi không truyền trực tuyến:
+新しいステップの開始を示します。ステップの `type` と `index` が含まれます。ステップタイプによって、想定されるデルタタイプと、ストリーミング以外のレスポンスでのステップの表示方法が決まります。
 
-| Loại bước | Loại delta dự kiến | Mô tả |
+| ステップの種類 | 想定されるデルタタイプ | 説明 |
 | --- | --- | --- |
-| `model_output` | `text`, `image`, `audio` | Nội dung phản hồi cuối cùng của mô hình. |
-| `thought` | `thought_signature`, `thought_summary` | Lý luận theo chuỗi suy nghĩ. `summary` chỉ xuất hiện khi `thinking_summaries` được bật. |
-| `function_call` | `arguments_delta` | Yêu cầu khách hàng thực thi một hàm. Đặt trạng thái lượt tương tác thành `requires_action`. |
-| Công cụ phía máy chủ | Tuỳ theo công cụ | Các công cụ do API thực thi (ví dụ: `google_search_call`, `google_search_result`, `code_execution_call`, `code_execution_result`). |
+| `model_output` | `text`、`image`、`audio` | モデルの最終的なレスポンス コンテンツ。 |
+| `thought` | `thought_signature`、`thought_summary` | Chain-of-Thought 推論。`summary` は、`thinking_summaries` が有効になっている場合にのみ存在します。 |
+| `function_call` | `arguments_delta` | クライアントに関数を実行するようリクエストします。インタラクション ステータスを `requires_action` に設定します。 |
+| サーバーサイド ツール | ツールによって異なる | API によって実行されるツール（`google_search_call`、`google_search_result`、`code_execution_call`、`code_execution_result` など）。 |
 
-Xem tài liệu tham khảo về [API Tương tác](https://ai.google.dev/api/interactions-api?hl=vi) để biết danh sách đầy đủ.
+完全なリストについては、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)をご覧ください。
 
 ```
 event: step.start
 data: {"index": 0, "step": {"type": "model_output"}, "event_type": "step.start"}
 ```
 
-Đối với lệnh gọi hàm, bước này bao gồm tên hàm, mã nhận dạng và đối số trống `{}`
+関数呼び出しの場合、ステップには関数名、ID、空の引数 `{}` が含まれます。
 
 ```
 event: step.start
@@ -170,11 +170,11 @@ data: {"index": 0, "step": {"type": "function_call", "id":"un6k8t18", "name": "g
 
 ### `step.delta`
 
-Dữ liệu gia tăng cho bước hiện tại. Đối tượng `delta` chứa một trường `type` xác định hình dạng của đối tượng đó.
+現在のステップの増分データ。`delta` オブジェクトには、その形状を決定する `type` フィールドが含まれています。
 
-**Ví dụ:**
+**例:**
 
-**`text`:** Mã thông báo văn bản gia tăng từ bước `model_output`:
+**`text`:** `model_output` ステップからの増分テキスト トークン:
 
 ```
 event: step.delta
@@ -184,32 +184,32 @@ event: step.delta
 data: {"index": 0, "delta": {"type": "text", "text": ", and I live in Germany." }, "event_type": "step.delta"}
 ```
 
-**`image`:** Dữ liệu hình ảnh được mã hoá bằng Base64 từ bước `model_output`:
+**`image`:** `model_output` ステップからの Base64 エンコードされた画像データ:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "image", "mime_type": "image/jpeg", "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCg..."}, "event_type": "step.delta"}
 ```
 
-**`thought_summary`:** Nội dung tóm tắt suy nghĩ từ bước `thought`:
+**`thought_summary`:** `thought` ステップからの思考の概要コンテンツ:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "thought_summary", "content": {"type": "text", "text": "I need to find the GCD..."}}, "event_type": "step.delta"}
 ```
 
-**`arguments_delta`:** Chuỗi JSON (một phần) cho các đối số lệnh gọi hàm. Phải được tích luỹ trên các delta:
+**`arguments_delta`:** 関数呼び出し引数の（部分的な）JSON 文字列。デルタ間で累積する必要があります。
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "arguments_delta", "arguments": "{\"location\": \"San Francisco, CA\"}"}, "event_type": "step.delta"}
 ```
 
-Đây là một số loại delta phổ biến nhất. Để biết danh sách đầy đủ tất cả các loại delta, hãy xem tài liệu tham khảo về API Tương tác .
+これらは、最も一般的なデルタタイプの一部です。すべてのデルタタイプの完全なリストについては、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)をご覧ください。
 
 ### `step.stop`
 
-Đánh dấu sự kết thúc của một bước. Chứa `index` của bước.
+ステップの終了を示します。ステップの `index` が含まれます。
 
 ```
 event: step.stop
@@ -218,7 +218,7 @@ data: {"index": 0, "event_type": "step.stop"}
 
 ### `interaction.completed`
 
-Được gửi khi lượt tương tác kết thúc. Chứa đối tượng lượt tương tác cuối cùng có số liệu thống kê `usage`. Ở chế độ không truyền trực tuyến, đây là chính đối tượng phản hồi cấp cao nhất. Không bao gồm `steps` trong phản hồi.
+インタラクションが終了したときに送信されます。`usage` 統計情報を含む最終的なインタラクション オブジェクトが含まれます。ストリーミング以外のモードでは、これが最上位のレスポンス オブジェクト自体です。レスポンスに `steps` は含まれません。
 
 ```
 event: interaction.completed
@@ -227,24 +227,24 @@ data: {"interaction": {"id": "v1_abc123", "status": "completed", "usage": {"tota
 
 ### `error`
 
-Được gửi khi xảy ra lỗi trong lượt tương tác. Chứa một đối tượng lỗi có thông báo và mã.
+インタラクション中にエラーが発生したときに送信されます。メッセージとコードを含むエラー オブジェクトが含まれます。
 
 ```
 event: error
 data: {"error":{"message":"Deadline expired before operation could complete.","code":"gateway_timeout"},"event_type":"error"}
 ```
 
-## Truyền trực tuyến bằng công cụ
+## ツールを使用したストリーミング
 
-API Tương tác hỗ trợ truyền trực tuyến bằng cả công cụ phía máy khách (gọi hàm) và công cụ phía máy chủ (Google Tìm kiếm, Thực thi mã, v.v.) trong một yêu cầu. Trong quá trình truyền trực tuyến, các lệnh gọi công cụ sẽ xuất hiện dưới dạng các bước đã nhập trong luồng sự kiện. Đối với lệnh gọi hàm, sự kiện `step.start` sẽ cung cấp tên hàm và các sự kiện `step.delta` sẽ truyền trực tuyến các đối số dưới dạng chuỗi JSON (`arguments_delta`). Bạn phải tích luỹ các delta này để nhận được các đối số đầy đủ.
-Các công cụ phía máy chủ như Google Tìm kiếm sẽ được API tự động thực thi, tạo ra các bước `google_search_call` và `google_search_result`.
+Interactions API は、単一のリクエストでクライアントサイド ツール（関数呼び出し）とサーバーサイド ツール（Google 検索、コード実行など）の両方を使用したストリーミングをサポートしています。ストリーミング中、ツールの呼び出しはイベント ストリームで型付きステップとして表示されます。関数呼び出しの場合、`step.start` イベントは関数名を配信し、`step.delta` イベントは引数を JSON 文字列（`arguments_delta`）としてストリーミングします。完全な引数を取得するには、これらのデルタを累積する必要があります。
+Google 検索などのサーバーサイド ツールは API によって自動的に実行され、`google_search_call` ステップと `google_search_result` ステップが生成されます。
 
-### Truyền trực tuyến bằng cách gọi hàm
+### 関数呼び出しを使用したストリーミング
 
-Để thực hiện lệnh gọi hàm bằng tính năng truyền trực tuyến, máy khách phải xử lý cuộc trò chuyện nhiều lượt:
+ストリーミングで関数呼び出しを行うには、クライアントがマルチターンの会話を処理する必要があります。
 
-1. **Lượt 1 (Yêu cầu hàm):** Gọi `interactions.create` bằng `stream: true` và `tools` mà bạn đã xác định. API sẽ truyền trực tuyến một bước `function_call`. Bạn phải tích luỹ các chuỗi JSON đối số gia tăng (`arguments_delta`) từ các sự kiện `step.delta` cho đến khi lượt tương tác hoàn tất với trạng thái `requires_action`.
-2. **Lượt 2 (Gửi kết quả):** Gọi lại `interactions.create`, truyền `previous_interaction_id` (khớp với mã nhận dạng của lượt tương tác đầu tiên) và gửi một khối `function_result` trong mảng `input`. Thao tác này sẽ tiếp tục luồng, cho phép mô hình tạo phản hồi cuối cùng.
+1. **ターン 1（関数リクエスト）:** `stream: true` と定義した `tools` を指定して `interactions.create` を呼び出します。API は `function_call` ステップをストリーミングします。インタラクションがステータス `requires_action` で完了するまで、`step.delta` イベントから増分引数 JSON 文字列（`arguments_delta`）を累積する必要があります。
+2. **ターン 2（結果の送信）:** `interactions.create` を再度呼び出し、`previous_interaction_id`（最初のインタラクションの ID と一致）を渡して、`input` 配列内に `function_result` ブロックを送信します。これによりストリームが再開され、モデルが最終的なレスポンスを生成できるようになります。
 
 ### Python
 
@@ -403,7 +403,7 @@ if (funcCallId && firstInteractionId && funcCallName) {
 
 ### REST
 
-**Lượt 1:** Yêu cầu lệnh gọi hàm
+**ターン 1:** 関数呼び出しをリクエストする
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -434,7 +434,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**Lượt 2:** Gửi kết quả hàm bằng `previous_interaction_id` và `call_id` từ Lượt 1
+**ターン 2:** ターン 1 の `previous_interaction_id` と `call_id` を使用して関数結果を送信する
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -463,9 +463,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Truyền trực tuyến bằng nhiều công cụ
+### 複数のツールを使用したストリーミング
 
-Ví dụ sau đây sử dụng cả công cụ `function` và `google_search` trong một yêu cầu:
+次の例では、1 つのリクエストで `function` ツールと `google_search` の両方を使用しています。
 
 ### Python
 
@@ -668,9 +668,9 @@ event: done
 data: [DONE]
 ```
 
-## Truyền trực tuyến bằng tính năng suy nghĩ
+## 思考を使用したストリーミング
 
-Khi mô hình sử dụng tính năng suy nghĩ, bạn sẽ nhận được các bước `thought` với 2 loại delta riêng biệt: `thought_summary` (nội dung tóm tắt văn bản hoặc hình ảnh gia tăng) và `thought_signature` (biểu diễn được mã hoá về quá trình suy luận nội bộ của mô hình, được gửi dưới dạng delta cuối cùng trước `step.stop`). Nếu `thinking_summaries` được bật, các delta `thought_summary` sẽ truyền trực tuyến bản tóm tắt về quá trình suy luận của mô hình. Để biết thêm thông tin chi tiết về tính năng suy nghĩ, hãy xem [Hướng dẫn về tính năng suy nghĩ](https://ai.google.dev/gemini-api/docs/thinking?hl=vi).
+モデルが思考を使用する場合、`thought` ステップが 2 つの異なるデルタタイプ（`thought_summary`（増分テキストまたは画像の概要コンテンツ）と `thought_signature`（モデルの内部推論の暗号化された表現。`step.stop` の前の最後のデルタとして送信される））で受信されます。`thinking_summaries` が有効になっている場合、`thought_summary` デルタはモデルの推論の概要をストリーミングします。思考の詳細については、[思考ガイド](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)をご覧ください。
 
 ### Python
 
@@ -770,9 +770,9 @@ data: {"index":1,"step":{"type":"model_output"},"event_type":"step.start"}
 ...
 ```
 
-## Truyền trực tuyến bằng tác nhân
+## エージェントを使用したストリーミング
 
-Interactions API hỗ trợ các tác nhân như Deep Research. Các tác nhân sử dụng `background=True` và trả về kết quả không đồng bộ, nhưng bạn cũng có thể truyền trực tuyến các lượt tương tác của tác nhân để nhận thông tin cập nhật về tiến trình và các bước trung gian khi chúng xảy ra. Để biết thêm thông tin chi tiết, hãy xem [Hướng dẫn thực thi ở chế độ nền](https://ai.google.dev/gemini-api/docs/background-execution?hl=vi) và [Hướng dẫn về Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi).
+Interactions API は、Deep Research などのエージェントをサポートしています。エージェントは `background=True` を使用して結果を非同期で返しますが、エージェントのインタラクションをストリーミングして、進行状況の更新と中間ステップをリアルタイムで受信することもできます。詳細については、[バックグラウンド実行ガイド](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)と[Deep Research ガイド](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja)をご覧ください。
 
 ### Python
 
@@ -891,11 +891,11 @@ event: done
 data: [DONE]
 ```
 
-## Truyền trực tuyến quá trình tạo hình ảnh
+## 画像生成のストリーミング
 
-API Tương tác hỗ trợ truyền trực tuyến đồng thời nhiều phương thức đầu ra. Bằng cách yêu cầu cả `text` và `image` trong `response_format`, bạn có thể nhận văn bản xen kẽ và hình ảnh được tạo trong cùng một luồng.
+Interactions API は、複数の出力モードの同時ストリーミングをサポートしています。`response_format` で `text` と `image` の両方をリクエストすると、同じストリームでテキストと生成された画像を交互に受信できます。
 
-Ví dụ sau đây sử dụng `gemini-3.1-flash-image-preview` (Nano Banana 2) để tìm kiếm thông tin và tạo một câu chuyện có hình minh hoạ xen kẽ.
+次の例では、`gemini-3.1-flash-image-preview`（Nano Banana 2）を使用して情報を検索し、イラストを交互に表示するストーリーを生成します。
 
 ### Python
 
@@ -1048,24 +1048,24 @@ event: done
 data: [DONE]
 ```
 
-## Xử lý các sự kiện không xác định
+## 不明なイベントの処理
 
-Theo chính sách kiểm soát phiên bản của API, các loại sự kiện và loại delta mới có thể được thêm theo thời gian. Mã của bạn sẽ xử lý các loại sự kiện không xác định một cách suôn sẻ – ghi nhật ký và bỏ qua mọi sự kiện mà bạn không nhận ra thay vì báo lỗi.
+API のバージョン管理ポリシーに従って、新しいイベントタイプとデルタタイプが随時追加される可能性があります。コードでは、不明なイベントタイプを適切に処理する必要があります。エラーをスローするのではなく、認識できないイベントをログに記録してスキップしてください。
 
-## Bước tiếp theo
+## 次のステップ
 
-- Tìm hiểu thêm về [API Tương tác](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi).
-- Khám phá tính năng [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) bằng công cụ.
-- Tìm hiểu về [tính năng Suy nghĩ](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) để tăng cường khả năng suy luận.
-- Dùng thử [Tác nhân Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=vi) cho các tác vụ chạy trong thời gian dài.
-- Xem tài liệu tham khảo về [API Tương tác](https://ai.google.dev/api/interactions-api?hl=vi) để biết tất cả các loại sự kiện và loại delta.
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の詳細を確認する。
+- ツールを使用した[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)を試す。
+- 推論を強化するための[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)について学習する。
+- 長時間実行タスクに [Deep Research エージェント](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja) を試す。
+- すべてのイベントタイプとデルタタイプについては、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)をご覧ください。
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-06-26 UTC.
+最終更新日 2026-06-26 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-26 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-26 UTC。"],[],[]]

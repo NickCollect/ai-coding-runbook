@@ -1,32 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=ja
-fetched_at: 2026-06-29T05:30:46.272859+00:00
-title: "Gemini Deep Research \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=id
+fetched_at: 2026-07-06T05:06:19.479583+00:00
+title: "Agen Deep Research Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-フィードバックを送信
+Kirim masukan
 
-# Gemini Deep Research エージェント
+# Agen Deep Research Gemini
 
-Gemini Deep Research エージェントは、複数ステップのリサーチタスクを自律的に計画、実行、統合します。Gemini
-を搭載し、複雑な情報環境をナビゲートして、引用付きの詳細なレポートを作成します。新しい機能により、エージェントと共同で計画を立てたり、MCP
-サーバーを使用して外部ツールに接続したり、可視化（グラフなど）を含めたり、ドキュメントを直接入力として提供したりできます。
+Agen Deep Research Gemini secara mandiri merencanakan, menjalankan, dan menyintesis tugas riset multi-langkah. Didukung oleh Gemini, fitur ini menavigasi lanskap informasi yang kompleks untuk menghasilkan laporan mendetail yang disertai kutipan. Kemampuan baru memungkinkan Anda merencanakan secara kolaboratif dengan agen, terhubung ke alat eksternal menggunakan server MCP, menyertakan visualisasi (seperti diagram dan grafik), dan memberikan dokumen secara langsung sebagai input.
 
-リサーチタスクには、反復的な検索と読み取りが含まれ、完了までに数分かかることがあります。エージェントを非同期で実行して結果をポーリングまたはストリーミングするには、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)（`background=true`を設定）
-を使用する必要があります。詳細については、
-[長時間実行タスクの処理](#long-running-tasks)をご覧ください。
+Tugas riset melibatkan penelusuran dan pembacaan iteratif dan dapat memerlukan waktu beberapa menit untuk diselesaikan. Anda harus menggunakan [eksekusi di latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id) (tetapkan `background=true`)
+untuk menjalankan agen secara asinkron dan melakukan polling untuk hasil atau streaming update. Lihat
+[Menangani tugas yang berjalan lama](#long-running-tasks) untuk mengetahui detail selengkapnya.
 
-次の例は、バックグラウンドでリサーチタスクを開始して結果をポーリングする方法を示しています。
+Contoh berikut menunjukkan cara memulai tugas riset di latar belakang
+dan melakukan polling untuk mendapatkan hasil.
 
 ### Python
 
@@ -101,20 +100,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## サポート対象のバージョン
+## Versi yang Didukung
 
-Deep Research エージェントには次の 2 つのバージョンがあります。
+Agen Deep Research hadir dalam dua versi:
 
-- **Deep Research** （`deep-research-preview-04-2026`）: スピードと効率性を重視した設計で、クライアント UI にストリーミングするのに最適です。
-- **Deep Research Max** （`deep-research-max-preview-04-2026`）: コンテキストの自動収集と統合を最大限に包括的に行います。
+- **Deep Research** (`deep-research-preview-04-2026`): Didesain untuk kecepatan dan efisiensi, ideal untuk di-streaming kembali ke UI klien.
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): Komprehensivitas maksimum untuk pengumpulan dan sintesis konteks otomatis.
 
-## 共同計画
+## Perencanaan kolaboratif
 
-共同計画では、エージェントが作業を開始する前に、調査の方向性を制御できます。有効にすると、エージェントはすぐに実行するのではなく、提案されたリサーチプランを返します。その後、マルチターンのインタラクションを通じてプランを確認、変更、承認できます。
+Perencanaan kolaboratif memberi Anda kontrol atas arah riset
+sebelum agen memulai pekerjaannya. Jika diaktifkan, agen akan menampilkan rencana riset yang diusulkan, bukan langsung menjalankannya. Kemudian, Anda dapat meninjau, mengubah, atau menyetujui rencana melalui interaksi multi-giliran.
 
-### ステップ 1: プランをリクエストする
+### Langkah 1: Minta paket
 
-最初のインタラクションで `collaborative_planning=True` を設定します。エージェントは完全なレポートではなく、リサーチプランを返します。
+Tetapkan `collaborative_planning=True` dalam interaksi pertama. Agen
+mengembalikan rencana riset, bukan laporan lengkap.
 
 ### Python
 
@@ -180,9 +181,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### ステップ 2: プランを修正する（省略可）
+### Langkah 2: Sempurnakan rencana (opsional)
 
-`previous_interaction_id` を使用して会話を続け、プランを反復処理します。`collaborative_planning=True` を維持して、計画モードを維持します。
+Gunakan `previous_interaction_id` untuk melanjutkan percakapan dan melakukan iterasi pada rencana. Tetap tekan `collaborative_planning=True` untuk tetap berada dalam mode perencanaan.
 
 ### Python
 
@@ -246,9 +247,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### ステップ 3: 承認して実行する
+### Langkah 3: Setujui dan jalankan
 
-`collaborative_planning=False` に設定（または省略）して、プランを承認し、調査を開始します。
+Tetapkan `collaborative_planning=False` (atau hapus) untuk menyetujui rencana dan memulai riset.
 
 ### Python
 
@@ -312,10 +313,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Visualization
+## Visualisasi
 
-`visualization` が `"auto"` に設定されている場合、エージェントは調査結果をサポートするグラフやその他の視覚要素を生成できます。生成された画像はレスポンス ステップに含まれ、`image` デルタとしてストリーミングされます。最適な結果を得るには、クエリで視覚要素を明示的にリクエストします（例: 「経時的な傾向を示すグラフを含める」、「マーケット シェアを比較するグラフを生成する」）。`visualization` を
-`"auto"` に設定すると、この機能が有効になりますが、エージェントはプロンプトでリクエストされた場合にのみ視覚要素を生成します。
+Jika `visualization` disetel ke `"auto"`, agen dapat membuat diagram, grafik, dan elemen visual lainnya untuk mendukung temuan risetnya.
+Gambar yang dihasilkan disertakan dalam langkah-langkah respons dan di-streaming sebagai delta `image`. Untuk hasil terbaik, minta visual secara eksplisit dalam kueri Anda — misalnya, "Sertakan diagram yang menunjukkan tren dari waktu ke waktu" atau "Buat grafik yang membandingkan pangsa pasar". Menetapkan `visualization` ke
+`"auto"` mengaktifkan kemampuan, tetapi agen hanya menghasilkan visual
+saat perintah memintanya.
 
 ### Python
 
@@ -401,21 +404,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## サポートされているツール
+## Alat yang didukung
 
-Deep Research は、複数の組み込みツールと外部ツールをサポートしています。デフォルトでは（`tools` パラメータが指定されていない場合）、エージェントは Google 検索、URL コンテキスト、コード実行にアクセスできます。ツールを明示的に指定して、エージェントの機能を制限または拡張できます。
+Deep Research mendukung beberapa alat bawaan dan eksternal. Secara default
+(jika tidak ada parameter `tools`), agen memiliki akses ke Google
+Penelusuran, Konteks URL, dan Eksekusi Kode. Anda dapat secara eksplisit
+menentukan alat untuk membatasi atau memperluas kemampuan agen.
 
-| ツール | Type 値 | 説明 |
+| Alat | Nilai jenis | Deskripsi |
 | --- | --- | --- |
-| Google 検索 | `google_search` | 公開ウェブを検索します。デフォルトで有効。 |
-| URL コンテキスト | `url_context` | ウェブページ コンテンツを読み取って要約します。デフォルトで有効。 |
-| コードを実行する | `code_execution` | コードを実行して計算とデータ分析を行います。デフォルトで有効。 |
-| MCP サーバー | `mcp_server` | 外部ツールにアクセスするために、リモート MCP サーバーに接続します。 |
-| ファイル検索 | `file_search` | アップロードしたドキュメント コーパスを検索します。 |
+| Google Penelusuran | `google_search` | Telusuri web publik. Diaktifkan secara default. |
+| Konteks URL | `url_context` | Membaca dan merangkum konten halaman web. Diaktifkan secara default. |
+| Eksekusi Kode | `code_execution` | Jalankan kode untuk melakukan penghitungan dan analisis data. Diaktifkan secara default. |
+| Server MCP | `mcp_server` | Terhubung ke server MCP jarak jauh untuk akses alat eksternal. |
+| Penelusuran File | `file_search` | Menelusuri korpora dokumen yang Anda upload. |
 
-### Google 検索
+### Google Penelusuran
 
-Google 検索を唯一のツールとして明示的に有効にします。
+Aktifkan Google Penelusuran secara eksplisit sebagai satu-satunya alat:
 
 ### Python
 
@@ -453,9 +459,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### URL コンテキスト
+### Konteks URL
 
-エージェントが特定のウェブページを読み取って要約できるようにします。
+Memberi agen kemampuan untuk membaca dan meringkas halaman web tertentu:
 
 ### Python
 
@@ -493,9 +499,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### コードを実行する
+### Eksekusi Kode
 
-エージェントが計算とデータ分析のためにコードを実行できるようにします。
+Mengizinkan agen mengeksekusi kode untuk penghitungan dan analisis data:
 
 ### Python
 
@@ -533,19 +539,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### MCP サーバー
+### Server MCP
 
-ツール構成でサーバーの `name` と `url` を指定します。認証情報を渡して、エージェントが呼び出すことができるツールを制限することもできます。
+Berikan `name` dan `url` server dalam konfigurasi alat. Anda juga dapat meneruskan kredensial autentikasi dan membatasi alat yang dapat dipanggil agen.
 
-| フィールド | 型 | 必須 / 省略可 | 説明 |
+| Kolom | Jenis | Wajib diisi | Deskripsi |
 | --- | --- | --- | --- |
-| `type` | `string` | ○ | `"mcp_server"` を指定します。 |
-| `name` | `string` | いいえ | MCP サーバーの表示名。 |
-| `url` | `string` | いいえ | MCP サーバー エンドポイントの完全な URL。 |
-| `headers` | `object` | いいえ | サーバーへのリクエストごとに HTTP ヘッダーとして送信される Key-Value ペア（認証トークンなど）。 |
-| `allowed_tools` | `array` | いいえ | エージェントが呼び出すことができるサーバーのツールを制限します。 |
+| `type` | `string` | Ya | Harus berupa `"mcp_server"`. |
+| `name` | `string` | Tidak | Nama tampilan untuk server MCP. |
+| `url` | `string` | Tidak | URL lengkap untuk endpoint server MCP. |
+| `headers` | `object` | Tidak | Pasangan nilai kunci yang dikirim sebagai header HTTP dengan setiap permintaan ke server (misalnya, token autentikasi). |
+| `allowed_tools` | `array` | Tidak | Membatasi alat dari server yang dapat dipanggil oleh agen. |
 
-#### 基本的な使用方法
+#### Penggunaan dasar
 
 ### Python
 
@@ -604,9 +610,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### ファイル検索
+### Penelusuran File
 
-[ファイル検索ツールを使用して、エージェントが独自のデータにアクセスできるようにします。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
+Beri agen akses ke data Anda sendiri menggunakan alat [Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id).
 
 ### Python
 
@@ -658,13 +664,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 操作性と書式設定
+## Kemampuan pengarahan dan pemformatan
 
-プロンプトで特定の書式設定手順を指定することで、エージェントの出力を操作できます。これにより、レポートを特定のセクションと
-サブセクションに構造化したり、データテーブルを含めたり、さまざまなユーザー（例:
-「技術者向け」、「経営幹部向け」、「カジュアル」）に合わせてトーンを調整したりできます。
+Anda dapat mengarahkan output agen dengan memberikan petunjuk pemformatan tertentu
+dalam perintah Anda. Hal ini memungkinkan Anda menyusun laporan ke dalam bagian dan subbagian tertentu, menyertakan tabel data, atau menyesuaikan gaya bahasa untuk audiens yang berbeda (misalnya, "teknis", "eksekutif", "santai").
 
-入力テキストで目的の出力形式を明示的に定義します。
+Tentukan format output yang diinginkan secara eksplisit dalam teks input Anda.
 
 ### Python
 
@@ -717,9 +722,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## マルチモーダル入力
+## Input multimodal
 
-Deep Research は、画像やドキュメント（PDF）などのマルチモーダル入力をサポートしています。これにより、エージェントは視覚的なコンテンツを分析し、提供された入力に基づいてウェブベースの調査を行うことができます。
+Deep Research mendukung input multimodal, termasuk gambar dan dokumen (PDF), sehingga memungkinkan agen menganalisis konten visual dan melakukan riset berbasis web yang dikontekstualisasi oleh input yang diberikan.
 
 ### Python
 
@@ -825,11 +830,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### ドキュメントの理解
+### Pemahaman dokumen
 
- 
-
-ドキュメントをマルチモーダル入力として直接渡します。エージェントは提供されたドキュメントを分析し、その内容に基づいて調査を行います。
+Teruskan dokumen secara langsung sebagai input multimodal. Agen menganalisis dokumen yang diberikan dan melakukan riset berdasarkan kontennya.
 
 ### Python
 
@@ -890,30 +893,36 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 長時間実行タスクの処理
+## Menangani tugas yang berjalan lama
 
-Deep Research は、計画、検索、読み取り、書き込みを含む複数ステップのプロセスです。通常、このサイクルは同期 API 呼び出しの標準タイムアウト上限を超えます。
+Deep Research adalah proses multi-langkah yang melibatkan perencanaan, penelusuran, pembacaan, dan penulisan. Siklus ini biasanya melampaui batas waktu tunggu standar panggilan API sinkron.
 
-エージェントは `background=True` を使用する必要があります。API は部分的な `Interaction` オブジェクトをすぐに返します。`id` プロパティを使用して、ポーリング用のインタラクションを取得できます。インタラクションの状態は `in_progress` から `completed` または `failed` に遷移します。バックグラウンド タスクの管理に関する包括的なガイドについては、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)をご覧ください。
+Agen wajib menggunakan `background=True`. API segera menampilkan objek
+`Interaction` parsial. Anda dapat menggunakan properti `id` untuk mengambil
+interaksi untuk polling. Status interaksi akan bertransisi dari
+`in_progress` ke `completed` atau `failed`. Untuk panduan komprehensif tentang mengelola tugas latar belakang, lihat [Eksekusi latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id).
 
-### ストリーミング
+### Streaming
 
-Deep Research は、思考の要約、テキスト出力、生成された画像など、調査の進捗状況に関するリアルタイムの更新情報を受信するためのストリーミングをサポートしています。
-`stream=True` と `background=True` を設定する必要があります。
+Deep Research mendukung streaming untuk menerima pembaruan real-time tentang progres riset, termasuk ringkasan pemikiran, output teks, dan gambar yang dihasilkan.
+Anda harus menetapkan `stream=True` dan `background=True`.
 
-中間的な推論ステップ（思考）と進捗状況の更新情報を受け取るには、
-`agent_config` で `thinking_summaries` を
-`"auto"` に設定して、**思考の要約** を有効にする必要があります。これがないと、ストリームは最終結果のみを提供する可能性があります。
+Untuk menerima langkah-langkah penalaran (pemikiran) dan info terbaru progres,
+Anda harus mengaktifkan **ringkasan pemikiran** dengan menetapkan `thinking_summaries` ke
+`"auto"` di `agent_config`. Tanpa ini, aliran data hanya dapat memberikan hasil akhir.
 
-#### ストリーム イベントのタイプ
+#### Jenis peristiwa streaming
 
-| イベントの種類 | デルタタイプ | 説明 |
+| Jenis peristiwa | Jenis delta | Deskripsi |
 | --- | --- | --- |
-| `step.delta` | `thought` | エージェントからの中間的な推論ステップ。 |
-| `step.delta` | `text` | 最終的なテキスト出力の一部。 |
-| `step.delta` | `image` | 生成された画像（base64 でエンコード）。 |
+| `step.delta` | `thought` | Langkah penalaran perantara dari agen. |
+| `step.delta` | `text` | Bagian dari output teks akhir. |
+| `step.delta` | `image` | Gambar yang dihasilkan (berenkode base64). |
 
-次の例では、リサーチタスクを開始し、自動再接続でストリームを処理します。`interaction_id` と `last_event_id` をトラッキングすることで、接続が切断された場合（600 秒のタイムアウト後など）に、中断したところから再開できます。
+Contoh berikut memulai tugas riset dan memproses streaming dengan
+koneksi ulang otomatis. Objek ini melacak `interaction_id` dan `last_event_id` sehingga
+jika koneksi terputus (misalnya, setelah waktu tunggu 600 detik), objek tersebut dapat
+melanjutkan dari tempat terakhir.
 
 ### Python
 
@@ -1034,9 +1043,10 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## フォローアップの質問とインタラクション
+## Pertanyaan dan interaksi lanjutan
 
-`previous_interaction_id` を使用すると、エージェントが最終レポートを返した後も会話を続けることができます。これにより、タスク全体を再開することなく、調査の特定のセクションについて説明、要約、詳細をリクエストできます。
+Anda dapat melanjutkan percakapan setelah agen menampilkan laporan akhir dengan
+menggunakan `previous_interaction_id`. Dengan begitu, Anda dapat meminta klarifikasi, meringkas, atau menguraikan bagian tertentu dari riset tanpa memulai ulang seluruh tugas.
 
 ### Python
 
@@ -1079,29 +1089,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Gemini Deep Research エージェントを使用するケース
+## Kapan harus menggunakan Agen Deep Research Gemini
 
-Deep Research は単なるモデルではなく、**エージェント** です。レイテンシの低いチャットではなく、「アナリスト
-イン ア ボックス」のアプローチが必要なワークロードに最適です。
+Deep Research adalah **agen**, bukan hanya model. Cara ini paling cocok untuk workload yang memerlukan pendekatan "analis dalam kotak" daripada chat latensi rendah.
 
-| 機能 | 標準の Gemini モデル | Gemini Deep Research エージェント |
+| Fitur | Model Gemini Standar | Agen Deep Research Gemini |
 | --- | --- | --- |
-| **レイテンシ** | 秒 | 分（非同期/バックグラウンド） |
-| **プロセス** | 生成 -> 出力 | 計画 -> 検索 -> 読み取り -> 反復 -> 出力 |
-| **出力** | 会話テキスト、コード、短い要約 | 詳細なレポート、長文分析、比較表 |
-| **最適な用途** | chatbot、抽出、クリエイティブ ライティング | 市場分析、デュー デリジェンス、文献レビュー、競合状況の把握 |
+| **Latensi** | Detik | Menit (Asinkron/Latar Belakang) |
+| **Proses** | Buat -> Output | Rencanakan -> Cari -> Baca -> Lakukan iterasi -> Output |
+| **Output** | Teks percakapan, kode, ringkasan singkat | Laporan mendetail, analisis panjang, tabel perbandingan |
+| **Paling Cocok untuk** | Chatbot, ekstraksi, penulisan kreatif | Analisis pasar, uji tuntas, tinjauan pustaka, lanskap kompetitif |
 
-## エージェントの構成
+## Konfigurasi agen
 
-Deep Research は、`agent_config` パラメータを使用して動作を制御します。
-次のフィールドを含むディクショナリとして渡します。
+Deep Research menggunakan parameter `agent_config` untuk mengontrol perilaku.
+Teruskan sebagai kamus dengan kolom berikut:
 
-| フィールド | タイプ | デフォルト | 説明 |
+| Kolom | Jenis | Default | Deskripsi |
 | --- | --- | --- | --- |
-| `type` | `string` | 必須 | `"deep-research"` を指定します。 |
-| `thinking_summaries` | `string` | `"none"` | ストリーミング中に中間的な推論ステップを受け取るには、`"auto"` に設定します。無効にするには、`"none"` に設定します。 |
-| `visualization` | `string` | `"auto"` | エージェントが生成したグラフや画像を有効にするには、`"auto"` に設定します。無効にするには、`"off"` に設定します。 |
-| `collaborative_planning` | `boolean` | `false` | 調査を開始する前にマルチターンのプランレビューを有効にするには、`true` に設定します。 |
+| `type` | `string` | Wajib | Harus berupa `"deep-research"`. |
+| `thinking_summaries` | `string` | `"none"` | Setel ke `"auto"` untuk menerima langkah-langkah penalaran perantara selama streaming. Setel ke `"none"` untuk menonaktifkan. |
+| `visualization` | `string` | `"auto"` | Setel ke `"auto"` untuk mengaktifkan diagram dan gambar yang dibuat agen. Setel ke `"off"` untuk menonaktifkan. |
+| `collaborative_planning` | `boolean` | `false` | Setel ke `true` untuk mengaktifkan peninjauan rencana multi-putaran sebelum riset dimulai. |
 
 ### Python
 
@@ -1156,64 +1165,63 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 提供状況と価格
+## Ketersediaan dan harga
 
-Gemini Deep Research エージェントには、Google AI Studio の Interactions API と Gemini API を使用してアクセスできます。
+Anda dapat mengakses Agen Riset Mendalam Gemini menggunakan Interactions API di Google AI Studio dan Gemini API.
 
-料金は、基盤となる Gemini モデルとエージェントが使用する特定のツールに基づく[従量課金制モデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)です。リクエストが 1
-つの出力につながる標準のチャット リクエストとは異なり、Deep Research タスクはエージェント型ワークフローです。1
-つのリクエストで、計画、検索、読み取り、推論の自律的なループがトリガーされます。
+Harga mengikuti [model bayar sesuai penggunaan](https://ai.google.dev/gemini-api/docs/pricing?hl=id#pricing-for-agents) berdasarkan model Gemini yang mendasarinya dan alat spesifik yang digunakan agen. Tidak seperti permintaan chat standar, yang menghasilkan satu output, tugas Deep Research adalah alur kerja agentic. Satu permintaan memicu loop otonom perencanaan, penelusuran, pembacaan, dan penalaran.
 
-### 推定費用
+### Perkiraan biaya
 
-費用は、必要な調査の深さによって異なります。エージェントは、プロンプトに回答するために必要な読み取りと検索の量を自律的に決定します。
+Biaya bervariasi berdasarkan kedalaman riset yang diperlukan. Agen secara otonom menentukan seberapa banyak membaca dan penelusuran yang diperlukan untuk menjawab perintah Anda.
 
-- **Deep Research** （`deep-research-preview-04-2026`）: 中程度の分析が必要な一般的なクエリの場合、エージェントは ~80 件の検索クエリ、~25 万個の入力トークン（~50 ～ 70% がキャッシュ）、~6 万個の出力トークンを使用する可能性があります。
-  - **合計:** 1 タスクあたり ~$1.00 ～$3.00
-- **Deep Research Max** （`deep-research-max-preview-04-2026`）: 競合状況の詳細な分析や広範なデュー デリジェンスの場合、エージェントは最大で ~160 件の検索クエリ、~90 万個の入力トークン（~50 ～ 70% がキャッシュ）、~8 万個の出力トークンを使用する可能性があります。
-  - **合計:** 1 タスクあたり ~$3.00 ～$7.00
+- **Deep Research** (`deep-research-preview-04-2026`): Untuk kueri umum yang memerlukan analisis sedang, agen mungkin menggunakan ~80 kueri penelusuran, ~250 ribu token input (~50-70% di-cache), dan ~60 ribu token output.
+  - **Estimasi total:** ~$1.00 – $3.00 per tugas
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): Untuk analisis lanskap kompetitif yang mendalam atau uji tuntas yang ekstensif, agen dapat menggunakan hingga ~160 kueri penelusuran, ~900 ribu token input (~50-70% di-cache), dan ~80 ribu token output.
+  - **Estimasi total:** ~$3.00 – $7.00 per tugas
 
-## 安全上の考慮事項
+## Pertimbangan keamanan
 
-エージェントにウェブや非公開ファイルへのアクセスを許可する場合は、安全上のリスクを慎重に検討する必要があります。
+Memberi agen akses ke web dan file pribadi Anda memerlukan pertimbangan yang cermat terhadap risiko keamanan.
 
-- **ファイルを使用したプロンプト インジェクション:** エージェントは、提供されたファイルの内容を読み取ります。アップロードされたドキュメント（PDF、テキスト ファイル）が信頼できるソースからのものであることを確認してください。悪意のあるファイルには、エージェントの出力を操作するように設計された隠しテキストが含まれている可能性があります。
-- **ウェブ コンテンツのリスク:** エージェントは公開ウェブを検索します。堅牢な安全フィルタを実装していますが、エージェントが悪意のあるウェブページに遭遇して処理するリスクがあります。レスポンスで提供される `citations` を確認して、ソースを検証することをおすすめします。
-- **データ漏洩:** エージェントにウェブの閲覧を許可している場合は、機密性の高い内部データの要約をリクエストする際に注意してください。
+- **Injeksi perintah menggunakan file:** Agen membaca isi file yang Anda berikan. Pastikan dokumen yang diupload (PDF, file teks) berasal dari sumber tepercaya. File berbahaya dapat berisi teks tersembunyi yang dirancang untuk memanipulasi output agen.
+- **Risiko konten web:** Agen menelusuri web publik. Meskipun kami menerapkan filter keamanan yang andal, ada risiko bahwa agen dapat menemukan dan memproses halaman web berbahaya. Sebaiknya tinjau `citations` yang diberikan
+  dalam respons untuk memverifikasi sumber.
+- **Pencurian data:** Berhati-hatilah saat meminta agen untuk meringkas data internal sensitif jika Anda juga mengizinkannya menjelajahi web.
 
-## ベスト プラクティス
+## Praktik terbaik
 
-- **不明な情報のプロンプト:** 不足しているデータの処理方法をエージェントに指示します。
-  たとえば、プロンプトに*「2025 年の具体的な数値が利用できない場合は、
-  推定するのではなく、予測または利用できないことを
-  明示的に示す」*を追加します。
-- **コンテキストを提供する:** 入力プロンプトで背景情報や制約を直接指定して、エージェントの調査をグラウンディングします。
-- **共同計画を使用する:** 複雑なクエリの場合は、共同計画を有効にして、実行前にリサーチプランを確認して修正します。
-- **マルチモーダル入力:** Deep Research エージェントはマルチモーダル入力をサポートしています。
-  費用が増加し、コンテキスト ウィンドウのオーバーフローのリスクが高まるため、慎重に使用してください。
+- **Perintah untuk nilai yang tidak diketahui:** Beri tahu agen cara menangani data yang tidak ada.
+  Misalnya, tambahkan *"Jika angka spesifik untuk tahun 2025 tidak tersedia, nyatakan secara eksplisit bahwa angka tersebut adalah proyeksi atau tidak tersedia, bukan perkiraan"* ke perintah Anda.
+- **Berikan konteks:** Mendasari riset agen dengan memberikan informasi atau batasan latar belakang langsung dalam perintah input.
+- **Gunakan perencanaan kolaboratif:** Untuk kueri kompleks, aktifkan perencanaan kolaboratif untuk meninjau dan menyempurnakan rencana riset sebelum eksekusi.
+- **Input multimodal:** Agen Deep Research mendukung input multimodal.
+  Gunakan dengan hati-hati, karena hal ini akan meningkatkan biaya dan risiko meluapnya jendela konteks.
 
-## 制限事項
+## Batasan
 
-- **カスタムツール:** 現在、カスタムの関数呼び出しツールを提供することはできませんが、Deep Research エージェントでリモート MCP（Model Context Protocol）サーバーを使用できます。
-- **構造化出力:** Deep Research エージェントは現在、構造化出力をサポートしていません。
-- **最大調査時間:** Deep Research エージェントの最大調査時間は 60 分です。ほとんどのタスクは 20 分以内に完了します。
-- **ストアの要件:** `background=True` を使用したエージェントの実行には `store=True` が必要です。
-- **Google 検索:** [Google
-  検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)はデフォルトで有効になっており、[グラウンディングされた結果には
-  特定の](https://ai.google.dev/gemini-api/terms?hl=ja#use-restrictions2)
-  制限が適用されます。
+- **Alat kustom:** Saat ini Anda tidak dapat menyediakan alat Pemanggilan Fungsi kustom, tetapi Anda dapat menggunakan server MCP (Model Context Protocol) jarak jauh dengan agen Deep Research.
+- **Output terstruktur:** Agen Deep Research saat ini tidak mendukung output terstruktur.
+- **Waktu riset maksimum:** Agen Deep Research memiliki waktu riset maksimum 60 menit. Sebagian besar tugas akan selesai dalam waktu 20 menit.
+- **Persyaratan penyimpanan:** Eksekusi agen menggunakan `background=True` memerlukan
+  `store=True`.
+- **Penelusuran Google:** [Google
+  Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) diaktifkan secara
+  default dan [pembatasan
+  tertentu](https://ai.google.dev/gemini-api/terms?hl=id#use-restrictions2)
+  berlaku untuk hasil yang di-grounding.
 
-## 次のステップ
+## Langkah berikutnya
 
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の詳細について学習する。
-- [ファイル検索ツールを使用して独自のデータを使用する方法を学習する。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
+- Pelajari lebih lanjut [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id).
+- Pelajari cara menggunakan data Anda sendiri menggunakan alat [Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id).
 
-フィードバックを送信
+Kirim masukan
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-最終更新日 2026-06-26 UTC。
+Terakhir diperbarui pada 2026-06-26 UTC.
 
-ご意見をお聞かせください
+Ada masukan untuk kami?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-26 UTC。"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-26 UTC."],[],[]]

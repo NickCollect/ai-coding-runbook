@@ -1,38 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=pt-BR
-fetched_at: 2026-06-29T05:40:22.484479+00:00
-title: "Entendimento de documentos \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=ko
+fetched_at: 2026-07-06T05:21:21.795733+00:00
+title: "\ubb38\uc11c \uc774\ud574 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Envie comentários
+의견 보내기
 
-# Entendimento de documentos
+# 문서 이해
 
-Os modelos do Gemini podem processar documentos em formato PDF usando a visão nativa para entender contextos completos. Isso vai além da extração de texto, permitindo que o Gemini:
+Gemini 모델은 기본 비전을 사용하여 전체 문서 컨텍스트를 이해함으로써 PDF 형식의 문서를 처리할 수 있습니다. 이는 단순한 텍스트 추출을 넘어 Gemini가 다음 작업을 할 수 있도록 합니다.
 
-- Analisar e interpretar conteúdo, incluindo texto, imagens, diagramas, gráficos e tabelas, mesmo em documentos longos de até 1.000 páginas.
-- Extrair informações em formatos de [saída estruturada](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br).
-- Resumir e responder a perguntas com base nos elementos visuais e textuais de um documento.
-- Transcrever o conteúdo do documento (por exemplo, para HTML), preservando layouts e formatação, para uso em aplicativos downstream.
+- 최대 1,000페이지의 긴 문서에서도 텍스트, 이미지, 다이어그램, 차트, 표를 비롯한 콘텐츠를 분석하고 해석합니다.
+- 정보를 [구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko) 형식으로 추출합니다.
+- 문서의 시각적 요소와 텍스트 요소를 모두 기반으로 질문에 요약하고 답변합니다.
+- 다운스트림 애플리케이션에서 사용할 수 있도록 레이아웃과 서식을 유지하면서 문서 콘텐츠를 트랜스크립션합니다 (예: HTML로).
 
-Você também pode enviar documentos que não sejam em PDF da mesma forma, mas o Gemini vai considerá-los como texto normal, o que elimina o contexto, como gráficos ou formatação.
+동일한 방식으로 PDF가 아닌 문서를 전달할 수도 있지만 Gemini는 이를 일반 텍스트로 인식하므로 차트나 서식과 같은 컨텍스트가 삭제됩니다.
 
-## Como transmitir dados de PDF inline
+## PDF 데이터 인라인 전달
 
-É possível transmitir dados de PDF inline na solicitação para `generateContent`. Essa opção é mais adequada para documentos menores ou processamento temporário em que não é necessário referenciar o arquivo em solicitações subsequentes. Recomendamos usar a [API Files](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br#large-pdfs) para documentos maiores que você precisa consultar em interações multiturno para melhorar a latência da solicitação e reduzir o uso da largura de banda.
+요청에서 PDF 데이터를 인라인으로 `generateContent`에 전달할 수 있습니다. 이는 후속 요청에서 파일을 참조할 필요가 없는 작은 문서 또는 임시 처리에 가장 적합합니다. 요청 지연 시간을 개선하고 대역폭 사용량을 줄이기 위해 멀티턴 상호작용에서 참조해야 하는 대용량 문서에는 [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko#large-pdfs)
+를 사용하는 것이 좋습니다.
 
-O exemplo a seguir mostra como buscar um PDF de um URL e convertê-lo em bytes para processamento:
+다음 예에서는 URL에서 PDF를 가져와 처리할 바이트로 변환하는 방법을 보여줍니다.
 
 ### Python
 
@@ -190,7 +191,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-Também é possível ler um PDF de um arquivo local para processamento:
+처리를 위해 로컬 파일에서 PDF를 읽을 수도 있습니다.
 
 ### Python
 
@@ -291,13 +292,13 @@ func main() {
 }
 ```
 
-## Fazer upload de PDFs usando a API Files
+## Files API를 사용하여 PDF 업로드
 
-Recomendamos usar a API Files para arquivos maiores ou quando você pretende reutilizar um documento em várias solicitações. Isso melhora a latência da solicitação e reduz o uso de largura de banda ao desacoplar o upload de arquivos das solicitações de modelo.
+대용량 파일의 경우 또는 여러 요청에서 문서를 재사용하려는 경우 Files API를 사용하는 것이 좋습니다. 이렇게 하면 파일 업로드를 모델 요청과 분리하여 요청 지연 시간이 개선되고 대역폭 사용량이 줄어듭니다.
 
-### PDFs grandes de URLs
+### URL의 대용량 PDF
 
-Use a API File para simplificar o upload e o processamento de arquivos PDF grandes de URLs:
+File API를 사용하여 URL에서 대용량 PDF 파일을 업로드하고 처리하는 작업을 간소화합니다.
 
 ### Python
 
@@ -505,7 +506,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### PDFs grandes armazenados localmente
+### 로컬에 저장된 대용량 PDF
 
 ### Python
 
@@ -677,7 +678,8 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Para verificar se a API armazenou o arquivo enviado e receber os metadados dele, chame [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=pt-br). Somente o `name` (e, por extensão, o `uri`) são exclusivos.
+`[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ko)`을 호출하여 API가 업로드된 파일을 성공적으로 저장했는지 확인하고
+메타데이터를 가져올 수 있습니다. `name`(및 확장된 `uri`)만 고유합니다.
 
 ### Python
 
@@ -709,9 +711,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Enviar vários PDFs
+## 여러 PDF 전달
 
-A API Gemini pode processar vários documentos PDF (até 1.000 páginas) em uma única solicitação, desde que o tamanho combinado dos documentos e do comando de texto permaneça dentro da janela de contexto do modelo.
+Gemini API는 문서와 텍스트 프롬프트의 결합된 크기가 모델의 컨텍스트 윈도우 내에 있는 한 단일 요청으로 여러 PDF 문서 (최대 1, 000페이지)를 처리할 수 있습니다.
 
 ### Python
 
@@ -963,62 +965,53 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Detalhes técnicos
+## 기술 세부정보
 
-O Gemini aceita arquivos PDF de até 50 MB ou 1.000 páginas. Esse limite se aplica
-a dados inline e uploads da API Files. Cada página do documento equivale a 258
-tokens.
+Gemini는 최대 50MB 또는 1,000페이지의 PDF 파일을 지원합니다. 이 한도는 인라인 데이터와 Files API 업로드 모두에 적용됩니다. 각 문서 페이지는 258개의 토큰과 같습니다.
 
-Não há limites específicos para o número de pixels em um documento além da [janela de contexto](https://ai.google.dev/gemini-api/docs/long-context?hl=pt-br) do modelo. No entanto, páginas maiores são reduzidas para uma resolução máxima de 3072 x 3072, preservando a proporção original, enquanto páginas menores são aumentadas para 768 x 768 pixels. Não há redução de custo para páginas em tamanhos menores, além da largura de banda, ou melhoria de desempenho para páginas em resolução mais alta.
+[모델의 컨텍스트 창 외에 문서의 픽셀 수에 대한 구체적인 제한은 없지만, 큰 페이지는 원래 가로세로 비율을 유지하면서 최대 해상도인 3072 x 3072로 축소되고 작은 페이지는 768 x 768픽셀로 확대됩니다.](https://ai.google.dev/gemini-api/docs/long-context?hl=ko) 대역폭 외에 크기가 작은 페이지의 비용 절감이나 해상도가 높은 페이지의 성능 개선은 없습니다.
 
-### Modelos do Gemini 3
+### Gemini 3 모델
 
-O Gemini 3 apresenta controle granular sobre o processamento de visão multimodal com o parâmetro
-`media_resolution`. Agora você pode definir a resolução como baixa, média ou alta para cada trecho de áudio individual. Com essa adição, o processamento de documentos PDF foi atualizado:
+Gemini 3는 `media_resolution` 파라미터를 통해 멀티모달 비전 처리에 대한 세밀한 제어 기능을 제공합니다. 이제 개별 미디어 파트별로 해상도를 낮음, 중간 또는 높음으로 설정할 수 있습니다. 이 추가로 PDF 문서 처리가 업데이트되었습니다.
 
-1. **Inclusão de texto nativo**:o texto incorporado nativamente no PDF é extraído
-   e fornecido ao modelo.
-2. **Faturamento e relatórios de tokens**:
-   - Você **não é cobrado** por tokens originados do
-     **texto nativo** extraído em PDFs.
-   - Na seção `usage_metadata` da resposta da API, os tokens gerados
-     pelo processamento de páginas PDF (como imagens) agora são contados na modalidade `IMAGE`
-     , e não em uma modalidade `DOCUMENT` separada, como em algumas versões
-     anteriores.
+1. **기본 텍스트 포함:** PDF에 기본적으로 삽입된 텍스트가 추출되어 모델에 제공됩니다.
+2. **결제 및 토큰 보고:**
+   - PDF에서 추출된 **기본 텍스트** 에서 발생한 토큰에 대해서는 **요금이 청구되지 않습니다**.
+   - API 응답의 `usage_metadata` 섹션에서 PDF 페이지 (이미지) 처리로 생성된 토큰은 이제 일부 이전 버전과 달리 별도의 `DOCUMENT` 모드가 아닌 `IMAGE` 모드에서 집계됩니다.
 
-Para mais detalhes sobre o parâmetro de resolução de mídia, consulte o guia [Resolução de mídia](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=pt-br).
+미디어 해상도 파라미터에 관한 자세한 내용은
+[미디어 해상도](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ko) 가이드를 참고하세요.
 
-### Tipos de documentos
+### 문서 유형
 
-Tecnicamente, é possível transmitir outros tipos MIME para o entendimento de documentos, como TXT, Markdown, HTML, XML etc. No entanto, a visão de documentos ***só entende PDFs de maneira significativa***. Outros tipos serão extraídos como texto puro, e o modelo não poderá interpretar o que vemos na renderização desses arquivos. Todas as especificidades de tipo de arquivo, como gráficos, diagramas, tags HTML, formatação Markdown etc., serão perdidas.
+기술적으로는 TXT, Markdown, HTML, XML 등과 같은 문서 이해를 위한 다른 MIME 유형을 전달할 수 있습니다. 하지만 문서 비전은 ***PDF만 의미 있게 이해합니다***. 다른 유형은 순수 텍스트로 추출되며 모델은 이러한 파일의 렌더링에서 보이는 내용을 해석할 수 없습니다. 차트, 다이어그램, HTML 태그, Markdown 서식 등과 같은 파일 유형 관련 세부정보는 손실됩니다.
 
-Para conhecer outros métodos de entrada de arquivos, consulte o guia [Métodos de entrada de arquivos](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pt-br).
+다른 파일 입력 방법에 관한 자세한 내용은
+[파일 입력 방법](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ko) 가이드를 참고하세요.
 
-### Práticas recomendadas
+### 권장사항
 
-Para conseguir os melhores resultados:
+최상의 결과를 얻는 방법
 
-- Gire as páginas para a orientação correta antes de fazer o upload.
-- Evite páginas desfocadas.
-- Se você estiver usando uma única página, coloque o comando de texto depois dela.
+- 업로드하기 전에 페이지를 올바른 방향으로 회전합니다.
+- 흐릿한 페이지는 사용하지 마세요.
+- 단일 페이지를 사용하는 경우 페이지 뒤에 텍스트 프롬프트를 배치합니다.
 
-## A seguir
+## 다음 단계
 
-Para saber mais, consulte os seguintes recursos:
+자세한 내용은 다음 리소스를 참고하세요.
 
-- [Estratégias de comandos de arquivo](https://ai.google.dev/gemini-api/docs/files?hl=pt-br#prompt-guide): a
-  API Gemini aceita comandos com dados de texto, imagem, áudio e vídeo, também
-  conhecidas como comandos multimodais.
-- [Instruções do sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br#system-instructions):
-  Com elas, é possível orientar o comportamento do modelo com base nas suas
-  necessidades e casos de uso específicos.
+- [파일 프롬프트 전략](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide): Gemini API는 멀티모달 프롬프트 사용이라고도 하는 텍스트, 이미지, 오디오, 동영상 데이터로 프롬프트를 지원합니다.
+- [시스템 안내](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko#system-instructions):
+  시스템 안내를 사용하면 특정 요구사항 및 사용 사례에 따라 모델의 동작을 조정할 수 있습니다.
 
-Envie comentários
+의견 보내기
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Última atualização 2026-06-24 UTC.
+최종 업데이트: 2026-06-24(UTC)
 
-Quer enviar seu feedback?
+의견을 전달하고 싶나요?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-24 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-24(UTC)"],[],[]]

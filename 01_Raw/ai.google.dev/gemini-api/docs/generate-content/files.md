@@ -1,35 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=ar
-fetched_at: 2026-06-29T05:28:39.159860+00:00
-title: "\u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0627\u0644\u0645\u0644\u0641\u0627\u062a \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=id
+fetched_at: 2026-07-06T05:09:49.973518+00:00
+title: "API File \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
-# واجهة برمجة تطبيقات الملفات
+# API File
 
-يمكن لنموذج Gemini التعامل مع أنواع مختلفة من بيانات الإدخال، بما في ذلك النصوص والصور والمقاطع الصوتية، في الوقت نفسه.
+Gemini dapat menangani berbagai jenis data input, termasuk teks, gambar, dan audio, secara bersamaan.
 
-يوضّح لك هذا الدليل كيفية التعامل مع ملفات الوسائط باستخدام Files API. تكون العمليات الأساسية هي نفسها بالنسبة إلى الملفات الصوتية والصور والفيديوهات والمستندات وأنواع الملفات الأخرى المتوافقة.
+Panduan ini menunjukkan cara menggunakan file media menggunakan Files API. Operasi
+dasar sama untuk file audio, gambar, video, dokumen, dan
+jenis file lain yang didukung.
 
-للحصول على إرشادات بشأن دليل كتابة الطلبات للملفات، يُرجى الاطّلاع على قسم [دليل كتابة الطلبات للملفات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide).
+Untuk panduan perintah file, lihat bagian [Panduan perintah file](https://ai.google.dev/gemini-api/docs/files?hl=id#prompt-guide).
 
-## تحميل ملف
+## Upload file
 
-يمكنك استخدام Files API لتحميل ملف وسائط. استخدِم دائمًا Files API عندما يتجاوز إجمالي حجم الطلب (بما في ذلك الملفات والطلب النصّي وتعليمات النظام وما إلى ذلك) 100 ميغابايت. بالنسبة إلى ملفات PDF، يبلغ الحدّ الأقصى 50 ميغابايت.
+Anda dapat menggunakan Files API untuk mengupload file media. Selalu gunakan Files API jika total ukuran permintaan (termasuk file, perintah teks, petunjuk sistem, dll.) lebih besar dari 100 MB. Untuk file PDF, batasnya adalah 50 MB.
 
-يحمّل الرمز التالي ملفًا ثم يستخدمه في طلب إلى `generateContent`.
+Kode berikut mengupload file, lalu menggunakan file tersebut dalam panggilan ke
+`generateContent`.
 
 ### Python
 
@@ -156,9 +159,10 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## الحصول على البيانات الوصفية لملف
+## Mendapatkan metadata untuk file
 
-يمكنك التأكّد من أنّ واجهة برمجة التطبيقات خزّنت الملف الذي تم تحميله بنجاح والحصول على بياناته الوصفية من خلال طلب `files.get`.
+Anda dapat memverifikasi bahwa API berhasil menyimpan file yang diupload dan mendapatkan
+metadatanya dengan memanggil `files.get`.
 
 ### Python
 
@@ -226,9 +230,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## عرض الملفات المحمَّلة
+## Mencantumkan file yang diupload
 
-يحصل الرمز التالي على قائمة بجميع الملفات التي تم تحميلها:
+Kode berikut akan mendapatkan daftar semua file yang diupload:
 
 ### Python
 
@@ -281,9 +285,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## حذف الملفات التي تم تحميلها
+## Menghapus file yang diupload
 
-يتم حذف الملفات تلقائيًا بعد 48 ساعة. يمكنك أيضًا حذف ملف تم تحميله يدويًا باتّباع الخطوات التالية:
+File akan otomatis dihapus setelah 48 jam. Anda juga dapat menghapus file yang diupload secara manual:
 
 ### Python
 
@@ -335,197 +339,207 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## معلومات الاستخدام
+## Info penggunaan
 
-يمكنك استخدام واجهة برمجة التطبيقات Files API لتحميل ملفات الوسائط والتفاعل معها. تتيح لك Files API تخزين ما يصل إلى 20 غيغابايت من الملفات لكل مشروع، مع حد أقصى لحجم الملف الواحد يبلغ 2 غيغابايت. يتم تخزين الملفات لمدة 48 ساعة. خلال هذه الفترة، يمكنك استخدام واجهة برمجة التطبيقات للحصول على البيانات الوصفية الخاصة بالملفات، ولكن لا يمكنك تنزيل الملفات.
-تتوفّر واجهة برمجة التطبيقات Files API مجانًا في جميع المناطق التي تتوفّر فيها واجهة برمجة التطبيقات Gemini API.
+Anda dapat menggunakan Files API untuk mengupload dan berinteraksi dengan file media. Files API memungkinkan Anda menyimpan hingga 20 GB file per project, dengan ukuran maksimum per file sebesar 2 GB. File disimpan selama 48 jam. Selama waktu tersebut, Anda dapat menggunakan API untuk mendapatkan metadata tentang file, tetapi Anda tidak dapat mendownload file.
+Files API tersedia tanpa biaya di semua wilayah tempat Gemini API tersedia.
 
-## استراتيجيات طلب الملفات
+## Strategi pembuatan perintah file
 
-يقدّم هذا القسم إرشادات وأفضل الممارسات لاستخدام ملفات الوسائط مع الطلبات في Gemini API.
+Bagian ini memberikan panduan dan praktik terbaik untuk menggunakan file media dengan perintah untuk Gemini API.
 
-يتيح لك استخدام أنواع مختلفة من البيانات في طلباتك مرونة أكبر في ما يتعلّق بالمهام التي يمكنك إنجازها باستخدام Gemini API. على سبيل المثال، يمكنك إرسال صورة وجبة لذيذة إلى النموذج وطلب كتابة مدوّنة قصيرة عنها.
+Kemampuan untuk menggunakan berbagai jenis data dalam perintah memberi Anda lebih banyak fleksibilitas dalam hal tugas yang dapat Anda selesaikan dengan Gemini API. Misalnya, Anda dapat mengirimkan foto hidangan lezat ke model dan memintanya untuk menulis blog singkat tentang hidangan tersebut.
 
 |  |  |
 | --- | --- |
-| **الطلب** | **الردّ** |
-| اكتب منشور مدوّنة قصيرًا وجذّابًا استنادًا إلى هذه الصورة. يجب أن يتضمّن وصفًا للوجبة في الصورة وأن يتحدث عن رحلتي في إعداد الوجبات مسبقًا.   بسكويت | يُعدّ تحضير الوجبات مسبقًا طريقة رائعة لتوفير الوقت والمال، ويمكن أن يساعدك أيضًا في تناول طعام صحي. هذه الوجبة هي مثال رائع على وجبة صحية ولذيذة يمكن تحضيرها بسهولة مسبقًا.  تتضمّن هذه الوجبة أرزًا أسمر وخضروات مشوية ودجاج ترياكي. الأرز الأسمر هو كربوهيدرات صحية ومعقدة تمنحك الطاقة المستدامة. تُعدّ الخضروات المشوية طريقة رائعة للحصول على الجرعة اليومية من الفيتامينات والمعادن، كما أنّ دجاج الترياكي خيار لذيذ وغني بالبروتين.  هذه الوجبة سهلة التحضير أيضًا. ما عليك سوى طهي الأرز الأسمر وشوي الخضراوات وطهي الدجاج بصلصة الترياكي. بعد الانتهاء من الطهي، قسِّموا الطعام إلى عبوات مخصّصة لتجهيز الوجبات واحفظوها في الثلاجة. يمكنك بعد ذلك أخذ وعاء والانطلاق في الصباحات المزدحمة.  إذا كنت تبحث عن وجبة صحية ولذيذة يمكن تحضيرها بسهولة مسبقًا، فهذه الوجبة هي الخيار الأمثل. فهي غنية بالعناصر الغذائية والمذاق الرائع، وستمنحك بالتأكيد شعورًا بالشبع والرضا.  نتمنى لك وجبات صحية ولذيذة! |
+| **Perintah** | **Respons** |
+| Tulis postingan blog singkat yang menarik berdasarkan gambar ini. Postingan tersebut harus menyertakan deskripsi makanan dalam foto dan menceritakan perjalanan saya dalam menyiapkan makanan.   Cookie | Menyiapkan makanan adalah cara yang bagus untuk menghemat waktu dan uang, dan juga dapat membantu Anda makan lebih sehat. Hidangan ini adalah contoh yang bagus dari hidangan sehat dan lezat yang dapat disiapkan dengan mudah sebelumnya.  Makanan ini terdiri dari nasi merah, sayuran panggang, dan ayam teriyaki. Nasi merah adalah karbohidrat kompleks yang sehat dan akan memberi Anda energi yang berkelanjutan. Sayuran panggang adalah cara yang bagus untuk mendapatkan dosis vitamin dan mineral harian Anda, dan ayam teriyaki adalah pilihan yang lezat dan kaya protein.  Makanan ini juga sangat mudah disiapkan. Cukup masak nasi merah, panggang sayuran, dan masak ayam teriyaki. Setelah semuanya matang, bagi menjadi beberapa porsi dan simpan di dalam wadah persiapan makanan di dalam kulkas. Kemudian, Anda dapat mengambil wadah dan pergi di pagi yang sibuk.  Jika Anda mencari makanan sehat dan lezat yang dapat disiapkan dengan mudah sebelumnya, makanan ini adalah pilihan yang tepat. Makanan ini penuh dengan nutrisi dan rasa, serta pasti membuat Anda merasa kenyang dan puas.  Selamat menikmati persiapan makanan yang sehat dan lezat! |
 
-إذا كنت تواجه مشكلة في الحصول على النتائج المطلوبة من الطلبات التي تستخدم ملفات وسائط، إليك بعض الاستراتيجيات التي يمكن أن تساعدك في الحصول على النتائج التي تريدها. تقدّم الأقسام التالية طرقًا لتصميم الطلبات ونصائح حول تحديد المشاكل وحلّها لتحسين الطلبات التي تستخدم الإدخال المتعدّد الوسائط.
+Jika Anda mengalami kesulitan mendapatkan output yang diinginkan dari perintah yang menggunakan
+file media, ada beberapa strategi yang dapat membantu Anda mendapatkan hasil yang
+diinginkan. Bagian berikut memberikan pendekatan desain dan tips pemecahan masalah untuk meningkatkan kualitas perintah yang menggunakan input multimodal.
 
-يمكنك تحسين طلباتك المتعدّدة الوسائط باتّباع أفضل الممارسات التالية:
+Anda dapat meningkatkan kualitas perintah multimodal dengan mengikuti praktik terbaik berikut:
 
-- ### [أساسيات تصميم الطلبات](#specific-instructions)
+- ### [Dasar-dasar desain perintah](#specific-instructions)
 
-  - **كن دقيقًا في تعليماتك**: صِغ تعليمات واضحة وموجزة لا تترك مجالاً كبيرًا لإساءة الفهم.
-  - **إضافة بعض الأمثلة إلى طلبك:** استخدِم أمثلة واقعية قليلة اللقطات لتوضيح ما تريد تحقيقه.
-  - **التقسيم إلى خطوات**: قسِّم المهام المعقّدة إلى أهداف فرعية يسهل تنفيذها، ما يساعد النموذج في إكمال العملية.
-  - **تحديد تنسيق الإخراج**: في طلبك، اطلب أن يكون الإخراج بالتنسيق الذي تريده، مثل Markdown وJSON وHTML وغير ذلك.
-  - **وضع صورتك أولاً في الطلبات التي تتضمّن صورة واحدة**: على الرغم من أنّ Gemini يمكنه التعامل مع مدخلات الصور والنصوص بأي ترتيب، قد يكون أداؤه أفضل في الطلبات التي تتضمّن صورة واحدة إذا تم وضع هذه الصورة (أو الفيديو) قبل طلب النص. ومع ذلك، بالنسبة إلى الطلبات التي تتطلّب أن تكون الصور متداخلة بشكل كبير مع النصوص لكي تكون مفهومة، استخدِم الترتيب الأكثر طبيعية.
-- ### [تحديد المشاكل في الطلب المتعدد الوسائط وحلّها](#troubleshooting)
+  - **Berikan petunjuk yang spesifik**: Buat petunjuk yang jelas dan ringkas yang hanya menyisakan sedikit ruang untuk salah penafsiran.
+  - **Tambahkan beberapa contoh ke perintah Anda:** Gunakan contoh few-shot yang realistis untuk menggambarkan apa yang ingin Anda capai.
+  - **Uraikan langkah demi langkah**: Bagi tugas yang kompleks menjadi sub-tujuan yang mudah dikelola, dengan memandu model melalui prosesnya.
+  - **Tentukan format output**: Dalam perintah Anda, minta output dalam format yang Anda inginkan, seperti markdown, JSON, HTML, dan lainnya.
+  - **Mendahulukan gambar untuk perintah satu gambar**: Meskipun Gemini dapat menangani input gambar dan teks dalam urutan apa pun, untuk perintah yang berisi satu gambar, performanya mungkin lebih baik jika gambar (atau video) tersebut ditempatkan sebelum perintah teks. Namun, untuk perintah yang memerlukan gambar diselingi dengan teks agar dapat dipahami, gunakan urutan apa pun yang paling alami.
+- ### [Memecahkan masalah perintah multimodal](#troubleshooting)
 
-  - **إذا كان النموذج لا يستمد المعلومات من الجزء ذي الصلة من الصورة:** قدِّم تلميحات بشأن جوانب الصورة التي تريد أن يستمد منها الطلب المعلومات.
-  - **إذا كانت مخرجات النموذج عامة جدًا (غير مخصّصة بشكل كافٍ للصورة أو الفيديو المُدخَل):** في بداية الطلب، جرِّب أن تطلب من النموذج وصف الصور أو الفيديو قبل تقديم تعليمات المهمة، أو جرِّب أن تطلب من النموذج الإشارة إلى ما يظهر في الصورة.
-  - **لتحديد الجزء الذي تعذّر تنفيذه:** اطلب من النموذج وصف الصورة أو شرح أسباب تعذُّر التنفيذ، وذلك لتقييم فهم النموذج الأوّلي.
-  - **إذا أدّى طلبك إلى الهلوسة في المحتوى:** جرِّب خفض إعداد درجة العشوائية أو اطلب من النموذج تقديم أوصاف أقصر لتقليل احتمالية استقراء تفاصيل إضافية.
-  - **ضبط مَعلَمات اختيار العيّنات:** جرِّب إعدادات مختلفة لدرجة العشوائية وخيارات top-k لضبط مستوى إبداع النموذج.
+  - **Jika model tidak mengambil informasi dari bagian gambar yang relevan:** Berikan petunjuk tentang aspek gambar yang ingin Anda gunakan sebagai sumber informasi perintah.
+  - **Jika output model terlalu umum (tidak cukup disesuaikan dengan input gambar/video):** Di awal perintah, coba minta model untuk mendeskripsikan gambar atau video sebelum memberikan petunjuk tugas, atau coba minta model untuk merujuk pada apa yang ada dalam gambar.
+  - **Untuk memecahkan masalah bagian mana yang gagal:** Minta model untuk mendeskripsikan gambar, atau minta model untuk menjelaskan penalarannya, guna mengukur pemahaman awal model.
+  - **Jika perintah Anda menghasilkan konten halusinasi:** Coba kurangi setelan temperatur atau minta model untuk memberikan deskripsi yang lebih singkat sehingga model cenderung tidak mengekstrapolasi detail tambahan.
+  - **Menyesuaikan parameter sampling:** Bereksperimenlah dengan berbagai setelan suhu dan pilihan top-k untuk menyesuaikan kreativitas model.
 
-### كن محدّدًا في تعليماتك
+### Berikan petunjuk yang spesifik
 
-تكون الطلبات أكثر فعالية عندما تكون واضحة ومفصّلة. إذا كان لديك ناتج محدّد في ذهنك، من الأفضل تضمين هذا الشرط في الطلب لضمان الحصول على الناتج المطلوب.
+Perintah akan memberikan hasil terbaik jika jelas dan mendetail. Jika Anda memiliki
+output tertentu yang diinginkan, sebaiknya sertakan persyaratan tersebut dalam perintah
+untuk memastikan Anda mendapatkan output yang diinginkan.
 
-بالنسبة إلى هذه الصورة التي تعرض لوحة في المطار، قد يؤدي الطلب من النموذج "وصف هذه الصورة" إلى إنشاء وصف عام. إذا كنت بحاجة إلى أن يحلّل النموذج الوقت والمدينة من الصورة، يمكنك تضمين هذا الطلب مباشرةً في طلبك.
+Untuk gambar papan informasi bandara ini, meminta model untuk "mendeskripsikan gambar ini" saja dapat menghasilkan deskripsi umum. Jika Anda ingin model mengurai waktu dan kota dari gambar, Anda dapat menyertakan permintaan tersebut langsung dalam perintah.
 
-| الطلب | ردّ النموذج |
+| Perintah | Respons model |
 | --- | --- |
-| صِف هذه الصورة. | تعرض الصورة لوحة مواعيد الوصول والمغادرة في المطار. |
+| Jelaskan gambar ini. | Gambar menampilkan papan kedatangan dan keberangkatan bandara. |
 
-| **طلب معدَّل** | **ردود محسّنة** |
+| **Perintah yang diperbarui** | **Respons yang lebih baik** |
 | --- | --- |
-| جدول مواعيد السفر حوِّل الوقت والمدينة من لوحة المطار الظاهرة في هذه الصورة إلى قائمة. | - ‫10:50 بتوقيت موسكو - ‫11:05 إدنبرة - ‫11:05 لندن - ‫11:10 بوخارست - ‫11:30 صباحًا بتوقيت كييف - ‫11:35 دبلن - ‫11:45 شرق ميدلاندز - ‫12:15 صوفيا - ‫12:30 لندن - ‫12:30 نيوكاسل - ‫12:40 سانت بطرسبرغ - ‫12:40 لندن - ‫12:45 مانشستر |
+| Jadwal perjalanan Parse waktu dan kota dari papan informasi bandara yang ditampilkan dalam gambar ini ke dalam daftar. | - 10.50 Moskow - 11:05 Edinburgh - 11:05 London - 11.10 Bucharest - 11.30 Kiev - 11:35 Dublin - 11.45 East Midlands - 12.15 Sofia - 12.30 London - 12:30 Newcastle - 12.40 St Petersburg - 12.40 London - 12.45 Manchester |
 
-### إضافة بعض الأمثلة
+### Tambahkan beberapa contoh
 
-يمكن لنموذج Gemini قبول مدخلات متعددة يمكنه استخدامها كأمثلة لفهم الناتج الذي تريده. يمكن أن تساعد إضافة هذه الأمثلة النموذج في تحديد الأنماط وتطبيق العلاقة بين الصور والردود المحدّدة على المثال الجديد. يُعرف ذلك أيضًا باسم التعلّم ببضع فُرَص.
+Model Gemini dapat menerima beberapa input yang dapat digunakan sebagai contoh untuk memahami output yang Anda inginkan. Menambahkan contoh ini dapat membantu model mengidentifikasi pola dan menerapkan hubungan antara gambar dan respons yang diberikan ke contoh baru. Hal ini juga disebut pembelajaran "few-shot".
 
-في المثال أدناه، تتم كتابة الناتج الأولي في شكل جملة، كما يتضمّن البلد (البرازيل). لنفترض أنّك تريد الإخراج بتنسيق أو نمط مختلفين، وأنّك تريد عرض المدينة فقط، وليس البلد. يمكن أن تؤدي إضافة أمثلة قليلة إلى طلبك إلى توجيه النموذج للرد بالطريقة التي تريدها.
+Dalam contoh di bawah, output awal ditulis dalam bentuk kalimat, dan juga berisi
+negara (Brasil). Misalnya, Anda menginginkan output dalam format atau gaya yang berbeda, dan Anda hanya menginginkan kota, bukan negara. Menambahkan contoh few-shot ke perintah dapat mengarahkan model
+untuk merespons sesuai keinginan Anda.
 
-| **الطلب** | **ردّ النموذج** |
+| **Perintah** | **Respons model** |
 | --- | --- |
-| جدول مواعيد السفر حدِّد المدينة والمعلم. | المعلم البارز هو تمثال "المسيح الفادي" في ريو دي جانيرو، البرازيل. |
+| Jadwal perjalanan Tentukan kota beserta tempat terkenalnya. | Landmark tersebut adalah patung Kristus Penebus di Rio de Janeiro, Brasil. |
 
-| **طلب معدَّل** | **ردود محسّنة** |
+| **Perintah yang diperbarui** | **Respons yang lebih baik** |
 | --- | --- |
-| حدِّد المدينة والمعلم. كولوسيوم | المدينة: روما، المعلم: الكولوسيوم |
-| المدينة المحرمة | المدينة: بكين، المعلم: المدينة المحرّمة |
-| forbidden-city | مدينة: ريو دي جانيرو، معلم: تمثال المسيح الفادي |
+| Tentukan kota beserta tempat terkenalnya. colosseum | kota: Roma, landmark: Colosseum. |
+| Kota Terlarang | kota: Beijing, landmark: Kota Terlarang |
+| kota-terlarang | kota: Rio de Janeiro, landmark: patung Kristus Penebus |
 
-### التقسيم إلى خطوات
+### Uraikan langkah demi langkah
 
-بالنسبة إلى المهام المعقّدة، مثل تلك التي تتطلّب فهمًا بصريًا واستدلالاً، قد يكون من المفيد تقسيم المهمة إلى خطوات أصغر وأكثر وضوحًا. يمكنك أيضًا أن تطلب من النموذج مباشرةً "التفكير خطوة بخطوة" في طلبك.
+Untuk tugas kompleks seperti yang memerlukan pemahaman dan penalaran visual, sebaiknya pecah tugas menjadi langkah-langkah yang lebih kecil dan lebih mudah. Atau, Anda juga dapat meminta model secara langsung untuk “berpikir secara berurutan” dalam perintah Anda.
 
-| الطلب | ردّ النموذج |
+| Perintah | Respons model |
 | --- | --- |
-| متى سينتهي ورق المرحاض؟ | سيتبقى لديك قريبًا 3 لفات فقط. |
+| Kapan tisu toilet saya akan habis? | Segera, Anda hanya memiliki 3 putaran tersisa. |
 
-| **طلب معدَّل** | **ردود محسّنة** |
+| **Perintah yang diperbarui** | **Respons yang lebih baik** |
 | --- | --- |
-| 1. أولاً، احسب عدد لفات ورق المرحاض في هذه الصورة.  ‫2. بعد ذلك، حدِّد كمية ورق المرحاض التي يستخدمها الشخص العادي يوميًا.  ‫3. احسب المدة التي ستكفيك فيها لفات ورق المرحاض هذه. | 1. تتضمّن هذه الصورة 3 لفات من ورق المرحاض.  ‫2. يستخدم الشخص العادي حوالي 20 ورقة من ورق التواليت يوميًا.  ‫3. إذا كانت كل لفة تحتوي على 200 ورقة، ستكفي كل لفة لمدة 10 أيام تقريبًا. وبالتالي، ستدوم اللفات الثلاث لمدة شهر تقريبًا. |
+| 1. Pertama, hitung berapa banyak gulungan tisu toilet dalam gambar ini.  2. Kemudian, tentukan berapa banyak tisu toilet yang digunakan orang pada umumnya per hari.  3. Hitung berapa lama gulungan tisu toilet ini akan habis. | 1. Ada 3 gulungan tisu toilet dalam gambar ini.  2. Orang biasanya menggunakan sekitar 20 lembar tisu toilet per hari.  3. Jika setiap gulungan berisi 200 lembar, maka setiap gulungan akan bertahan selama sekitar 10 hari. Oleh karena itu, 3 gulungan akan bertahan selama sekitar satu bulan. |
 
-تُعدّ المسائل الرياضية أو الأنواع الأخرى من المسائل الكلامية خيارًا رائعًا لطلب
-من النموذج التفكير خطوة بخطوة.
+Soal matematika atau jenis soal cerita lainnya adalah kandidat yang tepat untuk meminta model berpikir langkah demi langkah.
 
-| **الطلب** | **الردّ** |
+| **Perintah** | **Respons** |
 | --- | --- |
-| ما هو الحد الرابع في المتسلسلة؟ | -135 |
+| Berapa suku ke-4 dalam deret tersebut? | -135 |
 
-الردّ الذي قدّمه النموذج غير صحيح. يمكنك تحسين ذلك من خلال الطلب من النموذج تحليل المشكلة قبل الإجابة عن الطلب.
+Respons dari model salah. Beberapa cara untuk meningkatkan kualitas respons adalah dengan meminta model mengurai masalah sebelum menjawab perintah.
 
-| **الطلب** | **الردّ** |
+| **Perintah** | **Respons** |
 | --- | --- |
-| عليك أولاً تحليل الصيغة في الصورة.  بعد ذلك، استنادًا إلى الصيغة، أجب عن السؤال "ما هو الحد الرابع في المتسلسلة؟". | *انقر لتوسيع النتيجة* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. استبدِل قيمة n بـ 4 في الصيغة:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. لا نعرف قيمة b(3)، لذا نعوّض عن n بالقيمة 3 في الصيغة:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. لا نعرف قيمة b(2)، لذا نعوّض عن n بالقيمة 2 في الصيغة:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. نعرف أنّ قيمة b(1) هي 15، لذا نعوّض بها في الصيغة:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. بعد أن عرفنا قيمة b(2)، نعوّض بها في صيغة b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. بعد أن عرفنا قيمة b(3)، نعوّض بها في صيغة b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   وبالتالي، يكون الحد الرابع في المتسلسلة هو -405. |
+| Parse formula dalam gambar terlebih dahulu.  Kemudian, berdasarkan rumus tersebut, jawab "apa suku ke-4 dalam deret tersebut?". | *Klik untuk meluaskan hasil* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Substitusikan n = 4 ke dalam rumus:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Kita tidak mengetahui nilai b(3), jadi substitusikan n = 3 ke dalam rumus:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Kita tidak mengetahui nilai b(2), jadi substitusikan n = 2 ke dalam rumus:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Kita tahu nilai b(1) adalah 15, jadi substitusikan ke dalam rumus:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Sekarang setelah kita mengetahui nilai b(2), substitusikan ke dalam rumus untuk b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Sekarang setelah kita mengetahui nilai b(3), substitusikan ke dalam rumus untuk b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Oleh karena itu, suku ke-4 dalam deret tersebut adalah -405. |
 
-ردّ النموذج هذا صحيح، ولكن لجعل الردّ أكثر سلاسة، يمكنك أن تطلب من النموذج التفكير خطوة بخطوة.
+Respons model ini benar - sekarang untuk membuat respons menjadi lebih efisien,
+Anda dapat meminta model untuk berpikir langkah demi langkah.
 
-| **طلب معدَّل** | **ردود محسّنة** |
+| **Perintah yang diperbarui** | **Respons yang lebih baik** |
 | --- | --- |
-| ما هو الحد الرابع في المتسلسلة؟ فكِّر خطوة بخطوة. | الحدّ الأول هو 15.  الحد الثاني هو b(1) \* (-3) = 15 \* (-3) = -45.  الحد الثالث هو b(2) \* (-3) = -45 \* (-3) = 135.  الحد الرابع هو b(3) \* (-3) = 135 \* (-3) = -405. |
+| Berapa suku ke-4 dalam deret tersebut? Berpikirlah secara berurutan. | Istilah pertama adalah 15.  Istilah kedua adalah b(1) \* (-3) = 15 \* (-3) = -45.  Suku ketiga adalah b(2) \* (-3) = -45 \* (-3) = 135.  Suku keempat adalah b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### تحديد تنسيق الناتج
+### Tentukan format output
 
-من المشاكل الشائعة الحاجة إلى أن تكون نتائج النموذج بتنسيق معيّن (مثل Markdown أو JSON أو HTML)، خاصةً إذا كانت نتائج النموذج بحاجة إلى أن يتم استيعابها من خلال مهمة لاحقة. يمكنك محاولة إنتاج مخرجات بهذا التنسيق
-من خلال توجيه النموذج للقيام بذلك ضمن الطلب. في ما يلي مثالان:
+Masalah umum adalah kebutuhan output model dalam format tertentu
+(misalnya, markdown, JSON, HTML), terutama jika output model perlu
+diproses oleh tugas downstream. Anda dapat mencoba menghasilkan output dalam format tersebut
+dengan menginstruksikan model untuk melakukannya dalam perintah. Berikut dua contohnya:
 
-| الطلب | ردّ النموذج |
+| Perintah | Respons model |
 | --- | --- |
-| تحليل الجدول في هذه الصورة إلى تنسيق Markdown | | الموضوع | الحالة | الوقت | تاريخ البدء | تاريخ الاستحقاق |  | ------- | ------ | ---- | ---------- | ------ |  | رياضيات | تم | 1.5 ساعة | 29/11/2023 | 1/12/2023 |  | الموقع الجغرافي | تمّت | 30 دقيقة | 2/12/2023 | 4/12/2023 |  | الفيزياء | قيد التقدم | ساعتان | 3/12/2023 | 5/12/2023 |  | علم الأحياء | لم تبدأ | 6 ساعات | 2/11/2016 | 6/12/2023 | |
+| Parse tabel dalam gambar ini ke dalam format markdown | | Subjek | Status | Waktu | Tanggal mulai | Jatuh tempo pada |  | ------- | ------ | ---- | ---------- | ------ |  | Matematika | Selesai | 1,5 jam | 29/11/2023 | 1/12/2023 |  | Geografi | Selesai | 30 menit | 2/12/2023 | 4/12/2023 |  | Fisika | Sedang berlangsung | 2 jam | 3/12/2023 | 5/12/2023 |  | Biologi | Belum dimulai | 6 jam | 2/11/2016 | 6/12/2023 | |
 
-| **الطلب** | **ردّ النموذج** |
+| **Perintah** | **Respons model** |
 | --- | --- |
-| قدِّم قائمة بجميع السمات التالية:  المكونات ونوع المطبخ وما إذا كان نباتيًا أم لا، بتنسيق JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| Berikan daftar semua atribut berikut:  bahan, jenis masakan, vegetarian atau tidak, dalam format JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### وضع صورتك أولاً في الطلبات التي تتضمّن صورة واحدة
+### Utamakan gambar Anda untuk perintah gambar tunggal
 
-مع أنّ Gemini يمكنه تفسير الصور والنصوص بأي ترتيب ضمن الطلب، قد يؤدي وضع صورة واحدة قبل الطلب النصي إلى الحصول على نتائج أفضل.
-في الأمثلة التالية، ستلاحظ أنّ الصورة تأتي أولاً قبل النص في كل طلب.
+Meskipun Gemini dapat menafsirkan gambar dan teks dalam urutan apa pun dalam perintah, menempatkan satu gambar sebelum perintah teks dapat memberikan hasil yang lebih baik.
+Dalam contoh berikut, Anda akan melihat gambar muncul terlebih dahulu sebelum teks di setiap perintah.
 
-### تحديد المشاكل في الطلب المتعدد الوسائط وحلّها
+### Memecahkan masalah prompt multimodal
 
-قد تحتاج إلى تحديد المشاكل في طلبك وحلّها إذا لم تحصل على ردّ مفيد. في ما يلي بعض الاستراتيجيات التي يمكنك تجربتها.
+Anda mungkin perlu memecahkan masalah perintah jika tidak mendapatkan respons yang
+bermanfaat. Berikut beberapa strategi yang dapat Anda coba.
 
-#### إذا كان النموذج لا يستخلص المعلومات من الجزء ذي الصلة في الصورة
+#### Jika model tidak mengambil informasi dari bagian gambar yang relevan
 
-للحصول على ردّ أكثر تحديدًا، يمكنك الإشارة إلى الجوانب التي تريد أن يستند إليها الطلب في استخلاص المعلومات لتضمينها في الردّ.
+Untuk mendapatkan respons yang lebih spesifik, Anda dapat menunjukkan aspek gambar yang ingin Anda gunakan sebagai sumber informasi untuk perintahnya.
 
-| الطلب | ردّ النموذج |
+| Perintah | Respons model |
 | --- | --- |
-| كم عدد الأيام التي ستكفي فيها هذه الحفاضات طفلاً؟ | ستكفي الحفاضات لمدة 198 يومًا قبل أن تنتهي. |
+| Berapa hari popok ini akan bertahan untuk bayi? | Popok akan bertahan selama 198 hari sebelum habis. |
 
-| **طلب معدَّل** | **ردود محسّنة** |
+| **Perintah yang diperbarui** | **Respons yang lebih baik** |
 | --- | --- |
-| كم من الوقت ستدوم هذه الحفاضات قبل أن تنتهي؟  استخدِم الوزن الموضّح على العبوة لتحديد عمر الطفل، واستخدِم إجمالي عدد الحفاضات في العبوة.  قسِّم العدد الإجمالي على عدد الحفاضات التي يستخدمها الطفل في اليوم الواحد. | تحتوي العلبة على 198 حفاضة. يذكر الصندوق أنّ الحفاضات مخصّصة لطفل يزن بين 10 و17 كلغ.  من المرجّح أنّ متوسط عمر الطفل في هذا النطاق من الوزن يتراوح بين سنة واحدة وسنتين.  يستخدم الطفل البالغ من العمر عامَين عادةً 6 حفاضات في اليوم، وبالتالي ستدوم الحفاضات حوالي 33 يومًا (198/6). |
+| Berapa lama popok ini akan bertahan sebelum habis?  Gunakan berat yang tertera di kotak untuk menentukan usia anak, dan gunakan jumlah total popok dalam kotak.  Bagilah total jumlah popok dengan jumlah popok yang digunakan anak per hari. | Kotak berisi 198 popok. Kotak tersebut menyatakan bahwa popok ditujukan untuk anak dengan berat 10-17 kg.  Rata-rata anak dalam rentang berat ini kemungkinan berusia antara 1 dan 2 tahun.  Anak berusia 2 tahun biasanya menggunakan 6 popok per hari, sehingga popok akan bertahan sekitar 33 hari (198/6). |
 
-#### إذا كانت مخرجات النموذج عامة جدًا وغير مخصّصة بشكل كافٍ للصورة المُدخَلة
+#### Jika output model terlalu umum dan tidak cukup disesuaikan dengan input gambar
 
-لمساعدة النموذج في تخصيص رده وفقًا للصور، جرِّب أن تطلب منه وصف الصور قبل تنفيذ مهمة الاستدلال.
+Untuk membantu model menyesuaikan responsnya dengan gambar, coba minta model untuk mendeskripsikan gambar sebelum melakukan tugas penalarannya.
 
-| الطلب | ردّ النموذج |
+| Perintah | Respons model |
 | --- | --- |
-| ما هو الشيء المشترك بين هذه الصور؟ | جميع الصور الأربع هي أمثلة على تصوير المناظر الطبيعية. |
+| Apa kesamaan antara gambar-gambar ini? | Keempat gambar tersebut adalah contoh fotografi lanskap. |
 
-| **طلب معدَّل** | **ردود محسّنة** |
+| **Perintah yang diperbarui** | **Respons yang lebih baik** |
 | --- | --- |
-| ابدأ بوصف محتوى كل صورة بالتفصيل. ما هو الشيء المشترك بين هذه الصور؟ | تعرض الصورة الأولى شخصًا يحزم حقيبة سفر. تعرض الصورة الثانية ممرًا فارغًا في مركز تسوّق. تعرض الصورة الثالثة لفة ورق حمام. تعرض الصورة الرابعة بحرًا مظلمًا وعاصفًا.  القاسم المشترك بين هذه الصور هو أنّها كلها أمثلة على المساحات الحدّية. المساحات الحدّية هي أماكن أو مواقف تقع بين مكانَين أو موقفَين آخرَين. وغالبًا ما تتميّز هذه الألعاب بإحساس بعدم اليقين أو الغموض.  تعرض الصورة الأولى الشخص في حالة تنقّل بين المنزل والسفر. تعرض الصورة الثانية الممر بين متجرَين. الصورة الثالثة هي لورق حمام، ما قد يشير إلى حمام. الحمّام هو مساحة انتقالية بين المساحات الخاصة والعامة. وهو مكان نجهّز فيه أنفسنا للدخول إلى العالم الخارجي أو مغادرته.  تعرض الصورة الرابعة البحر بين الهدوء والعاصفة.  يمكن أن تكون المساحات الحدّية مثيرة ومزعجة في الوقت نفسه. يمكن أن تكون مكانًا لبداية جديدة أو مكانًا للنهايات. يمكن أن تكون مكانًا للتفكير أو مكانًا للعمل. |
+| Pertama, jelaskan secara mendetail apa yang ada di setiap gambar. Apa kesamaan antara gambar-gambar ini? | Gambar pertama menunjukkan seseorang sedang mengemas koper. Gambar kedua menampilkan lorong kosong di pusat perbelanjaan. Gambar ketiga menampilkan gulungan tisu toilet. Gambar keempat menampilkan laut yang gelap dan berbadai.  Kesamaan antara gambar-gambar ini adalah bahwa semuanya merupakan contoh ruang liminal. Ruang liminal adalah tempat atau situasi yang berada di antara dua tempat atau situasi lainnya. Hal ini sering kali ditandai dengan rasa tidak pasti atau ambigu.  Gambar pertama menunjukkan orang yang berada di antara rumah dan sedang dalam perjalanan. Gambar kedua menunjukkan lorong di antara dua toko. Gambar ketiga adalah tisu toilet, yang dapat mewakili kamar mandi. Kamar mandi adalah ruang transisi antara ranah pribadi dan publik. Ini adalah tempat di mana kita mempersiapkan diri untuk masuk atau keluar dari dunia luar.  Gambar keempat menunjukkan laut di antara kondisi tenang dan badai.  Ruang liminal bisa terasa menarik dan mengganggu. Tempat tersebut bisa menjadi tempat awal yang baru atau tempat akhir. Tempat tersebut dapat menjadi tempat untuk merenung atau tempat untuk bertindak. |
 
-يمكنك أيضًا تجربة الطلب من النموذج بشكل صريح الإشارة إلى ما يظهر في الصورة.
+Anda juga dapat mencoba meminta model secara eksplisit untuk merujuk pada objek yang ada dalam gambar.
 
-| **طلب معدَّل** | **ردود محسّنة** |
+| **Perintah yang diperbarui** | **Respons yang lebih baik** |
 | --- | --- |
-| ما هو الشيء المشترك بين هذه الصور؟ يجب أن يشير ردّك إلى محتوى الصور. | جميع الصور مرتبطة بالسفر. تعرض الصورة الأولى شخصًا يحزم حقيبة، وتعرض الصورة الثانية ممرًا فارغًا في مركز تسوّق، وتعرض الصورة الثالثة رزمة من ورق المرحاض، وتعرض الصورة الرابعة بحرًا مظلمًا وعاصفًا.  جميع هذه الصور مرتبطة بالسفر لأنّها تتضمّن أشياء يحتاجها الأشخاص أو يستخدمونها عند السفر. تعرض الصورة الأولى شخصًا يحزم حقيبة سفر، وهو ما يفعله الأشخاص عندما يذهبون في رحلة. تعرض الصورة الثانية ممرًا فارغًا في مركز تسوّق، وهو مكان يرتاده الأشخاص غالبًا لشراء مستلزمات رحلاتهم. تعرض الصورة الثالثة حزمة من ورق المرحاض، وهو منتج يستخدمه الأشخاص غالبًا أثناء السفر. تعرض الصورة الرابعة بحرًا مظلمًا وعاصفًا، وهو مشهد يواجهه الناس غالبًا أثناء السفر. |
+| Apa kesamaan antara gambar-gambar ini? Rujuk isi gambar dalam respons Anda. | Semua gambar terkait dengan perjalanan. Gambar pertama menunjukkan seseorang sedang mengemas koper, gambar kedua menunjukkan lorong kosong di pusat perbelanjaan, gambar ketiga menunjukkan tumpukan tisu toilet, dan gambar keempat menunjukkan laut yang gelap dan badai.  Semua gambar ini terkait dengan perjalanan karena semuanya adalah hal-hal yang dibutuhkan atau digunakan orang saat bepergian. Gambar pertama menunjukkan seseorang sedang mengemas koper, yang merupakan sesuatu yang dilakukan orang saat mereka akan bepergian. Gambar kedua menampilkan lorong kosong di pusat perbelanjaan, yang merupakan tempat yang sering dikunjungi orang untuk membeli perlengkapan perjalanan mereka. Gambar ketiga menampilkan tumpukan tisu toilet, yang merupakan sesuatu yang sering digunakan orang saat bepergian. Gambar keempat menunjukkan laut yang gelap dan badai, yang sering dialami orang saat bepergian. |
 
-تنطبق النصائح نفسها على المحتوى الإبداعي الناتج من الصور. في المثال التالي الذي يتضمّن أرنبًا، يمكن أن يؤدي الطلب من النموذج بشكل صريح تضمين جوانب من الصورة إلى تحسين الناتج.
+Tips yang sama berlaku untuk output kreatif dari gambar. Dalam contoh berikut dengan
+kelinci, meminta model secara eksplisit untuk menyertakan aspek dari gambar dapat
+meningkatkan kualitas output.
 
-| الطلب | ردّ النموذج |
+| Perintah | Respons model |
 | --- | --- |
-| هل يمكنك كتابة قصيدة حول هذه الصورة؟ | أرنب صغير، ناعم وبني،  يقفز في الحقل، صعودًا وهبوطًا.  أذناك طويلتان وذيلك صغير،  أنت ألطف مخلوق على الإطلاق.  تأكل العشب الأخضر الحلو  وتقفز بعيدًا عندما تراني.  سأبقى صديقك دائمًا،  يا أرنبي الصغير، حتى النهاية. |
+| Dapatkah Anda menulis puisi tentang gambar ini untuk saya? | Kelinci kecil, begitu lembut dan cokelat,  Melompat di padang, naik dan turun.  Telingamu panjang, ekormu kecil,  Kamu adalah makhluk paling lucu di antara semuanya.  Kamu mengunyah rumput, begitu hijau dan manis,  Dan melompat pergi saat melihatku.  Namun, aku akan selalu menjadi temanmu,  Kelinci kecil, hingga akhir hayatku. |
 
-| **طلب معدَّل** | **ردود محسّنة** |
+| **Perintah yang diperbarui** | **Respons yang lebih baik** |
 | --- | --- |
-| هل يمكنك كتابة قصيدة وصفية مؤثرة حول هذه الصورة وتضمين الموقع الجغرافي فيها؟ | أرنب صغير على العشب الأخضر،  أذناه طويلتان وحادتان.  ماذا ترى هناك،  في الأفق، حيث تحدّق؟  هل هو الأزرق المحيطي،  يتلألأ في ضوء الشمس؟  أم الأمواج التي تتلاطم وتزمجر،  إيقاع تعشقه؟  أرنب صغير، أخبرني الحقيقة،  ما الذي يلفت انتباهك إلى هذا الحد؟  هل هو النسيم المالح،  أم صرخات النوارس التي تسعد؟  ربما بسبب اتساع كل شيء،  عالم كبير وصغير.  مكان يمكن للأحلام أن تتجوّل فيه،  ويمكن أن تُزرع فيه المغامرات.  أريد أن أعرف ما تحلم به،  يا أرنبًا صغيرًا، وأنت جالس على العشب، هادئًا وجميلًا.  هل تتوق إلى استكشاف الأعماق،  أم تفضّل البقاء على اليابسة حيث يمكنك القفز؟  مهما كان الأمر، أيها الأرنب الصغير،  حافظ على شرارة الفضول متوهجة.  ففي أحلامك وتطلّعاتك،  يختبئ عالم ينتظر أن تصنعه. |
+| Dapatkah Anda menulis puisi deskriptif dan dramatis tentang gambar ini dan menyertakan lokasinya? | Kelinci kecil di padang rumput hijau,  Telinganya panjang, sangat tajam.  Apa yang Anda lihat di sana,  Di kejauhan, tempat Anda menatap?  Apakah biru laut,  Berkilauan dalam warna matahari?  Atau ombak yang menghantam dan menderu,  Irama yang Anda sukai?  Kelinci kecil, katakan yang sebenarnya,  Apa yang menarik perhatianmu?  Apakah itu angin laut yang asin,  Atau teriakan burung camar yang menyenangkan?  Mungkin karena luasnya semua ini,  Dunia yang begitu besar dan kecil.  Tempat impian dapat menjelajah,  Dan petualangan dapat dimulai.  Kelinci kecil, aku ingin tahu apa yang kamu impikan,  Saat kamu duduk di atas rumput, begitu tenang.  Apakah Anda ingin menjelajahi kedalaman laut,  Atau tetap di darat, tempat Anda bisa melompat?  Apa pun itu, kelinci kecil,  Jaga agar percikan keajaiban itu tetap menyala terang.  Karena dalam impian dan aspirasi Anda,  Terletak dunia yang menunggu kreasi Anda. |
 
-#### تحديد الجزء الذي تعذّر تنفيذه من الطلب وحلّ المشكلة
+#### Memecahkan masalah bagian perintah yang gagal
 
-قد يصعب معرفة ما إذا كان الطلب قد فشل لأنّ النموذج
-لم **يفهم الصورة** في البداية، أو إذا فهم الصورة
-ولكنّه لم ينفّذ **خطوات الاستنتاج** الصحيحة بعد ذلك.
-للتفريق بين هذه الأسباب، اطلب من النموذج وصف محتوى الصورة.
+Mungkin sulit untuk mengetahui apakah perintah gagal karena model **tidak memahami gambar** sejak awal, atau jika model memahami gambar tetapi tidak melakukan **langkah-langkah penalaran** yang benar setelahnya.
+Untuk membedakan alasan tersebut, minta model mendeskripsikan isi gambar.
 
-في المثال التالي، إذا ردّ النموذج بوجبة خفيفة تبدو غير متوقعة عند تناولها مع الشاي (مثل الفشار)، يمكنك أولاً تحديد المشاكل لمعرفة ما إذا كان النموذج قد تعرّف بشكل صحيح على أنّ الصورة تحتوي على شاي.
+Dalam contoh berikut, jika model merespons dengan makanan ringan yang tampaknya mengejutkan
+jika dipadukan dengan teh (misalnya, popcorn), Anda dapat memecahkan masalah terlebih dahulu untuk menentukan
+apakah model mengenali dengan benar bahwa gambar tersebut berisi teh.
 
-| الطلب | طلب تحديد المشاكل وحلّها |
+| Perintah | Perintah untuk pemecahan masalah |
 | --- | --- |
-| ما هي الوجبة الخفيفة التي يمكنني إعدادها في دقيقة واحدة وتتناسب مع هذا؟ | صِف هذه الصورة. |
+| Apa camilan yang bisa saya buat dalam 1 menit yang cocok dengan ini? | Jelaskan apa yang ada dalam gambar ini. |
 
-هناك استراتيجية أخرى تتمثل في مطالبة النموذج بتوضيح أسباب استنتاجاته. يمكن أن يساعدك ذلك في
-تحديد الجزء الذي حدث فيه خطأ في الاستنتاج، إن وُجد.
+Strategi lainnya adalah meminta model untuk menjelaskan penalarannya. Hal ini dapat membantu Anda
+mempersempit bagian penalaran yang salah, jika ada.
 
-| الطلب | طلب تحديد المشاكل وحلّها |
+| Perintah | Perintah untuk pemecahan masalah |
 | --- | --- |
-| ما هي الوجبة الخفيفة التي يمكنني إعدادها في دقيقة واحدة وتتناسب مع هذا؟ | ما هي الوجبة الخفيفة التي يمكنني إعدادها في دقيقة واحدة وتتناسب مع هذا؟ يُرجى توضيح السبب. |
+| Apa camilan yang bisa saya buat dalam 1 menit yang cocok dengan ini? | Apa camilan yang bisa saya buat dalam 1 menit yang cocok dengan ini? Harap jelaskan alasannya. |
 
-## الخطوات التالية
+## Langkah berikutnya
 
-- يمكنك تجربة كتابة طلبات متعددة الوسائط باستخدام [Google AI
-  Studio](http://aistudio.google.com?hl=ar).
-- للحصول على معلومات حول استخدام Gemini Files API لتحميل ملفات الوسائط وتضمينها في طلباتك، راجِع أدلة [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=ar) و[الصوت](https://ai.google.dev/gemini-api/docs/audio?hl=ar) و[معالجة المستندات](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar).
-- للحصول على مزيد من الإرشادات حول تصميم الطلبات، مثل ضبط مَعلمات أخذ العيّنات، يمكنك الاطّلاع على صفحة [استراتيجيات الطلبات](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar).
+- Coba tulis perintah multimodal Anda sendiri menggunakan [Google AI Studio](http://aistudio.google.com?hl=id).
+- Untuk mengetahui informasi tentang cara menggunakan Gemini Files API untuk mengupload file media dan menyertakannya dalam perintah Anda, lihat panduan [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=id), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=id), dan [Pemrosesan dokumen](https://ai.google.dev/gemini-api/docs/document-processing?hl=id).
+- Untuk panduan selengkapnya tentang desain perintah, seperti menyesuaikan parameter pengambilan sampel, lihat halaman [Strategi perintah](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id).
 
-إرسال ملاحظات
+Kirim masukan
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-06-24 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-06-29 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Ada masukan untuk kami?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-29 UTC."],[],[]]

@@ -1,139 +1,141 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=it
-fetched_at: 2026-06-29T05:39:22.677592+00:00
-title: "Agent in AI Studio Playground \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=tr
+fetched_at: 2026-07-06T05:21:58.536965+00:00
+title: "AI Studio Playground'daki temsilciler \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Invia feedback
+Geri bildirim gönderin
 
-# Agent in AI Studio Playground
+# AI Studio Playground'daki temsilciler
 
-Google AI Studio Playground fornisce un'interfaccia visiva per creare prototipi e imparare a creare agenti gestiti senza dover creare e scrivere chiamate API.
+Google AI Studio Playground, API çağrıları oluşturup yazmak zorunda kalmadan yönetilen temsilcilerin nasıl oluşturulacağını öğrenmek ve prototip oluşturmak için görsel bir arayüz sağlar.
 
-Per iniziare, vai alla scheda **Playground** nel pannello di navigazione di Google AI Studio e attiva/disattiva l'opzione **Agenti**.
+Başlamak için Google AI Studio'nun gezinme panelinde **Playground** sekmesine gidin ve açma/kapatma düğmesini **Agents** olarak değiştirin.
 
-## Modelli predefiniti
+## Önceden oluşturulmuş şablonlar
 
-La scheda **Agenti** contiene una serie di modelli che preconfigurano l'agente Antigravity di base impostando le configurazioni di strumenti e ambiente. Tutti i modelli sono open source e pubblicati nel
-repository [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/). Esplorare questi modelli è un ottimo modo per imparare a creare e strutturare il tuo agente gestito.
+**Ajanlar** sekmesinde, araç ve ortam yapılandırmalarını ayarlayarak temel Antigravity Ajanı'nı önceden yapılandıran bir dizi şablon bulunur. Tüm şablonlar açık kaynaklıdır ve [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) deposunda yayınlanır. Bu şablonları inceleyerek kendi yönetilen aracınızı nasıl oluşturacağınızı ve yapılandıracağınızı öğrenebilirsiniz.
 
-Ad esempio, quando scegli il modello AI Radio, vengono abilitati tutti gli strumenti consentiti e viene collegato un file `AGENTS.md` specializzato e le competenze per la produzione di programmi radiofonici. Puoi visualizzare queste impostazioni nell'interfaccia utente di Playground nella sezione **Ambiente** facendo clic sul pulsante **Origini**.
+Örneğin, Yapay Zeka Radyosu şablonunu seçtiğinizde izin verilen tüm araçlar etkinleştirilir ve radyo programı üretimi için özel bir `AGENTS.md` dosyası ve becerileri bağlanır. Bu ayarları, **Kaynaklar** düğmesini tıklayarak Playground kullanıcı arayüzündeki **Ortam** bölümünde görüntüleyebilirsiniz.
 
-## Configurazione dello strumento
+## Araç yapılandırması
 
-Nelle impostazioni dell'agente in Playground, puoi attivare/disattivare l'accesso ai seguenti strumenti integrati:
+Playground'daki Agent ayarları bölümünde aşağıdaki yerleşik araçlara erişimi açıp kapatabilirsiniz:
 
-- **Ricerca Google**:accedi al web aperto per informazioni in tempo reale.
-- **Contesto URL**:recupera e analizza il contenuto testuale di URL di pagine web specifiche.
-- **Esecuzione del codice**:esegui comandi Bash e Python direttamente nell'ambiente sandbox isolato.
-- **Strumenti del file system**:leggi, scrivi, elenca ed elimina i file all'interno dell'area di lavoro.
+- **Google Arama:** Gerçek zamanlı bilgi temellendirmesi için açık web'e erişin.
+- **URL Bağlamı:** Belirli web sayfası URL'lerinin metin içeriğini getirip ayrıştırın.
+- **Kod Yürütme:** Bash ve Python komutlarını doğrudan izole edilmiş korumalı alan ortamında çalıştırın.
+- **Dosya Sistemi Araçları:** Çalışma alanındaki dosyaları okuma, yazma, listeleme ve silme.
 
-## Configurazione dell'ambiente
+## Ortam Yapılandırması
 
-Gli agenti gestiti vengono eseguiti in una sandbox Linux effimera e sicura (l'ambiente) che fornisce l'area di lavoro e gli strumenti necessari per il loro funzionamento. Per saperne di più, consulta la guida all'ambiente degli agenti gestiti [managed agent environment](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it).
+Yönetilen aracılar, güvenli ve kısa ömürlü bir Linux korumalı alanında (ortam) çalışır. Bu ortam, aracılara çalışmak için ihtiyaç duydukları çalışma alanını ve araçları sağlar. Daha fazla bilgi için [yönetilen aracı ortamı](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr) kılavuzuna bakın.
 
-### Controllo del comportamento dell'agente
+### Ajan davranışını kontrol etme
 
-Il comportamento, la personalità e le funzionalità dell'agente sono determinati principalmente dai file presenti nel suo ambiente. L'agente rileva e carica automaticamente le configurazioni da una cartella `.agents` speciale:
+Ajanın davranışı, karakteri ve yetenekleri büyük ölçüde ortamındaki dosyalar tarafından belirlenir. Aracı, yapılandırmaları özel bir `.agents` klasörden otomatik olarak algılayıp yükler:
 
-- **`AGENTS.md`**: precaricato nel contesto dell'agente per definire le istruzioni di sistema e la personalità.
-- **`SKILL.md`**: si trova nelle rispettive cartelle delle competenze (ad es. `.agents/skills/my-skill/SKILL.md`) per definire funzionalità e workflow specifici.
+- **`AGENTS.md`**: Sistem talimatlarını ve karakterini tanımlamak için aracının bağlamına önceden yüklenir.
+- **`SKILL.md`**: Belirli özellikleri ve iş akışlarını tanımlamak için ilgili beceri klasörlerinin (ör. `.agents/skills/my-skill/SKILL.md`) altında yer alır.
 
-### Provisioning dell'ambiente
+### Ortamın temel hazırlığını yapma
 
-Puoi configurare l'ambiente da utilizzare dall'agente montando i file nell'ambiente prima di avviare una sessione. Puoi creare un nuovo ambiente montando le origini o ripristinarne uno precedente:
+Bir oturum başlatmadan önce dosyaları ortama bağlayarak aracının kullanacağı ortamı yapılandırabilirsiniz. Kaynakları bağlayarak yeni bir ortam oluşturabilir veya önceki bir ortamı geri yükleyebilirsiniz:
 
-- **Per creare un nuovo ambiente**, fai clic su **Aggiungi origini** nel riquadro delle impostazioni dell'ambiente e scegli tra i seguenti tipi di origine:
+- **Yeni bir ortam oluşturmak için** Ortam ayarları panelinde **Kaynak ekle**'yi tıklayın ve aşağıdaki kaynak türlerinden birini seçin:
 
-| Tipo di origine | Descrizione | Percorso di montaggio |
+| Kaynak türü | Açıklama | Bağlantı yolu |
 | --- | --- | --- |
-| **File in linea** | Scrivi o incolla file di configurazione, set di dati simulati o script di utilità (fino a 100 KB) direttamente nell'interfaccia utente di Playground. | Percorso di destinazione definito dall'utente (ad es. `/workspace/scripts/parser.py`). |
-| **Google Cloud Storage** | Monta un bucket Cloud Storage pubblico o privato.  I bucket privati richiedono un token di supporto OAuth 2.0 standard. Per saperne di più, consulta [Origini private](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#private-sources). | Mappa un percorso del bucket GCS (ad es. `gs://your-bucket-name/data/`) a una directory dell'area di lavoro (ad es. `/workspace/data/`). |
-| **Repository GitHub** | Clona codebase pubblici o privati.  I repository privati richiedono l'autenticazione di base con il token di accesso personale (PAT) di GitHub. Per saperne di più, consulta [Origini private](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#private-sources). | Clonato direttamente in `/workspace/` (in genere in `/workspace/<repo-name>`). |
+| **Satır İçi Dosyalar** | Yapılandırma dosyalarını, sahte veri kümelerini veya yardımcı program komut dosyalarını (100 KB'a kadar) doğrudan Playground kullanıcı arayüzüne yazın ya da yapıştırın. | Kullanıcı tanımlı hedef yolu (ör. `/workspace/scripts/parser.py`). |
+| **Google Cloud Storage** | Herkese açık veya özel bir Cloud Storage paketi bağlayın.  Özel paketler için standart bir OAuth 2.0 Bearer jetonu gerekir. Daha fazla bilgi için [Özel kaynaklar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#private-sources) başlıklı makaleyi inceleyin. | Bir GCS paketi yolunu (ör. `gs://your-bucket-name/data/`) bir çalışma alanı diziniyle (ör. `/workspace/data/`) eşler. |
+| **GitHub depoları** | Herkese açık veya özel kod tabanlarını klonlayın.  Özel depolar için GitHub kişisel erişim jetonunuzla (PAT) temel kimlik doğrulama gerekir. Daha fazla bilgi için [Özel kaynaklar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#private-sources) başlıklı makaleyi inceleyin. | Doğrudan `/workspace/` içine kopyalanır (genellikle `/workspace/<repo-name>` saniyeden kısa sürer). |
 
-- **Per ripristinare un ambiente precedente**, puoi [riutilizzare un ID ambiente esistente](#reusing-an-existing-environment-id) per clonare e creare una copia esatta del suo stato.
+- **Önceki bir ortamı geri yüklemek için**, tam durumunu klonlamak ve çatallamak üzere [mevcut bir ortam kimliğini yeniden kullanabilirsiniz](#reusing-an-existing-environment-id).
 
-### Riutilizzo di un ID ambiente esistente
+### Mevcut bir ortam kimliğini yeniden kullanma
 
-Se hai già dedicato del tempo alla configurazione di un ambiente sandbox, non devi ricominciare da zero. Per utilizzare un ambiente esistente:
+Bir test ortamı oluşturmak için zaman harcadıysanız sıfırdan başlamanız gerekmez. Mevcut bir ortamı kullanmak için:
 
-1. Vai al riquadro Ambienti in AI Studio e imposta **Tipo** su **Esistente**.
-2. Inserisci l'**ID ambiente** (ad es. `env_abc123`)
+1. AI Studio'da Ortamlar paneline gidin ve **Tür**'ü **Mevcut** olarak değiştirin.
+2. **Ortam kimliğini** girin (ör.`env_abc123`).
 
-Per saperne di più, consulta [Configurare un ambiente](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#configure-an-environment). Puoi anche recuperare l'ID ambiente della sessione corrente dalla scheda Ambiente nell'interfaccia utente.
+Daha fazla bilgi için [Ortam yapılandırma](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#configure-an-environment) başlıklı makaleyi inceleyin. Ayrıca, mevcut oturumun ortam kimliğini kullanıcı arayüzündeki Ortam sekmesinden de alabilirsiniz.
 
-Una volta inviato il primo messaggio all'agente, la configurazione dell'ambiente diventa fissa per quella sessione. Non puoi montare nuove origini o modificare la lista consentita di rete mentre l'interazione è in esecuzione.
+Temsilciye ilk mesajınızı gönderdiğinizde ortam yapılandırması, söz konusu oturum için sabitlenir. Etkileşim etkin olarak çalışırken yeni kaynaklar bağlayamaz veya ağ izin verilenler listesini değiştiremezsiniz.
 
-## Scarica l'ambiente
+## Ortamı indirme
 
-Una volta creato un ambiente, puoi scaricare lo snapshot dell'ambiente in qualsiasi momento utilizzando il pulsante **Scarica** nelle impostazioni dell'ambiente di AI Studio Playground per recuperare i file dell'ambiente come file tar.
+Bir ortam oluşturulduktan sonra, ortam dosyalarını tarball olarak almak için AI Studio Playground'un Ortam ayarlarındaki **İndir** düğmesini kullanarak ortam anlık görüntüsünü istediğiniz zaman indirebilirsiniz.
 
-## Sicurezza e gestione dei costi
+## Güvenlik ve Maliyet Yönetimi
 
-### Gestione del consumo di token
+### Jeton tüketimini yönetme
 
-A differenza di una richiesta di chat standard che produce un singolo output, l'agente Antigravity esegue un workflow autonomo. Pianifica, esegue il codice, osserva i risultati e itera. Ciò significa che un singolo prompt può comportare un consumo illimitato di token.
+Tek bir çıktı üreten standart bir sohbet isteğinin aksine, Antigravity Agent bağımsız bir iş akışı yürütür. Planlama yapar, kodu çalıştırır, sonuçları gözlemler ve tekrarlar. Bu, tek bir istemin sınırsız jeton tüketimine yol açabileceği anlamına gelir.
 
-Per gestire i costi, **fornisci criteri di terminazione chiari nei prompt e limita le attività dell'agente**. Un buon esempio potrebbe essere un prompt come *Esamina la richiesta di pull e interrompi l'operazione dopo aver generato il riepilogo in Markdown.
-Non tentare di scrivere la correzione da solo*.
+Maliyetleri yönetmek için **istemlerinizde net sonlandırma ölçütleri sağlayın ve görevleri, aracı için dar bir kapsamda tutun**. İyi bir örnek olarak şu istem verilebilir:
+*Çekme isteğini incele ve Markdown özetini oluşturduktan sonra dur.
+Düzeltmeyi kendiniz yazmaya çalışmayın*.
 
-### Costi aggiuntivi
+**Durdur** düğmesini kullanarak aracı istediğiniz zaman durdurabilirsiniz.
 
-Per impostazione predefinita, tutti i modelli di agenti in Playground hanno accesso al servizio API Gemini e possono effettuare chiamate API dall'ambiente per soddisfare le richieste. Questi potrebbero comportare costi aggiuntivi che non verranno visualizzati nel consumo di token.
+### Ek Maliyetler
 
-Allo stesso modo, se aggiungi altri servizi esterni, l'agente potrebbe comportare costi aggiuntivi chiamando questi servizi per tuo conto.
+Varsayılan olarak, Playground'daki tüm aracı şablonları Gemini API hizmetine erişebilir ve istekleri karşılamak için ortamdan API çağrıları yapabilir. Bunlar, jeton tüketimine yansıtılmayacak ek maliyetlere neden olabilir.
 
-### Lista consentita di rete
+Benzer şekilde, başka harici hizmetler eklerseniz aracı, bu hizmetleri sizin adınıza çağırarak ek maliyetlere neden olabilir.
 
-Per impostazione predefinita, in AI Studio tutte le richieste di rete in uscita dall'ambiente sandbox dell'agente sono strettamente controllate e limitate per garantire la sicurezza. Per concedere all'agente la possibilità di raggiungere API esterne, servizi web o gestori di pacchetti, devi dichiararli esplicitamente:
+### Ağ izin verilenler listesi
 
-1. Vai al riquadro Ambienti in AI Studio.
-2. Seleziona il pulsante **Regole** accanto a **Rete**.
-3. Nel riquadro **Configurazione di rete**, fai clic su **Aggiungi alla lista consentita** e inserisci i dettagli pertinenti:
-   - **Limitazione del dominio**:solo i domini specifici o i pattern con caratteri jolly aggiunti all'elenco possono essere accessibili dalla macchina virtuale dell'agente. Ad esempio, puoi inserire domini esatti come `api.github.com` o pattern ampi come `*.googleapis.com`.
-   - **Aggiungi intestazione HTTP e inserimento di token**:utilizza l'opzione **Aggiungi intestazione HTTP** per inserire in modo sicuro le credenziali richieste (ad esempio un token API) per un dominio specifico. Queste credenziali vengono trasmesse in modo sicuro tramite un proxy di uscita e non vengono mai esposte direttamente come testo non elaborato all'interno della sandbox dell'agente.
+Varsayılan olarak, AI Studio'da aracınızın korumalı alan ortamından gelen tüm giden ağ istekleri, güvenliği sağlamak için sıkı bir şekilde kontrol edilir ve kısıtlanır. Aracınıza harici API'lere, web hizmetlerine veya paket yöneticilerine ulaşma izni vermek için bunları açıkça belirtmeniz gerekir:
 
-Presta sempre attenzione quando aggiungi domini alla lista consentita. Concedere all'agente l'accesso ai servizi autenticati significa che può agire per tuo conto, il che potrebbe comportare azioni indesiderate se non viene monitorato attentamente.
+1. AI Studio'da Ortamlar paneline gidin.
+2. **Ağ**'ın yanındaki **kurallar** düğmesini seçin.
+3. **Ağ yapılandırması** panelinde **İzin verilenler listesine ekle**'yi tıklayın ve ilgili ayrıntıları girin:
+   - **Alan adı kısıtlaması:** Yalnızca listeye eklenen belirli alan adlarına veya joker karakter kalıplarına aracının sanal makinesi tarafından erişilebilir. Örneğin, `api.github.com` gibi tam alan adları veya `*.googleapis.com` gibi geniş kalıplar girebilirsiniz.
+   - **HTTP Üstbilgisi ve Jeton Ekleme:** Belirli bir alan için gerekli kimlik bilgilerini (ör. API jetonu) güvenli bir şekilde eklemek üzere **HTTP üstbilgisi ekle** seçeneğini kullanın. Bu kimlik bilgileri, çıkış proxy'si üzerinden güvenli bir şekilde iletilir ve hiçbir zaman aracı özel korumalı alanında doğrudan ham metin olarak gösterilmez.
 
-### Best practice per le credenziali
+İzin verilenler listenize alan eklerken her zaman dikkatli olun. Aracıya kimliği doğrulanmış hizmetlere erişim izni vermek, aracının sizin adınıza hareket edebileceği anlamına gelir. Bu durum, dikkatli bir şekilde izlenmediği takdirde istenmeyen işlemlere yol açabilir.
 
-Se il tuo workflow richiede che l'agente si autentichi con servizi esterni, è tua responsabilità eseguire il provisioning e definire l'ambito di queste credenziali. Segui queste linee guida per ridurre i rischi:
+### Kimlik bilgileriyle ilgili en iyi uygulamalar
 
-- **Utilizza credenziali con privilegi minimi**:crea account di servizio o chiavi API con solo le autorizzazioni di cui ha bisogno l'agente. Evita di passare credenziali con accesso amministrativo o ampio.
-- **Preferisci i token di breve durata**:ove possibile, utilizza credenziali o token a tempo limitato che scadono anziché chiavi API di lunga durata.
-- **Supponi l'accesso completo**:l'agente può utilizzare qualsiasi credenziale a cui ha accesso per completare l'attività che gli hai assegnato. Fornisci solo le credenziali di cui sei disposto a concedere l'ambito di accesso completo.
-- **Ruota regolarmente le credenziali**:tratta le credenziali condivise con l'agente allo stesso modo di qualsiasi credenziale programmatica; ruotale a intervalli regolari.
+İş akışınızda aracının harici hizmetlerle kimliğini doğrulaması gerekiyorsa bu kimlik bilgilerini sağlama ve kapsamını belirleme sorumluluğu size aittir. Riski azaltmak için aşağıdaki yönergeleri uygulayın:
 
-### Connessione di strumenti e API esterni
+- **En az ayrıcalık ilkesine uygun kimlik bilgileri kullanın:** Yalnızca aracınızın ihtiyaç duyduğu izinlere sahip hizmet hesapları veya API anahtarları oluşturun. Geniş veya yönetici erişimi olan kimlik bilgilerini iletmekten kaçının.
+- **Kısa ömürlü jetonları tercih edin:** Mümkün olduğunda uzun ömürlü API anahtarları yerine, geçerlilik süresi sınırlı kimlik bilgileri veya süresi dolan jetonlar kullanın.
+- **Tam erişim varsay:** Ajan, kendisine verdiğiniz görevi tamamlamak için erişebildiği tüm kimlik bilgilerini kullanabilir. Yalnızca tam kapsamlı erişim izni vermeye hazır olduğunuz kimlik bilgilerini sağlayın.
+- **Kimlik bilgilerini düzenli olarak değiştirin:** Aracıyla paylaşılan kimlik bilgilerine, diğer tüm programatik kimlik bilgilerine davrandığınız gibi davranın ve bunları düzenli olarak değiştirin.
 
-Puoi connettere strumenti e API esterni (come i server Model Context Protocol / MCP) per estendere le funzionalità dell'agente. Quando lo fai:
+### Harici araçları ve API'leri bağlama
 
-- Collega solo gli strumenti provenienti da origini attendibili. Uno strumento dannoso o scritto male potrebbe esporre i dati o eseguire azioni indesiderate.
-- Configura gli strumenti con le autorizzazioni minime richieste per il tuo caso d'uso. Se uno strumento supporta la modalità di sola lettura, preferiscila a meno che le scritture non siano strettamente necessarie.
-- Prima di connettere uno strumento a un'origine dati di produzione, testalo con dati di esempio o sintetici per verificare che l'agente lo utilizzi come previsto.
+Ajanın özelliklerini genişletmek için harici araçları ve API'leri (ör. Model Context Protocol / MCP sunucuları) bağlayabilirsiniz. Bu işlemi yaparken:
 
-### Supervisione umana
+- Yalnızca güvendiğiniz kaynaklardan gelen araçları bağlayın. Kötü amaçlı veya kötü yazılmış bir araç, verileri açığa çıkarabilir ya da istenmeyen işlemler gerçekleştirebilir.
+- Araçları, kullanım alanınız için gereken minimum izinlerle yapılandırın. Bir araç salt okuma modunu destekliyorsa yazma işlemi kesinlikle gerekli olmadığı sürece bu modu tercih edin.
+- Bir aracı üretim veri kaynağına bağlamadan önce, aracının beklendiği gibi kullandığını doğrulamak için örnek veya sentetik verilerle test edin.
 
-Gli agenti possono ragionare, pianificare ed eseguire workflow in più passaggi con un elevato grado di autonomia. Sebbene questa funzionalità sia potente, è necessario applicare una supervisione adeguata, soprattutto per le attività che modificano i dati o interagiscono con sistemi esterni.
+### İnsan gözetimi
 
-Verifica sempre gli output critici, come il codice generato, le trasformazioni dei dati o le modifiche alla configurazione, prima di eseguirne il deployment.
+Ajanlar, çok adımlı iş akışlarını yüksek düzeyde bağımsızlıkla akıl yürüterek, planlayarak ve uygulayarak gerçekleştirebilir. Bu özellik güçlü olsa da özellikle verileri değiştiren veya harici sistemlerle etkileşimde bulunan görevler için uygun gözetim uygulamanız gerekir.
 
-Invia feedback
+Oluşturulan kod, veri dönüşümleri veya yapılandırma değişiklikleri gibi kritik çıkışları dağıtmadan önce her zaman doğrulayın.
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Geri bildirim gönderin
 
-Ultimo aggiornamento 2026-05-20 UTC.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Vuoi dirci altro?
+Son güncelleme tarihi: 2026-05-20 UTC.
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-20 UTC."],[],[]]
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-20 UTC."],[],[]]

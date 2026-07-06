@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=he
-fetched_at: 2026-06-29T05:34:48.979082+00:00
+fetched_at: 2026-07-06T05:15:09.544369+00:00
 title: "\u05d4\u05e8\u05e6\u05ea \u05e7\u05d5\u05d3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

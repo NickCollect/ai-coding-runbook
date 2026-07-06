@@ -1,36 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=ar
-fetched_at: 2026-06-29T05:36:15.022250+00:00
-title: "\u0627\u0633\u062a\u062f\u0639\u0627\u0621 \u0627\u0644\u062f\u0648\u0627\u0644\u0651 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-BR
+fetched_at: 2026-07-06T05:13:40.221488+00:00
+title: "Chamada de fun\u00e7\u00e3o com a API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-إرسال ملاحظات
+Envie comentários
 
-# استدعاء الدوالّ باستخدام Gemini API
+# Chamada de função com a API Gemini
 
-تتيح لك ميزة "استدعاء الدوال" ربط النماذج بالأدوات وواجهات برمجة التطبيقات الخارجية.
-وبدلاً من إنشاء ردود نصية، يحدّد النموذج الوقت المناسب لاستدعاء دوال معيّنة ويقدّم المَعلمات اللازمة لتنفيذ إجراءات في العالم الحقيقي.
-يتيح ذلك للنموذج أن يكون بمثابة جسر بين اللغة الطبيعية والإجراءات والبيانات في العالم الحقيقي. تتضمّن ميزة "استدعاء الدالة" 3 حالات استخدام أساسية:
+A chamada de função permite conectar modelos a ferramentas e APIs externas.
+Em vez de gerar respostas de texto, o modelo determina quando chamar funções específicas e fornece os parâmetros necessários para executar ações reais.
+Isso permite que o modelo atue como uma ponte entre a linguagem natural e as ações e dados reais. A chamada de função tem três casos de uso principais:
 
-- [**اتّخاذ إجراءات:**](#meeting) التفاعل مع الأنظمة الخارجية باستخدام واجهات برمجة التطبيقات، مثل تحديد المواعيد أو إنشاء الفواتير أو إرسال الرسائل الإلكترونية أو التحكّم في الأجهزة المنزلية الذكية
-- [**تعزيز المعرفة:**](#weather) الوصول إلى المعلومات من مصادر خارجية، مثل قواعد البيانات وواجهات برمجة التطبيقات وقواعد المعلومات
-- [**توسيع الإمكانات:**](#chart) يمكنك استخدام أدوات خارجية لإجراء العمليات الحسابية وتوسيع حدود النموذج، مثل استخدام آلة حاسبة أو إنشاء رسومات بيانية.
+- [**Realizar ações:**](#meeting) interaja com sistemas externos usando APIs, como
+  agendar compromissos, criar faturas, enviar e-mails ou controlar
+  dispositivos domésticos inteligentes.
+- [**\*\*Aumentar o conhecimento\*\*:**](#weather) acesse informações de fontes externas, como
+  bancos de dados, APIs e bases de conhecimento.
+- [**Ampliar os recursos:**](#chart) use ferramentas externas para realizar cálculos e
+  ampliar as limitações do modelo, como usar uma calculadora ou criar
+  gráficos.
 
-يمكنك الاطّلاع أدناه على أمثلة على حالات الاستخدام هذه:
+Confira exemplos desses casos de uso abaixo:
 
-### تحديد موعد اجتماع
+### Programar reunião
 
-يوضّح هذا المثال كيفية تحديد دالة تحدّد موعدًا لاجتماع مع المشارِكين في وقت معيّن، ما يسمح للنموذج بتحليل طلبات المستخدمين وعرض وسيطات منظَّمة لتنفيذ إجراءات في أنظمة خارجية.
+Este exemplo mostra como definir uma função que agenda uma reunião com participantes em um horário específico, permitindo que o modelo analise as solicitações do usuário e retorne argumentos estruturados para acionar ações em sistemas externos.
 
 ### Python
 
@@ -131,9 +136,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### الحصول على معلومات الطقس
+### Receber informações sobre o clima
 
-يوضّح هذا المثال كيفية تحديد دالة تسترد بيانات درجة الحرارة لموقع جغرافي، ما يتيح للنموذج استدعاء واجهات برمجة التطبيقات الخارجية للإجابة عن طلبات البحث التي تتطلّب معلومات خارجية أو في الوقت الفعلي.
+Este exemplo mostra como definir uma função que recupera dados de temperatura de um local, permitindo que o modelo chame APIs externas para responder a consultas que exigem informações externas ou em tempo real.
 
 ### Python
 
@@ -231,9 +236,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### إنشاء رسم بياني
+### Criar gráfico
 
-يوضّح هذا المثال كيفية تحديد دالة تنشئ رسمًا بيانيًا شريطيًا من بيانات منظَّمة، ما يوضّح كيف يمكن للنموذج استخدام أدوات خارجية لإجراء عمليات حسابية أو إنشاء أصول مرئية:
+Este exemplo mostra como definir uma função que gera um gráfico de barras com dados estruturados, demonstrando como o modelo pode usar ferramentas externas para realizar cálculos ou criar recursos visuais:
 
 ### Python
 
@@ -330,22 +335,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## طريقة عمل ميزة "استدعاء الدوال"
+## Como a chamada de funções funciona
 
-![نظرة عامة على ميزة &quot;استدعاء الدالة&quot;](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=ar)
+![Visão geral da chamada de função](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=pt-br)
 
-تتضمّن ميزة &quot;استدعاء الدوال&quot; تفاعلاً منظَّمًا بين تطبيقك والنموذج والدوال الخارجية، وذلك على النحو التالي:
+A chamada de função envolve uma interação estruturada entre o aplicativo, o modelo e as funções externas:
 
-1. **تحديد تعريف الدالة:** حدِّد اسم الدالة ومَعلماتها وغرضها للنموذج.
-2. **استدعاء النموذج اللغوي الكبير باستخدام تعريفات الدوال:** أرسِل طلب المستخدم مع تعريفات الدوال إلى النموذج.
-3. **تنفيذ رمز الدالة (مسؤوليتك):** *لا* ينفّذ النموذج الدالة بنفسه. استخرِج الاسم والمعلَمات ونفِّذها في تطبيقك.
-4. **إنشاء ردّ سهل الاستخدام:** إرسال النتيجة مرة أخرى إلى النموذج للحصول على ردّ نهائي سهل الاستخدام
+1. **Definir a declaração de função**:defina o nome, os parâmetros e a finalidade da função para o modelo.
+2. **Chamar o LLM com declarações de função**:envie o comando do usuário com as declarações de função para o modelo.
+3. **Executar o código da função (sua responsabilidade)**: o modelo *não*
+   executa a função em si. Extraia o nome e os argumentos e execute no aplicativo.
+4. **Criar uma resposta amigável ao usuário**:envie o resultado de volta ao modelo para uma resposta final e amigável ao usuário.
 
-يمكن تكرار هذه العملية على مدار عدة أدوار. يتيح النموذج استدعاء
-عدة دوال في دورة واحدة ([استدعاء الدوال المتوازي](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#parallel_function_calling)) وفي
-تسلسل ([استدعاء الدوال التركيبي](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#compositional_function_calling)).
+Esse processo pode ser repetido várias vezes. O modelo oferece suporte à chamada de
+várias funções em uma única vez ([chamada de função paralela](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#parallel_function_calling)) e em
+sequência ([chamada de função composicional](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#compositional_function_calling)).
 
-### الخطوة 1: تحديد تعريف دالة
+### Etapa 1: definir uma declaração de função
 
 ### Python
 
@@ -398,7 +404,7 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### الخطوة 2: استدعاء النموذج باستخدام تعريفات الدوال
+### Etapa 2: chamar o modelo com declarações de função
 
 ### Python
 
@@ -434,7 +440,7 @@ const fcStep = interaction.steps.find(s => s.type === 'function_call');
 console.log(fcStep);
 ```
 
-يعرض النموذج خطوة `function_call` تتضمّن `type` و`name` و`arguments`:
+O modelo retorna uma etapa `function_call` com `type`, `name` e `arguments`:
 
 ```
 type='function_call'
@@ -442,7 +448,7 @@ name='set_light_values'
 arguments={'color_temp': 'warm', 'brightness': 25}
 ```
 
-### الخطوة 3: تنفيذ الدالة
+### Etapa 3: executar a função
 
 ### Python
 
@@ -466,7 +472,7 @@ if (fcStep.name === 'set_light_values') {
 }
 ```
 
-### الخطوة 4: إرسال النتيجة إلى النموذج
+### Etapa 4: enviar o resultado de volta ao modelo
 
 ### Python
 
@@ -506,14 +512,13 @@ const finalInteraction = await client.interactions.create({
 console.log(finalInteraction.output_text);
 ```
 
-### استدعاء الدالة بدون حالة
+### Chamada de função sem estado
 
-يمكنك أيضًا استخدام ميزة "استدعاء الدوال" في الوضع غير الاحتفاظ بالحالة من خلال إدارة سجلّ المحادثات من جهة العميل وتعيين `store=false`.
+Você também pode usar a chamada de função no modo sem estado gerenciando o histórico de conversas no lado do cliente e definindo `store=false`.
 
-في الوضع غير المرتبط بحالة، يجب تمرير السجلّ الكامل للمحادثة في الحقل `input` لكل طلب لاحق. يجب أن يتضمّن هذا السجلّ ما يلي:
-1. الخطوة `user_input` الأولية
-2. جميع الخطوات التي تم إنشاؤها بواسطة النموذج والتي تم عرضها في الجولة الأولى (بما في ذلك الخطوتان `thought` و`function_call`) تمامًا كما تم تلقّيها
-3- الخطوة `function_result` التي تحتوي على ناتج الدالة التي تم تنفيذها
+No modo sem estado, é necessário transmitir o histórico completo da conversa no campo `input` de cada solicitação subsequente. Esse histórico precisa incluir: 1. A etapa `user_input` inicial.
+2. Todas as etapas geradas pelo modelo retornadas na vez 1 (incluindo as etapas `thought` e `function_call`) exatamente como recebidas.
+3. A etapa `function_result` que contém a saída da função executada.
 
 ### Python
 
@@ -685,26 +690,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## تعريفات الدوال
+## Declarações de função
 
-يتم تمرير تعريف الدالة كأداة ويتضمّن ما يلي:
+Uma declaração de função é transmitida como uma ferramenta e inclui:
 
-- ‫`type` (سلسلة): يجب أن تكون `"function"` للدوال المخصّصة.
-- ‫`name` (سلسلة): اسم دالة فريد (استخدِم شُرطًا سفلية أو camelCase).
-- ‫`description` (سلسلة): شرح واضح للغرض من الدالة.
-- `parameters` (كائن): مَعلمات الإدخال التي تتوقّعها الدالة.
-  - ‫`type` (سلسلة): نوع البيانات العام، مثل `object`.
-  - ‫`properties` (كائن): مَعلمات فردية تتضمّن النوع والوصف
-  - `required` (مصفوفة): أسماء المعلمات الإلزامية.
+- `type` (string): precisa ser `"function"` para funções personalizadas.
+- `name` (string): nome de função exclusivo (use sublinhados ou camelCase).
+- `description` (string): explicação clara da finalidade da função.
+- `parameters` (objeto): parâmetros de entrada esperados pela função.
+  - `type` (string): tipo de dados geral, como `object`.
+  - `properties` (objeto): parâmetros individuais com tipo e descrição.
+  - `required` (matriz): nomes de parâmetros obrigatórios.
 
-## استدعاء الدوال باستخدام نماذج التفكير
+## Chamada de função com modelos de pensamento
 
-تستخدم نماذج السلسلة Gemini 3 و2.5 عملية ["تفكير"](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) داخلية تعمل على تحسين استدعاء الدوال.
-تتولّى حِزم تطوير البرامج (SDK) تلقائيًا إدارة [توقيعات الأفكار](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ar) نيابةً عنك.
+Os modelos das séries Gemini 3 e 2.5 usam um processo de ["pensamento"](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br) interno que melhora a chamada de função.
+Os SDKs processam automaticamente as [assinaturas de pensamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pt-br).
 
-## استدعاء الدوال بشكل متوازٍ
+## Chamada de função paralela
 
-استدعاء عدة دوال في الوقت نفسه عندما تكون مستقلة:
+Chame várias funções de uma só vez quando elas forem independentes:
 
 ### Python
 
@@ -755,9 +760,9 @@ for (const step of interaction.steps) {
 }
 ```
 
-## استدعاء الدوال التركيبية
+## Chamada de função composicional
 
-يمكن ربط طلبات استدعاء دوال متعددة معًا لتنفيذ طلبات معقّدة (مثل الحصول على الموقع الجغرافي أولاً، ثم الحصول على حالة الطقس في هذا الموقع الجغرافي).
+Encadeie várias chamadas de função para solicitações complexas (por exemplo, primeiro receba o local e, em seguida, receba a previsão do tempo para esse local).
 
 ### Python
 
@@ -812,14 +817,14 @@ for step in interaction.steps:
                  print(part.text)
 ```
 
-## أوضاع استدعاء الدالة
+## Modos de chamada de função
 
-التحكّم في كيفية استخدام النموذج للأدوات باستخدام `tool_choice` في `generation_config`:
+Controle como o modelo usa ferramentas usando `tool_choice` em `generation_config`:
 
-- `auto` (الإعداد التلقائي): يقرّر النموذج ما إذا كان سيستدعي دالة أو سيردّ مباشرةً.
-- ‫`any`: يكون النموذج مقيّدًا بالتنبؤ دائمًا باستدعاء دالة.
-- ‫`none`: يُحظر على النموذج إجراء استدعاءات الدوال.
-- `validated` (معاينة): يضمن النموذج الالتزام بمخطط الدالة.
+- `auto` (padrão): o modelo decide se quer chamar uma função ou responder diretamente.
+- `any`: o modelo é restrito a sempre prever uma chamada de função.
+- `none`: o modelo está proibido de fazer chamadas de função.
+- `validated` (pré-lançamento): o modelo garante a conformidade do esquema de função.
 
 ### Python
 
@@ -879,10 +884,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## استخدام أدوات متعددة
+## Uso de várias ferramentas
 
-يمكنك تفعيل أدوات متعددة، والجمع بين الأدوات المضمّنة واستدعاء الدوال في الطلب نفسه. يمكن لنماذج Gemini 3 الجمع بين الأدوات المضمّنة وميزة "استدعاء الدوال" الجاهزة للاستخدام في "التفاعلات". يؤدي تمرير `previous_interaction_id`
-إلى تداول سياق الأداة المضمّنة تلقائيًا.
+É possível ativar várias ferramentas, combinando ferramentas integradas com a chamada de função na mesma solicitação. Os modelos do Gemini 3 podem combinar ferramentas integradas com a chamada de função pronta para uso nas interações. A transmissão de `previous_interaction_id` circula automaticamente o contexto da ferramenta integrada.
 
 ### Python
 
@@ -990,13 +994,13 @@ for (const step of interaction.steps) {
 }
 ```
 
-## استجابات الوظائف المتعددة الوسائط
+## Respostas de funções multimodais
 
-بالنسبة إلى نماذج سلسلة Gemini 3، يمكنك تضمين محتوى متعدد الوسائط في أجزاء استجابة الدالة التي ترسلها إلى النموذج. يمكن للنموذج معالجة هذا المحتوى المتعدد الوسائط في دوره التالي لتقديم ردّ أكثر دقة.
+Para modelos da série Gemini 3, é possível incluir conteúdo multimodal nas partes de resposta da função que você envia ao modelo. O modelo pode processar esse conteúdo multimodal na próxima vez para produzir uma resposta mais informada.
 
-لتضمين بيانات متعددة الوسائط في ردّ الدالة، أدرِجها ككتلة محتوى واحدة أو أكثر في الحقل `result` من الخطوة `function_result`. يجب أن يحدّد كل قسم من أقسام المحتوى `type` (مثل `"text"` أو `"image"`).
+Para incluir dados multimodais em uma resposta de função, inclua-os como um ou mais blocos de conteúdo no campo `result` da etapa `function_result`. Cada bloco de conteúdo precisa especificar o `type` (por exemplo, `"text"`, `"image"`).
 
-يوضّح المثال التالي كيفية إرسال استجابة دالة تحتوي على بيانات صور إلى النموذج في تفاعل:
+O exemplo a seguir mostra como enviar uma resposta de função que contém dados de imagem de volta ao modelo em uma interação:
 
 ### Python
 
@@ -1096,29 +1100,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## استدعاء الدالة مع الناتج المنظَّم
+## Chamada de função com saída estruturada
 
-بالنسبة إلى نماذج سلسلة Gemini 3، يمكنك الجمع بين ميزة استدعاء الدالة و[النتائج المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar) للحصول على ردود منسَّقة باستمرار.
+Para modelos da série Gemini 3, combine a chamada de função com
+[saída estruturada](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br) para
+respostas formatadas de forma consistente.
 
-## بروتوكول سياق النموذج (MCP) عن بُعد
+## MCP (Protocolo de Contexto de Modelo) remoto
 
-تتيح واجهة برمجة التطبيقات Interactions API الربط بخوادم MCP البعيدة لمنح النموذج إمكانية الوصول إلى الأدوات والخدمات الخارجية. عليك تقديم الخادم `name` و`url` في إعدادات الأدوات.
+A API Interactions oferece suporte à conexão com servidores MCP remotos para dar ao modelo acesso a ferramentas e serviços externos. Você fornece o `name` e o `url` do servidor na configuração das ferramentas.
 
-عند استخدام Remote MCP، يُرجى مراعاة القيود التالية:
+Ao usar o MCP remoto, esteja ciente das seguintes restrições:
 
-- **أنواع الخوادم**: لا يعمل خادم MCP البعيد إلا مع خوادم HTTP التي يمكن بثها. لا تتوافق هذه الميزة مع خوادم SSE (Server-Sent Events).
-- **التوافق مع النماذج**: لا تتوافق ميزة "بروتوكول سياق النموذج (MCP) عن بُعد" مع نماذج Gemini 3 في الوقت الحالي. سيتوفّر Gemini 3 قريبًا.
-- **التسمية**: يجب ألا تتضمّن أسماء خوادم MCP الحرف `-`. استخدِم أسماء خوادم `snake_case` بدلاً من ذلك.
+- **Tipos de servidor**: o MCP remoto só funciona com servidores HTTP transmissíveis. Os servidores SSE (Eventos enviados pelo servidor) não são aceitos.
+- **Suporte ao modelo**: o MCP remoto não funciona com modelos do Gemini 3 no momento. O suporte ao Gemini 3 será lançado em breve.
+- **Nomenclatura**: os nomes de servidores MCP não podem incluir o caractere `-`. Use nomes de servidores `snake_case`.
 
-| الحقل | النوع | مطلوب | الوصف |
+| Campo | Tipo | Obrigatório | Descrição |
 | --- | --- | --- | --- |
-| `type` | `string` | نعم | يجب أن تكون `"mcp_server"`. |
-| `name` | `string` | لا | اسم معروض لخادم MCP |
-| `url` | `string` | لا | عنوان URL الكامل لنقطة نهاية خادم MCP |
-| `headers` | `object` | لا | أزواج المفتاح والقيمة التي يتم إرسالها كعناوين HTTP مع كل طلب إلى الخادم (على سبيل المثال، رموز المصادقة المميزة). |
-| `allowed_tools` | `array` | لا | تقييد الأدوات التي يمكن للوكيل استدعاؤها من الخادم |
+| `type` | `string` | Sim | Precisa ser `"mcp_server"`. |
+| `name` | `string` | Não | Um nome de exibição para o servidor MCP. |
+| `url` | `string` | Não | O URL completo do endpoint do servidor MCP. |
+| `headers` | `object` | Não | Pares de chave-valor enviados como cabeçalhos HTTP com cada solicitação ao servidor (por exemplo, tokens de autenticação). |
+| `allowed_tools` | `array` | Não | Restrinja quais ferramentas do servidor o agente pode chamar. |
 
-### مثال
+### Exemplo
 
 ### Python
 
@@ -1182,9 +1188,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## بث طلبات استخدام الأدوات
+## Transmitir chamadas de ferramentas
 
-عند استخدام أدوات مع البث، ينشئ النموذج طلبات الدوال كسلسلة من أحداث `step.delta` في البث. يمكن بث وسيطات الأدوات كجزء من الوسيطات باستخدام `arguments`. يجب تجميع هذه الفروق لإعادة إنشاء عمليات استدعاء الأدوات الكاملة قبل تنفيذها.
+Ao usar ferramentas com streaming, o modelo gera chamadas de função como uma sequência de eventos `step.delta` no stream. Os argumentos da ferramenta podem ser transmitidos como argumentos parciais usando `arguments`. É necessário agregar esses deltas para reconstruir as chamadas de ferramentas completas antes de executá-las.
 
 ### Python
 
@@ -1349,29 +1355,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## أفضل الممارسات
+## Práticas recomendadas
 
-- **أوصاف الدوال والمَعلمات:** يجب أن تكون واضحة ومحدّدة.
-- **التسمية:** استخدِم أسماء وصفية بدون مسافات أو رموز خاصة.
-- **الكتابة القوية:** استخدِم أنواعًا محدّدة (عدد صحيح، سلسلة، تعداد).
-- **اختيار الأدوات:** يجب أن يقتصر عدد الأدوات النشطة على 10 إلى 20 أداة كحدّ أقصى.
-- **هندسة الطلبات:** قدِّم السياق والتعليمات.
-- **التحقّق من الصحة:** تحقَّق من صحة استدعاءات الدوال قبل تنفيذها.
-- **معالجة الأخطاء:** اتَّخِذ إجراءات فعالة لمعالجة الأخطاء.
-- **الأمان:** استخدِم المصادقة المناسبة لواجهات برمجة التطبيقات الخارجية.
+- **Descrições de funções e parâmetros**:sejam claras e específicas.
+- **Nomenclatura**:use nomes descritivos sem espaços ou caracteres especiais.
+- **Tipagem forte**:use tipos específicos (inteiro, string, enumeração).
+- **Seleção de ferramentas**:mantenha o conjunto ativo em no máximo 10 a 20 ferramentas.
+- **Engenharia de comandos**:forneça contexto e instruções.
+- **Validação**:valide as chamadas de função antes de executar.
+- **Tratamento de erros**:implemente um tratamento de erros robusto.
+- **Segurança**:use a autenticação adequada para APIs externas.
 
-## الملاحظات والقيود
+## Observações e limitações:
 
-- لا يتوافق هذا الملف إلا مع [مجموعة فرعية من مخطط OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=ar#FunctionDeclaration).
-- بالنسبة إلى الوضع `any`، قد ترفض واجهة برمجة التطبيقات المخططات الكبيرة جدًا أو المتداخلة بشكل كبير.
-- أنواع المَعلمات المتوافقة في Python محدودة.
+- Há suporte apenas para um [subconjunto do esquema OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=pt-br#FunctionDeclaration).
+- Para o modo `any`, a API pode rejeitar esquemas muito grandes ou profundamente aninhados.
+- Os tipos de parâmetros aceitos em Python são limitados.
 
-إرسال ملاحظات
+Envie comentários
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)
+Última atualização 2026-06-22 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Quer enviar seu feedback?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-22 UTC."],[],[]]

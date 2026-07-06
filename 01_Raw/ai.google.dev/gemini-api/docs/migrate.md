@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=pl
-fetched_at: 2026-06-29T05:31:57.983315+00:00
-title: "Migracja do pakietu Google GenAI SDK \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate?hl=ja
+fetched_at: 2026-07-06T05:08:08.020923+00:00
+title: "Google GenAI SDK \u306b\u79fb\u884c\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Migracja do pakietu Google GenAI SDK
+# Google GenAI SDK に移行する
 
-Pod koniec 2024 r. wraz z wydaniem Gemini 2.0 wprowadziliśmy nowy zestaw
-bibliotek o nazwie [Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=pl). Dzięki [zaktualizowanej architekturze klienta](https://ai.google.dev/gemini-api/docs/migrate?hl=pl#client) zapewnia on lepsze wrażenia deweloperom i [upraszcza przejście](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=pl) między przepływami pracy deweloperów a przepływami pracy w przedsiębiorstwie.
+[2024 年後半の Gemini 2.0 リリースから、
+Google GenAI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ja) という新しいライブラリ セットが導入されました。[[更新されたクライアント アーキテクチャによりデベロッパー エクスペリエンスが向上し、デベロッパー ワークフローとエンタープライズ ワークフロー間の移行が簡素化されます。](https://ai.google.dev/gemini-api/docs/migrate?hl=ja#client)](https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=ja)
 
-Google GenAI SDK jest teraz w [ogólnej dostępności (GA)](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#new-libraries) na wszystkich obsługiwanych
-platformach. Jeśli używasz jednej z naszych [starszych bibliotek](https://ai.google.dev/gemini-api/docs/libraries?hl=pl#previous-sdks), zdecydowanie zalecamy
-migrację.
+Google GenAI SDK は、サポートされているすべての
+プラットフォームで[一般提供（GA）](https://ai.google.dev/gemini-api/docs/libraries?hl=ja#new-libraries)されています。以前の[ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja#previous-sdks)のいずれかを使用している場合は、
+移行することを強くおすすめします。
 
-W tym przewodniku znajdziesz przykłady kodu przed i po migracji, które pomogą Ci zacząć.
+このガイドでは、移行されたコードの移行前後の例を示して、移行を始められるようにします。
 
-## Instalacja
+## インストール
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -49,7 +49,7 @@ npm install @google/generative-ai
 go get github.com/google/generative-ai-go
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -69,16 +69,16 @@ npm install @google/genai
 go get google.golang.org/genai
 ```
 
-## Dostęp API
+## API アクセス
 
-Stary pakiet SDK niejawnie obsługiwał klienta API w tle za pomocą różnych metod ad hoc. Utrudniało to zarządzanie klientem i danymi logowania.
-Teraz możesz wchodzić w interakcje za pomocą centralnego obiektu `Client`. Ten obiekt `Client` działa jako pojedynczy punkt wejścia dla różnych usług API (np. `models`, `chats`, `files`, `tunings`), co zwiększa spójność i upraszcza zarządzanie danymi logowania i konfiguracją w różnych wywołaniach API.
+以前の SDK では、さまざまなアドホック メソッドを使用して、API クライアントが暗黙的に処理されていました。そのため、クライアントと認証情報の管理が困難でした。
+現在は、中央の `Client` オブジェクトを介して操作します。この `Client` オブジェクトは、さまざまな API サービス（`models`、`chats`、`files`、`tunings` など）の単一のエントリ ポイントとして機能し、一貫性を高め、さまざまな API 呼び出しでの認証情報と構成の管理を簡素化します。
 
-**Przed (mniej scentralizowany dostęp do interfejsu API)**
+**変更前（API アクセスの一元化が不十分）**
 
 ### Python
 
-Stary pakiet SDK nie używał jawnie obiektu klienta najwyższego poziomu w przypadku większości wywołań API. Bezpośrednio tworzyłeś instancje obiektów `GenerativeModel` i wchodziłeś z nimi w interakcje.
+以前の SDK では、ほとんどの API 呼び出しでトップレベルのクライアント オブジェクトが明示的に使用されていませんでした。`GenerativeModel` オブジェクトを直接インスタンス化して操作していました。
 
 ```
 import google.generativeai as genai
@@ -91,7 +91,7 @@ chat = model.start_chat(...)
 
 ### JavaScript
 
-Chociaż `GoogleGenerativeAI` był centralnym punktem dla modeli i czatu, inne funkcje, takie jak zarządzanie plikami i pamięcią podręczną, często wymagały importowania i tworzenia instancji całkowicie oddzielnych klas klientów.
+`GoogleGenerativeAI` はモデルとチャットの中央ポイントでしたが、ファイルやキャッシュの管理などの他の機能では、完全に別のクライアント クラスをインポートしてインスタンス化する必要がありました。
 
 ```
 import { GoogleGenerativeAI } from "@google/generative-ai";
@@ -113,7 +113,7 @@ const cache = await cacheManager.create(...);
 
 ### Go
 
-Funkcja `genai.NewClient` tworzyła klienta, ale operacje na modelu generatywnym były zwykle wywoływane w oddzielnej instancji `GenerativeModel` uzyskanej od tego klienta. Dostęp do innych usług mógł być uzyskiwany za pomocą odrębnych pakietów lub wzorców.
+`genai.NewClient` 関数はクライアントを作成しましたが、生成モデルのオペレーションは通常、このクライアントから取得した別の `GenerativeModel` インスタンスで呼び出されました。他のサービスには、個別のパッケージまたはパターンを介してアクセスしていた可能性があります。
 
 ```
 import (
@@ -134,7 +134,7 @@ cs := model.StartChat()
 uploadedFile, err := fileClient.UploadFile(...)
 ```
 
-**Po (scentralizowany obiekt klienta)**
+**変更後（クライアント オブジェクトの一元化）**
 
 ### Python
 
@@ -181,17 +181,17 @@ uploadedFile, err := client.Files.Upload(...)
 tuningJob, err := client.Tunings.Tune(...)
 ```
 
-## Uwierzytelnianie
+## 認証
 
-Zarówno starsze, jak i nowe biblioteki uwierzytelniają się za pomocą kluczy API. Klucz API możesz
-[utworzyć](https://aistudio.google.com/apikey?hl=pl) w Google AI
-Studio.
+以前のライブラリと新しいライブラリの両方で、API キーを使用して認証します。API キーは Google AI
+Studio で
+[作成](https://aistudio.google.com/apikey?hl=ja)できます。
 
-**Przed**
+**変更前**
 
 ### Python
 
-Stary pakiet SDK niejawnie obsługiwał obiekt klienta API.
+以前の SDK では、API クライアント オブジェクトが暗黙的に処理されていました。
 
 ```
 import google.generativeai as genai
@@ -209,7 +209,7 @@ const genAI = new GoogleGenerativeAI("GEMINI_API_KEY");
 
 ### Go
 
-Zaimportuj biblioteki Google:
+Google ライブラリをインポートします。
 
 ```
 import (
@@ -218,18 +218,18 @@ import (
 )
 ```
 
-Utwórz klienta:
+クライアントを作成します。
 
 ```
 client, err := genai.NewClient(ctx, option.WithAPIKey("GEMINI_API_KEY"))
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
-W Google GenAI SDK najpierw tworzysz klienta API, który jest używany do wywoływania interfejsu API.
-Jeśli nie przekażesz klucza API do klienta, nowy pakiet SDK pobierze go ze zmiennych środowiskowych `GEMINI_API_KEY`.
+Google GenAI SDK では、最初に API クライアントを作成し、そのクライアントを使用して API を呼び出します。
+クライアントに API キーを渡さない場合、新しい SDK は `GEMINI_API_KEY` 環境変数から API キーを取得します。
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
@@ -253,13 +253,13 @@ const ai = new GoogleGenAI({apiKey: "GEMINI_API_KEY"});
 
 ### Go
 
-Zaimportuj bibliotekę GenAI:
+GenAI ライブラリをインポートします。
 
 ```
 import "google.golang.org/genai"
 ```
 
-Utwórz klienta:
+クライアントを作成します。
 
 ```
 client, err := genai.NewClient(ctx, &genai.ClientConfig{
@@ -267,15 +267,15 @@ client, err := genai.NewClient(ctx, &genai.ClientConfig{
 })
 ```
 
-## Generuj treści
+## コンテンツの生成
 
-### Tekst
+### テキスト
 
-**Przed**
+**変更前**
 
 ### Python
 
-Wcześniej nie było obiektów klienta. Dostęp do interfejsów API uzyskiwano bezpośrednio za pomocą obiektów `GenerativeModel`.
+以前はクライアント オブジェクトがなく、`GenerativeModel` オブジェクトを介して API に直接アクセスしていました。
 
 ```
 import google.generativeai as genai
@@ -319,12 +319,11 @@ if err != nil {
 printResponse(resp) // utility for printing response parts
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
-Nowy Google GenAI SDK zapewnia dostęp do wszystkich metod API za pomocą obiektu `Client`. Z wyjątkiem kilku przypadków specjalnych ze stanem (`chat` i
-sesje live-api `session`s) są to funkcje bezstanowe. Dla wygody i spójności zwracane obiekty są klasami `pydantic`.
+新しい Google GenAI SDK では、`Client` オブジェクトを介してすべての API メソッドにアクセスできます。ステートフルな特殊なケース（`chat` とライブ API `session`）を除き、これらはすべてステートレス関数です。ユーティリティと均一性のために、返されるオブジェクトは `pydantic` クラスです。
 
 ```
 from google import genai
@@ -370,9 +369,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### Obraz
+### 画像
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -442,11 +441,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
-W nowym pakiecie SDK dostępnych jest wiele tych samych funkcji ułatwiających pracę. Na przykład obiekty `PIL.Image` są automatycznie konwertowane.
+新しい SDK には、同じ便利な機能が多数用意されています。たとえば、`PIL.Image` オブジェクトは自動的に変換されます。
 
 ```
 from google import genai
@@ -516,9 +515,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-### Streaming
+### ストリーミング
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -575,7 +574,7 @@ for {
 }
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -631,9 +630,9 @@ for result, err := range client.Models.GenerateContentStream(
 }
 ```
 
-## Konfiguracja
+## 構成
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -700,11 +699,11 @@ if err != nil {
 printResponse(resp) // utility for printing response
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
-W przypadku wszystkich metod w nowym pakiecie SDK wymagane argumenty są podawane jako argumenty słów kluczowych. Wszystkie opcjonalne dane wejściowe są podawane w argumencie `config`. Argumenty konfiguracji można określić jako słowniki Pythona lub klasy `Config` w przestrzeni nazw `google.genai.types`. Dla wygody i spójności wszystkie definicje w module `types` są klasami `pydantic`.
+新しい SDK のすべてのメソッドで、必要な引数はキーワード引数として指定されます。省略可能な入力はすべて `config` 引数で指定します。構成引数は、Python ディクショナリまたは `google.genai.types` Namespace の `Config` クラスとして指定できます。ユーティリティと均一性のために、`types` モジュール内のすべての定義は `pydantic` クラスです。
 
 ```
 from google import genai
@@ -780,11 +779,11 @@ if err != nil {
 debugPrint(result) // utility for printing response
 ```
 
-## Ustawienia bezpieczeństwa
+## 安全性設定
 
-Wygeneruj odpowiedź z ustawieniami bezpieczeństwa:
+安全性設定を使用してレスポンスを生成します。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -832,7 +831,7 @@ try {
 }
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -884,9 +883,9 @@ console.log("Finish reason:", response.candidates[0].finishReason);
 console.log("Safety ratings:", response.candidates[0].safetyRatings);
 ```
 
-## Dane asynchroniczne
+## 非同期
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -899,12 +898,12 @@ response = model.generate_content_async(
 )
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
-Aby używać nowego pakietu SDK z `asyncio`, dostępna jest oddzielna `async`
-implementacja każdej metody w `client.aio`.
+新しい SDK を `asyncio` で使用するには、`async`
+実装が `client.aio` の下に各メソッドに個別にあります。
 
 ```
 from google import genai
@@ -917,11 +916,11 @@ response = await client.aio.models.generate_content(
 )
 ```
 
-## Czat
+## チャット
 
-Rozpocznij czat i wyślij wiadomość do modelu:
+チャットを開始して、モデルにメッセージを送信します。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -997,7 +996,7 @@ if err != nil {
 printResponse(res) // utility for printing the response
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1072,9 +1071,9 @@ if err != nil {
 debugPrint(result) // utility for printing result
 ```
 
-## Wywoływanie funkcji
+## 関数呼び出し
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1101,11 +1100,11 @@ response = model.generate_content("What is the weather in San Francisco?")
 function_call = response.candidates[0].parts[0].function_call
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
-W nowym pakiecie SDK domyślnie włączone jest automatyczne wywoływanie funkcji. Tutaj je wyłączasz.
+新しい SDK では、自動関数呼び出しがデフォルトです。ここでは、無効にします。
 
 ```
 from google import genai
@@ -1135,13 +1134,13 @@ response = client.models.generate_content(
 function_call = response.candidates[0].content.parts[0].function_call
 ```
 
-### Automatyczne wywoływanie funkcji
+### 自動関数呼び出し
 
-**Przed**
+**変更前**
 
 ### Python
 
-Stary pakiet SDK obsługuje automatyczne wywoływanie funkcji tylko na czacie. W nowym pakiecie SDK jest to domyślne działanie w `generate_content`.
+以前の SDK では、チャットでの自動関数呼び出しのみがサポートされていました。新しい SDK では、`generate_content` でこれがデフォルトの動作です。
 
 ```
 import google.generativeai as genai
@@ -1159,7 +1158,7 @@ chat = model.start_chat(
 result = chat.send_message("What is the weather in San Francisco?")
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1180,11 +1179,11 @@ response = client.models.generate_content(
 )
 ```
 
-## Wykonanie kodu
+## コードの実行
 
-Wykonanie kodu to narzędzie, które umożliwia modelowi generowanie kodu Pythona, uruchamianie go i zwracanie wyniku.
+コード実行は、モデルが Python コードを生成して実行し、結果を返すことができるツールです。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1221,7 +1220,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1265,13 +1264,13 @@ console.log("-".repeat(80));
 console.log("\n", response.text);
 ```
 
-## Szukaj groundingu
+## 検索によるグラウンディング
 
-`GoogleSearch` (Gemini>=2.0) i `GoogleSearchRetrieval` (Gemini < 2.0) to
-narzędzia, które umożliwiają modelowi pobieranie publicznych danych internetowych na potrzeby groundingu, obsługiwane przez
-Google.
+`GoogleSearch`（Gemini>=2.0）と `GoogleSearchRetrieval`（Gemini < 2.0）は
+Google を利用して、モデルがグラウンディング用の一般公開ウェブデータを取得できるようにする
+ツールです。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1285,7 +1284,7 @@ response = model.generate_content(
 )
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1308,17 +1307,17 @@ response = client.models.generate_content(
 )
 ```
 
-## Odpowiedź JSON
+## JSON レスポンス
 
-Generuj odpowiedzi w formacie JSON.
+JSON 形式で回答を生成します。
 
-**Przed**
+**変更前**
 
 ### Python
 
-Określając `response_schema` i ustawiając
-`response_mime_type="application/json"`, użytkownicy mogą ograniczyć model do
-generowania odpowiedzi `JSON` zgodnie z daną strukturą.
+`response_schema` を指定して
+`response_mime_type="application/json"` を設定することで、ユーザーはモデルが
+`JSON` レスポンスを生成するように制約できます。
 
 ```
 import google.generativeai as genai
@@ -1381,11 +1380,11 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
-Nowy pakiet SDK używa klas `pydantic` do udostępniania schematu (możesz jednak przekazać `genai.types.Schema` lub równoważny `dict`). Jeśli to możliwe, pakiet SDK przeanalizuje zwrócony kod JSON i zwróci wynik w `response.parsed`. Jeśli jako schemat podasz klasę `pydantic`, pakiet SDK przekonwertuje ten kod `JSON` na instancję klasy.
+新しい SDK では、`pydantic` クラスを使用してスキーマを提供します（`genai.types.Schema` または同等の `dict` を渡すこともできます）。可能であれば、SDK は返された JSON を解析し、結果を `response.parsed` で返します。スキーマとして `pydantic` クラスを指定した場合、SDK はその `JSON` をクラスのインスタンスに変換します。
 
 ```
 from google import genai
@@ -1442,13 +1441,13 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## Pliki
+## ファイル
 
-### Prześlij
+### アップロード
 
-Prześlij plik:
+ファイルをアップロードします。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1472,7 +1471,7 @@ response = model.generate_content([
 print(response.text)
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1500,11 +1499,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### Wyświetl listę i pobierz
+### 一覧表示と取得
 
-Wyświetl listę przesłanych plików i pobierz przesłany plik o danej nazwie:
+アップロードしたファイルの一覧を表示し、ファイル名でアップロードしたファイルを取得します。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1517,7 +1516,7 @@ for file in genai.list_files():
 file = genai.get_file(name=file.name)
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1531,11 +1530,11 @@ for file in client.files.list():
 file = client.files.get(name=file.name)
 ```
 
-### Usuń
+### 削除
 
-Usuń plik:
+ファイルを削除します。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1549,7 +1548,7 @@ dummy_file = genai.upload_file(path='dummy.txt')
 file = genai.delete_file(name=dummy_file.name)
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1565,11 +1564,11 @@ dummy_file = client.files.upload(file='dummy.txt')
 response = client.files.delete(name=dummy_file.name)
 ```
 
-## Buforowanie kontekstu
+## コンテキストのキャッシュ保存
 
-Buforowanie kontekstu umożliwia użytkownikowi jednorazowe przekazanie treści do modelu, zapisanie tokenów wejściowych w pamięci podręcznej, a następnie odwoływanie się do tokenów w pamięci podręcznej w kolejnych wywołaniach, aby obniżyć koszty.
+コンテキストのキャッシュ保存を使用すると、コンテンツをモデルに 1 回渡して入力トークンをキャッシュに保存し、後続の呼び出しでキャッシュに保存されたトークンを参照してコストを削減できます。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1641,7 +1640,7 @@ const result = await model.generateContent(
 console.log(result.response.text());
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1723,11 +1722,11 @@ const response = await ai.models.generateContent({
 console.log("Response text:", response.text);
 ```
 
-## Zliczaj tokeny
+## トークンのカウント
 
-Zlicz liczbę tokenów w żądaniu.
+リクエスト内のトークン数をカウントします。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1769,7 +1768,7 @@ response = model.count_tokens(
  // { promptTokenCount: 11, candidatesTokenCount: 124, totalTokenCount: 135 }
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1804,11 +1803,11 @@ const generateResponse = await ai.models.generateContent({
 console.log(generateResponse.usageMetadata);
 ```
 
-## Generuj obrazy
+## 画像を生成
 
-Generuj obrazy:
+画像を生成します。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1827,7 +1826,7 @@ gen_images = imagen.generate_images(
 )
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1852,11 +1851,11 @@ for n, image in enumerate(gen_images.generated_images):
         image.image.image_bytes)
 ```
 
-## Osadzaj treści
+## コンテンツの埋め込み
 
-Generuj osadzenia treści.
+コンテンツ エンベディングを生成します。
 
-**Przed**
+**変更前**
 
 ### Python
 
@@ -1884,7 +1883,7 @@ const result = await model.embedContent("Hello world!");
 console.log(result.embedding);
 ```
 
-**Po**
+**変更後**
 
 ### Python
 
@@ -1914,12 +1913,12 @@ const result = await ai.models.embedContent({
 console.log(result.embeddings);
 ```
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-06-22 UTC.
+最終更新日 2026-06-22 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-22 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-22 UTC。"],[],[]]

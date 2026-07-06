@@ -1,30 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=th
-fetched_at: 2026-06-29T05:38:11.191379+00:00
-title: "\u0e04\u0e39\u0e48\u0e21\u0e37\u0e2d\u0e2a\u0e33\u0e2b\u0e23\u0e31\u0e1a\u0e19\u0e31\u0e01\u0e1e\u0e31\u0e12\u0e19\u0e32\u0e0b\u0e2d\u0e1f\u0e15\u0e4c\u0e41\u0e27\u0e23\u0e4c Gemini 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-3?hl=vi
+fetched_at: 2026-07-06T05:22:08.371774+00:00
+title: "H\u01b0\u1edbng d\u1eabn cho nh\u00e0 ph\u00e1t tri\u1ec3n Gemini 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
 
-ส่งความคิดเห็น
+Gửi ý kiến phản hồi
 
-# คู่มือสำหรับนักพัฒนาซอฟต์แวร์ Gemini 3
+# Hướng dẫn cho nhà phát triển Gemini 3
 
-Gemini 3 เป็นกลุ่มผลิตภัณฑ์โมเดลที่ชาญฉลาดที่สุดของเราในปัจจุบัน ซึ่งสร้างขึ้นจากพื้นฐานของการให้เหตุผลที่ล้ำสมัย โดยได้รับการออกแบบมาเพื่อทำให้ทุกไอเดียเป็นจริงได้ด้วยการเชี่ยวชาญเวิร์กโฟลว์แบบ Agentic AI, การเขียนโค้ดอัตโนมัติ และงานที่ซับซ้อนแบบหลายรูปแบบ
-คู่มือนี้จะครอบคลุมฟีเจอร์หลักของกลุ่มผลิตภัณฑ์โมเดล Gemini 3 และวิธีใช้ฟีเจอร์ดังกล่าวให้เกิดประโยชน์สูงสุด
+Gemini 3 là dòng mô hình thông minh nhất của chúng tôi cho đến nay, được xây dựng dựa trên nền tảng suy luận tiên tiến. Gemini Pro được thiết kế để biến mọi ý tưởng thành hiện thực bằng cách thành thạo quy trình làm việc dựa trên tác nhân, lập trình tự động và các tác vụ đa phương thức phức tạp.
+Hướng dẫn này trình bày các tính năng chính của nhóm mô hình Gemini 3 và cách khai thác tối đa nhóm mô hình này.
 
-สำรวจ[คอลเล็กชันแอป Gemini 3](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=th) เพื่อ
-ดูวิธีที่โมเดลจัดการการให้เหตุผลขั้นสูง การเขียนโค้ดอัตโนมัติ และงานที่ซับซ้อน
-แบบหลายรูปแบบ
+Khám phá [bộ sưu tập các ứng dụng Gemini 3](https://aistudio.google.com/app/apps?source=showcase&%3BshowcaseTag=gemini-3&hl=vi) để xem cách mô hình này xử lý khả năng suy luận nâng cao, lập trình tự động và các nhiệm vụ phức tạp có nhiều phương thức.
 
-เริ่มต้นด้วยโค้ด 2-3 บรรทัดดังนี้
+Bắt đầu bằng một vài dòng mã:
 
 ### Python
 
@@ -72,48 +70,47 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ขอแนะนำ Gemini 3 Series
+## Làm quen với dòng Gemini 3
 
-Gemini 3.1 Pro เหมาะที่สุดสำหรับงานที่ซับซ้อนซึ่งต้องใช้ความรู้เกี่ยวกับโลกในวงกว้างและการให้เหตุผลขั้นสูงในรูปแบบต่างๆ
+Gemini 3.1 Pro phù hợp nhất với những nhiệm vụ phức tạp đòi hỏi kiến thức rộng lớn về thế giới và khả năng suy luận nâng cao trên nhiều phương thức.
 
-Gemini 3 Flash เป็นโมเดลล่าสุดในซีรีส์ 3 ที่มีความสามารถระดับ Pro ในด้านความชาญฉลาดด้วยความเร็วและราคาของ Flash
+Gemini 3 Flash là mô hình mới nhất thuộc dòng 3, có trí thông minh cấp Pro với tốc độ và mức giá của Flash.
 
-Nano Banana Pro (หรือที่เรียกว่า Gemini 3 Pro Image) เป็นโมเดลการสร้างรูปภาพคุณภาพสูงสุด และ Nano Banana 2 (หรือที่เรียกว่า Gemini 3.1 Flash Image) เป็นโมเดลที่มีประสิทธิภาพสูงและมีปริมาณงานสูงในราคาที่ต่ำกว่า
+Nano Banana Pro (còn gọi là Gemini 3 Pro Image) là mô hình tạo hình ảnh có chất lượng cao nhất của chúng tôi, còn Nano Banana 2 (còn gọi là Gemini 3.1 Flash Image) là mô hình tương đương có hiệu suất cao, số lượng lớn và mức giá thấp hơn.
 
-Gemini 3.1 Flash-Lite เป็นโมเดลที่ใช้งานได้หลากหลายซึ่งสร้างขึ้นเพื่อประสิทธิภาพด้านต้นทุนและงานที่มีปริมาณงานสูง
+Gemini 3.1 Flash-Lite là mô hình hiệu suất cao được thiết kế để mang lại hiệu quả về chi phí và xử lý các nhiệm vụ với khối lượng lớn.
 
-ปัจจุบันโมเดล Gemini 3 ทั้งหมดอยู่ในเวอร์ชันตัวอย่าง
+Tất cả các mô hình Gemini 3 hiện đang ở giai đoạn dùng thử.
 
-| รหัสโมเดล | หน้าต่างบริบท (อินพุต / เอาต์พุต) | การตัดข้อมูล | การกำหนดราคา (อินพุต / เอาต์พุต)\* |
+| Mã kiểu máy | Cửa sổ ngữ cảnh (Vào / Ra) | Điểm cắt kiến thức | Giá (Đầu vào / Đầu ra)\* |
 | --- | --- | --- | --- |
-| **gemini-3.1-flash-lite** | 1 ล้าน / 64,000 | ม.ค. 2025 | $0.25 (ข้อความ รูปภาพ วิดีโอ), $0.50 (เสียง) / $1.50 |
-| **gemini-3.1-flash-image-preview** | 128,000 / 32,000 | ม.ค. 2025 | $0.25 (อินพุตข้อความ) / $0.067 (เอาต์พุตรูปภาพ)\*\* |
-| **gemini-3.1-pro-preview** | 1 ล้าน / 64,000 | ม.ค. 2025 | $2 / $12 (<200,000 โทเค็น)   $4 / $18 (>200,000 โทเค็น) |
-| **gemini-3-flash-preview** | 1 ล้าน / 64,000 | ม.ค. 2025 | $0.50 / $3 |
-| **gemini-3-pro-image-preview** | 65,000 / 32,000 | ม.ค. 2025 | $2 (อินพุตข้อความ) / $0.134 (เอาต์พุตรูปภาพ)\*\* |
+| **gemini-3.1-flash-lite** | 1M / 64k | Tháng 1 năm 2025 | 0,25 USD (văn bản, hình ảnh, video), 0,5 USD (âm thanh) / 1,5 USD |
+| **gemini-3.1-flash-image-preview** | 128.000 / 32.000 | Tháng 1 năm 2025 | 0,25 USD (Đầu vào là văn bản) / 0,067 USD (Đầu ra là hình ảnh)\*\* |
+| **gemini-3.1-pro-preview** | 1M / 64k | Tháng 1 năm 2025 | 2 USD / 12 USD (<200.000 token)   4 USD / 18 USD (>200.000 token) |
+| **gemini-3-flash-preview** | 1M / 64k | Tháng 1 năm 2025 | 0,5 USD / 3 USD |
+| **gemini-3-pro-image-preview** | 65.000 / 32.000 | Tháng 1 năm 2025 | 2 USD (Nhập văn bản) / 0,134 USD (Xuất hình ảnh)\*\* |
 
-*\* การกำหนดราคาต่อ 1 ล้านโทเค็น เว้นแต่จะระบุไว้เป็นอย่างอื่น*
-*\*\* การกำหนดราคารูปภาพจะแตกต่างกันไปตามความละเอียด ดูรายละเอียดได้ใน[หน้าราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th)*
+*\* Giá tính trên 1 triệu mã thông báo, trừ phi có quy định khác.*
+*\*\* Giá hình ảnh thay đổi theo độ phân giải. Hãy xem [trang giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) để biết thông tin chi tiết.*
 
-ดูขีดจำกัดโดยละเอียด การกำหนดราคา และข้อมูลเพิ่มเติมได้ใน
-[หน้าโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th)
+Để biết các giới hạn, mức giá và thông tin bổ sung chi tiết, hãy xem [trang mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi).
 
-## ฟีเจอร์ใหม่ของ API ใน Gemini 3
+## Các tính năng mới của API trong Gemini 3
 
-Gemini 3 ขอแนะนำพารามิเตอร์ใหม่ที่ออกแบบมาเพื่อให้นักพัฒนาแอปควบคุมเวลาในการตอบสนอง ต้นทุน และความถูกต้องของข้อมูลหลายรูปแบบได้มากขึ้น
+Gemini 3 giới thiệu các tham số mới được thiết kế để giúp nhà phát triển kiểm soát độ trễ, chi phí và độ trung thực của nhiều phương thức hiệu quả hơn.
 
-### ระดับการคิด
+### Cấp độ tư duy
 
-โมเดล Gemini 3 Series ใช้การคิดแบบไดนามิกเป็นค่าเริ่มต้นเพื่อใช้เหตุผลกับพรอมต์ คุณสามารถใช้พารามิเตอร์ `thinking_level` ซึ่งควบคุมความลึก**สูงสุด** ของกระบวนการให้เหตุผลภายในของโมเดลก่อนที่จะสร้างคำตอบ Gemini 3 ถือว่าระดับเหล่านี้เป็นค่าเผื่อสัมพัทธ์สำหรับการคิด ไม่ใช่การรับประกันโทเค็นที่เข้มงวด
+Các mô hình Gemini 3 sử dụng tư duy linh hoạt theo mặc định để suy luận thông qua các câu lệnh. Bạn có thể sử dụng tham số `thinking_level` để kiểm soát độ sâu **tối đa** của quy trình suy luận nội bộ của mô hình trước khi mô hình tạo ra một câu trả lời. Gemini 3 coi những cấp độ này là mức cho phép tương đối để suy nghĩ thay vì đảm bảo nghiêm ngặt về số lượng mã thông báo.
 
-หากไม่ได้ระบุ `thinking_level` ไว้ Gemini 3 จะใช้ `high` เป็นค่าเริ่มต้น หากไม่จำเป็นต้องใช้การให้เหตุผลที่ซับซ้อน คุณสามารถจำกัดระดับการคิดของโมเดลเป็น `low` เพื่อให้ได้คำตอบที่เร็วขึ้นและมีเวลาในการตอบสนองที่สั้นลง
+Nếu bạn không chỉ định `thinking_level`, Gemini 3 sẽ mặc định là `high`. Để có câu trả lời nhanh hơn và có độ trễ thấp hơn khi không cần suy luận phức tạp, bạn có thể giới hạn mức độ suy nghĩ của mô hình ở `low`.
 
-| ระดับการคิด | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | คำอธิบาย |
+| Cấp độ tư duy | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Mô tả |
 | --- | --- | --- | --- | --- |
-| **`minimal`** | ไม่รองรับ | สิ่งที่ทำได้ (ค่าเริ่มต้น) | สิ่งที่ทำได้ | ตรงกับการตั้งค่า "ไม่คิด" สำหรับการค้นหาส่วนใหญ่ โมเดลอาจคิดน้อยมากสำหรับงานเขียนโค้ดที่ซับซ้อน ลดเวลาในการตอบสนองสำหรับแอปพลิเคชันแชทหรือแอปพลิเคชันที่มีการส่งข้อความปริมาณมาก โปรดทราบว่า `minimal` ไม่ได้รับประกันว่าจะปิดการคิด |
-| **`low`** | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | ลดเวลาในการตอบสนองและต้นทุน เหมาะที่สุดสำหรับการทำตามคำสั่งง่ายๆ การแชท หรือแอปพลิเคชันที่มีปริมาณงานสูง |
-| **`medium`** | สิ่งที่ทำได้ | สิ่งที่ทำได้ | สิ่งที่ทำได้ | การคิดที่สมดุลสำหรับงานส่วนใหญ่ |
-| **`high`** | สิ่งที่ทำได้ (ค่าเริ่มต้น, ไดนามิก) | สิ่งที่ทำได้ (ไดนามิก) | สิ่งที่ทำได้ (ค่าเริ่มต้น, ไดนามิก) | เพิ่มความลึกในการให้เหตุผลให้สูงสุด โมเดลอาจใช้เวลานานขึ้นอย่างมากในการ เข้าถึงโทเค็นเอาต์พุตแรก (ที่ไม่ใช่การคิด) แต่เอาต์พุตจะได้รับการพิจารณาอย่างรอบคอบมากขึ้น |
+| **`minimal`** | Không được hỗ trợ | Được hỗ trợ (Mặc định) | Được hỗ trợ | Phù hợp với chế độ cài đặt "không suy nghĩ" cho hầu hết các cụm từ tìm kiếm. Mô hình có thể suy nghĩ rất ít cho các nhiệm vụ lập trình phức tạp. Giảm thiểu độ trễ cho các ứng dụng trò chuyện hoặc ứng dụng có thông lượng cao. Xin lưu ý rằng `minimal` không đảm bảo rằng tính năng suy nghĩ đã tắt. |
+| **`low`** | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Giảm thiểu độ trễ và chi phí. Phù hợp nhất với các ứng dụng tuân theo hướng dẫn đơn giản, trò chuyện hoặc có thông lượng cao. |
+| **`medium`** | Được hỗ trợ | Được hỗ trợ | Được hỗ trợ | Tư duy cân bằng cho hầu hết các nhiệm vụ. |
+| **`high`** | Được hỗ trợ (Mặc định, Động) | Được hỗ trợ (Động) | Được hỗ trợ (Mặc định, Động) | Tối đa hoá độ sâu suy luận. Mô hình có thể mất nhiều thời gian hơn đáng kể để đạt được mã thông báo đầu ra đầu tiên (không phải mã thông báo tư duy), nhưng đầu ra sẽ được suy luận cẩn thận hơn. |
 
 ### Python
 
@@ -164,25 +161,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### อุณหภูมิ
+### Nhiệt độ
 
-สำหรับโมเดล Gemini 3 ทั้งหมด เราขอแนะนำอย่างยิ่งให้ตั้งค่าพารามิเตอร์อุณหภูมิเป็นค่าเริ่มต้นที่ `1.0`
+Đối với tất cả các mô hình Gemini 3, bạn nên giữ tham số nhiệt độ ở giá trị mặc định là `1.0`.
 
-แม้ว่าโมเดลก่อนหน้านี้มักจะได้รับประโยชน์จากการปรับอุณหภูมิเพื่อควบคุมความคิดสร้างสรรค์เทียบกับความแน่นอน แต่ความสามารถในการให้เหตุผลของ Gemini 3 ได้รับการปรับให้เหมาะกับการตั้งค่าเริ่มต้น การเปลี่ยนอุณหภูมิ (ตั้งค่าต่ำกว่า 1.0) อาจทำให้เกิดลักษณะการทำงานที่ไม่คาดคิด เช่น การวนซ้ำหรือประสิทธิภาพลดลง โดยเฉพาะอย่างยิ่งในงานทางคณิตศาสตร์หรือการให้เหตุผลที่ซับซ้อน
+Mặc dù các mô hình trước đây thường được hưởng lợi từ việc điều chỉnh nhiệt độ để kiểm soát khả năng sáng tạo so với tính xác định, nhưng khả năng suy luận của Gemini 3 được tối ưu hoá cho chế độ cài đặt mặc định. Việc thay đổi nhiệt độ (đặt nhiệt độ dưới 1.0) có thể dẫn đến hành vi không mong muốn, chẳng hạn như lặp lại hoặc giảm hiệu suất, đặc biệt là trong các nhiệm vụ phức tạp về toán học hoặc lý luận.
 
-### ลายเซ็นความคิด
+### Chữ ký của suy nghĩ
 
-โมเดล Gemini 3 ใช้ลายเซ็นความคิดเพื่อรักษาบริบทการให้เหตุผลในการเรียก API ลายเซ็นเหล่านี้เป็นการแสดงที่เข้ารหัสของกระบวนการคิดภายในของโมเดล
+Các mô hình Gemini 3 sử dụng chữ ký suy luận để duy trì ngữ cảnh suy luận trong các lệnh gọi API. Các chữ ký này là biểu thị được mã hoá của quy trình suy nghĩ nội bộ của mô hình.
 
-- **โหมด Stateful (แนะนำ)**: เมื่อใช้ Interactions API ในโหมด Stateful (ระบุ `previous_interaction_id`) เซิร์ฟเวอร์จะจัดการประวัติการสนทนาและลายเซ็นความคิดโดยอัตโนมัติ
-- **โหมด Stateless**: หากคุณจัดการประวัติการสนทนาด้วยตนเอง คุณต้องใส่บล็อกความคิดพร้อมลายเซ็นในคำขอที่ตามมาเพื่อตรวจสอบความถูกต้อง
+- **Chế độ có trạng thái (Nên dùng)**: Khi sử dụng Interactions API ở chế độ có trạng thái (cung cấp `previous_interaction_id`), máy chủ sẽ tự động quản lý nhật ký cuộc trò chuyện và chữ ký suy nghĩ.
+- **Chế độ không trạng thái**: Nếu đang quản lý nhật ký cuộc trò chuyện theo cách thủ công, bạn phải đưa các khối suy nghĩ cùng với chữ ký của chúng vào các yêu cầu tiếp theo để xác thực tính chân thực.
 
-ดูข้อมูลโดยละเอียดได้ในหน้า [ลายเซ็นความคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)
+Để biết thông tin chi tiết, hãy xem trang [Chữ ký tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi).
 
-### เอาต์พุตที่มีโครงสร้างพร้อมเครื่องมือ
+### Đầu ra có cấu trúc bằng các công cụ
 
-โมเดล Gemini 3 ช่วยให้คุณรวม[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)เข้ากับเครื่องมือในตัว ซึ่งรวมถึง
-[การเชื่อมต่อแหล่งข้อมูลกับ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th), [บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th), [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) และ [การเรียกใช้ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)
+Các mô hình Gemini 3 cho phép bạn kết hợp [Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi) với các công cụ tích hợp sẵn, bao gồm [Bám sát nguồn bằng Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) và [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi).
 
 ### Python
 
@@ -295,20 +291,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### การสร้างรูปภาพ
+### Tạo hình ảnh
 
-Gemini 3.1 Flash Image และ Gemini 3 Pro Image ช่วยให้คุณสร้างและแก้ไขรูปภาพจากพรอมต์ข้อความได้ โดยใช้
-การให้เหตุผลเพื่อ "คิด" ผ่านพรอมต์ และดึงข้อมูลแบบเรียลไทม์ เช่น
-พยากรณ์อากาศหรือแผนภูมิหุ้น ก่อนที่จะใช้การเชื่อมต่อแหล่งข้อมูลกับ [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th) ก่อนที่จะสร้างรูปภาพที่มีความถูกต้องสูง
+Gemini 3.1 Flash Image và Gemini 3 Pro Image cho phép bạn tạo và chỉnh sửa hình ảnh từ câu lệnh văn bản. Mô hình này sử dụng khả năng suy luận để "suy nghĩ" về một câu lệnh và có thể truy xuất dữ liệu theo thời gian thực (chẳng hạn như dự báo thời tiết hoặc biểu đồ chứng khoán) trước khi sử dụng tính năng [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) để tạo cơ sở trước khi tạo hình ảnh có độ trung thực cao.
 
-**ความสามารถใหม่และที่ได้รับการปรับปรุง**
+**Các chức năng mới và được cải thiện:**
 
-- **การแสดงผล 4K และข้อความ:** สร้างข้อความและแผนภูมิที่คมชัดและอ่านง่ายด้วยความละเอียดสูงสุด 2K และ 4K
-- **การสร้างที่เชื่อมต่อแหล่งข้อมูล:** ใช้เครื่องมือ `google_search` เพื่อยืนยันข้อเท็จจริงและสร้างภาพตามข้อมูลในโลกแห่งความเป็นจริง การเชื่อมต่อแหล่งข้อมูลกับ Google *Image* Search พร้อมใช้งานสำหรับ Gemini 3.1 Flash Image
-- **การแก้ไขแบบผ่านการสนทนาไปมา:** แก้ไขรูปภาพหลายครั้งได้เพียงแค่ขอให้เปลี่ยนแปลง (เช่น "เปลี่ยนพื้นหลังให้เป็นภาพพระอาทิตย์ตก") เวิร์กโฟลว์นี้อาศัย**ลายเซ็นความคิด** เพื่อรักษาบริบทภาพระหว่างการสนทนา
+- **Độ phân giải 4K và kết xuất văn bản:** Tạo văn bản và sơ đồ sắc nét, dễ đọc với độ phân giải lên đến 2K và 4K.
+- **Tạo nội dung có căn cứ:** Sử dụng công cụ `google_search` để xác minh dữ kiện và tạo hình ảnh dựa trên thông tin thực tế. Căn cứ vào thông tin từ tính năng Tìm kiếm *Hình ảnh* của Google cho Gemini 3.1 Flash Image.
+- **Chỉnh sửa bằng ngôn ngữ tự nhiên:** Chỉnh sửa ảnh nhiều lượt bằng cách chỉ cần yêu cầu thay đổi (ví dụ: "Chỉnh sửa để nền là cảnh hoàng hôn"). Quy trình này dựa vào **Chữ ký tư duy** để duy trì ngữ cảnh trực quan giữa các lượt.
 
-ดูรายละเอียดทั้งหมดเกี่ยวกับสัดส่วนภาพ เวิร์กโฟลว์การแก้ไข และตัวเลือกการกำหนดค่า
-ได้ใน[คู่มือการสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)
+Để biết thông tin chi tiết đầy đủ về tỷ lệ khung hình, quy trình chỉnh sửa và các lựa chọn cấu hình, hãy xem [hướng dẫn Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi).
 
 ### Python
 
@@ -386,23 +379,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**ตัวอย่างคำตอบ**
+**Ví dụ về phản hồi**
 
-![สภาพอากาศ โตเกียว](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=th)
+![Thời tiết ở Tokyo](https://ai.google.dev/static/gemini-api/docs/images/weather-tokyo.jpg?hl=vi)
 
-### การเรียกใช้โค้ดพร้อมรูปภาพ
+### Thực thi mã bằng hình ảnh
 
-Gemini 3 Flash สามารถมองเห็นเป็นกระบวนการตรวจสอบที่ใช้งานอยู่ ไม่ใช่แค่การมองผ่านๆ ด้วยการรวมการให้เหตุผลเข้ากับการ[เรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) โมเดลจะกำหนดแผน จากนั้นเขียนและ
-เรียกใช้โค้ด Python เพื่อซูม ครอบตัด ใส่คำอธิบายประกอบ หรือจัดการรูปภาพอื่นๆ
-ทีละขั้นตอนเพื่อเชื่อมต่อคำตอบกับข้อมูลภาพ
+Gemini 3 Flash có thể coi thị giác là một hoạt động điều tra chủ động, chứ không chỉ là một cái nhìn tĩnh. Bằng cách kết hợp suy luận với [thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi), mô hình sẽ xây dựng một kế hoạch, sau đó viết và thực thi mã Python để phóng to, cắt, chú thích hoặc thao tác với hình ảnh theo từng bước nhằm đưa ra câu trả lời bám sát nguồn trực quan.
 
-**Use cases**
+**Trường hợp sử dụng:**
 
-- **ซูมและตรวจสอบ:** โมเดลจะตรวจหาโดยนัยเมื่อรายละเอียดมีขนาดเล็กเกินไป (เช่น การอ่านมาตรวัดหรือหมายเลขซีเรียลที่อยู่ไกลออกไป) และเขียนโค้ดเพื่อครอบตัดและตรวจสอบพื้นที่อีกครั้งด้วยความละเอียดที่สูงขึ้น
-- **คณิตศาสตร์และการพล็อตภาพ:** โมเดลสามารถทำการคำนวณหลายขั้นตอนโดยใช้โค้ด (เช่น การรวมรายการในใบเสร็จ หรือการสร้างแผนภูมิ Matplotlib จากข้อมูลที่แยกออกมา)
-- **คำอธิบายประกอบรูปภาพ:** โมเดลสามารถวาดลูกศร กรอบล้อมรอบ หรือคำอธิบายประกอบอื่นๆ ลงในรูปภาพโดยตรงเพื่อตอบคำถามเชิงพื้นที่ เช่น "ควรวางรายการนี้ไว้ที่ใด"
+- **Phóng to và kiểm tra:** Mô hình sẽ tự động phát hiện khi các chi tiết quá nhỏ (ví dụ: đọc một đồng hồ đo hoặc số sê-ri ở xa) và viết mã để cắt và kiểm tra lại khu vực ở độ phân giải cao hơn.
+- **Phép toán và biểu đồ trực quan:** Mô hình có thể chạy các phép tính nhiều bước bằng mã (ví dụ: tính tổng các mục hàng trên biên nhận hoặc tạo biểu đồ Matplotlib từ dữ liệu đã trích xuất).
+- **Chú thích hình ảnh:** Mô hình có thể vẽ mũi tên, khung viền hoặc các chú thích khác trực tiếp lên hình ảnh để trả lời các câu hỏi về không gian như "Mặt hàng này nên đặt ở đâu?".
 
-หากต้องการเปิดใช้การคิดเชิงภาพ ให้กำหนดค่า [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) เป็นเครื่องมือ โมเดลจะใช้โค้ดเพื่อจัดการรูปภาพโดยอัตโนมัติเมื่อจำเป็น
+Để bật tính năng tư duy trực quan, hãy định cấu hình [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) làm công cụ. Mô hình sẽ tự động dùng mã để thao tác với hình ảnh khi cần.
 
 ### Python
 
@@ -529,14 +520,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-ดูรายละเอียดเพิ่มเติมเกี่ยวกับการเรียกใช้โค้ดพร้อมรูปภาพได้ที่ [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th#images)
+Để biết thêm thông tin về việc thực thi mã bằng hình ảnh, hãy xem phần [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi#images).
 
-### คำตอบของฟังก์ชันแบบหลายรูปแบบ
+### Phản hồi của hàm đa phương thức
 
-[การเรียกใช้ฟังก์ชันแบบหลายรูปแบบ](https://ai.google.dev/gemini-api/docs/function-calling?hl=th#multimodal)
-ช่วยให้ผู้ใช้ได้รับคำตอบของฟังก์ชันที่มี
-ออบเจ็กต์แบบหลายรูปแบบ ซึ่งช่วยให้ใช้ความสามารถในการเรียกใช้ฟังก์ชัน
-ของโมเดลได้ดียิ่งขึ้น การเรียกใช้ฟังก์ชันมาตรฐานรองรับเฉพาะคำตอบของฟังก์ชันแบบข้อความเท่านั้น
+[Tính năng gọi hàm đa phương thức](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#multimodal) cho phép người dùng nhận được các phản hồi của hàm có chứa các đối tượng đa phương thức, giúp cải thiện khả năng sử dụng tính năng gọi hàm của mô hình. Tính năng gọi hàm tiêu chuẩn chỉ hỗ trợ các phản hồi hàm dựa trên văn bản:
 
 ### Python
 
@@ -711,10 +699,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### รวมเครื่องมือในตัวและการเรียกใช้ฟังก์ชัน
+### Kết hợp các công cụ tích hợp và lệnh gọi hàm
 
-Gemini 3 อนุญาตให้ใช้เครื่องมือในตัว (เช่น Google Search, บริบท URL
-และ [อื่นๆ](https://ai.google.dev/gemini-api/docs/tools?hl=th)) และเครื่องมือการเรียกใช้[ฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)ที่กำหนดเองในการเรียก API เดียวกัน ซึ่งช่วยให้เวิร์กโฟลว์มีความซับซ้อนมากขึ้น
+Gemini 3 cho phép sử dụng các công cụ tích hợp sẵn (như Google Tìm kiếm, ngữ cảnh URL và [nhiều công cụ khác](https://ai.google.dev/gemini-api/docs/tools?hl=vi)) cũng như các công cụ [gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) tuỳ chỉnh trong cùng một lệnh gọi API, cho phép các quy trình công việc phức tạp hơn.
 
 ### Python
 
@@ -822,72 +809,51 @@ if (fcStep) {
 }
 ```
 
-## การย้ายข้อมูลจาก Gemini 2.5
+## Di chuyển từ Gemini 2.5
 
-Gemini 3 เป็นกลุ่มผลิตภัณฑ์โมเดลที่มากความสามารถที่สุดของเราในปัจจุบัน และมีการปรับปรุงทีละขั้นตอนเมื่อเทียบกับ Gemini 2.5 เมื่อย้ายข้อมูล โปรดพิจารณาสิ่งต่อไปนี้
+Gemini 3 là nhóm mô hình mạnh mẽ nhất của chúng tôi cho đến nay và có sự cải tiến từng bước so với Gemini 2.5. Khi di chuyển, hãy cân nhắc những điều sau:
 
-- **การคิด:** หากก่อนหน้านี้คุณใช้เทคนิควิศวกรรมพรอมต์ที่ซับซ้อน (เช่น
-  Chain of Thought) เพื่อบังคับให้ Gemini 2.5 ใช้เหตุผล ให้ลองใช้ Gemini 3 ที่มี
-  `thinking_level: "high"` และพรอมต์ที่ง่ายขึ้น
-- **การตั้งค่าอุณหภูมิ:** หากโค้ดที่มีอยู่ตั้งค่าอุณหภูมิอย่างชัดเจน (โดยเฉพาะค่าต่ำสำหรับเอาต์พุตที่แน่นอน) เราขอแนะนำให้นำพารามิเตอร์นี้ออกและใช้ค่าเริ่มต้นของ Gemini 3 ที่ 1.0 เพื่อหลีกเลี่ยงปัญหาการวนซ้ำที่อาจเกิดขึ้นหรือประสิทธิภาพลดลงในงานที่ซับซ้อน
-- **ความเข้าใจ PDF และเอกสาร:** หากคุณอาศัยลักษณะการทำงานที่เฉพาะเจาะจงสำหรับการแยกวิเคราะห์เอกสารที่มีข้อมูลหนาแน่น ให้ทดสอบการตั้งค่า `media_resolution_high` ใหม่เพื่อให้มั่นใจในความถูกต้องอย่างต่อเนื่อง
-- **การใช้โทเค็น:** การย้ายข้อมูลไปยังค่าเริ่มต้นของ Gemini 3 อาจ**เพิ่ม** การใช้โทเค็นสำหรับ PDF แต่**ลด** การใช้โทเค็นสำหรับวิดีโอ หากคำขอเกินหน้าต่างบริบทเนื่องจากความละเอียดเริ่มต้นสูงขึ้น เราขอแนะนำให้ลดความละเอียดของสื่ออย่างชัดเจน
-- **การแบ่งส่วนรูปภาพ:** Gemini 3 Pro หรือ Gemini 3 Flash ไม่รองรับความสามารถในการแบ่งส่วนรูปภาพ (การแสดงผลมาสก์ระดับพิกเซลสำหรับออบเจ็กต์) สำหรับ
-  เวิร์กโหลดที่ต้องใช้การแบ่งส่วนรูปภาพในตัว เราขอแนะนำให้ใช้ Gemini 2.5 Flash ต่อไปโดยปิดการคิด หรือใช้ [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=th)
-- **การใช้คอมพิวเตอร์:** Gemini 3 Pro และ Gemini 3 Flash รองรับ[การใช้
-  คอมพิวเตอร์](https://ai.google.dev/gemini-api/docs/computer-use?hl=th) คุณไม่จำเป็นต้องใช้โมเดลแยกต่างหากเพื่อเข้าถึงเครื่องมือการใช้คอมพิวเตอร์ ซึ่งแตกต่างจากซีรีส์ 2.5
-- **การรองรับเครื่องมือ**: [ตอนนี้โมเดล Gemini 3 รองรับการรวมเครื่องมือในตัวเข้ากับการเรียกใช้ฟังก์ชันแล้ว](https://ai.google.dev/gemini-api/docs/tool-combination?hl=th) [โมเดล
-  Gemini 3](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th) ยังรองรับการเชื่อมต่อแหล่งข้อมูลกับ Maps
-  แล้วด้วย
+- **Tư duy:** Nếu trước đây bạn đang sử dụng kỹ thuật thiết kế câu lệnh phức tạp (chẳng hạn như chuỗi suy luận) để buộc Gemini 2.5 suy luận, hãy thử Gemini 3 với `thinking_level: "high"` và câu lệnh đơn giản.
+- **Chế độ cài đặt nhiệt độ:** Nếu mã hiện tại của bạn đặt nhiệt độ một cách rõ ràng (đặc biệt là ở giá trị thấp cho đầu ra xác định), bạn nên xoá thông số này và sử dụng giá trị mặc định là 1.0 của Gemini 3 để tránh các vấn đề tiềm ẩn về vòng lặp hoặc giảm hiệu suất đối với các tác vụ phức tạp.
+- **Hiểu PDF và tài liệu:** Nếu bạn dựa vào hành vi cụ thể để phân tích cú pháp tài liệu dày đặc, hãy kiểm thử chế độ cài đặt `media_resolution_high` mới để đảm bảo độ chính xác liên tục.
+- **Mức tiêu thụ mã thông báo:** Việc di chuyển sang Gemini 3 mặc định có thể **tăng** mức sử dụng mã thông báo cho tệp PDF nhưng **giảm** mức sử dụng mã thông báo cho video. Nếu các yêu cầu hiện vượt quá cửa sổ ngữ cảnh do độ phân giải mặc định cao hơn, bạn nên giảm rõ ràng độ phân giải của nội dung nghe nhìn.
+- **Phân đoạn hình ảnh:** Gemini 3 Pro hoặc Gemini 3 Flash không hỗ trợ các chức năng phân đoạn hình ảnh (trả về mặt nạ ở cấp độ pixel cho các đối tượng). Đối với những khối lượng công việc yêu cầu tính năng phân đoạn hình ảnh tích hợp, bạn nên tiếp tục sử dụng Gemini 2.5 Flash khi tắt chế độ tư duy hoặc [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=vi).
+- **Sử dụng máy tính:** Gemini 3 Pro và Gemini 3 Flash hỗ trợ tính năng [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi). Không giống như dòng 2.5, bạn không cần sử dụng một mô hình riêng để truy cập vào công cụ Sử dụng máy tính.
+- **Hỗ trợ công cụ**: [Các mô hình Gemini 3 hiện hỗ trợ việc kết hợp các công cụ tích hợp với tính năng gọi hàm](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi). [Tính năng cơ sở dữ liệu trên Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi) hiện cũng được hỗ trợ cho các mô hình Gemini 3.
 
-## ความเข้ากันได้กับ OpenAI
+## Khả năng tương thích với OpenAI
 
-สำหรับผู้ใช้ที่ใช้เลเยอร์ความเข้ากันได้กับ [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th)
-ระบบจะจับคู่พารามิเตอร์มาตรฐาน (พารามิเตอร์ `reasoning_effort` ของ OpenAI) กับ
-พารามิเตอร์ที่เทียบเท่าของ Gemini (`thinking_level`) โดยอัตโนมัติ
+Đối với những người dùng sử dụng [lớp tương thích OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=vi), các tham số tiêu chuẩn (`reasoning_effort` của OpenAI) sẽ tự động được liên kết với các tham số tương đương của Gemini (`thinking_level`).
 
-## แนวทางปฏิบัติแนะนำในการใช้พรอมต์
+## Các phương pháp hay nhất để viết câu lệnh
 
-Gemini 3 เป็นโมเดลการให้เหตุผล ซึ่งจะเปลี่ยนวิธีที่คุณควรใช้พรอมต์
+Gemini 3 là một mô hình suy luận, do đó bạn cần thay đổi cách đưa ra câu lệnh.
 
-- **คำแนะนำที่แม่นยำ:** ใช้พรอมต์อินพุตที่กระชับ Gemini 3 ตอบสนองได้ดีที่สุดต่อคำแนะนำที่ชัดเจนและตรงไปตรงมา โมเดลอาจวิเคราะห์เทคนิควิศวกรรมพรอมต์ (Prompt Engineering) ที่ละเอียดหรือซับซ้อนเกินไปซึ่งใช้กับโมเดลเก่ามากเกินไป
-- **ความละเอียดของเอาต์พุต:** โดยค่าเริ่มต้น Gemini 3 จะมีความละเอียดน้อยกว่าและชอบให้คำตอบที่ตรงไปตรงมาและมีประสิทธิภาพ หาก Use Case ของคุณต้องใช้บุคลิกที่สนทนาหรือ "ช่างพูด" มากขึ้น คุณต้องนำโมเดลไปในทิศทางนั้นอย่างชัดเจนในพรอมต์ (เช่น "อธิบายเรื่องนี้ในฐานะผู้ช่วยที่เป็นมิตรและช่างพูด")
-- **การจัดการบริบท:** เมื่อทำงานกับชุดข้อมูลขนาดใหญ่ (เช่น หนังสือทั้งเล่ม
-  ฐานโค้ด หรือวิดีโอขนาดยาว) ให้วางคำแนะนำหรือคำถามที่เฉพาะเจาะจงไว้ที่
-  ส่วนท้ายของพรอมต์ หลังจากบริบทข้อมูล ยึดการให้เหตุผลของโมเดลกับข้อมูลที่ให้ไว้โดยเริ่มคำถามด้วยวลี เช่น "จากข้อมูลข้างต้น..."
+- **Hướng dẫn chính xác:** Nhập câu lệnh một cách ngắn gọn. Gemini 3 phản hồi tốt nhất khi nhận được chỉ dẫn trực tiếp và rõ ràng. Có thể phân tích quá mức các kỹ thuật thiết kế câu lệnh dài dòng hoặc quá phức tạp được dùng cho các mô hình cũ.
+- **Mức độ chi tiết của kết quả:** Theo mặc định, Gemini 3 ít chi tiết hơn và ưu tiên cung cấp câu trả lời trực tiếp, hiệu quả. Nếu trường hợp sử dụng của bạn yêu cầu một nhân cách trò chuyện hoặc "hay chuyện" hơn, bạn phải hướng dẫn rõ ràng cho mô hình trong câu lệnh (ví dụ: "Giải thích điều này với tư cách là một trợ lý thân thiện, hay chuyện").
+- **Quản lý bối cảnh:** Khi làm việc với các tập dữ liệu lớn (ví dụ: toàn bộ sách, cơ sở mã hoặc video dài), hãy đặt hướng dẫn hoặc câu hỏi cụ thể của bạn ở cuối câu lệnh, sau bối cảnh dữ liệu. Gắn suy luận của mô hình vào dữ liệu được cung cấp bằng cách bắt đầu câu hỏi bằng một cụm từ như "Dựa trên thông tin trước đó...".
 
-ดูข้อมูลเพิ่มเติมเกี่ยวกับกลยุทธ์การออกแบบพรอมต์ได้ใน[คู่มือวิศวกรรมพรอมต์ (Prompt Engineering)](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th)
+Tìm hiểu thêm về các chiến lược thiết kế câu lệnh trong [hướng dẫn kỹ thuật về câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
 
-## คำถามที่พบบ่อย
+## Câu hỏi thường gặp
 
-1. **การตัดข้อมูลของ Gemini 3 คือเมื่อใด** โมเดล Gemini 3 มีการตัดข้อมูลในเดือนมกราคม 2025 หากต้องการข้อมูลล่าสุด ให้ใช้เครื่องมือ
-   [การเชื่อมต่อแหล่งข้อมูลกับ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
-2. **ขีดจำกัดของหน้าต่างบริบทคือเท่าใด** โมเดล Gemini 3 รองรับหน้าต่างบริบทอินพุต 1 ล้านโทเค็นและเอาต์พุตสูงสุด 64,000 โทเค็น
-3. **Gemini 3 มีแพ็กเกจฟรีไหม** Gemini 3 Flash `gemini-3-flash-preview` มีแพ็กเกจฟรีใน Gemini API คุณสามารถลองใช้ Gemini 3.1 Pro และ 3 Flash ได้โดยไม่มีค่าใช้จ่ายใน Google AI Studio แต่ `gemini-3.1-pro-preview` ใน Gemini API ไม่มีแพ็กเกจฟรี
-4. **โค้ด `thinking_budget` เก่าของฉันจะยังใช้งานได้ไหม** ได้ `thinking_budget` ยังคงได้รับการรองรับเพื่อความเข้ากันได้แบบย้อนกลับ แต่เราขอแนะนำให้ย้ายข้อมูลไปใช้ `thinking_level` เพื่อให้ได้ประสิทธิภาพที่คาดการณ์ได้มากขึ้น อย่าใช้ทั้ง 2 อย่างในคำขอเดียวกัน
-5. **Gemini 3 รองรับ Batch API ไหม** ใช่ Gemini 3 รองรับ
-   [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)
-6. **ระบบรองรับการแคชบริบทไหม** ใช่ [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) รองรับสำหรับ Gemini 3
-7. **Gemini 3 รองรับเครื่องมือใดบ้าง** Gemini 3 รองรับ
-   [Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th),
-   [การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th),
-   [การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th),
-   [การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th) และ
-   [บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th) นอกจากนี้ ยังรองรับ
-   การเรียกใช้[ฟังก์ชันมาตรฐาน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)สำหรับ
-   เครื่องมือที่กำหนดเองของคุณเอง และเมื่อใช้
-   [ร่วมกับเครื่องมือในตัว](https://ai.google.dev/gemini-api/docs/tool-combination?hl=th)
-8. **คืออะไร`gemini-3.1-pro-preview-customtools`?** หากคุณใช้
-   `gemini-3.1-pro-preview` และโมเดลไม่สนใจเครื่องมือที่กำหนดเอง แต่เลือกใช้
-   คำสั่ง Bash ให้ลองใช้โมเดล `gemini-3.1-pro-preview-customtools` แทน
-   ดูข้อมูลเพิ่มเติมได้[ที่นี่][customtools-model]
+1. **Điểm cắt kiến thức của Gemini 3 là khi nào?** Các mô hình Gemini 3 có điểm cắt kiến thức là tháng 1 năm 2025. Để biết thông tin mới nhất, hãy sử dụng công cụ [Tìm kiếm thông tin cơ sở](https://ai.google.dev/gemini-api/docs/google-search?hl=vi).
+2. **Hạn mức cửa sổ ngữ cảnh là bao nhiêu?** Các mô hình Gemini 3 hỗ trợ cửa sổ ngữ cảnh đầu vào 1 triệu token và đầu ra lên đến 64.000 token.
+3. **Gemini 3 có phiên bản miễn phí không?** Gemini 3 Flash
+   `gemini-3-flash-preview` có một cấp miễn phí trong Gemini API. Bạn có thể dùng thử Gemini 3.1 Pro và 3 Flash miễn phí trong Google AI Studio, nhưng không có cấp miễn phí cho `gemini-3.1-pro-preview` trong Gemini API.
+4. **Mã `thinking_budget` cũ của tôi có còn hoạt động không?** Có, `thinking_budget` vẫn được hỗ trợ để tương thích ngược, nhưng bạn nên di chuyển sang `thinking_level` để có hiệu suất dễ dự đoán hơn. Đừng sử dụng cả hai trong cùng một yêu cầu.
+5. **Gemini 3 có hỗ trợ Batch API không?** Có, Gemini 3 hỗ trợ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi).
+6. **Context Caching có được hỗ trợ không?** Có, Gemini 3 có hỗ trợ tính năng [Lưu trữ bối cảnh](https://ai.google.dev/gemini-api/docs/caching?hl=vi).
+7. **Gemini 3 hỗ trợ những công cụ nào?** Gemini 3 hỗ trợ [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Kết nối với Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi), [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi), [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) và [Ngữ cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi). Công cụ này cũng hỗ trợ [Tính năng gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) tiêu chuẩn cho các công cụ tuỳ chỉnh của riêng bạn và [kết hợp với các công cụ tích hợp sẵn](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
+8. **`gemini-3.1-pro-preview-customtools` là gì?** Nếu bạn đang sử dụng `gemini-3.1-pro-preview` và mô hình này bỏ qua các công cụ tuỳ chỉnh của bạn để ưu tiên các lệnh bash, hãy thử mô hình `gemini-3.1-pro-preview-customtools`.
+   Xem thêm thông tin [tại đây][customtools-model].
 
-ส่งความคิดเห็น
+Gửi ý kiến phản hồi
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-อัปเดตล่าสุด 2026-06-22 UTC
+Cập nhật lần gần đây nhất: 2026-06-22 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-22 UTC"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-22 UTC."],[],[]]

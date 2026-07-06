@@ -1,229 +1,207 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=pt-BR
-fetched_at: 2026-06-29T05:39:42.991570+00:00
-title: "Criar apps no Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ar
+fetched_at: 2026-07-06T05:21:42.472850+00:00
+title: "\u0625\u0646\u0634\u0627\u0621 \u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0641\u064a Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Envie comentários
+إرسال ملاحظات
 
-# Criar apps no Google AI Studio
+# إنشاء تطبيقات في Google AI Studio
 
-Esta página descreve como usar o Google AI Studio para criar (ou "vibe
-code") e implantar rapidamente apps que testam os recursos mais recentes do Gemini, como o
-[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=pt-br) e a [API
-Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br). O Google AI Studio permite criar **apps da Web** com ambientes de execução full stack e **apps Android nativos** com Kotlin e Jetpack Compose, tudo isso usando comandos em linguagem natural.
+توضّح هذه الصفحة كيفية استخدام Google AI Studio لإنشاء التطبيقات ونشرها بسرعة (أو "البرمجة الوصفية") التي تختبر أحدث إمكانات Gemini، مثل
+[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) و[Live
+API](https://ai.google.dev/gemini-api/docs/live?hl=ar). يتيح Google AI Studio إنشاء **تطبيقات ويب** باستخدام أوقات تشغيل كاملة المكدس و**تطبيقات Android أصلية** باستخدام Kotlin وJetpack Compose، وكل ذلك من خلال طلبات باللغة الطبيعية.
 
-## Primeiros passos
+## البدء
 
-Comece a programar no [modo de criação](https://aistudio.google.com/apps?hl=pt-br) do Google AI Studio. Você pode
-começar a criar de algumas maneiras:
+ابدأ البرمجة الوصفية في وضع "[الإنشاء](https://aistudio.google.com/apps?hl=ar)" في Google AI Studio. يمكنك البدء في الإنشاء بعدة طرق:
 
-- **Comece com um comando**: no modo de criação, use a caixa de entrada para inserir uma descrição do que você quer criar. Selecione "Chips de IA" para adicionar recursos específicos, como geração de imagens ou dados do Google Maps, ao seu comando. Você pode
-  até dizer o que quer usando o botão de conversão de voz em texto.
-- **Botão "Estou com sorte"**: se você precisar de uma faísca de criatividade, use o botão "Estou com sorte". O Gemini vai gerar um comando com uma ideia de projeto para você começar.
-- **Remixar um projeto da galeria**: abra um projeto na [Galeria de
-  apps](https://aistudio.google.com/apps?source=showcase&hl=pt-br) e selecione **Copiar app**.
+- **البدء بطلب**: في وضع "الإنشاء"، استخدِم مربّع الإدخال لإدخال
+  وصف لما تريد إنشاؤه. اختَر "شرائح الذكاء الاصطناعي" لإضافة ميزات معيّنة، مثل إنشاء الصور أو بيانات "خرائط Google"، إلى طلبك. يمكنك حتى قول ما تريده باستخدام زر تحويل الكلام إلى نص.
+- **زر "ضربة حظ"**: إذا كنت بحاجة إلى إطلاق العنان لإبداعك، استخدِم زر "ضربة حظ"، وسينشئ Gemini طلبًا يتضمّن فكرة مشروع لمساعدتك في البدء.
+- **إعادة مزج مشروع من المعرض**: افتح مشروعًا من [معرض
+  التطبيقات](https://aistudio.google.com/apps?source=showcase&hl=ar) وانقر على **نسخ التطبيق**.
 
-Depois de executar o comando, o código e os arquivos necessários serão gerados, com uma prévia em tempo real do seu app aparecendo no lado direito.
+بعد تشغيل الطلب، ستظهر لك التعليمات البرمجية والملفات اللازمة التي يتم إنشاؤها، مع معاينة مباشرة لتطبيقك على الجانب الأيسر.
 
-## O que é criado?
+## ما الذي يتم إنشاؤه؟
 
-Quando você executa o comando, o AI Studio cria um aplicativo completo. Você pode
-criar um **app da Web** ou um **app Android nativo** usando o seletor
-de plataforma.
+عند تشغيل طلبك، ينشئ AI Studio تطبيقًا كاملاً. يمكنك اختيار إنشاء **تطبيق ويب** أو **تطبيق Android أصلي** باستخدام أداة اختيار النظام الأساسي.
 
-Para **apps da Web** (padrão), o AI Studio cria um ambiente full stack que inclui:
+بالنسبة إلى **تطبيقات الويب** (الإعداد التلقائي)، ينشئ AI Studio بيئة كاملة المكدس تتضمّن ما يلي:
 
-- **Do lado do cliente**: um front-end da Web (o React é o padrão).
-- **Do lado do servidor**: um ambiente de execução do Node.js que permite chamadas de API seguras, conexões de banco de dados e uso de pacotes npm.
+- **من جهة العميل**: واجهة أمامية للويب (React هي الإعداد التلقائي)
+- **من جهة الخادم**: وقت تشغيل Node.js يتيح إجراء طلبات آمنة لواجهة برمجة التطبيقات،
+  الاتصال بقواعد البيانات واستخدام حِزم npm.
 
-Para **apps Android**, o AI Studio gera um projeto em Kotlin e Jetpack Compose que pode ser visualizado em um emulador baseado em navegador, instalado em um dispositivo físico e publicado na Google Play Store para testes. [Saiba mais sobre como criar apps
-Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=pt-br).
+بالنسبة إلى **تطبيقات Android**، ينشئ AI Studio مشروعًا باستخدام Kotlin وJetpack Compose يمكنك معاينته في محاكي مستند إلى المتصفّح وتثبيته على جهاز فعلي، ونشره على متجر Play للاختبار. [مزيد من المعلومات عن إنشاء تطبيقات Android
+apps](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ar).
 
-Para ver o código gerado, selecione a guia **Código** no painel de visualização à direita. O **Antigravity Agent** gerencia de forma inteligente
-vários arquivos em toda a sua pilha, garantindo que as mudanças sejam propagadas
-corretamente.
+يمكنك الاطّلاع على الرمز الذي يتم إنشاؤه من خلال النقر على علامة التبويب **الرمز** في لوحة المعاينة على الجانب الأيسر. يدير **برنامج Antigravity Agent** بذكاء ملفات متعدّدة على مستوى المكدس، ما يضمن نشر التغييرات بشكل صحيح.
 
-### O agente do Antigravity
+### برنامج Antigravity Agent
 
-O **Agente Antigravity** é a principal funcionalidade de IA no [Google Antigravity](https://antigravity.google?hl=pt-br). Agora, os componentes principais do conector do agente estão alimentando a experiência do modo de criação no Google AI Studio. Ele vai além da simples geração de código, mantendo o contexto de todo o projeto, gerenciando vários arquivos e entendendo instruções complexas para criar aplicativos full-stack robustos.
+‫**Antigravity Agent** هي وظيفة الذكاء الاصطناعي الرئيسية في [Google
+Antigravity](https://antigravity.google?hl=ar)، وتعمل الآن المكوّنات الأساسية لأداة البرنامج على تشغيل تجربة وضع "الإنشاء" في Google AI Studio. يتجاوز هذا البرنامج مجرد إنشاء الرموز البرمجية البسيطة من خلال الحفاظ على سياق مشروعك بالكامل وإدارة ملفات متعدّدة وفهم التعليمات المعقّدة لإنشاء تطبيقات قوية وكاملة المكدس.
 
-As principais capacidades incluem:
+تشمل الإمكانات الرئيسية ما يلي:
 
-- **Consciência de contexto**: mantém o contexto de comandos e estados de arquivos anteriores.
-- **Gerenciamento de vários arquivos**: processa dependências em vários arquivos.
-- **Execução verificada**: verifica atualizações de código para reduzir alucinações.
+- **الوعي بالسياق**: يحافظ على سياق الطلبات السابقة وحالات الملفات.
+- **إدارة ملفات متعدّدة**: يعالج التبعيات في ملفات متعدّدة.
+- **التنفيذ الذي تم التحقّق منه**: يتحقّق من تعديلات الرمز لتقليل الأخطاء.
 
-## Recursos de pilha completa
+## إمكانات كاملة المكدس
 
-O Google AI Studio libera o poder do ecossistema da Web moderna, permitindo que você crie mais do que apenas protótipos do lado do cliente.
+يطلق Google AI Studio العنان لقوة النظام الإيكولوجي الحديث للويب، ما يتيح لك إنشاء أكثر من مجرد نماذج أولية من جهة العميل.
 
-- **Tempo de execução do lado do servidor e npm**: use a vasta biblioteca de pacotes npm. O
-  agente vai identificar e instalar automaticamente os pacotes conforme necessário para seu
-  app (por exemplo, bibliotecas específicas para visualização de dados ou clientes de API). Você
-  também pode solicitar pacotes específicos, se quiser.
-- **Gerenciamento de secrets**: armazene chaves de API e secrets com segurança no menu **Configurações**. Eles ficam acessíveis no código do lado do servidor, protegendo-os contra exposição do lado do cliente.
-- **Multiplayer**: crie experiências colaborativas em tempo real diretamente no AI Studio. O ambiente de execução do lado do servidor gerencia o estado e as conexões necessárias
-  para que os usuários interajam entre si.
-- **Firebase Firestore e Authentication**: provisiona e configura automaticamente o Firebase,
-  incluindo o banco de dados do Firestore (armazenamento de dados persistentes) e
-  o Firebase Authentication (fluxos de login, especificamente "Fazer login com o Google").
-  O agente gerencia todo o processo de configuração e até mesmo escreve o código no seu
-  app para esses serviços.
-- **Integrações com o Google Workspace**: conecte seu app às APIs do Google Workspace, como Gmail, Planilhas, Documentos, Drive, Agenda e muito mais. O AI Studio processa
-  toda a configuração do OAuth automaticamente.
+- **وقت التشغيل من جهة الخادم وnpm**: استخدِم المكتبة الواسعة لحِزم npm. سيحدّد البرنامج الحِزم ويثبّتها تلقائيًا حسب الحاجة لتطبيقك (مثل مكتبات معيّنة لتصوّر البيانات أو برامج واجهة برمجة التطبيقات من جهة العميل). يمكنك أيضًا طلب حِزم معيّنة إذا أردت ذلك.
+- **إدارة الأسرار**: يمكنك تخزين مفاتيح واجهة برمجة التطبيقات والأسرار بشكل آمن في قائمة
+  **الإعدادات**. يمكن الوصول إلى هذه العناصر في الرمز من جهة الخادم، ما يحافظ على أمانها من العرض من جهة العميل.
+- **وضع اللاعبين المتعدّدين**: يمكنك إنشاء تجارب تعاونية في الوقت الفعلي مباشرةً في
+  AI Studio. يدير وقت التشغيل من جهة الخادم الحالة والاتصالات المطلوبة لكي يتفاعل المستخدمون معًا.
+- **Firebase Firestore ومصادقة Firebase**: يمكنك توفير Firebase وإعداده تلقائيًا،
+  بما في ذلك قاعدة بيانات Firestore (تخزين البيانات المستمر) و
+  مصادقة Firebase (عمليات تسجيل الدخول، وتحديدًا "تسجيل الدخول باستخدام حساب Google").
+  يتولّى البرنامج عملية الإعداد بالكامل ويكتب الرمز في تطبيقك لهذه الخدمات.
+- **عمليات الدمج مع Google Workspace**: يمكنك ربط تطبيقك بواجهات برمجة تطبيقات Google Workspace
+  ، مثل Gmail و"جداول بيانات Google" و"مستندات Google" وDrive و"تقويم Google" وغير ذلك. يتولّى AI Studio جميع عمليات إعداد OAuth تلقائيًا.
 
-[Saiba mais sobre o desenvolvimento de apps full-stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=pt-br)
+[مزيد من المعلومات عن تطوير تطبيقات كاملة المكدس](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ar)
 
-### Apps Android
+### تطبيقات Android
 
-Você também pode criar apps Android nativos usando Kotlin e Jetpack Compose.
-Visualize o app em um emulador do Android baseado em navegador, instale-o em um dispositivo físico usando o adb no navegador e publique na Google Play Store para testes internos.
+يمكنك أيضًا إنشاء تطبيقات Android أصلية باستخدام Kotlin وJetpack Compose.
+يمكنك معاينة تطبيقك في محاكي Android مستند إلى المتصفّح وتثبيته على جهاز فعلي باستخدام ADB في المتصفّح ونشره على متجر Play للاختبار الداخلي.
 
-[Saiba mais sobre como criar apps Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=pt-br)
+[مزيد من المعلومات عن إنشاء تطبيقات Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ar)
 
-## Continuar criando
+## متابعة الإنشاء
 
-Depois que o Google AI Studio gerar o código inicial do seu aplicativo, você poderá continuar refinando-o:
+بعد أن ينشئ Google AI Studio الرمز الأوّلي لتطبيقك، يمكنك مواصلة تحسينه:
 
-### Crie no Google AI Studio
+### الإنشاء في Google AI Studio
 
-- **Iterar com o Gemini**: use o painel de chat no **Modo de criação** para pedir ao Gemini
-  que faça modificações, adicione novos recursos ou mude o estilo.
-- **Edite o código diretamente**: abra a **guia "Código"** no painel de visualização para
-  fazer edições em tempo real.
+- **التكرار باستخدام Gemini**: استخدِم لوحة المحادثة في **وضع "الإنشاء"** لطلب إجراء تعديلات أو إضافة ميزات جديدة أو تغيير التصميم من Gemini.
+- **تعديل الرمز مباشرةً**: افتح **علامة التبويب "الرمز"** في لوحة المعاينة لإجراء
+  تعديلات مباشرة.
 
-### Desenvolver externamente
+### التطوير خارجيًا
 
-Para fluxos de trabalho mais avançados, exporte o código e trabalhe no ambiente de sua preferência:
+بالنسبة إلى مهام العمل الأكثر تقدمًا، يمكنك تصدير الرمز والعمل في البيئة المفضّلة لديك:
 
-- **Baixar e desenvolver localmente**: exporte o código gerado como um **arquivo
-  ZIP** e importe-o para seu editor de código.
-- **Enviar para o GitHub**: integre o código aos seus processos de desenvolvimento e
-  implantação atuais enviando-o para um **repositório do GitHub**.
+- **التنزيل والتطوير محليًا**: يمكنك تصدير الرمز الذي تم إنشاؤه كـ **ملف
+  ZIP** واستيراده إلى أداة تعديل الرموز.
+- **الإرسال إلى GitHub**: يمكنك دمج الرمز مع عمليات التطوير والنشر الحالية من خلال إرساله إلى **مستودع GitHub**.
 
-## Principais recursos
+## الميزات الرئيسية
 
-O Google AI Studio inclui vários recursos para tornar o processo de criação
-intuitivo e visual:
+يتضمّن Google AI Studio عدة ميزات لجعل عملية الإنشاء سهلة ومرئية:
 
-- **Crie e itere em apps de pilha completa**: crie apps de pilha completa com apenas um comando e itere no chat ou no **modo de anotação**. O modo de anotação
-  permite destacar qualquer parte da interface do app e descrever a
-  mudança desejada.
-- **Compartilhe e implante seu app**: você pode compartilhar suas criações com outras pessoas para
-  colaborar ou mostrar seu trabalho. Ao compartilhar, as chamadas de API são contabilizadas nos seus limites de uso. Se você usar modelos pagos, poderão ser aplicadas cobranças. Depois, quando o app estiver
-  pronto, implante no Cloud Run.
-- **Galeria de apps**: a galeria de apps oferece uma biblioteca visual de ideias de projetos.
-  Você pode navegar pelas possibilidades do Gemini, testar aplicativos instantaneamente e
-  fazer remix para criar algo seu.
+- **إنشاء تطبيقات كاملة المكدس وتكرارها**: يمكنك إنشاء تطبيقات كاملة المكدس باستخدام
+  طلب فقط وتكرارها من خلال المحادثة أو **وضع التعليقات التوضيحية**. يتيح لك وضع التعليقات التوضيحية تمييز أي جزء من واجهة مستخدم تطبيقك ووصف التغيير الذي تريده.
+- **مشاركة تطبيقك ونشره**: يمكنك مشاركة إبداعاتك مع الآخرين للـ
+  تعاون أو عرض عملك. عند المشاركة، يتم احتساب طلبات واجهة برمجة التطبيقات ضمن حدود الاستخدام. قد يتم فرض رسوم إذا كنت تستخدم نماذج مدفوعة. بعد ذلك، عندما يصبح تطبيقك جاهزًا، يمكنك نشره على Cloud Run.
+- **معرض التطبيقات**: يوفّر "معرض التطبيقات" مكتبة مرئية لأفكار المشاريع.
+  يمكنك تصفّح الإمكانات المتاحة باستخدام Gemini ومعاينة التطبيقات على الفور وإعادة مزجها لتخصيصها.
 
-## Implantar ou arquivar o app
+## نشر تطبيقك أو أرشفته
 
-Quando o aplicativo estiver pronto, você poderá implantá-lo:
+بعد أن يصبح تطبيقك جاهزًا، يمكنك نشره:
 
-- **Cloud Run**: implante seu aplicativo como um serviço escalonável.
-  Os preços do [Google Cloud Run](https://cloud.google.com/run?hl=pt-br) podem ser aplicados com base no uso. Para saber mais sobre a implantação, consulte
-  [Implantar no Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=pt-br).
-- **GitHub**: exporte seu projeto para um repositório do GitHub.
+- **Cloud Run**: يمكنك نشر تطبيقك كخدمة قابلة للتوسّع.
+  قد يتم فرض رسوم على [Google Cloud Run](https://cloud.google.com/run?hl=ar) استنادًا
+  إلى الاستخدام. لمزيد من المعلومات عن النشر، يُرجى الاطّلاع على مقالة
+  [النشر من Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ar).
+- **GitHub**: يمكنك تصدير مشروعك إلى مستودع GitHub.
 
-## Limitações
+## القيود
 
-Esta seção lista as limitações atuais do modo de criação no Google AI Studio.
+يسرد هذا القسم القيود الحالية لوضع "الإنشاء" في Google AI Studio.
 
-### Gerenciamento de chaves de API
+### إدارة مفتاح واجهة برمجة التطبيقات
 
-Quando você cria um app que usa a API Gemini, o AI Studio configura automaticamente
-sua chave de API Gemini como um segredo no ambiente do lado do servidor do app.
-Você pode ver e gerenciar essa chave no painel **Secrets**.
+عند إنشاء تطبيق جديد يستخدم Gemini API، يضبط AI Studio تلقائيًا مفتاح Gemini API كسرّ في بيئة الخادم من جهة التطبيق.
+يمكنك الاطّلاع على هذا المفتاح وإدارته في لوحة **الأسرار**.
 
-- **Configuração automática**: seu `GEMINI_API_KEY` é configurado para você. Não é necessário fazer configurações manuais para começar a criar.
-- **Somente do lado do servidor**: as chaves de API são injetadas no tempo de execução do lado do servidor e nunca são incluídas no código do lado do cliente.
-- **Apps atuais**: para apps criados antes de 14 de maio de 2026, o agente vai
-  atualizar automaticamente a integração da API Gemini para a abordagem
-  recomendada do lado do servidor na próxima vez que você modificar os recursos do Gemini no app.
+- **الإعداد التلقائي**: يتم إعداد `GEMINI_API_KEY` لك، ولا يلزم إجراء أي إعداد يدوي
+  لبدء الإنشاء.
+- **من جهة الخادم فقط**: يتم إدخال مفاتيح واجهة برمجة التطبيقات في وقت التشغيل من جهة الخادم و
+  لا يتم تضمينها مطلقًا في الرمز من جهة العميل.
+- **التطبيقات الحالية**: بالنسبة إلى التطبيقات التي تم إنشاؤها قبل 14 مايو 2026، سيُجري البرنامج
+  تلقائيًا ترقية لعملية دمج Gemini API إلى الطريقة المقترَحة من جهة
+  الخادم في المرة التالية التي تعدّل فيها ميزات Gemini في التطبيق.
 
-### Implantação fora do Google AI Studio
+### النشر خارج Google AI Studio
 
-- **Cloud Run**: quando você implanta no Cloud Run pelo AI Studio, a chave de API é
-  incluída com segurança no ambiente do lado do servidor. O app implantado vai usar
-  sua chave de API para todas as chamadas da API Gemini dos usuários.
-- **Download do ZIP**: se você baixar o app como um arquivo ZIP para executá-lo
-  em outro lugar, será necessário configurar a variável de ambiente `GEMINI_API_KEY`
-  no ambiente de hospedagem. Como as chamadas da API Gemini do seu app são feitas com
-  código do lado do servidor, a chave não é exposta aos usuários finais.
+- **Cloud Run**: عند النشر على Cloud Run من AI Studio، يتم
+  تضمين مفتاح واجهة برمجة التطبيقات بشكل آمن في بيئة الخادم من جهة الخادم. سيستخدم التطبيق الذي تم نشره مفتاح واجهة برمجة التطبيقات لجميع طلبات Gemini API الخاصة بالمستخدمين.
+- **تنزيل ملف ZIP**: إذا نزّلت تطبيقك كملف ZIP لتشغيله
+  في مكان آخر، عليك إعداد متغيّر البيئة `GEMINI_API_KEY`
+  في بيئة الاستضافة. بما أنّ طلبات Gemini API الخاصة بتطبيقك يتم إجراؤها من الرمز من جهة الخادم، لا يتم عرض المفتاح للمستخدمين النهائيين.
 
-### Erro ao compartilhar apps
+### حدث خطأ عند مشاركة التطبيقات
 
-Se você compartilhar o app e o usuário final encontrar um erro **403 Acesso restrito**
-ao usar o URL compartilhado, isso pode ser devido a um dos seguintes motivos:
+إذا شاركت تطبيقك وظهر للمستخدم النهائي خطأ **403 تم حظر الوصول** عند استخدام عنوان URL الذي تمت مشاركته، قد يرجع ذلك إلى أحد الأسباب التالية:
 
-- **Extensões do navegador**: extensões de privacidade, como o Privacy Badger, podem estar bloqueando o app. Desative a extensão para evitar o erro.
-- **Problemas de build**: pode haver problemas com o código atual. Peça ao
-  agente para "corrigir problemas de build com o código atual" e compartilhe o
-  URL novamente.
+- **إضافات المتصفّح**: قد تحظر إضافات الخصوصية، مثل Privacy Badger، التطبيق. عليك إيقاف الإضافة لتجنُّب الخطأ.
+- **مشاكل في الإنشاء**: قد تكون هناك مشاكل في الرمز الحالي. اطلب من البرنامج "إصلاح أي مشاكل في الإنشاء في الرمز الحالي"، ثم أعد مشاركة عنوان URL.
 
-## Perguntas frequentes
+## الأسئلة الشائعة
 
-### O que é o recurso "Criar no AI Studio"?
+### ما هو وضع "الإنشاء" في AI Studio؟
 
-O AI Studio Build é uma plataforma criada para transformar um comando simples em um aplicativo pronto para produção e com tecnologia de IA usando o Gemini. Descreva o que você quer criar com um comando, e o Gemini vai gerar um app para você. Você também pode acessar nossa galeria para conferir o que é possível fazer com a API Gemini e remixar apps para personalizar.
+وضع "الإنشاء" في AI Studio هو منصة مصمّمة لنقلك من طلب بسيط إلى تطبيق مستنِد إلى الذكاء الاصطناعي وجاهز للإنتاج باستخدام Gemini. يمكنك وصف ما تريد إنشاؤه باستخدام طلب، وسينشئ Gemini تطبيقًا لك. يمكنك أيضًا استكشاف المعرض للاطّلاع على الإمكانات المتاحة باستخدام Gemini API وإعادة مزج التطبيقات لتخصيصها.
 
-### Como o Build trata minha chave da API Gemini?
+### كيف يتعامل وضع "الإنشاء" مع مفتاح Gemini API؟
 
-Quando você cria um app que usa a API Gemini, o AI Studio configura automaticamente
-sua chave de API Gemini como um segredo do lado do servidor. As chamadas da API Gemini do seu app são feitas com código do lado do servidor usando essa chave. Portanto, ela nunca é exposta no navegador. É possível conferir sua chave de API no painel **Secrets** em
-Configurações.
+عند إنشاء تطبيق يستخدم Gemini API، يضبط AI Studio تلقائيًا مفتاح Gemini API كسرّ من جهة الخادم. يتم إجراء طلبات Gemini API الخاصة بتطبيقك من الرمز من جهة الخادم باستخدام هذا المفتاح، لذا لا يتم عرضه مطلقًا في المتصفّح. يمكنك الاطّلاع على مفتاح واجهة برمجة التطبيقات في لوحة **الأسرار** في "الإعدادات".
 
-### Minha chave de API fica exposta ao compartilhar apps?
+### هل يتم عرض مفتاح واجهة برمجة التطبيقات عند مشاركة التطبيقات؟
 
-Não. Sua chave de API é armazenada como um secret do lado do servidor e nunca é incluída no código do lado do cliente. Quando você compartilha seu app, outros usuários podem usá-lo, mas não podem ver sua chave de API.
+لا، يتم تخزين مفتاح واجهة برمجة التطبيقات كسرّ من جهة الخادم ولا يتم تضمينه مطلقًا في الرمز من جهة العميل. عند مشاركة تطبيقك، يمكن للمستخدمين الآخرين استخدامه، ولكن لا يمكنهم الاطّلاع على مفتاح واجهة برمجة التطبيقات.
 
-Ao compartilhar seus apps com outras pessoas, as chamadas de API contam para seus limites de uso.
-Se você usar modelos pagos, poderão ser aplicadas cobranças. O AI Studio vai avisar durante a configuração e antes do compartilhamento se o app pode gerar custos.
+عند مشاركة تطبيقاتك مع الآخرين، يتم احتساب طلبات واجهة برمجة التطبيقات ضمن حدود الاستخدام.
+قد يتم فرض رسوم إذا كنت تستخدم نماذج مدفوعة. سيُعلمك AI Studio أثناء الإعداد وقبل المشاركة إذا كان تطبيقك قد يتكبّد تكاليف.
 
-### Quem pode ver meus apps?
+### مَن يمكنه الاطّلاع على تطبيقاتي؟
 
-Por padrão, seu app é particular. Você pode compartilhar seu app com outros usuários para
-que eles possam usá-lo. Os usuários com quem você compartilha seu app podem ver e bifurcar o código
-para fins próprios. Se você compartilhar seu app com permissão de edição, os
-outros usuários poderão editar o código dele.
+يكون تطبيقك خاصًا بشكل تلقائي. يمكنك مشاركة تطبيقك مع مستخدمين آخرين للسماح لهم باستخدامه. يمكن للمستخدمين الذين تشارك معهم تطبيقك الاطّلاع على الرمز الخاص به وإنشاء نسخة منه لأغراضهم الخاصة. إذا شاركت تطبيقك مع إذن التعديل، يمكن للمستخدمين الآخرين تعديل رمز تطبيقك.
 
-### Posso executar apps fora do AI Studio?
+### هل يمكنني تشغيل التطبيقات خارج AI Studio؟
 
-Sim. É possível implantar seu app no
-[Cloud Run](https://cloud.google.com/run?hl=pt-br) pelo AI Studio, o que
-dá ao app um URL público com sua chave de API configurada com segurança no
-ambiente do lado do servidor. Você também pode baixar o app como um arquivo ZIP e
-hospedá-lo em outro lugar. Para isso, defina a variável de ambiente `GEMINI_API_KEY` no ambiente
-de hospedagem. Como as chamadas da API Gemini são feitas no código do lado do servidor, sua chave permanece segura.
+نعم. يمكنك نشر تطبيقك على
+[Cloud Run](https://cloud.google.com/run?hl=ar) من AI Studio، ما
+يمنح تطبيقك عنوان URL علنيًا مع إعداد مفتاح واجهة برمجة التطبيقات بشكل آمن في
+بيئة الخادم من جهة الخادم. يمكنك أيضًا تنزيل تطبيقك كملف ZIP واستضافته في مكان آخر، ولكن عليك ضبط متغيّر البيئة `GEMINI_API_KEY` في بيئة الاستضافة. بما أنّ طلبات Gemini API يتم إجراؤها من الرمز من جهة الخادم، يظل مفتاحك آمنًا.
 
-Para saber mais sobre as opções de implantação, consulte [Implantar do Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=pt-br).
+لمزيد من المعلومات عن خيارات النشر، يُرجى الاطّلاع على مقالة [النشر من Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ar).
 
-### Posso desenvolver apps localmente com minhas próprias ferramentas e depois compartilhá-los aqui?
+### هل يمكنني تطوير التطبيقات محليًا باستخدام أدواتي الخاصة ثم مشاركتها هنا؟
 
-Essa funcionalidade ainda não está disponível. Estamos animados para oferecer suporte a mais casos de uso de apps no futuro. Envie feedback se tiver algo específico em mente.
+هذه الوظيفة غير متاحة بعد. نحن متحمّسون لإتاحة المزيد من حالات استخدام التطبيقات في المستقبل. يُرجى تقديم ملاحظاتك إذا كان لديك أي شيء محدّد في ذهنك.
 
-### Como posso usar um banco de dados ou outro armazenamento com meus apps?
+### كيف يمكنني استخدام قاعدة بيانات أو مساحة تخزين أخرى مع تطبيقاتي؟
 
-Os apps do AI Studio são apps padrão executados em um contêiner do Cloud Run. Você pode usar qualquer solução de armazenamento que possa ser conectada por uma rede, desde que não haja um firewall impedindo o acesso de um intervalo de IP dinâmico.
+تطبيقات AI Studio هي تطبيقات عادية يتم تشغيلها في حاوية Cloud Run. يمكنك استخدام أي حلّ تخزين يمكنك الاتصال به عبر شبكة، طالما لا يوجد جدار حماية يمنع الوصول من نطاق عنوان IP ديناميكي.
 
-Estamos trabalhando para adicionar suporte direto ao armazenamento no futuro, que você poderá configurar diretamente no AI Studio.
+نحن نعمل على إضافة دعم مباشر لمساحة التخزين في المستقبل، وستتمكّن من إعدادها مباشرةً في AI Studio.
 
-### Como posso acessar o microfone, a webcam e outras APIs do navegador?
+### كيف يمكنني الوصول إلى الميكروفون وكاميرا الويب وواجهات برمجة تطبيقات Navigator الأخرى؟
 
-Para garantir que os espectadores estejam cientes do uso da webcam ou de outros dispositivos por um app, exigimos uma confirmação extra antes que o app possa acessar essas [APIs Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
-Os criadores de apps podem adicionar essas solicitações de permissão ao arquivo
-`metadata.json` do app. Exemplo:
+لضمان علم المشاهدين باستخدام التطبيق لكاميرا الويب أو الأجهزة الأخرى
+، نطلب إقرارًا إضافيًا قبل أن يتمكّن التطبيق من الوصول إلى
+واجهات برمجة تطبيقات [Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) هذه.
+يمكن لمُنشئي التطبيقات إضافة طلبات الأذونات هذه إلى ملف `metadata.json` الخاص بتطبيقهم. على سبيل المثال:
 
 ```
 {
@@ -241,60 +219,65 @@ Os criadores de apps podem adicionar essas solicitações de permissão ao arqui
 }
 ```
 
-Os valores aceitos para `requestFramePermissions` são um subconjunto dos [recursos padrão controlados por política](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
+القيم المسموح بها لـ `requestFramePermissions` هي مجموعة فرعية من الـ
+ميزات العادية التي تتحكّم فيها [السياسة](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
 
-### Como posso usar o GitHub com meus apps?
+### كيف يمكنني استخدام GitHub مع تطبيقاتي؟
 
-Com a integração do GitHub no AI Studio, você pode criar um repositório para seu
-trabalho e confirmar as mudanças mais recentes. No momento, não é possível extrair mudanças remotas.
+يتيح لك التكامل مع GitHub في AI Studio إنشاء مستودع لعملك وإجراء تغييراتك الأخيرة. لا نتيح حاليًا جلب التغييرات عن بُعد.
 
-### Posso dar acesso de edição do meu app a outros usuários?
+### هل يمكنني منح مستخدمين آخرين إذن تعديل تطبيقي؟
 
-Ainda não há suporte para isso, mas o recurso será lançado em breve.
+هذه الميزة غير متاحة بعد، ولكن سيتم إتاحتها قريبًا.
 
-### Por que meu app foi sinalizado por violação da política?
+### لماذا تم وضع علامة على تطبيقي بسبب انتهاك السياسة؟
 
-Temos sistemas que analisam automaticamente os apps para garantir que eles obedeçam às nossas políticas. Se descobrirmos que um app viola nossas políticas, ele será removido do AI Studio. As violações de política podem incluir, entre outros:
+لدينا أنظمة تراجع التطبيقات تلقائيًا لضمان امتثالها لسياساتنا. إذا تبيّن لنا أنّ تطبيقًا يخالف سياساتنا، ستتم إزالته من AI Studio. يمكن أن تشمل انتهاكات السياسات، على سبيل المثال لا الحصر، ما يلي:
 
-- Apps que contêm malware, phishing ou falsificação de identidade
-- Apps que mostram ou distribuem conteúdo que viola a política sobre imagens de abuso sexual infantil
-- Apps que mostram ou distribuem conteúdo que viola a política contra assédio
-- Apps que mostram ou distribuem conteúdo que viola a política contra discurso de ódio
-- Apps que mostram ou distribuem conteúdo que viola a política contra tráfico de pessoas
-- Apps que mostram ou distribuem conteúdo que viola a política contra conteúdo sexualmente explícito
-- Apps que mostram ou distribuem conteúdo que viola a política contra violência e imagens sangrentas
-- Apps que mostram ou distribuem conteúdo que viola a política contra conteúdo nocivo ou perigoso
+- التطبيقات التي تحتوي على برامج ضارة أو تصيّد احتيالي أو انتحال هوية
+- التطبيقات التي تعرض أو توزع محتوًى يخالف سياسة صور الاعتداء الجنسي على الأطفال
+- التطبيقات التي تعرض أو توزع محتوًى يخالف سياسة التحرّش
+- التطبيقات التي تعرض أو توزع محتوًى يخالف سياسة الكلام الذي يحضّ على الكراهية
+- التطبيقات التي تعرض أو توزع محتوًى يخالف سياسة الاتجار بالبشر
+- التطبيقات التي تعرض أو توزع محتوًى يخالف سياسة المحتوى الجنسي الفاضح
+- التطبيقات التي تعرض أو توزع محتوًى يخالف سياسة المحتوى العنيف والدموي
+- التطبيقات التي تعرض أو توزع محتوًى يخالف سياسة المحتوى الضار أو الخطير
 
-Se o app foi sinalizado por violação de política e você acredita que houve um erro, envie uma contestação. Violações recorrentes das nossas políticas podem resultar no encerramento do seu acesso ao AI Studio.
+إذا تم وضع علامة على تطبيقك بسبب انتهاك السياسة، وكنت تعتقد أنّ ذلك حدث عن طريق الخطأ، يمكنك إرسال طلب بإعادة النظر. قد تؤدي الانتهاكات المتكرّرة لسياساتنا إلى إنهاء إمكانية وصولك إلى AI Studio.
 
-### Quais são minhas responsabilidades como desenvolvedor de apps?
+### ما هي مسؤولياتي بصفتي مطوّر تطبيقات؟
 
-Como proprietário do aplicativo, você é responsável pelo comportamento dele e por todos os dados que ele processa. Isso inclui:
+للتذكير، بصفتك مالك تطبيقك، أنت مسؤول عن سلوكه وجميع البيانات التي يعالجها. يشمل ذلك ما يلي:
 
-- **Conformidade legal e direitos de terceiros**:garantir que seu app esteja em conformidade com todas as leis e regulamentações aplicáveis e não viole os direitos de outras pessoas, incluindo direitos de propriedade intelectual e direitos de privacidade.
-- **Monitoramento de conteúdo**:a conformidade com termos adicionais pode se aplicar a outros serviços usados pelo seu app. Por exemplo, os [Termos de Serviço do Google Cloud](https://cloud.google.com/terms?hl=pt-br), aplicáveis ao Firestore, exigem que os clientes que hospedam conteúdo de terceiros publiquem políticas que definam o que é proibido (por exemplo, conteúdo ilegal) e monitorem a presença desse conteúdo.
-- **Implementação segura**:implemente as proteções e ferramentas de moderação necessárias para evitar o uso indevido do aplicativo.
+- **الامتثال للقوانين وحقوق الأطراف الثالثة:** يجب التأكّد من امتثال تطبيقك لجميع القوانين واللوائح السارية وعدم انتهاك حقوق الآخرين، بما في ذلك حقوق الملكية الفكرية وحقوق الخصوصية.
+- **رصد المحتوى:** قد تنطبق بنود إضافية على
+  الخدمات الأخرى التي يستخدمها تطبيقك. على سبيل المثال،
+  [تتطلب بنود خدمة Google Cloud](https://cloud.google.com/terms?hl=ar)،
+  السارية على Firestore، من العملاء الذين يستضيفون محتوًى تابعًا لجهة خارجية
+  نشر سياسات تحدّد المحتوى المحظور (مثل المحتوى غير
+  القانوني) ورصد هذا المحتوى غير القانوني.
+- **التنفيذ الآمن:** يجب تنفيذ الضمانات وأدوات الإشراف اللازمة لمنع إساءة استخدام تطبيقك.
 
-Conheça as [restrições de uso](https://ai.google.dev/gemini-api/terms?hl=pt-br#use-restrictions) nos Termos de Serviço.
+[يُرجى العِلم بقيود الاستخدام في بنود الخدمة.](https://ai.google.dev/gemini-api/terms?hl=ar#use-restrictions)
 
-### Quais termos se aplicam aos apps na galeria de apps do AI Studio?
+### ما هي البنود السارية على التطبيقات في "معرض التطبيقات" في AI Studio؟
 
-Os [Termos Adicionais de Serviço da API Gemini](https://ai.google.dev/gemini-api/terms?hl=pt-br)
-se aplicam ao uso dos apps mostrados na Galeria de Apps do AI Studio, a menos que
-indicado de outra forma.
+تنطبق [بنود الخدمة الإضافية الخاصة بـ Gemini API](https://ai.google.dev/gemini-api/terms?hl=ar)
+على استخدام التطبيقات المعروضة في "معرض التطبيقات" في AI Studio، ما لم
+يُنص على خلاف ذلك.
 
-## A seguir
+## الخطوات التالية
 
-- [Desenvolvimento de apps de pilha completa](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=pt-br) (Web)
-- [Criar apps Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=pt-br)
-- Confira exemplos na [Galeria de apps](https://aistudio.google.com/apps?source=showcase&hl=pt-br).
+- [تطوير تطبيقات كاملة المكدس](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ar) (الويب)
+- [إنشاء تطبيقات Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ar)
+- الاطّلاع على أمثلة في [معرض التطبيقات](https://aistudio.google.com/apps?source=showcase&hl=ar).
 
-Envie comentários
+إرسال ملاحظات
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Última atualização 2026-05-19 UTC.
+تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)
 
-Quer enviar seu feedback?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-05-19 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-05-19 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

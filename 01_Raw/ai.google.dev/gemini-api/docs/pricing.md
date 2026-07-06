@@ -1,992 +1,1026 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=pt-BR
-fetched_at: 2026-06-29T05:29:10.764720+00:00
-title: "Pre\u00e7os da API Gemini Developer \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=he
+fetched_at: 2026-07-06T05:07:33.093400+00:00
+title: "\u05ea\u05de\u05d7\u05d5\u05e8 \u05e9\u05dc Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-# Preços da API Gemini Developer
+# תמחור של Gemini Developer API
 
-Comece a criar sem custo financeiro com limites generosos e depois faça o escalonamento verticalmente com preços pré-pagos e de pagamento por uso para seus aplicativos prontos para produção.
+אפשר להתחיל לפתח בחינם עם מכסות נדיבות, ואז להרחיב את הפיתוח באמצעות תשלום מראש או תשלום לפי שימוש עבור האפליקציות שמוכנות להפקה.
 
-### Sem custo financeiro
+### חינם
 
-Para desenvolvedores e pequenos projetos que estão começando a usar a API Gemini.
+למפתחים ולפרויקטים קטנים שמתחילים להשתמש ב-Gemini API.
 
-- check\_circleAcesso limitado a alguns modelos
-- check\_circleTokens de entrada e saída sem custo financeiro
-- check\_circleAcesso ao Google AI Studio
-- check\_circleConteúdo usado para melhorar nossos produtos[\*](https://ai.google.dev/gemini-api/terms?hl=pt-br)
+- check\_circleגישה מוגבלת למודלים מסוימים
+- check\_circleטוקנים של קלט ופלט בחינם
+- check\_circleגישה ל-Google AI Studio
+- check\_circleתוכן שמשמש לשיפור המוצרים שלנו[\*](https://ai.google.dev/gemini-api/terms?hl=he)
 
-[Comece a usar sem custo financeiro](https://aistudio.google.com?hl=pt-br)
+[מתחילים לעבוד בלי לשלם](https://aistudio.google.com?hl=he)
 
-### Pago
+### בתשלום
 
-Para aplicativos de produção que exigem volumes maiores e recursos avançados.
+לשימוש באפליקציות לייצור שדורשות נפחים גדולים יותר ותכונות מתקדמות.
 
-- check\_circleLimites de taxa mais altos para implantações de produção
-- check\_circleAcesso ao cache de contexto
-- check\_circleAPI Batch (redução de custos de 50%)
-- check\_circleAcesso aos modelos mais avançados do Google
-- check\_circleO conteúdo **não** é usado para melhorar nossos produtos[\*](https://ai.google.dev/gemini-api/terms?hl=pt-br)
+- check\_circleמכסות גבוהות יותר של בקשות לשנייה לפריסות בסביבת ייצור
+- check\_circleגישה לשמירת נתונים במטמון של ההקשר
+- ‫check\_circleBatch API (הפחתת עלויות בשיעור של 50%)
+- check\_circleגישה למודלים הכי מתקדמים של Google
+- check\_circleהתוכן **לא** משמש לשיפור המוצרים שלנו[\*](https://ai.google.dev/gemini-api/terms?hl=he)
 
-[Fazer upgrade para o modo pago](https://aistudio.google.com/api-keys?hl=pt-br)
+[שדרוג לחשבון בתשלום](https://aistudio.google.com/api-keys?hl=he)
 
 ### Enterprise
 
-Para implantações em grande escala com necessidades personalizadas de segurança, suporte e compliance, com tecnologia da [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=pt-br).
+לפריסות בהיקף גדול עם צרכים מותאמים אישית בתחום האבטחה, התמיכה והתאימות, שמבוססות על [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=he).
 
-- check\_circleTodos os recursos do plano Pago, além do acesso opcional a:
-- check\_circleCanais de suporte dedicados
-- check\_circleSegurança e compliance avançadas
-- check\_circleCapacidade de processamento provisionada
-- check\_circleDescontos por volume (com base no uso)
-- check\_circleMLOps, Grupo de modelos e muito mais
+- check\_circleכל התכונות במינוי בתשלום, בנוסף לגישה אופציונלית אל:
+- check\_circleערוצי תמיכה ייעודיים
+- check\_circleאבטחה ותאימות מתקדמות
+- check\_circleהקצאת משאבים לפי התפוקה שנקבעה
+- check\_circleהנחות לפי נפח (מבוססות על שימוש)
+- ‫check\_circleML ops, model garden ועוד
 
-[Entre em contato com a equipe de vendas](https://cloud.google.com/contact?hl=pt-br)
+[פנייה למחלקת המכירות](https://cloud.google.com/contact?hl=he)
 
 ## Gemini 3.5 Flash
 
 *`gemini-3.5-flash`*
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-3.5-flash&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com?model=gemini-3.5-flash&hl=he)
 
-Nosso modelo mais inteligente, criado para ser rápido, combina inteligência de ponta com pesquisa e embasamento superiores.
+המודל הכי חכם שלנו, שפועל במהירות, ומשלב בין יכולות מתקדמות לבין חיפוש והצמדה מעולים.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 1,50 |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 9,00 |
-| Preço do armazenamento em cache de contexto | Sem custo financeiro | US$ 0,15 US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | 6.00 ש"ח |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 36 ש"ח |
+| מחיר של שמירת הקשר במטמון | בחינם | ‫0.15$ ‫1.00$‎ / 1,000,000 טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,75 |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 4,50 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,075 US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | 3.00 ש"ח |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 4.50$‎ |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.075$ 1.00$ / 1,000,000 טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,75 |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 4,50 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,08 US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | 3.00 ש"ח |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 4.50$‎ |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.08$ 1.00$‎ / 1,000,000 טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### עדיפות
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 2,70 |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 16,20 |
-| Preço do armazenamento em cache de contexto | Sem custo financeiro | US$ 0,27 US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | $2.70 |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | $16.20 |
+| מחיר של שמירת הקשר במטמון | בחינם | ‫0.27$ 1.00$‎ / 1,000,000 טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* Uma solicitação enviada por um cliente ao Gemini pode resultar em uma ou mais consultas à Pesquisa Google. Você vai receber uma cobrança por cada consulta de pesquisa individual
-realizada.
+‫\* בקשה שהלקוח שולח ל-Gemini עשויה להוביל לשאילתה אחת או יותר בחיפוש Google. תחויבו על כל שאילתת חיפוש נפרדת שתבצעו.
 
-## Gemini 3.5 Live Translate
+## ‫Gemini 3.5 Live Translate
 
 *`gemini-3.5-live-translate-preview`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=he)
 
-Nosso modelo de tradução de fala para fala em tempo real e com baixa latência que oferece suporte a mais de 70 idiomas.
+מודל התרגום שלנו, עם השהיה נמוכה, מתרגם דיבור לדיבור בזמן אמת ותומך ביותר מ-70 שפות.
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 3,50 ou US $0,0053/min\* (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 21,00 ou US $0,0315/min\* (áudio) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫3.50$ או 0.0053 $לדקה\* (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | ‫21.00$ או 0.0315 $לדקה\* (אודיו) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* O faturamento é baseado no consumo total de tokens de áudio de entrada e saída, calculado a uma taxa de 25 tokens por segundo de áudio, o que equivale a um preço efetivo de aproximadamente US $0,0368 por minuto.
+‫\* החיוב מבוסס על צריכת טוקנים כוללת של אודיו בקלט ופלט, שמחושבת לפי קצב של 25 טוקנים לשנייה של אודיו, כלומר מחיר בפועל של כ-0.0368 $לדקה.
 
 ## Gemini 3.1 Flash-Lite
 
 *`gemini-3.1-flash-lite`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=he)
 
-Nosso modelo mais econômico, otimizado para tarefas agênticas de alto volume, tradução e processamento de dados simples.
+המודל הכי חסכוני שלנו, שעבר אופטימיזציה לביצוע משימות אג'נטיות בכמויות גדולות, לתרגום ולעיבוד נתונים פשוט.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,25 (texto / imagem / vídeo) US$0,50 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 1,50 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,025 (texto / imagem / vídeo) US$0,05 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫‎0.25 USD (טקסט / תמונה / סרטון) ‎0.50 USD (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 6.00 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.025$ (טקסט / תמונה / סרטון) ‫0.05$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,125 (texto / imagem / vídeo) US$0,25 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 0,75 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,0125 (texto / imagem / vídeo) US$0,025 (áudio) US$0,50 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫0.125$ (טקסט / תמונה / סרטון) 0.25$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 3.00 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.0125$ (טקסט / תמונה / סרטון) ‫0.025$ (אודיו) ‫0.50$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,125 (texto / imagem / vídeo) US$0,25 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 0,75 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,0125 (texto / imagem / vídeo) US$0,025 (áudio) US$0,50 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫0.125$ (טקסט / תמונה / סרטון) 0.25$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 3.00 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.0125$ (טקסט / תמונה / סרטון) ‫0.025$ (אודיו) ‫0.50$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### עדיפות
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,45 (texto / imagem / vídeo) US$0,90 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 2,70 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,045 (texto / imagem / vídeo) US$0,09 (áudio) US$1,80 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫$0.45 (טקסט / תמונה / סרטון) $0.90 (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | $2.70 |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.045$ (טקסט / תמונה / סרטון) ‫0.09$ (אודיו) ‫1.80$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* Uma solicitação enviada por um cliente ao Gemini pode resultar em uma ou mais consultas à Pesquisa Google. Você vai receber uma cobrança por cada consulta de pesquisa individual
-realizada.
+‫\* בקשה שהלקוח שולח ל-Gemini עשויה להוביל לשאילתה אחת או יותר בחיפוש Google. תחויבו על כל שאילתת חיפוש נפרדת שתבצעו.
 
-## Pré-lançamento do Gemini 3.1 Pro
+## ‫Gemini Omni Flash Preview
 
-*`gemini-3.1-pro-preview` e `gemini-3.1-pro-preview-customtools`*
+*`gemini-omni-flash-preview`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=he)
 
-As mais recentes melhorias de performance, inteligência e usabilidade na melhor família de modelos do mundo para compreensão multimodal, recursos de agentes e vibe coding.
+מודל הדור הבא שלנו ליצירה ולעריכה של סרטונים, שזמין למפתחים ברמת התשלום של Gemini API.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 2,00, comandos <= 200 mil tokens US$4,00, comandos > 200 mil tokens |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 12,00, comandos <= 200 mil tokens US$18,00, comandos > 200 mil |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,20, comandos <= 200 mil tokens US$0,40, comandos > 200 mil US$4,50 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫6.00 ש"ח (טקסט / תמונה / סרטון / אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | ‫9.00$ (טקסט) ‫17.50$ (סרטון)\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+‫\* החיוב מבוסס על צריכת הטוקנים הכוללת של הפלט, שמחושבת לפי קצב של 5,792 טוקנים לשנייה של סרטון באיכות 720p. במסגרת התמחור הרגיל, המשמעות היא מחיר אפקטיבי של כ-0.10 $לשנייה.
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+## ‫Gemini 3.1 Pro Preview
+
+‫*`gemini-3.1-pro-preview` ו-`gemini-3.1-pro-preview-customtools`*
+
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=he)
+
+השיפורים האחרונים בביצועים, באינטליגנציה ובנוחות השימוש של משפחת המודלים הכי טובה בעולם להבנה מולטי-מודאלית, ליכולות אג'נטיות ולתכנות בשיטת Vibe coding.
+
+### רגיל
+
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 1,00, comandos <= 200 mil tokens US$2,00, comandos > 200 mil tokens |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 6,00, comandos <= 200 mil tokens US$9,00, comandos > 200 mil |
-| Preço do armazenamento em cache de contexto | Indisponível | *Igual ao Standard*  US$ 0,20, comandos <= 200 mil tokens US$0,40, comandos > 200 mil US$4,50 / 1 milhão de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫2.00$, הנחיות עם ‎ <= 200k טוקנים ‫4.00$, הנחיות עם ‎ > 200k טוקנים |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | ‫12.00$, הנחיות עם ‎ <= 200k tokens ‫18.00$, הנחיות עם ‎ > 200k |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.20$, הנחיות של עד 200, 000 טוקנים ‫0.40$,הנחיות של יותר מ-200,000 טוקנים ‫4.50$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 1,00, comandos <= 200 mil tokens US$2,00, comandos > 200 mil tokens |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 6,00, comandos <= 200 mil tokens US$9,00, comandos > 200 mil |
-| Preço do armazenamento em cache de contexto | Indisponível | *Igual ao Standard*  US$ 0,20, comandos <= 200 mil tokens US$0,40, comandos > 200 mil US$4,50 / 1 milhão de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫1.00$, הנחיות עם ‎ <= 200k טוקנים ‫2.00$, הנחיות עם ‎ > 200k טוקנים |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | ‫6.00$, הנחיות עם ‎ <= 200k tokens ‫9.00$, הנחיות עם ‎ > 200k |
+| מחיר של שמירת הקשר במטמון | לא זמין | *זהה ל-Standard*  ‫0.20$, הנחיות עם ‎200k tokens או פחות ‫0.40$, הנחיות עם יותר מ-‎200k tokens ‫4.50$למיליון tokens לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 3,60, comandos <= 200 mil tokens US$7,20, comandos > 200 mil tokens |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 21,60, comandos <= 200 mil tokens US$32,40, comandos > 200 mil |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,36, solicitações <= 200 mil tokens US$0,72, solicitações > 200 mil US$8,10 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫1.00$, הנחיות עם ‎ <= 200k טוקנים ‫2.00$, הנחיות עם ‎ > 200k טוקנים |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | ‫6.00$, הנחיות עם ‎ <= 200k tokens ‫9.00$, הנחיות עם ‎ > 200k |
+| מחיר של שמירת הקשר במטמון | לא זמין | *זהה ל-Standard*  ‫0.20$, הנחיות עם ‎200k tokens או פחות ‫0.40$, הנחיות עם יותר מ-‎200k tokens ‫4.50$למיליון tokens לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* Uma solicitação enviada por um cliente ao Gemini pode resultar em uma ou mais consultas à Pesquisa Google. Você vai receber uma cobrança por cada consulta de pesquisa individual
-realizada.
+### עדיפות
 
-## Pré-lançamento do Gemini 3.1 Flash Live
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
+| --- | --- | --- |
+| מחיר קלט | לא זמין | ‫14.4 ש "ח, הנחיות של עד 200,000 טוקנים 28.8 ש "ח, הנחיות של יותר מ-200,000 טוקנים |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | ‫21.60$, הנחיות <= 200,000 טוקנים ‫32.40$, הנחיות > 200,000 |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.36$, הנחיות עם ‎ <= 200k tokens ‫0.72$, הנחיות עם ‎ > 200k ‫8.10$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
+
+‫\* בקשה שהלקוח שולח ל-Gemini עשויה להוביל לשאילתה אחת או יותר בחיפוש Google. תחויבו על כל שאילתת חיפוש נפרדת שתבצעו.
+
+## ‫Gemini 3.1 Flash Live Preview
 
 *`gemini-3.1-flash-live-preview`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=he)
 
-Nosso modelo de áudio para áudio de baixa latência otimizado para diálogo em tempo real com detecção de nuances acústicas, precisão numérica e percepção multimodal.
+מודל אודיו לאודיו עם זמן אחזור נמוך, שעבר אופטימיזציה לדיאלוג בזמן אמת עם זיהוי ניואנסים אקוסטיים, דיוק מספרי ומודעות מולטימודאלית.
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,75 (texto) US$3,00 ou US $0,005/min (áudio) US$1,00 ou US $0,002/min (imagem/vídeo) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 4,50 (texto) US$12,00 ou US $0,018/min (áudio) |
-| Embasamento com a Pesquisa Google\* | Compatível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫$0.75 (טקסט) ‫$3.00 או $0.005 לדקה (אודיו) ‫$1.00 או $0.002 לדקה (תמונה או סרטון) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | ‫4.50$ (טקסט) ‫12.00$או 0.018 $לדקה (אודיו) |
+| עיגון באמצעות חיפוש Google\* | נתמך | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* Uma solicitação enviada por um cliente ao Gemini pode resultar em uma ou mais consultas à Pesquisa Google. Você vai receber uma cobrança por cada consulta de pesquisa individual
-realizada.
+‫\* בקשה שהלקוח שולח ל-Gemini עשויה להוביל לשאילתה אחת או יותר בחיפוש Google. תחויבו על כל שאילתת חיפוש נפרדת שתבצעו.
 
-## Imagem do Gemini 3.1 Flash 🍌
+## ‫Gemini 3.1 Flash Image (Nano Banana 2) 🍌
 
 *`gemini-3.1-flash-image`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=he)
 
-Projetado para velocidade e eficiência, o modelo de geração de imagens do Gemini 3.1 Flash é eficaz para respostas rápidas e interativas e alta capacidade de processamento.
+מודל Gemini 3.1 Flash ליצירת תמונות נועד לספק תשובות מהירות ויעילות, והוא מתאים לתשובות אינטראקטיביות מהירות ולתפוקה גבוהה.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,50 (texto/imagem) |
-| Preço de saída | Indisponível | US$ 3 (texto e pensamento)  US$ 60 (imagens)  Equivalente a US $0,045 por imagem de 0,5K\*  US$ 0,067 por imagem de 1K\*, US$ 0,101 por imagem de 2K\*, e US $0,151 por imagem de 4K\*. |
-| Embasamento com a Pesquisa de imagens e na Web do Google\*\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado no Gemini 3), depois US $14 / 1.000 consultas de pesquisa para embasamento de texto e imagem. |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.50$ (טקסט/תמונה) |
+| מחיר הפלט | לא זמין | ‫3$ (טקסט וחשיבה)  ‫60.00$ (תמונות)  שווה ל-0.045 $לכל תמונה באיכות 0.5K\*  ‫0.067$ לכל תמונה באיכות 1K\*, ‫0.101$ לכל תמונה באיכות 2K\*, ו-0.151 $לכל תמונה באיכות 4K\*. |
+| עיגון באמצעות חיפוש אינטרנט וחיפוש תמונות ב-Google\*\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותפות ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש להארקה מבוססת-טקסט ותמונה. |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,25 (texto, imagem) |
-| Preço de saída | Indisponível | US$ 1,50 (texto e raciocínio)  US$ 30,00 (imagens)  Equivalente a US $0,022 por imagem de 0,5K\*  US$ 0,034 por imagem de 1K\*,  US$ 0,050 por imagem de 2K\*,  e US $0,076 por imagem de 4K\*. |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.25$ (טקסט, תמונה) |
+| מחיר הפלט | לא זמין | ‫1.50$ (טקסט וחשיבה)  ‫30.00$ (תמונות)  שווה ל-0.022 $לכל תמונה בגודל 0.5K\*  ‫0.034$ לכל תמונה בגודל 1K\*,  ‫0.050$ לכל תמונה בגודל 2K\*,  ו-0.076 $לכל תמונה בגודל 4K\*. |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* A saída de imagem custa US $60 por 1.000.000 de tokens.
-As imagens de saída em 0,5K (512 px) consomem 747 tokens e equivalem a US $0,045 por imagem. As imagens de saída em 1K (1024 x 1024 pixels) consomem 1.120 tokens e equivalem a US $0,067 por imagem. As imagens de saída em 2K (2048x2048px) consomem 1.680 tokens e equivalem a US $0,101 por imagem. As imagens de saída em 4K (4096 x 4096 pixels) consomem 2.520 tokens e equivalem a US $0,151 por imagem.
+\* התמחור של פלט תמונה הוא 60 $למיליון טוקנים.
+תמונות פלט ברזולוציה של 0.5K‏ (512px) צורכות 747 טוקנים, והעלות שלהן היא 0.045 $לתמונה. תמונות פלט ברזולוציה של 1K‏ (1024x1024 פיקסלים) צורכות 1,120 טוקנים, והן שוות ל-0.067 $לכל תמונה. תמונות פלט באיכות 2K ‏ (2,048x2,048 פיקסלים) צורכות 1,680 טוקנים, והן שוות ל-0.101 $‎ לכל תמונה. תמונות פלט ברזולוציית 4K‏ (4096x4096px) צורכות 2,520 טוקנים, והן שוות ל-0.151 $לכל תמונה.
 
-\*\* Uma solicitação enviada por um cliente ao Gemini pode resultar em uma ou mais consultas à Pesquisa Google. Você vai receber uma cobrança por cada consulta de pesquisa individual
-realizada. O contexto recuperado (texto ou imagens) fornecido pela fundamentação com a Pesquisa Google não é cobrado como tokens de entrada.
+‫\*\* בקשה שהלקוח שולח ל-Gemini עשויה להוביל לשאילתה אחת או יותר בחיפוש Google. תחויבו על כל שאילתת חיפוש נפרדת שתבצעו. ההקשר (טקסט או תמונות) שאוחזר על ידי Grounding with Google Search לא מחויב כאסימוני קלט.
 
-## Pré-lançamento do Gemini 3.1 Flash TTS
+## תמונה של Gemini 3.1 Flash Lite 🍌
+
+*`gemini-3.1-flash-lite-image`*
+
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=he)
+
+מודל התמונות Gemini 3.1 Flash Lite הוא מודל יעיל במיוחד ליצירה ועריכה של תמונות, שנועד לספק זמן טעינה קצר במיוחד ועלות משתלמת.
+
+### רגיל
+
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
+| --- | --- | --- |
+| מחיר קלט | לא זמין | ‫$0.25 (טקסט/תמונה/סרטון) |
+| מחיר הפלט | לא זמין | ‫1.50$ (טקסט וחשיבה)  ‫30.00$ (תמונות)  שווה ל-0.0336 $לכל תמונה ברזולוציה של 1K\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
+
+### Batch
+
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
+| --- | --- | --- |
+| מחיר קלט | לא זמין | ‫$0.125 (טקסט/תמונה/סרטון) |
+| מחיר הפלט | לא זמין | ‫0.75$ (טקסט וחשיבה)  ‫15.00$ (תמונות)  שווה ל-0.0168 $לכל תמונה ברזולוציה של 1,000 פיקסלים\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
+
+\* מחיר הפלט של תמונות הוא 30 $לכל 1,000,000 טוקנים. תמונות פלט ברזולוציה של 1K‏ (1024x1024px) צורכות 1,120 טוקנים, והעלות שלהן היא 0.0336 $לתמונה.
+
+## גרסת טרום-השקה של Gemini 3.1 Flash TTS
 
 *`gemini-3.1-flash-tts-preview`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=he)
 
-Nosso modelo de áudio Text-to-Speech 3.1 Flash otimizado para geração de fala controlável, de baixa latência e com boa relação custo-benefício.
+מודל האודיו שלנו מסוג Text-to-Speech‏ ‎3.1 Flash עבר אופטימיזציה כדי לספק ביצועים טובים במחיר משתלם, זמן אחזור נמוך ויצירת דיבור שניתן לשליטה.
 
-Os modelos de prévia podem mudar antes de se tornarem estáveis e têm limites de taxa mais restritivos.
+יכול להיות שיהיו שינויים במודלים בתצוגה מקדימה לפני שהם יהפכו ליציבים, ושיש להם מגבלות קצב מחמירות יותר.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 1,00 (texto) |
-| Preço de saída | Sem custo financeiro | US$ 20,00 (áudio) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫$1.00 (טקסט) |
+| מחיר הפלט | בחינם | ‫‎20.00 USD (אודיו) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,50 (texto) |
-| Preço de saída | Indisponível | US$ 10,00 (áudio) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.50$ (הודעת טקסט) |
+| מחיר הפלט | לא זמין | ‫10.00$ (אודיו) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* Os tokens de áudio correspondem a 25 tokens por segundo de áudio.
+\* טוקנים של אודיו מתאימים ל-25 טוקנים לשנייה של אודיו.
 
-## Pré-lançamento do Gemini 3 Flash
+## ‫Gemini 3 Flash Preview
 
 *`gemini-3-flash-preview`*
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=he)
 
-Nosso modelo mais inteligente, criado para ser rápido, combina inteligência de ponta com pesquisa e embasamento superiores.
+המודל הכי חכם שלנו, שפועל במהירות, ומשלב בין יכולות מתקדמות לבין חיפוש והצמדה מעולים.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,50 (texto / imagem / vídeo) US$1,00 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 3,00 |
-| Preço do armazenamento em cache de contexto | Sem custo financeiro | US$ 0,05 (texto / imagem / vídeo) US$0,10 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫0.50$ (טקסט / תמונה / סרטון) ‫1.00$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 12 ש"ח |
+| מחיר של שמירת הקשר במטמון | בחינם | ‫0.05$ (טקסט / תמונה / סרטון) ‫0.10$ (אודיו) ‫1.00$‎ / 1,000,000 טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,25 (texto / imagem / vídeo) US$0,50 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 1,50 |
-| Preço do armazenamento em cache de contexto | Indisponível | *Igual ao Standard*  US$ 0,05 (texto / imagem / vídeo)  US$ 0,10 (áudio)  US$ 1 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫‎0.25 USD (טקסט / תמונה / סרטון) ‎0.50 USD (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 6.00 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | *זהה למחיר של תכונה רגילה*  ‫0.05$ (טקסט / תמונה / סרטון)  ‫0.10$ (אודיו)  ‫1.00$ למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,25 (texto / imagem / vídeo) US$0,50 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 1,50 |
-| Preço do armazenamento em cache de contexto | Indisponível | *Igual ao Standard*  US$ 0,05 (texto / imagem / vídeo)  US$ 0,10 (áudio)  US$ 1 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 solicitações por mês (sem custo financeiro, compartilhado no Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫‎0.25 USD (טקסט / תמונה / סרטון) ‎0.50 USD (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 6.00 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | *זהה למחיר של תכונה רגילה*  ‫0.05$ (טקסט / תמונה / סרטון)  ‫0.10$ (אודיו)  ‫1.00$ למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 בקשות לחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### עדיפות
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,90 (texto / imagem / vídeo) US$1,80 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 5,40 |
-| Preço do armazenamento em cache de contexto | Sem custo financeiro | US$ 0,09 (texto / imagem / vídeo) US$0,18 (áudio) US$1,80 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Embasamento com o Google Maps | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫0.90$ (טקסט / תמונה / סרטון) ‫1.80$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | ‫$5.40 |
+| מחיר של שמירת הקשר במטמון | בחינם | ‫0.09$ (טקסט / תמונה / סרטון) ‫0.18$ (אודיו) ‫1.80$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| עיגון בעזרת מפות Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* Uma solicitação enviada por um cliente ao Gemini pode resultar em uma ou mais consultas à Pesquisa Google. Você vai receber uma cobrança por cada consulta de pesquisa individual
-realizada.
+‫\* בקשה שהלקוח שולח ל-Gemini עשויה להוביל לשאילתה אחת או יותר בחיפוש Google. תחויבו על כל שאילתת חיפוש נפרדת שתבצעו.
 
-## Gemini 3 Pro Image 🍌
+## ‫Gemini 3 Pro Image (Nano Banana Pro) 🍌
 
 *`gemini-3-pro-image`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=he)
 
-Nosso modelo nativo de geração de imagens, otimizado para velocidade, flexibilidade e compreensão contextual. O **texto de entrada e saída** tem o mesmo preço do [Gemini 3.1 Pro](#gemini-3.1-pro-preview).
+מודל מקורי ליצירת תמונות, שעבר אופטימיזציה למהירות, לגמישות ולהבנה הקשרית. **הקלט והפלט של טקסט** מתומחרים כמו [Gemini 3.1 Pro](#gemini-3.1-pro-preview).
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 2,00 (texto/imagem),  equivalente a US $0,0011 por imagem\* |
-| Preço de saída | Indisponível | US$ 12,00 (texto e pensamento)  US$ 120,00 (imagens)  Equivalente a US $0,134 por imagem de 1K/2K\*\*  e US $0,24 por imagem de 4K\*\* |
-| Embasamento com a Pesquisa Google\*\*\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫2.00$‎ (טקסט/תמונה),  שווה ל-0.0011 $‎ לכל תמונה\* |
+| מחיר הפלט | לא זמין | ‫12.00$ (טקסט ומחשבה)  ‫120.00$ (תמונות)  שווה ל-0.134 $לכל 1K/2K תמונות\*\*  ול-0.24 $לכל 4K תמונות\*\* |
+| עיגון באמצעות חיפוש Google\*\*\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 1,00 (texto), US$0,0006 (imagem)\* |
-| Preço de saída | Indisponível | US$ 6,00 (texto e pensamento)  US$ 0,067 por imagem de 1K/2K\*\*  US$ 0,12 por imagem de 4K\*\* |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫$1.00 (טקסט), $0.0006 (תמונה)\* |
+| מחיר הפלט | לא זמין | ‫24 ש"ח (טקסט וחשיבה)  ‫0.27 ש"ח לכל תמונה באיכות 1K/2K\*\*  ‫0.48 ש"ח לכל תמונה באיכות 4K\*\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 1,00 (texto), US$0,0006 (imagem)\* |
-| Preço de saída | Indisponível | US$ 6,00 (texto e pensamento)  US$ 0,067 por imagem de 1K/2K\*\*  US$ 0,12 por imagem de 4K\*\* |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫$1.00 (טקסט), $0.0006 (תמונה)\* |
+| מחיר הפלט | לא זמין | ‫24 ש"ח (טקסט וחשיבה)  ‫0.27 ש"ח לכל תמונה באיכות 1K/2K\*\*  ‫0.48 ש"ח לכל תמונה באיכות 4K\*\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### עדיפות
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 3,60 (texto/imagem) |
-| Preço de saída | Indisponível | US$ 21,60 (texto e pensamento)  US$ 216,00 (imagens) |
-| Embasamento com a Pesquisa Google\*\*\* | Indisponível | 5.000 comandos por mês (sem custo financeiro, compartilhado entre o Gemini 3) e US $14 / 1.000 consultas de pesquisa |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫14.4 ש"ח (טקסט/תמונה) |
+| מחיר הפלט | לא זמין | ‫21.60$ (טקסט וחשיבה)  ‫216.00$ (תמונות) |
+| עיגון באמצעות חיפוש Google\*\*\* | לא זמין | ‫5,000 הנחיות בחודש (בחינם, משותף ל-Gemini 3), ואז 14 $‎ לכל 1,000 שאילתות חיפוש |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-\* A entrada de imagem é definida em 560 tokens ou US $0,0011 por imagem.
+\* קלט של תמונה מוגבל ל-560 טוקנים או ל-0.0011 $לכל תמונה.
 
-\*\* A saída de imagem custa US $120 por 1.000.000 de tokens. As imagens de saída de 1024 x 1024 px (1K) até 2048 x 2048 px (2K) consomem 1.120 tokens e equivalem a US $0,134 por imagem. As imagens de saída de até 4096 x 4096 pixels (4K) consomem 2.000 tokens e equivalem a US $0,24 por imagem.
+\*\* תפוקת תמונות מתומחרת ב-120 $לכל 1,000,000 טוקנים. תמונות פלט ברזולוציה של ‎1,024x1,024px‏ (1K) ועד ‎2,048x2,048px‏ (2K) צורכות 1,120 טוקנים, והן שוות ל-0.134 $‎ לכל תמונה. תמונות פלט ברזולוציה של עד ‎4096x4096px‏ (4K) צורכות 2,000 טוקנים, והעלות שלהן היא 0.24 $לכל תמונה.
 
-\*\*\* Uma solicitação enviada por um cliente ao Gemini pode resultar em uma ou mais consultas à Pesquisa Google. Você vai receber uma cobrança por cada consulta de pesquisa individual
-realizada.
+‫\*\*\* בקשה שהלקוח שולח ל-Gemini עשויה להוביל לשאילתה אחת או יותר בחיפוש Google. תחויבו על כל שאילתת חיפוש נפרדת שתבצעו.
 
-## Gemini 2.5 Pro
+## Gemini ‎2.5 Pro
 
 *`gemini-2.5-pro`*
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=he)
 
-Nosso modelo multifuncional de última geração, que se destaca em programação e tarefas de raciocínio complexas.
+המודל המתקדם ביותר (SOTA) שלנו לשימושים מגוונים, שמצטיין בתכנות ובמשימות מורכבות של חשיבה רציונלית.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 1,25, comandos <= 200 mil tokens US$2,50, comandos > 200 mil tokens |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 10,00, comandos <= 200 mil tokens US$15,00, comandos > 200 mil |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,125, comandos <= 200 mil tokens US$0,25, comandos > 200 mil US$4,50 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | 10.000 RPD (sem custo financeiro), depois US $25 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫1.25$, הנחיות עם ‎ <= 200k טוקנים ‫2.50$, הנחיות עם ‎ > 200k טוקנים |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | ‫10.00$, הנחיות עם ‎ <= 200k tokens ‫15.00$, הנחיות עם ‎ > 200k |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.125$, הנחיות של עד 200, 000 טוקנים ‫0.25$,הנחיות של יותר מ-200,000 טוקנים ‫4.50$לכל מיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם), ואז 35 $לכל 1,000 הנחיות עם הארקה |
+| עיגון בעזרת מפות Google | לא זמין | ‫10,000 RPD (בחינם), ואז 25 $‎ / 1,000 הנחיות עם הארקה |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,625, comandos <= 200 mil tokens US$1,25, comandos > 200 mil tokens |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 5,00, comandos <= 200 mil tokens US$7,50, comandos > 200 mil |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,125, comandos <= 200 mil tokens US$0,25, comandos > 200 mil US$4,50 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.625$, הנחיות עם עד 200,000 טוקנים ‫1.25$, הנחיות עם יותר מ-200,000 טוקנים |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | ‫5.00$, הנחיות עם ‎ <= 200k tokens ‫7.50$, הנחיות עם ‎ > 200k |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.125$, הנחיות של עד 200, 000 טוקנים ‫0.25$,הנחיות של יותר מ-200,000 טוקנים ‫4.50$לכל מיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם), ואז 35 $לכל 1,000 הנחיות עם הארקה |
+| עיגון בעזרת מפות Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,625, comandos <= 200 mil tokens US$1,25, comandos > 200 mil tokens |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 5,00, comandos <= 200 mil tokens US$7,50, comandos > 200 mil |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,125, comandos <= 200 mil tokens US$0,25, comandos > 200 mil US$4,50 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.625$, הנחיות עם עד 200,000 טוקנים ‫1.25$, הנחיות עם יותר מ-200,000 טוקנים |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | ‫5.00$, הנחיות עם ‎ <= 200k tokens ‫7.50$, הנחיות עם ‎ > 200k |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.125$, הנחיות של עד 200, 000 טוקנים ‫0.25$,הנחיות של יותר מ-200,000 טוקנים ‫4.50$לכל מיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם), ואז 35 $לכל 1,000 הנחיות עם הארקה |
+| עיגון בעזרת מפות Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### עדיפות
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 2,25, comandos <= 200 mil tokens US$4,50, comandos > 200 mil tokens |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 18,00, comandos <= 200 mil tokens US$27,00, comandos > 200 mil |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,225, comandos <= 200 mil tokens US$0,45, comandos > 200 mil US$8,10 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | 10.000 RPD (sem custo financeiro), depois US $25 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫2.25$, הנחיות עם ‎<= 200k טוקנים ‫4.50$, הנחיות עם ‎> 200k טוקנים |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | ‫18.00$, הנחיות עם ‎ <= 200k tokens ‫27.00$, הנחיות עם ‎ > 200k |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.225$, הנחיות עם עד 200, 000 טוקנים ‫0.45$,הנחיות עם יותר מ-200,000 טוקנים ‫8.10$לכל מיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם), ואז 35 $לכל 1,000 הנחיות עם הארקה |
+| עיגון בעזרת מפות Google | לא זמין | ‫10,000 RPD (בחינם), ואז 25 $‎ / 1,000 הנחיות עם הארקה |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Gemini 2.5 Flash
+## Gemini ‎2.5 Flash
 
 *`gemini-2.5-flash`*
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=he)
 
-Nosso primeiro modelo de raciocínio híbrido que oferece suporte a uma janela de contexto de 1 milhão de tokens e tem limites de raciocínio.
+מודל ההיגיון ההיברידי הראשון שלנו, שתומך בחלון הקשר של מיליון טוקנים וכולל תקציבי חשיבה.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,30 (texto / imagem / vídeo) US$1,00 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 2,50 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,03 (texto / imagem / vídeo) US$0,1 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Sem custo financeiro, até 500 RPD (limite compartilhado com RPD do Flash-Lite) | 1.500 RPD (sem custo financeiro, limite compartilhado com RPD do Flash-Lite), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | 500 RPD | 1.500 RPD (sem custo financeiro), depois US $25 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫$0.30 (טקסט / תמונה / סרטון) $1.00 (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 10.00 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.03$ (טקסט / תמונה / סרטון) ‫0.1$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | ללא תשלום, עד 500 RPD (ההגבלה משותפת עם Flash-Lite RPD) | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash-Lite RPD), ואז 35 $‎ לכל 1,000 הנחיות שמוגבלות לקרקוע |
+| עיגון בעזרת מפות Google | ‫500 RPD | ‫1,500 RPD (בחינם), ואז 25 $לכל 1,000 הנחיות עם הארקה |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,15 (texto / imagem / vídeo) US$0,50 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 1,25 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,03 (texto / imagem / vídeo) US$0,1 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro, limite compartilhado com RPD do Flash-Lite), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.15$ (טקסט / תמונה / סרטון) ‫0.50$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 5.00 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.03$ (טקסט / תמונה / סרטון) ‫0.1$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash-Lite RPD), ואז 35 $‎ לכל 1,000 הנחיות שמוגבלות לקרקוע |
+| עיגון בעזרת מפות Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,15 (texto / imagem / vídeo) US$0,50 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 1,25 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,03 (texto / imagem / vídeo) US$0,1 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro, limite compartilhado com RPD do Flash-Lite), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.15$ (טקסט / תמונה / סרטון) ‫0.50$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 5.00 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.03$ (טקסט / תמונה / סרטון) ‫0.1$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash-Lite RPD), ואז 35 $‎ לכל 1,000 הנחיות שמוגבלות לקרקוע |
+| עיגון בעזרת מפות Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### עדיפות
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,54 (texto / imagem / vídeo) US$1,80 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 4,50 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,054 (texto / imagem / vídeo) US$0,18 (áudio) US$1,80 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Sem custo financeiro, até 500 RPD (limite compartilhado com RPD do Flash-Lite) | 1.500 RPD (sem custo financeiro, limite compartilhado com RPD do Flash-Lite), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | 500 RPD | 1.500 RPD (sem custo financeiro), depois US $25 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫0.54$ (טקסט / תמונה / סרטון) 1.80$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 4.50$‎ |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.054$ (טקסט / תמונה / סרטון) ‫0.18$ (אודיו) ‫1.80$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | ללא תשלום, עד 500 RPD (ההגבלה משותפת עם Flash-Lite RPD) | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash-Lite RPD), ואז 35 $‎ לכל 1,000 הנחיות שמוגבלות לקרקוע |
+| עיגון בעזרת מפות Google | ‫500 RPD | ‫1,500 RPD (בחינם), ואז 25 $לכל 1,000 הנחיות עם הארקה |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
 ## Gemini 2.5 Flash-Lite
 
 *`gemini-2.5-flash-lite`*
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=he)
 
-Nosso modelo menor e mais econômico, criado para uso em grande escala.
+המודל הכי קטן ומשתלם שלנו, שנועד לשימוש נרחב.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada (texto, imagem, vídeo) | Sem custo financeiro | US$ 0,10 (texto / imagem / vídeo) US$0,30 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 0,40 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,01 (texto / imagem / vídeo) US$0,03 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Sem custos financeiros, até 500 RPD (limite compartilhado com RPD do Flash) | 1.500 RPD (sem custo financeiro, limite compartilhado com o RPD do Flash), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | 500 RPD | 1.500 RPD (sem custo financeiro), depois US $25 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט (טקסט, תמונה, סרטון) | בחינם | ‫$0.10 (טקסט / תמונה / סרטון) $0.30 (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 1.6 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.01$ (טקסט / תמונה / סרטון) ‫0.03$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | ללא תשלום, עד 500 RPD (המגבלה משותפת עם Flash RPD) | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash RPD), ואז ‎ $35 / 1,000 הנחיות מבוססות |
+| עיגון בעזרת מפות Google | ‫500 RPD | ‫1,500 RPD (בחינם), ואז 25 $לכל 1,000 הנחיות עם הארקה |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada (texto, imagem, vídeo) | Indisponível | US$ 0,05 (texto / imagem / vídeo) US$0,15 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 0,20 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,01 (texto / imagem / vídeo) US$0,03 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro, limite compartilhado com o RPD do Flash), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט (טקסט, תמונה, סרטון) | לא זמין | ‫0.05$ (טקסט / תמונה / סרטון) ‫0.15$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 0.80 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.01$ (טקסט / תמונה / סרטון) ‫0.03$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash RPD), ואז ‎ $35 / 1,000 הנחיות מבוססות |
+| עיגון בעזרת מפות Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada (texto, imagem, vídeo) | Indisponível | US$ 0,05 (texto / imagem / vídeo) US$0,15 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 0,20 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,01 (texto / imagem / vídeo) US$0,03 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro, limite compartilhado com o RPD do Flash), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט (טקסט, תמונה, סרטון) | לא זמין | ‫0.05$ (טקסט / תמונה / סרטון) ‫0.15$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 0.80 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.01$ (טקסט / תמונה / סרטון) ‫0.03$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash RPD), ואז ‎ $35 / 1,000 הנחיות מבוססות |
+| עיגון בעזרת מפות Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### עדיפות
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada (texto, imagem, vídeo) | Sem custo financeiro | US$ 0,18 (texto / imagem / vídeo) US$0,54 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 0,72 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,018 (texto / imagem / vídeo) US$0,054 (áudio) US$1,80 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Sem custos financeiros, até 500 RPD (limite compartilhado com RPD do Flash) | 1.500 RPD (sem custo financeiro, limite compartilhado com o RPD do Flash), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | 500 RPD | 1.500 RPD (sem custo financeiro), depois US $25 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט (טקסט, תמונה, סרטון) | בחינם | ‫0.18$ (טקסט / תמונה / סרטון) 0.54$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | $0.72 |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.018$ (טקסט / תמונה / סרטון) ‫0.054$ (אודיו) ‫1.80$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | ללא תשלום, עד 500 RPD (המגבלה משותפת עם Flash RPD) | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash RPD), ואז ‎ $35 / 1,000 הנחיות מבוססות |
+| עיגון בעזרת מפות Google | ‫500 RPD | ‫1,500 RPD (בחינם), ואז 25 $לכל 1,000 הנחיות עם הארקה |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Pré-lançamento do Gemini 2.5 Flash-Lite
+## ‫Gemini 2.5 Flash-Lite (גרסת טרום-השקה)
 
 *`gemini-2.5-flash-lite-preview-09-2025`*
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=he)
 
-O modelo mais recente baseado no Gemini 2.5 Flash Lite otimizado para custo-benefício, alta capacidade de processamento e alta qualidade.
+המודל העדכני ביותר שמבוסס על Gemini 2.5 Flash lite ועבר אופטימיזציה ליעילות בעלויות, לתפוקה גבוהה ולאיכות גבוהה.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada (texto, imagem, vídeo) | Sem custo financeiro | US$ 0,10 (texto / imagem / vídeo) US$0,30 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 0,40 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,01 (texto / imagem / vídeo) US$0,03 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Sem custos financeiros, até 500 RPD (limite compartilhado com RPD do Flash) | 1.500 RPD (sem custo financeiro, limite compartilhado com o RPD do Flash), depois US $35 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט (טקסט, תמונה, סרטון) | בחינם | ‫$0.10 (טקסט / תמונה / סרטון) $0.30 (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 1.6 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.01$ (טקסט / תמונה / סרטון) ‫0.03$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | ללא תשלום, עד 500 RPD (המגבלה משותפת עם Flash RPD) | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash RPD), ואז ‎ $35 / 1,000 הנחיות מבוססות |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada (texto, imagem, vídeo) | Indisponível | US$ 0,05 (texto / imagem / vídeo) US$0,15 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 0,20 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,01 (texto / imagem / vídeo) US$0,03 (áudio) US$1,00 / 1.000.000 de tokens por hora (preço de armazenamento) |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro, limite compartilhado com o RPD do Flash), depois US $35 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט (טקסט, תמונה, סרטון) | לא זמין | ‫0.05$ (טקסט / תמונה / סרטון) ‫0.15$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 0.80 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.01$ (טקסט / תמונה / סרטון) ‫0.03$ (אודיו) ‫1.00$למיליון טוקנים לשעה (מחיר אחסון) |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם, המגבלה משותפת עם Flash RPD), ואז ‎ $35 / 1,000 הנחיות מבוססות |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Áudio nativo do Gemini 2.5 Flash (API Live)
+## Gemini 2.5 Flash Native Audio (Live API)
 
 *`gemini-2.5-flash-native-audio-preview-12-2025`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/app/live?hl=pt-br#gemini-2.5-flash-native-audio-preview-12-2025)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/app/live?hl=he#gemini-2.5-flash-native-audio-preview-12-2025)
 
-Nossos modelos de áudio nativos da [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) são otimizados para saídas de áudio de maior qualidade, com melhor ritmo, naturalidade da voz, nível de detalhes e humor.
+מודלים מקוריים של אודיו ב-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=he) שלנו, שעברו אופטימיזציה כדי לספק פלט אודיו באיכות גבוהה יותר עם קצב טוב יותר, קול טבעי יותר, רמת פירוט גבוהה יותר ומצב רוח טוב יותר.
 
-Os modelos de prévia podem mudar antes de se tornarem estáveis e têm limites de taxa mais restritivos.
+יכול להיות שיהיו שינויים במודלים בתצוגה מקדימה לפני שהם יהפכו ליציבים, ושיש להם מגבלות קצב מחמירות יותר.
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,50 (texto) US$3,00 (áudio / vídeo) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 2,00 (texto) US$12,00 (áudio) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫0.50$ (טקסט) ‫3.00$ (אודיו / וידאו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | ‫2.00$‎ (טקסט) ‫12.00$‎ (אודיו) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Criação de imagens do Gemini 2.5 Flash 🍌
+## תמונה ב-Gemini 2.5 Flash (Nano Banana) 🍌
 
 *`gemini-2.5-flash-image`*
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=he)
 
-Nosso modelo nativo de geração de imagens, otimizado para velocidade, flexibilidade e compreensão contextual. A entrada e a saída de texto têm o mesmo preço do [2.5 Flash](#gemini-2.5-flash).
+מודל מקורי ליצירת תמונות, שעבר אופטימיזציה למהירות, לגמישות ולהבנה הקשרית. התמחור של קלט ופלט של טקסט זהה לזה של [2.5 Flash](#gemini-2.5-flash).
 
-Os modelos de prévia podem mudar antes de se tornarem estáveis e têm limites de taxa mais restritivos.
+יכול להיות שיהיו שינויים במודלים בתצוגה מקדימה לפני שהם יהפכו ליציבים, ושיש להם מגבלות קצב מחמירות יותר.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,30 (texto / imagem) |
-| Preço de saída | Indisponível | US$ 0,039 por imagem\* |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫$0.30 (טקסט / תמונה) |
+| מחיר הפלט | לא זמין | ‫0.039$‎ לכל תמונה\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,15 (texto / imagem) |
-| Preço de saída | Indisponível | US$ 0,0195 por imagem\* |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.15$ (טקסט / תמונה) |
+| מחיר הפלט | לא זמין | ‫0.0195$‎ לכל תמונה\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Flex
+### שרירים של סלע
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,15 (texto / imagem) |
-| Preço de saída | Indisponível | US$ 0,0195 por imagem\* |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.15$ (טקסט / תמונה) |
+| מחיר הפלט | לא זמין | ‫0.0195$‎ לכל תמונה\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Prioridade
+### עדיפות
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,54 (texto / imagem) |
-| Preço de saída | Indisponível | US$ 0,0702 por imagem\* |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.54$ (טקסט / תמונה) |
+| מחיר הפלט | לא זמין | ‫0.0702$‎ לכל תמונה\* |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-[\*] A saída de imagem custa US $30 por 1.000.000 de tokens. As imagens de saída de até 1024 x 1024 pixels consomem 1.290 tokens e equivalem a US $0,039 por imagem.
+‫[\*] תמונות בפלט מתומחרות ב-30 $לכל מיליון טוקנים. תמונות פלט בגודל של עד ‎1024x1024px צורכות 1,290 טוקנים, והן שוות ל-0.039 $לכל תמונה.
 
-## Pré-lançamento do Gemini 2.5 Flash TTS
+## ‫Gemini 2.5 Flash Preview TTS
 
 *`gemini-2.5-flash-preview-tts`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/generate-speech?hl=he)
 
-Nosso modelo de áudio Text-to-Speech 2.5 Flash otimizado para geração de fala controlável,
-de baixa latência e com boa relação custo-benefício.
+מודל האודיו שלנו להמרת טקסט לדיבור, ‎2.5 Flash, עבר אופטימיזציה כדי לספק ביצועים טובים במחיר משתלם, השהיה נמוכה ויצירת דיבור שניתן לשליטה.
 
-Os modelos de prévia podem mudar antes de se tornarem estáveis e têm limites de taxa mais restritivos.
+יכול להיות שיהיו שינויים במודלים בתצוגה מקדימה לפני שהם יהפכו ליציבים, ושיש להם מגבלות קצב מחמירות יותר.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,50 (texto) |
-| Preço de saída | Sem custo financeiro | US$ 10,00 (áudio) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫0.50$ (הודעת טקסט) |
+| מחיר הפלט | בחינם | ‫10.00$ (אודיו) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,25 (texto) |
-| Preço de saída | Indisponível | US$ 5,00 (áudio) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.25$ (טקסט) |
+| מחיר הפלט | לא זמין | ‫5.00$ (אודיו) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Pré-lançamento do Gemini 2.5 Pro TTS
+## ‫Gemini 2.5 Pro Preview TTS
 
 *`gemini-2.5-pro-preview-tts`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/generate-speech?hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/generate-speech?hl=he)
 
-Nosso modelo de áudio Text-to-Speech 2.5 Pro é otimizado para geração de fala poderosa e de baixa latência, com saídas mais naturais e comandos mais fáceis de direcionar.
+מודל האודיו שלנו להמרת טקסט לדיבור, ‎2.5 Pro, עבר אופטימיזציה ליצירת דיבור עוצמתי עם זמן אחזור נמוך, כדי שהתוצאות יהיו טבעיות יותר ויהיה קל יותר לכוון את ההנחיות.
 
-Os modelos de prévia podem mudar antes de se tornarem estáveis e têm limites de taxa mais restritivos.
+יכול להיות שיהיו שינויים במודלים בתצוגה מקדימה לפני שהם יהפכו ליציבים, ושיש להם מגבלות קצב מחמירות יותר.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 1,00 (texto) |
-| Preço de saída | Indisponível | US$ 20,00 (áudio) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫$1.00 (טקסט) |
+| מחיר הפלט | לא זמין | ‫‎20.00 USD (אודיו) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,50 (texto) |
-| Preço de saída | Indisponível | US$ 10,00 (áudio) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.50$ (הודעת טקסט) |
+| מחיר הפלט | לא זמין | ‫10.00$ (אודיו) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Gemini 2.0 Flash
+## Gemini ‎2.0 Flash
 
 *`gemini-2.0-flash`*
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,10 (texto / imagem / vídeo) US$0,70 (áudio) |
-| Preço de saída | Sem custo financeiro | US$ 0,40 |
-| Preço do armazenamento em cache de contexto | Sem custo financeiro | US$ 0,025 / 1.000.000 tokens (texto/imagem/vídeo) US$0,175 / 1.000.000 tokens (áudio) |
-| Armazenamento em cache de contexto | Indisponível | US$ 1,00 / 1.000.000 de tokens por hora |
-| Preços da geração de imagens | Indisponível ([desativado](https://ai.google.dev/gemini-api/docs/deprecations?hl=pt-br#gemini-2.0-models)) | Indisponível ([desativado](https://ai.google.dev/gemini-api/docs/deprecations?hl=pt-br#gemini-2.0-models)) |
-| Preço ajustado | Indisponível | Indisponível |
-| Embasamento com a Pesquisa Google | Sem custo financeiro, até 500 RPD | 1.500 RPD (sem custo financeiro), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | 500 RPD | 1.500 RPD (sem custo financeiro), depois US $25 / 1.000 comandos fundamentados |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫$0.10 (טקסט / תמונה / סרטון) $0.70 (אודיו) |
+| מחיר הפלט | בחינם | 1.6 ש"ח |
+| מחיר של שמירת הקשר במטמון | בחינם | ‫0.025$‎ / 1,000,000 טוקנים (טקסט/תמונה/סרטון) ‫0.175$‎ / 1,000,000 טוקנים (אודיו) |
+| שמירת הקשר במטמון (אחסון) | לא זמין | ‫1.00$‎ / 1,000,000 טוקנים לשעה |
+| תמחור של יצירת תמונות | לא זמין ([הושבת](https://ai.google.dev/gemini-api/docs/deprecations?hl=he#gemini-2.0-models)) | לא זמין ([הושבת](https://ai.google.dev/gemini-api/docs/deprecations?hl=he#gemini-2.0-models)) |
+| מחיר הכוונון | לא זמין | לא זמין |
+| עיגון באמצעות חיפוש Google | ללא עלות, עד 500 RPD | ‫1,500 RPD (בחינם), ואז 35 $לכל 1,000 הנחיות עם הארקה |
+| עיגון בעזרת מפות Google | ‫500 RPD | ‫1,500 RPD (בחינם), ואז 25 $לכל 1,000 הנחיות עם הארקה |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,05 (texto / imagem / vídeo) US$0,35 (áudio) |
-| Preço de saída | Indisponível | US$ 0,20 |
-| Preço do armazenamento em cache de contexto | Indisponível | US$ 0,025 / 1.000.000 tokens (texto/imagem/vídeo) US$0,175 / 1.000.000 tokens (áudio) |
-| Armazenamento em cache de contexto | Indisponível | US$ 1,00 / 1.000.000 de tokens por hora |
-| Preços da geração de imagens | Indisponível ([desativado](https://ai.google.dev/gemini-api/docs/deprecations?hl=pt-br#gemini-2.0-models)) | Indisponível ([desativado](https://ai.google.dev/gemini-api/docs/deprecations?hl=pt-br#gemini-2.0-models)) |
-| Preço ajustado | Indisponível | Indisponível |
-| Embasamento com a Pesquisa Google | Indisponível | 1.500 RPD (sem custo financeiro), depois US $35 / 1.000 comandos fundamentados |
-| Embasamento com o Google Maps | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.05$ (טקסט / תמונה / סרטון) ‫0.35$ (אודיו) |
+| מחיר הפלט | לא זמין | 0.80 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | ‫0.025$‎ / 1,000,000 טוקנים (טקסט/תמונה/סרטון) ‫0.175$‎ / 1,000,000 טוקנים (אודיו) |
+| שמירת הקשר במטמון (אחסון) | לא זמין | ‫1.00$‎ / 1,000,000 טוקנים לשעה |
+| תמחור של יצירת תמונות | לא זמין ([הושבת](https://ai.google.dev/gemini-api/docs/deprecations?hl=he#gemini-2.0-models)) | לא זמין ([הושבת](https://ai.google.dev/gemini-api/docs/deprecations?hl=he#gemini-2.0-models)) |
+| מחיר הכוונון | לא זמין | לא זמין |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫1,500 RPD (בחינם), ואז 35 $לכל 1,000 הנחיות עם הארקה |
+| עיגון בעזרת מפות Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-[\*] A saída de imagem custa US $30 por 1.000.000 de tokens. As imagens de saída de até 1024 x 1024 pixels consomem 1.290 tokens e equivalem a US $0,039 por imagem.
+‫[\*] תמונות בפלט מתומחרות ב-30 $לכל מיליון טוקנים. תמונות פלט בגודל של עד ‎1024x1024px צורכות 1,290 טוקנים, והן שוות ל-0.039 $לכל תמונה.
 
 ## Gemini 2.0 Flash-Lite
 
 *`gemini-2.0-flash-lite`*
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,075 |
-| Preço de saída | Sem custo financeiro | US$ 0,30 |
-| Preço do armazenamento em cache de contexto | Indisponível | Indisponível |
-| Armazenamento em cache de contexto | Indisponível | Indisponível |
-| Preço ajustado | Indisponível | Indisponível |
-| Embasamento com a Pesquisa Google | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | $‎0.075 |
+| מחיר הפלט | בחינם | $0.30 |
+| מחיר של שמירת הקשר במטמון | לא זמין | לא זמין |
+| שמירת הקשר במטמון (אחסון) | לא זמין | לא זמין |
+| מחיר הכוונון | לא זמין | לא זמין |
+| עיגון באמצעות חיפוש Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,0375 |
-| Preço de saída | Indisponível | US$ 0,15 |
-| Preço do armazenamento em cache de contexto | Indisponível | Indisponível |
-| Armazenamento em cache de contexto | Indisponível | Indisponível |
-| Preço ajustado | Indisponível | Indisponível |
-| Embasamento com a Pesquisa Google | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | $0.0375 |
+| מחיר הפלט | לא זמין | 0.60 ש"ח |
+| מחיר של שמירת הקשר במטמון | לא זמין | לא זמין |
+| שמירת הקשר במטמון (אחסון) | לא זמין | לא זמין |
+| מחיר הכוונון | לא זמין | לא זמין |
+| עיגון באמצעות חיפוש Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
 ## Imagen 4
 
 *`imagen-4.0-generate-001`, `imagen-4.0-ultra-generate-001`, `imagen-4.0-fast-generate-001`*
 
-[Teste no Google AI Studio](https://aistudio.google.com/generate-image?hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com/generate-image?hl=he)
 
-Nosso modelo mais recente de geração de imagens, com renderização de texto e qualidade geral de imagem significativamente melhores.
+המודל הכי עדכני שלנו ליצירת תמונות, עם עיבוד טקסט משופר משמעותית ואיכות תמונה טובה יותר באופן כללי.
 
-Os modelos de prévia podem mudar antes de se tornarem estáveis e têm limites de taxa mais restritivos.
+יכול להיות שיהיו שינויים במודלים בתצוגה מקדימה לפני שהם יהפכו ליציבים, ושיש להם מגבלות קצב מחמירות יותר.
 
-|  | Nível sem custo financeiro | Nível pago, por imagem em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל תמונה בדולר ארה"ב |
 | --- | --- | --- |
-| Preço da imagem do Imagen 4 Fast | Indisponível | US$ 0,02 |
-| Preço da imagem padrão do Imagen 4 | Indisponível | US$ 0,04 |
-| Preço da imagem do Imagen 4 Ultra | Indisponível | US$ 0,06 |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר של יצירת תמונה מהירה ב-Imagen 4 | לא זמין | $0.02 |
+| מחיר תמונה רגילה ב-Imagen 4 | לא זמין | $0.04 |
+| מחיר תמונות ב-Imagen 4 Ultra | לא זמין | $0.06 |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
 ## Veo 3.1
 
 *`veo-3.1-generate-preview`, `veo-3.1-fast-generate-preview`, `veo-3.1-lite-generate-preview`*
 
-[Teste o Veo 3.1](https://deepmind.google/models/veo/?hl=pt-br)
+[רוצה לנסות את Veo 3.1?](https://deepmind.google/models/veo/?hl=he)
 
-Nosso modelo de geração de vídeos mais recente, disponível para desenvolvedores no nível pago da API Gemini.
+מודל יצירת הווידאו העדכני ביותר שלנו, שזמין למפתחים ברמה בתשלום של Gemini API.
 
-Os modelos de prévia podem mudar antes de se tornarem estáveis e têm limites de taxa mais restritivos.
+יכול להיות שיהיו שינויים במודלים בתצוגה מקדימה לפני שהם יהפכו ליציבים, ושיש להם מגבלות קצב מחמירות יותר.
 
-|  | Nível sem custo financeiro | Nível pago, por segundo em USD |
+|  | תוכנית בחינם | רמה בתשלום, לשנייה בדולר ארה"ב |
 | --- | --- | --- |
-| Preço padrão do vídeo com áudio do Veo 3.1 | Indisponível | US$ 0,40 (720p e 1080p) US$0,60 (4k) |
-| Preço do vídeo com áudio do Veo 3.1 Fast (padrão) | Indisponível | US$ 0,10 (720p) US$0,12 (1080p) US$0,30 (4k) |
-| Preço do vídeo do Veo 3.1 Lite com áudio (padrão) | Indisponível | US$ 0,05 (720p) US$0,08 (1080p) (saída em 4K não disponível) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר סרטון רגיל עם אודיו ב-Veo 3.1 (ברירת מחדל) | לא זמין | ‫0.40$ (720p ו-1080p) ‫0.60$ (4k) |
+| מחיר סרטון עם אודיו שנוצר באמצעות Veo 3.1 Fast (ברירת מחדל) | לא זמין | ‫0.10$ (720p) ‫0.12$ (1080p) ‫0.30$ (4k) |
+| מחיר סרטון עם אודיו ב-Veo 3.1 Lite (ברירת מחדל) | לא זמין | ‫$0.05‏ (720p) $0.08‏ (1080p) (אין תמיכה בפלט 4k) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
 ## Veo 3
 
 *`veo-3.0-generate-001`, `veo-3.0-fast-generate-001`*
 
-[Teste o Veo 3](https://deepmind.google/models/veo/?hl=pt-br)
+[רוצה לנסות את Veo 3?](https://deepmind.google/models/veo/?hl=he)
 
-Nosso modelo estável de geração de vídeo, disponível para desenvolvedores no nível pago da API Gemini.
+מודל יציב ליצירת סרטונים, שזמין למפתחים ברמה בתשלום של Gemini API.
 
-|  | Nível sem custo financeiro | Nível pago, por segundo em USD |
+|  | תוכנית בחינם | רמה בתשלום, לשנייה בדולר ארה"ב |
 | --- | --- | --- |
-| Preço do vídeo padrão do Veo 3 com áudio (padrão) | Indisponível | US$ 0,40 |
-| Preço do vídeo com áudio do Veo 3 Fast (padrão) | Indisponível | US$ 0,10 (720p) US$0,12 (1080p) US$0,30 (4k) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר סרטון רגיל עם אודיו ב-Veo 3 (ברירת מחדל) | לא זמין | 1.6 ש"ח |
+| מחיר סרטון עם אודיו ב-Veo 3 Fast (ברירת מחדל) | לא זמין | ‫0.10$ (720p) ‫0.12$ (1080p) ‫0.30$ (4k) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
 ## Veo 2
 
 *`veo-2.0-generate-001`*
 
-[Testar a API](https://ai.google.dev/gemini-api/docs/video?hl=pt-br)
+[התנסות עם ה-API](https://ai.google.dev/gemini-api/docs/video?hl=he)
 
-Nosso modelo de geração de vídeos de última geração, disponível para desenvolvedores no nível pago da API Gemini.
+מודל מתקדם ליצירת סרטונים שזמין למפתחים ברמה בתשלום של Gemini API.
 
-|  | Nível sem custo financeiro | Nível pago, por segundo em USD |
+|  | תוכנית בחינם | רמה בתשלום, לשנייה בדולר ארה"ב |
 | --- | --- | --- |
-| Preço do vídeo | Indisponível | US$ 0,35 |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר הסרטון | לא זמין | 1.4 ש"ח |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
 ## Lyria 3
 
-*`lyria-3-clip-preview` e `lyria-3-pro-preview`*
+‫*`lyria-3-clip-preview` ו-`lyria-3-pro-preview`*
 
-Família de modelos de geração de música do Google. Os modelos de prévia podem mudar antes de se tornarem estáveis e têm limites de taxa mais restritivos.
+משפחת המודלים של Google ליצירת מוזיקה. יכול להיות שיהיו שינויים במודלים בתצוגה מקדימה לפני שהם יהפכו ליציבים, ויכול להיות שיהיו להם מגבלות קצב מחמירות יותר.
 
-|  | Nível sem custo financeiro | Nível pago, por solicitação em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל בקשה בדולר ארה"ב |
 | --- | --- | --- |
-| Prévia do clipe do Lyria 3 (30 segundos) | Indisponível | US$ 0,04 por música |
-| Prévia do Lyria 3 Pro (música completa) | Indisponível | US$ 0,08 por música |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| תצוגה מקדימה של קליפ Lyria 3‏ (30 שניות) | לא זמין | ‫0.04$‎ לכל שיר |
+| ‫Lyria 3 Pro Preview (שיר מלא) | לא זמין | ‫0.08$‎ לכל שיר |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Embedding do Gemini 2
+## ‫Gemini Embedding 2
 
 *`gemini-embedding-2`*
 
-[Testar a API](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br)
+[התנסות עם ה-API](https://ai.google.dev/gemini-api/docs/embeddings?hl=he)
 
-Nosso primeiro modelo de embedding multimodal, que mapeia texto, imagens, vídeo, áudio e PDFs em um espaço de embedding unificado.
+מודל ההטמעה המולטי-מודאלי הראשון שלנו, שממפה טקסט, תמונות, סרטונים, אודיו וקובצי PDF למרחב הטמעה מאוחד.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço da entrada de texto | Sem custo financeiro | US$ 0,20 |
-| Preço da entrada de imagem | Sem custo financeiro | US$ 0,45 (US$ 0,00012 por imagem) |
-| Preço da entrada de áudio | Sem custo financeiro | US$ 6,50 (US$ 0,00016 por segundo) |
-| Preço da entrada de vídeo | Sem custo financeiro | US$ 12,00 (US$ 0,00079 por frame) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט טקסט | בחינם | 0.80 ש"ח |
+| מחיר של תמונת קלט | בחינם | ‫0.45$‎ (0.00012$‎ לכל תמונה) |
+| מחיר של קלט אודיו | בחינם | ‫6.50$ (0.00016$ לשנייה) |
+| מחיר של הזנת סרטון | בחינם | ‫12.00$ (0.00079$ לכל פריים) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço da entrada de texto | Indisponível | US$ 0,10 |
-| Preço da entrada de imagem | Indisponível | US$ 0,225 (US$ 0,00006 por imagem) |
-| Preço da entrada de áudio | Indisponível | US$ 3,25 (US$ 0,00008 por segundo) |
-| Preço da entrada de vídeo | Indisponível | US$ 6,00 (US$ 0,000395 por frame) |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט טקסט | לא זמין | 0.40 ש"ח |
+| מחיר של תמונת קלט | לא זמין | ‫0.225$‎ (0.00006$‎ לכל תמונה) |
+| מחיר של קלט אודיו | לא זמין | ‫3.25$‎ (0.00008$‎ לשנייה) |
+| מחיר של הזנת סרטון | לא זמין | ‫6.00$ (0.000395$ לכל פריים) |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Embedding do Gemini
+## Gemini Embedding
 
 *`gemini-embedding-001`*
 
-[Testar a API](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br)
+[התנסות עם ה-API](https://ai.google.dev/gemini-api/docs/embeddings?hl=he)
 
-Nosso modelo de embeddings do Gemini para casos de uso somente de texto, disponível para desenvolvedores nos níveis sem custo financeiro e pagos da API Gemini.
+מודל Gemini Embeddings לתרחישי שימוש שמבוססים על טקסט בלבד, שזמין למפתחים ברמות השימוש החינמיות והבתשלום של Gemini API.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 0,15 |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | 0.60 ש"ח |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,075 |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | $‎0.075 |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Pré-lançamento do Gemini Robotics-ER 1.6
+## ‫Gemini Robotics-ER 1.6 Preview
 
 *`gemini-robotics-er-1.6-preview`*
 
-[Teste no Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=pt-br)
+[אפשר לנסות את זה ב-Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=he)
 
-O Gemini Robotics-ER, abreviação de Gemini Robotics-Embodied Reasoning, é um modelo de pensamento que melhora a capacidade dos robôs de entender e interagir com o mundo físico.
+‫Gemini Robotics-ER, קיצור של Gemini Robotics-Embodied Reasoning (הסקת מסקנות מגולמת ב-Gemini Robotics), הוא מודל חשיבה שמשפר את היכולות של רובוטים להבין את העולם הפיזי ולקיים איתו אינטראקציה.
 
-### Padrão
+### רגיל
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | US$ 1,00 (texto / imagem / vídeo) US$2,00 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Sem custo financeiro | US$ 5,00 |
-| Embasamento com a Pesquisa Google | Indisponível | 5.000 comandos por mês (sem custo financeiro, limite compartilhado com o Flash), depois US $14 / 1.000 consultas de pesquisa para embasamento de texto e imagem. |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | ‫4 ש"ח (טקסט / תמונה / סרטון) ‫8 ש"ח (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | בחינם | 20.00 ש"ח |
+| עיגון באמצעות חיפוש Google | לא זמין | ‫5,000 הנחיות בחודש (בחינם, המגבלה משותפת עם Flash), ואז 14 $‎ לכל 1,000 שאילתות חיפוש להארקה מבוססת-טקסט ותמונה. |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-### Lote
+### Batch
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 0,50 (texto / imagem / vídeo) US$1,00 (áudio) |
-| Preço de saída (incluindo tokens de pensamento) | Indisponível | US$ 2,50 |
-| Embasamento com a Pesquisa Google | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫0.50$ (טקסט / תמונה / סרטון) ‫1.00$ (אודיו) |
+| מחיר הפלט (כולל טוקנים של חשיבה) | לא זמין | 10.00 ש"ח |
+| עיגון באמצעות חיפוש Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Pré-lançamento do Gemini 2.5 Computer Use
+## ‫Gemini 2.5 Computer Use Preview
 
 *`gemini-2.5-computer-use-preview-10-2025`*
 
-Nosso modelo de uso de computador otimizado para criar agentes de controle de navegador que automatizam tarefas.
+מודל השימוש במחשב שלנו מותאם ליצירת סוכנים לשליטה בדפדפן שמבצעים משימות באופן אוטומטי.
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Indisponível | US$ 1,25, comandos <= 200 mil tokens US$2,50, comandos > 200 mil tokens |
-| Preço de saída | Indisponível | US$ 10,00, comandos <= 200 mil tokens US$15,00, comandos > 200 mil |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | לא זמין | ‫1.25$, הנחיות עם ‎<= 200k טוקנים ‫2.50$, הנחיות עם ‎> 200k טוקנים |
+| מחיר הפלט | לא זמין | ‫10.00$, הנחיות עם ‎ <= 200k tokens ‫15.00$, הנחיות עם ‎ > 200k |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
 ## Gemma 4
 
-Nosso modelo aberto, leve e de última geração, criado com a mesma tecnologia
-que alimenta os modelos do Gemini.
+מודל קל משקל, מתקדם ופתוח, שנבנה על בסיס אותה טכנולוגיה שמפעילה את המודלים של Gemini.
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| Preço de entrada | Sem custo financeiro | Indisponível |
-| Preço de saída | Sem custo financeiro | Indisponível |
-| Preço do armazenamento em cache de contexto | Sem custo financeiro | Indisponível |
-| Armazenamento em cache de contexto | Sem custo financeiro | Indisponível |
-| Preço ajustado | Indisponível | Indisponível |
-| Embasamento com a Pesquisa Google | Indisponível | Indisponível |
-| Usado para melhorar nossos produtos. | [Sim](https://ai.google.dev/gemini-api/terms?hl=pt-br) | [Não](https://ai.google.dev/gemini-api/terms?hl=pt-br) |
+| מחיר קלט | בחינם | לא זמין |
+| מחיר הפלט | בחינם | לא זמין |
+| מחיר של שמירת הקשר במטמון | בחינם | לא זמין |
+| שמירת הקשר במטמון (אחסון) | בחינם | לא זמין |
+| מחיר הכוונון | לא זמין | לא זמין |
+| עיגון באמצעות חיפוש Google | לא זמין | לא זמין |
+| התרומה משמשת לשיפור המוצרים שלנו | [כן](https://ai.google.dev/gemini-api/terms?hl=he) | [לא](https://ai.google.dev/gemini-api/terms?hl=he) |
 
-## Preços das ferramentas
+## תמחור של כלים
 
-As ferramentas têm preços próprios, aplicados ao modelo que as usa.
-Confira na página [Modelos](https://ai.google.dev/gemini-api/docs/models?hl=pt-br) quais ferramentas estão disponíveis para cada modelo.
+המחירים של הכלים הם המחירים שלהם, והם חלים על המודל שמשתמש בהם.
+בדף [מודלים](https://ai.google.dev/gemini-api/docs/models?hl=he) אפשר לראות אילו כלים זמינים לכל מודל.
 
-|  | Nível sem custo financeiro | Nível pago, por 1 milhão de tokens em USD |
+|  | תוכנית בחינם | רמה בתשלום, לכל מיליון טוקנים בדולר ארה"ב |
 | --- | --- | --- |
-| [Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br#pricing) | 500 RPDs sem custo financeiro (limite compartilhado para Flash e Flash-Lite). Não disponível para o Pro. | Modelos do Gemini 2.5:  1.500 RPDs sem custos financeiros (limite compartilhado para Flash e Flash-Lite). Depois, US $35 / 1.000 comandos fundamentados   Modelos do Gemini 3:  5.000 comandos por mês (sem custos financeiros), depois US $14 / 1.000 consultas de pesquisa |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pt-br#pricing_and_rate_limits) | 500 RPD Não disponível para o Pro. | 1.500 RPD sem custo financeiro (limite compartilhado para Flash e Flash-Lite) 10.000 RPD sem custo financeiro para o Pro. Depois, US $25 / 1.000 comandos fundamentados |
-| [Execução de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=pt-br#billing) | Sem custo financeiro | A execução de código é faturada com as taxas de token padrão do modelo selecionado. Os custos são determinados apenas pelo uso da ferramenta, e não há cobranças acumuladas pelo tempo de execução da sessão. O código gerado e os resultados da execução são cobrados como **tokens de saída** quando criados e como **tokens de entrada** quando o modelo os usa como parte do processo de raciocínio iterativo. |
-| [Contexto do URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pt-br#limitations) | Sem custo financeiro | Cobrado como tokens de entrada por preços de modelo. |
-| [Uso do computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br) | Indisponível | Cobrado como tokens regulares de acordo com os preços de cada modelo (por exemplo, preços padrão do [Gemini 3.5 Flash](#gemini-3.5-flash)). Consulte a tabela de preços da [prévia do Gemini 2.5 Computer Use](#gemini-2.5-computer-use-preview-10-2025) para ver as taxas do modelo legado. |
-| [Pesquisa de arquivos](https://ai.google.dev/gemini-api/docs/file-search?hl=pt-br#pricing) | Sem custo financeiro | Cobrança de [incorporações](#gemini-embedding) a US $0,15 / 1 milhão de tokens. Tokens de documentos recuperados cobrados como tokens regulares de acordo com os preços de cada modelo. |
-| [Endpoint de ferramentas personalizadas (pré-lançamento do Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pt-br) | Indisponível | Igual aos preços do [pré-lançamento do Gemini 3.1 Pro](#gemini-3.1-pro-preview) |
+| [חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he#pricing) | ‫500 RPD בחינם (המגבלה משותפת ל-Flash ול-Flash-Lite). לא זמין ב-Pro. | מודלים של Gemini 2.5:  1,500 בקשות בחינם ליום (המגבלה משותפת ל-Flash ול-Flash-Lite). לאחר מכן, 35 $לכל 1,000 הנחיות עם הארקה   מודלים של Gemini 3:  ‫5,000 הנחיות בחודש (בחינם), ואז 14 $לכל 1,000 שאילתות חיפוש |
+| [מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he#pricing_and_rate_limits) | ‫500 RPD לא זמין בגרסת Pro. | ‫1,500 RPD בחינם (המגבלה משותפת ל-Flash ול-Flash-Lite) ‫10,000 RPD בחינם ב-Pro. לאחר מכן 25 $‎ לכל 1,000 הנחיות שמוגבלות |
+| [הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he#billing) | בחינם | החיוב על ביצוע קוד מתבצע לפי התעריפים הרגילים של טוקנים עבור המודל שנבחר. העלויות נקבעות רק לפי השימוש בכלי, ולא מצטברות עלויות על זמן הריצה של הסשן. הקוד שנוצר ותוצאות ההרצה מחויבים כ**טוקנים של פלט** כשהם נוצרים, וכ**טוקנים של קלט** כשהמודל משתמש בהם כחלק מתהליך החשיבה האיטרטיבי שלו. |
+| [הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he#limitations) | בחינם | החיוב הוא לפי טוקנים של קלט, בהתאם לתמחור של כל מודל. |
+| [שימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he) | לא זמין | החיוב הוא לפי מחיר רגיל של טוקנים לכל מודל (למשל, המחיר הרגיל של [Gemini 3.5 Flash](#gemini-3.5-flash)). בטבלת המחירים של [גרסת טרום-השקה של Gemini 2.5 לשימוש במחשב](#gemini-2.5-computer-use-preview-10-2025) מופיעים התעריפים של מודלים מדור קודם. |
+| [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he#pricing) | בחינם | החיוב על [הטמעות](#gemini-embedding) הוא 0.15 $למיליון טוקנים.  טוקנים של מסמכים שאוחזרו מחויבים כטוקנים רגילים בהתאם לתמחור של המודל. |
+| [נקודת קצה של כלי בהתאמה אישית (גרסת טרום-השקה של Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he) | לא זמין | זהה לתמחור של [Gemini 3.1 Pro Preview](#gemini-3.1-pro-preview) |
 
-## Preços para agentes
+## תמחור לנציגים
 
-Os custos de uso do agente são calculados com base no consumo de tokens e no uso das ferramentas.
+עלויות השימוש בסוכנים מחושבות על סמך צריכת הטוקנים הבסיסית והשימוש בכלים.
 
-|  | Modelo | Ferramentas |
+|  | מודל | כלים |
 | --- | --- | --- |
-| [Agente Deep Research do Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) | Toda a inferência de modelo é cobrada de acordo com as taxas padrão da lista do Gemini, incluindo tokens de entrada, saída e entrada / raciocínio intermediários gerados durante loops de agentes. | As taxas de uso da ferramenta são aplicadas por estrutura de preços atual, mantendo as distinções padrão para o embasamento da pesquisa (tokens recuperados excluídos) em comparação com Url\_context / Pesquisa de arquivos (tokens recuperados incluídos em todas as outras ferramentas). |
-| [Agentes gerenciados na API Gemini](https://ai.google.dev/gemini-api/docs/agents?hl=pt-br) | Toda a inferência de modelo é cobrada de acordo com as taxas padrão da lista do Gemini, incluindo tokens de entrada, saída e entrada / raciocínio intermediários gerados durante loops de agentes. Consulte os [detalhes de preços](https://ai.google.dev/gemini-api/docs/agents?hl=pt-br#pricing). | O ambiente de computação (CPU, memória, execução de sandbox) não é cobrado durante o período de prévia. |
-| [Agente do Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pt-br) | Toda a inferência de modelo é cobrada de acordo com as taxas padrão da lista do Gemini, incluindo tokens de entrada, saída e entrada / raciocínio intermediários gerados durante loops de agentes. Consulte os [detalhes de preços](https://ai.google.dev/gemini-api/docs/agents?hl=pt-br#pricing). | O ambiente de computação (CPU, memória, execução de sandbox) não é cobrado durante o período de prévia. |
+| [Gemini Deep Research Agent](https://ai.google.dev/gemini-api/docs/deep-research?hl=he) | כל ההסקות של המודל מחויבות לפי תעריפי הרשימה הרגילים של Gemini, כולל טוקנים של קלט, פלט וקלט ביניים / חשיבה רציונלית שנוצרו במהלך לולאות סוכנים. | התשלום על השימוש בכלי הוא בהתאם למבנה התמחור הקיים, תוך שמירה על ההבחנות הרגילות בין Search Grounding (טוקנים שאוחזרו לא נכללים) לבין Url\_context / File Search (טוקנים שאוחזרו נכללים בכל שאר הכלים). |
+| [ניהול סוכנים ב-Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=he) | כל ההסקות של המודל מחויבות לפי תעריפי הרשימה הרגילים של Gemini, כולל טוקנים של קלט, פלט וקלט ביניים / חשיבה רציונלית שנוצרו במהלך לולאות סוכנים. ([פרטים על התמחור](https://ai.google.dev/gemini-api/docs/agents?hl=he#pricing)) | במהלך תקופת התצוגה המקדימה, לא נחייב על מחשוב בסביבה (CPU, זיכרון, הרצת ארגז חול). |
+| [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=he) | כל ההסקות של המודל מחויבות לפי תעריפי הרשימה הרגילים של Gemini, כולל טוקנים של קלט, פלט וקלט ביניים / חשיבה רציונלית שנוצרו במהלך לולאות סוכנים. ([פרטים על התמחור](https://ai.google.dev/gemini-api/docs/agents?hl=he#pricing)) | במהלך תקופת התצוגה המקדימה, לא נחייב על מחשוב בסביבה (CPU, זיכרון, הרצת ארגז חול). |
 
-## Observações
+## הערות
 
-- **Faturamento de tokens de documentos**:os tokens da modalidade `DOCUMENT` (por exemplo, PDFs) são faturados na taxa de tokens de imagem. Nas respostas da API, esses tokens aparecem na modalidade `DOCUMENT` em `promptTokensDetails`.
-- O uso do Google AI Studio não tem custo financeiro em todas as [regiões disponíveis](https://ai.google.dev/gemini-api/docs/available-regions?hl=pt-br). Consulte as [perguntas frequentes sobre faturamento](https://ai.google.dev/gemini-api/docs/billing?hl=pt-br) para mais detalhes.
-- Os preços podem ser diferentes dos listados aqui e dos oferecidos na
-  Gemini Enterprise Agent Platform. Para conferir os preços da Gemini Enterprise Agent Platform, acesse a [página de preços da Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=pt-br).
-- Se você estiver usando a [recuperação dinâmica](https://ai.google.dev/gemini-api/docs/grounding?hl=pt-br) para otimizar custos, apenas as solicitações que contêm pelo menos um URL de suporte de embasamento da Web na resposta serão cobradas pelo embasamento com a Pesquisa Google.
-  Os custos do Gemini sempre são aplicados. Os limites de taxa estão sujeitos a mudanças.
+- **חיוב לפי טוקנים של מסמכים:** טוקנים של המודאליות `DOCUMENT` (לדוגמה, קובצי PDF) מחויבים לפי שיעור הטוקנים של תמונות. בתגובות מה-API, הטוקנים האלה מופיעים בקטע `DOCUMENT` modality בתוך `promptTokensDetails`.
+- השימוש ב-Google AI Studio הוא בחינם בכל [האזורים שבהם הכלי זמין](https://ai.google.dev/gemini-api/docs/available-regions?hl=he). לפרטים נוספים, אפשר לעיין ב[שאלות הנפוצות בנושא חיוב](https://ai.google.dev/gemini-api/docs/billing?hl=he).
+- יכול להיות שהמחירים יהיו שונים מהמחירים שמופיעים כאן ומהמחירים שמוצעים ב-Gemini Enterprise Agent Platform. למחירים של Gemini Enterprise Agent Platform, אפשר לעיין [בדף המחירים של Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=he).
+- אם אתם משתמשים ב[אחזור דינמי](https://ai.google.dev/gemini-api/docs/grounding?hl=he) כדי לייעל את העלויות, רק בקשות שמכילות לפחות כתובת URL אחת של תמיכה בעיגון מהאינטרנט בתשובה שלהן יחויבו על עיגון באמצעות חיפוש Google.
+  תמיד חלות עלויות על השימוש ב-Gemini. יכול להיות שיהיו שינויים במגבלות הקצב.
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Última atualização 2026-06-24 UTC.
+עדכון אחרון: 2026-06-30 (שעון UTC).
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-24 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-30 (שעון UTC)."],[],[]]

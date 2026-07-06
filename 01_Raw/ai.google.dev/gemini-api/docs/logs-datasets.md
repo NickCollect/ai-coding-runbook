@@ -1,89 +1,92 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=tr
-fetched_at: 2026-06-29T05:34:10.880218+00:00
-title: "G\u00fcnl\u00fckler ve veri k\u00fcmeleri \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=pl
+fetched_at: 2026-07-06T05:15:23.339765+00:00
+title: "Logi i zbiory danych \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Geri bildirim gönderin
+Prześlij opinię
 
-# Günlükler ve veri kümeleri
+# Logi i zbiory danych
 
-Bu kılavuzda, mevcut Gemini API uygulamalarınızda günlük kaydını etkinleştirmeye başlamak için ihtiyacınız olan her şey yer almaktadır. Bu kılavuzda, model davranışını ve kullanıcıların uygulamalarınızla nasıl etkileşim kurabileceğini daha iyi anlamak için Google AI Studio kontrol panelinde mevcut veya yeni bir uygulamadan gelen günlükleri nasıl görüntüleyeceğinizi öğreneceksiniz. Günlük kaydını kullanarak *kullanım geri bildirimlerini isteğe bağlı olarak Google ile paylaşabilir
-ve geliştiricilerin kullanım alanlarında Gemini'ı iyileştirmeye yardımcı olabilirsiniz*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=tr)
+Ten przewodnik zawiera wszystkie informacje potrzebne do rozpoczęcia włączania logowania w istniejących aplikacjach Gemini API. Z tego przewodnika dowiesz się, jak wyświetlać logi z istniejącej lub nowej aplikacji na panelu Google AI Studio, aby lepiej zrozumieć zachowanie modelu i sposób, w jaki użytkownicy mogą wchodzić w interakcje z Twoimi aplikacjami. Używaj logowania do obserwowania, debugowania i *opcjonalnie udostępniania Google opinii o użytkowaniu
+aby pomóc w ulepszaniu Gemini w różnych przypadkach użycia przez deweloperów*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=pl)
 
-[OpenAI uyumluluğu](https://ai.google.dev/gemini-api/docs/openai?hl=tr) uç noktaları üzerinden yapılanlar da dahil olmak üzere tüm `GenerateContent` ve `StreamGenerateContent` API çağrıları desteklenir.
+Obsługiwane są wszystkie wywołania interfejsu API `GenerateContent` i `StreamGenerateContent`,
+w tym te, które są wykonywane za pomocą punktów końcowych zgodności z [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pl).
 
-## 1. Google AI Studio'da günlük kaydını etkinleştirme
+## 1. Włącz logowanie w Google AI Studio
 
-Başlamadan önce, faturalandırmanın etkinleştirildiği ve sahibi olduğunuz bir projenin bulunduğundan emin olun.
+Zanim zaczniesz, upewnij się, że masz projekt z włączonymi płatnościami, którego jesteś właścicielem.
 
-1. Google [AI Studio](https://aistudio.google.com/logs?hl=tr)'da günlükler sayfasını açın.
-2. Açılır listeden projenizi seçin ve tüm istekler için varsayılan olarak günlüğe kaydetmeyi etkinleştirmek üzere etkinleştirme düğmesine basın.
+1. Otwórz stronę logów w Google [AI Studio](https://aistudio.google.com/logs?hl=pl).
+2. Wybierz projekt z menu i naciśnij przycisk włączania, aby domyślnie włączyć logowanie dla wszystkich żądań.
 
-![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=tr)
+![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=pl)
 
-Tüm projeler veya belirli projeler için günlük kaydını etkinleştirebilir ya da devre dışı bırakabilir ve bu tercihleri Google AI Studio üzerinden istediğiniz zaman değiştirebilirsiniz.
+Możesz włączyć lub wyłączyć logowanie dla wszystkich projektów albo tylko dla wybranych projektów. Te ustawienia możesz w każdej chwili zmienić w Google AI Studio.
 
-## 2. AI Studio'da günlükleri görüntüleme
+## 2. Wyświetlanie logów w AI Studio
 
-1. [AI Studio](https://aistudio.google.com/logs?hl=tr)'ya gidin.
-2. Günlüğü etkinleştirdiğiniz projeyi seçin.
-3. Günlüklerinizin tabloda ters kronolojik sırada göründüğünü görmeniz gerekir.
+1. Otwórz [AI Studio](https://aistudio.google.com/logs?hl=pl).
+2. Wybierz projekt, w którym włączono logowanie.
+3. Logi powinny pojawić się w tabeli w odwrotnej kolejności chronologicznej.
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/nano-banana-logs.gif)
 
-İstek ve yanıt çiftinin tam sayfa görüntülemesi için bir girişi tıklayın. İstemin tamamını, Gemini'dan gelen yanıtın tamamını ve önceki aşamadaki bağlamı inceleyebilirsiniz. Her projenin varsayılan depolama sınırının 1.000 günlük olduğunu ve veri kümelerine kaydedilmeyen günlüklerin süresinin 55 gün sonra dolacağını unutmayın. Projeniz depolama alanı sınırına ulaşırsa günlükleri silmeniz istenir.
+Kliknij wpis, aby wyświetlić parę żądanie-odpowiedź na pełnej stronie. Możesz sprawdzić cały prompt, pełną odpowiedź Gemini i kontekst z poprzedniej tury. Pamiętaj,że każdy projekt ma domyślny limit miejsca na dane wynoszący 1000 logów, a logi niezapisane w zbiorach danych wygasną po 55 dniach. Jeśli projekt osiągnie limit miejsca na dane, pojawi się prośba o usunięcie logów.
 
-## 3. Veri kümelerini düzenleme ve paylaşma
+## 3. Tworzenie i udostępnianie zbiorów danych
 
-- Filtreleme ölçütü olarak kullanılacak bir özellik seçmek için günlükler tablosunda üst kısımdaki filtre çubuğunu bulun.
-- Filtrelenmiş günlük görünümünüzde, tüm günlükleri veya birkaç günlüğü seçmek için onay kutularını kullanın.
-- Listenin en üstünde görünen "Veri kümesi oluştur" düğmesini tıklayın.
-- Yeni veri kümenize açıklayıcı bir ad ve isteğe bağlı bir açıklama girin.
-- Yeni oluşturduğunuz veri kümesini, seçilmiş günlükler kümesiyle birlikte görürsünüz.
-- Daha ayrıntılı analiz için veri kümenizi CSV, JSONL dosyaları olarak veya Google E-Tablolar'a aktarın.
+- W tabeli logów znajdź pasek filtrowania u góry, aby wybrać właściwość, według której chcesz filtrować.
+- W przefiltrowanym widoku logów użyj pól wyboru, aby zaznaczyć wszystkie lub kilka logów.
+- Kliknij przycisk „Utwórz zbiór danych”, który pojawi się u góry listy.
+- Nadaj nowemu zbiorowi danych opisową nazwę i opcjonalnie dodaj opis.
+- Zobaczysz utworzony zbiór danych z wybranym zestawem logów.
+- Wyeksportuj zbiór danych do dalszej analizy jako pliki CSV lub JSONL albo do Arkuszy Google.
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/sales-dataset.gif)
 
-Veri kümeleri, çeşitli kullanım alanlarında faydalı olabilir.
+Zbiory danych mogą być przydatne w wielu różnych przypadkach użycia.
 
-- **Hazır soru setleri oluşturun:** Yapay zekanızın gelişmesini istediğiniz alanlara yönelik iyileştirmeler yapın.
-- **Örnek kümeleri düzenleme:** Örneğin, başka bir modelden yanıt oluşturmak için gerçek kullanımdan alınan bir örnek veya dağıtımdan önce rutin kontroller için uç durumların bir koleksiyonu.
-- **Değerlendirme kümeleri:** Diğer modeller veya sistem talimatı yinelemeleri arasında karşılaştırma yapmak için önemli özelliklerdeki gerçek kullanımı temsil eden kümeler.
+- **Tworzenie zestawów wyzwań:** wprowadzaj przyszłe ulepszenia, które będą dotyczyć obszarów, w których chcesz, aby Twoja sztuczna inteligencja działała lepiej.
+- **Tworzenie zestawów próbek:** na przykład próbka z rzeczywistego użytkowania, aby generować odpowiedzi z innego modelu, lub zbiór przypadków brzegowych do rutynowych kontroli przed wdrożeniem.
+- **Zestawy do oceny:** zestawy reprezentujące rzeczywiste użytkowanie w przypadku ważnych funkcji, do porównywania z innymi modelami lub iteracjami instrukcji systemowych.
 
-Veri kümelerinizi gösterim örnekleri olarak paylaşmayı seçerek yapay zeka araştırmaları, Gemini API ve Google AI Studio'da ilerlemeye yardımcı olabilirsiniz. Bu sayede modellerimizi çeşitli bağlamlarda iyileştirebilir ve birçok alanda ve uygulamada geliştiriciler için faydalı olmaya devam eden yapay zeka sistemleri oluşturabiliriz.
+Możesz pomóc w rozwoju badań nad sztuczną inteligencją, Gemini API i Google AI Studio, udostępniając swoje zbiory danych jako przykłady demonstracyjne. Pozwala nam to udoskonalać nasze modele w różnych kontekstach i tworzyć systemy AI, które są przydatne dla deweloperów w wielu dziedzinach i aplikacjach.
 
-## Sonraki adımlar ve test edilecek öğeler
+## Dalsze kroki i co testować
 
-Günlüğü etkinleştirdiğinize göre deneyebileceğiniz birkaç şey:
+Teraz, gdy masz włączone logowanie, możesz wypróbować te czynności:
 
-- **Oturum geçmişiyle prototip oluşturma:** Kod uygulamaları oluşturmak için [AI Studio Build](https://aistudio.google.com/apps?hl=tr)'dan yararlanın ve kullanıcı günlüklerinin geçmişini etkinleştirmek için API anahtarınızı ekleyin.
-- **Gemini Batch API ile günlükleri yeniden çalıştırma:** [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb) aracılığıyla günlükleri yeniden çalıştırarak yanıt örnekleme ve modellerin ya da uygulama mantığının değerlendirilmesi için veri kümelerini kullanın.
+- **Tworzenie prototypów z historią sesji:** użyj [AI Studio Build](https://aistudio.google.com/apps?hl=pl), aby tworzyć aplikacje z kodem i dodać klucz interfejsu API, który umożliwi zapisywanie historii logów użytkowników.
+- **Ponowne uruchamianie logów za pomocą Gemini Batch API:** używaj zbiorów danych do próbkowania odpowiedzi
+  i oceny modeli lub logiki aplikacji, ponownie uruchamiając logi za pomocą
+  [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
 
-## Uyumluluk
+## Zgodność
 
-Günlüğe kaydetme özelliği şu anda aşağıdakiler için desteklenmemektedir:
+Logowanie nie jest obecnie obsługiwane w przypadku:
 
-- Imagen ve Veo modelleri
-- Gemini yerleştirme modeli
-- Video, GIF veya PDF içeren girişler
+- modeli Imagen i Veo,
+- modelu Gemini do tworzenia osadzeń,
+- danych wejściowych zawierających filmy, GIF-y lub pliki PDF.
 
-Geri bildirim gönderin
+Prześlij opinię
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Son güncelleme tarihi: 2026-06-01 UTC.
+Ostatnia aktualizacja: 2026-06-01 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Chcesz przekazać coś jeszcze?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-01 UTC."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-01 UTC."],[],[]]

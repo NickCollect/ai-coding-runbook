@@ -1,47 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=zh-TW
-fetched_at: 2026-06-29T05:32:09.982083+00:00
-title: "API \u7248\u672c\u8aaa\u660e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=es-419
+fetched_at: 2026-07-06T05:10:31.026505+00:00
+title: "Explicaci\u00f3n de las versiones de la API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [API 參考資料](https://ai.google.dev/api?hl=zh-tw)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Referencia de la API](https://ai.google.dev/api?hl=es-419)
 
-提供意見
+Enviar comentarios
 
-# API 版本說明
+# Explicación de las versiones de la API
 
-本文將概略說明 Gemini API 的 `v1` 和 `v1beta` 版本之間的差異。
+En este documento, se proporciona una descripción general de alto nivel de las diferencias entre las versiones `v1` y `v1beta` de la API de Gemini.
 
-- **v1**：API 穩定版。穩定版中的功能在主要版本生命週期內完全受支援。如有任何重大變更，系統會建立下一個 API 主要版本，並在一段合理時間後淘汰現有版本。API 導入非破壞性變更時，不必變更主要版本。自 2026 年 6 月起，**Interactions API** 將全面開放使用，並支援 `v1`。
-- **v1beta**：這個版本包含正在積極開發的早期功能。`v1beta` 中的功能可能會根據意見回饋進行調整，但您可以在這些功能升級為穩定版之前搶先試用。
+- **v1**: Es la versión estable de la API. Las funciones de la versión estable son totalmente compatibles durante el ciclo de vida de la versión principal. Si hay cambios que interrumpen la compatibilidad, se creará la próxima versión principal de la API y la versión existente se marcará como obsoleta después de un período razonable.
+  Se pueden introducir cambios no rotundos en la API sin cambiar la versión principal. A partir de junio de 2026, la **API de Interactions** estará disponible de forma general y se admitirá en `v1`.
+- **v1beta**: Esta versión incluye funciones y capacidades iniciales que se encuentran en desarrollo activo. Si bien las funciones en `v1beta` pueden estar sujetas a cambios a medida que las perfeccionamos en función de los comentarios, te permite probar nuevas capacidades antes de que se promuevan a estables.
 
-| 功能 | v1 | v1beta |
+| Función | v1 | v1beta |
 | --- | --- | --- |
-| Interactions API |  |  |
-| 生成內容 - 僅輸入文字 |  |  |
-| 生成內容 - 輸入文字和圖片 |  |  |
-| 生成內容 - 文字輸出 |  |  |
-| 生成內容 - 多輪對話 (聊天) |  |  |
-| 生成內容 - 函式呼叫 |  |  |
-| 生成內容 - 串流 |  |  |
-| 嵌入內容 - 僅輸入文字 |  |  |
-| 生成答案 |  |  |
-| 語意檢索器 |  |  |
+| API de Interactions |  |  |
+| Genera contenido: entrada de solo texto |  |  |
+| Generar contenido: entrada de texto e imagen |  |  |
+| Generar contenido: salida de texto |  |  |
+| Generar contenido: conversaciones de varios turnos (chat) |  |  |
+| Genera contenido: Llamadas a funciones |  |  |
+| Generar contenido: transmisión |  |  |
+| Incorpora contenido: entrada de solo texto |  |  |
+| Generar respuesta |  |  |
+| Recuperador semántico |  |  |
 
-- - 支援
-- - Will never be supported
+- : Compatible
+- : Nunca será compatible
 
-## 在 SDK 中設定 API 版本
+## Cómo configurar la versión de la API en un SDK
 
-Gemini API SDK 預設為 `v1beta`，但您可以明確指定版本，方法是設定 API 版本，如下列程式碼範例所示：
+Los SDK de la API de Gemini usan `v1beta` de forma predeterminada, pero puedes especificar versiones de forma explícita configurando la versión de la API como se muestra en la siguiente muestra de código:
 
 ### Python
 
@@ -90,12 +91,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   }'
 ```
 
-提供意見
+Enviar comentarios
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-上次更新時間：2026-06-22 (世界標準時間)。
+Última actualización: 2026-06-22 (UTC)
 
-想進一步說明嗎？
+¿Quieres brindar más información?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-22 (世界標準時間)。"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]

@@ -1,62 +1,62 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-TW
-fetched_at: 2026-06-29T05:29:31.043756+00:00
-title: "\u4f7f\u7528 Gemini MCP \u548c Skills \u8a2d\u5b9a\u7a0b\u5f0f\u8a2d\u8a08\u52a9\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/coding-agents?hl=ja
+fetched_at: 2026-07-06T05:06:58.965170+00:00
+title: "Gemini MCP \u3068\u30b9\u30ad\u30eb\u3092\u4f7f\u7528\u3057\u3066\u30b3\u30fc\u30c7\u30a3\u30f3\u30b0 \u30a2\u30b7\u30b9\u30bf\u30f3\u30c8\u3092\u8a2d\u5b9a\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-提供意見
+フィードバックを送信
 
-# 使用 Gemini MCP 和 Skills 設定程式設計助理
+# Gemini MCP とスキルを使用してコーディング アシスタントを設定する
 
-AI 程式碼輔助功能雖然強大，但仍有其限制，例如訓練資料會在特定日期截止，因此無法提供新的 API 功能和變更。如果無法存取 Gemini 專屬文件，服務專員可能會建議一般模式，而非最佳化方法。
+AI コーディング アシスタントは強力ですが、制限があります。トレーニング データは特定の日付でカットオフされ、新しい API 機能や変更が反映されません。Gemini 固有のドキュメントにアクセスできない場合、エージェントは最適化されたアプローチではなく、一般的なパターンを提案する可能性があります。
 
-為確保程式設計助理能跟上不斷演進的 Gemini API 和建議用法，建議您設定 **Gemini 文件 MCP**，並使用 **Gemini API 技能**強化環境。這些工具可獨立使用，但設計宗旨是搭配運作，提供完整涵蓋範圍。
+進化する Gemini API とその推奨される使用方法に合わせてコーディング アシスタントを最新の状態に保つには、**Gemini Docs MCP** を設定し、**Gemini API Skills** で環境を強化することをおすすめします。これらのツールは個別に使用できますが、連携して完全なカバレッジを提供するように設計されています。
 
-## 連結 Gemini Docs MCP
+## Gemini Docs MCP を接続する
 
-Gemini 會在 `https://gemini-api-docs-mcp.dev`代管公開的 Model Context Protocol (MCP) 伺服器。將程式碼編寫代理程式連線至這個伺服器，可確保所有查詢都能存取最新的 API、程式碼更新和最佳設定範例。
+Gemini は、`https://gemini-api-docs-mcp.dev` にパブリック Model Context Protocol（MCP）サーバーをホストします。コーディング エージェントをこのサーバーに接続すると、すべてのクエリが最新の API、コード更新、最適な構成例にアクセスできるようになります。
 
-在代理程式的終端機或專案根目錄中執行下列指令，安裝伺服器：
+エージェントのターミナルまたはプロジェクト ルートで次のコマンドを実行して、サーバーをインストールします。
 
 ```
 npx add-mcp "https://gemini-api-docs-mcp.dev"
 ```
 
-這個伺服器會新增 `search_documentation` 函式，讓代理程式從官方 Gemini 說明文件檔案擷取即時 API 定義和整合模式。
+このサーバーは、エージェントが公式の Gemini ドキュメント ファイルからリアルタイムの API 定義と統合パターンを取得するために使用できる `search_documentation` 関数を追加します。
 
-## 新增 API 開發技能
+## API 開発スキルを追加する
 
-技能會直接在助理的環境中提供**內建規則和最佳做法** (例如強制使用正確的 SDK 和目前模型版本)，這項技能會與 Gemini Docs MCP 服務搭配運作：如果兩者都已安裝，這項技能會使用 MCP 服務取得說明文件；即使未安裝 MCP，這項技能也會從 `ai.google.dev` 擷取 `llms.txt` 做為備援。
+スキルは、アシスタントのコンテキストに直接 **組み込みのルールとベスト プラクティス**（正しい SDK と現在のモデル バージョンの適用など）を提供します。このスキルは Gemini Docs MCP サービスと連携して動作します。両方がインストールされている場合、このスキルはドキュメントに MCP サービスを使用しますが、MCP がインストールされていない場合でも、フォールバックとして `ai.google.dev` から `llms.txt` を取得します。
 
-如要安裝這些技能，可以使用下列任一支援的工具。每個技能模組下方都有安裝說明：
+これらのスキルをインストールするには、次のいずれかのサポートされているツールを使用します。両方のインストール手順は、各スキルモジュールの下に記載されています。
 
-- **[skills.sh](https://skills.sh)**：建議使用。可攜式代理程式行為的開放標準。
-- **[Context7](https://context7.com)**：支援已使用 Context7 生態系統的使用者。
+- **[skills.sh](https://skills.sh)**: 推奨。ポータブル エージェントの動作に関するオープン標準。
+- **[Context7](https://context7.com)**: Context7 エコシステムをすでに利用しているユーザーが対象です。
 
 ### gemini-api-dev
 
-這是開發一般用途 Gemini 應用程式的基礎技能。這項技能提供下列項目的文件和最佳做法：
+汎用 Gemini 開発の基礎となるスキル。このスキルでは、次のドキュメントとベスト プラクティスを提供します。
 
-- 將提示詞傳送至目前模型 (例如 Gemini 3.1 Pro/Flash)，並避開已淘汰的模型
-- 多模態提示、函式呼叫、結構化輸出內容和常見的整合模式
+- 現在のモデル（Gemini 3.1 Pro/Flash など）へのプロンプトのルーティングと、非推奨モデルの回避
+- マルチモーダル プロンプト、関数呼び出し、構造化された出力、一般的な統合パターン
 
-#### 使用 skills.sh 安裝
+#### skills.sh を使用してインストールする
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev --global
 ```
 
-#### 使用 Context7 安裝
+#### Context7 を使用してインストールする
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-api-dev
@@ -64,19 +64,19 @@ npx ctx7 skills install /google-gemini/gemini-skills gemini-api-dev
 
 ### gemini-live-api-dev
 
-這項技能可協助您使用 Gemini Live API 建構即時對話式 AI 應用程式。這項技能提供下列項目的文件和最佳做法：
+Gemini Live API を使用してリアルタイムの会話型 AI アプリケーションを構築するスキル。このスキルでは、次のドキュメントとベスト プラクティスを提供します。
 
-- 用於低延遲串流的 WebSocket 連線
-- 串流音訊、影片和文字
-- 語音活動偵測和插話支援
+- 低レイテンシ ストリーミング用の WebSocket 接続
+- 音声、動画、テキストのストリーミング
+- 音声アクティビティ検出と割り込みのサポート
 
-#### 使用 skills.sh 安裝
+#### skills.sh を使用してインストールする
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-live-api-dev --global
 ```
 
-#### 使用 Context7 安裝
+#### Context7 を使用してインストールする
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-live-api-dev
@@ -84,87 +84,87 @@ npx ctx7 skills install /google-gemini/gemini-skills gemini-live-api-dev
 
 ### gemini-interactions-api
 
-使用 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 建構應用程式的技能。Interactions API 是與 Gemini 模型和代理互動的統一介面，專為代理應用程式設計。這項技能涵蓋的主題包括：
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) を使用してアプリを構築するためのスキル。Interactions API は、Gemini モデルとエージェントを操作するための統合インターフェースであり、エージェント アプリケーション向けに設計されています。このスキルでは、次の内容について学習します。
 
-- 生成文字、進行多輪對話及串流
-- 函式呼叫、結構化輸出內容和圖像生成
-- 背景執行和 Deep Research 代理
-- 伺服器端對話狀態管理
-- Python 和 TypeScript SDK 模式
+- テキスト生成、マルチターン チャット、ストリーミング
+- 関数呼び出し、構造化出力、画像生成
+- バックグラウンド実行と Deep Research エージェント
+- サーバーサイドの会話状態管理
+- Python と TypeScript の SDK パターン
 
-#### 使用 skills.sh 安裝
+#### skills.sh を使用してインストールする
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-interactions-api --global
 ```
 
-#### 使用 Context7 安裝
+#### Context7 を使用してインストールする
 
 ```
 npx ctx7 skills install /google-gemini/gemini-skills gemini-interactions-api
 ```
 
-## 驗證安裝
+## インストールを確認する
 
-安裝完成後，請確認程式碼輔助工具可以連線至 Gemini Docs MCP 伺服器，並使用您安裝的技能。
+インストール後、コーディング アシスタントが Gemini Docs MCP サーバーに接続し、インストールしたスキルを使用できることを確認します。
 
-### 1. 驗證服務專員行為
+### 1. エージェントの動作を確認する
 
-如要驗證，最可靠的方式是向服務專員詢問有關 Gemini API 的技術問題。
+最も確実な方法は、Gemini API に関する技術的な質問をエージェントにすることです。
 
-**提示：**「如何使用 Gemini API 的脈絡快取功能？」
+**プロンプト:** 「Gemini API でコンテキスト キャッシュ保存機能を使用するにはどうすればよいですか？」
 
-設定成功後，系統會：
+設定が正常に完了すると、次のようになります。
 
-- **提供準確的程式碼**：從最新端點參照特定 Gemini 方法，例如 `cacheContent` 或 `cachedContents.create`。
-- **使用 MCP 工具**：顯示工具已連線至 **Gemini 文件 MCP 伺服器**，或使用 `search_documentation` 工具擷取資料。
-- **叫用已載入的技能**：顯示「使用技能：gemini-api-dev」指標 (如果依附於次要包裝函式)。
+- **正確なコードを提供する**: 最新のエンドポイントから `cacheContent` や `cachedContents.create` などの特定の Gemini メソッドを参照します。
+- **MCP ツールを使用する**: **Gemini Docs MCP サーバー**に接続されていること、または `search_documentation` ツールを使用してデータを取得していることを示します。
+- **読み込まれたスキルを呼び出す**: 「スキルを使用中: gemini-api-dev」というインジケーターを表示します（セカンダリ ラッパーを使用している場合）。
 
-### 2. 驗證表現和工具
+### 2. 現象とツールを確認する
 
-如果代理程式提供一般或通用答案，請使用環境專用的 Discovery 或 Status 指令，確認 Docs MCP 或技能已載入記憶體。
+エージェントが一般的な回答をした場合は、環境固有の Discovery コマンドまたは Status コマンドを使用して、Docs MCP またはスキルがメモリに読み込まれていることを確認します。
 
-| 環境 | MCP 驗證 | 技能驗證 |
+| 環境 | MCP の確認 | スキルの確認 |
 | --- | --- | --- |
-| **Claude Code** | 在終端機中輸入 `/mcp`，即可查看有效伺服器和 `search_documentation` 工具。 | 在終端機中輸入 `/skills`，即可列出所有有效資訊清單。 |
-| **游標** | 依序前往「設定」>「功能」>「MCP」。確認伺服器已「連線」。 | 依序開啟「設定」>「規則」。確認技能是否顯示在「Agent Decides」下方。 |
-| **Antigravity** | 檢查「自訂」>「連結」側欄中的 MCP 狀態。 | 輸入 `/skills list` 或查看「自訂」>「規則」側欄。 |
-| **Gemini CLI** | 執行 `gemini mcp list` 或使用 `/mcp list`。 | 執行 `gemini skills list` 或在工作階段中使用 `/skills` 斜線指令。 |
-| **Copilot** | 輸入 `@gemini /mcp` 即可列出有效的資料連接器。 | 輸入 `@gemini /skills` (或 `/skills`) 即可查看有效擴充功能。 |
+| **Claude Code** | ターミナルに「`/mcp`」と入力して、アクティブなサーバーと `search_documentation` ツールを表示します。 | ターミナルで `/skills` と入力して、アクティブなすべてのマニフェストを一覧表示します。 |
+| **Cursor** | **[設定] > [機能] > [MCP]** に移動します。サーバーが [接続済み] になっていることを確認します。 | **[設定] > [ルール]** を開きます。スキルが [Agent Decides] に表示されていることを確認します。 |
+| **Antigravity** | [**カスタマイズ > 接続**] サイドバーで MCP のステータスを確認します。 | `/skills list` と入力するか、[**カスタマイズ] > [ルール]** のサイドバーを確認します。 |
+| **Gemini CLI** | `gemini mcp list` を実行するか、`/mcp list` を使用します。 | `gemini skills list` を実行するか、セッション中に `/skills` スラッシュ コマンドを使用します。 |
+| **Copilot** | `@gemini /mcp` と入力して、アクティブなデータコネクタを一覧表示します。 | `@gemini /skills`（または `/skills`）と入力すると、有効な拡張機能が表示されます。 |
 
-## 疑難排解
+## トラブルシューティング
 
-如果代理程式只提供一般資訊，或無法辨識 Gemini 專屬方法，請檢查下列事項：
+エージェントが一般的な情報しか提供しない場合や、Gemini 固有のメソッドを認識しない場合は、次の点を確認してください。
 
-### 代理程式未探索到技能
+### エージェントがスキルを検出できなかった
 
-大多數代理程式只會在啟動時為技能建立索引。
+ほとんどのエージェントは、起動時にのみスキルをインデックス登録します。
 
-**修正方式：**完全重新啟動 IDE (Cursor/VS Code)，或結束並重新開啟終端機型代理程式 (Claude Code)。
+**修正:** IDE（Cursor/VS Code）を完全に再起動するか、ターミナルベースのエージェント（Claude Code）を終了して再度開きます。
 
-### 全球與區域衝突
+### グローバルな競合とローカルな競合
 
-如果您使用 `--global` 旗標安裝代理程式，代理程式可能會忽略該旗標，改用專案專屬規則。
+`--global` フラグを使用してインストールした場合、エージェントはプロジェクト固有のルールを優先してこのフラグを無視している可能性があります。
 
-**修正：**嘗試直接將技能安裝到專案根目錄，不要使用全域標記：
+**修正:** グローバル フラグなしで、スキルをプロジェクト ルートに直接インストールしてみてください。
 
 ```
 npx skills add google-gemini/gemini-skills --skill gemini-api-dev
 ```
 
-## 資源
+## リソース
 
-- [GitHub 上的 Gemini API 技能](https://github.com/google-gemini/gemini-skills)
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw)
-- [開始使用](https://ai.google.dev/gemini-api/docs/get-started?hl=zh-tw)
-- [程式庫](https://ai.google.dev/gemini-api/docs/libraries?hl=zh-tw)
+- [GitHub の Gemini API スキル](https://github.com/google-gemini/gemini-skills)
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja)
+- [使ってみる](https://ai.google.dev/gemini-api/docs/get-started?hl=ja)
+- [ライブラリ](https://ai.google.dev/gemini-api/docs/libraries?hl=ja)
 
-提供意見
+フィードバックを送信
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-上次更新時間：2026-06-22 (世界標準時間)。
+最終更新日 2026-06-22 UTC。
 
-想進一步說明嗎？
+ご意見をお聞かせください
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-22 (世界標準時間)。"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-22 UTC。"],[],[]]

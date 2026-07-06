@@ -1,41 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=th
-fetched_at: 2026-06-29T05:31:41.572017+00:00
-title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=tr
+fetched_at: 2026-07-06T05:06:55.276872+00:00
+title: "Ara\u015ft\u0131rma i\u00e7in Gemini ile ke\u015ffi h\u0131zland\u0131r\u0131n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
 
-# เร่งการค้นพบด้วย Gemini สำหรับการวิจัย
+# Araştırma için Gemini ile keşfi hızlandırın
 
-[รับคีย์ Gemini API](https://aistudio.google.com/apikey?hl=th)
+[Gemini API anahtarı edinme](https://aistudio.google.com/apikey?hl=tr)
 
-คุณสามารถใช้โมเดล Gemini เพื่อต่อยอดงานวิจัยพื้นฐานในสาขาวิชาต่างๆ
-วิธีที่คุณใช้ Gemini เพื่อการวิจัยได้มีดังนี้
+Gemini modelleri, çeşitli disiplinlerdeki temel araştırmaları ilerletmek için kullanılabilir.
+Araştırmalarınızda Gemini'ı kullanabileceğiniz yöntemler:
 
-- **วิเคราะห์และควบคุมเอาต์พุตของโมเดล**: คุณสามารถตรวจสอบตัวเลือกคำตอบที่โมเดลสร้างขึ้นโดยใช้เครื่องมือต่างๆ เช่น `CitationMetadata` เพื่อทำการวิเคราะห์เพิ่มเติมได้ นอกจากนี้ คุณยังกำหนดค่าตัวเลือกสำหรับการสร้างโมเดลและ
-  เอาต์พุตได้ด้วย เช่น `responseSchema`, `topP` และ `topK` [ดูข้อมูลเพิ่มเติม](https://ai.google.dev/api/generate-content?hl=th)
-- **อินพุตแบบหลายรูปแบบ**: Gemini สามารถประมวลผลรูปภาพ เสียง และวิดีโอ ซึ่งช่วยให้มี
-  แนวทางการวิจัยที่น่าสนใจมากมาย [ดูข้อมูลเพิ่มเติม](https://ai.google.dev/gemini-api/docs/vision?hl=th)
-- **ความสามารถด้านบริบทแบบยาว**: Gemini 3.0 Flash และ Pro มาพร้อมหน้าต่างบริบทขนาด 1 ล้านโทเค็น
-  [ดูข้อมูลเพิ่มเติม](https://ai.google.dev/gemini-api/docs/long-context?hl=th)
-- **Grow with Google**: เข้าถึงโมเดล Gemini อย่างรวดเร็วผ่าน API และ Google AI
-  Studio สำหรับกรณีการใช้งานในการผลิต หากคุณกำลังมองหาแพลตฟอร์มที่ใช้ Google Cloud
-  แพลตฟอร์มเอเจนต์ Gemini Enterprise สามารถมอบโครงสร้างพื้นฐานเพิ่มเติมที่รองรับได้
+- **Model çıkışlarını analiz etme ve kontrol etme**: Daha ayrıntılı analiz için model tarafından oluşturulan bir yanıt adayını `CitationMetadata` gibi araçlarla inceleyebilirsiniz. Ayrıca `responseSchema`, `topP` ve `topK` gibi model oluşturma ve çıkışlarla ilgili seçenekleri de yapılandırabilirsiniz. [Daha fazla bilgi edinin](https://ai.google.dev/api/generate-content?hl=tr).
+- **Çok formatlı girişler**: Gemini, görüntüleri, sesleri ve videoları işleyerek heyecan verici birçok araştırma yönü sunar. [Daha fazla bilgi edinin](https://ai.google.dev/gemini-api/docs/vision?hl=tr).
+- **Uzun bağlam özellikleri**: Gemini 3.0 Flash ve Pro, 1 milyon parçalık bağlam penceresiyle birlikte gelir. [Daha fazla bilgi edinin](https://ai.google.dev/gemini-api/docs/long-context?hl=tr).
+- **Grow with Google**: Üretim kullanım alanları için API ve Google AI Studio üzerinden Gemini modellerine hızlıca erişin. Google Cloud tabanlı bir platform arıyorsanız Gemini Enterprise Agent Platform ek destekleyici altyapı sağlayabilir.
 
-Google ให้สิทธิ์เข้าถึงเครดิต Gemini API สำหรับนักวิทยาศาสตร์และนักวิจัยทางวิชาการผ่าน[โปรแกรม Gemini สำหรับสถาบันการศึกษา](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=th#gemini-academic-program) เพื่อสนับสนุนการวิจัยทางวิชาการและขับเคลื่อนการวิจัยที่ล้ำสมัย
+Google, akademik araştırmaları desteklemek ve çığır açan araştırmalar yapmak için [Gemini Academic Program](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=tr#gemini-academic-program) aracılığıyla bilim insanlarına ve akademik araştırmacılara Gemini API kredilerine erişim imkanı sunar.
 
-## เริ่มต้นใช้งาน Gemini
+## Gemini'ı kullanmaya başlayın
 
-Gemini API และ Google AI Studio ช่วยให้คุณเริ่มต้นใช้งานโมเดลล่าสุดของ Google
-และเปลี่ยนไอเดียของคุณให้เป็นแอปพลิเคชันที่ปรับขนาดได้
+Gemini API ve Google AI Studio, Google'ın en yeni modelleriyle çalışmaya başlamanıza ve fikirlerinizi ölçeklenebilir uygulamalara dönüştürmenize yardımcı olur.
 
 ### Python
 
@@ -83,48 +77,40 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
    }'
 ```
 
-## นักวิชาการที่แนะนำ
+## Öne çıkan akademisyenler
 
-![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=th)
+![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=tr)
 
-"การวิจัยของเราตรวจสอบ Gemini ในฐานะโมเดลภาษาภาพ (VLM) และพฤติกรรมแบบเอเจนต์ในสภาพแวดล้อมที่หลากหลายจากมุมมองด้านความแข็งแกร่งและความปลอดภัย จนถึงตอนนี้ เราได้ประเมินความแข็งแกร่งของ Gemini ในการรับมือกับสิ่งรบกวนต่างๆ เช่น หน้าต่างป๊อปอัป เมื่อเอเจนต์ VLM ทำงานบนคอมพิวเตอร์ และได้ใช้ประโยชน์จาก Gemini ในการวิเคราะห์การโต้ตอบทางโซเชียล เหตุการณ์ตามลำดับเวลา รวมถึงปัจจัยเสี่ยงตามข้อมูลวิดีโอที่ป้อน"
+"Araştırmamızda Gemini, görsel dil modeli (VLM) olarak ele alınmakta ve farklı ortamlardaki temsilci davranışları sağlamlık ve güvenlik açısından incelenmektedir. Şimdiye kadar, VLM temsilcileri bilgisayar görevlerini yerine getirirken Gemini'ın pop-up pencereler gibi dikkat dağıtıcı unsurlara karşı ne kadar sağlam olduğunu değerlendirdik ve video girişine dayalı olarak sosyal etkileşimi, zamansal olayları ve risk faktörlerini analiz etmek için Gemini'dan yararlandık."
 
-![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=th)
+[Diyi Yang'ın Web Sitesi](https://cs.stanford.edu/~diyiy/)
 
-"Gemini Pro และ Flash ที่มีหน้าต่างบริบทแบบยาวช่วยเราใน OK-Robot ซึ่งเป็นโปรเจ็กต์การจัดการบนอุปกรณ์เคลื่อนที่แบบเปิดคำศัพท์ Gemini ช่วยให้สามารถใช้คำสั่งและคำค้นหาภาษาธรรมชาติที่ซับซ้อนกับ "หน่วยความจำ" ของหุ่นยนต์ได้ ในกรณีนี้คือการสังเกตการณ์ก่อนหน้าที่หุ่นยนต์ดำเนินการเป็นเวลานาน นอกจากนี้ ผมและ Mahi Shafiullah ยังใช้ Gemini เพื่อแยกย่อยงานเป็นโค้ดที่หุ่นยนต์สามารถดำเนินการในโลกแห่งความเป็นจริงได้ด้วย"
+![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=tr)
 
-## โปรแกรม Gemini Academic
+"Uzun bağlam penceresi sayesinde Gemini Pro ve Flash, açık sözcük dağarcığına sahip mobil manipülasyon projemiz OK-Robot'ta bize yardımcı oluyor. Gemini, robotun "hafızası" üzerinden karmaşık doğal dil sorgularına ve komutlarına olanak tanır. Bu durumda, robotun uzun bir çalışma süresi boyunca yaptığı önceki gözlemler söz konusudur. Mahi Shafiullah ile birlikte, görevleri robotun gerçek dünyada yürütebileceği kodlara ayırmak için de Gemini'ı kullanıyoruz."
 
-นักวิจัยด้านวิชาการที่มีคุณสมบัติ (เช่น คณาจารย์ เจ้าหน้าที่ และนักศึกษาปริญญาเอก) ใน[ประเทศที่รองรับ](https://ai.google.dev/gemini-api/docs/available-regions?hl=th)สามารถสมัครรับเครดิต Gemini API
-และขีดจำกัดอัตราที่สูงขึ้นสำหรับโปรเจ็กต์วิจัย การสนับสนุนนี้ช่วยให้การทดลองทางวิทยาศาสตร์มีอัตราการส่งข้อมูลสูงขึ้นและช่วยพัฒนาการวิจัย
+[Lerrel Pinto'nun Web Sitesi](https://www.lerrelpinto.com/)
 
-เราสนใจเป็นพิเศษในสาขาการวิจัยในส่วนต่อไปนี้
-แต่ก็ยินดีรับใบสมัครจากสาขาวิทยาศาสตร์ต่างๆ
+## Gemini Academic Program
 
-- **การประเมินและเกณฑ์มาตรฐาน**: วิธีการประเมินที่ชุมชนรับรองซึ่ง
-  สามารถให้สัญญาณประสิทธิภาพที่แข็งแกร่งในด้านต่างๆ เช่น ความถูกต้อง ความปลอดภัย
-  การปฏิบัติตามคำสั่ง การให้เหตุผล และการวางแผน
-- **เร่งการค้นพบทางวิทยาศาสตร์เพื่อประโยชน์ของมวลมนุษยชาติ**: ศักยภาพ
-  ในการประยุกต์ใช้ AI ในการวิจัยทางวิทยาศาสตร์แบบสหวิทยาการ ซึ่งรวมถึงสาขาต่างๆ
-  เช่น โรคหายากและโรคที่ถูกละเลย ชีววิทยาเชิงทดลอง วิทยาศาสตร์วัสดุ
-  และความยั่งยืน
-- **การจำลองและการโต้ตอบ**: ใช้โมเดลภาษาขนาดใหญ่เพื่อ
-  ตรวจสอบการโต้ตอบใหม่ๆ ในสาขา AI แบบฝังตัว การโต้ตอบรอบข้าง
-  หุ่นยนต์ และการโต้ตอบระหว่างมนุษย์กับคอมพิวเตอร์
-- **ความสามารถที่เกิดขึ้นใหม่**: การสำรวจความสามารถด้าน Agentic AI ใหม่ที่จำเป็นต่อการปรับปรุงการให้เหตุผลและการวางแผน รวมถึงวิธีขยายความสามารถระหว่างการอนุมาน (เช่น โดยใช้ Gemini Flash)
-- **การโต้ตอบและการทำความเข้าใจแบบมัลติโมดัล**: ระบุช่องว่างและโอกาสสำหรับโมเดลพื้นฐานแบบมัลติโมดัลเพื่อการวิเคราะห์ การให้เหตุผล และการวางแผนในงานต่างๆ
+[Desteklenen ülkelerdeki](https://ai.google.dev/gemini-api/docs/available-regions?hl=tr) nitelikli akademik araştırmacılar (ör. öğretim üyeleri, personel ve doktora öğrencileri), araştırma projeleri için Gemini API kredileri ve daha yüksek hız sınırları almak üzere başvurabilir. Bu destek, bilimsel deneylerde daha yüksek işleme hızı elde edilmesini ve araştırmaların ilerlemesini sağlar.
 
-การมีสิทธิ์: เฉพาะบุคคลธรรมดา (คณาจารย์ นักวิจัย หรือเทียบเท่า)
-ที่สังกัดสถาบันการศึกษาหรือองค์กรวิจัยทางวิชาการที่ถูกต้อง
-เท่านั้นที่จะสมัครได้ โปรดทราบว่า Google จะเป็นผู้พิจารณาให้สิทธิ์เข้าถึง API และเครดิต รวมถึงการนำสิทธิ์เข้าถึงและเครดิตออก
-เราตรวจสอบใบสมัครเป็นรายเดือน
+Aşağıdaki bölümde yer alan araştırma alanlarıyla özellikle ilgileniyoruz ancak farklı bilimsel disiplinlerden gelen başvuruları da kabul ediyoruz:
 
-### เริ่มค้นคว้าด้วย Gemini API
+- **Değerlendirmeler ve karşılaştırmalar**: Doğruluk, güvenlik, talimatlara uyma, muhakeme ve planlama gibi alanlarda güçlü bir performans sinyali sağlayabilen, topluluk tarafından onaylanmış değerlendirme yöntemleri.
+- **İnsanlığın yararına bilimsel keşifleri hızlandırma**: Nadir ve ihmal edilen hastalıklar, deneysel biyoloji, malzeme bilimi ve sürdürülebilirlik gibi alanlar da dahil olmak üzere disiplinler arası bilimsel araştırmalarda yapay zekanın potansiyel uygulamaları.
+- **Vücutlandırma ve etkileşimler**: Vücutlandırılmış yapay zeka, ortam etkileşimleri, robotik ve insan-bilgisayar etkileşimi alanlarındaki yeni etkileşimleri araştırmak için büyük dil modellerinden yararlanma.
+- **Yeni özellikler**: Akıl yürütme ve planlamayı geliştirmek için gereken yeni aracı özelliklerini ve çıkarım sırasında özelliklerin nasıl genişletilebileceğini (ör. Gemini Flash'i kullanarak) keşfetme.
+- **Çok formatlı etkileşim ve anlama**: Çeşitli görevlerde analiz, muhakeme ve planlama için çok formatlı temel modellerdeki eksiklikleri ve fırsatları belirleme.
 
-[สมัครเลย](https://forms.gle/HMviQstU8PxC5iCt5)
+Uygunluk: Yalnızca geçerli bir akademik kuruma veya akademik araştırma kuruluşuna bağlı kişiler (öğretim üyeleri, araştırmacılar veya benzeri) başvurabilir. API erişiminin ve kredilerin Google'ın takdiri doğrultusunda verileceğini ve kaldırılacağını unutmayın. Başvuruları aylık olarak inceleriz.
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+### Gemini API ile araştırmaya başlama
 
-อัปเดตล่าสุด 2026-06-22 UTC
+[Hemen başvurun](https://forms.gle/HMviQstU8PxC5iCt5)
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-22 UTC"],[],[]]
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+
+Son güncelleme tarihi: 2026-07-01 UTC.
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-01 UTC."],[],[]]

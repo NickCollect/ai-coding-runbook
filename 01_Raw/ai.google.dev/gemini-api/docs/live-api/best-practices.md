@@ -1,108 +1,93 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=ar
-fetched_at: 2026-06-29T05:33:07.914598+00:00
-title: "\u0623\u0641\u0636\u0644 \u0627\u0644\u0645\u0645\u0627\u0631\u0633\u0627\u062a \u0627\u0644\u0645\u062a\u0639\u0644\u0651\u0642\u0629 \u0628\u0648\u0627\u062c\u0647\u0629 Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=de
+fetched_at: 2026-07-06T05:14:30.190502+00:00
+title: "Best Practices f\u00fcr die Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-إرسال ملاحظات
+Feedback geben
 
-# أفضل الممارسات المتعلّقة بواجهة Live API
+# Best Practices für die Live API
 
-يتناول هذا الدليل أفضل الممارسات التي يمكنك اتّباعها لتحسين استخدامك لواجهة برمجة التطبيقات Live API.
-للحصول على نظرة عامة ورمز نموذجي لحالات الاستخدام الشائعة، يُرجى الاطّلاع على صفحة [البدء في استخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar).
+In diesem Leitfaden werden Best Practices beschrieben, mit denen Sie die Verwendung der Live API optimieren können.
+Auf der Seite [Erste Schritte mit der Live API](https://ai.google.dev/gemini-api/docs/live?hl=de) finden Sie eine Übersicht und Beispielcode für gängige Anwendungsfälle.
 
-## تصميم تعليمات واضحة للنظام
+## Klare Systemanweisungen erstellen
 
-للحصول على أفضل أداء من Live API، ننصحك بوضع مجموعة محدّدة بوضوح من تعليمات النظام (SI) التي تحدّد شخصية الوكيل وقواعد المحادثة والضوابط، بهذا الترتيب.
+Damit die Live API optimal funktioniert, empfehlen wir, einen klar definierten Satz von Systemanweisungen zu verwenden, der die Persona des Agents, die Konversationsregeln und die Schutzmaßnahmen in dieser Reihenfolge definiert.
 
-للحصول على أفضل النتائج، افصل كل وكيل في تعليمات نظام مميزة.
+Um optimale Ergebnisse zu erzielen, sollten Sie für jeden Kundenservicemitarbeiter einen separaten SI erstellen.
 
-1. **تحديد شخصية الوكيل:** قدِّم تفاصيل حول اسم الوكيل ودوره وأي خصائص مفضّلة. إذا أردت تحديد اللهجة، احرص أيضًا على تحديد لغة الإخراج المفضّلة (مثل اللهجة البريطانية للمتحدث باللغة الإنجليزية).
-2. **تحديد قواعد المحادثة:** ضَع هذه القواعد بالترتيب الذي تتوقّع أن يتّبعه النموذج. ميِّز بين العناصر التي تظهر مرة واحدة في المحادثة والحلقات الحوارية. على سبيل المثال:
+1. **Agent-Persona angeben**:Geben Sie den Namen, die Rolle und alle bevorzugten Eigenschaften des Agenten an. Wenn Sie den Akzent angeben möchten, müssen Sie auch die bevorzugte Ausgabesprache angeben (z. B. einen britischen Akzent für einen englischen Sprecher).
+2. **Regeln für die Konversation festlegen**:Geben Sie die Regeln in der Reihenfolge an, in der das Modell sie befolgen soll. Unterscheiden Sie zwischen einmaligen Elementen der Unterhaltung und Gesprächsschleifen. Beispiel:
 
-   - **العنصر الذي يظهر مرة واحدة:** اجمع تفاصيل العميل مرة واحدة (مثل الاسم والموقع الجغرافي ورقم بطاقة برنامج الولاء).
-   - **الحلقة الحوارية:** يمكن للمستخدم مناقشة الاقتراحات والأسعار وعمليات الإرجاع والتسليم، وقد يرغب في الانتقال من موضوع إلى آخر. أخبِر النموذج أنّه لا بأس من المشاركة في هذه الحلقة الحوارية طالما أراد المستخدم ذلك.
-3. **تحديد طلبات الأدوات ضِمن سير العمل في جمل منفصلة:** على سبيل المثال، إذا كانت خطوة جمع تفاصيل العميل مرة واحدة تتطلّب استدعاء دالة `get_user_info`، يمكنك قول: *خطوتك الأولى هي جمع معلومات المستخدم. اطلب أولاً من المستخدم تقديم اسمه وموقعه الجغرافي ورقم بطاقة برنامج الولاء. بعد ذلك،
-   استدعِ `get_user_info` باستخدام هذه التفاصيل.*
-4. ***إضافة أي ضوابط ضرورية:** قدِّم أي ضوابط عامة للمحادثة
-   لا تريد أن يتّبعها النموذج. يمكنك تقديم أمثلة محدّدة على ما تريد أن يفعله النموذج إذا حدث *x*.* إذا كنت لا تزال لا تحصل على المستوى المفضّل من الدقة، استخدِم الكلمة *بشكل لا لبس فيه* لتوجيه النموذج إلى أن يكون دقيقًا.
+   - **Einmaliges Element**:Erfassen Sie die Daten eines Kunden einmalig, z. B. Name, Standort, Kundenkartennummer.
+   - **Konversationsschleife**:Der Nutzer kann Empfehlungen, Preise, Rückgaben und die Lieferung besprechen und möglicherweise von Thema zu Thema wechseln. Teilen Sie dem Modell mit, dass es diesen Konversationszyklus so lange fortsetzen kann, wie der Nutzer möchte.
+3. **Tool-Aufrufe in einem Ablauf in separaten Sätzen angeben**:Wenn beispielsweise ein einmaliger Schritt zum Erfassen der Kundendetails den Aufruf einer `get_user_info`-Funktion erfordert, könnten Sie Folgendes sagen: *Der erste Schritt besteht darin, Nutzerinformationen zu erfassen. Bitte den Nutzer zuerst, seinen Namen, seinen Standort und seine Kundenkartennummer anzugeben. Rufen Sie dann `get_user_info` mit diesen Details auf.*
+4. **Erforderliche Schutzmaßnahmen hinzufügen**:Geben Sie alle allgemeinen Konversationsschutzmaßnahmen an, die das Modell nicht ausführen soll. Sie können auch spezifische Beispiele angeben, z. B. wenn *x* passiert, soll das Modell *y* ausführen. Wenn Sie immer noch nicht die gewünschte Genauigkeit erhalten, verwenden Sie das Wort *unmissverständlich*, um das Modell zu einer präzisen Antwort zu bewegen.
 
-## تحديد الأدوات بدقة
+## Tools präzise definieren
 
-عند استخدام الأدوات مع Live API، كن محدّدًا في تعريفات الأدوات.
-احرص على إخبار Gemini بالشروط التي يجب بموجبها استدعاء طلب الأداة. لمزيد من التفاصيل، يُرجى الاطّلاع على [تعريفات الأدوات](#tool-definitions-example) في
-قسم المثال.
+Wenn Sie Tools mit der Live API verwenden, müssen Sie die Tool-Definitionen genau angeben.
+Geben Sie unbedingt an, unter welchen Bedingungen ein Toolaufruf erfolgen soll. Weitere Informationen finden Sie im Abschnitt mit Beispielen unter [Tool-Definitionen](#tool-definitions-example).
 
-## صياغة طلبات فعّالة
+## Effektive Prompts erstellen
 
-- **استخدام طلبات واضحة:** قدِّم أمثلة على ما يجب وما لا يجب أن تفعله النماذج في الطلبات، وحاول حصر الطلبات في طلب واحد لكل شخصية أو دور في كل مرة. بدلاً من الطلبات الطويلة المتعدّدة الصفحات، ننصحك باستخدام تسلسل الطلبات بدلاً من ذلك. يحقّق النموذج أفضل أداء في المهام التي تتضمّن استدعاءات دالة واحدة.
-- **تقديم أوامر ومعلومات البدء:** تتوقّع Live API بيانات أدخلها المستخدم قبل الردّ. لجعل Live API تبدأ المحادثة، ضَمِّن طلبًا يطلب منها تحية المستخدم أو بدء المحادثة. ضَمِّن معلومات عن المستخدم لجعل Live API تخصّص هذه التحية.
+- **Klare Prompts verwenden**:Geben Sie in den Prompts Beispiele dafür an, was die Modelle tun sollen und was nicht. Beschränken Sie die Prompts auf jeweils einen Prompt pro Persona oder Rolle. Anstelle von langen, mehrseitigen Prompts sollten Sie Prompt-Chaining verwenden. Das Modell eignet sich am besten für Aufgaben mit einzelnen Funktionsaufrufen.
+- **Startbefehle und Informationen angeben**:Die Live API erwartet Nutzereingaben, bevor sie antwortet. Damit die Live API die Unterhaltung beginnt, müssen Sie einen Prompt einfügen, in dem sie aufgefordert wird, den Nutzer zu begrüßen oder die Unterhaltung zu beginnen. Fügen Sie Informationen zum Nutzer hinzu, damit die Live API die Begrüßung personalisieren kann.
 
-## تحديد اللغة
+## Sprache angeben
 
-للحصول على أفضل أداء على `gemini-live-2.5-flash` المتسلسلة في Live API، تأكَّد من أنّ `language_code` في واجهة برمجة التطبيقات تطابق اللغة التي يتحدث بها المستخدم.
+Für eine optimale Leistung bei der kaskadierten `gemini-live-2.5-flash` der Live API muss die `language_code` der API mit der Sprache übereinstimmen, die vom Nutzer gesprochen wird.
 
-إذا كنت تتوقّع أن يردّ النموذج بلغة غير الإنجليزية، ضَمِّن ما يلي كجزء من تعليمات النظام:
+Wenn das Modell in einer anderen Sprache als Englisch antworten soll, fügen Sie Folgendes in die Systemanweisungen ein:
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## البث
+## Streaming
 
-عند تنفيذ الصوت في الوقت الفعلي، اتّبِع أفضل الممارسات التالية:
+Beachten Sie beim Implementieren von Echtzeit-Audio die folgenden Best Practices:
 
-- **حجم الجزء ووقت الاستجابة**: أرسِل الصوت في أجزاء تتراوح مدتها بين 20 ملي ثانية و40 ملي ثانية.
-- **التعامل مع الانقطاع**: عندما يتحدث المستخدم أثناء ردّ النموذج،
-  يرسل الخادم رسالة `server_content` تتضمّن `"interrupted": true`. عليك التخلّص فورًا من المخزن المؤقت للصوت من جهة العميل لمنع الوكيل من مواصلة التحدث أثناء حديث المستخدم.
+- **Blockgröße und Latenz**: Senden Sie Audio in Blöcken von 20 bis 40 ms.
+- **Unterbrechungen verarbeiten**: Wenn der Nutzer spricht, während das Modell antwortet, sendet der Server eine `server_content`-Nachricht mit `"interrupted": true`. Sie müssen den clientseitigen Audio-Puffer sofort verwerfen, damit der Kundenservicemitarbeiter nicht weiter über den Nutzer spricht.
 
-## إدارة السياق
+## Kontextverwaltung
 
-استخدِم `ContextWindowCompressionConfig` للجلسات الطويلة، لأنّ الرموز المميّزة الصوتية الأصلية تتراكم بسرعة (حوالي 25 رمزًا مميزًا لكل ثانية من الصوت).
+Verwenden Sie `ContextWindowCompressionConfig` für lange Sitzungen, da sich native Audio-Tokens schnell ansammeln (ca. 25 Tokens pro Sekunde Audio).
 
-## التخزين المؤقت من جهة العميل
+## Clientseitiges Puffern
 
-لا تخزِّن الصوت المُدخَل مؤقتًا بشكل كبير (مثل ثانية واحدة) قبل الإرسال. أرسِل أجزاء صغيرة (من 20 ملي ثانية إلى 100 ملي ثانية) لتقليل وقت الاستجابة.
+Puffern Sie das eingegebene Audio nicht wesentlich (z. B. 1 Sekunde) vor dem Senden. Senden Sie kleine Chunks (20–100 ms), um die Latenz zu minimieren.
 
-## إعادة أخذ العيّنات
+## Resampling
 
-تأكَّد من أنّ تطبيق العميل يعيد أخذ عيّنات من إدخال الميكروفون (غالبًا 44.1 كيلوهرتز أو 48 كيلوهرتز) إلى 16 كيلوهرتز قبل الإرسال.
+Ihre Clientanwendung muss Mikrofoneingaben (häufig 44,1 kHz oder 48 kHz) vor der Übertragung auf 16 kHz resamplen.
 
-## إدارة الجلسة
+## Sitzungsverwaltung
 
-اتّبِع هذه الإرشادات للتعامل مع مراحل نشاط الجلسة وضمان تجربة مستخدم موثوقة:
+Beachten Sie die folgenden Richtlinien, um den Sitzungslebenszyklus zu verwalten und eine zuverlässige Nutzererfahrung zu gewährleisten:
 
-- **تفعيل ضغط قدرة استيعاب السياق:** تتراكم الرموز المميّزة الصوتية بمعدّل 25 رمزًا مميزًا في الثانية تقريبًا. بدون الضغط، تقتصر الجلسات الصوتية فقط على 15 دقيقة والجلسات الصوتية والمرئية على دقيقتَين. فعِّل
-  [ضغط قدرة استيعاب السياق](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#context-window-compression)
-  لتمديد الجلسات إلى مدة غير محدودة.
-- **تنفيذ استئناف الجلسة:** قد يعيد الخادم بشكل دوري ضبط اتصال WebSocket. استخدِم
-  [ميزة استئناف الجلسة](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#session-resumption)
-  لإعادة الاتصال بسلاسة بدون فقدان السياق. احتفِظ بأحدث رمز مميز للاستئناف من رسائل `SessionResumptionUpdate` ومرِّره كمقبض عند إعادة الاتصال. تكون الرموز المميّزة للاستئناف صالحة لمدة ساعتين بعد انتهاء الجلسة الأخيرة.
-- **التعامل مع رسائل GoAway:** يرسل الخادم رسالة
-  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#goaway-message) قبل إنهاء الاتصال. استمِع إلى هذه الرسالة واستخدِم الحقل `timeLeft` لإنهاء المحادثة بسلاسة أو إعادة الاتصال قبل إغلاق الاتصال.
-- **التعامل مع إشارات `generationComplete`:** استخدِم الرسالة
-  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar#generation-complete-message)
-  لمعرفة متى ينتهي النموذج من إنشاء ردّ، حتى يتمكّن تطبيقك
-  من تعديل واجهة المستخدم أو المتابعة إلى الإجراء التالي.
+- **Kontextfenster-Komprimierung aktivieren**:Audiotokens werden mit etwa 25 Tokens pro Sekunde angesammelt. Ohne Komprimierung sind reine Audio-Sitzungen auf 15 Minuten und Audio-Video-Sitzungen auf 2 Minuten begrenzt. Aktivieren Sie die [Kontextfensterkomprimierung](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de#context-window-compression), um Sitzungen auf unbegrenzte Dauer zu verlängern.
+- **Sitzungswiederaufnahme implementieren**:Der Server kann die WebSocket-Verbindung regelmäßig zurücksetzen. Mit der [Wiederaufnahme von Sitzungen](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de#session-resumption) können Sie nahtlos wieder eine Verbindung herstellen, ohne den Kontext zu verlieren. Das letzte Fortsetzungs-Token aus `SessionResumptionUpdate` Nachrichten beibehalten und beim erneuten Verbinden als Handle übergeben. Fortsetzungstokens sind 2 Stunden nach dem Beenden der letzten Sitzung gültig.
+- **GoAway-Nachrichten verarbeiten**:Der Server sendet eine [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de#goaway-message)-Nachricht, bevor eine Verbindung beendet wird. Achten Sie auf diese Nachricht und verwenden Sie das Feld `timeLeft`, um die Verbindung ordnungsgemäß zu beenden oder wiederherzustellen, bevor sie geschlossen wird.
+- **„generationComplete“-Signale verarbeiten**:Verwenden Sie die [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de#generation-complete-message)-Nachricht, um zu erfahren, wann das Modell die Generierung einer Antwort abgeschlossen hat. So kann Ihre Anwendung die Benutzeroberfläche aktualisieren oder mit der nächsten Aktion fortfahren.
 
-لمعرفة تفاصيل التنفيذ، يُرجى الاطّلاع على
-[إدارة الجلسة](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar).
+Einzelheiten zur Implementierung finden Sie unter [Sitzungsverwaltung](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de).
 
-## أمثلة
+## Beispiele
 
-يجمع هذا المثال بين أفضل الممارسات و
-[الإرشادات لتصميم تعليمات النظام](#system-instruction-guidelines) من أجل
-توجيه أداء النموذج كمدرب مهني.
+In diesem Beispiel werden sowohl die Best Practices als auch die [Richtlinien für das Erstellen von Systemanweisungen](#system-instruction-guidelines) kombiniert, um die Leistung des Modells als Karrierecoach zu optimieren.
 
 ```
 **Persona:**
@@ -154,10 +139,10 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### تعريفات الأدوات
+### Tooldefinitionen
 
-يحدّد ملف JSON هذا الدوال ذات الصلة التي يتم استدعاؤها في مثال المدرب المهني.
-للحصول على أفضل النتائج عند تحديد الدوال، ضَمِّن أسماءها وأوصافها ومَعلماتها وشروط استدعائها.
+In diesem JSON-Code werden die relevanten Funktionen definiert, die im Beispiel für den Karriere-Coach aufgerufen werden.
+Für optimale Ergebnisse sollten Sie beim Definieren von Funktionen deren Namen, Beschreibungen, Parameter und Aufrufbedingungen angeben.
 
 ```
 [
@@ -247,44 +232,44 @@ clients to thrive.
 ]
 ```
 
-## التسعير والفوترة
+## Preise und Abrechnung
 
-تتم فوترة Gemini Live API بشكل صارم حسب استخدام الرموز المميّزة. بما أنّ Live API تحافظ على جلسة WebSocket مستمرة، تتّبع الفوترة نموذجًا مركّبًا استنادًا إلى قدرة الاستيعاب النشطة.
+Die Gemini Live API wird ausschließlich nach Tokennutzung abgerechnet. Da bei der Live API eine dauerhafte WebSocket-Sitzung aufrechterhalten wird, erfolgt die Abrechnung nach einem zusammengesetzten Modell basierend auf dem aktiven Kontextfenster.
 
-### قدرة استيعاب سياق الجلسة (التكاليف المركّبة)
+### Das Sitzungskontextfenster (kumulative Kosten)
 
-تفرض عليك واجهة برمجة التطبيقات رسومًا لكل دورة على جميع الرموز المميّزة المعروضة في نافذة سياق الجلسة. يُعرَّف "الدور" على أنّه بيانات أدخلها المستخدم والردّ المقابل من النموذج.
+Die API berechnet Ihnen pro Runde alle Tokens, die im Sitzungskontextfenster vorhanden sind. Ein „Turn“ ist eine Nutzereingabe und die entsprechende Antwort des Modells.
 
-- **التراكم:** تتضمّن نافذة السياق الرموز المميّزة الجديدة من الدور الحالي بالإضافة إلى جميع الرموز المميّزة المتراكمة من الأدوار السابقة.
-- **إعادة الفوترة:** تتم إعادة معالجة الرموز المميّزة السابقة ويتم تدوين سجلات استخدامها في كل دورة جديدة، بما يصل إلى قدرة استيعاب التي تم ضبطها. كلما طالت الجلسة، زادت التكلفة لكل دورة لأنّه تتم إعادة معالجة سجلّ المحادثات.
+- **Akkumulierung**:Das Kontextfenster enthält neue Tokens aus dem aktuellen Zug sowie alle akkumulierten Tokens aus vorherigen Zügen.
+- **Erneute Abrechnung**:Frühere Tokens werden in jeder neuen Runde noch einmal verarbeitet und berücksichtigt, bis die von Ihnen konfigurierte Kontextfenstergröße erreicht ist. Mit zunehmender Sitzungsdauer steigen die Kosten pro Runde, da der Unterhaltungsverlauf neu verarbeitet wird.
 
-### الرموز المميّزة الصوتية والنصوص المحوَّلة من مقاطع صوتية
+### Audio-Tokens und ‑Transkripte
 
-تتسم Live API بأنّها متعدّدة الوسائط بشكل أساسي. تحتفظ بسجلّ المحادثات كرموز مميّزة صوتية أولية للحفاظ على الفروق الدقيقة في الصوت والنبرة.
+Die Live API ist nativ multimodal. Der Unterhaltungsverlauf wird als rohe Audio-Tokens beibehalten, um akustische Nuancen und den Tonfall zu bewahren.
 
-- **الفوترة الصوتية:** تفرض عليك واجهة برمجة التطبيقات رسومًا على الرموز المميّزة الصوتية الأصلية المتراكمة بالمعدّل العادي لإدخال الصوت في كل دورة.
-- **الرسوم الإضافية للنص المحوَّل من مقطع صوتي:** عند تفعيل ميزة تحويل الصوت إلى نص (`inputAudioTranscription` أو `outputAudioTranscription`)، تفرض واجهة برمجة التطبيقات رسومًا على جميع الرموز المميّزة النصية التي تم إنشاؤها للنص المحوَّل من مقطع صوتي بالمعدّل العادي لإخراج الرموز المميّزة النصية بالإضافة إلى التكاليف العادية للرموز المميّزة الصوتية.
+- **Abrechnung von Audio:** Die API berechnet Ihnen die angesammelten nativen Audio-Tokens in jeder Runde zum Standardtarif für Audioeingabe.
+- **Transkriptionszuschlag**:Wenn die Audio-zu-Text-Transkription aktiviert ist (`inputAudioTranscription` oder `outputAudioTranscription`), werden für alle Text-Tokens, die für die Transkription generiert werden, zusätzlich zu den Standardkosten für Audio-Tokens die Kosten für die Ausgabe von Text-Tokens berechnet.
 
-### إدارة التكاليف باستخدام حدود السياق
+### Kosten mit Kontextlimits verwalten
 
-لمنع النمو غير المحدود للتكلفة في الجلسات الطويلة، اضبط حجم قدرة الاستيعاب باستخدام `contextWindowCompression`.
+Um unbegrenztes Kostenwachstum bei langen Sitzungen zu verhindern, konfigurieren Sie die Größe des Kontextfensters mit `contextWindowCompression`.
 
-من خلال ضبط مشغّل الضغط (مثل 25,000 رمز مميز) ونافذة منزلقة (مثل 8,000 رمز مميز)، تزيل واجهة برمجة التطبيقات تلقائيًا الرموز المميّزة الأقدم بمجرد الوصول إلى الحدّ الأقصى. بعد ذلك، لا تفرض واجهة برمجة التطبيقات رسومًا على الأدوار اللاحقة إلا على السجلّ المحتفظ به بالإضافة إلى أي رموز مميّزة جديدة.
+Wenn Sie einen Komprimierungsauslöser (z. B. 25.000 Tokens) und ein gleitendes Fenster (z. B. 8.000 Tokens) festlegen, werden ältere Tokens automatisch entfernt, sobald der Schwellenwert erreicht ist. Bei nachfolgenden Anfragen werden dann nur das beibehaltene Protokoll und alle neuen Tokens in Rechnung gestellt.
 
-### وضع الصوت فقط الاستباقي
+### Proaktiver Audiomodus
 
-عند تفعيل "وضع الصوت الاستباقي"، يتم تحصيل رسوم من الرموز المميّزة المُدخَلة طوال فترة استماع Live API، بينما لا يتم تحصيل رسوم من الرموز المميّزة الناتجة إلا عندما تردّ واجهة برمجة التطبيقات.
+Wenn der proaktive Audiomodus aktiviert ist, werden Eingabetokens für die gesamte Zeit berechnet, in der die Live API zuhört. Ausgabetokens werden nur berechnet, wenn die API antwortet.
 
-- **ملاحظة بشأن Gemini 3.1:** لا يتوفّر "وضع الصوت الاستباقي" في `gemini-3.1-flash-live-preview`. بالنسبة إلى هذا النموذج، لا يتم تحصيل رسوم منك مقابل الصوت إلا عند البث النشط للإدخال.
+- **Hinweis zu Gemini 3.1**:Der proaktive Audiomodus wird in `gemini-3.1-flash-live-preview` nicht unterstützt. Bei diesem Modell wird Ihnen Audio nur in Rechnung gestellt, wenn Sie aktiv Eingaben streamen.
 
-للحصول على معلومات مفصّلة عن الأسعار، يُرجى الاطّلاع على صفحة أسعار [Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
+Detaillierte Preisinformationen finden Sie auf der [Seite „Gemini API-Preise“](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
 
-إرسال ملاحظات
+Feedback geben
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-تاريخ التعديل الأخير: 2026-06-01 (حسب التوقيت العالمي المتفَّق عليه)
+Zuletzt aktualisiert: 2026-06-01 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Haben Sie Feedback für uns?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-01 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-01 (UTC)."],[],[]]

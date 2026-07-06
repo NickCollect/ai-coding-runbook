@@ -1,46 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=fr
-fetched_at: 2026-06-29T05:40:24.913942+00:00
-title: "Veo\u00a02.0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=id
+fetched_at: 2026-07-06T05:17:51.097667+00:00
+title: "Veo 2.0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Envoyer des commentaires
+Kirim masukan
 
-# Veo 2.0
+# Veo 2.0
 
-Notre modèle de génération de vidéos stables, robuste et fiable, offre des performances constantes pour les workflows prêts pour la production. Veo 2.0 est idéal pour la création de contenus standard en 1080p, les assets pour les réseaux sociaux et les tâches vidéo à volume élevé qui privilégient la cohérence fiable des personnages et des vitesses de génération prévisibles en moins d'une seconde.
+Model pembuatan video stabil kami yang tangguh dan andal, memberikan performa yang konsisten untuk alur kerja siap produksi. Veo 2.0 paling cocok untuk pembuatan konten 1080p standar, aset media sosial, dan tugas video bervolume tinggi yang memprioritaskan konsistensi karakter yang andal dan kecepatan pembuatan sub-detik yang dapat diprediksi.
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=veo-2.0-generate-001&hl=fr)
+[Coba di Google AI Studio](https://aistudio.google.com?model=veo-2.0-generate-001&hl=id)
 
-## Documentation
+## Dokumentasi
 
-Consultez la page [Génération de vidéos](https://ai.google.dev/gemini-api/docs/video?hl=fr) pour en savoir plus sur les fonctionnalités et les capacités.
+Buka halaman [Pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id) untuk mengetahui cakupan lengkap
+fitur dan kemampuannya.
 
 ## veo-2.0-generate-001
 
-| Propriété | Description |
+| Properti | Deskripsi |
 | --- | --- |
-| Code du modèle id\_card | **API Gemini**  `veo-2.0-generate-001` |
-| Types de données acceptés pour save | **Entrée**  Texte, image  **Résultat**  Vidéo |
-| Limites de token\_auto | **Saisie de texte**  N/A  **Entrée d'image**  N'importe quelle résolution et n'importe quel format d'image, jusqu'à 20 Mo  **Vidéo de sortie**  Jusqu'à 2 |
-| calendar\_monthDernière mise à jour | Avril 2025 |
+| id\_cardKode model | **Gemini API**  `veo-2.0-generate-001` |
+| saveJenis data yang didukung | **Input**  Teks, gambar  **Output**  Video |
+| token\_autoBatas | **Input teks**  T/A  **Input gambar**  Resolusi dan rasio aspek gambar apa pun hingga ukuran file 20 MB  **Video output**  Maksimal 2 |
+| calendar\_monthPembaruan terbaru | April 2025 |
 
-Envoyer des commentaires
+Kirim masukan
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Dernière mise à jour le 2026/06/15 (UTC).
+Terakhir diperbarui pada 2026-06-15 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Ada masukan untuk kami?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/15 (UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-15 UTC."],[],[]]

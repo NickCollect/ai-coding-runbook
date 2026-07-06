@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=de
-fetched_at: 2026-06-29T05:34:08.835178+00:00
-title: "Umgebungen in verwalteten KI-Agenten \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja
+fetched_at: 2026-07-06T05:16:20.601186+00:00
+title: "\u30de\u30cd\u30fc\u30b8\u30c9 \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u306e\u74b0\u5883 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Feedback geben
+フィードバックを送信
 
-# Umgebungen in verwalteten KI-Agenten
+# マネージド エージェントの環境
 
-Umgebungen sind verwaltete Linux-Sandboxes, die Agenten einen isolierten Ort bieten, um Code auszuführen und Dateien zu speichern. Sie sind vom Interaktionskontext entkoppelt, sodass Sie dieselbe Umgebung für mehrere Interaktionen verwenden oder jederzeit neu beginnen können.
+環境はマネージド Linux サンドボックスであり、エージェントがコードを実行してファイルを永続化するための隔離された場所を提供します。環境はインタラクション コンテキストから切り離されているため、複数のインタラクションで同じ環境を再利用したり、いつでも最初からやり直したりできます。
 
-Das folgende Beispiel zeigt, wie Sie eine Interaktion mit einer neuen Remote-Umgebung erstellen und ihre ID abrufen:
+次の例は、新しいリモート環境でインタラクションを作成してその ID を取得する方法を示しています。
 
 ### Python
 
@@ -67,17 +67,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Der Parameter `environment`
+## `environment` パラメータ
 
-Der Parameter `environment` akzeptiert drei Formen:
+`environment` パラメータは、次の 3 つの形式を受け入れます。
 
-| Formular | Beispiel | Anwendung |
+| フォーム | 例 | 使用する場面 |
 | --- | --- | --- |
-| `"remote"` | `environment="remote"` | Eine neue Sandbox bereitstellen. |
-| Umgebungs-ID | `environment="env_abc123"` | Eine vorhandene Sandbox mit allen Dateien und Paketen wiederverwenden. |
-| Konfigurationsobjekt | `environment={...}` | Eine neue Sandbox mit Quellen, Netzwerkregeln oder beidem bereitstellen. |
+| `"remote"` | `environment="remote"` | 新しいサンドボックスをプロビジョニングする。 |
+| 環境 ID | `environment="env_abc123"` | すべてのファイルとパッケージを含む既存のサンドボックスを再利用する。 |
+| 構成オブジェクト | `environment={...}` | ソース、ネットワーク ルール、またはその両方を使用して新しいサンドボックスをプロビジョニングする。 |
 
-Die folgenden Beispiele zeigen die drei Möglichkeiten, den Parameter `environment` zu verwenden.
+次の例は、`environment` パラメータを使用する 3 つの方法を示しています。
 
 ### Python
 
@@ -205,10 +205,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Umgebung konfigurieren
+## 環境を構成する
 
-Eine Möglichkeit, eine Umgebung einzurichten, besteht darin, dem Agenten mitzuteilen, was installiert werden muss.
-Er kümmert sich um die Auflösung von Abhängigkeiten und die Fehlerbehebung. Sobald die Umgebung bereit ist, speichern Sie die `environment_id` und verwenden Sie sie wieder.
+環境を設定する方法の一つは、インストールする必要があるものをエージェントに伝えることです。依存関係の解決とトラブルシューティングを処理します。環境の準備ができたら、`environment_id` を保存して再利用します。
 
 ### Python
 
@@ -285,15 +284,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Aus einer Quelle einbinden
+### ソースからマウントする
 
-Wenn Sie genau wissen, welche Dateien der Agent benötigt, binden Sie sie in einem einzigen Aufruf ein, anstatt sie zu durchlaufen. Das Konfigurationsobjekt `environment` akzeptiert ein `sources`-Array mit drei Typen:
+エージェントに必要なファイルがわかっている場合は、反復処理を行うのではなく、1 回の呼び出しでマウントします。`environment` 構成オブジェクトは、次の 3 つのタイプの `sources` 配列を受け入れます。
 
-| Quelltyp | `type`-Wert | Beschreibung | Limit |
+| ソースタイプ | `type` 値 | 説明 | 上限 |
 | --- | --- | --- | --- |
-| Git-Repository | `repository` | Klonen Sie ein Repository von einer URL in die Sandbox unter `target`. | 500 MB |
-| Cloud Storage | `gcs` | Kopiert eine Datei oder ein Verzeichnis aus Cloud Storage in die Sandbox unter `target`. | 2 GB |
-| Inline-Inhalte | `inline` | Schreibt unformatierten Textinhalt in eine Datei in der Sandbox unter `target`. | 1 MB pro Datei, insgesamt 2 MB |
+| Git リポジトリ | `repository` | URL から `target` のサンドボックスにリポジトリのクローンを作成します。 | 500 MB |
+| Cloud Storage | `gcs` | Cloud Storage から `target` のサンドボックスにファイルまたはディレクトリをコピーします。 | 2 GB |
+| インライン コンテンツ | `inline` | `target` のサンドボックス内のファイルに未加工のテキスト コンテンツを書き込みます。 | 1 ファイルあたり 1 MB、合計 2 MB |
 
 ### Python
 
@@ -398,16 +397,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Sie können beide Ansätze kombinieren: Binden Sie bekannte Quellen deklarativ ein und durchlaufen Sie sie dann mit Folgeinteraktionen, um Pakete zu installieren oder Einrichtungs-Skripts auszuführen. Sie können das Stammverzeichnis (`/`) nicht als Ziel festlegen, wenn Sie eine benutzerdefinierte Quelle hinzufügen. Sie müssen immer ein Unterverzeichnis angeben.
+両方のアプローチを組み合わせることができます。既知のソースを宣言的にマウントし、フォローアップ インタラクションで反復処理を行ってパッケージをインストールするか、設定スクリプトを実行します。カスタムソースを追加するときにルート（`/`）をターゲットとして設定することはできません。常にサブディレクトリを指定する必要があります。
 
-### Private Quellen
+### プライベート ソース
 
-Sie können auch aus privaten GitHub-Repositories oder privaten Cloud Storage-Buckets herunterladen, indem Sie die Anmeldedaten in der Netzwerkkonfiguration hinzufügen:
+ネットワーク構成に認証情報を追加することで、プライベート Github リポジトリまたはプライベート Cloud Storage バケットからダウンロードすることもできます。
 
-Verwenden Sie für **private Git-Repositories** die `Basic` Authentifizierung mit Ihrem
-[persönlichen GitHub-Zugriffstoken
-(Personal Access Token, PAT)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens).
-Codieren Sie das Token mit `x-oauth-basic` als Nutzernamen:
+**プライベート Git リポジトリ**の場合は、`Basic` 認証を使用して
+[GitHub 個人アクセス トークン
+（PAT）](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)を使用します。
+トークンをエンコードするには、ユーザー名として `x-oauth-basic` を使用します。
 
 ```
 echo -n "x-oauth-basic:ghp_YourPATHere" | base64
@@ -512,7 +511,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Verwenden Sie für **private Cloud Storage-Buckets** ein standardmäßiges OAuth 2.0-Inhabertoken:
+**プライベート Cloud Storage バケット** の場合は、標準の OAuth 2.0 署名なしトークンを使用します。
 
 ```
 gcloud auth print-access-token
@@ -617,25 +616,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Vorinstallierte Software
+## プリインストールされているソフトウェア
 
-Die Sandbox wird unter Ubuntu ausgeführt und enthält vorinstallierte Laufzeiten und gängige Pakete. Der Agent kann zur Laufzeit zusätzliche Pakete mit `pip
-install` oder `npm install` installieren. Pakete, die während einer Interaktion installiert wurden, bleiben erhalten, wenn Sie dieselbe `environment_id` wiederverwenden.
+サンドボックスは Ubuntu で実行され、ランタイムと一般的なパッケージがプリインストールされています。エージェントは、`pip
+install` または `npm install` を使用して、実行時に追加のパッケージをインストールできます。インタラクション中にインストールされたパッケージは、同じ `environment_id` を再利用するときに保持されます。
 
-| Kategorie | Vorinstallierte Pakete |
+| カテゴリ | プリインストールされているパッケージ |
 | --- | --- |
-| **UNIX-Tools** | `curl`, `wget`, `git`, `rsync`, `unzip`, `ripgrep`, `fd-find`, `gawk`, `bc`, `tree`, `which`, `lsof`, `htop`, `jq`, `iproute2`, `procps`, `gcloud CLI` |
-| **Python 3.12** | `numpy`, `pandas`, `requests`, `google-genai`, `beautifulsoup4`, `pyyaml`, `ast-grep-cli` |
-| **Node.js 22** | `create-next-app`, `create-vite`, `typescript` |
+| **UNIX ツール** | `curl`、`wget`、`git`、`rsync`、`unzip`、`ripgrep`、`fd-find`、`gawk`、`bc`、`tree`、`which`、`lsof`、`htop`、`jq`、`iproute2`、`procps`、`gcloud CLI` |
+| **Python 3.12** | `numpy`、`pandas`、`requests`、`google-genai`、`beautifulsoup4`、`pyyaml`、`ast-grep-cli` |
+| **Node.js 22** | `create-next-app`、`create-vite`、`typescript` |
 
-## Netzwerkkonfiguration
+## ネットワークの構成
 
-Standardmäßig haben Umgebungen uneingeschränkten ausgehenden Netzwerkzugriff. Mit dem Feld `network` können Sie den ausgehenden Traffic auf bestimmte Domains beschränken. Jede Regel gibt eine `domain` und ein optionales `transform`-Objekt an, um Header in übereinstimmende Anfragen einzufügen. Diese Header können für jede Interaktion eindeutig sein und Sie können sie für dieselbe Umgebung aktualisieren.
+デフォルトでは、環境には無制限の下り（外向き）ネットワーク アクセスがあります。`network` フィールドを使用して、下り（外向き）トラフィックを特定のドメインに制限します。各ルールでは、一致するリクエストにヘッダーを挿入する `domain` とオプションの `transform` オブジェクトを指定します。これらのヘッダーはインタラクションごとに一意にすることができ、同じ環境で更新できます。
 
-| Feld | Typ | Beschreibung |
+| フィールド | タイプ | 説明 |
 | --- | --- | --- |
-| `domain` | `string` | Domain, die übereinstimmen muss. Verwenden Sie einen genauen Hostnamen oder `*` für alle Domains. |
-| `transform` | `object` | Objekt mit flachen Schlüssel/Wert-Paaren, die Header darstellen, die in übereinstimmende Anfragen eingefügt werden sollen, z.B. `{"Authorization": "Bearer ..."}`. |
+| `domain` | `string` | 一致するドメイン。正確なホスト名を使用するか、すべてのドメインに `*` を使用します。 |
+| `transform` | `object` | 一致するリクエストに挿入するヘッダーを表すフラットな Key-Value ペアを含むオブジェクト（例: `{"Authorization": "Bearer ..."}`）。 |
 
 ### Python
 
@@ -724,14 +723,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Wenn eine Zulassungsliste festgelegt ist, sind nur Anfragen an explizit aufgeführte Domains zulässig. Sie können Platzhalter verwenden, um Subdomains abzugleichen (z.B. `{"domain":
-"*.example.com"}`), aber beachten Sie, dass dies nicht mit der Stammdomain
-`example.com` übereinstimmt, die separat hinzugefügt werden muss. Wenn Sie allen anderen Traffic zulassen möchten, z. B. das Weiterleiten nicht aufgeführter Domains ohne eingefügte Header, fügen Sie `{"domain": "*"}` als
-Catch-all-Eintrag hinzu.
+許可リストが設定されている場合、明示的にリストされたドメインへのリクエストのみが許可されます。ワイルドカードを使用してサブドメインを照合できます（例: `{"domain":
+"*.example.com"}`）。ただし、ルートドメイン
+`example.com` は照合されません。これは別途追加する必要があります。挿入されたヘッダーのないリストにないドメインのルーティングなど、他のすべてのトラフィックを許可するには、`{"domain": "*"}`を
+キャッチオール エントリとして追加します。
 
-### Anmeldedaten
+### 認証情報
 
-Sie können Anmeldedaten für Ihren Agenten hinzufügen, indem Sie Header-Transformationen hinzufügen. Die Anmeldedaten werden von einem Egress-Proxy in die entsprechenden HTTP-Header eingefügt. Sie werden in der Sandbox niemals als Umgebungsvariablen oder Dateien verfügbar gemacht.
+ヘッダー変換を追加して、エージェントが使用する認証情報を追加できます。認証情報は下り（外向き）プロキシによってそれぞれの HTTP ヘッダーに挿入され、環境変数やファイルとしてサンドボックス内に公開されることはありません。
 
 ### Python
 
@@ -824,9 +823,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Netzwerkzugriff deaktivieren
+### ネットワーク アクセスを無効にする
 
-Wenn Sie den gesamten ausgehenden Netzwerkzugriff blockieren möchten, legen Sie für `network` den Wert `disabled` fest:
+すべての下り（外向き）ネットワーク アクセスをブロックするには、`network` を `disabled` に設定します。
 
 ### Python
 
@@ -882,21 +881,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Lebenszyklus der Umgebung
+## 環境のライフサイクル
 
-Umgebungen folgen diesem Lebenszyklus:
+環境は次のライフサイクルに従います。
 
-| Bundesland | Verhalten |
+| 州 | 行動 |
 | --- | --- |
-| **Erstellt** | Wird bereitgestellt, wenn in einer Interaktion `environment: "remote"` oder ein Konfigurationsobjekt angegeben ist. |
-| **Aktiv** | Wird ausgeführt, während eine Interaktion läuft. |
-| **Inaktiv** | Automatische Momentaufnahme und Beendigung nach 15 Minuten Inaktivität. |
-| **Offline** | Wird 7 Tage nach der letzten Aktivität beibehalten. Kann durch Übergeben der ID fortgesetzt werden. |
-| **Gelöscht** | Aus dem System entfernt. |
+| **作成日** | インタラクションで `environment: "remote"` または構成オブジェクトが指定されたときにプロビジョニングされます。 |
+| **有効** | インタラクションの進行中に実行されます。 |
+| **アイドル状態** | 15 分間操作がないと、自動スナップショットが作成され、停止します。 |
+| **オフライン** | 最後にアクティブになってから 7 日間保持されます。ID を渡すことで再開できます。 |
+| **削除しました** | システムから削除されました。 |
 
-## Dateien aus der Umgebung herunterladen
+## 環境からファイルをダウンロードする
 
-Der Agent erstellt während der Ausführung Dateien in der Sandbox. Mit der Files API können Sie die vollständige Momentaufnahme der Umgebung als TAR-Datei herunterladen:
+エージェントは実行中にサンドボックス内にファイルを作成します。Files API を使用して、環境スナップショット全体を tar ファイルとしてダウンロードできます。
 
 ### Python
 
@@ -991,41 +990,40 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 #   -o snapshot.tar
 ```
 
-## Preise und Ressourcen
+## 料金とリソース
 
-Jede Umgebung wird mit festen Ressourcenzuweisungen ausgeführt:
+各環境は、固定リソース割り当てで実行されます。
 
-| Ressource | Wert |
+| リソース | 値 |
 | --- | --- |
-| **CPU** | 4 Kerne |
-| **Arbeitsspeicher** | 16 GB |
+| **CPU** | 4 コア |
+| **メモリ** | 16 GB |
 
-Die Umgebungskosten für Compute (CPU, Arbeitsspeicher, Sandbox-Ausführung) werden während der Vorabversion **nicht in Rechnung gestellt**. Informationen zu den Kosten für
-Agent-Tokens finden Sie unter
-[Preise](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing-for-agents).
+プレビュー期間中は、環境コンピューティング（CPU、メモリ、サンドボックス実行）は**課金されません** 。エージェント トークンの費用については、
+[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)をご覧ください。
 
-## Beschränkungen
+## 制限事項
 
-- **Vorabversion**:Umgebungen und verwaltete Agenten sind in der Vorabversion verfügbar. Funktionen und Schemas können sich ändern.
-- **Größe der Inline-Quelle**:Inline-Quellen sind auf 1 MB pro Datei und insgesamt 2 MB für alle Dateien beschränkt.
-- **Quellgröße**: Git-Repositories sind auf 500 MB und Cloud Storage-Repositories auf 2 GB beschränkt.
-- **Umgebungsstart**:Die Bereitstellung einer neuen Umgebung dauert bis zu 5 Sekunden. Bei großen Quell-Repositories kann diese Zeit länger sein.
-- **Dateiformate**:Der Agent kann derzeit nur Text- und Bilddateien lesen. Die Unterstützung für Binärdateien ist noch nicht verfügbar.
-- **Keine Einbindung aus dem Stammverzeichnis:** Sie können das Stammverzeichnis (`/`) nicht als Ziel festlegen, wenn Sie eine benutzerdefinierte Quelle hinzufügen. Sie müssen immer ein Unterverzeichnis angeben.
+- **プレビュー ステータス:** 環境とマネージド エージェントはプレビュー版です。機能とスキーマは変更される可能性があります。
+- **インライン ソースのサイズ:** インライン ソースは、1 ファイルあたり 1 MB、すべてのファイルで合計 2 MB に制限されています。
+- **ソースサイズ**: Git リポジトリは 500 MB、Cloud Storage リポジトリは 2 GB に制限されています。
+- **環境の起動:** 新しい環境のプロビジョニングには最大 5 秒かかります。ソース リポジトリが大きいと、この時間が長くなる可能性があります。
+- **ファイルのサポート:** 現在、エージェントはテキスト ファイルと画像ファイルの読み取りに制限されています。バイナリ ファイルのサポートはまだ利用できません。
+- **ルートからのマウント不可:** カスタムソースを追加するときにルート（`/`）をターゲットとして設定することはできません。常にサブディレクトリを指定する必要があります。
 
-## Nächste Schritte
+## 次のステップ
 
-- [Übersicht über Agenten](https://ai.google.dev/gemini-api/docs/agents?hl=de): Informationen zu den grundlegenden Konzepten verwalteter Agenten.
-- [Schnellstart](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de): Mit mehrstufigen Unterhaltungen und Streaming beginnen.
-- [Antigravity-Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de): Funktionen, Tools und Preise für den Standardagenten.
-- [Benutzerdefinierte Agenten erstellen](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de): Definieren Sie Ihre eigenen Agenten mit `AGENTS.md` und `SKILL.md`.
+- [エージェントの概要](https://ai.google.dev/gemini-api/docs/agents?hl=ja): マネージド エージェントの基本コンセプトについて学習する。
+- [クイックスタート](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja): 複数ターンの会話とストリーミングで構築を開始する。
+- [Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja): デフォルト エージェントの機能、ツール、料金を確認する。
+- [カスタム エージェントの構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja): `AGENTS.md` と `SKILL.md` を使用して独自のエージェントを定義する。
 
-Feedback geben
+フィードバックを送信
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Zuletzt aktualisiert: 2026-06-22 (UTC).
+最終更新日 2026-06-22 UTC。
 
-Haben Sie Feedback für uns?
+ご意見をお聞かせください
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-22 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-22 UTC。"],[],[]]

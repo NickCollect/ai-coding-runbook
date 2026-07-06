@@ -1,64 +1,68 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=zh-CN
-fetched_at: 2026-06-29T05:34:02.018820+00:00
-title: "\u4e86\u89e3\u8bcd\u5143\u5e76\u8ba1\u7b97\u8bcd\u5143\u6570\u91cf \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ko
+fetched_at: 2026-07-06T05:13:14.188642+00:00
+title: "\ud1a0\ud070 \uc774\ud574 \ubc0f \uacc4\uc0b0 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-发送反馈
+의견 보내기
 
-# 了解词元并计算词元数量
+# 토큰 이해 및 계산
 
-Gemini 和其他生成式 AI 模型会以一种称为“token”的粒度处理输入和输出。
+Gemini 및 기타 생성형 AI 모델은 *토큰* 이라는 세분화된 수준에서 입력과 출력을 처리합니다.
 
-**对于 Gemini 模型，一个 token 大致相当于 4 个字符。
-100 个 token 大约相当于 60-80 个英文单词。**
+**Gemini 모델의 경우 토큰은 약 4자와 같습니다.
+100개의 토큰은 약 60~80개의 영어 단어와 같습니다.**
 
-## 令牌简介
+## 토큰 정보
 
-词元可以是单个字符（例如 `z`），也可以是整个字词（例如 `cat`）。长字词会被拆分为多个 token。模型使用的所有 token 的集合称为词汇，将文本拆分为 token 的过程称为 *token 化*。
+토큰은 단일 문자(예: `z`) 또는 전체 단어(예: `cat`)일 수 있습니다. 긴 단어는 여러 토큰으로 나뉩니다. 모델에서 사용하는 모든 토큰 집합을 어휘라고 하며, 텍스트를 토큰으로 분할하는 프로세스를 *토큰화* 라고 합니다.
 
-启用结算功能后，[对 Gemini API 的调用费用](https://ai.google.dev/pricing?hl=zh-cn)部分取决于输入和输出 token 的数量，因此了解如何计算 token 数量会很有帮助。
+결제가 사용 설정되면 [Gemini API 호출 비용](https://ai.google.dev/pricing?hl=ko)은
+입력 및 출력 토큰 수에 따라 결정되므로 토큰 수를
+계산하는 방법을 알아두면 유용합니다.
 
-您可以在我们的 Colab 中尝试统计令牌。
+Colab에서 토큰 수를 계산해 볼 수 있습니다.
 
 |  |  |  |
 | --- | --- | --- |
-| [在 ai.google.dev 上查看](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | [试用 Colab 笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=zh-cn) | [在 GitHub 上查看笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=zh-cn) |
+| [ai.google.dev에서 보기](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | [Colab 노트북 사용해 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) | [GitHub에서 노트북 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) |
 
-## 统计 token 数量
+## 토큰 집계
 
-Gemini API 的所有输入和输出（包括文本、图片文件和其他非文本模态）都会进行分词。
+텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력 및 출력은 토큰화됩니다.
 
-您可以通过以下方式统计令牌数量：
+다음과 같은 방법으로 토큰 수를 집계할 수 있습니다.
 
-- **使用请求的输入调用 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=zh-cn)。**  
-   这会返回*仅输入*中的令牌总数。您可以在将输入内容发送给模型之前进行此调用，以检查请求的大小。
-- **在调用 `generate_content` 后，对 `response` 对象使用 `usage_metadata` 属性。**  
-   这会返回*输入和输出*中的令牌总数：`total_token_count`。  
-   它还会分别返回输入和输出的 token 数：`prompt_token_count`（输入 token）和 `candidates_token_count`（输出 token）。
+- **요청의 입력
+  으로 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ko)를 호출합니다.**  
+   이렇게 하면 *입력에만* 있는 총 토큰 수가 반환됩니다. 모델에 입력을 전송하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
+- **`generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용합니다.**  
+   이렇게 하면
+  토큰의 총 수(*입력과 출력 모두*)가 반환됩니다. `total_token_count`.  
+   또한 입력 및 출력의 토큰 수를 별도로 반환합니다. `prompt_token_count` (입력 토큰) 및 `candidates_token_count`(출력 토큰).
 
-  如果您使用的是[思考模型](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)，则思考过程中使用的 token 会在 `thoughts_token_count` 中返回。如果您使用的是[上下文缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)，缓存的令牌数量将位于 `cached_content_token_count` 中。
+  [사고 모델을 사용하는 경우 사고 과정에서 사용된 토큰이 `thoughts_token_count`에 반환됩니다.](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) [컨텍스트 캐싱을 사용하는 경우 캐시된 토큰 수가 `cached_content_token_count`에 표시됩니다.](https://ai.google.dev/gemini-api/docs/caching?hl=ko)
 
-### 统计文本 token
+### 텍스트 토큰 집계
 
-如果您使用仅包含文本的输入调用 `count_tokens`，它会返回*仅包含输入内容* (`total_tokens`) 的文本的 token 数量。您可以在调用 `generate_content` 之前进行此调用，以检查请求的大小。
+텍스트 전용 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트의 토큰 수 (`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
 
-另一种方法是调用 `generate_content`，然后使用 `response` 对象上的 `usage_metadata` 属性来获取以下信息：
+또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- 输入 (`prompt_token_count`)、缓存内容 (`cached_content_token_count`) 和输出 (`candidates_token_count`) 的单独 token 数
-- 思考过程的 token 数 (`thoughts_token_count`)
-- *输入和输出*中的 token 总数 (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
 
 ### Python
 
@@ -133,17 +137,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### 统计多轮（聊天）对话的 token 数量
+### 멀티턴 (채팅) 토큰 집계
 
-如果您使用聊天记录调用 `count_tokens`，它会返回聊天中每个角色的文本的总 token 数 (`total_tokens`)。
+채팅 기록으로 `count_tokens`를 호출하면 채팅의 각 역할에서 텍스트의 총 토큰 수 (`total_tokens`)가 반환됩니다.
 
-另一种方法是调用 `send_message`，然后使用 `response` 对象上的 `usage_metadata` 属性来获取以下信息：
+또 다른 방법은 `send_message`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- 输入 (`prompt_token_count`)、缓存内容 (`cached_content_token_count`) 和输出 (`candidates_token_count`) 的单独 token 数
-- 思考过程的 token 数 (`thoughts_token_count`)
-- *输入和输出*中的 token 总数 (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
 
-如需了解下一个对话轮次的大小，您需要在调用 `count_tokens` 时将其附加到历史记录中。
+다음 대화 턴의 크기를 파악하려면 `count_tokens`를 호출할 때 기록에 추가해야 합니다.
 
 ### Python
 
@@ -269,30 +273,33 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### 统计多模态 token
+### 멀티모달 토큰 집계
 
-Gemini API 的所有输入内容（包括文本、图片文件和其他非文本模态）都会被分词。请注意以下关于 Gemini API 在处理多模态输入时进行分词的高级关键点：
+텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력은 토큰화됩니다. Gemini API에서 처리하는 동안 멀티모달 입력의 토큰화에 관한 다음 주요사항을 참고하세요.
 
-- 如果图片输入的两个维度均小于或等于 384 像素，则计为 258 个 token。如果图片在某个或两个维度上较大，则会根据需要将其剪裁并缩放为 768x768 像素的图块，每个图块计为 258 个 token。
-- 视频和音频文件会按以下固定费率转换为 token：视频为每秒 263 个 token，音频为每秒 32 个 token。
+- 두 치수가 모두 384픽셀 이하인 이미지 입력은 258개의 토큰으로 집계됩니다. 한쪽 또는 양쪽 치수가 더 큰 이미지는 필요에 따라 768x768픽셀의 타일로 잘리고 크기가 조정되며, 각 타일은 258개의 토큰으로 집계됩니다.
+- 동영상 및 오디오 파일은 다음과 같은 고정된 비율로 토큰으로 변환됩니다. 동영상은 초당 263개의 토큰, 오디오는 초당 32개의 토큰입니다.
 
-#### 媒体分辨率
+#### 미디어 해상도
 
-[Gemini 3 模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-3)通过 `media_resolution` 参数引入了对多模态视觉处理的精细控制。`media_resolution` 参数用于确定**为每个输入图片或视频帧分配的 token 数量上限**。分辨率越高，模型读取细小文字或识别细微细节的能力就越强，但 token 用量和延迟时间也会增加。
+[Gemini 3 모델](https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-3)은
+멀티모달 비전 처리를 세부적으로 제어할 수 있습니다. `media_resolution` 매개변수를 사용하여 `media_resolution` 매개변수는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수** 를 결정합니다.
+해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
 
-如需详细了解该参数及其对令牌计算的影响，请参阅[媒体分辨率](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-cn)指南。
+매개변수 및 토큰 계산에 미치는 영향에 관한 자세한 내용은
+[미디어 해상도](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ko) 가이드를 참고하세요.
 
-#### 图片文件
+#### 이미지 파일
 
-如果您使用文本和图片输入调用 `count_tokens`，它会返回*输入中*文本和图片的组合令牌数量 (`total_tokens`)。您可以在调用 `generate_content` 之前进行此调用，以检查请求的大小。您还可以选择性地分别对文本和文件调用 `count_tokens`。
+텍스트 및 이미지 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트와 이미지의 결합된 토큰 수 (`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 텍스트와 파일에서 별도로 `count_tokens`를 호출할 수도 있습니다.
 
-另一种方法是调用 `generate_content`，然后使用 `response` 对象上的 `usage_metadata` 属性来获取以下信息：
+또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- 输入 (`prompt_token_count`)、缓存内容 (`cached_content_token_count`) 和输出 (`candidates_token_count`) 的单独 token 数
-- 思考过程的 token 数 (`thoughts_token_count`)
-- *输入和输出*中的 token 总数 (`total_token_count`)
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
 
-使用 File API 上传的图片的示例：
+File API에서 업로드된 이미지를 사용하는 예:
 
 ### Python
 
@@ -392,7 +399,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-以内嵌数据形式提供图片的示例：
+이미지를 인라인 데이터로 제공하는 예:
 
 ### Python
 
@@ -489,20 +496,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### 视频或音频文件
+#### 동영상 또는 오디오 파일
 
-音频和视频会分别按以下固定费率转换为 token：
+오디오와 동영상은 각각 다음과 같은 고정된 비율로 토큰으로 변환됩니다.
 
-- 视频：每秒 263 个 token
-- 音频：每秒 32 个 token
+- 동영상: 초당 토큰 263개
+- 오디오: 초당 토큰 32개
 
-如果您使用文本和视频/音频输入调用 `count_tokens`，它会返回*输入中*文本和视频/音频文件的总令牌数 (`total_tokens`)。您可以在调用 `generate_content` 之前进行此调用，以检查请求的大小。您还可以选择分别对文本和文件调用 `count_tokens`。
+텍스트 및 동영상/오디오 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트와 동영상/오디오 파일의 결합된 토큰 수(`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 텍스트와 파일에서 별도로 `count_tokens`를 호출할 수도 있습니다.
 
-另一种方法是调用 `generate_content`，然后使用 `response` 对象上的 `usage_metadata` 属性来获取以下信息：
+또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
 
-- 输入 (`prompt_token_count`)、缓存内容 (`cached_content_token_count`) 和输出 (`candidates_token_count`) 的单独 token 数
-- 思考过程的 token 数 (`thoughts_token_count`)
-- *输入和输出*中的 token 总数 (`total_token_count`)。
+- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
+- 사고 과정의 토큰 수 (`thoughts_token_count`)
+- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`).
 
 ### Python
 
@@ -627,9 +634,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-### 统计思考 token 数
+### 사고 토큰 집계
 
-开启思考功能后，回答价格是输出 token 和思考 token 的总和。您可以从 `thoughtsTokenCount` 字段（或 SDK 等效字段）检索生成的思考 token 总数。
+사고를 사용 설정하면 응답 가격은 출력 토큰과 사고 토큰의 합계입니다. `thoughtsTokenCount` 필드 (또는 SDK에 상응하는 필드)에서 생성된 총 사고 토큰 수를 가져올 수 있습니다.
 
 ### Python
 
@@ -655,13 +662,15 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-思考模型会生成完整的想法，以提高最终回答的质量，然后输出[摘要](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#summaries)，以便深入了解思考过程。因此，即使 API 仅输出摘要，也会根据模型为创建摘要而生成的完整思路令牌来确定价格。
+사고 모델은 최종 응답의 품질을 개선하기 위해 전체 사고를 생성한 후 사고 과정에 관한 통계를 제공하기 위해 [요약](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#summaries)을 출력합니다. 따라서 API는 요약만 출력하더라도 모델이 요약을 만들기 위해 생성하는 전체 사고 토큰을 기준으로 가격을 책정합니다.
 
-如需详细了解如何配置思考，请参阅 [Gemini 思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)指南。
+[Gemini 사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) 가이드에서 사고를 구성하는 방법을 자세히 알아보세요.
 
-## 上下文窗口
+## 컨텍스트 윈도우
 
-通过 Gemini API 提供的模型具有以 token 衡量的上下文窗口。上下文窗口定义了您可以提供的输入量以及模型可以生成的输出量。您可以通过调用 [`models.get` 端点](https://ai.google.dev/api/rest/v1/models/get?hl=zh-cn)或查看[模型文档](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)来确定上下文窗口的大小。
+Gemini API를 통해 사용할 수 있는 모델에는 토큰으로 측정되는 컨텍스트 윈도우가 있습니다. 컨텍스트 윈도우는 제공할 수 있는 입력의 양과 모델이 생성할 수 있는 출력의 양을 정의합니다.
+컨텍스트 윈도우의 크기를 [`models.get` 엔드포인트](https://ai.google.dev/api/rest/v1/models/get?hl=ko)
+를 호출하거나 [모델 문서](https://ai.google.dev/gemini-api/docs/models?hl=ko)에서 확인할 수 있습니다.
 
 ### Python
 
@@ -706,12 +715,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-发送反馈
+의견 보내기
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-最后更新时间 (UTC)：2026-06-24。
+최종 업데이트: 2026-06-24(UTC)
 
-需要向我们提供更多信息？
+의견을 전달하고 싶나요?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-24。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-24(UTC)"],[],[]]

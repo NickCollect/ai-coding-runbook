@@ -1,84 +1,82 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=it
-fetched_at: 2026-06-29T05:35:51.676812+00:00
-title: "Agente AI durevole con Gemini e Temporal \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=ar
+fetched_at: 2026-07-06T05:13:21.533423+00:00
+title: "\u0648\u0643\u064a\u0644 \u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064a \u0627\u0644\u062f\u0627\u0626\u0645 \u0645\u0639 Gemini \u0648Temporal \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Invia feedback
+إرسال ملاحظات
 
-# Agente AI durevole con Gemini e Temporal
+# وكيل الذكاء الاصطناعي الدائم مع Gemini وTemporal
 
-Questo tutorial ti guida nella creazione di un
-[loop agentico in stile ReAct](https://arxiv.org/abs/2210.03629) che utilizza l'
-API Gemini per il ragionamento e [Temporal](https://temporal.io/) per la durabilità.
-Il codice sorgente completo per questo tutorial è disponibile su
+يرشدك هذا البرنامج التعليمي خلال عملية إنشاء حلقة وكيل بأسلوب
+[ReAct](https://arxiv.org/abs/2210.03629) تستخدِم
+Gemini API للاستدلال و[Temporal](https://temporal.io/) لضمان استمراريتها.
+يتوفّر الرمز المصدر الكامل لهذا البرنامج التعليمي على
 [GitHub](https://github.com/temporal-community/durable-react-agent-gemini).
 
-L'agente può chiamare strumenti, ad esempio cercare avvisi meteo o geolocalizzare un indirizzo IP, e continuerà a eseguire il loop finché non avrà informazioni sufficienti per rispondere.
+يمكن للوكيل استدعاء الأدوات، مثل البحث عن تنبيهات الأحوال الجوية أو تحديد الموقع الجغرافي لعنوان IP، وسيستمر في التكرار إلى أن يحصل على معلومات كافية للردّ.
 
-Ciò che lo distingue da una tipica demo di agenti è la **durabilità**. Ogni chiamata LLM, ogni chiamata di strumenti e ogni passaggio del loop agentico viene mantenuto da Temporal. Se il processo si arresta in modo anomalo, la rete si interrompe o un'API va in timeout, Temporal riprova automaticamente e riprende dall'ultimo passaggio completato. Non viene persa la cronologia delle conversazioni e le chiamate di strumenti non vengono ripetute in modo errato.
+ما يميّز هذا البرنامج التعليمي عن العرض التوضيحي العادي للوكيل هو **الاستمرارية**. تحتفظ Temporal بكل استدعاء للنموذج اللغوي الكبير وكل استدعاء للأداة وكل خطوة من خطوات حلقة الوكيل. إذا تعطّلت العملية أو انقطع الاتصال بالشبكة أو انتهت مهلة واجهة برمجة التطبيقات، تعيد Temporal المحاولة تلقائيًا وتستأنف من آخر خطوة مكتملة. لا يتم فقدان سجلّ المحادثات ولا يتم تكرار استدعاءات الأدوات بشكل غير صحيح.
 
-## Architettura
+## هندسة معمارية
 
-L'architettura è composta da tre parti:
+تتألف الهندسة المعمارية من ثلاثة أجزاء:
 
-- **Workflow**:il loop agentico che orchestra la logica di esecuzione.
-- **Attività**:singole unità di lavoro (chiamate LLM, chiamate di strumenti) che Temporal rende durabili.
-- **Worker**:il processo che esegue i workflow e le attività.
+- **سير العمل:** حلقة الوكيل التي تنظّم منطق التنفيذ.
+- **الأنشطة:** وحدات العمل الفردية (استدعاءات النموذج اللغوي الكبير واستدعاءات الأدوات) التي تجعلها Temporal مستمرة.
+- **العامل:** العملية التي تنفّذ مهام سير العمل والأنشطة.
 
-In questo esempio, inserirai tutti e tre questi elementi in un unico file (`durable_agent_worker.py`). In un'implementazione reale, li separeresti per consentire vari vantaggi di deployment e scalabilità. Inserirai il codice che fornisce un prompt all'agente in un secondo file (`start_workflow.py`).
+في هذا المثال، ستضع كل هذه الأجزاء الثلاثة في ملف واحد (`durable_agent_worker.py`). في عملية التنفيذ الواقعية، يمكنك فصلها للاستفادة من مزايا النشر وقابلية التوسّع المختلفة. ستضع الرمز الذي يقدّم طلبًا إلى الوكيل في ملف ثانٍ (`start_workflow.py`).
 
-## Prerequisiti
+## المتطلبات الأساسية
 
-Per completare questa guida, avrai bisogno di:
+لإكمال هذا الدليل، ستحتاج إلى:
 
-- Una chiave API Gemini. Puoi crearne una senza costi in
-  [Google AI Studio](https://aistudio.google.com/apikey?hl=it).
-- [Python](https://www.python.org/downloads/) versione 3.10 o successive.
-- La [CLI Temporal](https://docs.temporal.io/cli) per l'esecuzione di un server di sviluppo
-  locale.
+- مفتاح Gemini API يمكنك إنشاء مفتاح مجانًا في
+  [Google AI Studio](https://aistudio.google.com/apikey?hl=ar).
+- الإصدار 3.10 من [Python](https://www.python.org/downloads/) أو إصدار أحدث
+- واجهة سطر الأوامر [Temporal](https://docs.temporal.io/cli) لتشغيل خادم تطوير محلي
 
-## Configurazione
+## الإعداد
 
-Prima di iniziare, assicurati di avere un
-[server di sviluppo Temporal](https://docs.temporal.io/cli#start-dev-server)
-in esecuzione localmente:
+قبل البدء، تأكَّد من تشغيل خادم تطوير
+[Temporal](https://docs.temporal.io/cli#start-dev-server)
+محليًا:
 
 ```
 temporal server start-dev
 ```
 
-Poi, installa le dipendenze richieste:
+بعد ذلك، ثبِّت التبعيات المطلوبة:
 
 ```
 pip install temporalio google-genai httpx pydantic python-dotenv
 ```
 
-Crea un file `.env` nella directory del progetto con la tua chiave API Gemini. Puoi
-ottenere una chiave API da
-[Google AI Studio](https://aistudio.google.com/apikey?hl=it).
+أنشِئ ملف `.env` في دليل مشروعك باستخدام مفتاح Gemini API. يمكنك الحصول على مفتاح واجهة برمجة التطبيقات من
+[Google AI Studio](https://aistudio.google.com/apikey?hl=ar).
 
 ```
 echo "GOOGLE_API_KEY=your-api-key-here" > .env
 ```
 
-## Implementazione
+## التنفيذ
 
-Il resto di questo tutorial illustra il file `durable_agent_worker.py` dall'inizio alla fine, creando l'agente passo dopo passo. Crea il file e segui le istruzioni.
+يرشدك الجزء المتبقي من هذا البرنامج التعليمي خلال عملية إنشاء `durable_agent_worker.py` من أعلى إلى أسفل، وتجميع الوكيل جزءًا جزءًا. أنشِئ الملف واتّبِع الخطوات.
 
-### Importazioni e configurazione del sandbox
+### عمليات الاستيراد وإعداد وضع الحماية
 
-Inizia con le importazioni che devono essere definite in anticipo. Il blocco `workflow.unsafe.imports_passed_through()` indica al sandbox del workflow di Temporal di consentire il passaggio di determinati moduli senza restrizioni. Questo è necessario perché diverse librerie (in particolare `httpx`, che è una sottoclasse di `urllib.request.Request`) utilizzano pattern che altrimenti il sandbox bloccherebbe.
+ابدأ بعمليات الاستيراد التي يجب تحديدها مسبقًا. تخبر الكتلة `workflow.unsafe.imports_passed_through()` وضع حماية سير عمل Temporal بالسماح بمرور وحدات معيّنة بدون قيود. هذا ضروري لأنّ العديد من المكتبات (أبرزها `httpx`، التي تنتمي إلى الفئة الفرعية `urllib.request.Request`) تستخدِم أنماطًا سيحظرها وضع الحماية بخلاف ذلك.
 
 ```
 from temporalio import workflow
@@ -93,9 +91,9 @@ with workflow.unsafe.imports_passed_through():
     from google.genai import types
 ```
 
-### Istruzioni di sistema
+### تعليمات النظام
 
-Poi, definisci la personalità dell'agente. Le istruzioni di sistema indicano al modello come comportarsi. Questo agente è istruito a rispondere in haiku quando non sono necessari strumenti.
+بعد ذلك، حدِّد شخصية الوكيل. تخبر تعليمات النظام النموذج بكيفية التصرّف. تمت توجيه هذا الوكيل للردّ في قصائد هايكو عندما لا تكون هناك حاجة إلى استخدام أي أدوات.
 
 ```
 SYSTEM_INSTRUCTIONS = """
@@ -106,9 +104,9 @@ If no tools are needed, respond in haikus.
 """
 ```
 
-### Definizioni degli strumenti
+### تعريفات الأدوات
 
-Ora definisci gli strumenti che l'agente può utilizzare. Ogni strumento è una funzione asincrona con una stringa di documentazione descrittiva. Gli strumenti che accettano parametri utilizzano un modello Pydantic come singolo argomento. Questa è una best practice di Temporal che mantiene stabili le firme delle attività man mano che aggiungi campi facoltativi nel tempo.
+الآن، حدِّد الأدوات التي يمكن للوكيل استخدامها. كل أداة هي دالة غير متزامنة تتضمّن سلسلة مستندات وصفية. تستخدِم الأدوات التي تأخذ مَعلمات نموذج Pydantic كمعلَمة واحدة. هذه أفضل ممارسة في Temporal تحافظ على ثبات تواقيع النشاط أثناء إضافة حقول اختيارية بمرور الوقت.
 
 ```
 import json
@@ -137,7 +135,7 @@ async def get_weather_alerts(request: GetWeatherAlertsRequest) -> str:
         return json.dumps(response.json())
 ```
 
-Poi, definisci gli strumenti per la geolocalizzazione degli indirizzi IP:
+بعد ذلك، حدِّد أدوات تحديد الموقع الجغرافي لعنوان IP:
 
 ```
 class GetLocationRequest(BaseModel):
@@ -166,11 +164,11 @@ async def get_location_info(request: GetLocationRequest) -> str:
         return f"{result['city']}, {result['regionName']}, {result['country']}"
 ```
 
-### Registro degli strumenti
+### سجلّ الأدوات
 
-Poi, crea un registro che mappa i nomi degli strumenti alle funzioni di gestione. La funzione
-`get_tools()` genera oggetti `FunctionDeclaration` compatibili con Gemini
-dai callable utilizzando `FunctionDeclaration.from_callable_with_api_option()`.
+بعد ذلك، أنشِئ قاعدة بيانات المسجّلين التي تربط أسماء الأدوات بدوال المعالجة. تنشئ الدالة
+`get_tools()` كائنات `FunctionDeclaration` متوافقة مع Gemini
+من الدوال القابلة للاستدعاء باستخدام `FunctionDeclaration.from_callable_with_api_option()`.
 
 ```
 from typing import Any, Awaitable, Callable
@@ -208,11 +206,11 @@ def get_tools() -> types.Tool:
     )
 ```
 
-### Attività LLM
+### نشاط النموذج اللغوي الكبير
 
-Ora definisci l'attività che chiama l'API Gemini. Le classi di dati `GeminiChatRequest` e `GeminiChatResponse` definiscono il contratto.
+الآن، حدِّد النشاط الذي يستدعي Gemini API. تحدِّد فئتا البيانات `GeminiChatRequest` و`GeminiChatResponse` العقد.
 
-Disabiliterai la chiamata automatica di funzioni in modo che la chiamata LLM e la chiamata di strumenti vengano gestite come attività separate, aumentando la durabilità dell'agente. Disabiliterai anche i tentativi integrati dell'SDK (`attempts=1`) poiché Temporal gestisce i tentativi in modo duraturo.
+ستوقف ميزة استدعاء الدوال التلقائي حتى يتم التعامل مع استدعاء النموذج اللغوي الكبير واستدعاء الأداة كمهام منفصلة، ما يمنح وكيلك مزيدًا من الاستمرارية. ستوقف أيضًا عمليات إعادة المحاولة المضمّنة في حزمة SDK (`attempts=1`) لأنّ Temporal تتعامل مع عمليات إعادة المحاولة بشكل مستمر.
 
 ```
 import os
@@ -288,13 +286,13 @@ async def generate_content(request: GeminiChatRequest) -> GeminiChatResponse:
     )
 ```
 
-### Attività di strumenti dinamici
+### نشاط الأداة الديناميكية
 
-Poi, definisci l'attività che esegue gli strumenti. Questa utilizza la funzionalità di attività dinamica di Temporal: il gestore di strumenti (un callable) viene ottenuto dal registro degli strumenti tramite la funzione `get_handler`. In questo modo è possibile definire agenti diversi semplicemente fornendo un insieme diverso di strumenti e istruzioni di sistema; il workflow che implementa il loop agentico non richiede modifiche.
+بعد ذلك، حدِّد النشاط الذي ينفّذ الأدوات. يستخدِم هذا ميزة النشاط الديناميكي في Temporal: يتم الحصول على معالج الأداة (دالة قابلة للاستدعاء) من سجلّ الأدوات من خلال الدالة `get_handler`. يتيح ذلك تحديد وكلاء مختلفين ببساطة من خلال تقديم مجموعة مختلفة من الأدوات وتعليمات النظام، ولا يتطلّب سير العمل الذي ينفّذ حلقة الوكيل أي تغييرات.
 
-L'attività esamina la firma del gestore per determinare come passare gli argomenti. Se il gestore prevede un modello Pydantic, gestisce il formato di output
-nidificato prodotto da Gemini (ad esempio, `{"request": {"state": "CA"}}` anziché
-un formato piatto `{"state": "CA"}`).
+يفحص النشاط توقيع المعالج لتحديد كيفية تمرير الوسيطات. إذا كان المعالج يتوقّع نموذج Pydantic، فإنّه يتعامل مع تنسيق الإخراج المتداخل
+الذي ينتجه Gemini (على سبيل المثال، `{"request": {"state": "CA"}}` بدلاً
+من `{"state": "CA"}`).
 
 ```
 import inspect
@@ -334,11 +332,11 @@ async def dynamic_tool_activity(args: Sequence[RawValue]) -> dict:
     return result
 ```
 
-### Il workflow del loop agentico
+### سير عمل حلقة الوكيل
 
-Ora hai tutti gli elementi per completare la creazione dell'agente. La classe `AgentWorkflow` implementa un workflow contenente il loop dell'agente. All'interno di questo loop, l'LLM viene chiamato tramite l'attività (rendendolo duraturo), l'output viene esaminato e, se l'LLM ha scelto uno strumento, viene chiamato tramite `dynamic_tool_activity`.
+الآن، لديك كل الأجزاء اللازمة لإنهاء إنشاء الوكيل. تنفّذ الفئة `AgentWorkflow` سير عمل يحتوي على حلقة الوكيل. ضمن هذه الحلقة، يتم استدعاء النموذج اللغوي الكبير من خلال النشاط (ما يجعله مستمرًا)، ويتم فحص الناتج، وإذا اختار النموذج اللغوي الكبير أداة، يتم استدعاؤها من خلال `dynamic_tool_activity`.
 
-In questo semplice agente in stile ReAct, una volta che l'LLM sceglie di non utilizzare uno strumento, il loop viene considerato completato e viene restituito il risultato finale dell'LLM.
+في هذا الوكيل البسيط بأسلوب ReAct، بمجرد أن يختار النموذج اللغوي الكبير عدم استخدام أداة، تُعتبر الحلقة مكتملة ويتم عرض النتيجة النهائية للنموذج اللغوي الكبير.
 
 ```
 from datetime import timedelta
@@ -406,13 +404,13 @@ class AgentWorkflow:
         return result
 ```
 
-Il loop agentico è completamente duraturo. Se il worker dell'agente si arresta in modo anomalo dopo diverse iterazioni del loop, Temporal riprenderà esattamente da dove si era interrotto senza dover richiamare le chiamate LLM o le chiamate di strumenti già eseguite.
+حلقة الوكيل مستمرة بالكامل. إذا تعطّل عامل الوكيل بعد عدة تكرارات خلال الحلقة، ستستأنف Temporal من المكان الذي توقّفت عنده بالضبط بدون الحاجة إلى إعادة استدعاء استدعاءات النموذج اللغوي الكبير أو استدعاءات الأدوات التي تم تنفيذها من قبل.
 
-### Avvio del worker
+### بدء تشغيل العامل
 
-Infine, collega tutto. Sebbene il codice implementi la logica di business necessaria in modo da sembrare in esecuzione in un unico processo, l'utilizzo di Temporal lo rende un sistema basato su eventi (in particolare, basato su eventi) in cui la comunicazione tra il workflow e le attività avviene tramite la messaggistica fornita da Temporal.
+أخيرًا، اربط كل شيء معًا. على الرغم من أنّ الرمز ينفّذ منطق النشاط التجاري الضروري بطريقة تجعله يبدو وكأنّه يتم تشغيله في عملية واحدة، فإنّ استخدام Temporal يجعله نظامًا يستند إلى الأحداث (على وجه التحديد، يستند إلى مصدر الأحداث) حيث يحدث التواصل بين سير العمل والأنشطة من خلال المراسلة التي توفّرها Temporal.
 
-Il worker Temporal si connette al servizio Temporal e funge da pianificatore per le attività di workflow e attività. Il worker registra il workflow e entrambe le attività, quindi inizia ad ascoltare le attività.
+يتصل عامل Temporal بخدمة Temporal ويعمل كنظام جدولة مهام لمهام سير العمل والأنشطة. يسجِّل العامل سير العمل وكلا النشاطَين، ثم يبدأ في الاستماع إلى المهام.
 
 ```
 import asyncio
@@ -451,9 +449,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Lo script client
+## النص البرمجي للعميل
 
-Crea lo script client (`start_workflow.py`). Invia una query e attende il risultato. Tieni presente che si connette alla stessa coda di attività a cui fa riferimento il worker dell'agente: lo script `start_workflow` invia un'attività di workflow con il prompt dell'utente a questa coda di attività, avviando l'esecuzione dell'agente.
+أنشِئ النص البرمجي للعميل (`start_workflow.py`). يرسِل هذا النص استعلامًا وينتظر النتيجة. لاحظ أنّه يتصل بقائمة انتظار المهام نفسها المشار إليها في عامل الوكيل، إذ يرسِل النص البرمجي `start_workflow` مهمة سير عمل تتضمّن طلب المستخدم إلى قائمة انتظار المهام هذه، ما يؤدي إلى بدء تنفيذ الوكيل.
 
 ```
 import asyncio
@@ -483,29 +481,29 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## Esegui l'agente
+## تشغيل الوكيل
 
-Se non l'hai ancora fatto, avvia il server di sviluppo Temporal:
+إذا لم يسبق لك ذلك، ابدأ خادم تطوير Temporal:
 
 ```
 temporal server start-dev
 ```
 
-In una nuova finestra del terminale, avvia il worker dell'agente:
+في نافذة طرفية جديدة، ابدأ عامل الوكيل:
 
 ```
 python -m durable_agent_worker
 ```
 
-In una terza finestra del terminale, invia una query all'agente:
+في نافذة طرفية ثالثة، أرسِل استعلامًا إلى وكيلك:
 
 ```
 python -m start_workflow "are there any weather alerts for where I am?"
 ```
 
-Nota l'output nel terminale di `durable_agent_worker` che mostra le azioni che si verificano in ogni iterazione del loop agentico. L'LLM è in grado di soddisfare la richiesta dell'utente chiamando una serie di strumenti a sua disposizione. Puoi visualizzare i passaggi eseguiti tramite l'interfaccia utente di Temporal all'indirizzo `http://localhost:8233/namespaces/default/workflows`.
+لاحظ الناتج في النافذة الطرفية لـ `durable_agent_worker` الذي يعرض الإجراءات التي تحدث في كل تكرار من حلقة الوكيل. يستطيع النموذج اللغوي الكبير تلبية طلب المستخدم من خلال استدعاء سلسلة من الأدوات المتاحة له. يمكنك الاطّلاع على الخطوات التي تم تنفيذها من خلال واجهة مستخدم Temporal على `http://localhost:8233/namespaces/default/workflows`.
 
-Prova alcuni prompt diversi per vedere l'agente ragionare e chiamare gli strumenti:
+جرِّب توجيه بضعة طلبات مختلفة للاطّلاع على طريقة استدلال الوكيل واستدعائه للأدوات:
 
 ```
 python -m start_workflow "are there any weather alerts for New York?"
@@ -514,63 +512,63 @@ python -m start_workflow "what is my ip address?"
 python -m start_workflow "tell me a joke"
 ```
 
-L'ultimo prompt non richiede strumenti, quindi l'agente risponde in un haiku basato su `SYSTEM_INSTRUCTIONS`.
+لا يتطلّب الطلب الأخير أي أدوات، لذا يردّ الوكيل في قصيدة هايكو استنادًا إلى `SYSTEM_INSTRUCTIONS`.
 
-## Testa la durabilità (facoltativo)
+## اختبار الاستمرارية (اختياري)
 
-La creazione su Temporal garantisce che l'agente sopravviva senza problemi agli errori. Puoi testarlo utilizzando due esperimenti distinti.
+يضمن إنشاء وكيلك استنادًا إلى Temporal أنّه سيستمر في العمل بسلاسة في حال حدوث أعطال. يمكنك اختبار ذلك باستخدام تجربتَين مختلفتَين.
 
-### Simulazione di un'interruzione della rete
+### محاكاة انقطاع الشبكة
 
-In questo test, disabiliterai temporaneamente la connessione a internet del computer, invierai un workflow, osserverai Temporal riprovare automaticamente e poi ripristinerai la rete per vederla recuperare.
+في هذا الاختبار، ستوقف مؤقتًا الاتصال بالإنترنت على جهاز الكمبيوتر، وترسِل سير عمل، وتراقب إعادة المحاولة التلقائية في Temporal، ثم تعيد الاتصال بالشبكة للاطّلاع على عملية الاسترداد.
 
-1. Scollega la macchina da internet (ad esempio, disattiva il Wi-Fi).
-2. Invia un workflow:
+1. افصل جهازك عن الإنترنت (على سبيل المثال، أوقِف شبكة Wi-Fi).
+2. أرسِل سير عمل:
 
    ```
    python -m start_workflow "tell me a joke"
    ```
-3. Controlla l'interfaccia utente di Temporal (`http://localhost:8233`). Vedrai che l'attività LLM non riesce e che Temporal gestisce automaticamente i tentativi in background.
-4. Riconnettiti a internet.
-5. Il successivo tentativo automatico raggiungerà correttamente l'API Gemini e il terminale stamperà il risultato finale.
+3. تحقَّق من واجهة مستخدم Temporal (`http://localhost:8233`). ستلاحظ تعذُّر نشاط النموذج اللغوي الكبير وإدارة Temporal تلقائيًا لعمليات إعادة المحاولة في الخلفية.
+4. أعِد الاتصال بالإنترنت.
+5. ستصل عملية إعادة المحاولة التلقائية التالية بنجاح إلى Gemini API، وستعرض النافذة الطرفية النتيجة النهائية.
 
-### Superare un arresto anomalo del worker
+### الاستمرار في العمل بعد تعطُّل العامل
 
-In questo test, interrompi il worker a metà dell'esecuzione e lo riavvii. Temporal riproduce la cronologia del workflow (origine eventi) e riprende dall'ultima attività completata: le chiamate LLM e le chiamate di strumenti già completate non vengono ripetute.
+في هذا الاختبار، ستوقف العامل في منتصف التنفيذ ثم تعيد تشغيله. تعيد Temporal تشغيل سجلّ سير العمل (مصدر الأحداث) وتستأنف من آخر نشاط مكتمل، ولا يتم تكرار استدعاءات النموذج اللغوي الكبير واستدعاءات الأدوات التي تم إكمالها من قبل.
 
-1. Per darti il tempo di interrompere il worker, apri `durable_agent_worker.py` e rimuovi temporaneamente il commento da `await asyncio.sleep(10)` all'interno del loop `run` di `AgentWorkflow`.
-2. Riavvia il worker:
+1. لمنح نفسك وقتًا لإيقاف العامل، افتح `durable_agent_worker.py` وأزِل مؤقتًا علامة التعليق عن `await asyncio.sleep(10)` داخل حلقة `run` في `AgentWorkflow`.
+2. أعِد تشغيل العامل:
 
    ```
    python -m durable_agent_worker
    ```
-3. Invia una query che attivi diversi strumenti:
+3. أرسِل استعلامًا يؤدي إلى استدعاء عدة أدوات:
 
    ```
    python -m start_workflow "are there any weather alerts where I am?"
    ```
-4. Interrompi il processo worker in qualsiasi momento prima del completamento (`Ctrl-C` nel terminale worker o utilizzando `kill %1` se è in esecuzione in background).
-5. Riavvia il worker:
+4. أوقِف عملية العامل في أي وقت قبل الإكمال (`Ctrl-C` في النافذة الطرفية للعامل، أو باستخدام `kill %1` إذا كان يتم تشغيلها في الخلفية).
+5. أعِد تشغيل العامل:
 
    ```
    python -m durable_agent_worker
    ```
 
-Temporal riproduce la cronologia del workflow. Le chiamate LLM e le chiamate di strumenti già completate **non** vengono eseguite di nuovo: i risultati vengono riprodotti immediatamente dalla cronologia (il log eventi). Il workflow viene completato correttamente.
+تعيد Temporal تشغيل سجلّ سير العمل. **لا** تتم إعادة تنفيذ استدعاءات النموذج اللغوي الكبير واستدعاءات الأدوات التي تم إكمالها من قبل، بل تتم إعادة تشغيل نتائجها على الفور من السجلّ (سجلّ الأحداث). يكتمل سير العمل بنجاح.
 
-## Ulteriori risorse
+## موارد أخرى
 
-- [Documentazione di Temporal](https://docs.temporal.io/)
-- [SDK Python di Temporal](https://docs.temporal.io/develop/python)
-- [SDK Google GenAI](https://googleapis.github.io/python-genai/)
-- [Codice sorgente per questo tutorial](https://github.com/temporal-community/durable-react-agent-gemini)
+- [مستندات Temporal](https://docs.temporal.io/)
+- [حزمة Temporal Python SDK](https://docs.temporal.io/develop/python)
+- [حزمة Google GenAI SDK](https://googleapis.github.io/python-genai/)
+- [الرمز المصدر لهذا البرنامج التعليمي](https://github.com/temporal-community/durable-react-agent-gemini)
 
-Invia feedback
+إرسال ملاحظات
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-06-22 UTC.
+تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)
 
-Vuoi dirci altro?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-22 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-22 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

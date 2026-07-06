@@ -1,25 +1,25 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=ko
-fetched_at: 2026-06-29T05:35:07.391813+00:00
-title: "\uc624\ub514\uc624 \uc774\ud574 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=pt-BR
+fetched_at: 2026-07-06T05:17:03.879679+00:00
+title: "Compreens\u00e3o de \u00e1udio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-의견 보내기
+Envie comentários
 
-# 오디오 이해
+# Compreensão de áudio
 
-Gemini는 오디오 입력을 분석하고 텍스트 응답을 생성할 수 있습니다.
+O Gemini pode analisar entradas de áudio e gerar respostas de texto.
 
 ### Python
 
@@ -166,25 +166,25 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 개요
+## Visão geral
 
-Gemini는 오디오 입력을 분석하고 이해하여 텍스트 응답을 생성할 수 있으므로 다음과 같은 사용 사례를 지원합니다.
+O Gemini pode analisar e entender entradas de áudio e gerar respostas de texto para elas,
+permitindo casos de uso como os seguintes:
 
-- 오디오 콘텐츠에 관해 설명, 요약 또는 질문에 답변합니다.
-- 오디오 (음성을 텍스트로 변환)의 스크립트와 번역을 제공합니다.
-- 음성과 음악에서 감정을 감지합니다.
-- 오디오의 특정 세그먼트를 분석하고 타임스탬프를 제공합니다.
+- Descrever, resumir ou responder a perguntas sobre conteúdo de áudio.
+- Forneça uma transcrição e tradução do áudio (conversão de voz em texto).
+- Detectar emoções na fala e na música.
+- Analise segmentos específicos do áudio e forneça carimbos de data/hora.
 
-현재 Gemini API는 실시간 스크립트 작성 사용 사례를 지원하지 않습니다.
-실시간 음성 및 동영상 상호작용은 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ko)를 참고하세요.
-실시간 스크립트 작성을 지원하는 전용 음성을 텍스트로 변환 모델은
-[Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=ko)를 사용하세요.
+No momento, a API Gemini não oferece suporte a casos de uso de transcrição em tempo real.
+Para interações de voz e vídeo em tempo real, consulte a [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br).
+Para modelos dedicados de conversão de voz em texto com suporte à transcrição em tempo real, use a [API Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text?hl=pt-br).
 
-## 음성을 텍스트로 변환
+## Transcrever voz em texto
 
-이 샘플 애플리케이션은 구조화된 출력을 사용하여 타임스탬프와 감정 감지를 포함한 음성을 텍스트로 변환,
-번역, 요약하도록 Gemini API에 프롬프트를 표시하는 방법을 보여줍니다.
-[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)을 사용합니다.
+Este aplicativo de exemplo mostra como pedir à API Gemini para transcrever,
+traduzir e resumir a fala, incluindo carimbos de data/hora e detecção de emoções
+usando [saídas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br).
 
 ### Python
 
@@ -412,28 +412,28 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-[버튼을 클릭하여 이 예시 스크립트 작성 앱과 같은 앱을 [AI Studio 빌드](https://aistudio.google.com/apps?e=0&hl=ko)에 프롬프트할 수 있습니다.](https://aistudio.google.com/apps/bundled/echoscript?hl=ko)
+Você pode pedir para o [AI Studio Build](https://aistudio.google.com/apps?e=0&hl=pt-br) criar um app igual a [este exemplo de app de transcrição](https://aistudio.google.com/apps/bundled/echoscript?hl=pt-br) com apenas um clique.
 
-![다국어 오디오 스크립트 작성 Gemini 앱](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=ko)
+![Um app do Gemini para transcrição de áudio multilíngue](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=pt-br)
 
-## 입력 오디오
+## Áudio de entrada
 
-다음과 같은 방법으로 Gemini에 오디오 데이터를 제공할 수 있습니다.
+Você pode fornecer dados de áudio ao Gemini das seguintes maneiras:
 
-- [오디오 파일](#upload-audio)을
-  `generateContent`에 요청하기 전에 업로드합니다.
-- [인라인 오디오 데이터](#inline-audio)를 요청과 함께
-  `generateContent`에 전달합니다.
+- [Faça upload de um arquivo de áudio](#upload-audio) antes de fazer uma solicitação para
+  `generateContent`.
+- [Transmita dados de áudio inline](#inline-audio) com a solicitação para
+  `generateContent`.
 
-다른 파일 입력 방법에 관해 알아보려면
-[파일 입력 방법](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ko) 가이드를 참고하세요.
+Para conhecer outros métodos de entrada de arquivos, consulte o guia [Métodos de entrada de arquivos](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pt-br).
 
-### 오디오 파일 업로드
+### Fazer upload de um arquivo de áudio
 
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 사용하여 오디오 파일을 업로드할 수 있습니다.
-파일, 텍스트 프롬프트, 시스템 안내 등을 포함한 총 요청 크기가 20MB보다 큰 경우 항상 Files API를 사용하세요.
+Use a [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br) para fazer upload de um arquivo de áudio.
+Sempre use a API Files quando o tamanho total da solicitação (incluindo arquivos, comando de texto, instruções do sistema etc.) for maior que 20 MB.
 
-다음 코드는 오디오 파일을 업로드한 후 `generateContent` 호출에서 파일을 사용합니다.
+O código a seguir faz upload de um arquivo de áudio e o usa em uma chamada para
+`generateContent`.
 
 ### Python
 
@@ -580,12 +580,13 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-미디어 파일 작업에 관해 자세히 알아보려면
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 참고하세요.
+Para saber mais sobre como trabalhar com arquivos de mídia, consulte a
+[API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br).
 
-### 오디오 데이터 인라인 전달
+### Transmitir dados de áudio inline
 
-오디오 파일을 업로드하는 대신 `generateContent`에 요청에서 인라인 오디오 데이터를 전달할 수 있습니다.
+Em vez de fazer upload de um arquivo de áudio, você pode transmitir dados de áudio inline na
+solicitação para `generateContent`:
 
 ### Python
 
@@ -684,14 +685,14 @@ func main() {
 }
 ```
 
-인라인 오디오 데이터와 관련해 유의해야 할 사항은 다음과 같습니다.
+Alguns lembretes sobre dados de áudio inline:
 
-- 최대 요청 크기는 20MB이며, 여기에는 텍스트 프롬프트, 시스템 안내, 인라인으로 제공되는 파일이 포함됩니다. 파일 크기로 인해 *총 요청 크기*가 20MB를 초과하는 경우 Files API를 사용하여 [요청에 사용할 오디오 파일을 업로드](#upload-audio)하세요.
-- 오디오 샘플을 여러 번 사용하는 경우 오디오 파일을 업로드하는 것이 더 효율적입니다.
+- O tamanho máximo da solicitação é de 20 MB, incluindo comandos de texto, instruções do sistema e arquivos fornecidos inline. Se o tamanho do arquivo fizer com que o *tamanho total da solicitação* exceda 20 MB, use a API Files para [fazer upload de um arquivo de áudio](#upload-audio) para uso na solicitação.
+- Se você estiver usando uma amostra de áudio várias vezes, é mais eficiente [fazer upload de um arquivo de áudio](#upload-audio).
 
-## 스크립트 가져오기
+## Acessar uma transcrição
 
-오디오 데이터의 스크립트를 가져오려면 프롬프트에서 요청하기만 하면 됩니다.
+Para receber uma transcrição dos dados de áudio, basta pedir no comando:
 
 ### Python
 
@@ -780,12 +781,13 @@ func main() {
 }
 ```
 
-## 타임스탬프 참조
+## Consulte os carimbos de data/hora
 
-`MM:SS` 형식의 타임스탬프를 사용하여 오디오 파일의 특정 섹션을 참조할 수 있습니다. 예를 들어 다음 프롬프트는
+É possível se referir a seções específicas de um arquivo de áudio usando carimbos de data/hora no formato
+`MM:SS`. Por exemplo, o comando a seguir solicita uma transcrição que
 
-- 파일 시작 부분에서 2분 30초에 시작합니다.
-- 파일 시작 부분에서 3분 29초에 종료합니다.
+- Começa aos 2 minutos e 30 segundos do início do arquivo.
+- Termina em 3 minutos e 29 segundos desde o início do arquivo.
 
 ### Python
 
@@ -847,9 +849,10 @@ func main() {
 }
 ```
 
-## 토큰 집계
+## Contar tokens
 
-`countTokens` 메서드를 호출하여 오디오 파일의 토큰 수를 가져옵니다. 예를 들면 다음과 같습니다.
+Chame o método `countTokens` para receber uma contagem do número de tokens em um
+arquivo de áudio. Exemplo:
 
 ### Python
 
@@ -933,43 +936,44 @@ func main() {
 }
 ```
 
-## 지원되는 오디오 형식
+## Formatos de áudio compatíveis
 
-Gemini는 다음과 같은 오디오 형식 MIME 유형을 지원합니다.
+O Gemini é compatível com os seguintes tipos MIME de formato de áudio:
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
 - AIFF - `audio/aiff`
 - AAC - `audio/aac`
-- OGG Vorbis - `audio/ogg`
+- OGG Vorbis: `audio/ogg`
 - FLAC - `audio/flac`
 
-## 오디오에 대한 기술 세부정보
+## Detalhes técnicos sobre áudio
 
-- Gemini는 오디오의 각 초를 32개의 토큰으로 나타냅니다. 예를 들어 1분 오디오는 1,920개의 토큰으로 나타냅니다.
-- Gemini는 새소리나 사이렌과 같은 음성이 아닌 구성요소를 '이해'할 수 있습니다.
-- 단일 프롬프트에서 지원되는 최대 오디오 데이터 길이는 9.5시간입니다.
-  Gemini는 단일 프롬프트의 오디오 파일 *수* 를 제한하지 않습니다. 하지만 단일 프롬프트에 있는 모든 오디오 파일의 총 결합 길이는 9.5시간을 초과할 수 없습니다.
-- Gemini는 오디오 파일을 16Kbps 데이터 해상도로 다운샘플링합니다.
-- 오디오 소스에 여러 채널이 포함된 경우 Gemini는 이러한 채널을 단일 채널로 결합합니다.
+- O Gemini representa cada segundo de áudio como 32 tokens. Por exemplo, um minuto de áudio é representado como 1.920 tokens.
+- O Gemini pode "entender" componentes que não são de fala, como cantos de pássaros ou sirenes.
+- O tamanho máximo aceito de dados de áudio em um único comando é de 9,5 horas.
+  O Gemini não limita o *número* de arquivos de áudio em um único comando.No entanto, a duração total combinada de todos os arquivos de áudio em um único comando não pode exceder 9,5 horas.
+- O Gemini reduz a resolução dos arquivos de áudio para 16 Kbps.
+- Se a fonte de áudio tiver vários canais, o Gemini vai combinar todos em um só.
 
-## 다음 단계
+## A seguir
 
-이 가이드에서는 오디오 데이터에 대한 응답으로 텍스트를 생성하는 방법을 보여줍니다. 자세한 내용은 다음 리소스를 참고하세요.
+Este guia mostra como gerar texto em resposta a dados de áudio. Para saber mais, consulte os seguintes recursos:
 
-- [파일 프롬프트 전략](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide): Gemini API는 텍스트, 이미지, 오디오, 동영상 데이터(멀티모달 프롬프트 사용이라고도 함)를 사용한 프롬프트를 지원합니다.
-- [시스템 안내](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko#system-instructions):
-  시스템 안내를 사용하면 특정 요구사항 및 사용 사례에 따라 모델의 동작을 조정할 수 있습니다.
-- [안전 가이드](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ko): 생성형 AI
-  모델은 때때로 부정확하거나
-  편향되거나 불쾌감을 주는 등 예상치 못한 출력을 생성합니다. 이러한 출력으로 인한 피해 위험을 제한하려면 후처리 및 인간 평가가 필수적입니다.
+- [Estratégias de comandos de arquivo](https://ai.google.dev/gemini-api/docs/files?hl=pt-br#prompt-guide): a
+  API Gemini aceita comandos com dados de texto, imagem, áudio e vídeo, também
+  conhecidas como comandos multimodais.
+- [Instruções do sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br#system-instructions):
+  Com elas, é possível orientar o comportamento do modelo com base nas suas
+  necessidades e casos de uso específicos.
+- [Orientações de segurança](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=pt-br): às vezes, os modelos de IA generativa produzem resultados inesperados, como imprecisos, tendenciosos ou ofensivos. O pós-processamento e a avaliação humana são essenciais para limitar o risco de danos causados por essas saídas.
 
-의견 보내기
+Envie comentários
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-최종 업데이트: 2026-06-23(UTC)
+Última atualização 2026-06-23 UTC.
 
-의견을 전달하고 싶나요?
+Quer enviar seu feedback?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-23(UTC)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-23 UTC."],[],[]]

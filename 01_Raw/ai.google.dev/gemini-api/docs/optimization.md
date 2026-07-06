@@ -1,94 +1,86 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=it
-fetched_at: 2026-06-29T05:35:28.064525+00:00
-title: "Inferenza e ottimizzazione dell'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=zh-CN
+fetched_at: 2026-07-06T05:12:42.782708+00:00
+title: "Gemini API \u4f18\u5316\u548c\u63a8\u7406 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Invia feedback
+发送反馈
 
-# Inferenza e ottimizzazione dell'API Gemini
+# Gemini API 优化和推理
 
-L'API Gemini offre una serie di meccanismi di ottimizzazione per aiutarti a bilanciare velocità, costi e affidabilità in base alle esigenze specifiche del tuo carico di lavoro.
-Che tu stia creando bot conversazionali in tempo reale o eseguendo pipeline di elaborazione dei dati offline pesanti, la scelta del paradigma giusto può ridurre significativamente i costi o migliorare il rendimento.
+Gemini API 提供多种优化机制，可帮助您根据具体的工作负载需求平衡速度、费用和可靠性。无论您是构建实时对话机器人，还是运行繁重的离线数据处理流水线，选择合适的范式都可以显著降低成本或提升性能。
 
-| Funzionalità | Standard | Flex | Priorità | Batch | Memorizzazione nella cache |
+| 功能 | 标准 | Flex | 优先级 | 批量 | 缓存 |
 | --- | --- | --- | --- | --- | --- |
-| **Prezzi** | Prezzo pieno | Sconto del 50% | Dal 75% al 100% in più rispetto allo standard | Sconto del 50% | Sconto del 90% + spazio di archiviazione dei token ripartito proporzionalmente |
-| **Latenza** | Da secondi a minuti | Minuti (target 1-15 min) | Secondi | Fino a 24 ore | Time to first token più rapido |
-| **Affidabilità** | Alta / medio-alta | Best effort (rimovibile) | Alta (non rimovibile) | Alta (per il throughput) | N/D |
-| **Interfaccia** | Sincrona | Sincrona | Sincrona | Asincrona | Stato salvato |
-| **Caso d'uso ideale** | Workflow di applicazioni generiche | Catene sequenziali non urgenti | App di produzione rivolte agli utenti | Set di dati di grandi dimensioni, valutazioni offline | Query ricorrenti sullo stesso file |
+| **价格** | 全价 | 5 折优惠 | 比标准高出 75% 到 100% | 5 折优惠 | 90% 折扣 + 按比例分摊的 token 存储 |
+| **延迟时间** | 秒到分钟 | 分钟（目标时长为 1-15 分钟） | 秒 | 最长 24 小时 | 首 token 延迟更短 |
+| **可靠性** | 高 / 中高 | 尽力而为（可舍弃） | 高（不可拆卸） | 高（针对吞吐量） | 不适用 |
+| **接口** | 同步 | 同步 | 同步 | 异步 | 保存的状态 |
+| **最佳使用场景** | 常规应用工作流程 | 非紧急顺序链 | 面向用户的正式版应用 | 海量数据集、离线评估 | 针对同一文件的重复查询 |
 
-## Livelli di servizio di inferenza (sincroni)
+## 推理服务层级（同步）
 
-Puoi passare dal traffico sincrono ottimizzato per l'affidabilità a quello ottimizzato per i costi passando il parametro `service_tier` nelle chiamate di generazione standard.
+您可以在标准生成调用中传递 `service_tier` 参数，从而在可靠性优化和费用优化之间切换同步流量。
 
-### Inferenza standard (valore predefinito)
+### 标准推理（默认）
 
-Il livello standard è l'opzione predefinita per la generazione di contenuti sequenziali.
-Fornisce tempi di risposta normali senza costi aggiuntivi o code pesanti.
+标准层级是顺序生成内容的默认选项。它可提供正常的响应时间，无需额外付费或排长队。
 
-- **Affidabilità:** criticità standard
-- **Prezzo:** prezzi standard.
-- **Ideale per:** la maggior parte delle applicazioni interattive quotidiane.
+- **可靠性**：标准严重程度
+- **价格**：标准价格。
+- **最适合**：大多数日常交互式应用。
 
-### Inferenza con priorità (ottimizzata per la latenza)
+### 优先推理（延迟时间优化）
 
-[L'elaborazione con priorità](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it) indirizza le richieste
-alle code di calcolo ad alta criticità.
-Questo traffico è strettamente non rimovibile (non viene mai sostituito da altri livelli) e offre la massima affidabilità. Se superi i limiti di priorità dinamici, il sistema esegue il downgrade della richiesta all'elaborazione standard anziché generare un errore.
+[优先](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn)处理会将您的请求路由到高严重性计算队列。此类流量严格来说是不可丢弃的（永远不会被其他层级抢占），并且提供最高的可靠性。如果您超出动态优先级限制，系统会将请求降级为标准处理，而不是失败并显示错误。
 
-- **Affidabilità:** massima criticità
-- **Prezzo:** dal 75% al 100% in più rispetto alle tariffe standard.
-- **Ideale per:** chatbot per clienti, rilevamento delle frodi in tempo reale e copiloti mission-critical.
+- **可靠性**：最高严重程度
+- **价格**：比标准费率高 75% 至 100%。
+- **最适合**：客户服务聊天机器人、实时欺诈检测和业务关键型 Copilot。
 
-### Inferenza flessibile (ottimizzata per i costi)
+### Flex 推理（费用优化）
 
-[L'inferenza flessibile](https://ai.google.dev/gemini-api/docs/flex-inference?hl=it) offre uno sconto del 50% rispetto alle tariffe standard utilizzando la capacità di calcolo
-opportunistica fuori orario di punta. Le richieste vengono elaborate in modo sincrono, il che significa che non devi riscrivere il codice per gestire gli oggetti batch.
-Poiché si tratta di traffico "rimovibile", le richieste potrebbero essere sostituite se il sistema registra picchi di traffico standard.
+[灵活推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)利用机会性非高峰计算容量，与标准费率相比可节省 50% 的费用。请求会同步处理，这意味着您无需重写代码来管理批处理对象。
+由于它是“可舍弃”的流量，因此如果系统遇到标准流量高峰，请求可能会被抢占。
 
-- **Affidabilità:** criticità non garantita e rimovibile
-- **Prezzo:** 50% del prezzo standard (fatturato per token).
-- **Ideale per:** workflow agentici multi-step in cui la chiamata N+1 dipende dall'output della chiamata N, aggiornamenti CRM in background e valutazioni offline.
+- **可靠性**：无保证，可舍弃的紧急程度
+- **价格**：标准价格的 50%（按令牌数结算）。
+- **最适合**：多步智能体工作流，其中调用 N+1 依赖于调用 N 的输出、后台 CRM 更新和离线评估。
 
-## API Batch (bulk, asincrona)
+## Batch API（批量、异步）
 
-[L'API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it) è progettata per elaborare grandi volumi
-di richieste in modo asincrono al
-50% del costo standard. Puoi inviare le richieste come dizionari in linea o utilizzando un file di input JSONL (fino a 2 GB). Elabora le richieste utilizzando le code di throughput in background con un tempo di risposta target di 24 ore.
+[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn) 旨在以标准费用 50% 的价格异步处理大量请求。您可以内嵌字典的形式提交请求，也可以使用 JSONL 输入文件（最大 2 GB）提交请求。它使用后台吞吐量队列处理请求，目标周转时间为 24 小时。
 
-- **Affidabilità:** rimovibile, ma con tentativi automatici e sistema di accodamento di 24 ore
-- **Prezzo:** 50% del prezzo standard.
-- **Ideale per:** pre-elaborazione di set di dati di grandi dimensioni, esecuzione di suite di test di regressione periodici e generazione di immagini o incorporamenti di grandi dimensioni.
+- **可靠性**：可丢弃，但具有 24 小时自动重试和排队系统
+- **价格**：标准价格的 50%。
+- **最适合**：预处理海量数据集、运行周期性回归测试套件，以及生成大量图片或嵌入内容。
 
-## Memorizzazione nella cache del contesto (risparmio di input)
+## 上下文缓存（节省输入）
 
-[La memorizzazione nella cache del contesto](https://ai.google.dev/gemini-api/docs/caching?hl=it) viene utilizzata quando un contesto iniziale sostanziale
-viene referenziato ripetutamente da richieste più brevi.
+当较短的请求重复引用大量初始上下文时，可以使用[上下文缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)。
 
-- **Memorizzazione nella cache implicita:** attivata automaticamente sui modelli Gemini 2.5 e versioni successive.
-  Il sistema trasferisce i risparmi sui costi se la richiesta raggiunge le cache esistenti in base ai prefissi di prompt comuni.
-- **Memorizzazione nella cache esplicita:** puoi creare manualmente un oggetto cache con un TTL (Time-To-Live) specifico. Una volta creati, fai riferimento ai token memorizzati nella cache per le richieste successive per evitare di passare ripetutamente lo stesso payload del corpus.
-- **Prezzo:** fatturato in base al conteggio dei token della cache e alla durata di archiviazione (TTL).
-- **Ideale per:** chatbot con istruzioni di sistema estese, analisi ripetitive di file video lunghi o query su set di documenti di grandi dimensioni.
+- **隐式缓存**：在 Gemini 2.5 及更新型号上自动启用。
+  如果您的请求基于常见提示前缀命中现有缓存，系统会传递节省的费用。
+- **显式缓存**：您可以手动创建具有特定存留时间 (TTL) 的缓存对象。创建后，您可以在后续请求中引用缓存的令牌，以避免重复传递相同的语料库载荷。
+- **价格**：根据缓存词元数量和存储时长 (TTL) 计费。
+- **最适合**：有大量系统指令的聊天机器人、对较长的视频文件进行的重复分析，或针对大型文档集的查询。
 
-Invia feedback
+发送反馈
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Ultimo aggiornamento 2026-04-29 UTC.
+最后更新时间 (UTC)：2026-04-29。
 
-Vuoi dirci altro?
+需要向我们提供更多信息？
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-04-29 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

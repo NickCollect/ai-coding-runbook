@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/api-key?hl=pl
-fetched_at: 2026-06-29T05:29:54.109217+00:00
+fetched_at: 2026-07-06T05:11:44.306523+00:00
 title: "Korzystanie z kluczy interfejsu Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

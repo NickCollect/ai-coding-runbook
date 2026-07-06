@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=ar
-fetched_at: 2026-06-29T05:41:06.660146+00:00
-title: "\u0627\u0644\u0627\u0633\u062a\u0646\u062a\u0627\u062c \u0627\u0644\u0645\u0631\u0646 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=es-419
+fetched_at: 2026-07-06T05:21:02.430024+00:00
+title: "Inferencia flexible \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-إرسال ملاحظات
+Enviar comentarios
 
-# الاستنتاج المرن
+# Inferencia flexible
 
-الوصف: تعرَّف على كيفية تحسين التكاليف باستخدام مستوى الاستدلال المرن
+Descripción: Aprende a optimizar los costos con el nivel de inferencia flexible
 
-‫Gemini Flex API هو مستوى استدلال يقدّم خصمًا بنسبة% 50 على التكلفة مقارنةً بالأسعار العادية، مقابل وقت استجابة متغيّر وتوفّر بأفضل جهد. تم تصميم هذا المستوى لأحمال العمل التي تتحمّل وقت الاستجابة وتتطلّب معالجة متزامنة ولكنّها لا تحتاج إلى الأداء في الوقت الفعلي الذي يوفّره واجهة برمجة التطبيقات العادية.
+La API de Gemini Flex es un nivel de inferencia que ofrece una reducción del 50% en el costo en comparación con las tarifas estándar, a cambio de una latencia variable y una disponibilidad con el mayor esfuerzo posible. Está diseñada para cargas de trabajo tolerantes a la latencia que requieren procesamiento síncrono, pero no necesitan el rendimiento en tiempo real de la API estándar.
 
-## كيفية استخدام المستوى المرن
+## Cómo usar Flex
 
-لاستخدام المستوى المرن، حدِّد `service_tier` على أنّه `flex` في نص الطلب. تستخدم الطلبات تلقائيًا المستوى العادي إذا تم حذف هذا الحقل.
+Para usar el nivel Flexible, especifica `service_tier` como `flex` en el cuerpo de la solicitud. De forma predeterminada, las solicitudes usan el nivel estándar si se omite este campo.
 
 ### Python
 
@@ -68,7 +68,7 @@ async function main() {
 await main();
 ```
 
-### انتقال
+### Go
 
 ```
 package main
@@ -116,61 +116,57 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
 }'
 ```
 
-## كيفية عمل الاستدلال المرن
+## Cómo funciona la inferencia flexible
 
-[يسدّ الاستدلال المرن في Gemini الفجوة بين واجهة برمجة التطبيقات العادية وواجهة برمجة التطبيقات المجمّعة التي تستغرق 24 ساعة
-.](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar) ويستخدِم هذا المستوى سعة الحوسبة "القابلة للتخفيض" في غير أوقات الذروة لتوفير حلّ فعّال من حيث التكلفة للمهام في الخلفية وسير العمل المتسلسل.
+La inferencia de Gemini Flex une la brecha entre la API estándar y el tiempo de respuesta de las 24 horas de la [API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419). Utiliza capacidad de procesamiento fuera de las horas pico y "descartable" para proporcionar una solución rentable para las tareas en segundo plano y los flujos de trabajo secuenciales.
 
-| الميزة | التعبير | الأولوية | خطة "الرزمة العادية" | مجمّعة |
+| Función | Flexible | Prioridad | Estándar | Lote |
 | --- | --- | --- | --- | --- |
-| **الأسعار** | خصم بنسبة% 50 | أكثر بنسبة %75 إلى %100 من خطة "الرزمة العادية" | السعر الكامل | خصم بنسبة% 50 |
-| **وقت الاستجابة** | دقائق (الهدف من دقيقة إلى 15 دقيقة) | منخفض (ثوانٍ) | من ثوانٍ إلى دقائق | ما يصل إلى 24 ساعة |
-| **الموثوقية** | بأفضل جهد (قابل للتخفيض) | عالية (غير قابلة للتخفيض) | عالية / متوسّطة إلى عالية | عالية (لمعدّل نقل البيانات) |
-| **الواجهة** | متزامن | متزامن | متزامن | غير متزامن |
+| **Precios** | 50% de descuento | Entre un 75% y un 100% más que el plan Estándar | Precio completo | 50% de descuento |
+| **Latencia** | Minutos (objetivo de 1 a 15 min) | Baja (segundos) | De segundos a minutos | Hasta 24 horas |
+| **Confiabilidad** | Mejor esfuerzo (descartable) | Alta (no se desprende) | Alta / media-alta | Alto (para la capacidad de procesamiento) |
+| **Interface** | Síncrona | Síncrona | Síncrona | Asíncrono |
 
-### المزايا الرئيسية
+### Ventajas clave
 
-- **فعالية التكلفة**: وفورات كبيرة لعمليات التقييم غير الإنتاجية والوكلاء في الخلفية وإثراء البيانات
-- **سهولة الاستخدام**: ما مِن حاجة إلى إدارة كائنات مجمّعة أو أرقام تعريف الوظائف أو عمليات الاقتراع، ما عليك سوى إضافة مَعلمة واحدة إلى طلباتك الحالية.
-- **سير العمل المتزامن**: مثالي لسلاسل واجهات برمجة التطبيقات المتسلسلة حيث يعتمد الطلب التالي على ناتج الطلب السابق، ما يجعله أكثر مرونة من واجهة برمجة التطبيقات المجمّعة لسير عمل الوكلاء
+- **Eficiencia en los costos**: Ahorros significativos en las evaluaciones que no son de producción, los agentes en segundo plano y el enriquecimiento de datos.
+- **Baja fricción**: No es necesario administrar objetos de lotes, IDs de trabajos ni sondeos. Simplemente agrega un solo parámetro a tus solicitudes existentes.
+- **Flujos de trabajo síncronos**: Son ideales para cadenas de APIs secuenciales en las que la próxima solicitud depende del resultado de la anterior, lo que los hace más flexibles que los flujos de trabajo por lotes para los flujos de trabajo de agentes.
 
-### حالات الاستخدام
+### Casos de uso
 
-- **عمليات التقييم بلا إنترنت**: إجراء اختبارات الانحدار أو لوحات الصدارة "للنموذج اللغوي الكبير كحكم"
-- **الوكلاء في الخلفية**: مهام متسلسلة، مثل تعديلات نظام إدارة علاقات العملاء أو إنشاء الملفات الشخصية أو الإشراف على المحتوى، حيث تكون دقائق التأخير مقبولة
-- **الأبحاث المقيّدة بالميزانية**: التجارب الأكاديمية التي تتطلّب حجمًا كبيرًا من الرموز المميّزة بميزانية محدودة
+- **Evaluaciones sin conexión**: Ejecución de pruebas de regresión o tablas de clasificación de "LLM como juez".
+- **Agentes en segundo plano**: Tareas secuenciales como actualizaciones de CRM, creación de perfiles o moderación de contenido en las que se aceptan minutos de retraso.
+- **Investigación con presupuesto limitado**: Experimentos académicos que requieren un gran volumen de tokens con un presupuesto limitado.
 
-### حدود معدّل الاستخدام
+### Límites de frecuencia
 
-يتم احتساب عدد الزيارات الناتجة عن الاستدلال المرن ضمن حدود [معدّل الاستخدام](https://aistudio.google.com/rate-limit?hl=ar) العامة، ولا
-يقدّم هذا المستوى حدودًا موسّعة لمعدّل الاستخدام مثل [واجهة برمجة التطبيقات المجمّعة](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar).
+El tráfico de inferencia flexible se incluye en los [límites de frecuencia](https://aistudio.google.com/rate-limit?hl=es-419) generales y no ofrece límites de frecuencia extendidos como la [API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419).
 
-### السعة القابلة للتخفيض
+### Capacidad que se puede reducir
 
-يتم التعامل مع عدد الزيارات المرنة بأولوية أقل. في حال حدوث ارتفاع في عدد الزيارات العادية، قد يتم إيقاف طلبات المستوى المرن أو إزالتها لضمان توفير السعة للمستخدمين ذوي الأولوية العالية. إذا كنت تبحث عن استدلال ذي أولوية عالية، اطّلِع على
-[الاستدلال ذي الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar)
+El tráfico flexible se trata con menor prioridad. Si hay un aumento repentino en el tráfico estándar, es posible que se interrumpan o descarten las solicitudes de Flex para garantizar la capacidad de los usuarios de alta prioridad. Si buscas inferencia de alta prioridad, consulta [Inferencia prioritaria](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419).
 
-### رموز الخطأ
+### Códigos de error
 
-عندما تكون سعة المستوى المرن غير متاحة أو يكون النظام مزدحمًا، ستعرض واجهة برمجة التطبيقات رموز الخطأ العادية:
+Cuando la capacidad flexible no esté disponible o el sistema esté congestionado, la API devolverá códigos de error estándar:
 
-- **\*\*503 الخدمة غير متاحة\*\***: يتلقّى النظام عدد طلبات كبير جدًا في الوقت الحالي.
-- **429 Too Many Requests**: حدود معدّل الاستخدام أو استنفاد الموارد
+- **503 Service Unavailable**: El sistema está al máximo de su capacidad.
+- **429 Too Many Requests**: Se excedieron los límites de frecuencia o se agotaron los recursos.
 
-### مسؤولية العميل
+### Responsabilidad del cliente
 
-- **ما مِن خيار احتياطي من جهة الخادم**: لمنع حدوث رسوم غير متوقّعة، لن يرقّي النظام تلقائيًا طلبًا من المستوى المرن إلى المستوى العادي إذا كانت سعة المستوى المرن ممتلئة.
-- **عمليات إعادة المحاولة**: عليك تنفيذ منطق إعادة المحاولة من جهة العميل باستخدام
-  خوارزمية الرقود الأسي الثنائي.
-- **مهلات الانتظار**: بما أنّ طلبات المستوى المرن قد تبقى في صفّ الانتظار، ننصحك بزيادة مهلات الانتظار من جهة العميل إلى 10 دقائق أو أكثر لتجنُّب إغلاق الاتصال قبل الأوان.
+- **Sin alternativa del servidor**: Para evitar cargos inesperados, el sistema no actualizará automáticamente una solicitud de Flex al nivel Estándar si la capacidad de Flex está completa.
+- **Reintentos**: Debes implementar tu propia lógica de reintento del cliente con retirada exponencial.
+- **Tiempos de espera**: Debido a que las solicitudes de Flex pueden permanecer en una cola, recomendamos aumentar los tiempos de espera del cliente a 10 minutos o más para evitar el cierre prematuro de la conexión.
 
-## تعديل فترات مهلة الانتظار
+## Cómo ajustar los períodos de espera
 
-يمكنك ضبط مهلات الانتظار لكل طلب في REST API ومكتبات العميل، ومهلات الانتظار العامة فقط عند استخدام مكتبات العميل.
+Puedes configurar tiempos de espera por solicitud para la API de REST y las bibliotecas cliente, y tiempos de espera globales solo cuando usas las bibliotecas cliente.
 
-احرص دائمًا على أن تغطّي مهلة الانتظار من جهة العميل فترة الانتظار المقصودة من جهة الخادم (مثل 600 ثانية أو أكثر لقوائم انتظار المستوى المرن). تتوقّع حِزم تطوير البرامج (SDK) قيم مهلة الانتظار بالملّي ثانية.
+Siempre asegúrate de que el tiempo de espera del cliente cubra el período de espera previsto del servidor (p.ej., más de 600 s para las colas de espera de Flex). Los SDKs esperan valores de tiempo de espera en milisegundos.
 
-### مهلات الانتظار لكل طلب
+### Tiempos de espera por solicitud
 
 ### Python
 
@@ -251,7 +247,7 @@ except Exception as e:
  await main();
 ```
 
-### انتقال
+### Go
 
 ```
 package main
@@ -317,12 +313,11 @@ func main() {
 
 ### REST
 
-عند إجراء طلبات REST، يمكنك التحكّم في مهلات الانتظار باستخدام مجموعة من عناوين HTTP وخيارات `curl`:
+Cuando realizas llamadas a la API de REST, puedes controlar los tiempos de espera con una combinación de encabezados HTTP y opciones de `curl`:
 
-- **العنوان `X-Server-Timeout` (مهلة الانتظار من جهة الخادم)**: يشير هذا العنوان إلى مدة مهلة الانتظار المفضّلة (600 ثانية تلقائيًا) لخادم Gemini API. سيحاول الخادم الالتزام بذلك، ولكن ليس هناك ما يضمن ذلك. يجب أن تكون القيمة بالثواني.
-- **`--max-time` في `curl` (مهلة الانتظار من جهة العميل)**: يضبط الخيار `curl --max-time
-  <seconds>` حدًا أقصى للوقت الإجمالي (بالثواني) الذي ستنتظره `curl`
-  حتى تكتمل العملية بأكملها. هذا إجراء وقائي من جهة العميل.
+- **Encabezado `X-Server-Timeout` (tiempo de espera del servidor)**: Este encabezado sugiere una duración de tiempo de espera preferida (600 s de forma predeterminada) para el servidor de la API de Gemini. El servidor intentará respetar esta configuración, pero no se garantiza que lo haga. El valor debe estar en segundos.
+- **`--max-time` en `curl` (tiempo de espera del cliente)**: La opción `curl --max-time
+  <seconds>` establece un límite estricto en el tiempo total (en segundos) que `curl` esperará a que se complete toda la operación. Esta es una protección del cliente.
 
 ```
  # Set a server timeout hint of 120 seconds and a client-side curl timeout of 125 seconds.
@@ -338,9 +333,9 @@ func main() {
  }'
 ```
 
-### مهلات الانتظار العامة
+### Tiempos de espera globales
 
-إذا كنت تريد أن تتضمّن جميع طلبات واجهة برمجة التطبيقات التي يتم إجراؤها من خلال مثيل `genai.Client` معيّن (مكتبات العميل فقط) مهلة انتظار تلقائية، يمكنك ضبط ذلك عند تهيئة العميل باستخدام `http_options` و`genai.types.HttpOptions`.
+Si deseas que todas las llamadas a la API realizadas a través de una instancia `genai.Client` específica (solo bibliotecas cliente) tengan un tiempo de espera predeterminado, puedes configurar esto cuando inicialices el cliente con `http_options` y `genai.types.HttpOptions`.
 
 ### Python
 
@@ -430,7 +425,7 @@ async function main() {
 await main();
 ```
 
-### انتقال
+### Go
 
 ```
  package main
@@ -487,9 +482,9 @@ await main();
  }
 ```
 
-## تنفيذ عمليات إعادة المحاولة
+## Implementa reintentos
 
-بما أنّ المستوى المرن قابل للتخفيض ويتعذّر استخدامه مع ظهور أخطاء 503، إليك مثال على تنفيذ منطق إعادة المحاولة اختياريًا لمتابعة الطلبات التي تعذّر إرسالها:
+Dado que Flex se puede descartar y falla con errores 503, a continuación, se muestra un ejemplo de cómo implementar de forma opcional la lógica de reintento para continuar con las solicitudes fallidas:
 
 ### Python
 
@@ -572,7 +567,7 @@ print(response.text)
  await main();
 ```
 
-### انتقال
+### Go
 
 ```
  package main
@@ -631,41 +626,40 @@ print(response.text)
  }
 ```
 
-## الأسعار
+## Precios
 
-يتم تسعير الاستدلال المرن بنسبة% 50 من [واجهة برمجة التطبيقات العادية](https://ai.google.dev/gemini-api/docs/pricing?hl=ar)
-ويتم تحصيل الرسوم لكل رمز مميّز.
+La inferencia flexible tiene un precio del 50% de la [API estándar](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419) y se factura por token.
 
-## النماذج المتوافقة
+## Modelos compatibles
 
-تتوفّر ميزة الاستدلال المرن في النماذج التالية:
+Los siguientes modelos admiten la inferencia flexible:
 
-| الطراز | الاستدلال المرن |
+| Modelo | Inferencia flexible |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ar) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar) | ✔️ |
-| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ar) | ✔️ |
-| [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=ar) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ar) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ar) | ✔️ |
-| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ar) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ar) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=es-419) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=es-419) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=es-419) | ✔️ |
 
-## الخطوات التالية
+## ¿Qué sigue?
 
-يمكنك الاطّلاع على خيارات [الاستدلال والتحسين](https://ai.google.dev/gemini-api/docs/optimization?hl=ar) الأخرى في Gemini:
+Obtén más información sobre otras opciones de [inferencia y optimización](https://ai.google.dev/gemini-api/docs/optimization?hl=es-419) de Gemini:
 
-- [الاستدلال ذي الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar) لوقت استجابة فائق السرعة
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar) للمعالجة غير المتزامنة في غضون 24 ساعة
-- [تخزين السياق مؤقتًا](https://ai.google.dev/gemini-api/docs/caching?hl=ar) لتقليل تكاليف الرموز المميّزة للإدخال
+- [Inferencia priorizada](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419) para una latencia ultrabaja
+- [API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419) para el procesamiento asíncrono en un plazo de 24 horas
+- [Almacenamiento en caché de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=es-419) para reducir los costos de los tokens de entrada
 
-إرسال ملاحظات
+Enviar comentarios
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-تاريخ التعديل الأخير: 2026-06-23 (حسب التوقيت العالمي المتفَّق عليه)
+Última actualización: 2026-06-23 (UTC)
 
-هل تريد مشاركة ملاحظاتك معنا؟
+¿Quieres brindar más información?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-23 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-23 (UTC)"],[],[]]

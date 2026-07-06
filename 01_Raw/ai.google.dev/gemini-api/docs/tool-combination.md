@@ -1,26 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi
-fetched_at: 2026-06-29T05:28:24.138793+00:00
-title: "K\u1ebft h\u1ee3p c\u00e1c c\u00f4ng c\u1ee5 t\u00edch h\u1ee3p v\u00e0 t\u00ednh n\u0103ng g\u1ecdi h\u00e0m \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=es-419
+fetched_at: 2026-07-06T05:06:37.832191+00:00
+title: "Combinar herramientas integradas y llamadas a funciones \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-# Kết hợp các công cụ tích hợp và tính năng gọi hàm
+# Combinar herramientas integradas y llamadas a funciones
 
-Gemini cho phép kết hợp [các công cụ tích hợp](https://ai.google.dev/gemini-api/docs/tools?hl=vi), chẳng hạn như `google_search` và [lệnh gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) (còn gọi là *công cụ tuỳ chỉnh*) trong một lượt tương tác bằng cách duy trì và hiển thị nhật ký ngữ cảnh của các lệnh gọi công cụ. Các tổ hợp công cụ tích hợp và tuỳ chỉnh cho phép các quy trình làm việc phức tạp, dựa trên tác nhân, trong đó chẳng hạn như mô hình có thể tự căn cứ vào dữ liệu web theo thời gian thực trước khi gọi logic kinh doanh cụ thể của bạn.
+Gemini permite la combinación de [herramientas integradas](https://ai.google.dev/gemini-api/docs/tools?hl=es-419), como
+`google_search`, y [llamadas a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
+(también conocidas como *herramientas personalizadas*) en una sola interacción preservando y exponiendo
+el historial de contexto de las llamadas a herramientas. Las combinaciones de herramientas integradas y personalizadas permiten flujos de trabajo complejos y de agentes en los que, por ejemplo, el modelo puede basarse en datos web en tiempo real antes de llamar a tu lógica empresarial específica.
 
-Dưới đây là ví dụ cho phép kết hợp các công cụ tích hợp và tuỳ chỉnh bằng `google_search` và hàm tuỳ chỉnh `getWeather`:
+Este es un ejemplo que habilita combinaciones de herramientas integradas y personalizadas con `google_search` y una función personalizada `getWeather`:
 
 ### Python
 
@@ -141,87 +144,93 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Cách hoạt động
+## Cómo funciona
 
-Các mô hình Gemini 3 sử dụng *vòng tuần hoàn ngữ cảnh công cụ* để cho phép kết hợp các công cụ tuỳ chỉnh và công cụ tích hợp. Tính năng lưu thông ngữ cảnh công cụ giúp duy trì và hiển thị ngữ cảnh của các công cụ tích hợp, đồng thời chia sẻ ngữ cảnh đó với các công cụ tuỳ chỉnh trong cùng một hoạt động tương tác.
+Los modelos de Gemini 3 usan la *circulación de contexto de herramientas* para habilitar combinaciones de herramientas integradas y personalizadas. La circulación de contexto de herramientas permite preservar y exponer el contexto de las herramientas integradas y compartirlo con herramientas personalizadas en la misma interacción.
 
-### Bật tính năng kết hợp công cụ
+### Habilita la combinación de herramientas
 
-- Thêm [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#function-declarations), cùng với các công cụ tích hợp mà bạn muốn sử dụng, để kích hoạt hành vi kết hợp.
+- Incluye [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419#function-declarations), junto
+  con las herramientas integradas que deseas usar, para activar el comportamiento de combinación.
 
-### API trả về các bước
+### Pasos que muestra la API
 
-Trong một phản hồi tương tác, API sẽ trả về các bước riêng biệt cho lệnh gọi công cụ tích hợp và lệnh gọi hàm (công cụ tuỳ chỉnh):
+En una respuesta de interacción, la API muestra pasos separados para las llamadas a herramientas integradas y las llamadas a funciones (herramientas personalizadas):
 
-- **Các bước của công cụ tích hợp sẵn**: API tự động quản lý các bước này, duy trì ngữ cảnh trong các lượt tương tác.
-- **Các bước gọi hàm**: API này trả về `function_call` bước cho các hàm tuỳ chỉnh của bạn. Bạn thực thi hàm và cung cấp kết quả.
+- **Pasos de herramientas integradas**: La API los administra automáticamente y preserva
+  el contexto en los turnos.
+- **Pasos de llamadas a funciones**: La API muestra pasos `function_call` para tus
+  funciones personalizadas. Ejecutas la función y proporcionas el resultado.
 
-### Các trường quan trọng trong các bước được trả về
+### Campos críticos en los pasos mostrados
 
-Một số trường trong các bước được trả về là rất quan trọng để duy trì ngữ cảnh của công cụ và cho phép kết hợp các công cụ:
+Ciertos campos en los pasos mostrados son fundamentales para mantener el contexto de las herramientas y habilitar las combinaciones de herramientas:
 
-- **`id`**: Xuất hiện ở các bước `function_call` và `function_response`. Giá trị nhận dạng duy nhất liên kết một lệnh gọi với phản hồi của lệnh gọi đó.
-- **`signature`**: Xuất hiện ở các bước `thought`, cũng như tất cả các bước gọi công cụ (ví dụ: `function_call`) và kết quả (ví dụ: `function_response`) cho các mô hình Gemini 3 trở lên. Bối cảnh được mã hoá này cho phép **lưu thông bối cảnh công cụ** trong các lượt tương tác.
+- **`id`**: Se encuentra en los pasos `function_call` y `function_response`. Es un identificador único que asigna una llamada a su respuesta.
+- **`signature`**: Se encuentra en los pasos `thought`, así como en todos los pasos de llamada a herramientas (p.ej., `function_call`) y de resultado (p.ej., `function_response`) para los modelos de Gemini 3 y versiones posteriores. Este contexto encriptado permite la **circulación de contexto de herramientas** en las interacciones.
 
-**Quản lý các trường này:**
+**Administración de estos campos:**
 
-- **Chế độ có trạng thái (Nên dùng)**: Khi bạn sử dụng `previous_interaction_id`, máy chủ sẽ tự động xử lý cả hai trường `id` và `signature`.
-- **Chế độ không trạng thái**: Khi quản lý nhật ký cuộc trò chuyện theo cách thủ công, bạn phải đảm bảo rằng bạn truyền cả trường `id` và `signature` trở lại mô hình trong các yêu cầu tiếp theo để xác thực tính xác thực và duy trì ngữ cảnh. Các SDK chính thức sẽ tự động xử lý việc này nếu bạn truyền toàn bộ đối tượng phản hồi trở lại nhật ký.
+- **Modo con estado (recomendado)**: Cuando usas `previous_interaction_id`, el servidor controla automáticamente los campos `id` y `signature`.
+- **Modo sin estado**: Cuando administras el historial de conversaciones de forma manual, debes asegurarte de pasar los campos `id` y `signature` al modelo en las solicitudes posteriores para validar la autenticidad y mantener el contexto. Los SDK oficiales controlan esto automáticamente si pasas el objeto de respuesta completo al historial.
 
-### Dữ liệu dành riêng cho công cụ
+### Datos específicos de la herramienta
 
-Một số công cụ tích hợp trả về các đối số dữ liệu mà người dùng có thể thấy, dành riêng cho loại công cụ.
+Algunas herramientas integradas muestran argumentos de datos visibles para el usuario que son específicos del tipo de herramienta.
 
-| Công cụ | Đối số gọi công cụ mà người dùng nhìn thấy (nếu có) | Phản hồi của công cụ mà người dùng nhìn thấy (nếu có) |
+| Herramienta | Argumentos de llamada a herramientas visibles para el usuario (si corresponde) | Respuesta de herramientas visible para el usuario (si corresponde) |
 | --- | --- | --- |
 | **google\_search** | `queries` | `search_suggestions` |
 | **google\_maps** | `queries` | `places` `google_maps_widget_context_token` |
-| **url\_context** | `urls` URL cần duyệt xem | `status`: Trạng thái duyệt qua `retrieved_url`: URL đã duyệt qua |
-| **file\_search** | Không có | Không có |
+| **url\_context** | `urls` URLs que se explorarán | `status`: Estado de exploración `retrieved_url`: URLs exploradas |
+| **file\_search** | Ninguno | Ninguno |
 
-## Mã thông báo và giá
+## Tokens y precios
 
-Xin lưu ý rằng các phần gọi công cụ tích hợp sẵn trong yêu cầu được tính vào `prompt_token_count`. Vì các bước trung gian của công cụ này hiện có thể nhìn thấy và được trả về cho bạn, nên chúng là một phần của nhật ký trò chuyện. Đây chỉ là trường hợp đối với *yêu cầu*, chứ không phải *phản hồi*.
+Ten en cuenta que las partes de la llamada a herramientas integradas en las solicitudes se cuentan para `prompt_token_count`. Dado que estos pasos de herramientas intermedios ahora son visibles y se te muestran, forman parte del historial de conversaciones. Este es solo el
+caso de las *solicitudes*, no de las *respuestas*.
 
-Công cụ Google Tìm kiếm là một trường hợp ngoại lệ đối với quy tắc này. Google Tìm kiếm đã áp dụng mô hình định giá riêng ở cấp truy vấn, vì vậy, các mã thông báo sẽ không bị tính phí gấp đôi (xem trang [Định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi)).
+La herramienta Búsqueda de Google es una excepción a esta regla. La Búsqueda de Google ya
+aplica su propio modelo de precios a nivel de la consulta, por lo que los tokens no se
+cobran dos veces (consulta la página de [precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419)).
 
-Hãy đọc trang [Mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) để biết thêm thông tin.
+Lee la página [Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) para obtener más información.
 
-## Các điểm hạn chế
+## Limitaciones
 
-- Chuyển về chế độ `validated` theo mặc định (chế độ `auto` không được hỗ trợ) khi bật tính năng lưu thông bối cảnh công cụ.
-- Các công cụ tích hợp như `google_search` dựa vào thông tin vị trí và thời gian hiện tại. Vì vậy, nếu `system_instruction` hoặc `function_declaration.description` của bạn có thông tin vị trí và thời gian mâu thuẫn, thì tính năng kết hợp công cụ có thể không hoạt động hiệu quả.
+- Se establece el modo `validated` de forma predeterminada (no admitido el modo `auto`) cuando se habilita la circulación de contexto de herramientas.
+- Las herramientas integradas, como `google_search`, dependen de la ubicación y la información de la hora actual, por lo que, si tu `system_instruction` o `function_declaration.description` tienen información de ubicación y hora en conflicto, es posible que la función de combinación de herramientas no funcione bien.
 
-## Các công cụ được hỗ trợ
+## Herramientas compatibles
 
-Hoạt động lưu thông ngữ cảnh công cụ tiêu chuẩn áp dụng cho các công cụ phía máy chủ (được tích hợp sẵn).
-Thực thi mã cũng là một công cụ phía máy chủ, nhưng có giải pháp tích hợp sẵn riêng để lưu thông ngữ cảnh. Computer Use và function calling là các công cụ phía máy khách, đồng thời có các giải pháp tích hợp để lưu thông ngữ cảnh.
+La circulación de contexto de herramientas estándar se aplica a las herramientas del lado del servidor (integradas).
+La ejecución de código también es una herramienta del lado del servidor, pero tiene su propia solución integrada para la circulación de contexto. El uso de la computadora y las llamadas a funciones son herramientas del lado del cliente y también tienen soluciones integradas para la circulación de contexto.
 
-| Công cụ | Bên thực thi | Hỗ trợ lưu thông theo bối cảnh |
+| Herramienta | Lado de ejecución | Compatibilidad con la circulación de contexto |
 | --- | --- | --- |
-| [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) | Phía máy chủ | Được hỗ trợ |
-| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi) | Phía máy chủ | Được hỗ trợ |
-| [Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi) | Phía máy chủ | Được hỗ trợ |
-| [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi) | Phía máy chủ | Được hỗ trợ |
-| [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) | Phía máy chủ | Được hỗ trợ (tích hợp sẵn, sử dụng các bước `code_execution` và `code_execution_result`) |
-| [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi) | Phía máy khách | Được hỗ trợ (tích hợp sẵn, sử dụng các bước `function_call` và `function_response`) |
-| [Hàm tuỳ chỉnh](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) | Phía máy khách | Được hỗ trợ (tích hợp sẵn, sử dụng các bước `function_call` và `function_response`) |
+| [Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419) | Del lado del servidor | Compatible |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419) | Del lado del servidor | Compatible |
+| [Contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419) | Del lado del servidor | Compatible |
+| [Búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419) | Del lado del servidor | Compatible |
+| [Ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419) | Del lado del servidor | Compatible (integrado, usa los pasos `code_execution` y `code_execution_result`) |
+| [Uso de la computadora](https://ai.google.dev/gemini-api/docs/computer-use?hl=es-419) | Del lado del cliente | Compatible (integrado, usa los pasos `function_call` y `function_response`) |
+| [Funciones personalizadas](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419) | Del lado del cliente | Compatible (integrado, usa los pasos `function_call` y `function_response`) |
 
-## Bước tiếp theo
+## ¿Qué sigue?
 
-- Tìm hiểu thêm về tính năng [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) trong Gemini API.
-- Khám phá các công cụ được hỗ trợ:
-  - [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)
-  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)
-  - [Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)
-  - [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)
+- Obtén más información sobre [las llamadas a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419) en la API de Gemini.
+- Explora las herramientas compatibles:
+  - [Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419)
+  - [Contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419)
+  - [Búsqueda de archivos](https://ai.google.dev/gemini-api/docs/file-search?hl=es-419)
 
-Gửi ý kiến phản hồi
+Enviar comentarios
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Cập nhật lần gần đây nhất: 2026-06-22 UTC.
+Última actualización: 2026-06-22 (UTC)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+¿Quieres brindar más información?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-22 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]
