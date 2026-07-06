@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-06-29T05:25:15.416595+00:00
+fetched_at: 2026-07-06T05:04:28.829187+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,6 +38,8 @@ export CURSOR_API_KEY="your-key"
 ## Usage and billing
 
 SDK runs follow the same pricing, request pools, and Privacy Mode rules as runs from the IDE and Cloud Agents. Spend shows up in your team's [usage dashboard](https://cursor.com/dashboard/usage) under the SDK tag.
+
+To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/python.md#token-usage).
 
 ## Core concepts
 
@@ -185,6 +187,8 @@ agent = Agent.create(
 ```
 
 These values are encrypted at rest, injected into the cloud agent's shell, and deleted with the agent. `env_vars` can't be used with a caller-supplied `agent_id`; omit `agent_id` and read the server-minted ID from `agent.agent_id`. Variable names can't start with `CURSOR_`.
+
+For values that should only exist during a single run, pass them on `agent.send()` instead. See [Per-run environment variables](https://cursor.com/docs/sdk/python.md#per-run-environment-variables).
 
 ### Model parameters
 
@@ -465,6 +469,7 @@ class Run:
     duration_ms: int
     git: RunGitInfo | None
     created_at: str | None
+    usage: TokenUsage | None  # cumulative; property on the live handle
 
     def messages(self) -> Iterator[SDKMessage]: ...
     def events(self) -> Iterator[RunStreamEvent]: ...
@@ -485,7 +490,7 @@ class Run:
 
 `run.stream()` is an alias for `run.messages()`. Iterating `run` directly yields `RunStreamEvent` envelopes, the same as `run.events()`.
 
-`AsyncRun` exposes the same state fields. Methods that do I/O are async: `async for message in run.messages()`, `async for event in run.events()`, `async for text in run.iter_text()`, `await run.text()`, `await run.wait()`, `await run.cancel()`, `await run.conversation()`, `await run.conversation_json()`, and `async for event in run.observe()`.
+`AsyncRun` exposes the same state fields, including `usage`. Methods that do I/O are async: `async for message in run.messages()`, `async for event in run.events()`, `async for text in run.iter_text()`, `await run.text()`, `await run.wait()`, `await run.cancel()`, `await run.conversation()`, `await run.conversation_json()`, and `async for event in run.observe()`.
 
 ### Streaming
 
@@ -503,9 +508,11 @@ for message in run.messages():
         print(f"[tool] {message.name}: {message.status}")
     elif message.type == "status":
         print(f"[status] {message.status}")
+    elif message.type == "usage":
+        print(f"[usage] turn total={message.usage.total_tokens}")
 ```
 
-A run stream is consumable once. `run.messages()`, `run.events()`, and `run.iter_text()` all draw from the same underlying stream and advance it. Once the stream completes, the run holds the terminal result (`run.result`, `run.status`, `run.git`, ...). Call `run.wait()` to drain any remaining events and return the typed `RunResult`.
+A run stream is consumable once. `run.messages()`, `run.events()`, and `run.iter_text()` all draw from the same underlying stream and advance it. Once the stream completes, the run holds the terminal result (`run.result`, `run.status`, `run.usage`, `run.git`, ...). Call `run.wait()` to drain any remaining events and return the typed `RunResult`.
 
 ### Waiting without streaming
 
@@ -516,6 +523,7 @@ print(result.status)       # "finished" | "error" | "cancelled" | "expired"
 print(result.result)       # final assistant text, if any
 print(result.model)        # resolved ModelSelection used for this run
 print(result.duration_ms)
+print(result.usage)        # cumulative TokenUsage, or None if unavailable
 print(result.git)          # RunGitInfo on cloud
 ```
 
@@ -524,6 +532,61 @@ Async equivalent:
 ```python
 result = await run.wait()
 ```
+
+### Token usage
+
+Runs report token usage when the runtime provides it. Read the cumulative total from `run.usage` on the live handle (while streaming or after `wait()`), or from `result.usage` on the `RunResult` returned by `run.wait()`. Both hold a `TokenUsage` summed across every turn that reported usage, and both are `None` when no turn did—for example a cancelled run that never finished a turn, a runtime that doesn't surface usage, or a detached cloud snapshot that hasn't reconciled usage yet.
+
+```python
+@dataclass(frozen=True)
+class TokenUsage:
+    input_tokens: int
+    output_tokens: int
+    cache_read_tokens: int
+    cache_write_tokens: int
+    total_tokens: int
+    reasoning_tokens: int | None = None
+```
+
+| Field                | Description                                                                                           |
+| :------------------- | :---------------------------------------------------------------------------------------------------- |
+| `input_tokens`       | Prompt tokens sent to the model.                                                                      |
+| `output_tokens`      | Tokens generated by the model.                                                                        |
+| `cache_read_tokens`  | Tokens served from the prompt cache.                                                                  |
+| `cache_write_tokens` | Tokens written to the prompt cache.                                                                   |
+| `total_tokens`       | `input_tokens + output_tokens + cache_read_tokens + cache_write_tokens`. Excludes `reasoning_tokens`. |
+| `reasoning_tokens`   | Reasoning tokens, a subset of `output_tokens`. `None` when the model or runtime didn't report it.     |
+
+```python
+result = run.wait()
+
+if result.usage is not None:
+    print(f"total: {result.usage.total_tokens}")
+    print(f"in: {result.usage.input_tokens}, out: {result.usage.output_tokens}")
+    print(
+        f"cache read/write: {result.usage.cache_read_tokens}/{result.usage.cache_write_tokens}"
+    )
+else:
+    print("no usage reported for this run")
+```
+
+`reasoning_tokens` is already counted inside `output_tokens`, so `total_tokens` leaves it out to avoid double-counting.
+
+For per-turn numbers as they stream, handle the `usage` [stream event](https://cursor.com/docs/sdk/python.md#stream-events) (`SDKUsageMessage`). It fires once at the end of each turn that reported usage and carries that turn's `TokenUsage`. `run.usage` and `result.usage` stay cumulative across the run. After stream turns, the handle prefers those summed totals; otherwise it uses usage from `wait()` or from a `get_run` / `list_runs` snapshot when the bridge supplies it.
+
+```python
+for message in run.messages():
+    if message.type == "usage":
+        print(f"turn used {message.usage.total_tokens} tokens")
+
+# Or after wait / without consuming messages yourself:
+result = run.wait()
+print(run.usage, result.usage)
+```
+
+Async equivalent: `async for message in run.messages()` and `await run.wait()`. `run.usage` is still a sync property on `AsyncRun`.
+
+`TokenUsage` is exported from `cursor_sdk` (plus `to_token_usage` / `sum_token_usage` for advanced callers). Wire JSON is camelCase (`inputTokens`, …); the Python dataclasses use snake\_case.
 
 ### Reading text output
 
@@ -602,6 +665,27 @@ run = agent.send(
 
 `run.model` and `result.model` reflect the selection this run used and are immutable once the run starts.
 
+### Per-run environment variables
+
+Cloud agents can also take environment variables for a single run. Pass `cloud.env_vars` in `SendOptions` and the values are injected into the agent's shell for that run only — when the run finishes, they're removed from the VM and the next run doesn't see them. This is the right shape for credentials that rotate between turns, like a short-lived deploy token you mint right before asking the agent to use it.
+
+```python
+from cursor_sdk import CloudSendOptions, SendOptions
+
+run = agent.send(
+    "Deploy the preview environment",
+    SendOptions(
+        cloud=CloudSendOptions(env_vars={"DEPLOY_TOKEN": mint_short_lived_token()}),
+    ),
+)
+```
+
+If a run-scoped variable has the same name as an agent-scoped one from [`env_vars` on `CloudAgentOptions`](https://cursor.com/docs/sdk/python.md#session-environment-variables), the run-scoped value wins for that run, then the agent-scoped value comes back on the next run.
+
+Per-run variables work on the first send too. The SDK passes them along with agent creation, scoped to the initial run, so they aren't persisted on the agent. Like agent-scoped variables, they're encrypted at rest and names can't start with `CURSOR_`.
+
+Per-run environment variables are cloud agents only, and they aren't available for agents running against public repositories. For local agents, the agent process inherits your own environment, so set variables on the process before calling `send()`.
+
 ### Conversation mode
 
 Pass `mode="plan"` or `mode="agent"` to control whether a run explores and plans first or implements changes directly. See [Plan mode](https://cursor.com/help/ai-features/plan-mode.md) for what plan mode does in the product.
@@ -658,15 +742,16 @@ They remain importable from `cursor_sdk` for backward compatibility, but new cod
 
 ### SendOptions
 
-| Property          | Type                                         | Description                                                                                                                                                             |
-| :---------------- | :------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `model`           | `str \| ModelSelection \| Mapping[str, Any]` | Per-send model override. If omitted, uses `agent.model`. Sticky after a successful send.                                                                                |
-| `mode`            | `"agent" \| "plan"`                          | Per-send conversation mode override. If omitted on follow-ups, keeps the conversation's current mode.                                                                   |
-| `mcp_servers`     | `Mapping[str, McpServerConfig]`              | Inline MCP server definitions. Fully replaces creation-time servers for this run.                                                                                       |
-| `local.force`     | `bool`                                       | Local agents only. Defaults to `False`. Expire a stuck active run before starting this message. Cloud returns `409 agent_busy` server-side, so no equivalent is needed. |
-| `idempotency_key` | `str`                                        | Optional client-generated idempotency key for the send.                                                                                                                 |
-| `on_step`         | `Callable[[ConversationStep], Any]`          | Callback after each completed conversation step (text, thinking, or tool batch).                                                                                        |
-| `on_delta`        | `Callable[[InteractionUpdate], Any]`         | Callback per raw `InteractionUpdate`.                                                                                                                                   |
+| Property          | Type                                         | Description                                                                                                                                                                                                                              |
+| :---------------- | :------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`           | `str \| ModelSelection \| Mapping[str, Any]` | Per-send model override. If omitted, uses `agent.model`. Sticky after a successful send.                                                                                                                                                 |
+| `mode`            | `"agent" \| "plan"`                          | Per-send conversation mode override. If omitted on follow-ups, keeps the conversation's current mode.                                                                                                                                    |
+| `mcp_servers`     | `Mapping[str, McpServerConfig]`              | Inline MCP server definitions. Fully replaces creation-time servers for this run.                                                                                                                                                        |
+| `cloud.env_vars`  | `Mapping[str, str]`                          | Cloud agents only. [Per-run environment variables](https://cursor.com/docs/sdk/python.md#per-run-environment-variables) injected for this run and removed when it finishes. Overrides agent-scoped `env_vars` by name for this run only. |
+| `local.force`     | `bool`                                       | Local agents only. Defaults to `False`. Expire a stuck active run before starting this message. Cloud returns `409 agent_busy` server-side, so no equivalent is needed.                                                                  |
+| `idempotency_key` | `str`                                        | Optional client-generated idempotency key for the send.                                                                                                                                                                                  |
+| `on_step`         | `Callable[[ConversationStep], Any]`          | Callback after each completed conversation step (text, thinking, or tool batch).                                                                                                                                                         |
+| `on_delta`        | `Callable[[InteractionUpdate], Any]`         | Callback per raw `InteractionUpdate`.                                                                                                                                                                                                    |
 
 ***
 
@@ -686,24 +771,37 @@ SDKMessage = (
     | SDKStatusMessage
     | SDKTaskMessage
     | SDKRequestMessage
+    | SDKUsageMessage
     | Mapping[str, Any]
 )
 ```
 
-| `type`        | Dataclass             | Key fields                                                   |
-| :------------ | :-------------------- | :----------------------------------------------------------- |
-| `"system"`    | `SDKSystemMessage`    | `subtype`, `model`, `tools`                                  |
-| `"user"`      | `SDKUserMessageEvent` | `message.content`                                            |
-| `"assistant"` | `SDKAssistantMessage` | `message.content` with `TextBlock` and `ToolUseBlock` values |
-| `"thinking"`  | `SDKThinkingMessage`  | `text`, `thinking_duration_ms`                               |
-| `"tool_call"` | `SDKToolUseMessage`   | `call_id`, `name`, `status`, `args`, `result`, `truncated`   |
-| `"status"`    | `SDKStatusMessage`    | `status`, `message`                                          |
-| `"task"`      | `SDKTaskMessage`      | `status`, `text`                                             |
-| `"request"`   | `SDKRequestMessage`   | `request_id`                                                 |
+| `type`        | Dataclass             | Key fields                                                                  |
+| :------------ | :-------------------- | :-------------------------------------------------------------------------- |
+| `"system"`    | `SDKSystemMessage`    | `subtype`, `model`, `tools`                                                 |
+| `"user"`      | `SDKUserMessageEvent` | `message.content`                                                           |
+| `"assistant"` | `SDKAssistantMessage` | `message.content` with `TextBlock` and `ToolUseBlock` values                |
+| `"thinking"`  | `SDKThinkingMessage`  | `text`, `thinking_duration_ms`                                              |
+| `"tool_call"` | `SDKToolUseMessage`   | `call_id`, `name`, `status`, `args`, `result`, `truncated`                  |
+| `"status"`    | `SDKStatusMessage`    | `status`, `message`                                                         |
+| `"task"`      | `SDKTaskMessage`      | `status`, `text`                                                            |
+| `"request"`   | `SDKRequestMessage`   | `request_id`                                                                |
+| `"usage"`     | `SDKUsageMessage`     | `usage` ([`TokenUsage`](https://cursor.com/docs/sdk/python.md#token-usage)) |
 
 `SDKToolUseMessage` is emitted twice for most tool calls: first with `status="running"` and `args` populated, then again on completion with `status="completed"` (or `"error"`) and `result` populated. `truncated` flags whether the SDK truncated `args` or `result` because the payload was too large.
 
-Result data (final text, model, duration, git metadata) lives on the `Run` object after the stream completes. Use `run.wait()` to read it.
+`SDKUsageMessage` is emitted once at the end of each turn that reported token usage, carrying that turn's [`TokenUsage`](https://cursor.com/docs/sdk/python.md#token-usage). The cumulative total across turns stays on `run.usage` and `result.usage`. See [Token usage](https://cursor.com/docs/sdk/python.md#token-usage).
+
+```python
+@dataclass(frozen=True)
+class SDKUsageMessage:
+    type: Literal["usage"]
+    agent_id: str
+    run_id: str
+    usage: TokenUsage
+```
+
+Result data (final text, model, duration, cumulative token usage, git metadata) lives on the `Run` object after the stream completes. Use `run.wait()` to read it, including `result.usage` when the runtime reported it.
 
 > **Tool call schema is not stable.** The `args` and `result` payloads on `tool_call` events reflect each tool's internal shape and can change as tools evolve. Tool names can also be renamed or replaced. Treat `args` and `result` as untyped data and parse defensively. The event envelope (`type`, `call_id`, `name`, `status`) is stable.
 

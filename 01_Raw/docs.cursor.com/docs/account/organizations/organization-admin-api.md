@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-06-29T05:25:13.170844+00:00
+fetched_at: 2026-07-06T05:04:26.472078+00:00
 fetch_method: mintlify_md
 ---
 
@@ -296,7 +296,7 @@ Report on usage across every team linked to your organization. These endpoints a
 - **Availability**: Enterprise only
 - **Authentication**: Organization API key (Basic auth). The key must include the **`usage:*`** scope for these routes; keys with **`admin:*`** also work because admin implies usage.
 - **Organization match**: The `organizationId` in the body must be the same organization as the API key; otherwise the request is rejected.
-- **Team containment**: Any `teamId` (or entry in `teamIds`) must belong to the organization. Requests that reference a team outside the organization are rejected.
+- **Team containment**: Every entry in `teamIds` must belong to the organization. Requests that reference a team outside the organization are rejected.
 - **Polling**: Usage data is aggregated at the hourly level. Poll these endpoints at most once per hour. Rate limited to 20 requests per minute. See [rate limits and best practices](https://cursor.com/docs/api.md#rate-limits).
 
 ### Get Pooled Usage
@@ -369,9 +369,9 @@ curl -X POST https://api.cursor.com/organizations/pooled-usage \
 
 /organizations/filtered-usage-events
 
-Retrieve detailed usage events across the teams linked to your organization. This is the organization-wide counterpart to the team [`/teams/filtered-usage-events`](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data) endpoint: it returns the same event shape, with each event tagged by its owning `teamId`. Filtering and pagination run in the database, so large organizations page through results without in-memory aggregation.
+Retrieve detailed usage events across the teams linked to your organization. This is the organization-wide counterpart to the team [`/teams/filtered-usage-events`](https://cursor.com/docs/account/teams/admin-api.md#get-usage-events-data) endpoint: it returns the same event shape, with each event tagged by its owning `teamId`.
 
-By default, events from **all** teams in the organization pool are returned. Pass `teamId` or `teamIds` to restrict the response to specific teams.
+By default, events from **all** teams in the organization pool are returned. Pass `teamIds` to restrict the response to specific teams.
 
 **Cost Calculation**: Sum the `chargedCents` field across events to reconcile event-level costs with the per-team `usedCents` breakdown from [`/organizations/pooled-usage`](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-pooled-usage). This field includes both the model cost and the Cursor Token Rate (if applicable).
 
@@ -385,11 +385,7 @@ Public organization ID (for example `org_abc123`). Must match the organization f
 
 `teamIds` number\[]
 
-Optional set of integer team IDs to include. Each must belong to the organization. When omitted (and `teamId` is not set), all teams in the organization pool are included.
-
-`teamId` number
-
-Optional single team ID to include. Shorthand for a one-element `teamIds`. Must belong to the organization.
+Optional set of integer team IDs to include. Each must belong to the organization. When omitted, all teams in the organization pool are included.
 
 `startDate` number
 
@@ -523,6 +519,234 @@ curl -X POST https://api.cursor.com/organizations/filtered-usage-events \
   "period": {
     "startDate": 1748411762359,
     "endDate": 1751003762359
+  }
+}
+```
+
+### Get Daily Usage Data
+
+/organizations/daily-usage-data
+
+Retrieve daily usage metrics for every member across the teams linked to your organization. This is the organization-wide counterpart to the team [`/teams/daily-usage-data`](https://cursor.com/docs/account/teams/admin-api.md#get-daily-usage-data) endpoint, with each row tagged by its owning `teamId`. Results are paginated by user and return data for all members with a membership during the requested date range; use `page` and `pageSize` to page through them.
+
+#### Request body
+
+`organizationId` string Required
+
+Public organization ID (for example `org_abc123`). Must match the organization for the Organization API key used to call the endpoint.
+
+`startDate` number
+
+Start date in epoch milliseconds. Defaults to 7 days ago.
+
+`endDate` number
+
+End date in epoch milliseconds. Defaults to now.
+
+`teamIds` number\[]
+
+Org-linked teams to report on. When omitted, all teams in the organization pool are included. At most 100 teams per request.
+
+`page` number
+
+Page number (1-indexed). Default: `1`
+
+`pageSize` number
+
+Number of users per page (1-1000). Default: `1000`
+
+`userEmail` string
+
+Filter to one or more users by email. Accepts a single email or a comma-separated list. `userEmails` is accepted as an alias.
+
+Date range cannot exceed 30 days. Make multiple requests for longer periods.
+
+The fields `subscriptionIncludedReqs`, `usageBasedReqs`, and `apiKeyReqs` count raw usage events, not billable request units in older request-based pricing.
+
+#### Response Fields
+
+Each object in the `data` array contains the same fields as the team [daily usage](https://cursor.com/docs/account/teams/admin-api.md#get-daily-usage-data) endpoint, plus a `teamId`. Key fields:
+
+- `userId` string - Encoded user ID with the `user_` prefix (e.g., `user_abc123`)
+- `teamId` number - ID of the org-linked team this row belongs to
+- `day` string - The date this record covers (ISO date, e.g., `2024-03-18`)
+- `date` number - Date as epoch milliseconds
+- `email` string - User's email address
+- `isActive` boolean - Whether the user had activity on this day
+- `totalLinesAdded` number - Total lines of code added
+- `totalLinesDeleted` number - Total lines of code deleted
+- `acceptedLinesAdded` number - AI-suggested lines added that were accepted
+- `acceptedLinesDeleted` number - AI-suggested lines deleted that were accepted
+- `totalApplies` number - Total AI code apply actions
+- `totalAccepts` number - Total accepted AI suggestions
+- `totalRejects` number - Total rejected AI suggestions
+- `totalTabsShown` number - Total Tab completions shown to the user
+- `totalTabsAccepted` number - Total Tab completions accepted by the user
+- `composerRequests` number - Number of Composer requests made
+- `chatRequests` number - Number of chat requests made
+- `agentRequests` number - Number of Agent mode requests made
+- `cmdkUsages` number - Number of Cmd+K inline edit usages
+- `subscriptionIncludedReqs` number - Requests included in the subscription plan
+- `apiKeyReqs` number - Requests made via API key
+- `usageBasedReqs` number - Usage-based (overage) requests
+- `bugbotUsages` number - Number of Bugbot usages
+- `mostUsedModel` string | null - Most frequently used AI model for the day
+- `applyMostUsedExtension` string | null - Most common file extension for apply actions
+- `tabMostUsedExtension` string | null - Most common file extension for Tab completions
+- `clientVersion` string | null - Cursor client version used
+
+The response also includes a `pagination` object (`page`, `pageSize`, `totalUsers`, `totalPages`, `hasNextPage`, `hasPreviousPage`) and a `period` object (`startDate`, `endDate`).
+
+```bash
+curl -X POST https://api.cursor.com/organizations/daily-usage-data \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "organizationId": "org_abc123",
+    "startDate": 1710720000000,
+    "endDate": 1710892800000,
+    "page": 1,
+    "pageSize": 1000
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "userId": "user_abc123",
+      "teamId": 101,
+      "day": "2024-03-18",
+      "date": 1710720000000,
+      "isActive": true,
+      "totalLinesAdded": 1543,
+      "totalLinesDeleted": 892,
+      "acceptedLinesAdded": 1102,
+      "acceptedLinesDeleted": 645,
+      "totalApplies": 87,
+      "totalAccepts": 73,
+      "totalRejects": 14,
+      "totalTabsShown": 342,
+      "totalTabsAccepted": 289,
+      "composerRequests": 45,
+      "chatRequests": 128,
+      "agentRequests": 12,
+      "cmdkUsages": 67,
+      "subscriptionIncludedReqs": 180,
+      "apiKeyReqs": 0,
+      "usageBasedReqs": 5,
+      "bugbotUsages": 3,
+      "mostUsedModel": "gpt-5",
+      "applyMostUsedExtension": ".tsx",
+      "tabMostUsedExtension": ".ts",
+      "clientVersion": "0.25.1",
+      "email": "developer@company.com"
+    }
+  ],
+  "period": {
+    "startDate": 1710720000000,
+    "endDate": 1710892800000
+  },
+  "pagination": {
+    "page": 1,
+    "pageSize": 1000,
+    "totalUsers": 150,
+    "totalPages": 1,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  }
+}
+```
+
+### Get Spending Data
+
+/organizations/spend
+
+Retrieve per-member spend across the teams linked to your organization. This is the organization-wide counterpart to the team [`/teams/spend`](https://cursor.com/docs/account/teams/admin-api.md#get-spending-data) endpoint, with each member tagged by its owning `teamId`. Unlike the team endpoint, spend is reported over the **organization contract window** (not per-team billing cycles) using the same included-spend definition as [`/organizations/pooled-usage`](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-pooled-usage), so the numbers reconcile with the pool.
+
+#### Request body
+
+`organizationId` string Required
+
+Public organization ID (for example `org_abc123`). Must match the organization for the Organization API key used to call the endpoint.
+
+`teamIds` number\[]
+
+Org-linked teams to report on. When omitted, all teams in the organization pool are included. At most 100 teams per request.
+
+`sortBy` string
+
+Sort by: `email`, `name`, `spendCents`. Default: `email`
+
+`sortDirection` string
+
+Sort direction: `asc`, `desc`. Default: `asc`
+
+`page` number
+
+Page number (1-indexed). Default: `1`
+
+`pageSize` number
+
+Results per page (1-1000). Default: `100`
+
+Spend is reported across the organization's pooled teams, so the single-team fields `subscriptionCycleStart`, `overallSpendCents`, `fastPremiumRequests`, `hardLimitOverrideDollars`, and `monthlyLimitDollars` from `/teams/spend` are not included. The reporting window is returned in `period`.
+
+#### Response Fields
+
+Each object in `teamMemberSpend` contains:
+
+- `userId` string - Encoded user ID with the `user_` prefix (e.g., `user_abc123`)
+- `teamId` number - ID of the org-linked team this member belongs to
+- `name` string - Display name of the user
+- `email` string - Email address of the user
+- `role` string - Role in the team (e.g., `member`, `owner`)
+- `spendCents` number - Included pool spend in cents attributed to this member over the organization contract window
+
+The response also includes `totalMembers` (number), `totalPages` (number), and a `period` object (`startDate`, `endDate` in epoch milliseconds) describing the organization contract window.
+
+```bash
+curl -X POST https://api.cursor.com/organizations/spend \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "organizationId": "org_abc123",
+    "sortBy": "spendCents",
+    "sortDirection": "desc",
+    "page": 1,
+    "pageSize": 25
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "teamMemberSpend": [
+    {
+      "userId": "user_abc123",
+      "teamId": 101,
+      "name": "Alex",
+      "email": "developer@company.com",
+      "role": "member",
+      "spendCents": 2450
+    },
+    {
+      "userId": "user_def456",
+      "teamId": 202,
+      "name": "Sam",
+      "email": "admin@company.com",
+      "role": "owner",
+      "spendCents": 1875
+    }
+  ],
+  "totalMembers": 15,
+  "totalPages": 1,
+  "period": {
+    "startDate": 1735689600000,
+    "endDate": 1767225600000
   }
 }
 ```

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/azure-devops
-fetched_at: 2026-06-22T06:23:25.433023+00:00
+fetched_at: 2026-07-06T05:04:27.881873+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,6 +9,18 @@ fetch_method: mintlify_md
 The Azure DevOps integration connects Azure DevOps Services repositories so Cursor can clone your code, work on branches, and open pull requests from [Cloud Agents](https://cursor.com/docs/cloud-agent.md).
 
 The Azure DevOps integration is in public beta. It supports Azure DevOps Services at `dev.azure.com`. Azure DevOps Server is not supported.
+
+## Supported features
+
+Azure DevOps works with [Cloud Agents](https://cursor.com/docs/cloud-agent.md) only. Cloud Agents can clone your code, work on branches, and open pull requests.
+
+The following features don't support Azure DevOps yet:
+
+- [Automations](https://cursor.com/docs/cloud-agent/automations.md)
+- [Bugbot](https://cursor.com/docs/bugbot.md) and Bugbot autofix
+- [Security Agents](https://cursor.com/docs/security-agents.md), including Security Reviewer and Vulnerability Scanner
+
+These features work with [GitHub](https://cursor.com/docs/integrations/github.md) today. Azure DevOps support is on the roadmap.
 
 ## Setup
 

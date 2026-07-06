@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/enterprise/private-connectivity
-fetched_at: 2026-06-08T05:24:58.424657+00:00
+fetched_at: 2026-07-06T05:04:27.750862+00:00
 fetch_method: mintlify_md
 ---
 
 # Private Connectivity
 
-Cursor supports private network connectivity for Enterprise teams that need Cursor to work with systems that are not reachable from the public internet. This includes self-hosted GitHub Enterprise Server, GitLab Enterprise, private source control APIs, and webhook traffic from those systems back to Cursor.
+Cursor supports private network connectivity for Enterprise teams that need Cursor to work with systems that are not reachable from the public internet. This includes self-hosted GitHub Enterprise Server, GitLab Enterprise, Bitbucket Data Center, private source control APIs, and webhook traffic from those systems back to Cursor.
 
 The same private connectivity setup is used across Cursor services that need access to your source control system, including [Cloud Agents](https://cursor.com/docs/cloud-agent.md), [Bugbot](https://cursor.com/docs/bugbot.md), and Cursor backend services.
 
@@ -214,6 +214,7 @@ After private networking is configured, complete the source control setup in Cur
 
 - For GitHub Enterprise Server, follow the [GitHub integration setup](https://cursor.com/docs/integrations/github.md#setup).
 - For GitLab Enterprise, follow the [GitLab integration setup](https://cursor.com/docs/integrations/gitlab.md#setup).
+- For Bitbucket Data Center, follow the [Bitbucket integration setup](https://cursor.com/docs/integrations/bitbucket.md#setup).
 - Use the same hostname that is covered by your TLS certificate and private DNS configuration.
 - If a proxy sits in front of your Git provider, make sure it allows the authenticated API traffic described in [Prerequisites](https://cursor.com/docs/enterprise/private-connectivity.md#prerequisites).
 

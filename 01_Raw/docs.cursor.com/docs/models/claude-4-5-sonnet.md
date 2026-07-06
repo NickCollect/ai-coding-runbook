@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/claude-4-5-sonnet
-fetched_at: 2026-05-05T19:55:40.594160+00:00
+fetched_at: 2026-07-06T05:04:28.034106+00:00
 fetch_method: mintlify_md
 ---
 
-We recommend using [Claude 4.6 Sonnet](https://cursor.com/docs/models/claude-4-6-sonnet.md). It's the latest Sonnet with stronger capabilities at the same price.
+We recommend using [Claude Sonnet 5](https://cursor.com/docs/models/claude-sonnet-5.md). It's the latest Sonnet with stronger capabilities at the same price.
 
 ## Tools
 

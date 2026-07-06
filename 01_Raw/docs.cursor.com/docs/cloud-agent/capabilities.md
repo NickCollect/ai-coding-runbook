@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-05-11T04:55:36.591994+00:00
+fetched_at: 2026-07-06T05:04:27.263463+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,9 @@ Cloud agents run in a remote VM that can be fully onboarded with your repo, depe
 
 Cloud agents can use [MCP (Model Context Protocol)](https://cursor.com/docs/mcp.md) servers configured for your team. This gives agents access to external tools and data sources like databases, APIs, and third-party services during their runs.
 
-Add and enable MCP servers through the MCP dropdown in [cursor.com/agents](https://cursor.com/agents).
+Add and enable personal MCP servers through the MCP dropdown in [cursor.com/agents](https://cursor.com/agents). Team admins configure shared servers under **Dashboard -> Integrations & MCP**.
+
+Admins can link shared Team MCP servers to the [Default team marketplace](https://cursor.com/docs/plugins.md#migrate-existing-team-mcps). Linking keeps the servers available to Cloud Agents and also makes them available for teammates to install and configure in the Agent Window, IDE, and CLI.
 
 Cloud agents support OAuth for MCP servers that need it. OAuth is per-user, including for MCP servers shared at the team level.
 
@@ -52,6 +54,50 @@ MCP configurations are encrypted at rest. Sensitive fields are redacted and cann
 - **Stdio** — servers run inside the cloud agent's VM, so the agent has access to the server's configuration and environment variables. This is similar to how stdio MCPs work in the Cursor IDE.
 
 Stdio servers depend on the VM environment to execute. We cannot verify that a stdio server will run successfully until a cloud agent is launched. We recommend using HTTP MCPs when possible, and configuring your [environment setup](https://cursor.com/docs/cloud-agent/setup.md) correctly if you use stdio servers.
+
+### Cursor Cloud MCP
+
+The Cursor Cloud MCP is a built-in diagnostics server available during Cloud Agent runs. It lets an agent inspect the current run, browse related runs in the same environment, and fetch transcripts, diff metadata, environment details, and setup logs without manually collecting links and files.
+
+Cursor Cloud MCP is in **beta**. Availability and behavior may change.
+
+Team admins can disable Cursor Cloud MCP for their team from **MCP Configuration** in [team settings](https://cursor.com/dashboard/settings). See [Team dashboard](https://cursor.com/docs/account/teams/dashboard.md#mcp-configuration) for more on MCP admin controls.
+
+#### Access and permissions
+
+Cloud Agent conversations can include prompts, code, tool output, and secrets. All tools enforce access checks on every request.
+
+| Role       | What you can access                                                                                                                                |
+| :--------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Team admin | List and fetch details (including transcripts) for Cloud Agent runs across the team, for repositories and environments they already have access to |
+| Non-admin  | Only your own runs and transcripts. You cannot view other team members' chats through this MCP                                                     |
+
+Even when listing runs in a shared environment, non-admins only see agents they started or own. Service accounts follow the same rules as the user or team context they run under.
+
+#### What you can inspect
+
+| Category      | Examples                                                                                                                          |
+| :------------ | :-------------------------------------------------------------------------------------------------------------------------------- |
+| Current run   | Run ID, URL, repo, branch, model, owner, lifecycle status, and where the run was started (Cursor, Slack, GitHub, API, and others) |
+| Related runs  | Other Cloud Agents in the same environment, or on the same repository when no saved environment is attached                       |
+| Environment   | Environment version, full environment config, dashboard URL, and effective egress network policy                                  |
+| Transcript    | Full user-agent conversation, including tool calls when available                                                                 |
+| Diff metadata | Whether the agent changed code, how much changed, and whether it opened a PR                                                      |
+| Setup logs    | Raw logs from environment setup and image-build steps                                                                             |
+
+#### Tools
+
+Depending on your MCP client, tool names may include a server prefix (for example, `cursor-cloud-run-info`). The underlying tools are:
+
+| Tool                  | Purpose                                                                                                                                                         |
+| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `run-info`            | Get the current run's identity, metadata, and URL. Start here.                                                                                                  |
+| `environment-info`    | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                                  |
+| `list-cloud-agents`   | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, archived state, and self-hosted routing. |
+| `batch-fetch-details` | Fetch details for specific run IDs (`bcId`s). Optionally include transcripts, diff metadata, setup logs, and environment info (up to 50 runs per batch).        |
+| `get-automation`      | Get an automation's details like name and owner from its ID.                                                                                                    |
+
+A typical diagnostics flow is `run-info` → `environment-info` → `list-cloud-agents` → `batch-fetch-details`.
 
 ## Fixing CI Failures
 

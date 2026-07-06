@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organization-groups
-fetched_at: 2026-06-29T05:25:13.960533+00:00
+fetched_at: 2026-07-06T05:04:27.670570+00:00
 fetch_method: mintlify_md
 ---
 
@@ -17,6 +17,7 @@ Use Organization Groups when you want to:
 - Apply model access or usage controls to a cross-team cohort
 - Manage a group from your identity provider through SCIM
 - Give a pilot group access to a new model or setting before enabling it broadly
+- Restrict a team marketplace to selected cohorts
 - Keep team defaults strict while allowing specific users more permissive settings
 - Manage group membership through the [Organization API](https://cursor.com/docs/account/organizations/organization-admin-api.md#organization-groups)
 
@@ -69,11 +70,21 @@ Organization Groups can also carry group-level agent and model-routing controls,
 
 Because groups can include users from multiple teams, team-level restrictions still matter. If a user's team blocks a model required by a group setting, that team-level restriction can affect the user's experience.
 
+### Team marketplace access
+
+Team admins can use Organization Groups to control who can see and use a [team marketplace](https://cursor.com/docs/plugins.md#team-marketplaces). Open **Dashboard -> Plugins**, select a marketplace, then choose groups under **Marketplace Settings -> Marketplace Access**.
+
+A team marketplace remains scoped to its owning team. Selecting an Organization Group grants access only to group members who also belong to that team. Team admins retain access, and a marketplace with no selected groups is available to everyone in the team.
+
+Existing marketplaces that use team-level SCIM directory groups keep those assignments. Cursor does not migrate them to Organization Groups automatically.
+
 ## Organization Groups and SCIM
 
 SCIM lets your identity provider control who belongs to a group. This is the recommended approach when the group mirrors an existing department, role, or access cohort in your IdP.
 
 Before mapping SCIM groups, make sure [SCIM provisioning](https://cursor.com/docs/account/teams/scim.md) is configured for your Organization. Then create or edit an Organization Group and connect it to the matching directory group.
+
+An SCIM-synced Organization Group is an organization-level cohort. A legacy team directory group is a separate team-level access source. Existing team marketplaces can continue using directory groups while new marketplace assignments use Organization Groups.
 
 ## API access
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/dashboard
-fetched_at: 2026-06-22T06:23:24.262007+00:00
+fetched_at: 2026-07-06T05:04:26.521893+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,9 +33,12 @@ spending limits. Control whether only admins can modify these settings.
 
 ### Team Marketplaces
 
-Import custom team marketplaces from GitHub in dashboard settings under
-Plugins. Teams plans can add up to 1 team marketplace. Enterprise plans can
-add unlimited team marketplaces. Learn more in [Team Marketplaces](https://cursor.com/docs/plugins.md#team-marketplaces).
+Import private marketplaces from GitHub or use the Default marketplace to
+distribute shared Team MCP servers. Set **Marketplace Access** for the whole
+team, selected Organization Groups, or an existing SCIM directory-group
+configuration. Teams plans can add up to 1 team marketplace. Enterprise plans
+can add unlimited team marketplaces. Learn more in [Team
+Marketplaces](https://cursor.com/docs/plugins.md#team-marketplaces).
 
 ### Bedrock IAM Role
 

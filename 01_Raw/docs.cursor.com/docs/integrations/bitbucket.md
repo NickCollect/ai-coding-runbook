@@ -1,18 +1,20 @@
 ---
 source_url: https://cursor.com/docs/integrations/bitbucket
-fetched_at: 2026-06-22T06:23:25.498980+00:00
+fetched_at: 2026-07-06T05:04:27.898415+00:00
 fetch_method: mintlify_md
 ---
 
 # Bitbucket
 
-The Bitbucket integration connects Bitbucket Cloud repositories so you can use [Cloud Agents](https://cursor.com/docs/cloud-agent.md) and [Bugbot](https://cursor.com/docs/bugbot.md).
-
-The Bitbucket integration is in public beta. Cursor supports Bitbucket Cloud repositories on `bitbucket.org`. Bitbucket Server and Bitbucket Data Center are not supported.
+Connect Bitbucket Cloud repositories to [Cloud Agents](https://cursor.com/docs/cloud-agent.md) and [Bugbot](https://cursor.com/docs/bugbot.md). Connect Bitbucket Data Center repositories to Bugbot.
 
 ## Setup
 
-Bitbucket setup has two parts:
+### Bitbucket Cloud
+
+The Bitbucket Cloud integration is in public beta. It supports repositories on `bitbucket.org`.
+
+Bitbucket Cloud setup has two parts:
 
 - Each developer connects their Bitbucket account so Cursor can clone repositories, push branches, and open pull requests as that user.
 - A Bitbucket workspace admin installs the Cursor app so Bugbot and Cloud Agent status comments can appear as Cursor.
@@ -45,7 +47,7 @@ When the workspace is linked, the dashboard shows the Cursor app installed for t
 
 Bitbucket can take a few minutes to notify Cursor after app installation. If Cursor cannot find the workspace right away, wait and try the link step again.
 
-## How Cursor uses Bitbucket identities
+### How Cursor uses Bitbucket Cloud identities
 
 Cursor uses different Bitbucket identities for different actions:
 
@@ -55,11 +57,11 @@ Cursor uses different Bitbucket identities for different actions:
 | Cloud Agent progress comments on pull requests               | Cursor app                   |
 | Git clone, branch push, commits, and pull request creation   | The connected Bitbucket user |
 
-This means pull requests opened by Cloud Agents are attributed to the person who started the agent. Bugbot output appears from Cursor when the workspace app is installed.
+Pull requests opened by Cloud Agents are attributed to the person who started the agent. Bugbot output appears from Cursor when the workspace app is installed.
 
-## Permissions
+### Permissions
 
-The Bitbucket integration asks for permissions needed to support Cloud Agents and Bugbot:
+The Bitbucket Cloud integration asks for permissions needed to support Cloud Agents and Bugbot:
 
 | Permission             | Purpose                                    |
 | ---------------------- | ------------------------------------------ |
@@ -69,14 +71,86 @@ The Bitbucket integration asks for permissions needed to support Cloud Agents an
 | **Pull request write** | Create pull requests and post comments     |
 | **Webhooks**           | Receive repository and pull request events |
 
-## Disconnect Bitbucket
+### Disconnect Bitbucket Cloud
 
-Disconnecting Bitbucket has two separate effects:
+Disconnecting Bitbucket Cloud has two separate effects:
 
 - **Disconnect account** removes your personal Bitbucket OAuth connection from Cursor.
 - **Disconnect Cursor app** unlinks the Bitbucket workspace from your Cursor team. The app can remain installed in Bitbucket until a workspace admin removes it there.
 
 To fully stop app events from the workspace, uninstall the Cursor app from Bitbucket workspace settings.
+
+### Bitbucket Data Center
+
+Bitbucket Data Center requires a [Teams](https://cursor.com/docs/account/teams/pricing.md) or [Enterprise](https://cursor.com/docs/enterprise.md) plan. It supports Bugbot. Cloud Agents are not supported.
+
+### Prerequisites
+
+- Cursor team admin access
+- A dedicated Bitbucket Data Center service account
+- An HTTP access token for the service account
+- Repository admin access for the service account on each repository you want to use with Bugbot
+
+The service account reads repositories and pull requests, manages webhooks, and posts Bugbot comments and build statuses.
+
+### Networking
+
+Cursor needs HTTPS access to your Bitbucket Data Center instance for API requests and Git clones. Your instance also needs outbound HTTPS access to send webhook notifications to Cursor.
+
+#### IP allowlisting (recommended)
+
+Add these Cursor IP addresses to your inbound allowlist:
+
+```text
+184.73.225.134
+3.209.66.12
+52.44.113.131
+```
+
+If Cursor should use a load balancer or API hostname that differs from the repository clone hostname, enter it as the external host during registration.
+
+For instances without public inbound access, see [Advanced networking](https://cursor.com/docs/integrations/bitbucket.md#advanced-networking).
+
+### Register with Cursor
+
+1. Create an HTTP access token for the Bitbucket service account
+2. Go to [Integrations in the dashboard](https://cursor.com/dashboard/integrations)
+3. Open **Advanced**, then select **Bitbucket Data Center**
+4. Enter the **Bitbucket Hostname** used in repository clone URLs
+5. If API traffic uses a different hostname, enter it as the **External Host**
+6. Enter the **Service Account Token**
+7. Click **Register**
+8. Return to the [Bugbot dashboard](https://cursor.com/dashboard/bugbot) to enable Bugbot on repositories from the instance
+
+Cursor uses the service account identity for Bugbot review comments, inline findings, webhooks, and build statuses.
+
+### Disconnect Bitbucket Data Center
+
+Go to [Integrations in the dashboard](https://cursor.com/dashboard/integrations), open the Bitbucket Data Center configuration page, and delete the registered instance. Revoke the service account token in Bitbucket Data Center after removing the instance from Cursor.
+
+## Advanced networking
+
+Bitbucket Data Center supports private connection methods for instances that cannot accept traffic from the public internet.
+
+### AWS PrivateLink or Cloudflare Tunnel
+
+Available for Enterprise customers. Allow Cursor to access your instance over a private network connection. See [Private Connectivity](https://cursor.com/docs/enterprise/private-connectivity.md) or [contact your Cursor representative](https://cursor.com/contact-sales?source=docs-bugbot-private-network) for setup.
+
+**Best for:** Instances behind a firewall, including AWS-hosted instances and environments that can run `cloudflared`
+
+**Security:** HTTPS encryption, AWS PrivateLink, Cloudflare Tunnel, VPC allowlisting, service account access tokens
+
+**Drawbacks:** Requires coordination with Cursor. Google Private Service Connect is not currently supported.
+
+### Reverse Proxy Tunnel
+
+Available for Enterprise customers. Run a reverse proxy tunnel on-premises that establishes an outbound connection to Cursor. Network requests are forwarded through the tunnel, so the Bitbucket instance does not need public inbound access. [Contact your Cursor representative](https://cursor.com/contact-sales?source=docs-bugbot-on-prem-proxy) for setup.
+
+**Best for:** Environments without inbound network access
+
+**Security:** HTTPS encryption, service account access tokens
+
+**Drawbacks:** Introduces additional complexity, maintenance requirements, and potential security considerations compared to more direct connection methods
 
 ## Troubleshooting
 
@@ -94,12 +168,24 @@ Install the Cursor app in the Bitbucket workspace and link it to your Cursor tea
 - Confirm your Bitbucket user has read-write access to the repository.
 - Confirm the repository is on Bitbucket Cloud at `bitbucket.org`.
 
+### Cursor cannot list my Bitbucket Data Center repositories
+
+- Confirm the service account token is active.
+- Confirm the service account can access the repositories.
+- Confirm Cursor can reach the instance hostname or configured external host over HTTPS.
+
+### I cannot enable Bugbot on a Bitbucket Data Center repository
+
+- Confirm you are a Cursor team admin.
+- Confirm the registered instance has a service account token.
+- Confirm the service account has repository admin access.
+
 ## Next steps
 
 Once Bitbucket is connected, configure the features that use it:
 
 - [Bugbot](https://cursor.com/docs/bugbot.md) - automated PR reviews that catch bugs and security issues
-- [Cloud Agents](https://cursor.com/docs/cloud-agent.md) - AI agents that run in the cloud on your repositories
+- [Cloud Agents](https://cursor.com/docs/cloud-agent.md) - AI agents for Bitbucket Cloud repositories
 
 
 ---
