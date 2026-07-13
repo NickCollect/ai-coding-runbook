@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp
-fetched_at: 2026-07-06T05:04:33.786735+00:00
+fetched_at: 2026-07-13T04:25:50.756325+00:00
 fetch_method: mintlify_md
 ---
 
@@ -83,6 +83,8 @@ claude mcp add --transport http secure-api https://api.example.com/mcp \
 
 When configuring MCP servers via JSON in `.mcp.json`, `~/.claude.json`, or `claude mcp add-json`, the `type` field accepts `streamable-http` as an alias for `http`. The MCP specification uses the name `streamable-http` for this transport, so configurations copied from server documentation work without modification.
 
+A JSON entry that has a `url` but no `type` is a configuration error, because Claude Code reads an entry with no `type` as a stdio server. Claude Code skips that server and reports `MCP server "<name>" has a "url" but no "type"; add "type": "http" (or "sse" / "ws") to this entry`. Before v2.1.202, Claude Code reported this misconfiguration as `command: expected string, received undefined`.
+
 ### Option 2: Add a remote SSE server
 
 <Warning>
@@ -107,7 +109,7 @@ Stdio servers run as local processes on your machine. They're ideal for tools th
 
 Claude Code sets `CLAUDE_PROJECT_DIR` in the spawned server's environment to the project root, so your server can resolve project-relative paths without depending on the working directory. This is the same directory hooks receive in their `CLAUDE_PROJECT_DIR` variable. Read it from inside your server process, for example `process.env.CLAUDE_PROJECT_DIR` in Node or `os.environ["CLAUDE_PROJECT_DIR"]` in Python.
 
-Your server can also call the MCP `roots/list` request, which returns the directory Claude Code was launched from.
+`CLAUDE_PROJECT_DIR` is the stable project root and doesn't change when you add or remove working directories mid-session. A server that limits its own filesystem access to a set of allowed directories should implement the MCP `roots/list` request instead. Claude Code answers `roots/list` with the session's launch directory plus every [additional working directory](/en/permissions#working-directories) you've granted with `--add-dir`, `/add-dir`, or the `additionalDirectories` setting. Claude Code sends `notifications/roots/list_changed` when that set changes. Before v2.1.203, `roots/list` returned only the launch directory and Claude Code didn't send `notifications/roots/list_changed`.
 
 This variable is set in the server's environment, not in Claude Code's own environment, so referencing it via `${VAR}` expansion in a project- or user-scoped `.mcp.json` `command` or `args` requires a default such as `${CLAUDE_PROJECT_DIR:-.}`. Plugin-provided MCP configurations substitute `${CLAUDE_PROJECT_DIR}` directly and don't need the default.
 
@@ -183,7 +185,9 @@ The `/mcp` panel shows the tool count next to each connected server and flags se
 
 If your request needs tools from a server that is still connecting in the background, Claude waits for that server before continuing. With [tool search](#scale-with-mcp-tool-search) enabled, which is the default, the wait happens inside the `ToolSearch` call. In configurations without tool search, such as Google Cloud's Agent Platform, a custom `ANTHROPIC_BASE_URL`, or `ENABLE_TOOL_SEARCH=false`, Claude uses the `WaitForMcpServers` tool instead.
 
-The server name `workspace` is reserved for internal use. If your configuration defines a server with that name, Claude Code skips it at load time and shows a warning asking you to rename it.
+Some server names are reserved for Claude Code's built-in servers: `workspace`, `claude-in-chrome`, `computer-use`, `Claude Preview`, and `Claude Browser`. If your configuration defines a server with a reserved name, Claude Code skips it at load time and shows a warning asking you to rename it. `claude mcp add` rejects a reserved name with an error.
+
+`Claude Preview` and `Claude Browser` both name the built-in server that the [Claude Code desktop app's preview pane](/en/desktop#preview-your-app) uses. Before v2.1.205, `Claude Browser` wasn't reserved, so a user-configured server could register under that name.
 
 ### Dynamic tool updates
 
@@ -195,6 +199,8 @@ If an HTTP or SSE server disconnects mid-session, Claude Code automatically reco
 
 The same backoff applies when an HTTP or SSE server fails its initial connection at startup. As of v2.1.121, Claude Code retries the initial connection up to three times on transient errors such as a 5xx response, a connection refused, or a timeout, then marks the server as failed if it still can't connect. Authentication and not-found errors are not retried because they require a configuration change to resolve.
 
+When a configured server fails to connect, Claude Code tells Claude which server failed and its connection error, including in `ToolSearch` results that find no matching tool, so Claude reports the connection failure in its response. Requires [tool search](#scale-with-mcp-tool-search), which is enabled by default. In configurations without tool search, such as a custom `ANTHROPIC_BASE_URL`, `ENABLE_TOOL_SEARCH=false`, or a Haiku model, and on Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, Claude Code doesn't report failed server connections to Claude. Before v2.1.205, Claude Code didn't pass connection errors to Claude, and Claude could respond as if the failed server's tools were never configured.
+
 As of v2.1.191, the capability discovery requests that run after a successful connection, such as `tools/list`, `prompts/list`, and `resources/list`, also retry transient network and server errors up to three times with short backoff. Authentication errors, 4xx responses, and request timeouts are not retried.
 
 ### Push messages with channels
@@ -204,11 +210,12 @@ An MCP server can also push messages directly into your session so Claude can re
 <Tip>
   Tips:
 
-  * Use the `--scope` flag to specify where the configuration is stored:
+  * Use the `-s` or `--scope` flag to specify where the configuration is stored:
     * `local` (default): available only to you in the current project. Older versions called this scope `project`
     * `project`: shared with everyone in the project via the `.mcp.json` file
     * `user`: available to you across all projects. Older versions called this scope `global`
-  * Set environment variables with `--env` flags (for example, `--env KEY=value`)
+  * Set environment variables with `-e` or `--env` flags (for example, `-e KEY=value`)
+  * The `--transport` and `--header` flags also accept `-t` and `-H` short forms
   * Configure MCP server startup timeout using the `MCP_TIMEOUT` environment variable (for example, `MCP_TIMEOUT=10000 claude` sets a 10-second timeout)
   * Set a per-server tool execution timeout by adding a `timeout` field in milliseconds to that server's `.mcp.json` entry, for example `"timeout": 600000` for ten minutes. This overrides the `MCP_TOOL_TIMEOUT` environment variable for that server only
   * Claude Code displays a warning when MCP tool output exceeds 10,000 tokens. To increase this limit, set the `MAX_MCP_OUTPUT_TOKENS` environment variable (for example, `MAX_MCP_OUTPUT_TOKENS=50000`)
@@ -217,9 +224,13 @@ An MCP server can also push messages directly into your session so Claude can re
 
 The per-server `timeout` is a hard wall-clock limit per tool call, and progress notifications from the server don't extend it. Values below 1000 are ignored and fall through to `MCP_TOOL_TIMEOUT`, or to its default of about 28 hours when that variable is unset. {/* min-version: 2.1.162 */}Before v2.1.162, values below 1000 were floored to one second instead.
 
+A per-server `timeout` of at least 1000 also acts as a floor on the idle timeout described below: Claude Code never aborts that server's tool calls for idleness sooner than the per-server `timeout`. Requires Claude Code v2.1.203 or later.
+
 For HTTP and SSE servers, the per-request fetch first-byte budget has a 60-second minimum.
 
-As of v2.1.187, a tool call to a remote HTTP, SSE, WebSocket, or [claude.ai connector](#use-mcp-servers-from-claude-ai) server that sends no response and no progress notification for 5 minutes aborts with an error instead of waiting for the wall-clock limit. Set the [`CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT`](/en/env-vars) environment variable in milliseconds to change the idle window, or set it to `0` to disable the check. Stdio servers are local processes and are not subject to the idle timeout.
+A tool call to an MCP server that sends no response and no progress notification for the idle window aborts with an error instead of waiting for the wall-clock limit. The idle timeout requires Claude Code v2.1.187 or later. {/* min-version: 2.1.203 */}It applies to every server type except IDE servers and SDK in-process servers. The idle window defaults to five minutes for HTTP, SSE, WebSocket, and [claude.ai connector](#use-mcp-servers-from-claude-ai) servers, and to 30 minutes for stdio servers. Before v2.1.203, stdio servers were exempt from the idle timeout.
+
+Set the [`CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT`](/en/env-vars) environment variable in milliseconds to change the idle window, or set it to `0` to disable the check.
 
 ### Plugin-provided MCP servers
 
@@ -288,7 +299,9 @@ Tools from a plugin-bundled MCP server include both the plugin name and the serv
 mcp__plugin_my-plugin_database-tools__query
 ```
 
-Use this full name when referencing the tool in [permission rules](/en/permissions), a skill's `allowed-tools` list, or a [subagent's `tools` field](/en/sub-agents#available-tools).
+Use this full name when referencing the tool in [permission rules](/en/permissions), a skill's `allowed-tools` list, a [subagent's `tools` field](/en/sub-agents#available-tools), or a [hook matcher](/en/hooks#match-mcp-tools). A hook matcher written against the bare server key, such as `mcp__database-tools__.*`, never fires for a plugin-bundled server.
+
+The server itself registers under the scoped name `plugin:<plugin-name>:<server-name>`, such as `plugin:my-plugin:database-tools`. Use that name where a configured server name is expected, such as an [`mcp_tool` hook's `server` field](/en/hooks#mcp-tool-hook-fields).
 
 **Benefits of plugin MCP servers**:
 
@@ -804,13 +817,15 @@ If you've already configured MCP servers in Claude Desktop, you can import them:
   </Step>
 </Steps>
 
+Server names added through `claude mcp` commands can contain only letters, numbers, hyphens, and underscores. Claude Desktop doesn't apply that restriction, so a Claude Desktop server whose name contains any other character, such as a space, can't be imported. The import reports each name it rejects and still imports the other servers you selected. Before v2.1.205, the first invalid name stopped the import and none of the selected servers were added.
+
 <Tip>
   Tips:
 
   * This feature only works on macOS and Windows Subsystem for Linux (WSL)
   * It reads the Claude Desktop configuration file from its standard location on those platforms
   * Use the `--scope user` flag to add servers to your user configuration
-  * Imported servers keep the same names as in Claude Desktop
+  * Imported servers keep the same names as in Claude Desktop when the name contains only letters, numbers, hyphens, and underscores. Claude Code reports a server whose name contains any other character and skips it
   * If servers with the same names already exist, they get a numerical suffix (for example, `server_1`)
 </Tip>
 

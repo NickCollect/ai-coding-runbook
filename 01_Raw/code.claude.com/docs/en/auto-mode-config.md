@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/auto-mode-config
-fetched_at: 2026-07-06T05:04:29.341213+00:00
+fetched_at: 2026-07-13T04:25:44.591481+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ As of Claude Code v2.1.198, `claude auto-mode defaults` prints three kinds of en
   * **Organization**
   * **Primary use of Claude Code**: defaults to software development
   * **Cloud provider(s)**
-  * **Repository visibility**: a repository is assumed private unless its remote host and name indicate otherwise, {/* min-version: 2.1.200 */}or something earlier in the session already showed it is public, such as a `gh repo view` result in the transcript. The transcript-evidence check requires Claude Code v2.1.200 or later
+  * **Repository visibility**: a repository is assumed private unless its remote host and name indicate otherwise, {/* min-version: 2.1.200 */}or a visibility check earlier in the conversation the classifier reads shows it is public. The classifier reads your messages and the commands Claude runs, not their output, so the evidence has to be something it can read, such as your own message naming the repository as public; the output of a `gh repo view` on its own doesn't reach it. The transcript-evidence check requires Claude Code v2.1.200 or later
   * **Internal sharing / snippet hosting**: public paste and gist services are treated as outside the trust boundary until you name one
   * **Org-specific CLIs**
   * **Secrets management**
@@ -71,7 +71,7 @@ As of Claude Code v2.1.198, `claude auto-mode defaults` prints three kinds of en
   * **Network posture**
   * **Protected deployment namespaces / environments**: falls back to the Sensitive remote targets heuristic until you name them
   * **Data retention / declassification**
-* **Trust slots**: name what the classifier treats as inside your boundary. The slots are Trusted repo, Source control, Trusted internal domains, Trusted cloud buckets, Key internal services, and Internal package registry. The repo and source-control entries default to the working repository and its configured remotes. Every other trust slot defaults to `None configured`, so nothing else is trusted until you add it.
+* **Trust slots**: name what the classifier treats as inside your boundary. The slots are Trusted repo, Source control, Trusted internal domains, Trusted cloud buckets, Key internal services, and Internal package registry. The repo and source-control entries default to the working repository and its configured remotes. Every other trust slot defaults to `None configured`, so nothing else is trusted until you add it. {/* min-version: 2.1.203 */}A repository's visibility scopes only confidential material: a private repository is an acceptable destination for confidential material, but making a repository private never clears secrets or personal or entrusted data into it, and the classifier treats content ported, repointed, or first read from outside the working repository as not that repository's own work. This scoping requires Claude Code v2.1.203 or later.
 * **Sensitivity slots**: name what the protective rules treat as high-risk. The slots are Sensitive data locations & audiences, Sensitive remote targets, and Protected IaC scopes. Each defaults to a broad heuristic, such as treating any host or namespace whose name carries `prod` or `production` as a sensitive remote target, so the protective rules are active before you configure anything. Naming concrete targets in a sensitivity slot makes those rules apply to the named targets instead of the heuristic.
 
 To add your own entries alongside the defaults, include the literal string `"$defaults"` in the array. The default entries are spliced in at that position, so your custom entries can go before or after them.

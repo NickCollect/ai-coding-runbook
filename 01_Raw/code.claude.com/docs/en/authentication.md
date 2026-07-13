@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/authentication
-fetched_at: 2026-07-06T05:04:29.136511+00:00
+fetched_at: 2026-07-13T04:25:44.127427+00:00
 fetch_method: mintlify_md
 ---
 
@@ -133,6 +133,16 @@ Claude Code securely manages your authentication credentials:
 * **Slow helper notice**: if `apiKeyHelper` takes longer than 10 seconds to return a key, Claude Code displays a warning notice in the prompt bar showing the elapsed time. If you see this notice regularly, check whether your credential script can be optimized.
 
 `apiKeyHelper`, `ANTHROPIC_API_KEY`, and `ANTHROPIC_AUTH_TOKEN` apply to the CLI and the surfaces that wrap it, including the VS Code extension, the Agent SDK, and GitHub Actions. Claude Desktop and cloud sessions do not call `apiKeyHelper` or read these environment variables: they use OAuth, except desktop sessions running an [organization-distributed third-party inference configuration](/en/llm-gateway-connect#desktop-app), which authenticate with that configuration's credential.
+
+### Renew an expiring login
+
+When the login you created with `/login` is within five days of expiring, Claude Code shows a warning at startup: `Your login expires in 3 days · run /login to renew`. Requires Claude Code v2.1.203 or later.
+
+Run `/login` to renew. The warning is informational and never blocks a request: authentication keeps working until the login actually expires. The login lifetime itself is unchanged; the advance warning is what v2.1.203 adds.
+
+The warning appears only when a claude.ai or Claude Console login is the active credential, and not when a cloud provider, `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, or `apiKeyHelper` supplies the credential.
+
+Renewing early matters most for sessions that run unattended. A [background session in agent view](/en/agent-view) or a [Remote Control](/en/remote-control) session that outlives the login stops making progress once the credential expires and can't recover until you sign in again.
 
 ### Authentication precedence
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/keybindings
-fetched_at: 2026-07-06T05:04:33.570309+00:00
+fetched_at: 2026-07-13T04:25:50.029037+00:00
 fetch_method: mintlify_md
 ---
 
@@ -73,7 +73,8 @@ Each binding block specifies a **context** where the bindings apply:
 | `Select`          | Generic select/list components                               |
 | `Plugin`          | Plugin dialog (browse, discover, manage)                     |
 | `Scroll`          | Conversation scrolling and text selection in fullscreen mode |
-| `Doctor`          | `/doctor` diagnostics screen                                 |
+
+{/* max-version: 2.1.204 */}Before v2.1.205, a `Doctor` context and a `doctor:fix` action existed for the `/doctor` diagnostics screen.
 
 ## Available actions
 
@@ -316,14 +317,6 @@ Actions available in the `Settings` context. The `select:accept` and `confirm:no
 | `select:accept`   | Enter, Space | Change the selected setting or open its submenu |
 | `confirm:no`      | Escape       | Close the panel. Changes are already saved      |
 
-### Doctor actions
-
-Actions available in the `Doctor` context:
-
-| Action       | Default | Description                                                                                         |
-| :----------- | :------ | :-------------------------------------------------------------------------------------------------- |
-| `doctor:fix` | F       | Send the diagnostics report to Claude to fix the reported issues. Only active when issues are found |
-
 ### Voice actions
 
 Actions available in the `Chat` context when [voice dictation](/en/voice-dictation) is enabled:
@@ -488,4 +481,4 @@ Claude Code validates your keybindings and shows warnings for:
 * Terminal multiplexer conflicts
 * Duplicate bindings in the same context
 
-Run `/doctor` to see any keybinding warnings.
+Claude Code reports warnings when the file loads and writes each one to the debug log. Start Claude Code with [`--debug`](/en/cli-reference#cli-flags) to see the details.

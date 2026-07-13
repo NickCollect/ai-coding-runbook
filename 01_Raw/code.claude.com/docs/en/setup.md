@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/setup
-fetched_at: 2026-07-06T05:04:35.885122+00:00
+fetched_at: 2026-07-13T04:25:53.395622+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,7 +36,7 @@ Claude Code runs on the following platforms and configurations:
 ## Install Claude Code
 
 <Tip>
-  Prefer a graphical interface? The [Desktop app](/en/desktop-quickstart) lets you use Claude Code without the terminal. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs), [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs), or [Linux](https://claude.com/download?utm_source=claude_code\&utm_medium=docs).
+  Prefer a graphical interface? The [Desktop app](/en/desktop-quickstart) lets you use Claude Code without the terminal. Download it for [macOS](https://claude.ai/api/desktop/darwin/universal/dmg/latest/redirect?utm_source=claude_code\&utm_medium=docs), [Windows](https://claude.com/download?utm_source=claude_code\&utm_medium=docs), or [Linux](/en/desktop-linux).
 
   New to the terminal? See the [terminal guide](/en/terminal-guide) for step-by-step instructions.
 </Tip>
@@ -350,7 +350,13 @@ All repositories are signed with the [Claude Code release signing key](#binary-i
 
 <Tabs>
   <Tab title="apt">
-    For Debian and Ubuntu. The following commands configure the `stable` channel:
+    For Debian and Ubuntu. The install commands below download the signing key with `curl`, which fresh Debian and Ubuntu installations may not include. If the download fails with `sudo: curl: command not found`, install curl first:
+
+    ```bash theme={null}
+    sudo apt install curl
+    ```
+
+    The following commands configure the `stable` channel:
 
     ```bash theme={null}
     sudo install -d -m 0755 /etc/apt/keyrings

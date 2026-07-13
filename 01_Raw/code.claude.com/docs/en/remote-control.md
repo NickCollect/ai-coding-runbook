@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/remote-control
-fetched_at: 2026-07-06T05:04:34.962384+00:00
+fetched_at: 2026-07-13T04:25:52.526252+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,6 +22,7 @@ When you start a Remote Control session on your machine, Claude keeps running lo
 
 * **Use your full local environment remotely**: your filesystem, [MCP servers](/en/mcp), tools, and project configuration all stay available, and typing `@` autocompletes file paths from your local project
 * **Work from both surfaces at once**: the conversation stays in sync across all connected devices, so you can send messages from your terminal, browser, and phone interchangeably
+* **Send images and files from your phone or browser**: when you add an attachment in the Claude app or at claude.ai/code, Claude Code downloads it to your machine and passes it to Claude as an `@` file reference, with or without a caption. {/* min-version: 2.1.202 */}Before v2.1.202, Claude Code could drop an attachment sent without a caption before it reached the session.
 * **Survive interruptions**: if your laptop sleeps or your network drops, the session reconnects automatically when your machine comes back online
 
 Unlike [Claude Code on the web](/en/claude-code-on-the-web), which runs on cloud infrastructure, Remote Control sessions run directly on your machine and interact with your local filesystem. The web and mobile interfaces are just a window into that local session.
@@ -148,7 +149,7 @@ If you don't have the Claude app yet, use the `/mobile` command inside Claude Co
 
 ### Enable Remote Control for all sessions
 
-Remote Control only activates when you explicitly run `claude remote-control`, `claude --remote-control`, or `/remote-control`, unless auto-connect is turned on. To enable it automatically for every interactive session, run `/config` inside Claude Code and set **Enable Remote Control for all sessions** to `true`. Set it to `false` to never auto-connect, or leave it unset to follow your organization's default. In the Desktop app, you can also toggle this from **Settings → Claude Code → Enable remote control by default**.
+Remote Control only activates when you explicitly run `claude remote-control`, `claude --remote-control`, or `/remote-control`, unless auto-connect is turned on. To enable it automatically for every interactive session, run `/config` inside Claude Code and set **Enable Remote Control for all sessions** to `true`. Set it to `false` to never auto-connect, or leave it unset to follow your organization's default. In the Desktop app, you can also toggle this from **Settings → Claude Code → Enable remote control by default**. {/* min-version: 2.1.203 */}In the [VS Code extension](/en/vs-code#use-the-prompt-box), the same toggle appears as **Enable Remote Control for all sessions** in the command menu's Settings section; requires Claude Code v2.1.203 or later.
 
 With this setting on, each interactive Claude Code process registers one remote session. If you run multiple instances, each one gets its own environment and session. To run multiple concurrent sessions from a single process, use [server mode](#start-a-remote-control-session) instead.
 
@@ -263,8 +264,9 @@ Claude Code skips mobile push notifications while you are typing in or focused o
 * **Local process must keep running**: Remote Control runs as a local process. If you close the terminal, quit VS Code, or otherwise stop the `claude` process, the session ends.
 * **Extended network outage**: if your machine is awake but unable to reach the network for more than roughly 10 minutes, the session times out and the process exits. Run `claude remote-control` again to start a new session.
 * **Ultraplan disconnects Remote Control**: starting an [ultraplan](/en/ultraplan) session disconnects any active Remote Control session because both features occupy the claude.ai/code interface and only one can be connected at a time.
-* **Some commands are local-only**: commands that open an interactive picker in the terminal, such as `/plugin` or `/resume`, work only from the local CLI. The following work from mobile and web:
+* **Some commands are local-only**: commands that only run in the terminal interface, such as `/plugin` or `/resume`, work only from the local CLI, whether or not you pass an argument. The following work from mobile and web:
   * Text-output commands: `/compact`, `/clear`, `/context`, `/usage`, `/exit`, `/usage-credits`, `/recap`, `/reload-plugins`
+  * `/model`, `/effort`, `/fast`, `/color`, and `/rename`: pass the value as an argument, for example `/model sonnet` or `/effort high`. From mobile and web, `/model` and `/effort` take the argument in place of the terminal picker or slider.
   * {/* min-version: 2.1.166 */}`/mcp`, from v2.1.166: returns a text summary of server status instead of opening the picker, and accepts the `reconnect`, `enable`, and `disable` [subcommands](/en/commands#all-commands). Unlike the local CLI, `/mcp reconnect` without a server name reconnects every server that has failed or needs authentication.
   * {/* min-version: 2.1.181 */}`/config`, from v2.1.181: pass `key=value` to set a setting, or run it with no argument to list the keys you can set.
 

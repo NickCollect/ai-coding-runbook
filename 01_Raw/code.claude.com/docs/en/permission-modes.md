@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/permission-modes
-fetched_at: 2026-07-06T05:04:34.362146+00:00
+fetched_at: 2026-07-13T04:25:51.735012+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,9 @@ You can switch modes mid-session, at startup, or as a persistent default. The mo
 
 <Tabs>
   <Tab title="CLI">
-    **During a session**: press `Shift+Tab` to cycle `default` → `acceptEdits` → `plan`. The current mode appears in the status bar. Not every mode is in the default cycle:
+    **During a session**: press `Shift+Tab` to cycle `default` → `acceptEdits` → `plan`. The current mode appears in the status bar. {/* min-version: 2.1.203 */}Manual mode, `default` in that cycle, shows a gray `⏸ manual mode on` badge. Before v2.1.203, the status bar showed no badge in Manual mode.
+
+    Not every mode is in the default cycle:
 
     * `auto`: appears when your account meets the [auto mode requirements](#eliminate-prompts-with-auto-mode); cycling to it switches modes without a confirmation prompt
     * `bypassPermissions`: appears after you start with `--permission-mode bypassPermissions`, `--dangerously-skip-permissions`, or `--allow-dangerously-skip-permissions`; the `--allow-` variant adds the mode to the cycle without activating it
@@ -77,9 +79,11 @@ You can switch modes mid-session, at startup, or as a persistent default. The mo
     | :----------------- | :------------------ |
     | Manual             | `default`           |
     | Edit automatically | `acceptEdits`       |
-    | Plan mode          | `plan`              |
-    | Auto mode          | `auto`              |
+    | Plan               | `plan`              |
+    | Auto               | `auto`              |
     | Bypass permissions | `bypassPermissions` |
+
+    Before v2.1.205, the extension labeled `plan` as Plan mode and `auto` as Auto mode.
 
     Auto mode appears in the mode indicator when your account meets every requirement listed in the [auto mode section](#eliminate-prompts-with-auto-mode). The `claudeCode.initialPermissionMode` setting does not accept `auto`. To start in auto mode by default, set `defaultMode` in your [user settings](/en/settings#settings-files) instead. Claude Code ignores `defaultMode: "auto"` in project and local settings.
 
@@ -99,8 +103,8 @@ You can switch modes mid-session, at startup, or as a persistent default. The mo
   <Tab title="Web and mobile">
     Use the mode dropdown next to the prompt box on [claude.ai/code](https://claude.ai/code) or in the mobile app. Permission prompts appear in claude.ai for approval. Which modes appear depends on where the session runs:
 
-    * **Cloud sessions** on [Claude Code on the web](/en/claude-code-on-the-web): Accept edits, Plan mode, and Auto mode. Accept edits corresponds to `default` mode: the cloud environment pre-approves file edits regardless of mode, so the dropdown shows Accept edits instead of Ask permissions. `defaultMode: "acceptEdits"` from settings is still honored. Auto mode appears only when your organization allows it and the selected model supports it. Bypass permissions is not available.
-    * **[Remote Control](/en/remote-control) sessions** on your local machine: Ask permissions, Auto accept edits, and Plan mode. Auto and Bypass permissions are not available.
+    * **Cloud sessions** on [Claude Code on the web](/en/claude-code-on-the-web): Accept edits, Plan, and Auto. Accept edits corresponds to `default` mode: the cloud environment pre-approves file edits regardless of mode, so the dropdown shows Accept edits instead of Manual. Cloud sessions still honor `defaultMode: "acceptEdits"` from settings. Auto mode appears only when your organization allows it and the selected model supports it. Bypass permissions isn't available.
+    * **[Remote Control](/en/remote-control) sessions** on your local machine: Manual, Accept edits, and Plan. You can't select Auto or Bypass permissions from the app. {/* min-version: 2.1.202 */}The dropdown shows the mode the local session is in, including a mode set from the terminal, and updates when the mode changes in the app or in the terminal. The one exception is Bypass permissions: the session never reports that mode to claude.ai, so switching into it from the terminal doesn't change what the dropdown shows. Before v2.1.202, sessions connected with `/remote-control` or `claude --remote-control` didn't report their mode at all, so claude.ai and the mobile app could show a mode the session wasn't in. The mismatch affected only the label: Claude Code generated permission prompts from the session's actual mode, and they still appeared in the app for approval.
 
     For Remote Control, you can also set the starting mode when launching the host:
 
@@ -179,7 +183,7 @@ Auto mode lets Claude execute without routine permission prompts. A separate cla
 Auto mode also nudges Claude to keep working without stopping for clarifying questions, though Claude still asks when your prompt or a skill explicitly relies on it. For stronger autonomous behavior while keeping permission prompts, set the [Proactive output style](/en/output-styles) instead.
 
 <Warning>
-  Auto mode is a research preview. It reduces permission prompts but does not guarantee safety. Use it for tasks where you trust the general direction, not as a replacement for review on sensitive operations.
+  Auto mode reduces permission prompts but does not guarantee safety. Use it for tasks where you trust the general direction, not as a replacement for review on sensitive operations.
 </Warning>
 
 Auto mode is available only when your account meets all of these requirements:
@@ -228,7 +232,8 @@ The classifier trusts your working directory and the remotes that were configure
 * Granting IAM or repo permissions
 * Modifying shared infrastructure
 * Irreversibly destroying files that existed before the session
-* Force push, or pushing directly to `main`
+* Force push
+* {/* min-version: 2.1.203 */}Pushing to the repository's default branch when the push carries sensitive content such as secrets or personal or entrusted data, carries changes concealed or misdescribed relative to what you asked for, carries content ported in or first read from outside the repository, or routes around a pull request, review, or check you asked for. A plain push to the default branch isn't blocked on its own, and clearing a flagged push requires naming the flagged content or the bypassed review, not only the push. The classifier is one layer: [`permissions.deny` rules](/en/permissions#manage-permissions) apply in every mode and can block pushes to the default branch outright, and the remote's own branch protection still applies. Before v2.1.203, any direct push to the default branch was blocked
 * {/* min-version: 2.1.182 */}`git reset --hard`, `git checkout -- .`, `git restore .`, `git clean -fd`, `git stash drop`, or `git stash clear`, which the classifier presumes would discard uncommitted changes
 * `git commit --amend` when the commit at HEAD was not created in this session
 * {/* min-version: 2.1.198 */}From v2.1.198, `git commit --amend` when the commit at HEAD has already been pushed. A message-only reword is not blocked: `--amend -m` with nothing newly staged, on a commit that Claude created during this session
@@ -255,7 +260,7 @@ Claude Code v2.1.195 and later block more categories by default. Several depend 
 Claude Code v2.1.198 and later also block these by default:
 
 * Deleting files in `/tmp`, `$TMPDIR`, or another shared scratch or cache directory by wildcard, glob, or age filter rather than by a specific named path
-* Including sensitive details in content sent, uploaded, published, or written to other people or shared systems, when your own message didn't authorize those details for that recipient. {/* min-version: 2.1.200 */}PR and issue bodies, commit messages, and comments count as this kind of outbound content when the repository is outside the trust boundary or public, including your organization's own public repositories; internal file paths, code names, live API response data such as emails or account identifiers, and infrastructure identifiers count as sensitive details. The PR, issue, and commit-message scoping requires Claude Code v2.1.200 or later
+* Including sensitive details in content sent, uploaded, published, or written to other people or shared systems, when your own message didn't authorize those details for that recipient. {/* min-version: 2.1.200 */}PR and issue bodies, commit messages, and comments count as this kind of outbound content when the repository is outside the trust boundary or public, including your organization's own public repositories; internal file paths, code names, live API response data such as emails or account identifiers, and infrastructure identifiers count as sensitive details. The PR, issue, and commit-message scoping requires Claude Code v2.1.200 or later. {/* min-version: 2.1.203 */}Live personal data from an API response in a PR or issue body, such as an email address, an account or organization identifier, or a usage metric, requires you to name those details and the recipient regardless of the repository's visibility or trust boundary. That check requires Claude Code v2.1.203 or later
 * Sending keystrokes to Claude Code's own tmux pane to drive its own interface, which the classifier treats as Claude changing its own permissions or oversight
 
 Claude Code v2.1.200 and later also block these by default:
@@ -264,8 +269,17 @@ Claude Code v2.1.200 and later also block these by default:
 * Deleting or tearing down a stateful resource Claude didn't create in the session, when no more specific deletion rule applies and you didn't name that resource
 * Repointing an API base URL, proxy endpoint, webhook receiver, or registry mirror at a third-party host that doesn't fit the task, including in example files like `.env.example`
 * Changing where pushes go with `git remote set-url` or `git remote add`, unless you named the new remote
-* Pushing secrets to a repository known to be public, or pushing other sensitive or confidential material there that isn't part of that repository's own work. When a repository's visibility isn't established, the classifier doesn't block on that alone; it judges the content against the other rules instead
+* Pushing secrets or personal or entrusted data to a repository known to be public, or pushing confidential material there that isn't part of that repository's own work. {/* min-version: 2.1.203 */}A dotfiles repository's own subject matter is the one exception for personal or entrusted data, and content from a private repository reaching any public surface is blocked the same way; both refinements require Claude Code v2.1.203 or later. Before v2.1.203, personal data was grouped with confidential material and blocked only when it wasn't part of that repository's own work. When a repository's visibility isn't established, the classifier doesn't block on that alone; it judges the content against the other rules instead
 * Opening a pull request against a different repository or organization, forking with `gh repo fork`, or pushing to a third-party repository, unless you named that external target
+
+Claude Code v2.1.203 and later also block these by default:
+
+* Content from a sensitive local store, or from a file whose name, path, or type marks it as sensitive, entering a commit, a push, PR or issue text, a gist or paste, or a package publish, unless you named both the source and the destination. Session transcripts and conversation logs, credential and configuration dot-folders such as SSH keys, cloud credentials, browser profiles, and shell history, and user-data exports all count, and the repository being private doesn't clear it
+
+Claude Code v2.1.205 and later also block these by default:
+
+* Writing to Claude Code session transcripts, the `.jsonl` history files under `~/.claude/projects/` or your configured config directory, whether directly or through a shell command. The rule also covers the metadata lines Claude Code appends to each transcript entry for its own checks. A transcript is session state that Claude Code writes, not a working file, and a tampered entry reaches every later check once you resume the session, so auto mode blocks these writes as defense in depth. Reading a transcript isn't blocked
+* A recursive forced delete such as `rm -rf "$VAR"` or `Remove-Item -Recurse -Force $dir` whose target is a shell variable, or a glob rooted at one, that isn't assigned anywhere in the conversation the classifier sees. The value came only from earlier command output, which the classifier never receives, so the classifier can't verify the deletion target against the other deletion rules. The classifier reads the conversation rather than command output by design, so it blocks the call instead of guessing at the target. The block clears when you name the exact path being deleted, or when Claude re-runs the delete with the resolved literal path written into the command. Deletes whose target the classifier can resolve aren't affected
 
 **Allowed by default**:
 

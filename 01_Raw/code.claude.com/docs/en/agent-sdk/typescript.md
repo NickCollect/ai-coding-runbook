@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript
-fetched_at: 2026-07-06T05:04:28.635822+00:00
+fetched_at: 2026-07-13T04:25:43.776396+00:00
 fetch_method: mintlify_md
 ---
 
@@ -257,13 +257,14 @@ function getSessionMessages(
 
 #### Return type: `SessionMessage`
 
-| Property             | Type                    | Description                                                                                                                     |
-| :------------------- | :---------------------- | :------------------------------------------------------------------------------------------------------------------------------ |
-| `type`               | `"user" \| "assistant"` | Message role                                                                                                                    |
-| `uuid`               | `string`                | Unique message identifier                                                                                                       |
-| `session_id`         | `string`                | Session this message belongs to                                                                                                 |
-| `message`            | `unknown`               | Raw message payload from the transcript                                                                                         |
-| `parent_tool_use_id` | `string \| null`        | For subagent messages, the `tool_use_id` of the spawning `Agent` tool call. `null` for main-session messages and older sessions |
+| Property             | Type                    | Description                                                                                                                                                                                                                                                                              |
+| :------------------- | :---------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `type`               | `"user" \| "assistant"` | Message role                                                                                                                                                                                                                                                                             |
+| `uuid`               | `string`                | Unique message identifier                                                                                                                                                                                                                                                                |
+| `session_id`         | `string`                | Session this message belongs to                                                                                                                                                                                                                                                          |
+| `message`            | `unknown`               | Raw message payload from the transcript                                                                                                                                                                                                                                                  |
+| `parent_tool_use_id` | `string \| null`        | For subagent messages, the `tool_use_id` of the spawning `Agent` tool call. `null` for main-session messages and older sessions                                                                                                                                                          |
+| `parent_agent_id`    | `string \| null`        | For messages from a [nested subagent](/en/sub-agents#spawn-nested-subagents), the `agentId` of the subagent that spawned it. `null` for main-session messages, messages from top-level subagents, and older sessions. {/* min-version: 2.1.202 */}Requires Claude Code v2.1.202 or later |
 
 #### Example
 
@@ -495,7 +496,7 @@ Interface returned by the `query()` function.
 
 ```typescript theme={null}
 interface Query extends AsyncGenerator<SDKMessage, void> {
-  interrupt(): Promise<void>;
+  interrupt(): Promise<SDKControlInterruptResponse | undefined>;
   rewindFiles(
     userMessageId: string,
     options?: { dryRun?: boolean }
@@ -524,7 +525,7 @@ interface Query extends AsyncGenerator<SDKMessage, void> {
 
 | Method                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | :------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `interrupt()`                          | Interrupts the query (only available in streaming input mode)                                                                                                                                                                                                                                                                                                                                                                                                                |
+| `interrupt()`                          | Interrupts the query. Only available in streaming input mode. {/* min-version: 2.1.205 */}When the CLI advertises the `interrupt_receipt_v1` capability in [`SDKSystemMessage.capabilities`](#sdksystemmessage), resolves with an [`SDKControlInterruptResponse`](#sdkcontrolinterruptresponse) listing the queued messages that survive the interrupt. Resolves `undefined` on CLIs before v2.1.205                                                                         |
 | `rewindFiles(userMessageId, options?)` | Restores files to their state at the specified user message. Pass `{ dryRun: true }` to preview changes. Requires `enableFileCheckpointing: true`. See [File checkpointing](/en/agent-sdk/file-checkpointing)                                                                                                                                                                                                                                                                |
 | `setPermissionMode()`                  | Changes the permission mode (only available in streaming input mode)                                                                                                                                                                                                                                                                                                                                                                                                         |
 | `setModel()`                           | Changes the model (only available in streaming input mode)                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -552,6 +553,8 @@ Only some keys take effect mid-session:
 
 * **Applied on the next turn**: `model`, `effortLevel`, `ultracode`, `permissions`, `hooks`, `skillOverrides`, `fastMode`, `awaySummaryEnabled`, `agent`. Switching `agent` also applies that agent's model override, hooks, and system prompt on the next turn.
 * **No effect mid-session**: the system prompt options. These are resolved once at startup, so the running session keeps the original value even though the call succeeds. To change them, start a new session.
+
+`effortLevel` accepts an [effort level](/en/model-config#adjust-effort-level) name. It also accepts `"ultracode"`, which runs the session at `xhigh` effort and turns on [ultracode](/en/workflows#let-claude-decide-with-ultracode). The `Settings` type declares `effortLevel` without that value, so pass the equivalent `{ ultracode: true }` in TypeScript. {/* min-version: 2.1.203 */}The `ultracode` value requires Claude Code v2.1.203 or later and is accepted only by `applyFlagSettings()`, not by the `effortLevel` key in a settings file.
 
 The values are written to the flag-settings layer, the same layer the inline `settings` option of `query()` populates at startup. Flag settings sit near the top of the [settings precedence order](/en/settings#settings-precedence): they override user, project, and local settings, and only managed policy settings can override them. This is the same tier the [on-page precedence section](#settings-precedence) calls programmatic options.
 
@@ -614,6 +617,26 @@ type SDKControlInitializeResponse = {
 When a client sends `initialize` to a session that is already running, the control-response wrapper also carries an optional `pending_permission_requests` array. The field is on the response wrapper itself, not in the `SDKControlInitializeResponse` payload above. Each entry is a complete `control_request` message with the same `{ type: "control_request", request_id, request }` shape the session streams for permission requests while running.
 
 These are requests that were issued before the client connected and are still awaiting a reply. The SDK reads the array for you and dispatches each entry to your [`canUseTool`](#canusetool) callback, the same redelivery that [`reinitialize()`](#query-object) triggers after a transport gap. Handle repeated request IDs idempotently, because an entry can repeat a request the callback already received before the connection dropped.
+
+### `SDKControlInterruptResponse`
+
+The interrupt receipt: the value [`interrupt()`](#query-object) resolves with on a CLI that advertises the `interrupt_receipt_v1` capability in [`SDKSystemMessage.capabilities`](#sdksystemmessage). Requires Claude Code v2.1.205 or later. Earlier CLIs answer the interrupt with an empty success payload, so `interrupt()` resolves to `undefined`.
+
+```typescript theme={null}
+type SDKControlInterruptResponse = {
+  still_queued: string[];
+};
+```
+
+`still_queued` lists the UUIDs of user messages that survive the interrupt: messages still in the queue, plus any batch already dequeued for the next turn but not yet reachable by the abort. Each one runs as its own turn after the interrupt unless you cancel it first. Use the receipt to decide whether to resend anything; resending a message that is already listed produces a duplicate turn.
+
+Interpret the list with these caveats:
+
+* Only messages that were enqueued with a UUID appear. An empty array doesn't mean nothing else will run.
+* Only main-thread messages are listed. Messages addressed to a subagent are out of scope.
+* The list can include UUIDs your client never sent, such as [scheduled task](/en/scheduled-tasks) triggers. Ignore UUIDs you don't recognize instead of treating them as an error.
+
+The receipt is a snapshot taken at the moment the interrupt is processed, and on a clean interrupt it arrives before the interrupted turn's [`SDKResultMessage`](#sdkresultmessage). Read the receipt rather than inspecting the queue after that result: the loop starts the next queued turn immediately, so the queue you inspect after the result has already changed.
 
 ### `AgentDefinition`
 
@@ -981,6 +1004,7 @@ type SDKMessage =
   | SDKTaskStartedMessage
   | SDKTaskProgressMessage
   | SDKTaskUpdatedMessage
+  | SDKBackgroundTasksChangedMessage
   | SDKSessionStateChangedMessage
   | SDKWorkerShuttingDownMessage
   | SDKCommandsChangedMessage
@@ -994,7 +1018,8 @@ type SDKMessage =
   | SDKPromptSuggestionMessage
   | SDKAPIRetryMessage
   | SDKMirrorErrorMessage
-  | SDKInformationalMessage;
+  | SDKInformationalMessage
+  | SDKConversationResetMessage;
 ```
 
 ### `SDKAssistantMessage`
@@ -1147,8 +1172,17 @@ type SDKSystemMessage = {
   output_style: string;
   skills: string[];
   plugins: { name: string; path: string }[];
+  capabilities?: string[];
 };
 ```
+
+{/* min-version: 2.1.205 */}
+
+The `capabilities` array names the protocol behaviors this CLI implements, so you can feature-detect instead of comparing `claude_code_version` strings. It is an open set: ignore values you don't recognize, and check for the specific capability whose behavior you rely on. The field requires Claude Code v2.1.205 or later and is absent on earlier CLIs.
+
+| Capability             | Meaning                                                                                                                                                                     |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `interrupt_receipt_v1` | [`interrupt()`](#query-object) resolves with an [`SDKControlInterruptResponse`](#sdkcontrolinterruptresponse) receipt naming the queued messages that survive the interrupt |
 
 ### `SDKPartialAssistantMessage`
 
@@ -1279,20 +1313,26 @@ Provenance of a user-role message. This appears as `origin` on [`SDKUserMessage`
 type SDKMessageOrigin =
   | { kind: "human" }
   | { kind: "channel"; server: string }
-  | { kind: "peer"; from: string; name?: string; senderTaskId?: string }
+  | {
+      kind: "peer";
+      from: string;
+      name?: string;
+      senderTaskId?: string;
+      body?: string;
+    }
   | { kind: "task-notification" }
   | { kind: "coordinator" }
   | { kind: "auto-continuation" };
 ```
 
-| `kind`              | Meaning                                                                                                                                                                                                                                                                                                                                      |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `human`             | Direct input from the end user. On user messages, an absent `origin` also means human input.                                                                                                                                                                                                                                                 |
-| `channel`           | Message arriving on a [channel](/en/channels). `server` is the source MCP server name.                                                                                                                                                                                                                                                       |
-| `peer`              | Message from another agent. For an in-process [teammate](/en/agent-teams) sending to `main` via `SendMessage`, `from` is the teammate's name and `senderTaskId` is its task ID. For a cross-session peer such as another local Claude Code process, `from` is the sender address and `senderTaskId` is absent. The `name` field is reserved. |
-| `task-notification` | Synthetic turn injected after a background task finished. See [`SDKTaskNotificationMessage`](#sdktasknotificationmessage).                                                                                                                                                                                                                   |
-| `coordinator`       | Message from a team coordinator in an [agent team](/en/agent-teams).                                                                                                                                                                                                                                                                         |
-| `auto-continuation` | Synthetic turn injected when the session continues without fresh user input, such as a command result that triggers a follow-up prompt.                                                                                                                                                                                                      |
+| `kind`              | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `human`             | Direct input from the end user. On user messages, an absent `origin` also means human input.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| `channel`           | Message arriving on a [channel](/en/channels). `server` is the source MCP server name.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `peer`              | Message from another agent. For an in-process [teammate](/en/agent-teams) sending to `main` via `SendMessage`, `from` is the teammate's name and `senderTaskId` is its task ID. For a cross-session peer such as another local Claude Code process, `from` is the sender address and `senderTaskId` is absent. {/* min-version: 2.1.205 */}`name` and `body` require Claude Code v2.1.205 or later. `name` is the sender's display name, normalized by Claude Code: it strips Unicode control, format, surrogate, and line or paragraph separator code points, then trims the result and caps it at 64 code points with an ellipsis. `body` is the decoded message body with the peer envelope stripped, byte-exact with what the model sees. For a teammate message `body` is always present; for a cross-session peer it is present only when the turn is exactly one peer envelope formed by Claude Code. Render `name` and `body` instead of re-parsing the message text. |
+| `task-notification` | Synthetic turn injected after a background task finished. See [`SDKTaskNotificationMessage`](#sdktasknotificationmessage).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `coordinator`       | Message from a team coordinator in an [agent team](/en/agent-teams).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `auto-continuation` | Synthetic turn injected when the session continues without fresh user input, such as a command result that triggers a follow-up prompt.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 ## Hook Types
 
@@ -2111,6 +2151,7 @@ Returns a snapshot of all tasks in the current list.
 
 ```typescript theme={null}
 type ExitPlanModeInput = {
+  /** Deprecated: no longer used. */
   allowedPrompts?: Array<{
     tool: "Bash";
     prompt: string;
@@ -2118,7 +2159,7 @@ type ExitPlanModeInput = {
 };
 ```
 
-Exits planning mode. Optionally specifies prompt-based permissions needed to implement the plan.
+Exits plan mode. The `allowedPrompts` field is deprecated and ignored; Claude Code still accepts it so existing callers and transcripts validate. Before v2.1.205, it requested prompt-based Bash permissions for implementing the plan.
 
 ### ListMcpResources
 
@@ -2156,7 +2197,7 @@ type EnterWorktreeInput = {
 };
 ```
 
-Creates and enters a temporary git worktree for isolated work. Pass `path` to switch into an existing worktree of the current repository instead of creating a new one. `name` and `path` are mutually exclusive.
+Creates and enters a temporary git worktree for isolated work. Pass `path` to switch into an existing worktree instead of creating a new one. On first entry the target must be a registered worktree of the current repository or, in a multi-repo workspace, of a repository nested inside it; from within a worktree session it must be under `.claude/worktrees/` of the session's repository. `name` and `path` are mutually exclusive.
 
 ## Tool Output Types
 
@@ -3284,6 +3325,30 @@ type SDKTaskUpdatedMessage = {
 };
 ```
 
+### `SDKBackgroundTasksChangedMessage`
+
+Emitted whenever the set of live background tasks changes: a task starts, completes, is killed, or a foreground agent is backgrounded. The `tasks` array is the full live set. Replace any cached set with each payload instead of pairing `task_started` and `task_notification` events, so the next membership change corrects any event you missed.
+
+Ordering relative to those per-task events is unspecified, so don't correlate the two streams.
+
+Nothing is emitted at startup. Reset to an empty set whenever the session's CLI process starts or restarts and let the next membership change repopulate it.
+
+{/* min-version: 2.1.203 */}Requires Claude Code v2.1.203 or later.
+
+```typescript theme={null}
+type SDKBackgroundTasksChangedMessage = {
+  type: "system";
+  subtype: "background_tasks_changed";
+  tasks: {
+    task_id: string;
+    task_type: string;
+    description: string;
+  }[];
+  uuid: UUID;
+  session_id: string;
+};
+```
+
 ### `SDKFilesPersistedEvent`
 
 Emitted when file checkpoints are persisted to disk.
@@ -3362,6 +3427,21 @@ type SDKPromptSuggestionMessage = {
   session_id: string;
 };
 ```
+
+### `SDKConversationResetMessage`
+
+Emitted when the session's conversation is replaced without ending the session, such as after `/clear`, on plan-mode exit, or when a fresh conversation starts. Mount an empty transcript under `new_conversation_id` and discard any cached session title.
+
+```typescript theme={null}
+type SDKConversationResetMessage = {
+  type: "conversation_reset";
+  new_conversation_id: UUID;
+  uuid: UUID;
+  session_id: string;
+};
+```
+
+{/* min-version: 2.1.203 */}The SDK's published typings declare `SDKConversationResetMessage` in Claude Code v2.1.203 and later. Before v2.1.203, `SDKMessage` referenced the type without declaring it, so narrowing on `type === "conversation_reset"` failed to typecheck when `skipLibCheck` was disabled.
 
 ### `AbortError`
 
