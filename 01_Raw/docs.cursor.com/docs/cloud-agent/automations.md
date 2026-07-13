@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-06-22T06:23:24.874495+00:00
+fetched_at: 2026-07-13T04:25:37.906029+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,7 +40,7 @@ How usage is billed depends on the automation's [permission scope](https://curso
 
 Triggers decide when an automation runs. An automation can have more than one trigger and is run when *any* trigger fires.
 
-For certain triggers like Slack or cron schedules, Cursor defaults to not using a repository. If your automation should make code changes, specify which repository or repositories agents should work in. For GitHub and GitLab triggers, specifying a repo or multiple repos is required.
+For certain triggers like Slack or cron schedules, Cursor defaults to not using a repository. If your automation should make code changes, specify which repository or repositories agents should work in. For source control triggers, specifying a repo or multiple repos is required.
 
 ### Scheduled triggers
 
@@ -48,28 +48,50 @@ Scheduled triggers run on a recurring schedule. Choose from preset options or en
 
 Scheduled triggers may run with a delay but will not start before the indicated time.
 
-### GitHub and GitLab triggers
+### Source control triggers
 
-GitHub and GitLab triggers respond to pull request events, such as when a pull request is opened or merged. You can connect the automation to one repository or a multi-repo environment.
+Source control triggers respond to pull request and push events from your connected Git provider: GitHub, GitLab, and Bitbucket Cloud. Connect the automation to one repository or a multi-repo environment.
+
+Every connected provider supports the core pull request and push triggers:
 
 - **Draft opened** - When a draft pull request is created.
 - **Pull request opened** - When a non-draft PR is created or a draft is marked ready for review.
 - **Pull request pushed** - When new commits are pushed to an existing PR.
-- **Pull request label changed** - When a specific label, or any label, is added to or removed from an existing PR.
 - **Pull request merged** - When a PR is merged.
-- **Pull request commented** - When someone comments on a PR.
 - **Push to branch** - When commits are pushed to a specific branch outside a pull request.
-- **CI completed** - When a GitHub or GitLab check finishes on a pull request or branch.
+- **Comment added** - When someone leaves a top-level comment on a pull request.
 
-Automations can also be triggered from the following GitHub issue, review, and workflow events:
+GitHub supports the most triggers. GitLab and Bitbucket support the core triggers above, plus a few extras listed in their sections below.
 
+#### GitHub triggers
+
+GitHub is the reference provider and supports every source control trigger. Alongside the core triggers, it adds:
+
+- **Pull request label changed** - When a specific label, or any label, is added to or removed from a pull request.
+- **Issue label changed** - When a label is added to or removed from a non-PR issue.
+- **CI completed** - When a GitHub check finishes on a pull request or branch.
 - **Issue comment** - When a comment is made on a non-PR issue.
 - **PR review comment** - When an inline comment is left on a pull request diff.
-- **PR review submitted** - When a PR review is submitted.
+- **PR review submitted** - When a review is submitted as approved, changes requested, or commented.
 - **Review thread updated** - When a review thread on a pull request is marked resolved or unresolved.
 - **Workflow run completed** - When a GitHub Actions workflow run finishes on a pull request or branch.
 
 The [Cursor Marketplace](/marketplace/automations) includes templates for [triaging failed GitHub Actions](/marketplace/automations/triage-github-workflow-failures) and [fixing pull request review comments](/marketplace/automations/autofix-pr-review-comments).
+
+#### GitLab triggers
+
+Alongside the core triggers, GitLab adds:
+
+- **Pull request label changed** - When a label is added to or removed from a merge request.
+- **Pull request approved** - When a merge request is approved.
+
+#### Bitbucket triggers
+
+Bitbucket support covers Bitbucket Cloud (`bitbucket.org`) only. Bitbucket Server and Data Center are not supported. Alongside the core triggers, it adds:
+
+- **Pull request approved** - When a pull request is approved.
+
+Bitbucket Cloud has no pull request label or inline review-comment triggers.
 
 Pull request triggers don't run on PRs opened from forks. These runs fail with a "Fork pull requests not supported" error because the branch only exists on the fork, and running external code with the repo's permissions isn't safe. The exception is **Pull request merged** triggers, which still run because they start from the merge commit. To work around this, push the branch to the repo itself and open the PR from there.
 
@@ -122,7 +144,7 @@ Cursor Automations can have tools enabled for richer capabilities around GitHub,
 
 Repo-backed automations can open pull requests after making code changes requested by the automation prompt. This tool is enabled by default for every automation.
 
-The pull request is opened against the repositories specified for the GitHub or GitLab trigger. For other triggers, it uses the repositories specified by the environment.
+The pull request is opened against the repositories specified for the source control trigger. For other triggers, it uses the repositories specified by the environment.
 
 ### Comment on pull request
 
@@ -188,13 +210,13 @@ The repository setting controls the codebase context for each run:
 
 For certain triggers like Slack or cron schedules, Cursor defaults to not using a repository. If your automation should make code changes, specify which repository or repositories agents should work in.
 
-For GitHub and GitLab triggers, specifying a repo or multiple repos is required.
+For source control triggers, specifying a repo or multiple repos is required.
 
 #### Single-repo automations
 
 By default, an automation runs against one repository and branch. This is the right choice when the agent should read, review, or change code in a single codebase.
 
-GitHub and GitLab triggers infer the repository from the pull request. For other triggers, choose the repository and branch in the automation settings.
+Source control triggers infer the repository from the pull request. For other triggers, choose the repository and branch in the automation settings.
 
 #### Multi-repo automations
 

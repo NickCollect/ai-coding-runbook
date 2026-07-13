@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-06-29T05:25:12.919350+00:00
+fetched_at: 2026-07-13T04:25:36.815573+00:00
 fetch_method: mintlify_md
 ---
 
@@ -473,9 +473,9 @@ curl -X POST https://api.cursor.com/teams/spend \
 
 Retrieve detailed usage events for your team with comprehensive filtering, search, and pagination options. This endpoint provides granular insights into individual API calls, model usage, token consumption, and costs. Data is aggregated at the hourly level - we recommend polling this endpoint at most once per hour. Rate limited to 20 requests per minute per team. See [best practices](https://cursor.com/docs/api.md#best-practices).
 
-**Cost Calculation**: To reconcile event-level costs with `/teams/spend` totals, sum the `chargedCents` field across events. This field includes both the model cost and the Cursor Token Rate (if applicable), matching the dashboard totals. It works for both token-based and request-based billing plans.
+**Cost Calculation**: To reconcile event-level costs with `/teams/spend` totals, sum the `chargedCents` field across events. This field includes both the model cost and the Cursor Token Rate when a request is eligible for the rate, matching the dashboard totals. It works for both token-based and request-based billing plans.
 
-The `cursorTokenFee` field represents the Cursor Token Rate and is only present for teams with Cursor Token Rate enabled. For request-based enterprise accounts, this field may not appear in the response.
+The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a non-Auto third-party model request. Auto requests, first-party models such as Composer 2.5 and Grok 4.5, and request-based enterprise accounts do not include this fee.
 
 #### Parameters
 
@@ -546,8 +546,8 @@ Each object in `usageEvents` contains:
   - `cacheReadTokens` number - Tokens read from cache
   - `totalCents` number - Total model cost in cents
   - `discountPercentOff` number | undefined - Discount percentage applied, if any
-- `chargedCents` number - Total amount charged in cents for this event (model cost + Cursor Token Rate if applicable). Use this field to reconcile event-level costs with `/teams/spend` totals. Works for both token-based and request-based billing plans.
-- `cursorTokenFee` number | undefined - The `cursorTokenFee` field contains the Cursor Token Rate in cents (only present for teams with token rate enabled)
+- `chargedCents` number - Total amount charged in cents for this event. For non-Auto third-party model requests, this includes model cost plus the Cursor Token Rate. Use this field to reconcile event-level costs with `/teams/spend` totals. Works for both token-based and request-based billing plans.
+- `cursorTokenFee` number | undefined - Cursor Token Rate in cents. Present only when the rate applies to a non-Auto third-party model request.
 
 ```bash
 curl -X POST https://api.cursor.com/teams/filtered-usage-events \

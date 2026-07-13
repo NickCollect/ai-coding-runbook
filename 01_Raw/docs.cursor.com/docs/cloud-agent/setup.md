@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-06-22T06:23:25.076003+00:00
+fetched_at: 2026-07-13T04:25:37.967400+00:00
 fetch_method: mintlify_md
 ---
 
@@ -279,8 +279,11 @@ Here is a sample `.cursor/environment.json` referencing a `.cursor/Dockerfile` (
 
 ### Important path behavior
 
-The `dockerfile` and `context` paths in `build` are relative to `.cursor`.
-The `install` command runs from your project root.
+The `dockerfile` and `context` paths in `build` are relative to `.cursor`. When
+you omit `context`, it defaults to `.cursor`. The values `.`, `./`, and `..` are
+special-cased to mean the repository root rather than `.cursor`, so to `COPY`
+files that live in `.cursor` with bare filenames, omit `context`. The `install`
+command runs from your project root.
 
 The full schema is [defined here](https://www.cursor.com/schemas/environment.schema.json).
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/security-hardening
-fetched_at: 2026-06-29T05:25:14.043580+00:00
+fetched_at: 2026-07-13T04:25:38.394160+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,14 +50,14 @@ Control who signs in and on which device.
 
 Control how your code and data are handled.
 
-| Control                      | Recommendation                                                                                                                                                                                     | Learn more                                                                                                              |
-| :--------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
-| **Privacy Mode**             | Enforce org-wide so members can't disable Privacy Mode or its ZDR guarantees for Cursor-routed models; on by default for Enterprise. See exceptions under BYOK and models with provider retention. | [Privacy](https://cursor.com/docs/enterprise/privacy-and-data-governance.md#privacy-mode-enforcement)                   |
-| **Personal API keys (BYOK)** | Restrict them; with your own keys, zero data retention is subject to your own agreement with the model provider, not Cursor's.                                                                     | [BYOK](https://cursor.com/docs/enterprise/model-and-integration-management.md#restrict-personal-api-keys-byok-controls) |
-| **CMEK**                     | Encrypt embeddings and Cloud Agent data with your own key when your compliance program requires customer-managed keys.                                                                             | [CMEK](https://cursor.com/docs/enterprise/privacy-and-data-governance.md#data-encryption)                               |
-| **Model access**             | Approve specific models for use by your organization. Non-ZDR models require admin approval.                                                                                                       | [Models](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control)                   |
-| **Repository blocklist**     | Keep sensitive repos out of Cursor entirely.                                                                                                                                                       | [Blocklist](https://cursor.com/docs/enterprise/model-and-integration-management.md#git-repository-blocklist)            |
-| **Protected Git Scopes**     | Lock your Git org or namespace so only your teams use those repos with Cloud Agents and Bugbot.                                                                                                    | [Scopes](https://cursor.com/docs/enterprise/model-and-integration-management.md#protected-git-scopes)                   |
+| Control                      | Recommendation                                                                                                                                                                                      | Learn more                                                                                                              |
+| :--------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------- |
+| **Privacy Mode**             | Enforce org-wide so members can't disable Privacy Mode or its ZDR commitments for Cursor-routed models; on by default for Enterprise. See exceptions under BYOK and models with provider retention. | [Privacy](https://cursor.com/docs/enterprise/privacy-and-data-governance.md#privacy-mode-enforcement)                   |
+| **Personal API keys (BYOK)** | Restrict them; with your own keys, zero data retention is subject to your own agreement with the model provider, not Cursor's.                                                                      | [BYOK](https://cursor.com/docs/enterprise/model-and-integration-management.md#restrict-personal-api-keys-byok-controls) |
+| **CMEK**                     | Encrypt embeddings and Cloud Agent data with your own key when your compliance program requires customer-managed keys.                                                                              | [CMEK](https://cursor.com/docs/enterprise/privacy-and-data-governance.md#data-encryption)                               |
+| **Model access**             | Approve specific models for use by your organization. Non-ZDR models require admin approval.                                                                                                        | [Models](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control)                   |
+| **Repository blocklist**     | Keep sensitive repos out of Cursor entirely.                                                                                                                                                        | [Blocklist](https://cursor.com/docs/enterprise/model-and-integration-management.md#git-repository-blocklist)            |
+| **Protected Git Scopes**     | Lock your Git org or namespace so only your teams use those repos with Cloud Agents and Bugbot.                                                                                                     | [Scopes](https://cursor.com/docs/enterprise/model-and-integration-management.md#protected-git-scopes)                   |
 
 Also see [HIPAA BAA](https://cursor.com/docs/enterprise/baa.md) and [Cyber Safeguards](https://cursor.com/docs/account/enterprise/cyber-safeguards.md) when those apply to your deployment.
 

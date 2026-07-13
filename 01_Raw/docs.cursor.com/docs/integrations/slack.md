@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/slack
-fetched_at: 2026-06-22T06:23:25.639073+00:00
+fetched_at: 2026-07-13T04:25:38.628011+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,17 +30,9 @@ With Cursor's integration for Slack, you can use [Cloud Agents](https://cursor.c
 
 ## How to use
 
-Mention `@cursor` and give your prompt. Cursor automatically picks the right repository and model based on your message and your recent agent activity.
+Mention `@cursor` and give your prompt. Cursor tries to detect a repository, model, base branch, or named [cloud agent environment](https://cursor.com/docs/cloud-agent/setup.md) from your message. It also uses your recent agent activity when selecting a repository.
 
-To use a specific repository, include its name in your message:
-
-- `@Cursor in cursor-app, fix the login bug`
-- `@Cursor fix the auth issue in backend-api`
-
-To use a specific model, mention it in your message:
-
-- `@Cursor with opus, fix the login bug`
-- `@Cursor use gpt-5.2 to refactor the auth module`
+For a named environment, include its name in your prompt. For example: `@Cursor use the Platform environment to update the shared API`.
 
 ### Commands
 
@@ -50,7 +42,7 @@ Run `@Cursor help` for an up-to-date command list.
 | :--------------------------- | :------------------------------------------------------------------------------- |
 | `@Cursor [prompt]`           | Start a Cloud Agent. In threads with existing agents, adds followup instructions |
 | `@Cursor settings`           | Configure defaults and channel's default repository                              |
-| `@Cursor [options] [prompt]` | Use advanced options: `branch`, `autopr`                                         |
+| `@Cursor [options] [prompt]` | Set the repository, model, branch, PR behavior, or worker for a run              |
 | `@Cursor agent [prompt]`     | Force create a new agent in a thread                                             |
 | `@Cursor list my agents`     | Show your running agents                                                         |
 
@@ -58,12 +50,17 @@ Run `@Cursor help` for an up-to-date command list.
 
 Customize Cloud Agent behavior with these options:
 
-| Option   | Description                          | Example        |
-| :------- | :----------------------------------- | :------------- |
-| `branch` | Specify base branch                  | `branch=main`  |
-| `autopr` | Enable/disable automatic PR creation | `autopr=false` |
+| Option               | Description                                                                                                              | Natural language example   | Inline example      |
+| :------------------- | :----------------------------------------------------------------------------------------------------------------------- | :------------------------- | :------------------ |
+| `repo`               | Use a specific repository                                                                                                | `in acme/backend`          | `repo=acme/backend` |
+| `branch`             | Use a specific base branch                                                                                               | `work from the dev branch` | `branch=dev`        |
+| `model`              | Use a specific model                                                                                                     | `with opus`                | `model=opus`        |
+| `autopr`             | Enable or disable automatic PR creation                                                                                  | Inline option required     | `autopr=false`      |
+| `worker` / `machine` | Run on a named [My Machine](https://cursor.com/docs/cloud-agent/my-machines.md#trigger-this-machine-from-a-chat-surface) | Inline option required     | `worker=my-devbox`  |
+| `pool`               | Run on a named [self-hosted pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#triggering-pool-agents)        | Inline option required     | `pool=gpu`          |
+| `self_hosted`        | Run on your team's self-hosted pool                                                                                      | Inline option required     | `self_hosted=true`  |
 
-#### Syntax Formats
+#### Syntax formats
 
 Natural:
 
@@ -74,7 +71,13 @@ Natural:
 Inline:
 
 ```bash
-@Cursor branch=dev autopr=false Fix the login bug in backend-api
+@Cursor repo=acme/backend branch=dev model=opus autopr=false Fix the login bug
+```
+
+To run on a named self-hosted pool:
+
+```bash
+@Cursor repo=acme/backend pool=gpu Fix the login bug
 ```
 
 #### Option precedence

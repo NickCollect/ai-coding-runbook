@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/agents-window
-fetched_at: 2026-06-22T06:23:24.412377+00:00
+fetched_at: 2026-07-13T04:25:37.092203+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,11 +16,11 @@ If you're in the editor, type Cmd+Shift+P → Open Agents Window to open the Age
 
 ![Command Palette showing the Open Agents Window command](/docs-static/images/agent/open-agents-window-final.png)
 
-## Switch Back to the Editor
+## Switch Back to the IDE
 
-To return to the classic Cursor editor, type Cmd+Shift+P → Open Editor Window. This opens the current workspace in the editor.
+To return to the classic Cursor IDE, type Cmd+Shift+P → Open IDE. This opens the current workspace in the editor.
 
-![Actions menu showing the Open Editor Window command](/docs-static/images/agent/open-editor-window-final.png)
+![Actions menu showing the Open IDE command](/docs-static/images/agent/open-editor-window-final.png)
 
 If you want to view or edit files without leaving the Agents Window, you can type Cmd+P to search files, or Cmd+Shift+F to search all files.
 

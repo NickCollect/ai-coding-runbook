@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/overview
-fetched_at: 2026-05-05T19:55:36.266591+00:00
+fetched_at: 2026-07-13T04:25:37.262515+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,10 +27,6 @@ Tools are the building blocks of Agent. They are used to search your codebase an
 To understand how tool calling works under the hood, see our [tool calling fundamentals](https://cursor.com/learn/tool-calling.md).
 
 There is no limit on the number of tool calls Agent can make during a task.
-
-### Semantic search
-
-Perform semantic searches within your [indexed codebase](https://cursor.com/docs/agent/tools/search.md). Finds code by meaning, not just exact matches.
 
 ### Search files and folders
 

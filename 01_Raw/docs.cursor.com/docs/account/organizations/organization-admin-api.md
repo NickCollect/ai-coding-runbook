@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-07-06T05:04:26.472078+00:00
+fetched_at: 2026-07-13T04:25:36.906029+00:00
 fetch_method: mintlify_md
 ---
 
@@ -23,8 +23,21 @@ Use a **Team API key** when calling team-level endpoints under `/teams/*` (for e
 
 - **Scope**: Organization API keys can act across teams linked to the same organization. Team API keys can only act within one team.
 - **Endpoint compatibility**: Organization endpoints require Organization API keys. Team endpoints require Team API keys.
-- **Key scopes**: Each route requires a specific scope on the key. Membership and group routes need **`members:*`**; usage routes need **`usage:*`**. Keys with **`admin:*`** work everywhere because admin implies the other scopes.
+- **Key scopes**: Each route requires a specific scope on the key. Read-only membership routes accept **`members:read`**; membership and group write routes need **`members:*`**; usage routes need **`usage:*`**. Keys with **`admin:*`** work everywhere because admin implies the other scopes.
 - **Authorization failures**: If the key scope does not match the endpoint scope, requests fail with authentication or authorization errors (typically `401` or `403`).
+
+### Scopes
+
+Every Organization API key carries exactly one scope. A route runs only when the key's scope covers it, and broader scopes include everything narrower scopes allow.
+
+| Scope          | Access                                                                                     | Example routes                                                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `members:read` | Read-only access to organization membership.                                               | `GET /organizations/members`                                                                                                                         |
+| `members:*`    | Read and write access to membership and groups. Includes everything `members:read` allows. | `GET /organizations/members`, `POST /organizations/team-memberships/sync`, all `/organizations/groups` routes                                        |
+| `usage:*`      | Read access to pooled usage and reporting.                                                 | `POST /organizations/pooled-usage`, `POST /organizations/filtered-usage-events`, `POST /organizations/daily-usage-data`, `POST /organizations/spend` |
+| `admin:*`      | Full access to every organization route.                                                   | All of the above                                                                                                                                     |
+
+Pick the narrowest scope for the job. Use `members:read` for read-only integrations that list members but never change membership. You can select the `members:read` scope when you create an Organization API key in the dashboard.
 
 ### How should I pass an Organization API key?
 
@@ -42,13 +55,100 @@ curl -X POST https://api.cursor.com/organizations/team-memberships/sync \
   }'
 ```
 
-## Endpoints
+## Members
+
+Read organization membership and move members between the teams linked to your organization.
+
+- **Availability**: Enterprise only
+- **Authentication**: Organization API key (Basic auth). Reading members accepts the read-only **`members:read`** scope; moving members requires **`members:*`**. Keys with **`admin:*`** work for both.
+- **Scope**: `GET /organizations/members` is organization-scoped and paginated, returning each member's organization role plus every linked-team assignment in one response.
+- **Pagination**: `GET /organizations/members` accepts `page` and `pageSize`. `pageSize` is capped at 200; larger values are clamped to 200.
+
+### List Organization Members
+
+/organizations/members
+
+Retrieve members of the organization attached to your API key, along with each member's organization role and their assignments across linked teams. Results are paginated.
+
+#### Query parameters
+
+`page` number
+
+Page number (1-indexed). Defaults to the first page.
+
+`pageSize` number
+
+Number of members per page. Capped at 200; values above 200 are clamped to 200.
+
+#### Response Fields
+
+`members` array
+
+Array of organization member objects, each containing:
+
+- `userId` number - Unique numeric identifier for the member, matching the `id` returned by the team [`GET /teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members) endpoint
+- `email` string - Email address of the member
+- `name` string - Display name of the member
+- `organizationRole` string - Organization-level role, either `admin` or `member`. This is distinct from each team assignment's `teamRole`: a user can be an org `admin` while holding a `member` role on a specific team, or vice versa.
+- `teams` array - The member's assignments across teams linked to the organization. Each object contains:
+  - `teamId` number - Integer ID of a linked team the member belongs to
+  - `teamRole` string - Role within that team (e.g., `member`, `owner`)
+
+`pagination` object
+
+Pagination metadata: `page`, `pageSize`, `totalCount`, `totalPages`, `hasNextPage`, and `hasPreviousPage`.
+
+```bash
+curl -X GET "https://api.cursor.com/organizations/members?page=1&pageSize=50" \
+  -u YOUR_ORGANIZATION_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "members": [
+    {
+      "userId": 12345,
+      "email": "developer@company.com",
+      "name": "Alex",
+      "organizationRole": "member",
+      "teams": [
+        { "teamId": 7, "teamRole": "member" },
+        { "teamId": 8, "teamRole": "owner" }
+      ]
+    },
+    {
+      "userId": 12346,
+      "email": "admin@company.com",
+      "name": "Sam",
+      "organizationRole": "admin",
+      "teams": [
+        { "teamId": 7, "teamRole": "owner" }
+      ]
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "pageSize": 50,
+    "totalCount": 2,
+    "totalPages": 1,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  }
+}
+```
 
 ### Sync Organization Team Memberships
 
 /organizations/team-memberships/sync
 
-Move one or more users between teams that are linked to your organization. For each requested move, the member’s team assignment within the organization is set to exactly the destination team, and they are removed from any other linked teams. This matches the bulk style of the CSV import API: you send an array of users and receive a result row for each one.
+Set the teams that one or more users belong to within your organization. This matches the bulk style of the CSV import API: you send an array of users and receive a result row for each one.
+
+Each entry must use exactly one of `teamIds` or `destinationTeamId`:
+
+- `teamIds` is the **complete set** of team IDs the user should belong to. The endpoint reconciles the user's memberships to exactly that set. It adds any listed teams the user is not on yet and removes any teams that are not listed. To keep a user on their current team while adding another during a migration, list both (for example `[oldTeamId, newTeamId]`).
+- `destinationTeamId` puts the user on a **single** team. They are placed on the specified team and removed from every other team. Setting `destinationTeamId: NNN` is functionally equivalent to `teamIds: [NNN]`.
 
 #### Request body
 
@@ -58,16 +158,19 @@ Public organization ID (for example `org_abc123`). Must match the organization f
 
 `users` array Required
 
-Non-empty list of moves (at most 500 per request). Each element is an object with:
+Non-empty list of entries (at most 500 per request). Each element is an object with a user ID and exactly one team field (`teamIds` or `destinationTeamId`):
 
-- `userId` number | string: ID of the user to move. Accepts either an integer numeric ID (for example `12345`) or a string ID (for example `"user_abc123"`).
-- `destinationTeamId` number: Integer team ID for the destination. Must be a team linked to the organization.
+- `userId` number | string: ID of the user to sync. Accepts either an integer numeric ID (for example `12345`) or a string ID (for example `"user_abc123"`).
+- `teamIds` number\[]: The complete set of org-linked team IDs the user should belong to after the sync. Memberships are reconciled to exactly this set. Any team not listed is removed. Include the user's current teams to keep them (for example `[7, 8]`). At most 100 teams per entry.
+- `destinationTeamId` number: Field for syncing to a single team. Setting `destinationTeamId: NNN` is the same as sending `teamIds: [NNN]`. The user's teams are set to exactly that one team. Must be a team linked to the organization.
+
+Provide exactly one of `teamIds` or `destinationTeamId` per entry.
 
 #### Success response (HTTP 200)
 
 `results` array
 
-One entry per requested move, in order. Each object includes `userId`, `destinationTeamId`, and either `status: &quot;success&quot;` or `status: &quot;error&quot;` with `errorMessage` when that row failed.
+One entry per requested sync, in order. Each object includes `userId`, the resolved `teamIds` for that entry, and either `status: &quot;success&quot;` or `status: &quot;error&quot;` with `errorMessage` when that row failed. Entries sent with `destinationTeamId` also echo `destinationTeamId` (the first team in `teamIds`).
 
 `successCount` number
 
@@ -80,10 +183,13 @@ Number of rows with `status: &quot;error&quot;`.
 - **Availability**: Enterprise only
 - **Authentication**: Organization API key (Basic auth). The key must include the **`members:*`** scope for this route; keys with **`admin:*`** also work because admin implies members.
 - **Organization match**: The `organizationId` in the body must be the same organization as the API key; otherwise the request is rejected.
-- The target user must already be a member of the organization for a move to succeed.
-- The destination team must be linked to the organization for a move to succeed.
-- If one move in `users` fails, others can still succeed; check each `results` entry’s `status` and `errorMessage`.
-- **Batch size**: A single request may include up to 500 moves. Send additional batches in separate requests if needed.
+- **Team set**: `teamIds` is the exact set of teams the user should belong to after the call. The user will be removed from any team NOT listed, so include the user's existing teams in the set to retain them.
+- **One team field per entry**: Provide exactly one of `teamIds` or `destinationTeamId` for each entry.
+- **Per-entry team cap**: An entry's `teamIds` may list at most 100 teams.
+- The target user must already be a member of the organization for a sync to succeed.
+- Every team in the entry must be linked to the organization for the sync to succeed.
+- If one entry in `users` fails, others can still succeed; check each `results` entry’s `status` and `errorMessage`.
+- **Batch size**: A single request may include up to 500 entries. Send additional batches in separate requests if needed.
 
 ```bash
 curl -X POST https://api.cursor.com/organizations/team-memberships/sync \
@@ -92,11 +198,13 @@ curl -X POST https://api.cursor.com/organizations/team-memberships/sync \
   -d '{
     "organizationId": "org_abc123",
     "users": [
-      { "userId": 12345, "destinationTeamId": 7 },
+      { "userId": 12345, "teamIds": [7, 8] },
       { "userId": "user_abc123", "destinationTeamId": 8 }
     ]
   }'
 ```
+
+The first entry links user `12345` to exactly teams `7` and `8` (adding either team the user isn't already on, and removing any other linked team). The second entry uses `destinationTeamId`, which is the same as sending `teamIds: [8]`.
 
 **Response:**
 
@@ -105,11 +213,12 @@ curl -X POST https://api.cursor.com/organizations/team-memberships/sync \
   "results": [
     {
       "userId": 12345,
-      "destinationTeamId": 7,
+      "teamIds": [7, 8],
       "status": "success"
     },
     {
       "userId": "user_abc123",
+      "teamIds": [8],
       "destinationTeamId": 8,
       "status": "success"
     }
@@ -195,7 +304,7 @@ Most thrown API errors use HTTP **401**, **403**, or **400** and a JSON body sha
 }
 ```
 
-**Per-row failures (HTTP 200)**: Validation or business rules for a single move are returned in `results` with `status: "error"` and `errorMessage`. Invalid `userId` / `destinationTeamId` types use `0` for the invalid field in the row:
+**Per-row failures (HTTP 200)**: Validation or business rules for a single entry are returned in `results` with `status: "error"` and `errorMessage`. The examples below use `destinationTeamId`, so the rows echo `destinationTeamId`; entries sent with `teamIds` echo `teamIds` instead. Invalid `userId` / `destinationTeamId` types use `0` for the invalid field in the row:
 
 ```json
 {
@@ -242,7 +351,7 @@ Most thrown API errors use HTTP **401**, **403**, or **400** and a JSON body sha
 }
 ```
 
-**Per-row failures (HTTP 200)**: From the move logic when inputs are well-typed but the move cannot be applied:
+**Per-row failures (HTTP 200)**: From the sync logic when inputs are well-typed but the change cannot be applied:
 
 ```json
 {
@@ -373,9 +482,9 @@ Retrieve detailed usage events across the teams linked to your organization. Thi
 
 By default, events from **all** teams in the organization pool are returned. Pass `teamIds` to restrict the response to specific teams.
 
-**Cost Calculation**: Sum the `chargedCents` field across events to reconcile event-level costs with the per-team `usedCents` breakdown from [`/organizations/pooled-usage`](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-pooled-usage). This field includes both the model cost and the Cursor Token Rate (if applicable).
+**Cost Calculation**: Sum the `chargedCents` field across events to reconcile event-level costs with the per-team `usedCents` breakdown from [`/organizations/pooled-usage`](https://cursor.com/docs/account/organizations/organization-admin-api.md#get-pooled-usage). This field includes both the model cost and the Cursor Token Rate when a request is eligible for the rate.
 
-The `cursorTokenFee` field represents the Cursor Token Rate and is only present for teams with Cursor Token Rate enabled. For request-based enterprise accounts, this field may not appear in the response.
+The `cursorTokenFee` field represents the Cursor Token Rate and is only present when the rate applies to a non-Auto third-party model request. Auto requests, first-party models such as Composer 2.5 and Grok 4.5, and request-based enterprise accounts do not include this fee.
 
 #### Request body
 
@@ -438,8 +547,8 @@ Each object in `usageEvents` contains the same fields as the team endpoint, plus
   - `cacheReadTokens` number - Tokens read from cache
   - `totalCents` number - Total model cost in cents
   - `discountPercentOff` number | undefined - Discount percentage applied, if any
-- `chargedCents` number - Total amount charged in cents for this event (model cost + Cursor Token Rate if applicable)
-- `cursorTokenFee` number | undefined - The Cursor Token Rate in cents (only present for teams with token rate enabled)
+- `chargedCents` number - Total amount charged in cents for this event. For non-Auto third-party model requests, this includes model cost plus the Cursor Token Rate.
+- `cursorTokenFee` number | undefined - Cursor Token Rate in cents. Present only when the rate applies to a non-Auto third-party model request.
 
 ```bash
 # Events across all teams in the organization pool

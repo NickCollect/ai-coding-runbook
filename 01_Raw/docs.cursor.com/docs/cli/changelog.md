@@ -1,12 +1,44 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-07-06T05:04:26.981022+00:00
+fetched_at: 2026-07-13T04:25:37.429435+00:00
 fetch_method: mintlify_md
 ---
 
 # CLI Changelog
 
 The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent --version` to check your installed version, and `agent update` to upgrade in place.
+
+## July 6, 2026 release
+
+### Models and skills
+
+- **New installs start on Auto.** Fresh CLI installs default to Auto model routing. Existing choices are unchanged; switch anytime with `/model` or `--model`.
+- **Switch models instantly from slash commands.** Type a shortcut like `/opus` or `/composer` to jump straight to a model, no picker needed; each family shortcut remembers your last choice. `/fast` toggles Fast when the current model supports it. Disable shortcuts under Model slash commands in `/config`.
+- **Keep model-only skills out of slash commands.** Set `user-invocable: false` in a skill's `SKILL.md` frontmatter to hide it from `/` autocomplete and typed `/skill-name` resolution while keeping it available to the model.
+
+### Reliability
+
+- **Fixed memory growth from per-turn cancellation state.** Long chats no longer accumulate abort listeners and controllers; each turn releases them when it finishes.
+- **Quitting returns you to the shell promptly.** Exit no longer waits on MCP servers or other background tasks to wind down, and quitting from the workspace-trust prompt no longer flashes "Trusting workspace…".
+- **Fixed config corruption when running several agents at once.** Concurrent CLI processes could interleave writes to `cli-config.json` and block later startups. Each write now stages to its own temp file before an atomic rename.
+
+### Sessions and subagents
+
+- **Resume chats from any directory.** `agent ls`, `agent --resume`, and `/resume` open All chats across workspaces by default. Use Left/Right to switch to This workspace; chats from other directories show a folder label, and resuming one loads the full conversation instead of an empty one.
+- **Subagents keep their context across resumes.** Completed subagents persist checkpoints, so resuming one restores its prior context instead of starting empty. Background subagents include their final message in the completion notification, and resuming an unavailable subagent fails clearly.
+
+### Login and MCP
+
+- **Log in from another device with a QR code.** During `agent login` or first-run onboarding, press `q` to reveal a QR code for the same login URL, then scan it from a phone to finish authentication over SSH without copying a long link. Narrow terminals and non-interactive sessions continue to show the URL only.
+- **Filter MCP servers and see login start immediately.** Type to filter the `/mcp` server list. Selecting Login shows "Preparing login…" right away, and SSH OAuth instructions no longer use `ssh -N`, which failed through some proxies.
+- **Fixed MCP allowlist and approval bugs.** Team network allowlists now accept HTTP(S) origins with explicit ports, such as local servers on non-default ports. Personal MCP tool approvals work again when team admin tool controls are empty or unset.
+
+### Input and terminal
+
+- **Long prompts stay within six visual lines.** The prompt bar and queued-message editor scroll to keep the cursor visible instead of growing without bound. Large pastes stay collapsed as a pill when recalled from history while the agent receives their full content, and Working appears immediately after you submit.
+- **Fixed terminal state after Ctrl+Z.** Suspending the CLI restores your shell's keyboard modes until you `fg`. Backspace no longer swallows the letters typed right after it when the interface briefly stalls, and typing stays responsive while the agent streams output.
+- **Fixed queued sudo prompts.** Each sudo request opens a fresh password prompt instead of sticking on "Authenticating…". Escape and Ctrl+C cancel during submission, and the mask uses `•` instead of `*` to avoid misalignment with terminal font ligatures.
+- **Debug mode cards use debug mode colors.** The reproduction-steps decision card uses the red debug accent instead of plan-mode yellow, so the active mode stays clear.
 
 ## June 29, 2026 release
 

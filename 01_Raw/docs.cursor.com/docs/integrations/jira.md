@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/jira
-fetched_at: 2026-06-22T06:23:25.573302+00:00
+fetched_at: 2026-07-13T04:25:38.488243+00:00
 fetch_method: mintlify_md
 ---
 
@@ -97,7 +97,7 @@ Examples:
 
 - `@Cursor please investigate this regression`
 - `@Cursor repo=acme/backend branch=release fix this before the release cut`
-- `@Cursor model=gpt-5.5 and update the related tests`
+- `@Cursor model=gpt-5.6-sol and update the related tests`
 
 ### Follow-up instructions
 

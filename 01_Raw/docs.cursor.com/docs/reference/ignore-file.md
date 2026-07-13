@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/ignore-file
-fetched_at: 2026-05-05T19:55:43.453655+00:00
+fetched_at: 2026-07-13T04:25:39.419660+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,8 +10,7 @@ Cursor reads and indexes your project's codebase to power its features. Control 
 
 Cursor blocks access to files listed in `.cursorignore` from:
 
-- Semantic search
-- Code accessible by Tab, [Agent](https://cursor.com/docs/agent/overview.md), and Inline Edit
+- Code accessible by [Agent](https://cursor.com/docs/agent/overview.md), Tab, and Inline Edit
 - Code accessible via [@ mention references](https://cursor.com/docs/agent/prompting.md)
 
 The terminal and MCP server tools used by Agent cannot block access to code
@@ -49,6 +48,8 @@ dist/           # Directory
 ### Hierarchical ignore
 
 Enable `Cursor Settings` > `Features` > `Editor` > `Hierarchical Cursor Ignore` to search parent directories for `.cursorignore` files.
+
+Starting in Cursor 3.11, this setting moves to `Cursor Settings` > `Indexing` > `Ignore Files` > `Hierarchical Cursor Ignore`.
 
 ## Global ignore files
 

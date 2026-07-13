@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics-api
-fetched_at: 2026-06-29T05:25:13.028057+00:00
+fetched_at: 2026-07-13T04:25:36.914397+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 The Analytics API provides comprehensive insights into your team's Cursor usage, including AI-assisted coding metrics, active users, model usage, and more.
 
-- The Analytics API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication). You must generate an admin-scoped API key (with `admin:*` scope) from [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api).
+- The Analytics API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication). Most endpoints require an admin-scoped API key with `admin:*` scope. Bugbot review analytics require `read:*` scope. Generate a key from [Cursor Dashboard → API Keys](https://cursor.com/dashboard/api).
 - For details on authentication, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
 - **Availability**: Only for enterprise teams
 
@@ -1019,6 +1019,8 @@ curl -X GET "https://api.cursor.com/analytics/team/leaderboard?users=alice@examp
 
 Get per-PR Bugbot review analytics for your team, including issue counts by severity and how many issues were resolved.
 
+For per-review data including billed cost and individual findings, use [Bugbot review analytics](https://cursor.com/docs/account/teams/analytics-api.md#bugbot-review-analytics).
+
 #### Parameters
 
 `startDate` string
@@ -1111,6 +1113,172 @@ curl -X GET "https://api.cursor.com/analytics/team/bugbot?page=2&pageSize=50" \
   }
 }
 ```
+
+### Bugbot review analytics
+
+/analytics/team/bugbot-reviews
+
+Return one item per completed Bugbot review, including the reviewed commit, findings count, billed cost, and per-finding resolution data.
+
+Includes both posted reviews and dry-run reviews. Posted findings are identified by `comment_id` and `resolution_status`. Dry-run findings return `title`, `description`, and `locations` instead because nothing is posted to the SCM.
+
+Requires an API key with `read:*` scope.
+
+#### Parameters
+
+`startDate` string
+
+Start of the analytics range. Defaults to 7 days ago. See [Date Formats](https://cursor.com/docs/account/teams/analytics-api.md#date-formats).
+
+`endDate` string
+
+End of the analytics range. Defaults to now. See [Date Formats](https://cursor.com/docs/account/teams/analytics-api.md#date-formats).
+
+`repo` string
+
+Optional repository filter in `host/owner/repo` form. Protocol and `.git` suffix are optional.
+
+`prNumber` number
+
+Optional pull request or merge request number.
+
+`page` number
+
+Page number for pagination (1-indexed). Default: `1`.
+
+`pageSize` number
+
+Number of reviews per page. Default: `100`, max: `250`.
+
+`dryRun` boolean
+
+Optional filter for dry-run (`true`) or posted (`false`) reviews only.
+
+```bash
+curl --get https://api.cursor.com/analytics/team/bugbot-reviews \
+  -u YOUR_API_KEY: \
+  --data-urlencode 'startDate=2026-06-01' \
+  --data-urlencode 'endDate=2026-06-29' \
+  --data-urlencode 'repo=github.com/your-org/your-repo' \
+  --data-urlencode 'prNumber=42' \
+  --data-urlencode 'page=1' \
+  --data-urlencode 'pageSize=100'
+```
+
+```bash
+curl --get https://api.cursor.com/analytics/team/bugbot-reviews \
+  -u YOUR_API_KEY: \
+  --data-urlencode 'dryRun=true' \
+  --data-urlencode 'repo=github.com/your-org/your-repo' \
+  --data-urlencode 'prNumber=42'
+```
+
+**Response (posted review):**
+
+```json
+{
+  "data": [
+    {
+      "request_id": "6e0d261c-86a2-4383-89f0-9162c1c10662",
+      "timestamp": "2026-06-29T19:42:18.000Z",
+      "repo": "github.com/your-org/your-repo",
+      "repo_node_id": "R_kgDOABCDEF",
+      "pr_number": 42,
+      "commit_sha": "9f3c2a1b7d8e4f5061728394a5b6c7d8e9f0a1b2",
+      "bugs_found": 2,
+      "cost_cents": 42.5,
+      "dry_run": false,
+      "publication_status": "posted",
+      "bugs": [
+        {
+          "comment_id": "2147483999",
+          "resolution_status": "resolved",
+          "severity": "high"
+        },
+        {
+          "comment_id": "2147484000",
+          "resolution_status": "unresolved",
+          "severity": "medium"
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "pageSize": 100,
+    "totalItems": 1,
+    "totalPages": 1,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  },
+  "params": {
+    "metric": "bugbot-reviews",
+    "teamId": 12345,
+    "startDate": "2026-06-01",
+    "endDate": "2026-06-29",
+    "repo": "github.com/your-org/your-repo",
+    "prNumber": 42,
+    "page": 1,
+    "pageSize": 100
+  }
+}
+```
+
+**Response (dry-run review):**
+
+```json
+{
+  "data": [
+    {
+      "request_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "timestamp": "2026-06-29T20:15:03.000Z",
+      "repo": "github.com/your-org/your-repo",
+      "repo_node_id": "R_kgDOABCDEF",
+      "pr_number": 42,
+      "commit_sha": "9f3c2a1b7d8e4f5061728394a5b6c7d8e9f0a1b2",
+      "bugs_found": 1,
+      "cost_cents": null,
+      "dry_run": true,
+      "publication_status": "dry_run",
+      "bugs": [
+        {
+          "comment_id": null,
+          "resolution_status": null,
+          "severity": "medium",
+          "title": "Unbounded retry loop",
+          "description": "retry() recurses without a ceiling.",
+          "locations": [
+            { "file": "src/net.ts", "start_line": 5, "end_line": 9 }
+          ]
+        }
+      ]
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "pageSize": 100,
+    "totalItems": 1,
+    "totalPages": 1,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  },
+  "params": {
+    "metric": "bugbot-reviews",
+    "teamId": 12345,
+    "startDate": "2026-06-01",
+    "endDate": "2026-06-29",
+    "repo": "github.com/your-org/your-repo",
+    "prNumber": 42,
+    "dryRun": true,
+    "page": 1,
+    "pageSize": 100
+  }
+}
+```
+
+`repo_node_id`, `pr_number`, `commit_sha`, `cost_cents`, `bugs[].comment_id`, `bugs[].resolution_status`, and `bugs[].severity` may be `null` when unavailable. `cost_cents` is `null` when the review is not billed separately. For dry-run reviews, `bugs[].title`, `bugs[].description`, and `bugs[].locations` carry the finding content. Dry-run findings have `comment_id: null` and `resolution_status: null` because nothing is posted to the SCM.
+
+To trigger a dry-run review, call `POST /bugbot/review` with `"dryRun": true`. See the [Bugbot API docs](https://cursor.com/docs/bugbot.md#trigger-a-review).
 
 ***
 

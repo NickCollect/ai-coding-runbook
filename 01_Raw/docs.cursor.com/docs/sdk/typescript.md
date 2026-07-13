@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-07-06T05:04:28.597465+00:00
+fetched_at: 2026-07-13T04:25:39.510147+00:00
 fetch_method: mintlify_md
 ---
 
@@ -86,7 +86,7 @@ The SDK requires Node.js 22.13 or later. It ships per-platform `@cursor/sdk-<os>
 
 Importing `@cursor/sdk` does not eagerly load the local agent stack. The local executor loads on the first local `acquire`, so cloud-only and type-only consumers don't pay the local import cost. The first local agent in a process pays a one-time import, then the module stays cached.
 
-The current package, `@cursor/sdk@1.0.22`, publishes self-contained `.d.ts` files, so types resolve without pulling in unpublished workspace packages. After upgrading, re-run your typecheck. Stream types such as `TurnEndedUpdate` resolve to real types instead of `any`.
+The current package, `@cursor/sdk@1.0.23`, publishes self-contained `.d.ts` files, so types resolve without pulling in unpublished workspace packages. After upgrading, re-run your typecheck. Stream types such as `TurnEndedUpdate` resolve to real types instead of `any`.
 
 ## Quick start
 
@@ -256,6 +256,7 @@ interface Run {
   readonly agentId: string;
   readonly status: RunStatus;
   readonly result?: string;
+  readonly error?: RunError;
   readonly model?: ModelSelection;
   readonly durationMs?: number;
   readonly usage?: TokenUsage;
@@ -276,6 +277,11 @@ interface RunGitInfo {
   branches: Array<{ repoUrl: string; branch?: string; prUrl?: string }>;
 }
 
+interface RunError {
+  message: string;
+  code?: string;
+}
+
 interface TokenUsage {
   inputTokens: number;
   outputTokens: number;
@@ -290,6 +296,7 @@ interface RunResult {
   requestId?: string;
   status: "finished" | "error" | "cancelled";
   result?: string;
+  error?: RunError;
   model?: ModelSelection;
   durationMs?: number;
   usage?: TokenUsage;
@@ -343,6 +350,7 @@ const result = await run.wait();
 
 console.log(result.status);      // "finished" | "error" | "cancelled"
 console.log(result.result);      // final assistant text, if any
+console.log(result.error);       // { message, code? } when the run failed
 console.log(result.model);       // resolved ModelSelection used for this run
 console.log(result.durationMs);
 console.log(result.usage);       // cumulative TokenUsage, or undefined if unavailable

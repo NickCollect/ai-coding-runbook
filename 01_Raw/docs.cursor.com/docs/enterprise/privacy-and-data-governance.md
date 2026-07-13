@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/privacy-and-data-governance
-fetched_at: 2026-06-15T06:17:45.357407+00:00
+fetched_at: 2026-07-13T04:25:38.292733+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,31 +8,11 @@ fetch_method: mintlify_md
 
 Understanding how data flows through Cursor is critical for security reviews and compliance assessments. This documentation explains what data goes where, what guarantees you have, and where that data lives geographically.
 
-## Three data flows
+## Two data flows
 
-There are three ways data leaves your local environment when using Cursor:
+There are two ways data leaves your local environment when using Cursor:
 
-### 1. The indexing process
-
-When you open a project in Cursor, we create embeddings that represent your code. These embeddings power semantic search across your codebase.
-
-**What gets sent:**
-
-- Your code, temporarily, to create embeddings
-- Nothing is stored; embeddings are generated and the original code is discarded
-
-**What gets stored:**
-
-- One-way mathematical embeddings (vectors) that represent code semantics
-- Obfuscated file paths
-- Line numbers
-
-**How it works:**
-When you ask a question or use Cmd K, we create an embedding from your request and search for similar embeddings in the vector database. The search returns obfuscated file paths and line numbers. We then look up the actual code on your local machine using those coordinates.
-
-The vector database never sees your raw code. It only stores mathematical representations that can't be reverse-engineered back to source code.
-
-### 2. LLM requests
+### 1. LLM requests
 
 When you use AI features, we send prompts and code context to language model providers like OpenAI, Anthropic, and Google. If you are using Cursor's custom models (e.g. Composer), your data may also be processed by our inference providers. See our list of [sub-processors](https://trust.cursor.com/subprocessors).
 
@@ -40,7 +20,7 @@ When you use AI features, we send prompts and code context to language model pro
 
 Privacy Mode is on by default for Enterprise teams. See [Privacy Overview](https://cursor.com/privacy-overview) for details.
 
-### 3. Cloud Agents
+### 2. Cloud Agents
 
 Cloud Agents are the only feature that requires Cursor to store code. Unlike the indexing process or LLM requests, Cloud Agents need access to your repository over time to make changes.
 

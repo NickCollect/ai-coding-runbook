@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/customizing/aws-bedrock
-fetched_at: 2026-05-05T19:55:39.033131+00:00
+fetched_at: 2026-07-13T04:25:38.119811+00:00
 fetch_method: mintlify_md
 ---
 
@@ -75,6 +75,8 @@ Before using a model, you must enable it in the AWS Bedrock console:
 4. Select the models you want to use
 5. Click **Save changes**
 
+In newer AWS console versions the **Model access** page has been replaced by the **Model catalog**. To enable a model there, open it in the Model catalog and invoke it once (for example, via **Open in Playground**) using an account with AWS Marketplace permissions. This activates the model account-wide.
+
 ### Step 4: Configure in the dashboard
 
 IAM role configuration is only available through the [Cursor dashboard](https://cursor.com/dashboard), not in the IDE settings.
@@ -93,6 +95,20 @@ IAM role configuration is only available through the [Cursor dashboard](https://
 5. Click **Validate & Save** to test the connection
 
 If you don't see the Bedrock IAM Role section, check with your team admin. On enterprise plans, admins control which settings are visible to team members.
+
+### Step 5: Enable Bedrock in the IDE
+
+Validating the IAM role does not change routing by itself. Each user must enable Bedrock in their own Cursor client:
+
+1. Open `Cursor Settings` > `Models`
+2. Scroll to the **AWS Bedrock** section (it shows that your team has configured AWS Bedrock access)
+3. Turn the toggle on. It is off by default for every user, even after the team IAM role is validated.
+
+Once the toggle is on, Bedrock models appear in the model picker under their raw Bedrock IDs (for example, `us.anthropic.claude-sonnet-5`). Select one of these entries explicitly to route requests through Bedrock. If your team configured a non-US region, the entries use the matching prefix (`eu.`, `apac.`, or `ca.`) instead of `us.`.
+
+Standard model names (for example, "Claude Sonnet 5") and Auto continue to route through Cursor's model providers. Only requests made with an explicit Bedrock model ID selected go through your Bedrock account.
+
+While the Bedrock toggle is on, requests are routed through your Bedrock connection. Selecting a model that is not available as a Bedrock ID can fail with a "not supported by bedrock" error. Turn the toggle off to switch back to Cursor-hosted models.
 
 ## External ID
 
@@ -124,6 +140,23 @@ Alternatively, you can use AWS access keys instead of an IAM role. Enter your AW
 - Confirm Bedrock is available in your selected region
 - Verify the model is enabled in that specific region
 - Some models are only available in certain regions
+
+### Requests still route through Cursor after validation
+
+- Make sure the **AWS Bedrock** toggle is enabled in `Cursor Settings` > `Models` (it is off by default for each user)
+- Select an explicit Bedrock model ID (e.g., `us.anthropic.claude-sonnet-5`) in the model picker; standard model names and Auto route through Cursor
+- If the AWS Bedrock section or the model entries don't appear, restart Cursor to refresh the team configuration
+
+## Usage reporting
+
+Bedrock-routed requests still appear in the [dashboard usage page](https://cursor.com/docs/account/teams/dashboard.md) and the [Admin API](https://cursor.com/docs/account/teams/admin-api.md). In usage events:
+
+- The `kind` field is set to the User API Key category, since Bedrock requests are recorded as bring-your-own-key usage.
+- Model cost is near zero because inference is billed to your AWS account.
+- On plans with the [Cursor Token Rate](https://cursor.com/docs/models-and-pricing.md), the rate still applies to Bedrock requests and appears in the `cursorTokenFee` field. On other plans, such as request-based enterprise accounts, `cursorTokenFee` is omitted.
+- The `chargedCents` field holds the total charged by Cursor for the event: model cost plus the Cursor Token Rate, if applicable. On plans with the token rate, Bedrock events can carry a non-trivial `chargedCents` even when model cost is near zero. Sum `chargedCents` across events to reconcile with `/teams/spend` totals.
+
+The AWS inference cost is not surfaced in Cursor; use AWS billing or Cost Explorer for that.
 
 ## Related
 

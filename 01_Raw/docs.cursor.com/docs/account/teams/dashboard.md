@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/dashboard
-fetched_at: 2026-07-06T05:04:26.521893+00:00
+fetched_at: 2026-07-13T04:25:37.007671+00:00
 fetch_method: mintlify_md
 ---
 
@@ -143,9 +143,7 @@ Connect Cursor with your favorite tools and services. Configure integrations wit
 
 ## Cloud Agents
 
-![Cloud agents](/docs-static/images/account/team/integrations.png)
-
-Monitor and manage cloud agents running in your workspace. View agent status, logs, and resource usage.
+Monitor and manage cloud agents running in your workspace. View agent status, logs, and resource usage. See [Cloud Agent settings](https://cursor.com/docs/cloud-agent/settings.md) for configuration details.
 
 ## Bugbot
 

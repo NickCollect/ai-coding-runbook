@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/third-party-hooks
-fetched_at: 2026-05-05T19:55:43.771015+00:00
+fetched_at: 2026-07-13T04:25:39.573660+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Cursor can load and execute hooks configured for Claude Code, allowing you to us
 
 To enable Claude Code hooks compatibility:
 
-1. **Enable Third-party skills** in Cursor Settings → Features → Third-party skills
+1. **Enable Third-party skills** in Cursor Settings → Rules, Skills, Subagents → Include third-party Plugins, Skills, and other configs
 2. The feature must be enabled for your account
 
 ### Configuration Locations

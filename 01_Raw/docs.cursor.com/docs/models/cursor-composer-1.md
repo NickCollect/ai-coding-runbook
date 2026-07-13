@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/cursor-composer-1
-fetched_at: 2026-05-05T19:55:41.434736+00:00
+fetched_at: 2026-07-13T04:25:38.871687+00:00
 fetch_method: mintlify_md
 ---
 
-We strongly recommend using [Composer 1.5](https://cursor.com/docs/models/cursor-composer-1-5.md). It's smarter and includes more usage on individual plans.
+We strongly recommend using [Composer 2.5](https://cursor.com/docs/models/cursor-composer-2-5.md). It's smarter and includes more usage on individual plans.
 
 ## Tools
 

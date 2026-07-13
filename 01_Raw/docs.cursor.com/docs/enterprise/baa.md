@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/baa
-fetched_at: 2026-05-05T19:55:39.043826+00:00
+fetched_at: 2026-07-13T04:25:38.039756+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,6 +43,7 @@ The listed Eligible Services are covered for Enterprise customers with Privacy M
 
 - Desktop IDE, including Agent, Tab, Edit, local agent mode, and inline edit
 - Cloud Agents and self-hosted Cloud Agents
+- Cursor for iOS
 - CLI
 - Tab
 - BugBot

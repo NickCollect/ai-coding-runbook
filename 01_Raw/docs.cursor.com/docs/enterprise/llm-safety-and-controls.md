@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/llm-safety-and-controls
-fetched_at: 2026-06-29T05:25:13.925016+00:00
+fetched_at: 2026-07-13T04:25:38.138627+00:00
 fetch_method: mintlify_md
 ---
 
@@ -106,10 +106,8 @@ Not all files in your repositories should be accessible to AI. Configuration fil
 
 The `.cursorignore` file works like `.gitignore` but controls what Cursor can access. Files matching patterns in `.cursorignore` are excluded from:
 
-- [Semantic search](https://cursor.com/docs/agent/tools/search.md)
 - Agent file reading
 - Context selection
-- Semantic search
 
 `.cursorignore` is not a security boundary. It's a convenience feature to exclude files from AI processing, but:
 
@@ -247,7 +245,7 @@ However, this approach significantly slows down the development experience. Agen
 
 ### Model provider safety
 
-All model providers (OpenAI, Anthropic, Google, xAI) implement safety systems that filter harmful content. These systems reject prompts requesting harmful information, refuse to generate dangerous code, and filter outputs for safety.
+All model providers (OpenAI, Anthropic, Google, SpaceXAI) implement safety systems that filter harmful content. These systems reject prompts requesting harmful information, refuse to generate dangerous code, and filter outputs for safety.
 
 Cursor works with providers to ensure models meet safety standards before deployment to users. Providers continuously evaluate models for safety issues. However, these are not security boundaries. Safety systems can be bypassed or tricked. Always implement your own controls through hooks and access policies.
 

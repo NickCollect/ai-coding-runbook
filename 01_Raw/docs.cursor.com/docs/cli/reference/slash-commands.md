@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/slash-commands
-fetched_at: 2026-06-22T06:23:24.773077+00:00
+fetched_at: 2026-07-13T04:25:37.781641+00:00
 fetch_method: mintlify_md
 ---
 
@@ -21,7 +21,6 @@ fetch_method: mintlify_md
 | `/resume`                              | Open recent chats and resume one                                                                                       |
 | `/fork`                                | Fork the current chat into a new session                                                                               |
 | `/summarize`                           | Summarize the conversation to reduce context. `/compress` is an alias.                                                 |
-| `/context`                             | Show what's consuming the context window, broken down by category                                                      |
 | `/rewind`                              | Jump back to a previous message                                                                                        |
 | `/vim`                                 | Toggle Vim keys                                                                                                        |
 | `/line-numbers`                        | Toggle line numbers in code blocks                                                                                     |

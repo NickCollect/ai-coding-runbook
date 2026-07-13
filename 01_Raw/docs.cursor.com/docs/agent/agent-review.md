@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/agent-review
-fetched_at: 2026-05-05T19:55:35.921178+00:00
+fetched_at: 2026-07-13T04:25:37.071559+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,6 +15,8 @@ To configure Agent Review:
 1. Open **Cursor Settings**
 2. Go to **Agents**
 3. Find **Agent Review** and configure your preferences
+
+Starting in Cursor 3.11, this setting moves to **Git & PRs** > **Pull Requests**.
 
 Agent Review also reads repository rules from `BUGBOT.md` files. To set up these rule files, see [BugBot docs](https://cursor.com/docs/bugbot.md).
 
