@@ -3,7 +3,9 @@ use codex_core::StartThreadOptions;
 use codex_core::ThreadConfigSnapshot;
 use codex_core::config::AgentRoleConfig;
 use codex_features::Feature;
+use codex_models_manager::bundled_models_response;
 use codex_protocol::ThreadId;
+use codex_protocol::config_types::ReasoningSummary;
 use codex_protocol::models::PermissionProfile;
 use codex_protocol::openai_models::ReasoningEffort;
 use codex_protocol::protocol::AskForApproval;
@@ -55,7 +57,7 @@ const TURN_0_FORK_PROMPT: &str = "seed fork context";
 const TURN_1_PROMPT: &str = "spawn a child and continue";
 const TURN_2_NO_WAIT_PROMPT: &str = "follow up without wait";
 const CHILD_PROMPT: &str = "child: do work";
-const INHERITED_MODEL: &str = "gpt-5.3-codex";
+const INHERITED_MODEL: &str = "gpt-5.2";
 const INHERITED_REASONING_EFFORT: ReasoningEffort = ReasoningEffort::XHigh;
 const REQUESTED_MODEL: &str = "gpt-5.4";
 const REQUESTED_REASONING_EFFORT: ReasoningEffort = ReasoningEffort::Low;
@@ -979,6 +981,80 @@ async fn spawn_agent_requested_model_and_reasoning_override_inherited_settings_w
     Ok(())
 }
 
+#[test_case(true, false; "unsupported child")]
+#[test_case(false, true; "supported child")]
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn spawned_agent_uses_summary_support_for_final_model(
+    parent_supports_summary: bool,
+    child_supports_summary: bool,
+) -> Result<()> {
+    skip_if_no_network!(Ok(()));
+
+    let server = start_mock_server().await;
+    let mut model_catalog = bundled_models_response().expect("bundled models.json should parse");
+    for (slug, supports_summary) in [
+        (INHERITED_MODEL, parent_supports_summary),
+        (REQUESTED_MODEL, child_supports_summary),
+    ] {
+        let model = model_catalog
+            .models
+            .iter_mut()
+            .find(|model| model.slug == slug)
+            .unwrap_or_else(|| panic!("{slug} should exist in bundled models.json"));
+        model.supports_reasoning_summary_parameter = supports_summary;
+    }
+
+    let (_test, _spawned_id, child_request_log) = setup_turn_one_with_custom_spawned_child(
+        &server,
+        json!({
+            "message": CHILD_PROMPT,
+            "model": REQUESTED_MODEL,
+        }),
+        /*child_response_delay*/ Some(Duration::from_secs(1)),
+        /*wait_for_parent_notification*/ false,
+        move |builder| {
+            builder.with_config(move |config| {
+                config.model_catalog = Some(model_catalog);
+                config.model_reasoning_summary = Some(ReasoningSummary::Detailed);
+                config
+                    .features
+                    .enable(Feature::ConcurrentReasoningSummaries)
+                    .expect("test config should allow feature update");
+            })
+        },
+    )
+    .await?;
+
+    let deadline = Instant::now() + Duration::from_secs(2);
+    let child_body = loop {
+        if let Some(body) = child_request_log
+            .requests()
+            .iter()
+            .map(ResponsesRequest::body_json)
+            .find(|body| body["model"] == REQUESTED_MODEL)
+        {
+            break body;
+        }
+        if Instant::now() >= deadline {
+            anyhow::bail!("timed out waiting for the child request");
+        }
+        sleep(Duration::from_millis(10)).await;
+    };
+    assert_eq!(child_body["model"], json!(REQUESTED_MODEL));
+    let expected_reasoning = if child_supports_summary {
+        json!({"effort": "medium", "summary": "detailed"})
+    } else {
+        json!({"effort": "medium"})
+    };
+    assert_eq!(child_body["reasoning"], expected_reasoning);
+    assert_eq!(
+        child_body.get("stream_options").is_some(),
+        child_supports_summary
+    );
+
+    Ok(())
+}
+
 #[tokio::test(flavor = "multi_thread", worker_threads = 2)]
 async fn spawned_multi_agent_v2_child_inherits_parent_developer_context() -> Result<()> {
     skip_if_no_network!(Ok(()));
@@ -1120,10 +1196,22 @@ async fn encrypted_multi_agent_v2_spawn_sends_agent_message_to_child() -> Result
 
     test.submit_turn(TURN_1_PROMPT).await?;
 
-    let child_request = wait_for_requests(&child_request_log)
-        .await?
-        .pop()
-        .expect("child request");
+    // The response mock records candidate requests before its request matcher runs, so wait for
+    // the child request instead of assuming the latest recorded request is already it.
+    let deadline = Instant::now() + Duration::from_secs(2);
+    let child_request = loop {
+        if let Some(request) = child_request_log
+            .requests()
+            .into_iter()
+            .find(|request| !request.inputs_of_type("agent_message").is_empty())
+        {
+            break request;
+        }
+        if Instant::now() >= deadline {
+            anyhow::bail!("timed out waiting for child agent message request");
+        }
+        sleep(Duration::from_millis(10)).await;
+    };
     assert_eq!(
         strip_metadata_from_json(Value::Array(child_request.inputs_of_type("agent_message"))),
         Value::Array(vec![json!({
