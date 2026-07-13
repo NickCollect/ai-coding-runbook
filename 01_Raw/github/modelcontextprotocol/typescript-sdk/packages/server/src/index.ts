@@ -39,6 +39,14 @@ export type { BearerAuthOptions, OAuthTokenVerifier } from './server/middleware/
 export { bearerAuthChallengeResponse, requireBearerAuth, verifyBearerToken } from './server/middleware/bearerAuth';
 export type { HostHeaderValidationResult } from './server/middleware/hostHeaderValidation';
 export { hostHeaderValidationResponse, localhostAllowedHostnames, validateHostHeader } from './server/middleware/hostHeaderValidation';
+// OAuth discovery documents (RFC 9728 / RFC 8414) for web-standard hosts; the
+// Express metadata router in @modelcontextprotocol/express adapts the same core.
+export type { AuthMetadataOptions } from './server/middleware/oauthMetadata';
+export {
+    buildOAuthProtectedResourceMetadata,
+    getOAuthProtectedResourceMetadataUrl,
+    oauthMetadataResponse
+} from './server/middleware/oauthMetadata';
 export type { OriginValidationResult } from './server/middleware/originValidation';
 export { localhostAllowedOrigins, originValidationResponse, validateOriginHeader } from './server/middleware/originValidation';
 export type { PerRequestHTTPServerTransportOptions, PerRequestMessageExtra, PerRequestResponseMode } from './server/perRequestTransport';
@@ -88,7 +96,7 @@ export type { CacheHint, CacheScope } from '@modelcontextprotocol/core-internal'
 // helpers a handler uses to request additional client input by returning an
 // input-required result instead of sending a server→client request, and the
 // typed readers for the responses a retried request carries back.
-export type { InputRequiredSpec, InputResponseView } from '@modelcontextprotocol/core-internal';
+export type { ElicitInputParams, InputRequiredSpec, InputResponseView } from '@modelcontextprotocol/core-internal';
 export { acceptedContent, inputRequired, inputResponse } from '@modelcontextprotocol/core-internal';
 
 // re-export curated public API from core

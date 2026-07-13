@@ -25,6 +25,7 @@ import {
     SUPPORTED_MODERN_PROTOCOL_VERSIONS
 } from '@modelcontextprotocol/core-internal';
 
+import { UnauthorizedError } from './auth';
 import type { ProbeEnvironment, ProbeOutcome, ProbeTransportKind, ProbeVerdict } from './probeClassifier';
 import { classifyProbeOutcome } from './probeClassifier';
 
@@ -170,12 +171,30 @@ type RawProbeReply =
  * starts the transport; `release()` detaches them and arms a one-shot `start()`
  * pass-through so the subsequent Protocol connect (which always starts its
  * transport) takes over the already-started channel without a double-start error.
+ *
+ * Handlers a caller pre-set on the transport before `connect()` are saved on
+ * open and restored on detach, so `Protocol.connect()` finds and chains them
+ * exactly as it would on a plain (non-negotiating) connect. Error and close
+ * events are forwarded to the saved handlers during the window, so negotiation
+ * does not change what a pre-attached observer sees of the transport
+ * lifecycle. (Inbound messages are deliberately NOT forwarded — the window's
+ * drop-guard is a module invariant, and the probe reply has no plain-connect
+ * counterpart; a pre-set `onmessage` is restored at detach and chained by
+ * `Protocol.connect()` like the others.)
  */
 class ProbeWindow {
     private _pending: { id: string; resolve: (reply: RawProbeReply) => void } | undefined;
     private _probeCounter = 0;
+    private readonly _savedOnMessage: Transport['onmessage'];
+    private readonly _savedOnError: Transport['onerror'];
+    private readonly _savedOnClose: Transport['onclose'];
+    private _closeDelivered = false;
 
-    private constructor(private readonly _transport: Transport) {}
+    private constructor(private readonly _transport: Transport) {
+        this._savedOnMessage = _transport.onmessage;
+        this._savedOnError = _transport.onerror;
+        this._savedOnClose = _transport.onclose;
+    }
 
     static async open(transport: Transport): Promise<ProbeWindow> {
         const window = new ProbeWindow(transport);
@@ -196,9 +215,10 @@ class ProbeWindow {
             }
             // Probe-window guard: drop everything else with zero bytes written back (see module doc).
         };
-        transport.onerror = () => {
+        transport.onerror = error => {
             // Out-of-band transport errors are not necessarily fatal; the probe
             // resolves via a send failure, the close signal, or the timeout.
+            window._savedOnError?.(error);
         };
         transport.onclose = () => {
             const pending = window._pending;
@@ -206,8 +226,18 @@ class ProbeWindow {
                 window._pending = undefined;
                 pending.resolve({ kind: 'closed' });
             }
+            // Forward exactly once: after a mid-window close is delivered, the
+            // restored handler must not re-deliver it when cleanup paths call
+            // `transport.close()` again.
+            window._closeDelivered = true;
+            window._savedOnClose?.();
         };
-        await transport.start();
+        try {
+            await transport.start();
+        } catch (error) {
+            window.detach();
+            throw error;
+        }
         return window;
     }
 
@@ -234,12 +264,12 @@ class ProbeWindow {
         });
     }
 
-    /** Detach the window's handlers, leaving the transport's own `start` untouched. */
+    /** Detach the window's handlers, restoring any the caller pre-set, leaving the transport's own `start` untouched. */
     detach(): void {
         this._pending = undefined;
-        this._transport.onmessage = undefined;
-        this._transport.onerror = undefined;
-        this._transport.onclose = undefined;
+        this._transport.onmessage = this._savedOnMessage;
+        this._transport.onerror = this._savedOnError;
+        this._transport.onclose = this._closeDelivered ? undefined : this._savedOnClose;
     }
 
     /** Detach the handlers and arm the one-shot `start()` pass-through for the `Protocol.connect()` handover. */
@@ -293,10 +323,18 @@ function normalizeReply(reply: RawProbeReply, timeoutMs: number): ProbeOutcome {
                 const text = (error.data as { text?: unknown } | undefined)?.text;
                 return { kind: 'http-error', status: error.data.status, body: typeof text === 'string' ? text : undefined };
             }
-            if (error instanceof Error && error.name === 'UnauthorizedError') {
-                // Auth-gated server: not era evidence — the conservative legacy
-                // fallback re-runs the auth flow through the plain connect path.
-                return { kind: 'http-error', status: 401 };
+            const isUnauthorized =
+                error instanceof UnauthorizedError ||
+                // Name fallback for auth errors the brand cannot reach: an
+                // UnauthorizedError from a differently bundled SDK copy at a
+                // skewed version, or an auth middleware's own class.
+                (error instanceof Error && error.name === 'UnauthorizedError');
+            if (isUnauthorized) {
+                // Auth-gated server. (The pre-branding name-string check alone
+                // could never fire for the SDK's own class — it did not set
+                // `.name` — so these send failures fell through to the generic
+                // network-error wrap.)
+                return { kind: 'auth-required', error: error as Error };
             }
             return { kind: 'network-error', error };
         }

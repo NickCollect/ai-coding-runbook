@@ -397,7 +397,9 @@ A few transports need a decision the codemod can't make:
   `mcpAuthMetadataRouter`, `getOAuthProtectedResourceMetadataUrl`, `OAuthTokenVerifier`)
   → `@modelcontextprotocol/express`; the runtime-neutral core (`requireBearerAuth`
   for web-standard `fetch` hosts, `verifyBearerToken`, `bearerAuthChallengeResponse`,
-  `OAuthTokenVerifier`) is also exported from `@modelcontextprotocol/server`. Authorization Server helpers (`mcpAuthRouter`,
+  `OAuthTokenVerifier`, and the discovery serving `oauthMetadataResponse` /
+  `buildOAuthProtectedResourceMetadata` / `getOAuthProtectedResourceMetadataUrl`)
+  is also exported from `@modelcontextprotocol/server`. Authorization Server helpers (`mcpAuthRouter`,
   `OAuthServerProvider`, `ProxyOAuthServerProvider`, `allowedMethods`,
   `authenticateClient`, `metadataHandler`, `createOAuthMetadata`,
   `authorizationHandler` / `tokenHandler` / `revocationHandler` /
@@ -815,6 +817,18 @@ same as every released v1.x — only the import path changes. Framework-agnostic
 (`validateHostHeader`, `localhostAllowedHostnames`, `hostHeaderValidationResponse`) are
 in `@modelcontextprotocol/server`.
 
+Server entries validate the request `Content-Type` by its **parsed media type**, not a
+substring: every POST whose media type is not `application/json` answers
+`415 Unsupported Media Type`. Previously any value merely containing the substring
+passed (for example `text/plain; a=application/json`), case variants were wrongly
+rejected, and the 2026-07-28 entry did not inspect `Content-Type` at all — so
+hand-rolled clients that omit the header (or send a non-JSON type) must now set
+`Content-Type: application/json`. Parameters (`; charset=utf-8`) and unambiguous
+values with malformed parameter sections (`application/json;`) keep working; SDK
+clients always sent the correct header and are unaffected. Custom entries that
+compose `classifyInboundRequest` / `PerRequestHTTPServerTransport` directly must
+apply the same validation themselves — use the exported `isJsonContentType(header)`.
+
 ### Errors
 
 The SDK now distinguishes three error kinds:
@@ -824,6 +838,28 @@ The SDK now distinguishes three error kinds:
 2. **`SdkError`** — local SDK errors that never cross the wire. Uses `SdkErrorCode`.
 3. **`SdkHttpError`** (extends `SdkError`) — HTTP transport errors with typed `.status`
    and `.statusText`.
+
+These classes (and `OAuthError`, the client's `SseError`, `UnauthorizedError`, and the
+OAuth-client-flow error family) brand-match under `instanceof`, so checks work across
+separately bundled copies of the SDK — e.g. a process using both
+`@modelcontextprotocol/client` and `@modelcontextprotocol/server`. Each branded
+hierarchy also exposes the same check as an explicit static guard
+(`SdkError.isInstance(err)`, `ProtocolError.isInstance(err)`, …) that narrows in
+TypeScript — use whichever style your codebase prefers; both read the same brand.
+Fine print (applies equally to `instanceof` and `isInstance`):
+
+- **Version skew** — matching needs *both* copies at a brand-aware release; against an
+  older copy, behavior degrades to plain prototype `instanceof` (false across bundles).
+  During mixed-version rollouts, recognize errors without class identity: match
+  `error.name` plus the class's discriminant field (`code`, `status`), or reconstruct
+  typed protocol errors with `ProtocolError.fromError(code, message, data)`.
+- **Worker boundaries** — `structuredClone`/`postMessage` drop the (symbol-keyed) brand,
+  so a rehydrated error no longer brand-matches; recognize forwarded errors by
+  `code`/`data` instead.
+- **Brands assert identity, not shape** — a matched instance from another SDK version
+  may lack newer fields; read fields defensively.
+- **Re-bundling with property mangling** (`mangle.props` and similar) breaks the brand
+  statics; default esbuild/webpack/terser settings are safe.
 
 The codemod renames `McpError` → `ProtocolError`, `ErrorCode` → `ProtocolErrorCode`
 (routing `RequestTimeout` / `ConnectionClosed` to `SdkErrorCode`), and
@@ -982,7 +1018,8 @@ peers as `-32602` — a server can no longer emit `-32002` on the wire.
 `ProtocolErrorCode.ResourceNotFound` (`-32002`) stays importable as
 receive-tolerated vocabulary — accept both `-32602` and `-32002` from peers.
 `ProtocolError.fromError(code, message, data)` reconstructs the typed subclass from
-code + data alone, so it works across bundle boundaries where `instanceof` doesn't.
+code + data alone — the version-agnostic path: it also works on plain wire shapes and
+against SDK copies that predate brand-matched `instanceof`.
 The default message text changed alongside: v1's unknown-resource error read
 `Resource <uri> not found`; v2's `ResourceNotFoundError` default is
 `Resource not found: <uri>` (the code is unchanged). Tests pinning the exact string
@@ -1636,10 +1673,16 @@ requests, the per-request `_meta.logLevel` envelope key is the filter — see
 
 #### Wire tightening (every era)
 
-- **`CallToolResult.content` is required at the wire boundary.** The `content.default([])`
-  affordance was removed. Tool handlers MUST include `content` (the TypeScript surface
-  always required it; `content: []` is fine). A handler result without it is rejected
-  with `-32602`.
+- **`CallToolResult.content` keeps the v1 parse tolerance on the legacy era.** An
+  inbound result without `content` defaults to `[]` (deployed servers omit it
+  alongside `structuredContent`); 2026-07-28 connections stay strict. Authoring is
+  unchanged and era-independent: the TypeScript surface requires `content` on handler
+  results, and a content-less handler result is normalized to `content: []` before it
+  reaches the wire. One sharpening remains: a content-less body carrying another
+  result family's vocabulary (a task handle or an `input_required` round) is still
+  rejected loudly — tolerance never turns a different result kind into a silent empty
+  success. A body whose only foreign key was `resultType` strips to an empty object
+  and defaults, exactly as v1 parsed a payload-free body.
 - **`ElicitResult.content` values are typed and validated as
   `string | number | boolean | string[]`.** v1's TypeScript surface accepted
   `Record<string, unknown>` content values; an elicitation handler returning arbitrary
