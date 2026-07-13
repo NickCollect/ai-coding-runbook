@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/archive
-fetched_at: 2026-06-15T06:17:48.929691+00:00
+fetched_at: 2026-07-13T04:25:41.488903+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Archive a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -80,6 +80,8 @@ Archive a memory store
 
     - `"fallback-credit-2026-06-01"`
 
+    - `"agent-memory-2026-07-22"`
+
 ### Returns
 
 - `BetaManagedAgentsMemoryStore object { id, created_at, name, 5 more }`
@@ -124,7 +126,7 @@ Archive a memory store
 curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/archive \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
-    -H 'anthropic-beta: managed-agents-2026-04-01' \
+    -H 'anthropic-beta: agent-memory-2026-07-22' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY"
 ```
 

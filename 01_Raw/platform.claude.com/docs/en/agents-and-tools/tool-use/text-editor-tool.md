@@ -1,10 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/text-editor-tool
-fetched_at: 2026-06-29T05:25:11.318892+00:00
+fetched_at: 2026-07-13T04:25:37.455013+00:00
 fetch_method: mintlify_md
 ---
 
 # Text editor tool
+
+Give Claude the Anthropic-defined text editor tool to view, create, and edit files, and handle its view, str_replace, create, and insert commands.
 
 ---
 

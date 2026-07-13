@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions
-fetched_at: 2026-07-06T05:04:28.974255+00:00
+fetched_at: 2026-07-13T04:25:40.491541+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ Create Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -77,6 +77,8 @@ Create Session
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Body Parameters
 
@@ -396,7 +398,7 @@ Create Session
 
         - `description: string`
 
-          Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+          Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
         - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -1335,7 +1337,7 @@ List Sessions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1392,6 +1394,8 @@ List Sessions
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -2148,7 +2152,7 @@ Get Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2205,6 +2209,8 @@ Get Session
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -2947,7 +2953,7 @@ Update Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -3004,6 +3010,8 @@ Update Session
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Body Parameters
 
@@ -3169,7 +3177,7 @@ Update Session
 
       - `description: string`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -3948,7 +3956,7 @@ Delete Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4005,6 +4013,8 @@ Delete Session
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -4055,7 +4065,7 @@ Archive Session
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -4112,6 +4122,8 @@ Archive Session
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -5177,7 +5189,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       - `description: string`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -6579,7 +6591,7 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/archive \
 
       - `description: string`
 
-        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
+        Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
 
       - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -7643,7 +7655,7 @@ List Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -7700,6 +7712,8 @@ List Events
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -9558,7 +9572,7 @@ Send Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -9615,6 +9629,8 @@ Send Events
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Body Parameters
 
@@ -10491,7 +10507,7 @@ Stream Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -10548,6 +10564,8 @@ Stream Events
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -20572,7 +20590,7 @@ Add Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -20629,6 +20647,8 @@ Add Session Resource
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Body Parameters
 
@@ -20722,7 +20742,7 @@ List Session Resources
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -20779,6 +20799,8 @@ List Session Resources
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -20947,7 +20969,7 @@ Get Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -21004,6 +21026,8 @@ Get Session Resource
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -21151,7 +21175,7 @@ Update Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -21208,6 +21232,8 @@ Update Session Resource
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Body Parameters
 
@@ -21365,7 +21391,7 @@ Delete Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -21422,6 +21448,8 @@ Delete Session Resource
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -21914,7 +21942,7 @@ List Session Threads
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -21971,6 +21999,8 @@ List Session Threads
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -22441,7 +22471,7 @@ Get Session Thread
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -22498,6 +22528,8 @@ Get Session Thread
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -22959,7 +22991,7 @@ Archive Session Thread
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -23016,6 +23048,8 @@ Archive Session Thread
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -25764,7 +25798,7 @@ List Session Thread Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -25821,6 +25855,8 @@ List Session Thread Events
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 
@@ -27670,7 +27706,7 @@ Stream Session Thread Events
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 26 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -27727,6 +27763,8 @@ Stream Session Thread Events
     - `"server-side-fallback-2026-06-01"`
 
     - `"fallback-credit-2026-06-01"`
+
+    - `"agent-memory-2026-07-22"`
 
 ### Returns
 

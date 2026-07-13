@@ -1,10 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/remote-mcp-servers
-fetched_at: 2026-06-29T05:25:12.037261+00:00
+fetched_at: 2026-07-13T04:25:37.972967+00:00
 fetch_method: mintlify_md
 ---
 
 # Remote MCP servers
+
+Connect Claude to third-party remote MCP servers through the MCP connector API. Browse example servers and review the steps to connect.
 
 ---
 

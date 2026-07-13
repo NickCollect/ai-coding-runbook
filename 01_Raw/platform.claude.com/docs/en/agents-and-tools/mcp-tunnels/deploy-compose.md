@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/deploy-compose
-fetched_at: 2026-07-06T05:04:24.617363+00:00
+fetched_at: 2026-07-13T04:25:38.168180+00:00
 fetch_method: mintlify_md
 ---
 
@@ -86,7 +86,7 @@ This guide provides one reference approach using Docker Compose. You are respons
         cat > docker-compose.yaml <<'EOF'
         services:
           setup:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:dab8c3f6ac44c15d91b1580af23a7da6e579865d5852e9ad31e35b6940daf436
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:9d4c80593b559fc3ca3814866418744fa94858b02a4d4a4cc52d423e732ccc81
             entrypoint: ["/setup"]
             command:
               - init
@@ -130,7 +130,7 @@ This guide provides one reference approach using Docker Compose. You are respons
                 max-file: "3"
 
           mcp-proxy:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:dab8c3f6ac44c15d91b1580af23a7da6e579865d5852e9ad31e35b6940daf436
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:9d4c80593b559fc3ca3814866418744fa94858b02a4d4a4cc52d423e732ccc81
             volumes:
               - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
               - ./data:/data:ro
@@ -345,7 +345,7 @@ This guide provides one reference approach using Docker Compose. You are respons
                 max-file: "3"
 
           mcp-proxy:
-            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:dab8c3f6ac44c15d91b1580af23a7da6e579865d5852e9ad31e35b6940daf436
+            image: us-docker.pkg.dev/anthropic-public-registry/images/mcp-proxy@sha256:9d4c80593b559fc3ca3814866418744fa94858b02a4d4a4cc52d423e732ccc81
             volumes:
               - ./config/mcp-proxy.yaml:/etc/mcp-gateway/config.yaml:ro
               - ./data:/data:ro

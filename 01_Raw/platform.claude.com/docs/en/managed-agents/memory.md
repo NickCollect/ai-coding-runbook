@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/memory
-fetched_at: 2026-07-06T05:04:25.681269+00:00
+fetched_at: 2026-07-13T04:25:38.828112+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,13 @@ Give your agents persistent memory that survives across sessions using memory st
 Each Managed Agents session starts with a fresh context by default. When a session ends, any state the agent built up is gone. Memory stores let the agent carry information across sessions: user preferences, project conventions, prior mistakes, and domain context.
 
 <Note>
-  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
+</Note>
+
+<Note>
+  Don't combine `agent-memory-2026-07-22` with `managed-agents-2026-04-01` on a memory store request: sending both returns a `400` error. If your code sets beta headers explicitly, replace `managed-agents-2026-04-01` with `agent-memory-2026-07-22` on memory store calls rather than adding a second value. Session endpoints, including attaching a memory store to a session, still use `managed-agents-2026-04-01`.
+
+  On July 22, 2026, the `managed-agents-2026-04-01` header adopts the same list behavior on `GET /v1/memory_stores/{memory_store_id}/memories`; sending `agent-memory-2026-07-22` opts you into that behavior now. Page cursors from requests made without the header aren't valid with it, so restart from the first page.
 </Note>
 
 ## Overview
@@ -33,7 +39,7 @@ Give the store a `name` and a `description`. The description is passed to the ag
   store=$(curl -s https://api.anthropic.com/v1/memory_stores \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
     -d '{"name": "User Preferences", "description": "Per-user preferences and project context."}')
   store_id=$(jq -r '.id' <<< "$store")
@@ -129,7 +135,7 @@ Pre-load a store with reference material before any agent runs:
   curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
     -d '{"path": "/formatting_standards.md", "content": "All reports use GAAP formatting. Dates are ISO-8601..."}' > /dev/null
   ```
@@ -389,28 +395,29 @@ Memory stores can be managed directly through the API. Use this for building rev
 
 ### List memories
 
-List the memories in a store, optionally filtered by `path_prefix` to browse a path like a directory:
+List the memories in a store. Results are returned in a stable, server-defined order.
+
+* `path_prefix` scopes the list to one directory. It must end with `/` and matches whole path segments, so `path_prefix=/notes/` returns `/notes/todo.md` but not `/notes-archive/todo.md`.
+* `depth` controls how deep the listing goes below `path_prefix`: omit it (or pass `0`) to list the whole subtree, or pass `1` to list only the immediate children. Other values return a `400` error.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash curl
-  curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories?path_prefix=/&order_by=path&depth=2" \
+  curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories?path_prefix=/" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" | jq -r '.data[] | "\(.type)  \(.path)"'
+    -H "anthropic-beta: agent-memory-2026-07-22" | jq -r '.data[] | "\(.type)  \(.path)"'
   ```
 
   ```bash CLI
   ant beta:memory-stores:memories list \
     --memory-store-id "$store_id" \
-    --path-prefix "/" --order-by path --depth 2
+    --path-prefix "/"
   ```
 
   ```python Python
   page = client.beta.memory_stores.memories.list(
       store.id,
       path_prefix="/",
-      order_by="path",
-      depth=2,
   )
   for item in page.data:
       print(item.type, item.path)
@@ -418,9 +425,7 @@ List the memories in a store, optionally filtered by `path_prefix` to browse a p
 
   ```typescript TypeScript
   const page = await client.beta.memoryStores.memories.list(store.id, {
-    path_prefix: "/",
-    order_by: "path",
-    depth: 2
+    path_prefix: "/"
   });
   for (const item of page.data) {
     console.log(item.type, item.path);
@@ -431,8 +436,6 @@ List the memories in a store, optionally filtered by `path_prefix` to browse a p
   var page = await client.Beta.MemoryStores.Memories.List(store.ID, new()
   {
       PathPrefix = "/",
-      OrderBy = "path",
-      Depth = 2,
   });
   await foreach (var item in page.Paginate())
   {
@@ -444,8 +447,6 @@ List the memories in a store, optionally filtered by `path_prefix` to browse a p
   ```go Go
   page, err := client.Beta.MemoryStores.Memories.List(ctx, store.ID, anthropic.BetaMemoryStoreMemoryListParams{
   	PathPrefix: anthropic.String("/"),
-  	OrderBy:    anthropic.String("path"),
-  	Depth:      anthropic.Int(2),
   })
   if err != nil {
   	panic(err)
@@ -460,8 +461,6 @@ List the memories in a store, optionally filtered by `path_prefix` to browse a p
       store.id(),
       MemoryListParams.builder()
           .pathPrefix("/")
-          .orderBy("path")
-          .depth(2)
           .build()
   );
   for (var item : page.data()) {
@@ -474,8 +473,6 @@ List the memories in a store, optionally filtered by `path_prefix` to browse a p
   $page = $client->beta->memoryStores->memories->list(
       $store->id,
       pathPrefix: '/',
-      orderBy: 'path',
-      depth: 2,
   );
   foreach ($page->data as $item) {
       echo "{$item->type}  {$item->path}\n";
@@ -485,9 +482,7 @@ List the memories in a store, optionally filtered by `path_prefix` to browse a p
   ```ruby Ruby
   page = client.beta.memory_stores.memories.list(
     store.id,
-    path_prefix: "/",
-    order_by: "path",
-    depth: 2
+    path_prefix: "/"
   )
   page.data.each do |entry|
     puts "#{entry.type}  #{entry.path}"
@@ -506,7 +501,7 @@ Fetching an individual memory returns the full content.
   curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" | jq -r '.content'
+    -H "anthropic-beta: agent-memory-2026-07-22" | jq -r '.content'
   ```
 
   ```bash CLI
@@ -581,7 +576,7 @@ See the [Retrieve a memory reference](/docs/en/api/beta/memory_stores/memories/r
   mem=$(curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memories" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
     -d '{"path": "/preferences/formatting.md", "content": "Always use tabs, not spaces."}')
   mem_id=$(jq -r '.id' <<< "$mem")
@@ -669,7 +664,7 @@ See the [Create a memory reference](/docs/en/api/beta/memory_stores/memories/cre
   curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
     -d '{"path": "/archive/2026_q1_formatting.md"}' > /dev/null
   ```
@@ -753,7 +748,7 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
   curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
     --data @- > /dev/null <<EOF
   {
@@ -858,7 +853,7 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
   curl -s -X DELETE "https://api.anthropic.com/v1/memory_stores/$store_id/memories/$mem_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" > /dev/null
+    -H "anthropic-beta: agent-memory-2026-07-22" > /dev/null
   ```
 
   ```bash CLI
@@ -937,7 +932,7 @@ List version history for a store, newest first. The example filters to a single 
   versions=$(curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions?memory_id=$mem_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01")
+    -H "anthropic-beta: agent-memory-2026-07-22")
   jq -r '.data[] | "\(.id): \(.operation)"' <<< "$versions"
   version_id=$(jq -r '.data[1].id' <<< "$versions")
   ```
@@ -1057,7 +1052,7 @@ Fetching an individual version returns the same fields as the list response plus
   curl -s "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/$version_id" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01"
+    -H "anthropic-beta: agent-memory-2026-07-22"
   ```
 
   ```bash CLI
@@ -1137,7 +1132,7 @@ A version that is the current head of a live memory cannot be redacted. Write a 
   curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/memory_versions/$version_id/redact" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "anthropic-beta: agent-memory-2026-07-22" \
     -H "content-type: application/json" \
     -d '{}'
   ```
@@ -1214,7 +1209,7 @@ List stores in the workspace. Archived stores are excluded by default; pass `inc
   curl -s "https://api.anthropic.com/v1/memory_stores?include_archived=true" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" | jq '.data[] | {id, name, archived_at}'
+    -H "anthropic-beta: agent-memory-2026-07-22" | jq '.data[] | {id, name, archived_at}'
   ```
 
   ```bash CLI
@@ -1285,7 +1280,7 @@ Archiving makes a store read-only and prevents it from being attached to new ses
   curl -s -X POST "https://api.anthropic.com/v1/memory_stores/$store_id/archive" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: managed-agents-2026-04-01" > /dev/null
+    -H "anthropic-beta: agent-memory-2026-07-22" > /dev/null
   ```
 
   ```bash CLI

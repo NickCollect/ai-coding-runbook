@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview
-fetched_at: 2026-07-06T05:04:24.183640+00:00
+fetched_at: 2026-07-13T04:25:37.855001+00:00
 fetch_method: mintlify_md
 ---
 
@@ -171,9 +171,8 @@ Skills are available across Claude's agent products:
 
 The Claude API supports both pre-built Agent Skills and custom Skills. Both work identically: specify the relevant `skill_id` in the `container` parameter along with the code execution tool.
 
-**Prerequisites**: Using Skills via the API requires three beta headers:
+**Prerequisites:** Using Skills through the API requires the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool), whose container Skills run in, and two beta headers:
 
-* `code-execution-2025-08-25` - Skills run in the code execution container
 * `skills-2025-10-02` - Enables Skills functionality
 * `files-api-2025-04-14` - Required for uploading/downloading files to/from the container
 

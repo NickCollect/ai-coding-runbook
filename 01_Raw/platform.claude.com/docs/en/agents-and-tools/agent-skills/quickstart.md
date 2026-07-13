@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/agent-skills/quickstart
-fetched_at: 2026-06-29T05:25:11.965266+00:00
+fetched_at: 2026-07-13T04:25:37.890758+00:00
 fetch_method: mintlify_md
 ---
 
@@ -137,7 +137,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
       -H "content-type: application/json" \
       -H "x-api-key: $ANTHROPIC_API_KEY" \
       -H "anthropic-version: 2023-06-01" \
-      -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+      -H "anthropic-beta: skills-2025-10-02" \
       -d @- <<'EOF'
   {
     "model": "claude-opus-4-8",
@@ -148,7 +148,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
     "messages": [
       {"role": "user", "content": "Create a presentation about renewable energy with 5 slides"}
     ],
-    "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+    "tools": [{"type": "code_execution_20260521", "name": "code_execution"}]
   }
   EOF
   )
@@ -158,7 +158,6 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   ```bash CLI
   # Create a message with the PowerPoint Skill
   response=$(ant beta:messages create --format json \
-    --beta code-execution-2025-08-25 \
     --beta skills-2025-10-02 <<'YAML'
   model: claude-opus-4-8
   max_tokens: 16000
@@ -171,7 +170,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
     - role: user
       content: Create a presentation about renewable energy with 5 slides
   tools:
-    - type: code_execution_20250825
+    - type: code_execution_20260521
       name: code_execution
   YAML
   )
@@ -184,7 +183,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   response = client.beta.messages.create(
       model="claude-opus-4-8",
       max_tokens=16000,
-      betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+      betas=["skills-2025-10-02"],
       container={
           "skills": [{"type": "anthropic", "skill_id": "pptx", "version": "latest"}]
       },
@@ -194,7 +193,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
               "content": "Create a presentation about renewable energy with 5 slides",
           }
       ],
-      tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+      tools=[{"type": "code_execution_20260521", "name": "code_execution"}],
   )
 
   print(f"stop_reason={response.stop_reason}, blocks={len(response.content)}")
@@ -205,7 +204,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   const response = await client.beta.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 16000,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas: ["skills-2025-10-02"],
     container: {
       skills: [{ type: "anthropic", skill_id: "pptx", version: "latest" }],
     },
@@ -215,7 +214,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
         content: "Create a presentation about renewable energy with 5 slides",
       },
     ],
-    tools: [{ type: "code_execution_20250825", name: "code_execution" }],
+    tools: [{ type: "code_execution_20260521", name: "code_execution" }],
   });
 
   console.log(
@@ -229,7 +228,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   {
       Model = Model.ClaudeOpus4_8,
       MaxTokens = 16000,
-      Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+      Betas = ["skills-2025-10-02"],
       Container = new BetaContainerParams
       {
           Skills =
@@ -250,7 +249,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
               Content = "Create a presentation about renewable energy with 5 slides",
           },
       ],
-      Tools = [new BetaCodeExecutionTool20250825()],
+      Tools = [new BetaCodeExecutionTool20260521()],
   });
 
   Console.WriteLine($"stop_reason={response.StopReason?.Raw()}, blocks={response.Content.Count}");
@@ -262,7 +261,6 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 16000,
   	Betas: []anthropic.AnthropicBeta{
-  		"code-execution-2025-08-25",
   		anthropic.AnthropicBetaSkills2025_10_02,
   	},
   	Container: anthropic.BetaMessageNewParamsContainerUnion{
@@ -282,7 +280,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   		),
   	},
   	Tools: []anthropic.BetaToolUnionParam{
-  		{OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{}},
+  		{OfCodeExecutionTool20260521: &anthropic.BetaCodeExecutionTool20260521Param{}},
   	},
   })
   if err != nil {
@@ -298,7 +296,6 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
       MessageCreateParams.builder()
           .model(Model.CLAUDE_OPUS_4_8)
           .maxTokens(16000)
-          .addBeta("code-execution-2025-08-25")
           .addBeta(AnthropicBeta.SKILLS_2025_10_02)
           .container(
               BetaContainerParams.builder()
@@ -312,7 +309,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
                   .build()
           )
           .addUserMessage("Create a presentation about renewable energy with 5 slides")
-          .addTool(BetaCodeExecutionTool20250825.builder().build())
+          .addTool(BetaCodeExecutionTool20260521.builder().build())
           .build()
   );
 
@@ -327,7 +324,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   $response = $client->beta->messages->create(
       model: 'claude-opus-4-8',
       maxTokens: 16000,
-      betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+      betas: ['skills-2025-10-02'],
       container: [
           'skills' => [['type' => 'anthropic', 'skill_id' => 'pptx', 'version' => 'latest']],
       ],
@@ -337,7 +334,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
               'content' => 'Create a presentation about renewable energy with 5 slides',
           ],
       ],
-      tools: [['type' => 'code_execution_20250825', 'name' => 'code_execution']],
+      tools: [['type' => 'code_execution_20260521', 'name' => 'code_execution']],
   );
 
   printf("stop_reason=%s, blocks=%d\n", $response->stopReason, count($response->content));
@@ -348,7 +345,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
   response = client.beta.messages.create(
     model: "claude-opus-4-8",
     max_tokens: 16_000,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas: ["skills-2025-10-02"],
     container: {
       skills: [{type: "anthropic", skill_id: "pptx", version: "latest"}]
     },
@@ -358,7 +355,7 @@ Now use the PowerPoint Skill to create a presentation about renewable energy. Sp
         content: "Create a presentation about renewable energy with 5 slides"
       }
     ],
-    tools: [{type: "code_execution_20250825", name: "code_execution"}]
+    tools: [{type: "code_execution_20260521", name: "code_execution"}]
   )
 
   puts "stop_reason=#{response.stop_reason}, blocks=#{response.content.length}"
@@ -372,10 +369,10 @@ Let's break down what each part does:
 * **`skill_id: "pptx"`:** The PowerPoint Skill identifier
 * **`version: "latest"`:** The Skill version set to the most recently published
 * **`tools`:** Enables code execution (required for Skills)
-* **Beta headers:** `code-execution-2025-08-25` and `skills-2025-10-02`
+* **Beta header:** `skills-2025-10-02`
 
 <Note>
-  The examples here use the `code_execution_20250825` tool version with its matching `code-execution-2025-08-25` beta header. Skills also work with the newer [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) revisions (`code_execution_20260120` and later); any code execution tool version satisfies the Skills requirement. Whichever version you use, keep its tool `type` and beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
+  The examples here use the `code_execution_20260521` tool version, which is generally available and requires no code execution beta header. Skills also work with older [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool) versions (such as `code_execution_20250825`); any code execution tool version satisfies the Skills requirement. Whichever version you use, keep its tool `type` and any beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
 </Note>
 
 When you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.
@@ -674,7 +671,7 @@ Now that you've created your first document with Skills, try these variations:
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+    -H "anthropic-beta: skills-2025-10-02" \
     -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 16000,
@@ -684,13 +681,12 @@ Now that you've created your first document with Skills, try these variations:
       "messages": [
         {"role": "user", "content": "Create a quarterly sales tracking spreadsheet with sample data"}
       ],
-      "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+      "tools": [{"type": "code_execution_20260521", "name": "code_execution"}]
     }' | jq -r '"stop_reason=\(.stop_reason)"'
   ```
 
   ```bash CLI
   ant beta:messages create --format json \
-    --beta code-execution-2025-08-25 \
     --beta skills-2025-10-02 <<'YAML' | jq -r '"stop_reason=\(.stop_reason)"'
   model: claude-opus-4-8
   max_tokens: 16000
@@ -703,7 +699,7 @@ Now that you've created your first document with Skills, try these variations:
     - role: user
       content: Create a quarterly sales tracking spreadsheet with sample data
   tools:
-    - type: code_execution_20250825
+    - type: code_execution_20260521
       name: code_execution
   YAML
   ```
@@ -712,7 +708,7 @@ Now that you've created your first document with Skills, try these variations:
   response = client.beta.messages.create(
       model="claude-opus-4-8",
       max_tokens=16000,
-      betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+      betas=["skills-2025-10-02"],
       container={
           "skills": [{"type": "anthropic", "skill_id": "xlsx", "version": "latest"}]
       },
@@ -722,7 +718,7 @@ Now that you've created your first document with Skills, try these variations:
               "content": "Create a quarterly sales tracking spreadsheet with sample data",
           }
       ],
-      tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+      tools=[{"type": "code_execution_20260521", "name": "code_execution"}],
   )
   ```
 
@@ -730,7 +726,7 @@ Now that you've created your first document with Skills, try these variations:
   const response = await client.beta.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 16000,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas: ["skills-2025-10-02"],
     container: {
       skills: [{ type: "anthropic", skill_id: "xlsx", version: "latest" }]
     },
@@ -740,7 +736,7 @@ Now that you've created your first document with Skills, try these variations:
         content: "Create a quarterly sales tracking spreadsheet with sample data"
       }
     ],
-    tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+    tools: [{ type: "code_execution_20260521", name: "code_execution" }]
   });
   ```
 
@@ -750,7 +746,7 @@ Now that you've created your first document with Skills, try these variations:
       {
           Model = Model.ClaudeOpus4_8,
           MaxTokens = 16000,
-          Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+          Betas = ["skills-2025-10-02"],
           Container = new BetaContainerParams
           {
               Skills =
@@ -771,7 +767,7 @@ Now that you've created your first document with Skills, try these variations:
                   Content = "Create a quarterly sales tracking spreadsheet with sample data",
               },
           ],
-          Tools = [new BetaCodeExecutionTool20250825()],
+          Tools = [new BetaCodeExecutionTool20260521()],
       }
   );
   ```
@@ -781,7 +777,6 @@ Now that you've created your first document with Skills, try these variations:
   	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 16000,
   	Betas: []anthropic.AnthropicBeta{
-  		"code-execution-2025-08-25",
   		anthropic.AnthropicBetaSkills2025_10_02,
   	},
   	Container: anthropic.BetaMessageNewParamsContainerUnion{
@@ -800,7 +795,7 @@ Now that you've created your first document with Skills, try these variations:
   	},
   	Tools: []anthropic.BetaToolUnionParam{
   		{
-  			OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{},
+  			OfCodeExecutionTool20260521: &anthropic.BetaCodeExecutionTool20260521Param{},
   		},
   	},
   })
@@ -815,7 +810,6 @@ Now that you've created your first document with Skills, try these variations:
           MessageCreateParams.builder()
               .model(CLAUDE_OPUS_4_8)
               .maxTokens(16000)
-              .addBeta("code-execution-2025-08-25")
               .addBeta(AnthropicBeta.SKILLS_2025_10_02)
               .container(
                   BetaContainerParams.builder()
@@ -829,7 +823,7 @@ Now that you've created your first document with Skills, try these variations:
                       .build()
               )
               .addUserMessage("Create a quarterly sales tracking spreadsheet with sample data")
-              .addTool(BetaCodeExecutionTool20250825.builder().build())
+              .addTool(BetaCodeExecutionTool20260521.builder().build())
               .build()
       );
 
@@ -839,7 +833,7 @@ Now that you've created your first document with Skills, try these variations:
   $response = $client->beta->messages->create(
       model: 'claude-opus-4-8',
       maxTokens: 16000,
-      betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+      betas: ['skills-2025-10-02'],
       container: [
           'skills' => [
               ['type' => 'anthropic', 'skillID' => 'xlsx', 'version' => 'latest'],
@@ -851,7 +845,7 @@ Now that you've created your first document with Skills, try these variations:
               'content' => 'Create a quarterly sales tracking spreadsheet with sample data',
           ],
       ],
-      tools: [new BetaCodeExecutionTool20250825()],
+      tools: [new BetaCodeExecutionTool20260521()],
   );
   ```
 
@@ -859,7 +853,7 @@ Now that you've created your first document with Skills, try these variations:
   response = client.beta.messages.create(
     model: "claude-opus-4-8",
     max_tokens: 16_000,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas: ["skills-2025-10-02"],
     container: {
       skills: [{type: "anthropic", skill_id: "xlsx", version: "latest"}]
     },
@@ -869,7 +863,7 @@ Now that you've created your first document with Skills, try these variations:
         content: "Create a quarterly sales tracking spreadsheet with sample data"
       }
     ],
-    tools: [{type: "code_execution_20250825", name: "code_execution"}]
+    tools: [{type: "code_execution_20260521", name: "code_execution"}]
   )
   ```
 </CodeGroup>
@@ -882,7 +876,7 @@ Now that you've created your first document with Skills, try these variations:
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+    -H "anthropic-beta: skills-2025-10-02" \
     -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 16000,
@@ -892,13 +886,12 @@ Now that you've created your first document with Skills, try these variations:
       "messages": [
         {"role": "user", "content": "Write a 2-page report on the benefits of renewable energy"}
       ],
-      "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+      "tools": [{"type": "code_execution_20260521", "name": "code_execution"}]
     }' | jq -r '"stop_reason=\(.stop_reason)"'
   ```
 
   ```bash CLI
   ant beta:messages create --format json \
-    --beta code-execution-2025-08-25 \
     --beta skills-2025-10-02 <<'YAML' | jq -r '"stop_reason=\(.stop_reason)"'
   model: claude-opus-4-8
   max_tokens: 16000
@@ -911,7 +904,7 @@ Now that you've created your first document with Skills, try these variations:
     - role: user
       content: Write a 2-page report on the benefits of renewable energy
   tools:
-    - type: code_execution_20250825
+    - type: code_execution_20260521
       name: code_execution
   YAML
   ```
@@ -920,7 +913,7 @@ Now that you've created your first document with Skills, try these variations:
   response = client.beta.messages.create(
       model="claude-opus-4-8",
       max_tokens=16000,
-      betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+      betas=["skills-2025-10-02"],
       container={
           "skills": [{"type": "anthropic", "skill_id": "docx", "version": "latest"}]
       },
@@ -930,7 +923,7 @@ Now that you've created your first document with Skills, try these variations:
               "content": "Write a 2-page report on the benefits of renewable energy",
           }
       ],
-      tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+      tools=[{"type": "code_execution_20260521", "name": "code_execution"}],
   )
   ```
 
@@ -938,7 +931,7 @@ Now that you've created your first document with Skills, try these variations:
   const response = await client.beta.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 16000,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas: ["skills-2025-10-02"],
     container: {
       skills: [{ type: "anthropic", skill_id: "docx", version: "latest" }]
     },
@@ -948,7 +941,7 @@ Now that you've created your first document with Skills, try these variations:
         content: "Write a 2-page report on the benefits of renewable energy"
       }
     ],
-    tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+    tools: [{ type: "code_execution_20260521", name: "code_execution" }]
   });
   ```
 
@@ -958,7 +951,7 @@ Now that you've created your first document with Skills, try these variations:
       {
           Model = Model.ClaudeOpus4_8,
           MaxTokens = 16000,
-          Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+          Betas = ["skills-2025-10-02"],
           Container = new BetaContainerParams
           {
               Skills =
@@ -979,7 +972,7 @@ Now that you've created your first document with Skills, try these variations:
                   Content = "Write a 2-page report on the benefits of renewable energy",
               },
           ],
-          Tools = [new BetaCodeExecutionTool20250825()],
+          Tools = [new BetaCodeExecutionTool20260521()],
       }
   );
   ```
@@ -989,7 +982,6 @@ Now that you've created your first document with Skills, try these variations:
   	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 16000,
   	Betas: []anthropic.AnthropicBeta{
-  		"code-execution-2025-08-25",
   		anthropic.AnthropicBetaSkills2025_10_02,
   	},
   	Container: anthropic.BetaMessageNewParamsContainerUnion{
@@ -1008,7 +1000,7 @@ Now that you've created your first document with Skills, try these variations:
   	},
   	Tools: []anthropic.BetaToolUnionParam{
   		{
-  			OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{},
+  			OfCodeExecutionTool20260521: &anthropic.BetaCodeExecutionTool20260521Param{},
   		},
   	},
   })
@@ -1023,7 +1015,6 @@ Now that you've created your first document with Skills, try these variations:
           MessageCreateParams.builder()
               .model(CLAUDE_OPUS_4_8)
               .maxTokens(16000)
-              .addBeta("code-execution-2025-08-25")
               .addBeta(AnthropicBeta.SKILLS_2025_10_02)
               .container(
                   BetaContainerParams.builder()
@@ -1037,7 +1028,7 @@ Now that you've created your first document with Skills, try these variations:
                       .build()
               )
               .addUserMessage("Write a 2-page report on the benefits of renewable energy")
-              .addTool(BetaCodeExecutionTool20250825.builder().build())
+              .addTool(BetaCodeExecutionTool20260521.builder().build())
               .build()
       );
 
@@ -1047,7 +1038,7 @@ Now that you've created your first document with Skills, try these variations:
   $response = $client->beta->messages->create(
       model: 'claude-opus-4-8',
       maxTokens: 16000,
-      betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+      betas: ['skills-2025-10-02'],
       container: [
           'skills' => [
               ['type' => 'anthropic', 'skillID' => 'docx', 'version' => 'latest'],
@@ -1059,7 +1050,7 @@ Now that you've created your first document with Skills, try these variations:
               'content' => 'Write a 2-page report on the benefits of renewable energy',
           ],
       ],
-      tools: [new BetaCodeExecutionTool20250825()],
+      tools: [new BetaCodeExecutionTool20260521()],
   );
   ```
 
@@ -1067,7 +1058,7 @@ Now that you've created your first document with Skills, try these variations:
   response = client.beta.messages.create(
     model: "claude-opus-4-8",
     max_tokens: 16_000,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas: ["skills-2025-10-02"],
     container: {
       skills: [{type: "anthropic", skill_id: "docx", version: "latest"}]
     },
@@ -1077,7 +1068,7 @@ Now that you've created your first document with Skills, try these variations:
         content: "Write a 2-page report on the benefits of renewable energy"
       }
     ],
-    tools: [{type: "code_execution_20250825", name: "code_execution"}]
+    tools: [{type: "code_execution_20260521", name: "code_execution"}]
   )
   ```
 </CodeGroup>
@@ -1090,7 +1081,7 @@ Now that you've created your first document with Skills, try these variations:
     -H "content-type: application/json" \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
-    -H "anthropic-beta: code-execution-2025-08-25,skills-2025-10-02" \
+    -H "anthropic-beta: skills-2025-10-02" \
     -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 16000,
@@ -1100,13 +1091,12 @@ Now that you've created your first document with Skills, try these variations:
       "messages": [
         {"role": "user", "content": "Generate a PDF invoice template"}
       ],
-      "tools": [{"type": "code_execution_20250825", "name": "code_execution"}]
+      "tools": [{"type": "code_execution_20260521", "name": "code_execution"}]
     }' | jq -r '"stop_reason=\(.stop_reason)"'
   ```
 
   ```bash CLI
   ant beta:messages create --format json \
-    --beta code-execution-2025-08-25 \
     --beta skills-2025-10-02 <<'YAML' | jq -r '"stop_reason=\(.stop_reason)"'
   model: claude-opus-4-8
   max_tokens: 16000
@@ -1119,7 +1109,7 @@ Now that you've created your first document with Skills, try these variations:
     - role: user
       content: Generate a PDF invoice template
   tools:
-    - type: code_execution_20250825
+    - type: code_execution_20260521
       name: code_execution
   YAML
   ```
@@ -1128,7 +1118,7 @@ Now that you've created your first document with Skills, try these variations:
   response = client.beta.messages.create(
       model="claude-opus-4-8",
       max_tokens=16000,
-      betas=["code-execution-2025-08-25", "skills-2025-10-02"],
+      betas=["skills-2025-10-02"],
       container={
           "skills": [{"type": "anthropic", "skill_id": "pdf", "version": "latest"}]
       },
@@ -1138,7 +1128,7 @@ Now that you've created your first document with Skills, try these variations:
               "content": "Generate a PDF invoice template",
           }
       ],
-      tools=[{"type": "code_execution_20250825", "name": "code_execution"}],
+      tools=[{"type": "code_execution_20260521", "name": "code_execution"}],
   )
   ```
 
@@ -1146,7 +1136,7 @@ Now that you've created your first document with Skills, try these variations:
   const response = await client.beta.messages.create({
     model: "claude-opus-4-8",
     max_tokens: 16000,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas: ["skills-2025-10-02"],
     container: {
       skills: [{ type: "anthropic", skill_id: "pdf", version: "latest" }]
     },
@@ -1156,7 +1146,7 @@ Now that you've created your first document with Skills, try these variations:
         content: "Generate a PDF invoice template"
       }
     ],
-    tools: [{ type: "code_execution_20250825", name: "code_execution" }]
+    tools: [{ type: "code_execution_20260521", name: "code_execution" }]
   });
   ```
 
@@ -1166,7 +1156,7 @@ Now that you've created your first document with Skills, try these variations:
       {
           Model = Model.ClaudeOpus4_8,
           MaxTokens = 16000,
-          Betas = ["code-execution-2025-08-25", "skills-2025-10-02"],
+          Betas = ["skills-2025-10-02"],
           Container = new BetaContainerParams
           {
               Skills =
@@ -1187,7 +1177,7 @@ Now that you've created your first document with Skills, try these variations:
                   Content = "Generate a PDF invoice template",
               },
           ],
-          Tools = [new BetaCodeExecutionTool20250825()],
+          Tools = [new BetaCodeExecutionTool20260521()],
       }
   );
   ```
@@ -1197,7 +1187,6 @@ Now that you've created your first document with Skills, try these variations:
   	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 16000,
   	Betas: []anthropic.AnthropicBeta{
-  		"code-execution-2025-08-25",
   		anthropic.AnthropicBetaSkills2025_10_02,
   	},
   	Container: anthropic.BetaMessageNewParamsContainerUnion{
@@ -1216,7 +1205,7 @@ Now that you've created your first document with Skills, try these variations:
   	},
   	Tools: []anthropic.BetaToolUnionParam{
   		{
-  			OfCodeExecutionTool20250825: &anthropic.BetaCodeExecutionTool20250825Param{},
+  			OfCodeExecutionTool20260521: &anthropic.BetaCodeExecutionTool20260521Param{},
   		},
   	},
   })
@@ -1231,7 +1220,6 @@ Now that you've created your first document with Skills, try these variations:
           MessageCreateParams.builder()
               .model(CLAUDE_OPUS_4_8)
               .maxTokens(16000)
-              .addBeta("code-execution-2025-08-25")
               .addBeta(AnthropicBeta.SKILLS_2025_10_02)
               .container(
                   BetaContainerParams.builder()
@@ -1245,7 +1233,7 @@ Now that you've created your first document with Skills, try these variations:
                       .build()
               )
               .addUserMessage("Generate a PDF invoice template")
-              .addTool(BetaCodeExecutionTool20250825.builder().build())
+              .addTool(BetaCodeExecutionTool20260521.builder().build())
               .build()
       );
 
@@ -1255,7 +1243,7 @@ Now that you've created your first document with Skills, try these variations:
   $response = $client->beta->messages->create(
       model: 'claude-opus-4-8',
       maxTokens: 16000,
-      betas: ['code-execution-2025-08-25', 'skills-2025-10-02'],
+      betas: ['skills-2025-10-02'],
       container: [
           'skills' => [
               ['type' => 'anthropic', 'skillID' => 'pdf', 'version' => 'latest'],
@@ -1267,7 +1255,7 @@ Now that you've created your first document with Skills, try these variations:
               'content' => 'Generate a PDF invoice template',
           ],
       ],
-      tools: [new BetaCodeExecutionTool20250825()],
+      tools: [new BetaCodeExecutionTool20260521()],
   );
   ```
 
@@ -1275,7 +1263,7 @@ Now that you've created your first document with Skills, try these variations:
   response = client.beta.messages.create(
     model: "claude-opus-4-8",
     max_tokens: 16_000,
-    betas: ["code-execution-2025-08-25", "skills-2025-10-02"],
+    betas: ["skills-2025-10-02"],
     container: {
       skills: [{type: "anthropic", skill_id: "pdf", version: "latest"}]
     },
@@ -1285,7 +1273,7 @@ Now that you've created your first document with Skills, try these variations:
         content: "Generate a PDF invoice template"
       }
     ],
-    tools: [{type: "code_execution_20250825", name: "code_execution"}]
+    tools: [{type: "code_execution_20260521", name: "code_execution"}]
   )
   ```
 </CodeGroup>

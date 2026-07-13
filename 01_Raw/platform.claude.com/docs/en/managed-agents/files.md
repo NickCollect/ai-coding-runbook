@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-06-29T05:25:13.155790+00:00
+fetched_at: 2026-07-13T04:25:38.725653+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,7 +13,7 @@ Upload files and mount them in your sandbox for reading and processing.
 You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
 
 <Note>
-  All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
+  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
 </Note>
 
 ## Uploading files
@@ -553,8 +553,7 @@ Use the [Files API](/docs/en/build-with-claude/files) to list files scoped to a 
   ```bash CLI
   # List files associated with a session
   ant beta:files list --scope-id sesn_abc123 \
-    --beta files-api-2025-04-14 \
-    --beta managed-agents-2026-04-01
+    --beta files-api-2025-04-14,managed-agents-2026-04-01
 
   # Download a file
   ant beta:files download --file-id "$FILE_ID" --output output.txt

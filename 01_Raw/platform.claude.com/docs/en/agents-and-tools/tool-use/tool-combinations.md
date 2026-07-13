@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-combinations
-fetched_at: 2026-06-29T05:25:11.457249+00:00
+fetched_at: 2026-07-13T04:25:37.514851+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Search finds sources; code execution analyzes and synthesizes. Claude searches f
 {
   "tools": [
     { "type": "web_search_20260209", "name": "web_search" },
-    { "type": "code_execution_20250825", "name": "code_execution" }
+    { "type": "code_execution_20260521", "name": "code_execution" }
   ]
 }
 ```

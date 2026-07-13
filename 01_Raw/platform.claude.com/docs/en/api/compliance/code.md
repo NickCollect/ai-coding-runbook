@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/code
-fetched_at: 2026-06-29T05:25:21.792671+00:00
+fetched_at: 2026-07-13T04:25:45.055816+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,18 +10,17 @@ fetch_method: mintlify_md
 
 ## List Code Artifacts
 
-**get** `/v1/compliance/code/artifacts`
+**get** `/v1/compliance/apps/code/artifacts`
 
 List Claude Code Artifacts owned by organizations under the parent
 organization.
 
-Results are sorted by Artifact identifier within each batch of child
-organizations. Pages may be short or empty while `next_page` is still
-set — continue until `next_page` is absent. Artifacts are sorted by
-identifier (not creation time): an
-Artifact published during an export may land before the cursor and be
-omitted, so for a point-in-time-complete export re-enumerate after
-publishing quiesces.
+Results are sorted by Artifact identifier. Pages may be short or empty
+while `next_page` is still set — continue until `next_page` is absent.
+Artifacts are sorted by identifier (not creation time): an Artifact
+published during an export may land before the cursor and be omitted, so
+for a point-in-time-complete export re-enumerate after publishing
+quiesces.
 
 Artifacts owned by a since-deleted child organization are not
 returned.
@@ -68,17 +67,13 @@ returned.
 
 ### Returns
 
-- `data: array of object { id, organization_id, organization_uuid, 6 more }`
+- `data: array of object { id, organization_uuid, owner_user_id, 5 more }`
 
   Page of Artifacts
 
   - `id: string`
 
     Artifact identifier (tagged ID)
-
-  - `organization_id: string`
-
-    Organization identifier (tagged ID)
 
   - `organization_uuid: string`
 
@@ -124,7 +119,7 @@ returned.
 
   - `versions: array of object { id, created_at, name }`
 
-    Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
+    Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
 
     - `id: string`
 
@@ -140,7 +135,7 @@ returned.
 
 - `has_more: boolean`
 
-  Whether `next_page` is set. When enumeration spans multiple organization batches this may be true for a page whose next page is empty — continue until `next_page` is absent.
+  Whether `next_page` is set. May be true for a page whose next page is empty — continue until `next_page` is absent.
 
 - `next_page: string`
 
@@ -149,7 +144,7 @@ returned.
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/compliance/code/artifacts \
+curl https://api.anthropic.com/v1/compliance/apps/code/artifacts \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
@@ -160,7 +155,6 @@ curl https://api.anthropic.com/v1/compliance/code/artifacts \
   "data": [
     {
       "id": "cart_01Tu9VwXyZaBcDeFgHiJkLmN",
-      "organization_id": "org_015eofRkKpogX7uDKUyvBTph",
       "organization_uuid": "a1b2c3d4-e5f6-4789-a012-3456789abcde",
       "owner_user_id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
       "published_version_id": "1741803761-9f3a",
@@ -186,7 +180,7 @@ curl https://api.anthropic.com/v1/compliance/code/artifacts \
 
 ## Download Code Artifact Version Content
 
-**get** `/v1/compliance/code/artifacts/{artifact_id}/versions/{version_id}`
+**get** `/v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}`
 
 Streams the content of one version of a Claude Code Artifact as the
 response body.
@@ -211,12 +205,6 @@ only for identity-stored content; validate against it when present.
 
   Opaque version identifier from the Artifact's `versions` list
 
-### Query Parameters
-
-- `organization_uuid: optional string`
-
-  The Artifact's owning organization UUID, from the list response. Strongly recommended — without it the route scans across child organizations and, for parents with many children, returns 400 rather than scanning further.
-
 ### Header Parameters
 
 - `"x-api-key": optional string`
@@ -224,13 +212,13 @@ only for identity-stored content; validate against it when present.
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/compliance/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
+curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID/versions/$VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
 ## Delete Code Artifact
 
-**delete** `/v1/compliance/code/artifacts/{artifact_id}`
+**delete** `/v1/compliance/apps/code/artifacts/{artifact_id}`
 
 Permanently deletes a Code Artifact and all its versions. This is a
 destructive operation that cannot be undone. A 200 response means the
@@ -246,12 +234,6 @@ Artifact.
 - `artifact_id: string`
 
   The Artifact ID (tagged ID, e.g., cart_abc123)
-
-### Query Parameters
-
-- `organization_uuid: optional string`
-
-  The Artifact's owning organization UUID, from the list response. Strongly recommended — without it the route scans across child organizations and, for parents with many children, returns 400 rather than scanning further.
 
 ### Header Parameters
 
@@ -272,7 +254,7 @@ Artifact.
 ### Example
 
 ```http
-curl https://api.anthropic.com/v1/compliance/code/artifacts/$ARTIFACT_ID \
+curl https://api.anthropic.com/v1/compliance/apps/code/artifacts/$ARTIFACT_ID \
     -X DELETE \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
@@ -290,17 +272,13 @@ curl https://api.anthropic.com/v1/compliance/code/artifacts/$ARTIFACT_ID \
 
 ### Artifact List Response
 
-- `ArtifactListResponse object { id, organization_id, organization_uuid, 6 more }`
+- `ArtifactListResponse object { id, organization_uuid, owner_user_id, 5 more }`
 
   A hosted site published via Claude Code.
 
   - `id: string`
 
     Artifact identifier (tagged ID)
-
-  - `organization_id: string`
-
-    Organization identifier (tagged ID)
 
   - `organization_uuid: string`
 
@@ -346,7 +324,7 @@ curl https://api.anthropic.com/v1/compliance/code/artifacts/$ARTIFACT_ID \
 
   - `versions: array of object { id, created_at, name }`
 
-    Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
+    Up to roughly 20 most-recently-published versions of this Artifact (older versions are not retained). Metadata only — use `GET /v1/compliance/apps/code/artifacts/{artifact_id}/versions/{version_id}` to download a version's content.
 
     - `id: string`
 

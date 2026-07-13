@@ -1,10 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/admin-api
-fetched_at: 2026-06-29T05:25:13.280662+00:00
+fetched_at: 2026-07-13T04:25:38.901566+00:00
 fetch_method: mintlify_md
 ---
 
 # Admin API
+
+Manage organization members, workspaces, invites, and API keys programmatically with the Admin API, using an Admin API key or an `org:admin` OAuth token.
 
 ---
 
@@ -178,7 +180,7 @@ Manage [user access to specific workspaces](/docs/en/api/admin-api/workspace_mem
 
 ### API keys
 
-Monitor and manage [API keys](/docs/en/api/admin-api/apikeys/get-api-key):
+Monitor and manage [API keys](/docs/en/api/admin/api_keys/list). Each key in the response includes its `expires_at` timestamp (`null` for keys without an [expiration](/docs/en/manage-claude/authentication#key-expiration)):
 
 <CodeGroup>
   ```bash cURL
@@ -249,7 +251,7 @@ Read the rate limits configured for your organization and its workspaces with th
 
 ## Compliance API
 
-Retrieve audit and activity data for your organization with the [Compliance API](/docs/en/manage-claude/compliance-api). Admin API keys can read the Activity Feed only; for full access, see [Get access to the Compliance API](/docs/en/manage-claude/compliance-api-access).
+Retrieve audit and activity data for your organization with the [Compliance API](/docs/en/manage-claude/compliance-api). Admin API keys can read the Activity Feed only; for full access, see [Set up the Compliance API](/docs/en/manage-claude/compliance-api-access).
 
 ## Best practices
 
@@ -259,7 +261,7 @@ To effectively use the Admin API:
 * Implement proper error handling for failed operations
 * Regularly audit member roles and permissions
 * Clean up unused workspaces and expired invites
-* Monitor API key usage and rotate keys periodically
+* Monitor API key usage, audit each key's [`expires_at`](/docs/en/manage-claude/authentication#key-expiration), and rotate keys periodically
 
 ## FAQ
 
