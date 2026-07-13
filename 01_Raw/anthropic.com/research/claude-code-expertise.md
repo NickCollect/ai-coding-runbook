@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-code-expertise
-fetched_at: 2026-07-06T05:05:00.655549+00:00
+fetched_at: 2026-07-13T04:26:06.883322+00:00
 title: "How Claude Code is used in practice \\ Anthropic"
 ---
 
@@ -25,7 +25,7 @@ Jun 16, 2026
 
 Agentic coding has taken off. The share of GitHub projects with coding agent activity has more than doubled since late 2025,1 and Claude Code users now spend an average of 20 hours per week using the tool.2 Can people without formal coding experience successfully direct an agent through complex technical work? And what will rapid adoption and improvement of these tools mean for knowledge work broadly? While we don’t have full answers to these questions yet, we look to Claude Code usage data for early signals.
 
-This report provides evidence on how Claude Code is used in practice, based on a [privacy-preserving analysis](https://www.anthropic.com/research/clio) of ~400,000 interactive sessions from ~235,000 people between October 2025 and April 2026. It builds on prior work focused on [measures of autonomy](https://www.anthropic.com/research/measuring-agent-autonomy) in Claude Code sessions, and [how Claude Code is changing work at Anthropic](https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic).3 Here, we introduce a framework for describing interactive AI coding-assistant usage: what kind of work is being done, who is doing it, and whether it succeeds. We focus on Claude Code usage through a command-line interface (CLI), [Claude.ai](http://claude.ai/redirect/website.v1.578d72e1-ba6b-4216-833c-906db923ff1d), or the Claude Code desktop app.4 By tracking how agentic coding usage changes as models get more capable, we can better understand how these tools affect the labor market for coding professionals and knowledge workers.
+This report provides evidence on how Claude Code is used in practice, based on a [privacy-preserving analysis](https://www.anthropic.com/research/clio) of ~400,000 interactive sessions from ~235,000 people between October 2025 and April 2026. It builds on prior work focused on [measures of autonomy](https://www.anthropic.com/research/measuring-agent-autonomy) in Claude Code sessions, and [how Claude Code is changing work at Anthropic](https://www.anthropic.com/research/how-ai-is-transforming-work-at-anthropic).3 Here, we introduce a framework for describing interactive AI coding-assistant usage: what kind of work is being done, who is doing it, and whether it succeeds. We focus on Claude Code usage through a command-line interface (CLI), [Claude.ai](http://claude.ai/redirect/website.v1.281285a0-a972-493f-852d-b0c09b78ff5b), or the Claude Code desktop app.4 By tracking how agentic coding usage changes as models get more capable, we can better understand how these tools affect the labor market for coding professionals and knowledge workers.
 
 What happens on Claude Code may be a preview of where knowledge work is headed, as agents become embedded in non-coding work. We find that Claude is handling more complex and more valuable tasks. At the same time, there remains a clear division of labor in agentic coding: People decide what to build, and the agent decides how to build it.
 
@@ -182,18 +182,18 @@ With acknowledgements to: Jake Eaton, Sarah Pollack, Hanah Ho, Szymon Sacher, An
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Paving the way for agents in biology
-
-[Read more](https://www.anthropic.com/research/agents-in-biology)

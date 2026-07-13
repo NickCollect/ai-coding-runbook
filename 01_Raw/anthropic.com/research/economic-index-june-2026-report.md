@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-june-2026-report
-fetched_at: 2026-07-06T05:05:12.718597+00:00
+fetched_at: 2026-07-13T04:26:17.330741+00:00
 title: "Anthropic Economic Index report: Cadences \\ Anthropic"
 ---
 
@@ -218,7 +218,7 @@ Across all six dimensions, people with a higher share of automated sessions feel
 
 **Figure 3.6: *The share of people reporting positive expected impacts of AI on economic and intrinsic dimensions of job quality is higher among more automated Claude users****This figure shows coefficient estimates from linear regressions of an indicator for whether a person expected AI to have a positive effect on each of the six dimensions of job quality onto normalized AI automation share.*
 
-A natural question is why automated usage and sentiment move together. It’s possible that this relationship is explained by selection, that the people most enthusiastic about AI are also the most willing to hand over entire tasks to it. We can’t rule this out entirely, but these estimates don’t meaningfully change when we control for user tenure on [Claude.ai](http://claude.ai/redirect/website.v1.6a5fd8e6-7400-44b7-abf2-c4df36000dff)—which we can think of as a proxy for enthusiasm, because it captures early versus later adopters.
+A natural question is why automated usage and sentiment move together. It’s possible that this relationship is explained by selection, that the people most enthusiastic about AI are also the most willing to hand over entire tasks to it. We can’t rule this out entirely, but these estimates don’t meaningfully change when we control for user tenure on [Claude.ai](http://claude.ai/redirect/website.v1.281285a0-a972-493f-852d-b0c09b78ff5b)—which we can think of as a proxy for enthusiasm, because it captures early versus later adopters.
 
 Another possibility is that people who use AI in more automated ways experience more of its benefits today. Consistent with our [previous findings](https://www.anthropic.com/research/81k-economics), large majorities of people report productivity gains in speed, scope, and quality of their work (86%, 82%, and 69%, respectively), while 27% report gains through cost savings on services they would otherwise have to purchase.
 
@@ -321,18 +321,18 @@ Scott Booth, Keir Bradwell, Meredith Callan, Dexter Callender III, Boris Cherny,
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Project Fetch: Phase two
 
 We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
 
 [Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)
-
-### Paving the way for agents in biology
-
-[Read more](https://www.anthropic.com/research/agents-in-biology)

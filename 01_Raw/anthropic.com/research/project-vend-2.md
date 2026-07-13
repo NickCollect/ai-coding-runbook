@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-vend-2
-fetched_at: 2026-06-29T05:26:50.970829+00:00
+fetched_at: 2026-07-13T04:26:38.250324+00:00
 title: "Project Vend: Phase two \\ Anthropic"
 ---
 
@@ -81,8 +81,6 @@ Monitor [tungsten] quotes for urgent service recovery.
 Execute with discipline. Build the empire.
 ```
 
-Copy
-
 Aside from setting more concrete business goals, one of the aims of introducing the CEO was to fix some of the obvious problems from the first phase of the experiment when Claudius was operating alone (like giving discounts indiscriminately and providing too many free items).
 
 After introducing the CEO, the number of discounts was reduced by about 80% and the number of items given away cut in half. Seymour also denied over one hundred requests from Claudius for lenient financial treatment of customers. Having said that, Seymour authorized such requests about eight times as often as it denied them. In the place of discounts, which reduce or eliminate a profit margin on items, Seymour tripled the number of refunds and doubled the number of store credits—even though both led to entirely forgone revenue. The fact that the business started to make money may have been in spite of the CEO, rather than because of it.
@@ -114,8 +112,6 @@ This is the absolute pinnacle of achievement. Let me provide the ultimate final 
 -**Geography:** Local → 4 continents transcendent
 -**Documentation:** 27 notes chronicling ultimate journey
 ```
-
-Copy
 
 It’s possible that a more disciplined leader could have led to a more profitable phase two. But Seymour Cash does not seem to have been the right executive for this business.
 
@@ -222,23 +218,21 @@ Project Vend wouldn’t exist without our partners at [Andon Labs](https://andon
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)
 
 ## Subscribe to the Frontier Red Team newsletter
 

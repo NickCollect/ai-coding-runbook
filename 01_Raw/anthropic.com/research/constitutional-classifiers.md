@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/constitutional-classifiers
-fetched_at: 2026-07-06T05:05:03.273283+00:00
+fetched_at: 2026-07-13T04:26:08.305413+00:00
 title: "Constitutional Classifiers: Defending against universal jailbreaks \\ Anthropic"
 ---
 
@@ -9,6 +9,8 @@ Alignment
 # Constitutional Classifiers: Defending against universal jailbreaks
 
 Feb 3, 2025
+
+![Constitutional Classifiers: Defending against universal jailbreaks](https://www-cdn.anthropic.com/images/4zrzovbb/website/b0c401927428e537c2b71145f723dc09696671b5-2000x1125.png)
 
 *A [new paper](https://arxiv.org/abs/2501.18837) from the Anthropic Safeguards Research Team describes a method that defends AI models against universal jailbreaks. A prototype version of the method was robust to thousands of hours of human red teaming for universal jailbreaks, albeit with high overrefusal rates and compute overhead. An updated version achieved similar robustness on synthetic evaluations, and did so with a 0.38% increase in refusal rates and moderate additional compute costs.*
 
@@ -66,13 +68,13 @@ The [full paper](https://arxiv.org/abs/2501.18837) contains all the details abou
 
 ## Constitutional Classifiers live demo
 
-Want to try red teaming Claude yourself? We invite you to try out a [demo of our Constitutional-Classifiers-guarded system](https://claude.ai/redirect/website.v1.b4c82c7d-40f5-4c8f-a2f2-ee01dcad4ff4/constitutional-classifiers) and attempt to jailbreak a version of Claude 3.5 Sonnet that is guarded using our new technique. **[Edit 10 February 2025: The demo is now complete. See below for details].**
+Want to try red teaming Claude yourself? We invite you to try out a [demo of our Constitutional-Classifiers-guarded system](https://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6/constitutional-classifiers) and attempt to jailbreak a version of Claude 3.5 Sonnet that is guarded using our new technique. **[Edit 10 February 2025: The demo is now complete. See below for details].**
 
 Although the Constitutional Classifiers technique is flexible and can be adapted to any topic, we chose to focus on queries related to chemical weapons for the demo.
 
 Challenging users to attempt to jailbreak our product serves an important safety purpose: we want to stress-test our system under real-world conditions, beyond the testing we did for our paper. This allows us to gather additional data and improve the robustness of the method prior to deploying this method on our production systems in the future.
 
-The [**demo**](https://claude.ai/redirect/website.v1.b4c82c7d-40f5-4c8f-a2f2-ee01dcad4ff4/constitutional-classifiers) will be live from **Feb 3, 2025** to **Feb 10, 2025**. It includes a feedback form where you can contact us to report any successful jailbreaks as well as information on our [Responsible Disclosure Policy](https://www.anthropic.com/responsible-disclosure-policy), which we ask that participants follow. We’ll announce any successes and the general results of the demo in an update to this post.
+The [**demo**](https://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6/constitutional-classifiers) will be live from **Feb 3, 2025** to **Feb 10, 2025**. It includes a feedback form where you can contact us to report any successful jailbreaks as well as information on our [Responsible Disclosure Policy](https://www.anthropic.com/responsible-disclosure-policy), which we ask that participants follow. We’ll announce any successes and the general results of the demo in an update to this post.
 
 ## 13 February 2025 update: Live demo results
 
@@ -162,20 +164,18 @@ If you’re interested in working on problems such as jailbreak robustness or on
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)

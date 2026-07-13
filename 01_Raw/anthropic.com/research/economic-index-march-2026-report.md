@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/economic-index-march-2026-report
-fetched_at: 2026-06-29T05:26:16.956238+00:00
+fetched_at: 2026-07-13T04:26:15.476773+00:00
 title: "Anthropic Economic Index report: Learning curves \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Mar 24, 2026
 
 [Read in PDF](https://cdn.sanity.io/files/4zrzovbb/website/4053bf3440c0c85b8852052770c5b4cf882689c3.pdf)
 
-![Anthropic Economic Index report: Learning curves](https://www-cdn.anthropic.com/images/4zrzovbb/website/1c3e87fd90491089b2971dc34f9f75bb8a80f713-1000x1000.svg)
+![Anthropic Economic Index report: Learning curves](https://www-cdn.anthropic.com/images/4zrzovbb/website/a7a26dcce3759f36c1738cf6358800ed5870cb45-1920x1080.jpg)
 
 The Anthropic Economic Index uses our privacy-preserving data analysis [system](https://www.anthropic.com/research/clio) to track how Claude is being used across the economy. It’s part of our effort to understand the economic impacts of AI as early as possible, so that researchers and policymakers have adequate time to prepare.
 
@@ -236,20 +236,18 @@ Copy
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)

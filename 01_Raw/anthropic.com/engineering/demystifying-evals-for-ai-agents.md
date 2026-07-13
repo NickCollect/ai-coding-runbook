@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents
-fetched_at: 2026-07-06T05:04:34.334723+00:00
+fetched_at: 2026-07-13T04:25:43.992751+00:00
 title: "Demystifying evals for AI agents \\ Anthropic"
 ---
 
@@ -251,7 +251,7 @@ Each task should be passable by an agent that follows instructions correctly. Th
 
 **Step 3: Build balanced problem sets**
 
-Test both the cases where a behavior *should* occur and where it *shouldn't*. One-sided evals create one-sided optimization. For instance, if you only test whether the agent searches when it should, you might end up with an agent that searches for almost everything. Try to avoid [class-imbalanced](https://developers.google.com/machine-learning/crash-course/overfitting/imbalanced-datasets) evals. We learned this firsthand when building evals for web search in [Claude.ai](http://claude.ai/redirect/website.v1.6a5fd8e6-7400-44b7-abf2-c4df36000dff). The challenge was preventing the model from searching when it shouldn’t, while preserving its ability to do extensive research when appropriate. The team built evals covering both directions: queries where the model should search (like finding the weather) and queries where it should answer from existing knowledge (like “who founded Apple?”). Striking the right balance between undertriggering (not searching when it should) or overtriggering (searching when it shouldn’t) was difficult, and took many rounds of refinements to both the prompts and the eval. As more example problems come up, we continue to add to evals to improve our coverage.
+Test both the cases where a behavior *should* occur and where it *shouldn't*. One-sided evals create one-sided optimization. For instance, if you only test whether the agent searches when it should, you might end up with an agent that searches for almost everything. Try to avoid [class-imbalanced](https://developers.google.com/machine-learning/crash-course/overfitting/imbalanced-datasets) evals. We learned this firsthand when building evals for web search in [Claude.ai](http://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6). The challenge was preventing the model from searching when it shouldn’t, while preserving its ability to do extensive research when appropriate. The team built evals covering both directions: queries where the model should search (like finding the weather) and queries where it should answer from existing knowledge (like “who founded Apple?”). Striking the right balance between undertriggering (not searching when it should) or overtriggering (searching when it shouldn’t) was difficult, and took many rounds of refinements to both the prompts and the eval. As more example problems come up, we continue to add to evals to improve our coverage.
 
 ### Design the eval harness and graders
 

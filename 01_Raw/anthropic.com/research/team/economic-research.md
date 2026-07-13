@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economic-research
-fetched_at: 2026-07-06T05:06:06.318172+00:00
+fetched_at: 2026-07-13T04:26:47.886300+00:00
 title: "Economic Research \\ Anthropic"
 ---
 
@@ -19,8 +19,6 @@ We build the empirical foundation for understanding AI's economic impact. Our fl
 ### Why It Matters
 
 Economic transitions create both opportunity and disruption. The speed of AI development means the stakes are unusually high. We need reliable data to inform the decisions that workers, employers, and policymakers make about the future. Our research provides evidence to address uncertainty and helps society navigate this transition in ways that are broadly beneficial.
-
-![Anthropic Economic Index report: Learning curves](https://www-cdn.anthropic.com/images/4zrzovbb/website/1c3e87fd90491089b2971dc34f9f75bb8a80f713-1000x1000.svg)
 
 [## Anthropic Economic Index report: Learning curves
 

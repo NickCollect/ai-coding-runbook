@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/introspection
-fetched_at: 2026-06-29T05:26:35.224279+00:00
+fetched_at: 2026-07-13T04:26:27.293322+00:00
 title: "Emergent introspective awareness in large language models \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Oct 29, 2025
 
 [Read the paper](https://transformer-circuits.pub/2025/introspection/index.html)
 
-![Signs of introspection in large language models](https://www-cdn.anthropic.com/images/4zrzovbb/website/46e4aa7ea208ed440d5bd9e9e3a0ee66bc336ff1-1000x1000.svg)
+![Signs of introspection in large language models](https://www-cdn.anthropic.com/images/4zrzovbb/website/82bb8b2f999a998a9fd7e0cba8a5f44e0be04c51-1200x630.jpg)
 
 Have you ever asked an AI model what’s on its mind? Or to explain how it came up with its responses? Models will sometimes answer questions like these, but it’s hard to know what to make of their answers. Can AI systems really introspect—that is, can they consider their own thoughts? Or do they just make up plausible-sounding answers when they’re asked to do so?
 
@@ -152,20 +152,18 @@ We see several important directions. First, we need better evaluation methods—
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)

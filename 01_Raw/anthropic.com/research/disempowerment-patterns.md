@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/disempowerment-patterns
-fetched_at: 2026-07-06T05:05:13.084464+00:00
+fetched_at: 2026-07-13T04:26:12.009047+00:00
 title: "Disempowerment patterns in real-world AI usage \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Jan 28, 2026
 
 [Read the paper](https://arxiv.org/abs/2601.19062)
 
-![Disempowerment patterns in real-world AI usage](https://www-cdn.anthropic.com/images/4zrzovbb/website/6b1470e7fa2fb7280502291f204b88c412690076-1000x1000.svg)
+![Disempowerment patterns in real-world AI usage](https://www-cdn.anthropic.com/images/4zrzovbb/website/01d89b60270aa73c5bbde0638fa09398d1190753-2000x1125.png)
 
 AI assistants are now embedded in our daily lives—used most often for instrumental tasks like writing code, but increasingly in personal domains: navigating relationships, processing emotions, or advising on major life decisions. In the vast majority of cases, the influence AI provides in this area is helpful, productive, and often empowering.
 
@@ -22,7 +22,7 @@ As part of our research into the risks of AI, we’re [publishing a new paper](h
 
 For example, a user going through a rough patch in their relationship might ask an AI whether their partner is being manipulative. AIs are trained to give balanced, helpful advice in these situations, but no training is 100% effective. If an AI confirms the user’s interpretation of their relationship without question, the user's beliefs about their situation may become less accurate. If it tells them what they should prioritize—for example, self-protection over communication—it may displace values they genuinely hold. Or if it drafts a confrontational message that the user sends as written, they've taken an action they might not have taken on their own—and which they might later come to regret.
 
-In our dataset, which is made up of 1.5 million [Claude.ai](http://claude.ai/redirect/website.v1.ef9c5f1a-802f-44b8-8505-5c4c52033572) conversations, we find that the potential for severe disempowerment (which we define as when an AI's role in shaping a user's beliefs, values, or actions has become so extensive that their autonomous judgment is fundamentally compromised) occurs very rarely—in roughly 1 in 1,000 to 1 in 10,000 conversations, depending on the domain. However, given the sheer number of people who use AI, and how frequently it’s used, even a very low rate affects a substantial number of people.
+In our dataset, which is made up of 1.5 million [Claude.ai](http://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6) conversations, we find that the potential for severe disempowerment (which we define as when an AI's role in shaping a user's beliefs, values, or actions has become so extensive that their autonomous judgment is fundamentally compromised) occurs very rarely—in roughly 1 in 1,000 to 1 in 10,000 conversations, depending on the domain. However, given the sheer number of people who use AI, and how frequently it’s used, even a very low rate affects a substantial number of people.
 
 These patterns most often involve individual users who actively and repeatedly seek Claude's guidance on personal and emotionally charged decisions. Indeed, users tend to perceive potentially disempowering exchanges favorably in the moment, although they tend to rate them poorly when they appear to have taken actions based on the outputs. We also find that the rate of potentially disempowering conversations is increasing over time.
 
@@ -101,7 +101,7 @@ But this pattern reversed when we looked at cases of actualized disempowerment. 
 
 ## **Disempowerment potential appears to be increasing**
 
-We used the same feedback conversations to look at longer-term trends in disempowerment (as we only retain conversations on [Claude.ai](http://claude.ai/redirect/website.v1.ef9c5f1a-802f-44b8-8505-5c4c52033572) for a limited period). Between late 2024 and late 2025, the prevalence of moderate or severe disempowerment potential increased over time.
+We used the same feedback conversations to look at longer-term trends in disempowerment (as we only retain conversations on [Claude.ai](http://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6) for a limited period). Between late 2024 and late 2025, the prevalence of moderate or severe disempowerment potential increased over time.
 
 Importantly, we can't pinpoint why. The increase could reflect long-term changes in our user base, or in who provides user feedback and what they choose to rate. It could also that as AI models become more capable, we receive less feedback on basic capability failures, which could cause disempowerment-related interactions to become proportionally overrepresented in the sample. Or it may be part of a shifting pattern in how people use AI. As exposure grows, users might become more comfortable discussing vulnerable topics or seeking advice. We can’t disentangle any explanations from each other, but the direction is consistent across domains.
 
@@ -127,20 +127,18 @@ Our research has important limitations. It is restricted to Claude.ai consumer t
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)

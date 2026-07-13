@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-personal-guidance
-fetched_at: 2026-07-06T05:05:04.921284+00:00
+fetched_at: 2026-07-13T04:26:04.608402+00:00
 title: "How people ask Claude for personal guidance \\ Anthropic"
 ---
 
@@ -26,7 +26,7 @@ There remain many open questions on what good guidance from AI really means or h
 
 ## **What kinds of guidance do people seek from Claude?**
 
-We sampled 1 million [claude.ai](http://claude.ai/redirect/website.v1.e5d37d26-d22d-4499-af4c-d9bbc8e1d906) conversations from March and April 2026 and filtered for unique users to get roughly 639,000 conversations. We then used a classifier to identify *personal guidance,* which we defined as conversations where people ask what *they specifically* should do in their personal lives—for example, questions that start with "Should I…?" or "What do I do about…?". We excluded questions that seek objective information or opinions in general terms.
+We sampled 1 million [claude.ai](http://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6) conversations from March and April 2026 and filtered for unique users to get roughly 639,000 conversations. We then used a classifier to identify *personal guidance,* which we defined as conversations where people ask what *they specifically* should do in their personal lives—for example, questions that start with "Should I…?" or "What do I do about…?". We excluded questions that seek objective information or opinions in general terms.
 
 We categorized these roughly 38,000 conversations into nine domains, drawing from previous research on AI and guidance-giving: relationships, career, personal development, financial, legal, health and wellness, parenting, ethics, and spirituality (see [Appendix](https://cdn.sanity.io/files/4zrzovbb/website/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf) for more information). This taxonomy covered 98% of the conversations we saw.
 
@@ -104,20 +104,18 @@ Available [here.](https://cdn.sanity.io/files/4zrzovbb/website/0a540acdf3e167827
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)

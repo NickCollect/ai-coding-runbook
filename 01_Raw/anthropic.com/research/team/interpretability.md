@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/interpretability
-fetched_at: 2026-07-06T05:06:05.490009+00:00
+fetched_at: 2026-07-13T04:26:46.770830+00:00
 title: "Interpretability Research \\ Anthropic"
 ---
 
@@ -54,6 +54,9 @@ Search
 
 DateCategoryTitle
 
+- [Jul 6, 2026Interpretability
+
+  A global workspace in language models](https://www.anthropic.com/research/global-workspace)
 - [May 7, 2026Interpretability
 
   Natural Language Autoencoders: Turning Claude’s thoughts into text](https://www.anthropic.com/research/natural-language-autoencoders)
@@ -81,9 +84,6 @@ DateCategoryTitle
 - [Mar 13, 2025Alignment
 
   Auditing language models for hidden objectives](https://www.anthropic.com/research/auditing-hidden-objectives)
-- [Feb 20, 2025Interpretability
-
-  Insights on Crosscoder Model Diffing](https://www.anthropic.com/research/crosscoder-model-diffing)
 
 [See more](#)
 

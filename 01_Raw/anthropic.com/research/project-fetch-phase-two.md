@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/project-fetch-phase-two
-fetched_at: 2026-06-29T05:26:51.578415+00:00
+fetched_at: 2026-07-13T04:26:34.409892+00:00
 title: "Project Fetch: Phase two \\ Anthropic"
 ---
 
@@ -84,21 +84,21 @@ More research is needed to understand models’ ability to make these physical t
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)
-
-### Paving the way for agents in biology
-
-[Read more](https://www.anthropic.com/research/agents-in-biology)
 
 ## Subscribe to the Frontier Red Team newsletter
 

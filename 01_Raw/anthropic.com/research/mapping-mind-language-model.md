@@ -1,18 +1,18 @@
 ---
 source_url: https://www.anthropic.com/research/mapping-mind-language-model
-fetched_at: 2026-07-06T05:05:41.867273+00:00
-title: "Mapping the Mind of a Large Language Model \\ Anthropic"
+fetched_at: 2026-07-13T04:26:27.644395+00:00
+title: "Mapping the mind of a large language model \\ Anthropic"
 ---
 
 Interpretability
 
-# Mapping the Mind of a Large Language Model
+# Mapping the mind of a large language model
 
 May 21, 2024
 
 [Read the paper](https://transformer-circuits.pub/2024/scaling-monosemanticity/index.html)
 
-![](https://www-cdn.anthropic.com/images/4zrzovbb/website/80d6e033480704f5d57fbae4e3f0368d86a747ae-5761x3240.png)
+![Mapping the mind of a large language model](https://www-cdn.anthropic.com/images/4zrzovbb/website/7cb91c3d259514860ff0482f74c178eb4000ba6c-2000x1125.png)
 
 *Today we report a significant advance in understanding the inner workings of AI models. We have identified how millions of concepts are represented inside Claude Sonnet, one of our deployed large language models. This is the first ever detailed look inside a modern, production-grade large language model.* *This interpretability discovery could, in future, help us make AI models safer.*
 
@@ -30,7 +30,7 @@ There was both an engineering challenge (the raw sizes of the models involved re
 
 As for the scientific risk, the proof is in the pudding.
 
-We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.6a5fd8e6-7400-44b7-abf2-c4df36000dff)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
+We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
 
 Whereas the features we found in the toy language model were rather superficial, the features we found in Sonnet have a depth, breadth, and abstraction reflecting Sonnet's advanced capabilities.
 
@@ -92,20 +92,18 @@ For full details, please read our paper, "[Scaling Monosemanticity: Extracting I
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)

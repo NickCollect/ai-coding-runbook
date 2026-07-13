@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/labor-market-impacts
-fetched_at: 2026-06-29T05:26:35.161295+00:00
+fetched_at: 2026-07-13T04:26:28.558836+00:00
 title: "Labor market impacts of AI: A new measure and early evidence \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Mar 5, 2026
 
 [Read in PDF](https://cdn.sanity.io/files/4zrzovbb/website/2b5bbaf2c1eb81dbf6e6fb813c1a24e35a64d376.pdf)
 
-![Labor market impacts of AI: A new measure and early evidence](https://www-cdn.anthropic.com/images/4zrzovbb/website/1576ae23eaf481f33bd36ab468171cc69d12361a-1000x1000.svg)
+![Labor market impacts of AI: A new measure and early evidence](https://www-cdn.anthropic.com/images/4zrzovbb/website/ab8ae8617a1938790140358209918c79418b1c1e-2000x1125.png)
 
 ## Key findings
 
@@ -243,20 +243,18 @@ Tomlinson, K., Jaffe, S., Wang, W., Counts, S., & Suri, S. (2025). Working with 
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)

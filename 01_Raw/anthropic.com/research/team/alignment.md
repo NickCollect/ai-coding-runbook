@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/alignment
-fetched_at: 2026-07-06T05:06:10.070114+00:00
+fetched_at: 2026-07-13T04:26:47.302897+00:00
 title: "Alignment Research \\ Anthropic"
 ---
 
@@ -54,6 +54,9 @@ Search
 
 DateCategoryTitle
 
+- [Jul 8, 2026Alignment
+
+  An off switch for dual-use knowledge in AI models](https://www.anthropic.com/research/off-switch-dual-use)
 - [May 8, 2026Alignment
 
   Teaching Claude why](https://www.anthropic.com/research/teaching-claude-why)
@@ -81,9 +84,6 @@ DateCategoryTitle
 - [Dec 19, 2025Alignment
 
   Introducing Bloom: an open source tool for automated behavioral evaluations](https://www.anthropic.com/research/bloom)
-- [Nov 21, 2025Alignment
-
-  From shortcuts to sabotage: natural emergent misalignment from reward hacking](https://www.anthropic.com/research/emergent-misalignment-reward-hacking)
 
 [See more](#)
 

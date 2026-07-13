@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/persona-vectors
-fetched_at: 2026-06-29T05:26:46.637157+00:00
+fetched_at: 2026-07-13T04:26:32.742944+00:00
 title: "Persona vectors: Monitoring and controlling character traits in language models \\ Anthropic"
 ---
 
@@ -12,7 +12,7 @@ Aug 1, 2025
 
 [Read the paper](https://arxiv.org/abs/2507.21509)
 
-![Persona vectors: Monitoring and controlling character traits in language models](https://www-cdn.anthropic.com/images/4zrzovbb/website/74409af25137110ac04cc39e4d5ea0a2fbcea421-1000x1000.svg)
+![Persona vectors: Monitoring and controlling character traits in language models](https://www-cdn.anthropic.com/images/4zrzovbb/website/b20307e62d608cda29d80f3991e1e6624b3f3258-2000x1125.png)
 
 Language models are strange beasts. In many ways they appear to have human-like “personalities” and “moods,” but these traits are highly fluid and liable to change unexpectedly.
 
@@ -108,20 +108,18 @@ This research was led by participants in our [Anthropic Fellows](https://alignme
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)

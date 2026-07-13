@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/building-ai-cyber-defenders
-fetched_at: 2026-06-29T05:25:52.837760+00:00
+fetched_at: 2026-07-13T04:26:00.002702+00:00
 title: "Building AI for cyber defenders \\ Anthropic"
 ---
 
@@ -10,7 +10,7 @@ PolicyFrontier Red Team
 
 Oct 3, 2025
 
-![Building AI for cyber defenders](https://www-cdn.anthropic.com/images/4zrzovbb/website/97cf99624aa60f59b75f9e08cdf0f00d33c34804-1000x1000.svg)
+![Building AI for cyber defenders](https://www-cdn.anthropic.com/images/4zrzovbb/website/f7142e163f054fd84fbe85cbf193f6748becb2e0-2000x1125.jpg)
 
 **AI models are now useful for cybersecurity tasks in practice, not just theory. As research and experience demonstrated the utility of frontier AI as a tool for cyber attackers, we invested in improving Claude’s ability to help defenders detect, analyze, and remediate vulnerabilities in code and deployed systems. This work allowed Claude Sonnet 4.5 to match or eclipse Opus 4.1, our frontier model released only two months prior, in discovering code vulnerabilities and other cyber skills. Adopting and experimenting with AI will be key for defenders to keep pace.**
 
@@ -106,23 +106,21 @@ But even building and adopting to advantage defenders is only part of the soluti
 
 ## Related content
 
+### An off switch for dual-use knowledge in AI models
+
+[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+
+### A global workspace in language models
+
+New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+
+[Read more](https://www.anthropic.com/research/global-workspace)
+
 ### Anthropic Economic Index report: Cadences
 
 In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
 
 [Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
-
-### Project Fetch: Phase two
-
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
-
-### Agentic coding and persistent returns to expertise
-
-This report provides evidence on how Claude Code is used in practice, based on a privacy-preserving analysis of around 400,000 interactive sessions from around 235,000 people between October 2025 and April 2026.
-
-[Read more](https://www.anthropic.com/research/claude-code-expertise)
 
 ## Subscribe to the Frontier Red Team newsletter
 
