@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/debug-your-config
-fetched_at: 2026-07-13T04:25:47.408301+00:00
+fetched_at: 2026-07-20T04:31:27.715945+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,24 +18,24 @@ For installation, authentication, and connectivity problems, see [Troubleshoot i
 
 ## See what loaded into context
 
-The `/context` command shows everything occupying the context window for the current session, broken down by category: system prompt, memory files, skills, custom subagents with the source each loaded from, MCP tools, and conversation messages. Run it first to confirm whether your `CLAUDE.md`, rules, or skill descriptions are present at all.
+The `/context` command shows everything occupying the context window for the current session, broken down by category: system prompt, system tools, MCP tools, custom subagents with the source each loaded from, memory files, skills, and conversation messages. Run it first to confirm whether your `CLAUDE.md`, rules, or skill descriptions are present at all.
 
 For detail on a specific category, follow up with the dedicated command:
 
-| Command          | Shows                                                                                                                                                                    |
-| :--------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/memory`        | Which `CLAUDE.md` and rules files loaded, plus auto-memory entries                                                                                                       |
-| `/skills`        | Available skills from project, user, and plugin sources                                                                                                                  |
-| `/hooks`         | Active hook configurations                                                                                                                                               |
-| `/mcp`           | Connected MCP servers and their status                                                                                                                                   |
-| `/permissions`   | Resolved allow and deny rules currently in effect                                                                                                                        |
-| `/doctor`        | Setup checkup: installation health, invalid settings files, unused extensions, and duplicate [subagent](/en/sub-agents) names in the same directory, with proposed fixes |
-| `/debug [issue]` | Enables debug logging for the session and prompts Claude to diagnose using the log output and settings paths                                                             |
-| `/status`        | Active settings sources, including whether managed settings are in effect                                                                                                |
+| Command          | Shows                                                                                                                                                                                                                                        |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/memory`        | Memory file locations across user and project scopes with the option to open each in your editor, plus access to the auto memory folder and the auto memory toggle                                                                           |
+| `/skills`        | Available skills from project, user, and plugin sources                                                                                                                                                                                      |
+| `/hooks`         | Active hook configurations                                                                                                                                                                                                                   |
+| `/mcp`           | Connected MCP servers and their status                                                                                                                                                                                                       |
+| `/permissions`   | Resolved allow and deny rules currently in effect                                                                                                                                                                                            |
+| `/doctor`        | Setup checkup: installation health, invalid settings files, unused extensions, duplicate [subagent](/en/sub-agents) names in the same directory, and checked-in `CLAUDE.md` content Claude can derive from the codebase, with proposed fixes |
+| `/debug [issue]` | Enables debug logging for the session and prompts Claude to diagnose using the log output and settings paths                                                                                                                                 |
+| `/status`        | Active settings sources, including whether managed settings are in effect                                                                                                                                                                    |
 
-If a memory file is missing from `/memory`, check its location against [how CLAUDE.md files load](/en/memory#how-claude-md-files-load). Subdirectory `CLAUDE.md` files load on demand when Claude reads a file in that directory with the Read tool, not at session start.
+If a memory file is missing from the `/context` breakdown, check its location against [how CLAUDE.md files load](/en/memory#how-claude-md-files-load). Subdirectory `CLAUDE.md` files load on demand when Claude reads a file in that directory with the Read tool, not at session start.
 
-If `/memory` confirms the file loaded but Claude still isn't following a particular instruction, the issue is likely how the instruction is written rather than whether it loaded. CLAUDE.md works well for the kinds of guidance you'd give a new teammate, such as project conventions, build commands, and where files belong.
+If `/context` confirms the file loaded but Claude still isn't following a particular instruction, the issue is likely how the instruction is written rather than whether it loaded. CLAUDE.md works well for the kinds of guidance you'd give a new teammate, such as project conventions, build commands, and where files belong.
 
 Adherence drops when an instruction is vague enough to interpret multiple ways, when two files give conflicting direction, or when the file has grown long enough that individual rules get less attention. [Write effective instructions](/en/memory#write-effective-instructions) covers the specificity, size, and structure patterns that keep adherence high.
 
@@ -47,7 +47,7 @@ Adherence drops when an instruction is vague enough to interpret multiple ways, 
 
 Settings merge across managed, user, project, and local scopes. Managed settings always win when present. Among the rest, the closer scope overrides the broader one in the order local, then project, then user. Some settings can also be set by command-line flags or [environment variables](/en/env-vars), which act as another override layer. When a setting doesn't seem to apply, the value you set is usually being overridden by another scope or an environment variable.
 
-Run `/doctor` to check your configuration and installation. It reports what it finds, including invalid settings files, duplicate installations, and unused extensions, then proposes fixes it applies only after you confirm. Before v2.1.205, `/doctor` opened a read-only diagnostics screen and pressing `f` sent the report to Claude to fix.
+Run `/doctor` to check your configuration and installation. It reports what it finds, including invalid settings files, duplicate installations, unused extensions, and {/* min-version: 2.1.206 */}checked-in `CLAUDE.md` content Claude can derive from the codebase, then proposes fixes it applies only after you confirm. The `CLAUDE.md` trim check requires Claude Code v2.1.206 or later. Before v2.1.205, `/doctor` opened a read-only diagnostics screen and pressing `f` sent the report to Claude to fix.
 
 From the terminal, `claude doctor` prints read-only installation and settings diagnostics without starting a session.
 
@@ -87,7 +87,7 @@ If the problem persists in safe mode, or your settings themselves are suspect, c
 cd /tmp && CLAUDE_CONFIG_DIR=/tmp/claude-clean claude
 ```
 
-The clean session has no user or project settings, hooks, MCP servers, plugins, or memory.
+The clean session has no user or project settings, hooks, MCP servers, plugins, or memory. On the first launch, expect the first-run setup screens, starting with theme selection. If you see them, the clean configuration directory is in effect. Later launches with the same directory skip these screens because Claude Code saves onboarding state there.
 
 * Managed settings still apply if your organization deploys them, since they live at a system path outside `~/.claude`
 * On Linux and Windows, you'll be prompted to log in again because credentials are stored under the configuration directory

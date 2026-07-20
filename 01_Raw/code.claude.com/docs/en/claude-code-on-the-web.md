@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-code-on-the-web
-fetched_at: 2026-07-13T04:25:46.078853+00:00
+fetched_at: 2026-07-20T04:31:26.706705+00:00
 fetch_method: mintlify_md
 ---
 
@@ -65,21 +65,22 @@ Each session runs in a fresh Anthropic-managed VM with your repository cloned. T
 
 Cloud sessions start from a fresh clone of your repository. Anything committed to the repo is available. Anything you've installed or configured only on your own machine isn't available in the session. Your organization's policy arrives separately through [server-managed settings](/en/server-managed-settings).
 
-|                                                                            | Available in cloud sessions | Why                                                                                                                                                                                                                                                                                                                  |
-| :------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Your repo's `CLAUDE.md`                                                    | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
-| Your repo's `.claude/settings.json` hooks                                  | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
-| Your repo's `.mcp.json` MCP servers                                        | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
-| Your repo's `.claude/rules/`                                               | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
-| Your repo's `.claude/skills/`, `.claude/agents/`, `.claude/commands/`      | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
-| Plugins declared in `.claude/settings.json`                                | Yes                         | Installed at session start from the [marketplace](/en/plugin-marketplaces) you declared. Requires network access to reach the marketplace source                                                                                                                                                                     |
-| Your organization's [server-managed settings](/en/server-managed-settings) | Yes                         | Fetched from Anthropic's servers when the session starts. See [Surface coverage](/en/model-config#surface-coverage) for how `availableModels` is enforced in cloud sessions. Settings deployed to your device through MDM or managed settings files don't apply, because the session runs on an Anthropic-managed VM |
-| Your user `~/.claude/CLAUDE.md`                                            | No                          | Lives on your machine, not in the repo                                                                                                                                                                                                                                                                               |
-| Your user `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/`  | No                          | Live on your machine, not in the repo. Commit them to the repo's `.claude/` directory instead. Skills you enable on claude.ai are loaded into cloud sessions automatically                                                                                                                                           |
-| Plugins enabled only in your user settings                                 | No                          | User-scoped `enabledPlugins` lives in `~/.claude/settings.json`. Declare them in the repo's `.claude/settings.json` instead                                                                                                                                                                                          |
-| MCP servers you added with `claude mcp add`                                | No                          | Those write to your local user config, not the repo. Declare the server in [`.mcp.json`](/en/mcp#project-scope) instead                                                                                                                                                                                              |
-| Static API tokens and credentials                                          | No                          | No dedicated secrets store exists yet. See below                                                                                                                                                                                                                                                                     |
-| Interactive auth like AWS SSO                                              | No                          | Not supported. SSO requires browser-based login that can't run in a cloud session                                                                                                                                                                                                                                    |
+|                                                                                                                                                                                           | Available in cloud sessions | Why                                                                                                                                                                                                                                                                                                                  |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Your repo's `CLAUDE.md`                                                                                                                                                                   | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Your repo's `.claude/settings.json` hooks                                                                                                                                                 | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Your repo's `.mcp.json` MCP servers                                                                                                                                                       | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Your repo's `.claude/rules/`                                                                                                                                                              | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Your repo's `.claude/skills/`, `.claude/agents/`, `.claude/commands/`                                                                                                                     | Yes                         | Part of the clone                                                                                                                                                                                                                                                                                                    |
+| Plugins declared in `.claude/settings.json`                                                                                                                                               | Yes                         | Installed at session start from the [marketplace](/en/plugin-marketplaces) you declared. Requires network access to reach the marketplace source                                                                                                                                                                     |
+| Your organization's [server-managed settings](/en/server-managed-settings)                                                                                                                | Yes                         | Fetched from Anthropic's servers when the session starts. See [Surface coverage](/en/model-config#surface-coverage) for how `availableModels` is enforced in cloud sessions. Settings deployed to your device through MDM or managed settings files don't apply, because the session runs on an Anthropic-managed VM |
+| Your user `~/.claude/CLAUDE.md`                                                                                                                                                           | No                          | Lives on your machine, not in the repo                                                                                                                                                                                                                                                                               |
+| Your user `~/.claude/skills/`, `~/.claude/agents/`, `~/.claude/commands/`                                                                                                                 | No                          | Live on your machine, not in the repo. Commit them to the repo's `.claude/` directory instead. Skills you enable on claude.ai are loaded into cloud sessions automatically                                                                                                                                           |
+| Plugins enabled only in your user settings                                                                                                                                                | No                          | User-scoped `enabledPlugins` lives in `~/.claude/settings.json`. Declare them in the repo's `.claude/settings.json` instead                                                                                                                                                                                          |
+| MCP servers you added with `claude mcp add`                                                                                                                                               | No                          | Those write to your local user config, not the repo. Declare the server in [`.mcp.json`](/en/mcp#project-scope) instead                                                                                                                                                                                              |
+| Transport variables in your repo's `.claude/settings.json` `env` block, such as `NODE_EXTRA_CA_CERTS` and the [mTLS client certificate variables](/en/network-config#mtls-authentication) | No                          | The hosting environment manages the session's API connection, so Claude Code ignores these keys and notes each ignored key in the session's debug log                                                                                                                                                                |
+| Static API tokens and credentials                                                                                                                                                         | No                          | No dedicated secrets store exists yet. See below                                                                                                                                                                                                                                                                     |
+| Interactive auth like AWS SSO                                                                                                                                                             | No                          | Not supported. SSO requires browser-based login that can't run in a cloud session                                                                                                                                                                                                                                    |
 
 To make your own configuration available in cloud sessions, commit it to the repo; organization policy arrives separately through [server-managed settings](/en/server-managed-settings).
 
@@ -111,6 +112,13 @@ For exact versions, ask Claude to run `check-tools` in a cloud session. This com
 
 Cloud sessions include built-in GitHub tools that let Claude read issues, list pull requests, fetch diffs, and post comments without any setup. These tools authenticate through the [GitHub proxy](#github-proxy) using whichever method you configured under [GitHub authentication options](#github-authentication-options), so your token never enters the container.
 
+You can set `GH_TOKEN` or `GITHUB_TOKEN` yourself in [environment settings](#configure-your-environment), or leave both unset and let the [GitHub proxy](#github-proxy) authenticate for you:
+
+* If you set a token, it passes through to the container unchanged, so `gh` and your scripts use it directly.
+* If you set neither, the container sets both variables to the placeholder string `proxy-injected` and the proxy substitutes your real credentials on outbound GitHub requests. `gh` works without a token of your own, but a script that reads `GITHUB_TOKEN` directly gets the placeholder, not a usable token.
+
+To check which case applies to your session, ask Claude to run `echo $GH_TOKEN`.
+
 The `gh` CLI isn't pre-installed. If you need a `gh` command the built-in tools don't cover, like `gh release` or `gh workflow run`, install and authenticate it yourself:
 
 <Steps>
@@ -118,8 +126,8 @@ The `gh` CLI isn't pre-installed. If you need a `gh` command the built-in tools 
     Add `apt update && apt install -y gh` to your [setup script](#setup-scripts).
   </Step>
 
-  <Step title="Provide a token">
-    Add a `GH_TOKEN` environment variable to your [environment settings](#configure-your-environment) with a GitHub personal access token. `gh` reads `GH_TOKEN` automatically, so no `gh auth login` step is needed.
+  <Step title="Provide a token if the proxy is not handling authentication">
+    If `echo $GH_TOKEN` prints `proxy-injected`, the [GitHub proxy](#github-proxy) authenticates `gh` for you and this step is unnecessary. Otherwise, add a `GH_TOKEN` environment variable to your [environment settings](#configure-your-environment) with a GitHub personal access token. `gh` reads `GH_TOKEN` automatically, so no `gh auth login` step is needed.
   </Step>
 </Steps>
 
@@ -183,6 +191,19 @@ NODE_ENV=development
 LOG_LEVEL=debug
 DATABASE_URL=postgres://localhost:5432/myapp
 ```
+
+### Organization-shared environments
+
+Owners and admins on Team and Enterprise plans can create cloud environments that are shared with every member of the organization. Shared environments appear in each member's environment selector alongside their personal ones, so a team can standardize on one configuration instead of each member recreating it.
+
+Manage shared environments from the **Cloud environments** page in [admin settings](https://claude.ai/admin-settings). From there you can:
+
+* Create, edit, and archive shared environments. Each one has the same fields as a personal environment: a name, a [network access level](#access-levels), [environment variables](#configure-your-environment) in `.env` format, and a [setup script](#setup-scripts).
+* Set the default environment for the organization.
+
+Values in a shared environment reach every member's sessions in that environment. Like personal environments, shared environments have no dedicated secrets store, so don't include secrets.
+
+Organizations in the self-hosted runners program also manage their runner pools from the same page.
 
 ## Setup scripts
 
@@ -254,7 +275,7 @@ To install dependencies only in cloud sessions, add a SessionStart hook to your 
 }
 ```
 
-Create the script at `scripts/install_pkgs.sh` and make it executable with `chmod +x`. The `CLAUDE_CODE_REMOTE` environment variable is set to `true` in cloud sessions, so you can use it to skip local execution:
+Create the script at `scripts/install_pkgs.sh`. The `CLAUDE_CODE_REMOTE` environment variable is set to `true` in cloud sessions, so you can use it to skip local execution:
 
 ```bash theme={null}
 #!/bin/bash
@@ -266,6 +287,12 @@ fi
 npm install
 pip install -r requirements.txt
 exit 0
+```
+
+Then make the script executable:
+
+```bash theme={null}
+chmod +x scripts/install_pkgs.sh
 ```
 
 SessionStart hooks have some limitations in cloud sessions:
@@ -314,13 +341,18 @@ registry.example.com
 
 Use `*.` for wildcard subdomain matching. Check **Also include default list of common package managers** to keep the [Trusted domains](#default-allowed-domains) alongside your custom entries, or leave it unchecked to allow only what you list.
 
+Allowed domains are configured per environment. There's no organization-level allowlist that Owners can push to all users' environments; [server-managed settings](/en/server-managed-settings) can restrict cloud sessions but can't add allowed domains.
+
 ### GitHub proxy
 
-For security, all GitHub operations go through a dedicated proxy service that transparently handles all git interactions. Inside the sandbox, the git client authenticates using a custom-built scoped credential. This proxy:
+For security, all GitHub operations go through a dedicated proxy service that keeps your real GitHub credentials outside the sandbox. The proxy authenticates two kinds of traffic:
 
-* Manages GitHub authentication securely: the git client uses a scoped credential inside the sandbox, which the proxy verifies and translates to your actual GitHub authentication token
-* Restricts git push operations to the current working branch for safety
-* Enables cloning, fetching, and PR operations while maintaining security boundaries
+* Git interactions: the git client inside the sandbox uses a custom-built scoped credential, which the proxy verifies and translates to your actual GitHub authentication token
+* GitHub API requests: the proxy substitutes your real credentials on requests from the built-in GitHub tools, and from `gh` when your session sets the `proxy-injected` placeholder described in [Work with GitHub issues and pull requests](#work-with-github-issues-and-pull-requests)
+
+The proxy also restricts git push operations to the current working branch for safety, and enables cloning, fetching, and PR operations while maintaining security boundaries.
+
+The proxy limits GitHub API and release-asset requests to repositories attached to the session, regardless of the environment's [network access level](#access-levels). Setup scripts that download release assets from unattached repositories return a 403. Committed files from public repositories are fetched through `raw.githubusercontent.com`, which the [security proxy](#security-proxy) handles instead. That domain is in the default [Trusted list](#default-allowed-domains), so the files stay reachable unless the environment's [access level](#access-levels) excludes it.
 
 ### Security proxy
 
@@ -592,7 +624,7 @@ When using **Trusted** network access, the following domains are allowed by defa
 
 ## Move tasks between web and terminal
 
-These workflows require the [Claude Code CLI](/en/quickstart) signed in to the same claude.ai account. You can start new cloud sessions from your terminal, or pull cloud sessions into your terminal to continue locally. Cloud sessions persist even if you close your laptop, and you can monitor them from anywhere including the Claude mobile app.
+These workflows require the [Claude Code CLI](/en/quickstart) signed in to the same claude.ai account. You can start new cloud sessions from your terminal, or pull cloud sessions into your terminal to continue locally. Cloud sessions persist even if you close your laptop, and you can monitor them from anywhere including the Claude mobile app. The `--cloud` and `--teleport` flags don't appear in `claude --help` output, but the CLI accepts them as shown below.
 
 <Note>
   From the CLI, session handoff is one-way: you can pull cloud sessions into your terminal with `--teleport`, but you can't push an existing terminal session to the web. The `--cloud` flag creates a new cloud session for your current repository. The [Desktop app](/en/desktop#continue-in-another-surface) provides a Continue in menu that can send a local session to the web.
@@ -687,7 +719,7 @@ Teleport checks these requirements before resuming a session. If any requirement
 
 #### `--teleport` is unavailable
 
-Teleport requires claude.ai subscription authentication. If you're authenticated via API key, Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, run `/login` to sign in with your claude.ai account instead. If you're already signed in via claude.ai and `--teleport` is still unavailable, your organization may have disabled cloud sessions.
+Teleport requires claude.ai subscription authentication. If you're authenticated via API key, run `/login` to sign in with your claude.ai account instead. On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, `--teleport` stops with `Cloud sessions aren't available with <provider>` because cloud sessions run on Anthropic's infrastructure and aren't available through those providers. If you're already signed in via claude.ai and `--teleport` is still unavailable, your organization may have disabled cloud sessions.
 
 ## Work with sessions
 
@@ -695,7 +727,10 @@ Sessions appear in the sidebar at claude.ai/code. From there you can review chan
 
 ### Manage context
 
-Cloud sessions support [built-in commands](/en/commands) that produce text output. Commands that only run in the terminal interface, such as `/plugin` or `/resume`, aren't available. {/* min-version: 2.1.205 */}`/model`, `/effort`, `/fast`, `/color`, and `/rename` work with the value as an argument, for example `/model sonnet`, instead of opening the terminal picker or slider; the argument forms require Claude Code v2.1.205 or later in the session's environment and follow each command's [availability notes](/en/commands#all-commands), so `/effort` reports `Not applied` while a model's [launch-default effort hold](/en/model-config#adjust-effort-level) is in force and `/fast` works only in a session that started with fast mode turned on. `/config` sets a setting when you pass `key=value`.
+Cloud sessions support [built-in commands](/en/commands) that produce text output. Commands that only run in the terminal interface, such as `/plugin` or `/resume`, aren't available. Commands that open a picker or panel in the terminal behave differently in cloud sessions:
+
+* {/* min-version: 2.1.205 */}**`/model`, `/effort`, `/fast`, `/color`, and `/rename`**: pass the value as an argument, for example `/model sonnet`, instead of opening the terminal picker or slider. The argument forms require Claude Code v2.1.205 or later in the session's environment and follow each command's [availability notes](/en/commands#all-commands): `/effort` reports `Not applied` while a model's [launch-default effort hold](/en/model-config#adjust-effort-level) is in force, and `/fast` works only in a session that started with fast mode turned on.
+* **`/config`**: on the web, opens the Claude Code section of your settings instead of setting a value, and text after the command, including `key=value`, is ignored. To change settings for a cloud session, use [environment variables](#configure-your-environment) or commit [settings files](/en/settings) to the repository.
 
 For context management specifically:
 
@@ -731,7 +766,7 @@ For Max and Pro accounts, the two visibility options are **Private** and **Publi
 
 Check your session for sensitive content before sharing. Sessions may contain code and credentials from private GitHub repositories. Repository access verification is not enabled by default.
 
-To require recipients to have repository access, or to hide your name from shared sessions, go to Settings > Claude Code > Sharing settings.
+To require recipients to have repository access, or to hide your name from shared sessions, go to [**Settings > Claude Code > Sharing settings**](https://claude.ai/settings/claude-code).
 
 ### Archive sessions
 
@@ -801,6 +836,14 @@ If a new session fails to start with `Session creation failed` or stalls at prov
 * Check [status.claude.com](https://status.claude.com) for cloud session incidents
 * Retry after a minute, as capacity is provisioned on demand
 * Confirm your repository is reachable. The connecting GitHub account must have access to the repository on GitHub, either through the Claude GitHub App authorization or a `gh` token synced via `/web-setup`. Installing the App on the repository isn't required. See [GitHub authentication options](#github-authentication-options).
+
+### Unable to get organization UUID
+
+`claude --cloud` and `claude --teleport` require sign-in with a claude.ai account. If you authenticate with an API key, or your stored account details are stale, these commands fail with `Unable to get organization UUID` or a message that API key authentication is not sufficient.
+
+Run `/login` to sign in with your claude.ai account, then retry the command.
+
+On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, the commands stop earlier with `Cloud sessions aren't available with <provider>`. Cloud sessions run on Anthropic's infrastructure and aren't available through those providers.
 
 ### Remote Control session expired or access denied
 

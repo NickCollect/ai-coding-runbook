@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/context-window
-fetched_at: 2026-07-06T05:04:31.609060+00:00
+fetched_at: 2026-07-20T04:31:27.493715+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1619,7 +1619,7 @@ If you need a larger window rather than a smaller conversation, Fable 5, Sonnet 
 
 ## Check your own session
 
-The visualization uses representative numbers. To see your actual context usage at any point, run `/context` for a live breakdown by category with optimization suggestions. Run `/memory` to check which CLAUDE.md and auto memory files loaded at startup.
+The visualization uses representative numbers. To see your actual context usage at any point, run `/context` for a live breakdown by category with optimization suggestions, including which CLAUDE.md and auto memory files loaded. Run `/memory` to open and edit those files.
 
 ## Related resources
 

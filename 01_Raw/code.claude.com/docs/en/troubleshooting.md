@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/troubleshooting
-fetched_at: 2026-07-13T04:25:54.259572+00:00
+fetched_at: 2026-07-20T04:31:32.681101+00:00
 fetch_method: mintlify_md
 ---
 
@@ -43,7 +43,15 @@ Claude Code is designed to work with most development environments, but may cons
 
 If memory usage stays high after these steps, run `/heapdump` to write a JavaScript heap snapshot and a memory breakdown to `~/Desktop`. On Linux without a Desktop folder, the files are written to your home directory.
 
-The breakdown shows resident set size, JS heap, array buffers, and unaccounted native memory, which helps identify whether the growth is in JavaScript objects or in native code. To inspect retainers, open the `.heapsnapshot` file in Chrome DevTools under Memory → Load. Attach both files when reporting a memory issue on [GitHub](https://github.com/anthropics/claude-code/issues).
+The breakdown shows resident set size, JS heap, array buffers, and unaccounted native memory, which helps identify whether the growth is in JavaScript objects or in native code. To inspect retainers, open the `.heapsnapshot` file in Chrome DevTools under Memory → Load; the breakdown is the file ending in `-diagnostics.json`.
+
+<Warning>
+  The `.heapsnapshot` file contains every string in the process. Don't attach it to a public issue or share it. Attach only the `-diagnostics.json` file when reporting a memory issue on [GitHub](https://github.com/anthropics/claude-code/issues). That file contains memory statistics and no conversation content or credentials.
+</Warning>
+
+### Large tables are cut off in the terminal
+
+A Markdown table with more than 200 rows renders its first 200 rows followed by a `… N more rows not shown` line. Only the display is capped: the full table stays in the conversation, and [`/copy`](/en/commands) copies every row. For a table too large to read in the terminal, ask Claude to write it to a file instead. Before v2.1.208, Claude Code rendered every row, so resuming a session that contained a very large table could stall while it re-rendered.
 
 ### Auto-compaction stops with a thrashing error
 
@@ -90,6 +98,8 @@ If the Search tool, `@file` mentions, custom agents, or custom skills aren't fin
     ```bash theme={null}
     apk add ripgrep
     ```
+
+    `ripgrep` is in Alpine's community repository. If `apk` reports that the package is missing, see [Alpine Linux setup](/en/setup#alpine-linux-and-musl-based-distributions).
   </Tab>
 
   <Tab title="Arch">
@@ -105,7 +115,7 @@ If the Search tool, `@file` mentions, custom agents, or custom skills aren't fin
   </Tab>
 </Tabs>
 
-Then set `USE_BUILTIN_RIPGREP=0` in your [environment](/en/env-vars).
+Then set `USE_BUILTIN_RIPGREP=0` in your [environment](/en/env-vars). To confirm the switch took effect, run `claude doctor` in your terminal and check that the Search line shows the path of your system ripgrep instead of `OK (bundled)`.
 
 ### Slow or incomplete search results on WSL
 
@@ -131,3 +141,5 @@ If you're experiencing issues not covered here:
 2. Use the `/feedback` command within Claude Code to report problems directly to Anthropic
 3. Check the [GitHub repository](https://github.com/anthropics/claude-code) for known issues
 4. Ask Claude directly about its capabilities and features. Claude has built-in access to its documentation.
+
+For account, billing, or subscription problems, contact Anthropic support instead: sign in at [claude.ai](https://claude.ai) (Console users: [platform.claude.com](https://platform.claude.com)), click your initials in the lower left, and select **Get help**. See [How to get support](https://support.claude.com/en/articles/9015913-how-to-get-support) for the full flow, including who can reach a human agent on each plan.

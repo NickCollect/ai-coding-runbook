@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugin-dependencies
-fetched_at: 2026-07-13T04:25:51.813103+00:00
+fetched_at: 2026-07-20T04:31:30.274437+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,17 +10,13 @@ fetch_method: mintlify_md
 
 # Constrain plugin dependency versions
 
-> Declare version constraints on plugin dependencies so your plugin keeps working when an upstream plugin ships a breaking change.
+> Declare version constraints on plugin dependencies, and bundle a curated plugin set behind one install.
 
 A plugin can depend on other plugins by listing them in `plugin.json` or in its marketplace entry. By default, a dependency tracks the latest available version, so an upstream release can change the dependency under your plugin without warning. Version constraints let you hold a dependency at a tested version range until you choose to move.
 
 When you install a plugin that declares dependencies, Claude Code resolves and installs them automatically and lists which dependencies were added at the end of the install output. If a dependency later goes missing, `/reload-plugins` and the background plugin auto-update reinstall it, provided its marketplace is already in your configured marketplaces. Re-running `claude plugin install` on the dependent plugin, or adding a marketplace with `claude plugin marketplace add`, also resolves any outstanding missing dependencies. Dependencies from a marketplace you have not added are left unresolved.
 
 This guide is for plugin authors who declare dependencies in `plugin.json` and for marketplace maintainers who tag releases. To install plugins that have dependencies, see [Discover and install plugins](/en/discover-plugins). For the full manifest schema, see the [Plugins reference](/en/plugins-reference).
-
-<Note>
-  Dependency version constraints require Claude Code v2.1.110 or later.
-</Note>
 
 ## Why constrain dependency versions
 
@@ -56,6 +52,35 @@ An entry can be a bare string with only the plugin name, like `"audit-logger"` i
 | `marketplace` | string | A different marketplace to resolve `name` in. Cross-marketplace dependencies are blocked unless the target marketplace is listed in [`allowCrossMarketplaceDependenciesOn`](#depend-on-a-plugin-from-another-marketplace) in the root marketplace's `marketplace.json`. |
 
 The `version` field accepts any expression supported by Node's `semver` package, including caret, tilde, hyphen, and comparator ranges. Pre-release versions such as `2.0.0-beta.1` are excluded unless your range opts in with a pre-release suffix like `^2.0.0-0`.
+
+## Bundle plugins for a team
+
+Besides the required `name`, a plugin manifest can consist of only a `dependencies` array. Installing it pulls in every dependency, which makes it a way to package a curated plugin set behind one install.
+
+For example, a platform team can publish role-specific bundles in an internal marketplace so engineers run one `claude plugin install` instead of installing each tool separately:
+
+```json .claude-plugin/plugin.json theme={null}
+{
+  "name": "backend-standard",
+  "version": "1.0.0",
+  "description": "Standard plugin set for backend engineers",
+  "dependencies": [
+    "secrets-vault",
+    "deploy-kit",
+    { "name": "db-migrate", "version": "^3.0" },
+    "oncall-runbook"
+  ]
+}
+```
+
+Installing `backend-standard` resolves and installs all four dependencies.
+
+To add a tool to the standard set later, publish a new `backend-standard` version with the extra dependency. Auto-update is off by default for non-Anthropic marketplaces, so engineers pick up the new version in one of two ways:
+
+* Enable auto-update for the marketplace in `/plugin`. The next auto-update moves the bundle to the new version and installs any dependencies it adds.
+* Run `claude plugin update backend-standard`, then `/reload-plugins` to install the newly added dependencies.
+
+To roll bundles out across an organization, add the bundle plugin to `enabledPlugins` in [managed settings](/en/settings#enabledplugins).
 
 ## Depend on a plugin from another marketplace
 
@@ -94,7 +119,14 @@ Tag each release as `{plugin-name}--v{version}`, where `{version}` matches the `
 claude plugin tag --push
 ```
 
-The `claude plugin tag` command derives the tag name from the plugin's manifest and the enclosing marketplace entry. Before creating the tag, it validates the plugin contents, checks that `plugin.json` and the marketplace entry agree on the version, requires a clean working tree under the plugin directory, and refuses if the tag already exists. Add `--dry-run` to see what would be tagged without creating it. Running `git tag secrets-vault--v2.1.0` directly is equivalent if you keep `plugin.json` and the marketplace entry in sync yourself.
+The `claude plugin tag` command derives the tag name from the plugin's manifest and the enclosing marketplace entry. Before creating the tag, it validates the plugin contents, checks that `plugin.json` and the marketplace entry agree on the version, requires a clean working tree under the plugin directory, and refuses if the tag already exists.
+
+* `--push` pushes the tag to the `origin` remote, so the repository needs a configured `origin` remote. Pass `--remote` to push to a different one.
+* If the push fails, the tag is still created locally and the command exits with an error.
+* With `--push`, a successful run ends with `Created tag secrets-vault--v2.1.0` and `Pushed to origin`, where the last line names the remote it pushed to. Without `--push`, the command prints the `git push` command to run instead.
+* `--dry-run` prints what would be tagged without creating it.
+
+Running `git tag secrets-vault--v2.1.0` directly is equivalent if you keep `plugin.json` and the marketplace entry in sync yourself.
 
 The plugin name prefix lets one marketplace repository host multiple plugins with independent version lines. The `--v` separator is parsed as a prefix match on the full plugin name, so plugin names that contain hyphens are handled correctly.
 
@@ -159,9 +191,17 @@ Auto-installed dependencies stay on disk after the plugins that installed them a
 claude plugin prune
 ```
 
-By default, prune operates at user scope. Use `--scope project` or `--scope local` to target a different scope. Pass `--dry-run` to list what would be removed without changing anything. Pass `-y` to skip the confirmation prompt. When stdin or stdout is not a terminal, prune lists the orphans and exits without removing them unless `-y` is passed.
+If nothing qualifies for removal, the command prints `Nothing to prune` with the reason and exits. This is the expected output on a fresh install, not an error.
+
+By default, prune operates at user scope and asks for confirmation before removing anything:
+
+* `--scope project` or `--scope local` targets a different scope.
+* `--dry-run` lists what would be removed without changing anything.
+* `-y` skips the confirmation prompt. When stdin or stdout isn't a terminal, prune lists the orphans and exits without removing them unless you pass `-y`.
 
 To prune as part of an uninstall, pass `--prune` to `claude plugin uninstall`. After removing the named plugin, Claude Code scans for and removes any auto-installed dependencies that are now orphaned. Plugins you installed yourself are never pruned, only those installed automatically through another plugin's `dependencies` array.
+
+The same confirmation behavior applies: pass `-y` to skip the prompt. When stdin or stdout isn't a terminal, the uninstall still completes, but the prune step lists the orphans and removes nothing unless you pass `-y`.
 
 For example, to uninstall `deploy-kit` and clean up the dependencies it leaves behind:
 
@@ -171,7 +211,7 @@ claude plugin uninstall deploy-kit --prune
 
 ## Resolve dependency errors
 
-Dependency problems appear in `claude plugin list` and in the `/plugin` interface. Claude Code disables the affected plugin until you resolve the error. The table below lists the most common errors and how to resolve them.
+Dependency problems appear in `claude plugin list` and in the `/plugin` interface, as descriptive error messages rather than the literal codes in this table. Claude Code disables the affected plugin until you resolve the error. The table below lists the most common errors and how to resolve them.
 
 | Error                            | Meaning                                                                                                                                                                                                                           | How to resolve                                                                                                                                                                                                                                                          |
 | :------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -180,7 +220,7 @@ Dependency problems appear in `claude plugin list` and in the `/plugin` interfac
 | `dependency-version-unsatisfied` | The installed dependency's version is outside this plugin's declared range.                                                                                                                                                       | Run `claude plugin install <dependency>@<marketplace>` to re-resolve the dependency against all current constraints.                                                                                                                                                    |
 | `no-matching-tag`                | The dependency's repository has no `{name}--v*` tag satisfying the range.                                                                                                                                                         | Check that the upstream has tagged releases using the convention above, or relax your range.                                                                                                                                                                            |
 
-To check for these errors programmatically, run `claude plugin list --json` and read the `errors` field on each plugin.
+To check for these errors programmatically, run `claude plugin list --json`. Plugins with problems include an `errors` field listing them. Plugins that loaded cleanly omit the field.
 
 ## See also
 

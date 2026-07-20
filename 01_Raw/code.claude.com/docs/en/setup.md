@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/setup
-fetched_at: 2026-07-13T04:25:53.395622+00:00
+fetched_at: 2026-07-20T04:31:31.618108+00:00
 fetch_method: mintlify_md
 ---
 
@@ -105,6 +105,8 @@ After installation completes, open a terminal in the project you want to work in
 claude
 ```
 
+Claude Code opens an interactive session in your terminal.
+
 If you encounter any issues during installation, see [Troubleshoot installation and login](/en/troubleshoot-install).
 
 ### Set up on Windows
@@ -144,13 +146,21 @@ Open your WSL distribution and run the Linux installer from the [install instruc
 
 ### Alpine Linux and musl-based distributions
 
-The native installer on Alpine and other musl/uClibc-based distributions requires `libgcc`, `libstdc++`, and `ripgrep`. Install these using your distribution's package manager, then set `USE_BUILTIN_RIPGREP=0`.
+Installing Claude Code on Alpine and other musl/uClibc-based distributions requires `bash` and `curl` for the install command, and `libgcc`, `libstdc++`, and `ripgrep` at runtime. Alpine doesn't include `bash` or `curl` by default, so the documented install command fails with a `not found` error until you install them. Install these packages using your distribution's package manager, then set `USE_BUILTIN_RIPGREP=0`.
 
 This example installs the required packages on Alpine:
 
 ```bash theme={null}
-apk add libgcc libstdc++ ripgrep
+apk add bash curl libgcc libstdc++ ripgrep
 ```
+
+On Alpine, `ripgrep` is in the community repository. If `apk` reports that the package is missing, add the community repository to `/etc/apk/repositories`, using your Alpine version:
+
+```bash theme={null}
+echo "https://dl-cdn.alpinelinux.org/alpine/v3.22/community" >> /etc/apk/repositories
+```
+
+Run `apk update` to refresh the package index, and retry the `apk add` command.
 
 Then set `USE_BUILTIN_RIPGREP` to `0` in your [`settings.json`](/en/settings#available-settings) file:
 
@@ -170,6 +180,8 @@ After installing, confirm Claude Code is working:
 claude --version
 ```
 
+A working installation prints a version number such as `2.1.211 (Claude Code)`.
+
 If this fails with `command not found` or another error, see [Troubleshoot installation and login](/en/troubleshoot-install).
 
 For a more detailed check of your installation and configuration, run [`claude doctor`](/en/troubleshooting#get-more-help):
@@ -178,11 +190,13 @@ For a more detailed check of your installation and configuration, run [`claude d
 claude doctor
 ```
 
+`claude doctor` prints read-only installation and settings diagnostics without starting a session, including install health, settings-file validation errors, and any warnings with suggested fixes.
+
 ## Authenticate
 
 Claude Code requires a Pro, Max, Team, Enterprise, or Console account. The free Claude.ai plan does not include Claude Code access. You can also use Claude Code with a third-party API provider like [Amazon Bedrock](/en/amazon-bedrock), [Google Cloud's Agent Platform](/en/google-vertex-ai), or [Microsoft Foundry](/en/microsoft-foundry).
 
-After installing, log in by running `claude` and following the browser prompts. See [Authentication](/en/authentication) for all account types and team setup options.
+After installing, log in by running `claude` and following the browser prompts. If the `ANTHROPIC_API_KEY` environment variable is set, Claude Code prompts you once to approve the key instead of opening a browser. See [Authentication](/en/authentication) for all account types and team setup options.
 
 ## Update Claude Code
 
@@ -193,6 +207,12 @@ Native installations automatically update in the background. You can [configure 
 Claude Code checks for updates on startup and periodically while running. Updates download and install in the background, then take effect the next time you start Claude Code.
 
 Run `claude doctor` to see the result of the most recent update attempt.
+
+On macOS and Linux, the native installer manages the launcher at `~/.local/bin/claude` as a symlink into `~/.local/share/claude/versions/`. If you replace that launcher with your own script or symlink, auto-update and `claude update` leave it in place: new versions still install under the `versions/` directory, and your launcher decides which version runs. Before v2.1.207, the auto-updater replaced a custom launcher at that path with its own symlink on every update.
+
+With a custom launcher, Claude Code also keeps every installed version on disk because it can't tell which version the launcher needs. `claude doctor` reports a launcher that the native installer didn't create.
+
+To let Claude Code manage the launcher again, remove `~/.local/bin/claude` and run `claude update`.
 
 If an npm global install can't auto-update because the npm global directory isn't writable, Claude Code shows a one-time notice at startup, and `claude doctor` lists the available fixes. See [permission errors during installation](/en/troubleshoot-install#permission-errors-during-installation) for details.
 
@@ -267,6 +287,8 @@ To apply an update immediately without waiting for the next background check, ru
 ```bash theme={null}
 claude update
 ```
+
+When an update installs, the command reports `Successfully updated from <old version> to version <new version>`. If you're already on the newest version, it reports `Claude Code is up to date (<version>)`. Installs managed by Homebrew, WinGet, or apk report `Claude is up to date!` instead.
 
 ## Advanced installation options
 

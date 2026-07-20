@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/large-codebases
-fetched_at: 2026-06-15T06:17:54.953058+00:00
+fetched_at: 2026-07-20T04:31:28.984611+00:00
 fetch_method: mintlify_md
 ---
 
@@ -173,7 +173,11 @@ Claude's content searches respect `.gitignore` by default, so paths already list
 
 For paths that are checked in, such as a vendored SDK or committed generated code, add `Read` deny rules in `permissions.deny` to block Claude from opening those files even when a search lists them.
 
-To apply these exclusions for everyone working in the repository, commit them to `.claude/settings.json`. To keep them personal, use `.claude/settings.local.json` instead. Like other project settings on this page, these files load only from your starting directory. Place them at the repository root if you start Claude there, or in each package's `.claude/` if you start from subdirectories. To enforce the same deny rules in every session regardless of starting directory, set them in [managed settings](/en/settings#settings-files), which user and project settings cannot override.
+The deny rules can cover everyone working in the repository, only you, or every session on the machine, depending on which settings file you put them in:
+
+* **Everyone working in the repository**: commit the rules to `.claude/settings.json`. Like other project settings on this page, that file loads only from your starting directory, so place it at the repository root if you start Claude there, or in each package's `.claude/` if you start from subdirectories.
+* **Yourself only**: use `.claude/settings.local.json` at the repository root, which loads in every CLI session inside the repository regardless of starting directory. Relative patterns like the example's `Read(./vendor/**)` still [anchor at the directory you start Claude Code from](/en/permissions#read-and-edit), so if you start sessions from subdirectories, write the rules in this file as `//`-absolute paths, such as `Read(//absolute/path/to/repo/vendor/**)`. {/* min-version: 2.1.211 */}Before v2.1.211, `.claude/settings.local.json` also loaded only from the starting directory.
+* **Everyone, enforced in every session**: set the rules in [managed settings](/en/settings#settings-files), which user and project settings cannot override.
 
 The example below blocks build artifacts and a vendored SDK:
 
@@ -201,6 +205,8 @@ The official marketplace has plugins for TypeScript, Python, Go, Rust, and other
 ```shell theme={null}
 /plugin install typescript-lsp@claude-plugins-official
 ```
+
+If Claude Code reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`. If it reports that the plugin is not found in the marketplace, your local copy is outdated: refresh it with `/plugin marketplace update claude-plugins-official`. Then retry the install.
 
 To enable a plugin for everyone in the repository rather than installing it yourself, add it to the [`enabledPlugins` project setting](/en/settings#plugin-settings).
 
@@ -235,6 +241,8 @@ When Claude creates a worktree, it checks out only `.claude/`, `packages/api/`, 
 This is particularly useful for [subagent worktree isolation](/en/worktrees#isolate-subagents-with-worktrees). Subagents are parallel Claude instances spawned for subtasks, and each one that runs in a worktree gets a lightweight checkout instead of the full tree. All worktrees in a session share the same `sparsePaths`, so if one subagent needs `packages/api/` and another needs `packages/web/`, list both.
 
 List directories in `sparsePaths`, not individual files. Root-level files like `package.json`, `tsconfig.base.json`, and lock files are always checked out alongside the directories you list. Root-level directories are not, so include `.claude` in the list if you want the repository root's `.claude/settings.json`, `.claude/rules/`, or `.claude/skills/` available inside the worktree.
+
+Sparse checkout requires git to enable `extensions.worktreeConfig` in the repository's shared `.git/config` while a sparse worktree exists. Claude Code removes that entry after the last worktree is removed, but only if Claude Code added it. It never removes a value you set yourself. Before v2.1.207, the entry remained after the last worktree was removed, and go-git-based tools such as `tea` failed to open the repository until you ran `git config --unset extensions.worktreeConfig`.
 
 To avoid duplicating large directories like `node_modules` across worktrees, pair `sparsePaths` with `symlinkDirectories` in the same `.claude/settings.json`:
 

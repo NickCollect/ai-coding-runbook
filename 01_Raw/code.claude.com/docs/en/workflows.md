@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/workflows
-fetched_at: 2026-07-13T04:25:58.062012+00:00
+fetched_at: 2026-07-20T04:31:35.050547+00:00
 fetch_method: mintlify_md
 ---
 
@@ -97,17 +97,17 @@ Workflows run in the background, so the session stays responsive while agents wo
 
 The progress view shows each phase with its agent counts, token totals, and elapsed time. The footer lists the key for each action:
 
-| Key            | Action                                                                                                  |
-| :------------- | :------------------------------------------------------------------------------------------------------ |
-| `↑` / `↓`      | Select a phase or agent                                                                                 |
-| `Enter` or `→` | Drill into the selected phase, then into an agent to read its prompt, recent tool calls, and result     |
-| `Esc`          | Back out one level                                                                                      |
-| `j` / `k`      | Scroll within the agent detail when it overflows                                                        |
-| `f`            | {/* min-version: 2.1.186 */}Filter the agent list in the selected phase by status. Press again to cycle |
-| `p`            | Pause or resume the run                                                                                 |
-| `x`            | Stop the selected agent, or stop the whole workflow when focus is on the run                            |
-| `r`            | Restart the selected running agent                                                                      |
-| `s`            | [Save](#save-the-workflow-for-reuse) the run's script as a command                                      |
+| Key            | Action                                                                                                                      |
+| :------------- | :-------------------------------------------------------------------------------------------------------------------------- |
+| `↑` / `↓`      | Select a phase or agent                                                                                                     |
+| `Enter` or `→` | Drill into the selected phase, then into an agent to read its prompt, recent tool calls, and result                         |
+| `Esc` or `←`   | Back out one level. In v2.1.203 through v2.1.205, `←` didn't step back out of a phase or agent; use `Esc` on those versions |
+| `j` / `k`      | Scroll within the agent detail when it overflows                                                                            |
+| `f`            | {/* min-version: 2.1.186 */}Filter the agent list in the selected phase by status. Press again to cycle                     |
+| `p`            | Pause or resume the run                                                                                                     |
+| `x`            | Stop the selected agent, or stop the whole workflow when focus is on the run                                                |
+| `r`            | Restart the selected running agent                                                                                          |
+| `s`            | [Save](#save-the-workflow-for-reuse) the run's script as a command                                                          |
 
 ## Have Claude write a workflow
 
@@ -126,11 +126,26 @@ To run a single task as a workflow without changing the session's effort level, 
 ultracode: audit every API endpoint under src/routes/ for missing auth checks
 ```
 
-Claude Code highlights the keyword in your input and Claude writes a workflow script for the task instead of working through it turn by turn. If you didn't mean to start a workflow, press `Option+W` on macOS or `Alt+W` on Windows and Linux to dismiss the highlight for this prompt, or press backspace while the cursor is right after the highlighted keyword. To stop the keyword from triggering at all, turn off Ultracode keyword trigger in `/config`.
+Claude Code highlights the keyword in your input and Claude writes a workflow script for the task instead of working through it turn by turn. The keyword only chooses how Claude structures the work: a workflow started this way runs inside the session's existing [permission mode](/en/permission-modes), and its agents' tool calls receive the same permission checks and [sandboxing](/en/sandboxing) as any other tool call in the session.
 
-If the run does what you wanted, you can [save it as a command](#save-the-workflow-for-reuse) afterward.
+If the run does what you wanted, you can [save it as a command](#save-the-workflow-for-reuse) afterward. If you already have an orchestrator built another way, such as a folder of subagent prompts or a skill that fans work out, you can point Claude at it and ask for a workflow that does the same thing.
 
-If you already have an orchestrator built another way, such as a folder of subagent prompts or a skill that fans work out, you can point Claude at it and ask for a workflow that does the same thing.
+#### Dismiss or turn off the keyword
+
+If you didn't mean to start a workflow, press `Option+W` on macOS or `Alt+W` on Windows and Linux to dismiss the highlight for this prompt, or press backspace while the cursor is right after the highlighted keyword. To stop the keyword from triggering at all, turn off Ultracode keyword trigger in `/config`.
+
+#### Where the keyword works
+
+The keyword is an opt-in only in a prompt you type yourself: at the interactive prompt, in an IDE extension panel, in a [Remote Control](/en/remote-control) client, or in an Agent SDK application that stamps your keyboard input's [`origin`](/en/agent-sdk/typescript#sdkmessageorigin) as `{ kind: "human" }`. It doesn't start a workflow when it reaches the session another way:
+
+* a prompt passed with `-p`
+* a prompt an Agent SDK application sends without stamping it as human input
+* a scheduled task prompt
+* a webhook payload or pull request comment relayed into the conversation
+
+<Note>
+  Before v2.1.210, the keyword started a workflow from any of these routes too, including a webhook payload or pull request comment relayed into the conversation.
+</Note>
 
 ### Let Claude decide with ultracode
 
@@ -180,7 +195,9 @@ When Claude writes a workflow for a task you'll repeat, you can save that run's 
 Run `/workflows`, select the run you want to keep, and press `s`. In the save dialog, Tab toggles between the two save locations:
 
 * `.claude/workflows/` in your project: shared with everyone who clones the repo
-* `~/.claude/workflows/` in your home directory: available in every project, visible only to you
+* `~/.claude/workflows/` in your home directory: available in every project, visible only to you. If you set [`CLAUDE_CONFIG_DIR`](/en/env-vars), this location is the `workflows/` directory under that path.
+
+{/* min-version: 2.1.208 */}The save dialog shows the resolved path for the personal location. Before v2.1.208, it showed `~/.claude/workflows/` even when `CLAUDE_CONFIG_DIR` was set; the file was still saved under the configured directory.
 
 Press Enter to save. The workflow runs as `/<name>` in future sessions from either location.
 
@@ -300,7 +317,7 @@ Once a run starts, you manage it from the `/workflows` view, or by expanding its
 
 ### Resume after a pause
 
-If you stop a run, you can resume it: agents that already completed return their cached results, and the rest run live. Resume a paused run from `/workflows` by selecting it and pressing `p`, or ask Claude to relaunch the workflow with the same script.
+If you stop a run, you can resume it: agents that already completed return their cached results, and the rest run live. An agent that was still running when you stopped isn't saved and starts over on resume, so a workflow that fans work out across many small agents preserves more progress than one long agent. Resume a paused run from `/workflows` by selecting it and pressing `p`, or ask Claude to relaunch the workflow with the same script.
 
 Resume works within the same Claude Code session. If you exit Claude Code while a workflow is running, the next session starts the workflow fresh.
 
@@ -317,7 +334,7 @@ The warning is advisory: it doesn't pause or limit the run. Two settings change 
 * If you [set a size guideline](#set-a-size-guideline), the guideline's agent count replaces the 25-agent threshold.
 * Sessions with [ultracode](#let-claude-decide-with-ultracode) on don't show the warning, because turning ultracode on already opts you in to large runs.
 
-Every agent in a workflow uses your session's model unless the script routes a stage to a different one. To control the model cost:
+Every agent in a workflow uses your session's model unless the script routes a stage to a different one or the [`CLAUDE_CODE_SUBAGENT_MODEL`](/en/model-config#environment-variables) environment variable is set, which overrides both. To control the model cost:
 
 * Check `/model` before a large run if you usually switch to a smaller model for routine work
 * Ask Claude to use a smaller model for stages that don't need the strongest one when you describe the task

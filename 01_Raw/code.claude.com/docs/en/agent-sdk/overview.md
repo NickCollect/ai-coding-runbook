@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/overview
-fetched_at: 2026-07-06T05:04:27.854618+00:00
+fetched_at: 2026-07-20T04:31:23.021382+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Build production AI agents with Claude Code as a library
 
-Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript.
+Build AI agents that autonomously read files, run commands, search the web, edit code, and more. The Agent SDK gives you the same tools, agent loop, and context management that power Claude Code, programmable in Python and TypeScript. For other languages, [run the CLI programmatically](/en/headless) with the `-p` flag and `--output-format json`. For the thinking behind agent harness design, see [A harness for every task: dynamic workflows in Claude Code](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code) on the blog.
 
 <CodeGroup>
   ```python Python theme={null}
@@ -66,10 +66,35 @@ The Agent SDK includes built-in tools for reading files, running commands, and e
         ```
       </Tab>
 
-      <Tab title="Python">
+      <Tab title="Python (uv)">
+        [uv](https://docs.astral.sh/uv/) is a fast Python package manager that handles virtual environments automatically:
+
         ```bash theme={null}
+        uv init
+        uv add claude-agent-sdk
+        ```
+      </Tab>
+
+      <Tab title="Python (pip)">
+        Create and activate a virtual environment, then install the package. Installing into a virtual environment avoids the `error: externally-managed-environment` failure that system Python on recent Debian, Ubuntu, and Homebrew installs returns for `pip install` outside a venv.
+
+        On macOS or Linux:
+
+        ```bash theme={null}
+        python3 -m venv .venv
+        source .venv/bin/activate
         pip install claude-agent-sdk
         ```
+
+        On Windows:
+
+        ```powershell theme={null}
+        py -m venv .venv
+        .venv\Scripts\Activate.ps1
+        pip install claude-agent-sdk
+        ```
+
+        If PowerShell blocks `Activate.ps1` with an execution policy error, run `Set-ExecutionPolicy -Scope Process RemoteSigned` first.
 
         The Python package requires Python 3.10 or later. If pip reports `No matching distribution found for claude-agent-sdk`, your interpreter is older than 3.10. Run `python3 --version` on macOS or Linux, or `py --version` on Windows, to check.
       </Tab>
@@ -81,10 +106,18 @@ The Agent SDK includes built-in tools for reading files, running commands, and e
   </Step>
 
   <Step title="Set your API key">
-    Get an API key from the [Console](https://platform.claude.com/), then set it as an environment variable:
+    Get an API key from the [Console](https://platform.claude.com/), then set it as an environment variable.
+
+    On macOS or Linux:
 
     ```bash theme={null}
-    export ANTHROPIC_API_KEY=your-api-key
+    export ANTHROPIC_API_KEY=sk-ant-xxxxx
+    ```
+
+    On Windows PowerShell:
+
+    ```powershell theme={null}
+    $env:ANTHROPIC_API_KEY = "sk-ant-xxxxx"
     ```
 
     The SDK also supports authentication via third-party API providers:
@@ -92,7 +125,7 @@ The Agent SDK includes built-in tools for reading files, running commands, and e
     * **Amazon Bedrock**: set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
     * **Claude Platform on AWS**: set `CLAUDE_CODE_USE_ANTHROPIC_AWS=1` and `ANTHROPIC_AWS_WORKSPACE_ID`, then configure AWS credentials
     * **Google Cloud's Agent Platform**: set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
-    * **Microsoft Azure**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
+    * **Microsoft Foundry**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
 
     See the setup guides for [Amazon Bedrock](/en/amazon-bedrock), [Claude Platform on AWS](/en/claude-platform-on-aws), [Google Cloud's Agent Platform](/en/google-vertex-ai), or [Microsoft Foundry](/en/microsoft-foundry) for details.
 
@@ -159,6 +192,8 @@ Everything that makes Claude Code powerful is available in the SDK:
     | **WebFetch**                                                                | Fetch and parse web page content                                    |
     | **[AskUserQuestion](/en/agent-sdk/user-input#handle-clarifying-questions)** | Ask the user clarifying questions with multiple choice options      |
 
+    For the full list, including scheduling and worktree tools, see the [tools reference](/en/tools-reference).
+
     This example creates an agent that searches your codebase for TODO comments:
 
     <CodeGroup>
@@ -217,6 +252,7 @@ Everything that makes Claude Code powerful is available in the SDK:
           async for message in query(
               prompt="Refactor utils.py to improve readability",
               options=ClaudeAgentOptions(
+                  allowed_tools=["Read", "Edit"],
                   permission_mode="acceptEdits",
                   hooks={
                       "PostToolUse": [
@@ -245,6 +281,7 @@ Everything that makes Claude Code powerful is available in the SDK:
       for await (const message of query({
         prompt: "Refactor utils.py to improve readability",
         options: {
+          allowedTools: ["Read", "Edit"],
           permissionMode: "acceptEdits",
           hooks: {
             PostToolUse: [{ matcher: "Edit|Write", hooks: [logFileChange] }]
@@ -370,7 +407,7 @@ Everything that makes Claude Code powerful is available in the SDK:
       For interactive approval prompts and the `AskUserQuestion` tool, see [Handle approvals and user input](/en/agent-sdk/user-input).
     </Note>
 
-    This example creates a read-only agent that can analyze but not modify code. `allowed_tools` pre-approves `Read`, `Glob`, and `Grep`.
+    This example creates a read-only agent that can analyze but not modify code. `allowed_tools` pre-approves `Read`, `Glob`, and `Grep` so they run without prompting. Tools not listed are still available but fall through to the permission mode; to block tools entirely, use `disallowed_tools`.
 
     <CodeGroup>
       ```python Python theme={null}
@@ -424,12 +461,19 @@ Everything that makes Claude Code powerful is available in the SDK:
           session_id = None
 
           # First query: capture the session ID
-          async for message in query(
-              prompt="Read the authentication module",
-              options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"]),
-          ):
-              if isinstance(message, SystemMessage) and message.subtype == "init":
-                  session_id = message.data["session_id"]
+          try:
+              async for message in query(
+                  prompt="Read the authentication module",
+                  options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"]),
+              ):
+                  if isinstance(message, SystemMessage) and message.subtype == "init":
+                      session_id = message.data["session_id"]
+          except Exception as error:
+              # A single-shot query() raises after yielding an error result. If
+              # the failure was an error result, session_id was already captured
+              # by the loop above; connection or process failures yield no
+              # result message.
+              print(f"Session ended with an error: {error}")
 
           # Resume with full context from the first query
           async for message in query(
@@ -449,13 +493,20 @@ Everything that makes Claude Code powerful is available in the SDK:
       let sessionId: string | undefined;
 
       // First query: capture the session ID
-      for await (const message of query({
-        prompt: "Read the authentication module",
-        options: { allowedTools: ["Read", "Glob"] }
-      })) {
-        if (message.type === "system" && message.subtype === "init") {
-          sessionId = message.session_id;
+      try {
+        for await (const message of query({
+          prompt: "Read the authentication module",
+          options: { allowedTools: ["Read", "Glob"] }
+        })) {
+          if (message.type === "system" && message.subtype === "init") {
+            sessionId = message.session_id;
+          }
         }
+      } catch (error) {
+        // A single-shot query() throws after yielding an error result. If the
+        // failure was an error result, sessionId was already captured by the
+        // loop above; connection or process failures yield no result message.
+        console.error(`Session ended with an error: ${error}`);
       }
 
       // Resume with full context from the first query

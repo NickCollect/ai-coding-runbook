@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/features-overview
-fetched_at: 2026-06-22T06:23:26.851774+00:00
+fetched_at: 2026-07-20T04:31:28.374019+00:00
 fetch_method: mintlify_md
 ---
 
@@ -71,7 +71,7 @@ The same triggers tell you when to update what you already have. A repeated mist
 
 ### Compare similar features
 
-Some features can seem similar. Here's how to tell them apart.
+Some features can seem similar. For a deeper walkthrough of choosing between them, see [Steering Claude Code: when to use CLAUDE.md, skills, hooks, and subagents](https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more) on the blog. Here's how to tell them apart.
 
 <Tabs>
   <Tab title="Skill vs Subagent">

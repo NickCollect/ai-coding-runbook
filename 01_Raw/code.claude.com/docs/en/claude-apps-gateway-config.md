@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-config
-fetched_at: 2026-07-06T05:04:30.280031+00:00
+fetched_at: 2026-07-20T04:31:27.513327+00:00
 fetch_method: mintlify_md
 ---
 
@@ -177,6 +177,8 @@ upstreams:
 ```
 
 An empty `auth` block uses the AWS SDK's default credential chain: env vars, `~/.aws/credentials`, ECS task role, EC2 instance metadata, or IRSA on EKS. In production, give the gateway pod an IAM role instead of embedding static keys in a container image.
+
+Explicit credentials must be complete: the gateway fails at boot when `aws_access_key_id` and `aws_secret_access_key` aren't set together, or when `aws_session_token` is set without them. Before v2.1.207, a partial `auth:` block passed validation.
 
 | Setup           | How                                                                                                                                                                                                                                                                                                                                               |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -480,14 +482,14 @@ managed:
                 - { type: command, command: /usr/local/bin/audit-edit.sh }
 ```
 
-| Key                                        | Enforced by   | Effect                                                                                                                                                                                                        |
-| ------------------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `availableModels`                          | Gateway + CLI | Model allowlist. Also checked at `/v1/messages`, so a patched client can't bypass it.                                                                                                                         |
-| `permissions.allow` / `.deny`              | CLI           | Tool and command rules. See [Permissions](/en/permissions).                                                                                                                                                   |
-| `permissions.disableBypassPermissionsMode` | CLI           | Set to `disable` to block [`bypassPermissions`](/en/permission-modes#skip-all-checks-with-bypasspermissions-mode), the mode that auto-approves every tool call, and the `--dangerously-skip-permissions` flag |
-| `allowManagedPermissionRulesOnly`          | CLI           | When `true`, user and project permission rules are ignored; only rules from this document apply                                                                                                               |
-| `env`                                      | CLI           | Environment variables merged into the CLI process. Use for telemetry, auto-update, and model-name overrides.                                                                                                  |
-| `hooks`                                    | CLI           | Org-wide [hooks](/en/hooks)                                                                                                                                                                                   |
+| Key                                        | Enforced by   | Effect                                                                                                                                                                                                   |
+| ------------------------------------------ | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `availableModels`                          | Gateway + CLI | Model allowlist. Also checked at `/v1/messages`, so a patched client can't bypass it.                                                                                                                    |
+| `permissions.allow` / `.deny`              | CLI           | Tool and command rules. See [Permissions](/en/permissions).                                                                                                                                              |
+| `permissions.disableBypassPermissionsMode` | CLI           | Set to `disable` to block [`bypassPermissions`](/en/permission-modes#skip-all-checks-with-bypasspermissions-mode), the mode that skips permission prompts, and the `--dangerously-skip-permissions` flag |
+| `allowManagedPermissionRulesOnly`          | CLI           | When `true`, user and project permission rules are ignored; only rules from this document apply                                                                                                          |
+| `env`                                      | CLI           | Environment variables merged into the CLI process. Use for telemetry, auto-update, and model-name overrides.                                                                                             |
+| `hooks`                                    | CLI           | Org-wide [hooks](/en/hooks)                                                                                                                                                                              |
 
 Because these settings arrive over the network, the CLI shows each developer a one-time security approval dialog before applying anything that can run a shell command or alter where traffic goes. The dialog covers:
 
@@ -501,7 +503,9 @@ The safe list determines which `env` variables apply without approval:
 * **On the safe list**: auto-update and model-name vars
 * **Not on the safe list**: proxy vars, base-URL vars, and `OTEL_EXPORTER_OTLP_ENDPOINT`
 
-The gateway's [telemetry](#telemetry) configuration pushes `OTEL_EXPORTER_OTLP_ENDPOINT`, so setting `telemetry.forward_to` triggers the dialog on each interactive client. Non-interactive runs with the `-p` flag skip the dialog and apply settings without approval. The dialog protects the developer's machine from a compromised or hostile gateway, not the organization from the developer, so the `-p` skip is intentional rather than a gap.
+The gateway's [telemetry](#telemetry) configuration pushes `OTEL_EXPORTER_OTLP_ENDPOINT`, so setting `telemetry.forward_to` triggers the dialog on each interactive client. The dialog protects the developer's machine from a compromised or hostile gateway, not the organization from the developer.
+
+A non-interactive run with the `-p` flag can't show the dialog. It applies the pushed settings for that run only and doesn't record them as approved, so the developer's next interactive session still shows the dialog. Before v2.1.207, a non-interactive run saved the settings as approved and no later interactive session showed the dialog for them.
 
 If a developer declines, Claude Code exits rather than applying the policy. Pushing a new hook or non-safe env var to a broad policy therefore means an approval prompt on every matching developer's next startup.
 
@@ -517,16 +521,25 @@ If a device also has a local `managed-settings.json` or MDM-delivered policy, th
 4. The `managed-settings.json` file
 5. The HKCU registry, on Windows only
 
-Embedding hosts can supply policy through the SDK `managedSettings` option. It is ignored by default and applies only when a managed source opts in with [`parentSettingsBehavior: "merge"`](/en/settings#available-settings), filtered so it can tighten policy but not loosen it.
+Embedding hosts can supply policy through the SDK `managedSettings` option. Whether it applies depends on the machine's managed configuration:
 
-The only exception is the following keys, which are honored when any admin source above the user-writable HKCU tier sets them, regardless of which source provides the rest of the policy:
+* On machines with an admin-deployed managed source, it is ignored unless the highest-priority source opts in with [`parentSettingsBehavior: "merge"`](/en/settings#available-settings).
+* It is never merged while a [`policyHelper`](/en/settings#compute-managed-settings-with-a-policy-helper) is configured.
+* When merged, it passes through a restrictive-only allowlist. [Restrict parent settings](/en/claude-apps-gateway#restrict-parent-settings) lists which allow-direction settings still apply without the `allowManaged*Only` locks.
+
+The following keys are honored when any admin source above the user-writable HKCU tier sets them, regardless of which source provides the rest of the policy. When a [`policyHelper`](/en/settings#compute-managed-settings-with-a-policy-helper) is configured, its output is the only source these checks read:
 
 * `sandbox.network.allowManagedDomainsOnly` and `sandbox.filesystem.allowManagedReadPathsOnly`: when locked, the corresponding allowlists are unioned across sources
 * [`allowAllClaudeAiMcps`](/en/settings#available-settings): allow-only override for the claude.ai MCP server allowlist
 * `sandbox.bwrapPath` and `sandbox.socatPath`: filesystem paths to the [sandbox](/en/sandboxing) helper binaries
 * [`forceRemoteSettingsRefresh`](/en/server-managed-settings): blocks startup until remote managed settings are freshly fetched, so an MDM or file policy that sets it is honored even when a cached remote payload that lacks the key is the highest-priority source
 
-Every other key, including `allowManagedPermissionRulesOnly` and `disableBypassPermissionsMode`, comes from the highest-priority source only. See [Settings precedence](/en/settings#settings-precedence) for the same rule on the settings page.
+Every other key, including `disableBypassPermissionsMode`, comes from the highest-priority source only. Two [parent-settings](/en/claude-apps-gateway#restrict-parent-settings) checks read every admin source:
+
+* When any admin source sets `allowManagedPermissionRulesOnly`, Claude Code drops parent-supplied permission allow rules and `additionalDirectories`. The key's effect on the developer's own rules still follows the highest-priority source.
+* A `forceLoginOrgUUID` or `allowedMcpServers` value in any admin source blocks a parent-supplied one. The value that applies still comes from the highest-priority source.
+
+See [Settings precedence](/en/settings#settings-precedence) for the same rules on the settings page.
 
 Gateway policies apply to every Claude Code invocation on the machine, including non-interactive `claude -p` runs and sessions spawned by the Agent SDK. If the gateway is unreachable at startup, signed-in sessions exit with an error rather than running without their policy.
 
@@ -730,24 +743,29 @@ telemetry:
 
 ## Client-side managed settings
 
-Everything above configures the gateway server. Pointing developer machines at it is configured separately, on each device, through Claude Code's [managed settings](/en/settings#settings-files). The gateway can't push these keys itself, because they're what tell the client where the gateway is.
+Everything above configures the gateway server. Pointing developer machines at it is configured separately, on each device, through Claude Code's [managed settings](/en/settings#settings-files). The gateway can't push the login keys itself, because they're what tell the client where the gateway is.
 
-For the CLI, set both keys in the per-OS `managed-settings.json`:
+For the CLI, set these keys in the per-OS `managed-settings.json`. The two login keys route each developer's `/login` to your gateway:
 
 ```json theme={null}
 {
   "forceLoginMethod": "gateway",
-  "forceLoginGatewayUrl": "https://claude-gateway.internal.example.com"
+  "forceLoginGatewayUrl": "https://claude-gateway.internal.example.com",
+  "parentSettingsBehavior": "merge"
 }
 ```
 
-Deploy that file to each device, typically via your MDM platform. The file path differs by platform:
+`parentSettingsBehavior: "merge"` keeps Claude Desktop's policy delivery to its embedded Claude Code sessions working; [Deliver policy to Claude Desktop sessions](/en/claude-apps-gateway#deliver-policy-to-claude-desktop-sessions) explains the mechanism and where the opt-in must sit.
+
+Deploy the `managed-settings.json` file to each device, typically via your MDM platform. The file path differs by platform:
 
 | Platform      | Path                                                                                                                          |
 | ------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | macOS         | `/Library/Application Support/ClaudeCode/managed-settings.json`, or the `com.anthropic.claudecode` managed preferences domain |
 | Linux and WSL | `/etc/claude-code/managed-settings.json`                                                                                      |
 | Windows       | `C:\Program Files\ClaudeCode\managed-settings.json`, or Group Policy via the HKLM registry                                    |
+
+A registry policy on Windows or a managed-preferences plist on macOS replaces the `managed-settings.json` file rather than merging with it, apart from the [exception keys and cross-source checks above](#precedence-with-other-managed-sources). All three keys in this snippet follow the highest-priority-source rule, so fleets that deliver policy through Group Policy or configuration profiles must put all three in that mechanism instead.
 
 `forceLoginGatewayUrl`, and the `"gateway"` value of `forceLoginMethod`, are honored only from the admin-controlled managed tier. A developer setting them in their own `~/.claude/settings.json` has no effect.
 

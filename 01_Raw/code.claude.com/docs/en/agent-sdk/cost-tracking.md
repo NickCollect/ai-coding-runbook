@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/cost-tracking
-fetched_at: 2026-07-06T05:04:27.074595+00:00
+fetched_at: 2026-07-20T04:31:22.234006+00:00
 fetch_method: mintlify_md
 ---
 
@@ -58,6 +58,14 @@ The following diagram shows the message stream from a single `query()` call, wit
 ## Get the total cost of a query
 
 The result message ([TypeScript](/en/agent-sdk/typescript#sdkresultmessage), [Python](/en/agent-sdk/python#resultmessage)) marks the end of the agent loop for a `query()` call. It includes `total_cost_usd`, the cumulative estimated cost across all steps in that call. This works for both success and error results. If you use sessions to make multiple `query()` calls, each result only reflects the cost of that individual call.
+
+The three result-level fields differ in what they count when the agent spawns [subagents](/en/agent-sdk/subagents). Use `modelUsage`, or `model_usage` in Python, for whole-tree token accounting; the `usage` field undercounts as soon as nesting occurs.
+
+| Field                        | Subagent activity                                                                                 |
+| ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| `usage`                      | Excluded. Counts only the top-level agent loop, so tokens consumed inside subagents are not added |
+| `total_cost_usd`             | Included. Counts subagent requests alongside the top-level loop                                   |
+| `modelUsage` / `model_usage` | Included. Counts subagent requests alongside the top-level loop, broken down by model             |
 
 The following examples iterate over the message stream from a `query()` call and print the total cost when the `result` message arrives:
 
@@ -280,7 +288,7 @@ Cache entries written by the SDK use a 5-minute TTL by default when you authenti
 
 To request a 1-hour TTL on cache writes, set the [`ENABLE_PROMPT_CACHING_1H`](/en/env-vars) environment variable. You can export it in your shell or container environment, or pass it through `options.env`.
 
-The following example enables 1-hour TTL for an agent running on Amazon Bedrock:
+The following example enables 1-hour TTL for an agent running on Amazon Bedrock. Because it sets `CLAUDE_CODE_USE_BEDROCK`, it requires working AWS credentials for [Amazon Bedrock](/en/amazon-bedrock); without them the query fails.
 
 <CodeGroup>
   ```python Python theme={null}

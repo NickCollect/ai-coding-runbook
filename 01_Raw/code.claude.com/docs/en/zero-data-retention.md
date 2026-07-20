@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/zero-data-retention
-fetched_at: 2026-07-06T05:04:38.046494+00:00
+fetched_at: 2026-07-20T04:31:35.156922+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,6 +35,10 @@ ZDR covers Claude Code inference on Claude for Enterprise.
   ZDR is enabled on a per-organization basis. Each new organization requires ZDR to be enabled separately by your Anthropic account team. ZDR does not automatically apply to new organizations created under the same account. Contact your account team to enable ZDR for any new organizations.
 </Warning>
 
+### Route Claude Code traffic to your ZDR organization
+
+ZDR applies to requests that authenticate into a ZDR-enabled organization. If a developer signs in to Claude Code with a personal account or with an API key from a different organization, those sessions are not covered. To restrict login to your ZDR organization, deploy the `forceLoginMethod` and `forceLoginOrgUUID` managed settings; see [Restrict login to your organization](/en/authentication#restrict-login-to-your-organization).
+
 ### What ZDR covers
 
 ZDR covers model inference calls made through Claude Code on Claude for Enterprise. When you use Claude Code in your terminal, the prompts you send and the responses Claude generates are not retained by Anthropic. This applies to every model available to ZDR organizations. Some models require data retention and are not available under ZDR; see [Model availability under ZDR](#model-availability-under-zdr).
@@ -55,12 +59,13 @@ ZDR does not extend to the following, even for organizations with ZDR enabled. T
 
 When ZDR is enabled for a Claude Code organization on Claude for Enterprise, certain features that require storing prompts or completions are automatically disabled at the backend level:
 
-| Feature                                                           | Reason                                                                        |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [Claude Code on the Web](/en/claude-code-on-the-web)              | Requires server-side storage of conversation history.                         |
-| [Cloud sessions](/en/desktop#cloud-sessions) from the Desktop app | Requires persistent session data that includes prompts and completions.       |
-| [Artifacts](/en/artifacts)                                        | Requires storing published page content on Anthropic-operated infrastructure. |
-| Feedback submission (`/feedback`)                                 | Submitting feedback sends conversation data to Anthropic.                     |
+| Feature                                                           | Reason                                                                                      |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| [Claude Code on the Web](/en/claude-code-on-the-web)              | Requires server-side storage of conversation history.                                       |
+| [Cloud sessions](/en/desktop#cloud-sessions) from the Desktop app | Requires persistent session data that includes prompts and completions.                     |
+| [Artifacts](/en/artifacts)                                        | Requires storing published page content on Anthropic-operated infrastructure.               |
+| Feedback submission (`/feedback`, `/bug`, `/share`)               | Submitting feedback sends conversation data to Anthropic.                                   |
+| [Remote Control](/en/remote-control)                              | Stores the session transcript on Anthropic servers to sync the conversation across devices. |
 
 These features are blocked in the backend regardless of client-side display. If you see a disabled feature in the Claude Code terminal during startup, attempting to use it returns an error indicating the organization's policies do not allow that action.
 

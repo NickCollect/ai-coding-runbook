@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/glossary
-fetched_at: 2026-07-13T04:25:49.179618+00:00
+fetched_at: 2026-07-20T04:31:28.530826+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ fetch_method: mintlify_md
 
 > Definitions for Claude Code terminology. Learn what agentic loop, compaction, CLAUDE.md, hooks, subagents, MCP, and other core concepts mean.
 
-This glossary defines Claude Code terminology. Each entry links to the page where the concept is covered in depth. For model-level concepts like tokens, temperature, and RAG, see the [platform glossary](https://platform.claude.com/docs/en/about-claude/glossary).
+This glossary defines Claude Code terminology. Each entry links to the page where the concept is covered in depth. For model-level concepts like tokens, temperature, and RAG, see the [platform glossary](https://platform.claude.com/docs/en/about-claude/glossary). For Claude Desktop terms such as desktop extension, MCPB, and DXT, see the [Claude Help Center](https://support.claude.com/).
 
 ## A
 
@@ -42,7 +42,7 @@ Learn more: [How Claude Code works](/en/how-claude-code-works#the-agentic-loop)
 
 ### Artifact
 
-A live, interactive web page Claude Code publishes from your session to a private URL on claude.ai, so you can see output visually or share it inside your organization instead of reading terminal text. The page updates in place when the session republishes. Artifacts you create from Claude Code appear in the same gallery as artifacts created in claude.ai conversations, but their sharing stops at your organization and they cannot be made public.
+A live, interactive web page Claude Code publishes from your session to a private URL on claude.ai, so you can see output visually or share it instead of reading terminal text. The page updates in place when the session republishes. Artifacts you create from Claude Code appear in the same gallery as artifacts created in claude.ai conversations. Sharing depends on your plan: on Pro and Max, a public link that anyone can open; on Team and Enterprise, sharing within your organization, plus public links once an Owner enables them.
 
 Learn more: [Share session output as artifacts](/en/artifacts)
 
@@ -82,7 +82,7 @@ Learn more: [Channels](/en/channels)
 
 ### Checkpoint
 
-A restore point created at each prompt you send. Claude Code snapshots files before every edit so a checkpoint can revert them. Press `Esc` twice or run `/rewind` to restore code, conversation, or both to an earlier point, or to summarize part of the conversation from a selected message. Checkpoints are local to the session, separate from git, and don't track changes made through the Bash tool.
+A restore point created at each prompt you send. Claude Code snapshots files before every edit so a checkpoint can revert them. Press `Esc` twice or run `/rewind` to restore code, conversation, or both to an earlier point, or to summarize part of the conversation from a selected message. Checkpoints are saved with the conversation, so a resumed session can still `/rewind` to them. They're separate from git and don't track changes made through the Bash tool.
 
 Learn more: [Checkpointing](/en/checkpointing)
 
@@ -104,6 +104,8 @@ Learn more: [CLAUDE.md files](/en/memory#claude-md-files)
 
 A reusable instruction you invoke by typing `/name` in the prompt. Built-in commands such as `/clear`, `/model`, and `/compact` control the session. You can define your own commands as files in `.claude/commands/`, or install them from a [plugin](#plugin). [Skills](#skill) are the recommended way to package multi-step commands.
 
+Two other uses of the word are unrelated: `claude` CLI subcommands such as `claude mcp add`, listed in the [CLI reference](/en/cli-reference#cli-commands), and the `command` field of a stdio [MCP server](#mcp-server) entry, which specifies the executable Claude Code launches to start the server.
+
 Learn more: [Commands](/en/commands) · [Skills](/en/skills)
 
 ### Compaction
@@ -111,6 +113,12 @@ Learn more: [Commands](/en/commands) · [Skills](/en/skills)
 Automatic summarization of your conversation when the [context window](#context-window) approaches its limit. Older tool outputs are cleared first, then the conversation is summarized. Project-root CLAUDE.md and auto memory survive compaction and reload from disk; instructions given only in conversation may be lost. Run `/compact` to trigger manually, optionally with a focus like `/compact focus on the API changes`.
 
 Learn more: [What survives compaction](/en/context-window#what-survives-compaction) · [When context fills up](/en/how-claude-code-works#when-context-fills-up)
+
+### Connector
+
+An [MCP server](#mcp-server) added to your claude.ai account rather than configured in Claude Code. When you sign in to Claude Code with that account, your connectors appear in `/mcp` alongside the servers you added locally. Organizations can also provision connectors and set per-tool controls on them.
+
+Learn more: [Use MCP servers from claude.ai](/en/mcp#use-mcp-servers-from-claude-ai)
 
 ### Context window
 
@@ -168,6 +176,12 @@ An open standard for connecting AI tools to external data sources and services. 
 
 Learn more: [Model Context Protocol](/en/mcp)
 
+### MCP server
+
+A program that gives Claude tools, prompts, or resources over [MCP](#mcp-model-context-protocol). You add servers with `claude mcp add`, in `.mcp.json`, through a [plugin](#plugin), or as a claude.ai [connector](#connector). A local stdio server runs as a process Claude Code starts from the `command` and `args` fields of its configuration, which have nothing to do with the [commands](#command) you type at the prompt.
+
+Learn more: [Model Context Protocol](/en/mcp)
+
 ### MCP Tool Search
 
 A context-saving mechanism that defers MCP tool schemas until needed. Only tool names load at startup; Claude fetches the full schema on demand when it decides to use a specific tool. This keeps idle MCP servers from consuming much context.
@@ -178,7 +192,7 @@ Learn more: [Scale with MCP Tool Search](/en/mcp#scale-with-mcp-tool-search)
 
 ### Non-interactive mode
 
-A mode that executes a single prompt and exits without a conversational session, invoked with `-p` or `--print`. Used for CI, scripts, and piping. The [Agent SDK](/en/agent-sdk/overview) is the Python and TypeScript equivalent. Formerly called headless mode.
+A mode that executes a single prompt and exits without an interactive prompt, invoked with `-p` or `--print`. Used for CI, scripts, and piping. The run is still saved as a resumable session unless you pass `--no-session-persistence`. The [Agent SDK](/en/agent-sdk/overview) is the Python and TypeScript equivalent. Formerly called headless mode.
 
 Learn more: [Run Claude Code programmatically](/en/headless)
 
@@ -196,7 +210,7 @@ Learn more: [Output styles](/en/output-styles)
 
 The baseline approval behavior for the session. Cycle with `Shift+Tab` in the CLI or use the mode selector in VS Code, Desktop, and claude.ai. Available modes are `default`, `acceptEdits`, `plan`, `auto`, `dontAsk`, and `bypassPermissions`.
 
-The `default` mode is labeled Manual in the CLI and in the VS Code and JetBrains extensions, and Claude Code accepts `manual` as an alias for the value.
+The `default` mode is labeled Manual in the CLI, in the VS Code and JetBrains extensions, and in the desktop app, and Claude Code accepts `manual` as an alias for the value.
 
 Learn more: [Choose a permission mode](/en/permission-modes)
 
@@ -234,7 +248,7 @@ Learn more: [Protect against prompt injection](/en/security#protect-against-prom
 
 ### Remote Control
 
-A way to continue a local Claude Code session from your phone or browser via claude.ai. Your code stays on your machine; only the UI is remote. Different from Claude Code on the web, which runs in a cloud sandbox.
+A way to continue a local Claude Code session from your phone or browser via claude.ai. Your code execution and files stay on your machine; the interface is remote. Different from Claude Code on the web, which runs in a cloud sandbox.
 
 Learn more: [Remote Control](/en/remote-control)
 
@@ -282,7 +296,7 @@ Learn more: [Create custom subagents](/en/sub-agents)
 
 ### Surface
 
-Any place you access Claude Code: the CLI, VS Code, JetBrains, Desktop, or claude.ai. All surfaces share the same engine, so your CLAUDE.md, settings, and skills work the same way across them. Slack and the Chrome extension are integrations that connect to a surface rather than surfaces themselves.
+Any place you access Claude Code: the CLI, VS Code, JetBrains, Desktop, or claude.ai. All surfaces share the same engine. Sessions on your machine read your local CLAUDE.md, settings, and skills; [cloud sessions](/en/claude-code-on-the-web#what’s-available-in-cloud-sessions) start from a fresh clone of your repository and don't read `~/.claude/` on your machine. Slack and the Chrome extension are integrations that connect to a surface rather than surfaces themselves.
 
 Learn more: [Platforms and integrations](/en/platforms)
 

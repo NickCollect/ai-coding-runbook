@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/quickstart
-fetched_at: 2026-07-13T04:25:41.746144+00:00
+fetched_at: 2026-07-20T04:31:23.445101+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
         npm install --save-dev tsx
         ```
 
-        Setting `"type": "module"` in `package.json` lets your agent script use top-level `await`, and [tsx](https://tsx.is) runs TypeScript files directly.
+        Setting `"type": "module"` in `package.json` lets your agent script use top-level `await`, and [tsx](https://tsx.is) runs TypeScript files directly. npm prints `added N packages` when the install succeeds.
       </Tab>
 
       <Tab title="TypeScript (existing project)">
@@ -124,7 +124,7 @@ Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fix
     * **Amazon Bedrock**: set `CLAUDE_CODE_USE_BEDROCK=1` environment variable and configure AWS credentials
     * **Claude Platform on AWS**: set `CLAUDE_CODE_USE_ANTHROPIC_AWS=1` and `ANTHROPIC_AWS_WORKSPACE_ID`, then configure AWS credentials
     * **Google Cloud's Agent Platform**: set `CLAUDE_CODE_USE_VERTEX=1` environment variable and configure Google Cloud credentials
-    * **Microsoft Azure**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
+    * **Microsoft Foundry**: set `CLAUDE_CODE_USE_FOUNDRY=1` environment variable and configure Azure credentials
 
     See the setup guides for [Amazon Bedrock](/en/amazon-bedrock), [Claude Platform on AWS](/en/claude-platform-on-aws), [Google Cloud's Agent Platform](/en/google-vertex-ai), or [Microsoft Foundry](/en/microsoft-foundry) for details.
 
@@ -357,14 +357,14 @@ With `Bash` enabled, try: `"Write unit tests for utils.py, run them, and fix any
 
 **Permission modes** control how much human oversight you want:
 
-| Mode                | Behavior                                                                                                                            | Use case                                  |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| `acceptEdits`       | Auto-approves file edits and common filesystem commands, asks for other actions                                                     | Trusted development workflows             |
-| `plan`              | Runs read-only tools; file edits are never auto-approved and reach your `canUseTool` callback                                       | Scoping a task before approving execution |
-| `dontAsk`           | Denies anything not in `allowedTools`                                                                                               | Locked-down headless agents               |
-| `auto`              | A model classifier approves or denies each tool call                                                                                | Autonomous agents with safety guardrails  |
-| `bypassPermissions` | Runs every tool without prompting, unless an explicit [`ask` rule](/en/agent-sdk/permissions#how-permissions-are-evaluated) matches | Sandboxed CI, fully trusted environments  |
-| `default`           | Requires a `canUseTool` callback to handle approval                                                                                 | Custom approval flows                     |
+| Mode                | Behavior                                                                                                                                                                                                                                                                                                                                                                             | Use case                                  |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------- |
+| `acceptEdits`       | Auto-approves file edits and common filesystem commands, asks for other actions                                                                                                                                                                                                                                                                                                      | Trusted development workflows             |
+| `plan`              | Runs read-only tools; file edits are never auto-approved and reach your `canUseTool` callback                                                                                                                                                                                                                                                                                        | Scoping a task before approving execution |
+| `dontAsk`           | Denies anything not in `allowedTools`; connector tools [your organization set to `ask`](/en/mcp#organization-controls-on-connector-tools) and tools that require user interaction are denied even if you've listed them                                                                                                                                                              | Locked-down headless agents               |
+| `auto`              | A model classifier approves or denies each tool call                                                                                                                                                                                                                                                                                                                                 | Autonomous agents with safety guardrails  |
+| `bypassPermissions` | Runs every tool without prompting, except tools matched by an explicit [`ask` rule](/en/agent-sdk/permissions#how-permissions-are-evaluated), connector tools [your organization set to `ask`](/en/mcp#organization-controls-on-connector-tools), and tools that require user interaction. In the TypeScript SDK, also requires `allowDangerouslySkipPermissions: true` in `options` | Sandboxed CI, fully trusted environments  |
+| `default`           | Requires a `canUseTool` callback to handle approval                                                                                                                                                                                                                                                                                                                                  | Custom approval flows                     |
 
 The example above uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](/en/agent-sdk/user-input) that collects user input. For more control, see [Permissions](/en/agent-sdk/permissions).
 

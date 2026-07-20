@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/keybindings
-fetched_at: 2026-07-13T04:25:50.029037+00:00
+fetched_at: 2026-07-20T04:31:29.094058+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,10 +11,6 @@ fetch_method: mintlify_md
 # Customize keyboard shortcuts
 
 > Customize keyboard shortcuts in Claude Code with a keybindings configuration file.
-
-<Note>
-  Customizable keyboard shortcuts require Claude Code v2.1.18 or later. Check your version with `claude --version`.
-</Note>
 
 Claude Code supports customizable keyboard shortcuts. Run `/keybindings` to create or open your configuration file at `~/.claude/keybindings.json`.
 
@@ -87,7 +83,7 @@ Actions available in the `Global` context:
 | Action                 | Default   | Description                                                                                                  |
 | :--------------------- | :-------- | :----------------------------------------------------------------------------------------------------------- |
 | `app:interrupt`        | Ctrl+C    | Cancel current operation                                                                                     |
-| `app:exit`             | Ctrl+D    | Exit Claude Code                                                                                             |
+| `app:exit`             | Ctrl+D    | Exit Claude Code. Press twice within 800ms to confirm                                                        |
 | `app:redraw`           | (unbound) | Force terminal redraw                                                                                        |
 | `app:toggleTodos`      | Ctrl+T    | Toggle visibility of Claude's to-do checklist. This is not the [`/tasks`](/en/commands) background-task view |
 | `app:toggleTranscript` | Ctrl+O    | Toggle verbose transcript                                                                                    |
@@ -140,17 +136,17 @@ Actions available in the `Autocomplete` context:
 
 Actions available in the `Confirmation` context:
 
-| Action                      | Default   | Description                   |
-| :-------------------------- | :-------- | :---------------------------- |
-| `confirm:yes`               | Y, Enter  | Confirm action                |
-| `confirm:no`                | N, Escape | Decline action                |
-| `confirm:previous`          | Up        | Previous option               |
-| `confirm:next`              | Down      | Next option                   |
-| `confirm:nextField`         | Tab       | Next field                    |
-| `confirm:previousField`     | (unbound) | Previous field                |
-| `confirm:toggle`            | Space     | Toggle selection              |
-| `confirm:cycleMode`         | Shift+Tab | Cycle permission modes        |
-| `confirm:toggleExplanation` | Ctrl+E    | Toggle permission explanation |
+| Action                      | Default   | Description                                                                                                                        |
+| :-------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------------------------- |
+| `confirm:yes`               | Y, Enter  | Confirm action                                                                                                                     |
+| `confirm:no`                | N, Escape | Decline action                                                                                                                     |
+| `confirm:previous`          | Up        | Previous option                                                                                                                    |
+| `confirm:next`              | Down      | Next option                                                                                                                        |
+| `confirm:nextField`         | Tab       | Next field                                                                                                                         |
+| `confirm:previousField`     | (unbound) | Previous field                                                                                                                     |
+| `confirm:toggle`            | Space     | Toggle selection                                                                                                                   |
+| `confirm:cycleMode`         | Shift+Tab | Cycle permission modes                                                                                                             |
+| `confirm:toggleExplanation` | Ctrl+E    | Toggle a model-generated [explanation of the command](/en/permissions#permission-system) on Bash and PowerShell permission prompts |
 
 ### Permission actions
 
@@ -169,6 +165,8 @@ Actions available in the `Transcript` context:
 | `transcript:toggleShowAll` | Ctrl+E            | Toggle show all content |
 | `transcript:exit`          | q, Ctrl+C, Escape | Exit transcript view    |
 
+`transcript:toggleShowAll` applies in the default renderer only; in [fullscreen rendering](/en/fullscreen), the transcript viewer doesn't offer a show-all toggle.
+
 ### History search actions
 
 Actions available in the `HistorySearch` context:
@@ -180,6 +178,8 @@ Actions available in the `HistorySearch` context:
 | `historySearch:cancel`     | Ctrl+C      | Cancel search                             |
 | `historySearch:execute`    | Enter       | Execute selected command                  |
 | `historySearch:cycleScope` | Ctrl+S      | Cycle scope: session, project, everywhere |
+
+The `historySearch:next`, `historySearch:accept`, `historySearch:cancel`, and `historySearch:execute` defaults apply to the inline history search in the default renderer, which always searches prompts from all projects. `historySearch:cycleScope` takes effect only in [fullscreen rendering](/en/fullscreen), where `Ctrl+R` opens a search dialog instead and `Ctrl+S` cycles its scope. The dialog's other keys are fixed and can't be rebound: `Enter` or `Tab` places the highlighted match in the prompt input and `Esc` cancels.
 
 ### Task actions
 
@@ -254,15 +254,15 @@ Actions available in the `MessageSelector` context:
 
 Actions available in the `DiffDialog` context:
 
-| Action                | Default            | Description                                                           |
-| :-------------------- | :----------------- | :-------------------------------------------------------------------- |
-| `diff:dismiss`        | Escape             | Close diff viewer                                                     |
-| `diff:previousSource` | Left               | Previous diff source                                                  |
-| `diff:nextSource`     | Right              | Next diff source                                                      |
-| `diff:previousFile`   | Up, K              | Previous file in the file list; scroll up one line in the detail view |
-| `diff:nextFile`       | Down, J            | Next file in the file list; scroll down one line in the detail view   |
-| `diff:viewDetails`    | Enter              | View diff details                                                     |
-| `diff:back`           | (context-specific) | Go back in diff viewer                                                |
+| Action                | Default   | Description                                                                                                                                         |
+| :-------------------- | :-------- | :-------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `diff:dismiss`        | Escape    | Close diff viewer; from the detail view, returns to the file list instead                                                                           |
+| `diff:previousSource` | Left      | Previous diff source                                                                                                                                |
+| `diff:nextSource`     | Right     | Next diff source                                                                                                                                    |
+| `diff:previousFile`   | Up, K     | Previous file in the file list; scroll up one line in the detail view                                                                               |
+| `diff:nextFile`       | Down, J   | Next file in the file list; scroll down one line in the detail view                                                                                 |
+| `diff:viewDetails`    | Enter     | View diff details                                                                                                                                   |
+| `diff:back`           | (unbound) | Go back in diff viewer. Escape performs the back action via `diff:dismiss`. The previous default of Left in the detail view was removed in v2.1.203 |
 
 The diff detail view also binds pager-style keys to the standard [scroll actions](#scroll-actions). These bindings are part of the `DiffDialog` context and apply only in the detail view; the `Scroll` context defaults listed under [Scroll actions](#scroll-actions) are unchanged.
 
@@ -468,6 +468,7 @@ When vim mode is enabled via `/config` → Editor mode, keybindings and vim mode
 * **Keybindings** handle actions at the component level (toggle todos, submit, etc.)
 * The Escape key in vim mode switches INSERT to NORMAL mode; it does not trigger `chat:cancel`
 * Most Ctrl+key shortcuts pass through vim mode to the keybinding system
+* Vim keys aren't remappable through the keybindings file. To map a two-key INSERT-mode sequence such as `jj` to Escape, use the [`vimInsertModeRemaps`](/en/interactive-mode#remap-insert-mode-key-sequences) setting
 * In vim NORMAL mode, `?` shows the help menu (vim behavior)
 * In vim NORMAL mode, `/` opens history search, the same as Ctrl+R in standard mode
 

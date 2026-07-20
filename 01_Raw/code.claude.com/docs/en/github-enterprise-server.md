@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/github-enterprise-server
-fetched_at: 2026-07-13T04:25:48.685024+00:00
+fetched_at: 2026-07-20T04:31:28.561600+00:00
 fetch_method: mintlify_md
 ---
 
@@ -91,7 +91,7 @@ Your GHES instance must be reachable from Anthropic infrastructure so Claude can
 
 Once an Owner has connected the GHES instance, no developer-side configuration is needed. Claude Code detects your GHES hostname automatically from the git remote in your working directory.
 
-Clone a repository from your GHES instance as you normally would:
+Clone a repository from your GHES instance as you normally would, replacing `github.example.com` and the repository path with your GHES hostname and repository:
 
 ```bash theme={null}
 git clone git@github.example.com:platform/api-service.git
@@ -128,7 +128,7 @@ Host plugin marketplaces on your GHES instance to distribute internal tooling ac
 
 ### Add a GHES marketplace
 
-The `owner/repo` shorthand always resolves to github.com. For GHES-hosted marketplaces, use the full git URL. HTTPS URLs are recommended:
+The `owner/repo` shorthand always resolves to github.com. For GHES-hosted marketplaces, use the full git URL, replacing `github.example.com` and the repository path with your own. HTTPS URLs are recommended:
 
 ```bash theme={null}
 /plugin marketplace add https://github.example.com/platform/claude-plugins.git
@@ -213,6 +213,10 @@ On other claude.ai surfaces, a "Repository not found. If it's private, GitHub ac
 ### GHES instance not reachable
 
 If reviews or web sessions time out, your GHES instance may not be reachable from Anthropic infrastructure. Confirm your firewall allows inbound connections from the [Anthropic API IP addresses](https://platform.claude.com/docs/en/api/ip-addresses).
+
+### Session start fails with `Unable to get organization UUID`
+
+Web sessions require a Team or Enterprise organization. Sign in with `/login` using your organization account. If you authenticate with an API key instead, web sessions fail earlier with a message asking you to run `/login`.
 
 ## Related resources
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/scheduled-tasks
-fetched_at: 2026-07-13T04:25:52.919474+00:00
+fetched_at: 2026-07-20T04:31:31.771454+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,10 +11,6 @@ fetch_method: mintlify_md
 # Run prompts on a schedule
 
 > Use /loop and the cron scheduling tools to run prompts repeatedly, poll for status, or set one-time reminders within a Claude Code session.
-
-<Note>
-  Scheduled tasks require Claude Code v2.1.72 or later. Check your version with `claude --version`.
-</Note>
 
 Scheduled tasks let Claude re-run a prompt automatically on an interval. Use them to poll a deployment, babysit a PR, check back on a long-running build, or remind yourself to do something later in the session. To react to events as they happen instead of polling, see [Channels](/en/channels): your CI can push the failure into the session directly. To keep the session working turn after turn until a condition is met rather than on an interval, see [`/goal`](/en/goal).
 
@@ -55,7 +51,7 @@ You can also pass a skill as the prompt, for example `/loop 20m /review-pr 1234`
 * built-in commands such as `/permissions`, `/model`, or `/clear`
 * skills marked [`disable-model-invocation: true`](/en/skills#frontmatter-reference)
 * skills withheld from Claude by a [`skillOverrides`](/en/skills#override-skill-visibility-from-settings) setting or a `Skill` [deny rule](/en/skills#restrict-claude’s-skill-access)
-* [MCP prompts](/en/mcp#use-mcp-prompts-as-commands) such as `/mcp__github__list_prs`; skills an MCP server exposes still run
+* [MCP prompts](/en/mcp#use-mcp-prompts-as-commands) such as `/mcp__github__list_prs`
 
 ### Run on a fixed interval
 
@@ -84,7 +80,7 @@ When you ask for a dynamic `/loop` schedule, Claude may use the [Monitor tool](/
 A dynamically scheduled loop appears in your [scheduled task list](#manage-scheduled-tasks) like any other task, so you can list or cancel it the same way. The [jitter rules](#jitter) don't apply to it, but the [seven-day expiry](#seven-day-expiry) does: the loop ends automatically seven days after you start it.
 
 <Note>
-  On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, a prompt with no interval runs on a fixed 10-minute schedule instead.
+  On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, a prompt with no interval runs on a fixed 10-minute schedule instead.
 </Note>
 
 ### Run the built-in maintenance prompt
@@ -104,7 +100,7 @@ Claude does not start new initiatives outside that scope, and irreversible actio
 A bare `/loop` runs this prompt at a [dynamically chosen interval](#let-claude-choose-the-interval). Add an interval, for example `/loop 15m`, to run it on a fixed schedule instead. To replace the built-in prompt with your own default, see [Customize the default prompt with loop.md](#customize-the-default-prompt-with-loop-md).
 
 <Note>
-  On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, `/loop` with no prompt prints the usage message instead of running the maintenance prompt.
+  On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, `/loop` with no prompt prints the usage message instead of running the maintenance prompt.
 </Note>
 
 ### Customize the default prompt with loop.md
@@ -130,7 +126,7 @@ quiet, say so in one line.
 Edits to `loop.md` take effect on the next iteration, so you can refine the instructions while a loop is running. When no `loop.md` exists in either location, the loop falls back to the built-in maintenance prompt. Keep the file concise: content beyond 25,000 bytes is truncated.
 
 <Note>
-  On Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry, `loop.md` isn't read and `/loop` with no prompt prints the usage message instead.
+  On Amazon Bedrock, Claude Platform on AWS, Google Cloud's Agent Platform, and Microsoft Foundry, `loop.md` isn't read and `/loop` with no prompt prints the usage message instead.
 </Note>
 
 ### Stop a loop

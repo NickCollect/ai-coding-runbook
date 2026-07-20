@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/user-input
-fetched_at: 2026-07-13T04:25:43.837677+00:00
+fetched_at: 2026-07-20T04:31:24.748623+00:00
 fetch_method: mintlify_md
 ---
 
@@ -53,6 +53,8 @@ The callback fires in two cases:
 
 <Warning>
   **The callback never fires for auto-approved tools.** Any approval earlier in the [permission evaluation flow](/en/agent-sdk/permissions#how-permissions-are-evaluated), an allow rule or a mode like `acceptEdits` or `bypassPermissions`, resolves the call before `canUseTool` is consulted. If you list a tool bare in `allowed_tools`, a `canUseTool` check for that tool never runs unless an ask rule or `plan` mode routes the call back to a prompt. For logic that must apply to every tool call, use a [`PreToolUse` hook](/en/agent-sdk/hooks), which executes before the rest of the flow and can allow, deny, or modify requests.
+
+  `AskUserQuestion`, MCP tools marked [`requiresUserInteraction`](/en/mcp#require-approval-for-a-specific-tool), and connector tools [your organization set to `ask`](/en/mcp#organization-controls-on-connector-tools) reach the callback even when an allow rule matches. In `dontAsk` mode these calls are denied instead, without invoking the callback.
 </Warning>
 
 You can also use the [`PermissionRequest` hook](/en/agent-sdk/hooks#available-hooks) to send external notifications (Slack, email, push) when Claude is waiting for approval.
@@ -214,7 +216,9 @@ Your callback returns one of two response types:
 | **Allow** | `PermissionResultAllow(updated_input=...)` | `{ behavior: "allow", updatedInput }` |
 | **Deny**  | `PermissionResultDeny(message=...)`        | `{ behavior: "deny", message }`       |
 
-When allowing, pass the tool input (original or modified). When denying, provide a message explaining why. Claude sees this message and may adjust its approach.
+When allowing, the tool runs with the input Claude requested unless you return a modified input, `updatedInput` in TypeScript or `updated_input` in Python. {/* min-version: 2.1.207 */}Before v2.1.207, Claude Code rejected an allow result that omitted `updatedInput` and denied the tool call with a validation error.
+
+When denying, provide a message explaining why. Claude sees this message and may adjust its approach.
 
 <CodeGroup>
   ```python Python theme={null}

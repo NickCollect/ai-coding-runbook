@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/agent-loop
-fetched_at: 2026-07-13T04:25:39.985550+00:00
+fetched_at: 2026-07-20T04:31:21.998307+00:00
 fetch_method: mintlify_md
 ---
 
@@ -55,7 +55,7 @@ As the loop runs, the SDK yields a stream of messages. Each message carries a ty
 
 * **`SystemMessage`:** session lifecycle events. The `subtype` field distinguishes them:
 
-  * `"init"`: the first message with session metadata
+  * `"init"`: session metadata for the run. When a `SessionStart` or `Setup` hook runs during session startup, its [hook lifecycle messages](/en/agent-sdk/typescript#sdkhookstartedmessage) arrive before the `init` message
   * `"compact_boundary"`: fires after [compaction](#automatic-compaction)
   * `"informational"`: plain-text status banners from the loop
   * `"worker_shutting_down"`: the loop will end after the current turn because the host is exiting or Remote Control disconnected
@@ -66,7 +66,7 @@ As the loop runs, the SDK yields a stream of messages. Each message carries a ty
 * **`StreamEvent`:** only emitted when partial messages are enabled. Contains raw API streaming events (text deltas, tool input chunks). See [Stream responses](/en/agent-sdk/streaming-output).
 * **`ResultMessage`:** marks the end of the agent loop. Contains the final text result, token usage, cost, and session ID. Check the `subtype` field to determine whether the task succeeded or hit a limit. A small number of trailing system events, such as `prompt_suggestion`, can arrive after it, so iterate the stream to completion rather than breaking on the result. See [Handle the result](#handle-the-result).
 
-These five types cover the full agent loop lifecycle in both SDKs. The TypeScript SDK also yields additional observability events (hook events, tool progress, rate limits, task notifications) that provide extra detail but are not required to drive the loop. See the [Python message types reference](/en/agent-sdk/python#message-types) and [TypeScript message types reference](/en/agent-sdk/typescript#message-types) for the complete lists.
+These five types cover the full agent loop lifecycle. Both SDKs also yield observability events such as rate-limit status and task notifications that are not required to drive the loop. See the [Python message types reference](/en/agent-sdk/python#message-types) and [TypeScript message types reference](/en/agent-sdk/typescript#message-types) for the complete lists.
 
 ### Handle messages
 
@@ -214,14 +214,14 @@ Use lower effort for agents doing simple, well-scoped tasks (like listing files 
 
 The permission mode option (`permission_mode` in Python, `permissionMode` in TypeScript) controls whether the agent asks for approval before using tools:
 
-| Mode                  | Behavior                                                                                                                                                                                                                                                                                                                                                                                                      |
-| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `"default"`           | Tools not covered by allow rules trigger your approval callback; no callback means deny                                                                                                                                                                                                                                                                                                                       |
-| `"acceptEdits"`       | Auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.); other Bash commands follow default rules                                                                                                                                                                                                                                                                        |
-| `"plan"`              | Claude explores and plans without editing your source files; file edits are never auto-approved and prompt through your `canUseTool` callback                                                                                                                                                                                                                                                                 |
-| `"dontAsk"`           | Never prompts. Tools pre-approved by [permission rules](/en/settings#permission-settings) run, everything else is denied                                                                                                                                                                                                                                                                                      |
-| `"auto"`              | Uses a model classifier to approve or deny each tool call. See [Auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) for availability and behavior                                                                                                                                                                                                                                               |
-| `"bypassPermissions"` | Runs all allowed tools without asking, unless an explicit [`ask` rule](/en/settings#permission-settings) matches; see [How permissions are evaluated](/en/agent-sdk/permissions#how-permissions-are-evaluated) for where ask rules sit in the precedence order. Cannot be used when running as root on Unix. Use only in isolated environments where the agent's actions cannot affect systems you care about |
+| Mode                  | Behavior                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `"default"`           | Tools not covered by allow rules trigger your approval callback; no callback means deny                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `"acceptEdits"`       | Auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.); other Bash commands follow default rules                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `"plan"`              | Claude explores and plans without editing your source files; file edits are never auto-approved and prompt through your `canUseTool` callback                                                                                                                                                                                                                                                                                                                                                                                                |
+| `"dontAsk"`           | Never prompts. Tools pre-approved by [permission rules](/en/settings#permission-settings) run; everything else is denied. `AskUserQuestion`, connector tools [your organization set to `ask`](/en/mcp#organization-controls-on-connector-tools), and MCP tools marked [`requiresUserInteraction`](/en/mcp#require-approval-for-a-specific-tool) are denied even if you've allowed them                                                                                                                                                       |
+| `"auto"`              | Uses a model classifier to approve or deny each tool call. See [Auto mode](/en/permission-modes#eliminate-prompts-with-auto-mode) for availability and behavior                                                                                                                                                                                                                                                                                                                                                                              |
+| `"bypassPermissions"` | Runs all allowed tools without asking, except tools matched by an explicit [`ask` rule](/en/settings#permission-settings), connector tools [your organization set to `ask`](/en/mcp#organization-controls-on-connector-tools), and tools that require user interaction; see [How permissions are evaluated](/en/agent-sdk/permissions#how-permissions-are-evaluated) for the precedence order. Cannot be used when running as root on Unix. Use only in isolated environments where the agent's actions cannot affect systems you care about |
 
 For interactive applications, use `"default"` with a tool approval callback to surface approval prompts. For autonomous agents on a dev machine, `"acceptEdits"` auto-approves file edits and common filesystem commands (`mkdir`, `touch`, `mv`, `cp`, etc.) while still gating other `Bash` commands behind allow rules. Reserve `"bypassPermissions"` for CI, containers, or other isolated environments. See [Permissions](/en/agent-sdk/permissions) for full details.
 
@@ -231,7 +231,7 @@ If you don't set `model`, the SDK uses Claude Code's default, which depends on y
 
 ## The context window
 
-The context window is the total amount of information available to Claude during a session. It does not reset between turns within a session. Everything accumulates: the system prompt, tool definitions, conversation history, tool inputs, and tool outputs. Content that stays the same across turns (system prompt, tool definitions, CLAUDE.md) is automatically [prompt cached](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), which reduces cost and latency for repeated prefixes.
+The context window is the total amount of information available to Claude during a session. It does not reset between turns within a session. Everything accumulates: the system prompt, tool definitions, conversation history, tool inputs, and tool outputs. Content that stays the same across turns (system prompt, tool definitions, CLAUDE.md) is automatically [prompt cached](https://platform.claude.com/docs/en/build-with-claude/prompt-caching), which reduces cost and latency for repeated prefixes. For how a custom system prompt or `append` text affects cache reuse across sessions, see [Modifying system prompts](/en/agent-sdk/modifying-system-prompts#improve-prompt-caching-across-users-and-machines).
 
 ### What consumes context
 
@@ -290,7 +290,7 @@ Each interaction with the SDK creates or continues a session. Capture the sessio
 
 When you resume, the full context from previous turns is restored: files that were read, analysis that was performed, and actions that were taken. You can also fork a session to branch into a different approach without modifying the original.
 
-See [Session management](/en/agent-sdk/sessions) for the full guide on resume, continue, and fork patterns.
+See [Session management](/en/agent-sdk/sessions) for the full guide on resume, continue, and fork patterns. To resume sessions across stateless containers or serverless hosts, pass a [`session_store` / `sessionStore` adapter](/en/agent-sdk/session-storage) so transcripts are mirrored to your own backend and any host can resume them. The Claude Code subprocess still writes to local disk first; point `CLAUDE_CONFIG_DIR` at a temp directory in `options.env` if the local copy needs to be ephemeral.
 
 <Note>
   In Python, `ClaudeSDKClient` handles session IDs automatically across multiple calls. See the [Python SDK reference](/en/agent-sdk/python#choosing-between-query-and-claudesdkclient) for details.
@@ -447,5 +447,6 @@ Now that you understand the loop, here's where to go depending on what you're bu
 * **Building an interactive UI?** Enable [streaming](/en/agent-sdk/streaming-output) to show live text and tool calls as the loop runs.
 * **Need tighter control over what the agent can do?** Lock down tool access with [permissions](/en/agent-sdk/permissions), and use [hooks](/en/agent-sdk/hooks) to audit, block, or transform tool calls before they execute.
 * **Running long or expensive tasks?** Offload isolated work to [subagents](/en/agent-sdk/subagents) to keep your main context lean.
+* **Deploying as a service?** See [Hosting the Agent SDK](/en/agent-sdk/hosting) for container and serverless guidance, and [Session storage](/en/agent-sdk/session-storage) to persist sessions to your own backend.
 
-For the broader conceptual picture of the agentic loop (not SDK-specific), see [How Claude Code works](/en/how-claude-code-works).
+For the broader conceptual picture of the agentic loop (not SDK-specific), see [How Claude Code works](/en/how-claude-code-works). For a practical guide to designing loops in Claude Code, from turn-based to goal-based and proactive loops, see [Loop engineering: getting started with loops](https://claude.com/blog/getting-started-with-loops) on the blog.

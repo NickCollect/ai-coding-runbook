@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/sessions
-fetched_at: 2026-07-06T05:04:35.738049+00:00
+fetched_at: 2026-07-20T04:31:31.506291+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,19 +20,33 @@ The [desktop app](/en/desktop#work-in-parallel-with-sessions), [Claude Code on t
 
 Sessions are saved continuously to [local transcript files](#export-and-locate-session-data) as you work, so you can return to one after exiting or running `/clear`. Use these entry points:
 
-| Command                     | What it does                                                       |
-| :-------------------------- | :----------------------------------------------------------------- |
-| `claude --continue`         | Resumes the most recent session in the current directory           |
-| `claude --resume`           | Opens the [session picker](#use-the-session-picker)                |
-| `claude --resume <name>`    | Resumes the named session directly                                 |
-| `claude --from-pr <number>` | Resumes the session linked to that pull request                    |
-| `/resume`                   | Switches to a different conversation from inside an active session |
+| Command                     | What it does                                                              |
+| :-------------------------- | :------------------------------------------------------------------------ |
+| `claude --continue`         | Resumes the most recent session in the current directory                  |
+| `claude --resume`           | Opens the [session picker](#use-the-session-picker)                       |
+| `claude --resume <name>`    | Resumes the named session directly                                        |
+| `claude --from-pr <number>` | Opens the session picker filtered to sessions linked to that pull request |
+| `/resume`                   | Switches to a different conversation from inside an active session        |
 
 Sessions created with [`claude -p`](/en/headless) or the [Agent SDK](/en/agent-sdk/overview) do not appear in the session picker, but you can still resume one by passing its session ID to `claude --resume <session-id>`. Run this from the directory the session was started in: session ID lookup is scoped to the current project directory and its git worktrees, so a session created elsewhere reports `No conversation found with session ID: <session-id>`.
+
+### What a resumed session restores
+
+A resumed session restores the conversation along with the state saved in it:
+
+* Conversation history: the full history, including tool calls and results.
+* Model: the session continues on the model it was using. The model isn't restored when it has been retired or isn't allowed by `availableModels`, when a `--model` flag or `ANTHROPIC_MODEL`-family environment variable picks one at launch, or on providers that use provider-specific deployment IDs, such as [Amazon Bedrock, Google Cloud's Agent Platform, and Microsoft Foundry](/en/third-party-integrations); see [model configuration](/en/model-config#setting-your-model) for the resolution order.
+* Permission mode: the mode the session was in. `plan` and `bypassPermissions` are never restored; [bypassing permissions](/en/permission-modes#skip-all-checks-with-bypasspermissions-mode) must be enabled again at launch, with one of its launch flags or `permissions.defaultMode: "bypassPermissions"` in [settings](/en/settings#permission-settings). `auto` is restored only when your account still meets the [auto mode requirements](/en/permission-modes#eliminate-prompts-with-auto-mode). Pass `--permission-mode` to override the restored mode.
+* Active goal: a [goal](/en/goal#resume-with-an-active-goal) that was still active when the session ended carries over; its turn count, timer, and token-spend baseline reset.
+* Scheduled tasks: [tasks that haven't expired](/en/scheduled-tasks#limitations) are restored. Background Bash and monitor tasks aren't.
+
+Not every configuration flag from the original launch is restored. If the session depended on `--mcp-config`, `--settings`, `--plugin-dir`, `--fallback-model`, or directories added with `--add-dir`, pass them again when you resume; directories added mid-session with `/add-dir` aren't restored either, though the session picker still uses them to locate the session. The standard settings files, such as `settings.json` and `settings.local.json`, are re-read at launch, so configuration that lives in them doesn't need to be passed again.
 
 ### Where the session picker looks
 
 Sessions are stored per project directory. By default the session picker shows interactive sessions from the current worktree, plus sessions started elsewhere that added the current directory with `/add-dir`. Use `Ctrl+W` to widen to all worktrees of the repository or `Ctrl+A` to widen to every project on this machine.
+
+{/* min-version: 2.1.211 */}Sessions whose first prompt was a [`/loop`](/en/scheduled-tasks#run-a-prompt-repeatedly-with-%2Floop) command don't appear in the picker; running `/loop` later in a conversation doesn't hide the session. Before v2.1.211, a `/loop` run early in a conversation hid the session from the picker permanently.
 
 {/* min-version: 2.1.169 */}From v2.1.169, moving a session with [`/cd`](/en/commands) relocates it to the new directory's project storage, so it appears in that directory's picker afterward. {/* min-version: 2.1.196 */}As of v2.1.196, a moved session stays out of the old directory's picker even after a crash or forced exit. On earlier versions, it could also reappear in the old directory's list after an exit that wasn't clean when the old path contained special characters such as underscores.
 
@@ -62,6 +76,8 @@ Once a session is named, return to it with `claude --resume <name>` or `/resume 
 
 The default isn't a resume handle: `claude --resume <name>`, `/resume <name>`, and the session picker match only names you set. Naming the session replaces the default.
 
+If you don't name a session, Claude Code generates a session title for it: a short summary of your first prompt, written by a background request to the small/fast model, normally a Haiku-class model. Naming the session with `--name` or `/rename` replaces the generated title. You see the generated title in the [session picker](#use-the-session-picker) and in the statusline [`session_name`](/en/statusline) field when no name is set; like the default display name, it isn't a resume handle.
+
 ## Use the session picker
 
 Run `/resume` inside a session, or `claude --resume` with no arguments, to open the interactive session picker. Use these keyboard shortcuts to navigate, search, and widen the list:
@@ -79,9 +95,9 @@ Run `/resume` inside a session, or `claude --resume` with no arguments, to open 
 | `Ctrl+B`                                          | Filter to sessions from the current git branch. Press again to show all branches                                                                             |
 | `Esc`                                             | Exit the session picker or search mode                                                                                                                       |
 
-Each row shows the session name if set, otherwise the conversation summary or first prompt, along with time since last activity, message count, and git branch. Project path appears after you widen to all projects with `Ctrl+A`.
+Each row shows the session name if you set one, otherwise the AI-generated session title, conversation summary, or first prompt, along with time since last activity, git branch, and file size. Widen to all projects with `Ctrl+A` to also see each session's project path.
 
-Forked sessions created with `/branch`, `/rewind`, or `--fork-session` are grouped under their root session. Press `→` to expand a group.
+Sessions created with `/branch` or `--fork-session` get their own session IDs and appear as separate rows. When the picker finds more than one entry for the same session, it groups them under a single row. Press `→` to expand a group.
 
 ## Branch a session
 
@@ -109,7 +125,7 @@ For checkpoint-based rewind within a single session, see [Checkpointing](/en/che
 
 These commands control what's in the context window without leaving the session:
 
-* **`/clear`**: start fresh with an empty context. The previous conversation is saved and resumable
+* **`/clear`**: start fresh with an empty context. Claude Code saves the previous conversation; resume it with `/resume`, or, in the same Claude Code process, {/* min-version: 2.1.191 */}from [the rewind menu's previous-session entry](/en/checkpointing#rewind-past-a-cleared-conversation). You keep a name you set with `--name` or `/rename` in the new conversation, but not an AI-generated session title
 * **`/compact [instructions]`**: replace history with a summary, optionally focused on what you specify
 * **`/context`**: show what is currently consuming context
 

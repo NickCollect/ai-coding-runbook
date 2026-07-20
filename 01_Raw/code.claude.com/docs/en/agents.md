@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agents
-fetched_at: 2026-07-06T05:04:28.895139+00:00
+fetched_at: 2026-07-20T04:31:24.916859+00:00
 fetch_method: mintlify_md
 ---
 
@@ -31,7 +31,7 @@ Two more tools support this work without being a way to run agents themselves:
 A few other features run Claude without you driving each step, but they solve a different problem than splitting work across agents:
 
 * A [background bash command](/en/interactive-mode#background-bash-commands) runs one shell command without blocking the conversation. It doesn't spawn an agent.
-* A [forked subagent](/en/sub-agents#fork-the-current-conversation) is a subagent that inherits your full conversation context instead of starting fresh. It's a way to spawn a subagent, not a separate surface.
+* A [forked subagent](/en/sub-agents#fork-the-current-conversation), started with `/subtask`, is a subagent that inherits your full conversation context instead of starting fresh. It's a way to spawn a subagent, not a separate surface. To copy the whole session into a new [background session](/en/agent-view#from-inside-a-session) that runs alongside it, use `/fork`. With [agent view turned off](/en/agent-view#turn-off-agent-view), the forked-subagent command is `/fork` instead and `/subtask` isn't available.
 * A [routine](/en/routines) runs a session on a schedule in Anthropic's cloud, not in parallel on your machine.
 
 <Note>
@@ -56,7 +56,7 @@ The command for checking on running work depends on which approach you used:
 
 * For background sessions, `claude agents` opens [agent view](/en/agent-view): one screen showing every session, its state, and which ones need your input.
 * For subagents in the current session, named background subagents appear in the @-mention typeahead with their status. {/* min-version: 2.1.198 */}As of v2.1.198, `/agents` no longer opens a panel; it prints a notice pointing to the subagent file locations. To [create and edit custom subagents](/en/sub-agents#configure-subagents), ask Claude or edit the files directly. Despite the similar name, `/agents` is separate from `claude agents`.
-* For anything running in the background of the current session, `/tasks` lists each item and lets you check on, attach to, or stop it.
+* For anything running in the background of the current session, `/tasks` lists each item and lets you check on, attach to, or stop it. The list also includes subagents that have finished.
 * For dynamic workflows, `/workflows` lists running and completed runs, the phase each is in, and how many agents have finished.
 
 For a desktop view of all your sessions, see [parallel sessions in the desktop app](/en/desktop#work-in-parallel-with-sessions).

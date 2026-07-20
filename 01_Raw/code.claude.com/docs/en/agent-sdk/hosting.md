@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/hosting
-fetched_at: 2026-07-06T05:04:27.630559+00:00
+fetched_at: 2026-07-20T04:31:22.624495+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,16 +110,26 @@ The pattern hinges on resuming a session by ID with a shared store attached:
   ```
 
   ```python Python theme={null}
-  from claude_agent_sdk import query, ClaudeAgentOptions
+  from claude_agent_sdk import query, ClaudeAgentOptions, SessionStore
+  import asyncio
 
-  async for message in query(
-      prompt=user_input,
-      options=ClaudeAgentOptions(
-          resume=session_id,            # looked up from your database by user
-          session_store=session_store,  # S3, Redis, Postgres, or your own adapter
-      ),
-  ):
-      ...
+  user_input: str = ...
+  session_id: str = ...              # looked up from your database by user
+  session_store: SessionStore = ...  # S3, Redis, Postgres, or your own adapter
+
+
+  async def main():
+      async for message in query(
+          prompt=user_input,
+          options=ClaudeAgentOptions(
+              resume=session_id,
+              session_store=session_store,
+          ),
+      ):
+          ...
+
+
+  asyncio.run(main())
   ```
 </CodeGroup>
 
@@ -275,19 +285,29 @@ The example below applies the four SDK-level options together. Construct `tenant
 
   ```python Python theme={null}
   from claude_agent_sdk import query, ClaudeAgentOptions
+  import asyncio
 
-  async for message in query(
-      prompt=prompt,
-      options=ClaudeAgentOptions(
-          cwd=tenant_dir,
-          setting_sources=[],
-          env={
-              "CLAUDE_CONFIG_DIR": config_dir,
-              "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
-          },
-      ),
-  ):
-      ...
+  prompt: str = ...
+  tenant_dir: str = ...
+  config_dir: str = ...
+
+
+  async def main():
+      async for message in query(
+          prompt=prompt,
+          options=ClaudeAgentOptions(
+              cwd=tenant_dir,
+              setting_sources=[],
+              env={
+                  "CLAUDE_CONFIG_DIR": config_dir,
+                  "CLAUDE_CODE_DISABLE_AUTO_MEMORY": "1",
+              },
+          ),
+      ):
+          ...
+
+
+  asyncio.run(main())
   ```
 </CodeGroup>
 

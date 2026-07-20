@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/slash-commands
-fetched_at: 2026-06-29T05:25:10.405010+00:00
+fetched_at: 2026-07-20T04:31:24.054589+00:00
 fetch_method: mintlify_md
 ---
 
@@ -369,14 +369,19 @@ Use in SDK:
   import { query } from "@anthropic-ai/claude-agent-sdk";
 
   // Pass arguments to custom command
-  for await (const message of query({
-    prompt: "/fix-issue 123 high",
-    options: { maxTurns: 5 }
-  })) {
-    // Command will process with $0="123" and $1="high"
-    if (message.type === "result" && message.subtype === "success") {
-      console.log("Issue fixed:", message.result);
+  try {
+    for await (const message of query({
+      prompt: "/fix-issue 123 high",
+      options: { maxTurns: 5 }
+    })) {
+      // Command will process with $0="123" and $1="high"
+      if (message.type === "result" && message.subtype === "success") {
+        console.log("Issue fixed:", message.result);
+      }
     }
+  } catch (err) {
+    // The run ends with an error when it reaches the maxTurns limit
+    console.error("Session ended with an error:", err);
   }
   ```
 
@@ -387,10 +392,14 @@ Use in SDK:
 
   async def main():
       # Pass arguments to custom command
-      async for message in query(prompt="/fix-issue 123 high", options=ClaudeAgentOptions(max_turns=5)):
-          # Command will process with $0="123" and $1="high"
-          if isinstance(message, ResultMessage):
-              print("Issue fixed:", message.result)
+      try:
+          async for message in query(prompt="/fix-issue 123 high", options=ClaudeAgentOptions(max_turns=5)):
+              # Command will process with $0="123" and $1="high"
+              if isinstance(message, ResultMessage):
+                  print("Issue fixed:", message.result)
+      except Exception as error:
+          # The run ends with an error when it reaches the max_turns limit
+          print(f"Session ended with an error: {error}")
 
 
   asyncio.run(main())
