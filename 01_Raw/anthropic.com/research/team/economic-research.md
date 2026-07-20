@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/economic-research
-fetched_at: 2026-07-13T04:26:47.886300+00:00
+fetched_at: 2026-07-20T04:33:10.981916+00:00
 title: "Economic Research \\ Anthropic"
 ---
 
@@ -50,6 +50,9 @@ Search
 
 DateCategoryTitle
 
+- [Jul 14, 2026Economic Research
+
+  How Canada uses Claude: Findings from the Anthropic Economic Index](https://www.anthropic.com/research/how-canada-uses-claude)
 - [Jun 26, 2026Economic Research
 
   Anthropic Economic Index report: Cadences](https://www.anthropic.com/research/economic-index-june-2026-report)
@@ -77,8 +80,5 @@ DateCategoryTitle
 - [Feb 16, 2026Economic Research
 
   India Country Brief: The Anthropic Economic Index](https://www.anthropic.com/research/india-brief-economic-index)
-- [Jan 15, 2026Economic Research
-
-  Anthropic Economic Index: New building blocks for understanding AI use](https://www.anthropic.com/research/economic-index-primitives)
 
 [See more](#)

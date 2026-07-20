@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/constitutional-classifiers
-fetched_at: 2026-07-13T04:26:08.305413+00:00
+fetched_at: 2026-07-20T04:32:12.454759+00:00
 title: "Constitutional Classifiers: Defending against universal jailbreaks \\ Anthropic"
 ---
 
@@ -68,13 +68,13 @@ The [full paper](https://arxiv.org/abs/2501.18837) contains all the details abou
 
 ## Constitutional Classifiers live demo
 
-Want to try red teaming Claude yourself? We invite you to try out a [demo of our Constitutional-Classifiers-guarded system](https://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6/constitutional-classifiers) and attempt to jailbreak a version of Claude 3.5 Sonnet that is guarded using our new technique. **[Edit 10 February 2025: The demo is now complete. See below for details].**
+Want to try red teaming Claude yourself? We invite you to try out a [demo of our Constitutional-Classifiers-guarded system](https://claude.ai/redirect/website.v1.94bf6d90-4e4f-4499-966d-dd2a98b730d0/constitutional-classifiers) and attempt to jailbreak a version of Claude 3.5 Sonnet that is guarded using our new technique. **[Edit 10 February 2025: The demo is now complete. See below for details].**
 
 Although the Constitutional Classifiers technique is flexible and can be adapted to any topic, we chose to focus on queries related to chemical weapons for the demo.
 
 Challenging users to attempt to jailbreak our product serves an important safety purpose: we want to stress-test our system under real-world conditions, beyond the testing we did for our paper. This allows us to gather additional data and improve the robustness of the method prior to deploying this method on our production systems in the future.
 
-The [**demo**](https://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6/constitutional-classifiers) will be live from **Feb 3, 2025** to **Feb 10, 2025**. It includes a feedback form where you can contact us to report any successful jailbreaks as well as information on our [Responsible Disclosure Policy](https://www.anthropic.com/responsible-disclosure-policy), which we ask that participants follow. We’ll announce any successes and the general results of the demo in an update to this post.
+The [**demo**](https://claude.ai/redirect/website.v1.94bf6d90-4e4f-4499-966d-dd2a98b730d0/constitutional-classifiers) will be live from **Feb 3, 2025** to **Feb 10, 2025**. It includes a feedback form where you can contact us to report any successful jailbreaks as well as information on our [Responsible Disclosure Policy](https://www.anthropic.com/responsible-disclosure-policy), which we ask that participants follow. We’ll announce any successes and the general results of the demo in an update to this post.
 
 ## 13 February 2025 update: Live demo results
 
@@ -164,18 +164,16 @@ If you’re interested in working on problems such as jailbreak robustness or on
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### A global workspace in language models
+### Claude’s values across models and languages
 
-New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/global-workspace)
+### Claude plays robotics
 
-### Anthropic Economic Index report: Cadences
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
-
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/statistical-approach-to-model-evals
-fetched_at: 2026-07-13T04:26:44.929998+00:00
+fetched_at: 2026-07-20T04:33:04.221876+00:00
 title: "A statistical approach to model evaluations \\ Anthropic"
 ---
 
@@ -89,18 +89,16 @@ Statistics is the science of measurement in the presence of noise. Evals present
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### A global workspace in language models
+### Claude’s values across models and languages
 
-New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/global-workspace)
+### Claude plays robotics
 
-### Anthropic Economic Index report: Cadences
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
-
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)

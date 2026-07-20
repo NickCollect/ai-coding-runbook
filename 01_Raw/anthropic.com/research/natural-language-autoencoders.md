@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/natural-language-autoencoders
-fetched_at: 2026-07-13T04:26:31.365370+00:00
+fetched_at: 2026-07-20T04:32:49.859894+00:00
 title: "Natural Language Autoencoders \\ Anthropic"
 ---
 
@@ -64,7 +64,7 @@ For example, in the blackmail test discussed above, we used NLAs to understand w
 
 Claude does not say it thinks it’s being tested in this transcript from our blackmail evaluation, but the NLA explanation reveals its suspicions.
 
-Extending this analysis to other evaluations, NLAs suggest that Claude suspects it’s being tested more often than it lets on. For instance, in a test of whether Claude takes destructive actions while writing code—for example, deleting important files—NLA explanations show signs of evaluation awareness 16% of the time, even though Claude never explicitly verbalizes this. Similarly, on the popular coding benchmark SWE-bench Verified, which we use to determine how capable Claude is, NLAs indicate that Claude is aware it is being evaluated on 26% of problems. In contrast, NLA explanations indicate evaluation awareness on less than 1% of real [claude.ai](http://claude.ai/redirect/website.v1.2397298e-a2be-4064-bedd-12fd760d437d) usage that opted in for training.
+Extending this analysis to other evaluations, NLAs suggest that Claude suspects it’s being tested more often than it lets on. For instance, in a test of whether Claude takes destructive actions while writing code—for example, deleting important files—NLA explanations show signs of evaluation awareness 16% of the time, even though Claude never explicitly verbalizes this. Similarly, on the popular coding benchmark SWE-bench Verified, which we use to determine how capable Claude is, NLAs indicate that Claude is aware it is being evaluated on 26% of problems. In contrast, NLA explanations indicate evaluation awareness on less than 1% of real [claude.ai](http://claude.ai/redirect/website.v1.7d1d640a-96f1-4700-8dfc-c193050bcd96) usage that opted in for training.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fc08005f32ff020f21e598cc72f58768af2bcc4f-1590x1170.png)
 
@@ -110,18 +110,16 @@ Find the [code](https://github.com/kitft/natural_language_autoencoders) on GitHu
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### A global workspace in language models
+### Claude’s values across models and languages
 
-New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/global-workspace)
+### Claude plays robotics
 
-### Anthropic Economic Index report: Cadences
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
-
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)

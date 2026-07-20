@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/global-workspace
-fetched_at: 2026-07-13T04:26:23.802310+00:00
+fetched_at: 2026-07-20T04:32:33.336631+00:00
 title: "A global workspace in language models \\ Anthropic"
 ---
 
@@ -80,7 +80,7 @@ Claude’s control over its J-space isn't perfect. When we told it *not* to thin
 
 In the J-lens readouts above, we saw the intermediate steps of a math problem appear in the J-space. But seeing a concept appearing in the J-space doesn’t necessarily mean the J-space is doing the cognitive work. In principle, the real computation might be happening elsewhere, with the J-space just passively reflecting it. To test whether Claude actually reasons with its J-space, we returned to our swap technique.
 
-Consider the prompt “The number of legs on the animal that spins webs is”. To answer, Claude has to first figure out that the animal is a spider, and then recall how many legs spiders have. The word “spider” never appears in the prompt or in Claude's answer (it just says “8”); it's a stepping stone Claude uses internally. The J-lens shows “spider” light up partway through Claude’s processing, and swapping it changes the outcome: if you replace the “spider” pattern with “ant,” Claude answers “6” instead of “8.”
+Consider the prompt “The number of legs on the animal that spins webs is.” To answer, Claude has to first figure out that the animal is a spider, and then recall how many legs spiders have. The word “spider” never appears in the prompt or in Claude's answer (it just says “8”); it's a stepping stone Claude uses internally. The J-lens shows “spider” light up partway through Claude’s processing, and swapping it changes the outcome: if you replace the “spider” pattern with “ant,” Claude answers “6” instead of “8.”
 
 The second step of Claude’s reasoning took its input from the J-space and went along with whatever we put in it. We saw the same thing in other kinds of thinking. When Claude writes a rhyming couplet, it picks the rhyme word ahead of time, and the planned word sits in the J-space at the start of the line; if you swap it for another word in the J-space, the whole line changes.
 
@@ -176,18 +176,16 @@ Read their commentaries [here](https://www-cdn.anthropic.com/files/4zrzovbb/webs
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### Anthropic Economic Index report: Cadences
+### Claude’s values across models and languages
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+### Claude plays robotics
 
-### Project Fetch: Phase two
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-We report results from our latest test of whether Claude can help Anthropic employees perform sophisticated robotics tasks. We found that Claude Opus 4.7, operating without human assistance, was about 20 times faster than the fastest human team at all tasks completed by participants less than a year ago.
-
-[Read more](https://www.anthropic.com/research/project-fetch-phase-two)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)

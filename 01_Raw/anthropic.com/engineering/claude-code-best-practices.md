@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-best-practices
-fetched_at: 2026-06-08T05:24:56.642372+00:00
+fetched_at: 2026-07-20T04:31:25.889404+00:00
 title: "Best practices for Claude Code - Claude Code Docs"
 ---
 
@@ -159,7 +159,7 @@ CLAUDE.md
 - Prefer running single tests, and not the whole test suite, for performance
 ```
 
-CLAUDE.md is loaded every session, so only include things that apply broadly. For domain knowledge or workflows that are only relevant sometimes, use [skills](https://www.anthropic.com/docs/en/skills) instead. Claude loads them on demand without bloating every conversation.
+Run `/context` to confirm Claude loaded the file. CLAUDE.md is loaded every session, so only include things that apply broadly. For domain knowledge or workflows that are only relevant sometimes, use [skills](https://www.anthropic.com/docs/en/skills) instead. Claude loads them on demand without bloating every conversation.
 Keep it concise. For each line, ask: *“Would removing this cause Claude to make mistakes?”* If not, cut it. Bloated CLAUDE.md files cause Claude to ignore your actual instructions!
 
 | ✅ Include | ❌ Exclude |
@@ -328,7 +328,7 @@ Using Claude Code this way is an effective onboarding workflow, improving ramp-u
 
 For larger features, have Claude interview you first. Start with a minimal prompt and ask Claude to interview you using the `AskUserQuestion` tool.
 
-Claude asks about things you might not have considered yet, including technical implementation, UI/UX, edge cases, and tradeoffs.
+Claude asks about things you might not have considered yet, including technical implementation, UI/UX, edge cases, and tradeoffs. Replace `[brief description]` with your feature before sending the prompt.
 
 ```
 I want to build [brief description]. Interview me in detail using the AskUserQuestion tool.
@@ -397,9 +397,9 @@ use a subagent to review this code for edge cases
 Every prompt you send creates a checkpoint. You can restore conversation, code, or both to any previous checkpoint.
 
 Claude automatically snapshots files before each change so a checkpoint can restore them. Double-tap `Escape` or run `/rewind` to open the rewind menu. You can restore conversation only, restore code only, restore both, or summarize from a selected message. See [Checkpointing](https://www.anthropic.com/docs/en/checkpointing) for details.
-Instead of carefully planning every move, you can tell Claude to try something risky. If it doesn’t work, rewind and try a different approach. Checkpoints persist across sessions, so you can close your terminal and still rewind later.
+Instead of carefully planning every move, you can tell Claude to try something risky. If it doesn’t work, rewind and try a different approach. Checkpoints are saved with the conversation, so you can close your terminal, resume the session later, and still rewind.
 
-Checkpoints only track changes made *by Claude*, not external processes. This isn’t a replacement for git.
+Checkpoints only track changes made through Claude’s file editing tools. Changes made through Bash commands or external processes are not captured. This isn’t a replacement for git.
 
 ### [​](#resume-conversations) Resume conversations
 
@@ -418,7 +418,7 @@ Everything so far assumes one human, one Claude, and one conversation. But Claud
 
 Use `claude -p "prompt"` in CI, pre-commit hooks, or scripts. Add `--output-format stream-json --verbose` for streaming JSON output.
 
-With `claude -p "your prompt"`, you can run Claude non-interactively, without a session. [Non-interactive mode](https://www.anthropic.com/docs/en/headless) is how you integrate Claude into CI pipelines, pre-commit hooks, or any automated workflow. The output formats let you parse results programmatically: plain text, JSON, or streaming JSON.
+With `claude -p "your prompt"`, you can run Claude non-interactively, without an interactive prompt. The run still creates a resumable session unless you pass `--no-session-persistence`. [Non-interactive mode](https://www.anthropic.com/docs/en/headless) is how you integrate Claude into CI pipelines, pre-commit hooks, or any automated workflow. The output formats let you parse results programmatically: plain text, JSON, or streaming JSON.
 
 ```
 # One-off queries
@@ -430,6 +430,8 @@ claude -p "List all API endpoints" --output-format json
 # Streaming for real-time processing
 claude -p "Analyze this log file" --output-format stream-json --verbose
 ```
+
+The first command prints plain text. The `json` format returns a single JSON object with a `result` field. The `stream-json` format prints one JSON object per line, starting with an init event.
 
 ### [​](#run-multiple-claude-sessions) Run multiple Claude sessions
 

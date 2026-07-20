@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/societal-impacts
-fetched_at: 2026-07-06T05:06:08.548480+00:00
+fetched_at: 2026-07-20T04:33:11.415160+00:00
 title: "Societal Impacts Research \\ Anthropic"
 ---
 
@@ -54,6 +54,9 @@ Search
 
 DateCategoryTitle
 
+- [Jul 13, 2026Societal Impacts
+
+  Claude’s values across models and languages](https://www.anthropic.com/research/claude-values-models-languages)
 - [Apr 30, 2026Societal Impacts
 
   How people ask Claude for personal guidance](https://www.anthropic.com/research/claude-personal-guidance)
@@ -81,9 +84,6 @@ DateCategoryTitle
 - [Apr 8, 2025Announcements
 
   Anthropic Education Report: How university students use Claude](https://www.anthropic.com/news/anthropic-education-report-how-university-students-use-claude)
-- [Mar 27, 2025Societal Impacts
-
-  Anthropic Economic Index: Insights from Claude 3.7 Sonnet](https://www.anthropic.com/news/anthropic-economic-index-insights-from-claude-sonnet-3-7)
 
 [See more](#)
 

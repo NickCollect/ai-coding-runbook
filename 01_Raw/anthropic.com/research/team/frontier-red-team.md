@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-07-06T05:06:04.568172+00:00
+fetched_at: 2026-07-20T04:33:05.068493+00:00
 title: "Frontier Red Team \\ Anthropic"
 ---
 
@@ -28,6 +28,9 @@ Search
 
 DateCategoryTitle
 
+- [Jul 9, 2026Frontier Red Team
+
+  Claude plays robotics](https://www.anthropic.com/research/claude-plays-robotics)
 - [Jun 18, 2026Frontier Red Team
 
   Project Fetch: Phase two](https://www.anthropic.com/research/project-fetch-phase-two)
@@ -55,8 +58,5 @@ DateCategoryTitle
 - [Feb 5, 2026Frontier Red Team
 
   Evaluating and mitigating the growing risk of LLM-discovered 0-days](https://www.anthropic.com/research/zero-days)
-- [Jan 16, 2026Frontier Red Team
-
-  AI models are showing a greater ability to find and exploit vulnerabilities on realistic cyber ranges](https://www.anthropic.com/research/cyber-toolkits-update)
 
 [See more](#)

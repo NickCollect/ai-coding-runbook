@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/bloom
-fetched_at: 2026-07-13T04:26:01.574762+00:00
+fetched_at: 2026-07-20T04:31:57.530701+00:00
 title: "Introducing Bloom: an open source tool for automated behavioral evaluations \\ Anthropic"
 ---
 
@@ -45,7 +45,7 @@ Unlike fixed evaluation sets, Bloom produces different scenarios on each run whi
 
 Researchers can extensively configure Bloom's behavior, through choosing models for each stage, adjusting the interactions’ length and modality (i.e., whether to expose tools to the target model, whether to simulate a user), controlling how diverse the evaluation scenarios are, and specifying secondary scoring dimensions, like realism or elicitation difficulty.
 
-**Example outputs from all four stages of the Bloom evaluation pipeline can be viewed [here.](https://claude.ai/redirect/website.v1.281285a0-a972-493f-852d-b0c09b78ff5b/public/artifacts/cbfddf51-ab0d-45a9-913b-163ae2dd4126)**
+**Example outputs from all four stages of the Bloom evaluation pipeline can be viewed [here.](https://claude.ai/redirect/website.v1.94bf6d90-4e4f-4499-966d-dd2a98b730d0/public/artifacts/cbfddf51-ab0d-45a9-913b-163ae2dd4126)**
 
 ## Validation and trust
 
@@ -98,18 +98,16 @@ Copy
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### A global workspace in language models
+### Claude’s values across models and languages
 
-New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/global-workspace)
+### Claude plays robotics
 
-### Anthropic Economic Index report: Cadences
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
-
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)

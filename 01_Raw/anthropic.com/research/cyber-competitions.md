@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/cyber-competitions
-fetched_at: 2026-07-13T04:26:09.834049+00:00
+fetched_at: 2026-07-20T04:32:15.373057+00:00
 title: "Claude does cyber competitions \\ Anthropic"
 ---
 
@@ -54,9 +54,9 @@ The Airbnb competition, in which Claude solved nearly half of a multi-day compet
 
 ## Claude can make good use of autonomy and tools
 
-The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on [Claude.ai](http://claude.ai/redirect/website.v1.2397298e-a2be-4064-bedd-12fd760d437d); before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
+The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on [Claude.ai](http://claude.ai/redirect/website.v1.eaf9040e-bc53-4022-8305-22212560bb40); before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
 
-In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with [Claude.ai](http://claude.ai/redirect/website.v1.2397298e-a2be-4064-bedd-12fd760d437d) to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.
+In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with [Claude.ai](http://claude.ai/redirect/website.v1.eaf9040e-bc53-4022-8305-22212560bb40) to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1ac1e6bc9064e821eb8e239ef1cf5fc4a6687938-1740x946.png)
 
@@ -154,21 +154,19 @@ We thank Artem Petrov and Dmitrii Volkov from Palisade Research for providing da
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### A global workspace in language models
+### Claude’s values across models and languages
 
-New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/global-workspace)
+### Claude plays robotics
 
-### Anthropic Economic Index report: Cadences
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
-
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)
 
 ## Subscribe to the Frontier Red Team newsletter
 

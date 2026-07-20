@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/anthropic-economic-index-september-2025-report
-fetched_at: 2026-07-13T04:25:57.154679+00:00
+fetched_at: 2026-07-20T04:31:50.587651+00:00
 title: "Anthropic Economic Index report: Uneven geographic and enterprise AI adoption \\ Anthropic"
 ---
 
@@ -325,7 +325,7 @@ The geographic patterns of AI adoption—where it is used, for which tasks, and 
 
 Whether frontier AI capabilities make us more productive, reshape labor markets, and accelerate growth will depend on when and how firms choose to deploy AI. Even when businesses recognize the potential of AI, profitably adopting it may require costly restructuring of production processes, training new workers, and other sunk-cost investments to facilitate effective deployment.**1**
 
-To understand business adoption patterns of AI, we turn to a new data source: Anthropic's first-party (1P) API customers—again relying on [privacy-preserving methods](https://www.anthropic.com/research/clio).**2** Our API allows customers to integrate Claude directly into their own products and applications, and charges by the token used, rather than a flat subscription fee. This represents a fundamentally different product experience to [Claude.ai](http://claude.ai/redirect/website.v1.2397298e-a2be-4064-bedd-12fd760d437d), which we focused on in the previous two chapters.
+To understand business adoption patterns of AI, we turn to a new data source: Anthropic's first-party (1P) API customers—again relying on [privacy-preserving methods](https://www.anthropic.com/research/clio).**2** Our API allows customers to integrate Claude directly into their own products and applications, and charges by the token used, rather than a flat subscription fee. This represents a fundamentally different product experience to [Claude.ai](http://claude.ai/redirect/website.v1.5caa3a01-314d-4257-a08d-ebe52b621d29), which we focused on in the previous two chapters.
 
 Institutional inertia, alongside fixed costs of adoption, suggests that early examples of enterprise use of AI is likely to be concentrated among specialized tasks where deployment is easy, capabilities are robust, and the economic benefits from adoption are high.
 
@@ -545,18 +545,16 @@ Copy
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### A global workspace in language models
+### Claude’s values across models and languages
 
-New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/global-workspace)
+### Claude plays robotics
 
-### Anthropic Economic Index report: Cadences
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
-
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)

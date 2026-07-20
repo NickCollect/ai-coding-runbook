@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/clio
-fetched_at: 2026-07-13T04:26:05.164448+00:00
+fetched_at: 2026-07-20T04:32:12.907498+00:00
 title: "Clio: Privacy-preserving insights into real-world AI use \\ Anthropic"
 ---
 
@@ -24,7 +24,7 @@ This isn’t just a matter of curiosity, or even of sociological research. Knowi
 
 There’s also a crucially important factor standing in the way of a clear understanding of AI model use: privacy. At Anthropic, we take the protection of our users’ data very seriously. How, then, can we research and observe how our systems are used while rigorously maintaining user privacy?
 
-**Cl**aude **i**nsights and **o**bservations, or “Clio,” is our attempt to answer this question. Clio is an automated analysis tool that enables privacy-preserving analysis of real-world language model use. It gives us insights into the day-to-day uses of [claude.ai](http://claude.ai/redirect/website.v1.2397298e-a2be-4064-bedd-12fd760d437d) in a way that’s analogous to tools like Google Trends. It’s also already helping us improve our safety measures. In this post—which accompanies a [full research paper](https://arxiv.org/abs/2412.13678)—we describe Clio and some of its initial results.
+**Cl**aude **i**nsights and **o**bservations, or “Clio,” is our attempt to answer this question. Clio is an automated analysis tool that enables privacy-preserving analysis of real-world language model use. It gives us insights into the day-to-day uses of [claude.ai](http://claude.ai/redirect/website.v1.013ca4d7-a584-43d0-802e-09b2e32f4b4c) in a way that’s analogous to tools like Google Trends. It’s also already helping us improve our safety measures. In this post—which accompanies a [full research paper](https://arxiv.org/abs/2412.13678)—we describe Clio and some of its initial results.
 
 ## How Clio works: Privacy-preserving analysis at scale
 
@@ -47,11 +47,11 @@ All our privacy protections have been extensively tested, as we describe in the 
 
 ## How people use Claude: Insights from Clio
 
-Using Clio, we've been able to glean high-level insights into how people use [claude.ai](https://claude.ai/redirect/website.v1.2397298e-a2be-4064-bedd-12fd760d437d) in practice. While public datasets like [WildChat](https://arxiv.org/abs/2405.01470) and [LMSYS-Chat-1M](https://arxiv.org/abs/2309.11998) provide useful information on how people use language models, they only capture specific contexts and use cases. Clio allows us to understand the full spectrum of real-world usage of [claude.ai](https://claude.ai/redirect/website.v1.2397298e-a2be-4064-bedd-12fd760d437d) (which may look different than usage of other AI systems due to differences in user bases and model types).
+Using Clio, we've been able to glean high-level insights into how people use [claude.ai](https://claude.ai/redirect/website.v1.013ca4d7-a584-43d0-802e-09b2e32f4b4c) in practice. While public datasets like [WildChat](https://arxiv.org/abs/2405.01470) and [LMSYS-Chat-1M](https://arxiv.org/abs/2309.11998) provide useful information on how people use language models, they only capture specific contexts and use cases. Clio allows us to understand the full spectrum of real-world usage of [claude.ai](https://claude.ai/redirect/website.v1.013ca4d7-a584-43d0-802e-09b2e32f4b4c) (which may look different than usage of other AI systems due to differences in user bases and model types).
 
 ### Top use cases on Claude.ai
 
-We used Clio to analyze 1 million conversations with Claude on [claude.ai](https://claude.ai/redirect/website.v1.2397298e-a2be-4064-bedd-12fd760d437d) (both the Free and Pro tiers) to identify the top tasks people use Claude for. This revealed a particular emphasis on coding-related tasks: the "Web and mobile application development" category represented over 10% of all conversations. Software developers use Claude for tasks ranging from debugging code to explaining Git operations and concepts.
+We used Clio to analyze 1 million conversations with Claude on [claude.ai](https://claude.ai/redirect/website.v1.013ca4d7-a584-43d0-802e-09b2e32f4b4c) (both the Free and Pro tiers) to identify the top tasks people use Claude for. This revealed a particular emphasis on coding-related tasks: the "Web and mobile application development" category represented over 10% of all conversations. Software developers use Claude for tasks ranging from debugging code to explaining Git operations and concepts.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/04049f03394efe43a972f52066ecb801fc544a40-2400x1346.png)
 
@@ -131,18 +131,16 @@ We're continuing to develop and improve Clio, and we hope that others will build
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### A global workspace in language models
+### Claude’s values across models and languages
 
-New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/global-workspace)
+### Claude plays robotics
 
-### Anthropic Economic Index report: Cadences
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
-
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)

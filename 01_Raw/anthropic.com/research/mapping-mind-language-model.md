@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/mapping-mind-language-model
-fetched_at: 2026-07-13T04:26:27.644395+00:00
+fetched_at: 2026-07-20T04:32:45.613386+00:00
 title: "Mapping the mind of a large language model \\ Anthropic"
 ---
 
@@ -30,7 +30,7 @@ There was both an engineering challenge (the raw sizes of the models involved re
 
 As for the scientific risk, the proof is in the pudding.
 
-We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.dd119ac4-658c-411e-81c0-b94bec1a3fb6)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
+We successfully extracted millions of features from the middle layer of Claude 3.0 Sonnet, (a member of our current, state-of-the-art model family, currently available on [claude.ai](https://claude.ai/redirect/website.v1.013ca4d7-a584-43d0-802e-09b2e32f4b4c)), providing a rough conceptual map of its internal states halfway through its computation. This is the first ever detailed look inside a modern, production-grade large language model.
 
 Whereas the features we found in the toy language model were rather superficial, the features we found in Sonnet have a depth, breadth, and abstraction reflecting Sonnet's advanced capabilities.
 
@@ -92,18 +92,16 @@ For full details, please read our paper, "[Scaling Monosemanticity: Extracting I
 
 ## Related content
 
-### An off switch for dual-use knowledge in AI models
+### How Canada uses Claude: Findings from the Anthropic Economic Index
 
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
+[Read more](https://www.anthropic.com/research/how-canada-uses-claude)
 
-### A global workspace in language models
+### Claude’s values across models and languages
 
-New interpretability research reveals an emergent mental workspace in Claude that holds internal thoughts that don’t appear in the model’s output.
+[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
-[Read more](https://www.anthropic.com/research/global-workspace)
+### Claude plays robotics
 
-### Anthropic Economic Index report: Cadences
+In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
 
-In our latest Economic Index report, we sample hourly for the first time to ask: When do people come to Claude? What do they produce with it? And how do they perceive AI's impact on their work?
-
-[Read more](https://www.anthropic.com/research/economic-index-june-2026-report)
+[Read more](https://www.anthropic.com/research/claude-plays-robotics)
