@@ -1,129 +1,133 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=pl
-fetched_at: 2026-07-06T05:07:44.538310+00:00
-title: "Om\u00f3wienie interfejsu Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=zh-TW
+fetched_at: 2026-07-20T04:43:39.601843+00:00
+title: "Gemini Live API \u7e3d\u89bd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Prześlij opinię
+提供意見
 
-# Omówienie interfejsu Gemini Live API
+# Gemini Live API 總覽
 
-Interfejs Live API umożliwia interakcje głosowe i wizualne z Gemini w czasie rzeczywistym z niewielkimi opóźnieniami. Przetwarza ciągłe strumienie dźwięku, obrazów i tekstu, aby dostarczać natychmiastowe odpowiedzi głosowe, które brzmią jak ludzkie, tworząc naturalne doświadczenie konwersacyjne dla użytkowników.
+透過 Live API，您可以與 Gemini 展開低延遲的即時語音和視覺互動。這項服務可處理連續的音訊、圖片和文字，並立即以擬真語音回應，為使用者打造自然的對話體驗。
 
-![Omówienie interfejsu Live API](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=pl)
+![Live API 總覽](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=zh-tw)
 
-[Wypróbuj interfejs Live API w Google AI Studiomic](https://aistudio.google.com/live?hl=pl)
-[Sklonuj przykładowe aplikacje z GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
-[Korzystaj z umiejętności agenta do kodowaniaterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=pl)
+[在 Google AI Studio 中試用 Live APImic](https://aistudio.google.com/live?hl=zh-tw)
+[從 GitHub 複製範例應用程式code](https://github.com/google-gemini/gemini-live-api-examples)
+[使用程式碼編寫代理程式技能terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-tw)
 
-## Przypadki użycia
+## 用途
 
-Interfejs Live API może być używany do tworzenia agentów głosowych w czasie rzeczywistym w różnych branżach, m.in.:
+Live API 可用於為各種產業建構即時語音代理程式，包括：
 
-- **E-commerce i handel detaliczny:** asystenci zakupów, którzy oferują spersonalizowane rekomendacje, oraz agenci obsługi klienta, którzy rozwiązują problemy klientów.
-- **Gry:** interaktywne postacie niezależne, pomoc w grze i tłumaczenie treści w czasie rzeczywistym.
-- **Interfejsy nowej generacji:** funkcje głosowe i wideo w robotyce, okularach inteligentnych i pojazdach.
-- **Opieka zdrowotna:** towarzysze zdrowia, którzy wspierają pacjentów i edukują ich.
-- **Usługi finansowe:** doradcy AI w zakresie zarządzania kapitałem i inwestycjami.
-- **Edukacja:** mentorzy i towarzysze uczniów oparte na AI, którzy zapewniają spersonalizowane instrukcje i opinie.
-- **Tłumaczenie i lokalizacja:** tłumaczenie w czasie rzeczywistym z niskim opóźnieniem rozmów mówionych, co umożliwia bezproblemową komunikację w wielu językach.
+- **電子商務和零售：**提供個人化建議的購物助理，以及解決顧客問題的支援代理。
+- **遊戲：**互動式非玩家角色 (NPC)、遊戲內輔助助理，以及遊戲內容的即時翻譯。
+- **新一代介面：**在機器人、智慧眼鏡和車輛中，提供支援語音和視訊的體驗。
+- **醫療保健：**為病患提供支援和教育資訊的健康夥伴。
+- **金融服務：**AI 顧問提供財富管理和投資建議。
+- **教育：**AI 導師和學習夥伴，提供個人化指導和意見回饋。
+- **翻譯和本地化：**即時翻譯口語對話，延遲時間短，可順暢進行多語言溝通。
 
-## Najważniejsze funkcje
+## 主要功能與特色
 
-Interfejs Live API oferuje kompleksowy zestaw funkcji do tworzenia
-zaawansowanych agentów głosowych:
+Live API 提供完整的功能，可建構強大的語音代理程式：
 
-- [**Obsługa wielu języków:**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#supported-languages)
-  rozmawiaj w 70 obsługiwanych językach.
-- [**Przerwanie**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#interruptions): użytkownicy mogą w dowolnym momencie przerwać działanie modelu, aby uzyskać interaktywne odpowiedzi.
-- [**Korzystanie z narzędzi:**](https://ai.google.dev/gemini-api/docs/live-tools?hl=pl)
-  integruje narzędzia takie jak wywoływanie funkcji i wyszukiwarka Google, aby umożliwiać dynamiczne interakcje.
-- [**Transkrypcje audio:**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#audio-transcription) udostępnia transkrypcje tekstowe zarówno danych wejściowych użytkownika, jak i danych wyjściowych modelu.
-- [**Proaktywny dźwięk:**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#proactive-audio) pozwala kontrolować, kiedy i w jakich kontekstach model odpowiada.
-- [**Dialog afektywny:**](https://ai.google.dev/gemini-api/docs/live-guide?hl=pl#affective-dialog) dostosowuje styl i ton odpowiedzi do ekspresji użytkownika.
-- [**Tłumaczenie na żywo:**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=pl) tłumaczenie głosowe w czasie rzeczywistym w ponad 70 językach.
+- [**支援多種語言**](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-tw#supported-languages)：
+  支援 70 種語言。
+- [**插話**](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-tw#interruptions)：
+  使用者隨時可以打斷模型，進行回應式互動。
+- [**使用工具**](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-tw)：
+  整合函式呼叫和 Google 搜尋等工具，進行動態互動。
+- [**音訊轉錄稿**](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-tw#audio-transcription)：
+  提供使用者輸入內容和模型輸出內容的文字轉錄稿。
+- [**主動式語音**](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-tw#proactive-audio)：
+  可控制模型的回覆時間和情境。
+- [**情感對話**](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-tw#affective-dialog)：
+  根據使用者輸入內容的措辭調整回覆風格和語氣。
+- [**即時翻譯**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=zh-tw)：
+  即時翻譯語音內容，支援超過 70 種語言。
 
-## Specyfikacja techniczna
+## 技術規格
 
-W tabeli poniżej znajdziesz dane techniczne interfejsu Live API:
+下表列出 Live API 的技術規格：
 
-| Kategoria | Szczegóły |
+| 類別 | 詳細資料 |
 | --- | --- |
-| Rodzaje danych wejściowych | Audio (surowe 16-bitowe audio PCM, 16 kHz, little-endian), obrazy (JPEG <= 1 kl./s), tekst |
-| Rodzaje danych wyjściowych | Audio (surowe 16-bitowe audio PCM, 24 kHz, little-endian) |
-| Protokół | Połączenie WebSocket z zachowywaniem stanu (WSS) |
+| 輸入模態 | 音訊 (原始 16 位元 PCM 音訊，16 kHz，小端序)、圖片 (JPEG <= 1 FPS)、文字 |
+| 輸出模態 | 音訊 (原始 16 位元 PCM 音訊，24 kHz，小端序) |
+| 通訊協定 | 具狀態的 WebSocket 連線 (WSS) |
 
-## Wybierz metodę implementacji
+## 選擇導入方式
 
-Podczas integracji z interfejsem Live API musisz wybrać jedną z tych metod implementacji:
+整合 Live API 時，您需要選擇下列其中一種實作方式：
 
-- **Serwer-serwer:** backend łączy się z interfejsem Live API za pomocą [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Zwykle klient wysyła dane strumieniowe (audio, wideo, tekst) na serwer, który następnie przekazuje je do interfejsu Live API.
-- **Klient-serwer**: kod frontendu łączy się bezpośrednio z interfejsem Live API za pomocą [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), aby przesyłać strumieniowo dane z pominięciem backendu.
+- **伺服器對伺服器**：後端會使用 [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) 連線至 Live API。一般來說，用戶端會將串流資料 (音訊、影片、文字) 傳送至伺服器，然後伺服器會將資料轉送至 Live API。
+- **用戶端到伺服器**：前端程式碼會使用 [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) 直接連線至 Live API 來串流資料，略過後端。
 
-## Rozpocznij
+## 開始使用
 
-Wybierz przewodnik odpowiedni dla Twojego środowiska programistycznego:
+選取與開發環境相符的指南：
 
-Serwer-serwer
+伺服器對伺服器
 
-### [Samouczek dotyczący pakietu GenAI SDK](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=pl)
+### [GenAI SDK 教學課程](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-tw)
 
-Połącz się z interfejsem Gemini Live API za pomocą pakietu GenAI SDK, aby utworzyć wielomodową aplikację w czasie rzeczywistym z backendem w Pythonie.
+使用 GenAI SDK 連線至 Gemini Live API，透過 Python 後端建構即時多模態應用程式。
 
-Klient-serwer
+用戶端對伺服器
 
-### [Samouczek dotyczący WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=pl)
+### [WebSocket 教學課程](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=zh-tw)
 
-Połącz się z interfejsem Gemini Live API za pomocą protokołu WebSocket, aby utworzyć multimodalną aplikację w czasie rzeczywistym z interfejsem JavaScript i tokenami tymczasowymi.
+使用 WebSockets 連線至 Gemini Live API，透過 JavaScript 前端和臨時權杖建構即時多模態應用程式。
 
-Pakiet Agent Development Kit
+Agent Development Kit
 
-### [Samouczek pakietu ADK](https://google.github.io/adk-docs/streaming/)
+### [ADK 教學課程](https://google.github.io/adk-docs/streaming/)
 
-Utwórz agenta i użyj pakietu Agent Development Kit (ADK) Streaming, aby włączyć komunikację głosową i wideo.
+建立代理程式，並使用 Agent Development Kit (ADK) 串流功能啟用語音和視訊通訊。
 
-## Integracje z partnerami
+## 與合作夥伴整合
 
-Aby usprawnić tworzenie aplikacji audio i wideo działających w czasie rzeczywistym, możesz użyć integracji innej firmy, która obsługuje interfejs Gemini Live API przez WebRTC lub WebSockets.
+如要簡化即時音訊和視訊應用程式的開發作業，您可以透過 WebRTC 或 WebSocket 使用支援 Gemini Live API 的第三方整合服務。
 
 [LiveKit
 
-Korzystanie z interfejsu Gemini Live API z agentami LiveKit.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
+搭配 LiveKit Agents 使用 Gemini Live API。](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
 [Pipecat by Daily
 
-Tworzenie czatbota AI działającego w czasie rzeczywistym za pomocą Gemini Live i Pipecat](https://docs.pipecat.ai/guides/features/gemini-live)
-[Fishjam od Software Mansion
+使用 Gemini Live 和 Pipecat 建立即時 AI 聊天機器人。](https://docs.pipecat.ai/guides/features/gemini-live)
+[Software Mansion 的 Fishjam
 
-Twórz aplikacje do strumieniowego przesyłania wideo i audio na żywo za pomocą Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
-[Agenty Vision według strumienia
+使用 Fishjam 建立即時影像和音訊串流應用程式。](https://docs.fishjam.io/tutorials/gemini-live-integration)
+[Stream 的 Vision Agents
 
-Twórz aplikacje AI do obsługi głosu i wideo w czasie rzeczywistym za pomocą agentów Vision.](https://visionagents.ai/integrations/gemini)
+使用 Vision Agents 建構即時語音和視訊 AI 應用程式。](https://visionagents.ai/integrations/gemini)
 [Voximplant
 
-Łączenie połączeń przychodzących i wychodzących z interfejsem Live API za pomocą Voximplant.](https://voximplant.com/products/gemini-client)
+使用 Voximplant 將撥入和撥出電話連線至 Live API。](https://voximplant.com/products/gemini-client)
 [Agora
 
-Twórz aplikacje konwersacyjne AI w czasie rzeczywistym za pomocą Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
-[Pakiet Firebase AI SDK
+使用 Agora 建構即時對話式 AI 應用程式。](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
+[Firebase AI SDK
 
-Pierwsze kroki z interfejsem Gemini Live API przy użyciu Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=pl)
+使用 Firebase AI Logic 開始使用 Gemini Live API。](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=zh-tw)
 
-Prześlij opinię
+提供意見
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Ostatnia aktualizacja: 2026-06-12 UTC.
+上次更新時間：2026-06-12 (世界標準時間)。
 
-Chcesz przekazać coś jeszcze?
+想進一步說明嗎？
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-12 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-12 (世界標準時間)。"],[],[]]

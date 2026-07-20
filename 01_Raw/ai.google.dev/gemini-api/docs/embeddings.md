@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=pl
-fetched_at: 2026-07-06T05:12:55.030948+00:00
-title: "Wektory dystrybucyjne \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/embeddings?hl=de
+fetched_at: 2026-07-20T04:42:19.383948+00:00
+title: "Einbettungen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Prześlij opinię
+Feedback geben
 
-# Wektory dystrybucyjne
+# Einbettungen
 
-Interfejs Gemini API udostępnia modele wektorów dystrybucyjnych do generowania wektorów dystrybucyjnych tekstu, obrazów, filmów i innych treści. Powstałe w ten sposób wektory dystrybucyjne można następnie wykorzystać w zadaniach takich jak wyszukiwanie semantyczne, klasyfikacja i klastrowanie, co pozwala uzyskać dokładniejsze wyniki uwzględniające kontekst niż w przypadku podejść opartych na słowach kluczowych.
+Die Gemini API bietet Einbettungsmodelle zum Generieren von Einbettungen für Text, Bilder, Videos und andere Inhalte. Die resultierenden Einbettungen können dann für Aufgaben wie die semantische Suche, Klassifizierung und Clustering verwendet werden. Sie liefern genauere, kontextbezogene Ergebnisse als stichwortbasierte Ansätze.
 
-Najnowszy model, `gemini-embedding-2`, to pierwszy multimodalny model osadzania w interfejsie Gemini API. Mapuje tekst, obrazy, filmy, dźwięk i dokumenty w ujednoliconej przestrzeni osadzania, umożliwiając wyszukiwanie, klasyfikowanie i grupowanie w różnych trybach w ponad 100 językach. Więcej informacji znajdziesz w [sekcji poświęconej osadzaniu multimodalnemu](#multimodal). W przypadku zastosowań obejmujących tylko tekst `gemini-embedding-001` pozostaje dostępny.
+Das neueste Modell, `gemini-embedding-2`, ist das erste multimodale Embedding-Modell in der Gemini API. Es ordnet Text, Bilder, Videos, Audio und Dokumente einem einheitlichen Einbettungsbereich zu und ermöglicht so die multimodale Suche, Klassifizierung und das Clustering in über 100 Sprachen. Weitere Informationen finden Sie im [Abschnitt zu multimodalen Einbettungen](#multimodal). Für Nur-Text-Anwendungsfälle ist `gemini-embedding-001` weiterhin verfügbar.
 
-Tworzenie systemów generowania rozszerzonego przez wyszukiwanie w zapisanych informacjach (RAG) jest typowym zastosowaniem usług AI. Osadzanie odgrywa kluczową rolę w znacznym ulepszaniu wyników modelu dzięki większej dokładności faktów, spójności i bogactwu kontekstowemu. Jeśli wolisz korzystać z zarządzanego rozwiązania RAG, stworzyliśmy narzędzie [File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=pl), które ułatwia zarządzanie RAG i zmniejsza koszty.
+Das Erstellen von RAG-Systemen (Retrieval Augmented Generation) ist ein häufiger Anwendungsfall für KI-Produkte. Embeddings spielen eine wichtige Rolle bei der deutlichen Verbesserung der Modellausgaben in Bezug auf faktenorientierte Genauigkeit, Kohärenz und Kontextreichtum. Wenn Sie lieber eine verwaltete RAG-Lösung verwenden möchten, haben wir das Tool [Dateisuche](https://ai.google.dev/gemini-api/docs/file-search?hl=de) entwickelt, mit dem sich RAG einfacher verwalten lässt und kostengünstiger ist.
 
-## Generowanie wektorów dystrybucyjnych
+## Einbettungen generieren
 
-Aby wygenerować osadzenia tekstu, użyj metody `embedContent`:
+Verwenden Sie die Methode `embedContent`, um Texteinbettungen zu generieren:
 
 ### Python
 
@@ -63,7 +63,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -120,28 +120,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Określ typ zadania, które ma poprawić skuteczność
+## Aufgabentyp angeben, um die Leistung zu verbessern
 
-Możesz używać wektorów do wielu różnych zadań, od klasyfikacji po wyszukiwanie dokumentów. Określenie właściwego typu zadania pomaga zoptymalizować osadzanie pod kątem zamierzonych relacji, co zwiększa dokładność i wydajność.
+Sie können Einbettungen für eine Vielzahl von Aufgaben verwenden, von der Klassifizierung bis zur Dokumentsuche. Wenn Sie den richtigen Aufgabentyp angeben, werden die Einbettungen für die beabsichtigten Beziehungen optimiert, wodurch die Genauigkeit und Effizienz maximiert werden.
 
-### Typy zadań z wektorami dystrybucyjnymi 2
+### Aufgabentypen mit Embeddings 2
 
-W przypadku zadań tekstowych z `gemini-embedding-2` zdecydowanie zalecamy dodanie instrukcji do promptu. Możesz to zrobić, formatując zapytanie i dokument za pomocą odpowiedniego prefiksu zadania.
+Bei reinen Textaufgaben mit `gemini-embedding-2` empfehlen wir dringend, die Aufgabenanweisung in den Prompt aufzunehmen. Dazu müssen Sie die Anfrage und das Dokument mit dem richtigen Aufgabenpräfix formatieren.
 
-W tabelach poniżej znajdziesz przykłady formatowania zapytań i dokumentów w przypadku zastosowań symetrycznych i asymetrycznych z użyciem modelu `gemini-embedding-2`.
+In den folgenden Tabellen finden Sie Beispiele für die Formatierung von Anfragen und Dokumenten für symmetrische und asymmetrische Anwendungsfälle mit dem Modell `gemini-embedding-2`.
 
-**Przypadki użycia wyszukiwania (format asymetryczny)**
+**Abrufanwendungsfälle (asymmetrisches Format)**
 
-W przypadku asymetrycznych przypadków użycia dodaj do zapytania prefiks zadania i zastosuj strukturę dokumentu do treści, które chcesz osadzić i pobrać.
+In asymmetrischen Anwendungsfällen fügen Sie der Anfrage das Aufgabenpräfix hinzu und wenden Sie die Dokumentstruktur für die Inhalte an, die Sie einbetten und abrufen möchten.
 
-| Przypadek użycia | Struktura zapytania | Struktura dokumentu |
+| Anwendungsfall | Abfragestruktur | Dokumentstruktur |
 | --- | --- | --- |
-| Zapytanie | `task: search result | query: {content}` | `title: {title} | text: {content}` Jeśli nie ma tytułu, użyj `title: none`. |
-| Odpowiadanie na pytania | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
-| Weryfikowanie informacji | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
-| Odzyskiwanie kodu | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
+| Suchanfrage | `task: search result | query: {content}` | `title: {title} | text: {content}` Wenn kein Titel vorhanden ist, verwenden Sie `title: none`. |
+| Question Answering | `task: question answering | query: {content}` | `title: {title} | text: {content}` |
+| Faktenchecks | `task: fact checking | query: {content}` | `title: {title} | text: {content}` |
+| Codeabruf | `task: code retrieval | query: {content}` | `title: {title} | text: {content}` |
 
-**Przykładowe użycie**
+**Beispiel für die Verwendung**
 
 ### Python
 
@@ -160,17 +160,17 @@ def prepare_document(content, title=None):
     return f"title: {title} | text: {content}"
 ```
 
-**Przypadki użycia z 1 wejściem (format symetryczny)**
+**Anwendungsfälle mit einer Eingabe (symmetrisches Format)**
 
-W przypadku symetrycznych przypadków użycia wykonuj to samo zadanie, stosując to samo formatowanie zapytania i dokumentu.
+Verwenden Sie in symmetrischen Anwendungsfällen für dieselbe Aufgabe dieselbe Formatierung für die Anfrage und das Dokument.
 
-| Przypadek użycia | Struktura danych wejściowych |
+| Anwendungsfall | Eingabestruktur |
 | --- | --- |
-| Klasyfikacja | `task: classification | query: {content}` |
-| Grupowanie | `task: clustering | query: {content}` |
-| Podobieństwo semantyczne | `task: sentence similarity | query: {content}` Nie używaj tej funkcji do wyszukiwania ani pobierania. Jest on przeznaczony do określania podobieństwa semantycznego tekstu. |
+| Klassifizierung | `task: classification | query: {content}` |
+| Clustering | `task: clustering | query: {content}` |
+| Semantische Ähnlichkeit | `task: sentence similarity | query: {content}` Nicht für die Suche oder den Abruf verwenden. Sie ist für die semantische Textähnlichkeit vorgesehen. |
 
-**Przykładowe użycie**
+**Beispiel für die Verwendung**
 
 ### Python
 
@@ -182,13 +182,13 @@ def prepare_query_and_document(content):
     return f'task: classification | query: {content}'
 ```
 
-Ważne jest, aby zadanie było używane konsekwentnie. Jeśli np. dokumenty są osadzone za pomocą funkcji `f'task: classification | query: {content}'`, zapytanie również powinno być osadzone zgodnie z formatem tego zadania.
+Es ist wichtig, dass die Aufgabe konsistent verwendet wird. Wenn Dokumente beispielsweise mit `f'task: classification | query: {content}'` eingebettet werden, sollte auch die Anfrage in diesem Aufgabenformat eingebettet werden.
 
-### Typy zadań z osadzaniem 1
+### Aufgabentypen mit Embeddings 1
 
-W przypadku `gemini-embedding-001` możesz określić `task_type` w metodzie `embedContent`. Pełną listę obsługiwanych typów zadań znajdziesz w tabeli [Obsługiwane typy zadań](#supported-task-types).
+Für `gemini-embedding-001` können Sie `task_type` in der Methode `embedContent` angeben. Eine vollständige Liste der unterstützten Aufgabentypen finden Sie in der Tabelle [Unterstützte Aufgabentypen](#supported-task-types).
 
-Przykład poniżej pokazuje, jak za pomocą funkcji `SEMANTIC_SIMILARITY` sprawdzić, jak podobne są do siebie ciągi tekstów.
+Im folgenden Beispiel wird gezeigt, wie Sie `SEMANTIC_SIMILARITY` verwenden können, um zu prüfen, wie ähnlich sich Textstrings in ihrer Bedeutung sind.
 
 ### Python
 
@@ -259,7 +259,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -350,28 +350,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-0
     }'
 ```
 
-Fragmenty kodu pokażą, jak podobne są do siebie różne fragmenty tekstu po uruchomieniu.
+Die Code-Snippets zeigen, wie ähnlich die verschiedenen Textblöcke sind, wenn sie ausgeführt werden.
 
-#### Obsługiwane typy zadań
+#### Unterstützte Aufgabentypen
 
-Obsługiwane typy zadań w przypadku `gemini-embedding-001`:
+Unterstützte Aufgabentypen für `gemini-embedding-001`:
 
-| Typ zadania | Opis | Przykłady |
+| Aufgabentyp | Beschreibung | Beispiele |
 | --- | --- | --- |
-| **SEMANTIC\_SIMILARITY** | Osadzanie zoptymalizowane pod kątem oceny podobieństwa tekstu. | Systemy rekomendacji, wykrywanie duplikatów |
-| **KLASYFIKACJA** | Osadzanie zoptymalizowane pod kątem klasyfikowania tekstów według wstępnie ustawionych etykiet. | Analiza nastawienia, wykrywanie spamu |
-| **KLASYFIKACJA** | Osadzanie zoptymalizowane pod kątem grupowania tekstów na podstawie ich podobieństwa. | Porządkowanie dokumentów, badania rynku, wykrywanie anomalii |
-| **RETRIEVAL\_DOCUMENT** | Osadzanie zoptymalizowane pod kątem wyszukiwania dokumentów. | indeksowanie artykułów, książek lub stron internetowych na potrzeby wyszukiwania; |
-| **RETRIEVAL\_QUERY** | Osadzanie zoptymalizowane pod kątem ogólnych zapytań. Używaj symbolu `RETRIEVAL_QUERY` w przypadku zapytań, a symbolu `RETRIEVAL_DOCUMENT` w przypadku dokumentów do pobrania. | Twoja wyszukiwarka |
-| **CODE\_RETRIEVAL\_QUERY** | Osadzanie zoptymalizowane pod kątem wyszukiwania bloków kodu na podstawie zapytań w języku naturalnym. Używaj znaku `CODE_RETRIEVAL_QUERY` w przypadku zapytań, a znaku `RETRIEVAL_DOCUMENT` w przypadku bloków kodu, które mają zostać pobrane. | Sugestie dotyczące kodu i wyszukiwanie |
-| **QUESTION\_ANSWERING** | Osadzanie pytań w systemie odpowiadania na pytania, zoptymalizowane pod kątem znajdowania dokumentów, które zawierają odpowiedź na pytanie. Używaj symbolu `QUESTION_ANSWERING` w przypadku pytań, a symbolu `RETRIEVAL_DOCUMENT` w przypadku dokumentów do pobrania. | Chatbox |
-| **FACT\_VERIFICATION** | Osadzenia dla stwierdzeń, które wymagają weryfikacji, zoptymalizowane pod kątem wyszukiwania dokumentów zawierających dowody potwierdzające lub obalające to stwierdzenie. Użyj `FACT_VERIFICATION` w przypadku tekstu docelowego, a `RETRIEVAL_DOCUMENT` w przypadku dokumentów do pobrania. | Automatyczne systemy weryfikacji informacji |
+| **SEMANTIC\_SIMILARITY** | Einbettungen, die für die Beurteilung der Textähnlichkeit optimiert sind. | Empfehlungssysteme, Erkennung von Duplikaten |
+| **CLASSIFICATION** | Einbettungen, die für die Klassifizierung von Texten nach vordefinierten Labels optimiert sind. | Sentimentanalyse, Spamerkennung |
+| **CLUSTERING** | Einbettungen, die für das Clustern von Texten basierend auf ihren Ähnlichkeiten optimiert sind. | Dokumentorganisation, Marktforschung, Anomalieerkennung |
+| **RETRIEVAL\_DOCUMENT** | Für die Dokumentsuche optimierte Einbettungen. | Artikel, Bücher oder Webseiten für die Suche indexieren. |
+| **RETRIEVAL\_QUERY** | Einbettungen, die für allgemeine Suchanfragen optimiert sind. Verwenden Sie `RETRIEVAL_QUERY` für Abfragen und `RETRIEVAL_DOCUMENT` für abzurufende Dokumente. | Benutzerdefinierte Suche |
+| **CODE\_RETRIEVAL\_QUERY** | Einbettungen, die für den Abruf von Codeblöcken auf Grundlage von Anfragen in natürlicher Sprache optimiert sind. Verwenden Sie `CODE_RETRIEVAL_QUERY` für Anfragen und `RETRIEVAL_DOCUMENT` für abzurufende Codeblöcke. | Codevorschläge und Suche |
+| **QUESTION\_ANSWERING** | Einbettungen für Fragen in einem Frage-Antwort-System, die für das Auffinden von Dokumenten optimiert sind, die die Frage beantworten. Verwenden Sie `QUESTION_ANSWERING` für Fragen und `RETRIEVAL_DOCUMENT` für abzurufende Dokumente. | Chatbox |
+| **FACT\_VERIFICATION** | Einbettungen für Aussagen, die überprüft werden müssen, optimiert für das Abrufen von Dokumenten, die Beweise für oder gegen die Aussage enthalten. Verwenden Sie `FACT_VERIFICATION` für den Zieltext und `RETRIEVAL_DOCUMENT` für abzurufende Dokumente. | Automatisierte Faktenchecksysteme |
 
-## Określanie rozmiaru wektora dystrybucyjnego
+## Größe von Einbettungen steuern
 
-Zarówno `gemini-embedding-001`, jak i `gemini-embedding-2` są trenowane przy użyciu techniki uczenia reprezentacji Matrioszka (MRL), która uczy model tworzenia osadzeń o wysokiej liczbie wymiarów, których początkowe segmenty (lub prefiksy) są również przydatnymi, prostszymi wersjami tych samych danych.
+Sowohl `gemini-embedding-001` als auch `gemini-embedding-2` werden mit der MRL-Technik (Matryoshka Representation Learning) trainiert. Dabei wird ein Modell trainiert, um hochdimensionale Einbettungen zu lernen, deren Anfangssegmente (oder Präfixe) auch nützliche, einfachere Versionen derselben Daten sind.
 
-Użyj parametru `output_dimensionality`, aby kontrolować rozmiar wyjściowego wektora dystrybucyjnego. Wybór mniejszej liczby wymiarów wyjściowych może zaoszczędzić miejsce na dane i zwiększyć wydajność obliczeniową w przypadku aplikacji podrzędnych, przy niewielkiej utracie jakości. Domyślnie oba modele generują 3072-wymiarowe osadzanie, ale możesz je skrócić do mniejszego rozmiaru bez utraty jakości, aby zaoszczędzić miejsce na dane. Zalecamy używanie wymiarów wyjściowych 768, 1536 lub 3072.
+Mit dem Parameter `output_dimensionality` können Sie die Größe des Ausgabebettungsvektors steuern. Durch die Auswahl einer kleineren Ausgabedimensionalität kann Speicherplatz gespart und die Recheneffizienz für Downstream-Anwendungen gesteigert werden, ohne dass die Qualität wesentlich beeinträchtigt wird. Standardmäßig geben beide Modelle ein 3.072-dimensionales Embedding aus. Sie können es jedoch auf eine kleinere Größe kürzen, ohne die Qualität zu beeinträchtigen, um Speicherplatz zu sparen. Wir empfehlen, die Ausgabedimensionen 768, 1536 oder 3072 zu verwenden.
 
 ### Python
 
@@ -414,7 +414,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -468,17 +468,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-emb
     }'
 ```
 
-Przykładowe dane wyjściowe z fragmentu kodu:
+Beispielausgabe des Code-Snippets:
 
 ```
 Length of embedding: 768
 ```
 
-## Zapewnianie jakości w przypadku mniejszych wymiarów
+## Qualität bei kleineren Abmessungen sicherstellen
 
-Domyślne 3072-wymiarowe osadzanie jest zawsze normalizowane, ale Gemini Embedding 2 automatycznie normalizuje też obcięte wymiary (np. 768, 1536). Dzięki temu podobieństwo semantyczne jest obliczane na podstawie kierunku wektora, a nie jego wielkości, co zapewnia większą dokładność wyników od razu po wyjęciu z pudełka.
+Während die Standardeinbettungen mit 3.072 Dimensionen immer normalisiert werden, normalisiert Gemini Embedding 2 auch automatisch gekürzte Dimensionen (z. B. 768, 1.536). So wird die semantische Ähnlichkeit über die Vektorrichtung und nicht über die Größe berechnet, was von vornherein genauere Ergebnisse liefert.
 
-**Starsze modele:** jeśli używasz modelu `gemini-embedding-001`, musisz ręcznie znormalizować wymiary inne niż 3072 w ten sposób:
+**Ältere Modelle**: Wenn Sie `gemini-embedding-001` verwenden, müssen Sie nicht 3072-Dimensionen manuell normalisieren:
 
 ### Python
 
@@ -494,46 +494,45 @@ print(f"Normed embedding length: {len(normed_embedding)}")
 print(f"Norm of normed embedding: {np.linalg.norm(normed_embedding):.6f}") # Should be very close to 1
 ```
 
-Przykładowe dane wyjściowe tego fragmentu kodu:
+Beispielausgabe dieses Code-Snippets:
 
 ```
 Normed embedding length: 768
 Norm of normed embedding: 1.000000
 ```
 
-W tabeli poniżej znajdziesz wyniki MTEB, czyli powszechnie stosowanego testu porównawczego dla osadzania, w przypadku różnych wymiarów. Wyniki pokazują, że skuteczność nie jest ściśle związana z rozmiarem wymiaru osadzania, ponieważ mniejsze wymiary osiągają wyniki porównywalne z większymi.
+In der folgenden Tabelle sind die MTEB-Werte aufgeführt, ein häufig verwendeter Benchmark für Einbettungen für verschiedene Dimensionen. Das Ergebnis zeigt, dass die Leistung nicht unbedingt an die Größe der Einbettungsdimension gebunden ist. Niedrigere Dimensionen erreichen Werte, die mit denen ihrer Pendants mit höherer Dimension vergleichbar sind.
 
-| Wymiar MRL | Wynik MTEB (Gemini Embedding 001) |
+| Dimension „MRL“ | MTEB-Punktzahl (Gemini Embedding 001) |
 | --- | --- |
-| 2048 | 68,16 |
-| 1536 | 68,17 |
+| 2048 | 68.16 |
+| 1.536 | 68,17 |
 | 768 | 67,99 |
 | 512 | 67,55 |
 | 256 | 66,19 |
 | 128 | 63,31 |
 
-## Multimodalne wektory dystrybucyjne
+## Multimodale Einbettungen
 
-Model `gemini-embedding-2` obsługuje dane wejściowe multimodalne, co umożliwia osadzanie treści w formie obrazów, filmów, dźwięku i dokumentów obok tekstu. Wszystkie rodzaje danych są mapowane na tę samą przestrzeń osadzania, co umożliwia wyszukiwanie i porównywanie różnych rodzajów danych.
+Das `gemini-embedding-2`-Modell unterstützt multimodale Eingaben, sodass Sie neben Text auch Bilder, Videos, Audio und Dokumente einbetten können. Alle Modalitäten werden in denselben Einbettungsbereich abgebildet, was die modalitätsübergreifende Suche und den modalitätsübergreifenden Vergleich ermöglicht.
 
-### Obsługiwane rodzaje i limity
+### Unterstützte Modalitäten und Grenzwerte
 
-Ogólny maksymalny limit tokenów wejściowych to 8192 tokeny.
+Das maximale Limit für Eingabetokens beträgt insgesamt 8.192 Tokens.
 
-| Modalność | Specyfikacje i limity |
+| Modalität | Spezifikationen und Einschränkungen |
 | --- | --- |
-| **Text** | Obsługuje do 8192 tokenów. |
-| **Obraz** | Maksymalnie 6 obrazów na żądanie. Obsługiwane formaty: PNG, JPEG. |
-| **Dźwięk** | Maksymalny czas trwania to 180 sekund. Obsługiwane formaty: MP3, WAV. |
-| **Film** | Maksymalny czas trwania to 120 sekund. Obsługiwane formaty: MP4, MOV. Obsługiwane kodeki: H264, H265, AV1, VP9.  System przetwarza maksymalnie 32 klatki na film: w przypadku krótkich filmów (≤32 s) próbkowanie odbywa się z częstotliwością 1 klatki na sekundę, a w przypadku dłuższych filmów próbkowanie jest jednolite i obejmuje 32 klatki. Ścieżki audio nie są przetwarzane w plikach wideo. |
-| **Dokumenty (PDF)** | Maksymalnie 1 plik na żądanie, do 6 stron. |
+| **Text** | Unterstützt bis zu 8.192 Tokens. |
+| **Bild** | Maximal 6 Bilder pro Anfrage. Unterstützte Formate: PNG, JPEG. |
+| **Audio** | Maximale Dauer: 180 Sekunden. Unterstützte Formate: MP3, WAV. |
+| **Video** | Maximale Dauer: 120 Sekunden Unterstützte Formate: MP4, MOV. Unterstützte Codecs: H264, H265, AV1, VP9.  Das System verarbeitet maximal 32 Frames pro Video. Bei kurzen Videos (≤ 32 Sekunden) wird eine Stichprobe mit 1 fps genommen, bei längeren Videos werden gleichmäßig 32 Frames ausgewählt. Audiotracks werden in Videodateien nicht verarbeitet. |
+| **Dokumente (PDF)** | Max. 1 Datei pro Anfrage, bis zu 6 Seiten. |
 
-### Umieszczanie obrazów
+### Bilder einbetten
 
-Poniższy przykład pokazuje, jak umieścić obraz za pomocą tagu
-`gemini-embedding-2`.
+Das folgende Beispiel zeigt, wie ein Bild mit `gemini-embedding-2` eingebettet wird.
 
-Obrazy można przesyłać jako dane wbudowane lub jako przesłane pliki za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+Bilder können als Inline-Daten oder als hochgeladene Dateien über die [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) bereitgestellt werden.
 
 ### Python
 
@@ -607,16 +606,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Agregacja wektorów dystrybucyjnych
+### Aggregation von Einbettungen
 
-Podczas pracy z treściami multimodalnymi struktura danych wejściowych wpływa na wygenerowane wektory dystrybucyjne:
+Wenn Sie mit multimodalen Inhalten arbeiten, wirkt sich die Strukturierung Ihrer Eingabe auf die Einbettungsausgabe aus:
 
-- **Wiele części (zagregowanych):** dodanie wielu danych wejściowych bezpośrednio do parametru
-  `contents` powoduje utworzenie jednego zagregowanego osadzenia dla wszystkich danych wejściowych.
-- **Wiele obiektów `Content` (osobnych):** umieszczenie każdego wejścia w obiekcie `Content` i przekazanie ich w parametrze `contents` zwraca osobne wektory osadzeń dla każdego wpisu.
-- **Reprezentacja na poziomie posta:** w przypadku złożonych obiektów, takich jak posty w mediach społecznościowych zawierające wiele elementów multimedialnych, zalecamy agregowanie oddzielnych osadzeń (np. przez uśrednianie), aby utworzyć spójną reprezentację na poziomie posta.
+- **Mehrere Teile (aggregiert)**: Wenn Sie dem Parameter `contents` mehrere Eingaben hinzufügen, wird ein aggregiertes Embedding für alle Eingaben erstellt.
+- **Mehrere `Content`-Objekte (separat)**: Wenn Sie jede Eingabe in ein `Content`-Objekt einfügen und diese im Parameter `contents` übergeben, werden separate Einbettungen für jeden Eintrag zurückgegeben.
+- **Darstellung auf Beitragsebene**:Bei komplexen Objekten wie Social-Media-Beiträgen mit mehreren Media-Elementen empfehlen wir, separate Einbettungen zu aggregieren (z. B. durch Mittelwertbildung), um eine kohärente Darstellung auf Beitragsebene zu erstellen.
 
-W przykładzie poniżej pokazujemy, jak utworzyć 1 zagregowane osadzenie dla tekstu i obrazu. Wystarczy dodać wiele danych wejściowych do parametru `contents`:
+Im folgenden Beispiel wird gezeigt, wie eine aggregierte Einbettung für Text- und Bildeingaben erstellt wird. Fügen Sie dem Parameter `contents` einfach mehrere Eingaben hinzu:
 
 ### Python
 
@@ -702,7 +700,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Z drugiej strony, jeśli użyjesz obiektów `Content` w parametrze `contents`, zwróci on oddzielne wektory. W tym przykładzie tworzymy wiele wektorów dystrybucyjnych w jednym wywołaniu:
+Wenn Sie hingegen `Content`-Objekte im Parameter `contents` verwenden, werden separate Einbettungen zurückgegeben. In diesem Beispiel werden mehrere Einbettungen in einem Einbettungsaufruf erstellt:
 
 ### Python
 
@@ -793,11 +791,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Osadzanie dźwięku
+### Audio einbetten
 
-Poniższy przykład pokazuje, jak umieścić plik audio za pomocą tagu`gemini-embedding-2`.
+Das folgende Beispiel zeigt, wie Sie eine Audiodatei mit `gemini-embedding-2` einbetten.
 
-Pliki audio można przesyłać jako dane wbudowane lub jako przesłane pliki za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+Audiodateien können als Inline-Daten oder als hochgeladene Dateien über die [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) bereitgestellt werden.
 
 ### Python
 
@@ -871,11 +869,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-### Umieszczanie filmu
+### Videos einbetten
 
-Poniższy przykład pokazuje, jak umieścić film za pomocą tagu `gemini-embedding-2`.
+Das folgende Beispiel zeigt, wie ein Video mit `gemini-embedding-2` eingebettet wird.
 
-Filmy można przesyłać jako dane wbudowane lub jako przesłane pliki za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+Videos können als Inlinedaten oder als hochgeladene Dateien über die [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) bereitgestellt werden.
 
 ### Python
 
@@ -949,29 +947,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-Jeśli chcesz osadzić filmy dłuższe niż 120 sekund, możesz podzielić je na nakładające się na siebie segmenty i osadzić je osobno.
+Wenn Sie Videos mit einer Länge von mehr als 120 Sekunden einbetten möchten, können Sie das Video in sich überschneidende Segmente aufteilen und diese Segmente einzeln einbetten.
 
-### Umieszczanie dokumentów
+### Dokumente einbetten
 
-Dokumenty w formacie PDF można umieszczać bezpośrednio. Model przetwarza treści wizualne i tekstowe na każdej stronie.
+Dokumente im PDF-Format können direkt eingebettet werden. Das Modell verarbeitet die visuellen und textlichen Inhalte jeder Seite.
 
-Pliki PDF można przesyłać jako dane wbudowane lub jako przesłane pliki za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl).
+PDFs können als Inline-Daten oder als hochgeladene Dateien über die [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) bereitgestellt werden.
 
-#### Jak model przetwarza pliki PDF
+#### So verarbeitet das Modell PDFs
 
-Gdy osadzasz plik PDF, model przetwarza dokument za pomocą funkcji wizualnych i tekstowych:
+Wenn Sie ein PDF einbetten, verarbeitet das Modell das Dokument sowohl mit visuellen als auch mit Textfunktionen:
 
-- **Reprezentacja wizualna:** model renderuje każdą stronę jako obraz, co zużywa **258 tokenów** na stronę.
-- **Wyodrębnianie tekstu:** model wyodrębnia tekst z dokumentu. W przypadku **natywnych plików PDF** (zawierających tekst cyfrowy) model wyodrębnia tekst bezpośrednio. W przypadku **zeskanowanych plików PDF** (zawierających obrazy tekstu) model automatycznie uruchamia optyczne rozpoznawanie znaków (OCR), aby wyodrębnić tekst.
+- **Visuelle Darstellung**:Das Modell rendert jede Seite als Bild, was **258 Tokens** pro Seite verbraucht.
+- **Textextraktion**:Das Modell extrahiert Text aus dem Dokument. Bei **nativen PDFs** (die digitalen Text enthalten) wird der Text direkt vom Modell extrahiert. Bei **gescannten PDFs**, die Bilder von Text enthalten, führt das Modell automatisch eine optische Zeichenerkennung (OCR) durch, um den Text zu extrahieren.
 
-Aby obliczyć łączną liczbę tokenów w pliku PDF, dodaj tokeny wizualne (258 na stronę) do tokenów tekstowych. Dane wejściowe muszą mieścić się w **limicie 8192 tokenów** (wspólnym dla wszystkich rodzajów danych). System automatycznie obcina dane wejściowe, które przekraczają ten limit.
+Um die Gesamtzahl der Tokens für ein PDF zu berechnen, addieren Sie die visuellen Tokens (258 pro Seite) zu den Text-Tokens. Ihre Eingaben dürfen das **Token-Limit von 8.192** des Modells nicht überschreiten (gilt für alle Modalitäten). Eingaben, die dieses Limit überschreiten, werden vom System automatisch abgeschnitten.
 
-#### Limity plików PDF
+#### PDF-Limits
 
-- **Pliki w żądaniu:** możesz przesłać maksymalnie 1 plik PDF.
-- **Limit stron:** w każdym pliku możesz przesłać maksymalnie 6 stron. Aby uzyskać najlepszą jakość, zdecydowanie zalecamy używanie 1 strony na plik PDF.
+- **Dateien pro Anfrage**:Sie können maximal eine PDF-Datei einreichen.
+- **Seitenlimit**:Sie können maximal 6 Seiten pro Datei einreichen. Für eine optimale Qualität empfehlen wir dringend, nur eine Seite pro PDF zu verwenden.
 
-Poniższy przykład pokazuje, jak umieścić plik PDF za pomocą `gemini-embedding-2`:
+Das folgende Beispiel zeigt, wie Sie ein PDF mit `gemini-embedding-2` einbetten:
 
 ### Python
 
@@ -1045,91 +1043,91 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-embedding-2
     }'
 ```
 
-## Przypadki użycia
+## Anwendungsfälle
 
-Osadzanie tekstu ma kluczowe znaczenie w przypadku wielu typowych zastosowań AI, takich jak:
+Texteinbettungen sind für eine Vielzahl gängiger KI-Anwendungsfälle unerlässlich, z. B.:
 
-- **Generowanie wspomagane wyszukiwaniem (RAG):** osadzanie poprawia jakość wygenerowanego tekstu, ponieważ pobiera i uwzględnia w kontekście modelu odpowiednie informacje.
-- **Wyszukiwanie informacji:** wyszukiwanie najbardziej podobnego semantycznie tekstu lub dokumentów na podstawie fragmentu tekstu wejściowego.
+- **Retrieval-Augmented Generation (RAG):** Mit Embeddings lässt sich die Qualität von generiertem Text verbessern, indem relevante Informationen abgerufen und in den Kontext eines Modells eingebunden werden.
+- **Information Retrieval**:Suchen Sie anhand eines Eingabetexts nach dem semantisch ähnlichsten Text oder den semantisch ähnlichsten Dokumenten.
 
-  [Samouczek dotyczący wyszukiwania dokumentówtask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
-- **Ponowne rankingowanie wyników wyszukiwania:** nadawanie priorytetu najtrafniejszym elementom przez semantyczne ocenianie wstępnych wyników w odniesieniu do zapytania.
+  [Anleitung zur Dokumentsuchetask](https://github.com/google-gemini/cookbook/blob/main/examples/Talk_to_documents_with_embeddings.ipynb)
+- **Neubewertung der Suche**: Die relevantesten Elemente werden priorisiert, indem die ersten Ergebnisse semantisch anhand der Anfrage bewertet werden.
 
-  [Samouczek dotyczący ponownego rankingu wyszukiwaniatask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
-- **Wykrywanie anomalii:** porównywanie grup osadzeń może pomóc w identyfikowaniu ukrytych trendów lub wartości odstających.
+  [Tutorial zum Neuklassifizieren von Suchergebnissentask](https://github.com/google-gemini/cookbook/blob/main/examples/Search_reranking_using_embeddings.ipynb)
+- **Anomalieerkennung**:Durch den Vergleich von Gruppen von Einbettungen lassen sich verborgene Trends oder Ausreißer erkennen.
 
-  [Samouczek dotyczący wykrywania anomaliibubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
-- **Klasyfikacja:** automatyczne kategoryzowanie tekstu na podstawie jego treści, np. analiza nastawienia lub wykrywanie spamu.
+  [Anleitung zur Anomalieerkennungbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/Anomaly_detection_with_embeddings.ipynb)
+- **Klassifizierung**:Text basierend auf seinem Inhalt automatisch kategorisieren, z. B. für die Sentimentanalyse oder die Spamerkennung
 
-  [Samouczek dotyczący klasyfikacjitoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
-- **Grupowanie:** skutecznie analizuj złożone relacje, tworząc klastry i wizualizacje osadzeń.
+  [Anleitung zur Klassifizierungtoken](https://github.com/google-gemini/cookbook/blob/main/examples/Classify_text_with_embeddings.ipynb)
+- **Clustering**:Erfassen Sie komplexe Beziehungen effektiv, indem Sie Cluster und Visualisierungen Ihrer Einbettungen erstellen.
 
-  [Samouczek dotyczący wizualizacji klastrowaniabubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
+  [Anleitung zur Visualisierung von Clusternbubble\_chart](https://github.com/google-gemini/cookbook/blob/main/examples/clustering_with_embeddings.ipynb)
 
-## Przechowywanie wektorów dystrybucyjnych
+## Einbettungen speichern
 
-W przypadku wdrażania wektorów dystrybucyjnych w środowisku produkcyjnym często używa się **baz danych wektorowych** do wydajnego przechowywania, indeksowania i pobierania wektorów dystrybucyjnych o wysokiej liczbie wymiarów. Google Cloud oferuje zarządzane usługi danych, które można wykorzystać w tym celu, w tym [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=pl), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=pl), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=pl) i [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=pl).
+Wenn Sie Einbettungen in der Produktion verwenden, ist es üblich, **Vektordatenbanken** zu verwenden, um hochdimensionale Einbettungen effizient zu speichern, zu indexieren und abzurufen. Google Cloud bietet verwaltete Datendienste, die für diesen Zweck verwendet werden können, darunter [Gemini Enterprise Agent Platform Vector Search 2.0](https://docs.cloud.google.com/gemini-enterprise-agent-platform/BUILD/vector-search-2?hl=de), [BigQuery](https://cloud.google.com/bigquery/docs/introduction?hl=de), [AlloyDB](https://cloud.google.com/alloydb/docs/overview?hl=de) und [Cloud SQL](https://cloud.google.com/sql/docs/postgres/introduction?hl=de).
 
-Z tych samouczków dowiesz się, jak używać innych baz danych wektorów innych firm z osadzaniem Gemini.
+In den folgenden Anleitungen wird gezeigt, wie Sie andere Vektordatenbanken von Drittanbietern mit Gemini Embedding verwenden.
 
-- [Samouczki dotyczące ChromaDBbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
-- [Samouczki QDrantbolt](https://qdrant.tech/documentation/embeddings/gemini/)
-- [Samouczki Weaviatebolt](https://docs.weaviate.io/weaviate/model-providers/google)
-- [Samouczki Pineconebolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
+- [ChromaDB-Tutorialsbolt](https://docs.trychroma.com/integrations/embedding-models/google-gemini)
+- [QDrant-Tutorialsbolt](https://qdrant.tech/documentation/embeddings/gemini/)
+- [Weaviate-Tutorialsbolt](https://docs.weaviate.io/weaviate/model-providers/google)
+- [Pinecone-Anleitungenbolt](https://github.com/google-gemini/cookbook/blob/main/examples/langchain/Gemini_LangChain_QA_Pinecone_WebLoad.ipynb)
 
-## Wersje modelu
+## Modellversionen
 
 ### Gemini Embedding 2
 
-| Właściwość | Opis |
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `gemini-embedding-2` |
-| saveObsługiwane typy danych | **Wejście**  Tekst, obraz, film, dźwięk, PDF  **Dane wyjściowe**  Wektory dystrybucyjne tekstu |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  8192  **Rozmiar wymiaru wyjściowego**  Elastyczny, obsługuje: 128–3072, zalecane: 768, 1536, 3072 |
-| 123 wersje | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Stabilny: `gemini-embedding-2` |
-| calendar\_monthOstatnia aktualizacja | Kwiecień 2026 r. |
+| id\_cardModellcode | **Gemini API**  `gemini-embedding-2` |
+| saveUnterstützte Datentypen | **Eingabe**  Text, Bild, Video, Audio, PDF  **Ausgabe**  Texteinbettungen |
+| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  8.192  **Größe der Ausgabedimension**  Flexibel, unterstützt: 128–3072, empfohlen: 768, 1536, 3072 |
+| 123-Versionen | Weitere Informationen finden Sie unter [Muster für Modellversionen](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Stabil: `gemini-embedding-2` |
+| calendar\_monthLetzte Aktualisierung | April 2026 |
 
-### Osadzanie Gemini
+### Gemini Embedding
 
-| Właściwość | Opis |
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_cardKod modelu | **Gemini API**  `gemini-embedding-001` |
-| saveObsługiwane typy danych | **Wejście**  Tekst  **Dane wyjściowe**  Wektory dystrybucyjne tekstu |
-| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  2048  **Rozmiar wymiaru wyjściowego**  Elastyczny, obsługuje: 128–3072, zalecane: 768, 1536, 3072 |
-| 123 wersje | Więcej informacji znajdziesz w [wzorcach wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - Stabilny: `gemini-embedding-001` |
-| calendar\_monthOstatnia aktualizacja | Czerwiec 2025 r. |
+| id\_cardModellcode | **Gemini API**  `gemini-embedding-001` |
+| saveUnterstützte Datentypen | **Eingabe**  Text  **Ausgabe**  Texteinbettungen |
+| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  2.048  **Größe der Ausgabedimension**  Flexibel, unterstützt: 128–3072, empfohlen: 768, 1536, 3072 |
+| 123-Versionen | Weitere Informationen finden Sie unter [Muster für Modellversionen](https://ai.google.dev/gemini-api/docs/models/gemini?hl=de#model-versions).  - Stabil: `gemini-embedding-001` |
+| calendar\_monthLetzte Aktualisierung | Juni 2025 |
 
-W przypadku wycofanych modeli Embeddings odwiedź stronę [Wycofane modele](https://ai.google.dev/gemini-api/docs/deprecations?hl=pl).
+Informationen zu eingestellten Embeddings-Modellen finden Sie auf der Seite [Einstellungen](https://ai.google.dev/gemini-api/docs/deprecations?hl=de).
 
-## Migracja z modelu gemini-embedding-001
+## Migration von gemini-embedding-001
 
-Przestrzenie osadzania między `gemini-embedding-001` a `gemini-embedding-2` są **niezgodne**. Oznacza to, że nie możesz bezpośrednio porównywać wektorów wygenerowanych przez jeden model z wektorami wygenerowanymi przez drugi. Jeśli przechodzisz na `gemini-embedding-2`, musisz ponownie osadzić wszystkie dotychczasowe dane.
+Die Einbettungsräume zwischen `gemini-embedding-001` und `gemini-embedding-2` sind **nicht kompatibel**. Das bedeutet, dass Sie die von einem Modell generierten Einbettungen nicht direkt mit den von einem anderen Modell generierten Einbettungen vergleichen können. Wenn Sie auf `gemini-embedding-2` upgraden, müssen Sie alle vorhandenen Daten neu einbetten.
 
-Oprócz niezgodności istnieje kilka innych istotnych różnic między tymi modelami:
+Neben der Inkompatibilität gibt es noch einige andere nennenswerte Unterschiede zwischen den beiden Modellen:
 
-- **Specyfikacja typu zadania:** w przypadku `gemini-embedding-001` typ zadania określasz za pomocą parametru `task_type` (np. `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). W przypadku `gemini-embedding-2` parametr `task_type` nie jest obsługiwany. Zamiast tego w przypadku zadań tekstowych należy umieścić instrukcje bezpośrednio w prompcie. Więcej informacji o tym, jak formatować prompty w różnych przypadkach użycia, znajdziesz w sekcji [Typy zadań z Embeddings 2](#task-types-embeddings-2).
-- **Agregacja wektorów dystrybucyjnych:** `gemini-embedding-001` generuje poszczególne wektory dystrybucyjne dla każdego ciągu znaków na liście danych wejściowych. Z kolei `gemini-embedding-2` generuje pojedynczy, zagregowany wektor, gdy w jednym żądaniu podawanych jest wiele danych wejściowych (np. tekst i obrazy). Aby wygenerować osobne wektory osadzania dla poszczególnych danych wejściowych, umieść każdy z nich w obiekcie `Content` lub użyj [interfejsu Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl#batch-embedding). Więcej informacji znajdziesz w sekcji [Osadzanie agregacji](#embedding-aggregation).
-- **Normalizacja:** jeśli używasz `output_dimensionality` do żądania osadzeń o liczbie wymiarów mniejszej niż 3072, `gemini-embedding-2` automatycznie normalizuje te obcięte osadzenia. W przypadku `gemini-embedding-001` musisz przeprowadzić ręczną normalizację w przypadku wymiarów innych niż 3072. Więcej informacji znajdziesz w artykule [Zapewnianie jakości w przypadku mniejszych wymiarów](#quality-for-smaller-dimensions).
+- **Spezifikation des Aufgabentyps**:Mit `gemini-embedding-001` geben Sie den Aufgabentyp mit dem Parameter `task_type` an (z.B. `SEMANTIC_SIMILARITY`, `RETRIEVAL_DOCUMENT`). Mit `gemini-embedding-2` wird der Parameter `task_type` nicht unterstützt. Stattdessen sollten Sie die Aufgabenanweisungen direkt in den Prompt für reine Textaufgaben einfügen. Unter [Aufgabentypen mit Embeddings 2](#task-types-embeddings-2) finden Sie Informationen zum Formatieren von Prompts für verschiedene Anwendungsfälle.
+- **Aggregation von Einbettungen**:`gemini-embedding-001` generiert einzelne Einbettungen für jeden String in einer Liste von Eingaben. Im Gegensatz dazu wird bei `gemini-embedding-2` eine einzelne, aggregierte Einbettung erstellt, wenn mehrere Eingaben (z. B. Text und Bilder) direkt in einer Anfrage angegeben werden. Wenn Sie separate Einbettungen für einzelne Eingaben generieren möchten, schließen Sie jede Eingabe in ein `Content`-Objekt ein oder verwenden Sie die [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de#batch-embedding). Weitere Informationen finden Sie unter [Aggregation von Einbettungen](#embedding-aggregation).
+- **Normalisierung**:Wenn Sie `output_dimensionality` verwenden, um Einbettungen mit weniger als 3.072 Dimensionen anzufordern, normalisiert `gemini-embedding-2` diese gekürzten Einbettungen automatisch. Bei `gemini-embedding-001` müssen Sie die Normalisierung für andere Dimensionen als 3.072 manuell vornehmen. Weitere Informationen finden Sie unter [Qualität bei kleineren Dimensionen sicherstellen](#quality-for-smaller-dimensions).
 
-## Wektory dystrybucyjne w pakietach
+## Batch-Einbettungen
 
-Jeśli opóźnienie nie jest problemem, spróbuj użyć modeli Gemini Embeddings z [interfejsem Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl#batch-embedding). Umożliwia to znacznie większą przepustowość przy 50% domyślnej ceny za osadzanie.
-Przykłady, jak zacząć, znajdziesz w [przewodniku po interfejsie Batch API](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
+Wenn die Latenz kein Problem darstellt, können Sie die Gemini Embeddings-Modelle mit der [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=de#batch-embedding) verwenden. Dadurch ist ein viel höherer Durchsatz zum halben Standardpreis für Einbettungen möglich.
+Beispiele für die ersten Schritte finden Sie im [Batch API Cookbook](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb).
 
-## Powiadomienie o odpowiedzialnym korzystaniu
+## Hinweis zur verantwortungsvollen Nutzung
 
-W przeciwieństwie do modeli generatywnej AI, które tworzą nowe treści, model Gemini Embedding ma tylko przekształcać format danych wejściowych w reprezentację numeryczną. Google odpowiada za udostępnienie modelu osadzania, który przekształca format danych wejściowych na wymagany format numeryczny, ale użytkownicy ponoszą pełną odpowiedzialność za wprowadzane dane i powstałe osadzanie. Korzystając z modelu Gemini Embedding, potwierdzasz, że masz wymagane prawa do treści, które przesyłasz. Nie twórz treści naruszających prawa własności intelektualnej lub prawo do prywatności innych osób. Korzystanie z tej usługi podlega naszym [zasadom dotyczącym niedozwolonych zastosowań](https://policies.google.com/terms/generative-ai/use-policy?hl=pl) i [Warunkom korzystania z usług Google](https://ai.google.dev/gemini-api/terms?hl=pl).
+Im Gegensatz zu generativen KI-Modellen, die neue Inhalte erstellen, ist das Gemini Embedding-Modell nur dazu gedacht, das Format Ihrer Eingabedaten in eine numerische Darstellung zu transformieren. Google ist zwar für die Bereitstellung eines Einbettungsmodells verantwortlich, das das Format Ihrer Eingabedaten in das erforderliche numerische Format umwandelt, die Nutzer sind jedoch weiterhin für die von ihnen eingegebenen Daten und die resultierenden Einbettungen verantwortlich. Durch die Nutzung des Gemini Embedding-Modells bestätigen Sie, dass Sie über die erforderlichen Rechte für die von Ihnen hochgeladenen Inhalte verfügen. Erstellen Sie keine Inhalte, durch die die Rechte anderer, zum Beispiel Rechte an geistigem Eigentum oder das Recht auf Privatsphäre, verletzt werden. Die Nutzung dieses Dienstes unterliegt unserer [Richtlinie zur unzulässigen Nutzung](https://policies.google.com/terms/generative-ai/use-policy?hl=de) und den [Google-Nutzungsbedingungen](https://ai.google.dev/gemini-api/terms?hl=de).
 
-## Zacznij tworzyć z użyciem wektorów
+## Mit Einbettungen entwickeln
 
-Zapoznaj się z [notebookiem z krótkim wprowadzeniem do wektorów](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb), aby poznać możliwości modelu i dowiedzieć się, jak dostosowywać i wizualizować wektory.
+Im [Notebook zur Kurzanleitung für Einbettungen](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Embeddings.ipynb) können Sie die Modellfunktionen kennenlernen und erfahren, wie Sie Ihre Einbettungen anpassen und visualisieren.
 
-Prześlij opinię
+Feedback geben
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Ostatnia aktualizacja: 2026-06-22 UTC.
+Zuletzt aktualisiert: 2026-06-22 (UTC).
 
-Chcesz przekazać coś jeszcze?
+Haben Sie Feedback für uns?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-22 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-22 (UTC)."],[],[]]

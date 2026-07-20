@@ -1,48 +1,44 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=es-419
-fetched_at: 2026-07-06T05:21:12.307269+00:00
-title: "Comprensi\u00f3n de videos \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=de
+fetched_at: 2026-07-20T04:37:50.074680+00:00
+title: "Videos verstehen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Enviar comentarios
+Feedback geben
 
-# Comprensión de videos
+# Videos verstehen
 
-> Para obtener información sobre la generación de videos, consulta la guía de [Veo](https://ai.google.dev/gemini-api/docs/video?hl=es-419).
+> Weitere Informationen zur Videogenerierung finden Sie im [Veo](https://ai.google.dev/gemini-api/docs/video?hl=de).
 
-Los modelos de Gemini pueden procesar videos, lo que permite muchos casos de uso de desarrolladores de vanguardia que históricamente habrían requerido modelos específicos del dominio.
-Algunas de las capacidades de visión de Gemini incluyen la capacidad de describir, segmentar y extraer información de videos, responder preguntas sobre el contenido de video y hacer referencia a marcas de tiempo específicas dentro de un video.
+Gemini-Modelle können Videos verarbeiten und ermöglichen so viele innovative Anwendungsfälle für Entwickler, für die in der Vergangenheit domänenspezifische Modelle erforderlich gewesen wären.
+Gemini kann unter anderem Videos beschreiben, segmentieren und Informationen daraus extrahieren, Fragen zu Videoinhalten beantworten und auf bestimmte Zeitstempel in einem Video verweisen.
 
-Puedes proporcionar videos como entrada a Gemini de las siguientes maneras:
+Sie haben folgende Möglichkeiten, Videos als Eingabe für Gemini zu verwenden:
 
-| Método de entrada | Tamaño máximo | Caso de uso recomendado |
+| Eingabemethode | Max. Größe | Empfohlener Anwendungsfall |
 | --- | --- | --- |
-| [API de Files](#upload-video) | 20 GB (pagada) / 2 GB (gratis) | Archivos grandes (más de 100 MB), videos largos (más de 10 min) y archivos reutilizables |
-| [Registro de Cloud Storage](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=es-419#registration) | 2 GB (por archivo, sin límites de almacenamiento) | Archivos grandes (más de 100 MB), videos largos (más de 10 min), archivos persistentes y reutilizables |
-| [Datos intercalados](#inline-video) | Menos de 100 MB | Archivos pequeños (menos de 100 MB), duración corta (menos de 1 min) y entradas únicas |
-| [URLs de YouTube](#youtube) | N/A | Videos públicos de YouTube |
+| [File API](#upload-video) | 20 GB (kostenpflichtig) / 2 GB (kostenlos) | Große Dateien (über 100 MB), lange Videos (über 10 Minuten), wiederverwendbare Dateien. |
+| [Cloud Storage-Registrierung](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=de#registration) | 2 GB (pro Datei, keine Speicherplatzbeschränkungen) | Große Dateien (über 100 MB), lange Videos (über 10 Minuten), dauerhafte, wiederverwendbare Dateien. |
+| [Inlinedaten](#inline-video) | < 100 MB | Kleine Dateien (< 100 MB), kurze Dauer (< 1 Minute), einmalige Eingaben. |
+| [YouTube-URLs](#youtube) | – | Öffentliche YouTube-Videos. |
 
-> **Nota:** Se recomienda la [API de Files](#upload-video) para la mayoría de los casos de uso, en especial para archivos de más de 100 MB o cuando deseas reutilizar el archivo en varias solicitudes.
+> **Hinweis**:Die [File API](#upload-video) wird für die meisten Anwendungsfälle empfohlen, insbesondere für Dateien, die größer als 100 MB sind, oder wenn Sie die Datei in mehreren Anfragen wiederverwenden möchten.
 
-Para obtener información sobre otros métodos de entrada de archivos, como el uso de URLs externas o archivos
-almacenados en Google Cloud, consulta la
-[guía Métodos de entrada de archivos](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=es-419).
+Informationen zu anderen Dateieingabemethoden, z. B. zur Verwendung externer URLs oder in Google Cloud gespeicherter Dateien, finden Sie im Leitfaden [Dateieingabemethoden](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=de).
 
-### Cómo subir un archivo de video
+### Videodatei hochladen
 
-El siguiente código descarga un video de muestra, lo sube con la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419),
-espera a que se procese y, luego, usa la referencia del archivo subido para
-resumir el video.
+Im folgenden Code wird ein Beispielvideo heruntergeladen, mit der [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) hochgeladen, auf die Verarbeitung gewartet und dann die hochgeladene Dateireferenz verwendet, um das Video zusammenzufassen.
 
 ### Python
 
@@ -179,17 +175,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 jq ".steps[].content[0].text" response.json
 ```
 
-Siempre usa la API de Files cuando el tamaño total de la solicitud (incluidos el archivo, la instrucción de texto, las instrucciones del sistema, etcétera) sea superior a 20 MB, la duración del video sea significativa o si tienes la intención de usar el mismo video en varias instrucciones.
-La API de Files acepta formatos de archivo de video directamente.
+Verwenden Sie immer die Files API, wenn die Gesamtgröße der Anfrage (einschließlich Datei, Text-Prompt, Systemanweisungen usw.) mehr als 20 MB beträgt, die Videodauer lang ist oder wenn Sie dasselbe Video in mehreren Prompts verwenden möchten.
+Die File API akzeptiert Videodateiformate direkt.
 
-Para obtener más información sobre cómo trabajar con archivos multimedia, consulta la
-[API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419).
+Weitere Informationen zum Arbeiten mit Media-Dateien finden Sie unter [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de).
 
-### Cómo pasar datos de video intercalados
+### Videodaten inline übergeben
 
-En lugar de subir un archivo de video con la API de Files, puedes pasar videos más pequeños directamente en la solicitud. Esto es adecuado para videos más cortos con un tamaño total de solicitud inferior a 20 MB.
+Anstatt eine Videodatei über die File API hochzuladen, können Sie kleinere Videos direkt im Request übergeben. Diese Methode eignet sich für kürzere Videos mit einer Gesamtanfragegröße von unter 20 MB.
 
-Aquí tienes un ejemplo de cómo proporcionar datos de video intercalados:
+Hier ein Beispiel für die Bereitstellung von Inline-Videodaten:
 
 ### Python
 
@@ -267,9 +262,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }' 2> /dev/null
 ```
 
-### Cómo pasar URLs de YouTube
+### YouTube-URLs für Tickets
 
-Puedes pasar URLs de YouTube directamente a la API de Gemini como parte de tu solicitud de la siguiente manera:
+Sie können YouTube-URLs direkt als Teil Ihrer Anfrage an die Gemini API übergeben:
 
 ### Python
 
@@ -328,16 +323,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }' 2> /dev/null
 ```
 
-**Limitaciones:**
+**Beschränkungen:**
 
-- En el nivel gratuito, no puedes subir más de 8 horas de video de YouTube por día.
-- En el nivel pagado, no hay límite según la duración del video.
-- Para los modelos anteriores a Gemini 2.5, solo puedes subir 1 video por solicitud. Para Gemini 2.5 y modelos posteriores, puedes subir un máximo de 10 videos por solicitud.
-- Solo puedes subir videos públicos (no videos privados ni no listados).
+- In der kostenlosen Version können Sie nicht mehr als 8 Stunden YouTube-Videos pro Tag hochladen.
+- Bei der kostenpflichtigen Stufe gibt es keine Begrenzung der Videolänge.
+- Bei Modellen vor Gemini 2.5 können Sie nur ein Video pro Anfrage hochladen. Bei Gemini 2.5 und späteren Modellen können Sie pro Anfrage maximal 10 Videos hochladen.
+- Du kannst nur öffentliche Videos hochladen, keine privaten oder nicht gelisteten Videos.
 
-## Cómo hacer referencia a marcas de tiempo en el contenido
+## Auf Zeitstempel im Inhalt verweisen
 
-Puedes hacer preguntas sobre puntos específicos en el tiempo dentro del video con marcas de tiempo del formulario `MM:SS`.
+Sie können Fragen zu bestimmten Zeitpunkten im Video stellen, indem Sie Zeitstempel im Format `MM:SS` verwenden.
 
 ### Python
 
@@ -357,11 +352,11 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
 ```
 
-## Cómo extraer estadísticas detalladas de un video
+## Detaillierte Informationen aus Videos extrahieren
 
-Los modelos de Gemini ofrecen potentes capacidades para comprender el contenido de video mediante el procesamiento de información de las transmisiones **auditivas y visuales**. Esto te permite extraer un conjunto enriquecido de detalles, incluida la generación de descripciones de lo que sucede en un video y la respuesta a preguntas sobre su contenido.
+Gemini-Modelle bieten leistungsstarke Funktionen zum Verstehen von Videoinhalten, indem sie Informationen aus **Audio- und visuellen Streams** verarbeiten. So können Sie viele Details extrahieren, z. B. Beschreibungen der Vorgänge in einem Video generieren und Fragen zum Inhalt beantworten lassen.
 
-Para las descripciones visuales, el modelo muestrea el video a una velocidad de **1 fotograma por segundo** (FPS). Esta frecuencia de muestreo predeterminada funciona bien para la mayoría del contenido, pero ten en cuenta que puede omitir detalles en videos con movimientos rápidos o cambios de escena rápidos.
+Für visuelle Beschreibungen wird das Video mit einer Rate von **1 Bild pro Sekunde** (FPS) abgetastet. Diese Standard-Samplingrate eignet sich gut für die meisten Inhalte. Bei Videos mit schnellen Bewegungen oder schnellen Szenenwechseln können jedoch Details verloren gehen.
 
 ### Python
 
@@ -381,9 +376,9 @@ const prompt = "Describe the key events in this video, providing both audio and 
 PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
 ```
 
-## Formatos de video compatibles
+## Unterstützte Videoformate
 
-Gemini admite los siguientes tipos de MIME de formato de video:
+Gemini unterstützt die folgenden MIME-Typen für Videoformate:
 
 - `video/mp4`
 - `video/mpeg`
@@ -395,55 +390,46 @@ Gemini admite los siguientes tipos de MIME de formato de video:
 - `video/wmv`
 - `video/3gpp`
 
-## Detalles técnicos sobre los videos
+## Technische Details zu Videos
 
-- **Modelos y contexto compatibles**: Todos los modelos de Gemini pueden procesar datos de video.
-  - Los modelos con una ventana de contexto de 1 millón pueden procesar videos de hasta 1 hora de duración con resolución de medios predeterminada o de 3 horas de duración con resolución de medios baja.
-- **Procesamiento de la API de Files**: Cuando se usa la API de Files, los videos se almacenan a 1
-  fotograma por segundo (FPS) y el audio se procesa a 1 Kbps (canal único).
-  Las marcas de tiempo se agregan cada segundo.
-  - Estas tasas están sujetas a cambios en el futuro para mejorar la inferencia.
-- **Cálculo de tokens**: Cada segundo de video se tokeniza de la siguiente manera:
-  - Fotogramas individuales (muestreados a 1 FPS):
-    - Si `media_resolution` se establece en bajo, los fotogramas se tokenizan a 66 tokens por fotograma.
-    - De lo contrario, los fotogramas se tokenizan a 258 tokens por fotograma.
-  - Audio: 32 tokens por segundo
-  - También se incluyen metadatos.
-  - Total: Aproximadamente 300 tokens por segundo de video con resolución de medios predeterminada o 100 tokens por segundo de video con resolución de medios baja
-- **Resolución de medios**: Gemini 3 introduce un control detallado sobre el procesamiento de visión multimodal
-  con el `media_resolution` parámetro. El parámetro `media_resolution` determina la **cantidad máxima de tokens asignados por imagen de entrada o fotograma de video.**
-  Las resoluciones más altas mejoran la capacidad del modelo para leer texto fino o identificar detalles pequeños, pero aumentan el uso de tokens y la latencia.
+- **Unterstützte Modelle und Kontext**: Alle Gemini-Modelle können Videodaten verarbeiten.
+  - Modelle mit einem Kontextfenster für 1 Million Tokens können Videos mit einer Länge von bis zu einer Stunde in der Standardauflösung oder bis zu drei Stunden in niedriger Auflösung verarbeiten.
+- **Verarbeitung über die File API**: Bei Verwendung der File API werden Videos mit 1 Frame pro Sekunde (FPS) gespeichert und Audio mit 1 Kbps (Einzelkanal) verarbeitet.
+  Zeitstempel werden jede Sekunde hinzugefügt.
+  - Diese Raten können sich in Zukunft ändern, um die Inferenz zu verbessern.
+- **Tokenberechnung**: Jede Sekunde des Videos wird so tokenisiert:
+  - Einzelne Frames (mit 1 FPS):
+    - Wenn `media_resolution` auf „Niedrig“ festgelegt ist, werden Frames mit 66 Tokens pro Frame tokenisiert.
+    - Andernfalls werden Frames mit 258 Tokens pro Frame tokenisiert.
+  - Audio: 32 Tokens pro Sekunde.
+  - Metadaten sind ebenfalls enthalten.
+  - Insgesamt: etwa 300 Tokens pro Sekunde Video bei Standardauflösung oder 100 Tokens pro Sekunde Video bei niedriger Auflösung.
+- **Mediale Auflösung**: Mit Gemini 3 wird die multimodale Bildverarbeitung durch den Parameter `media_resolution` detaillierter gesteuert. Der Parameter `media_resolution` bestimmt die **maximale Anzahl von Tokens, die pro Eingabebild oder Videoframes zugewiesen werden.**
+  Höhere Auflösungen verbessern die Fähigkeit des Modells, feinen Text zu lesen oder kleine Details zu erkennen, erhöhen aber die Token-Nutzung und die Latenz.
 
-  Para obtener más detalles sobre los cálculos de tokens, consulta la [guía de tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419).
-- **Formato de marca de tiempo**: Cuando hagas referencia a momentos específicos de un video dentro de tu instrucción, usa el formato `MM:SS` (p.ej., `01:15` para 1 minuto y 15 segundos).
-- **Recomendaciones**:
+  Weitere Informationen zur Tokenberechnung finden Sie im [Leitfaden zu Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=de).
+- **Format des Zeitstempels**: Wenn Sie in Ihrem Prompt auf bestimmte Momente in einem Video verweisen, verwenden Sie das Format `MM:SS` (z.B. `01:15` für 1 Minute und 15 Sekunden).
+- **Best Practices**:
 
-  - Usa solo un video por solicitud de instrucción para obtener resultados óptimos.
-  - Si combinas texto y un solo video, coloca la instrucción de texto *después* de la parte del video en el array `input`.
-  - Ten en cuenta que las secuencias de acción rápida pueden perder detalles debido a la frecuencia de muestreo de 1 FPS. Considera ralentizar esos clips si es necesario.
+  - Verwenden Sie für optimale Ergebnisse nur ein Video pro Prompt-Anfrage.
+  - Wenn Sie Text und ein einzelnes Video kombinieren, platzieren Sie den Text-Prompt im `input`-Array *nach* dem Videoteil.
+  - Bei schnellen Aktionssequenzen können aufgrund der Abtastrate von 1 FPS Details verloren gehen. Verlangsame solche Clips bei Bedarf.
 
-## ¿Qué sigue?
+## Nächste Schritte
 
-En esta guía, se muestra cómo subir archivos de video y generar resultados de texto a partir de entradas de video. Para obtener más información, consulta los siguientes recursos:
+In diesem Leitfaden wird gezeigt, wie Sie Videodateien hochladen und Textausgaben aus Videoeingaben generieren. Weitere Informationen finden Sie in den folgenden Ressourcen:
 
-- [Instrucciones del sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419#system-instructions):
-  Las instrucciones del sistema te permiten dirigir el comportamiento del modelo según tus
-  necesidades y casos de uso específicos.
-- [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419): Obtén más información para subir y administrar
-  archivos para usarlos con Gemini.
-- [Estrategias de instrucciones de archivos](https://ai.google.dev/gemini-api/docs/files?hl=es-419#prompt-guide): La
-  API de Gemini admite instrucciones con datos de texto, imagen, audio y video, también
-  conocidas como instrucciones multimodales.
-- [Guía de seguridad](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=es-419): A veces, los modelos de IA generativa
-  producen resultados inesperados, como resultados inexactos, sesgados o ofensivos. El procesamiento posterior y la evaluación humana son fundamentales para
-  limitar el riesgo de daño de esos resultados.
+- [Systemanweisungen](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#system-instructions): Mit Systemanweisungen können Sie das Verhalten des Modells basierend auf Ihren spezifischen Anforderungen und Anwendungsfällen steuern.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de): Hier finden Sie weitere Informationen zum Hochladen und Verwalten von Dateien für die Verwendung mit Gemini.
+- [Strategien für Dateiprompts](https://ai.google.dev/gemini-api/docs/files?hl=de#prompt-guide): Die Gemini API unterstützt Prompts mit Text-, Bild-, Audio- und Videodaten, auch als multimodale Prompts bezeichnet.
+- [Sicherheitshinweise](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=de): Generative KI-Modelle können manchmal unerwartete Ausgaben liefern, z. B. Ausgaben, die ungenau, voreingenommen oder anstößig sind. Die Nachbearbeitung und menschliche Bewertung sind unerlässlich, um das Risiko von Schäden durch solche Ausgaben zu begrenzen.
 
-Enviar comentarios
+Feedback geben
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Última actualización: 2026-06-22 (UTC)
+Zuletzt aktualisiert: 2026-07-06 (UTC).
 
-¿Quieres brindar más información?
+Haben Sie Feedback für uns?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-06 (UTC)."],[],[]]

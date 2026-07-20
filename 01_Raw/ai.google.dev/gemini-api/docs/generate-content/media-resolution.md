@@ -1,35 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-CN
-fetched_at: 2026-07-06T05:19:42.222586+00:00
-title: "\u5a92\u4f53\u5206\u8fa8\u7387 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ar
+fetched_at: 2026-07-20T04:33:43.673888+00:00
+title: "\u062f\u0631\u062c\u0629 \u062f\u0642\u0629 \u0627\u0644\u0648\u0633\u0627\u0626\u0637 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-发送反馈
+إرسال ملاحظات
 
-# 媒体分辨率
+# درجة دقة الوسائط
 
-`media_resolution` 参数通过确定为媒体输入分配的 **token 数量上限** 来控制 Gemini API 处理图片、视频和 PDF
-文档等媒体输入的方式，让您可以在回答质量、延迟时间和费用之间取得平衡。如需了解不同设置、默认值及其与 token 的对应关系，请参阅[token 数量](#token-counts)部分。
+يتحكّم المَعلمة `media_resolution` في طريقة معالجة Gemini API لمدخلات الوسائط، مثل الصور والفيديوهات ومستندات PDF، من خلال تحديد **الحد الأقصى لعدد الرموز المميزة** المخصّص لمدخلات الوسائط، ما يتيح لك تحقيق التوازن بين جودة الردود ووقت الاستجابة والتكلفة. للاطّلاع على الإعدادات المختلفة والقيم التلقائية وكيفية تطابقها مع الرموز المميزة، يُرجى الانتقال إلى قسم [عدد الرموز المميزة](#token-counts).
 
-您可以通过以下两种方式配置媒体分辨率：
+يمكنك ضبط دقة الوسائط بطريقتَين:
 
-- [按部分](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn#per-part-media-resolution)（仅限 Gemini 3）
-- [针对整个](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn#global-media-resolution) `generateContent` 请求全局配置（所有多模态模型）
+- [لكل جزء](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar#per-part-media-resolution) (Gemini 3 فقط)
+- [على مستوى العالم](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar#global-media-resolution) لطلب `generateContent` كامل (جميع النماذج المتعددة الوسائط)
 
-## 按部分配置媒体分辨率（仅限 Gemini 3）
+## دقة الوسائط لكل جزء (Gemini 3 فقط)
 
-Gemini 3 允许您为请求中的各个媒体对象设置媒体分辨率，从而对 token 用量进行精细优化。您可以在单个请求中混合使用不同的分辨率级别。例如，对复杂的图表使用高分辨率，对简单的上下文图片使用低分辨率。此设置会替换特定部分的任何全局配置。如需了解默认设置，请参阅 [token 数量](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn#token-counts) 部分。
+يتيح لك Gemini 3 ضبط دقة الوسائط لكائنات الوسائط الفردية ضمن طلبك، ما يوفّر تحسينًا دقيقًا لاستخدام الرموز المميزة. يمكنك الجمع بين مستويات الدقة في طلب واحد. على سبيل المثال، استخدام دقة عالية لمخطط بياني معقّد ودقة منخفضة لصورة بسيطة ذات صلة بالموضوع يلغي هذا الإعداد أي إعدادات عامة لجزء معيّن. للاطّلاع على الإعدادات التلقائية، يُرجى الرجوع إلى قسم [عدد الرموز المميزة](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar#token-counts).
 
 ### Python
 
@@ -132,10 +131,10 @@ curl -s -X POST \
   -d @request.json
 ```
 
-## 全局媒体分辨率
+## درجة دقة الوسائط العامة
 
-您可以使用 `GenerationConfig` 为请求中的所有媒体部分设置默认分辨率。所有多模态模型都支持此功能。如果请求
-同时包含全局设置和[按部分设置](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn#per-part-media-resolution)，则对于该特定项，按部分设置优先。
+يمكنك ضبط دقة تلقائية لجميع أجزاء الوسائط في الطلب باستخدام
+`GenerationConfig`. تتوفّر هذه الميزة في جميع النماذج المتعدّدة الوسائط. إذا تضمّن الطلب إعدادات عامة و[إعدادات خاصة بكل جزء](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar#per-part-media-resolution)، ستكون الأولوية للإعدادات الخاصة بكل جزء في ما يتعلّق بهذا العنصر المحدّد.
 
 ### Python
 
@@ -203,86 +202,87 @@ curl -s -X POST \
   }'
 ```
 
-## 可用的分辨率值
+## قيم الدقة المتاحة
 
-Gemini API 为媒体分辨率定义了以下级别：
+تحدّد Gemini API مستويات دقة الوسائط التالية:
 
-- `MEDIA_RESOLUTION_UNSPECIFIED`：默认设置。对于此级别，Gemini 3 和更早版本的 Gemini 模型之间的 token 数量差异很大。
-- `MEDIA_RESOLUTION_LOW`：token 数量较少，因此处理速度更快，费用更低，但细节较少。
-- `MEDIA_RESOLUTION_MEDIUM`：在细节、费用和延迟时间之间取得平衡。
-- `MEDIA_RESOLUTION_HIGH`：token 数量较多，为模型提供了更多细节，但延迟时间和费用也会增加。
-- `MEDIA_RESOLUTION_ULTRA_HIGH`（仅限按部分）：token 数量最多，某些特定
-  用例（例如[计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)）需要此级别。
+- `MEDIA_RESOLUTION_UNSPECIFIED`: هذا هو الإعداد التلقائي. يختلف عدد الرموز المميزة لهذا المستوى بشكل كبير بين Gemini 3 ونماذج Gemini السابقة.
+- `MEDIA_RESOLUTION_LOW`: عدد أقل من الرموز المميزة، ما يؤدي إلى معالجة أسرع
+  وتكلفة أقل، ولكن مع تفاصيل أقل
+- `MEDIA_RESOLUTION_MEDIUM`: توازن بين التفاصيل والتكلفة ووقت الاستجابة
+- ‫`MEDIA_RESOLUTION_HIGH`: عدد الرموز المميزة أكبر، ما يوفّر تفاصيل أكثر للنموذج، ولكن مع زيادة في وقت الاستجابة والتكلفة.
+- `MEDIA_RESOLUTION_ULTRA_HIGH` (لكل جزء فقط): أعلى عدد من الرموز المميزة، وهو مطلوب لحالات استخدام محدّدة، مثل [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar).
 
-请注意，`MEDIA_RESOLUTION_HIGH` 可为大多数用例提供最佳性能。
+يُرجى العِلم أنّ `MEDIA_RESOLUTION_HIGH` يوفّر الأداء الأمثل لمعظم حالات الاستخدام.
 
-为每个级别生成的 token 的确切数量取决于**媒体类型** （图片、视频、PDF）和**模型版本** 。
+يعتمد العدد الدقيق للرموز المميزة التي يتم إنشاؤها لكل مستوى من هذه المستويات على كل من **نوع الوسائط** (صورة أو فيديو أو ملف PDF) و**إصدار النموذج**.
 
-## token 数量
+## عدد الرموز المميزة
 
-下表总结了每个模型系列中每个 `media_resolution` 值和媒体类型对应的大致 token 数量。
+تلخّص الجداول أدناه عدد الرموز المميزة التقريبي لكل قيمة `media_resolution` ونوع وسائط لكل مجموعة نماذج.
 
-**Gemini 3 模型**
+**نماذج Gemini 3**
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **MediaResolution** | **图片** | **视频** | **PDF** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` （默认） | 1120 | 70 | 560 |
-| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + 原生文本 |
-| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + 原生文本 |
-| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + 原生文本 |
-| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | 不适用 | 不适用 |
+| **MediaResolution** | **صورة** | **الفيديو** | **PDF** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (تلقائي) | 1120 | 70 | 560 |
+| `MEDIA_RESOLUTION_LOW` | 280 | 70 | ‫280 + نص أصلي |
+| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | ‫560 + نص إعلاني أصلي |
+| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | ‫1120 + نص إعلاني مدمج |
+| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | لا ينطبق | لا ينطبق |
 
-**Gemini 2.5 模型**
+**نماذج Gemini 2.5**
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **MediaResolution** | **图片** | **视频** | **PDF（扫描）** | **PDF（原生）** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` （默认） | 256 + 平移和扫描（约 2048） | 256 | 256 + OCR | 256 + 原生文本 |
-| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + 原生文本 |
-| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + 原生文本 |
-| `MEDIA_RESOLUTION_HIGH` | 256 + 平移和扫描 | 256 | 256 + OCR | 256 + 原生文本 |
+| **MediaResolution** | **صورة** | **الفيديو** | **ملف PDF (ممسوح ضوئيًا)** | **ملف PDF (مدمَج مع المحتوى)** |
+| `MEDIA_RESOLUTION_UNSPECIFIED` (تلقائي) | ‫256 + Pan & Scan (حوالي 2048) | 256 | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
+| `MEDIA_RESOLUTION_LOW` | 64 | 64 | ‫64 + OCR | 64 + Native Text |
+| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
+| `MEDIA_RESOLUTION_HIGH` | ‫256 + Pan & Scan | 256 | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
 
-## 选择合适的分辨率
+## اختيار درجة الدقة المناسبة
 
-- **默认 (`UNSPECIFIED`)**： 从默认设置开始。此设置经过调整，可在大多数常见用例中实现质量、延迟时间和费用之间的良好平衡。
-- **`LOW`**： 适用于费用和延迟时间至关重要，而精细细节不太重要的场景。
-- **`MEDIUM` / `HIGH`**： 如果任务需要理解媒体中的复杂细节，请提高分辨率。这通常适用于复杂的视觉分析、图表解读或密集文档理解。
-- **`ULTRA HIGH`** - 仅适用于按部分设置。建议用于特定用例（例如计算机使用），或者测试表明此设置比 `HIGH` 有明显提升。
-- **按部分控制 (Gemini 3)**： 优化 token 用量。例如，在包含多张图片的提示中，对复杂的图表使用 `HIGH`，对简单的上下文图片使用 `LOW` 或 `MEDIUM`。
+- **تلقائي (`UNSPECIFIED`):** ابدأ بالخيار التلقائي. تم تحسين هذا الخيار لتحقيق توازن جيد بين الجودة والوقت المستغرق والتكلفة في معظم حالات الاستخدام الشائعة.
+- **`LOW`:** استخدِم هذا الخيار في الحالات التي تكون فيها التكلفة ووقت الاستجابة في غاية الأهمية،
+  ويكون فيها الحصول على تفاصيل دقيقة أقل أهمية.
+- **`MEDIUM` / `HIGH`:** زيادة درجة الدقة عندما تتطلّب المهمة
+  فهم تفاصيل دقيقة في الوسائط ويكون ذلك مطلوبًا غالبًا
+  لتحليل المرئيات المعقّدة أو قراءة الرسوم البيانية أو فهم المستندات الكثيفة.
+- **`ULTRA HIGH`**: يتوفّر هذا الخيار فقط لإعدادات كل جزء. يُنصح باستخدامها في حالات استخدام معيّنة، مثل استخدام الكمبيوتر أو عندما تُظهر الاختبارات تحسّنًا واضحًا مقارنةً بـ `HIGH`.
+- **التحكّم في كل جزء (Gemini 3):** يعمل على تحسين استخدام الرموز المميزة. على سبيل المثال، في طلب يتضمّن صورًا متعددة، استخدِم `HIGH` لرسم تخطيطي معقّد و`LOW` أو `MEDIUM` لصور سياقية أبسط.
 
-**推荐设置**
+**الإعدادات المقترَحة**
 
-以下列出了每种受支持媒体类型的推荐媒体分辨率设置。
+في ما يلي قائمة بإعدادات دقة الوسائط المقترَحة لكل نوع من أنواع الوسائط المتوافقة.
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **媒体类型** | **推荐设置** | **token 数量上限** | **使用指南** |
-| **Google 图片** | `MEDIA_RESOLUTION_HIGH` | 1120 | 建议用于大多数图片分析任务，以确保获得最高质量。 |
-| **PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | 最适合文档理解；质量通常在 `medium` 级别达到饱和。对于标准文档，提高到 `high` 级别很少能改善 OCR 结果。 |
-| **视频** （常规） | `MEDIA_RESOLUTION_LOW` （或 `MEDIA_RESOLUTION_MEDIUM`） | 70（每帧） | **注意** ：对于视频，`low` 和 `medium` 设置的处理方式相同（70 个 token），以优化上下文使用。这对于大多数动作识别和描述任务来说已经足够。 |
-| **视频** （文本密集） | `MEDIA_RESOLUTION_HIGH` | 280（每帧） | 仅当用例涉及读取视频帧中的密集文本 (OCR) 或小细节时才需要。 |
+| **نوع الوسائط** | **الإعدادات المقترَحة** | **الحد الأقصى للرموز المميزة** | **إرشادات الاستخدام** |
+| **الصور** | `MEDIA_RESOLUTION_HIGH` | 1120 | يُنصح باستخدامها لمعظم مهام تحليل الصور لضمان الحصول على أعلى جودة. |
+| **ملفات PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | الأفضل لفهم المستندات، وعادةً ما تصل الجودة إلى الحد الأقصى عند `medium`. لا تؤدي الزيادة إلى `high` عادةً إلى تحسين نتائج التعرّف البصري على الأحرف للمستندات العادية. |
+| **الفيديو** (عام) | ‫`MEDIA_RESOLUTION_LOW` (أو `MEDIA_RESOLUTION_MEDIUM`) | ‫70 (لكل إطار) | **ملاحظة:** بالنسبة إلى الفيديو، يتم التعامل مع إعدادات `low` و`medium` بشكل مماثل (70 رمزًا مميزًا) لتحسين استخدام السياق. وهذا يكفي لمعظم مهام التعرّف على الإجراءات ووصفها. |
+| **فيديو** (يحتوي على الكثير من النصوص) | `MEDIA_RESOLUTION_HIGH` | ‫280 (لكل إطار) | يجب توفُّرها فقط عندما تتضمّن حالة الاستخدام قراءة نص كثيف (التعرّف البصري على الأحرف) أو تفاصيل صغيرة ضمن إطارات الفيديو. |
 
-请务必测试和评估不同分辨率设置对特定应用的影响，以便在质量、延迟时间和费用之间找到最佳平衡点。
+ننصحك دائمًا باختبار وتقييم تأثير إعدادات الدقة المختلفة على تطبيقك المحدّد للعثور على أفضل موازنة بين الجودة ووقت الاستجابة والتكلفة.
 
-## 版本兼容性摘要
+## ملخّص التوافق مع الإصدارات
 
-- 所有支持媒体输入的模型都可以使用 `MediaResolution` 枚举。
-- 与每个枚举级别关联的 token 数量在 Gemini 3 模型和更早版本的 Gemini 之间**有所不同** 。
-- 在各个 `Part` 对象上设置 `media_resolution` **仅适用于 Gemini 3 模型** 。
+- تتوفّر السمة `MediaResolution` enum لجميع النماذج التي تتيح إدخال الوسائط.
+- تختلف أعداد الرموز المميزة المرتبطة بكل مستوى من مستويات التعداد بين نماذج Gemini 3 وإصدارات Gemini السابقة.
+- يقتصر ضبط `media_resolution` على عناصر `Part` الفردية **على نماذج Gemini 3**.
 
-## 后续步骤
+## الخطوات التالية
 
-- 如需详细了解 Gemini API 的多模态功能，请参阅
-  [图片理解](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=zh-cn)、[视频理解](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=zh-cn)和
-  [文档理解](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=zh-cn)指南。
+- يمكنك الاطّلاع على مزيد من المعلومات حول إمكانات Gemini API المتعددة الوسائط في أدلة [فهم الصور](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=ar) و[فهم الفيديوهات](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ar) و[فهم المستندات](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=ar).
 
-发送反馈
+إرسال ملاحظات
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-最后更新时间 (UTC)：2026-06-24。
+تاريخ التعديل الأخير: 2026-06-24 (حسب التوقيت العالمي المتفَّق عليه)
 
-需要向我们提供更多信息？
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-24。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,68 +1,72 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=ko
-fetched_at: 2026-07-06T05:13:14.188642+00:00
-title: "\ud1a0\ud070 \uc774\ud574 \ubc0f \uacc4\uc0b0 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=th
+fetched_at: 2026-07-20T04:43:22.130079+00:00
+title: "\u0e17\u0e4d\u0e32\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e41\u0e25\u0e30\u0e19\u0e31\u0e1a\u0e42\u0e17\u0e40\u0e04\u0e47\u0e19 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-의견 보내기
+ส่งความคิดเห็น
 
-# 토큰 이해 및 계산
+# ทําความเข้าใจและนับโทเค็น
 
-Gemini 및 기타 생성형 AI 모델은 *토큰* 이라는 세분화된 수준에서 입력과 출력을 처리합니다.
+Gemini และโมเดล Generative AI อื่นๆ จะประมวลผลอินพุตและเอาต์พุตที่ระดับความละเอียดที่เรียกว่า *โทเค็น*
 
-**Gemini 모델의 경우 토큰은 약 4자와 같습니다.
-100개의 토큰은 약 60~80개의 영어 단어와 같습니다.**
+**สำหรับโมเดล Gemini โทเค็นจะเทียบเท่ากับอักขระประมาณ 4 ตัว
+โทเค็น 100 รายการจะเท่ากับคำภาษาอังกฤษประมาณ 60-80 คำ**
 
-## 토큰 정보
+## เกี่ยวกับโทเค็น
 
-토큰은 단일 문자(예: `z`) 또는 전체 단어(예: `cat`)일 수 있습니다. 긴 단어는 여러 토큰으로 나뉩니다. 모델에서 사용하는 모든 토큰 집합을 어휘라고 하며, 텍스트를 토큰으로 분할하는 프로세스를 *토큰화* 라고 합니다.
+โทเค็นอาจเป็นอักขระเดียว เช่น `z` หรือคำทั้งคำ เช่น `cat` คำยาวจะถูกแบ่งออกเป็นโทเค็นหลายรายการ ชุดโทเค็นทั้งหมดที่โมเดลใช้เรียกว่าคำศัพท์ และกระบวนการแยกข้อความออกเป็นโทเค็นเรียกว่า *การแยกโทเค็น*
 
-결제가 사용 설정되면 [Gemini API 호출 비용](https://ai.google.dev/pricing?hl=ko)은
-입력 및 출력 토큰 수에 따라 결정되므로 토큰 수를
-계산하는 방법을 알아두면 유용합니다.
+เมื่อเปิดใช้การเรียกเก็บเงิน [ต้นทุนของการเรียกใช้ Gemini API](https://ai.google.dev/pricing?hl=th) จะ
+พิจารณาจากจำนวนโทเค็นอินพุตและเอาต์พุตเป็นส่วนหนึ่ง ดังนั้นการรู้วิธี
+นับโทเค็นจึงอาจเป็นประโยชน์
 
-Colab에서 토큰 수를 계산해 볼 수 있습니다.
+คุณสามารถลองนับโทเค็นใน Colab ของเราได้
 
 |  |  |  |
 | --- | --- | --- |
-| [ai.google.dev에서 보기](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | [Colab 노트북 사용해 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) | [GitHub에서 노트북 보기](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=ko) |
+| [ดูใน ai.google.dev](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | [ลองใช้ Colab Notebook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=th) | [ดู Notebook ใน GitHub](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Counting_Tokens.ipynb?hl=th) |
 
-## 토큰 집계
+## นับโทเค็น
 
-텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력 및 출력은 토큰화됩니다.
+อินพุตและเอาต์พุตทั้งหมดของ Gemini API จะได้รับการแยกโทเค็น ซึ่งรวมถึงข้อความ ไฟล์รูปภาพ และรูปแบบอื่นๆ ที่ไม่ใช่ข้อความ
 
-다음과 같은 방법으로 토큰 수를 집계할 수 있습니다.
+คุณสามารถนับโทเค็นได้ด้วยวิธีต่อไปนี้
 
-- **요청의 입력
-  으로 [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=ko)를 호출합니다.**  
-   이렇게 하면 *입력에만* 있는 총 토큰 수가 반환됩니다. 모델에 입력을 전송하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
-- **`generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용합니다.**  
-   이렇게 하면
-  토큰의 총 수(*입력과 출력 모두*)가 반환됩니다. `total_token_count`.  
-   또한 입력 및 출력의 토큰 수를 별도로 반환합니다. `prompt_token_count` (입력 토큰) 및 `candidates_token_count`(출력 토큰).
+- **เรียกใช้ [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=th) ด้วยอินพุต
+  ของคำขอ**  
+   ฟังก์ชันนี้จะแสดงผลจำนวนโทเค็นทั้งหมดใน *อินพุตเท่านั้น* คุณสามารถเรียกใช้ฟังก์ชันนี้ก่อนส่งอินพุตไปยังโมเดลเพื่อตรวจสอบขนาดของคำขอ
+- **ใช้แอตทริบิวต์ `usage_metadata` ในออบเจ็กต์ `response` หลังจาก
+  เรียกใช้ `generate_content`**  
+   ฟังก์ชันนี้จะแสดงผลจำนวนโทเค็นทั้งหมดใน
+  *ทั้งอินพุตและเอาต์พุต*: `total_token_count`  
+   นอกจากนี้ยังแสดงผลจำนวนโทเค็นของอินพุตและเอาต์พุตแยกกันด้วย ได้แก่ `prompt_token_count` (โทเค็นอินพุต) และ `candidates_token_count` (โทเค็นเอาต์พุต)
 
-  [사고 모델을 사용하는 경우 사고 과정에서 사용된 토큰이 `thoughts_token_count`에 반환됩니다.](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) [컨텍스트 캐싱을 사용하는 경우 캐시된 토큰 수가 `cached_content_token_count`에 표시됩니다.](https://ai.google.dev/gemini-api/docs/caching?hl=ko)
+  หากคุณใช้ [โมเดล
+  การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th) ระบบจะแสดงผลโทเค็นที่ใช้ระหว่างกระบวนการคิด
+  ใน `thoughts_token_count` และหากคุณใช้
+  [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) จำนวนโทเค็นที่แคชไว้จะอยู่ใน `cached_content_token_count`
 
-### 텍스트 토큰 집계
+### นับโทเค็นข้อความ
 
-텍스트 전용 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트의 토큰 수 (`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다.
+หากคุณเรียกใช้ `count_tokens` ด้วยอินพุตที่เป็นข้อความเท่านั้น ฟังก์ชันนี้จะแสดงผลจำนวนโทเค็นของข้อความใน *อินพุตเท่านั้น* (`total_tokens`) คุณสามารถเรียกใช้ฟังก์ชันนี้ก่อนเรียกใช้ `generate_content` เพื่อตรวจสอบขนาดของคำขอ
 
-또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+อีกตัวเลือกหนึ่งคือการเรียกใช้ `generate_content` แล้วใช้แอตทริบิวต์ `usage_metadata` ในออบเจ็กต์ `response` เพื่อรับข้อมูลต่อไปนี้
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
+- จำนวนโทเค็นแยกกันของอินพุต (`prompt_token_count`) เนื้อหาที่แคชไว้ (`cached_content_token_count`) และเอาต์พุต (`candidates_token_count`)
+- จำนวนโทเค็นสำหรับกระบวนการคิด (`thoughts_token_count`)
+- จำนวนโทเค็นทั้งหมดใน *ทั้งอินพุตและเอาต์พุต* (`total_token_count`)
 
 ### Python
 
@@ -137,17 +141,17 @@ fmt.Println(string(usageMetadata))
     ```
 ```
 
-### 멀티턴 (채팅) 토큰 집계
+### นับโทเค็นการสนทนาไปมา (แชท)
 
-채팅 기록으로 `count_tokens`를 호출하면 채팅의 각 역할에서 텍스트의 총 토큰 수 (`total_tokens`)가 반환됩니다.
+หากคุณเรียกใช้ `count_tokens` ด้วยประวัติการแชท ฟังก์ชันนี้จะแสดงผลจำนวนโทเค็นทั้งหมดของข้อความจากแต่ละบทบาทในการแชท (`total_tokens`)
 
-또 다른 방법은 `send_message`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+อีกตัวเลือกหนึ่งคือการเรียกใช้ `send_message` แล้วใช้แอตทริบิวต์ `usage_metadata` ในออบเจ็กต์ `response` เพื่อรับข้อมูลต่อไปนี้
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
+- จำนวนโทเค็นแยกกันของอินพุต (`prompt_token_count`) เนื้อหาที่แคชไว้ (`cached_content_token_count`) และเอาต์พุต (`candidates_token_count`)
+- จำนวนโทเค็นสำหรับกระบวนการคิด (`thoughts_token_count`)
+- จำนวนโทเค็นทั้งหมดใน *ทั้งอินพุตและเอาต์พุต* (`total_token_count`)
 
-다음 대화 턴의 크기를 파악하려면 `count_tokens`를 호출할 때 기록에 추가해야 합니다.
+หากต้องการทราบว่าการสนทนาครั้งถัดไปจะมีขนาดเท่าใด คุณต้องเพิ่มการสนทนาครั้งถัดไปลงในประวัติเมื่อเรียกใช้ `count_tokens`
 
 ### Python
 
@@ -273,33 +277,33 @@ if err != nil {
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### 멀티모달 토큰 집계
+### นับโทเค็นแบบหลายรูปแบบ
 
-텍스트, 이미지 파일, 기타 텍스트가 아닌 모달리티를 비롯한 Gemini API의 모든 입력은 토큰화됩니다. Gemini API에서 처리하는 동안 멀티모달 입력의 토큰화에 관한 다음 주요사항을 참고하세요.
+อินพุตทั้งหมดของ Gemini API จะได้รับการแยกโทเค็น ซึ่งรวมถึงข้อความ ไฟล์รูปภาพ และรูปแบบอื่นๆ ที่ไม่ใช่ข้อความ โปรดทราบประเด็นสำคัญระดับสูงต่อไปนี้เกี่ยวกับการแยกโทเค็นของอินพุตแบบหลายรูปแบบระหว่างการประมวลผลโดย Gemini API
 
-- 두 치수가 모두 384픽셀 이하인 이미지 입력은 258개의 토큰으로 집계됩니다. 한쪽 또는 양쪽 치수가 더 큰 이미지는 필요에 따라 768x768픽셀의 타일로 잘리고 크기가 조정되며, 각 타일은 258개의 토큰으로 집계됩니다.
-- 동영상 및 오디오 파일은 다음과 같은 고정된 비율로 토큰으로 변환됩니다. 동영상은 초당 263개의 토큰, 오디오는 초당 32개의 토큰입니다.
+- อินพุตรูปภาพที่มีขนาดทั้ง 2 ด้าน <=384 พิกเซลจะนับเป็น 258 โทเค็น รูปภาพที่มีขนาดใหญ่กว่าในด้านใดด้านหนึ่งหรือทั้ง 2 ด้านจะถูกครอบตัดและปรับขนาดตามความจำเป็นให้เป็นไทล์ขนาด 768x768 พิกเซล โดยแต่ละไทล์จะนับเป็น 258 โทเค็น
+- ระบบจะแปลงไฟล์วิดีโอและไฟล์เสียงเป็นโทเค็นในอัตราคงที่ต่อไปนี้ วิดีโอที่ 263 โทเค็นต่อวินาที และเสียงที่ 32 โทเค็นต่อวินาที
 
-#### 미디어 해상도
+#### ความละเอียดของสื่อ
 
-[Gemini 3 모델](https://ai.google.dev/gemini-api/docs/models?hl=ko#gemini-3)은
-멀티모달 비전 처리를 세부적으로 제어할 수 있습니다. `media_resolution` 매개변수를 사용하여 `media_resolution` 매개변수는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수** 를 결정합니다.
-해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
+[โมเดล Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=th#gemini-3) มีการควบคุมแบบละเอียดในการประมวลผลการมองเห็นแบบ
+หลายรูปแบบด้วยพารามิเตอร์ `media_resolution` พารามิเตอร์ `media_resolution` จะกำหนด**จำนวนโทเค็นสูงสุดที่จัดสรรต่อรูปภาพอินพุตหรือเฟรมวิดีโอ**
+ความละเอียดที่สูงขึ้นจะช่วยเพิ่มความสามารถของโมเดลในการอ่านข้อความขนาดเล็กหรือระบุรายละเอียดเล็กๆ แต่จะเพิ่มการใช้โทเค็นและเวลาในการตอบสนอง
 
-매개변수 및 토큰 계산에 미치는 영향에 관한 자세한 내용은
-[미디어 해상도](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ko) 가이드를 참고하세요.
+ดูรายละเอียดเพิ่มเติมเกี่ยวกับพารามิเตอร์และวิธีที่พารามิเตอร์นี้อาจส่งผลต่อการคำนวณโทเค็นได้ที่
+คู่มือ[ความละเอียดของสื่อ](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=th)
 
-#### 이미지 파일
+#### ไฟล์ภาพ
 
-텍스트 및 이미지 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트와 이미지의 결합된 토큰 수 (`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 텍스트와 파일에서 별도로 `count_tokens`를 호출할 수도 있습니다.
+หากคุณเรียกใช้ `count_tokens` ด้วยอินพุตที่เป็นข้อความและรูปภาพ ฟังก์ชันนี้จะแสดงผลจำนวนโทเค็นรวมของข้อความและรูปภาพใน *อินพุตเท่านั้น* (`total_tokens`) คุณสามารถเรียกใช้ฟังก์ชันนี้ก่อนเรียกใช้ `generate_content` เพื่อตรวจสอบขนาดของคำขอ นอกจากนี้ คุณยังเรียกใช้ `count_tokens` กับข้อความและไฟล์แยกกันได้ด้วย
 
-또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+อีกตัวเลือกหนึ่งคือการเรียกใช้ `generate_content` แล้วใช้แอตทริบิวต์ `usage_metadata` ในออบเจ็กต์ `response` เพื่อรับข้อมูลต่อไปนี้
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`)
+- จำนวนโทเค็นแยกกันของอินพุต (`prompt_token_count`) เนื้อหาที่แคชไว้ (`cached_content_token_count`) และเอาต์พุต (`candidates_token_count`)
+- จำนวนโทเค็นสำหรับกระบวนการคิด (`thoughts_token_count`)
+- จำนวนโทเค็นทั้งหมดใน *ทั้งอินพุตและเอาต์พุต* (`total_token_count`)
 
-File API에서 업로드된 이미지를 사용하는 예:
+ตัวอย่างที่ใช้รูปภาพที่อัปโหลดจาก File API
 
 ### Python
 
@@ -399,7 +403,7 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-이미지를 인라인 데이터로 제공하는 예:
+ตัวอย่างที่แสดงรูปภาพเป็นข้อมูลแบบอินไลน์
 
 ### Python
 
@@ -496,20 +500,20 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-#### 동영상 또는 오디오 파일
+#### ไฟล์วิดีโอหรือไฟล์เสียง
 
-오디오와 동영상은 각각 다음과 같은 고정된 비율로 토큰으로 변환됩니다.
+ระบบจะแปลงเสียงและวิดีโอแต่ละรายการเป็นโทเค็นในอัตราคงที่ต่อไปนี้
 
-- 동영상: 초당 토큰 263개
-- 오디오: 초당 토큰 32개
+- วิดีโอ: 263 โทเค็นต่อวินาที
+- เสียง: 32 โทเค็นต่อวินาที
 
-텍스트 및 동영상/오디오 입력으로 `count_tokens`를 호출하면 *입력에만* 있는 텍스트와 동영상/오디오 파일의 결합된 토큰 수(`total_tokens`)가 반환됩니다. `generate_content`를 호출하기 전에 이 호출을 실행하여 요청의 크기를 확인할 수 있습니다. 텍스트와 파일에서 별도로 `count_tokens`를 호출할 수도 있습니다.
+หากคุณเรียกใช้ `count_tokens` ด้วยอินพุตที่เป็นข้อความและวิดีโอ/เสียง ฟังก์ชันนี้จะแสดงผลจำนวนโทเค็นรวมของข้อความและไฟล์วิดีโอ/เสียงใน *อินพุตเท่านั้น* (`total_tokens`) คุณสามารถเรียกใช้ฟังก์ชันนี้ก่อนเรียกใช้ `generate_content` เพื่อตรวจสอบขนาดของคำขอ นอกจากนี้ คุณยังเรียกใช้ `count_tokens` กับข้อความและไฟล์แยกกันได้ด้วย
 
-또 다른 방법은 `generate_content`를 호출한 후 `response` 객체에서 `usage_metadata` 속성을 사용하여 다음을 가져오는 것입니다.
+อีกตัวเลือกหนึ่งคือการเรียกใช้ `generate_content` แล้วใช้แอตทริบิวต์ `usage_metadata` ในออบเจ็กต์ `response` เพื่อรับข้อมูลต่อไปนี้
 
-- 입력 (`prompt_token_count`), 캐시된 콘텐츠 (`cached_content_token_count`), 출력(`candidates_token_count`)의 개별 토큰 수
-- 사고 과정의 토큰 수 (`thoughts_token_count`)
-- *입력과 출력 모두* 의 총 토큰 수(`total_token_count`).
+- จำนวนโทเค็นแยกกันของอินพุต (`prompt_token_count`) เนื้อหาที่แคชไว้ (`cached_content_token_count`) และเอาต์พุต (`candidates_token_count`)
+- จำนวนโทเค็นสำหรับกระบวนการคิด (`thoughts_token_count`)
+- จำนวนโทเค็นทั้งหมดใน *ทั้งอินพุตและเอาต์พุต* (`total_token_count`)
 
 ### Python
 
@@ -634,9 +638,9 @@ if err != nil {
 fmt.Println(string(usageMetadata))
 ```
 
-### 사고 토큰 집계
+### นับโทเค็นการคิด
 
-사고를 사용 설정하면 응답 가격은 출력 토큰과 사고 토큰의 합계입니다. `thoughtsTokenCount` 필드 (또는 SDK에 상응하는 필드)에서 생성된 총 사고 토큰 수를 가져올 수 있습니다.
+เมื่อเปิดใช้การคิด ราคาการตอบกลับจะเป็นผลรวมของโทเค็นเอาต์พุตและโทเค็นการคิด คุณสามารถดึงข้อมูลจำนวนโทเค็นการคิดทั้งหมดที่สร้างขึ้นจากช่อง `thoughtsTokenCount` (หรือเทียบเท่าใน SDK)
 
 ### Python
 
@@ -662,15 +666,15 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-사고 모델은 최종 응답의 품질을 개선하기 위해 전체 사고를 생성한 후 사고 과정에 관한 통계를 제공하기 위해 [요약](https://ai.google.dev/gemini-api/docs/thinking?hl=ko#summaries)을 출력합니다. 따라서 API는 요약만 출력하더라도 모델이 요약을 만들기 위해 생성하는 전체 사고 토큰을 기준으로 가격을 책정합니다.
+โมเดลการคิดจะสร้างความคิดทั้งหมดเพื่อปรับปรุงคุณภาพของการตอบกลับสุดท้าย แล้วแสดงผล[ข้อมูลสรุป](https://ai.google.dev/gemini-api/docs/thinking?hl=th#summaries)เพื่อให้ข้อมูลเชิงลึกเกี่ยวกับกระบวนการคิด ดังนั้น API จะกำหนดราคาตามโทเค็นความคิดทั้งหมดที่โมเดลสร้างขึ้นเพื่อสร้างข้อมูลสรุป แม้ว่า API จะแสดงผลข้อมูลสรุปเท่านั้น
 
-[Gemini 사고](https://ai.google.dev/gemini-api/docs/thinking?hl=ko) 가이드에서 사고를 구성하는 방법을 자세히 알아보세요.
+ดูข้อมูลเพิ่มเติมเกี่ยวกับวิธีกำหนดค่าการคิดได้ในคู่มือการคิดของ [Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=th)
 
-## 컨텍스트 윈도우
+## หน้าต่างบริบท
 
-Gemini API를 통해 사용할 수 있는 모델에는 토큰으로 측정되는 컨텍스트 윈도우가 있습니다. 컨텍스트 윈도우는 제공할 수 있는 입력의 양과 모델이 생성할 수 있는 출력의 양을 정의합니다.
-컨텍스트 윈도우의 크기를 [`models.get` 엔드포인트](https://ai.google.dev/api/rest/v1/models/get?hl=ko)
-를 호출하거나 [모델 문서](https://ai.google.dev/gemini-api/docs/models?hl=ko)에서 확인할 수 있습니다.
+โมเดลที่พร้อมใช้งานผ่าน Gemini API มีหน้าต่างบริบทที่วัดเป็นโทเค็น หน้าต่างบริบทจะกำหนดจำนวนอินพุตที่คุณระบุได้และจำนวนเอาต์พุตที่โมเดลสร้างได้ คุณสามารถกำหนดขนาดของ
+หน้าต่างบริบทได้โดยการเรียกใช้ปลายทาง [`models.get`](https://ai.google.dev/api/rest/v1/models/get?hl=th)
+หรือดูใน[เอกสารประกอบของโมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)
 
 ### Python
 
@@ -715,12 +719,12 @@ fmt.Println("input token limit:", modelInfo.InputTokenLimit)
 fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 ```
 
-의견 보내기
+ส่งความคิดเห็น
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-최종 업데이트: 2026-06-24(UTC)
+อัปเดตล่าสุด 2026-06-24 UTC
 
-의견을 전달하고 싶나요?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-24(UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-24 UTC"],[],[]]

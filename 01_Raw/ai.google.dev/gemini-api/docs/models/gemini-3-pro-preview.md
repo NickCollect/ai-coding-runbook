@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-preview?hl=ko
-fetched_at: 2026-07-06T05:13:17.140566+00:00
+fetched_at: 2026-07-20T04:41:49.244373+00:00
 title: "Gemini 3 Pro \ud504\ub9ac\ubdf0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

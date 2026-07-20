@@ -1,39 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=ko
-fetched_at: 2026-07-06T05:21:21.795733+00:00
-title: "\ubb38\uc11c \uc774\ud574 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=tr
+fetched_at: 2026-07-20T04:38:00.475350+00:00
+title: "Belge anlama \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-의견 보내기
+Geri bildirim gönderin
 
-# 문서 이해
+# Belge anlama
 
-Gemini 모델은 기본 비전을 사용하여 전체 문서 컨텍스트를 이해함으로써 PDF 형식의 문서를 처리할 수 있습니다. 이는 단순한 텍스트 추출을 넘어 Gemini가 다음 작업을 할 수 있도록 합니다.
+Gemini modelleri, doküman bağlamlarının tamamını anlamak için yerel görsel işleme özelliğini kullanarak PDF biçimindeki dokümanları işleyebilir. Bu, yalnızca metin ayıklamanın ötesine geçerek Gemini'ın aşağıdaki işlemleri yapmasına olanak tanır:
 
-- 최대 1,000페이지의 긴 문서에서도 텍스트, 이미지, 다이어그램, 차트, 표를 비롯한 콘텐츠를 분석하고 해석합니다.
-- 정보를 [구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko) 형식으로 추출합니다.
-- 문서의 시각적 요소와 텍스트 요소를 모두 기반으로 질문에 요약하고 답변합니다.
-- 다운스트림 애플리케이션에서 사용할 수 있도록 레이아웃과 서식을 유지하면서 문서 콘텐츠를 트랜스크립션합니다 (예: HTML로).
+- Metin, resim, diyagram, grafik ve tablo gibi içerikleri 1.000 sayfaya kadar olan uzun dokümanlarda bile analiz edip yorumlayın.
+- Bilgileri [yapılandırılmış çıkış](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr) biçimlerinde ayıklayın.
+- Bir belgedeki hem görsel hem de metin öğelerini temel alarak özetleme ve soru yanıtlama
+- Aşağı akış uygulamalarında kullanılmak üzere düzenleri ve biçimlendirmeyi koruyarak doküman içeriğini (ör. HTML'ye) transkribe edin.
 
-동일한 방식으로 PDF가 아닌 문서를 전달할 수도 있지만 Gemini는 이를 일반 텍스트로 인식하므로 차트나 서식과 같은 컨텍스트가 삭제됩니다.
+PDF olmayan dokümanları da aynı şekilde iletebilirsiniz ancak Gemini bunları normal metin olarak görür. Bu durumda grafikler veya biçimlendirme gibi bağlamlar ortadan kalkar.
 
-## PDF 데이터 인라인 전달
+## PDF verilerini satır içi olarak iletme
 
-요청에서 PDF 데이터를 인라인으로 `generateContent`에 전달할 수 있습니다. 이는 후속 요청에서 파일을 참조할 필요가 없는 작은 문서 또는 임시 처리에 가장 적합합니다. 요청 지연 시간을 개선하고 대역폭 사용량을 줄이기 위해 멀티턴 상호작용에서 참조해야 하는 대용량 문서에는 [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko#large-pdfs)
-를 사용하는 것이 좋습니다.
+PDF verilerini `generateContent` isteğinde satır içi olarak iletebilirsiniz. Bu yöntem, daha küçük belgeler veya dosyaya sonraki isteklerde başvurmanız gerekmeyen geçici işlemler için en uygun yöntemdir. İstek gecikmesini iyileştirmek ve bant genişliği kullanımını azaltmak için çok aşamalı etkileşimlerde başvurmanız gereken daha büyük belgeler için [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr#large-pdfs)'yi kullanmanızı öneririz.
 
-다음 예에서는 URL에서 PDF를 가져와 처리할 바이트로 변환하는 방법을 보여줍니다.
+Aşağıdaki örnekte, bir URL'den PDF'nin nasıl getirileceği ve işlenmek üzere baytlara nasıl dönüştürüleceği gösterilmektedir:
 
 ### Python
 
@@ -191,7 +190,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-처리를 위해 로컬 파일에서 PDF를 읽을 수도 있습니다.
+İşleme için yerel bir dosyadan PDF de okuyabilirsiniz:
 
 ### Python
 
@@ -292,13 +291,13 @@ func main() {
 }
 ```
 
-## Files API를 사용하여 PDF 업로드
+## Files API'yi kullanarak PDF yükleme
 
-대용량 파일의 경우 또는 여러 요청에서 문서를 재사용하려는 경우 Files API를 사용하는 것이 좋습니다. 이렇게 하면 파일 업로드를 모델 요청과 분리하여 요청 지연 시간이 개선되고 대역폭 사용량이 줄어듭니다.
+Daha büyük dosyalar için veya bir dokümanı birden fazla istekte yeniden kullanmak istediğinizde Files API'yi kullanmanızı öneririz. Bu sayede, dosya yükleme işlemi model isteklerinden ayrılır ve istek gecikmesi iyileşirken bant genişliği kullanımı azalır.
 
-### URL의 대용량 PDF
+### URL'lerden alınan büyük PDF'ler
 
-File API를 사용하여 URL에서 대용량 PDF 파일을 업로드하고 처리하는 작업을 간소화합니다.
+URL'lerden büyük PDF dosyalarını yükleme ve işleme sürecini basitleştirmek için File API'yi kullanın:
 
 ### Python
 
@@ -506,7 +505,7 @@ jq ".candidates[].content.parts[].text" response.json
 rm "${DISPLAY_NAME}.pdf"
 ```
 
-### 로컬에 저장된 대용량 PDF
+### Yerel olarak depolanan büyük PDF'ler
 
 ### Python
 
@@ -678,8 +677,8 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-`[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ko)`을 호출하여 API가 업로드된 파일을 성공적으로 저장했는지 확인하고
-메타데이터를 가져올 수 있습니다. `name`(및 확장된 `uri`)만 고유합니다.
+[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=tr) işlevini çağırarak API'nin yüklenen dosyayı başarıyla sakladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz. Yalnızca `name`
+(ve dolayısıyla `uri`) benzersizdir.
 
 ### Python
 
@@ -711,9 +710,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## 여러 PDF 전달
+## Birden fazla PDF'yi iletme
 
-Gemini API는 문서와 텍스트 프롬프트의 결합된 크기가 모델의 컨텍스트 윈도우 내에 있는 한 단일 요청으로 여러 PDF 문서 (최대 1, 000페이지)를 처리할 수 있습니다.
+Gemini API, belgelerin ve metin isteminin toplam boyutu modelin bağlam penceresi içinde kaldığı sürece tek bir istekte birden fazla PDF belgesini (1.000 sayfaya kadar) işleyebilir.
 
 ### Python
 
@@ -965,53 +964,51 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 기술 세부정보
+## Teknik ayrıntılar
 
-Gemini는 최대 50MB 또는 1,000페이지의 PDF 파일을 지원합니다. 이 한도는 인라인 데이터와 Files API 업로드 모두에 적용됩니다. 각 문서 페이지는 258개의 토큰과 같습니다.
+Gemini, 50 MB veya 1.000 sayfaya kadar olan PDF dosyalarını destekler. Bu sınır hem satır içi veriler hem de Files API yüklemeleri için geçerlidir. Her belge sayfası 258 jetona karşılık gelir.
 
-[모델의 컨텍스트 창 외에 문서의 픽셀 수에 대한 구체적인 제한은 없지만, 큰 페이지는 원래 가로세로 비율을 유지하면서 최대 해상도인 3072 x 3072로 축소되고 작은 페이지는 768 x 768픽셀로 확대됩니다.](https://ai.google.dev/gemini-api/docs/long-context?hl=ko) 대역폭 외에 크기가 작은 페이지의 비용 절감이나 해상도가 높은 페이지의 성능 개선은 없습니다.
+Modelin [bağlam penceresi](https://ai.google.dev/gemini-api/docs/long-context?hl=tr) dışında bir dokümandaki piksel sayısıyla ilgili belirli bir sınır olmasa da daha büyük sayfalar, orijinal en boy oranları korunarak maksimum 3072 x 3072 çözünürlüğe ölçeklendirilirken daha küçük sayfalar 768 x 768 piksele ölçeklendirilir. Daha küçük boyutlardaki sayfalar için bant genişliği dışında maliyet düşüşü veya daha yüksek çözünürlükteki sayfalar için performans artışı olmaz.
 
-### Gemini 3 모델
+### Gemini 3 modelleri
 
-Gemini 3는 `media_resolution` 파라미터를 통해 멀티모달 비전 처리에 대한 세밀한 제어 기능을 제공합니다. 이제 개별 미디어 파트별로 해상도를 낮음, 중간 또는 높음으로 설정할 수 있습니다. 이 추가로 PDF 문서 처리가 업데이트되었습니다.
+Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sunar. Artık çözünürlüğü her bir medya parçası için ayrı ayrı düşük, orta veya yüksek olarak ayarlayabilirsiniz. Bu eklemeyle birlikte PDF belgelerinin işlenmesi güncellendi:
 
-1. **기본 텍스트 포함:** PDF에 기본적으로 삽입된 텍스트가 추출되어 모델에 제공됩니다.
-2. **결제 및 토큰 보고:**
-   - PDF에서 추출된 **기본 텍스트** 에서 발생한 토큰에 대해서는 **요금이 청구되지 않습니다**.
-   - API 응답의 `usage_metadata` 섹션에서 PDF 페이지 (이미지) 처리로 생성된 토큰은 이제 일부 이전 버전과 달리 별도의 `DOCUMENT` 모드가 아닌 `IMAGE` 모드에서 집계됩니다.
+1. **Doğal metin ekleme:** PDF'ye doğal olarak yerleştirilmiş metin çıkarılır ve modele sağlanır.
+2. **Faturalandırma ve jeton raporlama:**
+   - PDF'lerdeki çıkarılan **yerel metinden** kaynaklanan jetonlar için **ücretlendirilmezsiniz**.
+   - API yanıtının `usage_metadata` bölümünde, PDF sayfalarının (resim olarak) işlenmesiyle oluşturulan jetonlar artık `IMAGE` biçimi altında sayılıyor. Bazı önceki sürümlerde olduğu gibi ayrı bir `DOCUMENT` biçimi altında sayılmıyor.
 
-미디어 해상도 파라미터에 관한 자세한 내용은
-[미디어 해상도](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ko) 가이드를 참고하세요.
+Medya çözünürlüğü parametresi hakkında daha fazla bilgi için [Medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr) kılavuzuna bakın.
 
-### 문서 유형
+### Belge türleri
 
-기술적으로는 TXT, Markdown, HTML, XML 등과 같은 문서 이해를 위한 다른 MIME 유형을 전달할 수 있습니다. 하지만 문서 비전은 ***PDF만 의미 있게 이해합니다***. 다른 유형은 순수 텍스트로 추출되며 모델은 이러한 파일의 렌더링에서 보이는 내용을 해석할 수 없습니다. 차트, 다이어그램, HTML 태그, Markdown 서식 등과 같은 파일 유형 관련 세부정보는 손실됩니다.
+Teknik olarak, doküman anlama için TXT, Markdown, HTML, XML gibi diğer MIME türlerini iletebilirsiniz. Ancak dokümanla ilgili görsel algılama ***yalnızca PDF'leri anlamlı bir şekilde anlar***. Diğer türler düz metin olarak ayıklanır ve model, bu dosyaların oluşturulmasında gördüklerimizi yorumlayamaz. Grafikler, diyagramlar, HTML etiketleri, Markdown biçimlendirmesi vb. gibi dosya türüne özgü tüm özellikler kaybolur.
 
-다른 파일 입력 방법에 관한 자세한 내용은
-[파일 입력 방법](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ko) 가이드를 참고하세요.
+Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
 
-### 권장사항
+### En iyi uygulamalar
 
-최상의 결과를 얻는 방법
+En iyi sonuçlar için:
 
-- 업로드하기 전에 페이지를 올바른 방향으로 회전합니다.
-- 흐릿한 페이지는 사용하지 마세요.
-- 단일 페이지를 사용하는 경우 페이지 뒤에 텍스트 프롬프트를 배치합니다.
+- Yüklemeden önce sayfaları doğru yöne döndürün.
+- Bulanık sayfalardan kaçının.
+- Tek sayfa kullanıyorsanız metin istemini sayfanın sonuna yerleştirin.
 
-## 다음 단계
+## Sırada ne var?
 
-자세한 내용은 다음 리소스를 참고하세요.
+Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
 
-- [파일 프롬프트 전략](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide): Gemini API는 멀티모달 프롬프트 사용이라고도 하는 텍스트, 이미지, 오디오, 동영상 데이터로 프롬프트를 지원합니다.
-- [시스템 안내](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko#system-instructions):
-  시스템 안내를 사용하면 특정 요구사항 및 사용 사례에 따라 모델의 동작을 조정할 수 있습니다.
+- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istemi destekler.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
+  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
 
-의견 보내기
+Geri bildirim gönderin
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-최종 업데이트: 2026-06-24(UTC)
+Son güncelleme tarihi: 2026-06-24 UTC.
 
-의견을 전달하고 싶나요?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-24(UTC)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-24 UTC."],[],[]]

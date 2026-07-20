@@ -1,49 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=th
-fetched_at: 2026-07-06T05:08:47.989637+00:00
+source_url: https://ai.google.dev/gemini-api/docs/batch-api?hl=ko
+fetched_at: 2026-07-20T04:48:58.155365+00:00
 title: "Batch API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-ส่งความคิดเห็น
+의견 보내기
 
 # Batch API
 
-Gemini Batch API ออกแบบมาเพื่อประมวลผลคำขอจำนวนมากแบบไม่พร้อมกันที่[50% ของต้นทุนมาตรฐาน](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
-เวลาในการดำเนินการตามเป้าหมายคือ 24 ชั่วโมง แต่ในกรณีส่วนใหญ่จะเร็วกว่านั้นมาก
+Gemini Batch API는 [표준 비용의 50%](https://ai.google.dev/gemini-api/docs/pricing?hl=ko)로 대량의 요청을 비동기식으로 처리하도록 설계되었습니다.
+목표 처리 시간은 24시간이지만 대부분의 경우 훨씬 빠릅니다.
 
-ใช้ Batch API สำหรับงานขนาดใหญ่ที่ไม่เร่งด่วน เช่น การประมวลผลข้อมูลเบื้องต้นหรือการเรียกใช้การประเมินที่ไม่จำเป็นต้องมีการตอบกลับทันที
+즉각적인 응답이 필요하지 않은 데이터 사전 처리나 평가 실행과 같은 대규모의 긴급하지 않은 작업에는 Batch API를 사용하세요.
 
-## การสร้างงานแบบกลุ่ม
+## 일괄 작업 만들기
 
-คุณส่งคำขอใน Batch API ได้ 2 วิธี ดังนี้
+Batch API에서 요청을 제출하는 방법에는 두 가지가 있습니다.
 
-- **[คำขอแบบอินไลน์](#inline-requests):** รายการออบเจ็กต์
-  [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest)
-  ที่รวมอยู่ในคำขอสร้างกลุ่มโดยตรง เหมาะสำหรับ
-  การประมวลผลแบบกลุ่มขนาดเล็กที่ทำให้ขนาดคำขอทั้งหมดไม่เกิน 20 MB **เอาต์พุต**
-  ที่โมเดลแสดงผลคือรายการออบเจ็กต์ `inlineResponse`
-- **[ไฟล์อินพุต](#input-file):** ไฟล์ [JSON Lines (JSONL)](https://jsonlines.org/)
-  ซึ่งแต่ละบรรทัดมีออบเจ็กต์ [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ที่สมบูรณ์
-  เราขอแนะนำให้ใช้วิธีนี้สำหรับคำขอที่มีขนาดใหญ่ **เอาต์พุต**
-  ที่ได้จากโมเดลคือไฟล์ JSONL ซึ่งแต่ละบรรทัดจะเป็น`GenerateContentResponse`หรือออบเจ็กต์สถานะ
+- **[인라인 요청](#inline-requests):** 일괄 생성 요청에 직접 포함된 [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ko#GenerateContentRequest) 객체 목록입니다. 이는 총 요청 크기가 20MB 미만인 작은 배치에 적합합니다. 모델에서 반환된 **출력**은 `inlineResponse` 객체 목록입니다.
+- **[입력 파일](#input-file):** 각 줄에 완전한 [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ko#GenerateContentRequest) 객체가 포함된 [JSON Lines (JSONL)](https://jsonlines.org/) 파일입니다.
+  이 방법은 더 큰 요청에 권장됩니다. 모델에서 반환된 **출력**은 각 줄이 `GenerateContentResponse` 또는 상태 객체인 JSONL 파일입니다.
 
-### คำขอในหน้า
+### 인라인 요청
 
-สำหรับคำขอจำนวนเล็กน้อย คุณสามารถฝังออบเจ็กต์
-[`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) โดยตรง
-ภายใน [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#request-body) ตัวอย่างต่อไปนี้เรียกใช้เมธอด
-[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-ด้วยคำขอแบบอินไลน์
+요청 수가 적은 경우 [`BatchGenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ko#request-body) 내에 [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ko#GenerateContentRequest) 객체를 직접 삽입할 수 있습니다. 다음 예에서는 인라인 요청을 사용하여 [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=ko#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) 메서드를 호출합니다.
 
 ### Python
 
@@ -80,7 +70,7 @@ inline_batch_job = client.batches.create(
 print(f"Created batch job: {inline_batch_job.name}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {GoogleGenAI} from '@google/genai';
@@ -145,28 +135,22 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ba
 }'
 ```
 
-### ไฟล์อินพุต
+### 입력 파일
 
-สำหรับชุดคำขอขนาดใหญ่ ให้เตรียมไฟล์ JSON Lines (JSONL) แต่ละบรรทัดในไฟล์นี้ต้องเป็นออบเจ็กต์ JSON ที่มีคีย์ที่ผู้ใช้กำหนดและออบเจ็กต์คำขอ โดยที่คำขอเป็นออบเจ็กต์ [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=th#GenerateContentRequest) ที่ถูกต้อง ระบบจะใช้คีย์ที่ผู้ใช้กำหนดในการตอบกลับเพื่อระบุว่าเอาต์พุตใดเป็นผลลัพธ์
-ของคำขอใด เช่น คำขอที่มีคีย์กำหนดเป็น `request-1`
-จะมีคำอธิบายประกอบการตอบกลับด้วยชื่อคีย์เดียวกัน
+요청이 많은 경우 JSON Lines (JSONL) 파일을 준비합니다. 이 파일의 각 줄은 사용자 정의 키와 요청 객체를 포함하는 JSON 객체여야 합니다. 여기서 요청은 유효한 [`GenerateContentRequest`](https://ai.google.dev/api/batch-mode?hl=ko#GenerateContentRequest) 객체입니다. 사용자 정의 키는 응답에서 어떤 출력이 어떤 요청의 결과인지 나타내는 데 사용됩니다. 예를 들어 키가 `request-1`로 정의된 요청의 응답에는 동일한 키 이름이 주석으로 추가됩니다.
 
-ระบบจะอัปโหลดไฟล์นี้โดยใช้ [File API](https://ai.google.dev/gemini-api/docs/files?hl=th) ขนาดไฟล์สูงสุด
-ที่อนุญาตสำหรับไฟล์อินพุตคือ 2 GB
+이 파일은 [파일 API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 사용하여 업로드됩니다. 입력 파일의 최대 허용 파일 크기는 2GB입니다.
 
-ตัวอย่างไฟล์ JSONL มีดังนี้ คุณสามารถบันทึกไว้ในไฟล์ชื่อ
-`my-batch-requests.json` ได้โดยทำดังนี้
+다음은 JSONL 파일의 예입니다. `my-batch-requests.json`이라는 파일에 저장할 수 있습니다.
 
 ```
 {"key": "request-1", "request": {"contents": [{"parts": [{"text": "Describe the process of photosynthesis."}]}], "generation_config": {"temperature": 0.7}}}
 {"key": "request-2", "request": {"contents": [{"parts": [{"text": "What are the main ingredients in a Margherita pizza?"}]}]}}
 ```
 
-คุณระบุพารามิเตอร์อื่นๆ เช่น คำสั่งของระบบ เครื่องมือ หรือการกำหนดค่าอื่นๆ ใน JSON ของคำขอแต่ละรายการได้เช่นเดียวกับคำขอแบบอินไลน์
+인라인 요청과 마찬가지로 각 요청 JSON에서 시스템 지침, 도구 또는 기타 구성과 같은 다른 매개변수를 지정할 수 있습니다.
 
-คุณอัปโหลดไฟล์นี้ได้โดยใช้ [File API](https://ai.google.dev/gemini-api/docs/files?hl=th) ตามที่แสดงในตัวอย่างต่อไปนี้ หาก
-คุณกำลังทำงานกับอินพุตมัลติโมดัล คุณสามารถอ้างอิงไฟล์อื่นๆ ที่อัปโหลด
-ภายในไฟล์ JSONL ได้
+다음 예와 같이 [File API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 사용하여 이 파일을 업로드할 수 있습니다. 멀티모달 입력을 사용하는 경우 JSONL 파일 내에서 업로드된 다른 파일을 참조할 수 있습니다.
 
 ### Python
 
@@ -195,7 +179,7 @@ uploaded_file = client.files.upload(
 print(f"Uploaded file: {uploaded_file.name}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {GoogleGenAI} from '@google/genai';
@@ -287,9 +271,7 @@ curl "${upload_url}" \
 file_uri=$(jq ".file.uri" file_info.json)
 ```
 
-ตัวอย่างต่อไปนี้เรียกใช้เมธอด
-[`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-โดยใช้ไฟล์อินพุตที่อัปโหลดโดยใช้ File API
+다음 예시에서는 File API를 사용하여 업로드된 입력 파일로 [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=ko#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) 메서드를 호출합니다.
 
 ### Python
 
@@ -309,7 +291,7 @@ file_batch_job = client.batches.create(
 print(f"Created batch job: {file_batch_job.name}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 // Assumes `uploadedFile` is the file object from the previous step
@@ -343,21 +325,18 @@ curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:ba
 }"
 ```
 
-เมื่อสร้างงานแบบกลุ่ม คุณจะได้รับชื่องานที่ส่งคืน ใช้ชื่อนี้
-เพื่อ[ตรวจสอบ](#batch-job-status)สถานะของงานและ[ดึงข้อมูลผลลัพธ์](#retrieve-batch-results)เมื่องานเสร็จสมบูรณ์
+일괄 작업을 만들면 작업 이름이 반환됩니다. 작업이 완료되면 작업 상태를 [모니터링](#batch-job-status)하고 [결과를 검색](#retrieve-batch-results)하는 데 이 이름을 사용합니다.
 
-ต่อไปนี้เป็นตัวอย่างเอาต์พุตที่มีชื่องาน
+다음은 작업 이름을 포함하는 출력의 예입니다.
 
 ```
 Created batch job from file: batches/123456789
 ```
 
-### รองรับการฝังแบบกลุ่ม
+### 일괄 임베딩 지원
 
-คุณสามารถใช้ Batch API เพื่อโต้ตอบกับ[โมเดลการฝัง](https://ai.google.dev/gemini-api/docs/embeddings?hl=th)เพื่อเพิ่มปริมาณงานได้
-หากต้องการสร้างงานแบบกลุ่มของ Embedding ด้วย[คำขอแบบอินไลน์](#inline-requests)
-หรือ[ไฟล์อินพุต](#input-file) ให้ใช้ `batches.create_embeddings` API และ
-ระบุโมเดล Embedding
+Batch API를 사용하여 처리량을 높이기 위해 [Embeddings 모델](https://ai.google.dev/gemini-api/docs/embeddings?hl=ko)과 상호작용할 수 있습니다.
+[인라인 요청](#inline-requests) 또는 [입력 파일](#input-file)을 사용하여 임베딩 일괄 작업을 만들려면 `batches.create_embeddings` API를 사용하고 임베딩 모델을 지정합니다.
 
 ### Python
 
@@ -382,7 +361,7 @@ batch_job = client.batches.create_embeddings(
 )
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 // Creating an embeddings batch job with an input file request:
@@ -405,15 +384,11 @@ batchJob = await client.batches.createEmbeddings({
 console.log(`Created batch job: ${batchJob.name}`);
 ```
 
-อ่านส่วนการฝังใน[คู่มือการใช้งาน Batch API](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)
-เพื่อดูตัวอย่างเพิ่มเติม
+자세한 예는 [Batch API 쿡북](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb)의 임베딩 섹션을 참고하세요.
 
-### การกำหนดค่าคำขอ
+### 요청 구성
 
-คุณสามารถรวมการกำหนดค่าคำขอใดก็ได้ที่จะใช้ในคำขอมาตรฐานที่ไม่ใช่แบบกลุ่ม
-เช่น คุณระบุอุณหภูมิ คำสั่งของระบบ หรือ
-ส่งผ่านรูปแบบอื่นๆ ได้ ตัวอย่างต่อไปนี้แสดงคำขอแบบอินไลน์
-ที่มีคำสั่งของระบบสำหรับคำขอรายการใดรายการหนึ่ง
+표준 비일괄 요청에서 사용할 요청 구성을 포함할 수 있습니다. 예를 들어 온도, 시스템 안내를 지정하거나 다른 모달리티를 전달할 수 있습니다. 다음 예시는 요청 중 하나의 시스템 요청 사항이 포함된 인라인 요청의 예시를 보여줍니다.
 
 ### Python
 
@@ -431,7 +406,7 @@ inline_requests_list = [
 ]
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 inlineRequestsList = [
@@ -441,8 +416,7 @@ inlineRequestsList = [
 ]
 ```
 
-ในทำนองเดียวกัน คุณสามารถระบุเครื่องมือที่จะใช้สำหรับคำขอได้ ตัวอย่างต่อไปนี้
-แสดงคำขอที่เปิดใช้[เครื่องมือ Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)
+마찬가지로 요청에 사용할 도구를 지정할 수 있습니다. 다음 예시는 [Google 검색 도구](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)를 사용 설정하는 요청을 보여줍니다.
 
 ### Python
 
@@ -453,7 +427,7 @@ inlined_requests = [
  'config':{'tools': [{'google_search': {}}]}}]
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 inlineRequestsList = [
@@ -463,8 +437,8 @@ inlineRequestsList = [
 ]
 ```
 
-คุณยังระบุ[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)ได้ด้วย
-ตัวอย่างต่อไปนี้แสดงวิธีระบุสำหรับคำขอแบบกลุ่ม
+[구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)을 지정할 수도 있습니다.
+다음 예시에서는 일괄 요청을 지정하는 방법을 보여줍니다.
 
 ### Python
 
@@ -534,7 +508,7 @@ for i, inline_response in enumerate(batch_job_inline.dest.inlined_responses, sta
         print(inline_response.response.text)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {GoogleGenAI, Type} from '@google/genai';
@@ -615,7 +589,7 @@ const inlinedBatchJob = await ai.batches.create({
 });
 ```
 
-ตัวอย่างเอาต์พุตของงานนี้มีดังนี้
+다음은 이 작업의 출력 예시를 보여줍니다.
 
 ```
 --- Response 1 ---
@@ -711,22 +685,20 @@ const inlinedBatchJob = await ai.batches.create({
 ]
 ```
 
-## การตรวจสอบสถานะของงาน
+## 작업 상태 모니터링
 
-ใช้ชื่อการดำเนินการที่ได้รับเมื่อสร้างงานแบบกลุ่มเพื่อสำรวจสถานะ
-ฟิลด์สถานะของงานแบบกลุ่มจะระบุสถานะปัจจุบันของงาน งานแบบกลุ่ม
-อาจอยู่ในสถานะใดสถานะหนึ่งต่อไปนี้
+일괄 작업을 만들 때 획득한 작업 이름을 사용하여 상태를 폴링합니다.
+일괄 작업의 상태 필드에 현재 상태가 표시됩니다. 일괄 작업은 다음 상태 중 하나일 수 있습니다.
 
-- `JOB_STATE_PENDING`: สร้างงานแล้วและกำลังรอให้บริการประมวลผล
-- `JOB_STATE_RUNNING`: งานกำลังดำเนินการ
-- `JOB_STATE_SUCCEEDED`: งานเสร็จสมบูรณ์แล้ว ตอนนี้คุณสามารถดึงข้อมูลผลลัพธ์ได้แล้ว
-- `JOB_STATE_FAILED`: งานล้มเหลว ดูรายละเอียดข้อผิดพลาดสำหรับข้อมูลเพิ่มเติม
-- `JOB_STATE_CANCELLED`: ผู้ใช้ยกเลิกงาน
-- `JOB_STATE_EXPIRED`: งานหมดอายุแล้วเนื่องจากทำงานหรือรอนานกว่า 48 ชั่วโมง
-  งานนี้จะไม่มีผลลัพธ์ให้เรียกข้อมูล
-  คุณลองส่งงานอีกครั้งหรือแบ่งคำขอออกเป็นชุดเล็กๆ ได้
+- `JOB_STATE_PENDING`: 작업이 생성되었으며 서비스에서 처리되기를 기다리고 있습니다.
+- `JOB_STATE_RUNNING`: 작업이 진행 중입니다.
+- `JOB_STATE_SUCCEEDED`: 작업이 성공적으로 완료되었습니다. 이제 결과를 가져올 수 있습니다.
+- `JOB_STATE_FAILED`: 작업이 실패했습니다. 자세한 내용은 오류 세부정보를 확인하세요.
+- `JOB_STATE_CANCELLED`: 사용자가 작업을 취소했습니다.
+- `JOB_STATE_EXPIRED`: 48시간 넘게 실행 중이거나 대기 중이어서 작업이 만료되었습니다. 작업에 검색할 결과가 없습니다.
+  작업을 다시 제출하거나 요청을 더 작은 배치로 분할해 보세요.
 
-คุณสามารถสำรวจสถานะของงานเป็นระยะๆ เพื่อตรวจสอบว่าเสร็จสมบูรณ์แล้วหรือไม่
+주기적으로 작업 상태를 폴링하여 완료 여부를 확인할 수 있습니다.
 
 ### Python
 
@@ -760,7 +732,7 @@ if batch_job.state.name == 'JOB_STATE_FAILED':
     print(f"Error: {batch_job.error}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 // Use the name of the job you want to check
@@ -792,13 +764,10 @@ try {
 }
 ```
 
-### การสำรวจความคิดเห็นและเว็บฮุค
+### 폴링 및 웹훅
 
-**เบื่อการสำรวจไหม** ตอนนี้ Gemini รองรับ[Webhook](https://ai.google.dev/gemini-api/docs/webhooks?hl=th) สำหรับการประมวลผลการเติมข้อความแบบไม่พร้อมกันแล้ว
-แทนที่จะเรียกใช้ `GET / operations` อย่างต่อเนื่อง ให้สมัครใช้บริการ
-`batch.succeeded` โดยตรงเพื่ออนุญาตให้ Gemini API พุชการแจ้งเตือนแบบเรียลไทม์
-ไปยังเซิร์ฟเวอร์ของคุณเมื่อการดำเนินการแบบไม่พร้อมกันหรือการดำเนินการที่ใช้เวลานาน
-เสร็จสมบูรณ์
+**폴링이 지겨우신가요?** 이제 Gemini에서 완료를 비동기적으로 처리하기 위한 [웹훅](https://ai.google.dev/gemini-api/docs/webhooks?hl=ko)을 지원합니다.
+`GET / operations`를 계속 호출하는 대신 `batch.succeeded`를 직접 구독하여 비동기 또는 장기 실행 작업이 완료될 때 Gemini API가 서버에 실시간 알림을 푸시하도록 합니다.
 
 ### Python
 
@@ -816,7 +785,7 @@ webhook = client.webhooks.create(
 print(f"Created webhook: {webhook.name}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -850,11 +819,10 @@ curl -X POST \
   }'
 ```
 
-## กำลังดึงข้อมูลผลลัพธ์
+## 결과 가져오기
 
-เมื่อสถานะของงานระบุว่างานแบบกลุ่มสำเร็จแล้ว ผลลัพธ์จะพร้อมใช้งานในฟิลด์ `response`
-โดยค่าเริ่มต้น ระบบจะจัดเก็บผลลัพธ์ของงานแบบกลุ่มและพร้อมให้ดาวน์โหลดเป็นเวลา 6 สัปดาห์
-ก่อนที่จะลบออกอย่างถาวร
+작업 상태가 일괄 작업이 성공했음을 나타내면 `response` 필드에서 결과를 확인할 수 있습니다.
+기본적으로 일괄 작업 결과는 영구 삭제되기 전 6주 동안 저장되며 다운로드할 수 있습니다.
 
 ### Python
 
@@ -905,7 +873,7 @@ else:
         print(f"Error: {batch_job.error}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 // Use the name of the job you want to check
@@ -1007,9 +975,9 @@ elif [[ $batch_state == "JOB_STATE_EXPIRED" ]]; then
 fi
 ```
 
-## การแสดงงานแบบกลุ่ม
+## 일괄 작업 나열
 
-คุณแสดงรายการงานแบบกลุ่มล่าสุดได้
+최근 일괄 작업을 나열할 수 있습니다.
 
 ### Python
 
@@ -1023,7 +991,7 @@ for batch_job in batch_jobs:
     print(batch_job)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 const batchJobs = await ai.batches.list();
@@ -1043,9 +1011,9 @@ curl https://generativelanguage.googleapis.com/v1beta/batches \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## การยกเลิกงานแบบกลุ่ม
+## 일괄 작업 취소
 
-คุณยกเลิกงานแบบกลุ่มที่กำลังดำเนินการได้โดยใช้ชื่อของงาน เมื่อมีการยกเลิกงาน ระบบจะหยุดประมวลผลคำขอใหม่
+이름을 사용하여 진행 중인 일괄 작업을 취소할 수 있습니다. 작업이 취소되면 새 요청 처리가 중지됩니다.
 
 ### Python
 
@@ -1053,7 +1021,7 @@ curl https://generativelanguage.googleapis.com/v1beta/batches \
 client.batches.cancel(name=batch_job_to_cancel.name)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 await ai.batches.cancel({name: batchJobToCancel.name});
@@ -1074,10 +1042,9 @@ curl https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME \
 -H "Content-Type:application/json" 2> /dev/null | jq -r '.metadata.state'
 ```
 
-## การลบงานแบบกลุ่ม
+## 일괄 작업 삭제
 
-คุณลบงานแบบกลุ่มที่มีอยู่ได้โดยใช้ชื่อของงาน เมื่อมีการลบงาน ระบบจะหยุดประมวลผลคำขอใหม่และนำงานออกจากรายการ
-งานแบบเป็นชุด
+이름을 사용하여 기존 일괄 작업을 삭제할 수 있습니다. 작업이 삭제되면 새 요청 처리가 중지되고 일괄 작업 목록에서 삭제됩니다.
 
 ### Python
 
@@ -1085,7 +1052,7 @@ curl https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME \
 client.batches.delete(name=batch_job_to_delete.name)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 await ai.batches.delete({name: batchJobToDelete.name});
@@ -1101,15 +1068,13 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$BATCH_NAME" \
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## สร้างรูปภาพเป็นชุด
+## 일괄 이미지 생성
 
-หากคุณใช้ [Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=th) และต้องการสร้างรูปภาพจำนวนมาก
-คุณสามารถใช้ Batch API เพื่อรับ[ขีดจำกัดของอัตรา](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th)ที่สูงขึ้น
-เพื่อแลกกับการดำเนินการที่ใช้เวลาไม่เกิน 24 ชั่วโมง
+[Gemini Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)를 사용하고 이미지를 많이 생성해야 하는 경우 최대 24시간의 처리 시간을 감수하는 대신 배치 API를 사용하여 더 높은 [속도 제한](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ko)을 얻을 수 있습니다.
 
-คุณสามารถใช้[คำขอแบบอินไลน์](#inline-requests-images)สำหรับคำขอแบบกลุ่มเล็กๆ (ไม่เกิน 20 MB) หรือ[ไฟล์อินพุต JSONL](#input-file-images) สำหรับคำขอแบบกลุ่มใหญ่ (แนะนำสำหรับการสร้างรูปภาพ)
+소규모 요청 일괄 (20MB 미만)에는 [인라인 요청](#inline-requests-images)을 사용하고 대규모 일괄에는 [JSONL 입력 파일](#input-file-images)을 사용할 수 있습니다 (이미지 생성에 권장).
 
-### คำขอรูปภาพในบรรทัด
+### 이미지 인라인 요청
 
 ### Python
 
@@ -1183,7 +1148,7 @@ elif batch_job.state.name == 'JOB_STATE_FAILED':
     print(f"Error: {batch_job.error}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {GoogleGenAI} from '@google/genai';
@@ -1320,7 +1285,7 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-### ไฟล์อินพุตสำหรับรูปภาพ
+### 이미지 입력 파일
 
 ### Python
 
@@ -1403,7 +1368,7 @@ elif batch_job.state.name == 'JOB_STATE_FAILED':
     print(f"Error: {batch_job.error}")
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {GoogleGenAI} from '@google/genai';
@@ -1552,50 +1517,35 @@ if [[ $batch_state = "JOB_STATE_SUCCEEDED" ]]; then
 fi
 ```
 
-## รายละเอียดทางเทคนิค
+## 기술 세부정보
 
-- **โมเดลที่รองรับ:** Batch API รองรับโมเดล Gemini หลายรุ่น
-  โปรดดู[หน้าโมเดล](https://ai.google.dev/gemini-api/docs/models?hl=th)เพื่อดูการรองรับ Batch API ของแต่ละโมเดล
-  รูปแบบที่รองรับสำหรับ Batch API จะเหมือนกับรูปแบบที่รองรับใน API แบบอินเทอร์แอกทีฟ (หรือไม่ใช่แบบกลุ่ม)
-- **ราคา:** การใช้งาน Batch API มีราคาอยู่ที่ 50% ของต้นทุน API แบบอินเทอร์แอกทีฟมาตรฐาน
-  สำหรับโมเดลที่เทียบเท่า ดูรายละเอียดได้ที่[หน้าการกำหนดราคา](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
-  ดูรายละเอียดเกี่ยวกับขีดจำกัดของอัตราการใช้งานสำหรับฟีเจอร์นี้ได้ที่[หน้าขีดจำกัดของอัตราการใช้งาน](https://ai.google.dev/gemini-api/docs/rate-limits?hl=th#batch-mode)
-- **เป้าหมายระดับการให้บริการ (SLO):** งานแบบกลุ่มได้รับการออกแบบมาให้เสร็จสมบูรณ์
-  ภายในเวลาในการตอบกลับ 24 ชั่วโมง งานจำนวนมากอาจเสร็จสมบูรณ์เร็วกว่านี้มาก
-  โดยขึ้นอยู่กับขนาดและภาระงานปัจจุบันของระบบ
-- **การแคช:** รองรับ[การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th)
-  สำหรับคำขอแบบกลุ่ม นำเนื้อหาที่แคชไว้กลับมาใช้ซ้ำโดยระบุ`cached_content`
-  ชื่อทรัพยากรในการกำหนดค่าของคำขอแต่ละรายการภายในกลุ่ม
-  หากคำขอในกลุ่มของคุณทำให้เกิดการพบแคช คุณจะชำระเงินตาม[อัตราการแคชบริบทมาตรฐาน](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
+- **지원되는 모델:** Batch API는 다양한 Gemini 모델을 지원합니다.
+  각 모델의 배치 API 지원은 [모델 페이지](https://ai.google.dev/gemini-api/docs/models?hl=ko)를 참고하세요. 일괄 API에서 지원되는 모달리티는 대화형 (또는 비일괄) API에서 지원되는 모달리티와 동일합니다.
+- **가격:** 배치 API 사용량은 동급 모델의 표준 대화형 API 비용의 50% 로 책정됩니다. 자세한 내용은 [가격 책정 페이지](https://ai.google.dev/gemini-api/docs/pricing?hl=ko)를 참고하세요. 이 기능의 비율 제한에 대한 자세한 내용은 [비율 제한 페이지](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ko#batch-mode)를 참고하세요.
+- **서비스 수준 목표 (SLO):** 배치 작업은 24시간 이내에 완료되도록 설계되었습니다. 크기와 현재 시스템 부하에 따라 많은 작업이 훨씬 빠르게 완료될 수 있습니다.
+- **캐싱:** 일괄 요청에 [컨텍스트 캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)이 지원됩니다. 일괄 처리 내 개별 요청의 구성에서 `cached_content` 리소스 이름을 지정하여 캐시된 콘텐츠를 재사용합니다.
+  일괄 요청의 요청으로 인해 캐시 적중이 발생하면 [표준 컨텍스트 캐싱 요금](https://ai.google.dev/gemini-api/docs/pricing?hl=ko)이 청구됩니다.
 
-## แนวทางปฏิบัติแนะนำ
+## 권장사항
 
-- **ใช้ไฟล์อินพุตสำหรับคำขอจำนวนมาก:** สำหรับคำขอจำนวนมาก
-  ให้ใช้วิธีการป้อนข้อมูลไฟล์เสมอ
-  เพื่อการจัดการที่ดีขึ้นและหลีกเลี่ยงการเกินขีดจำกัดขนาดคำขอสำหรับ
-  การเรียกใช้ [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=th#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent)
-  เอง โปรดทราบว่าไฟล์อินพุตแต่ละไฟล์ต้องมีขนาดไม่เกิน 2 GB
-- **การจัดการข้อผิดพลาด:** ตรวจสอบ `batchStats` สำหรับ `failedRequestCount` หลังจากที่งานเสร็จสมบูรณ์
-  หากใช้เอาต์พุตไฟล์ ให้แยกวิเคราะห์แต่ละบรรทัดเพื่อตรวจสอบว่าเป็น
-  `GenerateContentResponse` หรือออบเจ็กต์สถานะที่ระบุข้อผิดพลาดสำหรับคำขอ
-  ที่เฉพาะเจาะจงนั้น ดูชุดรหัสข้อผิดพลาดทั้งหมดได้ที่[คำแนะนำในการแก้ปัญหา](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=th#error-codes)
-- **ส่งงานครั้งเดียว:** การสร้างงานแบบกลุ่มไม่ใช่การดำเนินการที่ทำซ้ำได้
-  หากคุณส่งคำขอสร้างเดียวกัน 2 ครั้ง ระบบจะสร้างงานแบบกลุ่ม 2 งานแยกกัน
-- **แบ่งกลุ่มงานขนาดใหญ่มาก:** แม้ว่าเวลาในการดำเนินการตามเป้าหมายคือ 24 ชั่วโมง แต่เวลาในการประมวลผลจริงอาจแตกต่างกันไปตามภาระงานของระบบและขนาดงาน
-  สำหรับงานขนาดใหญ่ ให้ลองแบ่งงานออกเป็นกลุ่มเล็กๆ
-  หากต้องการผลลัพธ์ระดับกลางเร็วขึ้น
+- **대규모 요청에 입력 파일 사용:** 요청이 많은 경우 관리 편의성을 높이고 [`BatchGenerateContent`](https://ai.google.dev/api/batch-mode?hl=ko#google.ai.generativelanguage.v1beta.BatchService.BatchGenerateContent) 호출 자체의 요청 크기 제한을 피하려면 항상 파일 입력 방법을 사용하세요. 입력 파일당 파일 크기 한도는 2GB입니다.
+- **오류 처리:** 작업이 완료된 후 `batchStats`에서 `failedRequestCount`를 확인합니다. 파일 출력을 사용하는 경우 각 줄을 파싱하여 해당 특정 요청의 오류를 나타내는 `GenerateContentResponse`인지 상태 객체인지 확인합니다. 전체 오류 코드 목록은 [문제 해결 가이드](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=ko#error-codes)를 참고하세요.
+- **작업을 한 번 제출:** 일괄 작업 생성은 멱등성이 없습니다.
+  동일한 생성 요청을 두 번 보내면 두 개의 별도 일괄 작업이 생성됩니다.
+- **매우 큰 배치 분할:** 목표 처리 시간은 24시간이지만 실제 처리 시간은 시스템 부하 및 작업 크기에 따라 달라질 수 있습니다.
+  대규모 작업의 경우 중간 결과가 더 빨리 필요한 경우 작은 배치로 나누는 것이 좋습니다.
 
-## ขั้นตอนถัดไป
+## 다음 단계
 
-- ดูตัวอย่างเพิ่มเติมได้ใน[สมุดบันทึก Batch API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=th)
-- เลเยอร์ความเข้ากันได้ของ OpenAI รองรับ Batch API อ่านตัวอย่างในหน้า[ความเข้ากันได้กับ OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th#batch)
+- 자세한 예시는 [Batch API 노트북](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=ko)을 참고하세요.
+- OpenAI 호환성 레이어는 배치 API를 지원합니다. [OpenAI 호환성](https://ai.google.dev/gemini-api/docs/openai?hl=ko#batch) 페이지의 예시를 참고하세요.
 
-ส่งความคิดเห็น
+의견 보내기
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-อัปเดตล่าสุด 2026-07-02 UTC
+최종 업데이트: 2026-07-02(UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+의견을 전달하고 싶나요?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-02 UTC"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-02(UTC)"],[],[]]

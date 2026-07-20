@@ -1,89 +1,91 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=fr
-fetched_at: 2026-07-06T05:13:46.368630+00:00
-title: "Signatures de pens\u00e9e \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=tr
+fetched_at: 2026-07-20T04:40:01.943822+00:00
+title: "D\u00fc\u015f\u00fcnce \u0130mzalar\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-# Signatures de pensée
+# Düşünce İmzaları
 
-Les signatures de pensée sont des représentations chiffrées du processus de réflexion interne du modèle. Elles sont utilisées pour préserver le contexte de raisonnement lors d'interactions en plusieurs étapes.
-Lorsque vous utilisez des modèles de réflexion (tels que les séries Gemini 3 et 2.5), l'API peut renvoyer un champ `thoughtSignature` dans les [parties de contenu](https://ai.google.dev/api/caching?hl=fr#Part) de la réponse (par exemple, les parties `text` ou `functionCall`).
+Düşünce imzaları, modelin dahili düşünce sürecinin şifrelenmiş temsilleridir ve çok adımlı etkileşimlerde akıl yürütme bağlamını korumak için kullanılır.
+Düşünme modelleri (ör.Gemini 3 ve 2.5 serisi) kullanılırken API, yanıtın [content parts](https://ai.google.dev/api/caching?hl=tr#Part) (içerik bölümleri) içinde bir `thoughtSignature` alanı döndürebilir (ör. `text` veya `functionCall` bölümleri).
 
-En règle générale, si vous recevez une signature de pensée dans la réponse d'un modèle, vous devez la renvoyer exactement telle qu'elle a été reçue lorsque vous envoyez l'historique des conversations au tour suivant.
-**Lorsque vous utilisez les modèles Gemini 3, vous devez renvoyer les signatures de pensée lors de l'appel de fonction, sinon vous recevrez une erreur de validation** (code d'état 4xx).
-Cela inclut l'utilisation du paramètre `minimal`
-[Niveau de raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#thinking-levels) pour Gemini 3 Flash.
+Genel bir kural olarak, model yanıtında düşünce imzası alırsanız konuşma geçmişini bir sonraki turda gönderirken bu imzayı aynen iletmeniz gerekir.
+**Gemini 3 modellerini kullanırken işlev çağrısı sırasında düşünce imzalarını geri iletmeniz gerekir. Aksi takdirde doğrulama hatası alırsınız** (4xx durum kodu).
+Gemini 3 Flash için `minimal`
+[düşünme düzeyi](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#thinking-levels) ayarı kullanılırken de bu durum geçerlidir.
 
-## Fonctionnement
+## İşleyiş şekli
 
-Le graphique ci-dessous illustre la signification des termes "tour" et "étape" en ce qui concerne l'[appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) dans l'API Gemini. Un "tour" correspond à un échange complet dans une conversation entre un utilisateur et un modèle. Une "étape" est une action ou une opération plus précise effectuée par le modèle, souvent dans le cadre d'un processus plus vaste pour terminer un tour.
+Aşağıdaki grafik, Gemini API'deki [işlev çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) ile ilgili olarak "dönüş" ve "adım"ın anlamını görselleştirir. "Dönüş", kullanıcı ile model arasındaki sohbetteki tek ve eksiksiz bir etkileşimdir. "Adım", model tarafından gerçekleştirilen daha ayrıntılı bir işlem veya operasyondur. Genellikle bir dönüşü tamamlamak için daha büyük bir sürecin parçası olarak gerçekleştirilir.
 
-![Diagramme des tours et des étapes d&#39;appel de fonction](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=fr)
+![İşlev çağrısı dönüşleri ve adımları diyagramı](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=tr)
 
-*Ce document se concentre sur la gestion de l'appel de fonction pour les modèles Gemini 3. Consultez la section [Comportement du modèle](#model-behavior) pour connaître les différences avec la version 2.5.*
+*Bu belgede, Gemini 3 modellerinde işlev çağrısının nasıl işleneceği ele alınmaktadır. 2.5 ile ilgili tutarsızlıklar için [model davranışı](#model-behavior) bölümüne bakın.*
 
-Gemini 3 renvoie des signatures de pensée pour toutes les réponses du modèle (réponses de l'API) avec un appel de fonction. Les signatures de pensée s'affichent dans les cas suivants :
+Gemini 3, işlev çağrısı içeren tüm model yanıtları (API'den gelen yanıtlar) için düşünce imzaları döndürür. Düşünce imzaları aşağıdaki durumlarda gösterilir:
 
-- Lorsqu'il y a des appels de [fonction parallèle](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr#parallel_function_calling), la première partie d'appel de fonction renvoyée par la réponse du modèle aura une signature de pensée.
-- Lorsqu'il existe des appels de fonction séquentiels (multietapes), chaque appel de fonction aura une signature et vous devrez renvoyer toutes les signatures.
-- Les réponses du modèle sans appel de fonction renvoient une signature de réflexion dans la dernière partie renvoyée par le modèle.
+- [Paralel işlev](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#parallel_function_calling) çağrıları olduğunda, model yanıtı tarafından döndürülen ilk işlev çağrısı bölümünde düşünce imzası bulunur.
+- Sıralı işlev çağrıları (çok adımlı) olduğunda her işlev çağrısının bir imzası olur ve tüm imzaları geri iletmeniz gerekir.
+- İşlev çağrısı içermeyen model yanıtları, modelin döndürdüğü son kısımda düşünce imzası döndürür.
 
-Le tableau suivant fournit une visualisation des appels de fonction en plusieurs étapes, en combinant les définitions des tours et des étapes avec le concept de signatures présenté ci-dessus :
+Aşağıdaki tabloda, yukarıda bahsedilen imzalar kavramıyla birlikte dönüş ve adım tanımlarını birleştiren çok adımlı işlev çağrıları için bir görselleştirme sunulmaktadır:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Aucun |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Yok |
 
-## Signatures dans les parties d'appel de fonction
+## İşlev çağrısı bölümlerindeki imzalar
 
-Lorsque Gemini génère un `functionCall`, il s'appuie sur `thought_signature` pour traiter correctement la sortie de l'outil au tour suivant.
+Gemini bir `functionCall` oluşturduğunda, sonraki turda aracın çıktısını doğru şekilde işlemek için `thought_signature` kullanır.
 
-- **Comportement** :
-  - **Appel de fonction unique** : la partie `functionCall` contiendra un `thought_signature`.
-  - **Appels de fonction parallèles** : si le modèle génère des appels de fonction parallèles dans une réponse, le `thought_signature` n'est associé **qu'à la première** partie `functionCall`. Les parties `functionCall` suivantes de la même réponse **ne contiendront pas** de signature.
-- **Exigence** : Vous **devez** renvoyer cette signature exactement à l'endroit où elle a été reçue lorsque vous renvoyez l'historique des conversations.
-- **Validation** : une validation stricte est appliquée à tous les appels de fonction au cours du tour actuel . (Seul le tour actuel est requis. Nous ne validons pas les tours précédents.)
-  - L'API remonte dans l'historique (du plus récent au plus ancien) pour trouver le message **User** le plus récent contenant du contenu standard (par exemple, `text`), qui correspond au début du tour actuel. Il ne **be** d'un `functionResponse`.
-  - Les tours `functionCall` du modèle **Tous** qui se produisent après ce message d'utilisation spécifique sont considérés comme faisant partie du tour.
-  - La **première** partie `functionCall` de **chaque étape** du tour actuel **doit** inclure son `thought_signature`.
-  - Si vous omettez un `thought_signature` pour la première partie `functionCall` d'une étape du tour actuel, la requête échouera et renverra une erreur 400.
-- **Si les signatures appropriées ne sont pas renvoyées, voici comment l'erreur s'affichera :**
-  - Modèles Gemini 3 : si vous n'incluez pas de signatures, une erreur 400 se produira. Le libellé se présentera sous la forme suivante :
-    - Il manque un `thought_signature` à l'appel de fonction `<Function Call>` dans le bloc de contenu `<index of contents array>`. Par exemple, *l'appel de fonction `FC1` dans le bloc de contenu `1.` est manquant `thought_signature`*.
+- **Davranış**:
+  - **Tek İşlev Çağrısı**: `functionCall` bölümünde `thought_signature` yer alır.
+  - **Paralel İşlev Çağrıları**: Model, yanıtta paralel işlev çağrıları oluşturursa `thought_signature` **yalnızca ilk**
+    `functionCall` bölüme eklenir. Aynı yanıttaki sonraki `functionCall` bölümleri imza **içermez**.
+- **Şart: Görüşme geçmişini geri gönderirken bu imzayı, alındığı **tam** kısımda iade etmeniz gerekir**.
+- **Doğrulama**: Geçerli dönüşteki tüm işlev çağrıları için katı doğrulama uygulanır . (Yalnızca mevcut dönüş gereklidir; önceki dönüşler doğrulanmaz)
+  - API, standart içerik (ör. `text`) içeren en son **User** mesajını (mevcut dönüşün başlangıcı) bulmak için geçmişe (en yeni mesajdan en eski mesaja) gider. Bu işlem **be** `functionResponse` değildir.
+  - Bu belirli kullanım mesajından sonraki **tüm** model `functionCall` dönüşleri, dönüşün bir parçası olarak kabul edilir.
+  - **Mevcut dönüşteki **her adımın** **ilk** `functionCall` bölümü, `thought_signature` içermelidir.**
+  - Mevcut dönüşün herhangi bir adımında ilk `functionCall` bölüm için `thought_signature` karakterini atlarsanız istek 400 hatasıyla başarısız olur.
+- **Uygun imzalar döndürülmezse hata nasıl oluşur?**
+  - Gemini 3 modelleri: İmzaların eklenmemesi 400 hatasına neden olur. Metin şu biçimde olacaktır:
+    - `<index of contents array>` içerik bloğundaki `<Function Call>` işlev çağrısında `thought_signature` eksik. Örneğin, `1.` içerik bloğundaki *Function
+      call `FC1` ifadesinde `thought_signature` eksik.*
 
-### Exemple d'appel de fonction séquentiel
+### Sıralı işlev çağrısı örneği
 
-Cette section présente un exemple d'appels de fonction multiples dans lequel l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+Bu bölümde, kullanıcının birden fazla görev gerektiren karmaşık bir soru sorduğu birden fazla işlev çağrısı örneği gösterilmektedir.
 
-Prenons l'exemple d'un appel de fonction multitours où l'utilisateur pose une question complexe nécessitant plusieurs tâches : `"Check flight status for AA100 and
+Kullanıcının birden fazla görev gerektiren karmaşık bir soru sorduğu çok turlu bir işlev çağrısı örneğini inceleyelim: `"Check flight status for AA100 and
 book a taxi if delayed"`.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Le code suivant illustre la séquence du tableau ci-dessus.
+Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 
-**Tour 1, étape 1 (demande de l'utilisateur)**
+**1. Tur, 1. Adım (Kullanıcı isteği)**
 
 ```
 {
@@ -138,7 +140,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 1 (réponse du modèle)**
+**1. Tur, 1. Adım (Model yanıt)**
 
 ```
 {
@@ -159,7 +161,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 2 (réponse de l'utilisateur : envoi des résultats de l'outil)** : comme ce tour d'utilisateur ne contient qu'un `functionResponse` (aucun nouveau texte), nous sommes toujours au tour 1. Nous devons préserver `<Signature_A>`.
+**1. dönüş, 2. adım (Kullanıcı yanıtı - Araç çıktılarını gönderme)** Bu kullanıcı dönüşü yalnızca `functionResponse` içerdiğinden (yeni metin yok) hâlâ 1. dönüşteyiz. `<Signature_A>` korunmalıdır.
 
 ```
 {
@@ -200,7 +202,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 2 (modèle)** : le modèle décide maintenant de réserver un taxi en fonction du résultat de l'outil précédent.
+**1. Tur, 2. Adım (Model)** Model, önceki araç çıkışına göre taksi rezervasyonu yapmaya karar veriyor.
 
 ```
 {
@@ -221,7 +223,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, Étape 3 (Utilisateur : envoi du résultat de l'outil)** Pour envoyer la confirmation de la réservation de taxi, nous devons inclure des signatures pour **TOUS** les appels de fonction dans cette boucle (`<Signature A>` + `<Signature B>`).
+**1. tur, 3. adım (Kullanıcı - Araç çıktısı gönderme)** Taksi rezervasyonu onayını göndermek için bu döngüdeki **TÜM** işlev çağrılarına imza eklememiz gerekir (`<Signature A>` + `<Signature B>`).
 
 ```
 {
@@ -290,18 +292,19 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-### Exemple d'appel de fonction parallèle
+### Paralel işlev çağrısı örneği
 
-Passons à un exemple d'appel de fonction parallèle où l'utilisateur demande `"Check weather in Paris and London"` pour voir où le modèle effectue la validation.
+Kullanıcının modele doğrulama yaptığı yeri görmeyi istediği paralel işlev çağrısı örneğini inceleyelim.
+`"Check weather in Paris and London"`
 
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
-| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + signature  FC2 ("Londres") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (sans FC) | Aucun |
+| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + imza  FC2 ("London") | FR1 |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (FC yok) | Yok |
 
-Le code suivant illustre la séquence du tableau ci-dessus.
+Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 
-**Tour 1, étape 1 (demande de l'utilisateur)**
+**1. Tur, 1. Adım (Kullanıcı isteği)**
 
 ```
 {
@@ -340,7 +343,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Tour 1, étape 1 (réponse du modèle)**
+**1. Tur, 1. Adım (Model yanıt)**
 
 ```
 {
@@ -368,7 +371,7 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 }
 ```
 
-**Étape 2 du tour 1 (réponse de l'utilisateur : envoi des résultats de l'outil)** Nous devons conserver `<Signature_A>` dans la première partie exactement tel qu'il a été reçu.
+**1. Tur, 2. Adım (Kullanıcı yanıtı - Araç çıktılarını gönderme)** İlk bölümdeki `<Signature_A>`, alındığı şekilde korunmalıdır.
 
 ```
 [
@@ -426,17 +429,17 @@ Le code suivant illustre la séquence du tableau ci-dessus.
 ]
 ```
 
-## Signatures dans les parties non `functionCall`
+## `functionCall` dışındaki bölümlerdeki imzalar
 
-Gemini peut également renvoyer `thought_signatures` dans la dernière partie de la réponse, dans les parties qui ne sont pas des appels de fonction.
+Gemini, işlev çağrısı içermeyen bölümlerde yanıtın son kısmında `thought_signatures` da döndürebilir.
 
-- **Comportement** : la dernière partie du contenu (`text, inlineData…`) renvoyée par le modèle peut contenir un `thought_signature`.
-- **Recommandation** : il est **recommandé** de renvoyer ces signatures pour s'assurer que le modèle conserve un raisonnement de haute qualité, en particulier pour les workflows agentifs simulés ou le suivi d'instructions complexes.
-- **Validation** : l'API **n'applique pas** strictement la validation. Vous ne recevrez pas d'erreur bloquante si vous les omettez, mais les performances peuvent se dégrader.
+- **Davranış**: Model tarafından döndürülen son içerik bölümü (`text, inlineData…`), `thought_signature` içerebilir.
+- **Öneri**: Özellikle karmaşık talimatları takip etme veya simüle edilmiş aracı iş akışları için modelin yüksek kaliteli akıl yürütme özelliğini korumasını sağlamak amacıyla bu imzaların döndürülmesi **önerilir**.
+- **Doğrulama**: API, doğrulamayı katı bir şekilde **zorunlu kılmaz**. Bunları atladığınızda engelleme hatası almazsınız ancak performans düşebilir.
 
-### Texte/Raisonnement en contexte (aucune validation)
+### Metin/Bağlam içi akıl yürütme (Doğrulama yok)
 
-**Tour 1, étape 1 (réponse du modèle)**
+**1. Tur, 1. Adım (Model yanıt)**
 
 ```
 {
@@ -450,7 +453,7 @@ Gemini peut également renvoyer `thought_signatures` dans la dernière partie de
 }
 ```
 
-**Tour 2, étape 1 (utilisateur)**
+**2. Tur, 1. Adım (Kullanıcı)**
 
 ```
 [
@@ -468,26 +471,26 @@ Gemini peut également renvoyer `thought_signatures` dans la dernière partie de
 ]
 ```
 
-## Signatures pour la compatibilité avec OpenAI
+## OpenAI uyumluluğu için imzalar
 
-L'exemple suivant montre comment gérer les signatures de pensée pour une API Chat Completions à l'aide de la [compatibilité OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=fr).
+Aşağıdaki örneklerde, [OpenAI uyumluluğu](https://ai.google.dev/gemini-api/docs/openai?hl=tr) kullanılarak bir sohbet tamamlama API'si için düşünce imzalarının nasıl işleneceği gösterilmektedir.
 
-### Exemple d'appel de fonction séquentiel
+### Sıralı işlev çağrısı örneği
 
-Voici un exemple d'appel de fonction multiple où l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+Bu, kullanıcının birden fazla görev gerektiren karmaşık bir soru sorduğu çoklu işlev çağrısı örneğidir.
 
-Examinons un exemple d'appel de fonction multitours où l'utilisateur demande `Check flight status for AA100 and book a taxi if delayed`. Vous pouvez voir ce qui se passe lorsque l'utilisateur pose une question complexe nécessitant plusieurs tâches.
+Kullanıcının `Check flight status for AA100 and book a taxi if delayed` diye sorduğu çok turlu bir işlev çağrısı örneğini inceleyelim. Kullanıcı, birden fazla görev gerektiren karmaşık bir soru sorduğunda ne olduğunu görebilirsiniz.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Le code suivant parcourt la séquence donnée.
+Aşağıdaki kod, verilen sırayı adım adım açıklar.
 
-**Tour 1, étape 1 (demande de l'utilisateur)**
+**1. Tur, 1. Adım (Kullanıcı İsteği)**
 
 ```
 {
@@ -541,7 +544,7 @@ Le code suivant parcourt la séquence donnée.
 }
 ```
 
-**Tour 1, étape 1 (réponse du modèle)**
+**1. Tur, 1. Adım (Model Yanıt)**
 
 ```
 {
@@ -564,9 +567,9 @@ Le code suivant parcourt la séquence donnée.
     }
 ```
 
-**Tour 1, étape 2 (réponse de l'utilisateur : envoi des résultats de l'outil)**
+**1. Dönüş, 2. Adım (Kullanıcı Yanıtı - Araç Çıkışlarını Gönderme)**
 
-Étant donné que ce tour d'utilisateur ne contient qu'un `functionResponse` (pas de nouveau texte), nous sommes toujours au tour 1 et devons conserver `<Signature_A>`.
+Bu kullanıcı dönüşü yalnızca `functionResponse` içerdiğinden (yeni metin yok) hâlâ 1. dönüşteyiz ve `<Signature_A>` korunmalıdır.
 
 ```
 "messages": [
@@ -601,9 +604,9 @@ Le code suivant parcourt la séquence donnée.
   ]
 ```
 
-**Tour 1, étape 2 (modèle)**
+**1. Tur, 2. Adım (Model)**
 
-Le modèle décide maintenant de réserver un taxi en fonction du résultat de l'outil précédent.
+Model, önceki araç çıkışına göre taksi rezervasyonu yapmaya karar veriyor.
 
 ```
 {
@@ -626,9 +629,9 @@ Le modèle décide maintenant de réserver un taxi en fonction du résultat de l
 }
 ```
 
-**Tour 1, Étape 3 (Utilisateur : envoi du résultat de l'outil)**
+**1. Tur, 3. Adım (Kullanıcı - Araç Çıktısı Gönderme)**
 
-Pour envoyer la confirmation de réservation de taxi, nous devons inclure des signatures pour TOUS les appels de fonction dans cette boucle (`<Signature A>` + `<Signature B>`).
+Taksi rezervasyonu onayını göndermek için bu döngüdeki TÜM işlev çağrıları (`<Signature A>` + `<Signature B>`) için imzalar eklememiz gerekir.
 
 ```
 "messages": [
@@ -687,19 +690,19 @@ Pour envoyer la confirmation de réservation de taxi, nous devons inclure des si
   ]
 ```
 
-### Exemple d'appel de fonction parallèle
+### Paralel işlev çağrısı örneği
 
-Prenons l'exemple d'un appel de fonction parallèle où l'utilisateur demande `"Check weather in Paris and London"`. Vous pouvez voir où le modèle effectue la validation.
+Kullanıcının `"Check weather in Paris and London"` diye sorduğu paralel işlev çağırma örneğini inceleyelim. Bu örnekte, modelin nerede doğrulama yaptığını görebilirsiniz.
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Tourner** | **Step** | **Demande de l'utilisateur** | **Réponse du modèle** | **FunctionResponse** |
+| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Voici le code permettant de parcourir la séquence donnée.
+Belirtilen sırayı izlemek için gereken kod aşağıda verilmiştir.
 
-**Tour 1, étape 1 (demande de l'utilisateur)**
+**1. Tur, 1. Adım (Kullanıcı İsteği)**
 
 ```
 {
@@ -738,7 +741,7 @@ Voici le code permettant de parcourir la séquence donnée.
 }
 ```
 
-**Tour 1, étape 1 (réponse du modèle)**
+**1. Tur, 1. Adım (Model Yanıt)**
 
 ```
 {
@@ -769,9 +772,9 @@ Voici le code permettant de parcourir la séquence donnée.
 }
 ```
 
-**Tour 1, étape 2 (réponse de l'utilisateur : envoi des résultats de l'outil)**
+**1. Dönüş, 2. Adım (Kullanıcı Yanıtı - Araç Çıkışlarını Gönderme)**
 
-Vous devez conserver `<Signature_A>` dans la première partie exactement tel que vous l'avez reçu.
+İlk bölümdeki `<Signature_A>` işaretini tam olarak aldığınız şekilde korumalısınız.
 
 ```
 "messages": [
@@ -820,39 +823,40 @@ Vous devez conserver `<Signature_A>` dans la première partie exactement tel que
   ]
 ```
 
-## Questions fréquentes
+## SSS
 
-1. **Comment transférer l'historique d'un autre modèle vers Gemini 3 avec une partie d'appel de fonction dans le tour et l'étape actuels ? Je dois fournir des parties d'appel de fonction qui n'ont pas été générées par l'API et qui n'ont donc pas de signature de pensée associée.**
+1. **Geçerli dönüş ve adımda işlev çağrısı bölümü olan Gemini 3'e farklı bir modelden geçmiş nasıl aktarılır? API tarafından oluşturulmadığı için ilişkili düşünce imzası olmayan işlev çağrısı bölümleri sağlamam gerekiyor mu?**
 
-   Bien qu'il soit fortement déconseillé d'injecter des blocs d'appels de fonction personnalisés dans la requête, vous pouvez définir les signatures fictives suivantes (`"context_engineering_is_the_way_to_go"` ou `"skip_thought_signature_validator"`) dans le champ de signature de pensée pour ignorer la validation dans les cas où cela ne peut pas être évité (par exemple, pour fournir au modèle des informations sur les appels de fonction et les réponses qui ont été exécutés de manière déterministe par le client, ou pour transférer une trace à partir d'un autre modèle qui n'inclut pas de signatures de pensée).
-2. **J'envoie des appels et des réponses de fonctions parallèles entrelacés, et l'API renvoie un code 400. Pourquoi ?**
+   İsteğe özel işlev çağrısı bloklarının isteğe eklenmesi kesinlikle önerilmez.Ancak bu durumun kaçınılmaz olduğu durumlarda (ör. istemci tarafından deterministik olarak yürütülen işlev çağrıları ve yanıtları hakkında modele bilgi sağlama veya düşünce imzaları içermeyen farklı bir modelden izleme aktarma) doğrulamanın atlanması için düşünce imzası alanında `"context_engineering_is_the_way_to_go"` veya `"skip_thought_signature_validator"` değerlerinden birinin aşağıdaki sahte imzalarını ayarlayabilirsiniz.
+2. **İç içe geçmiş paralel işlev çağrıları ve yanıtları geri gönderiyorum ve API 400 döndürüyor. Neden?**
 
-   Lorsque l'API renvoie des appels de fonction parallèles "FC1 + signature, FC2", la réponse attendue de l'utilisateur est "FC1+ signature, FC2, FR1, FR2". Si vous les avez entrelacés comme "FC1 + signature, FR1, FC2, FR2", l'API renverra une erreur 400.
-3. **Lorsque le modèle ne renvoie pas d'appel de fonction lors du streaming, je ne trouve pas la signature de la pensée.**
+   API, paralel işlev çağrıları "FC1 + imza, FC2" döndürdüğünde, beklenen kullanıcı yanıtı "FC1+ imza, FC2, FR1, FR2" olur. Bunları "FC1 + imza, FR1, FC2, FR2" şeklinde iç içe yerleştirirseniz API 400 hatası döndürür.
+3. **Yayın sırasında model, bulamadığım bir işlev çağrısı döndürmüyor. Bu durumda düşünce imzasını bulamıyorum**
 
-   Lorsqu'une réponse de modèle ne contient pas de FC avec une demande de streaming, le modèle peut renvoyer la signature de pensée dans une partie avec une partie de contenu textuel vide. Il est conseillé d'analyser l'intégralité de la requête jusqu'à ce que le modèle renvoie `finish_reason`.
+   Akış isteğiyle birlikte FC içermeyen bir model yanıtı sırasında model, düşünce imzasını boş metin içerikli bir bölümde döndürebilir. Model tarafından `finish_reason` döndürülene kadar isteğin tamamını ayrıştırmanız önerilir.
 
-## Signatures de réflexion pour différents modèles
+## Farklı modeller için düşünce imzaları
 
-Les [modèles Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=fr#gemini-3) et Gemini 2.5 se comportent différemment avec les signatures de pensée dans les appels de fonction :
+[Gemini 3 modelleri](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-3) ve Gemini 2.5 modelleri
+işlev çağrılarında düşünce imzalarıyla farklı şekilde davranır:
 
-- Si une réponse contient des appels de fonction,
-  - Gemini 3 aura toujours la signature dans la première partie de l'appel de fonction.
-    Il est **obligatoire** de renvoyer cette partie.
-  - Dans Gemini 2.5, la signature figurera dans la première partie (quel que soit le type). Le renvoi de cette partie est **facultatif**.
-- S'il n'y a pas d'appels de fonction dans une réponse,
-  - Gemini 3 ajoutera la signature à la dernière partie si le modèle génère une réflexion.
-  - Gemini 2.5 ne comporte aucune signature.
+- Yanıt işlev çağrıları içeriyorsa,
+  - Gemini 3, her zaman ilk işlev çağrısı bölümünde imzaya sahip olur.
+    Bu parçanın iade edilmesi **zorunludur**.
+  - Gemini 2.5, ilk bölümde imzayı (türden bağımsız olarak) içerir. Bu parçayı iade etmek **isteğe bağlıdır**.
+- Yanıt içinde işlev çağrısı yoksa,
+  - Model bir düşünce oluşturursa Gemini 3, son bölümde imzayı gösterir.
+  - Gemini 2.5'in hiçbir bölümünde imza bulunmaz.
 
-Pour en savoir plus sur les comparaisons, consultez la page [Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr#signatures).
-Pour les modèles Gemini 3 Image, consultez la section sur le processus de réflexion du guide [Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr#thinking-process).
+Daha fazla karşılaştırma bilgisi için [Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#signatures) sayfasına bakın.
+Gemini 3 Image modelleri için [Görüntü oluşturma](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr#thinking-process) kılavuzunun düşünme süreci bölümüne bakın.
 
-Envoyer des commentaires
+Geri bildirim gönderin
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Dernière mise à jour le 2026/06/22 (UTC).
+Son güncelleme tarihi: 2026-06-22 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/22 (UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-22 UTC."],[],[]]

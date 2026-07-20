@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=zh-TW
-fetched_at: 2026-07-06T05:14:24.294420+00:00
-title: "\u9077\u79fb\u81f3 Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=th
+fetched_at: 2026-07-20T04:38:55.418039+00:00
+title: "\u0e01\u0e32\u0e23\u0e22\u0e49\u0e32\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e44\u0e1b\u0e22\u0e31\u0e07 Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-提供意見
+ส่งความคิดเห็น
 
-# 遷移至 Interactions API
+# การย้ายข้อมูลไปยัง Interactions API
 
-本指南將協助您從 `generateContent` API 遷移至 Interactions API。
+คู่มือนี้จะช่วยคุณย้ายข้อมูลจาก `generateContent` API ไปยัง Interactions API
 
-Interactions API 是使用 Gemini 建構應用程式的標準介面。這個架構已針對代理式工作流程、伺服器端狀態管理，以及複雜的多模態多輪對話完成最佳化調整，同時仍完全支援簡單的無狀態單輪要求。雖然我們仍會全面支援 `generateContent`，但建議所有新開發項目都使用 Interactions API。
+Interactions API เป็นวิธีที่ง่ายที่สุดและดีที่สุดในการสร้างด้วยโมเดลและเอเจนต์ Gemini แม้ว่าเราจะยังคงให้การสนับสนุน `generateContent` อย่างเต็มที่ แต่ขอแนะนำให้ใช้ Interactions API สำหรับการพัฒนาใหม่ทั้งหมด
 
-### 為何要遷移？
+### เหตุผลที่ควรย้ายข้อมูล
 
-Interactions API 提供更結構化且強大的方式，可運用 Gemini 建構內容：
+Interactions API เป็นวิธีที่ง่ายที่สุดและดีที่สุดในการสร้างด้วยโมเดลและเอเจนต์ของ Gemini
 
-- **伺服器端記錄管理**：透過 `previous_interaction_id` 簡化多輪對話流程。伺服器預設會啟用狀態 (`store=true`)，但您可以設定 `store=false`，選擇無狀態行為。
-- **可觀察的執行步驟**：輸入步驟可輕鬆偵錯複雜流程，並為中繼事件 (例如想法或搜尋小工具) 算繪 UI。
-- **專為代理工作流程打造**：透過型別執行步驟，原生支援多步驟工具使用、自動調度管理和複雜的推論流程。
-- **長期執行的工作和背景工作**：支援使用 `background=true` 將耗時的作業 (例如 Deep Think 和 Deep Research) 卸載至背景程序。
+- **การจัดการประวัติฝั่งเซิร์ฟเวอร์**: ลดความซับซ้อนของโฟลว์แบบหลายรอบผ่าน `previous_interaction_id` เซิร์ฟเวอร์จะเปิดใช้สถานะโดยค่าเริ่มต้น (`store=true`) แต่คุณเลือกใช้ลักษณะการทำงานแบบไม่มีสถานะได้โดยการตั้งค่า `store=false`
+- **ขั้นตอนการดำเนินการที่สังเกตได้**: ขั้นตอนที่พิมพ์ทำให้การแก้ไขข้อบกพร่องของโฟลว์ที่ซับซ้อนเป็นเรื่องง่าย และแสดงผล UI สำหรับเหตุการณ์ระดับกลาง (เช่น ความคิดหรือวิดเจ็ตการค้นหา)
+- **การใช้เครื่องมือและเวิร์กโฟลว์แบบเป็น Agent**: รองรับการใช้เครื่องมือแบบหลายขั้นตอน การจัดการเป็นกลุ่ม และการให้เหตุผลที่ซับซ้อนผ่านขั้นตอนการดำเนินการที่พิมพ์
+- **งานที่ทำอยู่เบื้องหลังซึ่งใช้เวลานาน**: รองรับการส่งต่อการดำเนินการที่ใช้เวลานาน เช่น Deep Think และ Deep Research ไปยังกระบวนการเบื้องหลังโดยใช้ `background=true`
 
-## 基本輸入/輸出
+## อินพุต/เอาต์พุตพื้นฐาน
 
-本節說明如何遷移簡單的文字生成要求。
+ส่วนนี้แสดงวิธีเปลี่ยนคำขอการสร้างข้อความอย่างง่าย
 
-### 之前 (`generateContent`)
+### ก่อน (`generateContent`)
 
-`generateContent` API 為無狀態，會直接傳回回應。回應結構會將輸出內容包裝在 `candidates` 清單中，每個 `candidates` 都包含 `content`，其中含有要剖析的 `parts` 清單。
+`generateContent` API ไม่มีการเก็บสถานะและจะแสดงการตอบกลับโดยตรง โครงสร้างการตอบกลับจะรวมเอาต์พุตไว้ในรายการของ `candidates` ซึ่งแต่ละรายการจะมี `content` ที่มีรายการของ `parts` เพื่อแยกวิเคราะห์
 
 ### Python
 
@@ -47,7 +47,7 @@ from google import genai
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-2.5-flash", contents="Tell me a joke."
+    model="gemini-2.5-flash-lite", contents="Tell me a joke."
 )
 print(response.text)
 ```
@@ -60,7 +60,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI({});
 
 const response = await ai.models.generateContent({
-  model: "gemini-2.5-flash",
+  model: "gemini-2.5-flash-lite",
   contents: "Tell me a joke.",
 });
 console.log(response.text);
@@ -70,7 +70,7 @@ console.log(response.text);
 
 ```
 # Request
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -105,9 +105,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-Interactions API 會傳回儲存的互動資源，並附上 `steps`時間軸。雖然您可以手動檢查 `steps` 陣列來尋找中繼事件，但 Google GenAI SDK 會在傳回的 `Interaction` 物件上直接提供便利屬性，方便您存取最終輸出內容。
+Interaction API จะแสดงผลแหล่งข้อมูลการโต้ตอบที่จัดเก็บไว้พร้อม`steps`
+ไทม์ไลน์ แม้ว่าคุณจะตรวจสอบอาร์เรย์ `steps` ด้วยตนเองเพื่อค้นหาเหตุการณ์ระดับกลางได้ แต่ Google GenAI SDK มีพร็อพเพอร์ตี้ที่สะดวก
+ในออบเจ็กต์ `Interaction` ที่ส่งคืนโดยตรงเพื่อให้เข้าถึงเอาต์พุตสุดท้ายได้
 
-最常見的便利性屬性是 **`.output_text`** (字串)，可自動擷取並加入模型回覆結尾的連續 `TextContent` 區塊。雖然這項功能非常適合簡單的回覆，但不會納入以非文字內容 (例如想法、圖片、音訊或工具呼叫) 分隔的先前文字區塊。如要處理複雜或交錯的多模態回應，請改為手動疊代 `steps`。
+พร็อพเพอร์ตี้ความสะดวกที่พบบ่อยที่สุดคือ **`.output_text`** (String) ซึ่งจะ
+แยกและรวมบล็อก `TextContent` ที่ต่อเนื่องกันโดยอัตโนมัติที่
+ส่วนท้ายของการตอบกลับของโมเดล แม้ว่าวิธีนี้จะใช้ได้ดีกับคำตอบง่ายๆ
+แต่ก็ไม่ได้รวมบล็อกข้อความก่อนหน้าซึ่งคั่นด้วยเนื้อหาที่ไม่ใช่ข้อความ (เช่น
+ความคิด รูปภาพ เสียง หรือการเรียกใช้เครื่องมือ) สำหรับคำตอบแบบมัลติโมดอลที่ซับซ้อนหรือสลับกัน คุณต้องวนซ้ำผ่าน `steps` ด้วยตนเองแทน
 
 ### Python
 
@@ -179,24 +185,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 多轉折對話
+## การสนทนาแบบหลายรอบ
 
-Interactions API 預設會儲存互動內容，方便您管理多輪對話的伺服器端狀態。
+Interactions API จะจัดเก็บการโต้ตอบโดยค่าเริ่มต้น ซึ่งช่วยให้การจัดการสถานะฝั่งเซิร์ฟเวอร์สำหรับการสนทนาแบบหลายรอบ
 
-### 之前 (`generateContent`)
+### ก่อน (`generateContent`)
 
-在 `generateContent` 中，您必須使用 `contents` 陣列或用戶端即時通訊輔助程式，手動管理對話記錄。
+ใน `generateContent` คุณต้องจัดการประวัติการสนทนาด้วยตนเองโดยใช้อาร์เรย์ `contents` หรือตัวช่วยแชทฝั่งไคลเอ็นต์
 
 ### Python
 
-**使用即時通訊小幫手 (建議做法)**
+**ใช้แชทช่วย (แนะนำ)**
 
 ```
 from google import genai
 
 client = genai.Client()
 
-chat = client.chats.create(model="gemini-2.5-flash")
+chat = client.chats.create(model="gemini-2.5-flash-lite")
 response1 = chat.send_message("Hi, my name is Phil.")
 print(response1.text)
 
@@ -204,7 +210,7 @@ response2 = chat.send_message("What is my name?")
 print(response2.text)
 ```
 
-**手動管理記錄**
+**การจัดการประวัติด้วยตนเอง**
 
 ```
 from google import genai
@@ -213,17 +219,17 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     contents=[
         types.Content(
-            role="user", parts=[types.Part.from_text("Hi, my name is Phil.")]
+            role="user", parts=[types.Part.from_text(text="Hi, my name is Phil.")]
         ),
         types.Content(
             role="model",
-            parts=[types.Part.from_text("Hi Phil, how can I help you?")],
+            parts=[types.Part.from_text(text="Hi Phil, how can I help you?")],
         ),
         types.Content(
-            role="user", parts=[types.Part.from_text("What is my name?")]
+            role="user", parts=[types.Part.from_text(text="What is my name?")]
         ),
     ],
 )
@@ -232,14 +238,14 @@ print(response.text)
 
 ### JavaScript
 
-**使用即時通訊小幫手 (建議做法)**
+**ใช้แชทช่วย (แนะนำ)**
 
 ```
 import { GoogleGenAI } from '@google/genai';
 
 const client = new GoogleGenAI({});
 
-const chat = client.chats.create({ model: 'gemini-2.5-flash' });
+const chat = client.chats.create({ model: 'gemini-2.5-flash-lite' });
 let response = await chat.sendMessage({ message: 'Hi, my name is Phil.' });
 console.log(response.text);
 
@@ -247,7 +253,7 @@ response = await chat.sendMessage({ message: 'What is my name?' });
 console.log(response.text);
 ```
 
-**手動管理記錄**
+**การจัดการประวัติด้วยตนเอง**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -255,7 +261,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const response = await client.models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.5-flash-lite',
     contents: [
         { role: 'user', parts: [{ text: 'Hi, my name is Phil.' }] },
         { role: 'model', parts: [{ text: 'Hi Phil, how can I help you?' }] },
@@ -269,7 +275,7 @@ console.log(response.text);
 
 ```
 # Request (the second turn requires sending the entire history)
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -301,7 +307,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 
 ### After (Interactions API)
 
-Interactions API 會管理伺服器上的狀態。如要繼續對話，請參照 `previous_interaction_id`。
+Interactions API จะจัดการสถานะในเซิร์ฟเวอร์ คุณสนทนาต่อได้โดยอ้างอิงถึง `previous_interaction_id`
 
 ### Python
 
@@ -394,13 +400,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 多模態輸入內容
+## อินพุตหลายรูปแบบ
 
-這兩項 API 都支援多模態輸入內容 (文字、圖片、影片等)。
+ทั้ง 2 API รองรับอินพุตหลายรูปแบบ (ข้อความ รูปภาพ วิดีโอ ฯลฯ)
 
-### 之前 (`generateContent`)
+### ก่อน (`generateContent`)
 
-在 `generateContent` 中，您會在 `contents` 陣列中傳遞 `parts` 清單。回應會傳回第一個候選人的 `parts` 輸出內容。
+ใน `generateContent` คุณจะส่งรายการ `parts` ภายในอาร์เรย์ `contents` การตอบกลับจะแสดงเอาต์พุตใน `parts` ของผู้สมัครคนแรก
 
 ### Python
 
@@ -414,7 +420,7 @@ with open("sample.jpg", "rb") as f:
     image_bytes = f.read()
 
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     contents=[
         types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg"),
         "Describe this image.",
@@ -423,11 +429,36 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
+### JavaScript
+
+```
+import { GoogleGenAI } from '@google/genai';
+import * as fs from 'fs';
+
+const client = new GoogleGenAI({});
+
+const imageBytes = fs.readFileSync('sample.jpg').toString('base64');
+
+const response = await client.models.generateContent({
+    model: 'gemini-2.5-flash-lite',
+    contents: [
+        {
+            inlineData: {
+                data: imageBytes,
+                mimeType: 'image/jpeg',
+            },
+        },
+        'Describe this image.',
+    ],
+});
+console.log(response.text);
+```
+
 ### REST
 
 ```
 # Request
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -465,17 +496,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 
 ### After (Interactions API)
 
-在 Interactions API 中，您會將陣列傳遞至 `input` 欄位。在時間軸中找到 `model_output` 步驟，即可擷取輸出內容。
+ใน Interactions API คุณจะส่งอาร์เรย์ไปยังฟิลด์ `input` คุณดึงเนื้อหาเอาต์พุตได้โดยค้นหา`model_output`ในไทม์ไลน์
 
 ### Python
 
 ```
+import base64
 from google import genai
 
 client = genai.Client()
 
 with open("sample.jpg", "rb") as f:
     image_bytes = f.read()
+image_b64 = base64.b64encode(image_bytes).decode("utf-8")
 
 interaction = client.interactions.create(
     model="gemini-3.5-flash",
@@ -483,7 +516,7 @@ interaction = client.interactions.create(
         {
             "type": "image",
             "mime_type": "image/jpeg",
-            "data": image_bytes,
+            "data": image_b64,
         },
         {"type": "text", "text": "Describe this image."},
     ],
@@ -573,13 +606,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 結構化輸出內容
+## เอาต์พุตที่มีโครงสร้าง
 
-如要讓模型傳回符合特定結構定義的 JSON，請設定回覆格式。
+หากต้องการให้โมเดลแสดงผล JSON ที่ตรงกับสคีมาที่เฉพาะเจาะจง ให้กำหนดค่ารูปแบบการตอบกลับ
 
-### 之前 (`generateContent`)
+### ก่อน (`generateContent`)
 
-在 `generateContent` 中，您可以使用 `generationConfig` 物件內嵌的 `response_format` 欄位設定輸出格式。
+ใน `generateContent` คุณจะกำหนดค่ารูปแบบเอาต์พุตโดยใช้ฟิลด์ `response_mime_type` และ `response_schema` ที่ซ้อนอยู่ภายในออบเจ็กต์ `config` (หรือ `generationConfig`)
 
 ### Python
 
@@ -595,26 +628,49 @@ class Recipe(BaseModel):
     ingredients: list[str]
 
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     contents="Give me a recipe for chocolate chip cookies.",
     config=types.GenerateContentConfig(
-        response_format=[
-            {
-                "type": "text",
-                "mime_type": "application/json",
-                "schema": Recipe,
-            }
-        ]
+        response_mime_type="application/json",
+        response_schema=Recipe,
     ),
 )
 print(response.text)
+```
+
+### JavaScript
+
+```
+import { GoogleGenAI, Type } from '@google/genai';
+
+const ai = new GoogleGenAI({});
+
+const response = await ai.models.generateContent({
+    model: 'gemini-2.5-flash-lite',
+    contents: 'Give me a recipe for chocolate chip cookies.',
+    config: {
+        responseMimeType: 'application/json',
+        responseSchema: {
+            type: Type.OBJECT,
+            properties: {
+                recipe_name: { type: Type.STRING },
+                ingredients: {
+                    type: Type.ARRAY,
+                    items: { type: Type.STRING },
+                },
+            },
+            required: ['recipe_name', 'ingredients'],
+        },
+    },
+});
+console.log(response.text);
 ```
 
 ### REST
 
 ```
 # Request
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -624,23 +680,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
         }]
     }],
     "generationConfig": {
-        "responseFormat": [
-            {
-                "type": "text",
-                "mimeType": "application/json",
-                "schema": {
-                    "type": "OBJECT",
-                    "properties": {
-                        "recipe_name": { "type": "STRING" },
-                        "ingredients": {
-                            "type": "ARRAY",
-                            "items": { "type": "STRING" }
-                        }
-                    },
-                    "required": ["recipe_name", "ingredients"]
+        "responseMimeType": "application/json",
+        "responseSchema": {
+            "type": "OBJECT",
+            "properties": {
+                "recipe_name": { "type": "STRING" },
+                "ingredients": {
+                    "type": "ARRAY",
+                    "items": { "type": "STRING" }
                 }
-            }
-        ]
+            },
+            "required": ["recipe_name", "ingredients"]
+        }
     }
 }'
 
@@ -663,7 +714,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 
 ### After (Interactions API)
 
-在 Interactions API 中，輸出格式控制項會移至頂層 `response_format` 陣列。
+ใน Interactions API การควบคุมรูปแบบเอาต์พุตจะย้ายไปอยู่ที่อาร์เรย์ `response_format` ระดับบนสุด
 
 ### Python
 
@@ -684,7 +735,7 @@ interaction = client.interactions.create(
         {
             "type": "text",
             "mime_type": "application/json",
-            "schema": Recipe,
+            "schema": Recipe.model_json_schema(),
         }
     ],
 )
@@ -775,13 +826,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 多模態生成
+## การสร้างแบบหลายรูปแบบ
 
-生成文字以外的內容 (例如圖片或音訊) 時，主要差異在於回覆如何建構生成的媒體。
+เมื่อสร้างเนื้อหาในรูปแบบอื่นๆ นอกเหนือจากข้อความ (เช่น รูปภาพหรือเสียง) ความแตกต่างหลักคือวิธีที่คำตอบจัดโครงสร้างสื่อที่สร้างขึ้น
 
-### 之前 (`generateContent`)
+### ก่อน (`generateContent`)
 
-在 `generateContent` 中，回應會直接在候選人的 `parts` 中傳回生成的媒體，通常是 `inlineData` 中的 base64 資料。
+ใน `generateContent` คำตอบจะแสดงสื่อที่สร้างขึ้นโดยตรงใน `parts` ของผู้สมัคร โดยปกติจะเป็นข้อมูล base64 ใน `inlineData`
 
 ```
 # Response structure concept
@@ -808,7 +859,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 
 ### After (Interactions API)
 
-在 Interactions API 中，產生的媒體會以時間軸中 `model_output` 步驟的 `content` 陣列內的不同項目顯示，維持互動的時間順序。
+ใน Interactions API สื่อที่สร้างขึ้นจะปรากฏเป็นรายการที่แตกต่างกันภายใน`content`อาร์เรย์ของ`model_output`ขั้นตอนในไทม์ไลน์ ซึ่งจะรักษาลำดับเวลาของการโต้ตอบไว้
 
 ```
 # Response structure concept
@@ -834,15 +885,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-這樣一來，回應剖析作業就會與輸入內容和文字輸出內容的處理方式保持一致，因為所有內容都是時間軸中的步驟。
+วิธีนี้จะช่วยให้การแยกวิเคราะห์การตอบกลับสอดคล้องกับวิธีจัดการอินพุตและเอาต์พุตข้อความ ซึ่งทุกอย่างจะเป็นขั้นตอนในไทม์ไลน์
 
-## 伺服器端工具
+## เครื่องมือฝั่งเซิร์ฟเวอร์
 
-Gemini 支援內建的伺服器端工具，例如 Google 搜尋基礎功能。主要差異在於回應如何表示工具執行作業。
+Gemini รองรับเครื่องมือฝั่งเซิร์ฟเวอร์ในตัว เช่น การอ้างอิงข้อมูลของ Google Search ความแตกต่างหลักคือวิธีที่คำตอบแสดงการดำเนินการของเครื่องมือ
 
-### 之前 (`generateContent`)
+### ก่อน (`generateContent`)
 
-在 `generateContent` 中，伺服器端工具大多不透明。啟用工具並透過個別 `groundingMetadata` 物件取得最終答案。重要事項：引文並非內嵌，請使用字元索引將文字片段對應回 `groundingChunks` 中的網路來源。`groundingSupports`
+ใน `generateContent` เครื่องมือฝั่งเซิร์ฟเวอร์ส่วนใหญ่จะทำงานแบบไม่โปร่งใส คุณเปิดใช้เครื่องมือและรับคำตอบสุดท้ายพร้อม`groundingMetadata`ออบเจ็กต์แยกต่างหาก ที่สำคัญคือ การอ้างอิงไม่ได้อยู่ในบรรทัด `groundingSupports` ใช้ดัชนีอักขระเพื่อแมปข้อความกลับไปยังแหล่งที่มาบนเว็บใน `groundingChunks`
 
 ### Python
 
@@ -853,7 +904,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     contents="Who won Euro 2024?",
     config=types.GenerateContentConfig(
         tools=[{"google_search": {}}]
@@ -876,7 +927,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const response = await client.models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.5-flash-lite',
     contents: 'Who won Euro 2024?',
     config: {
         tools: [{ google_search: {} }]
@@ -896,7 +947,7 @@ for (const support of metadata.groundingSupports) {
 
 ```
 # Request
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -952,9 +1003,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 
 ### After (Interactions API)
 
-在 Interactions API 中，伺服器端工具可提供完整的時間軸透明度。API 會將呼叫和結果記錄為不同的執行項目 (`steps`、`google_search_call` 和 `google_search_result`)，並顯示模型擷取的確切資料。
+ใน Interactions API เครื่องมือฝั่งเซิร์ฟเวอร์จะให้ความโปร่งใสของไทม์ไลน์ทั้งหมด API จะบันทึกการเรียกและผลลัพธ์เป็นการดำเนินการที่แตกต่างกัน `steps` (`google_search_call` และ `google_search_result`) ซึ่งจะแสดงข้อมูลที่โมเดลดึงมาอย่างชัดเจน
 
-此外，API 會**內嵌**傳回引文。`model_output` 步驟中的文字項目會包含自己的 `annotations` 陣列，直接連結至來源，不必從獨立的中繼資料物件對應索引。
+นอกจากนี้ API ยังแสดงการอ้างอิง**ในบรรทัด**ด้วย รายการข้อความภายใน`model_output` ขั้นตอนจะมีอาร์เรย์ `annotations` ของตัวเองที่ลิงก์ไปยังแหล่งที่มาโดยตรงแทนที่จะแมปดัชนีจากออบเจ็กต์ข้อมูลเมตาแยกต่างหาก
 
 ### Python
 
@@ -971,7 +1022,7 @@ interaction = client.interactions.create(
 
 for step in interaction.steps:
     if step.type == "google_search_result":
-        print(f"Search Suggestions: {step.search_suggestions}")
+        print(f"Search Suggestions: {step.result[0].search_suggestions}")
     elif step.type == "model_output":
         print(f"Answer: {step.content[0].text}")
         if step.content[0].annotations:
@@ -994,7 +1045,7 @@ const interaction = await client.interactions.create({
 
 for (const step of interaction.steps) {
     if (step.type === 'google_search_result') {
-        console.log(`Search Suggestions: ${step.search_suggestions}`);
+        console.log(`Search Suggestions: ${step.result[0].search_suggestions}`);
     } else if (step.type === 'model_output') {
         console.log(`Answer: ${step.content[0].text}`);
         if (step.content[0].annotations) {
@@ -1065,24 +1116,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 函式呼叫
+## การเรียกใช้ฟังก์ชัน
 
-函式呼叫和結果的結構也已變更，以符合步驟結構定義。
+นอกจากนี้ โครงสร้างของการเรียกใช้ฟังก์ชันและผลลัพธ์ยังเปลี่ยนไปเพื่อให้เข้ากับสคีมาขั้นตอนด้วย
 
-### 之前 (`generateContent`)
+### ก่อน (`generateContent`)
 
-在 `generateContent` 中，回應會在候選項目中傳回函式呼叫。
-
-### Python
+ใน `generateContent` คำตอบจะแสดงการเรียกใช้ฟังก์ชันภายในผู้สมัคร\* {Python}
 
 ```
+```python
 from google import genai
 from google.genai import types
 
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     contents="What's the weather in Boston?",
     config=types.GenerateContentConfig(tools=[weather_tool]),
 )
@@ -1093,7 +1143,7 @@ print(f"Requested tool: {function_call.name}")
 result = "52°F and rain"
 
 response = client.models.generate_content(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     contents=[
         types.Content(
             role="user",
@@ -1116,6 +1166,7 @@ response = client.models.generate_content(
 )
 print(response.text)
 ```
+```
 
 ### JavaScript
 
@@ -1125,7 +1176,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 let response = await client.models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.5-flash-lite',
     contents: "What's the weather in Boston?",
     config: { tools: [weatherTool] }
 });
@@ -1136,7 +1187,7 @@ console.log(`Requested tool: ${functionCall.name}`);
 const result = "52°F and rain";
 
 response = await client.models.generateContent({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.5-flash-lite',
     contents: [
         { role: 'user', parts: [{ text: "What's the weather in Boston?" }] },
         response.candidates[0].content,
@@ -1159,7 +1210,7 @@ console.log(response.text);
 
 ```
 # Request
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -1207,7 +1258,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 
 ### After (Interactions API)
 
-時間軸現在會分別顯示工具呼叫和結果。
+ตอนนี้การเรียกใช้เครื่องมือและผลลัพธ์เป็นขั้นตอนที่แยกกันในไทม์ไลน์แล้ว
 
 ### Python
 
@@ -1252,7 +1303,7 @@ for step in interaction.steps:
                 }
             ],
         )
-        print(next_interaction.output_text)
+        print(interaction.output_text)
 ```
 
 ### JavaScript
@@ -1392,21 +1443,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## 串流
+## สตรีมมิง
 
-串流的重大差異在於，Interactions API 使用相同的端點，但要求主體中含有 `"stream": true`，而 `generateContent` API 則需要呼叫專屬端點 (`:streamGenerateContent`)。
+ความแตกต่างที่สำคัญในการสตรีมคือ Interactions API ใช้ปลายทางเดียวกันกับ `"stream": true` ในเนื้อหาคำขอ ในขณะที่ `generateContent` API ต้องเรียกปลายทางเฉพาะ (`:streamGenerateContent`)
 
-此外，串流事件現在會使用專門類型，監控互動生命週期，並追蹤時間軸上的執行步驟。
+นอกจากนี้ ตอนนี้กิจกรรมการสตรีมยังใช้ประเภทเฉพาะเพื่อตรวจสอบวงจรการโต้ตอบและติดตามขั้นตอนการดำเนินการตามไทม์ไลน์ด้วย
 
-### 之前 (`generateContentStream`)
+### ก่อน (`generateContentStream`)
 
-使用 `generateContent` 時，您會接收一連串的回覆區塊。
+เมื่อใช้ `generateContent` คุณจะใช้สตรีมของก้อนการตอบกลับ
 
 ### Python
 
 ```
+from google import genai
+
+client = genai.Client()
+
 response = client.models.generate_content_stream(
-    model="gemini-2.5-flash", contents="Tell me a story"
+    model="gemini-2.5-flash-lite", contents="Tell me a story"
 )
 for chunk in response:
     print(chunk.text, end="")
@@ -1416,7 +1471,7 @@ for chunk in response:
 
 ```
 const responseStream = await client.models.generateContentStream({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.5-flash-lite',
     contents: 'Tell me a story',
 });
 for await (const chunk of responseStream) {
@@ -1428,7 +1483,7 @@ for await (const chunk of responseStream) {
 
 ```
 # Request
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:streamGenerateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
@@ -1456,7 +1511,7 @@ data: {"event_type": "content.stop", "index": 1}
 
 ### After (Interactions API)
 
-在 Interactions API 中，串流會使用伺服器傳送事件 (SSE) 和特殊差異類型，代表執行步驟的發生時間。
+ใน Interactions API การสตรีมจะใช้เหตุการณ์ที่เซิร์ฟเวอร์ส่ง (SSE) และประเภทเดลต้าเฉพาะเพื่อแสดงขั้นตอนการดำเนินการตามที่เกิดขึ้น
 
 ### Python
 
@@ -1472,8 +1527,8 @@ stream = client.interactions.create(
 )
 
 for event in stream:
-    if event.event_type == "step.delta":
-        if event.delta.type == "text":
+    if event.event_type == "step.delta" and event.delta:
+        if getattr(event.delta, "type", None) == "text" and getattr(event.delta, "text", None):
             print(event.delta.text, end="", flush=True)
     elif event.event_type == "interaction.completed":
         print(f"\n\n--- Stream Finished ---")
@@ -1493,8 +1548,8 @@ const stream = await client.interactions.create({
 });
 
 for await (const event of stream) {
-    if (event.event_type === 'step.delta') {
-        if (event.delta.type === 'text' && 'text' in event.delta) {
+    if (event.event_type === 'step.delta' && event.delta) {
+        if (event.delta.type === 'text' && event.delta.text) {
             process.stdout.write(event.delta.text);
         }
     } else if (event.event_type === 'interaction.completed') {
@@ -1505,7 +1560,7 @@ for await (const event of stream) {
 
 ### REST
 
-# Example SSE stream output
+# เอาต์พุตสตรีม SSE ตัวอย่าง
 **event: interaction.created
 data: {"type": "interaction.created", "interaction": {"id": "int\_xyz", "status": "created"}}
 event: interaction.in\_progress
@@ -1526,13 +1581,13 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int\_xyz", "status": "completed", "usage": {"prompt\_tokens": 10, "completion\_tokens": 5, "total\_tokens": 15}}}**
 ```
 
-### 串流工具和函式呼叫
+### เครื่องมือการสตรีมและการเรียกฟังก์ชัน
 
-串流中的工具行為已大幅改變，從 `generateContent` 轉移至提供更精細的控制和瀏覽權限。
+ลักษณะการทำงานของเครื่องมือในสตรีมเปลี่ยนไปอย่างมากจาก `generateContent` เพื่อให้การควบคุมและการเข้าถึงที่ละเอียดยิ่งขึ้น
 
-#### 之前 (`generateContent`)
+#### ก่อน (`generateContent`)
 
-使用 `generateContent` 時，串流函式呼叫會以單一區塊完整傳送。您無法即時查看產生的引數，因此處理常式只會檢查完整的 `functionCall` 物件。
+เมื่อใช้ `generateContent` ฟังก์ชันการโทรแบบสตรีมมิงจะมาถึงอย่างสมบูรณ์ในก้อนเดียว คุณไม่สามารถดูอาร์กิวเมนต์ที่สร้างขึ้นแบบเรียลไทม์ได้ ตัวแฮนเดิลจึงเพียงตรวจสอบออบเจ็กต์ `functionCall` ที่สมบูรณ์
 
 ### Python
 
@@ -1543,7 +1598,7 @@ from google.genai import types
 client = genai.Client()
 
 stream = client.models.generate_content_stream(
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash-lite",
     contents="What's the weather in Boston?",
     config=types.GenerateContentConfig(tools=[weather_tool]),
 )
@@ -1565,7 +1620,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const stream = await client.models.generateContentStream({
-    model: 'gemini-2.5-flash',
+    model: 'gemini-2.5-flash-lite',
     contents: "What's the weather in Boston?",
     config: { tools: [weatherTool] }
 });
@@ -1584,11 +1639,11 @@ for await (const chunk of stream) {
 
 ```
 # Request
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:streamGenerateContent" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "contents": [{"parts": [{"text": "What'\''s the weather in Boston?"}]}],
+    "contents": [{"parts": [{"text": "What is the weather in Boston?"}]}],
     "tools": [{"functionDeclarations": [{"name": "get_weather", "parameters": {"type": "OBJECT", "properties": {"location": {"type": "STRING"}}}}]}]
 }'
 
@@ -1598,7 +1653,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 
 #### After (Interactions API)
 
-Interactions API 會以 `arguments` 事件的形式，逐一串流函式呼叫引數的字元。整個工具生命週期 (想法、呼叫、結果和輸出) 會以一系列不同的步驟呈現。
+Interactions API จะสตรีมอาร์กิวเมนต์การเรียกฟังก์ชันทีละอักขระเป็นเหตุการณ์ `arguments` วงจรทั้งหมดของเครื่องมือ ซึ่งประกอบด้วยความคิด การเรียกใช้ ผลลัพธ์ และเอาต์พุต จะทำงานเป็นชุดขั้นตอนที่แตกต่างกัน
 
 ### Python
 
@@ -1615,13 +1670,13 @@ stream = client.interactions.create(
 )
 
 for event in stream:
-    if event.event_type == "step.start":
-        if event.step.type == "function_call":
+    if event.event_type == "step.start" and event.step:
+        if getattr(event.step, "type", None) == "function_call":
             print(f"Calling: {event.step.name}")
-    elif event.event_type == "step.delta":
-        if event.delta.type == "arguments":
+    elif event.event_type == "step.delta" and event.delta:
+        if getattr(event.delta, "type", None) == "arguments":
             print(f"  args: {event.delta.partial_arguments}")
-        elif event.delta.type == "text":
+        elif getattr(event.delta, "type", None) == "text" and getattr(event.delta, "text", None):
             print(event.delta.text, end="")
     elif event.event_type == "interaction.completed":
         print("\n--- Done ---")
@@ -1642,14 +1697,14 @@ const stream = await client.interactions.create({
 });
 
 for await (const event of stream) {
-    if (event.event_type === 'step.start') {
+    if (event.event_type === 'step.start' && event.step) {
         if (event.step.type === 'function_call') {
             console.log(`Calling: ${event.step.name}`);
         }
-    } else if (event.event_type === 'step.delta') {
-        if (event.delta.type === 'arguments') {
+    } else if (event.event_type === 'step.delta' && event.delta) {
+        if (event.delta.type === 'arguments' && event.delta.partial_arguments) {
             console.log(`  args: ${event.delta.partial_arguments}`);
-        } else if (event.delta.type === 'text') {
+        } else if (event.delta.type === 'text' && event.delta.text) {
             process.stdout.write(event.delta.text);
         }
     } else if (event.event_type === 'interaction.completed') {
@@ -1667,7 +1722,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
     "model": "gemini-3.5-flash",
-    "input": "What'\''s the weather in Boston?",
+    "input": "What is the weather in Boston?",
     "tools": [{"type": "function", "name": "get_weather", "parameters": {"type": "object", "properties": {"location": {"type": "string"}}}}],
     "stream": true
 }'
@@ -1743,12 +1798,12 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 256, "completion_tokens": 128, "total_tokens": 384}}}
 ```
 
-提供意見
+ส่งความคิดเห็น
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-上次更新時間：2026-06-22 (世界標準時間)。
+อัปเดตล่าสุด 2026-07-08 UTC
 
-想進一步說明嗎？
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-22 (世界標準時間)。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-08 UTC"],[],[]]

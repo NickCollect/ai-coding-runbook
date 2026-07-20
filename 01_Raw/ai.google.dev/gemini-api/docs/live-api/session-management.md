@@ -1,47 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=hi
-fetched_at: 2026-07-06T05:17:56.172495+00:00
-title: "Live API \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0938\u0947\u0936\u0928 \u092e\u0948\u0928\u0947\u091c \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=he
+fetched_at: 2026-07-20T04:37:46.021293+00:00
+title: "\u05e0\u05d9\u05d4\u05d5\u05dc \u05e1\u05e9\u05e0\u05d9\u05dd \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-सुझाव भेजें
+שליחת משוב
 
-# Live API की मदद से सेशन मैनेज करना
+# ניהול סשנים באמצעות Live API
 
-लाइव एपीआई में, सेशन का मतलब है ऐसा कनेक्शन जो लगातार बना रहता है. इसमें, एक ही कनेक्शन पर इनपुट और आउटपुट की स्ट्रीमिंग लगातार होती रहती है. इस बारे में ज़्यादा जानें कि [यह कैसे काम करता है](https://ai.google.dev/gemini-api/docs/live?hl=hi).
-सेशन के इस यूनीक डिज़ाइन की वजह से, कम समय में डेटा ट्रांसफ़र किया जा सकता है. साथ ही, इसमें यूनीक सुविधाएं भी मिलती हैं. हालांकि, इससे कुछ समस्याएं भी आ सकती हैं. जैसे, सेशन की समयसीमा तय होना और सेशन का समय से पहले खत्म हो जाना.
-इस गाइड में, सेशन के मैनेजमेंट से जुड़ी उन समस्याओं को हल करने की रणनीतियों के बारे में बताया गया है जो Live API का इस्तेमाल करते समय आ सकती हैं.
+ב-Live API, סשן הוא חיבור מתמשך שבו הקלט והפלט מועברים בסטרימינג באופן רציף דרך אותו חיבור ([מידע נוסף על אופן הפעולה](https://ai.google.dev/gemini-api/docs/live?hl=he)).
+העיצוב הייחודי של הסשן מאפשר השהיה נמוכה ותומך בתכונות ייחודיות, אבל הוא גם עלול ליצור בעיות, כמו הגבלות על משך הסשן וסיום מוקדם.
+במדריך הזה מוסברות אסטרטגיות להתמודדות עם האתגרים בניהול סשנים שיכולים להתעורר כשמשתמשים ב-Live API.
 
-## सेशन की समयसीमा
+## משך החיים של הסשן
 
-कंप्रेशन के बिना, सिर्फ़ ऑडियो वाले सेशन 15 मिनट तक और ऑडियो-वीडियो वाले सेशन दो मिनट तक ही चल सकते हैं. इन सीमाओं से ज़्यादा समय तक सेशन चलाने पर
-सेशन खत्म हो जाएगा. साथ ही, कनेक्शन भी खत्म हो जाएगा. हालांकि,
-[कॉन्टेक्स्ट विंडो कंप्रेशन](#context-window-compression) का इस्तेमाल करके,
-सेशन को अनलिमिटेड समय तक चलाया जा सकता है.
+בלי דחיסה, משך הפגישות עם אודיו בלבד מוגבל ל-15 דקות, ומשך הפגישות עם אודיו ווידאו מוגבל ל-2 דקות. חריגה מהמגבלות האלה תגרום לסיום הסשן (ולכן גם של החיבור), אבל אפשר להשתמש ב[דחיסה של חלון ההקשר](#context-window-compression) כדי להאריך את הסשנים לזמן בלתי מוגבל.
 
-कनेक्शन की समयसीमा भी सीमित होती है. यह करीब 10 मिनट तक ही चल सकता है. कनेक्शन खत्म होने पर, सेशन भी खत्म हो जाता है. [ऐसे में, सेशन को फिर से शुरू करने की सुविधा का इस्तेमाल करके, एक सेशन को कई कनेक्शन पर चालू रखा जा सकता है.](#session-resumption)
-कनेक्शन खत्म होने से पहले, आपको [GoAway मैसेज](#goaway-message) भी मिलेगा.
-इससे आपको आगे की कार्रवाई करने में मदद मिलेगी.
+גם משך החיים של החיבור מוגבל, לכ-10 דקות. כשהחיבור מסתיים, גם הסשן מסתיים. במקרה כזה, אפשר להגדיר סשן יחיד שיישאר פעיל בכמה חיבורים באמצעות [חידוש סשן](#session-resumption).
+בנוסף, תקבלו [הודעת GoAway](#goaway-message) לפני שהחיבור יסתיים, כדי שתוכלו לבצע פעולות נוספות.
 
-## कॉन्टेक्स्ट विंडो कंप्रेशन
+## דחיסת חלון ההקשר
 
-सेशन को ज़्यादा समय तक चलाने और कनेक्शन के अचानक खत्म होने से बचने के लिए, सेशन के कॉन्फ़िगरेशन के हिस्से के तौर पर,
-[contextWindowCompression](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression)
-फ़ील्ड सेट करके, कॉन्टेक्स्ट विंडो कंप्रेशन की सुविधा चालू की जा सकती है.
+כדי להאריך את משך הסשנים ולמנוע ניתוק פתאומי של החיבור, אפשר להפעיל דחיסה של חלון ההקשר על ידי הגדרת השדה [contextWindowCompression](https://ai.google.dev/api/live?hl=he#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) כחלק מהגדרת הסשן.
 
-[ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=hi#contextwindowcompressionconfig) में, [स्लाइडिंग-विंडो मैकेनिज़्म](https://ai.google.dev/api/live?hl=hi#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
-और [टोकन की संख्या](https://ai.google.dev/api/live?hl=hi#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
-को कॉन्फ़िगर किया जा सकता है. इससे कंप्रेशन ट्रिगर होता है.
+ב-[ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=he#contextwindowcompressionconfig), אפשר להגדיר [מנגנון של חלון הזזה](https://ai.google.dev/api/live?hl=he#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window) ו[מספר טוקנים](https://ai.google.dev/api/live?hl=he#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens) שמפעיל דחיסה.
 
 ### Python
 
@@ -68,19 +60,13 @@ const config = {
 };
 ```
 
-## सेशन को फिर से शुरू करना
+## המשך הסשן
 
-सर्वर के समय-समय पर WebSocket
-कनेक्शन रीसेट करने पर, सेशन को खत्म होने से रोकने के लिए, [sessionResumption](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
-फ़ील्ड को [सेटअप कॉन्फ़िगरेशन](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentSetup) में कॉन्फ़िगर करें.
+כדי למנוע את סיום הסשן כשהשרת מאפס מעת לעת את חיבור ה-WebSocket, צריך להגדיר את השדה [sessionResumption](https://ai.google.dev/api/live?hl=he#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) ב[הגדרת ההגדרה](https://ai.google.dev/api/live?hl=he#BidiGenerateContentSetup).
 
-इस कॉन्फ़िगरेशन को पास करने पर,
-सर्वर [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=hi#SessionResumptionUpdate)
-मैसेज भेजता है. इसका इस्तेमाल, अगले कनेक्शन के [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=hi#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle)
-के तौर पर, पिछले रेज़्युमशन
-टोकन को पास करके, सेशन को फिर से शुरू करने के लिए किया जा सकता है.
+העברת ההגדרה הזו גורמת לשרת לשלוח הודעות [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=he#SessionResumptionUpdate), שאפשר להשתמש בהן כדי להמשיך את הסשן. לשם כך צריך להעביר את אסימון ההמשכה האחרון כ-[`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=he#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) של החיבור הבא.
 
-रेज़्युमशन टोकन, पिछले सेशन के खत्म होने के दो घंटे बाद तक मान्य होते हैं.
+התוקף של אסימוני חידוש הוא שעתיים אחרי סיום הסשן האחרון.
 
 ### Python
 
@@ -215,10 +201,9 @@ async function main() {
 main();
 ```
 
-## सेशन डिसकनेक्ट होने से पहले मैसेज पाना
+## קבלת הודעה לפני ניתוק הסשן
 
-सर्वर एक [GoAway](https://ai.google.dev/api/live?hl=hi#GoAway) मैसेज भेजता है. इससे पता चलता है कि मौजूदा
-कनेक्शन जल्द ही खत्म हो जाएगा. इस मैसेज में [timeLeft](https://ai.google.dev/api/live?hl=hi#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left) शामिल होता है. इससे पता चलता है कि कनेक्शन खत्म होने में कितना समय बचा है. साथ ही, इससे आपको कनेक्शन के ABORTED के तौर पर खत्म होने से पहले, आगे की कार्रवाई करने में मदद मिलती है.
+השרת שולח הודעת [GoAway](https://ai.google.dev/api/live?hl=he#GoAway) שמציינת שהחיבור הנוכחי יסתיים בקרוב. ההודעה הזו כוללת את [timeLeft](https://ai.google.dev/api/live?hl=he#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left), שמציין את הזמן שנותר ומאפשר לכם לבצע פעולה נוספת לפני שהחיבור יסתיים כ-ABORTED.
 
 ### Python
 
@@ -241,10 +226,10 @@ for (const turn of turns) {
 }
 ```
 
-## जनरेशन पूरा होने पर मैसेज पाना
+## קבלת הודעה כשהיצירה מסתיימת
 
-सर्वर एक [generationComplete](https://ai.google.dev/api/live?hl=hi#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
-मैसेज भेजता है. इससे पता चलता है कि मॉडल ने जवाब जनरेट कर लिया है.
+השרת שולח הודעה מסוג [generationComplete](https://ai.google.dev/api/live?hl=he#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
+שמציינת שהמודל סיים ליצור את התשובה.
 
 ### Python
 
@@ -266,18 +251,16 @@ for (const turn of turns) {
 }
 ```
 
-## आगे क्या करना है
+## המאמרים הבאים
 
-लाइव एपीआई के साथ काम करने के अन्य तरीकों के बारे में जानने के लिए, सुविधाओं की पूरी
-[गाइड](https://ai.google.dev/gemini-api/docs/live?hl=hi), टूल के [इस्तेमाल वाला](https://ai.google.dev/gemini-api/docs/live-tools?hl=hi) पेज या
-[Live API कुकबुक](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=hi) देखें.
+אפשר לעיין בדרכים נוספות לעבודה עם Live API במדריך המלא [יכולות](https://ai.google.dev/gemini-api/docs/live?hl=he), בדף [שימוש בכלי](https://ai.google.dev/gemini-api/docs/live-tools?hl=he) או ב[אוסף פתרונות של Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=he).
 
-सुझाव भेजें
+שליחת משוב
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-आखिरी बार 2026-06-01 (UTC) को अपडेट किया गया.
+עדכון אחרון: 2026-06-01 (שעון UTC).
 
-क्या आपको हमें और कुछ बताना है?
+רוצה לתת לנו משוב?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-01 (UTC) को अपडेट किया गया."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-01 (שעון UTC)."],[],[]]

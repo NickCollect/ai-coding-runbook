@@ -1,28 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja
-fetched_at: 2026-07-06T05:06:49.511592+00:00
-title: "Flex \u63a8\u8ad6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/flex-inference?hl=es-419
+fetched_at: 2026-07-20T04:47:26.993742+00:00
+title: "Inferencia flexible \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-フィードバックを送信
+Enviar comentarios
 
-# Flex 推論
+# Inferencia flexible
 
-Gemini Flex API は推論階層で、レイテンシが変動し、ベスト エフォート型の可用性となる代わりに、標準料金と比較して 50% のコスト削減を実現します。同期処理が必要だが、標準 API のリアルタイム パフォーマンスは必要ない、レイテンシ許容型のワークロード向けに設計されています。
+La API de Gemini Flex es un nivel de inferencia que ofrece una reducción del 50% en el costo en comparación con las tarifas estándar, a cambio de una latencia variable y una disponibilidad de mejor esfuerzo. Está diseñada para cargas de trabajo tolerantes a la latencia que requieren procesamiento síncrono, pero no necesitan el rendimiento en tiempo real de la API estándar.
 
-## Flex の使用方法
+## Cómo usar Flex
 
-Flex 階層を使用するには、リクエストで `service_tier` を `flex` として指定します。このフィールドを省略すると、リクエストはデフォルトで標準階層を使用します。
+Para usar el nivel Flex, especifica `service_tier` como `flex` en tu solicitud. De forma predeterminada, las solicitudes usan el nivel estándar si se omite este campo.
 
 ### Python
 
@@ -70,59 +70,64 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Flex 推論の仕組み
+## Cómo funciona la inferencia de Flex
 
-Gemini Flex 推論は、標準 API と 24 時間
-の [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja) のターンアラウンド タイムのギャップを埋めます。オフピークの「削減可能な」コンピューティング容量を利用して、バックグラウンド タスクとシーケンシャル ワークフローに費用対効果の高いソリューションを提供します。
+La inferencia de Gemini Flex une la brecha entre la API estándar y el tiempo de respuesta de 24 horas
+de la [API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419). Utiliza la capacidad de procesamiento fuera de las horas pico y "desechable" para proporcionar una solución rentable para las tareas en segundo plano y los flujos de trabajo secuenciales.
 
-| 機能 | Flex | 候補 | 標準 | バッチ |
+| Función | Flexible | Prioridad | Estándar | Lote |
 | --- | --- | --- | --- | --- |
-| **料金** | 50% 割引 | 標準より 75 ～ 100% 高い | 通常料金 | 50% 割引 |
-| **レイテンシ** | 分（目標 1 ～ 15 分） | 低（秒） | 秒～分 | 最大 24 時間 |
-| **信頼性** | ベスト エフォート（削減可能） | 高（削減不可） | 高 / 中～高 | 高（スループットの場合） |
-| **インターフェース** | 同期 | 同期 | 同期 | 非同期 |
+| **Precios** | 50% de descuento | Entre un 75% y un 100% más que el nivel Estándar | Precio completo | 50% de descuento |
+| **Latencia** | Minutos (objetivo de 1 a 15 min) | Baja (segundos) | De segundos a minutos | Hasta 24 horas |
+| **Confiabilidad** | Mejor esfuerzo (desechable) | Alta (no desechable) | Alta / media alta | Alta (para la capacidad de procesamiento) |
+| **Interfaz** | Síncrona | Síncrona | Síncrona | Asíncrona |
 
-### 主な特典
+### Ventajas clave
 
-- **費用対効果**: 本番環境以外の評価、バックグラウンド エージェント、データ拡充で大幅なコスト削減を実現します。
-- **摩擦が少ない**: 既存のリクエストに 1 つのパラメータを追加するだけです。
-- **同期ワークフロー**: 次のリクエストが前のリクエストの出力に依存するシーケンシャル API チェーンに最適です。エージェント ワークフローの場合、Batch よりも柔軟性が高くなります。
+- **Rentabilidad**: Ahorros significativos para las evaluaciones que no son de producción, los agentes en segundo plano y el enriquecimiento de datos
+- **Baja fricción**: Simplemente agrega un solo parámetro a tus solicitudes existentes
+- **Flujos de trabajo síncronos**: Ideal para cadenas de API secuenciales en las que la siguiente solicitud depende del resultado de la anterior, lo que la hace más flexible que el lote para los flujos de trabajo de agentes
 
-### ユースケース
+### Casos de uso
 
-- **オフライン評価**: 「LLM-as-a-judge」回帰テストまたはリーダーボードの実行。
-- **バックグラウンド エージェント**: CRM の更新、プロファイルの作成、コンテンツ モデレーションなど、数分の遅延が許容されるシーケンシャル タスク。
-- **予算が限られた研究**: 限られた予算で大量のトークンを必要とする学術的な実験。
+- **Evaluaciones sin conexión**: Ejecución de pruebas de regresión o clasificaciones de "LLM como juez"
+- **Agentes en segundo plano**: Tareas secuenciales como actualizaciones de CRM, creación de perfiles o moderación de contenido en las que se aceptan minutos de demora
+- **Investigación con restricciones presupuestarias**: Experimentos académicos que requieren un gran volumen de tokens con un presupuesto limitado
 
-### レート上限
+### Límites de frecuencia
 
-[Flex 推論トラフィックは一般的な [レート上限](https://aistudio.google.com/rate-limit?hl=ja)にカウントされます。
-Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja) のような拡張レート上限は提供されません。
+El tráfico de inferencia de Flex se incluye en los [límites de frecuencia](https://aistudio.google.com/rate-limit?hl=es-419) generales; no
+ofrece límites de frecuencia extendidos como la [API de Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=es-419).
 
-### 削減可能な容量
+### Capacidad desechable
 
-Flex トラフィックは低い優先度で処理されます。標準トラフィックが急増した場合、優先度の高いユーザーの容量を確保するために、Flex リクエストがプリエンプトまたは削除されることがあります。優先度の高い推論をお探しの場合は、
-[優先度の高い推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)をご覧ください。
+El tráfico de Flex se trata con una prioridad más baja. Si hay un aumento en el tráfico estándar, es posible que se interrumpan o se expulsen las solicitudes de Flex para garantizar la capacidad de los usuarios de alta prioridad. Si buscas inferencias de alta prioridad, consulta
+[Inferencias de prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419)
 
-### エラーコード
+### Códigos de error
 
-Flex 容量が使用できない場合やシステムが輻輳している場合、API は標準のエラーコードを返します。
+Cuando la capacidad de Flex no está disponible o el sistema está congestionado, la API muestra códigos de error estándar:
 
-- **503 Service Unavailable**: 現在、システム容量の上限に達しています。
-- **429 Too Many Requests**: レート上限またはリソースの枯渇。
+- **503 Service Unavailable**: El sistema está al máximo de su capacidad.
+- **429 Too Many Requests**: Límites de frecuencia o agotamiento de recursos.
 
-### クライアントの責任
+### Responsabilidad del cliente
 
-- **サーバーサイドのフォールバックなし**: 予期しない料金が発生しないように、Flex 容量が上限に達した場合でも、Flex リクエストが自動的に標準階層にアップグレードされることはありません。
-- **再試行**: 指数バックオフを使用して、独自のクライアントサイドの再試行ロジックを実装する必要があります。
-- **タイムアウト**: Flex リクエストはキューに置かれる可能性があるため、接続が途中で切断されないように、クライアントサイドのタイムアウトを 10 分以上に増やすことをおすすめします。
+- **Sin fallback del servidor**: Para evitar cargos inesperados, el sistema no
+  actualizará automáticamente una solicitud de Flex al nivel Estándar si la capacidad de Flex está
+  llena.
+- **Reintentos**: Debes implementar tu propia lógica de reintento del cliente con
+  retirada exponencial.
+- **Tiempos de espera**: Debido a que las solicitudes de Flex pueden estar en una cola, te recomendamos
+  que aumentes los tiempos de espera del cliente a 10 minutos o más para evitar el cierre prematuro de la
+  conexión.
 
-## タイムアウト ウィンドウを調整する
+## Ajusta los períodos de tiempo de espera
 
-REST API とクライアント ライブラリのリクエストごとのタイムアウトを構成できます。
-クライアントサイドのタイムアウトが、意図したサーバーの待機ウィンドウ（Flex 待機キューの場合は 600 秒以上など）をカバーしていることを常に確認してください。SDK では、タイムアウト値はミリ秒単位で指定します。
+Puedes configurar tiempos de espera por solicitud para la API de REST y las bibliotecas cliente.
+Siempre asegúrate de que el tiempo de espera del cliente cubra el período de paciencia del servidor deseado (p.ej., 600 s o más para las colas de espera de Flex). Los SDK esperan valores de tiempo de espera en milisegundos.
 
-### リクエストごとのタイムアウト
+### Tiempos de espera por solicitud
 
 ### Python
 
@@ -156,9 +161,9 @@ async function main() {
 await main();
 ```
 
-## 再試行を実装する
+## Implementa reintentos
 
-Flex は削減可能で、503 エラーで失敗するため、失敗したリクエストを続行するために再試行ロジックを実装する例を次に示します。
+Debido a que Flex es desechable y falla con errores 503, aquí tienes un ejemplo de implementación opcional de la lógica de reintento para continuar con las solicitudes fallidas:
 
 ### Python
 
@@ -237,36 +242,36 @@ async function main() {
 await main();
 ```
 
-## 料金
+## Precios
 
-Flex 推論の料金は、[標準 API](https://ai.google.dev/gemini-api/docs/pricing?hl=ja) の 50% で、
-トークン単位で課金されます。
+La inferencia de Flex tiene un precio del 50% de la [API estándar](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419)
+y se factura por token.
 
-## サポートされているモデル
+## Modelos compatibles
 
-次のモデルは Flex 推論をサポートしています。
+Los siguientes modelos admiten la inferencia de Flex:
 
-| モデル | Flex 推論 |
+| Modelo | Inferencia de Flex |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ |
-| [Gemini 3.1 Pro プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ✔️ |
-| [Gemini 3 Flash プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ja) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ja) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ja) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=es-419) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=es-419) | ✔️ |
+| [Versión preliminar de Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=es-419) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=es-419) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=es-419) | ✔️ |
 
-## 次のステップ
+## ¿Qué sigue?
 
-- [超低レイテンシの優先度の高い推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)。
-- [トークン](https://ai.google.dev/gemini-api/docs/tokens?hl=ja): トークンについて理解する。
+- [Inferencia de prioridad](https://ai.google.dev/gemini-api/docs/priority-inference?hl=es-419) para una latencia ultrabaja
+- [Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419): Comprende los tokens
 
-フィードバックを送信
+Enviar comentarios
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-最終更新日 2026-06-22 UTC。
+Última actualización: 2026-07-06 (UTC)
 
-ご意見をお聞かせください
+¿Quieres brindar más información?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-22 UTC。"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-06 (UTC)"],[],[]]

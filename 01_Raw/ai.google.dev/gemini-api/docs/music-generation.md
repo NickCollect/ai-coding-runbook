@@ -1,39 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=id
-fetched_at: 2026-07-06T05:15:38.833082+00:00
-title: "Membuat musik dengan Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/music-generation?hl=vi
+fetched_at: 2026-07-20T04:39:45.696817+00:00
+title: "T\u1ea1o nh\u1ea1c b\u1eb1ng Lyria 3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-# Membuat musik dengan Lyria 3
+# Tạo nhạc bằng Lyria 3
 
-Lyria 3 adalah rangkaian model pembuatan musik Google, yang tersedia melalui Gemini API. Dengan Lyria 3, Anda dapat membuat audio stereo berkualitas tinggi 44, 1 kHz dari perintah teks atau dari gambar. Model ini memberikan koherensi struktural, termasuk vokal, lirik yang diberi stempel waktu, dan aransemen instrumental lengkap.
+Lyria 3 là nhóm mô hình tạo nhạc của Google, có sẵn thông qua Gemini API. Với Lyria 3, bạn có thể tạo âm thanh nổi chất lượng cao ở tần số 44, 1 kHz từ câu lệnh bằng văn bản hoặc từ hình ảnh. Các mô hình này mang đến sự nhất quán về cấu trúc, bao gồm cả giọng hát, lời bài hát có dấu thời gian và bản phối nhạc cụ hoàn chỉnh.
 
-Rangkaian Lyria 3 mencakup dua model:
+Nhóm mô hình Lyria 3 bao gồm 2 mô hình:
 
-| Model | ID Model | Paling cocok untuk | Durasi | Output |
+| Mô hình | Mã kiểu máy | Phù hợp nhất cho | Thời lượng | Đầu ra |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | Klip, loop, pratinjau singkat | 30 detik | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | Lagu berdurasi penuh dengan bait, chorus, bridge | Beberapa menit (dapat dikontrol menggunakan perintah) | MP3 |
+| **Đoạn video Lyria 3** | `lyria-3-clip-preview` | Đoạn video ngắn, video lặp lại, bản xem trước | 30 giây | MP3 |
+| **Lyria 3 Pro** | `lyria-3-pro-preview` | Bài hát có thời lượng đầy đủ, có đoạn thơ, điệp khúc và đoạn chuyển | Vài phút (có thể kiểm soát bằng câu lệnh) | MP3 |
 
-Kedua model dapat digunakan menggunakan
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) baru, yang mendukung input multimodal (teks dan gambar), dan menghasilkan audio **stereo fidelitas tinggi 44,1 kHz**
-.
+Bạn có thể dùng cả hai mô hình bằng [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) mới, hỗ trợ đầu vào đa phương thức (văn bản và hình ảnh) và tạo ra âm thanh **nổi có độ trung thực cao 44,1 kHz**.
 
-## Membuat klip musik
+## Tạo đoạn nhạc
 
-Model Lyria 3 Clip selalu membuat klip **30 detik**. Untuk membuat klip, panggil metode `interactions.create` dengan perintah teks. Respons selalu menyertakan lirik dan struktur lagu yang dibuat bersama dengan audio dalam skema `steps`.
+Mô hình Lyria 3 Clip luôn tạo một đoạn video dài **30 giây**. Để tạo một đoạn video, hãy gọi phương thức `interactions.create` bằng một câu lệnh văn bản. Phản hồi luôn bao gồm lời bài hát và cấu trúc bài hát được tạo cùng với âm thanh trong giản đồ `steps`.
 
 ### Python
 
@@ -94,14 +92,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Anda dapat mengambil data musik yang dibuat menggunakan properti `interaction.output_audio`, yang menampilkan blok audio terakhir yang dibuat. Anda juga dapat mengambil lirik dan struktur lagu menggunakan properti `interaction.output_text`. Untuk mengetahui detail properti praktis, lihat
-[Ringkasan interaksi](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id#convenience-properties).
+Bạn có thể truy xuất dữ liệu nhạc đã tạo bằng cách sử dụng thuộc tính `interaction.output_audio`. Thuộc tính này trả về khối âm thanh được tạo gần đây nhất. Bạn cũng có thể truy xuất lời bài hát và cấu trúc của bài hát bằng cách sử dụng thuộc tính `interaction.output_text`. Để biết thông tin chi tiết về các thuộc tính tiện lợi, hãy xem phần [Tổng quan về các hoạt động tương tác](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi#convenience-properties).
 
-## Membuat lagu berdurasi penuh
+## Tạo bài hát có thời lượng đầy đủ
 
-Gunakan model `lyria-3-pro-preview` untuk membuat lagu berdurasi penuh yang berlangsung selama beberapa menit. Model Pro memahami struktur musik dan dapat membuat komposisi dengan bait, chorus, dan bridge yang berbeda. Anda dapat memengaruhi
-durasi dengan menentukannya dalam perintah (misalnya, "buat lagu 2 menit") atau dengan
-menggunakan [stempel waktu](#timing) untuk menentukan struktur.
+Sử dụng mô hình `lyria-3-pro-preview` để tạo các bài hát dài từ một đến hai phút. Mô hình Pro hiểu cấu trúc âm nhạc và có thể tạo ra các bản nhạc có các đoạn, điệp khúc và cầu nối riêng biệt. Bạn có thể điều chỉnh thời lượng bằng cách chỉ định thời lượng trong câu lệnh (ví dụ: "tạo một bài hát dài 2 phút") hoặc bằng cách sử dụng [dấu thời gian](#timing) để xác định cấu trúc.
 
 ### Python
 
@@ -133,9 +128,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Memilih format output
+## Chọn định dạng đầu ra
 
-Secara default, model Lyria 3 membuat audio dalam format **MP3**. Untuk Lyria 3 Pro, Anda juga dapat meminta output dalam format **WAV** dengan menetapkan `response_format`.
+Theo mặc định, các mô hình Lyria 3 tạo âm thanh ở định dạng **MP3**. Đối với Lyria 3 Pro, bạn cũng có thể yêu cầu đầu ra ở định dạng **WAV** bằng cách đặt `response_format`.
 
 ### Python
 
@@ -174,12 +169,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Mengurai respons
+## Phân tích cú pháp phản hồi
 
-Respons dari Lyria 3 berisi beberapa blok konten dalam skema `steps`.
-Interaksi menampilkan urutan langkah, dengan langkah `model_output` berisi konten yang dibuat.
-Blok konten teks berisi lirik yang dibuat atau deskripsi JSON dari struktur lagu.
-Blok konten dengan jenis `audio` berisi data audio berenkode base64.
+Phản hồi từ Lyria 3 chứa nhiều khối nội dung trong giản đồ `steps`.
+Các lượt tương tác trả về một chuỗi các bước, trong đó các bước `model_output` chứa nội dung được tạo.
+Các khối nội dung văn bản chứa lời bài hát được tạo hoặc nội dung mô tả JSON về cấu trúc bài hát.
+Các khối nội dung có loại `audio` chứa dữ liệu âm thanh được mã hoá base64.
 
 ### Python
 
@@ -223,11 +218,11 @@ if (lyrics) {
 curl ... | jq -r '.steps[] | select(.type=="model_output") | .content[] | select(.type=="audio") | .data' | base64 -d > output.mp3
 ```
 
-#### Lirik dan musik yang disisipkan
+#### Lời bài hát và nhạc xen kẽ
 
-Karena output dari Lyria 3 kompleks—berisi langkah dan blok terpisah untuk lirik yang dibuat (teks) dan lagu itu sendiri (audio)—properti praktis menawarkan pintasan yang cepat dan direkomendasikan.
+Vì đầu ra của Lyria 3 rất phức tạp (chứa các bước và khối riêng biệt cho lời bài hát (văn bản) được tạo và bản thân bài hát (âm thanh)), nên các thuộc tính tiện lợi sẽ cung cấp một lối tắt nhanh chóng và được đề xuất.
 
-Namun, jika Anda menginginkan kontrol terprogram penuh atas linimasa langkah mentah yang ditampilkan oleh server (seperti mencatat blok konten individual saat diterima), Anda dapat melakukan iterasi `steps` secara manual:
+Tuy nhiên, nếu muốn kiểm soát hoàn toàn, theo cách lập trình đối với dòng thời gian thô của các bước do máy chủ trả về (chẳng hạn như ghi nhật ký các khối nội dung riêng lẻ khi chúng được nhận), bạn có thể lặp lại `steps` theo cách thủ công:
 
 ### Python
 
@@ -278,9 +273,9 @@ if (audioData) {
 }
 ```
 
-## Membuat musik dari gambar
+## Tạo nhạc từ hình ảnh
 
-Lyria 3 mendukung input multimodal — Anda dapat memberikan hingga **10 gambar** bersama dengan perintah teks dalam daftar `input` dan model akan membuat musik yang terinspirasi dari konten visual.
+Lyria 3 hỗ trợ nhiều phương thức nhập dữ liệu – bạn có thể cung cấp tối đa **10 hình ảnh** cùng với câu lệnh văn bản trong danh sách `input` và mô hình sẽ sáng tác nhạc dựa trên nội dung trực quan.
 
 ### Python
 
@@ -346,9 +341,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Memberikan lirik kustom
+## Cung cấp lời bài hát tuỳ chỉnh
 
-Anda dapat menulis lirik sendiri dan menyertakannya dalam perintah. Gunakan tag bagian seperti `[Verse]`, `[Chorus]`, dan `[Bridge]` untuk membantu model memahami struktur lagu:
+Bạn có thể tự viết lời bài hát và đưa lời bài hát đó vào câu lệnh. Sử dụng các thẻ phần như `[Verse]`, `[Chorus]` và `[Bridge]` để giúp mô hình hiểu cấu trúc bài hát:
 
 ### Python
 
@@ -424,9 +419,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Mengontrol waktu dan struktur
+## Kiểm soát thời gian và cấu trúc
 
-Anda dapat menentukan dengan tepat apa yang terjadi pada momen tertentu dalam lagu menggunakan stempel waktu. Hal ini berguna untuk mengontrol kapan instrumen masuk, kapan lirik disampaikan, dan bagaimana lagu berjalan:
+Bạn có thể chỉ định chính xác những gì xảy ra tại các thời điểm cụ thể trong bài hát bằng cách sử dụng dấu thời gian. Việc này rất hữu ích để kiểm soát thời điểm nhạc cụ bắt đầu, thời điểm lời bài hát được chuyển và cách bài hát tiến triển:
 
 ### Python
 
@@ -478,9 +473,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Membuat trek instrumental
+## Tạo bản nhạc không lời
 
-Untuk musik latar, soundtrack game, atau kasus penggunaan apa pun yang tidak memerlukan vokal, Anda dapat meminta model untuk membuat trek khusus instrumental:
+Đối với nhạc nền, nhạc trong trò chơi hoặc bất kỳ trường hợp sử dụng nào không yêu cầu giọng hát, bạn có thể yêu cầu mô hình tạo ra các bản nhạc chỉ có nhạc cụ:
 
 ### Python
 
@@ -512,9 +507,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Membuat musik dalam berbagai bahasa
+## Tạo nhạc bằng nhiều ngôn ngữ
 
-Lyria 3 membuat lirik dalam bahasa perintah Anda. Untuk membuat lagu dengan lirik bahasa Prancis, tulis perintah Anda dalam bahasa Prancis. Model ini menyesuaikan gaya vokal dan pengucapannya agar sesuai dengan bahasa.
+Lyria 3 tạo lời bài hát bằng ngôn ngữ trong câu lệnh của bạn. Để tạo một bài hát có lời bằng tiếng Pháp, hãy viết câu lệnh bằng tiếng Pháp. Mô hình này điều chỉnh phong cách giọng nói và cách phát âm cho phù hợp với ngôn ngữ.
 
 ### Python
 
@@ -546,30 +541,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Kecerdasan model
+## Trí tuệ của mô hình
 
-Lyria 3 menganalisis proses perintah Anda saat model mempertimbangkan struktur musik (intro, bait, chorus, bridge, dll.) berdasarkan perintah Anda.
-Hal ini terjadi sebelum audio dibuat dan memastikan koherensi struktural dan musikalitas.
+Lyria 3 phân tích quy trình tạo câu lệnh của bạn, trong đó mô hình suy luận thông qua cấu trúc âm nhạc (đoạn mở đầu, đoạn thơ, điệp khúc, đoạn chuyển, v.v.) dựa trên câu lệnh của bạn.
+Việc này diễn ra trước khi âm thanh được tạo và đảm bảo tính nhất quán về cấu trúc cũng như tính nhạc.
 
-## Panduan penulisan perintah
+## Hướng dẫn đặt câu lệnh
 
-Makin spesifik perintah Anda, makin bagus hasilnya. Berikut hal-hal yang dapat Anda sertakan untuk memandu pembuatan:
+Câu lệnh càng cụ thể thì kết quả càng tốt. Sau đây là những nội dung bạn có thể đưa vào để hướng dẫn quá trình tạo:
 
-- **Genre**: Tentukan genre atau campuran genre (misalnya, "lo-fi hip hop",
-  "jazz fusion", "cinematic orchestral").
-- **Instrumen**: Sebutkan instrumen tertentu (misalnya, "piano Fender Rhodes",
-  "gitar slide", "mesin drum TR-808").
-- **BPM**: Tetapkan tempo (misalnya, "120 BPM", "tempo lambat sekitar 70 BPM").
-- **Kunci/Skala**: Tentukan kunci musik (misalnya, "dalam G mayor", "D minor").
-- **Suasana hati dan atmosfer**: Gunakan kata sifat deskriptif (misalnya, "nostalgia",
-  "agresif", "halus", "melamun").
-- **Struktur**: Gunakan tag seperti `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`,
-  `[Outro]` atau stempel waktu untuk mengontrol perkembangan lagu.
-- **Durasi**: Model Klip selalu menghasilkan klip 30 detik. Untuk model Pro, tentukan panjang yang diinginkan dalam perintah Anda (misalnya, "buat lagu 2 menit") atau gunakan stempel waktu untuk mengontrol durasi.
+- **Thể loại**: Chỉ định một thể loại hoặc sự kết hợp của các thể loại (ví dụ: "lo-fi hip hop", "jazz fusion", "cinematic orchestral").
+- **Nhạc cụ**: Nêu tên nhạc cụ cụ thể (ví dụ: "đàn piano Fender Rhodes", "đàn guitar slide", "máy đánh trống TR-808").
+- **BPM**: Đặt nhịp độ (ví dụ: "120 BPM", "nhịp độ chậm khoảng 70 BPM").
+- **Khoá/Gam**: Nêu rõ một khoá nhạc (ví dụ: "trong khoá Sol trưởng", "trong khoá Rê thứ").
+- **Tâm trạng và bầu không khí**: Sử dụng tính từ mô tả (ví dụ: "hoài niệm", "mạnh mẽ", "siêu thực", "mơ màng").
+- **Cấu trúc**: Sử dụng các thẻ như `[Verse]`, `[Chorus]`, `[Bridge]`, `[Intro]`, `[Outro]` hoặc dấu thời gian để kiểm soát tiến trình của bài hát.
+- **Thời lượng**: Mô hình Đoạn trích luôn tạo ra các đoạn trích dài 30 giây. Đối với mô hình Pro, hãy chỉ định độ dài dự kiến trong câu lệnh (ví dụ: "tạo một bài hát dài 2 phút") hoặc dùng dấu thời gian để kiểm soát thời lượng.
 
-### Contoh perintah
+### Câu lệnh mẫu
 
-Berikut beberapa contoh perintah yang efektif:
+Sau đây là một số ví dụ về câu lệnh hiệu quả:
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -580,43 +571,38 @@ Berikut beberapa contoh perintah yang efektif:
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## Praktik terbaik
+## Các phương pháp hay nhất
 
-- **Lakukan iterasi dengan Klip terlebih dahulu.** Gunakan model `lyria-3-clip-preview` yang lebih cepat untuk bereksperimen dengan perintah sebelum melakukan pembuatan berdurasi penuh dengan `lyria-3-pro-preview`.
-- **Jadilah spesifik.** Perintah yang tidak jelas akan menghasilkan hasil yang umum. Sebutkan instrumen, BPM, kunci, suasana hati, dan struktur untuk output terbaik.
-- **Sesuaikan bahasa Anda.** Buat perintah dalam bahasa yang Anda inginkan untuk lirik.
-- **Gunakan tag bagian.** Tag `[Verse]`, `[Chorus]`, `[Bridge]` memberikan struktur yang jelas kepada model untuk diikuti.
-- **Pisahkan lirik dari petunjuk.** Saat memberikan lirik kustom, pisahkan lirik tersebut dengan jelas dari petunjuk arah musik Anda.
+- **Lặp lại với Clip trước.** Sử dụng mô hình `lyria-3-clip-preview` nhanh hơn để thử nghiệm các câu lệnh trước khi tạo một hình ảnh/video dài bằng `lyria-3-pro-preview`.
+- **Mô tả cụ thể.** Câu lệnh mơ hồ sẽ tạo ra kết quả chung chung. Đề cập đến nhạc cụ, số nhịp/phút, khoá nhạc, tâm trạng và cấu trúc để có kết quả tốt nhất.
+- **Ngôn ngữ phải phù hợp.** Đưa ra câu lệnh bằng ngôn ngữ mà bạn muốn có lời bài hát.
+- **Sử dụng thẻ phần.** Thẻ `[Verse]`, `[Chorus]`, `[Bridge]` giúp mô hình có cấu trúc rõ ràng để tuân theo.
+- **Tách lời bài hát khỏi hướng dẫn.** Khi cung cấp lời bài hát tuỳ chỉnh, hãy tách riêng lời bài hát với hướng dẫn về chỉ dẫn âm nhạc.
 
-## Batasan
+## Các điểm hạn chế
 
-- **Keamanan**: Semua perintah diperiksa oleh filter keamanan. Perintah yang memicu filter akan diblokir. Hal ini mencakup perintah yang meminta suara artis tertentu atau pembuatan lirik yang dilindungi hak cipta.
-- **Watermarking**: Semua audio yang dibuat menyertakan
-  [watermark audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=id) untuk
-  identifikasi. Watermark ini tidak dapat didengar oleh telinga manusia dan tidak memengaruhi pengalaman mendengarkan.
-- **Pengeditan berkelanjutan**: Pembuatan musik adalah proses satu kali.
-  Pengeditan berulang atau menyempurnakan klip yang dibuat melalui beberapa perintah tidak didukung dalam versi Lyria 3 saat ini.
-- **Panjang**: Model Klip selalu membuat klip 30 detik. Model Pro membuat lagu yang berlangsung selama beberapa menit; durasi yang tepat dapat dipengaruhi melalui perintah Anda.
-- **Determinisme**: Hasil dapat bervariasi antar-panggilan, bahkan dengan perintah yang sama.
+- **An toàn**: Tất cả câu lệnh đều được bộ lọc an toàn kiểm tra. Những câu lệnh kích hoạt bộ lọc sẽ bị chặn. Điều này bao gồm cả những câu lệnh yêu cầu giọng nói của một nghệ sĩ cụ thể hoặc việc tạo ra lời bài hát có bản quyền.
+- **Tạo hình mờ**: Tất cả âm thanh được tạo đều có [thuỷ vân âm thanh SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=vi) để nhận dạng. Hình mờ này không thể nghe thấy bằng tai thường và không ảnh hưởng đến trải nghiệm nghe.
+- **Chỉnh sửa nhiều lượt**: Tạo nhạc là một quy trình chỉ diễn ra một lượt.
+  Phiên bản Lyria 3 hiện tại không được hỗ trợ chỉnh sửa lặp lại hoặc tinh chỉnh một đoạn video được tạo thông qua nhiều câu lệnh.
+- **Độ dài**: Mô hình Đoạn trích luôn tạo ra các đoạn trích dài 30 giây. Mô hình Pro tạo ra những bài hát có thời lượng vài phút; thời lượng chính xác có thể bị ảnh hưởng bởi câu lệnh của bạn.
+- **Tính xác định**: Kết quả có thể khác nhau giữa các lệnh gọi, ngay cả khi dùng cùng một câu lệnh.
 
-## Langkah berikutnya
+## Bước tiếp theo
 
-- Periksa [harga](https://ai.google.dev/gemini-api/docs/pricing?hl=id) untuk model Lyria 3,
-- Coba [pembuatan musik streaming real-time](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=id)
-  dengan Lyria RealTime,
-- Buat percakapan multi-pembicara dengan model
-  [TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id),
-- Temukan cara membuat [gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) atau [video](https://ai.google.dev/gemini-api/docs/video?hl=id),
-- Cari tahu cara Gemini dapat [memahami file audio](https://ai.google.dev/gemini-api/docs/audio?hl=id),
-- Lakukan percakapan real-time dengan Gemini menggunakan the
-  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=id).
+- Xem [giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi) của các mô hình Lyria 3.
+- Thử [tạo nhạc trực tuyến theo thời gian thực](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=vi) bằng Lyria RealTime.
+- Tạo các cuộc trò chuyện có nhiều người nói bằng [các mô hình TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi).
+- Khám phá cách tạo [hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) hoặc [video](https://ai.google.dev/gemini-api/docs/video?hl=vi).
+- Tìm hiểu cách Gemini có thể [hiểu tệp âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi).
+- Trò chuyện theo thời gian thực với Gemini bằng [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
 
-Kirim masukan
+Gửi ý kiến phản hồi
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Terakhir diperbarui pada 2026-06-22 UTC.
+Cập nhật lần gần đây nhất: 2026-07-16 UTC.
 
-Ada masukan untuk kami?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-22 UTC."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-16 UTC."],[],[]]

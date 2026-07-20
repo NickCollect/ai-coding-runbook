@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=ar
-fetched_at: 2026-07-06T05:13:21.533423+00:00
+fetched_at: 2026-07-20T04:42:51.819635+00:00
 title: "\u0648\u0643\u064a\u0644 \u0627\u0644\u0630\u0643\u0627\u0621 \u0627\u0644\u0627\u0635\u0637\u0646\u0627\u0639\u064a \u0627\u0644\u062f\u0627\u0626\u0645 \u0645\u0639 Gemini \u0648Temporal \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

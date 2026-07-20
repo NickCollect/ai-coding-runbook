@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=he
-fetched_at: 2026-07-06T05:16:13.473006+00:00
-title: "\u05d1\u05d9\u05e6\u05d5\u05e2 \u05d1\u05e8\u05e7\u05e2 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=ko
+fetched_at: 2026-07-20T04:40:22.972120+00:00
+title: "\ubc31\uadf8\ub77c\uc6b4\ub4dc \uc2e4\ud589 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-שליחת משוב
+의견 보내기
 
-# ביצוע ברקע
+# 백그라운드 실행
 
-במשימות ארוכות כמו Deep Research, חשיבה רציונלית מורכבת או הרצות של סוכנים מרובי-שלבים, זמן קצוב לתפוגה לחיבור עלול להפריע לבקשות HTTP רגילות (שבדרך כלל נסגרות אחרי 60 שניות). [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) מספק **background execution** כדי להריץ את המשימות האלה באופן אסינכרוני.
+심층 연구, 복잡한 추론 또는 다단계 에이전트 실행과 같은 장기 실행 작업의 경우 연결 시간 제한으로 인해 표준 HTTP 요청이 중단될 수 있습니다 (일반적으로 60초 후에 닫힘). [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)는 이러한 작업을 비동기식으로 실행하는 **백그라운드 실행**을 제공합니다.
 
-כדי לאפשר לאינטראקציה לפעול עד שהיא משלימה את המשימה בשרת, מגדירים את `"background": true` כשיוצרים את האינטראקציה. ה-API מחזיר באופן מיידי מזהה אינטראקציה, שאפליקציות לקוח יכולות להשתמש בו כדי לבדוק את הסטטוס, את התקדמות הסטרימינג או להתחבר מחדש לסטרימינג שהחיבור שלו נותק.
+상호작용이 서버에서 작업을 완료할 때까지 실행되도록 하려면 상호작용을 만들 때 `"background": true`를 설정합니다. API는 즉시 상호작용 ID를 반환하며, 클라이언트 애플리케이션은 이 ID를 사용하여 상태를 폴링하거나, 진행 상황을 스트리밍하거나, 연결이 끊어진 스트림에 다시 연결할 수 있습니다.
 
-הביצוע ברקע נתמך במודלים רגילים של Gemini (כמו `gemini-3.5-flash` ו-`gemini-3.1-pro-preview`) ובסוכנים מנוהלים (כמו `antigravity-preview-05-2026`).
+백그라운드 실행은 표준 Gemini 모델 (예: `gemini-3.5-flash`, `gemini-3.1-pro-preview`) 및 관리형 에이전트 (예: `antigravity-preview-05-2026`)에서 지원됩니다.
 
-## יצירת אינטראקציה ברקע
+## 백그라운드 상호작용 만들기
 
-כדי להתחיל אינטראקציה ברקע, מגדירים את הפרמטר `background` לערך `true` כשיוצרים את המשאב.
+백그라운드 상호작용을 시작하려면 리소스를 만들 때 `background` 매개변수를 `true`로 설정합니다.
 
 ### Python
 
@@ -72,31 +72,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## איך הרצה ברקע פועלת
+## 백그라운드 실행 작동 방식
 
-כשיוצרים אינטראקציה ברקע, המשימה פועלת באופן אסינכרוני בשרת. האינטראקציה עוברת בין מצבי ביצוע שונים:
+백그라운드 상호작용을 만들면 작업이 서버에서 비동기식으로 실행됩니다. 상호작용은 다양한 실행 상태를 거칩니다.
 
-- ‫`in_progress`: השרת מבצע באופן פעיל את האינטראקציה (למשל, מריץ קוד או מבצע מחקר).
-- ‫`requires_action`: האינטראקציה מושהית וממתינה לקלט מהלקוח (למשל, אישור הפעלת כלי או מענה על שאלה).
-- ‫`completed`: האינטראקציה הסתיימה בהצלחה והפלט זמין.
-- ‫`failed`: אירעה שגיאה במהלך הביצוע (למשל, כשל בכלי או הגבלות קצב).
-- ‫`cancelled`: בקשה של לקוח עצרה את הביצוע.
+- `in_progress`: 서버가 상호작용을 적극적으로 실행하고 있습니다 (예: 코드 실행 또는 연구).
+- `requires_action`: 상호작용이 일시중지되었으며 클라이언트 입력 (예: 도구 실행 확인 또는 질문 답변)을 기다리고 있습니다.
+- `completed`: 상호작용이 성공적으로 완료되었으며 출력을 사용할 수 있습니다.
+- `failed`: 실행 중에 오류가 발생했습니다 (예: 도구 실패 또는 비율 제한).
+- `cancelled`: 클라이언트 요청으로 실행이 중지되었습니다.
 
-### תרחישים לדוגמה
+### 사용 사례
 
-שימוש בביצוע ברקע עבור:
+백그라운드 실행은 다음 용도로 사용합니다.
 
-- **הרצת סוכנים:** משימות שדורשות הרצת קוד, גלישה באינטרנט או תיאום בין סוכנים משניים (כמו `antigravity-preview-05-2026`).
-- **Deep Research:** פועל באמצעות `deep-research-preview-04-2026` או `deep-research-max-preview-04-2026`, והתהליך נמשך כמה דקות.
-- **הסקה ארוכה:** משימות שבהן שלבי החשיבה של המודל חורגים מהמגבלות הרגילות של חיבור HTTP.
+- **에이전트 실행:** 코드 실행, 웹브라우징 또는 하위 에이전트 오케스트레이션이 필요한 작업 (예: `antigravity-preview-05-2026`).
+- **심층 연구:** 몇 분이 걸리는 `deep-research-preview-04-2026` 또는 `deep-research-max-preview-04-2026`을 사용하여 실행합니다.
+- **긴 추론:** 모델 사고 단계가 표준 HTTP 연결 한도를 초과하는 작업.
 
-## אחזור תוצאות
+## 결과 검색
 
-אפשר לקבל תוצאות של אינטראקציות ברקע באמצעות **polling** או **סטרימינג**.
+**폴링** 또는 **스트리밍** 을 사용하여 백그라운드 상호작용 결과를 가져옵니다.
 
-### תבנית דגימה (לא חוסמת)
+### 폴링 패턴 (비차단)
 
-התשאול בודק את סטטוס האינטראקציה באופן תקופתי באמצעות בקשות GET לא חוסמות, עד שהוא מגיע למצב סופי.
+폴링은 종료 상태에 도달할 때까지 비차단 GET 요청을 사용하여 상호작용 상태를 주기적으로 확인합니다.
 
 ### Python
 
@@ -147,9 +147,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### תבנית סטרימינג
+### 스트리밍 패턴
 
-אם השידור מתנתק בגלל הפרעה ברשת, אפשר להמשיך את השידור מהאירוע האחרון שהתקבל. כל דלתא מכילה `event_id` ייחודי במטען הייעודי שלה. העברת המזהה הזה כ-`last_event_id` מפעילה מחדש את הזרם מהאירוע הזה.
+네트워크 중단으로 인해 스트림 연결이 끊어지면 스트리밍이 마지막으로 수신된 이벤트부터 다시 시작될 수 있습니다. 각 델타에는 페이로드에 고유한 `event_id`가 포함되어 있습니다. 이 ID를 `last_event_id`로 전달하면 해당 이벤트부터 스트림이 다시 시작됩니다.
 
 ### Python
 
@@ -240,14 +240,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## שיחות רב-שלביות
+## 멀티턴 대화
 
-אינטראקציות עוקבות יכולות להתבסס על שיחה ברקע באמצעות `previous_interaction_id`, בכפוף למגבלות הבאות:
+후속 상호작용은 다음 제약 조건에 따라 `previous_interaction_id`를 사용하여 백그라운드 대화에 연결할 수 있습니다.
 
-1. **הפעלה פעילה נחסמת:** שרשור של אינטראקציה עוקבת לאינטראקציה עם סטטוס `in_progress` מחזיר שגיאה `400 Bad Request`. צריך לחכות שהאינטראקציה תגיע למצב `completed` לפני שמתחילים את האינטראקציה הבאה.
-2. **פרמטר סביבה לסוכנים מנוהלים:** כשמשרשרים אינטראקציות לסוכנים מנוהלים (כמו `antigravity-preview-05-2026`), הבקשות צריכות לכלול את הפרמטרים `previous_interaction_id` ו-`environment`.
+1. **활성 실행이 차단됨:** 후속 상호작용을 `in_progress` 상태의 상호작용에 연결하면 `400 Bad Request` 오류가 반환됩니다. 상호작용이 `completed` 상태에 도달할 때까지 기다린 후 다음 상호작용을 시작합니다.
+2. **관리형 에이전트의 환경 매개변수:** 관리형 에이전트 (예: `antigravity-preview-05-2026`)의 상호작용을 연결할 때 요청에 `previous_interaction_id`와 `environment`가 모두 포함되어야 합니다.
 
-בדוגמאות הבאות אפשר לראות איך יוצרים שרשור של אינטראקציות:
+다음 예에서는 상호작용을 연결하는 방법을 보여줍니다.
 
 ### Python
 
@@ -335,12 +335,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## ביטול ומחיקה
+## 취소 및 삭제
 
-שליטה בהרצות פעולות וניהול האחסון באמצעות בקשות ביטול ומחיקה:
+취소 및 삭제 요청을 사용하여 실행 중인 실행을 제어하고 스토리지를 관리합니다.
 
-- **ביטול (`POST /interactions/{id}/cancel`):** מפסיק את המשימה הפעילה. הסטטוס משתנה ל`cancelled`. פעולות ניקוי בשרת יכולות לגרום לעיכוב קל לפני שהסטטוס מתעדכן בבקשות GET.
-- **מחיקה (`DELETE /interactions/{id}`):** רשומות האינטראקציה יוסרו מהשרת. בקשות GET הבאות מחזירות שגיאה `404 Not Found`.
+- **취소 (`POST /interactions/{id}/cancel`):** 실행 중인 작업을 중지합니다. 상태가 `cancelled`로 전환됩니다. 서버에서 정리 작업을 수행하면 GET 요청에서 상태가 업데이트되기 전에 약간의 지연이 발생할 수 있습니다.
+- **삭제 (`DELETE /interactions/{id}`):** 서버에서 상호작용 레코드를 삭제합니다. 후속 GET 요청은 `404 Not Found` 오류를 반환합니다.
 
 ### Python
 
@@ -384,18 +384,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## השלבים הבאים
+## 다음 단계
 
-- במאמר [סקירה כללית על Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) מוסבר על ניהול סשנים ומצבים.
-- פרטים נוספים על עדכונים בזמן אמת של אירועים זמינים במדריך בנושא [אינטראקציות בסטרימינג](https://ai.google.dev/gemini-api/docs/streaming?hl=he).
-- כדי ליצור סוכנים עם שמירת מצב שמנהלים כמה אינטראקציות רב-שלביות, אפשר לעיין ב[מדריך למתחילים בנושא סוכנים מנוהלים](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=he).
+- 세션 및 상태 관리를 이해하려면 [Interactions API 개요](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)를 읽어보세요.
+- 실시간 이벤트 업데이트에 관한 자세한 내용은 [스트리밍 상호작용](https://ai.google.dev/gemini-api/docs/streaming?hl=ko) 가이드를 참고하세요.
+- [관리형 에이전트 빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko)을 살펴보고 상태 저장 멀티턴 에이전트를 빌드하세요.
 
-שליחת משוב
+의견 보내기
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-עדכון אחרון: 2026-06-26 (שעון UTC).
+최종 업데이트: 2026-06-26(UTC)
 
-רוצה לתת לנו משוב?
+의견을 전달하고 싶나요?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-26 (שעון UTC)."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-26(UTC)"],[],[]]

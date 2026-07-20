@@ -1,34 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/omni?hl=ar
-fetched_at: 2026-07-06T05:09:44.688583+00:00
-title: "\u0625\u0646\u0634\u0627\u0621 \u0627\u0644\u0641\u064a\u062f\u064a\u0648\u0647\u0627\u062a \u0648\u062a\u0639\u062f\u064a\u0644\u0647\u0627 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/omni?hl=pl
+fetched_at: 2026-07-20T04:47:08.970332+00:00
+title: "Generowanie i edytowanie film\u00f3w za pomoc\u0105 Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-إرسال ملاحظات
+Prześlij opinię
 
-# إنشاء الفيديوهات وتعديلها باستخدام Gemini Omni Flash
+# Generowanie i edytowanie filmów za pomocą Gemini Omni Flash
 
-‫Gemini Omni Flash‏ (`gemini-omni-flash-preview`) هو نموذج متعدّد الوسائط عالي الأداء مصمّم لإنشاء الفيديوهات وتعديلها والتحكّم فيها بشكل سينمائي وبسرعة عالية.
-يستند Gemini Omni إلى الإمكانات الأساسية التالية التي تميّزه عن نماذج الفيديوهات السابقة:
+Gemini Omni Flash (`gemini-omni-flash-preview`) to wydajny model multimodalny zaprojektowany z myślą o szybkim generowaniu i edytowaniu filmów oraz sterowaniu ich charakterem.
+Gemini Omni ma te podstawowe funkcje, które odróżniają go od poprzednich modeli wideo:
 
-- **تعدُّد الوسائط الأصلي:** يعالج النموذج النصوص والصور والمقاطع الصوتية والفيديوهات في آنٍ واحد، ما يمنحك نتائج أكثر تماسكًا واتساقًا وقابلة للتحكّم.
-- **التعديل الحواري:** تتيح لك واجهة برمجة التطبيقات [Interactions
-  API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) تحسين فيديوهاتك وتعديلها بشكل متكرّر من خلال محادثة بلغة طبيعية. يمكنك وصف التغييرات المطلوبة، وسيُطبّق النموذج التعديل مع الاحتفاظ بأجزاء الفيديو التي تريدها.
-- **المعرفة بالعالم:** يجمع Gemini Omni بين فهم الفيزياء ومعرفة Gemini بالتاريخ والعلوم والسياق الثقافي، ما يربط بين الواقعية الفائقة وسرد القصص الهادف.
+- **Natywna multimodalność:** przetwarza tekst, obrazy, dźwięk i wideo jednocześnie, co zapewnia bardziej spójne, konsekwentne i kontrolowane dane wyjściowe.
+- **Edytowanie w trybie konwersacyjnym:** umożliwia iteracyjne ulepszanie i edytowanie filmów za pomocą rozmowy w języku naturalnym. Jest dostępne dzięki [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl). Opisz, co chcesz zmienić, a model zastosuje zmiany, zachowując te części filmu, które chcesz pozostawić.
+- **Wiedza o świecie:** Gemini Omni łączy zrozumienie fizyki z wiedzą Gemini o historii, nauce i kontekście kulturowym, wypełniając lukę między fotorealizmem a znaczącą narracją.
 
-## إنشاء فيديو من نص
+## Generowanie filmu na podstawie tekstu
 
-يمكنكم إنشاء فيديو من طلب نصي. ينشئ النموذج فيديو يتضمّن محتوًى صوتيًا استنادًا إلى الوصف النصي الذي تقدّمونه. للحصول على أفضل النتائج، اكتبوا طلبات تتضمّن تفاصيل مثل وصف المشهد وحركة الكاميرا والإضاءة والمزاج.
+Generowanie filmu na podstawie prompta tekstowego. Model generuje film z dźwiękiem na podstawie opisu tekstowego. Aby uzyskać jak najlepsze wyniki, pisz prompty zawierające szczegóły, takie jak opis sceny, ruch kamery, oświetlenie i nastrój.
 
 ### Python
 
@@ -63,7 +62,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
@@ -74,12 +73,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### مخطط استجابة REST
+### Schemat odpowiedzi REST
 
-حقل `interaction.output_video` المريح **خاص بحزمة تطوير البرامج (SDK) فقط**.
-يمكنكم الحصول على الناتج من الفيديو من مصفوفة `steps` عند استخدام REST API مباشرةً.
+Pole pomocnicze `interaction.output_video` jest **dostępne tylko w pakiecie SDK**.
+Pobierz dane wyjściowe wideo z tablicy `steps`, gdy używasz bezpośrednio interfejsu API REST.
 
-**بنية JSON غير المُعالَجة في REST:**
+**Nieprzetworzona struktura JSON interfejsu REST:**
 
 ```
 {
@@ -104,9 +103,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### التحكّم في نسبة العرض إلى الارتفاع
+### Sterowanie formatem obrazu
 
-اضبطوا `aspect_ratio` على `"9:16"` لإنشاء فيديوهات باتجاه عمودي. الوضع الأفقي (16:9) هو الإعداد التلقائي.
+Ustaw `aspect_ratio` na `"9:16"`, aby utworzyć filmy w orientacji pionowej. Domyślnie jest to orientacja pozioma (16:9).
 
 ### Python
 
@@ -149,7 +148,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
@@ -164,21 +163,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-## إنشاء فيديو من صورة
+## Generowanie filmu na podstawie obrazu
 
-يمكنكم تقديم صورة مرجعية مع الطلب النصي. سيقرّر النموذج كيفية استخدام الصورة استنادًا إلى الطلب. يفيد ذلك في إضفاء الحيوية على لقطات المنتجات أو الرسومات التوضيحية أو الصور الفوتوغرافية.
+Do prompta tekstowego możesz dodać obraz referencyjny. W zależności od prompta model zdecyduje, jak wykorzystać obraz. Jest to przydatne w przypadku zdjęć produktów, ilustracji lub fotografii.
 
-يوضّح المثال التالي كيفية استخدام الصورة المرجعية لرسمة سمكة تقفز خارج الماء:
+Poniższy przykład pokazuje, jak użyć obrazu referencyjnego przedstawiającego rysunek ryby wyskakującej z wody:
 
-![رسم لسمكة تقفز خارج الماء](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=ar)
+![Rysunek ryby wyskakującej z wody](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=pl)
 
-مع الطلب التالي:
+Wpisz ten prompt:
 
 ```
 turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
 ```
 
-لإنشاء فيديو واقعي للرسمة.
+Aby wygenerować realistyczny film przedstawiający rysunek.
 
 ### Python
 
@@ -219,7 +218,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
@@ -233,10 +232,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### معرِّف الموضوع
+### Odwołanie do obiektu
 
-يمكنكم إنشاء فيديو يتضمّن مواضيع محدّدة يتم تقديمها كصور مرجعية.
-على سبيل المثال، يوضّح الرمز التالي كيفية تقديم صورتَين لقطة وخيط لإنشاء فيديو للقطة وهي تلعب بالخيط.
+Możesz wygenerować film z określonymi obiektami podanymi jako obrazy referencyjne.
+Na przykład poniższy kod pokazuje, jak podać 2 obrazy kota i włóczki, aby wygenerować film przedstawiający kota bawiącego się włóczką.
 
 ### Python
 
@@ -279,7 +278,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
@@ -294,18 +293,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### مَعلمة المهام
+### Parametr zadań
 
-استخدِموا المَعلمة `task` في `video-config` للإشارة بوضوح إلى السلوك المقصود، على سبيل المثال، إذا كنتم تريدون أن ينشئ النموذج فيديو من صورة، يمكنكم ضبط المَعلمة على `image_to_video`. إذا لم يتم ضبط هذه المَعلمة، سيستنتج النموذج ما تريدونه من الطلب.
+Użyj parametru `task` w `video-config`, aby wyraźnie wskazać zamierzone działanie. Jeśli na przykład chcesz, aby model wygenerował film na podstawie obrazu, możesz ustawić parametr na `image_to_video`. Jeśli nie zostanie ustawiona, model wywnioskuje, czego oczekujesz, na podstawie prompta.
 
-في ما يلي القيم المسموح بها:
+Dozwolone wartości:
 
 - `text_to_video`
 - `image_to_video`
 - `reference_to_video`
 - `edit`
 
-يوضّح المثال التالي كيفية ضبط هذه المَعلمة لمثال إنشاء فيديو من صورة الذي تم عرضه سابقًا.
+Poniższy przykład pokazuje, jak ustawić tę wartość w przypadku przedstawionego wcześniej przykładu obrazu do filmu.
 
 ### Python
 
@@ -356,7 +355,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -383,11 +382,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## تعديل الفيديوهات مع الاحتفاظ بالحالة
+## Edytowanie filmów z zachowaniem stanu
 
-يمكنكم إنشاء فيديو وتعديله بشكل متكرّر باستخدام طلبات المتابعة. يستند كل دور إلى النتيجة السابقة. يتذكّر النموذج سياق الفيديو، ويُطبّق التغييرات مع الاحتفاظ بالعناصر التي لم تذكروها. استخدِموا `previous_interaction_id` لتتبُّع سجلّ المحادثات وحالة الفيديو الذي تم إنشاؤه بدون إعادة تحميل الفيديو السابق.
+Generuj film i edytuj go iteracyjnie za pomocą dodatkowych promptów. Każda tura
+bazuje na poprzednim wyniku. Model zapamiętuje kontekst filmu i stosuje zmiany, zachowując elementy, o których nie wspominasz. Użyj `previous_interaction_id`, aby śledzić historię rozmowy i stan wygenerowanego filmu bez ponownego przesyłania poprzedniego filmu.
 
-يوضّح المثال التالي كيفية إنشاء فيديو أولاً ثم تعديله:
+Ten przykład pokazuje, jak wygenerować pierwszy film, a potem go edytować:
 
 ### Python
 
@@ -435,7 +435,7 @@ if (res2.output_video?.data) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=$API_KEY" \
@@ -447,18 +447,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-مثال على فيديو أولي:
+Przykład filmu początkowego:
 
-مثال على فيديو معدَّل:
+Przykład edytowanego filmu:
 
-ينتج عن كل دور في المحادثة فيديو جديد. يفهم النموذج السياق من الأدوار السابقة، ما يتيح لكم إجراء تغييرات تدريجية، مثل تعديل الإضاءة واستبدال الخلفيات، بدون إعادة وصف المشهد بأكمله.
+Każda tura rozmowy generuje nowy film. Model rozumie kontekst z poprzednich tur, co pozwala wprowadzać stopniowe zmiany, takie jak dostosowywanie oświetlenia czy zamiana tła, bez konieczności ponownego opisywania całej sceny.
 
-### تعديل فيديوهاتكم
+### Edytowanie własnych filmów
 
-يمكنكم تحميل فيديوهاتكم باستخدام [واجهة برمجة التطبيقات Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar) لتعديلها
-باستخدام Gemini Omni Flash.
+Prześlij filmy za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl), aby je edytować za pomocą Gemini Omni Flash.
 
-يوضّح المثال التالي كيفية تعديل الفيديو الأصلي التالي:
+Poniższy przykład pokazuje, jak edytować ten oryginalny film:
 
 ### Python
 
@@ -530,7 +529,7 @@ if (interaction.output_video?.data) {
 }
 ```
 
-### راحة
+### REST
 
 ```
 #!/bin/bash
@@ -563,15 +562,12 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
 EOF
 ```
 
-مثال على فيديو معدَّل:
+Przykład edytowanego filmu:
 
- 
+## Pobieranie filmów za pomocą identyfikatora URI
 
-## استرداد الفيديوهات باستخدام معرّف موارد موحّد (URI)
-
-استخدِموا المَعلمة `delivery="uri"` في
-`response_format` لاسترداد الفيديوهات التي تم إنشاؤها والتي يزيد حجمها عن 4 ميغابايت.
-يؤدي ذلك إلى عرض معرّف موارد موحّد (URI) مستضاف على Google يمكنكم طلبه بشكل متكرّر إلى أن تصبح حالة الفيديو `ACTIVE` قبل تنزيله.
+Użyj parametru `delivery="uri"` w `response_format`, aby pobrać wygenerowane filmy o rozmiarze większym niż 4 MB.
+Zwraca to adres URI hostowany przez Google, który możesz sprawdzać, dopóki film nie będzie `ACTIVE` przed pobraniem.
 
 ### Python
 
@@ -641,7 +637,7 @@ await ai.files.download({
 console.log("💾 Saved video to output.mp4");
 ```
 
-### راحة
+### REST
 
 ```
 #!/bin/bash
@@ -686,7 +682,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**بنية JSON غير المُعالَجة في REST (معرّف موارد موحّد):**
+**Nieprzetworzona struktura JSON REST (URI):**
 
 ```
 {
@@ -711,110 +707,109 @@ echo "Done! Video saved to output.mp4"
 }
 ```
 
-## أفضل الممارسات
+## Sprawdzone metody
 
-- **استخدام طريقة التسليم من خلال معرّف موارد موحّد للفيديوهات الكبيرة:** بالنسبة إلى الفيديوهات التي يزيد حجمها عن 4 ميغابايت (>720p
-  إذا كانت متوفّرة)، استخدِموا `delivery="uri"` في `response_format` لتجنُّب الحدود القصوى
-  لحجم الحمولة.
-- **الأداء المحسّن:** اضبطوا `background=false` و`store=false` و`stream=false` لإنشاء أسرع ومتزامن أحادي. يُرجى العِلم أنّ ضبط `store=false` يعني أنّه لن يكون من الممكن تعديل الفيديو الذي تم إنشاؤه في الأدوار اللاحقة باستخدام `previous_interaction_id`.
-- **دقة الطلب:** يُرجى الاطّلاع على قسم [إرشادات الطلبات](#prompt-guide) للحصول على
-  التفاصيل.
+- **Używaj dostarczania URI w przypadku dużych filmów:** w przypadku filmów większych niż 4 MB (w razie dostępności – >720p) używaj `delivery="uri"` w `response_format`, aby uniknąć limitów rozmiaru ładunku.
+- **Zoptymalizowana wydajność:** ustaw `background=false`, `store=false` i `stream=false`, aby uzyskać szybsze, synchroniczne generowanie pojedynczych odpowiedzi. Pamiętaj, że ustawienie
+  `store=false` oznacza, że wygenerowanego filmu nie będzie można edytować w kolejnych
+  rundach za pomocą `previous_interaction_id`.
+- **Precyzja promptu:** szczegółowe informacje znajdziesz w sekcji [wskazówki dotyczące promptów](#prompt-guide).
 
-## القيود
+## Ograniczenia
 
-- لا يمكن تحميل الصور التي تتضمّن قاصرين وتعديلها في المنطقة الاقتصادية الأوروبية وسويسرا والمملكة المتحدة.
-- لا يمكن تحميل الصور التي تتضمّن أشخاصًا معيّنين يمكن التعرّف عليهم وتعديلها.
-- لا يمكن حاليًا للمستخدمين في المنطقة الاقتصادية الأوروبية وسويسرا والمملكة المتحدة تعديل الفيديوهات التي تم تحميلها (يمكن تعديل الفيديوهات التي ينشئها النموذج).
-- لا يمكن تحميل المراجع الصوتية في الإصدار الحالي من واجهة برمجة التطبيقات.
-- يقبل مخطط واجهة برمجة التطبيقات المراجع الصوتية التي تصل مدتها إلى 3 ثوانٍ، ولكن لا يعالجها النموذج بشكل صحيح في الوقت الحالي.
-- لا يمكن الإشارة إلى فيديوهات متعدّدة أو الاستنتاج منها. قد تؤدي محاولة توجيه طلبات متعدّدة الفيديوهات إلى تدهور أداء النموذج أو ظهور نتائج غير متوقّعة.
-- لا يمكن توسيع الفيديوهات أو إجراء استيفاء لها (إنشاء فيديو بين الإطار الأول والأخير).
-- لا يمكن تعديل الصوت.
-- لا يمكن استخدام معدّل النقل الذي تم توفيره.
-- لا يمكن استخدام تعليمات النظام ودرجة الحرارة و`top_p` وتسلسلات الإيقاف والطلبات السلبية (يمكنكم وضع الطلبات السلبية في الطلب العادي، مثلاً "لا تفعل X").
-- لا يمكن استخدام فيديوهات YouTube كمصدر للوسائط.
+- Przesyłanie i edytowanie obrazów przedstawiających osoby niepełnoletnie nie jest obsługiwane w Europejskim Obszarze Gospodarczym, Szwajcarii i Wielkiej Brytanii.
+- Przesyłanie i edytowanie obrazów przedstawiających niektóre rozpoznawalne osoby nie jest obsługiwane.
+- Edytowanie przesłanych filmów nie jest obecnie dostępne dla użytkowników w Europejskim Obszarze Gospodarczym (EOG), Szwajcarii i Wielkiej Brytanii (edytowanie filmów wygenerowanych przez model jest obsługiwane).
+- Przesyłanie referencji audio nie jest obsługiwane w bieżącej wersji interfejsu API.
+- Schemat interfejsu API akceptuje odniesienia do filmów trwających do 3 sekund, ale model nie przetwarza ich obecnie prawidłowo.
+- Odwoływanie się do wielu filmów lub wyciąganie z nich wniosków nie jest obsługiwane. Próba użycia promptów z wieloma filmami może spowodować pogorszenie wydajności modelu lub nieoczekiwane wyniki.
+- Wydłużanie filmów i interpolacja wideo (generowanie filmu między pierwszą a ostatnią klatką) nie są obsługiwane.
+- Edytowanie głosowe nie jest obsługiwane.
+- Udostępniona przepustowość nieobsługiwany.
+- Instrukcje systemowe, temperatura, `top_p`, sekwencje zatrzymania i negatywne prompty nie są obsługiwane (negatywne prompty możesz umieścić w zwykłym prompcie, np. „Nie rób X”).
+- Używanie filmów z YouTube jako źródła multimediów nie jest obsługiwane.
 
-## التفاصيل الفنية
+## Szczegóły techniczne
 
-- تتضمّن جميع الفيديوهات التي يتم إنشاؤها علامات مائية من SynthID، وهي غير مرئية للمشاهدين ولكن يمكن رصدها آليًا للتحقّق من المصدر.
-- تختلف أوقات إنشاء الفيديوهات استنادًا إلى المدة ودرجة الدقة والحِمل الحالي على واجهة برمجة التطبيقات. يستغرق إنشاء الفيديوهات الأطول والأعلى دقةً وقتًا أطول.
-- يتم تطبيق فلاتر أمان المحتوى على كلٍّ من الطلبات المُدخَلة والفيديو الذي تم إنشاؤه (ويعتمد ذلك على منطقتكم). سيتم حظر الطلبات التي تنتهك سياسات الاستخدام.
-- اللغة الإنجليزية (EN) متوافقة بالكامل، ولكن لم يتم تقييم اللغات الأخرى، لذا قد تعمل ولكن يمكن أن تختلف النتائج.
+- Wszystkie wygenerowane filmy zawierają znak wodny SynthID, który jest niewidoczny dla widzów, ale można go wykryć programowo w celu weryfikacji pochodzenia.
+- Czas generowania filmów zależy od ich długości, rozdzielczości i bieżącego obciążenia interfejsu API. Generowanie dłuższych filmów w wyższej rozdzielczości zajmuje więcej czasu.
+- Filtry bezpieczeństwa treści są stosowane zarówno do promptów wejściowych, jak i wygenerowanych filmów (zależą od regionu). Prompty, które naruszają zasady użytkowania, będą blokowane.
+- Język angielski jest w pełni obsługiwany, ale inne języki nie zostały jeszcze ocenione, więc mogą działać, ale wyniki mogą się różnić.
 
-## دليل كتابة الطلبات المُوجَّهة إلى Gemini Omni Flash
+## Przewodnik po tworzeniu promptów w Gemini Omni Flash
 
-يحتوي هذا القسم على نصائح وأمثلة حول كيفية توجيه الطلبات إلى Gemini Omni Flash بفعالية.
+Ta sekcja zawiera wskazówki i przykłady dotyczące skutecznego promptowania Gemini Omni Flash.
 
-### مشهد واحد
+### Pojedyncza scena
 
-سيحاول Omni Flash تلقائيًا إنشاء فيديو يتضمّن بضع لقطات مختلفة.
-سيحاول النموذج إنشاء سرد مثير للاهتمام استنادًا إلى الطلب.
+Domyślnie Omni Flash spróbuje utworzyć film z kilkoma różnymi ujęciami.
+Spróbuje stworzyć ciekawą opowieść na podstawie promptu.
 
-إذا كنتم بحاجة إلى أن يحتوي الفيديو الناتج على مشهد واحد، يجب أن تطلبوا ذلك:
+Jeśli chcesz, aby wygenerowany film zawierał tylko jedną scenę, musisz to określić w prompcie:
 
-- في مشهد واحد متواصل
-- في لقطة واحدة متواصلة
-- بدون قطع المشهد
+- w jednej nieprzerwanej scenie,
+- w jednym ciągłym ujęciu.
+- Brak cięć sceny
 
-على سبيل المثال:
+Na przykład:
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### إزالة العناصر غير المرغوب فيها
+### Usuwanie niechcianych elementów
 
-إذا كان الفيديو الذي تم إنشاؤه يحتوي على عناصر لا تريدونها، أدرِجوا طلبات سلبية بسيطة لتجنُّبها:
+Jeśli wygenerowany film zawiera elementy, których nie chcesz, użyj prostych negatywnych promptów, aby ich uniknąć:
 
-- بدون حوار
-- بدون زينة
-- بدون تأثيرات صوتية إضافية
+- Brak dialogu
+- Bez ozdób
+- Brak dodatkowych efektów dźwiękowych
 
-### طلبات التعديل
+### Potwierdzenia do edycji
 
-تعمل الطلبات البسيطة بشكل أفضل لتعديل الفيديوهات. قد تؤدي الطلبات الوصفية المفرطة إلى تغييرات غير مقصودة.
+W przypadku edycji wideo najlepiej sprawdzają się proste prompty. Zbyt szczegółowe prompty mogą prowadzić do niezamierzonych zmian.
 
-في ما يلي المزيد من الأمثلة على طلبات التعديل البسيطة:
+Oto więcej przykładów prostych promptów do edycji:
 
-- اجعلوا هذا الفيديو رسومًا متحركة
-- ضعوا قبعة عصرية على رأس هذا الشخص
-- غيِّروا الإضاءة لتكون أكثر إثارة
-- غيِّروا النص على اللافتة ليصبح "Omni Flash"
+- Przekształć ten film w anime
+- Załóż tej osobie modny kapelusz
+- Zmień oświetlenie, aby było bardziej dramatyczne
+- Zmień tekst na znaku na „Omni Flash”
 
-عند تعديل جانب معيّن من الفيديو، أدرِجوا `"Keep everything else the same"` للحفاظ على الاتساق المرئي.
+Podczas edytowania konkretnego aspektu filmu dodaj `"Keep everything else the same"`, aby zachować spójność wizualną.
 
-في ما يلي بعض الأمثلة لتوضيح كيفية تطبيق هذه التقنية:
+Oto kilka przykładów, które pokazują, jak zastosować tę technikę:
 
-- **تجنُّب:** `In the video of the man sitting on the sofa, please add a small
+- **Czego unikać:** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **التبسيط:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **Uprość:** `Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **تجنُّب:** `Please remove the cell phone that the person is holding in
+- **Czego unikać:** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **التبسيط:** `Make the phone invisible. Keep everything else the
+  - **Uprość:** `Make the phone invisible. Keep everything else the
     same.`
 
-### توجيه الطلبات بشأن المحتوى الصوتي
+### Promptowanie dźwięku
 
-سيحاول النموذج تلقائيًا إنشاء مقطع صوتي مناسب لفيديو. وقد لا يكون هذا ما تريدونه دائمًا. يمكنكم استخدام الطلب لوصف نوع المحتوى الصوتي المطلوب. يُعدّ ذلك مهمًا بشكل خاص إذا كنتم تريدون إضافة موسيقى إلى الفيديو:
+Domyślnie model będzie próbował wygenerować odpowiednią ścieżkę dźwiękową do filmu. Nie zawsze jest to pożądane. W prompcie możesz opisać typ dźwięku, który chcesz uzyskać. Jest to szczególnie ważne, jeśli chcesz użyć w filmie muzyki:
 
-- أدرِجوا موسيقى هادئة في الخلفية
-- يتضمّن الفيديو إيقاعًا سريعًا لموسيقى التكنو
-- المحتوى الصوتي هو بث إذاعي منخفض الجودة في الخلفية يعرض أغنية
+- dodaj spokojną muzykę w tle,
+- Film ma energetyczny beat techno
+- W tle słychać cichą, metaliczną audycję radiową z piosenką.
 
-### تحديد توقيت الأحداث
+### Zdarzenia związane z czasem
 
-يمكنكم توجيه طلبات لحدوث أشياء في أوقات معيّنة في الفيديو، ولا حاجة إلى استخدام بنية دقيقة ويمكنكم استخدام لغة طبيعية. يفيد ذلك بشكل خاص في إنشاء عمليات قطع المشاهد أو الإيقاع أو التسلسلات السريعة.
-في ما يلي أمثلة:
+Możesz poprosić o wykonanie określonych czynności w określonych momentach filmu. Nie musisz używać precyzyjnej składni, możesz używać języka naturalnego. Jest to szczególnie przydatne przy tworzeniu własnych cięć scen, rytmu lub szybkich sekwencji.
+Przykłady znajdziesz poniżej:
 
-- بعد 3 ثوانٍ، تدخل امرأة إلى المشهد.
-- في الثانية 5، يبدأ الكورس في المحتوى الصوتي في الخلفية.
-- كل ثانيتَين، يتم الانتقال إلى إطار جديد.
-- في تسلسل سريع، يتم تغيير المشهد إلى موقع جديد كل نصف ثانية (12 إطارًا بمعدّل 24 إطارًا في الثانية).
+- Po 3 sekundach na scenę wchodzi kobieta.
+- W 5 sekundzie w tle zaczyna się refren.
+- Co 2 sekundy przełączanie na nową klatkę.
+- W szybkiej sekwencji co pół sekundy (12 klatek przy 24 klatkach na sekundę) zmieniaj scenę na nową lokalizację.
 
-يمكنكم أيضًا استخدام بنية الرمز الزمني:
+Możesz też użyć składni kodu czasowego:
 
 ```
 [0-3s] A person is walking
@@ -822,39 +817,37 @@ Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny wind
 [6-10s] They start running
 ```
 
-### توجيه الطلبات الوصفية
+### Tworzenie metapromptów
 
-يمكنكم أن تطلبوا من Gemini Omni Flash الانتباه إلى الصفات العامة أو المبادئ العامة لإنشاء الفيديوهات:
+Możesz poprosić Gemini Omni Flash o zwrócenie uwagi na ogólne cechy lub zasady generowania filmów:
 
-- ضعوا في الاعتبار التفاصيل الدقيقة والتعبير والتوقيت لإنشاء مشهد غني جدًا ومفصّل ولكنه طبيعي تمامًا.
-- كونوا دقيقين للغاية في أوصاف الشخصيات والبيئات.
-  طبِّقوا مبادئ تصميم الأزياء على الشخصيات. كونوا دقيقين للغاية بشأن الأشخاص والعناصر والأشياء في المشهد.
-- أدرِجوا الكثير من التفاصيل المناسبة في عناصر الخلفية لجعل المشهد يبدو واقعيًا وطبيعيًا.
-- أنشئوا فيديو سريعًا يعرض `[thing]` مختلفًا ونادرًا كل ثانية، وموسيقى مبهجة
-  ، وأدرِجوا نصًا لتسمية الشيء.
+- Zwróć uwagę na mikrodetale, wyraz twarzy i timing, aby stworzyć bardzo bogatą w szczegóły, ale całkowicie naturalną scenę.
+- Opisuj postacie i środowiska bardzo szczegółowo.
+  Stosuj zasady projektowania kostiumów do postaci. Opisz dokładnie osoby, przedmioty i obiekty na scenie.
+- Dodaj do elementów tła wiele odpowiednich szczegółów, aby scena wyglądała realistycznie i naturalnie.
+- Utwórz film z szybko zmieniającymi się ujęciami, w którym co sekundę pojawia się inny rzadki `[thing]`. Dodaj do niego wesołą muzykę i tekst z nazwą obiektu.
 
-### النص في الفيديوهات
+### Tekst w filmach
 
-يمكنكم توجيه طلبات لتضمين نص في الفيديو، وسيعرضه Gemini Omni بطريقة صحيحة وقابلة للقراءة. إذا كان الفيديو يتضمّن نصًا يظهر بشكل طبيعي، حتى في عناصر الخلفية، يمكن أن يساعد ذلك في تحديد ما يجب أن يقوله.
+Możesz poprosić o uwzględnienie tekstu w filmie, a Gemini Omni wyrenderuje go w prawidłowy i czytelny sposób. Jeśli w filmie pojawia się tekst, nawet w elementach tła, warto określić, co ma on zawierać.
 
-- كلمة واحدة على الشاشة في كل مرة: "did, you, know, that, Omni, can, do, awesome, text?" تظهر كل كلمة لمدة ثانية واحدة بنمط متحرك مختلف. بدون حوار.
-- هناك لافتة شارع مكتوب عليها: "This is an AI generation by Omni"، وهناك واجهة متجر مكتوب عليها: "All you need AI"، وهناك سيارة تحمل لوحة الأرقام: "OMN111"
+- Po jednym słowie na ekranie: „czy, wiesz, że, Omni, potrafi, tworzyć, świetne, teksty?” Każde słowo pojawia się na sekundę w innym stylu animacji. Brak dialogów.
+- Jest znak drogowy z napisem „This is an AI generation by Omni”, witryna sklepowa z napisem „All you need AI” i samochód z tablicą rejestracyjną „OMN111”.
 
-### استخدام العلامات في الطلبات لضبط أدوار الصور
+### Używanie tagów w promptach do określania ról obrazów
 
-يمكنكم استخدام العلامات لربط الوسائط التي تم تحميلها بأدوار إنشاء محدّدة. يتيح لكم ذلك تحديد ما إذا كانت كل صورة هي إطار أولي أو مرجع.
+Za pomocą tagów możesz powiązać przesłane multimedia z określonymi rolami generowania. Dzięki temu możesz określić, czy każdy obraz jest klatką początkową czy referencyjną.
 
-#### 1. العلامات البسيطة (يُنصح بها)
+#### 1. Proste tagi (zalecane)
 
-في الحالات البسيطة التي تكون فيها أدوار الصور واضحة من الطلب، يمكنكم ربط الصور بالأدوار مباشرةً:
+W prostych przypadkach, gdy role obrazów są jasne na podstawie promptu, możesz bezpośrednio przypisać obrazy do ról:
 
-- **`<FIRST_FRAME>`**: استخدِموا الصورة كإطار بداية للفيديو، لـ
-  مثلاً: `<FIRST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: استخدِموا الصورة كمرجع، مثلاً: `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (يجمع بين مرجع النمط من الصورة الأولى ومرجع الموضوع من الصورة الثانية).
-  تبدأ المراجع من الصور من 0.
+- **`<FIRST_FRAME>`**: użyj obrazu jako klatki początkowej filmu, np. `<FIRST_FRAME> a woman is walking`
+- **`<IMAGE_REF_N>`**: użyj obrazu jako odniesienia, np. `in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (łączy odniesienie do stylu z pierwszego obrazu i odniesienie do obiektu z drugiego obrazu).
+  Odwołania do obrazów zaczynają się od 0.
 
-في ما يلي مثال يتضمّن 6 صور مرجعية:
+Oto przykład z 6 obrazami referencyjnymi:
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -862,37 +855,37 @@ Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny wind
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-#### 2. الإعلانات الصريحة
+#### 2. Wyraźne deklaracje
 
-في الحالات الأكثر تعقيدًا التي تتضمّن صورًا وأدوارًا متعدّدة، يمكنكم استخدام علامات البادئة الصريحة المقترنة باللاحقات التعليمية باللغة الطبيعية.
+W bardziej złożonych przypadkach, gdy masz wiele obrazów i wiele ról, możesz używać tagów z wyraźnymi prefiksami w połączeniu z sufiksami w języku naturalnym.
 
-- **تحديد المصادر والصور المرجعية**:
-  - `[# Sources <FIRST_FRAME>@Image1]` سيستخدم الصورة الأولى كإطار بداية.
-  - `[# References <IMAGE_REF_0>@Image1]` سيستخدم الصورة الأولى كمرجع.
-  - `[# References <IMAGE_REF_1>@Image2]` سيستخدم الصورة الثانية كمرجع.
-  - `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` سيستخدم كلتا الصورتَين كمرجعَين.
-  - `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` سيستخدم الصورة الأولى كإطار بداية والصورة الثانية كمرجع.
-- **التعليمات الإرشادية**: أدرِجوا التعليمات الإرشادية في نهاية الطلب:
-  - بالنسبة إلى إطار البداية: `"Use this image as the starting frame."`
-  - بالنسبة إلى الصور المرجعية: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- **Deklarowanie źródeł i obrazów referencyjnych:**
+  - `[# Sources <FIRST_FRAME>@Image1]` użyje pierwszego obrazu jako klatki początkowej.
+  - `[# References <IMAGE_REF_0>@Image1]` użyje pierwszego obrazu jako odniesienia.
+  - `[# References <IMAGE_REF_1>@Image2]` użyje drugiego obrazu jako referencyjnego.
+  - `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` użyje obu obrazów jako przykładów.
+  - `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` użyje pierwszego obrazu jako klatki początkowej, a drugiego jako obrazu referencyjnego.
+- **Instrukcje**: dodaj instrukcje na samym końcu prompta:
+  - Klatka początkowa: `"Use this image as the starting frame."`
+  - W przypadku obrazów referencyjnych: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
 
-مثال على طلب موسّع:
+Przykładowy rozbudowany prompt:
 
 ```
 [# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2] a woman <IMAGE_REF_0> is walking. Use Image1 as the starting frame. Use Image2 as a reference for the video generation.
 ```
 
-## الخطوات التالية
+## Co dalej?
 
-- ابدأوا رحلتكم مع Gemini Omni Flash من خلال التجربة في [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=ar).
-- تعلَّموا كيفية كتابة طلبات أفضل باستخدام [مقدّمة في تصميم الطلبات](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=ar).
+- Zacznij korzystać z Gemini Omni Flash, eksperymentując w [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=pl).
+- Dowiedz się, jak pisać jeszcze lepsze prompty, korzystając z naszego [wprowadzenia do projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
 
-إرسال ملاحظات
+Prześlij opinię
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-تاريخ التعديل الأخير: 2026-06-30 (حسب التوقيت العالمي المتفَّق عليه)
+Ostatnia aktualizacja: 2026-07-06 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Chcesz przekazać coś jeszcze?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-06 UTC."],[],[]]

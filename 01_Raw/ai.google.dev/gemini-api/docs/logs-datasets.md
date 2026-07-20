@@ -1,92 +1,179 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=pl
-fetched_at: 2026-07-06T05:15:23.339765+00:00
-title: "Logi i zbiory danych \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-datasets?hl=de
+fetched_at: 2026-07-20T04:42:58.887384+00:00
+title: "Logs und Datasets \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Prześlij opinię
+Feedback geben
 
-# Logi i zbiory danych
+# Logs und Datasets
 
-Ten przewodnik zawiera wszystkie informacje potrzebne do rozpoczęcia włączania logowania w istniejących aplikacjach Gemini API. Z tego przewodnika dowiesz się, jak wyświetlać logi z istniejącej lub nowej aplikacji na panelu Google AI Studio, aby lepiej zrozumieć zachowanie modelu i sposób, w jaki użytkownicy mogą wchodzić w interakcje z Twoimi aplikacjami. Używaj logowania do obserwowania, debugowania i *opcjonalnie udostępniania Google opinii o użytkowaniu
-aby pomóc w ulepszaniu Gemini w różnych przypadkach użycia przez deweloperów*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=pl)
+In diesem Leitfaden erfahren Sie, wie Sie Logs zur Nutzung der Gemini API im Google AI Studio-Dashboard aufrufen, um das Modellverhalten besser zu verstehen und zu sehen, wie Nutzer mit Ihren Anwendungen interagieren. Mit dem Logging können Sie die Nutzung beobachten, Fehler beheben und *optional Nutzungs
+feedback an Google senden, um Gemini für Entwickler-Anwendungsfälle zu verbessern*.[\*](https://ai.google.dev/gemini-api/docs/logs-policy?hl=de)
 
-Obsługiwane są wszystkie wywołania interfejsu API `GenerateContent` i `StreamGenerateContent`,
-w tym te, które są wykonywane za pomocą punktów końcowych zgodności z [OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=pl).
+Alle `GenerateContent`, `BatchGenerateContent`, `StreamGenerateContent` API
+-Aufrufe und [Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=de)-API-Aufrufe mit Ausnahme von
+verwalteten KI-Agenten werden unterstützt. Dazu gehören auch Aufrufe über
+[OpenAI-Kompatibilitäts](https://ai.google.dev/gemini-api/docs/openai?hl=de) endpunkte.
 
-## 1. Włącz logowanie w Google AI Studio
+## Projekt-Logging konfigurieren
 
-Zanim zaczniesz, upewnij się, że masz projekt z włączonymi płatnościami, którego jesteś właścicielem.
+Standardmäßig speichert die API alle Interaktionsobjekte (`store=true`), um die Verwendung von serverseitigen Funktionen zur Statusverwaltung zu vereinfachen. Im Gegensatz dazu werden Anfragen von der Generate Content API standardmäßig nicht gespeichert. Die Speicherung muss pro Anfrage oder auf Projektebene in AI Studio aktiviert werden.
 
-1. Otwórz stronę logów w Google [AI Studio](https://aistudio.google.com/logs?hl=pl).
-2. Wybierz projekt z menu i naciśnij przycisk włączania, aby domyślnie włączyć logowanie dla wszystkich żądań.
+In Google [AI Studio](https://aistudio.google.com/logs?hl=de) können Sie das Logging für alle Projekte oder für bestimmte Projekte aktivieren oder
+deaktivieren und diese
+Einstellungen jederzeit über das Fenster **Einstellungen** auf der Seite
+[Logs und Datensätze](https://aistudio.google.com/logs?hl=de) ändern. Das Logging kann unabhängig für die `generateContent` API und die
+[Interactions](https://ai.google.dev/gemini-api/docs/interactions?hl=de) API
+aktiviert oder deaktiviert werden, um das Standardverhalten für die Speicherung für ein Projekt zu ändern.
 
-![](https://ai.google.dev/static/gemini-api/docs/images/logs-state.png?hl=pl)
+### Logging auf Anfrageebene
 
-Możesz włączyć lub wyłączyć logowanie dla wszystkich projektów albo tylko dla wybranych projektów. Te ustawienia możesz w każdej chwili zmienić w Google AI Studio.
+Das Speicher- und Logging-Verhalten unterscheidet sich je nach API:
 
-## 2. Wyświetlanie logów w AI Studio
+- **[Interactions API](https://ai.google.dev/gemini-api/docs/interactions?hl=de):** Anfragen werden standardmäßig gespeichert (`store=true`), um die serverseitige Statusverwaltung zu vereinfachen.
+- **Generate Content API (`generateContent`)** : Anfragen werden standardmäßig nicht gespeichert (`store=false`).
 
-1. Otwórz [AI Studio](https://aistudio.google.com/logs?hl=pl).
-2. Wybierz projekt, w którym włączono logowanie.
-3. Logi powinny pojawić się w tabeli w odwrotnej kolejności chronologicznej.
+So legen Sie die Eigenschaft `store` fest:
 
-![](https://storage.googleapis.com/generativeai-downloads/images/nano-banana-logs.gif)
+**`generateContent` API**
 
-Kliknij wpis, aby wyświetlić parę żądanie-odpowiedź na pełnej stronie. Możesz sprawdzić cały prompt, pełną odpowiedź Gemini i kontekst z poprzedniej tury. Pamiętaj,że każdy projekt ma domyślny limit miejsca na dane wynoszący 1000 logów, a logi niezapisane w zbiorach danych wygasną po 55 dniach. Jeśli projekt osiągnie limit miejsca na dane, pojawi się prośba o usunięcie logów.
+### Python
 
-## 3. Tworzenie i udostępnianie zbiorów danych
+```
+from google import genai
 
-- W tabeli logów znajdź pasek filtrowania u góry, aby wybrać właściwość, według której chcesz filtrować.
-- W przefiltrowanym widoku logów użyj pól wyboru, aby zaznaczyć wszystkie lub kilka logów.
-- Kliknij przycisk „Utwórz zbiór danych”, który pojawi się u góry listy.
-- Nadaj nowemu zbiorowi danych opisową nazwę i opcjonalnie dodaj opis.
-- Zobaczysz utworzony zbiór danych z wybranym zestawem logów.
-- Wyeksportuj zbiór danych do dalszej analizy jako pliki CSV lub JSONL albo do Arkuszy Google.
+client = genai.Client()
 
-![](https://storage.googleapis.com/generativeai-downloads/images/sales-dataset.gif)
+response = client.models.generate_content(
+    model='gemini-3.5-flash',
+    contents='Explain quantum entanglement in simple terms.',
+    config={'store': False} # Set to True to enable logging of this request
+)
 
-Zbiory danych mogą być przydatne w wielu różnych przypadkach użycia.
+print(response.text)
+```
 
-- **Tworzenie zestawów wyzwań:** wprowadzaj przyszłe ulepszenia, które będą dotyczyć obszarów, w których chcesz, aby Twoja sztuczna inteligencja działała lepiej.
-- **Tworzenie zestawów próbek:** na przykład próbka z rzeczywistego użytkowania, aby generować odpowiedzi z innego modelu, lub zbiór przypadków brzegowych do rutynowych kontroli przed wdrożeniem.
-- **Zestawy do oceny:** zestawy reprezentujące rzeczywiste użytkowanie w przypadku ważnych funkcji, do porównywania z innymi modelami lub iteracjami instrukcji systemowych.
+### JavaScript
 
-Możesz pomóc w rozwoju badań nad sztuczną inteligencją, Gemini API i Google AI Studio, udostępniając swoje zbiory danych jako przykłady demonstracyjne. Pozwala nam to udoskonalać nasze modele w różnych kontekstach i tworzyć systemy AI, które są przydatne dla deweloperów w wielu dziedzinach i aplikacjach.
+```
+import { GoogleGenAI } from '@google/genai';
 
-## Dalsze kroki i co testować
+const client = new GoogleGenAI({});
 
-Teraz, gdy masz włączone logowanie, możesz wypróbować te czynności:
+const response = await client.models.generateContent({
+    model: 'gemini-3.5-flash',
+    contents: 'Explain quantum entanglement in simple terms.',
+    config: {
+        store: false // Set to true to enable logging of this request
+    }
+});
 
-- **Tworzenie prototypów z historią sesji:** użyj [AI Studio Build](https://aistudio.google.com/apps?hl=pl), aby tworzyć aplikacje z kodem i dodać klucz interfejsu API, który umożliwi zapisywanie historii logów użytkowników.
-- **Ponowne uruchamianie logów za pomocą Gemini Batch API:** używaj zbiorów danych do próbkowania odpowiedzi
-  i oceny modeli lub logiki aplikacji, ponownie uruchamiając logi za pomocą
-  [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb).
+console.log(response.text);
+```
 
-## Zgodność
+**Interactions API**
 
-Logowanie nie jest obecnie obsługiwane w przypadku:
+### Python
 
-- modeli Imagen i Veo,
-- modelu Gemini do tworzenia osadzeń,
-- danych wejściowych zawierających filmy, GIF-y lub pliki PDF.
+```
+from google import genai
 
-Prześlij opinię
+client = genai.Client()
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+interaction = client.interactions.create(
+    model="gemini-3.5-flash",
+    input="Explain quantum entanglement in simple terms.",
+    store=True # Set to False to disable logging of this request
+)
 
-Ostatnia aktualizacja: 2026-06-01 UTC.
+print(interaction.outputs[-1].text)
+```
 
-Chcesz przekazać coś jeszcze?
+### JavaScript
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-01 UTC."],[],[]]
+```
+import { GoogleGenAI } from '@google/genai';
+
+const client = new GoogleGenAI({});
+
+const interaction = await client.interactions.create({
+    model: 'gemini-3.5-flash',
+    input: 'Explain quantum entanglement in simple terms.',
+    store: true // Set to false to disable logging of this request
+});
+
+console.log(interaction.outputs[interaction.outputs.length - 1].text);
+```
+
+## Projektlogs in AI Studio ansehen
+
+1. Rufen Sie in [AI Studio](https://aistudio.google.com/logs?hl=de) die Seite „Logs“ auf.
+2. Wählen Sie im Drop-down-Menü ein Projekt aus.
+3. Die Logs werden in der Tabelle in umgekehrter chronologischer Reihenfolge für die Interactions API angezeigt, sofern sie vorhanden sind.
+4. Wenn Sie Projektlogs für die Generate Content API aufrufen möchten, aktivieren Sie diese zuerst im [Fenster „Einstellungen“](#configure-logging).
+
+Klicken Sie auf einen Eintrag, um eine Vorschau der Nutzlast zu sehen. Sie können den vollständigen Prompt und die Antwort von Gemini sowie den Kontext aus den vorherigen Runden prüfen. Bei Anfragen an die **Interactions API** enthalten die Logs auch einen direkten Link zur `previous_interaction_id`.
+
+## Speicheraufbewahrung für Projekte konfigurieren
+
+[Logs laufen nach einem standardmäßigen Aufbewahrungszeitraum von
+55 Tagen ab und werden zum Löschen markiert, es sei denn, sie werden in einem Datensatz gespeichert. Datensätze laufen nicht ab.](#create)
+Sie können den Aufbewahrungszeitraum für die Logs eines Projekts auf maximal 7, 14, 28 oder 55 Tage festlegen.
+
+## Datensätze erstellen und freigeben
+
+Sie können Logs in Datensätzen speichern, um sie besser zu organisieren und zu exportieren.
+
+- Suchen Sie auf der Seite [Logs](https://aistudio.google.com/logs?hl=de) oben die Filterleiste
+  und wählen Sie eine Eigenschaft aus, nach der gefiltert werden soll.
+- Wählen Sie in der gefilterten Ansicht mit den Kästchen alle oder einzelne Logs aus.
+- Klicken Sie oben in der Liste auf die Schaltfläche **Datensatz erstellen**.
+- Geben Sie Ihrem neuen Datensatz einen Namen und optional eine Beschreibung.
+- Der gerade erstellte Datensatz wird mit der ausgewählten Gruppe von Logs angezeigt.
+- Exportieren Sie den Datensatz zur weiteren Analyse als CSV-, JSONL-Dateien oder in Google Sheets.
+
+Datensätze können für eine Reihe verschiedener Anwendungsfälle nützlich sein.
+
+- **Challenge-Sets zusammenstellen**:Damit können Sie zukünftige Verbesserungen vorantreiben, die auf Bereiche abzielen, in denen Sie die Leistung Ihrer KI verbessern möchten.
+- **Beispielsets zusammenstellen**:Zum Beispiel ein Beispiel aus der tatsächlichen Nutzung, um Antworten von einem anderen Modell zu generieren, oder eine Sammlung von Grenzfällen für Routineprüfungen vor der Bereitstellung.
+- **Evaluationssets**:Sets, die die tatsächliche Nutzung wichtiger Funktionen repräsentieren, für den Vergleich mit anderen Modellen oder Systemanweisungsiterationen.
+
+Sie können zur Forschung und Entwicklung von Gemini beitragen, indem Sie Ihre Datensätze als Demonstrationsbeispiele für Google freigeben.
+
+## Beschränkungen
+
+Das Logging wird derzeit für Folgendes nicht unterstützt:
+
+- Imagen- und Veo-Modelle
+- Gemini-Einbettungsmodelle
+- Gemini Robotics-Modell
+- Eingaben mit Videos, GIFs oder PDFs
+- Öffentliche Vorabversion von KI-Agenten in der Gemini API
+
+## Nächste Schritte
+
+- **Prototyp mit Sitzungsverlauf:** Verwenden Sie [AI Studio Build](https://aistudio.google.com/apps?hl=de), um Apps mit Vibe Coding zu erstellen und Ihren API-Schlüssel hinzuzufügen, um einen Verlauf von Gemini API-Logs für KI-Funktionen zu aktivieren.
+- **Logs mit der Gemini Batch API noch einmal ausführen:** Verwenden Sie Datensätze für die Antwortstichprobe
+  und die Bewertung von Modellen oder Anwendungslogik, indem Sie Logs mit der
+  [Gemini Batch API](https://github.com/google-gemini/cookbook/blob/main/examples/Datasets.ipynb) noch einmal ausführen.
+
+Feedback geben
+
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+
+Zuletzt aktualisiert: 2026-07-17 (UTC).
+
+Haben Sie Feedback für uns?
+
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-17 (UTC)."],[],[]]

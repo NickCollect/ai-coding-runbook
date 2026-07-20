@@ -1,41 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=ja
-fetched_at: 2026-07-06T05:10:20.318431+00:00
-title: "Gemini \u3068 CrewAI \u3092\u4f7f\u7528\u3057\u305f\u30ab\u30b9\u30bf\u30de\u30fc \u30b5\u30dd\u30fc\u30c8\u306e\u5206\u6790 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=zh-TW
+fetched_at: 2026-07-20T04:45:48.589977+00:00
+title: "\u4f7f\u7528 Gemini \u548c CrewAI \u5206\u6790\u9867\u5ba2\u670d\u52d9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-フィードバックを送信
+提供意見
 
-# Gemini と CrewAI を使用したカスタマー サポートの分析
+# 使用 Gemini 和 CrewAI 分析顧客服務
 
-[CrewAI](https://docs.crewai.com/introduction) は、連携して複雑な目標を達成する自律型 AI エージェントをオーケストレートするためのフレームワークです。ロール、目標、バックストーリーを指定してエージェントを定義し、タスクを定義できます。
+[CrewAI](https://docs.crewai.com/introduction) 是一個框架，可自動化調度管理自主 AI 代理，讓這些代理互相合作，達成複雜目標。您可以指定角色、目標和背景故事來定義代理，然後為這些代理定義工作。
 
-この例では、Gemini 3 Flash を使用して、カスタマー サポート データを分析して問題を特定し、プロセス改善を提案するマルチエージェント システムを構築する方法を示します。このシステムは、最高執行責任者（COO）が読むことを想定したレポートを生成します。
+這個範例說明如何建構多代理程式系統，分析客戶服務資料以找出問題，並使用 Gemini 3 Flash 提出流程改善建議，然後生成一份報告，供營運長 (COO) 閱讀。
 
-このガイドでは、次のタスクを実行できる AI エージェントの「クルー」を作成する方法について説明します。
+本指南將說明如何建立 AI 代理「團隊」，執行下列工作：
 
-1. カスタマー サポート データを取得して分析します（この例ではシミュレートされています）。
-2. 繰り返し発生する問題とプロセスのボトルネックを特定します。
-3. 具体的な改善案を提案します。
-4. 調査結果を COO に適した簡潔なレポートにまとめます。
+1. 擷取及分析客戶服務資料 (本範例中為模擬資料)。
+2. 找出重複發生的問題和程序瓶頸。
+3. 建議可行的改善措施。
+4. 將調查結果彙整成簡明扼要的報告，方便營運長閱讀。
 
-Gemini API キーが必要です。キーがない場合は、[Google AI Studio で取得](https://aistudio.google.com/apikey?hl=ja)できます。
+您需要 Gemini API 金鑰。如果還沒有金鑰，可以[在 Google AI Studio 取得](https://aistudio.google.com/apikey?hl=zh-tw)。
 
 ```
 pip install "crewai[tools]"
 ```
 
-Gemini API キーを `GEMINI_API_KEY` という名前の環境変数として設定し、Gemini モデルを使用するように CrewAI を構成します。
+將 Gemini API 金鑰設為名為 `GEMINI_API_KEY` 的環境變數，然後將 CrewAI 設定為使用 Gemini 模型。
 
 ```
 import os
@@ -50,13 +50,13 @@ gemini_llm = LLM(
 )
 ```
 
-## コンポーネントを定義する
+## 定義元件
 
-**ツール**、**エージェント**、**タスク**、**クルー**自体を使用して CrewAI アプリケーションを構築します。以降のセクションでは、これらの各コンポーネントについて説明します。
+使用**工具**、**代理**、**工作**和 **Crew** 本身，建構 CrewAI 應用程式。以下各節將說明這些元件。
 
-### ツール
+### 工具
 
-ツールは、エージェントが外部とやり取りしたり、特定のアクションを実行したりするために使用できる機能です。ここでは、カスタマー サポート データの取得をシミュレートするプレースホルダ ツールを定義します。実際のアプリケーションでは、データベース、API、ファイル システムに接続します。ツールの詳細については、[CrewAI ツールガイド](https://docs.crewai.com/concepts/tools)をご覧ください。
+工具是代理可用的功能，可與外部世界互動或執行特定動作。您可以在這裡定義預留位置工具，模擬擷取客戶服務資料。在實際應用程式中，您會連線至資料庫、API 或檔案系統。如要進一步瞭解工具，請參閱 [CrewAI 工具指南](https://docs.crewai.com/concepts/tools)。
 
 ```
 from crewai.tools import BaseTool
@@ -86,9 +86,9 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### エージェント
+### 代理
 
-エージェントは、クルー内の個々の AI ワーカーです。各エージェントには、特定の `role`、`goal`、`backstory`、割り当てられた `llm`、省略可能な `tools` があります。エージェントの詳細については、[CrewAI エージェントのガイド](https://docs.crewai.com/concepts/agents)をご覧ください。
+代理是團隊中的個別 AI 工作者，每個代理程式都有特定的 `role`、`goal`、`backstory`、指派的 `llm` 和選用的 `tools`。如要進一步瞭解代理程式，請參閱 [CrewAI 代理程式指南](https://docs.crewai.com/concepts/agents)。
 
 ```
 from crewai import Agent
@@ -135,9 +135,9 @@ report_writer = Agent(
 )
 ```
 
-### タスク
+### 工作
 
-タスクは、エージェントの具体的な割り当てを定義します。各タスクには `description` と `expected_output` があり、`agent` に割り当てられます。タスクはデフォルトで順番に実行され、前のタスクのコンテキストが含まれます。タスクの詳細については、[CrewAI タスクガイド](https://docs.crewai.com/concepts/tasks)をご覧ください。
+工作會定義代理的具體指派事項。每項工作都有 `description`、`expected_output`，並指派給 `agent`。工作預設會依序執行，並包含先前工作的脈絡資訊。如要進一步瞭解工作，請參閱 [CrewAI 工作指南](https://docs.crewai.com/concepts/tasks)。
 
 ```
 from crewai import Task
@@ -196,9 +196,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### Crew
+### 工作人員
 
-`Crew` は、エージェントとタスクをまとめ、ワークフロー プロセス（「順次」など）を定義します。
+`Crew` 會將代理和工作整合在一起，定義工作流程程序 (例如「循序」)。
 
 ```
 from crewai import Crew, Process
@@ -211,9 +211,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## クルーを実行する
+## Run the crew
 
-最後に、必要な入力を使用してクルーの実行を開始します。
+最後，使用任何必要輸入內容啟動團隊執行作業。
 
 ```
 # Start the crew's work
@@ -227,17 +227,17 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-スクリプトが実行されます。`Data Analyst` はツールを使用し、`Process
-Optimizer` は調査結果を分析し、`Report Writer` は最終レポートをコンパイルしてコンソールに出力します。`verbose=True` 設定では、各エージェントの詳細な思考プロセスとアクションが表示されます。
+指令碼現在會執行。`Data Analyst` 會使用這項工具，`Process
+Optimizer` 會分析結果，`Report Writer` 則會編譯最終報告，然後將報告列印到控制台。`verbose=True`設定會顯示每位代理程式的詳細思考過程和動作。
 
-CrewAI の詳細については、[CrewAI の概要](https://docs.crewai.com/introduction)をご覧ください。
+如要進一步瞭解 CrewAI，請參閱 [CrewAI 簡介](https://docs.crewai.com/introduction)。
 
-フィードバックを送信
+提供意見
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-最終更新日 2026-06-10 UTC。
+上次更新時間：2026-06-10 (世界標準時間)。
 
-ご意見をお聞かせください
+想進一步說明嗎？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-10 UTC。"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-10 (世界標準時間)。"],[],[]]

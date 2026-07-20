@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/computer-use?hl=pt-BR
-fetched_at: 2026-07-06T05:20:23.587901+00:00
-title: "Uso de computador \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/computer-use?hl=ja
+fetched_at: 2026-07-20T04:36:52.048964+00:00
+title: "\u30b3\u30f3\u30d4\u30e5\u30fc\u30bf\u4f7f\u7528 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envie comentários
+フィードバックを送信
 
-# Uso de computador
+# コンピュータ使用
 
-Com a ferramenta Uso do computador, você cria agentes de controle para navegadores, dispositivos móveis e computadores que interagem e automatizam tarefas. Usando capturas de tela, o modelo pode "ver" uma tela de computador e "agir" gerando ações específicas da interface, como cliques do mouse e entradas de teclado. Assim como na chamada de função, você precisa implementar o ambiente de execução do lado do cliente para receber e executar as ações de uso do computador.
+コンピュータ使用ツールを使用すると、ブラウザ、モバイル、パソコンの制御エージェントを構築して、タスクを操作して自動化できます。モデルはスクリーンショットを使用して、コンピュータ画面を「見て」、マウスのクリックやキーボード入力などの特定の UI アクションを生成して「操作」できます。関数呼び出しと同様に、クライアントサイドの実行環境を実装して、コンピュータ使用アクションを受信して実行する必要があります。
 
-O Gemini 3.5 Flash é o modelo recomendado para uso em computadores e apresenta várias novas funcionalidades:
+Gemini 3.5 Flash は、パソコンでの使用におすすめのモデルです。次の新機能が導入されています。
 
-- **Suporte a vários ambientes**:crie agentes de build para ambientes de [navegador, dispositivos móveis e computadores](#supported-environments).
-- **Ações simplificadas com intents**:as ações incluem um campo `intent` que explica o raciocínio do modelo por trás de cada etapa.
-- **Políticas de segurança configuráveis**:ajuste o [comportamento de segurança](#safety-policies) com categorias e substituições de políticas integradas.
-- **Detecção de injeção de comandos**:ative a [verificação de capturas de tela](#prompt-injection) para detectar instruções adversárias ocultas.
+- **マルチ環境のサポート:** [ブラウザ、モバイル、パソコン](#supported-environments)環境用のエージェントを構築します。
+- **インテントを使用した合理化されたアクション:** アクションには、各ステップの背後にあるモデルの推論を説明する `intent` フィールドが含まれています。
+- **構成可能な安全性ポリシー:** 組み込みのポリシー カテゴリとオーバーライドを使用して、[安全性動作](#safety-policies)を微調整します。
+- **プロンプト インジェクションの検出:** 隠れた敵対的指示を検出するために、[スクリーンショット スキャン](#prompt-injection)をオプトインします。
 
-Com o uso do computador, é possível criar agentes que:
+コンピュータ使用モデルを使用すると、次のことができるエージェントを構築できます。
 
-- Automatizar a entrada de dados repetitivos ou o preenchimento de formulários em sites.
-- Realizar testes automatizados de aplicativos da Web e fluxos de usuários
-- Fazer pesquisas em vários sites (por exemplo, coletar informações de produtos, preços e avaliações de sites de e-commerce para informar uma compra)
+- ウェブサイトでのデータ入力やフォームへの記入など、繰り返し発生する作業を自動化します。
+- ウェブ アプリケーションとユーザーフローの自動テストを実行する
+- さまざまなウェブサイトで調査を行う（e コマース サイトから商品の情報、価格、レビューを収集して購入の判断に役立てるなど）
 
-Confira um exemplo mínimo de como ativar a ferramenta "Uso do computador":
+コンピュータの使用ツールを有効にする最小限の例を次に示します。
 
 ### Python
 
@@ -81,54 +81,44 @@ const response = await ai.models.generateContent({
 console.log(response.text);
 ```
 
-## Como o uso de computador funciona
+## コンピュータ使用の仕組み
 
-Para criar um agente com o modelo de uso de computador, configure um loop contínuo entre seu aplicativo e a API. Confira o que seu código
-vai fazer em cada etapa:
+コンピュータ使用モデルを使用してエージェントを構築するには、アプリケーションと API の間に継続的なループを設定する必要があります。各ステップでコードが実行する処理は次のとおりです。
 
-1. [**Enviar uma solicitação para o modelo**](#send-request)
-   - O aplicativo envia uma solicitação de API que contém a ferramenta de uso do computador, as configurações de configuração (como o ambiente de destino), o comando do usuário e uma captura de tela da tela atual.
-2. [**Receber a resposta do modelo**](#model-response)
-   - O modelo analisa a tela e o comando, retornando uma resposta que inclui um `function_call` sugerido representando uma ação da interface (como um clique, rolagem ou pressionamento de tecla).
-   - Para o **Gemini 3.5 Flash**, a resposta também inclui um raciocínio `intent`
-     explicando por que o modelo escolheu essa ação.
-   - A resposta também pode incluir um `safety_decision` de um sistema de segurança interno que classifica a ação como regular/permitida, `require_confirmation` (exigindo aprovação do usuário) ou bloqueada.
-3. [**Execute a ação recebida**](#execute-actions)
-   - Se a ação for permitida (ou o usuário confirmar), seu código do lado do cliente vai analisar o `function_call`, dimensionar as coordenadas normalizadas para corresponder à sua janela de visualização e executar a ação no ambiente de destino usando ferramentas de automação (como o Playwright). Se a ação for bloqueada, o
-     cliente vai interromper a execução ou processar a interrupção.
-4. [**Capturar o novo estado do ambiente**](#capture-state)
-   - Depois que a ação termina de ser executada, o aplicativo captura uma nova
-     captura de tela e a envia de volta ao modelo em um `function_result` para
-     solicitar a próxima etapa.
+1. [**モデルにリクエストを送信する**](#send-request)
+   - アプリケーションは、コンピュータ使用ツール、構成設定（ターゲット環境など）、ユーザーのプロンプト、現在の画面のスクリーンショットを含む API リクエストを送信します。
+2. [**モデル レスポンスを受信する**](#model-response)
+   - モデルは画面とプロンプトを分析し、UI アクション（クリック、スクロール、キーストロークなど）を表す `function_call` を含むレスポンスを返します。
+   - **Gemini 3.5 Flash** の場合、レスポンスには、モデルがそのアクションを選択した理由を説明する推論 `intent` も含まれます。
+   - レスポンスには、アクションを通常/許可、`require_confirmation`（ユーザーの承認が必要）、ブロックに分類する内部安全システムからの `safety_decision` が含まれる場合もあります。
+3. [**受信したアクションを実行する**](#execute-actions)
+   - アクションが許可されている場合（またはユーザーが確認した場合）、クライアントサイドのコードは `function_call` を解析し、正規化された座標をビューポートに合わせてスケーリングし、自動化ツール（Playwright など）を使用してターゲット環境でアクションを実行します。アクションがブロックされた場合、クライアントは実行を停止するか、中断を処理する必要があります。
+4. [**新しい環境の状態をキャプチャする**](#capture-state)
+   - アクションの実行が完了すると、アプリケーションは新しいスクリーンショットをキャプチャし、`function_result` でモデルに送り返して次のステップをリクエストします。
 
-Esse processo se repete desde a etapa 2, solicitando continuamente a próxima ação
-do modelo até que a tarefa seja concluída ou encerrada.
+このプロセスはステップ 2 から繰り返され、タスクが完了または終了するまで、モデルから次のアクションが継続的に求められます。
 
-![Visão geral do uso de computador](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=pt-br)
+![コンピュータ使用の概要](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=ja)
 
-## Como implementar o uso do computador
+## コンピュータの使用を実装する方法
 
-Antes de criar com a ferramenta "Uso do computador", você precisa configurar:
+コンピュータの使用ツールを使用して構築する前に、次の設定を行う必要があります。
 
-- **Ambiente de execução seguro**:execute o agente em uma VM ou
-  contêiner em sandbox para isolá-lo do sistema host e limitar o impacto potencial.
-  A [implementação de referência](https://github.com/google/computer-use-preview/)
-  inclui um sandbox baseado em Docker pronto para uso que você pode usar como ponto de partida.
-- **Gerenciador de ações do lado do cliente**:implemente a lógica do lado do cliente para executar coordenadas, digitar texto e fazer capturas de tela.
+- **安全な実行環境:** サンドボックス化された VM またはコンテナでエージェントを実行して、ホストシステムから隔離し、潜在的な影響を制限します。[リファレンス実装](https://github.com/google/computer-use-preview/)には、出発点として使用できる Docker ベースのサンドボックスが含まれています。
+- **クライアントサイドのアクション ハンドラ:** 座標の実行、テキストの入力、スクリーンショットの撮影を行うクライアントサイドのロジックを実装します。
 
-Os exemplos abaixo usam um navegador da Web como ambiente de execução e o
-[Playwright](https://playwright.dev/) como manipulador do lado do cliente.
+次の例では、実行環境としてウェブブラウザを使用し、クライアントサイド ハンドラとして [Playwright](https://playwright.dev/) を使用しています。
 
-### 0. Configurar o Playwright
+### 0: Playwright を設定する
 
-Primeiro, instale os pacotes necessários:
+まず、必要なパッケージをインストールします。
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-Em seguida, inicialize uma instância do navegador Playwright para usar na execução:
+次に、実行に使用する Playwright ブラウザ インスタンスを初期化します。
 
 ```
 from playwright.sync_api import sync_playwright
@@ -156,15 +146,15 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. Enviar uma solicitação ao modelo
+### 1. モデルにリクエストを送信する
 
-Inicialize a biblioteca de cliente e configure a ferramenta "Uso do computador". Não é necessário especificar o tamanho da tela ao fazer uma solicitação. O modelo prevê coordenadas de pixel dimensionadas para a altura e a largura da tela.
+クライアント ライブラリを初期化し、コンピュータ使用ツールを構成します。リクエストを発行する際に表示サイズを指定する必要はありません。モデルは、画面の高さと幅に合わせてスケーリングされたピクセル座標を予測します。
 
-### Gemini 3.5 Flash (recomendado)
+### Gemini 3.5 Flash（推奨）
 
 ### Python
 
-Use o SDK do Python `google-genai` (versão `2.7.0` ou mais recente) para configurar uma solicitação direcionada ao ambiente do navegador:
+`google-genai` Python SDK（バージョン `2.7.0` 以降）を使用して、ブラウザ環境をターゲットとするリクエストを構成します。
 
 ```
 from google import genai
@@ -210,7 +200,7 @@ print(response.text)
 
 ### JavaScript
 
-Use o SDK do Node.js `@google/genai` para configurar uma solicitação direcionada ao ambiente do navegador:
+`@google/genai` Node.js SDK を使用して、ブラウザ環境をターゲットとするリクエストを構成します。
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -243,7 +233,7 @@ console.log(response.text);
 
 ### REST
 
-Use curl para enviar uma solicitação:
+curl を使用してリクエストを送信します。
 
 ```
 curl -X POST \
@@ -269,7 +259,7 @@ curl -X POST \
   }'
 ```
 
-### Gemini 2.5 (legado)
+### Gemini 2.5（以前のバージョン）
 
 ### Python
 
@@ -343,9 +333,9 @@ const response = await ai.models.generateContent({
 console.log(response);
 ```
 
-### 2. Receber a resposta do modelo
+### 2. モデル レスポンスを受信する
 
-O modelo de resposta sugere uma chamada de função. Para o **Gemini 3.5 Flash**, a resposta contém uma intent de raciocínio personalizada com coordenadas. Confira exemplos das duas respostas:
+レスポンス モデルは関数呼び出しを提案します。**Gemini 3.5 Flash** の場合、レスポンスには座標とともにカスタマイズされた推論インテントが含まれます。次の例は、両方のレスポンスを示しています。
 
 ### Gemini 3.5 Flash
 
@@ -362,7 +352,7 @@ O modelo de resposta sugere uma chamada de função. Para o **Gemini 3.5 Flash**
 }
 ```
 
-### Gemini 2.5 (legado)
+### Gemini 2.5（以前のバージョン）
 
 ```
 {
@@ -387,11 +377,11 @@ O modelo de resposta sugere uma chamada de função. Para o **Gemini 3.5 Flash**
 }
 ```
 
-### 3. Executar as ações recebidas
+### 3. 受信したアクションを実行する
 
-O código do aplicativo precisa analisar a resposta do modelo, executar as ações e coletar os resultados.
+アプリケーション コードで、モデルのレスポンスを解析してアクションを実行し、結果を収集する必要があります。
 
-O código abaixo processa comandos de ferramentas legadas (`click_at`, `type_text_at`) e comandos simplificados do Gemini 3.5 Flash (`click`, `type`).
+次のコードは、以前のツールコマンド（`click_at`、`type_text_at`）と Gemini 3.5 Flash の効率化されたコマンド（`click`、`type`）の両方を処理します。
 
 ### Python
 
@@ -575,9 +565,9 @@ async function executeFunctionCalls(candidate, page, screenWidth, screenHeight) 
 }
 ```
 
-### 4. Capturar o estado do novo ambiente
+### 4. 新しい環境の状態をキャプチャする
 
-Capture uma representação da tela e retorne-a ao modelo.
+画面表現をキャプチャしてモデルに返します。
 
 ### Python
 
@@ -637,13 +627,13 @@ async function getFunctionResponses(page, results) {
 }
 ```
 
-Depois de definir como capturar e formatar o estado do ambiente, é possível combinar todas essas etapas em um loop de execução contínua.
+環境の状態をキャプチャしてフォーマットする方法を定義したら、これらの手順をすべて継続的な実行ループにまとめることができます。
 
-## Criar um loop de agente
+## エージェント ループを作成する
 
-Para ativar interações de várias etapas, combine as quatro etapas da seção [Como implementar o uso de computadores](#implement-computer-use) em um único loop. Esse loop continua solicitando ações e enviando os resultados de volta ao modelo até que a tarefa seja concluída.
+複数ステップのやり取りを可能にするには、[コンピュータの使用を実装する方法](#implement-computer-use)セクションの 4 つの手順を 1 つのループにまとめます。このループは、タスクが完了するまでアクションをリクエストし、結果をモデルにフィードバックし続けます。
 
-Não se esqueça de gerenciar o histórico de conversas corretamente, anexando as respostas do modelo e da função ao histórico em cada etapa.
+各ステップでモデルのレスポンスと関数のレスポンスの両方を履歴に追加して、会話履歴を正しく管理してください。
 
 ### Python
 
@@ -828,107 +818,107 @@ try {
 }
 ```
 
-## Ambientes compatíveis (Gemini 3.5 Flash)
+## サポートされている環境（Gemini 3.5 Flash）
 
-O Gemini 3.5 Flash é compatível com três ambientes especificados nas configurações `computer_use`:
+Gemini 3.5 Flash は、`computer_use` 構成で指定された次の 3 つの環境をサポートしています。
 
-### Ambiente do navegador (`ENVIRONMENT_BROWSER`)
+### ブラウザ環境（`ENVIRONMENT_BROWSER`）
 
-Ações de ação na ferramenta do navegador:
+ブラウザツールの [Action]（アクション）:
 
-| Nome do comando | Descrição | Argumentos (na chamada de função) |
+| コマンド名 | 説明 | 引数（関数呼び出し内） |
 | --- | --- | --- |
-| **click** | Clique com o botão esquerdo na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Clique duas vezes na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Clica três vezes na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Clique com o botão do meio na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Clica com o botão direito do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Toca e mantém pressionado o botão do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Solta o botão do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **move** | Move o cursor para a posição especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **type** | Digita texto. | `text`: str `press_enter`: bool (opcional, padrão `false`) `intent`: str |
-| **drag\_and\_drop** | Arrasta um item da coordenada inicial até a coordenada final. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **wait** | Pausa a execução por um número especificado de segundos. | `seconds`: int (opcional, padrão `1`) `intent`: str |
-| **press\_key** | Pressiona e solta a tecla especificada. | `key`: str `intent`: str |
-| **key\_down** | Pressiona e mantém pressionada a tecla especificada. | `key`: str `intent`: str |
-| **key\_up** | Libera a chave especificada. | `key`: str `intent`: str |
-| **tecla de atalho** | Pressiona a combinação de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Retorna uma captura de tela da tela atual. | `intent`: str |
-| **scroll** | Rola para cima, para baixo, para a esquerda ou para a direita em uma coordenada por uma distância de pixel. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, padrão `300`) `intent`: str |
-| **go\_back** | Volta para a página da Web anterior no histórico do navegador. | `intent`: str |
-| **navigate** | Navega diretamente para um URL especificado. | `url`: str `intent`: str |
-| **go\_forward** | Navega para a próxima página da Web no histórico do navegador. | `intent`: str |
+| **click** | 座標で左クリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **double\_click** | 座標をダブルクリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **triple\_click** | 座標を 3 回クリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **middle\_click** | 座標で中クリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **right\_click** | 座標での右クリック。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **mouse\_down** | 座標でマウスボタンを押して長押しします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **mouse\_up** | 座標でマウスボタンを離します。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **move** | カーソルを指定した位置に移動します。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **type** | テキストを入力します。 | `text`: str `press_enter`: bool（省略可、デフォルトは `false`） `intent`: str |
+| **drag\_and\_drop** | アイテムを開始座標から終了座標までドラッグします。 | `start_y`: int（0 ～ 999） `start_x`: int（0 ～ 999） `end_y`: int（0 ～ 999） `end_x`: int（0 ～ 999） `intent`: str |
+| **wait** | 指定された秒数だけ実行を一時停止します。 | `seconds`: int（省略可、デフォルトは `1`） `intent`: str |
+| **press\_key** | 指定されたキーを押して離します。 | `key`: str `intent`: str |
+| **key\_down** | 指定されたキーを押して保持します。 | `key`: str `intent`: str |
+| **key\_up** | 指定されたキーをリリースします。 | `key`: str `intent`: str |
+| **ホットキー** | 指定されたキーの組み合わせを押します。 | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | 現在の画面のスクリーンショットを返します。 | `intent`: str |
+| **scroll** | 座標で上下左右にピクセル距離だけスクロールします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `direction`: str（`"up"`、`"down"`、`"left"`、`"right"`） `magnitude_in_pixels`: int（0 ～ 999、省略可、デフォルトは `300`） `intent`: str |
+| **go\_back** | ブラウザの履歴の前のウェブページに戻ります。 | `intent`: str |
+| **navigate** | 指定された URL に直接移動します。 | `url`: str `intent`: str |
+| **go\_forward** | ブラウザの履歴の次のウェブページに移動します。 | `intent`: str |
 
-### Ambiente móvel (`ENVIRONMENT_MOBILE`)
+### モバイル環境（`ENVIRONMENT_MOBILE`）
 
-Ações de ambiente otimizado para Android:
+Android に最適化された環境アクション:
 
-| Nome do comando | Descrição | Argumentos (na chamada de função) |
+| コマンド名 | 説明 | 引数（関数呼び出し内） |
 | --- | --- | --- |
-| **open\_app** | Abre um aplicativo pelo nome. | `app_name`: str `intent`: str |
-| **click** | Clique com o botão esquerdo na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **list\_apps** | Lista os aplicativos disponíveis no dispositivo, retornando os nomes e nomes de pacotes. | `intent`: str |
-| **wait** | Pausa a execução por um número especificado de segundos. | `seconds`: int (opcional, padrão `1`) `intent`: str |
-| **go\_back** | Volta para a tela ou página da Web anterior. | `intent`: str |
-| **type** | Digita texto. | `text`: str `press_enter`: bool (opcional, padrão `false`) `intent`: str |
-| **drag\_and\_drop** | Arrasta um item da coordenada inicial até a coordenada final. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **long\_press** | Realiza um toque longo em uma coordenada na tela. | `y`: int (0-999) `x`: int (0-999) `seconds`: int (opcional, padrão `2`) `intent`: str |
-| **press\_key** | Pressiona e solta a tecla especificada. | `key`: str `intent`: str |
-| **take\_screenshot** | Retorna uma captura de tela da tela atual. | `intent`: str |
+| **open\_app** | 名前でアプリケーションを開きます。 | `app_name`: str `intent`: str |
+| **click** | 座標で左クリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **list\_apps** | デバイスで利用可能なアプリを一覧表示し、名前とパッケージ名を返します。 | `intent`: str |
+| **wait** | 指定された秒数だけ実行を一時停止します。 | `seconds`: int（省略可、デフォルトは `1`） `intent`: str |
+| **go\_back** | 前の画面またはウェブページに戻ります。 | `intent`: str |
+| **type** | テキストを入力します。 | `text`: str `press_enter`: bool（省略可、デフォルトは `false`） `intent`: str |
+| **drag\_and\_drop** | アイテムを開始座標から終了座標までドラッグします。 | `start_y`: int（0 ～ 999） `start_x`: int（0 ～ 999） `end_y`: int（0 ～ 999） `end_x`: int（0 ～ 999） `intent`: str |
+| **long\_press** | 画面上の座標で長押しを実行します。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `seconds`: int（省略可、デフォルトは `2`） `intent`: str |
+| **press\_key** | 指定されたキーを押して離します。 | `key`: str `intent`: str |
+| **take\_screenshot** | 現在の画面のスクリーンショットを返します。 | `intent`: str |
 
-### Ambiente de trabalho (`ENVIRONMENT_DESKTOP`)
+### デスクトップ環境（`ENVIRONMENT_DESKTOP`）
 
-Comandos de cursor no nível do SO para ambientes de desktop:
+デスクトップ環境の OS レベルのカーソル コマンド:
 
-| Nome do comando | Descrição | Argumentos (na chamada de função) |
+| コマンド名 | 説明 | 引数（関数呼び出し内） |
 | --- | --- | --- |
-| **click** | Clique com o botão esquerdo na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **double\_click** | Clique duas vezes na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **triple\_click** | Clica três vezes na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **middle\_click** | Clique com o botão do meio na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **right\_click** | Clica com o botão direito do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_down** | Toca e mantém pressionado o botão do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **mouse\_up** | Solta o botão do mouse na coordenada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **move** | Move o cursor para a posição especificada. | `y`: int (0-999) `x`: int (0-999) `intent`: str |
-| **type** | Digita texto. | `text`: str `press_enter`: bool (opcional, padrão `false`) `intent`: str |
-| **drag\_and\_drop** | Arrasta um item da coordenada inicial até a coordenada final. | `start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
-| **wait** | Pausa a execução por um número especificado de segundos. | `seconds`: int (opcional, padrão `1`) `intent`: str |
-| **press\_key** | Pressiona e solta a tecla especificada. | `key`: str `intent`: str |
-| **key\_down** | Pressiona e mantém pressionada a tecla especificada. | `key`: str `intent`: str |
-| **key\_up** | Libera a chave especificada. | `key`: str `intent`: str |
-| **tecla de atalho** | Pressiona a combinação de teclas especificada. | `keys`: `List[str]` `intent`: `str` |
-| **take\_screenshot** | Retorna uma captura de tela da tela atual. | `intent`: str |
-| **scroll** | Rola para cima, para baixo, para a esquerda ou para a direita em uma coordenada por uma distância de pixel. | `y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, opcional, padrão `300`) `intent`: str |
+| **click** | 座標で左クリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **double\_click** | 座標をダブルクリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **triple\_click** | 座標を 3 回クリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **middle\_click** | 座標で中クリックします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **right\_click** | 座標での右クリック。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **mouse\_down** | 座標でマウスボタンを押して長押しします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **mouse\_up** | 座標でマウスボタンを離します。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **move** | カーソルを指定した位置に移動します。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `intent`: str |
+| **type** | テキストを入力します。 | `text`: str `press_enter`: bool（省略可、デフォルトは `false`） `intent`: str |
+| **drag\_and\_drop** | アイテムを開始座標から終了座標までドラッグします。 | `start_y`: int（0 ～ 999） `start_x`: int（0 ～ 999） `end_y`: int（0 ～ 999） `end_x`: int（0 ～ 999） `intent`: str |
+| **wait** | 指定された秒数だけ実行を一時停止します。 | `seconds`: int（省略可、デフォルトは `1`） `intent`: str |
+| **press\_key** | 指定されたキーを押して離します。 | `key`: str `intent`: str |
+| **key\_down** | 指定されたキーを押して保持します。 | `key`: str `intent`: str |
+| **key\_up** | 指定されたキーをリリースします。 | `key`: str `intent`: str |
+| **ホットキー** | 指定されたキーの組み合わせを押します。 | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | 現在の画面のスクリーンショットを返します。 | `intent`: str |
+| **scroll** | 座標で上下左右にピクセル距離だけスクロールします。 | `y`: int（0 ～ 999） `x`: int（0 ～ 999） `direction`: str（`"up"`、`"down"`、`"left"`、`"right"`） `magnitude_in_pixels`: int（0 ～ 999、省略可、デフォルトは `300`） `intent`: str |
 
-## Ações legadas da interface compatíveis (Gemini 2.5)
+## 以前のサポート対象の UI アクション（Gemini 2.5）
 
-Para modelos legados (`gemini-2.5-computer-use-preview-10-2025`), as seguintes ações são compatíveis:
+以前のモデル（`gemini-2.5-computer-use-preview-10-2025`）では、次のアクションがサポートされています。
 
-| Nome do comando | Descrição | Argumentos (na chamada de função) | Exemplo de chamada de função |
+| コマンド名 | 説明 | 引数（関数呼び出し内） | 関数呼び出しの例 |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | Abre o navegador da Web. | Nenhum | `{"name": "open_web_browser", "args": {}}` |
-| **wait\_5\_seconds** | Pausa a execução por cinco segundos. | Nenhum | `{"name": "wait_5_seconds", "args": {}}` |
-| **go\_back** | Navega para a página anterior no histórico. | Nenhum | `{"name": "go_back", "args": {}}` |
-| **go\_forward** | Navega para a próxima página no histórico. | Nenhum | `{"name": "go_forward", "args": {}}` |
-| **search** | Navega até o mecanismo de pesquisa padrão. | Nenhum | `{"name": "search", "args": {}}` |
-| **navigate** | Navega o navegador diretamente para o URL especificado. | `url`: str | `{"name": "navigate", "args": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | Clica em uma coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "args": {"y": 300, "x": 500}}` |
-| **hover\_at** | Passa o cursor do mouse em uma coordenada específica. | `y`: int (0-999), `x`: int (0-999) | `{"name": "hover_at", "args": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | Digita texto em uma coordenada. | `y`: int (0 a 999), `x`: int (0 a 999), `text`: str, `press_enter`: bool (opcional, padrão é True), `clear_before_typing`: bool (opcional, padrão é True) | `{"name": "type_text_at", "args": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
-| **key\_combination** | Pressione teclas ou combinações. | `keys`: str | `{"name": "key_combination", "args": {"keys": "Control+A"}}` |
-| **scroll\_document** | Rola a página da Web inteira. | `direction`: str | `{"name": "scroll_document", "args": {"direction": "down"}}` |
-| **scroll\_at** | Rola na coordenada (x,y). | `y`: int, `x`: int, `direction`: str, `magnitude`: int (opcional, padrão 800) | `{"name": "scroll_at", "args": {"y": 500, "x": 500, "direction": "down"}}` |
-| **drag\_and\_drop** | Arrasta entre duas coordenadas. | `y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "args": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
+| **open\_web\_browser** | ウェブブラウザを開きます。 | なし | `{"name": "open_web_browser", "args": {}}` |
+| **wait\_5\_seconds** | 実行を 5 秒間一時停止します。 | なし | `{"name": "wait_5_seconds", "args": {}}` |
+| **go\_back** | 履歴の前のページに移動します。 | なし | `{"name": "go_back", "args": {}}` |
+| **go\_forward** | 履歴の次のページに移動します。 | なし | `{"name": "go_forward", "args": {}}` |
+| **search** | デフォルトの検索エンジンに移動します。 | なし | `{"name": "search", "args": {}}` |
+| **navigate** | ブラウザを指定された URL に直接移動します。 | `url`: str | `{"name": "navigate", "args": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | 特定の座標をクリックします。 | `y`: int（0～999）、`x`: int（0～999） | `{"name": "click_at", "args": {"y": 300, "x": 500}}` |
+| **hover\_at** | 特定の座標にマウスを移動します。 | `y`: int（0～999）、`x`: int（0～999） | `{"name": "hover_at", "args": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | 座標にテキストを入力します。 | `y`: int（0 ～ 999）、`x`: int（0 ～ 999）、`text`: str、`press_enter`: bool（省略可、デフォルトは True）、`clear_before_typing`: bool（省略可、デフォルトは True） | `{"name": "type_text_at", "args": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
+| **key\_combination** | キーまたはキーの組み合わせを押します。 | `keys`: str | `{"name": "key_combination", "args": {"keys": "Control+A"}}` |
+| **scroll\_document** | ウェブページ全体をスクロールします。 | `direction`: str | `{"name": "scroll_document", "args": {"direction": "down"}}` |
+| **scroll\_at** | 座標（x,y）でスクロールします。 | `y`: int、`x`: int、`direction`: str、`magnitude`: int（省略可、デフォルトは 800） | `{"name": "scroll_at", "args": {"y": 500, "x": 500, "direction": "down"}}` |
+| **drag\_and\_drop** | 2 つの座標間でドラッグします。 | `y`: int、`x`: int、`destination_y`: int、`destination_x`: int | `{"name": "drag_and_drop", "args": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
 
-## Funções personalizadas definidas pelo usuário
+## カスタムのユーザー定義関数
 
-É possível estender a funcionalidade do modelo incluindo funções personalizadas definidas pelo usuário. Por exemplo, em cenários de human-in-the-loop (HITL), é possível excluir ações predefinidas padrão e registrar ações personalizadas.
+カスタム ユーザー定義関数を含めて、モデルの機能を拡張できます。たとえば、人間参加型（HITL）シナリオでは、デフォルトの事前定義済みアクションを除外して、カスタム アクションを登録できます。
 
-#### Ferramentas personalizadas do Gemini 3.5 Flash
+#### Gemini 3.5 Flash カスタム ツール
 
 ### Python
 
-Exclua as ações padrão predefinidas do navegador (como `click`) e registre uma ferramenta `yield_to_user` personalizada:
+標準の事前定義されたブラウザ アクション（`click` など）を除外し、カスタム `yield_to_user` ツールを登録します。
 
 ```
 from google import genai
@@ -968,7 +958,7 @@ response = client.models.generate_content(
 )
 ```
 
-#### Ferramentas personalizadas do Gemini 2.5 (legado)
+#### Gemini 2.5（以前のバージョン）のカスタム ツール
 
 ### Python
 
@@ -998,29 +988,29 @@ def make_generate_content_config():
     return generate_content_config
 ```
 
-## Gerenciar níveis de pensamento (Gemini 3.5 Flash)
+## 思考レベルを管理する（Gemini 3.5 Flash）
 
-Para agentes de uso de computador, é possível configurar diferentes níveis de pensamento para equilibrar a qualidade da ação e a velocidade de execução. Níveis de pensamento mais baixos geralmente alcançam um bom equilíbrio para tarefas de automação padrão.
+コンピュータ使用エージェントでは、アクションの品質と実行速度のバランスを取るために、さまざまな思考レベルを構成できます。通常、思考レベルを低くすると、標準的な自動化タスクでバランスが取れます。
 
-## Segurança e proteção
+## 安全性とセキュリティ
 
-### Como configurar políticas de segurança (Gemini 3.5 Flash)
+### 安全性ポリシーの構成（Gemini 3.5 Flash）
 
-O modelo Gemini 3.5 Flash inclui categorias de serviços de segurança integrados que determinam automaticamente se a confirmação do usuário é necessária.
+Gemini 3.5 Flash モデルには、ユーザーの確認が必要かどうかを自動的に判断する組み込みの安全サービス カテゴリが含まれています。
 
-| Categoria da política de segurança | Descrição |
+| 安全性に関するポリシーのカテゴリ | 説明 |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | Bloqueia ou aciona a confirmação de ações envolvendo pagamentos, finalização de compras no varejo ou produtos regulamentados. |
-| `SENSITIVE_DATA_MODIFICATION` | Protege registros de saúde, financeiros ou governamentais contra modificações não autorizadas. |
-| `COMMUNICATION_TOOL` | Impede que o agente envie e-mails, mensagens de chat ou rascunhos de forma autônoma. |
-| `ACCOUNT_CREATION` | Impede que o agente registre novas contas de forma autônoma em sites. |
-| `DATA_MODIFICATION` | Regula as modificações gerais do sistema de arquivos, o compartilhamento de dados e a exclusão de armazenamento. |
-| `USER_CONSENT_MANAGEMENT` | Exige a substituição do usuário para banners de consentimento de cookies e solicitações de privacidade. |
-| `LEGAL_TERMS_AND_AGREEMENTS` | Impede que o modelo aceite de forma autônoma Termos de Serviço ou contratos juridicamente vinculativos. |
+| `FINANCIAL_TRANSACTIONS` | 支払い、小売店のレジ、規制対象商品に関連するアクションをブロックするか、確認をトリガーします。 |
+| `SENSITIVE_DATA_MODIFICATION` | 医療、財務、政府の記録を不正な変更から保護します。 |
+| `COMMUNICATION_TOOL` | エージェントがメール、チャット メッセージ、下書きを自律的に送信することを制限します。 |
+| `ACCOUNT_CREATION` | エージェントがウェブサイトで新しいアカウントを自律的に登録することを制限します。 |
+| `DATA_MODIFICATION` | ファイル システムの変更、データ共有、ストレージの削除を全体的に規制します。 |
+| `USER_CONSENT_MANAGEMENT` | Cookie 使用の同意バナーとプライバシー プロンプトでユーザーの操作が必要になります。 |
+| `LEGAL_TERMS_AND_AGREEMENTS` | モデルが利用規約や法的拘束力のある契約に自律的に同意することを防ぎます。 |
 
-#### Substituições de segurança
+#### 安全性のオーバーライド
 
-É possível substituir políticas selecionadas transmitindo substituições:
+オーバーライドを渡すことで、一部のポリシーをオーバーライドできます。
 
 ### Python
 
@@ -1071,13 +1061,13 @@ const response = await ai.models.generateContent({
 });
 ```
 
-### Detecção de injeção de comandos (Gemini 3.5 Flash)
+### プロンプト インジェクションの検出（Gemini 3.5 Flash）
 
-Mecanismo de segurança de ativação que verifica os pixels da captura de tela em busca de instruções adversárias ocultas (por exemplo, "Ignore os comandos anteriores") e bloqueia a execução quando detectadas.
+スクリーンショットのピクセルをスキャンして、隠された敵対的プロンプトの指示（「前のコマンドを無視」など）を検出し、検出された場合に実行をブロックするオプトインの安全メカニズム。
 
-### Confirmar decisão de segurança
+### 安全性の判断を確認する
 
-A resposta pode incluir um parâmetro `safety_decision` nos argumentos da chamada de função:
+レスポンスには、関数呼び出しの引数に `safety_decision` パラメータが含まれる場合があります。
 
 ```
 {
@@ -1095,8 +1085,7 @@ A resposta pode incluir um parâmetro `safety_decision` nos argumentos da chamad
 }
 ```
 
-Se `safety_decision` for `require_confirmation`, peça ao usuário final. Se o
-usuário confirmar, defina `safety_acknowledgement` em `FunctionResponse`.
+`safety_decision` が `require_confirmation` の場合は、エンドユーザーにプロンプトを表示します。ユーザーが確認したら、`FunctionResponse` で `safety_acknowledgement` を設定します。
 
 ### Python
 
@@ -1115,15 +1104,14 @@ if 'safety_decision' in function_call.args:
     action_result["safety_acknowledgement"] = True
 ```
 
-### Práticas recomendadas de segurança
+### 安全に使用するためのベスト プラクティス
 
-O uso de computadores apresenta riscos operacionais e de segurança exclusivos, já que um modelo que age em nome de um usuário pode encontrar conteúdo não confiável nas telas ou cometer erros ao executar ações. Implemente as seguintes práticas recomendadas para proteger os dados e sistemas dos usuários:
+コンピュータ使用は、ユーザーに代わって動作するモデルが画面上で信頼できないコンテンツに遭遇したり、アクションの実行でエラーが発生したりする可能性があるため、固有のセキュリティ リスクと運用リスクが生じます。ユーザーデータとシステムを保護するには、次のベスト プラクティスを実装します。
 
-1. **Human-in-the-loop (HITL)**:
+1. **人間参加型（HITL）:**
 
-   - **Exigir confirmação do usuário**:quando a resposta de segurança indica
-     `require_confirmation` (ou uma decisão de segurança legada exige isso), peça a aprovação do usuário.
-   - **Forneça instruções de segurança personalizadas**:implemente uma instrução do sistema personalizada para definir e aplicar seus próprios limites de segurança. Exemplo:
+   - **ユーザー確認を強制する:** 安全レスポンスで `require_confirmation` が示されている場合（または以前の安全判定で必要とされている場合）、ユーザーに承認を求めます。
+   - **カスタムの安全性に関する指示を提供する:** カスタム システム指示を実装して、独自の安全性に関する境界を定義し、適用します。次に例を示します。
 
      ### Python
 
@@ -1338,42 +1326,35 @@ O uso de computadores apresenta riscos operacionais e de segurança exclusivos, 
        }
      });
      ```
-2. **Ambiente de execução seguro**:execute o agente em um ambiente seguro de sandbox para limitar o impacto potencial dele. Pode ser uma máquina virtual (VM) em sandbox, um contêiner (por exemplo, Docker) ou um perfil de navegador dedicado com permissões limitadas. Consulte a
-   [implementação de referência do GitHub](https://github.com/google/computer-use-preview/)
-   para orientações de configuração do sandbox usando o Docker.
-3. **Sanitização de entrada**:sanitizar todo o texto gerado pelo usuário em comandos para
-   reduzir o risco de instruções não intencionais ou injeção de comandos. Essa é uma camada útil de segurança, mas não substitui um ambiente de execução seguro.
-4. **Barreiras de proteção de conteúdo**:use barreiras de proteção e APIs de segurança de conteúdo para avaliar a adequação, a injeção de comandos e a detecção de jailbreak em entradas do usuário, entradas e saídas de ferramentas e respostas do agente.
-5. **Listas de permissões e de bloqueio**:implemente mecanismos de filtragem para controlar onde o modelo pode navegar e o que ele pode fazer. Uma lista de bloqueio de sites proibidos é um bom ponto de partida, mas uma lista de permissões mais restritiva é ainda mais segura.
-6. **Observabilidade e geração de registros**:mantenha registros detalhados para depuração, auditoria e resposta a incidentes. Seu cliente precisa registrar comandos,
-   capturas de tela, ações sugeridas pelo modelo (`function_call`), respostas de segurança e
-   todas as ações executadas pelo cliente.
-7. **Gerenciamento de ambiente**:garanta que o ambiente da GUI seja consistente.
-   Pop-ups, notificações ou mudanças inesperadas no layout podem confundir o modelo. Se possível, comece de um estado limpo e conhecido para cada nova tarefa.
+2. **安全な実行環境:** 安全なサンドボックス環境でエージェントを実行して、潜在的な影響を制限します。これは、サンドボックス化された仮想マシン（VM）、コンテナ（Docker など）、権限が制限された専用のブラウザ プロファイルなどです。Docker を使用したサンドボックスのセットアップ ガイダンスについては、[GitHub リファレンス実装](https://github.com/google/computer-use-preview/)をご覧ください。
+3. **入力のサニタイズ:** プロンプト内のユーザーが生成したすべてのテキストをサニタイズして、意図しない指示やプロンプト インジェクションのリスクを軽減します。これはセキュリティの有用なレイヤですが、安全な実行環境の代わりにはなりません。
+4. **コンテンツ ガードレール:** ガードレールとコンテンツ安全 API を使用して、ユーザー入力、ツール入力と出力、エージェントのレスポンスの適切性、プロンプト インジェクション、ジェイルブレイクの検出を評価します。
+5. **許可リストとブロックリスト:** モデルが移動できる場所と実行できる操作を制御するフィルタリング メカニズムを実装します。禁止されているウェブサイトのブロックリストは適切な出発点ですが、より制限の厳しい許可リストを使用することで安全性を高めることができます。
+6. **オブザーバビリティとロギング:** デバッグ、監査、インシデント対応のために詳細なログを保持します。クライアントは、プロンプト、スクリーンショット、モデルが提案したアクション（`function_call`）、安全性に関するレスポンス、クライアントが最終的に実行したすべてのアクションをログに記録する必要があります。
+7. **環境管理:** GUI 環境の一貫性を確保します。予期しないポップアップ、通知、レイアウトの変更は、モデルを混乱させる可能性があります。可能であれば、新しいタスクごとに既知のクリーンな状態から開始します。
 
-## Versões do modelo
+## モデル バージョン
 
-É possível usar o recurso "Uso do computador" com os seguintes modelos:
+コンピュータ使用は次のモデルで使用できます。
 
-- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pt-br) (`gemini-3.5-flash`): o modelo recomendado para uso em computadores, com ações simplificadas com intents, suporte a ambientes de navegador, dispositivos móveis e computadores, políticas de segurança configuráveis e detecção de injeção de comandos.
-- [**Pré-lançamento do Gemini 3 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pt-br) (`gemini-3-flash-preview`): modelo de pré-lançamento
-  que oferece suporte ao uso de computadores.
-- [**Gemini 2.5 (pré-lançamento legado)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=pt-br) (`gemini-2.5-computer-use-preview-10-2025`): modelo de pré-lançamento legado otimizado para uso de computador baseado em navegador.
+- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja)（`gemini-3.5-flash`）: コンピュータ使用に推奨されるモデル。インテントによるアクションの効率化、ブラウザ、モバイル、デスクトップ環境のサポート、構成可能な安全ポリシー、プロンプト インジェクションの検出が特徴です。
+- [**Gemini 3 Flash プレビュー**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja)（`gemini-3-flash-preview`）: コンピュータでの使用をサポートするプレビュー モデル。
+- [**Gemini 2.5（以前のプレビュー）**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=ja)（`gemini-2.5-computer-use-preview-10-2025`）: ブラウザベースのコンピュータでの使用に最適化された以前のプレビュー モデル。
 
-## A seguir
+## 次のステップ
 
-- Teste o uso do computador no [ambiente de demonstração do Browserbase](http://gemini.browserbase.com).
-- Confira a [implementação de referência](https://github.com/google/computer-use-preview) para ver um exemplo de código.
-- Conheça outras ferramentas da API Gemini:
-  - [Chamadas de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br)
-  - [Embasamento com a Pesquisa Google](https://ai.google.dev/gemini-api/docs/grounding?hl=pt-br)
+- [Browserbase デモ環境](http://gemini.browserbase.com)でコンピュータの使用を試す。
+- サンプルコードについては、[リファレンス実装](https://github.com/google/computer-use-preview)をご覧ください。
+- 他の Gemini API ツールについて学習します。
+  - [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)
+  - [Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/grounding?hl=ja)
 
-Envie comentários
+フィードバックを送信
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última atualização 2026-06-25 UTC.
+最終更新日 2026-06-25 UTC。
 
-Quer enviar seu feedback?
+ご意見をお聞かせください
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-25 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-25 UTC。"],[],[]]

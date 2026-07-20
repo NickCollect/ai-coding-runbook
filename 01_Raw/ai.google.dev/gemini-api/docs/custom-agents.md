@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=th
-fetched_at: 2026-07-06T05:18:01.253763+00:00
-title: "\u0e01\u0e32\u0e23\u0e2a\u0e23\u0e49\u0e32\u0e07 Agent \u0e17\u0e35\u0e48\u0e21\u0e35\u0e01\u0e32\u0e23\u0e08\u0e31\u0e14\u0e01\u0e32\u0e23 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=tr
+fetched_at: 2026-07-20T04:34:07.803280+00:00
+title: "Y\u00f6netilen Ajanlar Olu\u015fturma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-ส่งความคิดเห็น
+Geri bildirim gönderin
 
-# การสร้าง Agent ที่มีการจัดการ
+# Yönetilen Ajanlar Oluşturma
 
-Managed Agent ใน Gemini API ช่วยให้คุณขยาย Agent ของ Antigravity ด้วยวิธีการ ทักษะ และข้อมูลของคุณเอง คุณสามารถ [ปรับแต่ง Agent แบบอินไลน์](#customize-inline) ในระหว่างการโต้ตอบ หรือ [บันทึกการกำหนดค่า](#save-agent) เป็น Managed Agent ที่คุณเรียกใช้ด้วยรหัสได้
+Gemini API'deki yönetilen ajanlar, Antigravity ajanını kendi talimatlarınız, becerileriniz ve verilerinizle genişletmenize olanak tanır. Etkileşim sırasında [aracıyı satır içinde özelleştirebilir](#customize-inline) veya [yapılandırmayı](#save-agent), kimliğe göre çağırdığınız yönetilen bir aracı olarak kaydedebilirsiniz.
 
-## ปรับแต่ง Agent ของ Antigravity
+## Antigravity ajanını özelleştirme
 
-วิธีที่เร็วที่สุดในการสร้าง Agent ที่กำหนดเองคือการส่งการกำหนดค่าแบบอินไลน์ขณะสร้างการโต้ตอบใหม่โดยไม่ต้องลงทะเบียน คุณสามารถขยาย Agent ได้ 3 วิธีดังนี้
+Özel bir aracı oluşturmanın en hızlı yolu, yeni bir etkileşim oluştururken yapılandırmanızı satır içi olarak iletmektir. Bu işlem için kayıt adımı gerekmez. Aracıyı üç şekilde uzatabilirsiniz:
 
-- **วิธีการของระบบ**: ส่งข้อความแบบอินไลน์ผ่าน `system_instruction` เพื่อกำหนดลักษณะการทำงาน
-- **เครื่องมือ**: ลบล้างเครื่องมือเริ่มต้น (การรันโค้ด การค้นหา บริบท URL) ลงทะเบียนเซิร์ฟเวอร์ MCP ระยะไกล หรือกำหนดฟังก์ชันที่กำหนดเอง (การเรียกใช้ฟังก์ชัน)
-- **ไฟล์และทักษะ**: เมานต์ไฟล์ เช่น `AGENTS.md` และ `SKILL.md` ลงในสภาพแวดล้อม
+- **Sistem talimatları**: Davranışı şekillendirmek için satır içi metni `system_instruction` ile iletin.
+- **Araçlar**: Varsayılan araçları (Kod Yürütme, Arama, URL Bağlamı) geçersiz kılın, uzak MCP sunucularını kaydedin veya özel işlevler (İşlev Çağırma) tanımlayın.
+- **Dosyalar ve beceriler**: `AGENTS.md` ve `SKILL.md` gibi dosyaları ortama yerleştirin.
 
-ตัวอย่างการส่งทั้ง 3 อย่างแบบอินไลน์
+Üçünün de satır içi olarak iletilmesine ilişkin bir örnek:
 
 ### Python
 
@@ -120,22 +120,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-ทุกอย่างจะกำหนดไว้ในระหว่างการโต้ตอบ จึงไม่จำเป็นต้องลงทะเบียนสิ่งใดก่อน ระบบควบคุมการทำงานของ Agent ของ Antigravity จะมีรันไทม์ (การเรียกใช้โค้ด การจัดการไฟล์ การเข้าถึงเว็บ) และเลเยอร์การกำหนดค่าของคุณอยู่ด้านบน
+Her şey etkileşim sırasında tanımlanır. Önceden herhangi bir kayıt işlemi yapmanız gerekmez. Antigravity aracı, çalışma zamanını (kod yürütme, dosya yönetimi, web erişimi) sağlar ve yapılandırma katmanlarınız bunun üzerine eklenir.
 
-### เครื่องมือและวิธีการของระบบ
+### Araçlar ve sistem talimatları
 
-คุณสามารถปรับแต่งลักษณะการทำงานและความสามารถของ Agent สำหรับการโต้ตอบที่เฉพาะเจาะจงได้โดยใช้พารามิเตอร์ `system_instruction` และ `tools`
+`system_instruction` ve `tools` parametrelerini kullanarak aracının davranışını ve özelliklerini belirli bir etkileşim için özelleştirebilirsiniz.
 
-- **วิธีการของระบบ**: ใช้พารามิเตอร์ `system_instruction` เพื่อส่งข้อความแบบอินไลน์ที่กำหนดลักษณะการทำงานของ Agent ซึ่งเหมาะสำหรับการปรับเปลี่ยนอย่างรวดเร็วที่คุณต้องการเปลี่ยนแปลงตามการเรียกใช้ `system_instruction` และ `AGENTS.md` เป็นแบบเพิ่มเติม ซึ่งทั้ง 2 อย่างจะมีผลเมื่อมีอยู่
-- **เครื่องมือ**: โดยค่าเริ่มต้น Agent ของ Antigravity จะมีสิทธิ์เข้าถึง `code_execution`, `google_search` และ `url_context` คุณสามารถลบล้างรายการนี้ได้โดยส่งพารามิเตอร์ `tools` ในระหว่างการโต้ตอบ นอกจากนี้ คุณยังลงทะเบียน [เซิร์ฟเวอร์ MCP ระยะไกล](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#mcp-servers) หรือกำหนด [ฟังก์ชันที่กำหนดเอง (การเรียกใช้ฟังก์ชัน)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#function-calling) เพื่อเชื่อมต่อ Agent กับ API และฐานข้อมูลของคุณเองได้ด้วย ดูรายละเอียดทั้งหมดเกี่ยวกับเครื่องมือที่พร้อมใช้งานได้ที่ [Antigravity Agent: เครื่องมือที่รองรับ](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#supported-tools)
+- **Sistem talimatları**: Aracının davranışını şekillendiren satır içi metni iletmek için `system_instruction` parametresini kullanın. Bu özellik, her görüşmede değiştirmek istediğiniz hızlı düzenlemeler için idealdir. `system_instruction` ve `AGENTS.md` toplamsaldır. Her ikisi de mevcut olduğunda geçerlidir.
+- **Araçlar**: Antigravity aracısı varsayılan olarak `code_execution`, `google_search` ve `url_context`'e erişebilir. Etkileşim sırasında `tools` parametresini ileterek bu listeyi geçersiz kılabilirsiniz. Ayrıca, aracıyı kendi API'lerinize ve veritabanlarınıza bağlamak için [uzak MCP sunucuları](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#mcp-servers) kaydedebilir veya [özel işlevler (işlev çağırma)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#function-calling) tanımlayabilirsiniz. Kullanılabilen araçlarla ilgili tüm ayrıntılar için [Antigravity Agent: Desteklenen araçlar](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#supported-tools) başlıklı makaleyi inceleyin.
 
-### การปรับแต่งตามไฟล์
+### Dosyaya dayalı özelleştirme
 
-#### โครงสร้างไดเรกทอรีของ Agent
+#### Aracı dizin yapısı
 
-แม้ว่าคุณจะส่งการกำหนดค่าแบบอินไลน์ได้ แต่เราขอแนะนำให้จัดระเบียบไฟล์ของ Agent ในไดเรกทอรีที่มีโครงสร้าง ซึ่งจะช่วยให้จัดการ ควบคุมเวอร์ชัน และเมานต์ลงในสภาพแวดล้อมของ Agent ได้ง่ายขึ้น
+Yapılandırmayı satır içi olarak iletebilirsiniz ancak aracınızın dosyalarını yapılandırılmış bir dizinde düzenlemenizi öneririz. Bu sayede yönetmek, sürüm kontrolü yapmak ve aracının ortamına monte etmek daha kolay olur.
 
-ไดเรกทอรีโปรเจ็กต์ของ Agent โดยทั่วไปจะมีลักษณะดังนี้
+Tipik bir aracı projesi dizini şu şekilde görünür:
 
 ```
 my-agent/
@@ -146,13 +146,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-รันไทม์ของ Antigravity จะสแกนหาไฟล์เหล่านี้ใน `.agents/` (และรูทของสภาพแวดล้อม)
+Antigravity çalışma zamanı, bu dosyalar için `.agents/` (ve ortamın kökünü) tarar.
 
 #### AGENTS.md
 
-Agent จะโหลด `.agents/AGENTS.md` (หรือ `/.agents/AGENTS.md`) จากสภาพแวดล้อมเป็นวิธีการของระบบโดยอัตโนมัติเมื่อเริ่มต้น ใช้ `AGENTS.md` สำหรับคำจำกัดความของบุคลิกภาพแบบยาว แนวทางโดยละเอียด และวิธีการที่คุณต้องการควบคุมเวอร์ชันควบคู่ไปกับโค้ด
+Aracı, başlangıçta ortamdan `.agents/AGENTS.md` (veya `/.agents/AGENTS.md`) öğesini sistem talimatları olarak otomatik olarak yükler. Uzun karakter tanımları, ayrıntılı yönergeler ve kodunuzla birlikte sürüm kontrolü yapmak istediğiniz talimatlar için `AGENTS.md` kullanın.
 
-เมานต์ `AGENTS.md` โดยใช้แหล่งข้อมูลแบบอินไลน์
+Satır içi kaynak kullanarak `AGENTS.md` bağlama:
 
 ### Python
 
@@ -229,9 +229,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### ทักษะ: SKILL.md
+#### Beceriler: SKILL.md
 
-ทักษะคือไฟล์ที่ขยายความสามารถของ Agent วางไฟล์ไว้ใน `.agents/skills/<skill-name>/SKILL.md` แล้ว Harness จะค้นพบและลงทะเบียนไฟล์เหล่านั้นโดยอัตโนมัติ
+Beceriler, ajanın yeteneklerini genişleten dosyalardır. Bunları `.agents/skills/<skill-name>/SKILL.md` altına yerleştirin. Böylece, donanım bunları otomatik olarak keşfedip kaydeder.
 
 ```
 .agents/
@@ -241,7 +241,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         └── SKILL.md
 ```
 
-เมานต์ทักษะโดยใช้แหล่งข้อมูลแบบอินไลน์
+Satır içi kaynak kullanarak beceri yükleme:
 
 ### Python
 
@@ -318,15 +318,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-ระบบจะค้นพบทักษะที่โหลดจาก `.agents/skills/` และ `/.agents/skills/` โดยอัตโนมัติ
+`.agents/skills/` ve `/.agents/skills/` kaynaklarından yüklenen beceriler otomatik olarak keşfedilir.
 
-## สร้าง Managed Agent
+## Yönetilen aracı oluşturma
 
-เมื่อทำซ้ำการกำหนดค่าแล้ว คุณจะสร้างการกำหนดค่าเป็น Managed Agent ได้ด้วย `agents.create` ซึ่งจะช่วยให้คุณเรียกใช้ Agent ด้วยรหัสได้โดยไม่ต้องทำซ้ำการกำหนดค่าทุกครั้ง
+Yapılandırmanızı yineledikten sonra `agents.create` ile yönetilen bir aracı olarak oluşturabilirsiniz. Bu sayede, yapılandırmayı her seferinde tekrarlamadan aracıyı kimliğe göre çağırabilirsiniz.
 
-### จากแหล่งข้อมูล
+Yönetilen bir aracı oluştururken belirttiğiniz `id`, projenize özel olmalı ve ayrılmış ön eklerle (ör. `google-`, `gemini-`) başlamamalıdır. Kısıtlanmış ön eklerin tam listesi için [Aracı kimliği kısıtlamaları](#agent-id-restrictions) bölümüne bakın.
 
-ระบุ `base_agent`, `id`, `system_instruction` และ `base_environment` พร้อมแหล่งข้อมูล แพลตฟอร์มจะจัดเตรียมแซนด์บ็อกซ์ใหม่ที่มีไฟล์ของคุณทุกครั้งที่เรียกใช้ ดูประเภทแหล่งข้อมูลที่พร้อมใช้งาน (Git, GCS, อินไลน์) ได้ที่ [สภาพแวดล้อม](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th)
+### Kaynaklardan
+
+Kaynaklarla birlikte `base_agent`, `id`, `system_instruction` ve `base_environment` değerlerini belirtin. Platform, her çağırmada dosyalarınızla yeni bir sanal alan sağlar. Kullanılabilir kaynak türleri (Git, GCS, satır içi) için [Ortamlar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr) bölümüne bakın.
 
 ### Python
 
@@ -433,9 +435,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### จากสภาพแวดล้อมที่มีอยู่ (fork)
+### Mevcut bir ortamdan (çatal)
 
-ทำซ้ำด้วย Agent ของ Antigravity ฐานจนกว่าสภาพแวดล้อมจะถูกต้อง (ติดตั้งแพ็กเกจแล้ว วางไฟล์เรียบร้อย) จากนั้น fork สภาพแวดล้อมนั้นเป็น Managed Agent
+Ortam doğru olana kadar (paketler yüklendi, dosyalar yerinde) temel Antigravity aracısıyla yineleme yapın, ardından bunu yönetilen bir aracıya çatallayın.
 
 ### Python
 
@@ -499,11 +501,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### พร้อมกฎเครือข่าย
+### Ağ kurallarıyla
 
-คุณสามารถล็อกการเข้าถึงขาออกหรือแทรกข้อมูลเข้าสู่ระบบเมื่อบันทึก Managed Agent ดูสคีมารายการที่อนุญาตทั้งหมด รูปแบบข้อมูลเข้าสู่ระบบ และสัญลักษณ์แทนได้ที่ [สภาพแวดล้อม: การกำหนดค่าเครือข่าย](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th#network-configuration)
+Yönetilen bir aracı kaydederken giden erişimi kilitleyebilir veya kimlik bilgilerini ekleyebilirsiniz. İzin verilenler listesi şeması, kimlik bilgisi kalıpları ve joker karakterler hakkında ayrıntılı bilgi için [Ortamlar: Ağ yapılandırması](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#network-configuration) başlıklı makaleyi inceleyin.
 
-ตัวอย่างต่อไปนี้จะสร้าง Agent `issue-resolver` ที่เข้าถึงได้เฉพาะ GitHub และ PyPI โดยมีการแทรกข้อมูลเข้าสู่ระบบสำหรับ GitHub
+Aşağıdaki örnekte, GitHub ve PyPI'ye erişebilen ve GitHub için kimlik bilgilerinin yerleştirildiği bir `issue-resolver` aracısı oluşturulur:
 
 ### Python
 
@@ -613,9 +615,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## เรียกใช้ Agent
+## Temsilciyi çağırma
 
-เรียกใช้ Managed Agent ด้วยรหัส Agent โดยสร้างการโต้ตอบใหม่ การเรียกใช้แต่ละครั้งจะ fork สภาพแวดล้อมฐาน ดังนั้นการเรียกใช้ทุกครั้งจะเริ่มต้นใหม่
+Yeni bir etkileşim oluşturarak yönetilen temsilcinizi temsilci kimliğinizle arayın. Her çağırma işlemi temel ortamı çatalladığından her çalıştırma temiz bir şekilde başlar.
 
 ### Python
 
@@ -654,13 +656,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-ดูการสนทนาไปมาและการสตรีมได้ที่[คู่มือเริ่มใช้งานฉบับย่อ](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th) รูปแบบ `previous_interaction_id` และ `environment` เดียวกันนี้ใช้ได้กับ Managed Agent
+Çok turlu görüşmeler ve akış için [Hızlı Başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr) bölümüne bakın. Aynı `previous_interaction_id` ve `environment` kalıpları, yönetilen aracılar için de geçerlidir.
 
-นอกจากนี้ Managed Agent ยังรองรับการรันเบื้องหลังและการยกเลิกด้วย ดูรายละเอียดและตัวอย่างโค้ดได้ที่ [Antigravity Agent: การรันเบื้องหลัง](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th#background-execution)
+Yönetilen temsilciler, arka planda yürütmeyi ve iptali de destekler. Ayrıntılar ve kod örnekleri için [Antigravity Agent: Background execution](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#background-execution) (Antigravity Agent: Arka planda yürütme) başlıklı makaleyi inceleyin.
 
-## การลบล้างการกำหนดค่าเมื่อเรียกใช้
+## Çağırma sırasında yapılandırmayı geçersiz kılma
 
-คุณสามารถลบล้าง `system_instruction` และ `tools` เริ่มต้นของ Agent ได้เมื่อสร้างการโต้ตอบ ซึ่งจะช่วยให้คุณแก้ไขลักษณะการทำงานหรือความสามารถของ Agent สำหรับการรันที่เฉพาะเจาะจงได้โดยไม่ต้องเปลี่ยนคำจำกัดความของ Agent ที่จัดเก็บไว้
+Bir etkileşim oluştururken aracının varsayılan `system_instruction`, `tools` ve `environment` ağ yapılandırmasını geçersiz kılabilirsiniz. Bu sayede, depolanan aracı tanımını değiştirmeden belirli bir çalıştırma için aracının davranışını, özelliklerini veya kimlik bilgilerini değiştirebilirsiniz.
+
+### Sistem talimatını ve araçlarını geçersiz kılma
 
 ### Python
 
@@ -704,11 +708,93 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## จัดการ Agent
+### Ağ yapılandırmasını geçersiz kılma (kimlik bilgilerini yenileme)
 
-คุณสามารถแสดงรายการ รับ และลบ Agent ได้
+Yönetilen aracınızın `base_environment` kimlik bilgileri varsa, süresi dolmuş jetonları yenilemek veya API anahtarlarını döndürmek için bunları çağırma sırasında geçersiz kılabilirsiniz. Yeni bir `network` yapılandırmasıyla `environment` nesnesi iletin. Yeni ağ kuralları, söz konusu etkileşim için önceki kuralların tamamen yerini alır. Temel ortamın kaynakları (dosyalar, depolar) korunur.
 
-### แสดงรายการ Agent
+### Python
+
+```
+# Invoke the agent with a fresh token, overriding the base_environment credentials
+result = client.interactions.create(
+    agent="issue-resolver",
+    input="Fix issue #42 and open a PR.",
+    environment={
+        "type": "remote",
+        "network": {
+            "allowlist": [
+                {
+                    "domain": "api.github.com",
+                    "transform": {
+                        "Authorization": "Bearer ghp_REFRESHED_TOKEN"
+                    },
+                },
+                {"domain": "pypi.org"},
+            ]
+        },
+    },
+)
+
+print(result.output_text)
+```
+
+### JavaScript
+
+```
+// Invoke the agent with a fresh token, overriding the base_environment credentials
+const result = await client.interactions.create({
+    agent: "issue-resolver",
+    input: "Fix issue #42 and open a PR.",
+    environment: {
+        type: "remote",
+        network: {
+            allowlist: [
+                {
+                    domain: "api.github.com",
+                    transform: {
+                        "Authorization": "Bearer ghp_REFRESHED_TOKEN"
+                    },
+                },
+                { domain: "pypi.org" },
+            ]
+        },
+    },
+}, { timeout: 300000 });
+
+console.log(result.output_text);
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "Content-Type: application/json" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -d '{
+      "agent": "issue-resolver",
+      "input": "Fix issue #42 and open a PR.",
+      "environment": {
+          "type": "remote",
+          "network": {
+              "allowlist": [
+                  {
+                      "domain": "api.github.com",
+                      "transform": {
+                          "Authorization": "Bearer ghp_REFRESHED_TOKEN"
+                      }
+                  },
+                  {"domain": "pypi.org"}
+              ]
+          }
+      }
+  }'
+```
+
+## Aracıları yönet
+
+Aracıları listeleyebilir, alabilir ve silebilirsiniz.
+
+### Aracıları listeleyin
 
 ### Python
 
@@ -736,7 +822,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### รับ Agent
+### Aracı edinme
 
 ### Python
 
@@ -759,9 +845,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### ลบ Agent
+### Temsilci silme
 
-การลบจะนำการกำหนดค่าออก สภาพแวดล้อมและการโต้ตอบที่มีอยู่ซึ่งสร้างโดย Agent จะไม่ได้รับผลกระทบ
+Silme işlemi, yapılandırmayı kaldırır. Mevcut ortamlar ve ajan tarafından oluşturulan etkileşimler etkilenmez.
 
 ### Python
 
@@ -782,46 +868,69 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## ข้อมูลอ้างอิงคำจำกัดความของ Agent
+## Aracı tanımı referansı
 
-| ช่อง | ประเภท | ต้องระบุ | คำอธิบาย |
+| Alan | Tür | Zorunlu | Açıklama |
 | --- | --- | --- | --- |
-| `id` | สตริง | ใช่ | ตัวระบุที่ไม่ซ้ำกันของ Agent ใช้เพื่อเรียกใช้ Agent |
-| `description` | สตริง | ไม่ | คำอธิบาย Agent ที่มนุษย์อ่านได้ |
-| `base_agent` | สตริง | ใช่ | รหัส Agent ฐาน (เช่น `antigravity-preview-05-2026`) |
-| `system_instruction` | สตริง | ไม่ | พรอมต์ของระบบที่กำหนดลักษณะการทำงานและบุคลิกภาพ |
-| `tools` | อาร์เรย์ | ไม่ | เครื่องมือที่ Agent ใช้ได้ หากละไว้ ระบบจะใช้ `code_execution`, `google_search` และ `url_context` เป็นค่าเริ่มต้น เครื่องมือที่รองรับ ได้แก่ `code_execution`, `google_search`, `url_context`, `mcp_server` และคำจำกัดความ `function` ที่กำหนดเอง |
-| `base_environment` | สตริงหรือออบเจ็กต์ | ไม่ | `"remote"`, `environment_id` หรือออบเจ็กต์การกำหนดค่าที่มี `sources` และ `network` ดูสภาพแวดล้อม |
+| `id` | dize | Evet | Google Cloud projesindeki benzersiz aracı tanımlayıcısı. Aracı çağırmak için kullanılır. Ayrılmış önekler kullanılmamalıdır. [Aracı kimliği kısıtlamaları](#agent-id-restrictions) başlıklı makaleyi inceleyin. |
+| `description` | dize | Hayır | Temsilcinin kullanıcılar tarafından okunabilir açıklaması. |
+| `base_agent` | dize | Evet | Temel aracı kimliği (ör. `antigravity-preview-05-2026`). |
+| `system_instruction` | dize | Hayır | Davranışı ve kullanıcı profilini tanımlayan sistem istemi. |
+| `tools` | dizi | Hayır | Ajanın kullanabileceği araçlar. Boş bırakılırsa varsayılan olarak `code_execution`, `google_search` ve `url_context` değerleri kullanılır. Desteklenen araçlar arasında `code_execution`, `google_search`, `url_context`, `mcp_server` ve özel `function` tanımları yer alır. |
+| `base_environment` | dize veya nesne | Hayır | `"remote"`, `environment_id` veya `sources` ve `network` içeren bir yapılandırma nesnesi. Ortamlar bölümüne bakın. |
 
-## ขั้นตอนการทำซ้ำ
+### Aracı kimliği kısıtlamaları
 
-1. **สร้างต้นแบบ** ด้วย Agent ของ Antigravity ฐาน ส่งวิธีการของระบบและแหล่งข้อมูลสภาพแวดล้อมแบบอินไลน์ ทดสอบวิธีการ ทักษะ และการตั้งค่าสภาพแวดล้อมแบบอินเทอร์แอกทีฟ
-2. **ทำให้ สภาพแวดล้อมเสถียร** ติดตั้งแพ็กเกจ เมานต์แหล่งข้อมูล ยืนยันว่าทุกอย่างทำงานได้
-3. **คงอยู่** เป็น Managed Agent โดยสร้าง Agent ใหม่ ไม่ว่าจะจากแหล่งข้อมูลหรือโดยการ fork สภาพแวดล้อม
-4. **อัปเดต** คำจำกัดความของ Agent เปลี่ยนวิธีการของระบบ สลับทักษะ หรือเพิ่มแหล่งข้อมูล การเรียกใช้ครั้งถัดไปจะใช้การกำหนดค่าใหม่
+Yönetilen bir aracı oluştururken belirttiğiniz `id` şu kurallara uymalıdır:
 
-## ข้อจำกัด
+- Google Cloud projenize özgü olmalıdır.
+- Aksi takdirde oluşturma işlemi başarısız olacağından, aşağıdaki ayrılmış öneklerden (büyük/küçük harfe duyarsız) biriyle **başlamamalıdır**:
+  - `antigravity-`
+  - `veo-`
+  - `omni-`
+  - `lyria-`
+  - `imagen-`
+  - `gemma-`
+  - `gemini-`
+  - `google-`
+  - `youtube-`
+  - `android-`
+  - `chrome-`
+  - `pixel-`
+  - `waze-`
+  - `fitbit-`
+  - `nest-`
+  - `kaggle-`
 
-- **สถานะเวอร์ชันทดลอง**: Managed Agent อยู่ในเวอร์ชันทดลอง ฟีเจอร์และสคีมาอาจมีการเปลี่ยนแปลง
-- **Agent ฐาน**: ระบบรองรับเฉพาะ `antigravity-preview-05-2026` เป็น `base_agent`
-- **ไม่มีการกำหนดเวอร์ชัน**: การกำหนดเวอร์ชันและการย้อนกลับของ Agent ยังไม่พร้อมใช้งาน
-- **ไม่มีการซ้อน Agent ย่อย**: ระบบยังไม่รองรับการมอบสิทธิ์ Agent ย่อย
-- คุณมี Managed Agent ได้สูงสุด 1,000 รายการ
+## Yineleme iş akışı
 
-## ขั้นตอนถัดไป
+1. Temel Antigravity temsilcisiyle **prototip oluşturun**. Sistem talimatını ve ortam kaynaklarını satır içi olarak iletin. Talimatları, becerileri ve ortam kurulumunu etkileşimli olarak test edin.
+2. Ortamı **dengeleyin**. Paketleri yükleyin, kaynakları bağlayın ve her şeyin çalıştığını doğrulayın.
+3. Kaynaklardan veya ortamı çatallayarak yeni bir aracı oluşturup yönetilen aracı olarak **kalıcı hale getirin**.
+4. Aracı tanımını **güncelleyin**. Sistem talimatını değiştirme, becerileri değiştirme veya kaynak ekleme Bir sonraki çağırmada yeni yapılandırma kullanılır.
 
-- [ภาพรวมของ Agent](https://ai.google.dev/gemini-api/docs/agents?hl=th): ดูข้อมูลเกี่ยวกับแนวคิดหลักของ Managed Agent
-- [การเริ่มต้นอย่างรวดเร็ว](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=th): เริ่มสร้างด้วยการสนทนาไปมาและการสตรีม
-- [Agent ของ Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=th): สำรวจความสามารถ เครื่องมือ และราคาของ Agent เริ่มต้น
-- [สภาพแวดล้อมของ Agent](https://ai.google.dev/gemini-api/docs/agent-environment?hl=th): กำหนดค่าแซนด์บ็อกซ์ แหล่งข้อมูล และเครือข่าย
-- [Managed Agents API ในแพลตฟอร์ม Agent](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=th): สำหรับการสร้าง Agent ที่มีการกำกับดูแลองค์กรในตัว
+## Sınırlamalar
 
-ส่งความคิดเห็น
+- **Önizleme durumu**: Yönetilen aracıların önizleme sürümü kullanımdadır. Özellikler ve şemalar değişebilir.
+- **Temel aracı**: `base_agent` olarak yalnızca `antigravity-preview-05-2026` desteklenir.
+- **Sürüm oluşturma yok**: Ajan sürümü oluşturma ve geri alma henüz kullanılamıyor.
+- **Alt temsilci iç içe yerleştirme yok**: Alt temsilci yetkilendirme henüz desteklenmemektedir.
+- En fazla 1.000 yönetilen aracınız olabilir.
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+## Sırada ne var?
 
-อัปเดตล่าสุด 2026-06-26 UTC
+- [Ajanlara Genel Bakış](https://ai.google.dev/gemini-api/docs/agents?hl=tr): Yönetilen ajanların temel kavramları hakkında bilgi edinin.
+- [Hızlı başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr): Çok adımlı görüşmeler ve akışla geliştirmeye başlayın.
+- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr): Varsayılan temsilcinin özelliklerini, araçlarını ve fiyatlandırmasını keşfedin.
+- [Aracı Ortamları](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr): Sanal alanları, kaynakları ve ağı yapılandırın.
+- [Agent Platform'da Yönetilen Ajanlar API'si](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=tr): Yerleşik kurumsal yönetim özelliklerine sahip ajanlar oluşturmak için kullanılır.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Geri bildirim gönderin
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-26 UTC"],[],[]]
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+
+Son güncelleme tarihi: 2026-07-08 UTC.
+
+Bize geri bildirimde bulunmak mı istiyorsunuz?
+
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-08 UTC."],[],[]]

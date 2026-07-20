@@ -1,44 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=hi
-fetched_at: 2026-07-06T05:20:31.833712+00:00
-title: "Gemini \u0914\u0930 Vercel \u0915\u0947 \u090f\u0906\u0908 \u090f\u0938\u0921\u0940\u0915\u0947 \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u092e\u093e\u0930\u094d\u0915\u0947\u091f \u0930\u093f\u0938\u0930\u094d\u091a \u0915\u0930\u0928\u0947 \u0935\u093e\u0932\u093e \u090f\u091c\u0947\u0902\u091f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=tr
+fetched_at: 2026-07-20T04:37:21.567544+00:00
+title: "Vercel'in Gemini ve AI SDK'si ile Pazar Ara\u015ft\u0131rmas\u0131 Temsilcisi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-# Gemini और Vercel के एआई एसडीके की मदद से मार्केट रिसर्च करने वाला एजेंट
+# Vercel'in Gemini ve AI SDK'si ile Pazar Araştırması Temsilcisi
 
-[Vercel का एआई एसडीके](https://ai-sdk.dev), TypeScript में एआई की मदद से काम करने वाले ऐप्लिकेशन, यूज़र इंटरफ़ेस, और एजेंट बनाने के लिए
-, एक बेहतरीन ओपन-सोर्स लाइब्रेरी है.
+[Vercel'in AI SDK'sı](https://ai-sdk.dev), TypeScript'te yapay zeka destekli uygulamalar, kullanıcı arayüzleri ve aracıları oluşturmak için kullanılan güçlü bir açık kaynak kitaplıktır.
 
-इस गाइड में, TypeScript
-की मदद से Node.js ऐप्लिकेशन बनाने का तरीका बताया गया है. यह ऐप्लिकेशन, [Google Generative AI Provider](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) के ज़रिए Gemini API से कनेक्ट होने और मार्केट ट्रेंड का विश्लेषण ऑटोमेट करने के लिए, एआई एसडीके का इस्तेमाल करता है. फ़ाइनल ऐप्लिकेशन:
+Bu kılavuzda, [Google Üretken Yapay Zeka Sağlayıcısı](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) aracılığıyla Gemini API'ye bağlanmak ve otomatik pazar trendi analizi yapmak için yapay zeka SDK'sını kullanan TypeScript ile bir Node.js uygulaması oluşturma adımları açıklanmaktadır. Son uygulama:
 
-1. मार्केट के मौजूदा ट्रेंड के बारे में रिसर्च करने के लिए, Google Search के साथ Gemini का इस्तेमाल करेगा.
-2. चार्ट जनरेट करने के लिए, रिसर्च से स्ट्रक्चर्ड डेटा एक्सट्रैक्ट करेगा.
-3. रिसर्च और चार्ट को मिलाकर, एचटीएमएल फ़ॉर्मैट में एक पेशेवर रिपोर्ट बनाएगा और उसे PDF के तौर पर सेव करेगा.
+1. Mevcut pazar trendlerini araştırmak için Google Arama ile Gemini'ı kullanın.
+2. Grafik oluşturmak için araştırmadan yapılandırılmış verileri ayıklayın.
+3. Araştırmayı ve grafikleri profesyonel bir HTML raporunda birleştirip PDF olarak kaydedin.
 
-## ज़रूरी शर्तें
+## Ön koşullar
 
-इस गाइड में दिए गए निर्देशों को पूरा करने के लिए, आपको इनकी ज़रूरत होगी:
+Bu kılavuzu tamamlamak için ihtiyacınız olanlar:
 
-- Gemini API पासकोड. इसे [Google AI Studio](https://aistudio.google.com/apikey?hl=hi) में मुफ़्त में बनाया जा सकता है.
-- [Node.js](https://nodejs.org/en/download) का वर्शन 18 या इसके बाद का वर्शन.
-- कोई पैकेज मैनेजर, जैसे कि `npm`, `pnpm`, या `yarn`.
+- Gemini API anahtarı. [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'da ücretsiz olarak oluşturabilirsiniz.
+- [Node.js](https://nodejs.org/en/download) 18 veya sonraki sürümler.
+- `npm`, `pnpm` veya `yarn` gibi bir paket yöneticisi.
 
-## अपना ऐप्लिकेशन सेट अप करना
+## Uygulamanızı ayarlama
 
-सबसे पहले, अपने प्रोजेक्ट के लिए एक नई डायरेक्ट्री बनाएं और उसे शुरू करें.
+Öncelikle projeniz için yeni bir dizin oluşturun ve bu dizini başlatın.
 
 ### npm
 
@@ -56,7 +54,7 @@ cd market-trend-app
 pnpm init
 ```
 
-### yarn
+### yumak
 
 ```
 mkdir market-trend-app
@@ -64,9 +62,9 @@ cd market-trend-app
 yarn init -y
 ```
 
-### डिपेंडेंसी इंस्टॉल करना
+### Bağımlıları yükleme
 
-इसके बाद, एआई एसडीके, Google Generative AI Provider, और अन्य ज़रूरी डिपेंडेंसी इंस्टॉल करें.
+Ardından, yapay zeka SDK'sını, Google Üretken Yapay Zeka sağlayıcısını ve diğer gerekli bağımlılıkları yükleyin.
 
 ### npm
 
@@ -75,7 +73,7 @@ npm install ai @ai-sdk/google zod
 npm install -D @types/node tsx typescript && npx tsc --init
 ```
 
-TypeScript कंपाइलर की गड़बड़ी से बचने के लिए, जनरेट की गई `tsconfig.json` में यह लाइन जोड़ें:
+TypeScript derleyici hatasını önlemek için oluşturulan `tsconfig.json` dosyasında aşağıdaki satırı yorum satırı yapın:
 
 ```
 //"verbatimModuleSyntax": true,
@@ -88,22 +86,20 @@ pnpm add ai @ai-sdk/google zod
 pnpm add -D @types/node tsx typescript
 ```
 
-### yarn
+### yumak
 
 ```
 yarn add ai @ai-sdk/google zod
 yarn add -D @types/node tsx typescript && yarn tsc --init
 ```
 
-TypeScript कंपाइलर की गड़बड़ी से बचने के लिए, जनरेट की गई `tsconfig.json` में यह लाइन जोड़ें:
+TypeScript derleyici hatasını önlemek için oluşturulan `tsconfig.json` dosyasında aşağıdaki satırı yorum satırı yapın:
 
 ```
 //"verbatimModuleSyntax": true,
 ```
 
-यह ऐप्लिकेशन, चार्ट रेंडर करने और
-PDF बनाने के लिए, तीसरे पक्ष के [Puppeteer](https://pptr.dev/)
-और [Chart.js](https://www.chartjs.org) पैकेज का भी इस्तेमाल करेगा:
+Bu uygulama, grafikleri oluşturmak ve PDF oluşturmak için [Puppeteer](https://pptr.dev/) ve [Chart.js](https://www.chartjs.org) adlı üçüncü taraf paketlerini de kullanır:
 
 ### npm
 
@@ -119,18 +115,18 @@ pnpm add puppeteer chart.js
 pnpm add -D @types/chart.js
 ```
 
-### yarn
+### yumak
 
 ```
 yarn add puppeteer chart.js
 yarn add -D @types/chart.js
 ```
 
-`puppeteer` पैकेज के लिए, Chromium ब्राउज़र डाउनलोड करने के लिए एक स्क्रिप्ट चलाने की ज़रूरत होती है. आपका पैकेज मैनेजर, अनुमति मांग सकता है. इसलिए, स्क्रिप्ट के लिए अनुमति दें.
+`puppeteer` paketinin Chromium tarayıcısını indirmek için bir komut dosyası çalıştırması gerekir. Paket yöneticiniz onay isteyebilir. Bu nedenle, istendiğinde komut dosyasını onayladığınızdan emin olun.
 
-### अपना एपीआई पासकोड कॉन्फ़िगर करना
+### API anahtarınızı yapılandırma
 
-`GOOGLE_GENERATIVE_AI_API_KEY` एनवायरमेंट वैरिएबल को अपने Gemini API पासकोड के साथ सेट करें. Google Generative AI Provider, इस एनवायरमेंट वैरिएबल में आपके एपीआई पासकोड को अपने-आप ढूंढ लेता है.
+`GOOGLE_GENERATIVE_AI_API_KEY` ortam değişkenini Gemini API anahtarınızla ayarlayın. Google Üretken Yapay Zeka Sağlayıcısı, API anahtarınızı bu ortam değişkeninde otomatik olarak arar.
 
 ### MacOS/Linux
 
@@ -144,11 +140,12 @@ export GOOGLE_GENERATIVE_AI_API_KEY="YOUR_API_KEY_HERE"
 setx GOOGLE_GENERATIVE_AI_API_KEY "YOUR_API_KEY_HERE"
 ```
 
-## अपना ऐप्लिकेशन बनाना
+## Uygulamanızı oluşturma
 
-अब अपने ऐप्लिकेशन के लिए, मुख्य फ़ाइल बनाते हैं. अपने प्रोजेक्ट की डायरेक्ट्री में, `main.ts` नाम की एक नई फ़ाइल बनाएं. इस फ़ाइल में, लॉजिक को चरण दर चरण बनाया जाएगा.
+Şimdi uygulamamızın ana dosyasını oluşturalım. Proje dizininizde
+`main.ts` adlı yeni bir dosya oluşturun. Bu dosyada mantığı adım adım oluşturacaksınız.
 
-यह पक्का करने के लिए कि सब कुछ सही तरीके से सेट अप किया गया है, `main.ts` में यह कोड जोड़ें. इस बुनियादी उदाहरण में, Gemini से सामान्य जवाब पाने के लिए `generateText` का इस्तेमाल किया गया है.
+Her şeyin doğru şekilde ayarlandığından emin olmak için hızlı bir test yapmak üzere aşağıdaki kodu `main.ts`'ya ekleyin. Bu temel örnekte, Gemini'dan basit bir yanıt almak için `generateText` kullanılıyor.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -166,7 +163,7 @@ async function main() {
 main().catch(console.error);
 ```
 
-ज़्यादा जटिलता जोड़ने से पहले, यह स्क्रिप्ट चलाकर देखें कि आपका एनवायरमेंट सही तरीके से कॉन्फ़िगर किया गया है या नहीं. अपने टर्मिनल में यह कमांड चलाएं:
+Daha fazla karmaşıklık eklemeden önce ortamınızın doğru şekilde yapılandırıldığını doğrulamak için bu komut dosyasını çalıştırın. Terminalinizde aşağıdaki komutu çalıştırın:
 
 ### npm
 
@@ -180,20 +177,19 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yarn
+### yumak
 
 ```
 yarn tsc && node main.js
 ```
 
-अगर सब कुछ सही तरीके से सेट अप किया गया है, तो आपको कंसोल में Gemini का जवाब दिखेगा.
+Her şey doğru şekilde ayarlanmışsa Gemini'ın yanıtı konsola yazdırılır.
 
-## Google Search की मदद से मार्केट रिसर्च करना
+## Google Arama ile pazar araştırması yapma
 
-अप-टू-डेट जानकारी पाने के लिए, Gemini के लिए
-[Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=hi) टूल चालू किया जा सकता है. यह टूल चालू होने पर, मॉडल, प्रॉम्प्ट का जवाब देने के लिए वेब पर खोज कर सकता है. साथ ही, यह उन सोर्स को भी दिखाएगा जिनका इस्तेमाल किया गया है.
+Güncel bilgilere ulaşmak için Gemini'da [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) aracını etkinleştirebilirsiniz. Bu araç etkinken model, istemi yanıtlamak için web'de arama yapabilir ve kullandığı kaynakları döndürür.
 
-अपने विश्लेषण का पहला चरण पूरा करने के लिए, `main.ts` के कॉन्टेंट की जगह यह कोड डालें.
+Analizimizin ilk adımını gerçekleştirmek için `main.ts` içeriğini aşağıdaki kodla değiştirin.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -219,13 +215,13 @@ async function main() {
 main().catch(console.error);
 ```
 
-## चार्ट का डेटा एक्सट्रैक्ट करना
+## Grafik verilerini ayıklama
 
-इसके बाद, चार्ट के लिए सही स्ट्रक्चर्ड डेटा एक्सट्रैक्ट करने के लिए, रिसर्च के टेक्स्ट को प्रोसेस करते हैं. डेटा के स्ट्रक्चर को तय करने के लिए, एआई एसडीके के `generateObject` फ़ंक्शन के साथ-साथ `zod` स्कीमा का इस्तेमाल करें.
+Ardından, araştırma metnini işleyerek grafiklere uygun yapılandırılmış verileri çıkaralım. Tam veri yapısını tanımlamak için `generateObject` işlevini `zod` şemasıyla birlikte kullanın.
 
-साथ ही, इस स्ट्रक्चर्ड डेटा को ऐसे कॉन्फ़िगरेशन में बदलने के लिए एक हेल्पर फ़ंक्शन बनाएं जिसे `Chart.js` समझ सके.
+Ayrıca, bu yapılandırılmış verileri `Chart.js`'nın anlayabileceği bir yapılandırmaya dönüştürmek için yardımcı bir işlev oluşturun.
 
-`main.ts` में यह कोड जोड़ें. नए इंपोर्ट और जोड़े गए "Step 2" पर ध्यान दें.
+Aşağıdaki kodu `main.ts` dosyasına ekleyin. Yeni içe aktarmaları ve eklenen "2. adım"ı inceleyin.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -307,13 +303,12 @@ ${marketTrends}
 main().catch(console.error);
 ```
 
-## फ़ाइनल रिपोर्ट जनरेट करना
+## Son raporu oluşturma
 
-आखिरी चरण में, Gemini को रिपोर्ट लिखने वाले विशेषज्ञ के तौर पर काम करने का निर्देश दें.
-उसे मार्केट रिसर्च, चार्ट के कॉन्फ़िगरेशन, और एचटीएमएल रिपोर्ट बनाने के लिए निर्देशों का एक साफ़ सेट दें. इसके बाद, इस एचटीएमएल को रेंडर करने और इसे PDF के तौर पर सेव करने के लिए,
-[Puppeteer](https://pptr.dev/) का इस्तेमाल करें.
+Son adımda, Gemini'a uzman bir rapor yazarı gibi davranmasını söyleyin.
+Pazar araştırması, grafik yapılandırmaları ve HTML raporu oluşturmayla ilgili net talimatlar sağlayın. Ardından, bu HTML'yi oluşturmak ve PDF olarak kaydetmek için [Puppeteer](https://pptr.dev/)'ı kullanın.
 
-अपनी `main.ts` फ़ाइल में, `puppeteer` का फ़ाइनल इंपोर्ट और "Step 3" जोड़ें.
+Nihai `puppeteer` içe aktarma işlemini ve "3. Adım"ı `main.ts` dosyanıza ekleyin.
 
 ```
 // ... (imports from previous step)
@@ -374,9 +369,9 @@ async function main() {
 main().catch(console.error);
 ```
 
-## अपना ऐप्लिकेशन चलाना
+## Uygulamanızı çalıştırma
 
-अब ऐप्लिकेशन चलाने के लिए तैयार हैं. अपने टर्मिनल में यह कमांड चलाएं:
+Artık uygulamayı çalıştırmaya hazırsınız. Terminalinizde aşağıdaki komutu çalıştırın:
 
 ### npm
 
@@ -390,33 +385,33 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yarn
+### yumak
 
 ```
 yarn tsc && node main.js
 ```
 
-स्क्रिप्ट का हर चरण पूरा होने पर, आपको अपने टर्मिनल में लॉगिंग दिखेगी.
-पूरा होने के बाद, आपकी प्रोजेक्ट डायरेक्ट्री में `report.pdf` फ़ाइल बनेगी. इसमें मार्केट के विश्लेषण की जानकारी होगी.
+Komut dosyası her adımı uyguladığında terminalinizde günlük kaydı görürsünüz.
+İşlem tamamlandığında, pazar analizinizin yer aldığı bir `report.pdf` dosyası proje dizininizde oluşturulur.
 
-यहां, आपको PDF फ़ॉर्मैट में बनी रिपोर्ट के पहले दो पेज दिखेंगे:
+Aşağıda, örnek bir PDF raporunun ilk iki sayfasını görebilirsiniz:
 
-![मार्केट ऐनलिसिस रिपोर्ट](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=hi)
+![Pazar analizi raporu](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=tr)
 
-## अतिरिक्त संसाधन
+## Diğer kaynaklar
 
-Gemini और एआई एसडीके की मदद से ऐप्लिकेशन बनाने के बारे में ज़्यादा जानने के लिए, ये संसाधन देखें:
+Gemini ve Yapay Zeka SDK'sı ile geliştirme hakkında daha fazla bilgi edinmek için şu kaynakları inceleyin:
 
-- [एआई एसडीके के दस्तावेज़](https://ai-sdk.dev/docs)
-- [एआई एसडीके के Google Generative AI से जुड़े दस्तावेज़](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
-- [एआई एसडीके कुकबुक: Gemini का इस्तेमाल शुरू करना](https://ai-sdk.dev/cookbook/guides/gemini)
+- [AI SDK belgeleri](https://ai-sdk.dev/docs)
+- [Yapay Zeka SDK'sı Google Üretken Yapay Zeka belgeleri](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
+- [AI SDK cookbook: Get Started with Gemini](https://ai-sdk.dev/cookbook/guides/gemini) (AI SDK yemek kitabı: Gemini'ı kullanmaya başlama)
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
+Son güncelleme tarihi: 2026-05-19 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-19 UTC."],[],[]]

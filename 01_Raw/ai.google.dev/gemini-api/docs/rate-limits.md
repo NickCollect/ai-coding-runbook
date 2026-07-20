@@ -1,225 +1,216 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=it
-fetched_at: 2026-07-06T05:22:00.567974+00:00
-title: "Limiti di frequenza \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=id
+fetched_at: 2026-07-20T04:33:22.271647+00:00
+title: "Batas kapasitas \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Invia feedback
+Kirim masukan
 
-# Limiti di frequenza
+# Batas kapasitas
 
-I limiti di frequenza regolano il numero di richieste che puoi effettuare all'API Gemini
-in un determinato periodo di tempo. Questi limiti contribuiscono a mantenere un utilizzo equo, proteggere dagli abusi e mantenere le prestazioni del sistema per tutti gli utenti.
+Batas laju mengatur jumlah permintaan yang dapat Anda ajukan ke Gemini API dalam jangka waktu tertentu. Batasan ini membantu mempertahankan penggunaan yang adil, melindungi dari penyalahgunaan, dan membantu mempertahankan performa sistem untuk semua pengguna.
 
-[Visualizzare i limiti di frequenza attivi in AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=it)
+[Melihat batas frekuensi aktif di AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=id)
 
-## Come funzionano i limiti di frequenza
+## Cara kerja batas laju
 
-I limiti di frequenza vengono in genere misurati in tre dimensioni:
+Batas laju biasanya diukur di tiga dimensi:
 
-- Richieste al minuto (**RPM**)
-- Token al minuto (input) (**TPM**)
-- Richieste al giorno (**RPD**)
+- Permintaan per menit (**RPM**)
+- Token per menit (input) (**TPM**)
+- Permintaan per hari (**RPD**)
 
-Il tuo utilizzo viene valutato in base a ciascun limite e il superamento di uno qualsiasi di questi limiti
-attiva un errore di limite di frequenza. Ad esempio, se il limite RPM è 20, l'invio di 21
-richieste in un minuto genererà un errore, anche se non hai superato
-il limite TPM o altri limiti.
+Penggunaan Anda dievaluasi terhadap setiap batas, dan jika salah satu batas terlampaui, error batas kecepatan akan dipicu. Misalnya, jika batas RPM Anda adalah 20, membuat 21
+permintaan dalam satu menit akan menghasilkan error, meskipun Anda belum melampaui
+TPM atau batas lainnya.
 
-I limiti di frequenza vengono applicati per progetto, non per chiave API. Le quote di richieste al giorno (**RPD**) vengono reimpostate alla mezzanotte del fuso orario del Pacifico.
+Batas laju diterapkan per project, bukan per kunci API. Kuota permintaan per hari (**RPD**) direset pada tengah malam waktu Pasifik.
 
-I limiti variano a seconda del modello specifico utilizzato e alcuni limiti si applicano solo a modelli specifici. Ad esempio, le immagini al minuto (IPM) vengono calcolate solo per i modelli in grado di generare immagini (Nano Banana), ma sono concettualmente simili ai token al minuto (TPM). Altri modelli potrebbero avere un limite di token al giorno (TPD).
+Batas bervariasi bergantung pada model spesifik yang digunakan, dan beberapa batas hanya berlaku untuk model tertentu. Misalnya, Gambar per menit (IPM) hanya dihitung untuk model yang mampu membuat gambar (Nano Banana), tetapi secara konseptual mirip dengan TPM. Model lain mungkin memiliki batas token per hari (TPD).
 
-I limiti di frequenza sono più restrittivi per i modelli sperimentali e di anteprima.
+Batas kapasitas lebih terbatas untuk model eksperimental dan pratinjau.
 
-### Limiti di frequenza basati sulla spesa
+### Batas frekuensi berbasis pembelanjaan
 
-Oltre ai limiti di richieste al minuto (RPM) e token al minuto (TPM), l'API Gemini applica limiti di frequenza basati sulla spesa per proteggersi da addebiti imprevisti. L'applicazione di questi limiti al tuo account dipende dalla cronologia
-della fatturazione e dal [livello di utilizzo](#usage-tiers).
+Selain batas permintaan per menit (RPM) dan token per menit (TPM), Gemini API menerapkan batas kapasitas berbasis pembelanjaan untuk melindungi dari biaya yang tidak terduga. Apakah batas ini berlaku untuk akun Anda atau tidak bergantung pada histori penagihan dan [tingkat penggunaan](#usage-tiers) Anda.
 
-La tabella seguente mostra i limiti di frequenza basati sulla spesa per ogni [livello di utilizzo](#usage-tiers). Questi limiti vengono valutati in una finestra mobile di 10 minuti. L'applicazione di questi limiti al tuo account dipende dalla cronologia della fatturazione e dallo stato dell'account.
+Tabel berikut menunjukkan batas frekuensi berbasis pembelanjaan untuk setiap
+[tingkat penggunaan](#usage-tiers). Batas ini dievaluasi dalam jangka waktu 10 menit yang terus berlanjut. Apakah batas ini berlaku untuk akun Anda bergantung pada histori penagihan dan reputasi akun Anda.
 
-| Livello di utilizzo | Limite di spesa (ogni 10 minuti) |
+| Tingkat penggunaan | Batas laju pembelanjaan (per 10 menit) |
 | --- | --- |
-| **Nessun costo** | N/D |
-| **Livello 1** | 10 $ |
-| **Livello 2** | 200 $ |
-| **Livello 3** | 200 $ |
+| **Gratis** | T/A |
+| **Tingkat 1** | $10 |
+| **Tingkat 2** | $200 |
+| **Tingkat 3** | $200 |
 
-Se raggiungi un limite di frequenza basato sulla spesa, l'API restituisce un errore `429 RESOURCE_EXHAUSTED`. Per risolvere questo problema:
+Jika Anda mencapai batas tarif berbasis pembelanjaan, API akan menampilkan error `429 RESOURCE_EXHAUSTED`. Untuk mengatasi hal ini:
 
-- **Attendi e riprova** dopo un breve periodo di tempo.
-- **Riduci la frequenza delle richieste costose**, ad esempio utilizzando finestre contestuali più piccole o output più brevi.
-- Se raggiungi costantemente questo limite durante l'utilizzo normale,
-  [richiedi un aumento del limite di frequenza](#request-rate-limit-increase).
+- **Tunggu dan coba lagi** setelah beberapa saat.
+- **Kurangi frekuensi permintaan yang mahal**, misalnya dengan menggunakan jendela konteks yang lebih kecil atau output yang lebih pendek.
+- Jika Anda terus-menerus mencapai batas ini selama penggunaan normal,
+  [minta peningkatan batas kecepatan](#request-rate-limit-increase).
 
-## Livelli di utilizzo
+## Tingkat penggunaan
 
-I limiti di frequenza sono legati al livello di utilizzo del progetto. Man mano che l'utilizzo e la spesa per l'API aumentano, verrà eseguito automaticamente l'upgrade a un livello superiore con limiti di frequenza più elevati.
+Pembatasan kapasitas terikat dengan tingkat penggunaan project. Seiring meningkatnya penggunaan dan pembelanjaan API, Anda akan otomatis diupgrade ke tingkat yang lebih tinggi dengan batas tarif yang lebih tinggi.
 
-I requisiti per i livelli 2 e 3 si basano sulla spesa cumulativa totale
-per i servizi Google Cloud (inclusa, a titolo esemplificativo, l'API Gemini) per l'account di fatturazione collegato al tuo progetto.
+Kualifikasi untuk Tingkat 2 dan 3 didasarkan pada total pembelanjaan kumulatif
+untuk layanan Google Cloud (termasuk, tetapi tidak terbatas pada, Gemini API) untuk
+akun penagihan yang ditautkan ke project Anda.
 
-| Livello di utilizzo | Qualificazione | [Limite del livello di fatturazione](https://ai.google.dev/gemini-api/docs/billing?hl=it#tier-spend-caps) |
+| Tingkat penggunaan | Kualifikasi | [Batas tingkat penagihan](https://ai.google.dev/gemini-api/docs/billing?hl=id#tier-spend-caps) |
 | --- | --- | --- |
-| **Nessun costo** | [Progetto attivo](https://ai.google.dev/gemini-api/docs/api-key?hl=it#google-cloud-projects) o prova senza costi | N/D |
-| **Livello 1** | [Configura e collega un account di fatturazione attivo](https://ai.google.dev/gemini-api/docs/billing?hl=it#setup-billing) | 250 $ |
-| **Livello 2** | Pagamento di 100 $+ 3 giorni dal primo pagamento riuscito | $ 2000 |
-| **Livello 3** | Pagamento di 1000 $+ 30 giorni dal primo pagamento riuscito | 20.000 $-100.000+ $ |
+| **Gratis** | [Project aktif](https://ai.google.dev/gemini-api/docs/api-key?hl=id#google-cloud-projects) atau uji coba gratis | T/A |
+| **Tingkat 1** | [Menyiapkan dan menautkan akun penagihan yang aktif](https://ai.google.dev/gemini-api/docs/billing?hl=id#setup-billing) | $250 |
+| **Tingkat 2** | Dibayar $100 + 3 hari sejak pembayaran pertama yang berhasil | $2.000 |
+| **Tingkat 3** | Membayar $1.000 + 30 hari sejak pembayaran pertama yang berhasil | $20.000 - $100.000+ |
 
-Sebbene il rispetto dei criteri di qualificazione indicati sia generalmente
-sufficiente per l'approvazione, in rari casi una richiesta di upgrade può essere rifiutata in base
-ad altri fattori identificati durante la procedura di revisione.
+Meskipun memenuhi kriteria kelayakan yang dinyatakan umumnya sudah cukup untuk mendapatkan persetujuan, dalam kasus yang jarang terjadi, permintaan upgrade dapat ditolak berdasarkan faktor lain yang diidentifikasi selama proses peninjauan.
 
-Questo sistema contribuisce a mantenere la sicurezza e l'integrità della piattaforma API Gemini
-per tutti gli utenti.
+Sistem ini membantu menjaga keamanan dan integritas platform Gemini API bagi semua pengguna.
 
-## Limiti di frequenza dell'API Gemini
+## Batas kapasitas Gemini API
 
-I limiti di frequenza dipendono da una serie di fattori (ad esempio il tuo livello di utilizzo) e possono essere
-visualizzati in Google AI Studio. Man mano che il tuo livello e lo stato dell'account cambiano nel tempo,
-i limiti di frequenza verranno aggiornati automaticamente.
+Batas frekuensi bergantung pada berbagai faktor (seperti tingkat penggunaan Anda) dan dapat dilihat di Google AI Studio. Seiring perubahan tingkat dan status akun Anda dari waktu ke waktu, batas laju Anda akan diperbarui secara otomatis.
 
-[Visualizzare i limiti di frequenza attivi in AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=it)
+[Melihat batas frekuensi aktif di AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=id)
 
-I limiti di frequenza specificati non sono garantiti e la capacità effettiva potrebbe variare.
+Batas frekuensi yang ditentukan tidak dijamin dan kapasitas sebenarnya dapat bervariasi.
 
-## Limiti di frequenza dell'inferenza della priorità
+## Batas frekuensi inferensi prioritas
 
-Il consumo [prioritario](https://ai.google.dev/gemini-api/docs/priority-inference?hl=it) mantiene i propri limiti di frequenza
-anche se il consumo viene conteggiato ai fini dei limiti di frequenza
-complessivi del traffico interattivo. **I limiti di frequenza predefiniti sono: 0,3 volte il [limite di frequenza standard](https://aistudio.google.com/rate-limit?hl=it) per ogni modello e livello**
+Penggunaan [Prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id) memiliki batas laju sendiri meskipun penggunaan dihitung dalam batas laju traffic interaktif keseluruhan. **Batas frekuensi default adalah: 0,3x [batas frekuensi standar](https://aistudio.google.com/rate-limit?hl=id) untuk setiap model dan tingkat**
 
-## Limiti di frequenza delle richieste API Batch
+## Batas kapasitas API batch
 
-Le richieste [API batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=it) sono soggette a limiti di frequenza propri, separati dalle chiamate API non batch.
+Permintaan [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id) tunduk pada batas kapasitasnya sendiri, terpisah dari panggilan API non-batch.
 
-- **Richieste batch simultanee:** 100
-- **Limite di dimensione del file di input:** 2 GB
-- **Limite di spazio di archiviazione dei file:** 20 GB
-- **Token in coda per modello**:la tabella **Token batch in coda** elenca il numero massimo di token che possono essere messi in coda per l'elaborazione batch in tutti i job batch attivi per un determinato modello.
+- **Permintaan batch serentak:** 100
+- **Batas ukuran file input:** 2 GB
+- **Batas penyimpanan file:** 20 GB
+- **Token dalam antrean per model:** Tabel **Token dalam antrean batch** mencantumkan jumlah maksimum token yang dapat dimasukkan dalam antrean untuk pemrosesan batch di semua tugas batch aktif Anda untuk model tertentu.
 
-### Livello 1
+### Tingkat 1
 
-| Modello | Token batch in coda |
+| Model | Token yang dimasukkan dalam antrean batch |
 | --- | --- |
-| Modelli di testo | | | | |
+| Model teks keluar | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (anteprima) | 5.000.000 |
+| Pratinjau Gemini 3.1 Pro | 5.000.000 |
 | Gemini 3.1 Flash Lite | 10.000.000 |
-| Gemini 3.1 Flash Lite (anteprima) | 10.000.000 |
+| Pratinjau Gemini 3.1 Flash Lite | 10.000.000 |
 | Gemini 3.5 Flash | 3.000.000 |
 | Gemini 2.5 Pro | 5.000.000 |
 | Gemini 2.5 Pro TTS | 25.000 |
 | Gemini 2.5 Flash | 3.000.000 |
-| Gemini 2.5 Flash (anteprima) | 3.000.000 |
-| Anteprima di Gemini 2.5 Flash Image | 3.000.000 |
+| Pratinjau Gemini 2.5 Flash | 3.000.000 |
+| Pratinjau Gambar Gemini 2.5 Flash | 3.000.000 |
 | Gemini 2.5 Flash TTS | 100.000 |
-| Gemini 2.5 Flash-Lite | 10.000.000 |
-| Gemini 2.5 Flash Lite (anteprima) | 10.000.000 |
+| Gemini 2.5 Flash Lite | 10.000.000 |
+| Pratinjau Gemini 2.5 Flash Lite | 10.000.000 |
 | Gemini 2.0 Flash | 10.000.000 |
-| Gemini 2.0 Flash Image | 3.000.000 |
+| Gambar Gemini 2.0 Flash | 3.000.000 |
 | Gemini 2.0 Flash Lite | 10.000.000 |
-| Modelli di generazione multimodali | | | | |
-| Anteprima dell'immagine flash di Gemini 3.1 🍌 | 1.000.000 |
-| Gemini 3.1 Flash Lite Image 🍌 | 2.000.000 |
-| Anteprima di Gemini 3 Pro Image 🍌 | 2.000.000 |
-| Modelli di embedding | | | | |
-| Incorporamento di Gemini | 500.000 |
+| Model pembuatan multi-modal | | | | |
+| Pratinjau Gambar Flash Gemini 3.1 🍌 | 1.000.000 |
+| Gambar Gemini 3.1 Flash Lite 🍌 | 2.000.000 |
+| Pratinjau Gambar Gemini 3 Pro 🍌 | 2.000.000 |
+| Model embedding | | | | |
+| Penyematan Gemini | 500.000 |
 
-### Livello 2
+### Tingkat 2
 
-| Modello | Token batch in coda |
+| Model | Token yang dimasukkan dalam antrean batch |
 | --- | --- |
-| Modelli di testo | | | | |
+| Model teks keluar | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (anteprima) | 500.000.000 |
+| Pratinjau Gemini 3.1 Pro | 500.000.000 |
 | Gemini 3.1 Flash Lite | 500.000.000 |
-| Gemini 3.1 Flash Lite (anteprima) | 500.000.000 |
+| Pratinjau Gemini 3.1 Flash Lite | 500.000.000 |
 | Gemini 3.5 Flash | 400.000.000 |
 | Gemini 2.5 Pro | 500.000.000 |
 | Gemini 2.5 Pro TTS | 100.000 |
 | Gemini 2.5 Flash | 400.000.000 |
-| Gemini 2.5 Flash (anteprima) | 400.000.000 |
-| Anteprima di Gemini 2.5 Flash Image | 400.000.000 |
+| Pratinjau Gemini 2.5 Flash | 400.000.000 |
+| Pratinjau Gambar Gemini 2.5 Flash | 400.000.000 |
 | Gemini 2.5 Flash TTS | 100.000 |
-| Gemini 2.5 Flash-Lite | 500.000.000 |
-| Gemini 2.5 Flash Lite (anteprima) | 500.000.000 |
+| Gemini 2.5 Flash Lite | 500.000.000 |
+| Pratinjau Gemini 2.5 Flash Lite | 500.000.000 |
 | Gemini 2.0 Flash | 1.000.000.000 |
-| Gemini 2.0 Flash Image | 400.000.000 |
+| Gambar Gemini 2.0 Flash | 400.000.000 |
 | Gemini 2.0 Flash Lite | 1.000.000.000 |
-| Modelli di generazione multimodali | | | | |
-| Anteprima dell'immagine flash di Gemini 3.1 🍌 | 250.000.000 |
-| Gemini 3.1 Flash Lite Image 🍌 | 270.000.000 |
-| Anteprima di Gemini 3 Pro Image 🍌 | 270.000.000 |
-| Modelli di embedding | | | | |
-| Incorporamento di Gemini | 5.000.000 |
+| Model pembuatan multi-modal | | | | |
+| Pratinjau Gambar Flash Gemini 3.1 🍌 | 250.000.000 |
+| Gambar Gemini 3.1 Flash Lite 🍌 | 270.000.000 |
+| Pratinjau Gambar Gemini 3 Pro 🍌 | 270.000.000 |
+| Model embedding | | | | |
+| Penyematan Gemini | 5.000.000 |
 
-### Livello 3
+### Tingkat 3
 
-| Modello | Token batch in coda |
+| Model | Token yang dimasukkan dalam antrean batch |
 | --- | --- |
-| Modelli di testo | | | | |
+| Model teks keluar | | | | |
 | --- | --- | --- | --- | --- |
-| Gemini 3.1 Pro (anteprima) | 1.000.000.000 |
+| Pratinjau Gemini 3.1 Pro | 1.000.000.000 |
 | Gemini 3.1 Flash Lite | 1.000.000.000 |
-| Gemini 3.1 Flash Lite (anteprima) | 1.000.000.000 |
+| Pratinjau Gemini 3.1 Flash Lite | 1.000.000.000 |
 | Gemini 3.5 Flash | 1.000.000.000 |
 | Gemini 2.5 Pro | 1.000.000.000 |
 | Gemini 2.5 Pro TTS | 1.000.000 |
 | Gemini 2.5 Flash | 1.000.000.000 |
-| Gemini 2.5 Flash (anteprima) | 1.000.000.000 |
-| Anteprima di Gemini 2.5 Flash Image | 1.000.000.000 |
+| Pratinjau Gemini 2.5 Flash | 1.000.000.000 |
+| Pratinjau Gambar Gemini 2.5 Flash | 1.000.000.000 |
 | Gemini 2.5 Flash TTS | 4.000.000 |
-| Gemini 2.5 Flash-Lite | 1.000.000.000 |
-| Gemini 2.5 Flash Lite (anteprima) | 1.000.000.000 |
+| Gemini 2.5 Flash Lite | 1.000.000.000 |
+| Pratinjau Gemini 2.5 Flash Lite | 1.000.000.000 |
 | Gemini 2.0 Flash | 5.000.000.000 |
-| Gemini 2.0 Flash Image | 1.000.000.000 |
+| Gambar Gemini 2.0 Flash | 1.000.000.000 |
 | Gemini 2.0 Flash Lite | 5.000.000.000 |
-| Modelli di generazione multimodali | | | | |
-| Anteprima dell'immagine flash di Gemini 3.1 🍌 | 750.000.000 |
-| Gemini 3.1 Flash Lite Image 🍌 | 1.000.000.000 |
-| Anteprima di Gemini 3 Pro Image 🍌 | 1.000.000.000 |
-| Modelli di embedding | | | | |
-| Incorporamento di Gemini | 10.000.000 |
+| Model pembuatan multi-modal | | | | |
+| Pratinjau Gambar Flash Gemini 3.1 🍌 | 750.000.000 |
+| Gambar Gemini 3.1 Flash Lite 🍌 | 1.000.000.000 |
+| Pratinjau Gambar Gemini 3 Pro 🍌 | 1.000.000.000 |
+| Model embedding | | | | |
+| Penyematan Gemini | 10.000.000 |
 
-## Come eseguire l'upgrade al livello successivo
+## Cara mengupgrade ke tingkat berikutnya
 
-Per eseguire la transizione dal livello senza costi a un livello a pagamento, devi prima
-[configurare la fatturazione in AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=it).
+Untuk bertransisi dari Paket gratis ke paket berbayar, Anda harus
+[menyiapkan penagihan di AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=id) terlebih dahulu.
 
-Una volta che il tuo progetto soddisfa i [criteri specificati](#usage-tiers), verrà
-eseguito automaticamente l'upgrade al livello successivo. Gli upgrade dal Livello senza costi al Livello 1
-in genere hanno effetto immediatamente, mentre gli upgrade successivi
-hanno effetto entro 10 minuti. Vai alla [pagina Progetti](https://aistudio.google.com/projects?hl=it) in AI Studio per controllare i tuoi livelli.
+Setelah proyek Anda memenuhi [kriteria yang ditentukan](#usage-tiers), proyek tersebut akan
+diupgrade secara otomatis ke tingkat berikutnya. Upgrade paket dari Gratis ke Paket 1
+biasanya akan langsung diterapkan, dan upgrade paket berikutnya akan
+diterapkan dalam waktu 10 menit. Buka [halaman Project](https://aistudio.google.com/projects?hl=id) di AI Studio untuk memeriksa tingkat Anda.
 
-## Richiedi un aumento del limite di frequenza
+## Meminta peningkatan batas laju
 
-Ogni variante del modello ha un limite di frequenza associato (richieste al minuto, RPM).
-Per informazioni dettagliate su questi limiti di frequenza, consulta la pagina
-[Limite di frequenza di AI Studio](https://aistudio.google.com/rate-limit?hl=it).
+Setiap variasi model memiliki batas frekuensi panggilan yang terkait (permintaan per menit, RPM).
+Untuk mengetahui detail tentang batas frekuensi tersebut, lihat halaman
+[Batas Frekuensi AI Studio](https://aistudio.google.com/rate-limit?hl=id).
 
-[Richiedere un aumento del limite di frequenza per il livello a pagamento](https://forms.gle/ETzX94k8jf7iSotH9)
+[Meminta peningkatan batas frekuensi tingkat berbayar](https://forms.gle/ETzX94k8jf7iSotH9)
 
-Non offriamo garanzie in merito all'aumento del limite di frequenza, ma faremo del nostro meglio
-per esaminare la tua richiesta.
+Kami tidak memberikan jaminan tentang peningkatan batas kecepatan Anda, tetapi kami akan berupaya sebaik mungkin untuk meninjau permintaan Anda.
 
-Invia feedback
+Kirim masukan
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Ultimo aggiornamento 2026-07-03 UTC.
+Terakhir diperbarui pada 2026-07-03 UTC.
 
-Vuoi dirci altro?
+Ada masukan untuk kami?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-03 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-03 UTC."],[],[]]

@@ -1,93 +1,102 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=de
-fetched_at: 2026-07-06T05:14:30.190502+00:00
-title: "Best Practices f\u00fcr die Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/best-practices?hl=ja
+fetched_at: 2026-07-20T04:41:35.793772+00:00
+title: "Live API \u306e\u30d9\u30b9\u30c8 \u30d7\u30e9\u30af\u30c6\u30a3\u30b9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Feedback geben
+フィードバックを送信
 
-# Best Practices für die Live API
+# Live API のベスト プラクティス
 
-In diesem Leitfaden werden Best Practices beschrieben, mit denen Sie die Verwendung der Live API optimieren können.
-Auf der Seite [Erste Schritte mit der Live API](https://ai.google.dev/gemini-api/docs/live?hl=de) finden Sie eine Übersicht und Beispielcode für gängige Anwendungsfälle.
+このガイドでは、Live API の使用を最適化するために従うことができるベスト プラクティスについて説明します。
+概要と一般的なユースケースのサンプルコードについては、[Live API を使ってみる](https://ai.google.dev/gemini-api/docs/live?hl=ja)
+をご覧ください。
 
-## Klare Systemanweisungen erstellen
+## 明確なシステム指示を設計する
 
-Damit die Live API optimal funktioniert, empfehlen wir, einen klar definierten Satz von Systemanweisungen zu verwenden, der die Persona des Agents, die Konversationsregeln und die Schutzmaßnahmen in dieser Reihenfolge definiert.
+Live API のパフォーマンスを最大限に引き出すには、エージェントのペルソナ、会話ルール、ガードレールをこの順序で明確に定義した、一連のシステム指示（SI）を用意することをおすすめします。
 
-Um optimale Ergebnisse zu erzielen, sollten Sie für jeden Kundenservicemitarbeiter einen separaten SI erstellen.
+最適な結果を得るには、各エージェントを個別の SI に分割します。
 
-1. **Agent-Persona angeben**:Geben Sie den Namen, die Rolle und alle bevorzugten Eigenschaften des Agenten an. Wenn Sie den Akzent angeben möchten, müssen Sie auch die bevorzugte Ausgabesprache angeben (z. B. einen britischen Akzent für einen englischen Sprecher).
-2. **Regeln für die Konversation festlegen**:Geben Sie die Regeln in der Reihenfolge an, in der das Modell sie befolgen soll. Unterscheiden Sie zwischen einmaligen Elementen der Unterhaltung und Gesprächsschleifen. Beispiel:
+1. **エージェントのペルソナを指定する:** エージェントの名前、役割、望ましい特性について詳しく説明します。アクセントを指定する場合は、優先する出力言語（英語話者の場合は英国のアクセントなど）も必ず指定してください。
+2. **会話ルールを指定する:** モデルに適用する順序でルールを記述します。会話の 1 回限りの要素と会話ループを区別します。例:
 
-   - **Einmaliges Element**:Erfassen Sie die Daten eines Kunden einmalig, z. B. Name, Standort, Kundenkartennummer.
-   - **Konversationsschleife**:Der Nutzer kann Empfehlungen, Preise, Rückgaben und die Lieferung besprechen und möglicherweise von Thema zu Thema wechseln. Teilen Sie dem Modell mit, dass es diesen Konversationszyklus so lange fortsetzen kann, wie der Nutzer möchte.
-3. **Tool-Aufrufe in einem Ablauf in separaten Sätzen angeben**:Wenn beispielsweise ein einmaliger Schritt zum Erfassen der Kundendetails den Aufruf einer `get_user_info`-Funktion erfordert, könnten Sie Folgendes sagen: *Der erste Schritt besteht darin, Nutzerinformationen zu erfassen. Bitte den Nutzer zuerst, seinen Namen, seinen Standort und seine Kundenkartennummer anzugeben. Rufen Sie dann `get_user_info` mit diesen Details auf.*
-4. **Erforderliche Schutzmaßnahmen hinzufügen**:Geben Sie alle allgemeinen Konversationsschutzmaßnahmen an, die das Modell nicht ausführen soll. Sie können auch spezifische Beispiele angeben, z. B. wenn *x* passiert, soll das Modell *y* ausführen. Wenn Sie immer noch nicht die gewünschte Genauigkeit erhalten, verwenden Sie das Wort *unmissverständlich*, um das Modell zu einer präzisen Antwort zu bewegen.
+   - **1 回限りの要素:** お客様の詳細情報（名前、ロケーション、ポイントカード番号など）を 1 回収集します。
+   - **会話ループ:** ユーザーは、おすすめ、価格、返品、配達について話し合うことができ、トピックからトピックへと移動したい場合があります。ユーザーが望む限り、この会話ループを継続してもよいことをモデルに伝えます。
+3. **フロー内のツール呼び出しを個別の文で指定する:** たとえば、お客様の詳細情報を収集する 1 回限りのステップで `get_user_info` 関数を呼び出す必要がある場合、最初のステップはユーザー情報の収集です。*まず、お客様に名前、ロケーション、ポイントカード番号の提供を依頼します。*次に、これらの詳細情報を使用して `get_user_info` を呼び出します。
+4. **必要なガードレールを追加します。**モデルに実行させたくない一般的な会話のガードレールを指定します。x が発生した場合にモデルに y を実行させたい場合は、具体的な例を自由に指定してください。それでも望ましいレベルの精度が得られない場合は、unmistakably という単語を使用して、モデルが正確になるようにガイドします。
 
-## Tools präzise definieren
+## ツールを正確に定義する
 
-Wenn Sie Tools mit der Live API verwenden, müssen Sie die Tool-Definitionen genau angeben.
-Geben Sie unbedingt an, unter welchen Bedingungen ein Toolaufruf erfolgen soll. Weitere Informationen finden Sie im Abschnitt mit Beispielen unter [Tool-Definitionen](#tool-definitions-example).
+Live API でツールを使用する場合は、ツール定義を具体的に記述します。
+ツール呼び出しを呼び出す条件を Gemini に必ず伝えてください。詳細については、[ツール定義](#tool-definitions-example)の
+例のセクションをご覧ください。
 
-## Effektive Prompts erstellen
+## 効果的なプロンプトを作成する
 
-- **Klare Prompts verwenden**:Geben Sie in den Prompts Beispiele dafür an, was die Modelle tun sollen und was nicht. Beschränken Sie die Prompts auf jeweils einen Prompt pro Persona oder Rolle. Anstelle von langen, mehrseitigen Prompts sollten Sie Prompt-Chaining verwenden. Das Modell eignet sich am besten für Aufgaben mit einzelnen Funktionsaufrufen.
-- **Startbefehle und Informationen angeben**:Die Live API erwartet Nutzereingaben, bevor sie antwortet. Damit die Live API die Unterhaltung beginnt, müssen Sie einen Prompt einfügen, in dem sie aufgefordert wird, den Nutzer zu begrüßen oder die Unterhaltung zu beginnen. Fügen Sie Informationen zum Nutzer hinzu, damit die Live API die Begrüßung personalisieren kann.
+- **明確なプロンプトを使用する:** プロンプトで、モデルが実行すべきことと実行すべきでないことの例を示します。また、プロンプトは一度に 1 つのペルソナまたはロールにつき 1 つに制限するようにします。長い複数ページのプロンプトではなく、プロンプト チェーンの使用を検討してください。このモデルは、単一の関数呼び出しを含むタスクで最適なパフォーマンスを発揮します。
+- **開始コマンドと情報を提供する:** Live API は、応答する前にユーザー入力を想定しています。Live API に会話を開始させるには、ユーザーに挨拶するか、会話を開始するよう求めるプロンプトを含めます。Live API であいさつをパーソナライズするために、ユーザーに関する情報を含めます。
 
-## Sprache angeben
+## 言語を指定する
 
-Für eine optimale Leistung bei der kaskadierten `gemini-live-2.5-flash` der Live API muss die `language_code` der API mit der Sprache übereinstimmen, die vom Nutzer gesprochen wird.
+Live API のカスケード `gemini-live-2.5-flash` で最適なパフォーマンスを得るには、API の `language_code` がユーザーが話す言語と一致していることを確認してください。
 
-Wenn das Modell in einer anderen Sprache als Englisch antworten soll, fügen Sie Folgendes in die Systemanweisungen ein:
+モデルが英語以外の言語で応答することを想定している場合は、システム指示の一部として次の内容を含めます。
 
 ```
 RESPOND IN {OUTPUT_LANGUAGE}. YOU MUST RESPOND UNMISTAKABLY IN {OUTPUT_LANGUAGE}.
 ```
 
-## Streaming
+## ストリーミング
 
-Beachten Sie beim Implementieren von Echtzeit-Audio die folgenden Best Practices:
+リアルタイム音声を実装する際は、次のベスト プラクティスを参考にしてください。
 
-- **Blockgröße und Latenz**: Senden Sie Audio in Blöcken von 20 bis 40 ms.
-- **Unterbrechungen verarbeiten**: Wenn der Nutzer spricht, während das Modell antwortet, sendet der Server eine `server_content`-Nachricht mit `"interrupted": true`. Sie müssen den clientseitigen Audio-Puffer sofort verwerfen, damit der Kundenservicemitarbeiter nicht weiter über den Nutzer spricht.
+- **チャンクサイズとレイテンシ**: 20～40 ミリ秒のチャンクで音声を送信します。
+- **割り込み処理**: モデルが返信している間にユーザーが発話すると、サーバーは `"interrupted": true` を含む `server_content` メッセージを送信します。エージェントがユーザーに話しかけ続けるのを防ぐため、クライアントサイドの音声バッファを直ちに破棄する必要があります。
 
-## Kontextverwaltung
+## コンテキスト管理
 
-Verwenden Sie `ContextWindowCompressionConfig` für lange Sitzungen, da sich native Audio-Tokens schnell ansammeln (ca. 25 Tokens pro Sekunde Audio).
+ネイティブ音声トークンは急速に蓄積されるため（音声 1 秒あたり約 25 トークン）、長いセッションの場合は `ContextWindowCompressionConfig` を使用します。
 
-## Clientseitiges Puffern
+## クライアント バッファリング
 
-Puffern Sie das eingegebene Audio nicht wesentlich (z. B. 1 Sekunde) vor dem Senden. Senden Sie kleine Chunks (20–100 ms), um die Latenz zu minimieren.
+送信前に、入力音声を大幅に（1 秒など）バッファリングしないでください。レイテンシを最小限に抑えるため、小さなチャンク（20～100 ミリ秒）で送信してください。
 
-## Resampling
+## 再サンプリング
 
-Ihre Clientanwendung muss Mikrofoneingaben (häufig 44,1 kHz oder 48 kHz) vor der Übertragung auf 16 kHz resamplen.
+クライアント アプリケーションが、送信前にマイク入力（通常は 44.1 kHz または 48 kHz）を 16 kHz に再サンプリングするようにしてください。
 
-## Sitzungsverwaltung
+## セッション管理
 
-Beachten Sie die folgenden Richtlinien, um den Sitzungslebenszyklus zu verwalten und eine zuverlässige Nutzererfahrung zu gewährleisten:
+セッションのライフサイクルを処理し、信頼性の高いユーザー エクスペリエンスを確保するには、次のガイドラインに沿ってください。
 
-- **Kontextfenster-Komprimierung aktivieren**:Audiotokens werden mit etwa 25 Tokens pro Sekunde angesammelt. Ohne Komprimierung sind reine Audio-Sitzungen auf 15 Minuten und Audio-Video-Sitzungen auf 2 Minuten begrenzt. Aktivieren Sie die [Kontextfensterkomprimierung](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de#context-window-compression), um Sitzungen auf unbegrenzte Dauer zu verlängern.
-- **Sitzungswiederaufnahme implementieren**:Der Server kann die WebSocket-Verbindung regelmäßig zurücksetzen. Mit der [Wiederaufnahme von Sitzungen](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de#session-resumption) können Sie nahtlos wieder eine Verbindung herstellen, ohne den Kontext zu verlieren. Das letzte Fortsetzungs-Token aus `SessionResumptionUpdate` Nachrichten beibehalten und beim erneuten Verbinden als Handle übergeben. Fortsetzungstokens sind 2 Stunden nach dem Beenden der letzten Sitzung gültig.
-- **GoAway-Nachrichten verarbeiten**:Der Server sendet eine [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de#goaway-message)-Nachricht, bevor eine Verbindung beendet wird. Achten Sie auf diese Nachricht und verwenden Sie das Feld `timeLeft`, um die Verbindung ordnungsgemäß zu beenden oder wiederherzustellen, bevor sie geschlossen wird.
-- **„generationComplete“-Signale verarbeiten**:Verwenden Sie die [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de#generation-complete-message)-Nachricht, um zu erfahren, wann das Modell die Generierung einer Antwort abgeschlossen hat. So kann Ihre Anwendung die Benutzeroberfläche aktualisieren oder mit der nächsten Aktion fortfahren.
+- **コンテキスト ウィンドウの圧縮を有効にする:** 音声トークンは 1 秒あたり約 25 トークンの割合で蓄積されます。圧縮しない場合、音声のみのセッションは 15 分、音声と動画のセッションは 2 分に制限されます。[コンテキスト ウィンドウの圧縮を有効にすると、セッションを無制限に延長できます。](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja#context-window-compression)
+- **セッションの再開を実装する:** サーバーは WebSocket 接続を定期的にリセットする場合があります。[セッションの再開を使用すると、コンテキストを失うことなくシームレスに再接続できます。](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja#session-resumption)`SessionResumptionUpdate` メッセージから最新の再開トークンを保持し、再接続時にハンドルとして渡します。再開トークンは、最後のセッションが終了してから 2 時間有効です。
+- **GoAway メッセージを処理する:** サーバーは、接続を終了する前に
+  [GoAway](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja#goaway-message) メッセージを送信します。このメッセージをリッスンし、`timeLeft` フィールドを使用して、接続が閉じる前に正常に終了するか、再接続します。
+- **generationComplete シグナルを処理する:**
+  [`generationComplete`](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja#generation-complete-message)
+  メッセージを使用すると、モデルがレスポンスの生成を完了したタイミングを把握できるため、
+  アプリケーションで UI を更新したり、次のアクションに進んだりできます。
 
-Einzelheiten zur Implementierung finden Sie unter [Sitzungsverwaltung](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=de).
+実装の詳細については、
+[セッション管理](https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ja)をご覧ください。
 
-## Beispiele
+## 例
 
-In diesem Beispiel werden sowohl die Best Practices als auch die [Richtlinien für das Erstellen von Systemanweisungen](#system-instruction-guidelines) kombiniert, um die Leistung des Modells als Karrierecoach zu optimieren.
+この例では、ベスト プラクティスと
+[システム指示の設計に関するガイドライン](#system-instruction-guidelines)の両方を組み合わせて、
+キャリアコーチとしてのモデルのパフォーマンスをガイドしています。
 
 ```
 **Persona:**
@@ -139,10 +148,9 @@ Remember that your ultimate goal is to create a supportive environment for your
 clients to thrive.
 ```
 
-### Tooldefinitionen
+### ツール定義
 
-In diesem JSON-Code werden die relevanten Funktionen definiert, die im Beispiel für den Karriere-Coach aufgerufen werden.
-Für optimale Ergebnisse sollten Sie beim Definieren von Funktionen deren Namen, Beschreibungen, Parameter und Aufrufbedingungen angeben.
+この JSON は、キャリアコーチの例で呼び出される関連関数を定義します。関数を定義する際は、名前、説明、パラメータ、呼び出し条件を含めると、最適な結果が得られます。
 
 ```
 [
@@ -232,44 +240,44 @@ Für optimale Ergebnisse sollten Sie beim Definieren von Funktionen deren Namen,
 ]
 ```
 
-## Preise und Abrechnung
+## 料金と課金
 
-Die Gemini Live API wird ausschließlich nach Tokennutzung abgerechnet. Da bei der Live API eine dauerhafte WebSocket-Sitzung aufrechterhalten wird, erfolgt die Abrechnung nach einem zusammengesetzten Modell basierend auf dem aktiven Kontextfenster.
+Gemini Live API は、トークンの使用量に応じて厳密に課金されます。Live API は永続的な WebSocket セッションを維持するため、課金はアクティブなコンテキスト ウィンドウに基づく複合モデルに従います。
 
-### Das Sitzungskontextfenster (kumulative Kosten)
+### セッション コンテキスト ウィンドウ（複合費用）
 
-Die API berechnet Ihnen pro Runde alle Tokens, die im Sitzungskontextfenster vorhanden sind. Ein „Turn“ ist eine Nutzereingabe und die entsprechende Antwort des Modells.
+API は、セッション コンテキスト ウィンドウに存在するすべてのトークンに対してターンごとに課金します。「ターン」とは、ユーザー入力 1 回とモデルの対応するレスポンスを指します。
 
-- **Akkumulierung**:Das Kontextfenster enthält neue Tokens aus dem aktuellen Zug sowie alle akkumulierten Tokens aus vorherigen Zügen.
-- **Erneute Abrechnung**:Frühere Tokens werden in jeder neuen Runde noch einmal verarbeitet und berücksichtigt, bis die von Ihnen konfigurierte Kontextfenstergröße erreicht ist. Mit zunehmender Sitzungsdauer steigen die Kosten pro Runde, da der Unterhaltungsverlauf neu verarbeitet wird.
+- **蓄積:** コンテキスト ウィンドウには、現在のターンの新しいトークンと、以前のターンから蓄積されたすべてのトークンが含まれます。
+- **再課金:** 過去のトークンは、構成されたコンテキスト ウィンドウ サイズまで、新しいターンごとに再処理され、計上されます。セッションが長くなるほど、会話履歴が再処理されるため、ターンあたりの費用が増加します。
 
-### Audio-Tokens und ‑Transkripte
+### 音声トークンと文字起こし
 
-Die Live API ist nativ multimodal. Der Unterhaltungsverlauf wird als rohe Audio-Tokens beibehalten, um akustische Nuancen und den Tonfall zu bewahren.
+Live API はネイティブでマルチモーダルです。音響のニュアンスとトーンを保持するため、会話履歴を生の音声トークンとして保持します。
 
-- **Abrechnung von Audio:** Die API berechnet Ihnen die angesammelten nativen Audio-Tokens in jeder Runde zum Standardtarif für Audioeingabe.
-- **Transkriptionszuschlag**:Wenn die Audio-zu-Text-Transkription aktiviert ist (`inputAudioTranscription` oder `outputAudioTranscription`), werden für alle Text-Tokens, die für die Transkription generiert werden, zusätzlich zu den Standardkosten für Audio-Tokens die Kosten für die Ausgabe von Text-Tokens berechnet.
+- **音声の課金:** API は、ターンごとに蓄積されたネイティブ音声トークンに対して、標準の音声入力レートで課金します。
+- **文字起こし追加料金:** 音声からテキストへの文字起こしが有効になっている場合（`inputAudioTranscription` または `outputAudioTranscription`）、API は、標準の音声トークン費用に加えて、文字起こし用に生成されたすべてのテキスト トークンに対してテキスト トークン出力レートで課金します。
 
-### Kosten mit Kontextlimits verwalten
+### コンテキスト制限による費用の管理
 
-Um unbegrenztes Kostenwachstum bei langen Sitzungen zu verhindern, konfigurieren Sie die Größe des Kontextfensters mit `contextWindowCompression`.
+長いセッションで費用が際限なく増加しないようにするには、`contextWindowCompression` を使用してコンテキスト ウィンドウ サイズを構成します。
 
-Wenn Sie einen Komprimierungsauslöser (z. B. 25.000 Tokens) und ein gleitendes Fenster (z. B. 8.000 Tokens) festlegen, werden ältere Tokens automatisch entfernt, sobald der Schwellenwert erreicht ist. Bei nachfolgenden Anfragen werden dann nur das beibehaltene Protokoll und alle neuen Tokens in Rechnung gestellt.
+圧縮トリガー（25,000 トークンなど）とスライディング ウィンドウ（8,000 トークンなど）を設定すると、しきい値に達した時点で古いトークンが自動的に削除されます。その後、API は保持された履歴と新しいトークンに対してのみ、後続のターンを課金します。
 
-### Proaktiver Audiomodus
+### プロアクティブ音声モード
 
-Wenn der proaktive Audiomodus aktiviert ist, werden Eingabetokens für die gesamte Zeit berechnet, in der die Live API zuhört. Ausgabetokens werden nur berechnet, wenn die API antwortet.
+プロアクティブ音声モードが有効になっている場合、入力トークンは Live API がリッスンしている間ずっと課金されますが、出力トークンは API が応答したときにのみ課金されます。
 
-- **Hinweis zu Gemini 3.1**:Der proaktive Audiomodus wird in `gemini-3.1-flash-live-preview` nicht unterstützt. Bei diesem Modell wird Ihnen Audio nur in Rechnung gestellt, wenn Sie aktiv Eingaben streamen.
+- **Gemini 3.1 の注意:** プロアクティブ音声モードは `gemini-3.1-flash-live-preview` ではサポートされていません。このモデルでは、入力のストリーミングを積極的に行っている場合にのみ、音声に対して課金されます。
 
-Detaillierte Preisinformationen finden Sie auf der [Seite „Gemini API-Preise“](https://ai.google.dev/gemini-api/docs/pricing?hl=de).
+料金の詳細については、[Gemini API の料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)をご覧ください。
 
-Feedback geben
+フィードバックを送信
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Zuletzt aktualisiert: 2026-06-01 (UTC).
+最終更新日 2026-06-01 UTC。
 
-Haben Sie Feedback für uns?
+ご意見をお聞かせください
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-01 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-01 UTC。"],[],[]]

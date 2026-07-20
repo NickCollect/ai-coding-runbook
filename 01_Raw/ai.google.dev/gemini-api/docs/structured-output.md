@@ -1,40 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=hi
-fetched_at: 2026-07-06T05:20:55.220302+00:00
-title: "\u0938\u094d\u091f\u094d\u0930\u0915\u094d\u091a\u0930\u094d\u0921 \u0906\u0909\u091f\u092a\u0941\u091f \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=tr
+fetched_at: 2026-07-20T04:36:11.590128+00:00
+title: "Yap\u0131land\u0131r\u0131lm\u0131\u015f \u00e7\u0131k\u0131\u015flar \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-# स्ट्रक्चर्ड आउटपुट
+# Yapılandırılmış çıkışlar
 
-Gemini मॉडल को कॉन्फ़िगर करके, दिए गए JSON स्कीमा के मुताबिक जवाब जनरेट किए जा सकते हैं. इससे, टाइप-सेफ़ और अनुमान के मुताबिक नतीजे मिलते हैं. साथ ही, बिना स्ट्रक्चर वाले टेक्स्ट से स्ट्रक्चर्ड डेटा को आसानी से निकाला जा सकता है.
+Gemini modellerini, sağlanan bir JSON şemasına uygun yanıtlar oluşturacak şekilde yapılandırabilirsiniz. Bu sayede, tahmin edilebilir ve tür açısından güvenli sonuçlar elde edilir. Ayrıca, yapılandırılmamış metinlerden yapılandırılmış verilerin ayıklanması kolaylaşır.
 
-स्ट्रक्चर्ड आउटपुट का इस्तेमाल इन कामों के लिए किया जा सकता है:
+Yapılandırılmış çıkışlar şu durumlarda idealdir:
 
-- **डेटा निकालना:** टेक्स्ट से नाम और तारीख जैसी खास जानकारी निकालना.
-- **स्ट्रक्चर्ड क्लासिफ़िकेशन:** टेक्स्ट को पहले से तय की गई कैटगरी में बांटना.
-- **एजेंटिक वर्कफ़्लो:** टूल या एपीआई के लिए स्ट्रक्चर्ड इनपुट जनरेट करना.
+- **Veri ayıklama:** Metinden adlar ve tarihler gibi belirli bilgileri alın.
+- **Yapılandırılmış sınıflandırma:** Metni önceden tanımlanmış kategorilere göre sınıflandırın.
+- **Ajan tabanlı iş akışları:** Araçlar veya API'ler için yapılandırılmış girişler oluşturun.
 
-REST API में JSON स्कीमा के साथ-साथ, Google GenAI SDK की मदद से
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) और
-[Zod](https://zod.dev/) (JavaScript) का इस्तेमाल करके स्कीमा तय किए जा सकते हैं.
+Google GenAI SDK'ları, REST API'de JSON şemasını desteklemenin yanı sıra [Pydantic](https://docs.pydantic.dev/latest/) (Python) ve [Zod](https://zod.dev/) (JavaScript) kullanılarak şemaların tanımlanmasına da olanak tanır.
 
-## स्ट्रक्चर्ड आउटपुट के उदाहरण
+## Yapılandırılmış çıkış örnekleri
 
-### रेसिपी निकालने वाला टूल
+### Recipe Extractor
 
-इस उदाहरण में, JSON स्कीमा के बुनियादी टाइप, जैसे कि `object`, `array`, `string`, और `integer` का इस्तेमाल करके, टेक्स्ट से स्ट्रक्चर्ड डेटा निकालने का तरीका बताया गया है.
+Bu örnekte, `object`, `array`, `string` ve `integer` gibi temel JSON şema türlerini kullanarak metinden yapılandırılmış verilerin nasıl ayıklanacağı gösterilmektedir.
 
 ### Python
 
@@ -86,6 +84,7 @@ print(recipe)
 ### JavaScript
 
 ```
+// Note: Ensure zod is installed (npm install zod)
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -197,7 +196,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**जवाब का उदाहरण:**
+**Örnek Yanıt:**
 
 ```
 {
@@ -225,9 +224,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### कॉन्टेंट को मॉडरेट करना
+### İçerik Denetimi
 
-इस उदाहरण में, शर्तों के हिसाब से स्कीमा के लिए `anyOf` और क्लासिफ़िकेशन के लिए `enum` का इस्तेमाल दिखाया गया है. इससे, कॉन्टेंट के आधार पर आउटपुट स्ट्रक्चर में बदलाव किया जा सकता है.
+Bu örnekte, koşullu şemalar için `anyOf`, sınıflandırma için `enum` gösterilmektedir. Böylece, çıkış yapısının içeriğe göre değişmesine olanak tanınır.
 
 ### Python
 
@@ -271,6 +270,7 @@ print(result)
 ### JavaScript
 
 ```
+// Note: Ensure zod is installed (npm install zod)
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -375,7 +375,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**जवाब का उदाहरण:**
+**Örnek Yanıt:**
 
 ```
 {
@@ -386,9 +386,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### रिकर्सिव स्ट्रक्चर
+### Yinelemeli Yapılar
 
-इस उदाहरण में, संगठन चार्ट जैसे रिकर्सिव स्कीमा को तय करने का तरीका बताया गया है.
+Bu örnekte, kuruluş şeması gibi yinelemeli bir şemanın nasıl tanımlanacağı gösterilmektedir.
 
 ### Python
 
@@ -430,6 +430,7 @@ print(employee)
 ### JavaScript
 
 ```
+// Note: Ensure zod is installed (npm install zod)
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -504,7 +505,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**जवाब का उदाहरण:**
+**Örnek Yanıt:**
 
 ```
 {
@@ -531,9 +532,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## नतीजों को स्ट्रीम करना
+## Yayın sonuçları
 
-स्ट्रक्चर्ड आउटपुट को स्ट्रीम किया जा सकता है. इससे, जवाब जनरेट होने के दौरान ही उसे प्रोसेस किया जा सकता है. स्ट्रीम किए गए चंक, JSON स्ट्रिंग के मान्य हिस्से होते हैं. इन्हें जोड़कर, फ़ाइनल JSON ऑब्जेक्ट बनाया जा सकता है.
+Yapılandırılmış çıkışları yayınlayarak yanıt oluşturulurken işlemeye başlamanıza olanak tanır. Yayınlanan parçalar, son JSON nesnesini oluşturmak için birleştirilebilen geçerli kısmi JSON dizeleridir.
 
 ### Python
 
@@ -560,13 +561,15 @@ stream = client.interactions.create(
     stream=True
 )
 for event in stream:
-    if event.event_type == "step.delta" and event.delta.text:
-        print(event.delta.text, end="")
+    if event.event_type == "step.delta":
+        if event.delta.type == "text" and getattr(event.delta, "text", None):
+            print(event.delta.text, end="", flush=True)
 ```
 
 ### JavaScript
 
 ```
+// Note: Ensure zod is installed (npm install zod)
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -595,20 +598,42 @@ const stream = await client.interactions.create({
 });
 
 for await (const event of stream) {
-  if (event.type === "step.delta" && event.delta?.text) {
-    process.stdout.write(event.delta.text);
+  if (event.event_type === "step.delta") {
+    if (event.delta.type === "text") {
+      process.stdout.write(event.delta.text);
+    }
   }
 }
 ```
 
-## टूल के साथ स्ट्रक्चर्ड आउटपुट
+### REST
 
-Gemini 3 की मदद से, स्ट्रक्चर्ड आउटपुट को इन-बिल्ट टूल के साथ जोड़ा जा सकता है. इनमें
-[Google Search के साथ ग्राउंडिंग](https://ai.google.dev/gemini-api/docs/google-search?hl=hi),
-[यूआरएल कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi),
-[कोड एक्ज़ीक्यूशन](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi),
-[फ़ाइल सर्च](https://ai.google.dev/gemini-api/docs/file-search?hl=hi#structured-output), और
-[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi) शामिल हैं.
+```
+curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
+    -H 'Content-Type: application/json' \
+    -d '{
+      "model": "gemini-3.5-flash",
+      "input": "The new UI is incredibly intuitive. Add a very long summary!",
+      "response_format": {
+        "type": "text",
+        "mime_type": "application/json",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "sentiment": { "type": "string", "enum": ["positive", "neutral", "negative"] },
+            "summary": { "type": "string" }
+          },
+          "required": ["sentiment", "summary"]
+        }
+      },
+      "stream": true
+    }'
+```
+
+## Araçlarla yapılandırılmış çıkışlar
+
+Gemini 3, Yapılandırılmış Çıkışları [Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr), [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr), [Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr), [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr#structured-output) ve [İşlev Çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) gibi yerleşik araçlarla birleştirmenize olanak tanır.
 
 ### Python
 
@@ -642,6 +667,7 @@ print(result)
 ### JavaScript
 
 ```
+// Note: Ensure zod is installed (npm install zod)
 import { GoogleGenAI } from "@google/genai";
 import * as z from "zod";
 
@@ -700,80 +726,79 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## JSON स्कीमा के लिए सहायता
+## JSON şeması desteği
 
-JSON ऑब्जेक्ट जनरेट करने के लिए, `response_format` को `text` टाइप के ऑब्जेक्ट (या ऑब्जेक्ट वाले कलेक्शन) के साथ कॉन्फ़िगर करें. साथ ही, इसका `mime_type` को `application/json` पर सेट करें. `schema` फ़ील्ड में स्कीमा की जानकारी देनी चाहिए.
+JSON nesnesi oluşturmak için `response_format` öğesini `text` türünde bir nesneyle (veya nesne içeren bir diziyle) yapılandırın ve `mime_type` özelliğini `application/json` olarak ayarlayın. Şema, `schema` alanında sağlanmalıdır.
 
-Gemini का स्ट्रक्चर्ड आउटपुट मोड,
-[JSON स्कीमा](https://json-schema.org/) की खास जानकारी के सबसेट के साथ काम करता है.
+Gemini'ın yapılandırılmış çıkış modu, [JSON şeması](https://json-schema.org/) spesifikasyonunun bir alt kümesini destekler.
 
-`type` की ये वैल्यू इस्तेमाल की जा सकती हैं:
+`type` için aşağıdaki değerler desteklenir:
 
-- **`string`**: टेक्स्ट के लिए.
-- **`number`**: फ़्लोटिंग-पॉइंट नंबर के लिए.
-- **`integer`**: पूर्णांक के लिए.
-- **`boolean`**: सही या गलत वैल्यू के लिए.
-- **`object`**: कुंजी-वैल्यू पेयर वाले स्ट्रक्चर्ड डेटा के लिए.
-- **`array`**: आइटम की सूचियों के लिए.
-- **`null`**: किसी प्रॉपर्टी को नल के तौर पर सेट करने के लिए, टाइप कलेक्शन में `"null"` शामिल करें. उदाहरण के लिए, `{"type": ["string", "null"]}`.
+- **`string`**: Metin için.
+- **`number`**: Kayan noktalı sayılar için.
+- **`integer`**: Tam sayılar için.
+- **`boolean`**: Doğru veya yanlış değerler için.
+- **`object`**: Anahtar/değer çiftleri içeren yapılandırılmış veriler için.
+- **`array`**: Öğe listeleri için.
+- **`null`**: Bir özelliğin null olmasına izin vermek için tür dizisine `"null"` değerini ekleyin (ör. `{"type": ["string", "null"]}`).
 
-जानकारी देने वाली इन प्रॉपर्टी से, मॉडल को गाइड करने में मदद मिलती है:
+Bu açıklayıcı özellikler, modele yol göstermeye yardımcı olur:
 
-- **`title`**: किसी प्रॉपर्टी का छोटा ब्यौरा.
-- **`description`**: किसी प्रॉपर्टी का लंबा और ज़्यादा जानकारी वाला ब्यौरा.
+- **`title`**: Bir mülkün kısa açıklaması.
+- **`description`**: Bir tesisin daha uzun ve ayrıntılı açıklaması.
 
-### टाइप के हिसाब से प्रॉपर्टी
+### Türe özgü özellikler
 
-**`object` वैल्यू के लिए:**
+**`object` değerleri için:**
 
-- **`properties`**: एक ऑब्जेक्ट, जिसमें हर कुंजी एक प्रॉपर्टी का नाम होती है और हर वैल्यू उस प्रॉपर्टी के लिए एक स्कीमा होती है.
-- **`required`**: स्ट्रिंग का एक कलेक्शन, जिसमें यह बताया जाता है कि कौनसी प्रॉपर्टी ज़रूरी हैं.
-- **`additionalProperties`**: इससे यह कंट्रोल किया जाता है कि `properties` में शामिल नहीं की गई प्रॉपर्टी इस्तेमाल की जा सकती हैं या नहीं. यह बूलियन या स्कीमा हो सकता है.
+- **`properties`**: Her anahtarın bir özellik adı, her değerin ise söz konusu özelliğin şeması olduğu bir nesne.
+- **`required`**: Hangi özelliklerin zorunlu olduğunu listeleyen bir dize dizisi.
+- **`additionalProperties`**: `properties` içinde listelenmeyen özelliklere izin verilip verilmeyeceğini kontrol eder. Boole veya şema olabilir.
 
-**`string` वैल्यू के लिए:**
+**`string` değerleri için:**
 
-- **`enum`**: क्लासिफ़िकेशन टास्क के लिए, संभावित स्ट्रिंग का एक खास सेट दिखाता है.
-- **`format`**: स्ट्रिंग के लिए एक सिंटैक्स तय करता है. जैसे, `date-time`, `date`, `time`.
+- **`enum`**: Sınıflandırma görevleri için olası dizelerin belirli bir kümesini listeler.
+- **`format`**: Dize için `date-time`, `date`, `time` gibi bir söz dizimi belirtir.
 
-**`number` और `integer` वैल्यू के लिए:**
+**`number` ve `integer` değerleri için:**
 
-- **`enum`**: संभावित संख्या वाली वैल्यू का एक खास सेट दिखाता है.
-- **`minimum`**: शामिल की जा सकने वाली कम से कम वैल्यू.
-- **`maximum`**: शामिल की जा सकने वाली ज़्यादा से ज़्यादा वैल्यू.
+- **`enum`**: Olası sayısal değerlerin belirli bir kümesini listeler.
+- **`minimum`**: Minimum dahil edilen değer.
+- **`maximum`**: Maksimum dahil edilen değer.
 
-**`array` वैल्यू के लिए:**
+**`array` değerleri için:**
 
-- **`items`**: कलेक्शन में मौजूद सभी आइटम के लिए स्कीमा तय करता है.
-- **`prefixItems`**: पहले N आइटम के लिए स्कीमा की एक सूची तय करता है. इससे, टपल जैसे स्ट्रक्चर बनाए जा सकते हैं.
-- **`minItems`**: कलेक्शन में मौजूद आइटम की कम से कम संख्या.
-- **`maxItems`**: कलेक्शन में मौजूद आइटम की ज़्यादा से ज़्यादा संख्या.
+- **`items`**: Dizideki tüm öğelerin şemasını tanımlar.
+- **`prefixItems`**: İlk N öğe için bir şema listesi tanımlar ve demet benzeri yapılara izin verir.
+- **`minItems`**: Dizideki minimum öğe sayısı.
+- **`maxItems`**: Dizideki maksimum öğe sayısı.
 
-## स्ट्रक्चर्ड आउटपुट बनाम फ़ंक्शन कॉलिंग
+## Yapılandırılmış çıkışlar ve işlev çağrısı
 
-| सुविधा | इस्तेमाल का मुख्य उदाहरण |
+| Özellik | Birincil Kullanım Alanı |
 | --- | --- |
-| **स्ट्रक्चर्ड आउटपुट** | **फ़ाइनल जवाब को फ़ॉर्मैट करना.** इसका इस्तेमाल तब करें, जब आपको मॉडल का *जवाब* किसी खास फ़ॉर्मैट में चाहिए. |
-| **फ़ंक्शन कॉलिंग** | **बातचीत के दौरान कार्रवाई करना.** इसका इस्तेमाल तब करें, जब मॉडल को फ़ाइनल जवाब देने से पहले, आपसे कोई टास्क *पूछना* हो. |
+| **Yapılandırılmış Çıkışlar** | **Son yanıtı biçimlendirme** Modelin *yanıtının* belirli bir biçimde olmasını istediğinizde kullanın. |
+| **İşlev Çağırma** | **Sohbet sırasında işlem yapma** Modelin nihai yanıtı vermeden önce bir görevi *yapmanızı istemesi* gerektiğinde kullanılır. |
 
-## सबसे सही तरीके
+## En iyi uygulamalar
 
-- **साफ़ तौर पर जानकारी देना:** मॉडल को गाइड करने के लिए, `description` फ़ील्ड का इस्तेमाल करें.
-- **टाइपिंग:** खास टाइप (`integer`, `string`, `enum`) का इस्तेमाल करें.
-- **प्रॉम्प्ट इंजीनियरिंग:** साफ़ तौर पर बताएं कि आपको मॉडल से क्या काम कराना है.
-- **पुष्टि करना:** भले ही, आउटपुट सिंटैक्टिक तौर पर सही JSON हो, लेकिन हमेशा अपने ऐप्लिकेशन में वैल्यू की पुष्टि करें.
-- **गड़बड़ी को ठीक करना:** स्कीमा के मुताबिक, लेकिन सिमैंटिक तौर पर गलत आउटपुट के लिए, गड़बड़ी को ठीक करने की मज़बूत सुविधा लागू करें.
+- **Net açıklamalar:** Modeli yönlendirmek için `description` alanını kullanın.
+- **Güçlü tür belirleme:** Belirli türleri (`integer`, `string`, `enum`) kullanın.
+- **İstem mühendisliği:** Modelin ne yapmasını istediğinizi açıkça belirtin.
+- **Doğrulama:** Çıkış söz dizimi açısından doğru JSON olsa da uygulamanızdaki değerleri her zaman doğrulayın.
+- **Hata yönetimi:** Şemaya uygun ancak semantik olarak yanlış çıktılar için etkili hata yönetimi uygulayın.
 
-## सीमाएं
+## Sınırlamalar
 
-- **स्कीमा का सबसेट:** JSON स्कीमा की सभी सुविधाएं उपलब्ध नहीं हैं.
-- **स्कीमा की जटिलता:** बहुत बड़े या डीपली नेस्ट किए गए स्कीमा अस्वीकार किए जा सकते हैं.
+- **Şema alt kümesi:** Tüm JSON şema özellikleri desteklenmez.
+- **Şema karmaşıklığı:** Çok büyük veya derin şekilde iç içe yerleştirilmiş şemalar reddedilebilir.
 
-सुझाव भेजें
+Geri bildirim gönderin
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-आखिरी बार 2026-06-22 (UTC) को अपडेट किया गया.
+Son güncelleme tarihi: 2026-07-07 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-22 (UTC) को अपडेट किया गया."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-07 UTC."],[],[]]

@@ -1,61 +1,61 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=tr
-fetched_at: 2026-07-06T05:12:13.081370+00:00
-title: "Gemini 3.1 Flash Lite G\u00f6r\u00fcnt\u00fcs\u00fc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=hi
+fetched_at: 2026-07-20T04:39:09.085703+00:00
+title: "Gemini 3.1 Flash Lite \u0915\u0940 \u0907\u092e\u0947\u091c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Gemini 3.1 Flash Lite Görüntüsü
+# Gemini 3.1 Flash Lite की इमेज
 
-**Nano Banana Lite**, görüntü üretme ailesinin verimlilik uzmanı olarak tasarlanmıştır. Ultra düşük gecikme süresi ve uygun maliyetli görüntü üretme ve düzenleme özellikleri sunar. Bu model, 2 saniyeden kısa bir gecikme süresini hedefleyerek ve TPU işlem maliyetlerini önemli ölçüde azaltarak yüksek hacimli etkileşimli geliştirici kullanım alanlarını ve gerçek zamanlı tüketici uygulamalarını mümkün kılar.
+**Nano Banana 2 Lite** को इमेज जनरेट करने वाले मॉडल के परिवार के सबसे कारगर मॉडल के तौर पर डिज़ाइन किया गया है. यह बहुत कम इंतज़ार के समय में, कम लागत पर इमेज जनरेट और एडिट करने की सुविधा देता है. यह मॉडल, दो सेकंड से कम इंतज़ार के समय और टीपीयू की कंप्यूटिंग लागत को काफ़ी कम करके, डेवलपर के लिए इंटरैक्टिव इस्तेमाल के ज़्यादा से ज़्यादा उदाहरण और उपभोक्ताओं के लिए रीयल-टाइम ऐप्लिकेशन उपलब्ध कराता है.
 
-**Temel özellikler:**
+**मुख्य सुविधाएं:**
 
-- **2 saniyeden kısa uçtan uca gecikme**
-- Metin -> Metin + Resim ve Resim + Metin -> Metin + Resim için yerel destekle **araya eklenmiş oluşturma ve düzenleme**
-- 1K (1024x1024 piksel) gibi **daha düşük çözünürlükler için optimize edilmiştir**.
-- Standart biçimler de dahil olmak üzere **14 farklı en boy oranı** desteklenir.
-- **Hızlı çok aşamalı etkileşimli yerel düzenlemeler** (renk değiştirme, çıkartma oluşturma, arka plan ayarlamaları).
-- Orijinal Nano Banana standartlarına uygun yüksek karakter hizalaması sağlar.
-- Yeni `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` en-boy oranları.
-- Desteklenen `image_size` değerleri: `1024px` (1.000). *(Not: 2K ve 4K çözünürlük desteklenmez).*
-- **SynthID (her zaman açık) + C2PA** filigranı.
+- **दो सेकंड से कम का एंड-टू-एंड इंतज़ार का समय**
+- **इंटरलीव्ड जनरेशन और एडिटिंग** की सुविधा. इसमें Text -> Text + Image(s) और Image + Text -> Text + Image(s) के लिए, नेटिव सपोर्ट उपलब्ध है.
+- **1K (1024x1024 पिक्सल) के कम रिज़ॉल्यूशन** के लिए ऑप्टिमाइज़ किया गया है.
+- यह **14 आसपेक्ट रेशियो** के अलग-अलग सेट के साथ काम करता है. इनमें स्टैंडर्ड फ़ॉर्मैट भी शामिल हैं.
+- **स्थानीय तौर पर कई बार तेज़ी से बदलाव करने की सुविधा** (रंग बदलना, स्टिकर बनाना, बैकग्राउंड में बदलाव करना).
+- यह, Nano Banana के ओरिजनल स्टैंडर्ड के मुताबिक, वर्णों के अलाइनमेंट को बनाए रखता है.
+- नए आसपेक्ट रेशियो: `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`.
+- `image_size` की इन वैल्यू के साथ काम करता है: `1024px` (1K). *(ध्यान दें: 2K और 4K के साथ काम नहीं करता है).*
+- **SynthID (हमेशा चालू) + C2PA** वॉटरमार्क की सुविधा.
 
-[Google AI Studio'da deneme](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=tr)
+[Google AI Studio में आज़माएं](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=hi)
 
-## Belgeler
+## दस्तावेज़
 
-Özellikler ve işlevler hakkında kapsamlı bilgi için [Görüntü üretme](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) sayfasını ziyaret edin.
+सुविधाओं और क्षमताओं के बारे में पूरी जानकारी पाने के लिए, [इमेज जनरेट करने की सुविधा वाला](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi) पेज देखें.
 
 ## gemini-3.1-flash-lite-image
 
-| Mülk | Açıklama |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| id\_cardModel kodu | `gemini-3.1-flash-lite-image` |
-| saveDesteklenen veri türleri | **Girişler**  Metin ve Resim  **Çıkış**  Resim ve Metin |
-| token\_autoJeton sınırları[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) | **Giriş jetonu sınırı**  65.536  **Çıkış jetonu sınırı**  4.096 |
-| handymanÖzellikler | **Ses üretme**  Desteklenmiyor  **Batch API**  Destekleniyor  **Önbelleğe alma**  Desteklenmiyor  **Kod yürütme**  Desteklenmiyor  **Dosya arama**  Desteklenmiyor  **İşlev çağırma**  Destekleniyor  **Google Haritalar ile Temellendirme**  Desteklenmiyor  **Google Arama ile temellendirme**  Desteklenmiyor  **Görüntü düzenleme**  Destekleniyor  **Görüntü üretme**  Destekleniyor  **Live API**  Desteklenmiyor  **Arama temellendirme**  Desteklenmiyor  **Yapılandırılmış çıkışlar**  Desteklenmiyor  **Düşünme** (Thinking)  Desteklenir (en az ve en çok)  **URL bağlamı**  Desteklenmiyor |
-| 123Sürümler | Daha fazla bilgi için [model sürümü kalıplarını](https://ai.google.dev/gemini-api/docs/models/gemini?hl=tr#model-versions) okuyun.  - Kararlı: `gemini-3.1-flash-lite-image` |
-| calendar\_monthSon güncelleme | Haziran 2026 |
-| cognition\_2Son güncel bilgi tarihi | Ocak 2025 |
+| id\_cardModel कोड | `gemini-3.1-flash-lite-image` |
+| saveइस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट और इमेज  **आउटपुट**  इमेज और टेक्स्ट |
+| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  65,536  **आउटपुट टोकन की सीमा**  4,096 |
+| handymanसुविधाएं | **ऑडियो जनरेट करने की सुविधा**  काम नहीं करता है  **बैच एपीआई**  काम करता है  **कैश मेमोरी में सेव होना**  काम नहीं करता है  **कोड एक्ज़ीक्यूशन**  काम नहीं करता है  **फ़ाइल खोजने की सुविधा**  काम नहीं करता है  **फ़ंक्शन कॉल करने की सुविधा**  काम करता है  **Google Maps से सटीक जानकारी पाने की सुविधा**  काम नहीं करता है  **Google Search से सटीक जानकारी पाने की सुविधा**  काम नहीं करता है  **इमेज में बदलाव करने की सुविधा**  काम करता है  **इमेज जनरेट करने की सुविधा**  काम करता है  **लाइव एपीआई**  काम नहीं करता है  **भरोसेमंद स्रोतों से जानकारी लें**  काम नहीं करता है  **स्ट्रक्चर्ड आउटपुट**  काम नहीं करता है  **प्रोसेस**  काम करता है (कम और ज़्यादा)  **यूआरएल का कॉन्टेक्स्ट**  काम नहीं करता है |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल के वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) के बारे में पढ़ें.  - स्टेबल: `gemini-3.1-flash-lite-image` |
+| calendar\_monthसबसे नया अपडेट | जून 2026 |
+| cognition\_2जानकारी की कटऑफ़ तारीख | जनवरी 2025 |
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-06-30 UTC.
+आखिरी बार 2026-07-09 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-30 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-09 (UTC) को अपडेट किया गया."],[],[]]

@@ -1,107 +1,118 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=ja
-fetched_at: 2026-07-06T05:11:21.004111+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=pt-BR
+fetched_at: 2026-07-20T04:46:49.180623+00:00
 title: "Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# Nano Banana による画像生成
+# Geração de imagens com o Nano Banana
 
-プロンプトを使用して、完全に機能する UI 完成済みのアプリのプロトタイプを作成し、Nano Banana 2 が実際のツール、データ、Gemini エコシステムと統合されている様子を確認します。コードを 1 行も書かずに、すべて完了しました。
+Use comandos para prototipar apps totalmente funcionais e com interface
+completa. Veja o Nano Banana 2 integrado a ferramentas, dados e o ecossistema
+do Gemini. Tudo isso antes de escrever uma única linha de código.
 
-- [Nano Banana 2 アプリを試す](https://aistudio.google.com/apps/bundled/pet_passport?hl=ja)
-- プロンプトから独自のものを構築することもできます。
+- [Teste um app do Nano Banana 2](https://aistudio.google.com/apps/bundled/pet_passport?hl=pt-br)
+- Ou crie o seu com comandos:
 
-- ![雑誌](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
-  ![ロンドン](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+- ![revista](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![Londres](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
   ![restore](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
-  ![バナナ](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
-  ![cafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
-  ![記事](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
-  ![犬](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
-  ![アイソメトリック](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
-- ![雑誌](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
+  ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06-output.jpg)
+  ![café](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  ![artigo](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  ![cachorro](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  ![isométrico](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+- ![revista](https://storage.googleapis.com/generativeai-downloads/images/magazine-2.jpg)
 
-  Nano Banana 2 で生成
+  Gerado pelo Nano Banana 2
 
-  **プロンプト:** 「光沢のある雑誌の表紙の写真。青色のシンプルな表紙に、Nano Banana という大きな太字の単語が書かれている。」テキストはセリフフォントで、ビュー全体に表示されます。他のテキストは含めないでください。テキストの前に、洗練されたミニマルなドレスを着た人物のポートレートがあります。彼女は数字の 2 を楽しそうに持っており、それがフォーカル ポイントになっています。  
-  問題番号と「2026 年 2 月」の日付をバーコードとともに隅に配置します。雑誌は、デザイナーズ ストア内のオレンジ色の漆喰の壁に面した棚に置かれています。」
+  **Comando**: "Uma foto da capa brilhante de uma revista. A capa azul minimalista tem as palavras grandes e em negrito Nano Banana. O texto está em uma fonte serifada e preenche a visualização. Nenhum outro texto. Na frente do texto, há um retrato de uma pessoa com um vestido elegante e minimalista. Ela está segurando o número 2, que é o ponto focal.
+    
+  Coloque o número da edição e a data "Fev 2026" no canto junto com um código de barras. A revista está em uma prateleira contra uma parede laranja rebocada, dentro de uma loja de design".
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=ja) で[プロ仕様の商品写真](#4_product_mockups_commercial_photography)を作成する
-- ![ロンドン](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
+  Criar [fotos profissionais de produtos](#4_product_mockups_commercial_photography) no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=pt-br)
+- ![Londres](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/05-output.jpg)
 
-  Nano Banana Pro で生成
+  Gerado pelo Nano Banana Pro
 
-  **プロンプト:** 「ロンドンの最も象徴的なランドマークと建築要素を特徴とする、45 度の真上から見た等角投影のミニチュア 3D 漫画のシーンを明確に表現してください。リアルな PBR マテリアルと、優しくリアルな照明と影を使用して、柔らかく洗練されたテクスチャを使用します。現在の気象条件を都市環境に直接統合して、没入感のある雰囲気を作り出します。柔らかい単色の背景を使用した、すっきりとしたミニマルな構図にします。上部中央に、大きな太字で「ロンドン」というタイトルを配置し、その下に目立つ天気アイコン、日付（小さいテキスト）、気温（中くらいのテキスト）を配置します。すべてのテキストは、一貫した間隔で中央に配置する必要があります。建物の最上部とわずかに重なることがあります。」
+  **Comando**: "Apresente uma cena de desenho animado 3D em miniatura isométrica clara, com 45° de inclinação vista de cima para baixo de Londres, apresentando seus marcos e elementos arquitetônicos mais icônicos. Use texturas suaves e refinadas com materiais PBR realistas e iluminação e sombras suaves e realistas. Integre as condições climáticas atuais diretamente ao ambiente da cidade para criar uma atmosfera imersiva. Use uma composição limpa e minimalista com um fundo macio e de cor sólida. Na parte superior central, coloque o título "Londres" em texto grande e em negrito, um ícone de clima em destaque abaixo dele e, em seguida, a data (texto pequeno) e a temperatura (texto médio). Todo o texto precisa estar centralizado com espaçamento consistente e pode se sobrepor sutilmente aos topos dos edifícios."
 
-  [検索グラウンディング](#use-with-grounding)の詳細を確認し、[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=ja) で試す
-- ![ケツァール](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
+  Saiba mais sobre o [embasamento de pesquisa](#use-with-grounding) e teste no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=pt-br)
+- ![quetzal](https://storage.googleapis.com/generativeai-downloads/images/quetzal.png)
 
-  Nano Banana 2 で生成
+  Gerado pelo Nano Banana 2
 
-  **プロンプト:** 「画像検索を使用して、ケツァール鳥の正確な画像を見つけてください。この鳥の美しい 3:2 の壁紙を作成してください。上から下への自然なグラデーションと、最小限の構図でお願いします。」
+  **Comando**: "Use a pesquisa por imagens para encontrar imagens precisas de um quetzal resplandecente. Crie um plano de fundo 3:2 lindo dessa ave, com um gradiente natural de cima para baixo e composição minimalista."
 
-  Nano Banana 2 で Google [画像検索](#image-search)のグラウンディングを使用します。[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=ja) で試す
-- ![バナナ](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
+  Use a ancoragem da [Pesquisa de imagens](#image-search) do Google com o Nano Banana 2. Teste no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=pt-br)
+- ![banana](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/06.jpg)
 
-  Nano Banana Pro で生成
+  Gerado pelo Nano Banana Pro
 
-  **プロンプト:** 「このロゴをバナナの香りの香水の高級広告に配置して。ロゴがボトルに完璧に統合されています。」
+  **Comando**: "Coloque este logotipo em um anúncio sofisticado de um perfume com aroma de banana. O logotipo está perfeitamente integrado à garrafa".
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=ja) で Nano Banana の[高忠実度ディテールの保持](#5_high-fidelity_detail_preservation)を試す
-- ![cafe](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
+  Teste a [preservação de detalhes de alta fidelidade](#5_high-fidelity_detail_preservation) do Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=pt-br)
+- ![café](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/02-a-photo-of-an-everyday-scene-at-a-busy-cafe-servin.jpg)
 
-  Nano Banana Pro で生成
+  Gerado pelo Nano Banana Pro
 
-  **プロンプト:** 「朝食を提供する忙しいカフェの日常風景の写真。前景には青い髪のアニメの男性がおり、人物の 1 人は鉛筆スケッチ、もう 1 人はクレイアニメの人物です。」
+  **Comando**: "Uma foto de uma cena cotidiana em um café movimentado que serve café da manhã. Em primeiro plano, um homem de anime com cabelo azul, uma das pessoas é um esboço a lápis, outra é uma pessoa de animação com massa de modelar"
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=ja) の Nano Banana でさまざまな[アートスタイル](#3_style_transfer)を試す
-- ![記事](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
+  Teste diferentes [estilos artísticos](#3_style_transfer) com o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=pt-br)
+- ![artigo](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/10-use-search-to-find-how-the-gemini-3-flash-launch-h.jpg)
 
-  Nano Banana Pro で生成
+  Gerado pelo Nano Banana Pro
 
-  **プロンプト:** 「検索を使用して、Gemini 3 Flash のリリースがどのように受け止められているか調べてください。この情報を使用して、それに関する短い記事（見出し付き）を書いてください。デザインに特化した光沢のある雑誌に掲載された記事の写真を返します。Gemini 3 Flash に関する記事が掲載された、1 ページの折り返し部分の写真です。ヒーロー写真 1 枚。セリフ体の見出し。」
+  **Comando**: "Use a pesquisa para saber como foi recebido o lançamento do Gemini 3 Flash. Use essas informações para escrever um pequeno artigo sobre o assunto (com títulos). Retorne uma foto do artigo como ele apareceu em uma revista brilhante focada em design. É uma foto de uma única página dobrada, mostrando o artigo sobre o Gemini 3 Flash. Uma foto principal. Título em serifada."
 
-  [検索](#use-with-grounding)から[正確なテキスト](#3_accurate_text_in_images)を生成します。[AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=ja) で Nano Banana を試す
-- ![犬](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
+  Gerar [texto preciso](#3_accurate_text_in_images) com base na [pesquisa](#use-with-grounding). Teste o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=pt-br)
+- ![cachorro](https://storage.googleapis.com/generativeai-downloads/images/Nano%20Banana%20Pro%20outputs%20for%20docs/01-an-icon-representing-a-cute-dog-the-background-is-.jpg)
 
-  Nano Banana Pro で生成
+  Gerado pelo Nano Banana Pro
 
-  **プロンプト:** 「かわいい犬を表すアイコン。背景は白です。アイコンをカラフルで触覚的な 3D スタイルにします。テキストなし。」
+  **Comando**: "Um ícone representando um cachorro fofo. O plano de fundo é branco. Faça os ícones em um estilo 3D colorido e tátil. Sem texto."
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=ja) の Nano Banana で[アイコン、ステッカー、アセット](#2_stylized_illustrations_stickers)を作成する
-- ![アイソメトリック](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
+  Crie [ícones, adesivos e recursos](#2_stylized_illustrations_stickers) com o Nano Banana no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2%2Csearch_grounding&hl=pt-br)
+- ![isométrico](https://storage.googleapis.com/generativeai-downloads/images/isometric-pool.jpg)
 
-  Nano Banana 2 で生成
+  Gerado pelo Nano Banana 2
 
-  **プロンプト:** 「完全にアイソメトリックな写真を作成して。ミニチュアではなく、たまたま完全にアイソメトリックになった写真です。美しいモダンな庭の写真です。大きな 2 の形をしたプールと「Nano Banana 2」という文字があります。」
+  **Comando**: "Crie uma foto perfeitamente isométrica. Não é uma miniatura, é uma foto que acabou ficando perfeitamente isométrica. É uma foto de um lindo jardim moderno. Há uma piscina grande em forma de 2 e as palavras: Nano Banana 2."
 
-  [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=ja) で[フォトリアリスティックな画像生成](#1_photorealistic_scenes)を試す
+  Teste a [geração de imagens fotorrealistas](#1_photorealistic_scenes) no [AI Studio](https://aistudio.google.com/apps?features=nano_banana_2&hl=pt-br)
 
-**Nano Banana** は、Gemini のネイティブ画像生成機能の名称です。Gemini は、テキスト、画像、動画、またはその組み合わせを使用して、会話形式で画像を生成して処理できます。これにより、これまでにない高いコントロール精度で画像を作成、編集、反復的な改善ができます。
+**Nano Banana** é o nome dos recursos nativos de geração de imagens do Gemini.
+O Gemini pode gerar e processar imagens de forma conversacional
+com texto, imagens, vídeo ou uma combinação. Isso permite criar, editar e
+fazer iterações em recursos visuais com controle incomparável.
 
-Nano Banana は、Gemini API で利用できる 4 つの異なるモデルを指します。
+Nano Banana se refere a quatro modelos distintos disponíveis na API Gemini:
 
-- **Nano Banana 2 Lite（[Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja)）（`gemini-3.1-flash-lite-image`）:** 速度とコストが主な運用上の制約となる速度と規模向けに設計された、最も高速で最も安価な Gemini 画像モデル。複数の参照入力やマルチターンの連続編集には最適化されていません。
-- **Nano Banana 2（[Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja)）（`gemini-3.1-flash-image`）:** 最も汎用性の高いモデルであり、すべてのタスクに対応する汎用的なワークホース モデルとして機能します。速度と最先端の 4K 生成、世界に関する知識、信頼性の高いテキスト レンダリングのバランスが取れています。複数の参照画像の処理と一貫性に優れています。
-- **Nano Banana Pro（[Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja)）（`gemini-3-pro-image`）:** 最も複雑なビジュアル タスクに最適なプレミアム オプション。世界に関する最高レベルの知識、高度なローカライズ、正確なブランドの一貫性、精密なクリエイティブ制御を提供します。
-- **Nano Banana（[Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ja)）（`gemini-2.5-flash-image`）:** Nano Banana シリーズの先駆者。Nano Banana は信頼性の高いワークホースでしたが、品質の向上、生成速度の向上、API 料金の引き下げを体験していただくために、Nano Banana 2 Lite への移行を強くおすすめします。
+- **Nano Banana 2 Lite ([Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=pt-br))
+  (`gemini-3.1-flash-lite-image`):** nosso modelo de imagem do Gemini mais rápido e barato, projetado para velocidade e escala em que velocidade e custo são as principais restrições operacionais. Não é otimizado para várias entradas de referência ou edição sequencial multiturno.
+- **Nano Banana 2 ([Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=pt-br))
+  (`gemini-3.1-flash-image`):** é o modelo mais versátil e generalista para todas as tarefas. Ele equilibra a velocidade com a geração de 4K de última geração, o conhecimento mundial e a renderização de texto confiável. Excelente no processamento e na consistência de várias imagens de referência.
+- **Nano Banana Pro ([Imagens no Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=pt-br))
+  (`gemini-3-pro-image`):** a opção premium para as tarefas visuais mais complexas, oferecendo o mais alto nível de conhecimento do mundo, localização avançada, consistência precisa da marca e controle criativo preciso.
+- **Nano Banana ([Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=pt-br))
+  (`gemini-2.5-flash-image`):** o pioneiro legado da série Nano Banana.
+  Embora tenha sido um cavalo de batalha confiável, recomendamos que os clientes façam a transição para o Nano Banana 2 Lite para aproveitar uma qualidade aprimorada, velocidades de geração mais rápidas e preços de API mais baixos.
 
-生成されたすべての画像には [SynthID の透かし](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ja)が埋め込まれています。
+Todas as imagens geradas incluem uma [marca-d'água do SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=pt-br).
 
-## 画像生成（テキスト画像変換）
+## Geração de imagens (conversão de texto em imagem)
 
 ### Python
 
@@ -290,13 +301,16 @@ curl -s -X POST \
   }'
 ```
 
-## 画像編集（テキストと画像による画像変換）
+## Edição de imagens (texto e imagem para imagem)
 
-**リマインダー**: アップロードする画像に必要な権利をすべて所有していることをご確認ください。他者の権利を侵害するコンテンツ（他人を欺く、嫌がらせをする、または危害を加える動画や画像など）を生成しないでください。この生成 AI 機能の使用は、Google の[使用禁止に関するポリシー](https://policies.google.com/terms/generative-ai/use-policy?hl=ja)の対象となります。
+**Lembrete**: confira se você tem os direitos necessários sobre as imagens que enviar.
+Não gere conteúdo que viole os direitos de terceiros, incluindo vídeos ou imagens que enganem, assediem ou prejudiquem pessoas. O uso deste serviço de IA generativa está sujeito à nossa [Política de uso proibido](https://policies.google.com/terms/generative-ai/use-policy?hl=pt-br).
 
-画像を指定し、テキスト プロンプトを使用して要素の追加、削除、変更、スタイルの変更、カラー グレーディングの調整を行います。
+Forneça uma imagem e use comandos de texto para adicionar, remover ou modificar elementos,
+mudar o estilo ou ajustar a gradação de cores.
 
-次の例は、`base64` エンコードされた画像をアップロードする方法を示しています。複数の画像、大きなペイロード、サポートされている MIME タイプについては、[画像理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)のページをご覧ください。
+O exemplo a seguir demonstra o upload de imagens codificadas em `base64`.
+Para várias imagens, payloads maiores e tipos MIME compatíveis, consulte a página [Entendimento de imagens](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pt-br).
 
 ### Python
 
@@ -539,9 +553,9 @@ curl -s -X POST \
     }"
 ```
 
-### マルチターンの画像編集
+### Edição de imagens multiturno
 
-会話形式で画像の生成と編集を続けます。画像に対して反復処理を行うには、チャットまたはマルチターンの会話をおすすめします。次の例は、光合成に関するインフォグラフィックを生成するプロンプトを示しています。
+Continue gerando e editando imagens de forma conversacional. O chat ou a conversa multiturno é a maneira recomendada de iterar imagens. O exemplo a seguir mostra um comando para gerar um infográfico sobre a fotossíntese.
 
 ### Python
 
@@ -773,11 +787,11 @@ curl -s -X POST \
   }'
 ```
 
-![光合成に関する AI 生成のインフォグラフィック](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=ja)
+![Infográfico gerado com IA sobre a fotossíntese](https://ai.google.dev/static/gemini-api/docs/images/infographic-eng.png?hl=pt-br)
 
-光合成に関する AI 生成のインフォグラフィック
+Infográfico gerado com IA sobre a fotossíntese
 
-同じチャットを使用して、グラフィックの言語をスペイン語に変更できます。
+Em seguida, use o mesmo chat para mudar o idioma do gráfico para espanhol.
 
 ### Python
 
@@ -875,7 +889,7 @@ config = GenerateContentConfig.builder()
     .build();
 
 response = chat.sendMessage(
-    "Update this infographic to be in Spanish. " + 
+    "Update this infographic to be in Spanish. " +
     "Do not change any other elements of the image.",
     config);
 
@@ -971,34 +985,35 @@ curl -s -X POST \
   }'
 ```
 
-![スペイン語で光合成のインフォグラフィックを AI が生成](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=ja)
+![Infográfico gerado com IA sobre a fotossíntese em espanhol](https://ai.google.dev/static/gemini-api/docs/images/infographic-spanish.png?hl=pt-br)
 
-光合成のインフォグラフィックをスペイン語で AI 生成して
+Infográfico gerado com IA sobre a fotossíntese em espanhol
 
-## Gemini 3 画像モデルの新機能
+## Novidade com os modelos de imagem do Gemini 3
 
-Gemini 3 は、最先端の画像生成および編集モデルを提供します。Gemini 3.1 Flash Image は速度と大量のユースケース向けに最適化されており、Gemini 3 Pro Image はプロフェッショナルなアセット制作向けに最適化されています。高度な推論を通じて最も困難なワークフローに取り組むように設計されており、複雑なマルチターンの作成と変更のタスクに優れています。
+O Gemini 3 oferece modelos de edição e geração de imagens de última geração. O Gemini 3.1 Flash Image é otimizado para velocidade e casos de uso de alto volume, e o Gemini 3 Pro Image é otimizado para produção de recursos profissionais.
+Criados para lidar com os fluxos de trabalho mais desafiadores usando raciocínio avançado, eles são excelentes em tarefas complexas de criação e modificação multiturno.
 
-- **高解像度出力**: 1K、2K、4K のビジュアルを生成する機能が組み込まれています。
-  - **Gemini 3.1 Flash Image** では、より小さい 512（0.5K）にも対応しています。
-  - **Gemini 3.1 Flash Lite Image** は 1K 解像度のみをサポートしています。
-- **高度なテキスト レンダリング**: インフォグラフィック、メニュー、図表、マーケティング アセット用に、読みやすくスタイリッシュなテキストを生成できます。
-- **Google 検索によるグラウンディング**: モデルは、Google 検索をツールとして使用して、事実を確認し、リアルタイム データ（現在の天気図、株価チャート、最近のイベントなど）に基づいて画像生成できます。
-  - **Gemini 3.1 Flash Lite Image モデルではサポートされていません。**
-  - **Gemini 3.1 Flash Image** では、画像検索とウェブ検索に加えて、Google 検索によるグラウンディングが統合されています。
-- **思考モード**: モデルは「思考」プロセスを利用して、複雑なプロンプトを推論します。最終的な高品質の出力を生成する前に、構成を調整するための中間的な「思考画像」（バックエンドで表示されるが、課金されない）を生成します。
-- **最大 14 枚の参照画像**: 最大 14 枚の参照画像を組み合わせて最終的な画像を生成できるようになりました。
-- **新しいアスペクト比**: Gemini 3.1 Flash Lite Image に `1:1`、`3:2`、`2:3`、`3:4`、`4:3`、`4:5`、`5:4`、`9:16`、`16:9`、`21:9` の[アスペクト比](#aspect_ratios_and_image_size)が追加されました。
+- **Saída de alta resolução**: recursos de geração integrados para visuais em 1K, 2K e 4K.
+  - O **Gemini 3.1 Flash Image** adiciona a resolução menor de 512 (0,5K).
+  - O **Gemini 3.1 Flash Lite Image** só é compatível com resolução 1K.
+- **Renderização avançada de texto**: capaz de gerar texto legível e estilizado para infográficos, menus, diagramas e recursos de marketing.
+- **Embasamento com a Pesquisa Google**: o modelo pode usar a Pesquisa Google como uma ferramenta para verificar fatos e gerar imagens com base em dados em tempo real (por exemplo, mapas meteorológicos atuais, gráficos de ações, eventos recentes).
+  - **Indisponível para o modelo de imagem do Gemini 3.1 Flash Lite.**
+  - O **Gemini 3.1 Flash Image** adiciona a integração do embasamento com a Pesquisa Google para imagens e a Pesquisa na Web.
+- **Modo de raciocínio**: o modelo usa um processo de "raciocínio" para analisar comandos complexos. Ele gera "imagens de pensamento" provisórias (visíveis no back-end, mas não cobradas) para refinar a composição antes de produzir a saída final de alta qualidade.
+- **Até 14 imagens de referência**: agora você pode combinar até 14 imagens de referência para produzir a imagem final.
+- **Novas proporções**: a criação de imagens do Gemini 3.1 Flash Lite adiciona `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9` e `21:9` [proporções](#aspect_ratios_and_image_size).
 
-### 最大 14 枚の参照画像を使用する
+### Usar até 14 imagens de referência
 
-Gemini 3 画像モデルでは、最大 14 個の参照画像を組み合わせることができます。これらの 14 枚の画像には、次のものを含めることができます。
+Com os modelos de imagem do Gemini 3, você pode misturar até 14 imagens de referência. Essas 14 imagens podem incluir o seguinte:
 
-| Gemini 3.1 Flash Lite Image | Gemini 3.1 Flash Image | Gemini 3 Pro Image |
+| Imagem do Gemini 3.1 Flash Lite | Imagem do Gemini 3.1 Flash | Gemini 3 Pro Image |
 | --- | --- | --- |
-| 最終画像に含める忠実度の高いオブジェクトの画像（最大 14 枚） | 最終画像に含める忠実度の高いオブジェクトの画像（最大 10 枚） | 最終画像に含める忠実度の高いオブジェクトの画像（最大 6 枚） |
-| なし | キャラクターの一貫性を保つためのキャラクターの画像（最大 4 枚） | キャラクターの一貫性を保つためのキャラクターの画像（最大 5 枚） |
-| なし | なし | スタイルの参照用として使用する画像（3 枚まで） |
+| Até 14 imagens de objetos de alta fidelidade para incluir na imagem final | Até 10 imagens de objetos com alta fidelidade para incluir na imagem final | Até seis imagens de objetos com alta fidelidade para incluir na imagem final |
+| N/A | Até quatro imagens de personagens para manter a consistência | Até cinco imagens de personagens para manter a consistência |
+| N/A | N/A | Até três imagens para usar como referências de estilo |
 
 ### Python
 
@@ -1317,15 +1332,15 @@ curl -s -X POST \
     }"
 ```
 
-![AI 生成のオフィス グループ写真](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=ja)
+![Foto de grupo do escritório gerada com IA](https://ai.google.dev/static/gemini-api/docs/images/office-group-photo.jpeg?hl=pt-br)
 
-AI 生成のオフィス グループ写真
+Foto de grupo do escritório gerada com IA
 
-### Google 検索によるグラウンディング
+### Embasamento com a Pesquisa Google
 
-[Google 検索ツール](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)を使用して、天気予報、株価チャート、最近の出来事などのリアルタイム情報に基づいて画像を生成します。
+Use a [ferramenta da Pesquisa Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pt-br) para gerar imagens com base em informações em tempo real, como previsões do tempo, gráficos de ações ou eventos recentes.
 
-画像生成で Google 検索によるグラウンディングを使用する場合、画像ベースの検索結果は生成モデルに渡されず、レスポンスから除外されます（[画像に対する Google 検索によるグラウンディング](#image-search)を参照）。
+Ao usar o embasamento com a Pesquisa Google para geração de imagens, os resultados da pesquisa baseados em imagens não são transmitidos ao modelo de geração e são excluídos da resposta. Consulte [Embasamento com a Pesquisa Google para imagens](#image-search).
 
 ### Python
 
@@ -1514,22 +1529,26 @@ curl -s -X POST \
   }'
 ```
 
-![サンフランシスコの 5 日間の天気予報の AI 生成グラフ](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=ja)
+![Gráfico de clima de cinco dias gerado com IA para São Francisco](https://ai.google.dev/static/gemini-api/docs/images/weather-forecast.png?hl=pt-br)
 
-サンフランシスコの 5 日間の天気予報の AI 生成のグラフ
+Gráfico de previsão do tempo de cinco dias gerado por IA para São Francisco
 
-レスポンスには、次の必須フィールドを含む `groundingMetadata` が含まれます。
+A resposta inclui `groundingMetadata`, que contém os seguintes campos obrigatórios:
 
-- **`searchEntryPoint`**: 必要な検索候補をレンダリングする HTML と CSS が含まれています。
-- **`groundingChunks`**: 生成された画像のグラウンディングに使用された上位 3 つのウェブソースを返します
+- **`searchEntryPoint`**: contém o HTML e o CSS para renderizar as sugestões de pesquisa
+  necessárias.
+- **`groundingChunks`**: retorna as três principais fontes da Web usadas para embasar a imagem gerada.
 
-### 画像検索によるグラウンディング（3.1 Flash）
+### Embasamento com a Pesquisa Google para imagens (3.1 Flash)
 
-画像用の Google 検索によるグラウンディングを使用すると、モデルは Google 検索で取得したウェブ画像を画像生成の視覚的コンテキストとして使用できます。画像検索は、既存の Google 検索によるグラウンディング ツール内の新しい検索タイプで、標準の[ウェブ検索](#use-with-grounding)とともに機能します。
+O embasamento com a Pesquisa Google para imagens permite que os modelos usem imagens da Web recuperadas pela Pesquisa Google como contexto visual para a geração de imagens. A Pesquisa de imagens é um
+novo tipo de pesquisa na ferramenta de embasamento com a Pesquisa Google,
+que funciona junto com a [Pesquisa na Web](#use-with-grounding) padrão.
 
-画像検索を有効にするには、API リクエストで `googleSearch` ツールを構成し、`searchTypes` オブジェクト内で `imageSearch` を指定します。画像検索は、単独で使用することも、ウェブ検索と組み合わせて使用することもできます。
+Para ativar a Pesquisa de imagens, configure a ferramenta `googleSearch` na solicitação de API
+e especifique `imageSearch` no objeto `searchTypes`. A pesquisa de imagens pode ser usada de forma independente ou com a pesquisa na Web.
 
-画像に対する Google 検索でのグラウンディングは、人物の検索には使用できません。
+Observação: o embasamento com a Pesquisa Google para imagens não pode ser usado para pesquisar pessoas.
 
 ### Python
 
@@ -1756,32 +1775,39 @@ curl -s -X POST \
   }'
 ```
 
-**表示の要件**
+**Requisitos de exibição**
 
-Google 検索によるグラウンディング内で画像検索を使用する場合は、次の条件を遵守する必要があります。
+Ao usar a Pesquisa de imagens no Embasamento com a Pesquisa Google, você precisa obedecer às seguintes condições:
 
-- **出典の帰属**: ユーザーがリンクとして認識できる方法で、ソース画像を含むウェブページ（画像ファイル自体ではなく「包含ページ」）へのリンクを提供する必要があります。
-- **直接ナビゲーション**: ソース画像も表示する場合は、ソース画像からそのソース ウェブページへの直接のワンクリック パスを提供する必要があります。エンドユーザーが元のウェブページにアクセスするのを遅らせたり、抽象化したりする他の実装（複数回のクリックが必要なパスや、中間画像ビューアの使用など）は許可されません。
+- **Atribuição da fonte**: você precisa fornecer um link para a página da Web que contém a imagem de origem (a "página que contém", não o arquivo de imagem em si) de uma maneira que o usuário reconheça como um link.
+- **Navegação direta**: se você também optar por mostrar as imagens de origem, será necessário fornecer um caminho direto de um único clique das imagens de origem para a página da Web de origem que as contém. Qualquer outra implementação que atrase ou abstraia
+  o acesso do usuário final à página da Web de origem, incluindo, entre outros,
+  qualquer caminho de vários cliques ou o uso de um visualizador de imagens intermediário, não é
+  permitida.
 
-**レスポンス**
+**Resposta**
 
-画像検索を使用するグラウンディングされたレスポンスの場合、API は明確な帰属とメタデータを提供し、出力を検証済みのソースにリンクします。`groundingMetadata` オブジェクトの主なフィールドは次のとおりです。
+Para respostas embasadas usando a pesquisa de imagens, a API fornece atribuição e metadados claros para vincular a saída a fontes verificadas. Os principais campos do objeto
+`groundingMetadata` incluem:
 
-- **`imageSearchQueries`**: モデルが視覚的コンテキスト（画像検索）に使用する特定のクエリ。
-- **`groundingChunks`**: 取得した結果のソース情報が含まれます。画像ソースの場合、新しい画像チャンクタイプを使用してリダイレクト URL として返されます。このチャンクには次のものが含まれます。
+- **`imageSearchQueries`**: as consultas específicas usadas pelo modelo para contexto visual (Pesquisa por imagens).
+- **`groundingChunks`**: contém informações de origem para os resultados recuperados.
+  Para fontes de imagens, eles serão retornados como URLs de redirecionamento usando um novo tipo de
+  fragmento de imagem. Esse trecho inclui:
 
-  - **`uri`**: アトリビューションのウェブページ URL（ランディング ページ）。
-  - **`image_uri`**: 画像の直接 URL。
-- **`groundingSupports`**: 生成されたコンテンツをチャンク内の関連する引用元にリンクする特定のマッピングを提供します。
-- **`searchEntryPoint`**: 検索候補をレンダリングするための準拠した HTML と CSS を含む「Google 検索」チップが含まれます。
+  - **`uri`**: o URL da página da Web para atribuição (a página de destino).
+  - **`image_uri`**: o URL direto da imagem.
+- **`groundingSupports`**: fornece mapeamentos específicos que vinculam o conteúdo gerado à fonte de citação relevante nos trechos.
+- **`searchEntryPoint`**: inclui o ícone "Pesquisa Google" com
+  HTML e CSS compatíveis para renderizar as sugestões de pesquisa.
 
-### 動画から画像への生成（3.1 Flash）
+### Geração de imagens com base em vídeos (3.1 Flash)
 
-動画から画像への生成では、動画のコンテキストをマルチモーダル参照として使用して、新しい画像を生成できます。この機能は、高品質の動画サムネイル、映画のポスター、概要のインフォグラフィック、動画のシーンからインスピレーションを得た新しいアートワークの作成に役立ちます。
+A geração de vídeo para imagem permite criar novas imagens usando o contexto de um vídeo como referência multimodal. Isso é útil para criar miniaturas de vídeo de alta qualidade, pôsteres de filmes, infográficos de resumo ou novas artes inspiradas em uma cena de vídeo.
 
-生成中、モデルはコンテキスト内の動画フレームを分析し（モデルの入力トークン上限である 131,072 トークンまで）、視覚的なテーマとキーイベントを抽出します。次に、テキスト プロンプトとともにそれらを使用して、出力画像を合成します。
+Durante a geração, o modelo analisa os frames do vídeo no contexto (até o limite de tokens de entrada do modelo,que é de 131.072 tokens) para extrair temas visuais e eventos principais. Em seguida, ele usa essas informações com o comando de texto para sintetizar a imagem de saída.
 
-API リクエストで公開 [YouTube URL](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#youtube) を直接渡すか、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してローカル動画ファイルをアップロードできます。
+Você pode transmitir [URLs públicos do YouTube](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-br#youtube) diretamente na solicitação da API ou fazer upload de arquivos de vídeo locais usando a [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br).
 
 ### Python
 
@@ -2037,15 +2063,15 @@ curl -s -X POST \
   }'
 ```
 
-![YouTube 動画から AI で生成されたインフォグラフィック](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=ja)
+![Infográfico gerado por IA de um vídeo do YouTube](https://ai.google.dev/static/gemini-api/docs/images/youtube_infographics.png?hl=pt-br)
 
-YouTube 動画から生成された AI インフォグラフィック
+Infográfico gerado com IA de um vídeo do YouTube
 
-### 最大 4K 解像度の画像を生成する
+### Gerar imagens com resolução de até 4K
 
-Gemini 3 画像モデルは、デフォルトで 1K 画像を生成しますが、2K、4K、512（0.5K）（Gemini 3.1 Flash Image のみ）の画像を出力することもできます。高解像度のアセットを生成するには、`generation_config` で `image_size` を指定します。
+Os modelos de imagem do Gemini 3 geram 1.000 imagens por padrão, mas também podem gerar imagens de 2K, 4K e 512 (0,5K) (somente o Gemini 3.1 Flash Image). Para gerar recursos de resolução mais alta, especifique o `image_size` no `generation_config`.
 
-大文字の「K」を使用する必要があります（例: 1K、2K、4K）。`512` 値には「K」という接尾辞は使用されません。小文字のパラメータ（1k など）は拒否されます。
+Use um "K" maiúsculo (por exemplo, 1K, 2K, 4K). O valor `512` não usa um sufixo "K". Parâmetros em letras minúsculas (por exemplo, 1k) serão rejeitados.
 
 ### Python
 
@@ -2284,19 +2310,20 @@ curl -s -X POST \
   }'
 ```
 
-このプロンプトから生成された画像の例を次に示します。
+Confira um exemplo de imagem gerada com esse comando:
 
-![解剖されたオオカバマダラをダ ヴィンチ風に描いた AI 生成の解剖図。](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=ja)
+![Esboço anatômico de uma borboleta monarca dissecada no estilo Da Vinci gerado por IA.](https://ai.google.dev/static/gemini-api/docs/images/gemini3-4k-image.png?hl=pt-br)
 
-モナーク蝶の解剖図をダ・ヴィンチ風に描いた AI 生成のスケッチ。
+Esboço anatômico de uma borboleta monarca dissecada no estilo de Da Vinci, gerado por IA.
 
-### 思考プロセス
+### Processo de raciocínio
 
-Gemini 3 画像モデルは、複雑なプロンプトに推論プロセス（「思考」）を使用する思考モデルです。この機能はデフォルトで有効になっており、API で無効にすることはできません。思考プロセスの詳細については、[Gemini の思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)ガイドをご覧ください。
+Os modelos de imagem do Gemini 3 são modelos de raciocínio que usam um processo de inferência ("Raciocínio") para comandos complexos. Esse recurso é ativado por padrão e
+não pode ser desativado na API. Para saber mais sobre o processo de pensamento, consulte o guia [Pensamento do Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br).
 
-このモデルは、構成とロジックをテストするために最大 2 つの中間画像を生成します。Thinking の最後の画像は、最終的にレンダリングされた画像でもあります。
+O modelo gera até duas imagens provisórias para testar a composição e a lógica. A última imagem em "Pensando" também é a imagem renderizada final.
 
-最終的な画像が生成されるまでの思考を確認できます。
+Você pode conferir as ideias que levaram à produção da imagem final.
 
 ### Python
 
@@ -2362,11 +2389,11 @@ foreach (var candidate in response.Candidates) {
 }
 ```
 
-#### 思考レベルを制御する
+#### Como controlar os níveis de pensamento
 
-Gemini 3.1 Flash Image と Gemini 3.1 Flash Lite Image を使用すると、モデルが使用する思考の量を制御して、品質とレイテンシのバランスを取ることができます。デフォルトの `thinkingLevel` は `minimal` で、サポートされているレベルは `minimal` と `high` です。`thinkingLevel` を `minimal` に設定すると、レイテンシが最小限に抑えられたレスポンスが返されます。最小限の思考とは、モデルがまったく思考を使用しないという意味ではないことに注意してください。
+Com o Gemini 3.1 Flash Image e o Gemini 3.1 Flash Lite Image, você controla a quantidade de raciocínio que o modelo usa para equilibrar qualidade e latência. O `thinkingLevel` padrão é `minimal`, e os níveis compatíveis são `minimal` e `high`. Definir o `thinkingLevel` como `minimal` oferece respostas com a menor latência. O pensamento mínimo não significa que o modelo não usa nenhum pensamento.
 
-`includeThoughts` ブール値を追加して、モデルが生成した思考をレスポンスで返すか、非表示のままにするかを決定できます。
+Você pode adicionar o booleano `includeThoughts` para determinar se os pensamentos gerados pelo modelo são retornados na resposta ou permanecem ocultos.
 
 ### Python
 
@@ -2605,19 +2632,20 @@ curl -s -X POST \
   }'
 ```
 
-`includeThoughts` が `true` または `false` に設定されているかどうかにかかわらず、思考トークンは課金されます。これは、プロセスを表示するかどうかにかかわらず、[思考プロセス](#thinking-process)が常にデフォルトで実行されるためです。
+Os tokens de pensamento são faturados, independente de `includeThoughts` estar definido como `true` ou `false`, já que o [processo de pensamento](#thinking-process) sempre acontece por padrão, mesmo que você não o veja.
 
-#### 思考シグネチャ
+#### Assinaturas de raciocínio
 
-思考シグネチャは、モデルの内部的な思考プロセスを暗号化したもので、マルチターンのインタラクションで推論コンテキストを保持するために使用されます。すべてのレスポンスに `thought_signature` フィールドが含まれます。原則として、モデル レスポンスで思考シグネチャを受け取った場合は、次のターンで会話履歴を送信するときに、受け取ったとおりに渡す必要があります。思考シグネチャを循環させないと、レスポンスが失敗する可能性があります。署名全般について詳しくは、[思考署名](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ja)のドキュメントをご覧ください。
+As assinaturas de pensamento são representações criptografadas do processo de raciocínio interno do modelo e são usadas para preservar o contexto de raciocínio em interações multiturno. Todas as respostas incluem um campo `thought_signature`. Como regra geral, se você receber uma assinatura de pensamento em uma resposta do modelo, transmita-a exatamente como foi recebida ao enviar o histórico da conversa na próxima vez. Se não fizer isso, a resposta poderá falhar. Consulte a documentação sobre [assinatura de pensamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pt-br) para mais explicações sobre assinaturas em geral.
 
-思考シグネチャの仕組みは次のとおりです。
+Confira como elas funcionam:
 
-- レスポンスの一部である画像 `mimetype` を含むすべての `inline_data` 部分には署名が必要です。
-- 考えの直後に（画像の前に）テキスト部分がある場合は、最初のテキスト部分にも署名が必要です。
-- 画像 `mimetype` を含む `inline_data` 部分が思考の一部である場合、署名は含まれません。
+- Todas as partes `inline_data` com a imagem `mimetype` que fazem parte da resposta
+  precisam ter assinatura.
+- Se houver partes de texto no início (antes de qualquer imagem) logo após os pensamentos, a primeira parte de texto também deverá ter uma assinatura.
+- Se `inline_data` partes com a imagem `mimetype` fizerem parte de ideias, elas não terão assinaturas.
 
-次のコードは、思考シグネチャが含まれる場所の例を示しています。
+O código a seguir mostra um exemplo de onde as assinaturas de pensamento são incluídas:
 
 ```
 [
@@ -2677,176 +2705,181 @@ curl -s -X POST \
 ]
 ```
 
-## その他の画像生成モード
+## Outros modos de geração de imagens
 
-Gemini は、プロンプトの構造とコンテキストに基づいて、次のような他の画像操作モードをサポートしています。
+O Gemini oferece suporte a outros modos de interação com imagens com base na estrutura e no contexto do comando, incluindo:
 
-- **テキスト画像変換とテキスト（インターリーブ）:** 関連するテキストを含む画像を出力します。
-  - プロンプトの例: 「パエリアのレシピをイラスト付きで生成してください。」
-- **画像とテキスト画像変換とテキスト（インターリーブ）**: 入力画像とテキストを使用して、関連する新しい画像とテキストを作成します。
-  - プロンプトの例:（家具付きの部屋の画像を提示して）「この部屋に合いそうなソファの色には他にどんなものがありますか？画像を更新してください」。
+- **Texto para imagens e texto (intercalado)**: gera imagens com texto relacionado.
+  - Exemplo de comando: "Gere uma receita ilustrada de paella".
+- **Imagens e texto para imagens e texto (intercalados)**: usa imagens e texto de entrada para criar novas imagens e texto relacionados.
+  - Exemplo de comando: (com uma imagem de um quarto mobiliado) "Quais outras cores de sofás ficariam boas no meu espaço? Você pode atualizar a imagem?"
 
-## 画像をバッチで生成する
+## Gerar imagens em lote
 
-多数の画像を生成する必要がある場合は、[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja) を使用できます。最大 24 時間のターンアラウンドと引き換えに、[レートの上限](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ja)が引き上げられます。
+Se você precisar gerar muitas imagens, use a
+[API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br). Você recebe [limites de taxa](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pt-br) mais altos em troca de um tempo de resposta de até 24 horas.
 
-Batch API の画像例とコードについては、[Batch API の画像生成に関するドキュメント](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja#image-generation)と[クックブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=ja)をご覧ください。
+Confira a [documentação da geração de imagens da API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br#image-generation) e o [cookbook](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Batch_mode.ipynb?hl=pt-br)
+para exemplos e códigos de imagens da API Batch.
 
-## プロンプト ガイドと戦略
+## Guia e estratégias para a criação de comandos
 
-画像生成をマスターするには、次の基本原則から始めます。
+Para dominar a geração de imagens, é preciso entender um princípio fundamental:
 
-> **キーワードを並べるだけでなく、シーンを説明します。**このモデルの強みは、言語を深く理解していることです。物語形式の記述的な段落は、関連性のない単語のリストよりも、一貫性のある優れた画像を生成する可能性がほぼ常に高くなります。
+> **Descreva a cena, não apenas liste palavras-chave.**
+> A principal vantagem do modelo é a compreensão profunda da linguagem. Um parágrafo narrativo e descritivo quase sempre produz uma imagem melhor e mais coerente do que uma lista de palavras desconectadas.
 
-### 画像を生成するためのプロンプト
+### Comandos para gerar imagens
 
-次の戦略は、効果的なプロンプトを作成して、思いどおりの画像を生成するのに役立ちます。
+As estratégias a seguir vão ajudar você a criar comandos eficazes para gerar exatamente as imagens que procura.
 
-#### 写真
+#### Fotografia
 
-リアルな画像の場合は、写真用語を使用します。カメラアングル、レンズの種類、照明、細部について言及して、モデルがリアルな結果を生成するようにします。
+Para imagens realistas, use termos de fotografia. Mencione ângulos de câmera, tipos de lentes, iluminação e detalhes para orientar o modelo a um resultado realista.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| 深い日焼けのしわと、温かく知的な笑顔を浮かべた、日本の高齢の陶芸家のクローズアップ ポートレートの写真。彼は、新しく釉薬をかけた茶碗を注意深く調べています。舞台は、太陽の光が差し込む彼の素朴な工房。窓から差し込む柔らかいゴールデンアワーの光で照らされ、粘土のきめ細かい質感が際立っている。85 mm ポートレート レンズで撮影したように、背景が柔らかくぼかされている（ボケ）ようにしてください。全体的に穏やかで、熟練した印象を与える仕上がり。縦向き。 | 高齢の日本の陶芸家 |
+| Uma foto em close de um ceramista japonês idoso com rugas profundas e marcadas pelo sol e um sorriso caloroso e cúmplice. Ele está inspecionando cuidadosamente uma xícara de chá recém-esmaltada. O cenário é a oficina rústica e ensolarada dele. A cena é iluminada por uma luz suave da hora mágica que entra por uma janela, destacando a textura fina da argila. A imagem é capturada com uma lente de 85 mm, própria para retratos, resultando em um fundo suave e desfocado (bokeh). O clima geral é sereno e magistral. Orientação retrato vertical. | Ceramista japonês idoso |
 
-#### スタイリッシュなイラストとステッカー
+#### Ilustrações e adesivos estilizados
 
-ステッカー、アイコン、アセットを作成する場合は、スタイルを明示的に指定し、白い背景をリクエストします。
+Para criar adesivos, ícones ou recursos, seja explícito sobre o estilo e peça um fundo branco.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| 小さな竹の帽子をかぶった、嬉しそうなレッサーパンダのかわいいスタイルのステッカー。緑色の竹の葉を食べています。太くてくっきりとした輪郭、シンプルなセルシェーディング、鮮やかなカラーパレットが特徴です。背景は白である必要があります。 | かわいいレッサーパンダのステッカー |
+| Um adesivo em estilo kawaii de um panda-vermelho feliz usando um chapéu de bambu pequeno. Ele está mastigando uma folha de bambu verde. O design tem contornos limpos e destacados, cel-shading simples e uma paleta de cores vibrante. O fundo precisa ser branco. | Adesivo de panda-vermelho kawaii |
 
-#### 画像内の正確なテキスト
+#### Texto preciso em imagens
 
-Gemini はテキストのレンダリングに優れています。テキスト、フォント スタイル（説明的に）、全体的なデザインを明確にします。Gemini 3 Pro Image を使用して、プロフェッショナルなアセットを制作します。
+O Gemini é excelente em renderização de texto. Seja claro sobre o texto, o estilo da fonte (de forma descritiva) e o design geral. Use o Gemini 3 Pro Image para produção de recursos profissionais.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| 「The Daily Grind」というコーヒー ショップのモダンでミニマルなロゴを作成してください。テキストは、クリーンで太字の Sans Serif フォントを使用してください。カラーパターンが白黒である。ロゴを円の中に配置します。コーヒー豆を賢く使う。 | コーヒー ショップのロゴ |
+| Crie um logotipo moderno e minimalista para uma cafeteria chamada "The Daily Grind". O texto precisa estar em uma fonte sem serifa, limpa e em negrito. O esquema de cores é preto e branco. Coloque o logo em um círculo. Use um grão de café de maneira inteligente. | Logotipo de cafeteria |
 
-#### 商品のモックアップと広告写真
+#### Simulações de produtos e fotografia comercial
 
-e コマース、広告、ブランディング用のクリーンでプロフェッショナルな商品ショットの作成に最適です。
+Perfeito para criar fotos de produtos limpas e profissionais para e-commerce, publicidade ou branding.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| 高解像度のスタジオ照明で撮影された商品写真。マットブラックのミニマルなセラミック製コーヒーカップが、磨かれたコンクリートの表面に置かれている。照明は、柔らかく拡散したハイライトを作り出し、強い影をなくすように設計されたソフトボックスを使った 3 点照明です。カメラの角度は、クリーンなラインを際立たせるため、やや上向きの 45 度で撮影されています。コーヒーから立ち上る湯気に焦点が合っている、超リアルな画像。正方形の画像。 | セラミック コーヒー マグのプロダクト ショット |
+| Uma foto de produto em alta resolução, iluminada em estúdio, de uma xícara de café de cerâmica minimalista em preto fosco, apresentada em uma superfície de concreto polido. A iluminação é uma configuração de softbox de três pontos projetada para criar destaques suaves e difusos e eliminar sombras fortes. O ângulo da câmera é um pouco elevado, com um disparo de 45 graus para mostrar as linhas limpas. Ultrarrealista, com foco nítido no vapor saindo do café. Imagem quadrada. | Foto de produto de uma xícara de café de cerâmica |
 
-#### ミニマルでネガティブ スペースのデザイン
+#### Design minimalista e de espaço negativo
 
-テキストを重ねて表示するウェブサイト、プレゼンテーション、マーケティング資料の背景の作成に最適です。
+Excelente para criar planos de fundo para sites, apresentações ou materiais de marketing em que o texto será sobreposto.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| フレームの右下に配置された 1 枚の繊細な赤いカエデの葉をフィーチャーしたミニマリストの構図。背景は広大なオフホワイトのキャンバスで、テキスト用のネガティブ スペースが大きく取られています。左上から柔らかく拡散した照明。正方形の画像。 | 赤いカエデの葉をあしらったミニマルなデザイン |
+| Uma composição minimalista com uma única folha delicada de bordo vermelho posicionada na parte inferior direita da imagem. O fundo é uma tela branca vazia, criando um espaço negativo significativo para o texto. Iluminação suave e difusa do canto superior esquerdo. Imagem quadrada. | Design minimalista com folha de bordo vermelha |
 
-#### 連続したアート（コミック パネル / ストーリーボード）
+#### Arte sequencial (painel de quadrinhos / storyboard)
 
-キャラクターの一貫性とシーンの説明に基づいて、ビジュアル ストーリーテリング用のパネルを作成します。テキストの精度とストーリーテリングの能力については、これらのプロンプトは Gemini 3.1 Pro と Gemini 3.1 Flash Image で最適に動作します。
+Cria painéis para contar histórias visuais com base na consistência do personagem e na descrição da cena. Para precisão com texto e capacidade de contar histórias, esses comandos funcionam melhor com o Gemini 3.1 Pro e o Gemini 3.1 Flash Image.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| **入力画像:**  白いメガネをかけた男性   入力画像   **プロンプト:** 3 コマのマンガを、高コントラストのモノクロ インクを使った、ざらざらしたノワール アート スタイルで作成して。キャラクターをユーモラスなシーンに配置します。 | ざらざらしたノワール風のコミック パネル |
+| **Imagem de entrada**:  Homem de óculos brancos   Imagem de entrada   **Comando**:crie uma história em quadrinhos de três quadros em um estilo de arte noir e sombrio com tintas em preto e branco de alto contraste. Coloque o personagem em uma cena engraçada. | Painel de quadrinhos noir sombrio |
 
-#### Google 検索によるグラウンディング
+#### Embasamento com a Pesquisa Google
 
-Google 検索を使用して、最近の情報やリアルタイムの情報に基づいて画像を生成します。これは、ニュースや天気など、時間的制約のあるトピックに役立ちます。
+Use a Pesquisa Google para gerar imagens com base em informações recentes ou em tempo real.
+Isso é útil para notícias, clima e outros assuntos urgentes.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| 昨夜のチャンピオンズ リーグのアーセナルの試合のシンプルでスタイリッシュなグラフィックを作成して | アーセナル サッカーのスコアのグラフィック |
+| Crie um gráfico simples, mas elegante, do jogo do Arsenal da noite passada na Liga dos Campeões | Gráfico de pontuação do Arsenal |
 
-### 画像を編集するためのプロンプト
+### Comandos para editar imagens
 
-これらの例は、編集、構図、スタイル転送のテキスト プロンプトとともに画像を提供する方法を示しています。
+Estes exemplos mostram como fornecer imagens junto com seus comandos de texto para edição, composição e transferência de estilo.
 
-#### 要素の追加と削除
+#### Adicionar e remover elementos
 
-画像を提供し、変更内容を説明します。モデルは、元の画像のスタイル、照明、遠近法に一致します。
+Forneça uma imagem e descreva a mudança. O modelo vai corresponder ao estilo, à iluminação e à perspectiva da imagem original.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| **入力画像:**  ふわふわの茶色の猫のリアルな写真...   入力画像   **プロンプト:** 提供された猫の画像を使用して、猫の頭に小さな編み物の魔法使いの帽子を追加してください。写真の柔らかい照明と一致するように、快適に座っているように見せます。 | 魔法使いの帽子をかぶった猫 |
+| **Imagem de entrada**:  Uma imagem fotorrealista de um gato ruivo fofo...   Imagem de entrada   **Comando**:usando a imagem fornecida do meu gato, adicione um pequeno chapéu de mago de tricô na cabeça dele. Faça com que ele pareça estar sentado confortavelmente e combine com a iluminação suave da foto. | Gato com chapéu de mago |
 
-#### インペイント（セマンティック マスク）
+#### Retoque (mascaramento semântico)
 
-会話形式で「マスク」を定義して、画像の特定の部分を編集し、残りの部分はそのままにできます。
+Defina uma "máscara" por conversa para editar uma parte específica de uma imagem sem alterar o restante.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| **入力画像:**  モダンで明るいリビングルームのワイドショット...   入力画像   **プロンプト:** 提供されたリビングルームの画像を使用して、青いソファだけをヴィンテージの茶色の革製チェスターフィールド ソファに変更してください。ソファのクッションや照明など、部屋の他の部分は変更しないでください。 | 茶色の革張りソファがあるリビングルーム |
+| **Imagem de entrada**:  Uma foto ampla de uma sala de estar moderna e bem iluminada...   Imagem de entrada   **Comando**:usando a imagem fornecida de uma sala de estar, mude apenas o sofá azul para um sofá chesterfield vintage de couro marrom. Mantenha o restante do ambiente, incluindo os travesseiros no sofá e a iluminação, inalterado. | Sala de estar com sofá de couro marrom |
 
-#### 画風変換
+#### Transferência de estilo
 
-画像を提供し、異なる画風でコンテンツを再現するようにモデルに指示します。
+Forneça uma imagem e peça para o modelo recriar o conteúdo dela em um estilo artístico diferente.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| **入力画像:**  にぎやかな街の通りのリアルな高解像度写真...   入力画像   **プロンプト:** 夜の都会のストリートの写真を、フィンセント ファン ゴッホの「星月夜」の画風に変換して。建物や車の元の構図はそのままに、すべての要素を渦巻くようなインパスト ブラシストロークと、濃い青と明るい黄色の劇的なパレットでレンダリングします。 | 星月夜風の街路 |
+| **Imagem de entrada**:  Uma fotografia fotorrealista de alta resolução de uma rua movimentada...   Imagem de entrada   **Comando**:transforme a fotografia fornecida de uma rua moderna da cidade à noite no estilo artístico de "Noite Estrelada" de Vincent van Gogh. Preserve a composição original de edifícios e carros, mas renderize todos os elementos com pinceladas giratórias e empastadas e uma paleta dramática de azuis profundos e amarelos brilhantes. | Rua da cidade no estilo &quot;Noite estrelada&quot; |
 
-#### 高度な構図: 複数の画像を組み合わせる
+#### Composição avançada: combinar várias imagens
 
-複数の画像をコンテキストとして提供し、新しい複合シーンを作成します。これは、プロダクト モックアップやクリエイティブ コラージュに最適です。
+Forneça várias imagens como contexto para criar uma cena nova e composta. Isso é perfeito para simulações de produtos ou colagens criativas.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| **入力画像:**  青い花柄の夏のワンピースのプロが撮影した写真...   入力 1: ドレス   髪を束ねた女性の全身写真...   入力 2: モデル   **プロンプト:** プロ仕様の e コマース ファッション写真を作成します。1 枚目の画像の青い花柄のドレスを、2 枚目の画像の女性に着せてください。屋外の環境に合わせて照明と影を調整し、ドレスを着た女性のリアルな全身ショットを生成します。 | ファッション e コマースのショット |
+| **Imagens de entrada:**  Uma foto profissional de um vestido de verão azul com estampa floral...   Entrada 1: vestido   Foto de corpo inteiro de uma mulher com o cabelo preso em um coque...   Entrada 2: modelo   **Comando**:crie uma foto profissional de moda para e-commerce. Pegue o vestido floral azul da primeira imagem e coloque na mulher da segunda imagem. Gere uma foto realista de corpo inteiro da mulher usando o vestido, com a iluminação e as sombras ajustadas para corresponder ao ambiente externo. | Foto de e-commerce de moda |
 
-#### 高忠実度の詳細保持
+#### Preservação de detalhes de alta fidelidade
 
-編集時に重要な詳細（顔やロゴなど）が保持されるように、編集リクエストとともに詳細を説明してください。
+Para garantir que detalhes importantes (como um rosto ou um logotipo) sejam preservados durante uma edição, descreva-os com muitos detalhes junto com sua solicitação de edição.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| **入力画像:**  茶色の髪と青い目の女性のビジネス用プロフィール写真...   入力 1: 女性   「G」と「A」の文字を使ったシンプルでモダンなロゴ...   入力 2: ロゴ   **プロンプト:** 茶色の髪、青い目、無表情の女性の最初の画像を取得します。2 枚目の画像のロゴを彼女の黒い T シャツに追加して。女性の顔と特徴が完全に変わらないようにします。ロゴは、シャツの折り目に沿って生地に自然にプリントされているように見える必要があります。 | ロゴ付きの T シャツを着た女性 |
+| **Imagens de entrada:**  Um retrato profissional de uma mulher com cabelo castanho e olhos azuis...   Entrada 1: mulher   Um logotipo simples e moderno com as letras &quot;G&quot; e &quot;A&quot;...   Entrada 2: logotipo   **Comando**:pegue a primeira imagem da mulher com cabelo castanho, olhos azuis e uma expressão neutra. Adicione o logo da segunda imagem à camiseta preta dela. Mantenha o rosto e as características da mulher completamente inalterados. O logotipo precisa parecer impresso naturalmente no tecido, seguindo as dobras da camisa. | Mulher com logotipo na camiseta |
 
-#### 命を吹き込む
+#### Dar vida a algo
 
-ラフスケッチや図面をアップロードし、モデルに完成した画像に仕上げるよう依頼します。
+Faça upload de um esboço ou desenho e peça ao modelo para refinar e criar uma imagem final.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| **入力画像:**  車のスケッチ   車のラフスケッチ   **プロンプト:** この未来的な車のラフな鉛筆スケッチを、ショールームに展示されている完成したコンセプトカーの洗練された写真に変換してください。スケッチの滑らかなラインとロープロファイルはそのままに、メタリック ブルーの塗装とネオンのリム照明を追加します。 | コンセプトカーの磨かれた写真 |
+| **Imagem de entrada**:  Esboço de um carro   Esboço de um carro   **Comando**:transforme este esboço a lápis de um carro futurista em uma foto refinada do carro-conceito finalizado em um showroom. Mantenha as linhas elegantes e o perfil baixo do esboço, mas adicione tinta azul metálica e iluminação neon na borda. | Foto polida de um carro conceito |
 
-#### キャラクターの一貫性: 360 度ビュー
+#### Consistência de personagens: visualização completa
 
-さまざまな角度を繰り返しプロンプトすることで、キャラクターの 360 度ビューを生成できます。最適な結果を得るには、一貫性を保つために、以前に生成した画像を後続のプロンプトに含めます。複雑なポーズの場合は、目的のポーズの参照画像を含めます。
+É possível gerar visualizações de 360 graus de um personagem pedindo ângulos diferentes de forma iterativa. Para ter os melhores resultados, inclua imagens geradas anteriormente em comandos subsequentes para manter a consistência. Para poses complexas, inclua uma imagem de referência da pose desejada.
 
-| **プロンプト** | **生成された出力** |
+| **Comando** | **Saída gerada** |
 | --- | --- |
-| **入力画像:**  白いメガネをかけた男性の元の入力   元の画像   **プロンプト:** 白い背景を背に、右を向いた横顔の男性のスタジオ ポートレート | 右を向いている白いメガネをかけた男性の出力   白い眼鏡をかけて右を向いている男性   白いメガネをかけて前を見ている男性の出力   白い眼鏡をかけて前を向いている男性 |
+| **Imagem de entrada**:  Entrada original de um homem com óculos brancos   Imagem original   **Comando**:um retrato de estúdio desse homem em um fundo branco, de perfil olhando para a direita | Saída de um homem de óculos brancos olhando para a direita   Homem de óculos brancos olhando para a direita   Saída de um homem com óculos brancos olhando para frente   Homem de óculos brancos olhando para frente |
 
-### ベスト プラクティス
+### Práticas recomendadas
 
-結果を優れたものにするには、これらのプロフェッショナルな戦略をワークフローに組み込みます。
+Para melhorar ainda mais seus resultados, incorpore estas estratégias profissionais ao seu fluxo de trabalho.
 
-- **非常に具体的にする:** 詳細に説明するほど、より細かく制御できます。「ファンタジー アーマー」ではなく、「銀の葉の模様がエッチングされた、装飾的なエルフのプレート アーマー。ハイカラーとハヤブサの翼の形をした肩当て付き」とします。
-- **コンテキストと意図を提供する:** 画像の*目的*を説明します。モデルのコンテキストの理解が最終出力に影響します。たとえば、「高級感のあるミニマリストのスキンケア ブランドのロゴを作成して」は、「ロゴを作成して」よりも効果的です。
-- **繰り返して改良:** 最初の試行で完璧な画像が生成されるとは限りません。モデルの会話的な性質を利用して、小さな変更を行います。「素晴らしいですが、照明をもう少し暖色にできますか？」や「すべてそのままにして、キャラクターの表情をもっとシリアスにしてください」などのフォローアップ プロンプトを使用します。
-- **手順ガイドを使用する:** 多くの要素を含む複雑なシーンの場合は、プロンプトを手順に分割します。「まず、夜明けの静かで霧のかかった森の背景を作成して。次に、前景に苔むした古代の石の祭壇を追加して。最後に、祭壇の上に光る剣を 1 本置いて。」
-- **「セマンティック ネガティブ プロンプト」を使用する:** 「車なし」ではなく、「交通の気配のない、空っぽの寂れた通り」のように、ポジティブな表現でシーンを説明します。
-- **カメラを制御する:** 写真や映画の撮影用語を使用して、構図を制御します。`wide-angle shot`、`macro shot`、`low-angle
-  perspective` などの用語。
+- **Seja muito específico**:quanto mais detalhes você fornecer, mais controle terá. Em vez de "armadura de fantasia", descreva: "armadura de placas élfica ornamentada, gravada com padrões de folhas de prata, com uma gola alta e ombreiras em forma de asas de falcão".
+- **Forneça contexto e intenção**:explique a *finalidade* da imagem. A compreensão do contexto pelo modelo influencia o resultado final. Por exemplo, "Crie um logotipo para uma marca de cuidados com a pele sofisticada e minimalista" vai gerar resultados melhores do que apenas "Crie um logotipo".
+- **Itere e refine**:não espere uma imagem perfeita na primeira tentativa. Use a natureza conversacional do modelo para fazer pequenas mudanças. Faça perguntas complementares como: "Ótimo, mas você pode deixar a iluminação um pouco mais quente?" ou "Mantenha tudo igual, mas mude a expressão do personagem para algo mais sério".
+- **Use instruções passo a passo**:para cenas complexas com muitos elementos, divida o comando em etapas. "Primeiro, crie um plano de fundo de uma floresta serena e enevoada ao amanhecer. Em seguida, em primeiro plano, adicione um altar de pedra antigo coberto de musgo.
+  Por fim, coloque uma espada brilhante em cima do altar."
+- **Use comandos negativos semânticos**: em vez de dizer "sem carros", descreva a cena desejada de forma positiva: "uma rua vazia e deserta sem sinais de trânsito".
+- **Controle a câmera**:use linguagem fotográfica e cinematográfica para controlar a composição. Termos como `wide-angle shot`, `macro shot` e `low-angle
+  perspective`.
 
-## 制限事項
+## Limitações
 
-- 最高のパフォーマンスを実現するには、EN、ar-EG、de-DE、es-MX、fr-FR、hi-IN、id-ID、it-IT、ja-JP、ko-KR、pt-BR、ru-RU、ua-UA、vi-VN、zh-CN のいずれかの言語を使用してください。
-- 画像生成では、音声入力はサポートされていません。動画入力は Gemini 3.1 Flash Image でのみサポートされています。
-- モデルは、ユーザーが明示的にリクエストした画像の出力数を正確に守るとは限りません。
-- `gemini-2.5-flash-image` は最大 3 枚の画像を、`gemini-3-pro-image` は高忠実度で 5 枚の画像をサポートし、合計で最大 14 枚の画像をサポートします。`gemini-3.1-flash-image` は、1 つのワークフローで最大 4 文字の文字類似性と最大 10 個のオブジェクトの忠実度をサポートします。
-- テキストを含む画像を生成するときは、まずテキストを生成してから、そのテキストを画像に変換するように頼むと、良い結果が得られます。
-- `gemini-3.1-flash-image` 現在、Google 検索によるグラウンディングでは、ウェブ検索から取得した人物の実写画像を使用することはできません。
-- 生成されたすべての画像には [SynthID の透かし](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ja)が埋め込まれています。
+- Para ter o melhor desempenho, use os seguintes idiomas: EN, ar-EG, de-DE, es-MX, fr-FR, hi-IN, id-ID, it-IT, ja-JP, ko-KR, pt-BR, ru-RU, ua-UA, vi-VN, zh-CN.
+- A geração de imagens não aceita entradas de áudio. As entradas de vídeo são compatíveis apenas com o Gemini 3.1 Flash Image.
+- O modelo nem sempre segue o número exato de imagens que o usuário pede explicitamente.
+- O `gemini-2.5-flash-image` funciona melhor com até três imagens como entrada, enquanto o `gemini-3-pro-image` aceita cinco imagens com alta fidelidade e até 14 imagens no total. O `gemini-3.1-flash-image` oferece suporte à semelhança de até quatro caracteres e à fidelidade de até 10 objetos em um único fluxo de trabalho.
+- Ao gerar texto para uma imagem, o Gemini funciona melhor se você primeiro gerar o texto e depois pedir uma imagem com ele.
+- `gemini-3.1-flash-image` No momento, a fundamentação com a Pesquisa Google não é compatível com o uso de imagens de pessoas do mundo real na pesquisa na Web.
+- Todas as imagens geradas incluem uma [marca-d'água do SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=pt-br).
 
-## オプションの構成
+## Configurações opcionais
 
-必要に応じて、`generate_content` 呼び出しの `config` フィールドで、モデルの出力のレスポンス モダリティとアスペクト比を構成できます。
+Você pode configurar as modalidades de resposta e a proporção da saída do modelo no campo `config` das chamadas `generate_content`.
 
-### 出力形式
+### Tipos de saída
 
-モデルはデフォルトでテキストと画像の両方のレスポンス（`response_modalities=['Text', 'Image']`）を返します。`response_modalities=['Image']` を使用すると、テキストなしで画像のみを返すようにレスポンスを構成できます。
+Por padrão, o modelo retorna respostas de texto e imagem (ou seja, `response_modalities=['Text', 'Image']`). Você pode configurar a resposta para retornar apenas imagens sem texto usando `response_modalities=['Image']`.
 
 ### Python
 
@@ -2929,9 +2962,11 @@ curl -s -X POST \
   }'
 ```
 
-### アスペクト比と画像サイズ
+### Proporções e tamanho da imagem
 
-モデルはデフォルトで、出力画像のサイズを入力画像のサイズに合わせるか、1:1 の正方形を生成します。レスポンス リクエストの `response_format` の `aspect_ratio` フィールドを使用して、出力画像のアスペクト比を制御できます。
+Por padrão, o modelo corresponde o tamanho da imagem de saída ao da imagem de entrada ou gera quadrados 1:1.
+É possível controlar a proporção da imagem de saída usando o campo `aspect_ratio`
+em `response_format` na solicitação de resposta, mostrada aqui:
 
 ### Python
 
@@ -3118,66 +3153,66 @@ curl -s -X POST \
   }'
 ```
 
-使用可能なさまざまな比率と生成される画像のサイズを次の表に示します。
+As diferentes proporções disponíveis e o tamanho da imagem gerada estão listados nas tabelas a seguir:
 
 ### 3.1 Flash Image
 
-| アスペクト比 | 512 解像度 | 0.5K トークン | 1K 解像度 | 1,000 トークン | 2K 解像度 | 2K トークン | 4K 解像度 | 4K トークン |
+| Proporção | Resolução 512 | 0,5 mil tokens | Resolução 1K | 1.000 tokens | Resolução 2K | 2 mil tokens | Resolução 4K | 4K tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024 x 1024 | 1120 | 2,048x2,048 | 1680 | 4096x4096 | 2520 |
-| **1:4** | 256x1024 | 747 | 512x2048 | 1120 | 1024x4096 | 1680 | 2048x8192 | 2520 |
+| **1:1** | 512x512 | 747 | 1024x1024 | 1120 | 2.048 x 2.048 | 1680 | 4096x4096 | 2520 |
+| **1:4** | 256x1024 | 747 | 512 x 2.048 | 1120 | 1024x4096 | 1680 | 2.048 x 8.192 | 2520 |
 | **1:8** | 192x1536 | 747 | 384x3072 | 1120 | 768x6144 | 1680 | 1536x12288 | 2520 |
 | **2:3** | 424x632 | 747 | 848x1264 | 1120 | 1696x2528 | 1680 | 3392x5056 | 2520 |
-| **3:2** | 632x424 | 747 | 1264x848 | 1120 | 2528x1696 | 1680 | 5056x3392 | 2520 |
-| **3:4** | 448×600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
-| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | 8192x2048 | 2520 |
-| **4:3** | 600×448 | 747 | 1,200×896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
-| **4:5** | 464×576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
-| **5:4** | 576x464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4608x3712 | 2520 |
+| **3:2** | 632x424 | 747 | 1264x848 | 1120 | 2.528 x 1.696 | 1680 | 5056x3392 | 2520 |
+| **3:4** | 448x600 | 747 | 896x1200 | 1120 | 1792x2400 | 1680 | 3584x4800 | 2520 |
+| **4:1** | 1024x256 | 747 | 2048x512 | 1120 | 4096x1024 | 1680 | 8.192 x 2.048 | 2520 |
+| **4:3** | 600x448 | 747 | 1200x896 | 1120 | 2400x1792 | 1680 | 4800x3584 | 2520 |
+| **4:5** | 464x576 | 747 | 928x1152 | 1120 | 1856x2304 | 1680 | 3712x4608 | 2520 |
+| **5:4** | 576x464 | 747 | 1152x928 | 1120 | 2304x1856 | 1680 | 4.608 x 3.712 | 2520 |
 | **8:1** | 1536x192 | 747 | 3072x384 | 1120 | 6144x768 | 1680 | 12288x1536 | 2520 |
-| **9:16** | 384x688 | 747 | 768x1376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
-| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5,504 x 3,072 | 2520 |
-| **21:9** | 792×168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
+| **9:16** | 384x688 | 747 | 768 x 1.376 | 1120 | 1536x2752 | 1680 | 3072x5504 | 2520 |
+| **16:9** | 688x384 | 747 | 1376x768 | 1120 | 2752x1536 | 1680 | 5504x3072 | 2520 |
+| **21:9** | 792x168 | 747 | 1584x672 | 1120 | 3168x1344 | 1680 | 6336x2688 | 2520 |
 
-### 3.1 Flash Lite Image
+### 3.1 Imagem do Flash Lite
 
-| アスペクト比 | 512 解像度 | 0.5K トークン | 1K 解像度 | 1,000 トークン |
+| Proporção | Resolução 512 | 0,5 mil tokens | Resolução 1K | 1.000 tokens |
 | --- | --- | --- | --- | --- |
-| **1:1** | 512x512 | 747 | 1024 x 1024 | 1120 |
-| **1:4** | 256x1024 | 747 | 512x2048 | 1120 |
+| **1:1** | 512x512 | 747 | 1024x1024 | 1120 |
+| **1:4** | 256x1024 | 747 | 512 x 2.048 | 1120 |
 | **1:8** | 192x1536 | 747 | 384x3072 | 1120 |
 | **2:3** | 424x632 | 747 | 848x1264 | 1120 |
 | **3:2** | 632x424 | 747 | 1264x848 | 1120 |
-| **3:4** | 448×600 | 747 | 896x1200 | 1120 |
+| **3:4** | 448x600 | 747 | 896x1200 | 1120 |
 | **4:1** | 1024x256 | 747 | 2048x512 | 1120 |
-| **4:3** | 600×448 | 747 | 1,200×896 | 1120 |
-| **4:5** | 464×576 | 747 | 928x1152 | 1120 |
+| **4:3** | 600x448 | 747 | 1200x896 | 1120 |
+| **4:5** | 464x576 | 747 | 928x1152 | 1120 |
 | **5:4** | 576x464 | 747 | 1152x928 | 1120 |
 | **8:1** | 1536x192 | 747 | 3072x384 | 1120 |
-| **9:16** | 384x688 | 747 | 768x1376 | 1120 |
+| **9:16** | 384x688 | 747 | 768 x 1.376 | 1120 |
 | **16:9** | 688x384 | 747 | 1376x768 | 1120 |
-| **21:9** | 792×168 | 747 | 1584x672 | 1120 |
+| **21:9** | 792x168 | 747 | 1584x672 | 1120 |
 
 ### 3.1 Pro Image
 
-| アスペクト比 | 1K 解像度 | 1,000 トークン | 2K 解像度 | 2K トークン | 4K 解像度 | 4K トークン |
+| Proporção | Resolução 1K | 1.000 tokens | Resolução 2K | 2 mil tokens | Resolução 4K | 4K tokens |
 | --- | --- | --- | --- | --- | --- | --- |
-| **1:1** | 1024 x 1024 | 1120 | 2,048x2,048 | 1120 | 4096x4096 | 2000 |
+| **1:1** | 1024x1024 | 1120 | 2.048 x 2.048 | 1120 | 4096x4096 | 2000 |
 | **2:3** | 848x1264 | 1120 | 1696x2528 | 1120 | 3392x5056 | 2000 |
-| **3:2** | 1264x848 | 1120 | 2528x1696 | 1120 | 5056x3392 | 2000 |
+| **3:2** | 1264x848 | 1120 | 2.528 x 1.696 | 1120 | 5056x3392 | 2000 |
 | **3:4** | 896x1200 | 1120 | 1792x2400 | 1120 | 3584x4800 | 2000 |
-| **4:3** | 1,200×896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
+| **4:3** | 1200x896 | 1120 | 2400x1792 | 1120 | 4800x3584 | 2000 |
 | **4:5** | 928x1152 | 1120 | 1856x2304 | 1120 | 3712x4608 | 2000 |
-| **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4608x3712 | 2000 |
-| **9:16** | 768x1376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
-| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5,504 x 3,072 | 2000 |
+| **5:4** | 1152x928 | 1120 | 2304x1856 | 1120 | 4.608 x 3.712 | 2000 |
+| **9:16** | 768 x 1.376 | 1120 | 1536x2752 | 1120 | 3072x5504 | 2000 |
+| **16:9** | 1376x768 | 1120 | 2752x1536 | 1120 | 5504x3072 | 2000 |
 | **21:9** | 1584x672 | 1120 | 3168x1344 | 1120 | 6336x2688 | 2000 |
 
-### Gemini 2.5 Flash Image
+### Imagem do Gemini 2.5 Flash
 
-| アスペクト比 | 解決策 | トークン |
+| Proporção | Resolução | Tokens |
 | --- | --- | --- |
-| 1:1 | 1024 x 1024 | 1290 |
+| 1:1 | 1024x1024 | 1290 |
 | 2:3 | 832x1248 | 1290 |
 | 3:2 | 1248x832 | 1290 |
 | 3:4 | 864x1184 | 1290 |
@@ -3188,31 +3223,33 @@ curl -s -X POST \
 | 16:9 | 1344x768 | 1290 |
 | 21:9 | 1536x672 | 1290 |
 
-## モデルの選択
+## Seleção de modelos
 
-特定のユースケースに最適なモデルを選択します。
+Escolha o modelo mais adequado ao seu caso de uso específico.
 
-- **Gemini 3.1 Flash Image（Nano Banana 2）**は、コストとレイテンシのバランスが取れた、最高の総合的なパフォーマンスとインテリジェンスを備えているため、画像生成モデルとして最適です。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.1-flash-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ja)のページをご覧ください。
-- **Gemini 3.1 Flash Lite Image（Nano Banana Lite）**は、画像生成ファミリーの効率化スペシャリストとして設計されており、超低レイテンシで費用対効果の高い画像生成と編集を実現します。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3.1-flash-lite-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja)のページをご覧ください。
-- **Gemini 3 Pro Image（Nano Banana Pro）**は、プロフェッショナルなアセット制作と複雑な指示に対応するように設計されています。このモデルは、Google 検索を使用した実世界のグラウンディング、生成前に構成を調整するデフォルトの「思考」プロセスを備えており、最大 4K の解像度の画像を生成できます。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-3-pro-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja)のページをご覧ください。
-- **Gemini 2.5 Flash Image（Nano Banana）**は、速度と効率性を重視して設計されています。このモデルは、大容量で低レイテンシのタスク向けに最適化されており、1, 024 ピクセルの解像度で画像を生成します。詳細については、モデルの[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#gemini-2.5-flash-image)と[機能](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=ja)のページをご覧ください。
+- O **Gemini 3.1 Flash Image (Nano Banana 2)** é o modelo de geração de imagens ideal, já que oferece o melhor desempenho e inteligência em geral para equilibrar custo e latência. Confira mais detalhes na página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3.1-flash-image) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=pt-br) do modelo.
+- O **Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite)** foi projetado como o especialista em eficiência da família de geração de imagens, oferecendo latência ultrabaixa e geração e edição de imagens econômicas.
+  Confira a página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3.1-flash-lite-image) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=pt-br) do modelo para mais detalhes.
+- O **Gemini 3 Pro Image (Nano Banana Pro)** foi desenvolvido para
+  produção de recursos profissionais e instruções complexas. Esse modelo tem embasamento no mundo real usando a Pesquisa Google, um processo padrão de "Pensamento" que refina a composição antes da geração e pode gerar imagens com resoluções de até 4K. Confira mais detalhes na página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-3-pro-image) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=pt-br) do modelo.
+- O **Gemini 2.5 Flash Image (Nano Banana)** foi projetado para ser rápido e eficiente. Ele é otimizado para tarefas de alto volume e baixa latência e gera imagens com resolução de 1024 px. Confira a página de [preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#gemini-2.5-flash-image) e [recursos](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=pt-br) do modelo para mais detalhes.
 
-### Imagen を使用する場面
+### Quando usar o Imagen
 
-Gemini の組み込みの画像生成機能を使用するだけでなく、Gemini API を介して Google の特別な画像生成モデルである [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja) にもアクセスできます。シャットダウン日より前に移行する計画を立ててください。
+Além de usar os recursos integrados de geração de imagens do Gemini, você também pode acessar o [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=pt-br), nosso modelo especializado de geração de imagens, pela API Gemini. Planeje a migração antes da data de desativação.
 
-## 次のステップ
+## A seguir
 
-- その他の例とコードサンプルについては、[クックブック ガイド](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=ja)をご覧ください。
-- Gemini API を使用して動画を生成する方法については、[Veo ガイド](https://ai.google.dev/gemini-api/docs/video?hl=ja)をご覧ください。
-- Gemini モデルの詳細については、[Gemini モデル](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja)をご覧ください。
+- Encontre mais exemplos e amostras de código no [guia de receitas](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_Started_Nano_Banana.ipynb?hl=pt-br).
+- Confira o [guia do Veo](https://ai.google.dev/gemini-api/docs/video?hl=pt-br) para saber como gerar vídeos com a API Gemini.
+- Para saber mais sobre os modelos do Gemini, consulte [Modelos do Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br).
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-06-30 UTC。
+Última atualização 2026-07-16 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-30 UTC。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-16 UTC."],[],[]]

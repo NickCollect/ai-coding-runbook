@@ -1,55 +1,53 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=es-419
-fetched_at: 2026-07-06T05:10:48.277119+00:00
-title: "Accede a Google AI Studio con tu cuenta de Workspace \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/workspace?hl=th
+fetched_at: 2026-07-20T04:48:38.712336+00:00
+title: "\u0e40\u0e02\u0e49\u0e32\u0e16\u0e36\u0e07 Google AI Studio \u0e14\u0e49\u0e27\u0e22\u0e1a\u0e31\u0e0d\u0e0a\u0e35 Workspace \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-# Accede a Google AI Studio con tu cuenta de Workspace
+# เข้าถึง Google AI Studio ด้วยบัญชี Workspace
 
-Todos los usuarios de [Google Workspace](https://workspace.google.com?hl=es-419) tienen acceso a AI
-Studio de forma predeterminada. Si eres usuario de Workspace y quieres comenzar a usar
-AI Studio, consulta la
-[guía de inicio rápido de AI Studio](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=es-419).
+ผู้ใช้ [Google Workspace](https://workspace.google.com?hl=th) ทุกคนมีสิทธิ์เข้าถึง AI
+Studio โดยค่าเริ่มต้น หากคุณเป็นผู้ใช้ Workspace และต้องการเริ่มต้นใช้งาน
+AI Studio โปรดดู[การเริ่มต้นใช้งาน AI Studio ฉบับย่อ](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart?hl=th)
 
-## Solución de problemas
+## การแก้ปัญหา
 
-Si el acceso a AI Studio está inhabilitado para tu cuenta de Google Workspace, es posible que veas un error como el siguiente:
+หากบัญชี Google Workspace ของคุณถูกปิดใช้การเข้าถึง AI Studio คุณอาจเห็นข้อผิดพลาดต่อไปนี้
 
 `We are sorry, but you do not have access to Google AI Studio. Please contact
 your Organization Administrator for access.`
 
-Si crees que deberías tener acceso a AI Studio, comunícate con tu administrador de Workspace.
+หากคิดว่าคุณควรมีสิทธิ์เข้าถึง AI Studio โปรดติดต่อผู้ดูแลระบบ Workspace
 
-## Cómo habilitar AI Studio para usuarios de Workspace
+## เปิดใช้ AI Studio สำหรับผู้ใช้ Workspace
 
-Como administrador de Google Workspace, puedes controlar quién usa AI Studio:
+ในฐานะผู้ดูแลระบบ Google Workspace คุณสามารถควบคุมผู้ที่ใช้ AI Studio ได้โดยทำดังนี้
 
-- AI Studio está activado de forma predeterminada para todas las ediciones.
-- Puedes activar o desactivar AI Studio para conjuntos de usuarios en unidades organizativas o entre ellas.
-- Ediciones de Google Workspace for Education: Los usuarios menores de 18 años no pueden usar AI Studio con sus cuentas de Google Workspace for Education. Esto ocurre incluso cuando la configuración de AI Studio está activada. Para obtener más detalles, consulta [Cómo controlar el acceso a los servicios de Google por
-  edad](https://support.google.com/a/answer/10651918?hl=es-419).
+- AI Studio จะเปิดอยู่โดยค่าเริ่มต้นสำหรับทุกรุ่น
+- คุณสามารถปิดหรือเปิด AI Studio สำหรับชุดผู้ใช้ในหรือภายใน
+  หน่วยขององค์กรได้
+- รุ่น Google Workspace for Education: ผู้ใช้ที่มีอายุต่ำกว่า 18 ปีจะถูกจำกัดไม่ให้ใช้ AI Studio ด้วยบัญชี Google Workspace for Education ของตนเอง ถึงแม้จะเปิดการตั้งค่า AI Studio อยู่ก็ตาม โปรดดูรายละเอียดที่หัวข้อ[ควบคุมสิทธิ์เข้าถึงบริการของ Google ตามอายุ](https://support.google.com/a/answer/10651918?hl=th)
 
-Para habilitar o inhabilitar AI Studio para los usuarios de tu organización, consulta
-[Cómo activar o desactivar Google AI Studio para los usuarios](https://support.google.com/a/answer/15004095?hl=es-419).
+หากต้องการเปิดหรือปิดใช้ AI Studio สำหรับผู้ใช้ในองค์กร โปรดดูหัวข้อ[เปิดหรือปิด Google AI Studio ให้กับผู้ใช้](https://support.google.com/a/answer/15004095?hl=th)
 
-Enviar comentarios
+ส่งความคิดเห็น
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Última actualización: 2026-04-29 (UTC)
+อัปเดตล่าสุด 2026-04-29 UTC
 
-¿Quieres brindar más información?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-04-29 UTC"],[],[]]

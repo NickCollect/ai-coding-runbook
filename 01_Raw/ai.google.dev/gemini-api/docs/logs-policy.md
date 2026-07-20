@@ -1,59 +1,88 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=zh-CN
-fetched_at: 2026-07-06T05:06:23.399536+00:00
-title: "\u6570\u636e\u8bb0\u5f55\u548c\u5171\u4eab \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/logs-policy?hl=it
+fetched_at: 2026-07-20T04:47:34.565900+00:00
+title: "Registrazione e condivisione dei dati \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-发送反馈
+Invia feedback
 
-# 数据记录和共享
+# Registrazione e condivisione dei dati
 
-本页面概述了 [Gemini API 日志](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=zh-cn)的存储和管理，这些日志是已启用结算功能的项目中受支持的 Gemini API 调用的开发者自有 API 数据。日志涵盖了从用户提出请求到模型做出回答的整个过程。
+Questa pagina descrive l'archiviazione e la gestione dei [log dell'API Gemini](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=it), ovvero i dati API di proprietà degli sviluppatori provenienti da chiamate API Gemini supportate per i progetti con la fatturazione abilitata. I log
+comprendono l'intero processo, dalla richiesta di un utente alla risposta del modello.
+Questi log, privati per il tuo progetto Google Cloud, sono separati da tutti i log conservati esclusivamente per scopi di [monitoraggio degli abusi](https://ai.google.dev/gemini-api/docs/usage-policies?hl=it).
 
-## 1. 可共享的数据
+## Dati che possono essere condivisi
 
-作为项目所有者，您可以选择启用 Gemini API 调用日志记录功能，以便自行使用或向 Google 提供反馈和分享信息，帮助我们不断改进模型。
+In qualità di proprietario del progetto, puoi scegliere di attivare il logging delle chiamate all'API Gemini,
+per uso personale o per feedback e condivisione con Google per aiutarci a migliorare continuamente
+i nostri modelli.
 
-启用日志记录后，您可以选择贡献以下数据，帮助我们构建对各个领域和用例的开发者都持续有价值的 AI 系统，以改进产品和模型训练：
+Se la registrazione è attivata, puoi aiutarci a creare sistemi di AI che continuino a essere
+utili per gli sviluppatori in vari campi e casi d'uso scegliendo di
+contribuire con i seguenti dati per il miglioramento del prodotto e l'addestramento del modello:
 
-- **数据集**：使用 Google AI Studio 的“日志和数据集”界面，从受支持的 Gemini API 调用中选择感兴趣的日志（请求、响应、元数据等）；通过包含在数据集中贡献，并在创建数据集期间可以选择退出。
-- **反馈**：查看日志时，您可以提供反馈，包括点赞/点踩评分以及您提供的任何书面评论。
+- **Set di dati**:utilizza l'interfaccia Log e set di dati di Google AI Studio per
+  scegliere i log (richieste, risposte, metadati e così via) di interesse dalle
+  chiamate API Gemini supportate; i log vengono forniti tramite l'inclusione nei set di dati, con la
+  possibilità di disattivare l'inclusione durante la creazione del set di dati.
+- **Feedback**:durante la revisione dei log, puoi fornire un feedback, incluse le valutazioni Mi piace e Non mi piace e qualsiasi commento scritto.
 
-如果您与 Google 分享数据集，系统会根据我们针对“[无偿服务](https://ai.google.dev/gemini-api/terms?hl=zh-cn#data-use-unpaid)”的[条款](https://developers.google.com/terms?hl=zh-cn)处理该数据集中的日志（包括请求和响应），这意味着该数据集可能会用于开发和改进 Google 产品、服务和机器学习技术，包括改进和训练我们的模型。**请勿包含个人信息、敏感信息或机密信息。**
+Quando condividi un set di dati con Google, i log in quel set di dati, incluse le richieste e le risposte, verranno elaborati in conformità ai nostri [Termini](https://developers.google.com/terms?hl=it) per i "[Servizi non a pagamento](https://ai.google.dev/gemini-api/terms?hl=it#data-use-unpaid)", il che significa che il set di dati potrebbe essere utilizzato per sviluppare e migliorare i prodotti, i servizi e le tecnologie di machine learning di Google, inclusi il miglioramento e l'addestramento dei nostri modelli. **Non includere informazioni personali, sensibili o riservate.**
 
-## 2. 我们会如何使用您的数据
+## Come utilizziamo i tuoi dati
 
-默认情况下，日志会在 55 天后过期。在此期限过后，这些功能将无法使用。您可以创建数据集，以保留此期限之外的感兴趣或有价值的日志，供下游使用情形使用，并可选择性地为模型改进做出贡献。存储在数据集中的日志没有设置过期日期，但每个项目的默认存储空间上限为 1,000 条日志。
+I log vengono conservati per un periodo massimo predefinito di 55 giorni. Trascorso questo periodo,
+i log vengono contrassegnati automaticamente per l'eliminazione. La finestra di conservazione dello spazio di archiviazione per un progetto può essere aggiornata in AI Studio per contrassegnare automaticamente i log per l'eliminazione dopo 7, 14, 28 o 55 giorni.
 
-默认情况下，由于日志记录仅适用于已启用结算的项目，因此日志中的提示和回答不会用于产品改进或开发，这符合我们关于数据使用的[条款](https://developers.google.com/terms?hl=zh-cn)。
+È possibile creare [dataset](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=it) per conservare i log di
+interesse oltre il periodo di conservazione impostato per i casi d'uso downstream e
+il contributo facoltativo ai miglioramenti del modello. I log archiviati nei set di dati non
+hanno periodi di conservazione impostati.
 
-如果您选择与 Google 分享日志数据集，这些数据集将用作实际演示数据，以便更好地了解 AI 系统和应用所使用的网域和上下文的多样性。这些数据可能会用于提高模型质量，并为未来模型和服务的训练和评估提供信息。我们会根据[免费服务](https://ai.google.dev/gemini-api/terms?hl=zh-cn#data-use-unpaid)的数据使用条款处理这些数据。
-因此，人工审核员可能会读取、批注和处理您分享的 API 输入和输出。在将数据用于改进模型之前，Google 会在此过程中采取措施来保护用户隐私。其中包括消除这些数据与您的 Google 账号、API 密钥和云项目的关联，然后才允许审核员查看或添加注释。
+Per impostazione predefinita, poiché la registrazione è disponibile solo per i progetti con fatturazione abilitata,
+i prompt e le risposte all'interno dei log non vengono utilizzati per il miglioramento o lo
+sviluppo dei prodotti, in conformità con i nostri [Termini](https://developers.google.com/terms?hl=it)
+sull'utilizzo dei dati.
 
-## 3. 数据权限
+Se scegli di condividere i set di dati dei tuoi log con Google, questi verranno
+utilizzati come dati dimostrativi reali per comprendere meglio la diversità di
+domini e contesti in cui vengono utilizzati i sistemi e le applicazioni di AI. Questi dati potrebbero essere
+utilizzati per migliorare la qualità del modello e informare l'addestramento e la valutazione di futuri
+modelli e servizi. Questi dati vengono trattati in conformità ai nostri termini di utilizzo dei dati per i [Servizi non a pagamento](https://ai.google.dev/gemini-api/terms?hl=it#data-use-unpaid).
 
-选择贡献 API 数据即表示您确认，您已授予 Google 必要权限，以便 Google 能够按照本文档中的说明处理和使用这些数据。**请勿提供包含通过付费服务获得的敏感信息、机密信息或专有信息的日志**。您根据 API 条款中“[提交内容](https://developers.google.com/terms?hl=zh-cn#b_submission_of_content)”部分向 Google 授予的许可还扩展到您提交给本服务的任何内容（例如提示，包括关联的系统指令、缓存的内容和文件，如图片、视频或文档）以及任何生成的回答，但仅限在适用法律要求我们使用这些内容时。
+Di conseguenza, i revisori umani potrebbero leggere, annotare ed elaborare gli input e gli output delle API che condividi. Prima che i dati vengano utilizzati per il miglioramento del modello, Google adotta misure
+per proteggere la privacy degli utenti nell'ambito di questa procedura. Ciò include la disconnessione di questi dati dal tuo Account Google, dalla chiave API e dal progetto Cloud prima che i revisori li vedano o li annotino.
 
-## 4. 数据共享和反馈
+## Autorizzazioni dati
 
-您可以选择分享数据作为示例，帮助我们推进 AI 研究、Gemini API 和 Google AI Studio 的前沿发展，从而使我们能够不断改进各种情境下的模型，并构建在各种领域和使用情形下对开发者都持续有价值的 AI 系统。
+Se accetti di contribuire con i dati dell'API, confermi di disporre delle autorizzazioni necessarie per consentire a Google di trattare e utilizzare i dati come descritto in questa documentazione. **Non contribuire con log contenenti informazioni sensibili, riservate o proprietarie ottenute tramite il servizio a pagamento**.
+La licenza che concedi a Google ai sensi della sezione "[Invio di contenuti](https://developers.google.com/terms?hl=it#b_submission_of_content)"
+dei Termini delle API si estende anche, nella misura richiesta dalla legge
+vigente per il nostro utilizzo, a qualsiasi contenuto (ad es. prompt, incluse istruzioni
+di sistema associate, contenuti memorizzati nella cache e file come immagini, video o documenti)
+che invii ai Servizi e a qualsiasi risposta generata.
 
-发送反馈
+## Condivisione dei dati e feedback
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Puoi aiutarci a far progredire la ricerca sull'AI, l'API Gemini e Google AI Studio attivando la condivisione dei tuoi dati come esempi, consentendoci di migliorare continuamente i nostri modelli in vari contesti e di creare sistemi di AI che continuino a essere utili agli sviluppatori in vari campi e casi d'uso.
 
-最后更新时间 (UTC)：2026-06-01。
+Invia feedback
 
-需要向我们提供更多信息？
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-01。"],[],[]]
+Ultimo aggiornamento 2026-07-09 UTC.
+
+Vuoi dirci altro?
+
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-09 UTC."],[],[]]

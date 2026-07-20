@@ -1,99 +1,98 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tools?hl=he
-fetched_at: 2026-07-06T05:10:05.941303+00:00
-title: "\u05e9\u05d9\u05de\u05d5\u05e9 \u05d1\u05db\u05dc\u05d9 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tools?hl=ja
+fetched_at: 2026-07-20T04:48:36.002298+00:00
+title: "Gemini API \u3067\u30c4\u30fc\u30eb\u3092\u4f7f\u7528\u3059\u308b \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-שליחת משוב
+フィードバックを送信
 
-# שימוש בכלי Gemini API
+# Gemini API でツールを使用する
 
-הכלים מרחיבים את היכולות של מודלי Gemini, ומאפשרים להם לבצע פעולות בעולם, לגשת למידע בזמן אמת ולבצע משימות חישוביות מורכבות. מודלים יכולים להשתמש בכלים גם באינטראקציות רגילות של בקשה ותגובה וגם בסשנים של סטרימינג בזמן אמת באמצעות [Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=he).
+ツールは Gemini モデルの機能を拡張し、現実世界でのアクション、リアルタイムの情報へのアクセス、複雑な計算タスクの実行を可能にします。モデルは、[Live API](https://ai.google.dev/gemini-api/docs/live-tools?hl=ja) を使用して、標準のリクエストとレスポンスのやり取りとリアルタイム ストリーミング セッションの両方でツールを使用できます。
 
-כלים הם יכולות ספציפיות (כמו חיפוש Google או הרצת קוד) שמודל יכול להשתמש בהן כדי לענות על שאילתות. ‫Gemini API מספק חבילה של כלים מובנים ומנוהלים באופן מלא, או שאתם יכולים להגדיר כלים בהתאמה אישית באמצעות [קריאה לפונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
+ツールは、モデルがクエリへの回答に使用できる特定の機能（Google 検索やコード実行など）です。Gemini API は、フルマネージドの組み込みツール スイートを提供します。また、[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)を使用してカスタムツールを定義することもできます。
 
-כדי ליצור מערכות מרובות שלבים שמכוונות להשגת יעדים, אפשר לעיין במאמר [סקירה כללית על סוכנים](https://ai.google.dev/gemini-api/docs/agents?hl=he).
+マルチステップの目標指向システムを構築するには、[エージェントの概要](https://ai.google.dev/gemini-api/docs/agents?hl=ja)をご覧ください。
 
-## כלים מובנים זמינים
+## 利用可能な組み込みツール
 
-| כלי | תיאור | תרחישים לדוגמה |
+| ツール | 説明 | ユースケース |
 | --- | --- | --- |
-| [חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) | התשובות מבוססות על אירועים עכשוויים ועובדות מהאינטרנט כדי לצמצם את ההזיות. | ‫- מענה לשאלות על אירועים מהזמן האחרון   ‫- אימות עובדות באמצעות מגוון מקורות |
-| [מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he) | פיתוח ממשקי Assistant שמודעים למיקום ויכולים למצוא מקומות, לקבל מסלולים ולספק הקשר מקומי עשיר. | ‫- תכנון מסלולי נסיעה עם כמה עצירות   ‫- חיפוש עסקים מקומיים על סמך קריטריונים של המשתמש |
-| [Code Execution](https://ai.google.dev/gemini-api/docs/code-execution?hl=he) | לאפשר למודל לכתוב ולהריץ קוד Python כדי לפתור בעיות מתמטיות או לעבד נתונים בצורה מדויקת. | ‫- פתרון משוואות מתמטיות מורכבות   ‫- עיבוד וניתוח מדויקים של נתוני טקסט |
-| [הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he) | הנחיית המודל לקרוא ולנתח תוכן מדפי אינטרנט או ממסמכים ספציפיים. | ‫- מענה לשאלות על סמך כתובות URL או מסמכים ספציפיים   ‫- אחזור מידע מדפי אינטרנט שונים |
-| [שימוש במחשב (תצוגה מקדימה)](https://ai.google.dev/gemini-api/docs/computer-use?hl=he) | אפשר לאפשר ל-Gemini לצפות במסך וליצור פעולות לאינטראקציה עם ממשקי משתמש של דפדפני אינטרנט (ביצוע בצד הלקוח). | ‫- אוטומציה של תהליכי עבודה חוזרים שמבוססים על אינטרנט   ‫- בדיקה של ממשקי משתמש של אפליקציות אינטרנט |
-| [חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he) | יצירת אינדקס וחיפוש במסמכים שלכם כדי להפעיל Retrieval-Augmented Generation (יצירה משולבת-אחזור, RAG). | ‫- חיפוש במדריכים טכניים   ‫- מענה לשאלות על נתונים קנייניים |
+| [Google 検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja) | ウェブ上の最新の出来事や事実に基づいて回答を生成し、ハルシネーションを減らします。 | \- 最近の出来事に関する質問に答える   \- さまざまなソースで事実を確認する |
+| [Google マップ](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja) | 場所の検索、ルートの取得、豊富なローカル コンテキストの提供が可能な位置認識アシスタントを構築します。 | - 複数の立ち寄り先を含む旅行プランの作成   - ユーザーの条件に基づくローカル ビジネスの検索 |
+| [コードの実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja) | モデルが Python コードを記述して実行し、数学の問題を解決したり、データを正確に処理したりできるようにします。 | \- 複雑な数式を解く   \- テキストデータを正確に処理、分析する |
+| [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja) | 特定のウェブページやドキュメントのコンテンツを読み取って分析するようにモデルに指示します。 | \- 特定の URL またはドキュメントに基づいて質問に回答する   \- さまざまなウェブページから情報を取得する |
+| [コンピュータ使用（プレビュー）](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja) | Gemini が画面を表示し、ウェブブラウザの UI を操作するアクションを生成できるようにします（クライアント サイド実行）。 | \- ウェブベースの反復的なワークフローの自動化   \- ウェブ アプリケーションのユーザー インターフェースのテスト |
+| [ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja) | 独自のドキュメントをインデックス登録して検索し、検索拡張生成（RAG）を有効にします。 | - 技術マニュアルの検索   - 独自データに関する質問応答 |
 
-פרטים על העלויות שמשויכות לכלים ספציפיים מופיעים [בדף התמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he#pricing_for_tools).
+特定のツールに関連する費用の詳細については、[料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing_for_tools)をご覧ください。
 
-## איך מתבצעת הרצת כלים
+## ツールの実行の仕組み
 
-הכלים מאפשרים למודל לבקש פעולות במהלך שיחה. התהליך שונה בהתאם לסוג הכלי: כלי מובנה (בניהול Google) או כלי בהתאמה אישית (בניהול שלכם).
+ツールを使用すると、モデルは会話中にアクションをリクエストできます。ツールが組み込み（Google が管理）かカスタム（ユーザーが管理）かによって、フローは異なります。
 
-### תהליך עבודה מובנה בכלי
+### 組み込みツールのフロー
 
-בכלים המובנים (חיפוש Google, מפות Google, הקשר של כתובת URL, חיפוש קבצים, הרצת קוד), התהליך כולו מתבצע בקריאה אחת ל-API:
+組み込みツール（Google 検索、Google マップ、URL コンテキスト、ファイル検索、コード実行）の場合、プロセス全体が 1 回の API 呼び出しで行われます。
 
-1. **אתם** שולחים הנחיה: "What is the square root of the latest stock price of
-   GOOG?"
-2. ‫**Gemini** מחליט שהוא צריך כלים ומפעיל אותם בשרתים של Google (למשל, מחפש את מחיר המניה ואז מריץ קוד Python כדי לחשב את השורש הריבועי).
-3. ‫**Gemini** מחזיר את התשובה הסופית שמבוססת על תוצאות הכלי.
+1. **ユーザー**が「GOOG の最新の株価の平方根は？」というプロンプトを送信します。
+2. **Gemini** はツールが必要であると判断し、Google のサーバーでツールを実行します（株価を検索してから、Python コードを実行して平方根を計算するなど）。
+3. **Gemini** は、ツールの結果に基づいて最終的な回答を返します。
 
-### תהליך מותאם אישית של שימוש בכלי (בקשה להפעלת פונקציה)
+### カスタムツールフロー（関数呼び出し）
 
-בכלים מותאמים אישית ובשימוש במחשב, האפליקציה מטפלת בהרצה:
+カスタムツールとコンピュータ使用の場合、アプリケーションが実行を処理します。
 
-1. **אתם** שולחים הנחיה עם הצהרות על פונקציות (כלים).
-2. ‫**Gemini** עשוי להחזיר JSON מובנה כדי לקרוא לפונקציה ספציפית (לדוגמה, `{"name": "get_order_status", "args": {"order_id": "123"}}`), תמיד עם `id` ייחודי.
-3. **אתם** מריצים את הפונקציה באפליקציה או בסביבה שלכם.
-4. **אתם** שולחים את תוצאות הפונקציה, עם אותו `id` כמו בקשה להפעלת פונקציה, בחזרה אל Gemini.
-5. ‫**Gemini** משתמש בתוצאות כדי ליצור תשובה סופית או כדי להפעיל כלי אחר.
+1. **ユーザー**は、関数（ツール）宣言とともにプロンプトを送信します。
+2. **Gemini** は、常に一意の `id` を使用して、特定の関数（`{"name": "get_order_status", "args": {"order_id": "123"}}` など）を呼び出すために構造化された JSON を返送することがあります。
+3. **ユーザー**がアプリケーションまたは環境で関数を実行します。
+4. 関数呼び出しと同じ `id` を使用して、関数の結果を Gemini に送り返します。
+5. **Gemini** は、結果を使用して最終的なレスポンスまたは別のツール呼び出しを生成します。
 
-מידע נוסף מפורט ב[מדריך להפעלת פונקציות](https://ai.google.dev/gemini-api/docs/function-calling?hl=he).
+詳しくは、[関数呼び出しガイド](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)をご覧ください。
 
-### שילוב של כלים מובנים וכלים בהתאמה אישית
+### 組み込みツールとカスタムツールのフローを組み合わせる
 
-בבקשות שמשלבות בין כלים מובנים לבין כלים מותאמים אישית (קריאות לפונקציות), המודל משתמש ב[העברת הקשר של הכלים](https://ai.google.dev/gemini-api/docs/toold-combination?hl=he) כדי לתאם את הביצוע בסביבות שונות:
+組み込みツールとカスタムツール（関数呼び出し）を組み合わせたリクエストの場合、モデルは[ツール コンテキストの循環](https://ai.google.dev/gemini-api/docs/toold-combination?hl=ja)を使用して、さまざまな環境での実行を調整します。
 
-1. **אתם** שולחים הנחיה ומצהירים על הכלים המובנים ועל הפונקציות בהתאמה אישית שאתם רוצים להפעיל, ומגדירים דגל כדי להפעיל תמיכה בשילוב.
-2. ‫**Gemini** מפעיל כלים מובנים ומתעדף את המשתמש אם נוצרות קריאות לפונקציות בצד הלקוח (הסדר שבו הן מופעלות תלוי בהנחיה ובהחלטה של המודל). הוא מחזיר תשובה עם:
-   - אישור של הפעלת הכלי
-   - תוצאות התגובה של הכלי (יכול להיות שהן יופיעו אחרי ה-JSON אם המודל יצר שתי קריאות מקבילות לפונקציות)
-   - ‫JSON מובנה לקריאה לפונקציה
-   - חתימות מוצפנות של מחשבות כדי לשמור על ההקשר
-3. **אתם** מריצים את הפונקציה באפליקציה או בסביבה שלכם.
-4. **אתם** מחזירים את כל החלקים של התשובה של Gemini, בנוסף לתוצאות של בקשה להפעלת פונקציה.
-5. ‫**Gemini** יוצר את התשובה הסופית על סמך כל ההקשר המשולב.
+1. **ユーザー**は、プロンプトを送信し、有効にする組み込みツールとカスタム関数を宣言して、組み合わせサポートをオンにするフラグを設定します。
+2. **Gemini** は、組み込みツールを実行し、クライアントサイドの関数呼び出しが生成された場合はユーザーに譲ります（最初に実行されるのは、プロンプトとモデルの判断によって異なります）。次のようなレスポンスが返されます。
+   - ツール呼び出しの確認
+   - ツール レスポンスの結果（モデルが 2 つの並列関数呼び出しを生成した場合、JSON の後に続くことがあります）
+   - 関数を呼び出す構造化 JSON
+   - コンテキストを保持するための暗号化された思考シグネチャ
+3. **ユーザー**がアプリケーションまたは環境で関数を実行します。
+4. **ユーザー**は、Gemini のレスポンスのすべての部分と、関数呼び出しの結果を返します。
+5. **Gemini** は、結合されたすべてのコンテキストを使用して最終的な回答を生成します。
 
-ב[מדריך לשילוב כלים](https://ai.google.dev/gemini-api/docs/tool-combination?hl=he) מוסבר איך להפעיל תמיכה בשילוב של כלים מובנים וכלים בהתאמה אישית, ומוצגות דוגמאות להעברת הקשר.
+[ツールの組み合わせガイド](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)で、組み込みツールとカスタムツールの組み合わせのサポートを有効にする方法と、コンテキストの循環の例をご覧ください。
 
-## פלט מובנה לעומת בקשה להפעלת פונקציה
+## 構造化出力と関数呼び出し
 
-‫Gemini מציע שתי שיטות ליצירת פלט מובנה. משתמשים ב[קריאה לפונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) כשהמודל צריך לבצע שלב ביניים על ידי התחברות לכלים או למערכות נתונים משלכם. כדאי להשתמש ב[פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) כשאתם צריכים שהתשובה הסופית של המודל תתאים לסכימה ספציפית, למשל כדי לעבד ממשק משתמש מותאם אישית.
+Gemini には、構造化された出力を生成する 2 つの方法があります。モデルが独自のツールやデータシステムに接続して中間ステップを実行する必要がある場合は、[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)を使用します。カスタム UI のレンダリングなど、モデルの最終的なレスポンスが特定のスキーマに厳密に準拠する必要がある場合は、[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を使用します。
 
-## פלט מובנה עם כלים
+## ツールを使用した構造化出力
 
-אתם יכולים לשלב [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) עם כלים מובנים כדי לוודא שהתשובות של המודל שמבוססות על נתונים חיצוניים או על חישובים עדיין עומדות בדרישות של סכמה מחמירה.
+[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)と組み込みツールを組み合わせることで、外部データまたは計算に基づいてグラウンディングされたモデルのレスポンスが厳密なスキーマに準拠するようにできます。
 
-דוגמאות קוד מופיעות במאמר בנושא [פלט מובנה עם כלים](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=he#structured_outputs_with_tools).
+コード例については、[ツールを使用した構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?example=recipe&hl=ja#structured_outputs_with_tools)をご覧ください。
 
-שליחת משוב
+フィードバックを送信
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-עדכון אחרון: 2026-04-29 (שעון UTC).
+最終更新日 2026-04-29 UTC。
 
-רוצה לתת לנו משוב?
+ご意見をお聞かせください
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-04-29 UTC。"],[],[]]

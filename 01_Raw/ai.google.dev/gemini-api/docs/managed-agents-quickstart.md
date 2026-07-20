@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr
-fetched_at: 2026-07-06T05:19:38.533194+00:00
-title: "Y\u00f6netilen Ajanlar H\u0131zl\u0131 Ba\u015flang\u0131\u00e7 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=hi
+fetched_at: 2026-07-20T04:36:23.510889+00:00
+title: "\u092e\u0948\u0928\u0947\u091c \u0915\u093f\u090f \u0917\u090f \u090f\u091c\u0947\u0902\u091f\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f \u0915\u094d\u0935\u093f\u0915\u0938\u094d\u091f\u093e\u0930\u094d\u091f \u0917\u093e\u0907\u0921 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Yönetilen Ajanlar Hızlı Başlangıç
+# मैनेज किए गए एजेंटों के लिए क्विकस्टार्ट गाइड
 
-Bu kılavuzda, [Antigravity agent](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=tr)'ı kullanarak Gemini API'de Yönetilen Ajanlar oluşturma ve kullanma adımları açıklanmaktadır. İlk temsilci görüşmenizi yapacak, çok turlu bir sohbete devam edecek, yanıtı yayınlayacak, korumalı alandan dosya indirecek ve Antigravity tarafından yönetilen temsilciyle çalışacaksınız.
+इस गाइड में, [Antigravity एजेंट](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=hi) का इस्तेमाल करके, Gemini API पर मैनेज किए गए एजेंट बनाने और उनका इस्तेमाल करने का तरीका बताया गया है. आपको एजेंट से पहला कॉल करने, कई बार बातचीत जारी रखने, जवाब स्ट्रीम करने, सैंडबॉक्स से फ़ाइलें डाउनलोड करने, और Antigravity के मैनेज किए गए एजेंट के साथ काम करने का मौका मिलेगा.
 
-## İlk temsilci etkileşiminizi çalıştırma
+## एजेंट के साथ पहली बार इंटरैक्ट करना
 
-[Interactions API](https://ai.google.dev/gemini-api/docs?hl=tr)'ye yapılan tek bir çağrı, Linux özel korumalı alanını sağlar, aracı döngüsünü çalıştırır ve sonucu döndürür. Üç parametre tanımlarsınız:
+[Interactions API](https://ai.google.dev/gemini-api/docs?hl=hi) को एक बार कॉल करने पर, Linux सैंडबॉक्स उपलब्ध कराया जाता है, एजेंट लूप चलाया जाता है, और नतीजा दिखाया जाता है. आपको तीन पैरामीटर तय करने होंगे:
 
-- Önceden tanımlanmış ve genel amaçlı yönetilen aracımızın mevcut sürümü olan `agent` değerini `"antigravity-preview-05-2026",` olarak iletin.
-- Yeni bir temiz sanal alan ortamı sağlamak için `environment="remote"` tanımlayın.
-- Temsilcinin ne yapmasını istediğinizi tanımlayan bir giriş oluşturun.
+- `agent` को `"antigravity-preview-05-2026",` के तौर पर पास करें. यह पहले से तय और सामान्य मकसद के लिए मैनेज किए जाने वाले एजेंट का मौजूदा वर्शन है.
+- `environment="remote"` को तय करें, ताकि नया सैंडबॉक्स एनवायरमेंट उपलब्ध कराया जा सके.
+- एक इनपुट बनाएं और उसमें बताएं कि आपको एजेंट से क्या काम करवाना है.
 
 ### Python
 
@@ -79,16 +79,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Yanıt, `Interaction` nesnesi döndürür. Aynı korumalı alanda sohbete devam etmek için `interaction.id` ve `interaction.environment_id` değerlerini saklayın. Temsilcinin son yanıtına erişmek için `interaction.output_text` simgesini kullanın. `interaction.steps`, aracının gerçekleştirdiği her adımı (gerekçe, araç çağrıları, kod yürütme) listeler.
+जवाब में, एक `Interaction` ऑब्जेक्ट मिलता है. `interaction.id` और `interaction.environment_id` को सेव करें, ताकि उसी सैंडबॉक्स में बातचीत जारी रखी जा सके. एजेंट के आखिरी जवाब को ऐक्सेस करने के लिए, `interaction.output_text` का इस्तेमाल करें. `interaction.steps` में, एजेंट की ओर से किए गए हर चरण की जानकारी दी गई होती है. जैसे, तर्क, टूल कॉल, कोड एक्ज़ीक्यूट करना.
 
-## Görüşmeye devam etme (çok adımlı)
+## बातचीत जारी रखना (कई बार)
 
-API, iki bağımsız durum boyutunu izler:
+यह एपीआई, दो इंडिपेंडेंट स्टेट डाइमेंशन ट्रैक करता है:
 
-- **Sohbet bağlamı:** Sohbet geçmişi, akıl yürütme izi, araç kullanımı, `previous_interaction_id` kullanımı.
-- [**Ortam durumu:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr) `environment` kullanılarak dosyalar, yüklü paketler ve korumalı alan durumu.
+- **बातचीत का कॉन्टेक्स्ट:** चैट का इतिहास, तर्क का पता लगाना, टूल का इस्तेमाल करना, और `previous_interaction_id` का इस्तेमाल करना.
+- [**एनवायरमेंट की स्थिति:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi) फ़ाइलें, इंस्टॉल किए गए पैकेज, और सैंडबॉक्स की स्थिति. इसके लिए, `environment` का इस्तेमाल किया जाता है.
 
-Devam etmek için her ikisini de ilgili yere yerleştirin:
+इन दोनों को इनकी जगह पर पास करें, ताकि प्रोसेस को फिर से शुरू किया जा सके:
 
 ### Python
 
@@ -130,20 +130,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-1. turdaki dosyalar (`fibonacci.txt`) 2. turda kalır. Temsilci, sohbet bağlamını da korur.
+पहले टर्न (`fibonacci.txt`) की फ़ाइलें, दूसरे टर्न में भी मौजूद रहती हैं. एजेंट के पास बातचीत का कॉन्टेक्स्ट भी बना रहता है.
 
-Bunları bağımsız olarak karıştırıp eşleştirebilirsiniz:
+इनको अलग-अलग तरीके से इस्तेमाल किया जा सकता है:
 
-- **Net görüşme, dosyaları saklama:** `previous_interaction_id` simgesini atlayın, aynı çalışma alanında yeni bir görüşme için yalnızca `environment` kullanarak ortam kimliğini iletin.
-- **Sohbeti sürdürme, yeni çalışma alanı:** Geçiş `previous_interaction_id`, yeni bir sandbox için `environment="remote"` ayarlayın.
+- **बातचीत मिटाएं, फ़ाइलें सेव रखें:** `previous_interaction_id` को शामिल न करें. सिर्फ़ `environment` का इस्तेमाल करके एनवायरमेंट आईडी पास करें, ताकि उसी वर्कस्पेस में नई बातचीत शुरू की जा सके.
+- **बातचीत जारी रखें, नया वर्कस्पेस:** `previous_interaction_id` पास करें और नए सैंडबॉक्स के लिए `environment="remote"` सेट करें.
 
-### Otomatik bağlam sıkıştırma
+### कॉन्टेक्स्ट को अपने-आप छोटा करने की सुविधा
 
-Uzun süren, çok turlu sohbetlerde, muhakeme adımlarının, araç çağrılarının ve büyük dosya içeriklerinin ham geçmişi hızla büyüyebilir ve önemli miktarda bağlam alanı tüketebilir. Yönetilen Aracılar API'si, jeton sınırı hatalarını önlemek ve aracının odak noktasını korumak (bağlam bozulmasını önlemek) için yaklaşık 135.000 jetonluk yerel bir bağlam sıkıştırma adımına sahiptir. Bu, otomatik olarak gerçekleşir.
+लंबे समय तक चलने वाली, कई बार की बातचीत में, तर्क देने के चरणों, टूल कॉल, और बड़ी फ़ाइल के कॉन्टेंट का रॉ डेटा तेज़ी से बढ़ सकता है. इससे कॉन्टेक्स्ट के लिए उपलब्ध जगह काफ़ी कम हो जाती है. टोकन की सीमा से जुड़ी गड़बड़ियों को रोकने और एजेंट का फ़ोकस बनाए रखने (कॉन्टेक्स्ट रोट को रोकने) के लिए, Managed Agents API में करीब 1,35,000 टोकन पर कॉन्टेक्स्ट कंपैक्शन का एक नेटिव चरण होता है. यह अपने-आप होता है.
 
-## Yanıtı akış şeklinde gösterme
+## जवाब को स्ट्रीम करना
 
-Uzun süren görevlerde, temsilcinin çalışmasını anlık olarak görmek için yanıtı yayınlayabilirsiniz:
+लंबे समय तक चलने वाले टास्क के लिए, जवाब को स्ट्रीम किया जा सकता है. इससे एजेंट को रीयल टाइम में काम करते हुए देखा जा सकता है:
 
 ### Python
 
@@ -196,11 +196,11 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-Yayın, adım farklılıklarının yinelenebilir bir değerini döndürür. Bu değerler, artımlı metin, akıl yürütme jetonları ve araç çağrısı güncellemeleridir. Yanıtları yayınlama hakkında daha fazla bilgiyi [Yayınlama kılavuzu](https://ai.google.dev/gemini-api/docs/streaming?hl=tr)'nda bulabilirsiniz.
+स्ट्रीमिंग से, चरण के अंतर का एक इटरेबल मिलता है. यह इंक्रीमेंटल टेक्स्ट, तर्क के टोकन, और टूल कॉल के अपडेट होते हैं. [स्ट्रीमिंग गाइड](https://ai.google.dev/gemini-api/docs/streaming?hl=hi) में, जवाबों को स्ट्रीम करने के तरीके के बारे में ज़्यादा जानें.
 
-## Ortamdan dosya indirme
+## एनवायरमेंट से फ़ाइलें डाउनलोड करना
 
-Aracı, sanal ortamda dosya oluşturduğunda Doğrudan HTTP isteğiyle (henüz SDK yöntemi yok) Files API'yi kullanarak indirin:
+जब एजेंट, सैंडबॉक्स में फ़ाइलें बनाता है. इन्हें सीधे एचटीटीपी अनुरोध (अभी तक कोई एसडीके तरीका नहीं है) के साथ Files API का इस्तेमाल करके डाउनलोड करें:
 
 ### Python
 
@@ -267,13 +267,13 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/environme
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## Yönetilen bir aracıyı kaydetme
+## मैनेज किए जा रहे एजेंट को सेव करना
 
-Önceki adımlarda varsayılan Antigravity aracısını kullandık ve satır içi olarak özelleştirdik. Yapılandırmanızı (talimatlar, beceriler ve ortam) yineledikten sonra yönetilen bir aracı olarak kaydedebilirsiniz. Bu sayede, yapılandırmayı tekrarlamadan kimliğe göre çağırabilirsiniz.
+पिछले चरणों में, हमने डिफ़ॉल्ट Antigravity एजेंट का इस्तेमाल किया था और उसे इनलाइन तरीके से पसंद के मुताबिक बनाया था. कॉन्फ़िगरेशन (निर्देश, स्किल, और एनवायरमेंट) को दोहराने के बाद, इसे मैनेज किए जा सकने वाले एजेंट के तौर पर सेव किया जा सकता है. इससे कॉन्फ़िगरेशन को दोहराए बिना, आईडी के ज़रिए इसे चालू किया जा सकता है.
 
-Bir aracı kaydettiğinizde `base_environment` tanımlarsınız (kaynaklardan veya mevcut bir ortamı çatallayarak). Temsilci, her yeni etkileşim için bu ortamı kullanır.
+किसी एजेंट को सेव करते समय, आपको `base_environment` तय करना होता है. इसके लिए, सोर्स से डेटा लिया जा सकता है या किसी मौजूदा एनवायरमेंट को फ़ोर्क किया जा सकता है. एजेंट, हर नए इंटरैक्शन के लिए इस एनवायरमेंट का इस्तेमाल करेगा.
 
-**Kaynaklardan:** Kaynakları satır içi olarak veya GitHub ya da Cloud Storage gibi diğer kaynaklardan tanımlayın.
+**सोर्स से:** सोर्स को इनलाइन या GitHub या Cloud Storage जैसे अन्य सोर्स से तय करें.
 
 ### Python
 
@@ -357,9 +357,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## Yönetilen aracıyı çağırma
+## मैनेज किए जा रहे एजेंट को शुरू करना
 
-Kaydettiğiniz yönetilen temsilcileri kimlikleriyle çağırabilirsiniz. Her çağırma işlemi temel ortamı çatalladığından her çalıştırma temiz bir şekilde başlar:
+मैनेज किए जा रहे एजेंट को सेव करने के बाद, उसे आईडी के ज़रिए शुरू किया जा सकता है. हर इनवोकेशन, बेस एनवायरमेंट को फ़ोर्क करता है. इसलिए, हर रन क्लीन तरीके से शुरू होता है:
 
 ### Python
 
@@ -400,19 +400,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Sırada ne var?
+## आगे क्या करना है
 
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr): Yetenekler, desteklenen araçlar, çok formatlı giriş, fiyatlandırma ve sınırlamalar.
-- [Yönetilen Ajanlar Oluşturma](https://ai.google.dev/gemini-api/docs/custom-agents?hl=tr): Antigravity'yi kendi talimatlarınız, becerileriniz ve verilerinizle genişletin.
-- [Ortamlar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr): kaynaklar, ağ, yaşam döngüsü, kaynak sınırları.
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr): Modeller ve aracılar için temel API.
+- [ऐंटीग्रैविटी एजेंट](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=hi): सुविधाएं, इस्तेमाल किए जा सकने वाले टूल, मल्टीमॉडल इनपुट, कीमत, और सीमाएं.
+- [मैनेज किए गए एजेंट बनाना](https://ai.google.dev/gemini-api/docs/custom-agents?hl=hi): अपने निर्देशों, कौशल, और डेटा के साथ Antigravity को बेहतर बनाएं.
+- [एनवायरमेंट](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi): सोर्स, नेटवर्किंग, लाइफ़साइकल, संसाधन की सीमाएं.
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi): यह मॉडल और एजेंट के लिए बुनियादी एपीआई है.
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-06-22 UTC.
+आखिरी बार 2026-06-22 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-22 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-22 (UTC) को अपडेट किया गया."],[],[]]

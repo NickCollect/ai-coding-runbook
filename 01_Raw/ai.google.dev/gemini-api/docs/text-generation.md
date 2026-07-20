@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=hi
-fetched_at: 2026-07-06T05:09:36.670341+00:00
-title: "Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=de
+fetched_at: 2026-07-20T04:45:45.652433+00:00
+title: "Textgenerierung \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-सुझाव भेजें
+Feedback geben
 
-# टेक्स्ट जनरेट करने की सुविधा
+# Textgenerierung
 
-Gemini API, टेक्स्ट, इमेज, वीडियो, और ऑडियो इनपुट से टेक्स्ट आउटपुट जनरेट कर सकता है.
+Die Gemini API kann Textausgabe aus Text-, Bild-, Video- und Audioeingaben generieren.
 
-यहां एक सामान्य उदाहरण दिया गया है:
+Hier ein einfaches Beispiel:
 
 ### Python
 
@@ -66,16 +66,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Google के GenAI SDK टूल, मॉडल के जवाब को ऐक्सेस करने के लिए, सीधे तौर पर `Interaction` ऑब्जेक्ट पर सुविधा प्रॉपर्टी उपलब्ध कराते हैं.
+Die Google GenAI SDKs bieten praktische Attribute direkt für das zurückgegebene `Interaction`-Objekt, um auf die Antwort des Modells zuzugreifen.
 
-सबसे ज़्यादा इस्तेमाल किया जाने वाला हेल्पर **`interaction.output_text`** (स्ट्रिंग) है. यह मॉडल के जवाब में मौजूद आखिरी टेक्स्ट ब्लॉक दिखाता है. अगर जवाब को एक के बाद एक कई `TextContent` ब्लॉक में बांटा गया है, तो यह सुविधा उन्हें अपने-आप जोड़ देती है.
-ध्यान दें कि `.output_text` में, पहले के ऐसे टेक्स्ट ब्लॉक शामिल नहीं होते जिन्हें टेक्स्ट के अलावा किसी अन्य तरह के कॉन्टेंट (जैसे कि विचार, इमेज, ऑडियो या टूल कॉल) से अलग किया गया हो. मुश्किल या इंटरलीव किए गए मल्टीमॉडल जवाबों के लिए, आपको `steps` पर मैन्युअल तरीके से दोहराना होगा. मीडिया से जुड़ी अन्य सुविधाओं के बारे में ज़्यादा जानने के लिए, [इंटरैक्शन की खास जानकारी](https://ai.google.dev/gemini-api/docs/interactions?hl=hi#convenience-properties) देखें.
+Die häufigste Hilfsfunktion ist **`interaction.output_text`** (String), die die letzten Textblöcke in der Antwort des Modells zurückgibt. Wenn die Antwort auf mehrere aufeinanderfolgende `TextContent`-Blöcke aufgeteilt ist, werden diese automatisch zusammengefügt.
+`.output_text` umfasst keine früheren Textblöcke, die durch nicht textbezogene Inhalte (z. B. Gedanken, Bilder, Audio oder Tool-Aufrufe) getrennt sind. Bei komplexen oder verschachtelten multimodalen Antworten müssen Sie stattdessen manuell über `steps` iterieren. Weitere Informationen zu anderen Media-Convenience-Properties finden Sie in der [Übersicht zu Interaktionen](https://ai.google.dev/gemini-api/docs/interactions?hl=de#convenience-properties).
 
-## Gemini के साथ मिलकर सोचना
+## Mit Gemini Ideen entwickeln
 
-Gemini मॉडल में, ["थिंकिंग"](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=hi) मोड डिफ़ॉल्ट रूप से चालू होता है. इससे मॉडल को किसी अनुरोध का जवाब देने से पहले, जानकारी का विश्लेषण करने यानी तर्क करने की सुविधा मिलती है.
+Bei Gemini-Modellen ist [„Denken“](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=de) oft standardmäßig aktiviert. Dadurch kann das Modell Schlussfolgerungen ziehen, bevor es auf eine Anfrage antwortet.
 
-हर मॉडल, अलग-अलग थिंकिंग कॉन्फ़िगरेशन के साथ काम करता है. इससे आपको लागत, लेटेन्सी, और इंटेलिजेंस को कंट्रोल करने में मदद मिलती है. ज़्यादा जानकारी के लिए, [सोचने की गाइड](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=hi#set-budget) देखें.
+Jedes Modell unterstützt unterschiedliche Denkkonfigurationen, sodass Sie Kosten, Latenz und Intelligenz steuern können. Weitere Informationen finden Sie im [Leitfaden zum Denken](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=de#set-budget).
 
 ### Python
 
@@ -130,9 +130,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## सिस्टम के निर्देश और अन्य कॉन्फ़िगरेशन
+## Systemanweisungen und andere Konfigurationen
 
-सिस्टम के निर्देशों की मदद से, Gemini के मॉडल के व्यवहार को कंट्रोल किया जा सकता है. मॉडल के व्यवहार को कॉन्फ़िगर करने के लिए, `system_instruction` पैरामीटर पास करें.
+Mit Systemanweisungen können Sie das Verhalten von Gemini-Modellen steuern. Übergeben Sie einen `system_instruction`-Parameter, um das Verhalten des Modells zu konfigurieren.
 
 ### Python
 
@@ -182,7 +182,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-`generation_config` पैरामीटर का इस्तेमाल करके, जनरेट करने के डिफ़ॉल्ट पैरामीटर को भी बदला जा सकता है. जैसे, तापमान.
+Sie können auch Standardparameter für die Generierung, z. B. die Temperatur, mit dem Parameter `generation_config` überschreiben.
 
 ### Python
 
@@ -237,11 +237,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-कॉन्फ़िगर किए जा सकने वाले पैरामीटर और उनके ब्यौरे की पूरी सूची देखने के लिए, [Interactions API का रेफ़रंस](https://ai.google.dev/api/interactions-api?hl=hi) देखें.
+Eine vollständige Liste der konfigurierbaren Parameter und ihrer Beschreibungen finden Sie in der [Interactions API-Referenz](https://ai.google.dev/api/interactions-api?hl=de).
 
-## मल्टीमॉडल इनपुट
+## Multimodale Eingaben
 
-Gemini API में, टेक्स्ट, इमेज, वीडियो, और ऑडियो, सभी तरह के इनपुट इस्तेमाल किए जा सकते हैं. इससे आपको टेक्स्ट के साथ-साथ मीडिया फ़ाइलें भी इस्तेमाल करने की सुविधा मिलती है. यहां दी गई इमेज में, इमेज उपलब्ध कराने का तरीका दिखाया गया है:
+Die Gemini API unterstützt multimodale Eingaben, sodass Sie Text mit Mediendateien kombinieren können. Im folgenden Beispiel wird gezeigt, wie ein Bild bereitgestellt wird:
 
 ### Python
 
@@ -316,14 +316,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-इमेज उपलब्ध कराने के अन्य तरीकों और इमेज प्रोसेसिंग के ज़्यादा बेहतर तरीके के बारे में जानने के लिए, [इमेज समझने से जुड़ी हमारी गाइड](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=hi) देखें.
-यह एपीआई, [दस्तावेज़](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=hi), [वीडियो](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=hi), और [ऑडियो](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=hi) इनपुट के साथ-साथ इन्हें समझने की सुविधा भी देता है.
+Alternative Methoden zum Bereitstellen von Bildern und zur erweiterten Bildverarbeitung finden Sie in unserem [Leitfaden zur Bildanalyse](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=de).
+Die API unterstützt auch [Dokument-](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=de), [Video-](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=de) und [Audioeingaben](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=de).
 
-## जवाब स्ट्रीम करना
+## Streamingantworten
 
-डिफ़ॉल्ट रूप से, मॉडल जवाब सिर्फ़ तब देता है, जब जनरेट करने की पूरी प्रोसेस पूरी हो जाती है.
+Standardmäßig gibt das Modell erst dann eine Antwort zurück, wenn der gesamte Generierungsprozess abgeschlossen ist.
 
-बेहतर इंटरैक्शन के लिए, जवाब के चंक जनरेट होने पर उन्हें हैंडल करने के लिए स्ट्रीमिंग का इस्तेमाल करें. इवेंट टाइप, टूल की मदद से स्ट्रीमिंग, थिंकिंग, एजेंट, और इमेज जनरेशन के बारे में पूरी जानकारी देने वाली गाइड के लिए, [स्ट्रीमिंग के दौरान होने वाली बातचीत](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=hi) की गाइड देखें.
+Für flüssigere Interaktionen können Sie Streaming verwenden, um Antwortblöcke zu verarbeiten, sobald sie generiert werden. Einen umfassenden Leitfaden zu Ereignistypen, Streaming mit Tools, Denken, Agents und Bilderstellung finden Sie im [Leitfaden zu Streaming-Interaktionen](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=de).
 
 ### Python
 
@@ -383,9 +383,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## सिलसिलेवार बातचीत
+## Unterhaltungen über mehrere Themen
 
-Interactions API, एक से ज़्यादा बार बातचीत करने की सुविधा देता है. इसके लिए, यह `previous_interaction_id` का इस्तेमाल करके, इंटरैक्शन को एक साथ जोड़ता है. हर बातचीत एक अलग इंटरैक्शन होती है. साथ ही, एपीआई बातचीत के इतिहास को अपने-आप मैनेज करता है.
+Die Interactions API unterstützt Multi-Turn-Unterhaltungen, indem Interaktionen mit `previous_interaction_id` verkettet werden. Jede Runde ist eine separate Interaktion und der Unterhaltungsverlauf wird automatisch von der API verwaltet.
 
 ### Python
 
@@ -456,7 +456,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-स्ट्रीमिंग का इस्तेमाल, सिलसिलेवार बातचीत के लिए भी किया जा सकता है. इसके लिए, `previous_interaction_id` को स्ट्रीमिंग के तरीकों के साथ जोड़ें.
+Streaming kann auch für Multi-Turn-Unterhaltungen verwendet werden, indem `previous_interaction_id` mit den Streaming-Methoden kombiniert wird.
 
 ### Python
 
@@ -539,14 +539,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-## स्टेटलेस बातचीत
+## Zustandslose Unterhaltungen
 
-`previous_interaction_id` का इस्तेमाल करने पर, Interactions API डिफ़ॉल्ट रूप से बातचीत की स्थिति को सर्वर-साइड पर मैनेज करता है. हालांकि, क्लाइंट-साइड पर बातचीत के इतिहास को मैनेज करके, स्टेटलेस मोड में भी काम किया जा सकता है.
+Standardmäßig wird der Unterhaltungsstatus serverseitig von der Interactions API verwaltet, wenn Sie `previous_interaction_id` verwenden. Sie können den Dienst jedoch auch im statuslosen Modus verwenden, indem Sie den Unterhaltungsverlauf selbst auf der Clientseite verwalten.
 
-स्टेटलेस मोड का इस्तेमाल करने के लिए:
-1. सर्वर-साइड स्टोरेज से ऑप्ट आउट करने के लिए, अपने अनुरोध में `store=false` सेट करें.
-2. क्लाइंट-साइड पर, बातचीत के इतिहास को **चरणों** की एक कैटगरी के तौर पर बनाए रखें.
-3. इसके बाद के अनुरोधों में, `input` फ़ील्ड में इकट्ठा किए गए चरणों को पास करें. साथ ही, अपने नए चरण को `user_input` चरण के तौर पर जोड़ें.
+So verwenden Sie den zustandslosen Modus:
+1. Legen Sie `store=false` in Ihrer Anfrage fest, um die serverseitige Speicherung zu deaktivieren.
+2. Der Unterhaltungsverlauf wird clientseitig als Array von **Schritten** verwaltet.
+3. Übergeben Sie in nachfolgenden Anfragen die gesammelten Schritte im Feld `input` und hängen Sie Ihren neuen Zug als `user_input`-Schritt an.
 
 ### Python
 
@@ -667,26 +667,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## प्रॉम्प्ट लिखने से जुड़ी सलाह
+## Tipps für Prompts
 
-Gemini का ज़्यादा से ज़्यादा फ़ायदा पाने के लिए, [प्रॉम्प्ट इंजीनियरिंग गाइड](https://ai.google.dev/gemini/docs/prompting-strategies?hl=hi) देखें.
+In unserem [Leitfaden zum Erstellen von Prompts](https://ai.google.dev/gemini/docs/prompting-strategies?hl=de) finden Sie Vorschläge, wie Sie Gemini optimal nutzen können.
 
-## आगे क्या करना है
+## Nächste Schritte
 
-- [Google AI Studio में Gemini](https://aistudio.google.com?hl=hi) को आज़माएं.
-- JSON जैसे जवाबों के लिए, [स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=hi) का इस्तेमाल करके देखें.
-- Gemini की [इमेज](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=hi),
-  [वीडियो](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=hi),
-  [ऑडियो](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=hi), और
-  [दस्तावेज़](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=hi) को समझने की क्षमताओं के बारे में जानें.
-- मल्टीमॉडल [फ़ाइल प्रॉम्प्टिंग की रणनीतियों](https://ai.google.dev/gemini-api/docs/interactions/files?hl=hi#prompt-guide) के बारे में जानें.
+- [Gemini in Google AI Studio testen](https://aistudio.google.com?hl=de)
+- Experimentieren Sie mit [strukturierten Ausgaben](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=de) für JSON-ähnliche Antworten.
+- [Bild](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=de)-, [Video](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=de)-, [Audio](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=de)- und [Dokumentverständnis](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=de) von Gemini
+- [Weitere Informationen zu multimodalen Strategien für Dateiprompts](https://ai.google.dev/gemini-api/docs/interactions/files?hl=de#prompt-guide)
 
-सुझाव भेजें
+Feedback geben
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-आखिरी बार 2026-06-22 (UTC) को अपडेट किया गया.
+Zuletzt aktualisiert: 2026-07-08 (UTC).
 
-क्या आपको हमें और कुछ बताना है?
+Haben Sie Feedback für uns?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-22 (UTC) को अपडेट किया गया."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-08 (UTC)."],[],[]]

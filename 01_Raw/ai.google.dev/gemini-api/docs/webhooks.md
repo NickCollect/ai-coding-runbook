@@ -1,46 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=vi
-fetched_at: 2026-07-06T05:20:01.644320+00:00
+source_url: https://ai.google.dev/gemini-api/docs/webhooks?hl=ja
+fetched_at: 2026-07-20T04:32:49.401263+00:00
 title: "Webhook \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
 # Webhook
 
-Webhook cho phép Gemini API gửi thông báo theo thời gian thực đến máy chủ của bạn khi các Thao tác không đồng bộ hoặc Thao tác kéo dài (LRO) hoàn tất. Điều này giúp bạn không cần phải thăm dò API để biết thông tin cập nhật về trạng thái, giảm độ trễ và chi phí.
+Webhook を使用すると、非同期オペレーションまたは長時間実行オペレーション（LRO）が完了したときに、Gemini API からサーバーにリアルタイム通知を push できます。これにより、API
+にステータス更新をポーリングする必要がなくなり、レイテンシとオーバーヘッドが削減されます。
 
-Webhook có sẵn cho các thao tác như lệnh [Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi), [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) và [video generation](https://ai.google.dev/gemini-api/docs/video?hl=vi).
+Webhook は、[バッチ](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)ジョブ、
+[インタラクション](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja)、[動画生成](https://ai.google.dev/gemini-api/docs/video?hl=ja)などのオペレーションで使用できます。
 
-## Cách hoạt động
+## 仕組み
 
-Thay vì liên tục thăm dò `GET /operations` để kiểm tra xem một công việc đã hoàn tất hay chưa, bạn có thể định cấu hình Webhook của Gemini API để gửi yêu cầu POST qua HTTP đến URL trình nghe của bạn ngay khi có sự kiện kích hoạt.
+ジョブが完了したかどうかを確認するために `GET /operations` を繰り返しポーリングする代わりに、イベント トリガーが発生するとすぐに HTTP POST リクエストをリスナー URL に送信するように Gemini API Webhook を構成できます。
 
-Gemini API hỗ trợ 2 cách định cấu hình webhook:
+Gemini API では、Webhook を構成する次の 2 つの方法がサポートされています。
 
-- [**Webhook tĩnh**](#static-webhooks): Điểm cuối ở cấp dự án được định cấu hình bằng [Gemini WebhookService API](https://ai.google.dev/api?hl=vi). Phù hợp với các hoạt động tích hợp trên toàn cầu (ví dụ: thông báo cho Slack, đồng bộ hoá cơ sở dữ liệu, v.v.).
-- [**Webhook động**](#dynamic-webhooks): Các chế độ ghi đè ở cấp yêu cầu sẽ truyền một URL webhook trong tải trọng cấu hình của một lệnh gọi công việc cụ thể. Lý tưởng để định tuyến các công việc cụ thể đến các điểm cuối chuyên dụng.
+- [**静的 Webhook**](#static-webhooks): Gemini [WebhookService API](https://ai.google.dev/api?hl=ja) で構成されたプロジェクト レベルのエンドポイント。グローバル統合（Slack への通知、データベースの同期など）に適しています。
+- [**動的 Webhook**](#dynamic-webhooks): 特定のジョブ呼び出しの構成ペイロードで
+  Webhook URL を渡すリクエスト レベルのオーバーライド。特定のジョブを専用のエンドポイントにルーティングする場合に最適です。
 
-## Webhook tĩnh
+## 静的 Webhook
 
-Webhook tĩnh được đăng ký cho toàn bộ [dự án](https://ai.google.dev/gemini-api/docs/api-key?hl=vi#google-cloud-projects) và kích hoạt cho mọi sự kiện trùng khớp.
+[静的 Webhook はプロジェクト全体に登録され、一致するイベントが発生するとトリガーされます。](https://ai.google.dev/gemini-api/docs/api-key?hl=ja#google-cloud-projects)
 
-### Tạo webhook
+### Webhook を作成する
 
-Bạn có thể tạo điểm cuối bằng SDK hoặc API REST.
+エンドポイントは、SDK または REST API を使用して作成できます。
 
-**QUAN TRỌNG**: Khi tạo một webhook, API chỉ trả về **khoá bí mật để ký**
-**một lần**. Bạn phải lưu trữ khoá này một cách an toàn (ví dụ: trong các biến môi trường) để xác minh chữ ký sau này. Nếu mất khoá bí mật để ký, bạn sẽ phải [xoay vòng](#rotate-signing-secret) khoá đó.
+**重要**: Webhook を作成すると、API は**署名シークレット**
+**一度だけ** 返します。後で署名を確認するために、この情報を安全に保存する必要があります（環境変数など）。署名シークレットを紛失した場合は、
+[ローテーション](#rotate-signing-secret)する必要があります。
 
 ### Python
 
@@ -96,11 +100,12 @@ curl -X POST \
   }'
 ```
 
-Để biết thông tin chi tiết về cách thiết lập máy chủ để nhận dữ liệu, hãy xem phần [Xử lý các yêu cầu webhook](#handle-webhook-requests).
+データを受信するようにサーバーを設定する方法については、
+[Webhook リクエストを処理する](#handle-webhook-requests)をご覧ください。
 
-### Nhận webhook
+### Webhook を取得する
 
-Truy xuất thông tin chi tiết về một webhook cụ thể theo tên tài nguyên của webhook đó.
+リソース名で特定の Webhook の詳細を取得します。
 
 ### Python
 
@@ -142,9 +147,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Liệt kê webhook
+### Webhook の一覧表示
 
-Liệt kê tất cả webhook đã định cấu hình cho dự án hiện tại, có thể phân trang.
+現在のプロジェクト用に構成されているすべての Webhook を一覧表示します。ページ分割は省略可能です。
 
 ### Python
 
@@ -185,9 +190,9 @@ curl -X GET \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Cập nhật webhook
+### Webhook を更新する
 
-Cập nhật các thuộc tính của webhook hiện có, chẳng hạn như tên hiển thị, URI mục tiêu hoặc các sự kiện đã đăng ký.
+表示名、ターゲット URI、登録済みイベントなど、既存の Webhook のプロパティを更新します。
 
 ### Python
 
@@ -237,9 +242,9 @@ curl -X PATCH \
   }'
 ```
 
-### Xoá webhook
+### Webhook を削除する
 
-Xoá một điểm cuối webhook khỏi dự án. Thao tác này sẽ dừng việc gửi các sự kiện trong tương lai đến điểm cuối đó.
+プロジェクトから Webhook エンドポイントを削除します。これにより、そのエンドポイントへの今後のイベント配信が停止します。
 
 ### Python
 
@@ -277,11 +282,12 @@ curl -X DELETE \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Xoay vòng khoá bí mật dùng để ký
+### 署名シークレットをローテーションする
 
-Xoay vòng khoá bí mật ký cho webhook. Bạn có thể định cấu hình xem các bí mật đã hoạt động trước đó có bị thu hồi ngay lập tức hay sau thời gian gia hạn 24 giờ.
+Webhook の署名シークレットをローテーションします。以前に有効だったシークレットをすぐに取り消すか、24 時間の猶予期間後に取り消すかを構成できます。
 
-**QUAN TRỌNG**: Khoá bí mật ký mới chỉ được trả về **một lần** tại thời điểm xoay vòng. Hãy lưu trữ khoá này một cách an toàn trước khi cập nhật logic xác minh.
+**重要**: 新しい署名シークレットは、ローテーション
+時に**一度だけ** 返されます。検証ロジックを更新する前に、安全に保存してください。
 
 ### Python
 
@@ -334,13 +340,14 @@ curl -X POST \
   }'
 ```
 
-### Xử lý các yêu cầu webhook trên máy chủ
+### サーバーで Webhook リクエストを処理する
 
-Khi một sự kiện mà bạn đã đăng ký xảy ra, URL webhook của bạn sẽ nhận được một yêu cầu HTTP POST. Điểm cuối của bạn phải phản hồi bằng mã trạng thái 2xx trong vòng vài giây để tránh thử lại. Để đảm bảo việc phân phối, Gemini API sẽ tự động thử lại các yêu cầu không thành công trong 24 giờ bằng thuật toán thời gian đợi luỹ thừa.
+登録しているイベントが発生すると、Webhook URL は HTTP POST リクエストを受信します。再試行を回避するには、エンドポイントが数秒以内に 2xx ステータス コードで応答する必要があります。配信を確実に行うため、Gemini API は指数バックオフを使用して、失敗したリクエストを 24 時間自動的に再試行します。
 
-Gemini tuân thủ nghiêm ngặt quy cách [Standard Webhooks](https://github.com/standard-webhooks/standard-webhooks) (Webhook tiêu chuẩn) đối với tiêu đề bảo mật. Xác minh tải trọng trên máy chủ bằng cách sử dụng chữ ký tiêu đề đã ký và khoá bí mật ký tĩnh đã lưu trữ. Hãy xem phần [Gói webhook](#webhook-envelope) để biết thông tin về tải trọng.
+Gemini は、セキュリティ ヘッダーの
+[標準 Webhook](https://github.com/standard-webhooks/standard-webhooks) 仕様に厳密に準拠しています。署名付きヘッダーの署名と保存されている静的署名シークレットを使用して、サーバー上のペイロードを検証します。ペイロード情報については、[Webhook エンベロープ](#webhook-envelope)をご覧ください。
 
-Sau đây là ví dụ sử dụng Flask cho trình nghe HTTP:
+HTTP リスナーに Flask を使用する例を次に示します。
 
 ### Python
 
@@ -433,13 +440,14 @@ app.listen(8000, () => {
 });
 ```
 
-## Webhook động
+## 動的 Webhook
 
-Webhook động cho phép bạn liên kết một điểm cuối webhook với một **cấu hình yêu cầu cụ thể**, phù hợp với các hàng đợi điều phối tác nhân. Webhook động tận dụng chữ ký JWKS khoá công khai bất đối xứng thay vì các bí mật đối xứng.
+動的 Webhook を使用すると、Webhook エンドポイントを**特定のリクエスト
+構成** にバインドできます。これは、エージェント オーケストレーション キューに最適です。動的 Webhook は、対称シークレットではなく、非対称公開鍵 JWKS 署名を利用します。
 
-### Gửi yêu cầu linh hoạt
+### 動的リクエストを送信する
 
-Thêm một `webhook_config` khi kích hoạt một công việc không đồng bộ (ví dụ: tạo một Batch).
+非同期ジョブ（バッチの作成など）をトリガーするときに `webhook_config` を追加します。
 
 ### Python
 
@@ -508,9 +516,9 @@ curl -X POST \
   }'
 ```
 
-### Xác minh chữ ký động (JWKS)
+### 動的署名（JWKS）を確認する
 
-Các yêu cầu webhook động phát ra chữ ký Mã thông báo web JSON (JWT). Trình nghe của bạn phải trích xuất chữ ký và xác minh chữ ký đó bằng cách sử dụng [các điểm cuối chứng chỉ công khai của Google](https://www.googleapis.com/oauth2/v3/certs).
+動的 Webhook リクエストは、JSON ウェブトークン（JWT）署名を発行します。リスナーは署名を抽出し、[Google の公開証明書エンドポイントを使用して検証する必要があります。](https://www.googleapis.com/oauth2/v3/certs)
 
 ### Python
 
@@ -611,11 +619,11 @@ app.post('/gemini-webhook-dynamic', (req, res) => {
 });
 ```
 
-## Phong bì webhook
+## Webhook エンベロープ
 
-Để tránh tình trạng tắc nghẽn băng thông, webhook của Gemini sử dụng mô hình **tải trọng mỏng** để phân phối dữ liệu. Các lượt phân phối sẽ gửi một ảnh chụp nhanh chứa thông tin chi tiết về trạng thái và con trỏ đến kết quả, thay vì chính tệp đầu ra thô.
+帯域幅の輻輳を回避するため、Gemini Webhook は**シン ペイロード** モデルを使用してデータを配信します。配信では、元の出力ファイルではなく、ステータスの詳細と結果へのポインタを含むスナップショットが送信されます。
 
-Sau đây là ví dụ về định dạng tải trọng:
+ペイロード形式の例を次に示します。
 
 ```
 {
@@ -629,40 +637,42 @@ Sau đây là ví dụ về định dạng tải trọng:
 }
 ```
 
-## Tài liệu tham khảo về danh mục sự kiện
+## イベント カタログのリファレンス
 
-Các sự kiện sau đây được kích hoạt cho các công việc hỗ trợ:
+サポートされているジョブでは、次のイベントがトリガーされます。
 
-| Loại sự kiện | Trigger | Mục tải trọng (`data`) |
+| イベントの種類 | トリガー | ペイロード アイテム（`data`） |
 | --- | --- | --- |
-| `batch.succeeded` | Đã xử lý xong. | `id`, `output_file_uri` |
-| `batch.cancelled` | Người dùng đã huỷ yêu cầu | `id` |
-| `batch.expired` | Lô chưa được xử lý (hoàn tất) trong khung thời gian 24 giờ | `id` |
-| `batch.failed` | Thao tác hàng loạt không thành công (lỗi hệ thống hoặc lỗi xác thực). | `id`, `error_code`, `error_message` |
-| `interaction.requires_action` | Lệnh gọi hàm, người dùng cần làm gì đó | `id` |
-| `interaction.completed` | LRO trong API tương tác đã thành công | `id` |
-| `interaction.failed` | LRO trong API tương tác không thành công (lỗi hệ thống hoặc lỗi xác thực). | `id`, `error_code`, `error_message` |
-| `interaction.cancelled` | LRO trong API tương tác bị huỷ | `id` |
-| `video.generated` | Đã hoàn tất LRO tạo video. | `id`, `output_file_uri`, `file_name` |
+| `batch.succeeded` | 処理が正常に完了しました。 | `id`、`output_file_uri` |
+| `batch.cancelled` | ユーザーがリクエストをキャンセルしました | `id` |
+| `batch.expired` | バッチが 24 時間以内に処理（完了）されませんでした | `id` |
+| `batch.failed` | バッチジョブが失敗しました（システム エラーまたは検証エラー）。 | `id`、`error_code`、`error_message` |
+| `interaction.requires_action` | 関数呼び出し。ユーザーが操作する必要があります | `id` |
+| `interaction.completed` | Interactions API の LRO が成功しました | `id` |
+| `interaction.failed` | Interactions API の LRO が失敗しました（システム エラーまたは検証エラー）。 | `id`、`error_code`、`error_message` |
+| `interaction.cancelled` | Interactions API の LRO がキャンセルされました | `id` |
+| `video.generated` | 動画生成 LRO が完了しました。 | `id`、`output_file_uri`、`file_name` |
 
-## Các phương pháp hay nhất
+## ベスト プラクティス
 
-Để đảm bảo hoạt động đáng tin cậy và có khả năng mở rộng:
+信頼性が高くスケーラブルなオペレーションを確保するには:
 
-- **Kiểm tra nghiêm ngặt khả năng bảo vệ chống phát lại**: Tất cả các yêu cầu đều có một tiêu đề `webhook-timestamp`. Luôn xác thực dấu thời gian này trên lớp cấu hình máy chủ để từ chối các tải trọng cũ hơn **5 phút** (để giảm thiểu các cuộc tấn công phát lại).
-- **Xử lý không đồng bộ**: Phản hồi bằng `2xx OK` ngay khi phát hiện chữ ký hợp lệ và xếp hàng các thao tác phân tích cú pháp nội bộ. Thời gian giữ máy của người nghe quá lâu sẽ kích hoạt một chu kỳ thử lại việc gửi.
-- **Xử lý việc loại bỏ dữ liệu trùng lặp**: Webhook tiêu chuẩn phân phối "Ít nhất một lần". Sử dụng tiêu đề `webhook-id` nhất quán để xử lý các bản sao tiềm ẩn trong các luồng tắc nghẽn cao hơn.
+- **厳格なリプレイ保護チェック**: すべてのリクエストに `webhook-timestamp`
+  ヘッダーが含まれます。サーバー構成レイヤでこのタイムスタンプを常に検証し、**5 分** より古いペイロードを拒否します（リプレイ攻撃を軽減するため）。
+- **非同期で処理する**: 有効な
+  署名が検出されたらすぐに `2xx OK` で応答し、解析オペレーションを内部でキューに登録します。リスナーの保持時間が長すぎると、配信の再試行サイクルがトリガーされます。
+- **重複排除処理**: 標準の Webhook は「少なくとも 1 回」配信します。一貫した `webhook-id` ヘッダーを使用して、輻輳の多いフローで発生する可能性のある重複を処理します。
 
-## Tiếp theo là gì?
+## 次のステップ
 
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=vi): Sử dụng webhook để tự động hoá các điểm cuối có số lượng lớn.
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch?hl=ja): Webhook を使用して、大量のエンドポイントを自動化します。
 
-Gửi ý kiến phản hồi
+フィードバックを送信
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Cập nhật lần gần đây nhất: 2026-06-22 UTC.
+最終更新日 2026-07-06 UTC。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+ご意見をお聞かせください
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-22 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-06 UTC。"],[],[]]

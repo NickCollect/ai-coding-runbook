@@ -1,64 +1,69 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=de
-fetched_at: 2026-07-06T05:07:07.676840+00:00
-title: "Kontext-Caching \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=ja
+fetched_at: 2026-07-20T04:49:10.827106+00:00
+title: "\u30b3\u30f3\u30c6\u30ad\u30b9\u30c8\u306e\u30ad\u30e3\u30c3\u30b7\u30e5\u4fdd\u5b58 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Feedback geben
+フィードバックを送信
 
-# Kontext-Caching
+# コンテキストのキャッシュ保存
 
-In einem typischen KI-Workflow werden dieselben Eingabetokens möglicherweise immer wieder an ein Modell übergeben. Die Gemini API bietet zwei verschiedene Caching-Mechanismen:
+一般的な AI ワークフローでは、同じ入力トークンをモデルに何度も渡すことがあります。Gemini API には、次の 2
+つの異なるキャッシュ保存メカニズムが用意されています。
 
-- Implizites Caching (automatisch für Gemini 2.5 und neuere Modelle aktiviert, keine Garantie für Kosteneinsparungen)
-- Explizites Caching (kann bei den meisten Modellen manuell aktiviert werden, Kosteneinsparungsgarantie)
+- 暗黙的なキャッシュ保存（Gemini 2.5 以降のモデルで自動的に有効になります。費用削減は保証されません）
+- 明示的なキャッシュ保存（ほとんどのモデルで手動で有効にできます。費用削減が保証されます）
 
-Explizites Caching ist nützlich, wenn Sie Kosten sparen möchten, aber dafür etwas mehr Entwicklerarbeit in Kauf nehmen.
+明示的なキャッシュ保存は、費用削減を保証したい場合に便利ですが、デベロッパーの作業が追加されます。
 
-## Implizites Caching
+## 暗黙的なキャッシュ保存
 
-Implizites Caching ist für alle Gemini 2.5-Modelle und neuere Modelle standardmäßig aktiviert. Wir geben Kosteneinsparungen automatisch weiter, wenn Ihre Anfrage auf Caches trifft. Sie müssen nichts weiter tun, um diese Funktion zu aktivieren. Die Mindestanzahl an Eingabetokens für das Zwischenspeichern von Kontext ist in der folgenden Tabelle für jedes Modell aufgeführt:
+暗黙的なキャッシュ保存は、Gemini 2.5 以降のすべてのモデルでデフォルトで有効になっています。リクエストがキャッシュにヒットした場合、費用削減が自動的に適用されます。これを有効にするために必要な操作はありません。コンテキスト
+キャッシュ保存の最小入力トークン数は、モデルごとに次の表に示されています。
 
-| Modell | Mindest-Tokenlimit |
+| モデル | トークン数の最小制限 |
 | --- | --- |
-| Gemini 3.5 Flash | 4.096 |
-| Gemini 3.1 Pro (Vorabversion) | 4.096 |
-| Gemini 2.5 Flash | 2048 |
-| Gemini 2.5 Pro | 2048 |
+| Gemini 3.5 Flash | 4096 |
+| Gemini 3.1 Pro プレビュー版 | 4096 |
+| Gemini 2.5 Flash | 2048 |
+| Gemini 2.5 Pro | 2048 |
 
-So erhöhen Sie die Wahrscheinlichkeit eines impliziten Cache-Treffers:
+暗黙的なキャッシュ ヒットの可能性を高めるには:
 
-- Große und gängige Inhalte am Anfang des Prompts platzieren
-- Versuchen Sie, Anfragen mit ähnlichem Präfix innerhalb kurzer Zeit zu senden.
+- 大きくて一般的なコンテンツをプロンプトの先頭に配置する
+- 短い時間で同様の接頭辞を持つリクエストを送信する
 
-Die Anzahl der Tokens, die Cache-Treffer waren, finden Sie im Feld `usage_metadata` des Antwortobjekts.
+キャッシュ ヒットしたトークンの数は、レスポンス オブジェクトの `usage_metadata` フィールドで確認できます。
 
-## Explizites Caching
+## 明示的なキャッシュ保存
 
-Mit der Funktion zum expliziten Caching der Gemini API können Sie einige Inhalte einmal an das Modell übergeben, die Eingabe-Tokens im Cache speichern und dann bei nachfolgenden Anfragen auf die im Cache gespeicherten Tokens verweisen. Bei bestimmten Mengen ist die Verwendung von im Cache gespeicherten Tokens kostengünstiger als die wiederholte Übergabe desselben Token-Korpus.
+Gemini API の明示的なキャッシュ保存機能を使用すると、一部のコンテンツをモデルに 1
+回渡して入力トークンをキャッシュに保存し、後続のリクエストでキャッシュに保存されたトークンを参照できます。特定のボリュームでは、キャッシュに保存されたトークンを使用する方が、同じトークンセットを繰り返し渡すよりも低コストになります。
 
-Wenn Sie eine Gruppe von Tokens im Cache speichern, können Sie festlegen, wie lange der Cache bestehen soll, bevor die Tokens automatisch gelöscht werden. Diese Caching-Dauer wird als *Gültigkeitsdauer* (time to live, TTL) bezeichnet. Wenn nichts anderes festgelegt ist, beträgt die TTL standardmäßig 1 Stunde. Die Kosten für das Caching hängen von der Größe der Eingabetokens und der Dauer ab, für die die Tokens beibehalten werden sollen.
+トークンセットをキャッシュに保存するときに、トークンが自動的に削除されるまでのキャッシュの存続期間を選択できます。このキャッシュ保存期間は有効期間（TTL）と呼ばれます。
+設定しない場合、TTL はデフォルトで 1 時間になります。キャッシュ保存の費用は、入力トークンのサイズとトークンの保持期間によって異なります。
 
-In diesem Abschnitt wird davon ausgegangen, dass Sie ein Gemini SDK installiert haben (oder curl installiert ist) und dass Sie einen API-Schlüssel konfiguriert haben, wie im [Leitfaden für den Einstieg](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de) beschrieben.
+このセクションでは、スタートガイド
+に記載されているように、Gemini SDK（または curl）をインストールし、API キーを構成していることを前提としています。
 
-### Inhalte mit einem Cache generieren
+### キャッシュを使用してコンテンツを生成する
 
 ### Python
 
-Im folgenden Beispiel wird gezeigt, wie Sie Inhalte mit einer im Cache gespeicherten Systemanweisung und Videodatei generieren.
+次の例は、キャッシュに保存されたシステム指示と動画ファイルを使用してコンテンツを生成する方法を示しています。
 
-### Videos
+### 動画
 
 ```
 import os
@@ -117,7 +122,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### PDF-Dateien
+### PDF
 
 ```
 from google import genai
@@ -165,7 +170,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-Im folgenden Beispiel wird gezeigt, wie Sie Inhalte mit einer im Cache gespeicherten Systemanweisung und einer Textdatei generieren.
+次の例は、キャッシュに保存されたシステム指示とテキスト ファイルを使用してコンテンツを生成する方法を示しています。
 
 ```
 import {
@@ -204,9 +209,9 @@ async function main() {
 await main();
 ```
 
-### Ok
+### Go
 
-Im folgenden Beispiel wird gezeigt, wie Inhalte mithilfe eines Cache generiert werden.
+次の例は、キャッシュを使用してコンテンツを生成する方法を示しています。
 
 ```
 package main
@@ -276,9 +281,9 @@ func main() {
 
 ### REST
 
-Im folgenden Beispiel wird gezeigt, wie ein Cache erstellt und dann zum Generieren von Inhalten verwendet wird.
+次の例は、キャッシュを作成し、それを使用してコンテンツを生成する方法を示しています。
 
-### Videos
+### 動画
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -329,7 +334,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
     }'
 ```
 
-### PDF-Dateien
+### PDF
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
@@ -427,20 +432,22 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Caches auflisten
+### キャッシュのリストを表示する
 
-Es ist nicht möglich, im Cache gespeicherte Inhalte abzurufen oder anzusehen, aber Sie können Cache-Metadaten (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time` und `expire_time`) abrufen.
+キャッシュに保存されたコンテンツを取得または表示することはできませんが、
+キャッシュ メタデータ（`name`、`model`、`display_name`、`usage_metadata`、
+`create_time`、`update_time`、`expire_time`）を取得できます。
 
 ### Python
 
-Verwenden Sie `CachedContent.list()`, um Metadaten für alle hochgeladenen Caches aufzulisten:
+アップロードされたすべてのキャッシュのメタデータを一覧表示するには、`CachedContent.list()` を使用します。
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Wenn Sie die Metadaten für ein Cacheobjekt abrufen möchten und den Namen des Objekts kennen, verwenden Sie `get`:
+1 つのキャッシュ オブジェクトのメタデータを取得するには、名前がわかっている場合は `get` を使用します。
 
 ```
 client.caches.get(name=name)
@@ -448,7 +455,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Verwenden Sie `GoogleGenAI.caches.list()`, um Metadaten für alle hochgeladenen Caches aufzulisten:
+アップロードされたすべてのキャッシュのメタデータを一覧表示するには、`GoogleGenAI.caches.list()` を使用します。
 
 ```
 console.log("My caches:");
@@ -463,9 +470,9 @@ while (true) {
 }
 ```
 
-### Ok
+### Go
 
-Im folgenden Beispiel werden alle Caches aufgelistet.
+次の例では、すべてのキャッシュを一覧表示します。
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -478,7 +485,7 @@ for _, item := range caches {
 }
 ```
 
-Im folgenden Beispiel werden Caches mit einer Seitengröße von 2 aufgelistet.
+次の例では、ページサイズ 2 でキャッシュを一覧表示します。
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -511,13 +518,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Cache aktualisieren
+### キャッシュを更新する
 
-Sie können für einen Cache eine neue `ttl` oder `expire_time` festlegen. Das Ändern anderer Aspekte des Caches wird nicht unterstützt.
+キャッシュの新しい `ttl` または `expire_time` を設定できます。キャッシュのその他の変更はサポートされていません。
 
 ### Python
 
-Im folgenden Beispiel wird gezeigt, wie Sie die `ttl` eines Cache mit `client.caches.update()` aktualisieren.
+次の例は、`client.caches.update()` を使用してキャッシュの `ttl` を更新する方法を示しています。
 
 ```
 from google import genai
@@ -531,7 +538,11 @@ client.caches.update(
 )
 ```
 
-Zum Festlegen der Ablaufzeit kann entweder ein `datetime`-Objekt oder ein ISO-formatierter Datetime-String (`dt.isoformat()`, z. B. `2025-01-27T16:02:36.473528+00:00`) verwendet werden. Ihre Zeit muss eine Zeitzone enthalten (`datetime.utcnow()` fügt keine Zeitzone an, `datetime.now(datetime.timezone.utc)` schon).
+有効期限を設定するには、`datetime` オブジェクト
+または ISO 形式の日付と時刻の文字列（`dt.isoformat()`、
+`2025-01-27T16:02:36.473528+00:00` など）を指定します。時刻にはタイムゾーンを含める必要があります
+（`datetime.utcnow()` にはタイムゾーンが追加されませんが、
+`datetime.now(datetime.timezone.utc)` にはタイムゾーンが追加されます）。
 
 ```
 from google import genai
@@ -551,7 +562,7 @@ client.caches.update(
 
 ### JavaScript
 
-Im folgenden Beispiel wird gezeigt, wie Sie die `ttl` eines Cache mit `GoogleGenAI.caches.update()` aktualisieren.
+次の例は、`GoogleGenAI.caches.update()` を使用してキャッシュの `ttl` を更新する方法を示しています。
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -562,9 +573,9 @@ const updatedCache = await ai.caches.update({
 console.log("After update (TTL):", updatedCache);
 ```
 
-### Ok
+### Go
 
-Das folgende Beispiel zeigt, wie Sie die `TTL` eines Cache aktualisieren.
+次の例は、キャッシュの `TTL` を更新する方法を示しています。
 
 ```
 // Update the TTL (2 hours).
@@ -580,7 +591,7 @@ fmt.Println(cache)
 
 ### REST
 
-Das folgende Beispiel zeigt, wie Sie die `ttl` eines Cache aktualisieren.
+次の例は、キャッシュの `ttl` を更新する方法を示しています。
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -588,9 +599,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Cache löschen
+### キャッシュを削除する
 
-Der Caching-Dienst bietet einen Löschvorgang zum manuellen Entfernen von Inhalten aus dem Cache. Das folgende Beispiel zeigt, wie ein Cache gelöscht wird:
+キャッシュ保存サービスには、キャッシュからコンテンツを手動で削除するための削除オペレーションが用意されています。次の例は、キャッシュを削除する方法を示しています。
 
 ### Python
 
@@ -604,7 +615,7 @@ client.caches.delete(cache.name)
 await ai.caches.delete({ name: cache.name });
 ```
 
-### Ok
+### Go
 
 ```
 _, err = client.Caches.Delete(ctx, cache.Name, &genai.DeleteCachedContentConfig{})
@@ -620,44 +631,49 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Explizites Caching mit der OpenAI-Bibliothek
+### OpenAI ライブラリを使用した明示的なキャッシュ保存
 
-Wenn Sie eine [OpenAI-Bibliothek](https://ai.google.dev/gemini-api/docs/openai?hl=de) verwenden, können Sie das explizite Caching mit der Eigenschaft `cached_content` für [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=de#extra-body) aktivieren.
+[OpenAI ライブラリ](https://ai.google.dev/gemini-api/docs/openai?hl=ja)を使用している場合は、
+`cached_content` プロパティを使用して
+[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=ja#extra-body)を有効にできます。
 
-## Wann sollte explizites Caching verwendet werden?
+## 明示的なキャッシュ保存を使用する状況
 
-Kontext-Caching eignet sich besonders für Szenarien, bei denen in kürzeren Anfragen wiederholt auf eine hohe anfängliche Kontextmenge verwiesen wird. Ziehen Sie die Verwendung von Kontext-Caching für Anwendungsfälle wie diese in Betracht:
+コンテキスト キャッシュ保存は、初期コンテキストの実体部分が、短いリクエストで繰り返し参照されるシナリオに特に適しています。次のようなユースケースでは、コンテキスト キャッシュ保存の使用を検討してください。
 
-- Chatbots mit ausführlichen [Systemanweisungen](https://ai.google.dev/gemini-api/docs/system-instructions?hl=de)
-- Wiederholte Analyse langer Videodateien
-- Wiederkehrende Abfragen großer Dokumentgruppen
-- Häufige Analyse des Code-Repositorys oder Fehlerbehebung
+- 広範な[システム指示](https://ai.google.dev/gemini-api/docs/system-instructions?hl=ja)を伴う chatbot
+- 長時間の動画ファイルの繰り返し分析
+- 大規模なドキュメント セットに対する繰り返しのクエリ
+- 頻繁なコード リポジトリの分析やバグ修正
 
-### So werden Kosten durch explizites Caching gesenkt
+### 明示的なキャッシュ保存によるコスト削減の方法
 
-Das Kontext-Caching ist eine kostenpflichtige Funktion, die darauf ausgelegt ist, die Kosten zu senken. Die Abrechnung basiert auf den folgenden Faktoren:
+コンテキスト キャッシュ保存は、コスト削減を目的とした有料の機能です。課金は次の要素に基づいて行われます。
 
-1. **Anzahl der Cache-Tokens:** Die Anzahl der im Cache gespeicherten Eingabetokens, für die ein ermäßigter Tarif für die Nutzung in nachfolgenden Prompts gilt.
-2. **Speicherdauer**:Die Zeit, über die hinweg im Cache gespeicherte Tokens erhalten werden (TTL). Die Abrechnung erfolgt auf Grundlage der TTL-Dauer der Anzahl der im Cache gespeicherten Tokens. Es gibt keine Mindest- oder Höchstwerte für die TTL.
-3. **Andere Faktoren:** Es fallen weitere Gebühren an, z. B. für nicht im Cache gespeicherte Eingabe- und Ausgabetokens.
+1. **キャッシュ トークン数:** キャッシュに保存された入力トークンの数。後続のプロンプトに含まれる場合は、割引料金で請求されます。
+2. **保存期間:** キャッシュに保存されたトークンの保存時間（TTL）。キャッシュに保存されたトークン数の TTL 期間に基づいて課金されます。TTL に最小値や最大値はありません。
+3. **その他の項目:** 入力トークンや出力トークンがキャッシュされていない場合などは、別の料金が適用されます。
 
-Aktuelle Preisinformationen finden Sie auf der [Preisseite für die Gemini API](https://ai.google.dev/pricing?hl=de). Informationen zum Zählen von Tokens finden Sie im [Token-Leitfaden](https://ai.google.dev/gemini-api/docs/tokens?hl=de).
+最新の料金の詳細については、Gemini API [料金
+ページ](https://ai.google.dev/pricing?hl=ja)をご覧ください。トークンをカウントする方法については、[トークン
+ガイド](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)をご覧ください。
 
-### Weitere Überlegungen
+### その他の考慮事項
 
-Beachten Sie bei der Verwendung von Kontext-Caching Folgendes:
+コンテキスト キャッシュ保存を使用する場合は、次の点に注意してください。
 
-- Die *Mindestanzahl* der Eingabetokens für das Kontext-Caching variiert je nach Modell. Der *Höchstwert* entspricht dem Höchstwert für das angegebene Modell. Weitere Informationen zum Zählen von Tokens finden Sie im [Token-Leitfaden](https://ai.google.dev/gemini-api/docs/tokens?hl=de).
-- Das Modell unterscheidet nicht zwischen zwischengespeicherten und regulären Eingabetokens. Im Cache gespeicherte Inhalte werden dem Prompt vorangestellt.
-- Für das Zwischenspeichern von Kontexten gelten keine besonderen Raten- oder Nutzungslimits. Es gelten die Standardratenlimits für `GenerateContent` und die Tokenlimits umfassen zwischengespeicherte Tokens.
-- Die Anzahl der im Cache gespeicherten Tokens wird in `usage_metadata` der Cache-Dienstvorgänge „create“, „get“ und „list“ sowie in `GenerateContent` bei Verwendung des Cache zurückgegeben.
+- コンテキスト キャッシュ保存の最小入力トークン数は、モデルによって異なります。 最大値は、指定されたモデルの最大値と同じです。 （トークンのカウントについて詳しくは、[トークンガイド](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)をご覧ください
+  ）。
+- モデルは、キャッシュに保存されたトークンと通常の入力トークンを区別しません。キャッシュに保存されたコンテンツは、プロンプトの接頭辞です。
+- コンテキスト キャッシュ保存には特別な料金や使用制限はありません。`GenerateContent` の標準のレート制限が適用され、トークン制限にはキャッシュに保存されたトークンが含まれます。
+- キャッシュに保存されたトークンの数は、キャッシュ サービスの作成、取得、一覧表示オペレーションの `usage_metadata` と、キャッシュを使用する際の `GenerateContent` で返されます。
 
-Feedback geben
+フィードバックを送信
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Zuletzt aktualisiert: 2026-06-24 (UTC).
+最終更新日 2026-06-24 UTC。
 
-Haben Sie Feedback für uns?
+ご意見をお聞かせください
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-24 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-24 UTC。"],[],[]]

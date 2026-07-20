@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/tool-combination?hl=es-419
-fetched_at: 2026-07-06T05:06:37.832191+00:00
+fetched_at: 2026-07-20T04:47:01.829790+00:00
 title: "Combinar herramientas integradas y llamadas a funciones \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -18,10 +18,7 @@ Enviar comentarios
 
 # Combinar herramientas integradas y llamadas a funciones
 
-Gemini permite la combinación de [herramientas integradas](https://ai.google.dev/gemini-api/docs/tools?hl=es-419), como
-`google_search`, y [llamadas a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419)
-(también conocidas como *herramientas personalizadas*) en una sola interacción preservando y exponiendo
-el historial de contexto de las llamadas a herramientas. Las combinaciones de herramientas integradas y personalizadas permiten flujos de trabajo complejos y de agentes en los que, por ejemplo, el modelo puede basarse en datos web en tiempo real antes de llamar a tu lógica empresarial específica.
+Gemini permite combinar [herramientas integradas](https://ai.google.dev/gemini-api/docs/tools?hl=es-419), como `google_search`, y [llamadas a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419) (también conocidas como *herramientas personalizadas*) en una sola interacción, ya que conserva y expone el historial de contexto de las llamadas a herramientas. Las combinaciones de herramientas integradas y personalizadas permiten flujos de trabajo complejos y basados en agentes en los que, por ejemplo, el modelo puede fundamentarse en datos web en tiempo real antes de llamar a tu lógica de negocios específica.
 
 Este es un ejemplo que habilita combinaciones de herramientas integradas y personalizadas con `google_search` y una función personalizada `getWeather`:
 
@@ -146,67 +143,61 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 ## Cómo funciona
 
-Los modelos de Gemini 3 usan la *circulación de contexto de herramientas* para habilitar combinaciones de herramientas integradas y personalizadas. La circulación de contexto de herramientas permite preservar y exponer el contexto de las herramientas integradas y compartirlo con herramientas personalizadas en la misma interacción.
+Los modelos de Gemini 3 usan la *circulación de contexto de herramientas* para habilitar combinaciones de herramientas integradas y personalizadas. La circulación del contexto de la herramienta permite conservar y exponer el contexto de las herramientas integradas, y compartirlo con las herramientas personalizadas en la misma interacción.
 
 ### Habilita la combinación de herramientas
 
-- Incluye [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419#function-declarations), junto
-  con las herramientas integradas que deseas usar, para activar el comportamiento de combinación.
+- Incluye el [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419#function-declarations), junto con las herramientas integradas que deseas usar, para activar el comportamiento de combinación.
 
-### Pasos que muestra la API
+### Devoluciones de pasos de la API
 
-En una respuesta de interacción, la API muestra pasos separados para las llamadas a herramientas integradas y las llamadas a funciones (herramientas personalizadas):
+En una respuesta de interacción, la API devuelve pasos separados para las llamadas a herramientas integradas y las llamadas a funciones (herramientas personalizadas):
 
-- **Pasos de herramientas integradas**: La API los administra automáticamente y preserva
-  el contexto en los turnos.
-- **Pasos de llamadas a funciones**: La API muestra pasos `function_call` para tus
-  funciones personalizadas. Ejecutas la función y proporcionas el resultado.
+- **Pasos de herramientas integradas**: La API administra estos pasos automáticamente y conserva el contexto en cada turno.
+- **Pasos de la llamada a función**: La API devuelve pasos `function_call` para tus funciones personalizadas. Ejecutas la función y proporcionas el resultado.
 
-### Campos críticos en los pasos mostrados
+### Campos críticos en los pasos devueltos
 
-Ciertos campos en los pasos mostrados son fundamentales para mantener el contexto de las herramientas y habilitar las combinaciones de herramientas:
+Algunos campos de los pasos devueltos son fundamentales para mantener el contexto de la herramienta y habilitar combinaciones de herramientas:
 
 - **`id`**: Se encuentra en los pasos `function_call` y `function_response`. Es un identificador único que asigna una llamada a su respuesta.
-- **`signature`**: Se encuentra en los pasos `thought`, así como en todos los pasos de llamada a herramientas (p.ej., `function_call`) y de resultado (p.ej., `function_response`) para los modelos de Gemini 3 y versiones posteriores. Este contexto encriptado permite la **circulación de contexto de herramientas** en las interacciones.
+- **`signature`**: Se encuentra en los pasos de `thought`, así como en todos los pasos de llamada a herramientas (p.ej., `function_call`) y de resultados (p.ej., `function_response`) para los modelos de Gemini 3+. Este contexto encriptado permite la **circulación del contexto de la herramienta** en las interacciones.
 
-**Administración de estos campos:**
+**Administra estos campos:**
 
 - **Modo con estado (recomendado)**: Cuando usas `previous_interaction_id`, el servidor controla automáticamente los campos `id` y `signature`.
-- **Modo sin estado**: Cuando administras el historial de conversaciones de forma manual, debes asegurarte de pasar los campos `id` y `signature` al modelo en las solicitudes posteriores para validar la autenticidad y mantener el contexto. Los SDK oficiales controlan esto automáticamente si pasas el objeto de respuesta completo al historial.
+- **Modo sin estado**: Cuando administras el historial de conversaciones de forma manual, debes asegurarte de pasar los campos `id` y `signature` al modelo en las solicitudes posteriores para validar la autenticidad y mantener el contexto. Los SDKs oficiales controlan esto automáticamente si pasas el objeto de respuesta completo al historial.
 
 ### Datos específicos de la herramienta
 
-Algunas herramientas integradas muestran argumentos de datos visibles para el usuario que son específicos del tipo de herramienta.
+Algunas herramientas integradas devuelven argumentos de datos visibles para el usuario que son específicos del tipo de herramienta.
 
-| Herramienta | Argumentos de llamada a herramientas visibles para el usuario (si corresponde) | Respuesta de herramientas visible para el usuario (si corresponde) |
+| Herramienta | Argumentos de la llamada a la herramienta visibles para el usuario (si hay alguno) | Respuesta de la herramienta visible para el usuario (si corresponde) |
 | --- | --- | --- |
 | **google\_search** | `queries` | `search_suggestions` |
 | **google\_maps** | `queries` | `places` `google_maps_widget_context_token` |
-| **url\_context** | `urls` URLs que se explorarán | `status`: Estado de exploración `retrieved_url`: URLs exploradas |
+| **url\_context** | `urls` URLs que se explorarán | `status`: Estado de navegación `retrieved_url`: URLs navegadas |
 | **file\_search** | Ninguno | Ninguno |
 
 ## Tokens y precios
 
-Ten en cuenta que las partes de la llamada a herramientas integradas en las solicitudes se cuentan para `prompt_token_count`. Dado que estos pasos de herramientas intermedios ahora son visibles y se te muestran, forman parte del historial de conversaciones. Este es solo el
-caso de las *solicitudes*, no de las *respuestas*.
+Ten en cuenta que las partes de llamadas a herramientas integradas en las solicitudes se incluyen en `prompt_token_count`. Como ahora estos pasos intermedios de la herramienta son visibles y se te devuelven, forman parte del historial de la conversación. Esto solo se aplica a las *solicitudes*, no a las *respuestas*.
 
-La herramienta Búsqueda de Google es una excepción a esta regla. La Búsqueda de Google ya
-aplica su propio modelo de precios a nivel de la consulta, por lo que los tokens no se
-cobran dos veces (consulta la página de [precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419)).
+La herramienta de la Búsqueda de Google es una excepción a esta regla. La Búsqueda de Google ya aplica su propio modelo de precios a nivel de la búsqueda, por lo que no se cobran tokens dos veces (consulta la página [Precios](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419)).
 
 Lee la página [Tokens](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) para obtener más información.
 
 ## Limitaciones
 
-- Se establece el modo `validated` de forma predeterminada (no admitido el modo `auto`) cuando se habilita la circulación de contexto de herramientas.
-- Las herramientas integradas, como `google_search`, dependen de la ubicación y la información de la hora actual, por lo que, si tu `system_instruction` o `function_declaration.description` tienen información de ubicación y hora en conflicto, es posible que la función de combinación de herramientas no funcione bien.
+- Se establece de forma predeterminada en el modo `validated` (no se admite el modo `auto`) cuando se habilita la circulación del contexto de la herramienta.
+- Las herramientas integradas, como `google_search`, dependen de la información de la ubicación y la hora actual, por lo que, si tu `system_instruction` o `function_declaration.description` tienen información de ubicación y hora contradictoria, es posible que la función de combinación de herramientas no funcione bien.
 
 ## Herramientas compatibles
 
-La circulación de contexto de herramientas estándar se aplica a las herramientas del lado del servidor (integradas).
-La ejecución de código también es una herramienta del lado del servidor, pero tiene su propia solución integrada para la circulación de contexto. El uso de la computadora y las llamadas a funciones son herramientas del lado del cliente y también tienen soluciones integradas para la circulación de contexto.
+La circulación estándar del contexto de la herramienta se aplica a las herramientas del servidor (integradas).
+La Ejecución de código también es una herramienta del servidor, pero tiene su propia solución integrada para la circulación del contexto. El uso de la computadora y la llamada a funciones son herramientas del cliente y también tienen soluciones integradas para la circulación del contexto.
 
-| Herramienta | Lado de ejecución | Compatibilidad con la circulación de contexto |
+| Herramienta | Lado de la ejecución | Asistencia para la circulación de contexto |
 | --- | --- | --- |
 | [Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419) | Del lado del servidor | Compatible |
 | [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419) | Del lado del servidor | Compatible |
@@ -218,7 +209,7 @@ La ejecución de código también es una herramienta del lado del servidor, pero
 
 ## ¿Qué sigue?
 
-- Obtén más información sobre [las llamadas a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419) en la API de Gemini.
+- Obtén más información sobre la [llamada a funciones](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419) en la API de Gemini.
 - Explora las herramientas compatibles:
   - [Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419)
   - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=es-419)
@@ -229,8 +220,8 @@ Enviar comentarios
 
 Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Última actualización: 2026-06-22 (UTC)
+Última actualización: 2026-07-06 (UTC)
 
 ¿Quieres brindar más información?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-06 (UTC)"],[],[]]

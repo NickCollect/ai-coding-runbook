@@ -1,95 +1,85 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=pl
-fetched_at: 2026-07-06T05:08:56.170290+00:00
-title: "Kr\u00f3tkie wprowadzenie do uwierzytelniania z protoko\u0142em OAuth \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=tr
+fetched_at: 2026-07-20T04:46:58.220764+00:00
+title: "OAuth ile kimlik do\u011frulama h\u0131zl\u0131 ba\u015flang\u0131\u00e7 k\u0131lavuzu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Prześlij opinię
+Geri bildirim gönderin
 
-# Krótkie wprowadzenie do uwierzytelniania z protokołem OAuth
+# OAuth ile kimlik doğrulama hızlı başlangıç kılavuzu
 
-Najłatwiejszym sposobem uwierzytelniania w Gemini API jest skonfigurowanie klucza API
-zgodnie z instrukcjami w [przewodniku dla początkujących](https://ai.google.dev/gemini-api/docs/get-started?hl=pl). Jeśli potrzebujesz bardziej rygorystycznych kontroli dostępu, możesz zamiast tego użyć OAuth. Ten przewodnik pomoże Ci skonfigurować uwierzytelnianie za pomocą OAuth.
+Gemini API'de kimlik doğrulamanın en kolay yolu, [Gemini API'yi kullanmaya başlama kılavuzunda](https://ai.google.dev/gemini-api/docs/get-started?hl=tr) açıklandığı gibi bir API anahtarı yapılandırmaktır. Daha katı erişim kontrollerine ihtiyacınız varsa bunun yerine OAuth kullanabilirsiniz. Bu kılavuz, OAuth ile kimlik doğrulama ayarlamanıza yardımcı olacaktır.
 
-Ten przewodnik zawiera uproszczoną metodę uwierzytelniania, która jest odpowiednia dla środowiska testowego. W przypadku środowiska produkcyjnego zapoznaj się
-z informacjami
-[o uwierzytelnianiu i autoryzacji](https://developers.google.com/workspace/guides/auth-overview?hl=pl)
-przed
-[wybraniem danych logowania](https://developers.google.com/workspace/guides/create-credentials?hl=pl#choose_the_access_credential_that_is_right_for_you)
-odpowiednich dla Twojej aplikacji.
+Bu kılavuzda, test ortamı için uygun olan basitleştirilmiş bir kimlik doğrulama yaklaşımı kullanılmaktadır. Üretim ortamı için, uygulamanıza uygun [erişim kimlik bilgilerini seçmeden](https://developers.google.com/workspace/guides/create-credentials?hl=tr#choose_the_access_credential_that_is_right_for_you) önce [kimlik doğrulama ve yetkilendirme](https://developers.google.com/workspace/guides/auth-overview?hl=tr) hakkında bilgi edinin.
 
-## Cele
+## Hedefler
 
-- Skonfiguruj projekt w chmurze na potrzeby OAuth.
-- Skonfiguruj domyślne dane logowania aplikacji.
-- Zarządzaj danymi logowania w programie zamiast używać `gcloud auth`.
+- OAuth için Cloud projenizi ayarlama
+- Uygulama varsayılan kimlik bilgilerini ayarlama
+- `gcloud auth` kullanmak yerine programınızdaki kimlik bilgilerini yönetin
 
-## Wymagania wstępne
+## Ön koşullar
 
-Aby uruchomić ten samouczek, musisz mieć:
+Bu hızlı başlangıç kılavuzunu çalıştırmak için ihtiyacınız olanlar:
 
-- [projekt Google Cloud,](https://developers.google.com/workspace/guides/create-project?hl=pl)
-- [lokalną instalację gcloud CLI.](https://cloud.google.com/sdk/docs/install?hl=pl)
+- [Google Cloud projesi](https://developers.google.com/workspace/guides/create-project?hl=tr)
+- [gcloud CLI'nın yerel olarak yüklenmiş olması](https://cloud.google.com/sdk/docs/install?hl=tr)
 
-## Konfigurowanie projektu w chmurze
+## Cloud projenizi oluşturma
 
-Aby wykonać zadania z tego samouczka, musisz najpierw skonfigurować projekt w chmurze.
+Bu hızlı başlangıcı tamamlamak için önce Cloud projenizi ayarlamanız gerekir.
 
-### 1. Włącz API
+### 1. API'yi etkinleştirme
 
-Zanim zaczniesz korzystać z interfejsów API Google, musisz je włączyć w projekcie w chmurze Google.
+Google API'lerini kullanmadan önce bir Google Cloud projesinde etkinleştirmeniz gerekir.
 
-- W konsoli Google Cloud włącz Google Generative Language API.
+- Google Cloud Console'da Google Generative Language API'yi etkinleştirin.
 
-  [Włącz API](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=pl)
+  [API'yi etkinleştirme](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=tr)
 
-### 2. Konfigurowanie ekranu zgody OAuth
+### 2. OAuth kullanıcı rızası ekranını yapılandırma
 
-Następnie skonfiguruj ekran zgody OAuth w projekcie i dodaj siebie jako użytkownika testowego. Jeśli ten krok został już wykonany w przypadku projektu w chmurze, przejdź do następnej sekcji.
+Ardından, projenin OAuth kullanıcı rızası ekranını yapılandırın ve kendinizi test kullanıcısı olarak ekleyin. Cloud projeniz için bu adımı zaten tamamladıysanız bir sonraki bölüme geçin.
 
-1. W konsoli Google Cloud kliknij **Menu** > **Platforma uwierzytelniania Google** > **Przegląd**.
+1. Google Cloud Console'da **Menü** > **Google Auth platform** > **Overview**'a (Genel bakış) gidin.
 
-   [Otwórz platformę uwierzytelniania Google](https://console.developers.google.com/auth/overview?hl=pl)
-2. Wypełnij formularz konfiguracji projektu i w sekcji **Odbiorcy** ustaw typ użytkownika na **Zewnętrzny**.
-3. Wypełnij pozostałą część formularza, zaakceptuj warunki zasad dotyczących danych użytkownika, a następnie kliknij **Utwórz**.
-4. Na razie możesz pominąć dodawanie zakresów i kliknąć **Zapisz i kontynuuj**. W przyszłości, gdy będziesz tworzyć aplikację do użytku poza organizacją Google Workspace, musisz dodać i zweryfikować zakresy autoryzacji wymagane przez aplikację.
-5. Dodaj użytkowników testowych:
+   [Google Auth platformuna gidin](https://console.developers.google.com/auth/overview?hl=tr)
+2. Proje yapılandırma formunu doldurun ve **Kitle** bölümünde kullanıcı türünü **Harici** olarak ayarlayın.
+3. Formun geri kalanını doldurun, Kullanıcı Verileri Politikası şartlarını kabul edin ve **Oluştur**'u tıklayın.
+4. Şimdilik kapsam eklemeyi atlayıp **Kaydet ve Devam Et**'i tıklayabilirsiniz. Gelecekte, Google Workspace kuruluşunuzun dışında kullanılacak bir uygulama oluşturduğunuzda, uygulamanızın gerektirdiği yetkilendirme kapsamlarını ekleyip doğrulamanız gerekir.
+5. Test kullanıcıları ekleyin:
 
-   1. Otwórz stronę
-      [Odbiorcy](https://console.developers.google.com/auth/audience?hl=pl) na
-      platformie uwierzytelniania Google.
-   2. W sekcji **Użytkownicy testowi** kliknij **Dodaj użytkowników**.
-   3. Wpisz swój adres e-mail i adresy e-mail innych autoryzowanych użytkowników testowych, a następnie kliknij **Zapisz**.
+   1. Google Auth platformunun [Kitle sayfasına](https://console.developers.google.com/auth/audience?hl=tr) gidin.
+   2. **Test kullanıcıları** bölümünde **Kullanıcı ekle**'yi tıklayın.
+   3. E-posta adresinizi ve yetkili diğer test kullanıcılarını girip **Kaydet**'i tıklayın.
 
-### 3. Autoryzowanie danych logowania aplikacji na komputer
+### 3. Masaüstü uygulaması için kimlik bilgilerini yetkilendirme
 
-Aby uwierzytelnić się jako użytkownik końcowy i uzyskać dostęp do danych użytkownika w aplikacji, musisz utworzyć co najmniej 1 identyfikator klienta OAuth 2.0. Identyfikator klienta wskazuje konkretną aplikację na serwerach OAuth Google. Jeśli Twoja aplikacja działa na kilku platformach, musisz utworzyć osobny identyfikator klienta dla każdej z nich.
+Son kullanıcı olarak kimlik doğrulamak ve uygulamanızdaki kullanıcı verilerine erişmek için bir veya daha fazla OAuth 2.0 istemci kimliği oluşturmanız gerekir. İstemci kimliği, tek bir uygulamanın Google OAuth sunucularına tanıtılması için kullanılır. Uygulamanız birden fazla platformda çalışıyorsa her platform için ayrı bir istemci kimliği oluşturmanız gerekir.
 
-1. W konsoli Google Cloud kliknij **Menu** > **Platforma uwierzytelniania Google** > **Klienci**.
+1. Google Cloud Console'da **Menü** > **Google Auth platformu** > **İstemciler**'e gidin.
 
-   [Otwórz dane logowania](https://console.developers.google.com/auth/clients?hl=pl)
-2. Kliknij **Utwórz klienta**.
-3. Kliknij **Typ aplikacji** > **Aplikacja na komputer**.
-4. W polu **Nazwa** wpisz nazwę danych logowania. Ta nazwa jest widoczna tylko w konsoli Google Cloud.
-5. Kliknij **Utwórz**. Wyświetli się ekran Utworzono klienta OAuth z nowym identyfikatorem klienta i tajnym kluczem klienta.
-6. Kliknij **OK**. Nowo utworzone dane logowania pojawią się w sekcji **Identyfikatory klientów OAuth 2.0**.
-7. Kliknij przycisk pobierania, aby zapisać plik JSON. Zostanie on zapisany jako
-   `client_secret_<identifier>.json`. Zmień jego nazwę na `client_secret.json`
-   i przenieś go do katalogu roboczego.
+   [Kimlik Bilgileri'ne gidin](https://console.developers.google.com/auth/clients?hl=tr)
+2. **Create Client**'ı (İstemci Oluştur) tıklayın.
+3. **Uygulama türü** > **Masaüstü uygulaması**'nı tıklayın.
+4. **Ad** alanına, kimliğin adını yazın. Bu ad yalnızca Google Cloud Console'da gösterilir.
+5. **Oluştur**'u tıklayın. Yeni istemci kimliğinizi ve istemci gizli anahtarınızı gösteren, oluşturulan OAuth istemcisi ekranı görünür.
+6. **Tamam**'ı tıklayın. Yeni oluşturulan kimlik bilgisi, **OAuth 2.0 İstemci Kimlikleri** altında görünür.
+7. JSON dosyasını kaydetmek için indir düğmesini tıklayın. `client_secret_<identifier>.json` olarak kaydedilir. `client_secret.json` olarak yeniden adlandırın ve çalışma dizininize taşıyın.
 
-## Konfigurowanie domyślnych danych logowania aplikacji
+## Uygulama Varsayılan Kimlik Bilgileri'ni ayarlama
 
-Aby przekonwertować plik `client_secret.json` na dane logowania, które można wykorzystać, przekaż jego lokalizację do argumentu `--client-id-file` polecenia `gcloud auth application-default login`.
+`client_secret.json` dosyasını kullanılabilir kimlik bilgilerine dönüştürmek için dosyanın konumunu `gcloud auth application-default login` komutunun `--client-id-file` bağımsız değişkenine iletin.
 
 ```
 gcloud auth application-default login \
@@ -97,10 +87,9 @@ gcloud auth application-default login \
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ```
 
-Uproszczona konfiguracja projektu w tym samouczku powoduje wyświetlenie okna **"Google nie
-zweryfikowało tej aplikacji"**. To normalne. Kliknij **„Kontynuuj”**.
+Bu eğitimdeki basitleştirilmiş proje kurulumu, **"Google bu uygulamayı doğrulamadı."** iletişim kutusunu tetikler. Bu normal bir durumdur. **"Devam"**'ı seçin.
 
-Spowoduje to umieszczenie wygenerowanego tokena w dobrze znanej lokalizacji, dzięki czemu będzie on dostępny dla `gcloud` lub bibliotek klienta.
+Bu işlem, sonuç jetonunu iyi bilinen bir konuma yerleştirir. Böylece jetona `gcloud` veya istemci kitaplıkları tarafından erişilebilir.
 
 ```` ```
 gcloud auth application-default login   
@@ -111,11 +100,11 @@ gcloud auth application-default login
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ``` ````
 
-Gdy skonfigurujesz domyślne uwierzytelnianie aplikacji (ADC), biblioteki klienta w większości języków nie będą potrzebować pomocy w ich znalezieniu.
+Uygulama Varsayılan Kimlik Bilgileri (ADC) ayarlandıktan sonra, çoğu dildeki istemci kitaplıklarının bunları bulmak için çok az yardıma veya hiç yardıma ihtiyacı olmaz.
 
-### curl
+### Curl
 
-Najszybszym sposobem na sprawdzenie, czy wszystko działa, jest użycie curl do uzyskania dostępu do REST API:
+Bu işlemin çalıştığını test etmenin en hızlı yolu, curl kullanarak REST API'ye erişmek için kullanmaktır:
 
 ```
 access_token=$(gcloud auth application-default print-access-token)
@@ -128,13 +117,13 @@ curl -X GET https://generativelanguage.googleapis.com/v1/models \
 
 ### Python
 
-W Pythonie biblioteki klienta powinny znaleźć je automatycznie:
+Python'da istemci kitaplıkları bunları otomatik olarak bulur:
 
 ```
 pip install google-genai
 ```
 
-Minimalny skrypt do testowania może wyglądać tak:
+Bunu test etmek için kullanılabilecek minimum komut dosyası:
 
 ```
 from google import genai
@@ -143,30 +132,28 @@ client = genai.Client()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-## Dalsze kroki
+## Sonraki adımlar
 
-Jeśli wszystko działa, możesz wypróbować
-[wyszukiwanie semantyczne na danych tekstowych](https://ai.google.dev/docs/semantic_retriever?hl=pl).
+Bu işlem işe yararsa [metin verilerinizde semantik almayı](https://ai.google.dev/docs/semantic_retriever?hl=tr) deneyebilirsiniz.
 
-## Samodzielne zarządzanie danymi logowania [Python]
+## Kimlik bilgilerini kendiniz yönetme [Python]
 
-W wielu przypadkach nie będziesz mieć dostępu do polecenia `gcloud`, aby utworzyć token dostępu na podstawie identyfikatora klienta (`client_secret.json`). Google udostępnia biblioteki w wielu językach, które umożliwiają zarządzanie tym procesem w aplikacji. W tej sekcji pokazujemy, jak to zrobić w Pythonie. Odpowiednie przykłady tej procedury w innych językach znajdziesz w
-[dokumentacji Drive API](https://developers.google.com/drive/api/quickstart/python?hl=pl).
+Çoğu durumda, istemci kimliğinden (`client_secret.json`) erişim jetonu oluşturmak için `gcloud` komutunu kullanamazsınız. Google, bu süreci uygulamanızda yönetmenize olanak tanıyan birçok dilde kitaplıklar sunar. Bu bölümde, süreç Python'da gösterilmektedir. Bu tür bir prosedürün diğer dillerdeki benzer örneklerini [Drive API belgelerinde](https://developers.google.com/drive/api/quickstart/python?hl=tr) bulabilirsiniz.
 
-### 1. Zainstaluj niezbędne biblioteki
+### 1. Gerekli kitaplıkları yükleme
 
-Zainstaluj bibliotekę klienta Google dla Pythona i bibliotekę klienta Gemini.
+Python için Google istemci kitaplığını ve Gemini istemci kitaplığını yükleyin.
 
 ```
 pip install --upgrade -q google-api-python-client google-auth-httplib2 google-auth-oauthlib
 pip install google-genai
 ```
 
-### 2. Napisz menedżera danych logowania
+### 2. Kimlik bilgisi yöneticisini yazma
 
-Aby zminimalizować liczbę kliknięć na ekranach autoryzacji, utwórz w katalogu roboczym plik o nazwie `load_creds.py`, który będzie buforować plik `token.json`, aby można go było później użyć ponownie lub odświeżyć, jeśli wygaśnie.
+Yetkilendirme ekranlarını tıklamanız gereken sayıyı en aza indirmek için çalışma dizininizde `load_creds.py` adlı bir dosya oluşturun. Bu dosya, daha sonra yeniden kullanılabilecek veya süresi dolarsa yenilenebilecek bir `token.json` dosyasını önbelleğe alır.
 
-Zacznij od tego kodu, aby przekonwertować plik `client_secret.json` na token, którego można używać z `genai.configure`:
+`client_secret.json` dosyasını `genai.configure` ile kullanılabilir bir jetona dönüştürmek için aşağıdaki kodla başlayın:
 
 ```
 import os.path
@@ -203,9 +190,9 @@ def load_creds():
     return creds
 ```
 
-### 3. Napisz program
+### 3. Programınızı yazma
 
-Teraz utwórz plik `script.py`:
+Şimdi `script.py` özelliğinizi oluşturun:
 
 ```
 import pprint
@@ -220,27 +207,27 @@ print()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-### 4. Uruchom program
+### 4. Programınızı çalıştırma
 
-W katalogu roboczym uruchom przykład:
+Çalışma dizininizde örneği çalıştırın:
 
 ```
 python script.py
 ```
 
-Gdy uruchomisz skrypt po raz pierwszy, otworzy się okno przeglądarki z prośbą o autoryzację dostępu.
+Komut dosyasını ilk kez çalıştırdığınızda bir tarayıcı penceresi açılır ve erişimi yetkilendirmeniz istenir.
 
-1. Jeśli nie jesteś zalogowany(-a) na konto Google, pojawi się prośba o zalogowanie się. Jeśli korzystasz z kilku kont, **pamiętaj, aby podczas konfigurowania projektu wybrać konto, które zostało ustawione jako „Konto testowe”**.
-2. Informacje o autoryzacji są przechowywane w systemie plików, więc przy następnym uruchomieniu przykładowego kodu nie pojawi się prośba o autoryzację.
+1. Henüz Google Hesabınızda oturum açmadıysanız oturum açmanız istenir. Birden fazla hesapta oturum açtıysanız **projenizi yapılandırırken "Test Hesabı" olarak ayarladığınız hesabı seçtiğinizden emin olun.**
+2. Yetkilendirme bilgileri dosya sisteminde saklandığı için örnek kodu bir sonraki çalıştırmanızda yetkilendirme istenmez.
 
-Udało Ci się skonfigurować uwierzytelnianie.
+Kimlik doğrulama işlemini başarıyla ayarladınız.
 
-Prześlij opinię
+Geri bildirim gönderin
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Ostatnia aktualizacja: 2026-07-01 UTC.
+Son güncelleme tarihi: 2026-07-01 UTC.
 
-Chcesz przekazać coś jeszcze?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-01 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-01 UTC."],[],[]]

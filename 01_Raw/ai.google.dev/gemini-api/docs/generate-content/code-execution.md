@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=he
-fetched_at: 2026-07-06T05:15:09.544369+00:00
-title: "\u05d4\u05e8\u05e6\u05ea \u05e7\u05d5\u05d3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=tr
+fetched_at: 2026-07-20T04:42:33.797048+00:00
+title: "Kod y\u00fcr\u00fctme \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-שליחת משוב
+Geri bildirim gönderin
 
-# הרצת קוד
+# Kod yürütme
 
-‫Gemini API כולל כלי להרצת קוד שמאפשר למודל ליצור ולהריץ קוד Python. לאחר מכן המודל יכול ללמוד באופן איטרטיבי מתוצאות הביצוע של הקוד עד שהוא מגיע לפלט סופי. אתם יכולים להשתמש בהרצת קוד כדי ליצור אפליקציות שמרוויחות מהיכולת להסיק מסקנות על סמך קוד. לדוגמה, אפשר להשתמש בהרצת קוד כדי לפתור משוואות או לעבד טקסט. אפשר גם להשתמש ב[ספריות](#supported-libraries) שכלולות בסביבת ההפעלה של הקוד כדי לבצע משימות ספציפיות יותר.
+Gemini API, modelin Python kodu oluşturup çalıştırmasını sağlayan bir kod yürütme aracı sunar. Model, nihai bir çıkışa ulaşana kadar kod yürütme sonuçlarından yinelemeli olarak öğrenebilir. Kod yürütme özelliğini kullanarak kod tabanlı akıl yürütmeden yararlanan uygulamalar oluşturabilirsiniz. Örneğin, denklemleri çözmek veya metinleri işlemek için kod yürütmeyi kullanabilirsiniz. Daha özel görevleri gerçekleştirmek için kod yürütme ortamında yer alan [kütüphaneleri](#supported-libraries) de kullanabilirsiniz.
 
-‫Gemini יכול להריץ קוד רק ב-Python. עדיין אפשר לבקש מ-Gemini ליצור קוד בשפה אחרת, אבל המודל לא יכול להשתמש בכלי להרצת קוד כדי להריץ אותו.
+Gemini yalnızca Python'daki kodları çalıştırabilir. Gemini'dan başka bir dilde kod oluşturmasını isteyebilirsiniz ancak model, kodu çalıştırmak için kod yürütme aracını kullanamaz.
 
-## הפעלת ביצוע קוד
+## Kod yürütmeyi etkinleştirme
 
-כדי להפעיל את הרצת הקוד, צריך להגדיר את כלי הרצת הקוד במודל. כך המודל יכול ליצור ולהריץ קוד.
+Kod yürütmeyi etkinleştirmek için modelde kod yürütme aracını yapılandırın. Bu, modelin kod oluşturup çalıştırmasına olanak tanır.
 
 ### Python
 
@@ -143,7 +143,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-הפלט יכול להיראות כך, אחרי שעיצבנו אותו כדי שיהיה קל לקריאה:
+Çıktı, okunabilirlik için biçimlendirilmiş aşağıdaki gibi görünebilir:
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -192,27 +192,27 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-הפלט הזה משלב כמה חלקים של תוכן שהמודל מחזיר כשמשתמשים בהרצת קוד:
+Bu çıkış, kod yürütme kullanılırken modelin döndürdüğü çeşitli içerik bölümlerini birleştirir:
 
-- ‫`text`: טקסט מוטבע שנוצר על ידי המודל
-- ‫`executableCode`: קוד שנוצר על ידי המודל ומיועד להרצה
-- `codeExecutionResult`: התוצאה של קוד ההפעלה
+- `text`: Model tarafından oluşturulan satır içi metin
+- `executableCode`: Model tarafından oluşturulan ve yürütülmesi amaçlanan kod
+- `codeExecutionResult`: Yürütülebilir kodun sonucu
 
-מוסכמות השמות של החלקים האלה משתנות בהתאם לשפת התכנות.
+Bu bölümlerin adlandırma kuralları, programlama diline göre değişir.
 
-## הפעלת קוד עם תמונות (Gemini 3)
+## Görüntülerle kod yürütme (Gemini 3)
 
-מודל Gemini 3 Flash יכול עכשיו לכתוב ולהריץ קוד Python כדי לשנות ולבדוק תמונות באופן פעיל.
+Gemini 3 Flash modeli artık görüntüleri etkin bir şekilde işlemek ve incelemek için Python kodu yazıp çalıştırabilir.
 
-**תרחישים לדוגמה**
+**Kullanım alanları**
 
-- **התקרבות ובדיקה**: המודל מזהה באופן מובנה מתי הפרטים קטנים מדי (למשל, קריאת מד מרחק) וכותב קוד לחיתוך ולבדיקה מחדש של האזור ברזולוציה גבוהה יותר.
-- **מתמטיקה ויזואלית**: המודל יכול לבצע חישובים מרובי-שלבים באמצעות קוד (לדוגמה, סיכום פריטים בחשבונית).
-- **הערות לתמונות**: המודל יכול להוסיף הערות לתמונות כדי לענות על שאלות, למשל לצייר חצים כדי להראות קשרים.
+- **Yakınlaştırma ve inceleme**: Model, ayrıntıların çok küçük olduğunu (ör. uzaktaki bir ölçüm cihazını okuma) örtülü olarak algılar ve alanı kırpıp daha yüksek çözünürlükte yeniden incelemek için kod yazar.
+- **Görsel matematik**: Model, kod kullanarak çok adımlı hesaplamalar yapabilir (ör. bir makbuzdaki satır öğelerini toplama).
+- **Görüntü notlandırma**: Model, soruları yanıtlamak için görüntüleri notlandırabilir (ör. ilişkileri göstermek için oklar çizebilir).
 
-### הפעלת ביצוע קוד באמצעות תמונות
+### Görüntülerle kod yürütmeyi etkinleştirme
 
-החל מ-Gemini 3 Flash, יש תמיכה רשמית בהרצת קוד עם תמונות. כדי להפעיל את ההתנהגות הזו, צריך להפעיל גם את ההגדרה 'הפעלת קוד ככלי' וגם את ההגדרה 'חשיבה'.
+Görüntülerle kod yürütme, Gemini 3 Flash'te resmi olarak desteklenir. Hem "Araç olarak kod yürütme" hem de "Düşünme"yi etkinleştirerek bu davranışı etkinleştirebilirsiniz.
 
 ### Python
 
@@ -427,9 +427,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-## איך משתמשים בהרצת קוד בצ'אט
+## Sohbette kod yürütme özelliğini kullanma
 
-אפשר גם להשתמש בהרצת קוד כחלק משיחה.
+Kod yürütmeyi sohbetin bir parçası olarak da kullanabilirsiniz.
 
 ### Python
 
@@ -587,73 +587,73 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-## קלט/פלט (I/O)
+## Giriş/çıkış (G/Ç)
 
-הרצת קוד תומכת בקלט של קבצים ובפלט של גרפים. בעזרת היכולות האלה של קלט ופלט, אתם יכולים להעלות קובצי CSV וקובצי טקסט, לשאול שאלות לגבי הקבצים ולקבל תשובה שכוללת גרפים של [Matplotlib](https://matplotlib.org/). קבצי הפלט מוחזרים כתמונות מוטמעות בתשובה.
+Kod yürütme, dosya girişini ve grafik çıkışını destekler. Bu giriş ve çıkış özelliklerini kullanarak CSV ve metin dosyaları yükleyebilir, dosyalarla ilgili sorular sorabilir ve yanıtın bir parçası olarak [Matplotlib](https://matplotlib.org/) grafikleri oluşturabilirsiniz. Çıkış dosyaları, yanıttaki satır içi resimler olarak döndürülür.
 
-### תמחור של קלט/פלט
+### G/Ç fiyatlandırması
 
-כשמשתמשים בקלט/פלט של ביצוע קוד, מחויבים על טוקנים של קלט וטוקנים של פלט:
+Kod yürütme G/Ç'sini kullanırken giriş jetonları ve çıkış jetonları için ücretlendirilirsiniz:
 
-**טוקנים של קלט:**
+**Giriş jetonu sayısı:**
 
-- הנחיה למשתמש
+- Kullanıcı istemi
 
-**טוקנים של פלט:**
+**Çıkış jetonları:**
 
-- קוד שנוצר על ידי המודל
-- פלט של הרצת קוד בסביבת הקוד
-- טוקנים של חשיבה
-- סיכום שנוצר על ידי המודל
+- Model tarafından oluşturulan kod
+- Kod ortamında kod yürütme çıkışı
+- Düşünme jetonları
+- Model tarafından oluşturulan özet
 
-### פרטי קלט/פלט
+### G/Ç ayrıntıları
 
-כשעובדים עם קלט/פלט של ביצוע קוד, חשוב לשים לב לפרטים הטכניים הבאים:
+Kod yürütme G/Ç'siyle çalışırken aşağıdaki teknik ayrıntılara dikkat edin:
 
-- זמן הריצה המקסימלי של סביבת הקוד הוא 30 שניות.
-- אם סביבת הקוד יוצרת שגיאה, יכול להיות שהמודל יחליט ליצור מחדש את פלט הקוד. אפשר לנסות עד 5 פעמים.
-- הגודל המקסימלי של קובץ קלט מוגבל על ידי חלון הטוקנים של המודל. ב-AI Studio, גודל הקובץ המקסימלי של קובץ קלט הוא מיליון טוקנים (בערך 2MB לקובצי טקסט מסוגי הקלט הנתמכים). אם תעלו קובץ גדול מדי, לא תוכלו לשלוח אותו ב-AI Studio.
-- התכונה 'ביצוע קוד' פועלת הכי טוב עם קובצי טקסט ו-CSV.
-- אפשר להעביר את קובץ הקלט ב-`part.inlineData` או ב-`part.fileData` (העלאה דרך [Files API](https://ai.google.dev/gemini-api/docs/files?hl=he)), וקובץ הפלט תמיד מוחזר כ-`part.inlineData`.
+- Kod ortamının maksimum çalışma süresi 30 saniyedir.
+- Kod ortamı hata oluşturursa model, kod çıkışını yeniden oluşturmaya karar verebilir. Bu işlem en fazla 5 kez yapılabilir.
+- Maksimum dosya giriş boyutu, model jetonu penceresiyle sınırlıdır. AI Studio'da maksimum giriş dosyası boyutu 1 milyon jetondur (desteklenen giriş türlerindeki metin dosyaları için yaklaşık 2 MB). Çok büyük bir dosya yüklerseniz AI Studio bu dosyayı göndermenize izin vermez.
+- Kod yürütme, metin ve CSV dosyalarıyla en iyi şekilde çalışır.
+- Giriş dosyası `part.inlineData` veya `part.fileData` olarak iletilebilir ([Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenir) ve çıkış dosyası her zaman `part.inlineData` olarak döndürülür.
 
-## חיוב
+## Faturalandırma
 
-הפעלת ביצוע קוד מ-Gemini API לא כרוכה בתשלום נוסף.
-תחויבו לפי התעריף הנוכחי של טוקנים של קלט ופלט, בהתאם למודל Gemini שבו אתם משתמשים.
+Gemini API'den kod yürütmeyi etkinleştirmek için ek ücret alınmaz.
+Kullandığınız Gemini modeline göre giriş ve çıkış jetonlarının mevcut oranı üzerinden faturalandırılırsınız.
 
-ריכזנו כאן כמה דברים נוספים שכדאי לדעת על חיוב על הפעלת קוד:
+Kod yürütme faturalandırması hakkında bilmeniz gereken diğer noktalar:
 
-- אתם מחויבים רק פעם אחת על טוקני הקלט שאתם מעבירים למודל, ועל טוקני הפלט הסופי שהמודל מחזיר לכם.
-- טוקנים שמייצגים קוד שנוצר נספרים כטוקנים של פלט. הקוד שנוצר יכול לכלול טקסט ופלט מולטי-מודאלי כמו תמונות.
-- תוצאות של הרצת קוד נספרות גם הן כטוקנים של פלט.
+- Modele ilettiğiniz giriş jetonları için yalnızca bir kez faturalandırılırsınız ve modelin size döndürdüğü nihai çıkış jetonları için faturalandırılırsınız.
+- Oluşturulan kodu temsil eden jetonlar, çıkış jetonları olarak sayılır. Oluşturulan kod, metin ve görüntü gibi çok formatlı çıkışlar içerebilir.
+- Kod yürütme sonuçları da çıkış jetonu olarak sayılır.
 
-מודל החיוב מוצג בתרשים הבא:
+Faturalandırma modeli aşağıdaki şemada gösterilmektedir:
 
-![מודל חיוב על הרצת קוד](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=he)
+![kod yürütme faturalandırma modeli](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=tr)
 
-- החיוב מתבצע לפי התעריף הנוכחי של טוקנים של קלט ופלט, על סמך מודל Gemini שבו אתם משתמשים.
-- אם Gemini משתמש בהרצת קוד כדי ליצור את התשובה, ההנחיה המקורית, הקוד שנוצר והתוצאה של הקוד שהורץ מסומנים כ*טוקנים של תוצאות ביניים*, והחיוב הוא על *טוקנים של קלט*.
-- ‫Gemini ייצור סיכום ויחזיר את הקוד שנוצר, את התוצאה של הקוד שהופעל ואת הסיכום הסופי. החיוב הוא על *טוקנים של פלט*.
-- ‫Gemini API כולל ספירת אסימונים ביניים בתגובת ה-API, כדי שתדעו למה אתם מקבלים אסימוני קלט נוספים מעבר להנחיה הראשונית.
+- Kullandığınız Gemini modeline göre giriş ve çıkış jetonlarının mevcut oranı üzerinden faturalandırılırsınız.
+- Gemini, yanıtınızı oluştururken kod yürütme özelliğini kullanırsa orijinal istem, oluşturulan kod ve yürütülen kodun sonucu *ara jetonları* olarak etiketlenir ve *giriş jetonları* olarak faturalandırılır.
+- Ardından Gemini, bir özet oluşturur ve oluşturulan kodu, çalıştırılan kodun sonucunu ve nihai özeti döndürür. Bunlar *çıkış jetonları* olarak faturalandırılır.
+- Gemini API, API yanıtında ara jeton sayısını içerir. Böylece, ilk isteminizin ötesinde neden ek giriş jetonları aldığınızı bilirsiniz.
 
-## מגבלות
+## Sınırlamalar
 
-- המודל יכול רק ליצור ולהריץ קוד. הוא לא יכול להחזיר פריטים אחרים, כמו קובצי מדיה.
-- במקרים מסוימים, הפעלת ביצוע קוד עלולה להוביל לרגרסיות בתחומים אחרים של פלט המודל (לדוגמה, כתיבת סיפור).
-- יש הבדלים בין המודלים השונים ביכולת שלהם להשתמש בהרצת קוד בהצלחה.
+- Model yalnızca kod oluşturabilir ve yürütebilir. Medya dosyaları gibi diğer öğeler geri döndürülemez.
+- Bazı durumlarda, kod yürütmenin etkinleştirilmesi model çıktısının diğer alanlarında (ör. hikaye yazma) gerilemelere yol açabilir.
+- Farklı modellerin kod yürütmeyi başarılı bir şekilde kullanma becerisinde bazı farklılıklar vardır.
 
-## שילובים נתמכים של כלים
+## Desteklenen araç kombinasyonları
 
-אפשר לשלב את הכלי להרצת קוד עם [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) כדי להפעיל תרחישי שימוש מורכבים יותר.
+Kod yürütme aracı, daha karmaşık kullanım alanlarını desteklemek için [Google Arama ile temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) ile birleştirilebilir.
 
-מודלים של Gemini 3 תומכים בשילוב של כלים מובנים (כמו הפעלת קוד) עם כלים מותאמים אישית (הפעלת פונקציות). כדי שהשילוב של הכלים יפעל, צריך להעביר בחזרה את השדות `id` ו-`thought_signature`. מידע נוסף זמין בדף [שילובים של כלים](https://ai.google.dev/gemini-api/docs/tool-combination?hl=he).
+Gemini 3 modelleri, yerleşik araçların (ör. kod yürütme) özel araçlarla (işlev çağrısı) birlikte kullanılmasını destekler. Araç kombinasyonunun çalışması için `id` ve `thought_signature` alanlarını geri iletmeniz gerekir. [Araç kombinasyonları](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) sayfasından daha fazla bilgi edinin.
 
-## ספריות נתמכות
+## Desteklenen kitaplıklar
 
-סביבת ההפעלה של הקוד כוללת את הספריות הבאות:
+Kod yürütme ortamı aşağıdaki kitaplıkları içerir:
 
 - attrs
-- שחמט
+- satranç
 - contourpy
 - fpdf
 - geopandas
@@ -668,9 +668,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 - numpy
 - opencv-python
 - openpyxl
-- מארז
-- פנדות
-- כרית
+- paketleme
+- pandalar
+- yastık
 - protobuf
 - pylatex
 - pyparsing
@@ -682,29 +682,29 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 - scikit-learn
 - scipy
 - seaborn
-- שש
+- altı
 - striprtf
 - sympy
-- לרכז בטבלה
+- tablolaştırmak
 - tensorflow
 - toolz
 - xlrd
 
-אי אפשר להתקין ספריות משלכם.
+Kendi kitaplıklarınızı yükleyemezsiniz.
 
-## המאמרים הבאים
+## Sırada ne var?
 
-- אפשר לנסות את [הפעלת הקוד ב-Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=he).
-- מידע על כלים אחרים של Gemini API:
-  - [בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)
-  - [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/grounding?hl=he)
+- [Kod yürütme Colab'ini](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=tr) deneyin.
+- Diğer Gemini API araçları hakkında bilgi edinin:
+  - [İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)
+  - [Google Arama ile temellendirme](https://ai.google.dev/gemini-api/docs/grounding?hl=tr)
 
-שליחת משוב
+Geri bildirim gönderin
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-עדכון אחרון: 2026-06-24 (שעון UTC).
+Son güncelleme tarihi: 2026-06-24 UTC.
 
-רוצה לתת לנו משוב?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-24 (שעון UTC)."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-24 UTC."],[],[]]

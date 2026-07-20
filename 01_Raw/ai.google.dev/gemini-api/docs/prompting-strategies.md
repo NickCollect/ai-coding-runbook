@@ -1,212 +1,209 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar
-fetched_at: 2026-07-06T05:16:28.895420+00:00
-title: "\u0627\u0633\u062a\u0631\u0627\u062a\u064a\u062c\u064a\u0627\u062a \u0627\u0644\u062a\u0635\u0645\u064a\u0645 \u0627\u0644\u0641\u0648\u0631\u064a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ja
+fetched_at: 2026-07-20T04:40:47.217583+00:00
+title: "\u30d7\u30ed\u30f3\u30d7\u30c8\u8a2d\u8a08\u6226\u7565 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-إرسال ملاحظات
+フィードバックを送信
 
-# استراتيجيات التصميم الفوري
+# プロンプト設計戦略
 
-*تصميم الطلبات* هو عملية إنشاء طلبات أو طلبات بلغة طبيعية تؤدي إلى إنتاج ردود دقيقة وعالية الجودة من نموذج لغوي.
+プロンプト設計とは、言語モデルから正確で高品質なレスポンスを引き出すプロンプト（自然言語リクエスト）を作成するプロセスです。
 
-تقدّم هذه الصفحة المفاهيم الأساسية والاستراتيجيات وأفضل الممارسات لمساعدتك في البدء بتصميم الطلبات للاستفادة إلى أقصى حدّ من نماذج الذكاء الاصطناعي من Gemini.
+このページでは、Gemini AI モデルを最大限に活用するためのプロンプト設計の基本的なコンセプト、戦略、ベスト プラクティスについて説明します。
 
-## أدلة كتابة الطلبات المتعلقة بموضوع معيّن
+## トピック別のプロンプト ガイド
 
-هل تبحث عن استراتيجيات أكثر تحديدًا لإنشاء الطلبات؟ يمكنك الاطّلاع على أدلة كتابة الطلبات الأخرى
-على:
+より具体的なプロンプト戦略をお探しですか？次のプロンプト ガイドをご覧ください。
 
-- [تقديم الطلبات باستخدام ملفات الوسائط](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide)
-- تقديم طلبات لإنشاء الصور باستخدام [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ar#imagen-prompt-guide) و[ميزة إنشاء الصور الأصلية في Gemini](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar#prompt-guide)
-- [تقديم طلب لإنشاء فيديو](https://ai.google.dev/gemini-api/docs/video?hl=ar#prompt-guide)
+- [メディア ファイルを使用したプロンプト](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)
+- [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja#imagen-prompt-guide) と [Gemini ネイティブ画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja#prompt-guide) を使用した画像生成のプロンプト
+- [動画生成のプロンプト](https://ai.google.dev/gemini-api/docs/video?hl=ja#prompt-guide)
 
-يمكنك العثور على نماذج أخرى من الطلبات في [معرض الطلبات](https://ai.google.dev/gemini-api/prompts?hl=ar)
-المخصّص لعرض العديد من المفاهيم الواردة في هذا الدليل بشكل تفاعلي.
+その他のサンプル プロンプトについては、[プロンプト ギャラリー](https://ai.google.dev/gemini-api/prompts?hl=ja)
+をご覧ください。このガイドで説明されているコンセプトの多くをインタラクティブに紹介しています。
 
-## تعليمات واضحة ومحدّدة
+## 明確で具体的な指示
 
-تتمثّل إحدى الطرق الفعّالة والمجدية لتخصيص سلوك النموذج في تزويده بتعليمات واضحة ومحدّدة، ويمكن أن تكون التعليمات على شكل سؤال أو مهام مفصّلة أو معقّدة مثل تحديد تجربة المستخدم وطريقة تفكيره.
+モデルの動作をカスタマイズする効果的かつ効率的な方法は、明確で具体的な指示を与えることです。指示は、質問、段階的なタスク、ユーザー エクスペリエンスや考え方を表すような複雑な内容にすることもできます。
 
-### الإدخال
+### 入力
 
-الإدخال هو النص المطلوب في الطلب الذي تريد أن يقدّم النموذج ردًا عليه. يمكن أن تكون المدخلات سؤالاً يجيب عنه النموذج (مدخلات السؤال)، أو مهمة ينفّذها النموذج (مدخلات المهمة)، أو كيانًا يعمل عليه النموذج (مدخلات الكيان)، أو مدخلات جزئية يكملها النموذج أو يتابعها (مدخلات الإكمال).
+入力は、モデルにレスポンスを提供させるプロンプトの必須テキストです。入力は、モデルが回答する質問（質問入力）、モデルが実行するタスク（タスク入力）、モデルが動作するエンティティ（エンティティ入力）、またはモデルが完了または続行する部分入力（コンプリーション入力）のいずれかです。
 
-| **نوع الإدخال** | **الطلب** | **المخرجات المولَّدة** |
+| **入力タイプ** | **プロンプト** | **生成された出力** |
 | --- | --- | --- |
-| السؤال | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
-| المهمة | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
-| الكيان | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
+| 質問 | ```     What's a good name for a flower shop that specializes in selling bouquets of     dried flowers? Create a list of 5 options with just the names. ``` | ```     Here are 5 names for a flower shop specializing in dried flowers:      1. Everlasting Blooms     2. Dried & Delightful     3. The Petal Preserve     4. Whispers of Wildflowers     5. Forever Blooms ``` |
+| タスク | ```     Give me a simple list of just the things that I must bring on a camping trip. The list should have 5 items. ``` | ```     1. **Tent:** Your shelter from the elements.     2. **Sleeping Bag:** Stay warm and comfortable.     3. **Sleeping Pad:** Insulation and cushioning for a good night's sleep.     4. **Headlamp or Flashlight:** Light for nighttime activities.     5. **First Aid Kit:** Be prepared for minor injuries. ``` |
+| エンティティ | ```     Classify the following items as [large, small]: Elephant Mouse Snail ``` | ``` Here's the classification:  * **Elephant:** Large * **Mouse:** Small * **Snail:** Small ``` |
 
-#### إكمال الإدخال جزئيًا
+#### 部分的な入力の補完
 
-تعمل نماذج اللغة التوليدية مثل أداة متقدّمة للإكمال التلقائي. فعندما تقدّم محتوًى جزئيًا، يمكن للنموذج تقديم بقية المحتوى أو ما يعتقد أنّه استمرار لهذا المحتوى كردّ. وعندما يفعل ذلك، إذا تضمّن المحتوى أي أمثلة أو سياق، يمكن للنموذج أخذ هذه الأمثلة أو السياق في الاعتبار.
+生成言語モデルは、高度な予測入力ツールのように機能します。部分的なコンテンツを提供すると、モデルは残りのコンテンツ、またはコンテンツの継続として認識したコンテンツをレスポンスとして提供できます。その場合、例やコンテキストを含めると、モデルはそれらの例やコンテキストを考慮できます。
 
-يقدّم المثال التالي طلبًا يتضمّن تعليمات ومدخلات كيان:
-
-|  |
-| --- |
-| **الطلب:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **الردّ:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  (gemini-2.5-flash) |
-
-مع أنّ النموذج نفّذ ما طُلب منه، إلا أنّ كتابة التعليمات باللغة الطبيعية قد تكون صعبة في بعض الأحيان، كما أنّها تترك الكثير من الخيارات لتفسير النموذج.
-على سبيل المثال، قد تحتوي قائمة طعام أحد المطاعم على العديد من الأطباق. لتقليل حجم ردّ JSON، من المحتمل أنّك تريد حذف العناصر التي لم يتم طلبها. في هذه الحالة، يمكنك تقديم مثال وبادئة ردّ والسماح للنموذج بإكمالها:
+次の例では、指示とエンティティ入力を含むプロンプトを示しています。
 
 |  |
 | --- |
-| **الطلب:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **الردّ:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  (gemini-2.5-flash) |
+| **プロンプト:**    ``` For the given order, return a JSON object that has the fields cheeseburger, hamburger, fries, or drink, with the value being the quantity.  Order: A burger and a drink. ```  **レスポンス:**    ``` {   "cheeseburger": 0,   "hamburger": 1,   "fries": 0,   "drink": 1 } ```  （gemini-2.5-flash） |
 
-لاحظ كيف تم استبعاد "تشيز برجر" من الناتج لأنّه لم يكن جزءًا من الطلب.
-
-على الرغم من أنّه يمكنك تحديد تنسيق كائنات ردود JSON البسيطة باستخدام الطلبات، ننصحك باستخدام ميزة [الإخراج المنظَّم](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar) في Gemini API عند تحديد مخطط JSON أكثر تعقيدًا للرد.
-
-### القيود
-
-حدِّد أي قيود على قراءة الطلب أو إنشاء ردّ، فيمكنك أن تطلب من النموذج تنفيذ إجراءات معيّنة أو عدم تنفيذها. على سبيل المثال، يمكنك تحديد قيد في الطلب بشأن المدة التي تريد أن يستغرقها التلخيص:
+モデルはプロンプトに従って動作しましたが、自然言語での指示は難しい場合があり、モデルの解釈に多くの負担が残ります。
+たとえば、レストランのメニューに多くのアイテムが含まれているとします。JSON レスポンスのサイズを小さくするには、オーダーされていないアイテムを省略します。この場合、例とレスポンス接頭辞を指定して、モデルに完成させることができます。
 
 |  |
 | --- |
-| **الطلب:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **الردّ:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  (gemini-2.5-flash) |
+| **プロンプト:**    ``` Valid fields are cheeseburger, hamburger, fries, and drink. Order: Give me a cheeseburger and fries Output: ``` {   "cheeseburger": 1,   "fries": 1 } ``` Order: I want two burgers, a drink, and fries. Output: ```  **レスポンス:**    ``` ``` {   "hamburger": 2,   "drink": 1,   "fries": 1 } ``` ```  （gemini-2.5-flash） |
 
-### تنسيق الردّ
+「cheeseburger」は注文に含まれていないため、出力から除外されています。
 
-يمكنك تقديم تعليمات تحدّد تنسيق الردّ، مثلاً، يمكنك طلب أن يكون الردّ منسّقًا كجدول أو قائمة نقطية أو عرض موجز أو كلمات رئيسية أو جملة أو فقرة. توجّه تعليمات النظام التالية النموذج لتقديم ردّ أكثر حوارية:
+プロンプトを使用して単純な JSON レスポンス オブジェクトの形式を指定できますが、
+レスポンスに複雑な JSON スキーマを指定する場合は、Gemini API's
+[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)機能を使用することをおすすめします。
 
-|  |
-| --- |
-| **تعليمات النظام**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **الطلب**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **الردّ:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  (gemini-2.5-flash) |
+### 制約
 
-#### تنسيق الردود باستخدام استراتيجية الإكمال
-
-يمكن أن تساعد [استراتيجية الإكمال](#completion) أيضًا في تنسيق الردّ.
-يطلب المثال التالي من النموذج إنشاء مخطط لمقال:
+プロンプトの読み取りやレスポンスの生成に関する制約を指定します。行うべきことと、行うべきでないことをモデルに指示できます。たとえば、必要な要約の長さについてプロンプトで制約を指定できます。
 
 |  |
 | --- |
-| **الطلب:**    ``` Create an outline for an essay about hummingbirds. ```  **الردّ:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  (gemini-2.5-flash) |
+| **プロンプト:**     ``` Summarize this text in one sentence: Text: A quantum computer exploits quantum mechanical phenomena to perform calculations exponentially faster than any modern traditional computer. At very tiny scales, physical matter acts as both particles and as waves, and quantum computing uses specialized hardware to leverage this behavior. The operating principles of quantum devices is beyond the scope of classical physics. When deployed at scale, quantum computers could be used in a wide variety of applications such as: in cybersecurity to break existing encryption methods while helping researchers create new ones, in meteorology to develop better weather forecasting etc. However, the current state of the art quantum computers are still largely experimental and impractical. ```     **レスポンス:**     ```       Exploiting quantum mechanical phenomena, quantum computers can perform calculations exponentially faster than traditional computers for potential applications like cybersecurity and meteorology, although they are currently largely experimental and impractical. ```  （gemini-2.5-flash） |
 
-لم يحدّد الطلب شكل المخطط التفصيلي، فاختار النموذج شكلاً مناسبًا لك. للحصول على مخطط تفصيلي بالشكل الذي تريده، يمكنك إضافة نص يمثّل بداية المخطط التفصيلي والسماح للنموذج بإكماله استنادًا إلى النمط الذي بدأته.
+### 回答の形式
 
-|  |
-| --- |
-| **الطلب:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **الردّ:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  (gemini-2.5-flash) |
-
-## الطلبات بلا أمثلة مقابل الطلبات ببضعة أمثلة
-
-يمكنك تضمين أمثلة في الطلب توضّح للنموذج الشكل الصحيح للردّ. يحاول النموذج تحديد الأنماط والعلاقات من الأمثلة وتطبيقها عند إنشاء ردّ. تُعرف الطلبات التي تحتوي على بعض الأمثلة باسم طلبات *التعلم من أمثلة قليلة*، بينما تُعرف الطلبات التي لا تقدّم أي أمثلة باسم طلبات *التعلم بدون أمثلة*. غالبًا ما تُستخدَم طلبات التعلم من أمثلة قليلة لتنظيم التنسيق أو الصياغة أو النطاق أو الأنماط العامة لردود النموذج. استخدِم أمثلة محدّدة ومتنوعة لمساعدة النموذج في تضييق نطاق تركيزه وإنشاء نتائج أكثر دقة.
-
-ننصحك دائمًا بتضمين أمثلة قليلة في طلباتك، لأنّ الطلبات التي لا تتضمّن أمثلة قليلة من المرجّح أن تكون أقل فعالية. في الواقع، يمكنك إزالة التعليمات من طلبك إذا كانت الأمثلة واضحة بما يكفي في عرض المهمة المطلوبة.
-
-يطلب طلب zero-shot التالي من النموذج اختيار أفضل شرح.
+指示の中でレスポンスの形式を指定することもできます。たとえば、表、箇条書き、エレベーター ピッチ、キーワード、文、段落の形式でレスポンスを求めることができます。次のシステム指示は、レスポンスでより会話形式にするようモデルに指示します。
 
 |  |
 | --- |
-| **الطلب:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **الردّ:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  (gemini-2.5-flash) |
+| **システム指示**    ```     All questions should be answered comprehensively with details, unless the user requests a concise response specifically. ```  **プロンプト**    ```     What is a smart way to make a business that sells DVD's in 2026? ```  **レスポンス:**    ``` Starting a business selling DVDs in 2026 presents significant challenges due to the overwhelming dominance of digital streaming and on-demand services; a "smart" approach would therefore require a highly specialized niche, a strong value proposition beyond just the disc, and likely a focus on community or collector markets rather than mainstream consumption.  Here's a breakdown of what a smart DVD business in 2026 would likely entail:  1. Extreme Niche Specialization: You cannot compete with streaming libraries. Your business must focus on what digital doesn't offer easily or at all. This could include:      * Out-of-Print & Rare Titles: Sourcing films or TV shows that have never been released digitally or are currently unavailable on major streaming platforms.     .... ```  （gemini-2.5-flash） |
 
-إذا كانت حالة الاستخدام تتطلّب أن يقدّم النموذج ردودًا موجزة، يمكنك تضمين أمثلة في الطلب تعطي الأولوية للردود الموجزة.
+#### 完了戦略でレスポンスの形式を設定する
 
-يقدّم الطلب التالي مثالَين يوضّحان تفضيل التفسيرات الأقصر. في الردّ، يمكنك ملاحظة أنّ الأمثلة ساعدت النموذج في اختيار التفسير الأقصر (`Explanation2`) بدلاً من التفسير الأطول (`Explanation1`) كما فعل سابقًا.
-
-|  |
-| --- |
-| **الطلب:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **الردّ:**    ``` Answer: Explanation2 ```  (gemini-2.5-flash) |
-
-### العدد الأمثل للأمثلة
-
-يمكن للنماذج، مثل Gemini، غالبًا رصد الأنماط باستخدام بعض الأمثلة، ولكن قد تحتاج إلى تجربة عدد الأمثلة التي يجب تقديمها في الطلب للحصول على أفضل النتائج. في الوقت نفسه، إذا تضمّن الطلب عددًا كبيرًا جدًا من الأمثلة، قد يبدأ النموذج في [المبالغة في مطابقة](https://developers.google.com/machine-learning/glossary?hl=ar#overfitting) الردّ مع الأمثلة.
-
-### اعتماد تنسيق موحَّد
-
-احرص على أن يكون تنسيق الأمثلة القليلة متشابهًا لتجنُّب الردود بتنسيقات غير مرغوب فيها. أحد الأهداف الأساسية لإضافة أمثلة قليلة في الطلبات هو عرض تنسيق الردّ على النموذج، لذا من الضروري التأكّد من اتّساق التنسيق في جميع الأمثلة، مع الانتباه بشكل خاص إلى علامات XML والمسافات البيضاء وأسطر جديدة وعوامل تقسيم الأمثلة.
-
-## إضافة سياق
-
-يمكنك تضمين تعليمات ومعلومات في طلب يحتاج النموذج إلى
-حلّ مشكلة، بدلاً من افتراض أنّ النموذج يتضمّن كل المعلومات
-المطلوبة. تساعد هذه المعلومات السياقية النموذج في فهم القيود والتفاصيل المتعلقة بما تطلبه منه.
-
-يطلب المثال التالي من النموذج تقديم إرشادات لتحديد المشاكل في جهاز توجيه وحلّها:
+[完了戦略](#completion)は、レスポンスの形式にも活用できます。
+次の例では、小論文の概要を作成するようにモデルに指示しています。
 
 |  |
 | --- |
-| **الطلب:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **الردّ:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  (gemini-2.5-flash) |
+| **プロンプト:**    ``` Create an outline for an essay about hummingbirds. ```  **レスポンス:**    ``` Here is a possible outline for an essay about hummingbirds:  I. Introduction A. Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). B. Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds. C. Thesis Statement: State the main point of the essay, which could be about the remarkable adaptations, behaviors, and ecological importance of hummingbirds.  II. Appearance and Identification ..... ```  （gemini-2.5-flash） |
 
-يبدو أنّ الرد يتضمّن معلومات عامة لتحديد المشاكل وحلّها، وهي غير مرتبطة بجهاز التوجيه أو حالة أضواء مؤشر LED.
-
-لتخصيص الردّ لجهاز التوجيه المحدّد، يمكنك إضافة دليل تحديد المشاكل وحلّها الخاص بجهاز التوجيه إلى الطلب كمرجع يمكن للنموذج الرجوع إليه عند تقديم الردّ.
+プロンプトでアウトラインの形式が指定されていないため、モデルによって形式が選択されています。モデルが特定の形式でアウトラインを返すようにするには、アウトラインの始点を表すテキストを追加し、開始パターンに基づいてモデルを完成させます。
 
 |  |
 | --- |
-| **الطلب:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **الردّ:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  (gemini-2.5-flash) |
+| **プロンプト:**    ``` Create an outline for an essay about hummingbirds. I. Introduction    * ```  **レスポンス:**    ``` Okay, here is an outline for an essay about hummingbirds, starting from the introduction you provided:  I. Introduction * Hook: Start with a captivating fact or description about hummingbirds (e.g., their speed, iridescent colors, or tiny size). * Background: Briefly introduce hummingbirds – where they are found (Americas), their reputation as unique birds, and their general characteristics. * Thesis Statement: State the main point of the essay, focusing on the remarkable adaptations, behaviors, and ecological significance that make hummingbirds extraordinary. ..... ```  （gemini-2.5-flash） |
 
-## تقسيم الطلبات إلى مكوّنات
+## ゼロショット プロンプトと少数ショット プロンプト
 
-بالنسبة إلى حالات الاستخدام التي تتطلّب طلبات معقّدة، يمكنك مساعدة النموذج في التعامل مع هذا التعقيد من خلال تقسيم الطلبات إلى مكوّنات أبسط.
+プロンプトに、モデルに対して望ましい動作を示す例を含めることができます。モデルは、例からパターンと関係を特定し、回答を生成する際にそれらを適用します。いくつかの
+例を含むプロンプトは*少数ショット* プロンプトと呼ばれ、例のない
+プロンプトは*ゼロショット* プロンプトと呼ばれます。少数ショット プロンプトは、モデルのレスポンスのフォーマット、フレーズ、範囲、一般的なパターンの設定を規制するために頻繁に使用されます。具体的で多様な例を使用して、モデルが焦点を絞り込み、より正確な結果を生成できるようにします。
 
-1. **تقسيم التعليمات:** بدلاً من تضمين العديد من التعليمات في طلب واحد، أنشئ طلبًا واحدًا لكل تعليمات. يمكنك اختيار الطلب الذي تريد معالجته استنادًا إلى إدخال المستخدم.
-2. **تسلسل الطلبات:** بالنسبة إلى المهام المعقّدة التي تتضمّن خطوات متعدّدة متسلسلة،
-   اجعل كل خطوة طلبًا، واربط الطلبات معًا في تسلسل،
-   بحيث يصبح الناتج من أحد الطلبات في التسلسل هو
-   مدخل الطلب التالي، ويكون الناتج من الطلب الأخير في التسلسل
-   هو الناتج النهائي.
-3. **تجميع الردود:** يحدث التجميع عندما تريد تنفيذ مهام متوازية مختلفة على أجزاء مختلفة من البيانات وتجميع النتائج لإنتاج الناتج النهائي. على سبيل المثال، يمكنك أن تطلب من النموذج تنفيذ عملية واحدة على الجزء الأول من البيانات، وتنفيذ عملية أخرى على بقية البيانات، ثم تجميع النتائج.
+プロンプトには、常に少数ショットの例を含めることをおすすめします。少数ショットの例は、モデルに対して指示の適用方法を示すものであり、このようなショットのないプロンプトは効果的でない可能性があります。タスクを説明するのに十分な例が含まれていれば、プロンプトから指示を削除することも可能です。
 
-## تجربة مَعلمات النموذج
+次のゼロショット プロンプトでは、モデルに最良の説明を選択するよう求めます。
 
-يتضمّن كل طلب ترسله إلى أحد النماذج قيم مَعلمات تتحكّم في طريقة إنشاء النموذج للردّ، ويمكن أن ينشئ النموذج نتائج مختلفة لقيم المَعلمات المختلفة. جرِّب قيم مَعلمات مختلفة للحصول على أفضل القيم للمهمة، مع العلم بأنّ المَعلمات المتاحة للنماذج المختلفة قد تختلف، وفي ما يلي المَعلمات الأكثر شيوعًا:
+|  |
+| --- |
+| **プロンプト:**    ``` Please choose the best explanation to the question:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **レスポンス:**    ``` Explanation1 is the better explanation because it provides more detail on the process, including how ice crystals combine and grow into snowflakes as they fall through the atmosphere. ```  （gemini-2.5-flash） |
 
-1. **الحدّ الأقصى لعدد الرموز المميزة للناتج:** يحدّد الحدّ الأقصى لعدد الرموز المميزة التي يمكن إنشاؤها في الرد. الرمز المميز هو أربعة أحرف تقريبًا. تتجاوب 100
-   رمز مميز مع 60 إلى 80 كلمة تقريبًا.
-2. **درجة العشوائية:** تتحكّم درجة العشوائية في مستوى العشوائية في اختيار الرموز المميزة. يتم استخدام درجة العشوائية لأخذ العيّنات أثناء إنشاء رد،
-   ويحدث ذلك عند تطبيق `topP` و`topK`. تكون درجات العشوائية المنخفضة مناسبة للطلبات التي تتطلّب ردودًا أكثر حتمية أو أقل انفتاحًا، بينما يمكن أن تؤدي درجات العشوائية المرتفعة إلى نتائج أكثر تنوعًا أو إبداعًا. درجة الحرارة 0 هي درجة حتمية، ما يعني أنّه يتم دائمًا اختيار الردّ ذي الاحتمالية الأعلى.
-3. **`topK`:** تغيّر المَعلمة `topK` طريقة اختيار النموذج للرموز المميزة في الناتج. تشير القيمة 1 للمَعلمة `topK` إلى أنّ الرمز المميز المحدّد هو الأكثر احتمالاً بين جميع الرموز المميزة في مفردات النموذج (يُعرف أيضًا باسم فك الترميز الجشع)، بينما تشير القيمة 3 للمَعلمة `topK` إلى أنّه يتم اختيار الرمز المميز التالي من بين 3 رموز مميزة هي الأكثر احتمالاً باستخدام درجة الحرارة. في كل خطوة من خطوات اختيار الرمز المميز، يتم أخذ عيّنات من الرموز المميزة `topK` التي تتضمّن أعلى الاحتمالات. بعد ذلك، يتم فلترة الرموز المميزة بشكل أكبر استنادًا إلى `topP` مع اختيار الرمز المميز النهائي باستخدام أخذ العيّنات من درجة الحرارة.
-4. **`topP`:** تغيّر المَعلمة `topP` طريقة اختيار النموذج للرموز المميزة في الناتج. ويتم اختيار الرموز المميزة من الأكثر احتمالاً إلى الأقل احتمالاً إلى أن يساوي مجموع احتمالاتها قيمة `topP`. على سبيل المثال، إذا كان احتمال الرموز المميزة A وB وC هو 0.3 و0.2 و0.1 وكانت قيمة `topP` هي 0.5، سيختار النموذج إما A أو B كرمز مميز تالٍ باستخدام درجة العشوائية ويستبعد C كمرشح. قيمة `topP` التلقائية هي 0.95.
-5. **`stop_sequences`:** يمكنك ضبط تسلسل إيقاف لتوجيه النموذج إلى التوقف عن إنشاء المحتوى. يمكن أن يكون تسلسل الإيقاف أي تسلسل من الأحرف، ولكن ننصحك بتجنُّب استخدام تسلسل من الأحرف قد يظهر في المحتوى الذي يتم إنشاؤه.
+ユースケースでモデルが簡潔なレスポンスを生成する必要がある場合は、簡潔なレスポンスを優先する例をプロンプトに含めることができます。
 
-## استراتيجيات كتابة الطلبات المتلاحقة
+次のプロンプトでは、短い説明を優先する例を 2 つ示します。レスポンスでは、前の例のような長い説明（`Explanation1`）ではなく、短い説明（`Explanation2`）を選択するように例がモデルをガイドしたことがわかります。
 
-قد يتطلّب تصميم الطلبات أحيانًا إجراء بعض التكرارات قبل أن تحصل باستمرار على الردّ الذي تبحث عنه. يقدّم هذا القسم إرشادات حول بعض الإجراءات التي يمكنك تجربتها عند تكرار طلباتك:
+|  |
+| --- |
+| **プロンプト:**    ``` Below are some examples showing a question, explanation, and answer format:  Question: Why is the sky blue? Explanation1: The sky appears blue because of Rayleigh scattering, which causes shorter blue wavelengths of light to be scattered more easily than longer red wavelengths, making the sky look blue. Explanation2: Due to Rayleigh scattering effect. Answer: Explanation2  Question: What is the cause of earthquakes? Explanation1: Sudden release of energy in the Earth's crust. Explanation2: Earthquakes happen when tectonic plates suddenly slip or break apart, causing a release of energy that creates seismic waves that can shake the ground and cause damage. Answer: Explanation1  Now, Answer the following question given the example formats above:  Question: How is snow formed? Explanation1: Snow is formed when water vapor in the air freezes into ice crystals in the atmosphere, which can combine and grow into snowflakes as they fall through the atmosphere and accumulate on the ground. Explanation2: Water vapor freezes into ice crystals forming snow. Answer: ```  **レスポンス:**    ``` Answer: Explanation2 ```  （gemini-2.5-flash） |
 
-1. **استخدام صياغة مختلفة:** غالبًا ما يؤدي استخدام كلمات أو صياغة مختلفة في الطلبات إلى حصولك على ردود مختلفة من النموذج، حتى لو كانت جميعها تعني الشيء نفسه. إذا لم تحصل على النتائج المتوقّعة من طلبك، جرِّب إعادة صياغته.
+### 最適なサンプル数
+
+Gemini などのモデルでは、多くの場合、いくつかの例を使用してパターンを検出できますが、最適な結果を得るには、プロンプトで提供する例の数をテストすることが必要な場合があります。同時に、過剰に多くの例を追加すると、
+モデルが例に対するレスポンスを[過学習](https://developers.google.com/machine-learning/glossary?hl=ja#overfitting)
+し始める可能性があります。
+
+### 一貫性のある形式
+
+レスポンスが望ましくない形式で返されないように、少数ショットの例の構造と形式を同じにする必要があります。プロンプトに少数ショットの例を追加する主な目的の 1 つは、モデルにレスポンスの形式を示すことです。そのため、すべてのサンプルで形式を統一することが重要になります。特に、XML タグ、空白、改行、サンプルの分割子には注意してください。
+
+## コンテキストを追加する
+
+モデルに必要な情報がすべて与えられていると仮定するのではなく、モデルが問題を解決するために必要な指示や情報をプロンプトに含めることができます。このコンテキスト情報により、モデルは求められている内容について、制約と詳細を理解できます。
+
+次の例では、モデルにルーターのトラブルシューティング ガイダンスを提供するよう求めています。
+
+|  |
+| --- |
+| **プロンプト:**    ``` What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly. ```  **レスポンス:**    ```   A yellow blinking light on your Google Wifi router usually indicates a problem   with the internet connection. Here are some steps to troubleshoot and fix the   issue:   1. Restart your router and modem:     - Unplug your modem from the power outlet and wait for 30 seconds.     - Plug your modem back in and wait for it to fully boot up.     - Unplug your Google Wifi router and wait for 30 seconds.     - Plug your Google Wifi router back in and wait for it to fully boot up. ..... ```  （gemini-2.5-flash） |
+
+レスポンスは一般的なトラブルシューティング情報のように見えますが、ルーターや LED インジケーター ライトのステータスに固有のものではありません。
+
+特定のルーターに関するレスポンスをカスタマイズするには、ルーターのトラブルシューティング ガイドを、レスポンスの提供時に参照するコンテキストとしてプロンプトに追加します。
+
+|  |
+| --- |
+| **プロンプト:**    ``` Answer the question using the text below. Respond with only the text provided. Question: What should I do to fix my disconnected wifi? The light on my Google Wifi router is yellow and blinking slowly.  Text: Color: Slowly pulsing yellow What it means: There is a network error. What to do: Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again.  Color: Fast blinking yellow What it means: You are holding down the reset button and are factory resetting this device. What to do: If you keep holding down the reset button, after about 12 seconds, the light will turn solid yellow. Once it is solid yellow, let go of the factory reset button.  Color: Solid yellow What it means: Router is factory resetting. What to do: This can take up to 10 minutes. When it's done, the device will reset itself and start pulsing white, letting you know it's ready for setup.  Color: Solid red What it means: Something is wrong. What to do: Critical failure. Factory reset the router. If the light stays red, contact Wifi customer support. ```  **レスポンス:**    ``` Check that the Ethernet cable is connected to both your router and your modem and both devices are turned on. You might need to unplug and plug in each device again. ```  （gemini-2.5-flash） |
+
+## プロンプトをコンポーネントに分割する
+
+複雑なプロンプトを必要とするユースケースでは、プロンプトをより単純なコンポーネントに分割することで、モデルでこの複雑さを管理できるようになります。
+
+1. **指示を分割する:** 1 つのプロンプトに複数の指示を記述するのではなく、指示ごとに 1 つのプロンプトを作成します。ユーザーの入力に基づいて、処理するプロンプトを選択できます。
+2. **プロンプトを連結する:** 複数の連続したステップを含む複雑なタスクの場合は、各ステップをプロンプトにして、プロンプトを順番に連結します。プロンプトが順番に並んだこの連鎖では、シーケンス内の 1 つのプロンプトの出力が次のプロンプトの入力になります。シーケンス内の最後のプロンプトの出力が最終出力です。
+3. **レスポンスを集計する:** 集計とは、データのさまざまな部分に対して異なる並列タスクを実行し、結果を集計して最終出力を生成することです。たとえば、データの最初の部分に対して 1 つのオペレーションを実行し、残りのデータに対して別のオペレーションを実行して、結果を集計するようにモデルに指示できます。
+
+## モデル パラメータをテストする
+
+モデルに送信する呼び出しの一つ一つに、モデルがどのようにレスポンスを生成するかを制御するパラメータ値が含まれています。このモデルは、パラメータ値によって異なる結果を生成できます。さまざまなパラメータ値を試して、タスクに最適な値を取得します。使用可能なパラメータはモデルに世代によって異なる場合があります。最も一般的なパラメータは次のとおりです。
+
+1. **最大出力トークン:** レスポンスで生成できるトークンの最大数を指定します。トークンは約 4 文字です。100 トークンは約 60 ～ 80 語に相当します。
+2. **Temperature:** Temperature は、トークン選択のランダム性の度合いを制御します。温度は、レスポンス生成時のサンプリングに使用されます。レスポンス生成は、`topP` と `topK` が適用された場合に発生します。温度が低いほど、確定的で自由度を抑えたレスポンスが求められるプロンプトに適しています。一方、温度が高いと、より多様で創造的な結果を導くことができます。Temperature 0 は決定的であり、最も高い確率のレススポンスが常に選択されることを意味します。
+3. **`topK`:** `topK` パラメータは、モデルが出力用のトークンを選択する方法を変更します。`topK` が 1 の場合、選択されるトークンは、モデルの語彙内のすべてのトークンで最も確率の高いものであることになります（グリーディ デコードとも呼ばれます）。`topK` が 3 の場合は、最も確率が高い上位 3 つのトークンから次のトークン選択されることになります（温度を使用します）。トークン選択ステップごとに、確率が最も高い `topK` トークンがサンプリングされます。その後、トークンは `topP` に基づいてさらにフィルタリングされ、最終的なトークンは温度サンプリングを用いて選択されます。
+4. **`topP`:** `topP` パラメータは、モデルが出力用のトークンを選択する方法を変更します。トークンは、確率の合計が `topP` 値に等しくなるまで、確率の高いものから低いものへと選択されます。たとえば、トークン A、B、C の確率が 0.3、0.2、0.1 で、`topP` が 0.5 だとします。このとき、モデルは次のトークンとして A か B を Temperature を使って選択し、C は候補から外します。デフォルトの `topP` 値は 0.95 です。
+5. **`stop_sequences`:** 停止シーケンスを設定して、コンテンツの生成を停止するようモデルに指示します。停止シーケンスには任意の文字シーケンスを使用できます。生成されたコンテンツに表示される可能性のある文字シーケンスは使用しないようにしてください。
+
+## プロンプトの反復処理に関する戦略
+
+プロンプト設計では、望ましいレスポンスを一貫して得られるようになるまでにイテレーション（反復）が何度か必要になることがあります。このセクションでは、プロンプトを反復処理する際に試すことができるいくつかのガイダンスについて説明します。
+
+1. **異なるフレーズを使用する:** プロンプトで異なる単語やフレーズを使用すると、すべて同じ意味であっても、多くの場合、モデルの応答は異なります。プロンプトから期待される結果が得られない場合は、言い換えてみてください。
 
    |  |
    | --- |
    | ``` Version 1: How do I bake a pie?  Version 2: Suggest a recipe for a pie.  Version 3: What's a good pie recipe? ``` |
-2. **التبديل إلى مهمة مشابهة:** إذا لم يتمكّن النموذج من اتّباع تعليماتك بشأن مهمة معيّنة، حاوِل تقديم تعليمات بشأن مهمة مشابهة تؤدي إلى النتيجة نفسها.
+2. **同様のタスクに切り替える:** モデルに対してタスクの指示に従わせることができない場合は、同じ結果が得られる同様のタスクの指示を出してみてください。
 
-   يطلب هذا الطلب من النموذج تصنيف كتاب باستخدام فئات محدّدة مسبقًا:
-
-   |  |
-   | --- |
-   | **الطلب:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **الردّ:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  (gemini-2.5-flash) |
-
-   الردّ صحيح، ولكن النموذج لم يلتزم بحدود الخيارات. تريد أيضًا أن يردّ النموذج بأحد الخيارات فقط بدلاً من جملة كاملة. في هذه الحالة، يمكنك إعادة صياغة التعليمات كسؤال خيارات متعدّدة وطلب أن يختار النموذج أحد الخيارات.
+   このプロンプトは、事前定義されたカテゴリを使用して書籍を分類するようモデルに指示します。
 
    |  |
    | --- |
-   | **الطلب:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
+   | **プロンプト:**    ``` Which category does The Odyssey belong to: thriller sci-fi mythology biography ```  **レスポンス:**    ```     The Odyssey belongs to the category of **mythology**.       Here's why:      * **Mythology:** The Odyssey tells the story of Odysseus, a hero from Greek mythology, and his     journey home after the Trojan War. It features gods, monsters, and supernatural events common to     Greek mythology. ..... ```  （gemini-2.5-flash） |
+
+   レスポンスは正解ですが、モデルがオプションの境界内に収まっていません。また、完全な文ではなく、いずれかのオプションのみを使用して応答するようにモデル化する必要があります。この場合は、指示を多肢選択式の質問として言い換えて、モデルにオプションの選択を求めることができます。
+
+   |  |
+   | --- |
+   | **プロンプト:**    ``` Multiple choice problem: Which of the following options describes the book The Odyssey? Options: ``` |
 
    - thriller
    - sci-fi
    - mythology
    - biography
-     **الردّ:**
+     **レスポンス:**
 
      ```
      The correct answer is mythology.
      ```
 
-     (gemini-2.5-flash)
-   - **تغيير ترتيب المحتوى في الطلب:** يمكن أن يؤثر ترتيب المحتوى في الطلب أحيانًا في الردّ. حاوِل تغيير ترتيب المحتوى ومعرفة تأثير ذلك في الردّ.
+     （gemini-2.5-flash）
+   - **プロンプト コンテンツの順序を変更する:** プロンプト内のコンテンツの順序がレスポンスに影響する場合があります。コンテンツの順序を変更して、レスポンスにどう影響するかを確認してみます。
 
      ```
      Version 1:
@@ -225,51 +222,57 @@ Google uses AI technology to translate content into your preferred language. AI 
      [context]
      ```
 
-## الردود الاحتياطية
+## フォールバック レスポンス
 
-الردّ الاحتياطي هو ردّ يقدّمه النموذج عندما يؤدي الطلب أو الردّ إلى تفعيل فلتر الأمان. ومن الأمثلة على الردود الاحتياطية: "لا يمكنني المساعدة في ذلك، فأنا مجرد نموذج لغوي".
+フォールバック レスポンスは、プロンプトまたはレスポンスのいずれかが安全フィルタをトリガーした場合に、モデルが返すレスポンスです。フォールバック レスポンスの例としては、「私は言語モデルにすぎないため、それについては対応できません」が挙げられます。
 
-إذا ردّ النموذج بردّ احتياطي، جرِّب زيادة درجة العشوائية.
+モデルがフォールバック レスポンスを返す場合は、温度を上げてみてください。
 
-## الاستناد إلى الحقائق وتنفيذ الرموز البرمجية
+## グラウンディングとコード実行
 
-يستطيع Gemini استخدام أدوات لتجنُّب الهلوسة في السيناريوهات التي قد يؤدي فيها إلى تقديم ردود غير صحيحة.
+Gemini は、ツールを使用して、誤ったレスポンスを生成する可能性のあるシナリオでハルシネーションを回避できます。
 
-تتيح ميزة [تحديد المصدر من خلال بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) ربط نموذج Gemini بمحتوى الويب في الوقت الفعلي، ويجب تفعيلها عندما يحتاج النموذج إلى معرفة حقائق غير واضحة أو حديثة.
+[Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)は、
+Gemini モデルをリアルタイムのウェブ コンテンツに接続します。モデルが
+不明な事実や最新の事実を知る必要がある場合は、この機能を有効にする必要があります。
 
-تتيح [أداة تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) في Gemini للنموذج إنشاء رموز Python البرمجية وتشغيلها، ويجب تفعيلها عندما يحتاج النموذج إلى إجراء أي نوع من العمليات الحسابية أو العد أو العمليات الحسابية.
+Gemini の [コード実行ツール](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)を使用すると、
+モデルは Python コードを生成して実行できます。モデル
+が算術演算、カウント、計算を行う必要がある場合は、この機能を有効にする必要があります。
 
 ## Gemini 3
 
-تم تصميم [نماذج Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-3) لإجراء تحليلات متقدّمة واتّباع التعليمات.
-وتقدّم أفضل ردّ في الطلبات المباشرة والمنظَّمة جيدًا والتي تحدّد بوضوح المهمة وأي قيود. يُنصح باتّباع الممارسات التالية للحصول على أفضل النتائج باستخدام Gemini 3:
+[Gemini 3 モデル](https://ai.google.dev/gemini-api/docs/models?hl=ja#gemini-3)は、高度な
+推論と指示の遵守を目的として設計されています。
+タスクと制約が明確に定義された、直接的で構造化されたプロンプトに最適に応答します。Gemini 3 で最適な結果を得るには、次の方法をおすすめします。
 
-### المبادئ الأساسية لإنشاء الطلبات
+### プロンプトの基本原則
 
-- **كن دقيقًا ومباشرًا:** حدِّد هدفك بوضوح واختصار، وتجنَّب استخدام لغة غير ضرورية أو مفرطة في الإقناع.
-- **استخدام بنية متّسقة:** استخدِم فواصل واضحة للفصل بين الأجزاء المختلفة من الطلب. تُعدّ علامات XML (مثل `<context>` و`<task>`) أو عناوين Markdown فعّالة. اختَر تنسيقًا واحدًا واستخدِمه بشكل متّسق في طلب واحد.
-- **تحديد المَعلمات:** اشرح بوضوح أي مصطلحات أو مَعلمات غامضة.
-- **التحكّم في مستوى تفصيل الناتج:** تقدّم نماذج Gemini 3 إجابات مباشرة وفعّالة بشكل تلقائي. إذا كنت بحاجة إلى ردّ أكثر تفصيلاً أو بأسلوب محادثة، عليك أن تطلب ذلك صراحةً في تعليماتك.
-- **التعامل مع المدخلات المتعددة الوسائط بشكل متسق:** عند استخدام النصوص أو الصور أو المحتوى الصوتي أو الفيديو، يجب التعامل معها كمدخلات من الفئة نفسها، والتأكّد من أنّ التعليمات تشير بوضوح إلى كل وسيط حسب الحاجة.
-- **إعطاء الأولوية للتعليمات المهمة:** ضَع القيود السلوكية الأساسية وتعريفات الأدوار (الشخصية) ومتطلبات تنسيق الإخراج في &quot;تعليمات النظام&quot; أو في بداية طلب المستخدم.
-- **بنية النصوص الطويلة:** عند تقديم كميات كبيرة من النصوص (مثل المستندات أو الرموز البرمجية)، يجب تقديم كل النصوص أولاً، ثم وضع التعليمات أو الأسئلة المحدّدة في *نهاية* الطلب.
-- **سياق الفقرة التمهيدية:** بعد عرض مجموعة كبيرة من البيانات، استخدِم عبارة انتقال واضحة لربط السياق بطلب البحث، مثل "استنادًا إلى المعلومات الواردة أعلاه...".
+- **正確かつ直接的に記述する:** 目標を明確かつ簡潔に記述します。不要な表現や説得力のある表現は避けてください。
+- **一貫した構造を使用する:** 明確な区切り文字を使用して、プロンプトのさまざまな部分を分離します。XML スタイルのタグ（`<context>`、`<task>` など）や
+  Markdown 見出しが効果的です。1 つの形式を選択し、1 つのプロンプト内で一貫して使用します。
+- **パラメータを定義する:** あいまいな用語やパラメータは明示的に説明します。
+- **出力の冗長性を制御する:** デフォルトでは、Gemini 3 モデルは直接的で効率的な回答を提供します。より会話形式または詳細なレスポンスが必要な場合は、指示で明示的にリクエストする必要があります。
+- **マルチモーダル入力を一貫して処理する:** テキスト、画像、音声、動画を使用する場合は、同じクラスの入力として扱います。必要に応じて、指示で各モダリティを明確に参照してください。
+- **重要な指示を優先する:** 重要な動作制約、ロール定義（ペルソナ）、出力形式の要件は、システム指示またはユーザー プロンプトの冒頭に記述します。
+- **長いコンテキストの構造化:** 大量のコンテキスト（ドキュメント、コードなど）を提供する場合は、最初にすべてのコンテキストを指定します。具体的な指示や質問は、プロンプトの末尾に記述します。
+- **コンテキストを固定する:** 大量のデータブロックの後に、コンテキストとクエリを橋渡しする明確な移行フレーズ（「上記の情報に基づいて...」など）を使用します。
 
-### استراتيجيات Gemini 3 Flash
+### Gemini 3 Flash の戦略
 
-- **دقة اليوم الحالي:** أضِف العبارة التالية إلى تعليمات النظام لمساعدة النموذج في الانتباه إلى أنّ اليوم الحالي هو في عام 2026:
+- **現在日の精度:** モデルが 2026 年の現在日に注意を払うように、次の句をシステム指示に追加します。
 
   ```
   For time-sensitive user queries that require up-to-date information, you
   MUST follow the provided current time (date and year) when formulating
   search queries in tool calls. Remember it is 2026 this year.
   ```
-- **دقة تاريخ انتهاء قاعدة المعرفة:** أضِف العبارة التالية إلى تعليمات النظام لكي يكون النموذج على دراية بتاريخ انتهاء قاعدة المعرفة:
+- **ナレッジ カットオフの精度:** モデルがナレッジ カットオフを認識するように、次の句をシステム指示に追加します。
 
   ```
   Your knowledge cutoff date is January 2025.
   ```
-- **أداء الاستناد إلى مصادر خارجية:** أضِف العبارة التالية إلى تعليمات النظام (مع إجراء التعديلات اللازمة) لتحسين قدرة النموذج على الاستناد إلى السياق المقدَّم في الردود:
+- **グラウンディングのパフォーマンス:** 提供されたコンテキストでレスポンスをグラウンディングするモデルの能力を向上させるには、次の句をシステム指示に追加します（必要に応じて編集します）。
 
   ```
   You are a strictly grounded assistant limited to the information provided in
@@ -285,17 +288,18 @@ Google uses AI technology to translate content into your preferred language. AI 
   the context, you must state that the information is not available.
   ```
 
-### تحسين قدرات الاستدلال والتخطيط
+### 推論と計画の強化
 
-تنشئ نماذج Gemini 2.5 و3 تلقائيًا نصًا داخليًا "للتفكير" من أجل تحسين أداء الاستدلال، وبالتالي، ليس من الضروري عادةً أن يقدّم النموذج مخططًا أو خطة أو تفاصيل لخطوات الاستدلال في الرد الذي يتم إرجاعه. بالنسبة إلى المشاكل التي تتطلب استدلالاً مكثفًا، يمكن أن تؤدي الطلبات البسيطة، مثل "التفكير مليًا قبل الإجابة"، إلى تحسين الأداء، ولكن على حساب رموز التفكير الإضافية.
+Gemini 2.5 シリーズと 3 シリーズのモデルは、推論のパフォーマンスを向上させるために、内部の「思考」テキストを自動的に生成します。そのため、返されたレスポンス自体でモデルがアウトライン、計画、推論ステップの詳細を示す必要はありません。高度な推論が必要な問題については、「回答する前に慎重に検討してください」などの簡単なリクエストでパフォーマンスを向上させることができますが、思考トークンが追加されます。
 
-يمكنك الاطّلاع على مستندات [طريقة عمل Gemini](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) لمزيد من التفاصيل.
+詳細については、[Gemini の思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)に関するドキュメントをさらに
+ご覧ください。
 
-### أمثلة على الطلبات المنظَّمة
+### 構造化されたプロンプトの例
 
-يساعد استخدام العلامات أو Markdown النموذج في التمييز بين التعليمات والسياق والمهام.
+タグまたは Markdown を使用すると、モデルは指示、コンテキスト、タスクを区別できます。
 
-**مثال على تنسيق XML:**
+**XML の例:**
 
 ```
 <role>
@@ -316,7 +320,7 @@ You are a helpful assistant.
 </task>
 ```
 
-**مثال على Markdown:**
+**Markdown 記法の例:**
 
 ```
 # Identity
@@ -330,11 +334,11 @@ You are a senior solution architect.
 Return a single code block.
 ```
 
-### مثال على نموذج يجمع بين أفضل الممارسات
+### ベスト プラクティスを組み合わせたテンプレートの例
 
-يقدّم هذا النموذج المبادئ الأساسية لكتابة الطلبات باستخدام Gemini 3. احرص دائمًا على تكرار الخطوات وتعديلها لتناسب حالة الاستخدام المحدّدة.
+このテンプレートは、Gemini 3 でプロンプトを使用するための基本原則を捉えています。特定のユースケースに合わせて、必ず反復処理と変更を行ってください。
 
-**تعليمات النظام:**
+**システム指示:**
 
 ```
 <role>
@@ -361,7 +365,7 @@ Structure your response as follows:
 </output_format>
 ```
 
-**طلب المستخدم:**
+**ユーザー プロンプト:**
 
 ```
 <context>
@@ -377,41 +381,41 @@ Remember to think step-by-step before answering.
 </final_instruction>
 ```
 
-## عمليات سير العمل المستندة إلى الوكلاء
+## エージェント ワークフロー
 
-بالنسبة إلى مهام سير العمل المعقّدة التي تتضمّن وكلاء، غالبًا ما تكون هناك حاجة إلى تعليمات محدّدة للتحكّم في طريقة استدلال النموذج وتخطيطه وتنفيذه للمهام. وعلى الرغم من أنّ Gemini يقدّم أداءً عامًا قويًا، غالبًا ما تتطلّب الوكلاء المعقّدة منك ضبط المفاضلة بين التكلفة الحسابية (وقت الاستجابة والرموز المميزة) ودقة المهام.
+高度なエージェント ワークフローでは、モデルがタスクを推論、計画、実行する方法を制御するために、具体的な指示が必要になることがよくあります。Gemini は一般的なパフォーマンスに優れていますが、複雑なエージェントでは、多くの場合、計算コスト（レイテンシとトークン）とタスクの精度とのトレードオフを構成する必要があります。
 
-عند تصميم الطلبات الموجّهة إلى الوكلاء، يجب مراعاة جوانب السلوك التالية التي يمكنك توجيهها في الوكيل:
+エージェントのプロンプトを設計する際は、エージェントで制御できる次の動作の側面を考慮してください。
 
-### الاستدلال والاستراتيجية
+### 推論と戦略
 
-إعدادات طريقة تفكير النموذج وتخطيطه قبل اتخاذ أي إجراء
+行動を起こす前にモデルが思考し、計画を立てる方法の構成。
 
-- **التجزئة المنطقية:** تحدّد مدى دقة تحليل النموذج للقيود والمتطلبات الأساسية وترتيب العمليات.
-- **تشخيص المشكلة**: يتحكّم في عمق التحليل عند تحديد الأسباب وفي استخدام النموذج للاستدلال الاستنتاجي. تحدّد ما إذا كان النموذج سيقبل الإجابة الأكثر وضوحًا أو سيبحث عن تفسيرات معقّدة وأقل احتمالاً.
-- **شمولية المعلومات:** المفاضلة بين تحليل كل السياسات والمستندات المتاحة وبين إعطاء الأولوية للكفاءة والسرعة
+- **論理分解:** モデルが制約、前提条件、オペレーションの順序をどの程度徹底的に分析する必要があるかを定義します。
+- **問題の診断**: 原因を特定する際の分析の深さと、モデルの仮説的推論の使用を制御します。モデルが最も明白な回答を受け入れるか、複雑で可能性の低い説明を探索するかを決定します。
+- **情報の網羅性:** 利用可能なすべてのポリシーとドキュメントを分析することと、効率と速度を優先することのトレードオフ。
 
-### التنفيذ والموثوقية
+### 実行と信頼性
 
-إعدادات طريقة عمل الوكيل بشكل مستقل والتعامل مع العوائق
+エージェントが自律的に動作し、障害を処理する方法の構成。
 
-- **القدرة على التكيّف:** طريقة تفاعل النموذج مع البيانات الجديدة تحدّد هذه السمة ما إذا كان يجب الالتزام بدقة بالخطة الأولية أو تغييرها على الفور عندما تتعارض الملاحظات مع الافتراضات.
-- **المثابرة والاسترداد:** هي مدى محاولة النموذج تصحيح الأخطاء ذاتيًا. تزيد المثابرة العالية من معدلات النجاح ولكنها تنطوي على مخاطر ارتفاع تكاليف الرموز المميزة أو التكرار.
-- **تقييم المخاطر:** منطق تقييم العواقب يميز بوضوح بين الإجراءات الاستكشافية المنخفضة المخاطر (عمليات القراءة) وتغييرات الحالة العالية المخاطر (عمليات الكتابة).
+- **適応性:** モデルが新しいデータにどのように反応するか。最初の計画を厳守するか、観測結果が仮定と矛盾する場合はすぐにピボットするかを決定します。
+- **永続性と復旧:** モデルがエラーを自己修正しようとする度合い。永続性が高いほど成功率は向上しますが、トークン費用やループが増加するリスクがあります。
+- **リスク評価:** 結果を評価するロジック。低リスクの探索的アクション（読み取り）と高リスクの状態変更（書き込み）を明示的に区別します。
 
-### التفاعل والإخراج
+### インタラクションと出力
 
-إعدادات طريقة تواصل الوكيل مع المستخدم وتنسيق النتائج
+エージェントがユーザーと通信し、結果の形式を設定する方法の構成。
 
-- **الغموض والتعامل مع الأذونات:** يحدّد هذا الإعداد الحالات التي يُسمح فيها للنموذج بوضع افتراضات والحالات التي يجب فيها إيقاف التنفيذ مؤقتًا لطلب توضيح أو إذن من المستخدم.
-- **مستوى التفصيل:** يتحكّم في حجم النص الذي يتم إنشاؤه إلى جانب طلبات الأدوات. يحدّد هذا الخيار ما إذا كان النموذج يوضّح للمستخدم الإجراءات التي يتّخذها أو يبقى صامتًا أثناء التنفيذ.
-- **الدقة والشمولية:** تشير إلى الدقة المطلوبة للناتج، وتحدّد ما إذا كان على النموذج حلّ كل الحالات الحدّية وتقديم أرقام دقيقة أو ما إذا كانت التقديرات التقريبية مقبولة.
+- **あいまいさと権限の処理:** モデルが仮定を行うことが許可される場合と、実行を一時停止してユーザーに明確化または権限を求める必要がある場合を定義します。
+- **冗長性:** ツール呼び出しとともに生成されるテキストの量を制御します。これにより、モデルがユーザーにアクションを説明するか、実行中に無音のままにするかが決まります。
+- **精度と完全性:** 出力の必要な忠実度。モデルがすべてのエッジケースを解決して正確な数値を提示する必要があるか、概算で許容されるかを指定します。
 
-### نموذج تعليمات النظام
+### システム指示テンプレート
 
-تعليمات النظام التالية هي مثال قيّمه الباحثون لتحسين الأداء في مقاييس الأداء المستندة إلى الوكلاء، حيث يجب أن يلتزم النموذج بمجموعة معقّدة من القواعد ويتفاعل مع المستخدم. تشجّع هذه التعليمات الوكيل على التفكير والتخطيط بشكل فعّال، وتفرض سلوكيات محدّدة على مستوى الأبعاد المذكورة أعلاه، وتتطلّب من النموذج التخطيط بشكل استباقي قبل اتخاذ أي إجراء.
+次のシステム指示は、モデルが複雑なルールブックを遵守し、ユーザーとやり取りする必要があるエージェント ベンチマークのパフォーマンスを向上させるために研究者によって評価された例です。エージェントが強力な推論者およびプランナーとして行動することを推奨し、上記のディメンション全体で特定の動作を強制し、モデルが行動を起こす前に積極的に計画を立てることを要求します。
 
-يمكنك تعديل هذا النموذج ليتناسب مع القيود المحدّدة لحالة الاستخدام.
+このテンプレートは、特定のユースケースの制約に合わせて調整できます。
 
 ```
 You are a very strong reasoner and planner. Use these critical instructions to structure your plans, thoughts, and responses.
@@ -459,19 +463,22 @@ Before taking any action (either tool calls *or* responses to the user), you mus
 9) Inhibit your response: only take an action after all the above reasoning is completed. Once you've taken an action, you cannot take it back.
 ```
 
-## الخطوات التالية
+## 次のステップ
 
-- بعد أن أصبح لديك فهم أعمق لتصميم الطلبات، جرِّب كتابة طلباتك الخاصة باستخدام [Google AI Studio](http://aistudio.google.com?hl=ar).
-- لمزيد من المعلومات حول إنشاء الطلبات المتعددة الوسائط، اطّلِع على [توجيه الطلبات باستخدام ملفات الوسائط](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide).
-- لمعرفة المزيد عن توجيه الطلبات باستخدام الصور، يمكنك الاطّلاع على أدلة الطلبات الخاصة بـ [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar#prompt-guide) و[Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ar#imagen-prompt-guide).
-- لمعرفة المزيد عن طلبات الفيديو، اطّلِع على [دليل كتابة طلبات Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar#prompt-guide).
+- プロンプト設計について理解を深めたので、
+  独自のプロンプトを[Google AI Studio](http://aistudio.google.com?hl=ja)を使用して作成してみてください。
+- マルチモーダル プロンプトの詳細については、
+  [メディア ファイルを使用したプロンプト](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)をご覧ください。
+- 画像プロンプトの詳細については、[Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja#prompt-guide)
+  と [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja#imagen-prompt-guide) のプロンプト ガイドをご覧ください。
+- 動画プロンプトの詳細については、[Veo プロンプト ガイド](https://ai.google.dev/gemini-api/docs/video?hl=ja#prompt-guide)をご覧ください。
 
-إرسال ملاحظات
+フィードバックを送信
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-تاريخ التعديل الأخير: 2026-06-10 (حسب التوقيت العالمي المتفَّق عليه)
+最終更新日 2026-06-10 UTC。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+ご意見をお聞かせください
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-10 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-10 UTC。"],[],[]]

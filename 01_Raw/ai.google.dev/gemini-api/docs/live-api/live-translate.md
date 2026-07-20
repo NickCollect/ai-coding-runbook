@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=vi
-fetched_at: 2026-07-06T05:17:37.899792+00:00
+fetched_at: 2026-07-20T04:36:18.674958+00:00
 title: "D\u1ecbch tr\u1ef1c ti\u1ebfp b\u1eb1ng Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

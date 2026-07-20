@@ -1,31 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=id
-fetched_at: 2026-07-06T05:06:19.479583+00:00
-title: "Agen Deep Research Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=tr
+fetched_at: 2026-07-20T04:44:56.696696+00:00
+title: "Gemini Deep Research Temsilcisi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Kirim masukan
+Geri bildirim gönderin
 
-# Agen Deep Research Gemini
+# Gemini Deep Research Temsilcisi
 
-Agen Deep Research Gemini secara mandiri merencanakan, menjalankan, dan menyintesis tugas riset multi-langkah. Didukung oleh Gemini, fitur ini menavigasi lanskap informasi yang kompleks untuk menghasilkan laporan mendetail yang disertai kutipan. Kemampuan baru memungkinkan Anda merencanakan secara kolaboratif dengan agen, terhubung ke alat eksternal menggunakan server MCP, menyertakan visualisasi (seperti diagram dan grafik), dan memberikan dokumen secara langsung sebagai input.
+Gemini Deep Research Temsilcisi, çok adımlı araştırma görevlerini bağımsız olarak planlar, yürütür ve sentezler. Gemini destekli bu araç, karmaşık bilgi ortamlarında gezinerek ayrıntılı ve alıntılı raporlar oluşturur. Yeni özellikler sayesinde, yapay zeka ajanıyla birlikte plan yapabilir, MCP sunucularını kullanarak harici araçlara bağlanabilir, görselleştirmeler (ör. grafikler) ekleyebilir ve belgeleri doğrudan giriş olarak sağlayabilirsiniz.
 
-Tugas riset melibatkan penelusuran dan pembacaan iteratif dan dapat memerlukan waktu beberapa menit untuk diselesaikan. Anda harus menggunakan [eksekusi di latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id) (tetapkan `background=true`)
-untuk menjalankan agen secara asinkron dan melakukan polling untuk hasil atau streaming update. Lihat
-[Menangani tugas yang berjalan lama](#long-running-tasks) untuk mengetahui detail selengkapnya.
+Araştırma görevleri, tekrara dayalı arama ve okuma işlemlerini içerir ve tamamlanması birkaç dakika sürebilir. Aracıyı eşzamansız olarak çalıştırmak ve sonuçları yoklamak ya da güncellemeleri yayınlamak için [arka planda yürütmeyi](https://ai.google.dev/gemini-api/docs/background-execution?hl=tr) (`background=true` olarak ayarlayın) kullanmanız gerekir. Daha fazla bilgi için [Uzun süren görevleri işleme](#long-running-tasks) başlıklı makaleyi inceleyin.
 
-Contoh berikut menunjukkan cara memulai tugas riset di latar belakang
-dan melakukan polling untuk mendapatkan hasil.
+Aşağıdaki örnekte, arka planda araştırma görevi başlatma ve sonuçları yoklama işlemi gösterilmektedir.
 
 ### Python
 
@@ -100,22 +97,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Versi yang Didukung
+## Desteklenen sürümler
 
-Agen Deep Research hadir dalam dua versi:
+Deep Research aracısı iki sürümde sunulur:
 
-- **Deep Research** (`deep-research-preview-04-2026`): Didesain untuk kecepatan dan efisiensi, ideal untuk di-streaming kembali ke UI klien.
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): Komprehensivitas maksimum untuk pengumpulan dan sintesis konteks otomatis.
+- **Deep Research** (`deep-research-preview-04-2026`): Hız ve verimlilik için tasarlanmıştır. İstemci kullanıcı arayüzüne geri aktarılmak için idealdir.
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): Otomatik bağlam toplama ve sentezleme için maksimum kapsamlılık.
 
-## Perencanaan kolaboratif
+## Ortak planlama
 
-Perencanaan kolaboratif memberi Anda kontrol atas arah riset
-sebelum agen memulai pekerjaannya. Jika diaktifkan, agen akan menampilkan rencana riset yang diusulkan, bukan langsung menjalankannya. Kemudian, Anda dapat meninjau, mengubah, atau menyetujui rencana melalui interaksi multi-giliran.
+Ortak planlama, araştırmayı yürütmeden önce araştırma planını inceleyip iyileştirmenize olanak tanıyarak temsilci çalışmaya başlamadan önce araştırma yönünü kontrol etmenizi sağlar. Etkinleştirildiğinde, ajan hemen yürütmek yerine önerilen bir araştırma planı döndürür. Ardından, çok turlu etkileşimler aracılığıyla planı inceleyebilir, değiştirebilir veya onaylayabilirsiniz.
 
-### Langkah 1: Minta paket
+### 1. adım: Plan isteğinde bulunun
 
-Tetapkan `collaborative_planning=True` dalam interaksi pertama. Agen
-mengembalikan rencana riset, bukan laporan lengkap.
+İlk etkileşimde `collaborative_planning=True` değerini ayarlayın. Ajan, tam rapor yerine araştırma planı döndürüyor.
 
 ### Python
 
@@ -181,9 +176,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Langkah 2: Sempurnakan rencana (opsional)
+### 2. adım: Planı iyileştirin (isteğe bağlı)
 
-Gunakan `previous_interaction_id` untuk melanjutkan percakapan dan melakukan iterasi pada rencana. Tetap tekan `collaborative_planning=True` untuk tetap berada dalam mode perencanaan.
+Sohbete devam etmek ve planı yinelemek için `previous_interaction_id` aboneliğini kullanın. Planlama modunda kalmak için `collaborative_planning=True` tuşunu basılı tutun.
 
 ### Python
 
@@ -247,9 +242,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Langkah 3: Setujui dan jalankan
+### 3. adım: Onaylayın ve yürütün
 
-Tetapkan `collaborative_planning=False` (atau hapus) untuk menyetujui rencana dan memulai riset.
+Planı onaylamak ve araştırmayı başlatmak için `collaborative_planning=False` değerini ayarlayın (veya bu değeri atlayın).
 
 ### Python
 
@@ -313,17 +308,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Visualisasi
+## Görselleştirme
 
-Jika `visualization` disetel ke `"auto"`, agen dapat membuat diagram, grafik, dan elemen visual lainnya untuk mendukung temuan risetnya.
-Gambar yang dihasilkan disertakan dalam langkah-langkah respons dan di-streaming sebagai delta `image`. Untuk hasil terbaik, minta visual secara eksplisit dalam kueri Anda — misalnya, "Sertakan diagram yang menunjukkan tren dari waktu ke waktu" atau "Buat grafik yang membandingkan pangsa pasar". Menetapkan `visualization` ke
-`"auto"` mengaktifkan kemampuan, tetapi agen hanya menghasilkan visual
-saat perintah memintanya.
+`visualization`, `"auto"` olarak ayarlandığında ajan, araştırma bulgularını desteklemek için grafikler ve diğer görsel öğeler oluşturabilir.
+Oluşturulan resimler, yanıt adımlarına dahil edilir ve `image` deltalara dönüştürülerek yayınlanır. En iyi sonuçları elde etmek için sorgunuzda görselleri açıkça isteyin. Örneğin, "Zaman içindeki trendleri gösteren grafikler ekle" veya "Pazar payını karşılaştıran grafikler oluştur" gibi ifadeler kullanın. `visualization` değerini `"auto"` olarak ayarlamak özelliği etkinleştirir ancak ajan, yalnızca istemde istenirse görsel oluşturur.
 
 ### Python
 
 ```
 import base64
+import time
+
+from google import genai
+
+client = genai.Client()
 
 interaction = client.interactions.create(
     agent="deep-research-preview-04-2026",
@@ -404,24 +402,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Alat yang didukung
+## Desteklenen araçlar
 
-Deep Research mendukung beberapa alat bawaan dan eksternal. Secara default
-(jika tidak ada parameter `tools`), agen memiliki akses ke Google
-Penelusuran, Konteks URL, dan Eksekusi Kode. Anda dapat secara eksplisit
-menentukan alat untuk membatasi atau memperluas kemampuan agen.
+Deep Research, birden fazla yerleşik ve harici aracı destekler. Varsayılan olarak (`tools` parametresi sağlanmadığında) aracı, Google Arama, URL Bağlamı ve Kod Yürütme'ye erişebilir. Ajanın yeteneklerini kısıtlamak veya genişletmek için araçları açıkça belirtebilirsiniz.
 
-| Alat | Nilai jenis | Deskripsi |
+| Araç | Tür değeri | Açıklama |
 | --- | --- | --- |
-| Google Penelusuran | `google_search` | Telusuri web publik. Diaktifkan secara default. |
-| Konteks URL | `url_context` | Membaca dan merangkum konten halaman web. Diaktifkan secara default. |
-| Eksekusi Kode | `code_execution` | Jalankan kode untuk melakukan penghitungan dan analisis data. Diaktifkan secara default. |
-| Server MCP | `mcp_server` | Terhubung ke server MCP jarak jauh untuk akses alat eksternal. |
-| Penelusuran File | `file_search` | Menelusuri korpora dokumen yang Anda upload. |
+| Google Arama | `google_search` | Herkese açık web'de arama yapın. Varsayılan olarak etkindir. |
+| URL Bağlamı | `url_context` | Web sayfası içeriğini okuma ve özetleme Varsayılan olarak etkindir. |
+| Kod Yürütme | `code_execution` | Hesaplamalar ve veri analizi yapmak için kodu yürütün. Varsayılan olarak etkindir. |
+| MCP Sunucusu | `mcp_server` | Harici araç erişimi için uzaktaki MCP sunucularına bağlanın. |
+| Dosya Arama | `file_search` | Yüklediğiniz doküman derlemlerinde arama yapın. |
 
-### Google Penelusuran
+### Google Arama
 
-Aktifkan Google Penelusuran secara eksplisit sebagai satu-satunya alat:
+Google Arama'yı tek araç olarak açıkça etkinleştirin:
 
 ### Python
 
@@ -459,9 +454,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Konteks URL
+### URL Bağlamı
 
-Memberi agen kemampuan untuk membaca dan meringkas halaman web tertentu:
+Ajana belirli web sayfalarını okuma ve özetleme yetkisi verin:
 
 ### Python
 
@@ -499,9 +494,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Eksekusi Kode
+### Kod Yürütme
 
-Mengizinkan agen mengeksekusi kode untuk penghitungan dan analisis data:
+Ajanın hesaplamalar ve veri analizi için kod yürütmesine izin verin:
 
 ### Python
 
@@ -539,19 +534,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Server MCP
+### MCP sunucuları
 
-Berikan `name` dan `url` server dalam konfigurasi alat. Anda juga dapat meneruskan kredensial autentikasi dan membatasi alat yang dapat dipanggil agen.
+Ajanın harici araçlara ve hizmetlere erişmesini sağlamak için uzak MCP sunucularına bağlanın.
 
-| Kolom | Jenis | Wajib diisi | Deskripsi |
+Araç yapılandırmasında sunucuyu `name` ve `url` olarak belirtin. Ayrıca, kimlik doğrulama kimlik bilgilerini iletebilir ve aracının hangi araçları çağırabileceğini kısıtlayabilirsiniz.
+
+| Alan | Tür | Zorunlu | Açıklama |
 | --- | --- | --- | --- |
-| `type` | `string` | Ya | Harus berupa `"mcp_server"`. |
-| `name` | `string` | Tidak | Nama tampilan untuk server MCP. |
-| `url` | `string` | Tidak | URL lengkap untuk endpoint server MCP. |
-| `headers` | `object` | Tidak | Pasangan nilai kunci yang dikirim sebagai header HTTP dengan setiap permintaan ke server (misalnya, token autentikasi). |
-| `allowed_tools` | `array` | Tidak | Membatasi alat dari server yang dapat dipanggil oleh agen. |
+| `type` | `string` | Evet | `"mcp_server"` olmalıdır. |
+| `name` | `string` | Hayır | MCP sunucusunun görünen adı. |
+| `url` | `string` | Hayır | MCP sunucusu uç noktasının tam URL'si. |
+| `headers` | `object` | Hayır | Sunucuya yapılan her istekle birlikte HTTP başlıkları olarak gönderilen anahtar/değer çiftleri (örneğin, kimlik doğrulama jetonları). |
+| `allowed_tools` | `array` | Hayır | Ajanın sunucudan hangi araçları çağırabileceğini kısıtlayın. |
 
-#### Penggunaan dasar
+#### Temel kullanım
 
 ### Python
 
@@ -610,9 +607,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Penelusuran File
+### Dosya Arama
 
-Beri agen akses ke data Anda sendiri menggunakan alat [Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id).
+[Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) aracını kullanarak aracıya kendi verilerinize erişim izni verin.
 
 ### Python
 
@@ -664,12 +661,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Kemampuan pengarahan dan pemformatan
+## Yönlendirilebilirlik ve biçimlendirme
 
-Anda dapat mengarahkan output agen dengan memberikan petunjuk pemformatan tertentu
-dalam perintah Anda. Hal ini memungkinkan Anda menyusun laporan ke dalam bagian dan subbagian tertentu, menyertakan tabel data, atau menyesuaikan gaya bahasa untuk audiens yang berbeda (misalnya, "teknis", "eksekutif", "santai").
+İsteminizde belirli biçimlendirme talimatları vererek aracının çıktısını yönlendirebilirsiniz. Bu sayede raporları belirli bölümler ve alt bölümler halinde yapılandırabilir, veri tabloları ekleyebilir veya farklı kitlelere yönelik üslubu ayarlayabilirsiniz (ör. "teknik", "yönetici", "gündelik").
 
-Tentukan format output yang diinginkan secara eksplisit dalam teks input Anda.
+İstenen çıkış biçimini giriş metninizde açıkça tanımlayın.
 
 ### Python
 
@@ -722,9 +718,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Input multimodal
+## Çok formatlı girişler
 
-Deep Research mendukung input multimodal, termasuk gambar dan dokumen (PDF), sehingga memungkinkan agen menganalisis konten visual dan melakukan riset berbasis web yang dikontekstualisasi oleh input yang diberikan.
+Derin Araştırma, resimler ve dokümanlar (PDF'ler) dahil olmak üzere çok formatlı girişleri destekler. Böylece, aracının görsel içerikleri analiz etmesine ve sağlanan girişlerle bağlamsallaştırılmış web tabanlı araştırmalar yapmasına olanak tanır.
 
 ### Python
 
@@ -830,9 +826,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Pemahaman dokumen
+### Belge anlama
 
-Teruskan dokumen secara langsung sebagai input multimodal. Agen menganalisis dokumen yang diberikan dan melakukan riset berdasarkan kontennya.
+Doküman yorumlama, dokümanların doğrudan çok formatlı giriş olarak iletilmesine olanak tanır.
+Aracı, sağlanan belgeleri analiz eder ve içeriklerine dayalı araştırma yapar.
 
 ### Python
 
@@ -893,36 +890,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Menangani tugas yang berjalan lama
+## Uzun süreli görevleri işleme
 
-Deep Research adalah proses multi-langkah yang melibatkan perencanaan, penelusuran, pembacaan, dan penulisan. Siklus ini biasanya melampaui batas waktu tunggu standar panggilan API sinkron.
+Deep Research; planlama, arama, okuma ve yazma gibi çok adımlı bir süreçtir. Bu döngü genellikle senkron API çağrılarının standart zaman aşımı sınırlarını aşar.
 
-Agen wajib menggunakan `background=True`. API segera menampilkan objek
-`Interaction` parsial. Anda dapat menggunakan properti `id` untuk mengambil
-interaksi untuk polling. Status interaksi akan bertransisi dari
-`in_progress` ke `completed` atau `failed`. Untuk panduan komprehensif tentang mengelola tugas latar belakang, lihat [Eksekusi latar belakang](https://ai.google.dev/gemini-api/docs/background-execution?hl=id).
+Temsilcilerin `background=True` kullanması gerekir. API, hemen kısmi bir `Interaction` nesnesi döndürür. Anket için etkileşim almak üzere `id` özelliğini kullanabilirsiniz. Etkileşim durumu `in_progress`'dan `completed` veya `failed`'ye geçiş yapar. Arka plan görevlerini yönetmeyle ilgili kapsamlı bir kılavuz için [Arka planda yürütme](https://ai.google.dev/gemini-api/docs/background-execution?hl=tr) başlıklı makaleyi inceleyin.
 
-### Streaming
+### Canlı Yayın
 
-Deep Research mendukung streaming untuk menerima pembaruan real-time tentang progres riset, termasuk ringkasan pemikiran, output teks, dan gambar yang dihasilkan.
-Anda harus menetapkan `stream=True` dan `background=True`.
+Deep Research, düşünce özetleri, metin çıktısı ve oluşturulan resimler dahil olmak üzere araştırma ilerlemesiyle ilgili anlık güncellemeler almak için akışı destekler.
+`stream=True` ve `background=True` öğelerini ayarlamanız gerekir.
 
-Untuk menerima langkah-langkah penalaran (pemikiran) dan info terbaru progres,
-Anda harus mengaktifkan **ringkasan pemikiran** dengan menetapkan `thinking_summaries` ke
-`"auto"` di `agent_config`. Tanpa ini, aliran data hanya dapat memberikan hasil akhir.
+Ara muhakeme adımlarını (düşünceler) ve ilerleme durumu güncellemelerini almak için `agent_config` bölümünde `thinking_summaries` ayarını `"auto"` olarak belirleyerek **düşünce özetlerini** etkinleştirmeniz gerekir. Bu olmadan yayın yalnızca nihai sonuçları sağlayabilir.
 
-#### Jenis peristiwa streaming
+#### Akış etkinliği türleri
 
-| Jenis peristiwa | Jenis delta | Deskripsi |
+| Etkinlik türü | Delta türü | Açıklama |
 | --- | --- | --- |
-| `step.delta` | `thought` | Langkah penalaran perantara dari agen. |
-| `step.delta` | `text` | Bagian dari output teks akhir. |
-| `step.delta` | `image` | Gambar yang dihasilkan (berenkode base64). |
+| `step.delta` | `thought` | Aracının akıl yürütme sürecindeki ara adım. |
+| `step.delta` | `text` | Nihai metin çıktısının bir parçası. |
+| `step.delta` | `image` | Üretilmiş bir resim (base64 kodlu). |
 
-Contoh berikut memulai tugas riset dan memproses streaming dengan
-koneksi ulang otomatis. Objek ini melacak `interaction_id` dan `last_event_id` sehingga
-jika koneksi terputus (misalnya, setelah waktu tunggu 600 detik), objek tersebut dapat
-melanjutkan dari tempat terakhir.
+Aşağıdaki örnekte bir araştırma görevi başlatılıyor ve otomatik yeniden bağlantı ile yayın işleniyor. Bağlantı kesilirse (örneğin, 600 saniyelik zaman aşımından sonra) kaldığı yerden devam edebilmesi için `interaction_id` ve `last_event_id` değerlerini izler.
 
 ### Python
 
@@ -1043,10 +1032,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Pertanyaan dan interaksi lanjutan
+## Ek sorular ve etkileşimler
 
-Anda dapat melanjutkan percakapan setelah agen menampilkan laporan akhir dengan
-menggunakan `previous_interaction_id`. Dengan begitu, Anda dapat meminta klarifikasi, meringkas, atau menguraikan bagian tertentu dari riset tanpa memulai ulang seluruh tugas.
+Temsilci nihai raporu döndürdükten sonra `previous_interaction_id` kullanarak görüşmeye devam edebilirsiniz. Bu sayede, görevin tamamını yeniden başlatmadan araştırmanın belirli bölümleriyle ilgili açıklama, özet veya ayrıntı isteyebilirsiniz.
 
 ### Python
 
@@ -1089,28 +1077,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Kapan harus menggunakan Agen Deep Research Gemini
+## Gemini Deep Research Ajanı'nı ne zaman kullanmalısınız?
 
-Deep Research adalah **agen**, bukan hanya model. Cara ini paling cocok untuk workload yang memerlukan pendekatan "analis dalam kotak" daripada chat latensi rendah.
+Deep Research yalnızca bir model değil, **ajandır**. Düşük gecikmeli sohbet yerine "analist-in-a-box" yaklaşımı gerektiren iş yükleri için en uygun seçenektir.
 
-| Fitur | Model Gemini Standar | Agen Deep Research Gemini |
+| Özellik | Standart Gemini Modelleri | Gemini Deep Research Ajanı |
 | --- | --- | --- |
-| **Latensi** | Detik | Menit (Asinkron/Latar Belakang) |
-| **Proses** | Buat -> Output | Rencanakan -> Cari -> Baca -> Lakukan iterasi -> Output |
-| **Output** | Teks percakapan, kode, ringkasan singkat | Laporan mendetail, analisis panjang, tabel perbandingan |
-| **Paling Cocok untuk** | Chatbot, ekstraksi, penulisan kreatif | Analisis pasar, uji tuntas, tinjauan pustaka, lanskap kompetitif |
+| **Gecikme** | Saniye | Dakika (Eşzamansız/Arka Plan) |
+| **İşlem** | Oluştur -> Çıkış | Plan -> Search -> Read -> Iterate -> Output |
+| **Çıkış** | Etkileşimli metin, kod, kısa özetler | Ayrıntılı raporlar, uzun analizler, karşılaştırmalı tablolar |
+| **İdeal kullanım alanları** | Chatbot'lar, ayıklama, yaratıcı yazarlık | Pazar analizi, durum tespiti, literatür taramaları, rekabet ortamı |
 
-## Konfigurasi agen
+## Aracı yapılandırması
 
-Deep Research menggunakan parameter `agent_config` untuk mengontrol perilaku.
-Teruskan sebagai kamus dengan kolom berikut:
+Deep Research, davranışı kontrol etmek için `agent_config` parametresini kullanır.
+Aşağıdaki alanları içeren bir sözlük olarak iletin:
 
-| Kolom | Jenis | Default | Deskripsi |
+| Alan | Tür | Varsayılan | Açıklama |
 | --- | --- | --- | --- |
-| `type` | `string` | Wajib | Harus berupa `"deep-research"`. |
-| `thinking_summaries` | `string` | `"none"` | Setel ke `"auto"` untuk menerima langkah-langkah penalaran perantara selama streaming. Setel ke `"none"` untuk menonaktifkan. |
-| `visualization` | `string` | `"auto"` | Setel ke `"auto"` untuk mengaktifkan diagram dan gambar yang dibuat agen. Setel ke `"off"` untuk menonaktifkan. |
-| `collaborative_planning` | `boolean` | `false` | Setel ke `true` untuk mengaktifkan peninjauan rencana multi-putaran sebelum riset dimulai. |
+| `type` | `string` | Zorunlu | `"deep-research"` olmalıdır. |
+| `thinking_summaries` | `string` | `"none"` | Yayın sırasında ara muhakeme adımlarını almak için `"auto"` olarak ayarlayın. Devre dışı bırakmak için `"none"` olarak ayarlayın. |
+| `visualization` | `string` | `"auto"` | Ajan tarafından oluşturulan grafik ve resimleri etkinleştirmek için `"auto"` olarak ayarlayın. Devre dışı bırakmak için `"off"` olarak ayarlayın. |
+| `collaborative_planning` | `boolean` | `false` | Araştırma başlamadan önce çok turlu plan incelemesini etkinleştirmek için `true` olarak ayarlayın. |
 
 ### Python
 
@@ -1165,63 +1153,57 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Ketersediaan dan harga
+## Kullanılabilirlik ve fiyatlandırma
 
-Anda dapat mengakses Agen Riset Mendalam Gemini menggunakan Interactions API di Google AI Studio dan Gemini API.
+Google AI Studio'daki Interactions API ve Gemini API'yi kullanarak Gemini Deep Research Agent'a erişebilirsiniz.
 
-Harga mengikuti [model bayar sesuai penggunaan](https://ai.google.dev/gemini-api/docs/pricing?hl=id#pricing-for-agents) berdasarkan model Gemini yang mendasarinya dan alat spesifik yang digunakan agen. Tidak seperti permintaan chat standar, yang menghasilkan satu output, tugas Deep Research adalah alur kerja agentic. Satu permintaan memicu loop otonom perencanaan, penelusuran, pembacaan, dan penalaran.
+Fiyatlandırma, temel Gemini modellerine ve aracının kullandığı belirli araçlara dayalı [kullandıkça öde modeline](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#pricing-for-agents) göre belirlenir. Bir isteğin tek bir çıkışa yol açtığı standart sohbet isteklerinin aksine, Deep Research görevi, bir aracı iş akışıdır. Tek bir istek, planlama, arama, okuma ve akıl yürütme işlemlerinden oluşan bağımsız bir döngüyü tetikler.
 
-### Perkiraan biaya
+### Tahmini maliyetler
 
-Biaya bervariasi berdasarkan kedalaman riset yang diperlukan. Agen secara otonom menentukan seberapa banyak membaca dan penelusuran yang diperlukan untuk menjawab perintah Anda.
+Maliyetler, gereken araştırma derinliğine göre değişir. Ajan, isteminize yanıt vermek için ne kadar okuma ve arama yapılması gerektiğini bağımsız olarak belirler.
 
-- **Deep Research** (`deep-research-preview-04-2026`): Untuk kueri umum yang memerlukan analisis sedang, agen mungkin menggunakan ~80 kueri penelusuran, ~250 ribu token input (~50-70% di-cache), dan ~60 ribu token output.
-  - **Estimasi total:** ~$1.00 – $3.00 per tugas
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): Untuk analisis lanskap kompetitif yang mendalam atau uji tuntas yang ekstensif, agen dapat menggunakan hingga ~160 kueri penelusuran, ~900 ribu token input (~50-70% di-cache), dan ~80 ribu token output.
-  - **Estimasi total:** ~$3.00 – $7.00 per tugas
+- **Deep Research** (`deep-research-preview-04-2026`): Orta düzeyde analiz gerektiren tipik bir sorgu için ajan yaklaşık 80 arama sorgusu, yaklaşık 250 bin giriş jetonu (yaklaşık% 50-70 önbelleğe alınmış) ve yaklaşık 60 bin çıkış jetonu kullanabilir.
+  - **Tahmini toplam:** Görev başına ~1,00 TL - 3,00 TL
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): Derinlemesine rekabet ortamı analizi veya kapsamlı durum tespiti için ajan, ~160 arama sorgusu, ~900 bin giriş jetonu (~% 50-70 önbelleğe alınmış) ve ~80 bin çıkış jetonu kullanabilir.
+  - **Tahmini toplam:** Görev başına ~3,00 TL - 7,00 TL
 
-## Pertimbangan keamanan
+## Güvenlikle ilgili olarak göz önünde bulundurulması gerekenler
 
-Memberi agen akses ke web dan file pribadi Anda memerlukan pertimbangan yang cermat terhadap risiko keamanan.
+Bir aracıya web'e ve özel dosyalarınıza erişim izni vermek için güvenlik risklerini dikkatlice değerlendirmeniz gerekir.
 
-- **Injeksi perintah menggunakan file:** Agen membaca isi file yang Anda berikan. Pastikan dokumen yang diupload (PDF, file teks) berasal dari sumber tepercaya. File berbahaya dapat berisi teks tersembunyi yang dirancang untuk memanipulasi output agen.
-- **Risiko konten web:** Agen menelusuri web publik. Meskipun kami menerapkan filter keamanan yang andal, ada risiko bahwa agen dapat menemukan dan memproses halaman web berbahaya. Sebaiknya tinjau `citations` yang diberikan
-  dalam respons untuk memverifikasi sumber.
-- **Pencurian data:** Berhati-hatilah saat meminta agen untuk meringkas data internal sensitif jika Anda juga mengizinkannya menjelajahi web.
+- **Dosyaları kullanarak istem ekleme:** Aracı, sağladığınız dosyaların içeriğini okur. Yüklenen dokümanların (PDF'ler, metin dosyaları) güvenilir kaynaklardan geldiğinden emin olun. Kötü amaçlı bir dosya, aracının çıkışını manipüle etmek için tasarlanmış gizli metinler içerebilir.
+- **Web içeriği riskleri:** Aracı, herkese açık web'de arama yapar. Güçlü güvenlik filtreleri uyguladığımız halde, aracının kötü amaçlı web sayfalarıyla karşılaşma ve bunları işleme riski vardır. Kaynakları doğrulamak için yanıtta `citations` bilgilerini incelemenizi öneririz.
+- **Veri sızdırma:** Agent'ın web'e göz atmasına da izin veriyorsanız hassas dahili verileri özetlemesini isterken dikkatli olun.
 
-## Praktik terbaik
+## En iyi uygulamalar
 
-- **Perintah untuk nilai yang tidak diketahui:** Beri tahu agen cara menangani data yang tidak ada.
-  Misalnya, tambahkan *"Jika angka spesifik untuk tahun 2025 tidak tersedia, nyatakan secara eksplisit bahwa angka tersebut adalah proyeksi atau tidak tersedia, bukan perkiraan"* ke perintah Anda.
-- **Berikan konteks:** Mendasari riset agen dengan memberikan informasi atau batasan latar belakang langsung dalam perintah input.
-- **Gunakan perencanaan kolaboratif:** Untuk kueri kompleks, aktifkan perencanaan kolaboratif untuk meninjau dan menyempurnakan rencana riset sebelum eksekusi.
-- **Input multimodal:** Agen Deep Research mendukung input multimodal.
-  Gunakan dengan hati-hati, karena hal ini akan meningkatkan biaya dan risiko meluapnya jendela konteks.
+- **Bilinmeyenler için istem:** Eksik verilerin nasıl işleneceği konusunda temsilciye talimat verin.
+  Örneğin, isteminize *"2025'e ait belirli rakamlar mevcut değilse tahmin etmek yerine bunların tahmin olduğunu veya kullanılamadığını açıkça belirt"* ifadesini ekleyin.
+- **Bağlam sağlama:** Giriş isteminde doğrudan arka plan bilgileri veya kısıtlamalar sağlayarak aracının araştırmasına temel oluşturun.
+- **Ortak planlamayı kullanın:** Karmaşık sorgular için, yürütmeden önce araştırma planını incelemek ve iyileştirmek üzere ortak planlamayı etkinleştirin.
+- **Çok formatlı girişler:** Deep Research Agent, çok formatlı girişleri destekler.
+  Maliyetleri artırdığı ve bağlam penceresinin taşmasına neden olabileceği için dikkatli kullanın.
 
-## Batasan
+## Sınırlamalar
 
-- **Alat kustom:** Saat ini Anda tidak dapat menyediakan alat Pemanggilan Fungsi kustom, tetapi Anda dapat menggunakan server MCP (Model Context Protocol) jarak jauh dengan agen Deep Research.
-- **Output terstruktur:** Agen Deep Research saat ini tidak mendukung output terstruktur.
-- **Waktu riset maksimum:** Agen Deep Research memiliki waktu riset maksimum 60 menit. Sebagian besar tugas akan selesai dalam waktu 20 menit.
-- **Persyaratan penyimpanan:** Eksekusi agen menggunakan `background=True` memerlukan
-  `store=True`.
-- **Penelusuran Google:** [Google
-  Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id) diaktifkan secara
-  default dan [pembatasan
-  tertentu](https://ai.google.dev/gemini-api/terms?hl=id#use-restrictions2)
-  berlaku untuk hasil yang di-grounding.
+- **Özel araçlar:** Şu anda özel işlev çağrısı araçları sağlayamıyorsunuz ancak Derin Araştırma aracısıyla uzak MCP (Model Context Protocol) sunucularını kullanabilirsiniz.
+- **Yapılandırılmış çıkış:** Derin Araştırma Aracısı şu anda yapılandırılmış çıkışları desteklememektedir.
+- **Maksimum araştırma süresi:** Deep Research aracısının maksimum araştırma süresi 60 dakikadır. Çoğu görev 20 dakika içinde tamamlanır.
+- **Mağaza koşulu:** `background=True` kullanılarak yapılan aracı yürütme işlemi için `store=True` gerekir.
+- **Google Arama:** [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) varsayılan olarak etkindir ve temellendirilmiş sonuçlar için [belirli kısıtlamalar](https://ai.google.dev/gemini-api/terms?hl=tr#use-restrictions2) geçerlidir.
 
-## Langkah berikutnya
+## Sırada ne var?
 
-- Pelajari lebih lanjut [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id).
-- Pelajari cara menggunakan data Anda sendiri menggunakan alat [Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id).
+- [Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) hakkında daha fazla bilgi edinin.
+- [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) aracını kullanarak kendi verilerinizi nasıl kullanacağınızı öğrenin.
 
-Kirim masukan
+Geri bildirim gönderin
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Terakhir diperbarui pada 2026-06-26 UTC.
+Son güncelleme tarihi: 2026-07-14 UTC.
 
-Ada masukan untuk kami?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-26 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-14 UTC."],[],[]]

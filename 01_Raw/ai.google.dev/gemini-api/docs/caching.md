@@ -1,50 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/caching?hl=pt-BR
-fetched_at: 2026-07-06T05:21:33.650313+00:00
-title: "O armazenamento em cache de contexto \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/caching?hl=ja
+fetched_at: 2026-07-20T04:37:29.206089+00:00
+title: "\u30b3\u30f3\u30c6\u30ad\u30b9\u30c8\u306e\u30ad\u30e3\u30c3\u30b7\u30e5\u4fdd\u5b58 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envie comentários
+フィードバックを送信
 
-# O armazenamento em cache de contexto
+# コンテキストのキャッシュ保存
 
-Em um fluxo de trabalho de IA típico, é possível transmitir os mesmos tokens de entrada várias vezes para um modelo. A API Gemini oferece armazenamento em cache implícito para otimizar a performance e os custos.
+一般的な AI ワークフローでは、同じ入力トークンをモデルに何度も渡すことがあります。Gemini API は、パフォーマンスとコストを最適化するために暗黙的なキャッシュ保存を提供します。
 
-## Armazenamento em cache implícito
+## 暗黙的なキャッシュ保存
 
-O armazenamento em cache implícito é ativado por padrão para todos os modelos do Gemini 2.5 e mais recentes. Transferimos automaticamente a economia de custos se sua solicitação atingir os caches. Não é necessário fazer nada
-para ativar esse recurso. A contagem mínima de tokens de entrada para o cache de contexto está listada na tabela a seguir para cada modelo:
+暗黙的なキャッシュ保存は、すべての Gemini 2.5 以降のモデルでデフォルトで有効になっています。[[ステートフル（`previous\_interaction\_id` を使用）とステートレスの両方の会話モードでサポートされています。](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#multi-turn-conversations)](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#stateless-conversations)`previous_interaction_id`リクエストがキャッシュにヒットした場合、コスト削減分が自動的に渡されます。有効にするために必要な操作はありません。コンテキスト キャッシュ保存の最小入力トークン数は、次の表にモデルごとに示されています。
 
-| Modelo | Limite mínimo de tokens |
+| モデル | 最小トークン数 |
 | --- | --- |
 | Gemini 3.5 Flash | 4096 |
-| Pré-lançamento do Gemini 3.1 Pro | 4096 |
+| Gemini 3.1 Pro プレビュー版 | 4096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-Para aumentar a chance de uma ocorrência implícita em cache:
+暗黙的なキャッシュ ヒットの可能性を高めるには:
 
-- Tente colocar conteúdos grandes e comuns no início do comando
-- Tente enviar solicitações com prefixos semelhantes em um curto período
+- 大規模で一般的なコンテンツは、プロンプトの先頭に配置します。
+- 類似した接頭辞を含むリクエストを短時間で送信します。
 
-É possível conferir o número de tokens que foram acertos de cache no campo `usage_metadata` (Python) ou `usageMetadata` (JavaScript) do objeto de resposta.
+キャッシュ ヒットしたトークンの数は、レスポンス オブジェクトの `usage.total_cached_tokens`（Python と JavaScript）フィールドで確認できます。
 
-Envie comentários
+フィードバックを送信
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última atualização 2026-06-22 UTC.
+最終更新日 2026-07-07 UTC。
 
-Quer enviar seu feedback?
+ご意見をお聞かせください
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-22 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-07 UTC。"],[],[]]

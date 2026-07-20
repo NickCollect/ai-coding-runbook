@@ -1,41 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-BR
-fetched_at: 2026-07-06T05:13:40.221488+00:00
-title: "Chamada de fun\u00e7\u00e3o com a API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=ja
+fetched_at: 2026-07-20T04:38:27.482728+00:00
+title: "Gemini API \u3092\u4f7f\u7528\u3057\u305f\u95a2\u6570\u547c\u3073\u51fa\u3057 \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envie comentários
+フィードバックを送信
 
-# Chamada de função com a API Gemini
+# Gemini API を使用した関数呼び出し
 
-A chamada de função permite conectar modelos a ferramentas e APIs externas.
-Em vez de gerar respostas de texto, o modelo determina quando chamar funções específicas e fornece os parâmetros necessários para executar ações reais.
-Isso permite que o modelo atue como uma ponte entre a linguagem natural e as ações e dados reais. A chamada de função tem três casos de uso principais:
+関数呼び出しを使用すると、モデルを外部ツールや API に接続できます。
+モデルは、テキスト レスポンスを生成する代わりに、特定の関数を呼び出すタイミングを判断し、実世界のアクションを実行するために必要なパラメータを提供します。
+これにより、モデルは自然言語と実世界のアクションやデータの間のブリッジとして機能します。関数呼び出しには、次の 3 つの主なユースケースがあります。
 
-- [**Realizar ações:**](#meeting) interaja com sistemas externos usando APIs, como
-  agendar compromissos, criar faturas, enviar e-mails ou controlar
-  dispositivos domésticos inteligentes.
-- [**\*\*Aumentar o conhecimento\*\*:**](#weather) acesse informações de fontes externas, como
-  bancos de dados, APIs e bases de conhecimento.
-- [**Ampliar os recursos:**](#chart) use ferramentas externas para realizar cálculos e
-  ampliar as limitações do modelo, como usar uma calculadora ou criar
-  gráficos.
+- [**アクションの実行:**](#meeting) API を使用して外部システムとやり取りします。たとえば、
+  予定のスケジュール設定、請求書の作成、メールの送信、
+  スマートホーム デバイスの制御などです。
+- [**知識の拡張:**](#weather) データベース、API、ナレッジベースなどの外部ソースから情報にアクセスします。
+- [**機能の拡張:**](#chart) 外部ツールを使用して計算を実行し、
+  モデルの制限を拡張します。たとえば、電卓の使用やグラフの作成などです。
 
-Confira exemplos desses casos de uso abaixo:
+これらのユースケースの例を以下に示します。
 
-### Programar reunião
+### 会議のスケジュール
 
-Este exemplo mostra como definir uma função que agenda uma reunião com participantes em um horário específico, permitindo que o modelo analise as solicitações do usuário e retorne argumentos estruturados para acionar ações em sistemas externos.
+この例では、特定の時間に会議のスケジュールを設定する関数を定義する方法を示します。これにより、モデルはユーザー リクエストを解析し、構造化された引数を返して外部システムでアクションをトリガーできます。
 
 ### Python
 
@@ -61,7 +59,7 @@ schedule_meeting_function = {
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Schedule a meeting with Bob and Alice for 03/14/2025 at 10:00 AM about Q3 planning.",
     tools=[{"type": "function", **schedule_meeting_function}],
 )
@@ -96,7 +94,7 @@ const scheduleMeetingFunction = {
 };
 
 const interaction = await client.interactions.create({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   input: 'Schedule a meeting with Bob and Alice for 03/27/2025 at 10:00 AM about Q3 planning.',
   tools: [scheduleMeetingFunction],
 });
@@ -116,7 +114,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Schedule a meeting with Bob and Alice for 03/27/2025 at 10:00 AM about Q3 planning.",
     "tools": [{
         "type": "function",
@@ -136,9 +134,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Receber informações sobre o clima
+### 天気を取得する
 
-Este exemplo mostra como definir uma função que recupera dados de temperatura de um local, permitindo que o modelo chame APIs externas para responder a consultas que exigem informações externas ou em tempo real.
+この例では、場所の気温データを取得する関数を定義する方法を示します。これにより、モデルは外部 API を呼び出して、リアルタイム情報や外部情報を必要とするクエリに回答できます。
 
 ### Python
 
@@ -164,7 +162,7 @@ weather_function = {
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="What's the temperature in London?",
     tools=[weather_function],
 )
@@ -199,7 +197,7 @@ const weatherFunctionDeclaration = {
 };
 
 const interaction = await client.interactions.create({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   input: "What's the temperature in London?",
   tools: [weatherFunctionDeclaration],
 });
@@ -219,7 +217,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "What'\''s the temperature in London?",
     "tools": [{
       "type": "function",
@@ -236,9 +234,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Criar gráfico
+### グラフを作成する
 
-Este exemplo mostra como definir uma função que gera um gráfico de barras com dados estruturados, demonstrando como o modelo pode usar ferramentas externas para realizar cálculos ou criar recursos visuais:
+この例では、構造化データから棒グラフを生成する関数を定義する方法を示します。モデルが外部ツールを使用して計算を実行したり、ビジュアル アセットを作成したりする方法を示します。
 
 ### Python
 
@@ -263,7 +261,7 @@ create_chart_function = {
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Create a bar chart titled 'Quarterly Sales' with Q1: 50000, Q2: 75000, Q3: 60000.",
     tools=[create_chart_function],
 )
@@ -297,7 +295,7 @@ const createChartFunctionDeclaration = {
 };
 
 const interaction = await client.interactions.create({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   input: "Create a bar chart titled 'Quarterly Sales' with Q1: 50000, Q2: 75000, Q3: 60000.",
   tools: [createChartFunctionDeclaration],
 });
@@ -316,7 +314,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "Create a bar chart titled '\''Quarterly Sales'\'' with Q1: 50000, Q2: 75000, Q3: 60000.",
     "tools": [{
         "type": "function",
@@ -335,23 +333,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Como a chamada de funções funciona
+## 関数呼び出しの仕組み
 
-![Visão geral da chamada de função](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=pt-br)
+![関数呼び出しの概要](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=ja)
 
-A chamada de função envolve uma interação estruturada entre o aplicativo, o modelo e as funções externas:
+関数呼び出しには、アプリケーション、モデル、外部関数間の構造化されたやり取りが含まれます。
 
-1. **Definir a declaração de função**:defina o nome, os parâmetros e a finalidade da função para o modelo.
-2. **Chamar o LLM com declarações de função**:envie o comando do usuário com as declarações de função para o modelo.
-3. **Executar o código da função (sua responsabilidade)**: o modelo *não*
-   executa a função em si. Extraia o nome e os argumentos e execute no aplicativo.
-4. **Criar uma resposta amigável ao usuário**:envie o resultado de volta ao modelo para uma resposta final e amigável ao usuário.
+1. **関数宣言を定義する:** 関数の名前、パラメータ、目的をモデルに定義します。
+2. **関数宣言を使用して LLM を呼び出す:** ユーザー プロンプトを関数宣言とともにモデルに送信します。
+3. **関数コードを実行する（ユーザーの責任）:** モデルは*関数自体を*
+   実行しません。名前と引数を抽出し、アプリケーションで実行します。
+4. **ユーザー フレンドリーなレスポンスを作成する:** 最終的なユーザー フレンドリーなレスポンスを生成するために、結果をモデルに返します。
 
-Esse processo pode ser repetido várias vezes. O modelo oferece suporte à chamada de
-várias funções em uma única vez ([chamada de função paralela](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#parallel_function_calling)) e em
-sequência ([chamada de função composicional](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br#compositional_function_calling)).
+このプロセスは、複数回繰り返すことができます。モデルは、1 回のターンで
+複数の関数を呼び出す（[並列関数呼び出し](#parallel_function_calling)）ことと、順番に呼び出す（[コンポジション関数呼び出し](#compositional_function_calling)）ことをサポートしています。
 
-### Etapa 1: definir uma declaração de função
+### ステップ 1: 関数宣言を定義する
 
 ### Python
 
@@ -404,7 +401,7 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### Etapa 2: chamar o modelo com declarações de função
+### ステップ 2: 関数宣言を使用してモデルを呼び出す
 
 ### Python
 
@@ -414,7 +411,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Turn the lights down to a romantic level",
     tools=[set_light_values_declaration],
 )
@@ -431,7 +428,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   input: 'Turn the lights down to a romantic level',
   tools: [setLightValuesTool],
 });
@@ -440,7 +437,7 @@ const fcStep = interaction.steps.find(s => s.type === 'function_call');
 console.log(fcStep);
 ```
 
-O modelo retorna uma etapa `function_call` com `type`, `name` e `arguments`:
+モデルは、`type`、`name`、`arguments` を含む `function_call` ステップを返します。
 
 ```
 type='function_call'
@@ -448,7 +445,7 @@ name='set_light_values'
 arguments={'color_temp': 'warm', 'brightness': 25}
 ```
 
-### Etapa 3: executar a função
+### ステップ 3: 関数を実行する
 
 ### Python
 
@@ -472,13 +469,13 @@ if (fcStep.name === 'set_light_values') {
 }
 ```
 
-### Etapa 4: enviar o resultado de volta ao modelo
+### ステップ 4: 結果をモデルに返す
 
 ### Python
 
 ```
 final_interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input=[
         {
             "type": "function_result",
@@ -498,7 +495,7 @@ print(final_interaction.output_text)
 
 ```
 const finalInteraction = await client.interactions.create({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   input: [{
     type: 'function_result',
     name: fcStep.name,
@@ -512,13 +509,14 @@ const finalInteraction = await client.interactions.create({
 console.log(finalInteraction.output_text);
 ```
 
-### Chamada de função sem estado
+### ステートレス関数呼び出し
 
-Você também pode usar a chamada de função no modo sem estado gerenciando o histórico de conversas no lado do cliente e definindo `store=false`.
+クライアント側で会話履歴を管理し、`store=false` を設定することで、ステートレス モードで関数呼び出しを使用することもできます。
 
-No modo sem estado, é necessário transmitir o histórico completo da conversa no campo `input` de cada solicitação subsequente. Esse histórico precisa incluir: 1. A etapa `user_input` inicial.
-2. Todas as etapas geradas pelo modelo retornadas na vez 1 (incluindo as etapas `thought` e `function_call`) exatamente como recebidas.
-3. A etapa `function_result` que contém a saída da função executada.
+ステートレス モードでは、後続のリクエストの `input` フィールドに会話の完全な履歴を渡す必要があります。この履歴には、次のものが含まれている必要があります。
+1. 最初の `user_input` ステップ。
+2. ターン 1 で返されたモデル生成ステップ（`thought` ステップと `function_call` ステップを含む）をすべて、受信したとおりに返します。
+3. 実行された関数の出力を含む `function_result` ステップ。
 
 ### Python
 
@@ -536,7 +534,7 @@ history = [
 ]
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     store=False,
     input=history,
     tools=[set_light_values_declaration],
@@ -557,7 +555,7 @@ history.append({
 })
 
 final_interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     store=False,
     input=history,
     tools=[set_light_values_declaration],
@@ -582,7 +580,7 @@ async function main() {
   ];
 
   const interaction = await client.interactions.create({
-    model: "gemini-3-flash-preview",
+    model: "gemini-3.5-flash",
     store: false,
     input: history,
     tools: [setLightValuesTool],
@@ -604,7 +602,7 @@ async function main() {
   });
 
   const finalInteraction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     store: false,
     input: history,
     tools: [setLightValuesTool],
@@ -624,7 +622,7 @@ RESPONSE1=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/in
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "store": false,
     "input": [
       {
@@ -671,7 +669,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d "{
-    \"model\": \"gemini-3-flash-preview\",
+    \"model\": \"gemini-3.5-flash\",
     \"store\": false,
     \"input\": $HISTORY,
     \"tools\": [{
@@ -690,26 +688,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## Declarações de função
+## 関数宣言
 
-Uma declaração de função é transmitida como uma ferramenta e inclui:
+関数宣言はツールとして渡され、次のものが含まれます。
 
-- `type` (string): precisa ser `"function"` para funções personalizadas.
-- `name` (string): nome de função exclusivo (use sublinhados ou camelCase).
-- `description` (string): explicação clara da finalidade da função.
-- `parameters` (objeto): parâmetros de entrada esperados pela função.
-  - `type` (string): tipo de dados geral, como `object`.
-  - `properties` (objeto): parâmetros individuais com tipo e descrição.
-  - `required` (matriz): nomes de parâmetros obrigatórios.
+- `type`（文字列）: カスタム関数の場合は `"function"` である必要があります。
+- `name`（文字列）: 一意の関数名（アンダースコアまたはキャメルケースを使用）。
+- `description`（文字列）: 関数の目的を明確に説明します。
+- `parameters` （オブジェクト）: 関数が想定する入力パラメータ。
+  - `type`（文字列）: 全体的なデータ型（`object` など）。
+  - `properties`（オブジェクト）: 型と説明を含む個々のパラメータ。
+  - `required`（配列）: 必須のパラメータ名。
 
-## Chamada de função com modelos de pensamento
+## 思考モデルを使用した関数呼び出し
 
-Os modelos das séries Gemini 3 e 2.5 usam um processo de ["pensamento"](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br) interno que melhora a chamada de função.
-Os SDKs processam automaticamente as [assinaturas de pensamento](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=pt-br).
+Gemini 3 シリーズのモデルでは、関数呼び出しを改善する内部の["思考"](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)プロセスが使用されます。SDK は[思考シグネチャ](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ja)を自動的に処理します。
 
-## Chamada de função paralela
+## 並列関数呼び出し
 
-Chame várias funções de uma só vez quando elas forem independentes:
+複数の関数が独立している場合は、一度に複数の関数を呼び出します。
 
 ### Python
 
@@ -724,7 +721,7 @@ dim_lights = {"type": "function", "name": "dim_lights", "description": "Dim the 
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="Turn this place into a party!",
     tools=[power_disco_ball, start_music, dim_lights],
     generation_config={"tool_choice": "any"},
@@ -747,7 +744,7 @@ const dimLights = { type: 'function', name: 'dim_lights', description: 'Dim the 
   parameters: { type: 'object', properties: { brightness: { type: 'number' } }, required: ['brightness'] } };
 
 const interaction = await client.interactions.create({
-  model: 'gemini-3-flash-preview',
+  model: 'gemini-3.5-flash',
   input: 'Turn this place into a party!',
   tools: [powerDiscoBall, startMusic, dimLights],
   generation_config: { tool_choice: 'any' },
@@ -760,9 +757,60 @@ for (const step of interaction.steps) {
 }
 ```
 
-## Chamada de função composicional
+### REST
 
-Encadeie várias chamadas de função para solicitações complexas (por exemplo, primeiro receba o local e, em seguida, receba a previsão do tempo para esse local).
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "input": "Turn this place into a party!",
+    "tools": [
+      {
+        "type": "function",
+        "name": "power_disco_ball",
+        "description": "Powers the disco ball.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "power": {"type": "boolean"}
+          },
+          "required": ["power"]
+        }
+      },
+      {
+        "type": "function",
+        "name": "start_music",
+        "description": "Play music.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "energetic": {"type": "boolean"},
+            "loud": {"type": "boolean"}
+          },
+          "required": ["energetic", "loud"]
+        }
+      },
+      {
+        "type": "function",
+        "name": "dim_lights",
+        "description": "Dim the lights.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "brightness": {"type": "number"}
+          },
+          "required": ["brightness"]
+        }
+      }
+    ]
+  }'
+```
+
+## コンポジション関数呼び出し
+
+複雑なリクエストの場合は、複数の関数呼び出しを連結します（最初に場所を取得し、その場所の天気を取得するなど）。
 
 ### Python
 
@@ -799,7 +847,7 @@ set_thermostat_temperature_declaration = {
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="If it's warmer than 20°C in London, set the thermostat to 20°C, otherwise 18°C.",
     tools=[
         get_weather_forecast_declaration,
@@ -817,14 +865,111 @@ for step in interaction.steps:
                  print(part.text)
 ```
 
-## Modos de chamada de função
+### JavaScript
 
-Controle como o modelo usa ferramentas usando `tool_choice` em `generation_config`:
+```
+import { GoogleGenAI } from '@google/genai';
 
-- `auto` (padrão): o modelo decide se quer chamar uma função ou responder diretamente.
-- `any`: o modelo é restrito a sempre prever uma chamada de função.
-- `none`: o modelo está proibido de fazer chamadas de função.
-- `validated` (pré-lançamento): o modelo garante a conformidade do esquema de função.
+const client = new GoogleGenAI({});
+
+const getWeatherForecastTool = {
+  type: 'function',
+  name: 'get_weather_forecast',
+  description: 'Gets the current weather temperature for a given location.',
+  parameters: {
+    type: 'object',
+    properties: {
+      location: { type: 'string', description: 'The location' },
+    },
+    required: ['location'],
+  },
+};
+
+const setThermostatTemperatureTool = {
+  type: 'function',
+  name: 'set_thermostat_temperature',
+  description: 'Sets the thermostat to a desired temperature.',
+  parameters: {
+    type: 'object',
+    properties: {
+      temperature: {
+        type: 'integer',
+        description: 'The temperature in Celsius',
+      },
+    },
+    required: ['temperature'],
+  },
+};
+
+const interaction = await client.interactions.create({
+  model: 'gemini-3.5-flash',
+  input: "If it's warmer than 20°C in London, set the thermostat to 20°C, otherwise 18°C.",
+  tools: [
+    getWeatherForecastTool,
+    setThermostatTemperatureTool,
+  ],
+});
+
+for (const step of interaction.steps) {
+  if (step.type === 'function_call') {
+    console.log(`Function to call: ${step.name}`);
+    console.log(`Arguments: ${JSON.stringify(step.arguments)}`);
+  } else if (step.content) {
+    for (const part of step.content) {
+      if (part.text) {
+        console.log(part.text);
+      }
+    }
+  }
+}
+```
+
+### REST
+
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "input": "If it'\''s warmer than 20°C in London, set the thermostat to 20°C, otherwise 18°C.",
+    "tools": [
+      {
+        "type": "function",
+        "name": "get_weather_forecast",
+        "description": "Gets the current weather temperature for a given location.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {"type": "string"}
+          },
+          "required": ["location"]
+        }
+      },
+      {
+        "type": "function",
+        "name": "set_thermostat_temperature",
+        "description": "Sets the thermostat to a desired temperature.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "temperature": {"type": "integer"}
+          },
+          "required": ["temperature"]
+        }
+      }
+    ]
+  }'
+```
+
+## 関数呼び出しモード
+
+`generation_config` の `tool_choice` を使用して、モデルがツールを使用する方法を制御します。
+
+- `auto`（デフォルト）: 関数を呼び出すか、直接レスポンスを返すかをモデルが決定します。
+- `any`: モデルは常に関数呼び出しを予測するように制約されます。
+- `none`: モデルは関数呼び出しを行うことが禁止されています。
+- `validated`（プレビュー）: モデルは関数スキーマの準拠を保証します。
 
 ### Python
 
@@ -859,7 +1004,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "What is the temperature in Boston?",
     "tools": [{
       "type": "function",
@@ -884,9 +1029,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Uso de várias ferramentas
+## 複数のツールを使用する
 
-É possível ativar várias ferramentas, combinando ferramentas integradas com a chamada de função na mesma solicitação. Os modelos do Gemini 3 podem combinar ferramentas integradas com a chamada de função pronta para uso nas interações. A transmissão de `previous_interaction_id` circula automaticamente o contexto da ferramenta integrada.
+複数のツールを有効にして、同じリクエストで組み込みツールと関数呼び出しを組み合わせることができます。Gemini 3 モデルでは、Interactions で組み込みツールと関数呼び出しをすぐに組み合わせることができます。`previous_interaction_id` を渡すと、組み込みツールのコンテキストが自動的に循環します。
 
 ### Python
 
@@ -918,7 +1063,7 @@ tools = [
 ]
 
 interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="What is the northernmost city in the United States? What's the weather like there today?",
     tools=tools
 )
@@ -928,7 +1073,7 @@ for step in interaction.steps:
         print(f"Function call: {step.name} (ID: {step.id})")
         result = {"response": "Very cold. 22 degrees Fahrenheit."}
         interaction_2 = client.interactions.create(
-            model="gemini-3-flash-preview",
+            model="gemini-3.5-flash",
             previous_interaction_id=interaction.id,
             tools=tools,
             input=[{
@@ -968,7 +1113,7 @@ const tools = [
 ];
 
 let interaction = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: "What is the northernmost city in the United States? What's the weather like there today?",
     tools: tools
 });
@@ -978,7 +1123,7 @@ for (const step of interaction.steps) {
         console.log(`Function call: ${step.name} (ID: ${step.id})`);
         const result = {response: "Very cold. 22 degrees Fahrenheit."};
         const interaction_2 = await client.interactions.create({
-            model: 'gemini-3-flash-preview',
+            model: 'gemini-3.5-flash',
             previous_interaction_id: interaction.id,
             tools: tools,
             input: [{
@@ -994,13 +1139,73 @@ for (const step of interaction.steps) {
 }
 ```
 
-## Respostas de funções multimodais
+### REST
 
-Para modelos da série Gemini 3, é possível incluir conteúdo multimodal nas partes de resposta da função que você envia ao modelo. O modelo pode processar esse conteúdo multimodal na próxima vez para produzir uma resposta mais informada.
+```
+# Turn 1: Send request with built-in google_search tool and custom weather tool
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "input": "What is the northernmost city in the United States? What'\''s the weather like there today?",
+    "tools": [
+      {"type": "google_search"},
+      {
+        "type": "function",
+        "name": "get_weather",
+        "description": "Gets the weather for a given location.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {"type": "string", "description": "The city and state, e.g. San Francisco, CA"}
+          },
+          "required": ["location"]
+        }
+      }
+    ]
+  }'
 
-Para incluir dados multimodais em uma resposta de função, inclua-os como um ou mais blocos de conteúdo no campo `result` da etapa `function_result`. Cada bloco de conteúdo precisa especificar o `type` (por exemplo, `"text"`, `"image"`).
+# Turn 2: Provide function result and pass previous_interaction_id
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+  -H "x-goog-api-key: $GEMINI_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "model": "gemini-3.5-flash",
+    "previous_interaction_id": "INTERACTION_ID",
+    "tools": [
+      {"type": "google_search"},
+      {
+        "type": "function",
+        "name": "get_weather",
+        "description": "Gets the weather for a given location.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {"type": "string", "description": "The city and state, e.g. San Francisco, CA"}
+          },
+          "required": ["location"]
+        }
+      }
+    ],
+    "input": [
+      {
+        "type": "function_result",
+        "name": "get_weather",
+        "call_id": "call_123",
+        "result": [{"type": "text", "text": "{\"response\": \"Very cold. 22 degrees Fahrenheit.\"}"}]
+      }
+    ]
+  }'
+```
 
-O exemplo a seguir mostra como enviar uma resposta de função que contém dados de imagem de volta ao modelo em uma interação:
+## マルチモーダル関数レスポンス
+
+Gemini 3 シリーズのモデルでは、モデルに送信する関数レスポンス部分にマルチモーダル コンテンツを含めることができます。モデルは、次のターンでこのマルチモーダル コンテンツを処理して、より多くの情報に基づいたレスポンスを生成できます。
+
+関数レスポンスにマルチモーダル データを含めるには、`result` フィールドの `function_result` ステップに 1 つ以上のコンテンツ ブロックとして含めます。各コンテンツ ブロックで `type`（`"text"`、`"image"` など）を指定する必要があります。
+
+次の例は、画像データを含む関数レスポンスをインタラクションでモデルに送り返す方法を示しています。
 
 ### Python
 
@@ -1019,7 +1224,7 @@ image_bytes = requests.get(image_path).content
 base64_image_data = base64.b64encode(image_bytes).decode("utf-8")
 
 final_interaction = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     previous_interaction_id=interaction.id,
     input=[
         {
@@ -1046,14 +1251,14 @@ print(final_interaction.output_text)
 ```
 import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({});
+const client = new GoogleGenAI({});
 
 const toolCall = interaction.steps.find(s => s.type === 'function_call');
 
 const base64ImageData = "BASE64_IMAGE_DATA";
 
-const finalInteraction = await ai.interactions.create({
-    model: 'gemini-3-flash-preview',
+const finalInteraction = await client.interactions.create({
+    model: 'gemini-3.5-flash',
     previous_interaction_id: interaction.id,
     input: [{
         type: 'function_result',
@@ -1080,7 +1285,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "previous_interaction_id": "INTERACTION_ID",
     "input": [
       {
@@ -1100,31 +1305,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Chamada de função com saída estruturada
+## 構造化出力を使用した関数呼び出し
 
-Para modelos da série Gemini 3, combine a chamada de função com
-[saída estruturada](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br) para
-respostas formatadas de forma consistente.
+Gemini 3 シリーズのモデルでは、関数呼び出しと
+[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を組み合わせて、
+一貫した形式のレスポンスを実現します。
 
-## MCP (Protocolo de Contexto de Modelo) remoto
+## リモート MCP（Model Context Protocol）
 
-A API Interactions oferece suporte à conexão com servidores MCP remotos para dar ao modelo acesso a ferramentas e serviços externos. Você fornece o `name` e o `url` do servidor na configuração das ferramentas.
+Interactions API は、リモート MCP サーバーに接続して、モデルが外部ツールやサービスにアクセスできるようにすることをサポートしています。サーバーの `name` と `url` は、ツールの構成で指定します。
 
-Ao usar o MCP remoto, esteja ciente das seguintes restrições:
+リモート MCP を使用する場合は、次の制約に注意してください。
 
-- **Tipos de servidor**: o MCP remoto só funciona com servidores HTTP transmissíveis. Os servidores SSE (Eventos enviados pelo servidor) não são aceitos.
-- **Suporte ao modelo**: o MCP remoto não funciona com modelos do Gemini 3 no momento. O suporte ao Gemini 3 será lançado em breve.
-- **Nomenclatura**: os nomes de servidores MCP não podem incluir o caractere `-`. Use nomes de servidores `snake_case`.
+- **サーバータイプ**: リモート MCP は、ストリーミング可能な HTTP サーバーでのみ動作します。SSE（Server-Sent Events）サーバーはサポートされていません。
+- **命名**: MCP サーバー名に `-` 文字を含めることはできません。代わりに `snake_case` サーバー名を使用してください。
 
-| Campo | Tipo | Obrigatório | Descrição |
+| フィールド | 型 | 必須 / 省略可 | 説明 |
 | --- | --- | --- | --- |
-| `type` | `string` | Sim | Precisa ser `"mcp_server"`. |
-| `name` | `string` | Não | Um nome de exibição para o servidor MCP. |
-| `url` | `string` | Não | O URL completo do endpoint do servidor MCP. |
-| `headers` | `object` | Não | Pares de chave-valor enviados como cabeçalhos HTTP com cada solicitação ao servidor (por exemplo, tokens de autenticação). |
-| `allowed_tools` | `array` | Não | Restrinja quais ferramentas do servidor o agente pode chamar. |
+| `type` | `string` | はい | `"mcp_server"` を指定します。 |
+| `name` | `string` | いいえ | MCP サーバーの表示名。 |
+| `url` | `string` | いいえ | MCP サーバー エンドポイントの完全な URL。 |
+| `headers` | `object` | いいえ | サーバーへのリクエストごとに HTTP ヘッダーとして送信される Key-Value ペア（認証トークンなど）。 |
+| `allowed_tools` | `array` | いいえ | エージェントが呼び出すことができるサーバーのツールを制限します。 |
 
-### Exemplo
+### 例
 
 ### Python
 
@@ -1134,14 +1338,13 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-2.5-flash",
-    input="Check the status of my last server deployment.",
+    model="gemini-3.5-flash",
+    input="Check the weather in San Francisco.",
     tools=[
         {
             "type": "mcp_server",
-            "name": "Deployment Tracker",
-            "url": "https://mcp.example.com/mcp",
-            "headers": {"Authorization": "Bearer my-token"},
+            "name": "weather",
+            "url": "https://gemini-api-demos.uc.r.appspot.com/mcp",
         }
     ]
 )
@@ -1155,14 +1358,13 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: 'gemini-2.5-flash',
-    input: 'Check the status of my last server deployment.',
+    model: 'gemini-3.5-flash',
+    input: 'Check the weather in San Francisco.',
     tools: [
         {
             type: 'mcp_server',
-            name: 'Deployment Tracker',
-            url: 'https://mcp.example.com/mcp',
-            headers: { Authorization: 'Bearer my-token' }
+            name: 'weather',
+            url: 'https://gemini-api-demos.uc.r.appspot.com/mcp'
         }
     ]
 });
@@ -1175,22 +1377,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-2.5-flash",
-    "input": "Check the status of my last server deployment.",
+    "model": "gemini-3.5-flash",
+    "input": "Check the weather in San Francisco.",
     "tools": [
         {
             "type": "mcp_server",
-            "name": "Deployment Tracker",
-            "url": "https://mcp.example.com/mcp",
-            "headers": {"Authorization": "Bearer my-token"}
+            "name": "weather",
+            "url": "https://gemini-api-demos.uc.r.appspot.com/mcp"
         }
     ]
 }'
 ```
 
-## Transmitir chamadas de ferramentas
+## ツール呼び出しをストリーミングする
 
-Ao usar ferramentas com streaming, o modelo gera chamadas de função como uma sequência de eventos `step.delta` no stream. Os argumentos da ferramenta podem ser transmitidos como argumentos parciais usando `arguments`. É necessário agregar esses deltas para reconstruir as chamadas de ferramentas completas antes de executá-las.
+ストリーミングでツールを使用する場合、モデルはストリーム上の `step.delta` イベントのシーケンスとして関数呼び出しを生成します。ツールの引数は、`arguments` を使用して部分引数としてストリーミングできます。これらのデルタを集計して、完全なツール呼び出しを再構築してから実行する必要があります。
 
 ### Python
 
@@ -1214,7 +1415,7 @@ weather_tool = {
 }
 
 stream = client.interactions.create(
-    model="gemini-3-flash-preview",
+    model="gemini-3.5-flash",
     input="What is the weather in Paris?",
     tools=[weather_tool],
     stream=True
@@ -1283,7 +1484,7 @@ const weatherTool = {
 };
 
 const stream = await client.interactions.create({
-    model: 'gemini-3-flash-preview',
+    model: 'gemini-3.5-flash',
     input: 'What is the weather in Paris?',
     tools: [weatherTool],
     stream: true,
@@ -1337,7 +1538,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3-flash-preview",
+    "model": "gemini-3.5-flash",
     "input": "What is the weather in Paris?",
     "tools": [{
         "type": "function",
@@ -1355,29 +1556,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## Práticas recomendadas
+## ベスト プラクティス
 
-- **Descrições de funções e parâmetros**:sejam claras e específicas.
-- **Nomenclatura**:use nomes descritivos sem espaços ou caracteres especiais.
-- **Tipagem forte**:use tipos específicos (inteiro, string, enumeração).
-- **Seleção de ferramentas**:mantenha o conjunto ativo em no máximo 10 a 20 ferramentas.
-- **Engenharia de comandos**:forneça contexto e instruções.
-- **Validação**:valide as chamadas de função antes de executar.
-- **Tratamento de erros**:implemente um tratamento de erros robusto.
-- **Segurança**:use a autenticação adequada para APIs externas.
+- **関数とパラメータの説明:** 明確かつ具体的に説明する。
+- **命名:** スペースや特殊文字を使用せずに、わかりやすい名前を使用する。
+- **厳密な型付け:** 特定の型（整数、文字列、enum）を使用する。
+- **ツールの選択:** アクティブなツールセットは最大 10 ～ 20 個にする。
+- **プロンプト エンジニアリング:** コンテキストと手順を提供する。
+- **検証:** 関数呼び出しを実行する前に検証する。
+- **エラー処理:** 堅牢なエラー処理を実装する。
+- **セキュリティ:** 外部 API に適切な認証を使用する。
 
-## Observações e limitações:
+## 注意と制限事項
 
-- Há suporte apenas para um [subconjunto do esquema OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=pt-br#FunctionDeclaration).
-- Para o modo `any`, a API pode rejeitar esquemas muito grandes ou profundamente aninhados.
-- Os tipos de parâmetros aceitos em Python são limitados.
+- OpenAPI スキーマの[サブセット](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=ja#FunctionDeclaration)のみがサポートされています。
+- `any` モードの場合、API は非常に大きいスキーマやネストが深いスキーマを拒否することがあります。
+- Python でサポートされているパラメータの型は限られています。
 
-Envie comentários
+フィードバックを送信
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última atualização 2026-06-22 UTC.
+最終更新日 2026-07-07 UTC。
 
-Quer enviar seu feedback?
+ご意見をお聞かせください
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-22 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-07 UTC。"],[],[]]

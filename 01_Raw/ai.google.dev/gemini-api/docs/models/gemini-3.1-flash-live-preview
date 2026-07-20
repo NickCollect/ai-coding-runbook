@@ -1,87 +1,68 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-CN
-fetched_at: 2026-07-06T05:18:28.568154+00:00
-title: "Gemini 3.1 Flash Live \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=he
+fetched_at: 2026-07-20T04:38:09.614404+00:00
+title: "\u05ea\u05e6\u05d5\u05d2\u05d4 \u05de\u05e7\u05d3\u05d9\u05de\u05d4 \u05e9\u05dc Gemini 3.1 Flash Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-发送反馈
+שליחת משוב
 
-# Gemini 3.1 Flash Live 预览版
+# תצוגה מקדימה של Gemini 3.1 Flash Live
 
-Gemini 3.1 Flash Live 预览版是 Google 的低延迟音频转音频模型，针对实时对话和语音优先 AI 应用进行了优化，具备声学细微差别检测、数值精准处理及多模态感知能力。
+‫Gemini 3.1 Flash Live Preview הוא מודל עם זמן טעינה נמוך, שממיר אודיו לאודיו ואופטימיזציה לדיאלוג בזמן אמת ולאפליקציות AI קוליות עם זיהוי ניואנסים אקוסטיים, דיוק מספרי ומודעות מולטימודאלית.
 
-[在 Google AI Studio 中试用](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=zh-cn)
+[לניסיון ב-Google AI Studio](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=he)
 
-## 文档
+## מאמרי עזרה
 
-如需全面了解各项功能，请访问 [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn) 指南。
+מידע מקיף על התכונות והיכולות זמין במדריך בנושא [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he).
 
 ## gemini-3.1-flash-live-preview
 
-| 属性 | 说明 |
+| נכס | תיאור |
 | --- | --- |
-| id\_card模型代码 | `gemini-3.1-flash-live-preview` |
-| save支持的数据类型 | **输入**  文本、图片、音频、视频  **输出**  文本和音频 |
-| token\_autoToken 限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  131,072  **输出 token 限制**  65,536 |
-| handyman功能 | **[音频生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)**  支持  **[缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)**  不支持  **[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)**  不支持  **[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)**  不支持  **[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)**  支持  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)**  不支持  **[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)**  不支持  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn)**  支持  **[搜索接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)**  支持  **[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)**  不支持  **[思考型](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)**  支持  **[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)**  不支持 |
-| speed使用选项 | **[批量 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)**  不支持 |
-| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-3.1-flash-live-preview` |
-| calendar\_month最后更新时间 | 2026 年 3 月 |
-| cognition\_2知识截点 | 2025 年 1 月 |
+| id\_cardקוד מודל | `gemini-3.1-flash-live-preview` |
+| saveסוגי נתונים נתמכים | **קלטים**  טקסט, תמונות, אודיו, וידאו  **פלט**  טקסט ואודיו |
+| ‫token\_autoמגבלות על טוקנים[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=he) | **מגבלת טוקנים של קלט**  131,072  **מגבלת טוקנים של פלט**  65,536 |
+| handymanיכולות | **[יצירת אודיו](https://ai.google.dev/gemini-api/docs/speech-generation?hl=he)**  נתמך  **[שמירת נתונים במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he)**  לא נתמך  **[הרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he)**  לא נתמך  **[חיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he)**  לא נתמך  **[בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)**  נתמך  **[עיגון בעזרת מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he)**  לא נתמך  **[יצירת תמונות](https://ai.google.dev/gemini-api/docs/image-generation?hl=he)**  לא נתמך  ‫**[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=he)**  נתמך  **[חיפוש עם עיגון בנתונים](https://ai.google.dev/gemini-api/docs/google-search?hl=he)**  נתמך  **[פלטים מובנים](https://ai.google.dev/gemini-api/docs/structured-output?hl=he)**  לא נתמך  **[חשיבה](https://ai.google.dev/gemini-api/docs/thinking?hl=he)**  נתמך  **[הקשר של כתובת ה-URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he)**  לא נתמך |
+| speedאפשרויות צריכה | ‫**[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he)**  לא נתמך |
+| גרסאות 123 | פרטים נוספים זמינים במאמר בנושא [דפוסי גרסאות של מודלים](https://ai.google.dev/gemini-api/docs/models/gemini?hl=he#model-versions).  - תצוגה מקדימה: `gemini-3.1-flash-live-preview` |
+| calendar\_monthהעדכון האחרון | מרץ 2026 |
+| cognition\_2תאריך סף הידע | ינואר 2025 |
 
-## 从 Gemini 2.5 Flash Live 迁移
+## מעבר מ-Gemini 2.5 Flash Live
 
-Gemini 3.1 Flash Live 预览版针对低延迟实时对话进行了优化。
-从 `gemini-2.5-flash-native-audio-preview-12-2025` 迁移时，请考虑以下事项：
+התצוגה המקדימה של Gemini 3.1 Flash Live מותאמת לדיאלוג בזמן אמת עם זמן אחזור נמוך.
+כשמעבירים נתונים מ-`gemini-2.5-flash-native-audio-preview-12-2025`, כדאי לקחת בחשבון את הנקודות הבאות:
 
-- **模型字符串**：将模型字符串从
-  `gemini-2.5-flash-native-audio-preview-12-2025`更新为
-  `gemini-3.1-flash-live-preview`。
-- **思考配置**：Gemini 3.1 使用 `thinkingLevel`（具有
-  `minimal`、`low`、`medium` 和 `high` 等设置），而不是 `thinkingBudget`。
-  默认值为 `minimal`，以针对最低延迟进行优化。请参阅
-  [思考级别和预算](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#levels-budgets)。
-- **服务器事件**：单个
-  [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=zh-cn#bidigeneratecontentservercontent)
-  事件现在可以同时包含多个内容部分（例如
-  音频块和脚本）。更新代码以处理每个事件中的所有部分，避免遗漏内容。
-- **客户端内容**：`send_client_content` 仅支持为
-  初始上下文历史记录植入种子（需要在
-  [`initial_history_in_client_content`](https://ai.google.dev/api/live?hl=zh-cn#HistoryConfig)中设置
-  [`history_config`](https://ai.google.dev/api/live?hl=zh-cn#BidiGenerateContentSetup)）。在对话期间，使用
-  [`send_realtime_input`](https://ai.google.dev/api/live?hl=zh-cn#bidigeneratecontentrealtimeinput)发送
-  文本更新。请参阅
-  [增量内容更新](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn#incremental-updates)。
-- **轮次覆盖范围**：默认值为
-  [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=zh-cn#turncoverage)，而不是
-  `TURN_INCLUDES_ONLY_ACTIVITY`。模型的轮次现在包含检测到的音频活动和所有视频帧。如果您的应用目前发送的是恒定的视频帧流，您可能需要更新应用，使其仅在有音频活动时发送视频帧，以避免产生额外费用。
-- **异步函数调用**：尚不支持。函数调用仅同步。在您发送工具响应之前，模型不会开始响应。请参阅
-  [异步函数调用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn#async-function-calling)。
-- **主动音频和共情对话**：Gemini 3.1 Flash Live 尚不
-  支持这些功能。从代码中移除这些功能的任何配置。请参阅
-  [主动音频](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn#proactive-audio)和
-  [共情对话](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn#affective-dialog)。
+- **מחרוזת המודל**: מעדכנים את מחרוזת המודל מ-`gemini-2.5-flash-native-audio-preview-12-2025` ל-`gemini-3.1-flash-live-preview`.
+- **הגדרת החשיבה**: Gemini 3.1 משתמש ב-`thinkingLevel` (עם הגדרות כמו `minimal`,‏ `low`,‏ `medium` ו-`high`) במקום ב-`thinkingBudget`.
+  ברירת המחדל היא `minimal` כדי לבצע אופטימיזציה לזמן האחזור הנמוך ביותר. [מידע נוסף על רמות ותקציבים](https://ai.google.dev/gemini-api/docs/thinking?hl=he#levels-budgets)
+- **אירועים בצד השרת**: אירוע יחיד של [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=he#bidigeneratecontentservercontent) יכול להכיל עכשיו כמה חלקי תוכן בו-זמנית (לדוגמה, קטעי אודיו ותמליל). כדי למנוע מצב שבו תוכן יחסר, צריך לעדכן את הקוד כך שיעבד את כל החלקים בכל אירוע.
+- **תוכן של לקוחות**: `send_client_content` נתמך רק לאתחול של היסטוריית ההקשר הראשונית (נדרשת הגדרה של [`initial_history_in_client_content`](https://ai.google.dev/api/live?hl=he#HistoryConfig) ב-[`history_config`](https://ai.google.dev/api/live?hl=he#BidiGenerateContentSetup)). אפשר להשתמש ב-[`send_realtime_input`](https://ai.google.dev/api/live?hl=he#bidigeneratecontentrealtimeinput) כדי לשלוח עדכוני טקסט במהלך השיחה. [עדכוני תוכן מצטברים](https://ai.google.dev/gemini-api/docs/live-guide?hl=he#incremental-updates)
+- **Turn coverage**: Defaults to
+  [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=he#turncoverage) instead of
+  `TURN_INCLUDES_ONLY_ACTIVITY`. התור של המודל כולל עכשיו פעילות שמע שזוהתה וכל פריים של הסרטון. אם האפליקציה שלכם שולחת כרגע זרם קבוע של פריימים של סרטונים, כדאי לעדכן את האפליקציה כך שהיא תשלח פריימים של סרטונים רק כשיש פעילות אודיו, כדי להימנע מעלויות נוספות.
+- **קריאה לפונקציה אסינכרונית**: עדיין לא נתמכת. בקשה להפעלת פונקציה היא סינכרונית בלבד. המודל לא יתחיל להגיב עד שתשלחו את התשובה של הכלי. [מידע נוסף על הפעלה אסינכרונית של פונקציות](https://ai.google.dev/gemini-api/docs/live-tools?hl=he#async-function-calling)
+- **אודיו פרואקטיבי ודיאלוג אפקטיבי**: התכונות האלה עדיין לא נתמכות ב-Gemini 3.1 Flash Live. צריך להסיר מהקוד את כל ההגדרות של התכונות האלה. [אודיו פרואקטיבי](https://ai.google.dev/gemini-api/docs/live-guide?hl=he#proactive-audio) ו[דיאלוג רגשי](https://ai.google.dev/gemini-api/docs/live-guide?hl=he#affective-dialog).
 
-如需详细比较各项功能，请参阅
-[功能指南](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn#model-comparison)中的
-模型对比表。
+טבלת [השוואה בין מודלים](https://ai.google.dev/gemini-api/docs/live-guide?hl=he#model-comparison) במדריך היכולות כוללת השוואה מפורטת בין התכונות.
 
-发送反馈
+שליחת משוב
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-最后更新时间 (UTC)：2026-06-23。
+עדכון אחרון: 2026-06-23 (שעון UTC).
 
-需要向我们提供更多信息？
+רוצה לתת לנו משוב?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-23。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-23 (שעון UTC)."],[],[]]

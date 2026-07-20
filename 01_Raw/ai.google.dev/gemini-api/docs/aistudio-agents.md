@@ -1,141 +1,139 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=tr
-fetched_at: 2026-07-06T05:21:58.536965+00:00
-title: "AI Studio Playground'daki temsilciler \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ja
+fetched_at: 2026-07-20T04:36:58.685879+00:00
+title: "AI Studio Playground \u306e\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# AI Studio Playground'daki temsilciler
+# AI Studio Playground のエージェント
 
-Google AI Studio Playground, API çağrıları oluşturup yazmak zorunda kalmadan yönetilen temsilcilerin nasıl oluşturulacağını öğrenmek ve prototip oluşturmak için görsel bir arayüz sağlar.
+Google AI Studio Playground には、API 呼び出しを作成して記述することなく、マネージド エージェントをプロトタイピングして構築する方法を学習できるビジュアル インターフェースが用意されています。
 
-Başlamak için Google AI Studio'nun gezinme panelinde **Playground** sekmesine gidin ve açma/kapatma düğmesini **Agents** olarak değiştirin.
+まず、Google AI Studio のナビゲーション パネルで [**Playground**] タブに移動し、切り替えを [**Agents**] に切り替えます。
 
-## Önceden oluşturulmuş şablonlar
+## 事前構築済みのテンプレート
 
-**Ajanlar** sekmesinde, araç ve ortam yapılandırmalarını ayarlayarak temel Antigravity Ajanı'nı önceden yapılandıran bir dizi şablon bulunur. Tüm şablonlar açık kaynaklıdır ve [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) deposunda yayınlanır. Bu şablonları inceleyerek kendi yönetilen aracınızı nasıl oluşturacağınızı ve yapılandıracağınızı öğrenebilirsiniz.
+[**Agents**] タブには、ツールと環境の構成を設定してベースの Antigravity Agent を事前構成する一連のテンプレートがあります。すべてのテンプレートはオープンソースで、
+[google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) リポジトリで公開されています。これらのテンプレートを確認すると、独自のマネージド エージェントを構築して構造化する方法を学ぶことができます。
 
-Örneğin, Yapay Zeka Radyosu şablonunu seçtiğinizde izin verilen tüm araçlar etkinleştirilir ve radyo programı üretimi için özel bir `AGENTS.md` dosyası ve becerileri bağlanır. Bu ayarları, **Kaynaklar** düğmesini tıklayarak Playground kullanıcı arayüzündeki **Ortam** bölümünde görüntüleyebilirsiniz.
+たとえば、AI Radio テンプレートを選択すると、許可されているすべてのツールが有効になり、ラジオ番組制作用の専用の `AGENTS.md` ファイルとスキルがリンクされます。これらの設定は、[**Sources**] ボタンをクリックすると、[**Environment**] セクションの Playground UI で確認できます。
 
-## Araç yapılandırması
+## ツール構成
 
-Playground'daki Agent ayarları bölümünde aşağıdaki yerleşik araçlara erişimi açıp kapatabilirsiniz:
+Playground の [Agent settings] で、次の組み込みツールへのアクセスを切り替えることができます。
 
-- **Google Arama:** Gerçek zamanlı bilgi temellendirmesi için açık web'e erişin.
-- **URL Bağlamı:** Belirli web sayfası URL'lerinin metin içeriğini getirip ayrıştırın.
-- **Kod Yürütme:** Bash ve Python komutlarını doğrudan izole edilmiş korumalı alan ortamında çalıştırın.
-- **Dosya Sistemi Araçları:** Çalışma alanındaki dosyaları okuma, yazma, listeleme ve silme.
+- **Google 検索:** オープンウェブにアクセスして、リアルタイム情報のグラウンディングを行います。
+- **URL コンテキスト:** 特定のウェブページ URL のテキスト コンテンツを取得して解析します。
+- **コード実行:** 分離されたサンドボックス環境内で Bash コマンドと Python コマンドを直接実行します。
+- **ファイル システム ツール:** ワークスペース内のファイルの読み取り、書き込み、一覧表示、削除を行います。
 
-## Ortam Yapılandırması
+## 環境の設定
 
-Yönetilen aracılar, güvenli ve kısa ömürlü bir Linux korumalı alanında (ortam) çalışır. Bu ortam, aracılara çalışmak için ihtiyaç duydukları çalışma alanını ve araçları sağlar. Daha fazla bilgi için [yönetilen aracı ortamı](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr) kılavuzuna bakın.
+マネージド エージェントは、安全なエフェメラル Linux サンドボックス（環境）内で実行されます。このサンドボックスには、オペレーションに必要なワークスペースとツールが用意されています。詳細については、[マネージド エージェント環境](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja)ガイドをご覧ください。
 
-### Ajan davranışını kontrol etme
+### エージェントの動作の制御
 
-Ajanın davranışı, karakteri ve yetenekleri büyük ölçüde ortamındaki dosyalar tarafından belirlenir. Aracı, yapılandırmaları özel bir `.agents` klasörden otomatik olarak algılayıp yükler:
+エージェントの動作、ペルソナ、機能は、主に環境内のファイルによって決まります。エージェントは、特別な `.agents` フォルダから構成を自動的に検出して読み込みます。
 
-- **`AGENTS.md`**: Sistem talimatlarını ve karakterini tanımlamak için aracının bağlamına önceden yüklenir.
-- **`SKILL.md`**: Belirli özellikleri ve iş akışlarını tanımlamak için ilgili beceri klasörlerinin (ör. `.agents/skills/my-skill/SKILL.md`) altında yer alır.
+- **`AGENTS.md`**: システム指示とペルソナを定義するために、エージェントのコンテキストに事前読み込みされます。
+- **`SKILL.md`**: 特定の機能とワークフローを定義するために、それぞれのスキルフォルダ（例: `.agents/skills/my-skill/SKILL.md`）に配置されます。
 
-### Ortamın temel hazırlığını yapma
+### 環境のプロビジョニング
 
-Bir oturum başlatmadan önce dosyaları ortama bağlayarak aracının kullanacağı ortamı yapılandırabilirsiniz. Kaynakları bağlayarak yeni bir ortam oluşturabilir veya önceki bir ortamı geri yükleyebilirsiniz:
+セッションを開始する前にファイルを環境にマウントすることで、エージェントが使用する環境を構成できます。ソースをマウントして新しい環境を構築することも、以前の環境を復元することもできます。
 
-- **Yeni bir ortam oluşturmak için** Ortam ayarları panelinde **Kaynak ekle**'yi tıklayın ve aşağıdaki kaynak türlerinden birini seçin:
+- ****新しい環境を作成するには**、[\*\*Add Sources\*\*] を [Environment settings] パネルでクリックし、次のソースタイプから選択します。**
 
-| Kaynak türü | Açıklama | Bağlantı yolu |
+| ソースタイプ | 説明 | マウントパス |
 | --- | --- | --- |
-| **Satır İçi Dosyalar** | Yapılandırma dosyalarını, sahte veri kümelerini veya yardımcı program komut dosyalarını (100 KB'a kadar) doğrudan Playground kullanıcı arayüzüne yazın ya da yapıştırın. | Kullanıcı tanımlı hedef yolu (ör. `/workspace/scripts/parser.py`). |
-| **Google Cloud Storage** | Herkese açık veya özel bir Cloud Storage paketi bağlayın.  Özel paketler için standart bir OAuth 2.0 Bearer jetonu gerekir. Daha fazla bilgi için [Özel kaynaklar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#private-sources) başlıklı makaleyi inceleyin. | Bir GCS paketi yolunu (ör. `gs://your-bucket-name/data/`) bir çalışma alanı diziniyle (ör. `/workspace/data/`) eşler. |
-| **GitHub depoları** | Herkese açık veya özel kod tabanlarını klonlayın.  Özel depolar için GitHub kişisel erişim jetonunuzla (PAT) temel kimlik doğrulama gerekir. Daha fazla bilgi için [Özel kaynaklar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#private-sources) başlıklı makaleyi inceleyin. | Doğrudan `/workspace/` içine kopyalanır (genellikle `/workspace/<repo-name>` saniyeden kısa sürer). |
+| **インライン ファイル** | 構成ファイル、モック データセット、ユーティリティ スクリプト（最大 100 KB）を Playground UI に直接書き込むか貼り付けます。 | ユーザー定義の宛先パス（例: `/workspace/scripts/parser.py`）。 |
+| **Google Cloud Storage** | 公開または非公開の Cloud Storage バケットをマウントします。  非公開バケットには、標準の OAuth 2.0 ベアラー トークンが必要です。詳細については、[非公開ソース](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#private-sources)をご覧ください。 | GCS バケットパス（例: `gs://your-bucket-name/data/`）をワークスペース ディレクトリ（例: `/workspace/data/`）にマッピングします。 |
+| **GitHub リポジトリ** | 公開または非公開のコードベースをクローンします。  非公開リポジトリには、GitHub 個人用アクセス トークン（PAT）を使用した基本認証が必要です。詳細については、[非公開ソース](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#private-sources)をご覧ください。 | `/workspace/` に直接クローンされます（通常は `/workspace/<repo-name>` の下）。 |
 
-- **Önceki bir ortamı geri yüklemek için**, tam durumunu klonlamak ve çatallamak üzere [mevcut bir ortam kimliğini yeniden kullanabilirsiniz](#reusing-an-existing-environment-id).
+- **以前の環境を復元するには**、[既存の環境 ID を再利用して](#reusing-an-existing-environment-id)、その正確な状態をクローンしてフォークできます。
 
-### Mevcut bir ortam kimliğini yeniden kullanma
+### 既存の環境 ID を再利用する
 
-Bir test ortamı oluşturmak için zaman harcadıysanız sıfırdan başlamanız gerekmez. Mevcut bir ortamı kullanmak için:
+サンドボックス環境の設定にすでに時間を費やしている場合は、最初からやり直す必要はありません。既存の環境を使用するには:
 
-1. AI Studio'da Ortamlar paneline gidin ve **Tür**'ü **Mevcut** olarak değiştirin.
-2. **Ortam kimliğini** girin (ör.`env_abc123`).
+1. AI Studio の [Environments] パネルに移動し、[**Type**] を [**Existing**] に切り替えます。
+2. **Environment ID** （例: `env_abc123`）を入力します。
 
-Daha fazla bilgi için [Ortam yapılandırma](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#configure-an-environment) başlıklı makaleyi inceleyin. Ayrıca, mevcut oturumun ortam kimliğini kullanıcı arayüzündeki Ortam sekmesinden de alabilirsiniz.
+詳細については、[環境を構成する](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#configure-an-environment)をご覧ください。現在のセッションの環境 ID は、UI の [Environment] タブから取得することもできます。
 
-Temsilciye ilk mesajınızı gönderdiğinizde ortam yapılandırması, söz konusu oturum için sabitlenir. Etkileşim etkin olarak çalışırken yeni kaynaklar bağlayamaz veya ağ izin verilenler listesini değiştiremezsiniz.
+エージェントに最初のメッセージを送信すると、そのセッションの環境構成が確定します。インタラクションがアクティブに実行されている間は、新しいソースをマウントしたり、ネットワーク許可リストを変更したりすることはできません。
 
-## Ortamı indirme
+## 環境をダウンロードする
 
-Bir ortam oluşturulduktan sonra, ortam dosyalarını tarball olarak almak için AI Studio Playground'un Ortam ayarlarındaki **İndir** düğmesini kullanarak ortam anlık görüntüsünü istediğiniz zaman indirebilirsiniz.
+環境が作成されたら、AI Studio Playground の [Environment settings] の [**Download**] ボタンを使用して、環境スナップショットをいつでもダウンロードし、環境ファイルを tarball として取得できます。
 
-## Güvenlik ve Maliyet Yönetimi
+## 安全性と費用管理
 
-### Jeton tüketimini yönetme
+### トークン消費量の管理
 
-Tek bir çıktı üreten standart bir sohbet isteğinin aksine, Antigravity Agent bağımsız bir iş akışı yürütür. Planlama yapar, kodu çalıştırır, sonuçları gözlemler ve tekrarlar. Bu, tek bir istemin sınırsız jeton tüketimine yol açabileceği anlamına gelir.
+単一の出力を生成する標準のチャット リクエストとは異なり、Antigravity Agent は自律的なワークフローを実行します。計画、コードの実行、結果の観察、反復を行います。つまり、1 つのプロンプトで無制限のトークン消費が発生する可能性があります。
 
-Maliyetleri yönetmek için **istemlerinizde net sonlandırma ölçütleri sağlayın ve görevleri, aracı için dar bir kapsamda tutun**. İyi bir örnek olarak şu istem verilebilir:
-*Çekme isteğini incele ve Markdown özetini oluşturduktan sonra dur.
-Düzeltmeyi kendiniz yazmaya çalışmayın*.
+費用を管理するには、**プロンプトで明確な終了条件を指定し、エージェントのタスクの範囲を絞ります** 。たとえば、「 *プルリクエストを確認し、Markdown の概要を生成したら停止してください。
+自分で修正を記述しようとしないでください* 」のようなプロンプトを使用できます。
 
-**Durdur** düğmesini kullanarak aracı istediğiniz zaman durdurabilirsiniz.
+### 追加費用
 
-### Ek Maliyetler
+デフォルトでは、Playground のすべてのエージェント テンプレートが Gemini API サービスにアクセスでき、リクエストを満たすために環境から API 呼び出しを行うことができます。これにより、トークン消費量に反映されない追加費用が発生する可能性があります。
 
-Varsayılan olarak, Playground'daki tüm aracı şablonları Gemini API hizmetine erişebilir ve istekleri karşılamak için ortamdan API çağrıları yapabilir. Bunlar, jeton tüketimine yansıtılmayacak ek maliyetlere neden olabilir.
+同様に、他の外部サービスを追加すると、エージェントがユーザーに代わってこれらのサービスを呼び出すことで、追加費用が発生する可能性があります。
 
-Benzer şekilde, başka harici hizmetler eklerseniz aracı, bu hizmetleri sizin adınıza çağırarak ek maliyetlere neden olabilir.
+### ネットワーク許可リスト
 
-### Ağ izin verilenler listesi
+デフォルトでは、AI Studio では、エージェントのサンドボックス環境内からのすべての送信ネットワーク リクエストが厳密に制御され、セキュリティを確保するために制限されています。エージェントに外部 API、ウェブサービス、パッケージ マネージャーにアクセスできるようにするには、明示的に宣言する必要があります。
 
-Varsayılan olarak, AI Studio'da aracınızın korumalı alan ortamından gelen tüm giden ağ istekleri, güvenliği sağlamak için sıkı bir şekilde kontrol edilir ve kısıtlanır. Aracınıza harici API'lere, web hizmetlerine veya paket yöneticilerine ulaşma izni vermek için bunları açıkça belirtmeniz gerekir:
+1. AI Studio の [Environments] パネルに移動します。
+2. [**Network**] の横にある**ルール** ボタンを選択します。
+3. [**Network configuration**] パネルで、[**Add to allowlist**] をクリックし、関連する詳細を入力します。
+   - **ドメイン制限:** リストに追加された特定のドメインまたはワイルドカード パターンにのみ、エージェントの仮想マシンからアクセスできます。たとえば、`api.github.com` などの正確なドメインや、`*.googleapis.com` などの広範なパターンを入力できます。
+   - **HTTP ヘッダーとトークン インジェクションの追加:** [**Add HTTP header**] オプションを使用して、特定のドメインに必要な認証情報（API トークンなど）を安全に挿入します。これらの認証情報は、エグレス プロキシを介して安全に渡され、エージェント サンドボックス内の未加工テキストとして直接公開されることはありません。
 
-1. AI Studio'da Ortamlar paneline gidin.
-2. **Ağ**'ın yanındaki **kurallar** düğmesini seçin.
-3. **Ağ yapılandırması** panelinde **İzin verilenler listesine ekle**'yi tıklayın ve ilgili ayrıntıları girin:
-   - **Alan adı kısıtlaması:** Yalnızca listeye eklenen belirli alan adlarına veya joker karakter kalıplarına aracının sanal makinesi tarafından erişilebilir. Örneğin, `api.github.com` gibi tam alan adları veya `*.googleapis.com` gibi geniş kalıplar girebilirsiniz.
-   - **HTTP Üstbilgisi ve Jeton Ekleme:** Belirli bir alan için gerekli kimlik bilgilerini (ör. API jetonu) güvenli bir şekilde eklemek üzere **HTTP üstbilgisi ekle** seçeneğini kullanın. Bu kimlik bilgileri, çıkış proxy'si üzerinden güvenli bir şekilde iletilir ve hiçbir zaman aracı özel korumalı alanında doğrudan ham metin olarak gösterilmez.
+許可リストにドメインを追加する場合は、常に注意してください。エージェントに認証済みサービスへのアクセス権を付与すると、エージェントがユーザーに代わって操作できるようになります。注意深くモニタリングしないと、意図しない操作につながる可能性があります。
 
-İzin verilenler listenize alan eklerken her zaman dikkatli olun. Aracıya kimliği doğrulanmış hizmetlere erişim izni vermek, aracının sizin adınıza hareket edebileceği anlamına gelir. Bu durum, dikkatli bir şekilde izlenmediği takdirde istenmeyen işlemlere yol açabilir.
+### 認証情報のベスト プラクティス
 
-### Kimlik bilgileriyle ilgili en iyi uygulamalar
+ワークフローでエージェントが外部サービスに対して認証を行う必要がある場合は、これらの認証情報のプロビジョニングとスコープ設定を行う必要があります。リスクを軽減するには、次のガイドラインに従ってください。
 
-İş akışınızda aracının harici hizmetlerle kimliğini doğrulaması gerekiyorsa bu kimlik bilgilerini sağlama ve kapsamını belirleme sorumluluğu size aittir. Riski azaltmak için aşağıdaki yönergeleri uygulayın:
+- **最小権限の認証情報を使用する:** エージェントに必要な権限のみを持つサービス アカウントまたは API キーを作成します。広範なアクセス権または管理者権限を持つ認証情報を渡さないでください。
+- **有効期間の短いトークンを優先する:** 可能な場合は、有効期間の長い API キーではなく、有効期限のある時間制限付きの認証情報またはトークンを使用します。
+- **完全なアクセス権を想定する:** エージェントは、与えられたタスクを完了するために、アクセスできる任意の認証情報を使用する可能性があります。完全なアクセス権を付与してもよい認証情報のみを指定してください。
+- **認証情報を定期的にローテーションする:** エージェントと共有する認証情報は、プログラムによる認証情報と同じように扱い、定期的にローテーションします。
 
-- **En az ayrıcalık ilkesine uygun kimlik bilgileri kullanın:** Yalnızca aracınızın ihtiyaç duyduğu izinlere sahip hizmet hesapları veya API anahtarları oluşturun. Geniş veya yönetici erişimi olan kimlik bilgilerini iletmekten kaçının.
-- **Kısa ömürlü jetonları tercih edin:** Mümkün olduğunda uzun ömürlü API anahtarları yerine, geçerlilik süresi sınırlı kimlik bilgileri veya süresi dolan jetonlar kullanın.
-- **Tam erişim varsay:** Ajan, kendisine verdiğiniz görevi tamamlamak için erişebildiği tüm kimlik bilgilerini kullanabilir. Yalnızca tam kapsamlı erişim izni vermeye hazır olduğunuz kimlik bilgilerini sağlayın.
-- **Kimlik bilgilerini düzenli olarak değiştirin:** Aracıyla paylaşılan kimlik bilgilerine, diğer tüm programatik kimlik bilgilerine davrandığınız gibi davranın ve bunları düzenli olarak değiştirin.
+### 外部ツールと API を接続する
 
-### Harici araçları ve API'leri bağlama
+外部ツールと API（Model Context Protocol / MCP サーバーなど）を接続して、エージェントの機能を拡張できます。その場合、次のようになります。
 
-Ajanın özelliklerini genişletmek için harici araçları ve API'leri (ör. Model Context Protocol / MCP sunucuları) bağlayabilirsiniz. Bu işlemi yaparken:
+- 信頼できる提供元のツールのみを接続してください。悪意のあるツールや不適切なツールは、データを公開したり、意図しない操作を実行したりする可能性があります。
+- ユースケースに必要な最小限の権限でツールを構成します。ツールが読み取り専用モードをサポートしている場合は、書き込みが厳密に必要な場合を除き、読み取り専用モードを優先します。
+- ツールを本番環境のデータソースに接続する前に、サンプルデータまたは合成データに対してテストし、エージェントが想定どおりに使用することを確認します。
 
-- Yalnızca güvendiğiniz kaynaklardan gelen araçları bağlayın. Kötü amaçlı veya kötü yazılmış bir araç, verileri açığa çıkarabilir ya da istenmeyen işlemler gerçekleştirebilir.
-- Araçları, kullanım alanınız için gereken minimum izinlerle yapılandırın. Bir araç salt okuma modunu destekliyorsa yazma işlemi kesinlikle gerekli olmadığı sürece bu modu tercih edin.
-- Bir aracı üretim veri kaynağına bağlamadan önce, aracının beklendiği gibi kullandığını doğrulamak için örnek veya sentetik verilerle test edin.
+### 人間による監視
 
-### İnsan gözetimi
+エージェントは、高度な自律性で複数ステップのワークフローを推論、計画、実行できます。これは強力ですが、適切な監視を適用する必要があります。特に、データを変更したり、外部システムとやり取りしたりするタスクの場合は注意が必要です。
 
-Ajanlar, çok adımlı iş akışlarını yüksek düzeyde bağımsızlıkla akıl yürüterek, planlayarak ve uygulayarak gerçekleştirebilir. Bu özellik güçlü olsa da özellikle verileri değiştiren veya harici sistemlerle etkileşimde bulunan görevler için uygun gözetim uygulamanız gerekir.
+生成されたコード、データ変換、構成変更などの重要な出力は、デプロイする前に必ず確認してください。
 
-Oluşturulan kod, veri dönüşümleri veya yapılandırma değişiklikleri gibi kritik çıkışları dağıtmadan önce her zaman doğrulayın.
+フィードバックを送信
 
-Geri bildirim gönderin
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+最終更新日 2026-05-20 UTC。
 
-Son güncelleme tarihi: 2026-05-20 UTC.
+ご意見をお聞かせください
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
-
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-20 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-20 UTC。"],[],[]]

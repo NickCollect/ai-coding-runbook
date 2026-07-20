@@ -1,48 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=es-419
-fetched_at: 2026-07-06T05:10:31.026505+00:00
-title: "Explicaci\u00f3n de las versiones de la API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=it
+fetched_at: 2026-07-20T04:44:58.995793+00:00
+title: "Spiegazione delle versioni API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Referencia de la API](https://ai.google.dev/api?hl=es-419)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Riferimento API](https://ai.google.dev/api?hl=it)
 
-Enviar comentarios
+Invia feedback
 
-# Explicación de las versiones de la API
+# Spiegazione delle versioni API
 
-En este documento, se proporciona una descripción general de alto nivel de las diferencias entre las versiones `v1` y `v1beta` de la API de Gemini.
+Questo documento fornisce una panoramica generale delle differenze tra le versioni `v1`
+e `v1beta` dell'API Gemini.
 
-- **v1**: Es la versión estable de la API. Las funciones de la versión estable son totalmente compatibles durante el ciclo de vida de la versión principal. Si hay cambios que interrumpen la compatibilidad, se creará la próxima versión principal de la API y la versión existente se marcará como obsoleta después de un período razonable.
-  Se pueden introducir cambios no rotundos en la API sin cambiar la versión principal. A partir de junio de 2026, la **API de Interactions** estará disponible de forma general y se admitirá en `v1`.
-- **v1beta**: Esta versión incluye funciones y capacidades iniciales que se encuentran en desarrollo activo. Si bien las funciones en `v1beta` pueden estar sujetas a cambios a medida que las perfeccionamos en función de los comentarios, te permite probar nuevas capacidades antes de que se promuevan a estables.
+- **v1**: versione stabile dell'API. Le funzionalità nella versione stabile sono
+  completamente supportate per tutta la durata della versione principale. Se vengono apportate
+  modifiche che causano interruzioni, verrà creata la successiva versione principale dell'API e
+  la versione esistente verrà ritirata dopo un periodo di tempo ragionevole.
+  Nell'API possono essere introdotte modifiche non sostanziali senza modificare la
+  versione principale. A partire da giugno 2026, l'**API Interactions** è disponibile
+  e supportata in `v1`.
+- **v1beta**: questa versione include funzionalità e capacità iniziali in fase di sviluppo attivo. Sebbene le funzionalità in `v1beta` possano essere soggette a modifiche man mano che le perfezioniamo in base al feedback, ti consentono di provare nuove funzionalità prima che vengano promosse alla versione stabile.
 
-| Función | v1 | v1beta |
+| Funzionalità | v1 | v1beta |
 | --- | --- | --- |
-| API de Interactions |  |  |
-| Genera contenido: entrada de solo texto |  |  |
-| Generar contenido: entrada de texto e imagen |  |  |
-| Generar contenido: salida de texto |  |  |
-| Generar contenido: conversaciones de varios turnos (chat) |  |  |
-| Genera contenido: Llamadas a funciones |  |  |
-| Generar contenido: transmisión |  |  |
-| Incorpora contenido: entrada de solo texto |  |  |
-| Generar respuesta |  |  |
-| Recuperador semántico |  |  |
+| API Interactions |  |  |
+| Generare contenuti: input solo testo |  |  |
+| Genera contenuti - Input di testo e immagini |  |  |
+| Genera contenuti - Output di testo |  |  |
+| Generare contenuti - Conversazioni multi-turno (chat) |  |  |
+| Genera contenuti - Chiamate di funzione |  |  |
+| Genera contenuti - Streaming |  |  |
+| Incorporare contenuti - Input solo testo |  |  |
+| Genera risposta |  |  |
+| Semantic retriever |  |  |
 
-- : Compatible
-- : Nunca será compatible
+- - Supportato
+- - Non sarà mai supportato
 
-## Cómo configurar la versión de la API en un SDK
+## Configurare la versione dell'API in un SDK
 
-Los SDK de la API de Gemini usan `v1beta` de forma predeterminada, pero puedes especificar versiones de forma explícita configurando la versión de la API como se muestra en la siguiente muestra de código:
+Per impostazione predefinita, gli SDK dell'API Gemini utilizzano `v1beta`, ma puoi specificare esplicitamente le versioni
+impostando la versione dell'API come mostrato nel seguente esempio di codice:
 
 ### Python
 
@@ -91,12 +98,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   }'
 ```
 
-Enviar comentarios
+Invia feedback
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Última actualización: 2026-06-22 (UTC)
+Ultimo aggiornamento 2026-06-22 UTC.
 
-¿Quieres brindar más información?
+Vuoi dirci altro?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-22 UTC."],[],[]]

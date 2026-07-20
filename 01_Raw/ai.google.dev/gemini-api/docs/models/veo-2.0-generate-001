@@ -1,47 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=id
-fetched_at: 2026-07-06T05:17:51.097667+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=ko
+fetched_at: 2026-07-20T04:33:39.377588+00:00
 title: "Veo 2.0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Kirim masukan
+의견 보내기
 
 # Veo 2.0
 
-Model pembuatan video stabil kami yang tangguh dan andal, memberikan performa yang konsisten untuk alur kerja siap produksi. Veo 2.0 paling cocok untuk pembuatan konten 1080p standar, aset media sosial, dan tugas video bervolume tinggi yang memprioritaskan konsistensi karakter yang andal dan kecepatan pembuatan sub-detik yang dapat diprediksi.
+안정적이고 신뢰할 수 있는 동영상 생성 모델로, 프로덕션 준비가 완료된 워크플로에 일관된 성능을 제공합니다. Veo 2.0은 표준 1080p 콘텐츠 제작, 소셜 미디어 애셋, 신뢰할 수 있는 캐릭터 일관성과 예측 가능한 1초 미만의 생성 속도를 우선시하는 대량 동영상 작업에 가장 적합합니다.
 
-[Coba di Google AI Studio](https://aistudio.google.com?model=veo-2.0-generate-001&hl=id)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com?model=veo-2.0-generate-001&hl=ko)
 
-## Dokumentasi
+## 문서
 
-Buka halaman [Pembuatan video](https://ai.google.dev/gemini-api/docs/video?hl=id) untuk mengetahui cakupan lengkap
-fitur dan kemampuannya.
+[동영상 생성](https://ai.google.dev/gemini-api/docs/video?hl=ko) 페이지에서 기능과 기능에 대해 자세히 알아보세요.
 
 ## veo-2.0-generate-001
 
-| Properti | Deskripsi |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardKode model | **Gemini API**  `veo-2.0-generate-001` |
-| saveJenis data yang didukung | **Input**  Teks, gambar  **Output**  Video |
-| token\_autoBatas | **Input teks**  T/A  **Input gambar**  Resolusi dan rasio aspek gambar apa pun hingga ukuran file 20 MB  **Video output**  Maksimal 2 |
-| calendar\_monthPembaruan terbaru | April 2025 |
+| id\_card모델 코드 | **Gemini API**  `veo-2.0-generate-001` |
+| save지원되는 데이터 유형 | **입력**  텍스트, 이미지  **출력**  동영상 |
+| token\_auto 한도 | **텍스트 입력**  해당 사항 없음  **이미지 입력**  최대 20MB 파일 크기의 모든 이미지 해상도 및 가로세로 비율  **출력 동영상**  최대 2 |
+| calendar\_month최신 업데이트 | 2025년 4월 |
 
-Kirim masukan
+의견 보내기
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Terakhir diperbarui pada 2026-06-15 UTC.
+최종 업데이트: 2026-06-15(UTC)
 
-Ada masukan untuk kami?
+의견을 전달하고 싶나요?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-15 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-15(UTC)"],[],[]]

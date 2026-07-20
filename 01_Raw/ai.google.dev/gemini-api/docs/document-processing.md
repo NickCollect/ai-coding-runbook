@@ -1,37 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=he
-fetched_at: 2026-07-06T05:18:59.787310+00:00
-title: "\u05d4\u05d1\u05e0\u05ea \u05de\u05e1\u05de\u05db\u05d9\u05dd \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=vi
+fetched_at: 2026-07-20T04:34:16.574544+00:00
+title: "Hi\u1ec3u t\u00e0i li\u1ec7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-# הבנת מסמכים
+# Hiểu tài liệu
 
-מודלים של Gemini יכולים לעבד מסמכים בפורמט PDF, באמצעות ראייה מובנית כדי להבין את ההקשרים של מסמכים שלמים. היכולת הזו היא מעבר לחילוץ טקסט בלבד, והיא מאפשרת ל-Gemini:
+Các mô hình Gemini có thể xử lý tài liệu ở định dạng PDF, sử dụng thị giác tự nhiên để hiểu toàn bộ ngữ cảnh của tài liệu. Tính năng này không chỉ trích xuất văn bản mà còn cho phép Gemini:
 
-- ניתוח ופירוש של תוכן, כולל טקסט, תמונות, דיאגרמות, תרשימים וטבלאות, גם במסמכים ארוכים של עד 1, 000 עמודים.
-- חילוץ מידע לפורמטים של [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he).
-- לסכם מסמכים ולענות על שאלות על סמך הרכיבים החזותיים והטקסטואליים שלהם.
-- תמלול תוכן של מסמכים (למשל ל-HTML), תוך שמירה על הפריסות והעיצוב, לשימוש באפליקציות במורד הזרם.
+- Phân tích và diễn giải nội dung, bao gồm cả văn bản, hình ảnh, sơ đồ, biểu đồ và bảng, ngay cả trong các tài liệu dài lên đến 1.000 trang.
+- Trích xuất thông tin thành các định dạng [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
+- Tóm tắt và trả lời câu hỏi dựa trên cả yếu tố hình ảnh và văn bản trong tài liệu.
+- Chuyển nội dung tài liệu thành văn bản (ví dụ: sang HTML), giữ nguyên bố cục và định dạng để sử dụng trong các ứng dụng tiếp theo.
 
-אפשר גם להעביר מסמכים שאינם PDF באותו אופן, אבל Gemini יראה אותם כטקסט רגיל, כך שלא יהיה הקשר כמו תרשימים או עיצוב.
+Bạn cũng có thể truyền các tài liệu không phải là PDF theo cách tương tự, nhưng Gemini sẽ coi các tài liệu đó là văn bản thông thường, do đó sẽ loại bỏ các ngữ cảnh như biểu đồ hoặc định dạng.
 
-## העברת נתוני PDF בתוך השורה
+## Truyền dữ liệu PDF nội tuyến
 
-אפשר להעביר נתוני PDF בתוך הבקשה. האפשרות הזו מתאימה במיוחד למסמכים קטנים או לעיבוד זמני שבו אין צורך להפנות לקובץ בבקשות הבאות. מומלץ להשתמש ב-[Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=he#large-pdfs) למסמכים גדולים שצריך להתייחס אליהם באינטראקציות מרובות שלבים, כדי לשפר את זמן האחזור של הבקשה ולהקטין את השימוש ברוחב הפס.
+Bạn có thể truyền dữ liệu PDF nội tuyến trong yêu cầu. Phương thức này phù hợp nhất với các tài liệu nhỏ hoặc quy trình xử lý tạm thời mà bạn không cần tham chiếu đến tệp trong các yêu cầu tiếp theo. Bạn nên sử dụng [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi#large-pdfs) cho các tài liệu lớn hơn mà bạn cần tham khảo trong các lượt tương tác nhiều vòng để cải thiện độ trễ của yêu cầu và giảm mức sử dụng băng thông.
 
-בדוגמה הבאה אפשר לראות איך מעבירים נתוני PDF בשורה:
+Ví dụ sau đây cho thấy cách truyền dữ liệu PDF nội tuyến:
 
 ### Python
 
@@ -116,7 +116,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-אפשר גם להעלות קובץ PDF מקומי לעיבוד:
+Bạn cũng có thể tải một tệp PDF trên máy lên để xử lý:
 
 ### Python
 
@@ -167,13 +167,64 @@ async function main() {
 main();
 ```
 
-## העלאת קובצי PDF באמצעות Files API
+### REST
 
-מומלץ להשתמש ב-Files API לקבצים גדולים יותר או כשרוצים לעשות שימוש חוזר במסמך בכמה בקשות. כך משפרים את זמן האחזור של הבקשות ומצמצמים את השימוש ברוחב הפס, כי ההעלאה של הקובץ לא תלויה בבקשות למודל.
+```
+PDF_PATH="file.pdf"
+NUM_BYTES=$(wc -c < "${PDF_PATH}")
+DISPLAY_NAME="file.pdf"
+tmp_header_file=upload-header.tmp
 
-### קובצי PDF גדולים מכתובות URL
+# Initial resumable request defining metadata.
+# The upload url is in the response headers dump them to a file.
+curl "https://generativelanguage.googleapis.com/upload/v1beta/files?key=${GEMINI_API_KEY}" \
+  -D upload-header.tmp \
+  -H "X-Goog-Upload-Protocol: resumable" \
+  -H "X-Goog-Upload-Command: start" \
+  -H "X-Goog-Upload-Header-Content-Length: ${NUM_BYTES}" \
+  -H "X-Goog-Upload-Header-Content-Type: application/pdf" \
+  -H "Content-Type: application/json" \
+  -d "{'file': {'display_name': '${DISPLAY_NAME}'}}" 2> /dev/null
 
-אפשר להשתמש ב-File API כדי לפשט את ההעלאה והעיבוד של קובצי PDF גדולים מכתובות URL:
+upload_url=$(grep -i "x-goog-upload-url: " "${tmp_header_file}" | cut -d" " -f2 | tr -d "\r")
+rm "${tmp_header_file}"
+
+# Upload the actual bytes.
+curl "${upload_url}" \
+  -H "Content-Length: ${NUM_BYTES}" \
+  -H "X-Goog-Upload-Offset: 0" \
+  -H "X-Goog-Upload-Command: upload, finalize" \
+  --data-binary "@${PDF_PATH}" 2> /dev/null > file_info.json
+
+file_uri=$(jq -r ".file.uri" file_info.json)
+echo file_uri=$file_uri
+
+# Now create an interaction using that file
+curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
+    -H "x-goog-api-key: $GEMINI_API_KEY" \
+    -H 'Content-Type: application/json' \
+    -X POST \
+    -d '{
+      "model": "gemini-3.5-flash",
+      "input": [
+        {"type": "document", "uri": "'$file_uri'", "mime_type": "application/pdf"},
+        {"type": "text", "text": "Summarize this document"}
+      ]
+    }' 2> /dev/null > response.json
+
+cat response.json
+echo
+
+jq -r ".steps[-1].content[0].text" response.json
+```
+
+## Tải tệp PDF lên bằng Files API
+
+Bạn nên sử dụng Files API cho các tệp lớn hơn hoặc khi bạn dự định sử dụng lại một tài liệu trong nhiều yêu cầu. Điều này giúp cải thiện độ trễ của yêu cầu và giảm mức sử dụng băng thông bằng cách tách hoạt động tải tệp lên khỏi các yêu cầu về mô hình.
+
+### Tệp PDF lớn từ URL
+
+Sử dụng File API để đơn giản hoá việc tải lên và xử lý các tệp PDF lớn từ URL:
 
 ### Python
 
@@ -326,7 +377,7 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### קובצי PDF גדולים שמאוחסנים באופן מקומי
+### Tệp PDF lớn được lưu trữ cục bộ
 
 ### Python
 
@@ -360,7 +411,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
     const file = await ai.files.upload({
-        file: 'path-to-localfile.pdf',
+        file: 'large_file.pdf',
         config: {
             displayName: 'A17_FlightPlan.pdf',
         },
@@ -398,7 +449,7 @@ main();
 ### REST
 
 ```
-PDF_PATH="path/to/large_file.pdf"
+PDF_PATH="large_file.pdf"
 NUM_BYTES=$(wc -c < "${PDF_PATH}")
 DISPLAY_NAME=TEXT
 tmp_header_file=upload-header.tmp
@@ -424,7 +475,7 @@ curl "${upload_url}" \
   -H "X-Goog-Upload-Command: upload, finalize" \
   --data-binary "@${PDF_PATH}" 2> /dev/null > file_info.json
 
-file_uri=$(jq ".file.uri" file_info.json)
+file_uri=$(jq -r ".file.uri" file_info.json)
 echo file_uri=$file_uri
 
 # Now create an interaction using that file
@@ -435,7 +486,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -d '{
       "model": "gemini-3.5-flash",
       "input": [
-        {"type": "document", "uri": '$file_uri', "mime_type": "application/pdf"},
+        {"type": "document", "uri": "'$file_uri'", "mime_type": "application/pdf"},
         {"type": "text", "text": "Can you add a few more lines to this poem?"}
       ]
     }' 2> /dev/null > response.json
@@ -443,10 +494,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/interactions" \
 cat response.json
 echo
 
-jq ".steps[-1].content[0].text" response.json
+jq -r ".steps[-1].content[0].text" response.json
 ```
 
-כדי לוודא שה-API שמר בהצלחה את הקובץ שהועלה ולקבל את המטא-נתונים שלו, אפשר לקרוא ל-[`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=he). רק `name` (ומכאן גם `uri`) הם ייחודיים.
+Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và lấy siêu dữ liệu của tệp đó bằng cách gọi [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=vi). Chỉ có `name` (và theo đó là `uri`) là duy nhất.
 
 ### Python
 
@@ -465,6 +516,29 @@ file_info = client.files.get(name=file.name)
 print(file_info.model_dump_json(indent=4))
 ```
 
+### JavaScript
+
+```
+import { GoogleGenAI } from "@google/genai";
+import * as fs from "node:fs";
+
+const ai = new GoogleGenAI({});
+
+async function main() {
+    fs.writeFileSync("example.pdf", "hello");
+
+    const file = await ai.files.upload({
+        file: "example.pdf",
+        config: { mime_type: "application/pdf" }
+    });
+
+    const fileInfo = await ai.files.get({ name: file.name });
+    console.log(fileInfo);
+}
+
+main();
+```
+
 ### REST
 
 ```
@@ -478,9 +552,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## העברת כמה קובצי PDF
+## Truyền nhiều tệp PDF
 
-‫Gemini API יכול לעבד כמה מסמכי PDF (עד 1,000 דפים) בבקשה אחת, כל עוד הגודל המשולב של המסמכים וההנחיה הטקסטואלית לא חורג מחלון ההקשר של המודל.
+Gemini API có thể xử lý nhiều tài liệu PDF (tối đa 1.000 trang) trong một yêu cầu duy nhất, miễn là kích thước kết hợp của các tài liệu và câu lệnh văn bản nằm trong cửa sổ ngữ cảnh của mô hình.
 
 ### Python
 
@@ -671,51 +745,50 @@ rm "file_info_${DISPLAY_NAME_1}.json"
 rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## פרטים טכניים
+## Chi tiết kỹ thuật
 
-‫Gemini תומך בקובצי PDF בגודל של עד 50MB או עד 1,000 דפים. המגבלה הזו חלה על נתונים מוטבעים וגם על העלאות באמצעות Files API. כל דף במסמך שווה ל-258 טוקנים.
+Gemini hỗ trợ tệp PDF có kích thước tối đa 50 MB hoặc 1.000 trang. Giới hạn này áp dụng cho cả dữ liệu nội tuyến và nội dung tải lên bằng Files API. Mỗi trang tài liệu tương đương với 258 mã thông báo.
 
-אין מגבלות ספציפיות על מספר הפיקסלים במסמך, מלבד [חלון ההקשר](https://ai.google.dev/gemini-api/docs/long-context?hl=he) של המודל. דפים גדולים יותר מצטמצמים לרזולוציה מקסימלית של ‎3072 x 3072 תוך שמירה על יחס הגובה-רוחב המקורי שלהם, ודפים קטנים יותר מוגדלים לרזולוציה של ‎768 x 768 פיקסלים. אין הפחתה בעלויות של דפים בגדלים קטנים יותר, מלבד רוחב פס, או שיפור בביצועים של דפים ברזולוציה גבוהה יותר.
+Mặc dù không có giới hạn cụ thể về số lượng pixel trong một tài liệu ngoài [cửa sổ ngữ cảnh](https://ai.google.dev/gemini-api/docs/long-context?hl=vi) của mô hình, nhưng các trang lớn hơn sẽ được thu nhỏ xuống độ phân giải tối đa là 3072 x 3072 trong khi vẫn giữ nguyên tỷ lệ khung hình ban đầu, còn các trang nhỏ hơn sẽ được phóng to lên 768 x 768 pixel. Không có mức giảm chi phí cho các trang có kích thước nhỏ hơn, ngoài băng thông hoặc cải thiện hiệu suất cho các trang có độ phân giải cao hơn.
 
-### המודלים של Gemini 3
+### Mô hình Gemini 3
 
-‫Gemini 3 מציג שליטה מפורטת בעיבוד של ראייה מולטי-מודאלית באמצעות הפרמטר `media_resolution`. מעכשיו אפשר להגדיר את הרזולוציה לנמוכה, בינונית או גבוהה לכל חלק מדיה בנפרד. בעקבות התוספת הזו, עודכן העיבוד של מסמכי PDF:
+Gemini 3 giới thiệu khả năng kiểm soát chi tiết đối với quy trình xử lý hình ảnh đa phương thức bằng tham số `media_resolution`. Giờ đây, bạn có thể đặt độ phân giải thành thấp, trung bình hoặc cao cho từng phần nội dung nghe nhìn. Với việc bổ sung này, quy trình xử lý tài liệu PDF đã được cập nhật:
 
-1. **הכללת טקסט מקורי:** טקסט שמוטמע באופן מקורי בקובץ ה-PDF מחולץ ומועבר למודל.
-2. **דיווח על חיובים ועל טוקנים:**
-   - **לא תחויבו** על טוקנים שמקורם ב**טקסט מקורי** שחולץ מקובצי PDF.
-   - בקטע `usage_metadata` בתגובה מה-API, טוקנים שנוצרו מעיבוד של דפי PDF (כתמונות) נספרים עכשיו בתוך `IMAGE`, ולא בתוך `DOCUMENT` נפרד כמו בכמה גרסאות קודמות.
+1. **Bao gồm văn bản gốc:** Văn bản được nhúng nguyên bản trong tệp PDF sẽ được trích xuất và cung cấp cho mô hình.
+2. **Báo cáo về việc thanh toán và mã thông báo:**
+   - Bạn **không bị tính phí** cho các mã thông báo bắt nguồn từ **văn bản gốc** được trích xuất trong tệp PDF.
+   - Trong phần `usage_metadata` của phản hồi API, các mã thông báo được tạo từ việc xử lý các trang PDF (dưới dạng hình ảnh) hiện được tính theo phương thức `IMAGE` chứ không phải phương thức `DOCUMENT` riêng biệt như trong một số phiên bản trước.
 
-פרטים נוספים על הפרמטר של רזולוציית המדיה זמינים במדריך בנושא [רזולוציית מדיה](https://ai.google.dev/gemini-api/docs/media-resolution?hl=he).
+Để biết thêm thông tin về tham số độ phân giải của nội dung nghe nhìn, hãy xem hướng dẫn về [Độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=vi).
 
-### סוגי מסמכים
+### Các loại tài liệu
 
-מבחינה טכנית, אפשר להעביר סוגי MIME אחרים לניתוח מסמכים, כמו TXT,‏ Markdown,‏ HTML,‏ XML וכו'. עם זאת, ***הניתוח של מסמכים מתבצע רק עבור קובצי PDF***. סוגים אחרים יחולצו כטקסט בלבד, והמודל לא יוכל לפרש את מה שרואים בעיבוד של הקבצים האלה. כל הפרטים הספציפיים לגבי סוג הקובץ, כמו תרשימים, דיאגרמות, תגי HTML, עיצוב Markdown וכו', יימחקו.
+Về mặt kỹ thuật, bạn có thể truyền các loại MIME khác để hiểu tài liệu, chẳng hạn như TXT, Markdown, HTML, XML, v.v. Tuy nhiên, tính năng thị giác tài liệu ***chỉ hiểu được PDF một cách có ý nghĩa***. Các loại khác sẽ được trích xuất dưới dạng văn bản thuần tuý và mô hình sẽ không thể diễn giải những gì chúng ta thấy trong quá trình hiển thị các tệp đó. Mọi thông tin cụ thể về loại tệp như biểu đồ, sơ đồ, thẻ HTML, định dạng Markdown, v.v. sẽ bị mất.
 
-מידע על שיטות אחרות להזנת קבצים זמין במדריך בנושא [שיטות להזנת קבצים](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=he).
+Để tìm hiểu về các phương thức nhập tệp khác, hãy xem hướng dẫn [Phương thức nhập tệp](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi).
 
-### שיטות מומלצות
+### Các phương pháp hay nhất
 
-לקבלת התוצאות הטובות ביותר:
+Để có kết quả tốt nhất:
 
-- לפני ההעלאה, מסובבים את הדפים לכיוון הנכון.
-- אל תשתמשו בדפים מטושטשים.
-- אם משתמשים בדף יחיד, צריך להציב את ההנחייה הטקסטואלית אחרי הדף.
+- Xoay các trang về đúng hướng trước khi tải lên.
+- Tránh các trang bị mờ.
+- Nếu sử dụng một trang duy nhất, hãy đặt câu lệnh văn bản sau trang.
 
-## המאמרים הבאים
+## Bước tiếp theo
 
-מידע נוסף זמין במקורות המידע הבאים:
+Để tìm hiểu thêm, hãy xem các tài nguyên sau:
 
-- [אסטרטגיות לכתיבת הנחיות לקבצים](https://ai.google.dev/gemini-api/docs/files?hl=he#prompt-guide): Gemini API תומך בכתיבת הנחיות עם נתוני טקסט, תמונה, אודיו ווידאו, שנקראות גם כתיבת הנחיות מולטי-מודאליות.
-- [System instructions](https://ai.google.dev/gemini-api/docs/text-generation?hl=he#system-instructions):
-  הוראות מערכת מאפשרות לכם לכוון את התנהגות המודל בהתאם לצרכים הספציפיים ולתרחישי השימוש שלכם.
+- [Chiến lược đưa ra câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide): Gemini API hỗ trợ đưa ra câu lệnh bằng dữ liệu văn bản, hình ảnh, âm thanh và video, còn được gọi là câu lệnh đa phương thức.
+- [Hướng dẫn hệ thống](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#system-instructions): Hướng dẫn hệ thống giúp bạn điều chỉnh hành vi của mô hình dựa trên nhu cầu và trường hợp sử dụng cụ thể của bạn.
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-עדכון אחרון: 2026-06-22 (שעון UTC).
+Cập nhật lần gần đây nhất: 2026-07-07 UTC.
 
-רוצה לתת לנו משוב?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-22 (שעון UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-07 UTC."],[],[]]

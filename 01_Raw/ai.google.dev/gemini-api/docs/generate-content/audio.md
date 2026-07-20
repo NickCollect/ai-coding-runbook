@@ -1,25 +1,25 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=pt-BR
-fetched_at: 2026-07-06T05:17:03.879679+00:00
-title: "Compreens\u00e3o de \u00e1udio \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=zh-TW
+fetched_at: 2026-07-20T04:40:32.215248+00:00
+title: "\u97f3\u8a0a\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Envie comentários
+提供意見
 
-# Compreensão de áudio
+# 音訊理解
 
-O Gemini pode analisar entradas de áudio e gerar respostas de texto.
+Gemini 可以分析音訊輸入內容，並生成文字回覆。
 
 ### Python
 
@@ -166,25 +166,23 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Visão geral
+## 總覽
 
-O Gemini pode analisar e entender entradas de áudio e gerar respostas de texto para elas,
-permitindo casos de uso como os seguintes:
+Gemini 可以分析及理解音訊輸入內容，並生成文字回覆，
+適用於下列應用情境：
 
-- Descrever, resumir ou responder a perguntas sobre conteúdo de áudio.
-- Forneça uma transcrição e tradução do áudio (conversão de voz em texto).
-- Detectar emoções na fala e na música.
-- Analise segmentos específicos do áudio e forneça carimbos de data/hora.
+- 描述、摘要或回答音訊內容相關問題。
+- 提供音訊的轉錄稿和翻譯 (語音轉文字)。
+- 偵測語音和音樂中的情緒。
+- 分析音訊的特定片段，並提供時間戳記。
 
-No momento, a API Gemini não oferece suporte a casos de uso de transcrição em tempo real.
-Para interações de voz e vídeo em tempo real, consulte a [API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br).
-Para modelos dedicados de conversão de voz em texto com suporte à transcrição em tempo real, use a [API Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text?hl=pt-br).
+Gemini API 目前不支援即時轉錄功能。
+如需即時語音和視訊互動，請參閱 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-tw)。
+如要使用支援即時轉錄的專用語音轉文字模型，請使用 [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=zh-tw)。
 
-## Transcrever voz em texto
+## 將語音轉錄成文字
 
-Este aplicativo de exemplo mostra como pedir à API Gemini para transcrever,
-traduzir e resumir a fala, incluindo carimbos de data/hora e detecção de emoções
-usando [saídas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br).
+這個範例應用程式說明如何提示 Gemini API 轉錄、翻譯及摘要語音內容，包括使用[結構化輸出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)功能偵測時間戳記和情緒。
 
 ### Python
 
@@ -412,28 +410,25 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Você pode pedir para o [AI Studio Build](https://aistudio.google.com/apps?e=0&hl=pt-br) criar um app igual a [este exemplo de app de transcrição](https://aistudio.google.com/apps/bundled/echoscript?hl=pt-br) com apenas um clique.
+只要按一下按鈕，就能提示 [AI Studio Build](https://aistudio.google.com/apps?e=0&hl=zh-tw) 建立應用程式，就像[這個轉錄應用程式範例](https://aistudio.google.com/apps/bundled/echoscript?hl=zh-tw)一樣。
 
-![Um app do Gemini para transcrição de áudio multilíngue](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=pt-br)
+![支援多種語言的語音轉錄 Gemini 應用程式](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=zh-tw)
 
-## Áudio de entrada
+## 輸入音訊
 
-Você pode fornecer dados de áudio ao Gemini das seguintes maneiras:
+你可以透過下列方式向 Gemini 提供音訊資料：
 
-- [Faça upload de um arquivo de áudio](#upload-audio) antes de fazer uma solicitação para
-  `generateContent`.
-- [Transmita dados de áudio inline](#inline-audio) com a solicitação para
-  `generateContent`.
+- 請先[上傳音訊檔案](#upload-audio)，再向 `generateContent` 提出要求。
+- 透過要求將[內嵌音訊資料](#inline-audio)傳遞至 `generateContent`。
 
-Para conhecer outros métodos de entrada de arquivos, consulte o guia [Métodos de entrada de arquivos](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=pt-br).
+如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)」指南。
 
-### Fazer upload de um arquivo de áudio
+### 上傳音訊檔案
 
-Use a [API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br) para fazer upload de um arquivo de áudio.
-Sempre use a API Files quando o tamanho total da solicitação (incluindo arquivos, comando de texto, instruções do sistema etc.) for maior que 20 MB.
+您可以使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳音訊檔。
+如果要求總大小 (包括檔案、文字提示、系統指令等) 超過 20 MB，請一律使用 Files API。
 
-O código a seguir faz upload de um arquivo de áudio e o usa em uma chamada para
-`generateContent`.
+下列程式碼會上傳音訊檔案，然後在呼叫 `generateContent` 時使用該檔案。
 
 ### Python
 
@@ -580,13 +575,11 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-Para saber mais sobre como trabalhar com arquivos de mídia, consulte a
-[API Files](https://ai.google.dev/gemini-api/docs/files?hl=pt-br).
+如要進一步瞭解如何處理媒體檔案，請參閱 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
 
-### Transmitir dados de áudio inline
+### 內嵌傳遞音訊資料
 
-Em vez de fazer upload de um arquivo de áudio, você pode transmitir dados de áudio inline na
-solicitação para `generateContent`:
+您可以將內嵌音訊資料傳遞至 `generateContent`，而非上傳音訊檔案：
 
 ### Python
 
@@ -685,14 +678,14 @@ func main() {
 }
 ```
 
-Alguns lembretes sobre dados de áudio inline:
+使用內嵌音訊資料時，請注意下列事項：
 
-- O tamanho máximo da solicitação é de 20 MB, incluindo comandos de texto, instruções do sistema e arquivos fornecidos inline. Se o tamanho do arquivo fizer com que o *tamanho total da solicitação* exceda 20 MB, use a API Files para [fazer upload de um arquivo de áudio](#upload-audio) para uso na solicitação.
-- Se você estiver usando uma amostra de áudio várias vezes, é mais eficiente [fazer upload de um arquivo de áudio](#upload-audio).
+- 要求大小上限為 20 MB，包括文字提示、系統指令和內嵌提供的檔案。如果檔案大小會導致*要求總大小*超過 20 MB，請使用 Files API [上傳音訊檔案](#upload-audio)，以供要求使用。
+- 如果多次使用音訊樣本，建議[上傳音訊檔案](#upload-audio)，這樣效率更高。
 
-## Acessar uma transcrição
+## 取得轉錄稿
 
-Para receber uma transcrição dos dados de áudio, basta pedir no comando:
+如要取得音訊資料的轉錄稿，只要在提示中提出要求即可：
 
 ### Python
 
@@ -781,13 +774,12 @@ func main() {
 }
 ```
 
-## Consulte os carimbos de data/hora
+## 參考時間戳記
 
-É possível se referir a seções específicas de um arquivo de áudio usando carimbos de data/hora no formato
-`MM:SS`. Por exemplo, o comando a seguir solicita uma transcrição que
+你可以使用 `MM:SS` 格式的時間戳記，參照音訊檔案的特定部分。舉例來說，下列提示會要求轉錄稿
 
-- Começa aos 2 minutos e 30 segundos do início do arquivo.
-- Termina em 3 minutos e 29 segundos desde o início do arquivo.
+- 從檔案開頭算起，2 分 30 秒處開始。
+- 結束時間為檔案開頭算起的 3 分 29 秒。
 
 ### Python
 
@@ -849,10 +841,9 @@ func main() {
 }
 ```
 
-## Contar tokens
+## 計算詞元數
 
-Chame o método `countTokens` para receber uma contagem do número de tokens em um
-arquivo de áudio. Exemplo:
+呼叫 `countTokens` 方法，即可取得音訊檔案中的權杖數量。例如：
 
 ### Python
 
@@ -936,44 +927,41 @@ func main() {
 }
 ```
 
-## Formatos de áudio compatíveis
+## 支援的音訊格式
 
-O Gemini é compatível com os seguintes tipos MIME de formato de áudio:
+Gemini 支援下列音訊格式 MIME 類型：
 
 - WAV - `audio/wav`
 - MP3 - `audio/mp3`
 - AIFF - `audio/aiff`
 - AAC - `audio/aac`
-- OGG Vorbis: `audio/ogg`
+- OGG Vorbis - `audio/ogg`
 - FLAC - `audio/flac`
 
-## Detalhes técnicos sobre áudio
+## 音訊技術詳細資料
 
-- O Gemini representa cada segundo de áudio como 32 tokens. Por exemplo, um minuto de áudio é representado como 1.920 tokens.
-- O Gemini pode "entender" componentes que não são de fala, como cantos de pássaros ou sirenes.
-- O tamanho máximo aceito de dados de áudio em um único comando é de 9,5 horas.
-  O Gemini não limita o *número* de arquivos de áudio em um único comando.No entanto, a duração total combinada de todos os arquivos de áudio em um único comando não pode exceder 9,5 horas.
-- O Gemini reduz a resolução dos arquivos de áudio para 16 Kbps.
-- Se a fonte de áudio tiver vários canais, o Gemini vai combinar todos em um só.
+- Gemini 會將每秒音訊表示為 32 個權杖；舉例來說，一分鐘的音訊會表示為 1,920 個權杖。
+- Gemini 可以「瞭解」非語音成分，例如鳥鳴或警報聲。
+- 單一提示支援的音訊資料長度上限為 9.5 小時。
+  Gemini 不會限制單一提示中的音訊檔案*數量*，但單一提示中所有音訊檔案的總長度不得超過 9.5 小時。
+- Gemini 會將音訊檔案降採樣至 16 Kbps 的資料解析度。
+- 如果音訊來源包含多個聲道，Gemini 會將這些聲道合併為單一聲道。
 
-## A seguir
+## 後續步驟
 
-Este guia mostra como gerar texto em resposta a dados de áudio. Para saber mais, consulte os seguintes recursos:
+本指南說明如何產生回應音訊資料的文字。如要瞭解詳情，請參閱下列資源：
 
-- [Estratégias de comandos de arquivo](https://ai.google.dev/gemini-api/docs/files?hl=pt-br#prompt-guide): a
-  API Gemini aceita comandos com dados de texto, imagem, áudio e vídeo, também
-  conhecidas como comandos multimodais.
-- [Instruções do sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br#system-instructions):
-  Com elas, é possível orientar o comportamento do modelo com base nas suas
-  necessidades e casos de uso específicos.
-- [Orientações de segurança](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=pt-br): às vezes, os modelos de IA generativa produzem resultados inesperados, como imprecisos, tendenciosos ou ofensivos. O pós-processamento e a avaliação humana são essenciais para limitar o risco de danos causados por essas saídas.
+- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也就是多模態提示。
+- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
+  系統指令可根據特定需求和用途，引導模型行為。
+- [安全指引](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：有時生成式 AI 模型會產生出乎意料的輸出內容，例如不準確、有偏見或令人反感的內容。後續處理和人工評估是不可或缺的步驟，有助於降低這類輸出內容造成危害的風險。
 
-Envie comentários
+提供意見
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Última atualização 2026-06-23 UTC.
+上次更新時間：2026-06-23 (世界標準時間)。
 
-Quer enviar seu feedback?
+想進一步說明嗎？
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-23 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-23 (世界標準時間)。"],[],[]]
