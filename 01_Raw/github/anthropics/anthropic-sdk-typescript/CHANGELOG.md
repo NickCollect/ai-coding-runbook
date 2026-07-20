@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.112.3 (2026-07-17)
+
+Full Changelog: [sdk-v0.112.2...sdk-v0.112.3](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.2...sdk-v0.112.3)
+
+### Chores
+
+* **docs:** small updates ([79fd6c7](https://github.com/anthropics/anthropic-sdk-typescript/commit/79fd6c7dd046e066965aa7ab9897695c174f88bb))
+
+## 0.112.2 (2026-07-17)
+
+Full Changelog: [sdk-v0.112.1...sdk-v0.112.2](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.1...sdk-v0.112.2)
+
+### Chores
+
+* **client:** docs updates ([fdb3a65](https://github.com/anthropics/anthropic-sdk-typescript/commit/fdb3a65501a809b4e949131f2097dc0d84e01cc7))
+
+## 0.112.1 (2026-07-16)
+
+Full Changelog: [sdk-v0.112.0...sdk-v0.112.1](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.112.0...sdk-v0.112.1)
+
+## 0.112.0 (2026-07-16)
+
+Full Changelog: [sdk-v0.111.0...sdk-v0.112.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.111.0...sdk-v0.112.0)
+
+### Features
+
+* **api:** add support for MCP Tunnels ([597ac41](https://github.com/anthropics/anthropic-sdk-typescript/commit/597ac4181f318e46fb974e716467648587e95362))
+
 ## 0.111.0 (2026-07-10)
 
 Full Changelog: [sdk-v0.110.0...sdk-v0.111.0](https://github.com/anthropics/anthropic-sdk-typescript/compare/sdk-v0.110.0...sdk-v0.111.0)

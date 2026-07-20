@@ -1,5 +1,58 @@
 # Changelog
 
+## 0.2.123
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.215
+
+## 0.2.122
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.214
+
+## 0.2.121
+
+### Bug Fixes
+
+- **Fixed argv flag injection via `resume` and `session_id` options**: `--resume` and `--session-id` are now passed as single `=`-joined argv tokens (e.g. `--resume=<value>`) so that a dash-prefixed value is never misinterpreted as an independent CLI flag (#1123)
+
+### Internal/Other Changes
+
+- **Hardened build scripts against command injection via `CLAUDE_CLI_VERSION`**: Added version validation (`_cli_version_validation.py`) and eliminated shell interpolation in `download_cli.py` and `update_cli_version.py` so that a malformed version string cannot inject shell or Python code during builds (#1117)
+- CI now lints and typechecks `scripts/` alongside `src/` and `tests/`
+- CI CLI install steps now fail properly when `curl` errors (added `shell: bash` for `pipefail`)
+- Updated bundled Claude CLI to version 2.1.212
+
+## 0.2.120
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.211
+
+## 0.2.119
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.210
+
+## 0.2.118
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.209
+
+## 0.2.117
+
+### Bug Fixes
+
+- **Escaped untrusted fields in Slack issue notification workflow**: Fixed the Slack notification workflow to properly escape issue titles and usernames using `jq` instead of bash substitution, preventing malformed JSON payloads and mrkdwn injection from specially crafted issue titles (#1116)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.208
+
 ## 0.2.116
 
 ### Internal/Other Changes
