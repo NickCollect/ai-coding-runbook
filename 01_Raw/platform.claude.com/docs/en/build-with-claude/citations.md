@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-07-13T04:25:36.940315+00:00
+fetched_at: 2026-07-20T04:31:15.346932+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,12 +11,12 @@ Ground Claude's responses in your source documents. Citations return the exact p
 ---
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 
-All [active models](/docs/en/about-claude/models/overview) support citations, with the exception of Claude Haiku 3.
+All [active models](/docs/en/about-claude/models/overview) support citations.
 
 <Tip>
   Share your feedback and suggestions about the citations feature using the [citations feedback form](https://forms.gle/9n9hSrKnKe3rpowH9).
@@ -210,30 +210,30 @@ The following example shows how to enable citations on a plain text document wit
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   PlainTextSource source = PlainTextSource.builder()
-    .data("The grass is green. The sky is blue.")
-    .build();
+      .data("The grass is green. The sky is blue.")
+      .build();
 
   DocumentBlockParam documentParam = DocumentBlockParam.builder()
-    .source(source)
-    .title("My Document")
-    .context("This is a trustworthy document.")
-    .citations(CitationsConfigParam.builder().enabled(true).build())
-    .build();
+      .source(source)
+      .title("My Document")
+      .context("This is a trustworthy document.")
+      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .build();
 
   TextBlockParam textBlockParam = TextBlockParam.builder()
-    .text("What color is the grass and sky?")
-    .build();
+      .text("What color is the grass and sky?")
+      .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_8)
-    .maxTokens(1024)
-    .addUserMessageOfBlockParams(
-      List.of(
-        ContentBlockParam.ofDocument(documentParam),
-        ContentBlockParam.ofText(textBlockParam)
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+          List.of(
+              ContentBlockParam.ofDocument(documentParam),
+              ContentBlockParam.ofText(textBlockParam)
+          )
       )
-    )
-    .build();
+      .build();
 
   Message message = client.messages().create(params);
   System.out.println(message);
@@ -340,7 +340,7 @@ Integrate citations with Claude in these steps:
   <Step title="Claude provides cited response">
     * Responses may now include multiple text blocks where each text block can contain a claim that Claude is making and a list of citations that support the claim.
 
-    * Citations reference specific locations in source documents. The format of these citations are dependent on the type of document being cited from.
+    * Citations reference specific locations in source documents. The format of these citations is dependent on the type of document being cited from.
 
       * **For PDFs:** Citations include the page number range (1-indexed).
       * **For plain text documents:** Citations include the character index range (0-indexed).
@@ -358,7 +358,7 @@ Integrate citations with Claude in these steps:
   For example, if you want Claude to be able to cite specific sentences from your RAG chunks, you should put each RAG chunk into a plain text document. Otherwise, if you do not want any further chunking to be done, or if you want to customize any additional chunking, you can put RAG chunks into custom content document(s).
 </Tip>
 
-### Citable vs non-citable content
+### Citable versus non-citable content
 
 * Text found within a document's `source` content can be cited from.
 * `title` and `context` are optional fields that are passed to the model but not used toward cited content.
@@ -374,7 +374,7 @@ Integrate citations with Claude in these steps:
 ### Token costs
 
 * Enabling citations incurs a slight increase in input tokens because of system prompt additions and document chunking.
-* However, the citations feature is very efficient with output tokens. Under the hood, the model is outputting citations in a standardized format that are then parsed into cited text and document location indices. The `cited_text` field is provided for convenience and does not count toward output tokens.
+* However, the citations feature is very efficient with output tokens. Internally, the model outputs citations in a standardized format that are then parsed into cited text and document location indices. The `cited_text` field is provided for convenience and does not count toward output tokens.
 * When passed back in subsequent conversation turns, `cited_text` is also not counted toward input tokens.
 
 ### Feature compatibility
@@ -595,29 +595,29 @@ The citation blocks generated in responses cannot be cached directly, but the so
 
   // Long document content (for example, technical documentation)
   String longDocument =
-    "This is a very long document with thousands of words..."
-      + " ... ".repeat(1000); // Minimum cacheable length
+      "This is a very long document with thousands of words..."
+          + " ... ".repeat(1000); // Minimum cacheable length
 
   DocumentBlockParam documentParam = DocumentBlockParam.builder()
-    .source(PlainTextSource.builder().data(longDocument).build())
-    .citations(CitationsConfigParam.builder().enabled(true).build())
-    .cacheControl(CacheControlEphemeral.builder().build()) // Cache the document content
-    .build();
+      .source(PlainTextSource.builder().data(longDocument).build())
+      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .cacheControl(CacheControlEphemeral.builder().build()) // Cache the document content
+      .build();
 
   TextBlockParam textBlockParam = TextBlockParam.builder()
-    .text("What does this document say about API features?")
-    .build();
+      .text("What does this document say about API features?")
+      .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_8)
-    .maxTokens(1024)
-    .addUserMessageOfBlockParams(
-      List.of(
-        ContentBlockParam.ofDocument(documentParam),
-        ContentBlockParam.ofText(textBlockParam)
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+          List.of(
+              ContentBlockParam.ofDocument(documentParam),
+              ContentBlockParam.ofText(textBlockParam)
+          )
       )
-    )
-    .build();
+      .build();
 
   Message message = client.messages().create(params);
   System.out.println(message);
@@ -1004,7 +1004,7 @@ Plain text documents are automatically chunked into sentences. You can provide t
 
 ### PDF documents
 
-PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text will not be citable.
+PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text are not citable.
 
 <Tabs>
   <Tab title="Base64">
@@ -1210,22 +1210,22 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       String pdfBase64 = Base64.getEncoder().encodeToString(pdfBytes);
 
       DocumentBlockParam documentParam = DocumentBlockParam.builder()
-        .source(Base64PdfSource.builder().data(pdfBase64).build())
-        .title("Document Title")
-        .context("Context about the document that will not be cited from")
-        .citations(CitationsConfigParam.builder().enabled(true).build())
-        .build();
+          .source(Base64PdfSource.builder().data(pdfBase64).build())
+          .title("Document Title")
+          .context("Context about the document that will not be cited from")
+          .citations(CitationsConfigParam.builder().enabled(true).build())
+          .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024)
-        .addUserMessageOfBlockParams(
-          List.of(
-            ContentBlockParam.ofDocument(documentParam),
-            ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024)
+          .addUserMessageOfBlockParams(
+              List.of(
+                  ContentBlockParam.ofDocument(documentParam),
+                  ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+              )
           )
-        )
-        .build();
+          .build();
 
       Message message = client.messages().create(params);
       System.out.println(message);
@@ -1486,24 +1486,24 @@ PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PD
       AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
       DocumentBlockParam documentParam = DocumentBlockParam.builder()
-        .source(UrlPdfSource.builder()
-          .url("https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf")
-          .build())
-        .title("Document Title")
-        .context("Context about the document that will not be cited from")
-        .citations(CitationsConfigParam.builder().enabled(true).build())
-        .build();
+          .source(UrlPdfSource.builder()
+              .url("https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf")
+              .build())
+          .title("Document Title")
+          .context("Context about the document that will not be cited from")
+          .citations(CitationsConfigParam.builder().enabled(true).build())
+          .build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
-        .maxTokens(1024)
-        .addUserMessageOfBlockParams(
-          List.of(
-            ContentBlockParam.ofDocument(documentParam),
-            ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+          .model(Model.CLAUDE_OPUS_4_8)
+          .maxTokens(1024)
+          .addUserMessageOfBlockParams(
+              List.of(
+                  ContentBlockParam.ofDocument(documentParam),
+                  ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+              )
           )
-        )
-        .build();
+          .build();
 
       Message message = client.messages().create(params);
       System.out.println(message);
@@ -2041,29 +2041,29 @@ Custom content documents give you control over citation granularity. No addition
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   DocumentBlockParam documentParam = DocumentBlockParam.builder()
-    .source(ContentBlockSource.builder()
-      .contentOfBlockSource(
-        List.of(
-          ContentBlockSourceContent.ofText(TextBlockParam.builder().text("First chunk").build()),
-          ContentBlockSourceContent.ofText(TextBlockParam.builder().text("Second chunk").build())
-        )
-      )
-      .build())
-    .title("Document Title")
-    .context("Context about the document that will not be cited from")
-    .citations(CitationsConfigParam.builder().enabled(true).build())
-    .build();
+      .source(ContentBlockSource.builder()
+          .contentOfBlockSource(
+              List.of(
+                  ContentBlockSourceContent.ofText(TextBlockParam.builder().text("First chunk").build()),
+                  ContentBlockSourceContent.ofText(TextBlockParam.builder().text("Second chunk").build())
+              )
+          )
+          .build())
+      .title("Document Title")
+      .context("Context about the document that will not be cited from")
+      .citations(CitationsConfigParam.builder().enabled(true).build())
+      .build();
 
   MessageCreateParams params = MessageCreateParams.builder()
-    .model(Model.CLAUDE_OPUS_4_8)
-    .maxTokens(1024)
-    .addUserMessageOfBlockParams(
-      List.of(
-        ContentBlockParam.ofDocument(documentParam),
-        ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(1024)
+      .addUserMessageOfBlockParams(
+          List.of(
+              ContentBlockParam.ofDocument(documentParam),
+              ContentBlockParam.ofText(TextBlockParam.builder().text("Summarize this document.").build())
+          )
       )
-    )
-    .build();
+      .build();
 
   Message message = client.messages().create(params);
   System.out.println(message);

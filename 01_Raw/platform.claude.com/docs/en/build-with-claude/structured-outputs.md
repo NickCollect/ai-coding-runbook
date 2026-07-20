@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/structured-outputs
-fetched_at: 2026-07-13T04:25:36.972799+00:00
+fetched_at: 2026-07-20T04:31:15.438029+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ You can use these features independently or together in the same request.
 </Note>
 
 <Note>
-  This feature qualifies for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 <Tip>

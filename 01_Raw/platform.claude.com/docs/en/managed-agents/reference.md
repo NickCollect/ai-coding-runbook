@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/reference
-fetched_at: 2026-07-13T04:25:38.854846+00:00
+fetched_at: 2026-07-20T04:31:17.355425+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,35 +33,35 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
   </Tab>
 
   <Tab title="Agent events">
-    | Type                             | Description                                                                                                         |
-    | -------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-    | `agent.message`                  | Agent response containing text content blocks.                                                                      |
-    | `agent.thinking`                 | Agent thinking content, emitted separately from messages.                                                           |
-    | `agent.tool_use`                 | Agent invokes a pre-built agent tool (bash, file operations, and so on).                                            |
-    | `agent.tool_result`              | Result of a pre-built agent tool execution.                                                                         |
-    | `agent.mcp_tool_use`             | Agent invokes an MCP server tool.                                                                                   |
-    | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                    |
-    | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                             |
-    | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                       |
-    | `agent.thread_message_received`  | In a [multi-agent](/docs/en/managed-agents/multi-agent) session, an agent delivered its result to the coordinator.  |
-    | `agent.thread_message_sent`      | In a [multi-agent](/docs/en/managed-agents/multi-agent) session, the coordinator sent a follow-up to another agent. |
+    | Type                             | Description                                                                                                                     |
+    | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+    | `agent.message`                  | Agent response containing text content blocks.                                                                                  |
+    | `agent.thinking`                 | Agent thinking content, emitted separately from messages.                                                                       |
+    | `agent.tool_use`                 | Agent invokes a pre-built agent tool (bash, file operations, and so on).                                                        |
+    | `agent.tool_result`              | Result of a pre-built agent tool execution.                                                                                     |
+    | `agent.mcp_tool_use`             | Agent invokes an MCP server tool.                                                                                               |
+    | `agent.mcp_tool_result`          | Result of an MCP tool execution.                                                                                                |
+    | `agent.custom_tool_use`          | Agent invokes one of your custom tools. Respond with a `user.custom_tool_result` event.                                         |
+    | `agent.thread_context_compacted` | Conversation history was compacted to fit the context window.                                                                   |
+    | `agent.thread_message_received`  | In a [multiagent](/docs/en/managed-agents/multiagent-orchestration) session, an agent delivered its result to the coordinator.  |
+    | `agent.thread_message_sent`      | In a [multiagent](/docs/en/managed-agents/multiagent-orchestration) session, the coordinator sent a follow-up to another agent. |
   </Tab>
 
   <Tab title="Session events">
-    | Type                                | Description                                                                                                                  |
-    | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-    | `session.status_running`            | Agent is actively processing.                                                                                                |
-    | `session.status_idle`               | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped.         |
-    | `session.status_rescheduled`        | A transient error occurred and the session is retrying automatically.                                                        |
-    | `session.status_terminated`         | Session ended because of an unrecoverable error.                                                                             |
-    | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                     |
-    | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.    |
-    | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                  |
-    | `session.thread_created`            | A [multi-agent](/docs/en/managed-agents/multi-agent) thread was created.                                                     |
-    | `session.thread_status_running`     | A [multi-agent](/docs/en/managed-agents/multi-agent) thread started activity.                                                |
-    | `session.thread_status_idle`        | A [multi-agent](/docs/en/managed-agents/multi-agent) thread finished its turn and is awaiting input. Includes `stop_reason`. |
-    | `session.thread_status_rescheduled` | A [multi-agent](/docs/en/managed-agents/multi-agent) thread hit a transient error and is retrying automatically.             |
-    | `session.thread_status_terminated`  | A [multi-agent](/docs/en/managed-agents/multi-agent) thread was archived or reached a terminal error.                        |
+    | Type                                | Description                                                                                                                              |
+    | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+    | `session.status_running`            | Agent is actively processing.                                                                                                            |
+    | `session.status_idle`               | Agent finished its current task and is waiting for input. Includes a `stop_reason` indicating why the agent stopped.                     |
+    | `session.status_rescheduled`        | A transient error occurred and the session is retrying automatically.                                                                    |
+    | `session.status_terminated`         | Session ended because of an unrecoverable error.                                                                                         |
+    | `session.deleted`                   | Session was deleted. Terminates any active event stream; no further events are emitted for this session.                                 |
+    | `session.updated`                   | Session update request changed at least one field. Includes only the fields that changed. Updates apply on the next turn.                |
+    | `session.error`                     | An error occurred during processing. Includes a typed `error` object with a `retry_status`.                                              |
+    | `session.thread_created`            | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread was created.                                                     |
+    | `session.thread_status_running`     | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread started activity.                                                |
+    | `session.thread_status_idle`        | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread finished its turn and is awaiting input. Includes `stop_reason`. |
+    | `session.thread_status_rescheduled` | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread hit a transient error and is retrying automatically.             |
+    | `session.thread_status_terminated`  | A [multiagent](/docs/en/managed-agents/multiagent-orchestration) thread was archived or reached a terminal error.                        |
   </Tab>
 
   <Tab title="Span events">
@@ -77,9 +77,9 @@ Persisted event type strings follow a `{domain}.{action}` naming convention; the
   </Tab>
 
   <Tab title="System events">
-    | Type             | Description                                                                        |
-    | ---------------- | ---------------------------------------------------------------------------------- |
-    | `system.message` | Update the agent's system prompt between turns. Only supported on Claude Opus 4.8. |
+    | Type             | Description                                                                                                                                           |
+    | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+    | `system.message` | Update the agent's system prompt between turns. Supported on Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8. |
   </Tab>
 
   <Tab title="Event deltas">

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/vision
-fetched_at: 2026-07-06T05:04:24.130313+00:00
+fetched_at: 2026-07-20T04:31:16.290671+00:00
 fetch_method: mintlify_md
 ---
 
@@ -858,40 +858,365 @@ See [Messages API examples](/docs/en/api/messages/create) for more example code 
 
 You can include multiple images in a single request, and Claude analyzes them jointly. This is useful for comparing images, asking about differences, or working with a sequence such as pages of a document. When sending several images, introduce each one with a short text label (`Image 1:`, `Image 2:`, and so on) so you can refer to them by name in your prompt and in follow-up turns.
 
-```python Python
-client = anthropic.Anthropic()
-message = client.messages.create(
-    model="claude-opus-4-8",
-    max_tokens=1024,
-    messages=[
+<CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 1024,
+      "messages": [
         {
-            "role": "user",
-            "content": [
-                {"type": "text", "text": "Image 1:"},
-                {
-                    "type": "image",
-                    "source": {
-                        "type": "base64",
-                        "media_type": "image/png",
-                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC",
-                    },
-                },
-                {"type": "text", "text": "Image 2:"},
-                {
-                    "type": "image",
-                    "source": {
-                        "type": "base64",
-                        "media_type": "image/png",
-                        "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC",
-                    },
-                },
-                {"type": "text", "text": "How are these images different?"},
-            ],
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": "Image 1:"
+            },
+            {
+              "type": "image",
+              "source": {
+                "type": "base64",
+                "media_type": "image/png",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+              }
+            },
+            {
+              "type": "text",
+              "text": "Image 2:"
+            },
+            {
+              "type": "image",
+              "source": {
+                "type": "base64",
+                "media_type": "image/png",
+                "data": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+              }
+            },
+            {
+              "type": "text",
+              "text": "How are these images different?"
+            }
+          ]
         }
-    ],
-)
-print(message)
-```
+      ]
+    }'
+  ```
+
+  ```bash CLI
+  ant messages create <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 1024
+  messages:
+    - role: user
+      content:
+        - type: text
+          text: "Image 1:"
+        - type: image
+          source:
+            type: base64
+            media_type: image/png
+            data: iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC
+        - type: text
+          text: "Image 2:"
+        - type: image
+          source:
+            type: base64
+            media_type: image/png
+            data: iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC
+        - type: text
+          text: How are these images different?
+  YAML
+  ```
+
+  ```python Python
+  image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+  image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
+  client = anthropic.Anthropic()
+  message = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=1024,
+      messages=[
+          {
+              "role": "user",
+              "content": [
+                  {"type": "text", "text": "Image 1:"},
+                  {
+                      "type": "image",
+                      "source": {
+                          "type": "base64",
+                          "media_type": "image/png",
+                          "data": image1_data,
+                      },
+                  },
+                  {"type": "text", "text": "Image 2:"},
+                  {
+                      "type": "image",
+                      "source": {
+                          "type": "base64",
+                          "media_type": "image/png",
+                          "data": image2_data,
+                      },
+                  },
+                  {"type": "text", "text": "How are these images different?"},
+              ],
+          }
+      ],
+  )
+  print(message)
+  ```
+
+  ```typescript TypeScript
+  const anthropic = new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY
+  });
+
+  const image1Data =
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+  const image2Data =
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+  const message = await anthropic.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: "Image 1:"
+          },
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: "image/png",
+              data: image1Data
+            }
+          },
+          {
+            type: "text",
+            text: "Image 2:"
+          },
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: "image/png",
+              data: image2Data
+            }
+          },
+          {
+            type: "text",
+            text: "How are these images different?"
+          }
+        ]
+      }
+    ]
+  });
+
+  console.log(message);
+  ```
+
+  ```csharp C#
+  AnthropicClient client = new();
+
+  string image1Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+  string image2Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+  var message = await client.Messages.Create(new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 1024,
+      Messages =
+      [
+          new()
+          {
+              Role = Role.User,
+              Content = new MessageParamContent(new List<ContentBlockParam>
+              {
+                  new ContentBlockParam(new TextBlockParam("Image 1:")),
+                  new ContentBlockParam(new ImageBlockParam(
+                      new ImageBlockParamSource(new Base64ImageSource()
+                      {
+                          Data = image1Data,
+                          MediaType = MediaType.ImagePng,
+                      })
+                  )),
+                  new ContentBlockParam(new TextBlockParam("Image 2:")),
+                  new ContentBlockParam(new ImageBlockParam(
+                      new ImageBlockParamSource(new Base64ImageSource()
+                      {
+                          Data = image2Data,
+                          MediaType = MediaType.ImagePng,
+                      })
+                  )),
+                  new ContentBlockParam(new TextBlockParam("How are these images different?")),
+              }),
+          }
+      ]
+  });
+
+  Console.WriteLine(message);
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  image1Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+  image2Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
+  message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 1024,
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(
+  			anthropic.NewTextBlock("Image 1:"),
+  			anthropic.NewImageBlockBase64("image/png", image1Data),
+  			anthropic.NewTextBlock("Image 2:"),
+  			anthropic.NewImageBlockBase64("image/png", image2Data),
+  			anthropic.NewTextBlock("How are these images different?"),
+  		),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+
+  fmt.Println(message)
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  String image1Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC";
+  String image2Data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
+
+  List<ContentBlockParam> contentBlockParams = List.of(
+      ContentBlockParam.ofText(TextBlockParam.builder().text("Image 1:").build()),
+      ContentBlockParam.ofImage(
+          ImageBlockParam.builder()
+              .source(
+                  Base64ImageSource.builder()
+                      .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+                      .data(image1Data)
+                      .build()
+              )
+              .build()
+      ),
+      ContentBlockParam.ofText(TextBlockParam.builder().text("Image 2:").build()),
+      ContentBlockParam.ofImage(
+          ImageBlockParam.builder()
+              .source(
+                  Base64ImageSource.builder()
+                      .mediaType(Base64ImageSource.MediaType.IMAGE_PNG)
+                      .data(image2Data)
+                      .build()
+              )
+              .build()
+      ),
+      ContentBlockParam.ofText(
+          TextBlockParam.builder().text("How are these images different?").build()
+      )
+  );
+
+  Message message = client
+      .messages()
+      .create(
+          MessageCreateParams.builder()
+              .model(Model.CLAUDE_OPUS_4_8)
+              .maxTokens(1024)
+              .addUserMessageOfBlockParams(contentBlockParams)
+              .build()
+      );
+
+  IO.println(message);
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $image1Data = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC';
+  $image2Data = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC';
+
+  $message = $client->messages->create(
+      maxTokens: 1024,
+      messages: [
+          [
+              'role' => 'user',
+              'content' => [
+                  ['type' => 'text', 'text' => 'Image 1:'],
+                  [
+                      'type' => 'image',
+                      'source' => [
+                          'type' => 'base64',
+                          'media_type' => 'image/png',
+                          'data' => $image1Data,
+                      ],
+                  ],
+                  ['type' => 'text', 'text' => 'Image 2:'],
+                  [
+                      'type' => 'image',
+                      'source' => [
+                          'type' => 'base64',
+                          'media_type' => 'image/png',
+                          'data' => $image2Data,
+                      ],
+                  ],
+                  ['type' => 'text', 'text' => 'How are these images different?'],
+              ],
+          ],
+      ],
+      model: 'claude-opus-4-8',
+  );
+
+  echo $message;
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
+  image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
+
+  message = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 1024,
+    messages: [
+      {
+        role: "user",
+        content: [
+          { type: "text", text: "Image 1:" },
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: "image/png",
+              data: image1_data
+            }
+          },
+          { type: "text", text: "Image 2:" },
+          {
+            type: "image",
+            source: {
+              type: "base64",
+              media_type: "image/png",
+              data: image2_data
+            }
+          },
+          { type: "text", text: "How are these images different?" }
+        ]
+      }
+    ]
+  )
+
+  puts message
+  ```
+</CodeGroup>
 
 In a multi-turn conversation, add new images in later `user` turns the same way. Claude has access to every image from earlier turns, so follow-up questions such as "Are these similar to the first two?" work without including the earlier images again in the new turn's content.
 
@@ -940,16 +1265,18 @@ Each model has a maximum native image resolution, expressed as a long-edge limit
 
 High-resolution support is automatic on the listed models and requires no beta header or client-side opt-in.
 
-The following table shows the visual-token cost for several image sizes on each tier:
+The following table shows the downsized resolution and visual-token cost for several image sizes on each tier:
 
-| Image size                     | Standard-tier tokens                                                                                                                                         | High-resolution-tier tokens                                                                                                                              |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200x200 px (0.04 megapixels)   | 64                                                                                                                                                           | 64                                                                                                                                                       |
-| 1000x1000 px (1 megapixel)     | 1296                                                                                                                                                         | 1296                                                                                                                                                     |
-| 1092x1092 px (1.19 megapixels) | 1521                                                                                                                                                         | 1521                                                                                                                                                     |
-| 1920x1080 px (2.07 megapixels) | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1560</Tooltip> | 2691                                                                                                                                                     |
-| 2000x1500 px (3 megapixels)    | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1564</Tooltip> | 3888                                                                                                                                                     |
-| 3840x2160 px (8.29 megapixels) | <Tooltip tooltipContent="Exceeds the standard tier's resolution limit; the image is downscaled before processing, which caps the token cost.">1560</Tooltip> | <Tooltip tooltipContent="Exceeds the high-resolution tier's limit; the image is downscaled before processing, which caps the token cost.">4784</Tooltip> |
+| Image size                     | Standard tier: downsized to | Standard tier: tokens | High-resolution tier: downsized to | High-resolution tier: tokens |
+| ------------------------------ | --------------------------- | --------------------- | ---------------------------------- | ---------------------------- |
+| 200x200 px (0.04 megapixels)   | Not resized                 | 64                    | Not resized                        | 64                           |
+| 1000x1000 px (1 megapixel)     | Not resized                 | 1296                  | Not resized                        | 1296                         |
+| 1092x1092 px (1.19 megapixels) | Not resized                 | 1521                  | Not resized                        | 1521                         |
+| 1920x1080 px (2.07 megapixels) | 1456x819 px                 | 1560                  | Not resized                        | 2691                         |
+| 2000x1500 px (3 megapixels)    | 1269x952 px                 | 1564                  | Not resized                        | 3888                         |
+| 3840x2160 px (8.29 megapixels) | 1456x819 px                 | 1560                  | 2576x1449 px                       | 4784                         |
+
+When an image is downsized, Claude scales it to the largest size that fits the tier's limits while preserving its aspect ratio. This caps the token cost. For the precise rule and a reference implementation, see [How Claude resizes and pads images](/docs/en/build-with-claude/vision-coordinates#how-claude-resizes-and-pads-images).
 
 To estimate cost, multiply the token count by the [per-token price of the model](https://claude.com/pricing) you're using. For example, at Claude Haiku 4.5's $1 per million input tokens (standard tier), the 1000×1000 image costs about $1.30 per thousand images. At Claude Opus 4.8's $5 per million (high-resolution tier), the same image costs about $6.48 per thousand and the 4K image about $23.92 per thousand.
 

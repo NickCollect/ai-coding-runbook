@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
-fetched_at: 2026-07-06T05:04:22.243229+00:00
+fetched_at: 2026-07-20T04:31:15.107815+00:00
 fetch_method: mintlify_md
 ---
 
@@ -60,10 +60,10 @@ The most common stop reason. Indicates Claude finished its response naturally.
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello!"}]
@@ -200,16 +200,16 @@ The most common stop reason. Indicates Claude finished its response naturally.
 </CodeGroup>
 
 <Accordion title="Empty responses with end_turn">
-  Sometimes Claude returns an empty response (exactly 2-3 tokens with no content) with `stop_reason: "end_turn"`. This typically happens when Claude interprets that the assistant turn is complete, particularly after tool results.
+  Sometimes Claude returns an empty response (exactly 2–3 tokens with no content) with `stop_reason: "end_turn"`. This typically occurs when Claude interprets that the assistant turn is complete, particularly after tool results.
 
   **Common causes:**
 
   * Adding text blocks immediately after tool results (Claude learns to expect the user to always insert text after tool results, so it ends its turn to follow the pattern)
-  * Sending Claude's completed response back without adding anything (Claude already decided it's done, so it will remain done)
+  * Sending Claude's completed response back without adding anything (Claude already determined it's done, so it will remain done)
 
   **How to prevent empty responses:**
 
-  <CodeGroup>
+  <CodeGroup exclude="shell">
     ```python Python
     # INCORRECT: Adding text immediately after tool_result
     messages = [
@@ -531,7 +531,7 @@ The most common stop reason. Indicates Claude finished its response naturally.
 
   If you still get empty responses after fixing the message structure, add a continuation prompt in a new user message rather than retrying with the empty response:
 
-  <CodeGroup>
+  <CodeGroup exclude="shell">
     ```python Python
     def handle_empty_response(client, messages):
         response = client.messages.create(
@@ -738,10 +738,10 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 10,
       "messages": [{"role": "user", "content": "Explain quantum physics"}]
@@ -884,9 +884,9 @@ Claude stopped because it reached the `max_tokens` limit specified in your reque
 </CodeGroup>
 
 <Accordion title="Incomplete tool use blocks">
-  If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
+  If Claude's response is cut off because it hit the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
-  <CodeGroup>
+  <CodeGroup exclude="shell:cURL">
     ```bash CLI
     RESPONSE=$(ant messages create --max-tokens 1024 \
       --format jsonl < request.yaml)
@@ -1056,10 +1056,10 @@ Claude encountered one of your custom stop sequences.
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "stop_sequences": ["END", "STOP"],
@@ -1192,7 +1192,7 @@ Claude encountered one of your custom stop sequences.
 
 ### tool\_use
 
-Claude is calling a tool and expects you to execute it.
+Claude is calling a tool and expects you to run it.
 
 <Note>
   For most tool use implementations, use the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner), which automatically handles tool execution, result formatting, and conversation management.
@@ -1201,10 +1201,10 @@ Claude is calling a tool and expects you to execute it.
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "tools": [{
@@ -1535,7 +1535,7 @@ Leaving out a `tool_result`, or putting one after other content, fails earlier w
 
 ### pause\_turn
 
-Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](/docs/en/agents-and-tools/tool-use/server-tools) like web search or web fetch. The default limit is 10 iterations per request.
+Returned when the server-side sampling loop reaches its iteration limit while executing [server tools](/docs/en/agents-and-tools/tool-use/server-tools) such as web search or web fetch. The default limit is 10 iterations per request.
 
 When this happens, the response may contain a `server_tool_use` block without a corresponding result block. To let Claude finish processing, continue the conversation by sending the response back as-is. A response that leaves a client `tool_use` block waiting on you never has a `stop_reason` of `pause_turn`: when Claude stops to call your tools, `stop_reason` is [`tool_use`](#tool-use), and you continue it by sending the client `tool_result` blocks instead of the response itself.
 
@@ -1544,10 +1544,10 @@ When this happens, the response may contain a `server_tool_use` block without a 
   # The SDKs handle continuation directly. With cURL, inspect stop_reason
   # on the response and re-POST with the assistant content appended.
   curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 4096,
       "tools": [{"type": "web_search_20250305", "name": "web_search"}],
@@ -1763,10 +1763,10 @@ Claude declined to generate a response. On Claude Fable 5, safety classifiers re
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "[Unsafe request]"}]
@@ -1902,7 +1902,7 @@ Claude declined to generate a response. On Claude Fable 5, safety classifiers re
 </CodeGroup>
 
 <Tip>
-  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 (deprecated; see [Model deprecations](/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 </Tip>
 
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.
@@ -1920,10 +1920,10 @@ Claude stopped because it reached the model's context window limit. This lets yo
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 20000,
       "messages": [{"role": "user", "content": "Large input that uses most of context window..."}]
@@ -2067,7 +2067,7 @@ Claude stopped because it reached the model's context window limit. This lets yo
 
 Make it a habit to check the `stop_reason` in your response handling logic:
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def handle_response(response):
       if response.stop_reason == "tool_use":
@@ -2200,7 +2200,7 @@ Make it a habit to check the `stop_reason` in your response handling logic:
 
 When a response is truncated because of token limits or the context window, append a notice so the reader knows the output is incomplete. To continue generating from where the response left off instead, see [Ensuring complete responses](#ensuring-complete-responses).
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def handle_truncated_response(response):
       if response.stop_reason in ["max_tokens", "model_context_window_exceeded"]:
@@ -2318,7 +2318,7 @@ When a response is truncated because of token limits or the context window, appe
 
 When using [server tools](/docs/en/agents-and-tools/tool-use/server-tools), the API may return `pause_turn` if the server-side sampling loop reaches its iteration limit (default 10). Handle this by continuing the conversation:
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def handle_server_tool_conversation(client, user_query, tools, max_continuations=5):
       """
@@ -2589,10 +2589,10 @@ It's important to distinguish between `stop_reason` values and actual errors:
   # cURL exits non-zero on HTTP errors with --fail-with-body; inspect
   # $? for errors and stop_reason for successful responses.
   curl --fail-with-body -sS https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello!"}]
@@ -2800,10 +2800,10 @@ When using streaming, `stop_reason` is:
   ```bash cURL
   # The message_delta event in the SSE stream carries stop_reason.
   curl --no-buffer https://api.anthropic.com/v1/messages \
-    --header "x-api-key: $ANTHROPIC_API_KEY" \
-    --header "anthropic-version: 2023-06-01" \
-    --header "content-type: application/json" \
-    --data '{
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
       "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "stream": true,
@@ -2961,7 +2961,7 @@ When using streaming, `stop_reason` is:
   **Simpler with tool runner:** The following example shows manual tool handling. For most use cases, the [tool runner](/docs/en/agents-and-tools/tool-use/tool-runner) automatically handles tool execution with much less code.
 </Tip>
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def complete_tool_workflow(client, user_query, tools):
       messages = [{"role": "user", "content": user_query}]
@@ -3170,7 +3170,7 @@ When using streaming, `stop_reason` is:
 
 ### Ensuring complete responses
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def get_complete_response(client, prompt, max_attempts=3):
       messages = [{"role": "user", "content": prompt}]
@@ -3402,7 +3402,7 @@ When using streaming, `stop_reason` is:
 
 With the `model_context_window_exceeded` stop reason, you can request the maximum possible tokens without calculating input size:
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   def get_max_possible_tokens(client, prompt):
       """

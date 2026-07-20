@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/external_keys/delete
-fetched_at: 2026-06-15T06:17:51.761719+00:00
+fetched_at: 2026-07-20T04:31:25.137303+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ The request is rejected if any workspace still references this config.
 
 - `external_key_id: string`
 
-  ID of the External Key to delete.
+  ID of the External Key.
 
 ### Returns
 

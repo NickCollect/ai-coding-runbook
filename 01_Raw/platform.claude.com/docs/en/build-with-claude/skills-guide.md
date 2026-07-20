@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/skills-guide
-fetched_at: 2026-07-13T04:25:37.995245+00:00
+fetched_at: 2026-07-20T04:31:16.568354+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ Agent Skills extend Claude's capabilities through organized folders of instructi
 </Note>
 
 <Note>
-  This feature is **not** eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). Data is retained according to the feature's standard retention policy.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 ## Quick links
@@ -38,7 +38,7 @@ Agent Skills extend Claude's capabilities through organized folders of instructi
 ## Overview
 
 <Note>
-  For a deep dive into the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
+  For a detailed look at the architecture and real-world applications of Agent Skills, read the engineering blog post: [Equipping agents for the real world with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills).
 </Note>
 
 Skills integrate with the Messages API through the [code execution tool](/docs/en/agents-and-tools/tool-use/code-execution-tool). Whether using pre-built Skills managed by Anthropic or custom Skills you've uploaded, the integration shape is identical: both require code execution and use the same `container` structure.
@@ -63,7 +63,7 @@ Both skill sources are returned by the [List Skills endpoint](/docs/en/api/beta/
 
 To use Skills, you need:
 
-1. **Claude API key** from the [Console](/settings/keys)
+1. **Claude API key** from the [Claude Console](/settings/keys)
 
 2. **Beta headers:**
 
@@ -79,7 +79,7 @@ To use Skills, you need:
 
 ### Container parameter
 
-Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills per request.
+Skills are specified using the `container` parameter in the Messages API. You can include up to 8 Skills for each request.
 
 The structure is identical for both Anthropic and custom Skills. Specify the required `type` and `skill_id`, and optionally include `version` to pin to a specific version:
 
@@ -333,7 +333,7 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 
 1. Skills create files during code execution.
 2. Response includes `file_id` for each created file.
-3. Use Files API to download the actual file content.
+3. Use the Files API to download the actual file content.
 4. Save locally or process as needed.
 
 **Example: Creating and downloading an Excel file**
@@ -967,7 +967,7 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 </CodeGroup>
 
 <Note>
-  For complete details on the Files API, see the [Files API documentation](/docs/en/api/files-content).
+  For complete details on the Files API, see the [Files API](/docs/en/api/beta/files/download) documentation.
 </Note>
 
 ### Multi-turn conversations
@@ -1137,7 +1137,7 @@ Reuse the same container across multiple messages by specifying the container ID
   // Carry the assistant's text forward; container.id carries the execution state
   var assistantText = string.Join(
       "\n",
-      response1.Content.Select(block => block.TryPickText(out var text) ? text.Text : null).Where(t => t is not null)
+      response1.Content.Select(block => block.TryPickText(out var text) ? text.Text : null).Where(text => text is not null)
   );
 
   var parameters2 = new MessageCreateParams
@@ -1900,7 +1900,7 @@ Skills may perform operations that require multiple turns. Handle `pause_turn` s
 </CodeGroup>
 
 <Note>
-  The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you wish to interrupt the conversation and provide additional guidance.
+  The response may include a `pause_turn` stop reason, which indicates that the API paused a long-running Skill operation. You can provide the response back as-is in a subsequent request to let Claude continue its turn, or modify the content if you want to interrupt the conversation and provide additional guidance.
 </Note>
 
 ### Using multiple Skills
@@ -4703,7 +4703,7 @@ For ZDR eligibility across all features, see [API and data retention](/docs/en/m
 ## Next steps
 
 <CardGroup cols={3}>
-  <Card title="API Reference" icon="book" href="/docs/en/api/beta/skills/create">
+  <Card title="API reference" icon="book" href="/docs/en/api/beta/skills/create">
     Complete API reference with all endpoints
   </Card>
 

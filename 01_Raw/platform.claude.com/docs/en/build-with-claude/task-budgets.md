@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/task-budgets
-fetched_at: 2026-07-13T04:25:36.866214+00:00
+fetched_at: 2026-07-20T04:31:15.251003+00:00
 fetch_method: mintlify_md
 ---
 
@@ -9,10 +9,6 @@ fetch_method: mintlify_md
 Give Claude an advisory token budget for the full agentic loop to help the model self-regulate on long agentic tasks.
 
 ---
-
-<Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
-</Note>
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
@@ -37,24 +33,24 @@ Add `task_budget` to `output_config` and include the beta header:
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --no-buffer \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "anthropic-beta: task-budgets-2026-03-13" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-4-8",
-          "max_tokens": 128000,
-          "stream": true,
-          "messages": [{
-              "role": "user",
-              "content": "Review the codebase and propose a refactor plan."
-          }],
-          "output_config": {
-              "effort": "high",
-              "task_budget": {"type": "tokens", "total": 64000}
-          }
-      }'
+    -N \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: task-budgets-2026-03-13" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-4-8",
+      "max_tokens": 128000,
+      "stream": true,
+      "messages": [{
+        "role": "user",
+        "content": "Review the codebase and propose a refactor plan."
+      }],
+      "output_config": {
+        "effort": "high",
+        "task_budget": {"type": "tokens", "total": 64000}
+      }
+    }'
   ```
 
   ```bash CLI
@@ -168,29 +164,27 @@ Add `task_budget` to `output_config` and include the beta header:
   ```
 
   ```java Java
-  void main() {
-      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-      MessageCreateParams params = MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
-          .maxTokens(128000L)
-          .addUserMessage("Review the codebase and propose a refactor plan.")
-          .outputConfig(BetaOutputConfig.builder()
-              .effort(BetaOutputConfig.Effort.HIGH)
-              .taskBudget(BetaTokenTaskBudget.builder().total(64000L).build())
-              .build())
-          .addBeta("task-budgets-2026-03-13")
-          .build();
+  MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(128000L)
+      .addUserMessage("Review the codebase and propose a refactor plan.")
+      .outputConfig(BetaOutputConfig.builder()
+          .effort(BetaOutputConfig.Effort.HIGH)
+          .taskBudget(BetaTokenTaskBudget.builder().total(64000L).build())
+          .build())
+      .addBeta("task-budgets-2026-03-13")
+      .build();
 
-      BetaMessageAccumulator accumulator = BetaMessageAccumulator.create();
-      try (StreamResponse<BetaRawMessageStreamEvent> stream =
-              client.beta().messages().createStreaming(params)) {
-          stream.stream().forEach(accumulator::accumulate);
-      }
-
-      BetaMessage response = accumulator.message();
-      IO.println(response.usage());
+  BetaMessageAccumulator accumulator = BetaMessageAccumulator.create();
+  try (StreamResponse<BetaRawMessageStreamEvent> stream =
+          client.beta().messages().createStreaming(params)) {
+      stream.stream().forEach(accumulator::accumulate);
   }
+
+  BetaMessage response = accumulator.message();
+  IO.println(response.usage());
   ```
 
   ```php PHP
@@ -300,7 +294,7 @@ Claude thinks, then emits a tool call and stops with `stop_reason: "tool_use"`:
 
 Suppose this assistant turn (thinking plus the tool call) totals 5,000 generated tokens. The countdown Claude saw during generation ended near `remaining` ≈ 95,000.
 
-**Turn 2.** Your client executes the tool, then resends the full history with the tool result appended:
+**Turn 2.** Your client runs the tool, then resends the full history with the tool result appended:
 
 ```json
 {
@@ -351,7 +345,7 @@ Your client sent the turn-1 user message three times and the turn-1 assistant me
 
 If your agentic loop compacts or rewrites context between requests (for example, by summarizing earlier turns), the server has no memory of how much budget was spent before compaction. Pass `remaining` on the next request so the countdown continues from where you left off rather than resetting to `total`:
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   output_config = {
       "effort": "high",
@@ -364,13 +358,25 @@ If your agentic loop compacts or rewrites context between requests (for example,
   ```
 
   ```typescript TypeScript
-  const output_config = {
+  const outputConfig = {
     effort: "high",
     task_budget: {
       type: "tokens",
       total: 128000,
       remaining: 128000 - tokensSpentSoFar
     }
+  };
+  ```
+
+  ```csharp C#
+  var outputConfig = new BetaOutputConfig
+  {
+      Effort = Effort.High,
+      TaskBudget = new BetaTokenTaskBudget
+      {
+          Total = 128000,
+          Remaining = 128000 - tokensSpentSoFar,
+      },
   };
   ```
 
@@ -392,18 +398,6 @@ If your agentic loop compacts or rewrites context between requests (for example,
           .remaining(128000L - tokensSpentSoFar)
           .build())
       .build();
-  ```
-
-  ```csharp C#
-  var outputConfig = new BetaOutputConfig
-  {
-      Effort = Effort.High,
-      TaskBudget = new BetaTokenTaskBudget
-      {
-          Total = 128000,
-          Remaining = 128000 - tokensSpentSoFar,
-      },
-  };
   ```
 
   ```php PHP
@@ -443,7 +437,7 @@ For a hard cap on cost or latency, combine task budgets with a reasonable `max_t
 Because `task_budget` spans the full agentic loop (potentially many requests) while `max_tokens` caps each individual request, the two values are independent; one is not required to be at or below the other.
 
 <Warning>
-  **A budget that is too small for the task can cause refusal-like behavior.** When Claude sees a budget that is clearly insufficient for the work being asked (for example, a 20,000-token budget for a multi-hour agentic coding task), it may decline to attempt the task at all, scope it down aggressively, or stop early with a partial result rather than start work it cannot finish. If you observe unexpected refusals or premature stops after setting a budget, raise the budget before debugging other parameters. Size budgets against your actual task-length distribution rather than a fixed default; see [Choosing a budget](#choosing-a-budget).
+  **A budget that is too small for the task can cause refusal-like behavior.** When Claude sees a budget that is clearly insufficient for the work being asked (for example, a 20,000-token budget for a multihour agentic coding task), it may decline to attempt the task at all, scope it down aggressively, or stop early with a partial result rather than start work it cannot finish. If you observe unexpected refusals or premature stops after setting a budget, raise the budget before debugging other parameters. Size budgets against your actual task-length distribution rather than a fixed default; see [Choosing a budget](#choosing-a-budget).
 </Warning>
 
 ## Choosing a budget
@@ -452,69 +446,126 @@ The right budget depends on how much work your agentic loop currently does. Rath
 
 ### Measure your current usage
 
-Run a representative sample of tasks **without** `task_budget` set and record the total tokens Claude spends per task. For an agentic loop, sum `usage.output_tokens` plus thinking and tool-result tokens across every request in the loop:
+Run a representative sample of tasks **without** `task_budget` set and record the total tokens Claude spends per task. For an agentic loop, sum `usage.output_tokens` across every request in the loop, plus the tokens of the tool results you append between requests:
 
 <CodeGroup>
+  ```bash CLI
+  ant messages create --transform 'usage.output_tokens' <<'YAML'
+  model: claude-opus-4-8
+  max_tokens: 4096
+  messages:
+    - role: user
+      content: Review the codebase and propose a refactor plan.
+  YAML
+  ```
+
   ```python Python
-  def run_task_and_count_tokens(messages: list) -> int:
-      """Runs an agentic loop to completion and returns total tokens spent."""
-      total_spend = 0
-      while True:
-          with client.beta.messages.stream(
-              model="claude-opus-4-8",
-              max_tokens=128000,
-              messages=messages,
-              tools=tools,
-              betas=["task-budgets-2026-03-13"],
-          ) as stream:
-              response = stream.get_final_message()
-          # Count what Claude generated this turn (output covers text + thinking + tool calls).
-          # Tool-result tokens also count against the budget; add the token count of the
-          # tool_result blocks you append below if you want client-side tracking to match
-          # the server-side countdown.
-          total_spend += response.usage.output_tokens
-          if response.stop_reason == "end_turn":
-              return total_spend
-          # Append the assistant turn and your tool results, then continue the loop.
-          messages += [
-              {"role": "assistant", "content": response.content},
-              {"role": "user", "content": run_tools(response.content)},
-          ]
+  client = anthropic.Anthropic()
+
+  response = client.messages.create(
+      model="claude-opus-4-8",
+      max_tokens=4096,
+      messages=[
+          {"role": "user", "content": "Review the codebase and propose a refactor plan."}
+      ],
+  )
+
+  # Sum output_tokens (text + thinking + tool calls) across every request in your loop.
+  print(response.usage.output_tokens)
   ```
 
   ```typescript TypeScript
-  async function runTaskAndCountTokens(
-    messages: Anthropic.Beta.BetaMessageParam[]
-  ): Promise<number> {
-    let totalSpend = 0;
-    while (true) {
-      const response = await client.beta.messages
-        .stream({
-          model: "claude-opus-4-8",
-          max_tokens: 128000,
-          messages,
-          tools,
-          betas: ["task-budgets-2026-03-13"]
-        })
-        .finalMessage();
-      // Count what Claude generated this turn (output covers text + tool calls;
-      // add cache creation and thinking via the same usage object if you opt in).
-      totalSpend += response.usage.output_tokens;
-      if (response.stop_reason === "end_turn") {
-        return totalSpend;
-      }
-      // Append the assistant turn and your tool results, then continue the loop.
-      messages = [
-        ...messages,
-        { role: "assistant", content: response.content },
-        { role: "user", content: runTools(response.content) }
-      ];
-    }
+  const client = new Anthropic();
+
+  const response = await client.messages.create({
+    model: "claude-opus-4-8",
+    max_tokens: 4096,
+    messages: [{ role: "user", content: "Review the codebase and propose a refactor plan." }]
+  });
+
+  // Sum output_tokens (text + thinking + tool calls) across every request in your loop.
+  console.log(response.usage.output_tokens);
+  ```
+
+  ```csharp C#
+
+  var client = new AnthropicClient();
+
+  var response = await client.Messages.Create(new MessageCreateParams
+  {
+      Model = Model.ClaudeOpus4_8,
+      MaxTokens = 4096,
+      Messages = [new() { Role = Role.User, Content = "Review the codebase and propose a refactor plan." }],
+  });
+
+  // Sum OutputTokens (text + thinking + tool calls) across every request in your loop.
+  Console.WriteLine(response.Usage.OutputTokens);
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus4_8,
+  	MaxTokens: 4096,
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("Review the codebase and propose a refactor plan.")),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
   }
+
+  // Sum OutputTokens (text + thinking + tool calls) across every request in your loop.
+  fmt.Println(response.Usage.OutputTokens)
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  MessageCreateParams params = MessageCreateParams.builder()
+      .model(Model.CLAUDE_OPUS_4_8)
+      .maxTokens(4096L)
+      .addUserMessage("Review the codebase and propose a refactor plan.")
+      .build();
+
+  Message response = client.messages().create(params);
+  // Sum outputTokens (text + thinking + tool calls) across every request in your loop.
+  IO.println(response.usage().outputTokens());
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $response = $client->messages->create(
+      model: 'claude-opus-4-8',
+      maxTokens: 4096,
+      messages: [
+          ['role' => 'user', 'content' => 'Review the codebase and propose a refactor plan.'],
+      ],
+  );
+
+  // Sum outputTokens (text + thinking + tool calls) across every request in your loop.
+  echo $response->usage->outputTokens . "\n";
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  response = client.messages.create(
+    model: "claude-opus-4-8",
+    max_tokens: 4096,
+    messages: [
+      { role: "user", content: "Review the codebase and propose a refactor plan." }
+    ]
+  )
+
+  # Sum output_tokens (text + thinking + tool calls) across every request in your loop.
+  puts response.usage.output_tokens
   ```
 </CodeGroup>
 
-Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget may modify the model's behavior, then test up or down as needed.
+Run this across a representative set of tasks and record the distribution. Start with the p99 of your per-task token spend to understand how providing the model with a task budget might modify the model's behavior, then test up or down as needed.
 
 The minimum accepted `task_budget.total` is **20,000 tokens**; values below the minimum return a 400 error.
 
@@ -539,3 +590,23 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 | Claude Haiku 4.5  | Not supported                               |
 
 Task budgets are not supported on [Claude Code](https://code.claude.com/docs/en/overview) or Cowork surfaces. Use task budgets directly through the Messages API on a [supported model](#feature-support).
+
+## Next steps
+
+<CardGroup>
+  <Card title="Effort" icon="gauge" href="/docs/en/build-with-claude/effort">
+    Control how thoroughly Claude reasons about each step of an agentic loop.
+  </Card>
+
+  <Card title="Adaptive thinking" icon="brain" href="/docs/en/build-with-claude/adaptive-thinking">
+    Let Claude decide when and how much to use extended thinking.
+  </Card>
+
+  <Card title="Compaction" icon="arrows-clockwise" href="/docs/en/build-with-claude/compaction">
+    Manage context in long-running conversations with server-side compaction.
+  </Card>
+
+  <Card title="Prompt caching" icon="database" href="/docs/en/build-with-claude/prompt-caching">
+    Reduce cost and latency on repeated prompts by caching prompt prefixes.
+  </Card>
+</CardGroup>

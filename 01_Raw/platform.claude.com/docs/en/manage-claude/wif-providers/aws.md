@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-providers/aws
-fetched_at: 2026-06-29T05:25:13.443725+00:00
+fetched_at: 2026-07-20T04:31:17.537479+00:00
 fetch_method: mintlify_md
 ---
 
@@ -137,7 +137,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-sonnet-4-6",
+      "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello from AWS"}]
     }' | jq -r '.content[0].text'
@@ -172,7 +172,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   )
 
   message = client.messages.create(
-      model="claude-sonnet-4-6",
+      model="claude-opus-4-8",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello from AWS"}],
   )
@@ -210,7 +210,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   });
 
   const message = await client.messages.create({
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello from AWS" }]
   });
@@ -251,7 +251,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   )
 
   message, err := client.Messages.New(ctx, anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeSonnet4_6,
+  	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from AWS")),
@@ -283,7 +283,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
           .build();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_SONNET_4_6)
+          .model(Model.CLAUDE_OPUS_4_8)
           .maxTokens(1024)
           .addUserMessage("Hello from AWS")
           .build());
@@ -304,7 +304,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeSonnet4_6,
+      Model = Model.ClaudeOpus4_8,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello from AWS" }],
   });
@@ -346,7 +346,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   # ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID, and
   # ANTHROPIC_SERVICE_ACCOUNT_ID, and ANTHROPIC_WORKSPACE_ID are read from the environment
   ant messages create \
-    --model claude-sonnet-4-6 \
+    --model claude-opus-4-8 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello from AWS"}'
   ```
@@ -370,7 +370,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   ));
 
   $message = $client->messages->create(
-      model: 'claude-sonnet-4-6',
+      model: 'claude-opus-4-8',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello from AWS']],
   );
@@ -399,7 +399,7 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
   )
 
   message = client.messages.create(
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello from AWS"}]
   )
@@ -590,7 +590,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-sonnet-4-6",
+      "model": "claude-opus-4-8",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello from EKS"}]
     }' | jq -r '.content[0].text'
@@ -615,7 +615,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   )
 
   message = client.messages.create(
-      model="claude-sonnet-4-6",
+      model="claude-opus-4-8",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello from EKS"}],
   )
@@ -640,7 +640,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   });
 
   const message = await client.messages.create({
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello from EKS" }]
   });
@@ -672,7 +672,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   )
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeSonnet4_6,
+  	Model:     anthropic.ModelClaudeOpus4_8,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello from EKS")),
@@ -688,7 +688,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_SONNET_4_6)
+          .model(Model.CLAUDE_OPUS_4_8)
           .maxTokens(1024)
           .addUserMessage("Hello from EKS")
           .build());
@@ -703,7 +703,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeSonnet4_6,
+      Model = Model.ClaudeOpus4_8,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello from EKS" }],
   });
@@ -720,7 +720,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   # Reads ANTHROPIC_FEDERATION_RULE_ID, ANTHROPIC_ORGANIZATION_ID,
   # ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
   ant messages create \
-    --model claude-sonnet-4-6 \
+    --model claude-opus-4-8 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello from EKS"}'
   ```
@@ -733,7 +733,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   $client = new Client();
 
   $message = $client->messages->create(
-      model: 'claude-sonnet-4-6',
+      model: 'claude-opus-4-8',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello from EKS']],
   );
@@ -748,7 +748,7 @@ Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token`
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-sonnet-4-6",
+    model: "claude-opus-4-8",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello from EKS"}]
   )

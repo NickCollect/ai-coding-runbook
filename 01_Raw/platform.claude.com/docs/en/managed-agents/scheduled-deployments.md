@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/scheduled-deployments
-fetched_at: 2026-07-06T05:04:25.672552+00:00
+fetched_at: 2026-07-20T04:31:17.315517+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,6 +11,8 @@ Create and manage deployments with the Claude API: run an agent on a recurring c
 ---
 
 A **scheduled deployment** allows an [agent](/docs/en/managed-agents/agent-setup) to start [sessions](/docs/en/managed-agents/sessions) autonomously, enabling task completion over a predictable cadence. You create and manage deployments with the Deployments API, part of the Claude API.
+
+For the launch context and examples of what teams run on schedules, see [scheduled deployments and vaults in Claude Managed Agents](https://claude.com/blog/whats-new-in-claude-managed-agents) on the blog.
 
 <Note>
   All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.

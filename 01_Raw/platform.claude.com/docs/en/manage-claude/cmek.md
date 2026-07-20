@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/cmek
-fetched_at: 2026-07-13T04:25:39.288821+00:00
+fetched_at: 2026-07-20T04:31:17.815342+00:00
 fetch_method: mintlify_md
 ---
 
@@ -94,7 +94,7 @@ Some features are turned off or substantially modified when CMEK is enabled. Thi
 
 ### Not encrypted
 
-These features remain available, but their data is not encrypted under your key. You can disable any feature that is not appropriate for your use case in Settings.
+These features remain available, but their data is not encrypted under your key. You can disable any feature that is not appropriate for your use case in **Settings**.
 
 **Claude Platform**
 
@@ -105,7 +105,7 @@ These features remain available, but their data is not encrypted under your key.
 
 * Claude Code Desktop, Claude Code on the web, and Claude in Slack. Anthropic recommends disabling any of these that are not appropriate for your use case in the admin console.
 * Beta and research preview features may not be covered by CMEK and can break in CMEK organizations, for example Claude Security and Claude Design.
-* On-demand data export under Settings > Privacy.
+* On-demand data export under **Settings** > **Privacy**.
 
 On both products, account data for users in your organization (such as names, email addresses, and profile pictures) is not encrypted under your key.
 
@@ -141,7 +141,7 @@ Outside of [CSAM screening](https://support.claude.com/en/articles/9020328-csam-
 * **Irreversible action:** Once a key is attached to a workspace, it cannot be detached or swapped. On Claude Platform, attaching a key also locks the workspace's data retention setting: you cannot turn off 30-day data retention for that workspace, and returning to zero data retention requires creating a new workspace and moving your traffic to it. Rotating the key material within the same key (for example, AWS KMS automatic rotation, a Cloud KMS rotation schedule, or an Azure Key Vault rotation policy) is supported transparently and requires no change in Anthropic. Switching to a *different* key requires creating a new workspace with the new key and migrating your data. Revoking or disabling the key makes all CMEK-protected data in that workspace permanently inaccessible, with no backout path.
 * **No retroactive encryption:** CMEK only protects data written after the key is enabled.
 * **Latency:** Operations that wrap or unwrap data keys make a round-trip to your key management service, which can add a small amount of latency to actions that read or write data at rest.
-* **Revocation delay:** Key revocation can take up to one hour (the cache TTL). Requests already in flight during that window may continue to succeed.
+* **Revocation delay:** Key revocation can take up to 1 hour (the cache TTL). Requests already in flight during that window may continue to succeed.
 * **KMS costs:** CMEK requires a key in a third-party key management service (AWS KMS, Google Cloud KMS, or Azure Key Vault), which may incur separate charges billed by your KMS provider.
 
 ## Configure your provider

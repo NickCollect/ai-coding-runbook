@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/context-editing
-fetched_at: 2026-06-29T05:25:11.734536+00:00
+fetched_at: 2026-07-20T04:31:16.208850+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Automatically manage conversation context as it grows with context editing.
 ---
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 ## Overview
@@ -3049,7 +3049,7 @@ Understanding when compaction triggers helps you tune thresholds and verify expe
 
 * Long-running agent tasks that process many files or data sources
 * Research workflows that accumulate large amounts of information
-* Multi-step tasks with clear, measurable progress
+* Multistep tasks with clear, measurable progress
 * Tasks that produce artifacts (files, reports) that persist outside the conversation
 
 **Less ideal use cases:**

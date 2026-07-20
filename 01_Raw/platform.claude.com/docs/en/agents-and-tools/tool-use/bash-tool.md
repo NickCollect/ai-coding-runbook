@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool
-fetched_at: 2026-07-13T04:25:37.416672+00:00
+fetched_at: 2026-07-20T04:31:15.873711+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Let Claude request shell commands that your application runs in a persistent bas
 ---
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 The bash tool is a [client tool](/docs/en/agents-and-tools/tool-use/how-tool-use-works): Claude doesn't run commands itself. When you include the tool in a request, Claude replies with a `tool_use` block that names the command to run. Your application runs that command in a bash session it owns and returns the output in a `tool_result` block.
@@ -265,9 +265,9 @@ To handle `restart: true`, kill the shell process, start a new one, and return a
 
 The original `bash_20241022` version is part of the computer use beta, and the October 2024 Claude Sonnet 3.5 release ([retired](/docs/en/about-claude/model-deprecations)) is the only model that accepts it. Requests that use it need the `anthropic-beta: computer-use-2024-10-22` header, and the SDKs expose it only in their beta namespaces. New integrations should use `bash_20250124`.
 
-## Example: Multi-step automation
+## Example: Multistep automation
 
-Claude can chain commands across tool calls to complete a multi-step task:
+Claude can chain commands across tool calls to complete a multistep task:
 
 ```text
 User request:
@@ -295,7 +295,7 @@ Claude determines which command to run. Your application owns everything else: t
   <Step title="Create a persistent bash session">
     Start one long-lived bash process and run every command inside it. Because a pipe to a live process never reports end-of-file, the session prints a unique sentinel line after each command to mark where that command's output ends:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       import subprocess
       import uuid
@@ -695,7 +695,7 @@ Claude determines which command to run. Your application owns everything else: t
   <Step title="Process Claude's tool calls">
     Extract and run commands from Claude's responses:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       tool_results = []
       for content in response.content:
@@ -1202,7 +1202,7 @@ Claude determines which command to run. Your application owns everything else: t
   <Step title="Implement safety measures">
     Add validation and restrictions. Use an allowlist rather than a blocklist: a blocklist misses any command it didn't anticipate. The example also rejects shell operators that appear as separate words:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       import shlex
 
@@ -1512,7 +1512,7 @@ When a command fails or the session breaks, tell Claude what happened. Return th
   <Accordion title="Use command timeouts">
     A command that never finishes, such as one that waits for input, blocks the session forever because its sentinel line never arrives. Give every command a deadline. When the deadline passes, stop the shell and everything the command started, then restart the session:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       import concurrent.futures
       import os
@@ -1668,7 +1668,7 @@ When a command fails or the session breaks, tell Claude what happened. Return th
   <Accordion title="Maintain session state">
     Keep the bash session persistent to maintain environment variables and working directory:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       # Commands run in the same session maintain state
       commands = [
@@ -1738,7 +1738,7 @@ When a command fails or the session breaks, tell Claude what happened. Return th
   <Accordion title="Handle large outputs">
     Truncate large outputs to prevent token limit issues:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       def truncate_output(output, max_lines=100):
           lines = output.split("\n")
@@ -1821,7 +1821,7 @@ When a command fails or the session breaks, tell Claude what happened. Return th
   <Accordion title="Log all commands">
     Keep an audit trail. Route every command through one wrapper that records the command before it runs and the output after it finishes. A command that hangs or breaks the session still leaves a record:
 
-    <CodeGroup>
+    <CodeGroup exclude="shell">
       ```python Python
       import logging
 

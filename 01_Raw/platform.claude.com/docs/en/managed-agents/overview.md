@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/overview
-fetched_at: 2026-07-06T05:04:24.970192+00:00
+fetched_at: 2026-07-20T04:31:16.864416+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,7 +18,7 @@ Anthropic offers two ways to build with Claude, each suited to different use cas
 | **Best for**   | Custom agent loops and fine-grained control                           | Long-running tasks and asynchronous work                                  |
 | **Learn more** | [Messages API docs](/docs/en/build-with-claude/working-with-messages) | [Claude Managed Agents docs](/docs/en/managed-agents/overview)            |
 
-Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and execute code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs.
+Claude Managed Agents provides the harness and infrastructure for running Claude as an autonomous agent. Instead of building your own agent loop, tool execution, and runtime, you get a fully managed environment where Claude can read files, run commands, browse the web, and run code securely. The harness supports built-in prompt caching, compaction, and other performance optimizations for high-quality, efficient agent outputs.
 
 <Note>
   Claude Managed Agents is also available on Claude Platform on AWS, with some differences in feature availability and session behavior. See [Claude Managed Agents](/docs/en/build-with-claude/claude-platform-on-aws#claude-managed-agents) in the Claude Platform on AWS guide.
@@ -65,7 +65,7 @@ Claude Managed Agents is built around four concepts:
   </Step>
 
   <Step title="Send events and stream responses">
-    Send user messages as events. Claude autonomously executes tools and streams back results through server-sent events (SSE). Event history is persisted server-side and can be fetched in full.
+    Send user messages as events. Claude autonomously runs tools and streams back results through server-sent events (SSE). Event history is persisted server-side and can be fetched in full.
   </Step>
 
   <Step title="Steer or interrupt">
@@ -98,7 +98,7 @@ See [Tools](/docs/en/managed-agents/tools) for the full list and configuration o
 ## Beta access
 
 <Note>
-  Claude Managed Agents is currently in beta. All Managed Agents endpoints require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically. Behaviors may be refined between releases to improve outputs.
+  Claude Managed Agents is in beta. All Managed Agents endpoints require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically. Behaviors may be refined between releases to improve outputs.
 </Note>
 
 To get started, you need:

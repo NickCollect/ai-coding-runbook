@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-combinations
-fetched_at: 2026-07-13T04:25:37.514851+00:00
+fetched_at: 2026-07-20T04:31:15.959352+00:00
 fetch_method: mintlify_md
 ---
 
@@ -90,7 +90,7 @@ The computer use tool subsumes most others by operating a full desktop. Claude s
 }
 ```
 
-Computer use is the most general option and also the slowest, since every action requires a screenshot roundtrip. Prefer narrower tools when they cover your use case, and reach for computer use when nothing else fits. See [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool) for the sandbox setup.
+Computer use is the most general option and also the slowest, because every action requires a screenshot roundtrip. Prefer narrower tools when they cover your use case, and reach for computer use when nothing else fits. See [Computer use tool](/docs/en/agents-and-tools/tool-use/computer-use-tool) for the sandbox setup.
 
 ## Next steps
 

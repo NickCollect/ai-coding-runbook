@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/server-tools
-fetched_at: 2026-07-06T05:04:23.122505+00:00
+fetched_at: 2026-07-20T04:31:15.714822+00:00
 fetch_method: mintlify_md
 ---
 
@@ -899,7 +899,7 @@ The following example enables web fetch together with a user-defined `run_comman
       ['type' => 'web_fetch_20250910', 'name' => 'web_fetch', 'max_uses' => 5],
       [
           'name' => 'run_command',
-          'description' => "Run a shell command on this computer and return its output.",
+          'description' => 'Run a shell command on this computer and return its output.',
           'input_schema' => [
               'type' => 'object',
               'properties' => [
@@ -1037,7 +1037,7 @@ This restricts the tool to direct invocation only, bypassing the internal code e
 `allowed_callers` controls how a tool can be invoked: directly by Claude (`"direct"`), from inside a code execution container (for example, `"code_execution_20260120"`), or both. The `_20260209` versions of the web tools default to the code execution caller only; earlier versions default to `["direct"]`. On models that don't support programmatic tool calling, these versions require `allowed_callers: ["direct"]`; without it the API returns a validation error that says to set it.
 
 <Note>
-  Even when web fetch is used in a ZDR-eligible configuration, website publishers may retain any parameters passed to the URL if Claude fetches content from their site.
+  Even when web fetch is used in a ZDR-eligible configuration, website publishers might retain any parameters passed to the URL if Claude fetches content from their site.
 </Note>
 
 ## Domain filtering

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/skills
-fetched_at: 2026-07-13T04:25:38.497156+00:00
+fetched_at: 2026-07-20T04:31:16.996207+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,7 +10,7 @@ Attach reusable, filesystem-based expertise to your agent for domain-specific wo
 
 ---
 
-Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Unlike prompts (conversation-level instructions for one-off tasks), skills load on demand, only impacting the context window when needed.
+Skills are reusable, filesystem-based resources that give your agent domain-specific expertise: workflows, context, and best practices that turn a general-purpose agent into a specialist. Each skill you add incurs a modest cost on the session's context window, adding instructions and metadata that help the model use the skill. Learn more in the [Agent Skills](/docs/en/agents-and-tools/agent-skills/overview) overview.
 
 You can attach two types of skill. Both work the same way: your agent invokes them automatically when they are relevant to the task.
 
@@ -199,7 +199,11 @@ To list, retrieve, delete, and version custom skills, see [Managing custom skill
 
 ## Attach skills to an agent
 
-Attach skills when creating an agent. Each [session](/docs/en/managed-agents/sessions) supports up to 20 skills total, counted across every agent in the session (see [Multi-agent sessions](/docs/en/managed-agents/multi-agent)).
+Attach skills when creating an agent. Each [session](/docs/en/managed-agents/sessions) supports up to 500 skills total, counted across every agent in the session (see [Multiagent orchestration](/docs/en/managed-agents/multiagent-orchestration)).
+
+<Note>
+  Mounting more skills increases the time it takes for the session's sandbox to start. Attach only the skills each agent needs for its task.
+</Note>
 
 Each entry in the `skills` array uses the following fields:
 

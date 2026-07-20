@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/external_keys/validate
-fetched_at: 2026-07-06T05:04:33.902228+00:00
+fetched_at: 2026-07-20T04:31:25.138845+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,7 @@ message if it failed or timed out.
 
 - `external_key_id: string`
 
-  ID of the External Key to validate.
+  ID of the External Key.
 
 ### Returns
 

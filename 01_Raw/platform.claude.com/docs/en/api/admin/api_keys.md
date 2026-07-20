@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/api_keys
-fetched_at: 2026-07-06T05:04:33.611912+00:00
+fetched_at: 2026-07-20T04:31:24.860671+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ Get API Key
 
 ### Returns
 
-- `APIKey object { id, created_at, created_by, 6 more }`
+- `APIKey object { id, created_at, created_by, 7 more }`
 
   - `id: string`
 
@@ -53,6 +53,22 @@ Get API Key
   - `partial_key_hint: string`
 
     Partially redacted hint for the API key.
+
+  - `principal: object { id, type }`
+
+    The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
+
+    - `id: string`
+
+      ID of the principal the API key acts as: a User ID (`user_...`) when the type is `user`, or a Service Account ID (`svac_...`) when the type is `service_account`.
+
+    - `type: "service_account" or "user"`
+
+      Type of the principal the API key acts as.
+
+      - `"service_account"`
+
+      - `"user"`
 
   - `status: "active" or "archived" or "expired" or "inactive"`
 
@@ -99,6 +115,10 @@ curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
   "expires_at": "2024-10-30T23:58:27.427722Z",
   "name": "Developer Key",
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
+  "principal": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "type": "user"
+  },
   "status": "active",
   "type": "api_key",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -183,6 +203,22 @@ List API Keys
 
     Partially redacted hint for the API key.
 
+  - `principal: object { id, type }`
+
+    The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
+
+    - `id: string`
+
+      ID of the principal the API key acts as: a User ID (`user_...`) when the type is `user`, or a Service Account ID (`svac_...`) when the type is `service_account`.
+
+    - `type: "service_account" or "user"`
+
+      Type of the principal the API key acts as.
+
+      - `"service_account"`
+
+      - `"user"`
+
   - `status: "active" or "archived" or "expired" or "inactive"`
 
     Status of the API key.
@@ -242,6 +278,10 @@ curl https://api.anthropic.com/v1/organizations/api_keys \
       "expires_at": "2024-10-30T23:58:27.427722Z",
       "name": "Developer Key",
       "partial_key_hint": "sk-ant-api03-R2D...igAA",
+      "principal": {
+        "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+        "type": "user"
+      },
       "status": "active",
       "type": "api_key",
       "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"
@@ -283,7 +323,7 @@ Update API Key
 
 ### Returns
 
-- `APIKey object { id, created_at, created_by, 6 more }`
+- `APIKey object { id, created_at, created_by, 7 more }`
 
   - `id: string`
 
@@ -316,6 +356,22 @@ Update API Key
   - `partial_key_hint: string`
 
     Partially redacted hint for the API key.
+
+  - `principal: object { id, type }`
+
+    The ID and type of the principal the API key acts as, or `null` if the key is not bound to a principal.
+
+    - `id: string`
+
+      ID of the principal the API key acts as: a User ID (`user_...`) when the type is `user`, or a Service Account ID (`svac_...`) when the type is `service_account`.
+
+    - `type: "service_account" or "user"`
+
+      Type of the principal the API key acts as.
+
+      - `"service_account"`
+
+      - `"user"`
 
   - `status: "active" or "archived" or "expired" or "inactive"`
 
@@ -364,6 +420,10 @@ curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
   "expires_at": "2024-10-30T23:58:27.427722Z",
   "name": "Developer Key",
   "partial_key_hint": "sk-ant-api03-R2D...igAA",
+  "principal": {
+    "id": "user_01WCz1FkmYMm4gnmykNKUu3Q",
+    "type": "user"
+  },
   "status": "active",
   "type": "api_key",
   "workspace_id": "wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ"

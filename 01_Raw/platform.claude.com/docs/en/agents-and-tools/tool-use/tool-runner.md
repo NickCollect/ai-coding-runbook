@@ -1,10 +1,10 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-runner
-fetched_at: 2026-07-13T04:25:37.205114+00:00
+fetched_at: 2026-07-20T04:31:15.680151+00:00
 fetch_method: mintlify_md
 ---
 
-# Tool Runner (SDK)
+# Tool runner (SDK)
 
 Use the SDK's tool runner to handle the agentic loop, error wrapping, and type safety automatically.
 

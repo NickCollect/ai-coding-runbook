@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-07-13T04:25:38.727003+00:00
+fetched_at: 2026-07-20T04:31:17.191869+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1077,7 +1077,7 @@ By default, the agent's response text reaches the stream as buffered `agent.mess
 
 ### Opt in to previews
 
-Previews are opt-in per stream connection. Add the `event_deltas[]` query parameter to `GET /v1/sessions/{session_id}/events/stream`, repeating it once for each event type you want previewed. The accepted values are `agent.message` and `agent.thinking`; any other value returns a 400 error. Only the session-level event stream supports the parameter. [Session thread](/docs/en/managed-agents/multi-agent) event streams reject it.
+Previews are opt-in per stream connection. Add the `event_deltas[]` query parameter to `GET /v1/sessions/{session_id}/events/stream`, repeating it once for each event type you want previewed. The accepted values are `agent.message` and `agent.thinking`; any other value returns a 400 error. Only the session-level event stream supports the parameter. [Session thread](/docs/en/managed-agents/multiagent-orchestration) event streams reject it.
 
 When a previewed event begins, the stream emits an `event_start` carrying the upcoming event's type and `id`:
 
@@ -1589,7 +1589,7 @@ Previews are tuned for responsiveness. Build against these constraints:
 
 * **Best effort:** Under load, the server may shed deltas for an event. When it does, you receive a contiguous prefix of the text and then no further deltas for that event. The buffered `agent.message` still arrives complete. Never treat an accumulated preview as final.
 * **No replay on reconnect:** Deltas are delivered only to the connection that opted in, while it is open. If the stream drops, follow the [reconnect procedure](#integrating-events) in the Streaming events tab: reopen the stream and list the event history. The history includes any buffered events emitted while you were disconnected, including the `agent.message` your preview was waiting for. There is no way to re-request missed deltas.
-* **Primary thread, text only:** Previews cover assistant text on the session's primary thread. Tool use, tool results, MCP results, and activity on other [session threads](/docs/en/managed-agents/multi-agent) are never previewed.
+* **Primary thread, text only:** Previews cover assistant text on the session's primary thread. Tool use, tool results, MCP results, and activity on other [session threads](/docs/en/managed-agents/multiagent-orchestration) are never previewed.
 * **Start-only `agent.thinking`:** An `agent.thinking` preview emits only the `event_start` as a signal that a thinking block has started; no `event_delta` events follow it.
 * **Never persisted:** `event_start` and `event_delta` exist only on the live stream. They do not appear in the session's event history (`GET /v1/sessions/{session_id}/events`).
 
@@ -2276,7 +2276,7 @@ To resume a session, send a `user.message` event to it as usual:
 ### Sending system messages
 
 <Note>
-  `system.message` is currently only supported by Claude Opus 4.8. If any model configured on the agent does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error.
+  `system.message` is supported by Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), and Claude Opus 4.8. If any model configured on the agent does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error.
 </Note>
 
 Send a `system.message` event to update the agent's system prompt between turns. Unlike the `system` field on the agent definition (which is fixed at session creation), `system.message` lets you change the system prompt as the session progresses. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.

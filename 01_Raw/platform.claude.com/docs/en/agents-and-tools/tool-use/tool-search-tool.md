@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool
-fetched_at: 2026-07-06T05:04:23.256815+00:00
+fetched_at: 2026-07-20T04:31:15.823383+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ The tool search tool lets Claude work with hundreds or thousands of tools by dis
 
 Loading every tool definition up front causes two problems as a tool library grows:
 
-* **Context bloat:** A typical multi-server setup (GitHub, Slack, Sentry, Grafana, and Splunk) can consume \~55k tokens in definitions before Claude does any work. Tool search typically reduces this by over 85 percent, loading only the 3–5 tools Claude needs for a given request.
+* **Context bloat:** A typical multiserver setup (GitHub, Slack, Sentry, Grafana, and Splunk) can consume \~55k tokens in definitions before Claude does any work. Tool search typically reduces this by over 85 percent, loading only the 3–5 tools Claude needs for a given request.
 * **Tool selection accuracy:** Claude's ability to pick the right tool degrades once you exceed 30–50 available tools. Because tool search loads only a focused set of relevant tools on demand, selection accuracy stays high even across thousands of tools.
 
 Tool search is generally available on the Claude API. For supported models, see [Model compatibility](#model-compatibility).
@@ -30,7 +30,7 @@ Tool search runs as a server-side tool, but you can also implement your own clie
 </Note>
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 <Warning>

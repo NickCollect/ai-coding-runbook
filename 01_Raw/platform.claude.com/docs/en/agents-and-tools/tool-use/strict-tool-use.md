@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/strict-tool-use
-fetched_at: 2026-06-29T05:25:11.063024+00:00
+fetched_at: 2026-07-20T04:31:15.685039+00:00
 fetch_method: mintlify_md
 ---
 
@@ -663,7 +663,7 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
   </Accordion>
 
   <Accordion title="Agentic workflow with multiple validated tools">
-    Build reliable multi-step agents with guaranteed tool parameters:
+    Build reliable multistep agents with guaranteed tool parameters:
 
     <CodeGroup>
       ```bash CLI

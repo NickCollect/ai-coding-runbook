@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/users/update
-fetched_at: 2026-07-06T05:04:32.888347+00:00
+fetched_at: 2026-07-20T04:31:23.704391+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 **post** `/v1/organizations/users/{user_id}`
 
-Update User
+For Claude Enterprise organizations, this endpoint's availability is in beta.
 
 ### Path Parameters
 
@@ -18,15 +18,19 @@ Update User
 
 ### Body Parameters
 
-- `role: "billing" or "claude_code_user" or "developer" or "user"`
+- `role: "billing" or "claude_code_user" or "developer" or 2 more`
 
-  New role for the User. Cannot be "admin".
+  New role for the User.
+
+  The accepted values depend on the organization type. Console and API organizations accept `user`, `developer`, `billing`, and `claude_code_user`; `admin` cannot be assigned through the API. Claude Enterprise organizations (beta) accept `user` and `managed`.
 
   - `"billing"`
 
   - `"claude_code_user"`
 
   - `"developer"`
+
+  - `"managed"`
 
   - `"user"`
 
@@ -50,7 +54,7 @@ Update User
 
     Name of the User.
 
-  - `role: "admin" or "billing" or "claude_code_user" or 2 more`
+  - `role: "admin" or "billing" or "claude_code_user" or 6 more`
 
     Organization role of the User.
 
@@ -61,6 +65,14 @@ Update User
     - `"claude_code_user"`
 
     - `"developer"`
+
+    - `"managed"`
+
+    - `"membership_admin"`
+
+    - `"owner"`
+
+    - `"primary_owner"`
 
     - `"user"`
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/compaction
-fetched_at: 2026-07-06T05:04:23.837908+00:00
+fetched_at: 2026-07-20T04:31:16.081282+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Server-side context compaction for managing long conversations that approach con
 ---
 
 <Note>
-  This feature is eligible for [Zero Data Retention (ZDR)](/docs/en/build-with-claude/api-and-data-retention). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
+  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
 <Tip>
@@ -1113,7 +1113,7 @@ When a model works on long tasks with many tool-use iterations, total token cons
 
 This example appears in the SDK languages only: its value is the budget-tracking logic around the request. The raw request combines the `trigger` from [Trigger configuration](#trigger-configuration) with `pause_after_compaction` from [Pausing after compaction](#pausing-after-compaction).
 
-<CodeGroup>
+<CodeGroup exclude="shell">
   ```python Python
   client = anthropic.Anthropic()
   messages = [{"role": "user", "content": "Hello, Claude"}]

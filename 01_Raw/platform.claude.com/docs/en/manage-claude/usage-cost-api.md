@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/usage-cost-api
-fetched_at: 2026-07-06T05:04:26.316472+00:00
+fetched_at: 2026-07-20T04:31:17.695209+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,11 +18,11 @@ The Usage & Cost Admin API provides programmatic and granular access to historic
 
 This API enables you to better monitor, analyze, and optimize your Claude implementations:
 
-* **Accurate Usage Tracking:** Get precise token counts and usage patterns instead of relying solely on response token counting
-* **Cost Reconciliation:** Match internal records with Anthropic billing for finance and accounting teams
-* **Product performance and improvement:** Monitor product performance while measuring if changes to the system have improved it, or setup alerting
+* **Accurate usage tracking:** Get precise token counts and usage patterns instead of relying solely on response token counting
+* **Cost reconciliation:** Match internal records with Anthropic billing for finance and accounting teams
+* **Product performance and improvement:** Monitor product performance while measuring if changes to the system have improved it, or set up alerting
 * **[Rate limit](/docs/en/api/rate-limits) optimization:** Optimize features like [prompt caching](/docs/en/build-with-claude/prompt-caching) or specific prompts to make the most of your allocated capacity.
-* **Advanced Analysis:** Perform deeper data analysis than what's available in Console
+* **Advanced analysis:** Perform deeper data analysis than what's available in Console
 
 <Check>
   **Admin API key required.** These endpoints require an Admin API key, which is different from a standard Claude API key. See [Create an Admin API key](/docs/en/manage-claude/admin-api-keys) to find where to create one for your organization type and which scopes to select.
@@ -80,8 +80,8 @@ curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-08T00:00:00Z&\
 ending_at=2025-01-15T00:00:00Z&\
 bucket_width=1d" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 <Tip>
@@ -100,10 +100,10 @@ Track token consumption across your organization with detailed breakdowns by mod
 
 ### Key concepts
 
-* **Time buckets**: Aggregate usage data in fixed intervals (`1m`, `1h`, or `1d`)
-* **Token tracking**: Measure uncached input, cached input, cache creation, and output tokens
-* **Filtering & grouping**: Filter by API key, workspace, model, service tier, context window, [data residency](/docs/en/manage-claude/data-residency), or speed (beta), and group results by these dimensions
-* **Server tool usage**: Track usage of server-side tools like web search
+* **Time buckets:** Aggregate usage data in fixed intervals (`1m`, `1h`, or `1d`)
+* **Token tracking:** Measure uncached input, cached input, cache creation, and output tokens
+* **Filtering & grouping:** Filter by API key, workspace, model, service tier, context window, [data residency](/docs/en/manage-claude/data-residency), or speed (beta), and group results by these dimensions
+* **Server tool usage:** Track usage of server-side tools such as web search
 
 For complete parameter details and response schemas, see the [Usage API reference](/docs/en/api/admin-api/usage-cost/get-messages-usage-report).
 
@@ -117,8 +117,8 @@ starting_at=2025-01-01T00:00:00Z&\
 ending_at=2025-01-08T00:00:00Z&\
 group_by[]=model&\
 bucket_width=1d" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 #### Hourly usage with filtering
@@ -131,8 +131,8 @@ models[]=claude-opus-4-8&\
 service_tiers[]=batch&\
 context_window[]=0-200k&\
 bucket_width=1h" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 #### Filter usage by API keys and workspaces
@@ -146,8 +146,8 @@ api_key_ids[]=apikey_01ABC123DEF456GHI789JKL&\
 workspace_ids[]=wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ&\
 workspace_ids[]=wrkspc_01XYZ789ABC123DEF456MNO&\
 bucket_width=1d" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 <Tip>
@@ -167,8 +167,8 @@ ending_at=2026-02-08T00:00:00Z&\
 group_by[]=inference_geo&\
 group_by[]=model&\
 bucket_width=1d" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 You can also filter to a specific geo. Valid values are `global`, `us`, and `not_available`:
@@ -180,8 +180,8 @@ ending_at=2026-02-08T00:00:00Z&\
 inference_geos[]=us&\
 group_by[]=model&\
 bucket_width=1d" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 <Note>
@@ -190,7 +190,7 @@ bucket_width=1d" \
 
 #### Fast mode (research preview)
 
-Track [fast mode](/docs/en/build-with-claude/fast-mode) usage by grouping and filtering with the `speed` dimension. This is useful for monitoring standard vs. fast mode usage.
+Track [fast mode](/docs/en/build-with-claude/fast-mode) usage by grouping and filtering with the `speed` dimension. This is useful for monitoring standard versus fast mode usage.
 
 ```bash cURL
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -199,9 +199,9 @@ ending_at=2026-02-08T00:00:00Z&\
 group_by[]=speed&\
 group_by[]=model&\
 bucket_width=1d" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "anthropic-beta: fast-mode-2026-02-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: fast-mode-2026-02-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 You can also filter to a specific speed. Valid values are `standard` and `fast`:
@@ -213,9 +213,9 @@ ending_at=2026-02-08T00:00:00Z&\
 speeds[]=fast&\
 group_by[]=model&\
 bucket_width=1d" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "anthropic-beta: fast-mode-2026-02-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "anthropic-beta: fast-mode-2026-02-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 <Note>
@@ -224,9 +224,9 @@ bucket_width=1d" \
 
 ### Time granularity limits
 
-| Granularity | Default Limit | Maximum Limit | Use Case               |
+| Granularity | Default limit | Maximum limit | Use case               |
 | ----------- | ------------- | ------------- | ---------------------- |
-| `1m`        | 60 buckets    | 1440 buckets  | Real-time monitoring   |
+| `1m`        | 60 buckets    | 1,440 buckets | Real-time monitoring   |
 | `1h`        | 24 buckets    | 168 buckets   | Daily patterns         |
 | `1d`        | 7 buckets     | 31 buckets    | Weekly/monthly reports |
 
@@ -236,10 +236,10 @@ Retrieve service-level cost breakdowns in USD with the `/v1/organizations/cost_r
 
 ### Key concepts
 
-* **Currency**: All costs in USD, reported as decimal strings in lowest units (cents)
-* **Cost types**: Track token usage, web search, and code execution costs
-* **Grouping**: Group costs by workspace or description for detailed breakdowns. When grouping by `description`, responses include parsed fields like `model` and `inference_geo`
-* **Time buckets**: Daily granularity only (`1d`)
+* **Currency:** All costs in USD, reported as decimal strings in lowest units (cents)
+* **Cost types:** Track token usage, web search, and code execution costs
+* **Grouping:** Group costs by workspace or description for detailed breakdowns. When grouping by `description`, responses include parsed fields such as `model` and `inference_geo`
+* **Time buckets:** Daily granularity only (`1d`)
 
 For complete parameter details and response schemas, see the [Cost API reference](/docs/en/api/admin-api/usage-cost/get-cost-report).
 
@@ -255,17 +255,17 @@ starting_at=2025-01-01T00:00:00Z&\
 ending_at=2025-01-31T00:00:00Z&\
 group_by[]=workspace_id&\
 group_by[]=description" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ## Pagination
 
 Both endpoints support pagination for large datasets:
 
-1. Make your initial request
-2. If `has_more` is `true`, use the `next_page` value in your next request
-3. Continue until `has_more` is `false`
+1. Make your initial request.
+2. If `has_more` is `true`, use the `next_page` value in your next request.
+3. Continue until `has_more` is `false`.
 
 ```bash cURL
 # First request
@@ -273,8 +273,8 @@ curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-01T00:00:00Z&\
 ending_at=2025-01-31T00:00:00Z&\
 limit=7" \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 
 # Response includes: "has_more": true, "next_page": "page_xyz..."
 
@@ -284,19 +284,19 @@ starting_at=2025-01-01T00:00:00Z&\
 ending_at=2025-01-31T00:00:00Z&\
 limit=7&\
 page=page_xyz..." \
-  --header "anthropic-version: 2023-06-01" \
-  --header "x-api-key: $ANTHROPIC_ADMIN_KEY"
+  -H "anthropic-version: 2023-06-01" \
+  -H "x-api-key: $ANTHROPIC_ADMIN_KEY"
 ```
 
 ## Common use cases
 
 Explore detailed implementations in [Claude Cookbook](https://platform.claude.com/cookbooks):
 
-* **Daily usage reports**: Track token consumption trends
-* **Cost attribution**: Allocate expenses by workspace for chargebacks
-* **Cache efficiency**: Measure and optimize prompt caching
-* **Budget monitoring**: Set up alerts for spending thresholds
-* **CSV export**: Generate reports for finance teams
+* **Daily usage reports:** Track token consumption trends
+* **Cost attribution:** Allocate expenses by workspace for chargebacks
+* **Cache efficiency:** Measure and optimize prompt caching
+* **Budget monitoring:** Set up alerts for spending thresholds
+* **CSV export:** Generate reports for finance teams
 
 ## Frequently asked questions
 
@@ -306,7 +306,7 @@ Usage and cost data typically appears within 5 minutes of API request completion
 
 ### What's the recommended polling frequency?
 
-The API supports polling once per minute for sustained use. For short bursts (e.g., downloading paginated data), more frequent polling is acceptable. Cache results for dashboards that need frequent updates.
+The API supports polling once per minute for sustained use. For short bursts (for example, downloading paginated data), more frequent polling is acceptable. Cache results for dashboards that need frequent updates.
 
 ### How do I track code execution usage?
 
@@ -316,7 +316,7 @@ Code execution costs appear in the cost endpoint grouped under `Code Execution U
 
 Filter or group by `service_tier` in the usage endpoint and look for the `priority` value. Priority Tier costs are not available in the cost endpoint.
 
-### What happens with Workbench usage?
+### What happens with Anthropic Workbench usage?
 
 API usage from the Workbench is not associated with an API key, so `api_key_id` will be `null` even when grouping by that dimension.
 
@@ -330,7 +330,7 @@ Use the [Claude Code Analytics API](/docs/en/manage-claude/claude-code-analytics
 
 ## See also
 
-The Usage and Cost APIs can be used to help you deliver a better experience for your users, help you manage costs, and preserve your rate limit. Learn more about some of these other features:
+Use the Usage and Cost APIs to deliver a better experience for your users, manage costs, and preserve your rate limit. Learn more about some of these other features:
 
 * [Admin API](/docs/en/manage-claude/admin-api)
 * [Admin API reference](/docs/en/api/admin)
