@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-07-13T04:25:36.815573+00:00
+fetched_at: 2026-07-20T04:31:19.374464+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,7 +27,7 @@ Retrieve all team members and their details.
 
 Array of team member objects, each containing:
 
-- `id` number - Unique identifier for the team member
+- `id` string - Encoded user ID for the team member (e.g., `user_PDSPmvukpYgZEDXsoNirw3CFhy`)
 - `email` string - Email address of the team member
 - `name` string - Display name of the team member
 - `role` string - Role in the team (e.g., `member`, `owner`)
@@ -44,14 +44,14 @@ curl -X GET https://api.cursor.com/teams/members \
 {
   "teamMembers": [
     {
-      "id": 12345,
+      "id": "user_PDSPmvukpYgZEDXsoNirw3CFhy",
       "name": "Alex",
       "email": "developer@company.com",
       "role": "member",
       "isRemoved": false
     },
     {
-      "id": 12346,
+      "id": "user_kljUvI0ASZORvSEXf9hV0ydcso",
       "name": "Sam",
       "email": "admin@company.com",
       "role": "owner",
@@ -410,7 +410,7 @@ Results per page
 
 Each object in `teamMemberSpend` contains:
 
-- `userId` number - Unique identifier for the user
+- `userId` string - Encoded user ID (e.g., `user_PDSPmvukpYgZEDXsoNirw3CFhy`). Shares the same identifier namespace as `teamMembers[].id` from [`/teams/members`](https://cursor.com/docs/account/teams/admin-api.md#get-team-members).
 - `name` string - Display name of the user
 - `email` string - Email address of the user
 - `role` string - Role in the team (e.g., `member`, `owner`)
@@ -419,6 +419,7 @@ Each object in `teamMemberSpend` contains:
 - `fastPremiumRequests` number - Number of usage-based premium requests made during the billing cycle
 - `hardLimitOverrideDollars` number - Custom hard spending limit override in dollars for this user (0 means no override)
 - `monthlyLimitDollars` number | null - Monthly spending limit in dollars set for this user, or `null` if no limit is set
+- `effectivePerUserLimitDollars` number - Currently enforced per-user spending limit in dollars, derived from `monthlyLimitDollars` and `hardLimitOverrideDollars`
 
 On June 4th, 2026 we added additional precision to the spendCents and overallSpendCents fields to avoid rounding errors when comparing results to invoice amounts.
 
@@ -439,7 +440,7 @@ curl -X POST https://api.cursor.com/teams/spend \
 {
   "teamMemberSpend": [
     {
-      "userId": 12345,
+      "userId": "user_PDSPmvukpYgZEDXsoNirw3CFhy",
       "spendCents": 2450.125487,
       "overallSpendCents": 2450.125487,
       "fastPremiumRequests": 1250,
@@ -447,10 +448,11 @@ curl -X POST https://api.cursor.com/teams/spend \
       "email": "developer@company.com",
       "role": "member",
       "hardLimitOverrideDollars": 100,
-      "monthlyLimitDollars": 200
+      "monthlyLimitDollars": 200,
+      "effectivePerUserLimitDollars": 100
     },
     {
-      "userId": 12346,
+      "userId": "user_kljUvI0ASZORvSEXf9hV0ydcso",
       "spendCents": 1875.500123,
       "overallSpendCents": 3200.750456,
       "fastPremiumRequests": 980,
@@ -458,7 +460,8 @@ curl -X POST https://api.cursor.com/teams/spend \
       "email": "admin@company.com",
       "role": "owner",
       "hardLimitOverrideDollars": 0,
-      "monthlyLimitDollars": null
+      "monthlyLimitDollars": null,
+      "effectivePerUserLimitDollars": 50
     }
   ],
   "subscriptionCycleStart": 1708992000000,
@@ -471,7 +474,7 @@ curl -X POST https://api.cursor.com/teams/spend \
 
 /teams/filtered-usage-events
 
-Retrieve detailed usage events for your team with comprehensive filtering, search, and pagination options. This endpoint provides granular insights into individual API calls, model usage, token consumption, and costs. Data is aggregated at the hourly level - we recommend polling this endpoint at most once per hour. Rate limited to 20 requests per minute per team. See [best practices](https://cursor.com/docs/api.md#best-practices).
+Retrieve detailed usage events for your team with filtering, search, and pagination options. This endpoint provides granular insights into API calls, model usage, token consumption, and costs. Data is aggregated at the hourly level. We recommend polling this endpoint at most once per hour. Rate limited to 60 requests per minute per team. See the [API guidance](https://cursor.com/docs/api.md#best-practices).
 
 **Cost Calculation**: To reconcile event-level costs with `/teams/spend` totals, sum the `chargedCents` field across events. This field includes both the model cost and the Cursor Token Rate when a request is eligible for the rate, matching the dashboard totals. It works for both token-based and request-based billing plans.
 
@@ -503,7 +506,7 @@ Page number (1-indexed). Default: `1`
 
 `pageSize` number
 
-Number of results per page. Default: `10`
+Number of results per page. Default: `100`. Maximum: `1000`.
 
 `email` string
 
@@ -512,6 +515,14 @@ Filter by user email address
 `serviceAccountId` string
 
 Filter by service account ID
+
+`cloudAgentId` string
+
+Filter by a specific cloud agent run ID. Pass `*` to return events from all cloud agent runs.
+
+`automationId` string
+
+Filter by a specific automation UUID. Pass `*` to return events from all automations.
 
 `hostingType` string
 
@@ -524,6 +535,8 @@ Filter cloud agent (background agent) runs by where they executed. Use this to i
 
 An unrecognized `hostingType` value returns a `400` error rather than an empty result, so a typo can't be mistaken for genuinely zero self-hosted spend. This filter covers inference spend only; self-hosted compute runs on your own machines and is never metered by Cursor.
 
+When you pass multiple filters, the endpoint combines them with `AND`. For example, `automationId` and `serviceAccountId` return events that match both values.
+
 #### Response Fields
 
 Each object in `usageEvents` contains:
@@ -532,6 +545,8 @@ Each object in `usageEvents` contains:
 - `userEmail` string - Email address of the user who made the request
 - `serviceAccountId` string | undefined - ID of the service account that made the request. Omitted for human user events.
 - `serviceAccountName` string | undefined - Display name of the service account that made the request. Omitted for human user events.
+- `cloudAgentId` string | undefined - ID of the cloud agent run attributed to this event. Omitted for events outside cloud agents.
+- `automationId` string | undefined - UUID of the automation attributed to this event. Omitted for events outside automations.
 - `model` string - AI model used for the request
 - `kind` string - Billing category (e.g., `Usage-based`, `Included in Business`)
 - `maxMode` boolean - Whether the request used max mode
@@ -568,9 +583,9 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
 {
   "totalUsageEventsCount": 113,
   "pagination": {
-    "numPages": 12,
+    "numPages": 5,
     "currentPage": 1,
-    "pageSize": 10,
+    "pageSize": 25,
     "hasNextPage": true,
     "hasPreviousPage": false
   },
@@ -693,6 +708,25 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
   }
 }
 ```
+
+**Automation usage example:**
+
+Use an automation UUID to retrieve its usage events. Automation attribution works for automations that run as a user or a service account.
+
+```bash
+curl -X POST https://api.cursor.com/teams/filtered-usage-events \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "startDate": 1748411762359,
+    "endDate": 1751003762359,
+    "automationId": "7fc64f90-6d7a-4a5d-91b1-bd1f529a85dd",
+    "page": 1,
+    "pageSize": 100
+  }'
+```
+
+Each matching event includes its `automationId` and `cloudAgentId`. Sum `chargedCents` across the events to calculate the automation's total cost.
 
 **Self-hosted agent spend example:**
 

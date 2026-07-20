@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/reference/slash-commands
-fetched_at: 2026-07-13T04:25:37.781641+00:00
+fetched_at: 2026-07-20T04:31:19.908453+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,7 +15,7 @@ fetch_method: mintlify_md
 | `/debug [prompt]`                      | Toggle Debug mode or submit a prompt in Debug mode                                                                     |
 | `/logs`                                | Show the debug log path and copy it to the clipboard                                                                   |
 | `/update`                              | Update Cursor Agent to the latest version                                                                              |
-| `/max-mode`                            | Toggle max mode on the selected model                                                                                  |
+| `/max-mode`                            | Toggle Max Mode on legacy request-based plans                                                                          |
 | `/rename <name>`                       | Rename the current chat session                                                                                        |
 | `/clear`                               | Start a new chat session. `/new`, `/new-chat`, and `/newchat` are aliases.                                             |
 | `/resume`                              | Open recent chats and resume one                                                                                       |

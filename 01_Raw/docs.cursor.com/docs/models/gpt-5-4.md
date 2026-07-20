@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/gpt-5-4
-fetched_at: 2026-05-05T19:55:42.570769+00:00
+fetched_at: 2026-07-20T04:31:21.318951+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 Cursor [plans](https://cursor.com/docs/account/pricing.md) include two usage pools. GPT-5.4 draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
 
-A **Fast mode** variant (`gpt-5.4-fast`) is available for priority processing. It runs 15% faster at 2x the standard price. When input exceeds 272k tokens (long context / Max Mode), input pricing doubles and output pricing is 1.5x the standard rate.
+A **Fast mode** variant (`gpt-5.4-fast`) is available for priority processing. It runs 15% faster at 2x the standard price. When input exceeds 272k tokens (long context), input pricing doubles and output pricing is 1.5x the standard rate.
 
 
 ---

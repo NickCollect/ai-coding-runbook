@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/claude-4-sonnet-1m
-fetched_at: 2026-07-06T05:04:28.050378+00:00
+fetched_at: 2026-07-20T04:31:20.919074+00:00
 fetch_method: mintlify_md
 ---
 
-We recommend using [Claude Sonnet 5](https://cursor.com/docs/models/claude-sonnet-5.md), which also supports up to 1M context in Max Mode.
+We recommend using [Claude Sonnet 5](https://cursor.com/docs/models/claude-sonnet-5.md), which also supports up to 1M tokens of context.
 
 ## Tools
 

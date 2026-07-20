@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cli/overview
-fetched_at: 2026-06-22T06:23:24.710530+00:00
+fetched_at: 2026-07-20T04:31:19.803755+00:00
 fetch_method: mintlify_md
 ---
 
@@ -91,12 +91,6 @@ agent --resume="chat-id-here"
 Configure command execution settings with `/sandbox` or the `--sandbox <mode>` flag (`enabled` or `disabled`). Toggle sandbox mode on or off and control network access through an interactive menu. Settings persist across sessions.
 
 [Media](https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/uploads/sandox.mp4)
-
-## Max mode
-
-Toggle [Max Mode](https://cursor.com/help/ai-features/max-mode.md) on models that support it using `/max-mode`.
-
-[Media](https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/uploads/max-mode.mp4)
 
 ## Sudo password prompting
 

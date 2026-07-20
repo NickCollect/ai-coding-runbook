@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/automations
-fetched_at: 2026-07-13T04:25:37.906029+00:00
+fetched_at: 2026-07-20T04:31:20.006905+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ For any path:
 
 Automations create cloud agents and are billed based on cloud agent usage. See [cloud agent pricing](https://cursor.com/docs/models-and-pricing.md#model-pricing) for details.
 
-Automations always run in [Max Mode](https://cursor.com/docs/models-and-pricing.md#max-mode) because they run as cloud agents. There is no toggle to turn Max Mode off.
+Automations use each model's maximum supported context window because they run as cloud agents. There is no context-window toggle.
 
 How usage is billed depends on the automation's [permission scope](https://cursor.com/docs/cloud-agent/automations.md#permissions):
 

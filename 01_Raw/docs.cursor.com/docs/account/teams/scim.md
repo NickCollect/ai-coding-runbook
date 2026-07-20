@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/scim
-fetched_at: 2026-06-29T05:25:13.082228+00:00
+fetched_at: 2026-07-20T04:31:19.504580+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,14 +10,17 @@ fetch_method: mintlify_md
 
 SCIM 2.0 provisioning automatically manages your team members and directory groups through your identity provider. Available on Enterprise plans with SSO enabled, [contact sales](https://cursor.com/contact-sales?source=docs-scim) to get access.
 
-If you also manage multiple linked teams, see [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md) for org-level cohorts and group controls.
+This page covers SCIM for a single team. If you run multiple linked teams
+under an [Organization](https://cursor.com/docs/enterprise/organizations.md), you can also sync
+directory groups at the organization level and use them across teams through
+[Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md).
 
 ## Prerequisites
 
 - Cursor Enterprise plan
-- SSO must be configured first - **SCIM requires an active SSO connection**
+- SSO configured first. **SCIM requires an active SSO connection**
 - Admin access to your identity provider (Okta, Azure AD, etc.)
-- Admin access to your Cursor organization
+- Admin access to your Cursor team
 
 ## How it works
 
@@ -27,7 +30,9 @@ Users are automatically added to Cursor when assigned to the SCIM application in
 
 ### Directory groups
 
-Directory groups and their membership sync from your identity provider. Group and user management must be done through your identity provider - Cursor displays this information as read-only.
+Directory groups and their membership sync from your identity provider. Manage groups and users in your identity provider; Cursor displays this information as read-only. Within a team, directory groups control spend limits and policy.
+
+To drive team membership and roles from your directory, sync a directory group into an [Organization Group](https://cursor.com/docs/enterprise/organization-groups.md#set-up-scim-synced-groups) and map that group to a team. See [Use groups to power teams](https://cursor.com/docs/enterprise/organization-groups.md#use-groups-to-power-teams).
 
 ### Spend management
 
@@ -54,15 +59,15 @@ this to begin the configuration wizard.
 
 ### Configure SCIM in your identity provider
 
-In your identity provider: - Create or configure your SCIM application - Use
-the SCIM endpoint and token provided by Cursor - Enable user and push group
-provisioning - Test the connection
+In your identity provider, create or configure your SCIM application, use
+the SCIM endpoint and token provided by Cursor, enable user and push group
+provisioning, then test the connection.
 
 ### Configure spend limits (optional)
 
-Back in Cursor's Active Directory Management page: - View your synchronized
-directory groups - Set per-user spend limits for specific groups as needed -
-Review which limits apply to users in multiple groups
+Back in Cursor's Active Directory Management page, view your synchronized
+directory groups, set per-user spend limits for specific groups, and
+review which limits apply to users in multiple groups.
 
 ### Identity provider setup
 
@@ -122,13 +127,15 @@ No. All user and group management must be done through your identity provider. C
 
 Changes made in your identity provider sync to Cursor in real-time. There may be a brief delay for large bulk operations.
 
-### Can I sync user roles from my IdP?
+### Can I sync user roles from my identity provider?
 
-No. Currently, the SCIM integration doesn't support role mapping and all users are provisioned as Members. Any role updates need to be done in the Cursor dashboard.
+Roles are configured in Cursor. To set roles from your directory, sync the directory group into an [Organization Group](https://cursor.com/docs/enterprise/organization-groups.md#set-up-scim-synced-groups) and map that group to a team with a role. Members of the group receive that role on the team. See [Set team roles from mappings](https://cursor.com/docs/enterprise/organization-groups.md#set-team-roles-from-mappings).
 
-### Why are there users on my Members dashboard that aren't in the provisioned IdP groups?
+The role on a mapping also controls dashboard editing. When a group is connected to a team with a role, sync manages roles on that team and admins can no longer change them in the dashboard. Roles stay editable in the dashboard only when no role was selected during group selection.
 
-When SCIM is set up, existing users are not automatically removed from Cursor. You can either remove them manually, or sync them with SCIM once and deprovision them from your IdP to have them removed from Cursor.
+### Why are there users on my Members dashboard that aren't in the provisioned groups?
+
+When team-level SCIM is set up, existing users are not automatically removed from Cursor. Either remove them manually, or sync them with SCIM once and deprovision them from your identity provider to have them removed from Cursor.
 
 ### Why don't the users from my synced groups match the users on the Cursor Members dashboard?
 

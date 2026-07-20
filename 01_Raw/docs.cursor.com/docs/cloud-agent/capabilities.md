@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-07-13T04:25:37.792440+00:00
+fetched_at: 2026-07-20T04:31:20.042757+00:00
 fetch_method: mintlify_md
 ---
 
@@ -87,13 +87,13 @@ Even when listing runs in a shared environment, non-admins only see agents they 
 
 Depending on your MCP client, tool names may include a server prefix (for example, `cursor-cloud-run-info`). The underlying tools are:
 
-| Tool                  | Purpose                                                                                                                                                         |
-| :-------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `run-info`            | Get the current run's identity, metadata, and URL. Start here.                                                                                                  |
-| `environment-info`    | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                                  |
-| `list-cloud-agents`   | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, archived state, and self-hosted routing. |
-| `batch-fetch-details` | Fetch details for specific run IDs (`bcId`s). Optionally include transcripts, diff metadata, setup logs, and environment info (up to 50 runs per batch).        |
-| `get-automation`      | Get an automation's details like name and owner from its ID.                                                                                                    |
+| Tool                  | Purpose                                                                                                                                                  |
+| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `run-info`            | Get the current run's identity, metadata, and URL. Start here.                                                                                           |
+| `environment-info`    | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                           |
+| `list-cloud-agents`   | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, and archived state.               |
+| `batch-fetch-details` | Fetch details for specific run IDs (`bcId`s). Optionally include transcripts, diff metadata, setup logs, and environment info (up to 50 runs per batch). |
+| `get-automation`      | Get an automation's details like name and owner from its ID.                                                                                             |
 
 A typical diagnostics flow is `run-info` → `environment-info` → `list-cloud-agents` → `batch-fetch-details`.
 

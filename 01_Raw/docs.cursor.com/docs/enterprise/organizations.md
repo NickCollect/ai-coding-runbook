@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organizations
-fetched_at: 2026-06-29T05:25:13.965464+00:00
+fetched_at: 2026-07-20T04:31:20.449134+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,35 +10,76 @@ Organizations are the top-level container for Enterprise customers. They sit abo
 
 ## Organizations model
 
-Organizations can include multiple teams, created around departments, business units, regions, or roles. Each team defines its own membership, roles, usage views, privacy settings, usage controls, and other team-level settings. Organizations sit above those teams and provide shared identity, administration, and org-wide settings.
+An Organization can include multiple teams, created around departments, business units, regions, or roles. Each team defines its own membership, roles, usage views, privacy settings, and usage controls. The Organization adds shared identity, administration, and org-wide settings on top.
 
 Each Organization has a default team that acts as a stable home team for login and routing.
 
-Users can belong to multiple teams in the same Organization, and their role can differ by team. For example, one person can be an admin in one team, a member in another, and not belong to a third team.
+Users can belong to multiple teams in the same Organization, with a different role in each. One person can be an admin on one team, a member on another, and absent from a third.
 
 ## Identity model
 
-Organizations support org-level SSO with your identity provider integration. This is the recommended model when you want one login setup across the company.
+Organizations give you one shared identity layer across every team. Configure how people sign in and how directory data flows into Cursor once, at the organization level, instead of repeating it per team.
 
-Team-level SSO is still supported for team-specific identity requirements. Organizations add a shared identity layer, but they do not remove team-level SSO options.
+### Single sign-on
+
+Organizations support org-level SSO with your identity provider. This is the recommended model when you want one login setup across the company. Team-level SSO stays supported for team-specific identity requirements.
+
+### Directory sync with SCIM
+
+At the organization level, SCIM makes directory groups from your identity provider available to Cursor. Nothing syncs automatically: admins can be intentional and choose which directory groups to sync in as [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md), and those groups can then keep team membership aligned with your directory.
+
+An identity provider connection supports one SCIM directory, so an Organization has one directory through its own identity provider. An Organization can still draw from more than one directory when linked teams run their own identity providers, since each of those connections can bring its own SCIM directory.
+
+See [SCIM provisioning](https://cursor.com/docs/account/teams/scim.md) for setup and [Identity & access management](https://cursor.com/docs/enterprise/identity-and-access-management.md) for the full identity model.
+
+### Consolidate team identity providers
+
+Teams that set up their own identity provider before joining the Organization can consolidate into one shared setup. The result is a single organization identity provider instead of one configuration per team, and members keep signing in with the same corporate credentials.
+
+To merge, open the Organization's **Settings**, find the team identity provider under **Identity provider**, and select **Merge into default IDP**.
+
+![Organization settings showing a team identity provider with the Merge into default IDP button](/docs-static/images/enterprise/organizations/idp-merge.png)
+
+The merge can't be undone: the team identity provider is retired and its teams use the organization default. Cursor runs the merge in the background, which can take a few minutes for large teams.
+
+![Confirmation dialog for merging a team identity provider into the organization default](/docs-static/images/enterprise/organizations/idp-merge-confirm.png)
+
+The identity model after consolidation: one organization identity provider handles login and directory sync for every team. A linked team that keeps its own identity provider contributes a second SCIM directory.
+
+```mermaid
+flowchart TD
+    ta["Team A identity provider"]
+    tb["Team B identity provider"]
+    idp["Organization identity provider<br/>(SSO + one SCIM directory)"]
+    tidp["Linked team identity provider<br/>(optional, own SCIM directory)"]
+    og["Organization Groups"]
+    t1["Team A"]
+    t2["Team B"]
+    ta -->|consolidate| idp
+    tb -->|consolidate| idp
+    idp -->|sync directory groups| og
+    tidp -->|sync directory groups| og
+    og -->|map| t1
+    og -->|map| t2
+```
 
 ## Usage and contract boundaries
 
-Usage can be tracked at the team level for day-to-day reporting. With organization-pooled billing, teams can draw from a shared committed pool.
-
-See [Pooled usage](https://cursor.com/docs/enterprise/pooled-usage.md) for details.
+Usage is tracked at the team level for day-to-day reporting. With organization-pooled billing, teams can draw from a shared committed pool. See [Pooled usage](https://cursor.com/docs/enterprise/pooled-usage.md) for details.
 
 ## Groups
 
-Organization Groups help you organize users across teams. Organization Groups are useful for org-wide cohorts such as Engineering, Contractors, or Pilot Users. Members can belong to multiple teams, so organization admins can apply settings to the same cohort regardless of each user's team membership.
+Organization Groups organize users across teams into org-wide cohorts such as Engineering, Contractors, or Pilot Users. Because members can belong to multiple teams, org admins can apply settings to the same cohort regardless of each user's team membership.
 
-See [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md) for setup, SCIM mapping, membership management, and group-level controls.
+Groups can also drive team membership. Map a group to a team, and Cursor keeps that team's members and roles aligned with the cohort.
+
+See [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md) for the full walkthrough: SCIM-synced setup, membership management, group settings, and team mappings.
 
 ## How limits and permissions combine
 
-Users may have different effective settings, such as usage limits and allowed models, across organization-level groups and team-level directory groups. Cursor reconciles these settings with a "most permissive wins" model.
+Users can pick up settings, such as spend limits and allowed models, from organization-level groups and team-level directory groups at once. Cursor reconciles them with a most-permissive-wins model.
 
-For example, if a user is in an organization-level group and a team, Cursor uses the highest spend limit setting between the two.
+For example, if a user is in an organization-level group and a team, Cursor uses the higher of the two spend limits.
 
 | Layer                 | What it controls                         | How multiple sources combine                                                                 |
 | --------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------- |
@@ -47,13 +88,13 @@ For example, if a user is in an organization-level group and a team, Cursor uses
 | Directory Group(s)    | SCIM-synced spend caps and team policies | Spend limits use the highest value; policy behavior is generally most permissive             |
 | Organization Group(s) | Org-level allowances and policy          | Across org groups, highest value applies; compared with team baseline, highest value applies |
 
-When choosing between team-level settings and Organization Group-level settings, use a bottom-up model from least permissive to most permissive. Set the strictest defaults at the team level, then use Organization Groups to give specific user cohorts more permissive settings.
+Work bottom-up from least to most permissive: set the strictest defaults at the team level, then use Organization Groups to give specific cohorts more permissive settings.
 
 ## Roles
 
-Organizations add org-level administration on top of team-level roles. Org admins can manage organization settings, organization membership, shared identity configuration, and view teams in the Organization. Team admins and team owners manage settings and members for their own teams.
+Organizations add org-level administration on top of team-level roles. Org admins manage organization settings, organization membership, shared identity configuration, and can view the Organization's teams. Team admins and team owners manage settings and members for their own teams.
 
-Team admin access does not automatically grant org admin access. Users can also have different roles at each layer. For example, a user can be an org admin while only being a member of specific teams.
+Team admin access doesn't grant org admin access, and roles can differ by layer. A user can be an org admin while only being a member of specific teams.
 
 ## Organization API
 

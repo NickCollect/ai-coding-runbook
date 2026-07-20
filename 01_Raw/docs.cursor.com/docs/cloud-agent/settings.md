@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/settings
-fetched_at: 2026-05-18T05:02:43.987676+00:00
+fetched_at: 2026-07-20T04:31:20.174852+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,7 +25,7 @@ Use **Update with Agent** when you want Cursor to inspect the current environmen
 
 ## Default settings
 
-- **Default model** – the model used when a run does not specify one. Pick any model that supports Max Mode.
+- **Default model** – the model used when a run does not specify one. Pick any model available for cloud agents.
 - **Default repository** – when empty, agents ask the user to choose a repo. Supplying a repo here lets users skip that step.
 - **Base branch** – the branch agents fork from when creating pull requests. Leave blank to use the repository’s default branch.
 

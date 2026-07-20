@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/api/endpoints
-fetched_at: 2026-06-15T06:17:44.518748+00:00
+fetched_at: 2026-07-20T04:31:19.976115+00:00
 fetch_method: mintlify_md
 ---
 
@@ -54,7 +54,7 @@ An explicit model ID returned by `GET /v1/models` (for example, `claude-4-sonnet
 
 `model.params` array (optional)
 
-Per-model parameters to apply to the run, such as reasoning effort or max mode. Each item has an `id` and `value`. Use only parameters supported by the selected model — call `GET /v1/models` to discover the valid `id`/`params` combinations.
+Per-model parameters to apply to the run, such as reasoning effort or context window size. Each item has an `id` and `value`. Use only parameters supported by the selected model — call `GET /v1/models` to discover the valid `id`/`params` combinations.
 
 `name` string (optional)
 
@@ -873,7 +873,7 @@ curl --request DELETE \
 
 /v1/sub-tokens
 
-Create a one-hour user-scoped token for a [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md) worker to run as an active team member.
+Create a one-hour user-scoped token for a self-hosted worker to run as an active team member.
 
 Requires an agent-scoped team service account API key. User-scoped tokens can't mint other user-scoped tokens.
 
@@ -928,7 +928,7 @@ curl --request POST \
 
 ## Fleet Management
 
-Monitor pool worker utilization and build autoscaling against self-hosted Cloud Agent pools. See [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md#fleet-management-api) for background.
+Monitor pool worker utilization and build autoscaling against self-hosted Cloud Agent pools.
 
 Authenticate with the pool's service account API key via Basic auth or Bearer token. Other API key types are rejected.
 

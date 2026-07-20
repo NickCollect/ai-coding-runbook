@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/gpt-5-6-sol
-fetched_at: 2026-07-13T04:25:39.233958+00:00
+fetched_at: 2026-07-20T04:31:21.390717+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,7 +33,7 @@ Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage 
 
 A **Fast mode** tier (`gpt-5.6-sol-fast`) is available for priority processing at 2x the standard rates.
 
-When input exceeds 272k tokens (long context / Max Mode), input pricing doubles and output pricing is 1.5x the standard rate.
+When input exceeds 272k tokens (long context), input pricing doubles and output pricing is 1.5x the standard rate.
 
 
 ---

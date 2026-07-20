@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/claude-sonnet-5
-fetched_at: 2026-07-06T05:04:28.123717+00:00
+fetched_at: 2026-07-20T04:31:21.047754+00:00
 fetch_method: mintlify_md
 ---
 
-Claude Sonnet 5 is Anthropic's latest medium-tier model and replaces Sonnet 4.6. It pushes quality close to Opus 4.8 while keeping Sonnet's lower per-token price. It supports thinking mode with a 200k default context window expandable to 1M in Max Mode, making it a strong default for everyday coding when you want frontier reasoning without Opus pricing.
+Claude Sonnet 5 is Anthropic's latest medium-tier model and replaces Sonnet 4.6. It pushes quality close to Opus 4.8 while keeping Sonnet's lower per-token price. It supports thinking mode and context windows up to 1M tokens, making it a strong default for everyday coding when you want frontier reasoning without Opus pricing.
 
 ## Strengths
 
@@ -30,7 +30,7 @@ Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage 
 
 A launch promotion lowers pricing to $2/M input and $10/M output through August 31, 2026. After that, standard pricing of $3/M input and $15/M output applies.
 
-All Sonnet 5 prompts bill at the base per-token rates in the table above, including when you use Max Mode and context goes above 200k. There is no separate long-context multiplier for Sonnet 5.
+All Sonnet 5 prompts bill at the base per-token rates in the table above, including when context goes above 200k. There is no separate long-context multiplier for Sonnet 5.
 
 A thinking variant is available for deeper reasoning.
 

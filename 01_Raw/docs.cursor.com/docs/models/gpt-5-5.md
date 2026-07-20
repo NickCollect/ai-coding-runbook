@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/gpt-5-5
-fetched_at: 2026-05-05T19:55:42.836307+00:00
+fetched_at: 2026-07-20T04:31:21.278694+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,7 +30,7 @@ Cursor [plans](https://cursor.com/docs/account/pricing.md) include two usage poo
 
 A **Fast mode** tier (`gpt-5.5-fast`) is available for priority processing. It has higher per-token pricing than standard mode.
 
-GPT-5.5 uses the same cache discount, regional endpoint pricing, and long-context pricing behavior as GPT-5.4. When input exceeds 272k tokens (long context / Max Mode), input pricing doubles and output pricing is 1.5x the standard rate.
+GPT-5.5 uses the same cache discount, regional endpoint pricing, and long-context pricing behavior as GPT-5.4. When input exceeds 272k tokens (long context), input pricing doubles and output pricing is 1.5x the standard rate.
 
 
 ---

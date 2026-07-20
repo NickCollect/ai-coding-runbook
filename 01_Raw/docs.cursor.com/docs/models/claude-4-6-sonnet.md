@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/models/claude-4-6-sonnet
-fetched_at: 2026-07-06T05:04:28.040486+00:00
+fetched_at: 2026-07-20T04:31:20.997301+00:00
 fetch_method: mintlify_md
 ---
 
 We recommend using [Claude Sonnet 5](https://cursor.com/docs/models/claude-sonnet-5.md). It's the latest Sonnet with stronger capabilities at the same price.
 
-Sonnet 4.6 is Anthropic's medium-tier intelligence model. It costs the same as Sonnet 4.5 and supports thinking mode with a 200k default context window expandable to 1M in Max Mode. It's a solid pick for teams standardized on Claude who want reasoning without Opus pricing.
+Sonnet 4.6 is Anthropic's medium-tier intelligence model. It costs the same as Sonnet 4.5 and supports thinking mode with context windows up to 1M tokens. It's a solid pick for teams standardized on Claude who want reasoning without Opus pricing.
 
 ## Strengths
 
@@ -29,7 +29,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Sonnet 4.6 draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
 
-All Sonnet 4.6 prompts bill at the base per-token rates in the table above, including when you use Max Mode and context goes above 200k. There is no separate long-context multiplier for Sonnet 4.6.
+All Sonnet 4.6 prompts bill at the base per-token rates in the table above, including when context goes above 200k. There is no separate long-context multiplier for Sonnet 4.6.
 
 A thinking variant is available for deeper reasoning.
 

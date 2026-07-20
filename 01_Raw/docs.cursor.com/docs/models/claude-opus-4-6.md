@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-6
-fetched_at: 2026-06-01T05:54:49.252211+00:00
+fetched_at: 2026-07-20T04:31:20.982157+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.6 draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
 
-All Opus 4.6 prompts bill at the base per-token rates in the table above, including when you use Max Mode and context goes above 200k. Anthropic no longer applies a separate long-context multiplier for Opus 4.6.
+All Opus 4.6 prompts bill at the base per-token rates in the table above, including when context goes above 200k. Anthropic no longer applies a separate long-context multiplier for Opus 4.6.
 
 Opus 4.6 supports a thinking variant for deeper reasoning.
 

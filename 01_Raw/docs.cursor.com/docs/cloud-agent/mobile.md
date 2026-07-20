@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/mobile
-fetched_at: 2026-07-13T04:25:37.820557+00:00
+fetched_at: 2026-07-20T04:31:20.068769+00:00
 fetch_method: mintlify_md
 ---
 
@@ -52,7 +52,7 @@ Once you're set up, put an agent to work. For example:
 You get the full cloud agent workflow from your pocket, not a stripped-down chat box. The same machines, models, and review tools you use on the web come with you.
 
 - **Run agents on cloud machines.** Pick a worker for each run: a Cloud machine, a [Self-Hosted Pool](https://cursor.com/docs/cloud-agent/self-hosted-pool.md), or one of [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md). Agents work in full development environments, so they install dependencies, run tests, and verify their changes.
-- **Use any model.** Choose any model available for cloud agents. Every run uses [Max Mode](https://cursor.com/docs/models-and-pricing.md#max-mode).
+- **Use any model.** Choose any model available for cloud agents. Every run uses the model's maximum supported context window.
 - **Let agents run long.** Start a task, lock your phone, and check back later. Agents keep working in the cloud whether or not your device stays connected.
 - **Follow the work live.** Watch the chat stream as the agent codes, send follow-ups to a running agent, and tap a subagent card to read its child transcript.
 - **Review and merge pull requests.** Read full diffs, commits, deployments, and review threads. Then merge with squash, mark ready, update the branch, toggle auto-merge, publish, close, or hand a failing check back with Fix with Agent.
@@ -81,7 +81,7 @@ Agents follow you across surfaces:
 
 - **Desktop or web to mobile.** Agents you start anywhere appear in the mobile inbox automatically. From a local IDE session, push your work to a cloud agent first with Move to Cloud, or keep it on your computer and direct it from your phone with [Remote Control](https://cursor.com/docs/cloud-agent/mobile.md#remote-control).
 - **Mobile to desktop.** Any agent you start on mobile shows up in the desktop Cloud Agents panel and at [cursor.com/agents](https://cursor.com/agents). Open it and keep going.
-- **Run on your local Mac from your phone.** Register a machine with [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md), then choose it as the worker when you start an agent on mobile. The agent loop runs in the cloud while terminal commands, file edits, and tests run on your Mac, so you can put your own machine to work while you're away from your desk.
+- **Direct your computer from your phone.** Hand a session running on your computer to the cloud with [Remote Control](https://cursor.com/docs/cloud-agent/mobile.md#remote-control), then keep directing it from your phone. The agent loop runs in the cloud while terminal commands, file edits, and tests run on your computer.
 
 Agents started on mobile are tagged with `source: iosApp` so you can tell where they came from.
 
@@ -121,13 +121,13 @@ your phone. Your computer keeps running the work.
 
 ### How your code stays on your machine
 
-Remote Control automatically manages a worker on your computer. It uses the same execution model as [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md), but doesn't require separate worker setup. The agent loop runs in Cursor's cloud, and every tool call (terminal commands, file edits, tests, and git) runs on your computer.
+Remote Control automatically manages a worker on your computer, with no separate setup required. The agent loop runs in Cursor's cloud, and every tool call (terminal commands, file edits, tests, and git) runs on your computer.
 
 - Your repository, secrets, credentials, and build caches stay on your machine. Only tool results and the context the model needs cross to Cursor.
 - Only you can control your agents. Cursor ties each session to your account and your machine, and rejects requests for agents you don't own.
 - Cursor sends the conversation state and model context needed to continue the session when you enable Remote Control for the agent.
 
-For the trust boundaries that apply to private workers, see [Security and network](https://cursor.com/docs/cloud-agent/security-network.md).
+For the trust boundaries that apply when tool calls run on your computer, see [Security and network](https://cursor.com/docs/cloud-agent/security-network.md).
 
 ### Current limitations
 
@@ -153,7 +153,6 @@ When you try to use Cloud Agents, Cursor prompts you to opt in to Privacy Mode. 
 - [Cloud agents overview](https://cursor.com/docs/cloud-agent.md)
 - [Cloud agent capabilities](https://cursor.com/docs/cloud-agent/capabilities.md)
 - [Cloud agent setup](https://cursor.com/docs/cloud-agent/setup.md)
-- [My Machines](https://cursor.com/docs/cloud-agent/my-machines.md)
 - [Security and network](https://cursor.com/docs/cloud-agent/security-network.md)
 
 

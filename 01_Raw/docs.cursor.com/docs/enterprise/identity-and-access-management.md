@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/identity-and-access-management
-fetched_at: 2026-06-08T05:24:58.351268+00:00
+fetched_at: 2026-07-20T04:31:20.317538+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 Identity and access management controls who can use Cursor in your organization and what they can do. You'll set up authentication, automate user provisioning, and enforce policies through device management.
 
-We recommend implementing identity controls in this order:
+Set up identity controls in this order:
 
 1. **Set up SSO**: Get centralized authentication working first
 2. **Enable SCIM**: Automate user lifecycle management
@@ -17,11 +17,11 @@ We recommend implementing identity controls in this order:
 
 ## Single Sign-On (SSO) and SAML
 
-SSO lets your users authenticate to Cursor using your existing identity provider. Instead of creating separate Cursor passwords, users log in with their corporate credentials.
+SSO lets your users authenticate to Cursor with your existing identity provider. Instead of creating separate Cursor passwords, users log in with their corporate credentials.
 
-Cursor supports SAML 2.0 integration with providers like Okta, Azure AD, Google Workspace, and OneLogin. When you enable SSO, you can require it for all team members, preventing password-based authentication entirely.
+Cursor supports SAML 2.0 with providers like Okta, Azure AD, Google Workspace, and OneLogin. When you enable SSO, you can require it for all team members and block password-based authentication entirely.
 
-If your company has multiple linked teams, we recommend a shared org-level SSO model through [Organizations](https://cursor.com/docs/enterprise/organizations.md). Team-level SSO setups are still supported for team-specific identity requirements.
+If your company runs multiple linked teams, use shared org-level SSO through [Organizations](https://cursor.com/docs/enterprise/organizations.md). Team-level SSO stays supported for team-specific identity requirements.
 
 See [SSO and SAML setup](https://cursor.com/docs/account/teams/sso.md) for detailed configuration instructions.
 
@@ -29,13 +29,22 @@ See [SSO and SAML setup](https://cursor.com/docs/account/teams/sso.md) for detai
 
 SCIM 2.0 provisioning automatically manages your team members and directory groups through your identity provider. Available on Enterprise plans with SSO enabled.
 
-Without SCIM, you need to manually add users to your Cursor team and remove them when they leave. With SCIM:
+Without SCIM, you add users to your Cursor team by hand and remove them when they leave. With SCIM:
 
 - New employees get Cursor access automatically when added to the right group
-- Departing employees lose access when removed from your IDP
+- Departing employees lose access when removed from your identity provider
 - Group membership changes propagate automatically
 
-See [SCIM provisioning](https://cursor.com/docs/account/teams/scim.md) for setup instructions.
+See [SCIM provisioning](https://cursor.com/docs/account/teams/scim.md) for setup instructions. If you run multiple linked teams, you can also sync directory groups at the organization level and reuse them across teams. See [Organization-level identity](https://cursor.com/docs/enterprise/identity-and-access-management.md#organization-level-identity).
+
+## Organization-level identity
+
+If you run multiple linked teams, manage identity once at the organization level through [Organizations](https://cursor.com/docs/enterprise/organizations.md). This gives you one shared setup instead of a separate identity configuration per team.
+
+- **Org SSO**: one login setup for every team. See [Organizations](https://cursor.com/docs/enterprise/organizations.md#identity-model).
+- **Org SCIM**: sync directory groups from your identity provider into Cursor, then use them across teams through [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md).
+- **Team membership from groups**: sync a directory group into an Organization Group, then map that group to a team so membership and team roles stay aligned with the cohort. See [Use groups to power teams](https://cursor.com/docs/enterprise/organization-groups.md#use-groups-to-power-teams).
+- **Consolidate team identity providers**: org admins can merge separate team-level identity providers into one shared organization identity provider from the dashboard. See [Consolidate team identity providers](https://cursor.com/docs/enterprise/organizations.md#consolidate-team-identity-providers).
 
 ## Role-Based Access Control (RBAC)
 
@@ -113,9 +122,7 @@ Team admins can configure allowed extensions through the [team dashboard](https:
 
 **MDM Configuration:**
 
-To centrally manage allowed extensions using device management, configure the `AllowedExtensions` policy. This policy overrides both the admin portal setting and user-configured `extensions.allowed` settings. The value of this policy is a JSON string that defines the allowed extensions.
-
-To centrally manage allowed extensions for your organization, configure the `AllowedExtensions` policy using your device management solution. This policy overrides the `extensions.allowed` setting on users' devices. The value of this policy is a JSON string that defines the allowed publishers.
+To centrally manage allowed extensions, configure the `AllowedExtensions` policy through your device management solution. This policy overrides both the admin portal setting and user-configured `extensions.allowed` settings on users' devices. The value is a JSON string that defines the allowed publishers and extensions.
 
 See [Deployment Patterns](https://cursor.com/docs/enterprise/deployment-patterns.md#mdm-configuration) for platform-specific MDM configuration instructions.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/microsoft-teams
-fetched_at: 2026-06-22T06:23:25.614011+00:00
+fetched_at: 2026-07-20T04:31:20.824314+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,7 +28,7 @@ With Cursor's integration for Microsoft Teams, you can use [Cloud Agents](https:
 
 ## How to use
 
-Mention `@Cursor` and give your prompt. Cursor automatically picks the right repository and model based on your message, the thread context, and your recent agent activity.
+Mention `@Cursor` and give your prompt. Cursor automatically picks the right repository, model, base branch, or named [cloud agent environment](https://cursor.com/docs/cloud-agent/setup.md) based on your message, the thread context, and your recent agent activity.
 
 To use a specific repository, include its name in your message:
 
@@ -40,6 +40,12 @@ To use a specific model, mention it in your message:
 - `@Cursor with opus, fix the login bug`
 - `@Cursor use gpt-5.2 to refactor the auth module`
 
+To use a named environment, mention it in your message or add `env=<name>`:
+
+- `@Cursor use the Platform environment to update the shared API`
+- `@Cursor env=Platform update the shared API`
+- `@Cursor env="Platform Services" update the shared API`
+
 ### Commands
 
 Run `@Cursor help` for an up-to-date command list.
@@ -50,17 +56,18 @@ Run `@Cursor help` for an up-to-date command list.
 | `@Cursor help`               | Show setup and usage help                                                                 |
 | `@Cursor unlink`             | Disconnect your Cursor account from Microsoft Teams                                       |
 | `@Cursor disconnect`         | Disconnect your Cursor account from Microsoft Teams                                       |
-| `@Cursor [options] [prompt]` | Use advanced options: `repo`, `branch`, `model`                                           |
+| `@Cursor [options] [prompt]` | Set the repository, environment, branch, or model for a run                               |
 
 #### Options
 
 Customize Cloud Agent behavior with these options:
 
-| Option   | Description         | Example             |
-| :------- | :------------------ | :------------------ |
-| `repo`   | Specify repository  | `repo=acme/web-app` |
-| `branch` | Specify base branch | `branch=main`       |
-| `model`  | Specify model       | `model=opus`        |
+| Option                | Description                                                                         | Natural language example       | Inline example            |
+| :-------------------- | :---------------------------------------------------------------------------------- | :----------------------------- | :------------------------ |
+| `repo`                | Use a specific repository                                                           | `in acme/web-app`              | `repo=acme/web-app`       |
+| `env` / `environment` | Use a named [cloud agent environment](https://cursor.com/docs/cloud-agent/setup.md) | `use the Platform environment` | `env="Platform Services"` |
+| `branch`              | Use a specific base branch                                                          | `work from the main branch`    | `branch=main`             |
+| `model`               | Use a specific model                                                                | `with opus`                    | `model=opus`              |
 
 #### Syntax formats
 
@@ -73,7 +80,7 @@ Natural:
 Inline:
 
 ```bash
-@Cursor repo=acme/backend branch=dev model=opus Fix the login bug
+@Cursor env="Platform Services" branch=dev model=opus Fix the login bug
 ```
 
 #### Option precedence
@@ -83,6 +90,7 @@ When combining options:
 - **Explicit values** override defaults
 - **Inline options** override model and repository values inferred from your message
 - **Dashboard settings** apply when no value is specified or inferred
+- **`env`** takes precedence over `repo` when both are present
 
 The bot parses options from anywhere in the message, allowing natural command writing.
 
@@ -147,7 +155,7 @@ Starting branch for Cloud Agent. Leave blank to use the repository's default bra
 
 Cursor evaluates your Microsoft Teams message in this order:
 
-1. **Explicit options**: `repo`, `branch`, and `model` values in your prompt
+1. **Explicit options**: `repo`, `env`, `branch`, and `model` values in your prompt
 2. **Your message content**: repository names, model names, or branch names in your prompt
 3. **Recent agent activity**: repositories you've used recently
 4. **Default repository**: fallback when no match is found

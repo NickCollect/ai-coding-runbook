@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/regions
-fetched_at: 2026-05-05T19:55:34.975916+00:00
+fetched_at: 2026-07-20T04:31:19.239426+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,6 +42,13 @@ Yes, if the provider allows usage from your region. Go to Cursor Settings →
 Models and add your own API key for a supported provider. (See the [API
 Keys](https://cursor.com/help/models-and-usage/api-keys.md) page.) If the provider blocks your region,
 calls may still fail even with your own key.
+
+### Does Cursor offer data residency controls?
+
+Yes. Enterprise customers can enroll in US-only data residency so inference,
+processing, and storage for supported features stay in the US. See
+[Privacy and Data Governance](https://cursor.com/docs/enterprise/privacy-and-data-governance.md#data-residency)
+for supported models, exclusions, pricing, and how to enable it.
 
 
 ---

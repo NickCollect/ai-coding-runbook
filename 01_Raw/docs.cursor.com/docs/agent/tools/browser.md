@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/agent/tools/browser
-fetched_at: 2026-05-25T05:15:50.307468+00:00
+fetched_at: 2026-07-20T04:31:19.603194+00:00
 fetch_method: mintlify_md
 ---
 
 # Browser
 
-Agent can control a web browser to test applications, visually edit layouts and styles, audit accessibility, convert designs into code, and more. With full access to console logs and network traffic, Agent can debug issues and automate comprehensive testing workflows.
+Agent can control a web browser to test applications, audit accessibility, convert designs into code, and more. With full access to console logs and network traffic, Agent can debug issues and automate comprehensive testing workflows.
 
 For enterprise customers, browser controls are governed by MCP allowlist or denylist.
 
@@ -54,28 +54,6 @@ Read browser console messages, errors, and logs. Agent can monitor JavaScript er
 ### Network Traffic
 
 Monitor HTTP requests and responses made by the page. Agent can track API calls, analyze request payloads, check response status codes, and diagnose network-related issues. This is currently only available in the Agent panel, coming soon to the layout.
-
-## Design sidebar
-
-The browser includes a design sidebar for modifying your site directly in Cursor. Design and code simultaneously with real-time visual adjustments.
-
-![Browser design sidebar showing layout controls, positioning, and CSS properties for a selected element.](/docs-static/images/agent/browser-design-sidebar.png)
-
-### Visual editing capabilities
-
-The sidebar provides powerful visual editing controls:
-
-- **Position and layout**: Move and rearrange elements on the page. Change flex direction, alignment, and grid layouts.
-- **Dimensions**: Adjust width, height, padding, and margins with precise pixel values.
-- **Colors**: Update colors from your design system or add new gradients. Access color tokens through a visual picker.
-- **Appearance**: Experiment with shadows, opacity, and border radius using visual sliders.
-- **Theme testing**: Test your designs across light and dark themes instantly.
-
-### Applying changes
-
-When your visual adjustments match your vision, click the apply button to trigger an agent that updates your codebase. The agent translates your visual changes into the appropriate code modifications.
-
-You can also select multiple elements across your site and describe changes in text. Agents kick off in parallel, and your changes appear live on the page after hot-reload.
 
 ## Session persistence
 

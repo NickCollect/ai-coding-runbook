@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/baa
-fetched_at: 2026-07-13T04:25:38.039756+00:00
+fetched_at: 2026-07-20T04:31:20.275469+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,7 +42,7 @@ Third-party services and integrations are not automatically covered by Cursor's 
 The listed Eligible Services are covered for Enterprise customers with Privacy Mode enabled and locked organization-wide:
 
 - Desktop IDE, including Agent, Tab, Edit, local agent mode, and inline edit
-- Cloud Agents and self-hosted Cloud Agents
+- Cloud Agents
 - Cursor for iOS
 - CLI
 - Tab
