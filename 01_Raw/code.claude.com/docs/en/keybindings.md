@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/keybindings
-fetched_at: 2026-07-20T04:31:29.094058+00:00
+fetched_at: 2026-07-27T04:31:49.300374+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ Each binding block specifies a **context** where the bindings apply:
 | `Task`            | Background task is running                                   |
 | `ThemePicker`     | Theme picker dialog                                          |
 | `Attachments`     | Image attachment navigation in select dialogs                |
-| `Footer`          | Footer indicator navigation (tasks, teams, diff)             |
+| `Footer`          | Footer indicator navigation (tasks, teams, diff, artifacts)  |
 | `MessageSelector` | Rewind and summarize dialog message selection                |
 | `DiffDialog`      | Diff viewer navigation                                       |
 | `ModelPicker`     | Model picker effort level                                    |
@@ -85,7 +85,7 @@ Actions available in the `Global` context:
 | `app:interrupt`        | Ctrl+C    | Cancel current operation                                                                                     |
 | `app:exit`             | Ctrl+D    | Exit Claude Code. Press twice within 800ms to confirm                                                        |
 | `app:redraw`           | (unbound) | Force terminal redraw                                                                                        |
-| `app:toggleTodos`      | Ctrl+T    | Toggle visibility of Claude's to-do checklist. This is not the [`/tasks`](/en/commands) background-task view |
+| `app:toggleTodos`      | Ctrl+T    | Toggle visibility of Claude's to-do checklist. This is not the [`/tasks`](/docs/en/commands) background-task view |
 | `app:toggleTranscript` | Ctrl+O    | Toggle verbose transcript                                                                                    |
 
 ### History actions
@@ -105,9 +105,9 @@ Actions available in the `Chat` context:
 | Action                | Default                           | Description                                                                                                                                                    |
 | :-------------------- | :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `chat:cancel`         | Escape                            | Cancel current input                                                                                                                                           |
-| `chat:clearInput`     | Ctrl+L                            | Force a full screen redraw, preserving input. In [fullscreen rendering](/en/fullscreen#clear-the-conversation), press twice within two seconds to run `/clear` |
-| `chat:clearScreen`    | Cmd+K                             | In [fullscreen rendering](/en/fullscreen#clear-the-conversation), press twice within two seconds to run `/clear`                                               |
-| `chat:killAgents`     | Ctrl+X Ctrl+K                     | Stop all running [background subagents](/en/sub-agents#run-subagents-in-foreground-or-background) in this session                                              |
+| `chat:clearInput`     | Ctrl+L                            | Force a full screen redraw, preserving input. In [fullscreen rendering](/docs/en/fullscreen#clear-the-conversation), press twice within two seconds to run `/clear` |
+| `chat:clearScreen`    | Cmd+K                             | In [fullscreen rendering](/docs/en/fullscreen#clear-the-conversation), press twice within two seconds to run `/clear`                                               |
+| `chat:killAgents`     | Ctrl+X Ctrl+K                     | Stop all running [background subagents](/docs/en/sub-agents#run-subagents-in-foreground-or-background) in this session                                              |
 | `chat:cycleMode`      | Shift+Tab\*                       | Cycle permission modes                                                                                                                                         |
 | `chat:modelPicker`    | Meta+P                            | Open model picker                                                                                                                                              |
 | `chat:fastMode`       | Meta+O                            | Toggle fast mode                                                                                                                                               |
@@ -146,7 +146,7 @@ Actions available in the `Confirmation` context:
 | `confirm:previousField`     | (unbound) | Previous field                                                                                                                     |
 | `confirm:toggle`            | Space     | Toggle selection                                                                                                                   |
 | `confirm:cycleMode`         | Shift+Tab | Cycle permission modes                                                                                                             |
-| `confirm:toggleExplanation` | Ctrl+E    | Toggle a model-generated [explanation of the command](/en/permissions#permission-system) on Bash and PowerShell permission prompts |
+| `confirm:toggleExplanation` | Ctrl+E    | Toggle a model-generated [explanation of the command](/docs/en/permissions#permission-system) on Bash and PowerShell permission prompts |
 
 ### Permission actions
 
@@ -165,7 +165,7 @@ Actions available in the `Transcript` context:
 | `transcript:toggleShowAll` | Ctrl+E            | Toggle show all content |
 | `transcript:exit`          | q, Ctrl+C, Escape | Exit transcript view    |
 
-`transcript:toggleShowAll` applies in the default renderer only; in [fullscreen rendering](/en/fullscreen), the transcript viewer doesn't offer a show-all toggle.
+`transcript:toggleShowAll` applies in the default renderer only; in [fullscreen rendering](/docs/en/fullscreen), the transcript viewer doesn't offer a show-all toggle.
 
 ### History search actions
 
@@ -179,7 +179,7 @@ Actions available in the `HistorySearch` context:
 | `historySearch:execute`    | Enter       | Execute selected command                  |
 | `historySearch:cycleScope` | Ctrl+S      | Cycle scope: session, project, everywhere |
 
-The `historySearch:next`, `historySearch:accept`, `historySearch:cancel`, and `historySearch:execute` defaults apply to the inline history search in the default renderer, which always searches prompts from all projects. `historySearch:cycleScope` takes effect only in [fullscreen rendering](/en/fullscreen), where `Ctrl+R` opens a search dialog instead and `Ctrl+S` cycles its scope. The dialog's other keys are fixed and can't be rebound: `Enter` or `Tab` places the highlighted match in the prompt input and `Esc` cancels.
+The `historySearch:next`, `historySearch:accept`, `historySearch:cancel`, and `historySearch:execute` defaults apply to the inline history search in the default renderer, which always searches prompts from all projects. `historySearch:cycleScope` takes effect only in [fullscreen rendering](/docs/en/fullscreen), where `Ctrl+R` opens a search dialog instead and `Ctrl+S` cycles its scope. The dialog's other keys are fixed and can't be rebound: `Enter` or `Tab` places the highlighted match in the prompt input and `Esc` cancels.
 
 ### Task actions
 
@@ -229,14 +229,15 @@ Actions available in the `Attachments` context:
 
 Actions available in the `Footer` context:
 
-| Action                  | Default | Description                              |
-| :---------------------- | :------ | :--------------------------------------- |
-| `footer:next`           | Right   | Next footer item                         |
-| `footer:previous`       | Left    | Previous footer item                     |
-| `footer:up`             | Up      | Navigate up in footer (deselects at top) |
-| `footer:down`           | Down    | Navigate down in footer                  |
-| `footer:openSelected`   | Enter   | Open selected footer item                |
-| `footer:clearSelection` | Escape  | Clear footer selection                   |
+| Action                  | Default           | Description                                                                                                                                                                                                               |
+| :---------------------- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `footer:next`           | Right             | Next footer item                                                                                                                                                                                                          |
+| `footer:previous`       | Left              | Previous footer item                                                                                                                                                                                                      |
+| `footer:up`             | Up                | Navigate up in footer (deselects at top)                                                                                                                                                                                  |
+| `footer:down`           | Down              | Navigate down in footer                                                                                                                                                                                                   |
+| `footer:openSelected`   | Enter             | Open selected footer item                                                                                                                                                                                                 |
+| `footer:clearSelection` | Escape            | Clear footer selection                                                                                                                                                                                                    |
+| `footer:dismiss`        | Backspace, Delete | Dismiss the selected [artifact](/docs/en/artifacts) link from the footer; the published artifact itself is unaffected. On other footer rows, these keys have no effect. {/* min-version: 2.1.217 */}Requires v2.1.217 or later |
 
 ### Message selector actions
 
@@ -319,7 +320,7 @@ Actions available in the `Settings` context. The `select:accept` and `confirm:no
 
 ### Voice actions
 
-Actions available in the `Chat` context when [voice dictation](/en/voice-dictation) is enabled:
+Actions available in the `Chat` context when [voice dictation](/docs/en/voice-dictation) is enabled:
 
 | Action             | Default | Description                                              |
 | :----------------- | :------ | :------------------------------------------------------- |
@@ -327,7 +328,7 @@ Actions available in the `Chat` context when [voice dictation](/en/voice-dictati
 
 ### Scroll actions
 
-Actions available in the `Scroll` context when [fullscreen rendering](/en/fullscreen) is enabled:
+Actions available in the `Scroll` context when [fullscreen rendering](/docs/en/fullscreen) is enabled:
 
 | Action                      | Default              | Description                                                                                               |
 | :-------------------------- | :------------------- | :-------------------------------------------------------------------------------------------------------- |
@@ -468,7 +469,7 @@ When vim mode is enabled via `/config` → Editor mode, keybindings and vim mode
 * **Keybindings** handle actions at the component level (toggle todos, submit, etc.)
 * The Escape key in vim mode switches INSERT to NORMAL mode; it does not trigger `chat:cancel`
 * Most Ctrl+key shortcuts pass through vim mode to the keybinding system
-* Vim keys aren't remappable through the keybindings file. To map a two-key INSERT-mode sequence such as `jj` to Escape, use the [`vimInsertModeRemaps`](/en/interactive-mode#remap-insert-mode-key-sequences) setting
+* Vim keys aren't remappable through the keybindings file. To map a two-key INSERT-mode sequence such as `jj` to Escape, use the [`vimInsertModeRemaps`](/docs/en/interactive-mode#remap-insert-mode-key-sequences) setting
 * In vim NORMAL mode, `?` shows the help menu (vim behavior)
 * In vim NORMAL mode, `/` opens history search, the same as Ctrl+R in standard mode
 
@@ -482,4 +483,4 @@ Claude Code validates your keybindings and shows warnings for:
 * Terminal multiplexer conflicts
 * Duplicate bindings in the same context
 
-Claude Code reports warnings when the file loads and writes each one to the debug log. Start Claude Code with [`--debug`](/en/cli-reference#cli-flags) to see the details.
+Claude Code reports warnings when the file loads and writes each one to the debug log. Start Claude Code with [`--debug`](/docs/en/cli-reference#cli-flags) to see the details.

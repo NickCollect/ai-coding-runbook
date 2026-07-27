@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/google-vertex-ai
-fetched_at: 2026-07-20T04:31:28.721119+00:00
+fetched_at: 2026-07-27T04:31:49.167287+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,11 +110,11 @@ If you have Google Cloud credentials and want to start using Claude Code through
   </Step>
 
   <Step title="Follow the wizard prompts">
-    Choose how you authenticate to Google Cloud: Application Default Credentials from `gcloud`, a service account key file, or credentials already in your environment. The wizard detects your project and region, verifies which Claude models your project can invoke, and lets you pin them. It saves the result to the `env` block of your [user settings file](/en/settings), so you don't need to export environment variables yourself.
+    Choose how you authenticate to Google Cloud: Application Default Credentials from `gcloud`, a service account key file, or credentials already in your environment. The wizard detects your project and region, verifies which Claude models your project can invoke, and lets you pin them. It saves the result to the `env` block of your [user settings file](/docs/en/settings), so you don't need to export environment variables yourself.
   </Step>
 </Steps>
 
-After you've signed in, run `/setup-vertex` any time to reopen the wizard and change your credentials, project, region, or model pins. The model pin step starts from your currently pinned models. The wizard writes to `~/.claude/settings.json`, or to `$CLAUDE_CONFIG_DIR/settings.json` when [`CLAUDE_CONFIG_DIR`](/en/env-vars#variables) is set.
+After you've signed in, run `/setup-vertex` any time to reopen the wizard and change your credentials, project, region, or model pins. The model pin step starts from your currently pinned models. The wizard writes to `~/.claude/settings.json`, or to `$CLAUDE_CONFIG_DIR/settings.json` when [`CLAUDE_CONFIG_DIR`](/docs/en/env-vars#variables) is set.
 
 ## Region configuration
 
@@ -163,7 +163,7 @@ Claude Code v2.1.121 or later supports [X.509 certificate-based Workload Identit
 
 #### Advanced credential configuration
 
-Claude Code supports automatic credential refresh for GCP through the `gcpAuthRefresh` setting. Add it to your Claude Code [settings file](/en/settings), for example `~/.claude/settings.json`. When Claude Code detects that your GCP credentials are expired or cannot be loaded, it runs the configured command to obtain new credentials before retrying the request.
+Claude Code supports automatic credential refresh for GCP through the `gcpAuthRefresh` setting. Add it to your Claude Code [settings file](/docs/en/settings), for example `~/.claude/settings.json`. When Claude Code detects that your GCP credentials are expired or cannot be loaded, it runs the configured command to obtain new credentials before retrying the request.
 
 ```json theme={null}
 {
@@ -200,11 +200,11 @@ export VERTEX_REGION_CLAUDE_HAIKU_4_5=us-east5
 export VERTEX_REGION_CLAUDE_4_6_SONNET=europe-west1
 ```
 
-Most model versions have a corresponding `VERTEX_REGION_CLAUDE_*` variable. See the [Environment variables reference](/en/env-vars) for the full list. Check [Google Cloud's Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) to determine which models support global endpoints versus regional only.
+Most model versions have a corresponding `VERTEX_REGION_CLAUDE_*` variable. See the [Environment variables reference](/docs/en/env-vars) for the full list. Check [Google Cloud's Agent Platform Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) to determine which models support global endpoints versus regional only.
 
-[Prompt caching](/en/prompt-caching) is enabled automatically. To disable it, set `DISABLE_PROMPT_CACHING=1`. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Google Cloud's Agent Platform, the `/logout` command is unavailable since authentication is handled through Google Cloud credentials.
+[Prompt caching](/docs/en/prompt-caching) is enabled automatically. To disable it, set `DISABLE_PROMPT_CACHING=1`. To request a 1-hour cache TTL instead of the 5-minute default, set `ENABLE_PROMPT_CACHING_1H=1`; cache writes with a 1-hour TTL are billed at a higher rate. For heightened rate limits, contact Google Cloud support. When using Google Cloud's Agent Platform, the `/logout` command is unavailable since authentication is handled through Google Cloud credentials.
 
-Claude Code disables [MCP tool search](/en/mcp#scale-with-mcp-tool-search) by default on Google Cloud's Agent Platform, so MCP tool definitions load upfront. Google Cloud's Agent Platform supports tool search for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later. Set `ENABLE_TOOL_SEARCH=true` to enable it on those models. Earlier models on Google Cloud's Agent Platform do not accept the required beta header, and requests fail if you enable tool search with them.
+Claude Code disables [MCP tool search](/docs/en/mcp#scale-with-mcp-tool-search) by default on Google Cloud's Agent Platform, so MCP tool definitions load upfront. Google Cloud's Agent Platform supports tool search for Claude Sonnet 4.5 and later and Claude Opus 4.5 and later. Set `ENABLE_TOOL_SEARCH=true` to enable it on those models. Earlier models on Google Cloud's Agent Platform do not accept the required beta header, and requests fail if you enable tool search with them.
 
 ### 5. Pin model versions
 
@@ -214,7 +214,7 @@ Claude Code disables [MCP tool search](/en/mcp#scale-with-mcp-tool-search) by de
 
 Set these environment variables to specific Google Cloud's Agent Platform model IDs.
 
-Without `ANTHROPIC_DEFAULT_OPUS_MODEL`, the `opus` alias on Google Cloud's Agent Platform resolves to Opus 4.8, and without `ANTHROPIC_DEFAULT_SONNET_MODEL`, the `sonnet` alias resolves to Sonnet 4.5. This example pins each alias to a specific version:
+Without `ANTHROPIC_DEFAULT_OPUS_MODEL`, the `opus` alias on Google Cloud's Agent Platform resolves to Opus 5, and without `ANTHROPIC_DEFAULT_SONNET_MODEL`, the `sonnet` alias resolves to Sonnet 4.5. This example pins each alias to a specific version:
 
 ```bash theme={null}
 export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-8'
@@ -222,13 +222,13 @@ export ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-5'
 export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'
 ```
 
-For current and legacy model IDs, see [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview). See [Model configuration](/en/model-config#pin-models-for-third-party-deployments) for the full list of environment variables.
+For current and legacy model IDs, see [Models overview](https://platform.claude.com/docs/en/about-claude/models/overview). See [Model configuration](/docs/en/model-config#pin-models-for-third-party-deployments) for the full list of environment variables.
 
 Claude Code uses these default models when no pinning variables are set:
 
 | Model type       | Default value                |
 | :--------------- | :--------------------------- |
-| Primary model    | `claude-opus-4-8`            |
+| Primary model    | `claude-opus-5`              |
 | Small/fast model | `claude-sonnet-4-5@20250929` |
 
 Background tasks such as session title generation use the small/fast model, normally a Haiku-class model. On Google Cloud's Agent Platform, Claude Code uses the default Sonnet model for background tasks because Haiku may not be enabled in every project or region. Two selections change which model carries them:
@@ -240,7 +240,7 @@ Background tasks such as session title generation use the small/fast model, norm
   Opus models have a higher per-token price than Sonnet models, so a deployment that doesn't pin a primary model is billed at the Opus rate once it updates to v2.1.207 or later. To keep Sonnet 4.5 as the primary model, set `ANTHROPIC_MODEL` to its full model ID. A deployment that steers the default with `ANTHROPIC_DEFAULT_SONNET_MODEL` and doesn't set `ANTHROPIC_DEFAULT_OPUS_MODEL` keeps its steered Sonnet model as the default.
 </Warning>
 
-{/* min-version: 2.1.207 */}Before v2.1.207, the primary model on Google Cloud's Agent Platform defaulted to Sonnet 4.5, the `opus` alias resolved to Opus 4.6, and background tasks always used the primary model.
+{/* min-version: 2.1.219 */}On v2.1.207 through v2.1.218, the primary model on Google Cloud's Agent Platform defaulted to Opus 4.8 and the `opus` alias resolved to Opus 4.8. {/* min-version: 2.1.207 */}Before v2.1.207, the primary model defaulted to Sonnet 4.5, the `opus` alias resolved to Opus 4.6, and background tasks always used the primary model.
 
 To customize models further:
 
@@ -251,17 +251,17 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'
 
 ### 6. Verify your configuration
 
-Start Claude Code and run `/status` to confirm the setup. The `API provider` line shows `Google Vertex AI`, and the `GCP project`, `Default region`, and `Model` lines show your project ID, region, and resolved model. If the provider line is missing, the environment variables aren't reaching the process. Confirm they are exported in the shell where you launched `claude`, or set them in the `env` block of your [settings file](/en/settings).
+Start Claude Code and run `/status` to confirm the setup. The `API provider` line shows `Google Vertex AI`, and the `GCP project`, `Default region`, and `Model` lines show your project ID, region, and resolved model. If the provider line is missing, the environment variables aren't reaching the process. Confirm they are exported in the shell where you launched `claude`, or set them in the `env` block of your [settings file](/docs/en/settings).
 
 ## Startup model checks
 
 When Claude Code starts with Google Cloud's Agent Platform configured, it verifies that the models it intends to use are accessible in your project.
 
-If you have pinned a model version that is older than the current Claude Code default, and your project can invoke the newer version, Claude Code prompts you to update the pin. Accepting writes the new model ID to your [user settings file](/en/settings) and restarts Claude Code. Declining is remembered until the next default version change.
+If you have pinned a model version that is older than the current Claude Code default, and your project can invoke the newer version, Claude Code prompts you to update the pin. Accepting writes the new model ID to your [user settings file](/docs/en/settings) and restarts Claude Code. Declining is remembered until the next default version change.
 
 If you have not pinned a model and the current default is unavailable in your project, Claude Code falls back for the current session and shows a notice. It tries earlier versions of the default model first and, when the default is an Opus model and no Opus version is available, falls back to the default Sonnet model. The fallback is not persisted. Enable the newer model in [Model Garden](https://console.cloud.google.com/vertex-ai/model-garden) or [pin a version](#5-pin-model-versions) to make the choice permanent.
 
-{/* min-version: 2.1.211 */}When you start the session on a specific Sonnet or Opus version, with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](/en/settings), that version acts as the session's pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
+{/* min-version: 2.1.211 */}When you start the session on a specific Sonnet or Opus version, with `--model`, `ANTHROPIC_MODEL`, or the [`model` setting](/docs/en/settings), that version acts as the session's pinned default for the matching `sonnet` or `opus` alias. Claude Code skips the availability check for the built-in default your model replaces and starts on the model you configured, with no fallback notice.
 
 Model aliases such as `opus` don't act as pins, and neither does a model ID Claude Code doesn't recognize.
 
@@ -287,7 +287,7 @@ For details, see [Google Cloud's Agent Platform IAM documentation](https://cloud
 
 Claude Sonnet 5, Opus 4.6 and later, and Sonnet 4.6 support the [1M token context window](https://platform.claude.com/docs/en/build-with-claude/context-windows#context-window-sizes-by-model) on Google Cloud's Agent Platform. Sonnet 5 always runs with the 1M window, with no `[1m]` variant to select. For the other models, Claude Code automatically enables the extended context window when you select a 1M model variant.
 
-The [setup wizard](#sign-in-with-agent-platform) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](/en/model-config#pin-models-for-third-party-deployments) for details.
+The [setup wizard](#sign-in-with-agent-platform) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](/docs/en/model-config#pin-models-for-third-party-deployments) for details.
 
 ## Troubleshooting
 

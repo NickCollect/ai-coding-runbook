@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/code-review
-fetched_at: 2026-07-20T04:31:27.278563+00:00
+fetched_at: 2026-07-27T04:31:47.874708+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,14 +13,14 @@ fetch_method: mintlify_md
 > Set up automated PR reviews that catch logic errors, security vulnerabilities, and regressions using multi-agent analysis of your full codebase
 
 <Note>
-  Code Review is in research preview, available for [Team and Enterprise](https://claude.ai/admin-settings/claude-code) subscriptions. It is not available for organizations with [Zero Data Retention](/en/zero-data-retention) enabled. On other plans, you can still [review a diff locally](#review-a-diff-locally) with the `/code-review` command.
+  Code Review is in research preview, available for [Team and Enterprise](https://claude.ai/admin-settings/claude-code) subscriptions. It is not available for organizations with [Zero Data Retention](/docs/en/zero-data-retention) enabled. On other plans, you can still [review a diff locally](#review-a-diff-locally) with the `/code-review` command.
 </Note>
 
 Code Review analyzes your GitHub pull requests and posts findings as inline comments on the lines of code where it found issues. A fleet of specialized agents examine the code changes in the context of your full codebase, looking for logic errors, security vulnerabilities, broken edge cases, and subtle regressions.
 
 Findings are tagged by severity and don't approve or block your PR, so existing review workflows stay intact. You can tune what Claude flags by adding a `CLAUDE.md` or `REVIEW.md` file to your repository.
 
-To run Claude in your own CI infrastructure instead of this managed service, see [GitHub Actions](/en/github-actions) or [GitLab CI/CD](/en/gitlab-ci-cd). For repositories on a self-hosted GitHub instance, see [GitHub Enterprise Server](/en/github-enterprise-server).
+To run Claude in your own CI infrastructure instead of this managed service, see [GitHub Actions](/docs/en/github-actions) or [GitLab CI/CD](/docs/en/gitlab-ci-cd). For repositories on a self-hosted GitHub instance, see [GitHub Enterprise Server](/docs/en/github-enterprise-server).
 
 This page covers:
 
@@ -106,7 +106,7 @@ An Owner enables Code Review once for the organization and selects which reposit
     * **Issues**: read and write
     * **Pull requests**: read and write
 
-    Code Review uses read access to contents and write access to pull requests. The broader permission set also supports [GitHub Actions](/en/github-actions) if you enable that later.
+    Code Review uses read access to contents and write access to pull requests. The broader permission set also supports [GitHub Actions](/docs/en/github-actions) if you enable that later.
   </Step>
 
   <Step title="Select repositories">
@@ -166,7 +166,7 @@ Code Review reads two files from your repository to guide what it flags. They di
 
 Code Review reads your repository's `CLAUDE.md` files and treats newly introduced violations as [nit-level](#severity-levels) findings. This works bidirectionally: if your PR changes code in a way that makes a `CLAUDE.md` statement outdated, Claude flags that the docs need updating too.
 
-Claude reads `CLAUDE.md` files at every level of your directory hierarchy, so rules in a subdirectory's `CLAUDE.md` apply only to files under that path. See the [memory documentation](/en/memory) for more on how `CLAUDE.md` works.
+Claude reads `CLAUDE.md` files at every level of your directory hierarchy, so rules in a subdirectory's `CLAUDE.md` apply only to files under that path. See the [memory documentation](/docs/en/memory) for more on how `CLAUDE.md` works.
 
 For review-specific guidance that you don't want applied to general Claude Code sessions, use [`REVIEW.md`](#review-md) instead.
 
@@ -174,7 +174,7 @@ For review-specific guidance that you don't want applied to general Claude Code 
 
 `REVIEW.md` is a file at your repository root that overrides how Code Review behaves on your repo. Its contents are injected into the system prompt of every agent in the review pipeline as the highest-priority instruction block, taking precedence over the default review guidance.
 
-Because it's pasted verbatim, `REVIEW.md` is plain instructions: [`@` import syntax](/en/memory#import-additional-files) is not expanded, and referenced files are not read into the prompt. Put the rules you want enforced directly in the file.
+Because it's pasted verbatim, `REVIEW.md` is plain instructions: [`@` import syntax](/docs/en/memory#import-additional-files) is not expanded, and referenced files are not read into the prompt. Put the rules you want enforced directly in the file.
 
 #### What you can tune
 
@@ -288,15 +288,67 @@ If the check run title says issues were found but you don't see inline review co
 
 ## Review a diff locally
 
-The [`/code-review` command](/en/commands) reviews a diff in your terminal without installing the GitHub App. Run it in any Claude Code session: it reports correctness bugs and {/* min-version: 2.1.151 */}reuse, simplification, and efficiency cleanups. By default the local review covers your branch's commits ahead of its upstream plus any uncommitted changes in the working tree. Pass `--comment` to post findings as inline PR comments, or `--fix` to apply the findings to your working tree after the review.
+The [`/code-review` command](/docs/en/commands) reviews a diff in your terminal without installing the GitHub App. It reports correctness bugs and {/* min-version: 2.1.151 */}reuse, simplification, and efficiency cleanups.
 
-The local command follows your `CLAUDE.md` like any Claude Code session, but it doesn't read [`REVIEW.md`](#review-md).
+<Steps>
+  <Step title="Run /code-review">
+    From the session where you're working, run the command:
 
-Lower [effort levels](/en/model-config#adjust-effort-level) return fewer, higher-confidence findings, while `high` through `max` give broader coverage and may include uncertain findings. Without an effort argument, the review uses the session's current effort. To review something other than the default diff, pass a target: a file path, a PR number, a branch name, or a ref range such as `main...my-feature`. The ref range form reviews the committed diff a pull request from `my-feature` into `main` would contain, regardless of how the branch's upstream is configured.
+    ```text theme={null}
+    /code-review
+    ```
 
-`/code-review ultra --fix` runs the deeper [ultrareview](/en/ultrareview) in the cloud, then applies its findings to your working tree when they arrive back in your session. Ultrareview uses its own scope: your current branch against the repository's default branch, plus any uncommitted and staged changes in the working tree. Pass a branch name, such as `/code-review ultra develop`, to compare against a different base.
+    It reviews your branch's commits ahead of its upstream plus any uncommitted changes, so it needs work on the branch or in the working tree to have something to report. To review something else, pass a target: a file path, a PR number, a branch name, or a ref range such as `main...my-feature`.
 
-Ultrareview requires authentication with a claude.ai account and is not available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, or to organizations with Zero Data Retention enabled. When ultrareview is not available, `/code-review ultra` runs a local review in your session instead.
+    You can also add flags:
+
+    * `--fix`: applies the findings to your working tree after the review
+    * `--comment`: posts the findings as inline PR comments
+  </Step>
+
+  <Step title="Keep working">
+    {/* min-version: 2.1.218 */}The review runs as a background [subagent](/docs/en/sub-agents) with its own context window, so it doesn't fill your conversation. The findings arrive in your conversation when the review completes.
+  </Step>
+
+  <Step title="Act on the findings">
+    Ask Claude to fix what the review found. If you passed `--fix` or `--comment`, the review has already applied or posted its findings.
+  </Step>
+</Steps>
+
+### What the review reads and edits
+
+The review follows your `CLAUDE.md` like any Claude Code session, but it doesn't read [`REVIEW.md`](#review-md). {/* min-version: 2.1.218 */}A background review applies its `--fix` edits outside your session's [checkpoints](/docs/en/checkpointing#subagent-edits-not-restored), so `/rewind` doesn't undo them; use git to revert them. When the review [runs in the foreground](#run-in-the-foreground), it edits your working tree during your own turn, so `/rewind` restores its edits as usual.
+
+### Tune effort and arguments
+
+Pass an [effort level](/docs/en/model-config#adjust-effort-level) to trade coverage for confidence. At `low` and `medium`, the review reports only the findings it's most confident in, so you see fewer false positives; `high` through `max` cast a wider net and may include findings the review is less sure about. Without an effort argument, the review uses the session's current effort.
+
+After the effort level and flags, Claude Code reads the rest of the line in one of two ways:
+
+* **Without `ultra`**: everything left is the review target, even when it starts with another command name. `/code-review /fix-issue 123` reviews with `/fix-issue 123` as target text instead of loading `/fix-issue` as a second [stacked skill](/docs/en/skills#pass-arguments-to-skills). {/* min-version: 2.1.218 */}Before v2.1.218, a command stacked after `/code-review` expanded as its own skill.
+* **With `ultra`**: Claude Code reads a single word as a base branch or PR number, and turns longer text that doesn't name a branch or PR into [a note attached to the review](/docs/en/ultrareview#pass-a-request-in-plain-words). `/code-review ultra check my auth changes` reviews your current branch, and Claude relates the findings to your note.
+
+### Run in the foreground
+
+{/* min-version: 2.1.218 */}The review runs in the background by default; before v2.1.218, it ran inside your conversation. It runs in the foreground instead in cases like these:
+
+* You run `/code-review` again while an earlier review is still in progress
+* You run it in non-interactive mode, with the `-p` flag or the Agent SDK; Claude Code waits for the review and includes the findings in the response, except for `ultra`, which [launches the cloud review without waiting](#escalate-to-ultrareview)
+* You set [`CLAUDE_CODE_DISABLE_BACKGROUND_TASKS`](/docs/en/env-vars) to `1`, which also turns off every other background task feature
+
+You can't schedule the review: `/code-review` is marked [`disable-model-invocation`](/docs/en/skills#frontmatter-reference), so if you set it as a [scheduled task](/docs/en/scheduled-tasks)'s prompt, Claude reads it as plain text instead of running the review.
+
+### Escalate to ultrareview
+
+`/code-review ultra --fix` runs the deeper [ultrareview](/docs/en/ultrareview) in the cloud, then applies its findings to your working tree when they arrive back in your session. Ultrareview uses its own scope: your current branch against the repository's default branch, plus any uncommitted and staged changes in the working tree. Pass a branch name, such as `/code-review ultra develop`, to compare against a different base.
+
+<Note>
+  Ultrareview requires authentication with a claude.ai account and is not available on Amazon Bedrock, Google Cloud's Agent Platform, or Microsoft Foundry, or to organizations with Zero Data Retention enabled. When ultrareview is not available, `/code-review ultra` runs a local review in your session instead.
+</Note>
+
+{/* min-version: 2.1.218 */}To start a cloud review from a script or CI, run `claude -p '/code-review ultra'`. Claude Code launches the review and prints a link for tracking it. Requires Claude Code v2.1.218 or later.
+
+When the review would bill [usage credits](https://support.claude.com/en/articles/12429409-extra-usage-for-paid-claude-plans), Claude Code stops before launching, because the billing confirmation needs an interactive session. Run the [`claude ultrareview` subcommand](/docs/en/ultrareview#run-ultrareview-non-interactively) instead; by running it, you consent to the charge.
 
 The command was named `/simplify` before v2.1.147, when it applied fixes by default. {/* min-version: 2.1.154 */}From v2.1.154, `/simplify` runs a separate cleanup-only review that applies fixes without hunting for bugs. If you scripted `/simplify` for bug-finding, switch to `/code-review --fix`, which is unchanged.
 
@@ -304,8 +356,8 @@ The command was named `/simplify` before v2.1.147, when it applied fixes by defa
 
 Code Review is designed to work alongside the rest of Claude Code. If you want to run reviews locally before opening a PR, need a self-hosted setup, or want to go deeper on how `CLAUDE.md` shapes Claude's behavior across tools, these pages are good next stops:
 
-* [Commands](/en/commands): run `/code-review` in a local Claude Code session to check a diff before pushing
-* [GitHub Actions](/en/github-actions): run Claude in your own GitHub Actions workflows for custom automation beyond code review
-* [GitLab CI/CD](/en/gitlab-ci-cd): self-hosted Claude integration for GitLab pipelines
-* [Memory](/en/memory): how `CLAUDE.md` files work across Claude Code
-* [Analytics](/en/analytics): track Claude Code usage beyond code review
+* [Commands](/docs/en/commands): run `/code-review` in a local Claude Code session to check a diff before pushing
+* [GitHub Actions](/docs/en/github-actions): run Claude in your own GitHub Actions workflows for custom automation beyond code review
+* [GitLab CI/CD](/docs/en/gitlab-ci-cd): self-hosted Claude integration for GitLab pipelines
+* [Memory](/docs/en/memory): how `CLAUDE.md` files work across Claude Code
+* [Analytics](/docs/en/analytics): track Claude Code usage beyond code review
