@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/batch-processing
-fetched_at: 2026-07-20T04:31:15.379270+00:00
+fetched_at: 2026-07-27T04:31:46.810358+00:00
 fetch_method: mintlify_md
 ---
 
@@ -94,6 +94,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 | ------------------------------------------------------------------------------------------------------------- | ------------ | ------------- |
 | Claude Fable 5                                                                                                | $5 / MTok    | $25 / MTok    |
 | Claude Mythos 5 ([limited availability](https://anthropic.com/glasswing))                                     | $5 / MTok    | $25 / MTok    |
+| Claude Opus 5                                                                                                 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.8                                                                                               | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.7                                                                                               | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.6                                                                                               | $2.50 / MTok | $12.50 / MTok |
@@ -131,7 +132,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
           {
               "custom_id": "my-first-request",
               "params": {
-                  "model": "claude-opus-4-8",
+                  "model": "claude-opus-5",
                   "max_tokens": 1024,
                   "messages": [
                       {"role": "user", "content": "Hello, world"}
@@ -141,7 +142,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
           {
               "custom_id": "my-second-request",
               "params": {
-                  "model": "claude-opus-4-8",
+                  "model": "claude-opus-5",
                   "max_tokens": 1024,
                   "messages": [
                       {"role": "user", "content": "Hi again, friend"}
@@ -157,14 +158,14 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
   requests:
     - custom_id: my-first-request
       params:
-        model: claude-opus-4-8
+        model: claude-opus-5
         max_tokens: 1024
         messages:
           - role: user
             content: Hello, world
     - custom_id: my-second-request
       params:
-        model: claude-opus-4-8
+        model: claude-opus-5
         max_tokens: 1024
         messages:
           - role: user
@@ -183,7 +184,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
           Request(
               custom_id="my-first-request",
               params=MessageCreateParamsNonStreaming(
-                  model="claude-opus-4-8",
+                  model="claude-opus-5",
                   max_tokens=1024,
                   messages=[
                       {
@@ -196,7 +197,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
           Request(
               custom_id="my-second-request",
               params=MessageCreateParamsNonStreaming(
-                  model="claude-opus-4-8",
+                  model="claude-opus-5",
                   max_tokens=1024,
                   messages=[
                       {
@@ -220,7 +221,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
       {
         custom_id: "my-first-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           messages: [{ role: "user", content: "Hello, world" }]
         }
@@ -228,7 +229,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
       {
         custom_id: "my-second-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           messages: [{ role: "user", content: "Hi again, friend" }]
         }
@@ -255,7 +256,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
               CustomID = "my-first-request",
               Params = new()
               {
-                  Model = Model.ClaudeOpus4_8,
+                  Model = Model.ClaudeOpus5,
                   MaxTokens = 1024,
                   Messages =
                   [
@@ -268,7 +269,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
               CustomID = "my-second-request",
               Params = new()
               {
-                  Model = Model.ClaudeOpus4_8,
+                  Model = Model.ClaudeOpus5,
                   MaxTokens = 1024,
                   Messages =
                   [
@@ -291,7 +292,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
   			{
   				CustomID: "my-first-request",
   				Params: anthropic.MessageBatchNewParamsRequestParams{
-  					Model:     anthropic.ModelClaudeOpus4_8,
+  					Model:     anthropic.ModelClaudeOpus5,
   					MaxTokens: 1024,
   					Messages: []anthropic.MessageParam{
   						anthropic.NewUserMessage(
@@ -303,7 +304,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
   			{
   				CustomID: "my-second-request",
   				Params: anthropic.MessageBatchNewParamsRequestParams{
-  					Model:     anthropic.ModelClaudeOpus4_8,
+  					Model:     anthropic.ModelClaudeOpus5,
   					MaxTokens: 1024,
   					Messages: []anthropic.MessageParam{
   						anthropic.NewUserMessage(
@@ -327,7 +328,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
         .customId("my-first-request")
         .params(
           BatchCreateParams.Request.Params.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
+            .model(Model.CLAUDE_OPUS_5)
             .maxTokens(1024)
             .addUserMessage("Hello, world")
             .build()
@@ -339,7 +340,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
         .customId("my-second-request")
         .params(
           BatchCreateParams.Request.Params.builder()
-            .model(Model.CLAUDE_OPUS_4_8)
+            .model(Model.CLAUDE_OPUS_5)
             .maxTokens(1024)
             .addUserMessage("Hi again, friend")
             .build()
@@ -361,7 +362,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
           [
               'custom_id' => 'my-first-request',
               'params' => [
-                  'model' => 'claude-opus-4-8',
+                  'model' => 'claude-opus-5',
                   'max_tokens' => 1024,
                   'messages' => [
                       ['role' => 'user', 'content' => 'Hello, world']
@@ -371,7 +372,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
           [
               'custom_id' => 'my-second-request',
               'params' => [
-                  'model' => 'claude-opus-4-8',
+                  'model' => 'claude-opus-5',
                   'max_tokens' => 1024,
                   'messages' => [
                       ['role' => 'user', 'content' => 'Hi again, friend']
@@ -392,7 +393,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
       {
         custom_id: "my-first-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           messages: [
             { role: "user", content: "Hello, world" }
@@ -402,7 +403,7 @@ You can [create a batch](/docs/en/api/messages/batches/create) by passing this l
       {
         custom_id: "my-second-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           messages: [
             { role: "user", content: "Hi again, friend" }
@@ -932,8 +933,8 @@ Results of the batch are available for download at the `results_url` property on
 The results are in `.jsonl` format, where each line is a valid JSON object representing the result of a single request in the Message Batch. For each streamed result, you can do something different depending on its `custom_id` and result type. Here is an example set of results:
 
 ```jsonl .jsonl file
-{"custom_id":"my-second-request","result":{"type":"succeeded","message":{"id":"msg_014VwiXbi91y3JMjcpyGBHX5","type":"message","role":"assistant","model":"claude-opus-4-8","content":[{"type":"text","text":"Hello again! It's nice to see you. How can I assist you today? Is there anything specific you'd like to chat about or any questions you have?"}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":36}}}}
-{"custom_id":"my-first-request","result":{"type":"succeeded","message":{"id":"msg_01FqfsLoHwgeFbguDgpz48m7","type":"message","role":"assistant","model":"claude-opus-4-8","content":[{"type":"text","text":"Hello! How can I assist you today? Feel free to ask me any questions or let me know if there's anything you'd like to chat about."}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":34}}}}
+{"custom_id":"my-second-request","result":{"type":"succeeded","message":{"id":"msg_014VwiXbi91y3JMjcpyGBHX5","type":"message","role":"assistant","model":"claude-opus-5","content":[{"type":"text","text":"Hello again! It's nice to see you. How can I assist you today? Is there anything specific you'd like to chat about or any questions you have?"}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":36}}}}
+{"custom_id":"my-first-request","result":{"type":"succeeded","message":{"id":"msg_01FqfsLoHwgeFbguDgpz48m7","type":"message","role":"assistant","model":"claude-opus-5","content":[{"type":"text","text":"Hello! How can I assist you today? Feel free to ask me any questions or let me know if there's anything you'd like to chat about."}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":34}}}}
 ```
 
 If your result has an error, its `result.error` will be set to the standard [error shape](/docs/en/api/errors#error-shapes).
@@ -1076,7 +1077,7 @@ Example of implementing prompt caching in a batch:
           {
               "custom_id": "my-first-request",
               "params": {
-                  "model": "claude-opus-4-8",
+                  "model": "claude-opus-5",
                   "max_tokens": 1024,
                   "system": [
                       {
@@ -1097,7 +1098,7 @@ Example of implementing prompt caching in a batch:
           {
               "custom_id": "my-second-request",
               "params": {
-                  "model": "claude-opus-4-8",
+                  "model": "claude-opus-5",
                   "max_tokens": 1024,
                   "system": [
                       {
@@ -1124,7 +1125,7 @@ Example of implementing prompt caching in a batch:
   requests:
     - custom_id: my-first-request
       params:
-        model: claude-opus-4-8
+        model: claude-opus-5
         max_tokens: 1024
         system:
           - type: text
@@ -1141,7 +1142,7 @@ Example of implementing prompt caching in a batch:
             content: Analyze the major themes in Pride and Prejudice.
     - custom_id: my-second-request
       params:
-        model: claude-opus-4-8
+        model: claude-opus-5
         max_tokens: 1024
         system:
           - type: text
@@ -1170,7 +1171,7 @@ Example of implementing prompt caching in a batch:
           Request(
               custom_id="my-first-request",
               params=MessageCreateParamsNonStreaming(
-                  model="claude-opus-4-8",
+                  model="claude-opus-5",
                   max_tokens=1024,
                   system=[
                       {
@@ -1194,7 +1195,7 @@ Example of implementing prompt caching in a batch:
           Request(
               custom_id="my-second-request",
               params=MessageCreateParamsNonStreaming(
-                  model="claude-opus-4-8",
+                  model="claude-opus-5",
                   max_tokens=1024,
                   system=[
                       {
@@ -1227,7 +1228,7 @@ Example of implementing prompt caching in a batch:
       {
         custom_id: "my-first-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           system: [
             {
@@ -1248,7 +1249,7 @@ Example of implementing prompt caching in a batch:
       {
         custom_id: "my-second-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           system: [
             {
@@ -1287,7 +1288,7 @@ Example of implementing prompt caching in a batch:
               CustomID = "my-first-request",
               Params = new()
               {
-                  Model = Model.ClaudeOpus4_8,
+                  Model = Model.ClaudeOpus5,
                   MaxTokens = 1024,
                   System = new List<TextBlockParam>
                   {
@@ -1312,7 +1313,7 @@ Example of implementing prompt caching in a batch:
               CustomID = "my-second-request",
               Params = new()
               {
-                  Model = Model.ClaudeOpus4_8,
+                  Model = Model.ClaudeOpus5,
                   MaxTokens = 1024,
                   System = new List<TextBlockParam>
                   {
@@ -1344,7 +1345,7 @@ Example of implementing prompt caching in a batch:
   		{
   			CustomID: "my-first-request",
   			Params: anthropic.MessageBatchNewParamsRequestParams{
-  				Model:     anthropic.ModelClaudeOpus4_8,
+  				Model:     anthropic.ModelClaudeOpus5,
   				MaxTokens: 1024,
   				System: []anthropic.TextBlockParam{
   					{
@@ -1363,7 +1364,7 @@ Example of implementing prompt caching in a batch:
   		{
   			CustomID: "my-second-request",
   			Params: anthropic.MessageBatchNewParamsRequestParams{
-  				Model:     anthropic.ModelClaudeOpus4_8,
+  				Model:     anthropic.ModelClaudeOpus5,
   				MaxTokens: 1024,
   				System: []anthropic.TextBlockParam{
   					{
@@ -1400,7 +1401,7 @@ Example of implementing prompt caching in a batch:
             .customId("my-first-request")
             .params(
               BatchCreateParams.Request.Params.builder()
-                .model(Model.CLAUDE_OPUS_4_8)
+                .model(Model.CLAUDE_OPUS_5)
                 .maxTokens(1024)
                 .systemOfTextBlockParams(
                   List.of(
@@ -1425,7 +1426,7 @@ Example of implementing prompt caching in a batch:
             .customId("my-second-request")
             .params(
               BatchCreateParams.Request.Params.builder()
-                .model(Model.CLAUDE_OPUS_4_8)
+                .model(Model.CLAUDE_OPUS_5)
                 .maxTokens(1024)
                 .systemOfTextBlockParams(
                   List.of(
@@ -1458,7 +1459,7 @@ Example of implementing prompt caching in a batch:
           [
               'custom_id' => 'my-first-request',
               'params' => [
-                  'model' => 'claude-opus-4-8',
+                  'model' => 'claude-opus-5',
                   'max_tokens' => 1024,
                   'system' => [
                       [
@@ -1479,7 +1480,7 @@ Example of implementing prompt caching in a batch:
           [
               'custom_id' => 'my-second-request',
               'params' => [
-                  'model' => 'claude-opus-4-8',
+                  'model' => 'claude-opus-5',
                   'max_tokens' => 1024,
                   'system' => [
                       [
@@ -1509,7 +1510,7 @@ Example of implementing prompt caching in a batch:
       {
         custom_id: "my-first-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           system: [
             {
@@ -1530,7 +1531,7 @@ Example of implementing prompt caching in a batch:
       {
         custom_id: "my-second-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 1024,
           system: [
             {
@@ -1565,7 +1566,7 @@ The batch worker additionally throttles `web_search` per organization so that hi
 
 ### Extended output (beta)
 
-The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
+The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 5, Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard 128k `max_tokens` limit in a single turn.
 
 <Note>
   Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and Claude Platform on AWS, and is not currently available on Amazon Bedrock, Google Cloud, or Microsoft Foundry.
@@ -1588,7 +1589,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
           {
               "custom_id": "long-form-request",
               "params": {
-                  "model": "claude-opus-4-8",
+                  "model": "claude-opus-5",
                   "max_tokens": 300000,
                   "messages": [
                       {"role": "user", "content": "Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices."}
@@ -1604,7 +1605,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
   requests:
     - custom_id: long-form-request
       params:
-        model: claude-opus-4-8
+        model: claude-opus-5
         max_tokens: 300000
         messages:
           - role: user
@@ -1627,7 +1628,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
           Request(
               custom_id="long-form-request",
               params=MessageCreateParamsNonStreaming(
-                  model="claude-opus-4-8",
+                  model="claude-opus-5",
                   max_tokens=300_000,
                   messages=[
                       {
@@ -1652,7 +1653,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
       {
         custom_id: "long-form-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 300000,
           messages: [
             {
@@ -1687,7 +1688,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
               CustomID = "long-form-request",
               Params = new()
               {
-                  Model = Model.ClaudeOpus4_8,
+                  Model = Model.ClaudeOpus5,
                   MaxTokens = 300_000,
                   Messages =
                   [
@@ -1711,7 +1712,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
   			{
   				CustomID: "long-form-request",
   				Params: anthropic.BetaMessageBatchNewParamsRequestParams{
-  					Model:     anthropic.ModelClaudeOpus4_8,
+  					Model:     anthropic.ModelClaudeOpus5,
   					MaxTokens: 300_000,
   					Messages: []anthropic.BetaMessageParam{
   						anthropic.NewBetaUserMessage(
@@ -1742,7 +1743,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
           .customId("long-form-request")
           .params(
             BatchCreateParams.Request.Params.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(300_000L)
               .addUserMessage("Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices.")
               .build()
@@ -1766,7 +1767,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
           [
               'custom_id' => 'long-form-request',
               'params' => [
-                  'model' => 'claude-opus-4-8',
+                  'model' => 'claude-opus-5',
                   'max_tokens' => 300_000,
                   'messages' => [
                       ['role' => 'user', 'content' => 'Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices.']
@@ -1788,7 +1789,7 @@ A single 300k-token generation can take over an hour to complete, so plan your b
       {
         custom_id: "long-form-request",
         params: {
-          model: "claude-opus-4-8",
+          model: "claude-opus-5",
           max_tokens: 300_000,
           messages: [
             { role: "user", content: "Write a comprehensive technical guide to building distributed systems, covering architecture patterns, consistency models, fault tolerance, and operational best practices." }

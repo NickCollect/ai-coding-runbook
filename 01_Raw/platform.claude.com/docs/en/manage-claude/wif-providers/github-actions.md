@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/wif-providers/github-actions
-fetched_at: 2026-07-20T04:31:17.586963+00:00
+fetched_at: 2026-07-27T04:31:49.522466+00:00
 fetch_method: mintlify_md
 ---
 
@@ -172,10 +172,10 @@ Set the federation environment variables on the job and call the SDK normally. `
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [{"role": "user", "content": "Hello, Claude"}]
-    }' | jq -r '.content[0].text'
+    }' | jq -r '.content[] | select(.type == "text") | .text'
   ```
 
   ```python Python
@@ -187,11 +187,11 @@ Set the federation environment variables on the job and call the SDK normally. `
   client = anthropic.Anthropic()
 
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[{"role": "user", "content": "Hello, Claude"}],
   )
-  print(message.content[0].text)
+  print(next(block.text for block in message.content if block.type == "text"))
   ```
 
   ```typescript TypeScript
@@ -203,7 +203,7 @@ Set the federation environment variables on the job and call the SDK normally. `
   const client = new Anthropic();
 
   const message = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{ role: "user", content: "Hello, Claude" }]
   });
@@ -221,7 +221,7 @@ Set the federation environment variables on the job and call the SDK normally. `
   client := anthropic.NewClient()
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(anthropic.NewTextBlock("Hello, Claude")),
@@ -230,14 +230,19 @@ Set the federation environment variables on the job and call the SDK normally. `
   if err != nil {
   	panic(err)
   }
-  fmt.Println(message.Content[0].Text)
+  for _, block := range message.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  		break
+  	}
+  }
   ```
 
   ```java Java
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   var message = client.messages().create(MessageCreateParams.builder()
-          .model(Model.CLAUDE_OPUS_4_8)
+          .model(Model.CLAUDE_OPUS_5)
           .maxTokens(1024)
           .addUserMessage("Hello, Claude")
           .build());
@@ -252,7 +257,7 @@ Set the federation environment variables on the job and call the SDK normally. `
 
   var message = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages = [new() { Role = Role.User, Content = "Hello, Claude" }],
   });
@@ -270,7 +275,7 @@ Set the federation environment variables on the job and call the SDK normally. `
   # ANTHROPIC_SERVICE_ACCOUNT_ID, ANTHROPIC_WORKSPACE_ID, and ANTHROPIC_IDENTITY_TOKEN_FILE
   # from the job environment.
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --message '{role: user, content: "Hello, Claude"}'
   ```
@@ -284,11 +289,12 @@ Set the federation environment variables on the job and call the SDK normally. `
   $client = new Client();
 
   $message = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 1024,
       messages: [['role' => 'user', 'content' => 'Hello, Claude']],
   );
-  echo $message->content[0]->text, PHP_EOL;
+  $textBlock = array_find($message->content, static fn ($block): bool => $block->type === 'text');
+  echo $textBlock->text, PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -300,11 +306,11 @@ Set the federation environment variables on the job and call the SDK normally. `
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [{role: "user", content: "Hello, Claude"}]
   )
-  puts message.content.first.text
+  puts message.content.find { it.type == :text }.text
   ```
 </CodeGroup>
 

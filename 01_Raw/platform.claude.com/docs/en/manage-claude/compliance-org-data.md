@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-org-data
-fetched_at: 2026-07-20T04:31:17.992758+00:00
+fetched_at: 2026-07-27T04:31:50.148245+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,13 +28,11 @@ The [List organizations](/docs/en/api/compliance/organizations/list) endpoint re
 
 The following call lists every organization under your parent. The response is a `data` array of organization records sorted by `created_at` ascending, plus `has_more` and `next_page` for pagination. When `has_more` is `true`, pass the returned `next_page` token back unchanged as the `page` query parameter on your next request. See [List organizations](/docs/en/api/compliance/organizations/list) in the API reference for the `limit` and `page` parameter defaults and ranges.
 
-<CodeGroup>
-  ```bash cURL
-  curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/compliance/organizations" \
-    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+```bash cURL
+curl --fail-with-body -sS \
+  "https://api.anthropic.com/v1/compliance/organizations" \
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 ```json Response
 {
@@ -79,16 +77,14 @@ See [List organization users](/docs/en/api/compliance/organizations/users/list) 
 
 Results are sorted by organization join date ascending. Unlike the Activity Feed's `before_id`/`after_id` cursors (see [Paginate results](/docs/en/manage-claude/compliance-activity-feed#paginate-results)), the directory endpoints paginate with a `next_page` token: when `has_more` is `true`, pass `next_page` back unchanged as the `page` query parameter on the next request.
 
-<CodeGroup>
-  ```bash cURL
-  org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
+```bash cURL
+org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
 
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/users" \
-    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
-    --data-urlencode "limit=500"
-  ```
-</CodeGroup>
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/organizations/$org_uuid/users" \
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY" \
+  --data-urlencode "limit=500"
+```
 
 ```json Response
 {
@@ -116,15 +112,13 @@ The [List Compliance Roles](/docs/en/api/compliance/organizations/roles/list) en
 
 Both role endpoints require `read:compliance_org_data`. The list endpoint accepts the same `limit` and `page` parameters as the [organization users endpoint](#list-organization-users).
 
-<CodeGroup>
-  ```bash cURL
-  org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
+```bash cURL
+org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
 
-  curl --fail-with-body -sS \
-    "https://api.anthropic.com/v1/compliance/organizations/${org_uuid}/roles" \
-    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+curl --fail-with-body -sS \
+  "https://api.anthropic.com/v1/compliance/organizations/${org_uuid}/roles" \
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 ```json Response
 {
@@ -154,13 +148,11 @@ See the [List Compliance Groups](/docs/en/api/compliance/groups/list) response s
 
 List groups, then for each group list its members:
 
-<CodeGroup>
-  ```bash cURL
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/groups" \
-    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+```bash cURL
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/groups" \
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 ```json Response
 {
@@ -182,15 +174,13 @@ List groups, then for each group list its members:
 
 For each group ID, list its members:
 
-<CodeGroup>
-  ```bash cURL
-  group_id="rbac_group_01P9qRsTuVwXyZa2BcDeFgHjK"
+```bash cURL
+group_id="rbac_group_01P9qRsTuVwXyZa2BcDeFgHjK"
 
-  curl --fail-with-body -sS -G \
-    "https://api.anthropic.com/v1/compliance/groups/$group_id/members" \
-    -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
-  ```
-</CodeGroup>
+curl --fail-with-body -sS -G \
+  "https://api.anthropic.com/v1/compliance/groups/$group_id/members" \
+  -H "x-api-key: $ANTHROPIC_COMPLIANCE_ACCESS_KEY"
+```
 
 ```json Response
 {

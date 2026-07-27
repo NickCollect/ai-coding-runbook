@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/bash-tool
-fetched_at: 2026-07-20T04:31:15.873711+00:00
+fetched_at: 2026-07-27T04:31:47.550806+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,7 +36,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "tools": [
         {
@@ -55,7 +55,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
 
   ```bash CLI
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --tool '{type: bash_20250124, name: bash}' \
     --message '{role: user, content: List all Python files in the current directory.}'
@@ -65,7 +65,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       tools=[{"type": "bash_20250124", "name": "bash"}],
       messages=[
@@ -80,7 +80,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [{ type: "bash_20250124", name: "bash" }],
     messages: [
@@ -100,7 +100,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
   var response = await client.Messages.Create(
       new()
       {
-          Model = Model.ClaudeOpus4_8,
+          Model = Model.ClaudeOpus5,
           MaxTokens = 1024,
           Tools = [new ToolBash20250124()],
           Messages =
@@ -121,7 +121,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Tools: []anthropic.ToolUnionParam{
   		{OfBashTool20250124: &anthropic.ToolBash20250124Param{}},
@@ -144,7 +144,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
 
       Message response = client.messages().create(
           MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(1024)
               .addTool(ToolBash20250124.builder().build())
               .addUserMessage("List all Python files in the current directory.")
@@ -161,7 +161,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
   $client = new Client();
 
   $response = $client->messages->create(
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       maxTokens: 1024,
       tools: [new ToolBash20250124()],
       messages: [
@@ -176,7 +176,7 @@ The current version of the tool is `bash_20250124`. For model support, beta head
   client = Anthropic::Client.new
 
   response = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [{type: "bash_20250124", name: "bash"}],
     messages: [
@@ -193,7 +193,7 @@ Claude responds with `stop_reason: "tool_use"` and a `tool_use` block that conta
 ```json Output
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-opus-4-8",
+  "model": "claude-opus-5",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -847,7 +847,7 @@ Claude determines which command to run. Your application owns everything else: t
         -H "x-api-key: $ANTHROPIC_API_KEY" \
         -H "anthropic-version: 2023-06-01" \
         -d '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "tools": [
             {
@@ -889,7 +889,7 @@ Claude determines which command to run. Your application owns everything else: t
 
       ```bash CLI
       ant messages create <<'YAML'
-      model: claude-opus-4-8
+      model: claude-opus-5
       max_tokens: 1024
       tools:
         - type: bash_20250124
@@ -918,7 +918,7 @@ Claude determines which command to run. Your application owns everything else: t
       client = anthropic.Anthropic()
 
       response = client.messages.create(
-          model="claude-opus-4-8",
+          model="claude-opus-5",
           max_tokens=1024,
           tools=[{"type": "bash_20250124", "name": "bash"}],
           messages=[
@@ -954,7 +954,7 @@ Claude determines which command to run. Your application owns everything else: t
       const client = new Anthropic();
 
       const response = await client.messages.create({
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         tools: [{ type: "bash_20250124", name: "bash" }],
         messages: [
@@ -995,7 +995,7 @@ Claude determines which command to run. Your application owns everything else: t
       var response = await client.Messages.Create(
           new()
           {
-              Model = Model.ClaudeOpus4_8,
+              Model = Model.ClaudeOpus5,
               MaxTokens = 1024,
               Tools = [new ToolBash20250124()],
               Messages =
@@ -1044,7 +1044,7 @@ Claude determines which command to run. Your application owns everything else: t
       client := anthropic.NewClient()
 
       response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-      	Model:     anthropic.ModelClaudeOpus4_8,
+      	Model:     anthropic.ModelClaudeOpus5,
       	MaxTokens: 1024,
       	Tools: []anthropic.ToolUnionParam{
       		{OfBashTool20250124: &anthropic.ToolBash20250124Param{}},
@@ -1085,7 +1085,7 @@ Claude determines which command to run. Your application owns everything else: t
           AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
           MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(1024)
               .addTool(ToolBash20250124.builder().build())
               .addUserMessage("List all Python files in the current directory.")
@@ -1127,7 +1127,7 @@ Claude determines which command to run. Your application owns everything else: t
       $client = new Client();
 
       $response = $client->messages->create(
-          model: 'claude-opus-4-8',
+          model: 'claude-opus-5',
           maxTokens: 1024,
           tools: [new ToolBash20250124()],
           messages: [
@@ -1163,7 +1163,7 @@ Claude determines which command to run. Your application owns everything else: t
       client = Anthropic::Client.new
 
       response = client.messages.create(
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         max_tokens: 1024,
         tools: [{type: "bash_20250124", name: "bash"}],
         messages: [
@@ -1926,10 +1926,10 @@ Beyond isolation, add these controls:
 
 The bash tool definition adds the following input tokens to your request. This is in addition to the per-model [tool use system prompt](/docs/en/agents-and-tools/tool-use/overview#pricing) that applies whenever any tool is present.
 
-| Model                                           | Additional input tokens |
-| ----------------------------------------------- | ----------------------- |
-| Claude Opus 4.7 and Claude Opus 4.8             | 325 tokens              |
-| Claude Opus 4.6, Claude Sonnet 4.6, and earlier | 244 tokens              |
+| Model                                               | Additional input tokens |
+| --------------------------------------------------- | ----------------------- |
+| Claude Opus 5, Claude Opus 4.8, and Claude Opus 4.7 | 325 tokens              |
+| Claude Opus 4.6, Claude Sonnet 4.6, and earlier     | 244 tokens              |
 
 Additional tokens are consumed by:
 

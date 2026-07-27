@@ -1,14 +1,14 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/api_keys/retrieve
-fetched_at: 2026-07-20T04:31:24.868601+00:00
+fetched_at: 2026-07-27T04:31:56.141352+00:00
 fetch_method: mintlify_md
 ---
 
-## Get API Key
+## Retrieve API Key (Admin API)
 
 **get** `/v1/organizations/api_keys/{api_key_id}`
 
-Get API Key
+Retrieve information about a single API key in your organization, looked up by its ID. This Admin API endpoint requires an Admin API key, is intended for programmatic key management, and never returns the key's secret value. To view or create your own API keys, go to [API keys](https://platform.claude.com/settings/keys) in the Claude Console.
 
 ### Path Parameters
 

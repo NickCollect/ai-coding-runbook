@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/mcp-connector
-fetched_at: 2026-07-20T04:31:16.937430+00:00
+fetched_at: 2026-07-27T04:31:48.814950+00:00
 fetch_method: mintlify_md
 ---
 
@@ -39,7 +39,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
     -d @- <<'EOF'
   {
     "name": "GitHub Assistant",
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "mcp_servers": [
       {
         "type": "url",
@@ -60,7 +60,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```bash CLI
   AGENT_ID=$(ant beta:agents create \
     --name "GitHub Assistant" \
-    --model claude-opus-4-8 \
+    --model '{id: claude-opus-5}' \
     --mcp-server '{type: url, name: github, url: "https://api.githubcopilot.com/mcp/"}' \
     --tool '{type: agent_toolset_20260401}' \
     --tool '{type: mcp_toolset, mcp_server_name: github}' \
@@ -70,7 +70,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```python Python
   agent = client.beta.agents.create(
       name="GitHub Assistant",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       mcp_servers=[
           {
               "type": "url",
@@ -88,7 +88,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "GitHub Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     mcp_servers: [
       {
         type: "url",
@@ -107,7 +107,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "GitHub Assistant",
-      Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+      Model = BetaManagedAgentsModel.ClaudeOpus5,
       McpServers =
       [
           new() { Type = "url", Name = "github", Url = "https://api.githubcopilot.com/mcp/" },
@@ -127,7 +127,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "GitHub Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
   	},
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{{
   		Type: anthropic.BetaManagedAgentsURLMCPServerParamsTypeURL,
@@ -157,7 +157,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("GitHub Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .addMcpServer(
               BetaManagedAgentsUrlMcpServerParams.builder()
                   .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -183,7 +183,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'GitHub Assistant',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       mcpServers: [
           BetaManagedAgentsURLMCPServerParams::with(
               type: 'url',
@@ -206,7 +206,7 @@ Each declared server also needs a matching `mcp_toolset` entry in the `tools` ar
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "GitHub Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     mcp_servers: [
       {
         type: "url",
@@ -276,7 +276,7 @@ See [configuring the toolset](/docs/en/managed-agents/tools#configuring-the-tool
 
 ### MCP tool output handling
 
-When an MCP tool output exceeds 100,000 tokens, it is automatically written to a file in the sandbox. The model receives a truncated preview with the file path and can read the full content from there.
+When an MCP tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the sandbox. The model receives a truncated preview with the file path and can read the full content from there.
 
 ## Provide authentication at session creation
 
@@ -371,16 +371,16 @@ When starting a session, pass `vault_ids` to provide credentials for your MCP se
   ```
 </CodeGroup>
 
-Credentials are matched by URL, so the vault must contain a credential whose `mcp_server_url` exactly matches the `url` declared in `mcp_servers`. If none matches, the connection is attempted unauthenticated. See [Add a credential](/docs/en/managed-agents/vaults#add-a-credential) for the `static_bearer` and `mcp_oauth` credential types.
+Credentials are matched by URL, so the vault must contain a credential whose `mcp_server_url` refers to the same server as the `url` declared in `mcp_servers`. Both URLs are normalized before matching (scheme and host lowercased, default ports and trailing slashes stripped), so differences in host casing, a default port, or a trailing slash don't prevent a match; a different path, subdomain, or non-default port does. If none matches, the connection is attempted unauthenticated. See [Add a credential](/docs/en/managed-agents/vaults#add-a-credential) for the `static_bearer` and `mcp_oauth` credential types.
 
 ### Handle connection and authentication failures
 
 Session creation does not validate MCP connectivity or credentials. If an MCP server is unreachable or rejects the supplied credential, the session still starts and interaction remains possible. A [`session.error`](/docs/en/managed-agents/events-and-streaming) event is emitted with the `mcp_server_name` of the affected server and a `retry_status`:
 
-| Error type                        | Meaning                                                                                           |
-| --------------------------------- | ------------------------------------------------------------------------------------------------- |
-| `mcp_connection_failed_error`     | The MCP server could not be reached (network error, timeout, or non-authentication HTTP failure). |
-| `mcp_authentication_failed_error` | The MCP server was reached but rejected the credential from the attached vault.                   |
+| Error type                        | Meaning                                                                                                                                                                                                      |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `mcp_connection_failed_error`     | The MCP server could not be reached (network error, timeout, or non-authentication HTTP failure).                                                                                                            |
+| `mcp_authentication_failed_error` | Authentication with the MCP server failed: the server rejected the credential from the attached vault, required authentication when no matching credential was configured, or an OAuth token refresh failed. |
 
 You can decide whether to block further interaction on this error, trigger a credential rotation, or let the session continue without the affected server's tools. The connection is retried on the next `session.status_idle` to `session.status_running` transition.
 

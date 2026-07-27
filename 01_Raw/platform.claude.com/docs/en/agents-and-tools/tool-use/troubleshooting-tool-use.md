@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/troubleshooting-tool-use
-fetched_at: 2026-07-20T04:31:15.910124+00:00
+fetched_at: 2026-07-27T04:31:47.631187+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,10 +36,10 @@ Symptom-to-fix tables for the most common tool-use errors. Each fix cross-refere
 
 ## Cache keeps invalidating
 
-| Symptom                                     | Likely cause                           | Fix                                                                                                                                                                                                |
-| ------------------------------------------- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Every request is a cache miss               | `tool_choice` varying between requests | Keep `tool_choice` stable or place the `cache_control` breakpoint before the variation point. See [Tool use with prompt caching](/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching). |
-| Adding a tool mid-conversation breaks cache | Tool prepended to the tools array      | Use `defer_loading: true` with tool search to append the tool inline instead of modifying the array head.                                                                                          |
+| Symptom                                     | Likely cause                                                                                  | Fix                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Every request is a cache miss               | `tool_choice`, the thinking configuration, or `output_config.effort` varying between requests | Keep `tool_choice` stable or place the `cache_control` breakpoint before the variation point; hold the thinking configuration and effort level constant for the life of a cached conversation. See [Tool use with prompt caching](/docs/en/agents-and-tools/tool-use/tool-use-with-prompt-caching) and [Thinking and prompt caching](/docs/en/build-with-claude/thinking#thinking-and-prompt-caching). |
+| Adding a tool mid-conversation breaks cache | Tool prepended to the tools array                                                             | Use `defer_loading: true` with tool search to append the tool inline instead of modifying the array head.                                                                                                                                                                                                                                                                                              |
 
 ## Errors at request time
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/quickstart
-fetched_at: 2026-07-20T04:31:16.835185+00:00
+fetched_at: 2026-07-27T04:31:48.715644+00:00
 fetch_method: mintlify_md
 ---
 
@@ -27,7 +27,7 @@ This guide walks you through creating an agent, setting up an environment, start
 
 ## Prerequisites
 
-* An Anthropic [Console account](https://platform.claude.com)
+* A [Claude Console account](https://platform.claude.com)
 * An [API key](/settings/keys)
 
 ## Install the CLI
@@ -43,7 +43,7 @@ This guide walks you through creating an agent, setting up an environment, start
     For Linux environments, download the release binary directly.
 
     ```bash
-    VERSION=1.17.0
+    VERSION=1.21.0
     OS=$(uname -s | tr '[:upper:]' '[:lower:]')
     case $(uname -m) in
       x86_64) ARCH=amd64 ;;
@@ -94,7 +94,7 @@ ant --version
 
   <Tab title="Java">
     ```groovy Gradle
-    implementation("com.anthropic:anthropic-java:2.48.0")
+    implementation("com.anthropic:anthropic-java:2.52.0")
     ```
   </Tab>
 
@@ -152,7 +152,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
           -d @- <<'EOF'
       {
         "name": "Coding Assistant",
-        "model": "claude-opus-4-8",
+        "model": "claude-opus-5",
         "system": "You are a helpful coding assistant. Write clean, well-documented code.",
         "tools": [
           {"type": "agent_toolset_20260401"}
@@ -170,7 +170,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
       ```bash CLI
       ant beta:agents create \
         --name "Coding Assistant" \
-        --model '{id: claude-opus-4-8}' \
+        --model '{id: claude-opus-5}' \
         --system "You are a helpful coding assistant. Write clean, well-documented code." \
         --tool '{type: agent_toolset_20260401}'
       ```
@@ -182,7 +182,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
       agent = client.beta.agents.create(
           name="Coding Assistant",
-          model="claude-opus-4-8",
+          model="claude-opus-5",
           system="You are a helpful coding assistant. Write clean, well-documented code.",
           tools=[
               {"type": "agent_toolset_20260401"},
@@ -199,7 +199,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
       const agent = await client.beta.agents.create({
         name: "Coding Assistant",
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         system: "You are a helpful coding assistant. Write clean, well-documented code.",
         tools: [
           { type: "agent_toolset_20260401" },
@@ -221,7 +221,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
       var agent = await client.Beta.Agents.Create(new()
       {
           Name = "Coding Assistant",
-          Model = BetaManagedAgentsModel.ClaudeOpus4_8,
+          Model = BetaManagedAgentsModel.ClaudeOpus5,
           System = "You are a helpful coding assistant. Write clean, well-documented code.",
           Tools =
           [
@@ -252,7 +252,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
       	agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
       		Name: "Coding Assistant",
       		Model: anthropic.BetaManagedAgentsModelConfigParams{
-      			ID: anthropic.BetaManagedAgentsModelClaudeOpus4_8,
+      			ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
       		},
       		System: anthropic.String("You are a helpful coding assistant. Write clean, well-documented code."),
       		Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -286,7 +286,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
           var agent = client.beta().agents().create(AgentCreateParams.builder()
               .name("Coding Assistant")
-              .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+              .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
               .system("You are a helpful coding assistant. Write clean, well-documented code.")
               .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
                   .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
@@ -303,7 +303,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
       $agent = $client->beta->agents->create(
           name: 'Coding Assistant',
-          model: 'claude-opus-4-8',
+          model: 'claude-opus-5',
           system: 'You are a helpful coding assistant. Write clean, well-documented code.',
           tools: [
               ['type' => 'agent_toolset_20260401'],
@@ -320,7 +320,7 @@ export ANTHROPIC_API_KEY="your-api-key-here"
 
       agent = client.beta.agents.create(
         name: "Coding Assistant",
-        model: "claude-opus-4-8",
+        model: "claude-opus-5",
         system_: "You are a helpful coding assistant. Write clean, well-documented code.",
         tools: [{type: "agent_toolset_20260401"}]
       )

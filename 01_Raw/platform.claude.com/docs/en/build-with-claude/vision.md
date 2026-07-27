@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/vision
-fetched_at: 2026-07-20T04:31:16.290671+00:00
+fetched_at: 2026-07-27T04:31:48.107156+00:00
 fetch_method: mintlify_md
 ---
 
@@ -19,7 +19,7 @@ This guide describes how to send images to Claude, the limits and costs that app
 Use Claude's vision capabilities through:
 
 * [claude.ai](https://claude.ai/). Upload an image like you would a file, or drag and drop an image directly into the chat window.
-* The [Anthropic Workbench](/workbench/). A button to add images appears at the top right of every User message block.
+* The [Workbench](/playground) in the Claude Console. Add images directly to any User message block.
 * API request. See the following examples.
 
 On the API, provide images to Claude as `image` content blocks using one of three source types:
@@ -46,7 +46,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
     -H "content-type: application/json" \
     -d @- <<EOF
   {
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "max_tokens": 1024,
     "messages": [
       {
@@ -76,7 +76,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
     https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
 
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -97,7 +97,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 
   client = anthropic.Anthropic()
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {
@@ -125,7 +125,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
   });
 
   const message = await anthropic.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -162,7 +162,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 
   var message = await client.Messages.Create(new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages =
       [
@@ -193,7 +193,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
   imageData := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -230,7 +230,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
     .messages()
     .create(
       MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5)
         .maxTokens(1024)
         .addUserMessageOfBlockParams(contentBlockParams)
         .build()
@@ -262,10 +262,10 @@ On the API, provide images to Claude as `image` content blocks using one of thre
               ],
           ],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
 
-  echo $message->content[0]->text;
+  echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -274,7 +274,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
   image_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -307,7 +307,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -332,7 +332,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -349,7 +349,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
   ```python Python
   client = anthropic.Anthropic()
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {
@@ -376,7 +376,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
   });
 
   const message = await anthropic.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -410,7 +410,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
 
   var message = await client.Messages.Create(new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages =
       [
@@ -438,7 +438,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
   client := anthropic.NewClient()
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -477,7 +477,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
     .messages()
     .create(
       MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5)
         .maxTokens(1024)
         .addUserMessageOfBlockParams(contentBlockParams)
         .build()
@@ -505,17 +505,17 @@ On the API, provide images to Claude as `image` content blocks using one of thre
               ],
           ],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
 
-  echo $message->content[0]->text;
+  echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
   ```
 
   ```ruby Ruby
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -562,7 +562,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
     -H "anthropic-beta: files-api-2025-04-14" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -598,7 +598,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
   ant beta:messages create \
     --beta files-api-2025-04-14 \
     --transform content --format yaml <<YAML
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -621,7 +621,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 
   # Use the uploaded file in a message
   message = client.beta.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       betas=["files-api-2025-04-14"],
       messages=[
@@ -654,7 +654,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 
   // Use the uploaded file in a message
   const response = await anthropic.beta.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     betas: ["files-api-2025-04-14"],
     messages: [
@@ -693,7 +693,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
   var response = await client.Beta.Messages.Create(
       new MessageCreateParams
       {
-          Model = "claude-opus-4-8",
+          Model = "claude-opus-5",
           MaxTokens = 1024,
           Betas = new[] { "files-api-2025-04-14" },
           Messages = new[]
@@ -738,7 +738,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
   // Use the uploaded file in a message
   message, err := client.Beta.Messages.New(context.Background(),
   	anthropic.BetaMessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus4_8,
+  		Model:     anthropic.ModelClaudeOpus5,
   		MaxTokens: 1024,
   		Betas:     []anthropic.AnthropicBeta{anthropic.AnthropicBetaFilesAPI2025_04_14},
   		Messages: []anthropic.BetaMessageParam{
@@ -775,7 +775,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
       ImageBlockParam imageParam = ImageBlockParam.builder().fileSource(file.id()).build();
 
       MessageCreateParams params = MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model(Model.CLAUDE_OPUS_5)
         .maxTokens(1024)
         .addUserMessageOfBlockParams(
           List.of(
@@ -814,11 +814,11 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
               ],
           ],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       betas: ['files-api-2025-04-14'],
   );
 
-  echo $message->content[0]->text;
+  echo json_encode($message, JSON_PRETTY_PRINT), PHP_EOL;
   ```
 
   ```ruby Ruby
@@ -831,7 +831,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 
   # Use the uploaded file in a message
   message = client.beta.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     betas: ["files-api-2025-04-14"],
     messages: [
@@ -865,7 +865,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -907,7 +907,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -937,7 +937,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
 
   client = anthropic.Anthropic()
   message = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           {
@@ -980,7 +980,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC";
 
   const message = await anthropic.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -1030,7 +1030,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
 
   var message = await client.Messages.Create(new MessageCreateParams
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages =
       [
@@ -1071,7 +1071,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
   image2Data := "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
 
   message, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -1128,7 +1128,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
       .messages()
       .create(
           MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
+              .model(Model.CLAUDE_OPUS_5)
               .maxTokens(1024)
               .addUserMessageOfBlockParams(contentBlockParams)
               .build()
@@ -1171,7 +1171,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
               ],
           ],
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
 
   echo $message;
@@ -1184,7 +1184,7 @@ You can include multiple images in a single request, and Claude analyzes them jo
   image2_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGNgYPgPAAEDAQAIicLsAAAAAElFTkSuQmCC"
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -1258,10 +1258,10 @@ Claude views images in patches instead of pixels. Each patch is a 28×28-pixel b
 
 Each model has a maximum native image resolution, expressed as a long-edge limit and a visual-token limit. Images larger than either limit are downscaled before processing; see [How Claude resizes and pads images](/docs/en/build-with-claude/vision-coordinates#how-claude-resizes-and-pads-images) for the exact rule.
 
-| Resolution tier | Models                                                                             | Max long edge | Max visual tokens |
-| --------------- | ---------------------------------------------------------------------------------- | ------------- | ----------------- |
-| High-resolution | Claude Fable 5, Claude Mythos 5, Claude Opus 4.8, Claude Opus 4.7, Claude Sonnet 5 | 2576 px       | 4784              |
-| Standard        | All other models                                                                   | 1568 px       | 1568              |
+| Resolution tier | Models                      | Max long edge | Max visual tokens |
+| --------------- | --------------------------- | ------------- | ----------------- |
+| High-resolution | Claude 4.7 and later models | 2576 px       | 4784              |
+| Standard        | All other models            | 1568 px       | 1568              |
 
 High-resolution support is automatic on the listed models and requires no beta header or client-side opt-in.
 
@@ -1278,7 +1278,7 @@ The following table shows the downsized resolution and visual-token cost for sev
 
 When an image is downsized, Claude scales it to the largest size that fits the tier's limits while preserving its aspect ratio. This caps the token cost. For the precise rule and a reference implementation, see [How Claude resizes and pads images](/docs/en/build-with-claude/vision-coordinates#how-claude-resizes-and-pads-images).
 
-To estimate cost, multiply the token count by the [per-token price of the model](https://claude.com/pricing) you're using. For example, at Claude Haiku 4.5's $1 per million input tokens (standard tier), the 1000×1000 image costs about $1.30 per thousand images. At Claude Opus 4.8's $5 per million (high-resolution tier), the same image costs about $6.48 per thousand and the 4K image about $23.92 per thousand.
+To estimate cost, multiply the token count by the [per-token price of the model](https://claude.com/pricing) you're using. For example, at Claude Haiku 4.5's $1 per million input tokens (standard tier), the 1000×1000 image costs about $1.30 per thousand images. At Claude Opus 5's $5 per million (high-resolution tier), the same image costs about $6.48 per thousand and the 4K image about $23.92 per thousand.
 
 High-resolution images can use up to roughly three times more visual tokens than the same image on a standard-tier model. If you don't need the additional fidelity that high resolution provides for computer use, screenshot understanding, and dense documents, downsample images before sending to control token costs. To minimize latency and to simplify [coordinate-based workflows](/docs/en/build-with-claude/vision-coordinates), prefer resizing images before uploading them.
 

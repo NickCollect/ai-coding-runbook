@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/tools
-fetched_at: 2026-07-13T04:25:38.420697+00:00
+fetched_at: 2026-07-27T04:31:48.803487+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,7 +33,7 @@ The agent toolset includes the following tools. All are enabled by default when 
 | Web fetch  | `web_fetch`  | Fetch content from a URL                       |
 | Web search | `web_search` | Search the web for information                 |
 
-When a tool output exceeds 100,000 tokens, it is automatically written to a file in the [sandbox](/docs/en/managed-agents/environments). The model receives a truncated preview with the file path and can read the full content from there.
+When a tool output exceeds 100,000 characters (about 25,000 tokens), it is automatically written to a file in the [sandbox](/docs/en/managed-agents/environments). The model receives a truncated preview with the file path and can read the full content from there.
 
 ## Configuring the toolset
 
@@ -49,7 +49,7 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
     -d @- <<'EOF'
   {
     "name": "Coding Assistant",
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "tools": [
       {
         "type": "agent_toolset_20260401",
@@ -66,7 +66,7 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
   ```bash CLI
   ant beta:agents create <<'YAML'
   name: Coding Assistant
-  model: claude-opus-4-8
+  model: claude-opus-5
   tools:
     - type: agent_toolset_20260401
       configs:
@@ -78,7 +78,7 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
   ```python Python
   agent = client.beta.agents.create(
       name="Coding Assistant",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       tools=[
           {
               "type": "agent_toolset_20260401",
@@ -93,7 +93,7 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Coding Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [
       {
         type: "agent_toolset_20260401",
@@ -104,10 +104,12 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Agents;
+
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Coding Assistant",
-      Model = new("claude-opus-4-8"),
+      Model = new("claude-opus-5"),
       Tools =
       [
           new BetaManagedAgentsAgentToolset20260401Params
@@ -126,7 +128,7 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Coding Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-4-8",
+  		ID: "claude-opus-5",
   	},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -145,9 +147,11 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
   ```
 
   ```java Java
+  import com.anthropic.models.beta.agents.*;
+
   var agent = client.beta().agents().create(AgentCreateParams.builder()
       .name("Coding Assistant")
-      .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+      .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
       .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
           .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
           .addConfig(BetaManagedAgentsAgentToolConfigParams.builder()
@@ -164,7 +168,7 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
 
   $agent = $client->beta->agents->create(
       name: 'Coding Assistant',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
               type: 'agent_toolset_20260401',
@@ -179,7 +183,7 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Coding Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [
       {
         type: :agent_toolset_20260401,
@@ -240,7 +244,7 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
     -d @- <<'EOF'
   {
     "name": "Weather Agent",
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "tools": [
       {
         "type": "agent_toolset_20260401"
@@ -266,7 +270,7 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
   ```bash CLI
   ant beta:agents create <<'YAML'
   name: Weather Agent
-  model: claude-opus-4-8
+  model: claude-opus-5
   tools:
     - type: agent_toolset_20260401
     - type: custom
@@ -286,7 +290,7 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
   ```python Python
   agent = client.beta.agents.create(
       name="Weather Agent",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       tools=[
           {
               "type": "agent_toolset_20260401",
@@ -310,7 +314,7 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Weather Agent",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [
       { type: "agent_toolset_20260401" },
       {
@@ -328,10 +332,13 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
   ```
 
   ```csharp C#
+  using System.Text.Json;
+  using Anthropic.Models.Beta.Agents;
+
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Weather Agent",
-      Model = new("claude-opus-4-8"),
+      Model = new("claude-opus-5"),
       Tools =
       [
           new BetaManagedAgentsAgentToolset20260401Params
@@ -362,7 +369,7 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Weather Agent",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-4-8",
+  		ID: "claude-opus-5",
   	},
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
   		OfAgentToolset20260401: &anthropic.BetaManagedAgentsAgentToolset20260401Params{
@@ -392,9 +399,12 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
   ```
 
   ```java Java
+  import com.anthropic.models.beta.agents.*;
+  import java.util.Map;
+
   var agent = client.beta().agents().create(AgentCreateParams.builder()
       .name("Weather Agent")
-      .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+      .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
       .addTool(BetaManagedAgentsAgentToolset20260401Params.builder()
           .type(BetaManagedAgentsAgentToolset20260401Params.Type.AGENT_TOOLSET_20260401)
           .build())
@@ -421,7 +431,7 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
 
   $agent = $client->beta->agents->create(
       name: 'Weather Agent',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
               type: 'agent_toolset_20260401',
@@ -442,7 +452,7 @@ If your sessions run in a self-hosted sandbox, the environment worker can [serve
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Weather Agent",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     tools: [
       {type: :agent_toolset_20260401},
       {

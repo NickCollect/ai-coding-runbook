@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws
-fetched_at: 2026-07-20T04:31:16.839855+00:00
+fetched_at: 2026-07-27T04:31:48.721358+00:00
 fetch_method: mintlify_md
 ---
 
@@ -311,14 +311,14 @@ Anthropic's [client SDKs](/docs/en/cli-sdks-libraries/overview) support Claude P
 
   <Tab title="Java">
     ```kotlin Gradle
-    implementation("com.anthropic:anthropic-java-aws:2.48.0")
+    implementation("com.anthropic:anthropic-java-aws:2.52.0")
     ```
 
     ```xml Maven
     <dependency>
       <groupId>com.anthropic</groupId>
       <artifactId>anthropic-java-aws</artifactId>
-      <version>2.48.0</version>
+      <version>2.52.0</version>
     </dependency>
     ```
   </Tab>
@@ -588,7 +588,7 @@ Claude Platform on AWS supports the following inference geographies:
 Set the inference geography per request with the `inference_geo` parameter:
 
 <Note>
-  The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6, and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, or Claude Haiku 4.5 return a 400 error. See [Data residency](/docs/en/manage-claude/data-residency) for model availability details.
+  The `inference_geo` parameter is supported on Claude 4.6 and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, or Claude Haiku 4.5 return a 400 error. See [Data residency](/docs/en/manage-claude/data-residency) for model availability details.
 </Note>
 
 <CodeGroup>
@@ -797,25 +797,25 @@ Two Claude Console roles are available: **Admin** and **Developer**. The Admin r
 
 The **Through AWS gateway** column indicates whether the page reads and writes data through the AWS gateway (and is therefore governed by [IAM actions](/docs/en/api/claude-platform-on-aws-iam-actions)). Pages marked **No** read organization-level metadata directly from Anthropic and bypass IAM action checks.
 
-| Page                  | Available     | Through AWS gateway | Notes                                                                                                                                                                  |
-| --------------------- | ------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Usage**             | Yes           | No                  | View token usage by model, workspace, and dimension. Data can take a few minutes to appear after a request.                                                            |
-| **Cost**              | Yes           | No                  | View cost breakdowns by model and workspace. AWS Cost Explorer shows the aggregated [Claude Consumption Unit (CCU)](#billing) line item.                               |
-| **Limits**            | Yes           | No                  | View rate limits (read-only). Tier increases go through your Anthropic account representative; see [Rate limits and quotas](#rate-limits-and-quotas).                  |
-| **Workspaces**        | Yes           | No                  | View per-region workspaces (read-only).                                                                                                                                |
-| **Files**             | Yes           | Yes                 | View and manage uploaded files.                                                                                                                                        |
-| **Skills**            | Yes           | Yes                 | View and manage Agent Skills.                                                                                                                                          |
-| **Batches**           | Yes           | Yes                 | View and manage batch processing jobs.                                                                                                                                 |
-| **Agents**            | Yes           | Yes                 | View and manage agent definitions.                                                                                                                                     |
-| **Sessions**          | Yes           | Yes                 | View agent sessions and event history.                                                                                                                                 |
-| **Environments**      | Yes           | Yes                 | View and manage cloud sandbox configurations for sessions.                                                                                                             |
-| **Credential vaults** | Yes           | Yes                 | View and manage credential vaults for session authentication.                                                                                                          |
-| **Memory stores**     | Yes           | Yes                 | View and manage persistent agent memory.                                                                                                                               |
-| **Webhooks**          | Yes           | Yes                 | View and manage webhook endpoints under **Settings → Webhooks**.                                                                                                       |
-| **API keys**          | No            | N/A                 | Manage API keys in the AWS Console (**Claude Platform on AWS → API keys**). See [API key authentication](#api-key-authentication).                                     |
-| **Members**           | No            | N/A                 | Not applicable. AWS IAM manages access.                                                                                                                                |
-| **Billing**           | Yes (limited) | No                  | Set an organization monthly spend limit and spend alerts; see [Spend limits](#spend-limits). AWS Marketplace manages invoicing. View cost breakdowns on the Cost page. |
-| **Claude Code**       | No            | N/A                 | View Claude Code usage on the Usage page.                                                                                                                              |
+| Page                  | Available     | Through AWS gateway | Notes                                                                                                                                                 |
+| --------------------- | ------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Usage**             | Yes           | No                  | View token usage by model, workspace, and dimension. Data can take a few minutes to appear after a request.                                           |
+| **Cost**              | Yes           | No                  | View cost breakdowns by model and workspace. AWS Cost Explorer shows the aggregated [Claude Consumption Unit (CCU)](#billing) line item.              |
+| **Limits**            | Yes           | No                  | View rate limits (read-only). Tier increases go through your Anthropic account representative; see [Rate limits and quotas](#rate-limits-and-quotas). |
+| **Workspaces**        | Yes           | No                  | View per-region workspaces (read-only).                                                                                                               |
+| **Files**             | Yes           | Yes                 | View and manage uploaded files.                                                                                                                       |
+| **Skills**            | Yes           | Yes                 | View and manage Agent Skills.                                                                                                                         |
+| **Batches**           | Yes           | Yes                 | View and manage batch processing jobs.                                                                                                                |
+| **Agents**            | Yes           | Yes                 | View and manage agent definitions.                                                                                                                    |
+| **Sessions**          | Yes           | Yes                 | View agent sessions and event history.                                                                                                                |
+| **Environments**      | Yes           | Yes                 | View and manage cloud sandbox configurations for sessions.                                                                                            |
+| **Credential vaults** | Yes           | Yes                 | View and manage credential vaults for session authentication.                                                                                         |
+| **Memory stores**     | Yes           | Yes                 | View and manage persistent agent memory.                                                                                                              |
+| **Webhooks**          | Yes           | Yes                 | View and manage webhook endpoints under **Settings → Webhooks**.                                                                                      |
+| **API keys**          | No            | N/A                 | Manage API keys in the AWS Console (**Claude Platform on AWS → API keys**). See [API key authentication](#api-key-authentication).                    |
+| **Members**           | No            | N/A                 | Not applicable. AWS IAM manages access.                                                                                                               |
+| **Billing**           | Yes (limited) | No                  | Set an organization monthly spend limit; see [Spend limits](#spend-limits). AWS Marketplace manages invoicing. View cost breakdowns on the Cost page. |
+| **Claude Code**       | No            | N/A                 | View Claude Code usage on the Usage page.                                                                                                             |
 
 ### Switching organizations
 
@@ -847,9 +847,8 @@ The Start, Build, and Scale usage tiers each carry a monthly spend cap; see [the
 
 You can also set your own monthly spend limit to cap what your organization spends:
 
-* **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit and optional spend alerts. On Claude Platform on AWS, spend limits are managed on the Billing page rather than the Limits page.
+* **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit. On Claude Platform on AWS, spend limits are managed on the Billing page rather than the Limits page.
 * **Workspace spend limits:** Set monthly spend limits for individual workspaces from each workspace's limits settings.
-* **Spend alerts:** Alerts are sent to the email addresses you list. Role-based recipients, such as all organization admins, are not supported on Claude Platform on AWS.
 
 The spend limits you set are soft limits: spend is calculated at list prices and can take about two hours to reflect recent usage.
 

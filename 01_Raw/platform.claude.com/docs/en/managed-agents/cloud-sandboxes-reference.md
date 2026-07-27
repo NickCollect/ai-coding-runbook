@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/cloud-sandboxes-reference
-fetched_at: 2026-07-13T04:25:38.506333+00:00
+fetched_at: 2026-07-27T04:31:48.909805+00:00
 fetch_method: mintlify_md
 ---
 
@@ -51,7 +51,7 @@ These specifications apply to `cloud` environments. Self-hosted sandboxes run on
 * `curl`, `wget` - HTTP clients
 * `jq` - JSON processing
 * `tar`, `zip`, `unzip` - Archive tools
-* `ssh`, `scp` - Remote access (requires network enabled)
+* `ssh`, `scp` - Remote access (requires a networking mode that allows the destination host)
 * `tmux`, `screen` - Terminal multiplexers
 
 ### Development tools
@@ -70,10 +70,10 @@ These specifications apply to `cloud` environments. Self-hosted sandboxes run on
 
 ## Sandbox specifications
 
-| Property         | Value                                              |
-| ---------------- | -------------------------------------------------- |
-| Operating system | Ubuntu 22.04 LTS                                   |
-| Architecture     | x86\_64 (amd64)                                    |
-| Memory           | Up to 8 GB                                         |
-| Disk space       | Up to 10 GB                                        |
-| Network          | Disabled by default (enable in environment config) |
+| Property         | Value                                                                                                                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Operating system | Ubuntu 22.04 LTS                                                                                                                                                                   |
+| Architecture     | x86\_64 (amd64)                                                                                                                                                                    |
+| Memory           | Up to 8 GB                                                                                                                                                                         |
+| Disk space       | Up to 10 GB                                                                                                                                                                        |
+| Network          | API-created environments default to [`unrestricted` networking](/docs/en/managed-agents/environments#networking); sandboxes provisioned through Claude Studio default to `limited` |

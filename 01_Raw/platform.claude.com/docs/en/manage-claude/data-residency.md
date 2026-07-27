@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/data-residency
-fetched_at: 2026-07-20T04:31:17.823812+00:00
+fetched_at: 2026-07-27T04:31:49.803192+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
       --header "anthropic-version: 2023-06-01" \
       --header "content-type: application/json" \
       --data '{
-          "model": "claude-opus-4-8",
+          "model": "claude-opus-5",
           "max_tokens": 1024,
           "inference_geo": "us",
           "messages": [{
@@ -53,18 +53,18 @@ The `inference_geo` parameter controls where model inference runs for a specific
 
   ```bash CLI
   ant messages create \
-    --model claude-opus-4-8 \
+    --model claude-opus-5 \
     --max-tokens 1024 \
     --inference-geo us \
     --message '{role: user, content: "Summarize the key points of this document."}' \
-    --transform '{content.0.text,usage.inference_geo}' --format yaml
+    --transform '{content.#(type=="text").text,usage.inference_geo}' --format yaml
   ```
 
   ```python Python
   client = anthropic.Anthropic()
 
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       inference_geo="us",
       messages=[
@@ -72,7 +72,9 @@ The `inference_geo` parameter controls where model inference runs for a specific
       ],
   )
 
-  print(response.content[0].text)
+  for block in response.content:
+      if block.type == "text":
+          print(block.text)
   # Check where inference actually ran
   print(f"Inference geo: {response.usage.inference_geo}")
   ```
@@ -81,7 +83,7 @@ The `inference_geo` parameter controls where model inference runs for a specific
   const client = new Anthropic();
 
   const response = await client.messages.create({
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     inference_geo: "us",
     messages: [
@@ -98,6 +100,116 @@ The `inference_geo` parameter controls where model inference runs for a specific
   console.log(textBlock?.text);
   // Check where inference actually ran
   console.log(`Inference geo: ${response.usage.inference_geo}`);
+  ```
+
+  ```csharp C#
+  var client = new AnthropicClient();
+
+  var response = await client.Messages.Create(
+      new MessageCreateParams
+      {
+          Model = Model.ClaudeOpus5,
+          MaxTokens = 1024,
+          InferenceGeo = "us",
+          Messages =
+          [
+              new() { Role = Role.User, Content = "Summarize the key points of this document." },
+          ],
+      }
+  );
+
+  foreach (var block in response.Content)
+  {
+      if (block.TryPickText(out var textBlock))
+      {
+          Console.WriteLine(textBlock.Text);
+      }
+  }
+
+  // Check where inference actually ran
+  Console.WriteLine($"Inference geo: {response.Usage.InferenceGeo}");
+  ```
+
+  ```go Go
+  client := anthropic.NewClient()
+
+  message, err := client.Messages.New(context.Background(), anthropic.MessageNewParams{
+  	Model:        anthropic.ModelClaudeOpus5,
+  	MaxTokens:    1024,
+  	InferenceGeo: anthropic.String("us"),
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("Summarize the key points of this document.")),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+
+  for _, block := range message.Content {
+  	if textBlock, ok := block.AsAny().(anthropic.TextBlock); ok {
+  		fmt.Println(textBlock.Text)
+  	}
+  }
+  // Check where inference actually ran
+  fmt.Printf("Inference geo: %s\n", message.Usage.InferenceGeo)
+  ```
+
+  ```java Java
+  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+  Message response = client.messages().create(
+          MessageCreateParams.builder()
+                  .model(Model.CLAUDE_OPUS_5)
+                  .maxTokens(1024L)
+                  .inferenceGeo("us")
+                  .addUserMessage("Summarize the key points of this document.")
+                  .build());
+
+  response.content().stream()
+          .flatMap(block -> block.text().stream())
+          .forEach(textBlock -> IO.println(textBlock.text()));
+  // Check where inference actually ran
+  IO.println("Inference geo: " + response.usage().inferenceGeo().get());
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $response = $client->messages->create(
+      model: 'claude-opus-5',
+      maxTokens: 1024,
+      inferenceGeo: 'us',
+      messages: [
+          ['role' => 'user', 'content' => 'Summarize the key points of this document.'],
+      ],
+  );
+
+  foreach ($response->content as $block) {
+      if ($block->type === 'text') {
+          echo $block->text, PHP_EOL;
+      }
+  }
+  // Check where inference actually ran
+  echo "Inference geo: {$response->usage->inferenceGeo}\n";
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  response = client.messages.create(
+    model: "claude-opus-5",
+    max_tokens: 1024,
+    inference_geo: "us",
+    messages: [
+      {role: "user", content: "Summarize the key points of this document."}
+    ]
+  )
+
+  response.content.each do |block|
+    puts block.text if block.type == :text
+  end
+  # Check where inference actually ran
+  puts "Inference geo: #{response.usage.inference_geo}"
   ```
 </CodeGroup>
 
@@ -117,7 +229,7 @@ The response `usage` object includes an `inference_geo` field indicating where i
 
 ### Model availability
 
-The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6, and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, or earlier models return a 400 error.
+The `inference_geo` parameter is supported on Claude 4.6 and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, or earlier models return a 400 error.
 
 <Note>
   The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). On Amazon Bedrock and Google Cloud, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. On [Claude in Microsoft Foundry](/docs/en/build-with-claude/claude-in-microsoft-foundry), `inference_geo` is likewise not applicable: deployments hosted on Azure can instead use the US Data Zone Standard deployment type, which keeps inference within the United States. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](/docs/en/cli-sdks-libraries/libraries/openai-sdk).
@@ -150,7 +262,7 @@ To set workspace geo, create a new workspace in the [Console](https://platform.c
 
 Data residency pricing varies by model generation:
 
-* **Claude Opus 4.6, Claude Sonnet 4.6, and later:** US-only inference (`inference_geo: "us"`) is priced at 1.1x the standard rate across all token pricing categories (input tokens, output tokens, cache writes, and cache reads).
+* **Claude 4.6 and later models:** US-only inference (`inference_geo: "us"`) is priced at 1.1x the standard rate across all token pricing categories (input tokens, output tokens, cache writes, and cache reads).
 * **Global routing** (`inference_geo: "global"`): Standard pricing applies.
 * **Older models:** Don't support `inference_geo` (see [Model availability](#model-availability)); standard pricing applies. Requests that include the parameter return a 400 error.
 

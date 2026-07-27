@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/cmek
-fetched_at: 2026-07-20T04:31:17.815342+00:00
+fetched_at: 2026-07-27T04:31:49.804554+00:00
 fetch_method: mintlify_md
 ---
 
@@ -18,30 +18,32 @@ A customer-managed encryption key (CMEK) lets you provision an encryption key in
 
 The use of CMEK is optional. Eligible organizations can **opt in** to use customer-managed encryption keys instead of the default encryption that Anthropic provides. To activate CMEK, contact your Anthropic account team.
 
-<Accordion title="Enabling CMEK is permanent and can cause irreversible data loss" className="!border-warning-200 bg-warning-900 text-warning-000 [&_button:hover]:bg-warning-200/10">
+<Warning>
+  **Enabling CMEK is permanent and can cause irreversible data loss**
+
   Enabling CMEK is permanent. Anthropic keeps no copy of your key, so misconfiguration or key loss can permanently destroy your CMEK-protected data. If you are uncertain about any step, contact your Anthropic representative before applying changes.
 
   * **Permanent data loss:** If your encryption key is deleted, scheduled for deletion, or has its key material destroyed, Anthropic cannot recover your data.
   * **Identifier verification is mandatory:** Granting key access to an incorrect or spoofed principal can expose your data to an unauthorized party. Always verify the Anthropic identifier against the published production identities in each configuration guide. Never trust an identifier provided over email, chat, or any onboarding channel.
-</Accordion>
+</Warning>
 
 ## How it works
 
-Only admins can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API. On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after the key is enabled. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
+Only Organization Admins (on Claude Platform) or Owners and the Primary Owner (on Claude Enterprise) can configure CMEK. On Claude Platform, CMEK is scoped per workspace and configured with the Admin API. On Claude Enterprise, CMEK is scoped per organization and configured in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls). On either product, CMEK protects data written after the key is enabled. Existing data (prior chats, files, and sessions) remains encrypted with Anthropic-managed keys and is not re-encrypted under your key.
 
-CMEK admin configuration events appear in the [Compliance API Activity Feed](/docs/en/manage-claude/compliance-activity-feed). The key operations Anthropic performs against your key (such as wrapping and unwrapping data keys) do not appear in the Compliance API; they appear in your cloud provider's audit logs.
+CMEK configuration events appear in the [Compliance API Activity Feed](/docs/en/manage-claude/compliance-activity-feed). The key operations Anthropic performs against your key (such as wrapping and unwrapping data keys) do not appear in the Compliance API; they appear in your cloud provider's audit logs.
 
 Anthropic calls your key management service from its standard public IP range. If you restrict access to your key management service by IP, allow the addresses listed in [IP addresses](/docs/en/api/ip-addresses).
 
 ## Prerequisites
 
-* Cloud Admin access in the account, project, or subscription that will host the encryption key.
-* An admin role in your Anthropic organization: an Organization Admin role in the Claude Console on Claude Platform, or an Owner or Primary Owner role on Claude Enterprise.
+* Permissions to create encryption keys and manage key access in the account, project, or subscription that will host the encryption key.
+* An Organization Admin role in the Claude Console on Claude Platform, or an Owner or Primary Owner role on Claude Enterprise.
 * Data retention configuration: CMEK is allowed with [Zero data retention (ZDR)](/docs/en/manage-claude/api-and-data-retention) for both Claude Platform and Claude Enterprise.
 
 ## Availability and regions
 
-CMEK is currently available in US regions only, and all encryption operations are processed in US regions. Multi-region keys and EU key residency are not yet supported.
+CMEK is currently available in US regions only, and all encryption operations are processed in US regions.
 
 On [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws), CMEK is available with AWS KMS keys only; Google Cloud KMS and Azure Key Vault keys cannot be registered. Create, validate, and attach keys in the Claude Console; the `external_keys` API endpoints are not currently available on Claude Platform on AWS. The key must be in the same AWS region as the workspace it is attached to.
 
@@ -70,6 +72,7 @@ What CMEK covers depends on which product you use.
 * Claude Code on the CLI, including message content.
 * Cowork in Claude Desktop.
 * Office agents.
+* Claude in Chrome.
 
 On both products, backups and snapshots inherit the key.
 
@@ -89,7 +92,7 @@ Some features are turned off or substantially modified when CMEK is enabled. Thi
 * Search across large numbers of files is slower.
 * The Analytics API and in-product analytics are degraded. Some usage views and reports may be incomplete.
 * Audit log exports are disabled.
-* Signed URLs for temporary file exchanges are disabled. These back claude.ai admin data exports and Claude Code Remote file flows such as screenshot updates.
+* Signed URLs for temporary file exchanges are disabled. These back organization data exports in claude.ai and Claude Code Remote file flows such as screenshot updates.
 * Personal preferences are disabled for users who belong to a CMEK-protected organization, across all organizations under the same parent. Users who do not belong to a CMEK-protected organization can still use them across all organizations.
 
 ### Not encrypted
@@ -113,18 +116,18 @@ On both products, account data for users in your organization (such as names, em
 
 The following Claude Platform APIs and tools store data at rest under your key when CMEK is enabled:
 
-| APIs          | Tools and features                                               |
-| ------------- | ---------------------------------------------------------------- |
-| Messages      | Web search                                                       |
-| Models        | Web fetch                                                        |
-| Files         | Code execution                                                   |
-| Batch         | Bash tool                                                        |
-| Skills        | Text editor tool                                                 |
-| User profiles | MCP connector                                                    |
-|               | Structured outputs (Claude Sonnet 4.6 and Claude Haiku 4.5 only) |
-|               | Advisor tool                                                     |
-|               | Computer use                                                     |
-|               | Context management                                               |
+| APIs          | Tools and features                                                                                  |
+| ------------- | --------------------------------------------------------------------------------------------------- |
+| Messages      | Web search                                                                                          |
+| Models        | Web fetch                                                                                           |
+| Files         | Code execution                                                                                      |
+| Batch         | Bash tool                                                                                           |
+| Skills        | Text editor tool                                                                                    |
+| User profiles | MCP connector                                                                                       |
+|               | Structured outputs (not available for Claude Fable 5 or Claude Mythos models in CMEK organizations) |
+|               | Advisor tool                                                                                        |
+|               | Computer use                                                                                        |
+|               | Context management                                                                                  |
 
 ## Limited preservation outside your key
 

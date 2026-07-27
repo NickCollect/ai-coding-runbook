@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/github
-fetched_at: 2026-07-13T04:25:38.693665+00:00
+fetched_at: 2026-07-27T04:31:49.058946+00:00
 fetch_method: mintlify_md
 ---
 
@@ -32,7 +32,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
     --data @- <<JSON | jq -r '.id'
   {
     "name": "Code Reviewer",
-    "model": "claude-opus-4-8",
+    "model": "claude-opus-5",
     "system": "You are a code review assistant with access to GitHub.",
     "mcp_servers": [
       {
@@ -56,7 +56,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   ```bash CLI
   AGENT_ID=$(ant beta:agents create \
     --name "Code Reviewer" \
-    --model '{id: claude-opus-4-8}' \
+    --model '{id: claude-opus-5}' \
     --system "You are a code review assistant with access to GitHub." \
     --mcp-server '{type: url, name: github, url: https://api.githubcopilot.com/mcp/}' \
     --tool '{type: agent_toolset_20260401}' \
@@ -67,7 +67,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   ```python Python
   agent = client.beta.agents.create(
       name="Code Reviewer",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       system="You are a code review assistant with access to GitHub.",
       mcp_servers=[
           {
@@ -89,7 +89,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Code Reviewer",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system: "You are a code review assistant with access to GitHub.",
     mcp_servers: [
       {
@@ -112,7 +112,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Code Reviewer",
-      Model = new("claude-opus-4-8"),
+      Model = new("claude-opus-5"),
       System = "You are a code review assistant with access to GitHub.",
       McpServers =
       [
@@ -137,7 +137,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Code Reviewer",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-4-8",
+  		ID: "claude-opus-5",
   	},
   	System: anthropic.String("You are a code review assistant with access to GitHub."),
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{
@@ -169,7 +169,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   ```java Java
   var agent = client.beta().agents().create(AgentCreateParams.builder()
       .name("Code Reviewer")
-      .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+      .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
       .system("You are a code review assistant with access to GitHub.")
       .addMcpServer(BetaManagedAgentsUrlMcpServerParams.builder()
           .type(BetaManagedAgentsUrlMcpServerParams.Type.URL)
@@ -189,7 +189,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Code Reviewer',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       system: 'You are a code review assistant with access to GitHub.',
       mcpServers: [
           [
@@ -211,7 +211,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Code Reviewer",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system_: "You are a code review assistant with access to GitHub.",
     mcp_servers: [
       {
@@ -616,7 +616,13 @@ After a session is created, you can list its repository resources and rotate the
   ```typescript TypeScript
   // List resources on the session
   const listed = await client.beta.sessions.resources.list(session.id);
-  const repoResourceId = listed.data[0].id;
+  const repoResource = listed.data.find(
+    (entry) => entry.type === "github_repository",
+  );
+  if (!repoResource) {
+    throw new Error("No GitHub repository resource on the session");
+  }
+  const repoResourceId = repoResource.id;
   console.log(repoResourceId); // "sesrsc_01ABC..."
 
   // Rotate the authorization token

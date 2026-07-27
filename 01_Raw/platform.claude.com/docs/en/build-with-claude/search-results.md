@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/search-results
-fetched_at: 2026-07-20T04:31:15.513586+00:00
+fetched_at: 2026-07-27T04:31:46.892998+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,30 +14,9 @@ Enable natural citations for RAG applications by providing search results with s
   For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
 </Note>
 
-Search result content blocks enable natural citations with proper source attribution, bringing web search-quality citations to your custom applications. This feature is particularly powerful for RAG (Retrieval-Augmented Generation) applications where you need Claude to cite sources accurately.
+Search result content blocks let Claude cite your own content the same way it cites web search results: each citation carries the source and title you provided. Use them in RAG (Retrieval-Augmented Generation) applications where Claude needs to attribute answers to your documents.
 
-The search results feature is available on the following models:
-
-* Claude Opus 4.8 (claude-opus-4-8)
-* Claude Opus 4.7 (`claude-opus-4-7`)
-* Claude Opus 4.6 (`claude-opus-4-6`)
-* Claude Sonnet 5 (`claude-sonnet-5`)
-* Claude Sonnet 4.6 (`claude-sonnet-4-6`)
-* Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`)
-* Claude Opus 4.5 (`claude-opus-4-5-20251101`)
-* Claude Opus 4.1 ([deprecated](/docs/en/about-claude/model-deprecations)) (`claude-opus-4-1-20250805`)
-* Claude Opus 4 ([retired, except on Google Cloud](/docs/en/about-claude/model-deprecations)) (`claude-opus-4-20250514`)
-* Claude Sonnet 4 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)) (`claude-sonnet-4-20250514`)
-* Claude Haiku 4.5 (`claude-haiku-4-5-20251001`)
-* Claude Haiku 3.5 ([retired, except on Bedrock and Google Cloud](/docs/en/about-claude/model-deprecations)) (`claude-3-5-haiku-20241022`)
-
-## Key benefits
-
-* **Natural citations:** Achieve the same citation quality as web search for any content
-* **Flexible integration:** Use in tool returns for dynamic RAG or as top-level content for pre-fetched data
-* **Proper source attribution:** Each result includes source and title information for clear attribution
-* **No document workarounds needed:** Eliminates the need for document-based workarounds
-* **Consistent citation format:** Matches the citation quality and format of Claude's web search functionality
+All [active models](/docs/en/about-claude/models/overview) support search results with citations, with the exception of Claude Haiku 3. No beta header is required: search results are part of the standard Messages API.
 
 ## How it works
 
@@ -46,7 +25,7 @@ Search results can be provided in two ways:
 1. **From tool calls:** Your custom tools return search results, enabling dynamic RAG applications
 2. **As top-level content:** You provide search results directly in user messages for pre-fetched or cached content
 
-In both cases, Claude can automatically cite information from the search results with proper source attribution.
+In both cases, Claude cites the search results automatically when citations are enabled. No special prompting is needed: ask your question, and citations appear on the text blocks that draw on your content.
 
 ### Search result schema
 
@@ -73,32 +52,48 @@ Search results use the following structure:
 
 ### Required fields
 
-| Field     | Type   | Description                                           |
-| --------- | ------ | ----------------------------------------------------- |
-| `type`    | string | Must be `"search_result"`                             |
-| `source`  | string | The source URL or identifier for the content          |
-| `title`   | string | A descriptive title for the search result             |
-| `content` | array  | An array of text blocks containing the actual content |
+| Field     | Type   | Description                                                                                                      |
+| --------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| `type`    | string | Must be `"search_result"`                                                                                        |
+| `source`  | string | The source of the content. Any stable string works: a URL, or an internal identifier such as `kb://article-1234` |
+| `title`   | string | A descriptive title for the search result                                                                        |
+| `content` | array  | An array of text blocks containing the actual content                                                            |
 
 ### Optional fields
 
-| Field           | Type   | Description                                                   |
-| --------------- | ------ | ------------------------------------------------------------- |
-| `citations`     | object | Citation configuration with `enabled` Boolean field           |
-| `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`) |
+| Field           | Type   | Description                                                                                                                                                                                                                                                 |
+| --------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `citations`     | object | Citation configuration with `enabled` Boolean field. Citations are disabled by default; every example on this page sets `"enabled": true` explicitly. All search results in a request must use the same setting (see [Citation control](#citation-control)) |
+| `cache_control` | object | Cache control settings (for example, `{"type": "ephemeral"}`)                                                                                                                                                                                               |
 
 Each item in the `content` array must be a text block with:
 
 * `type`: Must be `"text"`
 * `text`: The actual text content (non-empty string)
 
+Search results hold text only. Images and other media are not supported inside the `content` array.
+
 ## Method 1: Search results from tool calls
 
-The most powerful use case is returning search results from your custom tools. This enables dynamic RAG applications where tools fetch and return relevant content with automatic citations.
+Returning search results from your custom tools enables dynamic RAG applications: tools fetch content at runtime, and Claude cites it in the response. The following example forces the tool call with [`tool_choice`](/docs/en/agents-and-tools/tool-use/define-tools#forcing-tool-use), so the retrieval step runs every time.
 
 ### Example: Knowledge base tool
 
-<CodeGroup exclude="shell">
+<CodeGroup>
+  ```bash cURL
+  # The tool-calling flow needs application-side search logic that doesn't
+  # translate to a one-off shell command. See the SDK tabs for the full flow.
+  # The raw shape of a tool conversation with search results is shown in the
+  # Combining both methods cURL tab; Method 2 shows the top-level shape.
+  ```
+
+  ```bash CLI
+  # The tool-calling flow needs application-side search logic that doesn't
+  # translate to a one-off shell command. See the SDK tabs for the full flow.
+  # The raw shape of a tool conversation with search results is shown in the
+  # Combining both methods cURL tab; Method 2 shows the top-level shape.
+  ```
+
   ```python Python
   from anthropic.types import (
       MessageParam,
@@ -153,48 +148,55 @@ The most powerful use case is returning search results from your custom tools. T
       ]
 
 
+  # Build up the conversation in a list, starting with the user's question
+  messages = [
+      MessageParam(role="user", content="How do I configure the timeout settings?")
+  ]
+
   # Create a message with the tool
   response = client.messages.create(
-      model="claude-opus-4-8",  # Works with all supported models
+      model="claude-opus-5",
       max_tokens=1024,
       tools=[knowledge_base_tool],
-      messages=[
-          MessageParam(role="user", content="How do I configure the timeout settings?")
-      ],
+      tool_choice={"type": "tool", "name": "search_knowledge_base"},
+      messages=messages,
   )
 
-  # When Claude calls the tool, provide the search results
-  if response.content[0].type == "tool_use":
-      tool_result = search_knowledge_base(response.content[0].input["query"])
+  # When Claude calls the tool, provide the search results.
+  # The tool_use block is not always first: iterate to find it.
+  tool_use = next((block for block in response.content if block.type == "tool_use"), None)
+  if tool_use is not None:
+      tool_result = search_knowledge_base(tool_use.input["query"])
+
+      # Append Claude's turn, then the tool result, to the running conversation
+      messages.append(MessageParam(role="assistant", content=response.content))
+      messages.append(
+          MessageParam(
+              role="user",
+              content=[
+                  ToolResultBlockParam(
+                      type="tool_result",
+                      tool_use_id=tool_use.id,
+                      content=tool_result,  # Search results go here
+                  )
+              ],
+          )
+      )
 
       # Send the tool result back
       final_response = client.messages.create(
-          model="claude-opus-4-8",  # Works with all supported models
+          model="claude-opus-5",
           max_tokens=1024,
-          messages=[
-              MessageParam(
-                  role="user", content="How do I configure the timeout settings?"
-              ),
-              MessageParam(role="assistant", content=response.content),
-              MessageParam(
-                  role="user",
-                  content=[
-                      ToolResultBlockParam(
-                          type="tool_result",
-                          tool_use_id=response.content[0].id,
-                          content=tool_result,  # Search results go here
-                      )
-                  ],
-              ),
-          ],
+          messages=messages,
       )
+      print(final_response)
   ```
 
   ```typescript TypeScript
-  const anthropic = new Anthropic();
+  const client = new Anthropic();
 
   // Define a knowledge base search tool
-  const knowledgeBaseTool: Anthropic.Messages.Tool = {
+  const knowledgeBaseTool: Anthropic.Tool = {
     name: "search_knowledge_base",
     description: "Search the company knowledge base for information",
     input_schema: {
@@ -241,157 +243,137 @@ The most powerful use case is returning search results from your custom tools. T
     ];
   }
 
+  // Build up the conversation in a list, starting with the user's question
+  const messages: Anthropic.MessageParam[] = [
+    { role: "user", content: "How do I configure the timeout settings?" }
+  ];
+
   // Create a message with the tool
-  const response = await anthropic.messages.create({
-    model: "claude-opus-4-8", // Works with all supported models
+  const response = await client.messages.create({
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [knowledgeBaseTool],
-    messages: [
-      {
-        role: "user",
-        content: "How do I configure the timeout settings?"
-      }
-    ]
+    tool_choice: { type: "tool", name: "search_knowledge_base" },
+    messages
   });
 
-  // Handle tool use and provide results
-  if (response.content[0].type === "tool_use") {
-    const input = response.content[0].input as { query: string };
+  // Handle tool use and provide results.
+  // The tool_use block is not always first: find it in the content array.
+  const toolUse = response.content.find(
+    (block): block is Anthropic.ToolUseBlock => block.type === "tool_use"
+  );
+  if (toolUse) {
+    const input = toolUse.input as { query: string };
     const toolResult = searchKnowledgeBase(input.query);
 
-    const finalResponse = await anthropic.messages.create({
-      model: "claude-opus-4-8", // Works with all supported models
-      max_tokens: 1024,
-      messages: [
-        { role: "user", content: "How do I configure the timeout settings?" },
-        { role: "assistant", content: response.content },
+    // Append Claude's turn, then the tool result, to the running conversation
+    messages.push({ role: "assistant", content: response.content });
+    messages.push({
+      role: "user",
+      content: [
         {
-          role: "user",
-          content: [
-            {
-              type: "tool_result" as const,
-              tool_use_id: response.content[0].id,
-              content: toolResult // Search results go here
-            }
-          ]
+          type: "tool_result" as const,
+          tool_use_id: toolUse.id,
+          content: toolResult // Search results go here
         }
       ]
     });
+
+    // Send the tool result back
+    const finalResponse = await client.messages.create({
+      model: "claude-opus-5",
+      max_tokens: 1024,
+      messages
+    });
+    console.log(finalResponse);
   }
   ```
 
   ```csharp C#
-  using System;
-  using System.Collections.Generic;
-  using System.Threading.Tasks;
-  using Anthropic;
-  using Anthropic.Models.Messages;
+  AnthropicClient client = new();
 
-  public class Program
+  var tools = new List<ToolUnion>
   {
-      public static async Task Main(string[] args)
+      new ToolUnion(new Tool()
       {
-          AnthropicClient client = new();
-
-          var knowledgeBaseTool = new Tool
+          Name = "search_knowledge_base",
+          Description = "Search the company knowledge base for information",
+          InputSchema = new InputSchema()
           {
-              Name = "search_knowledge_base",
-              Description = "Search the company knowledge base for information",
-              InputSchema = new
+              Properties = new Dictionary<string, JsonElement>
               {
-                  type = "object",
-                  properties = new
-                  {
-                      query = new
-                      {
-                          type = "string",
-                          description = "The search query"
-                      }
-                  },
-                  required = new[] { "query" }
-              }
-          };
-
-          var parameters = new MessageCreateParams
-          {
-              Model = Model.ClaudeOpus4_8,
-              MaxTokens = 1024,
-              Tools = new[] { knowledgeBaseTool },
-              Messages = new[]
-              {
-                  new MessageParam
-                  {
-                      Role = Role.User,
-                      Content = "How do I configure the timeout settings?"
-                  }
-              }
-          };
-
-          var response = await client.Messages.Create(parameters);
-
-          if (response.Content[0] is ToolUseBlock toolUse)
-          {
-              var toolResult = SearchKnowledgeBase(toolUse.Input["query"].ToString());
-
-              var finalParameters = new MessageCreateParams
-              {
-                  Model = Model.ClaudeOpus4_8,
-                  MaxTokens = 1024,
-                  Messages = new[]
-                  {
-                      new MessageParam { Role = Role.User, Content = "How do I configure the timeout settings?" },
-                      new MessageParam { Role = Role.Assistant, Content = response.Content },
-                      new MessageParam
-                      {
-                          Role = Role.User,
-                          Content = new[]
-                          {
-                              new ToolResultBlockParam
-                              {
-                                  ToolUseID = toolUse.Id,
-                                  Content = toolResult
-                              }
-                          }
-                      }
-                  }
-              };
-
-              var finalResponse = await client.Messages.Create(finalParameters);
-              Console.WriteLine(finalResponse);
-          }
-      }
-
-      private static List<SearchResultBlockParam> SearchKnowledgeBase(string query)
-      {
-          return new List<SearchResultBlockParam>
-          {
-              new SearchResultBlockParam
-              {
-                  Source = "https://docs.company.com/product-guide",
-                  Title = "Product Configuration Guide",
-                  Content = new[]
-                  {
-                      new TextBlockParam
-                      {
-                          Text = "To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs."
-                      }
-                  },
-                  Citations = new CitationsConfigParam { Enabled = true }
+                  ["query"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The search query" }),
               },
-              new SearchResultBlockParam
-              {
-                  Source = "https://docs.company.com/troubleshooting",
-                  Title = "Troubleshooting Guide",
-                  Content = new[]
-                  {
-                      new TextBlockParam
-                      {
-                          Text = "If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values."
-                      }
-                  },
-                  Citations = new CitationsConfigParam { Enabled = true }
-              }
-          };
+              Required = ["query"],
+          },
+      }),
+  };
+
+  // Function to handle the tool call
+  static List<Block> SearchKnowledgeBase(string query)
+  {
+      // Your search logic here
+      // Returns search results in the correct format
+      return
+      [
+          new SearchResultBlockParam
+          {
+              Source = "https://docs.company.com/product-guide",
+              Title = "Product Configuration Guide",
+              Content = [new() { Text = "To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs." }],
+              Citations = new() { Enabled = true },
+          },
+          new SearchResultBlockParam
+          {
+              Source = "https://docs.company.com/troubleshooting",
+              Title = "Troubleshooting Guide",
+              Content = [new() { Text = "If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values." }],
+              Citations = new() { Enabled = true },
+          },
+      ];
+  }
+
+  // Build up the conversation in a list, starting with the user's question
+  List<MessageParam> messages = [new() { Role = Role.User, Content = "How do I configure the timeout settings?" }];
+
+  // Create a message with the tool
+  var response = await client.Messages.Create(new()
+  {
+      Model = Model.ClaudeOpus5,
+      MaxTokens = 1024,
+      Tools = tools,
+      ToolChoice = new ToolChoiceTool { Name = "search_knowledge_base" },
+      Messages = messages,
+  });
+
+  // When Claude calls the tool, provide the search results.
+  // The tool_use block is not always first: find the first one.
+  foreach (var block in response.Content)
+  {
+      if (block.TryPickToolUse(out var toolUse))
+      {
+          var query = toolUse.Input["query"].GetString() ?? "";
+          var toolResults = SearchKnowledgeBase(query);
+
+          // Append Claude's turn, then the tool result, to the running conversation
+          messages.Add(new() { Role = Role.Assistant, Content = response.Content.Select(contentBlock => new ContentBlockParam(contentBlock.Json)).ToList() });
+          messages.Add(new()
+          {
+              Role = Role.User,
+              Content = new MessageParamContent(
+                  [new ContentBlockParam(new ToolResultBlockParam() { ToolUseID = toolUse.ID, Content = new ToolResultBlockParamContent(toolResults) })]
+              ),
+          });
+
+          // Send the tool result back
+          var finalResponse = await client.Messages.Create(new()
+          {
+              Model = Model.ClaudeOpus5,
+              MaxTokens = 1024,
+              Messages = messages,
+          });
+          Console.WriteLine(finalResponse);
+          break;
       }
   }
   ```
@@ -415,51 +397,59 @@ The most powerful use case is returning search results from your custom tools. T
   		},
   	}
 
+  	// Build up the conversation in a slice, starting with the user's question
+  	messages := []anthropic.MessageParam{
+  		anthropic.NewUserMessage(anthropic.NewTextBlock("How do I configure the timeout settings?")),
+  	}
+
   	response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  		Model:     anthropic.ModelClaudeOpus4_8,
-  		MaxTokens: 1024,
-  		Tools:     []anthropic.ToolUnionParam{knowledgeBaseTool},
-  		Messages: []anthropic.MessageParam{
-  			anthropic.NewUserMessage(anthropic.NewTextBlock("How do I configure the timeout settings?")),
-  		},
+  		Model:      anthropic.ModelClaudeOpus5,
+  		MaxTokens:  1024,
+  		Tools:      []anthropic.ToolUnionParam{knowledgeBaseTool},
+  		ToolChoice: anthropic.ToolChoiceUnionParam{OfTool: &anthropic.ToolChoiceToolParam{Name: "search_knowledge_base"}},
+  		Messages:   messages,
   	})
   	if err != nil {
   		log.Fatal(err)
   	}
 
+  	// The tool_use block is not always first: find it in the content list
+  	var toolUse *anthropic.ToolUseBlock
   	for _, block := range response.Content {
-  		switch variant := block.AsAny().(type) {
-  		case anthropic.ToolUseBlock:
-  			var input struct {
-  				Query string `json:"query"`
-  			}
-  			if err := json.Unmarshal(variant.Input, &input); err != nil {
-  				log.Fatal(err)
-  			}
-  			toolResults := searchKnowledgeBase(input.Query)
-
-  			// Build assistant message from the response
-  			assistantParam := response.ToParam()
-
-  			finalResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  				Model:     anthropic.ModelClaudeOpus4_8,
-  				MaxTokens: 1024,
-  				Messages: []anthropic.MessageParam{
-  					anthropic.NewUserMessage(anthropic.NewTextBlock("How do I configure the timeout settings?")),
-  					assistantParam,
-  					anthropic.NewUserMessage(anthropic.ContentBlockParamUnion{
-  						OfToolResult: &anthropic.ToolResultBlockParam{
-  							ToolUseID: variant.ID,
-  							Content:   toolResults,
-  						},
-  					}),
-  				},
-  			})
-  			if err != nil {
-  				log.Fatal(err)
-  			}
-  			fmt.Println(finalResponse)
+  		if variant, ok := block.AsAny().(anthropic.ToolUseBlock); ok {
+  			toolUse = &variant
+  			break
   		}
+  	}
+
+  	if toolUse != nil {
+  		var input struct {
+  			Query string `json:"query"`
+  		}
+  		if err := json.Unmarshal(toolUse.Input, &input); err != nil {
+  			log.Fatal(err)
+  		}
+  		toolResults := searchKnowledgeBase(input.Query)
+
+  		// Append Claude's turn, then the tool result, to the running conversation
+  		messages = append(messages, response.ToParam())
+  		messages = append(messages, anthropic.NewUserMessage(anthropic.ContentBlockParamUnion{
+  			OfToolResult: &anthropic.ToolResultBlockParam{
+  				ToolUseID: toolUse.ID,
+  				Content:   toolResults,
+  			},
+  		}))
+
+  		// Send the tool result back
+  		finalResponse, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  			Model:     anthropic.ModelClaudeOpus5,
+  			MaxTokens: 1024,
+  			Messages:  messages,
+  		})
+  		if err != nil {
+  			log.Fatal(err)
+  		}
+  		fmt.Println(finalResponse)
   	}
   // ...
   func searchKnowledgeBase(query string) []anthropic.ToolResultBlockParamContentUnion {
@@ -485,96 +475,130 @@ The most powerful use case is returning search results from your custom tools. T
   ```
 
   ```java Java
+  import com.anthropic.models.messages.ContentBlockParam;
   import com.anthropic.models.messages.CitationsConfigParam;
   // ...
+  import com.anthropic.models.messages.MessageParam;
+  import com.anthropic.models.messages.Model;
   import com.anthropic.models.messages.SearchResultBlockParam;
+  import com.anthropic.models.messages.TextBlockParam;
+  import com.anthropic.models.messages.Tool;
+  import com.anthropic.models.messages.ToolChoice;
+  import com.anthropic.models.messages.ToolChoiceTool;
+  import com.anthropic.models.messages.ToolResultBlockParam;
+  import com.anthropic.core.JsonValue;
   // ...
-  public class SearchKnowledgeBaseExample {
-      public static void main(String[] args) {
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          Tool knowledgeBaseTool = Tool.builder()
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      Tool knowledgeBaseTool = Tool.builder()
+          .name("search_knowledge_base")
+          .description("Search the company knowledge base for information")
+          .inputSchema(Tool.InputSchema.builder()
+              .properties(JsonValue.from(Map.of(
+                  "query", Map.of(
+                      "type", "string",
+                      "description", "The search query"
+                  )
+              )))
+              .putAdditionalProperty("required", JsonValue.from(List.of("query")))
+              .build())
+          .build();
+
+      // Build up the conversation in a list, starting with the user's question
+      List<MessageParam> messages = new ArrayList<>();
+      messages.add(MessageParam.builder()
+          .role(MessageParam.Role.USER)
+          .content("How do I configure the timeout settings?")
+          .build());
+
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_5)
+          .maxTokens(1024L)
+          .addTool(knowledgeBaseTool)
+          .toolChoice(ToolChoice.ofTool(ToolChoiceTool.builder()
               .name("search_knowledge_base")
-              .description("Search the company knowledge base for information")
-              .inputSchema(Tool.InputSchema.builder()
-                  .properties(JsonValue.from(Map.of(
-                      "query", Map.of(
-                          "type", "string",
-                          "description", "The search query"
-                      )
-                  )))
-                  .putAdditionalProperty("required", JsonValue.from(List.of("query")))
-                  .build())
-              .build();
+              .build()))
+          .messages(messages)
+          .build();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(1024L)
-              .addTool(knowledgeBaseTool)
-              .addUserMessage("How do I configure the timeout settings?")
-              .build();
+      Message response = client.messages().create(params);
 
-          Message response = client.messages().create(params);
-
-          response.content().get(0).toolUse().ifPresent(toolUse -> {
-              List<ContentBlockParam> toolResult = searchKnowledgeBase(
-                  (String) ((Map<?, ?>) toolUse._input()).get("query")
+      // The tool_use block is not always first: find it in the content list
+      response.content().stream()
+          .flatMap(contentBlock -> contentBlock.toolUse().stream())
+          .findFirst()
+          .ifPresent(toolUse -> {
+              Map<String, JsonValue> input =
+                  (Map<String, JsonValue>) toolUse._input().asObject().get();
+              List<ToolResultBlockParam.Content.Block> toolResult = searchKnowledgeBase(
+                  input.get("query").asStringOrThrow()
               );
 
-              MessageCreateParams finalParams = MessageCreateParams.builder()
-                  .model(Model.CLAUDE_OPUS_4_8)
-                  .maxTokens(1024L)
-                  .addUserMessage("How do I configure the timeout settings?")
-                  .addAssistantMessageOfBlockParams(List.of(
-                      ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()
-                          .id(toolUse.id())
-                          .name(toolUse.name())
-                          .input(toolUse._input())
-                          .build())
-                  ))
-                  .addUserMessageOfBlockParams(List.of(
+              // Append Claude's entire turn to the running conversation, then the tool result.
+              // Rebuilding only the tool_use block would drop any other content blocks Claude
+              // returned (e.g. leading text when the tool call is not forced) — append the
+              // full turn, as the other language tabs do.
+              messages.add(MessageParam.builder()
+                  .role(MessageParam.Role.ASSISTANT)
+                  .contentOfBlockParams(
+                      response.content().stream()
+                          .map(block -> block.toParam())
+                          .toList()
+                  )
+                  .build());
+              messages.add(MessageParam.builder()
+                  .role(MessageParam.Role.USER)
+                  .contentOfBlockParams(List.of(
                       ContentBlockParam.ofToolResult(
                           ToolResultBlockParam.builder()
                               .toolUseId(toolUse.id())
-                              .contentOfBlockParams(toolResult)
+                              .contentOfBlocks(toolResult)
                               .build()
                       )
                   ))
+                  .build());
+
+              // Send the tool result back
+              MessageCreateParams finalParams = MessageCreateParams.builder()
+                  .model(Model.CLAUDE_OPUS_5)
+                  .maxTokens(1024L)
+                  .messages(messages)
                   .build();
 
               Message finalResponse = client.messages().create(finalParams);
               System.out.println(finalResponse);
           });
-      }
+  }
 
-      private static List<ContentBlockParam> searchKnowledgeBase(String query) {
-          return List.of(
-              ContentBlockParam.ofSearchResult(
-                  SearchResultBlockParam.builder()
-                      .source("https://docs.company.com/product-guide")
-                      .title("Product Configuration Guide")
-                      .content(List.of(
-                          TextBlockParam.builder()
-                              .text("To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs.")
-                              .build()
-                      ))
-                      .citations(CitationsConfigParam.builder().enabled(true).build())
-                      .build()
-              ),
-              ContentBlockParam.ofSearchResult(
-                  SearchResultBlockParam.builder()
-                      .source("https://docs.company.com/troubleshooting")
-                      .title("Troubleshooting Guide")
-                      .content(List.of(
-                          TextBlockParam.builder()
-                              .text("If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values.")
-                              .build()
-                      ))
-                      .citations(CitationsConfigParam.builder().enabled(true).build())
-                      .build()
-              )
-          );
-      }
+  static List<ToolResultBlockParam.Content.Block> searchKnowledgeBase(String query) {
+      return List.of(
+          ToolResultBlockParam.Content.Block.ofSearchResult(
+              SearchResultBlockParam.builder()
+                  .source("https://docs.company.com/product-guide")
+                  .title("Product Configuration Guide")
+                  .content(List.of(
+                      TextBlockParam.builder()
+                          .text("To configure the product, navigate to Settings > Configuration. The default timeout is 30 seconds, but can be adjusted between 10-120 seconds based on your needs.")
+                          .build()
+                  ))
+                  .citations(CitationsConfigParam.builder().enabled(true).build())
+                  .build()
+          ),
+          ToolResultBlockParam.Content.Block.ofSearchResult(
+              SearchResultBlockParam.builder()
+                  .source("https://docs.company.com/troubleshooting")
+                  .title("Troubleshooting Guide")
+                  .content(List.of(
+                      TextBlockParam.builder()
+                          .text("If you encounter timeout errors, first check the configuration settings. Common causes include network latency and incorrect timeout values.")
+                          .build()
+                  ))
+                  .citations(CitationsConfigParam.builder().enabled(true).build())
+                  .build()
+          )
+      );
   }
   ```
 
@@ -625,12 +649,16 @@ The most powerful use case is returning search results from your custom tools. T
       ];
   }
 
+  // Build up the conversation in a list, starting with the user's question
+  $messages = [
+      ['role' => 'user', 'content' => 'How do I configure the timeout settings?']
+  ];
+
   $response = $client->messages->create(
       maxTokens: 1024,
-      messages: [
-          ['role' => 'user', 'content' => 'How do I configure the timeout settings?']
-      ],
-      model: 'claude-opus-4-8',
+      messages: $messages,
+      model: 'claude-opus-5',
+      toolChoice: ['type' => 'tool', 'name' => 'search_knowledge_base'],
       tools: [$knowledgeBaseTool],
   );
 
@@ -645,23 +673,24 @@ The most powerful use case is returning search results from your custom tools. T
   if ($toolUseBlock !== null) {
       $toolResult = searchKnowledgeBase($toolUseBlock->input['query']);
 
+      // Append Claude's turn, then the tool result, to the running conversation
+      $messages[] = ['role' => 'assistant', 'content' => $response->content];
+      $messages[] = [
+          'role' => 'user',
+          'content' => [
+              [
+                  'type' => 'tool_result',
+                  'tool_use_id' => $toolUseBlock->id,
+                  'content' => $toolResult
+              ]
+          ]
+      ];
+
+      // Send the tool result back
       $finalResponse = $client->messages->create(
           maxTokens: 1024,
-          messages: [
-              ['role' => 'user', 'content' => 'How do I configure the timeout settings?'],
-              ['role' => 'assistant', 'content' => $response->content],
-              [
-                  'role' => 'user',
-                  'content' => [
-                      [
-                          'type' => 'tool_result',
-                          'tool_use_id' => $toolUseBlock->id,
-                          'content' => $toolResult
-                      ]
-                  ]
-              ]
-          ],
-          model: 'claude-opus-4-8',
+          messages: $messages,
+          model: 'claude-opus-5',
       );
       echo $finalResponse;
   } else {
@@ -713,35 +742,43 @@ The most powerful use case is returning search results from your custom tools. T
     ]
   end
 
+  # Build up the conversation in a list, starting with the user's question
+  messages = [
+    { role: "user", content: "How do I configure the timeout settings?" }
+  ]
+
   response = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     tools: [knowledge_base_tool],
-    messages: [
-      { role: "user", content: "How do I configure the timeout settings?" }
-    ]
+    tool_choice: { type: "tool", name: "search_knowledge_base" },
+    messages: messages
   )
 
-  if response.content.first.type == :tool_use
-    tool_result = search_knowledge_base(response.content.first.input["query"])
+  # The tool_use block is not always first: find it in the content array
+  tool_use = response.content.find { |block| block.type == :tool_use }
 
-    final_response = client.messages.create(
-      model: "claude-opus-4-8",
-      max_tokens: 1024,
-      messages: [
-        { role: "user", content: "How do I configure the timeout settings?" },
-        { role: "assistant", content: response.content },
+  if tool_use
+    tool_result = search_knowledge_base(tool_use.input[:query])
+
+    # Append Claude's turn, then the tool result, to the running conversation
+    messages << { role: "assistant", content: response.content }
+    messages << {
+      role: "user",
+      content: [
         {
-          role: "user",
-          content: [
-            {
-              type: "tool_result",
-              tool_use_id: response.content.first.id,
-              content: tool_result
-            }
-          ]
+          type: "tool_result",
+          tool_use_id: tool_use.id,
+          content: tool_result
         }
       ]
+    }
+
+    # Send the tool result back
+    final_response = client.messages.create(
+      model: "claude-opus-5",
+      max_tokens: 1024,
+      messages: messages
     )
     puts final_response
   end
@@ -766,7 +803,7 @@ You can also provide search results directly in user messages. This is useful fo
     -H "anthropic-version: 2023-06-01" \
     -H "content-type: application/json" \
     -d '{
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "max_tokens": 1024,
       "messages": [
         {
@@ -812,7 +849,7 @@ You can also provide search results directly in user messages. This is useful fo
 
   ```bash CLI
   ant messages create <<'YAML'
-  model: claude-opus-4-8
+  model: claude-opus-5
   max_tokens: 1024
   messages:
     - role: user
@@ -853,7 +890,7 @@ You can also provide search results directly in user messages. This is useful fo
 
   # Provide search results directly in the user message
   response = client.messages.create(
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       max_tokens=1024,
       messages=[
           MessageParam(
@@ -896,11 +933,11 @@ You can also provide search results directly in user messages. This is useful fo
   ```
 
   ```typescript TypeScript
-  const anthropic = new Anthropic();
+  const client = new Anthropic();
 
   // Provide search results directly in the user message
-  const response = await anthropic.messages.create({
-    model: "claude-opus-4-8",
+  const response = await client.messages.create({
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -945,61 +982,46 @@ You can also provide search results directly in user messages. This is useful fo
   ```csharp C#
   AnthropicClient client = new();
 
-  var parameters = new MessageCreateParams
+  // Provide search results directly in the user message
+  var response = await client.Messages.Create(new()
   {
-      Model = Model.ClaudeOpus4_8,
+      Model = Model.ClaudeOpus5,
       MaxTokens = 1024,
       Messages =
       [
           new()
           {
               Role = Role.User,
-              Content =
+              Content = new MessageParamContent(
               [
-                  new SearchResultBlockParam
+                  new ContentBlockParam(new SearchResultBlockParam
                   {
                       Source = "https://docs.company.com/api-reference",
                       Title = "API Reference - Authentication",
-                      Content =
-                      [
-                          new TextBlockParam
-                          {
-                              Text = "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium."
-                          }
-                      ],
-                      Citations = new CitationsConfigParam { Enabled = true }
-                  },
-                  new SearchResultBlockParam
+                      Content = [new() { Text = "All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium." }],
+                      Citations = new() { Enabled = true },
+                  }),
+                  new ContentBlockParam(new SearchResultBlockParam
                   {
                       Source = "https://docs.company.com/quickstart",
                       Title = "Getting Started Guide",
-                      Content =
-                      [
-                          new TextBlockParam
-                          {
-                              Text = "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key."
-                          }
-                      ],
-                      Citations = new CitationsConfigParam { Enabled = true }
-                  },
-                  new TextBlockParam
-                  {
-                      Text = "Based on these search results, how do I authenticate API requests and what are the rate limits?"
-                  }
-              ]
-          }
-      ]
-  };
+                      Content = [new() { Text = "To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key." }],
+                      Citations = new() { Enabled = true },
+                  }),
+                  new ContentBlockParam(new TextBlockParam { Text = "Based on these search results, how do I authenticate API requests and what are the rate limits?" }),
+              ]),
+          },
+      ],
+  });
 
-  var message = await client.Messages.Create(parameters);
-  Console.WriteLine(message);
+  Console.WriteLine(response);
   ```
 
   ```go Go
   client := anthropic.NewClient()
 
   response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
-  	Model:     anthropic.ModelClaudeOpus4_8,
+  	Model:     anthropic.ModelClaudeOpus5,
   	MaxTokens: 1024,
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
@@ -1030,53 +1052,54 @@ You can also provide search results directly in user messages. This is useful fo
   ```
 
   ```java Java
+  import com.anthropic.models.messages.ContentBlockParam;
   import com.anthropic.models.messages.CitationsConfigParam;
   // ...
   import com.anthropic.models.messages.SearchResultBlockParam;
+  import com.anthropic.models.messages.TextBlockParam;
   // ...
-  public class SearchResultExample {
-      public static void main(String[] args) {
-          AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          MessageCreateParams params = MessageCreateParams.builder()
-              .model(Model.CLAUDE_OPUS_4_8)
-              .maxTokens(1024L)
-              .addUserMessageOfBlockParams(List.of(
-                  ContentBlockParam.ofSearchResult(
-                      SearchResultBlockParam.builder()
-                          .source("https://docs.company.com/api-reference")
-                          .title("API Reference - Authentication")
-                          .content(List.of(
-                              TextBlockParam.builder()
-                                  .text("All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.")
-                                  .build()
-                          ))
-                          .citations(CitationsConfigParam.builder().enabled(true).build())
-                          .build()
-                  ),
-                  ContentBlockParam.ofSearchResult(
-                      SearchResultBlockParam.builder()
-                          .source("https://docs.company.com/quickstart")
-                          .title("Getting Started Guide")
-                          .content(List.of(
-                              TextBlockParam.builder()
-                                  .text("To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.")
-                                  .build()
-                          ))
-                          .citations(CitationsConfigParam.builder().enabled(true).build())
-                          .build()
-                  ),
-                  ContentBlockParam.ofText(
-                      TextBlockParam.builder()
-                          .text("Based on these search results, how do I authenticate API requests and what are the rate limits?")
-                          .build()
-                  )
-              ))
-              .build();
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-          Message response = client.messages().create(params);
-          System.out.println(response);
-      }
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_5)
+          .maxTokens(1024L)
+          .addUserMessageOfBlockParams(List.of(
+              ContentBlockParam.ofSearchResult(
+                  SearchResultBlockParam.builder()
+                      .source("https://docs.company.com/api-reference")
+                      .title("API Reference - Authentication")
+                      .content(List.of(
+                          TextBlockParam.builder()
+                              .text("All API requests must include an API key in the Authorization header. Keys can be generated from the dashboard. Rate limits: 1000 requests per hour for standard tier, 10000 for premium.")
+                              .build()
+                      ))
+                      .citations(CitationsConfigParam.builder().enabled(true).build())
+                      .build()
+              ),
+              ContentBlockParam.ofSearchResult(
+                  SearchResultBlockParam.builder()
+                      .source("https://docs.company.com/quickstart")
+                      .title("Getting Started Guide")
+                      .content(List.of(
+                          TextBlockParam.builder()
+                              .text("To get started: 1) Sign up for an account, 2) Generate an API key from the dashboard, 3) Install our SDK using pip install company-sdk, 4) Initialize the client with your API key.")
+                              .build()
+                      ))
+                      .citations(CitationsConfigParam.builder().enabled(true).build())
+                      .build()
+              ),
+              ContentBlockParam.ofText(
+                  TextBlockParam.builder()
+                      .text("Based on these search results, how do I authenticate API requests and what are the rate limits?")
+                      .build()
+              )
+          ))
+          .build();
+
+      Message response = client.messages().create(params);
+      System.out.println(response);
   }
   ```
 
@@ -1120,7 +1143,7 @@ You can also provide search results directly in user messages. This is useful fo
               ]
           ]
       ],
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
   );
 
   echo json_encode($message, JSON_PRETTY_PRINT);
@@ -1130,7 +1153,7 @@ You can also provide search results directly in user messages. This is useful fo
   client = Anthropic::Client.new
 
   message = client.messages.create(
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     max_tokens: 1024,
     messages: [
       {
@@ -1257,7 +1280,8 @@ Search results can contain multiple text blocks in the `content` array:
       "type": "text",
       "text": "Error Handling: The API returns standard HTTP status codes."
     }
-  ]
+  ],
+  "citations": { "enabled": true }
 }
 ```
 
@@ -1281,82 +1305,782 @@ When this search result is cited, `start_block_index` and `end_block_index` iden
 
 ### Combining both methods
 
-You can use both tool-based and top-level search results in the same conversation:
+You can mix both methods in the same conversation. Claude cites from either source, and `search_result_index` counts all `search_result` blocks in request order, regardless of source.
 
-```python
-from anthropic.types import MessageParam, SearchResultBlockParam, TextBlockParam
+The following example replays a complete conversation. The first user message carries a pre-fetched search result, the assistant turn calls a knowledge base tool, and the tool result returns a second search result. Claude's answer cites both sources:
 
-# First message with top-level search results
-messages = [
-    MessageParam(
-        role="user",
-        content=[
-            SearchResultBlockParam(
-                type="search_result",
-                source="https://docs.company.com/overview",
-                title="Product Overview",
-                content=[
-                    TextBlockParam(
-                        type="text", text="Our product helps teams collaborate..."
-                    )
+<CodeGroup>
+  ```bash cURL
+  curl https://api.anthropic.com/v1/messages \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-5",
+      "max_tokens": 1024,
+      "tools": [
+        {
+          "name": "search_knowledge_base",
+          "description": "Search the company knowledge base for information",
+          "input_schema": {
+            "type": "object",
+            "properties": {
+              "query": {"type": "string", "description": "The search query"}
+            },
+            "required": ["query"]
+          }
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "search_result",
+              "source": "https://docs.company.com/overview",
+              "title": "Product Overview",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards."
+                }
+              ],
+              "citations": {"enabled": true}
+            },
+            {
+              "type": "text",
+              "text": "What does Acme Dashboard do, and what plans is it available on?"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "content": [
+            {
+              "type": "text",
+              "text": "Let me check the pricing information."
+            },
+            {
+              "type": "tool_use",
+              "id": "toolu_01A09q90qw90lq917835lq9",
+              "name": "search_knowledge_base",
+              "input": {"query": "Acme Dashboard pricing plans"}
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "tool_result",
+              "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
+              "content": [
+                {
+                  "type": "search_result",
+                  "source": "https://docs.company.com/pricing",
+                  "title": "Pricing Plans",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing."
+                    }
+                  ],
+                  "citations": {"enabled": true}
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }'
+  ```
+
+  ```bash CLI
+  ant messages create <<'YAML'
+  model: claude-opus-5
+  max_tokens: 1024
+  tools:
+    - name: search_knowledge_base
+      description: Search the company knowledge base for information
+      input_schema:
+        type: object
+        properties:
+          query:
+            type: string
+            description: The search query
+        required: [query]
+  messages:
+    - role: user
+      content:
+        - type: search_result
+          source: https://docs.company.com/overview
+          title: Product Overview
+          content:
+            - type: text
+              text: >-
+                Acme Dashboard is a monitoring tool for distributed systems.
+                It supports real-time alerting and custom metric dashboards.
+          citations:
+            enabled: true
+        - type: text
+          text: What does Acme Dashboard do, and what plans is it available on?
+    - role: assistant
+      content:
+        - type: text
+          text: Let me check the pricing information.
+        - type: tool_use
+          id: toolu_01A09q90qw90lq917835lq9
+          name: search_knowledge_base
+          input:
+            query: Acme Dashboard pricing plans
+    - role: user
+      content:
+        - type: tool_result
+          tool_use_id: toolu_01A09q90qw90lq917835lq9
+          content:
+            - type: search_result
+              source: https://docs.company.com/pricing
+              title: Pricing Plans
+              content:
+                - type: text
+                  text: >-
+                    Acme Dashboard is available on the Starter plan at $10 per
+                    user per month and the Enterprise plan with custom pricing.
+              citations:
+                enabled: true
+  YAML
+  ```
+
+  ```python Python
+  from anthropic.types import (
+      MessageParam,
+      SearchResultBlockParam,
+      TextBlockParam,
+      ToolResultBlockParam,
+      ToolUseBlockParam,
+  )
+
+  client = Anthropic()
+
+  knowledge_base_tool = {
+      "name": "search_knowledge_base",
+      "description": "Search the company knowledge base for information",
+      "input_schema": {
+          "type": "object",
+          "properties": {"query": {"type": "string", "description": "The search query"}},
+          "required": ["query"],
+      },
+  }
+
+  # Replay a conversation that provides search results both ways: the first
+  # user message carries a pre-fetched result, the tool result returns another
+  response = client.messages.create(
+      model="claude-opus-5",
+      max_tokens=1024,
+      tools=[knowledge_base_tool],
+      messages=[
+          MessageParam(
+              role="user",
+              content=[
+                  SearchResultBlockParam(
+                      type="search_result",
+                      source="https://docs.company.com/overview",
+                      title="Product Overview",
+                      content=[
+                          TextBlockParam(
+                              type="text",
+                              text="Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards.",
+                          )
+                      ],
+                      citations={"enabled": True},
+                  ),
+                  TextBlockParam(
+                      type="text",
+                      text="What does Acme Dashboard do, and what plans is it available on?",
+                  ),
+              ],
+          ),
+          MessageParam(
+              role="assistant",
+              content=[
+                  TextBlockParam(
+                      type="text", text="Let me check the pricing information."
+                  ),
+                  ToolUseBlockParam(
+                      type="tool_use",
+                      id="toolu_01A09q90qw90lq917835lq9",
+                      name="search_knowledge_base",
+                      input={"query": "Acme Dashboard pricing plans"},
+                  ),
+              ],
+          ),
+          MessageParam(
+              role="user",
+              content=[
+                  ToolResultBlockParam(
+                      type="tool_result",
+                      tool_use_id="toolu_01A09q90qw90lq917835lq9",
+                      content=[
+                          SearchResultBlockParam(
+                              type="search_result",
+                              source="https://docs.company.com/pricing",
+                              title="Pricing Plans",
+                              content=[
+                                  TextBlockParam(
+                                      type="text",
+                                      text="Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing.",
+                                  )
+                              ],
+                              citations={"enabled": True},
+                          )
+                      ],
+                  )
+              ],
+          ),
+      ],
+  )
+
+  print(response)
+  ```
+
+  ```typescript TypeScript
+  const client = new Anthropic();
+
+  const knowledgeBaseTool: Anthropic.Tool = {
+    name: "search_knowledge_base",
+    description: "Search the company knowledge base for information",
+    input_schema: {
+      type: "object" as const,
+      properties: {
+        query: { type: "string", description: "The search query" }
+      },
+      required: ["query"]
+    }
+  };
+
+  // Replay a conversation that provides search results both ways: the first
+  // user message carries a pre-fetched result, the tool result returns another
+  const response = await client.messages.create({
+    model: "claude-opus-5",
+    max_tokens: 1024,
+    tools: [knowledgeBaseTool],
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "search_result" as const,
+            source: "https://docs.company.com/overview",
+            title: "Product Overview",
+            content: [
+              {
+                type: "text" as const,
+                text: "Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards."
+              }
+            ],
+            citations: { enabled: true }
+          },
+          {
+            type: "text" as const,
+            text: "What does Acme Dashboard do, and what plans is it available on?"
+          }
+        ]
+      },
+      {
+        role: "assistant",
+        content: [
+          { type: "text" as const, text: "Let me check the pricing information." },
+          {
+            type: "tool_use" as const,
+            id: "toolu_01A09q90qw90lq917835lq9",
+            name: "search_knowledge_base",
+            input: { query: "Acme Dashboard pricing plans" }
+          }
+        ]
+      },
+      {
+        role: "user",
+        content: [
+          {
+            type: "tool_result" as const,
+            tool_use_id: "toolu_01A09q90qw90lq917835lq9",
+            content: [
+              {
+                type: "search_result" as const,
+                source: "https://docs.company.com/pricing",
+                title: "Pricing Plans",
+                content: [
+                  {
+                    type: "text" as const,
+                    text: "Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing."
+                  }
                 ],
-                citations={"enabled": True},
-            ),
-            TextBlockParam(
-                type="text",
-                text="Tell me about this product and search for pricing information",
-            ),
-        ],
-    )
-]
+                citations: { enabled: true }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  });
 
-# Claude might respond and call a tool to search for pricing
-# Then you provide tool results with more search results
-```
+  console.log(response);
+  ```
 
-### Combining with other content types
+  ```csharp C#
+  AnthropicClient client = new();
 
-Both methods support mixing search results with other content:
+  // Replay a conversation that provides search results both ways: the first
+  // user message carries a pre-fetched result, the tool result returns another
+  var response = await client.Messages.Create(new()
+  {
+      Model = Model.ClaudeOpus5,
+      MaxTokens = 1024,
+      Tools =
+      [
+          new ToolUnion(new Tool()
+          {
+              Name = "search_knowledge_base",
+              Description = "Search the company knowledge base for information",
+              InputSchema = new InputSchema()
+              {
+                  Properties = new Dictionary<string, JsonElement>
+                  {
+                      ["query"] = JsonSerializer.SerializeToElement(new { type = "string", description = "The search query" }),
+                  },
+                  Required = ["query"],
+              },
+          }),
+      ],
+      Messages =
+      [
+          new()
+          {
+              Role = Role.User,
+              Content = new MessageParamContent(
+              [
+                  new ContentBlockParam(new SearchResultBlockParam
+                  {
+                      Source = "https://docs.company.com/overview",
+                      Title = "Product Overview",
+                      Content = [new() { Text = "Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards." }],
+                      Citations = new() { Enabled = true },
+                  }),
+                  new ContentBlockParam(new TextBlockParam { Text = "What does Acme Dashboard do, and what plans is it available on?" }),
+              ]),
+          },
+          new()
+          {
+              Role = Role.Assistant,
+              Content = new MessageParamContent(
+              [
+                  new ContentBlockParam(new TextBlockParam { Text = "Let me check the pricing information." }),
+                  new ContentBlockParam(new ToolUseBlockParam
+                  {
+                      ID = "toolu_01A09q90qw90lq917835lq9",
+                      Name = "search_knowledge_base",
+                      Input = new Dictionary<string, JsonElement>
+                      {
+                          ["query"] = JsonSerializer.SerializeToElement("Acme Dashboard pricing plans"),
+                      },
+                  }),
+              ]),
+          },
+          new()
+          {
+              Role = Role.User,
+              Content = new MessageParamContent(
+              [
+                  new ContentBlockParam(new ToolResultBlockParam()
+                  {
+                      ToolUseID = "toolu_01A09q90qw90lq917835lq9",
+                      Content = new ToolResultBlockParamContent(
+                      [
+                          new SearchResultBlockParam
+                          {
+                              Source = "https://docs.company.com/pricing",
+                              Title = "Pricing Plans",
+                              Content = [new() { Text = "Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing." }],
+                              Citations = new() { Enabled = true },
+                          },
+                      ]),
+                  }),
+              ]),
+          },
+      ],
+  });
 
-```python
-from anthropic.types import SearchResultBlockParam, TextBlockParam
+  Console.WriteLine(response);
+  ```
 
-# In tool results
-tool_result = [
-    SearchResultBlockParam(
-        type="search_result",
-        source="https://docs.company.com/guide",
-        title="User Guide",
-        content=[TextBlockParam(type="text", text="Configuration details...")],
-        citations={"enabled": True},
-    ),
-    TextBlockParam(
-        type="text", text="Additional context: This applies to version 2.0 and later."
-    ),
-]
+  ```go Go
+  client := anthropic.NewClient()
 
-# In top-level content
-user_content = [
-    SearchResultBlockParam(
-        type="search_result",
-        source="https://research.com/paper",
-        title="Research Paper",
-        content=[TextBlockParam(type="text", text="Key findings...")],
-        citations={"enabled": True},
-    ),
+  knowledgeBaseTool := anthropic.ToolUnionParam{
+  	OfTool: &anthropic.ToolParam{
+  		Name:        "search_knowledge_base",
+  		Description: anthropic.String("Search the company knowledge base for information"),
+  		InputSchema: anthropic.ToolInputSchemaParam{
+  			Properties: map[string]any{
+  				"query": map[string]any{"type": "string", "description": "The search query"},
+  			},
+  			Required: []string{"query"},
+  		},
+  	},
+  }
+
+  // Replay a conversation that provides search results both ways: the first
+  // user message carries a pre-fetched result, the tool result returns another
+  response, err := client.Messages.New(context.TODO(), anthropic.MessageNewParams{
+  	Model:     anthropic.ModelClaudeOpus5,
+  	MaxTokens: 1024,
+  	Tools:     []anthropic.ToolUnionParam{knowledgeBaseTool},
+  	Messages: []anthropic.MessageParam{
+  		anthropic.NewUserMessage(
+  			anthropic.ContentBlockParamUnion{OfSearchResult: &anthropic.SearchResultBlockParam{
+  				Content: []anthropic.TextBlockParam{
+  					{Text: "Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards."},
+  				},
+  				Source:    "https://docs.company.com/overview",
+  				Title:     "Product Overview",
+  				Citations: anthropic.CitationsConfigParam{Enabled: anthropic.Bool(true)},
+  			}},
+  			anthropic.NewTextBlock("What does Acme Dashboard do, and what plans is it available on?"),
+  		),
+  		anthropic.NewAssistantMessage(
+  			anthropic.NewTextBlock("Let me check the pricing information."),
+  			anthropic.ContentBlockParamUnion{OfToolUse: &anthropic.ToolUseBlockParam{
+  				ID:    "toolu_01A09q90qw90lq917835lq9",
+  				Name:  "search_knowledge_base",
+  				Input: map[string]any{"query": "Acme Dashboard pricing plans"},
+  			}},
+  		),
+  		anthropic.NewUserMessage(
+  			anthropic.ContentBlockParamUnion{OfToolResult: &anthropic.ToolResultBlockParam{
+  				ToolUseID: "toolu_01A09q90qw90lq917835lq9",
+  				Content: []anthropic.ToolResultBlockParamContentUnion{
+  					{OfSearchResult: &anthropic.SearchResultBlockParam{
+  						Content: []anthropic.TextBlockParam{
+  							{Text: "Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing."},
+  						},
+  						Source:    "https://docs.company.com/pricing",
+  						Title:     "Pricing Plans",
+  						Citations: anthropic.CitationsConfigParam{Enabled: anthropic.Bool(true)},
+  					}},
+  				},
+  			}},
+  		),
+  	},
+  })
+  if err != nil {
+  	log.Fatal(err)
+  }
+  fmt.Println(response)
+  ```
+
+  ```java Java
+  import com.anthropic.core.JsonValue;
+  import com.anthropic.models.messages.CitationsConfigParam;
+  import com.anthropic.models.messages.ContentBlockParam;
+  // ...
+  import com.anthropic.models.messages.SearchResultBlockParam;
+  import com.anthropic.models.messages.TextBlockParam;
+  import com.anthropic.models.messages.Tool;
+  import com.anthropic.models.messages.ToolResultBlockParam;
+  import com.anthropic.models.messages.ToolUseBlockParam;
+  // ...
+
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+
+      Tool knowledgeBaseTool = Tool.builder()
+          .name("search_knowledge_base")
+          .description("Search the company knowledge base for information")
+          .inputSchema(Tool.InputSchema.builder()
+              .properties(JsonValue.from(Map.of(
+                  "query", Map.of("type", "string", "description", "The search query")
+              )))
+              .putAdditionalProperty("required", JsonValue.from(List.of("query")))
+              .build())
+          .build();
+
+      // Replay a conversation that provides search results both ways: the first
+      // user message carries a pre-fetched result, the tool result returns another
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_5)
+          .maxTokens(1024L)
+          .addTool(knowledgeBaseTool)
+          .addUserMessageOfBlockParams(List.of(
+              ContentBlockParam.ofSearchResult(SearchResultBlockParam.builder()
+                  .source("https://docs.company.com/overview")
+                  .title("Product Overview")
+                  .content(List.of(TextBlockParam.builder()
+                      .text("Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards.")
+                      .build()))
+                  .citations(CitationsConfigParam.builder().enabled(true).build())
+                  .build()),
+              ContentBlockParam.ofText(TextBlockParam.builder()
+                  .text("What does Acme Dashboard do, and what plans is it available on?")
+                  .build())
+          ))
+          .addAssistantMessageOfBlockParams(List.of(
+              ContentBlockParam.ofText(TextBlockParam.builder()
+                  .text("Let me check the pricing information.")
+                  .build()),
+              ContentBlockParam.ofToolUse(ToolUseBlockParam.builder()
+                  .id("toolu_01A09q90qw90lq917835lq9")
+                  .name("search_knowledge_base")
+                  .input(JsonValue.from(Map.of("query", "Acme Dashboard pricing plans")))
+                  .build())
+          ))
+          .addUserMessageOfBlockParams(List.of(
+              ContentBlockParam.ofToolResult(ToolResultBlockParam.builder()
+                  .toolUseId("toolu_01A09q90qw90lq917835lq9")
+                  .contentOfBlocks(List.of(
+                      ToolResultBlockParam.Content.Block.ofSearchResult(SearchResultBlockParam.builder()
+                          .source("https://docs.company.com/pricing")
+                          .title("Pricing Plans")
+                          .content(List.of(TextBlockParam.builder()
+                              .text("Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing.")
+                              .build()))
+                          .citations(CitationsConfigParam.builder().enabled(true).build())
+                          .build())
+                  ))
+                  .build())
+          ))
+          .build();
+
+      Message response = client.messages().create(params);
+      System.out.println(response);
+  }
+  ```
+
+  ```php PHP
+  $client = new Client();
+
+  $knowledgeBaseTool = [
+      'name' => 'search_knowledge_base',
+      'description' => 'Search the company knowledge base for information',
+      'input_schema' => [
+          'type' => 'object',
+          'properties' => [
+              'query' => ['type' => 'string', 'description' => 'The search query']
+          ],
+          'required' => ['query']
+      ]
+  ];
+
+  // Replay a conversation that provides search results both ways: the first
+  // user message carries a pre-fetched result, the tool result returns another
+  $response = $client->messages->create(
+      maxTokens: 1024,
+      tools: [$knowledgeBaseTool],
+      messages: [
+          [
+              'role' => 'user',
+              'content' => [
+                  [
+                      'type' => 'search_result',
+                      'source' => 'https://docs.company.com/overview',
+                      'title' => 'Product Overview',
+                      'content' => [
+                          [
+                              'type' => 'text',
+                              'text' => 'Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards.'
+                          ]
+                      ],
+                      'citations' => ['enabled' => true]
+                  ],
+                  [
+                      'type' => 'text',
+                      'text' => 'What does Acme Dashboard do, and what plans is it available on?'
+                  ]
+              ]
+          ],
+          [
+              'role' => 'assistant',
+              'content' => [
+                  ['type' => 'text', 'text' => 'Let me check the pricing information.'],
+                  [
+                      'type' => 'tool_use',
+                      'id' => 'toolu_01A09q90qw90lq917835lq9',
+                      'name' => 'search_knowledge_base',
+                      'input' => ['query' => 'Acme Dashboard pricing plans']
+                  ]
+              ]
+          ],
+          [
+              'role' => 'user',
+              'content' => [
+                  [
+                      'type' => 'tool_result',
+                      'tool_use_id' => 'toolu_01A09q90qw90lq917835lq9',
+                      'content' => [
+                          [
+                              'type' => 'search_result',
+                              'source' => 'https://docs.company.com/pricing',
+                              'title' => 'Pricing Plans',
+                              'content' => [
+                                  [
+                                      'type' => 'text',
+                                      'text' => 'Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing.'
+                                  ]
+                              ],
+                              'citations' => ['enabled' => true]
+                          ]
+                      ]
+                  ]
+              ]
+          ]
+      ],
+      model: 'claude-opus-5',
+  );
+
+  echo json_encode($response, JSON_PRETTY_PRINT);
+  ```
+
+  ```ruby Ruby
+  client = Anthropic::Client.new
+
+  knowledge_base_tool = {
+    name: "search_knowledge_base",
+    description: "Search the company knowledge base for information",
+    input_schema: {
+      type: "object",
+      properties: {
+        query: { type: "string", description: "The search query" }
+      },
+      required: ["query"]
+    }
+  }
+
+  # Replay a conversation that provides search results both ways: the first
+  # user message carries a pre-fetched result, the tool result returns another
+  response = client.messages.create(
+    model: "claude-opus-5",
+    max_tokens: 1024,
+    tools: [knowledge_base_tool],
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "search_result",
+            source: "https://docs.company.com/overview",
+            title: "Product Overview",
+            content: [
+              {
+                type: "text",
+                text: "Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards."
+              }
+            ],
+            citations: { enabled: true }
+          },
+          {
+            type: "text",
+            text: "What does Acme Dashboard do, and what plans is it available on?"
+          }
+        ]
+      },
+      {
+        role: "assistant",
+        content: [
+          { type: "text", text: "Let me check the pricing information." },
+          {
+            type: "tool_use",
+            id: "toolu_01A09q90qw90lq917835lq9",
+            name: "search_knowledge_base",
+            input: { query: "Acme Dashboard pricing plans" }
+          }
+        ]
+      },
+      {
+        role: "user",
+        content: [
+          {
+            type: "tool_result",
+            tool_use_id: "toolu_01A09q90qw90lq917835lq9",
+            content: [
+              {
+                type: "search_result",
+                source: "https://docs.company.com/pricing",
+                title: "Pricing Plans",
+                content: [
+                  {
+                    type: "text",
+                    text: "Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing."
+                  }
+                ],
+                citations: { enabled: true }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  )
+
+  puts response
+  ```
+</CodeGroup>
+
+The response cites both sources. The pre-fetched result is `search_result_index: 0` and the tool-returned result is `search_result_index: 1`, matching the order the `search_result` blocks appear in the conversation:
+
+```json
+{
+  "role": "assistant",
+  "content": [
     {
-        "type": "image",
-        "source": {"type": "url", "url": "https://example.com/chart.png"},
+      "type": "text",
+      "text": "Here's what I found about Acme Dashboard:\n\n**What it does:** "
     },
-    TextBlockParam(
-        type="text", text="How does the chart relate to the research findings?"
-    ),
-]
+    {
+      "type": "text",
+      "text": "Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards.",
+      "citations": [
+        {
+          "type": "search_result_location",
+          "cited_text": "Acme Dashboard is a monitoring tool for distributed systems. It supports real-time alerting and custom metric dashboards.",
+          "source": "https://docs.company.com/overview",
+          "title": "Product Overview",
+          "search_result_index": 0,
+          "start_block_index": 0,
+          "end_block_index": 1
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "text": "\n\n**Available plans:** "
+    },
+    {
+      "type": "text",
+      "text": "Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing.",
+      "citations": [
+        {
+          "type": "search_result_location",
+          "cited_text": "Acme Dashboard is available on the Starter plan at $10 per user per month and the Enterprise plan with custom pricing.",
+          "source": "https://docs.company.com/pricing",
+          "title": "Pricing Plans",
+          "search_result_index": 1,
+          "start_block_index": 0,
+          "end_block_index": 1
+        }
+      ]
+    }
+  ]
+}
 ```
+
+### Mixing with other content types
+
+In user messages, `search_result` blocks can sit alongside any other content block. The Method 2 example pairs search results with a `text` question, and image or document blocks can join them the same way.
+
+Tool results are stricter: if any block in a `tool_result` content array is a `search_result`, all of its blocks must be `search_result`. Mixing search results with other block types in the same tool result returns a validation error. To return supporting text alongside tool-sourced search results, include it as a text block inside one of the search results' `content` arrays, where it also becomes citable.
 
 ### Cache control
 
-Add cache control for better performance:
+Add `cache_control` on the search result block to cache it for reuse across requests. It sits alongside `citations` on the same block:
 
 ```json
 {
@@ -1364,11 +2088,12 @@ Add cache control for better performance:
   "source": "https://docs.company.com/guide",
   "title": "User Guide",
   "content": [{ "type": "text", "text": "..." }],
-  "cache_control": {
-    "type": "ephemeral"
-  }
+  "citations": { "enabled": true },
+  "cache_control": { "type": "ephemeral" }
 }
 ```
+
+See [Prompt caching](/docs/en/build-with-claude/prompt-caching) for minimum cacheable lengths and other requirements.
 
 ### Citation control
 
@@ -1386,11 +2111,7 @@ By default, citations are disabled for search results. You can enable citations 
 }
 ```
 
-When `citations.enabled` is set to `true`, Claude includes citation references when using information from the search result. This enables:
-
-* Natural citations for your custom RAG applications
-* Source attribution when interfacing with proprietary knowledge bases
-* Web search-quality citations for any custom tool that returns search results
+When `citations.enabled` is set to `true`, Claude attaches citation references to the text blocks that draw on the search result.
 
 <Warning>
   Citations are all-or-nothing: either all search results in a request must have citations enabled, or all must have them disabled. Mixing search results with different citation settings results in an error.
@@ -1424,34 +2145,28 @@ When `citations.enabled` is set to `true`, Claude includes citation references w
    * Ensure titles accurately reflect content
    * Keep formatting consistent
 
-3. **Handle errors gracefully:**
-
-   ```python
-   def search_with_fallback(query):
-       try:
-           results = perform_search(query)
-           if not results:
-               return {"type": "text", "text": "No results found."}
-           return format_as_search_results(results)
-       except Exception as e:
-           return {"type": "text", "text": f"Search error: {str(e)}"}
-   ```
+3. **Handle errors gracefully:** when a search fails or returns nothing, return a plain text block describing the outcome (for example, `{"type": "text", "text": "No results found."}`) instead of raising an error: Claude explains the empty result to the user, and the conversation continues.
 
 ## Limitations
 
 * Search result content blocks are available on Claude API, Amazon Bedrock, and Google Cloud.
 * Only text content is supported within search results (no images or other media).
-* The `content` array must contain at least one text block.
+* `search_result` blocks can only appear in user messages (including inside tool results). Assistant messages with search results are rejected.
+* When the [web search tool](/docs/en/agents-and-tools/tool-use/web-search-tool) is enabled in the same request, citations must be enabled on all `search_result` blocks.
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Citations" icon="book" href="/docs/en/build-with-claude/citations">
-    Learn how citations work across documents, custom content, and search results.
+  <Card title="Streaming refusals" icon="lock" href="/docs/en/test-and-evaluate/strengthen-guardrails/handle-streaming-refusals">
+    Detect and handle refusal stop reasons in streaming responses, and retry refused requests on a fallback model.
   </Card>
 
-  <Card title="Web search tool" icon="magnifying-glass" href="/docs/en/agents-and-tools/tool-use/web-search-tool">
-    Let Claude search the web and cite sources automatically using a server tool.
+  <Card title="Citations" icon="book" href="/docs/en/build-with-claude/citations">
+    Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
+  </Card>
+
+  <Card title="Web search tool" icon="browser" href="/docs/en/agents-and-tools/tool-use/web-search-tool">
+    Give Claude access to current web content with cited sources, optional dynamic filtering, and domain controls.
   </Card>
 
   <Card title="Messages API reference" icon="code" href="/docs/en/api/messages/create">

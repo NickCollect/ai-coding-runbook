@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/files
-fetched_at: 2026-07-20T04:31:17.213588+00:00
+fetched_at: 2026-07-27T04:31:49.152162+00:00
 fetch_method: mintlify_md
 ---
 
@@ -111,7 +111,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
           {
             type: "file",
             file_id: $file_id,
-            mount_path: "/workspace/data.csv"
+            mount_path: "/data.csv"
           }
         ]
       }' | curl --fail-with-body -sS "${auth[@]}" "${base_url}/sessions" --json @-
@@ -127,7 +127,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
   resources:
     - type: file
       file_id: $FILE_ID
-      mount_path: /workspace/data.csv
+      mount_path: /data.csv
   EOF
   )
   ```
@@ -140,7 +140,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
           {
               "type": "file",
               "file_id": file.id,
-              "mount_path": "/workspace/data.csv",
+              "mount_path": "/data.csv",
           },
       ],
   )
@@ -154,7 +154,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
       {
         type: "file",
         file_id: file.id,
-        mount_path: "/workspace/data.csv",
+        mount_path: "/data.csv",
       },
     ],
   });
@@ -171,7 +171,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
           {
               Type = "file",
               FileID = file.ID,
-              MountPath = "/workspace/data.csv",
+              MountPath = "/data.csv",
           },
       ],
   });
@@ -187,7 +187,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
   		OfFile: &anthropic.BetaManagedAgentsFileResourceParams{
   			Type:      anthropic.BetaManagedAgentsFileResourceParamsTypeFile,
   			FileID:    file.ID,
-  			MountPath: anthropic.String("/workspace/data.csv"),
+  			MountPath: anthropic.String("/data.csv"),
   		},
   	}},
   })
@@ -205,7 +205,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
               BetaManagedAgentsFileResourceParams.builder()
                   .type(BetaManagedAgentsFileResourceParams.Type.FILE)
                   .fileId(file.id())
-                  .mountPath("/workspace/data.csv")
+                  .mountPath("/data.csv")
                   .build()
           )
           .build()
@@ -220,7 +220,7 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
           BetaManagedAgentsFileResourceParams::with(
               type: 'file',
               fileID: $file->id,
-              mountPath: '/workspace/data.csv',
+              mountPath: '/data.csv',
           ),
       ],
   );
@@ -234,12 +234,14 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
       {
         type: "file",
         file_id: file.id,
-        mount_path: "/workspace/data.csv"
+        mount_path: "/data.csv"
       }
     ]
   )
   ```
 </CodeGroup>
+
+With the preceding `mount_path`, the agent reads the file at `/mnt/session/uploads/data.csv` (see [File paths](#file-paths)).
 
 A new `file_id` is created that references the instance of the file in the session. These copies do not count against your [storage limits](/docs/en/build-with-claude/files).
 
@@ -250,9 +252,9 @@ Mount multiple files by adding entries to the `resources` array:
 <CodeGroup>
   ```json curl
   "resources": [
-    { "type": "file", "file_id": "file_abc123", "mount_path": "/workspace/data.csv" },
-    { "type": "file", "file_id": "file_def456", "mount_path": "/workspace/config.json" },
-    { "type": "file", "file_id": "file_ghi789", "mount_path": "/workspace/src/main.py" }
+    { "type": "file", "file_id": "file_abc123", "mount_path": "/data.csv" },
+    { "type": "file", "file_id": "file_def456", "mount_path": "/config.json" },
+    { "type": "file", "file_id": "file_ghi789", "mount_path": "/src/main.py" }
   ]
   ```
 
@@ -260,77 +262,82 @@ Mount multiple files by adding entries to the `resources` array:
   resources:
     - type: file
       file_id: file_abc123
-      mount_path: /workspace/data.csv
+      mount_path: /data.csv
     - type: file
       file_id: file_def456
-      mount_path: /workspace/config.json
+      mount_path: /config.json
     - type: file
       file_id: file_ghi789
-      mount_path: /workspace/src/main.py
+      mount_path: /src/main.py
   ```
 
   ```python Python
   resources = [
-      {"type": "file", "file_id": "file_abc123", "mount_path": "/workspace/data.csv"},
-      {"type": "file", "file_id": "file_def456", "mount_path": "/workspace/config.json"},
-      {"type": "file", "file_id": "file_ghi789", "mount_path": "/workspace/src/main.py"},
+      {"type": "file", "file_id": "file_abc123", "mount_path": "/data.csv"},
+      {"type": "file", "file_id": "file_def456", "mount_path": "/config.json"},
+      {"type": "file", "file_id": "file_ghi789", "mount_path": "/src/main.py"},
   ]
   ```
 
   ```typescript TypeScript
   resources: [
-    { type: "file", file_id: "file_abc123", mount_path: "/workspace/data.csv" },
-    { type: "file", file_id: "file_def456", mount_path: "/workspace/config.json" },
-    { type: "file", file_id: "file_ghi789", mount_path: "/workspace/src/main.py" }
+    { type: "file", file_id: "file_abc123", mount_path: "/data.csv" },
+    { type: "file", file_id: "file_def456", mount_path: "/config.json" },
+    { type: "file", file_id: "file_ghi789", mount_path: "/src/main.py" }
   ]
   ```
 
   ```csharp C#
+  using Anthropic.Models.Beta.Sessions;
+
   var resources = new[]
   {
-      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_abc123", MountPath = "/workspace/data.csv" },
-      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_def456", MountPath = "/workspace/config.json" },
-      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_ghi789", MountPath = "/workspace/src/main.py" },
+      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_abc123", MountPath = "/data.csv" },
+      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_def456", MountPath = "/config.json" },
+      new BetaManagedAgentsFileResourceParams { Type = BetaManagedAgentsFileResourceParamsType.File, FileID = "file_ghi789", MountPath = "/src/main.py" },
   };
   ```
 
   ```go Go
   resources := []anthropic.BetaSessionNewParamsResourceUnion{
-  	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_abc123", MountPath: anthropic.String("/workspace/data.csv")}},
-  	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_def456", MountPath: anthropic.String("/workspace/config.json")}},
-  	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_ghi789", MountPath: anthropic.String("/workspace/src/main.py")}},
+  	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_abc123", MountPath: anthropic.String("/data.csv")}},
+  	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_def456", MountPath: anthropic.String("/config.json")}},
+  	{OfFile: &anthropic.BetaManagedAgentsFileResourceParams{Type: "file", FileID: "file_ghi789", MountPath: anthropic.String("/src/main.py")}},
   }
   ```
 
   ```java Java
+  import com.anthropic.models.beta.sessions.*;
+  import java.util.List;
+
   var resources = List.of(
       BetaManagedAgentsFileResourceParams.builder()
-          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_abc123").mountPath("/workspace/data.csv").build(),
+          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_abc123").mountPath("/data.csv").build(),
       BetaManagedAgentsFileResourceParams.builder()
-          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_def456").mountPath("/workspace/config.json").build(),
+          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_def456").mountPath("/config.json").build(),
       BetaManagedAgentsFileResourceParams.builder()
-          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_ghi789").mountPath("/workspace/src/main.py").build()
+          .type(BetaManagedAgentsFileResourceParams.Type.FILE).fileId("file_ghi789").mountPath("/src/main.py").build()
   );
   ```
 
   ```php PHP
   $resources = [
-      ['type' => 'file', 'file_id' => 'file_abc123', 'mount_path' => '/workspace/data.csv'],
-      ['type' => 'file', 'file_id' => 'file_def456', 'mount_path' => '/workspace/config.json'],
-      ['type' => 'file', 'file_id' => 'file_ghi789', 'mount_path' => '/workspace/src/main.py'],
+      ['type' => 'file', 'file_id' => 'file_abc123', 'mount_path' => '/data.csv'],
+      ['type' => 'file', 'file_id' => 'file_def456', 'mount_path' => '/config.json'],
+      ['type' => 'file', 'file_id' => 'file_ghi789', 'mount_path' => '/src/main.py'],
   ];
   ```
 
   ```ruby Ruby
   resources = [
-    {type: "file", file_id: "file_abc123", mount_path: "/workspace/data.csv"},
-    {type: "file", file_id: "file_def456", mount_path: "/workspace/config.json"},
-    {type: "file", file_id: "file_ghi789", mount_path: "/workspace/src/main.py"}
+    {type: "file", file_id: "file_abc123", mount_path: "/data.csv"},
+    {type: "file", file_id: "file_def456", mount_path: "/config.json"},
+    {type: "file", file_id: "file_ghi789", mount_path: "/src/main.py"}
   ]
   ```
 </CodeGroup>
 
-A maximum of 100 files is supported per session.
+A maximum of 500 files is supported per session.
 
 ## Managing files on a running session
 
@@ -369,6 +376,9 @@ You can add or remove files from a session after creation using the session reso
     type: "file",
     file_id: file.id,
   });
+  if (resource.type !== "file") {
+    throw new Error(`Unexpected resource type: ${resource.type}`);
+  }
   console.log(resource.id); // "sesrsc_01ABC..."
   ```
 
@@ -459,7 +469,9 @@ List all resources on a session with `resources.list`. To remove a file, call `r
   ```typescript TypeScript
   const listed = await client.beta.sessions.resources.list(session.id);
   for (const entry of listed.data) {
-    console.log(entry.id, entry.type);
+    if (entry.type !== "memory_store") {
+      console.log(entry.id, entry.type);
+    }
   }
 
   await client.beta.sessions.resources.delete(resource.id, {
@@ -552,7 +564,7 @@ Use the [Files API](/docs/en/build-with-claude/files) to list files scoped to a 
   ```bash CLI
   # List files associated with a session
   ant beta:files list --scope-id sesn_abc123 \
-    --beta files-api-2025-04-14,managed-agents-2026-04-01
+    --beta managed-agents-2026-04-01
 
   # Download a file
   ant beta:files download --file-id "$FILE_ID" --output output.txt
@@ -682,6 +694,7 @@ The agent can work with any file type, including:
   Files mounted in the sandbox are read-only copies. The agent can read them but cannot modify the original uploaded file. To work with modified versions, the agent writes to new paths within the sandbox.
 </Note>
 
-* Files are mounted at the exact path you specify
+* The path you specify is rooted under the session's uploads directory: a `mount_path` of `/data.csv` places the file at `/mnt/session/uploads/data.csv` in the sandbox
+* If you omit `mount_path`, the file is placed at `/mnt/session/uploads/<file_id>`
 * Parent directories are created automatically
 * Paths should be absolute (starting with `/`)

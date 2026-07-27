@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/memory
-fetched_at: 2026-07-20T04:31:17.267393+00:00
+fetched_at: 2026-07-27T04:31:49.147162+00:00
 fetch_method: mintlify_md
 ---
 
@@ -942,8 +942,9 @@ List version history for a store, newest first. The example filters to a single 
     --memory-store-id "$store_id" \
     --memory-id "$mem_id" \
     --format json)
-  jq -r '.data[] | "\(.id): \(.operation)"' <<< "$versions"
-  version_id=$(jq -r '.data[1].id' <<< "$versions")
+  # `list --format json` emits one JSON object per item.
+  jq -r '"\(.id): \(.operation)"' <<< "$versions"
+  version_id=$(jq -rs '.[1].id' <<< "$versions")
   ```
 
   ```python Python
@@ -1258,7 +1259,9 @@ List stores in the workspace. Archived stores are excluded by default; pass `inc
 
   ```php PHP
   foreach ($client->beta->memoryStores->list(includeArchived: true)->pagingEachItem() as $s) {
-      echo "{$s->id} {$s->name} {$s->archivedAt}\n";
+      // archivedAt is only set on archived stores.
+      $archivedAt = isset($s->archivedAt) ? $s->archivedAt->format(DATE_ATOM) : '';
+      echo "{$s->id} {$s->name} {$archivedAt}\n";
   }
   ```
 

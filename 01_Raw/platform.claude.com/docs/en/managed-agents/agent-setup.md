@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/agent-setup
-fetched_at: 2026-07-20T04:31:16.949132+00:00
+fetched_at: 2026-07-27T04:31:48.765691+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,23 +20,23 @@ Create the agent once as a reusable resource and reference it by ID each time yo
 
 ## Agent configuration fields
 
-| Field         | Description                                                                                                                                                                                                                                                                                                      |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`        | Required. A human-readable name for the agent.                                                                                                                                                                                                                                                                   |
-| `model`       | Required. The Claude [model](/docs/en/about-claude/models/overview) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-4-8"}`. All Claude 4.5-family and later models are supported.                                                                                |
-| `system`      | A [system prompt](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](/docs/en/managed-agents/reference#event-types), which should describe the work to be done. |
-| `tools`       | The tools available to the agent. Combines [pre-built agent tools](/docs/en/managed-agents/tools), [MCP tools](/docs/en/managed-agents/mcp-connector), and [custom tools](/docs/en/managed-agents/tools#custom-tools).                                                                                           |
-| `mcp_servers` | [MCP servers](/docs/en/managed-agents/mcp-connector) that provide standardized third-party capabilities.                                                                                                                                                                                                         |
-| `skills`      | [Skills](/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure.                                                                                                                                                                                                        |
-| `multiagent`  | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent orchestration](/docs/en/managed-agents/multiagent-orchestration).                                                                                                                                                       |
-| `description` | A description of what the agent does.                                                                                                                                                                                                                                                                            |
-| `metadata`    | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                 |
+| Field         | Description                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`        | Required. A human-readable name for the agent.                                                                                                                                                                                                                                                                                                                                                                  |
+| `model`       | Required. The Claude [model](/docs/en/about-claude/models/overview) that powers the agent. Accepts a model ID string or an object, for example `{"id": "claude-opus-5"}`. Claude 4.5 and later models are supported. The object form also accepts a `speed` and an `effort` level; see the tips under [Create an agent](#create-an-agent) and [Effort levels](/docs/en/build-with-claude/effort#effort-levels). |
+| `system`      | A [system prompt](/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices#give-claude-a-role) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](/docs/en/managed-agents/reference#event-types), which should describe the work to be done.                                                                                                |
+| `tools`       | The tools available to the agent. Combines [pre-built agent tools](/docs/en/managed-agents/tools), [MCP tools](/docs/en/managed-agents/mcp-connector), and [custom tools](/docs/en/managed-agents/tools#custom-tools).                                                                                                                                                                                          |
+| `mcp_servers` | [MCP servers](/docs/en/managed-agents/mcp-connector) that provide standardized third-party capabilities.                                                                                                                                                                                                                                                                                                        |
+| `skills`      | [Skills](/docs/en/managed-agents/skills) that supply domain-specific context with progressive disclosure.                                                                                                                                                                                                                                                                                                       |
+| `multiagent`  | A coordinator declaration listing the agents this agent can delegate to. See [Multiagent orchestration](/docs/en/managed-agents/multiagent-orchestration).                                                                                                                                                                                                                                                      |
+| `description` | A description of what the agent does.                                                                                                                                                                                                                                                                                                                                                                           |
+| `metadata`    | Arbitrary key-value pairs for your own tracking.                                                                                                                                                                                                                                                                                                                                                                |
 
-You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. See [Override agent configuration for a session](/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session).
+You can also override `model`, `system`, `tools`, `mcp_servers`, and `skills` for a single session without changing the agent. An `effort` level set inside a per-session `model` override isn't applied; set it on the agent instead. See [Override agent configuration for a session](/docs/en/managed-agents/sessions#override-agent-configuration-for-a-session).
 
 ## Create an agent
 
-The following example defines a coding agent that uses Claude Opus 4.8 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](/docs/en/managed-agents/tools) for the full list of supported tools.
+The following example defines a coding agent that uses Claude Opus 5 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](/docs/en/managed-agents/tools) for the full list of supported tools.
 
 The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one up, the [quickstart](/docs/en/managed-agents/quickstart#install-the-cli) covers installation and client setup.
 
@@ -49,7 +49,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
     -H "content-type: application/json" \
     -d '{
       "name": "Coding Assistant",
-      "model": "claude-opus-4-8",
+      "model": "claude-opus-5",
       "system": "You are a helpful coding agent.",
       "tools": [{"type": "agent_toolset_20260401"}]
     }')
@@ -61,7 +61,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```bash CLI
   agent=$(ant beta:agents create \
     --name "Coding Assistant" \
-    --model '{id: claude-opus-4-8}' \
+    --model '{id: claude-opus-5}' \
     --system "You are a helpful coding agent." \
     --tool '{type: agent_toolset_20260401}' \
     --format json)
@@ -73,7 +73,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```python Python
   agent = client.beta.agents.create(
       name="Coding Assistant",
-      model="claude-opus-4-8",
+      model="claude-opus-5",
       system="You are a helpful coding agent.",
       tools=[
           {"type": "agent_toolset_20260401"},
@@ -84,7 +84,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```typescript TypeScript
   const agent = await client.beta.agents.create({
     name: "Coding Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system: "You are a helpful coding agent.",
     tools: [{ type: "agent_toolset_20260401" }],
   });
@@ -94,7 +94,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Coding Assistant",
-      Model = new("claude-opus-4-8"),
+      Model = new("claude-opus-5"),
       System = "You are a helpful coding agent.",
       Tools =
       [
@@ -110,7 +110,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Coding Assistant",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-4-8",
+  		ID: "claude-opus-5",
   	},
   	System: anthropic.String("You are a helpful coding agent."),
   	Tools: []anthropic.BetaAgentNewParamsToolUnion{{
@@ -128,7 +128,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   var agent = client.beta().agents().create(
       AgentCreateParams.builder()
           .name("Coding Assistant")
-          .model(BetaManagedAgentsModel.CLAUDE_OPUS_4_8)
+          .model(BetaManagedAgentsModel.CLAUDE_OPUS_5)
           .system("You are a helpful coding agent.")
           .addTool(
               BetaManagedAgentsAgentToolset20260401Params.builder()
@@ -142,7 +142,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```php PHP
   $agent = $client->beta->agents->create(
       name: 'Coding Assistant',
-      model: 'claude-opus-4-8',
+      model: 'claude-opus-5',
       system: 'You are a helpful coding agent.',
       tools: [
           BetaManagedAgentsAgentToolset20260401Params::with(
@@ -155,7 +155,7 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
   ```ruby Ruby
   agent = client.beta.agents.create(
     name: "Coding Assistant",
-    model: "claude-opus-4-8",
+    model: "claude-opus-5",
     system_: "You are a helpful coding agent.",
     tools: [{type: "agent_toolset_20260401"}]
   )
@@ -163,10 +163,14 @@ The examples use curl, the `ant` CLI, or one of the SDKs. If you haven't set one
 </CodeGroup>
 
 <Tip>
-  To use Claude Opus 4.8 or Claude Opus 4.7 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.7 is deprecated; see [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models) for the removal date and behavior.
+  To use Claude Opus 5 or Claude Opus 4.8 with [fast mode](/docs/en/build-with-claude/fast-mode), pass `model` as an object, for example: `{"id": "claude-opus-5", "speed": "fast"}`. See [Fast mode](/docs/en/build-with-claude/fast-mode#supported-models) for supported models.
 </Tip>
 
-The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields. The `version` starts at 1 and increments each time an update changes the agent.
+<Tip>
+  To set the model's effort level, pass `model` as an object, for example: `{"id": "claude-opus-5", "effort": "high"}`. The `effort` field accepts a level string (`low`, `medium`, `high`, `xhigh`, or `max`) or an object such as `{"type": "high"}`. See [Effort levels](/docs/en/build-with-claude/effort#effort-levels) for what each level does.
+</Tip>
+
+The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields, and fills in `model` fields you omit, such as `effort`, with their defaults. The `version` starts at 1 and increments each time an update changes the agent.
 
 ```json
 {
@@ -174,7 +178,8 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
   "type": "agent",
   "name": "Coding Assistant",
   "model": {
-    "id": "claude-opus-4-8",
+    "id": "claude-opus-5",
+    "effort": { "type": "high" },
     "speed": "standard"
   },
   "system": "You are a helpful coding agent.",
@@ -201,7 +206,7 @@ The `default_config` on the toolset shows its default [permission policy](/docs/
 
 ## Update an agent
 
-Updating an agent generates a new version when the configuration changes. The `version` field is required and must match the agent's current version, so you always update from a known state. A version mismatch returns a 409, and updates to archived agents are rejected.
+Updating an agent generates a new version when the configuration changes. The `version` field is optional: supply it for optimistic concurrency (a mismatch returns a 409), or omit it to apply the update unconditionally (last write wins). Updates to archived agents are rejected.
 
 <CodeGroup defaultLanguage="CLI">
   ```bash curl
@@ -259,7 +264,7 @@ Updating an agent generates a new version when the configuration changes. The `v
 
   ```go Go
   updatedAgent, err := client.Beta.Agents.Update(ctx, agent.ID, anthropic.BetaAgentUpdateParams{
-  	Version: agent.Version,
+  	Version: anthropic.Int(agent.Version),
   	System:  anthropic.String("You are a helpful coding agent. Always write tests."),
   })
   if err != nil {
@@ -302,11 +307,30 @@ Updating an agent generates a new version when the configuration changes. The `v
   ```
 </CodeGroup>
 
+The preceding example supplies `version` from the create response, so the update only applies if nothing else has changed the agent since you read it. To apply an update unconditionally, omit `version` from the request:
+
+<CodeGroup defaultLanguage="curl">
+  ```bash curl
+  updated_agent=$(curl -fsSL "https://api.anthropic.com/v1/agents/$AGENT_ID" \
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "anthropic-beta: managed-agents-2026-04-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "description": "Writes and reviews code."
+    }')
+
+  echo "New version: $(jq -r '.version' <<< "$updated_agent")"
+  ```
+</CodeGroup>
+
 ### Update semantics
+
+* **`version`** is optional and must be at least 1 when supplied. When supplied, the request returns a 409 if it doesn't match the agent's current version, even when the fields you send already match the stored values; re-read the agent and retry. When omitted, the update applies unconditionally and the most recent update silently replaces any concurrent one, with no error to either caller. Supplying `version` is the recommended default for interactive callers, and omitting it fits declarative apply loops, such as a CI job that syncs checked-in agent definitions, where the loop owns the agent.
 
 * **Omitted fields are preserved.** You only need to include the fields you want to change.
 
-* **Scalar fields** (`model`, `system`, `name`, `description`) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared.
+* **Scalar fields** (`model`, `system`, `name`, `description`) are replaced with the new value. `system` and `description` can be cleared by passing `null`. `model` and `name` are mandatory and cannot be cleared. Within a `model` object you supply, `effort` is the exception: if the model `id` is unchanged, omitting `effort` leaves the stored effort level unchanged. If you change the model `id`, an omitted `effort` resets to the new model's default.
 
 * **Array fields** (`tools`, `mcp_servers`, `skills`) are fully replaced by the new array. To clear an array field entirely, pass `null` or an empty array.
 
