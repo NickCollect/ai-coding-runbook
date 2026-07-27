@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/analytics
-fetched_at: 2026-07-13T04:25:37.197865+00:00
+fetched_at: 2026-07-27T04:31:47.662293+00:00
 fetch_method: mintlify_md
 ---
 
@@ -172,7 +172,7 @@ All classification runs on-device. Default classifiers ensure no PII or sensitiv
 
 ### Pricing
 
-Conversation Insights is free during the preview period. Starting January 1st, 2026, customers will be charged for inference. The Cursor Token Rate applies only when the underlying request is a non-Auto third-party model request.
+Conversation Insights is free during the preview period. Starting January 1st, 2026, customers will be charged for inference. The Cursor Token Rate applies when the underlying request is a third-party model request subject to the rate, including when Auto Balance or Auto Intelligence routes to a third-party model.
 
 ## Cloud Agent Usage
 

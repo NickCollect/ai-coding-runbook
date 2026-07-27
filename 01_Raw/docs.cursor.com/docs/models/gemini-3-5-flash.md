@@ -1,10 +1,12 @@
 ---
 source_url: https://cursor.com/docs/models/gemini-3-5-flash
-fetched_at: 2026-05-25T05:15:51.686535+00:00
+fetched_at: 2026-07-27T04:31:49.341286+00:00
 fetch_method: mintlify_md
 ---
 
-Gemini 3.5 Flash is Google's newest speed-tier model. At $1.50 per million input tokens and $9.00 per million output tokens, it sits between Gemini 3 Flash and Gemini 3.1 Pro on price while bringing reasoning improvements over earlier Flash models. Use it for high-throughput coding tasks that need stronger reasoning than Gemini 3 Flash, but at a lower cost than Pro models.
+We recommend using [Gemini 3.6 Flash](https://cursor.com/docs/models/gemini-3-6-flash.md). It's Google's newest speed-tier Flash model at a lower output price.
+
+Gemini 3.5 Flash is Google's previous speed-tier Flash model. At $1.50 per million input tokens and $9.00 per million output tokens, it sits between Gemini 3 Flash and Gemini 3.1 Pro on price while bringing reasoning improvements over earlier Flash models.
 
 ## Strengths
 
@@ -20,7 +22,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Gemini 3.5 Flash draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Gemini 3.5 Flash draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
 
 
 ---

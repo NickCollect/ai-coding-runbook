@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/enterprise/cyber-safeguards
-fetched_at: 2026-07-13T04:25:36.747130+00:00
+fetched_at: 2026-07-27T04:31:47.586545+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ Anthropic applies cyber safeguards to its latest generations of Opus models. The
 
 Cursor facilitates your application for the CVP, but any agreement for the program is only between your organization and Anthropic. All terms are set by Anthropic, and Cursor does not take on any of its obligations.
 
-Once approved for the CVP by Anthropic, you can turn on the Cyber option for Opus 4.7 and Opus 4.8 from your settings.
+Once approved for the CVP by Anthropic, you can turn on the Cyber option for Opus 4.7, Opus 4.8, and Opus 5 from your settings.
 
 It's important to understand that the blocks you might experience in Cursor when interacting with a model don't come from Cursor; they come directly from Anthropic's API.
 
@@ -72,7 +72,7 @@ Requests through a cyber-verified model run with Privacy Mode off for that model
 
 ## Supported models
 
-Enabling this mode works with Anthropic models today: **Opus 4.7** and **Opus 4.8**.
+Enabling this mode works with Anthropic models today: **Opus 4.7**, **Opus 4.8**, and **Opus 5**.
 
 ## FAQ
 
@@ -94,7 +94,7 @@ Approval is not instant. After you apply for the CVP, Cursor checks for your app
 
 ### Is Mythos included as a part of the CVP?
 
-No. Only Opus 4.7 and Opus 4.8 are a part of the program.
+No. Only Opus 4.7, Opus 4.8, and Opus 5 are a part of the program.
 
 ### I only see Spend Limit Overrides and Auto-Run Controls
 

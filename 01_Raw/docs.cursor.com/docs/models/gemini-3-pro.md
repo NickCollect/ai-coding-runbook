@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/gemini-3-pro
-fetched_at: 2026-05-05T19:55:41.824766+00:00
+fetched_at: 2026-07-27T04:31:49.400073+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,7 +14,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Gemini 3 Pro draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Gemini 3 Pro draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
 
 
 ---

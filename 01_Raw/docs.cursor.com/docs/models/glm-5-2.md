@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/glm-5-2
-fetched_at: 2026-07-13T04:25:39.075165+00:00
+fetched_at: 2026-07-27T04:31:49.562571+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,11 +12,11 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Hosting
 
-GLM 5.2 is an open-weight model from Z.ai. Cursor serves it through our inference partner [Fireworks](https://fireworks.ai) on infrastructure based in the US, Canada, and Iceland. Learn more about [where models are hosted](https://cursor.com/docs/models-and-pricing.md#faq) or see the full list of [sub-processors](https://trust.cursor.com/subprocessors).
+GLM 5.2 is an open-weight model from Z.ai. Cursor serves it through our inference partner [Fireworks](https://fireworks.ai). Learn more about [where models are hosted](https://cursor.com/docs/models-and-pricing.md#faq) or see the full list of [sub-processors](https://trust.cursor.com/subprocessors).
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. GLM 5.2 draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. GLM 5.2 draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
 
 
 ---

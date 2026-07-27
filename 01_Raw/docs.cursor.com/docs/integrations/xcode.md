@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/xcode
-fetched_at: 2026-05-05T19:55:40.452871+00:00
+fetched_at: 2026-07-27T04:31:48.927049+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,7 +36,7 @@ Pick whichever method suits your workflow.
 
 ### Open MCP settings
 
-Go to **Cursor Settings > Features > MCP**.
+Go to **Customize** > **MCPs**.
 
 ### Add the server
 

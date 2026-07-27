@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/plugins
-fetched_at: 2026-05-18T05:02:45.552509+00:00
+fetched_at: 2026-07-27T04:31:49.816853+00:00
 fetch_method: mintlify_md
 ---
 
@@ -50,22 +50,23 @@ Every plugin requires a `.cursor-plugin/plugin.json` manifest file.
 
 ### Optional fields
 
-| Field         | Type                     | Description                                                                                                                                                                                                          |
-| :------------ | :----------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `description` | string                   | Brief plugin description                                                                                                                                                                                             |
-| `version`     | string                   | Semantic version (e.g., `1.0.0`)                                                                                                                                                                                     |
-| `author`      | object                   | Author info: `name` (required), `email` (optional)                                                                                                                                                                   |
-| `homepage`    | string                   | URL to plugin homepage                                                                                                                                                                                               |
-| `repository`  | string                   | URL to plugin repository                                                                                                                                                                                             |
-| `license`     | string                   | License identifier (e.g., `MIT`)                                                                                                                                                                                     |
-| `keywords`    | array                    | Tags for discovery and categorization                                                                                                                                                                                |
-| `logo`        | string                   | Relative path to a logo file in the repo (e.g., `assets/logo.svg`), or an absolute URL. Relative paths resolve to `raw.githubusercontent.com` URLs. Preferred: commit the logo to your repo and use a relative path. |
-| `rules`       | string or array          | Path(s) to rule files or directories                                                                                                                                                                                 |
-| `agents`      | string or array          | Path(s) to agent files or directories                                                                                                                                                                                |
-| `skills`      | string or array          | Path(s) to skill directories                                                                                                                                                                                         |
-| `commands`    | string or array          | Path(s) to command files or directories                                                                                                                                                                              |
-| `hooks`       | string or object         | Path to hooks config file, or inline hook config                                                                                                                                                                     |
-| `mcpServers`  | string, object, or array | Path to MCP config file, inline MCP server config, or an array of either. Overrides default `mcp.json` discovery.                                                                                                    |
+| Field         | Type                     | Description                                                                                                                                                                                                                                                                                         |
+| :------------ | :----------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `description` | string                   | Brief plugin description                                                                                                                                                                                                                                                                            |
+| `version`     | string                   | Semantic version (e.g., `1.0.0`)                                                                                                                                                                                                                                                                    |
+| `author`      | object                   | Author info: `name` (required), `email` (optional)                                                                                                                                                                                                                                                  |
+| `homepage`    | string                   | URL to plugin homepage                                                                                                                                                                                                                                                                              |
+| `repository`  | string                   | URL to plugin repository                                                                                                                                                                                                                                                                            |
+| `license`     | string                   | License identifier (e.g., `MIT`)                                                                                                                                                                                                                                                                    |
+| `keywords`    | array                    | Tags for discovery and categorization                                                                                                                                                                                                                                                               |
+| `logo`        | string                   | Relative path to a logo file in the repo (e.g., `assets/logo.svg`), or an absolute URL. Relative paths resolve to `raw.githubusercontent.com` URLs. Preferred: commit the logo to your repo and use a relative path.                                                                                |
+| `rules`       | string or array          | Path(s) to rule files or directories                                                                                                                                                                                                                                                                |
+| `agents`      | string or array          | Path(s) to agent files or directories                                                                                                                                                                                                                                                               |
+| `skills`      | string or array          | Path(s) to skill directories                                                                                                                                                                                                                                                                        |
+| `commands`    | string or array          | Path(s) to command files or directories                                                                                                                                                                                                                                                             |
+| `hooks`       | string or object         | Path to hooks config file, or inline hook config                                                                                                                                                                                                                                                    |
+| `mcpServers`  | string, object, or array | Path to MCP config file, inline MCP server config, or an array of either. Overrides default `mcp.json` discovery.                                                                                                                                                                                   |
+| `variables`   | object                   | JSON Schema that declares variable **names** (tokens, connection strings). The plugin does not store secret values; users set them in the dashboard (**Plugins** → **Configure**). Substituted into `${VAR}` placeholders. See [Variables](https://cursor.com/docs/reference/plugins.md#variables). |
 
 ### Example manifest
 
@@ -82,6 +83,46 @@ Every plugin requires a `.cursor-plugin/plugin.json` manifest file.
   "logo": "assets/logo.svg"
 }
 ```
+
+## Variables
+
+Use `variables` to declare the **names** (and types/descriptions) of user-specified configuration — for example an API token for an HTTP MCP server. The plugin only defines the schema; it does not include the secret values themselves.
+
+Team admins set the actual values in the dashboard under **Plugins** (at install time, or later via **Configure** on the plugin).
+
+Do not put secret values in the plugin repo. In `mcp.json` and other plugin config, include only `${VAR}` placeholders that match property names in the schema.
+
+```json title=".cursor-plugin/plugin.json"
+{
+  "name": "example-plugin",
+  "variables": {
+    "type": "object",
+    "properties": {
+      "API_TOKEN": {
+        "type": "string",
+        "title": "API token",
+        "description": "Bearer token for the example HTTP MCP"
+      }
+    },
+    "required": ["API_TOKEN"]
+  }
+}
+```
+
+```json title="mcp.json"
+{
+  "mcpServers": {
+    "example-api": {
+      "url": "https://mcp.example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer ${API_TOKEN}"
+      }
+    }
+  }
+}
+```
+
+The top level must be `{ "type": "object", "properties": { ... } }`. Only a fixed set of JSON Schema keywords is accepted (`type`, `title`, `description`, `default`, `enum`, `const`, `properties`, `required`, `items`, and common length/numeric constraints).
 
 ## Component discovery
 
@@ -279,6 +320,8 @@ The MCP config file should contain server entries under a `mcpServers` key:
 }
 ```
 
+`${POSTGRES_URL}` is a [plugin variable](https://cursor.com/docs/reference/plugins.md#variables) placeholder (not shell `${env:...}`). Declare the variable name under `variables` in `plugin.json`, put only the placeholder in plugin config, and set the value in the dashboard under **Plugins** → **Configure**. Plugin-managed MCP config is read-only in the dashboard.
+
 For full documentation, see [MCP](https://cursor.com/docs/mcp.md).
 
 ## Logos
@@ -344,23 +387,24 @@ A single Git repository can contain multiple plugins using a **marketplace manif
 
 Each entry in the `plugins` array supports:
 
-| Field                                   | Type             | Description                                                 |
-| :-------------------------------------- | :--------------- | :---------------------------------------------------------- |
-| `name`                                  | string           | **(required)** Plugin identifier (kebab-case)               |
-| `source`                                | string or object | Path to plugin directory, or object with `path` and options |
-| `description`                           | string           | Plugin description                                          |
-| `version`                               | string           | Semantic version                                            |
-| `author`                                | object           | Author info                                                 |
-| `homepage`                              | string           | URL                                                         |
-| `repository`                            | string           | URL                                                         |
-| `license`                               | string           | License identifier                                          |
-| `keywords`                              | array            | Search tags                                                 |
-| `logo`                                  | string           | Relative path or URL to logo                                |
-| `category`                              | string           | Plugin category                                             |
-| `tags`                                  | array            | Additional tags                                             |
-| `skills`, `rules`, `agents`, `commands` | string or array  | Path(s) to component files                                  |
-| `hooks`                                 | string or object | Path to hooks config or inline config                       |
-| `mcpServers`                            | string or object | Path to MCP config or inline config                         |
+| Field                                   | Type             | Description                                                                                                                                                                                                                                     |
+| :-------------------------------------- | :--------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`                                  | string           | **(required)** Plugin identifier (kebab-case)                                                                                                                                                                                                   |
+| `source`                                | string or object | Path to plugin directory, or object with `path` and options                                                                                                                                                                                     |
+| `description`                           | string           | Plugin description                                                                                                                                                                                                                              |
+| `version`                               | string           | Semantic version                                                                                                                                                                                                                                |
+| `author`                                | object           | Author info                                                                                                                                                                                                                                     |
+| `homepage`                              | string           | URL                                                                                                                                                                                                                                             |
+| `repository`                            | string           | URL                                                                                                                                                                                                                                             |
+| `license`                               | string           | License identifier                                                                                                                                                                                                                              |
+| `keywords`                              | array            | Search tags                                                                                                                                                                                                                                     |
+| `logo`                                  | string           | Relative path or URL to logo                                                                                                                                                                                                                    |
+| `category`                              | string           | Plugin category                                                                                                                                                                                                                                 |
+| `tags`                                  | array            | Additional tags                                                                                                                                                                                                                                 |
+| `skills`, `rules`, `agents`, `commands` | string or array  | Path(s) to component files                                                                                                                                                                                                                      |
+| `hooks`                                 | string or object | Path to hooks config or inline config                                                                                                                                                                                                           |
+| `mcpServers`                            | string or object | Path to MCP config or inline config                                                                                                                                                                                                             |
+| `variables`                             | object           | JSON Schema that declares variable names (values set in dashboard **Plugins** → **Configure**). Prefer `plugin.json`; manifest values take precedence if both are set. See [Variables](https://cursor.com/docs/reference/plugins.md#variables). |
 
 ### How resolution works
 
@@ -418,6 +462,7 @@ Go to [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) a
 - All rules, skills, agents, and commands have proper frontmatter metadata
 - Logo is committed to the repo and referenced by relative path (if provided)
 - `README.md` documents usage and any configuration
+- If using `variables`, the schema is valid and every `${VAR}` in `mcp.json` has a matching property
 - All paths in manifest are relative and valid (no `..`, no absolute paths)
 - Plugin has been tested locally
 - For multi-plugin repos: `.cursor-plugin/marketplace.json` is at the repo root with unique plugin names

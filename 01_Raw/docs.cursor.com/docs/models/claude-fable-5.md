@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/models/claude-fable-5
-fetched_at: 2026-07-06T05:04:28.148063+00:00
+fetched_at: 2026-07-27T04:31:49.077601+00:00
 fetch_method: mintlify_md
 ---
 
 Claude Fable 5 is Anthropic's most capable generally available model for autonomous knowledge work and coding. It is a Mythos-class model with strong safeguards, built to handle long-running, complex, and asynchronous tasks where earlier models needed more frequent check-ins.
 
-Fable 5 also leads every other model on [CursorBench](https://cursor.com/evals), our benchmark for real-world coding work. It costs about twice as much as Claude Opus 4.8, so it's a strong fit for your team's most complex agentic work.
+Fable 5 sits at the top of [CursorBench](https://cursor.com/cursorbench), our benchmark for real-world coding work, alongside Opus 5. It costs about twice as much as Claude Opus 5, so it's a strong fit for your team's most complex agentic work when you can opt in to Anthropic data retention.
 
 ## Enabling Fable 5
 
@@ -56,9 +56,9 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Fable 5 draws from the **API** pool, which charges at the rates below. All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Fable 5 draws from the third-party **Other Models** pool, which charges at the rates below. All prices are per million tokens.
 
-Fable 5 costs about twice as much as Claude Opus 4.8, at $10 per million input tokens and $50 per million output tokens.
+Fable 5 costs about twice as much as Claude Opus 5, at $10 per million input tokens and $50 per million output tokens.
 
 Fable 5 supports a thinking variant for deeper reasoning. We recommend the high thinking variant for the strongest results.
 

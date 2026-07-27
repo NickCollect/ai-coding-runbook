@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organizations
-fetched_at: 2026-07-20T04:31:20.449134+00:00
+fetched_at: 2026-07-27T04:31:48.739787+00:00
 fetch_method: mintlify_md
 ---
 
@@ -36,13 +36,17 @@ See [SCIM provisioning](https://cursor.com/docs/account/teams/scim.md) for setup
 
 Teams that set up their own identity provider before joining the Organization can consolidate into one shared setup. The result is a single organization identity provider instead of one configuration per team, and members keep signing in with the same corporate credentials.
 
-To merge, open the Organization's **Settings**, find the team identity provider under **Identity provider**, and select **Merge into default IDP**.
+Merging is optional. Keep a separate team identity provider when a team genuinely needs its own — for example, a team that runs its own Okta instance.
+
+To merge, open the Organization's **Settings**, find the team identity provider under **Identity provider**, and select **Merge into default IDP** from the **⋯** menu on its card.
 
 ![Organization settings showing a team identity provider with the Merge into default IDP button](/docs-static/images/enterprise/organizations/idp-merge.png)
 
-The merge can't be undone: the team identity provider is retired and its teams use the organization default. Cursor runs the merge in the background, which can take a few minutes for large teams.
+A confirmation dialog checks the prerequisites for your specific merge — for example, disconnecting SCIM on the team identity provider first, or verifying that the default provider's SSO covers the users being moved — and asks you to acknowledge that the merge can't be undone. Once merged, the team identity provider is retired and its teams use the organization default for sign-in and directory sync.
 
 ![Confirmation dialog for merging a team identity provider into the organization default](/docs-static/images/enterprise/organizations/idp-merge-confirm.png)
+
+Cursor runs the merge in the background, which can take a few minutes for large teams. While it runs, the team identity provider's card shows a **Merging…** badge and its settings are locked until the merge completes.
 
 The identity model after consolidation: one organization identity provider handles login and directory sync for every team. A linked team that keeps its own identity provider contributes a second SCIM directory.
 

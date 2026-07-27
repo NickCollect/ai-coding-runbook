@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/cursor-composer-2-5
-fetched_at: 2026-07-13T04:25:38.902709+00:00
+fetched_at: 2026-07-27T04:31:49.249476+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 A **faster variant** with the same intelligence is also available at $3/M input and $15/M output tokens. Fast is the default in the product and is priced lower than other fast models at similar speeds.
 
-On individual and team plans, Composer 2.5 draws from the **First-party models pool** with Auto and Grok 4.5. On-demand usage is charged at the rates below. All prices are per million tokens.
+On individual and team plans, Composer 2.5 draws from the Cursor Models pool with Cursor Grok 4.5. On-demand usage is charged at the rates below. All prices are per million tokens.
 
 
 ---

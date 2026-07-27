@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-4-5-haiku
-fetched_at: 2026-07-06T05:04:28.015842+00:00
+fetched_at: 2026-07-27T04:31:48.997121+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ For stronger results, consider [Claude Sonnet 5](https://cursor.com/docs/models/
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Claude 4.5 Haiku draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Claude 4.5 Haiku draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
 
 
 ---

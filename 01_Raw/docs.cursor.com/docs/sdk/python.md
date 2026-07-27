@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-07-20T04:31:21.575092+00:00
+fetched_at: 2026-07-27T04:31:49.900135+00:00
 fetch_method: mintlify_md
 ---
 
@@ -174,6 +174,33 @@ agent = Agent.create(
 These values are encrypted at rest, injected into the cloud agent's shell, and deleted with the agent. `env_vars` can't be used with a caller-supplied `agent_id`; omit `agent_id` and read the server-minted ID from `agent.agent_id`. Variable names can't start with `CURSOR_`.
 
 For values that should only exist during a single run, pass them on `agent.send()` instead. See [Per-run environment variables](https://cursor.com/docs/sdk/python.md#per-run-environment-variables).
+
+### Agent metadata
+
+Use a raw `cloud` mapping to attach your own identifiers to a cloud agent when you create it. Metadata can link an agent to a user, tenant, workflow, or ticket in your system.
+
+```python
+from cursor_sdk import Agent
+
+with Agent.create(
+    model="composer-2.5",
+    cloud={
+        "repos": [{"url": "https://github.com/your-org/your-repo"}],
+        "metadata": {
+            "end_user_id": "user-123",
+            "ticket_id": "ENG-456",
+        },
+    },
+) as agent:
+    print(agent.agent_id)
+```
+
+Metadata is available for cloud agents at creation time. You can attach up to 50 key-value pairs. Keys must be non-empty and no more than 255 characters. Values must be strings no larger than 4096 bytes. Empty string values are allowed, and an empty mapping is treated as no metadata.
+
+The typed `CloudAgentOptions` and `SDKAgentInfo` classes don't expose metadata
+yet. Pass it through a raw mapping as shown above. If metadata isn't enabled
+for the API key's account, creating an agent with a non-empty map returns
+`403 feature_unavailable`.
 
 ### Model parameters
 
@@ -456,6 +483,7 @@ class Run:
     created_at: str | None
     usage: TokenUsage | None  # cumulative; property on the live handle
 
+    def stream(self) -> Iterator[SDKMessage]: ...
     def messages(self) -> Iterator[SDKMessage]: ...
     def events(self) -> Iterator[RunStreamEvent]: ...
     def iter_text(self) -> Iterator[str]: ...
@@ -475,7 +503,7 @@ class Run:
 
 `run.stream()` is an alias for `run.messages()`. Iterating `run` directly yields `RunStreamEvent` envelopes, the same as `run.events()`.
 
-`AsyncRun` exposes the same state fields, including `usage`. Methods that do I/O are async: `async for message in run.messages()`, `async for event in run.events()`, `async for text in run.iter_text()`, `await run.text()`, `await run.wait()`, `await run.cancel()`, `await run.conversation()`, `await run.conversation_json()`, and `async for event in run.observe()`.
+`AsyncRun` exposes the same state fields, including `usage`. Methods that do I/O are async: `async for message in run.stream()`, `async for message in run.messages()`, `async for event in run.events()`, `async for text in run.iter_text()`, `await run.text()`, `await run.wait()`, `await run.cancel()`, `await run.conversation()`, `await run.conversation_json()`, and `async for event in run.observe()`.
 
 ### Streaming
 

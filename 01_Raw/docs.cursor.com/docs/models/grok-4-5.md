@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/grok-4-5
-fetched_at: 2026-07-20T04:31:21.360283+00:00
+fetched_at: 2026-07-27T04:31:49.737835+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Grok 4.5 is part of the [First-party models pool](https://cursor.com/docs/models-and-pricing.md#first-party-models-pool) on individual and team plans. This pool also includes Auto and Composer 2.5.
+Grok 4.5 is part of the [Cursor Models pool](https://cursor.com/docs/models-and-pricing.md#cursor-models) on individual and team plans. This pool also includes Composer 2.5.
 
 Included usage is doubled through July 21, 2026. Standard on-demand usage is priced at $2/M input tokens and $6/M output tokens. The Fast variant is priced at $4/M input tokens and $18/M output tokens. All prices are per million tokens.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-7-fast
-fetched_at: 2026-05-18T05:02:44.779267+00:00
+fetched_at: 2026-07-27T04:31:49.138614+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Claude Opus 4.7 (fast mode) draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Claude Opus 4.7 (fast mode) draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
 
 
 ---

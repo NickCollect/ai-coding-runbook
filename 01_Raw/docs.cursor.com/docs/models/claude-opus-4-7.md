@@ -1,10 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-7
-fetched_at: 2026-07-20T04:31:21.057972+00:00
+fetched_at: 2026-07-27T04:31:49.175282+00:00
 fetch_method: mintlify_md
 ---
 
-We recommend using [Claude Opus 4.8](https://cursor.com/docs/models/claude-opus-4-8.md). It is Anthropic's latest Opus release with the same pricing and capabilities.
+We recommend using [Claude Opus 5](https://cursor.com/docs/models/claude-opus-5.md). It is Anthropic's latest Opus release with the same pricing and stronger agentic capabilities.
 
 Opus 4.7 is Anthropic's strongest model and a meaningful jump over Opus 4.6 on [CursorBench](https://cursor.com/blog/cursorbench). It excels at autonomous, multi-step work: it holds intent across long sessions, self-corrects when it hits friction, and writes production-ready code without hand-holding. We recommend the high thinking variant for the best results.
 
@@ -28,7 +28,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.7 draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.7 draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
 
 All Opus 4.7 prompts bill at the base per-token rates in the table above, including when context goes above 300k. There is no separate long-context multiplier for Opus 4.7. Context windows up to 1M tokens use the same rates.
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/deployment-patterns
-fetched_at: 2026-06-29T05:25:13.799412+00:00
+fetched_at: 2026-07-27T04:31:48.566957+00:00
 fetch_method: mintlify_md
 ---
 
@@ -482,11 +482,16 @@ See [Network Configuration](https://cursor.com/docs/enterprise/network-configura
 
 ## Minimum Versions
 
-We recommend users stay within one version of our most recent release. Users three or more versions behind our current release will start to see a warning indicating that they need to upgrade. Users four or more versions behind our latest release will see an error forcing them to update. This allows users to experience our latest features, while also staying up to date with our latest performance improvements, stability updates and bug fixes.
+Cursor maintains two minimum version floors:
 
-For example, if the latest release is 1.7, we recommend all users to be on version 1.6 or 1.7. Users on 1.4 or below will see a warning telling them to update. Users on 1.3 or below will see an error forcing them to update.
+- **Minimum supported version**: users on older versions see a dismissable warning asking them to upgrade.
+- **Minimum allowed version**: users on older versions see an undismissable error and must upgrade. This marks the end of life for that release line.
 
-When managing Cursor deployments for your organization, we recommend updating your Cursor version regularly.
+As a general rule of thumb, a release becomes eligible to be the minimum supported version about 2 months after its GA date, and eligible to be the minimum allowed version about 3 months after its GA date. Bumps also depend on adoption of newer releases.
+
+You can estimate when a release will age out by combining this guidance with our published GA and changelog dates.
+
+When managing Cursor deployments for your organization, we recommend updating Cursor regularly (for example, via MDM) so users stay on supported versions.
 
 ## Troubleshooting
 

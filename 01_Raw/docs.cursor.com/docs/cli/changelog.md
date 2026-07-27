@@ -1,12 +1,47 @@
 ---
 source_url: https://cursor.com/docs/cli/changelog
-fetched_at: 2026-07-13T04:25:37.429435+00:00
+fetched_at: 2026-07-27T04:31:48.023903+00:00
 fetch_method: mintlify_md
 ---
 
 # CLI Changelog
 
 The latest features, improvements, and fixes shipping to Cursor CLI. Run `agent --version` to check your installed version, and `agent update` to upgrade in place.
+
+## July 20, 2026 release
+
+- **`--trust` works in interactive sessions.** Previously `--trust` required headless mode. Passing it in an interactive session now trusts the workspace up front and skips the trust dialog, recording the same saved trust decision the dialog writes when you accept.
+- **Clear errors instead of hangs at login.** MCP OAuth login fails fast with an actionable message when the callback port is already taken, instead of hanging on "Listening for the OAuth callback". On macOS, keychain failures at startup now explain the cause and the fix, like unlocking a locked keychain or logging out and back in, instead of a raw exit code.
+- **The model catalog stays fresh in long sessions.** The CLI refetches the model catalog every 10 minutes in the background, so newly released models appear in `/model` and shortcuts without restarting. If a refresh fails, the CLI keeps the current catalog and retries on the next interval.
+- **Cleaner rendering.** Completed tool rows no longer disappear for a frame when the agent moves to its next step, markdown tables with emoji or CJK text keep their columns aligned, typing a path like `/tmp` followed by a space no longer leaves the slash palette stuck on "No matches", and subagent rows drop the Ctrl+O expand hint (the shortcut still works).
+- **Fixed CPU spinning from the branch watcher.** When the watcher that keeps the prompt footer's git branch current could not attach, most commonly after exhausting the inotify watch limit on Linux, it retried in a tight loop that pegged a CPU core. Failed attaches now back off exponentially, and branch switches still update the footer immediately.
+
+## July 13, 2026 release
+
+### Plugins and MCP
+
+- **Manage plugin marketplaces from the shell.** Script marketplace management without an interactive session: `agent plugin marketplace add <git-url>` registers a marketplace (pin a branch, tag, or commit with `--git-ref`), `list` prints each marketplace's name, scope, and git URL (`--format json` for scripts), `update` re-indexes one from its repository, and `remove` deletes a user-scoped marketplace.
+- **One server for duplicate MCP configs.** When the same remote MCP server is configured in more than one scope, such as your user `mcp.json` and a project's `.cursor/mcp.json`, the CLI now runs a single instance instead of duplicates. Pick which scope's configuration wins from the new Configure Scope tab in a server's `/mcp` detail view. The choice is saved per project.
+
+### Usage and models
+
+- **See plan usage and spend in `/usage`.** `/usage` now shows your account's included-usage meters with Auto and API breakdowns, on-demand spend against your limit, plan name, and billing-cycle reset date. Enterprise pooled plans get a spend chart for the current billing cycle compared with the previous period of the same length, plus a link to the usage dashboard.
+- **Fixed Max Mode sticking on.** Choosing a variant that requires Max Mode, like `/fast` or a 1M-context option, no longer leaves Max Mode silently enabled for other models and future sessions: it clears when your selection stops requiring it, while an explicit `/max-mode` choice stays sticky. The MAX indicator is also back in the prompt bar, after the model's parameter summary.
+- **Fixed the empty `/model` picker on slow connections.** If the model catalog fetch timed out at startup, `/model` stayed empty for the whole session. Opening the picker now refetches the catalog, and an open picker fills in as soon as the list arrives.
+
+### Approvals and trust
+
+- **Auto-accept web searches.** A new Auto-Accept Web Search permission lets the agent run web searches without pausing for approval each time. It is off by default. Toggle it under Permissions in `/config` or set `autoAcceptWebSearch` in `cli-config.json`. Honored in interactive, headless, subagent, and Agent Client Protocol runs.
+- **Steer the agent from shell approval prompts.** The skip option on shell approvals is now labeled "Skip & tell the agent what to do instead", and choosing it opens a composer whose message is sent to the agent as the reason the command was skipped. Submitting an empty message just skips.
+- **Worktree setup respects workspace trust.** Setup commands from `.cursor/worktrees.json` now run only after the workspace is trusted, through the trust prompt, a saved trust decision, or `--trust` in headless runs. Untrusted workspaces skip setup with a visible notice.
+
+### Reliability
+
+- **Resuming chats is faster.** The resume picker shows your current workspace's chats immediately and fills in other workspaces in the background, and selecting a chat no longer waits on a model-catalog fetch when your stored model is already cached.
+- **Network blips no longer kill runs.** DNS failures and network-unreachable errors, like those during a VPN transition, retry with backoff like other transport errors. If the network stays down, the CLI shows an actionable hint covering network, VPN, DNS, and proxy configuration instead of a raw network error.
+- **Subagents survive transient failures.** A momentary network error no longer kills a running subagent with a terminal error. Subagent turns retry with the same policy as regular turns, resuming from their last checkpoint when one exists.
+- **Updates no longer break running sessions.** Auto-update cleanup could delete the installed version a long-running session was launched from, crashing it mid-turn. Running processes now mark their install directory as in use so cleanup skips it, and if install files still disappear, such as after a Homebrew upgrade, the CLI asks you to restart instead of failing with a module error.
+- **`/btw` fixes.** Side questions no longer fail with an internal blob error in long or compacted sessions, and the slash palette no longer pops up over your question while you type it.
 
 ## July 6, 2026 release
 

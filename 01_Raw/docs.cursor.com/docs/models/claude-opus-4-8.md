@@ -1,10 +1,12 @@
 ---
 source_url: https://cursor.com/docs/models/claude-opus-4-8
-fetched_at: 2026-07-20T04:31:21.097493+00:00
+fetched_at: 2026-07-27T04:31:49.210248+00:00
 fetch_method: mintlify_md
 ---
 
-Claude Opus 4.8 is Anthropic's strongest model and a meaningful jump over Opus 4.7 on [CursorBench](https://cursor.com/blog/cursorbench). It excels at autonomous, multi-step work: it holds intent across long sessions, self-corrects when it hits friction, and writes production-ready code without hand-holding. We recommend the high thinking variant for the best results.
+We recommend using [Claude Opus 5](https://cursor.com/docs/models/claude-opus-5.md). It replaces Opus 4.8 with stronger agentic coding and long-horizon reasoning at the same price.
+
+Claude Opus 4.8 is Anthropic's previous Opus model and a meaningful jump over Opus 4.7 on [CursorBench](https://cursor.com/blog/cursorbench). It excels at autonomous, multi-step work: it holds intent across long sessions, self-corrects when it hits friction, and writes production-ready code without hand-holding. We recommend the high thinking variant for the best results.
 
 ## Strengths
 
@@ -26,7 +28,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.8 draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. Opus 4.8 draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
 
 A **Fast mode** tier (`claude-opus-4-8-fast`) is available for roughly 2.5x faster output. On legacy request-based plans, it requires Max Mode. It bills at $10/M input and $50/M output tokens, 3x lower than Opus 4.7 fast mode. Use it selectively for time-sensitive or critical work.
 

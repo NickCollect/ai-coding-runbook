@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/gpt-5-6-luna
-fetched_at: 2026-07-13T04:25:39.222420+00:00
+fetched_at: 2026-07-27T04:31:49.649420+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,7 +25,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 ## Pricing
 
-Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. GPT-5.6 Luna draws from the **API** pool, which charges at the rates below. Individual plans include at least $20 of API usage each month (more on higher tiers). All prices are per million tokens.
+Cursor [plans](https://cursor.com/docs/models-and-pricing.md) include two usage pools. GPT-5.6 Luna draws from the third-party **Other Models** pool, which charges at the rates below. Individual plans include at least $20 of third-party Other Models usage each month (more on higher tiers). All prices are per million tokens.
 
 A **Fast mode** tier (`gpt-5.6-luna-fast`) is available for priority processing at 2x the standard rates.
 
