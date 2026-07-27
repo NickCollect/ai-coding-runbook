@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/prompt-injection-defenses
-fetched_at: 2026-07-20T04:33:00.129670+00:00
+fetched_at: 2026-07-27T04:31:55.695530+00:00
 title: "Mitigating the risk of prompt injections in browser use \\ Anthropic"
 ---
 
@@ -60,6 +60,12 @@ If you're interested in helping make our models and products more robust to prom
 
 ## Related content
 
+### Project Pilot: Can AI control a drone?
+
+Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+
+[Read more](https://www.anthropic.com/research/project-pilot)
+
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
@@ -67,9 +73,3 @@ If you're interested in helping make our models and products more robust to prom
 ### Claude’s values across models and languages
 
 [Read more](https://www.anthropic.com/research/claude-values-models-languages)
-
-### Claude plays robotics
-
-In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
-
-[Read more](https://www.anthropic.com/research/claude-plays-robotics)

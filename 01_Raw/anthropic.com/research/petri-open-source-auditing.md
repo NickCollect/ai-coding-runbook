@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/petri-open-source-auditing
-fetched_at: 2026-07-20T04:32:53.959959+00:00
+fetched_at: 2026-07-27T04:31:55.179355+00:00
 title: "Petri: An open-source auditing tool to accelerate AI safety research \\ Anthropic"
 ---
 
@@ -97,6 +97,12 @@ Helpful comments, discussions, and other assistance: Julius Steen, Chloe Loughri
 
 ## Related content
 
+### Project Pilot: Can AI control a drone?
+
+Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+
+[Read more](https://www.anthropic.com/research/project-pilot)
+
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
@@ -104,9 +110,3 @@ Helpful comments, discussions, and other assistance: Julius Steen, Chloe Loughri
 ### Claude’s values across models and languages
 
 [Read more](https://www.anthropic.com/research/claude-values-models-languages)
-
-### Claude plays robotics
-
-In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
-
-[Read more](https://www.anthropic.com/research/claude-plays-robotics)

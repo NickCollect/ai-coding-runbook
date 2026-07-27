@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-07-20T04:33:05.068493+00:00
+fetched_at: 2026-07-27T04:31:56.278710+00:00
 title: "Frontier Red Team \\ Anthropic"
 ---
 
@@ -28,6 +28,9 @@ Search
 
 DateCategoryTitle
 
+- [Jul 24, 2026Frontier Red Team
+
+  Project Pilot: Can AI control a drone?](https://www.anthropic.com/research/project-pilot)
 - [Jul 9, 2026Frontier Red Team
 
   Claude plays robotics](https://www.anthropic.com/research/claude-plays-robotics)
@@ -55,8 +58,5 @@ DateCategoryTitle
 - [Mar 6, 2026Frontier Red Team
 
   Reverse engineering Claude's CVE-2026-2796 exploit](https://www.anthropic.com/research/exploit)
-- [Feb 5, 2026Frontier Red Team
-
-  Evaluating and mitigating the growing risk of LLM-discovered 0-days](https://www.anthropic.com/research/zero-days)
 
 [See more](#)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-plays-robotics
-fetched_at: 2026-07-20T04:32:08.983711+00:00
+fetched_at: 2026-07-27T04:31:52.641516+00:00
 title: "How Claude Performs on Robotics Tasks \\ Anthropic"
 ---
 
@@ -507,6 +507,12 @@ The code, once released, will be in `github.com/safety-research/embody`, the pub
 
 ## Related content
 
+### Project Pilot: Can AI control a drone?
+
+Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+
+[Read more](https://www.anthropic.com/research/project-pilot)
+
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
@@ -514,10 +520,6 @@ The code, once released, will be in `github.com/safety-research/embody`, the pub
 ### Claude’s values across models and languages
 
 [Read more](https://www.anthropic.com/research/claude-values-models-languages)
-
-### An off switch for dual-use knowledge in AI models
-
-[Read more](https://www.anthropic.com/research/off-switch-dual-use)
 
 ## Subscribe to the Frontier Red Team newsletter
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/evaluating-ai-systems
-fetched_at: 2026-07-20T04:32:24.006579+00:00
+fetched_at: 2026-07-27T04:31:53.836352+00:00
 title: "Challenges in evaluating AI systems \\ Anthropic"
 ---
 
@@ -171,6 +171,12 @@ url = {[https://www.anthropic.com/index/evaluating-ai-systems](https://www.anthr
 
 ## Related content
 
+### Project Pilot: Can AI control a drone?
+
+Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+
+[Read more](https://www.anthropic.com/research/project-pilot)
+
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
@@ -178,9 +184,3 @@ url = {[https://www.anthropic.com/index/evaluating-ai-systems](https://www.anthr
 ### Claude’s values across models and languages
 
 [Read more](https://www.anthropic.com/research/claude-values-models-languages)
-
-### Claude plays robotics
-
-In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
-
-[Read more](https://www.anthropic.com/research/claude-plays-robotics)

@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/persona-vectors
-fetched_at: 2026-07-20T04:32:52.642389+00:00
+fetched_at: 2026-07-27T04:31:55.235950+00:00
 title: "Persona vectors: Monitoring and controlling character traits in language models \\ Anthropic"
 ---
 
@@ -108,6 +108,12 @@ This research was led by participants in our [Anthropic Fellows](https://alignme
 
 ## Related content
 
+### Project Pilot: Can AI control a drone?
+
+Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
+
+[Read more](https://www.anthropic.com/research/project-pilot)
+
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
@@ -115,9 +121,3 @@ This research was led by participants in our [Anthropic Fellows](https://alignme
 ### Claude’s values across models and languages
 
 [Read more](https://www.anthropic.com/research/claude-values-models-languages)
-
-### Claude plays robotics
-
-In project Fetch, we examined how humans can use models to get robots to perform complex tasks. Now, we investigate many models on a large variety of different robotics tasks in simulation, to see how good models are at controlling robots themselves.
-
-[Read more](https://www.anthropic.com/research/claude-plays-robotics)
