@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-TW
-fetched_at: 2026-07-20T04:42:04.951080+00:00
-title: "\u5716\u50cf\u89e3\u8b80 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr
+fetched_at: 2026-07-27T04:41:55.262389+00:00
+title: "G\u00f6r\u00fcnt\u00fc anlama \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-提供意見
+Geri bildirim gönderin
 
-# 圖像解讀
+# Görüntü anlama
 
-Gemini 模型從一開始就建構於多模態的基礎上，因此可執行各種圖像處理和電腦視覺工作，包括但不限於生成圖像說明、分類和回答圖像問題，無須訓練專門的機器學習模型。
+Gemini modelleri, baştan aşağı çok formatlı olacak şekilde tasarlanmıştır. Bu sayede, özel makine öğrenimi modelleri eğitmenize gerek kalmadan görüntü açıklaması, sınıflandırma ve görsel soru yanıtlama gibi çok çeşitli görüntü işleme ve bilgisayarla görme görevlerini yerine getirebilirsiniz.
 
-除了提供一般多模態功能，Gemini 模型還透過額外訓練，針對特定用途 (例如[物件偵測](#object-detection)和[區隔](#segmentation)) **提升準確度**。
+Gemini modelleri, genel çok formatlı özelliklerinin yanı sıra ek eğitim sayesinde [nesne algılama](#object-detection) ve [segmentasyon](#segmentation) gibi belirli kullanım alanlarında **daha yüksek doğruluk** sunar.
 
-## 將圖片傳送給 Gemini
+## Gemini'a görüntü aktarma
 
-你可以透過下列幾種方式，將圖片做為 Gemini 的輸入內容：
+Gemini'a giriş olarak resim sağlamak için çeşitli yöntemler kullanabilirsiniz:
 
-- [使用網址傳遞圖片](#url-image)：適合公開存取的圖片。
-- [傳遞內嵌圖片資料](#inline-image)：適用於採用 Base64 編碼的圖片資料。
-- [使用 File API 上傳圖片](#upload-image)：建議用於較大的檔案，或在多個要求中重複使用圖片。
+- [URL kullanarak resim iletme](#url-image): Herkese açık resimler için idealdir.
+- [Satır içi görüntü verilerini iletme](#inline-image): Base64 kodlu görüntü verileri için.
+- [File API'yi kullanarak resim yükleme](#upload-image): Daha büyük dosyalar veya resimleri birden çok istekte yeniden kullanmak için önerilir.
 
-### 使用網址傳遞圖片
+### URL kullanarak resim iletme
 
-您可以使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳圖片，並在要求中傳遞圖片：
+[Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak bir resim yükleyebilir ve isteğe iletebilirsiniz:
 
 ### Python
 
@@ -103,9 +103,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 傳遞內嵌圖片資料
+### Satır içi görüntü verilerini iletme
 
-您可以提供採用 Base64 編碼的字串做為圖片資料：
+Görüntü verilerini base64 kodlu dizeler olarak sağlayabilirsiniz:
 
 ### Python
 
@@ -184,9 +184,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 使用 File API 上傳圖片
+### File API'yi kullanarak resim yükleme
 
-如要處理大型檔案或重複使用同一張圖片，請使用 Files API。請參閱 [Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)。
+Büyük dosyalar için veya aynı resim dosyasını tekrar tekrar kullanabilmek için Files API'yi kullanın. [Files API kılavuzuna](https://ai.google.dev/gemini-api/docs/files?hl=tr) bakın.
 
 ### Python
 
@@ -259,9 +259,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 使用多張圖片做為提示
+## Birden fazla resimle istem oluşturma
 
-您可以在單一提示中提供多張圖片，方法是在 `input` 陣列中加入多個圖片物件：
+`input` dizisine birden fazla resim nesnesi ekleyerek tek bir istemde birden fazla resim sağlayabilirsiniz:
 
 ### Python
 
@@ -339,9 +339,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 物件偵測
+## Nesne algılama
 
-模型經過訓練後，可偵測圖片中的物件並取得定界框座標。座標會根據圖片尺寸縮放至 [0, 1000]。您需要根據原始圖片大小，縮放這些座標。
+Modeller, bir görüntüdeki nesneleri algılayıp sınırlayıcı kutu koordinatlarını almak için eğitilir. Görüntü boyutlarına göre koordinatlar [0, 1000] aralığında ölçeklendirilir. Bu koordinatları orijinal resim boyutunuza göre ölçeklendirmeniz gerekir.
 
 ### Python
 
@@ -462,13 +462,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-如需更多範例，請參閱 [Gemini 教戰手冊](https://github.com/google-gemini/cookbook)。
+Daha fazla örnek için [Gemini Cookbook](https://github.com/google-gemini/cookbook)'u ziyaret edin.
 
-## 區隔
+## Segmentasyon
 
-Gemini 模型不僅能偵測項目，還能區隔項目並提供輪廓遮罩。
+Gemini modelleri yalnızca öğeleri algılamakla kalmaz, aynı zamanda bunları segmentlere ayırır ve kontur maskelerini sağlar.
 
-模型會預測 JSON 清單，其中每個項目都代表一個區隔遮罩。每個項目都有一個定界框 (「`box_2d`」)，格式為 `[ymin, xmin, ymax, xmax]`，內含介於 0 到 1000 之間的正規化座標、識別物件的標籤 (「`label`」)，以及定界框內的區隔遮罩 (以正規化為 0 到 1000 的 `[x, y]` 座標多邊形表示)。
+Model, her öğenin bir segmentasyon maskesini temsil ettiği bir JSON listesi tahmin eder. Her öğe, 0 ile 1000 arasında normalleştirilmiş koordinatlara sahip `[ymin, xmin, ymax, xmax]` biçiminde bir sınırlayıcı kutu ("`box_2d`"), nesneyi tanımlayan bir etiket ("`label`") ve son olarak sınırlayıcı kutunun içindeki segmentasyon maskesini 0-1000'e normalleştirilmiş `[x, y]` koordinatlı bir çokgen olarak içerir.
 
 ### Python
 
@@ -609,75 +609,75 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![桌上擺著杯子蛋糕，木製和玻璃物品以醒目方式顯示](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=zh-tw)
+![Ahşap ve cam nesnelerin vurgulandığı, keklerin bulunduğu bir masa](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=tr)
 
-含有物件和區隔遮罩的區隔輸出範例
+Nesneler ve segmentasyon maskeleri içeren örnek bir segmentasyon çıkışı
 
-## 支援的圖片格式
+## Desteklenen görsel biçimleri
 
-Gemini 支援下列圖片格式 MIME 類型：
+Gemini aşağıdaki resim biçimi MIME türlerini destekler:
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
-- WebP - `image/webp`
+- WEBP - `image/webp`
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-如要瞭解其他檔案輸入方式，請參閱「[檔案輸入方式](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-tw)」指南。
+Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
 
-## 功能
+## Özellikler
 
-所有 Gemini 模型版本都是多模態模型，可用於各種圖像處理和電腦視覺工作，包括但不限於圖像說明、圖像問答、圖像分類、物件偵測和分割。
+Tüm Gemini model sürümleri çok formatlıdır ve görüntü açıklaması, görsel soru ve yanıtlama, görüntü sınıflandırma, nesne algılama ve segmentasyon dahil ancak bunlarla sınırlı olmamak üzere çok çeşitli görüntü işleme ve bilgisayarla görme görevlerinde kullanılabilir.
 
-視品質和效能需求而定，Gemini 可減少使用專業機器學習模型的需求。
+Gemini, kalite ve performans gereksinimlerinize bağlı olarak özel makine öğrenimi modelleri kullanma ihtiyacını azaltabilir.
 
-最新模型版本經過特別訓練，除了通用功能外，還能提升特定工作的準確度，例如強化[物件偵測](#object-detection)和[區隔](#segmentation)。
+En yeni model sürümleri, özellikle [nesne algılama](#object-detection) ve [segmentasyon](#segmentation) gibi genel özelliklerin yanı sıra uzmanlık gerektiren görevlerin doğruluğunu artırmak için eğitilmiştir.
 
-## 限制和重要技術資訊
+## Sınırlamalar ve temel teknik bilgiler
 
-### 檔案限制
+### Dosya sınırı
 
-Gemini 模型每項要求最多可支援 3,600 個圖片檔案。
+Gemini modelleri,istek başına en fazla 3.600 resim dosyasını destekler.
 
-### 代幣計算
+### Jeton hesaplaması
 
-- 如果長邊和短邊都 <= 384 像素，則為 258 個權杖。
-  較大的圖片會分割成 768x768 像素的圖塊，每個圖塊需支付 258 個權杖。
+- Her iki boyut da <= 384 piksel ise 258 jeton.
+  Daha büyük resimler, her biri 258 jeton değerinde olan 768x768 piksellik bloklar halinde düzenlenir.
 
-計算圖塊數量的粗略公式如下：
+Döşeme sayısını hesaplamak için kullanılan yaklaşık formül şöyledir:
 
-- 計算裁剪單元大小，大約是：`floor(min(width, height)` / 1.5)。
-- 將每個維度除以裁剪單元大小，然後相乘，即可取得圖塊數量。
+- Kırpma birimi boyutunu hesaplayın (yaklaşık olarak: `floor(min(width, height)` / 1,5).
+- Her boyutu kırpma birimi boyutuna bölün ve döşeme sayısını elde etmek için sonuçları çarpın.
 
-舉例來說，如果圖片尺寸為 960x540，裁剪單位大小為 360。將每個維度除以 360，圖塊數量為 3 \* 2 = 6。
+Örneğin, 960x540 boyutlarındaki bir resmin kırpma birimi boyutu 360 olur. Her boyutu 360'a bölün. Döşeme sayısı 3 \* 2 = 6 olur.
 
-### 媒體解析度
+### Medya çözünürlüğü
 
-Gemini 3 推出 `media_resolution` 參數，可精細控管多模態視覺處理作業。`media_resolution` 參數會決定**每個輸入圖片或影片影格分配到的詞元數量上限。**
-解析度越高，模型就越能辨識細小文字或細節，但也會增加權杖用量和延遲時間。
+Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sunar. `media_resolution` parametresi, **giriş resmi veya video karesi başına ayrılan maksimum jeton sayısını** belirler.
+Daha yüksek çözünürlükler, modelin ince metinleri okuma veya küçük ayrıntıları tanımlama becerisini artırır ancak jeton kullanımını ve gecikmeyi de artırır.
 
-## 提示與最佳做法
+## İpuçları ve en iyi uygulamalar
 
-- 確認圖片已正確旋轉。
-- 使用清晰的圖片，避免模糊不清。
-- 使用含有文字的單一圖片時，請將文字提示詞*放在* `input` 陣列中的圖片前面。
+- Resimlerin doğru şekilde döndürüldüğünü doğrulayın.
+- Net ve bulanık olmayan resimler kullanın.
+- Metin içeren tek bir resim kullanırken metin istemini `input` dizisinde resmin *önüne* yerleştirin.
 
-## 後續步驟
+## Sırada ne var?
 
-本指南說明如何上傳圖片檔案，以及如何從圖片輸入內容生成文字輸出內容。如要進一步瞭解相關內容，請參閱下列資源：
+Bu kılavuzda, resim dosyalarını nasıl yükleyeceğiniz ve resim girişlerinden nasıl metin çıkışları oluşturacağınız gösterilmektedir. Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw)：進一步瞭解如何上傳及管理檔案，以便搭配 Gemini 使用。
-- [系統指令](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#system-instructions)：
-  系統指令可根據特定需求和用途，引導模型行為。
-- [檔案提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw#prompt-guide)：Gemini API 支援使用文字、圖片、音訊和影片資料提示，也就是多模態提示。
-- [安全指引](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)：生成式 AI 模型有時會產生出乎意料的輸出內容，例如不準確、有偏見或令人反感的內容。後續處理和人工評估是不可或缺的環節，有助於降低這類輸出內容造成危害的風險。
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr): Gemini ile kullanılacak dosyaları yükleme ve yönetme hakkında daha fazla bilgi edinin.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
+  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
+- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istem oluşturmayı destekler.
+- [Güvenlik yönergeleri](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr): Üretken yapay zeka modelleri bazen yanlış, taraflı veya rahatsız edici gibi beklenmedik çıktılar üretebilir. Bu tür çıkışlardan kaynaklanan zarar riskini sınırlamak için sonradan işleme ve insan değerlendirmesi gereklidir.
 
-提供意見
+Geri bildirim gönderin
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-上次更新時間：2026-07-07 (世界標準時間)。
+Son güncelleme tarihi: 2026-07-07 UTC.
 
-想進一步說明嗎？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-07 (世界標準時間)。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-07 UTC."],[],[]]

@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=it
-fetched_at: 2026-07-20T04:43:51.797515+00:00
-title: "Accelera la scoperta con Gemini per la ricerca \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=ar
+fetched_at: 2026-07-27T04:49:32.492873+00:00
+title: "\u062a\u0633\u0631\u064a\u0639 \u0639\u0645\u0644\u064a\u0629 \u0627\u0644\u0627\u0643\u062a\u0634\u0627\u0641 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini \u0644\u0623\u063a\u0631\u0627\u0636 \u0627\u0644\u0628\u062d\u062b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
 
-# Accelera la scoperta con Gemini per la ricerca
+# تسريع عملية الاكتشاف باستخدام Gemini لأغراض البحث
 
-[Ottenere una chiave API Gemini](https://aistudio.google.com/apikey?hl=it)
+[الحصول على مفتاح Gemini API](https://aistudio.google.com/apikey?hl=ar)
 
-I modelli Gemini possono essere utilizzati per far progredire la ricerca di base in tutte le discipline.
-Ecco alcuni modi in cui puoi esplorare Gemini per la tua ricerca:
+يمكن استخدام نماذج Gemini لتطوير الأبحاث الأساسية في مختلف المجالات.
+في ما يلي طرق لاستكشاف Gemini لأغراض بحثك:
 
-- **Analizzare e controllare gli output del modello**: per un'analisi più approfondita, puoi esaminare un
-  candidato di risposta generato dal modello utilizzando strumenti come
-  `CitationMetadata`. Puoi anche configurare le opzioni per la generazione e gli output del modello, ad esempio `responseSchema`, `topP` e `topK`. [Scopri di più](https://ai.google.dev/api/generate-content?hl=it).
-- **Input multimodali**: Gemini può elaborare immagini, audio e video, consentendo una
-  moltitudine di entusiasmanti direzioni di ricerca. [Scopri di più](https://ai.google.dev/gemini-api/docs/vision?hl=it).
-- **Funzionalità di contesto lungo**: Gemini 3.0 Flash e Pro sono dotati di una finestra contestuale da 1 milione di token. [Scopri di più](https://ai.google.dev/gemini-api/docs/long-context?hl=it).
-- **Grow with Google**: accedi rapidamente ai modelli Gemini tramite l'API e Google AI Studio per i casi d'uso di produzione. Se stai cercando una piattaforma basata su Google Cloud, Gemini Enterprise Agent Platform può fornire un'infrastruttura di supporto aggiuntiva.
+- **تحليل نواتج النموذج والتحكّم بها**: لمزيد من التحليل، يمكنك فحص
+  ردّ مقترَح أنشأه النموذج باستخدام أدوات مثل
+  `CitationMetadata`. يمكنك أيضًا ضبط خيارات إنشاء النموذج ونواتجه، مثل `responseSchema` و`topP` و`topK`. [مزيد من المعلومات](https://ai.google.dev/api/generate-content?hl=ar).
+- **الإدخالات المتعدّدة الوسائط**: يمكن لـ Gemini معالجة الصور والمحتوى الصوتي والفيديوهات، ما يتيح العديد من الاتجاهات البحثية المثيرة. [مزيد من المعلومات](https://ai.google.dev/gemini-api/docs/vision?hl=ar).
+- **إمكانات السياق الطويل**: يأتي Gemini 3.0 Flash وGemini Pro مزوَّدين بقدرة استيعاب مليون رمز مميّز. [مزيد من المعلومات](https://ai.google.dev/gemini-api/docs/long-context?hl=ar).
+- **Grow with Google**: يمكنك الوصول بسرعة إلى نماذج Gemini من خلال واجهة برمجة التطبيقات وGoogle AI
+  Studio لحالات الاستخدام في مرحلة الإنتاج. إذا كنت تبحث عن منصة مستندة إلى Google Cloud، يمكن أن توفّر منصة وكيل Gemini Enterprise بنية أساسية إضافية داعمة.
 
-Per supportare la ricerca accademica e promuovere la ricerca all'avanguardia, Google fornisce
-l'accesso ai crediti dell'API Gemini per scienziati e ricercatori accademici tramite il
-[programma accademico Gemini](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=it#gemini-academic-program).
+لدعم الأبحاث الأكاديمية وتعزيز الأبحاث المتطورة، تتيح Google
+للعلماء والباحثين الأكاديميين الوصول إلى أرصدة Gemini API من خلال
+[برنامج Gemini الأكاديمي](https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=ar#gemini-academic-program).
 
-## Inizia a utilizzare Gemini
+## بدء استخدام Gemini
 
-L'API Gemini e Google AI Studio ti aiutano a iniziare a lavorare con i modelli più recenti di Google e a trasformare le tue idee in applicazioni scalabili.
+تساعدك Gemini API وGoogle AI Studio في البدء في استخدام أحدث نماذج Google وتحويل أفكارك إلى تطبيقات قابلة للتوسّع.
 
 ### Python
 
@@ -68,7 +68,7 @@ async function main() {
 await main();
 ```
 
-### REST
+### راحة
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
@@ -82,53 +82,48 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
    }'
 ```
 
-## Accademici in primo piano
+## أكاديميون مميّزون
 
-![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=it)
+![](https://ai.google.dev/static/site-assets/images/diyi-yang.png?hl=ar)
 
-"La nostra ricerca esamina Gemini come modello linguistico visivo (VLM) e i suoi comportamenti agentici in diversi ambienti dal punto di vista della robustezza e della sicurezza. Finora abbiamo valutato la robustezza di Gemini rispetto a distrazioni come le finestre popup quando gli agenti VLM eseguono attività del computer e abbiamo sfruttato Gemini per analizzare l'interazione sociale, gli eventi temporali e i fattori di rischio in base all'input video."
+"يبحث بحثنا في Gemini كنموذج لغوي مرئي (VLM) وسلوكياته كوكيل في بيئات متنوعة من منظورَي المتانة والأمان. لقد قيّمنا حتى الآن متانة Gemini في مواجهة عوامل التشتيت، مثل النوافذ المنبثقة عندما تنفّذ وكلاء VLM مهام على الكمبيوتر، واستخدمنا Gemini لتحليل التفاعل الاجتماعي والأحداث المؤقتة وعوامل الخطر استنادًا إلى إدخالات الفيديو".
 
-[Sito web di Diyi Yang](https://cs.stanford.edu/~diyiy/)
+[موقع Diyi Yang الإلكتروني](https://cs.stanford.edu/~diyiy/)
 
-![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=it)
+![](https://ai.google.dev/static/site-assets/images/lerrel-pinto.png?hl=ar)
 
-"Gemini Pro e Flash, con la loro lunga finestra contestuale, ci hanno aiutato in OK-Robot, il nostro progetto di manipolazione mobile a vocabolario aperto. Gemini consente query e comandi complessi in linguaggio naturale sulla "memoria" del robot: in questo caso, le osservazioni precedenti effettuate dal robot durante una lunga durata di funzionamento. Io e Mahi Shafiullah utilizziamo anche Gemini per scomporre le attività in codice che il robot può eseguire nel mondo reale."
+"يساعدنا Gemini Pro وGemini Flash، بقدرتهما على استيعاب معلومات كثيرة، في مشروع OK-Robot، وهو مشروعنا الخاص بمعالجة الأجهزة الجوّالة باستخدام مفردات مفتوحة. يتيح Gemini إجراء طلبات وأوامر معقّدة باللغة الطبيعية على "ذاكرة" الروبوت، وفي هذه الحالة، الملاحظات السابقة التي سجّلها الروبوت خلال فترة تشغيل طويلة. أنا وMahi Shafiullah نستخدم أيضًا Gemini لتقسيم المهام إلى تعليمات برمجية يمكن للروبوت تنفيذها في العالم الحقيقي".
 
-[Sito web di Lerrel Pinto](https://www.lerrelpinto.com/)
+[موقع Lerrel Pinto الإلكتروني](https://www.lerrelpinto.com/)
 
-## Programma accademico Gemini
+## برنامج Gemini الأكاديمي
 
-I ricercatori accademici qualificati (come docenti, personale e studenti di dottorato) nei [paesi
-supportati](https://ai.google.dev/gemini-api/docs/available-regions?hl=it) possono richiedere di ricevere crediti dell'API Gemini
-e limiti di frequenza più elevati per i progetti di ricerca. Questo supporto consente una maggiore velocità effettiva per gli esperimenti scientifici e fa progredire la ricerca.
+يمكن للباحثين الأكاديميين المؤهّلين (مثل أعضاء هيئة التدريس والموظفين وطلاب الدكتوراه) في [البلدان
+المؤهّلة](https://ai.google.dev/gemini-api/docs/available-regions?hl=ar) التقديم للحصول على أرصدة Gemini API
+وحدود أعلى لمعدّل الاستخدام لمشاريعهم البحثية. يتيح هذا الدعم إنتاجية أعلى للتجارب العلمية ويعزّز الأبحاث.
 
-Siamo particolarmente interessati alle aree di ricerca nella sezione seguente, ma accettiamo candidature da diverse discipline scientifiche:
+نحن مهتمون بشكل خاص بمجالات البحث الواردة في القسم التالي، ولكننا نرحّب بالطلبات من مختلف التخصّصات العلمية:
 
-- **Valutazioni e benchmark**: metodi di valutazione approvati dalla community che
-  possono fornire un forte segnale di rendimento in aree come factualità, sicurezza,
-  rispetto delle istruzioni, ragionamento e pianificazione.
-- **Accelerare la scoperta scientifica a vantaggio dell'umanità**: potenziali
-  applicazioni dell'AI nella ricerca scientifica interdisciplinare, incluse aree
-  come malattie rare e trascurate, biologia sperimentale, scienza dei materiali
-  e sostenibilità.
-- **Incorporazione e interazioni**: utilizzo di modelli linguistici di grandi dimensioni per
-  studiare nuove interazioni nei campi dell'AI incorporata, delle interazioni ambientali,
-  della robotica e dell'interazione uomo-computer.
-- **Funzionalità emergenti**: esplorazione di nuove capacità agentiche necessarie per
-  migliorare il ragionamento e la pianificazione e di come le funzionalità possono essere ampliate durante
-  l'inferenza (ad es. utilizzando Gemini Flash).
-- **Interazione e comprensione multimodali**: identificazione di lacune e
-  opportunità per i modelli di base multimodali per l'analisi, il ragionamento,
-  e la pianificazione in una varietà di attività.
+- **التقييمات والمقاييس**: طرق التقييم التي تحظى بموافقة المنتدى والتي
+  يمكن أن توفّر إشارة أداء قوية في مجالات مثل الدقة والسلامة و
+  اتّباع التعليمات والتحليل والتخطيط.
+- **تسريع الاكتشاف العلمي لصالح البشرية**: التطبيقات المحتمَلة للذكاء الاصطناعي في الأبحاث العلمية المتعدّدة التخصّصات، بما في ذلك مجالات مثل الأمراض النادرة والمهملة وعلم الأحياء التجريبي وعلم المواد والاستدامة.
+- **التجسيد والتفاعلات**: استخدام النماذج اللغوية الكبيرة للبحث عن تفاعلات جديدة في مجالات الذكاء الاصطناعي المجسّد والتفاعلات المحيطة والروبوتات والتفاعل بين الإنسان والكمبيوتر.
+- **الإمكانات الناشئة**: استكشاف إمكانات جديدة للوكيل مطلوبة لـ
+  تعزيز التحليل والتخطيط، وكيفية توسيع الإمكانات أثناء
+  الاستدلال (على سبيل المثال، باستخدام Gemini Flash).
+- **التفاعل والفهم المتعدّد الوسائط**: تحديد الثغرات و
+  الفرص المتاحة للنماذج الأساسية المتعدّدة الوسائط للتحليل والتحليل و
+  التخطيط في مجموعة متنوعة من المهام.
 
-Idoneità: possono presentare domanda solo le persone (docenti, ricercatori o equivalenti) affiliate a un istituto accademico valido o a un'organizzazione di ricerca accademica. Tieni presente che l'accesso all'API e i crediti verranno concessi e rimossi a discrezione di Google. Esaminiamo le domande su base mensile.
+الأهلية: يمكن فقط للأفراد (أعضاء هيئة التدريس أو الباحثين أو ما يعادلهم) التابعين لمؤسسة أكاديمية صالحة أو مؤسسة بحث أكاديمي التقديم. يُرجى العِلم أنّ Google ستمنح أرصدة الوصول إلى واجهة برمجة التطبيقات وتزيلها وفقًا لتقديرها الخاص. نراجع الطلبات شهريًا.
 
-### Inizia la ricerca con l'API Gemini
+### بدء البحث باستخدام Gemini API
 
-[Richiedi ora](https://forms.gle/HMviQstU8PxC5iCt5)
+[تقديم طلب الآن](https://forms.gle/HMviQstU8PxC5iCt5)
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-07-01 UTC.
+تاريخ التعديل الأخير: 2026-07-01 (حسب التوقيت العالمي المتفَّق عليه)
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-01 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-01 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

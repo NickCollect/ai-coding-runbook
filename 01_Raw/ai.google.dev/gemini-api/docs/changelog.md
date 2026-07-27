@@ -1,389 +1,345 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/changelog?hl=ar
-fetched_at: 2026-07-20T04:42:13.676264+00:00
-title: "\u0645\u0644\u0627\u062d\u0638\u0627\u062a \u062d\u0648\u0644 \u0627\u0644\u0625\u0635\u062f\u0627\u0631 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/changelog?hl=zh-CN
+fetched_at: 2026-07-27T04:42:21.658554+00:00
+title: "\u7248\u672c\u8bf4\u660e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-إرسال ملاحظات
+发送反馈
 
-# ملاحظات حول الإصدار
+# 版本说明
 
-تتضمّن هذه الصفحة معلومات حول آخر التعديلات التي تم إجراؤها على Gemini API.
+本页面记录了 Gemini API 的更新。
 
-## ‫6 يوليو 2026
+## 2026 年 7 月 6 日
 
-- توفير [سجلّات المطوّرين](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ar) لواجهة Interactions API: يمكن الآن الاطّلاع على سجلّات طلبات Interactions API المتوافقة في [لوحة بيانات AI Studio](https://aistudio.google.com/logs?hl=ar).
+- 为 Interactions API 提供[开发者日志](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=zh-cn)支持：现在可以在 [AI Studio 信息中心](https://aistudio.google.com/logs?hl=zh-cn)中查看受支持的 Interactions API 调用的日志。
 
-## ‫30 يونيو 2026
+## 2026 年 6 月 30 日
 
-- **إصدار Gemini Omni Flash للمعاينة العامة**: تم طرحه في `gemini-omni-flash-preview`،
-  وهو نموذج متعدد الوسائط عالي الأداء مصمّم لإنشاء الفيديوهات بسرعة عالية
-  وتعديلها بشكل حواري. باستخدام [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar)،
-  يمكنك إنشاء فيديوهات مدتها من 3 إلى 10 ثوانٍ بدقة 720p من أوصاف نصية أو تحريك صور ثابتة،
-  ثم تعديل المخرجات وتحسينها بشكل حواري. للبدء، يُرجى الاطّلاع على دليل
-  [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=ar) وبطاقة نموذج
-  [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=ar).
-- أطلقنا `gemini-3.1-flash-lite-image` (Nano Banana 2 Lite) وأتحناه للجميع، وهو نموذج متعدد الوسائط مدمج ومحسّن لتحقيق أقل وقت استجابة ممكن وإنشاء الصور وتعديلها بفعالية من حيث التكلفة. اطّلِع على بطاقة نموذج [Gemini 3.1
-  Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ar) ودليل [إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar).
+- **Gemini Omni Flash（公开预览版）**：于 `gemini-omni-flash-preview` 发布，是一款高性能多模态模型，旨在实现高速视频生成和对话式视频编辑。借助 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn)，您可以根据文本说明生成 3-10 秒的 720p 视频，或为静态图片添加动画效果，然后以对话方式编辑和优化输出内容。如需开始使用，请参阅 [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=zh-cn) 指南和 [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=zh-cn) 模型卡片。
+- 发布了 `gemini-3.1-flash-lite-image`（Nano Banana 2 Lite），这是我们内置的多模态模型，经过优化，可实现超低延迟和经济高效的图片生成和编辑。请参阅 [Gemini 3.1 Flash Lite Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=zh-cn) 模型卡片和[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)指南。
 
-## ‫24 يونيو 2026
+## 2026 年 6 月 24 日
 
-- **استخدام الكمبيوتر**: أطلقنا نسخة تجريبية عامة من أداة
-  [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) في Gemini 3.5 Flash. يتضمّن هذا الإصدار إجراءات مبسطة مع نوايا، ودعمًا مدمجًا لبيئات المتصفح والأجهزة الجوّالة وأجهزة الكمبيوتر، وسياسات أمان قابلة للضبط، وميزة متقدّمة لرصد عمليات حقن الطلبات.
+- **电脑使用**：在 Gemini 3.5 Flash 中推出了[电脑使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)工具的公开预览版支持。此版本包含基于 intent 的简化操作、对浏览器、移动设备和桌面环境的内置支持、可配置的安全政策，以及高级提示注入检测功能。
 
-## ‫17 يونيو 2026
+## 2026 年 6 月 17 日
 
-- **إتاحة البث لإنشاء الكلام**: أصبح البث متاحًا الآن عبر `streamGenerateContent`
-  (و`stream: true` في Interactions API) للنموذج `gemini-3.1-flash-tts-preview`. لمزيد من المعلومات، يمكنك الاطّلاع على دليل [تحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar#streaming).
+- **支持语音生成的流式传输**：现在支持通过 `streamGenerateContent`（以及 Interactions API 中的 `stream: true`）为 `gemini-3.1-flash-tts-preview` 模型进行流式传输。如需了解详情，请参阅[文字转语音](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn#streaming)指南。
 
-## ‫15 يونيو 2026
+## 2026 年 6 月 15 日
 
-- **إشعار بشأن الإيقاف النهائي**: سيتم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نماذج إنشاء الصور التالية نهائيًا في **17 أغسطس 2026**:
+- **弃用公告**：以下图片生成模型正在被弃用，并将于 **2026 年 8 月 17 日**[关闭](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)：
 
-  - **نماذج Imagen 4 وGemini 3 Image**:
+  - **Imagen 4 和 Gemini 3 Image 模型**：
 
     - `imagen-4.0-generate-001`
     - `imagen-4.0-ultra-generate-001`
     - `imagen-4.0-fast-generate-001`
 
-    لنقل الرمز إلى نقاط نهاية أحدث وثابتة أو نقاط نهاية معاينة، يُرجى الرجوع إلى صفحة
-    [عمليات إيقاف Gemini نهائيًا](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#imagen-models).
-- **إشعار بالإيقاف النهائي**: سيتم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نماذج إنشاء الفيديوهات التالية نهائيًا في **30 يونيو 2026**:
+    如需将代码迁移到更新的稳定版或预览版端点，请参阅 [Gemini 弃用](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn#imagen-models)页面。
+- **弃用公告**：以下视频生成模型即将被弃用，并将于 **2026 年 6 月 30 日**[关闭](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)：
 
-  - **نماذج Veo**:
+  - **Veo 型号**：
 
     - `veo-2.0-generate-001`
     - `veo-3.0-generate-001`
     - `veo-3.0-fast-generate-001`
 
-    عليك تعديل عملية الدمج لاستخدام معرّفات نموذج Veo 3.1 التجريبي (`veo-3.1-generate-preview` و`veo-3.1-fast-generate-preview`) أو نماذج 3.1 المتاحة للجميع من خلال [منصة وكيل Gemini Enterprise](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=ar) لتجنُّب انقطاع الخدمة.
-- **إشعار بإيقاف الميزة نهائيًا**: سيتم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) أداة "العرض السياقي" التجريبية في "منصة Google للتسويق" (واجهة ثابتة لنتائج "التأسيس" في "خرائط Google") نهائيًا في **15 يونيو 2026**:
+    请更新您的集成，以使用 Veo 3.1 预览版模型 ID（`veo-3.1-generate-preview`、`veo-3.1-fast-generate-preview`）或通过 [Gemini Enterprise Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/veo/3-1-generate?hl=zh-cn) 提供的 3.1 正式版模型，以免服务中断。
+- **弃用公告**：实验性 GMP 上下文视图工具（用于“依托 Google 地图进行接地”输出的固定界面）将于 **2026 年 6 月 15 日**[关闭](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)：
 
-## ‫1 يونيو 2026
+## 2026 年 6 月 1 日
 
-- تم الآن [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نماذج Gemini 2.0 التالية:
-
-  - `gemini-2.0-flash`
-  - `gemini-2.0-flash-001`
-  - `gemini-2.0-flash-lite`
-  - `gemini-2.0-flash-lite-001`
-
-  يُرجى استخدام [`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ar) أو
-  [`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar)
-  بدلاً من ذلك.
-
-## ‫28 مايو 2026
-
-- أطلقنا الإصدارَين `gemini-3.1-flash-image` (‫Nano Banana 2) و`gemini-3-pro-image`
-  (‫Nano Banana Pro) من نماذجنا المرئية الأصلية، [Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=ar)
-  و[Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ar)، وهما متوفران بشكل عام.
-- **إتاحة إنشاء صور من فيديوهات**: يمكنك الآن إرسال ملف فيديو (عبر التحميل المباشر أو كعنوان URL علني على YouTube) كبيانات متعددة الوسائط مع طلب نصي لإنشاء صور مصغّرة عالية الجودة أو ملصقات سينمائية للأفلام أو رسومات بيانية تلخيصية. تتوفّر هذه الميزة حصريًا على طراز `gemini-3.1-flash-image`. لمزيد من المعلومات، يُرجى الاطّلاع على دليل
-  [إنشاء صور من فيديوهات](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar#video-to-image).
-- إشعار بإيقاف نهائي: تم إيقاف النموذجين `gemini-3.1-flash-image-preview` و`gemini-3-pro-image-preview` نهائيًا، وسيتم [إيقافهما](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) في 25 يونيو 2026.
-
-## ‫25 مايو 2026
-
-- تم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نموذج `gemini-3.1-flash-lite-preview`. استخدِم
-  [`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar) بدلاً من ذلك.
-
-## ‫19 مايو 2026
-
-- أصدرنا `gemini-3.5-flash`، الإصدار المتاح للجميع من
-  [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ar)،
-  وهو نموذجنا الأكثر تطورًا لتحقيق أداء متقدّم ومستمر في
-  مهام الترميز والمهام التي تتطلب استخدام وكلاء. هذا هو النموذج الذي يستند إليه `gemini-flash-latest` الآن.
-- تم إطلاق **الوكلاء المُدارون في Gemini API** في إصدار مبكر متاح للجميع. يتيح ذلك للمطوّرين إنشاء وكلاء مستقلين ومحتفظين بالحالة وتفعيلهم في بيئات معزولة وآمنة على Linux مُستضافة على Google. لمزيد من المعلومات، يُرجى الاطّلاع على صفحة [نظرة عامة حول العملاء](https://ai.google.dev/gemini-api/docs/agents?hl=ar) و[دليل البدء السريع](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar).
-- تم إطلاق الوكيل المُدار **Antigravity Agent** للأغراض العامة،
-  [`antigravity-preview-05-2026`](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=ar)، في الإصدار التجريبي المتاح للجميع.
-  يمكن لوكيل Antigravity التخطيط بشكل مستقل، والتفكير، وكتابة الرموز البرمجية وتنفيذها، وإدارة الملفات، وتصفُّح الويب داخل حاوية وضع الحماية. راجِع دليل
-  [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar) للاطّلاع على نماذج الرموز والمواصفات.
-
-## ‫7 مايو 2026
-
-- أصدرنا `gemini-3.1-flash-lite` النسخة المتوفّرة للجمهور العام من
-  [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar)،
-  المحسَّنة من أجل السرعة والتوسّع وفعالية التكلفة.
-- إشعار بإيقاف نهائي: سيتم إيقاف النموذج `gemini-3.1-flash-lite-preview` نهائيًا في 11 مايو 2026، وسيتم [إيقافه](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) في 25 مايو 2026.
-
-## ‫6 مايو 2026
-
-- **تغيير غير متوافق قادم**: سيتم تغيير مخطط طلبات [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) واستجاباتها (`outputs` → `steps`) وإعدادات تنسيق الإخراج (`response_format`). سيصبح المخطط الجديد هو المخطط التلقائي في **26 مايو**، وستتم إزالة المخطط القديم في **8 يونيو**.
-  راجِع
-  [دليل نقل البيانات](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=ar)
-  للاطّلاع على التفاصيل.
-
-## ‫5 مايو 2026
-
-- تم تعديل **البحث عن الملفات** ليتوافق مع البحث المتعدّد الوسائط. يمكنك الآن تضمين الصور والبحث فيها بشكل أصلي باستخدام نموذج `gemini-embedding-2`.
-  تتضمّن البيانات الوصفية لتحديد المصدر الآن `media_id` للاقتباسات المرئية و`page_numbers` للإشارة إلى مكان العثور على المعلومات. لمزيد من المعلومات، يُرجى الاطّلاع على دليل [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar).
-
-## ‫4 مايو 2026
-
-- أطلقنا ميزة [Webhooks](https://ai.google.dev/gemini-api/docs/webhooks?hl=ar) المستندة إلى الأحداث في Gemini API لاستبدال عمليات سير العمل التي تستخدم الاستقصاء في Batch API والعمليات الطويلة الأمد.
-
-## ‫30 أبريل 2026
-
-- تم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نموذج `gemini-robotics-er-1.5-preview`. استخدِم
-  [`gemini-robotics-er-1.6-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=ar) بدلاً من ذلك.
-
-## ‫22 أبريل 2026
-
-- تم إصدار `gemini-embedding-2` كمنتج متوفّر للجمهور العام. لمزيد من المعلومات، يُرجى الاطّلاع على صفحة [التضمينات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar).
-
-## ‫21 أبريل 2026
-
-- أصدرنا إصدارات جديدة من وكيل [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar)
-  تتضمّن ميزات التخطيط التعاوني، ودعم العرض المرئي، ودمج خادم MCP،
-  وميزة "البحث في الملفات":
-
-  - ‫[`deep-research-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=ar): تم تصميمه ليكون سريعًا وفعّالاً، وهو مثالي للبث إلى واجهة مستخدم العميل.
-  - ‫[`deep-research-max-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=ar): أعلى مستوى من الشمولية لعملية جمع السياق وتلخيصه بشكل آلي.
-
-## ‫15 أبريل 2026
-
-- أطلقنا [الإصدار التجريبي من نموذج Gemini 3.1 Flash لتحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=ar)، وهو نموذج فعّال من حيث التكلفة، ومعبّر، ويمكن التحكّم فيه. يمكنك الاطّلاع على مستندات [تحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar) لمعرفة المزيد.
-
-## ‫14 أبريل 2026
-
-- أصدرنا `gemini-robotics-er-1.6-preview`، وهو نموذج الروبوتات المعدَّل.
-  يتضمّن الآن إمكانات جديدة، مثل قراءة الآلات الموسيقية، وإمكانات محسّنة للاستدلال المكاني والمادي. لمزيد من المعلومات، يُرجى الاطّلاع على صفحة [Gemini Robotics-ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ar) و[المدوّنة](https://deepmind.google/blog/gemini-robotics-er-1-6?hl=ar).
-- إشعار بإيقاف نهائي: سيتم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نموذج `gemini-robotics-er-1.5-preview` نهائيًا في 30 أبريل 2026 الساعة 9 صباحًا بتوقيت المحيط الهادئ.
-
-## ‫2 أبريل 2026
-
-- تم إطلاق `gemma-4-26b-a4b-it` و`gemma-4-31b-it`، وهما متوفّران على [AI Studio](https://aistudio.google.com?hl=ar) ومن خلال Gemini API،
-  كجزء من إطلاق [Gemma 4](https://ai.google.dev/gemma/docs/core?hl=ar).
-
-## ‫1 أبريل 2026
-
-- أضفنا فئتَي الاستدلال الجديدتَين [Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ar) و[Priority](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar)، ما يوفّر المزيد من الخيارات
-  لتحسين التكلفة أو وقت الاستجابة.
-
-## ‫31 مارس 2026
-
-- أطلقنا الإصدار التجريبي من Veo 3.1 Lite، [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=ar)، وهو نموذج [لإنشاء الفيديوهات](https://ai.google.dev/gemini-api/docs/video?hl=ar) الأكثر فعالية من حيث التكلفة، والمصمّم لتكرار العمليات بسرعة وإنشاء تطبيقات ذات حجم كبير.
-- تم إيقاف نموذج `gemini-2.5-flash-lite-preview-09-2025`. استخدِم
-  [`gemini-3.1-flash-lite-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ar) بدلاً من ذلك.
-
-## ‫26 مارس 2026
-
-- تم إطلاق [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ar)، وهو أحدث نموذج لتحويل الصوت إلى صوت (A2A) مصمَّم للحوار في الوقت الفعلي وتطبيقات الذكاء الاصطناعي التي تعتمد على الصوت. يمكنك الاطّلاع على مستندات [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar) للبدء.
-
-## ‫25 مارس 2026
-
-- أطلقنا نموذجين لإنشاء الموسيقى [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar): [`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=ar)
-  (مقاطع مدتها 30 ثانية) و[`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=ar)
-  (أغانٍ كاملة). يقبل كلا النموذجين إدخالات نصية وصورًا وينشئان محتوًى صوتيًا استريو عالي الجودة بتردد 48 كيلو هرتز. اطّلِع على دليل [إنشاء الموسيقى](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar) للحصول على التفاصيل وأمثلة على الرموز البرمجية.
-
-## ‫23 مارس 2026
-
-- طرح [خطط الفوترة للدفع المسبق والدفع الآجل](https://ai.google.dev/gemini-api/docs/billing?hl=ar) في AI Studio قد تتأثر الحسابات الحالية، لذا يُرجى قراءة مستندات [الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar) للحصول على مزيد من المعلومات.
-
-## ‫18 مارس 2026
-
-- أطلقنا ميزة [الجمع بين الأدوات المضمّنة واستدعاء الدوال](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar) الجديدة التي تتيح استخدام أدوات Gemini المضمّنة إلى جانب أدوات استدعاء الدوال المخصّصة في طلب واحد من واجهة برمجة التطبيقات.
-- أصبحت ميزة [استخدام "خرائط Google" كمصدر](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar#supported_models) متاحة الآن لنماذج Gemini 3.
-
-## ‫16 مارس 2026
-
-- تم طرح [فئات الاستخدام](https://ai.google.dev/gemini-api/docs/billing?hl=ar#about-billing) و[حدود الإنفاق في حساب الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar#tier-spend-caps) المحسّنة
-  لتقديم تجربة أفضل للمستخدمين في ما يتعلّق بالفوترة.
-
-## ‫12 مارس 2026
-
-- أضفنا [حدود الإنفاق على مستوى المشروع](https://ai.google.dev/gemini-api/docs/billing?hl=ar#project-spend-caps) إلى الفوترة في AI Studio.
-
-## ‫10 مارس 2026
-
-- أطلقنا `gemini-embedding-2-preview`، وهو أول نموذج تضمين متعدد الوسائط.
-  يتيح هذا النموذج إدخال النصوص والصور والفيديوهات والمحتوى الصوتي وملفات PDF،
-  ويعمل على ربط جميع أنواع المحتوى بمساحة تضمين موحّدة. لمزيد من المعلومات، اطّلِع على مقالة [عمليات التضمين](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar).
-- إشعار بالإيقاف النهائي: سيتم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نموذج `gemini-2.5-flash-lite-preview-09-2025` نهائيًا في 31 مارس 2026.
-
-## ‫9 مارس 2026
-
-- تم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نموذج معاينة Gemini 3 Pro. يشير `gemini-3-pro-preview` الآن إلى
-  [`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar).
-
-## ‫3 مارس 2026
-
-- أطلقنا الإصدار الحصري من Gemini 3.1 Flash-Lite، وهو أول نموذج Flash-Lite في سلسلة Gemini 3. يمكنك الاطّلاع على [صفحة الطراز](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=ar) لمعرفة المواصفات والتحديثات المحدّدة وإرشادات المطوّرين.
-
-## ‫26 فبراير 2026
-
-- أطلقنا Nano Banana 2، وهو [إصدار تجريبي من Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=ar)، وهو نموذج عالي الكفاءة ومحسَّن للاستخدام السريع وفي حالات الاستخدام التي تتطلّب معالجة كميات كبيرة من البيانات.
-- إشعار بإيقاف الإصدار التجريبي من Gemini 3 Pro (`gemini-3-pro-preview`)
-  [نهائيًا](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) في 9 مارس 2026
-
-## ‫19 فبراير 2026
-
-- أطلقنا [إصدارًا تجريبيًا من Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar)، وهو أحدث إصدار في سلسلة Gemini 3 الجديدة.
-- أطلقنا نقطة نهاية منفصلة `gemini-3.1-pro-preview-customtools`، وهي أفضل في تحديد أولويات الأدوات المخصّصة، للمستخدمين الذين ينشئون باستخدام مزيج من bash والأدوات.
-
-## ‫18 فبراير 2026
-
-- إشعار بإيقاف نهائي: سيتم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) الطُرز التالية نهائيًا في 1 يونيو 2026:
+- 以下 Gemini 2.0 模型现已[关闭](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)：
 
   - `gemini-2.0-flash`
   - `gemini-2.0-flash-001`
   - `gemini-2.0-flash-lite`
   - `gemini-2.0-flash-lite-001`
 
-## ‫17 فبراير 2026
+  请改用 [`gemini-3.5-flash`](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) 或 [`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn)。
 
-- تم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) النماذج التالية:
+## 2026 年 5 月 28 日
+
+- 我们发布了 `gemini-3.1-flash-image` (Nano Banana 2) 和 `gemini-3-pro-image` (Nano Banana Pro)，这是我们原生视觉模型 [Gemini 3.1 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-cn) 和 [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-cn) 的正式版 (GA)。
+- **支持视频转图片生成**：您现在可以传递视频文件（通过直接上传或作为公开的 YouTube 网址），将其作为多模态上下文与文本提示一起使用，以生成优质的缩略图、电影级海报或摘要信息图表。此功能仅在 `gemini-3.1-flash-image` 型号上受支持。如需了解详情，请参阅[视频转图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn#video-to-image)指南。
+- 弃用公告：`gemini-3.1-flash-image-preview` 和 `gemini-3-pro-image-preview` 模型已弃用，并将于 2026 年 6 月 25 日[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。
+
+## 2026 年 5 月 25 日
+
+- `gemini-3.1-flash-lite-preview` 模型已[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。请改用 [`gemini-3.1-flash-lite`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn)。
+
+## 2026 年 5 月 19 日
+
+- `gemini-3.5-flash`发布了 [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) 的正式版 (GA)，这是我们最智能的模型，可在智能体和编码任务中持续提供前沿性能。现在，`gemini-flash-latest` 背后的模型是这个。
+- 发布了 **Gemini API 中的托管式智能体**，并进入公开预览阶段。这样一来，开发者便可构建和部署在安全、隔离的 Google 托管式 Linux 沙盒环境中运行的自主有状态智能体。如需了解详情，请参阅[代理概览](https://ai.google.dev/gemini-api/docs/agents?hl=zh-cn)页面和[快速入门](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=zh-cn)。
+- 发布了通用 **Antigravity Agent** 受管代理 [`antigravity-preview-05-2026`](https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=zh-cn)，目前处于公开预览版阶段。
+  Antigravity 智能体可以在其沙盒容器内自主规划、推理、编写和执行代码、管理文件以及浏览网页。如需查看代码示例和规范，请参阅 [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-cn) 指南。
+
+## 2026 年 5 月 7 日
+
+- 发布了 `gemini-3.1-flash-lite`，即 [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) 的正式版 (GA)，该模型在速度、规模和成本效益方面进行了优化。
+- 弃用公告：`gemini-3.1-flash-lite-preview` 模型将于 2026 年 5 月 11 日弃用，并于 2026 年 5 月 25 日[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。
+
+## 2026 年 5 月 6 日
+
+- **即将发生的重大变更**：[互动 API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 请求和响应架构（`outputs` → `steps`）以及输出格式配置 (`response_format`) 即将发生变更。新架构将于 **5 月 26 日**成为默认架构，旧版架构将于 **6 月 8 日**移除。
+  如需了解详情，请参阅[迁移指南](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=zh-cn)。
+
+## 2026 年 5 月 5 日
+
+- 更新了**文件搜索**，以支持多模态搜索。您现在可以使用 `gemini-embedding-2` 模型以原生方式嵌入和搜索图片。接地元数据现在包含 `media_id`（用于视觉引用）和 `page_numbers`（用于指示信息来源）。如需了解详情，请参阅[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)指南。
+
+## 2026 年 5 月 4 日
+
+- 在 Gemini API 中推出了事件驱动型 [Webhook](https://ai.google.dev/gemini-api/docs/webhooks?hl=zh-cn) 支持，以取代 Batch API 和长时间运行的操作的轮询工作流。
+
+## 2026 年 4 月 30 日
+
+- `gemini-robotics-er-1.5-preview` 模型已[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。请改用 [`gemini-robotics-er-1.6-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-robotics-er-1.6-preview?hl=zh-cn)。
+
+## 2026 年 4 月 22 日
+
+- 已正式发布 (GA) `gemini-embedding-2`。如需了解详情，请参阅[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)页面。
+
+## 2026 年 4 月 21 日
+
+- 发布了新版[深度研究](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn)代理，其中包含协作规划、可视化支持、MCP 服务器集成和文件搜索功能：
+
+  - [`deep-research-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=zh-cn)：专为速度和效率而设计，非常适合流式传输回客户端界面。
+  - [`deep-research-max-preview-04-2026`](https://ai.google.dev/gemini-api/docs/models/deep-research-max-preview-04-2026?hl=zh-cn)：自动收集和合成上下文的最大全面性。
+
+## 2026 年 4 月 15 日
+
+- 推出了 [Gemini 3.1 Flash TTS 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-tts-preview?hl=zh-cn)，这是一款经济实惠、富有表现力且可控的文字转语音模型。如需了解详情，请参阅 [Text-to-Speech](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn) 文档。
+
+## 2026 年 4 月 14 日
+
+- 发布了更新后的机器人模型 `gemini-robotics-er-1.6-preview`。
+  现在，它具备了新的功能，例如读取乐器，以及改进的空间和物理推理能力。如需了解详情，请参阅 [Gemini Robotics-ER](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-cn) 页面和[博客](https://deepmind.google/blog/gemini-robotics-er-1-6?hl=zh-cn)。
+- 弃用公告：`gemini-robotics-er-1.5-preview` 模型将于 2026 年 4 月 30 日上午 9 点（太平洋标准时间）[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。
+
+## 2026 年 4 月 2 日
+
+- 已发布 `gemma-4-26b-a4b-it` 和 `gemma-4-31b-it`，可在 [AI Studio](https://aistudio.google.com?hl=zh-cn) 中使用，也可通过 Gemini API 使用，是 [Gemma 4](https://ai.google.dev/gemma/docs/core?hl=zh-cn) 发布的一部分。
+
+## April 1, 2026
+
+- 推出了新的 [Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn) 和 [Priority](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn) 推理层级，可提供更多选项来优化费用或延迟时间。
+
+## 2026 年 3 月 31 日
+
+- 推出了 Veo 3.1 Lite 预览版 [`veo-3.1-lite-generate-preview`](https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=zh-cn)，这是我们最具成本效益的[视频生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)模型，专为快速迭代和构建高容量应用而设计。
+- `gemini-2.5-flash-lite-preview-09-2025` 模型已关闭。请改用 [`gemini-3.1-flash-lite-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=zh-cn)。
+
+## 2026 年 3 月 26 日
+
+- 发布了 [`gemini-3.1-flash-live-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=zh-cn)，这是最新的音频转音频 (A2A) 模型，专为实时对话和语音优先的 AI 应用而设计。请阅读 [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn) 文档，开始使用该 API。
+
+## 2026 年 3 月 25 日
+
+- 推出了 [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-cn) 音乐生成模型：[`lyria-3-clip-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-clip-preview?hl=zh-cn)（30 秒片段）和 [`lyria-3-pro-preview`](https://ai.google.dev/gemini-api/docs/models/lyria-3-pro-preview?hl=zh-cn)（完整歌曲）。这两款模型均可接受文本和图片输入，并生成高品质的 48 kHz 立体声音频。如需了解详情和代码示例，请参阅[音乐生成](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-cn)指南。
+
+## 2026 年 3 月 23 日
+
+- 在 AI Studio 中推出了[预付款和后付费结算方案](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn)。现有账号可能会受到影响；如需了解详情，请参阅[结算](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn)文档。
+
+## 2026 年 3 月 18 日
+
+- 发布了新的[内置工具和函数调用组合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)功能，让您可以在一次 API 调用中使用 Gemini 的内置工具和自定义函数调用工具。
+- Gemini 3 模型现在支持[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn#supported_models)。
+
+## 2026 年 3 月 16 日
+
+- 推出了经过改版的[使用层级](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn#about-billing)和[结算账号支出上限](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn#tier-spend-caps)，以提升用户结算体验。
+
+## 2026 年 3 月 12 日
+
+- 在 AI Studio 的结算中引入了[项目级支出上限](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn#project-spend-caps)。
+
+## 2026 年 3 月 10 日
+
+- 发布了我们的首个多模态嵌入模型 `gemini-embedding-2-preview`。
+  它支持文本、图片、视频、音频和 PDF 输入，可将所有模态映射到统一的嵌入空间中。如需了解详情，请参阅[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)。
+- 弃用公告：`gemini-2.5-flash-lite-preview-09-2025` 模型将于 2026 年 3 月 31 日[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。
+
+## 2026 年 3 月 9 日
+
+- Gemini 3 Pro 预览版模型已[关闭](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。`gemini-3-pro-preview` 现在指向 [`gemini-3.1-pro-preview`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn)。
+
+## 2026 年 3 月 3 日
+
+- 推出了 Gemini 3.1 Flash-Lite 预览版，这是 Gemini 3 系列中的首款 Flash-Lite 模型。如需了解规格、具体更新和开发者指南，请参阅[模型页面](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-preview?hl=zh-cn)。
+
+## 2026 年 2 月 26 日
+
+- 推出了 Nano Banana 2（[Gemini 3.1 Flash Image 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image-preview?hl=zh-cn)），这是一款高效模型，专为极致速度与大规模量产场景而优化。
+- 弃用公告：Gemini 3 Pro（预览版）(`gemini-3-pro-preview`) 将于 2026 年 3 月 9 日[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。
+
+## 2026 年 2 月 19 日
+
+- 发布了 [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn)，这是全新 Gemini 3 系列中的最新迭代版本。
+- 为同时使用 Bash 和工具进行构建的用户推出了一个单独的端点 `gemini-3.1-pro-preview-customtools`，该端点可以更好地确定自定义工具的优先级。
+
+## 2026 年 2 月 18 日
+
+- 弃用公告：以下模型将于 2026 年 6 月 1 日[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)：
+
+  - `gemini-2.0-flash`
+  - `gemini-2.0-flash-001`
+  - `gemini-2.0-flash-lite`
+  - `gemini-2.0-flash-lite-001`
+
+## 2026 年 2 月 17 日
+
+- 以下型号已[停用](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)：
 
   - `gemini-2.5-flash-preview-09-25`
   - `imagen-4.0-generate-preview-06-06`
   - `imagen-4.0-ultra-generate-preview-06-06`
 
-## ‫4 يناير 2026
+## 2026 年 1 月 29 日
 
-- أطلقنا ميزة "استخدام الكمبيوتر" في `gemini-3-pro-preview` و`gemini-3-flash-preview`.
+- 在 `gemini-3-pro-preview` 和 `gemini-3-flash-preview` 中推出了对“计算机使用”工具的支持。
 
-## ‫21 يناير 2026
+## 2026 年 1 月 21 日
 
-- تم تغيير الأسماء المستعارة لـ `latest`:
+- 更改了 `latest` 别名：
 
-  - تم التبديل من `gemini-pro-latest` إلى `gemini-3-pro-preview`
-  - تم التبديل من `gemini-flash-latest` إلى `gemini-3-flash-preview`
+  - `gemini-pro-latest` 已切换为 `gemini-3-pro-preview`
+  - `gemini-flash-latest` 已切换为 `gemini-3-flash-preview`
 
-## ‫15 يناير 2026
+## 2026 年 1 月 15 日
 
-- إشعار بإيقاف نهائي: سيتم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) النماذج التالية نهائيًا في 17 فبراير 2026:
+- 弃用公告：以下模型将于 2026 年 2 月 17 日[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)：
 
   - `gemini-2.5-flash-preview-09-25`
   - `imagen-4.0-generate-preview-06-06`
   - `imagen-4.0-ultra-generate-preview-06-06`
-- تم إيقاف نموذج `gemini-2.5-flash-image-preview`.
+- `gemini-2.5-flash-image-preview` 模型已关闭。
 
-## ‫14 يناير 2026
+## 2026 年 1 月 14 日
 
-- تم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نموذج `text-embedding-004`.
+- `text-embedding-004` 模型已[关停](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。
 
-## ‫13 يناير 2026
+## 2026 年 1 月 13 日
 
-- تمت إضافة درجات دقة 4K لإنشاء الفيديوهات في [Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar)، كما أصبح بإمكانك إنشاء فيديوهات بالوضع العمودي بجميع درجات الدقة.
+- 为 [Veo](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn) 添加了 4K 输出分辨率，并为所有分辨率的纵向视频提供了更多支持。
 
-## ‫12 يناير 2026
+## 2026 年 1 月 12 日
 
-- تم إطلاق ميزة مراحل نشاط النموذج. ستحدّد بعض النماذج الآن مرحلة دورة الحياة والجدول الزمني لإيقافها نهائيًا. يُرجى الاطّلاع على المستندات التالية لمزيد من المعلومات:
+- 推出了模型生命周期功能。现在，部分模型将指定生命周期阶段和弃用时间表。如需了解详情，请参阅以下文档：
 
-  - [مراحل النموذج](https://ai.google.dev/api/generate-content?hl=ar#ModelStatus)
+  - [模型阶段](https://ai.google.dev/api/generate-content?hl=zh-cn#ModelStatus)
 
-## ‫8 يناير 2026
+## 2026 年 1 月 8 日
 
-- أتحنا استخدام حِزم Cloud Storage وأي عناوين URL موقّعة مسبقًا لقواعد بيانات عامة وخاصة كمصدر لإدخال البيانات في Gemini API. تمت أيضًا زيادة الحدّ الأقصى لحجم الملف من 20 ميغابايت إلى 100 ميغابايت. لمزيد من التفاصيل، يُرجى الاطّلاع على [دليل
-  طرق إدخال الملفات](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar).
+- 推出了对 Cloud Storage 存储分区以及任何公共和私有数据库预签名网址的支持，作为 Gemini API 的数据输入源。文件大小上限也从 20MB 提高到 100MB。如需了解详情，请参阅[文件输入方法指南](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-cn)。
 
-## ‫19 ديسمبر 2025
+## 2025 年 12 月 19 日
 
-- تم تقديم تغيير غير متوافق مع الإصدارات السابقة في Interactions API في الإصدار التجريبي 1. تمت إعادة تسمية الحقل `total_reasoning_tokens` ليصبح `total_thought_tokens` بهدف التوافق بشكل أفضل مع مفهوم "الأفكار" في نماذج التفكير.
+- 在 v1beta 中对 Interactions API 引入了重大变更。`total_reasoning_tokens` 字段已重命名为 `total_thought_tokens`，以便更好地与思考模型中的“想法”概念保持一致。
 
-## ‫17 ديسمبر 2025
+## 2025 年 12 月 17 日
 
-- أطلقنا الإصدار الحصري من Gemini 3 Flash، `gemini-3-flash-preview`، الذي يقدّم أداءً سريعًا
-  بمستوى متطوّر ينافس النماذج الأكبر حجمًا وبتكلفة أقل. مع إمكانات محسّنة للاستدلال المرئي والمكاني والترميز بالذكاء الاصطناعي الوكيل يمكنك الاطّلاع على المستندات حول بعض الميزات الجديدة، بما في ذلك:
+- 推出了 Gemini 3 Flash 预览版 `gemini-3-flash-preview`，以远低于大型模型的成本，提供可媲美大型模型的快速前沿级性能。升级了视觉和空间推理能力，以及代理式编码能力。阅读有关部分新功能的文档，包括：
 
-  - [الردود المتعدّدة الوسائط من الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#multimodal)
-  - [تنفيذ الرموز البرمجية باستخدام الصور](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar#images)
+  - [多模态函数响应](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#multimodal)
+  - [使用图片执行代码](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn#images)
 
-## ‫12 ديسمبر 2025
+## 2025 年 12 月 12 日
 
-- تم إصدار `gemini-2.5-flash-native-audio-preview-12-2025`،
-  وهو نموذج صوتي جديد مدمج في Live API. يحسّن هذا التحديث قدرة النموذج على التعامل مع مهام سير العمل المعقّدة. لمزيد من المعلومات، يُرجى الاطّلاع على
-  [دليل Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar) و[Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-live?hl=ar).
+- 发布了 `gemini-2.5-flash-native-audio-preview-12-2025`，这是 Live API 的新原生音频模型。此更新可提高模型处理复杂工作流程的能力。如需了解详情，请参阅 [Live API 指南](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn)和 [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-live?hl=zh-cn)。
 
-## ‫11 ديسمبر 2025
+## 2025 年 12 月 11 日
 
-- تم إطلاق Interactions API. توفر واجهة برمجة التطبيقات هذه واجهة موحّدة للتفاعل مع نماذج Gemini ووكلائه. لمزيد من المعلومات، يُرجى الاطّلاع على دليل [واجهة برمجة التطبيقات للتفاعلات](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar).
-- أطلقنا ميزة "وكيل Deep Research" في Gemini في إصدار تجريبي. يمكنها
-  تخطيط وتنفيذ وتجميع نتائج مهام البحث المتعدّدة الخطوات بشكل مستقل. يمكنك الاطّلاع على التفاصيل في دليل [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar).
+- 发布了 Interactions API。此 API 提供了与 Gemini 模型和代理交互的统一界面。如需了解详情，请参阅[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 指南。
+- 推出了 Gemini Deep Research 智能体预览版。它可以自主规划、执行和汇总多步骤研究任务的结果。如需了解详情，请参阅 [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 指南。
 
-## ‫10 ديسمبر 2025
+## 2025 年 12 月 10 日
 
-- أطلقنا تحسينات على [نماذج تحويل النص إلى كلام](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar)، وهي إصدار Gemini 2.5 Flash التجريبي من ميزة تحويل النص إلى كلام (المحسّن لتحقيق سرعة استجابة عالية) وإصدار Gemini 2.5 Pro التجريبي من ميزة تحويل النص إلى كلام (المحسّن لتحقيق جودة عالية)، بما في ذلك تعزيز التعبيرية، وتحديد السرعة بدقة، وإجراء حوار سلس.
+- 推出了对[文字转语音模型](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)的增强功能，包括 Gemini 2.5 Flash TTS 预览版（经过优化，可实现低延迟）和 Gemini 2.5 Pro TTS 预览版（经过优化，可实现高质量），可提供更丰富的表现力、更精准的语速和更流畅的对话。
 
-## ‫9 ديسمبر 2025
+## 2025 年 12 月 9 日
 
-- تم إيقاف نماذج Gemini Live API التالية:
+- 以下 Gemini Live API 模型现已关闭：
   - `gemini-2.0-flash-live-001`
   - `gemini-live-2.5-flash-preview`
 
-## ‫5 ديسمبر 2025
+## 2024 年 12 月 5 日
 
-- سيبدأ تحصيل فواتير Gemini 3 مقابل ميزة [تحديد المصدر من خلال "بحث Search"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) في 5 يناير 2026.
+- Gemini 3 的[依托 Google 搜索进行接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)功能将于 2026 年 1 月 5 日开始结算。
 
-## ‫4 ديسمبر 2025
+## 2025 年 12 月 4 日
 
-- إشعار بإيقاف نهائي: سيتم إيقاف نموذج `gemini-2.5-flash-image-preview` نهائيًا في 15 يناير 2026.
+- 弃用公告：`gemini-2.5-flash-image-preview` 模型将于 2026 年 1 月 15 日关停。
 
-## ‫3 ديسمبر 2025
+## 2025 年 12 月 3 日
 
-- إشعار بإيقاف نهائي: سيتم إيقاف النموذج `text-embedding-004` نهائيًا في 14 يناير 2026.
+- 弃用公告：`text-embedding-004` 模型将于 2026 年 1 月 14 日停止服务。
 
-## ‫20 نوفمبر 2025
+## 2025 年 11 月 20 日
 
-- أطلقنا Gemini 3 Pro Image Preview، `gemini-3-pro-image-preview`، وهو الإصدار التالي من نموذج Nano Banana. اطّلِع على صفحة [إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) لمزيد من التفاصيل.
+- 发布了 Gemini 3 Pro Image 预览版 `gemini-3-pro-image-preview`，这是 Nano Banana 模型的下一代版本。如需了解详情，请参阅[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)页面。
 
-## ‫18 نوفمبر 2025
+## 2025 年 11 月 18 日
 
-- أطلقنا أول نموذج من سلسلة Gemini 3، وهو `gemini-3-pro-preview`، نموذجنا المتطوّر للاستدلال وفهم المحتوى المتعدد الوسائط، والذي يتميّز بقدرات فعّالة في الترميز والعمل كوكيل.
+- 发布了首款 Gemini 3 系列模型 `gemini-3-pro-preview`，这是我们前沿的推理和多模态理解模型，具有强大的智能体和编码能力。
 
-  بالإضافة إلى التحسينات في الذكاء والأداء، يقدّم الإصدار التجريبي من Gemini 3 Pro سلوكًا جديدًا بشأن ما يلي:
+  除了在智能性和性能方面有所改进之外，Gemini 3 Pro 预览版还引入了以下方面的新行为：
 
-  - [دقّة الوسائط](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar)
-  - [التوقيعات الفكرية](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ar)
-  - [مستويات التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#thinking-levels)
+  - [媒体分辨率](https://ai.google.dev/gemini-api/docs/media-resolution?hl=zh-cn)
+  - [思考签名](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=zh-cn)
+  - [思考等级](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#thinking-levels)
 
-  يمكنك الاطّلاع على [دليل المطوّرين الخاص بإصدار Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=ar) لمعرفة المزيد حول عملية نقل البيانات والميزات الجديدة والمواصفات.
+  如需了解迁移、新功能和规范，请参阅 [Gemini 3 开发者指南](https://ai.google.dev/gemini-api/docs/gemini-3?hl=zh-cn)。
 
-## ‫11 نوفمبر ٢٠٢٥
+## 2025 年 11 月 11 日
 
-- إشعار بإيقاف نهائي: سيتم إيقاف النماذج التالية نهائيًا:
+- 弃用公告：以下模型将被关闭：
 
-  - ‫12 نوفمبر:
+  - 11 月 12 日：
 
     - `veo-3.0-fast-generate-preview`
     - `veo-3.0-generate-preview`
-  - ‫14 نوفمبر:
+  - 11 月 14 日：
 
     - `gemini-2.0-flash-exp-image-generation`
     - `gemini-2.0-flash-preview-image-generation`
 
-## ‫10 نوفمبر 2025
+## 2025 年 11 月 10 日
 
-- تم إيقاف النموذج التالي:
+- 以下模型已关闭：
 
   - `imagen-3.0-generate-002`
 
-  يمكنك استخدام [Imagen 4](https://ai.google.dev/gemini-api/docs/imagen?hl=ar#imagen-4) بدلاً من ذلك. يمكنك الرجوع إلى
-  [جدول إيقاف Gemini نهائيًا](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) للاطّلاع على مزيد من التفاصيل.
+  请改用 [Imagen 4](https://ai.google.dev/gemini-api/docs/imagen?hl=zh-cn#imagen-4)。如需了解详情，请参阅 [Gemini 弃用表](https://ai.google.dev/gemini-api/docs/deprecations?hl=zh-cn)。
 
-## ‫6 نوفمبر 2025
+## 2025 年 11 月 6 日
 
-- أطلقنا واجهة برمجة التطبيقات File Search API في إصدار مبكر متاح للجميع، ما يتيح للمطوّرين الاستناد إلى بياناتهم الخاصة في الردود. يمكنك الانتقال إلى صفحة [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar) الجديدة للاطّلاع على مزيد من المعلومات.
+- 面向公众预览版发布了文件搜索 API，使开发者能够以自己的数据为依据生成回答。如需了解详情，请参阅新版[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)页面。
 
-## ‫4 نوفمبر 2025
+## 2025 年 11 月 4 日
 
-- بالنسبة إلى [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)، تم تخفيض عدد الرموز المميزة المدخلة للصور من 1290 إلى 258، ما أدّى إلى خفض تكلفة تعديل الصور.
-- إشعار بإيقاف نهائي: سيتم إيقاف النماذج التالية نهائيًا:
+- 对于 [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)，图片的输入 token 数已从 1,290 减少到 258，从而降低了图片编辑的费用。
+- 弃用公告：以下模型将被关闭：
 
-  - ‫18 نوفمبر:
+  - 11 月 18 日：
 
     - `gemini-2.5-flash-lite-preview-06-17`
     - `gemini-2.5-flash-preview-05-20`
-  - ‫2 ديسمبر:
+  - 12 月 2 日：
 
     - `gemini-2.0-flash-thinking-exp`
     - `gemini-2.0-flash-thinking-exp-01-21`
@@ -391,7 +347,7 @@ Google uses AI technology to translate content into your preferred language. AI 
     - `gemini-2.5-pro-preview-03-25`
     - `gemini-2.5-pro-preview-05-06`
     - `gemini-2.5-pro-preview-06-05`
-  - ‫9 ديسمبر:
+  - 12 月 9 日：
 
     - `gemini-2.0-flash-lite-preview`
     - `gemini-2.0-flash-lite-preview-02-05`
@@ -399,614 +355,533 @@ Google uses AI technology to translate content into your preferred language. AI 
     - `gemini-2.0-pro-exp`
     - `gemini-2.0-pro-exp-02-05`
 
-## ‫29 أكتوبر 2025
+## 2025 年 10 月 29 日
 
-- أطلقنا أداة [تسجيل البيانات ومجموعات البيانات](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=ar) الجديدة
-  لـ Gemini API.
+- 针对 Gemini API 推出了新的[日志记录和数据集](https://ai.google.dev/gemini-api/docs/logs-datasets?hl=zh-cn)工具。
 
-## ‫20 أكتوبر 2025
+## 2025 年 10 月 20 日
 
-- تم إيقاف نماذج Gemini Live API التالية نهائيًا:
+- 以下 Gemini Live API 模型现已关闭：
 
   - `gemini-2.5-flash-preview-native-audio-dialog`
   - `gemini-2.5-flash-exp-native-audio-thinking-dialog`
 
-  يمكنك استخدام `gemini-2.5-flash-native-audio-preview-09-2025` بدلاً من ذلك.
-- إشعار بإيقاف الخدمة نهائيًا: سيتم إيقاف `gemini-2.0-flash-live-001` و`gemini-live-2.5-flash-preview` نهائيًا في 9 ديسمبر 2025.
+  您可以改用 `gemini-2.5-flash-native-audio-preview-09-2025`。
+- 弃用公告：`gemini-2.0-flash-live-001` 和 `gemini-live-2.5-flash-preview` 将于 2025 年 12 月 9 日关闭。
 
-## ‫17 أكتوبر 2025
+## 2025 年 10 月 17 日
 
-- أصبحت ميزة **الاستناد إلى "خرائط Google"** متاحة للجميع. لمزيد من المعلومات، يُرجى الاطّلاع على مستندات [استخدام "خرائط Google" كمصدر](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar).
+- **Grounding with Google Maps** 现已正式发布。如需了解详情，请参阅[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)文档。
 
-## ‫15 أكتوبر 2025
+## 2025 年 10 月 15 日
 
-- أصدرنا [النموذجَين Veo 3.1 و3.1 Fast](https://ai.google.dev/gemini-api/docs/video?hl=ar#veo-3.1) في
-  نسخة حصرية متاحة للجميع، مع ميزات جديدة، بما في ذلك:
+- 发布了 [Veo 3.1 和 3.1 Fast](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn#veo-3.1) 型号的公开预览版，新增了以下功能：
 
-  - إطالة مدة الفيديوهات التي تم إنشاؤها بواسطة Veo
-  - الاستناد إلى ما يصل إلى ثلاث صور لإنشاء فيديو
-  - توفير صور الإطار الأول والأخير لإنشاء فيديوهات منها
+  - 延长 Veo 创作的视频。
+  - 参考最多三张图片来生成视频。
+  - 提供第一帧和最后一帧图片，以便生成视频。
 
-  أتاحت هذه الميزة أيضًا خيارات إضافية لمدد فيديوهات Veo 3 الناتجة: 4 و6 و8 ثوانٍ.
-- إشعار بإيقاف الخدمة نهائيًا: سيتم إيقاف `veo-3.0-generate-preview` و`veo-3.0-fast-generate-preview` نهائيًا في 12 نوفمبر 2025.
+  此次发布还新增了更多 Veo 3 输出视频时长选项：4 秒、6 秒和 8 秒。
+- 弃用公告：`veo-3.0-generate-preview` 和 `veo-3.0-fast-generate-preview` 将于 2025 年 11 月 12 日关停。
 
-## ‫7 أكتوبر 2025
+## 2025 年 10 月 7 日
 
-- أطلقنا [النسخة الحصرية من Gemini 2.5 لاستخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar)
+- 发布了 [Gemini 2.5 Computer Use 预览版](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)
 
-## ‫2 أكتوبر 2025
+## 2025 年 10 月 2 日
 
-- إطلاق الإصدار العام من Gemini 2.5 Flash Image: [إنشاء الصور باستخدام Gemini](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)
+- 正式发布 Gemini 2.5 Flash Image：[使用 Gemini 生成图片](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)
 
-## ‫29 سبتمبر 2025
+## 2025 年 9 月 29 日
 
-- تم إيقاف نماذج Gemini 1.5 التالية:
+- 以下 Gemini 1.5 模型现已关闭：
   - `gemini-1.5-pro`
   - `gemini-1.5-flash-8b`
   - `gemini-1.5-flash`
 
-## ‫25 سبتمبر 2025
+## 2025 年 9 月 25 日
 
-- أطلقنا نموذج Gemini Robotics-ER 1.5 في نسخة تجريبية. يمكنك الاطّلاع على
-  [نظرة عامة حول الروبوتات](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ar)
-  للتعرّف على كيفية استخدام النموذج في تطبيق الروبوتات.
-- تم إطلاق نماذج المعاينة التالية:
+- 发布了 Gemini Robotics-ER 1.5 预览版模型。请参阅[机器人技术概览](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-cn)，了解如何将该模型用于机器人技术应用。
+- 发布了以下预览模型：
 
   - `gemini-2.5-flash-preview-09-2025`
   - `gemini-2.5-flash-lite-preview-09-2025`
 
-  لمزيد من التفاصيل، انتقِل إلى صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+  如需了解详情，请参阅[模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn)页面。
 
-## ‫23 سبتمبر 2025
+## 2025 年 9 月 23 日
 
-- تم إطلاق `gemini-2.5-flash-native-audio-preview-09-2025`،
-  وهو نموذج صوتي جديد مدمج في Live API مع ميزة محسّنة لاستدعاء الدوال
-  ومعالجة أفضل لعمليات قطع الكلام. لمزيد من المعلومات، يُرجى الاطّلاع على
-  [دليل Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar) و[Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-native-audio).
+- 发布了 `gemini-2.5-flash-native-audio-preview-09-2025`，这是 Live API 的新原生音频模型，改进了函数调用和语音截断处理。如需了解详情，请参阅 [Live API 指南](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn)和 [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-native-audio)。
 
-## ‫16 سبتمبر 2025
+## 2025 年 9 月 16 日
 
-- إشعار بإيقاف الخدمة: سيتم إيقاف النماذج التالية في أكتوبر 2025:
+- 弃用公告：以下模型将于 2025 年 10 月关闭：
 
   - `embedding-001`
   - `embedding-gecko-001`
-  - `gemini-embedding-exp-03-07` ‏(`gemini-embedding-exp`)
+  - `gemini-embedding-exp-03-07` (`gemini-embedding-exp`)
 
-  راجِع صفحة [التضمينات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar) للاطّلاع على تفاصيل حول أحدث نموذج للتضمينات.
+  如需详细了解最新的嵌入模型，请参阅[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)页面。
 
-## ‫10 سبتمبر 2025
+## 2025 年 9 月 10 日
 
-- أتحنا استخدام
-  [نموذج Embeddings في Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar#batch-embedding)،
-  وأضفنا Batch API إلى
-  [مكتبة التوافق مع OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=ar#batch) لتوفير طرق أسهل
-  للبدء في استخدام طلبات البحث المجمّعة.
+- 发布了对 [Batch API 中的 Embeddings 模型](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn#batch-embedding)的支持，并向 [OpenAI 兼容性库](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn#batch)添加了 Batch API，以便更轻松地开始使用批量查询。
 
-## ‫9 سبتمبر 2025
+## 2025 年 9 月 9 日
 
-- أطلقنا الإصدار العام من Veo 3 وVeo 3 Fast، مع أسعار أقل وخيارات جديدة لنسب العرض إلى الارتفاع والدقة والتحميل الأولي. يمكنك الاطّلاع على [مستندات Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar#model-features) للحصول على مزيد من المعلومات.
+- 发布了 Veo 3 和 Veo 3 Fast 正式版，价格更低，并新增了宽高比、分辨率和种子选项。如需了解详情，请参阅 [Veo 文档](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn#model-features)。
 
-## ‫26 أغسطس 2025
+## 2025 年 8 月 26 日
 
-- أطلقنا [معاينة الصور في Gemini 2.5](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-image-preview)،
-  أحدث نموذج أصلي لإنشاء الصور.
+- 发布了最新的原生图片生成模型 [Gemini 2.5 Image Preview](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-image-preview)。
 
-## ‫18 أغسطس 2025
+## 2025 年 8 月 18 日
 
-- أطلقنا [أداة سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) وأتحناها للجمهور العام، وهي أداة تتيح تقديم عناوين URL كسياق إضافي للطلبات. سيتم إيقاف إمكانية استخدام سياق عنوان URL مع نموذج `gemini-2.0-flash`
-  (المتوفّر خلال الإصدار التجريبي) بعد أسبوع واحد.
+- 正式发布了 [网址 上下文工具](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)，该工具可用于向提示提供网址作为附加上下文。对将网址上下文与 `gemini-2.0-flash` 模型搭配使用的支持（在实验性发布期间提供）将于一周后停止。
 
-## ‫14 أغسطس 2025
+## 2025 年 8 月 14 日
 
-- أصدرنا نماذج Imagen 4 Ultra وStandard وFast كنسخ متوفّرة للجمهور العام. لمزيد من المعلومات، يُرجى الاطّلاع على صفحة [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ar).
+- 正式发布 (GA) 了 Imagen 4 Ultra、Standard 和 Fast 模型。如需了解详情，请参阅 [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=zh-cn) 页面。
 
-## ‫7 أغسطس 2025
+## 2025 年 8 月 7 日
 
-- أصبحت إعدادات `allow_adult` في ميزة "تحويل النص إلى فيديو" متاحة الآن في المناطق المحظورة. يمكنك الاطّلاع على صفحة
-  [Veo](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=ar#veo-model-parameters)
-  للحصول على التفاصيل.
+- `allow_adult`设置现已在受限地区推出。如需了解详情，请参阅 [Veo](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=zh-cn#veo-model-parameters) 页面。
 
-## ‫31 يوليو 2025
+## 2025 年 7 月 31 日
 
-- أطلقنا ميزة تحويل الصور إلى فيديوهات في نموذج Veo 3 Preview.
-- أطلقنا نموذج Veo 3 Fast Preview.
-- لمزيد من المعلومات عن Veo 3، يُرجى الانتقال إلى صفحة [Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar).
+- 针对 Veo 3 预览版模型推出了图像转视频功能。
+- 发布了 Veo 3 Fast 预览版模型。
+- 如需详细了解 Veo 3，请访问 [Veo](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn) 页面。
 
-## ‫22 يوليو 2025
+## 2025 年 7 月 22 日
 
-- أصدرنا `gemini-2.5-flash-lite`، وهو نموذج Gemini 2.5 السريع والمنخفض التكلفة والعالي الأداء. لمزيد من المعلومات، اطّلِع على [Gemini 2.5
-  Flash-Lite](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-lite).
+- 发布了`gemini-2.5-flash-lite`，这是我们快速、低成本、高性能的 Gemini 2.5 模型。如需了解详情，请参阅 [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-lite)。
 
-## يوليو 17، ‏2025
+## July 17, 2025
 
-- أطلقنا `veo-3.0-generate-preview`، وهو أحدث إصدار من Veo يتيح إنشاء فيديوهات تتضمّن صوتًا. لمزيد من المعلومات عن Veo 3، يُرجى الانتقال إلى صفحة [Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar).
-- زيادة الحد الأقصى لمعدّل الطلبات في Imagen 4 Standard وUltra انتقِل إلى صفحة [الحدود القصوى لعدد الطلبات](https://ai.google.dev/gemini-api/docs/rate-limits?hl=ar) لمزيد من التفاصيل.
+- 发布了 `veo-3.0-generate-preview`，这是 Veo 的最新更新，引入了带音频的视频生成功能。如需详细了解 Veo 3，请访问 [Veo](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn) 页面。
+- 提高了 Imagen 4 Standard 和 Ultra 的速率限制。如需了解详情，请访问[速率限制](https://ai.google.dev/gemini-api/docs/rate-limits?hl=zh-cn)页面。
 
-## ‫14 يوليو 2025
+## 2025 年 7 月 14 日
 
-- أطلقنا `gemini-embedding-001`، وهو الإصدار الثابت من نموذج تضمين النصوص. لمزيد من المعلومات، يُرجى الاطّلاع على مقالة [عمليات التضمين](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar). `gemini-embedding-exp-03-07`
-  سيتم إيقاف النموذج نهائيًا في 14 أغسطس 2025.
+- 发布了 `gemini-embedding-001`，即文本嵌入模型的稳定版。如需了解详情，请参阅[嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn)。`gemini-embedding-exp-03-07` 模型将于 2025 年 8 月 14 日弃用。
 
-## ‫7 يوليو 2025
+## 2025 年 7 月 7 日
 
-- تم إطلاق "وضع الدُفعات" في Gemini API. تجميع الطلبات وإرسالها للمعالجة بشكل غير متزامن لمزيد من المعلومات، اطّلِع على [وضع الدُفعات](https://ai.google.dev/gemini-api/docs/batch-mode?hl=ar).
+- 推出了 Gemini API 批量模式。将请求分批发送，并以异步方式进行处理。如需了解详情，请参阅[批量模式](https://ai.google.dev/gemini-api/docs/batch-mode?hl=zh-cn)。
 
-## ‫26 يونيو 2025
+## 2025 年 6 月 26 日
 
-- يتم الآن إعادة توجيه النماذج التجريبية `gemini-2.5-pro-preview-05-06` و`gemini-2.5-pro-preview-03-25` إلى أحدث إصدار ثابت `gemini-2.5-pro`.
-- تم إيقاف `gemini-2.5-pro-exp-03-25`.
+- 预览版模型 `gemini-2.5-pro-preview-05-06` 和 `gemini-2.5-pro-preview-03-25` 现在会重定向到最新的稳定版 `gemini-2.5-pro`。
+- `gemini-2.5-pro-exp-03-25`已关机。
 
-## ‫24 يونيو 2025
+## 2025 年 6 月 24 日
 
-- تم إطلاق نماذج "المعاينة العادية" و"المعاينة الفائقة" من Imagen 4. لمزيد من المعلومات، يمكنك الاطّلاع على صفحة [إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar).
+- 发布了 Imagen 4 Ultra 和标准预览版模型。如需了解详情，请参阅[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)页面。
 
-## ‫17 يونيو 2025
+## 2025 年 6 月 17 日
 
-- أطلقنا `gemini-2.5-pro`، وهو الإصدار الثابت من نموذجنا الأكثر تطورًا، والذي يتضمّن الآن ميزة التفكير التكيّفي. لمزيد من المعلومات، يُرجى الاطّلاع على [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-pro) و[التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar). ستتم إعادة توجيه `gemini-2.5-pro-preview-05-06`
-  إلى `gemini-2.5-pro` في 26 يونيو 2025.
-- أطلقنا `gemini-2.5-flash`، وهو أول نموذج مستقر من 2.5 Flash. لمزيد من المعلومات، يُرجى الاطّلاع على [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash).
-  سيتم إيقاف `gemini-2.5-flash-preview-04-17` نهائيًا في 15 يوليو 2025.
-- أطلقنا `gemini-2.5-flash-lite-preview-06-17`، وهو نموذج Gemini 2.5 منخفض التكلفة وعالي الأداء. لمزيد من المعلومات، اطّلِع على [معاينة Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-lite).
+- 发布了 `gemini-2.5-pro`，这是我们功能最强大的模型的稳定版，现在还具备自适应思考能力。如需了解详情，请参阅 [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-pro) 和[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)。`gemini-2.5-pro-preview-05-06`将于 2025 年 6 月 26 日重定向到 `gemini-2.5-pro`。
+- 发布了 `gemini-2.5-flash`，这是我们的首个稳定版 2.5 Flash 模型。如需了解详情，请参阅 [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash)。
+  `gemini-2.5-flash-preview-04-17` 将于 2025 年 7 月 15 日弃用。
+- 发布了`gemini-2.5-flash-lite-preview-06-17`，这是一款低成本、高性能的 Gemini 2.5 模型。如需了解详情，请参阅 [Gemini 2.5 Flash-Lite 预览版](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-lite)。
 
-## ‫5 يونيو 2025
+## 2025 年 6 月 5 日
 
-- أطلقنا `gemini-2.5-pro-preview-06-05`، وهو إصدار جديد من نموذجنا الأكثر تطورًا، ويتضمّن الآن ميزة التفكير التكيّفي. لمزيد من المعلومات، يُرجى الاطّلاع على [معاينة Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-pro-preview-06-05) و[التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
-  ستتم إعادة التوجيه من `gemini-2.5-pro-preview-05-06` إلى `gemini-2.5-pro` في 26 يونيو 2025.
+- 发布了 `gemini-2.5-pro-preview-06-05`，这是我们最强大的模型的新版本，现在具有自适应思维能力。如需了解详情，请参阅 [Gemini 2.5 Pro 预览版](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-pro-preview-06-05)和[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)。
+  `gemini-2.5-pro-preview-05-06` 将于 2025 年 6 月 26 日重定向到 `gemini-2.5-pro`。
 
-## ‫27 مايو 2025
+## 2025 年 5 月 27 日
 
-- تم إيقاف آخر نموذج متاح للضبط، وهو Gemini 1.5 Flash 001.
-  لم يعُد التعديل متاحًا في أي من النماذج.
-  اطّلِع على [الضبط الدقيق باستخدام Gemini API](https://ai.google.dev/gemini-api/docs/model-tuning?hl=ar).
+- 最后一个可用的调优模型 Gemini 1.5 Flash 001 已关闭。
+  任何模型都不再支持调优。
+  请参阅[使用 Gemini API 进行微调](https://ai.google.dev/gemini-api/docs/model-tuning?hl=zh-cn)。
 
-## ‫20 مايو 2025
+## 2025 年 5 月 20 日
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- أتحنا إمكانية
-  [المعالجة المسبقة المخصّصة للفيديوهات](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar#customize-video-processing)
-  باستخدام فواصل الاقتطاع وأخذ عيّنات من عدد اللقطات في الثانية يمكن ضبطه.
-- أطلقنا ميزة استخدام أدوات متعددة، والتي تتيح إعداد
-  [تنفيذ التعليمات البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و
-  [تحديد المصدر باستخدام &quot;بحث Google&quot;](https://ai.google.dev/gemini-api/docs/grounding?hl=ar) في طلب `generateContent` نفسه.
-- أتحنا إمكانية
-  [إجراء طلبات غير متزامنة لاستدعاء الدوال](https://ai.google.dev/gemini-api/docs/live-tools?hl=ar#async-function-calling)
-  في Live API.
-- أطلقنا
-  [أداة تجريبية لسياق عناوين URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)
-  تتيح تقديم عناوين URL كسياق إضافي للطلبات.
+- 推出了对使用剪辑间隔和可配置的帧速率采样进行[自定义视频预处理](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn#customize-video-processing)的支持。
+- 推出了多工具使用功能，支持在同一 `generateContent` 请求中配置[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)和[使用 Google 搜索进行接地](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)。
+- 在 Live API 中推出了对[异步函数调用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn#async-function-calling)的支持。
+- 推出了实验性 [网址 上下文工具](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)，用于提供网址作为提示的附加背景信息。
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا `gemini-2.5-flash-preview-05-20`، وهو نموذج [تجريبي](https://ai.google.dev/gemini-api/docs/models?hl=ar#model-versions) من Gemini تم تحسينه من أجل تحقيق أفضل توازن بين السعر والأداء، بالإضافة إلى التفكير التكيّفي. لمزيد من المعلومات، يمكنك الاطّلاع على [النسخة الحصرية من Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-preview) و[Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
-- أطلقنا النموذجين
-  [`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-pro-preview-tts)
-  و
-  [`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-preview-tts)
-  القادرَين على
-  [إنشاء محتوى صوتي](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar) لشخص واحد أو شخصين.
-- أطلقنا النموذج `lyria-realtime-exp` الذي
-  [ينشئ الموسيقى](https://ai.google.dev/gemini-api/docs/music-generation?hl=ar) في الوقت الفعلي.
-- أطلقنا `gemini-2.5-flash-preview-native-audio-dialog` و`gemini-2.5-flash-exp-native-audio-thinking-dialog`، وهما نموذجان جديدان من Gemini لواجهة Live API مع إمكانات مصدر إخراج الصوت المدمجة. لمزيد من المعلومات، يُرجى الاطّلاع على [دليل Live API](https://ai.google.dev/gemini-api/docs/live-guide?hl=ar#native-audio-output) و[ميزة "الصوت الأصلي" في Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-native-audio).
-- تم إصدار `gemma-3n-e4b-it` معاينة، وهي متاحة على
-  [AI Studio](https://aistudio.google.com?hl=ar) ومن خلال Gemini API،
-  كجزء من إطلاق [Gemma 3n](https://ai.google.dev/gemma/docs/3n?hl=ar).
+- 发布了 `gemini-2.5-flash-preview-05-20`，这是一款经过优化的 Gemini [预览版](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#model-versions)模型，具有出色的性价比和自适应思维能力。如需了解详情，请参阅 [Gemini 2.5 Flash 预览版](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-preview)和[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)。
+- 发布了 [`gemini-2.5-pro-preview-tts`](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-pro-preview-tts) 和 [`gemini-2.5-flash-preview-tts`](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-preview-tts) 模型，这些模型能够[生成包含一个或两个说话者的语音](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)。
+- 发布了 `lyria-realtime-exp` 模型，该模型可[实时生成音乐](https://ai.google.dev/gemini-api/docs/music-generation?hl=zh-cn)。
+- 发布了 `gemini-2.5-flash-preview-native-audio-dialog` 和 `gemini-2.5-flash-exp-native-audio-thinking-dialog`，这是两款支持原生音频输出功能的 Live API 新 Gemini 模型。如需了解详情，请参阅 [Live API 指南](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn#native-audio-output)和 [Gemini 2.5 Flash 原生音频](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-native-audio)。
+- 发布了 `gemma-3n-e4b-it` 预览版，可在 [AI Studio](https://aistudio.google.com?hl=zh-cn) 中使用，也可通过 Gemini API 使用，作为 [Gemma 3n](https://ai.google.dev/gemma/docs/3n?hl=zh-cn) 发布的一部分。
 
-## ‫7 مايو 2025
+## 2025 年 5 月 7 日
 
-- أطلقنا `gemini-2.0-flash-preview-image-generation`، وهو نموذج معاينة لإنشاء الصور وتعديلها. لمزيد من المعلومات، يمكنك الاطّلاع على [إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) و[إنشاء الصور باستخدام Gemini 2.0 Flash (نسخة حصرية)](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.0-flash-preview-image-generation).
+- 发布了 `gemini-2.0-flash-preview-image-generation`，一个用于生成和编辑图片的预览版模型。如需了解详情，请参阅[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)和 [Gemini 2.0 Flash 预览版图片生成](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.0-flash-preview-image-generation)。
 
-## ‫6 مايو 2025
+## 2025 年 5 月 6 日
 
-- أطلقنا الإصدار الجديد `gemini-2.5-pro-preview-05-06` من نموذجنا الأكثر تطورًا، والذي يتضمّن تحسينات على الترميز واستدعاء الدوال. سيشير `gemini-2.5-pro-preview-03-25` تلقائيًا إلى الإصدار الجديد من النموذج.
+- 发布了 `gemini-2.5-pro-preview-05-06`，这是我们功能最强大的模型的新版本，在代码和函数调用方面有所改进。`gemini-2.5-pro-preview-03-25` 将自动指向新版模型。
 
-## ‫17 أبريل 2025
+## 2025 年 4 月 17 日
 
-- أطلقنا `gemini-2.5-flash-preview-04-17`، وهو نموذج [تجريبي](https://ai.google.dev/gemini-api/docs/models?hl=ar#model-versions) من Gemini تم تحسينه من أجل تحقيق أفضل توازن بين السعر والأداء، بالإضافة إلى التفكير التكيّفي. لمزيد من المعلومات، يمكنك الاطّلاع على [النسخة الحصرية من Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-flash-preview) و[Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
+- 发布了 `gemini-2.5-flash-preview-04-17`，这是一款经过优化的 Gemini [预览版](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#model-versions)模型，具有出色的性价比和自适应思维能力。如需了解详情，请参阅 [Gemini 2.5 Flash 预览版](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-flash-preview)和[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)。
 
-## ‫16 أبريل 2025
+## 2025 年 4 月 16 日
 
-- تم إطلاق ميزة التخزين المؤقت للسياق في
-  [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.0-flash).
+- 为 [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.0-flash) 推出了上下文缓存功能。
 
-## ‫9 أبريل 2025
+## 2025 年 4 月 9 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا `veo-2.0-generate-001`، وهو نموذج متوفّر للجمهور العام يحوّل النصوص والصور إلى فيديوهات، ويمكنه إنشاء فيديوهات مفصّلة ودقيقة من الناحية الفنية. لمزيد من المعلومات، يُرجى الاطّلاع على [مستندات Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar).
-- تم طرح إصدار تجريبي علني من نموذج
-  [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) في `gemini-2.0-flash-live-001` مع تفعيل الفوترة.
+- 发布了 `veo-2.0-generate-001`，一款正式版 (GA) 的文本到视频和图片到视频模型，能够生成细节丰富且富有艺术性的视频。如需了解详情，请参阅 [Veo 文档](https://ai.google.dev/gemini-api/docs/video?hl=zh-cn)。
+- 发布了 `gemini-2.0-flash-live-001`，即启用了结算功能的 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=zh-cn) 模型的公开预览版。
 
-  - **إدارة الجلسات والموثوقية المحسّنة**
+  - **增强的会话管理和可靠性**
 
-    - **استئناف الجلسة:** الحفاظ على استمرار الجلسات عند حدوث انقطاعات مؤقتة في الشبكة تتيح واجهة برمجة التطبيقات الآن تخزين حالة الجلسة من جهة الخادم (لمدة تصل إلى 24 ساعة) وتوفّر معرّفات (session\_resumption) لإعادة الاتصال واستئناف الجلسة من حيث توقّفت.
-    - **جلسات أطول من خلال ضغط السياق:** يمكنك إجراء تفاعلات أطول من الحدود الزمنية السابقة. يمكنك ضبط ضغط نافذة السياق باستخدام آلية النافذة المنزلقة لإدارة طول السياق تلقائيًا، ما يمنع حدوث عمليات إنهاء مفاجئة بسبب حدود السياق.
-    - **إشعار قطع الاتصال السلس:** يمكنك تلقّي رسالة من الخادم `GoAway` تشير إلى الوقت الذي سيتم فيه إغلاق الاتصال، ما يتيح لك التعامل مع الأمر بسلاسة قبل إنهاء الاتصال.
-  - **المزيد من التحكّم في ديناميكية التفاعل**
-  - **ميزة "رصد النشاط الصوتي" (VAD) القابلة للإعداد:** يمكنك اختيار مستويات الحساسية أو إيقاف ميزة "رصد النشاط الصوتي" التلقائية بالكامل واستخدام أحداث العميل الجديدة (`activityStart` و`activityEnd`) للتحكّم اليدوي في التشغيل.
-  - **التعامل القابل للضبط مع المقاطعات:** يمكنك تحديد ما إذا كان يجب أن تؤدي مدخلات المستخدم إلى مقاطعة استجابة النموذج.
-  - **تغطية قابلة للضبط:** اختَر ما إذا كانت واجهة برمجة التطبيقات تعالج كل مدخلات الصوت والفيديو بشكل مستمر أو تسجّلها فقط عندما يتم رصد المستخدم النهائي وهو يتحدث.
-  - **درجة دقة الوسائط القابلة للضبط:** يمكنك تحسين الجودة أو استخدام الرموز المميزة
-    من خلال اختيار درجة دقة الوسائط المُدخَلة.
-  - **ميزات ونتائج أكثر ثراءً**
-  - **خيارات موسّعة للغة والصوت:** يمكنك الاختيار من بين صوتَين جديدَين و30 لغة جديدة لإخراج الصوت. يمكنك الآن ضبط لغة الإخراج ضمن `speechConfig`.
-  - **عرض النص أثناء إنشائه:** يمكنك تلقّي الردود النصية بشكل تدريجي أثناء إنشائها، ما يتيح عرضها بشكل أسرع للمستخدم.
-  - **تقارير استخدام الرموز المميزة:** يمكنك الاطّلاع على إحصاءات حول الاستخدام من خلال أعداد الرموز المميزة المفصّلة المقدَّمة في الحقل `usageMetadata` ضمن رسائل الخادم، مع تقسيمها حسب طريقة العرض ومراحل الطلب أو الردّ.
+    - **会话恢复**：在临时网络中断期间保持会话有效。该 API 现在支持服务器端会话状态存储（最长 24 小时），并提供用于重新连接和从上次中断处继续的句柄 (session\_resumption)。
+    - **通过上下文压缩实现更长的会话**：支持超出之前时间限制的扩展互动。配置使用滑动窗口机制的上下文窗口压缩，以自动管理上下文长度，防止因上下文限制而突然终止。
+    - **正常断开连接通知**：接收 `GoAway` 服务器消息，指示连接即将关闭，以便在终止之前进行正常处理。
+  - **更好地控制互动动态**
+  - **可配置的语音活动检测 (VAD)**：选择灵敏度级别，或完全停用自动 VAD，并使用新的客户端事件（`activityStart`、`activityEnd`）进行手动轮流发言控制。
+  - **可配置的中断处理**：决定用户输入是否应中断模型的回答。
+  - **可配置的轮流覆盖范围**：选择 API 是持续处理所有音频和视频输入，还是仅在检测到最终用户说话时捕获音频和视频输入。
+  - **可配置的媒体分辨率**：通过选择输入媒体的分辨率，优化质量或令牌使用情况。
+  - **更丰富的输出内容和功能**
+  - **更多语音和语言选项**：新增了两种语音和 30 种语言，可用于音频输出。现在，您可以在 `speechConfig` 中配置输出语言。
+  - **文本流式传输**：以增量方式接收生成的文本回答，从而更快地向用户显示回答。
+  - **token 使用情况报告**：通过服务器消息的 `usageMetadata` 字段中提供的详细 token 数量（按模态和提示或回答阶段细分）深入了解使用情况。
 
-## ‫4 أبريل 2025
+## 2025 年 4 月 4 日
 
-- تم طرح `gemini-2.5-pro-preview-03-25`، وهو إصدار مبكر من Gemini 2.5 Pro متاح للجميع
-  مع تفعيل الفوترة. يمكنك مواصلة استخدام `gemini-2.5-pro-exp-03-25` ضمن الفئة المجانية.
+- 发布了 `gemini-2.5-pro-preview-03-25`，这是启用了结算功能的 Gemini 2.5 Pro 公开预览版。您可以继续在免费层级中使用 `gemini-2.5-pro-exp-03-25`。
 
-## ‫25 مارس 2025
+## 2025 年 3 月 25 日
 
-- أطلقنا `gemini-2.5-pro-exp-03-25`، وهو نموذج Gemini تجريبي متاح للجميع
-  مع تفعيل وضع "التفكير" تلقائيًا دائمًا.
-  لمزيد من المعلومات، يُرجى الاطّلاع على [إصدار Gemini 2.5 Pro التجريبي](https://ai.google.dev/gemini-api/docs/models?hl=ar#gemini-2.5-pro-preview-03-25).
+- 发布了 `gemini-2.5-pro-exp-03-25`，这是一款公开实验版 Gemini 模型，默认情况下始终处于思考模式。
+  如需了解详情，请参阅 [Gemini 2.5 Pro Experimental](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-2.5-pro-preview-03-25)。
 
-## ‫12 مارس 2025
+## 2025 年 3 月 12 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا نموذجًا تجريبيًا من [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar#gemini)
-  قادرًا على إنشاء الصور وتعديلها.
-- تم إطلاقها في `gemma-3-27b-it`، وهي متاحة على
-  [AI Studio](https://aistudio.google.com?hl=ar) ومن خلال Gemini API،
-  كجزء من إطلاق [Gemma 3](https://ai.google.dev/gemma/docs/core?hl=ar).
+- 发布了一款实验性 [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn#gemini) 模型，能够生成和修改图片。
+- 已发布 `gemma-3-27b-it`，可在 [AI Studio](https://aistudio.google.com?hl=zh-cn) 中使用，也可通过 Gemini API 使用，是 [Gemma 3](https://ai.google.dev/gemma/docs/core?hl=zh-cn) 发布的一部分。
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تمت إضافة إمكانية استخدام
-  [عناوين URL على YouTube](https://ai.google.dev/gemini-api/docs/vision?hl=ar#youtube) كمصدر للوسائط.
-- تمت إضافة إمكانية تضمين [فيديو مضمّن](https://ai.google.dev/gemini-api/docs/vision?hl=ar#inline-video) بحجم أقل من 20 ميغابايت.
+- 添加了对 [YouTube 网址](https://ai.google.dev/gemini-api/docs/vision?hl=zh-cn#youtube)作为媒体来源的支持。
+- 添加了对包含小于 20MB 的[内嵌视频](https://ai.google.dev/gemini-api/docs/vision?hl=zh-cn#inline-video)的支持。
 
-## ‫11 مارس 2025
+## 2025 年 3 月 11 日
 
-**تعديلات حزمة تطوير البرامج (SDK):**
+**SDK 更新：**
 
-- أطلقنا [حزمة تطوير البرامج (SDK) الخاصة بتكنولوجيات الذكاء الاصطناعي التوليدي من Google والمصمَّمة للّغتَين TypeScript وJavaScript](https://googleapis.github.io/js-genai) في إصدار تجريبي علني.
+- 发布了 [Google Gen AI SDK（适用于 TypeScript 和 JavaScript）](https://googleapis.github.io/js-genai)的公开预览版。
 
-## ‫7 مارس 2025
+## 2025 年 3 月 7 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا `gemini-embedding-exp-03-07`
-  [نموذجًا تجريبيًا](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=ar)
-  للتضمينات يستند إلى Gemini في "المعاينة العلنية".
+- 发布了 `gemini-embedding-exp-03-07`，一款基于 Gemini 的[实验性](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=zh-cn)嵌入模型，目前处于公开预览版阶段。
 
-## ‫28 فبراير 2025
+## 2025 年 2 月 28 日
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تمت إضافة دعم [البحث كأداة](https://ai.google.dev/gemini-api/docs/grounding?hl=ar) إلى `gemini-2.0-pro-exp-02-05`، وهو نموذج تجريبي يستند إلى Gemini 2.0 Pro.
+- 为基于 Gemini 2.0 Pro 的实验性模型 `gemini-2.0-pro-exp-02-05` 添加了对[将搜索作为工具](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)的支持。
 
-## ‫25 فبراير 2025
+## 2025 年 2 月 25 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أصدرنا `gemini-2.0-flash-lite` نسخة متوفّرة للجمهور العام من
-  [Gemini 2.0 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#gemini-2.0-flash-lite)،
-  وهي نسخة محسّنة من حيث السرعة وقابلية التوسّع وفعالية التكلفة.
+- 发布了 `gemini-2.0-flash-lite`，即 [Gemini 2.0 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-2.0-flash-lite) 的正式版 (GA)，该模型在速度、规模和成本效益方面都经过了优化。
 
-## ‫19 فبراير 2025
+## 2025 年 2 月 19 日
 
-**التعديلات في AI Studio:**
+**AI Studio 更新**：
 
-- توفير الدعم في
-  [مناطق إضافية](https://ai.google.dev/gemini-api/docs/available-regions?hl=ar)
-  (كوسوفو وغرينلاند وجزر فارو)
+- 支持[其他地区](https://ai.google.dev/gemini-api/docs/available-regions?hl=zh-cn)（科索沃、格陵兰和法罗群岛）。
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- توفير الدعم في
-  [مناطق إضافية](https://ai.google.dev/gemini-api/docs/available-regions?hl=ar)
-  (كوسوفو وغرينلاند وجزر فارو)
+- 支持[其他地区](https://ai.google.dev/gemini-api/docs/available-regions?hl=zh-cn)（科索沃、格陵兰和法罗群岛）。
 
-## ‫18 فبراير 2025
+## 2025 年 2 月 18 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- لم يعُد الإصدار 1.0 من Gemini Pro متاحًا. للاطّلاع على قائمة الطُرز المتوافقة، يُرجى الانتقال إلى [طُرز Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar).
+- Gemini 1.0 Pro 不再受支持。如需查看支持的模型的列表，请参阅 [Gemini 模型](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn)。
 
-## ‫11 فبراير 2025
+## 2025 年 2 月 11 日
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تحديثات بشأن
-  [توافق مكتبات OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=ar)
+- 更新了 [OpenAI 库兼容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn)。
 
-## ‫6 فبراير 2025
+## 2025 年 2 月 6 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا `imagen-3.0-generate-002`، وهو إصدار متاح للجمهور العام من
-  [Imagen 3 في Gemini API](https://ai.google.dev/gemini-api/docs/imagen?hl=ar).
+- 发布了 [Gemini API 中的 Imagen 3](https://ai.google.dev/gemini-api/docs/imagen?hl=zh-cn) 的正式版 (GA) `imagen-3.0-generate-002`。
 
-**تعديلات حزمة تطوير البرامج (SDK):**
+**SDK 更新：**
 
-- أطلقنا [حزمة تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي في Java](https://github.com/googleapis/java-genai)
-  في إصدار تجريبي متاح للجميع.
+- 发布了 [Google Gen AI SDK for Java](https://github.com/googleapis/java-genai) 公开预览版。
 
-## ‫5 فبراير 2025
+## 2025 年 2 月 5 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أصدرنا `gemini-2.0-flash-001` إصدارًا متوفّرًا للجمهور العام من
-  [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#gemini-2.0-flash) يتيح عرض الناتج كنص فقط.
-- أصدرنا `gemini-2.0-pro-exp-02-05`،
-  نسخة [تجريبية](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=ar) متاحة للجميع
-  من Gemini 2.0 Pro.
-- تم إصدار `gemini-2.0-flash-lite-preview-02-05`، وهو نموذج تجريبي
-  للمعاينة العامة 
-  تم تحسينه لتحقيق فعالية التكلفة.
+- 发布了 `gemini-2.0-flash-001`，这是 [Gemini 2.0 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-2.0-flash) 的正式版 (GA)，支持纯文本输出。
+- 发布了 `gemini-2.0-pro-exp-02-05`，即 Gemini 2.0 Pro 的[实验性](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=zh-cn)公开预览版。
+- 发布了 `gemini-2.0-flash-lite-preview-02-05`，这是一款针对成本效益进行优化的实验性公开预览版[模型](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-2.0-flash-lite)。
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تمت إضافة دعم [إدخال الملفات وإخراج الرسومات البيانية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar#input-output) إلى تنفيذ الرمز البرمجي.
+- 为代码执行添加了[文件输入和图表输出](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn#input-output)支持。
 
-**تعديلات حزمة تطوير البرامج (SDK):**
+**SDK 更新：**
 
-- أطلقنا
-  [حزمة تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي في Python](https://googleapis.github.io/python-genai/)
-  وأصبحت متوفّرة للجمهور العام.
+- 发布了 [Google Gen AI SDK for Python](https://googleapis.github.io/python-genai/) 正式版 (GA)。
 
-## ‫21 يناير 2025
+## 2025 年 1 月 21 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- تم إصدار `gemini-2.0-flash-thinking-exp-01-21`، وهو أحدث إصدار تجريبي من النموذج الذي يستند إليه [نموذج Gemini 2.0 Flash Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
+- 发布了 `gemini-2.0-flash-thinking-exp-01-21`，这是 [Gemini 2.0 Flash Thinking 模型](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)背后的模型的最新预览版。
 
-## ‫19 ديسمبر 2024
+## 2024 年 12 月 19 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا "وضع Flash المفكّر" في Gemini 2.0 Flash كنسخة تجريبية متاحة للجميع. ‫Thinking Mode هو نموذج حسابي لوقت الاختبار يتيح لك الاطّلاع على عملية تفكير النموذج أثناء إنشاء الرد، كما يتيح إنشاء ردود تتضمّن إمكانات استدلال أقوى.
+- 发布了 Gemini 2.0 Flash 思考模式的公开预览版。思考模式是一种测试时间计算模型，可让您在模型生成回答时查看其思考过程，并生成推理能力更强的回答。
 
-  يمكنك الاطّلاع على مزيد من المعلومات حول "وضع التفكير" في Gemini 2.0 Flash في [صفحة النظرة العامة](https://ai.google.dev/gemini-api/docs/thinking-mode?hl=ar).
+  如需详细了解 Gemini 2.0 Flash Thinking 模式，请参阅我们的[概览页面](https://ai.google.dev/gemini-api/docs/thinking-mode?hl=zh-cn)。
 
-## ‫11 ديسمبر 2024
+## 2024 年 12 月 11 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أصدرنا [Gemini 2.0 Flash Experimental](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#gemini-2.0-flash)
-  لإتاحة معاينة عامة. تشمل القائمة الجزئية لميزات Gemini 2.0 Flash Experimental ما يلي:
-  - أسرع بمرتين من Gemini 1.5 Pro
-  - البث ثنائي الاتجاه باستخدام Live API
-  - إنشاء ردود متعددة الوسائط على شكل نصوص وصور وكلام
-  - استخدام الأدوات المضمّنة مع الاستدلال في محادثة مترابطة للاستفادة من ميزات مثل تطبيق الرموز البرمجية و"بحث Google" واستدعاء الدوال وغير ذلك
+- 发布了[公开预览版 Gemini 2.0 Flash Experimental](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-2.0-flash)。Gemini 2.0 Flash Experimental 的部分功能包括：
+  - 速度是 Gemini 1.5 Pro 的两倍
+  - 使用 Live API 进行双向流式传输
+  - 以文本、图片和语音形式生成多模态回答
+  - 通过多轮推理使用内置工具，以使用代码执行、搜索、函数调用等功能
 
-يمكنك الاطّلاع على مزيد من المعلومات حول ‎2.0 Flash في Gemini في [صفحة النظرة العامة](https://ai.google.dev/gemini-api/docs/models/gemini-v2?hl=ar).
+如需详细了解 Gemini 2.0 Flash，请参阅我们的[概览页面](https://ai.google.dev/gemini-api/docs/models/gemini-v2?hl=zh-cn)。
 
-## ‫21 نوفمبر 2024
+## 2024 年 11 月 21 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا `gemini-exp-1121`، وهو نموذج تجريبي أكثر تطورًا من Gemini API.
+- 发布了 `gemini-exp-1121`，这是一款功能更强大的实验性 Gemini API 模型。
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- تم تعديل الأسماء المستعارة للنموذج `gemini-1.5-flash-latest` و`gemini-1.5-flash`
-  لاستخدام `gemini-1.5-flash-002`.
-  - تغيير في المَعلمة `top_k`: يتيح النموذج `gemini-1.5-flash-002`
-    قيم `top_k` تتراوح بين 1 و41 (باستثناء 41).
-    سيتم تغيير القيم الأكبر من 40 إلى 40.
+- 更新了 `gemini-1.5-flash-latest` 和 `gemini-1.5-flash` 模型别名，以使用 `gemini-1.5-flash-002`。
+  - 更改为 `top_k` 参数：`gemini-1.5-flash-002` 模型支持介于 1 和 41（不含）之间的 `top_k` 值。大于 40 的值将更改为 40。
 
-## ‫14 نوفمبر 2024
+## 2024 年 11 月 14 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا `gemini-exp-1114`، وهو نموذج تجريبي قوي من Gemini API.
+- 发布了 `gemini-exp-1114`，这是一款强大的实验性 Gemini API 模型。
 
-## ‫8 نوفمبر 2024
+## 2024 年 11 月 8 日
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تمت إضافة [إمكانية استخدام Gemini](https://ai.google.dev/gemini-api/docs/openai?hl=ar) في مكتبات OpenAI / واجهة REST API.
+- 在 OpenAI 库 / REST API 中[添加了对 Gemini 的支持](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn)。
 
-## ‫31 أكتوبر 2024
+## 2024 年 10 月 31 日
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- أضفنا [إمكانية تحديد المصدر باستخدام "بحث Google"](https://ai.google.dev/gemini-api/docs/grounding?hl=ar).
+- 添加了[依托 Google 搜索进行接地的支持](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)。
 
-## ‫3 أكتوبر 2024
+## 2024 年 10 月 3 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أصدرنا `gemini-1.5-flash-8b-001`، وهو إصدار ثابت من أصغر نماذج واجهة Gemini API.
+- 发布了 `gemini-1.5-flash-8b-001`，这是我们最小的 Gemini API 模型的稳定版。
 
-## ‫24 سبتمبر 2024
+## 2024 年 9 月 24 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا الإصدارَين الجديدَين الثابتَين `gemini-1.5-pro-002` و`gemini-1.5-flash-002` من Gemini 1.5 Pro و1.5 Flash، وهما متاحان الآن للجمهور العام.
-- تم تعديل رمز النموذج `gemini-1.5-pro-latest` لاستخدام `gemini-1.5-pro-002`، وتم تعديل رمز النموذج `gemini-1.5-flash-latest` لاستخدام `gemini-1.5-flash-002`.
-- تم طرح الإصدار `gemini-1.5-flash-8b-exp-0924` ليحلّ محل الإصدار `gemini-1.5-flash-8b-exp-0827`.
-- أطلقنا [فلتر السلامة الخاص بالنزاهة المدنية](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar#safety-filters)
-  في Gemini API وAI Studio.
-- أتحنا استخدام مَعلمتَين جديدتَين في Gemini 1.5 Pro و1.5 Flash في Python وNodeJS:
-  [`frequencyPenalty`](https://ai.google.dev/api/generate-content?hl=ar#FIELDS.frequency_penalty) و
-  [`presencePenalty`](https://ai.google.dev/api/generate-content?hl=ar#FIELDS.presence_penalty).
+- 发布了 `gemini-1.5-pro-002` 和 `gemini-1.5-flash-002`，这是 Gemini 1.5 Pro 和 1.5 Flash 的两个全新稳定版，已正式发布。
+- 更新了 `gemini-1.5-pro-latest` 模型代码以使用 `gemini-1.5-pro-002`，并更新了 `gemini-1.5-flash-latest` 模型代码以使用 `gemini-1.5-flash-002`。
+- 发布了 `gemini-1.5-flash-8b-exp-0924` 以取代 `gemini-1.5-flash-8b-exp-0827`。
+- 为 Gemini API 和 AI Studio 发布了[公民诚信安全过滤器](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn#safety-filters)。
+- 在 Python 和 NodeJS 中为 Gemini 1.5 Pro 和 1.5 Flash 发布了对两个新参数的支持：[`frequencyPenalty`](https://ai.google.dev/api/generate-content?hl=zh-cn#FIELDS.frequency_penalty) 和 [`presencePenalty`](https://ai.google.dev/api/generate-content?hl=zh-cn#FIELDS.presence_penalty)。
 
-## ‫19 سبتمبر 2024
+## 2024 年 9 月 19 日
 
-**التعديلات في AI Studio:**
+**AI Studio 更新**：
 
-- أضفنا زرَّي "يعجبني" و"لا يعجبني" إلى ردود النماذج، وذلك للسماح للمستخدمين بتقديم ملاحظات حول جودة الردّ.
+- 在模型回答中添加了“我喜欢”和“不喜欢”按钮，以便用户就回答质量提供反馈。
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- أضفنا إمكانية استخدام أرصدة Google Cloud في Gemini API.
+- 新增了对 Google Cloud 赠金的支持，现在可将 Google Cloud 赠金用于 Gemini API 用量。
 
-## ‫17 سبتمبر 2024
+## 2024 年 9 月 17 日
 
-**التعديلات في AI Studio:**
+**AI Studio 更新**：
 
-- أضفنا زر **الفتح في Colab** الذي يصدّر طلبًا والرمز البرمجي لتشغيله إلى دفتر ملاحظات في Colab. لا تتيح الميزة بعد
-  تقديم الطلبات باستخدام الأدوات (وضع JSON أو استدعاء الدوال أو تنفيذ الرموز البرمجية).
+- 添加了**在 Colab 中打开**按钮，可将提示以及运行提示所需的代码导出到 Colab 笔记本。此功能尚不支持使用工具（JSON 模式、函数调用或代码执行）进行提示。
 
-## ‫13 سبتمبر 2024
+## 2024 年 9 月 13 日
 
-**التعديلات في AI Studio:**
+**AI Studio 更新**：
 
-- أضفنا ميزة "وضع المقارنة" التي تتيح لك مقارنة الردود من نماذج ومطالبات مختلفة للعثور على أفضل تطابق لحالة الاستخدام.
+- 新增了对比较模式的支持，可让您比较不同模型和提示的回答，以便找到最适合您应用场景的回答。
 
-## ‫30 أغسطس 2024
+## 2024 年 8 月 30 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- يتيح Gemini 1.5 Flash
-  [توفير مخطّط JSON من خلال إعدادات النموذج](https://ai.google.dev/gemini-api/docs/json-mode?hl=ar#supply-schema-in-config).
+- Gemini 1.5 Flash 支持[通过模型配置提供 JSON 架构](https://ai.google.dev/gemini-api/docs/json-mode?hl=zh-cn#supply-schema-in-config)。
 
-## ‫27 أغسطس 2024
+## 2024 年 8 月 27 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- تم إطلاق [النماذج التجريبية](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=ar) التالية:
+- 发布了以下[实验性模型](https://ai.google.dev/gemini-api/docs/models/experimental-models?hl=zh-cn)：
   - `gemini-1.5-pro-exp-0827`
   - `gemini-1.5-flash-exp-0827`
   - `gemini-1.5-flash-8b-exp-0827`
 
-## ‫9 أغسطس 2024
+## 2024 年 8 月 9 日
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تمت إضافة إمكانية [معالجة ملفات PDF](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar).
+- 添加了对 [PDF 处理](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn)的支持。
 
-## ‫5 أغسطس 2024
+## 2024 年 8 月 5 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أصبح بإمكانك الآن ضبط نموذج Gemini 1.5 Flash بدقة.
+- 发布了对 Gemini 1.5 Flash 的微调支持。
 
-## ‫1 أغسطس 2024
+## 2024 年 8 月 1 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا `gemini-1.5-pro-exp-0801`، وهو إصدار تجريبي جديد من
-  [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#gemini-1.5-pro).
+- 发布了 `gemini-1.5-pro-exp-0801`，即 [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-1.5-pro) 的新实验性版本。
 
-## ‫12 يوليو 2024
+## 2024 年 7 月 12 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- تمت إزالة إمكانية استخدام Gemini 1.0 Pro Vision من خدمات وأدوات Google AI.
+- 从 Google AI 服务和工具中移除了对 Gemini 1.0 Pro Vision 的支持。
 
-## ‫27 يونيو 2024
+## 2024 年 6 月 27 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- إصدار ميزة "قدرة الاستيعاب" التي تبلغ 2 مليون رمز مميّز في Gemini 1.5 Pro للجمهور العام
+- 正式发布 Gemini 1.5 Pro 的 200 万上下文窗口。
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تمت إضافة إمكانية [تنفيذ الرمز البرمجي](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar).
+- 新增了对[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)的支持。
 
-## ‫18 يونيو 2024
+## 2024 年 6 月 18 日
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تمت إضافة إمكانية [تخزين السياق مؤقتًا](https://ai.google.dev/gemini-api/docs/caching?hl=ar).
+- 添加了对[上下文缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)的支持。
 
-## ‫12 يونيو 2024
+## 2024 年 6 月 12 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- تم إيقاف Gemini 1.0 Pro Vision نهائيًا.
+- Gemini 1.0 Pro Vision 已弃用。
 
-## ‫23 مايو 2024
+## 2024 年 5 月 23 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- يتوفّر [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#gemini-1.5-pro)
-  (`gemini-1.5-pro-001`) للجمهور العام.
-- [‫Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#gemini-1.5-flash)
-  (`gemini-1.5-flash-001`) متوفّر للجمهور العام (GA).
+- [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-1.5-pro) (`gemini-1.5-pro-001`) 已发布正式版 (GA)。
+- [Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-1.5-flash) (`gemini-1.5-flash-001`) 已正式发布 (GA)。
 
-## ‫14 مايو 2024
+## 2024 年 5 月 14 日
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- طرحنا قدرة استيعاب تصل إلى مليونَي رمز مميّز في Gemini 1.5 Pro (قائمة انتظار).
-- أطلقنا [نظام الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar) "الدفع حسب الاستخدام" لـ Gemini 1.0 Pro، وسنطلق قريبًا نظام الفوترة لـ Gemini 1.5 Pro وGemini 1.5 Flash.
-- تم تقديم حدود معدّل استخدام أعلى لمستوى الاشتراك المدفوع القادم في Gemini 1.5 Pro.
-- تمت إضافة إمكانية استخدام الفيديوهات المضمّنة إلى [File API](https://ai.google.dev/api/rest/v1beta/files?hl=ar).
-- تمت إضافة إمكانية استخدام النص العادي في [File API](https://ai.google.dev/api/rest/v1beta/files?hl=ar).
-- تمت إضافة إمكانية تنفيذ استدعاءات الدوال بشكل متوازٍ، ما يتيح عرض أكثر من استدعاء واحد في المرة الواحدة.
+- 为 Gemini 1.5 Pro 推出了 200 万个 token 的上下文窗口（等候名单）。
+- 为 Gemini 1.0 Pro 推出了“随用随付”[结算](https://ai.google.dev/gemini-api/docs/billing?hl=zh-cn)方式，Gemini 1.5 Pro 和 Gemini 1.5 Flash 的结算方式即将推出。
+- 为即将推出的 Gemini 1.5 Pro 付费层级提高了速率限制。
+- 为 [File API](https://ai.google.dev/api/rest/v1beta/files?hl=zh-cn) 添加了内置视频支持。
+- 为 [File API](https://ai.google.dev/api/rest/v1beta/files?hl=zh-cn) 添加了纯文本支持。
+- 添加了对并行函数调用的支持，以便一次返回多个调用结果。
 
-## ‫10 مايو 2024
+## 2024 年 5 月 10 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أطلقنا [Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#gemini-1.5-flash)
-  (`gemini-1.5-flash-latest`) في نسخة حصرية.
+- 发布了预览版 [Gemini 1.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-1.5-flash) (`gemini-1.5-flash-latest`)。
 
-## ‫9 أبريل 2024
+## 2024 年 4 月 9 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- أصدرنا [Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#gemini-1.5-pro)
-  (`gemini-1.5-pro-latest`) في نسخة حصرية.
-- أطلقنا نموذجًا جديدًا لتضمين النص، وهو `text-embeddings-004`، ويتيح
-  [أحجام التضمين المرن](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar#elastic-embedding)
-  التي تقل عن 768.
+- 发布了[预览版 Gemini 1.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#gemini-1.5-pro) (`gemini-1.5-pro-latest`)。
+- 发布了新的文本嵌入模型 `text-embeddings-004`，该模型支持小于 768 的[弹性嵌入](https://ai.google.dev/gemini-api/docs/embeddings?hl=zh-cn#elastic-embedding)大小。
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- تم إطلاق [File API](https://ai.google.dev/api/rest/v1beta/files?hl=ar) لتخزين ملفات الوسائط مؤقتًا لاستخدامها في الطلبات.
-- تمت إضافة إمكانية إنشاء الطلبات باستخدام بيانات نصية وصور ومقاطع صوتية، ويُعرف ذلك أيضًا باسم إنشاء الطلبات *المتعددة الوسائط*. لمزيد من المعلومات، يُرجى الاطّلاع على مقالة [تقديم الطلبات باستخدام الوسائط](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=ar).
-- أطلقنا [تعليمات النظام](https://ai.google.dev/gemini-api/docs/system-instructions?hl=ar) في الإصدار التجريبي.
-- تمت إضافة
-  [وضع استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#function_calling_mode)،
-  الذي يحدّد سلوك التنفيذ عند استدعاء الدوال.
-- تمت إضافة خيار الإعداد `response_mime_type` الذي يتيح لك طلب الردود [بتنسيق JSON](https://ai.google.dev/gemini-api/docs/api-overview?hl=ar#json).
+- 发布了 [File API](https://ai.google.dev/api/rest/v1beta/files?hl=zh-cn)，用于临时存储媒体文件以用于提示。
+- 新增了对使用文本、图片和音频数据发出提示的支持，也称为*多模态*提示。如需了解详情，请参阅[使用媒体内容进行提示](https://ai.google.dev/gemini-api/docs/prompting_with_media?hl=zh-cn)。
+- 在 Beta 版中发布了[系统指令](https://ai.google.dev/gemini-api/docs/system-instructions?hl=zh-cn)。
+- 添加了[函数调用模式](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#function_calling_mode)，用于定义函数调用的执行行为。
+- 新增了对 `response_mime_type` 配置选项的支持，该选项可让您以 [JSON 格式](https://ai.google.dev/gemini-api/docs/api-overview?hl=zh-cn#json)请求响应。
 
-## ‫19 مارس 2024
+## 2024 年 3 月 19 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- تمت إضافة إمكانية
-  [ضبط Gemini 1.0 Pro](https://developers.googleblog.com/en/tune-gemini-pro-in-google-ai-studio-or-with-the-gemini-api/)
-  في Google AI Studio أو باستخدام Gemini API.
+- 在 Google AI Studio 中或通过 Gemini API [添加了对调优 Gemini 1.0 Pro](https://developers.googleblog.com/en/tune-gemini-pro-in-google-ai-studio-or-with-the-gemini-api/) 的支持。
 
-## ‫13 ديسمبر 2023
+## 2023 年 12 月 13 日
 
-**تعديلات على النموذج:**
+**模型更新**：
 
-- ‫gemini-pro: نموذج نصي جديد لمجموعة متنوعة من المهام تحقيق التوازن بين الإمكانات والكفاءة
-- ‫gemini-pro-vision: نموذج جديد متعدّد الوسائط لأداء مجموعة متنوعة من المهام
-  تحقيق التوازن بين القدرة والكفاءة
-- embedding-001: نموذج تضمينات جديد
-- aqa: نموذج جديد تم ضبطه خصيصًا وتدريبه للإجابة عن الأسئلة باستخدام مقاطع نصية لتحديد مصدر الإجابات التي يتم إنشاؤها.
+- gemini-pro：适用于各种任务的新文本模型。兼顾能力和效率。
+- gemini-pro-vision：适用于各种任务的新型多模态模型。
+  兼顾功能和效率。
+- embedding-001：新的嵌入模型。
+- aqa：一种经过专门调优的新模型，经过训练，可使用文本段落作为依据来回答问题。
 
-لمزيد من التفاصيل، يُرجى الاطّلاع على [نماذج Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar).
+如需了解详情，请参阅 [Gemini 模型](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn)。
 
-**تعديلات على إصدار واجهة برمجة التطبيقات:**
+**API 版本更新**：
 
-- الإصدار 1: قناة واجهة برمجة التطبيقات الثابتة
-- v1beta: قناة الإصدار التجريبي تتضمّن هذه القناة ميزات قد تكون قيد التطوير.
+- v1：稳定版 API 渠道。
+- v1beta：Beta 版。此频道具有可能正在开发中的功能。
 
-لمزيد من التفاصيل، يمكنك الاطّلاع على [موضوع إصدارات واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/api-versions?hl=ar).
+如需了解详情，请参阅[“API 版本”主题](https://ai.google.dev/gemini-api/docs/api-versions?hl=zh-cn)。
 
-**تعديلات على واجهة برمجة التطبيقات:**
+**API 更新：**
 
-- ‫`GenerateContent` هي نقطة نهاية موحّدة واحدة للمحادثات والنصوص.
-- يمكنك البث باستخدام طريقة `StreamGenerateContent`.
-- إمكانية استخدام وسائط متعددة: الصورة هي وسيط جديد متوافق
-- الميزات التجريبية الجديدة:
-  - [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)
-  - [Semantic Retriever](https://ai.google.dev/gemini-api/docs/semantic_retrieval?hl=ar)
-  - الإجابة عن الأسئلة مع ذكر المصدر (AQA)
-- عدد المرشحين المعدَّل: لا تعرض نماذج Gemini سوى مرشح واحد.
-- فئات مختلفة من "إعدادات السلامة الشخصية" و"تقييم السلامة" يمكنك الاطّلاع على [إعدادات الأمان](https://ai.google.dev/gemini-api/docs/safety-settings?hl=ar) لمزيد من التفاصيل.
-- لا تتوفّر بعد إمكانية ضبط النماذج لنماذج Gemini (نعمل على توفيرها).
+- `GenerateContent` 是用于聊天和文本的单个统一端点。
+- 可通过 `StreamGenerateContent` 方法进行流式传输。
+- 多模态功能：图片是一种新支持的模态
+- 新的 Beta 版功能：
+  - [函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)
+  - [语义检索器](https://ai.google.dev/gemini-api/docs/semantic_retrieval?hl=zh-cn)
+  - 归因问答 (AQA)
+- 更新了候选对象数量：Gemini 模型仅返回 1 个候选对象。
+- 不同的 Safety Settings 和 SafetyRating 类别。如需了解详情，请参阅[安全设置](https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-cn)。
+- 目前尚不支持对 Gemini 模型进行模型调优（正在开发中）。
 
-إرسال ملاحظات
+发送反馈
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-تاريخ التعديل الأخير: 2026-07-09 (حسب التوقيت العالمي المتفَّق عليه)
+最后更新时间 (UTC)：2026-07-09。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+需要向我们提供更多信息？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-09 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-09。"],[],[]]

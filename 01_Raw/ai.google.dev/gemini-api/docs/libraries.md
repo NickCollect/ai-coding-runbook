@@ -1,55 +1,55 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=th
-fetched_at: 2026-07-20T04:47:45.237409+00:00
-title: "\u0e44\u0e25\u0e1a\u0e23\u0e32\u0e23\u0e35 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/libraries?hl=es-419
+fetched_at: 2026-07-27T04:46:52.210879+00:00
+title: "Bibliotecas de la API de Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-# ไลบรารี Gemini API
+# Bibliotecas de la API de Gemini
 
-เมื่อสร้างด้วย Gemini API เราขอแนะนำให้ใช้ **Google GenAI SDK**
-ซึ่งเป็นไลบรารีอย่างเป็นทางการที่พร้อมใช้งานจริงที่เราพัฒนาและดูแลรักษาสำหรับภาษาที่ได้รับความนิยมมากที่สุด โดยไลบรารีเหล่านี้พร้อมใช้งาน[ทั่วไป](https://ai.google.dev/gemini-api/docs/libraries?hl=th#new-libraries)และใช้ในเอกสารประกอบและตัวอย่างอย่างเป็นทางการทั้งหมดของเรา
+Cuando compiles con la API de Gemini, te recomendamos que uses el **SDK de IA generativa de Google**.
+Estas son las bibliotecas oficiales listas para producción que desarrollamos y mantenemos para los lenguajes más populares. [Están disponibles para el público general y se usan en toda nuestra documentación y ejemplos oficiales.](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#new-libraries)
 
-หากเพิ่งเคยใช้ Gemini API ให้ทำตาม[คู่มือเริ่มต้นใช้งาน](https://ai.google.dev/gemini-api/docs/get-started?hl=th)เพื่อเริ่มใช้งาน
+Si no conoces la API de Gemini, sigue nuestra [guía de introducción](https://ai.google.dev/gemini-api/docs/get-started?hl=es-419) para comenzar.
 
-## ภาษาที่รองรับและการติดตั้ง
+## Compatibilidad con lenguajes e instalación
 
-Google GenAI SDK พร้อมใช้งานสำหรับภาษา Python, JavaScript/TypeScript, Go และ Java คุณสามารถติดตั้งไลบรารีของแต่ละภาษาได้โดยใช้เครื่องมือจัดการแพ็กเกจ หรือไปที่ที่เก็บใน GitHub ของภาษาเหล่านั้นเพื่อดูข้อมูลเพิ่มเติม
+El SDK de IA generativa de Google está disponible para los lenguajes Python, JavaScript/TypeScript, Go y Java. Puedes instalar la biblioteca de cada lenguaje con los administradores de paquetes o visitar sus repositorios de GitHub para obtener más información:
 
 ### Python
 
-- ไลบรารี: [`google-genai`](https://pypi.org/project/google-genai)
-- ที่เก็บใน GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
-- การติดตั้ง: `pip install google-genai`
+- Biblioteca: [`google-genai`](https://pypi.org/project/google-genai)
+- Repositorio de GitHub: [googleapis/python-genai](https://github.com/googleapis/python-genai)
+- Instalación: `pip install google-genai`
 
 ### JavaScript
 
-- ไลบรารี: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
-- ที่เก็บใน GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
-- การติดตั้ง: `npm install @google/genai`
+- Biblioteca: [`@google/genai`](https://www.npmjs.com/package/@google/genai)
+- Repositorio de GitHub: [googleapis/js-genai](https://github.com/googleapis/js-genai)
+- Instalación: `npm install @google/genai`
 
 ### Go
 
-- ไลบรารี: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
-- ที่เก็บใน GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
-- การติดตั้ง: `go get google.golang.org/genai`
+- Biblioteca: [`google.golang.org/genai`](https://pkg.go.dev/google.golang.org/genai)
+- Repositorio de GitHub: [googleapis/go-genai](https://github.com/googleapis/go-genai)
+- Instalación: `go get google.golang.org/genai`
 
 ### Java
 
-- ไลบรารี: `google-genai`
-- ที่เก็บใน GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
-- การติดตั้ง: หากใช้ Maven ให้เพิ่มข้อมูลต่อไปนี้ลงในทรัพยากร Dependency
+- Biblioteca: `google-genai`
+- Repositorio de GitHub: [googleapis/java-genai](https://github.com/googleapis/java-genai)
+- Instalación: Si usas Maven, agrega lo siguiente a tus dependencias:
 
 ```
 <dependencies>
@@ -63,48 +63,46 @@ Google GenAI SDK พร้อมใช้งานสำหรับภาษา
 
 ### C#
 
-- ไลบรารี: `Google.GenAI`
-- ที่เก็บใน GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
-- การติดตั้ง: `dotnet add package Google.GenAI`
+- Biblioteca: `Google.GenAI`
+- Repositorio de GitHub: [googleapis/dotnet-genai](https://googleapis.github.io/dotnet-genai/)
+- Instalación: `dotnet add package Google.GenAI`
 
-## เวอร์ชันสำหรับผู้ใช้ทั่วไป
+## Disponibilidad general
 
-ณ เดือนพฤษภาคม 2025 Google GenAI SDK พร้อมใช้งานทั่วไป (GA) ในทุกแพลตฟอร์มที่รองรับ และเป็นไลบรารีที่แนะนำสำหรับการเข้าถึง Gemini API
-โดยไลบรารีเหล่านี้มีความเสถียร รองรับการใช้งานจริงอย่างเต็มที่ และได้รับการดูแลรักษาอย่างต่อเนื่อง
-นอกจากนี้ยังให้สิทธิ์เข้าถึงฟีเจอร์ล่าสุดและมอบประสิทธิภาพที่ดีที่สุดในการทำงานร่วมกับ Gemini
+A partir de mayo de 2025, el SDK de IA generativa de Google alcanzó la disponibilidad general (GA) en todas las plataformas compatibles y son las bibliotecas recomendadas para acceder a la API de Gemini.
+Son estables, totalmente compatibles para el uso en producción y se mantienen de forma activa.
+Proporcionan acceso a las funciones más recientes y ofrecen el mejor rendimiento cuando se trabaja con Gemini.
 
-หากคุณใช้ไลบรารีแบบเดิมของเรา ขอแนะนำอย่างยิ่งให้เปลี่ยนไปใช้ไลบรารีใหม่เพื่อให้เข้าถึงฟีเจอร์ล่าสุดและได้รับประสิทธิภาพที่ดีที่สุดในการทำงานร่วมกับ Gemini ดูข้อมูลเพิ่มเติมได้ในส่วน[ไลบรารีแบบเดิม](https://ai.google.dev/gemini-api/docs/libraries?hl=th#previous-sdks)
+Si usas una de nuestras bibliotecas heredadas, te recomendamos que migres para que puedas acceder a las funciones más recientes y obtener el mejor rendimiento cuando trabajes con Gemini. Consulta la sección de [bibliotecas heredadas](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419#previous-sdks) para obtener más información.
 
-## ไลบรารีแบบเดิมและการเปลี่ยนไปใช้ไลบรารีใหม่
+## Bibliotecas heredadas y migración
 
-หากคุณใช้ไลบรารีแบบเดิมของเรา ขอแนะนำให้
-[เปลี่ยนไปใช้ไลบรารีใหม่](https://ai.google.dev/gemini-api/docs/migrate?hl=th)
+Si usas una de nuestras bibliotecas heredadas, te recomendamos que
+[migres a las bibliotecas nuevas](https://ai.google.dev/gemini-api/docs/migrate?hl=es-419).
 
-ไลบรารีแบบเดิมไม่ให้สิทธิ์เข้าถึงฟีเจอร์ล่าสุด (เช่น
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=th) และ [Veo](https://ai.google.dev/gemini-api/docs/video?hl=th)) และจะ
-เลิกใช้งานในวันที่ 30 พฤศจิกายน 2025
+Las bibliotecas heredadas no proporcionan acceso a funciones recientes (como
+[Live API](https://ai.google.dev/gemini-api/docs/live?hl=es-419) y [Veo](https://ai.google.dev/gemini-api/docs/video?hl=es-419)) y dejaron de estar disponibles el 30 de noviembre de 2025.
 
-สถานะการรองรับของไลบรารีแบบเดิมแต่ละรายการจะแตกต่างกันไปตามรายละเอียดในตารางต่อไปนี้
+El estado de compatibilidad de cada biblioteca heredada varía, como se detalla en la siguiente tabla:
 
-| ภาษา | ไลบรารีแบบเดิม | สถานะการรองรับ | ไลบรารีที่แนะนำ |
+| Idioma | Biblioteca heredada | Estado de compatibilidad | Biblioteca recomendada |
 | --- | --- | --- | --- |
-| **Python** | `google-generativeai` | ไม่ได้ดูแลรักษาอย่างต่อเนื่อง | `google-genai` |
-| **JavaScript/TypeScript** | `@google/generativeai` | ไม่ได้ดูแลรักษาอย่างต่อเนื่อง | `@google/genai` |
-| **Go** | `google.golang.org/generative-ai` | ไม่ได้ดูแลรักษาอย่างต่อเนื่อง | `google.golang.org/genai` |
-| **Dart และ Flutter** | `google_generative_ai` | ไม่ได้ดูแลรักษาอย่างต่อเนื่อง | ใช้ [Genkit Dart](https://genkit.dev/docs/dart/get-started/) หรือ [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
-| **Swift** | `generative-ai-swift` | ไม่ได้ดูแลรักษาอย่างต่อเนื่อง | ใช้ [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=th) |
-| **Android** | `generative-ai-android` | ไม่ได้ดูแลรักษาอย่างต่อเนื่อง | ใช้ [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=th) |
+| **Python** | `google-generativeai` | No se mantiene de forma activa | `google-genai` |
+| **JavaScript/TypeScript** | `@google/generativeai` | No se mantiene de forma activa | `@google/genai` |
+| **Go** | `google.golang.org/generative-ai` | No se mantiene de forma activa | `google.golang.org/genai` |
+| **Dart y Flutter** | `google_generative_ai` | No se mantiene de forma activa | Usa [Genkit Dart](https://genkit.dev/docs/dart/get-started/) o [Firebase AI Logic](https://pub.dev/packages/firebase_ai) |
+| **Swift** | `generative-ai-swift` | No se mantiene de forma activa | Usa [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=es-419) |
+| **Android** | `generative-ai-android` | No se mantiene de forma activa | Usa [Firebase AI Logic](https://firebase.google.com/products/firebase-ai-logic?hl=es-419) |
 
-**หมายเหตุสำหรับนักพัฒนาซอฟต์แวร์ Java:** ไม่มี Java SDK ที่ Google จัดหาให้แบบเดิมสำหรับ Gemini API คุณจึงไม่จำเป็นต้องเปลี่ยนจากไลบรารีของ Google เวอร์ชันก่อนหน้า คุณ
-สามารถเริ่มต้นใช้งานไลบรารีใหม่ได้โดยตรงใน
-[ส่วนภาษาที่รองรับและการติดตั้ง](#install)
+**Nota para desarrolladores de Java:** No había un SDK de Java heredado proporcionado por Google para la API de Gemini, por lo que no se requiere ninguna migración desde una biblioteca anterior de Google. Puedes comenzar directamente con la biblioteca nueva en la
+[sección Compatibilidad con lenguajes e instalación](#install).
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-อัปเดตล่าสุด 2026-06-22 UTC
+Última actualización: 2026-06-22 (UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+¿Quieres brindar más información?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-22 UTC"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]

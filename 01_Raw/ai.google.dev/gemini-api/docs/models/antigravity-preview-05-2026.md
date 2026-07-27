@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=es-419
-fetched_at: 2026-07-20T04:34:57.459989+00:00
-title: "Vista previa de Antigravity \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/antigravity-preview-05-2026?hl=zh-TW
+fetched_at: 2026-07-27T04:45:35.785333+00:00
+title: "Antigravity \u9810\u89bd\u756b\u9762 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Enviar comentarios
+提供意見
 
-# Vista previa de Antigravity
+# Antigravity 預覽畫面
 
-Es un agente administrado potente y de uso general diseñado para flujos de trabajo autónomos de varios pasos. Este modelo planifica, razona, ejecuta código, administra archivos y busca en la Web dentro de una zona de pruebas de Linux segura y aislada alojada por Google.
+功能強大的通用型受管理代理，專為自主式多步驟工作流程設計。這個模型會在 Google 託管的安全隔離 Linux 沙箱中規劃、推論、執行程式碼、管理檔案及搜尋網路。
 
-## Documentación
+## 說明文件
 
-Visita la página [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=es-419) para obtener una cobertura completa de las funciones, las capacidades y las muestras de código.
+如要全面瞭解功能、用途和程式碼範例，請前往 [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=zh-tw) 頁面。
 
 ## antigravity-preview-05-2026
 
-| Propiedad | Descripción |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardCódigo de agente | **API de Interactions**  `antigravity-preview-05-2026` |
-| saveTipos de datos admitidos | **Entrada**  Texto, imagen  **Resultado**  Texto |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Ventana de contexto de entrada**  1,048,576 (compactado en alrededor de 135,000)  **Límite de tokens de salida**  65,536 |
-| 123versiones | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `antigravity-preview-05-2026` |
-| calendar\_monthÚltima actualización | Mayo de 2026 |
+| id\_card代理程式碼 | **互動 API**  `antigravity-preview-05-2026` |
+| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  文字 |
+| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入脈絡窗口**  1,048,576 (壓縮後約為 135,000)  **輸出詞元限制**  65,536 |
+| 123 個版本 | 如要瞭解詳情，請參閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 預覽：`antigravity-preview-05-2026` |
+| calendar\_month最新更新 | 2026 年 5 月 |
 
-Enviar comentarios
+提供意見
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Última actualización: 2026-05-19 (UTC)
+上次更新時間：2026-05-19 (世界標準時間)。
 
-¿Quieres brindar más información?
+想進一步說明嗎？
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-05-19 (世界標準時間)。"],[],[]]

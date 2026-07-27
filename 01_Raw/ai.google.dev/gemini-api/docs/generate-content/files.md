@@ -1,35 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=ko
-fetched_at: 2026-07-20T04:45:53.830471+00:00
-title: "Files API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=pt-BR
+fetched_at: 2026-07-27T04:33:57.389880+00:00
+title: "API Files \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-의견 보내기
+Envie comentários
 
-# Files API
+# API Files
 
-Gemini는 텍스트, 이미지, 오디오 등 다양한 유형의 입력 데이터를 동시에 처리할 수 있습니다.
+O Gemini pode processar vários tipos de dados de entrada, incluindo texto, imagens e áudio, ao mesmo tempo.
 
-이 가이드에서는 Files API를 사용하여 미디어 파일을 사용하는 방법을 보여줍니다. 기본 작업은 오디오 파일, 이미지, 동영상, 문서, 기타 지원되는 파일 형식에서 동일합니다.
+Este guia mostra como trabalhar com arquivos de mídia usando a API Files. As operações básicas são as mesmas para arquivos de áudio, imagens, vídeos, documentos e outros tipos de arquivos compatíveis.
 
-파일 프롬프트 안내는 [파일 프롬프트 가이드](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide) 섹션을 참고하세요.
+Para orientações sobre comandos de arquivo, consulte a seção [Guia de comandos de arquivo](https://ai.google.dev/gemini-api/docs/files?hl=pt-br#prompt-guide).
 
-## 파일 업로드
+## Carregar um arquivo
 
-Files API를 사용하여 미디어 파일을 업로드할 수 있습니다. 파일, 텍스트 프롬프트, 시스템 안내 등을 포함한 총 요청 크기가 100MB보다 큰 경우 항상 Files API를 사용하세요. PDF 파일의 경우 한도는 50MB입니다.
+Você pode usar a API Files para fazer upload de um arquivo de mídia. Sempre use a API Files quando o tamanho total da solicitação (incluindo arquivos, comando de texto, instruções do sistema etc.) for maior que 100 MB. Para arquivos PDF, o limite é de 50 MB.
 
-다음 코드는 파일을 업로드한 다음 `generateContent` 호출에서 파일을 사용합니다.
+O código a seguir faz upload de um arquivo e o usa em uma chamada para
+`generateContent`.
 
 ### Python
 
@@ -47,7 +48,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import {
@@ -156,9 +157,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 파일의 메타데이터 가져오기
+## Receber metadados de um arquivo
 
-`files.get`를 호출하여 API가 업로드된 파일을 성공적으로 저장했는지 확인하고 메타데이터를 가져올 수 있습니다.
+Para verificar se a API armazenou o arquivo enviado e receber os metadados dele, chame `files.get`.
 
 ### Python
 
@@ -173,7 +174,7 @@ myfile = client.files.get(name=file_name)
 print(myfile)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import {
@@ -226,9 +227,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## 업로드된 파일 목록
+## Listar arquivos enviados
 
-다음 코드는 업로드된 모든 파일의 목록을 가져옵니다.
+O código a seguir recebe uma lista de todos os arquivos enviados:
 
 ### Python
 
@@ -242,7 +243,7 @@ for f in client.files.list():
     print(' ', f.name)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import {
@@ -281,9 +282,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 업로드된 파일 삭제
+## Excluir arquivos enviados
 
-파일은 48시간 후에 자동으로 삭제됩니다. 업로드된 파일을 수동으로 삭제할 수도 있습니다.
+Os arquivos são excluídos automaticamente após 48 horas. Também é possível excluir manualmente um
+arquivo enviado:
 
 ### Python
 
@@ -296,7 +298,7 @@ myfile = client.files.upload(file='path/to/sample.mp3')
 client.files.delete(name=myfile.name)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import {
@@ -335,191 +337,208 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 사용량 정보
+## Informações de uso
 
-Files API를 사용하여 미디어 파일을 업로드하고 상호작용할 수 있습니다. Files API를 사용하면 프로젝트당 최대 20GB의 파일을 저장할 수 있으며 파일당 최대 크기는 2GB입니다. 파일은 48시간 동안 저장됩니다. 이 기간 동안 API를 사용하여 파일에 관한 메타데이터를 가져올 수는 있지만 파일을 다운로드할 수는 없습니다.
-Files API는 Gemini API가 제공되는 모든 지역에서 무료로 사용할 수 있습니다.
+É possível usar a API Files para fazer upload e interagir com arquivos de mídia. Com a API Files, é possível armazenar até 20 GB de arquivos por projeto, com um tamanho máximo de 2 GB por arquivo. Os arquivos são armazenados por 48 horas. Durante esse período, você pode
+usar a API para receber metadados sobre os arquivos, mas não é possível fazer o download deles.
+A API Files está disponível sem custo financeiro em todas as regiões onde a API Gemini está disponível.
 
-## 파일 프롬프트 작성 전략
+## Estratégias de solicitação de arquivos
 
-이 섹션에서는 Gemini API의 프롬프트와 함께 미디어 파일을 사용하는 방법에 관한 가이드와 권장사항을 제공합니다.
+Esta seção oferece orientações e práticas recomendadas para usar arquivos de mídia com
+comandos para a API Gemini.
 
-프롬프트에서 다양한 유형의 데이터를 사용할 수 있으면 Gemini API로 처리할 수 있는 작업의 유연성이 높아집니다. 예를 들어 모델에 맛있는 식사 사진을 보내고 식사에 관한 짧은 블로그를 작성해 달라고 요청할 수 있습니다.
+A capacidade de usar vários tipos de dados nos comandos oferece mais flexibilidade em termos de tarefas que podem ser realizadas com a API Gemini. Por
+exemplo, você pode enviar para o modelo a foto de uma refeição deliciosa e pedir que ele escreva
+um pequeno blog sobre ela.
 
 |  |  |
 | --- | --- |
-| **프롬프트** | **응답** |
-| 이 사진을 바탕으로 마음을 사로잡는 짧은 블로그 게시물을 작성합니다. 사진에 있는 음식에 대한 설명과 식사 준비 과정을 설명해야 합니다.   쿠키 | 도시락 싸기는 시간과 비용을 절약하는 좋은 방법이며, 건강한 식습관을 기르는 데도 도움이 됩니다. 이 식사는 미리 쉽게 준비할 수 있는 건강하고 맛있는 식사의 좋은 예입니다.  이 식사에는 현미, 구운 채소, 닭고기 데리야키가 포함되어 있습니다. 현미는 건강한 복합 탄수화물로, 지속적인 에너지를 공급합니다. 구운 채소는 일일 비타민과 미네랄을 섭취하는 좋은 방법이며, 닭고기 데리야키는 맛있고 단백질이 풍부한 선택입니다.  이 식사는 준비하기도 매우 쉽습니다. 현미를 짓고, 채소를 구우며, 닭고기 데리야키를 요리하면 됩니다. 모든 재료가 익으면 밀프렙 용기에 나누어 담아 냉장고에 보관합니다. 그런 다음 용기를 들고 바쁜 아침을 시작할 수 있습니다.  미리 쉽게 준비할 수 있는 건강하고 맛있는 식사를 찾고 있다면 이 식사가 좋은 선택입니다. 영양과 풍미가 가득하며 포만감과 만족감을 확실히 느낄 수 있습니다.  건강하고 맛있는 도시락을 만들어 보세요! |
+| **Comando** | **Resposta** |
+| Escreva uma postagem curta e interessante para o blog com base nessa foto. A foto deve incluir uma descrição da refeição e falar sobre a preparação das refeições.   Cookies | Preparar refeições é uma ótima maneira de economizar tempo e dinheiro, além de ajudar você a comer de forma mais saudável. Essa refeição é um ótimo exemplo de uma refeição saudável e deliciosa que pode ser preparada com antecedência.  Essa refeição inclui arroz integral, legumes assados e frango teriyaki. O arroz integral é um carboidrato saudável e complexo que vai dar energia sustentada. Os vegetais assados são uma ótima maneira de receber sua dose diária de vitaminas e minerais, e o frango teriyaki é uma opção deliciosa e rica em proteínas.  Além disso, ela é muito fácil de preparar. Basta cozinhar o arroz integral, assar os legumes e preparar o frango teriyaki. Depois de tudo cozido, divida em recipientes para marmita e guarde na geladeira. Assim, você pode pegar um recipiente e sair para trabalhar nas manhãs agitadas.  Se você quer uma refeição saudável e deliciosa que pode ser preparada com antecedência, essa é uma ótima opção. Ele é cheio de nutrientes e sabor, e vai deixar você satisfeito.  Que venham muitas refeições deliciosas e saudáveis! |
 
-미디어 파일을 사용하는 프롬프트에서 원하는 출력을 얻는 데 문제가 있는 경우 원하는 결과를 얻는 데 도움이 되는 몇 가지 전략이 있습니다. 다음 섹션에서는 멀티모달 입력을 사용하는 프롬프트를 개선하기 위한 설계 접근 방식과 문제 해결 팁을 제공합니다.
+Se você estiver com problemas para receber a saída desejada de comandos que usam arquivos de mídia, há algumas estratégias que podem ajudar. As seções a seguir fornecem abordagens de design e dicas de solução de problemas para melhorar os comandos que usam entrada multimodal.
 
-다음 권장사항에 따라 멀티모달 프롬프트를 향상시킬 수 있습니다.
+É possível melhorar os prompts multimodais seguindo estas práticas recomendadas:
 
-- ### [프롬프트 설계 기초](#specific-instructions)
+- ### [Conceitos básicos do design de comandos](#specific-instructions)
 
-  - **구체적인 지침 설정**: 오해의 소지가 거의 없도록 명확하고 간결한 지침을 제시합니다.
-  - **프롬프트에 몇 가지 예시 추가:** 달성하려는 목표를 쉽게 이해할 수 있도록 실질적인 퓨샷 예시를 사용합니다.
-  - **단계별 분류**: 복잡한 태스크를 관리 가능한 하위 목표로 분할하고 프로세스 전반에 걸쳐서 모델을 안내합니다.
-  - **출력 형식 지정**: 프롬프트에서 마크다운, JSON, HTML 등 원하는 형식으로 출력을 요청합니다.
-  - **단일 이미지 프롬프트의 경우 이미지를 먼저 배치**: Gemini는 어떤 순서로든 이미지 및 텍스트 입력을 처리할 수 있지만 단일 이미지가 포함된 프롬프트의 경우 해당 이미지(또는 동영상)를 텍스트 프롬프트 앞에 배치할 경우 성능이 향상될 수 있습니다. 그러나 상황에 따라 이미지와 텍스트를 밀접하게 혼합해야 할 경우에는 무엇이든 가장 자연스러운 순서를 따릅니다.
-- ### [멀티모달 프롬프트 문제 해결](#troubleshooting)
+  - **Seja específico nas instruções**: crie instruções claras e concisas que deixem pouco espaço para interpretações equivocadas.
+  - **Adicione alguns exemplos ao comando**: use exemplos realistas de few-shot para ilustrar o que você quer alcançar.
+  - **Detalhamento por etapas**: divida tarefas complexas em submetas gerenciáveis para guiar o modelo pelo processo.
+  - **Especifique o formato de saída**: no comando, peça que a saída esteja no formato desejado, como markdown, JSON, HTML e muito mais.
+  - **Coloque sua imagem em primeiro lugar nos comandos de imagem única**: o Gemini processa entradas de imagem e texto em qualquer ordem, mas para comandos com uma única imagem, o desempenho pode ser melhor se a imagem (ou vídeo) for colocada antes no comando de texto. No entanto, nos comandos que exigem que as imagens sejam altamente intercaladas com textos para fazer sentido, use a ordem mais natural.
+- ### [Como solucionar problemas do comando multimodal](#troubleshooting)
 
-  - **모델이 관련 이미지 부분에서 정보를 가져오지 않는 경우:** 프롬프트로 정보를 가져오려는 이미지 부분에 대한 힌트를 제공합니다.
-  - **모델 출력이 너무 일반적인 경우(이미지/동영상 출력에 맞게 충분히 맞춤화되지 않은 경우):** 프롬프트 시작 시 태스크 지침을 제공하기 전 이미지 또는 동영상을 기술하도록 모델에 요청하거나 이미지에 포함된 항목을 참조하도록 모델에 요청합니다.
-  - **실패한 부분 문제 해결:** 이미지를 기술하거나, 이유를 설명하거나, 모델의 초기 이해 수준을 측정하도록 모델에 요청합니다.
-  - **프롬프트 결과 비현실적인 콘텐츠가 발생하는 경우:** 강도 설정을 낮추거나 추가 세부정보를 추정할 가능성이 적도록 모델에 더 짧은 설명을 요청합니다.
-  - **샘플링 매개변수 조정:** 여러 다른 강도 설정 및 최상위 K 선택으로 실험해서 모델 창의성을 조정합니다.
+  - **Se o modelo não estiver desenhando informações da parte relevante da imagem**: solte dicas com os aspectos da imagem de que você quer que o comando extraia informações.
+  - **Se a saída do modelo for muito genérica (não personalizada o suficiente para a entrada de imagem/vídeo)**: no início do comando, peça para o modelo descrever as imagens ou o vídeo antes de fornecer a tarefa ou peça ao modelo para consultar o conteúdo da imagem.
+  - **Para resolver problemas de qual parte falhou**: peça para o modelo descrever a imagem ou explicar o raciocínio para avaliar o entendimento inicial dele.
+  - **Se o comando resultar em conteúdo alucinado**: diminua a configuração de temperatura ou peça ao modelo descrições mais curtas para diminuir a probabilidade de extrapolar detalhes.
+  - **Ajuste os parâmetros de amostragem**: teste diferentes configurações de temperatura e as seleções de top-k para ajustar a criatividade do modelo.
 
-### 구체적인 지침 설정
+### Especificar as instruções
 
-프롬프트는 명확하고 세부적일 때 가장 성공적입니다. 특정 출력이 필요하다면 해당 요구사항을 프롬프트에 직접 포함하여 원하는 출력을 얻을 가능성을 높이세요.
+As instruções têm mais sucesso quando são claras e detalhadas. Se você tiver uma saída específica em mente, é melhor incluir esse requisito no comando para garantir a saída desejada.
 
-공항 보드 이미지의 경우 "이미지 설명"이라고만 모델에 요청하면 일반적인 설명이 생성될 수 있습니다. 모델이 이미지에서 시간과 도시를 파싱하도록 하려면 프롬프트에 해당 요청을 직접 포함할 수 있습니다.
+Para essa imagem de uma placa de aeroporto, pedir ao modelo apenas "descrever esta imagem" pode gerar uma descrição geral. Se você precisa que o modelo analise a hora e a cidade a partir da imagem, inclua essa solicitação diretamente no comando.
 
-| 프롬프트 | 모델 응답 |
+| Comando | Resposta do modelo |
 | --- | --- |
-| 이 이미지를 설명해 주세요. | 이 이미지는 공항 도착 및 출발 보드를 보여줍니다. |
+| Descreva esta imagem. | A imagem mostra um painel de chegadas e partidas do aeroporto. |
 
-| **업데이트된 프롬프트** | **개선된 응답** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 여행 일정 이 이미지에 표시된 공항 보드에서 시간과 도시를 분석해서 목록으로 표시해 주세요. | - 10:50 모스크바 - 11:05 에든버러 - 11:05 런던 - 11:10 부카레스트 - 11:30 키예프 - 11:35 더블린 - 11:45 이스트 미들랜즈 - 12:15 소피아 - 12:30 런던 - 12:30 뉴캐슬 - 12:40 상트페테르부르크 - 12:40 런던 - 12:45 맨체스터 |
+| Horários de viagem Analise a hora e a cidade no quadro do aeroporto mostrado nesta imagem em uma lista. | - 10:50 Moscow - 11:05 Edimburgo - 11:05 Londres - 11:10 Bucareste - 11:30 Kiev - 11:35 Dublin - 11:45 Midlands Orientais - 12:15 Sófia - 12:30 Londres - 12:30 Newcastle - 12:40 São Petersburgo - 12:40 Londres - 12:45 Manchester |
 
-### 몇 가지 예시 추가
+### Adicionar alguns exemplos
 
-Gemini 모델은 원하는 출력을 이해하기 위해 예시로 사용할 수 있는 여러 입력을 수락할 수 있습니다. 이러한 예시를 추가하면 모델이 패턴을 식별하고 제공된 이미지와 응답 사이의 관계를 새 예시에 적용할 수 있습니다. 이를 '퓨샷' 학습이라고도 합니다.
+O modelo Gemini pode aceitar várias entradas que podem ser usadas como exemplos para entender a
+saída que você quer. Adicionar esses exemplos pode ajudar o modelo a identificar os padrões e aplicar a relação entre as imagens fornecidas e as respostas ao novo exemplo. Isso também é chamado de aprendizado "few-shot".
 
-아래 예시에서 최초 출력은 문장 형식으로 작성되었으며 국가(브라질)를 포함합니다. 다른 형식 또는 스타일로 출력을 표시하고 국가가 아닌 도시만 포함한다고 가정해 보세요. 프롬프트에 퓨샷 예시를 추가하면 원하는 방식으로 응답하도록 모델을 조정할 수 있습니다.
+No exemplo abaixo, a saída inicial é escrita na forma de frase e também contém o país (Brasil). Suponha que você queira a saída em um formato ou estilo diferente e queira
+apenas a cidade, não o país. Adicionar alguns exemplos ao comando pode fazer com que o modelo responda da maneira desejada.
 
-| **프롬프트** | **모델 응답** |
+| **Comando** | **Resposta do modelo** |
 | --- | --- |
-| 여행 일정 명소와 함께 도시를 설명해 주세요. | 이 랜드마크는 브라질 리우데자네이루에 있는 구세주 예수상입니다. |
+| Horários de viagem Determine a cidade junto com o ponto de referência. | O ponto turístico é a estátua do Cristo Redentor no Rio de Janeiro, Brasil. |
 
-| **업데이트된 프롬프트** | **개선된 응답** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 명소와 함께 도시를 설명해 주세요. 콜로세움 | 도시: 로마, 랜드마크: 콜로세움 |
-| 자금성 | 도시: 베이징, 랜드마크: 자금성 |
-| 자금성 | 도시: 리우데자네이루, 랜드마크: 구세주 예수상 |
+| Determine a cidade junto com o ponto de referência. coliseu | cidade: Roma, ponto de referência: o Coliseu. |
+| Cidade Proibida | cidade: Pequim, ponto de referência: Cidade Proibida |
+| Cidade Proibida | cidade: Rio de Janeiro, ponto de referência: estátua do Cristo Redentor |
 
-### 단계별 분류
+### Detalhar por etapas
 
-시각적 이해와 추론이 모두 필요한 복잡한 태스크의 경우 태스크를 더 작고 직관적인 단계로 나누는 것이 좋습니다. 또는 프롬프트에서 "단계별로 생각"하도록 모델에 직접 요청하는 것도 효과적일 수 있습니다.
+Para tarefas complexas, como as que exigem compreensão e raciocínio visual, pode ser útil dividir a tarefa em etapas menores e mais diretas. Também poderia ser eficaz se você
+pedisse diretamente ao modelo para “pensar passo a passo” no comando.
 
-| 프롬프트 | 모델 응답 |
+| Comando | Resposta do modelo |
 | --- | --- |
-| 화장지가 언제 다 떨어질까요? | 이제 3개 밖에 없으니 곧 떨어집니다. |
+| Quando vou ficar sem papel higiênico? | Em breve, você só tem mais três rolos. |
 
-| **업데이트된 프롬프트** | **개선된 응답** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 1. 먼저 이 사진에서 화장실 휴지 개수를 세어 보세요.  2. 그런 다음 일반적인 사람이 하루에 화장실 휴지를 얼마나 사용하는지 확인해 주세요.  3. 여기 있는 화장실 휴지가 얼마나 오래갈지 계산해 주세요. | 1. 이 사진에는 화장실 휴지가 3개 있습니다.  2. 사람은 일반적으로 화장실 휴지를 하루에 20칸 정도 사용합니다.  3. 한 롤에 휴지가 200칸 있으면 각 롤이 약 10일 정도 지속됩니다. 따라서 3개 롤은 한 달 정도 지속됩니다. |
+| 1. Primeiro, conte quantos rolos de papel higiênico há nessa imagem.  2. Em seguida, determine a quantidade de papel higiênico que uma pessoa usa por dia.  3. Calcule quanto tempo esses rolos de papel higiênico vão durar. | 1. Há três rolos de papel higiênico nesta imagem.  2. Uma pessoa usa cerca de 20 folhas de papel higiênico por dia.  3. Se cada rolo tiver 200 páginas, cada um deles durará cerca de 10 dias. Portanto, os três rolos durarão cerca de um mês. |
 
-수학 문제나 기타 유형의 단어 문제는 모델이 단계별로 생각하도록 요청하기에 적합한 후보입니다.
+Problemas matemáticos ou outros tipos de problemas são ótimos candidatos para pedir que o modelo pense em etapas.
 
-| **프롬프트** | **응답** |
+| **Comando** | **Resposta** |
 | --- | --- |
-| 이 시퀀스에서 네 번째 항은 무엇인가요? | -135 |
+| Qual é o quarto termo na sequência? | -135 |
 
-모델의 응답은 잘못되었습니다. 이를 개선하기 위한 몇 가지 방법은 모델이 프롬프트에 답변하기 전 문제를 파싱하도록 요청하는 것입니다.
+A resposta do modelo está incorreta. Algumas maneiras de melhorar isso é pedir ao modelo que analise o problema antes de responder ao comando.
 
-| **프롬프트** | **응답** |
+| **Comando** | **Resposta** |
 | --- | --- |
-| 먼저 이미지에서 수식을 분석해 주세요.  그런 후 수식을 기준으로 "시퀀스에서 네 번째 항은 무엇"인지 대답해 주세요. | *클릭하여 결과 확장* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. n = 4를 수식에 대체합니다.  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. b(3)의 값을 알지 못하므로 n = 3을 수식에 대체합니다.  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. b(2)의 값을 알지 못하므로 n = 2를 수식에 대체합니다.  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. b(1)의 값이 15인 것을 알고 있으므로 이를 수식에 대체합니다.  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. 이제 b(2)의 값을 알았으므로 이를 b(3) 수식에 대체합니다.  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. 이제 b(3)의 값을 알았으므로 이를 b(4) 수식에 대체합니다.  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   따라서 시퀀스에서 네 번째 항은 -405입니다. |
+| Analise a fórmula na imagem primeiro.  Depois, com base na fórmula, responda "qual é o quarto termo na sequência?". | *Clique para abrir o resultado* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Substitua n = 4 na fórmula:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Não sabemos o valor de b(3), portanto, substitua n = 3 na fórmula:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Não sabemos o valor de b(2), portanto, substitua n = 2 na fórmula:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Sabemos que o valor de b(1) é 15, portanto, substitua-o na fórmula:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Agora que sabemos o valor de b(2), substitua-o na fórmula por b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Agora que sabemos o valor de b(3), substitua-o na fórmula por b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Portanto, o quarto termo na sequência é -405. |
 
-이번에는 모델 응답이 올바릅니다. 이제 응답을 보다 효율적으로 만들기 위해 모델에 단계별로 생각하도록 요청할 수 있습니다.
+A resposta do modelo está correta. Agora, para simplificar ainda mais, peça ao modelo que pense em etapas detalhadas.
 
-| **업데이트된 프롬프트** | **개선된 응답** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 이 시퀀스에서 네 번째 항은 무엇인가요? 단계별로 생각해 주세요. | 첫 번째 항은 15입니다.  두 번째 항은 b(1) \* (-3) = 15 \* (-3) = -45입니다.  세 번째 항은 b(2) \* (-3) = -45 \* (-3) = 135입니다.  네 번째 항은 b(3) \* (-3) = 135 \* (-3) = -405입니다. |
+| Qual é o quarto termo na sequência? Pense em etapas. | O primeiro termo é 15.  O segundo termo é b(1) \* (-3) = 15 \* (-3) = -45.  O terceiro termo é b(2) \* (-3) = -45 \* (-3) = 135.  O quarto termo é b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### 출력 형식 지정
+### especifique o formato das respostas
 
-일반적인 문제는 모델 출력을 다운스트림 태스크로 수집해야 할 경우 특히 모델 출력을 특정 형식(예: 마크다운, JSON, HTML)으로 지정해야 한다는 것입니다. 프롬프트 내에서 이를 수행하도록 모델을 안내하여 해당 형식으로 출력을 생성할 수 있습니다. 다음은 두 가지 예시입니다.
+Um problema comum é a necessidade de a saída do modelo estar em um determinado formato
+(por exemplo, markdown, JSON, HTML), especialmente se ela precisar ser ingerida por uma tarefa downstream. Você pode tentar produzir saídas nesse formato instruindo o modelo a fazer isso no comando. Veja dois exemplos:
 
-| 프롬프트 | 모델 응답 |
+| Comando | Resposta do modelo |
 | --- | --- |
-| 이 이미지의 표를 마크다운 형식으로 분석해 주세요. | | 과목 | 상태 | 시간 | 시작일 | 만료일 |  | ------- | ------ | ---- | ---------- | ------ |  | 수학 | 완료 | 1.5시간 | 2023/11/29 | 2023/12/1 |  | 지리 | 완료 | 30분 | 2023/12/2 | 2023/12/4 |  | 물리 | 진행 중 | 2시간 | 2023/12/3 | 2023/12/5 |  | 생물 | 시작 안 함 | 6시간 | 2016/11/2 | 2023/12/6 | |
+| Analise a tabela nesta imagem no formato markdown | | Assunto | Status | Tempo | Data de início | Prazo |  | ------- | ------ | ---- | ---------- | ------ |  | Matemática | Concluído | 1h30 | 29/11/2023 | 01/12/2023 |  | Geografia | Concluído | 30 min | 02/12/2023 | 04/12/2023 |  | Física | Em andamento | 2h | 03/12/2023 | 05/12/2023 |  | Biologia | Não começou | 6 horas | 02/11/2016 | 06/12/2023 | |
 
-| **프롬프트** | **모델 응답** |
+| **Comando** | **Resposta do modelo** |
 | --- | --- |
-| 다음 모든 속성:  재료, 요리 종류, 채식주의 식단 여부의 목록을 JSON 형식으로 제공해 주세요. | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| Forneça uma lista com todos os atributos a seguir:  Ingredientes, tipo de culinária, vegetariano ou não, no formato JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### 단일 이미지 프롬프트에 이미지 먼저 배치
+### Colocar a imagem em primeiro lugar nos comandos com uma imagem
 
-Gemini는 프롬프트 내에서 어떤 순서로든 이미지와 텍스트를 해석할 수 있지만 텍스트 프롬프트 앞에 단일 이미지를 배치하는 것이 더 나은 결과로 이어질 수 있습니다.
-다음 샘플에서는 각 프롬프트에서 이미지가 텍스트 앞에 오는 것을 알 수 있습니다.
+O Gemini pode interpretar imagens e textos em qualquer ordem nos comandos, mas inserir uma imagem individual antes do comando de texto pode gerar resultados melhores.
+Nos exemplos a seguir, você vai notar que a imagem vem antes do texto em
+cada comando.
 
-### 멀티모달 프롬프트 문제 해결
+### solucionar problemas do comando multimodal
 
-유용한 대답을 얻지 못할 경우 프롬프트를 문제 해결해야 할 수 있습니다. 이를 위해서는 몇 가지 전략을 시도해볼 수 있습니다.
+Se você não receber uma resposta útil, talvez seja necessário resolver problemas do comando. Aqui estão algumas estratégias que você pode tentar.
 
-#### 모델이 관련 이미지 부분에서 정보를 가져오지 않는 경우
+#### Se o modelo não estiver desenhando informações da parte relevante da imagem
 
-보다 구체적인 대답을 얻기 위해서는 해당 대답에 정보를 제공하도록 프롬프트가 정보를 가져올 이미지 특정 부분을 지적할 수 있습니다.
+Para receber uma resposta mais específica, indique de quais aspectos da imagem
+você quer que o comando extraia informações para embasar sua resposta.
 
-| 프롬프트 | 모델 응답 |
+| Comando | Resposta do modelo |
 | --- | --- |
-| 아기 한 명이 사용할 때 이 기저귀는 며칠이나 갈까요? | 기저귀가 모두 소진되려면 198일 걸립니다. |
+| Quantos dias essas fraldas vão durar para um bebê? | As fraldas durarão 198 dias antes de acabarem. |
 
-| **업데이트된 프롬프트** | **개선된 응답** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 기저귀가 소진되려면 며칠이나 걸릴까요?  상자에 표시된 무게를 사용해서 아기의 나이를 확인하고 상자에 적힌 총 기저귀 개수를 사용해 주세요.  총 개수를 아기 한 명이 하루에 사용하는 기저귀 수로 나눠주세요. | 상자에는 198개의 기저귀가 있습니다. 상자에는 체중이 22-37lbs인 아기를 위한 기저귀라고 씌여져 있습니다.  이 몸무게 범위의 평균 아기는 만 1~2세 사이입니다.  만 2세 아기는 일반적으로 하루 6개 정도 기저귀를 사용합니다. 따라서 기저귀는 33일(198/6) 정도 지속됩니다. |
+| Quanto tempo essas fraldas vão durar?  Determine a idade da criança e o número total de fraldas na caixa com base no peso total.  Divida o total pelo número de fraldas usadas diariamente por uma criança. | A caixa contém 198 fraldas. Ela também informa que as fraldas são para crianças que pesam de 9 a 16 quilos.  Crianças nessa faixa de peso geralmente têm de 1 a 2 anos de idade.  Uma criança de dois anos costuma usar 6 fraldas por dia, logo, as fraldas vão durar cerca de 33 dias (198/6). |
 
-#### 모델 출력이 너무 일반적이고 이미지 입력에 충분히 조정되지 않은 경우
+#### Se a saída do modelo for muito genérica e não for personalizada o suficiente para a entrada de imagem
 
-모델이 이미지에 따라 응답을 조정할 수 있게 하려면 추론 태스크를 수행하기 전 이미지를 기술하도록 요청합니다.
+Para ajudar o modelo a adaptar a resposta às imagens, peça para ele descrever
+as imagens antes de realizar a tarefa de raciocínio.
 
-| 프롬프트 | 모델 응답 |
+| Comando | Resposta do modelo |
 | --- | --- |
-| 이러한 이미지 사이의 공통점은 무엇인가요? | 4개 이미지 모두 풍경 사진을 보여줍니다. |
+| O que há em comum entre essas imagens? | As quatro imagens são exemplos de fotografia de paisagem. |
 
-| **업데이트된 프롬프트** | **개선된 응답** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 첫째, 각 이미지에 무엇이 있는지 자세히 설명해 주세요. 이러한 이미지 사이의 공통점은 무엇인가요? | 첫 번째 이미지는 여행 가방을 싸고 있는 사람을 보여줍니다. 두 번째 이미지는 쇼핑몰의 빈 통로를 보여줍니다. 세 번째 이미지는 화장실 휴지 한 롤을 보여줍니다. 네 번째 이미지는 어둡고 거친 바다를 보여줍니다.  이러한 이미지 간의 공통점은 이미지가 모두 경계 공간의 예시라는 점입니다. 경계 공간은 두 가지 서로 다른 공간 또는 상황 사이에 있는 공간 또는 상황을 의미합니다. 경계 공간의 특성은 불확실성이나 모호한 감정에 있습니다.  첫 번째 이미지는 집과 여행 사이에 있는 사람을 보여줍니다. 두 번째 이미지는 두 매장 사이의 통로를 보여줍니다. 세 번째 이미지는 욕실을 나타낼 수 있는 화장실 휴지를 보여줍니다. 욕실은 전통적으로 개인성과 공공성을 모두 갖고 있는 공간입니다. 그리고 우리가 외부 세계로 들어오고 나가기 위해 스스로를 준비하는 장소이기도 합니다.  네 번째 이미지는 고요함과 거침 사이에 있는 바다를 보여줍니다.  경계 공간은 흥미로움과 불편함을 모두 일으킬 수 있습니다. 이러한 공간은 무언가 시작되는 장소이거나 끝나는 장소일 수 있습니다. 사색하는 장소이거나 행동하는 장소일 수도 있습니다. |
+| Primeiro, descreva o que está em cada imagem em detalhes. O que há em comum entre essas imagens? | A primeira imagem mostra uma pessoa fazendo as malas. A segunda imagem mostra um corredor vazio de um shopping. A terceira imagem mostra um rolo de papel higiênico. A quarta imagem mostra um mar escuro e tempestuoso.  O ponto em comum entre essas imagens é que todas são exemplos de espaços liminais. Espaços liminais são lugares ou situações que estão entre dois outros lugares ou situações. Elas costumam ser caracterizadas por um senso de incerteza ou ambiguidade.  A primeira imagem mostra a pessoa entre o momento em que está em casa e viajando. A segunda imagem mostra o corredor entre duas lojas. A terceira imagem é de papel higiênico, que pode representar um banheiro. Um banheiro é um espaço de transição entre domínios privados e públicos. É um lugar onde nos preparamos para entrar ou sair do mundo exterior.  A quarta imagem mostra o mar entre calmo e tempestuoso.  Espaços liminais podem ser empolgantes e perturbadores. Eles podem ser um lugar de recomeço ou de fim. Eles podem ser um local de reflexão ou ação. |
 
-또한 모델이 이미지에 포함된 내용을 참조하도록 명확하게 요청할 수도 있습니다.
+Você também pode tentar pedir explicitamente ao modelo para se referir ao que está na imagem.
 
-| **업데이트된 프롬프트** | **개선된 응답** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 이러한 이미지 사이의 공통점은 무엇인가요? 이미지에 포함된 내용을 참조해서 답변해 주세요. | 모든 이미지는 여행과 관련이 있습니다. 첫 번째 이미지는 여행 가방을 싸고 있는 사람을 보여줍니다. 두 번째 이미지는 쇼핑몰의 빈 통로를 보여줍니다. 세 번째 이미지는 쌓여 있는 화장실 휴지를 보여줍니다. 네 번째 이미지는 어둡고 거친 바다를 보여줍니다.  이러한 이미지는 모두 여행할 때 필요하거나 사용하는 것들이기 때문에 모두 여행과 관련이 있습니다. 첫 번째 이미지는 여행 가방을 싸고 있는 사람을 보여줍니다. 이것은 사람들이 여행을 떠날 때 하는 행동입니다. 두 번째 이미지는 쇼핑몰의 빈 통로를 보여줍니다. 이것은 사람들이 여행에 필요한 물건을 구입하기 위해 자주 이동하는 장소입니다. 세 번째 이미지는 쌓여 있는 화장실 휴지를 보여줍니다. 이것은 사람들이 여행할 때 자주 사용하는 물건입니다. 네 번째 이미지는 어둡고 거친 바다를 보여줍니다. 이것은 사람들이 여행할 때 가끔 만나게 되는 것입니다. |
+| O que há em comum entre essas imagens? Consulte o que está nas imagens na sua resposta. | Todas as imagens são relacionadas a viagens. A primeira imagem mostra uma pessoa fazendo as malas, a segunda mostra um corredor vazio de um shopping, a terceira imagem mostra uma pilha de papel higiênico e a quarta mostra um mar escuro e violento.  Todas essas imagens são relacionadas a viagens, porque são tudo o que as pessoas precisam ou usam quando viajam. A primeira imagem mostra uma pessoa fazendo as malas, que é algo que as pessoas fazem quando viajam. A segunda imagem mostra um corredor vazio de um shopping, que é um lugar onde as pessoas costumam comprar itens para viagens. A terceira imagem mostra uma pilha de papel higiênico, algo que as pessoas costumam usar quando estão viajando. A quarta imagem mostra um mar escuro e tempestuoso, algo que as pessoas encontram com frequência quando estão viajando. |
 
-이미지에서 창의적인 출력을 얻을 때도 동일한 팁이 사용됩니다. 토끼를 사용한 다음 예시에서 특히 모델에 이미지 특성을 포함하도록 요청하면 출력을 개선시킬 수 있습니다.
+As mesmas dicas funcionam para resultados criativos de imagens. No exemplo a seguir com o coelho, pedir explicitamente ao modelo para incluir aspectos da imagem pode melhorar a saída.
 
-| 프롬프트 | 모델 응답 |
+| Comando | Resposta do modelo |
 | --- | --- |
-| 이 이미지에 관한 시를 지어줄 수 있나요? | 작은 토끼, 너무 부드럽고 갈색이야,  위로, 아래로 들판을 뛰어 다녀.  네 귀는 너무 길어, 네 꼬리는 너무 작아,  너는 모든 것들 중 가장 귀여운 생명체.  물고 뜯는 잔디 속, 너무 파랗고, 달콤해,  그리고 날 보면 깡총 떠나버려.  하지만 난 항상 네 친구야,  작은 토끼야, 세상 끝날 때까지. |
+| Você pode me escrever um poema sobre esta imagem? | Coelhinho peludo e marrom  Pulando pelo campo, para cima e para baixo.  Suas orelhas são tão longas e sua cauda tão pequena!  Você é a criatura mais fofa de todas.  Você morde a grama, tão verde e doce,  E pula quando me vê.  Mas sempre serei seu amigo,  Coelhinho, até o fim. |
 
-| **업데이트된 프롬프트** | **개선된 응답** |
+| **Comando atualizado** | **Resposta aprimorada** |
 | --- | --- |
-| 이 이미지에 대해 위치를 포함해서 설명적이고 극적인 시를 지어줄 수 있나요? | 초록 위 작은 토끼,  귀가 너무 길고, 너무 예리해.  저 멀리 무엇을 보고 있니,  저 멀리, 어딜 그렇게 보고 있어?  파란색 바다인가,  태양빛에 반짝이는?  아니면 성내고 부서지는 파도인가,  네가 좋아하는 그 리듬?  작은 토끼야, 사실을 말해줘,  널 사로잡은 것이 무엇이니?  짭짤한 바닷 바람이니?  혹은 낄낄대는 갈매기 울음이니?  어쩌면 그 모든 것을 품은 광활함일지도,  세상은 너무 크고도 너무 작아.  꿈들이 돌아다닐 수 있는 곳,  그리고 모험을 뿌릴 수 있는 곳이야.  작은 토끼야, 네 꿈은 무엇일까,  풀밭에 앉으면 너무나 고요해.  깊은 곳을 탐험하고 싶니,  아니면 마음껏 뛸 수 있는 땅 위에 서고 싶니?  그것이 무엇이든, 작은 토끼야,  그 놀라움의 불꽃이 밝게 계속 타오르게 하렴.  너의 꿈과 열망 속에서,  너의 창조를 기다리는 세상 속에서. |
+| Você pode escrever um poema descritivo e dramático sobre esta imagem e incluir o local? | Coelhinho no verde  Orelhas tão compridas e pontudas.  O que você vê lá fora,  À distância, onde você olha?  É o oceano azul,  Brilhando na tonalidade do sol?  Ou as ondas que quebram e rugem,  Um ritmo que você adora?  Coelhinho, fale a verdade:  O que chama sua atenção de verdade?  É a brisa salgada,  Ou o choro das gaivotas te agrada?  Talvez seja a vastidão de tudo isso,  Um mundo tão grande e pequeno.  Um lugar onde os sonhos podem andar,  e aventuras podem ser livres.  Coelhinho me pergunto o que você sonha,  Sentado na grama, tão sereno.  Você quer explorar as profundezas  Ou ficar na terra para dar um salto?  Seja o que for, coelhinho!  Deixe a faísca da maravilha brilhar.  Nos seus sonhos e aspirações,  há um mundo esperando sua criação. |
 
-#### 실패한 프롬프트 부분 문제 해결
+#### Solução de problemas em qual parte do prompt falhou
 
-모델이 처음에 **이미지를 이해**하지 못해서 프롬프트가 실패했는지, 아니면 이미지를 이해했지만 이후 올바른 **추론 단계**를 수행하지 못했는지 알기 어려울 수 있습니다.
-이러한 이유들을 구분하기 위해서는 모델에 이미지에 포함된 것이 무엇인지 기술하도록 요청하세요.
+Pode ser difícil saber se um comando falhou porque o modelo
+não **entendeu a imagem** ou se ele entendeu a imagem
+mas não executou as **etapas de raciocínio** corretas.
+Para fazer essa diferenciação, peça ao modelo que descreva o que aparece na imagem.
 
-다음 예시에서 모델이 차와 함께 할 때 어울리지 않는 간식 (예: 팝콘)으로 응답할 경우에는 먼저 모델이 이미지에 차가 포함된 것을 올바르게 인식했는지 확인하는 방식으로 문제 해결을 시작할 수 있습니다.
+No exemplo a seguir, se o modelo responder com um lanche que parece diferente quando combinado com chá (como pipoca), primeiro é possível resolver problemas para determinar se o modelo reconheceu corretamente que a imagem contém chá.
 
-| 프롬프트 | 문제 해결을 위한 프롬프트 |
+| Comando | Prompt de solução de problemas |
 | --- | --- |
-| 이 사진과 어울리는 것 중 1분 내에 만들 수 있는 간식은 무엇이 있나요? | 이 이미지의 내용을 설명해 주세요. |
+| Que lanchinho eu posso fazer em 1 minuto e que combina com este? | Descreva o que há na imagem. |
 
-또 다른 전략은 모델에 그 이유를 설명하도록 요청하는 것입니다. 이렇게 하면 (만약 있다면) 추론의 어떤 부분이 잘못되었는지를 좁혀 파악하는 데 도움이 될 수 있습니다.
+Outra estratégia é pedir que o modelo explique o raciocínio dele. Isso pode ajudar você a filtrar qual parte do raciocínio está incorreta, se houver.
 
-| 프롬프트 | 문제 해결을 위한 프롬프트 |
+| Comando | Prompt de solução de problemas |
 | --- | --- |
-| 이 사진과 어울리는 것 중 1분 내에 만들 수 있는 간식은 무엇이 있나요? | 이 사진과 어울리는 것 중 1분 내에 만들 수 있는 간식은 무엇이 있나요? 이유를 설명해 주세요. |
+| Que lanchinho eu posso fazer em 1 minuto e que combina com este? | Que lanchinho eu posso fazer em 1 minuto e que combina com este? Explique o motivo. |
 
-## 다음 단계
+## A seguir
 
-- [Google AI Studio](http://aistudio.google.com?hl=ko)를 사용하여 나만의 멀티모달 프롬프트를 작성해 보세요.
-- Gemini Files API를 사용하여 미디어 파일을 업로드하고 프롬프트에 포함하는 방법에 관한 자세한 내용은 [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=ko), [오디오](https://ai.google.dev/gemini-api/docs/audio?hl=ko), [문서 처리](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko) 가이드를 참고하세요.
-- 샘플링 매개변수 조정과 같은 프롬프트 설계에 관한 자세한 안내는 [프롬프트 전략](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ko) 페이지를 참고하세요.
+- Escreva seus próprios comandos multimodais usando o [Google AI Studio](http://aistudio.google.com?hl=pt-br).
+- Para informações sobre como usar a API Gemini Files para
+  fazer upload de arquivos de mídia e incluí-los nos seus comandos, consulte os guias
+  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=pt-br), [Áudio](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br) e
+  [Processamento de documentos](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br).
+- Para mais orientações sobre o design de comandos, como ajuste de parâmetros de amostragem, consulte a página
+  [Estratégias de comandos](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=pt-br).
 
-의견 보내기
+Envie comentários
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-최종 업데이트: 2026-06-29(UTC)
+Última atualização 2026-06-29 UTC.
 
-의견을 전달하고 싶나요?
+Quer enviar seu feedback?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-29(UTC)"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-29 UTC."],[],[]]

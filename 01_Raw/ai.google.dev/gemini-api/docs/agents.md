@@ -1,118 +1,117 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/agents?hl=pl
-fetched_at: 2026-07-20T04:36:55.295774+00:00
-title: "Przegl\u0105d agent\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/agents?hl=ja
+fetched_at: 2026-07-27T04:49:55.184609+00:00
+title: "\u30a8\u30fc\u30b8\u30a7\u30f3\u30c8\u306e\u6982\u8981 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Przegląd agentów
+# エージェントの概要
 
-Zarządzane agenty w Gemini API zapewniają konfigurowalny szkielet agenta. Pojedyncze wywołanie interfejsu API powoduje udostępnienie piaskownicy Linux, w której agent samodzielnie wnioskuje, wykonuje kod, zarządza plikami i przegląda internet.
+Gemini API のマネージド エージェントは、構成可能なエージェント ハーネスを提供します。1 回の API 呼び出しで、エージェントが推論、コードの実行、ファイルの管理、ウェブの自律的な閲覧を行う Linux サンドボックスがプロビジョニングされます。
 
 [rocket\_launch
 
-Krótkie wprowadzenie
+クイックスタート
 
-Wykonaj pierwsze wywołanie agenta, przesyłaj strumieniowo odpowiedzi i utwórz agenta niestandardowego.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=pl)
+最初のエージェント呼び出しを行い、レスポンスをストリーミングし、カスタム エージェントを構築します。](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ja)
 [smart\_toy
 
-Agent Antigravity
+Antigravity エージェント
 
-Możliwości, narzędzia, dane wejściowe multimodalne i ceny domyślnego agenta.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl)
+デフォルト エージェントの機能、ツール、マルチモーダル入力、料金。](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)
 [experiment
 
-Agenci w AI Studio
+AI Studio のエージェント
 
-Wizualne środowisko testowe do tworzenia prototypów agentów bez pisania kodu.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=pl)
+コードを記述せずにエージェントをプロトタイピングするためのビジュアル プレイグラウンド。](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ja)
 
-## Dostępne zarządzane agenty
+## 利用可能なマネージド エージェント
 
-- **[Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl)**: agent do zwykłych obciążeń zarządzany przez Gemini 3.5 Flash. Uruchamia kod, zarządza plikami i wyszukuje informacje w internecie w bezpiecznej piaskownicy Linux hostowanej przez Google. Możesz
-  rozszerzyć jego możliwości, dodając własne instrukcje, umiejętności i dane, aby
-  [utworzyć agenta niestandardowego](https://ai.google.dev/gemini-api/docs/custom-agents?hl=pl).
-- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pl)**: autonomiczny agent badawczy
-  który planuje, wykonuje i syntetyzuje wieloetapowe zadania badawcze na potrzeby takich przypadków użycia
-  jak analiza rynku, należyta staranność i przeglądy literatury.
+- **[Antigravity エージェント](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja)**: 汎用
+  マネージド エージェント (Gemini 3.6 Flash 搭載)。Google がホストする安全な Linux サンドボックス内でコードを実行し、ファイルを管理し、ウェブを検索します。
+  基盤となるモデル（Gemini 3.6 Flash、Gemini 3.5 Flash、Gemini 3.5 Flash-Lite など）を
+  `agent_config`を使用して構成し、独自の指示、スキル、データで拡張して
+  [カスタム エージェントを構築](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja)できます。
+- **[Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja)**: 自律型リサーチ エージェント
+  市場分析、デュー デリジェンス、文献レビューなどのユースケースで使用する、複数ステップのリサーチタスクを計画、実行、統合する
 
-## Bezpieczeństwo i sprawdzone metody
+## セキュリティとベスト プラクティス
 
-Każdy agent działa w środowisku piaskownicy, które jest izolowane na poziomie systemu operacyjnego.
-Piaskownica ma domyślnie nieograniczony dostęp do sieci wychodzącej. Możesz ograniczyć lub wyłączyć dostęp do sieci za pomocą listy dozwolonych.
+すべてのエージェントは、OS レベルで分離されたサンドボックス環境で実行されます。
+サンドボックスには、デフォルトで無制限の送信ネットワーク アクセスがあります。許可リストを使用して、ネットワーク アクセスを制限または無効にできます。
 
-### Dostęp do sieci
+### ネットワーク アクセス
 
-Domyślnie środowiska mają nieograniczony dostęp do sieci wychodzącej. Użyj listy dozwolonych `network`, aby ograniczyć ruch wychodzący do określonych domen lub wzorców z symbolami wieloznacznymi. Szczegółowe informacje o konfiguracji znajdziesz w sekcji
-[Lista dozwolonych sieci](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=pl#network_allow_list) (AI
-Studio) lub [Reguły sieciowe](https://ai.google.dev/gemini-api/docs/custom-agents?hl=pl#with_network_rules)
-(API).
+デフォルトでは、環境には無制限の送信ネットワーク アクセスがあります。`network` 許可リストを使用して、送信トラフィックを特定のドメインまたはワイルドカード パターンに制限します。構成の詳細については、
+[ネットワーク許可リスト](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ja#network_allow_list)（AI
+Studio）または[ネットワーク ルール](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ja#with_network_rules)
+（API）をご覧ください。
 
-### Narzędzia i interfejsy API zewnętrzne
+### 外部ツールと API
 
-Aby rozszerzyć możliwości agenta, możesz połączyć go z narzędziami i interfejsami API zewnętrznymi. Używaj tylko narzędzi z zaufanych źródeł i ogranicz uprawnienia do minimum. Dane logowania można bezpiecznie wstrzykiwać za pomocą transformacji nagłówków serwera proxy ruchu wychodzącego. Nigdy nie są one ujawniane w piaskownicy. Agent może używać dowolnych danych logowania, do których ma dostęp, dlatego udostępniaj tylko te dane logowania, których pełny zakres uprawnień chcesz przyznać.
+外部ツールと API を接続して、エージェントを拡張できます。信頼できるソースのツールのみを使用し、権限を必要最小限の範囲に設定してください。認証情報は、出力プロキシ ヘッダー変換を介して安全に挿入され、サンドボックス内で公開されることはありません。エージェントはアクセスできる認証情報を使用する可能性があるため、完全なスコープを付与してもよい認証情報のみを提供してください。
 
-- Używaj kont usługi lub kluczy API o jak najmniejszych uprawnieniach.
-- Preferuj tokeny krótkotrwałe zamiast kluczy długotrwałych.
-- Udostępniaj tylko te dane logowania, których pełny zakres uprawnień chcesz przyznać.
-- Regularnie zmieniaj dane logowania.
+- 最小権限のサービス アカウントまたは API キーを使用します。
+- 有効期間の長い鍵よりも有効期間の短いトークンを優先します。
+- 完全なスコープを付与してもよい認証情報のみを提供してください。
+- 認証情報を定期的にローテーションします。
 
-Więcej informacji o konfigurowaniu transformacji nagłówków znajdziesz w sekcji
-[Dane logowania](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#credentials).
+ヘッダー変換の構成の詳細については、
+[認証情報](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#credentials)をご覧ください。
 
-### Nadzór człowieka
+### 人間による監視
 
-Zanim wdrożysz wyniki (wygenerowany kod, transformacje danych, zmiany konfiguracji), zawsze je sprawdź, zwłaszcza w przypadku zadań, które modyfikują dane lub wchodzą w interakcje z systemami zewnętrznymi.
+出力をデプロイする前に必ず確認してください（生成されたコード、データ変換、構成の変更）。特に、データを変更したり、外部システムとやり取りしたりするタスクの場合は注意が必要です。
 
-## Ceny
+## 料金
 
-Zarządzane agenty korzystają z modelu [płatność według wykorzystania](https://ai.google.dev/gemini-api/docs/pricing?hl=pl#pricing-for-agents)
-który jest oparty na tokenach modelu Gemini i korzystaniu z narzędzi. Pojedyncza interakcja może wywołać wiele pętli wnioskowania, które zwykle zużywają od 100 tys. do 3 mln tokenów. W okresie korzystania z wersji przedpremierowej **nie są naliczane opłaty** za obliczenia w środowisku. Zobacz [szacunkowe koszty](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=pl#availability-and-pricing)
-podziału na zadania. Zarządzane agenty są też dostępne w bezpłatnej wersji z bezpłatnym limitem wykorzystania i limitem liczby operacji.
+マネージド エージェントは、[従量課金制モデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)
+を Gemini モデルのトークンとツールの使用量に基づいて使用します。1 回のインタラクションで複数の推論ループがトリガーされ、通常は 10 万～ 300 万トークンが消費されます。プレビュー期間中は、環境コンピューティングの**料金は発生しません** 。タスクごとの内訳の[推定費用](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ja#availability-and-pricing)
+をご覧ください。マネージド エージェントは、無料枠、無料のレート上限、使用量上限のある無料枠でもご利用いただけます。
 
-## Limity
+## 上限
 
-| Limit | Opis |
+| 上限 | 説明 |
 | --- | --- |
-| **Okres istnienia środowiska** | Środowiska są trwale usuwane po 7 dniach nieaktywności. |
-| **Wyłączanie maszyny wirtualnej** | Aby oszczędzać zasoby, maszyny wirtualne wyłączają się po krótkim okresie nieaktywności. Następne żądanie przywraca stan (z uruchomieniem „na zimno”). |
-| **Zainstalowane fabrycznie oprogramowanie** | Środowisko oparte na Ubuntu z Pythonem 3.12 i Node.js 22. Więcej informacji o obrazie bazowym środowiska znajdziesz w sekcji [Zainstalowane fabrycznie oprogramowanie](https://ai.google.dev/gemini-api/docs/agent-environment?hl=pl#pre-installed-software). |
-| **Maksymalna liczba agentów** | Możesz mieć maksymalnie 1000 zarządzanych agentów. |
+| **環境の有効期間** | 環境は、7 日間操作がないと完全に削除されます。 |
+| **VM のスピンダウン** | リソースを節約するため、VM は操作が行われない状態がしばらく続くとシャットダウンします。次のリクエストで状態が復元されます（コールド スタート）。 |
+| **プリインストールされたソフトウェア** | Python 3.12 と Node.js 22 を搭載した Ubuntu ベースの環境。環境のベースイメージの詳細については、[プリインストールされたソフトウェア](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ja#pre-installed-software)をご覧ください。 |
+| **最大エージェント数** | マネージド エージェントは最大 1,000 個まで使用できます。 |
 
-## Platformy agentów
+## エージェント フレームワーク
 
-Możesz też tworzyć agentów za pomocą Gemini, korzystając z tych platform i pakietów SDK:
+次のフレームワークと SDK を使用して、Gemini でエージェントを構築することもできます。
 
-- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=pl): Twórz
-  złożone przepływy aplikacji ze stanem i systemy wieloagentowe za pomocą struktur
-  grafów.
-- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=pl): łącz agentów Gemini z
-  danymi prywatnymi, aby korzystać z procesów roboczych z rozszerzonym wyszukiwaniem generatywnym.
-- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=pl)
-- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=pl): Build
-  twórz interfejsy użytkownika i agentów opartych na AI w JavaScript/TypeScript.
-- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): platforma
-  open source do tworzenia i zarządzania interoperacyjnymi agentami AI
-  .
-- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=pl): Twórz
-  autonomiczne agenty AI za pomocą tych samych narzędzi, pętli agenta i zarządzania
-  kontekstem, które są używane w Google Antigravity. Możesz je programować w Pythonie.
+- [**LangChain / LangGraph**](https://ai.google.dev/gemini-api/docs/langgraph-example?hl=ja): Build
+  stateful, complex application flows and multi-agent systems using graph
+  structures.
+- [**LlamaIndex**](https://ai.google.dev/gemini-api/docs/llama-index?hl=ja): Gemini エージェントを
+  プライベート データに接続して、RAG で強化されたワークフローを実現します。
+- [**CrewAI**](https://ai.google.dev/gemini-api/docs/crewai-example?hl=ja): 共同作業を行う、
+  ロールプレイングの自律型 AI エージェントをオーケストレートします。
+- [**Vercel AI SDK**](https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=ja): JavaScript/TypeScript で AI を活用したユーザー インターフェースとエージェントを構築します。
+- [**Google ADK**](https://google.github.io/adk-docs/get-started/python/): 相互運用可能な AI エージェントを構築してオーケストレートするための
+  オープンソース フレームワーク。
+- [**Antigravity SDK**](https://antigravity.google/product/antigravity-sdk?hl=ja): Google Antigravity を強化するのと同じツール、エージェント ループ、コンテキスト
+  管理を使用して、自律型 AI エージェントを構築します。Python でプログラミングできます。
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-07-16 UTC.
+最終更新日 2026-07-21 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-16 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-21 UTC。"],[],[]]

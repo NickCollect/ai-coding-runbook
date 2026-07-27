@@ -1,45 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=es-419
-fetched_at: 2026-07-20T04:48:33.524706+00:00
-title: "Vista previa de Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=zh-CN
+fetched_at: 2026-07-27T04:37:41.013063+00:00
+title: "Deep Research \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Enviar comentarios
+发送反馈
 
-# Vista previa de Deep Research
+# Deep Research 预览版
 
-Un potente agente de investigación diseñado para investigaciones autónomas de varios pasos que sintetizan información compleja en informes integrales con citas. Este modelo admite la planificación colaborativa, la visualización, los servidores de MCP y la búsqueda de archivos. Se ofrece en dos versiones: Deep Research para mayor velocidad y eficiencia, y Deep Research Max para una máxima exhaustividad.
+一款功能强大的智能体研究员，专为自主执行多步骤调查而设计，可将复杂信息整合到内容详尽且附有引用的报告中。此模型支持协作规划、可视化、MCP
+服务器和文件搜索。它有两个版本：Deep Research，注重速度和效率；Deep Research Max，注重全面性。
 
-## Documentación
+## 文档
 
-Visita la página [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=es-419) para obtener una cobertura completa de las funciones y capacidades.
+如需全面了解功能，请访问 [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=zh-cn) 页面
+。
 
 ## deep-research-preview-04-2026
 
-| Propiedad | Descripción |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardCódigo de agente | **API de Interactions**  `deep-research-preview-04-2026` |
-| saveTipos de datos admitidos | **Entrada**  Texto, imagen, PDF, audio y video  **Resultado**  Texto (informes citados), imágenes |
-| token\_autoLímites de tokens[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=es-419) | **Ventana de contexto de entrada**  1,048,576  **Límite de tokens de salida**  65,536 |
-| Versiones 123 | Lee los [patrones de versiones de modelos](https://ai.google.dev/gemini-api/docs/models/gemini?hl=es-419#model-versions) para obtener más detalles.  - Vista previa: `deep-research-preview-04-2026` - Máx.: `deep-research-max-preview-04-2026` |
-| calendar\_monthÚltima actualización | Abril de 2026 |
+| id\_card智能体代码 | **Interactions API**  `deep-research-preview-04-2026` |
+| save支持的数据类型 | **输入**  文本、图片、PDF、音频、视频  **输出**  文本（附有引用的报告）、图片 |
+| token\_autoToken 限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入上下文窗口**  1,048,576  **输出 token 限制**  65,536 |
+| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`deep-research-preview-04-2026` - 上限：`deep-research-max-preview-04-2026` |
+| calendar\_month最后更新时间 | 2026 年 4 月 |
 
-Enviar comentarios
+发送反馈
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Última actualización: 2026-04-29 (UTC)
+最后更新时间 (UTC)：2026-04-29。
 
-¿Quieres brindar más información?
+需要向我们提供更多信息？
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-04-29 (UTC)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-04-29。"],[],[]]

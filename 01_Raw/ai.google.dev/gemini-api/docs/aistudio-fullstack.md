@@ -1,184 +1,184 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=zh-CN
-fetched_at: 2026-07-20T04:47:36.992012+00:00
-title: "\u5728 Google AI Studio \u4e2d\u5f00\u53d1\u5168\u6808\u5e94\u7528 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=pl
+fetched_at: 2026-07-27T04:33:40.904369+00:00
+title: "Tworzenie aplikacji pe\u0142nostosowych w\u00a0Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-发送反馈
+Prześlij opinię
 
-# 在 Google AI Studio 中开发全栈应用
+# Tworzenie aplikacji pełnostosowych w Google AI Studio
 
-Google AI Studio 现已支持全栈开发，让您能够构建超出客户端原型范围的应用。借助服务器端运行时，您可以管理 Secret、连接到外部 API，以及打造实时多人游戏体验。
+Google AI Studio obsługuje teraz tworzenie aplikacji w pełnym stosie technologicznym, co umożliwia tworzenie aplikacji, które wykraczają poza prototypy po stronie klienta. Dzięki środowisku wykonawczemu po stronie serwera możesz zarządzać obiektami tajnymi, łączyć się z zewnętrznymi interfejsami API i tworzyć aplikacje wieloosobowe działające w czasie rzeczywistym.
 
-## 服务器端运行时
+## Środowisko wykonawcze po stronie serwera
 
-Google AI Studio 应用现在可以包含服务器端组件 (Node.js)。
-借助此功能，您可以：
+Aplikacje Google AI Studio mogą teraz zawierać komponent po stronie serwera (Node.js).
+Ma to następujące zalety:
 
-- **执行服务器端逻辑**：运行不应向
-  客户端公开的代码。
-- **访问 npm 软件包**：[Antigravity 智能体](https://antigravity.google/docs/agent?hl=zh-cn)
-  可以从庞大的 npm 生态系统中安装和使用软件包。
-- **处理 Secret**：安全地使用 API 密钥和凭据。
+- **Wykonywanie logiki po stronie serwera**: uruchamiaj kod, który nie powinien być widoczny dla
+  klienta.
+- **Dostęp do pakietów npm**: [Antigravity Agent](https://antigravity.google/docs/agent?hl=pl)
+  może instalować i używać pakietów z rozbudowanego ekosystemu npm.
+- **Obsługa obiektów tajnych**: bezpieczne używanie kluczy interfejsu API i danych logowania.
 
-### 使用 npm 软件包
+### Korzystanie z pakietów npm
 
-您无需手动运行 `npm install`。只需让智能体添加需要软件包的功能，它就会处理安装和导入。
+Nie musisz ręcznie uruchamiać polecenia `npm install`. Po prostu poproś Agenta o dodanie funkcji, która wymaga pakietu, a on zajmie się instalacją i importem.
 
-**示例**：>“使用 `axios` 从外部 API 提取数据。”
+**Przykład**: > "Użyj `axios`, aby pobrać dane z zewnętrznego interfejsu API."
 
-## 安全地管理 Secret
+## Bezpieczne zarządzanie obiektami tajnymi
 
-借助服务器端代码和 Secret 管理功能，您现在可以构建与外界互动的应用。
+Dzięki kodowi po stronie serwera i zarządzaniu obiektami tajnymi możesz teraz tworzyć aplikacje, które wchodzą w interakcje ze światem.
 
-### Gemini API 密钥
+### Klucz interfejsu Gemini API
 
-当您创建使用 Gemini API 的新应用时，AI Studio 会自动将 `GEMINI_API_KEY` 配置为服务器端 Secret，无需手动设置。您可以在“设置”中的 **Secrets** 面板中查看此密钥。应用的 Gemini API 调用是使用此密钥通过服务器端代码进行的，因此绝不会在浏览器中公开。
+Gdy tworzysz nową aplikację, która korzysta z Gemini API, AI Studio automatycznie konfiguruje Twój `GEMINI_API_KEY` jako obiekt tajny po stronie serwera – nie musisz niczego konfigurować ręcznie. Ten klucz możesz wyświetlić w panelu **Obiekty tajne** w Ustawieniach. Wywołania Gemini API w Twojej aplikacji są wykonywane z kodu po stronie serwera przy użyciu tego klucza, więc nigdy nie jest on widoczny w przeglądarce.
 
-### 第三方 API 密钥
+### Klucze interfejsów API innych firm
 
-对于其他服务，您可以手动添加 API 密钥：
+W przypadku innych usług możesz ręcznie dodać klucze interfejsu API:
 
-- **第三方 API**：连接到 Stripe、SendGrid 或自定义
-  REST API 等服务。
-- **数据库**：连接到外部数据库（例如，通过 Supabase、Firebase、
-  或 MongoDB Atlas），以便在会话结束后保留数据。
+- **Interfejsy API innych firm**: łącz się z usługami takimi jak Stripe, SendGrid czy niestandardowe
+  interfejsy REST API.
+- **Bazy danych**: łącz się z zewnętrznymi bazami danych (np. za pomocą Supabase, Firebase, lub MongoDB Atlas), aby przechowywać dane poza sesją.
 
-在构建实际应用时，您通常需要连接到需要 API 密钥的第三方服务（例如 Twilio、Slack 或数据库）。您可以按照以下步骤手动添加密钥：
+Podczas tworzenia aplikacji w rzeczywistych warunkach często trzeba łączyć się z usługami innych firm (takimi jak Twilio, Slack czy bazy danych), które wymagają kluczy interfejsu API. Klucze możesz dodać ręcznie, wykonując te czynności:
 
-1. **添加 Secret**：前往 Google AI Studio 中的**设置** 菜单，然后找到
-   “Secrets”部分。
-2. **存储密钥**：在此处添加您的 API 密钥或 Secret 令牌。
-3. **在代码中访问**：智能体可以编写服务器端代码，以安全地访问这些
-   Secret（通常通过环境变量），确保它们绝不会向客户端浏览器公开。
+1. **Dodaj obiekt tajny**: w Google AI Studio otwórz menu **Ustawienia** i znajdź
+   sekcję Obiekty tajne.
+2. **Przechowuj klucz**: dodaj tutaj klucze interfejsu API lub tajne tokeny.
+3. **Dostęp w kodzie**: Agent może napisać kod po stronie serwera, który bezpiecznie uzyskuje dostęp do tych
+   obiektów tajnych (zwykle za pomocą zmiennych środowiskowych), dzięki czemu nigdy nie są one
+   widoczne w przeglądarce po stronie klienta.
 
-在需要时，智能体还会在聊天中显示一张卡片，提示您在需要新 Secret 或在项目的 env 变量中检测到新密钥时添加密钥。
+W razie potrzeby Agent wyświetli też w czacie kartę z prośbą o dodanie kluczy, gdy będzie potrzebny nowy obiekt tajny lub gdy w zmiennych środowiskowych projektu zostanie wykryty nowy klucz.
 
-### Firebase 集成，用于数据库和身份验证
+### Integracja z Firebase na potrzeby bazy danych i uwierzytelniania
 
-Google AI Studio 现在可以通过
-[Firebase 集成](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=zh-cn)轻松地向
-应用添加数据库或身份验证。
-Antigravity 智能体可以自动为您配置和设置以下服务：
+Google AI Studio ułatwia teraz dodawanie bazy danych lub uwierzytelniania do Twojej
+aplikacji dzięki
+[integracji z Firebase](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=pl).
+Antigravity Agent może automatycznie udostępniać i konfigurować te usługi:
 
-- **Firestore 数据库**：一种灵活且可扩缩的 NoSQL 云数据库，用于存储
-  和同步数据，以便进行客户端及服务器端的开发。
-- **Firebase Authentication**：让用户可以使用“使用 Google 账号登录”流程安全地登录您的
-  应用。
+- **Baza danych Firestore**: elastyczna i skalowalna baza danych NoSQL w chmurze, która służy do przechowywania
+  i synchronizowania danych na potrzeby programowania po stronie klienta i serwera.
+- **Uwierzytelnianie Firebase**: umożliwia użytkownikom bezpieczne logowanie się w
+  aplikacji za pomocą przepływów „Zaloguj się przez Google”.
 
-只需让智能体“向我的应用添加数据库”或“设置 Google 登录”，它就会为您处理必要的配置和代码生成。
+Po prostu poproś Agenta o „dodanie bazy danych do mojej aplikacji” lub „skonfigurowanie logowania przez Google”, a on zajmie się niezbędną konfiguracją i wygenerowaniem kodu.
 
-Firebase 可让您免费开始使用，并可选择在您准备好使用更多配额或使用付费功能时，通过付费账号进行扩缩。
+Firebase umożliwia bezpłatne rozpoczęcie pracy i opcjonalne skalowanie za pomocą płatnego konta, gdy będziesz potrzebować większego limitu lub chcesz korzystać z płatnych funkcji.
 
-## Google Workspace API
+## Interfejsy Google Workspace API
 
-借助 Google AI Studio，您可以构建连接到 Google Workspace API 的应用，以便用户可以在应用中使用真实数据：电子邮件、电子表格、文档、日历活动等。您不再需要设置 Google Cloud 云项目、配置 OAuth 或手动管理 API。
+Google AI Studio umożliwia tworzenie aplikacji, które łączą się z interfejsami Google Workspace API, dzięki czemu użytkownicy mogą pracować z rzeczywistymi danymi: e-mailami, arkuszami kalkulacyjnymi, dokumentami, wydarzeniami w kalendarzu i innymi danymi – wszystko w Twojej aplikacji. Nie musisz już konfigurować projektu w chmurze Google, konfigurować protokołu OAuth ani ręcznie zarządzać interfejsem API.
 
-### 运作方式
+### Jak to działa
 
-您可以通过以下两种方式添加 Workspace 集成：
+Integrację z Workspace możesz dodać na 2 sposoby:
 
-- **在聊天面板中进行描述**：只需在底部的聊天面板中告知智能体您想要的内容。例如，*“构建一个费用跟踪器，将收据记录到我的 Google 表格”*或*“创建一个信息中心，用于汇总我的未读 Gmail 邮件。”*
-- **从集成面板中进行选择**：在构建模式的右侧边栏中打开**集成**面板，然后启用您要连接的 Workspace 应用。
+- **Opisz ją w panelu czatu**: po prostu powiedz Agentowi, czego chcesz, w panelu czatu u dołu. Na przykład *„Utwórz narzędzie do śledzenia wydatków, które rejestruje paragony w moim Arkuszu Google”* lub *„Utwórz panel, który podsumowuje moje nieprzeczytane wiadomości w Gmailu”*
+- **Wybierz w panelu integracji**: w prawym pasku bocznym trybu tworzenia otwórz panel **Integracje** i włącz aplikację Google Workspace, z którą chcesz się połączyć.
 
-添加 Workspace 应用后，AI Studio 会自动执行以下操作：
+Gdy dodasz aplikację Google Workspace, AI Studio automatycznie:
 
-1. 为您的应用连接必要的 Google API。
-2. 生成用于调用 API 的服务器端代码。
-3. 添加安全的“使用 Google 账号登录”流程，以便应用的最终用户可以授权访问自己的数据。
+1. łączy niezbędny interfejs Google API z Twoją aplikacją,
+2. generuje kod po stronie serwera do wywoływania interfejsu API,
+3. dodaje bezpieczny przepływ „Zaloguj się przez Google”, aby użytkownicy Twojej aplikacji mogli autoryzować dostęp do swoich danych.
 
-### 支持的应用
+### Obsługiwane aplikacje
 
-以下 Google Workspace 应用可用：
+Dostępne są te aplikacje Google Workspace:
 
-| 应用 | 您可以构建的内容 |
+| Aplikacja | Co możesz utworzyć |
 | --- | --- |
-| Google 日历 | 读取、创建和管理活动及日历 |
-| Google Chat | 读取对话和群组聊天室并与之互动 |
-| Google 文档 | 创建、读取、更新和设置文档格式 |
-| Google 云端硬盘 | 整理、搜索和管理文件及文件夹 |
-| Google 表单 | 创建调查问卷、更新问题和检索回答 |
-| Gmail | 读取、发送和管理电子邮件内容 |
-| Google Keep | 管理记事、清单和附件 |
-| Google Meet | 安排和管理视频通话 |
-| 通讯录 | 同步和管理联系人 |
-| Google 表格 | 读取、写入和设置电子表格数据格式 |
-| Google 幻灯片 | 创建和修改演示文稿 |
-| Google Tasks | 创建、管理和整理任务 |
+| Kalendarz Google | Odczytywanie, tworzenie i zarządzanie wydarzeniami oraz kalendarzami |
+| Google Chat | Odczytywanie rozmów i pokoi grupowych oraz wchodzenie z nimi w interakcje |
+| Dokumenty Google | Tworzenie, odczytywanie, aktualizowanie i formatowanie dokumentów |
+| Dysk Google | Porządkowanie, wyszukiwanie i zarządzanie plikami oraz folderami |
+| Formularze Google | Tworzenie ankiet, aktualizowanie pytań i pobieranie odpowiedzi |
+| Gmail | Odczytywanie, wysyłanie i zarządzanie treścią e-maili |
+| Google Keep | Zarządzanie notatkami, listami i załącznikami |
+| Google Meet | Planowanie rozmów wideo i zarządzanie nimi |
+| Kontakty | Synchronizowanie kontaktów i zarządzanie nimi |
+| Arkusze Google | Odczytywanie, zapisywanie i formatowanie danych arkusza kalkulacyjnego |
+| Prezentacje Google | Tworzenie i modyfikowanie prezentacji |
+| Lista zadań Google | Tworzenie zadań, zarządzanie nimi i porządkowanie ich |
 
-### 身份验证和权限
+### Uwierzytelnianie i uprawnienia
 
-作为构建者，您无需配置 OAuth 客户端、管理凭据或设置 Google Cloud 项目。AI Studio 会为您处理所有这些事宜。
+Jako twórca nie musisz konfigurować klientów OAuth, zarządzać danymi logowania ani konfigurować projektu w chmurze Google. AI Studio zajmie się tym za Ciebie.
 
-集成了 Workspace API 的应用使用“使用 Google 账号登录”对最终用户进行身份验证。当用户打开您的应用时，系统会提示他们登录并授予应用所需的特定权限（例如，对其日历的只读权限，或编辑电子表格的权限）。您的应用只能访问使用该应用的人员的数据。每位用户都会授权访问自己的账号。
+Aplikacje zintegrowane z interfejsami Workspace API używają do uwierzytelniania użytkowników funkcji „Zaloguj się przez Google”. Gdy użytkownik otworzy Twoją aplikację, zostanie poproszony o zalogowanie się i przyznanie jej określonych uprawnień (np. dostępu do kalendarza tylko do odczytu lub możliwości edytowania arkusza kalkulacyjnego). Twoja aplikacja ma dostęp tylko do danych osoby, która jej używa. Każdy użytkownik autoryzuje dostęp do swojego konta.
 
-### 示例提示
+### Przykładowe prompty
 
-以下这些方法可帮助您开始使用 Workspace 集成：
+Oto kilka pomysłów na rozpoczęcie pracy z integracjami Workspace:
 
-- *“构建一个应用，用于读取我的 Google 日历，并在
-  Gmail 中为每次会议起草准备电子邮件。”*
-- *“创建一个工具，用于获取 Google 文档，并在 Google 幻灯片中生成 5 张幻灯片的摘要
-  演示文稿。”*
-- *“创建一个费用跟踪器，用于让我上传收据，让 Gemini 提取
-  详细信息，并在我的 Google 表格中记录新行。”*
+- *„Utwórz aplikację, która odczytuje mój Kalendarz Google i tworzy wersje robocze e-maili przygotowujących w
+  Gmailu na każde spotkanie”*.
+- *„Utwórz narzędzie, które pobiera Dokument Google i generuje 5-slajdową prezentację podsumowującą
+  w Prezentacjach Google”*.
+- *„Utwórz narzędzie do śledzenia wydatków, w którym mogę przesłać paragon, Gemini wyodrębni
+  szczegóły, a narzędzie zapisze nowy wiersz w moim Arkuszu Google”*
 
-### 设置 OAuth
+### Skonfiguruj OAuth
 
-Secret 管理的一个主要用例是设置 OAuth 以连接到其他网站或应用。当您的提示包含有关连接到需要 OAuth 身份验证的第三方应用的说明时，智能体会提供有关如何为该应用设置 OAuth 的说明。这些说明将包含配置 OAuth 应用所需的回调网址。
-您还可以在“设置”面板的**集成** 下找到回调网址。
+Jednym z kluczowych przypadków użycia zarządzania obiektami tajnymi jest skonfigurowanie OAuth w celu połączenia się z innymi witrynami lub aplikacjami. Jeśli Twój prompt zawiera instrukcje dotyczące łączenia się z aplikacją innej firmy, która wymaga uwierzytelniania OAuth, Agent poda instrukcje dotyczące konfigurowania OAuth dla tej aplikacji. Te instrukcje będą zawierać niezbędne adresy URL wywołania zwrotnego do skonfigurowania aplikacji OAuth.
+Adresy URL wywołania zwrotnego znajdziesz też w sekcji **Integracje** w panelu Ustawienia.
 
-## 打造多人游戏体验
+## Tworzenie aplikacji wieloosobowych
 
-全栈运行时支持实时协作功能。
+Środowisko wykonawcze w pełnym stosie technologicznym umożliwia korzystanie z funkcji współpracy w czasie rzeczywistym.
 
-- **实时状态**：您可以让智能体构建“实时
-  聊天”“协作白板”或“多人游戏”等功能。
-- **同步会话**：服务器管理状态，允许多个用户
-  实时与同一应用实例互动。
+- **Stan w czasie rzeczywistym**: możesz poprosić Agenta o utworzenie funkcji takich jak "czat na żywo
+  ," "tablica do współpracy" czy "gra wieloosobowa."
+- **Zsynchronizowane sesje**: serwer zarządza stanem, co umożliwia wielu użytkownikom
+  interakcję z tą samą instancją aplikacji w czasie rzeczywistym.
 
-**提示示例**：>“将其设为多人游戏，让玩家可以看到彼此的光标。”
+**Przykładowy prompt**: > "Utwórz grę wieloosobową, w której gracze mogą widzieć
+kursory innych graczy."
 
-### 测试多人游戏应用的提示
+### Wskazówki dotyczące testowania aplikacji wieloosobowych
 
-您可以通过以下两种方式测试多人游戏模式，然后再部署应用。
+Przed wdrożeniem aplikacji możesz przetestować tryb wieloosobowy na 2 sposoby.
 
-1. 在多个标签页中以 Google AI Studio 构建模式打开应用。在构建模式下开发时，您的应用位于开发容器中。在多个标签页中打开应用可让您模拟多个玩家使用您的应用。
-2. 使用右上角的**分享** 菜单与他人分享应用。然后，使用**分享** 菜单的**集成** 标签页中的**分享的网址** ，以便与您分享了应用的其他玩家一起使用该应用。
+1. Otwórz aplikację w Google AI Studio w trybie tworzenia na kilku kartach. Podczas tworzenia w trybie tworzenia aplikacja znajduje się w kontenerze deweloperskim. Otwarcie aplikacji na kilku kartach pozwoli Ci symulować korzystanie z niej przez wielu graczy.
+2. Udostępnij aplikację innym osobom, korzystając z menu **Udostępnij** w prawym górnym rogu. Następnie użyj **udostępnionego adresu URL** na karcie **Integracje** w menu **Udostępnij**, aby korzystać z aplikacji z graczami, którym ją udostępniłeś.
 
-## 最佳做法
+## Sprawdzone metody
 
-- **Gemini API 调用**：您的 `GEMINI_API_KEY` 会自动配置为
-  服务器端 Secret。使用此密钥通过服务器端代码进行 Gemini API 调用。您可以在 **Secrets** 面板中查看它。
-- **Secret 安全性**：对于敏感密钥，请始终使用 Secret 管理器。
-  切勿在文件中对它们进行硬编码。
-- **关注点分离**：将界面逻辑保留在客户端框架
-  (React/Angular) 中，并将业务逻辑/数据处理保留在服务器端。
-- **错误处理**：确保服务器端代码能够稳健地处理来自外部 API 调用的错误
-  ，以防止应用崩溃。
+- **Wywołania Gemini API**: Twój `GEMINI_API_KEY` jest automatycznie konfigurowany jako obiekt tajny po stronie serwera. Użyj tego klucza, aby wywoływać Gemini API z kodu po stronie serwera. Możesz go wyświetlić w panelu **Obiekty tajne**.
+- **Bezpieczeństwo obiektów tajnych**: w przypadku kluczy zawierających dane wrażliwe zawsze używaj Menedżera obiektów tajnych.
+  Nigdy nie koduj ich na stałe w plikach.
+- **Rozdzielenie odpowiedzialności**: logikę interfejsu użytkownika umieść w frameworku po stronie klienta
+  (React/Angular), a logikę biznesową i obsługę danych – po stronie serwera.
+- **Obsługa błędów**: upewnij się, że kod po stronie serwera niezawodnie obsługuje błędy
+  wywołań zewnętrznych interfejsów API, aby zapobiec awariom aplikacji.
 
-## 后续步骤
+## Co dalej?
 
-- [在 Google AI Studio 中构建应用](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=zh-cn)
-- [从 Google AI Studio 进行部署](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=zh-cn)
-- [应用库](https://aistudio.google.com/apps?source=showcase&hl=zh-cn)
+- [Tworzenie aplikacji w Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=pl)
+- [Wdrażanie z Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=pl)
+- [Galeria aplikacji](https://aistudio.google.com/apps?source=showcase&hl=pl)
 
-发送反馈
+Prześlij opinię
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-最后更新时间 (UTC)：2026-05-19。
+Ostatnia aktualizacja: 2026-05-19 UTC.
 
-需要向我们提供更多信息？
+Chcesz przekazać coś jeszcze?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-05-19。"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-05-19 UTC."],[],[]]

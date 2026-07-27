@@ -1,50 +1,50 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=ja
-fetched_at: 2026-07-20T04:35:22.267785+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-CN
+fetched_at: 2026-07-27T04:34:10.641593+00:00
 title: "Gemini 3 Pro Image \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-フィードバックを送信
+发送反馈
 
 # Gemini 3 Pro Image
 
-**Nano Banana Pro** は、プロ仕様の画像編集と生成のための高度な推論駆動型エンジンです。スタジオ品質の精度と高度なクリエイティブ制御を実現します。Nano Banana Pro は、複雑なグラフィック デザイン、忠実度の高い商品のモックアップ、Google 検索による正確なテキスト レンダリングと現実世界のグラウンディングが必要な事実に基づいたデータ可視化に最適です。
+**Nano Banana Pro** 是一款由推理驱动的精密引擎，可用于专业级图片编辑和生成，提供堪比工作室的精准度和高级创意控制能力。Nano Banana Pro 最适合用于复杂的图形设计、高保真产品视觉稿以及需要准确文本渲染和通过 Google 搜索进行真实世界接地的实际数据可视化。
 
-[Google AI Studio で試す](https://aistudio.google.com?model=gemini-3-pro-image&hl=ja)
+[在 Google AI Studio 中试用](https://aistudio.google.com?model=gemini-3-pro-image&hl=zh-cn)
 
-## ドキュメント
+## 文档
 
-機能と機能の全容については、[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)のページをご覧ください。
+如需全面了解功能，请访问[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)页面。
 
 ## gemini-3-pro-image
 
-| プロパティ | 説明 |
+| 属性 | 说明 |
 | --- | --- |
-| id\_cardモデルコード | `gemini-3-pro-image` |
-| save でサポートされるデータ型 | **入力**  画像とテキスト  **出力**  画像とテキスト |
-| token\_autoトークンの上限[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ja) | **入力トークンの上限**  65,536  **出力トークンの上限**  32,768 |
-| handyman機能 | **[音声生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)**  サポート対象外  **[キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)**  サポート対象外  **[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)**  サポート対象外  **[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)**  サポート対象外  **[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)**  サポート対象外  **[Google マップによるグラウンディング](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)**  サポート対象外  **[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)**  サポート対象  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)**  サポート対象外  **[検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)**  サポート対象  **[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)**  サポート対象  **[思考モード](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)**  サポート対象  **[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)**  サポート対象外 |
-| speed使用オプション | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)**  サポート対象  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)**  サポート対象  **[優先度推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)**  サポート対象 |
-| 123 バージョン | 詳しくは、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - 安定版: `gemini-3-pro-image` |
-| calendar\_month最終更新日 | 2025 年 11 月 |
-| cognition\_2ナレッジ カットオフ | 2025 年 1 月 |
+| id\_card模型代码 | `gemini-3-pro-image` |
+| save支持的数据类型 | **输入**  图片和文本  **输出**  图片和文本 |
+| token\_autoToken 限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  65,536  **输出 token 限制**  32,768 |
+| handyman功能 | **[音频生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)**  不支持  **[缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)**  不支持  **[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)**  不支持  **[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)**  不支持  **[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)**  不支持  **[Grounding with Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)**  不支持  **[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)**  支持  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn)**  不支持  **[搜索接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)**  支持  **[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)**  支持  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)**  支持  **[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)**  不支持 |
+| speed使用方案 | **[批量 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)**  支持  **[灵活推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)**  支持  **[优先推理](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn)**  支持 |
+| 123版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 稳定版：`gemini-3-pro-image` |
+| calendar\_month最新更新 | 2025 年 11 月 |
+| id\_card模型卡片 | [模型卡片](https://deepmind.google/models/model-cards/gemini-3-pro-image/?hl=zh-cn) |
 
-フィードバックを送信
+发送反馈
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-最終更新日 2026-06-23 UTC。
+最后更新时间 (UTC)：2026-07-21。
 
-ご意見をお聞かせください
+需要向我们提供更多信息？
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-23 UTC。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-21。"],[],[]]

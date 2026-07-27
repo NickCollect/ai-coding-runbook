@@ -1,34 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=tr
-fetched_at: 2026-07-20T04:34:07.803280+00:00
-title: "Y\u00f6netilen Ajanlar Olu\u015fturma \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko
+fetched_at: 2026-07-27T04:45:32.559551+00:00
+title: "\uad00\ub9ac \uc5d0\uc774\uc804\ud2b8 \ube4c\ub4dc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Geri bildirim gönderin
+의견 보내기
 
-# Yönetilen Ajanlar Oluşturma
+# 관리 에이전트 빌드
 
-Gemini API'deki yönetilen ajanlar, Antigravity ajanını kendi talimatlarınız, becerileriniz ve verilerinizle genişletmenize olanak tanır. Etkileşim sırasında [aracıyı satır içinde özelleştirebilir](#customize-inline) veya [yapılandırmayı](#save-agent), kimliğe göre çağırdığınız yönetilen bir aracı olarak kaydedebilirsiniz.
+Gemini API의 관리형 에이전트를 사용하면 자체 요청 사항, 스킬, 데이터로 Antigravity 에이전트를 확장할 수 있습니다. 상호작용 시점에 에이전트를 [인라인으로 맞춤설정](#customize-inline)하거나 ID로 호출하는 관리형 에이전트로 [구성을 저장](#save-agent)할 수 있습니다.
 
-## Antigravity ajanını özelleştirme
+## Antigravity 에이전트 맞춤설정
 
-Özel bir aracı oluşturmanın en hızlı yolu, yeni bir etkileşim oluştururken yapılandırmanızı satır içi olarak iletmektir. Bu işlem için kayıt adımı gerekmez. Aracıyı üç şekilde uzatabilirsiniz:
+커스텀 에이전트를 빌드하는 가장 빠른 방법은 등록 단계 없이 새 상호작용을 만드는 동안 구성을 인라인으로 전달하는 것입니다. 다음과 같은 몇 가지 주요 방법으로 에이전트를 확장할 수 있습니다.
 
-- **Sistem talimatları**: Davranışı şekillendirmek için satır içi metni `system_instruction` ile iletin.
-- **Araçlar**: Varsayılan araçları (Kod Yürütme, Arama, URL Bağlamı) geçersiz kılın, uzak MCP sunucularını kaydedin veya özel işlevler (İşlev Çağırma) tanımlayın.
-- **Dosyalar ve beceriler**: `AGENTS.md` ve `SKILL.md` gibi dosyaları ortama yerleştirin.
+- **[모델 선택](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko#model-selection)**: `agent_config`를 통해 기본 Gemini 모델을 선택합니다 (기본값은 **Gemini 3.6 Flash**).
+- **시스템 요청 사항**: 인라인 텍스트를 `system_instruction`을 통해 전달하여 동작을 형성합니다.
+- **도구**: 기본 도구 (코드 실행, 검색, URL 컨텍스트)를 재정의하거나, 원격 MCP 서버를 등록하거나, 커스텀 함수 (함수 호출)를 정의합니다.
+- **파일 및 스킬**: `AGENTS.md` 및 `SKILL.md`와 같은 파일을 환경에 마운트합니다.
 
-Üçünün de satır içi olarak iletilmesine ilişkin bir örnek:
+다음은 세 가지 모두를 인라인으로 전달하는 예입니다.
 
 ### Python
 
@@ -120,22 +121,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-Her şey etkileşim sırasında tanımlanır. Önceden herhangi bir kayıt işlemi yapmanız gerekmez. Antigravity aracı, çalışma zamanını (kod yürütme, dosya yönetimi, web erişimi) sağlar ve yapılandırma katmanlarınız bunun üzerine eklenir.
+모든 항목은 상호작용 시점에 정의됩니다. 먼저 등록할 필요가 없습니다. Antigravity 에이전트 하네스는 런타임 (코드 실행, 파일 관리, 웹 액세스)과 구성 레이어를 제공합니다.
 
-### Araçlar ve sistem talimatları
+### 도구 및 시스템 요청 사항
 
-`system_instruction` ve `tools` parametrelerini kullanarak aracının davranışını ve özelliklerini belirli bir etkileşim için özelleştirebilirsiniz.
+`system_instruction` 및 `tools` 매개변수를 사용하여 특정 상호작용에 맞게 에이전트의 동작과 기능을 맞춤설정할 수 있습니다.
 
-- **Sistem talimatları**: Aracının davranışını şekillendiren satır içi metni iletmek için `system_instruction` parametresini kullanın. Bu özellik, her görüşmede değiştirmek istediğiniz hızlı düzenlemeler için idealdir. `system_instruction` ve `AGENTS.md` toplamsaldır. Her ikisi de mevcut olduğunda geçerlidir.
-- **Araçlar**: Antigravity aracısı varsayılan olarak `code_execution`, `google_search` ve `url_context`'e erişebilir. Etkileşim sırasında `tools` parametresini ileterek bu listeyi geçersiz kılabilirsiniz. Ayrıca, aracıyı kendi API'lerinize ve veritabanlarınıza bağlamak için [uzak MCP sunucuları](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#mcp-servers) kaydedebilir veya [özel işlevler (işlev çağırma)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#function-calling) tanımlayabilirsiniz. Kullanılabilen araçlarla ilgili tüm ayrıntılar için [Antigravity Agent: Desteklenen araçlar](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#supported-tools) başlıklı makaleyi inceleyin.
+- **시스템 요청 사항**: `system_instruction` 매개변수를 사용하여 에이전트의 동작을 형성하는 인라인 텍스트를 전달합니다. 이는 호출별로 변경하려는 빠른 조정에 적합합니다. `system_instruction` 및 `AGENTS.md`는 추가적입니다. 둘 다 있는 경우 적용됩니다.
+- **도구**: 기본적으로 Antigravity 에이전트는 `code_execution`, `google_search`, `url_context`에 액세스할 수 있습니다. 상호작용 시점에 `tools` 매개변수를 전달하여 이 목록을 재정의할 수 있습니다. [[원격 MCP 서버를 등록하거나 커스텀 함수 (함수 호출)를 정의하여 에이전트를 자체 API 및 데이터베이스에 연결할 수도 있습니다.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko#mcp-servers)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko#function-calling) 사용 가능한 도구에 관한 자세한 내용은 [Antigravity 에이전트: 지원되는 도구](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko#supported-tools)를 참고하세요.
 
-### Dosyaya dayalı özelleştirme
+### 파일 기반 맞춤설정
 
-#### Aracı dizin yapısı
+#### 에이전트 디렉터리 구조
 
-Yapılandırmayı satır içi olarak iletebilirsiniz ancak aracınızın dosyalarını yapılandırılmış bir dizinde düzenlemenizi öneririz. Bu sayede yönetmek, sürüm kontrolü yapmak ve aracının ortamına monte etmek daha kolay olur.
+구성을 인라인으로 전달할 수 있지만 구조화된 디렉터리에 에이전트의 파일을 구성하는 것이 좋습니다. 이렇게 하면 에이전트의 환경에서 더 쉽게 관리하고, 버전 제어하고, 마운트할 수 있습니다.
 
-Tipik bir aracı projesi dizini şu şekilde görünür:
+일반적인 에이전트 프로젝트 디렉터리는 다음과 같습니다.
 
 ```
 my-agent/
@@ -146,13 +147,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-Antigravity çalışma zamanı, bu dosyalar için `.agents/` (ve ortamın kökünü) tarar.
+Antigravity 런타임은 이러한 파일에 대해 `.agents/` (및 환경의 루트)를 검사합니다.
 
 #### AGENTS.md
 
-Aracı, başlangıçta ortamdan `.agents/AGENTS.md` (veya `/.agents/AGENTS.md`) öğesini sistem talimatları olarak otomatik olarak yükler. Uzun karakter tanımları, ayrıntılı yönergeler ve kodunuzla birlikte sürüm kontrolü yapmak istediğiniz talimatlar için `AGENTS.md` kullanın.
+에이전트는 시작 시 환경에서 `.agents/AGENTS.md` (또는 `/.agents/AGENTS.md`)를 시스템 요청 사항으로 자동 로드합니다. 코드와 함께 버전 제어하려는 긴 형식의 페르소나 정의, 자세한 가이드라인, 요청 사항에는 `AGENTS.md`를 사용합니다.
 
-Satır içi kaynak kullanarak `AGENTS.md` bağlama:
+인라인 소스를 사용하여 `AGENTS.md`를 마운트합니다.
 
 ### Python
 
@@ -229,9 +230,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Beceriler: SKILL.md
+#### 스킬: SKILL.md
 
-Beceriler, ajanın yeteneklerini genişleten dosyalardır. Bunları `.agents/skills/<skill-name>/SKILL.md` altına yerleştirin. Böylece, donanım bunları otomatik olarak keşfedip kaydeder.
+스킬은 에이전트의 기능을 확장하는 파일입니다. `.agents/skills/<skill-name>/SKILL.md` 아래에 배치하면 하네스가 자동으로 검색하고 등록합니다.
 
 ```
 .agents/
@@ -241,7 +242,7 @@ Beceriler, ajanın yeteneklerini genişleten dosyalardır. Bunları `.agents/ski
         └── SKILL.md
 ```
 
-Satır içi kaynak kullanarak beceri yükleme:
+인라인 소스를 사용하여 스킬을 마운트합니다.
 
 ### Python
 
@@ -318,17 +319,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-`.agents/skills/` ve `/.agents/skills/` kaynaklarından yüklenen beceriler otomatik olarak keşfedilir.
+`.agents/skills/` 및 `/.agents/skills/`에서 로드된 스킬은 모두 자동으로 검색됩니다.
 
-## Yönetilen aracı oluşturma
+## 관리형 에이전트 만들기
 
-Yapılandırmanızı yineledikten sonra `agents.create` ile yönetilen bir aracı olarak oluşturabilirsiniz. Bu sayede, yapılandırmayı her seferinde tekrarlamadan aracıyı kimliğe göre çağırabilirsiniz.
+구성을 반복한 후 `agents.create`를 사용하여 관리형 에이전트로 만들 수 있습니다. 이렇게 하면 매번 구성을 반복하지 않고도 ID로 에이전트를 호출할 수 있습니다.
 
-Yönetilen bir aracı oluştururken belirttiğiniz `id`, projenize özel olmalı ve ayrılmış ön eklerle (ör. `google-`, `gemini-`) başlamamalıdır. Kısıtlanmış ön eklerin tam listesi için [Aracı kimliği kısıtlamaları](#agent-id-restrictions) bölümüne bakın.
+관리형 에이전트를 만들 때 지정하는 `id`는 프로젝트에 고유해야 하며 예약된 접두사 (예: `google-`, `gemini-`)로 시작해서는 안 됩니다. 제한된 접두사의 전체 목록은 [에이전트 ID 제한사항](#agent-id-restrictions)을 참고하세요.
 
-### Kaynaklardan
+### 소스에서
 
-Kaynaklarla birlikte `base_agent`, `id`, `system_instruction` ve `base_environment` değerlerini belirtin. Platform, her çağırmada dosyalarınızla yeni bir sanal alan sağlar. Kullanılabilir kaynak türleri (Git, GCS, satır içi) için [Ortamlar](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr) bölümüne bakın.
+소스와 함께 `base_agent`, `id`, `agent_config`, `system_instruction`, `base_environment`를 지정합니다. 플랫폼은 호출할 때마다 파일이 포함된 새 샌드박스를 프로비저닝합니다. 사용 가능한 소스 유형 (Git, GCS, 인라인)은 [환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko)을 참고하세요.
 
 ### Python
 
@@ -340,6 +341,10 @@ client = genai.Client()
 agent = client.agents.create(
     id="data-analyst",
     base_agent="antigravity-preview-05-2026",
+    agent_config={
+        "type": "antigravity",
+        "model": "gemini-3.6-flash",
+    },
     system_instruction="You are a data analyst. Always include visualizations and export results as PDF.",
     base_environment={
         "type": "remote",
@@ -376,6 +381,10 @@ const client = new GoogleGenAI({});
 const agent = await client.agents.create({
     id: "data-analyst",
     base_agent: "antigravity-preview-05-2026",
+    agent_config: {
+        type: "antigravity",
+        model: "gemini-3.6-flash",
+    },
     system_instruction: "You are a data analyst. Always include visualizations and export results as PDF.",
     base_environment: {
         type: "remote",
@@ -411,6 +420,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 -d '{
     "id": "data-analyst",
     "base_agent": "antigravity-preview-05-2026",
+    "agent_config": {
+        "type": "antigravity",
+        "model": "gemini-3.6-flash"
+    },
     "system_instruction": "You are a data analyst. Always include visualizations and export results as PDF.",
     "base_environment": {
         "type": "remote",
@@ -435,9 +448,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### Mevcut bir ortamdan (çatal)
+### 기존 환경에서 (포크)
 
-Ortam doğru olana kadar (paketler yüklendi, dosyalar yerinde) temel Antigravity aracısıyla yineleme yapın, ardından bunu yönetilen bir aracıya çatallayın.
+환경이 올바르게 될 때까지 (패키지 설치, 파일 배치) 기본 Antigravity 에이전트로 반복한 다음 관리형 에이전트로 포크합니다.
 
 ### Python
 
@@ -501,11 +514,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Ağ kurallarıyla
+### 네트워크 규칙 사용
 
-Yönetilen bir aracı kaydederken giden erişimi kilitleyebilir veya kimlik bilgilerini ekleyebilirsiniz. İzin verilenler listesi şeması, kimlik bilgisi kalıpları ve joker karakterler hakkında ayrıntılı bilgi için [Ortamlar: Ağ yapılandırması](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr#network-configuration) başlıklı makaleyi inceleyin.
+관리형 에이전트를 저장할 때 아웃바운드 액세스를 잠그거나 사용자 인증 정보를 삽입할 수 있습니다. 허용 목록 스키마, 사용자 인증 정보 패턴, 와일드카드의 전체 목록은 [환경: 네트워크 구성](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko#network-configuration)을 참고하세요.
 
-Aşağıdaki örnekte, GitHub ve PyPI'ye erişebilen ve GitHub için kimlik bilgilerinin yerleştirildiği bir `issue-resolver` aracısı oluşturulur:
+다음 예에서는 GitHub에 사용자 인증 정보가 삽입된 상태로 GitHub 및 PyPI에만 액세스할 수 있는 `issue-resolver` 에이전트를 만듭니다.
 
 ### Python
 
@@ -615,9 +628,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## Temsilciyi çağırma
+## 에이전트 호출
 
-Yeni bir etkileşim oluşturarak yönetilen temsilcinizi temsilci kimliğinizle arayın. Her çağırma işlemi temel ortamı çatalladığından her çalıştırma temiz bir şekilde başlar.
+새 상호작용을 만들어 에이전트 ID로 관리형 에이전트를 호출합니다. 각 호출은 기본 환경을 포크하므로 모든 실행이 깨끗하게 시작됩니다.
 
 ### Python
 
@@ -656,15 +669,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Çok turlu görüşmeler ve akış için [Hızlı Başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr) bölümüne bakın. Aynı `previous_interaction_id` ve `environment` kalıpları, yönetilen aracılar için de geçerlidir.
+멀티턴 대화 및 스트리밍은 [빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko)을 참고하세요. 동일한 `previous_interaction_id` 및 `environment` 패턴이 관리형 에이전트에 적용됩니다.
 
-Yönetilen temsilciler, arka planda yürütmeyi ve iptali de destekler. Ayrıntılar ve kod örnekleri için [Antigravity Agent: Background execution](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr#background-execution) (Antigravity Agent: Arka planda yürütme) başlıklı makaleyi inceleyin.
+관리형 에이전트는 백그라운드 실행 및 취소도 지원합니다. 자세한 내용과 코드 예시는 [Antigravity 에이전트: 백그라운드 실행](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko#background-execution)을 참고하세요.
 
-## Çağırma sırasında yapılandırmayı geçersiz kılma
+## 호출 시 구성 재정의
 
-Bir etkileşim oluştururken aracının varsayılan `system_instruction`, `tools` ve `environment` ağ yapılandırmasını geçersiz kılabilirsiniz. Bu sayede, depolanan aracı tanımını değiştirmeden belirli bir çalıştırma için aracının davranışını, özelliklerini veya kimlik bilgilerini değiştirebilirsiniz.
+상호작용을 만들 때 에이전트의 기본 `system_instruction`, `tools`, `environment` 네트워크 구성을 재정의할 수 있습니다. 이렇게 하면 저장된 에이전트 정의를 변경하지 않고도 특정 실행에 맞게 에이전트의 동작, 기능, 사용자 인증 정보를 수정할 수 있습니다.
 
-### Sistem talimatını ve araçlarını geçersiz kılma
+### 시스템 요청 사항 및 도구 재정의
 
 ### Python
 
@@ -708,9 +721,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Ağ yapılandırmasını geçersiz kılma (kimlik bilgilerini yenileme)
+### 네트워크 구성 재정의 (사용자 인증 정보 새로고침)
 
-Yönetilen aracınızın `base_environment` kimlik bilgileri varsa, süresi dolmuş jetonları yenilemek veya API anahtarlarını döndürmek için bunları çağırma sırasında geçersiz kılabilirsiniz. Yeni bir `network` yapılandırmasıyla `environment` nesnesi iletin. Yeni ağ kuralları, söz konusu etkileşim için önceki kuralların tamamen yerini alır. Temel ortamın kaynakları (dosyalar, depolar) korunur.
+관리형 에이전트의 `base_environment`에 네트워크 사용자 인증 정보가 포함되어 있는 경우 호출 시 재정의하여 만료된 토큰을 새로고침하거나 API 키를 순환할 수 있습니다. 새 `network` 구성으로 `environment` 객체를 전달합니다. 새 네트워크 규칙은 해당 상호작용의 이전 규칙을 완전히 대체합니다. 기본 환경의 소스 (파일, 저장소)는 보존됩니다.
 
 ### Python
 
@@ -790,11 +803,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Aracıları yönet
+## 에이전트 관리
 
-Aracıları listeleyebilir, alabilir ve silebilirsiniz.
+에이전트를 나열, 가져오기, 삭제할 수 있습니다.
 
-### Aracıları listeleyin
+### 에이전트 나열
 
 ### Python
 
@@ -822,7 +835,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Aracı edinme
+### 에이전트 가져오기
 
 ### Python
 
@@ -845,9 +858,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Temsilci silme
+### 에이전트 삭제
 
-Silme işlemi, yapılandırmayı kaldırır. Mevcut ortamlar ve ajan tarafından oluşturulan etkileşimler etkilenmez.
+삭제하면 구성이 삭제됩니다. 에이전트가 만든 기존 환경과 상호작용은 영향을 받지 않습니다.
 
 ### Python
 
@@ -868,23 +881,24 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Aracı tanımı referansı
+## 에이전트 정의 참조
 
-| Alan | Tür | Zorunlu | Açıklama |
+| 필드 | 유형 | 필수 | 설명 |
 | --- | --- | --- | --- |
-| `id` | dize | Evet | Google Cloud projesindeki benzersiz aracı tanımlayıcısı. Aracı çağırmak için kullanılır. Ayrılmış önekler kullanılmamalıdır. [Aracı kimliği kısıtlamaları](#agent-id-restrictions) başlıklı makaleyi inceleyin. |
-| `description` | dize | Hayır | Temsilcinin kullanıcılar tarafından okunabilir açıklaması. |
-| `base_agent` | dize | Evet | Temel aracı kimliği (ör. `antigravity-preview-05-2026`). |
-| `system_instruction` | dize | Hayır | Davranışı ve kullanıcı profilini tanımlayan sistem istemi. |
-| `tools` | dizi | Hayır | Ajanın kullanabileceği araçlar. Boş bırakılırsa varsayılan olarak `code_execution`, `google_search` ve `url_context` değerleri kullanılır. Desteklenen araçlar arasında `code_execution`, `google_search`, `url_context`, `mcp_server` ve özel `function` tanımları yer alır. |
-| `base_environment` | dize veya nesne | Hayır | `"remote"`, `environment_id` veya `sources` ve `network` içeren bir yapılandırma nesnesi. Ortamlar bölümüne bakın. |
+| `id` | 문자열 | 예 | Google Cloud 프로젝트 내의 고유한 에이전트 식별자입니다. 에이전트를 호출하는 데 사용됩니다. 예약된 접두사를 사용해서는 안 됩니다. [에이전트 ID 제한사항](#agent-id-restrictions)을 참고하세요. |
+| `description` | 문자열 | 아니요 | 인간이 읽을 수 있는 에이전트 설명입니다. |
+| `base_agent` | 문자열 | 예 | 기본 에이전트 ID (예: `antigravity-preview-05-2026`). |
+| `agent_config` | 객체 | 아니요 | 모델 선택 (`{"type": "antigravity", "model": "gemini-3.6-flash"}`)을 포함한 기본 에이전트의 구성입니다. 생략하면 기본값은 `gemini-3.6-flash`입니다. 명명된 에이전트의 경우 상호작용 시점에 재정의할 수 없습니다. |
+| `system_instruction` | 문자열 | 아니요 | 동작과 페르소나를 정의하는 시스템 프롬프트입니다. |
+| `tools` | 배열 | 아니요 | 에이전트가 사용할 수 있는 도구입니다. 생략하면 기본값은 `code_execution`, `google_search`, `url_context`입니다. 지원되는 도구에는 `code_execution`, `google_search`, `url_context`, `mcp_server`, 커스텀 `function` 정의가 포함됩니다. |
+| `base_environment` | 문자열 또는 객체 | 아니요 | `"remote"`, `environment_id` 또는 `sources` 및 `network`가 포함된 구성 객체입니다. 환경을 참고하세요. |
 
-### Aracı kimliği kısıtlamaları
+### 에이전트 ID 제한사항
 
-Yönetilen bir aracı oluştururken belirttiğiniz `id` şu kurallara uymalıdır:
+관리형 에이전트를 만들 때 지정하는 `id`는 다음 규칙을 따라야 합니다.
 
-- Google Cloud projenize özgü olmalıdır.
-- Aksi takdirde oluşturma işlemi başarısız olacağından, aşağıdaki ayrılmış öneklerden (büyük/küçük harfe duyarsız) biriyle **başlamamalıdır**:
+- Google Cloud 프로젝트에 고유해야 합니다.
+- 다음 예약된 접두사 (대소문자 구분 안 함)로 시작해서는 **안 됩니다**. 그렇지 않으면 생성이 실패합니다.
   - `antigravity-`
   - `veo-`
   - `omni-`
@@ -902,35 +916,35 @@ Yönetilen bir aracı oluştururken belirttiğiniz `id` şu kurallara uymalıdı
   - `nest-`
   - `kaggle-`
 
-## Yineleme iş akışı
+## 반복 워크플로
 
-1. Temel Antigravity temsilcisiyle **prototip oluşturun**. Sistem talimatını ve ortam kaynaklarını satır içi olarak iletin. Talimatları, becerileri ve ortam kurulumunu etkileşimli olarak test edin.
-2. Ortamı **dengeleyin**. Paketleri yükleyin, kaynakları bağlayın ve her şeyin çalıştığını doğrulayın.
-3. Kaynaklardan veya ortamı çatallayarak yeni bir aracı oluşturup yönetilen aracı olarak **kalıcı hale getirin**.
-4. Aracı tanımını **güncelleyin**. Sistem talimatını değiştirme, becerileri değiştirme veya kaynak ekleme Bir sonraki çağırmada yeni yapılandırma kullanılır.
+1. 기본 Antigravity 에이전트로 **프로토타입** 을 만듭니다. 시스템 요청 사항 및 환경 소스를 인라인으로 전달합니다. 요청 사항, 스킬, 환경 설정을 대화형으로 테스트합니다.
+2. 환경을 **안정화** 합니다. 패키지를 설치하고, 소스를 마운트하고, 모든 항목이 작동하는지 확인합니다.
+3. 소스를 사용하거나 환경을 포크하여 새 에이전트를 만들어 관리형 에이전트로 **유지** 합니다.
+4. 에이전트 정의를 **업데이트** 합니다. 시스템 요청 사항을 변경하거나, 스킬을 교체하거나, 소스를 추가합니다. 다음 호출은 새 구성을 선택합니다.
 
-## Sınırlamalar
+## 제한사항
 
-- **Önizleme durumu**: Yönetilen aracıların önizleme sürümü kullanımdadır. Özellikler ve şemalar değişebilir.
-- **Temel aracı**: `base_agent` olarak yalnızca `antigravity-preview-05-2026` desteklenir.
-- **Sürüm oluşturma yok**: Ajan sürümü oluşturma ve geri alma henüz kullanılamıyor.
-- **Alt temsilci iç içe yerleştirme yok**: Alt temsilci yetkilendirme henüz desteklenmemektedir.
-- En fazla 1.000 yönetilen aracınız olabilir.
+- **미리보기 상태**: 관리형 에이전트는 미리보기 상태입니다. 기능과 스키마는 변경될 수 있습니다.
+- **기본 에이전트 및 모델**: `antigravity-preview-05-2026`만 `base_agent`로 지원됩니다. `agent_config`에서 지원되는 모델 옵션은 `gemini-3.5-flash`, `gemini-3.6-flash` (기본값), `gemini-3.5-flash-lite`입니다. 명명된 에이전트의 경우 상호작용 시점에 모델을 재정의할 수 없습니다.
+- **버전 관리 없음**: 에이전트 버전 관리 및 롤백은 아직 사용할 수 없습니다.
+- **하위 에이전트 중첩 없음**: 하위 에이전트 위임은 아직 지원되지 않습니다.
+- 관리형 에이전트는 최대 1,000개까지 사용할 수 있습니다.
 
-## Sırada ne var?
+## 다음 단계
 
-- [Ajanlara Genel Bakış](https://ai.google.dev/gemini-api/docs/agents?hl=tr): Yönetilen ajanların temel kavramları hakkında bilgi edinin.
-- [Hızlı başlangıç](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=tr): Çok adımlı görüşmeler ve akışla geliştirmeye başlayın.
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr): Varsayılan temsilcinin özelliklerini, araçlarını ve fiyatlandırmasını keşfedin.
-- [Aracı Ortamları](https://ai.google.dev/gemini-api/docs/agent-environment?hl=tr): Sanal alanları, kaynakları ve ağı yapılandırın.
-- [Agent Platform'da Yönetilen Ajanlar API'si](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=tr): Yerleşik kurumsal yönetim özelliklerine sahip ajanlar oluşturmak için kullanılır.
+- [에이전트 개요](https://ai.google.dev/gemini-api/docs/agents?hl=ko): 관리형 에이전트의 핵심 개념에 대해 알아봅니다.
+- [빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko): 멀티턴 대화 및 스트리밍으로 빌드를 시작합니다.
+- [Antigravity 에이전트](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko): 기본 에이전트의 기능, 도구, 가격 책정을 살펴봅니다.
+- [에이전트 환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko): 샌드박스, 소스, 네트워킹을 구성합니다.
+- [Agent Platform의 관리형 에이전트 API](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=ko): 기본 제공 조직 거버넌스로 에이전트를 만듭니다.
 
-Geri bildirim gönderin
+의견 보내기
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Son güncelleme tarihi: 2026-07-08 UTC.
+최종 업데이트: 2026-07-21(UTC)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+의견을 전달하고 싶나요?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-08 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-21(UTC)"],[],[]]

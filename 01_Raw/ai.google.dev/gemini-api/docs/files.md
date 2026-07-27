@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=zh-CN
-fetched_at: 2026-07-20T04:48:08.742690+00:00
-title: "\u6587\u4ef6 API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=tr
+fetched_at: 2026-07-27T04:46:27.000906+00:00
+title: "Dosyalar API'si \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-发送反馈
+Geri bildirim gönderin
 
-# 文件 API
+# Dosyalar API'si
 
-Gemini 可以同时处理各种类型的输入数据，包括文本、图片和音频。
+Gemini, metin, resim ve ses gibi çeşitli giriş verilerini aynı anda işleyebilir.
 
-本指南介绍了如何使用 Files API 处理媒体文件。对于音频文件、图片、视频、文档和其他受支持的文件类型，基本操作是相同的。
+Bu kılavuzda, Files API'yi kullanarak medya dosyalarıyla nasıl çalışacağınız gösterilmektedir. Ses dosyaları, resimler, videolar, dokümanlar ve desteklenen diğer dosya türleri için temel işlemler aynıdır.
 
-如需了解文件提示方面的指导，请参阅[文件提示指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)部分。
+Dosya istemiyle ilgili rehberlik için [Dosya istemi kılavuzu](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide) bölümüne göz atın.
 
-## 上传文件
+## Dosya yükleyin
 
-您可以使用 Files API 上传媒体文件。当总请求大小（包括文件、文本提示、系统指令等）超过 100 MB 时，请务必使用 Files API。对于 PDF 文件，上限为 50 MB。
+Medya dosyası yüklemek için Files API'yi kullanabilirsiniz. Toplam istek boyutu (dosyalar, metin istemi, sistem talimatları vb. dahil) 100 MB'tan büyük olduğunda her zaman Files API'yi kullanın. Bu sınır, PDF dosyaları için 50 MB'tır.
 
-以下代码会上传文件，然后在对 `interactions.create` 的调用中使用该文件。
+Aşağıdaki kod, bir dosyayı yükler ve ardından `interactions.create` çağrısında dosyayı kullanır.
 
 ### Python
 
@@ -161,9 +161,9 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## 获取文件的元数据
+## Dosyanın meta verilerini alma
 
-您可以调用 `files.get` 来验证 API 是否已成功存储上传的文件并获取其元数据。
+`files.get` işlevini çağırarak API'nin yüklenen dosyayı başarıyla depoladığını doğrulayabilir ve dosyanın meta verilerini alabilirsiniz.
 
 ### Python
 
@@ -231,9 +231,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## 列出已上传的文件
+## Yüklenen dosyaları listeleme
 
-以下代码会获取已上传的所有文件的列表：
+Aşağıdaki kod, yüklenen tüm dosyaların listesini alır:
 
 ### Python
 
@@ -286,9 +286,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 删除已上传的文件
+## Yüklenen dosyaları silme
 
-文件会在 48 小时后自动删除。您还可以手动删除已上传的文件：
+Dosyalar 48 saat sonra otomatik olarak silinir. Yüklenen bir dosyayı manuel olarak da silebilirsiniz:
 
 ### Python
 
@@ -340,190 +340,191 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/$name \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## 使用情况信息
+## Kullanım bilgileri
 
-您可以使用 Files API 上传媒体文件并与之互动。通过 Files API，您可以为每个项目存储最多 20 GB 的文件，每个文件的最大大小为 2 GB。文件会存储 48 小时。在此期间，您可以使用该 API 获取有关文件的元数据，但无法下载文件。
-在已推出 Gemini API 的所有地区，Files API 均可免费使用。
+Medya dosyalarını yüklemek ve bu dosyalarla etkileşim kurmak için Files API'yi kullanabilirsiniz. Files API, proje başına 20 GB'a kadar dosya depolamanıza olanak tanır. Dosya başına maksimum boyut 2 GB'tır. Dosyalar 48 saat boyunca saklanır. Bu süre zarfında, dosyalarla ilgili meta verileri almak için API'yi kullanabilirsiniz ancak dosyaları indiremezsiniz.
+Files API, Gemini API'nin kullanılabildiği tüm bölgelerde ücretsiz olarak kullanılabilir.
 
-## 文件提示策略
+## Dosya istemi stratejileri
 
-本部分提供了有关如何将媒体文件与 Gemini API 的提示搭配使用的指南和最佳实践。
+Bu bölümde, Gemini API için istemlerle medya dosyalarını kullanmayla ilgili rehberlik ve en iyi uygulamalar yer almaktadır.
 
-能够在提示中使用各种类型的数据，让您在可以使用 Gemini API 完成的任务方面拥有更大的灵活性。例如，您可以向模型发送一张美食照片，并要求它撰写一篇关于这道美食的简短博文。
+İstemlerinizde çeşitli veri türlerini kullanabilmek, Gemini API ile hangi görevleri yapabileceğiniz konusunda daha fazla esneklik sağlar. Örneğin, modele lezzetli bir yemeğin fotoğrafını gönderip yemekle ilgili kısa bir blog yazısı yazmasını isteyebilirsiniz.
 
 |  |  |
 | --- | --- |
-| **提示** | **答案** |
-| 根据这张图片写一篇简短而引人入胜的博文。其中应包含照片中菜肴的描述，并谈论我的饮食准备之旅。   Cookie | 饮食准备是节省时间和金钱的好方法，还可以帮助您吃得更健康。这道菜肴就是一个很好的例子，它既健康又美味，而且可以提前准备。  这道餐品包含糙米、烤蔬菜和照烧鸡肉。 糙米是一种健康且复杂的碳水化合物，可为您提供持久的能量。烤蔬菜是获取每日所需维生素和矿物质的好方法，照烧鸡肉则是一种美味且富含蛋白质的选择。  这道菜的准备工作也很简单。只需煮好糙米、烤好蔬菜，再做好照烧鸡肉即可。所有食材烹制完毕后， 将其分装到备餐容器中，然后放入冰箱冷藏。 这样，您就可以在忙碌的早晨拿上一个容器，然后出门了！  如果您想寻找一种可以提前准备的健康美味餐，那么这款餐食是不错的选择。它富含营养和风味，定能让您感到饱腹和满足。  祝您健康美味的备餐之旅愉快！ |
+| **İstem** | **Yanıt** |
+| Bu resme dayalı olarak kısa ve ilgi çekici bir blog yayını yaz. Fotoğraftaki yemeğin açıklamasını içermeli ve yemek hazırlama yolculuğumdan bahsetmelidir.   Çerezler | Yemek hazırlığı, zamandan ve paradan tasarruf etmenin yanı sıra daha sağlıklı beslenmenize de yardımcı olur. Bu yemek, önceden hazırlanabilen sağlıklı ve lezzetli bir yemeğe harika bir örnektir.  Bu öğünde kahverengi pirinç, fırında sebzeler ve teriyaki soslu tavuk bulunur. Esmer pirinç, size uzun süreli enerji verecek sağlıklı ve kompleks bir karbonhidrattır. Kızartılmış sebzeler, günlük vitamin ve mineral ihtiyacınızı karşılamak için harika bir seçenektir. Teriyaki soslu tavuk ise lezzetli ve protein açısından zengin bir seçenektir.  Bu yemeği hazırlamak da kolaydır. Kahverengi pirinci pişirin, sebzeleri fırında kızartın ve teriyaki soslu tavuğu pişirin. Her şey piştikten sonra yemek hazırlama kaplarına bölüp buzdolabında saklayın. Ardından, yoğun sabahlarınızda bir kap alıp çıkabilirsiniz.  Önceden hazırlanabilen sağlıklı ve lezzetli bir yemek arıyorsanız bu yemek harika bir seçenek. Besinler ve lezzetlerle dolu bu yemek, sizi tok ve memnun hissettirecek.  Sağlıklı ve lezzetli yemek hazırlama! |
 
-如果您在使用媒体文件的提示中难以获得所需的输出，可以尝试以下策略来帮助您获得所需的结果。以下部分提供了设计方法和问题排查提示，可帮助您改进使用多模态输入的提示。
+Medya dosyalarının kullanıldığı istemlerden istediğiniz çıkışı almakta zorlanıyorsanız istediğiniz sonuçları elde etmenize yardımcı olabilecek bazı stratejiler vardır. Aşağıdaki bölümlerde, çok formatlı giriş kullanan istemleri iyileştirmeye yönelik tasarım yaklaşımları ve sorun giderme ipuçları verilmektedir.
 
-您可以按照以下最佳实践来改进多模态提示：
+Aşağıdaki en iyi uygulamaları izleyerek çok formatlı istemlerinizi iyileştirebilirsiniz:
 
-- ### [提示设计基础知识](#specific-instructions)
+- ### [İstem tasarımıyla ilgili temel bilgiler](#specific-instructions)
 
-  - **指令应当明确具体**：编写清晰且简洁的指令，尽量避免误解。
-  - **向提示中添加一些示例**：使用切实可行的少样本示例来说明您要实现的目标。
-  - **分步细分**：将复杂的任务划分为多个易于管理的子目标，引导模型完成整个过程。
-  - **指定输出格式**：在提示中，要求输出采用所需的格式，如 Markdown、JSON、HTML 等。
-  - **对于单个图片的提示，首先放置图片**：虽然 Gemini 可以按任意顺序处理图片和文字输入，但对于包含单张图片的提示，如果将图片（或视频）放在文本提示前面，效果可能会更好。 但是，对于需要图片与文本高度交织才具有意义的提示，请使用最自然的顺序。
-- ### [排查多模态提示问题](#troubleshooting)
+  - **Talimatlarınızda net olun**: Yanlış yorumlamaya en az yer bırakacak şekilde net ve kısa talimatlar oluşturun.
+  - **İsteminize birkaç örnek ekleyin:** Ne elde etmek istediğinizi göstermek için gerçekçi birkaç görev örneği kullanın.
+  - **Adım adım ilerleyin**: Karmaşık görevleri yönetilebilir alt hedeflere ayırarak modele süreç boyunca rehberlik edin.
+  - **Çıkış biçimini belirtin**: İsteminizde, çıkışın istediğiniz biçimde (ör. Markdown, JSON, HTML vb.) olmasını isteyin.
+  - **Tek resimli istemlerde resminizi önce girin**: Gemini, resim ve metin girişlerini herhangi bir sırada işleyebilse de tek resim içeren istemlerde, resim (veya video) metin isteminden önce yerleştirilirse daha iyi performans gösterebilir. Ancak, anlamlı olması için resimlerin metinlerle yoğun bir şekilde iç içe geçmesini gerektiren istemlerde en doğal olan sırayı kullanın.
+- ### [Çok formatlı isteminizle ilgili sorunları giderme](#troubleshooting)
 
-  - **如果模型没有从图片的相关部分提取信息**：给出提示，说明您希望提示从图片的哪些方面提取信息。
-  - **如果模型输出过于笼统（没有针对图片或视频输入进行足够的定制）**：在提示开头，尝试要求模型描述图片或视频，然后再提供任务指令，或尝试要求模型参考图片中的内容。
-  - **排查哪个部分失败**：要求模型描述图片，或要求模型说明其推理，以衡量模型的初步理解。
-  - **如果您的提示产生幻觉内容**：尝试调低温度设置，或要求模型提供较短的说明，以便不太可能推断其他细节。
-  - **对采样参数调优**：尝试不同的温度设置和 Top-k 选择，以调整模型的创造力。
+  - **Model, resmin ilgili bölümünden bilgi almıyorsa:** İstemden, resmin hangi yönleriyle ilgili bilgi almasını istediğinize dair ipuçları verin.
+  - **Model çıktısı çok genel ise (resim/video girişine yeterince uyarlanmamışsa):** İstemin başında, görev talimatını vermeden önce modelden resimleri veya videoyu açıklamasını ya da modelden resimdeki içeriğe atıfta bulunmasını isteyin.
+  - **Hangi bölümün başarısız olduğunu belirlemek için:** Modelin ilk anlayışını ölçmek üzere modelden resmi açıklamasını veya gerekçesini açıklamasını isteyin.
+  - **İsteminiz halüsinasyon içeren içeriklerle sonuçlanıyorsa:** Sıcaklık ayarını düşürmeyi veya modelden daha kısa açıklamalar istemeyi deneyin. Böylece modelin ek ayrıntılar üretme olasılığı azalır.
+  - **Örnekleme parametrelerini ayarlama:** Modelin yaratıcılığını ayarlamak için farklı sıcaklık ayarları ve top-k seçimleriyle denemeler yapın.
 
-### 说明应当明确具体
+### Talimatlarınızda net olun
 
-提示在清晰而详细时最成功。如果您考虑获得特定输出，最好在提示中包含该要求，以确保获得所需输出。
+İstemler en iyi sonucu net ve ayrıntılı olduğunda verir. Aklınızda belirli bir çıkış varsa istediğiniz çıkışı elde etmek için bu şartı isteme eklemeniz daha iyi olur.
 
-对于此机场面板图片，要求模型仅“描述此图片”可能会生成一般性说明。如果您需要模型从图片中解析时间和城市，则可以直接在提示中添加该请求。
+Havaalanı panosunun yer aldığı bu resim için modele yalnızca "bu resmi açıkla" komutunu verdiğinizde genel bir açıklama oluşturulabilir. Modelin resimdeki saati ve şehri ayrıştırması gerekiyorsa bu isteği doğrudan isteminize ekleyebilirsiniz.
 
-| 提示 | 模型回答 |
+| İstem | Model yanıtı |
 | --- | --- |
-| 描述此图片。 | 此图片显示了机场到达和出发信息面板。 |
+| Bu resmi tanımla. | Resimde, havalimanındaki gelen ve giden uçuşlar tabelası gösteriliyor. |
 
-| **更新后的提示** | **改进后的回答** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 旅行时刻表 将下图中显示的机场面板中的时间和城市解析为列表。 | - 10:50 莫斯科 - 11:05 爱丁堡 - 11:05 伦敦 - 11:10 布加勒斯特 - 11:30 基辅 - 11:35 都柏林 - 11:45 东米德兰兹 - 12:15 索非亚 - 12:30 伦敦 - 12:30 纽卡斯尔 - 12:40 圣彼得堡 - 12:40 伦敦 - 12:45 曼彻斯特 |
+| Seyahat zaman çizelgesi Bu resimde gösterilen havaalanı panosundaki saati ve şehri ayrıştırarak listeleyin. | - 10:50 Moskova - 11:05 Edinburgh - 11:05 Londra - 11:10 Bükreş - 11:30 Kiev - 11:35 Dublin - 11:45 East Midlands - 12:15 Sofya - 12:30 Londra - 12:30 Newcastle - 12:40 St Petersburg - 12:40 Londra - 12:45 Manchester |
 
-### 添加一些示例
+### Birkaç örnek ekleyin
 
-Gemini 模型可以接受多个输入，它可以将这些输入用作示例来理解所需的输出。添加这些示例有助于模型识别模式，并将给定图片与回答之间的关系应用于新示例。这也称为少量样本学习。
+Gemini modeli, istediğiniz çıktıyı anlamak için örnek olarak kullanabileceği birden fazla giriş kabul edebilir. Bu örnekleri eklemek, modelin kalıpları belirlemesine ve verilen resimler ile yanıtlar arasındaki ilişkiyi yeni örneğe uygulamasına yardımcı olabilir. Bu, "az görevli" öğrenme olarak da adlandırılır.
 
-在以下示例中，初始输出以句子形式编写，并且还包含国家/地区（巴西）。假设您需要不同格式或样式的输出，并且只希望输入城市而不是国家/地区。向提示中添加少样本示例可以引导模型以您所需的方式进行回答。
+Aşağıdaki örnekte, ilk çıkış cümle şeklinde yazılmış ve ülkeyi (Brezilya) de içeriyor. Çıktının farklı bir biçimde veya tarzda olmasını ve yalnızca şehri (ülkeyi değil) istiyorsunuz. İsteminize birkaç görevli örnek eklemek, modelin istediğiniz şekilde yanıt vermesini sağlayabilir.
 
-| **提示** | **模型回答** |
+| **İstem** | **Model yanıtı** |
 | --- | --- |
-| 旅行时刻表 确定城市以及地标。 | 地标是巴西里约热内卢的基督救世主雕像。 |
+| Seyahat zaman çizelgesi Simge yapıyla birlikte şehri belirleyin. | Bu simge yapı, Brezilya'nın Rio de Janeiro şehrindeki Kurtarıcı İsa heykelidir. |
 
-| **更新后的提示** | **改进后的回答** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 确定城市以及地标。 斗兽场 | 城市：罗马，地标：斗兽场。 |
-| 紫禁城 | 城市：北京，地标：紫禁城 |
-| 紫禁城 | 城市：里约热内卢，地标：基督救世主雕像 |
+| Simge yapıyla birlikte şehri belirleyin. colosseum | city: Rome, landmark: the Colosseum. |
+| Yasak Şehir | city: Beijing, landmark: Forbidden City |
+| forbidden-city | city: Rio de Janeiro, landmark: Christ the Redeemer statue |
 
-### 分步细分
+### Adım adım inceleme
 
-对于复杂的任务（例如需要视觉理解和推理的任务），将任务拆分为更小、更直接的步骤可能会很有帮助。或者，如果您在提示中直接要求模型“分步思考”，也可能会很有效。
+Hem görsel anlayış hem de akıl yürütme gerektiren görevler gibi karmaşık görevleri daha küçük ve basit adımlara bölmek faydalı olabilir. Alternatif olarak, isteminizde doğrudan modelden "adım adım düşünmesini" istemek de etkili olabilir.
 
-| 提示 | 模型回答 |
+| İstem | Model yanıtı |
 | --- | --- |
-| 我什么时候会将卫生纸用完？ | 您只剩下 3 卷了。 |
+| Tuvalet kağıdım ne zaman bitecek? | Çok yakında yalnızca 3 rulo hakkınız kalacak. |
 
-| **更新后的提示** | **改进后的回答** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 1. 首先，统计此图片中有多少个卫生纸卷。 2. 然后，确定一个典型的人每天使用多少卫生纸。 3. 计算这些卫生纸卷的使用时长。 | 1. 这张图片中有 3 卷卫生纸。 2. 一个典型的人每天使用大约 20 张卫生纸。 3. 如果每卷包含 200 张纸，则每卷将持续约 10 天。因此，3 卷将持续大约一个月。 |
+| 1. Öncelikle bu resimde kaç rulo tuvalet kağıdı olduğunu sayın. 2. Ardından, bir kişinin günde ne kadar tuvalet kağıdı kullandığını belirleyin. 3. Bu tuvalet kağıdı rulolarının ne kadar süre dayanacağını hesaplayın. | 1. Bu resimde 3 rulo tuvalet kağıdı var. 2. Tipik bir kişi günde yaklaşık 20 yaprak tuvalet kağıdı kullanır. 3. Her ruloda 200 yaprak varsa her rulo yaklaşık 10 gün dayanır. Bu nedenle, 3 rulo yaklaşık bir ay dayanır. |
 
-数学问题或其他类型的文字题非常适合要求模型分步思考。
+Matematik problemleri veya diğer sözel problemler, modelden adım adım düşünmesini istemek için idealdir.
 
-| **提示** | **答案** |
+| **İstem** | **Yanıt** |
 | --- | --- |
-| 序列中的第 4 项是什么？ | -135 |
+| Dizideki 4. terim nedir? | -135 |
 
-模型的回答不正确。改进这种情况的一些方法是要求模型在回答提示之前，先解析问题。
+Modelin yanıtı yanlış. Bunu iyileştirmenin bazı yolları, modelden isteme yanıt vermeden önce sorunu ayrıştırmasını istemektir.
 
-| **提示** | **答案** |
+| **İstem** | **Yanıt** |
 | --- | --- |
-| 首先解析图片中的公式。  然后，根据公式回答“序列中的第 4 项是什么？”。 | *点击可展开结果* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. 将 n = 4 代入公式： $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. 我们不知道 b(3) 的值，因此将 n = 3 代入公式中： $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. 我们不知道 b(2) 的值，因此将 n = 2 代入公式中： $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. 我们知道 b(1) 的值是 15，因此将其代入公式中： $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. 现在我们已经知道 b(2) 的值，将其代入 b(3) 的公式中： $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. 现在我们已经知道 b(3) 的值，将其代入 b(4) 的公式中： $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   因此，序列中的第 4 项是 -405。 |
+| Önce resimdeki formülü ayrıştırın.  Ardından, formüle göre "Dizideki 4. terim nedir?" sorusunu yanıtlayın. | *Sonucu genişletmek için tıklayın* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. n = 4 değerini formülde yerine koyun: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. b(3) değerini bilmiyoruz. Bu nedenle, n = 3 değerini formülde yerine koyun: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. b(2) değerini bilmiyoruz. Bu nedenle, n = 2 değerini formülde yerine koyun: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. b(1) değerinin 15 olduğunu biliyoruz. Bu nedenle, formülde yerine koyalım: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. b(2) değerini bildiğimize göre bunu b(3) formülünde yerine koyalım: $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Artık b(3) değerini bildiğimize göre bu değeri b(4) formülünde yerine koyabiliriz: $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Bu nedenle, dizideki 4. terim -405'tir. |
 
-此模型回答是正确的。现在，如需简化回答，您可以要求模型分步思考。
+Bu model yanıtı doğru. Yanıtı daha da kolaylaştırmak için modele adım adım düşünmesini söyleyebilirsiniz.
 
-| **更新后的提示** | **改进后的回答** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 序列中的第 4 项是什么？请分步思考。 | 第一项是 15。  第二项是 b(1) \* (-3) = 15 \* (-3) = -45。  第三项是 b(2) \* (-3) = -45 \* (-3) = 135。  第四项是 b(3) \* (-3) = 135 \* (-3) = -405。 |
+| Dizideki 4. terim nedir? Adım adım düşünün. | İlk terim 15'tir.  İkinci terim b(1) \* (-3) = 15 \* (-3) = -45 olur.  Üçüncü terim b(2) \* (-3) = -45 \* (-3) = 135'tir.  Dördüncü terim b(3) \* (-3) = 135 \* (-3) = -405 olur. |
 
-### 指定输出格式
+### Çıkış biçimini belirtin
 
-一个常见问题是模型输出需要采用特定格式（例如 Markdown、JSON、HTML），尤其是在需要由下游任务提取模型输出的情况下。您可以在提示中指示模型生成采用该格式的输出。以下是两个示例：
+Model çıkışının belirli bir biçimde (ör.Markdown, JSON, HTML) olması gerektiğinde yaygın bir sorun yaşanır. Bu durum, özellikle model çıkışının sonraki bir görev tarafından alınması gerektiğinde ortaya çıkar. İstemde modeli bu biçimde çıkış üretmeye yönlendirerek bu biçimde çıkış üretmeyi deneyebilirsiniz. Aşağıda iki örnek verilmiştir:
 
-| 提示 | 模型回答 |
+| İstem | Model yanıtı |
 | --- | --- |
-| 将此图片中的表格解析为 Markdown 格式 | ```none | 学科 | 状态 | 时间 | 开始日期 | 截止日期 | | ------- | ------ | ---- | ---------- | ------ | | 数学 | 完成 | 1.5 小时 | 2023 年 11 月 29 日 | 2023 年 12 月 1 日 | | 地理 | 完成 | 30 分钟 | 2023 年 12 月 2 日 | 2023 年 12 月 4 日 | | 物理 | 进行中 | 2 小时 | 2023 年 12 月 3 日 | 2023 年 12 月 5 日 | | 生物 | 未开始 | 6 小时 | 2016 年 11 月 2 日 | 2023 年 12 月 6 日 | ``` |
+| Bu resimdeki tabloyu Markdown biçiminde ayrıştır | ```none | Konu | Durum | Süre | Başlangıç tarihi | Son tarih | | ------- | ------ | ---- | ---------- | ------ | | Matematik | Tamamlandı | 1,5 saat | 29.11.2023 | 01.12.2023 | | Coğrafya | Tamamlandı | 30 dakika | 02.12.2023 | 04.12.2023 | | Fizik | Devam ediyor | 2 saat | 03.12.2023 | 05.12.2023 | | Biyoloji | Başlatılmadı | 6 saat | 02.11.2016 | 06.12.2023 | ``` |
 
-| **提示** | **模型回答** |
+| **İstem** | **Model yanıtı** |
 | --- | --- |
-| 请提供以下所有属性的列表：  配料、菜系类型、是否为素菜，采用 JSON 格式 | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
+| Aşağıdaki tüm özelliklerin listesini sağlayın:  Malzemeler, mutfak türü, vejetaryen olup olmadığı (JSON biçiminde) | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
 
-### 首先将图片放在单图片提示中
+### Tek resim istemlerinde resminizi ön plana çıkarma
 
-虽然 Gemini 可以在提示中以任意顺序解读图片和文字，但将单个图片置于文字提示之前可以获得更好的结果。
-在以下示例中，您会注意到在每个提示中，图片都位于文本之前。
+Gemini, istemdeki görüntü ve metni herhangi bir sırada yorumlayabilir ancak metin isteminden önce tek bir görüntü yerleştirmek daha iyi sonuçlar verebilir.
+Aşağıdaki örneklerde, her istemde önce resmin, ardından metnin geldiğini göreceksiniz.
 
-### 排查多模态提示问题
+### Çok formatlı isteminizle ilgili sorunları giderme
 
-如果您未收到有用的回答，则可能需要排查提示问题。您可以尝试以下一些策略。
+Faydalı bir yanıt alamıyorsanız isteminizle ilgili sorunları gidermeniz gerekebilir. Deneyebileceğiniz birkaç strateji:
 
-#### 如果模型没有从图片的相关部分提取信息
+#### Model, resmin ilgili bölümünden bilgi almıyorsa
 
-如需获得更具体的回答，您可以指明您希望提示从图片的哪些方面提取信息以告知其回答。
+Daha ayrıntılı bir yanıt almak için istemin, yanıtını oluştururken hangi resim öğelerinden bilgi almasını istediğinizi belirtebilirsiniz.
 
-| 提示 | 模型回答 |
+| İstem | Model yanıtı |
 | --- | --- |
-| 这些尿片可供一个婴儿使用多少天？ | 这些尿片可以使用 198 天。 |
+| Bu bezler bir bebeğe kaç gün yeter? | Bezler bitmeden 198 gün boyunca kullanılabilir. |
 
-| **更新后的提示** | **改进后的回答** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 这些尿片可以使用多长时间？  使用包装盒上显示的体重确定孩子的年龄，并使用包装盒中的尿片总数。  用总数除以孩子每天要换的尿片数量。 | 包装盒中有 198 张尿片。包装盒上注明尿片适用于体重 22-37 磅的孩子。  此体重范围内的普通孩子可能在 1 至 2 岁之间。  2 岁的孩子通常每天要换 6 片尿片，因此尿片的使用寿命约为 33 天 (198/6)。 |
+| Bu bezler bitmeden ne kadar süre dayanır?  Çocuğun yaşını belirlemek için kutunun üzerinde gösterilen ağırlığı ve kutudaki toplam bebek bezi sayısını kullanın.  Toplam sayıyı, çocuğun günde kullandığı bez sayısına bölün. | Kutuda 198 adet bez bulunur. Kutuda, bezlerin 10-17 kg ağırlığındaki çocuklar için olduğu belirtiliyor.  Bu ağırlık aralığındaki ortalama bir çocuk muhtemelen 1-2 yaşlarındadır.  2 yaşındaki bir çocuk genellikle günde 6 bez kullanır. Bu nedenle, bezler yaklaşık 33 gün (198/6) dayanır. |
 
-#### 如果模型输出过于笼统，没有针对图片输入进行足够的定制
+#### Model çıkışı çok genel ve resim girişine yeterince uyarlanmamışsa
 
-如需帮助模型针对图片定制其回答，请尝试要求它在执行推理任务之前描述图片。
+Modelin yanıtını resimlere göre uyarlamasına yardımcı olmak için akıl yürütme görevini gerçekleştirmeden önce resimleri açıklamasını isteyin.
 
-| 提示 | 模型回答 |
+| İstem | Model yanıtı |
 | --- | --- |
-| 这些图片有什么共同之处？ | 全部四张图片都是横向摄影的示例。 |
+| Bu resimlerin ortak noktası nedir? | Dört resmin tamamı manzara fotoğrafı örnekleridir. |
 
-| **更新后的提示** | **改进后的回答** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 首先，详细描述每张图片中的内容。这些图片有什么共同之处？ | 第一张图片显示一个人正在收拾手提包。第二张图片显示购物中心内空无一人的走廊。第三张图片显示一卷卫生纸。第四张图片显示黑暗汹涌的大海。  这些图片之间的共同之处在于，它们都是临界空间的示例。临界空间是指处于两个其他场所或情景之间的场所或情景。它们通常以一种不确定或模糊的感觉为特征。  第一张图片显示处于居家与旅行之间的人。第二张图片显示两家商店之间的走廊。第三张图片是卫生纸，可以代表浴室。而浴室是私人领域与公共领域之间的过渡空间。它是一个让我们为进入或离开外部世界做好准备的场所。  第四张图片显示介于平静与风暴之间的大海。  临界空间可能既令人兴奋，又令人不安。它们既可以作为崭新开始的场所，也可以作为结束的场所。它们可以是反思的场所，也可以是行动的场所。 |
+| Öncelikle her resimde ne olduğunu ayrıntılı olarak açıklayın. Bu resimlerin ortak noktası nedir? | İlk resimde, bir kişinin bavul hazırladığı gösteriliyor. İkinci resimde, bir alışveriş merkezindeki boş koridor gösteriliyor. Üçüncü resimde bir rulo tuvalet kağıdı gösteriliyor. Dördüncü resimde karanlık ve fırtınalı bir deniz gösteriliyor.  Bu resimlerin ortak özelliği, hepsinin geçiş alanlarına örnek olmasıdır. Geçiş alanları, iki yer veya durum arasında kalan yerler ya da durumlardır. Genellikle belirsizlik veya muğlaklık hissiyle karakterize edilirler.  İlk resimde, kişinin evde ve seyahatte olduğu gösteriliyor. İkinci resimde, iki mağaza arasındaki koridor gösteriliyor. Üçüncü resimde, banyoyu temsil edebilecek tuvalet kağıdı gösteriliyor. Banyo, özel ve kamusal alanlar arasında geçiş yapılan bir yerdir. Dış dünyaya girerken veya dış dünyadan çıkarken kendimizi hazırladığımız bir yerdir.  Dördüncü resimde, sakin ve fırtınalı deniz arasında bir geçiş gösteriliyor.  Geçiş alanları hem heyecan verici hem de rahatsız edici olabilir. Yeni başlangıçların veya sonların yeri olabilirler. Bunlar, düşünme veya harekete geçme yeri olabilir. |
 
-您也可以尝试明确要求模型参考图片中的内容。
+Ayrıca modelden, resimdeki içeriğe açıkça atıfta bulunmasını da isteyebilirsiniz.
 
-| **更新后的提示** | **改进后的回答** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 这些图片有什么共同之处？请在回答中参考图片的内容。 | 所有图片都与旅行相关。第一张图片显示一个人正在收拾手提包，第二张图片显示购物中心空无一人的走廊，第三张图片显示一叠卫生纸，第四张图片显示黑暗汹涌的大海。  这些图片都与旅行相关，因为它们都是人们在旅行时所需要或使用的事物。第一张图片显示一个人正在收拾手提箱，这是人们在旅行时要做的事情。第二张图片显示购物中心内空无一人的走廊，人们经常来到这个场所购买旅行用品。第三张图片显示一叠卫生纸，这是人们在旅行时经常使用的物品。第四张图片显示黑暗汹涌的大海，这是人们在旅行时经常遇到的景象。 |
+| Bu resimlerin ortak noktası nedir? Yanıtınızda resimlerdeki içeriklere atıfta bulunun. | Resimlerin tamamı seyahatle ilgili. İlk resimde valiz hazırlayan bir kişi, ikinci resimde alışveriş merkezindeki boş bir koridor, üçüncü resimde bir rulo tuvalet kağıdı, dördüncü resimde ise karanlık ve fırtınalı bir deniz gösteriliyor.  Bu resimlerin hepsi seyahatle ilgili çünkü seyahat edenlerin ihtiyaç duyduğu veya kullandığı şeyler. İlk resimde, bir valizi hazırlayan bir kişi gösteriliyor. Bu, insanların seyahate çıkarken yaptığı bir şeydir. İkinci resimde, insanların seyahatleri için eşya satın almak üzere sık sık gittiği bir yer olan alışveriş merkezindeki boş bir koridor gösteriliyor. Üçüncü resimde, insanların seyahat ederken sıkça kullandığı bir ürün olan tuvalet kağıdı rulosu gösteriliyor. Dördüncü resimde, insanların seyahat ederken sıkça karşılaştığı bir durum olan karanlık ve fırtınalı bir deniz gösteriliyor. |
 
-同样的提示适用于从图片获得创造性输出。在以下包含兔子的示例中，明确要求模型包含图片中的各个方面可以改进输出。
+Aynı ipuçları, resimlerden elde edilen reklam öğesi çıkışları için de geçerlidir. Tavşanın yer aldığı aşağıdaki örnekte, modelden resimdeki unsurları dahil etmesini açıkça istemek çıkışı iyileştirebilir.
 
-| 提示 | 模型回答 |
+| İstem | Model yanıtı |
 | --- | --- |
-| 您能为我写一首关于此图片的诗歌吗？ | 棕色的软软的小兔子，  在田野里欢快地跳上跳下。  你的耳朵是那么长，你的尾巴是这么短，  你是最可爱的生灵。  你啃着又甜又绿的青草，  当我靠近时，你又蹦蹦跳跳地跑开。  但是小兔子啊，  我始终是你的朋友，直到永远。 |
+| Bu resim hakkında bir şiir yazabilir misin? | Küçük tavşan, yumuşacık ve kahverengi,  Tarlada zıplıyor, yukarı ve aşağı.  Kulakların uzun, kuyruğun küçük,  Sen hepsinin en tatlısısın.  Yeşil ve tatlı çimleri yersin,  Beni görünce de zıplayarak uzaklaşırsın.  Ama her zaman arkadaşın olacağım,  Küçük tavşan, sonuna kadar. |
 
-| **更新后的提示** | **改进后的回答** |
+| **Güncellenen istem** | **İyileştirilmiş yanıt** |
 | --- | --- |
-| 您能为我写一首关于此图片的兼具描述性和戏剧性的诗歌，并在其中包含地点吗？ | 小小兔子在绿草坪，  长长的耳朵，听力灵敏。  你遥望远方看到了什么？  让你如此专注，一动不动？  是那在阳光下熠熠生辉的，  蔚蓝的海洋吗？  还是那奏响让你着迷的节奏，  拍打着海岸的波涛呢？  小兔子，告诉我吧，  是什么如此吸引你？  是咸咸的海风，  还是海鸥悦耳的鸣叫？  也许是眼前的一切，  如此辽阔，却又如此渺小。  一个可以遨游梦想的地方，  冒险的种子在那里播种。  小兔子，当你在草地上静静地坐着，  我真想知道你在梦想着什么。  你渴望探索深海吗？  还是留在陆地上，自由地跳跃？  无论是什么，小兔子，  让那份好奇心永远闪耀光芒吧。  因为在你的梦想和渴望中，  有一个等待你创造的世界。 |
+| Bu resim hakkında, yeri de belirterek betimleyici ve etkileyici bir şiir yazabilir misin? | Çayırda küçük bir tavşan,  Kulakları çok uzun, çok keskin.  Uzakta, baktığın yerde ne görüyorsun?  Is it the ocean blue,  Sparkling in the sun's hue?  Ya da dalgaların çarpıp kükremesi,  Bayıldığınız bir ritim?  Küçük tavşan, doğruyu söyle bana,  İlginizi bu kadar çok çeken şey ne?  Tuzlu esinti mi,  Yoksa martıların çığlıkları mı hoşunuza gidiyor?  Belki de her şeyin büyüklüğüdür,  Dünya hem çok büyük hem de çok küçük.  Hayallerin dolaşabileceği,  Maceraların ekilebileceği bir yer.  Küçük tavşan, ne hayal ettiğini merak ediyorum,  Çimlerin üzerinde otururken, çok sakinsin.  Derinlikleri keşfetmek mi istersin,  Yoksa karada kalıp zıplamayı mı?  Ne olursa olsun, küçük tavşan,  Merak kıvılcımını parlak bir şekilde yakmaya devam et.  Çünkü hayallerinizde ve arzularınızda,  Yaratılmayı bekleyen bir dünya var. |
 
-#### 排查提示的哪个部分失败
+#### İstemin hangi bölümünün başarısız olduğunu belirleme
 
-很难知道提示失败是否是因为模型一开始不**理解图片**，或者它是否理解图片但随后没有执行正确的**推理步骤**。如需区分这些原因，请要求模型描述图片中的内容。
+Bir istemin başarısız olmasının nedeni, modelin **görüntüyü anlamaması** mı yoksa görüntüyü anlamasına rağmen doğru **akıl yürütme adımlarını** uygulamaması mı, bunu anlamak zor olabilir.
+Bu nedenleri netleştirmek için modele resimde ne olduğunu sorun.
 
-在以下示例中，如果在与茶搭配时，模型以似乎令人惊讶的零食（例如爆米花）作为回答，则可以先进行问题排查，以确定模型是否正确识别出图片中包含茶。
+Aşağıdaki örnekte, model çayla birlikte şaşırtıcı görünen bir atıştırmalıkla (ör. patlamış mısır) yanıt verirse önce modelin resimde çay olduğunu doğru tanıyıp tanımadığını belirlemek için sorun giderme işlemi yapabilirsiniz.
 
-| 提示 | 用于问题排查的提示 |
+| İstem | Sorun giderme istemi |
 | --- | --- |
-| 我在 1 分钟内能拿出什么零食来与此图片中的内容搭配食用？ | 描述此图片中的内容。 |
+| Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? | Bu resimde ne olduğunu açıklayın. |
 
-另一种策略是要求模型说明其推理。这有助于您缩小推理失败的部分（如果有）。
+Diğer bir strateji ise modelden gerekçesini açıklamasını istemektir. Bu, muhakemenin hangi kısmının (varsa) bozulduğunu daraltmanıza yardımcı olabilir.
 
-| 提示 | 用于问题排查的提示 |
+| İstem | Sorun giderme istemi |
 | --- | --- |
-| 我在 1 分钟内能拿出什么零食来与此图片中的内容搭配食用？ | 我在 1 分钟内能拿出什么零食来与此图片中的内容搭配食用？请说明原因。 |
+| Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? | Bununla iyi gidecek, 1 dakikada hazırlayabileceğim bir atıştırmalık önerir misin? Lütfen nedeniyle birlikte açıklayın. |
 
-## 后续步骤
+## Sırada ne var?
 
-- 不妨使用 [Google AI Studio](http://aistudio.google.com?hl=zh-cn) 尝试自行撰写多模态提示。
-- 如需了解如何使用 Gemini Files API 上传媒体文件并将其纳入提示中，请参阅[Vision](https://ai.google.dev/gemini-api/docs/vision?hl=zh-cn)、[音频](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn)和[文档处理](https://ai.google.dev/gemini-api/docs/document-processing?hl=zh-cn)指南。
-- 如需获取有关提示设计的更多指导（例如调整采样参数），请参阅[提示策略](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=zh-cn)页面。
+- [Google AI Studio](http://aistudio.google.com?hl=tr)'yu kullanarak kendi çok formatlı istemlerinizi yazmayı deneyin.
+- Medya dosyalarını yüklemek ve istemlerinize dahil etmek için Gemini Files API'yi kullanma hakkında bilgi edinmek üzere [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=tr), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=tr) ve [Document processing](https://ai.google.dev/gemini-api/docs/document-processing?hl=tr) kılavuzlarına bakın.
+- İstem tasarımıyla ilgili daha fazla bilgi (ör. örnekleme parametrelerini ayarlama) için [İstem stratejileri](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr) sayfasına bakın.
 
-发送反馈
+Geri bildirim gönderin
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最后更新时间 (UTC)：2026-07-06。
+Son güncelleme tarihi: 2026-07-06 UTC.
 
-需要向我们提供更多信息？
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-06。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-06 UTC."],[],[]]

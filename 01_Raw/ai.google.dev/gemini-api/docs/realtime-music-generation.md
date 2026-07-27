@@ -1,40 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=tr
-fetched_at: 2026-07-20T04:48:29.798596+00:00
-title: "Lyria RealTime ile an\u0131nda m\u00fczik \u00fcretme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=ja
+fetched_at: 2026-07-27T04:49:20.780239+00:00
+title: "Lyria RealTime \u3092\u4f7f\u7528\u3057\u305f\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u306e\u97f3\u697d\u751f\u6210 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Lyria RealTime ile anında müzik üretme
+# Lyria RealTime を使用したリアルタイムの音楽生成
 
-[deneysel modeldir](https://ai.google.dev/gemini-api/docs/models?hl=tr#experimental).
+Gemini API は
+[Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=ja)を使用して、最先端のリアルタイム ストリーミング音楽
+生成モデルへのアクセスを提供します。デベロッパーは、ユーザーがインタラクティブに楽器の音楽を作成、継続的に操作、演奏できるアプリケーションを構築できます。
 
-[Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=tr)'ı kullanan Gemini API, son teknoloji ürünü, gerçek zamanlı ve akışlı bir müzik üretme modeline erişim sağlar. Bu API, geliştiricilerin kullanıcıların etkileşimli olarak oluşturabileceği, sürekli yönlendirebileceği ve enstrümantal müzik yapabileceği uygulamalar geliştirmesine olanak tanır.
+[Lyria RealTime の音楽生成では、WebSocket を使用して、永続的な双方向の
+低レイテンシ ストリーミング接続を使用します。](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
 
-Lyria RealTime müzik üretimi, [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) kullanılarak kalıcı, çift yönlü ve düşük gecikmeli bir akış bağlantısı kullanır.
+[[Lyria RealTime を使用して構築できるものを体験するには、Prompt DJ アプリまたは MIDI DJ アプリを使用して AI Studio
+で試してください。](https://aistudio.google.com/apps/bundled/promptdj?hl=ja)](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=ja)
 
-Lyria RealTime ile neler yapılabileceğini deneyimlemek için [Prompt DJ](https://aistudio.google.com/apps/bundled/promptdj?hl=tr) veya [MIDI DJ](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=tr) uygulamalarını kullanarak AI Studio'da deneyin.
+## 音楽の生成と操作
 
-## Müzik üretme ve müziği kontrol etme
+Lyria RealTime は、[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)
+を介して Websocket を使用してモデルとのリアルタイム通信を維持するという点で、Live API と同様に機能します。
 
-Lyria RealTime, modelle anlık iletişimi sürdürmek için Websocket'leri kullanması bakımından [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)'ye benzer şekilde çalışır.
-
-Aşağıdaki kodda nasıl müzik oluşturulacağı gösterilmektedir:
+次のコードは、音楽を生成する方法を示しています。
 
 ### Python
 
-Bu örnekte, `client.aio.live.music.connect()` kullanılarak Lyria RealTime oturumu başlatılıyor, ardından `session.set_weighted_prompts()` ile ilk istem ve `session.set_music_generation_config` kullanılarak ilk yapılandırma gönderiliyor, `session.play()` kullanılarak müzik üretimi başlatılıyor ve `receive_audio()`, aldığı ses parçalarını işleyecek şekilde ayarlanıyor.
+この例では、`client.aio.live.music.connect()` を使用して Lyria RealTime セッションを初期化し、`session.set_weighted_prompts()` で最初のプロンプトを送信します。また、`session.set_music_generation_config` を使用して初期構成を設定し、`session.play()` を使用して音楽生成を開始し、受信した音声チャンクを処理するように `receive_audio()` を設定します。
 
 ```
   import asyncio
@@ -77,7 +80,7 @@ Bu örnekte, `client.aio.live.music.connect()` kullanılarak Lyria RealTime otur
 
 ### JavaScript
 
-Bu örnekte, `client.live.music.connect()` kullanılarak Lyria RealTime oturumu başlatılıyor, ardından `session.setWeightedPrompts()` ile ilk istem ve `session.setMusicGenerationConfig` kullanılarak ilk yapılandırma gönderiliyor, `session.play()` kullanılarak müzik oluşturma işlemi başlatılıyor ve alınan ses parçalarını işlemek için `onMessage` geri çağırma işlevi ayarlanıyor.
+この例では、`client.live.music.connect()` を使用して Lyria RealTime セッションを初期化し、`session.setWeightedPrompts()` で最初のプロンプトを送信します。また、`session.setMusicGenerationConfig` を使用して初期構成を設定し、`session.play()` を使用して音楽生成を開始し、受信した音声チャンクを処理するように `onMessage` コールバックを設定します。
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -133,18 +136,17 @@ async function main() {
 main().catch(console.error);
 ```
 
-Ardından oturumu başlatmak, duraklatmak, durdurmak veya sıfırlamak için `session.play()`, `session.pause()`, `session.stop()` ve `session.reset_context()` simgelerini kullanabilirsiniz.
+`session.play()`、`session.pause()`、`session.stop()`、`session.reset_context()` を使用して、セッションを開始、一時停止、停止、リセットできます。
 
-## Müziği anlık olarak yönlendirme
+## リアルタイムで音楽を操作する
 
-İstemler göndererek ve üretim parametrelerini anlık olarak güncelleyerek müzik üretimini anlık olarak yönlendirebilirsiniz.
+プロンプトを送信し、生成パラメータをリアルタイムで更新することで、音楽生成をリアルタイムで操作できます。
 
-### Lyria RealTime'a istem girme
+### Lyria RealTime にプロンプトを設定する
 
-Yayın etkin durumdayken, oluşturulan müziği değiştirmek için istediğiniz zaman yeni `WeightedPrompt` mesajları gönderebilirsiniz. Model, yeni girişe göre sorunsuz bir şekilde geçiş yapar.
+ストリームがアクティブな間は、新しい `WeightedPrompt` メッセージをいつでも送信して、生成された音楽を変更できます。モデルは、新しい入力に基づいてスムーズに移行します。
 
-İstemler, `text` (asıl istem) ve `weight` ile doğru biçimde olmalıdır. `weight`, `0` hariç herhangi bir değeri alabilir. `1.0`
-genellikle iyi bir başlangıç noktasıdır.
+プロンプトは、`text`（実際のプロンプト）と `weight` を含む適切な形式にする必要があります。`weight` には `0` 以外の任意の値を指定できます。通常は `1.0` から始めることをおすすめします。
 
 ### Python
 
@@ -171,13 +173,13 @@ genellikle iyi bir başlangıç noktasıdır.
   });
 ```
 
-İstemler önemli ölçüde değiştirildiğinde model geçişlerinin biraz ani olabileceğini unutmayın. Bu nedenle, modele ara ağırlık değerleri göndererek bir tür çapraz geçiş uygulamanız önerilir.
+プロンプトを大幅に変更すると、モデルの移行が少し急になる可能性があるため、中間的な重み値をモデルに送信して、クロスフェードを実装することをおすすめします。
 
-### Yapılandırmayı güncelleme
+### 構成を更新する
 
-Müzik üretimi parametrelerini gerçek zamanlı olarak güncelleyerek müzik üretimini yönlendirebilirsiniz. Yalnızca bir parametreyi güncelleyemezsiniz. Diğer alanların varsayılan değerlerine sıfırlanmaması için tüm yapılandırmayı ayarlamanız gerekir.
+音楽生成パラメータをリアルタイムで更新することで、音楽生成を操作できます。パラメータを更新するだけでなく、構成全体を設定する必要があります。そうしないと、他のフィールドがデフォルト値にリセットされます。
 
-BPM'yi veya ölçeği güncellemek model için önemli bir değişiklik olduğundan, yeni yapılandırmayı dikkate alması için `reset_context()` kullanarak bağlamını sıfırlamasını da söylemeniz gerekir. Bu işlem yayını durdurmaz ancak geçiş zor olur. Diğer parametreler için bu işlemi yapmanız gerekmez.
+bpm またはスケールを更新すると、モデルが大幅に変更されるため、`reset_context()` を使用してコンテキストをリセットし、新しい構成を考慮に入れるようにモデルに指示する必要があります。ストリームは停止しませんが、移行は困難になります。他のパラメータでは必要ありません。
 
 ### Python
 
@@ -207,11 +209,11 @@ BPM'yi veya ölçeği güncellemek model için önemli bir değişiklik olduğun
   await session.reset_context();
 ```
 
-## Lyria RealTime için istem rehberi
+## Lyria RealTime のプロンプト ガイド
 
-Lyria RealTime'a istem göndermek için kullanabileceğiniz istemlerin kapsamlı olmayan bir listesini aşağıda bulabilirsiniz:
+Lyria RealTime にプロンプトを設定するために使用できるプロンプトの例を次に示します。
 
-- Ödeme araçları: `303 Acid Bass, 808 Hip Hop Beat, Accordion, Alto Saxophone,
+- 楽器: `303 Acid Bass, 808 Hip Hop Beat, Accordion, Alto Saxophone,
   Bagpipes, Balalaika Ensemble, Banjo, Bass Clarinet, Bongos, Boomy Bass,
   Bouzouki, Buchla Synths, Cello, Charango, Clavichord, Conga Drums,
   Didgeridoo, Dirty Synths, Djembe, Drumline, Dulcimer, Fiddle, Flamenco
@@ -222,7 +224,7 @@ Lyria RealTime'a istem göndermek için kullanabileceğiniz istemlerin kapsamlı
   Guitar, Sitar, Slide Guitar, Smooth Pianos, Spacey Synths, Steel Drum, Synth
   Pads, Tabla, TR-909 Drum Machine, Trumpet, Tuba, Vibraphone, Viola Ensemble,
   Warm Acoustic Guitar, Woodwinds, ...`
-- Müzik Türü: `Acid Jazz, Afrobeat, Alternative Country, Baroque, Bengal Baul,
+- 音楽ジャンル: `Acid Jazz, Afrobeat, Alternative Country, Baroque, Bengal Baul,
   Bhangra, Bluegrass, Blues Rock, Bossa Nova, Breakbeat, Celtic Folk, Chillout,
   Chiptune, Classic Rock, Contemporary R&B, Cumbia, Deep House, Disco Funk,
   Drum & Bass, Dubstep, EDM, Electro Swing, Funk Metal, G-funk, Garage Rock,
@@ -233,109 +235,108 @@ Lyria RealTime'a istem göndermek için kullanabileceğiniz istemlerin kapsamlı
   Rock, Psytrance, R&B, Reggae, Reggaeton, Renaissance Music, Salsa, Shoegaze,
   Ska, Surf Rock, Synthpop, Techno, Trance, Trap Beat, Trip Hop, Vaporwave,
   Witch house, ...`
-- Ruh hali/Açıklama: `Acoustic Instruments, Ambient, Bright Tones, Chill,
+- ムード/説明: `Acoustic Instruments, Ambient, Bright Tones, Chill,
   Crunchy Distortion, Danceable, Dreamy, Echo, Emotional, Ethereal Ambience,
   Experimental, Fat Beats, Funky, Glitchy Effects, Huge Drop, Live Performance,
   Lo-fi, Ominous Drone, Psychedelic, Rich Orchestration, Saturated Tones,
   Subdued Melody, Sustained Chords, Swirling Phasers, Tight Groove,
   Unsettling, Upbeat, Virtuoso, Weird Noises, ...`
 
-Bunlar yalnızca birkaç örnektir. Lyria RealTime çok daha fazlasını yapabilir. Kendi istemlerinizle
-denemeler yapın.
+これらはほんの一例です。Lyria RealTime では、他にもさまざまなことができます。独自のプロンプトを試してみてください。
 
-## En iyi uygulamalar
+## ベスト プラクティス
 
-- İstemci uygulamaları, sorunsuz oynatma sağlamak için güçlü ses arabelleği oluşturma işlevini uygulamalıdır. Bu, ağ titremesini ve oluşturma gecikmesindeki küçük farklılıkları hesaba katmaya yardımcı olur.
-- Etkili istemler:
-  - Açıklayıcı olun. Atmosferi, türü ve enstrümanları açıklayan sıfatlar kullanın.
-  - İterasyon yapın ve yavaş yavaş yönlendirin. İstemi tamamen değiştirmek yerine, müziği daha sorunsuz bir şekilde dönüştürmek için öğeler eklemeyi veya değiştirmeyi deneyin.
-  - Yeni bir istemin devam eden üretimi ne kadar etkileyeceğini belirlemek için `WeightedPrompt` ağırlığıyla denemeler yapın.
+- クライアント アプリケーションは、スムーズな再生を確保するために、堅牢な音声バッファリングを実装する必要があります。これにより、ネットワーク ジッターと生成レイテンシのわずかな変動に対応できます。
+- 効果的なプロンプト:
+  - わかりやすいラベルを付けます。ムード、ジャンル、楽器を表す形容詞を使用します。
+  - 反復処理を行い、徐々に操作します。プロンプトを完全に変更するのではなく、要素を追加または変更して、音楽をよりスムーズに変化させてみてください。
+  - `WeightedPrompt` の重みを調整して、新しいプロンプトが進行中の生成に与える影響の強さを調整します。
 
-## Teknik ayrıntılar
+## 詳細な技術情報
 
-Bu bölümde, Lyria RealTime müzik üretme özelliğinin nasıl kullanılacağıyla ilgili ayrıntılar açıklanmaktadır.
+このセクションでは、Lyria RealTime の音楽生成の使用方法について詳しく説明します。
 
-### Teknik Özellikler
+### 仕様
 
-- Çıkış biçimi: Raw 16 bit PCM Ses
-- Örnek hızı: 48 kHz
-- Kanallar: 2 (stereo)
+- 出力形式: RAW 16 ビット PCM 音声
+- サンプルレート: 48 kHz
+- チャンネル数: 2（ステレオ）
 
-### Denetimler
+### コントロール
 
-Müzik üretimi, aşağıdakileri içeren mesajlar gönderilerek anlık olarak etkilenebilir:
+音楽生成は、次のものを含むメッセージを送信することで、リアルタイムで影響を受ける可能性があります。
 
-- `WeightedPrompt`: Müzikal bir fikri, türü, enstrümanı, ruh halini veya özelliği açıklayan bir metin dizesi. Etkileri karıştırmak için birden fazla istem sağlanabilir. Lyria RealTime'ı en iyi şekilde isteme hakkında daha fazla bilgi için [yukarıdaki](#steer-music) bölüme bakın.
-- `MusicGenerationConfig`: Müzik üretme sürecinin yapılandırması (çıkış sesinin özelliklerini etkiler). Parametreler
-  şunları içerir:
-  - `guidance`: (kayan nokta) Aralık: `[0.0, 6.0]`. Varsayılan: `4.0`.
-    Modelin istemlere ne kadar sıkı uyacağını kontrol eder. Daha yüksek yönlendirme, isteme uyumu artırır ancak geçişleri daha ani hale getirir.
-  - `bpm`: (int) Aralık: `[60, 200]`.
-    Oluşturulan müzik için istediğiniz dakikadaki vuruş sayısını ayarlar. Yeni BPM'yi dikkate alması için modeli durdurmanız/oynatmanız veya bağlamı sıfırlamanız gerekir.
-  - `density`: (kayan nokta) Aralık: `[0.0, 1.0]`.
-    Müzik notalarının/seslerin yoğunluğunu kontrol eder. Düşük değerler daha seyrek müzikler üretir. Yüksek değerler ise daha "yoğun" müzikler üretir.
-  - `brightness`: (kayan nokta) Aralık: `[0.0, 1.0]`.
-    Ton kalitesini ayarlar. Daha yüksek değerler, genellikle daha yüksek frekansları vurgulayan "daha parlak" sesler üretir.
-  - `scale`: (Enum)
-    Oluşturma için müzik ölçeğini (anahtar ve mod) ayarlar. SDK tarafından sağlanan [`Scale` enum değerlerini](#scale-enum) kullanın. Modelin yeni ölçeği dikkate alması için bağlamı durdurmanız/oynatmanız veya sıfırlamanız gerekir.
-  - `mute_bass`: (bool) Varsayılan: `False`.
-    Modelin çıkışlardaki bası azaltıp azaltmayacağını kontrol eder.
-  - `mute_drums`: (bool) Varsayılan: `False`.
-    Model çıktılarının, davul sesini azaltıp azaltmadığını kontrol eder.
-  - `only_bass_and_drums`: (bool) Varsayılan: `False`.
-    Modeli yalnızca bas ve davul sesleri üretmeye yönlendirin.
-  - `music_generation_mode`: (Enum)
-    Modele, müziğin `QUALITY` (varsayılan değer) veya `DIVERSITY` kısmına odaklanıp odaklanmaması gerektiğini belirtir. Ayrıca, modelin başka bir enstrüman olarak seslendirme oluşturmasına (yeni istemler olarak ekleme) izin vermek için `VOCALIZATION` olarak da ayarlanabilir.
-- `PlaybackControl`: Oynatma, duraklatma, durdurma veya bağlamı sıfırlama gibi oynatma özelliklerini kontrol etme komutları.
+- `WeightedPrompt`: 音楽のアイデア、ジャンル、楽器、ムード、特徴を表すテキスト文字列。複数のプロンプトを指定して、影響をブレンドすることもできます。Lyria RealTime に最適なプロンプトを設定する方法について詳しくは、[上記](#steer-music)をご覧ください。
+- `MusicGenerationConfig`: 音楽生成プロセスの構成。出力音声の特性に影響します。パラメータは次のとおりです。
+  - `guidance`:（浮動小数点）範囲: `[0.0, 6.0]`。デフォルト: `4.0`。
+    モデルがプロンプトにどの程度厳密に従うかを制御します。ガイダンスが高いほど、プロンプトへの準拠度は向上しますが、移行がより急になります。
+  - `bpm`:（整数）範囲: `[60, 200]`。
+    生成された音楽に必要な 1 分あたりのビート数を設定します。モデルが新しい bpm を考慮に入れるには、コンテキストを停止/再生またはリセットする必要があります。
+  - `density`:（浮動小数点）範囲: `[0.0, 1.0]`。
+    音符/音の密度を制御します。値が小さいほど音楽がまばらになり、値が大きいほど音楽が「忙しく」なります。
+  - `brightness`:（浮動小数点）範囲: `[0.0, 1.0]`。
+    音質を調整します。値が高いほど、音声が「明るく」なり、一般的に高周波が強調されます。
+  - `scale`:（列挙型）生成の音階（キーとモード）を設定します。SDK で提供される
+    [`Scale` 列挙値](#scale-enum)を使用します。モデルが新しいスケールを考慮に入れるには、コンテキストを停止/再生またはリセットする必要があります。
+  - `mute_bass`:（ブール値）デフォルト: `False`。
+    モデルが出力の低音を減らすかどうかを制御します。
+  - `mute_drums`:（ブール値）デフォルト: `False`。
+    モデルが出力のドラムを減らすかどうかを制御します。
+  - `only_bass_and_drums`:（ブール値）デフォルト: `False`。
+    低音とドラムのみを出力するようにモデルを操作します。
+  - `music_generation_mode`:（列挙型）音楽の `QUALITY`（デフォルト値）または `DIVERSITY` に焦点を当てるかどうかをモデルに示します。`VOCALIZATION` に設定して、モデルが別の楽器として発声（新しいプロンプトとして追加）を生成できるようにすることもできます。
+- `PlaybackControl`: 再生、一時停止、停止、コンテキストのリセットなど、再生の側面を制御するコマンド。
 
-`bpm`, `density`, `brightness` ve `scale` için değer sağlanmazsa model, ilk istemlerinize göre en iyi seçeneğe karar verir.
+`bpm`、`density`、`brightness`、`scale` に値を指定しない場合、モデルは最初のプロンプトに基づいて最適な値を決定します。
 
-`temperature` (0,0-3,0, varsayılan 1,1), `top_k` (1-1000, varsayılan 40) ve `seed` (0-2.147.483.647, varsayılan olarak rastgele seçilir) gibi daha klasik parametreler de `MusicGenerationConfig` içinde özelleştirilebilir.
+`temperature`（0.0 ～ 3.0、デフォルト 1.1）、`top_k`（1 ～ 1,000、デフォルト 40）、`seed`（0 ～ 2,147,483,647、デフォルトでランダムに選択）などの従来のパラメータも、`MusicGenerationConfig` でカスタマイズできます。
 
-#### Enum Değerlerini Ölçeklendirme
+#### スケール列挙値
 
-Modelin kabul edebileceği tüm ölçek değerleri şunlardır:
+モデルが受け入れられるスケール値は次のとおりです。
 
-| Enum Değeri | Ölçek / Anahtar |
+| 列挙値 | スケール / キー |
 | --- | --- |
-| `C_MAJOR_A_MINOR` | Do majör / La minör |
-| `D_FLAT_MAJOR_B_FLAT_MINOR` | Re bemol majör / Si bemol minör |
-| `D_MAJOR_B_MINOR` | D major / B minor |
-| `E_FLAT_MAJOR_C_MINOR` | Mi bemol majör / Do minör |
-| `E_MAJOR_D_FLAT_MINOR` | Mi majör / Do diyez/Re bemol minör |
-| `F_MAJOR_D_MINOR` | Fa majör / Re minör |
-| `G_FLAT_MAJOR_E_FLAT_MINOR` | Sol bemol majör / Mi bemol minör |
-| `G_MAJOR_E_MINOR` | Sol majör / Mi minör |
-| `A_FLAT_MAJOR_F_MINOR` | La bemol majör / Fa minör |
-| `A_MAJOR_G_FLAT_MINOR` | La majör / Fa diyez/Sol bemol minör |
-| `B_FLAT_MAJOR_G_MINOR` | Si bemol majör / Sol minör |
-| `B_MAJOR_A_FLAT_MINOR` | Si majör / Sol diyez/La bemol minör |
-| `SCALE_UNSPECIFIED` | Varsayılan / Model karar verir |
+| `C_MAJOR_A_MINOR` | ハ長調 / イ短調 |
+| `D_FLAT_MAJOR_B_FLAT_MINOR` | 変ニ長調 / 変ロ短調 |
+| `D_MAJOR_B_MINOR` | ニ長調 / ロ短調 |
+| `E_FLAT_MAJOR_C_MINOR` | 変ホ長調 / ハ短調 |
+| `E_MAJOR_D_FLAT_MINOR` | ホ長調 / 嬰ハ短調/変ニ短調 |
+| `F_MAJOR_D_MINOR` | ヘ長調 / ニ短調 |
+| `G_FLAT_MAJOR_E_FLAT_MINOR` | 変ト長調 / 変ホ短調 |
+| `G_MAJOR_E_MINOR` | ト長調 / ホ短調 |
+| `A_FLAT_MAJOR_F_MINOR` | 変イ長調 / ヘ短調 |
+| `A_MAJOR_G_FLAT_MINOR` | イ長調 / 嬰ヘ短調/変ト短調 |
+| `B_FLAT_MAJOR_G_MINOR` | 変ロ長調 / ト短調 |
+| `B_MAJOR_A_FLAT_MINOR` | ロ長調 / 嬰ト短調/変イ短調 |
+| `SCALE_UNSPECIFIED` | デフォルト / モデルが決定 |
 
-Model, çalınan notlara rehberlik edebilir ancak göreceli tuşlar arasında ayrım yapmaz. Bu nedenle her enum hem göreli büyük hem de göreli küçüğe karşılık gelir. Örneğin, `C_MAJOR_A_MINOR`, piyanodaki tüm beyaz tuşlara, `F_MAJOR_D_MINOR` ise si bemol dışındaki tüm beyaz tuşlara karşılık gelir.
+モデルは演奏される音符をガイドできますが、相対キーを区別しません。したがって、各列挙型は相対的な長調と短調の両方に対応します。たとえば、`C_MAJOR_A_MINOR` はピアノのすべての白鍵に対応し、`F_MAJOR_D_MINOR` は変ロ以外のすべての白鍵に対応します。
 
-### Sınırlamalar
+### 制限事項
 
-- Yalnızca enstrümantal: Model yalnızca enstrümantal müzik üretir.
-- Güvenlik: İstemler, güvenlik filtreleriyle kontrol edilir. Filtreleri tetikleyen istemler yoksayılır. Bu durumda, çıkışın `filtered_prompt` alanına bir açıklama yazılır.
-- Filigran: Çıkış sesi, [Sorumlu Yapay Zeka](https://ai.google/responsibility/principles/?hl=tr) ilkelerimize uygun olarak tanımlama için her zaman filigranlıdır.
+- インストゥルメンタルのみ: モデルはインストゥルメンタル音楽のみを生成します。
+- 安全性: プロンプトは安全フィルタによってチェックされます。フィルタをトリガーするプロンプトは無視され、その場合は出力の `filtered_prompt` フィールドに説明が書き込まれます。
+- [ウォーターマーク: 出力音声には、責任ある AI の原則に従って識別用のウォーターマークが常に付加されます。](https://ai.google/responsibility/principles/?hl=ja)
 
-## Sırada ne var?
+## 次のステップ
 
-- [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=tr) ile eksiksiz şarkılar ve vokal parçaları üretin.
-- Müzik yerine, [TTS modellerini](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr) kullanarak birden fazla konuşmacının yer aldığı sohbetler oluşturmayı öğrenin.
-- [Resim](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr) veya [video](https://ai.google.dev/gemini-api/docs/video?hl=tr) oluşturmayı öğrenin.
-- Müzik veya ses üretmek yerine Gemini'ın [ses dosyalarını nasıl anlayabileceğini](https://ai.google.dev/gemini-api/docs/audio?hl=tr) öğrenin.
-- [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=tr)'yi kullanarak Gemini ile gerçek zamanlı sohbet edin.
+- [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=ja) でフルソングとボーカル トラックを生成する。
+- 音楽の代わりに、
+  [TTS モデル](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)を使用して複数話者の会話を生成する方法を学習する。
+- [[画像や動画を生成する方法を確認する。](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)](https://ai.google.dev/gemini-api/docs/video?hl=ja)
+- 音楽や音声を生成する代わりに、Gemini が音声ファイルを
+  [理解する](https://ai.google.dev/gemini-api/docs/audio?hl=ja)方法を確認する。
+- [Live API を使用して Gemini とリアルタイムで会話する。](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)
 
-Daha fazla kod örneği ve eğitim için [Çözüm Kitabı](https://github.com/google-gemini/cookbook)'nı inceleyin.
+その他のコードサンプルとチュートリアルについては、[クックブック](https://github.com/google-gemini/cookbook)をご覧ください。
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-07-16 UTC.
+最終更新日 2026-07-16 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-16 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-16 UTC。"],[],[]]

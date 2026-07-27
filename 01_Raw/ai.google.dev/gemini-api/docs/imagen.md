@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=ar
-fetched_at: 2026-07-20T04:46:03.055079+00:00
-title: "\u0625\u0646\u0634\u0627\u0621 \u0635\u0648\u0631 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=vi
+fetched_at: 2026-07-27T04:48:15.408081+00:00
+title: "T\u1ea1o h\u00ecnh \u1ea3nh b\u1eb1ng Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# إنشاء صور باستخدام Imagen
+# Tạo hình ảnh bằng Imagen
 
-‫Imagen هو نموذج إنشاء صور عالي الدقة من Google، وهو قادر على إنشاء صور واقعية وعالية الجودة من الطلبات النصية. تتضمّن جميع الصور التي يتم إنشاؤها علامة مائية من SynthID. لمزيد من المعلومات حول صيغ نموذج Imagen المتاحة، يُرجى الاطّلاع على قسم [إصدارات النموذج](#model-versions).
+Imagen là mô hình tạo ảnh có độ trung thực cao của Google, có khả năng tạo ra hình ảnh chân thực và chất lượng cao từ câu lệnh văn bản. Tất cả hình ảnh được tạo đều có hình mờ SynthID. Để tìm hiểu thêm về các biến thể của mô hình Imagen hiện có, hãy xem phần [Các phiên bản mô hình](#model-versions).
 
-## النقل إلى Nano Banana
+## Di chuyển sang Nano Banana
 
-تم إيقاف نماذج Imagen نهائيًا، وسيتم إيقافها في 17 أغسطس 2026. ننصحك بالانتقال إلى Nano Banana لتلبية احتياجاتك المتعلقة بإنشاء الصور.
+Các mô hình Imagen sẽ ngừng hoạt động từ ngày 17 tháng 8 năm 2026. Bạn nên chuyển sang dùng Nano Banana để đáp ứng nhu cầu tạo hình ảnh.
 
-تتضمّن عملية نقل البيانات التغييرات التالية:
+Quá trình di chuyển bao gồm những thay đổi sau:
 
-- **اسم النموذج**: استخدِم `gemini-2.5-flash-image` بدلاً من أسماء نماذج Imagen.
-- **الطريقة**: استخدِم `client.models.generate_content` بدلاً من `client.models.generate_images`.
-- **التعامل مع الاستجابة**: يعرض Nano Banana أجزاء من المحتوى، والتي قد تتضمّن بيانات صور، بدلاً من كائن استجابة صورة محدّد.
+- **Tên mô hình**: Sử dụng `gemini-2.5-flash-image` thay vì tên mô hình Imagen.
+- **Phương thức**: Sử dụng `client.models.generate_content` thay vì `client.models.generate_images`.
+- **Xử lý phản hồi**: Nano Banana trả về các phần nội dung (có thể bao gồm dữ liệu hình ảnh) thay vì một đối tượng phản hồi hình ảnh cụ thể.
 
-يمكنك الاطّلاع على [دليل إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar) للحصول على مزيد من التفاصيل والأمثلة.
+Hãy xem [Hướng dẫn tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) để biết thêm thông tin chi tiết và ví dụ.
 
-## إنشاء صور باستخدام نماذج Imagen
+## Tạo hình ảnh bằng các mô hình Imagen
 
-يوضّح هذا المثال كيفية إنشاء صور باستخدام [نموذج Imagen](https://deepmind.google/technologies/imagen/?hl=ar):
+Ví dụ này minh hoạ cách tạo hình ảnh bằng [mô hình Imagen](https://deepmind.google/technologies/imagen/?hl=vi):
 
 ### Python
 
@@ -144,373 +144,363 @@ curl -X POST \
       }'
 ```
 
-![صورة من إنشاء الذكاء الاصطناعي لروبوت يحمل لوح تزلّج أحمر](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=ar)
+![Hình ảnh do AI tạo về một rô-bốt đang cầm ván trượt màu đỏ](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=vi)
 
-صورة من إنشاء الذكاء الاصطناعي لروبوت يحمل لوح تزلّج أحمر
+Hình ảnh do AI tạo về một robot đang cầm ván trượt màu đỏ
 
-### إعدادات Imagen
+### Cấu hình Imagen
 
-تتيح Imagen حاليًا كتابة الطلبات باللغة الإنجليزية فقط، بالإضافة إلى المَعلمات التالية:
+Hiện tại, Imagen chỉ hỗ trợ câu lệnh bằng tiếng Anh và các thông số sau:
 
-- ‫`numberOfImages`: عدد الصور المطلوب إنشاؤها، من 1 إلى 4 (شاملة).
-  القيمة التلقائية هي 4.
-- `imageSize`: حجم الصورة من إنشاء الذكاء الاصطناعي التوليدي تتوفّر هذه الميزة فقط في طرازَي Standard وUltra. القيمتان المسموح بإدراجهما هما `1K` و`2K`.
-  القيمة التلقائية هي `1K`.
-- `aspectRatio`: لتغيير نسبة العرض إلى الارتفاع في الصورة التي تم إنشاؤها القيم المسموح بها هي `"1:1"` و`"3:4"` و`"4:3"` و`"9:16"` و`"16:9"`. القيمة التلقائية هي
-  `"1:1"`.
-- `personGeneration`: السماح للنموذج بإنشاء صور لأشخاص في ما يلي القيم المسموح بها:
+- `numberOfImages`: Số lượng hình ảnh cần tạo, từ 1 đến 4 (bao gồm cả 1 và 4).
+  Giá trị mặc định là 4.
+- `imageSize`: Kích thước của hình ảnh được tạo. Tính năng này chỉ được hỗ trợ cho các mô hình Chuẩn và Siêu. Giá trị được hỗ trợ là `1K` và `2K`.
+  Giá trị mặc định là `1K`.
+- `aspectRatio`: Thay đổi tỷ lệ khung hình của hình ảnh được tạo. Các giá trị được hỗ trợ là `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` và `"16:9"`. Giá trị mặc định là `"1:1"`.
+- `personGeneration`: Cho phép mô hình tạo hình ảnh về con người. Sau đây là các giá trị được hỗ trợ:
 
-  - `"dont_allow"`: لحظر إنشاء صور لأشخاص
-  - `"allow_adult"`: إنشاء صور لبالغين فقط، وليس لأطفال وهذا هو الخيار التلقائي.
-  - `"allow_all"`: إنشاء صور تتضمّن أشخاصًا بالغين وأطفالاً
+  - `"dont_allow"`: Chặn việc tạo hình ảnh có người.
+  - `"allow_adult"`: Tạo hình ảnh về người lớn, nhưng không tạo hình ảnh về trẻ em. Đây là tuỳ chọn mặc định
+  - `"allow_all"`: Tạo hình ảnh có cả người lớn và trẻ em.
 
-## دليل كتابة الطلبات في Imagen
+## Hướng dẫn về câu lệnh cho Imagen
 
-يوضّح هذا القسم من دليل Imagen كيفية تعديل طلب نصي لتحويل النص إلى صورة، ما يؤدي إلى إنتاج نتائج مختلفة، بالإضافة إلى أمثلة على الصور التي يمكنك إنشاؤها.
+Phần này trong hướng dẫn về Imagen cho bạn biết cách sửa đổi câu lệnh chuyển văn bản thành hình ảnh có thể tạo ra nhiều kết quả, cùng với ví dụ về những hình ảnh bạn có thể tạo.
 
-### أساسيات كتابة الطلبات
+### Kiến thức cơ bản về cách viết câu lệnh
 
-يجب أن يكون الطلب جيدًا وواضحًا ووصفيًا، وأن يستخدم كلمات رئيسية ومعدِّلات ذات صلة. ابدأ بالتفكير في **الموضوع** و**السياق** و**الأسلوب**.
+Câu lệnh hiệu quả là câu lệnh có tính mô tả và rõ ràng, đồng thời sử dụng các từ khoá và đối tượng sửa đổi có ý nghĩa. Bắt đầu bằng cách nghĩ đến **chủ thể**, **bối cảnh** và **phong cách**.
 
-![طلب مع التركيز على الموضوع والسياق والأسلوب](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=ar)
+![Câu lệnh có chủ đề, bối cảnh và phong cách được nhấn mạnh](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=vi)
 
-نص الصورة: *رسم تخطيطي* (**الأسلوب**) *لمبنى سكني حديث*
-(**الموضوع**) محاط *بناطحات سحاب* (**السياق والخلفية**).
+Văn bản trong hình ảnh: Một *bản phác thảo* (**phong cách**) về một *toà nhà chung cư hiện đại* (**đối tượng**) được bao quanh bởi *các toà nhà chọc trời* (**bối cảnh và nền**).
 
-1. **الموضوع**: أول ما يجب التفكير فيه عند كتابة أي طلب هو *الموضوع*، أي الكائن أو الشخص أو الحيوان أو المنظر الذي تريد الحصول على صورة له.
-2. **السياق والخلفية:** لا تقلّ أهمية *الخلفية أو السياق*
-   الذي سيتم وضع الموضوع فيه. جرِّب وضع العنصر الأساسي في الصورة أمام مجموعة متنوعة من الخلفيات. على سبيل المثال، استوديو بخلفية بيضاء أو في الهواء الطلق أو في بيئات داخلية
-3. **النمط:** أخيرًا، أضِف نمط الصورة الذي تريده. يمكن أن تكون *الأنماط* عامة (مثل الرسم أو التصوير الفوتوغرافي أو الرسومات التخطيطية) أو محدّدة جدًا (مثل الرسم بالألوان الباستيل أو الرسم بالفحم أو الرسومات الثلاثية الأبعاد المتساوية القياس). يمكنك أيضًا الجمع بين الأنماط.
+1. **Chủ thể**: Điều đầu tiên bạn cần nghĩ đến khi đưa ra câu lệnh là *chủ thể*: đối tượng, người, động vật hoặc cảnh vật mà bạn muốn tạo hình ảnh.
+2. **Bối cảnh và nền:** *Nền hoặc bối cảnh* mà chủ thể sẽ được đặt vào cũng quan trọng không kém. Hãy thử đặt chủ thể của bạn vào nhiều phông nền. Ví dụ: một phòng chụp hình có phông nền trắng, ngoài trời hoặc môi trường trong nhà.
+3. **Phong cách:** Cuối cùng, hãy thêm phong cách hình ảnh mà bạn muốn. *Phong cách* có thể là phong cách chung (tranh vẽ, ảnh chụp, bản phác thảo) hoặc phong cách rất cụ thể (tranh vẽ bằng phấn màu, bản vẽ bằng than, hình ảnh 3D đẳng cự). Bạn cũng có thể kết hợp các kiểu.
 
-بعد كتابة النسخة الأولى من الطلب، حسِّنه من خلال إضافة المزيد من التفاصيل إلى أن تحصل على الصورة التي تريدها. التكرار مهم.
-ابدأ بتحديد فكرتك الأساسية، ثم حسِّنها ووسّع نطاقها إلى أن تصبح الصورة التي تم إنشاؤها قريبة من فكرتك.
+Sau khi viết phiên bản đầu tiên của câu lệnh, hãy tinh chỉnh câu lệnh bằng cách thêm nhiều chi tiết hơn cho đến khi bạn nhận được hình ảnh mà mình muốn. Việc lặp lại là rất quan trọng.
+Bắt đầu bằng cách xác định ý tưởng cốt lõi, sau đó tinh chỉnh và mở rộng ý tưởng cốt lõi đó cho đến khi hình ảnh được tạo gần với tầm nhìn của bạn.
 
 |  |  |  |
 | --- | --- | --- |
-| صورة نموذجية واقعية 1   الطلب: حديقة في الربيع بجانب بحيرة | صورة نموذجية واقعية 2   الطلب: حديقة في فصل الربيع بجوار بحيرة، **تغرب الشمس فوق البحيرة، الساعة الذهبية** | صورة نموذجية واقعية 3   الوصف: حديقة في فصل الربيع بجوار بحيرة، ***تغرب الشمس فوق البحيرة، الساعة الذهبية، زهور برية حمراء*** |
+| photorealistic sample image 1   Câu lệnh: Một công viên vào mùa xuân bên cạnh một hồ nước | photorealistic sample image 2   Câu lệnh: Một công viên vào mùa xuân bên cạnh một hồ nước, **mặt trời lặn bên kia hồ, giờ vàng** | hình ảnh mẫu giống thật 3   Câu lệnh: Một công viên vào mùa xuân bên cạnh một hồ nước, ***mặt trời lặn trên hồ, giờ vàng, hoa dại màu đỏ*** |
 
-يمكن لنماذج Imagen تحويل أفكارك إلى صور مفصّلة، سواء كانت طلباتك قصيرة أو طويلة ومفصّلة. حسِّنوا رؤيتكم
-من خلال تكرار الطلبات وإضافة التفاصيل إلى أن تحصلوا على النتيجة
-المثالية.
+Các mô hình Imagen có thể biến ý tưởng của bạn thành hình ảnh chi tiết, cho dù câu lệnh của bạn ngắn hay dài và chi tiết. Tinh chỉnh ý tưởng của bạn thông qua việc đưa ra câu lệnh lặp đi lặp lại, thêm chi tiết cho đến khi bạn đạt được kết quả hoàn hảo.
 
 |  |  |
 | --- | --- |
-| تتيح لك الطلبات القصيرة إنشاء صورة بسرعة.  مثال على طلب قصير في Imagen 4   الطلب: صورة مقرّبة لامرأة في العشرينات من عمرها، تصوير شوارع، لقطة من فيلم، درجات برتقالية دافئة هادئة | تتيح لك الطلبات الأطول إضافة تفاصيل محدّدة وإنشاء صورتك.  مثال على طلب طويل في Imagen 4   الطلب: صورة آسرة لامرأة في العشرينات من عمرها بأسلوب تصوير الشارع. يجب أن تبدو الصورة مثل لقطة من فيلم بألوان برتقالية دافئة. |
+| Câu lệnh ngắn giúp bạn tạo hình ảnh một cách nhanh chóng.  Ví dụ về câu lệnh ngắn cho Imagen 4   Câu lệnh: ảnh cận cảnh một phụ nữ ở độ tuổi 20, ảnh đường phố, ảnh tĩnh trong phim, tông màu cam ấm dịu | Câu lệnh dài hơn cho phép bạn thêm thông tin chi tiết cụ thể và tạo hình ảnh.  Ví dụ về câu lệnh dài cho Imagen 4   Câu lệnh: bức ảnh quyến rũ về một phụ nữ ở độ tuổi 20 sử dụng phong cách chụp ảnh đường phố. Hình ảnh phải trông như một cảnh phim tĩnh với tông màu cam nhạt ấm áp. |
 
-نصائح إضافية لكتابة الطلبات في Imagen:
+Lời khuyên bổ sung về cách viết câu lệnh cho Imagen:
 
-- **استخدام لغة وصفية**: استخدِم صفات وأحوال مفصّلة لتقديم صورة واضحة إلى Imagen.
-- **توفير السياق**: إذا لزم الأمر، أدرِج معلومات أساسية لمساعدة الذكاء الاصطناعي في فهم طلبك.
-- **الإشارة إلى فنّانين أو أساليب معيّنة**: إذا كان لديك أسلوب جمالي معيّن في ذهنك، يمكن أن تكون الإشارة إلى فنّانين أو حركات فنية معيّنة مفيدة.
-- **استخدام أدوات هندسة الطلبات**: ننصحك باستكشاف أدوات أو مراجع هندسة الطلبات لمساعدتك في تحسين طلباتك وتحقيق أفضل النتائج.
-- **تحسين تفاصيل الوجه في صورك الشخصية وصور المجموعات**: حدِّد تفاصيل الوجه كعنصر أساسي في الصورة (على سبيل المثال، استخدِم الكلمة "صورة شخصية" في الطلب).
+- **Sử dụng ngôn từ mô tả**: Sử dụng các tính từ và trạng từ chi tiết để mô tả rõ ràng cho Imagen.
+- **Cung cấp bối cảnh**: Nếu cần, hãy cung cấp thông tin cơ bản để hỗ trợ AI hiểu rõ hơn.
+- **Tham khảo các nghệ sĩ hoặc phong cách cụ thể**: Nếu bạn có một phong cách thẩm mỹ cụ thể, thì việc tham khảo các nghệ sĩ hoặc trào lưu nghệ thuật cụ thể có thể hữu ích.
+- **Sử dụng các công cụ thiết kế câu lệnh**: Cân nhắc việc khám phá các công cụ hoặc tài nguyên thiết kế câu lệnh để giúp bạn tinh chỉnh câu lệnh và đạt được kết quả tối ưu.
+- **Cải thiện các chi tiết trên khuôn mặt trong ảnh cá nhân và ảnh nhóm**: Chỉ định các chi tiết trên khuôn mặt làm tiêu điểm của bức ảnh (ví dụ: sử dụng từ "chân dung" trong câu lệnh).
 
-### إنشاء نص في الصور
+### Tạo văn bản trong hình ảnh
 
-يمكن لنماذج Imagen إضافة نص إلى الصور، ما يتيح إمكانات إبداعية أكبر في إنشاء الصور. اتّبِع الإرشادات التالية للاستفادة إلى أقصى حدّ من هذه الميزة:
+Các mô hình Imagen có thể thêm văn bản vào hình ảnh, mở ra nhiều khả năng sáng tạo hơn trong việc tạo hình ảnh. Hãy tham khảo hướng dẫn sau để khai thác tối đa tính năng này:
 
-- **التكرار بثقة**: قد تحتاج إلى إعادة إنشاء الصور إلى أن تحصل على المظهر الذي تريده. لا يزال دمج النصوص في Imagen في مرحلة التطوير، وفي بعض الأحيان، قد تؤدي المحاولات المتعددة إلى الحصول على أفضل النتائج.
-- **اختصِر النص**: يجب أن يتألف النص من 25 حرفًا أو أقل للحصول على أفضل النتائج.
-- **عبارات متعدّدة**: جرِّب استخدام عبارتَين أو ثلاث عبارات مختلفة لتقديم معلومات إضافية. تجنَّب تجاوز ثلاث عبارات للحصول على تركيبات أكثر وضوحًا.
+- **Lặp lại một cách tự tin**: Bạn có thể phải tạo lại hình ảnh cho đến khi đạt được kết quả mong muốn. Tính năng tích hợp văn bản của Imagen vẫn đang phát triển và đôi khi bạn cần thử nhiều lần để có kết quả tốt nhất.
+- **Ngắn gọn**: Giới hạn văn bản ở mức 25 ký tự trở xuống để tạo hình ảnh tối ưu.
+- **Nhiều cụm từ**: Thử nghiệm với hai hoặc ba cụm từ riêng biệt để cung cấp thêm thông tin. Tránh dùng quá 3 cụm từ để có bố cục rõ ràng hơn.
 
-  ![مثال على إنشاء نص باستخدام Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=ar)
+  ![Ví dụ về văn bản do Imagen 4 tạo](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=vi)
 
-  الطلب: ملصق يتضمّن النص "Summerland" بخط غامق كعنوان، وتحته الشعار "لم يكن الصيف ممتعًا إلى هذا الحد"
-- **موضع النص**: على الرغم من أنّ Imagen يمكنه محاولة وضع النص
-  في الموضع المطلوب، قد تظهر اختلافات أحيانًا. نعمل باستمرار على تحسين هذه الميزة.
-- **نمط الخط الملهم**: حدِّد نمط خط عامًا للتأثير بشكل طفيف في خيارات Imagen. لا تعتمد على تكرار الخطوط بدقة، ولكن توقَّع تفسيرات إبداعية.
-- **حجم الخط**: حدِّد حجم الخط أو مؤشرًا عامًا للحجم (على سبيل المثال، *صغير* أو *متوسط* أو *كبير*) للتأثير في عملية إنشاء حجم الخط.
+  Câu lệnh: Một áp phích có văn bản "Summerland" (Vùng đất mùa hè) bằng phông chữ in đậm làm tiêu đề, bên dưới văn bản này là khẩu hiệu "Mùa hè chưa bao giờ tuyệt vời đến thế"
+- **Vị trí theo hướng dẫn**: Mặc dù Imagen có thể cố gắng đặt văn bản theo chỉ dẫn, nhưng đôi khi sẽ có sự khác biệt. Tính năng này liên tục được cải thiện.
+- **Kiểu phông chữ truyền cảm hứng**: Chỉ định một kiểu phông chữ chung để ảnh hưởng một cách tinh tế đến các lựa chọn của Imagen. Đừng dựa vào việc sao chép phông chữ một cách chính xác, mà hãy mong đợi những cách diễn giải sáng tạo.
+- **Cỡ chữ**: Chỉ định cỡ chữ hoặc chỉ số chung về kích thước (ví dụ: *nhỏ*, *vừa*, *lớn*) để ảnh hưởng đến quá trình tạo cỡ chữ.
 
-### تحديد مَعلمات الطلب
+### Tham số hoá câu lệnh
 
-للتحكّم بشكل أفضل في نتائج الإخراج، قد يكون من المفيد تحديد مَعلمات للإدخالات في Imagen. على سبيل المثال، لنفترض أنّك تريد أن يتمكّن عملاؤك من إنشاء شعارات لمؤسساتهم، وأنّك تريد التأكّد من أنّ الشعارات يتم إنشاؤها دائمًا على خلفية بلون موحّد. تريد أيضًا حصر الخيارات التي يمكن للعميل تحديدها من القائمة.
+Để kiểm soát kết quả đầu ra tốt hơn, bạn có thể thấy việc tham số hoá dữ liệu đầu vào thành Imagen là hữu ích. Ví dụ: giả sử bạn muốn khách hàng có thể tạo biểu trưng cho doanh nghiệp của họ và bạn muốn đảm bảo rằng biểu trưng luôn được tạo trên nền có màu đơn sắc. Bạn cũng muốn giới hạn các lựa chọn mà khách hàng có thể chọn trong trình đơn.
 
-في هذا المثال، يمكنك إنشاء طلب يتضمّن مَعلمات مشابه لما يلي:
+Trong ví dụ này, bạn có thể tạo một câu lệnh có tham số tương tự như sau:
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-في واجهة المستخدم المخصّصة، يمكن للعميل إدخال المَعلمات باستخدام قائمة، ويتم ملء الطلب الذي تتلقّاه Imagen بالقيمة التي يختارها.
+Trong giao diện người dùng tuỳ chỉnh, khách hàng có thể nhập các tham số bằng một trình đơn và giá trị mà họ chọn sẽ điền vào câu lệnh mà Imagen nhận được.
 
-على سبيل المثال:
+Ví dụ:
 
-1. الطلب: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. Câu lệnh: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![مثال 1 على تحديد معلَمات الطلب في Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=ar)
-2. الطلب: `A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![Ví dụ 1 về tham số hoá câu lệnh của Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=vi)
+2. Câu lệnh: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![مثال 2 على تحديد مَعلمات الطلب في Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=ar)
-3. الطلب: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![Ví dụ 2 về việc tham số hoá câu lệnh cho Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=vi)
+3. Câu lệnh: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![مثال 3 على تحديد معلَمات الطلب في Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=ar)
+   ![Ví dụ 3 về tham số hoá câu lệnh của Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=vi)
 
-### أساليب متقدّمة لكتابة الطلبات
+### Kỹ thuật viết câu lệnh nâng cao
 
-استخدِم الأمثلة التالية لإنشاء طلبات أكثر تحديدًا استنادًا إلى سمات مثل أوصاف التصوير الفوتوغرافي والأشكال والمواد والحركات الفنية التاريخية ومعدّلات جودة الصورة.
+Hãy sử dụng các ví dụ sau để tạo câu lệnh cụ thể hơn dựa trên các thuộc tính như nội dung mô tả về nhiếp ảnh, hình dạng và chất liệu, các phong trào nghệ thuật trong lịch sử và các đối tượng sửa đổi chất lượng hình ảnh.
 
-#### تصوير فوتوغرافي
+#### Nhiếp ảnh
 
-- يتضمّن الطلب: *"صورة لـ..."*
+- Câu lệnh bao gồm: *"Một bức ảnh về..."*
 
-لاستخدام هذا النمط، ابدأ باستخدام كلمات رئيسية توضّح لـ Imagen أنّك تبحث عن صورة فوتوغرافية. ابدأ طلباتك بعبارة
-*"صورة لـ. . ."*. على سبيل المثال:
-
-|  |  |  |
-| --- | --- | --- |
-| صورة نموذجية واقعية 1   الطلب: **صورة** لحبوب قهوة في مطبخ على سطح خشبي | صورة نموذجية واقعية 2   الطلب: **صورة** لقطعة شوكولاتة على منضدة المطبخ | صورة نموذجية واقعية 3   الطلب: **صورة** لمبنى عصري يظهر الماء في الخلفية |
-
-مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 4.
-
-##### أدوات تعديل الصور
-
-في الأمثلة التالية، يمكنك الاطّلاع على العديد من المعدِّلات والمعلَمات الخاصة بالتصوير. يمكنك الجمع بين معدّلات متعددة للتحكّم بدقة أكبر.
-
-1. **تقريب الكاميرا**: *لقطات مقرّبة من مسافة بعيدة*
-
-   |  |  |
-   | --- | --- |
-   | صورة عيّنة من الكاميرا عن قُرب   الطلب: صورة **مقرّبة** لحبوب القهوة | صورة عيّنة تم تصغيرها بالكاميرا   الطلب: صورة **مصغّرة** لكيس صغير من  حبوب القهوة في مطبخ غير مرتّب |
-2. **موضع الكاميرا** - *من الأعلى، من الأسفل*
-
-   |  |  |
-   | --- | --- |
-   | نموذج صورة جوية   الطلب: **صورة جوية** لمدينة حضرية تضم ناطحات سحاب | صورة نموذجية من الأسفل   الطلب: صورة لمظلة غابة مع سماء زرقاء **من الأسفل** |
-3. **الإضاءة**: *طبيعية، درامية، دافئة، باردة*
-
-   |  |  |
-   | --- | --- |
-   | صورة نموذجية للإضاءة الطبيعية   الطلب: صورة استوديو لكرسي بذراعَين عصري، **إضاءة طبيعية** | صورة نموذجية للإضاءة الدرامية   الطلب: صورة استوديو لكرسي بذراعَين عصري، **إضاءة درامية** |
-4. **إعدادات الكاميرا** *- تمويه الحركة، والتركيز الناعم، والبوكيه، ووضع "بورتريه"*
-
-   |  |  |
-   | --- | --- |
-   | نموذج صورة بتأثير التمويه الناتج عن الحركة   الطلب: صورة لمدينة فيها ناطحات سحاب من داخل سيارة مع **تأثير التمويه الناتج عن الحركة** | صورة نموذجية بتركيز ضعيف   الطلب: صورة **بتركيز خفيف** لجسر في مدينة حضرية ليلاً |
-5. **أنواع العدسات**: *35 ملم و50 ملم وعدسة عين السمكة والزاوية الواسعة والتقريب*
-
-   |  |  |
-   | --- | --- |
-   | صورة نموذجية تم التقاطها باستخدام عدسة ماكرو   الطلب: صورة ورقة شجر، **عدسة ماكرو** | صورة نموذجية بعدسة عين السمكة   الطلب: تصوير الشارع، مدينة نيويورك، **عدسة عين السمكة** |
-6. **أنواع الأفلام** - *أبيض وأسود، بولارويد*
-
-   |  |  |
-   | --- | --- |
-   | صورة نموذجية لصورة بولارويد   الطلب: **صورة بولارويد** لكلب يرتدي نظارات شمسية | صورة نموذجية بالأبيض والأسود   الطلب: **صورة بالأبيض والأسود** لكلب يرتدي نظارات شمسية |
-
-مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 4.
-
-### الرسومات التوضيحية والفن
-
-- يتضمّن الطلب: *"painting من..."*، *"sketch من..."*
-
-تتنوّع أساليب الفن بين الأساليب أحادية اللون، مثل الرسومات بقلم الرصاص، والفن الرقمي الواقعي جدًا. على سبيل المثال، تستخدم الصور التالية الطلب نفسه مع أنماط مختلفة:
-
-*"[art style or creation technique] لسيارة سيدان كهربائية رياضية ذات تصميم زاوي مع ناطحات سحاب في الخلفية"*
+Để sử dụng kiểu này, hãy bắt đầu bằng cách dùng các từ khoá cho Imagen biết rõ rằng bạn đang tìm kiếm một bức ảnh. Bắt đầu câu lệnh bằng *"Một bức ảnh về. . ."*. Ví dụ:
 
 |  |  |  |
 | --- | --- | --- |
-| صور نموذجية فنية   الطلب: **رسم بقلم رصاص تقني** لشكل زاوي... | صور نموذجية فنية   الطلب: **رسم بقلم الفحم** لشكل زاوي... | صور نموذجية فنية   الطلب: **رسمة بقلم رصاص ملون** لشيء زاوي... |
+| photorealistic sample image 1   Câu lệnh: **Ảnh chụp** hạt cà phê trong bếp trên bề mặt gỗ | photorealistic sample image 2   Câu lệnh: **Ảnh chụp** một thanh sô cô la trên mặt bếp | hình ảnh mẫu giống thật 3   Câu lệnh: **Ảnh chụp** một toà nhà hiện đại có nước ở phía sau |
+
+Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
+
+##### Đối tượng sửa đổi nhiếp ảnh
+
+Trong các ví dụ sau, bạn có thể thấy một số tham số và giá trị sửa đổi dành riêng cho nhiếp ảnh. Bạn có thể kết hợp nhiều đối tượng sửa đổi để kiểm soát chính xác hơn.
+
+1. **Khoảng cách chụp của camera** – *Cận cảnh, chụp từ xa*
+
+   |  |  |
+   | --- | --- |
+   | ảnh mẫu chụp cận cảnh bằng camera   Câu lệnh: Ảnh **cận cảnh** hạt cà phê | hình ảnh mẫu của camera ở chế độ thu phóng   Câu lệnh: Ảnh **thu nhỏ** của một túi nhỏ đựng  hạt cà phê trong một căn bếp bừa bộn |
+2. **Vị trí camera** – *trên không, từ dưới lên*
+
+   |  |  |
+   | --- | --- |
+   | ảnh mẫu chụp từ trên không   Câu lệnh: **ảnh chụp từ trên không** về một thành phố đô thị có nhiều nhà cao tầng | hình ảnh mẫu về góc nhìn từ bên dưới   Câu lệnh: Ảnh chụp tán rừng với bầu trời xanh **từ dưới lên** |
+3. **Ánh sáng** – *tự nhiên, kịch tính, ấm áp, lạnh*
+
+   |  |  |
+   | --- | --- |
+   | hình ảnh mẫu ánh sáng tự nhiên   Câu lệnh: ảnh chụp trong studio về một chiếc ghế bành hiện đại, **ánh sáng tự nhiên** | hình ảnh mẫu ánh sáng kịch tính   Câu lệnh: ảnh chụp trong phòng thu về một chiếc ghế bành hiện đại, **ánh sáng kịch tính** |
+4. **Chế độ cài đặt camera** *– làm mờ chuyển động, tiêu điểm mềm, hiệu ứng bokeh, chân dung*
+
+   |  |  |
+   | --- | --- |
+   | hình ảnh mẫu làm mờ chuyển động   Câu lệnh: ảnh chụp một thành phố có các toà nhà chọc trời từ bên trong một chiếc ô tô với **hiệu ứng làm mờ chuyển động** | hình ảnh mẫu tiêu điểm mềm   Câu lệnh: **ảnh chụp tiêu điểm mềm** một cây cầu trong thành phố vào ban đêm |
+5. **Loại ống kính** – *35 mm, 50 mm, mắt cá, góc rộng, macro*
+
+   |  |  |
+   | --- | --- |
+   | hình ảnh mẫu chụp bằng ống kính macro   Câu lệnh: ảnh chụp một chiếc lá, **ống kính macro** | hình ảnh mẫu chụp bằng ống kính mắt cá   Câu lệnh: nhiếp ảnh đường phố, thành phố New York, **ống kính mắt cá** |
+6. **Loại phim** – *đen trắng, polaroid*
+
+   |  |  |
+   | --- | --- |
+   | hình ảnh mẫu về ảnh polaroid   Câu lệnh: **ảnh chân dung chụp bằng máy polaroid** của một chú chó đeo kính râm | ảnh mẫu đen trắng   Câu lệnh: **ảnh đen trắng** về một chú chó đeo kính râm |
+
+Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
+
+### Hình minh hoạ và nghệ thuật
+
+- Câu lệnh có: *"Một painting về..."*, *"Một sketch của..."*
+
+Phong cách nghệ thuật đa dạng từ phong cách đơn sắc như phác hoạ bằng bút chì, đến nghệ thuật số siêu thực. Ví dụ: các hình ảnh sau đây sử dụng cùng một câu lệnh nhưng có các kiểu khác nhau:
+
+*"Một [art style or creation technique] về chiếc xe sedan điện thể thao góc cạnh với các toà nhà chọc trời ở phía sau"*
 
 |  |  |  |
 | --- | --- | --- |
-| صور نموذجية فنية   الطلب: **لوحة زيتية بألوان الباستيل** لشيء زاوي... | صور نموذجية فنية   الطلب: **عمل فني رقمي** يظهر فيه... | صور نموذجية فنية   الطلب: **ملصق** على طراز الآرت ديكو يظهر فيه شكل زاوي... |
-
-مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 2.
-
-##### الأشكال والمواد
-
-- يتضمّن الطلب: *"...مصنوع من..."*، *"...على شكل..."*
-
-من مزايا هذه التكنولوجيا أنّه يمكنك إنشاء صور يصعب أو يستحيل إنشاؤها بطرق أخرى. على سبيل المثال، يمكنك إعادة إنشاء شعار شركتك باستخدام مواد وخامات مختلفة.
+| hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: **Bản vẽ kỹ thuật bằng bút chì** về một... | hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: Một **bức vẽ bằng chì than** về một... | hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: **Bức vẽ bằng bút chì màu** về một... |
 
 |  |  |  |
 | --- | --- | --- |
-| صورة توضيحية 1 عن الأشكال والمواد   الطلب: حقيبة رياضية كبيرة **مصنوعة من** الجبن | صورة توضيحية 2 عن الأشكال والمواد   الطلب: أنابيب نيون **على شكل** طائر | صورة توضيحية 3 عن الأشكال والمواد   الطلب: كرسي بذراعين **مصنوع من الورق**، صورة استوديو، أسلوب الأوريغامي |
+| hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: Một **bức tranh vẽ bằng phấn màu** về một... | hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: **Tranh kỹ thuật số** về một... | hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: Một **bức áp phích theo phong cách art deco** về một... |
 
-مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 4.
+Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 2.
 
-#### المراجع الفنية التاريخية
+##### Hình dạng và chất liệu
 
-- يتضمّن الطلب: *"...بأسلوب..."*
+- Câu lệnh có: *"...làm bằng..."*, *"...có hình dạng..."*
 
-أصبحت بعض الأساليب مميّزة على مر السنين. في ما يلي بعض الأفكار
-لأساليب فنية أو لوحات تاريخية يمكنك تجربتها.
-
-*"أنشئ صورة بأسلوب [art period or movement]
-: مزرعة رياح"*
+Một trong những điểm mạnh của công nghệ này là bạn có thể tạo ra những hình ảnh mà nếu không có công nghệ này thì bạn khó hoặc không thể tạo được. Ví dụ: bạn có thể tạo lại biểu trưng công ty bằng nhiều chất liệu và kết cấu.
 
 |  |  |  |
 | --- | --- | --- |
-| صورة مثال على الانطباعية   الطلب: إنشاء صورة **بأسلوب *لوحة انطباعية***: مزرعة رياح | صورة مثال من عصر النهضة   الطلب: أنشئ صورة **بأسلوب *لوحة من عصر النهضة***: مزرعة رياح | صورة مثال على فن البوب   الطلب: أنشئ صورة **بأسلوب *الفن الشعبي***: مزرعة رياح |
+| shapes and materials example image 1   Câu lệnh: một chiếc túi du lịch **làm bằng** phô mai | hình ảnh ví dụ 2 về hình dạng và chất liệu   Câu lệnh: ống neon **có hình dạng** của một con chim | hình ảnh ví dụ 3 về hình dạng và vật liệu   Câu lệnh: một chiếc ghế bành **làm bằng giấy**, ảnh chụp trong phòng chụp ảnh, phong cách origami |
 
-مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي المقابل لها من خلال نموذج Imagen 4.
+Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
 
-#### معدِّلات جودة الصور
+#### Tài liệu tham khảo về nghệ thuật trong lịch sử
 
-يمكن أن تتيح كلمات رئيسية معيّنة للنموذج معرفة أنّك تبحث عن مواد عرض عالية الجودة. تشمل الأمثلة على معدّلات الجودة ما يلي:
+- Câu lệnh có chứa: *"...theo phong cách của..."*
 
-- **المعدّلات العامة** - *عالي الجودة، جميل، منمّق*
-- **الصور** - *4K وHDR و"استوديو صور"*
-- **فن، رسم توضيحي** - *من إبداع محترف، تفاصيل دقيقة*
+Một số phong cách đã trở thành biểu tượng qua nhiều năm. Sau đây là một số ý tưởng về phong cách hội hoạ hoặc nghệ thuật trong lịch sử mà bạn có thể thử.
 
-في ما يلي بعض الأمثلة على الطلبات بدون معدّلات جودة والطلب نفسه مع معدّلات جودة.
+*"Tạo hình ảnh theo phong cách của [art period or movement]
+: một trang trại gió"*
+
+|  |  |  |
+| --- | --- | --- |
+| hình ảnh ví dụ về trường phái ấn tượng   Câu lệnh: tạo một hình ảnh **theo phong cách *hội hoạ trường phái ấn tượng***: một trang trại gió | hình ảnh ví dụ về thời Phục hưng   Câu lệnh: tạo một hình ảnh **theo phong cách *tranh thời Phục hưng***: một trang trại gió | hình ảnh ví dụ về nghệ thuật đại chúng   Tạo hình ảnh: tạo một hình ảnh **theo phong cách *nghệ thuật đại chúng***: một trang trại điện gió |
+
+Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
+
+#### Các tham số sửa đổi chất lượng hình ảnh
+
+Một số từ khoá có thể cho mô hình biết rằng bạn đang tìm kiếm một thành phần chất lượng cao. Sau đây là một số ví dụ về hệ số điều chỉnh chất lượng:
+
+- **Đối tượng sửa đổi chung** – *chất lượng cao, đẹp, cách điệu*
+- **Ảnh** – *4K, HDR, ảnh chụp trong phòng chụp*
+- **Nghệ thuật, Hình minh hoạ** – *do chuyên gia tạo ra, chi tiết*
+
+Sau đây là một vài ví dụ về câu lệnh không có công cụ sửa đổi chất lượng và câu lệnh tương tự có công cụ sửa đổi chất lượng.
 
 |  |  |
 | --- | --- |
-| مثال على صورة ذرة بدون معدّلات   توجيه (بدون أدوات تعديل الجودة): صورة لساق ذرة | صورة مثال على الذرة مع المعدّلات   الطلب (مع معدّلات الجودة): **صورة جميلة**   بجودة 4K ونطاق عالي الديناميكية (HDR) **لعود ذرة   التقطها مصوّر محترف** |
+| ví dụ về hình ảnh bắp không có đối tượng sửa đổi   Câu lệnh (không có bộ sửa đổi chất lượng): ảnh chụp một cây ngô | hình ảnh mẫu về bắp có đối tượng sửa đổi   Câu lệnh (có bộ sửa đổi chất lượng): **Ảnh 4K HDR tuyệt đẹp**   về một cây ngô **do một   nhiếp ảnh gia chuyên nghiệp chụp** |
 
-مصدر الصورة: تم إنشاء كل صورة باستخدام الطلب النصي الخاص بها مع نموذج Imagen 4.
+Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
 
-#### نِسب العرض إلى الارتفاع
+#### Tỷ lệ khung hình
 
-تتيح لك ميزة إنشاء الصور في Imagen ضبط خمس نِسب عرض إلى ارتفاع مختلفة للصور.
+Tính năng tạo hình ảnh của Imagen cho phép bạn đặt 5 tỷ lệ khung hình riêng biệt cho hình ảnh.
 
-1. **مربّع** (1:1، الإعداد التلقائي): صورة مربّعة عادية تشمل الاستخدامات الشائعة لنسبة العرض إلى الارتفاع هذه المشاركات على وسائل التواصل الاجتماعي.
-2. **ملء الشاشة** (4:3): تُستخدم نسبة العرض إلى الارتفاع هذه عادةً في الوسائط أو الأفلام.
-   وهي أيضًا أبعاد معظم أجهزة التلفزيون القديمة (غير ذات الشاشة العريضة) وكاميرات التنسيق المتوسط. تتيح هذه النسبة التقاط المزيد من المشهد أفقيًا (مقارنةً بنسبة 1:1)،
-   ما يجعلها نسبة العرض إلى الارتفاع المفضّلة للتصوير.
-
-   |  |  |
-   | --- | --- |
-   | مثال على نسبة العرض إلى الارتفاع   الطلب: صورة مقرّبة لأصابع عازف يعزف على البيانو، فيلم أبيض وأسود، قديم (نسبة عرض إلى ارتفاع 4:3) | مثال على نسبة العرض إلى الارتفاع   الطلب: صورة احترافية في استوديو لبطاطس مقلية لمطعم فاخر، بأسلوب مجلة طعام (نسبة العرض إلى الارتفاع 4:3) |
-3. **ملء الشاشة في الوضع الرأسي** (3:4): هذه هي نسبة العرض إلى الارتفاع في وضع ملء الشاشة بعد تدويرها بمقدار 90 درجة. يتيح ذلك التقاط المزيد من تفاصيل المشهد عموديًا مقارنةً بنسبة العرض إلى الارتفاع 1:1.
+1. **Vuông** (1:1, mặc định) – Ảnh vuông tiêu chuẩn. Tỷ lệ khung hình này thường được dùng cho bài đăng trên mạng xã hội.
+2. **Toàn màn hình** (4:3) – Tỷ lệ khung hình này thường được dùng trong nội dung nghe nhìn hoặc phim.
+   Đây cũng là kích thước của hầu hết các TV cũ (không phải màn hình rộng) và máy ảnh định dạng trung bình. Tỷ lệ này chụp được nhiều cảnh hơn theo chiều ngang (so với tỷ lệ 1:1), khiến đây trở thành tỷ lệ khung hình ưu tiên cho nhiếp ảnh.
 
    |  |  |
    | --- | --- |
-   | مثال على نسبة العرض إلى الارتفاع   الطلب: امرأة تتنزّه، لقطة مقرّبة لحذائها منعكسة في بركة، جبال كبيرة في الخلفية، بأسلوب إعلاني، زوايا درامية (نسبة العرض إلى الارتفاع 3:4) | مثال على نسبة العرض إلى الارتفاع   الطلب: صورة جوية لنهر يتدفق في وادٍ أسطوري (نسبة العرض إلى الارتفاع 3:4) |
-4. **الشاشة العريضة** (16:9): حلّت هذه النسبة محل 4:3، وهي الآن نسبة العرض إلى الارتفاع الأكثر شيوعًا في أجهزة التلفزيون والشاشات وشاشات الهواتف الجوّالة (الوضع الأفقي).
-   استخدِم نسبة العرض إلى الارتفاع هذه عندما تريد التقاط المزيد من الخلفية (على سبيل المثال، المناظر الطبيعية الخلابة).
+   | ví dụ về tỷ lệ khung hình   Câu lệnh: cận cảnh ngón tay của một nhạc sĩ đang chơi đàn piano, phim đen trắng, cổ điển (tỷ lệ khung hình 4:3) | ví dụ về tỷ lệ khung hình   Câu lệnh: Bức ảnh chuyên nghiệp chụp khoai tây chiên trong phòng thu cho một nhà hàng cao cấp, theo phong cách của một tạp chí ẩm thực (tỷ lệ khung hình 4:3) |
+3. **Toàn màn hình dọc** (3:4) – Đây là tỷ lệ khung hình toàn màn hình được xoay 90 độ. Điều này cho phép bạn chụp cảnh theo chiều dọc nhiều hơn so với tỷ lệ khung hình 1:1.
 
-   ![مثال على نسبة العرض إلى الارتفاع](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=ar)
+   |  |  |
+   | --- | --- |
+   | ví dụ về tỷ lệ khung hình   Câu lệnh: một người phụ nữ đang đi bộ đường dài, cận cảnh đôi ủng của cô ấy phản chiếu trong một vũng nước, những ngọn núi lớn ở phía sau, theo phong cách của một quảng cáo, góc quay ấn tượng (tỷ lệ khung hình 3:4) | ví dụ về tỷ lệ khung hình   Câu lệnh: ảnh chụp từ trên không về một dòng sông chảy qua một thung lũng huyền bí (tỷ lệ khung hình 3:4) |
+4. **Màn hình rộng** (16:9) – Tỷ lệ này đã thay thế tỷ lệ 4:3 và hiện là tỷ lệ khung hình phổ biến nhất cho TV, màn hình và màn hình điện thoại di động (chế độ ngang).
+   Hãy sử dụng tỷ lệ khung hình này khi bạn muốn chụp nhiều cảnh nền hơn (ví dụ: cảnh quan thiên nhiên).
 
-   الطلب: رجل يرتدي ملابس بيضاء بالكامل يجلس على الشاطئ، لقطة مقرّبة، إضاءة الساعة الذهبية (نسبة العرض إلى الارتفاع ‎16:9)
-5. **عمودية** (9:16): هذه النسبة هي شاشة عريضة ولكن تم تدويرها. نسبة العرض إلى الارتفاع هذه جديدة نسبيًا، وقد أصبحت رائجة بفضل تطبيقات الفيديوهات القصيرة (مثل فيديوهات Shorts على YouTube). استخدِم هذا الخيار للأجسام الطويلة ذات الاتجاهات العمودية القوية، مثل المباني أو الأشجار أو الشلالات أو غيرها من الأجسام المشابهة.
+   ![ví dụ về tỷ lệ khung hình](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=vi)
 
-   ![مثال على نسبة العرض إلى الارتفاع](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=ar)
+   Câu lệnh: một người đàn ông mặc quần áo toàn màu trắng đang ngồi trên bãi biển, cận cảnh, ánh sáng khung giờ vàng (tỷ lệ khung hình 16:9)
+5. **Dọc** (9:16) – Tỷ lệ này là tỷ lệ màn hình rộng nhưng được xoay. Đây là một tỷ lệ khung hình tương đối mới và được các ứng dụng video ngắn (ví dụ: YouTube Shorts) ưa chuộng. Sử dụng chế độ này cho các đối tượng cao có hướng dọc mạnh mẽ, chẳng hạn như toà nhà, cây, thác nước hoặc các đối tượng tương tự khác.
 
-   الطلب: تصميم رقمي لناطحة سحاب ضخمة وعصرية
-   وفخمة ومهيبة مع منظر جميل لغروب الشمس في الخلفية (نسبة العرض إلى الارتفاع 9:16)
+   ![ví dụ về tỷ lệ khung hình](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=vi)
 
-#### صور واقعية
+   Câu lệnh: hình ảnh kỹ thuật số của một toà nhà chọc trời đồ sộ, hiện đại, hùng vĩ, hoành tráng với cảnh hoàng hôn tuyệt đẹp ở phía sau (tỷ lệ khung hình 9:16)
 
-قد تقدّم إصدارات مختلفة من نموذج إنشاء الصور مزيجًا من النتائج الفنية والواقعية. استخدِم الكلمات التالية في الطلبات لإنشاء صور واقعية أكثر استنادًا إلى الموضوع الذي تريد إنشاءه.
+#### Hình ảnh chân thực
 
-| حالة الاستخدام | نوع العدسة | البُعد البؤري | تفاصيل إضافية |
+Các phiên bản khác nhau của mô hình tạo hình ảnh có thể cung cấp cả đầu ra mang tính nghệ thuật và chân thực như ảnh chụp. Hãy sử dụng những từ ngữ sau trong câu lệnh để tạo ra kết quả chân thực hơn, dựa trên chủ đề mà bạn muốn tạo.
+
+| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
 | --- | --- | --- | --- |
-| الأشخاص (صور شخصية) | التكبير والتصغير | ‫24-35 مم | فيلم بالأبيض والأسود، فيلم نوار، عمق المجال، لونان (اذكر لونين) |
-| الطعام والحشرات والنباتات (الأشياء، الطبيعة الصامتة) | وحدة الماكرو | ‫60-105 مم | تفاصيل عالية، وتركيز دقيق، وإضاءة مضبوطة |
-| الرياضة والحياة البرية (حركة) | التكبير/التصغير باستخدام العدسة المقرّبة | ‫100-400 مم | سرعة غالق عالية، تتبُّع الحركة |
-| فلكية، مناظر طبيعية (زاوية عريضة) | زاوية عريضة | 10-24 مم | أوقات تعرُّض طويلة للضوء، تركيز حاد، تعرُّض طويل للضوء، مياه أو سُحب ناعمة |
+| Người (ảnh chân dung) | Prime, zoom | 24-35mm | phim đen trắng, phim noir, độ sâu trường ảnh, hai tông màu (nêu 2 màu) |
+| Thực phẩm, côn trùng, thực vật (vật thể, tĩnh vật) | Macro | 60-105mm | Độ chi tiết cao, lấy nét chính xác, ánh sáng được kiểm soát |
+| Thể thao, động vật hoang dã (chuyển động) | Thu phóng bằng ống kính chụp xa | 100-400mm | Tốc độ màn trập nhanh, theo dõi hành động hoặc chuyển động |
+| Thiên văn học, phong cảnh (góc rộng) | Ống kính góc rộng | 10-24mm | Thời gian phơi sáng lâu, tiêu cự sắc nét, phơi sáng lâu, nước hoặc mây mịn |
 
-##### صور شخصية
+##### Chân dung
 
-| حالة الاستخدام | نوع العدسة | البُعد البؤري | تفاصيل إضافية |
+| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
 | --- | --- | --- | --- |
-| الأشخاص (صور شخصية) | التكبير والتصغير | ‫24-35 مم | فيلم بالأبيض والأسود، فيلم نوار، عمق المجال، لونان (اذكر لونين) |
+| Người (ảnh chân dung) | Prime, zoom | 24-35mm | phim đen trắng, phim noir, độ sâu trường ảnh, hai tông màu (nêu 2 màu) |
 
-باستخدام عدة كلمات رئيسية من الجدول، يمكن لـ Imagen إنشاء الصور الشخصية التالية:
+Dựa vào một số từ khoá trong bảng, Imagen có thể tạo ra những bức chân dung sau:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| مثال على تصوير الوجه | مثال على تصوير الوجه | مثال على تصوير الوجه | مثال على تصوير الوجه |
+| ví dụ về ảnh chân dung | ví dụ về ảnh chân dung | ví dụ về ảnh chân dung | ví dụ về ảnh chân dung |
 
-الطلب: *صورة عمودية لامرأة، 35 ملم، درجات أزرق ورمادي*  
-الطراز: `imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| مثال على تصوير الوجه | مثال على تصوير الوجه | مثال على تصوير الوجه | مثال على تصوير الوجه |
-
-الطلب: *امرأة، صورة شخصية 35 مم، فيلم نوار*  
-الطراز: `imagen-4.0-generate-001`
-
-##### العناصر
-
-| حالة الاستخدام | نوع العدسة | البُعد البؤري | تفاصيل إضافية |
-| --- | --- | --- | --- |
-| الطعام والحشرات والنباتات (الأشياء، الطبيعة الصامتة) | وحدة الماكرو | ‫60-105 مم | تفاصيل عالية، وتركيز دقيق، وإضاءة مضبوطة |
-
-باستخدام عدة كلمات رئيسية من الجدول، يمكن لـ Imagen إنشاء صور العناصر التالية:
+Câu lệnh: *Một phụ nữ, ảnh chân dung 35 mm, tông màu kép xanh dương và xám*  
+Mô hình: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| مثال على تصوير المنتجات | مثال على تصوير المنتجات | مثال على تصوير المنتجات | مثال على تصوير المنتجات |
+| ví dụ về ảnh chân dung | ví dụ về ảnh chân dung | ví dụ về ảnh chân dung | ví dụ về ảnh chân dung |
 
-الطلب: *ورقة نبات الصلاة، عدسة ماكرو، 60 ملم*  
-النموذج: `imagen-4.0-generate-001`
+Câu lệnh: *Một phụ nữ, ảnh chân dung 35 mm, phim noir*  
+Người mẫu: `imagen-4.0-generate-001`
+
+##### Đồ vật
+
+| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
+| --- | --- | --- | --- |
+| Thực phẩm, côn trùng, thực vật (vật thể, tĩnh vật) | Macro | 60-105mm | Độ chi tiết cao, lấy nét chính xác, ánh sáng được kiểm soát |
+
+Bằng cách sử dụng một số từ khoá trong bảng, Imagen có thể tạo các hình ảnh đối tượng sau:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| مثال على تصوير المنتجات | مثال على تصوير المنتجات | مثال على تصوير المنتجات | مثال على تصوير المنتجات |
+| ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể |
 
-الطلب: *طبق من المعكرونة، عدسة ماكرو 100 ملم*  
-الطراز: `imagen-4.0-generate-001`
-
-##### حركة
-
-| حالة الاستخدام | نوع العدسة | البُعد البؤري | تفاصيل إضافية |
-| --- | --- | --- | --- |
-| الرياضة والحياة البرية (حركة) | التكبير/التصغير باستخدام العدسة المقرّبة | ‫100-400 مم | سرعة غالق عالية، تتبُّع الحركة |
-
-باستخدام عدة كلمات رئيسية من الجدول، يمكن لـ Imagen إنشاء الصور المتحركة التالية:
+Câu lệnh: *lá của cây cầu nguyện, ống kính macro, 60mm*  
+Mô hình: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| مثال على التصوير المتحرّك | مثال على التصوير المتحرّك | مثال على التصوير المتحرّك | مثال على التصوير المتحرّك |
+| ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể |
 
-الطلب: *إحراز هدف الفوز عند التقاط الكرة، سرعة غالق عالية، تتبُّع الحركة*  
-النموذج: `imagen-4.0-generate-001`
+Câu lệnh: *một đĩa mì ống, ống kính macro 100 mm*  
+Mô hình: `imagen-4.0-generate-001`
+
+##### Chuyển động
+
+| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
+| --- | --- | --- | --- |
+| Thể thao, động vật hoang dã (chuyển động) | Thu phóng bằng ống kính chụp xa | 100-400mm | Tốc độ màn trập nhanh, theo dõi hành động hoặc chuyển động |
+
+Bằng cách sử dụng một số từ khoá trong bảng, Imagen có thể tạo ra những hình ảnh chuyển động sau:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| مثال على التصوير المتحرّك | مثال على التصوير المتحرّك | مثال على التصوير المتحرّك | مثال على التصوير المتحرّك |
+| ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động |
 
-الطلب: *غزال يركض في الغابة، سرعة غالق عالية، تتبُّع الحركة*  
-النموذج: `imagen-4.0-generate-001`
-
-##### زاوية عريضة
-
-| حالة الاستخدام | نوع العدسة | البُعد البؤري | تفاصيل إضافية |
-| --- | --- | --- | --- |
-| فلكية، مناظر طبيعية (زاوية عريضة) | زاوية عريضة | 10-24 مم | أوقات تعرُّض طويلة للضوء، تركيز حاد، تعرُّض طويل للضوء، مياه أو سُحب ناعمة |
-
-باستخدام عدة كلمات رئيسية من الجدول، يمكن لـ Imagen إنشاء الصور التالية بزاوية عريضة:
+Câu lệnh: *một pha tiếp bóng thành công, tốc độ màn trập nhanh, theo dõi chuyển động*  
+Mô hình: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة |
+| ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động |
 
-الطلب: *سلسلة جبال شاسعة، منظر طبيعي بزاوية واسعة 10 ملم*  
-النموذج: `imagen-4.0-generate-001`
+Câu lệnh: *Một chú hươu đang chạy trong rừng, tốc độ màn trập nhanh, theo dõi chuyển động*  
+Mô hình: `imagen-4.0-generate-001`
+
+##### Ống kính góc rộng
+
+| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
+| --- | --- | --- | --- |
+| Thiên văn học, phong cảnh (góc rộng) | Ống kính góc rộng | 10-24mm | Thời gian phơi sáng lâu, tiêu cự sắc nét, phơi sáng lâu, nước hoặc mây mịn |
+
+Bằng cách sử dụng một số từ khoá trong bảng, Imagen có thể tạo ra những hình ảnh góc rộng sau đây:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة | مثال على التصوير بزاوية واسعة |
+| ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng |
 
-الطلب: *صورة للقمر، تصوير فلكي، زاوية واسعة 10 مم*  
-النموذج: `imagen-4.0-generate-001`
+Câu lệnh: *một dãy núi rộng lớn, phong cảnh góc rộng 10 mm*  
+Mô hình: `imagen-4.0-generate-001`
 
-## إصدارات النموذج
+|  |  |  |  |
+| --- | --- | --- | --- |
+| ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng |
 
-### ‫Imagen 4 (متوقّفة نهائيًا)
+Câu lệnh: *một bức ảnh về mặt trăng, ảnh thiên văn, góc rộng 10 mm*  
+Mô hình: `imagen-4.0-generate-001`
 
-| الموقع | الوصف |
+## Phiên bản mô hình
+
+### Imagen 4 (Không dùng nữa)
+
+| Thuộc tính | Mô tả |
 | --- | --- |
-| رمز النموذج id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveأنواع البيانات المتوافقة | **الإدخال**  نص  **الناتج**  الصور |
-| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  ‫480 رمزًا مميزًا (نص)  **الصور الناتجة**  من 1 إلى 4 (فائق/عادي/سريع) |
-| calendar\_monthآخر تعديل | يونيو 2025 |
+| id\_cardMã kiểu máy | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản  **Đầu ra**  Hình ảnh |
+| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  480 token (văn bản)  **Hình ảnh đầu ra**  1 đến 4 (Ultra/Standard/Fast) |
+| calendar\_monthThông tin cập nhật mới nhất | Tháng 6 năm 2025 |
 
 ### Imagen 3
 
-تم [إيقاف](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar) نموذج Imagen 3.
+Mô hình Imagen 3 đã [tắt](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi).
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-07-16 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-07-16 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-16 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-16 UTC."],[],[]]

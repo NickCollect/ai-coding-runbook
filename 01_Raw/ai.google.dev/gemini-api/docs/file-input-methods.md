@@ -1,30 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ko
-fetched_at: 2026-07-20T04:36:00.451603+00:00
-title: "\ud30c\uc77c \uc785\ub825 \ubc29\ubc95 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=it
+fetched_at: 2026-07-27T04:46:18.401006+00:00
+title: "Metodi di input dei file \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-의견 보내기
+Invia feedback
 
-# 파일 입력 방법
+# Metodi di input dei file
 
-이 가이드에서는 Gemini API에 요청할 때 이미지, 오디오, 동영상, 문서와 같은 미디어 파일을 포함하는 다양한 방법을 설명합니다.
-새로운 메서드는 일괄 처리, 상호작용, Live API를 비롯한 모든 Gemini API 엔드포인트에서 지원됩니다.
-적절한 메서드를 선택하는 것은 파일 크기, 데이터가 저장된 위치, 파일 사용 빈도에 따라 다릅니다.
+Questa guida spiega i diversi modi in cui puoi includere file multimediali come
+immagini, audio, video e documenti quando invii richieste all'API Gemini.
+I nuovi metodi sono supportati in tutti gli endpoint dell'API Gemini, tra cui
+Batch, Interactions e Live API.
+La scelta del metodo giusto dipende dalle dimensioni del file, dalla posizione in cui sono archiviati i dati e dalla frequenza con cui prevedi di utilizzare il file.
 
-파일을 입력으로 포함하는 가장 간단한 방법은 로컬 파일을 읽고 프롬프트에 포함하는 것입니다. 다음 예에서는 로컬 PDF 파일을 읽는 방법을 보여줍니다. 이 메서드의 경우 PDF는 50MB로 제한됩니다. 파일
-입력 유형 및 제한사항의 전체 목록은
-[입력 방법 비교 표](#method-comparison)를 참고하세요.
+Il modo più semplice per includere un file come input è leggere un file locale e
+includerlo in un prompt. L'esempio seguente mostra come leggere un file PDF locale. I PDF sono limitati a 50 MB per questo metodo. Consulta la
+[tabella di confronto dei metodi di input](#method-comparison) per un elenco completo dei tipi di input e dei limiti dei file.
 
 ### Python
 
@@ -99,26 +101,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 입력 방법 비교
+## Confronto dei metodi di immissione
 
-다음 표에서는 각 입력 방법을 파일 제한사항 및 권장 사용 사례와 비교합니다. 파일 크기 제한은 파일 유형과 파일을 처리하는 데 사용되는 모델 또는 토큰화 도구에 따라 다를 수 있습니다.
+La tabella seguente mette a confronto ciascun metodo di input con i limiti dei file e i casi d'uso
+ottimali. Tieni presente che il limite di dimensione del file può variare a seconda del tipo di file e
+del modello o del tokenizer utilizzato per elaborare il file.
 
-| 메서드 | 권장 용도 | 최대 파일 크기 | 지속성 |
+| Metodo | Ideale per | Dimensione massima file | Persistenza |
 | --- | --- | --- | --- |
-| **인라인 데이터** | 빠른 테스트, 작은 파일, 실시간 애플리케이션 | 요청 또는 페이로드당 100MB   (**PDF의 경우 50MB**) | 없음 (모든 요청과 함께 전송) |
-| **파일 API 업로드** | 대용량 파일, 여러 번 사용되는 파일 | 파일당 2GB,   프로젝트당 최대 20GB | 48시간 |
-| **파일 API GCS URI 등록** | Google Cloud Storage에 이미 있는 대용량 파일, 여러 번 사용되는 파일 | 파일당 2GB, 전체 스토리지 제한 없음 | 없음 (요청별로 가져옴) 일회성 등록으로 최대 30일 동안 액세스 권한을 부여할 수 있습니다. |
-| **외부 URL** | 재업로드 없이 클라우드 버킷 (AWS, Azure, GCS)의 공개 데이터 또는 데이터 | 요청/페이로드당 100MB | 없음 (요청별로 가져옴) |
+| **Dati in linea** | Test rapidi, file di piccole dimensioni, applicazioni in tempo reale. | 100 MB per richiesta o payload   (**50 MB per i PDF**) | Nessuno (inviato con ogni richiesta) |
+| **Caricamento dell'API File** | File di grandi dimensioni, file utilizzati più volte. | 2 GB per file,   fino a 20 GB per progetto | 48 ore |
+| **Registrazione dell'URI GCS dell'API File** | File di grandi dimensioni già presenti in Google Cloud Storage, file utilizzati più volte. | 2 GB per file, nessun limite di spazio di archiviazione complessivo | Nessuno (recuperato per richiesta). La registrazione una tantum può fornire l'accesso per un massimo di 30 giorni. |
+| **URL esterni** | Dati pubblici o dati in bucket cloud (AWS, Azure, GCS) senza ricaricamento. | 100 MB per richiesta/payload | Nessuno (recuperato per richiesta) |
 
-## 인라인 데이터
+## Dati in linea
 
-작은 파일 (100MB 미만 또는 PDF의 경우 50MB)의 경우 요청 페이로드에서 직접 데이터를 전달할 수 있습니다. 이는 빠른 테스트 또는 실시간 임시 데이터를 처리하는 애플리케이션을 위한 가장 간단한 메서드입니다. 데이터를 base64 인코딩 문자열로 제공하거나 로컬 파일을 직접 읽어 제공할 수 있습니다.
+Per i file più piccoli (inferiori a 100 MB o 50 MB per i PDF), puoi trasmettere i dati
+direttamente nel payload della richiesta. Questo è il metodo più semplice per test rapidi o
+applicazioni che gestiscono dati temporanei in tempo reale. Puoi fornire i dati come stringhe con codifica base64 o leggendo direttamente i file locali.
 
-로컬 파일에서 읽는 예는 이 페이지의 시작 부분에 있는 예를 참고하세요.
+Per un esempio di lettura da un file locale, consulta l'esempio all'inizio di questa pagina.
 
-### URL에서 가져오기
+### Recuperare da un URL
 
-URL에서 파일을 가져와 바이트로 변환한 후 입력에 포함할 수도 있습니다.
+Puoi anche recuperare un file da un URL, convertirlo in byte e includerlo nell'input.
 
 ### Python
 
@@ -216,13 +222,15 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## Gemini 파일 API
+## API Gemini File
 
-파일 API는 대용량 파일 (최대 2GB) 또는 여러 요청에서 사용하려는 파일을 위해 설계되었습니다.
+L'API File è progettata per file più grandi (fino a 2 GB) o file che intendi
+utilizzare in più richieste.
 
-### 표준 파일 업로드
+### Caricamento standard dei file
 
-로컬 파일을 Gemini API에 업로드합니다. 이 방법으로 업로드된 파일은 일시적으로 (48시간) 저장되며 모델에서 효율적으로 검색할 수 있도록 처리됩니다.
+Carica un file locale nell'API Gemini. I file caricati in questo modo vengono archiviati
+temporaneamente (48 ore) ed elaborati per un recupero efficiente da parte del modello.
 
 ### Python
 
@@ -319,46 +327,45 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-### Google Cloud Storage 파일 등록
+### Registra i file Google Cloud Storage
 
-데이터가 이미 Google Cloud Storage에 있는 경우 다운로드하여 다시 업로드할 필요가 없습니다. 파일 API에 직접 등록할 수 있습니다.
+Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaricarli. Puoi registrarlo direttamente con l'API File.
 
-1. 각 버킷에 **서비스 에이전트** 액세스 권한 부여
+1. Concedi l'accesso al **service agent** a ogni bucket
 
-   1. Google Cloud 프로젝트에서 Gemini API를 사용 설정합니다.
-   2. 서비스 에이전트를 만듭니다.
+   1. Abilita l'API Gemini nel tuo progetto Google Cloud.
+   2. Crea l'agente di servizio:
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **Gemini API 서비스 에이전트 권한을 부여** 하여 스토리지 버킷을 읽습니다.
+   3. **Concedi al service agent dell'API Gemini le autorizzazioni** per leggere i tuoi bucket di archiviazione.
 
-      사용자는 사용하려는 특정 스토리지 버킷에서 이 서비스 에이전트에 `Storage Object Viewer`
-      [IAM 역할](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=ko#storage.objectViewer)
-      을 할당해야 합니다.
+      L'utente deve assegnare il [ruolo IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=it#storage.objectViewer) `Storage Object Viewer` a questo service agent nei bucket di archiviazione specifici che intende utilizzare.
 
-   이 액세스 권한은 기본적으로 만료되지 않지만 언제든지 변경할 수 있습니다. Google Cloud Storage IAM SDK
-   [명령어를](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=ko)
-   사용하여 권한을 부여할 수도 있습니다.
-2. 서비스 인증
+   Questo accesso non scade per impostazione predefinita, ma può essere modificato in qualsiasi momento. Puoi anche utilizzare i comandi dell'[SDK Google Cloud Storage IAM](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=it) per concedere le autorizzazioni.
+2. Autenticare il servizio
 
-   **기본 요건**
+   **Prerequisiti**
 
-   - API 사용 설정
-   - 적절한 권한이 있는 서비스 계정 또는 에이전트를 만듭니다.
+   - Abilita API
+   - Crea un service account o un agente con le autorizzazioni appropriate.
 
-   먼저 스토리지 객체 뷰어 권한이 있는 서비스로 인증해야 합니다. 이 작업은 파일 관리 코드가 실행되는 환경에 따라 다릅니다.
+   Devi prima autenticarti come servizio con autorizzazioni di visualizzazione degli oggetti Storage. La modalità dipende dall'ambiente in cui verrà eseguito il codice di gestione dei file.
 
-   **Google Cloud 외부**
+   **Al di fuori di Google Cloud**
 
-   데스크톱과 같이 Google Cloud 외부에서 코드를 실행하는 경우 다음 단계에 따라 Google Cloud 콘솔에서 계정 사용자 인증 정보를 다운로드합니다.
+   Se il tuo codice viene eseguito al di fuori di Google Cloud, ad esempio dal tuo computer,
+   scarica le credenziali dell'account dalla console Google Cloud seguendo
+   i seguenti passaggi:
 
-   1. [서비스 계정 콘솔](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=ko)로 이동합니다.
-   2. 관련 서비스 계정을 선택합니다.
-   3. **키** 탭을 선택하고 **키 추가, 새 키 만들기** 를 선택합니다.
-   4. **JSON** 키 유형을 선택하고 파일이 머신에 다운로드된 위치를 기록해 둡니다.
+   1. Vai alla [console Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=it).
+   2. Seleziona il service account pertinente.
+   3. Seleziona la scheda **Chiavi** e scegli **Aggiungi chiave, Crea nuova chiave**.
+   4. Scegli il tipo di chiave **JSON** e annota la posizione in cui è stato scaricato il file sul tuo computer.
 
-   [자세한 내용은 서비스 계정 키 관리에 관한 공식 Google Cloud 문서를 참고하세요.](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=ko)
+   Per maggiori dettagli, consulta la documentazione ufficiale di Google Cloud sulla
+   [gestione delle chiavi del service account](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=it).
 
-   그런 다음 다음 명령어를 사용하여 인증합니다. 이러한 명령어는 서비스 계정 파일이 현재 디렉터리에 있으며 이름이 `service-account.json`이라고 가정합니다.
+   Poi utilizza i seguenti comandi per l'autenticazione. Questi comandi presuppongono che il file dell'account di servizio si trovi nella directory corrente e sia denominato `service-account.json`.
 
    ### Python
 
@@ -378,7 +385,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
    )
    ```
 
-   ### 자바스크립트
+   ### JavaScript
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -396,7 +403,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
    });
    ```
 
-   ### CLI
+   ### Interfaccia a riga di comando
 
    ```
    gcloud auth application-default login \
@@ -404,15 +411,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **Google Cloud 환경**
+   **Su Google Cloud**
 
-   [[Cloud Run 함수 또는 Compute Engine 인스턴스를 사용하여 Google Cloud에서 직접 실행하는 경우 암시적 사용자 인증 정보가 있지만 적절한 범위를 부여하려면 다시 인증해야 합니다.](https://cloud.google.com/functions?hl=ko)](https://cloud.google.com/products/compute?hl=ko)
+   Se esegui l'applicazione direttamente in Google Cloud, ad esempio utilizzando le [funzioni Cloud Run](https://cloud.google.com/functions?hl=it) o un'[istanza Compute Engine](https://cloud.google.com/products/compute?hl=it), avrai credenziali implicite, ma dovrai eseguire nuovamente l'autenticazione per concedere gli ambiti appropriati.
 
    ### Python
 
-   이 코드는 서비스가 Cloud Run 또는 Compute Engine과 같이
-   [애플리케이션 기본 사용자 인증 정보](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=ko)
-   를 자동으로 가져올 수 있는 환경에서 실행될 것으로 예상합니다.
+   Questo codice prevede che il servizio venga eseguito in un ambiente in cui
+   [le credenziali predefinite dell'applicazione](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=it)
+   possono essere ottenute automaticamente, ad esempio Cloud Run o Compute Engine.
 
    ```
    import google.auth
@@ -427,9 +434,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
    ### JavaScript
 
-   이 코드는 서비스가 Cloud Run 또는 Compute Engine과 같이
-   [애플리케이션 기본 사용자 인증 정보](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=ko)
-   를 자동으로 가져올 수 있는 환경에서 실행될 것으로 예상합니다.
+   Questo codice prevede che il servizio venga eseguito in un ambiente in cui
+   [le credenziali predefinite dell'applicazione](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=it)
+   possono essere ottenute automaticamente, ad esempio Cloud Run o Compute Engine.
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -442,19 +449,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
    });
    ```
 
-   ### CLI
+   ### Interfaccia a riga di comando
 
-   이는 대화형 명령어입니다. Compute Engine과 같은 서비스의 경우 구성 수준에서 실행 중인 서비스에 범위를 연결할 수 있습니다. 예는 [사용자 관리 서비스
-   문서](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=ko#using)
-   를 참고하세요.
+   Questo è un comando interattivo. Per servizi come Compute Engine, puoi collegare gli ambiti al servizio in esecuzione a livello di configurazione. Per un esempio, consulta la [documentazione sul service account gestito dall'utente](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=it#using).
 
    ```
    gcloud auth application-default login \
    --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
    ```
-3. 파일 등록 (파일 API)
+3. Registrazione dei file (API Files)
 
-   파일 API를 사용하여 파일을 등록하고 Gemini API에서 직접 사용할 수 있는 파일 API 경로를 생성합니다.
+   Utilizza l'API Files per registrare i file e produrre un percorso dell'API Files che può essere utilizzato direttamente nell'API Gemini.
 
    ### Python
 
@@ -511,7 +516,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
    main();
    ```
 
-   ### CLI
+   ### Interfaccia a riga di comando
 
    ```
    access_token=$(gcloud auth application-default print-access-token)
@@ -523,10 +528,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
        -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
    ```
 
-## 외부 HTTP / 서명된 URL
+## HTTP esterno / URL firmati
 
-공개적으로 액세스할 수 있는 HTTPS URL 또는 사전 서명된 URL을 요청에 직접 전달할 수 있습니다. Gemini API는 처리 중에 콘텐츠를 안전하게 가져옵니다.
-이는 다시 업로드하지 않으려는 최대 100MB의 파일에 적합합니다.
+Puoi trasmettere URL HTTPS accessibili pubblicamente o URL pre-firmati direttamente nella tua
+richiesta. L'API Gemini recupererà i contenuti in modo sicuro durante l'elaborazione.
+È ideale per i file fino a 100 MB che non vuoi caricare nuovamente.
 
 ### Python
 
@@ -548,7 +554,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -591,20 +597,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         }'
 ```
 
-### 접근성
+### Accessibilità
 
-제공하는 URL이 로그인이 필요하거나 페이월이 적용된 페이지로 연결되지 않는지 확인합니다. 비공개 데이터베이스의 경우 올바른 액세스 권한과 만료일이 있는 서명된 URL을 만들어야 합니다.
+Verifica che gli URL forniti non rimandino a pagine che richiedono l'accesso o
+sono protette da un paywall. Per i database privati, assicurati di creare un URL firmato
+con le autorizzazioni di accesso e la scadenza corrette.
 
-### 안전 확인
+### Controlli di sicurezza
 
-시스템은 URL이 안전 및 정책 표준을 충족하는지 확인하기 위해 URL에 대한 콘텐츠 검토를 수행합니다. URL이 이 검사를 통과하지 못하면 `url_retrieval_status`가 `URL_RETRIEVAL_STATUS_UNSAFE`로 표시됩니다.
+Il sistema esegue un controllo di moderazione dei contenuti sull'URL per verificare che soddisfi
+gli standard di sicurezza e delle norme. Se l'URL non supera questo controllo, riceverai un
+`url_retrieval_status` di `URL_RETRIEVAL_STATUS_UNSAFE`.
 
-### 지원되는 콘텐츠 유형
+### Tipi di contenuti supportati
 
-지원되는 파일 유형 및 제한사항 목록은 초기 안내를 제공하기 위한 것이며 포괄적이지 않습니다. 지원되는 유형의 효과적인 집합은 변경될 수 있으며 사용 중인 특정 모델 및 토큰화 도구 버전에 따라 다를 수 있습니다. 지원되지 않는 유형은 오류를 발생시킵니다.
-또한 이러한 파일 유형의 콘텐츠 가져오기는 공개적으로 액세스할 수 있는 URL만 지원합니다.
+Questo elenco di tipi di file supportati e limitazioni è inteso come guida iniziale e non è esaustivo. L'insieme effettivo
+di tipi supportati è soggetto a modifiche e può variare in base al modello specifico e alla versione del tokenizer in uso. I tipi non supportati genereranno un errore.
+Inoltre, il recupero dei contenuti per questi tipi di file
+supporta solo gli URL accessibili pubblicamente.
 
-#### 텍스트 파일 유형
+#### Tipi di file di testo
 
 - `text/html`
 - `text/css`
@@ -614,19 +626,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `text/rtf`
 - `text/javascript`
 
-#### 애플리케이션 파일 유형
+#### Tipi di file dell'applicazione
 
 - `application/json`
 - `application/pdf`
 
-#### 이미지 파일 형식
+#### Tipi di file immagine
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### 동영상 파일 형식
+#### Tipi di file video
 
 - `video/mp4`
 - `video/mpeg`
@@ -638,36 +650,37 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 - `video/wmv`
 - `video/3gpp`
 
-## 권장사항
+## Best practice
 
-- **적절한 메서드 선택:** 작은 임시 파일에는 인라인 데이터를 사용합니다.
-  대용량 파일 또는 자주 사용되는 파일에는 파일 API를 사용합니다. 이미 온라인에서 호스팅되는 데이터에는 외부 URL을 사용합니다.
-- **MIME 유형 지정:** 적절한 처리를 위해 항상 파일 데이터에 올바른 MIME 유형을 제공합니다.
-- **오류 처리:** 코드에서 오류 처리를 구현하여 네트워크 오류, 파일 액세스 문제 또는 API 오류와 같은 잠재적인 문제를 관리합니다.
+- **Scegli il metodo giusto**:utilizza i dati incorporati per i file piccoli e temporanei.
+  Utilizza l'API File per i file più grandi o utilizzati di frequente. Utilizza URL esterni
+  per i dati già ospitati online.
+- **Specifica i tipi MIME**:fornisci sempre il tipo MIME corretto per i dati del file per garantire un'elaborazione corretta.
+- **Gestisci gli errori**:implementa la gestione degli errori nel codice per gestire potenziali problemi come errori di rete, problemi di accesso ai file o errori dell'API.
 
-## 제한사항
+## Limitazioni
 
-- 파일 크기 제한은 메서드 ([비교 표](#method-comparison))
-  및 파일 유형에 따라 다릅니다.
-- 인라인 데이터는 요청 페이로드 크기를 늘립니다.
-- 파일 API 업로드는 일시적이며 48시간 후에 만료됩니다.
-- 외부 URL 가져오기는 페이로드당 100MB로 제한되며 특정 콘텐츠 유형을 지원합니다.
+- I limiti delle dimensioni dei file variano in base al metodo (vedi la [tabella di confronto](#method-comparison))
+  e al tipo di file.
+- I dati incorporati aumentano le dimensioni del payload della richiesta.
+- I caricamenti dell'API File sono temporanei e scadono dopo 48 ore.
+- Il recupero di URL esterni è limitato a 100 MB per payload e supporta tipi di contenuti specifici.
 
-## 다음 단계
+## Passaggi successivi
 
-- Google AI Studio를 사용하여 자체 멀티모달 프롬프트를 작성해 보세요.
-- 프롬프트에 파일을 포함하는 방법은
-  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=ko),
-  [오디오](https://ai.google.dev/gemini-api/docs/audio?hl=ko), 및
-  [문서 처리](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko)
-  가이드를 참고하세요.
+- Prova a scrivere i tuoi prompt multimodali utilizzando
+  [Google AI Studio](http://aistudio.google.com/?hl=it).
+- Per informazioni sull'inclusione di file nei prompt, consulta le guide
+  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=it),
+  [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=it) e
+  [Elaborazione dei documenti](https://ai.google.dev/gemini-api/docs/document-processing?hl=it).
 
-의견 보내기
+Invia feedback
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-최종 업데이트: 2026-07-06(UTC)
+Ultimo aggiornamento 2026-07-06 UTC.
 
-의견을 전달하고 싶나요?
+Vuoi dirci altro?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-06(UTC)"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-06 UTC."],[],[]]

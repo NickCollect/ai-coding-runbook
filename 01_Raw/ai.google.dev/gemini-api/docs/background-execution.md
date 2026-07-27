@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=ko
-fetched_at: 2026-07-20T04:40:22.972120+00:00
-title: "\ubc31\uadf8\ub77c\uc6b4\ub4dc \uc2e4\ud589 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=id
+fetched_at: 2026-07-27T04:44:47.310902+00:00
+title: "Eksekusi latar belakang \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-의견 보내기
+Kirim masukan
 
-# 백그라운드 실행
+# Eksekusi latar belakang
 
-심층 연구, 복잡한 추론 또는 다단계 에이전트 실행과 같은 장기 실행 작업의 경우 연결 시간 제한으로 인해 표준 HTTP 요청이 중단될 수 있습니다 (일반적으로 60초 후에 닫힘). [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)는 이러한 작업을 비동기식으로 실행하는 **백그라운드 실행**을 제공합니다.
+Untuk tugas yang berjalan lama seperti riset mendalam, penalaran kompleks, atau eksekusi agen multi-langkah, waktu tunggu koneksi dapat mengganggu permintaan HTTP standar (yang biasanya ditutup setelah 60 detik). [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) menyediakan **eksekusi latar belakang** untuk menjalankan tugas ini secara asinkron.
 
-상호작용이 서버에서 작업을 완료할 때까지 실행되도록 하려면 상호작용을 만들 때 `"background": true`를 설정합니다. API는 즉시 상호작용 ID를 반환하며, 클라이언트 애플리케이션은 이 ID를 사용하여 상태를 폴링하거나, 진행 상황을 스트리밍하거나, 연결이 끊어진 스트림에 다시 연결할 수 있습니다.
+Agar interaksi berjalan hingga menyelesaikan tugas di server, tetapkan `"background": true` saat membuat interaksi. API akan segera menampilkan ID interaksi, yang dapat digunakan aplikasi klien untuk melakukan polling status, memproses streaming, atau menghubungkan kembali ke streaming yang terputus.
 
-백그라운드 실행은 표준 Gemini 모델 (예: `gemini-3.5-flash`, `gemini-3.1-pro-preview`) 및 관리형 에이전트 (예: `antigravity-preview-05-2026`)에서 지원됩니다.
+Eksekusi di latar belakang didukung untuk model Gemini standar (seperti `gemini-3.5-flash` dan `gemini-3.1-pro-preview`) dan Agen Terkelola (seperti `antigravity-preview-05-2026`).
 
-## 백그라운드 상호작용 만들기
+## Membuat interaksi latar belakang
 
-백그라운드 상호작용을 시작하려면 리소스를 만들 때 `background` 매개변수를 `true`로 설정합니다.
+Untuk memulai interaksi latar belakang, tetapkan parameter `background` ke `true` saat membuat resource.
 
 ### Python
 
@@ -72,31 +72,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 백그라운드 실행 작동 방식
+## Cara kerja eksekusi latar belakang
 
-백그라운드 상호작용을 만들면 작업이 서버에서 비동기식으로 실행됩니다. 상호작용은 다양한 실행 상태를 거칩니다.
+Saat Anda membuat interaksi latar belakang, tugas akan berjalan secara asinkron di server. Interaksi bertransisi melalui berbagai status eksekusi:
 
-- `in_progress`: 서버가 상호작용을 적극적으로 실행하고 있습니다 (예: 코드 실행 또는 연구).
-- `requires_action`: 상호작용이 일시중지되었으며 클라이언트 입력 (예: 도구 실행 확인 또는 질문 답변)을 기다리고 있습니다.
-- `completed`: 상호작용이 성공적으로 완료되었으며 출력을 사용할 수 있습니다.
-- `failed`: 실행 중에 오류가 발생했습니다 (예: 도구 실패 또는 비율 제한).
-- `cancelled`: 클라이언트 요청으로 실행이 중지되었습니다.
+- `in_progress`: Server sedang aktif menjalankan interaksi (seperti menjalankan kode atau melakukan riset).
+- `requires_action`: Interaksi telah dijeda dan menunggu input klien (seperti mengonfirmasi eksekusi alat atau menjawab pertanyaan).
+- `completed`: Interaksi berhasil diselesaikan dan output tersedia.
+- `failed`: Terjadi error selama eksekusi (seperti kegagalan alat atau batas kecepatan).
+- `cancelled`: Permintaan klien menghentikan eksekusi.
 
-### 사용 사례
+### Kasus penggunaan
 
-백그라운드 실행은 다음 용도로 사용합니다.
+Gunakan eksekusi latar belakang untuk:
 
-- **에이전트 실행:** 코드 실행, 웹브라우징 또는 하위 에이전트 오케스트레이션이 필요한 작업 (예: `antigravity-preview-05-2026`).
-- **심층 연구:** 몇 분이 걸리는 `deep-research-preview-04-2026` 또는 `deep-research-max-preview-04-2026`을 사용하여 실행합니다.
-- **긴 추론:** 모델 사고 단계가 표준 HTTP 연결 한도를 초과하는 작업.
+- **Eksekusi agen:** Tugas yang memerlukan eksekusi kode, penjelajahan web, atau orkestrasi sub-agen (seperti `antigravity-preview-05-2026`).
+- **Deep Research:** Berjalan menggunakan `deep-research-preview-04-2026` atau `deep-research-max-preview-04-2026` yang memerlukan waktu beberapa menit.
+- **Penalaran panjang:** Tugas yang langkah-langkah pemikiran modelnya melampaui batas koneksi HTTP standar.
 
-## 결과 검색
+## Mengambil hasil
 
-**폴링** 또는 **스트리밍** 을 사용하여 백그라운드 상호작용 결과를 가져옵니다.
+Dapatkan hasil interaksi latar belakang menggunakan **polling** atau **streaming**.
 
-### 폴링 패턴 (비차단)
+### Pola polling (tidak memblokir)
 
-폴링은 종료 상태에 도달할 때까지 비차단 GET 요청을 사용하여 상호작용 상태를 주기적으로 확인합니다.
+Polling memeriksa status interaksi secara berkala menggunakan permintaan GET non-blocking hingga mencapai status terminal.
 
 ### Python
 
@@ -147,9 +147,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### 스트리밍 패턴
+### Pola streaming
 
-네트워크 중단으로 인해 스트림 연결이 끊어지면 스트리밍이 마지막으로 수신된 이벤트부터 다시 시작될 수 있습니다. 각 델타에는 페이로드에 고유한 `event_id`가 포함되어 있습니다. 이 ID를 `last_event_id`로 전달하면 해당 이벤트부터 스트림이 다시 시작됩니다.
+Jika gangguan jaringan menghentikan streaming, streaming dapat dilanjutkan dari peristiwa terakhir yang diterima. Setiap delta berisi `event_id` unik dalam payload-nya. Meneruskan ID ini sebagai `last_event_id` akan melanjutkan streaming dari peristiwa tersebut.
 
 ### Python
 
@@ -240,14 +240,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## 멀티턴 대화
+## Percakapan multi-giliran
 
-후속 상호작용은 다음 제약 조건에 따라 `previous_interaction_id`를 사용하여 백그라운드 대화에 연결할 수 있습니다.
+Interaksi berikutnya dapat dirangkai ke percakapan latar belakang menggunakan `previous_interaction_id`, dengan tunduk pada batasan berikut:
 
-1. **활성 실행이 차단됨:** 후속 상호작용을 `in_progress` 상태의 상호작용에 연결하면 `400 Bad Request` 오류가 반환됩니다. 상호작용이 `completed` 상태에 도달할 때까지 기다린 후 다음 상호작용을 시작합니다.
-2. **관리형 에이전트의 환경 매개변수:** 관리형 에이전트 (예: `antigravity-preview-05-2026`)의 상호작용을 연결할 때 요청에 `previous_interaction_id`와 `environment`가 모두 포함되어야 합니다.
+1. **Eksekusi aktif diblokir:** Merangkai interaksi berikutnya dengan interaksi yang berstatus `in_progress` akan menampilkan error `400 Bad Request`. Tunggu hingga interaksi mencapai status `completed` sebelum memulai interaksi berikutnya.
+2. **Parameter Lingkungan untuk Agen Terkelola:** Saat merangkai interaksi untuk Agen Terkelola (seperti `antigravity-preview-05-2026`), permintaan harus menyertakan `previous_interaction_id` dan `environment`.
 
-다음 예에서는 상호작용을 연결하는 방법을 보여줍니다.
+Contoh berikut menunjukkan cara merangkai interaksi:
 
 ### Python
 
@@ -335,12 +335,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## 취소 및 삭제
+## Pembatalan dan penghapusan
 
-취소 및 삭제 요청을 사용하여 실행 중인 실행을 제어하고 스토리지를 관리합니다.
+Mengontrol eksekusi yang sedang berjalan dan mengelola penyimpanan menggunakan permintaan pembatalan dan penghapusan:
 
-- **취소 (`POST /interactions/{id}/cancel`):** 실행 중인 작업을 중지합니다. 상태가 `cancelled`로 전환됩니다. 서버에서 정리 작업을 수행하면 GET 요청에서 상태가 업데이트되기 전에 약간의 지연이 발생할 수 있습니다.
-- **삭제 (`DELETE /interactions/{id}`):** 서버에서 상호작용 레코드를 삭제합니다. 후속 GET 요청은 `404 Not Found` 오류를 반환합니다.
+- **Batalkan (`POST /interactions/{id}/cancel`):** Menghentikan tugas yang sedang berjalan. Status akan berubah menjadi `cancelled`. Tindakan pembersihan di server dapat menyebabkan sedikit penundaan sebelum status diperbarui dalam permintaan GET.
+- **Hapus (`DELETE /interactions/{id}`):** Menghapus catatan interaksi dari server. Permintaan GET berikutnya akan menampilkan error `404 Not Found`.
 
 ### Python
 
@@ -384,18 +384,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## 다음 단계
+## Langkah berikutnya
 
-- 세션 및 상태 관리를 이해하려면 [Interactions API 개요](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)를 읽어보세요.
-- 실시간 이벤트 업데이트에 관한 자세한 내용은 [스트리밍 상호작용](https://ai.google.dev/gemini-api/docs/streaming?hl=ko) 가이드를 참고하세요.
-- [관리형 에이전트 빠른 시작](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko)을 살펴보고 상태 저장 멀티턴 에이전트를 빌드하세요.
+- Baca [Ringkasan Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) untuk memahami pengelolaan sesi dan status.
+- Lihat panduan [Interaksi streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=id) untuk mengetahui detail tentang update peristiwa real-time.
+- Pelajari [Panduan memulai agen terkelola](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=id) untuk membangun agen multi-turn stateful.
 
-의견 보내기
+Kirim masukan
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-최종 업데이트: 2026-06-26(UTC)
+Terakhir diperbarui pada 2026-06-26 UTC.
 
-의견을 전달하고 싶나요?
+Ada masukan untuk kami?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-26(UTC)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-26 UTC."],[],[]]

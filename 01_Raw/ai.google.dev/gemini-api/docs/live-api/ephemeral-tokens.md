@@ -1,43 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ar
-fetched_at: 2026-07-20T04:41:46.073511+00:00
-title: "\u0627\u0644\u0631\u0645\u0648\u0632 \u0627\u0644\u0645\u0645\u064a\u0651\u0632\u0629 \u0627\u0644\u0645\u0624\u0642\u062a\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=hi
+fetched_at: 2026-07-27T04:42:03.464244+00:00
+title: "\u0907\u092b\u093c\u0947\u092e\u0930\u0932 \u091f\u094b\u0915\u0928 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-إرسال ملاحظات
+सुझाव भेजें
 
-# الرموز المميّزة المؤقتة
+# इफ़ेमरल टोकन
 
-الرموز المميزة المؤقتة هي رموز مميزة قصيرة الأمد للمصادقة تُستخدَم للوصول إلى Gemini API من خلال [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). وهي مصمَّمة لتعزيز الأمان عند الربط مباشرةً من جهاز المستخدم بواجهة برمجة التطبيقات (تنفيذ [من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach)). مثل مفاتيح واجهة برمجة التطبيقات العادية، يمكن استخراج الرموز المميزة المؤقتة من التطبيقات من جهة العميل، مثل متصفّحات الويب أو تطبيقات الأجهزة الجوّالة. ولكن بما أنّ الرموز المميزة المؤقتة تنتهي صلاحيتها بسرعة ويمكن حصر استخدامها، فإنّها تقلّل بشكل كبير من المخاطر الأمنية في بيئة التشغيل الفعلي. يجب استخدامها عند الوصول إلى Live API مباشرةً من التطبيقات من جهة العميل لتحسين أمان مفتاح واجهة برمجة التطبيقات.
+Ephemeral token, कम समय के लिए मान्य होने वाले ऐसे टोकन होते हैं जिनकी मदद से [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) के ज़रिए Gemini
+API को ऐक्सेस किया जा सकता है. इन्हें, सुरक्षा को बेहतर बनाने के लिए डिज़ाइन किया गया है. इनका इस्तेमाल, उपयोगकर्ता के डिवाइस से सीधे एपीआई से कनेक्ट करने पर किया जाता है. इसे
+[क्लाइंट-टू-सर्वर](https://ai.google.dev/gemini-api/docs/live?hl=hi#implementation-approach)
+लागू करने का तरीका कहा जाता है. मानक एपीआई पासकोड की तरह, ephemeral token को क्लाइंट-साइड ऐप्लिकेशन से निकाला जा सकता है. जैसे, वेब ब्राउज़र या मोबाइल ऐप्लिकेशन. हालांकि, ephemeral token की समयसीमा बहुत कम होती है और इन पर पाबंदियां लगाई जा सकती हैं. इसलिए, प्रोडक्शन एनवायरमेंट में सुरक्षा से जुड़े जोखिम काफ़ी कम हो जाते हैं. लाइव एपीआई को क्लाइंट-साइड ऐप्लिकेशन से सीधे ऐक्सेस करते समय, इनका इस्तेमाल करना चाहिए. इससे एपीआई पासकोड की सुरक्षा बेहतर होती है.
 
-## طريقة عمل الرموز المميزة المؤقتة
+## Ephemeral token कैसे काम करते हैं
 
-في ما يلي كيفية عمل الرموز المميزة المؤقتة على مستوى عالٍ:
+यहां, ephemeral token के काम करने का तरीका बताया गया है:
 
-1. يتم مصادقة العميل (مثل تطبيق الويب) مع الخلفية.
-2. يطلب الخلفية رمزًا مميّزًا مؤقتًا من خدمة التوفير في Gemini API.
-3. يصدر Gemini API رمزًا مميزًا صالحًا لفترة قصيرة.
-4. يرسل الخلفية الرمز المميّز إلى العميل لإجراء اتصالات WebSocket بواجهة Live API. يمكنك إجراء ذلك عن طريق استبدال مفتاح واجهة برمجة التطبيقات برمز مميّز مؤقت.
-5. يستخدم العميل بعد ذلك الرمز المميز كما لو كان مفتاح واجهة برمجة تطبيقات.
+1. आपका क्लाइंट (जैसे, वेब ऐप्लिकेशन) आपके बैकएंड से पुष्टि करता है.
+2. आपका बैकएंड, Gemini API की प्रोविज़निंग सेवा से ephemeral token का अनुरोध करता है.
+3. Gemini API, कम समय के लिए मान्य होने वाला टोकन जारी करता है.
+4. आपका बैकएंड, लाइव एपीआई से WebSocket कनेक्शन के लिए, क्लाइंट को टोकन भेजता है. इसके लिए, एपीआई पासकोड को ephemeral token से बदला जा सकता है.
+5. इसके बाद, क्लाइंट इस टोकन का इस्तेमाल, एपीआई पासकोड की तरह करता है.
 
-![نظرة عامة على الرموز المميزة المؤقتة](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=ar)
+![कुछ समय के लिए इस्तेमाल किए जाने वाले टोकन के बारे में खास जानकारी](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=hi)
 
-يؤدي ذلك إلى تعزيز الأمان لأنّ الرمز المميز يكون صالحًا لفترة قصيرة حتى إذا تم استخراجه، على عكس مفتاح واجهة برمجة التطبيقات الذي يكون صالحًا لفترة طويلة ويتم نشره من جهة العميل. وبما أنّ العميل يرسل البيانات مباشرةً إلى Gemini، يؤدي ذلك أيضًا إلى تحسين وقت الاستجابة وتجنُّب الحاجة إلى أن تعمل الخلفيات كوكيل للبيانات في الوقت الفعلي.
+इससे सुरक्षा बेहतर होती है, क्योंकि टोकन को निकालने पर भी, यह कम समय के लिए मान्य होता है. वहीं, क्लाइंट-साइड पर डिप्लॉय किया गया एपीआई पासकोड, लंबे समय के लिए मान्य होता है. क्लाइंट, Gemini को सीधे डेटा भेजता है. इसलिए, इससे लेटेंसी भी बेहतर होती है. साथ ही, आपके बैकएंड को रीयल टाइम डेटा को प्रॉक्सी करने की ज़रूरत नहीं पड़ती.
 
-## إنشاء رمز مميّز مؤقت
+## Ephemeral token बनाना
 
-في ما يلي مثال مبسّط على كيفية الحصول على رمز مميّز مؤقت من Gemini.
-بشكلٍ تلقائي، سيكون لديك دقيقة واحدة لبدء جلسات جديدة في Live API باستخدام الرمز المميّز من هذا الطلب (`newSessionExpireTime`)، و30 دقيقة لإرسال الرسائل عبر هذا الاتصال (`expireTime`).
+यहां, Gemini से ephemeral token पाने का एक आसान उदाहरण दिया गया है.
+डिफ़ॉल्ट रूप से, आपके पास इस अनुरोध (`newSessionExpireTime`) से मिले टोकन का इस्तेमाल करके, लाइव एपीआई के नए सेशन शुरू करने के लिए एक मिनट और उस कनेक्शन पर मैसेज भेजने के लिए 30 मिनट (`expireTime`) होंगे.
 
 ### Python
 
@@ -47,9 +50,7 @@ from google import genai
 
 now = datetime.datetime.now(tz=datetime.timezone.utc)
 
-client = genai.Client(
-    http_options={'api_version': 'v1alpha',}
-)
+client = genai.Client()
 
 token = client.auth_tokens.create(
     config = {
@@ -57,7 +58,6 @@ token = client.auth_tokens.create(
     'expire_time': now + datetime.timedelta(minutes=30), # Default is 30 minutes in the future
     # 'expire_time': '2025-05-17T00:00:00Z',   # Accepts isoformat.
     'new_session_expire_time': now + datetime.timedelta(minutes=1), # Default 1 minute in the future
-    'http_options': {'api_version': 'v1alpha'},
   }
 )
 
@@ -77,26 +77,37 @@ const token = await client.authTokens.create({
       uses: 1, // The default
       expireTime: expireTime, // Default is 30 mins
       newSessionExpireTime: new Date(Date.now() + (1 * 60 * 1000)), // Default 1 minute in the future
-      httpOptions: {apiVersion: 'v1alpha'},
     },
   });
 ```
 
-للاطّلاع على قيود القيمة التلقائية `expireTime` والإعدادات التلقائية ومواصفات الحقول الأخرى، يُرجى الرجوع إلى
-[مرجع واجهة برمجة التطبيقات](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens).
-خلال الإطار الزمني `expireTime`، عليك
-[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=ar#session-resumption) إعادة ربط المكالمة كل 10 دقائق (يمكن إجراء ذلك باستخدام الرمز المميز نفسه حتى إذا كان `uses: 1`).
+### REST
 
-يمكن أيضًا ربط رمز مميّز مؤقت بمجموعة من الإعدادات. قد يكون ذلك مفيدًا لتعزيز أمان تطبيقك والحفاظ على تعليمات نظامك على الخادم.
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
+  -H "x-goog-api-key: ${GEMINI_API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "uses": 1,
+    "expireTime": "YYYY-MM-DDTHH:MM:SSZ",
+    "newSessionExpireTime": "YYYY-MM-DDTHH:MM:SSZ"
+  }'
+```
+
+`expireTime` की वैल्यू की सीमाओं, डिफ़ॉल्ट वैल्यू, और अन्य फ़ील्ड की खास जानकारी के लिए, [एपीआई का संदर्भ](https://ai.google.dev/api/live?hl=hi#ephemeral-auth-tokens) देखें.
+`expireTime` की समयसीमा के अंदर, आपको
+[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=hi#session-resumption) हर 10 मिनट में कॉल को फिर से कनेक्ट करने के लिए
+की ज़रूरत होगी. ऐसा, उसी टोकन से किया जा सकता है, भले ही
+`uses: 1` हो.
+
+किसी खास कॉन्फ़िगरेशन के लिए, ephemeral token को लॉक भी किया जा सकता है. यह आपके ऐप्लिकेशन की सुरक्षा को बेहतर बनाने और सर्वर साइड पर अपने सिस्टम के निर्देशों को बनाए रखने में मददगार हो सकता है.
 
 ### Python
 
 ```
 from google import genai
 
-client = genai.Client(
-    http_options={'api_version': 'v1alpha',}
-)
+client = genai.Client()
 
 token = client.auth_tokens.create(
     config = {
@@ -105,11 +116,9 @@ token = client.auth_tokens.create(
         'model': 'gemini-3.1-flash-live-preview',
         'config': {
             'session_resumption':{},
-            'temperature':0.7,
             'response_modalities':['AUDIO']
         }
     },
-    'http_options': {'api_version': 'v1alpha'},
     }
 )
 
@@ -132,27 +141,43 @@ const token = await client.authTokens.create({
             model: 'gemini-3.1-flash-live-preview',
             config: {
                 sessionResumption: {},
-                temperature: 0.7,
                 responseModalities: ['AUDIO']
             }
         },
-        httpOptions: {
-            apiVersion: 'v1alpha'
-        }
     }
 });
 
 // You'll need to pass the value under token.name back to your client to use it
 ```
 
-يمكنك أيضًا قفل مجموعة فرعية من الحقول، راجِع [مستندات حزمة SDK](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
-للحصول على مزيد من المعلومات.
+### REST
 
-## الربط بواجهة Live API باستخدام رمز مميز مؤقت
+```
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
+  -H "x-goog-api-key: ${GEMINI_API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "uses": 1,
+    "expireTime": "YYYY-MM-DDTHH:MM:SSZ",
+    "liveConnectConstraints": {
+      "model": "models/gemini-3.1-flash-live-preview",
+      "config": {
+        "sessionResumption": {},
+        "responseModalities": ["AUDIO"]
+      }
+    }
+  }'
+```
 
-بعد الحصول على رمز مميّز مؤقت، يمكنك استخدامه كما لو كان مفتاح واجهة برمجة تطبيقات (ولكن تذكَّر أنّه يعمل فقط مع واجهة برمجة التطبيقات المباشرة، ومع الإصدار `v1alpha` من واجهة برمجة التطبيقات فقط).
+फ़ील्ड के सबसेट को भी लॉक किया जा सकता है. ज़्यादा जानकारी के लिए, [SDK टूल का दस्तावेज़](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
+देखें.
 
-لا يضيف استخدام الرموز المميزة المؤقتة قيمة إلا عند نشر التطبيقات التي تتّبع نهج [التنفيذ من العميل إلى الخادم](https://ai.google.dev/gemini-api/docs/live?hl=ar#implementation-approach).
+## Ephemeral token की मदद से, लाइव एपीआई से कनेक्ट करना
+
+Ephemeral token मिलने के बाद, इसका इस्तेमाल एपीआई पासकोड की तरह किया जा सकता है. हालांकि, ध्यान रखें कि यह सिर्फ़ लाइव एपीआई के लिए काम करता है. साथ ही, यह एपीआई के `v1beta` वर्शन के साथ ही काम करता है.
+
+[क्लाइंट-टू-सर्वर लागू करने के तरीके का इस्तेमाल करने वाले ऐप्लिकेशन
+को डिप्लॉय करने पर ही, ephemeral token का इस्तेमाल करने से फ़ायदा मिलता है.](https://ai.google.dev/gemini-api/docs/live?hl=hi#implementation-approach)
 
 ### JavaScript
 
@@ -182,29 +207,30 @@ async function main() {
 main();
 ```
 
-يمكنك الاطّلاع على [بدء استخدام Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) للحصول على مزيد من الأمثلة.
+ज़्यादा उदाहरणों के लिए, [लाइव एपीआई का इस्तेमाल शुरू करना](https://ai.google.dev/gemini-api/docs/live?hl=hi) लेख पढ़ें.
 
-## أفضل الممارسات
+## सबसे सही तरीके
 
-- اضبط مدة انتهاء صلاحية قصيرة باستخدام المَعلمة `expire_time`.
-- تنتهي صلاحية الرموز المميزة، ما يتطلّب إعادة بدء عملية توفير المتطلبات اللازمة.
-- تأكَّد من أنّ عملية المصادقة الآمنة متوافقة مع الخلفية البرمجية الخاصة بك، لأنّ الرموز المميزة المؤقتة لن تكون آمنة إلا إذا كانت طريقة المصادقة في الخلفية البرمجية آمنة.
-- بشكل عام، تجنَّب استخدام الرموز المميزة المؤقتة للاتصالات بين الخلفية وGemini، لأنّ هذا المسار يُعدّ آمنًا عادةً.
+- `expire_time` पैरामीटर का इस्तेमाल करके, समयसीमा कम सेट करें.
+- टोकन की समयसीमा खत्म हो जाती है. इसलिए, प्रोविज़निंग की प्रोसेस को फिर से शुरू करना पड़ता है.
+- अपने बैकएंड के लिए, सुरक्षित पुष्टि की सुविधा की पुष्टि करें. Ephemeral token की सुरक्षा, आपके बैकएंड की पुष्टि करने के तरीके जितनी ही होगी.
+- आम तौर पर, बैकएंड-टू-Gemini कनेक्शन के लिए, ephemeral token का इस्तेमाल न करें. ऐसा इसलिए, क्योंकि इस पाथ को आम तौर पर सुरक्षित माना जाता है.
 
-## القيود
+## सीमाएं
 
-تتوافق الرموز المميزة المؤقتة مع [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) فقط في الوقت الحالي.
+फ़िलहाल, ephemeral token सिर्फ़ [लाइव एपीआई](https://ai.google.dev/gemini-api/docs/live?hl=hi) के साथ काम करते हैं.
 
-## الخطوات التالية
+## आगे क्या करना है
 
-- يمكنك الاطّلاع على [مرجع](https://ai.google.dev/api/live?hl=ar#ephemeral-auth-tokens) Live API بشأن الرموز المميزة المؤقتة للحصول على مزيد من المعلومات.
+- ज़्यादा जानकारी के लिए, ephemeral token के बारे में लाइव एपीआई के [रेफ़रंस](https://ai.google.dev/api/live?hl=hi#ephemeral-auth-tokens)
+  पढ़ें.
 
-إرسال ملاحظات
+सुझाव भेजें
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-تاريخ التعديل الأخير: 2026-06-12 (حسب التوقيت العالمي المتفَّق عليه)
+आखिरी बार 2026-07-23 (UTC) को अपडेट किया गया.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+क्या आपको हमें और कुछ बताना है?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-12 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-23 (UTC) को अपडेट किया गया."],[],[]]

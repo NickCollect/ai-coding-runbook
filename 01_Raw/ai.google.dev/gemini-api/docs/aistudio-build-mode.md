@@ -1,178 +1,179 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=vi
-fetched_at: 2026-07-20T04:35:25.175035+00:00
-title: "T\u1ea1o \u1ee9ng d\u1ee5ng trong Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=he
+fetched_at: 2026-07-27T04:43:04.974068+00:00
+title: "\u05e4\u05d9\u05ea\u05d5\u05d7 \u05d0\u05e4\u05dc\u05d9\u05e7\u05e6\u05d9\u05d5\u05ea \u05d1-Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-# Tạo ứng dụng trong Google AI Studio
+# פיתוח אפליקציות ב-Google AI Studio
 
-Trang này mô tả cách sử dụng Google AI Studio để nhanh chóng tạo (hoặc "vibe code") và triển khai các ứng dụng thử nghiệm những tính năng mới nhất của Gemini như [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) và [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi). Google AI Studio hỗ trợ việc tạo **ứng dụng web** bằng thời gian chạy toàn ngăn xếp và **ứng dụng Android gốc** bằng Kotlin và Jetpack Compose – tất cả đều thông qua câu lệnh bằng ngôn ngữ tự nhiên.
+בדף הזה מוסבר איך להשתמש ב-Google AI Studio כדי לבנות במהירות (או "לתכנת בשיטת Vibe coding") ולפרוס אפליקציות שבודקות את היכולות העדכניות של Gemini, כמו [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=he) ו-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=he). ב-Google AI Studio אפשר ליצור **אפליקציות אינטרנט** עם סביבות זמן ריצה מלאות ו**אפליקציות נייטיב ל-Android** באמצעות Kotlin ו-Jetpack Compose – והכול באמצעות הנחיות בשפה טבעית.
 
-## Bắt đầu
+## שנתחיל?
 
-Bắt đầu lập trình theo cảm hứng trong [Chế độ tạo](https://aistudio.google.com/apps?hl=vi) của Google AI Studio. Bạn có thể bắt đầu xây dựng theo một số cách:
+אפשר להתחיל לתכנת בשיטת Vibe coding ב[מצב הבנייה](https://aistudio.google.com/apps?hl=he) של Google AI Studio. יש כמה דרכים להתחיל לבנות:
 
-- **Bắt đầu bằng một câu lệnh**: Ở chế độ Tạo, hãy dùng hộp nhập để nhập nội dung mô tả về những gì bạn muốn tạo. Chọn AI Chips để thêm các tính năng cụ thể như tạo hình ảnh hoặc dữ liệu của Google Maps vào câu lệnh. Bạn thậm chí có thể nói nội dung mình muốn bằng nút chuyển lời nói thành văn bản.
-- **Nút "Xem trang đầu tiên tìm được"**: Nếu cần khơi nguồn sáng tạo, hãy dùng nút "Xem trang đầu tiên tìm được" và Gemini sẽ tạo một câu lệnh kèm theo ý tưởng dự án để giúp bạn bắt đầu.
-- **Phối lại một dự án trong thư viện**: Mở một dự án trong [Thư viện ứng dụng](https://aistudio.google.com/apps?source=showcase&hl=vi) rồi chọn **Sao chép ứng dụng**.
-- **Nhập một dự án từ GitHub**: Ở chế độ Build (Xây dựng), hãy chọn **Import from GitHub** (Nhập từ GitHub) trong trình đơn **Add files** (Thêm tệp) (+ biểu tượng) trong hộp nhập lời nhắc để nhập mã hiện có.
+- **מתחילים עם הנחיה**: במצב בנייה, משתמשים בתיבת הקלט כדי להזין תיאור של מה שרוצים לבנות. בוחרים באפשרות 'שבבי AI' כדי להוסיף להנחיה תכונות ספציפיות כמו יצירת תמונות או נתונים של מפות Google. אפשר גם להגיד מה רוצים לשמוע באמצעות הלחצן להמרת דיבור לטקסט.
+- **הלחצן 'יותר מזל משכל'**: אם אתם צריכים השראה יצירתית, אתם יכולים ללחוץ על הלחצן 'יותר מזל משכל', ו-Gemini ייצור הנחיה עם רעיון לפרויקט כדי לעזור לכם להתחיל.
+- **ליצור רמיקס של פרויקט מהגלריה**: פותחים פרויקט מ[גלריית האפליקציות](https://aistudio.google.com/apps?source=showcase&hl=he) ובוחרים באפשרות **העתקת האפליקציה**.
+- **ייבוא פרויקט מ-GitHub**: במצב בנייה, בוחרים באפשרות **ייבוא מ-GitHub** בתפריט **הוספת קבצים** (סמל הפלוס) בתיבת הקלט של ההנחיה כדי לייבא את הקוד הקיים.
 
-Sau khi chạy câu lệnh, bạn sẽ thấy mã và các tệp cần thiết được tạo, đồng thời bản xem trước trực tiếp của ứng dụng sẽ xuất hiện ở bên phải.
+אחרי שמריצים את ההנחיה, הקוד והקבצים הדרושים ייווצרו, ותצוגה מקדימה של האפליקציה תופיע בצד שמאל.
 
-## Nội dung nào được tạo?
+## מה נוצר?
 
-Khi bạn chạy câu lệnh, AI Studio sẽ tạo một ứng dụng hoàn chỉnh. Bạn có thể chọn tạo **ứng dụng web** hoặc **ứng dụng Android gốc** bằng cách sử dụng bộ chọn nền tảng.
+כשמריצים את ההנחיה, AI Studio יוצר אפליקציה מלאה. אתם יכולים לבחור ליצור **אפליקציית אינטרנט** או **אפליקציית נייטיב ל-Android** באמצעות בורר הפלטפורמות.
 
-Đối với **ứng dụng web** (mặc định), AI Studio sẽ tạo một môi trường toàn ngăn xếp bao gồm:
+עבור **אפליקציות אינטרנט** (ברירת מחדל), AI Studio יוצר סביבת פיתוח מלאה שכוללת:
 
-- **Phía máy khách**: giao diện người dùng web (React là giao diện mặc định).
-- **Phía máy chủ**: một thời gian chạy Node.js cho phép thực hiện các lệnh gọi API bảo mật, kết nối cơ sở dữ liệu và sử dụng gói npm.
+- **צד הלקוח**: חזית אתר (React היא ברירת המחדל).
+- **בצד השרת**: סביבת זמן ריצה של Node.js שמאפשרת לבצע קריאות מאובטחות ל-API, חיבורים למסדי נתונים ושימוש בחבילות npm.
 
-Đối với **các ứng dụng Android**, AI Studio tạo một dự án Kotlin và Jetpack Compose mà bạn có thể xem trước trong trình mô phỏng dựa trên trình duyệt, cài đặt trên thiết bị thực và xuất bản lên Cửa hàng Play để kiểm thử. [Tìm hiểu thêm về cách tạo ứng dụng Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=vi).
+במקרה של **אפליקציות ל-Android**,‏ AI Studio יוצר פרויקט Kotlin ו-Jetpack Compose שאפשר לראות אותו בתצוגה מקדימה באמולטור מבוסס-דפדפן, להתקין אותו במכשיר פיזי ולפרסם אותו ב-Play Store לצורך בדיקה. [מידע נוסף על פיתוח אפליקציות ל-Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=he)
 
-Bạn có thể xem mã được tạo bằng cách chọn thẻ **Mã** trong ngăn xem trước bên phải. **Antigravity Agent** quản lý một cách thông minh nhiều tệp trên ngăn xếp của bạn, đảm bảo các thay đổi được truyền tải chính xác.
+כדי לראות את הקוד שנוצר, בוחרים בכרטיסייה **קוד** בחלונית התצוגה המקדימה בצד שמאל. **Antigravity Agent** מנהל בצורה חכמה כמה קבצים בסט הטכנולוגיות שלכם, ומוודא שהשינויים מועברים בצורה נכונה.
 
-### Tác nhân Antigravity
+### סוכן Antigravity
 
-**Antigravity Agent** là chức năng AI chính trong [Google Antigravity](https://antigravity.google?hl=vi) và hiện là các thành phần cốt lõi của bộ công cụ tác nhân, hỗ trợ trải nghiệm Chế độ tạo trong Google AI Studio. Gemini Advanced không chỉ tạo mã đơn giản mà còn duy trì ngữ cảnh của toàn bộ dự án, quản lý nhiều tệp và hiểu các chỉ dẫn phức tạp để tạo các ứng dụng toàn diện, mạnh mẽ.
+**סוכן Antigravity** הוא הפונקציונליות העיקרית של ה-AI ב-[Google Antigravity](https://antigravity.google?hl=he), ועכשיו רכיבי הליבה של פלטפורמת הסוכן מפעילים את חוויית השימוש במצב Build ב-Google AI Studio. הוא לא רק יוצר קוד, אלא גם שומר על ההקשר של הפרויקט כולו, מנהל כמה קבצים ומבין הוראות מורכבות כדי ליצור אפליקציות חזקות ומלאות.
 
-Các chức năng chính bao gồm:
+היכולות העיקריות:
 
-- **Nhận biết bối cảnh**: duy trì bối cảnh của các câu lệnh trước đó và trạng thái tệp.
-- **Quản lý nhiều tệp**: xử lý các phần phụ thuộc trên nhiều tệp.
-- **Thực thi đã xác minh**: xác minh nội dung cập nhật mã để giảm hiện tượng ảo giác.
+- **הבנת ההקשר**: שמירה על ההקשר של הנחיות קודמות ומצבי קבצים.
+- **ניהול של כמה קבצים**: טיפול בתלות בין כמה קבצים.
+- **ביצוע מאומת**: אימות של עדכוני קוד כדי לצמצם הזיות.
 
-## Khả năng full-stack
+## יכולות פול סטאק
 
-Google AI Studio khai thác sức mạnh của hệ sinh thái web hiện đại, cho phép bạn tạo nhiều nguyên mẫu hơn là chỉ nguyên mẫu phía máy khách.
+‫Google AI Studio מאפשר לכם לנצל את היכולות של הסביבה העסקית המודרנית אונליין, ולבנות לא רק אבות טיפוס בצד הלקוח.
 
-- **Thời gian chạy phía máy chủ và npm**: sử dụng thư viện rộng lớn gồm các gói npm. Tác nhân sẽ tự động xác định và cài đặt các gói khi cần cho ứng dụng của bạn (ví dụ: các thư viện cụ thể để trực quan hoá dữ liệu hoặc ứng dụng API). Bạn cũng có thể yêu cầu các gói cụ thể nếu muốn.
-- **Quản lý bí mật**: lưu trữ an toàn các khoá API và bí mật trong trình đơn **Settings** (Cài đặt). Bạn có thể truy cập vào các khoá này trong mã phía máy chủ, giúp bảo vệ chúng khỏi bị lộ ở phía máy khách.
-- **Nhiều người chơi**: xây dựng trải nghiệm cộng tác theo thời gian thực ngay trong AI Studio. Thời gian chạy phía máy chủ quản lý trạng thái và các kết nối cần thiết để người dùng tương tác với nhau.
-- **Firebase Firestore và Xác thực**: tự động cung cấp và thiết lập Firebase, bao gồm cả cơ sở dữ liệu Firestore (lưu trữ dữ liệu liên tục) và Xác thực Firebase (quy trình đăng nhập, cụ thể là "Đăng nhập bằng Google").
-  Tác nhân này xử lý toàn bộ quy trình thiết lập và thậm chí viết mã trong ứng dụng của bạn cho các dịch vụ này.
-- **Tích hợp Google Workspace**: Kết nối ứng dụng của bạn với các API của Google Workspace như Gmail, Trang tính, Tài liệu, Drive, Lịch và nhiều API khác. AI Studio sẽ tự động xử lý mọi cấu hình OAuth.
+- **זמן ריצה בצד השרת ו-npm**: אפשר להשתמש בספרייה הענקית של חבילות npm. הסוכן יזהה ויתקין באופן אוטומטי חבילות לפי הצורך של האפליקציה (לדוגמה, ספריות ספציפיות להצגת נתונים או לקוחות API). אפשר גם לבקש חבילות ספציפיות אם רוצים.
+- **ניהול סודות**: אחסון מאובטח של מפתחות API וסודות בתפריט **הגדרות**. הם נגישים בקוד בצד השרת, ולכן מוגנים מפני חשיפה בצד הלקוח.
+- **משחק מרובה משתתפים**: יצירת חוויות שיתופיות בזמן אמת ישירות ב-AI Studio. זמן הריצה בצד השרת מנהל את המצב והחיבורים שנדרשים כדי שהמשתמשים יוכלו ליצור אינטראקציה ביניהם.
+- ‫**Firebase Firestore ואימות**: הקצאה והגדרה אוטומטיות של Firebase, כולל מסד נתונים של Firestore (אחסון נתונים קבוע) ואימות ב-Firebase (תהליכי כניסה, במיוחד 'כניסה באמצעות חשבון Google').
+  הסוכן מטפל בכל תהליך ההגדרה ואפילו כותב את הקוד באפליקציה שלכם בשביל השירותים האלה.
+- **שילובים עם Google Workspace**: אפשר לקשר את האפליקציה לממשקי API של Google Workspace כמו Gmail,‏ Sheets,‏ Docs,‏ Drive,‏ יומן Google ועוד. ‫AI Studio מטפל בכל ההגדרות של OAuth באופן אוטומטי.
 
-[Tìm hiểu thêm về cách phát triển ứng dụng full-stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=vi)
+[מידע נוסף על פיתוח אפליקציות Full-stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=he)
 
-### Ứng dụng Android
+### אפליקציות ל-Android
 
-Bạn cũng có thể tạo ứng dụng Android gốc bằng Kotlin và Jetpack Compose.
-Xem trước ứng dụng của bạn trong trình mô phỏng Android dựa trên trình duyệt, cài đặt ứng dụng trên một thiết bị thực bằng ADB trong trình duyệt và xuất bản lên Cửa hàng Play để kiểm thử nội bộ.
+אפשר גם ליצור אפליקציות נייטיב ל-Android באמצעות Kotlin ו-Jetpack פיתוח נייטיב.
+אפשר לצפות בתצוגה מקדימה של האפליקציה באמולטור Android מבוסס-דפדפן, להתקין אותה במכשיר פיזי באמצעות ADB בדפדפן ולפרסם אותה בחנות Play לבדיקות פנימיות.
 
-[Tìm hiểu thêm về cách tạo ứng dụng Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=vi)
+[מידע נוסף על פיתוח אפליקציות ל-Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=he)
 
-## Tiếp tục xây dựng
+## המשך בנייה
 
-Sau khi Google AI Studio tạo mã ban đầu cho ứng dụng của bạn, bạn có thể tiếp tục tinh chỉnh mã đó:
+אחרי ש-Google AI Studio יוצר את הקוד הראשוני לאפליקציה, אפשר להמשיך לשפר אותו:
 
-### Tạo trong Google AI Studio
+### פיתוח ב-Google AI Studio
 
-- **Lặp lại với Gemini**: Sử dụng bảng trò chuyện ở **Chế độ tạo** để yêu cầu Gemini sửa đổi, thêm tính năng mới hoặc thay đổi kiểu.
-- **Chỉnh sửa mã trực tiếp**: Mở **thẻ Mã** trong bảng xem trước để chỉnh sửa trực tiếp.
+- **חזרה על פעולות עם Gemini**: משתמשים בחלונית הצ'אט ב**מצב בנייה** כדי לבקש מ-Gemini לבצע שינויים, להוסיף תכונות חדשות או לשנות את הסגנון.
+- **עריכת הקוד ישירות**: פותחים את **הכרטיסייה 'קוד'** בחלונית התצוגה המקדימה כדי לבצע עריכות בזמן אמת.
 
-### Phát triển bên ngoài
+### פיתוח חיצוני
 
-Đối với các quy trình làm việc nâng cao hơn, bạn có thể xuất mã và làm việc trong môi trường mà bạn muốn:
+לתהליכי עבודה מתקדמים יותר, אפשר לייצא את הקוד ולעבוד בסביבה המועדפת:
 
-- **Tải xuống và phát triển cục bộ**: Xuất mã đã tạo dưới dạng **tệp ZIP** rồi nhập mã đó vào trình chỉnh sửa mã của bạn.
-- **Đẩy lên GitHub**: Tích hợp mã với các quy trình phát triển và triển khai hiện có bằng cách đẩy mã đó lên một **kho lưu trữ GitHub**.
+- **הורדה ופיתוח מקומיים**: מייצאים את הקוד שנוצר כ**קובץ ZIP** ומייבאים אותו לעורך הקוד.
+- **העלאה ל-GitHub**: כדי לשלב את הקוד בתהליכי הפיתוח והפריסה הקיימים, אפשר להעלות אותו ל**מאגר ב-GitHub**.
 
-## Các tính năng chính
+## תכונות עיקריות
 
-Google AI Studio có một số tính năng giúp quá trình xây dựng trở nên trực quan và dễ hiểu:
+‫Google AI Studio כולל כמה תכונות שהופכות את תהליך הבנייה לאינטואיטיבי ולויזואלי:
 
-- **Tạo và lặp lại các ứng dụng toàn diện**: Tạo các ứng dụng toàn diện chỉ bằng một câu lệnh và lặp lại thông qua chế độ trò chuyện hoặc **chú thích**. Chế độ chú thích cho phép bạn làm nổi bật mọi phần trên giao diện người dùng của ứng dụng và mô tả thay đổi bạn muốn.
-- **Chia sẻ và triển khai ứng dụng**: Bạn có thể chia sẻ các tác phẩm của mình với người khác để cộng tác hoặc giới thiệu tác phẩm. Khi chia sẻ, các lệnh gọi API sẽ được tính vào hạn mức sử dụng của bạn. Nếu bạn sử dụng các mô hình có tính phí, bạn có thể phải trả phí. Sau đó, khi ứng dụng của bạn đã sẵn sàng, hãy triển khai lên Cloud Run.
-- **Thư viện ứng dụng**: Thư viện ứng dụng cung cấp một thư viện trực quan về các ý tưởng dự án.
-  Bạn có thể khám phá những tính năng của Gemini, xem trước các ứng dụng ngay lập tức và kết hợp chúng để tạo ra ứng dụng của riêng mình.
+- **ליצור אפליקציות פול סטאק ולשפר אותן**: אפשר ליצור אפליקציות פול סטאק רק באמצעות הנחיה ולשפר אותן באמצעות צ'אט או **מצב הערות**. במצב ההערות אפשר להדגיש כל חלק בממשק המשתמש של האפליקציה ולתאר את השינוי הרצוי.
+- **שיתוף האפליקציה ופריסתה**: אתם יכולים לשתף את היצירות שלכם עם אחרים כדי לשתף פעולה או להציג את העבודה שלכם. כשמשתפים, קריאות ה-API נספרות במכסת השימוש. אם משתמשים במודלים בתשלום, יכול להיות שיהיו עלויות. לאחר מכן, כשהאפליקציה מוכנה, פורסים אותה ב-Cloud Run.
+- **גלריית אפליקציות**: גלריית האפליקציות היא ספרייה חזותית של רעיונות לפרויקטים.
+  אתם יכולים לעיין באפשרויות של Gemini, לנסות גרסת טרום-השקה של אפליקציות באופן מיידי ולערוך אותן כדי ליצור אפליקציות משלכם.
 
-## Triển khai hoặc lưu trữ ứng dụng
+## פריסה או העברה לארכיון של האפליקציה
 
-Sau khi ứng dụng đã sẵn sàng, bạn có thể triển khai ứng dụng đó:
+אחרי שהאפליקציה מוכנה, אפשר לפרוס אותה:
 
-- **Cloud Run**: triển khai ứng dụng của bạn dưới dạng một dịch vụ có khả năng mở rộng.
-  Bạn có thể phải trả phí cho [Google Cloud Run](https://cloud.google.com/run?hl=vi) dựa trên mức sử dụng. Để tìm hiểu thêm về quy trình triển khai, hãy xem bài viết [Triển khai từ Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=vi).
-- **GitHub**: xuất dự án của bạn sang kho lưu trữ GitHub.
+- ‫**Cloud Run**: פריסת האפליקציה כשירות שניתן להרחבה.
+  יכול להיות שיחול תמחור על [Google Cloud Run](https://cloud.google.com/run?hl=he) בהתאם לשימוש. מידע נוסף על פריסה זמין במאמר [פריסה מ-Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=he).
+- ‫**GitHub**: ייצוא הפרויקט למאגר ב-GitHub.
 
-## Các điểm hạn chế
+## מגבלות
 
-Phần này liệt kê các hạn chế hiện tại của chế độ tạo trong Google AI Studio.
+בקטע הזה מפורטות ההגבלות הנוכחיות של מצב יצירה ב-Google AI Studio.
 
-### Quản lý khoá API
+### ניהול מפתחות API
 
-Khi bạn tạo một ứng dụng mới sử dụng Gemini API, AI Studio sẽ tự động định cấu hình khoá Gemini API của bạn dưới dạng một bí mật trong môi trường phía máy chủ của ứng dụng.
-Bạn có thể xem và quản lý khoá này trong bảng điều khiển **Bí mật**.
+כשיוצרים אפליקציה חדשה שמשתמשת ב-Gemini API, ‏ AI Studio מגדיר באופן אוטומטי את מפתח Gemini API כסוד בסביבת הצד של השרת של האפליקציה.
+אפשר לראות ולנהל את המפתח הזה בחלונית **Secrets**.
 
-- **Thiết lập tự động**: `GEMINI_API_KEY` được thiết lập cho bạn – bạn không cần định cấu hình theo cách thủ công để bắt đầu tạo.
-- **Chỉ phía máy chủ**: Khoá API được chèn vào thời gian chạy phía máy chủ và không bao giờ được đưa vào mã phía máy khách.
-- **Các ứng dụng hiện có**: Đối với những ứng dụng được tạo trước ngày 14 tháng 5 năm 2026, tác nhân sẽ tự động nâng cấp quy trình tích hợp Gemini API của bạn lên phương pháp phía máy chủ được đề xuất vào lần tiếp theo bạn sửa đổi các tính năng Gemini của ứng dụng.
+- **הגדרה אוטומטית**: המערכת מגדירה את `GEMINI_API_KEY` בשבילכם – לא נדרשת הגדרה ידנית כדי להתחיל לבנות.
+- **בצד השרת בלבד**: מפתחות API מוזרקים לזמן הריצה בצד השרת ואף פעם לא נכללים בקוד בצד הלקוח.
+- **אפליקציות קיימות**: באפליקציות שנוצרו לפני 14 במאי 2026, הסוכן ישדרג אוטומטית את השילוב של Gemini API לגישה המומלצת בצד השרת בפעם הבאה שתשנו את התכונות של Gemini באפליקציה.
 
-### Triển khai bên ngoài Google AI Studio
+### פריסה מחוץ ל-Google AI Studio
 
-- **Cloud Run**: Khi bạn triển khai lên Cloud Run từ AI Studio, khoá API của bạn sẽ được đưa vào một cách an toàn trong môi trường phía máy chủ. Ứng dụng đã triển khai sẽ dùng khoá API của bạn cho tất cả các lệnh gọi Gemini API của người dùng.
-- **Tải tệp ZIP xuống**: Nếu tải ứng dụng xuống dưới dạng tệp ZIP để chạy ở nơi khác, bạn sẽ cần thiết lập biến môi trường `GEMINI_API_KEY` trong môi trường lưu trữ. Vì các lệnh gọi Gemini API của ứng dụng được thực hiện từ mã phía máy chủ, nên khoá này không được hiển thị cho người dùng cuối.
+- ‫**Cloud Run**: כשפורסים ל-Cloud Run מ-AI Studio, מפתח ה-API נכלל בצורה מאובטחת בסביבת צד השרת. האפליקציה שנפרסה תשתמש במפתח ה-API שלכם לכל הקריאות ל-Gemini API של המשתמשים.
+- **הורדה של קובץ ZIP**: אם מורידים את האפליקציה כקובץ ZIP כדי להריץ אותה במקום אחר, צריך להגדיר את `GEMINI_API_KEY`משתנה הסביבה`GEMINI_API_KEY` בסביבת האירוח. מכיוון שהקריאות ל-Gemini API באפליקציה שלך מתבצעות מקוד בצד השרת, המפתח לא נחשף למשתמשי הקצה.
 
-### Lỗi khi chia sẻ ứng dụng
+### שגיאה בשיתוף אפליקציות
 
-Nếu bạn chia sẻ ứng dụng của mình và người dùng cuối gặp phải lỗi **403 Access Restricted** (Truy cập bị hạn chế) khi sử dụng URL được chia sẻ, thì có thể là do một trong những nguyên nhân sau:
+אם שיתפתם את האפליקציה ומשתמש הקצה נתקל בשגיאה **403 הגישה מוגבלת**
+בזמן השימוש בכתובת ה-URL ששותפה, יכול להיות שהסיבה לכך היא אחת מהאפשרויות הבאות:
 
-- **Tiện ích trên trình duyệt**: các tiện ích bảo vệ quyền riêng tư như Privacy Badger có thể đang chặn ứng dụng. Hãy tắt tiện ích này để tránh gặp lỗi.
-- **Vấn đề về bản dựng**: có thể có vấn đề với mã hiện tại. Yêu cầu tác nhân "khắc phục mọi vấn đề về bản dựng bằng mã hiện tại", sau đó chia sẻ lại URL.
+- **תוספים לדפדפן**: יכול להיות שתוספים שקשורים לפרטיות, כמו Privacy Badger, חוסמים את האפליקציה. כדי להימנע מהשגיאה, צריך להשבית את התוסף.
+- **בעיות בבנייה**: יכול להיות שיש בעיות בקוד הנוכחי. מנחים את הסוכן "לתקן בעיות בבנייה של הקוד הנוכחי" ואז משתפים מחדש את כתובת ה-URL.
 
-## Câu hỏi thường gặp
+## שאלות נפוצות
 
-### Build trong AI Studio là gì?
+### מה זה Build ב-AI Studio?
 
-AI Studio Build là một nền tảng được thiết kế để đưa bạn từ một câu lệnh đơn giản đến một ứng dụng dựa trên AI, sẵn sàng phát hành bằng Gemini. Mô tả nội dung bạn muốn tạo bằng một câu lệnh và Gemini sẽ tạo một ứng dụng cho bạn. Bạn cũng có thể khám phá thư viện của chúng tôi để xem những việc có thể làm với Gemini API và phối lại các ứng dụng để tạo ra ứng dụng của riêng mình.
+‫AI Studio Build היא פלטפורמה שנועדה לעזור לכם ליצור אפליקציה מבוססת-AI שמוכנה להפקה באמצעות Gemini, החל מהנחיה פשוטה. מתארים בהנחיה מה רוצים לבנות, ו-Gemini ייצור בשבילכם אפליקציה. אתם יכולים גם לעיין בגלריה שלנו כדי לראות מה אפשר לעשות עם Gemini API, ולשנות אפליקציות כדי להתאים אותן לצרכים שלכם.
 
-### Build xử lý khoá Gemini API của tôi như thế nào?
+### איך Build מטפל במפתח Gemini API שלי?
 
-Khi bạn tạo một ứng dụng sử dụng Gemini API, AI Studio sẽ tự động thiết lập khoá Gemini API của bạn dưới dạng một bí mật phía máy chủ. Các lệnh gọi Gemini API của ứng dụng được thực hiện từ mã phía máy chủ bằng khoá này, vì vậy, khoá này sẽ không bao giờ xuất hiện trong trình duyệt. Bạn có thể xem khoá API trong bảng **Bí mật** trong phần Cài đặt.
+כשיוצרים אפליקציה שמשתמשת ב-Gemini API, ‏ AI Studio מגדיר אוטומטית את מפתח Gemini API כסוד בצד השרת. הקריאות ל-Gemini API של האפליקציה מתבצעות מקוד בצד השרת באמצעות המפתח הזה, ולכן הוא אף פעם לא נחשף בדפדפן. אפשר לראות את מפתח ה-API בחלונית **Secrets** בקטע Settings.
 
-### Khoá API của tôi có bị lộ khi chia sẻ ứng dụng không?
+### האם מפתח ה-API שלי נחשף כשמשתפים אפליקציות?
 
-Không. Khoá API của bạn được lưu trữ dưới dạng một bí mật phía máy chủ và không bao giờ được đưa vào mã phía máy khách. Khi bạn chia sẻ ứng dụng, những người dùng khác có thể sử dụng ứng dụng đó nhưng không thể xem khoá API của bạn.
+לא. מפתח ה-API שלכם מאוחסן כסוד בצד השרת, ואף פעם לא נכלל בקוד בצד הלקוח. כשמשתפים את האפליקציה, משתמשים אחרים יכולים להשתמש בה, אבל הם לא יכולים לראות את מפתח ה-API.
 
-Khi bạn chia sẻ ứng dụng của mình với người khác, các lệnh gọi API sẽ được tính vào hạn mức sử dụng của bạn.
-Nếu bạn sử dụng các mô hình có tính phí, bạn có thể phải trả phí. AI Studio sẽ thông báo cho bạn trong quá trình thiết lập và trước khi bạn chia sẻ nếu ứng dụng của bạn có thể phát sinh chi phí.
+כשמשתפים את האפליקציות עם אחרים, קריאות ה-API נספרות במכסת השימוש.
+אם משתמשים במודלים בתשלום, יכול להיות שיהיו עלויות. במהלך ההגדרה ולפני השיתוף, תקבלו ב-AI Studio הודעה מראש אם השימוש באפליקציה עלול להיות כרוך בעלויות.
 
-### Những người có thể thấy ứng dụng của tôi
+### מי יכול לראות את האפליקציות שלי?
 
-Theo mặc định, ứng dụng của bạn sẽ ở chế độ riêng tư. Bạn có thể chia sẻ ứng dụng của mình với những người dùng khác để cho phép họ sử dụng ứng dụng đó. Những người dùng mà bạn chia sẻ ứng dụng có thể xem mã của ứng dụng và phân nhánh mã đó cho mục đích riêng của họ. Nếu bạn chia sẻ ứng dụng của mình với quyền chỉnh sửa, thì những người dùng khác có thể chỉnh sửa mã của ứng dụng.
+כברירת מחדל, האפליקציה שלכם פרטית. אתם יכולים לשתף את האפליקציה עם משתמשים אחרים כדי לאפשר להם להשתמש בה. משתמשים ששיתפתם איתם את האפליקציה יכולים לראות את הקוד שלה ולבצע פיצול (fork) כדי להשתמש בו למטרות שלהם. אם משתפים את האפליקציה עם הרשאת עריכה, משתמשים אחרים יכולים לערוך את הקוד של האפליקציה.
 
-### Tôi có thể chạy các ứng dụng bên ngoài AI Studio không?
+### האם אפשר להריץ אפליקציות מחוץ ל-AI Studio?
 
-Có. Bạn có thể triển khai ứng dụng của mình lên [Cloud Run](https://cloud.google.com/run?hl=vi) từ AI Studio. Việc này sẽ cung cấp cho ứng dụng của bạn một URL công khai với khoá API được định cấu hình an toàn trong môi trường phía máy chủ. Bạn cũng có thể tải ứng dụng xuống dưới dạng tệp ZIP và lưu trữ ở nơi khác. Bạn sẽ cần đặt biến môi trường `GEMINI_API_KEY` trong môi trường lưu trữ của mình. Vì các lệnh gọi Gemini API được thực hiện từ mã phía máy chủ, nên khoá của bạn vẫn an toàn.
+כן. אפשר לפרוס את האפליקציה ב-[Cloud Run](https://cloud.google.com/run?hl=he) מ-AI Studio. כך האפליקציה מקבלת כתובת URL ציבורית עם מפתח ה-API שהוגדר בצורה מאובטחת בסביבת הצד של השרת. אפשר גם להוריד את האפליקציה כקובץ ZIP ולארח אותה במקום אחר. במקרה כזה, צריך להגדיר את משתנה הסביבה `GEMINI_API_KEY` בסביבת האירוח. מכיוון שקריאות ל-Gemini API מתבצעות מקוד בצד השרת, המפתח שלכם נשאר מאובטח.
 
-Để tìm hiểu thêm về các lựa chọn triển khai, hãy xem phần [Triển khai từ Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=vi).
+מידע נוסף על אפשרויות הפריסה זמין במאמר [פריסה מ-Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=he).
 
-### Tôi có thể phát triển ứng dụng trên thiết bị của mình bằng các công cụ riêng rồi chia sẻ chúng tại đây không?
+### האם אפשר לפתח אפליקציות באופן מקומי באמצעות כלים משלי ולשתף אותן כאן?
 
-Chức năng này hiện chưa hoạt động. Chúng tôi rất vui khi có thể hỗ trợ nhiều trường hợp sử dụng hơn cho các ứng dụng trong tương lai. Vui lòng cân nhắc gửi ý kiến phản hồi cho chúng tôi nếu bạn có ý tưởng cụ thể.
+האפשרות הזו עדיין לא זמינה. אנחנו שמחים לתמוך בעוד תרחישי שימוש באפליקציות בעתיד. אם יש לך משוב ספציפי, נשמח לקבל אותו.
 
-### Làm cách nào để sử dụng cơ sở dữ liệu hoặc bộ nhớ khác với các ứng dụng của tôi?
+### איך אפשר להשתמש במסד נתונים או באחסון אחר באפליקציות שלי?
 
-Các ứng dụng AI Studio là những ứng dụng tiêu chuẩn chạy trong một vùng chứa Cloud Run. Bạn có thể sử dụng bất kỳ giải pháp lưu trữ nào mà bạn có thể kết nối qua mạng, miễn là không có tường lửa ngăn chặn quyền truy cập từ dải IP động.
+אפליקציות AI Studio הן אפליקציות רגילות שפועלות בקונטיינר Cloud Run. אתם יכולים להשתמש בכל פתרון אחסון שאפשר להתחבר אליו דרך רשת, כל עוד אין חומת אש שמונעת גישה מטווח דינמי של כתובות IP.
 
-Chúng tôi đang nỗ lực bổ sung tính năng hỗ trợ trực tiếp cho bộ nhớ trong tương lai. Bạn sẽ có thể định cấu hình bộ nhớ trực tiếp trong AI Studio.
+אנחנו עובדים על הוספת תמיכה ישירה באחסון בעתיד, ותוכלו להגדיר את האחסון ישירות ב-AI Studio.
 
-### Làm cách nào để truy cập vào micrô, webcam và các API Navigator khác?
+### איך אפשר לגשת למיקרופון, למצלמת האינטרנט ולממשקי API אחרים של Navigator?
 
-Để đảm bảo người xem biết về việc một ứng dụng sử dụng webcam hoặc các thiết bị khác của họ, chúng tôi yêu cầu họ xác nhận thêm trước khi ứng dụng có thể truy cập vào [các API Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) này.
-Nhà sáng tạo ứng dụng có thể thêm các yêu cầu cấp quyền này vào tệp `metadata.json` của ứng dụng. Ví dụ:
+כדי לוודא שהצופים מודעים לשימוש של האפליקציה במצלמת האינטרנט או במכשירים אחרים שלהם, אנחנו דורשים אישור נוסף לפני שהאפליקציה מקבלת גישה ל[ממשקי ה-API של Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator).
+יוצרי אפליקציות יכולים להוסיף את בקשות ההרשאה האלה לקובץ `metadata.json` של האפליקציה שלהם. לדוגמה:
 
 ```
 {
@@ -190,57 +191,57 @@ Nhà sáng tạo ứng dụng có thể thêm các yêu cầu cấp quyền này
 }
 ```
 
-Các giá trị được hỗ trợ cho `requestFramePermissions` là một phần trong số các [tính năng tiêu chuẩn chịu sự kiểm soát của chính sách](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
+הערכים הנתמכים של `requestFramePermissions` הם קבוצת משנה של [התכונות הרגילות שמבוקרות על ידי מדיניות](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
 
-### Làm cách nào để sử dụng GitHub với các ứng dụng của tôi?
+### איך אפשר להשתמש ב-GitHub עם האפליקציות שלי?
 
-Tính năng tích hợp GitHub của AI Studio cho phép bạn nhập một dự án hiện có từ GitHub để bắt đầu tạo hoặc xuất dự án sang một kho lưu trữ GitHub và xác nhận các thay đổi mới nhất.
+השילוב של GitHub ב-AI Studio מאפשר לכם לייבא פרויקט קיים מ-GitHub כדי להתחיל לפתח, או לייצא את הפרויקט למאגר ב-GitHub ולבצע קומיט של השינויים האחרונים.
 
-### Tôi có thể cấp cho người dùng khác quyền chỉnh sửa ứng dụng của tôi không?
+### האם אפשר לתת למשתמשים אחרים גישת עריכה לאפליקציה שלי?
 
-Tính năng này hiện chưa được hỗ trợ nhưng sẽ sớm ra mắt.
+האפשרות הזו עדיין לא נתמכת, אבל היא תהיה זמינה בקרוב.
 
-### Tại sao ứng dụng của tôi bị gắn cờ do vi phạm chính sách?
+### למה האפליקציה שלי סומנה בגלל הפרת מדיניות?
 
-Chúng tôi có các hệ thống tự động xem xét ứng dụng để đảm bảo ứng dụng tuân thủ chính sách của chúng tôi. Nếu chúng tôi phát hiện thấy một ứng dụng vi phạm chính sách của chúng tôi, thì ứng dụng đó sẽ bị xoá khỏi AI Studio. Các lỗi vi phạm chính sách có thể bao gồm nhưng không giới hạn ở những lỗi sau:
+יש לנו מערכות שבודקות אפליקציות באופן אוטומטי כדי לוודא שהן עומדות בדרישות המדיניות שלנו. אם נגלה שאפליקציה מפרה את כללי המדיניות שלנו, נסיר אותה מ-AI Studio. הפרות מדיניות יכולות לכלול, בין היתר:
 
-- Ứng dụng chứa phần mềm độc hại, nội dung lừa đảo hoặc mạo danh
-- Ứng dụng hiển thị hoặc phát tán nội dung vi phạm chính sách về hình ảnh xâm hại tình dục trẻ em
-- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về hành vi quấy rối
-- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về lời nói hận thù
-- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về buôn người
-- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về nội dung khiêu dâm
-- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về bạo lực và cảnh đẫm máu
-- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về nội dung gây hại hoặc nguy hiểm
+- אפליקציות שמכילות תוכנות זדוניות, פישינג או התחזות
+- אפליקציות שמציגות או מפיצות תוכן שמפר את המדיניות בנושא תוכן ויזואלי של התעללות מינית בילדים
+- אפליקציות שמציגות או מפיצות תוכן שמפר את המדיניות בנושא הטרדה
+- אפליקציות שמציגות או מפיצות תוכן שמפר את המדיניות בנושא דברי שטנה
+- אפליקציות שמציגות או מפיצות תוכן שמפר את המדיניות בנושא סחר בבני אדם
+- אפליקציות שמציגות או מפיצות תוכן שמפר את המדיניות בנושא תוכן מיני בוטה
+- אפליקציות שמציגות או מפיצות תוכן שמפר את המדיניות בנושא אלימות ותוכן עקוב מדם
+- אפליקציות שמציגות או מפיצות תוכן שמפר את המדיניות בנושא תוכן מזיק או מסוכן
 
-Nếu ứng dụng của bạn bị gắn cờ do vi phạm chính sách và bạn cho rằng đó là do nhầm lẫn, thì bạn có thể gửi đơn kháng nghị. Việc nhiều lần vi phạm chính sách của chúng tôi có thể khiến bạn bị chấm dứt quyền truy cập vào AI Studio.
+אם האפליקציה שלכם סומנה בגלל הפרת מדיניות, ולדעתכם מדובר בשגיאה, אתם יכולים לשלוח ערעור. הפרות חוזרות של כללי המדיניות שלנו עלולות להוביל לביטול הגישה שלכם ל-AI Studio.
 
-### Tôi có trách nhiệm gì với tư cách là nhà phát triển ứng dụng?
+### מה האחריות שלי כמפתח אפליקציות?
 
-Xin lưu ý rằng, với tư cách là chủ sở hữu ứng dụng, bạn chịu trách nhiệm về hành vi của ứng dụng và mọi dữ liệu mà ứng dụng xử lý. Nội dung như vậy bao gồm:
+חשוב לזכור: בתור הבעלים של האפליקציה, אתם אחראים להתנהגות שלה ולכל הנתונים שהיא מטפלת בהם. למשל:
 
-- **Tuân thủ pháp luật và tôn trọng quyền của bên thứ ba:** Đảm bảo ứng dụng của bạn tuân thủ tất cả luật và quy định hiện hành, đồng thời không vi phạm quyền của người khác, bao gồm cả quyền sở hữu trí tuệ và quyền riêng tư.
-- **Giám sát nội dung:** Việc tuân thủ các điều khoản bổ sung có thể áp dụng cho các dịch vụ khác mà ứng dụng của bạn sử dụng. Ví dụ: [Điều khoản dịch vụ của Google Cloud](https://cloud.google.com/terms?hl=vi) (áp dụng cho Firestore) yêu cầu những khách hàng lưu trữ nội dung của bên thứ ba phải xuất bản các chính sách xác định nội dung bị cấm (ví dụ: nội dung bất hợp pháp) và giám sát sự xuất hiện của nội dung bất hợp pháp đó.
-- **Triển khai an toàn:** Triển khai các biện pháp bảo vệ và công cụ kiểm duyệt cần thiết để ngăn chặn việc sử dụng sai mục đích ứng dụng của bạn.
+- **תאימות לחוק וזכויות צד שלישי:** חשוב לוודא שהאפליקציה תואמת לכל החוקים והתקנות הרלוונטיים, ולא מפרה את הזכויות של אחרים, כולל זכויות קניין רוחני וזכויות לפרטיות.
+- **מעקב אחרי תוכן:** יכול להיות שחובות ציות לתנאים נוספים יחולו על שירותים אחרים שבהם נעשה שימוש באפליקציה שלכם. לדוגמה, [התנאים וההגבלות של Google Cloud](https://cloud.google.com/terms?hl=he), שחלים על Firestore, מחייבים לקוחות שמארחים תוכן של צד שלישי לפרסם מדיניות שמגדירה איזה תוכן אסור (למשל, תוכן לא חוקי) ולעקוב אחרי נוכחות של תוכן לא חוקי כזה.
+- **הטמעה בטוחה:** הטמעה של אמצעי ההגנה וכלי הפיקוח הנדרשים כדי למנוע שימוש לרעה באפליקציה.
 
-Lưu ý [các hạn chế về việc sử dụng](https://ai.google.dev/gemini-api/terms?hl=vi#use-restrictions) trong Điều khoản dịch vụ.
+חשוב להכיר את [הגבלות השימוש](https://ai.google.dev/gemini-api/terms?hl=he#use-restrictions) שמופיעות בתנאים ובהגבלות.
 
-### Những điều khoản nào áp dụng cho các ứng dụng trong thư viện ứng dụng của AI Studio?
+### אילו תנאים חלים על אפליקציות בגלריית האפליקציות ב-AI Studio?
 
-[Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi) áp dụng cho việc sử dụng các ứng dụng xuất hiện trong thư viện ứng dụng của AI Studio, trừ phi có quy định khác.
+השימוש באפליקציות שמוצגות בגלריית האפליקציות ב-AI Studio כפוף [לתנאים ולהגבלות הנוספים של Gemini API](https://ai.google.dev/gemini-api/terms?hl=he), אלא אם צוין אחרת.
 
-## Bước tiếp theo
+## המאמרים הבאים
 
-- [Phát triển ứng dụng Full-Stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=vi) (web)
-- [Tạo ứng dụng Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=vi)
-- Xem các ví dụ trong [Thư viện ứng dụng](https://aistudio.google.com/apps?source=showcase&hl=vi).
+- [פיתוח אפליקציות פול סטאק](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=he) (אינטרנט)
+- [פיתוח אפליקציות ל-Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=he)
+- אפשר לראות דוגמאות ב[גלריית האפליקציות](https://aistudio.google.com/apps?source=showcase&hl=he).
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Cập nhật lần gần đây nhất: 2026-07-14 UTC.
+עדכון אחרון: 2026-07-14 (שעון UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+רוצה לתת לנו משוב?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-14 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-14 (שעון UTC)."],[],[]]

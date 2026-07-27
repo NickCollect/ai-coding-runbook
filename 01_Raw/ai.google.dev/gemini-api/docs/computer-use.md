@@ -1,39 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-TW
-fetched_at: 2026-07-20T04:40:43.930652+00:00
-title: "\u96fb\u8166\u4f7f\u7528 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/computer-use?hl=he
+fetched_at: 2026-07-27T04:46:49.397639+00:00
+title: "\u05e9\u05d9\u05de\u05d5\u05e9 \u05d1\u05de\u05d7\u05e9\u05d1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-提供意見
+שליחת משוב
 
-# 電腦使用
+# שימוש במחשב
 
-您可以使用電腦工具建構瀏覽器、行動裝置和電腦控制代理，與這些裝置互動並自動執行工作。模型可以透過螢幕截圖「看到」電腦畫面，並透過產生特定 UI 動作 (例如滑鼠點選和鍵盤輸入)「採取行動」。與函式呼叫類似，您需要實作用戶端執行環境，才能接收及執行電腦使用動作。
+הכלי 'שימוש במחשב' מאפשר לכם לבנות סוכני בקרה לדפדפן, לנייד ולמחשב, שמבצעים אינטראקציות ומשימות אוטומטיות. באמצעות צילומי מסך, המודל יכול "לראות" מסך מחשב ו "לפעול" על ידי יצירת פעולות ספציפיות בממשק המשתמש, כמו קליקים בעכבר וקלט מהמקלדת. בדומה לקריאה לפונקציה, תצטרכו להטמיע את סביבת ההפעלה בצד הלקוח כדי לקבל ולהפעיל את הפעולות של השימוש במחשב.
 
-Gemini 3.5 Flash 是建議用於電腦用途的模型，並推出多項新功能：
+רשימת המודלים הנתמכים מופיעה במאמר [גרסאות של מודלים](#model-versions). מודלים של Gemini 3.x תומכים בכמה יכולות מתקדמות:
 
-- **支援多種環境：**為[瀏覽器、行動裝置和電腦](#supported-environments)環境建構代理程式。
-- **簡化意圖動作：**動作包含 `intent` 欄位，說明模型在每個步驟背後的推理過程。
-- **可設定的安全政策：**透過內建政策類別和覆寫功能，微調[安全行為](#safety-policies)。
-- **提示詞注入偵測：**選擇啟用[螢幕截圖掃描](#prompt-injection)功能，偵測隱藏的惡意指令。
+- **תמיכה בסביבות מרובות:** אפשר ליצור סוכנים לסביבות [דפדפן, נייד ומחשב](#supported-environments).
+- **פעולות יעילות עם כוונות:** הפעולות כוללות שדה `intent` שמסביר את ההיגיון של המודל מאחורי כל שלב.
+- **מדיניות בטיחות שאפשר להגדיר:** אפשר לשנות את [התנהגות הבטיחות](#safety-policies) באמצעות קטגוריות מדיניות מובנות ושינויים בהגדרות ברירת המחדל.
+- **זיהוי הזרקת הנחיות:** הפעלה של [סריקת צילומי מסך](#prompt-injection) כדי לזהות הוראות נסתרות של יריבים.
 
-透過電腦使用功能，您可以建構具備下列功能的代理程式：
+באמצעות 'שימוש במחשב', אפשר ליצור סוכנים ש:
 
-- 自動在網站上輸入重複資料或填寫表單。
-- 對網頁應用程式和使用者流程執行自動化測試
-- 在各種網站上進行研究 (例如從電子商務網站收集產品資訊、價格和評論，做為購買決策的參考依據)
+- להפוך לאוטומטית משימות חוזרות של הזנת נתונים או מילוי טפסים באתרים.
+- ביצוע בדיקות אוטומטיות של אפליקציות אינטרנט ותהליכי משתמש
+- ביצוע מחקר באתרים שונים (למשל, איסוף מידע על מוצרים, מחירים וביקורות מאתרי מסחר אלקטרוני כדי לקבל החלטה לגבי רכישה)
 
-以下是初始化用戶端，並在啟用瀏覽器環境的 `computer_use` 工具後，將提示傳送至模型的最簡單範例：
+הנה דוגמה מינימלית לאתחול הלקוח ושליחת הנחיה למודל עם הכלי `computer_use` שמופעל בסביבת דפדפן:
 
 ### Python
 
@@ -43,7 +43,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Search for 'Gemini API' on Google.",
     tools=[{"type": "computer_use", "environment": "browser"}]
 )
@@ -59,7 +59,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const interaction = await ai.interactions.create({
-  model: 'gemini-3.5-flash',
+  model: 'gemini-3.6-flash',
   input: "Search for 'Gemini API' on Google.",
   tools: [{ type: "computer_use", environment: "browser" }]
 });
@@ -67,44 +67,46 @@ const interaction = await ai.interactions.create({
 console.log(interaction);
 ```
 
-## 電腦使用記錄的運作方式
+## איך פועלת התכונה 'שימוש במחשב'
 
-如要使用電腦使用模型建構代理程式，您需要在應用程式和 API 之間設定連續迴圈。以下說明程式碼在每個步驟中的作用：
+כדי ליצור סוכן באמצעות מודל השימוש במחשב, צריך להגדיר לולאה רציפה בין האפליקציה לבין ה-API. מה הקוד יעשה בכל שלב:
 
-1. [**向模型傳送要求**](#send-request)
-   - 應用程式會傳送 API 要求，其中包含電腦使用工具、設定 (例如目標環境)、使用者提示和目前畫面的螢幕截圖。
-2. [**接收模型回應**](#model-response)
-   - 模型會分析畫面和提示，然後傳回回應，包括代表 UI 動作的建議 `function_call` (例如點選、捲動或按鍵)。
-   - 如果是 **Gemini 3.5 Flash**，回應中也會包含推論 `intent`，說明模型選擇該動作的原因。
-   - 回覆內容也可能包含`safety_decision`，這是內部安全系統對動作的分類結果，分為一般/允許、`require_confirmation` (需要使用者核准) 或封鎖。
-3. [**執行收到的動作**](#execute-actions)
-   - 如果允許執行動作 (或使用者確認)，用戶端程式碼會剖析 `function_call`、調整標準化座標的比例以符合檢視區塊，並使用自動化工具 (例如 Playwright) 在目標環境中執行動作。如果動作遭到封鎖，用戶端應停止執行或處理中斷情形。
-4. [**擷取新環境狀態**](#capture-state)
-   - 動作執行完畢後，應用程式會擷取新的螢幕截圖，並透過 `function_result` 將其傳回模型，要求執行下一個步驟。
+1. [**שליחת בקשה למודל**](#send-request)
+   - האפליקציה שולחת בקשת API שמכילה את הכלי לשימוש במחשב, את הגדרות התצורה (כמו סביבת היעד), את ההנחיה של המשתמש וצילום מסך של המסך הנוכחי.
+2. [**קבלת התשובה של המודל**](#model-response)
+   - המודל מנתח את המסך ואת ההנחיה ומחזיר תשובה שכוללת `function_call` שמייצג פעולה בממשק המשתמש (כמו לחיצה, גלילה או הקשה על מקש).
+   - ב**מודלים של Gemini 3.x**, התשובה כוללת גם הסבר `intent`
+     למה המודל בחר בפעולה הזו.
+   - התגובה עשויה לכלול גם `safety_decision` ממערכת בטיחות פנימית שמסווגת את הפעולה כרגילה/מותרת, `require_confirmation` (נדרש אישור משתמש) או חסומה.
+3. [**מבצעים את הפעולה שהתקבלה**](#execute-actions)
+   - אם הפעולה מותרת (או שהמשתמש מאשר אותה), הקוד בצד הלקוח מנתח את `function_call`, משנה את קנה המידה של הקואורדינטות המנורמלות כך שיתאימו לאזור התצוגה, ומבצע את הפעולה בסביבת היעד באמצעות כלי אוטומציה (כמו Playwright). אם הפעולה חסומה, הלקוח צריך להפסיק את ההפעלה או לטפל בהפרעה.
+4. [**תיעוד המצב של הסביבה החדשה**](#capture-state)
+   - אחרי שהפעולה מסתיימת, האפליקציה מצלמת צילום מסך חדש ושולחת אותו בחזרה למודל ב-`function_result` כדי לבקש את השלב הבא.
 
-接著，這個程序會從步驟 2 開始重複執行，持續向模型索取下一個動作，直到工作完成或終止為止。
+התהליך הזה חוזר על עצמו משלב 2, והמודל מתבקש שוב ושוב לבצע את הפעולה הבאה עד שהמשימה מסתיימת או שהתהליך מופסק.
 
-![電腦使用總覽](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=zh-tw)
+![סקירה כללית על שימוש במחשב](https://ai.google.dev/static/gemini-api/docs/images/computer_use.png?hl=he)
 
-## 如何實作電腦使用
+## איך מטמיעים את התכונה 'שימוש במחשב'
 
-使用電腦用途工具建構內容前，請先設定：
+לפני שמתחילים להשתמש בכלי 'שימוש במחשב', צריך להגדיר:
 
-- **安全執行環境：**在沙箱 VM 或容器中執行代理程式，與主機系統隔離，並限制潛在影響。[參考實作](https://github.com/google/computer-use-preview/)包含可直接使用的 Docker 型沙箱，方便您踏出第一步。
-- **用戶端動作處理常式：**實作用戶端邏輯，執行座標、輸入文字及擷取螢幕截圖。
+- **סביבת ביצוע מאובטחת:** מריצים את הסוכן במכונה וירטואלית או במאגר מבודד כדי לבודד אותו ממערכת המארח ולהגביל את ההשפעה הפוטנציאלית שלו.
+  [הטמעה לדוגמה](https://github.com/google/computer-use-preview/) כוללת ארגז חול מבוסס Docker שמוכן לשימוש, ואפשר להשתמש בו כנקודת התחלה.
+- **הנדלר של פעולות מצד הלקוח:** הטמעת לוגיקה מצד הלקוח כדי להפעיל קואורדינטות, להקליד טקסט ולצלם צילומי מסך.
 
-下列範例使用網頁瀏覽器做為執行環境，並以 [Playwright](https://playwright.dev/) 做為用戶端處理常式。
+בדוגמאות שבהמשך נעשה שימוש בדפדפן אינטרנט כסביבת ההפעלה וב-[Playwright](https://playwright.dev/) כמטפל בצד הלקוח.
 
-### 0：設定 Playwright
+### ‫0. הגדרת Playwright
 
-首先，請安裝必要套件：
+קודם כול, מתקינים את החבילות הנדרשות:
 
 ```
 pip install google-genai playwright
 playwright install chromium
 ```
 
-接著，初始化要用於執行的 Playwright 瀏覽器例項：
+לאחר מכן, מאתחלים מופע של דפדפן Playwright לשימוש בהרצה:
 
 ```
 from playwright.sync_api import sync_playwright
@@ -132,15 +134,15 @@ page.goto("https://www.google.com")
 # will be used in the steps below.
 ```
 
-### 1. 向模型傳送要求
+### 1. שליחת בקשה למודל
 
-初始化用戶端程式庫，並設定電腦使用工具。請注意，發出要求時不必指定螢幕大小，模型會預測縮放至螢幕高度和寬度的像素座標。
+מאתחלים את ספריית הלקוח ומגדירים את הכלי 'שימוש במחשב'. שימו לב: אין צורך לציין את גודל התצוגה כששולחים בקשה. המודל חוזה את קואורדינטות הפיקסלים שמותאמות לגובה ולרוחב של המסך.
 
-### Gemini 3.5 Flash (建議)
+### ‫Gemini 3.x
 
 ### Python
 
-使用 `google-genai` Python SDK (版本 `2.7.0` 以上) 設定以瀏覽器環境為目標的請求：
+משתמשים ב-`google-genai` Python SDK (גרסה `2.7.0` ואילך) כדי להגדיר בקשה לטירגוט סביבת הדפדפן:
 
 ```
 from google import genai
@@ -148,7 +150,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     input="Find a flight from SF to Hawaii on Jun 30th, coming back on Jul 6th",
     tools=[
         {
@@ -164,7 +166,7 @@ print(interaction)
 
 ### JavaScript
 
-使用 `@google/genai` Node.js SDK 設定以瀏覽器環境為目標的請求：
+משתמשים ב-Node.js SDK‏ `@google/genai` כדי להגדיר בקשה שמטרגטת את סביבת הדפדפן:
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -172,7 +174,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const interaction = await ai.interactions.create({
-  model: 'gemini-3.5-flash',
+  model: 'gemini-3.6-flash',
   input: "Find a flight from SF to Hawaii on Jun 30th, coming back on Jul 6th",
   tools: [
     {
@@ -188,7 +190,7 @@ console.log(interaction);
 
 ### REST
 
-使用 curl 傳送要求：
+משתמשים ב-curl כדי לשלוח בקשה:
 
 ```
 curl -X POST \
@@ -196,7 +198,7 @@ curl -X POST \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Find me a flight from SF to Hawaii on Jun 30th, coming back on Jul 6th. Start by navigating directly to flights.google.com",
     "tools": [
       {
@@ -208,7 +210,7 @@ curl -X POST \
   }'
 ```
 
-### Gemini 2.5 (舊版)
+### ‫Gemini 2.5 (גרסה מדור קודם)
 
 ### Python
 
@@ -260,11 +262,11 @@ const interaction = await ai.interactions.create({
 console.log(interaction);
 ```
 
-### 2. 接收模型回覆
+### 2. קבלת התשובה מהמודל
 
-回應模型會建議呼叫函式。如果是 **Gemini 3.5 Flash**，回覆內容會包含量身打造的推論意圖和座標。以下範例顯示這兩種回應：
+מודל התגובה מציע קריאה לפונקציה. ב**מודלים של Gemini 3.x**, התשובה מכילה כוונת חשיבה רציונלית מותאמת אישית לצד קואורדינטות. בדוגמאות הבאות אפשר לראות את שתי התגובות:
 
-### Gemini 3.5 Flash
+### ‫Gemini 3.x
 
 ```
 {
@@ -282,7 +284,7 @@ console.log(interaction);
 }
 ```
 
-### Gemini 2.5 (舊版)
+### ‫Gemini 2.5 (גרסה מדור קודם)
 
 ```
 {
@@ -310,11 +312,11 @@ console.log(interaction);
 }
 ```
 
-### 3. 執行收到的動作
+### 3. ביצוע הפעולות שהתקבלו
 
-應用程式必須剖析回應座標、執行動作，並從標準化的 1000x1000 座標調整大小。
+האפליקציה צריכה לנתח את קואורדינטות התגובה, לבצע את הפעולה ולשנות את קנה המידה שלהן מקואורדינטות נורמליות של 1,000x1,000.
 
-下方程式碼會同時處理舊版工具指令 (`click_at`、`type_text_at`) 和 Gemini 3.5 Flash 簡化指令 (`click`、`type`)。
+הקוד שלמטה מטפל גם בפקודות של כלי מדור קודם (`click_at`, `type_text_at`) וגם בפקודות מודרניות יעילות (`click`, `type`).
 
 ### Python
 
@@ -479,9 +481,9 @@ async function executeFunctionCalls(interaction, page, screenWidth, screenHeight
 }
 ```
 
-### 4. 擷取新環境狀態
+### 4. תיעוד מצב הסביבה החדש
 
-執行動作後，將函式執行結果傳回模型，模型就能使用這項資訊生成下一個動作。如果執行多個動作 (平行呼叫)，您必須在後續使用者回合中，針對每個動作傳送 `function_result`。
+אחרי שמבצעים את הפעולות, שולחים את התוצאה של הפעלת הפונקציה בחזרה למודל כדי שהוא יוכל להשתמש במידע הזה כדי ליצור את הפעולה הבאה. אם בוצעו כמה פעולות (קריאות מקבילות), צריך לשלוח `function_result` לכל אחת מהן בתור הבא של המשתמש.
 
 ### Python
 
@@ -544,13 +546,14 @@ async function getFunctionResponses(page, results) {
 }
 ```
 
-定義如何擷取及格式化環境狀態後，您就可以將所有這些步驟合併為持續執行迴圈。
+אחרי שמגדירים איך ללכוד ולעצב את מצב הסביבה, אפשר לשלב את כל השלבים האלה בלולאת ביצוע רציפה.
 
-## 建構代理迴圈
+## יצירת לופ של סוכן
 
-如要啟用多步驟互動，請將「如何實作電腦使用」一節中的四個步驟合併為單一迴圈。這個迴圈會持續要求動作，並將結果回饋給模型，直到工作完成為止。
+כדי להפעיל אינטראקציות מרובות שלבים, משלבים את ארבעת השלבים מהקטע [איך מטמיעים את התכונה 'שימוש במחשב'](#implement-computer-use) בלולאה אחת.
+הלולאה הזו ממשיכה לבקש פעולות ולהעביר את התוצאות בחזרה למודל עד שהמשימה מסתיימת.
 
-請務必在每個步驟中，將模型回覆和函式回覆附加至記錄，正確管理對話記錄。
+חשוב לזכור לנהל את היסטוריית השיחות בצורה נכונה על ידי הוספת התשובות של המודל והתשובות של הפונקציה להיסטוריה בכל שלב.
 
 ### Python
 
@@ -591,7 +594,7 @@ try:
 
     # First interaction
     interaction = client.interactions.create(
-        model='gemini-3.5-flash',
+        model='gemini-3.6-flash',
         input=[
             {"type": "text", "text": USER_PROMPT},
             {"type": "image", "data": base64.b64encode(initial_screenshot).decode("utf-8"), "mime_type": "image/png"}
@@ -628,7 +631,7 @@ try:
 
         # Continue conversation with function responses
         interaction = client.interactions.create(
-            model='gemini-3.5-flash',
+            model='gemini-3.6-flash',
             previous_interaction_id=interaction.id,
             input=function_responses,
             tools=[{
@@ -682,7 +685,7 @@ try {
 
     // First interaction
     let interaction = await ai.interactions.create({
-        model: 'gemini-3.5-flash',
+        model: 'gemini-3.6-flash',
         input: [
             { type: 'text', text: USER_PROMPT },
             { type: 'image', data: initialScreenshotBase64, mime_type: 'image/png' }
@@ -723,7 +726,7 @@ try {
 
         // Continue conversation with function responses
         interaction = await ai.interactions.create({
-            model: 'gemini-3.5-flash',
+            model: 'gemini-3.6-flash',
             previous_interaction_id: interaction.id,
             input: functionResponses,
             tools: [{
@@ -740,107 +743,107 @@ try {
 }
 ```
 
-## 支援的環境 (Gemini 3.5 Flash)
+## סביבות נתמכות (Gemini 3.x)
 
-Gemini 3.5 Flash 支援 `computer_use` 設定中指定的三種環境：
+מודלים של Gemini 3.x תומכים בשלוש סביבות שמוגדרות ב`computer_use`הגדרות:
 
-### 瀏覽器環境 (`ENVIRONMENT_BROWSER`)
+### סביבת הדפדפן (`ENVIRONMENT_BROWSER`)
 
-瀏覽器工具可執行的動作：
+הפעולות הזמינות בכלי הדפדפן:
 
-| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
+| שם הפקודה | תיאור | ארגומנטים (בבקשה להפעלת פונקציה) |
 | --- | --- | --- |
-| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **double\_click** | 在座標上按兩下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **triple\_click** | 在座標上按三下滑鼠。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **middle\_click** | 在座標上按中間鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **right\_click** | 在座標上按一下滑鼠右鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **mouse\_down** | 在座標位置按住滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **mouse\_up** | 在座標處放開滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **移動** | 將游標移至指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
-| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
-| **wait** | 暫停執行指定的秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
-| **press\_key** | 按下並放開指定鍵。 | `key`：str `intent`：str |
-| **key\_down** | 按下並按住指定鍵。 | `key`：str `intent`：str |
-| **key\_up** | 釋放指定鍵。 | `key`：str `intent`：str |
-| **快速鍵** | 按下指定的按鍵組合。 | `keys`：`List[str]` `intent`：`str` |
-| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
-| **scroll** | 以像素距離在座標上下左右捲動。 | `y`：int (0 到 999) `x`：int (0 到 999) `direction`：str (`"up"`、`"down"`、`"left"`、`"right"`) `magnitude_in_pixels`：int (0 到 999，選用，預設為 `300`) `intent`：str |
-| **go\_back** | 返回瀏覽器記錄中的上一頁。 | `intent`：str |
-| **navigate** | 直接前往指定網址。 | `url`：str `intent`：str |
-| **go\_forward** | 前往瀏覽器記錄中的下一個網頁。 | `intent`：str |
+| **קליק** | קליקים שמאליים בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | לחיצות כפולות על הקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | שלוש לחיצות על הקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | לחיצה אמצעית על הקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | לחיצות ימניות בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | לחיצה ארוכה על כפתור העכבר בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | משחרר את כפתור העכבר בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **העברה** | העברת הסמן למיקום שצוין. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **type** | הקלדת טקסט. | `text`: str `press_enter`: bool (Optional, default `false`) `intent`: str |
+| **drag\_and\_drop** | גורר פריט מקואורדינטת ההתחלה לקואורדינטת הסיום. | ‫`start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **wait** | הפסקת ההרצה למספר שניות שצוין. | ‫`seconds`: int (אופציונלי, ברירת מחדל `1`) `intent`: str |
+| **press\_key** | לחיצה על המקש שצוין ושחרור שלו. | ‫`key`: str `intent`: str |
+| **key\_down** | לחיצה ארוכה על המקש שצוין. | ‫`key`: str `intent`: str |
+| **key\_up** | משחרר את המקש שצוין. | ‫`key`: str `intent`: str |
+| **מקש קיצור** | לחיצה על שילוב המקשים שצוין. | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | מחזירה צילום מסך של המסך הנוכחי. | `intent`: str |
+| **scroll** | גלילה למעלה, למטה, שמאלה או ימינה בנקודה מסוימת בפיקסל אחד. | ‫`y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, Optional, default `300`) `intent`: str |
+| **go\_back** | חזרה לדף האינטרנט הקודם בהיסטוריית הדפדפן. | `intent`: str |
+| **navigate** | ניווט ישירות לכתובת URL ספציפית. | ‫`url`: str `intent`: str |
+| **go\_forward** | מעבר קדימה לדף האינטרנט הבא בהיסטוריית הגלישה. | `intent`: str |
 
-### 行動環境 (`ENVIRONMENT_MOBILE`)
+### סביבה לנייד (`ENVIRONMENT_MOBILE`)
 
-Android 最佳化環境動作：
+פעולות בסביבה שעברה אופטימיזציה ל-Android:
 
-| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
+| שם הפקודה | תיאור | ארגומנטים (בבקשה להפעלת פונקציה) |
 | --- | --- | --- |
-| **open\_app** | 依名稱開啟應用程式。 | `app_name`：str `intent`：str |
-| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **list\_apps** | 列出裝置上可用的應用程式，並傳回應用程式名稱和套件名稱。 | `intent`：str |
-| **wait** | 暫停執行指定的秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
-| **go\_back** | 返回上一個畫面或網頁。 | `intent`：str |
-| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
-| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
-| **long\_press** | 在螢幕上的座標執行長按操作。 | `y`：int (0 到 999) `x`：int (0 到 999) `seconds`：int (選用，預設為 `2`) `intent`：str |
-| **press\_key** | 按下並放開指定鍵。 | `key`：str `intent`：str |
-| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
+| **open\_app** | פותח אפליקציה לפי השם שלה. | ‫`app_name`: str `intent`: str |
+| **קליק** | קליקים שמאליים בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **list\_apps** | מציג את האפליקציות שזמינות במכשיר ומחזיר את השמות ושמות החבילות שלהן. | `intent`: str |
+| **wait** | הפסקת ההרצה למספר שניות שצוין. | ‫`seconds`: int (אופציונלי, ברירת מחדל `1`) `intent`: str |
+| **go\_back** | חזרה למסך הקודם או לדף האינטרנט הקודם. | `intent`: str |
+| **type** | הקלדת טקסט. | `text`: str `press_enter`: bool (Optional, default `false`) `intent`: str |
+| **drag\_and\_drop** | גורר פריט מקואורדינטת ההתחלה לקואורדינטת הסיום. | ‫`start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **long\_press** | מבצע לחיצה ארוכה בקואורדינטה במסך. | ‫`y`: int (0-999) `x`: int (0-999) `seconds`: int (אופציונלי, ברירת מחדל `2`) `intent`: str |
+| **press\_key** | לחיצה על המקש שצוין ושחרור שלו. | ‫`key`: str `intent`: str |
+| **take\_screenshot** | מחזירה צילום מסך של המסך הנוכחי. | `intent`: str |
 
-### 桌面環境 (`ENVIRONMENT_DESKTOP`)
+### סביבת שולחן עבודה (`ENVIRONMENT_DESKTOP`)
 
-桌面環境作業系統層級游標指令：
+פקודות של סמן ברמת מערכת ההפעלה בסביבות שולחן עבודה:
 
-| 指令名稱 | 說明 | 引數 (在函式呼叫中) |
+| שם הפקודה | תיאור | ארגומנטים (בבקשה להפעלת פונקציה) |
 | --- | --- | --- |
-| **點按** | 在座標處按一下滑鼠左鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **double\_click** | 在座標上按兩下。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **triple\_click** | 在座標上按三下滑鼠。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **middle\_click** | 在座標上按中間鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **right\_click** | 在座標上按一下滑鼠右鍵。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **mouse\_down** | 在座標位置按住滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **mouse\_up** | 在座標處放開滑鼠按鈕。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **移動** | 將游標移至指定位置。 | `y`：int (0-999) `x`：int (0-999) `intent`：str |
-| **type** | 輸入文字。 | `text`：str `press_enter`：bool (選用，預設為 `false`) `intent`：str |
-| **drag\_and\_drop** | 將項目從起始座標拖曳至結束座標。 | `start_y`：int (0-999) `start_x`：int (0-999) `end_y`：int (0-999) `end_x`：int (0-999) `intent`：str |
-| **wait** | 暫停執行指定的秒數。 | `seconds`：int (選用，預設為 `1`) `intent`：str |
-| **press\_key** | 按下並放開指定鍵。 | `key`：str `intent`：str |
-| **key\_down** | 按下並按住指定鍵。 | `key`：str `intent`：str |
-| **key\_up** | 釋放指定鍵。 | `key`：str `intent`：str |
-| **快速鍵** | 按下指定的按鍵組合。 | `keys`：`List[str]` `intent`：`str` |
-| **take\_screenshot** | 傳回目前畫面的螢幕截圖。 | `intent`：str |
-| **scroll** | 以像素距離在座標上下左右捲動。 | `y`：int (0 到 999) `x`：int (0 到 999) `direction`：str (`"up"`、`"down"`、`"left"`、`"right"`) `magnitude_in_pixels`：int (0 到 999，選用，預設為 `300`) `intent`：str |
+| **קליק** | קליקים שמאליים בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **double\_click** | לחיצות כפולות על הקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **triple\_click** | שלוש לחיצות על הקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **middle\_click** | לחיצה אמצעית על הקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **right\_click** | לחיצות ימניות בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_down** | לחיצה ארוכה על כפתור העכבר בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **mouse\_up** | משחרר את כפתור העכבר בקואורדינטה. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **העברה** | העברת הסמן למיקום שצוין. | ‫`y`: int (0-999) `x`: int (0-999) `intent`: str |
+| **type** | הקלדת טקסט. | `text`: str `press_enter`: bool (Optional, default `false`) `intent`: str |
+| **drag\_and\_drop** | גורר פריט מקואורדינטת ההתחלה לקואורדינטת הסיום. | ‫`start_y`: int (0-999) `start_x`: int (0-999) `end_y`: int (0-999) `end_x`: int (0-999) `intent`: str |
+| **wait** | הפסקת ההרצה למספר שניות שצוין. | ‫`seconds`: int (אופציונלי, ברירת מחדל `1`) `intent`: str |
+| **press\_key** | לחיצה על המקש שצוין ושחרור שלו. | ‫`key`: str `intent`: str |
+| **key\_down** | לחיצה ארוכה על המקש שצוין. | ‫`key`: str `intent`: str |
+| **key\_up** | משחרר את המקש שצוין. | ‫`key`: str `intent`: str |
+| **מקש קיצור** | לחיצה על שילוב המקשים שצוין. | `keys`: `List[str]` `intent`: `str` |
+| **take\_screenshot** | מחזירה צילום מסך של המסך הנוכחי. | `intent`: str |
+| **scroll** | גלילה למעלה, למטה, שמאלה או ימינה בנקודה מסוימת בפיקסל אחד. | ‫`y`: int (0-999) `x`: int (0-999) `direction`: str (`"up"`, `"down"`, `"left"`, `"right"`) `magnitude_in_pixels`: int (0-999, Optional, default `300`) `intent`: str |
 
-## 舊版支援的 UI 動作 (Gemini 2.5)
+## פעולות נתמכות בממשק המשתמש מדור קודם (Gemini 2.5)
 
-對於舊版模型 (`gemini-2.5-computer-use-preview-10-2025`)，系統支援下列動作：
+במודלים מדור קודם (`gemini-2.5-computer-use-preview-10-2025`), הפעולות הבאות נתמכות:
 
-| 指令名稱 | 說明 | 引數 (在函式呼叫中) | 函式呼叫範例 |
+| שם הפקודה | תיאור | ארגומנטים (בבקשה להפעלת פונקציה) | דוגמה לבקשה להפעלת פונקציה |
 | --- | --- | --- | --- |
-| **open\_web\_browser** | 開啟網路瀏覽器。 | 無 | `{"name": "open_web_browser", "arguments": {}}` |
-| **wait\_5\_seconds** | 暫停執行 5 秒。 | 無 | `{"name": "wait_5_seconds", "arguments": {}}` |
-| **go\_back** | 前往瀏覽記錄中的上一頁。 | 無 | `{"name": "go_back", "arguments": {}}` |
-| **go\_forward** | 前往記錄中的下一頁。 | 無 | `{"name": "go_forward", "arguments": {}}` |
-| **search** | 前往預設搜尋引擎。 | 無 | `{"name": "search", "arguments": {}}` |
-| **navigate** | 直接將瀏覽器導向指定網址。 | `url`：str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
-| **click\_at** | 在特定座標點擊。 | `y`：int (0 到 999)，`x`：int (0 到 999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
-| **hover\_at** | 將滑鼠懸停在特定座標。 | `y`：int (0 到 999)，`x`：int (0 到 999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
-| **type\_text\_at** | 在座標位置輸入文字。 | `y`：int (0 到 999)、`x`：int (0 到 999)、`text`：str、`press_enter`：bool (選用，預設為 True)、`clear_before_typing`：bool (選用，預設為 True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
-| **key\_combination** | 按下按鍵或組合鍵。 | `keys`：str | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
-| **scroll\_document** | 捲動整個網頁。 | `direction`：str | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
-| **scroll\_at** | 在座標 (x,y) 捲動。 | `y`：int、`x`：int、`direction`：str、`magnitude`：int (選用，預設為 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down"}}` |
-| **drag\_and\_drop** | 在兩個座標之間拖曳。 | `y`：int、`x`：int、`destination_y`：int、`destination_x`：int | `{"name": "drag_and_drop", "arguments": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
+| **open\_web\_browser** | הפעולה הזו תפתח את דפדפן האינטרנט. | ללא | `{"name": "open_web_browser", "arguments": {}}` |
+| **wait\_5\_seconds** | ההרצה מושהית למשך 5 שניות. | ללא | `{"name": "wait_5_seconds", "arguments": {}}` |
+| **go\_back** | מעבר לדף הקודם בהיסטוריה. | ללא | `{"name": "go_back", "arguments": {}}` |
+| **go\_forward** | מעבר לדף הבא בהיסטוריה. | ללא | `{"name": "go_forward", "arguments": {}}` |
+| **search** | עוברים למנוע החיפוש שמוגדר כברירת מחדל. | ללא | `{"name": "search", "arguments": {}}` |
+| **navigate** | הדפדפן עובר ישירות לכתובת ה-URL שצוינה. | `url`: str | `{"name": "navigate", "arguments": {"url": "https://www.wikipedia.org"}}` |
+| **click\_at** | קליקים בקואורדינטה ספציפית. | ‫`y`: int (0-999), `x`: int (0-999) | `{"name": "click_at", "arguments": {"y": 300, "x": 500}}` |
+| **hover\_at** | העכבר מרחף בקואורדינטה ספציפית. | ‫`y`: int (0-999), `x`: int (0-999) | `{"name": "hover_at", "arguments": {"y": 150, "x": 250}}` |
+| **type\_text\_at** | הקלדת טקסט בקואורדינטה. | ‫`y`: int (0-999), `x`: int (0-999), `text`: str, `press_enter`: bool (אופציונלי, ברירת המחדל היא True), `clear_before_typing`: bool (אופציונלי, ברירת המחדל היא True) | `{"name": "type_text_at", "arguments": {"y": 250, "x": 400, "text": "search", "press_enter": false}}` |
+| **key\_combination** | לוחצים על מקשים או על שילובים של מקשים. | `keys`: str | `{"name": "key_combination", "arguments": {"keys": "Control+A"}}` |
+| **scroll\_document** | גלילה בכל דף האינטרנט. | `direction`: str | `{"name": "scroll_document", "arguments": {"direction": "down"}}` |
+| **scroll\_at** | גלילה בקואורדינטות (x,y). | ‫`y`: int, `x`: int, `direction`: str, `magnitude`: int (אופציונלי, ברירת מחדל 800) | `{"name": "scroll_at", "arguments": {"y": 500, "x": 500, "direction": "down"}}` |
+| **drag\_and\_drop** | גרירה בין שתי קואורדינטות. | ‫`y`: int, `x`: int, `destination_y`: int, `destination_x`: int | `{"name": "drag_and_drop", "arguments": {"y": 100, "destination_y": 500, "destination_x": 500, "x": 100}}` |
 
-## 自訂使用者定義函式
+## פונקציות מותאמות אישית בהגדרת המשתמש
 
-您可以納入自訂的 user-defined function，擴充模型的函式。舉例來說，在人機迴圈 (HITL) 情境中，您可以排除預先定義的預設動作，並註冊自訂動作。
+אפשר להרחיב את הפונקציונליות של המודל באמצעות פונקציות מותאמות אישית בהגדרת המשתמש. לדוגמה, בתרחישים של התערבות אנושית (HITL), אפשר להחריג פעולות מוגדרות מראש ולרשום פעולות בהתאמה אישית.
 
-#### Gemini 3.5 Flash Custom Tooling
+#### כלים מותאמים אישית של Gemini 3.x
 
 ### Python
 
-排除標準預先定義的瀏覽器動作 (例如 `click`)，並註冊自訂 `yield_to_user` 工具：
+להחריג פעולות סטנדרטיות שהוגדרו מראש בדפדפן (כמו `click`) ולרשום כלי מותאם אישית `yield_to_user`:
 
 ```
 from google import genai
@@ -864,7 +867,7 @@ yield_to_user_tool = {
 }
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Click the submit button. If you need a second factor authentication code, ask me.",
     tools=[
         {
@@ -879,7 +882,7 @@ interaction = client.interactions.create(
 
 ### JavaScript
 
-排除標準預先定義的瀏覽器動作 (例如 `click`)，並註冊自訂 `yield_to_user` 工具：
+להחריג פעולות סטנדרטיות שהוגדרו מראש בדפדפן (כמו `click`) ולרשום כלי מותאם אישית `yield_to_user`:
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -903,7 +906,7 @@ const yieldToUserTool = {
 };
 
 const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "Click the submit button. If you need a second factor authentication code, ask me.",
     tools: [
         {
@@ -916,7 +919,7 @@ const interaction = await ai.interactions.create({
 });
 ```
 
-#### Gemini 2.5 (Legacy) Custom Tooling
+#### כלים מותאמים אישית של Gemini 2.5 (גרסה מדור קודם)
 
 ### Python
 
@@ -996,29 +999,29 @@ const interaction = await ai.interactions.create({
 console.log(interaction);
 ```
 
-## 管理思考程度 (Gemini 3.5 Flash)
+## ניהול רמות ההעמקה (Gemini 3.x)
 
-對於電腦使用代理程式，您可以設定不同的思考層級，以平衡動作品質和執行速度。較低的思考層級通常能為標準自動化工作取得良好平衡。
+בסוכנים לשימוש במחשב, אפשר להגדיר רמות חשיבה שונות כדי ליצור איזון בין איכות הפעולה למהירות הביצוע. בדרך כלל, רמות חשיבה נמוכות יותר מאפשרות להשיג איזון טוב במשימות אוטומציה רגילות.
 
-## 安全與安全性
+## בטיחות ואבטחה
 
-### 設定安全政策 (Gemini 3.5 Flash)
+### הגדרת מדיניות בנושא בטיחות (Gemini 3.x)
 
-Gemini 3.5 Flash 模型內建安全服務類別，可自動判斷是否需要使用者確認。
+מודלים של Gemini 3.x כוללים קטגוריות מובנות של שירותי בטיחות שקובעות באופן אוטומטי אם נדרש אישור מהמשתמש.
 
-| 安全政策類別 | 說明 |
+| קטגוריית מדיניות בנושא בטיחות | תיאור |
 | --- | --- |
-| `FINANCIAL_TRANSACTIONS` | 封鎖或觸發涉及付款、零售結帳或管制商品的動作確認。 |
-| `SENSITIVE_DATA_MODIFICATION` | 保護健康、財務或政府記錄，避免未經授權的修改。 |
-| `COMMUNICATION_TOOL` | 禁止代理程式自主傳送電子郵件、即時通訊訊息或草稿。 |
-| `ACCOUNT_CREATION` | 禁止代理程式在網站上自主註冊新帳戶。 |
-| `DATA_MODIFICATION` | 控管整體檔案系統修改、資料共用和儲存空間刪除作業。 |
-| `USER_CONSENT_MANAGEMENT` | 需要使用者接管 Cookie 同意橫幅和隱私權提示。 |
-| `LEGAL_TERMS_AND_AGREEMENTS` | 避免模型自主接受《服務條款》或具有法律約束力的合約。 |
+| `FINANCIAL_TRANSACTIONS` | חסימה או הפעלה של אישור לפעולות שקשורות לתשלומים, לתהליך התשלום בקמעונאות או למוצרים מפוקחים. |
+| `SENSITIVE_DATA_MODIFICATION` | הגנה על רשומות בריאותיות, פיננסיות או ממשלתיות מפני שינויים לא מורשים. |
+| `COMMUNICATION_TOOL` | הגבלה של הסוכן כך שלא יוכל לשלוח אימיילים, הודעות צ'אט או טיוטות באופן אוטונומי. |
+| `ACCOUNT_CREATION` | ההגדרה הזו מגבילה את היכולת של הסוכן לרשום באופן אוטונומי חשבונות חדשים באתרים. |
+| `DATA_MODIFICATION` | ההרשאה הזו מסדירה שינויים במערכת הקבצים, שיתוף נתונים ומחיקת אחסון. |
+| `USER_CONSENT_MANAGEMENT` | נדרשת השתלטות על המשתמשים כדי להציג באנרים לבקשת הסכמה לשימוש בקובצי Cookie והודעות בנושא פרטיות. |
+| `LEGAL_TERMS_AND_AGREEMENTS` | מונעת מהמודל לאשר באופן אוטונומי תנאים והגבלות או חוזים מחייבים מבחינה משפטית. |
 
-#### 安全覆寫
+#### שינויים בהגדרות האבטחה
 
-您可以傳遞覆寫項目，藉此覆寫特定政策：
+אפשר לשנות מדיניות ספציפית על ידי העברת שינויים:
 
 ### Python
 
@@ -1028,7 +1031,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Clean up the local folder by archiving old logs.",
     tools=[
         {
@@ -1050,7 +1053,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI();
 
 const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "Clean up the local folder by archiving old logs.",
     tools: [
         {
@@ -1064,13 +1067,13 @@ const interaction = await ai.interactions.create({
 });
 ```
 
-### 提示插入偵測 (Gemini 3.5 Flash)
+### זיהוי החדרת פרומפטים (Gemini 3.x)
 
-這項安全機制可掃描螢幕截圖中的像素，找出隱藏的對抗性提示指令 (例如「忽略先前的指令」)，並在偵測到時封鎖執行。
+מנגנון בטיחות אופציונלי שסורק פיקסלים בצילומי מסך כדי לזהות הוראות פרומפט זדוני נסתרות (למשל, 'התעלם מהפקודות הקודמות') וחוסם את הביצוע שלהן אם הן מזוהות.
 
-### 確認安全裁決
+### אישור החלטה בנושא בטיחות
 
-回覆內容可能包含函式呼叫引數中的 `safety_decision` 參數：
+התשובה יכולה לכלול את הפרמטר `safety_decision` בארגומנטים של קריאת הפונקציה:
 
 ```
 {
@@ -1091,7 +1094,7 @@ const interaction = await ai.interactions.create({
 }
 ```
 
-如果 `safety_decision` 為 `require_confirmation`，請提示使用者。如果使用者確認，請在 `function_result` 中設定 `safety_acknowledgement`。
+אם הערך של `safety_decision` הוא `require_confirmation`, מציגים למשתמש הקצה הנחיה. אם המשתמש מאשר, מגדירים את `safety_acknowledgement` ב-`function_result`.
 
 ### Python
 
@@ -1110,14 +1113,15 @@ if 'safety_decision' in function_call.arguments:
     action_result["safety_acknowledgement"] = True
 ```
 
-### 安全性最佳做法
+### שיטות מומלצות לשמירה על האבטחה
 
-電腦使用功能會帶來獨特的安全性與作業風險，因為模型代表使用者執行動作時，可能會在畫面上遇到不受信任的內容，或在執行動作時發生錯誤。請實作下列最佳做法，保護使用者資料和系統：
+שימוש במחשב מציב סיכוני אבטחה ותפעול ייחודיים, כי מודל שפועל בשם משתמש עלול להיתקל בתוכן לא מהימן במסכים או לבצע שגיאות בהפעלת פעולות. כדי להגן על נתוני המשתמשים ועל המערכות, מומלץ להטמיע את השיטות המומלצות הבאות:
 
-1. **人機迴圈 (HITL)：**
+1. **Human-in-the-Loop (HITL):**
 
-   - **強制使用者確認：**當安全回應指出 `require_confirmation` (或舊版安全決策要求)，提示使用者核准。
-   - **提供自訂安全指示：**實作自訂系統指令，定義及強制執行專屬安全界線。例如：
+   - **אכיפת אישור המשתמש:** אם התגובה בנושא בטיחות מציינת
+     `require_confirmation` (או אם נדרש אישור לפי החלטת הבטיחות הקודמת), המשתמש יתבקש לאשר.
+   - **הוספת הוראות בטיחות בהתאמה אישית:** אפשר להטמיע הוראות מערכת בהתאמה אישית כדי להגדיר ולאכוף את גבולות הבטיחות שלכם. לדוגמה:
 
      ### Python
 
@@ -1215,7 +1219,7 @@ if 'safety_decision' in function_call.arguments:
      """
 
      interaction = client.interactions.create(
-         model="gemini-3.5-flash",
+         model="gemini-3.6-flash",
          system_instruction=system_instruction,
          input="Prepare a draft but do not send.",
          tools=[{
@@ -1321,7 +1325,7 @@ if 'safety_decision' in function_call.arguments:
      `;
 
      const interaction = await ai.interactions.create({
-         model: "gemini-3.5-flash",
+         model: "gemini-3.6-flash",
          system_instruction: systemInstruction,
          input: "Prepare a draft but do not send.",
          tools: [{
@@ -1330,35 +1334,39 @@ if 'safety_decision' in function_call.arguments:
          }]
      });
      ```
-2. **安全執行環境：**在安全的沙箱環境中執行代理程式，以限制潛在影響。可以是沙箱虛擬機器 (VM)、容器 (例如 Docker)，或權限受限的專用瀏覽器設定檔。如需使用 Docker 設定沙箱的指南，請參閱 [GitHub 參考實作](https://github.com/google/computer-use-preview/)。
-3. **輸入內容清除：**清除提示詞中所有使用者產生的文字，降低出現非預期指令或提示詞注入的風險。這層安全防護很有幫助，但無法取代安全執行環境。
-4. **內容防護機制：**使用防護機制和內容安全 API 評估使用者輸入內容、工具輸入內容和輸出內容，以及代理程式的回覆是否適當，並偵測提示詞注入和越獄活動。
-5. **許可清單和封鎖清單：**導入篩選機制，控管模型可前往的位置和可執行的動作。禁止存取的網站封鎖清單是不錯的起點，而限制更嚴格的許可清單則更加安全。
-6. **可觀測性和記錄：**維護詳細記錄以進行偵錯、稽核和事件應對。用戶端應記錄提示、螢幕截圖、模型建議的動作 (`function_call`)、安全回應，以及用戶端最終執行的所有動作。
-7. **環境管理：**確保 GUI 環境一致。如果出現非預期的彈出式視窗、通知或版面配置變更，模型可能會感到困惑。盡可能從已知的乾淨狀態開始執行每個新工作。
+2. **סביבת ביצוע מאובטחת:** הפעלת הסוכן בסביבה מאובטחת של ארגז חול כדי להגביל את ההשפעה הפוטנציאלית שלו. יכול להיות שמדובר במכונה וירטואלית (VM) בסביבת ארגז חול, בקונטיינר (למשל, Docker) או בפרופיל דפדפן ייעודי עם הרשאות מוגבלות. הוראות להגדרת ארגז חול באמצעות Docker מופיעות ב[הטמעה לדוגמה ב-GitHub](https://github.com/google/computer-use-preview/).
+3. **ניקוי קלט:** ניקוי של כל הטקסט שנוצר על ידי משתמשים בהנחיות, כדי לצמצם את הסיכון להוראות לא מכוונות או להחדרת פרומפטים. זו שכבת אבטחה מועילה, אבל היא לא תחליף לסביבת ביצוע מאובטחת.
+4. **אמצעי הגנה על תוכן:** אפשר להשתמש באמצעי הגנה ובממשקי API של בטיחות תוכן כדי להעריך את הקלט של המשתמשים, את הקלט והפלט של כלי העזר ואת התשובות של הסוכן, ולבדוק אם הם מתאימים, אם יש בהם הזרקת הנחיות ואם הם מאפשרים עקיפת הגבלות.
+5. **רשימות היתרים ורשימות חסימה:** כדאי להטמיע מנגנוני סינון כדי לשלוט במקומות שבהם המודל יכול לנווט ובפעולות שהוא יכול לבצע. רשימת חסימה של אתרים אסורים היא נקודת התחלה טובה, אבל רשימת היתרים מגבילה יותר היא מאובטחת עוד יותר.
+6. **יכולת מעקב ורישום ביומן:** שמירה של יומנים מפורטים לצורך ניפוי באגים, ביקורת ותגובה לאירועים. הלקוח צריך לתעד הנחיות, צילומי מסך, פעולות שהמודל מציע (`function_call`), תשובות שקשורות לבטיחות וכל הפעולות שהלקוח מבצע בסופו של דבר.
+7. **ניהול סביבה:** מוודאים שהסביבה של ממשק המשתמש הגרפי עקבית.
+   חלונות קופצים, התראות או שינויים בפריסה שלא ציפיתם להם עלולים לבלבל את המודל. אם אפשר, מתחילים ממצב נקי ומוכר לכל משימה חדשה.
 
-## 模型版本
+## גרסאות המודלים
 
-您可以在下列機型上使用電腦模式：
+אפשר להשתמש ב'שימוש במחשב' עם הדגמים הבאים:
 
-- [**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-tw) (`gemini-3.5-flash`)：建議用於電腦，可簡化意圖相關動作、支援瀏覽器、行動裝置和電腦環境、設定安全防護政策，以及偵測提示注入攻擊。
-- [**Gemini 3 Flash 預先發布版**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) (`gemini-3-flash-preview`)：支援電腦使用的預先發布模型。
-- [**Gemini 2.5 (舊版預先發布版)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=zh-tw) (`gemini-2.5-computer-use-preview-10-2025`)：舊版預先發布模型，專為瀏覽器型電腦使用而設計。
+- ‫[**Gemini 3.6 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=he) (`gemini-3.6-flash`): המודל המומלץ לשימוש במחשב, עם פעולות יעילות באמצעות כוונות, תמיכה בסביבות דפדפן, נייד ומחשב, מדיניות אבטחה שניתנת להגדרה וזיהוי של הזרקת הנחיות.
+- ‫[**Gemini 3.5 Flash-Lite**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=he) (`gemini-3.5-flash-lite`): מודל חסכוני עם זמן אחזור נמוך, שתומך בשימוש במחשב.
+- ‫[**Gemini 3.5 Flash**](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=he) (`gemini-3.5-flash`): מודל יציב קודם שתומך בשימוש במחשב.
+- ‫[**Gemini 3 Flash Preview**](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he) (`gemini-3-flash-preview`): מודל בתצוגה מקדימה
+  עם תמיכה בשימוש במחשב.
+- ‫[**Gemini 2.5 (גרסת טרום-השקה מדור קודם)**](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-computer-use-preview-10-2025?hl=he) (`gemini-2.5-computer-use-preview-10-2025`): מודל טרום-השקה מדור קודם שעבר אופטימיזציה לשימוש במחשב מבוסס-דפדפן.
 
-## 後續步驟
+## המאמרים הבאים
 
-- 在 [Browserbase 示範環境](http://gemini.browserbase.com)中試用電腦。
-- 如需程式碼範例，請參閱[參考實作](https://github.com/google/computer-use-preview)。
-- 瞭解其他 Gemini API 工具：
-  - [函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)
-  - [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)
+- אפשר להתנסות בשימוש במחשב ב[סביבת ההדגמה של Browserbase](http://gemini.browserbase.com).
+- בדף [Reference implementation](https://github.com/google/computer-use-preview) יש דוגמאות לקוד.
+- מידע על כלים אחרים של Gemini API:
+  - [בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he)
+  - [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he)
 
-提供意見
+שליחת משוב
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-上次更新時間：2026-07-06 (世界標準時間)。
+עדכון אחרון: 2026-07-23 (שעון UTC).
 
-想進一步說明嗎？
+רוצה לתת לנו משוב?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-06 (世界標準時間)。"],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-23 (שעון UTC)."],[],[]]

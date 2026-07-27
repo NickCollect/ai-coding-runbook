@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=ja
-fetched_at: 2026-07-20T04:33:19.941633+00:00
-title: "Google \u691c\u7d22\u306b\u3088\u308b\u30b0\u30e9\u30a6\u30f3\u30c7\u30a3\u30f3\u30b0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/google-search?hl=ar
+fetched_at: 2026-07-27T04:50:11.493043+00:00
+title: "\u0627\u0644\u0623\u0633\u0627\u0633\u064a\u0627\u062a \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \"\u0628\u062d\u062b Google\" \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-フィードバックを送信
+إرسال ملاحظات
 
-# Google 検索によるグラウンディング
+# الأساسيات باستخدام "بحث Google"
 
-Google 検索によるグラウンディングは、Gemini モデルをリアルタイムのウェブ コンテンツに接続し、利用可能なすべての言語で機能します。これにより、Gemini はより正確な回答を提供して、ナレッジ カットオフ以降の検証可能な情報源を引用することができます。
+تتيح ميزة "تحديد المصدر من خلال بحث Search" ربط نموذج Gemini بمحتوى الويب في الوقت الفعلي، وهي تعمل بجميع اللغات المتاحة. يتيح ذلك لـ Gemini تقديم إجابات أكثر دقة والإشارة إلى مصادر يمكن التحقّق منها بعد تاريخ آخر تحديث للبيانات.
 
-グラウンディングは、次のことができるアプリケーションの構築に役立ちます。
+تساعدك عملية التأسيس على إنشاء تطبيقات يمكنها إجراء ما يلي:
 
-- **事実の正確性を高める:** 回答を実世界の情報に基づいて生成することで、モデルのハルシネーションを減らします。
-- **リアルタイムの情報にアクセスする:** 最近の出来事やトピックに関する質問に答えます。
-- **引用を提供する:** モデルの主張の出典を示すことで、ユーザーの信頼を築きます。
+- **زيادة الدقة الواقعية:** يمكنك تقليل حالات الهلوسة في النموذج من خلال الاستناد إلى معلومات واقعية عند تقديم الردود.
+- **الوصول إلى معلومات في الوقت الفعلي:** الإجابة عن أسئلة حول الأحداث والمواضيع الحديثة
+- **تضمين اقتباسات:** يمكنك تعزيز ثقة المستخدمين من خلال عرض مصادر المعلومات التي يقدّمها النموذج.
 
 ### Python
 
@@ -71,21 +71,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Google 検索によるグラウンディングの仕組み
+## طريقة عمل ميزة "تحديد المصدر من خلال بحث Google"
 
-`google_search` ツールを有効にすると、モデルは情報の検索、処理、引用のワークフロー全体を自動的に処理します。
+عند تفعيل أداة `google_search`، يتعامل النموذج مع سير العمل الكامل
+للبحث عن المعلومات ومعالجتها والاقتباس منها تلقائيًا.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=ja)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=ar)
 
-1. **ユーザー プロンプト:** アプリケーションは、`google_search` ツールを有効にして、ユーザーのプロンプトを Gemini API に送信します。
-2. **プロンプト分析:** モデルがプロンプトを分析し、Google 検索で回答を改善できるかどうかを判断します。
-3. **Google 検索:** 必要に応じて、モデルは 1 つ以上の検索クエリを自動的に生成して実行します。
-4. **検索結果の処理:** モデルが検索結果を処理し、情報を合成して回答を作成します。
-5. **グラウンディングされたレスポンス:** API は、検索結果に基づいてグラウンディングされた、最終的なユーザー フレンドリーなレスポンスを返します。このレスポンスには、引用を含むインライン `annotations` を含むモデルのテキスト回答、検索クエリと検索候補を含む `google_search_call` ステップと `google_search_result` ステップが含まれます。
+1. **طلب المستخدم:** يرسل تطبيقك طلب المستخدم إلى Gemini API مع تفعيل الأداة `google_search`.
+2. **تحليل الطلب:** يحلّل النموذج الطلب ويحدّد ما إذا كان بإمكان &quot;بحث Google&quot; تحسين الإجابة.
+3. **بحث Google:** إذا لزم الأمر، ينشئ النموذج تلقائيًا طلب بحث واحدًا أو أكثر وينفّذها.
+4. **معالجة نتائج البحث:** يعالج النموذج نتائج البحث، ويلخّص المعلومات، ويصيغ ردًا.
+5. **الردّ المستند إلى معلومات موثوقة:** تعرض واجهة برمجة التطبيقات ردًا نهائيًا سهل الاستخدام يستند إلى نتائج البحث. تتضمّن هذه الاستجابة الإجابة النصية التي قدّمها النموذج مع `annotations` مضمّنة تحتوي على الاقتباسات، بالإضافة إلى الخطوتَين `google_search_call` و`google_search_result` اللتين تتضمّنان طلبات البحث واقتراحات البحث.
 
-## グラウンディング レスポンスについて
+## فهم الردّ المستند إلى معلومات أساسية
 
-レスポンスが正常にグラウンディングされると、モデルのテキスト出力には、テキスト コンテンツ ブロックに直接インライン `annotations` が含まれます。これらのアノテーションは、回答の一部をそのソースにリンクする引用情報を提供します。
+عندما يتم استناد الردّ بنجاح إلى المستند المصدر، يتضمّن الناتج النصي للنموذج `annotations` مضمّنًا مباشرةً في مقطع المحتوى النصي. توفّر هذه التعليقات التوضيحية معلومات الاقتباس التي تربط أجزاء من الرد بمصادرها.
 
 ```
 {
@@ -144,17 +145,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-レスポンスのキーフィールド:
+الحقول الرئيسية في الردّ:
 
-- `google_search_call` : モデルが実行した検索 `queries` を含みます。
-- `google_search_result` : UI で検索候補をレンダリングするための HTML スニペットである `search_suggestions` を含みます。使用要件の詳細は、[利用規約](https://ai.google.dev/gemini-api/terms?hl=ja#grounding-with-google-search)に記載されています。
-- `annotations` を含む `text` : インライン引用を含むモデルの合成回答。各 `url_citation` アノテーションは、テキスト セグメント（`start_index` と `end_index` で定義）をソース URL にリンクします。これが、インライン引用を作成する鍵となります。
+- ‫`google_search_call` : يحتوي على طلب البحث `queries` الذي نفّذه النموذج.
+- ‫`google_search_result` : يحتوي على `search_suggestions`، وهو مقتطف HTML
+  لعرض اقتراحات البحث في واجهة المستخدم. يمكن الاطّلاع على متطلبات الاستخدام الكاملة في [بنود الخدمة](https://ai.google.dev/gemini-api/terms?hl=ar#grounding-with-google-search).
+- ‫`text` مع `annotations` : الإجابة التي تم إنشاؤها بواسطة النموذج مع الاقتباسات المضمّنة يربط كل تعليق توضيحي من النوع `url_citation` مقطعًا نصيًا (محدّدًا بواسطة `start_index` و`end_index`) بعنوان URL للمصدر. هذا هو مفتاح
+  إنشاء اقتباسات مضمّنة.
 
-Google 検索でのグラウンディングは、[URL コンテキスト ツール](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)と組み合わせて使用することもできます。これにより、一般公開のウェブデータと指定した特定の URL の両方でレスポンスをグラウンディングできます。
+يمكن أيضًا استخدام ميزة "الاستناد إلى معلومات من بحث Google" مع [أداة سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) للاستناد إلى معلومات من كلّ من البيانات العلنية على الويب وعناوين URL المحدّدة التي تقدّمها.
 
-## インライン引用による出典の明示
+## تحديد مصادر الأعمال من خلال اقتباسات مضمّنة
 
-API は、テキスト コンテンツ ブロックにインライン `url_citation` アノテーションを返します。これにより、ユーザー インターフェースでソースを表示する方法を完全に制御できます。各アノテーションには、引用するテキストの部分を識別するための `start_index` と `end_index` が含まれています。抽出して表示する方法は次のとおりです。
+تعرض واجهة برمجة التطبيقات `url_citation` تعليقات توضيحية مضمّنة على كتلة المحتوى النصي، ما يمنحك تحكّمًا كاملاً في طريقة عرض المصادر في واجهة المستخدم.
+تتضمّن كل تعليق توضيحي `start_index` و`end_index` لتحديد الجزء الذي يشير إليه من النص. في ما يلي كيفية استخراجها وعرضها.
 
 ### Python
 
@@ -197,7 +201,7 @@ for (const step of interaction.steps) {
 }
 ```
 
-出力には、テキストとその引用元が表示されます。
+ستعرض النتائج النص متبوعًا بالاقتباسات:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final. This victory marks Spain's record fourth European Championship title.
@@ -209,46 +213,47 @@ Citations:
     Cited text: "This victory marks Spain's record fourth European Championship title."
 ```
 
-## 料金
+## الأسعار
 
-Gemini 3 で Google 検索によるグラウンディングを使用すると、モデルが実行すると判断した検索クエリごとにプロジェクトに課金されます。モデルが 1 つのプロンプトに回答するために複数の検索クエリを実行すると判断した場合（たとえば、同じ API 呼び出し内で `"UEFA Euro 2024 winner"` と `"Spain vs England Euro 2024 final
-score"` を検索する場合）、そのリクエストに対してツールの有料使用が 2 回カウントされます。請求の目的で、一意のクエリをカウントする際に空のウェブ検索クエリは無視されます。この課金モデルは Gemini 3 モデルにのみ適用されます。Gemini 2.5 以前のモデルで検索グラウンディングを使用する場合、プロジェクトはプロンプトごとに課金されます。
+عند استخدام ميزة "تحديد المصدر من خلال بحث Google" مع Gemini 3، يتم تحصيل رسوم من مشروعك مقابل كل طلب بحث يقرّر النموذج تنفيذه. إذا قرر النموذج تنفيذ طلبات بحث متعددة للإجابة عن طلب واحد (على سبيل المثال، البحث عن `"UEFA Euro 2024 winner"` و`"Spain vs England Euro 2024 final
+score"` ضمن طلب واحد من واجهة برمجة التطبيقات)، سيتم احتساب ذلك كاستخدامَين قابلَين للفوترة للأداة لهذا الطلب. لأغراض الفوترة، نتجاهل طلبات البحث الفارغة على الويب
+عند احتساب طلبات البحث الفريدة. لا ينطبق نموذج الفوترة هذا إلا على نماذج Gemini 3، وعند استخدام ميزة &quot;الاستناد إلى البحث&quot; مع Gemini 2.5 أو النماذج الأقدم، تتم فوترة مشروعك لكل طلب.
 
-料金の詳細については、[Gemini API の料金ページ](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)をご覧ください。
+للحصول على معلومات مفصّلة حول الأسعار، يُرجى الاطّلاع على [صفحة أسعار Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
 
-## サポートされているモデル
+## النماذج المتوافقة
 
-完全な機能については、[モデルの概要](https://ai.google.dev/gemini-api/docs/models?hl=ja)ページをご覧ください。
+يمكنك الاطّلاع على الإمكانات الكاملة في صفحة [النظرة العامة على الطراز](https://ai.google.dev/gemini-api/docs/models?hl=ar).
 
-| モデル | Google 検索によるグラウンディング |
+| الطراز | تحديد المصدر من خلال "بحث Search" |
 | --- | --- |
 | Gemini 3.5 Flash | ✔️ |
-| Gemini 3.1 Flash Image プレビュー版 | ✔️ |
-| Gemini 3.1 Pro プレビュー版 | ✔️ |
-| Gemini 3 Pro Image プレビュー | ✔️ |
-| Gemini 3 Flash プレビュー | ✔️ |
+| معاينة Gemini 3.1 Flash Image | ✔️ |
+| معاينة Gemini 3.1 Pro | ✔️ |
+| معاينة الصور في Gemini 3 Pro | ✔️ |
+| معاينة Gemini 3 Flash | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## サポートされているツールの組み合わせ
+## مجموعات الأدوات المتوافقة
 
-[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)や [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)などの他のツールと Google 検索によるグラウンディングを組み合わせて、より複雑なユースケースを実現できます。
+يمكنك استخدام ميزة Grounding with Google Search مع أدوات أخرى، مثل [تنفيذ الرمز](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)، لتفعيل المزيد من حالات الاستخدام المعقّدة.
 
-Gemini 3 モデルは、組み込みツール（Google 検索によるグラウンディングなど）とカスタムツール（関数呼び出し）の組み合わせをサポートしています。詳しくは、[ツールの組み合わせ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)のページをご覧ください。
+تتيح نماذج Gemini 3 الجمع بين الأدوات المضمّنة (مثل "تحديد المصدر من خلال بحث Google") والأدوات المخصّصة (استدعاء الدوال البرمجية). يمكنك الاطّلاع على مزيد من المعلومات في صفحة [مجموعات الأدوات](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar).
 
-## 次のステップ
+## الخطوات التالية
 
-- [関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)など、その他の利用可能なツールについて学習する。
-- [URL コンテキスト ツール](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)を使用して、特定の URL でプロンプトを補強する方法について説明します。
+- تعرَّف على الأدوات الأخرى المتاحة، مثل [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
+- تعرَّف على كيفية تحسين الطلبات باستخدام عناوين URL محدّدة من خلال [أداة سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar).
 
-フィードバックを送信
+إرسال ملاحظات
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-最終更新日 2026-07-06 UTC。
+تاريخ التعديل الأخير: 2026-07-06 (حسب التوقيت العالمي المتفَّق عليه)
 
-ご意見をお聞かせください
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-06 UTC。"],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-06 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

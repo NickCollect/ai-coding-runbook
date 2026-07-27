@@ -1,54 +1,49 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=ar
-fetched_at: 2026-07-20T04:47:55.810556+00:00
+source_url: https://ai.google.dev/gemini-api/docs/robotics-overview?hl=zh-CN
+fetched_at: 2026-07-27T04:46:07.174055+00:00
 title: "Gemini Robotics-ER 1.6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-إرسال ملاحظات
+发送反馈
 
 # Gemini Robotics-ER 1.6
 
-‫Gemini Robotics-ER 1.6 هو نموذج للرؤية واللغة (VLM) يتيح استخدام إمكانات Gemini المستندة إلى الوكلاء في مجال الروبوتات. وهو مصمّم لإجراء عمليات استنتاج متقدّمة في العالم المادي، ما يتيح للروبوتات تفسير البيانات المرئية المعقّدة وإجراء عمليات استنتاج مكانية وتخطيط الإجراءات من خلال الأوامر باللغة الطبيعية.
+Gemini Robotics-ER 1.6 是一款视觉-语言模型 (VLM)，可将 Gemini 的智能体功能引入机器人技术领域。它专为在物理世界中进行高级推理而设计，可让机器人解读复杂的视觉数据、执行空间推理，并根据自然语言命令规划行动。
 
-يُرجى العِلم أنّه إذا كنت تستخدم Gemini Robotics-ER 1.5، يمكنك البدء باستخدام النموذج 1.6
-من خلال استبدال اسم النموذج من `model="gemini-robotics-er-1.5-preview"`
-إلى `model="gemini-robotics-er-1.6-preview"` في طلب البيانات من واجهة برمجة التطبيقات.
+请注意，如果您之前使用的是 Gemini Robotics-ER 1.5，只需在 API 调用中将模型名称从 `model="gemini-robotics-er-1.5-preview"` 替换为 `model="gemini-robotics-er-1.6-preview"`，即可开始使用 1.6 模型。
 
-الميزات والمزايا الرئيسية:
+主要功能和优势：
 
-- **الاستقلالية المحسّنة:** يمكن للروبوتات التفكير والتكيّف والاستجابة للتغييرات في البيئات المفتوحة.
-- **التفاعل باللغة الطبيعية:** يسهّل استخدام الروبوتات من خلال السماح بتعيين مهام معقّدة باستخدام اللغة الطبيعية.
-- **تنظيم المهام:** يحلّل الأوامر باللغة الطبيعية إلى مهام فرعية، ويتكامل مع أدوات التحكّم والسلوكيات الحالية للروبوتات من أجل إكمال المهام الطويلة الأمد.
-- **إمكانات متعدّدة الاستخدامات:** تحديد الأجسام والتعرّف عليها، وفهم العلاقات بين الأجسام، وتخطيط عمليات الإمساك والمسارات، وتفسير المشاهد الديناميكية
+- **增强的自主性**：机器人可以推理、适应并响应开放式环境中的变化。
+- **自然语言互动**：通过使用自然语言分配复杂任务，让机器人更易于使用。
+- **任务编排**：将自然语言命令分解为子任务，并与现有的机器人控制器和行为集成，以完成长时程任务。
+- **功能多样**：可定位和识别对象、了解对象关系、规划抓取和轨迹，以及解读动态场景。
 
-يوضّح هذا المستند [وظيفة النموذج](#how-it-works) ويقدّم لك عدة [أمثلة](#standard-spatial-reasoning) تسلّط الضوء على إمكانات النموذج المستندة إلى الذكاء الاصطناعي.
+本文档介绍了[模型的功能](#how-it-works)，并提供了多个[示例](#standard-spatial-reasoning)来突出展示模型的主动性能力。
 
-إذا أردت البدء على الفور، يمكنك تجربة النموذج في Google AI Studio.
+如果您想立即开始使用，可以在 Google AI Studio 中试用该模型。
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.6-preview&hl=ar)
+[在 Google AI Studio 中试用](https://aistudio.google.com/prompts/new_chat?model=gemini-robotics-er-1.6-preview&hl=zh-cn)
 
-## الأمان
+## 安全
 
-على الرغم من أنّ Gemini Robotics-ER 1.6 مصمَّم مع مراعاة السلامة، تقع على عاتقك مسؤولية الحفاظ على بيئة آمنة حول الروبوت. قد ترتكب نماذج الذكاء الاصطناعي التوليدي أخطاء، وقد تتسبّب الروبوتات المادية في إلحاق الضرر. تُعدّ السلامة من
-الأولويات، ويشكّل توفير السلامة في نماذج الذكاء الاصطناعي التوليدي عند استخدامها مع
-الروبوتات في العالم الحقيقي مجالًا نشطًا ومهمًا في أبحاثنا. لمزيد من المعلومات، يُرجى الانتقال إلى [صفحة أمان الروبوتات في Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=ar).
+虽然 Gemini Robotics-ER 1.6 在设计时就考虑到了安全性，但您仍有责任确保机器人周围的环境安全。生成式 AI 模型可能会出错，而实体机器人可能会造成损坏。安全是我们的首要考虑因素，在将生成式 AI 模型与现实世界中的机器人技术结合使用时，确保其安全性是我们当前研究的一个重要领域。如需了解详情，请访问 [Google DeepMind 机器人安全页面](https://deepmind.google/models/gemini-robotics/safety?hl=zh-cn)。
 
-## البدء: العثور على عناصر في مشهد
+## 入门：查找场景中的对象
 
-يوضّح المثال التالي حالة استخدام شائعة للروبوتات. يوضّح هذا المثال كيفية تمرير صورة وطلب نصي إلى النموذج باستخدام طريقة [`generateContent`](https://ai.google.dev/api/generate-content?hl=ar#method:-models.generatecontent) للحصول على قائمة بالعناصر المحدّدة مع نقاطها الثنائية الأبعاد المقابلة.
-يعرض النموذج نقاطًا للعناصر التي تم التعرّف عليها في صورة، ويعرض الإحداثيات الثنائية الأبعاد العادية والتصنيفات الخاصة بها.
+以下示例展示了一个常见的机器人技术用例。此示例展示了如何使用 [`generateContent`](https://ai.google.dev/api/generate-content?hl=zh-cn#method:-models.generatecontent) 方法将图片和文本提示传递给模型，以获取包含已识别对象及其相应 2D 点的列表。该模型会返回其在图片中识别出的商品的点，并返回这些商品的归一化 2D 坐标和标签。
 
-يمكنك استخدام هذا الناتج مع واجهة برمجة تطبيقات خاصة بالروبوتات أو استدعاء نموذج رؤية ولغة وإجراء (VLA) أو أي دوال أخرى يحدّدها المستخدم تابعة لجهات خارجية لإنشاء إجراءات يمكن للروبوت تنفيذها.
+您可以将此输出与机器人 API 搭配使用，也可以调用视觉语言动作 (VLA) 模型或任何其他第三方用户定义的函数，以生成供机器人执行的动作。
 
 ### Python
 
@@ -123,8 +118,7 @@ curl -X POST \
   }'
 ```
 
-سيكون الناتج مصفوفة JSON تحتوي على عناصر، كل منها يتضمّن `point`
-(إحداثيات `[y, x]` عادية) و`label` يحدّد العنصر.
+输出将是一个包含对象的 JSON 数组，每个对象都包含一个 `point`（归一化的 `[y, x]` 坐标）和一个用于标识对象的 `label`。
 
 ### JSON
 
@@ -143,44 +137,43 @@ curl -X POST \
 ]
 ```
 
-في ما يلي مثال على كيفية عرض هذه النقاط:
+下图展示了如何显示这些点：
 
-![مثال يعرض نقاط العناصر في صورة](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=ar)
+![显示图片中对象点的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/point-to-object.png?hl=zh-cn)
 
-## آلية العمل
+## 运作方式
 
-يتيح Gemini Robotics-ER 1.6 للروبوتات فهم السياق والعمل في العالم المادي باستخدام إمكانات الفهم المكاني. تتلقّى هذه النماذج مدخلات على شكل صور أو فيديوهات أو ملفات صوتية، بالإضافة إلى طلبات مكتوبة بلغة طبيعية، وذلك بهدف:
+Gemini Robotics-ER 1.6 可让机器人利用空间理解能力在物理世界中了解上下文并开展工作。它可接收图片/视频/音频输入和自然语言提示，以执行以下操作：
 
-- **فهم العناصر وسياق المشهد**: يحدّد هذا الخيار العناصر ويشرح علاقتها بالمشهد، بما في ذلك إمكانات استخدامها.
-- **فهم تعليمات المهام**: تفسير المهام المقدَّمة بلغة طبيعية، مثل "العثور على الموزة"
-- **الاستدلال المكاني والزمني**: فهم تسلسلات الإجراءات وكيفية تفاعل العناصر مع مشهد معيّن بمرور الوقت
-- **توفير ناتج منظَّم**: تعرض هذه الدالة إحداثيات (نقاط أو مربّعات محيطة) تمثّل مواقع العناصر.
+- **了解对象和场景背景信息**：识别对象，并推理对象与场景的关系，包括其可供性。
+- **理解任务指令**：解读以自然语言给出的任务，例如“找到香蕉”。
+- **在空间和时间上进行推理**：了解动作序列以及对象在场景中随时间推移的互动方式。
+- **提供结构化输出**：返回表示对象位置的坐标（点或边界框）。
 
-ويتيح ذلك للبرامج الآلية "رؤية" و "فهم" البيئة المحيطة بها بطريقة آلية.
+这样，机器人就可以通过编程方式“看到”并“理解”周围环境。
 
-تتسم Gemini Robotics-ER 1.6 أيضًا بقدرتها على تنفيذ المهام بشكل مستقل، ما يعني أنّها تستطيع تقسيم المهام المعقّدة (مثل "وضع التفاحة في الوعاء") إلى مهام فرعية لتنفيذ المهام الطويلة الأمد:
+Gemini Robotics-ER 1.6 也是代理模型，这意味着它可以将复杂任务（例如“将苹果放入碗中”）分解为子任务，从而编排长期任务：
 
-- **ترتيب المهام الفرعية**: تقسيم الأوامر إلى تسلسل منطقي من الخطوات
-- **طلبات الدوال/تنفيذ الرمز**: ينفّذ الخطوات من خلال طلب دوال/أدوات الروبوت الحالية أو تنفيذ الرمز الذي تم إنشاؤه.
+- **子任务排序**：将命令分解为一系列逻辑步骤。
+- **函数调用/代码执行**：通过调用现有的机器人函数/工具或执行生成的代码来执行步骤。
 
-يمكنك الاطّلاع على مزيد من المعلومات حول طريقة عمل ميزة استدعاء الدوال في Gemini على [صفحة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=ar#how-it-works).
+如需详细了解如何使用 Gemini 进行函数调用，请参阅[函数调用页面](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=zh-cn#how-it-works)。
 
-### استخدام ميزانية التفكير مع Gemini Robotics-ER 1.6
+### 将思考预算与 Gemini Robotics-ER 1.6 搭配使用
 
-يحتوي Gemini Robotics-ER 1.6 على ميزانية مرنة للتفكير تتيح لك التحكّم في المفاضلة بين وقت الاستجابة والدقة. بالنسبة إلى مهام الفهم المكاني، مثل رصد العناصر، يمكن للنموذج تحقيق أداء عالٍ بميزانية تفكير صغيرة. تستفيد مهام الاستدلال الأكثر تعقيدًا، مثل العد وتقدير الوزن، من ميزانية تفكير أكبر. يتيح لك ذلك تحقيق التوازن بين الحاجة إلى ردود بزمن انتقال منخفض ونتائج عالية الدقة للمهام الأكثر صعوبة.
+Gemini Robotics-ER 1.6 具有灵活的思考预算，可让您控制延迟与准确性之间的权衡。对于物体检测等空间理解任务，模型只需少量思考预算即可实现高性能。对于计数和重量估计等更复杂的推理任务，较大的思考预算会带来更好的效果。这样，您就可以在需要低延迟响应的任务和需要高准确度结果的任务之间取得平衡。
 
-لمزيد من المعلومات عن ميزانيات التفكير، اطّلِع على صفحة الإمكانات الأساسية [التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar).
+如需详细了解思考预算，请参阅[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)核心功能页面。
 
-## الاستدلال المكاني العادي
+## 标准空间推理
 
-توضّح الأمثلة التالية مهام **الإدراك الآلي** والاستدلال المكاني باستخدام طلبات باللغة الطبيعية، بدءًا من الإشارة إلى العناصر والعثور عليها في صورة، وصولاً إلى تخطيط المسارات. لتبسيط الأمور، تم تقليل مقتطفات الرموز البرمجية في هذه الأمثلة لعرض الطلب واستدعاء واجهة برمجة التطبيقات `generate_content` فقط.
+以下示例演示了如何使用自然语言提示完成**机器人感知**和空间推理任务，包括在图像中指明和查找对象，以及规划轨迹。为简单起见，这些示例中的代码段已简化，仅显示提示和对 `generate_content` API 的调用。
 
-يمكنك العثور على الرمز الكامل القابل للتنفيذ بالإضافة إلى أمثلة إضافية في [كتاب وصفات الروبوتات](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+完整的可运行代码以及其他示例可在 [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) 中找到。
 
-### الإشارة إلى العناصر
+### 指向对象
 
-يُعدّ تحديد الأغراض في الصور أو لقطات الفيديو والعثور عليها حالة استخدام شائعة
-لنماذج الرؤية واللغة (VLM) في مجال الروبوتات. يطلب المثال التالي من النموذج العثور على عناصر محدّدة في صورة وعرض إحداثياتها.
+在机器人技术中，视觉和语言模型 (VLM) 的常见应用场景是在图片或视频帧中指明并找到对象。以下示例要求模型查找图片中的特定对象并返回其坐标。
 
 ### Python
 
@@ -228,7 +221,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-سيكون الناتج مشابهًا لمثال &quot;البدء&quot;، وهو ملف JSON يحتوي على إحداثيات العناصر التي تم العثور عليها وتصنيفاتها.
+输出将与“入门”示例类似，是一个包含所找到对象的坐标及其标签的 JSON。
 
 ```
 [
@@ -242,10 +235,9 @@ print(image_response.text)
 ]
 ```
 
-![مثال يعرض نقاط العناصر التي تم التعرّف عليها في صورة](https://ai.google.dev/static/gemini-api/docs/images/robotics/pointing-objects.png?hl=ar)
+![一个示例，用于显示图片中识别出的对象的点](https://ai.google.dev/static/gemini-api/docs/images/robotics/pointing-objects.png?hl=zh-cn)
 
-استخدِم الطلب التالي لكي تفسّر النماذج الفئات المجردة
-مثل "الفاكهة" بدلاً من الكائنات المحددة، وتحدّد جميع مثيلاتها في الصورة.
+使用以下提示，让模型解读“水果”等抽象类别，而不是具体对象，并找到图片中的所有实例。
 
 ### Python
 
@@ -258,14 +250,13 @@ prompt = f"""
         [y, x] format normalized to 0-1000."""
 ```
 
-يمكنك الانتقال إلى صفحة [فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar) للاطّلاع على تقنيات أخرى لمعالجة الصور.
+如需了解其他图片处理技术，请访问[图片理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn)页面。
 
-### تتبُّع العناصر في فيديو
+### 跟踪视频中的对象
 
-يمكن لـ Gemini Robotics-ER 1.6 أيضًا تحليل لقطات الفيديو لتتبُّع العناصر بمرور الوقت. يمكنك الاطّلاع على [مدخلات الفيديو](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar#supported-formats)
-للحصول على قائمة بتنسيقات الفيديو المتوافقة.
+Gemini Robotics-ER 1.6 还可以分析视频帧，以跟踪一段时间内的对象。如需查看支持的视频格式列表，请参阅[视频输入](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn#supported-formats)。
 
-في ما يلي الطلب الأساسي المستخدَم للعثور على عناصر محدّدة في كل إطار يحلّله النموذج:
+以下是用于在模型分析的每个帧中查找特定对象的基本提示：
 
 ### Python
 
@@ -289,17 +280,17 @@ base_prompt = f"""
   """
 ```
 
-تعرض النتيجة قلمًا وكمبيوترًا محمولاً يتم تتبّعهما في جميع لقطات الفيديو.
+输出结果显示了在视频帧中跟踪笔和笔记本电脑的过程。
 
-![مثال يعرض تتبُّع الكائنات من خلال إطارات في صورة GIF](https://ai.google.dev/static/gemini-api/docs/images/robotics/object-tracking.gif?hl=ar)
+![一个示例，展示了如何在 GIF 中跨帧跟踪对象](https://ai.google.dev/static/gemini-api/docs/images/robotics/object-tracking.gif?hl=zh-cn)
 
-للاطّلاع على الرمز الكامل القابل للتنفيذ، راجِع [كتاب وصفات الروبوتات](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+如需查看完整的可运行代码，请参阅[机器人技术食谱](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)。
 
-### رصد العناصر والمربّعات المحيطة
+### 对象检测和边界框
 
-بالإضافة إلى النقاط الفردية، يمكن للنموذج أيضًا عرض مربّعات حدود ثنائية الأبعاد، ما يوفّر منطقة مستطيلة تحيط بأحد العناصر.
+除了单个点之外，该模型还可以返回 2D 边界框，提供包含对象的矩形区域。
 
-يطلب هذا المثال مربّعات إحاطة ثنائية الأبعاد للعناصر القابلة للتحديد على طاولة. يتم توجيه النموذج إلى حصر الناتج بـ 25 عنصرًا وتسمية مثيلات متعددة بشكل فريد.
+此示例请求获取桌面上可识别对象的 2D 边界框。系统指示模型将输出限制为 25 个对象，并为多个实例指定唯一名称。
 
 ### Python
 
@@ -342,18 +333,18 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-يعرض ما يلي المربّعات التي تمّت إعادتها من النموذج.
+以下内容显示了模型返回的方框。
 
-![مثال يعرض مربّعات الإحاطة للعناصر التي تم العثور عليها](https://ai.google.dev/static/gemini-api/docs/images/robotics/bounding-boxes.png?hl=ar)
+![一个示例，显示了检测到的对象的边界框](https://ai.google.dev/static/gemini-api/docs/images/robotics/bounding-boxes.png?hl=zh-cn)
 
-للاطّلاع على الرمز الكامل القابل للتنفيذ، راجِع [كتاب الطبخ الخاص بالروبوتات](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
-تتضمّن صفحة [فهم الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar) أيضًا أمثلة إضافية على المهام المرئية، مثل رصد العناصر وأمثلة على المربّعات المحيطة.
+如需查看完整的可运行代码，请参阅 [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)。
+[图像理解](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn)页面还提供了其他视觉任务示例，例如对象检测和边界框示例。
 
-### المسارات
+### 轨迹
 
-يمكن لنموذج Gemini Robotics-ER 1.6 إنشاء تسلسلات من النقاط التي تحدّد مسارًا، ما يفيد في توجيه حركة الروبوت.
+Gemini Robotics-ER 1.6 可以生成定义轨迹的点序列，有助于引导机器人运动。
 
-يطلب هذا المثال مسارًا لتحريك قلم أحمر إلى منظم، بما في ذلك نقطة البداية وسلسلة من النقاط الوسيطة.
+此示例请求将红笔移动到整理器的轨迹，包括起点和一系列中间点。
 
 ### Python
 
@@ -395,9 +386,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-تتألف الاستجابة من مجموعة إحداثيات تصف مسار القلم الأحمر
-الذي يجب أن يتّبعه لإكمال مهمة تحريكه إلى أعلى
-المنظِّم:
+响应是一组坐标，用于描述红色笔应遵循的轨迹，以完成将其移动到整理器顶部的任务：
 
 ```
 [
@@ -420,15 +409,15 @@ print(image_response.text)
 ]
 ```
 
-![مثال يوضّح المسار المخطّط له](https://ai.google.dev/static/gemini-api/docs/images/robotics/trajectories.png?hl=ar)
+![显示计划轨迹的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/trajectories.png?hl=zh-cn)
 
-## إمكانات بالذكاء الاصطناعي الوكيل
+## 智能体功能
 
-توضّح الأمثلة التالية **الاستدلال الآلي** المتقدّم باستخدام إمكانات الذكاء الاصطناعي الوكيل في النموذج، وتحديدًا **تنفيذ الرمز البرمجي**. في هذه الحالات، يمكن للنموذج أن يقرر كتابة رمز Python وتنفيذه لمعالجة الصور (مثل التكبير أو الاقتصاص أو التدوير) بهدف إزالة الغموض أو تحسين الدقة قبل تقديم الإجابة.
+以下示例展示了如何使用模型的主动能力（尤其是**代码执行**）进行高级**机器人推理**。在这些场景中，模型可以决定编写和执行 Python 代码来处理图片（例如放大、裁剪或旋转），以消除歧义或提高精度，然后再回答问题。
 
-### رصد الأجسام (التكبير والقص)
+### 对象检测（缩放和裁剪）
 
-يوضّح المثال التالي كيفية استخدام تنفيذ الرمز البرمجي لتكبير صورة واقتصاصها من أجل عرضها بشكل أوضح عند رصد العناصر وعرض المربّعات المحيطة بها.
+以下示例演示了如何使用代码执行功能在检测到对象并返回边界框时缩放和裁剪图片，以便更清晰地查看。
 
 ### Python
 
@@ -467,7 +456,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-سيكون الناتج الذي يصدره النموذج مشابهًا لما يلي:
+模型输出将类似如下所示：
 
 ```
 [
@@ -479,13 +468,13 @@ print(response.text)
 ]
 ```
 
-يعرض ما يلي المربّعات التي تمّت إعادتها من النموذج.
+以下内容显示了模型返回的方框。
 
-![مثال يعرض مربّعات الإحاطة للعناصر التي تم العثور عليها](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=ar)
+![一个示例，显示了检测到的对象的边界框](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-bounding-boxes.png?hl=zh-cn)
 
-### قراءة مقياس تناظري وتطبيق المنطق
+### 读取模拟仪表并应用逻辑
 
-يوضّح المثال التالي كيفية استخدام النموذج لقراءة مقياس تناظري وإجراء عمليات حسابية متعلقة بالوقت. يستخدم تعليمات النظام لفرض إخراج JSON.
+以下示例演示了如何使用该模型读取模拟表盘并执行时间计算。它使用系统指令来强制生成 JSON 输出。
 
 ### Python
 
@@ -522,11 +511,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-في ما يلي مثال على إدخال صورة.
+以下是输入图片的示例。
 
-![مثال يعرض ساعة للقراءة](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-clock-reading.png?hl=ar)
+![显示时钟的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-clock-reading.png?hl=zh-cn)
 
-سيكون الناتج الذي يصدره النموذج مشابهًا لما يلي:
+模型输出将类似如下所示：
 
 ```
 Time Response:  {
@@ -535,9 +524,9 @@ Time Response:  {
  }
 ```
 
-### قياس السائل في وعاء
+### 测量容器中的液体
 
-يوضّح المثال التالي كيفية استخدام تنفيذ الرمز البرمجي لقراءة مقياس واحتساب مستوى السائل كنسبة مئوية.
+以下示例展示了如何使用代码执行功能读取仪表并计算液位百分比。
 
 ### Python
 
@@ -577,13 +566,13 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-في ما يلي صورة مكبّرة للإدخال.
+下图是输入的放大版。
 
-![مثال يعرض ساعة للقراءة](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-fluid-container.png?hl=ar)
+![显示时钟的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-fluid-container.png?hl=zh-cn)
 
-### قراءة العلامات على لوحة الدوائر الكهربائية
+### 读取电路板上的标记
 
-يوضّح المثال التالي كيفية استخدام تنفيذ التعليمات البرمجية لقراءة نص على شريحة لوحة إلكترونية، ما يتيح للنموذج تكبير الصورة واقتصاصها وتدويرها حسب الحاجة.
+以下示例演示了如何使用代码执行功能读取电路板芯片上的文字，从而让模型能够根据需要缩放、裁剪和旋转图片。
 
 ### Python
 
@@ -617,13 +606,13 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-في ما يلي صورة مكبّرة للإدخال.
+下图是输入的放大版。
 
-![مثال يعرض ساعة للقراءة](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=ar)
+![显示时钟的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-circuit-board.png?hl=zh-cn)
 
-### التعليق التوضيحي على الصور
+### 图片注释
 
-يوضّح المثال التالي كيفية استخدام تنفيذ الرمز البرمجي لإضافة تعليقات توضيحية إلى صورة (مثل رسم أسهم لتعليمات التخلص من المنتج) وعرض الصورة المعدَّلة.
+以下示例演示了如何使用代码执行功能来注释图片（例如，绘制箭头以指示处置说明），并返回修改后的图片。
 
 ### Python
 
@@ -661,11 +650,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-في ما يلي مثال على إدخال صورة.
+以下是输入图片的示例。
 
-![مثال يعرض ساعة للقراءة](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=ar)
+![显示时钟的示例](https://ai.google.dev/static/gemini-api/docs/images/robotics/agentic-image-annotation.png?hl=zh-cn)
 
-سيكون الناتج الذي يصدره النموذج مشابهًا لما يلي:
+模型输出将类似如下所示：
 
 ```
 The annotated image shows the suggested disposal locations for the items on the table:
@@ -674,13 +663,13 @@ The annotated image shows the suggested disposal locations for the items on the 
 - **Black bin (Trash)**: Chocolate bar wrapper, Welch's packet, and white tissue.
 ```
 
-## التنسيق
+## 编排
 
-يمكن لروبوت Gemini Robotics-ER 1.6 إجراء **تخطيط المهام** والاستدلال المكاني على مستوى أعلى، واستنتاج الإجراءات أو تحديد المواقع المثالية استنادًا إلى الفهم السياقي لتنفيذ المهام الطويلة الأمد.
+Gemini Robotics-ER 1.6 可以执行**任务规划**和更高级别的空间推理，根据上下文理解来推断动作或确定最佳位置，从而编排长时程任务。
 
-### توفير مساحة للكمبيوتر المحمول
+### 为笔记本电脑腾出空间
 
-يوضّح هذا المثال كيف يمكن لـ Gemini Robotics-ER التفكير في مساحة معيّنة. يطلب الطلب من النموذج تحديد العنصر الذي يجب نقله لإتاحة مساحة لعنصر آخر.
+此示例展示了 Gemini Robotics-ER 如何对空间进行推理。此提示要求模型确定需要移动哪个对象才能为另一项物品腾出空间。
 
 ### Python
 
@@ -718,7 +707,7 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-تحتوي الاستجابة على إحداثيات ثنائية الأبعاد للعنصر الذي يجيب عن سؤال المستخدم، وهو في هذه الحالة العنصر الذي يجب تحريكه لإفساح المجال لجهاز كمبيوتر محمول.
+响应包含回答用户问题的对象的二维坐标，在本例中，该对象应移动以腾出空间放置笔记本电脑。
 
 ```
 [
@@ -726,11 +715,11 @@ print(image_response.text)
 ]
 ```
 
-![مثال يوضّح العنصر الذي يجب نقله إلى عنصر آخر](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=ar)
+![一个示例，显示了需要移动哪个对象才能移动另一个对象](https://ai.google.dev/static/gemini-api/docs/images/robotics/spatial-reasoning.png?hl=zh-cn)
 
-### تجهيز وجبة غداء
+### 打包午餐
 
-يمكن للنموذج أيضًا تقديم تعليمات للمهام المتعددة الخطوات والإشارة إلى الكائنات ذات الصلة بكل خطوة. يوضّح هذا المثال كيف يخطّط النموذج لسلسلة من الخطوات لتعبئة حقيبة الغداء.
+该模型还可以为多步骤任务提供指令，并指出每个步骤的相关对象。此示例展示了模型如何规划一系列步骤来打包午餐袋。
 
 ### Python
 
@@ -769,13 +758,13 @@ image_response = client.models.generate_content(
 print(image_response.text)
 ```
 
-تتضمّن الاستجابة لهذا الطلب مجموعة من التعليمات المفصَّلة حول كيفية تعبئة حقيبة غداء من الصورة التي تم إدخالها.
+此提示的回答是一组关于如何打包图片输入中的午餐袋的分步说明。
 
-**الصورة المدخَلة**
+**输入图片**
 
-![صورة لعلبة غداء وأشياء يمكن وضعها فيها](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=ar)
+![图片：一个午餐盒以及要放入其中的物品](https://ai.google.dev/static/gemini-api/docs/images/robotics/packing-lunch.png?hl=zh-cn)
 
-**نتائج النموذج**
+**模型输出**
 
 ```
 Based on the image, here is a plan to pack the lunch box and lunch bag:
@@ -798,15 +787,15 @@ Here is the list of objects and their locations:
 *   [{"point": [448, 501], "label": "brown lunch bag"}]
 ```
 
-### استدعاء واجهة برمجة تطبيقات روبوت مخصّصة
+### 调用自定义机器人 API
 
-يوضّح هذا المثال تنسيق المهام باستخدام واجهة برمجة تطبيقات مخصّصة للروبوت. وتتضمّن واجهة برمجة تطبيقات وهمية مصمَّمة لتنفيذ عملية الالتقاط والوضع. المهمة هي التقاط مكعّب أزرق ووضعه في وعاء برتقالي:
+此示例演示了如何使用自定义机器人 API 进行任务编排。它引入了一个专为放置操作设计的模拟 API。任务是拿起一个蓝色积木，然后将其放入橙色碗中：
 
-![صورة للكتلة والوعاء](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=ar)
+![方块和碗的图片](https://ai.google.dev/static/gemini-api/docs/images/robotics/robot-api-example.png?hl=zh-cn)
 
-كما هو الحال مع الأمثلة الأخرى في هذه الصفحة، يتوفّر الرمز الكامل القابل للتنفيذ في [كتاب وصفات الروبوتات](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb).
+与本页上的其他示例类似，完整的可运行代码可在 [Robotics cookbook](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb) 中找到。
 
-الخطوة الأولى هي تحديد موقع كلتا السلعتَين باستخدام الطلب التالي:
+第一步是使用以下提示找到这两个商品：
 
 ### Python
 
@@ -819,7 +808,7 @@ prompt = """
           """
 ```
 
-يتضمّن ردّ النموذج الإحداثيات العادية للمكعب والوعاء:
+模型响应包含积木和碗的归一化坐标：
 
 ```
 [
@@ -828,7 +817,7 @@ prompt = """
 ]
 ```
 
-يستخدم هذا المثال واجهة برمجة تطبيقات الروبوت الوهمية التالية:
+此示例使用以下模拟机器人 API：
 
 ### Python
 
@@ -843,7 +832,7 @@ def returnToOrigin():
   print("Returning to origin pose")
 ```
 
-الخطوة التالية هي استدعاء سلسلة من دوال واجهة برمجة التطبيقات مع المنطق اللازم لتنفيذ الإجراء. يتضمّن الطلب التالي وصفًا لواجهة برمجة التطبيقات الخاصة بالروبوت التي يجب أن يستخدمها النموذج عند تنسيق هذه المهمة.
+下一步是调用一系列 API 函数，其中包含执行操作所需的逻辑。以下提示包含机器人 API 的说明，模型在编排此任务时应使用该 API。
 
 ### Python
 
@@ -887,7 +876,7 @@ prompt = f"""
 """
 ```
 
-يوضّح ما يلي ناتجًا محتملاً للنموذج استنادًا إلى الطلب وواجهة برمجة التطبيقات الوهمية الخاصة بالروبوت. يتضمّن الناتج عملية التفكير في النموذج والمهام التي خطّط لها نتيجةً لذلك. ويعرض أيضًا ناتج استدعاءات وظائف الروبوت التي رتّبها النموذج معًا.
+以下内容展示了模型基于提示和模拟机器人 API 的可能输出。输出包括模型思考过程以及由此规划的任务。它还显示了模型按顺序排列的机器人函数调用的输出。
 
 ```
 Reasoning: To perform the pick and place operation, I will first move the
@@ -987,78 +976,71 @@ moving to coordinates: -247, 90, 15
 Returning to origin pose
 ```
 
-## أفضل الممارسات
+## 最佳做法
 
-لتحسين أداء تطبيقات الروبوتات ودقتها، من المهم معرفة كيفية التفاعل مع نموذج Gemini بفعالية. يوضّح هذا القسم أفضل الممارسات والاستراتيجيات الرئيسية لصياغة الطلبات والتعامل مع البيانات المرئية وتنظيم المهام لتحقيق النتائج الأكثر موثوقية.
+为了优化机器人应用的性能和准确性，务必要了解如何有效地与 Gemini 模型互动。本部分概述了有关如何精心设计提示、处理视觉数据和构建任务的最佳实践和关键策略，以获得最可靠的结果。
 
-1. استخدِم لغة واضحة وبسيطة.
+1. 使用清晰简洁的语言。
 
-   - **استخدام اللغة الطبيعية**: تم تصميم نموذج Gemini لفهم اللغة الطبيعية المستخدمة في المحادثات. نظِّم طلباتك بطريقة واضحة من الناحية الدلالية وتعكس الطريقة التي يقدّم بها الشخص التعليمات بشكل طبيعي.
-   - **استخدام مصطلحات يومية**: استخدِم لغة شائعة ويومية بدلاً من المصطلحات الفنية أو المتخصصة. إذا لم يستجب النموذج كما هو متوقّع لمصطلح معيّن، جرِّب إعادة صياغته باستخدام مرادف أكثر شيوعًا.
-2. تحسين الإدخال المرئي
+   - **使用自然语言**：Gemini 模型旨在理解自然对话语言。以语义清晰的方式构建提示，并模仿人们自然给出指令的方式。
+   - **使用日常用语**：选择常用日常用语，而非技术性或专业术语。如果模型对某个特定术语的回答不尽如人意，请尝试使用更常见的同义词重新措辞。
+2. 优化视觉输入。
 
-   - **التكبير للحصول على التفاصيل**: عند التعامل مع عناصر صغيرة أو يصعب تمييزها في لقطة أوسع، استخدِم وظيفة مربّع الإحاطة لعزل العنصر المطلوب. يمكنك بعد ذلك اقتصاص الصورة إلى هذا الجزء وإرسال الصورة الجديدة التي تم التركيز فيها إلى النموذج لإجراء تحليل أكثر تفصيلاً.
-   - **تجربة الإضاءة والألوان**: يمكن أن تتأثر قدرة النموذج على الإدراك بظروف الإضاءة الصعبة والتباين الضعيف في الألوان.
-3. قسِّموا المشاكل المعقّدة إلى خطوات أصغر. ومن خلال معالجة كل خطوة أصغر على حدة، يمكنك توجيه النموذج للوصول إلى نتيجة أكثر دقة ونجاحًا.
-4. تحسين الدقة من خلال الإجماع بالنسبة إلى المهام التي تتطلّب درجة عالية من الدقة، يمكنك توجيه طلب البحث إلى النموذج عدة مرات باستخدام الطلب نفسه. ومن خلال حساب متوسط النتائج التي تم عرضها، يمكنك التوصّل إلى "إجماع" يكون غالبًا أكثر دقة وموثوقية.
+   - **放大以查看细节**：如果拍摄对象较小或在广角镜头中难以辨别，请使用边界框功能来隔离感兴趣的对象。然后，您可以根据此选择框剪裁图片，并将剪裁后的新图片发送给模型，以进行更详细的分析。
+   - **尝试不同的光线和颜色**：模型对图像的感知可能会受到光线条件不佳和颜色对比度差的影响。
+3. 将复杂的问题分解为较小的步骤。通过单独处理每个较小的步骤，您可以引导模型获得更精确、更成功的结果。
+4. 通过共识提高准确性。对于需要高精确度的任务，您可以多次使用同一提示查询模型。通过对返回的结果求平均值，您可以得出通常更准确、更可靠的“共识”。
 
-## القيود
+## 限制
 
-يجب مراعاة القيود التالية عند التطوير باستخدام Gemini Robotics-ER 1.6:
+使用 Gemini Robotics-ER 1.6 进行开发时，请考虑以下限制：
 
-- **حالة المعاينة:** النموذج حاليًا في مرحلة **المعاينة**. قد تتغيّر واجهات برمجة التطبيقات والإمكانات، وقد لا تكون مناسبة للتطبيقات المهمة في مرحلة الإنتاج بدون إجراء اختبارات شاملة.
-- **زمن الاستجابة:** يمكن أن تؤدي الطلبات المعقّدة أو المدخلات العالية الدقة أو
-  `thinking_budget` إلى زيادة أوقات المعالجة.
-- **الهلوسات:** مثل جميع النماذج اللغوية الكبيرة، يمكن أن "يهلوس" Gemini Robotics-ER 1.6
-  أحيانًا أو يقدّم معلومات غير صحيحة، خاصةً
-  في ما يتعلّق بالطلبات الغامضة أو المدخلات غير المتوقّعة.
-- **الاعتماد على جودة الطلب:** تعتمد جودة النتائج التي يقدّمها النموذج بشكل كبير على وضوح الطلب المُدخَل ومدى صلته بالموضوع. يمكن أن تؤدي الطلبات الغامضة أو السيئة التنظيم إلى نتائج غير مثالية.
-- **التكلفة الحسابية:** يؤدي تشغيل النموذج، خاصةً مع إدخال فيديوهات أو
-  `thinking_budget` عالية، إلى استهلاك موارد حسابية وتكبّد تكاليف.
-  يمكنك الاطّلاع على صفحة [التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) لمزيد من التفاصيل.
-- **أنواع الإدخال:** اطّلِع على المواضيع التالية لمعرفة تفاصيل حول القيود المفروضة على كل وضع.
-  - [مدخلات الصور](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ar#technical-details-image)
-  - [إدخالات الفيديو](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ar#supported-formats)
-  - [إدخال الصوت](https://ai.google.dev/gemini-api/docs/audio?hl=ar#supported-formats)
+- **预览版状态**：该模型目前处于**预览版**阶段。API 和功能可能会发生变化，未经全面测试，可能不适合用于对生产至关重要的应用。
+- **延迟时间**：复杂的查询、高分辨率输入或广泛的 `thinking_budget` 可能会导致处理时间增加。
+- **幻觉**：与所有大语言模型一样，Gemini Robotics-ER 1.6 有时也会产生“幻觉”或提供不正确的信息，尤其是在提示不明确或输入超出分布范围时。
+- **对提示质量的依赖性**：模型输出的质量高度依赖于输入提示的清晰度和具体性。模糊不清或结构不合理的提示可能会导致结果不理想。
+- **计算成本**：运行模型（尤其是使用视频输入或高 `thinking_budget` 时）会消耗计算资源并产生费用。如需了解详情，请参阅[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)页面。
+- **输入类型**：如需详细了解每种模式的限制，请参阅以下主题。
+  - [图片输入](https://ai.google.dev/gemini-api/docs/image-understanding?hl=zh-cn#technical-details-image)
+  - [视频输入](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn#supported-formats)
+  - [音频输入](https://ai.google.dev/gemini-api/docs/audio?hl=zh-cn#supported-formats)
 
-## إشعار الخصوصية
+## 隐私权声明
 
-أنت تقرّ بأنّ النماذج المشار إليها في هذا المستند ("نماذج الروبوتات") تستخدم بيانات الفيديو والصوت لتشغيل الأجهزة وتحريكها وفقًا لتعليماتك. وبالتالي، يمكنك تشغيل "نماذج الروبوتات" بطريقة تؤدي إلى جمع بيانات من أشخاص يمكن التعرّف عليهم، مثل بيانات الصوت والصور والتشابه ("البيانات الشخصية"). إذا اخترت تشغيل "نماذج الروبوتات" بطريقة تجمع "البيانات الشخصية"، أنت توافق على عدم السماح لأي أشخاص يمكن التعرّف عليهم بالتفاعل مع "نماذج الروبوتات" أو التواجد في المنطقة المحيطة بها، إلا بعد إبلاغ هؤلاء الأشخاص بشكل كافٍ وموافقتهم على إمكانية تقديم بياناتهم الشخصية إلى Google واستخدامها من قِبلها على النحو الموضّح في "البنود الإضافية لخدمة Gemini API" المتوفّرة على الرابط [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=ar) (المشار إليها باسم "البنود")، بما في ذلك وفقًا للقسم بعنوان "طريقة استخدام Google لبياناتك". ستضمن أنّ هذا الإشعار يسمح بجمع البيانات الشخصية واستخدامها على النحو الموضّح في &quot;البنود&quot;، وستبذل جهودًا معقولة تجاريًا للحدّ من جمع البيانات الشخصية وتوزيعها باستخدام تقنيات مثل تمويه الوجوه وتشغيل &quot;نماذج الروبوتات&quot; في مناطق لا تحتوي على أشخاص يمكن التعرّف عليهم إلى الحدّ الذي يمكن تنفيذه عمليًا.
+您确认，本文档中提及的模型（以下简称“机器人模型”）会利用视频和音频数据来运行您的硬件并按照您的指令移动。因此，您可能会操作机器人模型，以便机器人模型收集可识别个人的数据，例如语音、图像和肖像数据（“个人数据”）。如果您选择以会收集个人数据的方式操作机器人模型，则表示您同意，除非且直到可识别身份的个人充分了解并同意其个人数据可能会按照 [https://ai.google.dev/gemini-api/terms](https://ai.google.dev/gemini-api/terms?hl=zh-cn)（以下简称“条款”）中所述的方式提供给 Google 并由 Google 使用（包括按照标题为“Google 如何使用您的数据”的部分中所述的方式），否则您不得允许任何可识别身份的个人与机器人模型互动或出现在机器人模型周围的区域。您应确保此类通知允许按照本条款的规定收集和使用个人数据，并且您将尽商业上合理的努力，通过使用面部模糊处理等技术以及在不包含可识别人员的区域内操作机器人模型，尽可能减少个人数据的收集和分发。
 
-## الأسعار
+## 价格
 
-للحصول على معلومات تفصيلية حول الأسعار والمناطق المتاحة، يُرجى الرجوع إلى صفحة [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar).
+如需详细了解价格和可用地区，请参阅[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)页面。
 
-## إصدارات النموذج
+## 模型版本
 
-### Robotics-ER 1.6 Preview
+### Robotics-ER 1.6 预览版
 
-| الموقع | الوصف |
+| 属性 | 说明 |
 | --- | --- |
-| رمز النموذج id\_card | `gemini-robotics-er-1.6-preview` |
-| saveأنواع البيانات المتوافقة | **المدخلات**  النصوص والصور والفيديوهات والمحتوى الصوتي  **الناتج**  نص |
-| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  131,072  **الحدّ الأقصى لعدد الرموز المميزة الناتجة**  65,536 |
-| handymanالإمكانات | **[إنشاء الصوت](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar)**  غير متاح  **[التخزين المؤقت](https://ai.google.dev/gemini-api/docs/caching?hl=ar)**  متاح  **[تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)**  متاح  **[استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar)**  متاح  **[البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)**  متاح  **[استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)**  متاح  **[استخدام "خرائط Google" كمصدر](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar)**  متاح  **[إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)**  غير متاح  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar)**  غير متاح  **[تحديد المصادر في "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)**  متاح  **[المُخرجات المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)**  متاح  **[التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar)**  متاح  **[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)**  متاح |
-| speedخيارات الاستهلاك | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar)**  متاح  **[الاستدلال المرن](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ar)**  متاح  **[استنتاج الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar)**  متاح |
-| 123الإصدارات | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - معاينة: `gemini-robotics-er-1.6-preview` |
-| calendar\_monthآخر تعديل | ديسمبر 2025 |
-| cognition\_2تاريخ آخر تحديث للبيانات | يناير 2025 |
+| id\_card 模型代码 | `gemini-robotics-er-1.6-preview` |
+| 保存支持的数据类型 | **输入源**  文本、图片、视频、音频  **输出**  文本 |
+| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  131,072  **输出 token 限制**  65536 |
+| handyman功能 | **[音频生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-cn)**  不受支持  **[缓存](https://ai.google.dev/gemini-api/docs/caching?hl=zh-cn)**  支持  **[代码执行](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-cn)**  支持  **[计算机使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=zh-cn)**  支持  **[文件搜索](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-cn)**  支持  **[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)**  支持  **[依托 Google 地图进行接地](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-cn)**  支持  **[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn)**  不受支持  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn)**  不受支持  **[搜索接地](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-cn)**  支持  **[结构化输出](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-cn)**  支持  **[思考型](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn)**  支持  **[网址上下文](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-cn)**  支持 |
+| speed使用选项 | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-cn)**  支持  **[灵活推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)**  支持  **[优先推断](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-cn)**  支持 |
+| 123 版本 | 如需了解详情，请参阅[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-cn#model-versions)。  - 预览：`gemini-robotics-er-1.6-preview` |
+| calendar\_month最新更新 | 2025 年 12 月 |
+| cognition\_2知识截点 | 2025 年 1 月 |
 
-## الخطوات التالية
+## 后续步骤
 
-- استكشِف إمكانات أخرى وواصِل تجربة طلبات ومدخلات مختلفة لاكتشاف المزيد من تطبيقات Gemini Robotics-ER 1.6.
-  اطّلِع على [ملف Colab الخاص ببدء استخدام الروبوتات](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)
-  للاطّلاع على المزيد من الأمثلة.
-- لمعرفة المزيد حول كيفية تصميم نماذج Gemini Robotics مع مراعاة الأمان، يُرجى الانتقال إلى [صفحة أمان الروبوتات في Google DeepMind](https://deepmind.google/models/gemini-robotics/safety?hl=ar).
-- يمكنك الاطّلاع على آخر الأخبار حول نماذج Gemini Robotics على
-  [صفحة Gemini Robotics المقصودة](https://deepmind.google/robotics?hl=ar).
+- 探索其他功能，并继续尝试使用不同的提示和输入，以发现 Gemini Robotics-ER 1.6 的更多应用。
+  如需查看更多示例，请参阅 [Robotics 入门 Colab](https://github.com/google-gemini/robotics-samples/blob/main/Getting%20Started/gemini_robotics_er.ipynb)。
+- 如需了解 Gemini 机器人模型在构建时如何考虑安全性，请访问 [Google DeepMind 机器人安全页面](https://deepmind.google/models/gemini-robotics/safety?hl=zh-cn)。
+- 如需了解 Gemini Robotics 模型的最新更新，请访问 [Gemini Robotics 着陆页](https://deepmind.google/robotics?hl=zh-cn)。
 
-إرسال ملاحظات
+发送反馈
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-تاريخ التعديل الأخير: 2026-07-13 (حسب التوقيت العالمي المتفَّق عليه)
+最后更新时间 (UTC)：2026-07-13。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+需要向我们提供更多信息？
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-13 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-13。"],[],[]]

@@ -1,37 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=vi
-fetched_at: 2026-07-20T04:34:16.574544+00:00
-title: "Hi\u1ec3u t\u00e0i li\u1ec7u \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=ar
+fetched_at: 2026-07-27T04:37:37.437032+00:00
+title: "\u0641\u0647\u0645 \u0627\u0644\u0645\u0633\u062a\u0646\u062f\u0627\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-# Hiểu tài liệu
+# فهم المستندات
 
-Các mô hình Gemini có thể xử lý tài liệu ở định dạng PDF, sử dụng thị giác tự nhiên để hiểu toàn bộ ngữ cảnh của tài liệu. Tính năng này không chỉ trích xuất văn bản mà còn cho phép Gemini:
+يمكن لنماذج Gemini معالجة المستندات بتنسيق PDF باستخدام ميزة "الرؤية الأصلية" لفهم سياقات المستندات بأكملها. يتجاوز ذلك مجرد استخراج النص، ما يتيح لـ Gemini ما يلي:
 
-- Phân tích và diễn giải nội dung, bao gồm cả văn bản, hình ảnh, sơ đồ, biểu đồ và bảng, ngay cả trong các tài liệu dài lên đến 1.000 trang.
-- Trích xuất thông tin thành các định dạng [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
-- Tóm tắt và trả lời câu hỏi dựa trên cả yếu tố hình ảnh và văn bản trong tài liệu.
-- Chuyển nội dung tài liệu thành văn bản (ví dụ: sang HTML), giữ nguyên bố cục và định dạng để sử dụng trong các ứng dụng tiếp theo.
+- تحليل المحتوى وتفسيره، بما في ذلك النصوص والصور والمخططات والرسومات البيانية والجداول، حتى في المستندات الطويلة التي تصل إلى 1,000 صفحة
+- استخراج المعلومات بتنسيقات [النتائج المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)
+- تلخيص المستندات والإجابة عن الأسئلة استنادًا إلى العناصر المرئية والنصية فيها
+- تحويل محتوى المستند إلى نص (مثل HTML)، مع الحفاظ على التنسيقات والتصميمات، لاستخدامه في التطبيقات اللاحقة
 
-Bạn cũng có thể truyền các tài liệu không phải là PDF theo cách tương tự, nhưng Gemini sẽ coi các tài liệu đó là văn bản thông thường, do đó sẽ loại bỏ các ngữ cảnh như biểu đồ hoặc định dạng.
+يمكنك أيضًا تمرير مستندات غير PDF بالطريقة نفسها، ولكن سيتعامل معها Gemini كنص عادي، ما سيؤدي إلى إزالة السياق، مثل الرسوم البيانية أو التنسيق.
 
-## Truyền dữ liệu PDF nội tuyến
+## تمرير بيانات PDF مضمّنة
 
-Bạn có thể truyền dữ liệu PDF nội tuyến trong yêu cầu. Phương thức này phù hợp nhất với các tài liệu nhỏ hoặc quy trình xử lý tạm thời mà bạn không cần tham chiếu đến tệp trong các yêu cầu tiếp theo. Bạn nên sử dụng [Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi#large-pdfs) cho các tài liệu lớn hơn mà bạn cần tham khảo trong các lượt tương tác nhiều vòng để cải thiện độ trễ của yêu cầu và giảm mức sử dụng băng thông.
+يمكنك تمرير بيانات PDF مضمّنة في الطلب. هذه الطريقة هي الأنسب للمستندات الصغيرة أو المعالجة المؤقتة التي لا تحتاج فيها إلى الرجوع إلى الملف في الطلبات اللاحقة. ننصحك باستخدام
+[Files API](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar#large-pdfs)
+للمستندات الأكبر حجمًا التي تحتاج إلى الرجوع إليها في المحادثات المتعددة الأدوار
+لتحسين وقت استجابة الطلب وتقليل استخدام معدل نقل البيانات.
 
-Ví dụ sau đây cho thấy cách truyền dữ liệu PDF nội tuyến:
+يوضّح المثال التالي كيفية تمرير بيانات PDF مضمّنة:
 
 ### Python
 
@@ -116,7 +119,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Bạn cũng có thể tải một tệp PDF trên máy lên để xử lý:
+يمكنك أيضًا تحميل ملف PDF محلي لمعالجته:
 
 ### Python
 
@@ -218,13 +221,13 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-## Tải tệp PDF lên bằng Files API
+## تحميل ملفات PDF باستخدام Files API
 
-Bạn nên sử dụng Files API cho các tệp lớn hơn hoặc khi bạn dự định sử dụng lại một tài liệu trong nhiều yêu cầu. Điều này giúp cải thiện độ trễ của yêu cầu và giảm mức sử dụng băng thông bằng cách tách hoạt động tải tệp lên khỏi các yêu cầu về mô hình.
+ننصحك باستخدام واجهة برمجة التطبيقات Files API للملفات الأكبر حجمًا أو عندما تريد إعادة استخدام مستند في طلبات متعددة. يؤدي ذلك إلى تحسين وقت استجابة الطلبات وتقليل معدّل نقل البيانات من خلال فصل عملية تحميل الملف عن طلبات النموذج.
 
-### Tệp PDF lớn từ URL
+### ملفات PDF كبيرة من عناوين URL
 
-Sử dụng File API để đơn giản hoá việc tải lên và xử lý các tệp PDF lớn từ URL:
+استخدِم File API لتسهيل تحميل ملفات PDF كبيرة ومعالجتها من عناوين URL:
 
 ### Python
 
@@ -377,7 +380,7 @@ rm "${DISPLAY_NAME}.pdf"
 rm payload.json
 ```
 
-### Tệp PDF lớn được lưu trữ cục bộ
+### ملفات PDF كبيرة مخزَّنة على الجهاز
 
 ### Python
 
@@ -497,7 +500,7 @@ echo
 jq -r ".steps[-1].content[0].text" response.json
 ```
 
-Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và lấy siêu dữ liệu của tệp đó bằng cách gọi [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=vi). Chỉ có `name` (và theo đó là `uri`) là duy nhất.
+يمكنك التأكّد من أنّ واجهة برمجة التطبيقات خزّنت الملف الذي تم تحميله بنجاح والحصول على بياناته الوصفية من خلال طلب [`files.get`](https://ai.google.dev/api/rest/v1beta/files/get?hl=ar). `name` فقط (وبالتالي `uri`) فريد.
 
 ### Python
 
@@ -552,9 +555,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Truyền nhiều tệp PDF
+## تمرير ملفات PDF متعددة
 
-Gemini API có thể xử lý nhiều tài liệu PDF (tối đa 1.000 trang) trong một yêu cầu duy nhất, miễn là kích thước kết hợp của các tài liệu và câu lệnh văn bản nằm trong cửa sổ ngữ cảnh của mô hình.
+يمكن لواجهة Gemini API معالجة مستندات PDF متعددة (تصل إلى 1, 000 صفحة) في طلب واحد، طالما أنّ الحجم المجمّع للمستندات وطلب النص يقع ضمن قدرة الاستيعاب للنموذج.
 
 ### Python
 
@@ -745,50 +748,52 @@ rm "file_info_${DISPLAY_NAME_1}.json"
 rm "file_info_${DISPLAY_NAME_2}.json"
 ```
 
-## Chi tiết kỹ thuật
+## التفاصيل الفنية
 
-Gemini hỗ trợ tệp PDF có kích thước tối đa 50 MB hoặc 1.000 trang. Giới hạn này áp dụng cho cả dữ liệu nội tuyến và nội dung tải lên bằng Files API. Mỗi trang tài liệu tương đương với 258 mã thông báo.
+يمكن لـ Gemini معالجة ملفات PDF يصل حجمها إلى 50 ميغابايت أو 1,000 صفحة. وينطبق هذا الحدّ على كلّ من البيانات المضمّنة وعمليات التحميل باستخدام Files API. تعادل كل صفحة مستند 258 رمزًا مميزًا.
 
-Mặc dù không có giới hạn cụ thể về số lượng pixel trong một tài liệu ngoài [cửa sổ ngữ cảnh](https://ai.google.dev/gemini-api/docs/long-context?hl=vi) của mô hình, nhưng các trang lớn hơn sẽ được thu nhỏ xuống độ phân giải tối đa là 3072 x 3072 trong khi vẫn giữ nguyên tỷ lệ khung hình ban đầu, còn các trang nhỏ hơn sẽ được phóng to lên 768 x 768 pixel. Không có mức giảm chi phí cho các trang có kích thước nhỏ hơn, ngoài băng thông hoặc cải thiện hiệu suất cho các trang có độ phân giải cao hơn.
+مع أنّه لا توجد حدود معيّنة لعدد وحدات البكسل في المستندات باستثناء [نافذة السياق](https://ai.google.dev/gemini-api/docs/long-context?hl=ar) الخاصة بالنموذج، يتم تصغير حجم الصفحات الأكبر إلى دقة قصوى تبلغ 3072 × 3072 مع الحفاظ على نسبة العرض إلى الارتفاع الأصلية، بينما يتم تكبير حجم الصفحات الأصغر إلى 768 × 768 بكسل. لا يمكن خفض تكلفة الصفحات ذات الأحجام الأصغر، باستثناء تكلفة النطاق الترددي، ولا يمكن تحسين أداء الصفحات ذات الدقة الأعلى.
 
-### Mô hình Gemini 3
+### نماذج Gemini 3
 
-Gemini 3 giới thiệu khả năng kiểm soát chi tiết đối với quy trình xử lý hình ảnh đa phương thức bằng tham số `media_resolution`. Giờ đây, bạn có thể đặt độ phân giải thành thấp, trung bình hoặc cao cho từng phần nội dung nghe nhìn. Với việc bổ sung này, quy trình xử lý tài liệu PDF đã được cập nhật:
+يقدّم Gemini 3 إمكانية التحكّم الدقيق في معالجة الصور المتعدّدة الوسائط باستخدام المَعلمة
+`media_resolution`. يمكنك الآن ضبط دقة العرض على منخفضة أو متوسطة أو عالية لكل جزء من الوسائط. بعد إضافة هذه الميزة، تم تعديل طريقة معالجة مستندات PDF على النحو التالي:
 
-1. **Bao gồm văn bản gốc:** Văn bản được nhúng nguyên bản trong tệp PDF sẽ được trích xuất và cung cấp cho mô hình.
-2. **Báo cáo về việc thanh toán và mã thông báo:**
-   - Bạn **không bị tính phí** cho các mã thông báo bắt nguồn từ **văn bản gốc** được trích xuất trong tệp PDF.
-   - Trong phần `usage_metadata` của phản hồi API, các mã thông báo được tạo từ việc xử lý các trang PDF (dưới dạng hình ảnh) hiện được tính theo phương thức `IMAGE` chứ không phải phương thức `DOCUMENT` riêng biệt như trong một số phiên bản trước.
+1. **تضمين النص الأصلي:** يتم استخراج النص المضمّن في ملف PDF وتقديمه إلى النموذج.
+2. **الفوترة وإعداد التقارير عن الرموز المميزة:**
+   - **لن يتم تحصيل رسوم منك** مقابل الرموز المميزة التي مصدرها **النص الأصلي** المستخرَج من ملفات PDF.
+   - في القسم `usage_metadata` من استجابة واجهة برمجة التطبيقات، يتم الآن احتساب الرموز المميزة التي تم إنشاؤها من معالجة صفحات PDF (كصور) ضمن نوع البيانات `IMAGE`، وليس ضمن نوع البيانات `DOCUMENT` المنفصل كما كان في بعض الإصدارات السابقة.
 
-Để biết thêm thông tin về tham số độ phân giải của nội dung nghe nhìn, hãy xem hướng dẫn về [Độ phân giải của nội dung nghe nhìn](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=vi).
+لمزيد من التفاصيل حول مَعلمة دقة الوسائط، راجِع دليل [دقة الوسائط](https://ai.google.dev/gemini-api/docs/interactions/media-resolution?hl=ar).
 
-### Các loại tài liệu
+### أنواع المستندات
 
-Về mặt kỹ thuật, bạn có thể truyền các loại MIME khác để hiểu tài liệu, chẳng hạn như TXT, Markdown, HTML, XML, v.v. Tuy nhiên, tính năng thị giác tài liệu ***chỉ hiểu được PDF một cách có ý nghĩa***. Các loại khác sẽ được trích xuất dưới dạng văn bản thuần tuý và mô hình sẽ không thể diễn giải những gì chúng ta thấy trong quá trình hiển thị các tệp đó. Mọi thông tin cụ thể về loại tệp như biểu đồ, sơ đồ, thẻ HTML, định dạng Markdown, v.v. sẽ bị mất.
+من الناحية الفنية، يمكنك ضبط أنواع MIME أخرى لفهم المستندات، مثل TXT وMarkdown وHTML وXML وما إلى ذلك، ولكن ***لا يفهم Document Vision سوى ملفات PDF***. سيتم استخراج الأنواع الأخرى كنص عادي، ولن يتمكّن النموذج من تفسير ما نراه في عرض هذه الملفات. سيتم فقدان أي تفاصيل خاصة بنوع الملف، مثل الرسوم البيانية والمخططات وعلامات HTML وتنسيق Markdown وما إلى ذلك.
 
-Để tìm hiểu về các phương thức nhập tệp khác, hãy xem hướng dẫn [Phương thức nhập tệp](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=vi).
+للتعرّف على طرق إدخال الملفات الأخرى، يُرجى الاطّلاع على دليل [طرق إدخال الملفات](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar).
 
-### Các phương pháp hay nhất
+### أفضل الممارسات
 
-Để có kết quả tốt nhất:
+للحصول على أفضل النتائج:
 
-- Xoay các trang về đúng hướng trước khi tải lên.
-- Tránh các trang bị mờ.
-- Nếu sử dụng một trang duy nhất, hãy đặt câu lệnh văn bản sau trang.
+- يمكنك تدوير الصفحات إلى الاتجاه الصحيح قبل تحميلها.
+- تجنَّب الصفحات غير الواضحة.
+- في حال استخدام صفحة واحدة، ضَع طلب النص بعد الصفحة.
 
-## Bước tiếp theo
+## الخطوات التالية
 
-Để tìm hiểu thêm, hãy xem các tài nguyên sau:
+لمزيد من المعلومات، يُرجى الاطّلاع على المراجع التالية:
 
-- [Chiến lược đưa ra câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide): Gemini API hỗ trợ đưa ra câu lệnh bằng dữ liệu văn bản, hình ảnh, âm thanh và video, còn được gọi là câu lệnh đa phương thức.
-- [Hướng dẫn hệ thống](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi#system-instructions): Hướng dẫn hệ thống giúp bạn điều chỉnh hành vi của mô hình dựa trên nhu cầu và trường hợp sử dụng cụ thể của bạn.
+- [استراتيجيات طلب الملفات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide): تتيح واجهة Gemini API إمكانية طلب الملفات باستخدام بيانات نصية وصور وملفات صوت وفيديوهات، ويُعرف ذلك أيضًا باسم طلبات البحث المتعددة الوسائط.
+- [تعليمات النظام](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions):
+  تتيح لك تعليمات النظام توجيه سلوك النموذج استنادًا إلى احتياجاتك وحالات الاستخدام المحدّدة.
 
-Gửi ý kiến phản hồi
+إرسال ملاحظات
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Cập nhật lần gần đây nhất: 2026-07-07 UTC.
+تاريخ التعديل الأخير: 2026-07-07 (حسب التوقيت العالمي المتفَّق عليه)
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-07 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-07 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

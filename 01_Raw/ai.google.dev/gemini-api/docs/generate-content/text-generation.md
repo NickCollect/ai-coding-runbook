@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=id
-fetched_at: 2026-07-20T04:48:23.556321+00:00
-title: "Pembuatan teks \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=pt-BR
+fetched_at: 2026-07-27T04:36:15.015616+00:00
+title: "Gera\u00e7\u00e3o de texto \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Kirim masukan
+Envie comentários
 
-# Pembuatan teks
+# Geração de texto
 
-Gemini API dapat menghasilkan output teks dari input teks, gambar, video, dan audio.
+A API Gemini pode gerar saída de texto com base em entradas de texto, imagens, vídeo e áudio.
 
-Berikut contoh dasarnya:
+Este é um exemplo básico:
 
 ### Python
 
@@ -160,13 +160,13 @@ function main() {
 }
 ```
 
-## Berpikir dengan Gemini
+## Pensando com o Gemini
 
-Model Gemini sering kali memiliki ["pemikiran"](https://ai.google.dev/gemini-api/docs/thinking?hl=id) yang diaktifkan secara default
-sehingga model dapat melakukan penalaran sebelum merespons permintaan.
+Os modelos do Gemini geralmente têm o ["pensamento"](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br) ativado por padrão
+o que permite que o modelo raciocine antes de responder a uma solicitação.
 
-Setiap model mendukung konfigurasi pemikiran yang berbeda sehingga Anda dapat mengontrol biaya, latensi, dan kecerdasan. Untuk mengetahui detail selengkapnya, lihat
-[panduan pemikiran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#set-budget).
+Cada modelo oferece suporte a diferentes configurações de pensamento, o que permite controlar o custo, a latência e a inteligência. Para mais detalhes, consulte o
+[guia de pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#set-budget).
 
 ### Python
 
@@ -338,10 +338,11 @@ function main() {
 }
 ```
 
-## Petunjuk sistem dan konfigurasi lainnya
+## Instruções do sistema e outras configurações
 
-Anda dapat memandu perilaku model Gemini dengan petunjuk sistem. Untuk melakukannya,
-teruskan objek [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig).
+Você pode orientar o comportamento dos modelos do Gemini com instruções do sistema. Para fazer isso,
+transmita um [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerationConfig)
+objeto.
 
 ### Python
 
@@ -513,9 +514,9 @@ function main() {
 }
 ```
 
-Objek [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig)
-juga memungkinkan Anda mengganti parameter pembuatan default, seperti
-[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig).
+O [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerationConfig)
+objeto também permite substituir parâmetros de geração padrão, como
+[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerationConfig).
 
 ### Python
 
@@ -681,13 +682,13 @@ function main() {
 }
 ```
 
-Lihat [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerationConfig)
-dalam referensi API kami untuk mengetahui daftar lengkap parameter yang dapat dikonfigurasi dan
-deskripsinya.
+Consulte [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerationConfig)
+na referência da API para conferir uma lista completa de parâmetros configuráveis e as
+descrições deles.
 
-## Input multimodal
+## Entradas multimodais
 
-Gemini API mendukung input multimodal, sehingga Anda dapat menggabungkan teks dengan file media. Contoh berikut menunjukkan cara memberikan gambar:
+A API Gemini oferece suporte a entradas multimodais, permitindo combinar texto com arquivos de mídia. O exemplo a seguir demonstra como fornecer uma imagem:
 
 ### Python
 
@@ -895,17 +896,17 @@ function getImageData(url) {
 }
 ```
 
-Untuk mengetahui metode alternatif dalam menyediakan gambar dan pemrosesan gambar yang lebih canggih,
-lihat [panduan pemahaman gambar](https://ai.google.dev/gemini-api/docs/image-understanding?hl=id).
-API ini juga mendukung [dokumen](https://ai.google.dev/gemini-api/docs/document-processing?hl=id), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id), dan [audio](https://ai.google.dev/gemini-api/docs/audio?hl=id)
-input dan pemahaman.
+Para métodos alternativos de fornecimento de imagens e processamento de imagens mais avançado,
+consulte nosso [guia de compreensão de imagens](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pt-br).
+A API também oferece suporte a [entradas e compreensão de](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br) [documentos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-br), [vídeos](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br) e
+áudios.
 
-## Respons aliran data
+## Respostas de streaming
 
-Secara default, model hanya menampilkan respons setelah seluruh proses pembuatan selesai.
+Por padrão, o modelo retorna uma resposta somente após a conclusão de todo o processo de geração.
 
-Untuk interaksi yang lebih lancar, gunakan streaming untuk menerima [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerateContentResponse) instance secara bertahap
-saat dibuat.
+Para interações mais fluidas, use o streaming para receber [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerateContentResponse) instâncias de forma incremental
+à medida que são geradas.
 
 ### Python
 
@@ -1059,9 +1060,9 @@ function main() {
 }
 ```
 
-## Percakapan multi-giliran (chat)
+## Conversas com várias interações (chat)
 
-SDK kami menyediakan fungsi untuk mengumpulkan beberapa putaran perintah dan respons ke dalam chat, sehingga Anda dapat melacak histori percakapan dengan mudah.
+Nossos SDKs oferecem funcionalidade para coletar várias rodadas de comandos e respostas em um chat, oferecendo uma maneira fácil de acompanhar o histórico da conversa.
 
 ### Python
 
@@ -1269,7 +1270,7 @@ function main() {
 }
 ```
 
-Streaming juga dapat digunakan untuk percakapan multi-giliran.
+O streaming também pode ser usado para conversas com várias interações.
 
 ### Python
 
@@ -1488,46 +1489,46 @@ function main() {
 }
 ```
 
-## Tips menulis perintah
+## Dicas de comandos
 
-Lihat [panduan rekayasa perintah](https://ai.google.dev/gemini/docs/prompting-strategies?hl=id) kami untuk
-mendapatkan saran tentang cara memaksimalkan Gemini.
+Consulte nosso [guia de engenharia de comandos](https://ai.google.dev/gemini/docs/prompting-strategies?hl=pt-br) para
+sugestões sobre como aproveitar ao máximo o Gemini.
 
-## Langkah berikutnya
+## A seguir
 
-- Coba [Gemini di Google AI Studio](https://aistudio.google.com?hl=id).
-- Bereksperimen dengan [output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id) untuk
-  respons seperti JSON.
-- Pelajari kemampuan pemahaman [gambar](https://ai.google.dev/gemini-api/docs/image-understanding?hl=id),
-  [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=id), [audio](https://ai.google.dev/gemini-api/docs/audio?hl=id)
-  dan [dokumen](https://ai.google.dev/gemini-api/docs/document-processing?hl=id) Gemini.
-- Pelajari strategi perintah file multimodal
+- Teste o [Gemini no Google AI Studio](https://aistudio.google.com?hl=pt-br).
+- Faça experimentos com [saídas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br) para
+  respostas semelhantes a JSON.
+- Conheça os recursos de compreensão de [imagens](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pt-br),
+  [vídeos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-br), [áudios](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br)
+  e [documentos](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br) do Gemini.
+- Saiba mais sobre estratégias de comando de arquivos multimodais
   .
 
-## Pembuatan konten
+## Geração de conteúdo
 
-Ini adalah endpoint pusat untuk mengirim perintah ke model. Ada dua endpoint untuk membuat konten, dan perbedaan utamanya adalah cara Anda menerima respons:
+Esse é o endpoint central para enviar comandos ao modelo. Há dois endpoints para gerar conteúdo. A principal diferença é como você recebe a resposta:
 
-- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=id#method:-models.generatecontent)
-  (REST)**: Menerima permintaan dan memberikan satu respons setelah model menyelesaikan seluruh pembuatannya.
-- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=id#method:-models.streamgeneratecontent)
-  (SSE)**: Menerima permintaan yang sama persis, tetapi model melakukan streaming kembali potongan respons saat respons tersebut dibuat. Hal ini memberikan pengalaman pengguna yang lebih baik untuk aplikasi interaktif karena memungkinkan Anda menampilkan hasil parsial secara langsung.
+- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=pt-br#method:-models.generatecontent)
+  (REST)**: recebe uma solicitação e fornece uma única resposta depois que o modelo termina toda a geração.
+- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=pt-br#method:-models.streamgeneratecontent)
+  (SSE)**: recebe a mesma solicitação, mas o modelo transmite blocos da resposta à medida que são gerados. Isso oferece uma melhor experiência do usuário para aplicativos interativos, porque permite mostrar resultados parciais imediatamente.
 
-### Struktur isi permintaan
+### Estrutura do corpo da solicitação
 
-Isi [permintaan](https://ai.google.dev/api/generate-content?hl=id#request-body) adalah objek JSON yang
-**identik** untuk mode standar dan streaming, serta dibuat dari beberapa objek
-inti:
+O [corpo da solicitação](https://ai.google.dev/api/generate-content?hl=pt-br#request-body) é um objeto JSON que é
+**idêntico** para os modos padrão e de streaming e é criado com alguns objetos principais:
 
-- [`Content`](https://ai.google.dev/api/caching?hl=id#Content) objek: Mewakili satu putaran dalam percakapan.
-- [`Part`](https://ai.google.dev/api/caching?hl=id#Part) objek: Bagian data dalam putaran `Content`
-  (seperti teks atau gambar).
-- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=id#Blob)): Penampung untuk byte media mentah
-  dan jenis MIME-nya.
+- [`Content`](https://ai.google.dev/api/caching?hl=pt-br#Content) objeto: representa uma única interação em uma
+  conversa.
+- [`Part`](https://ai.google.dev/api/caching?hl=pt-br#Part) objeto: um pedaço de dados em uma interação `Content`
+  (como texto ou uma imagem).
+- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=pt-br#Blob)): um contêiner para bytes de mídia brutos
+  e o tipo MIME deles.
 
-Di tingkat tertinggi, isi permintaan berisi objek `contents`, yang merupakan daftar objek `Content`, yang masing-masing mewakili putaran dalam percakapan. Dalam sebagian besar kasus, untuk pembuatan teks dasar, Anda akan memiliki satu objek `Content`, tetapi jika ingin mempertahankan histori percakapan, Anda dapat menggunakan beberapa objek `Content`.
+No nível mais alto, o corpo da solicitação contém um objeto `contents`, que é uma lista de objetos `Content`, cada um representando interações na conversa. Na maioria dos casos, para a geração de texto básica, você terá um único objeto `Content`, mas, se quiser manter o histórico da conversa, poderá usar vários objetos `Content`.
 
-Berikut adalah isi permintaan `generateContent` yang umum:
+O exemplo a seguir mostra um corpo de solicitação `generateContent` típico:
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
@@ -1552,24 +1553,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Struktur isi respons
+### Estrutura do corpo da resposta
 
-Isi [respons](https://ai.google.dev/api/generate-content?hl=id#response-body) serupa untuk kedua
-mode streaming dan standar, kecuali untuk hal berikut:
+O [corpo da resposta](https://ai.google.dev/api/generate-content?hl=pt-br#response-body) é semelhante para ambos
+os modos de streaming e padrão, exceto pelo seguinte:
 
-- Mode standar: Isi respons berisi instance
-  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerateContentResponse).
-- Mode streaming: Isi respons berisi aliran
-  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=id#v1beta.GenerateContentResponse)
-  instance.
+- Modo padrão: o corpo da resposta contém uma instância de
+  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerateContentResponse).
+- Modo de streaming: o corpo da resposta contém um fluxo de
+  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerateContentResponse)
+  instâncias.
 
-Di tingkat tinggi, isi respons berisi objek `candidates`, yang merupakan daftar objek `Candidate`. Objek `Candidate` berisi objek `Content` yang memiliki respons yang dihasilkan yang ditampilkan dari model.
+Em um nível alto, o corpo da resposta contém um objeto `candidates`, que é uma lista de objetos `Candidate`. O objeto `Candidate` contém um objeto `Content` que tem a resposta gerada retornada do modelo.
 
-## Contoh REST API
+## Exemplos de API REST
 
-### Perintah multimodal (teks dan gambar)
+### Comando multimodal (texto e imagem)
 
-Untuk memberikan teks dan gambar dalam perintah, array `parts` harus berisi dua objek `Part`: satu untuk teks, dan satu untuk `inline_data` gambar.
+Para fornecer texto e uma imagem em um comando, a matriz `parts` precisa conter dois objetos `Part`: um para o texto e outro para a imagem `inline_data`.
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
@@ -1591,9 +1592,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Percakapan multi-giliran (chat)
+### Conversas com várias interações (chat)
 
-Untuk membuat percakapan dengan beberapa putaran, Anda menentukan array `contents` dengan beberapa objek `Content`. API akan menggunakan seluruh histori ini sebagai konteks untuk respons berikutnya. `role` untuk setiap objek `Content` harus bergantian antara `user` dan `model`.
+Para criar uma conversa com várias interações, defina a matriz `contents` com vários objetos `Content`. A API vai usar todo esse histórico como contexto para a próxima resposta. O `role` de cada objeto `Content` precisa alternar entre `user` e `model`.
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
@@ -1624,26 +1625,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Poin-poin penting
+### Pontos principais
 
-- `Content` adalah amplop: Ini adalah penampung tingkat atas untuk putaran pesan, baik dari pengguna maupun model.
-- `Part` memungkinkan multimodalitas: Gunakan beberapa objek `Part` dalam satu objek `Content` untuk menggabungkan berbagai jenis data (teks, gambar, URI video, dll.).
-- Pilih metode data Anda:
-  - Untuk media kecil yang disematkan secara langsung (seperti sebagian besar gambar), gunakan `Part` dengan `inline_data`.
-  - Untuk file yang lebih besar atau file yang ingin Anda gunakan kembali di seluruh permintaan, gunakan File API untuk mengupload file dan mereferensikannya dengan bagian `file_data`.
-- Kelola histori percakapan: Untuk aplikasi chat yang menggunakan REST API, buat
-  array `contents` dengan menambahkan objek `Content` untuk setiap putaran,
-  bergantian antara peran `"user"` dan `"model"`. Jika Anda menggunakan SDK, lihat dokumentasi SDK untuk mengetahui cara yang direkomendasikan untuk mengelola histori percakapan.
+- `Content` é o envelope: é o contêiner de nível superior para uma interação de mensagem, seja do usuário ou do modelo.
+- `Part` permite a multimodalidade: use vários objetos `Part` em um único objeto `Content` para combinar diferentes tipos de dados (texto, imagem, URI de vídeo etc.).
+- Escolha seu método de dados:
+  - Para mídias pequenas e incorporadas diretamente (como a maioria das imagens), use um `Part` com `inline_data`.
+  - Para arquivos maiores ou que você quer reutilizar em várias solicitações, use a API File para fazer upload do arquivo e referenciá-lo com uma parte `file_data`.
+- Gerenciar o histórico da conversa: para aplicativos de chat que usam a API REST, crie
+  a matriz `contents` anexando objetos `Content` para cada interação,
+  alternando entre as funções `"user"` e `"model"`. Se você estiver usando um SDK, consulte a documentação dele para conferir a maneira recomendada de gerenciar o histórico da conversa.
 
-## Contoh respons
+## Exemplos de resposta
 
-Contoh berikut menunjukkan cara komponen ini digabungkan untuk berbagai jenis permintaan.
+Os exemplos a seguir mostram como esses componentes se unem para diferentes tipos de solicitações.
 
-### Respons hanya teks
+### Resposta somente em texto
 
-Respons teks default terdiri dari array `candidates` dengan satu atau beberapa objek `content` yang berisi respons model.
+Uma resposta de texto padrão consiste em uma matriz `candidates` com um ou mais objetos `content` que contêm a resposta do modelo.
 
-Berikut adalah contoh respons **standar**:
+Confira a seguir um exemplo de resposta **padrão**:
 
 ```
 {
@@ -1664,7 +1665,7 @@ Berikut adalah contoh respons **standar**:
 }
 ```
 
-Berikut adalah serangkaian respons **streaming**. Setiap respons berisi `responseId` yang mengikat respons lengkap:
+A seguir, há uma série de respostas de **streaming**. Cada resposta contém um `responseId` que vincula a resposta completa:
 
 ```
 {
@@ -1712,44 +1713,44 @@ Berikut adalah serangkaian respons **streaming**. Setiap respons berisi `respons
 }
 ```
 
-## Live API (BidiGenerateContent) WebSockets API
+## API Live (BidiGenerateContent) WebSockets
 
-Live API menawarkan API berbasis WebSocket stateful untuk streaming dua arah guna mengaktifkan kasus penggunaan streaming real-time. Anda dapat meninjau
-[panduan Live API](https://ai.google.dev/gemini-api/docs/live?hl=id) dan [referensi Live API](https://ai.google.dev/api/live?hl=id)
-untuk mengetahui detail selengkapnya.
+A API Live oferece uma API com estado baseada em WebSocket para streaming bidirecional, permitindo casos de uso de streaming em tempo real. Consulte o
+[guia da API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) e a [referência da API Live](https://ai.google.dev/api/live?hl=pt-br)
+para mais detalhes.
 
-## Model khusus
+## Modelos especializados
 
-Selain rangkaian model Gemini, Gemini API menawarkan endpoint untuk
-model khusus seperti [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=id),
-[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=id) dan
-[model embedding](https://ai.google.dev/gemini-api/docs/embeddings?hl=id). Anda dapat melihat panduan ini di bagian Model.
+Além da família de modelos do Gemini, a API Gemini oferece endpoints para
+modelos especializados, como o [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=pt-br),
+[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=pt-br) e
+[modelos de incorporação](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br). Consulte esses guias na seção Modelos.
 
-## API Platform
+## APIs da plataforma
 
-Endpoint lainnya memungkinkan kemampuan tambahan untuk digunakan dengan endpoint utama yang dijelaskan sejauh ini. Lihat topik
-[Mode batch](https://ai.google.dev/gemini-api/docs/batch-mode?hl=id) dan
-[File API](https://ai.google.dev/gemini-api/docs/files?hl=id) di bagian Panduan untuk mempelajari lebih lanjut.
+O restante dos endpoints permite outros recursos para uso com os endpoints principais descritos até agora. Consulte os tópicos
+[Modo em lote](https://ai.google.dev/gemini-api/docs/batch-mode?hl=pt-br) e
+[API File](https://ai.google.dev/gemini-api/docs/files?hl=pt-br) na seção Guias para saber mais.
 
-## Langkah berikutnya
+## A seguir
 
-Jika Anda baru memulai, lihat panduan berikut, yang akan membantu Anda memahami model pemrograman Gemini API:
+Se você está começando, consulte os guias a seguir, que vão ajudar a entender o modelo de programação da API Gemini:
 
-- [Panduan Memulai Gemini API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
-- [Panduan model Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id)
+- [Guia de introdução à API Gemini](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
+- [Guia do modelo do Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br)
 
-Anda juga dapat melihat panduan kemampuan, yang memperkenalkan berbagai fitur Gemini API dan memberikan contoh kode:
+Você também pode consultar os guias de recursos, que apresentam diferentes recursos da API Gemini e fornecem exemplos de código:
 
-- [Pembuatan teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id)
-- [Penyimpanan cache konteks](https://ai.google.dev/gemini-api/docs/caching?hl=id)
-- [Embedding](https://ai.google.dev/gemini-api/docs/embeddings?hl=id)
+- [Geração de texto](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br)
+- [Cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)
+- [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br)
 
-Kirim masukan
+Envie comentários
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Terakhir diperbarui pada 2026-07-08 UTC.
+Última atualização 2026-07-08 UTC.
 
-Ada masukan untuk kami?
+Quer enviar seu feedback?
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-08 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-08 UTC."],[],[]]

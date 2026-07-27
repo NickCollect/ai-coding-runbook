@@ -1,135 +1,135 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=tr
-fetched_at: 2026-07-20T04:41:42.988829+00:00
-title: "Google AI Studio'da Android uygulamalar\u0131 geli\u015ftirme \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=hi
+fetched_at: 2026-07-27T04:44:54.123791+00:00
+title: "Google AI Studio \u092e\u0947\u0902 Android \u0910\u092a\u094d\u0932\u093f\u0915\u0947\u0936\u0928 \u092c\u0928\u093e\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Google AI Studio'da Android uygulamaları geliştirme
+# Google AI Studio में Android ऐप्लिकेशन बनाना
 
-Google AI Studio, doğal dil isteminden yerel Android uygulamaları oluşturmanıza olanak tanır. İstediğiniz uygulamayı tanımlayın. [Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=tr#antigravity-agent), eksiksiz bir Kotlin ve [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=tr) projesi oluşturur. Tarayıcınızdan uygulamanızı tarayıcı tabanlı bir Android emülatöründe önizleyebilir, fiziksel bir cihaza yükleyebilir ve test için yayınlayabilirsiniz.
+Google AI Studio की मदद से, नैचुरल लैंग्वेज वाले प्रॉम्प्ट का इस्तेमाल करके नेटिव Android ऐप्लिकेशन बनाए जा सकते हैं. आपको जिस तरह का ऐप्लिकेशन चाहिए उसके बारे में बताएं. इसके बाद, [Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=hi#antigravity-agent), Kotlin और [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=hi) का पूरा प्रोजेक्ट जनरेट करता है. अपने ब्राउज़र से, ब्राउज़र पर आधारित Android एम्युलेटर में अपने ऐप्लिकेशन का पूर्वावलोकन किया जा सकता है. साथ ही, इसे किसी फ़िज़िकल डिवाइस पर इंस्टॉल किया जा सकता है और टेस्टिंग के लिए पब्लिश किया जा सकता है.
 
-## Başlayın
+## अपनी प्रोफ़ाइल बनाना शुरू करें
 
-Android uygulaması geliştirmeye başlamak için:
+Android ऐप्लिकेशन बनाना शुरू करने के लिए:
 
-1. Sol taraftaki gezinme panelini kullanarak Google AI Studio'da [Oluşturma modu](https://aistudio.google.com/apps?hl=tr)'na gidin.
-2. Platform seçiciden **Android**'i seçin.
-3. Oluşturmak istediğiniz uygulamayı açıklayan bir istem girin (örneğin, *"Yerel depolama alanına sahip günlük görev takipçisi oluştur"* veya *"Basit bir hesap makinesi oluştur"*).
-4. Ajan, projeyi oluşturur ve tarayıcı tabanlı Android emülatöründe başlatır.
+1. बाईं ओर मौजूद नेविगेशन पैनल का इस्तेमाल करके, Google AI Studio में [बिल्ड मोड](https://aistudio.google.com/apps?hl=hi) पर जाएं.
+2. प्लैटफ़ॉर्म पिकर से **Android** चुनें.
+3. आपको जिस तरह का ऐप्लिकेशन बनाना है उसके बारे में बताने के लिए, प्रॉम्प्ट डालें. उदाहरण के लिए, *"लोकल स्टोरेज की सुविधा वाला, रोज़ के टास्क ट्रैक करने वाला ऐप्लिकेशन बनाओ"* या *"एक सामान्य कैल्क्यूलेटर बनाओ"*.
+4. एजेंट, प्रोजेक्ट जनरेट करता है और उसे ब्राउज़र पर आधारित Android एम्युलेटर में लॉन्च करता है.
 
-Ardından, web deneyiminde olduğu gibi sohbet panelini kullanarak uygulamanızı yineleyebilirsiniz. Temsilci, Android projenizdeki tüm dosyaları yönetir ve değişiklikleri kod tabanına yayar.
+इसके बाद, चैट पैनल का इस्तेमाल करके अपने ऐप्लिकेशन को बेहतर बनाया जा सकता है. यह ठीक वैसा ही होगा जैसा वेब पर किया जाता है. यह एजेंट, आपके Android प्रोजेक्ट की सभी फ़ाइलों को मैनेज करता है. साथ ही, कोडबेस में बदलावों को लागू करता है.
 
-## Tarayıcı tabanlı Android emülatörü
+## ब्राउज़र पर आधारित Android Emulator
 
-Android emülatörü tamamen bulutta çalışır ve tarayıcınıza yayın yapar.
-Android SDK'yı, Android Studio'yu veya yerel bir emülatörü yüklemeniz gerekmez.
+Android एम्युलेटर पूरी तरह से क्लाउड में चलता है और आपके ब्राउज़र पर स्ट्रीम होता है.
+आपको Android SDK, Android Studio या लोकल एम्युलेटर इंस्टॉल करने की ज़रूरत नहीं है.
 
-Emülatör şunları sağlar:
+एम्युलेटर में ये सुविधाएं मिलती हैं:
 
-- **Pixel benzeri cihaz simülasyonu**: Uygulamanızla gerçek bir cihazda olduğu gibi dokunarak, kaydırarak ve etkileşimde bulunarak test edin.
-- **Döndürme desteği**: Dikey ve yatay yön arasında geçiş yapın.
-- **Canlı önizleme**: Temsilci kodda değişiklik yaptığında uygulama yeniden oluşturulur ve emülatör otomatik olarak yenilenir.
+- **Pixel जैसे डिवाइस का सिम्युलेशन**: किसी असली डिवाइस की तरह, अपने ऐप्लिकेशन पर टैप करें, स्क्रोल करें, और उसके साथ इंटरैक्ट करें.
+- **स्क्रीन घुमाने की सुविधा**: पोर्ट्रेट और लैंडस्केप ओरिएंटेशन के बीच टॉगल करें.
+- **लाइव झलक**: जब एजेंट कोड में बदलाव करता है, तो ऐप्लिकेशन फिर से बनता है और एम्युलेटर अपने-आप रीफ़्रेश हो जाता है.
 
-### Emülatör sınırlamaları
+### एम्युलेटर की सीमाएं
 
-Tarayıcı tabanlı emülatör, tüm donanım özelliklerini desteklemez. Aşağıdakiler emülatörde kullanılamaz:
+ब्राउज़र पर आधारित एम्युलेटर में, हार्डवेयर की सभी सुविधाएं काम नहीं करती हैं. ये सुविधाएं, एम्युलेटर में उपलब्ध नहीं हैं:
 
-- Kamera ve fotoğraf çekme
-- NFC ve Bluetooth
-- GPS (konum simüle ediliyor)
-- Google Play Hizmetleri (Google ile Oturum Açma, Haritalar ve diğer Play Hizmetleri özellikleri gerçek cihazda çalışır ancak emülatörde çalışmaz)
+- कैमरा और फ़ोटो कैप्चर करने की सुविधा
+- एनएफ़सी और ब्लूटूथ
+- जीपीएस (जगह की जानकारी सिम्युलेट की गई है)
+- Google Play services (Google साइन-इन, Maps, और Play services की अन्य सुविधाएं असली डिवाइस पर काम करती हैं, लेकिन एम्युलेटर में नहीं)
 
-## ADB'nin yüklü olduğu bir cihaza yükleme
+## ADB की सुविधा वाले डिवाइस पर इंस्टॉल करना
 
-Oluşturulan APK'yı, USB ile bilgisayarınıza bağlı fiziksel bir Android cihaza doğrudan yükleyebilirsiniz. Bu işlem, tarayıcı üzerinden cihazınızla iletişim kurmak için [WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=tr)'yi kullanır. Yerel ADB kurulumu gerekmez.
+बनाए गए APK को सीधे तौर पर, किसी ऐसे Android डिवाइस पर इंस्टॉल किया जा सकता है जो यूएसबी के ज़रिए आपके कंप्यूटर से कनेक्ट हो. यह ब्राउज़र के ज़रिए आपके डिवाइस से कम्यूनिकेट करने के लिए, [WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=hi) का इस्तेमाल करता है. ADB को स्थानीय तौर पर इंस्टॉल करने की ज़रूरत नहीं है.
 
-### Ön koşullar
+### ज़रूरी शर्तें
 
-- WebUSB'yi destekleyen bir Chrome veya Edge tarayıcı
-- [Geliştirici Seçenekleri ve USB üzerinden hata ayıklama](https://developer.android.com/studio/debug/dev-options?hl=tr)'nın etkin olduğu bir Android cihaz.
-- Cihazınızı bilgisayarınıza bağlayan bir USB kablosu
+- WebUSB के साथ काम करने वाला Chrome या Edge ब्राउज़र.
+- Android डिवाइस पर [डेवलपर के लिए सेटिंग और टूल और यूएसबी डीबग करने की सुविधा](https://developer.android.com/studio/debug/dev-options?hl=hi) चालू होनी चाहिए.
+- आपके डिवाइस को कंप्यूटर से कनेक्ट करने वाली यूएसबी केबल.
 
-### Uygulamayı cihazınıza yükleyin
+### अपने डिवाइस पर ऐप्लिकेशन इंस्टॉल करना
 
-1. Önizleme panelinde **Cihaza Yükle**'yi tıklayın.
-2. Tarayıcının USB cihaz seçicisinden Android cihazınızı seçin.
-3. APK, cihazınıza aktarılıp yüklenir.
-4. Uygulama otomatik olarak başlatılır.
+1. झलक दिखाने वाले पैनल में, **डिवाइस पर इंस्टॉल करें** पर क्लिक करें.
+2. ब्राउज़र के यूएसबी डिवाइस पिकर से, अपना Android डिवाइस चुनें.
+3. एपीके को आपके डिवाइस पर ट्रांसफ़र करके इंस्टॉल कर दिया जाता है.
+4. ऐप्लिकेशन अपने-आप लॉन्च हो जाता है.
 
-## Play Store'da yayınlama
+## Play Store पर पब्लिश करना
 
-Android uygulamanızı [Google Play Console](https://play.google.com/console?hl=tr)'un dahili test kanalında yayınlayabilirsiniz. Bu kanal, uygulamayı 100'e kadar test kullanıcısına dağıtmanıza olanak tanır.
+अपने Android ऐप्लिकेशन को [Google Play Console](https://play.google.com/console?hl=hi) के इंटरनल टेस्टिंग ट्रैक पर पब्लिश किया जा सकता है. इससे, ऐप्लिकेशन को ज़्यादा से ज़्यादा 100 टेस्टर के साथ शेयर किया जा सकता है.
 
-### Ön koşullar
+### ज़रूरी शर्तें
 
-- [Google Play Geliştirici hesabı](https://play.google.com/console/signup?hl=tr)
-  (bir defalık 25 ABD doları kayıt ücreti gerekir).
-- Play Console'da tamamlanmış bir geliştirici profili.
+- [Google Play डेवलपर खाता](https://play.google.com/console/signup?hl=hi) (इसके लिए, रजिस्ट्रेशन के लिए एक बार में 25 डॉलर का शुल्क देना होगा).
+- Play Console में डेवलपर प्रोफ़ाइल पूरी की गई हो.
 
-### Uygulamanızı yayınlama
+### ऐप्लिकेशन पब्लिश करना
 
-1. Google AI Studio'da **Ayarlar > Yayınla**'yı açın.
-2. **Play Store'da yayınla**'yı tıklayın.
-3. Google Play Geliştirici Hesabınızla kimliğinizi doğrulayın.
-4. AI Studio, APK'yı imzalar, uygulama girişini oluşturur (veya yeni bir sürüm yükler) ve dahili test kanalında yayınlar.
-5. Test kullanıcılarınızla paylaşabileceğiniz bir bağlantı alırsınız.
+1. Google AI Studio में **सेटिंग > पब्लिश करें** खोलें.
+2. **Play Store पर पब्लिश करें** पर क्लिक करें.
+3. अपने Google Play डेवलपर खाते से पुष्टि करें.
+4. AI Studio, APK पर हस्ताक्षर करता है, ऐप्लिकेशन की लिस्टिंग बनाता है (या नया वर्शन अपलोड करता है),
+   और उसे इंटरनल टेस्टिंग ट्रैक पर पब्लिश करता है.
+5. आपको एक लिंक मिलता है, जिसे टेस्टर के साथ शेयर किया जा सकता है.
 
-AI Studio, yönetilen bir anahtar deposu kullanarak APK imzalama işlemini otomatik olarak yönetir. Uygulama girişini (simge, ekran görüntüleri, açıklama) daha sonra Play Console'da özelleştirebilirsiniz.
+AI Studio, मैनेज किए गए कीस्टोर का इस्तेमाल करके, APK साइनिंग को अपने-आप मैनेज करता है. Play Console में जाकर, ऐप्लिकेशन की लिस्टिंग (आइकॉन, स्क्रीनशॉट, जानकारी) को बाद में भी अपनी पसंद के मुताबिक बनाया जा सकता है.
 
-## Oluşturulan içerikler
+## क्या जनरेट किया गया है
 
-Bir Android uygulaması oluşturduğunuzda aracı, aşağıdaki yapıya sahip standart bir Gradle tabanlı proje oluşturur:
+Android ऐप्लिकेशन बनाने पर, एजेंट एक स्टैंडर्ड Gradle-आधारित प्रोजेक्ट जनरेट करता है. इसका स्ट्रक्चर इस तरह होता है:
 
-- **Derleme yapılandırması**: Kotlin DSL kullanılarak `build.gradle.kts` dosyaları (proje ve uygulama düzeyi).
-- **Kullanıcı arayüzü katmanı**: [Material 3](https://m3.material.io/) temalı [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=tr) bileşenleri.
-- **Mimari**: ViewModel'ler ve veri sınıflarıyla tek etkinlikli mimari.
-- **Kaynaklar**: `AndroidManifest.xml`, drawables, dizeler ve diğer Android kaynakları.
+- **बिल्ड कॉन्फ़िगरेशन**: Kotlin DSL का इस्तेमाल करके `build.gradle.kts` फ़ाइलें (प्रोजेक्ट और ऐप्लिकेशन लेवल).
+- **यूज़र इंटरफ़ेस (यूआई) लेयर**: [Material 3](https://m3.material.io/) थीमिंग वाले [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=hi) कॉम्पोनेंट.
+- **आर्किटेक्चर**: ViewModels और डेटा क्लास के साथ सिंगल-ऐक्टिविटी आर्किटेक्चर.
+- **संसाधन**: `AndroidManifest.xml`, ड्रॉएबल, स्ट्रिंग, और अन्य Android संसाधन.
 
-Aracı, Gradle bağımlılıklarını otomatik olarak yönetir ve gerektiğinde Maven ile Google depolarından paketler ekler.
+यह एजेंट, Gradle डिपेंडेंसी को अपने-आप मैनेज करता है. साथ ही, ज़रूरत के हिसाब से Maven और Google रिपॉज़िटरी से पैकेज जोड़ता है.
 
-Oluşturulan kodu, önizleme panelindeki **Kod** sekmesini kullanarak görüntüleyebilir ve düzenleyebilirsiniz. Android Studio'da geliştirmeye devam etmek için projeyi **ZIP dosyası** olarak indirin.
+झलक वाले पैनल में मौजूद **कोड** टैब का इस्तेमाल करके, जनरेट किए गए कोड को देखा और उसमें बदलाव किया जा सकता है. Android Studio में डेवलपमेंट जारी रखने के लिए, प्रोजेक्ट को **ZIP फ़ाइल** के तौर पर डाउनलोड करें.
 
-## Sınırlamalar
+## सीमाएं
 
-AI Studio'da Android uygulaması oluşturma ile ilgili aşağıdaki sınırlamalar vardır:
+AI Studio में Android ऐप्लिकेशन बनाने से जुड़ी ये सीमाएं हैं:
 
-### Platform sınırlamaları
+### प्लैटफ़ॉर्म से जुड़ी सीमाएं
 
-- **Yalnızca istemci tarafı**: Android uygulamaları, sunucu tarafı bileşeni içermez.
-  Sunucu çalışma zamanı gerektiren özellikler (sır yönetimi, çok oyunculu, Firebase, Google Workspace API'leri) kullanılamaz.
-- **Tek etkinlikli mimari**: Yalnızca tek etkinlikli, tek modüllü projeler desteklenir.
-- **Yalnızca Jetpack Compose**: Uygulamalar Kotlin ve Jetpack Compose kullanır. Java ve XML düzenleri desteklenmez.
-- **NDK veya yerel kod yok**: C ve C++ kodu desteklenmez.
-- **Wear OS veya Android TV yok**: Yalnızca telefon ve tablet form faktörleri desteklenir.
+- **सिर्फ़ क्लाइंट-साइड**: Android ऐप्लिकेशन में सर्वर-साइड कॉम्पोनेंट शामिल नहीं होता.
+  सर्वर रनटाइम की ज़रूरत वाली सुविधाएं (जैसे, सीक्रेट मैनेजमेंट, मल्टीप्लेयर, Firebase, Google Workspace API) उपलब्ध नहीं हैं.
+- **सिंगल-ऐक्टिविटी आर्किटेक्चर**: सिर्फ़ सिंगल-ऐक्टिविटी और सिंगल-मॉड्यूल वाले प्रोजेक्ट काम करते हैं.
+- **सिर्फ़ Jetpack Compose**: ऐप्लिकेशन, Kotlin और Jetpack Compose का इस्तेमाल करते हैं. Java और XML लेआउट इस्तेमाल नहीं किए जा सकते.
+- **कोई NDK या नेटिव कोड नहीं**: C और C++ कोड काम नहीं करता.
+- **Wear OS या Android TV पर काम नहीं करता**: यह सिर्फ़ फ़ोन और टैबलेट पर काम करता है.
 
-### Dışa aktarma sınırlamaları
+### एक्सपोर्ट करने से जुड़ी सीमाएं
 
-- **Yalnızca ZIP olarak indirme**: Projeyi ZIP dosyası olarak indirebilirsiniz. GitHub dışa aktarma özelliği, Android projelerinde henüz kullanılamamaktadır.
+- **सिर्फ़ ZIP फ़ाइल डाउनलोड करें**: प्रोजेक्ट को ZIP फ़ाइल के तौर पर डाउनलोड किया जा सकता है. GitHub पर एक्सपोर्ट करने की सुविधा, अभी Android प्रोजेक्ट के लिए उपलब्ध नहीं है.
 
-## Sırada ne var?
+## आगे क्या करना है
 
-- [Google AI Studio'da uygulama geliştirme](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=tr)
-- [Tam Yığın Uygulamaları Geliştirme](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=tr) (web)
-- [Uygulama Galerisi](https://aistudio.google.com/apps?source=showcase&hl=tr)'ndeki örneklere bakın.
+- [Google AI Studio में ऐप्लिकेशन बनाना](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=hi)
+- [फ़ुल-स्टैक ऐप्लिकेशन डेवलप करना](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=hi) (वेब)
+- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=hi) में उदाहरण देखें.
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-05-19 UTC.
+आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-05-19 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]

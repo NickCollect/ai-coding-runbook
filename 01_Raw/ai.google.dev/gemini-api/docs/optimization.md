@@ -1,91 +1,94 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=hi
-fetched_at: 2026-07-20T04:42:23.041892+00:00
-title: "Gemini API \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u0911\u092a\u094d\u091f\u093f\u092e\u093e\u0907\u091c\u093c\u0947\u0936\u0928 \u0914\u0930 \u0905\u0928\u0941\u092e\u093e\u0928 \u0932\u0917\u093e\u0928\u093e \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=pt-BR
+fetched_at: 2026-07-27T04:47:48.063149+00:00
+title: "Otimiza\u00e7\u00e3o e infer\u00eancia da API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-सुझाव भेजें
+Envie comentários
 
-# Gemini API की मदद से ऑप्टिमाइज़ेशन और अनुमान लगाना
+# Otimização e inferência da API Gemini
 
-Gemini API, ऑप्टिमाइज़ेशन के कई तरीके उपलब्ध कराता है. इनकी मदद से, आपके वर्कलोड की ज़रूरतों के हिसाब से, स्पीड, लागत, और भरोसेमंद होने के बीच बैलेंस बनाया जा सकता है.
-चाहे आप रीयल-टाइम में बातचीत करने वाले बॉट बना रहे हों या ऑफ़लाइन डेटा-प्रोसेसिंग के लिए बड़े पाइपलाइन चला रहे हों, सही पैराडाइम चुनने से लागत को काफ़ी हद तक कम किया जा सकता है या परफ़ॉर्मेंस को बेहतर बनाया जा सकता है.
+A API Gemini oferece vários mecanismos de otimização para ajudar você a equilibrar velocidade, custo e confiabilidade com base nas necessidades específicas da carga de trabalho.
+Se você estiver criando bots conversacionais em tempo real ou executando pipelines de processamento de dados off-line pesados, escolher o paradigma certo pode reduzir significativamente os custos ou aumentar a performance.
 
-| सुविधा | स्टैंडर्ड | Flex | प्राथमिकता | बैच | कैश मेमोरी में सेव करना |
+| Recurso | Padrão | Flex | Prioridade | Lote | Armazenamento em cache |
 | --- | --- | --- | --- | --- | --- |
-| **कीमत** | पूरी कीमत | 50% की छूट | स्टैंडर्ड कीमत से 75% से 100% ज़्यादा | 50% की छूट | 90% की छूट + टोकन स्टोरेज के लिए आनुपातिक शुल्क |
-| **लेटेंसी** | कुछ सेकंड से लेकर कुछ मिनट | कुछ मिनट (टारगेट 1–15 मिनट) | कुछ सेकंड | 24 घंटे लग सकते हैं | पहले टोकन के लिए कम समय |
-| **भरोसेमंद है** | ज़्यादा / मीडियम-ज़्यादा | पूरी कोशिश (कम अहमियत वाला) | ज़्यादा (अहमियत वाला) | ज़्यादा (थ्रूपुट के लिए) | लागू नहीं |
-| **इंटरफ़ेस** | सिंक्रोनस | सिंक्रोनस | सिंक्रोनस | एसिंक्रोनस | सेव की गई स्थिति |
-| **इस्तेमाल का सबसे अच्छा उदाहरण** | ऐप्लिकेशन के सामान्य वर्कफ़्लो | सीक्वेंशियल चेन (जिनके लिए तुरंत कार्रवाई की ज़रूरत न हो) | प्रोडक्शन, उपयोगकर्ता के लिए बने ऐप्लिकेशन | बड़े डेटासेट, ऑफ़लाइन आकलन | एक ही फ़ाइल के लिए बार-बार क्वेरी करना |
+| **Preços** | Preço total | 50% de desconto | 75% a 100% a mais do que o padrão | 50% de desconto | 90% de desconto + armazenamento de tokens proporcional |
+| **Latência** | Segundos a minutos | Minutos (1 a 15 min de destino) | Segundos | Até 24 horas | Tempo até o primeiro token mais rápido |
+| **Confiabilidade** | Alta / média-alta | Melhor esforço (descartável) | Alta (não descartável) | Alta (para capacidade de processamento) | N/A |
+| **Interface** | Síncrona | Síncrona | Síncrona | Assíncrona | Estado salvo |
+| **Melhor caso de uso** | Fluxos de trabalho de aplicativos gerais | Cadeias sequenciais não urgentes | Apps de produção voltados ao usuário | Conjuntos de dados massivos, avaliações off-line | Consultas recorrentes no mesmo arquivo |
 
-## इन्फ़रेंस सेवा के लेवल (सिंक्रोनस)
+## Níveis de serviço de inferência (síncrono)
 
-जनरेशन के स्टैंडर्ड कॉल में `service_tier` पैरामीटर पास करके, भरोसेमंद होने के लिए ऑप्टिमाइज़ किए गए और लागत के लिए ऑप्टिमाइज़ किए गए सिंक्रोनस ट्रैफ़िक के बीच स्विच किया जा सकता है.
+É possível alternar entre o tráfego síncrono otimizado para confiabilidade e o otimizado para custos transmitindo o parâmetro `service_tier` nas chamadas de geração padrão.
 
-### स्टैंडर्ड इन्फ़रेंस (डिफ़ॉल्ट)
+### Inferência padrão (padrão)
 
-सीक्वेंशियल कॉन्टेंट जनरेट करने के लिए, स्टैंडर्ड लेवल डिफ़ॉल्ट विकल्प है.
-इसमें, अतिरिक्त प्रीमियम या लंबी कतारों के बिना, सामान्य रिस्पॉन्स टाइम मिलता है.
+O nível padrão é a opção padrão para geração de conteúdo sequencial.
+Ele oferece tempos de resposta normais sem prêmios extras ou filas pesadas.
 
-- **भरोसेमंद है:** स्टैंडर्ड अहमियत
-- **कीमत:** स्टैंडर्ड कीमत.
-- **इसके लिए सबसे सही विकल्प:** रोज़ाना इस्तेमाल होने वाले ज़्यादातर इंटरैक्टिव ऐप्लिकेशन.
+- **Confiabilidade**:criticidade padrão
+- **Preço**:preços padrão.
+- **Ideal para**:a maioria dos aplicativos interativos do dia a dia.
 
-### प्राथमिकता वाला इन्फ़रेंस (लेटेंसी के लिए ऑप्टिमाइज़ किया गया)
+### Inferência de prioridade (otimizada para latência)
 
-[प्राथमिकता](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi) वाली प्रोसेसिंग, आपके अनुरोधों को ज़्यादा अहमियत वाली कंप्यूटिंग कतारों पर भेजती है.
-यह ट्रैफ़िक, अहमियत वाला होता है. इसका मतलब है कि इसे दूसरे लेवल से कभी भी रोका नहीं जा सकता. साथ ही, यह सबसे ज़्यादा भरोसेमंद होता है. अगर आपने प्राथमिकता वाली प्रोसेसिंग की डाइनैमिक सीमाओं को पार कर लिया है, तो सिस्टम गड़बड़ी दिखाने के बजाय, अनुरोध को स्टैंडर्ड प्रोसेसिंग पर डाउनग्रेड कर देगा.
+[O processamento de](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)prioridade encaminha suas solicitações
+para filas de computação de alta criticidade.
+Esse tráfego é estritamente não descartável (nunca substituído por outros níveis) e oferece a maior confiabilidade. Se você exceder os limites de prioridade dinâmica, o sistema vai fazer o downgrade da solicitação para o processamento padrão em vez de falhar com um erro.
 
-- **भरोसेमंद है:** सबसे ज़्यादा अहमियत
-- **कीमत:** स्टैंडर्ड दरों से 75% से 100% ज़्यादा.
-- **इसके लिए सबसे सही विकल्प:** ग्राहक सेवा के लिए चैटबॉट, रीयल-टाइम में धोखाधड़ी का पता लगाना, और कारोबार के लिए अहम को-पायलट.
+- **Confiabilidade**:maior criticidade
+- **Preço**:75% a 100% acima das taxas padrão.
+- **Ideal para**:chatbots de clientes, detecção de fraudes em tempo real e copilotos essenciais para os negócios.
 
-### Flex इन्फ़रेंस (लागत के लिए ऑप्टिमाइज़ किया गया)
+### Inferência flexível (otimizada para custos)
 
-[Flex इन्फ़रेंस](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi) में, स्टैंडर्ड दरों के मुकाबले 50% की छूट मिलती है.
-ऐसा इसलिए होता है, क्योंकि इसमें ऑफ़-पीक कंप्यूटिंग क्षमता का इस्तेमाल किया जाता है. अनुरोधों को सिंक्रोनस तरीके से प्रोसेस किया जाता है. इसका मतलब है कि बैच ऑब्जेक्ट मैनेज करने के लिए, आपको कोड फिर से लिखने की ज़रूरत नहीं होती.
-यह "कम अहमियत वाला" ट्रैफ़िक होता है. इसलिए, अगर सिस्टम में स्टैंडर्ड ट्रैफ़िक बढ़ता है, तो अनुरोधों को रोका जा सकता है.
+[A inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br) oferece um desconto de 50% em comparação com as taxas padrão, utilizando
+capacidade de computação oportunista fora do horário de pico. As solicitações são processadas de forma síncrona, o que significa que não é necessário reescrever o código para gerenciar objetos em lote.
+Como é um tráfego "descartável", as solicitações podem ser substituídas se o sistema tiver picos de tráfego padrão.
 
-- **भरोसेमंद है:** अहमियत की कोई गारंटी नहीं, कम अहमियत वाला
-- **कीमत:** स्टैंडर्ड कीमत का 50% (टोकन के हिसाब से बिल किया जाता है).
-- **इसके लिए सबसे सही विकल्प:** एजेंटिक वर्कफ़्लो (जिसमें कॉल N+1, कॉल N के आउटपुट पर निर्भर करता है), बैकग्राउंड में सीआरएम अपडेट, और ऑफ़लाइन आकलन.
+- **Confiabilidade**:criticidade não garantida e descartável
+- **Preço**:50% do preço padrão (cobrado por token).
+- **Ideal para**:fluxos de trabalho de agentes de várias etapas em que a chamada N+1 depende da saída da chamada N, atualizações de CRM em segundo plano e avaliações off-line.
 
-## बैच एपीआई (बल्क, एसिंक्रोनस)
+## API Batch (em massa, assíncrona)
 
-[बैच एपीआई](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi) को, बड़ी संख्या में अनुरोधों को एसिंक्रोनस तरीके से प्रोसेस करने के लिए डिज़ाइन किया गया है. इसकी लागत, स्टैंडर्ड लागत का 50% होती है. अनुरोधों को इन-लाइन डिक्शनरी के तौर पर या JSONL इनपुट फ़ाइल (दो जीबी तक) का इस्तेमाल करके सबमिट किया जा सकता है. यह, बैकग्राउंड थ्रूपुट कतारों का इस्तेमाल करके अनुरोधों को प्रोसेस करता है. इसका टारगेट टर्नअराउंड टाइम 24 घंटे होता है.
+[A API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br) foi projetada para processar grandes volumes
+de solicitações de forma assíncrona a
+50% do custo padrão. É possível enviar solicitações como dicionários inline ou usando um arquivo de entrada JSONL (até 2 GB). Ele processa solicitações usando filas de capacidade de processamento em segundo plano com um tempo de resposta de 24 horas.
 
-- **भरोसेमंद है:** कम अहमियत वाला, लेकिन इसमें 24 घंटे में अपने-आप फिर से कोशिश करने और कतार में लगाने का सिस्टम मौजूद है
-- **कीमत:** स्टैंडर्ड कीमत का 50%
-- **इसके लिए सबसे सही विकल्प:** बड़े डेटासेट को पहले से प्रोसेस करना, समय-समय पर रिग्रेशन टेस्ट सुइट चलाना, और बड़ी संख्या में इमेज या एम्बेडिंग जनरेट करना.
+- **Confiabilidade**:descartável, mas com novas tentativas automatizadas de 24 horas e sistema de filas
+- **Preço**:50% do preço padrão.
+- **Ideal para**:pré-processamento de conjuntos de dados massivos, execução de conjuntos de testes de regressão periódicos e gerações de imagens ou incorporações de alto volume.
 
-## कॉन्टेक्स्ट कैश मेमोरी में सेव करना (इनपुट की बचत)
+## Armazenamento em cache de contexto (economia de entrada)
 
-[कॉन्टेक्स्ट कैश मेमोरी में सेव करने की सुविधा](https://ai.google.dev/gemini-api/docs/caching?hl=hi) का इस्तेमाल तब किया जाता है, जब छोटे अनुरोधों में, शुरुआती
-कॉन्टेक्स्ट को बार-बार रेफ़र किया जाता है.
+[O armazenamento em cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br) é usado quando um contexto inicial substancial
+é referenciado repetidamente por solicitações mais curtas.
 
-- **अपने-आप कैश मेमोरी में सेव करना:** यह सुविधा, Gemini 2.5 और उसके बाद के मॉडल पर अपने-आप चालू हो जाती है.
-  अगर आपका अनुरोध, सामान्य प्रॉम्प्ट प्रीफ़िक्स के आधार पर मौजूदा कैश मेमोरी में सेव किए गए डेटा से मेल खाता है, तो सिस्टम लागत में बचत करता है.
-- **मैन्युअल तरीके से कैश मेमोरी में सेव करना:** टाइम-टू-लिव (टीटीएल) के साथ, कैश मेमोरी में सेव किया गया ऑब्जेक्ट मैन्युअल तरीके से बनाया जा सकता है. कैश मेमोरी में सेव किए गए टोकन को, बाद के अनुरोधों के लिए रेफ़र किया जा सकता है. इससे, एक ही कॉर्पस पेलोड को बार-बार पास करने से बचा जा सकता है.
-- **कीमत:** कैश मेमोरी में सेव किए गए टोकन की संख्या और स्टोरेज की अवधि (टीटीएल) के आधार पर बिल किया जाता है.
-- **इसके लिए सबसे सही विकल्प:** ऐसे चैटबॉट जिनमें सिस्टम के लिए ज़्यादा निर्देश दिए गए हों, लंबी वीडियो फ़ाइलों का बार-बार विश्लेषण करना या दस्तावेज़ों के बड़े सेट के लिए क्वेरी करना.
+- **Armazenamento em cache implícito**:ativado automaticamente no Gemini 2.5 e em modelos mais recentes.
+  O sistema transmite economias de custos se a solicitação atingir caches atuais com base em prefixos de comandos comuns.
+- **Armazenamento em cache explícito**:é possível criar manualmente um objeto de cache com um tempo de vida (TTL) específico. Depois de criado, você se refere aos tokens armazenados em cache para solicitações subsequentes para evitar a transmissão repetida do mesmo payload do corpus.
+- **Preço**:cobrado com base na contagem de tokens de cache e na duração do armazenamento (TTL).
+- **Ideal para**:chatbots com instruções abrangentes do sistema, análise repetitiva de arquivos de vídeo longos ou consultas em grandes conjuntos de documentos.
 
-सुझाव भेजें
+Envie comentários
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया.
+Última atualização 2026-04-29 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Quer enviar seu feedback?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-04-29 (UTC) को अपडेट किया गया."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

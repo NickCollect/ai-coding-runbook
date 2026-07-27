@@ -1,38 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=tr
-fetched_at: 2026-07-20T04:36:11.590128+00:00
-title: "Yap\u0131land\u0131r\u0131lm\u0131\u015f \u00e7\u0131k\u0131\u015flar \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=id
+fetched_at: 2026-07-27T04:46:33.645278+00:00
+title: "Output terstruktur \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Geri bildirim gönderin
+Kirim masukan
 
-# Yapılandırılmış çıkışlar
+# Output terstruktur
 
-Gemini modellerini, sağlanan bir JSON şemasına uygun yanıtlar oluşturacak şekilde yapılandırabilirsiniz. Bu sayede, tahmin edilebilir ve tür açısından güvenli sonuçlar elde edilir. Ayrıca, yapılandırılmamış metinlerden yapılandırılmış verilerin ayıklanması kolaylaşır.
+Anda dapat mengonfigurasi model Gemini untuk menghasilkan respons yang sesuai dengan Skema JSON yang disediakan. Hal ini memastikan hasil yang dapat diprediksi dan aman jenisnya, serta menyederhanakan ekstraksi data terstruktur dari teks tidak terstruktur.
 
-Yapılandırılmış çıkışlar şu durumlarda idealdir:
+Penggunaan output terstruktur sangat ideal untuk:
 
-- **Veri ayıklama:** Metinden adlar ve tarihler gibi belirli bilgileri alın.
-- **Yapılandırılmış sınıflandırma:** Metni önceden tanımlanmış kategorilere göre sınıflandırın.
-- **Ajan tabanlı iş akışları:** Araçlar veya API'ler için yapılandırılmış girişler oluşturun.
+- **Ekstraksi data:** Menarik informasi tertentu seperti nama dan tanggal dari teks.
+- **Klasifikasi terstruktur:** Mengklasifikasikan teks ke dalam kategori yang telah ditentukan.
+- **Alur kerja agen:** Menghasilkan input terstruktur untuk alat atau API.
 
-Google GenAI SDK'ları, REST API'de JSON şemasını desteklemenin yanı sıra [Pydantic](https://docs.pydantic.dev/latest/) (Python) ve [Zod](https://zod.dev/) (JavaScript) kullanılarak şemaların tanımlanmasına da olanak tanır.
+Selain mendukung Skema JSON di REST API, Google GenAI SDK
+memungkinkan Anda menentukan skema menggunakan
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) dan
+[Zod](https://zod.dev/) (JavaScript).
 
-## Yapılandırılmış çıkış örnekleri
+## Contoh output terstruktur
 
-### Recipe Extractor
+### Pengekstrak Resep
 
-Bu örnekte, `object`, `array`, `string` ve `integer` gibi temel JSON şema türlerini kullanarak metinden yapılandırılmış verilerin nasıl ayıklanacağı gösterilmektedir.
+Contoh ini menunjukkan cara mengekstrak data terstruktur dari teks menggunakan jenis Skema JSON dasar seperti `object`, `array`, `string`, dan `integer`.
 
 ### Python
 
@@ -196,7 +199,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Örnek Yanıt:**
+**Contoh Respons:**
 
 ```
 {
@@ -224,9 +227,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### İçerik Denetimi
+### Moderasi Konten
 
-Bu örnekte, koşullu şemalar için `anyOf`, sınıflandırma için `enum` gösterilmektedir. Böylece, çıkış yapısının içeriğe göre değişmesine olanak tanınır.
+Contoh ini menampilkan `anyOf` untuk skema bersyarat dan `enum` untuk klasifikasi, sehingga struktur output dapat bervariasi berdasarkan konten.
 
 ### Python
 
@@ -375,7 +378,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Örnek Yanıt:**
+**Contoh Respons:**
 
 ```
 {
@@ -386,9 +389,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Yinelemeli Yapılar
+### Struktur Rekursif
 
-Bu örnekte, kuruluş şeması gibi yinelemeli bir şemanın nasıl tanımlanacağı gösterilmektedir.
+Contoh ini mengilustrasikan cara menentukan skema rekursif seperti diagram organisasi.
 
 ### Python
 
@@ -505,7 +508,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Örnek Yanıt:**
+**Contoh Respons:**
 
 ```
 {
@@ -532,9 +535,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Yayın sonuçları
+## Hasil streaming
 
-Yapılandırılmış çıkışları yayınlayarak yanıt oluşturulurken işlemeye başlamanıza olanak tanır. Yayınlanan parçalar, son JSON nesnesini oluşturmak için birleştirilebilen geçerli kısmi JSON dizeleridir.
+Anda dapat melakukan streaming output terstruktur, sehingga Anda dapat mulai memproses respons saat respons tersebut dibuat. Potongan yang di-streaming adalah string JSON parsial yang valid yang dapat digabungkan untuk membentuk objek JSON akhir.
 
 ### Python
 
@@ -631,9 +634,14 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## Araçlarla yapılandırılmış çıkışlar
+## Output terstruktur dengan alat
 
-Gemini 3, Yapılandırılmış Çıkışları [Google Arama ile Temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr), [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr), [Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr), [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr#structured-output) ve [İşlev Çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) gibi yerleşik araçlarla birleştirmenize olanak tanır.
+Gemini 3 memungkinkan Anda menggabungkan Output Terstruktur dengan alat bawaan, termasuk
+[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id),
+[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id),
+[Eksekusi Kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id),
+[Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id#structured-output), dan
+[Panggilan Fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id).
 
 ### Python
 
@@ -726,79 +734,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## JSON şeması desteği
+## Dukungan skema JSON
 
-JSON nesnesi oluşturmak için `response_format` öğesini `text` türünde bir nesneyle (veya nesne içeren bir diziyle) yapılandırın ve `mime_type` özelliğini `application/json` olarak ayarlayın. Şema, `schema` alanında sağlanmalıdır.
+Untuk membuat objek JSON, konfigurasikan `response_format` dengan objek (atau array yang berisi objek) berjenis `text` dan tetapkan `mime_type`-nya ke `application/json`. Skema harus disediakan di kolom `schema`.
 
-Gemini'ın yapılandırılmış çıkış modu, [JSON şeması](https://json-schema.org/) spesifikasyonunun bir alt kümesini destekler.
+Mode output terstruktur Gemini mendukung subset spesifikasi
+[Skema JSON](https://json-schema.org/).
 
-`type` için aşağıdaki değerler desteklenir:
+Nilai `type` berikut didukung:
 
-- **`string`**: Metin için.
-- **`number`**: Kayan noktalı sayılar için.
-- **`integer`**: Tam sayılar için.
-- **`boolean`**: Doğru veya yanlış değerler için.
-- **`object`**: Anahtar/değer çiftleri içeren yapılandırılmış veriler için.
-- **`array`**: Öğe listeleri için.
-- **`null`**: Bir özelliğin null olmasına izin vermek için tür dizisine `"null"` değerini ekleyin (ör. `{"type": ["string", "null"]}`).
+- **`string`**: Untuk teks.
+- **`number`**: Untuk angka floating point.
+- **`integer`**: Untuk bilangan bulat.
+- **`boolean`**: Untuk nilai benar atau salah.
+- **`object`**: Untuk data terstruktur dengan key-value pair.
+- **`array`**: Untuk daftar item.
+- **`null`**: Untuk mengizinkan properti menjadi null, sertakan `"null"` dalam array jenis (misalnya, `{"type": ["string", "null"]}`).
 
-Bu açıklayıcı özellikler, modele yol göstermeye yardımcı olur:
+Properti deskriptif ini membantu memandu model:
 
-- **`title`**: Bir mülkün kısa açıklaması.
-- **`description`**: Bir tesisin daha uzun ve ayrıntılı açıklaması.
+- **`title`**: Deskripsi singkat properti.
+- **`description`**: Deskripsi properti yang lebih panjang dan lebih mendetail.
 
-### Türe özgü özellikler
+### Properti khusus jenis
 
-**`object` değerleri için:**
+**Untuk nilai `object`:**
 
-- **`properties`**: Her anahtarın bir özellik adı, her değerin ise söz konusu özelliğin şeması olduğu bir nesne.
-- **`required`**: Hangi özelliklerin zorunlu olduğunu listeleyen bir dize dizisi.
-- **`additionalProperties`**: `properties` içinde listelenmeyen özelliklere izin verilip verilmeyeceğini kontrol eder. Boole veya şema olabilir.
+- **`properties`**: Objek dengan setiap kunci adalah nama properti dan setiap nilai adalah skema untuk properti tersebut.
+- **`required`**: Array string yang mencantumkan properti mana yang wajib.
+- **`additionalProperties`**: Mengontrol apakah properti yang tidak tercantum di `properties` diizinkan. Dapat berupa boolean atau skema.
 
-**`string` değerleri için:**
+**Untuk nilai `string`:**
 
-- **`enum`**: Sınıflandırma görevleri için olası dizelerin belirli bir kümesini listeler.
-- **`format`**: Dize için `date-time`, `date`, `time` gibi bir söz dizimi belirtir.
+- **`enum`**: Mencantumkan kumpulan string yang mungkin untuk tugas klasifikasi.
+- **`format`**: Menentukan sintaksis untuk string, seperti `date-time`, `date`, `time`.
 
-**`number` ve `integer` değerleri için:**
+**Untuk nilai `number` dan `integer`:**
 
-- **`enum`**: Olası sayısal değerlerin belirli bir kümesini listeler.
-- **`minimum`**: Minimum dahil edilen değer.
-- **`maximum`**: Maksimum dahil edilen değer.
+- **`enum`**: Mencantumkan kumpulan nilai numerik yang mungkin.
+- **`minimum`**: Nilai inklusif minimum.
+- **`maximum`**: Nilai inklusif maksimum.
 
-**`array` değerleri için:**
+**Untuk nilai `array`:**
 
-- **`items`**: Dizideki tüm öğelerin şemasını tanımlar.
-- **`prefixItems`**: İlk N öğe için bir şema listesi tanımlar ve demet benzeri yapılara izin verir.
-- **`minItems`**: Dizideki minimum öğe sayısı.
-- **`maxItems`**: Dizideki maksimum öğe sayısı.
+- **`items`**: Menentukan skema untuk semua item dalam array.
+- **`prefixItems`**: Menentukan daftar skema untuk N item pertama, sehingga memungkinkan struktur seperti tuple.
+- **`minItems`**: Jumlah minimum item dalam array.
+- **`maxItems`**: Jumlah maksimum item dalam array.
 
-## Yapılandırılmış çıkışlar ve işlev çağrısı
+## Output terstruktur versus panggilan fungsi
 
-| Özellik | Birincil Kullanım Alanı |
+| Fitur | Kasus Penggunaan Utama |
 | --- | --- |
-| **Yapılandırılmış Çıkışlar** | **Son yanıtı biçimlendirme** Modelin *yanıtının* belirli bir biçimde olmasını istediğinizde kullanın. |
-| **İşlev Çağırma** | **Sohbet sırasında işlem yapma** Modelin nihai yanıtı vermeden önce bir görevi *yapmanızı istemesi* gerektiğinde kullanılır. |
+| **Output Terstruktur** | **Memformat respons akhir.** Gunakan saat Anda menginginkan *jawaban* model dalam format tertentu. |
+| **Panggilan Fungsi** | **Mengambil tindakan selama percakapan.** Gunakan saat model perlu *meminta Anda* untuk melakukan tugas sebelum memberikan jawaban akhir. |
 
-## En iyi uygulamalar
+## Praktik terbaik
 
-- **Net açıklamalar:** Modeli yönlendirmek için `description` alanını kullanın.
-- **Güçlü tür belirleme:** Belirli türleri (`integer`, `string`, `enum`) kullanın.
-- **İstem mühendisliği:** Modelin ne yapmasını istediğinizi açıkça belirtin.
-- **Doğrulama:** Çıkış söz dizimi açısından doğru JSON olsa da uygulamanızdaki değerleri her zaman doğrulayın.
-- **Hata yönetimi:** Şemaya uygun ancak semantik olarak yanlış çıktılar için etkili hata yönetimi uygulayın.
+- **Deskripsi yang jelas:** Gunakan kolom `description` untuk memandu model.
+- **Pengetikan yang kuat:** Gunakan jenis tertentu (`integer`, `string`, `enum`).
+- **Teknik perintah:** Nyatakan dengan jelas tindakan yang Anda inginkan dari model.
+- **Validasi:** Meskipun output adalah JSON yang benar secara sintaksis, selalu validasi nilai dalam aplikasi Anda.
+- **Penanganan error:** Terapkan penanganan error yang andal untuk output yang sesuai dengan skema tetapi salah secara semantik.
 
-## Sınırlamalar
+## Batasan
 
-- **Şema alt kümesi:** Tüm JSON şema özellikleri desteklenmez.
-- **Şema karmaşıklığı:** Çok büyük veya derin şekilde iç içe yerleştirilmiş şemalar reddedilebilir.
+- **Subset skema:** Tidak semua fitur Skema JSON didukung.
+- **Kompleksitas skema:** Skema yang sangat besar atau sangat bertingkat mungkin akan ditolak.
 
-Geri bildirim gönderin
+Kirim masukan
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Son güncelleme tarihi: 2026-07-07 UTC.
+Terakhir diperbarui pada 2026-07-07 UTC.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+Ada masukan untuk kami?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-07 UTC."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-07 UTC."],[],[]]

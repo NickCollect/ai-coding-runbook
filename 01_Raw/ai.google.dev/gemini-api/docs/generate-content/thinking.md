@@ -1,31 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=ar
-fetched_at: 2026-07-20T04:46:54.458067+00:00
-title: "\u062a\u0641\u0643\u064a\u0631 Gemini \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thinking?hl=id
+fetched_at: 2026-07-27T04:40:18.329065+00:00
+title: "Pemikiran Gemini \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
-# تفكير Gemini
+# Pemikiran Gemini
 
-تستخدم [نماذج سلسلة Gemini 3 و2.5](https://ai.google.dev/gemini-api/docs/models?hl=ar) "عملية تفكير" داخلية تحسّن بشكل كبير قدراتها على الاستدلال والتخطيط المتعدّد الخطوات، ما يجعلها فعّالة للغاية في المهام المعقّدة، مثل الترميز والرياضيات المتقدّمة وتحليل البيانات.
+[Model seri Gemini 3 dan 2.5](https://ai.google.dev/gemini-api/docs/models?hl=id) menggunakan "proses berpikir" internal yang secara signifikan meningkatkan kemampuan penalaran dan perencanaan multi-langkahnya, sehingga sangat efektif untuk tugas-tugas kompleks seperti coding, matematika tingkat lanjut, dan analisis data.
 
-يوضّح هذا الدليل كيفية الاستفادة من إمكانات التفكير في Gemini باستخدام Gemini API.
+Panduan ini menunjukkan cara menggunakan kemampuan penalaran Gemini menggunakan
+Gemini API.
 
-## إنشاء محتوى مع التفكير
+## Membuat konten dengan pemikiran
 
-إنّ بدء طلب باستخدام نموذج تفكير يشبه أي طلب آخر لإنشاء المحتوى. يكمن الاختلاف الرئيسي في تحديد أحد [النماذج التي تتضمّن ميزة التفكير](#supported-models) في الحقل `model`، كما هو موضّح في مثال [إنشاء النص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#text-input) التالي:
+Memulai permintaan dengan model pemikiran serupa dengan permintaan pembuatan konten lainnya. Perbedaan utamanya terletak pada penentuan salah satu
+[model dengan dukungan pemikiran](#supported-models) di kolom `model`, seperti
+yang ditunjukkan dalam contoh [pembuatan teks](https://ai.google.dev/gemini-api/docs/text-generation?hl=id#text-input) berikut:
 
 ### Python
 
@@ -113,14 +116,15 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
  ```
 ```
 
-## ملخّصات الأفكار
+## Ringkasan penalaran
 
-ملخّصات الأفكار هي إصدارات موجزة من الأفكار الأولية التي يعرضها النموذج، وهي تقدّم
-إحصاءات حول عملية الاستدلال الداخلية التي يجريها النموذج. يُرجى العِلم أنّ مستويات التفكير والميزانيات تنطبق على الأفكار الأولية للنموذج وليس على ملخّصات الأفكار.
+Ringkasan pemikiran adalah versi ringkas dari pemikiran mentah model dan menawarkan insight tentang proses penalaran internal model. Perhatikan bahwa
+tingkat pemikiran dan anggaran berlaku untuk pemikiran mentah model, bukan untuk ringkasan
+pemikiran.
 
-يمكنك تفعيل ملخّصات الأفكار من خلال ضبط `includeThoughts` على `true` في إعدادات الطلب. يمكنك بعد ذلك الوصول إلى الملخّص من خلال تكرار المعلَمة `response`، والتحقّق من القيمة المنطقية `thought`.`parts`
+Anda dapat mengaktifkan ringkasan pemikiran dengan menyetel `includeThoughts` ke `true` dalam konfigurasi permintaan. Anda kemudian dapat mengakses ringkasan dengan melakukan iterasi pada `parts` parameter `response`, dan memeriksa boolean `thought`.
 
-في ما يلي مثال يوضّح كيفية تفعيل ملخّصات الأفكار واستردادها بدون بث، ما يؤدي إلى عرض ملخّص نهائي واحد للأفكار مع الردّ:
+Berikut adalah contoh yang menunjukkan cara mengaktifkan dan mengambil ringkasan pemikiran tanpa streaming, yang menampilkan satu ringkasan pemikiran akhir dengan respons:
 
 ### Python
 
@@ -230,7 +234,8 @@ func main() {
 }
 ```
 
-في ما يلي مثال على استخدام ميزة "التفكير أثناء البث"، والتي تعرض ملخّصات متزايدة ومتجدّدة أثناء عملية الإنشاء:
+Berikut adalah contoh penggunaan berpikir dengan streaming, yang menampilkan ringkasan inkremental
+bergulir selama pembuatan:
 
 ### Python
 
@@ -383,25 +388,26 @@ func main() {
 }
 ```
 
-## التحكّم في التفكير
+## Mengontrol pemikiran
 
-تعتمد نماذج Gemini التفكير الديناميكي تلقائيًا، ما يعني أنّها تعدّل تلقائيًا مقدار الجهد المبذول في الاستدلال استنادًا إلى مدى تعقيد طلب المستخدم.
-ومع ذلك، إذا كانت لديك قيود معيّنة بشأن وقت الاستجابة أو كنت تحتاج إلى أن يشارك النموذج في عملية استدلال أعمق من المعتاد، يمكنك اختياريًا استخدام المَعلمات للتحكّم في سلوك التفكير.
+Model Gemini terlibat dalam pemikiran dinamis secara default, dengan otomatis menyesuaikan upaya penalaran berdasarkan kompleksitas permintaan pengguna.
+Namun, jika Anda memiliki batasan latensi tertentu atau memerlukan model untuk melakukan penalaran yang lebih mendalam dari biasanya, Anda dapat menggunakan parameter secara opsional untuk mengontrol perilaku berpikir.
 
-### مستويات التفكير (Gemini 3)
+### Tingkat penalaran (Gemini 3)
 
-تتيح لك المَعلمة `thinkingLevel`، التي يُنصح باستخدامها مع نماذج Gemini 3 والإصدارات الأحدث، التحكّم في سلوك الاستدلال.
+Parameter `thinkingLevel`, yang direkomendasikan untuk model Gemini 3 dan yang lebih baru,
+memungkinkan Anda mengontrol perilaku penalaran.
 
-يوضّح الجدول التالي إعدادات `thinkingLevel` لكل نوع من أنواع النماذج:
+Tabel berikut menjelaskan setelan `thinkingLevel` untuk setiap jenis model:
 
-| مستوى التفكير | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | صورة Gemini 3.1 Flash-Lite | Gemini 3 Flash | الوصف |
+| Tingkat Berpikir | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gambar Gemini 3.1 Flash-Lite | Gemini 3 Flash | Deskripsi |
 | --- | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | متاح | غير متاح | متاح (تلقائي) | متاح (تلقائي) | متاح | يتطابق هذا الخيار مع الإعداد "بدون تفكير" لمعظم طلبات البحث. يُرجى العِلم أنّ `minimal` لا يضمن إيقاف التفكير، فقد يقدّم النموذج أسبابًا بسيطة جدًا للمهام المعقّدة. |
-| **`low`** | متاح | متاح | متاح | غير متاح | متاح | يقلّل من زمن الانتقال والتكلفة. |
-| **`medium`** | متاح (تلقائي) | متاح | متاح | غير متاح | متاح | التفكير المتوازن لمعظم المهام |
-| **`high`** | متاح (ديناميكي) | متاح (تلقائي، ديناميكي) | متاح (ديناميكي) | متاح (ديناميكي) | متاح (تلقائي، ديناميكي) | زيادة عمق الاستدلال إلى أقصى حد قد يستغرق النموذج وقتًا أطول بكثير للوصول إلى الرمز المميز الأول للناتج (غير المرتبط بالتفكير)، ولكن سيتم التفكير في الناتج بعناية أكبر. |
+| **`minimal`** | Didukung | Tidak didukung | Didukung (Default) | Didukung (Default) | Didukung | Cocok dengan setelan "tanpa penalaran" untuk sebagian besar kueri. Perhatikan, `minimal` tidak menjamin bahwa penalaran dinonaktifkan, model mungkin bernalar sangat minimal untuk tugas yang kompleks. |
+| **`low`** | Didukung | Didukung | Didukung | Tidak Didukung | Didukung | Meminimalkan latensi dan biaya. |
+| **`medium`** | Didukung (Default) | Didukung | Didukung | Tidak didukung | Didukung | Pemikiran yang seimbang untuk sebagian besar tugas. |
+| **`high`** | Didukung (Dinamis) | Didukung (Default, Dinamis) | Didukung (Dinamis) | Didukung (Dinamis) | Didukung (Default, Dinamis) | Memaksimalkan kedalaman penalaran. Model mungkin memerlukan waktu yang jauh lebih lama untuk mencapai token output pertama (non-pemikiran), tetapi outputnya akan lebih beralasan. |
 
-يوضّح المثال التالي كيفية ضبط مستوى التفكير.
+Contoh berikut menunjukkan cara menetapkan tingkat pemikiran.
 
 ### Python
 
@@ -504,27 +510,31 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-لا يمكنك إيقاف ميزة "أفكّر" في Gemini 3.1 Pro. لا يتيح Gemini 3 Flash وFlash-Lite إيقاف التفكير بالكامل أيضًا. وإذا لم تحدّد مستوى التفكير، سيستخدم Gemini مستوى التفكير التلقائي لنماذج Gemini 3 (على سبيل المثال، `"high"` لنموذج Gemini 3.1 Pro و`"medium"` لنموذج Gemini 3.5 Flash).
+Anda tidak dapat menonaktifkan kemampuan berpikir untuk Gemini 3.1 Pro. Gemini 3 Flash dan Flash-Lite juga tidak mendukung penonaktifan penalaran sepenuhnya.
+Jika Anda tidak menentukan tingkat penalaran, Gemini akan menggunakan tingkat penalaran default model Gemini 3 (misalnya, `"high"` untuk Gemini 3.1 Pro, dan `"medium"` untuk Gemini 3.5 Flash).
 
-لا تتوافق سلسلة نماذج Gemini 2.5 مع `thinkingLevel`، لذا يُرجى استخدام `thinkingBudget` بدلاً من ذلك.
+Model seri Gemini 2.5 tidak mendukung `thinkingLevel`; gunakan `thinkingBudget` sebagai gantinya.
 
-### التفكير في الميزانيات
+### Anggaran penalaran
 
-توجّه المَعلمة `thinkingBudget`، التي تم طرحها مع سلسلة Gemini 2.5، النموذج بشأن العدد المحدّد من الرموز المميزة التي يجب استخدامها للاستدلال.
+Parameter `thinkingBudget`, yang diperkenalkan dengan seri Gemini 2.5, memandu
+model tentang jumlah token penalaran tertentu yang akan digunakan untuk melakukan penalaran.
 
-في ما يلي `thinkingBudget` تفاصيل الإعداد لكل نوع من أنواع النماذج.
-يمكنك إيقاف التفكير من خلال ضبط `thinkingBudget` على 0.
-يؤدي ضبط قيمة `thinkingBudget` على -1 إلى تفعيل **الاستدلال الديناميكي**، ما يعني أنّ النموذج سيعدّل الميزانية استنادًا إلى مدى تعقيد الطلب.
+Berikut adalah detail konfigurasi `thinkingBudget` untuk setiap jenis model.
+Anda dapat menonaktifkan pemikiran dengan menyetel `thinkingBudget` ke 0.
+Menetapkan `thinkingBudget` ke -1 akan mengaktifkan
+**pemikiran dinamis**, yang berarti model akan menyesuaikan anggaran berdasarkan
+kompleksitas permintaan.
 
-| الطراز | الإعداد التلقائي (لم يتم ضبط ميزانية التفكير) | النطاق | إيقاف التفكير | تفعيل التفكير الديناميكي |
+| Model | Setelan default (Anggaran penalaran tidak ditetapkan) | Rentang | Menonaktifkan penalaran | Mengaktifkan pemikiran dinamis |
 | --- | --- | --- | --- | --- |
-| ‫**2.5 Pro** | التفكير الديناميكي | من `128` إلى `32768` | لا ينطبق: لا يمكن إيقاف التفكير | `thinkingBudget = -1` (تلقائي) |
-| ‫**2.5 Flash** | التفكير الديناميكي | من `0` إلى `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (تلقائي) |
-| **معاينة ‎2.5 Flash** | التفكير الديناميكي | من `0` إلى `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (تلقائي) |
-| **2.5 Flash Lite** | النموذج لا يفكّر | من `512` إلى `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **معاينة 2.5 Flash Lite** | النموذج لا يفكّر | من `512` إلى `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
-| **الإصدار التجريبي من Robotics-ER 1.6** | التفكير الديناميكي | من `0` إلى `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (تلقائي) |
-| **معاينة الصوت الأصلي المباشر في 2.5 Flash (‫09-2025)** | التفكير الديناميكي | من `0` إلى `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (تلقائي) |
+| **2.5 Pro** | Pemikiran dinamis | `128` hingga `32768` | T/A: Tidak dapat menonaktifkan pemikiran | `thinkingBudget = -1` (Default) |
+| **2.5 Flash** | Pemikiran dinamis | `0` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Default) |
+| **Pratinjau 2.5 Flash** | Pemikiran dinamis | `0` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Default) |
+| **2.5 Flash Lite** | Model tidak berpikir | `512` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **Pratinjau 2.5 Flash Lite** | Model tidak berpikir | `512` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` |
+| **Pratinjau Robotics-ER 1.6** | Pemikiran dinamis | `0` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Default) |
+| **Pratinjau Audio Native Live 2.5 Flash (09-2025)** | Pemikiran dinamis | `0` hingga `24576` | `thinkingBudget = 0` | `thinkingBudget = -1` (Default) |
 
 ### Python
 
@@ -639,29 +649,38 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:g
 }'
 ```
 
-استنادًا إلى الطلب، قد يتجاوز النموذج ميزانية الرموز المميزة أو لا يبلغها.
+Bergantung pada perintahnya, model dapat melampaui atau tidak memenuhi anggaran token.
 
-## توقيعات الأفكار
+## Tanda tangan penalaran
 
-‫Gemini API هو واجهة برمجة تطبيقات لا تحتفظ بأي حالة، لذا يتعامل النموذج مع كل طلب من طلبات واجهة برمجة التطبيقات بشكل مستقل، ولا يمكنه الوصول إلى سياق الأفكار من الأدوار السابقة في التفاعلات المتعددة الأدوار.
+Gemini API bersifat stateless, sehingga model memperlakukan setiap permintaan API secara independen
+dan tidak memiliki akses ke konteks pemikiran dari giliran sebelumnya dalam interaksi
+multi-giliran.
 
-لإتاحة الحفاظ على سياق الأفكار خلال المحادثات المتعددة الأدوار، يعرض Gemini توقيعات الأفكار، وهي تمثيلات مشفّرة لعملية معالجة الأفكار الداخلية في النموذج.
+Untuk memungkinkan pemeliharaan konteks pemikiran di seluruh interaksi multi-turn,
+Gemini menampilkan tanda tangan pemikiran, yang merupakan representasi terenkripsi dari
+proses pemikiran internal model.
 
-- تعرض **نماذج Gemini 2.5** توقيعات الأفكار عندما تكون ميزة التفكير مفعّلة ويتضمّن الطلب [استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#thinking)، وتحديدًا [تعريفات الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#step-2).
-- قد تعرض **نماذج Gemini 3** توقيعات فكرية لجميع أنواع [الأجزاء](https://ai.google.dev/api/caching?hl=ar#Part).
-  ننصحك دائمًا بإعادة جميع التواقيع كما تم استلامها، ولكن هذا الإجراء *إلزامي* لتواقيع استدعاء الدوال. يمكنك الاطّلاع على صفحة [توقيعات الأفكار](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ar) لمعرفة المزيد.
+- **Model Gemini 2.5** menampilkan tanda tangan pemikiran saat fitur penalaran diaktifkan dan
+  permintaan mencakup [panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#thinking),
+  khususnya [deklarasi fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#step-2).
+- **Model Gemini 3** dapat menampilkan tanda tangan pemikiran untuk semua jenis [bagian](https://ai.google.dev/api/caching?hl=id#Part).
+  Sebaiknya Anda selalu meneruskan semua tanda tangan seperti yang diterima, tetapi hal ini *wajib* untuk tanda tangan panggilan fungsi. Baca halaman
+  [Thought Signatures](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id) untuk
+  mempelajari lebih lanjut.
 
-تشمل القيود الأخرى على الاستخدام التي يجب مراعاتها عند استخدام ميزة "استدعاء الدوال" ما يلي:
+Batasan penggunaan lain yang perlu dipertimbangkan dengan panggilan fungsi mencakup:
 
-- يتم عرض التواقيع من النموذج ضمن أجزاء أخرى في الردّ، مثل استدعاء الدوال أو الأجزاء النصية.
-  [أعِد الردّ بأكمله](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#step-4)
-  مع جميع الأجزاء إلى النموذج في الجولات اللاحقة.
-- لا تدمج الأجزاء التي تتضمّن توقيعات معًا.
-- لا تدمج جزءًا من مستند يتضمّن توقيعًا مع جزء آخر لا يتضمّن توقيعًا.
+- Tanda tangan ditampilkan dari model dalam bagian lain dalam respons,
+  misalnya panggilan fungsi atau bagian teks.
+  [Kembalikan seluruh respons](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#step-4)
+  dengan semua bagian kembali ke model pada giliran berikutnya.
+- Jangan menggabungkan bagian dengan tanda tangan.
+- Jangan menggabungkan satu bagian dengan tanda tangan dengan bagian lain tanpa tanda tangan.
 
-## الأسعار
+## Harga
 
-عند تفعيل ميزة "التفكير"، يكون سعر الردّ هو مجموع الرموز المميزة للناتج والرموز المميزة للتفكير. يمكنك الحصول على إجمالي عدد الرموز المميزة التي تم إنشاؤها من حقل `thoughtsTokenCount`.
+Jika penalaran diaktifkan, harga respons adalah jumlah token output dan token penalaran. Anda bisa mendapatkan total jumlah token pemikiran yang dihasilkan dari kolom `thoughtsTokenCount`.
 
 ### Python
 
@@ -687,56 +706,62 @@ fmt.Println("Thoughts tokens:", response.UsageMetadata.ThoughtsTokenCount)
 fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 ```
 
-تنشئ نماذج التفكير أفكارًا كاملة لتحسين جودة الرد النهائي، ثم تعرض [ملخّصات](#summaries) لتقديم نظرة ثاقبة حول عملية التفكير. لذلك، يستند التسعير إلى الرموز المميزة الكاملة التي يحتاج إليها النموذج لإنشاء ملخّص، على الرغم من أنّ الملخّص هو الناتج الوحيد من واجهة برمجة التطبيقات.
+Model pemikiran menghasilkan pemikiran lengkap untuk meningkatkan kualitas respons akhir, lalu menghasilkan [ringkasan](#summaries) untuk memberikan insight tentang proses pemikiran. Jadi, harga didasarkan pada token pemikiran penuh yang perlu dihasilkan model untuk membuat ringkasan, meskipun hanya ringkasan yang dihasilkan dari API.
 
-يمكنك الاطّلاع على مزيد من المعلومات حول الرموز المميزة في دليل [احتساب الرموز المميزة](https://ai.google.dev/gemini-api/docs/tokens?hl=ar).
+Anda dapat mempelajari lebih lanjut token dalam panduan [Penghitungan token](https://ai.google.dev/gemini-api/docs/tokens?hl=id).
 
-## أفضل الممارسات
+## Praktik terbaik
 
-يتضمّن هذا القسم بعض الإرشادات لاستخدام نماذج التفكير بكفاءة.
-وكالعادة، سيساعدك اتّباع [إرشادات كتابة الطلبات وأفضل الممارسات](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar) في الحصول على أفضل النتائج.
+Bagian ini mencakup beberapa panduan untuk menggunakan model berpikir secara efisien.
+Seperti biasa, mengikuti [panduan dan praktik terbaik pembuatan perintah](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id) kami akan memberikan hasil terbaik.
 
-### تصحيح الأخطاء والتوجيه
+### Proses debug dan pengarahan
 
-- **مراجعة الأسباب**: عندما لا تحصل على الردّ المتوقّع من نماذج التفكير، قد يساعدك ذلك في تحليل ملخّصات أفكار Gemini بعناية.
-  يمكنك الاطّلاع على كيفية تقسيم المهمة والوصول إلى الاستنتاج، واستخدام هذه المعلومات لتصحيح النتائج.
-- **تقديم إرشادات بشأن طريقة التفكير**: إذا كنت تأمل في الحصول على ناتج طويل بشكل خاص، يمكنك تقديم إرشادات في طلبك للحدّ من [مقدار التفكير](#set-budget) الذي يستخدمه النموذج. يتيح لك ذلك حجز المزيد من الرموز المميزة لردّك.
+- **Tinjau penalaran**: Jika Anda tidak mendapatkan respons yang diharapkan dari model pemikiran, Anda dapat menganalisis ringkasan pemikiran Gemini dengan cermat.
+  Anda dapat melihat cara model memecah tugas dan mencapai kesimpulannya, serta menggunakan informasi tersebut untuk mengoreksi hasil yang benar.
+- **Memberikan Panduan dalam Penalaran**: Jika Anda menginginkan output yang sangat panjang, Anda dapat memberikan panduan dalam perintah untuk membatasi [jumlah pemikiran](#set-budget) yang digunakan model. Dengan begitu, Anda dapat mencadangkan lebih banyak output token untuk respons Anda.
 
-### مدى تعقيد المهمة
+### Kompleksitas tugas
 
-- **المهام السهلة (قد يكون التفكير غير مفعّل):** لا يتطلّب الأمر التفكير في الطلبات المباشرة التي لا تحتاج إلى استنتاج معقّد، مثل استرجاع الحقائق أو التصنيف. تشمل الأمثلة ما يلي:
-  - "أين تأسّست شركة DeepMind؟"
-  - "هل تطلب هذه الرسالة الإلكترونية عقد اجتماع أم أنّها تقدّم معلومات فقط؟"
-- **المهام المتوسطة (الإعدادات التلقائية/بعض التفكير):** تستفيد العديد من الطلبات الشائعة من المعالجة خطوة بخطوة أو الفهم الأعمق. يمكن لـ Gemini استخدام قدرات التفكير بمرونة لتنفيذ مهام مثل:
-  - قدِّم تشبيهًا بين عملية التمثيل الضوئي والنمو.
-  - تحديد أوجه الاختلاف والتشابه بين السيارات الكهربائية والسيارات الهجينة
-- **المهام الصعبة (الحد الأقصى لقدرة التفكير):** بالنسبة إلى التحديات المعقدة حقًا، مثل حلّ مسائل رياضية معقدة أو مهام الترميز، ننصحك بتحديد ميزانية تفكير عالية. تتطلّب هذه الأنواع من المهام أن يستفيد النموذج من جميع إمكاناته في التفكير والتخطيط، وغالبًا ما تتضمّن العديد من الخطوات الداخلية قبل تقديم إجابة. تشمل الأمثلة ما يلي:
-  - حلّ المسألة 1 في مسابقة AIME لعام 2025: أوجد مجموع جميع الأعداد الصحيحة b > 9 التي يكون فيها 17b قاسمًا لـ 97b.
-  - اكتب رمز Python لتطبيق ويب يعرض بيانات سوق الأسهم في الوقت الفعلي، بما في ذلك مصادقة المستخدم. يجب أن يكون هذا الإجراء بأكبر قدر ممكن من الفعالية.
+- **Tugas Mudah (Pemikiran dapat DINONAKTIFKAN):** Untuk permintaan langsung yang tidak memerlukan penalaran yang kompleks, seperti pengambilan atau klasifikasi fakta, pemikiran tidak diperlukan. Contohnya antara lain:
+  - "Di mana DeepMind didirikan?"
+  - "Apakah email ini meminta rapat atau hanya memberikan informasi?"
+- **Tugas Sedang (Default/Beberapa Pemikiran):** Banyak permintaan umum yang diuntungkan dari
+  pemrosesan langkah demi langkah atau pemahaman yang lebih mendalam. Gemini dapat menggunakan kemampuan berpikir secara fleksibel untuk tugas-tugas seperti:
+  - Menganalogikan fotosintesis dan tumbuh dewasa.
+  - Bandingkan dan bedakan mobil listrik dan mobil hibrida.
+- **Tugas Sulit (Kemampuan Berpikir Maksimum):** Untuk tantangan yang benar-benar kompleks,
+  seperti menyelesaikan soal matematika yang rumit atau tugas coding, sebaiknya tetapkan
+  anggaran berpikir yang tinggi. Jenis tugas ini mengharuskan model menggunakan kemampuan penalaran dan perencanaan sepenuhnya, yang sering kali melibatkan banyak langkah internal sebelum memberikan jawaban. Contohnya antara lain:
+  - Pecahkan soal 1 di AIME 2025: Temukan jumlah semua bilangan bulat b > 9 yang
+    membuat 17b menjadi pembagi 97b.
+  - Menulis kode Python untuk aplikasi web yang memvisualisasikan data pasar saham real-time, termasuk autentikasi pengguna. Buat seefisien mungkin.
 
-## النماذج والأدوات والإمكانات المتوافقة
+## Model, alat, dan kemampuan yang didukung
 
-تتوفّر ميزات التفكير على جميع طُرز السلسلة 3 و2.5.
-يمكنك العثور على جميع إمكانات النموذج في صفحة
-[النظرة العامة على النموذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+Fitur berpikir didukung di semua model seri 3 dan 2.5.
+Anda dapat menemukan semua kemampuan model di halaman
+[ringkasan model](https://ai.google.dev/gemini-api/docs/models?hl=id).
 
-تعمل النماذج المفكِّرة مع جميع أدوات Gemini وقدراته. يتيح ذلك للنماذج التفاعل مع الأنظمة الخارجية أو تنفيذ الرموز أو الوصول إلى المعلومات في الوقت الفعلي، ودمج النتائج في عملية الاستدلال والرد النهائي.
+Model Penalaran berfungsi dengan semua alat dan kemampuan Gemini. Hal ini memungkinkan
+model berinteraksi dengan sistem eksternal, mengeksekusi kode, atau mengakses informasi
+real-time, dengan menggabungkan hasilnya ke dalam penalaran dan respons akhir.
 
-يمكنك تجربة أمثلة على استخدام الأدوات مع نماذج التفكير في
-[Thinking cookbook][Colab].
+Anda dapat mencoba contoh penggunaan alat dengan model pemikiran di
+[Buku resep pemikiran][Colab].
 
-## ما هي الخطوات التالية؟
+## Apa langkah selanjutnya?
 
-- تتوفّر معلومات حول التغطية في دليل [التوافق مع OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=ar#thinking).
+- Cakupan pemikiran tersedia di panduan [Kompatibilitas OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=id#thinking) kami.
 
 [Colab]: https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get\_started\_thinking.ipynb
 
-إرسال ملاحظات
+Kirim masukan
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-07-07 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-07-07 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Ada masukan untuk kami?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-07 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-07 UTC."],[],[]]

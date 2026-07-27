@@ -1,42 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=zh-CN
-fetched_at: 2026-07-20T04:37:26.095605+00:00
-title: "\u901a\u8fc7 Google GenAI SDK \u5f00\u59cb\u4f7f\u7528 Gemini Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ko
+fetched_at: 2026-07-27T04:49:36.528297+00:00
+title: "Google \uc0dd\uc131\ud615 AI SDK\ub97c \uc0ac\uc6a9\ud558\uc5ec Gemini Live API \uc2dc\uc791\ud558\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-发送反馈
+의견 보내기
 
-# 通过 Google GenAI SDK 开始使用 Gemini Live API
+# Google 생성형 AI SDK를 사용하여 Gemini Live API 시작하기
 
-Gemini Live API 支持与 Gemini 模型进行实时双向互动，并支持音频、视频和文本输入以及原生音频输出。本指南介绍了如何在服务器上使用 Google GenAI SDK 与 API 集成。
+Gemini Live API를 사용하면 Gemini 모델과 실시간 양방향 상호작용이 가능하며 오디오, 동영상, 텍스트 입력과 네이티브 오디오 출력을 지원합니다. 이 가이드에서는 서버에서 Google 생성형 AI SDK를 사용하여 API와 통합하는 방법을 설명합니다.
 
-[在 Google AI Studio 中试用 Live APImic](https://aistudio.google.com/live?hl=zh-cn)
-[从 GitHub 克隆示例应用code](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
-[使用编码代理技能terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=zh-cn)
+[Google AI Studio에서 Live API 사용해 보기mic](https://aistudio.google.com/live?hl=ko)
+[GitHub에서 샘플 앱 클론code](https://github.com/google-gemini/gemini-live-api-examples/tree/main/gemini-live-genai-python-sdk)
+[코딩 에이전트 기술 사용하기terminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ko)
 
-## 概览
+## 개요
 
-Gemini Live API 使用 WebSocket 进行实时通信。`google-genai` SDK 提供了一个用于管理这些连接的高级异步接口。
+Gemini Live API는 실시간 통신에 WebSockets를 사용합니다. `google-genai` SDK는 이러한 연결을 관리하기 위한 고급 비동기 인터페이스를 제공합니다.
 
-主要概念：
+주요 개념
 
-- **会话**：与模型的持久连接。
-- **配置**：设置模态（音频/文本）、语音和系统指令。
-- **实时输入**：以 blob 形式发送音频和视频帧。
+- **세션**: 모델에 대한 영구 연결입니다.
+- **구성**: 모달리티 (오디오/텍스트), 음성, 시스템 안내를 설정합니다.
+- **실시간 입력**: 오디오 및 동영상 프레임을 blob으로 전송합니다.
 
-## 连接到 Live API
+## Live API에 연결
 
-使用 API 密钥启动 Live API 会话：
+API 키로 Live API 세션을 시작합니다.
 
 ### Python
 
@@ -97,9 +97,9 @@ async function main() {
 main();
 ```
 
-## 正在发送短信
+## 텍스트 전송 중
 
-您可以使用 `send_realtime_input` (Python) 或 `sendRealtimeInput` (JavaScript) 发送文本。
+텍스트는 `send_realtime_input` (Python) 또는 `sendRealtimeInput` (자바스크립트)을 사용하여 전송할 수 있습니다.
 
 ### Python
 
@@ -115,9 +115,9 @@ session.sendRealtimeInput({
 });
 ```
 
-## 发送音频
+## 오디오 전송
 
-音频需要以原始 PCM 数据（原始 16 位 PCM 音频，16kHz，小端序）的形式发送。
+오디오는 원시 PCM 데이터 (원시 16비트 PCM 오디오, 16kHz, 리틀 엔디안)로 전송해야 합니다.
 
 ### Python
 
@@ -143,11 +143,12 @@ session.sendRealtimeInput({
 });
 ```
 
-如需查看如何从客户端设备（例如浏览器）获取音频的示例，请参阅 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70) 上的端到端示例。
+클라이언트 기기 (예: 브라우저)에서 오디오를 가져오는 방법의 예는
+[GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L31-L70)의 포괄적인 예시를 참고하세요.
 
-## 正在发送视频
+## 동영상 전송 중
 
-视频帧以特定帧速率（每秒最多 1 帧）作为单独的图片（例如 JPEG 或 PNG）发送。
+동영상 프레임은 특정 프레임 속도 (초당 최대 1프레임)로 개별 이미지 (예: JPEG 또는 PNG)로 전송됩니다.
 
 ### Python
 
@@ -173,11 +174,11 @@ session.sendRealtimeInput({
 });
 ```
 
-如需查看如何从客户端设备（例如浏览器）获取视频的示例，请参阅 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120) 上的端到端示例。
+클라이언트 기기 (예: 브라우저)에서 동영상을 가져오는 방법의 예는 [GitHub](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L84-L120)의 포괄적인 예시를 참고하세요.
 
-## 接收音频
+## 오디오 수신 중
 
-模型以数据块的形式返回音频回答。
+모델의 오디오 응답은 데이터 청크로 수신됩니다.
 
 ### Python
 
@@ -205,11 +206,11 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-如需了解如何[在服务器上接收音频](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98)以及如何[在浏览器中播放音频](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174)，请参阅 GitHub 上的示例应用。
+GitHub의 샘플 앱을 참고하여 서버에서 오디오를 [수신](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/gemini_live.py#L86-L98)하고 브라우저에서 [재생](https://github.com/google-gemini/gemini-live-api-examples/blob/main/gemini-live-genai-python-sdk/frontend/media-handler.js#L145-L174)하는 방법을 알아보세요.
 
-## 正在接收短信
+## 텍스트 수신 중
 
-服务器内容中包含用户输入和模型输出的转写内容。
+사용자 입력과 모델 출력의 스크립트는 서버 콘텐츠에서 확인할 수 있습니다.
 
 ### Python
 
@@ -236,9 +237,9 @@ if (content?.outputTranscription) {
 }
 ```
 
-## 处理工具调用
+## 도구 호출 처리
 
-该 API 支持工具调用（函数调用）。当模型请求工具调用时，您必须执行该函数并将响应发送回去。
+API는 도구 호출 (함수 호출)을 지원합니다. 모델이 도구 호출을 요청하면 함수를 실행하고 응답을 다시 전송해야 합니다.
 
 ### Python
 
@@ -279,20 +280,20 @@ if (response.toolCall) {
 }
 ```
 
-## 后续步骤
+## 다음 단계
 
-- 如需了解主要功能和配置（包括语音活动检测和原生音频功能），请参阅完整的 Live API [功能](https://ai.google.dev/gemini-api/docs/live-guide?hl=zh-cn)指南。
-- 请参阅[工具使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=zh-cn)指南，了解如何将 Live API 与工具和函数调用集成。
-- 如需了解如何管理长时间运行的对话，请参阅[会话管理](https://ai.google.dev/gemini-api/docs/live-session?hl=zh-cn)指南。
-- 请参阅[临时令牌](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=zh-cn)指南，了解如何在[客户端到服务器](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-cn#implementation-approach)应用中进行安全身份验证。
-- 如需详细了解底层 WebSockets API，请参阅 [WebSockets API 参考文档](https://ai.google.dev/api/live?hl=zh-cn)。
+- 음성 활동 감지 및 네이티브 오디오 기능을 비롯한 주요 기능 및 구성은 전체 Live API [기능](https://ai.google.dev/gemini-api/docs/live-guide?hl=ko) 가이드를 참고하세요.
+- [도구 사용](https://ai.google.dev/gemini-api/docs/live-tools?hl=ko) 가이드를 참고하여 Live API를 도구 및 함수 호출과 통합하는 방법을 알아보세요.
+- 장기 실행 대화를 관리하려면 [세션 관리](https://ai.google.dev/gemini-api/docs/live-session?hl=ko) 가이드를 참고하세요.
+- [클라이언트-서버 애플리케이션에서 보안 인증을 하려면 [임시 토큰](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=ko) 가이드를 참고하세요.](https://ai.google.dev/gemini-api/docs/live-api?hl=ko#implementation-approach)
+- 기본 WebSockets API에 관한 자세한 내용은 [WebSockets API 참조](https://ai.google.dev/api/live?hl=ko)를 참고하세요.
 
-发送反馈
+의견 보내기
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-最后更新时间 (UTC)：2026-07-08。
+최종 업데이트: 2026-07-08(UTC)
 
-需要向我们提供更多信息？
+의견을 전달하고 싶나요?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-08。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-08(UTC)"],[],[]]

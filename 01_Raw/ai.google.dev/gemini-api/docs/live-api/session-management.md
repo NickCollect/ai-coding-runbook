@@ -1,39 +1,48 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=he
-fetched_at: 2026-07-20T04:37:46.021293+00:00
-title: "\u05e0\u05d9\u05d4\u05d5\u05dc \u05e1\u05e9\u05e0\u05d9\u05dd \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar
+fetched_at: 2026-07-27T04:33:45.448840+00:00
+title: "\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u062c\u0644\u0633\u0627\u062a \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-שליחת משוב
+إرسال ملاحظات
 
-# ניהול סשנים באמצעות Live API
+# إدارة الجلسات باستخدام Live API
 
-ב-Live API, סשן הוא חיבור מתמשך שבו הקלט והפלט מועברים בסטרימינג באופן רציף דרך אותו חיבור ([מידע נוסף על אופן הפעולה](https://ai.google.dev/gemini-api/docs/live?hl=he)).
-העיצוב הייחודי של הסשן מאפשר השהיה נמוכה ותומך בתכונות ייחודיות, אבל הוא גם עלול ליצור בעיות, כמו הגבלות על משך הסשן וסיום מוקדם.
-במדריך הזה מוסברות אסטרטגיות להתמודדות עם האתגרים בניהול סשנים שיכולים להתעורר כשמשתמשים ב-Live API.
+في Live API، تشير الجلسة إلى اتصال مستمر يتم فيه بث الإدخال والإخراج بشكل مستمر عبر الاتصال نفسه (مزيد من المعلومات حول [طريقة عمله](https://ai.google.dev/gemini-api/docs/live?hl=ar)).
+يتيح تصميم الجلسة الفريد هذا وقت استجابة منخفضًا ويدعم ميزات فريدة، ولكن يمكن أن يطرح أيضًا تحديات، مثل حدود وقت الجلسة والإنهاء المبكر.
+يغطي هذا الدليل استراتيجيات للتغلّب على تحديات إدارة الجلسات التي يمكن أن تنشأ عند استخدام Live API.
 
-## משך החיים של הסשן
+## مدة الجلسة
 
-בלי דחיסה, משך הפגישות עם אודיו בלבד מוגבל ל-15 דקות, ומשך הפגישות עם אודיו ווידאו מוגבל ל-2 דקות. חריגה מהמגבלות האלה תגרום לסיום הסשן (ולכן גם של החיבור), אבל אפשר להשתמש ב[דחיסה של חלון ההקשר](#context-window-compression) כדי להאריך את הסשנים לזמן בלתי מוגבל.
+بدون ضغط، تقتصر الجلسات الصوتية فقط على 15 دقيقة، وتقتصر الجلسات الصوتية والمرئية على دقيقتَين. سيؤدي تجاوز هذه الحدود
+إلى إنهاء الجلسة (وبالتالي، الاتصال)، ولكن يمكنك استخدام
+[ضغط قدرة استيعاب](#context-window-compression) لتمديد الجلسات إلى
+مدة غير محدودة.
 
-גם משך החיים של החיבור מוגבל, לכ-10 דקות. כשהחיבור מסתיים, גם הסשן מסתיים. במקרה כזה, אפשר להגדיר סשן יחיד שיישאר פעיל בכמה חיבורים באמצעות [חידוש סשן](#session-resumption).
-בנוסף, תקבלו [הודעת GoAway](#goaway-message) לפני שהחיבור יסתיים, כדי שתוכלו לבצע פעולות נוספות.
+تقتصر مدة الاتصال أيضًا على 10 دقائق تقريبًا. عند انتهاء الاتصال، تنتهي الجلسة أيضًا. في هذه الحالة، يمكنك
+ضبط جلسة واحدة لتظل نشطة على عدة اتصالات باستخدام
+[استئناف الجلسة](#session-resumption).
+ستتلقّى أيضًا رسالة [GoAway](#goaway-message) قبل انتهاء
+الاتصال، ما يتيح لك اتّخاذ إجراءات إضافية.
 
-## דחיסת חלון ההקשר
+## ضغط قدرة استيعاب السياق
 
-כדי להאריך את משך הסשנים ולמנוע ניתוק פתאומי של החיבור, אפשר להפעיל דחיסה של חלון ההקשר על ידי הגדרת השדה [contextWindowCompression](https://ai.google.dev/api/live?hl=he#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) כחלק מהגדרת הסשן.
+لإتاحة جلسات أطول وتجنُّب إنهاء الاتصال المفاجئ، يمكنك تفعيل ضغط قدرة الاستيعاب من خلال ضبط الحقل [contextWindowCompression](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) كجزء من إعداد الجلسة.
 
-ב-[ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=he#contextwindowcompressionconfig), אפשר להגדיר [מנגנון של חלון הזזה](https://ai.google.dev/api/live?hl=he#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window) ו[מספר טוקנים](https://ai.google.dev/api/live?hl=he#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens) שמפעיל דחיסה.
+في [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=ar#contextwindowcompressionconfig)، يمكنك ضبط آلية
+[النافذة المنزلقة](https://ai.google.dev/api/live?hl=ar#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
+و[عدد الرموز المميّزة](https://ai.google.dev/api/live?hl=ar#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
+التي تؤدي إلى الضغط.
 
 ### Python
 
@@ -60,13 +69,15 @@ const config = {
 };
 ```
 
-## המשך הסשן
+## استئناف الجلسة
 
-כדי למנוע את סיום הסשן כשהשרת מאפס מעת לעת את חיבור ה-WebSocket, צריך להגדיר את השדה [sessionResumption](https://ai.google.dev/api/live?hl=he#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) ב[הגדרת ההגדרה](https://ai.google.dev/api/live?hl=he#BidiGenerateContentSetup).
+لمنع إنهاء الجلسة عندما يعيد الخادم ضبط اتصال WebSocket
+، اضبط الحقل [sessionResumption](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
+ضمن [إعداد الإعداد](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup).
 
-העברת ההגדרה הזו גורמת לשרת לשלוח הודעות [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=he#SessionResumptionUpdate), שאפשר להשתמש בהן כדי להמשיך את הסשן. לשם כך צריך להעביר את אסימון ההמשכה האחרון כ-[`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=he#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) של החיבור הבא.
+يؤدي تمرير هذا الإعداد إلى إرسال الخادم رسائل [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=ar#SessionResumptionUpdate)، التي يمكن استخدامها لاستئناف الجلسة من خلال تمرير آخر رمز مميّز للاستئناف كـ [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=ar#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) للاتصال اللاحق.
 
-התוקף של אסימוני חידוש הוא שעתיים אחרי סיום הסשן האחרון.
+تكون الرموز المميّزة للاستئناف صالحة لمدة ساعتَين بعد إنهاء الجلسات الأخيرة.
 
 ### Python
 
@@ -201,9 +212,12 @@ async function main() {
 main();
 ```
 
-## קבלת הודעה לפני ניתוק הסשן
+## تلقّي رسالة قبل قطع اتصال الجلسة
 
-השרת שולח הודעת [GoAway](https://ai.google.dev/api/live?hl=he#GoAway) שמציינת שהחיבור הנוכחי יסתיים בקרוב. ההודעה הזו כוללת את [timeLeft](https://ai.google.dev/api/live?hl=he#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left), שמציין את הזמן שנותר ומאפשר לכם לבצע פעולה נוספת לפני שהחיבור יסתיים כ-ABORTED.
+يرسل الخادم رسالة [GoAway](https://ai.google.dev/api/live?hl=ar#GoAway) تشير إلى أنّ الاتصال الحالي
+سيتم إنهاؤه قريبًا. تتضمّن هذه الرسالة الحقل [timeLeft](https://ai.google.dev/api/live?hl=ar#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left)،
+الذي يشير إلى الوقت المتبقي ويسمح لك باتّخاذ إجراءات إضافية قبل
+إنهاء الاتصال كـ ABORTED.
 
 ### Python
 
@@ -226,10 +240,10 @@ for (const turn of turns) {
 }
 ```
 
-## קבלת הודעה כשהיצירה מסתיימת
+## تلقّي رسالة عند اكتمال الإنشاء
 
-השרת שולח הודעה מסוג [generationComplete](https://ai.google.dev/api/live?hl=he#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
-שמציינת שהמודל סיים ליצור את התשובה.
+يرسل الخادم رسالة [generationComplete](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
+تشير إلى أنّ النموذج انتهى من إنشاء الردّ.
 
 ### Python
 
@@ -251,16 +265,19 @@ for (const turn of turns) {
 }
 ```
 
-## המאמרים הבאים
+## الخطوات التالية
 
-אפשר לעיין בדרכים נוספות לעבודה עם Live API במדריך המלא [יכולות](https://ai.google.dev/gemini-api/docs/live?hl=he), בדף [שימוש בכלי](https://ai.google.dev/gemini-api/docs/live-tools?hl=he) או ב[אוסף פתרונות של Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=he).
+يمكنك استكشاف المزيد من الطرق لاستخدام Live API في دليل
+[الإمكانات](https://ai.google.dev/gemini-api/docs/live?hl=ar) الكامل أو
+صفحة [استخدام الأدوات](https://ai.google.dev/gemini-api/docs/live-tools?hl=ar) أو
+[دليل Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=ar).
 
-שליחת משוב
+إرسال ملاحظات
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-עדכון אחרון: 2026-06-01 (שעון UTC).
+تاريخ التعديل الأخير: 2026-06-01 (حسب التوقيت العالمي المتفَّق عليه)
 
-רוצה לתת לנו משוב?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-01 (שעון UTC)."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-01 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

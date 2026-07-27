@@ -1,216 +1,222 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=id
-fetched_at: 2026-07-20T04:33:22.271647+00:00
-title: "Batas kapasitas \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/rate-limits?hl=th
+fetched_at: 2026-07-27T04:49:58.446729+00:00
+title: "\u0e02\u0e35\u0e14\u0e08\u0e33\u0e01\u0e31\u0e14\u0e2d\u0e31\u0e15\u0e23\u0e32 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Kirim masukan
+ส่งความคิดเห็น
 
-# Batas kapasitas
+# ขีดจำกัดอัตรา
 
-Batas laju mengatur jumlah permintaan yang dapat Anda ajukan ke Gemini API dalam jangka waktu tertentu. Batasan ini membantu mempertahankan penggunaan yang adil, melindungi dari penyalahgunaan, dan membantu mempertahankan performa sistem untuk semua pengguna.
+การจำกัดอัตราจะควบคุมจำนวนคำขอที่คุณส่งไปยัง Gemini API ได้
+ภายในกรอบเวลาที่กำหนด ขีดจำกัดเหล่านี้ช่วยรักษาการใช้งานที่เป็นธรรม ป้องกันการละเมิด และช่วยรักษาประสิทธิภาพของระบบสำหรับผู้ใช้ทุกคน
 
-[Melihat batas frekuensi aktif di AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=id)
+[ดูขีดจำกัดอัตราที่ใช้งานอยู่ใน AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=th)
 
-## Cara kerja batas laju
+## วิธีการทำงานของขีดจำกัดอัตรา
 
-Batas laju biasanya diukur di tiga dimensi:
+โดยปกติแล้ว ระบบจะวัดขีดจำกัดอัตราใน 3 มิติ ดังนี้
 
-- Permintaan per menit (**RPM**)
-- Token per menit (input) (**TPM**)
-- Permintaan per hari (**RPD**)
+- คำขอต่อนาที (**RPM**)
+- โทเค็นต่อนาที (อินพุต) (**TPM**)
+- คำขอต่อวัน (**RPD**)
 
-Penggunaan Anda dievaluasi terhadap setiap batas, dan jika salah satu batas terlampaui, error batas kecepatan akan dipicu. Misalnya, jika batas RPM Anda adalah 20, membuat 21
-permintaan dalam satu menit akan menghasilkan error, meskipun Anda belum melampaui
-TPM atau batas lainnya.
+ระบบจะประเมินการใช้งานของคุณเทียบกับขีดจำกัดแต่ละรายการ และการใช้งานเกินขีดจำกัดใดก็ตามจะ
+ทําให้เกิดข้อผิดพลาดเกี่ยวกับอัตราการจำกัด เช่น หากขีดจำกัด RPM คือ 20 การส่งคำขอ 21 รายการภายใน 1 นาทีจะทำให้เกิดข้อผิดพลาด แม้ว่าคุณจะยังไม่เกินขีดจำกัด TPM หรือขีดจำกัดอื่นๆ ก็ตาม
 
-Batas laju diterapkan per project, bukan per kunci API. Kuota permintaan per hari (**RPD**) direset pada tengah malam waktu Pasifik.
+ระบบจะใช้การจำกัดอัตราต่อโปรเจ็กต์ ไม่ใช่ต่อคีย์ API โควต้าคำขอต่อวัน (**RPD**)
+จะรีเซ็ตตอนเที่ยงคืนตามเวลาแปซิฟิก
 
-Batas bervariasi bergantung pada model spesifik yang digunakan, dan beberapa batas hanya berlaku untuk model tertentu. Misalnya, Gambar per menit (IPM) hanya dihitung untuk model yang mampu membuat gambar (Nano Banana), tetapi secara konseptual mirip dengan TPM. Model lain mungkin memiliki batas token per hari (TPD).
+ขีดจำกัดจะแตกต่างกันไปตามโมเดลที่ใช้ และขีดจำกัดบางอย่างจะใช้ได้กับโมเดลบางรุ่นเท่านั้น เช่น ระบบจะคำนวณรูปภาพต่อนาที (IPM) สำหรับโมเดลที่สร้างรูปภาพได้ (Nano Banana) เท่านั้น แต่ในเชิงแนวคิดแล้วจะคล้ายกับ TPM โมเดลอื่นๆ อาจมีขีดจำกัดโทเค็นต่อวัน (TPD)
 
-Batas kapasitas lebih terbatas untuk model eksperimental dan pratinjau.
+โมเดลทดลองและโมเดลเวอร์ชันตัวอย่างจะมีขีดจำกัดอัตราที่เข้มงวดกว่า
 
-### Batas frekuensi berbasis pembelanjaan
+### ขีดจำกัดอัตราตามการใช้จ่าย
 
-Selain batas permintaan per menit (RPM) dan token per menit (TPM), Gemini API menerapkan batas kapasitas berbasis pembelanjaan untuk melindungi dari biaya yang tidak terduga. Apakah batas ini berlaku untuk akun Anda atau tidak bergantung pada histori penagihan dan [tingkat penggunaan](#usage-tiers) Anda.
+นอกเหนือจากขีดจำกัดคำขอต่อนาที (RPM) และโทเค็นต่อนาที (TPM) แล้ว Gemini API ยังบังคับใช้ขีดจำกัดอัตราตามการใช้จ่ายเพื่อป้องกันค่าใช้จ่ายที่ไม่คาดคิด การที่ขีดจำกัดเหล่านี้จะมีผลกับบัญชีของคุณหรือไม่นั้นขึ้นอยู่กับประวัติการเรียกเก็บเงินและ[ระดับการใช้งาน](#usage-tiers)
 
-Tabel berikut menunjukkan batas frekuensi berbasis pembelanjaan untuk setiap
-[tingkat penggunaan](#usage-tiers). Batas ini dievaluasi dalam jangka waktu 10 menit yang terus berlanjut. Apakah batas ini berlaku untuk akun Anda bergantung pada histori penagihan dan reputasi akun Anda.
+ตารางต่อไปนี้แสดงขีดจํากัดอัตราตามการใช้จ่ายสําหรับแต่ละ[ระดับการใช้งาน](#usage-tiers) ระบบจะประเมินขีดจำกัดเหล่านี้ในกรอบเวลา 10 นาที
+แบบต่อเนื่อง การใช้ขีดจำกัดเหล่านี้กับบัญชีของคุณจะขึ้นอยู่กับประวัติการเรียกเก็บเงินและสถานะบัญชี
 
-| Tingkat penggunaan | Batas laju pembelanjaan (per 10 menit) |
+| ระดับการใช้งาน | ขีดจำกัดอัตราการใช้จ่าย (ต่อ 10 นาที) |
 | --- | --- |
-| **Gratis** | T/A |
-| **Tingkat 1** | $10 |
-| **Tingkat 2** | $200 |
-| **Tingkat 3** | $200 |
+| **ฟรี** | ไม่มี |
+| **ระดับที่ 1** | $10 |
+| **ระดับ 2** | $200 |
+| **ระดับ 3** | $200 |
 
-Jika Anda mencapai batas tarif berbasis pembelanjaan, API akan menampilkan error `429 RESOURCE_EXHAUSTED`. Untuk mengatasi hal ini:
+หากถึงขีดจำกัดอัตราตามการใช้จ่าย API จะแสดง`429 RESOURCE_EXHAUSTED`
+ข้อผิดพลาด วิธีแก้ไขปัญหามีดังนี้
 
-- **Tunggu dan coba lagi** setelah beberapa saat.
-- **Kurangi frekuensi permintaan yang mahal**, misalnya dengan menggunakan jendela konteks yang lebih kecil atau output yang lebih pendek.
-- Jika Anda terus-menerus mencapai batas ini selama penggunaan normal,
-  [minta peningkatan batas kecepatan](#request-rate-limit-increase).
+- **รอแล้วลองอีกครั้ง**หลังจากผ่านไปสักครู่
+- **ลดอัตราคำขอที่มีค่าใช้จ่ายสูง** เช่น โดยใช้หน้าต่างบริบทที่เล็กลงหรือเอาต์พุตที่สั้นลง
+- หากคุณพบว่ามีการใช้งานเกินขีดจำกัดนี้อย่างสม่ำเสมอในระหว่างการใช้งานปกติ
+  [ขอเพิ่มขีดจำกัดอัตรา](#request-rate-limit-increase)
 
-## Tingkat penggunaan
+## ระดับการใช้งาน
 
-Pembatasan kapasitas terikat dengan tingkat penggunaan project. Seiring meningkatnya penggunaan dan pembelanjaan API, Anda akan otomatis diupgrade ke tingkat yang lebih tinggi dengan batas tarif yang lebih tinggi.
+ขีดจำกัดอัตราจะเชื่อมโยงกับระดับการใช้งานของโปรเจ็กต์ เมื่อการใช้งาน API และการใช้จ่ายเพิ่มขึ้น ระบบจะอัปเกรดคุณเป็นระดับที่สูงขึ้นโดยอัตโนมัติพร้อมกับการเพิ่มขีดจำกัดอัตราคำขอ
 
-Kualifikasi untuk Tingkat 2 dan 3 didasarkan pada total pembelanjaan kumulatif
-untuk layanan Google Cloud (termasuk, tetapi tidak terbatas pada, Gemini API) untuk
-akun penagihan yang ditautkan ke project Anda.
+การมีสิทธิ์สำหรับระดับที่ 2 และ 3 จะพิจารณาจากค่าใช้จ่ายสะสมทั้งหมดในบริการของ Google Cloud (ซึ่งรวมถึงแต่ไม่จำกัดเพียง Gemini API) สำหรับบัญชีสำหรับการเรียกเก็บเงินที่ลิงก์กับโปรเจ็กต์ของคุณ
 
-| Tingkat penggunaan | Kualifikasi | [Batas tingkat penagihan](https://ai.google.dev/gemini-api/docs/billing?hl=id#tier-spend-caps) |
+| ระดับการใช้งาน | รอบคัดเลือก | [การจำกัดระดับการเรียกเก็บเงิน](https://ai.google.dev/gemini-api/docs/billing?hl=th#tier-spend-caps) |
 | --- | --- | --- |
-| **Gratis** | [Project aktif](https://ai.google.dev/gemini-api/docs/api-key?hl=id#google-cloud-projects) atau uji coba gratis | T/A |
-| **Tingkat 1** | [Menyiapkan dan menautkan akun penagihan yang aktif](https://ai.google.dev/gemini-api/docs/billing?hl=id#setup-billing) | $250 |
-| **Tingkat 2** | Dibayar $100 + 3 hari sejak pembayaran pertama yang berhasil | $2.000 |
-| **Tingkat 3** | Membayar $1.000 + 30 hari sejak pembayaran pertama yang berhasil | $20.000 - $100.000+ |
+| **ฟรี** | [โปรเจ็กต์ที่ใช้งานอยู่](https://ai.google.dev/gemini-api/docs/api-key?hl=th#google-cloud-projects)หรือช่วงทดลองใช้ฟรี | ไม่มี |
+| **ระดับที่ 1** | [ตั้งค่าและลิงก์บัญชีสำหรับการเรียกเก็บเงินที่ใช้งานอยู่](https://ai.google.dev/gemini-api/docs/billing?hl=th#setup-billing) | $250 |
+| **ระดับ 2** | ชำระเงิน $100 + 3 วันนับจากการชำระเงินครั้งแรกสำเร็จ | $2,000 |
+| **ระดับ 3** | ชำระเงิน $1,000 + 30 วันนับจากการชำระเงินครั้งแรกสำเร็จ | $20,000 - $100,000 ขึ้นไป |
 
-Meskipun memenuhi kriteria kelayakan yang dinyatakan umumnya sudah cukup untuk mendapatkan persetujuan, dalam kasus yang jarang terjadi, permintaan upgrade dapat ditolak berdasarkan faktor lain yang diidentifikasi selama proses peninjauan.
+แม้ว่าการมีคุณสมบัติตรงตามเกณฑ์ที่ระบุโดยทั่วไปจะเพียงพอต่อการอนุมัติ แต่ในบางกรณีที่พบได้ไม่บ่อยนัก คำขออัปเกรดอาจถูกปฏิเสธโดยอิงตามปัจจัยอื่นๆ ที่พบในกระบวนการตรวจสอบ
 
-Sistem ini membantu menjaga keamanan dan integritas platform Gemini API bagi semua pengguna.
+ระบบนี้ช่วยรักษาความปลอดภัยและความสมบูรณ์ของแพลตฟอร์ม Gemini API
+สำหรับผู้ใช้ทุกคน
 
-## Batas kapasitas Gemini API
+## ขีดจำกัดอัตราของ Gemini API
 
-Batas frekuensi bergantung pada berbagai faktor (seperti tingkat penggunaan Anda) dan dapat dilihat di Google AI Studio. Seiring perubahan tingkat dan status akun Anda dari waktu ke waktu, batas laju Anda akan diperbarui secara otomatis.
+ขีดจำกัดอัตราการใช้งานขึ้นอยู่กับปัจจัยหลายประการ (เช่น ระดับการใช้งานของคุณ) และดูได้ใน Google AI Studio เมื่อระดับและสถานะบัญชีของคุณเปลี่ยนแปลงไปเมื่อเวลาผ่านไป
+ระบบจะอัปเดตขีดจำกัดอัตราโดยอัตโนมัติ
 
-[Melihat batas frekuensi aktif di AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=id)
+[ดูขีดจำกัดอัตราที่ใช้งานอยู่ใน AI Studio](https://aistudio.google.com/rate-limit?timeRange=last-28-days&hl=th)
 
-Batas frekuensi yang ditentukan tidak dijamin dan kapasitas sebenarnya dapat bervariasi.
+ระบบไม่รับประกันขีดจำกัดอัตราที่ระบุ และความจุจริงอาจแตกต่างกันไป
 
-## Batas frekuensi inferensi prioritas
+## ขีดจำกัดอัตราคำขอการอนุมานที่มีลำดับความสำคัญ
 
-Penggunaan [Prioritas](https://ai.google.dev/gemini-api/docs/priority-inference?hl=id) memiliki batas laju sendiri meskipun penggunaan dihitung dalam batas laju traffic interaktif keseluruhan. **Batas frekuensi default adalah: 0,3x [batas frekuensi standar](https://aistudio.google.com/rate-limit?hl=id) untuk setiap model dan tingkat**
+การใช้[ลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)จะมีการจำกัดอัตราของตัวเอง
+แม้ว่าระบบจะนับการใช้รวมในการจำกัดอัตราการเข้าชมแบบอินเทอร์แอกทีฟโดยรวม
+ก็ตาม **ขีดจำกัดอัตราเริ่มต้นคือ 0.3 เท่าของ[ขีดจำกัดอัตรามาตรฐาน](https://aistudio.google.com/rate-limit?hl=th)สำหรับแต่ละโมเดลและแต่ละระดับ**
 
-## Batas kapasitas API batch
+## ขีดจำกัดอัตราของ Batch API
 
-Permintaan [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id) tunduk pada batas kapasitasnya sendiri, terpisah dari panggilan API non-batch.
+คำขอ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th) จะขึ้นอยู่กับขีดจำกัดอัตราของตัวเอง
+ซึ่งแยกจากการเรียก API แบบไม่เป็นกลุ่ม
 
-- **Permintaan batch serentak:** 100
-- **Batas ukuran file input:** 2 GB
-- **Batas penyimpanan file:** 20 GB
-- **Token dalam antrean per model:** Tabel **Token dalam antrean batch** mencantumkan jumlah maksimum token yang dapat dimasukkan dalam antrean untuk pemrosesan batch di semua tugas batch aktif Anda untuk model tertentu.
+- **คำขอแบบกลุ่มพร้อมกัน:** 100
+- **ขีดจำกัดขนาดไฟล์อินพุต:** 2 GB
+- **ขีดจำกัดพื้นที่เก็บข้อมูลไฟล์:** 20 GB
+- **โทเค็นที่เข้าคิวต่อโมเดล:** ตาราง**โทเค็นที่เข้าคิวแบบกลุ่ม**แสดง
+  จำนวนโทเค็นสูงสุดที่เข้าคิวสำหรับการประมวลผลแบบกลุ่มได้
+  ในงานแบบกลุ่มที่ใช้งานอยู่ทั้งหมดสำหรับโมเดลที่กำหนด
 
-### Tingkat 1
+### ระดับ 1
 
-| Model | Token yang dimasukkan dalam antrean batch |
+| รุ่น | โทเค็นที่จัดคิวเป็นกลุ่ม |
 | --- | --- |
-| Model teks keluar | | | | |
+| โมเดลข้อความออก | | | | |
 | --- | --- | --- | --- | --- |
-| Pratinjau Gemini 3.1 Pro | 5.000.000 |
-| Gemini 3.1 Flash Lite | 10.000.000 |
-| Pratinjau Gemini 3.1 Flash Lite | 10.000.000 |
-| Gemini 3.5 Flash | 3.000.000 |
-| Gemini 2.5 Pro | 5.000.000 |
-| Gemini 2.5 Pro TTS | 25.000 |
-| Gemini 2.5 Flash | 3.000.000 |
-| Pratinjau Gemini 2.5 Flash | 3.000.000 |
-| Pratinjau Gambar Gemini 2.5 Flash | 3.000.000 |
-| Gemini 2.5 Flash TTS | 100.000 |
-| Gemini 2.5 Flash Lite | 10.000.000 |
-| Pratinjau Gemini 2.5 Flash Lite | 10.000.000 |
-| Gemini 2.0 Flash | 10.000.000 |
-| Gambar Gemini 2.0 Flash | 3.000.000 |
-| Gemini 2.0 Flash Lite | 10.000.000 |
-| Model pembuatan multi-modal | | | | |
-| Pratinjau Gambar Flash Gemini 3.1 🍌 | 1.000.000 |
-| Gambar Gemini 3.1 Flash Lite 🍌 | 2.000.000 |
-| Pratinjau Gambar Gemini 3 Pro 🍌 | 2.000.000 |
-| Model embedding | | | | |
-| Penyematan Gemini | 500.000 |
+| เวอร์ชันตัวอย่างของ Gemini 3.1 Pro | 5,000,000 |
+| Gemini 3.1 Flash Lite | 10,000,000 |
+| Gemini 3.1 Flash Lite (เวอร์ชันตัวอย่าง) | 10,000,000 |
+| Gemini 3.5 Flash | 3,000,000 |
+| Gemini 2.5 Pro | 5,000,000 |
+| TTS ของ Gemini 2.5 Pro | 25,000 |
+| Gemini 2.5 Flash | 3,000,000 |
+| Gemini 2.5 Flash (เวอร์ชันตัวอย่าง) | 3,000,000 |
+| เวอร์ชันตัวอย่างของรูปภาพ Gemini 2.5 Flash | 3,000,000 |
+| TTS ของ Gemini 2.5 Flash | 100,000 |
+| Gemini 2.5 Flash Lite | 10,000,000 |
+| Gemini 2.5 Flash Lite (เวอร์ชันตัวอย่าง) | 10,000,000 |
+| Gemini 2.0 Flash | 10,000,000 |
+| รูปภาพ Gemini 2.0 Flash | 3,000,000 |
+| Gemini 2.0 Flash Lite | 10,000,000 |
+| โมเดลการสร้างแบบหลายโมดัล | | | | |
+| ตัวอย่างรูปภาพ Gemini 3.1 Flash 🍌 | 1,000,000 |
+| รูปภาพ Gemini 3.1 Flash Lite 🍌 | 2,000,000 |
+| ตัวอย่างรูปภาพ Gemini 3 Pro 🍌 | 2,000,000 |
+| โมเดลการฝัง | | | | |
+| การฝัง Gemini | 500,000 |
 
-### Tingkat 2
+### ระดับ 2
 
-| Model | Token yang dimasukkan dalam antrean batch |
+| รุ่น | โทเค็นที่จัดคิวเป็นกลุ่ม |
 | --- | --- |
-| Model teks keluar | | | | |
+| โมเดลข้อความออก | | | | |
 | --- | --- | --- | --- | --- |
-| Pratinjau Gemini 3.1 Pro | 500.000.000 |
-| Gemini 3.1 Flash Lite | 500.000.000 |
-| Pratinjau Gemini 3.1 Flash Lite | 500.000.000 |
-| Gemini 3.5 Flash | 400.000.000 |
-| Gemini 2.5 Pro | 500.000.000 |
-| Gemini 2.5 Pro TTS | 100.000 |
-| Gemini 2.5 Flash | 400.000.000 |
-| Pratinjau Gemini 2.5 Flash | 400.000.000 |
-| Pratinjau Gambar Gemini 2.5 Flash | 400.000.000 |
-| Gemini 2.5 Flash TTS | 100.000 |
-| Gemini 2.5 Flash Lite | 500.000.000 |
-| Pratinjau Gemini 2.5 Flash Lite | 500.000.000 |
-| Gemini 2.0 Flash | 1.000.000.000 |
-| Gambar Gemini 2.0 Flash | 400.000.000 |
-| Gemini 2.0 Flash Lite | 1.000.000.000 |
-| Model pembuatan multi-modal | | | | |
-| Pratinjau Gambar Flash Gemini 3.1 🍌 | 250.000.000 |
-| Gambar Gemini 3.1 Flash Lite 🍌 | 270.000.000 |
-| Pratinjau Gambar Gemini 3 Pro 🍌 | 270.000.000 |
-| Model embedding | | | | |
-| Penyematan Gemini | 5.000.000 |
+| เวอร์ชันตัวอย่างของ Gemini 3.1 Pro | 500,000,000 |
+| Gemini 3.1 Flash Lite | 500,000,000 |
+| Gemini 3.1 Flash Lite (เวอร์ชันตัวอย่าง) | 500,000,000 |
+| Gemini 3.5 Flash | 400,000,000 |
+| Gemini 2.5 Pro | 500,000,000 |
+| TTS ของ Gemini 2.5 Pro | 100,000 |
+| Gemini 2.5 Flash | 400,000,000 |
+| Gemini 2.5 Flash (เวอร์ชันตัวอย่าง) | 400,000,000 |
+| เวอร์ชันตัวอย่างของรูปภาพ Gemini 2.5 Flash | 400,000,000 |
+| TTS ของ Gemini 2.5 Flash | 100,000 |
+| Gemini 2.5 Flash Lite | 500,000,000 |
+| Gemini 2.5 Flash Lite (เวอร์ชันตัวอย่าง) | 500,000,000 |
+| Gemini 2.0 Flash | 1,000,000,000 |
+| รูปภาพ Gemini 2.0 Flash | 400,000,000 |
+| Gemini 2.0 Flash Lite | 1,000,000,000 |
+| โมเดลการสร้างแบบหลายโมดัล | | | | |
+| ตัวอย่างรูปภาพ Gemini 3.1 Flash 🍌 | 250,000,000 |
+| รูปภาพ Gemini 3.1 Flash Lite 🍌 | 270,000,000 |
+| ตัวอย่างรูปภาพ Gemini 3 Pro 🍌 | 270,000,000 |
+| โมเดลการฝัง | | | | |
+| การฝัง Gemini | 5,000,000 |
 
-### Tingkat 3
+### ระดับ 3
 
-| Model | Token yang dimasukkan dalam antrean batch |
+| รุ่น | โทเค็นที่จัดคิวเป็นกลุ่ม |
 | --- | --- |
-| Model teks keluar | | | | |
+| โมเดลข้อความออก | | | | |
 | --- | --- | --- | --- | --- |
-| Pratinjau Gemini 3.1 Pro | 1.000.000.000 |
-| Gemini 3.1 Flash Lite | 1.000.000.000 |
-| Pratinjau Gemini 3.1 Flash Lite | 1.000.000.000 |
-| Gemini 3.5 Flash | 1.000.000.000 |
-| Gemini 2.5 Pro | 1.000.000.000 |
-| Gemini 2.5 Pro TTS | 1.000.000 |
-| Gemini 2.5 Flash | 1.000.000.000 |
-| Pratinjau Gemini 2.5 Flash | 1.000.000.000 |
-| Pratinjau Gambar Gemini 2.5 Flash | 1.000.000.000 |
-| Gemini 2.5 Flash TTS | 4.000.000 |
-| Gemini 2.5 Flash Lite | 1.000.000.000 |
-| Pratinjau Gemini 2.5 Flash Lite | 1.000.000.000 |
-| Gemini 2.0 Flash | 5.000.000.000 |
-| Gambar Gemini 2.0 Flash | 1.000.000.000 |
-| Gemini 2.0 Flash Lite | 5.000.000.000 |
-| Model pembuatan multi-modal | | | | |
-| Pratinjau Gambar Flash Gemini 3.1 🍌 | 750.000.000 |
-| Gambar Gemini 3.1 Flash Lite 🍌 | 1.000.000.000 |
-| Pratinjau Gambar Gemini 3 Pro 🍌 | 1.000.000.000 |
-| Model embedding | | | | |
-| Penyematan Gemini | 10.000.000 |
+| เวอร์ชันตัวอย่างของ Gemini 3.1 Pro | 1,000,000,000 |
+| Gemini 3.1 Flash Lite | 1,000,000,000 |
+| Gemini 3.1 Flash Lite (เวอร์ชันตัวอย่าง) | 1,000,000,000 |
+| Gemini 3.5 Flash | 1,000,000,000 |
+| Gemini 2.5 Pro | 1,000,000,000 |
+| TTS ของ Gemini 2.5 Pro | 1,000,000 |
+| Gemini 2.5 Flash | 1,000,000,000 |
+| Gemini 2.5 Flash (เวอร์ชันตัวอย่าง) | 1,000,000,000 |
+| เวอร์ชันตัวอย่างของรูปภาพ Gemini 2.5 Flash | 1,000,000,000 |
+| TTS ของ Gemini 2.5 Flash | 4,000,000 |
+| Gemini 2.5 Flash Lite | 1,000,000,000 |
+| Gemini 2.5 Flash Lite (เวอร์ชันตัวอย่าง) | 1,000,000,000 |
+| Gemini 2.0 Flash | 5,000,000,000 |
+| รูปภาพ Gemini 2.0 Flash | 1,000,000,000 |
+| Gemini 2.0 Flash Lite | 5,000,000,000 |
+| โมเดลการสร้างแบบหลายโมดัล | | | | |
+| ตัวอย่างรูปภาพ Gemini 3.1 Flash 🍌 | 750,000,000 |
+| รูปภาพ Gemini 3.1 Flash Lite 🍌 | 1,000,000,000 |
+| ตัวอย่างรูปภาพ Gemini 3 Pro 🍌 | 1,000,000,000 |
+| โมเดลการฝัง | | | | |
+| การฝัง Gemini | 10,000,000 |
 
-## Cara mengupgrade ke tingkat berikutnya
+## วิธีอัปเกรดเป็นระดับถัดไป
 
-Untuk bertransisi dari Paket gratis ke paket berbayar, Anda harus
-[menyiapkan penagihan di AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=id) terlebih dahulu.
+หากต้องการเปลี่ยนจากระดับฟรีเป็นระดับแบบชำระเงิน คุณต้อง[ตั้งค่าการเรียกเก็บเงินใน AI Studio](https://ai.google.dev/gemini-api/docs/billing?hl=th) ก่อน
 
-Setelah proyek Anda memenuhi [kriteria yang ditentukan](#usage-tiers), proyek tersebut akan
-diupgrade secara otomatis ke tingkat berikutnya. Upgrade paket dari Gratis ke Paket 1
-biasanya akan langsung diterapkan, dan upgrade paket berikutnya akan
-diterapkan dalam waktu 10 menit. Buka [halaman Project](https://aistudio.google.com/projects?hl=id) di AI Studio untuk memeriksa tingkat Anda.
+เมื่อโปรเจ็กต์เป็นไปตาม[เกณฑ์ที่ระบุ](#usage-tiers)แล้ว ระบบจะอัปเกรดโปรเจ็กต์เป็นระดับถัดไปโดยอัตโนมัติ
+โดยปกติการอัปเกรดระดับจากฟรีเป็นระดับ 1
+จะมีผลทันที และการอัปเกรดระดับต่อๆ ไปจะมีผลภายใน 10 นาที
+ไปที่[หน้าโปรเจ็กต์](https://aistudio.google.com/projects?hl=th)ใน AI Studio เพื่อตรวจสอบระดับของคุณ
 
-## Meminta peningkatan batas laju
+## ขอเพิ่มอัตราการจำกัด
 
-Setiap variasi model memiliki batas frekuensi panggilan yang terkait (permintaan per menit, RPM).
-Untuk mengetahui detail tentang batas frekuensi tersebut, lihat halaman
-[Batas Frekuensi AI Studio](https://aistudio.google.com/rate-limit?hl=id).
+โมเดลแต่ละรูปแบบจะมีขีดจำกัดอัตรา (คำขอต่อนาที หรือ RPM) ที่เชื่อมโยงกัน
+ดูรายละเอียดเกี่ยวกับขีดจำกัดอัตราดังกล่าวได้ที่หน้า[ขีดจำกัดอัตราของ AI Studio](https://aistudio.google.com/rate-limit?hl=th)
 
-[Meminta peningkatan batas frekuensi tingkat berbayar](https://forms.gle/ETzX94k8jf7iSotH9)
+[ขอเพิ่มขีดจำกัดอัตราของระดับแบบชำระเงิน](https://forms.gle/ETzX94k8jf7iSotH9)
 
-Kami tidak memberikan jaminan tentang peningkatan batas kecepatan Anda, tetapi kami akan berupaya sebaik mungkin untuk meninjau permintaan Anda.
+เราไม่รับประกันว่าจะเพิ่มขีดจำกัดอัตราได้ แต่จะพยายามอย่างเต็มที่
+เพื่อตรวจสอบคำขอของคุณ
 
-Kirim masukan
+ส่งความคิดเห็น
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Terakhir diperbarui pada 2026-07-03 UTC.
+อัปเดตล่าสุด 2026-07-03 UTC
 
-Ada masukan untuk kami?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-03 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-03 UTC"],[],[]]

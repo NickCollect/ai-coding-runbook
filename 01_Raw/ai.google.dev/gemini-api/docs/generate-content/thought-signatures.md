@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=tr
-fetched_at: 2026-07-20T04:40:01.943822+00:00
+fetched_at: 2026-07-27T04:39:38.428602+00:00
 title: "D\u00fc\u015f\u00fcnce \u0130mzalar\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 

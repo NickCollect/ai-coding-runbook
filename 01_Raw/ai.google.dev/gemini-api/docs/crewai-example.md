@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=zh-TW
-fetched_at: 2026-07-20T04:45:48.589977+00:00
+fetched_at: 2026-07-27T04:45:52.524965+00:00
 title: "\u4f7f\u7528 Gemini \u548c CrewAI \u5206\u6790\u9867\u5ba2\u670d\u52d9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

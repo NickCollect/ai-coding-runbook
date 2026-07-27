@@ -1,28 +1,29 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=tr
-fetched_at: 2026-07-20T04:44:56.696696+00:00
-title: "Gemini Deep Research Temsilcisi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=ja
+fetched_at: 2026-07-27T04:37:58.059254+00:00
+title: "Gemini Deep Research \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-# Gemini Deep Research Temsilcisi
+# Gemini Deep Research エージェント
 
-Gemini Deep Research Temsilcisi, çok adımlı araştırma görevlerini bağımsız olarak planlar, yürütür ve sentezler. Gemini destekli bu araç, karmaşık bilgi ortamlarında gezinerek ayrıntılı ve alıntılı raporlar oluşturur. Yeni özellikler sayesinde, yapay zeka ajanıyla birlikte plan yapabilir, MCP sunucularını kullanarak harici araçlara bağlanabilir, görselleştirmeler (ör. grafikler) ekleyebilir ve belgeleri doğrudan giriş olarak sağlayabilirsiniz.
+Gemini Deep Research エージェントは、複数ステップのリサーチタスクを自律的に計画、実行、統合します。Gemini を搭載し、複雑な情報環境をナビゲートして、引用付きの詳細なレポートを作成します。新機能により、エージェントと共同で計画を立てたり、MCP サーバーを使用して外部ツールに接続したり、可視化（グラフなど）を含めたり、ドキュメントを直接入力として提供したりできます。
 
-Araştırma görevleri, tekrara dayalı arama ve okuma işlemlerini içerir ve tamamlanması birkaç dakika sürebilir. Aracıyı eşzamansız olarak çalıştırmak ve sonuçları yoklamak ya da güncellemeleri yayınlamak için [arka planda yürütmeyi](https://ai.google.dev/gemini-api/docs/background-execution?hl=tr) (`background=true` olarak ayarlayın) kullanmanız gerekir. Daha fazla bilgi için [Uzun süren görevleri işleme](#long-running-tasks) başlıklı makaleyi inceleyin.
+リサーチタスクには、反復的な検索と読み取りが含まれ、完了までに数分かかることがあります。エージェントを非同期で実行して結果をポーリングするか、更新をストリーミングするには、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)（`background=true`を設定）を使用する必要があります。詳細については、
+[長時間実行タスクの処理](#long-running-tasks)をご覧ください。
 
-Aşağıdaki örnekte, arka planda araştırma görevi başlatma ve sonuçları yoklama işlemi gösterilmektedir.
+次の例は、バックグラウンドでリサーチタスクを開始して結果をポーリングする方法を示しています。
 
 ### Python
 
@@ -97,20 +98,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Desteklenen sürümler
+## サポート対象のバージョン
 
-Deep Research aracısı iki sürümde sunulur:
+Deep Research エージェントには次の 2 つのバージョンがあります。
 
-- **Deep Research** (`deep-research-preview-04-2026`): Hız ve verimlilik için tasarlanmıştır. İstemci kullanıcı arayüzüne geri aktarılmak için idealdir.
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): Otomatik bağlam toplama ve sentezleme için maksimum kapsamlılık.
+- **Deep Research** （`deep-research-preview-04-2026`）: スピードと効率性を重視した設計で、クライアント UI にストリーミングで返送するのに最適です。
+- **Deep Research Max** （`deep-research-max-preview-04-2026`）: コンテキストの自動収集と統合を最大限に包括的に行います。
 
-## Ortak planlama
+## 共同計画
 
-Ortak planlama, araştırmayı yürütmeden önce araştırma planını inceleyip iyileştirmenize olanak tanıyarak temsilci çalışmaya başlamadan önce araştırma yönünü kontrol etmenizi sağlar. Etkinleştirildiğinde, ajan hemen yürütmek yerine önerilen bir araştırma planı döndürür. Ardından, çok turlu etkileşimler aracılığıyla planı inceleyebilir, değiştirebilir veya onaylayabilirsiniz.
+共同計画では、エージェントが作業を開始する前にリサーチプランを確認して改善できるため、実行前にリサーチの方向性を制御できます。有効にすると、エージェントはすぐに実行するのではなく、リサーチプランの候補を返します。その後、複数ターンのインタラクションを通じてプランを確認、変更、承認できます。
 
-### 1. adım: Plan isteğinde bulunun
+### ステップ 1: プランをリクエストする
 
-İlk etkileşimde `collaborative_planning=True` değerini ayarlayın. Ajan, tam rapor yerine araştırma planı döndürüyor.
+最初のインタラクションで `collaborative_planning=True` を設定します。エージェントは完全なレポートではなく、リサーチプランを返します。
 
 ### Python
 
@@ -176,9 +177,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 2. adım: Planı iyileştirin (isteğe bağlı)
+### ステップ 2: プランを改善する（省略可）
 
-Sohbete devam etmek ve planı yinelemek için `previous_interaction_id` aboneliğini kullanın. Planlama modunda kalmak için `collaborative_planning=True` tuşunu basılı tutun.
+`previous_interaction_id` を使用して会話を続け、プランを反復処理します。`collaborative_planning=True` のままにして、計画モードを維持します。
 
 ### Python
 
@@ -242,9 +243,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### 3. adım: Onaylayın ve yürütün
+### ステップ 3: 承認して実行する
 
-Planı onaylamak ve araştırmayı başlatmak için `collaborative_planning=False` değerini ayarlayın (veya bu değeri atlayın).
+`collaborative_planning=False` に設定（または省略）して、プランを承認し、リサーチを開始します。
 
 ### Python
 
@@ -308,10 +309,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Görselleştirme
+## Visualization
 
-`visualization`, `"auto"` olarak ayarlandığında ajan, araştırma bulgularını desteklemek için grafikler ve diğer görsel öğeler oluşturabilir.
-Oluşturulan resimler, yanıt adımlarına dahil edilir ve `image` deltalara dönüştürülerek yayınlanır. En iyi sonuçları elde etmek için sorgunuzda görselleri açıkça isteyin. Örneğin, "Zaman içindeki trendleri gösteren grafikler ekle" veya "Pazar payını karşılaştıran grafikler oluştur" gibi ifadeler kullanın. `visualization` değerini `"auto"` olarak ayarlamak özelliği etkinleştirir ancak ajan, yalnızca istemde istenirse görsel oluşturur.
+`visualization` が `"auto"` に設定されている場合、エージェントはグラフなどの視覚要素を生成して、リサーチ結果をサポートできます。生成された画像はレスポンス ステップに含まれ、`image` デルタとしてストリーミングされます。最適な結果を得るには、クエリで視覚要素を明示的にリクエストします（例: 「経時的な傾向を示すグラフを含める」、「市場シェアを比較するグラフを生成する」）。 `visualization` を
+`"auto"` に設定すると機能が有効になりますが、エージェントはプロンプトでリクエストされた場合にのみ視覚要素を生成します。
 
 ### Python
 
@@ -402,21 +403,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Desteklenen araçlar
+## サポートされるツール
 
-Deep Research, birden fazla yerleşik ve harici aracı destekler. Varsayılan olarak (`tools` parametresi sağlanmadığında) aracı, Google Arama, URL Bağlamı ve Kod Yürütme'ye erişebilir. Ajanın yeteneklerini kısıtlamak veya genişletmek için araçları açıkça belirtebilirsiniz.
+Deep Research は、複数の組み込みツールと外部ツールをサポートしています。デフォルトでは（`tools` パラメータが指定されていない場合）、エージェントは Google 検索、URL コンテキスト、コード実行にアクセスできます。ツールを明示的に指定して、エージェントの機能を制限または拡張できます。
 
-| Araç | Tür değeri | Açıklama |
+| ツール | Type 値 | 説明 |
 | --- | --- | --- |
-| Google Arama | `google_search` | Herkese açık web'de arama yapın. Varsayılan olarak etkindir. |
-| URL Bağlamı | `url_context` | Web sayfası içeriğini okuma ve özetleme Varsayılan olarak etkindir. |
-| Kod Yürütme | `code_execution` | Hesaplamalar ve veri analizi yapmak için kodu yürütün. Varsayılan olarak etkindir. |
-| MCP Sunucusu | `mcp_server` | Harici araç erişimi için uzaktaki MCP sunucularına bağlanın. |
-| Dosya Arama | `file_search` | Yüklediğiniz doküman derlemlerinde arama yapın. |
+| Google 検索 | `google_search` | 公開ウェブを検索します。デフォルトで有効。 |
+| URL コンテキスト | `url_context` | ウェブページの内容を読み取って要約します。デフォルトで有効。 |
+| コードを実行する | `code_execution` | コードを実行して計算とデータ分析を行います。デフォルトで有効。 |
+| MCP サーバー | `mcp_server` | 外部ツールにアクセスするためにリモート MCP サーバーに接続します。 |
+| ファイル検索 | `file_search` | アップロードしたドキュメント コーパスを検索します。 |
 
-### Google Arama
+### Google 検索
 
-Google Arama'yı tek araç olarak açıkça etkinleştirin:
+Google 検索を唯一のツールとして明示的に有効にします。
 
 ### Python
 
@@ -454,9 +455,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### URL Bağlamı
+### URL コンテキスト
 
-Ajana belirli web sayfalarını okuma ve özetleme yetkisi verin:
+エージェントが特定のウェブページを読み取って要約できるようにします。
 
 ### Python
 
@@ -494,9 +495,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Kod Yürütme
+### コードを実行する
 
-Ajanın hesaplamalar ve veri analizi için kod yürütmesine izin verin:
+エージェントが計算とデータ分析のためにコードを実行できるようにします。
 
 ### Python
 
@@ -534,21 +535,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### MCP sunucuları
+### MCP サーバー
 
-Ajanın harici araçlara ve hizmetlere erişmesini sağlamak için uzak MCP sunucularına bağlanın.
+リモート MCP サーバーに接続して、エージェントが外部ツールやサービスにアクセスできるようにします。
 
-Araç yapılandırmasında sunucuyu `name` ve `url` olarak belirtin. Ayrıca, kimlik doğrulama kimlik bilgilerini iletebilir ve aracının hangi araçları çağırabileceğini kısıtlayabilirsiniz.
+ツール構成でサーバーの `name` と `url` を指定します。認証情報を渡して、エージェントが呼び出すことができるツールを制限することもできます。
 
-| Alan | Tür | Zorunlu | Açıklama |
+| フィールド | 型 | 必須 / 省略可 | 説明 |
 | --- | --- | --- | --- |
-| `type` | `string` | Evet | `"mcp_server"` olmalıdır. |
-| `name` | `string` | Hayır | MCP sunucusunun görünen adı. |
-| `url` | `string` | Hayır | MCP sunucusu uç noktasının tam URL'si. |
-| `headers` | `object` | Hayır | Sunucuya yapılan her istekle birlikte HTTP başlıkları olarak gönderilen anahtar/değer çiftleri (örneğin, kimlik doğrulama jetonları). |
-| `allowed_tools` | `array` | Hayır | Ajanın sunucudan hangi araçları çağırabileceğini kısıtlayın. |
+| `type` | `string` | はい | `"mcp_server"` を指定します。 |
+| `name` | `string` | いいえ | MCP サーバーの表示名。 |
+| `url` | `string` | いいえ | MCP サーバー エンドポイントの完全な URL。 |
+| `headers` | `object` | いいえ | サーバーへのリクエストごとに HTTP ヘッダーとして送信される Key-Value ペア（認証トークンなど）。 |
+| `allowed_tools` | `array` | いいえ | エージェントが呼び出すことができるサーバーのツールを制限します。 |
 
-#### Temel kullanım
+#### 基本的な使用方法
 
 ### Python
 
@@ -607,9 +608,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### Dosya Arama
+### ファイル検索
 
-[Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) aracını kullanarak aracıya kendi verilerinize erişim izni verin.
+[ファイル検索ツールを使用して、エージェントが独自のデータにアクセスできるようにします。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
 
 ### Python
 
@@ -661,11 +662,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Yönlendirilebilirlik ve biçimlendirme
+## 操作性と書式設定
 
-İsteminizde belirli biçimlendirme talimatları vererek aracının çıktısını yönlendirebilirsiniz. Bu sayede raporları belirli bölümler ve alt bölümler halinde yapılandırabilir, veri tabloları ekleyebilir veya farklı kitlelere yönelik üslubu ayarlayabilirsiniz (ör. "teknik", "yönetici", "gündelik").
+プロンプトで特定の書式設定手順を指定することで、エージェントの出力を操作できます。これにより、レポートを特定のセクションと
+サブセクションに構造化したり、データテーブルを含めたり、さまざまなユーザーに合わせてトーンを調整したりできます（例:
+「技術的」、「エグゼクティブ」、「カジュアル」）。
 
-İstenen çıkış biçimini giriş metninizde açıkça tanımlayın.
+入力テキストで目的の出力形式を明示的に定義します。
 
 ### Python
 
@@ -718,9 +721,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Çok formatlı girişler
+## マルチモーダル入力
 
-Derin Araştırma, resimler ve dokümanlar (PDF'ler) dahil olmak üzere çok formatlı girişleri destekler. Böylece, aracının görsel içerikleri analiz etmesine ve sağlanan girişlerle bağlamsallaştırılmış web tabanlı araştırmalar yapmasına olanak tanır.
+Deep Research は、画像やドキュメント（PDF）などのマルチモーダル入力をサポートしており、エージェントは視覚的なコンテンツを分析し、提供された入力に基づいてウェブベースのリサーチを行うことができます。
 
 ### Python
 
@@ -826,10 +829,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Belge anlama
+### ドキュメントの理解
 
-Doküman yorumlama, dokümanların doğrudan çok formatlı giriş olarak iletilmesine olanak tanır.
-Aracı, sağlanan belgeleri analiz eder ve içeriklerine dayalı araştırma yapar.
+ドキュメントの理解により、ドキュメントをマルチモーダル入力として直接渡すことができます。
+エージェントは提供されたドキュメントを分析し、その内容に基づいてリサーチを行います。
 
 ### Python
 
@@ -890,28 +893,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Uzun süreli görevleri işleme
+## 長時間実行タスクの処理
 
-Deep Research; planlama, arama, okuma ve yazma gibi çok adımlı bir süreçtir. Bu döngü genellikle senkron API çağrılarının standart zaman aşımı sınırlarını aşar.
+Deep Research は、計画、検索、読み取り、書き込みを含む複数ステップのプロセスです。通常、このサイクルは同期 API 呼び出しの標準のタイムアウト上限を超えます。
 
-Temsilcilerin `background=True` kullanması gerekir. API, hemen kısmi bir `Interaction` nesnesi döndürür. Anket için etkileşim almak üzere `id` özelliğini kullanabilirsiniz. Etkileşim durumu `in_progress`'dan `completed` veya `failed`'ye geçiş yapar. Arka plan görevlerini yönetmeyle ilgili kapsamlı bir kılavuz için [Arka planda yürütme](https://ai.google.dev/gemini-api/docs/background-execution?hl=tr) başlıklı makaleyi inceleyin.
+エージェントは `background=True` を使用する必要があります。API は部分的な `Interaction` オブジェクトをすぐに返します。`id` プロパティを使用して、ポーリング用のインタラクションを取得できます。インタラクションの状態は `in_progress` から `completed` または `failed` に遷移します。バックグラウンド タスクの管理に関する包括的なガイドについては、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)をご覧ください。
 
-### Canlı Yayın
+### ストリーミング
 
-Deep Research, düşünce özetleri, metin çıktısı ve oluşturulan resimler dahil olmak üzere araştırma ilerlemesiyle ilgili anlık güncellemeler almak için akışı destekler.
-`stream=True` ve `background=True` öğelerini ayarlamanız gerekir.
+Deep Research は、思考の要約、テキスト出力、生成された画像など、リサーチの進捗状況に関するリアルタイムの更新情報を受信するためのストリーミングをサポートしています。
+`stream=True` と `background=True` を設定する必要があります。
 
-Ara muhakeme adımlarını (düşünceler) ve ilerleme durumu güncellemelerini almak için `agent_config` bölümünde `thinking_summaries` ayarını `"auto"` olarak belirleyerek **düşünce özetlerini** etkinleştirmeniz gerekir. Bu olmadan yayın yalnızca nihai sonuçları sağlayabilir.
+中間的な推論ステップ（思考）と進捗状況の更新情報を受け取るには、
+`agent_config` で `thinking_summaries` を
+`"auto"` に設定して、**思考の要約** を有効にする必要があります。これがないと、ストリームは最終結果のみを提供する可能性があります。
 
-#### Akış etkinliği türleri
+#### ストリーム イベントタイプ
 
-| Etkinlik türü | Delta türü | Açıklama |
+| イベントの種類 | Delta タイプ | 説明 |
 | --- | --- | --- |
-| `step.delta` | `thought` | Aracının akıl yürütme sürecindeki ara adım. |
-| `step.delta` | `text` | Nihai metin çıktısının bir parçası. |
-| `step.delta` | `image` | Üretilmiş bir resim (base64 kodlu). |
+| `step.delta` | `thought` | エージェントからの中間的な推論ステップ。 |
+| `step.delta` | `text` | 最終的なテキスト出力の一部。 |
+| `step.delta` | `image` | 生成された画像（base64 でエンコード）。 |
 
-Aşağıdaki örnekte bir araştırma görevi başlatılıyor ve otomatik yeniden bağlantı ile yayın işleniyor. Bağlantı kesilirse (örneğin, 600 saniyelik zaman aşımından sonra) kaldığı yerden devam edebilmesi için `interaction_id` ve `last_event_id` değerlerini izler.
+次の例では、リサーチタスクを開始し、自動再接続でストリームを処理します。`interaction_id` と `last_event_id` をトラッキングすることで、接続が切断された場合（600 秒のタイムアウト後など）に、中断したところから再開できます。
 
 ### Python
 
@@ -1032,9 +1037,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Ek sorular ve etkileşimler
+## フォローアップの質問とインタラクション
 
-Temsilci nihai raporu döndürdükten sonra `previous_interaction_id` kullanarak görüşmeye devam edebilirsiniz. Bu sayede, görevin tamamını yeniden başlatmadan araştırmanın belirli bölümleriyle ilgili açıklama, özet veya ayrıntı isteyebilirsiniz.
+`previous_interaction_id` を使用すると、エージェントが最終レポートを返した後も会話を続けることができます。これにより、タスク全体を再開することなく、リサーチの特定のセクションについて説明、要約、詳細をリクエストできます。
 
 ### Python
 
@@ -1077,28 +1082,28 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Gemini Deep Research Ajanı'nı ne zaman kullanmalısınız?
+## Gemini Deep Research エージェントを使用するケース
 
-Deep Research yalnızca bir model değil, **ajandır**. Düşük gecikmeli sohbet yerine "analist-in-a-box" yaklaşımı gerektiren iş yükleri için en uygun seçenektir.
+Deep Research は単なるモデルではなく、**エージェント** です。レイテンシの低いチャットではなく、「アナリスト イン ア ボックス」のアプローチが必要なワークロードに最適です。
 
-| Özellik | Standart Gemini Modelleri | Gemini Deep Research Ajanı |
+| 機能 | 標準の Gemini モデル | Gemini Deep Research エージェント |
 | --- | --- | --- |
-| **Gecikme** | Saniye | Dakika (Eşzamansız/Arka Plan) |
-| **İşlem** | Oluştur -> Çıkış | Plan -> Search -> Read -> Iterate -> Output |
-| **Çıkış** | Etkileşimli metin, kod, kısa özetler | Ayrıntılı raporlar, uzun analizler, karşılaştırmalı tablolar |
-| **İdeal kullanım alanları** | Chatbot'lar, ayıklama, yaratıcı yazarlık | Pazar analizi, durum tespiti, literatür taramaları, rekabet ortamı |
+| **レイテンシ** | 秒 | 分（非同期/バックグラウンド） |
+| **プロセス** | 生成 -> 出力 | 計画 -> 検索 -> 読み取り -> 反復 -> 出力 |
+| **出力** | 会話テキスト、コード、短い要約 | 詳細なレポート、長文分析、比較表 |
+| **最適なケース** | chatbot、抽出、クリエイティブ ライティング | 市場分析、デュー デリジェンス、文献レビュー、競合状況の把握 |
 
-## Aracı yapılandırması
+## エージェントの構成
 
-Deep Research, davranışı kontrol etmek için `agent_config` parametresini kullanır.
-Aşağıdaki alanları içeren bir sözlük olarak iletin:
+Deep Research は、`agent_config` パラメータを使用して動作を制御します。
+次のフィールドを含むディクショナリとして渡します。
 
-| Alan | Tür | Varsayılan | Açıklama |
+| フィールド | タイプ | デフォルト | 説明 |
 | --- | --- | --- | --- |
-| `type` | `string` | Zorunlu | `"deep-research"` olmalıdır. |
-| `thinking_summaries` | `string` | `"none"` | Yayın sırasında ara muhakeme adımlarını almak için `"auto"` olarak ayarlayın. Devre dışı bırakmak için `"none"` olarak ayarlayın. |
-| `visualization` | `string` | `"auto"` | Ajan tarafından oluşturulan grafik ve resimleri etkinleştirmek için `"auto"` olarak ayarlayın. Devre dışı bırakmak için `"off"` olarak ayarlayın. |
-| `collaborative_planning` | `boolean` | `false` | Araştırma başlamadan önce çok turlu plan incelemesini etkinleştirmek için `true` olarak ayarlayın. |
+| `type` | `string` | 必須 | `"deep-research"` を指定します。 |
+| `thinking_summaries` | `string` | `"none"` | ストリーミング中に中間的な推論ステップを受け取るには、`"auto"` に設定します。無効にするには、`"none"` に設定します。 |
+| `visualization` | `string` | `"auto"` | エージェントが生成したグラフや画像を有効にするには、`"auto"` に設定します。無効にするには、`"off"` に設定します。 |
+| `collaborative_planning` | `boolean` | `false` | リサーチを開始する前に複数ターンのプランレビューを有効にするには、`true` に設定します。 |
 
 ### Python
 
@@ -1153,57 +1158,62 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Kullanılabilirlik ve fiyatlandırma
+## 提供状況と価格
 
-Google AI Studio'daki Interactions API ve Gemini API'yi kullanarak Gemini Deep Research Agent'a erişebilirsiniz.
+Gemini Deep Research エージェントには、Google AI Studio と Gemini API の Interactions API を使用してアクセスできます。
 
-Fiyatlandırma, temel Gemini modellerine ve aracının kullandığı belirli araçlara dayalı [kullandıkça öde modeline](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#pricing-for-agents) göre belirlenir. Bir isteğin tek bir çıkışa yol açtığı standart sohbet isteklerinin aksine, Deep Research görevi, bir aracı iş akışıdır. Tek bir istek, planlama, arama, okuma ve akıl yürütme işlemlerinden oluşan bağımsız bir döngüyü tetikler.
+料金は、基盤となる Gemini モデルとエージェントが使用する特定のツールに基づく[従量課金制モデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)です。リクエストが 1 つの出力につながる標準のチャット リクエストとは異なり、Deep Research タスクはエージェント ワークフローです。1 つのリクエストで、計画、検索、読み取り、推論の自律的なループがトリガーされます。
 
-### Tahmini maliyetler
+### 推定費用
 
-Maliyetler, gereken araştırma derinliğine göre değişir. Ajan, isteminize yanıt vermek için ne kadar okuma ve arama yapılması gerektiğini bağımsız olarak belirler.
+費用は、必要なリサーチの深さによって異なります。エージェントは、プロンプトに回答するために必要な読み取りと検索の量を自律的に決定します。
 
-- **Deep Research** (`deep-research-preview-04-2026`): Orta düzeyde analiz gerektiren tipik bir sorgu için ajan yaklaşık 80 arama sorgusu, yaklaşık 250 bin giriş jetonu (yaklaşık% 50-70 önbelleğe alınmış) ve yaklaşık 60 bin çıkış jetonu kullanabilir.
-  - **Tahmini toplam:** Görev başına ~1,00 TL - 3,00 TL
-- **Deep Research Max** (`deep-research-max-preview-04-2026`): Derinlemesine rekabet ortamı analizi veya kapsamlı durum tespiti için ajan, ~160 arama sorgusu, ~900 bin giriş jetonu (~% 50-70 önbelleğe alınmış) ve ~80 bin çıkış jetonu kullanabilir.
-  - **Tahmini toplam:** Görev başına ~3,00 TL - 7,00 TL
+- **Deep Research** （`deep-research-preview-04-2026`）: 適度な分析が必要な一般的なクエリの場合、エージェントは ~80 件の検索クエリ、~25 万個の入力トークン（~50 ～ 70% がキャッシュ）、~6 万個の出力トークンを使用する可能性があります。
+  - **合計（推定）:** 1 タスクあたり ~$1.00 ～$3.00
+- **Deep Research Max** （`deep-research-max-preview-04-2026`）: 競合状況の詳細な分析や広範なデュー デリジェンスの場合、エージェントは最大 ~160 件の検索クエリ、~90 万個の入力トークン（~50 ～ 70% がキャッシュ）、~8 万個の出力トークンを使用する可能性があります。
+  - **合計（推定）:** 1 タスクあたり ~$3.00 ～$7.00
 
-## Güvenlikle ilgili olarak göz önünde bulundurulması gerekenler
+## 安全上の考慮事項
 
-Bir aracıya web'e ve özel dosyalarınıza erişim izni vermek için güvenlik risklerini dikkatlice değerlendirmeniz gerekir.
+エージェントにウェブとプライベート ファイルへのアクセス権を付与する場合は、安全上のリスクを慎重に検討する必要があります。
 
-- **Dosyaları kullanarak istem ekleme:** Aracı, sağladığınız dosyaların içeriğini okur. Yüklenen dokümanların (PDF'ler, metin dosyaları) güvenilir kaynaklardan geldiğinden emin olun. Kötü amaçlı bir dosya, aracının çıkışını manipüle etmek için tasarlanmış gizli metinler içerebilir.
-- **Web içeriği riskleri:** Aracı, herkese açık web'de arama yapar. Güçlü güvenlik filtreleri uyguladığımız halde, aracının kötü amaçlı web sayfalarıyla karşılaşma ve bunları işleme riski vardır. Kaynakları doğrulamak için yanıtta `citations` bilgilerini incelemenizi öneririz.
-- **Veri sızdırma:** Agent'ın web'e göz atmasına da izin veriyorsanız hassas dahili verileri özetlemesini isterken dikkatli olun.
+- **ファイルを使用したプロンプト インジェクション:** エージェントは、提供されたファイルの内容を読み取ります。アップロードされたドキュメント（PDF、テキスト ファイル）が信頼できるソースからのものであることを確認してください。悪意のあるファイルには、エージェントの出力を操作するように設計された隠しテキストが含まれている可能性があります。
+- **ウェブ コンテンツのリスク:** エージェントは公開ウェブを検索します。堅牢な安全フィルターを実装していますが、エージェントが悪意のあるウェブページに遭遇して処理するリスクがあります。レスポンスで提供される `citations` を確認して、ソースを検証することをおすすめします。
+- **データ漏洩:** エージェントにウェブの閲覧を許可している場合は、機密性の高い内部データの要約をリクエストする際に注意してください。
 
-## En iyi uygulamalar
+## ベスト プラクティス
 
-- **Bilinmeyenler için istem:** Eksik verilerin nasıl işleneceği konusunda temsilciye talimat verin.
-  Örneğin, isteminize *"2025'e ait belirli rakamlar mevcut değilse tahmin etmek yerine bunların tahmin olduğunu veya kullanılamadığını açıkça belirt"* ifadesini ekleyin.
-- **Bağlam sağlama:** Giriş isteminde doğrudan arka plan bilgileri veya kısıtlamalar sağlayarak aracının araştırmasına temel oluşturun.
-- **Ortak planlamayı kullanın:** Karmaşık sorgular için, yürütmeden önce araştırma planını incelemek ve iyileştirmek üzere ortak planlamayı etkinleştirin.
-- **Çok formatlı girişler:** Deep Research Agent, çok formatlı girişleri destekler.
-  Maliyetleri artırdığı ve bağlam penceresinin taşmasına neden olabileceği için dikkatli kullanın.
+- **不明な情報をプロンプトでリクエストする:** エージェントに欠損データの処理方法を指示します。
+  たとえば、プロンプトに*「2025 年の具体的な数値が利用できない場合は、
+  推定するのではなく、予測または利用できないことを
+  明示的に示す」*を追加します。
+- **コンテキストを提供する:** 入力プロンプトで背景情報や制約を直接指定して、エージェントのリサーチをグラウンディングします。
+- **共同計画を使用する:** 複雑なクエリの場合は、共同計画を有効にして、実行前にリサーチプランを確認して改善します。
+- **マルチモーダル入力:** Deep Research エージェントはマルチモーダル入力をサポートしています。
+  費用が増加し、コンテキスト ウィンドウのオーバーフローのリスクが高まるため、慎重に使用してください。
 
-## Sınırlamalar
+## 制限事項
 
-- **Özel araçlar:** Şu anda özel işlev çağrısı araçları sağlayamıyorsunuz ancak Derin Araştırma aracısıyla uzak MCP (Model Context Protocol) sunucularını kullanabilirsiniz.
-- **Yapılandırılmış çıkış:** Derin Araştırma Aracısı şu anda yapılandırılmış çıkışları desteklememektedir.
-- **Maksimum araştırma süresi:** Deep Research aracısının maksimum araştırma süresi 60 dakikadır. Çoğu görev 20 dakika içinde tamamlanır.
-- **Mağaza koşulu:** `background=True` kullanılarak yapılan aracı yürütme işlemi için `store=True` gerekir.
-- **Google Arama:** [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) varsayılan olarak etkindir ve temellendirilmiş sonuçlar için [belirli kısıtlamalar](https://ai.google.dev/gemini-api/terms?hl=tr#use-restrictions2) geçerlidir.
+- **カスタムツール:** 現在、カスタムの関数呼び出しツールを提供することはできませんが、Deep Research エージェントでリモート MCP（Model Context Protocol）サーバーを使用できます。
+- **構造化出力:** Deep Research エージェントは現在、構造化出力をサポートしていません。
+- **最大リサーチ時間:** Deep Research エージェントのリサーチ時間は最大 60 分です。ほとんどのタスクは 20 分以内に完了します。
+- **ストアの要件:** `background=True` を使用したエージェントの実行には `store=True` が必要です。
+- **Google 検索:** [Google
+  検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)はデフォルトで有効になっており、[グラウンディングされた結果には
+  特定の](https://ai.google.dev/gemini-api/terms?hl=ja#use-restrictions2)
+  制限が適用されます。
 
-## Sırada ne var?
+## 次のステップ
 
-- [Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) hakkında daha fazla bilgi edinin.
-- [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr) aracını kullanarak kendi verilerinizi nasıl kullanacağınızı öğrenin.
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の詳細について学習する。
+- [ファイル検索ツールを使用して独自のデータを使用する方法を学習する。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
 
-Geri bildirim gönderin
+フィードバックを送信
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Son güncelleme tarihi: 2026-07-14 UTC.
+最終更新日 2026-07-14 UTC。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+ご意見をお聞かせください
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-14 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-14 UTC。"],[],[]]

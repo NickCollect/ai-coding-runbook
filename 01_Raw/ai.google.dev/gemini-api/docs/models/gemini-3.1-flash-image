@@ -1,64 +1,62 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=vi
-fetched_at: 2026-07-20T04:35:34.677811+00:00
-title: "H\u00ecnh \u1ea3nh Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-image?hl=zh-TW
+fetched_at: 2026-07-27T04:49:47.942748+00:00
+title: "Gemini 3.1 Flash Image \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Gửi ý kiến phản hồi
+提供意見
 
-# Hình ảnh Gemini 3.1 Flash
+# Gemini 3.1 Flash Image
 
-**Nano Banana 2** cung cấp tính năng tạo hình ảnh chất lượng cao và chỉnh sửa bằng cách trò chuyện với mức giá phổ thông và độ trễ thấp. Đây là phiên bản hiệu quả cao của [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=vi), được tối ưu hoá cho tốc độ và
-các trường hợp sử dụng của nhà phát triển với số lượng lớn.
+**Nano Banana 2** 提供高品質圖像生成和對話式編輯功能，價格實惠且延遲時間短。這款模型是 [Gemini 3 Pro Image](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image?hl=zh-tw) 的高效能對應模型，專為速度和大量開發人員用途進行最佳化。
 
-**Nội dung cập nhật chính:**
+**異動重點如下：**
 
-- Các lựa chọn mới về độ phân giải đầu ra:
-  - Hỗ trợ mới cho 0,5K, 2K và 4K, mặc định là 1K
-- Tính năng mới Tìm trong phần liên kết thực tế cho hình ảnh:
-  - Tích hợp cả kết quả tìm kiếm bằng văn bản và hình ảnh để cung cấp thông tin cho quá trình tạo bằng dữ liệu web theo thời gian thực
-  - Hỗ trợ khi bật hoặc tắt tính năng Tư duy
-- Tỷ lệ khung hình mới 1:4, 4:1, 1:8 và 8:1
-- Cải thiện khả năng tuân thủ tỷ lệ khung hình
-- Cải thiện chất lượng và tính nhất quán của hình ảnh
-- Cải thiện khả năng kết xuất văn bản i18n
+- 新增輸出解析度選項：
+  - 新增支援 0.5K、2K 和 4K，預設為 1K
+- 全新圖片搜尋基礎：
+  - 整合文字和圖片搜尋結果，並運用即時網頁資料生成內容
+  - 支援開啟或關閉「思考」功能
+- 新增 1:4、4:1、1:8 和 8:1 長寬比
+- 改善顯示比例遵循情況
+- 提升圖片品質和一致性
+- 改善國際化文字算繪
 
-[Dùng thử trong Google AI Studio](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=vi)
+[在 Google AI Studio 中試用](https://aistudio.google.com?model=gemini-3.1-flash-image&hl=zh-tw)
 
-## Tài liệu
+## 說明文件
 
-Hãy truy cập trang [Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) để xem đầy đủ
-các tính năng và chức năng.
+如要全面瞭解功能和特色，請前往「[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)」頁面。
 
 ## gemini-3.1-flash-image
 
-| Thuộc tính | Mô tả |
+| 屬性 | 說明 |
 | --- | --- |
-| id\_cardMã mô hình | `gemini-3.1-flash-image` |
-| saveCác loại dữ liệu được hỗ trợ | **Thông tin đầu vào**  Văn bản và Hình ảnh / PDF  **Đầu ra**  Hình ảnh và Văn bản |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  131.072  **Giới hạn mã thông báo đầu ra**  32.768 |
-| handymanCác chức năng | **[Tạo âm thanh](https://ai.google.dev/gemini-api/docs/speech-generation?hl=vi)**  Không được hỗ trợ  **[Lưu vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)**  Không được hỗ trợ  **[Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)**  Không được hỗ trợ  **[Tìm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)**  Không được hỗ trợ  **[Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)**  Không được hỗ trợ  **[Kết nối với Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)**  Không được hỗ trợ  **[Tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi)**  Được hỗ trợ  **[API trực tiếp](https://ai.google.dev/gemini-api/docs/live-api?hl=vi)**  Không được hỗ trợ  **[Tìm trong phần liên kết thực tế](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)**  Được hỗ trợ  **[Đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi)**  Không được hỗ trợ  **[Tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi)**  Được hỗ trợ  **[Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)**  Không được hỗ trợ |
-| speedCác lựa chọn về mức tiêu thụ | **[API hàng loạt](https://ai.google.dev/gemini-api/docs/batch-api?hl=vi)**  Được hỗ trợ  **[Suy luận linh hoạt](https://ai.google.dev/gemini-api/docs/flex-inference?hl=vi)**  Không được hỗ trợ  **[Suy luận theo mức độ ưu tiên](https://ai.google.dev/gemini-api/docs/priority-inference?hl=vi)**  Không được hỗ trợ |
-| 123Phiên bản | Đọc các [mẫu phiên bản mô hình](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi#model-versions) để biết thêm chi tiết.  - Ổn định: `gemini-3.1-flash-image` |
-| calendar\_monthBản cập nhật mới nhất | Tháng 2 năm 2026 |
-| cognition\_2Điểm cắt kiến thức | Tháng 1 năm 2025 |
+| id\_card 模型代碼 | `gemini-3.1-flash-image` |
+| save支援的資料類型 | **輸入裝置**  文字和圖片 / PDF  **輸出內容**  圖片和文字 |
+| token\_auto 代幣限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-tw) | **輸入權杖限制**  131,072  **輸出詞元限制**  32,768 |
+| handyman功能 | **[生成音訊](https://ai.google.dev/gemini-api/docs/speech-generation?hl=zh-tw)**  不支援  **[快取](https://ai.google.dev/gemini-api/docs/caching?hl=zh-tw)**  不支援  **[執行程式碼](https://ai.google.dev/gemini-api/docs/code-execution?hl=zh-tw)**  不支援  **[檔案搜尋](https://ai.google.dev/gemini-api/docs/file-search?hl=zh-tw)**  不支援  **[函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)**  不支援  **[利用 Google 地圖建立基準](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=zh-tw)**  不支援  **[圖像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-tw)**  支援  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=zh-tw)**  不支援  **[以搜尋為基準](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)**  支援  **[結構化輸出內容](https://ai.google.dev/gemini-api/docs/structured-output?hl=zh-tw)**  不支援  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-tw)**  支援  **[網址內容](https://ai.google.dev/gemini-api/docs/url-context?hl=zh-tw)**  不支援 |
+| speed計費方案 | **[批次 API](https://ai.google.dev/gemini-api/docs/batch-api?hl=zh-tw)**  支援  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-tw)**  不支援  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-tw)**  不支援 |
+| 123 個版本 | 詳閱[模型版本模式](https://ai.google.dev/gemini-api/docs/models/gemini?hl=zh-tw#model-versions)。  - 穩定：`gemini-3.1-flash-image` |
+| calendar\_month最新更新 | 2026 年 2 月 |
+| id\_card模型資訊卡 | [模型資訊卡](https://deepmind.google/models/model-cards/gemini-3-1-flash-image/?hl=zh-tw) |
 
-Gửi ý kiến phản hồi
+提供意見
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Cập nhật lần gần đây nhất: 2026-06-23 UTC.
+上次更新時間：2026-07-21 (世界標準時間)。
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+想進一步說明嗎？
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-23 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-21 (世界標準時間)。"],[],[]]

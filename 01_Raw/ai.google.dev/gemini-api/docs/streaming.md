@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=ja
-fetched_at: 2026-07-20T04:36:36.221158+00:00
-title: "\u30b9\u30c8\u30ea\u30fc\u30df\u30f3\u30b0 \u30a4\u30f3\u30bf\u30e9\u30af\u30b7\u30e7\u30f3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/streaming?hl=pt-BR
+fetched_at: 2026-07-27T04:47:40.245362+00:00
+title: "Intera\u00e7\u00f5es de streaming \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-フィードバックを送信
+Envie comentários
 
-# ストリーミング インタラクション
+# Interações de streaming
 
-Interaction を作成するときに、`stream: true` を設定して、[サーバー送信イベント](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)（SSE）を使用してレスポンスを段階的にストリーミングできます。
+Ao criar uma interação, você pode definir `stream: true` para transmitir a resposta de forma incremental usando [eventos enviados pelo servidor](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) (SSE).
 
 ### Python
 
@@ -110,24 +110,24 @@ event: done
 data: [DONE]
 ```
 
-## イベントタイプ
+## Tipos de evento
 
-各サーバー送信イベントには、名前付きの `event_type` と関連する JSON データが含まれます。Interactions API は、すべてのコンテンツ（テキスト、ツール呼び出し、思考）が一貫した**ステップベース**のイベントを介して流れる対称ストリーミング モデルを使用します。
+Cada evento enviado pelo servidor inclui um `event_type` nomeado e dados JSON associados. A API Interactions usa um modelo de transmissão simétrico em que todo o conteúdo (texto, chamadas de ferramenta, raciocínio) flui por um evento **baseado em etapas** consistente.
 
-各ストリームは次のイベント フローに従います。
+Cada stream segue este fluxo de eventos:
 
-1. `interaction.created`: インタラクションが作成され、メタデータ（ID、モデル、ステータス）が含まれます。
-2. 一連の**ステップ**。各ステップは次の要素で構成されます。
-   - ステップタイプ（`model_output`、`thought`、`function_call` など）を示す `step.start` イベント。
-   - そのステップの増分データを含む 1 つ以上の `step.delta` イベント。
-   - ステップを完了としてマークする `step.stop` イベント。
-3. 最終的な `usage` 統計情報を含む `interaction.completed` イベント。
+1. `interaction.created`: a interação é criada e inclui metadados (ID, modelo, status).
+2. Uma série de **etapas**, cada uma consistindo em:
+   - Um evento `step.start`, que indica o tipo de etapa (por exemplo, `model_output`, `thought`, `function_call`).
+   - Um ou mais eventos `step.delta` com dados incrementais para essa etapa.
+   - Um evento `step.stop` que marca a etapa como concluída.
+3. Um evento `interaction.completed` com estatísticas `usage` finais.
 
-`stream: false` を設定すると、API は `steps` 配列を含む単一の `interaction` オブジェクトを返します。`steps` 内の各要素は、1 つの `step.start` → `step.delta`(s) → `step.stop` サイクルの完全に組み立てられたバージョンです。
+Quando você define `stream: false`, a API retorna um único objeto `interaction` com uma matriz `steps`. Cada elemento em `steps` é a versão totalmente montada de um ciclo `step.start` → `step.delta`(s) → `step.stop`.
 
 ### `interaction.created`
 
-インタラクションが最初に作成されたときに送信されます。インタラクション ID、モデル、初期ステータスが含まれます。
+Enviado quando a interação é criada. Contém o ID da interação, o modelo e o status inicial.
 
 ```
 event: interaction.created
@@ -136,7 +136,7 @@ data: {"interaction": {"id": "...", "model": "gemini-3.5-flash", "status": "in_p
 
 ### `interaction.status_update`
 
-インタラクション レベルのステータス遷移を通知します。ステップの間に表示されることがあります。
+Sinaliza uma transição de status no nível da interação. Pode aparecer entre as etapas.
 
 ```
 event: interaction.status_update
@@ -145,23 +145,23 @@ data: {"interaction_id": "...", "status": "in_progress", "event_type": "interact
 
 ### `step.start`
 
-新しいステップの始まりを示します。ステップ `type` と `index` が含まれます。ステップタイプによって、想定されるデルタタイプと、非ストリーミング レスポンスでのステップの表示方法が決まります。
+Marca o início de uma nova etapa. Contém o `type` e o `index` da etapa. O tipo de etapa determina quais tipos de delta esperar e como a etapa aparece em uma resposta não transmitida:
 
-| ステップの種類 | 想定される差分タイプ | 説明 |
+| Tipo de etapa | Tipos de delta esperados | Descrição |
 | --- | --- | --- |
-| `model_output` | `text`、`image`、`audio` | モデルの最終的なレスポンス コンテンツ。 |
-| `thought` | `thought_signature`、`thought_summary` | Chain-of-Thought 推論。`summary` は、`thinking_summaries` が有効になっている場合にのみ存在します。 |
-| `function_call` | `arguments_delta` | クライアントが関数を実行するためのリクエスト。インタラクションのステータスを `requires_action` に設定します。 |
-| サーバーサイド ツール | ツールによって異なる | API によって実行されるツール（`google_search_call`、`google_search_result`、`code_execution_call`、`code_execution_result` など）。 |
+| `model_output` | `text`, `image`, `audio` | O conteúdo da resposta final do modelo. |
+| `thought` | `thought_signature`, `thought_summary` | Raciocínio da cadeia de pensamento. `summary` só está presente quando `thinking_summaries` está ativado. |
+| `function_call` | `arguments_delta` | Uma solicitação para o cliente executar uma função. Define o status da interação como `requires_action`. |
+| Ferramentas do lado do servidor | Varia de acordo com a ferramenta | Ferramentas executadas pela API (por exemplo, `google_search_call`, `google_search_result`, `code_execution_call`, `code_execution_result`). |
 
-完全なリストについては、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)をご覧ください。
+Consulte a referência da API [Interactions](https://ai.google.dev/api/interactions-api?hl=pt-br) para conferir a lista completa.
 
 ```
 event: step.start
 data: {"index": 0, "step": {"type": "model_output"}, "event_type": "step.start"}
 ```
 
-関数呼び出しの場合、ステップには関数名、ID、空の引数 `{}` が含まれます。
+Para chamadas de função, a etapa inclui o nome da função, o ID e os argumentos vazios `{}`.
 
 ```
 event: step.start
@@ -170,11 +170,11 @@ data: {"index": 0, "step": {"type": "function_call", "id":"un6k8t18", "name": "g
 
 ### `step.delta`
 
-現在のステップの増分データ。`delta` オブジェクトには、その形状を決定する `type` フィールドが含まれています。
+Dados incrementais para a etapa atual. O objeto `delta` contém um campo `type` que determina o formato dele.
 
-**例:**
+**Exemplos:**
 
-**`text`:** `model_output` ステップからの増分テキスト トークン:
+**`text`**:token de texto incremental de uma etapa `model_output`:
 
 ```
 event: step.delta
@@ -184,32 +184,32 @@ event: step.delta
 data: {"index": 0, "delta": {"type": "text", "text": ", and I live in Germany." }, "event_type": "step.delta"}
 ```
 
-**`image`:** `model_output` ステップの Base64 エンコードされた画像データ:
+**`image`**:dados de imagem codificados em Base64 de uma etapa `model_output`:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "image", "mime_type": "image/jpeg", "data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAoHBwgHBgoICAgLCg..."}, "event_type": "step.delta"}
 ```
 
-**`thought_summary`:** `thought` ステップの思考の要約コンテンツ:
+**`thought_summary`:** conteúdo de resumo de raciocínio de uma etapa `thought`:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "thought_summary", "content": {"type": "text", "text": "I need to find the GCD..."}}, "event_type": "step.delta"}
 ```
 
-**`arguments_delta`:** 関数呼び出し引数の（部分的な）JSON 文字列。デルタ間で累積する必要があります。
+**`arguments_delta`**:string JSON (parcial) para argumentos de chamada de função. Precisa ser acumulado em deltas:
 
 ```
 event: step.delta
 data: {"index": 0, "delta": {"type": "arguments_delta", "arguments": "{\"location\": \"San Francisco, CA\"}"}, "event_type": "step.delta"}
 ```
 
-最も一般的なデルタタイプは次のとおりです。すべての差分タイプの完全なリストについては、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)をご覧ください。
+Estes são alguns dos tipos de delta mais comuns. Para conferir a lista completa de todos os tipos de delta, consulte a [referência da API Interactions](https://ai.google.dev/api/interactions-api?hl=pt-br).
 
 ### `step.stop`
 
-ステップの終了をマークします。ステップ `index` が含まれます。
+Marca o fim de uma etapa. Contém o `index` da etapa.
 
 ```
 event: step.stop
@@ -218,7 +218,7 @@ data: {"index": 0, "event_type": "step.stop"}
 
 ### `interaction.completed`
 
-インタラクションが終了すると送信されます。`usage` 統計情報を含む最終的なインタラクション オブジェクトが含まれます。非ストリーミング モードでは、これは最上位のレスポンス オブジェクト自体です。レスポンスに `steps` が含まれていません。
+Enviado quando a interação é concluída. Contém o objeto de interação final com estatísticas `usage`. No modo não transmitido, esse é o próprio objeto de resposta de nível superior. Não inclui `steps` na resposta.
 
 ```
 event: interaction.completed
@@ -227,23 +227,24 @@ data: {"interaction": {"id": "v1_abc123", "status": "completed", "usage": {"tota
 
 ### `error`
 
-インタラクション中にエラーが発生したときに送信されます。メッセージとコードを含むエラー オブジェクトが含まれます。
+Enviado quando ocorre um erro durante a interação. Contém um objeto de erro com uma mensagem e um código.
 
 ```
 event: error
 data: {"error":{"message":"Deadline expired before operation could complete.","code":"gateway_timeout"},"event_type":"error"}
 ```
 
-## ツールを使用したストリーミング
+## Transmissão com ferramentas
 
-Interactions API は、クライアントサイド ツール（関数呼び出し）とサーバーサイド ツール（Google 検索、コード実行など）の両方を使用したストリーミングを 1 つのリクエストでサポートします。ストリーミング中、ツール呼び出しはイベント ストリームに型付きステップとして表示されます。関数呼び出しの場合、`step.start` イベントは関数名を配信し、`step.delta` イベントは引数を JSON 文字列（`arguments_delta`）としてストリーミングします。これらの差分を累積して、完全な引数を取得する必要があります。Google 検索などのサーバーサイド ツールは API によって自動的に実行され、`google_search_call` ステップと `google_search_result` ステップが生成されます。
+A API Interactions oferece suporte à transmissão com ferramentas do lado do cliente (chamada de função) e do lado do servidor (Pesquisa Google, execução de código etc.) em uma única solicitação. Durante a transmissão, as invocações de ferramentas aparecem como etapas digitadas no fluxo de eventos. Para chamadas de função, o evento `step.start` entrega o nome da função, e os eventos `step.delta` transmitem os argumentos como strings JSON (`arguments_delta`). É necessário acumular esses deltas para receber os argumentos completos.
+As ferramentas do lado do servidor, como a Pesquisa Google, são executadas automaticamente pela API, produzindo etapas `google_search_call` e `google_search_result`.
 
-### 関数呼び出しによるストリーミング
+### Transmissão com chamada de função
 
-ストリーミングで関数呼び出しを行うには、クライアントがマルチターンの会話を処理する必要があります。
+Para realizar a chamada de função com transmissão, o cliente precisa processar uma conversa multiturno:
 
-1. **ターン 1（関数リクエスト）:** `stream: true` と定義した `tools` を使用して `interactions.create` を呼び出します。API は `function_call` ステップをストリーミングします。`step.delta` イベントから `requires_action` ステータスでインタラクションが完了するまで、増分引数 JSON 文字列（`arguments_delta`）を蓄積する必要があります。
-2. **ターン 2（結果の送信）:** `interactions.create` を再度呼び出し、`previous_interaction_id`（最初のやり取りの ID と一致）を渡して、`input` 配列内の `function_result` ブロックを送信します。これにより、ストリームが再開され、モデルが最終的なレスポンスを生成できるようになります。
+1. **Turno 1 (solicitação de função)** : chame `interactions.create` com `stream: true` e suas `tools` definidas. A API vai transmitir uma etapa `function_call`. É necessário acumular as strings JSON de argumento incremental (`arguments_delta`) de eventos `step.delta` até que a interação seja concluída com o status `requires_action`.
+2. **Turno 2 (envio do resultado)** : chame `interactions.create` novamente, transmitindo o `previous_interaction_id` (que corresponde ao ID da primeira interação) e enviando um bloco `function_result` na matriz `input`. Isso retoma o stream, permitindo que o modelo gere a resposta final.
 
 ### Python
 
@@ -400,7 +401,7 @@ if (funcCallId && firstInteractionId && funcCallName) {
 
 ### REST
 
-**ターン 1:** 関数呼び出しをリクエストする
+**Turno 1**:solicitar chamada de função
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -431,7 +432,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**ターン 2:** ターン 1 の `previous_interaction_id` と `call_id` を使用して関数結果を送信する
+**Turno 2**:enviar o resultado da função usando o `previous_interaction_id` e o `call_id` do turno 1
 
 ```
 curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
@@ -460,9 +461,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 複数のツールを使用したストリーミング
+### Transmissão com várias ferramentas
 
-次の例では、1 つのリクエストで `function` ツールと `google_search` の両方を使用しています。
+O exemplo a seguir usa uma ferramenta `function` e `google_search` em uma solicitação:
 
 ### Python
 
@@ -663,9 +664,9 @@ event: done
 data: [DONE]
 ```
 
-## 思考を伴うストリーミング
+## Transmissão com raciocínio
 
-モデルが思考を使用すると、2 つの異なるデルタ型（`thought_summary`（増分テキストまたは画像要約コンテンツ）と `thought_signature`（モデルの内部推論の暗号化された表現。`step.stop` の前の最後のデルタとして送信））を含む `thought` ステップが返されます。`thinking_summaries` が有効になっている場合、`thought_summary` デルタはモデルの推論の要約をストリーミングします。思考の詳細については、[思考ガイド](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)をご覧ください。
+Quando o modelo usa o raciocínio, você recebe etapas `thought` com dois tipos de delta distintos: `thought_summary` (conteúdo de resumo de texto ou imagem incremental) e `thought_signature` (uma representação criptografada do raciocínio interno do modelo, enviada como o último delta antes de `step.stop`). Se `thinking_summaries` estiver ativado, os deltas `thought_summary` vão transmitir um resumo do raciocínio do modelo. Para mais detalhes sobre o raciocínio, consulte o [guia de raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br).
 
 ### Python
 
@@ -765,9 +766,9 @@ data: {"index":1,"step":{"type":"model_output"},"event_type":"step.start"}
 ...
 ```
 
-## エージェントによるストリーミング
+## Transmissão com agentes
 
-Interactions API は、Deep Research などのエージェントをサポートしています。エージェントは `background=True` を使用して結果を非同期で返しますが、エージェントのインタラクションをストリーミングして、進行状況の更新や中間ステップをリアルタイムで受け取ることもできます。詳しくは、[バックグラウンド実行ガイド](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)と [Deep Research ガイド](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja)をご覧ください。
+A API Interactions oferece suporte a agentes como o Deep Research. Os agentes usam `background=True` e retornam resultados de forma assíncrona, mas também é possível transmitir interações de agentes para receber atualizações de progresso e etapas intermediárias à medida que acontecem. Para mais detalhes, consulte o [guia de execução em segundo plano](https://ai.google.dev/gemini-api/docs/background-execution?hl=pt-br) e o [guia do Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br).
 
 ### Python
 
@@ -886,11 +887,11 @@ event: done
 data: [DONE]
 ```
 
-## ストリーミング画像生成
+## Geração de imagens de transmissão
 
-Interactions API は、複数の出力モードの同時ストリーミングをサポートしています。`response_format` で `text` と `image` の両方をリクエストすると、インターリーブされたテキストと生成された画像を同じストリームで受け取ることができます。
+A API Interactions oferece suporte à transmissão de várias modalidades de saída simultaneamente. Ao solicitar `text` e `image` no `response_format`, você pode receber texto intercalado e imagens geradas no mesmo stream.
 
-次の例では、`gemini-3.1-flash-image`（Nano Banana 2）を使用して情報を検索し、イラストが挿入された物語を生成します。
+O exemplo a seguir usa `gemini-3.1-flash-image` (Nano Banana 2) para pesquisar informações e gerar uma história com ilustrações intercaladas.
 
 ### Python
 
@@ -1043,24 +1044,24 @@ event: done
 data: [DONE]
 ```
 
-## 不明なイベントの処理
+## Como processar eventos desconhecidos
 
-API のバージョン管理ポリシーに沿って、新しいイベントタイプとデルタタイプが追加される可能性があります。コードは、認識できないイベントタイプを適切に処理する必要があります。エラーをスローするのではなく、認識できないイベントをログに記録してスキップします。
+De acordo com a política de controle de versões da API, novos tipos de eventos e tipos de delta podem ser adicionados ao longo do tempo. O código precisa processar tipos de eventos desconhecidos normalmente: registre e pule todos os eventos que você não reconhece em vez de gerar um erro.
 
-## 次のステップ
+## A seguir
 
-- 詳しくは、[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) をご覧ください。
-- ツールを使用して[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)を試す。
-- 推論を強化する [Thinking](https://ai.google.dev/gemini-api/docs/thinking?hl=ja) の詳細を確認する。
-- 長時間実行タスクには [Deep Research エージェント](https://ai.google.dev/gemini-api/docs/deep-research?hl=ja)を試してください。
-- すべてのイベントタイプとデルタタイプについては、[Interactions API リファレンス](https://ai.google.dev/api/interactions-api?hl=ja)をご覧ください。
+- Saiba mais sobre a [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br).
+- Saiba mais sobre a [chamada de função](https://ai.google.dev/gemini-api/docs/function-calling?hl=pt-br) com ferramentas.
+- Saiba mais sobre [o raciocínio](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br) para melhorar o raciocínio.
+- Teste o [agente do Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=pt-br) para tarefas de longa duração.
+- Consulte a [referência da API Interactions](https://ai.google.dev/api/interactions-api?hl=pt-br) para conferir todos os tipos de eventos e tipos de delta.
 
-フィードバックを送信
+Envie comentários
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-最終更新日 2026-07-07 UTC。
+Última atualização 2026-07-07 UTC.
 
-ご意見をお聞かせください
+Quer enviar seu feedback?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-07 UTC。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-07 UTC."],[],[]]

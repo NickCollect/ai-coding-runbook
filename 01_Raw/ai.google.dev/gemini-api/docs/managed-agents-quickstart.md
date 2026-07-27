@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=hi
-fetched_at: 2026-07-20T04:36:23.510889+00:00
-title: "\u092e\u0948\u0928\u0947\u091c \u0915\u093f\u090f \u0917\u090f \u090f\u091c\u0947\u0902\u091f\u094b\u0902 \u0915\u0947 \u0932\u093f\u090f \u0915\u094d\u0935\u093f\u0915\u0938\u094d\u091f\u093e\u0930\u094d\u091f \u0917\u093e\u0907\u0921 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko
+fetched_at: 2026-07-27T04:47:44.512257+00:00
+title: "\uad00\ub9ac \uc5d0\uc774\uc804\ud2b8 \ube60\ub978 \uc2dc\uc791 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-सुझाव भेजें
+의견 보내기
 
-# मैनेज किए गए एजेंटों के लिए क्विकस्टार्ट गाइड
+# 관리 에이전트 빠른 시작
 
-इस गाइड में, [Antigravity एजेंट](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=hi) का इस्तेमाल करके, Gemini API पर मैनेज किए गए एजेंट बनाने और उनका इस्तेमाल करने का तरीका बताया गया है. आपको एजेंट से पहला कॉल करने, कई बार बातचीत जारी रखने, जवाब स्ट्रीम करने, सैंडबॉक्स से फ़ाइलें डाउनलोड करने, और Antigravity के मैनेज किए गए एजेंट के साथ काम करने का मौका मिलेगा.
+이 가이드에서는 [Antigravity 에이전트](https://ai.google.dev/gemini-api/docs/agents/antigravity-agent?hl=ko)를 사용하여 Gemini API에서 관리형 에이전트를 만들고 사용하는 방법을 안내합니다. 첫 번째 에이전트 호출을 하고, 멀티턴 대화를 계속하고, 응답을 스트리밍하고, 샌드박스에서 파일을 다운로드하고, Antigravity 관리형 에이전트를 사용합니다.
 
-## एजेंट के साथ पहली बार इंटरैक्ट करना
+## 첫 번째 에이전트 상호작용 실행
 
-[Interactions API](https://ai.google.dev/gemini-api/docs?hl=hi) को एक बार कॉल करने पर, Linux सैंडबॉक्स उपलब्ध कराया जाता है, एजेंट लूप चलाया जाता है, और नतीजा दिखाया जाता है. आपको तीन पैरामीटर तय करने होंगे:
+[Interactions API](https://ai.google.dev/gemini-api/docs?hl=ko)를 한 번 호출하면 Linux 샌드박스가 프로비저닝되고, 에이전트 루프가 실행되고, 결과가 반환됩니다. 다음 세 가지 매개변수를 정의합니다.
 
-- `agent` को `"antigravity-preview-05-2026",` के तौर पर पास करें. यह पहले से तय और सामान्य मकसद के लिए मैनेज किए जाने वाले एजेंट का मौजूदा वर्शन है.
-- `environment="remote"` को तय करें, ताकि नया सैंडबॉक्स एनवायरमेंट उपलब्ध कराया जा सके.
-- एक इनपुट बनाएं और उसमें बताएं कि आपको एजेंट से क्या काम करवाना है.
+- 미리 정의된 범용 관리형 에이전트의 현재 버전인 `agent`를 `"antigravity-preview-05-2026",`으로 전달합니다.
+- 새로운 샌드박스 환경을 프로비저닝하려면 `environment="remote"`를 정의합니다.
+- 에이전트가 수행할 작업을 정의하는 입력을 만듭니다.
 
 ### Python
 
@@ -79,16 +79,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-जवाब में, एक `Interaction` ऑब्जेक्ट मिलता है. `interaction.id` और `interaction.environment_id` को सेव करें, ताकि उसी सैंडबॉक्स में बातचीत जारी रखी जा सके. एजेंट के आखिरी जवाब को ऐक्सेस करने के लिए, `interaction.output_text` का इस्तेमाल करें. `interaction.steps` में, एजेंट की ओर से किए गए हर चरण की जानकारी दी गई होती है. जैसे, तर्क, टूल कॉल, कोड एक्ज़ीक्यूट करना.
+응답은 `Interaction` 객체를 반환합니다. 동일한 샌드박스에서 대화를 계속하려면 `interaction.id` 및 `interaction.environment_id`를 저장합니다. `interaction.output_text`를 사용하여 에이전트의 최종 응답에 액세스합니다. `interaction.steps`는 에이전트가 수행한 각 단계 (추론, 도구 호출, 코드 실행)를 나열합니다.
 
-## बातचीत जारी रखना (कई बार)
+## 대화 계속 (멀티턴)
 
-यह एपीआई, दो इंडिपेंडेंट स्टेट डाइमेंशन ट्रैक करता है:
+API는 두 가지 독립적인 상태 측정기준을 추적합니다.
 
-- **बातचीत का कॉन्टेक्स्ट:** चैट का इतिहास, तर्क का पता लगाना, टूल का इस्तेमाल करना, और `previous_interaction_id` का इस्तेमाल करना.
-- [**एनवायरमेंट की स्थिति:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi) फ़ाइलें, इंस्टॉल किए गए पैकेज, और सैंडबॉक्स की स्थिति. इसके लिए, `environment` का इस्तेमाल किया जाता है.
+- **대화 컨텍스트:** 채팅 기록, 추론 추적, 도구 사용, `previous_interaction_id` 사용
+- [**환경 상태:**](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko) 파일, 설치된 패키지, 샌드박스 상태, `environment` 사용
 
-इन दोनों को इनकी जगह पर पास करें, ताकि प्रोसेस को फिर से शुरू किया जा सके:
+각각의 위치에 전달하여 다시 시작합니다.
 
 ### Python
 
@@ -130,20 +130,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-पहले टर्न (`fibonacci.txt`) की फ़ाइलें, दूसरे टर्न में भी मौजूद रहती हैं. एजेंट के पास बातचीत का कॉन्टेक्स्ट भी बना रहता है.
+턴 1의 파일 (`fibonacci.txt`)은 턴 2에도 유지됩니다. 에이전트는 대화 컨텍스트도 유지합니다.
 
-इनको अलग-अलग तरीके से इस्तेमाल किया जा सकता है:
+다음과 같이 독립적으로 혼합하고 매칭할 수 있습니다.
 
-- **बातचीत मिटाएं, फ़ाइलें सेव रखें:** `previous_interaction_id` को शामिल न करें. सिर्फ़ `environment` का इस्तेमाल करके एनवायरमेंट आईडी पास करें, ताकि उसी वर्कस्पेस में नई बातचीत शुरू की जा सके.
-- **बातचीत जारी रखें, नया वर्कस्पेस:** `previous_interaction_id` पास करें और नए सैंडबॉक्स के लिए `environment="remote"` सेट करें.
+- **대화 삭제, 파일 유지:** `previous_interaction_id`를 생략하고 동일한 작업공간에서 새로운 대화를 위해 `environment`를 사용하여 환경 ID만 전달합니다.
+- **대화 유지, 새 작업공간:** `previous_interaction_id`를 전달하고 새 샌드박스에 `environment="remote"`를 설정합니다.
 
-### कॉन्टेक्स्ट को अपने-आप छोटा करने की सुविधा
+### 자동 컨텍스트 압축
 
-लंबे समय तक चलने वाली, कई बार की बातचीत में, तर्क देने के चरणों, टूल कॉल, और बड़ी फ़ाइल के कॉन्टेंट का रॉ डेटा तेज़ी से बढ़ सकता है. इससे कॉन्टेक्स्ट के लिए उपलब्ध जगह काफ़ी कम हो जाती है. टोकन की सीमा से जुड़ी गड़बड़ियों को रोकने और एजेंट का फ़ोकस बनाए रखने (कॉन्टेक्स्ट रोट को रोकने) के लिए, Managed Agents API में करीब 1,35,000 टोकन पर कॉन्टेक्स्ट कंपैक्शन का एक नेटिव चरण होता है. यह अपने-आप होता है.
+장기 실행 멀티턴 대화에서 추론 단계, 도구 호출, 대용량 파일 콘텐츠의 원시 기록은 빠르게 증가하여 상당한 컨텍스트 공간을 사용할 수 있습니다. 토큰 한도 오류를 방지하고 에이전트의 집중도를 유지 (컨텍스트 손상 방지)하기 위해 관리형 에이전트 API는 약 135,000개의 토큰에서 기본 컨텍스트 압축 단계를 제공합니다. 이 작업은 자동으로 진행되며
 
-## जवाब को स्ट्रीम करना
+## 응답 스트리밍
 
-लंबे समय तक चलने वाले टास्क के लिए, जवाब को स्ट्रीम किया जा सकता है. इससे एजेंट को रीयल टाइम में काम करते हुए देखा जा सकता है:
+장기 실행 작업의 경우 응답을 스트리밍하여 에이전트가 실시간으로 작동하는 것을 확인할 수 있습니다.
 
 ### Python
 
@@ -196,11 +196,11 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-स्ट्रीमिंग से, चरण के अंतर का एक इटरेबल मिलता है. यह इंक्रीमेंटल टेक्स्ट, तर्क के टोकन, और टूल कॉल के अपडेट होते हैं. [स्ट्रीमिंग गाइड](https://ai.google.dev/gemini-api/docs/streaming?hl=hi) में, जवाबों को स्ट्रीम करने के तरीके के बारे में ज़्यादा जानें.
+스트리밍은 증분 텍스트, 추론 토큰, 도구 호출 업데이트인 단계 델타의 반복 가능 항목을 반환합니다. [스트리밍 가이드에서 응답을 스트리밍하는 방법을 자세히 알아보세요.](https://ai.google.dev/gemini-api/docs/streaming?hl=ko)
 
-## एनवायरमेंट से फ़ाइलें डाउनलोड करना
+## 환경에서 파일 다운로드
 
-जब एजेंट, सैंडबॉक्स में फ़ाइलें बनाता है. इन्हें सीधे एचटीटीपी अनुरोध (अभी तक कोई एसडीके तरीका नहीं है) के साथ Files API का इस्तेमाल करके डाउनलोड करें:
+에이전트가 샌드박스 내에서 파일을 만들 때. 직접 HTTP 요청으로 Files API를 사용하여 다운로드합니다 (아직 SDK 메서드 없음).
 
 ### Python
 
@@ -267,13 +267,13 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/environme
 tar -xf snapshot.tar -C extracted_snapshot
 ```
 
-## मैनेज किए जा रहे एजेंट को सेव करना
+## 관리형 에이전트 저장
 
-पिछले चरणों में, हमने डिफ़ॉल्ट Antigravity एजेंट का इस्तेमाल किया था और उसे इनलाइन तरीके से पसंद के मुताबिक बनाया था. कॉन्फ़िगरेशन (निर्देश, स्किल, और एनवायरमेंट) को दोहराने के बाद, इसे मैनेज किए जा सकने वाले एजेंट के तौर पर सेव किया जा सकता है. इससे कॉन्फ़िगरेशन को दोहराए बिना, आईडी के ज़रिए इसे चालू किया जा सकता है.
+이전 단계에서는 기본 Antigravity 에이전트를 사용하고 인라인으로 맞춤설정했습니다. 구성 (안내, 기술, 모델 선택, 환경)을 반복한 후 재사용 가능한 관리형 에이전트로 저장할 수 있습니다. 이렇게 하면 구성을 반복하지 않고 ID로 호출할 수 있습니다.
 
-किसी एजेंट को सेव करते समय, आपको `base_environment` तय करना होता है. इसके लिए, सोर्स से डेटा लिया जा सकता है या किसी मौजूदा एनवायरमेंट को फ़ोर्क किया जा सकता है. एजेंट, हर नए इंटरैक्शन के लिए इस एनवायरमेंट का इस्तेमाल करेगा.
+에이전트를 저장할 때 인라인 상호작용과의 아키텍처 대칭에 유의하세요. `interactions.create`에서와 마찬가지로 `base_agent: "antigravity-preview-05-2026"`을 지정하고 선택한 `model`로 `agent_config`를 전달할 수 있습니다. 또한 소스에서 또는 기존 환경을 포크하여 `base_environment`를 정의합니다. 에이전트는 모든 새 상호작용에 이 환경 및 모델 구성을 사용합니다.
 
-**सोर्स से:** सोर्स को इनलाइन या GitHub या Cloud Storage जैसे अन्य सोर्स से तय करें.
+**소스에서:** 소스를 인라인으로 또는 GitHub 또는 Cloud Storage와 같은 다른 소스에서 정의합니다.
 
 ### Python
 
@@ -281,6 +281,10 @@ tar -xf snapshot.tar -C extracted_snapshot
 agent = client.agents.create(
     id="fibonacci-analyst",
     base_agent="antigravity-preview-05-2026",
+    agent_config={
+        "type": "antigravity",
+        "model": "gemini-3.6-flash",
+    },
     system_instruction="You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     base_environment={
         "type": "remote",
@@ -308,6 +312,10 @@ print(f"Saved agent: {agent.id}")
 const agent = await client.agents.create({
     id: "fibonacci-analyst",
     base_agent: "antigravity-preview-05-2026",
+    agent_config: {
+        type: "antigravity",
+        model: "gemini-3.6-flash",
+    },
     system_instruction: "You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     base_environment: {
         type: "remote",
@@ -338,6 +346,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 -d '{
     "id": "fibonacci-analyst",
     "base_agent": "antigravity-preview-05-2026",
+    "agent_config": {
+        "type": "antigravity",
+        "model": "gemini-3.6-flash"
+    },
     "system_instruction": "You are a math analysis agent. Generate sequences, visualize them, and export results as PDF reports.",
     "base_environment": {
         "type": "remote",
@@ -357,9 +369,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-## मैनेज किए जा रहे एजेंट को शुरू करना
+## 관리형 에이전트 호출
 
-मैनेज किए जा रहे एजेंट को सेव करने के बाद, उसे आईडी के ज़रिए शुरू किया जा सकता है. हर इनवोकेशन, बेस एनवायरमेंट को फ़ोर्क करता है. इसलिए, हर रन क्लीन तरीके से शुरू होता है:
+관리형 에이전트를 저장한 후 ID로 호출할 수 있습니다. 각 호출은 기본 환경을 포크하므로 모든 실행이 깨끗하게 시작됩니다.
 
 ### Python
 
@@ -400,19 +412,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## आगे क्या करना है
+## 다음 단계
 
-- [ऐंटीग्रैविटी एजेंट](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=hi): सुविधाएं, इस्तेमाल किए जा सकने वाले टूल, मल्टीमॉडल इनपुट, कीमत, और सीमाएं.
-- [मैनेज किए गए एजेंट बनाना](https://ai.google.dev/gemini-api/docs/custom-agents?hl=hi): अपने निर्देशों, कौशल, और डेटा के साथ Antigravity को बेहतर बनाएं.
-- [एनवायरमेंट](https://ai.google.dev/gemini-api/docs/agent-environment?hl=hi): सोर्स, नेटवर्किंग, लाइफ़साइकल, संसाधन की सीमाएं.
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi): यह मॉडल और एजेंट के लिए बुनियादी एपीआई है.
+- [Antigravity 에이전트](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko): 기능, 지원되는 도구, 멀티모달 입력, 가격 책정, 제한사항
+- [관리형 에이전트 빌드](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko): 자체 안내, 기술, 데이터로 Antigravity 확장
+- [환경](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ko): 소스, 네트워킹, 수명 주기, 리소스 한도
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko): 모델 및 에이전트의 기본 API
 
-सुझाव भेजें
+의견 보내기
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-आखिरी बार 2026-06-22 (UTC) को अपडेट किया गया.
+최종 업데이트: 2026-07-21(UTC)
 
-क्या आपको हमें और कुछ बताना है?
+의견을 전달하고 싶나요?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-06-22 (UTC) को अपडेट किया गया."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-21(UTC)"],[],[]]

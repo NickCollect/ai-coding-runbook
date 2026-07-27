@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=it
-fetched_at: 2026-07-20T04:44:58.995793+00:00
+fetched_at: 2026-07-27T04:35:27.694553+00:00
 title: "Spiegazione delle versioni API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

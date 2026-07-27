@@ -1,43 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=es-419
-fetched_at: 2026-07-20T04:34:23.882808+00:00
-title: "API de Interactions: Gu\u00eda de migraci\u00f3n de cambios rotundos (mayo de 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=hi
+fetched_at: 2026-07-27T04:42:43.694233+00:00
+title: "Interactions API: \u092e\u093e\u0907\u0917\u094d\u0930\u0947\u0936\u0928 \u0917\u093e\u0907\u0921 \u092e\u0947\u0902 \u092c\u0921\u093c\u0947 \u092c\u0926\u0932\u093e\u0935 (\u092e\u0908 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Enviar comentarios
+सुझाव भेजें
 
-# API de Interactions: Guía de migración de cambios rotundos (mayo de 2026)
+# Interactions API: माइग्रेशन गाइड में बड़े बदलाव (मई 2026)
 
-La API de `v1beta` Interactions presenta cambios rotundos que reestructuran la forma de la API para admitir capacidades futuras, como la dirección durante el vuelo y las llamadas a herramientas asíncronas. En esta página, se explica qué cambiará y se proporcionan ejemplos de código antes y después para ayudarte con la migración. Existen dos categorías de cambios:
+`v1beta` Interactions API में अहम बदलाव किए जा रहे हैं. इससे एपीआई के स्ट्रक्चर में बदलाव होगा. ऐसा इसलिए किया जा रहा है, ताकि आने वाली सुविधाएं काम कर सकें. जैसे, फ़्लाइट के दौरान स्टीयरिंग और टूल कॉल को एसिंक्रोनस तरीके से इस्तेमाल करना. इस पेज पर, किए जा रहे बदलावों के बारे में बताया गया है. साथ ही, माइग्रेट करने में आपकी मदद करने के लिए, कोड के पहले और बाद के उदाहरण दिए गए हैं. बदलावों की दो कैटगरी हैं:
 
-1. [**Esquema de pasos**](#steps-schema): Un nuevo array `steps` reemplaza el array `outputs` y proporciona una cronología estructurada de cada turno de interacción.
-2. [**Configuración del formato de salida**](#output-format-config): Un nuevo `response_format` polimórfico consolida todos los controles de formato de salida y quita `response_mime_type`.
+1. [**स्टेप स्कीमा**](#steps-schema): `outputs` कलेक्शन की जगह, नया `steps` कलेक्शन इस्तेमाल किया जाएगा. इससे हर इंटरैक्शन टर्न की स्ट्रक्चर्ड टाइमलाइन मिलेगी.
+2. [**आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन**](#output-format-config): नया पॉलीमॉर्फिक
+   `response_format` आउटपुट फ़ॉर्मैट के सभी कंट्रोल को एक साथ लाता है. साथ ही,
+   `response_mime_type` को हटाता है.
 
-Sigue los pasos que se indican en [Cómo migrar al nuevo esquema](#how-to-migrate) para actualizar tu integración.
+अपने इंटिग्रेशन को अपडेट करने के लिए, [नए स्कीमा पर माइग्रेट करने का तरीका](#how-to-migrate) में दिए गए निर्देशों का पालन करें.
 
-## Cambio principal: De `outputs` a `steps`
+## अहम बदलाव: `outputs` की जगह `steps` का इस्तेमाल
 
-El esquema nuevo reemplaza el array `outputs` por un array `steps`.
+नए स्कीमा में, `outputs` कलेक्शन की जगह `steps` कलेक्शन का इस्तेमाल किया जाएगा.
 
-- **Heredado**: Las respuestas devolvían un array `outputs` simple que contenía solo el contenido generado por el modelo.
-- **Nuevo esquema**: Las respuestas devuelven un array `steps` que contiene pasos estructurados con discriminadores de tipo.
+- **लेगसी**: जवाबों में, फ़्लैट `outputs` कलेक्शन मिलता था. इसमें सिर्फ़ मॉडल से जनरेट किया गया कॉन्टेंट होता था.
+- **नया स्कीमा**: जवाबों में, `steps` कलेक्शन मिलता है. इसमें टाइप डिस्क्रिमिनेटर के साथ स्ट्रक्चर्ड स्टेप होते हैं.
 
-`POST /interactions` solo devuelve pasos de salida. `GET /interactions/{id}`
-devuelve el cronograma completo de pasos, incluido el paso inicial `user_input`.
+`POST /interactions` से सिर्फ़ आउटपुट स्टेप मिलते हैं. `GET /interactions/{id}`
+से, पूरी स्टेप टाइमलाइन मिलती है. इसमें शुरुआती `user_input` स्टेप भी शामिल होता है.
 
-### Entrada y salida básicas (unarias)
+### सामान्य इनपुट/आउटपुट (यूनरी)
 
-#### Antes (heredado)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -89,7 +91,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Después (esquema nuevo)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -171,11 +173,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Llamada a función
+### फ़ंक्शन कॉलिंग
 
-La estructura de la solicitud no cambia, pero la respuesta reemplaza el contenido `outputs` plano por pasos estructurados.
+अनुरोध का स्ट्रक्चर पहले जैसा ही रहेगा. हालांकि, जवाब में फ़्लैट `outputs` कॉन्टेंट की जगह, स्ट्रक्चर्ड स्टेप मिलेंगे.
 
-#### Antes (heredado)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -220,7 +222,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### Después (esquema nuevo)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -268,11 +270,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Herramientas del servidor
+### सर्वर-साइड टूल
 
-Las herramientas del servidor (como la Búsqueda de Google o la Ejecución de código) ahora generan tipos de pasos específicos en el array `steps`. Si bien el esquema heredado devolvía estas operaciones como tipos de contenido específicos dentro del array `outputs`, el nuevo esquema las mueve al array `steps`. En los siguientes ejemplos, se usa la Búsqueda de Google.
+सर्वर-साइड टूल (जैसे, Google Search या Code Execution) अब `steps` कलेक्शन में, खास तरह के स्टेप देते हैं. लेगसी स्कीमा में, इन कार्रवाइयों को `outputs` कलेक्शन में खास तरह के कॉन्टेंट के तौर पर दिखाया जाता था. हालांकि, नए स्कीमा में इन्हें `steps` कलेक्शन में ले जाया गया है. यहां दिए गए उदाहरणों में, Google Search का इस्तेमाल किया गया है.
 
-#### Antes (heredado)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -346,7 +348,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Después (esquema nuevo)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -430,11 +432,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Transmisión
+### स्ट्रीमिंग
 
-La transmisión expone nuevos tipos de eventos:
+स्ट्रीमिंग में, इवेंट के नए टाइप दिखते हैं:
 
-#### Nuevos tipos de eventos
+#### इवेंट के नए टाइप
 
 - `interaction.created`
 - `interaction.completed`
@@ -444,22 +446,25 @@ La transmisión expone nuevos tipos de eventos:
 - `step.delta`
 - `step.stop`
 
-#### Tipos de eventos obsoletos
+#### इवेंट के बंद किए गए टाइप
 
-Los siguientes tipos de eventos heredados se reemplazan por los nuevos eventos que se mencionaron anteriormente:
+लेगसी स्कीमा में, इवेंट के इन टाइप की जगह ऊपर बताए गए नए इवेंट टाइप का इस्तेमाल किया जाएगा:
 
 - `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
 - `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → reemplazado por `interaction.in_progress`, `interaction.requires_action`, etcétera
+- `interaction.status_update` → इसकी जगह `interaction.in_progress`, `interaction.requires_action` वगैरह का इस्तेमाल किया जाएगा.
 
-**Llamadas a funciones de transmisión**: Cuando usas la transmisión con la llamada a función, el evento `step.start` entrega el nombre de la función y los eventos `step.delta` transmiten los argumentos como cadenas JSON parciales (con `arguments_delta`). Debes acumular estos deltas para obtener los argumentos completos. Esto difiere de las llamadas unarias, en las que recibes el objeto de llamada a la función completo de una vez.
+**स्ट्रीमिंग फ़ंक्शन कॉल**: फ़ंक्शन कॉलिंग के साथ स्ट्रीमिंग का इस्तेमाल करने पर,
+`step.start` इवेंट में फ़ंक्शन का नाम दिखता है. वहीं, `step.delta` इवेंट में
+आर्ग्युमेंट को, JSON स्ट्रिंग के तौर पर स्ट्रीम किया जाता है. इसके लिए, `arguments_delta` का इस्तेमाल किया जाता है. पूरे आर्ग्युमेंट पाने के लिए, आपको
+इन डेल्टा को इकट्ठा करना होगा. यह यूनरी कॉल से अलग है. यूनरी कॉल में, आपको फ़ंक्शन कॉल का पूरा ऑब्जेक्ट एक साथ मिलता है.
 
-#### Ejemplos
+#### उदाहरण
 
-##### Antes (heredado)
+##### पहले (लेगसी)
 
 ### Python
 
@@ -526,7 +531,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### Después (esquema nuevo)
+##### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -603,29 +608,31 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### Historial de conversaciones sin estado
+### स्टेटलेस बातचीत का इतिहास
 
-Si administras el historial de conversaciones de forma manual en el cliente (caso de uso sin estado), debes actualizar la forma en que encadenas los turnos anteriores.
+अगर क्लाइंट साइड पर, बातचीत के इतिहास को मैन्युअल तरीके से मैनेज किया जाता है (स्टेटलेस इस्तेमाल का तरीका), तो आपको पिछले टर्न को एक साथ लाने के तरीके को अपडेट करना होगा.
 
-- **Legado**: Los desarrolladores solían recopilar el array `outputs` de las respuestas y enviarlo de vuelta en el campo `input` en el siguiente turno.
-- **Nuevo esquema**: Ahora debes recopilar el array `steps` de la respuesta y pasarlo en el campo `input` de la próxima solicitud, agregando tu nuevo turno de usuario como un paso `user_input`.
+- **लेगसी**: डेवलपर अक्सर जवाबों से `outputs` कलेक्शन इकट्ठा करते थे और अगले टर्न में, उन्हें `input` फ़ील्ड में वापस भेजते थे.
+- **नया स्कीमा**: अब आपको जवाब से `steps` कलेक्शन इकट्ठा करना चाहिए और अगले अनुरोध के `input` फ़ील्ड में इसे पास करना चाहिए. साथ ही, अपने नए उपयोगकर्ता टर्न को `user_input` स्टेप के तौर पर जोड़ना चाहिए.
 
-## Configuración del formato de resultado: cambios en `response_format`
+## आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन: `response_format` में बदलाव
 
-La API actualizada consolida todos los controles de formato de salida en un campo `response_format` polimórfico unificado. Esto centraliza la configuración de salida en el nivel superior y mantiene `generation_config` enfocado en el comportamiento del modelo (como la temperatura, top\_p y el pensamiento).
+अपडेट किए गए एपीआई में, आउटपुट फ़ॉर्मैट के सभी कंट्रोल को एक ही पॉलीमॉर्फिक `response_format` फ़ील्ड में शामिल किया गया है. इससे, आउटपुट कॉन्फ़िगरेशन को टॉप लेवल पर केंद्रीकृत किया जाता है. साथ ही, `generation_config` को मॉडल के व्यवहार (जैसे, तापमान, top\_p, और थिंकिंग) पर फ़ोकस किया जाता है.
 
-### Cambios clave
+### मुख्य बदलाव
 
-- **La API quita `response_mime_type`.** Ahora especificas el tipo de MIME por entrada de formato dentro de `response_format`.
-- **`response_format` ahora es un objeto polimórfico (o array).** Cada entrada tiene un discriminador `type` (`text`, `audio`, `image`) y campos específicos del tipo. Para solicitar varias modalidades de salida, pasa un array de entradas de formato.
-- **`image_config` se mueve de `generation_config` a `response_format`.**
-  Ahora puedes especificar la configuración de salida de la imagen, como `aspect_ratio` y `image_size`, en una entrada `response_format` con `"type": "image"`.
+- **एपीआई, `response_mime_type` को हटाता है.** अब आपको `response_format` में, हर फ़ॉर्मैट एंट्री के लिए एमआईएमई टाइप तय करना होगा.
+- **`response_format` अब पॉलीमॉर्फिक ऑब्जेक्ट (या कलेक्शन) है.** हर एंट्री में, `type` डिस्क्रिमिनेटर (`text`, `audio`, `image`) और टाइप के हिसाब से फ़ील्ड होते हैं. आउटपुट के कई तरीके का अनुरोध करने के लिए, फ़ॉर्मैट एंट्री का कलेक्शन पास करें.
+- **`image_config`, `generation_config` से `response_format` में चला जाता है.**
+  अब आपको इमेज आउटपुट सेटिंग तय करनी होंगी. जैसे, `aspect_ratio` और `image_size`
+  एक `response_format` एंट्री में `"type": "image"` के साथ.
 
-### Resultados estructurados (JSON)
+### स्ट्रक्चर्ड आउटपुट (JSON)
 
-El esquema nuevo quita el campo `response_mime_type`. En su lugar, especifica el tipo de MIME y el esquema JSON dentro de un objeto `response_format` con `"type": "text"`.
+नए स्कीमा में, `response_mime_type` फ़ील्ड को हटा दिया गया है. इसके बजाय, `response_format` ऑब्जेक्ट में, एमआईएमई टाइप और JSON स्कीमा तय करें
+`"type": "text"`.
 
-#### Antes (heredado)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -681,7 +688,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Después (esquema nuevo)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -752,11 +759,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Configuración de la imagen
+### इमेज कॉन्फ़िगरेशन
 
-El nuevo esquema quita `image_config` de `generation_config`. Ahora puedes especificar la configuración de salida de la imagen en una entrada `response_format` con `"type": "image"`.
+नए स्कीमा में, `generation_config` से `image_config` को हटा दिया गया है. अब आपको
+इमेज आउटपुट सेटिंग तय करनी होंगी. इसके लिए, `response_format` एंट्री में `"type": "image"` का इस्तेमाल करें.
 
-#### Antes (heredado)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -805,7 +813,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Después (esquema nuevo)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -858,11 +866,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Configuración de audio
+### ऑडियो कॉन्फ़िगरेशन
 
-El esquema nuevo reemplaza `response_modalities: ["audio"]` por una entrada `response_format` de `"type": "audio"`.
+नए स्कीमा में, `response_modalities: ["audio"]` की जगह, `response_format` एंट्री का इस्तेमाल किया जाएगा.`"type": "audio"`
 
-#### Antes (heredado)
+#### पहले (लेगसी)
 
 ### Python
 
@@ -911,7 +919,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Después (esquema nuevo)
+#### बाद में (नया स्कीमा)
 
 ### Python
 
@@ -970,51 +978,53 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-Para solicitar varias modalidades de salida (por ejemplo, texto y audio juntos), pasa un array de entradas de formato a `response_format` en lugar de un solo objeto.
+आउटपुट के कई तरीके का अनुरोध करने के लिए (उदाहरण के लिए, टेक्स्ट और ऑडियो एक साथ), `response_format` में एक ऑब्जेक्ट के बजाय, फ़ॉर्मैट एंट्री का कलेक्शन पास करें.
 
-## Cómo migrar al nuevo esquema
+## नए स्कीमा पर माइग्रेट करने का तरीका
 
-### Usuarios del SDK
+### एसडीके का इस्तेमाल करने वाले लोग
 
-Actualiza a la versión más reciente del SDK (Python ≥2.0.0, JavaScript ≥2.0.0). El SDK te habilita automáticamente para usar el nuevo esquema. No se necesitan cambios de código más allá de actualizar la forma en que lees las respuestas (consulta los ejemplos anteriores). Ten en cuenta que solo se admite el esquema nuevo en estas versiones del SDK. Las versiones anteriores del SDK (Python 1.x.x, JavaScript 1.x.x) seguirán funcionando hasta que se quite el esquema heredado el **8 de junio de 2026**.
+एसडीके के नए वर्शन (Python ≥2.0.0, JavaScript ≥2.0.0) पर अपग्रेड करें. एसडीके, आपको नए स्कीमा में अपने-आप ऑप्ट-इन कर लेता है. इसके लिए, कोड में किसी तरह के बदलाव की ज़रूरत नहीं होती. आपको सिर्फ़ जवाब पढ़ने के तरीके को अपडेट करना होगा. इसके लिए, ऊपर दिए गए उदाहरण देखें. ध्यान दें कि एसडीके के इन वर्शन में, सिर्फ़ नए स्कीमा का इस्तेमाल किया जा सकता है. एसडीके के पुराने वर्शन (Python 1.x.x, JavaScript 1.x.x), **8 जून, 2026** को लेगसी स्कीमा हटाए जाने तक काम करते रहेंगे.
 
-### Usuarios de la API de REST
+### REST API का इस्तेमाल करने वाले लोग
 
-Agrega el encabezado `Api-Revision: 2026-05-20` a tus solicitudes para habilitar el nuevo esquema ahora. Después del **26 de mayo**, el esquema nuevo se convertirá en el predeterminado para todas las solicitudes. Puedes inhabilitar temporalmente la API con `Api-Revision: 2026-05-07` hasta el **8 de junio**, fecha en la que la API quitará de forma permanente el esquema heredado.
+नए स्कीमा में अभी ऑप्ट-इन करने के लिए, अपने अनुरोधों में `Api-Revision: 2026-05-20` हेडर जोड़ें. **26 मई** के बाद, नया स्कीमा सभी
+अनुरोधों के लिए डिफ़ॉल्ट स्कीमा बन जाएगा. **\*\*8 जून\*\* तक, `Api-Revision: 2026-05-07`
+का इस्तेमाल करके, अस्थायी तौर पर ऑप्ट-आउट किया जा सकता है. इसके बाद, एपीआई लेगसी स्कीमा को हमेशा के लिए हटा देगा.**
 
-### Cronograma
+### टाइमलाइन
 
-| Fecha | Fase | Usuarios del SDK | Usuarios de la API de REST |
+| तारीख | फ़ेज़ (चरण) | एसडीके का इस्तेमाल करने वाले लोग | REST API का इस्तेमाल करने वाले लोग |
 | --- | --- | --- | --- |
-| **7 de mayo** | Habilitar | Hay una nueva versión del SDK disponible (Python ≥2.0.0, JS ≥2.0.0). Actualiza tu cuenta para obtener el nuevo esquema automáticamente. | Agrega el encabezado `Api-Revision: 2026-05-20` para habilitar la opción. El valor predeterminado sigue siendo el heredado. |
-| **26 de mayo** | Volteo predeterminado | No es necesario que realices ninguna acción si ya realizaste la actualización. Los SDKs anteriores (Python 1.x.x, JS 1.x.x) aún funcionan, pero devuelven respuestas heredadas. | El nuevo esquema ahora es el predeterminado. Envía el encabezado `Api-Revision: 2026-05-07` para dejar de participar. |
-| **8 de junio** | Atardecer | Las versiones 1.x.x de los SDKs de Python y JS dejarán de funcionar para las llamadas a la API de Interactions. | Se quitó el esquema heredado de la API de Interactions. Se ignoró el encabezado `Api-Revision`. |
+| **7 मई** | ऑप्ट-इन करें | एसडीके का नया वर्शन उपलब्ध है (Python ≥2.0.0, JS ≥2.0.0). नए स्कीमा को अपने-आप पाने के लिए, अपग्रेड करें. | ऑप्ट-इन करने के लिए, `Api-Revision: 2026-05-20` हेडर जोड़ें. डिफ़ॉल्ट स्कीमा, लेगसी ही रहेगा. |
+| **26 मई** | डिफ़ॉल्ट सेटिंग बदलें | अगर पहले ही अपग्रेड कर लिया गया है, तो कुछ करने की ज़रूरत नहीं है. एसडीके के पुराने वर्शन (Python 1.x.x, JS 1.x.x) अब भी काम करेंगे. हालांकि, इनसे लेगसी स्कीमा के जवाब मिलेंगे. | नया स्कीमा अब डिफ़ॉल्ट स्कीमा है. ऑप्ट-आउट करने के लिए, `Api-Revision: 2026-05-07` हेडर भेजें. |
+| **8 जून** | सूर्यास्त | Interactions API कॉल के लिए, Python 1.x.x और JS 1.x.x एसडीके वर्शन काम नहीं करेंगे. | Interactions API के लिए, लेगसी स्कीमा हटा दिया गया है. `Api-Revision` हेडर को नज़रअंदाज़ किया जाएगा. |
 
-## Lista de tareas para la migración
+## माइग्रेशन की चेकलिस्ट
 
-### Esquema de pasos (`steps`)
+### स्टेप स्कीमा (`steps`)
 
-- Actualiza el código para leer el contenido de la respuesta del array `steps` en lugar de `outputs`. [Consulta ejemplos](#basic-unary).
-- Verifica que tu código controle los tipos de pasos `user_input` y `model_output`. [Consulta ejemplos](#basic-unary).
-- (Llamada a función) Actualiza el código para encontrar los pasos de `function_call` en el array `steps`. [Consulta ejemplos](#function-calling).
-- (Herramientas del servidor) Actualiza el código para controlar los pasos específicos de la herramienta (p.ej., `google_search_call`, `google_search_result`). [Consulta ejemplos](#server-side-tools).
-- (Historial sin estado) Actualiza la administración del historial para pasar el array `steps` en el campo `input` de la próxima solicitud. [Consulta los detalles](#stateless-history).
-- (Solo para transmisión) Actualiza el cliente para que escuche los nuevos tipos de eventos de SSE (`interaction.created`, `step.delta`, etc.). [Consulta ejemplos](#streaming).
+- जवाब के कॉन्टेंट को `outputs` के बजाय, `steps` कलेक्शन से पढ़ने के लिए कोड अपडेट करें. [उदाहरण देखें](#basic-unary).
+- पुष्टि करें कि आपका कोड, `user_input` और `model_output` दोनों तरह के स्टेप को हैंडल करता हो. [उदाहरण देखें](#basic-unary).
+- (फ़ंक्शन कॉलिंग) `steps` कलेक्शन में `function_call` स्टेप ढूंढने के लिए कोड अपडेट करें. [उदाहरण देखें](#function-calling).
+- (सर्वर-साइड टूल) टूल के हिसाब से स्टेप (जैसे, `google_search_call`, `google_search_result`) को हैंडल करने के लिए कोड अपडेट करें. [उदाहरण देखें](#server-side-tools).
+- (स्टेटलेस इतिहास) इतिहास को मैनेज करने के तरीके को अपडेट करें, ताकि अगले अनुरोध के `input` फ़ील्ड में `steps` कलेक्शन पास किया जा सके. [ज़्यादा जानकारी देखें](#stateless-history).
+- (सिर्फ़ स्ट्रीमिंग) नए SSE इवेंट टाइप (`interaction.created`, `step.delta` वगैरह) सुनने के लिए, क्लाइंट को अपडेट करें. [उदाहरण देखें](#streaming).
 
-### Configuración del formato de salida (`response_format`)
+### आउटपुट फ़ॉर्मैट कॉन्फ़िगरेशन (`response_format`)
 
-- Reemplaza `response_mime_type` por un campo `mime_type` dentro de `response_format`. [Consulta ejemplos](#structured-output).
-- Encapsula tu esquema JSON `response_format` existente dentro de un objeto `{"type": "text", "schema": ...}`. [Consulta ejemplos](#structured-output).
-- (Generación de imágenes) Mueve `image_config` de `generation_config` a una entrada `{"type": "image", ...}` en `response_format`. [Consulta ejemplos](#image-config).
-- (Generación de voz) Reemplaza `response_modalities=["audio"]` por una entrada `{"type": "audio"}` en `response_format`. [Consulta ejemplos](#audio-config).
-- (Multimodal) Convierte `response_format` de un solo objeto a un array cuando se solicitan varias modalidades de salida.
+- `response_mime_type` की जगह, `response_format` में `mime_type` फ़ील्ड का इस्तेमाल करें. [उदाहरण देखें](#structured-output).
+- अपने मौजूदा `response_format` JSON स्कीमा को, `{"type": "text", "schema": ...}` ऑब्जेक्ट में रैप करें. [उदाहरण देखें](#structured-output).
+- (इमेज जनरेशन) `generation_config` से `image_config` को हटाकर, `response_format` में `{"type": "image", ...}` एंट्री में ले जाएं. [उदाहरण देखें](#image-config).
+- (स्पीच जनरेशन) `response_modalities=["audio"]` की जगह, `response_format` में `{"type": "audio"}` एंट्री का इस्तेमाल करें. [उदाहरण देखें](#audio-config).
+- (मल्टीमॉडल) आउटपुट के कई तरीके का अनुरोध करते समय, `response_format` को एक ऑब्जेक्ट से कलेक्शन में बदलें.
 
-Enviar comentarios
+सुझाव भेजें
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Última actualización: 2026-07-07 (UTC)
+आखिरी बार 2026-07-07 (UTC) को अपडेट किया गया.
 
-¿Quieres brindar más información?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-07 (UTC)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-07 (UTC) को अपडेट किया गया."],[],[]]

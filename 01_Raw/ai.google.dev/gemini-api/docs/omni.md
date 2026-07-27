@@ -1,33 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/omni?hl=pl
-fetched_at: 2026-07-20T04:47:08.970332+00:00
-title: "Generowanie i edytowanie film\u00f3w za pomoc\u0105 Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/omni?hl=zh-TW
+fetched_at: 2026-07-27T04:43:29.146474+00:00
+title: "\u4f7f\u7528 Gemini Omni Flash \u751f\u6210\u53ca\u7de8\u8f2f\u5f71\u7247 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Prześlij opinię
+提供意見
 
-# Generowanie i edytowanie filmów za pomocą Gemini Omni Flash
+# 使用 Gemini Omni Flash 生成及編輯影片
 
-Gemini Omni Flash (`gemini-omni-flash-preview`) to wydajny model multimodalny zaprojektowany z myślą o szybkim generowaniu i edytowaniu filmów oraz sterowaniu ich charakterem.
-Gemini Omni ma te podstawowe funkcje, które odróżniają go od poprzednich modeli wideo:
+Gemini Omni Flash (`gemini-omni-flash-preview`) 是高效能多模態模型，專為高速生成影片、編輯影片和電影控制而設計。Gemini Omni 具備下列核心功能，與先前的影片模型有所不同：
 
-- **Natywna multimodalność:** przetwarza tekst, obrazy, dźwięk i wideo jednocześnie, co zapewnia bardziej spójne, konsekwentne i kontrolowane dane wyjściowe.
-- **Edytowanie w trybie konwersacyjnym:** umożliwia iteracyjne ulepszanie i edytowanie filmów za pomocą rozmowy w języku naturalnym. Jest dostępne dzięki [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl). Opisz, co chcesz zmienić, a model zastosuje zmiany, zachowując te części filmu, które chcesz pozostawić.
-- **Wiedza o świecie:** Gemini Omni łączy zrozumienie fizyki z wiedzą Gemini o historii, nauce i kontekście kulturowym, wypełniając lukę między fotorealizmem a znaczącą narracją.
+- **原生多模態：**可同時處理文字、圖片、音訊和影片，提供更連貫、一致且可控的輸出內容。
+- **對話式修圖：**透過 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 啟用，可讓您透過自然語言對話，反覆調整和編輯影片。描述想變更的內容，模型就會套用編輯效果，同時保留影片中你不想變更的部分。
+- **世界知識：**Gemini Omni 結合了物理學知識與 Gemini 的歷史、科學和文化背景知識，彌合了寫實主義與有意義的敘事之間的差距。
 
-## Generowanie filmu na podstawie tekstu
+## 文字轉影片生成
 
-Generowanie filmu na podstawie prompta tekstowego. Model generuje film z dźwiękiem na podstawie opisu tekstowego. Aby uzyskać jak najlepsze wyniki, pisz prompty zawierające szczegóły, takie jak opis sceny, ruch kamery, oświetlenie i nastrój.
+根據文字提示詞生成影片。模型會根據文字說明生成含音訊的影片。撰寫提示時，請加入場景描述、攝影機移動、燈光和情境等詳細資訊，以獲得最佳效果。
 
 ### Python
 
@@ -73,12 +72,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Schemat odpowiedzi REST
+### REST 回應結構定義
 
-Pole pomocnicze `interaction.output_video` jest **dostępne tylko w pakiecie SDK**.
-Pobierz dane wyjściowe wideo z tablicy `steps`, gdy używasz bezpośrednio interfejsu API REST.
+便利性欄位 `interaction.output_video` **僅適用於 SDK**。直接使用 REST API 時，請從 `steps` 陣列取得影片輸出內容。
 
-**Nieprzetworzona struktura JSON interfejsu REST:**
+**原始 REST JSON 結構：**
 
 ```
 {
@@ -103,9 +101,9 @@ Pobierz dane wyjściowe wideo z tablicy `steps`, gdy używasz bezpośrednio int
 }
 ```
 
-### Sterowanie formatem obrazu
+### 控制顯示比例
 
-Ustaw `aspect_ratio` na `"9:16"`, aby utworzyć filmy w orientacji pionowej. Domyślnie jest to orientacja pozioma (16:9).
+將 `aspect_ratio` 設為 `"9:16"`，即可製作直向影片。預設為橫向 (16:9)。
 
 ### Python
 
@@ -163,21 +161,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-## Generowanie filmu na podstawie obrazu
+## 以圖片生成影片
 
-Do prompta tekstowego możesz dodać obraz referencyjny. W zależności od prompta model zdecyduje, jak wykorzystać obraz. Jest to przydatne w przypadku zdjęć produktów, ilustracji lub fotografii.
+你可以提供參考圖像和文字提示詞。模型會根據提示決定如何使用圖片。這項功能可讓產品照片、插圖或相片栩栩如生。
 
-Poniższy przykład pokazuje, jak użyć obrazu referencyjnego przedstawiającego rysunek ryby wyskakującej z wody:
+以下範例說明如何使用魚兒躍出水面的手繪參考圖像：
 
-![Rysunek ryby wyskakującej z wody](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=pl)
+![魚躍出水面的繪圖](https://ai.google.dev/static/gemini-api/docs/images/fish-jumping-inputimage.png?hl=zh-tw)
 
-Wpisz ten prompt:
+輸入下列提示詞：
 
 ```
 turn this into realistic footage, using the drawing only as a guide for movement, do not show the drawing in the final video
 ```
 
-Aby wygenerować realistyczny film przedstawiający rysunek.
+生成寫實的繪圖影片。
 
 ### Python
 
@@ -232,10 +230,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Odwołanie do obiektu
+### 主題參考
 
-Możesz wygenerować film z określonymi obiektami podanymi jako obrazy referencyjne.
-Na przykład poniższy kod pokazuje, jak podać 2 obrazy kota i włóczki, aby wygenerować film przedstawiający kota bawiącego się włóczką.
+您可以生成影片，並加入參考圖像中的特定主體。
+舉例來說，下列程式碼說明如何提供貓和毛線的 2 張圖片，生成貓玩毛線的影片。
 
 ### Python
 
@@ -293,18 +291,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-### Parametr zadań
+### 工作參數
 
-Użyj parametru `task` w `video-config`, aby wyraźnie wskazać zamierzone działanie. Jeśli na przykład chcesz, aby model wygenerował film na podstawie obrazu, możesz ustawić parametr na `image_to_video`. Jeśli nie zostanie ustawiona, model wywnioskuje, czego oczekujesz, na podstawie prompta.
+在 `video-config` 中使用 `task` 參數清楚指出預期行為，例如，如要讓模型根據圖片生成影片，可以將參數設為 `image_to_video`。如未設定，模型會根據提示推斷您想要什麼。
 
-Dozwolone wartości:
+允許的值如下：
 
 - `text_to_video`
 - `image_to_video`
 - `reference_to_video`
 - `edit`
 
-Poniższy przykład pokazuje, jak ustawić tę wartość w przypadku przedstawionego wcześniej przykładu obrazu do filmu.
+以下範例說明如何為先前顯示的圖片設定此屬性，
+以影片為例。
 
 ### Python
 
@@ -382,12 +381,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Edytowanie filmów z zachowaniem stanu
+## 有狀態的影片編輯
 
-Generuj film i edytuj go iteracyjnie za pomocą dodatkowych promptów. Każda tura
-bazuje na poprzednim wyniku. Model zapamiętuje kontekst filmu i stosuje zmiany, zachowując elementy, o których nie wspominasz. Użyj `previous_interaction_id`, aby śledzić historię rozmowy i stan wygenerowanego filmu bez ponownego przesyłania poprzedniego filmu.
+生成影片，並使用後續提示詞反覆編輯。每一輪的結果都會以前一輪的結果為基礎。模型會記住影片內容，套用變更並保留您未提及的元素。使用 `previous_interaction_id` 追蹤對話記錄和生成的影片狀態，不必重新上傳先前的影片。
 
-Ten przykład pokazuje, jak wygenerować pierwszy film, a potem go edytować:
+以下範例說明如何生成第一部影片，然後進行編輯：
 
 ### Python
 
@@ -447,17 +445,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }'
 ```
 
-Przykład filmu początkowego:
+初始影片範例：
 
-Przykład edytowanego filmu:
+編輯影片的範例：
 
-Każda tura rozmowy generuje nowy film. Model rozumie kontekst z poprzednich tur, co pozwala wprowadzać stopniowe zmiany, takie jak dostosowywanie oświetlenia czy zamiana tła, bez konieczności ponownego opisywania całej sceny.
+對話中的每一輪都會產生新影片。模型會根據先前的對話瞭解情境，因此您不必重新描述整個場景，即可進行調整，例如調整光線和更換背景。
 
-### Edytowanie własnych filmów
+### 編輯自己的影片
 
-Prześlij filmy za pomocą [interfejsu Files API](https://ai.google.dev/gemini-api/docs/files?hl=pl), aby je edytować za pomocą Gemini Omni Flash.
+使用 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳影片，然後使用 Gemini Omni Flash 編輯影片。
 
-Poniższy przykład pokazuje, jak edytować ten oryginalny film:
+以下範例說明如何編輯原始影片：
 
 ### Python
 
@@ -562,12 +560,11 @@ curl -sS -w "\n[HTTP %{http_code}]\n" "https://generativelanguage.googleapis.com
 EOF
 ```
 
-Przykład edytowanego filmu:
+編輯影片的範例：
 
-## Pobieranie filmów za pomocą identyfikatora URI
+## 使用 URI 擷取影片
 
-Użyj parametru `delivery="uri"` w `response_format`, aby pobrać wygenerowane filmy o rozmiarze większym niż 4 MB.
-Zwraca to adres URI hostowany przez Google, który możesz sprawdzać, dopóki film nie będzie `ACTIVE` przed pobraniem.
+在 `response_format` 中使用 `delivery="uri"` 參數，擷取超過 4MB 的生成影片。這會傳回由 Google 代管的 URI，您可以輪詢該 URI，直到影片 `ACTIVE` 為止，再下載影片。
 
 ### Python
 
@@ -682,7 +679,7 @@ curl -L -X GET "https://generativelanguage.googleapis.com/v1beta/files/$FILE_ID:
 echo "Done! Video saved to output.mp4"
 ```
 
-**Nieprzetworzona struktura JSON REST (URI):**
+**原始 REST JSON 結構 (URI)：**
 
 ```
 {
@@ -707,109 +704,106 @@ echo "Done! Video saved to output.mp4"
 }
 ```
 
-## Sprawdzone metody
+## 最佳做法
 
-- **Używaj dostarczania URI w przypadku dużych filmów:** w przypadku filmów większych niż 4 MB (w razie dostępności – >720p) używaj `delivery="uri"` w `response_format`, aby uniknąć limitów rozmiaru ładunku.
-- **Zoptymalizowana wydajność:** ustaw `background=false`, `store=false` i `stream=false`, aby uzyskać szybsze, synchroniczne generowanie pojedynczych odpowiedzi. Pamiętaj, że ustawienie
-  `store=false` oznacza, że wygenerowanego filmu nie będzie można edytować w kolejnych
-  rundach za pomocą `previous_interaction_id`.
-- **Precyzja promptu:** szczegółowe informacje znajdziesz w sekcji [wskazówki dotyczące promptów](#prompt-guide).
+- **使用 URI 傳送大型影片：**如要傳送大於 4 MB 的影片 (如果有的話，解析度須高於 720p)，請使用 `response_format` 中的 `delivery="uri"`，避免超出酬載大小限制。
+- **最佳化效能：**設定 `background=false`、`store=false` 和 `stream=false`，加快同步一元生成速度。請注意，設定 `store=false` 後，生成的影片就無法在後續輪次中使用 `previous_interaction_id` 編輯。
+- **提示詞精確度：**詳情請參閱[提示詞指南](#prompt-guide)一節。
 
-## Ograniczenia
+## 限制
 
-- Przesyłanie i edytowanie obrazów przedstawiających osoby niepełnoletnie nie jest obsługiwane w Europejskim Obszarze Gospodarczym, Szwajcarii i Wielkiej Brytanii.
-- Przesyłanie i edytowanie obrazów przedstawiających niektóre rozpoznawalne osoby nie jest obsługiwane.
-- Edytowanie przesłanych filmów nie jest obecnie dostępne dla użytkowników w Europejskim Obszarze Gospodarczym (EOG), Szwajcarii i Wielkiej Brytanii (edytowanie filmów wygenerowanych przez model jest obsługiwane).
-- Przesyłanie referencji audio nie jest obsługiwane w bieżącej wersji interfejsu API.
-- Schemat interfejsu API akceptuje odniesienia do filmów trwających do 3 sekund, ale model nie przetwarza ich obecnie prawidłowo.
-- Odwoływanie się do wielu filmów lub wyciąganie z nich wniosków nie jest obsługiwane. Próba użycia promptów z wieloma filmami może spowodować pogorszenie wydajności modelu lub nieoczekiwane wyniki.
-- Wydłużanie filmów i interpolacja wideo (generowanie filmu między pierwszą a ostatnią klatką) nie są obsługiwane.
-- Edytowanie głosowe nie jest obsługiwane.
-- Udostępniona przepustowość nieobsługiwany.
-- Instrukcje systemowe, temperatura, `top_p`, sekwencje zatrzymania i negatywne prompty nie są obsługiwane (negatywne prompty możesz umieścić w zwykłym prompcie, np. „Nie rób X”).
-- Używanie filmów z YouTube jako źródła multimediów nie jest obsługiwane.
+- 歐洲經濟區、瑞士和英國不支援上傳及編輯含有未成年人的圖片。
+- 系統不支援上傳及編輯含有特定可辨識人物的圖片。
+- 歐洲經濟區、瑞士和英國的使用者目前無法編輯上傳的影片 (但可以編輯模型生成的影片)。
+- 目前的 API 版本不支援上傳音訊參考內容。
+- API 架構可接受長度最多 3 秒的影片參照，但模型目前無法正確處理。
+- 系統不支援參照或推理多部影片的內容。嘗試使用多部影片提示，可能會導致模型效能降低或輸出非預期的內容。
+- 不支援影片擴充功能和影片插補 (在第一幀和最後一幀之間生成影片)。
+- 不支援語音編輯。
+- 不支援佈建輸送量。
+- 不支援系統指令、溫度參數、`top_p`、停止序列和負面提示詞 (您可以將負面提示詞放在一般提示詞中，例如「請勿執行 X」)。
+- 系統不支援使用 YouTube 影片做為媒體來源。
 
-## Szczegóły techniczne
+## 技術詳細資料
 
-- Wszystkie wygenerowane filmy zawierają znak wodny SynthID, który jest niewidoczny dla widzów, ale można go wykryć programowo w celu weryfikacji pochodzenia.
-- Czas generowania filmów zależy od ich długości, rozdzielczości i bieżącego obciążenia interfejsu API. Generowanie dłuższych filmów w wyższej rozdzielczości zajmuje więcej czasu.
-- Filtry bezpieczeństwa treści są stosowane zarówno do promptów wejściowych, jak i wygenerowanych filmów (zależą od regionu). Prompty, które naruszają zasady użytkowania, będą blokowane.
-- Język angielski jest w pełni obsługiwany, ale inne języki nie zostały jeszcze ocenione, więc mogą działać, ale wyniki mogą się różnić.
+- 所有生成的影片都會加上 SynthID 浮水印，觀眾無法察覺，但系統可以偵測，以驗證來源。
+- 影片生成時間會因影片長度、解析度和目前的 API 負載而異。影片越長、解析度越高，生成時間就越長。
+- 內容安全篩選器會套用至輸入提示和生成的影片 (視您所在區域而定)。系統會封鎖違反使用政策的提示。
+- 系統完全支援英文 (EN)，但尚未評估其他語言，因此其他語言可能可以運作，但結果可能有所不同。
 
-## Przewodnik po tworzeniu promptów w Gemini Omni Flash
+## Gemini Omni Flash 提示詞指南
 
-Ta sekcja zawiera wskazówki i przykłady dotyczące skutecznego promptowania Gemini Omni Flash.
+本節提供提示和範例，說明如何有效提示 Gemini Omni Flash。
 
-### Pojedyncza scena
+### 單一場景
 
-Domyślnie Omni Flash spróbuje utworzyć film z kilkoma różnymi ujęciami.
-Spróbuje stworzyć ciekawą opowieść na podstawie promptu.
+根據預設，Omni Flash 會嘗試製作包含幾種不同鏡頭的影片。
+並根據提示嘗試製作有趣的敘述內容。
 
-Jeśli chcesz, aby wygenerowany film zawierał tylko jedną scenę, musisz to określić w prompcie:
+如要讓輸出影片只包含單一場景，請務必在提示中說明：
 
-- w jednej nieprzerwanej scenie,
-- w jednym ciągłym ujęciu.
-- Brak cięć sceny
+- 在單一不間斷的場景中
+- 一鏡到底
+- 沒有場景剪接
 
-Na przykład:
+例如：
 
 ```
 Continuous, unbroken handheld shot of a fluffy tabby cat sitting on a sunny windowsill, looking out into a leafy garden. The cat's tail twitches slowly, and its ears rotate slightly toward ambient noises. Sunbeams illuminate dust motes in the air. Sound design: Gentle breeze, distant bird chirps. No dialogue.
 ```
 
-### Usuwanie niechcianych elementów
+### 移除不想要的元素
 
-Jeśli wygenerowany film zawiera elementy, których nie chcesz, użyj prostych negatywnych promptów, aby ich uniknąć:
+如果生成的影片含有您不想要的內容，請加入簡單的負面提示來避免：
 
-- Brak dialogu
-- Bez ozdób
-- Brak dodatkowych efektów dźwiękowych
+- 沒有對話
+- 沒有裝飾
+- 沒有額外音效
 
-### Potwierdzenia do edycji
+### 編輯提示
 
-W przypadku edycji wideo najlepiej sprawdzają się proste prompty. Zbyt szczegółowe prompty mogą prowadzić do niezamierzonych zmian.
+簡單的提示最適合用於影片編輯。如果提示過於詳細，可能會導致非預期的變更。
 
-Oto więcej przykładów prostych promptów do edycji:
+以下提供更多簡單的編輯提示範例：
 
-- Przekształć ten film w anime
-- Załóż tej osobie modny kapelusz
-- Zmień oświetlenie, aby było bardziej dramatyczne
-- Zmień tekst na znaku na „Omni Flash”
+- 將這部影片轉換成動漫風格
+- 為這個人戴上時尚帽子
+- 讓亮度更戲劇化
+- 將招牌上的文字改為「Omni Flash」
 
-Podczas edytowania konkretnego aspektu filmu dodaj `"Keep everything else the same"`, aby zachować spójność wizualną.
+編輯影片的特定部分時，請加入 `"Keep everything else the same"`，確保視覺效果一致。
 
-Oto kilka przykładów, które pokazują, jak zastosować tę technikę:
+以下舉例說明如何套用這項技巧：
 
-- **Czego unikać:** `In the video of the man sitting on the sofa, please add a small
+- **請避免：** `In the video of the man sitting on the sofa, please add a small
   black cat that runs from the right side of the screen, jumps onto his lap,
   and then he starts to stroke its head while looking down.`
-  - **Uprość:** `Add a cat that jumps onto his lap, he begins to pet it.
+  - **簡化：** `Add a cat that jumps onto his lap, he begins to pet it.
     Keep everything else the same.`
-- **Czego unikać:** `Please remove the cell phone that the person is holding in
+- **請避免：** `Please remove the cell phone that the person is holding in
   their hand and fill in the background so it looks like they are just holding
   their hand empty.`
-  - **Uprość:** `Make the phone invisible. Keep everything else the
+  - **簡化：** `Make the phone invisible. Keep everything else the
     same.`
 
-### Promptowanie dźwięku
+### 提示音訊
 
-Domyślnie model będzie próbował wygenerować odpowiednią ścieżkę dźwiękową do filmu. Nie zawsze jest to pożądane. W prompcie możesz opisać typ dźwięku, który chcesz uzyskać. Jest to szczególnie ważne, jeśli chcesz użyć w filmie muzyki:
+根據預設，模型會嘗試為影片生成合適的音軌。這可能不符合您的需求。你可以使用提示詞描述想要的音訊類型。如果影片中含有音樂，這點就特別重要：
 
-- dodaj spokojną muzykę w tle,
-- Film ma energetyczny beat techno
-- W tle słychać cichą, metaliczną audycję radiową z piosenką.
+- 加入平靜的背景音樂
+- 影片採用高能量鐵克諾節奏
+- 背景音訊是低音質的無線電廣播，正在播放歌曲
 
-### Zdarzenia związane z czasem
+### 時間碼事件
 
-Możesz poprosić o wykonanie określonych czynności w określonych momentach filmu. Nie musisz używać precyzyjnej składni, możesz używać języka naturalnego. Jest to szczególnie przydatne przy tworzeniu własnych cięć scen, rytmu lub szybkich sekwencji.
-Przykłady znajdziesz poniżej:
+你可以提示在影片中的特定時間點發生某些事件，不需要使用精確的語法，只要使用自然語言即可。這項功能特別適合用來建立自己的場景剪接、節奏或快速連拍序列。請參閱以下範例：
 
-- Po 3 sekundach na scenę wchodzi kobieta.
-- W 5 sekundzie w tle zaczyna się refren.
-- Co 2 sekundy przełączanie na nową klatkę.
-- W szybkiej sekwencji co pół sekundy (12 klatek przy 24 klatkach na sekundę) zmieniaj scenę na nową lokalizację.
+- 3 秒後，一名女子進入畫面。
+- 背景音訊會在 5 秒時開始播放副歌。
+- 每 2 秒切換到新影格。
+- 在快速連拍序列中，每半秒 (24 fps 時為 12 個影格) 將場景變更為新地點。
 
-Możesz też użyć składni kodu czasowego:
+您也可以使用時間碼語法：
 
 ```
 [0-3s] A person is walking
@@ -817,37 +811,36 @@ Możesz też użyć składni kodu czasowego:
 [6-10s] They start running
 ```
 
-### Tworzenie metapromptów
+### 撰寫元提示詞
 
-Możesz poprosić Gemini Omni Flash o zwrócenie uwagi na ogólne cechy lub zasady generowania filmów:
+你可以問問 Gemini Omni Flash，請它注意影片生成的一般品質或原則：
 
-- Zwróć uwagę na mikrodetale, wyraz twarzy i timing, aby stworzyć bardzo bogatą w szczegóły, ale całkowicie naturalną scenę.
-- Opisuj postacie i środowiska bardzo szczegółowo.
-  Stosuj zasady projektowania kostiumów do postaci. Opisz dokładnie osoby, przedmioty i obiekty na scenie.
-- Dodaj do elementów tła wiele odpowiednich szczegółów, aby scena wyglądała realistycznie i naturalnie.
-- Utwórz film z szybko zmieniającymi się ujęciami, w którym co sekundę pojawia się inny rzadki `[thing]`. Dodaj do niego wesołą muzykę i tekst z nazwą obiektu.
+- 請考慮微細節、表情和時間點，創造非常豐富、細緻但完全自然的場景。
+- 請盡可能詳細描述角色和環境。
+  將服裝設計原則套用至角色。請務必詳細說明場景中的人物、物品和物件。
+- 在背景元素中加入大量適當的細節，讓場景感覺真實自然。
+- 製作快速連發影片，每 1 秒顯示一個不同的稀有 `[thing]`，搭配輕快的音樂，並加入文字標籤。
 
-### Tekst w filmach
+### 影片中的文字
 
-Możesz poprosić o uwzględnienie tekstu w filmie, a Gemini Omni wyrenderuje go w prawidłowy i czytelny sposób. Jeśli w filmie pojawia się tekst, nawet w elementach tła, warto określić, co ma on zawierać.
+你可以提示在影片中加入文字，Gemini Omni 會以正確且可讀的方式呈現。如果影片中會出現自然生成的文字 (即使是背景元素)，建議定義文字內容。
 
-- Po jednym słowie na ekranie: „czy, wiesz, że, Omni, potrafi, tworzyć, świetne, teksty?” Każde słowo pojawia się na sekundę w innym stylu animacji. Brak dialogów.
-- Jest znak drogowy z napisem „This is an AI generation by Omni”, witryna sklepowa z napisem „All you need AI” i samochód z tablicą rejestracyjną „OMN111”.
+- 一次一個字：「你知道 Omni 可以生成很棒的文字嗎？」每個字詞會以不同的動畫樣式顯示 1 秒。沒有對話。
+- 街上有一個寫著「這是 Omni 生成的 AI 圖片」的路牌、一個寫著「All you need AI」的店面，以及一輛車牌號碼為「OMN111」的車
 
-### Używanie tagów w promptach do określania ról obrazów
+### 在提示中使用標記設定圖片角色
 
-Za pomocą tagów możesz powiązać przesłane multimedia z określonymi rolami generowania. Dzięki temu możesz określić, czy każdy obraz jest klatką początkową czy referencyjną.
+你可以使用標記，將上傳的媒體繫結至特定生成角色。您可以藉此指定每張圖片是初始影格還是參照影格。
 
-#### 1. Proste tagi (zalecane)
+#### 1. 簡單標記 (建議)
 
-W prostych przypadkach, gdy role obrazów są jasne na podstawie promptu, możesz bezpośrednio przypisać obrazy do ról:
+如果提示清楚指出圖片的角色，您可以直接將圖片繫結至角色：
 
-- **`<FIRST_FRAME>`**: użyj obrazu jako klatki początkowej filmu, np. `<FIRST_FRAME> a woman is walking`
-- **`<IMAGE_REF_N>`**: użyj obrazu jako odniesienia, np. `in the
-  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (łączy odniesienie do stylu z pierwszego obrazu i odniesienie do obiektu z drugiego obrazu).
-  Odwołania do obrazów zaczynają się od 0.
+- **`<FIRST_FRAME>`**：將圖片做為影片的起始影格，例如：`<FIRST_FRAME> a woman is walking`
+- **`<IMAGE_REF_N>`**：將圖片做為參考，例如：`in the
+  style of <IMAGE_REF_0> a woman <IMAGE_REF_1> is walking` (結合第一張圖片的風格參考和第二張圖片的主體參考)。圖片參照從 0 開始。
 
-Oto przykład z 6 obrazami referencyjnymi:
+以下是使用 6 張參考圖片的範例：
 
 ```
 [0-3s] A studio fashion sequence. Starting with woman <IMAGE_REF_0>, she is holding <IMAGE_REF_1>
@@ -855,37 +848,37 @@ Oto przykład z 6 obrazami referencyjnymi:
 [6-10s] And finally another woman <IMAGE_REF_4> who is holding <IMAGE_REF_5> while walking.
 ```
 
-#### 2. Wyraźne deklaracje
+#### 2. 明確宣告
 
-W bardziej złożonych przypadkach, gdy masz wiele obrazów i wiele ról, możesz używać tagów z wyraźnymi prefiksami w połączeniu z sufiksami w języku naturalnym.
+如果有多張圖片和多個角色，情況較為複雜，可以使用明確的前置字元標記，搭配自然語言指令後置字元。
 
-- **Deklarowanie źródeł i obrazów referencyjnych:**
-  - `[# Sources <FIRST_FRAME>@Image1]` użyje pierwszego obrazu jako klatki początkowej.
-  - `[# References <IMAGE_REF_0>@Image1]` użyje pierwszego obrazu jako odniesienia.
-  - `[# References <IMAGE_REF_1>@Image2]` użyje drugiego obrazu jako referencyjnego.
-  - `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` użyje obu obrazów jako przykładów.
-  - `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` użyje pierwszego obrazu jako klatki początkowej, a drugiego jako obrazu referencyjnego.
-- **Instrukcje**: dodaj instrukcje na samym końcu prompta:
-  - Klatka początkowa: `"Use this image as the starting frame."`
-  - W przypadku obrazów referencyjnych: `"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
+- **聲明來源和參考圖片**：
+  - `[# Sources <FIRST_FRAME>@Image1]` 會將第一張圖片做為起始影格。
+  - `[# References <IMAGE_REF_0>@Image1]` 會以第一張圖片做為參考。
+  - `[# References <IMAGE_REF_1>@Image2]` 會以第二張圖片做為參考。
+  - `[# References <IMAGE_REF_0>@Image1 <IMAGE_REF_1>@Image2]` 會將兩張圖片做為參考。
+  - `[# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2]` 會使用第一張圖片做為起始影格，並以第二張圖片做為參考。
+- **引導式指令**：在提示的最後加入引導式指令：
+  - 起始影格：`"Use this image as the starting frame."`
+  - 參考圖像：`"Use the given image(s) as references for video generation. The images should not be used as literal initial frames."`
 
-Przykładowy rozbudowany prompt:
+範例擴充提示：
 
 ```
 [# Sources <FIRST_FRAME>@Image1] [# References <IMAGE_REF_0>@Image2] a woman <IMAGE_REF_0> is walking. Use Image1 as the starting frame. Use Image2 as a reference for the video generation.
 ```
 
-## Co dalej?
+## 後續步驟
 
-- Zacznij korzystać z Gemini Omni Flash, eksperymentując w [Omni Quickstart Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=pl).
-- Dowiedz się, jak pisać jeszcze lepsze prompty, korzystając z naszego [wprowadzenia do projektowania promptów](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=pl).
+- 如要開始使用 Gemini Omni Flash，請在 [Omni 快速入門 Colab](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_Omni.ipynb?hl=zh-tw) 中進行實驗。
+- 如要瞭解如何撰寫更有效的提示，請參閱「[提示設計簡介](https://ai.google.dev/gemini-api/docs/prompting-intro?hl=zh-tw)」。
 
-Prześlij opinię
+提供意見
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Ostatnia aktualizacja: 2026-07-06 UTC.
+上次更新時間：2026-07-06 (世界標準時間)。
 
-Chcesz przekazać coś jeszcze?
+想進一步說明嗎？
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-06 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-06 (世界標準時間)。"],[],[]]

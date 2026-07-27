@@ -1,50 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ar
-fetched_at: 2026-07-20T04:43:04.340018+00:00
-title: "\u0641\u0647\u0645 \u0627\u0644\u0641\u064a\u062f\u064a\u0648 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=tr
+fetched_at: 2026-07-27T04:41:15.908081+00:00
+title: "Video anlama \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-# فهم الفيديو
+# Video anlama
 
-> لمعرفة المزيد حول إنشاء الفيديوهات، اطّلِع على دليل [Veo](https://ai.google.dev/gemini-api/docs/video?hl=ar).
+> Video üretimi hakkında bilgi edinmek için [Veo](https://ai.google.dev/gemini-api/docs/video?hl=tr) kılavuzuna bakın.
 
-يمكن لنماذج Gemini معالجة الفيديوهات، ما يتيح العديد من حالات الاستخدام المتقدّمة للمطوّرين
-التي كانت تتطلّب في السابق نماذج خاصة بمجالات معيّنة.
-تشمل بعض قدرات Gemini المرئية ما يلي: وصف الفيديوهات وتقسيمها واستخراج المعلومات منها، والإجابة عن أسئلة حول محتوى الفيديو، والإشارة إلى طوابع زمنية محدّدة ضمن الفيديو.
+Gemini modelleri, videoları işleyebilir. Bu sayede, geçmişte alana özel modellerin gerekli olduğu birçok yeni geliştirici kullanım alanı mümkün olur.
+Gemini'ın bazı görme özellikleri şunlardır: videoları açıklama, segmentlere ayırma ve videolardan bilgi ayıklama, video içeriğiyle ilgili soruları yanıtlama ve videodaki belirli zaman damgalarına başvurma.
 
-يمكنك تقديم فيديوهات كمدخلات إلى Gemini بالطرق التالية:
+Gemini'a giriş olarak videoları aşağıdaki şekillerde sağlayabilirsiniz:
 
-| طريقة الإرسال | الحد الأقصى للحجم | حالة الاستخدام المقترَحة |
+| Giriş yöntemi | Maks. boyut | Önerilen kullanım alanı |
 | --- | --- | --- |
-| [File API](#upload-video) | ‫20 غيغابايت (مدفوعة) / 2 غيغابايت (مجانية) | الملفات الكبيرة (100 ميغابايت أو أكثر) والفيديوهات الطويلة (10 دقائق أو أكثر) والملفات القابلة لإعادة الاستخدام |
-| [تسجيل Cloud Storage](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar#registration) | ‫2 غيغابايت (لكل ملف، بدون حدود لمساحة التخزين) | الملفات الكبيرة (100 ميغابايت أو أكثر) والفيديوهات الطويلة (10 دقائق أو أكثر) والملفات الدائمة والقابلة لإعادة الاستخدام |
-| [البيانات المضمّنة](#inline-video) | ‫< 100 ميغابايت | الملفات الصغيرة (أقل من 100 ميغابايت) والمدّة القصيرة (أقل من دقيقة واحدة) والمدخلات لمرة واحدة |
-| [عناوين URL على YouTube](#youtube) | لا ينطبق | الفيديوهات العلنية على YouTube |
+| [File API](#upload-video) | 20 GB (ücretli) / 2 GB (ücretsiz) | Büyük dosyalar (100 MB'tan büyük), uzun videolar (10 dakikadan uzun), yeniden kullanılabilir dosyalar. |
+| [Cloud Storage Kaydı](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr#registration) | 2 GB (dosya başına, depolama alanı sınırı yoktur) | Büyük dosyalar (100 MB'tan büyük), uzun videolar (10 dakikadan uzun), kalıcı ve yeniden kullanılabilir dosyalar. |
+| [Satır İçi Veriler](#inline-video) | < 100MB | Küçük dosyalar (<100 MB), kısa süre (<1 dakika), tek seferlik girişler. |
+| [YouTube URL'leri](#youtube) | Yok | Herkese açık YouTube videoları. |
 
-> **ملاحظة:** ننصح باستخدام [File API](#upload-video) في معظم حالات الاستخدام، خاصةً للملفات التي يزيد حجمها عن 100 ميغابايت أو عندما تريد إعادة استخدام الملف في عدة طلبات.
+> **Not:** [File API](#upload-video), özellikle 100 MB'tan büyük dosyalar için veya dosyayı birden fazla istekte yeniden kullanmak istediğinizde çoğu kullanım alanı için önerilir.
 
-للتعرّف على طرق إدخال الملفات الأخرى، مثل استخدام عناوين URL أو ملفات خارجية
-مخزّنة في Google Cloud، راجِع دليل
-[طرق إدخال الملفات](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar).
+Harici URL'leri veya Google Cloud'da depolanan dosyaları kullanma gibi diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
 
-### تحميل ملف فيديو
+### Video dosyası yükleme
 
-ينزّل الرمز التالي فيديو نموذجيًا ويحمّله باستخدام [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar)،
-وينتظر إلى أن تتم معالجته، ثم يستخدم مرجع الملف الذي تم تحميله
-لتلخيص الفيديو.
+Aşağıdaki kod, örnek bir videoyu indirir, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yükler, işlenmesini bekler ve ardından yüklenen dosya referansını kullanarak videoyu özetler.
 
 ### Python
 
@@ -169,18 +164,16 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 jq -r ".candidates[].content.parts[].text" response.json
 ```
 
-استخدِم دائمًا Files API عندما يكون الحجم الإجمالي للطلب (بما في ذلك الملف، والنص
-المطلوب، وتعليمات النظام، وما إلى ذلك) أكبر من 20 ميغابايت، أو عندما تكون مدة الفيديو
-كبيرة، أو إذا كنت تنوي استخدام الفيديو نفسه في طلبات متعددة.
-تقبل File API تنسيقات ملفات الفيديو مباشرةً.
+Toplam istek boyutu (dosya, metin istemi, sistem talimatları vb. dahil) 20 MB'tan büyükse, video süresi uzunsa veya aynı videoyu birden fazla istemde kullanmayı planlıyorsanız her zaman Files API'yi kullanın.
+File API, video dosyası biçimlerini doğrudan kabul eder.
 
-لمزيد من المعلومات حول العمل باستخدام ملفات الوسائط، يُرجى الاطّلاع على [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar).
+Medya dosyalarıyla çalışma hakkında daha fazla bilgi edinmek için [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) başlıklı makaleyi inceleyin.
 
-### تمرير بيانات الفيديو مضمّنة
+### Video verilerini satır içi olarak iletme
 
-بدلاً من تحميل ملف فيديو باستخدام File API، يمكنك تمرير فيديوهات أصغر حجمًا مباشرةً في الطلب إلى `generateContent`. هذه الطريقة مناسبة للفيديوهات القصيرة التي يقلّ إجمالي حجم طلبها عن 20 ميغابايت.
+Dosya API'sini kullanarak video dosyası yüklemek yerine, daha küçük videoları doğrudan `generateContent` isteğinde iletebilirsiniz. Bu, toplam istek boyutu 20 MB'tan küçük olan kısa videolar için uygundur.
 
-في ما يلي مثال على تقديم بيانات الفيديو المضمّن:
+Satır içi video verileri sağlama örneğini burada bulabilirsiniz:
 
 ### Python
 
@@ -265,9 +258,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }' 2> /dev/null
 ```
 
-### تمرير عناوين URL لفيديوهات YouTube
+### YouTube URL'lerini iletme
 
-يمكنك تمرير عناوين URL على YouTube مباشرةً إلى Gemini API كجزء من طلبك على النحو التالي:
+YouTube URL'lerini, isteğinizin bir parçası olarak doğrudan Gemini API'ye aşağıdaki şekilde iletebilirsiniz:
 
 ### Python
 
@@ -373,20 +366,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }' 2> /dev/null
 ```
 
-**القيود:**
+**Sınırlamalar:**
 
-- في المستوى المجاني، لا يمكنك تحميل أكثر من 8 ساعات من فيديوهات على YouTube يوميًا.
-- بالنسبة إلى المستوى المدفوع، لا يوجد حد أقصى استنادًا إلى مدة الفيديو.
-- بالنسبة إلى النماذج الأقدم من Gemini 2.5، يمكنك تحميل فيديو واحد فقط لكل طلب. بالنسبة إلى Gemini 2.5 والإصدارات الأحدث، يمكنك تحميل 10 فيديوهات بحدّ أقصى لكل طلب.
-- يمكنك تحميل فيديوهات علنية فقط (وليس فيديوهات خاصة أو غير مُدرَجة).
+- Ücretsiz katmanda, günde 8 saatten fazla YouTube videosu yükleyemezsiniz.
+- Ücretli katmanda video uzunluğuna göre bir sınırlama yoktur.
+- Gemini 2.5'ten önceki modellerde, istek başına yalnızca 1 video yükleyebilirsiniz. Gemini 2.5 ve sonraki modellerde, istek başına en fazla 10 video yükleyebilirsiniz.
+- Yalnızca herkese açık videoları (gizli veya liste dışı videoları değil) yükleyebilirsiniz.
 
-## استخدام التخزين المؤقّت للسياق في الفيديوهات الطويلة
+## Uzun videolarda bağlamı önbelleğe alma özelliğini kullanma
 
-بالنسبة إلى الفيديوهات التي تزيد مدتها عن 10 دقائق أو عندما تخطّط لإجراء طلبات متعددة على ملف الفيديو نفسه، استخدِم [التخزين المؤقت للسياق](https://ai.google.dev/gemini-api/docs/caching?hl=ar) لتقليل التكاليف وتحسين وقت الاستجابة. تتيح لك ميزة التخزين المؤقت للسياق معالجة الفيديو مرة واحدة وإعادة استخدام الرموز المميزة لطلبات البحث اللاحقة، ما يجعلها مثالية لجلسات المحادثة أو التحليل المتكرر للمحتوى الطويل.
+10 dakikadan uzun videolar veya aynı video dosyasına birden fazla istek göndermeyi planladığınız durumlarda, maliyetleri düşürmek ve gecikmeyi azaltmak için [bağlam önbelleğe almayı](https://ai.google.dev/gemini-api/docs/caching?hl=tr) kullanın. Bağlamı önbelleğe alma özelliği, videoyu bir kez işlemenize ve sonraki sorgularda parçaları yeniden kullanmanıza olanak tanır. Bu nedenle, sohbet oturumları veya uzun içeriklerin tekrar tekrar analiz edilmesi için idealdir.
 
-## الرجوع إلى الطوابع الزمنية في المحتوى
+## İçerikteki zaman damgalarına bakın
 
-يمكنك طرح أسئلة حول نقاط زمنية محدّدة في الفيديو باستخدام طوابع زمنية بالتنسيق `MM:SS`.
+`MM:SS` biçimindeki zaman damgalarını kullanarak videodaki belirli zaman noktaları hakkında soru sorabilirsiniz.
 
 ### Python
 
@@ -417,13 +410,12 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
 ```
 
-## استخراج إحصاءات تفصيلية من الفيديو
+## Videodan ayrıntılı analizler çıkarma
 
-توفّر نماذج Gemini إمكانات قوية لفهم محتوى الفيديو من خلال معالجة المعلومات من كل من **محتوى الصوت والمرئي**. يتيح لك ذلك استخراج مجموعة كبيرة من التفاصيل، بما في ذلك إنشاء أوصاف لما يحدث في فيديو والإجابة عن الأسئلة حول محتواه.
+Gemini modelleri, hem **ses hem de görsel** akışlardaki bilgileri işleyerek video içeriklerini anlamak için güçlü özellikler sunar. Bu sayede, videoda olanların açıklamalarını oluşturma ve içeriğiyle ilgili soruları yanıtlama da dahil olmak üzere zengin bir ayrıntı kümesi çıkarabilirsiniz.
 
-بالنسبة إلى الأوصاف المرئية، يأخذ النموذج عيّنات من الفيديو بمعدّل **لقطة واحدة
-في الثانية** (FPS). يعمل معدّل أخذ العيّنات التلقائي هذا بشكل جيد مع معظم المحتوى، ولكن يجب الانتباه إلى أنّه قد لا يرصد التفاصيل في الفيديوهات التي تتضمّن حركة سريعة أو تغييرات سريعة في المشاهد.
-بالنسبة إلى المحتوى الذي يتضمّن الكثير من الحركة، ننصحك [بضبط عدد اللقطات في الثانية المخصّص](#custom-frame-rate).
+Görsel açıklamalar için model, videoyu **saniyede 1 kare** (FPS) hızında örnekler. Bu varsayılan örnekleme hızı çoğu içerik için uygundur ancak hızlı hareketlerin veya hızlı sahne değişikliklerinin olduğu videolarda ayrıntılar atlanabilir.
+Bu tür yüksek hareketli içerikler için [özel bir kare hızı ayarlamayı](#custom-frame-rate) düşünebilirsiniz.
 
 ### Python
 
@@ -453,13 +445,13 @@ const prompt = "Describe the key events in this video, providing both audio and 
 PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
 ```
 
-## تخصيص معالجة الفيديو
+## Video işlemeyi özelleştirme
 
-يمكنك تخصيص معالجة الفيديو في Gemini API من خلال ضبط فواصل زمنية لتقطيع الفيديو أو تقديم عيّنات مخصّصة لمعدّل اللقطات في الثانية.
+Kırpma aralıkları ayarlayarak veya özel kare hızı örnekleme sağlayarak Gemini API'de video işlemeyi özelleştirebilirsiniz.
 
-### ضبط الفواصل الزمنية لقص الفيديو
+### Kırpma aralıklarını ayarlama
 
-يمكنك قص الفيديو من خلال تحديد `videoMetadata` مع إزاحة البدء والانتهاء.
+Başlangıç ve bitiş zamanlarını belirterek `videoMetadata` ile video klip oluşturabilirsiniz.
 
 ### Python
 
@@ -526,9 +518,9 @@ console.log(response.text)
 await main();
 ```
 
-### ضبط عدد اللقطات في الثانية بشكل مخصّص
+### Özel kare hızı ayarlama
 
-يمكنك ضبط أخذ عيّنات مخصّص لعدد اللقطات في الثانية من خلال تمرير الوسيطة `fps` إلى `videoMetadata`.
+`fps` işlevine `videoMetadata` bağımsız değişkenini ileterek özel kare hızı örneklemesi ayarlayabilirsiniz.
 
 ### Python
 
@@ -557,11 +549,11 @@ response = client.models.generate_content(
 )
 ```
 
-يتم تلقائيًا أخذ عيّنة من الفيديو بمعدل لقطة واحدة في الثانية (FPS). ننصحك بضبط عدد اللقطات في الثانية على قيمة منخفضة (< 1) للفيديوهات الطويلة. ويكون ذلك مفيدًا بشكل خاص للفيديوهات الثابتة في معظمها (مثل المحاضرات). استخدِم عددًا أكبر من اللقطات في الثانية للفيديوهات التي تتطلّب تحليلًا زمنيًا دقيقًا، مثل فهم المشاهد السريعة أو تتبُّع الحركة السريعة.
+Varsayılan olarak videodan saniyede 1 kare (FPS) örneklenir. Uzun videolar için düşük FPS (< 1) ayarlamak isteyebilirsiniz. Bu özellik, özellikle çoğunlukla statik olan videolar (ör. dersler) için kullanışlıdır. Hızlı aksiyonu anlama veya yüksek hızlı hareket izleme gibi ayrıntılı zamansal analiz gerektiren videolar için daha yüksek bir FPS kullanın.
 
-## تنسيقات الفيديو المتوافقة
+## Desteklenen video biçimleri
 
-يتوافق Gemini مع أنواع MIME التالية لتنسيقات الفيديو:
+Gemini aşağıdaki video biçimi MIME türlerini destekler:
 
 - `video/mp4`
 - `video/mpeg`
@@ -573,50 +565,48 @@ response = client.models.generate_content(
 - `video/wmv`
 - `video/3gpp`
 
-## التفاصيل الفنية حول الفيديوهات
+## Videolarla ilgili teknik ayrıntılar
 
-- **النماذج والسياق المتوافقان**: يمكن لجميع نماذج Gemini معالجة بيانات الفيديو.
-  - يمكن للنماذج التي تتضمّن قدرة استيعاب تبلغ مليون رمز مميّز معالجة فيديوهات تصل مدتها إلى ساعة واحدة بدقة الوسائط التلقائية أو 3 ساعات بدقة الوسائط المنخفضة.
-- **معالجة File API**: عند استخدام File API، يتم تخزين الفيديوهات بمعدّل لقطة واحدة في الثانية (FPS) وتتم معالجة الصوت بمعدّل 1 كيلوبت في الثانية (قناة واحدة).
-  تتم إضافة الطوابع الزمنية كل ثانية.
-  - هذه المعدّلات عرضة للتغيير في المستقبل لتحسين الاستدلال.
-  - يمكنك تجاوز معدّل أخذ العيّنات البالغ إطارًا واحدًا في الثانية من خلال [ضبط عدد اللقطات في الثانية المخصّص](#custom-frame-rate).
-- **احتساب الرموز المميزة**: يتم تقسيم كل ثانية من الفيديو إلى رموز مميزة على النحو التالي:
-  - اللقطات الفردية (يتم أخذ عينات بمعدّل لقطة واحدة في الثانية):
-    - إذا تم ضبط قيمة [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=ar#MediaResolution) على منخفضة، يتم تقسيم اللقطات إلى 66 رمزًا مميزًا لكل لقطة.
-    - بخلاف ذلك، يتم تقسيم اللقطات إلى رموز مميزة بمعدل 258 رمزًا مميزًا لكل لقطة.
-  - الصوت: 32 رمزًا مميزًا في الثانية
-  - يتم تضمين البيانات الوصفية أيضًا.
-  - الإجمالي: حوالي 300 رمز مميز لكل ثانية من الفيديو بدقة الوسائط التلقائية، أو 100 رمز مميز لكل ثانية من الفيديو بدقة الوسائط المنخفضة
-- **دقة الوسائط**: يتيح Gemini 3 التحكّم بدقة في معالجة الصور المتعدّدة الوسائط باستخدام المَعلمة `media_resolution`. تحدّد المَعلمة
-  `media_resolution`
-  **الحد الأقصى لعدد الرموز المميزة المخصّصة لكل صورة إدخال أو إطار فيديو.**
-  تؤدي الدقة الأعلى إلى تحسين قدرة النموذج على قراءة النصوص الدقيقة أو تحديد التفاصيل الصغيرة، ولكنها تزيد من استخدام الرموز المميزة ووقت الاستجابة.
+- **Desteklenen modeller ve bağlam**: Tüm Gemini modelleri video verilerini işleyebilir.
+  - 1 milyon parçalık bağlam penceresine sahip modeller, 1 saate kadar uzunluktaki videoları varsayılan medya çözünürlüğünde veya 3 saate kadar uzunluktaki videoları düşük medya çözünürlüğünde işleyebilir.
+- **File API işleme**: File API kullanılırken videolar saniyede 1 kare (FPS) hızında depolanır ve ses 1 Kbps (tek kanal) hızında işlenir.
+  Zaman damgaları her saniye eklenir.
+  - Bu oranlar, çıkarım iyileştirmeleri için gelecekte değişebilir.
+  - [Özel bir kare hızı ayarlayarak](#custom-frame-rate) 1 FPS örnekleme hızını geçersiz kılabilirsiniz.
+- **Jeton hesaplama**: Videonun her saniyesi aşağıdaki şekilde jetonlaştırılır:
+  - Tek tek kareler (1 FPS'de örneklenir):
+    - [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=tr#MediaResolution) düşük olarak ayarlanırsa kareler, kare başına 66 jeton olacak şekilde jetonlaştırılır.
+    - Aksi takdirde, kareler kare başına 258 jeton olacak şekilde jetonlaştırılır.
+  - Ses: Saniyede 32 jeton.
+  - Meta veriler de dahildir.
+  - Toplam: Varsayılan medya çözünürlüğünde video saniyesi başına yaklaşık 300 jeton veya düşük medya çözünürlüğünde video saniyesi başına 100 jeton.
+- **Medya çözünürlüğü**: Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol imkanı sunar. `media_resolution` parametresi, **giriş resim veya video karesi başına ayrılan maksimum jeton sayısını** belirler.
+  Daha yüksek çözünürlükler, modelin küçük metinleri okuma veya küçük ayrıntıları belirleme becerisini artırır ancak jeton kullanımını ve gecikmeyi de artırır.
 
-  للحصول على مزيد من التفاصيل حول المَعلمة وكيفية تأثيرها في عمليات حساب الرموز المميزة، يمكنك الاطّلاع على دليل [دقة الوسائط](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ar).
-- **تنسيق الطابع الزمني**: عند الإشارة إلى لحظات معيّنة في فيديو ضمن طلبك، استخدِم التنسيق `MM:SS` (مثلاً، `01:15` للدقيقة الواحدة و15 ثانية).
-- **أفضل الممارسات**:
+  Parametre ve jeton hesaplamalarını nasıl etkileyebileceği hakkında daha fazla bilgi için [medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr) kılavuzuna bakın.
+- **Zaman damgası biçimi**: İsteminizde bir videodaki belirli anlardan bahsederken `MM:SS` biçimini kullanın (ör. 1 dakika 15 saniye için `01:15`).
+- **En iyi uygulamalar**:
 
-  - استخدِم فيديو واحدًا فقط لكل طلب للحصول على أفضل النتائج.
-  - في حال الجمع بين نص وفيديو واحد، ضَع طلب النص *بعد* جزء الفيديو في مصفوفة `contents`.
-  - يُرجى العِلم أنّ تسلسلات اللقطات السريعة قد تفقد بعض التفاصيل بسبب معدّل أخذ العيّنات البالغ لقطة واحدة في الثانية. ننصحك بإبطاء سرعة هذه المقاطع إذا لزم الأمر.
+  - En iyi sonuçları elde etmek için istem isteği başına yalnızca bir video kullanın.
+  - Metin ve tek bir videoyu birleştiriyorsanız metin istemini `contents` dizisinde video bölümünden *sonra* yerleştirin.
+  - Hızlı hareket dizilerinin, 1 FPS örnekleme hızı nedeniyle ayrıntı kaybedebileceğini unutmayın. Gerekirse bu tür klipleri yavaşlatabilirsiniz.
 
-## الخطوات التالية
+## Sırada ne var?
 
-يوضّح هذا الدليل كيفية تحميل ملفات الفيديو وإنشاء نواتج نصية من مدخلات الفيديو. لمزيد من المعلومات، يُرجى الاطّلاع على المراجع التالية:
+Bu kılavuzda, video dosyalarının nasıl yükleneceği ve video girişlerinden nasıl metin çıkışları oluşturulacağı gösterilmektedir. Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
 
-- [تعليمات النظام](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar#system-instructions):
-  تتيح لك تعليمات النظام توجيه سلوك النموذج استنادًا إلى احتياجاتك وحالات الاستخدام المحدّدة.
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ar): مزيد من المعلومات حول تحميل الملفات وإدارتها لاستخدامها مع Gemini
-- [استراتيجيات إنشاء الطلبات](https://ai.google.dev/gemini-api/docs/files?hl=ar#prompt-guide): تتيح واجهة Gemini API إمكانية إنشاء الطلبات باستخدام بيانات نصية وصور وملفات صوت وفيديوهات، ويُعرف ذلك أيضًا باسم إنشاء الطلبات المتعددة الوسائط.
-- [إرشادات الأمان](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ar): في بعض الأحيان، تقدّم نماذج الذكاء الاصطناعي التوليدي نتائج غير متوقعة، مثل نتائج غير دقيقة أو متحيزة أو مسيئة. تُعد المعالجة اللاحقة والتقييم من قِبل فريق ضروريَين للحدّ من مخاطر الضرر الناجم عن هذه النتائج.
+- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
+  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr): Gemini ile kullanılacak dosyaları yükleme ve yönetme hakkında daha fazla bilgi edinin.
+- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istemi destekler.
+- [Güvenlik yönergeleri](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr): Üretken yapay zeka modelleri bazen yanlış, önyargılı veya rahatsız edici gibi beklenmedik çıkışlar üretebilir. Bu tür çıkışlardan kaynaklanan zarar riskini sınırlamak için sonradan işleme ve uzman değerlendirmesi şarttır.
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-تاريخ التعديل الأخير: 2026-06-23 (حسب التوقيت العالمي المتفَّق عليه)
+Son güncelleme tarihi: 2026-06-23 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-23 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-23 UTC."],[],[]]

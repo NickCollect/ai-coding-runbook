@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ar
-fetched_at: 2026-07-20T04:33:43.673888+00:00
-title: "\u062f\u0631\u062c\u0629 \u062f\u0642\u0629 \u0627\u0644\u0648\u0633\u0627\u0626\u0637 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ja
+fetched_at: 2026-07-27T04:47:55.924632+00:00
+title: "\u30e1\u30c7\u30a3\u30a2\u306e\u89e3\u50cf\u5ea6 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-إرسال ملاحظات
+フィードバックを送信
 
-# درجة دقة الوسائط
+# メディアの解像度
 
-يتحكّم المَعلمة `media_resolution` في طريقة معالجة Gemini API لمدخلات الوسائط، مثل الصور والفيديوهات ومستندات PDF، من خلال تحديد **الحد الأقصى لعدد الرموز المميزة** المخصّص لمدخلات الوسائط، ما يتيح لك تحقيق التوازن بين جودة الردود ووقت الاستجابة والتكلفة. للاطّلاع على الإعدادات المختلفة والقيم التلقائية وكيفية تطابقها مع الرموز المميزة، يُرجى الانتقال إلى قسم [عدد الرموز المميزة](#token-counts).
+`media_resolution` パラメータは、メディア入力に割り当てられる**トークンの最大数**を決定することで、Gemini API が画像、動画、PDF ドキュメントなどのメディア入力を処理する方法を制御します。これにより、回答の品質とレイテンシ、費用のバランスを取ることができます。さまざまな設定、デフォルト値、トークンとの対応については、[トークン数](#token-counts)のセクションをご覧ください。
 
-يمكنك ضبط دقة الوسائط بطريقتَين:
+メディアの解像度を構成する方法は 2 つあります。
 
-- [لكل جزء](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar#per-part-media-resolution) (Gemini 3 فقط)
-- [على مستوى العالم](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar#global-media-resolution) لطلب `generateContent` كامل (جميع النماذج المتعددة الوسائط)
+- [パーツごと](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#per-part-media-resolution)（Gemini 3 のみ）
+- [グローバル](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#global-media-resolution): `generateContent` リクエスト全体（すべてのマルチモーダル モデル）
 
-## دقة الوسائط لكل جزء (Gemini 3 فقط)
+## パートごとのメディア解像度（Gemini 3 のみ）
 
-يتيح لك Gemini 3 ضبط دقة الوسائط لكائنات الوسائط الفردية ضمن طلبك، ما يوفّر تحسينًا دقيقًا لاستخدام الرموز المميزة. يمكنك الجمع بين مستويات الدقة في طلب واحد. على سبيل المثال، استخدام دقة عالية لمخطط بياني معقّد ودقة منخفضة لصورة بسيطة ذات صلة بالموضوع يلغي هذا الإعداد أي إعدادات عامة لجزء معيّن. للاطّلاع على الإعدادات التلقائية، يُرجى الرجوع إلى قسم [عدد الرموز المميزة](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar#token-counts).
+Gemini 3 では、リクエスト内の個々のメディア オブジェクトのメディア解像度を設定できるため、トークン使用量をきめ細かく最適化できます。1 つのリクエストで解像度レベルを混在させることができます。たとえば、複雑な図には高解像度を使用し、シンプルなコンテキスト画像には低解像度を使用します。この設定は、特定の部分のグローバル構成をオーバーライドします。デフォルト設定については、[トークン数](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#token-counts)セクションをご覧ください。
 
 ### Python
 
@@ -131,10 +131,9 @@ curl -s -X POST \
   -d @request.json
 ```
 
-## درجة دقة الوسائط العامة
+## グローバル メディアの解像度
 
-يمكنك ضبط دقة تلقائية لجميع أجزاء الوسائط في الطلب باستخدام
-`GenerationConfig`. تتوفّر هذه الميزة في جميع النماذج المتعدّدة الوسائط. إذا تضمّن الطلب إعدادات عامة و[إعدادات خاصة بكل جزء](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ar#per-part-media-resolution)، ستكون الأولوية للإعدادات الخاصة بكل جزء في ما يتعلّق بهذا العنصر المحدّد.
+`GenerationConfig` を使用すると、リクエスト内のすべてのメディア要素のデフォルトの解像度を設定できます。これは、すべてのマルチモーダル モデルでサポートされています。リクエストにグローバル設定と[パーツごとの設定](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ja#per-part-media-resolution)の両方が含まれている場合、その特定のアイテムについてはパーツごとの設定が優先されます。
 
 ### Python
 
@@ -202,87 +201,83 @@ curl -s -X POST \
   }'
 ```
 
-## قيم الدقة المتاحة
+## 使用可能な解決策の値
 
-تحدّد Gemini API مستويات دقة الوسائط التالية:
+Gemini API は、メディアの解像度に対して次のレベルを定義します。
 
-- `MEDIA_RESOLUTION_UNSPECIFIED`: هذا هو الإعداد التلقائي. يختلف عدد الرموز المميزة لهذا المستوى بشكل كبير بين Gemini 3 ونماذج Gemini السابقة.
-- `MEDIA_RESOLUTION_LOW`: عدد أقل من الرموز المميزة، ما يؤدي إلى معالجة أسرع
-  وتكلفة أقل، ولكن مع تفاصيل أقل
-- `MEDIA_RESOLUTION_MEDIUM`: توازن بين التفاصيل والتكلفة ووقت الاستجابة
-- ‫`MEDIA_RESOLUTION_HIGH`: عدد الرموز المميزة أكبر، ما يوفّر تفاصيل أكثر للنموذج، ولكن مع زيادة في وقت الاستجابة والتكلفة.
-- `MEDIA_RESOLUTION_ULTRA_HIGH` (لكل جزء فقط): أعلى عدد من الرموز المميزة، وهو مطلوب لحالات استخدام محدّدة، مثل [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar).
+- `MEDIA_RESOLUTION_UNSPECIFIED`: デフォルト設定。このレベルのトークン数は、Gemini 3 と以前の Gemini モデルで大きく異なります。
+- `MEDIA_RESOLUTION_LOW`: トークン数が少ないため、処理が高速になり、コストが削減されますが、詳細情報は少なくなります。
+- `MEDIA_RESOLUTION_MEDIUM`: 詳細、費用、レイテンシのバランス。
+- `MEDIA_RESOLUTION_HIGH`: トークン数が多いほど、モデルが処理する詳細が増えますが、レイテンシと費用が増加します。
+- `MEDIA_RESOLUTION_ULTRA_HIGH`（パートごと）: トークン数が最も多く、[パソコンの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja)などの特定のユースケースで必要です。
 
-يُرجى العِلم أنّ `MEDIA_RESOLUTION_HIGH` يوفّر الأداء الأمثل لمعظم حالات الاستخدام.
+`MEDIA_RESOLUTION_HIGH` はほとんどのユースケースで最適なパフォーマンスを提供します。
 
-يعتمد العدد الدقيق للرموز المميزة التي يتم إنشاؤها لكل مستوى من هذه المستويات على كل من **نوع الوسائط** (صورة أو فيديو أو ملف PDF) و**إصدار النموذج**.
+これらの各レベルで生成されるトークンの正確な数は、**メディアタイプ**（画像、動画、PDF）と**モデル バージョン**の両方によって異なります。
 
-## عدد الرموز المميزة
+## トークン数
 
-تلخّص الجداول أدناه عدد الرموز المميزة التقريبي لكل قيمة `media_resolution` ونوع وسائط لكل مجموعة نماذج.
+次の表は、モデル ファミリーごとに、各 `media_resolution` 値とメディアタイプのおおよそのトークン数をまとめたものです。
 
-**نماذج Gemini 3**
+**Gemini 3 モデル**
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **MediaResolution** | **صورة** | **الفيديو** | **PDF** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (تلقائي) | 1120 | 70 | 560 |
-| `MEDIA_RESOLUTION_LOW` | 280 | 70 | ‫280 + نص أصلي |
-| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | ‫560 + نص إعلاني أصلي |
-| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | ‫1120 + نص إعلاني مدمج |
-| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2240 | لا ينطبق | لا ينطبق |
+| **MediaResolution** | **画像** | **動画** | **PDF** |
+| `MEDIA_RESOLUTION_UNSPECIFIED`（デフォルト） | 1120 | 70 | 560 |
+| `MEDIA_RESOLUTION_LOW` | 280 | 70 | 280 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_MEDIUM` | 560 | 70 | 560 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_HIGH` | 1120 | 280 | 1120 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_ULTRA_HIGH` | 2,240 | なし | なし |
 
-**نماذج Gemini 2.5**
+**Gemini 2.5 モデル**
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **MediaResolution** | **صورة** | **الفيديو** | **ملف PDF (ممسوح ضوئيًا)** | **ملف PDF (مدمَج مع المحتوى)** |
-| `MEDIA_RESOLUTION_UNSPECIFIED` (تلقائي) | ‫256 + Pan & Scan (حوالي 2048) | 256 | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
-| `MEDIA_RESOLUTION_LOW` | 64 | 64 | ‫64 + OCR | 64 + Native Text |
-| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
-| `MEDIA_RESOLUTION_HIGH` | ‫256 + Pan & Scan | 256 | ‫256 + التعرّف البصري على الأحرف | ‫256 + نص أصلي |
+| **MediaResolution** | **画像** | **動画** | **PDF（スキャン）** | **PDF（ネイティブ）** |
+| `MEDIA_RESOLUTION_UNSPECIFIED`（デフォルト） | 256 + パン＆スキャン（~2048） | 256 | 256 + OCR | 256 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_LOW` | 64 | 64 | 64 + OCR | 64 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_MEDIUM` | 256 | 256 | 256 + OCR | 256 + ネイティブ テキスト |
+| `MEDIA_RESOLUTION_HIGH` | 256 + パン＆スキャン | 256 | 256 + OCR | 256 + ネイティブ テキスト |
 
-## اختيار درجة الدقة المناسبة
+## 適切な解決策の選択
 
-- **تلقائي (`UNSPECIFIED`):** ابدأ بالخيار التلقائي. تم تحسين هذا الخيار لتحقيق توازن جيد بين الجودة والوقت المستغرق والتكلفة في معظم حالات الاستخدام الشائعة.
-- **`LOW`:** استخدِم هذا الخيار في الحالات التي تكون فيها التكلفة ووقت الاستجابة في غاية الأهمية،
-  ويكون فيها الحصول على تفاصيل دقيقة أقل أهمية.
-- **`MEDIUM` / `HIGH`:** زيادة درجة الدقة عندما تتطلّب المهمة
-  فهم تفاصيل دقيقة في الوسائط ويكون ذلك مطلوبًا غالبًا
-  لتحليل المرئيات المعقّدة أو قراءة الرسوم البيانية أو فهم المستندات الكثيفة.
-- **`ULTRA HIGH`**: يتوفّر هذا الخيار فقط لإعدادات كل جزء. يُنصح باستخدامها في حالات استخدام معيّنة، مثل استخدام الكمبيوتر أو عندما تُظهر الاختبارات تحسّنًا واضحًا مقارنةً بـ `HIGH`.
-- **التحكّم في كل جزء (Gemini 3):** يعمل على تحسين استخدام الرموز المميزة. على سبيل المثال، في طلب يتضمّن صورًا متعددة، استخدِم `HIGH` لرسم تخطيطي معقّد و`LOW` أو `MEDIUM` لصور سياقية أبسط.
+- **デフォルト（`UNSPECIFIED`）:** デフォルトから開始します。最も一般的なユースケースで、品質、レイテンシ、費用のバランスが取れるように調整されています。
+- **`LOW`:** 費用とレイテンシが最優先で、詳細な情報はそれほど重要ではないシナリオで使用します。
+- **`MEDIUM` / `HIGH`:** メディア内の複雑な詳細を理解する必要があるタスクでは、解像度を上げます。これは、複雑な視覚分析、チャートの読み取り、密度の高いドキュメントの理解に必要になることがよくあります。
+- **`ULTRA HIGH`** - パーツごとの設定でのみ使用できます。パソコンでの使用など、特定のユースケースや、テストで `HIGH` よりも明確な改善が見られる場合に推奨されます。
+- **パートごとの制御（Gemini 3）:** トークンの使用量を最適化します。たとえば、複数の画像を含むプロンプトでは、複雑な図には `HIGH` を使用し、シンプルなコンテキスト画像には `LOW` または `MEDIUM` を使用します。
 
-**الإعدادات المقترَحة**
+**推奨設定**
 
-في ما يلي قائمة بإعدادات دقة الوسائط المقترَحة لكل نوع من أنواع الوسائط المتوافقة.
+以下に、サポートされている各メディアタイプに推奨されるメディア解像度設定を示します。
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| **نوع الوسائط** | **الإعدادات المقترَحة** | **الحد الأقصى للرموز المميزة** | **إرشادات الاستخدام** |
-| **الصور** | `MEDIA_RESOLUTION_HIGH` | 1120 | يُنصح باستخدامها لمعظم مهام تحليل الصور لضمان الحصول على أعلى جودة. |
-| **ملفات PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | الأفضل لفهم المستندات، وعادةً ما تصل الجودة إلى الحد الأقصى عند `medium`. لا تؤدي الزيادة إلى `high` عادةً إلى تحسين نتائج التعرّف البصري على الأحرف للمستندات العادية. |
-| **الفيديو** (عام) | ‫`MEDIA_RESOLUTION_LOW` (أو `MEDIA_RESOLUTION_MEDIUM`) | ‫70 (لكل إطار) | **ملاحظة:** بالنسبة إلى الفيديو، يتم التعامل مع إعدادات `low` و`medium` بشكل مماثل (70 رمزًا مميزًا) لتحسين استخدام السياق. وهذا يكفي لمعظم مهام التعرّف على الإجراءات ووصفها. |
-| **فيديو** (يحتوي على الكثير من النصوص) | `MEDIA_RESOLUTION_HIGH` | ‫280 (لكل إطار) | يجب توفُّرها فقط عندما تتضمّن حالة الاستخدام قراءة نص كثيف (التعرّف البصري على الأحرف) أو تفاصيل صغيرة ضمن إطارات الفيديو. |
+| **メディアタイプ** | **推奨設定** | **最大トークン数** | **使用に関するガイダンス** |
+| **画像検索** | `MEDIA_RESOLUTION_HIGH` | 1120 | 品質を最大限に高めるために、ほとんどの画像分析タスクにおすすめします。 |
+| **PDF** | `MEDIA_RESOLUTION_MEDIUM` | 560 | ドキュメントの理解に最適です。通常、品質は `medium` で飽和します。`high` に増やしても、標準的なドキュメントの OCR 結果が改善されることはほとんどありません。 |
+| **動画**（全般） | `MEDIA_RESOLUTION_LOW`（または `MEDIA_RESOLUTION_MEDIUM`） | 70（フレームあたり） | **注:** 動画の場合、コンテキストの使用を最適化するために、`low` と `medium` の設定は同じ（70 個のトークン）として扱われます。これは、ほとんどのアクション認識と説明のタスクで十分です。 |
+| **動画**（テキストが多い） | `MEDIA_RESOLUTION_HIGH` | 280（フレームあたり） | ユースケースで、密度の高いテキスト（OCR）や動画フレーム内の細部を読み取る場合にのみ必要です。 |
 
-ننصحك دائمًا باختبار وتقييم تأثير إعدادات الدقة المختلفة على تطبيقك المحدّد للعثور على أفضل موازنة بين الجودة ووقت الاستجابة والتكلفة.
+さまざまな解像度設定が特定のアプリケーションに与える影響を常にテストして評価し、品質、レイテンシ、費用の最適なトレードオフを見つけてください。
 
-## ملخّص التوافق مع الإصدارات
+## バージョンの互換性の概要
 
-- تتوفّر السمة `MediaResolution` enum لجميع النماذج التي تتيح إدخال الوسائط.
-- تختلف أعداد الرموز المميزة المرتبطة بكل مستوى من مستويات التعداد بين نماذج Gemini 3 وإصدارات Gemini السابقة.
-- يقتصر ضبط `media_resolution` على عناصر `Part` الفردية **على نماذج Gemini 3**.
+- `MediaResolution` 列挙型は、メディア入力をサポートするすべてのモデルで使用できます。
+- 各列挙型レベルに関連付けられているトークン数は、Gemini 3 モデルと以前の Gemini バージョンで**異なります**。
+- 個々の `Part` オブジェクトに `media_resolution` を設定できるのは、**Gemini 3 モデルのみ**です。
 
-## الخطوات التالية
+## 次のステップ
 
-- يمكنك الاطّلاع على مزيد من المعلومات حول إمكانات Gemini API المتعددة الوسائط في أدلة [فهم الصور](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=ar) و[فهم الفيديوهات](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ar) و[فهم المستندات](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=ar).
+- Gemini API のマルチモーダル機能の詳細については、[画像理解](https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=ja)、[動画理解](https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=ja)、[ドキュメント理解](https://ai.google.dev/gemini-api/docs/generate-content/document-processing?hl=ja)の各ガイドをご覧ください。
 
-إرسال ملاحظات
+フィードバックを送信
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-تاريخ التعديل الأخير: 2026-06-24 (حسب التوقيت العالمي المتفَّق عليه)
+最終更新日 2026-06-24 UTC。
 
-هل تريد مشاركة ملاحظاتك معنا؟
+ご意見をお聞かせください
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-24 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-24 UTC。"],[],[]]

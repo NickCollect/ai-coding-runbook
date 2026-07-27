@@ -1,33 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=pl
-fetched_at: 2026-07-20T04:47:40.821721+00:00
-title: "Kontekst adresu URL \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/url-context?hl=ja
+fetched_at: 2026-07-27T04:42:52.227492+00:00
+title: "URL \u30b3\u30f3\u30c6\u30ad\u30b9\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Kontekst adresu URL
+# URL コンテキスト
 
-Narzędzie kontekstu adresu URL umożliwia przekazywanie modelom dodatkowego kontekstu w postaci adresów URL. Jeśli w żądaniu uwzględnisz adresy URL, model uzyska dostęp do treści z tych stron (o ile nie jest to typ adresu URL wymieniony w [sekcji ograniczeń](#limitations)), aby uzyskać informacje i ulepszyć odpowiedź.
+[URL コンテキスト ツールを使用すると、URL の形式でモデルに追加のコンテキストを提供できます。リクエストに URL を含めると、モデルはそれらのページからコンテンツにアクセスし（制限事項セクションに記載されている URL タイプでない限り）、レスポンスの情報を取得して改善します。](#limitations)
 
-Narzędzie kontekstu adresu URL przydaje się w przypadku takich zadań:
+URL コンテキスト ツールは、次のようなタスクに役立ちます。
 
-- **Wyodrębnianie danych:** pobieranie z wielu adresów URL konkretnych informacji, takich jak ceny, nazwy lub kluczowe wnioski.
-- **Porównywanie dokumentów:** analizuj wiele raportów, artykułów lub plików PDF, aby identyfikować różnice i śledzić trendy.
-- **Synteza i tworzenie treści:** łączenie informacji z kilku adresów URL, aby generować dokładne podsumowania, posty na blogu lub raporty.
-- **Analizowanie kodu i dokumentów:** wskaż repozytorium GitHub lub dokumentację techniczną, aby wyjaśnić kod, wygenerować instrukcje konfiguracji lub odpowiedzieć na pytania.
+- **データの抽出**: 複数の URL から、価格、名前、主な調査結果などの特定の情報を取得します。
+- **ドキュメントの比較**: 複数のレポート、記事、PDF を分析して、
+  違いを特定し、トレンドを追跡します。
+- **コンテンツの統合と作成**: 複数のソース URL からの情報を組み合わせて、正確な要約、ブログ投稿、レポートを生成します。
+- **コードとドキュメントの分析**: GitHub リポジトリまたは技術ドキュメントを参照して、コードの説明、設定手順の生成、質問への回答を行います。
 
-Poniższy przykład pokazuje, jak porównać 2 przepisy z różnych witryn.
+次の例は、異なるウェブサイトの 2 つのレシピを比較する方法を示しています。
 
 ### Python
 
@@ -111,21 +112,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Jak to działa
+## 仕組み
 
-Narzędzie Kontekst adresu URL korzysta z dwuetapowego procesu pobierania, aby zachować równowagę między szybkością, kosztem i dostępem do aktualnych danych. Gdy podasz adres URL, narzędzie najpierw spróbuje pobrać treść z wewnętrznej pamięci podręcznej indeksu. Pełni funkcję wysoce zoptymalizowanej pamięci podręcznej. Jeśli adres URL nie jest dostępny w indeksie (np. jeśli jest to bardzo nowa strona), narzędzie automatycznie przełącza się na pobieranie wersji opublikowanej.
-Bezpośrednio uzyskuje dostęp do adresu URL, aby pobrać jego zawartość w czasie rzeczywistym.
+URL コンテキスト ツールは、2 段階の取得プロセスを使用して、速度、コスト、最新データへのアクセスのバランスを取ります。URL を指定すると、ツールはまず内部インデックス キャッシュからコンテンツを取得しようとします。これは高度に最適化されたキャッシュとして機能します。URL がインデックスにない場合（たとえば、非常に新しいページの場合）、ツールは自動的にライブ取得にフォールバックします。
+これにより、URL に直接アクセスして、コンテンツをリアルタイムで取得します。
 
-## Łączenie z innymi narzędziami
+## 他のツールとの組み合わせ
 
-Narzędzie kontekstu adresu URL możesz łączyć z innymi narzędziami, aby tworzyć bardziej zaawansowane
-procesy.
+URL コンテキスト ツールを他のツールと組み合わせて、より強力なワークフローを作成できます。
 
-[Modele Gemini 3](#supported-models) obsługują łączenie wbudowanych narzędzi (takich jak kontekst adresu URL) z narzędziami niestandardowymi (wywoływanie funkcji). Więcej informacji znajdziesz na stronie [kombinacje narzędzi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=pl).
+[Gemini 3 モデル](#supported-models)は、組み込みツール
+（URL コンテキストなど）とカスタムツール（関数呼び出し）の組み合わせをサポートしています。詳細については、
+[ツールの組み合わせ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ja)のページをご覧ください。
 
-### Powiązanie ze źródłem informacji przy użyciu wyszukiwarki
+### 検索によるグラウンディング
 
-Gdy włączone są zarówno kontekst adresu URL, jak i [Grounding z użyciem wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/grounding?hl=pl), model może korzystać z funkcji wyszukiwania, aby znajdować w internecie odpowiednie informacje, a następnie używać narzędzia kontekstu adresu URL, aby lepiej zrozumieć znalezione strony. To podejście jest przydatne w przypadku promptów, które wymagają zarówno szerokiego wyszukiwania, jak i dogłębnej analizy konkretnych stron.
+URL コンテキストと
+[Google 検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/grounding?hl=ja)の両方が有効になっている場合、
+モデルは検索機能を使用してオンラインで
+関連情報を検索し、URL コンテキスト ツールを使用して、
+見つかったページの詳細を把握できます。このアプローチは、広範な検索と特定のページの詳細な分析の両方を必要とするプロンプトに有効です。
 
 ### Python
 
@@ -198,19 +204,20 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Interpretowanie odpowiedzi
+## レスポンスについて
 
-Gdy model używa narzędzia kontekstowego URL, jego odpowiedź tekstowa zawiera wbudowane `url_citation` adnotacje w bloku treści tekstowej. Każda adnotacja łączy segment tekstu odpowiedzi (za pomocą parametrów `start_index` i `end_index`) z adresem URL źródła, z którego pochodzi. Jest to podstawowy sposób wyświetlania cytatów w aplikacji. Aby dowiedzieć się, jak je wyodrębniać, zapoznaj się z [głównym przykładem powyżej](#get-started).
+モデルが URL コンテキスト ツールを使用する場合、テキスト レスポンスには、テキスト コンテンツ ブロックにインラインの `url_citation` アノテーションが含まれます。各アノテーションは、レスポンス テキストのセグメント（`start_index` と `end_index` を使用）を、そのセグメントの派生元であるソース URL にリンクします。[これは、アプリケーションで引用を表示する主な方法です。抽出方法については、上記のメインの例をご覧ください。](#get-started)
 
-Odpowiedź zawiera też krok `url_context_result` z metadanymi dotyczącymi każdej próby pobrania adresu URL (stan, pobrany adres URL). Jest to przydatne głównie do debugowania.
+レスポンスには、各 URL 取得試行に関するメタデータ（ステータス、取得した URL）を含む `url_context_result` ステップも含まれます。これは主にデバッグに役立ちます。
 
-### Kontrole bezpieczeństwa
+### 安全チェック
 
-System sprawdza adresy URL pod kątem moderacji treści, aby potwierdzić, że spełniają one standardy bezpieczeństwa. Jeśli URL nie przejdzie tego testu, w odpowiednim kroku`url_context_result` pojawi się `status` w kolorze `"unsafe"`.
+システムは、URL が安全基準を満たしていることを確認するため、URL に対してコンテンツ モデレーション チェックを実行します。URL がこのチェックに失敗した場合、対応する
+`url_context_result` ステップに `status` が `"unsafe"` と表示されます。
 
-### Liczba tokenów
+### トークン数
 
-Treści pobrane z adresów URL podanych w prompcie są liczone jako tokeny wejściowe. Liczbę tokenów możesz sprawdzić w `usage`obiekcie interakcji. Oto przykład:
+プロンプトで指定した URL から取得したコンテンツは、入力トークンの一部としてカウントされます。トークン数は、インタラクションの `usage` オブジェクトで確認できます。次に例を示します。
 
 ```
 'usage': {
@@ -224,55 +231,61 @@ Treści pobrane z adresów URL podanych w prompcie są liczone jako tokeny wej
 }
 ```
 
-Cena za token zależy od użytego modelu. Więcej informacji znajdziesz na stronie [cennika](https://ai.google.dev/gemini-api/docs/pricing?hl=pl).
+トークンあたりの料金は使用するモデルによって異なります。詳細については、
+[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)ページをご覧ください。
 
-## Obsługiwane modele
+## サポートされているモデル
 
-| Model | Kontekst adresu URL |
+| モデル | URL コンテキスト |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=pl) | ✔️ |
-| [Gemini 3.1 Pro (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=pl) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl) | ✔️ |
-| [Gemini 3 Flash (wersja testowa)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=pl) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=pl) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=pl) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=pl) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ja) | ✔️ |
+| [Gemini 3.1 Pro プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ja) | ✔️ |
+| [Gemini 3 Flash プレビュー](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ja) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ja) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ja) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ja) | ✔️ |
 
-## Sprawdzone metody
+## ベスト プラクティス
 
-- **Podaj konkretne adresy URL:** aby uzyskać najlepsze wyniki, podaj bezpośrednie adresy URL treści, które mają być analizowane przez model. Model będzie pobierać treści tylko z podanych przez Ciebie adresów URL, a nie z linków zagnieżdżonych.
-- **Sprawdź dostępność:** upewnij się, że podane adresy URL nie prowadzą do stron, które wymagają logowania lub są umieszczone w sekcji płatnej.
-- **Używaj pełnego adresu URL:** podaj pełny adres URL, w tym protokół (np. https://www.google.com zamiast google.com).
+- **特定の URL を指定する**: 最良の結果を得るには、モデルで分析する
+  コンテンツの直接 URL を指定します。モデルは、指定した URL からのみコンテンツを取得し、ネストされたリンクのコンテンツは取得しません。
+- **アクセシビリティを確認する**: 指定した URL が、
+  ログインが必要なページやペイウォールの背後にあるページにリダイレクトされないことを確認します。
+- **完全な URL を使用する**: プロトコルを含む完全な URL を指定します
+  （例: google.com ではなく https://www.google.com）。
 
-## Ograniczenia
+## 制限事項
 
-- Limit żądań: narzędzie może przetworzyć maksymalnie 20 adresów URL w jednym żądaniu.
-- Rozmiar treści URL: maksymalny rozmiar treści pobranych z jednego adresu URL to 34 MB.
-- Publiczna dostępność: adresy URL muszą być publicznie dostępne w internecie.
-  Adresy hosta lokalnego (np. localhost, 127.0.0.1), sieci prywatne i usługi tunelowania (np. ngrok, pinggy) nie są obsługiwane.
-- Tylko Gemini API: kontekst URL jest dostępny tylko w interfejsie Gemini API, a nie w Gemini Enterprise Agent Platform.
+- リクエストの上限: このツールでは、リクエストごとに最大 20 個の URL を処理できます。
+- URL コンテンツのサイズ: 1 つの URL から取得できるコンテンツの最大サイズは 34 MB です。
+- 一般公開: URL は、ウェブ上で一般公開されている必要があります。
+  localhost アドレス（localhost、127.0.0.1 など）、プライベート ネットワーク、トンネリング サービス（ngrok、pinggy など）はサポートされていません。
+- Gemini API のみ: URL コンテキストは Gemini API でのみ使用でき、Gemini Enterprise Agent Platform では使用できません。
 
-### Obsługiwane i nieobsługiwane typy treści
+### サポートされているコンテンツ タイプとサポートされていないコンテンツ タイプ
 
-Narzędzie może wyodrębniać treści z adresów URL, które zawierają te typy treści:
+このツールは、次のコンテンツ タイプの URL からコンテンツを抽出できます。
 
-- Tekst (text/html, application/json, text/plain, text/xml, text/css, text/javascript , text/csv, text/rtf)
-- Obraz (image/png, image/jpeg, image/bmp, image/webp)
-- PDF (application/pdf)
+- テキスト（text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf）
+- 画像（image/png、image/jpeg、image/bmp、image/webp）
+- PDF（application/pdf）
 
-Te typy treści **nie są** obsługiwane:
+次のコンテンツ タイプは**サポートされていません。**
 
-- Treści płatne
-- filmy w YouTube (więcej informacji o przetwarzaniu adresów URL z YouTube znajdziesz w sekcji [rozumienie filmów](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl#youtube));
-- pliki Google Workspace, takie jak dokumenty lub arkusze kalkulacyjne Google;
-- Pliki audio i wideo
+- ペイウォール コンテンツ
+- YouTube 動画（YouTube URL の処理方法については、
+  [動画の理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja#youtube)をご覧ください
+  ）
+- Google ドキュメントやスプレッドシートなどの Google Workspace ファイル
+- 動画ファイルと音声ファイル
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-07-06 UTC.
+最終更新日 2026-07-06 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-06 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-06 UTC。"],[],[]]

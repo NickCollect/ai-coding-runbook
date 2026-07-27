@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=tr
-fetched_at: 2026-07-20T04:42:33.797048+00:00
-title: "Kod y\u00fcr\u00fctme \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=ko
+fetched_at: 2026-07-27T04:48:40.179936+00:00
+title: "\ucf54\ub4dc \uc2e4\ud589 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
 Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Geri bildirim gönderin
+의견 보내기
 
-# Kod yürütme
+# 코드 실행
 
-Gemini API, modelin Python kodu oluşturup çalıştırmasını sağlayan bir kod yürütme aracı sunar. Model, nihai bir çıkışa ulaşana kadar kod yürütme sonuçlarından yinelemeli olarak öğrenebilir. Kod yürütme özelliğini kullanarak kod tabanlı akıl yürütmeden yararlanan uygulamalar oluşturabilirsiniz. Örneğin, denklemleri çözmek veya metinleri işlemek için kod yürütmeyi kullanabilirsiniz. Daha özel görevleri gerçekleştirmek için kod yürütme ortamında yer alan [kütüphaneleri](#supported-libraries) de kullanabilirsiniz.
+Gemini API는 모델이 Python 코드를 생성하고 실행할 수 있는 코드 실행 도구를 제공합니다. 그런 다음 모델은 최종 출력을 도출할 때까지 코드 실행 결과를 통해 반복적으로 학습할 수 있습니다. 코드 실행을 사용하여 코드 기반 추론의 이점을 활용하는 애플리케이션을 빌드할 수 있습니다. 예를 들어 코드 실행을 사용하여 방정식을 풀거나 텍스트를 처리할 수 있습니다. 코드 실행 환경에 포함된 [라이브러리](#supported-libraries)를 사용하여 더 전문적인 작업을 실행할 수도 있습니다.
 
-Gemini yalnızca Python'daki kodları çalıştırabilir. Gemini'dan başka bir dilde kod oluşturmasını isteyebilirsiniz ancak model, kodu çalıştırmak için kod yürütme aracını kullanamaz.
+Gemini는 Python으로만 코드를 실행할 수 있습니다. 다른 언어로 코드를 생성해 달라고 Gemini에 요청할 수는 있지만 모델이 코드 실행 도구를 사용하여 코드를 실행할 수는 없습니다.
 
-## Kod yürütmeyi etkinleştirme
+## 코드 실행 사용 설정
 
-Kod yürütmeyi etkinleştirmek için modelde kod yürütme aracını yapılandırın. Bu, modelin kod oluşturup çalıştırmasına olanak tanır.
+코드 실행을 사용 설정하려면 모델에서 코드 실행 도구를 구성하세요. 이를 통해 모델이 코드를 생성하고 실행할 수 있습니다.
 
 ### Python
 
@@ -53,7 +53,7 @@ for part in response.candidates[0].content.parts:
         print(part.code_execution_result.output)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -143,7 +143,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-Çıktı, okunabilirlik için biçimlendirilmiş aşağıdaki gibi görünebilir:
+출력은 가독성을 위해 서식이 지정된 다음과 같이 표시될 수 있습니다.
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -192,27 +192,27 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-Bu çıkış, kod yürütme kullanılırken modelin döndürdüğü çeşitli içerik bölümlerini birleştirir:
+이 출력은 코드 실행을 사용할 때 모델이 반환하는 여러 콘텐츠 부분을 결합합니다.
 
-- `text`: Model tarafından oluşturulan satır içi metin
-- `executableCode`: Model tarafından oluşturulan ve yürütülmesi amaçlanan kod
-- `codeExecutionResult`: Yürütülebilir kodun sonucu
+- `text`: 모델에서 생성된 인라인 텍스트
+- `executableCode`: 실행 목적으로 모델에서 생성된 코드
+- `codeExecutionResult`: 실행 가능한 코드의 결과
 
-Bu bölümlerin adlandırma kuralları, programlama diline göre değişir.
+이러한 부분의 이름 지정 규칙은 프로그래밍 언어에 따라 다릅니다.
 
-## Görüntülerle kod yürütme (Gemini 3)
+## 이미지를 사용한 코드 실행 (Gemini 3)
 
-Gemini 3 Flash modeli artık görüntüleri etkin bir şekilde işlemek ve incelemek için Python kodu yazıp çalıştırabilir.
+이제 Gemini 3 Flash 모델이 Python 코드를 작성하고 실행하여 이미지를 적극적으로 조작하고 검사할 수 있습니다.
 
-**Kullanım alanları**
+**사용 사례**
 
-- **Yakınlaştırma ve inceleme**: Model, ayrıntıların çok küçük olduğunu (ör. uzaktaki bir ölçüm cihazını okuma) örtülü olarak algılar ve alanı kırpıp daha yüksek çözünürlükte yeniden incelemek için kod yazar.
-- **Görsel matematik**: Model, kod kullanarak çok adımlı hesaplamalar yapabilir (ör. bir makbuzdaki satır öğelerini toplama).
-- **Görüntü notlandırma**: Model, soruları yanıtlamak için görüntüleri notlandırabilir (ör. ilişkileri göstermek için oklar çizebilir).
+- **확대 및 검사**: 모델은 세부정보가 너무 작을 때(예: 멀리 있는 게이지를 읽는 경우) 이를 암시적으로 감지하고 더 높은 해상도로 영역을 잘라 다시 검사하는 코드를 작성합니다.
+- **시각적 수학**: 모델은 코드를 사용하여 다단계 계산을 실행할 수 있습니다 (예: 영수증의 항목 합계).
+- **이미지 주석**: 모델은 질문에 답하기 위해 이미지를 주석으로 달 수 있습니다(예: 관계를 보여주는 화살표를 그림).
 
-### Görüntülerle kod yürütmeyi etkinleştirme
+### 이미지를 사용한 코드 실행 사용 설정
 
-Görüntülerle kod yürütme, Gemini 3 Flash'te resmi olarak desteklenir. Hem "Araç olarak kod yürütme" hem de "Düşünme"yi etkinleştirerek bu davranışı etkinleştirebilirsiniz.
+이미지를 사용한 코드 실행은 Gemini 3 Flash에서 공식적으로 지원됩니다. 도구로서의 코드 실행과 사고를 모두 사용 설정하면 이 동작을 활성화할 수 있습니다.
 
 ### Python
 
@@ -252,7 +252,7 @@ for part in response.candidates[0].content.parts:
         display(Image.open(io.BytesIO(part.as_image().image_bytes)))
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 async function main() {
@@ -427,9 +427,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-## Sohbette kod yürütme özelliğini kullanma
+## 채팅에서 코드 실행 사용
 
-Kod yürütmeyi sohbetin bir parçası olarak da kullanabilirsiniz.
+채팅의 일부로 코드 실행을 사용할 수 있습니다.
 
 ### Python
 
@@ -463,7 +463,7 @@ for part in response.candidates[0].content.parts:
         print(part.code_execution_result.output)
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import {GoogleGenAI} from "@google/genai";
@@ -587,73 +587,73 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-## Giriş/çıkış (G/Ç)
+## 입력/출력 (I/O)
 
-Kod yürütme, dosya girişini ve grafik çıkışını destekler. Bu giriş ve çıkış özelliklerini kullanarak CSV ve metin dosyaları yükleyebilir, dosyalarla ilgili sorular sorabilir ve yanıtın bir parçası olarak [Matplotlib](https://matplotlib.org/) grafikleri oluşturabilirsiniz. Çıkış dosyaları, yanıttaki satır içi resimler olarak döndürülür.
+코드 실행은 파일 입력과 그래프 출력을 지원합니다. 이러한 입력 및 출력 기능을 사용하면 CSV 파일과 텍스트 파일을 업로드하고 파일에 대해 질문하고 대답의 일부로 [Matplotlib](https://matplotlib.org/) 그래프를 생성할 수 있습니다. 출력 파일은 응답에 인라인 이미지로 반환됩니다.
 
-### G/Ç fiyatlandırması
+### I/O 가격 책정
 
-Kod yürütme G/Ç'sini kullanırken giriş jetonları ve çıkış jetonları için ücretlendirilirsiniz:
+코드 실행 I/O를 사용하면 입력 토큰과 출력 토큰에 대한 요금이 청구됩니다.
 
-**Giriş jetonu sayısı:**
+**입력 토큰:**
 
-- Kullanıcı istemi
+- 사용자 프롬프트
 
-**Çıkış jetonları:**
+**출력 토큰:**
 
-- Model tarafından oluşturulan kod
-- Kod ortamında kod yürütme çıkışı
-- Düşünme jetonları
-- Model tarafından oluşturulan özet
+- 모델에서 생성된 코드
+- 코드 환경의 코드 실행 출력
+- 사고 토큰
+- 모델에서 생성된 요약
 
-### G/Ç ayrıntıları
+### I/O 세부정보
 
-Kod yürütme G/Ç'siyle çalışırken aşağıdaki teknik ayrıntılara dikkat edin:
+코드 실행 I/O를 사용할 때는 다음 기술 세부정보에 유의하세요.
 
-- Kod ortamının maksimum çalışma süresi 30 saniyedir.
-- Kod ortamı hata oluşturursa model, kod çıkışını yeniden oluşturmaya karar verebilir. Bu işlem en fazla 5 kez yapılabilir.
-- Maksimum dosya giriş boyutu, model jetonu penceresiyle sınırlıdır. AI Studio'da maksimum giriş dosyası boyutu 1 milyon jetondur (desteklenen giriş türlerindeki metin dosyaları için yaklaşık 2 MB). Çok büyük bir dosya yüklerseniz AI Studio bu dosyayı göndermenize izin vermez.
-- Kod yürütme, metin ve CSV dosyalarıyla en iyi şekilde çalışır.
-- Giriş dosyası `part.inlineData` veya `part.fileData` olarak iletilebilir ([Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) aracılığıyla yüklenir) ve çıkış dosyası her zaman `part.inlineData` olarak döndürülür.
+- 코드 환경의 최대 런타임은 30초입니다.
+- 코드 환경에서 오류가 발생하면 모델이 코드 출력을 재생성할 수 있습니다. 이러한 상황은 최대 5번까지 발생할 수 있습니다.
+- 최대 파일 입력 크기는 모델 토큰 창에 의해 제한됩니다. AI Studio에서 최대 입력 파일 크기는 100만 토큰입니다 (지원되는 입력 유형의 텍스트 파일의 경우 약 2MB). 너무 큰 파일을 업로드하면 AI Studio에서 전송할 수 없습니다.
+- 코드 실행은 텍스트 및 CSV 파일에서 가장 잘 작동합니다.
+- 입력 파일은 `part.inlineData` 또는 `part.fileData` ([Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 통해 업로드됨)로 전달할 수 있으며 출력 파일은 항상 `part.inlineData`로 반환됩니다.
 
-## Faturalandırma
+## 결제
 
-Gemini API'den kod yürütmeyi etkinleştirmek için ek ücret alınmaz.
-Kullandığınız Gemini modeline göre giriş ve çıkış jetonlarının mevcut oranı üzerinden faturalandırılırsınız.
+Gemini API에서 코드 실행을 사용 설정하는 데에는 추가 비용이 발생하지 않습니다.
+사용 중인 Gemini 모델에 따라 입력 및 출력 토큰의 현재 요율로 비용이 청구됩니다.
 
-Kod yürütme faturalandırması hakkında bilmeniz gereken diğer noktalar:
+코드 실행의 청구에 대해 몇 가지 중요한 사항은 다음과 같습니다.
 
-- Modele ilettiğiniz giriş jetonları için yalnızca bir kez faturalandırılırsınız ve modelin size döndürdüğü nihai çıkış jetonları için faturalandırılırsınız.
-- Oluşturulan kodu temsil eden jetonlar, çıkış jetonları olarak sayılır. Oluşturulan kod, metin ve görüntü gibi çok formatlı çıkışlar içerebilir.
-- Kod yürütme sonuçları da çıkış jetonu olarak sayılır.
+- 모델에 전달하는 입력 토큰에 대해서는 비용이 한 번만 청구되며, 모델에서 사용자에게 반환하는 최종 출력 토큰에 대해서는 비용이 청구됩니다.
+- 생성된 코드를 나타내는 토큰은 출력 토큰으로 계산됩니다. 생성된 코드에는 텍스트 및 멀티모달 출력(예: 이미지)이 포함될 수 있습니다.
+- 코드 실행 결과도 출력 토큰으로 집계됩니다.
 
-Faturalandırma modeli aşağıdaki şemada gösterilmektedir:
+결제 모델은 다음 다이어그램에 나와 있습니다.
 
-![kod yürütme faturalandırma modeli](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=tr)
+![코드 실행 청구 모델](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=ko)
 
-- Kullandığınız Gemini modeline göre giriş ve çıkış jetonlarının mevcut oranı üzerinden faturalandırılırsınız.
-- Gemini, yanıtınızı oluştururken kod yürütme özelliğini kullanırsa orijinal istem, oluşturulan kod ve yürütülen kodun sonucu *ara jetonları* olarak etiketlenir ve *giriş jetonları* olarak faturalandırılır.
-- Ardından Gemini, bir özet oluşturur ve oluşturulan kodu, çalıştırılan kodun sonucunu ve nihai özeti döndürür. Bunlar *çıkış jetonları* olarak faturalandırılır.
-- Gemini API, API yanıtında ara jeton sayısını içerir. Böylece, ilk isteminizin ötesinde neden ek giriş jetonları aldığınızı bilirsiniz.
+- 사용 중인 Gemini 모델에 따라 입력 및 출력 토큰의 현재 요율로 비용이 청구됩니다.
+- 응답을 생성할 때 Gemini에 코드 실행이 사용되는 경우 원본 프롬프트, 생성된 코드, 실행된 코드 결과가 *중간 토큰* 라벨로 표시되고 *입력 토큰*으로 청구됩니다.
+- 그런 후 Gemini가 요약을 생성하고 생성된 코드, 실행된 코드 결과, 최종 요약을 반환합니다. 이러한 토큰은 *출력 토큰*으로 청구됩니다.
+- Gemini API에는 API 응답에 중간 토큰 수가 포함되기 때문에 초기 프롬프트 이상으로 추가된 입력 토큰이 발생하는 이유를 알 수 있습니다.
 
-## Sınırlamalar
+## 제한사항
 
-- Model yalnızca kod oluşturabilir ve yürütebilir. Medya dosyaları gibi diğer öğeler geri döndürülemez.
-- Bazı durumlarda, kod yürütmenin etkinleştirilmesi model çıktısının diğer alanlarında (ör. hikaye yazma) gerilemelere yol açabilir.
-- Farklı modellerin kod yürütmeyi başarılı bir şekilde kullanma becerisinde bazı farklılıklar vardır.
+- 모델은 코드를 생성 및 실행할 수만 있습니다. 미디어 파일과 같은 다른 아티팩트는 반환할 수 없습니다.
+- 일부 경우에 코드 실행을 사용 설정하면 모델 출력의 다른 영역(예: 스토리 작성)에서 성능이 저하될 수 있습니다.
+- 다양한 모델이 코드 실행을 성공적으로 사용하는 능력에는 약간의 차이가 있습니다.
 
-## Desteklenen araç kombinasyonları
+## 지원되는 도구 조합
 
-Kod yürütme aracı, daha karmaşık kullanım alanlarını desteklemek için [Google Arama ile temellendirme](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) ile birleştirilebilir.
+코드 실행 도구를 [Google 검색을 사용한 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)과 결합하여 더 복잡한 사용 사례를 지원할 수 있습니다.
 
-Gemini 3 modelleri, yerleşik araçların (ör. kod yürütme) özel araçlarla (işlev çağrısı) birlikte kullanılmasını destekler. Araç kombinasyonunun çalışması için `id` ve `thought_signature` alanlarını geri iletmeniz gerekir. [Araç kombinasyonları](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) sayfasından daha fazla bilgi edinin.
+Gemini 3 모델은 코드 실행과 같은 기본 제공 도구와 맞춤 도구(함수 호출)의 조합을 지원합니다. 도구 조합이 작동하려면 `id` 및 `thought_signature` 필드를 다시 전달해야 합니다. [도구 조합](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko) 페이지에서 자세히 알아보세요.
 
-## Desteklenen kitaplıklar
+## 지원되는 라이브러리
 
-Kod yürütme ortamı aşağıdaki kitaplıkları içerir:
+코드 실행 환경에는 다음 라이브러리가 포함됩니다.
 
 - attrs
-- satranç
+- 체스
 - contourpy
 - fpdf
 - geopandas
@@ -668,9 +668,9 @@ Kod yürütme ortamı aşağıdaki kitaplıkları içerir:
 - numpy
 - opencv-python
 - openpyxl
-- paketleme
-- pandalar
-- yastık
+- 패키징
+- pandas
+- pillow
 - protobuf
 - pylatex
 - pyparsing
@@ -682,29 +682,29 @@ Kod yürütme ortamı aşağıdaki kitaplıkları içerir:
 - scikit-learn
 - scipy
 - seaborn
-- altı
+- 육
 - striprtf
 - sympy
-- tablolaştırmak
+- tabulate
 - tensorflow
 - toolz
 - xlrd
 
-Kendi kitaplıklarınızı yükleyemezsiniz.
+사용자의 고유 라이브러리는 설치할 수 없습니다.
 
-## Sırada ne var?
+## 다음 단계
 
-- [Kod yürütme Colab'ini](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=tr) deneyin.
-- Diğer Gemini API araçları hakkında bilgi edinin:
-  - [İşlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)
-  - [Google Arama ile temellendirme](https://ai.google.dev/gemini-api/docs/grounding?hl=tr)
+- [코드 실행 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=ko)을 사용해 보세요.
+- 다른 Gemini API 도구 알아보기:
+  - [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)
+  - [Google 검색으로 그라운딩](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)
 
-Geri bildirim gönderin
+의견 보내기
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Son güncelleme tarihi: 2026-06-24 UTC.
+최종 업데이트: 2026-06-24(UTC)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+의견을 전달하고 싶나요?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-24 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-24(UTC)"],[],[]]

@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/lyria-realtime-exp?hl=th
-fetched_at: 2026-07-20T04:38:03.387776+00:00
+fetched_at: 2026-07-27T04:34:06.628243+00:00
 title: "Lyria RealTime \u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e17\u0e14\u0e25\u0e2d\u0e07 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
