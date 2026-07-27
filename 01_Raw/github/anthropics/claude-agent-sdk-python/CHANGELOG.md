@@ -1,5 +1,50 @@
 # Changelog
 
+## 0.2.128
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.220
+
+## 0.2.127
+
+### Bug Fixes
+
+- **Fixed premature stdin closure when background tasks are in flight**: `query()` no longer closes stdin on the first `result` frame when background tasks (e.g. `run_in_background: true` subagents) are still running. Previously, closing stdin too early caused SDK-MCP tool calls from background tasks to fail with `"Stream closed"` and silently bypassed PreToolUse hooks. Stdin now stays open until all in-flight tasks complete and the final result frame arrives (#1103)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.219
+
+## 0.2.126
+
+### New Features
+
+- **`terminal_reason` on ResultMessage**: `ResultMessage.terminal_reason` now surfaces why the query loop ended (`"completed"`, `"max_turns"`, `"aborted_streaming"`, `"aborted_tools"`, etc.). A value of `"aborted_streaming"` or `"aborted_tools"` means the turn was cancelled via `ClaudeSDKClient.interrupt()`. Mirrors the TypeScript SDK's `SDKResultMessage.terminal_reason` (#1142)
+- **Typed `model_usage` on ResultMessage**: `ResultMessage.model_usage` is now typed as `dict[str, ModelUsage]` instead of `dict[str, Any]`, with a new `ModelUsage` TypedDict that mirrors the TypeScript SDK's shape. Includes optional `canonicalModel` and `provider` fields for stable model identification across provider-specific aliases (#1143)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.218
+
+## 0.2.125
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.217
+
+## 0.2.124
+
+### Bug Fixes
+
+- **Refused batch script CLI spawning on Windows**: Blocked spawning `.bat`/`.cmd` CLI scripts (including npm's `claude.cmd` shim) on Windows to prevent command injection via cmd.exe metacharacter re-parsing (BatBadBut / CVE-2024-27980 class). Windows users relying on the npm shim should switch to the native installer, an explicit `claude.exe` path, or a platform wheel that bundles the CLI (#1127)
+- **Windows cmd.exe metacharacter rejection**: `resume` and `session_id` values containing cmd.exe metacharacters (`& | < > ^ % ! "`) or newlines now raise `ValueError` on Windows, preventing injection even if a cmd.exe hop is reintroduced. POSIX behavior is unchanged (#1127)
+- **Dash-prefixed `extra_args` value binding**: `extra_args` now uses `--flag=value` form when the value starts with `-`, preventing a dash-leading value from being misinterpreted as a separate CLI flag (#1127)
+
+### Internal/Other Changes
+
+- Updated bundled Claude CLI to version 2.1.216
+
 ## 0.2.123
 
 ### Internal/Other Changes

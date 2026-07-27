@@ -1197,6 +1197,31 @@ class DeferredToolUse:
     input: dict[str, Any]
 
 
+class ModelUsage(TypedDict):
+    """Per-model token usage and cost breakdown.
+
+    Keys match the TypeScript SDK's ``ModelUsage`` shape (camelCase), since
+    the value is passed through verbatim from the CLI's ``modelUsage`` field.
+    """
+
+    inputTokens: int
+    outputTokens: int
+    cacheReadInputTokens: int
+    cacheCreationInputTokens: int
+    webSearchRequests: int
+    costUSD: float
+    contextWindow: int
+    maxOutputTokens: int
+    canonicalModel: NotRequired[str]
+    """Canonical model id used for the pricing lookup (e.g.
+    ``'claude-opus-4-7'``). May differ from the raw model string this entry
+    is keyed by (provider-specific ids, aliases)."""
+    provider: NotRequired[str]
+    """API provider that served this model (``'firstParty'``, ``'bedrock'``,
+    ``'vertex'``, ``'foundry'``, ``'anthropicAws'``, ``'anthropicGoogleCloud'``,
+    ``'mantle'``, ``'gateway'``)."""
+
+
 @dataclass
 class ResultMessage:
     """Result message with cost and usage information."""
@@ -1212,7 +1237,7 @@ class ResultMessage:
     usage: dict[str, Any] | None = None
     result: str | None = None
     structured_output: Any = None
-    model_usage: dict[str, Any] | None = None
+    model_usage: dict[str, ModelUsage] | None = None
     permission_denials: list[Any] | None = None
     deferred_tool_use: DeferredToolUse | None = None
     errors: list[str] | None = None
@@ -1221,6 +1246,15 @@ class ResultMessage:
     # Emitted by the CLI since v2.1.110. Safe to log (no message content).
     api_error_status: int | None = None
     uuid: str | None = None
+    terminal_reason: str | None = None
+    """Why the query loop terminated (e.g. ``"completed"``, ``"max_turns"``,
+    ``"aborted_streaming"``). A value of ``"aborted_streaming"`` or
+    ``"aborted_tools"`` indicates the turn was cancelled (via
+    :meth:`ClaudeSDKClient.interrupt` or an ``interrupt`` control request).
+    ``None`` when the CLI did not report a terminal reason (older CLI
+    versions, or a result that bypassed the query loop such as a local
+    slash command). Mirrors the TypeScript SDK's
+    ``SDKResultMessage.terminal_reason``."""
 
 
 @dataclass
