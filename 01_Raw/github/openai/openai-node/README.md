@@ -1,6 +1,6 @@
 # OpenAI TypeScript and JavaScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/openai.svg?label=npm%20(stable)>)](https://npmjs.org/package/openai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/openai) [![JSR Version](https://jsr.io/badges/@openai/openai)](https://jsr.io/@openai/openai)
+[![NPM version](<https://img.shields.io/npm/v/openai.svg?label=npm%20(stable)>)](https://npmjs.org/package/openai) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/openai)
 
 This library provides convenient access to the OpenAI REST API from TypeScript or JavaScript.
 
@@ -14,17 +14,12 @@ To learn how to use the OpenAI API, check out our [API Reference](https://platfo
 npm install openai
 ```
 
-### Installation from JSR
+### Installation with Deno
 
-```sh
-deno add jsr:@openai/openai
-npx jsr add @openai/openai
-```
-
-These commands will make the module importable from the `@openai/openai` scope. You can also [import directly from JSR](https://jsr.io/docs/using-packages#importing-with-jsr-specifiers) without an install step if you're using the Deno JavaScript runtime:
+Deno can import the package directly from npm:
 
 ```ts
-import OpenAI from 'jsr:@openai/openai';
+import OpenAI from 'npm:openai';
 ```
 
 ## Usage
@@ -631,7 +626,7 @@ may still be visible.
 #### Custom logger
 
 By default, this library logs to `globalThis.console`. You can also provide a custom logger.
-Most logging libraries are supported, including [pino](https://www.npmjs.com/package/pino), [winston](https://www.npmjs.com/package/winston), [bunyan](https://www.npmjs.com/package/bunyan), [consola](https://www.npmjs.com/package/consola), [signale](https://www.npmjs.com/package/signale), and [@std/log](https://jsr.io/@std/log). If your logger doesn't work, please open an issue.
+Most logging libraries are supported, including [pino](https://www.npmjs.com/package/pino), [winston](https://www.npmjs.com/package/winston), [bunyan](https://www.npmjs.com/package/bunyan), [consola](https://www.npmjs.com/package/consola), and [signale](https://www.npmjs.com/package/signale). If your logger doesn't work, please open an issue.
 
 When providing a custom logger, the `logLevel` option still controls which messages are emitted, messages
 below the configured level will not be sent to your logger.
@@ -771,6 +766,38 @@ const client = new OpenAI({
 });
 ```
 
+### Mutual TLS
+
+The API mTLS beta combines your API key with a client certificate. For enrollment, certificate requirements, activation, and supported endpoints, see the [OpenAI Mutual TLS Beta Program](https://help.openai.com/en/articles/10876024-openai-mutual-tls-beta-program). Configure mTLS on your runtime's HTTP transport, then pass that transport to the SDK with `fetch` and `fetchOptions`. Set `baseURL` to the mTLS endpoint explicitly:
+
+```ts
+import { readFile } from 'node:fs/promises';
+import { Agent, fetch as undiciFetch } from 'undici';
+import OpenAI from 'openai';
+
+const dispatcher = new Agent({
+  connect: {
+    // One PEM chain: leaf certificate first, then required intermediates.
+    cert: await readFile('/path/to/client-cert-chain.pem'),
+    key: await readFile('/path/to/client-key.pem'),
+  },
+});
+
+const client = new OpenAI({
+  apiKey: process.env['OPENAI_API_KEY'],
+  baseURL: 'https://mtls.api.openai.com/v1',
+  fetch: undiciFetch,
+  fetchOptions: {
+    dispatcher,
+    redirect: 'manual',
+  },
+});
+```
+
+Use `https://mtls-eu.api.openai.com/v1` for EU Data Residency. The example uses manual redirects so the certificate-bearing transport does not automatically follow a redirect to another host. Close transports your application creates when they are no longer needed.
+
+See the runnable [Node.js, Deno, and Bun mTLS examples](./examples/mtls/README.md) for certificate-chain setup, optional Node.js encrypted-key support, and runtime-specific transport cleanup.
+
 ## Frequently Asked Questions
 
 ## Semantic versioning
@@ -791,7 +818,7 @@ TypeScript >= 4.9 is supported.
 
 The following runtimes are supported:
 
-- Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
+- Node.js 22 and 24 LTS. Node.js 22 is the minimum supported version.
 - Deno v1.28.0 or higher.
 - Bun 1.0 or later.
 - Cloudflare Workers.
@@ -820,6 +847,12 @@ The following runtimes are supported:
 Note that React Native is not supported at this time.
 
 If you are interested in other runtime environments, please open or upvote an issue on GitHub.
+
+Node.js 20 reached end of life on April 30, 2026 and is no longer supported.
+Previously published SDK releases remain available, but receive no guaranteed
+fixes or security backports for unsupported Node.js versions. See the
+[Node.js version support policy](https://github.com/openai/openai-node/blob/main/NODE_VERSION_POLICY.md)
+for lifecycle, deprecation, and release rules.
 
 ## Contributing
 

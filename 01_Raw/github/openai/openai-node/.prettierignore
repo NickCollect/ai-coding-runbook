@@ -1,9 +1,9 @@
 CHANGELOG.md
-jsr.json
 pnpm-lock.yaml
 /ecosystem-tests/*/**
 /node_modules
 /deno
+/api_reference/openapi.transformed.yml
 
 # don't format tsc output, will break source maps
 /dist

@@ -1,5 +1,57 @@
 # Changelog
 
+## 2.52.0 (2026-07-31)
+
+Full Changelog: [v2.51.0...v2.52.0](https://github.com/openai/openai-python/compare/v2.51.0...v2.52.0)
+
+### Features
+
+* **api:** content provenance checks ([1d6c118](https://github.com/openai/openai-python/commit/1d6c1180f8eaa71bfd45cae67360987b2bea3656))
+
+
+### Bug Fixes
+
+* **client:** honor Retry-After delays up to two minutes ([#3555](https://github.com/openai/openai-python/issues/3555)) ([7fa7946](https://github.com/openai/openai-python/commit/7fa7946485b5ecbadd0ebf8624c574e2c9e3370c))
+
+
+### Documentation
+
+* add API-key mTLS HTTP client recipes ([#3552](https://github.com/openai/openai-python/issues/3552)) ([7a3d5e4](https://github.com/openai/openai-python/commit/7a3d5e46b61cb36109dc4e7fd6d4ab70cc6d6c0f))
+
+## 2.51.0 (2026-07-30)
+
+Full Changelog: [v2.50.0...v2.51.0](https://github.com/openai/openai-python/compare/v2.50.0...v2.51.0)
+
+### Features
+
+* **api:** fast tier ([8808ed2](https://github.com/openai/openai-python/commit/8808ed27952dae13fb8761f045376af5b3e5bec2))
+
+
+### Bug Fixes
+
+* **api:** add fast tier to helper methods ([6064126](https://github.com/openai/openai-python/commit/60641266ff4b296044a81fe1717c17a70ceadbf1))
+
+## 2.50.0 (2026-07-28)
+
+Full Changelog: [v2.49.0...v2.50.0](https://github.com/openai/openai-python/compare/v2.49.0...v2.50.0)
+
+### Features
+
+* **api:** transcription model updates ([fd57393](https://github.com/openai/openai-python/commit/fd57393389eac75af08c2e887cb188590448be20))
+
+
+### Bug Fixes
+
+* **audio:** restore transcription keyword overload ([713a262](https://github.com/openai/openai-python/commit/713a2624966c40f4e5b0c20436b8a79aa8383b08))
+
+## 2.49.0 (2026-07-27)
+
+Full Changelog: [v2.48.0...v2.49.0](https://github.com/openai/openai-python/compare/v2.48.0...v2.49.0)
+
+### Features
+
+* require Python 3.10 and automate version reviews ([#3537](https://github.com/openai/openai-python/issues/3537)) ([d4c151d](https://github.com/openai/openai-python/commit/d4c151d92ba713e56518a4483d3b7918dd1be838))
+
 ## 2.48.0 (2026-07-23)
 
 Full Changelog: [v2.47.0...v2.48.0](https://github.com/openai/openai-python/compare/v2.47.0...v2.48.0)

@@ -64,7 +64,7 @@ export const checkFileSupport = () => {
     throw new Error(
       '`File` is not defined as a global, which is required for file uploads.' +
         (isOldNode ?
-          " Update to Node 20 LTS or newer, or set `globalThis.File` to `import('node:buffer').File`."
+          " Update to a supported Node.js LTS release, or set `globalThis.File` to `import('node:buffer').File`."
         : ''),
     );
   }
@@ -165,10 +165,14 @@ function supportsFormData(fetchObject: OpenAI | Fetch): Promise<boolean> {
   if (cached) return cached;
   const promise = (async () => {
     try {
-      const FetchResponse = (
-        'Response' in fetch ?
-          fetch.Response
-        : (await fetch('data:,')).constructor) as typeof Response;
+      let FetchResponse: typeof Response;
+      if ('Response' in fetch) {
+        FetchResponse = fetch.Response as typeof Response;
+      } else {
+        const response = await fetch('data:,');
+        await response.arrayBuffer();
+        FetchResponse = response.constructor as typeof Response;
+      }
       const data = new FormData();
       if (data.toString() === (await new FetchResponse(data).text())) {
         return false;
