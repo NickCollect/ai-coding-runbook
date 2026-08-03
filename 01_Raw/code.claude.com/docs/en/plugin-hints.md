@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/plugin-hints
-fetched_at: 2026-07-27T04:31:49.613309+00:00
+fetched_at: 2026-08-03T04:25:06.136912+00:00
 fetch_method: mintlify_md
 ---
 
@@ -110,7 +110,7 @@ When the hint passes all checks, Claude Code shows a prompt like the following:
 ─────────────────────────────────────────────────────────────
 ```
 
-The prompt names the command that produced the hint so users can spot a mismatch between the tool and the plugin it recommends. If the user does not respond within 30 seconds, the prompt dismisses as **No**.
+The prompt names the command that produced the hint so users can spot a mismatch between the tool and the plugin it recommends. If the user doesn't respond within 30 seconds, Claude Code dismisses the prompt as **No**.
 
 Prompt frequency is bounded, and some sessions never prompt:
 

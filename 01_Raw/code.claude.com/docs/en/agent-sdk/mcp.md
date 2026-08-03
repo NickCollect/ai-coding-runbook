@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/mcp
-fetched_at: 2026-07-27T04:31:46.964000+00:00
+fetched_at: 2026-08-03T04:24:58.561869+00:00
 fetch_method: mintlify_md
 ---
 
@@ -774,10 +774,12 @@ The SDK emits a `system` message with subtype `init` at the start of each query.
       }
     }
   } catch (error) {
-    // A single-shot query() throws after yielding an error result.
-    // If the failure was an error result, the error subtype branch above
-    // has already run; connection or process failures yield no result
-    // message.
+    // A single-shot query() throws after yielding an error result. If the
+    // failure was an error result, the error subtype branch above has
+    // already run; a failure to start or reach the Claude Code process
+    // yields no result message. MCP servers that fail to connect don't
+    // throw: use the status check above, and note that servers still
+    // "pending" at init need a later status check.
     console.log(`Session ended with an error: ${error}`);
   }
   ```
@@ -809,10 +811,12 @@ The SDK emits a `system` message with subtype `init` at the start of each query.
               ):
                   print("Execution failed")
       except Exception as error:
-          # A single-shot query() raises after yielding an error result.
-          # If the failure was an error result, the error subtype branch
-          # above has already run; connection or process failures yield
-          # no result message.
+          # A single-shot query() raises after yielding an error result. If the
+          # failure was an error result, the error subtype branch above has
+          # already run; a failure to start or reach the Claude Code process
+          # yields no result message. MCP servers that fail to connect don't
+          # raise: use the status check above, and note that servers still
+          # "pending" at init need a later status check.
           print(f"Session ended with an error: {error}")
 
 

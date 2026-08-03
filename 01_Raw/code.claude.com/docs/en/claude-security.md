@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-security
-fetched_at: 2026-07-27T04:31:47.820702+00:00
+fetched_at: 2026-08-03T04:25:02.419596+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,9 +35,10 @@ In a Claude Code session, install from the [official Anthropic marketplace](/doc
 /plugin install claude-security@claude-plugins-official
 ```
 
-<Note>
-  If Claude Code reports that the marketplace is not found, run `/plugin marketplace add anthropics/claude-plugins-official` first, then retry the install.
-</Note>
+If the install fails, the fix depends on which message Claude Code reports:
+
+* If it reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+* If it reports that it can't find the plugin in the marketplace, check the plugin name for a typo, then refresh your local copy of the marketplace with `/plugin marketplace update claude-plugins-official` and retry the install.
 
 Then activate the plugin in the current session with `/reload-plugins`, which applies pending plugin changes without a restart:
 

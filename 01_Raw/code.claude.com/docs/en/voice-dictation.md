@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/voice-dictation
-fetched_at: 2026-07-27T04:31:50.029262+00:00
+fetched_at: 2026-08-03T04:25:07.423462+00:00
 fetch_method: mintlify_md
 ---
 
@@ -88,7 +88,7 @@ Your speech appears in the prompt as you speak, dimmed until the transcript is f
 > refactor the auth middleware to use the new token validation helper▮
 ```
 
-By default, releasing the key inserts the transcript and waits for you to press `Enter`. Set `"autoSubmit": true` in the `voice` settings object to send the prompt automatically when you release the key, as long as the transcript is at least three words long.
+By default, when you release the key, Claude Code inserts the transcript and waits for you to press `Enter`. Set `"autoSubmit": true` in the `voice` settings object to send the prompt automatically when you release the key, as long as the transcript is at least three words long.
 
 ## Tap to record and send
 

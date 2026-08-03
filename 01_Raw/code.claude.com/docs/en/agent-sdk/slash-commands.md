@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/slash-commands
-fetched_at: 2026-07-27T04:31:47.196129+00:00
+fetched_at: 2026-08-03T04:24:59.033650+00:00
 fetch_method: mintlify_md
 ---
 
@@ -225,7 +225,7 @@ This is useful in [streaming input mode](/docs/en/agent-sdk/streaming-vs-single-
 
 ## Creating Custom Slash Commands
 
-In addition to using built-in slash commands, you can create your own custom commands that are available through the SDK. Custom commands are defined as markdown files in specific directories, similar to how subagents are configured.
+In addition to using built-in slash commands, you can create your own custom commands that are available through the SDK. You define custom commands as markdown files in specific directories, the same way you configure subagents.
 
 <Note>
   The `.claude/commands/` directory is the legacy format. The recommended format is `.claude/skills/<name>/SKILL.md`, which supports the same slash-command invocation (`/name`) plus autonomous invocation by Claude. See [Skills](/docs/en/agent-sdk/skills) for the current format. The CLI continues to support both formats, and the examples below remain accurate for `.claude/commands/`.
@@ -233,7 +233,7 @@ In addition to using built-in slash commands, you can create your own custom com
 
 ### File Locations
 
-Custom slash commands are stored in designated directories based on their scope:
+Save custom slash commands in one of these directories, depending on their scope:
 
 * **Project commands**: `.claude/commands/` - Available only in the current project (legacy; prefer `.claude/skills/`)
 * **Personal commands**: `~/.claude/commands/` - Available across all your projects (legacy; prefer `~/.claude/skills/`)
@@ -405,6 +405,8 @@ Use in SDK:
   asyncio.run(main())
   ```
 </CodeGroup>
+
+If the prompt passes fewer arguments than the placeholders reference, unmatched indexed placeholders such as `$1` stay in the command text verbatim. For the full substitution behavior, including named arguments, see [available string substitutions](/docs/en/skills#available-string-substitutions).
 
 #### Bash Command Execution
 

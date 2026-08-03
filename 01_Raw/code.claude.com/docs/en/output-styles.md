@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/output-styles
-fetched_at: 2026-07-27T04:31:49.500148+00:00
+fetched_at: 2026-08-03T04:25:05.846594+00:00
 fetch_method: mintlify_md
 ---
 
@@ -103,7 +103,7 @@ Output style files support these frontmatter fields:
 
 Output styles directly modify Claude Code's system prompt.
 
-* All output styles have their own custom instructions added to the end of the system prompt.
+* Claude Code adds each output style's custom instructions to the end of the system prompt.
 * All output styles trigger reminders for Claude to adhere to the output style instructions during the conversation.
 * Custom output styles leave out Claude Code's built-in software engineering instructions, such as how to scope changes, write comments, and verify work, unless `keep-coding-instructions` is set to `true`.
 

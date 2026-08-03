@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/worktrees
-fetched_at: 2026-07-27T04:31:50.513854+00:00
+fetched_at: 2026-08-03T04:25:08.612403+00:00
 fetch_method: mintlify_md
 ---
 
@@ -189,10 +189,10 @@ Create a worktree on a new branch:
 git worktree add ../project-feature-a -b feature-a
 ```
 
-Create a worktree from an existing branch:
+Create a worktree from an existing branch, replacing `fix-issue-456` with a branch that already exists in your repository:
 
 ```bash theme={null}
-git worktree add ../project-bugfix bugfix-123
+git worktree add ../project-bugfix fix-issue-456
 ```
 
 Start Claude in the worktree:

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/code-review
-fetched_at: 2026-07-27T04:31:47.874708+00:00
+fetched_at: 2026-08-03T04:25:02.215116+00:00
 fetch_method: mintlify_md
 ---
 
@@ -314,6 +314,12 @@ The [`/code-review` command](/docs/en/commands) reviews a diff in your terminal 
     Ask Claude to fix what the review found. If you passed `--fix` or `--comment`, the review has already applied or posted its findings.
   </Step>
 </Steps>
+
+{/* min-version: 2.1.218 */}When the host application requests it, Claude reports the review's findings through the [`ReportFindings` tool](/docs/en/tools-reference) instead of as text in its reply. Claude Code renders the report as a findings list, one entry per finding. Each entry shows the file location, a one-sentence summary, and a category tag such as `correctness` when the finding carries one. A host request applies at every effort level and requires Claude Code v2.1.218 or later.
+
+{/* min-version: 2.1.218 */}In a terminal session, `/code-review` runs the review as a fork and reports the findings as text in the reply, and Claude reports as text in any `-p` run with text or JSON output, even when the host application requests the findings list. {/* max-version: 2.1.217 */}On v2.1.216 and v2.1.217, a terminal review at `medium` or higher effort reported the findings list instead.
+
+When Claude fixes reported findings later in the session, it reports them again, and Claude Code marks each finding in the new list as fixed, skipped, or no change needed.
 
 ### What the review reads and edits
 

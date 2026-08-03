@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/structured-outputs
-fetched_at: 2026-07-27T04:31:47.237658+00:00
+fetched_at: 2026-08-03T04:24:59.277831+00:00
 fetch_method: mintlify_md
 ---
 
@@ -437,11 +437,9 @@ A result can also end with subtype `success` but no `structured_output` value, f
       }
     }
   } catch (error) {
-    // A single-shot query() throws after yielding an error result.
-    // If the failure was an error result, the subtype branches above
-    // have already run; connection or process failures yield no result
-    // message. Handle the failure here - retry with a simpler prompt,
-    // fall back to unstructured, etc.
+    // A single-shot query() throws after yielding an error result. If the
+    // failure was an error result, the error subtype branches above have
+    // already run; connection or process failures yield no result message.
     console.log(`Session ended with an error: ${error}`);
   }
   ```
@@ -477,11 +475,9 @@ A result can also end with subtype `success` but no `structured_output` value, f
                   else:
                       print("Run ended without a structured output")
       except Exception as error:
-          # A single-shot query() raises after yielding an error result.
-          # If the failure was an error result, the subtype branches above
-          # have already run; connection or process failures yield no
-          # result message. Handle the failure here - retry with a simpler
-          # prompt, fall back to unstructured, etc.
+          # A single-shot query() raises after yielding an error result. If the
+          # failure was an error result, the error subtype branches above have
+          # already run; connection or process failures yield no result message.
           print(f"Session ended with an error: {error}")
 
 

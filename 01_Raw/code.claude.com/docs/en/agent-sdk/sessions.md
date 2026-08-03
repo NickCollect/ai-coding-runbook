@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/sessions
-fetched_at: 2026-07-27T04:31:47.154063+00:00
+fetched_at: 2026-08-03T04:24:58.843467+00:00
 fetch_method: mintlify_md
 ---
 
@@ -176,10 +176,9 @@ Resume and fork require a session ID. Read it from the `session_id` field on the
                   if message.subtype == "success":
                       print(message.result)
       except Exception as error:
-          # A single-shot query() raises after yielding an error result.
-          # If the failure was an error result, session_id was already
-          # captured by the loop above; connection or process failures
-          # yield no result message.
+          # A single-shot query() raises after yielding an error result. If the
+          # failure was an error result, the loop above already captured session_id;
+          # process failures yield no result message, so session_id stays None.
           print(f"Session ended with an error: {error}")
 
       print(f"Session ID: {session_id}")
@@ -207,10 +206,9 @@ Resume and fork require a session ID. Read it from the `session_id` field on the
       }
     }
   } catch (error) {
-    // A single-shot query() throws after yielding an error result.
-    // If the failure was an error result, sessionId was already captured
-    // by the loop above; connection or process failures yield no result
-    // message.
+    // A single-shot query() throws after yielding an error result. If the
+    // failure was an error result, the loop above already captured sessionId;
+    // process failures yield no result message, so sessionId stays undefined.
     console.error(`Session ended with an error: ${error}`);
   }
 

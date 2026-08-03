@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/secure-deployment
-fetched_at: 2026-07-27T04:31:47.120826+00:00
+fetched_at: 2026-08-03T04:24:59.114916+00:00
 fetch_method: mintlify_md
 ---
 
@@ -171,8 +171,7 @@ If an agent runs malicious code (perhaps due to prompt injection), that code run
 
 To use gVisor with Docker, install the `runsc` runtime and configure the daemon:
 
-```json theme={null}
-// /etc/docker/daemon.json
+```json /etc/docker/daemon.json theme={null}
 {
   "runtimes": {
     "runsc": {

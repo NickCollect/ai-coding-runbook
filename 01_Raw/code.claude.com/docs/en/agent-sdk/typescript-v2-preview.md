@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript-v2-preview
-fetched_at: 2026-07-27T04:31:47.328198+00:00
+fetched_at: 2026-08-03T04:25:00.084242+00:00
 fetch_method: mintlify_md
 ---
 
@@ -310,6 +310,8 @@ for await (const msg of resumedSession.stream()) {
 ### Cleanup
 
 Sessions can be closed manually or automatically using [`await using`](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-2.html#using-declarations-and-explicit-resource-management), a TypeScript 5.2+ feature for automatic resource cleanup. If you're using an older TypeScript version or encounter compatibility issues, use manual cleanup instead.
+
+The examples below show only the cleanup pattern and don't send any messages, so running them produces no output.
 
 **Automatic cleanup (TypeScript 5.2+):**
 

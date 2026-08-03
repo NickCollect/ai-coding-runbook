@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-config
-fetched_at: 2026-07-27T04:31:47.690095+00:00
+fetched_at: 2026-08-03T04:25:00.984288+00:00
 fetch_method: mintlify_md
 ---
 
@@ -491,25 +491,66 @@ managed:
 | `env`                                      | CLI           | Environment variables merged into the CLI process. Use for telemetry, auto-update, and model-name overrides.                                                                                             |
 | `hooks`                                    | CLI           | Org-wide [hooks](/docs/en/hooks)                                                                                                                                                                              |
 
-Because these settings arrive over the network, the CLI shows each developer a one-time security approval dialog before applying anything that can run a shell command or alter where traffic goes. The dialog covers:
+Because these settings arrive over the network, the CLI shows each developer a one-time security approval dialog before applying the settings listed below:
 
 * `hooks`
-* `env` variables that aren't on the CLI's built-in safe list
+* `env` variables that require the developer's approval, such as proxy and base-URL variables
 * shell-execution settings such as `apiKeyHelper` and `statusLine`
 * managed CLAUDE.md content
 
-The safe list determines which `env` variables apply without approval:
+Claude Code applies some delivered `env` variables without showing the developer the approval dialog, such as model selection settings and numeric limits. Other delivered variables can require the developer's approval before they take effect; a non-empty proxy, base-URL, or `OTEL_EXPORTER_OTLP_ENDPOINT` value always does. When a delivered variable needs approval, the dialog names it.
 
-* **On the safe list**: auto-update and model-name vars
-* **Not on the safe list**: proxy vars, base-URL vars, and `OTEL_EXPORTER_OTLP_ENDPOINT`
+[Environment variables and the approval dialog](/docs/en/server-managed-settings#environment-variables-and-the-approval-dialog) has the details, including four privacy toggles whose delivered value decides whether they need approval. {/* min-version: 2.1.218 */}Before v2.1.218, Claude Code applied fewer variables without asking the developer, so more delivered variables triggered the dialog.
 
 The gateway's [telemetry](#telemetry) configuration pushes `OTEL_EXPORTER_OTLP_ENDPOINT`, so setting `telemetry.forward_to` triggers the dialog on each interactive client. The dialog protects the developer's machine from a compromised or hostile gateway, not the organization from the developer.
 
 A non-interactive run with the `-p` flag can't show the dialog. It applies the pushed settings for that run only and doesn't record them as approved, so the developer's next interactive session still shows the dialog. Before v2.1.207, a non-interactive run saved the settings as approved and no later interactive session showed the dialog for them.
 
-If a developer declines, Claude Code exits rather than applying the policy. Pushing a new hook or non-safe env var to a broad policy therefore means an approval prompt on every matching developer's next startup.
+If a developer declines, Claude Code exits rather than applying the policy. Pushing a new hook, or any env var that triggers the dialog, to a broad policy therefore means an approval prompt on every matching developer's next startup.
 
 The `cli` key was named `settings` in earlier releases. That spelling is still accepted as an alias, but new deployments should use `cli`.
+
+#### Claude Desktop overlay
+
+If your organization also deploys [Claude Desktop](/docs/en/desktop), the same gateway serves both clients. Point `bootstrapUrl`, in Claude Desktop's [managed configuration](https://claude.com/docs/third-party/claude-desktop/configuration), at `<listen.public_url>/user/bootstrap`. Claude Desktop derives the OAuth issuer from that URL, runs the same device-code sign-in against this gateway, and fetches its configuration from the response.
+
+<Note>
+  Requires Claude Code v2.1.203 or later on the gateway server, and an explicit opt-in: `/user/bootstrap` returns 404 unless the policy matching the user carries a `desktop` key. An empty `desktop: {}` opts a policy in, and a `desktop` key on the `match: {}` base layer opts in every policy that inherits it. The audit log records each request as `desktop_bootstrap.serve` or `desktop_bootstrap.denied`.
+</Note>
+
+The gateway derives much of the response from the matched policy's `cli` block and from top-level gateway config:
+
+* The model list, from `availableModels`
+* Disabled tools, from bare tool-name `permissions.deny` entries
+* The egress allowlist, from `sandbox.network.allowedDomains`
+* An OTLP endpoint that points at the gateway itself, which fans out to your destinations, included when [`telemetry`](#telemetry) forwarding is configured
+
+The gateway omits keys with no Claude Desktop equivalent, such as `hooks` and scoped permission rules like `Bash(npm *)`, from the bootstrap response.
+
+The optional `desktop` block alongside `cli` holds the Claude Desktop feature gates that have no CLI equivalent:
+
+```yaml theme={null}
+managed:
+  policies:
+    - match: { groups: [eng-contractors] }
+      cli:
+        availableModels: [claude-sonnet-4-6]
+      desktop:
+        isLocalDevMcpEnabled: false
+        disableAutoUpdates: true
+        banner: { text: "Contractor build: internal use only" }
+```
+
+| Key                                                                | Effect                                                                                                             |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `modelDiscoveryEnabled`                                            | Whether Claude Desktop fetches `/v1/models` for its picker. Set `false` to rely solely on the policy's model list. |
+| `coworkTabEnabled`, `isClaudeCodeForDesktopEnabled`                | Show or hide individual tabs                                                                                       |
+| `isDesktopExtensionEnabled`, `isDesktopExtensionSignatureRequired` | Desktop extension loading and signature checks                                                                     |
+| `isLocalDevMcpEnabled`                                             | Allow locally defined MCP servers                                                                                  |
+| `disableAutoUpdates`, `autoUpdaterEnforcementHours`                | Auto-update policy                                                                                                 |
+| `banner`                                                           | Persistent banner at the top of the app: `enabled`, `text`, `backgroundColor`, `textColor`, `linkUrl`              |
+
+Every key is optional; Claude Desktop applies its own default for any key you omit. The gateway rejects unknown keys at boot. If you don't deploy Claude Desktop, leave `desktop` out of your policies entirely; `/user/bootstrap` then returns 404 for every user.
 
 #### Precedence with other managed sources
 
@@ -521,7 +562,7 @@ If a device also has a local `managed-settings.json` or MDM-delivered policy, th
 4. The `managed-settings.json` file
 5. The HKCU registry, on Windows only
 
-Embedding hosts can supply policy through the SDK `managedSettings` option. Whether it applies depends on the machine's managed configuration:
+Embedding hosts such as [Claude Desktop](/docs/en/desktop) can supply policy through the SDK `managedSettings` option. Whether it applies depends on the machine's managed configuration:
 
 * On machines with an admin-deployed managed source, it is ignored unless the highest-priority source opts in with [`parentSettingsBehavior: "merge"`](/docs/en/settings#available-settings).
 * It is never merged while a [`policyHelper`](/docs/en/settings#compute-managed-settings-with-a-policy-helper) is configured.
@@ -577,17 +618,18 @@ telemetry:
   Enable logs and traces only on destinations with the access controls and retention policy that data warrants.
 </Warning>
 
-Telemetry is off in the CLI by default. Configuring `telemetry.forward_to` together with `listen.public_url` turns it on. The gateway pushes five env vars to every connected client through `/managed/settings`:
+Telemetry is off in the CLI by default. Configuring `telemetry.forward_to` together with `listen.public_url` turns it on. The gateway pushes six env vars to every connected client through `/managed/settings`:
 
 * `CLAUDE_CODE_ENABLE_TELEMETRY=1`
 * `OTEL_METRICS_EXPORTER=otlp`
 * `OTEL_LOGS_EXPORTER=otlp`
 * `OTEL_TRACES_EXPORTER=otlp`
 * `OTEL_EXPORTER_OTLP_ENDPOINT=<public_url>`
+* `OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf`
 
 The pushed endpoint is built from the public URL, so metrics and logs need no OTEL configuration from developers or policies. The pushed configuration is applied at the managed tier, overriding `OTEL_*` variables a developer sets locally.
 
-[Traces](/docs/en/monitoring-usage#traces-beta) additionally require `CLAUDE_CODE_ENHANCED_TELEMETRY_BETA=1` on each client. The gateway doesn't push that variable, so set it through a managed policy's `env` block. It isn't on the CLI's safe list, so delivering it through a policy is covered by the same [security approval dialog](#managed) that the pushed OTLP endpoint already triggers.
+[Traces](/docs/en/monitoring-usage#traces-beta) additionally require `CLAUDE_CODE_ENHANCED_TELEMETRY_BETA=1` on each client. The gateway doesn't push that variable, so set it through a managed policy's `env` block. It isn't among the variables Claude Code applies without the developer's approval, so delivering it through a policy is covered by the same [security approval dialog](#managed) that the pushed OTLP endpoint already triggers.
 
 Both protobuf and JSON OTLP encodings are relayed, and any OpenTelemetry-compatible backend works as a destination.
 
@@ -743,7 +785,7 @@ telemetry:
 
 ## Client-side managed settings
 
-Everything above configures the gateway server. Pointing developer machines at it is configured separately, on each device, through Claude Code's [managed settings](/docs/en/settings#settings-files). The gateway can't push the login keys itself, because they're what tell the client where the gateway is.
+Everything above configures the gateway server. You point developer machines at the gateway separately, on each device, through Claude Code's [managed settings](/docs/en/settings#settings-files). The gateway can't push the login keys itself, because they're what tell the client where the gateway is.
 
 For the CLI, set these keys in the per-OS `managed-settings.json`. The two login keys route each developer's `/login` to your gateway:
 
@@ -766,6 +808,8 @@ Deploy the `managed-settings.json` file to each device, typically via your MDM p
 | Windows       | `C:\Program Files\ClaudeCode\managed-settings.json`, or Group Policy via the HKLM registry                                    |
 
 A registry policy on Windows or a managed-preferences plist on macOS replaces the `managed-settings.json` file rather than merging with it, apart from the [exception keys and cross-source checks above](#precedence-with-other-managed-sources). All three keys in this snippet follow the highest-priority-source rule, so fleets that deliver policy through Group Policy or configuration profiles must put all three in that mechanism instead.
+
+For Claude Desktop, set the `bootstrapUrl` key in Claude Desktop's own [managed configuration](https://claude.com/docs/third-party/claude-desktop/configuration) to `<listen.public_url>/user/bootstrap`. The sign-in flow and per-group policy then match the CLI's once a policy opts in server-side with a `desktop` key; without the opt-in, `/user/bootstrap` returns 404. See [Claude Desktop overlay](#claude-desktop-overlay) for the server-side half.
 
 `forceLoginGatewayUrl`, and the `"gateway"` value of `forceLoginMethod`, are honored only from the admin-controlled managed tier. A developer setting them in their own `~/.claude/settings.json` has no effect.
 
