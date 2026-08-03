@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=he
-fetched_at: 2026-07-27T04:34:17.287837+00:00
-title: "\u05d9\u05e6\u05d9\u05e8\u05ea \u05d8\u05e7\u05e1\u05d8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/text-generation?hl=vi
+fetched_at: 2026-08-03T04:27:22.442851+00:00
+title: "T\u1ea1o v\u0103n b\u1ea3n \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-# יצירת טקסט
+# Tạo văn bản
 
-‫Gemini API יכול ליצור פלט של טקסט מקלט של טקסט, תמונות, סרטונים ואודיו.
+Gemini API có thể tạo đầu ra là văn bản từ văn bản, hình ảnh, video và âm thanh đầu vào.
 
-דוגמה בסיסית:
+Sau đây là một ví dụ cơ bản:
 
 ### Python
 
@@ -30,7 +30,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="How does AI work?"
 )
 print(interaction.output_text)
@@ -45,7 +45,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "How does AI work?",
   });
   console.log(interaction.output_text);
@@ -61,22 +61,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "How does AI work?"
   }'
 ```
 
-ערכות ה-SDK של Google GenAI מספקות מאפייני נוחות ישירות באובייקט `Interaction` שמוחזר, כדי לגשת לתגובה של המודל.
+Các SDK AI tạo sinh của Google cung cấp các thuộc tính tiện lợi ngay trên đối tượng `Interaction` được trả về để truy cập vào phản hồi của mô hình.
 
-העוזר הנפוץ ביותר הוא **`interaction.output_text`** (מחרוזת), שמחזיר את בלוקי הטקסט האחרונים בתשובה של המודל. אם התשובה מחולקת לכמה בלוקים רצופים של `TextContent`, הם יאוחדו אוטומטית.
-שימו לב: `.output_text` לא כולל בלוקים קודמים של טקסט שמופרדים על ידי
-תוכן שאינו טקסט (כמו מחשבות, תמונות, אודיו או קריאות כלים). כדי לקבל תשובות מורכבות או תשובות משולבות עם כמה מצבים, צריך להשתמש ב-`steps` באופן ידני. מידע נוסף על מאפייני נוחות אחרים של מדיה זמין במאמר [סקירה כללית על אינטראקציות](https://ai.google.dev/gemini-api/docs/interactions?hl=he#convenience-properties).
+Trợ giúp phổ biến nhất là **`interaction.output_text`** (String), trả về các khối văn bản cuối cùng trong phản hồi của mô hình. Nếu câu trả lời được chia thành nhiều khối `TextContent` liên tiếp, thì câu trả lời đó sẽ tự động được hợp nhất.
+Xin lưu ý rằng `.output_text` không bao gồm các khối văn bản trước đó được phân tách bằng nội dung không phải văn bản (chẳng hạn như suy nghĩ, hình ảnh, âm thanh hoặc lệnh gọi công cụ). Đối với các câu trả lời phức tạp hoặc xen kẽ nhiều phương thức, bạn phải lặp lại `steps` theo cách thủ công. Để tìm hiểu thêm về các thuộc tính khác liên quan đến sự thuận tiện của nội dung nghe nhìn, hãy xem phần [Tổng quan về lượt tương tác](https://ai.google.dev/gemini-api/docs/interactions?hl=vi#convenience-properties).
 
-## חשיבה עם Gemini
+## Suy nghĩ cùng Gemini
 
-בדרך כלל, מודלים של Gemini מגיעים עם ['חשיבה'](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=he) מופעלת כברירת מחדל. כך המודל יכול להסיק מסקנות לפני שהוא משיב לבקשה.
+Các mô hình Gemini thường được bật tính năng ["tư duy"](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=vi) theo mặc định. Tính năng này cho phép mô hình suy luận trước khi trả lời một yêu cầu.
 
-כל מודל תומך בהגדרות שונות של חשיבה, שמאפשרות לכם לשלוט בעלות, בחביון ובאינטליגנציה. מידע נוסף זמין ב[מדריך החשיבה](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=he#set-budget).
+Mỗi mô hình hỗ trợ các cấu hình tư duy khác nhau, giúp bạn kiểm soát chi phí, độ trễ và mức độ thông minh. Để biết thêm thông tin, hãy xem [hướng dẫn tư duy](https://ai.google.dev/gemini-api/docs/interactions/thinking?hl=vi#set-budget).
 
 ### Python
 
@@ -86,7 +85,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="How does AI work?",
     generation_config={
         "thinking_level": "low"
@@ -104,7 +103,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "How does AI work?",
     generation_config: {
       thinking_level: "low",
@@ -123,7 +122,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "How does AI work?",
     "generation_config": {
       "thinking_level": "low"
@@ -131,9 +130,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## הוראות מערכת והגדרות אחרות
+## Hướng dẫn hệ thống và các cấu hình khác
 
-אתם יכולים להגדיר את ההתנהגות של מודלים של Gemini באמצעות הוראות מערכת. מעבירים פרמטר `system_instruction` כדי להגדיר את ההתנהגות של המודל.
+Bạn có thể hướng dẫn hành vi của các mô hình Gemini bằng chỉ dẫn hệ thống. Truyền tham số `system_instruction` để định cấu hình hành vi của mô hình.
 
 ### Python
 
@@ -143,7 +142,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     system_instruction="You are a cat. Your name is Neko.",
     input="Hello there"
 )
@@ -160,7 +159,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "Hello there",
     system_instruction: "You are a cat. Your name is Neko.",
   });
@@ -177,13 +176,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "system_instruction": "You are a cat. Your name is Neko.",
     "input": "Hello there"
   }'
 ```
 
-אפשר גם לשנות את פרמטרי ברירת המחדל של יצירת התוכן, כמו הטמפרטורה, באמצעות הפרמטר `generation_config`.
+Bạn cũng có thể ghi đè các tham số tạo mặc định, chẳng hạn như nhiệt độ, bằng cách sử dụng tham số `generation_config`.
 
 ### Python
 
@@ -193,7 +192,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Explain how AI works",
     generation_config={
         "temperature": 1.0
@@ -211,7 +210,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "Explain how AI works",
     generation_config: {
       temperature: 1.0,
@@ -230,7 +229,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Explain how AI works",
     "generation_config": {
       "temperature": 1.0
@@ -238,11 +237,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-רשימה מלאה של הפרמטרים שאפשר להגדיר והתיאורים שלהם מופיעה [במסמכי העזר של Interactions API](https://ai.google.dev/api/interactions-api?hl=he).
+Hãy tham khảo [Tài liệu tham khảo về Interactions API](https://ai.google.dev/api/interactions-api?hl=vi) để xem danh sách đầy đủ các tham số có thể định cấu hình và nội dung mô tả của các tham số đó.
 
-## קלט מרובה מצבים
+## Thông tin đầu vào đa phương thức
 
-‫Gemini API תומך בקלט מרובה-אופנים, ומאפשר לכם לשלב טקסט עם קובצי מדיה. בדוגמה הבאה מוצג איך מספקים תמונה:
+Gemini API hỗ trợ dữ liệu đầu vào đa phương thức, cho phép bạn kết hợp văn bản với các tệp nội dung nghe nhìn. Ví dụ sau đây minh hoạ cách cung cấp hình ảnh:
 
 ### Python
 
@@ -254,7 +253,7 @@ client = genai.Client()
 uploaded_file = client.files.upload(file="path/to/organ.jpg")
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Tell me about this instrument"},
         {
@@ -281,7 +280,7 @@ async function main() {
   });
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
       {type: "text", text: "Tell me about this instrument"},
       {
@@ -305,7 +304,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Tell me about this instrument"},
       {
@@ -317,14 +316,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-שיטות חלופיות להוספת תמונות ומידע נוסף על עיבוד תמונות מתקדם זמינים [במדריך שלנו להבנת תמונות](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=he).
-ממשק ה-API תומך גם בהבנה של קלט מסוג [מסמך](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=he), [וידאו](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=he) ו[אודיו](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=he).
+Để biết các phương thức thay thế để cung cấp hình ảnh và quy trình xử lý hình ảnh nâng cao hơn, hãy xem [hướng dẫn về việc hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=vi).
+API này cũng hỗ trợ các dữ liệu đầu vào và thông tin [về tài liệu](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=vi), [video](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=vi) và [âm thanh](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=vi).
 
-## הצגת התשובות באופן שוטף
+## Hiện câu trả lời theo thời gian thực
 
-כברירת מחדל, המודל מחזיר תשובה רק אחרי שתהליך היצירה כולו מסתיים.
+Theo mặc định, mô hình chỉ trả về câu trả lời sau khi toàn bộ quy trình tạo hoàn tất.
 
-כדי שהאינטראקציות יהיו חלקות יותר, אפשר להשתמש בסטרימינג כדי לטפל בחלקים של התשובה בזמן שהם נוצרים. מדריך מקיף בנושא סוגי אירועים, סטרימינג באמצעות כלים, חשיבה, סוכנים ויצירת תמונות זמין במדריך הייעודי [אינטראקציות בסטרימינג](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=he).
+Để có các hoạt động tương tác mượt mà hơn, hãy sử dụng tính năng truyền trực tuyến để xử lý các đoạn phản hồi khi chúng được tạo. Để xem hướng dẫn toàn diện về các loại sự kiện, tính năng phát trực tuyến bằng công cụ, tư duy, tác nhân và tạo hình ảnh, hãy xem hướng dẫn chuyên biệt về [Tương tác phát trực tuyến](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=vi).
 
 ### Python
 
@@ -334,7 +333,7 @@ from google import genai
 client = genai.Client()
 
 stream = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Explain how AI works",
     stream=True
 )
@@ -353,7 +352,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const stream = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "Explain how AI works",
     stream: true,
   });
@@ -378,15 +377,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   -H 'Content-Type: application/json' \
   --no-buffer \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Explain how AI works",
     "stream": true
   }'
 ```
 
-## שיחות עם זיכרון
+## Cuộc trò chuyện nhiều lượt
 
-‫Interactions API תומך בשיחות בכמה שלבים על ידי שרשור אינטראקציות באמצעות `previous_interaction_id`. כל תור הוא אינטראקציה נפרדת, וממשק ה-API מנהל אוטומטית את היסטוריית השיחות.
+Interactions API hỗ trợ các cuộc trò chuyện nhiều lượt bằng cách liên kết các lượt tương tác với nhau bằng cách sử dụng `previous_interaction_id`. Mỗi lượt là một lượt tương tác riêng biệt và API sẽ tự động quản lý nhật ký trò chuyện.
 
 ### Python
 
@@ -396,13 +395,13 @@ from google import genai
 client = genai.Client()
 
 interaction1 = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="I have 2 dogs in my house.",
 )
 print(interaction1.output_text)
 
 interaction2 = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="How many paws are in my house?",
     previous_interaction_id=interaction1.id,
 )
@@ -418,13 +417,13 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction1 = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "I have 2 dogs in my house.",
   });
   console.log("Response 1:", interaction1.output_text);
 
   const interaction2 = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "How many paws are in my house?",
     previous_interaction_id: interaction1.id,
   });
@@ -441,7 +440,7 @@ RESPONSE1=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/in
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "I have 2 dogs in my house."
   }')
 
@@ -451,13 +450,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "I have two dogs in my house. How many paws are in my house?",
     "previous_interaction_id": "'$INTERACTION_ID'"
   }'
 ```
 
-אפשר גם להשתמש בסטרימינג לשיחות מרובות תורות על ידי שילוב של `previous_interaction_id` עם שיטות הסטרימינג.
+Bạn cũng có thể dùng tính năng truyền trực tuyến cho các cuộc trò chuyện nhiều lượt bằng cách kết hợp `previous_interaction_id` với các phương thức truyền trực tuyến.
 
 ### Python
 
@@ -467,13 +466,13 @@ from google import genai
 client = genai.Client()
 
 interaction1 = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="I have 2 dogs in my house.",
 )
 print(interaction1.output_text)
 
 stream = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="How many paws are in my house?",
     previous_interaction_id=interaction1.id,
     stream=True
@@ -493,13 +492,13 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const interaction1 = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "I have 2 dogs in my house.",
   });
   console.log("Response 1:", interaction1.output_text);
 
   const stream = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "How many paws are in my house?",
     previous_interaction_id: interaction1.id,
     stream: true,
@@ -523,7 +522,7 @@ RESPONSE1=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/in
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "I have 2 dogs in my house."
   }')
 INTERACTION_ID=$(echo "$RESPONSE1" | jq -r '.id')
@@ -533,21 +532,21 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   -H 'Content-Type: application/json' \
   --no-buffer \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "How many paws are in my house?",
     "previous_interaction_id": "'$INTERACTION_ID'",
     "stream": true
   }'
 ```
 
-## שיחות ללא שמירת מצב
+## Cuộc trò chuyện không trạng thái
 
-כברירת מחדל, ממשק Interactions API מנהל את מצב השיחה בצד השרת כשמשתמשים ב-`previous_interaction_id`. עם זאת, אפשר גם לפעול במצב חסר מצב (stateless) על ידי ניהול היסטוריית השיחות בעצמכם בצד הלקוח.
+Theo mặc định, Interactions API quản lý trạng thái cuộc trò chuyện phía máy chủ khi bạn sử dụng `previous_interaction_id`. Tuy nhiên, bạn cũng có thể hoạt động ở chế độ không trạng thái bằng cách tự quản lý nhật ký cuộc trò chuyện ở phía máy khách.
 
-כדי להשתמש במצב חסר מצב:
-‫1. כדי לבטל את ההסכמה לאחסון בצד השרת, צריך להגדיר את הערך `store=false` בבקשה.
-2. לשמור את היסטוריית השיחות כמערך של **שלבים** בצד הלקוח.
-3. בבקשות הבאות, מעבירים את השלבים המצטברים בשדה `input` ומצרפים את התור החדש כשלב `user_input`.
+Cách sử dụng chế độ không trạng thái:
+1. Đặt `store=false` trong yêu cầu của bạn để chọn không sử dụng bộ nhớ phía máy chủ.
+2. Duy trì nhật ký trò chuyện dưới dạng một mảng **các bước** ở phía máy khách.
+3. Trong các yêu cầu tiếp theo, hãy truyền các bước đã tích luỹ trong trường `input` và thêm lượt mới của bạn dưới dạng một bước `user_input`.
 
 ### Python
 
@@ -564,7 +563,7 @@ history = [
 ]
 
 interaction1 = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     store=False,
     input=history
 )
@@ -579,7 +578,7 @@ history.append({
 })
 
 interaction2 = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     store=False,
     input=history
 )
@@ -602,7 +601,7 @@ async function main() {
   ];
 
   const interaction1 = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     store: false,
     input: history
   });
@@ -616,7 +615,7 @@ async function main() {
   });
 
   const interaction2 = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     store: false,
     input: history
   });
@@ -634,7 +633,7 @@ RESPONSE1=$(curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/in
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "store": false,
     "input": [
       {
@@ -662,29 +661,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d "{
-    \"model\": \"gemini-3.5-flash\",
+    \"model\": \"gemini-3.6-flash\",
     \"store\": false,
     \"input\": $HISTORY
   }"
 ```
 
-## טיפים לכתיבת הנחיות
+## Mẹo tạo câu lệnh
 
-ב[מדריך שלנו להנדסת הנחיות](https://ai.google.dev/gemini/docs/prompting-strategies?hl=he) מופיעות הצעות שיעזרו לכם להפיק את המרב מ-Gemini.
+Tham khảo [hướng dẫn về thiết kế câu lệnh](https://ai.google.dev/gemini/docs/prompting-strategies?hl=vi) của chúng tôi để biết các đề xuất về cách khai thác tối đa Gemini.
 
-## המאמרים הבאים
+## Bước tiếp theo
 
-- כדאי לנסות את [Gemini ב-Google AI Studio](https://aistudio.google.com?hl=he).
-- אפשר להתנסות ב[פלט מובנה](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=he) כדי לקבל תשובות שדומות ל-JSON.
-- אתם יכולים לנסות את היכולות של Gemini להבנת [תמונות](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=he), [סרטונים](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=he), [אודיו](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=he) ו[מסמכים](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=he).
-- [מידע על אסטרטגיות להנחיות בקבצים ל-multimodal](https://ai.google.dev/gemini-api/docs/interactions/files?hl=he#prompt-guide)
+- Dùng thử [Gemini trong Google AI Studio](https://aistudio.google.com?hl=vi).
+- Thử nghiệm với [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/interactions/structured-output?hl=vi) cho các phản hồi tương tự như JSON.
+- Khám phá các khả năng hiểu [hình ảnh](https://ai.google.dev/gemini-api/docs/interactions/image-understanding?hl=vi), [video](https://ai.google.dev/gemini-api/docs/interactions/video-understanding?hl=vi), [âm thanh](https://ai.google.dev/gemini-api/docs/interactions/audio?hl=vi) và [tài liệu](https://ai.google.dev/gemini-api/docs/interactions/document-processing?hl=vi) của Gemini.
+- Tìm hiểu về [các chiến lược đưa ra câu lệnh bằng tệp đa phương thức](https://ai.google.dev/gemini-api/docs/interactions/files?hl=vi#prompt-guide).
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-עדכון אחרון: 2026-07-08 (שעון UTC).
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-רוצה לתת לנו משוב?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-08 (שעון UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

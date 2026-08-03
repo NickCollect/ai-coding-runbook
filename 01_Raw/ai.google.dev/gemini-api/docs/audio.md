@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/audio?hl=he
-fetched_at: 2026-07-27T04:43:01.504790+00:00
-title: "\u05d4\u05d1\u05e0\u05ea \u05d0\u05d5\u05d3\u05d9\u05d5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/audio?hl=de
+fetched_at: 2026-08-03T04:40:06.201453+00:00
+title: "Audioinhalte verstehen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-שליחת משוב
+Feedback geben
 
-# הבנת אודיו
+# Audioinhalte verstehen
 
-‫Gemini יכול לנתח קלט אודיו וליצור תשובות טקסט.
+Gemini kann Audioeingaben analysieren und Textantworten generieren.
 
 ### Python
 
@@ -31,7 +31,7 @@ client = genai.Client()
 uploaded_file = client.files.upload(file="path/to/sample.mp3")
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {
@@ -57,7 +57,7 @@ const uploadedFile = await client.files.upload({
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         {type: "text", text: "Describe this audio clip"},
         {
@@ -78,7 +78,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Describe this audio clip"},
       {
@@ -90,23 +90,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## סקירה כללית
+## Übersicht
 
-‫Gemini יכול לנתח ולהבין קלט אודיו וליצור תשובות בטקסט,
-מה שמאפשר תרחישי שימוש כמו:
+Gemini kann Audioeingaben analysieren und verstehen und Textantworten generieren. Dadurch sind folgende Anwendungsfälle möglich:
 
-- תיאור, סיכום או מענה על שאלות לגבי תוכן אודיו
-- תמלול ותרגום (דיבור לטקסט)
-- חלוקת קובץ האודיו לפי דוברים (זיהוי של דוברים שונים)
-- זיהוי רגשות בדיבור ובמוזיקה
-- ניתוח פלחים ספציפיים עם חותמות זמן
+- Audioinhalte beschreiben, zusammenfassen oder Fragen dazu beantworten
+- Transkription und Übersetzung (Sprache zu Text)
+- Sprecherbestimmung (verschiedene Sprecher identifizieren)
+- Erkennung von Emotionen in Sprache und Musik
+- Bestimmte Segmente mit Zeitstempeln analysieren
 
-למידע על אינטראקציות בזמן אמת באמצעות קול ווידאו, אפשר לעיין ב[Live API](https://ai.google.dev/gemini-api/docs/live?hl=he).
-כדי להשתמש במודלים ייעודיים של תמלול דיבור לטקסט עם תמיכה בתמלול בזמן אמת, צריך להשתמש ב-[Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=he).
+Informationen zu Sprach- und Videointeraktionen in Echtzeit finden Sie in der
+[Live API](https://ai.google.dev/gemini-api/docs/live?hl=de).
+Für spezielle Modelle für die Umwandlung von Sprache in Text mit Unterstützung für die Echtzeit-Transkription,
+verwenden Sie die [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=de).
 
-## תמלול דיבור לטקסט
+## Sprache zu Text transkribieren
 
-בדוגמה הזו מוסבר איך לתמלל, לתרגם ולסכם דיבור עם חותמות זמן, זיהוי דובר וזיהוי רגשות באמצעות [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he).
+In diesem Beispiel wird gezeigt, wie Sie Sprache mit
+Zeitstempeln, Sprecherbestimmung und Emotionserkennung mithilfe
+[strukturierter Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de)transkribieren, übersetzen und zusammenfassen.
 
 ### Python
 
@@ -155,7 +158,7 @@ response_schema = {
 }
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "video", "uri": YOUTUBE_URL, "mime_type": "video/mp4"},
         {"type": "text", "text": prompt}
@@ -213,7 +216,7 @@ const responseSchema = {
 };
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         { type: "video", uri: YOUTUBE_URL, mime_type: "video/mp4" },
         { type: "text", text: prompt }
@@ -231,7 +234,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {
         "type": "video",
@@ -264,18 +267,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![אפליקציית Gemini לתמלול אודיו רב-לשוני](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=he)
+![Eine mehrsprachige Audio-Transkriptions-Gemini-App](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=de)
 
-## קלט אודיו
+## Eingabeaudio
 
-אפשר לספק נתוני אודיו בדרכים הבאות:
+Sie können Audiodaten auf folgende Arten bereitstellen:
 
-- [מעלים קובץ אודיו](#upload-audio) לפני ששולחים בקשה.
-- [מעבירים נתוני אודיו מוטבעים](#inline-audio) עם הבקשה.
+- [Laden Sie eine Audiodatei hoch](#upload-audio), bevor Sie eine Anfrage senden.
+- [Übergeben Sie Inline-Audiodaten](#inline-audio) mit der Anfrage.
 
-### העלאה של קובץ אודיו
+### Audiodatei hochladen
 
-לקבצים שגדולים מ-20MB, צריך להשתמש ב-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=he).
+Verwenden Sie die [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) für Dateien, die größer als 20 MB sind.
 
 ### Python
 
@@ -287,7 +290,7 @@ client = genai.Client()
 uploaded_file = client.files.upload(file="path/to/sample.mp3")
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {
@@ -313,7 +316,7 @@ const uploadedFile = await client.files.upload({
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         {type: "text", text: "Describe this audio clip"},
         {
@@ -334,7 +337,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Describe this audio clip"},
       {
@@ -346,9 +349,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### העברת נתוני אודיו בתוך השורה
+### Audiodaten inline übergeben
 
-עבור קובצי אודיו קטנים שגודל הבקשה הכולל שלהם הוא פחות מ-20MB:
+Für kleine Audiodateien mit einer Gesamtgröße von weniger als 20 MB:
 
 ### Python
 
@@ -362,7 +365,7 @@ with open('path/to/small-sample.mp3', 'rb') as f:
     audio_bytes = f.read()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Describe this audio clip"},
         {
@@ -388,7 +391,7 @@ const audioData = fs.readFileSync("path/to/small-sample.mp3", {
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         {type: "text", text: "Describe this audio clip"},
         {
@@ -416,7 +419,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Describe this audio clip"},
       {
@@ -428,19 +431,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-הערות לגבי נתוני אודיו מוטבעים:
-\* הגודל המקסימלי של הבקשה הוא 20MB בסך הכול (כולל הנחיות וכל הקבצים)
-\* כדי לעשות שימוש חוזר, [מעלים את הקובץ](#upload-audio) במקום זאת
+Hinweise zu Inline-Audiodaten:
+\* Die maximale Anfragengröße beträgt insgesamt 20 MB (einschließlich Prompts und aller Dateien).
+\* Wenn Sie die Datei wiederverwenden möchten, [laden Sie sie](#upload-audio) stattdessen hoch.
 
-## קבלת תמליל
+## Transkript erstellen
 
-כדי לקבל תמליל, מבקשים אותו בהנחיה:
+Wenn Sie ein Transkript erstellen möchten, fordern Sie es im Prompt an:
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Generate a transcript of the speech."},
         {
@@ -457,7 +460,7 @@ print(interaction.output_text)
 
 ```
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         { type: "text", text: "Generate a transcript of the speech." },
         {
@@ -470,15 +473,15 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-## עיון בחותמות זמן
+## Auf Zeitstempel verweisen
 
-כדי להפנות לחלקים ספציפיים, משתמשים בפורמט `MM:SS`:
+Verwenden Sie das Format `MM:SS`, um auf bestimmte Abschnitte zu verweisen:
 
 ### Python
 
 ```
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Provide a transcript from 02:30 to 03:29."},
         {
@@ -494,7 +497,7 @@ interaction = client.interactions.create(
 
 ```
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         { type: "text", text: "Provide a transcript from 02:30 to 03:29." },
         { type: "audio", uri: uploadedFile.uri, mime_type: "audio/mp3" }
@@ -502,15 +505,15 @@ const interaction = await client.interactions.create({
 });
 ```
 
-## ספירת טוקנים
+## Tokens zählen
 
-ספירת טוקנים בקובץ אודיו:
+So zählen Sie Tokens in einer Audiodatei:
 
 ### Python
 
 ```
 response = client.models.count_tokens(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents=[uploaded_file]
 )
 print(response)
@@ -520,7 +523,7 @@ print(response)
 
 ```
 const response = await client.models.countTokens({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: [
         { fileData: { fileUri: uploadedFile.uri, mimeType: uploadedFile.mimeType } }
     ]
@@ -528,37 +531,37 @@ const response = await client.models.countTokens({
 console.log(response.totalTokens);
 ```
 
-## פורמטים נתמכים של אודיו
+## Unterstützte Audioformate
 
-- ‫WAV – `audio/wav`
-- MP3 - `audio/mp3`
-- AIFF - `audio/aiff`
-- ‫AAC – `audio/aac`
-- OGG Vorbis - `audio/ogg`
+- WAV – `audio/wav`
+- MP3 – `audio/mp3`
+- AIFF – `audio/aiff`
+- AAC – `audio/aac`
+- OGG Vorbis – `audio/ogg`
 - FLAC – `audio/flac`
 
-## פרטים טכניים על אודיו
+## Technische Details zu Audio
 
-- **טוקנים**: 32 טוקנים לכל שנייה של אודיו (דקה אחת = 1,920 טוקנים)
-- **צלילים שהם לא דיבור**: Gemini מבין צלילים שהם לא דיבור (ציוץ ציפורים, סירנות וכו')
-- **אורך מקסימלי**: 9.5 שעות של אודיו לכל הנחיה
-- **רזולוציה**: דגימה חוזרת ל-16Kbps
-- **ערוצים**: שילוב של אודיו מרובה ערוצים לערוץ יחיד
+- **Tokens**: 32 Tokens pro Sekunde Audio (1 Minute = 1.920 Tokens)
+- **Nicht-Sprache**: Gemini versteht Geräusche, die keine Sprache sind (Vogelgesang, Sirenen usw.).
+- **Maximale Länge**: 9,5 Stunden Audio pro Prompt
+- **Auflösung**: Auf 16 kbit/s heruntergesampelt
+- **Kanäle**: Mehrkanal-Audio wird zu einem einzelnen Kanal kombiniert.
 
-## המאמרים הבאים
+## Nächste Schritte
 
-- ‫[Files API](https://ai.google.dev/gemini-api/docs/files?hl=he): העלאה וניהול של קובצי אודיו
-- [System instructions](https://ai.google.dev/gemini-api/docs/text-generation?hl=he#system-instructions):
-  Customize model behavior
-- ‫[Structured output](https://ai.google.dev/gemini-api/docs/structured-output?hl=he):
-  קבלת תוצאות תמלול בפורמט JSON
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de): Audiodateien hochladen und verwalten
+- [Systemanweisungen](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#system-instructions):
+  Modellverhalten anpassen
+- [Strukturierte Ausgabe](https://ai.google.dev/gemini-api/docs/structured-output?hl=de):
+  Transkriptionsergebnisse im JSON-Format abrufen
 
-שליחת משוב
+Feedback geben
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-עדכון אחרון: 2026-07-06 (שעון UTC).
+Zuletzt aktualisiert: 2026-07-30 (UTC).
 
-רוצה לתת לנו משוב?
+Haben Sie Feedback für uns?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-06 (שעון UTC)."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]

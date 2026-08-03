@@ -1,47 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=th
-fetched_at: 2026-07-27T04:48:02.946834+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-2.0-generate-001?hl=ja
+fetched_at: 2026-08-03T04:35:34.110522+00:00
 title: "Veo 2.0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-ส่งความคิดเห็น
+フィードバックを送信
 
 # Veo 2.0
 
-โมเดลการสร้างวิดีโอที่เสถียรและเชื่อถือได้ของเรา ซึ่งให้ประสิทธิภาพที่สม่ำเสมอสำหรับเวิร์กโฟลว์ที่พร้อมใช้งานจริง Veo 2.0 เหมาะที่สุดสำหรับการสร้างเนื้อหา 1080p มาตรฐาน, ชิ้นงานโซเชียลมีเดีย และงานวิดีโอจำนวนมากที่ให้ความสำคัญกับความสอดคล้องของตัวละครที่เชื่อถือได้และความเร็วในการสร้างที่คาดการณ์ได้ในระดับไม่ถึงวินาที
+堅牢で信頼性の高い安定版の動画生成モデル。本番環境に対応したワークフローで一貫したパフォーマンスを発揮します。Veo 2.0 は、標準の 1080p コンテンツの作成、ソーシャル メディア アセット、信頼性の高いキャラクターの一貫性と予測可能な 1 秒未満の生成速度を重視する大量の動画タスクに最適です。
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com?model=veo-2.0-generate-001&hl=th)
+[Google AI Studio で試す](https://aistudio.google.com?model=veo-2.0-generate-001&hl=ja)
 
-## เอกสารประกอบ
+## ドキュメント
 
-ไปที่หน้า[การสร้างวิดีโอ](https://ai.google.dev/gemini-api/docs/video?hl=th)เพื่อดู
-ฟีเจอร์และความสามารถทั้งหมด
+機能と機能の全容については、[動画生成](https://ai.google.dev/gemini-api/docs/video?hl=ja)のページをご覧ください。
 
 ## veo-2.0-generate-001
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| プロパティ | 説明 |
 | --- | --- |
-| id\_cardรหัสโมเดล | **Gemini API**  `veo-2.0-generate-001` |
-| saveประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ  **เอาต์พุต**  วิดีโอ |
-| token\_autoขีดจำกัด | **อินพุตข้อความ**  ไม่มี  **อินพุตรูปภาพ**  ความละเอียดและอัตราส่วนกว้างยาวของรูปภาพใดก็ได้ โดยมีขนาดไฟล์ไม่เกิน 20 MB  **วิดีโอเอาต์พุต**  สูงสุด 2 รายการ |
-| calendar\_monthการอัปเดตล่าสุด | เมษายน 2025 |
+| id\_cardモデルコード | **Gemini API**  `veo-2.0-generate-001` |
+| save でサポートされるデータ型 | **入力**  テキスト、画像  **出力**  動画 |
+| token\_auto の上限 | **テキスト入力**  なし  **画像入力**  ファイルサイズ 20 MB までの任意の画像解像度とアスペクト比  **出力動画**  最大 2 個 |
+| calendar\_month最終更新日 | 2025 年 4 月 |
 
-ส่งความคิดเห็น
+フィードバックを送信
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-อัปเดตล่าสุด 2026-06-15 UTC
+最終更新日 2026-06-15 UTC。
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+ご意見をお聞かせください
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-15 UTC"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-15 UTC。"],[],[]]

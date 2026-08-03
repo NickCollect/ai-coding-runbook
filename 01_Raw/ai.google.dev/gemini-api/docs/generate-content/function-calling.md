@@ -1,37 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=ar
-fetched_at: 2026-07-27T04:35:49.436468+00:00
-title: "\u0627\u0633\u062a\u062f\u0639\u0627\u0621 \u0627\u0644\u062f\u0648\u0627\u0644\u0651 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/function-calling?hl=id
+fetched_at: 2026-08-03T04:29:55.056215+00:00
+title: "Panggilan fungsi dengan Gemini API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
-# استدعاء الدوالّ باستخدام Gemini API
+# Panggilan fungsi dengan Gemini API
 
-تتيح لك ميزة "استدعاء الدوال" ربط النماذج بالأدوات وواجهات برمجة التطبيقات الخارجية.
-وبدلاً من إنشاء ردود نصية، يحدّد النموذج الوقت المناسب لاستدعاء دوال معيّنة ويقدّم المَعلمات اللازمة لتنفيذ إجراءات في العالم الحقيقي.
-يتيح ذلك للنموذج أن يكون بمثابة جسر بين اللغة الطبيعية والإجراءات والبيانات في العالم الحقيقي. تتضمّن ميزة "استدعاء الدالة" 3 حالات استخدام أساسية:
+Panggilan fungsi memungkinkan Anda menghubungkan model ke alat dan API eksternal.
+Daripada membuat respons teks, model menentukan kapan harus memanggil fungsi tertentu dan memberikan parameter yang diperlukan untuk menjalankan tindakan di dunia nyata.
+Hal ini memungkinkan model bertindak sebagai jembatan antara bahasa alami dan tindakan serta data dunia nyata. Panggilan fungsi memiliki 3 kasus penggunaan utama:
 
-- [**اتّخاذ إجراءات:**](#meeting) التفاعل مع الأنظمة الخارجية باستخدام واجهات برمجة التطبيقات، مثل تحديد المواعيد أو إنشاء الفواتير أو إرسال الرسائل الإلكترونية أو التحكّم في الأجهزة المنزلية الذكية
-- [**تعزيز المعرفة:**](#weather) الوصول إلى المعلومات من مصادر خارجية، مثل قواعد البيانات وواجهات برمجة التطبيقات وقواعد المعلومات
-- [**توسيع الإمكانات:**](#chart) يمكنك استخدام أدوات خارجية لإجراء العمليات الحسابية وتوسيع حدود النموذج، مثل استخدام آلة حاسبة أو إنشاء رسومات بيانية.
+- [**Mengambil Tindakan:**](#meeting) Berinteraksi dengan sistem eksternal menggunakan API, seperti
+  menjadwalkan janji temu, membuat invoice, mengirim email, atau mengontrol
+  perangkat smart home.
+- [**Augment Knowledge (Meningkatkan Pengetahuan):**](#weather) Mengakses informasi dari sumber eksternal seperti database, API, dan pusat informasi.
+- [**Memperluas Kemampuan:**](#chart) Menggunakan alat eksternal untuk melakukan komputasi dan
+  memperluas batasan model, seperti menggunakan kalkulator atau membuat
+  diagram.
 
-يمكنك الاطّلاع أدناه على أمثلة على حالات الاستخدام هذه:
+Anda dapat menjelajahi contoh kasus penggunaan ini di bawah:
 
-### تحديد موعد اجتماع
+### Jadwalkan Rapat
 
-يوضّح هذا المثال كيفية تحديد دالة تحدّد موعدًا لاجتماع مع الضيوف في وقت معيّن، ما يسمح للنموذج بتحليل طلبات المستخدمين وعرض وسيطات منظَّمة لتنفيذ إجراءات في أنظمة خارجية.
+Contoh ini menunjukkan cara menentukan fungsi yang menjadwalkan rapat dengan peserta pada waktu tertentu, sehingga model dapat mengurai permintaan pengguna dan menampilkan argumen terstruktur untuk memicu tindakan di sistem eksternal.
 
 ### Python
 
@@ -209,9 +213,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### الحصول على معلومات الطقس
+### Mendapatkan Cuaca
 
-يوضّح هذا المثال كيفية تحديد دالة تسترد بيانات درجة الحرارة لموقع جغرافي، ما يتيح للنموذج استدعاء واجهات برمجة التطبيقات الخارجية للإجابة عن طلبات البحث التي تتطلّب معلومات في الوقت الفعلي أو معلومات خارجية.
+Contoh ini menunjukkan cara menentukan fungsi yang mengambil data suhu untuk suatu lokasi, sehingga model dapat memanggil API eksternal untuk menjawab kueri yang memerlukan informasi eksternal atau real-time.
 
 ### Python
 
@@ -350,9 +354,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### إنشاء رسم بياني
+### Buat Diagram
 
-يوضّح هذا المثال كيفية تحديد دالة تنشئ رسمًا بيانيًا شريطيًا من بيانات منظَّمة، ما يوضّح كيف يمكن للنموذج استخدام أدوات خارجية لإجراء عمليات حسابية أو إنشاء أصول مرئية:
+Contoh ini menunjukkan cara menentukan fungsi yang menghasilkan diagram batang dari data terstruktur, yang menunjukkan cara model dapat menggunakan alat eksternal untuk melakukan komputasi atau membuat aset visual:
 
 ### Python
 
@@ -522,32 +526,45 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## طريقة عمل ميزة "استدعاء الدوال"
+## Cara kerja panggilan fungsi
 
-![نظرة عامة حول ميزة &quot;استدعاء الدالة&quot;](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=ar)
+![ringkasan pemanggilan fungsi](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=id)
 
-تتضمّن ميزة "استدعاء الدوال" تفاعلاً منظَّمًا بين تطبيقك والنموذج والدوال الخارجية. في ما يلي تفاصيل العملية:
+Panggilan fungsi melibatkan interaksi terstruktur antara aplikasi Anda, model, dan fungsi eksternal. Berikut perincian prosesnya:
 
-1. **تحديد تعريف الدالة:** حدِّد تعريف الدالة في الرمز البرمجي لتطبيقك. تصف "تعريفات الدوال" اسم الدالة ومعلماتها والغرض منها للنموذج.
-2. **استدعاء واجهة برمجة التطبيقات باستخدام تعريفات الدوال:** أرسِل طلب المستخدم مع تعريفات الدوال إلى النموذج. ويحلّل الطلب ويحدّد ما إذا كان استدعاء دالة سيكون مفيدًا. في هذه الحالة، يستجيب النموذج بكائن JSON منظَّم يحتوي على اسم الدالة والمعلَمات ومعرّف فريد `id`
-   (يعرض النموذج الآن هذا المعرّف `id` دائمًا عند استخدام نماذج Gemini 3\*).
-3. **تنفيذ رمز الدالة (مسؤوليتك):** *لا* ينفّذ النموذج الدالة بنفسه. يقع على عاتق تطبيقك مسؤولية معالجة الرد والتحقّق من طلب تنفيذ دالة. If
-   - **نعم**: استخرِج الاسم والوسيطات و`id` للدالة ونفِّذ الدالة المقابلة في تطبيقك.
-   - **لا:** قدّم النموذج ردًا نصيًا مباشرًا على الطلب
-     (لا يتم التركيز على هذا المسار في المثال، ولكنّه نتيجة محتملة).
-4. **إنشاء ردّ سهل الاستخدام:** إذا تم تنفيذ دالة، سجِّل النتيجة وأرسِلها مرة أخرى إلى النموذج، مع الحرص على تضمين `id` المطابق، وذلك في دورة لاحقة من المحادثة. سيستخدم النموذج النتيجة لإنشاء رد نهائي سهل الاستخدام يتضمّن المعلومات من استدعاء الدالة.
+1. **Tentukan deklarasi fungsi:** Tentukan deklarasi fungsi dalam kode aplikasi Anda. Deklarasi Fungsi menjelaskan nama,
+   parameter, dan tujuan fungsi ke model.
+2. **Memanggil API dengan deklarasi fungsi:** Kirim perintah pengguna beserta
+   deklarasi fungsi ke model. Plugin ini menganalisis permintaan dan menentukan
+   apakah panggilan fungsi akan bermanfaat. Jika ya, model akan merespons dengan objek JSON terstruktur
+   yang berisi nama fungsi, argumen, dan `id` unik
+   (`id` ini kini selalu ditampilkan oleh API untuk model Gemini 3\*).
+3. **Jalankan kode fungsi (tanggung jawab Anda):** Model *tidak*
+   menjalankan fungsi itu sendiri. Aplikasi Anda bertanggung jawab untuk
+   memproses respons dan memeriksa panggilan fungsi. Jika
+   - **Ya**: Ekstrak nama, argumen, dan `id` fungsi, lalu jalankan
+     fungsi yang sesuai di aplikasi Anda.
+   - **Tidak:** Model telah memberikan respons teks langsung terhadap perintah
+     (alur ini kurang ditekankan dalam contoh, tetapi merupakan kemungkinan hasil).
+4. **Buat respons yang mudah dipahami pengguna:** Jika fungsi dijalankan, ambil hasilnya dan kirim kembali ke model, pastikan Anda menyertakan `id` yang cocok, dalam giliran percakapan berikutnya. LLM akan menggunakan hasil tersebut untuk
+   membuat respons akhir yang mudah dipahami pengguna dan menyertakan informasi
+   dari panggilan fungsi.
 
-يمكن تكرار هذه العملية عدة مرات، ما يتيح إجراء تفاعلات وعمليات سير عمل معقّدة. يتيح النموذج أيضًا استدعاء دوال متعددة
-في دورة واحدة ([استدعاء الدوال المتوازي](#parallel_function_calling))،
-بالتسلسل ([استدعاء الدوال التركيبي](#compositional_function_calling))،
-ومع أدوات Gemini المضمّنة ([استخدام أدوات متعددة](#native-tools)).
+Proses ini dapat diulang beberapa kali, sehingga memungkinkan interaksi dan alur kerja yang kompleks. Model ini juga mendukung pemanggilan beberapa fungsi
+dalam satu giliran ([panggilan fungsi paralel](#parallel_function_calling)), secara
+berurutan ([panggilan fungsi komposit](#compositional_function_calling)),
+dan dengan alat Gemini bawaan ([penggunaan multi-alat](#native-tools)).
 
-\* **ربط معرّفات الدوال دائمًا:** يعرض Gemini 3 الآن دائمًا معرّفًا فريدًا
-`id` مع كل `functionCall`. يجب تضمين `id` هذا بالضبط في `functionResponse` حتى يتمكّن النموذج من ربط النتيجة بالطلب الأصلي بدقة.
+\* **Selalu petakan ID fungsi:** Gemini 3 kini selalu menampilkan
+`id` unik dengan setiap `functionCall`. Sertakan `id` ini persis seperti yang ada di
+`functionResponse` Anda agar model dapat memetakan hasil Anda secara akurat kembali ke
+permintaan asli.
 
-### الخطوة 1: تحديد تعريف دالة
+### Langkah 1: Tentukan deklarasi fungsi
 
-حدِّد دالة وبيانها ضمن الرمز البرمجي لتطبيقك يسمح للمستخدمين بضبط قيم الإضاءة وإجراء طلب بيانات من واجهة برمجة التطبيقات. يمكن أن تستدعي هذه الدالة خدمات أو واجهات برمجة تطبيقات خارجية.
+Tentukan fungsi dan deklarasinya dalam kode aplikasi yang memungkinkan
+pengguna menyetel nilai cahaya dan membuat permintaan API. Fungsi ini dapat memanggil
+layanan atau API eksternal.
 
 ### Python
 
@@ -628,9 +645,10 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### الخطوة 2: استدعاء النموذج باستخدام تعريفات الدوال
+### Langkah 2: Panggil model dengan deklarasi fungsi
 
-بعد تحديد تعريفات الدوال، يمكنك أن تطلب من النموذج استخدامها. ويحلّل الطلب وتعريفات الدوال ويقرّر ما إذا كان سيردّ مباشرةً أو سيستدعي دالة. إذا تم استدعاء دالة، سيحتوي عنصر الاستجابة على اقتراح باستدعاء دالة.
+Setelah menentukan deklarasi fungsi, Anda dapat meminta model untuk
+menggunakannya. Model ini menganalisis perintah dan deklarasi fungsi serta memutuskan apakah akan merespons secara langsung atau memanggil fungsi. Jika fungsi dipanggil, objek respons akan berisi saran panggilan fungsi.
 
 ### Python
 
@@ -692,7 +710,7 @@ const response = await ai.models.generateContent({
 console.log(response.functionCalls[0]);
 ```
 
-بعد ذلك، يعرض النموذج كائن `functionCall` في مخطط متوافق مع OpenAPI يحدّد كيفية طلب دالة واحدة أو أكثر من الدوال المعرَّفة من أجل الرد على سؤال المستخدم.
+Kemudian, model akan menampilkan objek `functionCall` dalam skema yang kompatibel dengan OpenAPI yang menentukan cara memanggil satu atau beberapa fungsi yang dideklarasikan untuk merespons pertanyaan pengguna.
 
 ### Python
 
@@ -710,9 +728,10 @@ id='8f2b1a3c' args={'color_temp': 'warm', 'brightness': 25} name='set_light_valu
 }
 ```
 
-### الخطوة 3: تنفيذ رمز الدالة set\_light\_values
+### Langkah 3: Jalankan kode fungsi set\_light\_values
 
-استخرِج تفاصيل طلب استدعاء الدالة من ردّ النموذج، وحلِّل المَعلمات، ونفِّذ الدالة `set_light_values`.
+Ekstrak detail panggilan fungsi dari respons model, uraikan argumen
+, dan jalankan fungsi `set_light_values`.
 
 ### Python
 
@@ -738,9 +757,9 @@ if (tool_call.name === 'set_light_values') {
 }
 ```
 
-### الخطوة 4: إنشاء ردّ سهل الاستخدام يتضمّن نتيجة الدالة واستدعاء النموذج مرة أخرى
+### Langkah 4: Buat respons yang mudah dipahami pengguna dengan hasil fungsi dan panggil model lagi
 
-أخيرًا، أرسِل نتيجة تنفيذ الدالة إلى النموذج ليتمكّن من دمج هذه المعلومات في الرد النهائي الذي يقدّمه للمستخدم.
+Terakhir, kirim hasil eksekusi fungsi kembali ke model agar model dapat menggabungkan informasi ini ke dalam respons akhirnya kepada pengguna.
 
 ### Python
 
@@ -793,61 +812,80 @@ const final_response = await ai.models.generateContent({
 console.log(final_response.text);
 ```
 
-بهذا تكون قد أكملت عملية استدعاء الدالة. استخدم النموذج الدالة
-`set_light_values` بنجاح لتنفيذ الإجراء المطلوب من المستخدم.
+Tindakan ini menyelesaikan alur panggilan fungsi. Model berhasil menggunakan fungsi
+`set_light_values` untuk melakukan tindakan permintaan pengguna.
 
-## تعريفات الدوال
+## Deklarasi fungsi
 
-عند تنفيذ ميزة "استدعاء الدوال" في طلب، يمكنك إنشاء عنصر `tools` يحتوي على دالة واحدة أو أكثر من دوال `function declarations`. يمكنك تحديد الدوال باستخدام JSON، وتحديدًا باستخدام [مجموعة فرعية من select](https://ai.google.dev/api/caching?hl=ar#Schema) من تنسيق [مخطط OpenAPI](https://spec.openapis.org/oas/v3.0.3#schemaw). يمكن أن يتضمّن تعريف الدالة الواحدة المَعلمات التالية:
+Saat menerapkan panggilan fungsi dalam perintah, Anda membuat objek `tools`,
+yang berisi satu atau beberapa `function declarations`. Anda menentukan fungsi menggunakan
+JSON, khususnya dengan [subset pilihan](https://ai.google.dev/api/caching?hl=id#Schema)
+dari format [skema OpenAPI](https://spec.openapis.org/oas/v3.0.3#schemaw). Deklarasi
+fungsi tunggal dapat mencakup parameter berikut:
 
-- ‫`name` (string): اسم فريد للدالة (`get_weather_forecast`،
-  `send_email`). استخدِم أسماء وصفية بدون مسافات أو أحرف خاصة
-  (استخدِم الشرطات السفلية أو camelCase).
-- استبدِل `description` (سلسلة) بشرح واضح ومفصّل للغرض من الوظيفة وإمكاناتها. هذا الإجراء ضروري لكي يفهم النموذج متى يجب استخدام الدالة. يجب أن تكون الإجابة محدّدة وتقديم أمثلة إذا كان ذلك مفيدًا ("تعثر على دور السينما استنادًا إلى الموقع الجغرافي وعنوان الفيلم بشكل اختياري، والذي يتم عرضه حاليًا في دور السينما").
-- ‫`parameters` (كائن): يحدّد مَعلمات الإدخال التي تتوقّعها الدالة.
-  - `type` (سلسلة): تحدّد نوع البيانات العام، مثل `object`.
-  - `properties` (عنصر): يدرج المَعلمات الفردية، ويتضمّن كل منها ما يلي:
-    - `type` (سلسلة): نوع بيانات المَعلمة، مثل `string` أو `integer` أو `boolean, array`
-    - ‫`description` (سلسلة): وصف لغرض المَعلمة وتنسيقها. قدِّم أمثلة وقيودًا ("المدينة والولاية،
-      مثل 'سان فرانسيسكو، كاليفورنيا' أو رمز بريدي مثل '95616'").
-    - ‫`enum` (مصفوفة، اختياري): إذا كانت قيم المَعلمات من مجموعة ثابتة، استخدِم "enum" لإدراج القيم المسموح بها بدلاً من مجرد وصفها في الوصف. يؤدي ذلك إلى تحسين الدقة ("enum":
+- `name` (string): Nama unik untuk fungsi (`get_weather_forecast`,
+  `send_email`). Gunakan nama deskriptif tanpa spasi atau karakter khusus
+  (gunakan garis bawah atau camelCase).
+- `description` (string): Penjelasan yang jelas dan mendetail tentang tujuan dan kemampuan fungsi. Hal ini sangat penting agar model memahami kapan harus menggunakan fungsi tersebut. Berikan contoh spesifik jika diperlukan ("Menemukan bioskop berdasarkan lokasi dan secara opsional judul film yang saat ini diputar di bioskop").
+- `parameters` (objek): Menentukan parameter input yang diharapkan fungsi.
+  - `type` (string): Menentukan jenis data secara keseluruhan, seperti `object`.
+  - `properties` (objek): Mencantumkan setiap parameter, masing-masing dengan:
+    - `type` (string): Jenis data parameter, seperti `string`,
+      `integer`, `boolean, array`.
+    - `description` (string): Deskripsi tujuan dan format parameter. Berikan contoh dan batasan ("Kota dan negara bagian, misalnya, 'San Francisco, CA' atau kode pos, misalnya, '95616'").
+    - `enum` (array, opsional): Jika nilai parameter berasal dari set
+      tetap, gunakan "enum" untuk mencantumkan nilai yang diizinkan, bukan hanya
+      mendeskripsikannya dalam deskripsi. Hal ini meningkatkan akurasi ("enum":
       ["daylight", "cool", "warm"]).
-  - ‫`required` (مصفوفة): مصفوفة من السلاسل تسرد أسماء المَعلمات التي يجب توفّرها لكي تعمل الدالة.
+  - `required` (array): Array string yang mencantumkan nama parameter yang
+    wajib agar fungsi dapat beroperasi.
 
-يمكنك أيضًا إنشاء `FunctionDeclarations` من دوال Python مباشرةً باستخدام `types.FunctionDeclaration.from_callable(client=client, callable=your_function)`.
+Anda juga dapat membuat `FunctionDeclarations` langsung dari fungsi Python menggunakan
+`types.FunctionDeclaration.from_callable(client=client, callable=your_function)`.
 
-## استدعاء الدوال باستخدام نماذج التفكير
+## Panggilan fungsi dengan model penalaran
 
-تستخدم نماذج Gemini 3 و2.5 سلسلة عملية ["تفكير"](https://ai.google.dev/gemini-api/docs/thinking?hl=ar) داخلية للاستدلال على الطلبات. يؤدي ذلك إلى تحسين أداء ميزة &quot;استدعاء الدوال&quot; بشكل كبير، ما يسمح للنموذج بتحديد الوقت المناسب لاستدعاء دالة معيّنة والمعلَمات التي يجب استخدامها. بما أنّ Gemini API لا يحتفظ بأي بيانات، تستخدم النماذج [توقيعات الأفكار](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ar) للحفاظ على السياق في محادثة مترابطة.
+Model seri Gemini 3 dan 2.5 menggunakan proses ["penalaran"](https://ai.google.dev/gemini-api/docs/thinking?hl=id) internal untuk memproses permintaan. Peningkatan ini secara signifikan meningkatkan performa panggilan fungsi, sehingga model dapat menentukan dengan lebih baik kapan harus memanggil fungsi dan parameter mana yang harus digunakan. Karena Gemini API tidak memiliki status, model menggunakan
+[tanda tangan pemikiran](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id) untuk mempertahankan konteks
+di seluruh percakapan multi-giliran.
 
-يتناول هذا القسم الإدارة المتقدّمة لتوقيعات الأفكار، ولا يكون ضروريًا إلا إذا كنت تنشئ طلبات واجهة برمجة التطبيقات يدويًا (مثل REST) أو تتلاعب بسجلّ المحادثات.
+Bagian ini membahas pengelolaan lanjutan tanda tangan pemikiran dan hanya
+diperlukan jika Anda membuat permintaan API secara manual (misalnya, melalui REST) atau
+memanipulasi histori percakapan.
 
-**إذا كنت تستخدم [حِزم تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي](https://ai.google.dev/gemini-api/docs/libraries?hl=ar) (مكتباتنا الرسمية)، لن تحتاج إلى إدارة هذه العملية**. تتولّى حِزم SDK تلقائيًا تنفيذ الخطوات اللازمة، كما هو موضّح في [المثال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#step-4) السابق.
+**Jika Anda menggunakan [SDK GenAI Google](https://ai.google.dev/gemini-api/docs/libraries?hl=id) (library resmi kami), Anda tidak perlu mengelola proses ini**. SDK
+secara otomatis menangani langkah-langkah yang diperlukan, seperti yang ditunjukkan dalam
+[contoh](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#step-4) sebelumnya.
 
-### إدارة سجلّ المحادثات يدويًا
+### Mengelola histori percakapan secara manual
 
-في حال تعديل سجلّ المحادثات يدويًا، عليك التعامل بشكل صحيح مع `thought_signature` المضمّن في ردّ النموذج بدلاً من إرسال [الردّ السابق الكامل](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#step-4).
+Jika Anda mengubah histori percakapan secara manual, alih-alih mengirimkan
+[respons sebelumnya yang lengkap](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#step-4), Anda
+harus menangani `thought_signature` yang disertakan dalam giliran model dengan benar.
 
-اتّبِع القواعد التالية لضمان الحفاظ على سياق النموذج:
+Ikuti aturan berikut untuk memastikan konteks model dipertahankan:
 
-- يجب دائمًا إرسال `thought_signature` مرة أخرى إلى النموذج داخل [`Part`](https://ai.google.dev/api?hl=ar#request-body-structure) الأصلي.
-- **احرص دائمًا على تضمين `id` نفسه من `function_call` في `function_response` لكي تتمكّن واجهة برمجة التطبيقات من ربط النتيجة بالطلب الصحيح.**
-- لا تدمج `Part` تحتوي على توقيع مع `Part` لا تحتوي على توقيع. يؤدي ذلك إلى فقدان السياق المكاني للفكرة.
-- لا تدمج بين ملفَي `Parts` يحتويان على تواقيع، لأنّه لا يمكن دمج سلاسل التواقيع.
+- Selalu kirim `thought_signature` kembali ke model di dalam
+  [`Part`](https://ai.google.dev/api?hl=id#request-body-structure) aslinya.
+- **Selalu sertakan `id` yang persis sama dari `function_call` di
+  `function_response` agar API dapat memetakan hasil ke permintaan yang benar.**
+- Jangan gabungkan `Part` yang berisi tanda tangan dengan `Part` yang tidak berisi tanda tangan. Hal ini
+  merusak konteks posisi pemikiran.
+- Jangan menggabungkan dua `Parts` yang keduanya berisi tanda tangan, karena string tanda tangan tidak dapat digabungkan.
 
-#### توقيعات أفكار Gemini 3
+#### Tanda tangan penalaran Gemini 3
 
-في Gemini 3، قد يحتوي أي [`Part`](https://ai.google.dev/api?hl=ar#request-body-structure) من ردّ النموذج
-على توقيع فكري.
-على الرغم من أنّنا ننصح بشكل عام بعرض التوقيعات من جميع أنواع `Part`،
-إلا أنّ عرض توقيعات الأفكار إلزامي عند استخدام ميزة "استدعاء الدوال". ما لم يتم التلاعب يدويًا بسجلّ المحادثات، ستتعامل حزمة تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي مع توقيعات الأفكار تلقائيًا.
+Di Gemini 3, [`Part`](https://ai.google.dev/api?hl=id#request-body-structure) respons model
+dapat berisi tanda tangan pemikiran.
+Meskipun kami umumnya merekomendasikan menampilkan tanda tangan dari semua jenis `Part`, meneruskan tanda tangan pemikiran kembali adalah wajib untuk panggilan fungsi. Kecuali jika Anda memanipulasi histori percakapan secara manual, Google GenAI SDK akan menangani tanda tangan pemikiran secara otomatis.
 
-إذا كنت تتلاعب بسجلّ المحادثات يدويًا، يُرجى الرجوع إلى صفحة [توقيعات الأفكار](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ar) للحصول على إرشادات وتفاصيل كاملة حول التعامل مع توقيعات الأفكار في Gemini 3.
+Jika Anda memanipulasi histori percakapan secara manual, lihat halaman
+[Tanda Tangan Pemikiran](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=id) untuk mendapatkan panduan dan detail lengkap tentang cara menangani tanda tangan pemikiran untuk Gemini 3.
 
-##### فحص توقيعات الأفكار
+##### Memeriksa tanda tangan penalaran
 
-مع أنّ ذلك ليس ضروريًا للتنفيذ، يمكنك فحص الاستجابة للاطّلاع على
-`thought_signature` لأغراض تصحيح الأخطاء أو تعليمية.
+Meskipun tidak diperlukan untuk penerapan, Anda dapat memeriksa respons untuk melihat
+`thought_signature` untuk tujuan proses debug atau edukasi.
 
 ### Python
 
@@ -875,13 +913,16 @@ if (part.thoughtSignature) {
 }
 ```
 
-يمكنك الاطّلاع على مزيد من المعلومات حول القيود والاستخدامات المتعلقة بالتوقيعات الفكرية ونماذج التفكير بشكل عام في صفحة [التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar#signatures).
+Pelajari lebih lanjut batasan dan penggunaan tanda tangan pemikiran, serta model pemikiran secara umum, di halaman [Pemikiran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#signatures).
 
-## استدعاء الدوال بشكل متوازٍ
+## Panggilan fungsi paralel
 
-بالإضافة إلى استدعاء الدوال في محادثة واحدة، يمكنك أيضًا استدعاء دوال متعددة في الوقت نفسه. تتيح لك ميزة "استدعاء الدوال المتوازي" تنفيذ دوال متعددة في الوقت نفسه، ويتم استخدامها عندما لا تكون الدوال معتمدة على بعضها البعض. ويكون ذلك مفيدًا في سيناريوهات مثل جمع البيانات من مصادر مستقلة متعددة، مثل استرداد تفاصيل العملاء من قواعد بيانات مختلفة أو التحقّق من مستويات المخزون في مستودعات مختلفة أو تنفيذ إجراءات متعددة مثل تحويل شقتك إلى ديسكو.
+Selain panggilan fungsi sekali putaran, Anda juga dapat memanggil beberapa fungsi sekaligus. Panggilan fungsi paralel memungkinkan Anda menjalankan beberapa fungsi
+sekaligus dan digunakan saat fungsi tidak saling bergantung. Hal ini berguna dalam skenario seperti mengumpulkan data dari beberapa sumber independen, seperti mengambil detail pelanggan dari berbagai database atau memeriksa tingkat inventaris di berbagai gudang atau melakukan beberapa tindakan seperti mengubah apartemen Anda menjadi disko.
 
-عندما يبدأ النموذج عدة طلبات استدعاء دوال في دورة واحدة، ليس عليك عرض كائنات `function_result` بالترتيب نفسه الذي تم استلام كائنات `function_call` به. تربط Gemini API كل نتيجة بالطلب المقابل باستخدام `id` من ناتج النموذج. يتيح لك ذلك تنفيذ الدوال بشكل غير متزامن وإلحاق النتائج بقائمتك عند اكتمالها.
+Saat model memulai beberapa panggilan fungsi dalam satu giliran, Anda tidak perlu menampilkan objek `function_result` dalam urutan yang sama dengan objek `function_call` yang diterima. Gemini API memetakan setiap hasil kembali ke panggilan yang sesuai menggunakan `id` dari output model. Dengan demikian, Anda dapat
+mengeksekusi fungsi secara asinkron dan menambahkan hasilnya ke daftar saat
+fungsi selesai.
 
 ### Python
 
@@ -991,8 +1032,9 @@ const dimLights = {
 };
 ```
 
-اضبط وضع "استدعاء الدوال" للسماح باستخدام جميع الأدوات المحدّدة.
-لمزيد من المعلومات، يمكنك الاطّلاع على مقالة [ضبط ميزة "استدعاء الدوال"](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#function_calling_modes).
+Konfigurasi mode pemanggilan fungsi untuk mengizinkan penggunaan semua alat yang ditentukan.
+Untuk mempelajari lebih lanjut, Anda dapat membaca tentang
+[mengonfigurasi panggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#function_calling_modes).
 
 ### Python
 
@@ -1066,10 +1108,10 @@ for (const fn of response.functionCalls) {
 }
 ```
 
-تعكس كل نتيجة مطبوعة طلبًا واحدًا للدالة قد طلبه النموذج. لإعادة إرسال النتائج، يجب تضمين الردود بالترتيب نفسه الذي تم طلبها به.
+Setiap hasil yang dicetak mencerminkan satu panggilan fungsi yang telah diminta model. Untuk mengirimkan kembali hasilnya, sertakan respons dalam urutan yang sama seperti
+permintaan.
 
-يتيح حزمة تطوير البرامج (SDK) الخاصة بلغة Python [استدعاء الدوال تلقائيًا](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#automatic_function_calling_python_only)،
-ما يؤدي إلى تحويل دوال Python تلقائيًا إلى تعريفات، والتعامل مع دورة التنفيذ والاستجابة لطلب استدعاء الدالة. في ما يلي مثال على حالة استخدام &quot;الديسكو&quot;.
+Python SDK mendukung [panggilan fungsi otomatis](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#automatic_function_calling_python_only), yang secara otomatis mengonversi fungsi Python menjadi deklarasi, menangani siklus eksekusi panggilan fungsi dan respons untuk Anda. Berikut adalah contoh untuk kasus penggunaan disko.
 
 ### Python
 
@@ -1132,16 +1174,16 @@ print(response.text)
 # I've turned on the disco ball, started playing loud and energetic music, and dimmed the lights to 50% brightness. Let's get this party started!
 ```
 
-## استدعاء الدوال التركيبية
+## Panggilan fungsi komposit
 
-تتيح ميزة &quot;استدعاء الدوال التركيبي أو التسلسلي&quot; لـ Gemini ربط عدة استدعاءات للدوال معًا لتلبية طلب معقّد. على سبيل المثال، للإجابة عن السؤال "ما هي درجة الحرارة في موقعي الجغرافي الحالي؟"، قد تستدعي Gemini API أولاً الدالة `get_current_location()` ثم الدالة `get_weather()` التي تأخذ الموقع الجغرافي كمعلَمة.
+Panggilan fungsi komposit atau berurutan memungkinkan Gemini merangkai beberapa panggilan fungsi untuk memenuhi permintaan yang kompleks. Misalnya, untuk menjawab "Dapatkan suhu di lokasi saya saat ini", Gemini API mungkin pertama-tama memanggil fungsi `get_current_location()`, diikuti dengan fungsi `get_weather()` yang menggunakan lokasi sebagai parameter.
 
-يوضّح المثال التالي كيفية تنفيذ استدعاء الدوال التركيبية باستخدام حزمة تطوير البرامج للغة Python واستدعاء الدوال التلقائي.
+Contoh berikut menunjukkan cara menerapkan panggilan fungsi komposit menggunakan Python SDK dan panggilan fungsi otomatis.
 
 ### Python
 
-يستخدم هذا المثال ميزة استدعاء الدوال التلقائي في
-`google-genai` حزمة تطوير البرامج (SDK) الخاصة بلغة Python. تحوّل حزمة تطوير البرامج (SDK) تلقائيًا دوال Python إلى المخطط المطلوب، وتنفّذ طلبات استدعاء الدوال عند طلب النموذج، وترسل النتائج مرة أخرى إلى النموذج لإكمال المهمة.
+Contoh ini menggunakan fitur panggilan fungsi otomatis dari
+Python SDK `google-genai`. SDK secara otomatis mengonversi fungsi Python ke skema yang diperlukan, menjalankan panggilan fungsi saat diminta oleh model, dan mengirimkan hasilnya kembali ke model untuk menyelesaikan tugas.
 
 ```
 import os
@@ -1180,9 +1222,9 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-**الناتج المتوقّع**
+**Output yang Diinginkan**
 
-عند تشغيل الرمز، ستلاحظ أنّ حزمة تطوير البرامج (SDK) تنظّم عمليات استدعاء الدوال. يستدعي النموذج أولاً `get_weather_forecast`، ويتلقّى درجة الحرارة، ثم يستدعي `set_thermostat_temperature` بالقيمة الصحيحة استنادًا إلى المنطق الوارد في الطلب.
+Saat menjalankan kode, Anda akan melihat SDK mengatur panggilan fungsi. Model pertama-tama memanggil `get_weather_forecast`, menerima temperatur, lalu memanggil `set_thermostat_temperature` dengan nilai yang benar berdasarkan logika dalam perintah.
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1194,7 +1236,7 @@ OK. I've set the thermostat to 20°C.
 
 ### JavaScript
 
-يوضّح هذا المثال كيفية استخدام حزمة تطوير البرامج (SDK) المستندة إلى JavaScript/TypeScript لتنفيذ استدعاءات الدوال التركيبية باستخدام حلقة تنفيذ يدوية.
+Contoh ini menunjukkan cara menggunakan JavaScript/TypeScript SDK untuk melakukan panggilan fungsi komposit menggunakan loop eksekusi manual.
 
 ```
 import { GoogleGenAI, Type } from "@google/genai";
@@ -1323,9 +1365,9 @@ while (true) {
 }
 ```
 
-**الناتج المتوقّع**
+**Output yang Diinginkan**
 
-عند تشغيل الرمز، ستلاحظ أنّ حزمة تطوير البرامج (SDK) تنظّم عمليات استدعاء الدوال. يستدعي النموذج أولاً `get_weather_forecast`، ويتلقّى درجة الحرارة، ثم يستدعي `set_thermostat_temperature` بالقيمة الصحيحة استنادًا إلى المنطق الوارد في الطلب.
+Saat menjalankan kode, Anda akan melihat SDK mengatur panggilan fungsi. Model pertama-tama memanggil `get_weather_forecast`, menerima temperatur, lalu memanggil `set_thermostat_temperature` dengan nilai yang benar berdasarkan logika dalam perintah.
 
 ```
 Tool Call: get_weather_forecast(location=London)
@@ -1335,8 +1377,9 @@ Tool Response: {'status': 'success'}
 OK. It's 25°C in London, so I've set the thermostat to 20°C.
 ```
 
-استدعاء الدوال التركيبية هو إحدى الميزات الأصلية في [Live
-API](https://ai.google.dev/gemini-api/docs/live?hl=ar). وهذا يعني أنّ Live API يمكنها التعامل مع استدعاء الدوال بشكل مشابه لحزمة تطوير البرامج (SDK) بلغة Python.
+Panggilan fungsi komposit adalah fitur [Live
+API](https://ai.google.dev/gemini-api/docs/live?hl=id) bawaan. Artinya, Live API
+dapat menangani panggilan fungsi yang mirip dengan Python SDK.
 
 ### Python
 
@@ -1376,18 +1419,25 @@ const tools = [
 await run(prompt, tools=tools, modality="AUDIO")
 ```
 
-## أوضاع استدعاء الدالة
+## Mode panggilan fungsi
 
-تتيح لك Gemini API التحكّم في طريقة استخدام النموذج للأدوات المتوفّرة (تعريفات الدوال). على وجه التحديد، يمكنك ضبط الوضع ضمن `function_calling_config`.
+Gemini API memungkinkan Anda mengontrol cara model menggunakan alat yang disediakan
+(deklarasi fungsi). Secara khusus, Anda dapat menetapkan mode dalam
+the.`function_calling_config`.
 
-- ‫`VALIDATED`: الوضع التلقائي لدمج الأدوات (عند تفعيل الأدوات المضمّنة أو النتائج المنظَّمة أيضًا) يقتصر النموذج على توقّع إما طلبات الدوال أو اللغة الطبيعية، ويضمن الالتزام بمخطط الدوال. في حال عدم توفير
-  `allowed_function_names`، يختار النموذج من جميع تعريفات الدوال المتاحة. إذا تم توفير `allowed_function_names`، يختار النموذج من مجموعة الدوال المسموح بها. يقلّل هذا الوضع من عدد طلبات الدوال غير الصالحة (مقارنةً بالوضع `AUTO`).
-- ‫`AUTO`: الوضع التلقائي عند تفعيل أداة function\_declarations فقط
-  يقرّر النموذج ما إذا كان سينشئ ردًا بلغة طبيعية أو سيقترح إجراء مكالمة استنادًا إلى الطلب والسياق.
-- `ANY`: يلتزم النموذج دائمًا بتوقّع طلب دالة، ويضمن الالتزام بمخطط الدالة. إذا لم يتم تحديد `allowed_function_names`، يمكن للنموذج الاختيار من أي من تعريفات الدوال المقدَّمة.
-  إذا تم تقديم `allowed_function_names` كقائمة، يمكن للنموذج الاختيار فقط من الدوال في تلك القائمة. استخدِم هذا الوضع عندما تحتاج إلى استجابة من دالة
-  لكل طلب (إذا كان ذلك منطبقًا).
-- ‫`NONE`: *محظور* على النموذج إجراء استدعاءات الدوال. وهذا الإجراء يعادل إرسال طلب بدون أي تعريفات للدوال. يمكنك استخدام هذه السمة لإيقاف ميزة "استدعاء الدوال" مؤقتًا بدون إزالة تعريفات الأدوات.
+- `VALIDATED`: Mode default untuk kombinasi alat (jika alat bawaan atau output terstruktur juga diaktifkan). Model ini dibatasi untuk memprediksi panggilan fungsi atau bahasa alami, dan memastikan kepatuhan skema fungsi. Jika
+  `allowed_function_names` tidak diberikan, model akan memilih dari semua
+  deklarasi fungsi yang tersedia. Jika `allowed_function_names` disediakan, model akan memilih dari kumpulan fungsi yang diizinkan. Mode ini mengurangi panggilan fungsi yang salah format (dibandingkan dengan mode `AUTO`).
+- `AUTO`: Mode default saat hanya alat function\_declarations yang diaktifkan.
+  Model memutuskan apakah akan menghasilkan respons bahasa alami atau menyarankan panggilan fungsi berdasarkan perintah dan konteks.
+- `ANY`: Model dibatasi untuk selalu memprediksi panggilan fungsi dan
+  memastikan kepatuhan terhadap skema fungsi. Jika `allowed_function_names` tidak
+  ditentukan, model dapat memilih dari deklarasi fungsi yang diberikan.
+  Jika `allowed_function_names` diberikan sebagai daftar, model hanya dapat memilih
+  dari fungsi dalam daftar tersebut. Gunakan mode ini jika Anda memerlukan respons
+  panggilan fungsi untuk setiap perintah (jika berlaku).
+- `NONE`: Model *dilarang* melakukan panggilan fungsi. Hal ini setara dengan mengirim permintaan tanpa deklarasi fungsi apa pun. Gunakan ini untuk
+  menonaktifkan panggilan fungsi untuk sementara tanpa menghapus definisi alat Anda.
 
 ### Python
 
@@ -1428,19 +1478,20 @@ const config = {
 };
 ```
 
-## استدعاء الدالة تلقائيًا (في Python فقط)
+## Panggilan fungsi otomatis (khusus Python)
 
-عند استخدام حزمة تطوير البرامج (SDK) الخاصة بلغة Python، يمكنك تقديم دوال Python مباشرةً كأدوات.
-تحوّل حزمة SDK هذه الدوال إلى تعريفات، وتدير عملية تنفيذ استدعاء الدالة، وتتعامل مع دورة الاستجابة نيابةً عنك. حدِّد الدالة باستخدام تلميحات الأنواع وسلسلة التوثيق. للحصول على أفضل النتائج، ننصحك باستخدام
-[سلاسل مستندات بتنسيق Google.](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
-سيقوم حِزمة تطوير البرامج (SDK) بعد ذلك تلقائيًا بما يلي:
+Saat menggunakan Python SDK, Anda dapat menyediakan fungsi Python secara langsung sebagai alat.
+SDK mengonversi fungsi ini menjadi deklarasi, mengelola eksekusi panggilan fungsi, dan menangani siklus respons untuk Anda. Tentukan fungsi Anda dengan
+petunjuk jenis dan docstring. Untuk hasil yang optimal, sebaiknya gunakan
+[string dokumen gaya Google.](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
+SDK kemudian akan otomatis:
 
-1. رصد الردود على طلبات تنفيذ الدوال من النموذج
-2. استدعِ دالة Python المناسبة في الرمز البرمجي.
-3. إرسال ردّ الدالة إلى النموذج
-4. عرض الردّ النصي النهائي للنموذج
+1. Mendeteksi respons panggilan fungsi dari model.
+2. Panggil fungsi Python yang sesuai dalam kode Anda.
+3. Kirim respons fungsi kembali ke model.
+4. Menampilkan respons teks akhir model.
 
-لا تحلّل حزمة تطوير البرامج (SDK) حاليًا أوصاف الوسيطات إلى خانات وصف السمة في تعريف الدالة الذي تم إنشاؤه. بدلاً من ذلك، يرسل السلسلة بأكملها كوصف للدالة ذات المستوى الأعلى.
+Saat ini, SDK tidak mengurai deskripsi argumen ke dalam slot deskripsi properti deklarasi fungsi yang dihasilkan. Sebagai gantinya, seluruh docstring dikirim sebagai deskripsi fungsi tingkat teratas.
 
 ### Python
 
@@ -1477,7 +1528,7 @@ response = client.models.generate_content(
 print(response.text)  # The SDK handles the function call and returns the final text
 ```
 
-يمكنك إيقاف استدعاء الدوال التلقائي باستخدام:
+Anda dapat menonaktifkan panggilan fungsi otomatis dengan:
 
 ### Python
 
@@ -1488,9 +1539,10 @@ config = types.GenerateContentConfig(
 )
 ```
 
-### بيان مخطط الدالة التلقائي
+### Deklarasi skema fungsi otomatis
 
-يمكن لواجهة برمجة التطبيقات وصف أي من الأنواع التالية. يُسمح باستخدام أنواع `Pydantic`، طالما أنّ الحقول المحدّدة فيها تتألف أيضًا من أنواع مسموح بها. لا تتوافق أنواع القواميس (مثل `dict[str: int]`) مع هذه السمة، لذا لا تستخدمها.
+API ini dapat mendeskripsikan salah satu jenis berikut. Jenis `Pydantic` diizinkan, asalkan kolom yang ditentukan di dalamnya juga terdiri dari jenis yang diizinkan. Jenis Dict (seperti `dict[str: int]`) tidak didukung dengan baik di sini, jadi jangan
+menggunakannya.
 
 ### Python
 
@@ -1499,7 +1551,7 @@ AllowedType = (
   int | float | bool | str | list['AllowedType'] | pydantic.BaseModel)
 ```
 
-للاطّلاع على شكل المخطط المستنتج، يمكنك تحويله باستخدام
+Untuk melihat tampilan skema yang diinferensikan, Anda dapat mengonversinya menggunakan
 [`from_callable`](https://googleapis.github.io/python-genai/genai.html#genai.types.FunctionDeclaration.from_callable):
 
 ### Python
@@ -1519,11 +1571,14 @@ fn_decl = types.FunctionDeclaration.from_callable(callable=multiply, client=clie
 print(fn_decl.to_json_dict())
 ```
 
-## استخدام أدوات متعددة: الجمع بين الأدوات المضمّنة وميزة "استدعاء الدوال"
+## Penggunaan multi-alat: Menggabungkan alat bawaan dengan panggilan fungsi
 
-يمكنك تفعيل أدوات متعددة، والجمع بين الأدوات المضمّنة واستدعاء الدوال في الطلب نفسه.
+Anda dapat mengaktifkan beberapa alat, menggabungkan alat bawaan dengan panggilan fungsi dalam
+permintaan yang sama.
 
-يمكن لنماذج Gemini 3 الجمع بين الأدوات المضمّنة وميزة &quot;استدعاء الدوال&quot; الجاهزة للاستخدام، وذلك بفضل ميزة &quot;تداول سياق الأداة&quot;. يمكنك الاطّلاع على صفحة [الجمع بين الأدوات المضمّنة واستدعاء الدوال البرمجية](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar) لمزيد من المعلومات.
+Model Gemini 3 dapat menggabungkan alat bawaan dengan panggilan fungsi secara langsung,
+berkat fitur sirkulasi konteks alat. Baca halaman tentang
+[Menggabungkan alat bawaan dan panggilan fungsi](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id) untuk mempelajari lebih lanjut.
 
 ### Python
 
@@ -1665,21 +1720,31 @@ async function run() {
 run();
 ```
 
-بالنسبة إلى الطُرز التي تسبق سلسلة Gemini 3، استخدِم [Live API](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=ar).
+Untuk model sebelum seri Gemini 3, gunakan
+[Live API](https://ai.google.dev/gemini-api/docs/live-api/tools?hl=id).
 
-## استجابات الوظائف المتعددة الوسائط
+## Respons fungsi multimodal
 
-بالنسبة إلى نماذج سلسلة Gemini 3، يمكنك تضمين محتوى متعدد الوسائط في أجزاء استجابة الدالة التي ترسلها إلى النموذج. يمكن للنموذج معالجة هذا المحتوى المتعدد الوسائط في دوره التالي لتقديم ردّ أكثر دقة.
-تتوفّر أنواع MIME التالية للمحتوى المتعدد الوسائط في ردود الدوال:
+Untuk model seri Gemini 3, Anda dapat menyertakan konten multimodal di
+bagian respons fungsi yang Anda kirim ke model. Model dapat memproses konten multimodal ini pada giliran berikutnya untuk menghasilkan respons yang lebih informatif.
+Jenis MIME berikut didukung untuk konten multimodal dalam respons fungsi:
 
-- **الصور**: `image/png` و`image/jpeg` و`image/webp`
-- **المستندات**: `application/pdf`، `text/plain`
+- **Gambar**: `image/png`, `image/jpeg`, `image/webp`
+- **Dokumen**: `application/pdf`, `text/plain`
 
-لتضمين بيانات متعددة الوسائط في ردّ الدالة، أدرِجها كجزء واحد أو أكثر مضمّن في الجزء `functionResponse`. يجب أن يحتوي كل جزء متعدد الوسائط على `inlineData`. إذا أشرت إلى جزء متعدد الوسائط من داخل حقل `response` الخاص بالبيانات المنظَّمة، يجب أن يحتوي على `displayName` فريد.
+Untuk menyertakan data multimodal dalam respons fungsi, sertakan sebagai satu atau beberapa bagian yang disarangkan dalam bagian `functionResponse`. Setiap bagian multimodal harus
+berisi `inlineData`. Jika Anda mereferensikan bagian multimodal dari
+dalam kolom `response` terstruktur, bagian tersebut harus berisi `displayName` unik.
 
-يمكنك أيضًا الإشارة إلى جزء متعدد الوسائط من داخل حقل `response` البيانات المنظَّمة الخاص بالجزء `functionResponse` باستخدام تنسيق مرجع JSON `{"$ref": "<displayName>"}`. يستبدل النموذج المرجع بالمحتوى المتعدد الوسائط عند معالجة الرد. لا يمكن الإشارة إلى كل `displayName` إلا مرة واحدة في الحقل `response` المنظَّم.
+Anda juga dapat mereferensikan bagian multimodal dari dalam kolom `response`
+terstruktur dari bagian `functionResponse` menggunakan format referensi JSON
+`{"$ref": "<displayName>"}`. Model mengganti referensi dengan konten multimodal saat memproses respons. Setiap `displayName` hanya dapat
+dirujuk satu kali di kolom `response` terstruktur.
 
-يعرض المثال التالي رسالة تحتوي على `functionResponse` لوظيفة باسم `get_image` وجزء مضمّن يحتوي على بيانات صور مع `displayName: "instrument.jpg"`. يشير الحقل `response` الخاص بـ `functionResponse` إلى جزء الصورة هذا:
+Contoh berikut menunjukkan pesan yang berisi `functionResponse` untuk
+fungsi bernama `get_image` dan bagian bertingkat yang berisi data gambar dengan
+`displayName: "instrument.jpg"`. Kolom `functionResponse`'s `response`
+mereferensikan bagian gambar ini:
 
 ### Python
 
@@ -1923,25 +1988,28 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## استدعاء الدالة مع الناتج المنظَّم
+## Pemanggilan fungsi dengan Output terstruktur
 
-بالنسبة إلى طُرز سلسلة Gemini 3، يمكنك استخدام ميزة "استدعاء الدوال" مع
-[النتائج المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar). يتيح ذلك للنموذج توقّع استدعاءات الدوال أو النتائج التي تلتزم بمخطط محدّد. نتيجةً لذلك، ستتلقّى ردودًا منسَّقة بشكل متّسق عندما لا ينشئ النموذج استدعاءات الدوال.
+Untuk model seri Gemini 3, Anda dapat menggunakan panggilan fungsi dengan
+[output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id). Hal ini memungkinkan model
+memprediksi panggilan fungsi atau output yang sesuai dengan skema tertentu. Hasilnya, Anda menerima respons yang diformat secara konsisten saat model tidak membuat panggilan fungsi.
 
-## بروتوكول سياق النموذج (MCP)
+## Model context protocol (MCP)
 
-[بروتوكول سياق النموذج (MCP)](https://modelcontextprotocol.io/introduction) هو معيار مفتوح المصدر لربط تطبيقات الذكاء الاصطناعي بالأدوات والبيانات الخارجية.
-يوفر بروتوكول سياق النموذج (MCP) بروتوكولاً مشتركًا للنماذج للوصول إلى السياق، مثل الدوال (الأدوات) أو مصادر البيانات (الموارد) أو الطلبات المحدّدة مسبقًا.
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) adalah
+standar terbuka untuk menghubungkan aplikasi AI dengan alat dan data eksternal.
+MCP menyediakan protokol umum bagi model untuk mengakses konteks, seperti fungsi (alat), sumber data (resource), atau perintah yang telah ditentukan sebelumnya.
 
-تتضمّن حِزم تطوير البرامج (SDK) من Gemini إمكانية استخدام MCP، ما يقلّل من الرموز النموذجية ويوفّر ميزة [استدعاء الأدوات تلقائيًا](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar#automatic_function_calling_python_only) لأدوات MCP. عندما ينشئ النموذج طلبًا لاستخدام أداة MCP، يمكن لحزمة تطوير البرامج (SDK) الخاصة بلغة Python وJavaScript تنفيذ أداة MCP تلقائيًا وإرسال الردّ إلى النموذج في طلب لاحق، مع مواصلة هذه العملية إلى أن يتوقف النموذج عن إرسال طلبات لاستخدام الأدوات.
+SDK Gemini memiliki dukungan bawaan untuk MCP, sehingga mengurangi kode boilerplate dan
+menawarkan
+[panggilan alat otomatis](https://ai.google.dev/gemini-api/docs/function-calling?hl=id#automatic_function_calling_python_only)
+untuk alat MCP. Saat model membuat panggilan alat MCP, SDK klien Python dan JavaScript dapat otomatis menjalankan alat MCP dan mengirimkan respons kembali ke model dalam permintaan berikutnya, melanjutkan loop ini hingga tidak ada lagi panggilan alat yang dilakukan oleh model.
 
-في ما يلي مثال على كيفية استخدام خادم MCP محلي مع Gemini و`mcp` SDK.
+Di sini, Anda dapat menemukan contoh cara menggunakan server MCP lokal dengan Gemini dan `mcp` SDK.
 
 ### Python
 
-تأكَّد من تثبيت أحدث إصدار من حزمة تطوير البرامج (SDK) الخاصة بـ
-[`mcp`](https://modelcontextprotocol.io/introduction) على
-النظام الأساسي الذي تختاره.
+Pastikan [SDK `mcp`](https://modelcontextprotocol.io/introduction) versi terbaru telah diinstal di platform pilihan Anda.
 
 ```
 pip install mcp
@@ -1994,7 +2062,7 @@ asyncio.run(run())
 
 ### JavaScript
 
-تأكَّد من تثبيت أحدث إصدار من حزمة تطوير البرامج (SDK) `mcp` على المنصة التي تختارها.
+Pastikan `mcp` SDK versi terbaru diinstal di platform pilihan Anda.
 
 ```
 npm install @modelcontextprotocol/sdk
@@ -2042,82 +2110,86 @@ console.log(response.text)
 await client.close();
 ```
 
-### القيود المفروضة على التوافق المضمّن مع بروتوكول سياق النموذج (MCP)
+### Batasan dengan dukungan MCP bawaan
 
-تتوفّر ميزة دعم MCP المضمّنة [كتجربة](https://ai.google.dev/gemini-api/docs/models?hl=ar#preview) في حِزم SDK، وتتضمّن القيود التالية:
+Dukungan MCP bawaan adalah fitur [eksperimental](https://ai.google.dev/gemini-api/docs/models?hl=id#preview) di SDK kami dan memiliki batasan berikut:
 
-- تتوفّر الأدوات فقط، وليس المراجع أو الطلبات
-- تتوفّر هذه الميزة لحزمة تطوير البرامج (SDK) الخاصة بلغة Python وJavaScript/TypeScript.
-- قد تحدث تغييرات غير متوافقة مع الإصدارات السابقة في الإصدارات المستقبلية.
+- Hanya alat yang didukung, bukan resource atau perintah
+- Fitur ini tersedia untuk Python dan JavaScript/TypeScript SDK.
+- Perubahan yang menyebabkan gangguan mungkin terjadi dalam rilis mendatang.
 
-يمكنك دائمًا دمج خوادم MCP يدويًا إذا كانت هذه الخوادم تفرض قيودًا على ما تنشئه.
+Integrasi server MCP secara manual selalu menjadi opsi jika batasan ini membatasi apa yang Anda bangun.
 
-## النماذج المتوافقة
+## Model yang didukung
 
-يسرد هذا القسم النماذج وإمكاناتها في استدعاء الدوال. ولا يتم تضمين النماذج التجريبية. يمكنك الاطّلاع على نظرة عامة شاملة حول الإمكانات في صفحة [النظرة العامة على النموذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+Bagian ini mencantumkan model dan kemampuan panggilan fungsi mereka. Model eksperimental tidak disertakan. Anda dapat menemukan ringkasan kemampuan yang komprehensif di halaman [ringkasan model](https://ai.google.dev/gemini-api/docs/models?hl=id).
 
-| الطراز | استدعاء الدالة | استدعاء الدوال بشكل متوازٍ | استدعاء الدوال التركيبية |
+| Model | Panggilan fungsi | Panggilan fungsi paralel | Panggilan fungsi komposit |
 | --- | --- | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=ar) | ✔️ | ✔️ | ✔️ |
-| [‫Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=ar) | ✔️ | ✔️ | ✔️ |
-| [إصدار تجريبي من Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar) | ✔️ | ✔️ | ✔️ |
-| [‫Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar) | ✔️ | ✔️ | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ar) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=ar) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=ar) | ✔️ | ✔️ | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=ar) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=id) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=id) | ✔️ | ✔️ | ✔️ |
+| [Pratinjau Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=id) | ✔️ | ✔️ | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=id) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=id) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=id) | ✔️ | ✔️ | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=id) | ✔️ | ✔️ | ✔️ |
 
-## أفضل الممارسات
+## Praktik terbaik
 
-- **أوصاف الوظائف والمَعلمات:** يجب أن تكون أوصافك واضحة ومحدّدة للغاية. ويعتمد النموذج على هذه المعلومات لاختيار الوظيفة الصحيحة وتقديم الوسيطات المناسبة.
-- **التسمية:** استخدِم أسماء دوال وصفية (بدون مسافات أو نقاط أو شرطات).
-- **الكتابة القوية:** استخدِم أنواعًا محدّدة (عدد صحيح، سلسلة، تعداد) للمَعلمات
-  للحدّ من الأخطاء. إذا كانت إحدى المَعلمات تتضمّن مجموعة محدودة من القيم الصالحة، استخدِم نوع البيانات
+- **Deskripsi Fungsi dan Parameter:** Jelaskan dengan sangat jelas dan spesifik dalam deskripsi Anda. Model mengandalkan hal ini untuk memilih fungsi yang benar
+  dan memberikan argumen yang sesuai.
+- **Penamaan:** Gunakan nama fungsi deskriptif (tanpa spasi, titik, atau tanda hubung).
+- **Pengetikan Kuat:** Gunakan jenis tertentu (integer, string, enum) untuk parameter guna mengurangi error. Jika parameter memiliki serangkaian nilai valid yang terbatas, gunakan
   enum.
-- **اختيار الأدوات:** على الرغم من أنّ النموذج يمكنه استخدام عدد عشوائي من الأدوات، إلا أنّ توفير عدد كبير جدًا منها يمكن أن يزيد من خطر اختيار أداة غير صحيحة أو غير مثالية. لتحقيق أفضل النتائج، احرص على توفير الأدوات ذات الصلة فقط بالسياق أو المهمة، مع الحرص على ألا يتجاوز عدد الأدوات النشطة 10 إلى 20 أداة كحد أقصى. ننصحك باختيار الأدوات بشكل ديناميكي استنادًا إلى سياق المحادثة إذا كان لديك عدد كبير من الأدوات.
-- **هندسة الطلبات:**
-  - تقديم سياق: أخبر النموذج عن دوره (مثلاً، "أنت مساعد
-    مفيد بشأن الطقس").
-  - تقديم التعليمات: حدِّد كيفية استخدام الدوال ومتى يجب استخدامها (مثلاً، "لا تخمّن التواريخ، بل استخدِم دائمًا تاريخًا مستقبليًا للتوقعات").
-  - تشجيع التوضيح: اطلب من النموذج طرح أسئلة توضيحية
-    إذا لزم الأمر.
-  - يمكنك الاطّلاع على [سير العمل المستند إلى الوكلاء](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar#agentic-workflows)
-    للحصول على استراتيجيات إضافية حول تصميم هذه الطلبات. في ما يلي مثال على [تعليمات نظام](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ar#agentic-si-template) تم اختبارها.
-- **درجة العشوائية:** استخدِم درجة عشوائية منخفضة (مثل 0) لإجراء استدعاءات دالة أكثر حتميةً وموثوقيةً.
-- **التحقّق من الصحة:** إذا كان لطلب تنفيذ دالة عواقب كبيرة (مثل تقديم طلب)، يجب التحقّق من صحة الطلب مع المستخدم قبل تنفيذه.
-- **التحقّق من سبب الإنهاء:** احرص دائمًا على التحقّق من [`finishReason`](https://ai.google.dev/api/generate-content?hl=ar#FinishReason)
-  في ردّ النموذج للتعامل مع الحالات التي تعذّر فيها على النموذج إنشاء
-  استدعاء دالة صالح.
-- **معالجة الأخطاء**: اتّخِذ إجراءات فعالة لمعالجة الأخطاء في الدوال من أجل معالجة الإدخالات غير المتوقّعة أو الأعطال في واجهة برمجة التطبيقات بشكل سليم. عرض رسائل خطأ مفيدة يمكن للنموذج استخدامها لإنشاء ردود مفيدة للمستخدم.
-- **الأمان:** يُرجى مراعاة الأمان عند استدعاء واجهات برمجة التطبيقات الخارجية. استخدِم آليات المصادقة والتفويض المناسبة. تجنَّب عرض البيانات الحسّاسة في استدعاءات الدوال.
-- **حدود الرموز المميزة:** يتم احتساب أوصاف الدوال ومعلَماتها ضمن الحد الأقصى لعدد الرموز المميزة التي يمكنك إدخالها. إذا كنت تواجه مشاكل بسبب الحد الأقصى لعدد الرموز المميزة، ننصحك بالحد من عدد الدوال أو طول الأوصاف، أو بتقسيم المهام المعقّدة إلى مجموعات أصغر وأكثر تركيزًا من الدوال.
-- **مزيج من أدوات bash والأدوات المخصّصة**: بالنسبة إلى المطوّرين الذين يستخدمون مزيجًا من أدوات bash والأدوات المخصّصة، يتوفّر الإصدار التجريبي من Gemini 3.1 Pro مع نقطة نهاية منفصلة يمكن الوصول إليها من خلال واجهة برمجة التطبيقات باسم [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar#gemini-31-pro-preview-customtools).
+- **Pemilihan Alat:** Meskipun model dapat menggunakan sejumlah alat yang tidak terbatas,
+  terlalu banyak alat dapat meningkatkan risiko pemilihan alat yang salah atau
+  tidak optimal. Untuk hasil terbaik, usahakan hanya menyediakan alat yang relevan untuk konteks atau tugas, idealnya menjaga set aktif hingga maksimum 10-20. Pertimbangkan pemilihan alat dinamis berdasarkan konteks percakapan jika Anda memiliki banyak alat.
+- **Rekayasa Perintah:**
+  - Berikan konteks: Beri tahu model perannya (misalnya, "Anda adalah asisten cuaca yang sigap membantu").
+  - Berikan petunjuk: Tentukan cara dan waktu penggunaan fungsi (misalnya, "Jangan
+    menebak tanggal; selalu gunakan tanggal mendatang untuk perkiraan.").
+  - Mendorong klarifikasi: Instruksikan model untuk mengajukan pertanyaan klarifikasi jika diperlukan.
+  - Lihat [Alur kerja agentik](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id#agentic-workflows)
+    untuk mengetahui strategi lebih lanjut dalam mendesain perintah ini. Berikut adalah contoh [petunjuk sistem](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=id#agentic-si-template) yang telah diuji.
+- **Temperatur:** Gunakan temperatur rendah (misalnya, 0) untuk panggilan fungsi yang lebih deterministik dan andal.
+- **Validasi:** Jika panggilan fungsi memiliki konsekuensi yang signifikan (misalnya,
+  melakukan pemesanan), validasi panggilan dengan pengguna sebelum mengeksekusinya.
+- **Periksa Alasan Selesai:** Selalu periksa [`finishReason`](https://ai.google.dev/api/generate-content?hl=id#FinishReason)
+  dalam respons model untuk menangani kasus saat model gagal membuat
+  panggilan fungsi yang valid.
+- **Penanganan Error**: Terapkan penanganan error yang andal dalam fungsi Anda untuk
+  menangani input yang tidak terduga atau kegagalan API dengan baik. Menampilkan pesan error informatif yang dapat digunakan model untuk menghasilkan respons yang bermanfaat bagi pengguna.
+- **Keamanan:** Perhatikan keamanan saat memanggil API eksternal. Gunakan
+  mekanisme autentikasi dan otorisasi yang sesuai. Hindari mengekspos data sensitif dalam panggilan fungsi.
+- **Batas Token:** Deskripsi dan parameter fungsi dihitung dalam batas token input Anda. Jika Anda mencapai batas token, pertimbangkan untuk membatasi jumlah fungsi atau panjang deskripsi, uraikan tugas yang kompleks menjadi serangkaian fungsi yang lebih kecil dan lebih terfokus.
+- **Kombinasi bash dan alat kustom** Bagi mereka yang membuat aplikasi dengan kombinasi bash dan alat kustom, Pratinjau Gemini 3.1 Pro hadir dengan endpoint terpisah yang tersedia melalui API yang disebut [`gemini-3.1-pro-preview-customtools`](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=id#gemini-31-pro-preview-customtools).
 
-## حلول بديلة لمتطلبات النص قبل استخدام الأداة
+## Solusi untuk persyaratan teks sebelum alat
 
-**المشكلة:** إذا كان طلبك يتطلّب من النموذج عرض نص منظَّم (XML أو YAML أو JSON أو غير ذلك) (مثلاً، `<UPDATE>...</UPDATE>`) مباشرةً قبل إجراء مكالمة باستخدام أداة، قد يتعذّر أحيانًا إجراء المكالمة وتظهر الرسالة `Malformed_Function_Call`.
+**Masalah:** Jika perintah Anda mengharuskan model menghasilkan teks terstruktur (XML, YAML, JSON, dll.) (misalnya, `<UPDATE>...</UPDATE>`) tepat sebelum melakukan panggilan alat, panggilan alat terkadang dapat gagal dengan `Malformed_Function_Call`.
 
-**الحلول:** تعمل الحلول البديلة التالية على حلّ هذه المشكلة:
+**Solusi:** Solusi berikut dapat mengatasi masalah ini:
 
-- **الخيار المفضّل:** اطلب من النموذج وضع ملاحظاته قبل استخدام الأدوات داخل استدعاء دالة `update()` مخصّص بدلاً من النص العادي (التفاصيل أدناه).
-- اطلب من النموذج كتابة الملاحظات كعناوين Markdown (`# UPDATE` و`## PLAN`) بدلاً من النص المنظَّم.
-- لا تطلب من النموذج إخراج نص قبل استدعاء الأدوات.
+- **DISARANKAN:** Beri petunjuk kepada model untuk menempatkan catatan pra-alatnya di dalam panggilan fungsi `update()` khusus, bukan teks mentah (detail di bawah).
+- Instruksikan model untuk menulis catatan sebagai header Markdown (`# UPDATE`, `## PLAN`) dan bukan teks terstruktur.
+- Tidak mewajibkan model menghasilkan teks sebelum panggilan alat.
 
-### الحل المفضّل: تضمين الملاحظات في استدعاء دالة مخصّصة
+### Solusi pilihan: Bungkus catatan kerja dalam panggilan fungsi khusus
 
-بدلاً من التعليمات الأصلية:
+Daripada petunjuk asli:
 
 ```
-Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags within `<UPDATE>`.
+Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags with<in `UP>DATE`.
 ```
 
-استخدِم هذه التعليمات المعدَّلة:
+Gunakan petunjuk yang diperbarui ini:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-عدِّل جميع الإشارات إلى تنسيق XML القديم `<UPDATE>` في طلب العميل. بعد ذلك، أضِف بيان الدالة المقابل لدالة التعديل:
+Perbarui semua referensi ke format XML `<UPDATE>` lama dalam permintaan pelanggan. Kemudian, tambahkan deklarasi fungsi yang sesuai untuk fungsi update:
 
 ```
 {
@@ -2139,7 +2211,7 @@ Before calling any other tool, in every response you MUST first call `update` wi
         "description": "Brief explanation of the immediate next action according to the plan."
       },
       "external": {
-        "type": "STRING",
+        ";type": "STRING",
         "description": "A short, plain-language note shown to the User about what you are ABOUT TO DO next."
       }
     },
@@ -2153,23 +2225,29 @@ Before calling any other tool, in every response you MUST first call `update` wi
 }
 ```
 
-بعد ذلك، سيُجري النموذج استدعاءَين في الخطوة نفسها: استدعاء `update()` الذي يحلّ محل XML المنظَّمة، واستدعاء الدالة الفعلي الذي يريد إجراءه.
+Kemudian, model akan melakukan dua panggilan dalam langkah yang sama: panggilan `update()` yang menggantikan XML terstruktur, dan panggilan fungsi sebenarnya yang ingin dilakukan.
 
-## الملاحظات والقيود
+## Catatan dan batasan
 
-- تحديد موضع أجزاء طلبات الدوال: عند استخدام تعريفات الدوال المخصّصة [إلى جانب الأدوات المضمّنة](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ar) (مثل &quot;بحث Google&quot;)، قد يعرض النموذج مزيجًا من أجزاء `functionCall` و`toolCall` و`toolResponse` في ردّ واحد. لهذا السبب، لا تفترض أنّ
-  `functionCall` سيكون دائمًا العنصر الأخير في مصفوفة الأجزاء. إذا كنت تحلّل استجابة JSON يدويًا، احرص دائمًا على تكرار مصفوفة الأجزاء بدلاً من الاعتماد على الموضع.
-- لا يتوافق سوى [جزء من مخطط OpenAPI](https://ai.google.dev/api/caching?hl=ar#FunctionDeclaration).
-- بالنسبة إلى الوضع `ANY`، قد ترفض واجهة برمجة التطبيقات المخططات الكبيرة جدًا أو المتداخلة بشكل كبير. إذا واجهت أخطاء، حاوِل تبسيط مخططات مَعلمات الدالة والاستجابة من خلال تقصير أسماء السمات أو تقليل التداخل أو الحدّ من عدد تعريفات الدوال.
-- أنواع المَعلمات المتوافقة في Python محدودة.
-- لا تتوفّر ميزة استدعاء الدوال التلقائي إلا في حزمة تطوير البرامج (SDK) الخاصة بلغة Python.
+- Penempatan bagian panggilan fungsi: Saat menggunakan deklarasi fungsi kustom
+  [bersama alat bawaan](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id) (seperti Google
+  Penelusuran), model dapat menampilkan campuran bagian `functionCall`, `toolCall`, dan
+  `toolResponse` dalam satu giliran. Oleh karena itu, jangan menganggap bahwa
+  `functionCall` akan selalu menjadi item terakhir dalam array bagian. Jika Anda mengurai respons JSON secara manual, selalu lakukan iterasi melalui array bagian, bukan mengandalkan posisi.
+- Hanya [subset skema OpenAPI](https://ai.google.dev/api/caching?hl=id#FunctionDeclaration) yang didukung.
+- Untuk mode `ANY`, API dapat menolak skema yang sangat besar atau bertingkat dalam. Jika
+  Anda mengalami error, coba sederhanakan parameter fungsi dan skema respons
+  dengan mempersingkat nama properti, mengurangi nesting, atau membatasi
+  jumlah deklarasi fungsi.
+- Jenis parameter yang didukung di Python terbatas.
+- Panggilan fungsi otomatis adalah fitur khusus Python SDK.
 
-إرسال ملاحظات
+Kirim masukan
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-07-21 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-07-30 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Ada masukan untuk kami?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-21 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]

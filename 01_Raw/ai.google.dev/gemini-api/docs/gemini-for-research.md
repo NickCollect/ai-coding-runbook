@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/gemini-for-research?hl=ar
-fetched_at: 2026-07-27T04:49:32.492873+00:00
+fetched_at: 2026-08-03T04:36:14.919151+00:00
 title: "\u062a\u0633\u0631\u064a\u0639 \u0639\u0645\u0644\u064a\u0629 \u0627\u0644\u0627\u0643\u062a\u0634\u0627\u0641 \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Gemini \u0644\u0623\u063a\u0631\u0627\u0636 \u0627\u0644\u0628\u062d\u062b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ title: "\u062a\u0633\u0631\u064a\u0639 \u0639\u0645\u0644\u064a\u0629 \u0627\u06
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
 - [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=ar)

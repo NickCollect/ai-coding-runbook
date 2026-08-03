@@ -1,32 +1,28 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=it
-fetched_at: 2026-07-27T04:46:18.401006+00:00
-title: "Metodi di input dei file \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ar
+fetched_at: 2026-08-03T04:41:21.498945+00:00
+title: "\u0637\u064f\u0631\u0642 \u0625\u062f\u062e\u0627\u0644 \u0627\u0644\u0645\u0644\u0641\u0627\u062a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Invia feedback
+إرسال ملاحظات
 
-# Metodi di input dei file
+# طُرق إدخال الملفات
 
-Questa guida spiega i diversi modi in cui puoi includere file multimediali come
-immagini, audio, video e documenti quando invii richieste all'API Gemini.
-I nuovi metodi sono supportati in tutti gli endpoint dell'API Gemini, tra cui
-Batch, Interactions e Live API.
-La scelta del metodo giusto dipende dalle dimensioni del file, dalla posizione in cui sono archiviati i dati e dalla frequenza con cui prevedi di utilizzare il file.
+يوضّح هذا الدليل الطرق المختلفة التي يمكنك من خلالها تضمين ملفات وسائط، مثل الصور والصوت والفيديو والمستندات، عند إرسال طلبات إلى Gemini API.
+تتوفّر الطرق الجديدة في جميع نقاط نهاية Gemini API، بما في ذلك Batch وInteractions وLive API.
+يعتمد اختيار الطريقة المناسبة على حجم ملفك ومكان تخزين بياناتك ومعدّل تكرار استخدامك للملف.
 
-Il modo più semplice per includere un file come input è leggere un file locale e
-includerlo in un prompt. L'esempio seguente mostra come leggere un file PDF locale. I PDF sono limitati a 50 MB per questo metodo. Consulta la
-[tabella di confronto dei metodi di input](#method-comparison) per un elenco completo dei tipi di input e dei limiti dei file.
+أبسط طريقة لتضمين ملف كمدخل هي قراءة ملف محلي وتضمينه في طلب. يوضّح المثال التالي كيفية قراءة ملف PDF محلي. يقتصر حجم ملفات PDF على 50 ميغابايت عند استخدام هذه الطريقة. راجِع [جدول مقارنة طرق الإدخال](#method-comparison) للحصول على قائمة كاملة بأنواع الملفات التي يمكن إدخالها والحدود القصوى المسموح بها.
 
 ### Python
 
@@ -41,7 +37,7 @@ filepath = pathlib.Path('my_local_file.pdf')
 
 prompt = "Summarize this document"
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": prompt},
         {"type": "document", "data": base64.b64encode(filepath.read_bytes()).decode('utf-8'), "mime_type": "application/pdf"}
@@ -63,7 +59,7 @@ async function main() {
     const filePath = 'my_local_file.pdf';
 
     const interaction = await client.interactions.create({
-        model: "gemini-3.5-flash",
+        model: "gemini-3.6-flash",
         input: [
             { type: "text", text: prompt },
             {
@@ -89,7 +85,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Summarize this document"},
       {
@@ -101,30 +97,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Confronto dei metodi di immissione
+## مقارنة طرق الإدخال
 
-La tabella seguente mette a confronto ciascun metodo di input con i limiti dei file e i casi d'uso
-ottimali. Tieni presente che il limite di dimensione del file può variare a seconda del tipo di file e
-del modello o del tokenizer utilizzato per elaborare il file.
+يقارن الجدول التالي بين كل طريقة إدخال من حيث حدود الملفات وحالات الاستخدام الأفضل. يُرجى العِلم أنّ الحدّ الأقصى المسموح به لحجم الملف قد يختلف حسب نوع الملف والنموذج أو أداة تقسيم النص المستخدَمة لمعالجة الملف.
 
-| Metodo | Ideale per | Dimensione massima file | Persistenza |
+| الطريقة | يناسب هذا الخيار: | الحجم الأقصى للملف | الاستمرارية |
 | --- | --- | --- | --- |
-| **Dati in linea** | Test rapidi, file di piccole dimensioni, applicazioni in tempo reale. | 100 MB per richiesta o payload   (**50 MB per i PDF**) | Nessuno (inviato con ogni richiesta) |
-| **Caricamento dell'API File** | File di grandi dimensioni, file utilizzati più volte. | 2 GB per file,   fino a 20 GB per progetto | 48 ore |
-| **Registrazione dell'URI GCS dell'API File** | File di grandi dimensioni già presenti in Google Cloud Storage, file utilizzati più volte. | 2 GB per file, nessun limite di spazio di archiviazione complessivo | Nessuno (recuperato per richiesta). La registrazione una tantum può fornire l'accesso per un massimo di 30 giorni. |
-| **URL esterni** | Dati pubblici o dati in bucket cloud (AWS, Azure, GCS) senza ricaricamento. | 100 MB per richiesta/payload | Nessuno (recuperato per richiesta) |
+| **البيانات المضمّنة** | اختبار سريع، وملفات صغيرة، وتطبيقات في الوقت الفعلي | ‫100 ميغابايت لكل طلب أو حمولة   (**50 ميغابايت لملفات PDF**) | بلا قيمة (يتم إرسالها مع كل طلب) |
+| **تحميل الملفات من خلال واجهة برمجة التطبيقات** | الملفات الكبيرة والملفات المستخدَمة عدة مرات | ‫2 غيغابايت لكل ملف،   ما يصل إلى 20 غيغابايت لكل مشروع | ‫48 ساعة |
+| **تسجيل معرّف الموارد المنتظم (URI) في File API على "خدمة التخزين السحابي من Google"** | الملفات الكبيرة المخزَّنة في Google Cloud Storage، والملفات المستخدَمة عدة مرات | ‫2 غيغابايت لكل ملف، بدون حدود إجمالية لمساحة التخزين | لا شيء (يتم استرجاعها لكل طلب). يمكن أن تتيح عملية التسجيل لمرة واحدة الوصول إلى التطبيق لمدة تصل إلى 30 يومًا. |
+| **عناوين URL الخارجية** | البيانات العامة أو البيانات في حِزم السحابة الإلكترونية (AWS وAzure وGCS) بدون إعادة تحميلها | ‫100 ميغابايت لكل طلب/حمولة | لا شيء (يتم استرجاعها لكل طلب) |
 
-## Dati in linea
+## البيانات المضمّنة
 
-Per i file più piccoli (inferiori a 100 MB o 50 MB per i PDF), puoi trasmettere i dati
-direttamente nel payload della richiesta. Questo è il metodo più semplice per test rapidi o
-applicazioni che gestiscono dati temporanei in tempo reale. Puoi fornire i dati come stringhe con codifica base64 o leggendo direttamente i file locali.
+بالنسبة إلى الملفات الأصغر حجمًا (أقل من 100 ميغابايت، أو 50 ميغابايت لملفات PDF)، يمكنك تمرير البيانات مباشرةً في حمولة الطلب. هذه هي الطريقة الأبسط لإجراء اختبارات سريعة أو للتطبيقات التي تعالج البيانات المؤقتة في الوقت الفعلي. يمكنك تقديم البيانات كسلاسل مشفّرة باستخدام base64 أو من خلال قراءة الملفات المحلية مباشرةً.
 
-Per un esempio di lettura da un file locale, consulta l'esempio all'inizio di questa pagina.
+للاطّلاع على مثال على القراءة من ملف محلي، راجِع المثال في بداية هذه الصفحة.
 
-### Recuperare da un URL
+### الجلب من عنوان URL
 
-Puoi anche recuperare un file da un URL, convertirlo in byte e includerlo nell'input.
+يمكنك أيضًا جلب ملف من عنوان URL وتحويله إلى وحدات بايت وتضمينه في الإدخال.
 
 ### Python
 
@@ -140,7 +132,7 @@ doc_data = httpx.get(doc_url).content
 prompt = "Summarize this document"
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "document", "data": base64.b64encode(doc_data).decode('utf-8'), "mime_type": "application/pdf"},
         {"type": "text", "text": prompt}
@@ -163,7 +155,7 @@ async function main() {
       .then((response) => response.arrayBuffer());
 
     const interaction = await client.interactions.create({
-        model: "gemini-3.5-flash",
+        model: "gemini-3.6-flash",
         input: [
             { type: "text", text: prompt },
             {
@@ -202,7 +194,7 @@ ENCODED_PDF=$(base64 $B64FLAGS "${DISPLAY_NAME}.pdf")
 # Create JSON payload file
 cat <<EOF > payload.json
 {
-"model": "gemini-3.5-flash",
+"model": "gemini-3.6-flash",
 "input": [
 {"type": "document", "data": "${ENCODED_PDF}", "mime_type": "application/pdf"},
 {"type": "text", "text": "${PROMPT}"}
@@ -222,15 +214,13 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## API Gemini File
+## Gemini File API
 
-L'API File è progettata per file più grandi (fino a 2 GB) o file che intendi
-utilizzare in più richieste.
+تم تصميم File API للملفات الأكبر حجمًا (حتى 2 غيغابايت) أو الملفات التي تنوي استخدامها في طلبات متعددة.
 
-### Caricamento standard dei file
+### تحميل الملفات العادي
 
-Carica un file locale nell'API Gemini. I file caricati in questo modo vengono archiviati
-temporaneamente (48 ore) ed elaborati per un recupero efficiente da parte del modello.
+حمِّل ملفًا محليًا إلى Gemini API. يتم تخزين الملفات التي يتم تحميلها بهذه الطريقة بشكل مؤقت (لمدة 48 ساعة) ومعالجتها ليتمكّن النموذج من استرجاعها بكفاءة.
 
 ### Python
 
@@ -243,7 +233,7 @@ doc_file = client.files.upload(file="path/to/your/sample.pdf")
 prompt = "Summarize this document"
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": prompt},
         {"type": "document", "uri": doc_file.uri, "mime_type": doc_file.mime_type}
@@ -269,7 +259,7 @@ async function main() {
   });
 
   const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         { type: "text", text: prompt },
         { type: "document", uri: myfile.uri, mime_type: myfile.mimeType }
@@ -319,7 +309,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "input": [
         {"type": "text", "text": "Summarize this document"},
         {"type": "document", "uri": '$file_uri', "mime_type": "'${MIME_TYPE}'"}
@@ -327,45 +317,45 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-### Registra i file Google Cloud Storage
+### تسجيل ملفات Google Cloud Storage
 
-Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaricarli. Puoi registrarlo direttamente con l'API File.
+إذا كانت بياناتك متوفّرة في Google Cloud Storage، لن تحتاج إلى تنزيلها وإعادة تحميلها. يمكنك تسجيلها مباشرةً باستخدام File API.
 
-1. Concedi l'accesso al **service agent** a ogni bucket
+1. منح **وكيل الخدمة** إذن الوصول إلى كل حزمة
 
-   1. Abilita l'API Gemini nel tuo progetto Google Cloud.
-   2. Crea l'agente di servizio:
+   1. فعِّل Gemini API في مشروعك على Google Cloud.
+   2. إنشاء وكيل الخدمة:
 
       `gcloud beta services identity create --service=generativelanguage.googleapis.com --project=<your_project>`
-   3. **Concedi al service agent dell'API Gemini le autorizzazioni** per leggere i tuoi bucket di archiviazione.
+   3. **امنح وكيل خدمة Gemini API الأذونات** اللازمة لقراءة حِزم التخزين.
 
-      L'utente deve assegnare il [ruolo IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=it#storage.objectViewer) `Storage Object Viewer` a questo service agent nei bucket di archiviazione specifici che intende utilizzare.
+      على المستخدم منح `Storage Object Viewer`
+      [دور IAM](https://docs.cloud.google.com/storage/docs/access-control/iam-roles?hl=ar#storage.objectViewer)
+      لوكيل الخدمة هذا في حِزم التخزين المحدّدة التي ينوي استخدامها.
 
-   Questo accesso non scade per impostazione predefinita, ma può essere modificato in qualsiasi momento. Puoi anche utilizzare i comandi dell'[SDK Google Cloud Storage IAM](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=it) per concedere le autorizzazioni.
-2. Autenticare il servizio
+   لا تنتهي صلاحية هذا الإذن بالوصول تلقائيًا، ولكن يمكن تغييره في أي وقت. يمكنك أيضًا استخدام أوامر [Google Cloud Storage IAM SDK](https://cloud.google.com/iam/docs/write-policy-client-libraries?hl=ar) لمنح الأذونات.
+2. مصادقة خدمتك
 
-   **Prerequisiti**
+   **المتطلبات الأساسية**
 
-   - Abilita API
-   - Crea un service account o un agente con le autorizzazioni appropriate.
+   - تفعيل واجهة برمجة التطبيقات
+   - أنشئ حساب خدمة أو وكيلًا لديه الأذونات المناسبة.
 
-   Devi prima autenticarti come servizio con autorizzazioni di visualizzazione degli oggetti Storage. La modalità dipende dall'ambiente in cui verrà eseguito il codice di gestione dei file.
+   عليك أولاً إجراء المصادقة بصفتك الخدمة التي لديها أذونات عارض عنصر التخزين. وتختلف طريقة فعل ذلك حسب البيئة التي سيتم فيها تشغيل رمز إدارة الملفات.
 
-   **Al di fuori di Google Cloud**
+   **خارج Google Cloud**
 
-   Se il tuo codice viene eseguito al di fuori di Google Cloud, ad esempio dal tuo computer,
-   scarica le credenziali dell'account dalla console Google Cloud seguendo
-   i seguenti passaggi:
+   إذا كان الرمز البرمجي يعمل من خارج Google Cloud، مثلاً من سطح المكتب،
+   نزِّل بيانات اعتماد الحساب من &quot;وحدة تحكّم Google Cloud&quot; باتّباع الخطوات التالية:
 
-   1. Vai alla [console Service Account](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=it).
-   2. Seleziona il service account pertinente.
-   3. Seleziona la scheda **Chiavi** e scegli **Aggiungi chiave, Crea nuova chiave**.
-   4. Scegli il tipo di chiave **JSON** e annota la posizione in cui è stato scaricato il file sul tuo computer.
+   1. انتقِل إلى [وحدة تحكّم حساب الخدمة](https://console.cloud.google.com/iam-admin/serviceaccounts?hl=ar)
+   2. اختَر حساب الخدمة ذي الصلة
+   3. اختَر علامة التبويب **المفاتيح**، ثم انقر على **إضافة مفتاح، إنشاء مفتاح جديد**.
+   4. اختَر نوع المفتاح **JSON**، ودَوِّن المكان الذي تم تنزيل الملف فيه على جهازك.
 
-   Per maggiori dettagli, consulta la documentazione ufficiale di Google Cloud sulla
-   [gestione delle chiavi del service account](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=it).
+   لمزيد من التفاصيل، يُرجى الاطّلاع على مستندات Google Cloud الرسمية حول [إدارة مفاتيح حسابات الخدمة](https://docs.cloud.google.com/iam/docs/keys-create-delete?hl=ar).
 
-   Poi utilizza i seguenti comandi per l'autenticazione. Questi comandi presuppongono che il file dell'account di servizio si trovi nella directory corrente e sia denominato `service-account.json`.
+   بعد ذلك، استخدِم الأوامر التالية للمصادقة. تفترض هذه الأوامر أنّ ملف حساب الخدمة موجود في الدليل الحالي، ويحمل الاسم `service-account.json`.
 
    ### Python
 
@@ -403,7 +393,7 @@ Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaric
    });
    ```
 
-   ### Interfaccia a riga di comando
+   ### CLI
 
    ```
    gcloud auth application-default login \
@@ -411,15 +401,13 @@ Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaric
      --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only'
    ```
 
-   **Su Google Cloud**
+   **على Google Cloud**
 
-   Se esegui l'applicazione direttamente in Google Cloud, ad esempio utilizzando le [funzioni Cloud Run](https://cloud.google.com/functions?hl=it) o un'[istanza Compute Engine](https://cloud.google.com/products/compute?hl=it), avrai credenziali implicite, ma dovrai eseguire nuovamente l'autenticazione per concedere gli ambiti appropriati.
+   إذا كنت تستخدم Google Cloud مباشرةً، مثلاً من خلال استخدام [وظائف Cloud Run](https://cloud.google.com/functions?hl=ar) أو [مثيل Compute Engine](https://cloud.google.com/products/compute?hl=ar)، ستتوفّر لك بيانات اعتماد ضمنية، ولكن عليك إعادة المصادقة لمنح النطاقات المناسبة.
 
    ### Python
 
-   Questo codice prevede che il servizio venga eseguito in un ambiente in cui
-   [le credenziali predefinite dell'applicazione](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=it)
-   possono essere ottenute automaticamente, ad esempio Cloud Run o Compute Engine.
+   يفترض هذا الرمز البرمجي أنّ الخدمة تعمل في بيئة يمكن فيها الحصول على [بيانات الاعتماد التلقائية للتطبيق](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=ar) تلقائيًا، مثل Cloud Run أو Compute Engine.
 
    ```
    import google.auth
@@ -434,9 +422,7 @@ Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaric
 
    ### JavaScript
 
-   Questo codice prevede che il servizio venga eseguito in un ambiente in cui
-   [le credenziali predefinite dell'applicazione](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=it)
-   possono essere ottenute automaticamente, ad esempio Cloud Run o Compute Engine.
+   يفترض هذا الرمز البرمجي أنّ الخدمة تعمل في بيئة يمكن فيها الحصول على [بيانات الاعتماد التلقائية للتطبيق](https://docs.cloud.google.com/docs/authentication/application-default-credentials?hl=ar) تلقائيًا، مثل Cloud Run أو Compute Engine.
 
    ```
    const { GoogleAuth } = require('google-auth-library');
@@ -449,17 +435,17 @@ Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaric
    });
    ```
 
-   ### Interfaccia a riga di comando
+   ### CLI
 
-   Questo è un comando interattivo. Per servizi come Compute Engine, puoi collegare gli ambiti al servizio in esecuzione a livello di configurazione. Per un esempio, consulta la [documentazione sul service account gestito dall'utente](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=it#using).
+   هذا أمر تفاعلي. بالنسبة إلى خدمات مثل Compute Engine، يمكنك ربط النطاقات بالخدمة قيد التشغيل على مستوى الإعدادات. راجِع [مستندات الخدمة التي يديرها المستخدم](https://docs.cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances?hl=ar#using) للحصول على مثال.
 
    ```
    gcloud auth application-default login \
    --scopes="https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/devstorage.read_only"
    ```
-3. Registrazione dei file (API Files)
+3. تسجيل الملفات (Files API)
 
-   Utilizza l'API Files per registrare i file e produrre un percorso dell'API Files che può essere utilizzato direttamente nell'API Gemini.
+   استخدِم Files API لتسجيل الملفات وإنشاء مسار Files API يمكن استخدامه مباشرةً في Gemini API.
 
    ### Python
 
@@ -476,7 +462,7 @@ Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaric
    for f in registered_gcs_files.files:
      print(f.name)
      interaction = client.interactions.create(
-       model="gemini-3.5-flash",
+       model="gemini-3.6-flash",
        input=[
          {"type": "text", "text": prompt},
          {"type": "document", "uri": f.uri, "mime_type": f.mime_type}
@@ -502,7 +488,7 @@ Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaric
        for (const file of registeredGcsFiles.files) {
            console.log(file.name);
            const interaction = await ai.interactions.create({
-               model: "gemini-3.5-flash",
+               model: "gemini-3.6-flash",
                input: [
                    { type: "text", text: prompt },
                    { type: "document", uri: file.uri, mime_type: file.mimeType }
@@ -516,7 +502,7 @@ Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaric
    main();
    ```
 
-   ### Interfaccia a riga di comando
+   ### CLI
 
    ```
    access_token=$(gcloud auth application-default print-access-token)
@@ -528,11 +514,10 @@ Se i dati si trovano già in Google Cloud Storage, non devi scaricarli e ricaric
        -d '{"uris": ["gs://bucket/object1", "gs://bucket/object2"]}'
    ```
 
-## HTTP esterno / URL firmati
+## عناوين URL الخارجية التي تستخدم HTTP أو عناوين URL الموقَّعة
 
-Puoi trasmettere URL HTTPS accessibili pubblicamente o URL pre-firmati direttamente nella tua
-richiesta. L'API Gemini recupererà i contenuti in modo sicuro durante l'elaborazione.
-È ideale per i file fino a 100 MB che non vuoi caricare nuovamente.
+يمكنك تمرير عناوين URL تستخدم HTTPS ومتاحة للجميع أو عناوين URL موقّعة مسبقًا مباشرةً في طلبك. ستجلب واجهة Gemini API المحتوى بشكل آمن أثناء المعالجة.
+هذه الطريقة مثالية للملفات التي يصل حجمها إلى 100 ميغابايت والتي لا تريد إعادة تحميلها.
 
 ### Python
 
@@ -545,7 +530,7 @@ prompt = "Summarize this file"
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "document", "uri": uri, "mime_type": "application/pdf"},
         {"type": "text", "text": prompt}
@@ -565,7 +550,7 @@ const uri = "https://ontheline.trincoll.edu/images/bookdown/sample-local-pdf.pdf
 
 async function main() {
   const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: [
       { type: "document", uri: uri, mime_type: "application/pdf" },
       { type: "text", text: "summarize this file" }
@@ -585,7 +570,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
       -H 'x-goog-api-key: $GEMINI_API_KEY' \
       -H 'Content-Type: application/json' \
       -d '{
-          "model": "gemini-3.5-flash",
+          "model": "gemini-3.6-flash",
           "input": [
             {"type": "text", "text": "Summarize this pdf"},
             {
@@ -597,26 +582,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         }'
 ```
 
-### Accessibilità
+### تسهيل الاستخدام
 
-Verifica che gli URL forniti non rimandino a pagine che richiedono l'accesso o
-sono protette da un paywall. Per i database privati, assicurati di creare un URL firmato
-con le autorizzazioni di accesso e la scadenza corrette.
+تأكَّد من أنّ عناوين URL التي تقدّمها لا تؤدي إلى صفحات تتطلّب تسجيل الدخول أو
+تستخدم حاجز الدفع. بالنسبة إلى قواعد البيانات الخاصة، تأكَّد من إنشاء عنوان URL موقَّع
+مع أذونات الوصول وتاريخ انتهاء الصلاحية الصحيحَين.
 
-### Controlli di sicurezza
+### عمليات التحقّق من الأمان
 
-Il sistema esegue un controllo di moderazione dei contenuti sull'URL per verificare che soddisfi
-gli standard di sicurezza e delle norme. Se l'URL non supera questo controllo, riceverai un
-`url_retrieval_status` di `URL_RETRIEVAL_STATUS_UNSAFE`.
+يُجري النظام عملية التحقّق من الإشراف على المحتوى في عنوان URL للتأكّد من استيفائه لمعايير الأمان والسياسات. إذا لم يجتَز عنوان URL عملية التحقّق هذه، سيظهر لك
+`url_retrieval_status` من `URL_RETRIEVAL_STATUS_UNSAFE`.
 
-### Tipi di contenuti supportati
+### أنواع المحتوى المتوافقة
 
-Questo elenco di tipi di file supportati e limitazioni è inteso come guida iniziale e non è esaustivo. L'insieme effettivo
-di tipi supportati è soggetto a modifiche e può variare in base al modello specifico e alla versione del tokenizer in uso. I tipi non supportati genereranno un errore.
-Inoltre, il recupero dei contenuti per questi tipi di file
-supporta solo gli URL accessibili pubblicamente.
+هذه القائمة بأنواع الملفات المتوافقة والقيود هي إرشادات أولية وليست شاملة. يخضع نطاق أنواع البيانات المتوافقة للتغيير، ويمكن أن يختلف حسب الطراز المحدد وإصدار أداة تقسيم النص المستخدَمة. وستؤدي الأنواع غير المتوافقة إلى حدوث خطأ.
+بالإضافة إلى ذلك، لا يمكن استرداد المحتوى لأنواع الملفات هذه إلا من خلال عناوين URL متاحة للجميع.
 
-#### Tipi di file di testo
+#### أنواع الملفات النصية
 
 - `text/html`
 - `text/css`
@@ -626,19 +608,19 @@ supporta solo gli URL accessibili pubblicamente.
 - `text/rtf`
 - `text/javascript`
 
-#### Tipi di file dell'applicazione
+#### أنواع ملفات التطبيقات
 
 - `application/json`
 - `application/pdf`
 
-#### Tipi di file immagine
+#### أنواع ملفات الصور
 
 - `image/bmp`
 - `image/jpeg`
 - `image/png`
 - `image/webp`
 
-#### Tipi di file video
+#### أنواع ملفات الفيديو
 
 - `video/mp4`
 - `video/mpeg`
@@ -650,37 +632,36 @@ supporta solo gli URL accessibili pubblicamente.
 - `video/wmv`
 - `video/3gpp`
 
-## Best practice
+## أفضل الممارسات
 
-- **Scegli il metodo giusto**:utilizza i dati incorporati per i file piccoli e temporanei.
-  Utilizza l'API File per i file più grandi o utilizzati di frequente. Utilizza URL esterni
-  per i dati già ospitati online.
-- **Specifica i tipi MIME**:fornisci sempre il tipo MIME corretto per i dati del file per garantire un'elaborazione corretta.
-- **Gestisci gli errori**:implementa la gestione degli errori nel codice per gestire potenziali problemi come errori di rete, problemi di accesso ai file o errori dell'API.
+- **اختيار الطريقة المناسبة:** استخدِم البيانات المضمّنة للملفات الصغيرة والمؤقتة.
+  استخدِم File API للملفات الأكبر حجمًا أو الملفات المستخدَمة بشكل متكرّر. استخدِم عناوين URL خارجية
+  للبيانات المستضافة على الإنترنت.
+- **تحديد أنواع MIME:** احرص دائمًا على تقديم نوع MIME الصحيح لبيانات الملف لضمان معالجتها بشكل سليم.
+- **معالجة الأخطاء:** نفِّذ إجراءات معالجة الأخطاء في الرمز البرمجي لإدارة المشاكل المحتملة، مثل الأعطال في الشبكة أو مشاكل الوصول إلى الملفات أو أخطاء واجهة برمجة التطبيقات.
 
-## Limitazioni
+## القيود
 
-- I limiti delle dimensioni dei file variano in base al metodo (vedi la [tabella di confronto](#method-comparison))
-  e al tipo di file.
-- I dati incorporati aumentano le dimensioni del payload della richiesta.
-- I caricamenti dell'API File sono temporanei e scadono dopo 48 ore.
-- Il recupero di URL esterni è limitato a 100 MB per payload e supporta tipi di contenuti specifici.
+- تختلف حدود حجم الملف حسب الطريقة (راجِع [جدول المقارنة](#method-comparison)) ونوع الملف.
+- تزيد البيانات المضمّنة من حجم حمولة الطلب.
+- عمليات التحميل باستخدام File API مؤقتة وتنتهي صلاحيتها بعد 48 ساعة.
+- يقتصر جلب عناوين URL الخارجية على 100 ميغابايت لكل حمولة، ويتوافق مع أنواع محتوى معيّنة.
 
-## Passaggi successivi
+## الخطوات التالية
 
-- Prova a scrivere i tuoi prompt multimodali utilizzando
-  [Google AI Studio](http://aistudio.google.com/?hl=it).
-- Per informazioni sull'inclusione di file nei prompt, consulta le guide
-  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=it),
-  [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=it) e
-  [Elaborazione dei documenti](https://ai.google.dev/gemini-api/docs/document-processing?hl=it).
+- يمكنك تجربة كتابة طلبات متعددة الوسائط باستخدام
+  [Google AI Studio](http://aistudio.google.com/?hl=ar).
+- للحصول على معلومات حول تضمين الملفات في طلباتك، يُرجى الاطّلاع على أدلة
+  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=ar) و
+  [الصوت](https://ai.google.dev/gemini-api/docs/audio?hl=ar) و
+  [معالجة المستندات](https://ai.google.dev/gemini-api/docs/document-processing?hl=ar).
 
-Invia feedback
+إرسال ملاحظات
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Ultimo aggiornamento 2026-07-06 UTC.
+تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
 
-Vuoi dirci altro?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-06 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

@@ -1,63 +1,61 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ja
-fetched_at: 2026-07-27T04:42:12.368980+00:00
-title: "Gemini 3.1 Pro \u30d7\u30ec\u30d3\u30e5\u30fc\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=fr
+fetched_at: 2026-08-03T04:33:35.856190+00:00
+title: "Gemini\u00a03.1 Pro (preview) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-フィードバックを送信
+Envoyer des commentaires
 
-# Gemini 3.1 Pro プレビュー版
+# Gemini 3.1 Pro (preview)
 
-Gemini 3 Pro シリーズのパフォーマンスと信頼性を向上させるために構築された Gemini 3.1 Pro
-プレビューでは、思考の改善、トークン効率の向上、より確実で事実に基づいた一貫性のあるエクスペリエンスが提供されます。ソフトウェア
-エンジニアリングの動作と使いやすさ、および正確なツール使用と現実世界のドメインでの信頼性の高い複数ステップの実行を必要とするエージェント
-ワークフローに最適化されています。
+Conçu pour améliorer les performances et la fiabilité de la série Gemini 3 Pro, Gemini 3.1 Pro Preview offre de meilleures capacités de réflexion, une efficacité accrue des jetons et une expérience plus ancrée et factuellement cohérente. Il est optimisé pour le comportement et la facilité d'utilisation de l'ingénierie logicielle, ainsi que pour les workflows d'agent nécessitant une utilisation précise des outils et une exécution fiable en plusieurs étapes dans des domaines du monde réel.
 
-[Google AI Studio で試す](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=ja)
+[Essayer dans Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=fr)
 
-## ドキュメント
+## Documentation
 
-機能の詳細については、[Gemini 3 デベロッパー ガイド](https://ai.google.dev/gemini-api/docs/gemini-3?hl=ja)のページをご覧ください
-。
+Consultez la page [du guide du développeur Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=fr) pour obtenir une couverture complète
+des fonctionnalités.
 
 ## gemini-3.1-pro-preview
 
-| プロパティ | 説明 |
+| Propriété | Description |
 | --- | --- |
-| id\_cardモデルコード | `gemini-3.1-pro-preview` |
-| saveサポートされるデータタイプ | **入力**  テキスト、画像、動画、音声、PDF  **出力**  テキスト |
-| token\_autoトークン上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  1,048,576  **出力トークンの上限**  65,536 |
-| handyman機能 | **[音声生成](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)**  サポート対象外  **[キャッシュ](https://ai.google.dev/gemini-api/docs/caching?hl=ja)**  サポート対象  **[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)**  サポート対象  **[ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)**  サポート対象（AI Studio のみ）  **[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)**  サポート対象  **[Google マップによるグラウンディング](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)**  サポート対象  **[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)**  サポート対象外  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)**  サポート対象外  **[検索によるグラウンディング](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)**  サポート対象  **[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)**  サポート対象  **[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)**  サポート対象  **[URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)**  サポート対象 |
-| speed使用オプション | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ja)**  サポート対象  **[Flex 推論](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ja)**  サポート対象  **[優先推論](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ja)**  サポート対象 |
-| 123バージョン | 詳細については、[モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - プレビュー: `gemini-3.1-pro-preview` - プレビュー: `gemini-3.1-pro-preview-customtools` \* |
-| calendar\_month最終更新日 | 2026 年 2 月 |
-| id\_cardモデルカード | [モデルカード](https://deepmind.google/models/model-cards/gemini-3-1-pro/?hl=ja) |
+| id\_cardCode du modèle | `gemini-3.1-pro-preview` |
+| saveTypes de données acceptés | **Entrées**  Texte, image, vidéo, audio et PDF  **Résultat**  Texte |
+| token\_auto[Limites de jetons[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=fr) | **Limite de jetons d'entrée**  1 048 576  **Limite de jetons de sortie**  65 536 |
+| handymanFonctions | **[Génération d'audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=fr)**  Non compatible  **[Mise en cache](https://ai.google.dev/gemini-api/docs/caching?hl=fr)**  Compatible  **[Exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr)**  Compatible  **[Recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr)**  Compatible (AI Studio uniquement)  **[Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr)**  Compatible  **[Ancrage avec Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr)**  Compatible  **[Génération d'images](https://ai.google.dev/gemini-api/docs/image-generation?hl=fr)**  Non compatible  **[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=fr)**  Non compatible  **[Ancrage de recherche](https://ai.google.dev/gemini-api/docs/google-search?hl=fr)**  Compatible  **[Sorties structurées](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr)**  Compatible  **[Réflexion](https://ai.google.dev/gemini-api/docs/thinking?hl=fr)**  Compatible  **[Contexte d'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr)**  Compatible |
+| speedOptions de consommation | **[API par lot](https://ai.google.dev/gemini-api/docs/batch-api?hl=fr)**  Compatible  **[Inférence Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=fr)**  Compatible  **[Inférence prioritaire](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr)**  Compatible |
+| 123Versions | Pour en savoir plus, consultez les [modèles de version de modèle](https://ai.google.dev/gemini-api/docs/models/gemini?hl=fr#model-versions).  - Aperçu : `gemini-3.1-pro-preview` - Aperçu : `gemini-3.1-pro-preview-customtools` \* |
+| calendar\_monthDernière mise à jour | Février 2026 |
+| id\_cardFiche de modèle | [Fiche de modèle](https://deepmind.google/models/model-cards/gemini-3-1-pro/?hl=fr) |
 
 #### gemini-3.1-pro-preview-customtools
 
-\* *Bash とカスタムツールを組み合わせて構築している場合、Gemini 3.1 Pro プレビュー
-には、API を介して利用できる別のエンドポイントが用意されています
-`gemini-3.1-pro-preview-customtools`. このエンドポイントは、カスタムツール（`view_file` や
-`search_code` など）の優先順位付けに適しています。*
+\* *Pour ceux qui créent avec une combinaison d'outils bash et personnalisés, Gemini 3.1 Pro Preview
+est fourni avec un point de terminaison distinct disponible via l'API appelé
+`gemini-3.1-pro-preview-customtools`. Ce point de terminaison est plus efficace pour hiérarchiser vos outils personnalisés (par exemple, `view_file` ou `search_code`).*
 
-*`gemini-3.1-pro-preview-customtools` は、カスタムツールと bash を使用するエージェントワークフローに最適化されていますが、このようなツールを利用できないユースケースでは品質が変動する可能性があります。*`gemini-3.1-pro-preview-customtools`
+*Notez que même si `gemini-3.1-pro-preview-customtools` est optimisé pour les workflows d'agent
+qui utilisent des outils personnalisés et bash, vous pouvez constater des fluctuations de qualité dans
+certains cas d'utilisation qui ne bénéficient pas de ces outils.*
 
-フィードバックを送信
+Envoyer des commentaires
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最終更新日 2026-07-21 UTC。
+Dernière mise à jour le 2026/07/21 (UTC).
 
-ご意見をお聞かせください
+Voulez-vous nous donner plus d'informations ?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-21 UTC。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/21 (UTC)."],[],[]]

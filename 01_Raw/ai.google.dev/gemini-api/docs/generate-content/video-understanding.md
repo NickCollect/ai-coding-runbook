@@ -1,45 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=tr
-fetched_at: 2026-07-27T04:41:15.908081+00:00
-title: "Video anlama \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/video-understanding?hl=hi
+fetched_at: 2026-08-03T04:31:15.139960+00:00
+title: "\u0935\u0940\u0921\u093f\u092f\u094b \u0915\u0940 \u092c\u093e\u0930\u0940\u0915\u093c\u0940 \u0938\u0947 \u092a\u0939\u091a\u093e\u0928 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-# Video anlama
+# वीडियो की बारीक़ी से पहचान करना
 
-> Video üretimi hakkında bilgi edinmek için [Veo](https://ai.google.dev/gemini-api/docs/video?hl=tr) kılavuzuna bakın.
+> वीडियो जनरेट करने के बारे में जानने के लिए, [Veo](https://ai.google.dev/gemini-api/docs/video?hl=hi) की गाइड देखें.
 
-Gemini modelleri, videoları işleyebilir. Bu sayede, geçmişte alana özel modellerin gerekli olduğu birçok yeni geliştirici kullanım alanı mümkün olur.
-Gemini'ın bazı görme özellikleri şunlardır: videoları açıklama, segmentlere ayırma ve videolardan bilgi ayıklama, video içeriğiyle ilgili soruları yanıtlama ve videodaki belirli zaman damgalarına başvurma.
+Gemini मॉडल, वीडियो प्रोसेस कर सकते हैं. इससे डेवलपर, वीडियो से जुड़े कई ऐसे काम कर सकते हैं जिनके लिए पहले, खास डोमेन के मॉडल की ज़रूरत होती थी.
+Gemini की विज़न सुविधाओं में ये काम शामिल हैं: वीडियो के बारे में बताना, वीडियो को सेगमेंट में बांटना, वीडियो से जानकारी निकालना, वीडियो के कॉन्टेंट से जुड़े सवालों के जवाब देना, और वीडियो में मौजूद किसी खास टाइमस्टैंप के बारे में बताना.
 
-Gemini'a giriş olarak videoları aşağıdaki şekillerde sağlayabilirsiniz:
+Gemini को इन तरीकों से वीडियो इनपुट के तौर पर दिया जा सकता है:
 
-| Giriş yöntemi | Maks. boyut | Önerilen kullanım alanı |
+| इनपुट विधि | सबसे बड़ा साइज़ | सुझाया गया इस्तेमाल |
 | --- | --- | --- |
-| [File API](#upload-video) | 20 GB (ücretli) / 2 GB (ücretsiz) | Büyük dosyalar (100 MB'tan büyük), uzun videolar (10 dakikadan uzun), yeniden kullanılabilir dosyalar. |
-| [Cloud Storage Kaydı](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr#registration) | 2 GB (dosya başına, depolama alanı sınırı yoktur) | Büyük dosyalar (100 MB'tan büyük), uzun videolar (10 dakikadan uzun), kalıcı ve yeniden kullanılabilir dosyalar. |
-| [Satır İçi Veriler](#inline-video) | < 100MB | Küçük dosyalar (<100 MB), kısa süre (<1 dakika), tek seferlik girişler. |
-| [YouTube URL'leri](#youtube) | Yok | Herkese açık YouTube videoları. |
+| [File API](#upload-video) | 20 जीबी (पैसे चुकाकर) / 2 जीबी (मुफ़्त) | बड़ी फ़ाइलें (100 एमबी से ज़्यादा), लंबे वीडियो (10 मिनट से ज़्यादा), दोबारा इस्तेमाल की जा सकने वाली फ़ाइलें. |
+| [Cloud Storage रजिस्ट्रेशन](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=hi#registration) | हर फ़ाइल के लिए 2 जीबी (स्टोरेज की कोई सीमा नहीं) | बड़ी फ़ाइलें (100 एमबी से ज़्यादा), लंबे वीडियो (10 मिनट से ज़्यादा), लगातार इस्तेमाल की जा सकने वाली, दोबारा इस्तेमाल की जा सकने वाली फ़ाइलें. |
+| [इनलाइन डेटा](#inline-video) | 100 एमबी से कम | छोटी फ़ाइलें (100 एमबी से कम), कम अवधि वाले वीडियो (एक मिनट से कम), एक बार इस्तेमाल किए जाने वाले इनपुट. |
+| [YouTube के यूआरएल](#youtube) | लागू नहीं | YouTube के सार्वजनिक वीडियो. |
 
-> **Not:** [File API](#upload-video), özellikle 100 MB'tan büyük dosyalar için veya dosyayı birden fazla istekte yeniden kullanmak istediğinizde çoğu kullanım alanı için önerilir.
+> **ध्यान दें:** ज़्यादातर मामलों में, [File API](#upload-video) का इस्तेमाल करने का सुझाव दिया जाता है. खास तौर पर, 100 एमबी से बड़ी फ़ाइलों के लिए या जब आपको एक ही फ़ाइल को कई अनुरोधों में दोबारा इस्तेमाल करना हो.
 
-Harici URL'leri veya Google Cloud'da depolanan dosyaları kullanma gibi diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
+[फ़ाइल इनपुट के अन्य तरीकों के बारे में जानने के लिए, जैसे कि बाहरी यूआरएल या Google Cloud में सेव की गई फ़ाइलों का इस्तेमाल करना, फ़ाइल इनपुट के तरीके वाली गाइड देखें.](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=hi)
 
-### Video dosyası yükleme
+### वीडियो फ़ाइल अपलोड करना
 
-Aşağıdaki kod, örnek bir videoyu indirir, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak yükler, işlenmesini bekler ve ardından yüklenen dosya referansını kullanarak videoyu özetler.
+यहां दिया गया कोड, एक सैंपल वीडियो डाउनलोड करता है. इसके बाद, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) का इस्तेमाल करके उसे अपलोड करता है.
+वीडियो के प्रोसेस होने का इंतज़ार करता है. इसके बाद, अपलोड की गई फ़ाइल के रेफ़रंस का इस्तेमाल करके,
+वीडियो की खास जानकारी देता है.
 
 ### Python
 
@@ -51,7 +53,7 @@ client = genai.Client()
 myfile = client.files.upload(file="path/to/sample.mp4")
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash", contents=[myfile, "Summarize this video. Then create a quiz with an answer key based on the information in this video."]
+    model="gemini-3.6-flash", contents=[myfile, "Summarize this video. Then create a quiz with an answer key based on the information in this video."]
 )
 
 print(response.text)
@@ -75,7 +77,7 @@ async function main() {
   });
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: createUserContent([
       createPartFromUri(myfile.uri, myfile.mimeType),
       "Summarize this video. Then create a quiz with an answer key based on the information in this video.",
@@ -103,7 +105,7 @@ contents := []*genai.Content{
 
 result, _ := client.Models.GenerateContent(
     ctx,
-    "gemini-3.5-flash",
+    "gemini-3.6-flash",
     contents,
     nil,
 )
@@ -149,7 +151,7 @@ echo "File uploaded successfully. File URI: ${file_uri}"
 
 # --- 3. Generate content using the uploaded video file ---
 echo "Generating content from video..."
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -164,16 +166,16 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 jq -r ".candidates[].content.parts[].text" response.json
 ```
 
-Toplam istek boyutu (dosya, metin istemi, sistem talimatları vb. dahil) 20 MB'tan büyükse, video süresi uzunsa veya aynı videoyu birden fazla istemde kullanmayı planlıyorsanız her zaman Files API'yi kullanın.
-File API, video dosyası biçimlerini doğrudan kabul eder.
+Files API का इस्तेमाल हमेशा तब करें, जब अनुरोध का कुल साइज़ (इसमें फ़ाइल, टेक्स्ट प्रॉम्प्ट, सिस्टम के निर्देश वगैरह शामिल हैं) 20 एमबी से ज़्यादा हो, वीडियो की अवधि ज़्यादा हो या अगर आपको एक ही वीडियो को कई प्रॉम्प्ट में इस्तेमाल करना हो.
+File API, वीडियो फ़ाइल फ़ॉर्मैट को सीधे स्वीकार करता है.
 
-Medya dosyalarıyla çalışma hakkında daha fazla bilgi edinmek için [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr) başlıklı makaleyi inceleyin.
+मीडिया फ़ाइलों के साथ काम करने के बारे में ज़्यादा जानने के लिए, [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi) देखें.
 
-### Video verilerini satır içi olarak iletme
+### वीडियो डेटा को इनलाइन पास करना
 
-Dosya API'sini kullanarak video dosyası yüklemek yerine, daha küçük videoları doğrudan `generateContent` isteğinde iletebilirsiniz. Bu, toplam istek boyutu 20 MB'tan küçük olan kısa videolar için uygundur.
+File API का इस्तेमाल करके वीडियो फ़ाइल अपलोड करने के बजाय, `generateContent` के अनुरोध में सीधे छोटे वीडियो पास किए जा सकते हैं. यह सुविधा, 20 एमबी से कम साइज़ वाले छोटे वीडियो के लिए सही है.
 
-Satır içi video verileri sağlama örneğini burada bulabilirsiniz:
+यहां, इनलाइन वीडियो डेटा देने का एक उदाहरण दिया गया है:
 
 ### Python
 
@@ -187,7 +189,7 @@ video_bytes = open(video_file_name, 'rb').read()
 
 client = genai.Client()
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents=types.Content(
         parts=[
             types.Part(
@@ -222,7 +224,7 @@ const contents = [
 ];
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: contents,
 });
 console.log(response.text);
@@ -239,7 +241,7 @@ else
   B64FLAGS="-w0"
 fi
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -258,9 +260,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }' 2> /dev/null
 ```
 
-### YouTube URL'lerini iletme
+### YouTube के यूआरएल पास करना
 
-YouTube URL'lerini, isteğinizin bir parçası olarak doğrudan Gemini API'ye aşağıdaki şekilde iletebilirsiniz:
+YouTube के यूआरएल को, Gemini API में सीधे अपने अनुरोध के हिस्से के तौर पर इस तरह पास किया जा सकता है:
 
 ### Python
 
@@ -270,7 +272,7 @@ from google.genai import types
 
 client = genai.Client()
 response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents=types.Content(
         parts=[
             types.Part(
@@ -300,7 +302,7 @@ const contents = [
 ];
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: contents,
 });
 console.log(response.text);
@@ -336,7 +338,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.5-flash",
+      "gemini-3.6-flash",
       contents,
       nil,
   )
@@ -348,7 +350,7 @@ func main() {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -366,20 +368,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }' 2> /dev/null
 ```
 
-**Sınırlamalar:**
+**सीमाएं:**
 
-- Ücretsiz katmanda, günde 8 saatten fazla YouTube videosu yükleyemezsiniz.
-- Ücretli katmanda video uzunluğuna göre bir sınırlama yoktur.
-- Gemini 2.5'ten önceki modellerde, istek başına yalnızca 1 video yükleyebilirsiniz. Gemini 2.5 ve sonraki modellerde, istek başına en fazla 10 video yükleyebilirsiniz.
-- Yalnızca herkese açık videoları (gizli veya liste dışı videoları değil) yükleyebilirsiniz.
+- मुफ़्त टियर के लिए, हर दिन YouTube के आठ घंटे से ज़्यादा के वीडियो अपलोड नहीं किए जा सकते.
+- पैसे चुकाकर इस्तेमाल किए जाने वाले टियर के लिए, वीडियो की अवधि के हिसाब से कोई सीमा नहीं है.
+- Gemini 2.5 से पहले के मॉडल के लिए, हर अनुरोध में सिर्फ़ एक वीडियो अपलोड किया जा सकता है. Gemini 2.5 और इसके बाद के मॉडल के लिए, हर अनुरोध में ज़्यादा से ज़्यादा 10 वीडियो अपलोड किए जा सकते हैं.
+- सिर्फ़ सार्वजनिक वीडियो अपलोड किए जा सकते हैं. निजी या 'सबके लिए मौजूद नहीं' के तौर पर उपलब्ध वीडियो अपलोड नहीं किए जा सकते.
 
-## Uzun videolarda bağlamı önbelleğe alma özelliğini kullanma
+## लंबे वीडियो के लिए, कॉन्टेक्स्ट कैश मेमोरी में सेव करने की सुविधा का इस्तेमाल करना
 
-10 dakikadan uzun videolar veya aynı video dosyasına birden fazla istek göndermeyi planladığınız durumlarda, maliyetleri düşürmek ve gecikmeyi azaltmak için [bağlam önbelleğe almayı](https://ai.google.dev/gemini-api/docs/caching?hl=tr) kullanın. Bağlamı önbelleğe alma özelliği, videoyu bir kez işlemenize ve sonraki sorgularda parçaları yeniden kullanmanıza olanak tanır. Bu nedenle, sohbet oturumları veya uzun içeriklerin tekrar tekrar analiz edilmesi için idealdir.
+अगर वीडियो 10 मिनट से ज़्यादा लंबा है या आपको एक ही वीडियो फ़ाइल के लिए कई अनुरोध करने हैं, तो लागत कम करने और इंतज़ार का समय कम करने के लिए, [कॉन्टेक्स्ट कैश मेमोरी में सेव करने की सुविधा](https://ai.google.dev/gemini-api/docs/caching?hl=hi) का इस्तेमाल करें. कॉन्टेक्स्ट कैश मेमोरी में सेव करने की सुविधा से, वीडियो को एक बार प्रोसेस किया जा सकता है. इसके बाद, टोकन को बाद की क्वेरी के लिए दोबारा इस्तेमाल किया जा सकता है. यह सुविधा, चैट सेशन या लंबी अवधि वाले कॉन्टेंट के बार-बार विश्लेषण के लिए सही है.
 
-## İçerikteki zaman damgalarına bakın
+## कॉन्टेंट में मौजूद टाइमस्टैंप के बारे में बताना
 
-`MM:SS` biçimindeki zaman damgalarını kullanarak videodaki belirli zaman noktaları hakkında soru sorabilirsiniz.
+`MM:SS` फ़ॉर्मैट वाले टाइमस्टैंप का इस्तेमाल करके, वीडियो में मौजूद किसी खास समय के बारे में सवाल पूछे जा सकते हैं.
 
 ### Python
 
@@ -410,12 +412,12 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
 ```
 
-## Videodan ayrıntılı analizler çıkarma
+## वीडियो से अहम जानकारी निकालना
 
-Gemini modelleri, hem **ses hem de görsel** akışlardaki bilgileri işleyerek video içeriklerini anlamak için güçlü özellikler sunar. Bu sayede, videoda olanların açıklamalarını oluşturma ve içeriğiyle ilgili soruları yanıtlama da dahil olmak üzere zengin bir ayrıntı kümesi çıkarabilirsiniz.
+Gemini मॉडल, वीडियो के कॉन्टेंट को समझने के लिए बेहतरीन सुविधाएं देते हैं. इसके लिए, ये मॉडल **ऑडियो और विज़ुअल**, दोनों तरह के स्ट्रीम से जानकारी प्रोसेस करते हैं. इससे, वीडियो में क्या हो रहा है, इसकी जानकारी जनरेट करने और वीडियो के कॉन्टेंट के बारे में सवालों के जवाब देने के साथ-साथ, कई तरह की अहम जानकारी निकाली जा सकती है.
 
-Görsel açıklamalar için model, videoyu **saniyede 1 kare** (FPS) hızında örnekler. Bu varsayılan örnekleme hızı çoğu içerik için uygundur ancak hızlı hareketlerin veya hızlı sahne değişikliklerinin olduğu videolarda ayrıntılar atlanabilir.
-Bu tür yüksek hareketli içerikler için [özel bir kare hızı ayarlamayı](#custom-frame-rate) düşünebilirsiniz.
+विज़ुअल जानकारी के लिए, मॉडल **हर सेकंड एक फ़्रेम** (एफ़पीएस) की दर से वीडियो का सैंपल लेता है. सैंपल लेने की यह डिफ़ॉल्ट दर, ज़्यादातर कॉन्टेंट के लिए सही है. हालांकि, ध्यान दें कि तेज़ी से चलने वाले वीडियो या सीन में तेज़ी से बदलाव होने वाले वीडियो में, यह दर कुछ जानकारी छोड़ सकती है.
+तेज़ी से चलने वाले ऐसे कॉन्टेंट के लिए, फ़्रेम रेट को अपने हिसाब से [सेट करें](#custom-frame-rate).
 
 ### Python
 
@@ -445,13 +447,13 @@ const prompt = "Describe the key events in this video, providing both audio and 
 PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
 ```
 
-## Video işlemeyi özelleştirme
+## वीडियो प्रोसेसिंग को पसंद के मुताबिक बनाना
 
-Kırpma aralıkları ayarlayarak veya özel kare hızı örnekleme sağlayarak Gemini API'de video işlemeyi özelleştirebilirsiniz.
+Gemini API में, वीडियो प्रोसेसिंग को पसंद के मुताबिक बनाया जा सकता है. इसके लिए, क्लिप करने के इंटरवल सेट किए जा सकते हैं या फ़्रेम रेट के हिसाब से सैंपल लेने की सुविधा दी जा सकती है.
 
-### Kırpma aralıklarını ayarlama
+### क्लिप करने के इंटरवल सेट करना
 
-Başlangıç ve bitiş zamanlarını belirterek `videoMetadata` ile video klip oluşturabilirsiniz.
+`videoMetadata` में, वीडियो के शुरू और खत्म होने के ऑफ़सेट की जानकारी देकर, वीडियो को क्लिप किया जा सकता है.
 
 ### Python
 
@@ -461,7 +463,7 @@ from google.genai import types
 
 client = genai.Client()
 response = client.models.generate_content(
-    model='models/gemini-3.5-flash',
+    model='models/gemini-3.6-flash',
     contents=types.Content(
         parts=[
             types.Part(
@@ -482,7 +484,7 @@ response = client.models.generate_content(
 ```
 import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI({});
-const model = 'gemini-3.5-flash';
+const model = 'gemini-3.6-flash';
 
 async function main() {
 const contents = [
@@ -518,9 +520,9 @@ console.log(response.text)
 await main();
 ```
 
-### Özel kare hızı ayarlama
+### फ़्रेम रेट को अपने हिसाब से सेट करना
 
-`fps` işlevine `videoMetadata` bağımsız değişkenini ileterek özel kare hızı örneklemesi ayarlayabilirsiniz.
+`videoMetadata` में `fps` आर्ग्युमेंट पास करके, फ़्रेम रेट के हिसाब से सैंपल लेने की सुविधा को अपने हिसाब से सेट किया जा सकता है.
 
 ### Python
 
@@ -534,7 +536,7 @@ video_bytes = open(video_file_name, 'rb').read()
 
 client = genai.Client()
 response = client.models.generate_content(
-    model='models/gemini-3.5-flash',
+    model='models/gemini-3.6-flash',
     contents=types.Content(
         parts=[
             types.Part(
@@ -549,11 +551,11 @@ response = client.models.generate_content(
 )
 ```
 
-Varsayılan olarak videodan saniyede 1 kare (FPS) örneklenir. Uzun videolar için düşük FPS (< 1) ayarlamak isteyebilirsiniz. Bu özellik, özellikle çoğunlukla statik olan videolar (ör. dersler) için kullanışlıdır. Hızlı aksiyonu anlama veya yüksek hızlı hareket izleme gibi ayrıntılı zamansal analiz gerektiren videolar için daha yüksek bir FPS kullanın.
+डिफ़ॉल्ट रूप से, वीडियो से हर सेकंड एक फ़्रेम (एफ़पीएस) का सैंपल लिया जाता है. लंबे वीडियो के लिए, कम एफ़पीएस (< 1) सेट किया जा सकता है. यह सुविधा, खास तौर पर ऐसे वीडियो के लिए काम की है जिनमें ज़्यादातर स्थिर सीन होते हैं. जैसे, लेक्चर. ऐसे वीडियो के लिए ज़्यादा एफ़पीएस का इस्तेमाल करें जिनमें समय के हिसाब से बारीकी से विश्लेषण करने की ज़रूरत होती है. जैसे, तेज़ी से होने वाली कार्रवाई को समझना या तेज़ गति से होने वाली गतिविधि को ट्रैक करना.
 
-## Desteklenen video biçimleri
+## काम करने वाले वीडियो फ़ॉर्मैट
 
-Gemini aşağıdaki video biçimi MIME türlerini destekler:
+Gemini, इन वीडियो फ़ॉर्मैट के MIME टाइप के साथ काम करता है:
 
 - `video/mp4`
 - `video/mpeg`
@@ -565,48 +567,54 @@ Gemini aşağıdaki video biçimi MIME türlerini destekler:
 - `video/wmv`
 - `video/3gpp`
 
-## Videolarla ilgili teknik ayrıntılar
+## वीडियो के बारे में तकनीकी जानकारी
 
-- **Desteklenen modeller ve bağlam**: Tüm Gemini modelleri video verilerini işleyebilir.
-  - 1 milyon parçalık bağlam penceresine sahip modeller, 1 saate kadar uzunluktaki videoları varsayılan medya çözünürlüğünde veya 3 saate kadar uzunluktaki videoları düşük medya çözünürlüğünde işleyebilir.
-- **File API işleme**: File API kullanılırken videolar saniyede 1 kare (FPS) hızında depolanır ve ses 1 Kbps (tek kanal) hızında işlenir.
-  Zaman damgaları her saniye eklenir.
-  - Bu oranlar, çıkarım iyileştirmeleri için gelecekte değişebilir.
-  - [Özel bir kare hızı ayarlayarak](#custom-frame-rate) 1 FPS örnekleme hızını geçersiz kılabilirsiniz.
-- **Jeton hesaplama**: Videonun her saniyesi aşağıdaki şekilde jetonlaştırılır:
-  - Tek tek kareler (1 FPS'de örneklenir):
-    - [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=tr#MediaResolution) düşük olarak ayarlanırsa kareler, kare başına 66 jeton olacak şekilde jetonlaştırılır.
-    - Aksi takdirde, kareler kare başına 258 jeton olacak şekilde jetonlaştırılır.
-  - Ses: Saniyede 32 jeton.
-  - Meta veriler de dahildir.
-  - Toplam: Varsayılan medya çözünürlüğünde video saniyesi başına yaklaşık 300 jeton veya düşük medya çözünürlüğünde video saniyesi başına 100 jeton.
-- **Medya çözünürlüğü**: Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol imkanı sunar. `media_resolution` parametresi, **giriş resim veya video karesi başına ayrılan maksimum jeton sayısını** belirler.
-  Daha yüksek çözünürlükler, modelin küçük metinleri okuma veya küçük ayrıntıları belirleme becerisini artırır ancak jeton kullanımını ve gecikmeyi de artırır.
+- **काम करने वाले मॉडल और कॉन्टेक्स्ट**: सभी Gemini मॉडल, वीडियो डेटा को प्रोसेस कर सकते हैं.
+  - 10 लाख कॉन्टेक्स्ट विंडो वाले मॉडल, डिफ़ॉल्ट मीडिया रिज़ॉल्यूशन पर एक घंटे तक के वीडियो या कम मीडिया रिज़ॉल्यूशन पर तीन घंटे तक के वीडियो प्रोसेस कर सकते हैं.
+- **File API से प्रोसेसिंग**: File API का इस्तेमाल करने पर, वीडियो को हर सेकंड एक
+  फ़्रेम (एफ़पीएस) पर सेव किया जाता है. साथ ही, ऑडियो को 1 केबीपीएस (सिंगल चैनल) पर प्रोसेस किया जाता है.
+  हर सेकंड टाइमस्टैंप जोड़े जाते हैं.
+  - इन्फ़रंस को बेहतर बनाने के लिए, आने वाले समय में इन दरों में बदलाव हो सकता है.
+  - फ़्रेम रेट को अपने हिसाब से सेट करके, हर सेकंड एक फ़्रेम (एफ़पीएस) की दर को [बदला जा सकता है](#custom-frame-rate).
+- **टोकन की गिनती**: वीडियो के हर सेकंड को इस तरह टोकन में बदला जाता है:
+  - अलग-अलग फ़्रेम (हर सेकंड एक फ़्रेम की दर से सैंपल लिए गए):
+    - अगर [`mediaResolution`](https://ai.google.dev/api/generate-content?hl=hi#MediaResolution) को कम पर सेट किया जाता है, तो फ़्रेम को हर फ़्रेम के लिए 66 टोकन की दर से टोकन में बदला जाता है.
+    - अन्य मामलों में, फ़्रेम को हर फ़्रेम के लिए 258 टोकन की दर से टोकन में बदला जाता है.
+  - ऑडियो: हर सेकंड 32 टोकन.
+  - इसमें मेटाडेटा भी शामिल होता है.
+  - कुल: डिफ़ॉल्ट मीडिया रिज़ॉल्यूशन पर, वीडियो के हर सेकंड के लिए करीब 300 टोकन या कम मीडिया रिज़ॉल्यूशन पर, वीडियो के हर सेकंड के लिए 100 टोकन.
+- **मीडिया रिज़ॉल्यूशन**: Gemini 3 में, मल्टीमॉडल
+  विज़न प्रोसेसिंग पर ज़्यादा कंट्रोल मिलता है.`media_resolution` `media_resolution` पैरामीटर, **हर इनपुट इमेज या वीडियो फ़्रेम के लिए, टोकन की ज़्यादा से ज़्यादा संख्या तय करता है.**
+  ज़्यादा रिज़ॉल्यूशन से, मॉडल को बारीक टेक्स्ट पढ़ने या छोटी-छोटी जानकारी की पहचान करने में मदद मिलती है. हालांकि, इससे टोकन का इस्तेमाल और इंतज़ार का समय बढ़ जाता है.
 
-  Parametre ve jeton hesaplamalarını nasıl etkileyebileceği hakkında daha fazla bilgi için [medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=tr) kılavuzuna bakın.
-- **Zaman damgası biçimi**: İsteminizde bir videodaki belirli anlardan bahsederken `MM:SS` biçimini kullanın (ör. 1 dakika 15 saniye için `01:15`).
-- **En iyi uygulamalar**:
+  पैरामीटर के बारे में ज़्यादा जानकारी और इससे टोकन
+  की गिनती पर पड़ने वाले असर के बारे में जानने के लिए, [मीडिया रिज़ॉल्यूशन](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=hi) की गाइड देखें.
+- **टाइमस्टैंप का फ़ॉर्मैट**: अपने प्रॉम्प्ट में, वीडियो में मौजूद किसी खास समय के बारे में बताने के लिए, `MM:SS` फ़ॉर्मैट का इस्तेमाल करें. जैसे, एक मिनट और 15 सेकंड के लिए `01:15`.
+- **सबसे सही तरीके**:
 
-  - En iyi sonuçları elde etmek için istem isteği başına yalnızca bir video kullanın.
-  - Metin ve tek bir videoyu birleştiriyorsanız metin istemini `contents` dizisinde video bölümünden *sonra* yerleştirin.
-  - Hızlı hareket dizilerinin, 1 FPS örnekleme hızı nedeniyle ayrıntı kaybedebileceğini unutmayın. Gerekirse bu tür klipleri yavaşlatabilirsiniz.
+  - सबसे अच्छे नतीजे पाने के लिए, हर प्रॉम्प्ट अनुरोध के लिए सिर्फ़ एक वीडियो का इस्तेमाल करें.
+  - अगर टेक्स्ट और एक वीडियो को एक साथ इस्तेमाल किया जा रहा है, तो `contents` कलेक्शन में वीडियो वाले हिस्से के *बाद* टेक्स्ट प्रॉम्प्ट रखें.
+  - ध्यान रखें कि हर सेकंड एक फ़्रेम की दर से सैंपल लेने की वजह से, तेज़ी से होने वाली कार्रवाई के क्रम में कुछ जानकारी छूट सकती है. अगर ज़रूरी हो, तो ऐसी क्लिप की स्पीड कम करें.
 
-## Sırada ne var?
+## आगे क्या करना है
 
-Bu kılavuzda, video dosyalarının nasıl yükleneceği ve video girişlerinden nasıl metin çıkışları oluşturulacağı gösterilmektedir. Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
+इस गाइड में, वीडियो फ़ाइलें अपलोड करने और वीडियो इनपुट से टेक्स्ट आउटपुट जनरेट करने का तरीका बताया गया है. ज़्यादा जानने के लिए, ये लेख पढ़ें और वीडियो देखें:
 
-- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
-  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr): Gemini ile kullanılacak dosyaları yükleme ve yönetme hakkında daha fazla bilgi edinin.
-- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istemi destekler.
-- [Güvenlik yönergeleri](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr): Üretken yapay zeka modelleri bazen yanlış, önyargılı veya rahatsız edici gibi beklenmedik çıkışlar üretebilir. Bu tür çıkışlardan kaynaklanan zarar riskini sınırlamak için sonradan işleme ve uzman değerlendirmesi şarttır.
+- [सिस्टम के निर्देश](https://ai.google.dev/gemini-api/docs/text-generation?hl=hi#system-instructions):
+  सिस्टम के निर्देशों से, अपनी
+  ज़रूरतों और इस्तेमाल के मामलों के हिसाब से मॉडल के व्यवहार को कंट्रोल किया जा सकता है.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=hi): Gemini के साथ इस्तेमाल करने के लिए, फ़ाइलें अपलोड करने और मैनेज करने के बारे में ज़्यादा जानें.
+- [फ़ाइल के साथ प्रॉम्प्ट करने की रणनीतियां](https://ai.google.dev/gemini-api/docs/files?hl=hi#prompt-guide): Gemini API, टेक्स्ट, इमेज, ऑडियो, और वीडियो डेटा के साथ प्रॉम्प्ट करने की सुविधा देता है. इसे
+  मल्टीमॉडल प्रॉम्प्टिंग भी कहा जाता है.
+- [सुरक्षा से जुड़े दिशा-निर्देश](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=hi): कभी-कभी, जनरेटिव
+  एआई मॉडल से ऐसे आउटपुट मिलते हैं जिनकी उम्मीद नहीं होती. जैसे, गलत, पक्षपाती या आपत्तिजनक आउटपुट. ऐसे आउटपुट से होने वाले नुकसान के जोखिम को कम करने के लिए, पोस्ट-प्रोसेसिंग और लोगों से आकलन कराना ज़रूरी है.
 
-Geri bildirim gönderin
+सुझाव भेजें
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-Son güncelleme tarihi: 2026-06-23 UTC.
+आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+क्या आपको हमें और कुछ बताना है?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-23 UTC."],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]

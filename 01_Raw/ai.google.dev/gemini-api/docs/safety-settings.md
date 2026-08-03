@@ -1,112 +1,102 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=es-419
-fetched_at: 2026-07-27T04:48:23.728297+00:00
-title: "Configuraci\u00f3n de seguridad \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/safety-settings?hl=zh-TW
+fetched_at: 2026-08-03T04:38:49.381292+00:00
+title: "\u5b89\u5168\u8a2d\u5b9a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Enviar comentarios
+提供意見
 
-# Configuración de seguridad
+# 安全設定
 
-La API de Gemini proporciona parámetros de seguridad que puedes ajustar durante la fase de creación de prototipos para determinar si tu aplicación requiere una configuración de seguridad más o menos restrictiva. Puedes ajustar estos parámetros en cuatro categorías de filtros para restringir o permitir ciertos tipos de contenido.
+您可以在原型設計階段調整 Gemini API 的安全設定，判斷應用程式是否需要更嚴謹或寬鬆的安全設定。您可以調整這四個篩選器類別的設定，藉此限制或允許特定類型的內容。
 
-En esta guía, se explica cómo la API de Gemini controla los parámetros de seguridad y el filtrado, y cómo puedes cambiar los parámetros de seguridad de tu aplicación.
+本指南說明 Gemini API 如何處理安全設定和篩選，以及如何變更應用程式的安全設定。
 
-## Filtros de seguridad
+## 安全篩選機制
 
-Los filtros de seguridad ajustables de la API de Gemini abarcan las siguientes categorías:
+Gemini API 的可調整安全篩選機制涵蓋下列類別：
 
-| Categoría | Descripción |
+| 類別 | 說明 |
 | --- | --- |
-| Hostigamiento | Comentarios negativos o dañinos dirigidos a la identidad o a los atributos protegidos |
-| Incitación al odio o a la violencia | Contenido obsceno, grosero o irrespetuoso. |
-| Contenido sexualmente explícito | Referencias a actos sexuales o a otro contenido obsceno. |
-| Peligroso | Contenido que promueve, facilita o incita actos dañinos. |
+| 騷擾 | 針對特定身分和/或受保護特質發表負面或有害言論。 |
+| 仇恨言論 | 粗俗、不尊重或不雅的內容。 |
+| 煽情露骨內容 | 提及性行為或其他猥褻情事的內容。 |
+| 危險內容 | 宣傳、鼓吹或助長有害舉動。 |
 
-Estas categorías se definen en [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=es-419). Puedes usar estos filtros para ajustar lo que sea apropiado para tu caso de uso. Por ejemplo, si estás creando diálogos de videojuegos, puedes considerar aceptable permitir más contenido clasificado como *peligroso* debido a la naturaleza del juego.
+這些類別定義於 [`HarmCategory`](https://ai.google.dev/api/rest/v1/HarmCategory?hl=zh-tw)。您可以運用這些篩選機制，根據使用情境將模型調整為適當的狀態。舉例來說，如果您要製作電玩遊戲對白，可能為配合遊戲風格，而允許較多遭評為「危險」的內容。
 
-Además de los filtros de seguridad ajustables, la API de Gemini tiene protecciones integradas contra daños fundamentales, como el contenido que pone en peligro la seguridad de los niños.
-Estos tipos de daño siempre se bloquean y no se pueden ajustar.
+除了可調整的安全篩選機制，Gemini API 也內建核心危害內容防護措施，例如危害兒童安全的內容。系統一律會封鎖這類有害內容，無法調整。
 
-### Nivel de filtrado de seguridad del contenido
+### 內容安全篩選等級
 
-La API de Gemini categoriza el nivel de probabilidad de que el contenido sea inseguro como `HIGH`, `MEDIUM`, `LOW` o `NEGLIGIBLE`.
+Gemini API 會將內容不安全的機率分為 `HIGH`、`MEDIUM`、`LOW` 或 `NEGLIGIBLE`。
 
-La API de Gemini bloquea el contenido en función de la probabilidad de que el contenido sea inseguro y no la gravedad. Es importante saber esto porque algunos contenidos pueden tener una baja probabilidad de ser inseguros, aunque la gravedad del daño pueda seguir siendo alta. Por ejemplo, comparemos las siguientes oraciones:
+Gemini API 會根據內容不安全的機率封鎖內容，而非嚴重程度。請務必考慮這點，因為即使某些內容造成嚴重傷害的機率不高，舉例來說，比較以下句子：
 
-1. El robot me golpeó.
-2. El robot me acuchilló.
+1. 機器人打了我。
+2. 機器人把我砍傷了。
 
-La primera oración puede tener una mayor probabilidad de que sea contenido no seguro, pero podrías considerar que la segunda oración es de mayor gravedad en términos de violencia.
-Ahora que entendemos esto, es importante que pruebes y consideres con cuidado cuál es el nivel adecuado de bloqueo necesario para apoyar tus casos de uso clave, para así minimizar al mismo tiempo el daño a los usuarios finales.
+第一句可能較容易被判定為不安全，但就暴力程度而言，您可能會認為第二句較為嚴重。因此，請務必仔細測試及考量適當的封鎖層級，以支援主要用途，同時盡量減少對使用者的傷害。
 
-### Filtrado de seguridad por solicitud
+### 每個要求的安全篩選
 
-Puedes ajustar los parámetros de seguridad para cada solicitud que realices a la API. Cuando haces una solicitud, el contenido se analiza y se le asigna una calificación de seguridad. La calificación de seguridad incluye la categoría y la probabilidad de la clasificación del daño. Por ejemplo, si el contenido se bloqueó debido a que la categoría de hostigamiento tenía una alta probabilidad, la calificación de seguridad que se muestra tendría una categoría igual a `HARASSMENT` y la probabilidad de daño establecida en `HIGH`.
+在向 API 發出的每項要求，都可以調整安全設定。提出要求後，系統會分析內容並給予安全評分。安全評分指的是 Gemini 判斷內容屬於特定危害類別的機率。舉例來說，如果內容因屬於騷擾類別的機率高而遭到封鎖，系統傳回的安全評分會將類別設為 `HARASSMENT`，危害機率則設為 `HIGH`。
 
-Debido a la seguridad inherente del modelo, los filtros adicionales están **desactivados** de forma predeterminada.
-Si eliges habilitarlos, puedes configurar el sistema para que bloquee el contenido en función de su probabilidad de ser inseguro. El comportamiento predeterminado del modelo abarca la mayoría de los casos de uso, por lo que solo debes ajustar estos parámetros si es necesario para tu aplicación.
+由於模型本身具有安全性，因此預設會**關閉**額外的篩選器。
+如果選擇啟用，您可以設定系統根據內容不安全的機率封鎖內容。預設模型行為適用於大多數用途，因此建議不要隨意調整，除非這對應用程式而言是必要之舉。
 
-En la siguiente tabla, se describe la configuración de bloqueo que puedes ajustar para cada categoría. Por ejemplo, si estableces la configuración de bloqueo en **Bloquear poco** para la categoría de **incitación al odio o a la violencia**, se bloqueará todo lo que tenga una alta probabilidad de ser contenido de incitación al odio o a la violencia. Pero se permite cualquier cosa con una probabilidad menor.
+下表說明各類別可調整的封鎖設定。舉例來說，如果將「仇恨言論」類別的封鎖設定設為「封鎖極少數內容」，系統就會封鎖仇恨言論機率高的內容。但機率較低的字詞則可使用。
 
-| Umbral (Google AI Studio) | Umbral (API) | Descripción |
+| 門檻 (Google AI Studio) | 閾值 (API) | 說明 |
 | --- | --- | --- |
-| Desactivado | `OFF` | Desactiva el filtro de seguridad. |
-| No bloquear | `BLOCK_NONE` | Mostrar siempre sin importar la probabilidad de que sea contenido no seguro. |
-| Bloquear poco | `BLOCK_ONLY_HIGH` | Bloquear cuando haya una alta probabilidad de que sea contenido no seguro. |
-| Bloquear algunos | `BLOCK_MEDIUM_AND_ABOVE` | Bloquear cuando haya una probabilidad media o alta de que sea contenido no seguro. |
-| Bloquear la mayoría | `BLOCK_LOW_AND_ABOVE` | Bloquear cuando haya una probabilidad baja, media o alta de que sea contenido no seguro. |
-| N/A | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | No se especifica el umbral; se bloquea con el umbral predeterminado. |
+| 關閉 | `OFF` | 關閉安全篩選器 |
+| 不封鎖任何內容 | `BLOCK_NONE` | 無論不安全的機率為何，一律顯示內容 |
+| 封鎖極少數內容 | `BLOCK_ONLY_HIGH` | 封鎖不安全機率高的內容 |
+| 封鎖一些 | `BLOCK_MEDIUM_AND_ABOVE` | 封鎖有害機率中等或較高的內容 |
+| 封鎖多數內容 | `BLOCK_LOW_AND_ABOVE` | 封鎖有害機率低、中等或高的內容 |
+| 不適用 | `HARM_BLOCK_THRESHOLD_UNSPECIFIED` | 未指定門檻，使用預設門檻封鎖 |
 
-Si no se establece el umbral, el umbral de bloqueo predeterminado es **Desactivado** para los modelos Gemini 2.5 y 3.
+如未設定門檻，Gemini 2.5 和 3 模型預設會**停用**封鎖門檻。
 
-Puedes establecer estos parámetros para cada solicitud que realices al servicio generativo.
-Consulta la referencia de la API de [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=es-419#harmblockthreshold)
-para obtener más detalles.
+您可以針對向生成服務發出的每項要求設定這些設定。
+詳情請參閱 [`HarmBlockThreshold`](https://ai.google.dev/api/generate-content?hl=zh-tw#harmblockthreshold) API 參考資料。
 
-### Comentarios de seguridad
+### 安全意見回饋
 
-[`generateContent`](https://ai.google.dev/api/generate-content?hl=es-419#method:-models.generatecontent)
-muestra una
-[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=es-419#generatecontentresponse) que
-incluye comentarios de seguridad.
+[`generateContent`](https://ai.google.dev/api/generate-content?hl=zh-tw#method:-models.generatecontent) 會傳回 [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=zh-tw#generatecontentresponse)，其中包含安全意見回饋。
 
-Los comentarios de los mensajes se incluyen en
-[`promptFeedback`](https://ai.google.dev/api/generate-content?hl=es-419#promptfeedback). Si se establece `promptFeedback.blockReason`, se bloqueó el contenido del mensaje.
+提示意見回饋會計入 [`promptFeedback`](https://ai.google.dev/api/generate-content?hl=zh-tw#promptfeedback)。如果設定 `promptFeedback.blockReason`，表示提示內容遭到封鎖。
 
-Los comentarios de los candidatos de respuesta se incluyen en
-[`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=es-419#candidate) y
-[`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=es-419#candidate). Si se bloqueó el contenido de la respuesta y el `finishReason` fue `SAFETY`, puedes inspeccionar `safetyRatings` para obtener más detalles. No se muestra el contenido que se bloqueó.
+回應候選人意見回饋會納入 [`Candidate.finishReason`](https://ai.google.dev/api/generate-content?hl=zh-tw#candidate) 和 [`Candidate.safetyRatings`](https://ai.google.dev/api/generate-content?hl=zh-tw#candidate)。如果回應內容遭到封鎖，且 `finishReason` 為 `SAFETY`，您可以檢查 `safetyRatings` 來瞭解詳情。但不會傳回遭封鎖的內容。
 
-## Ajusta la configuración de seguridad
+## 調整安全性設定
 
-En esta sección, se explica cómo ajustar la configuración de seguridad en Google AI Studio y en tu código.
+本節說明如何在 Google AI Studio 和程式碼中調整安全設定。
 
 ### Google AI Studio
 
-Puedes ajustar la configuración de seguridad en Google AI Studio.
+您可以在 Google AI Studio 中調整安全設定。
 
-Haz clic en **Configuración de seguridad** en **Configuración avanzada** en el panel **Configuración de la ejecución** para abrir el modal **Ejecutar configuración de seguridad**. En el modal, puedes usar los controles deslizantes para ajustar el nivel de filtrado de contenido por categoría de seguridad:
+在「執行設定」面板中，按一下「進階設定」下方的「安全設定」，開啟「執行安全設定」模式。在強制回應中，您可以使用滑桿，依安全類別調整內容篩選等級：
 
-![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=es-419)
+![](https://ai.google.dev/static/gemini-api/docs/images/safety_settings_ui.png?hl=zh-tw)
 
-Cuando envías una solicitud (por ejemplo, cuando le haces una pregunta al modelo), aparece un mensaje warning
-**Contenido bloqueado** si se bloquea el contenido de la solicitud. Para ver más detalles, mantén el puntero sobre el texto **Contenido bloqueado** para ver la categoría y la probabilidad de la clasificación del daño.
+當您傳送要求 (例如向模型提問) 時，如果要求內容遭到封鎖，系統會顯示「內容遭到封鎖」warning
+訊息。如要查看更多詳細資料，請將指標懸停在「內容已封鎖」文字上，即可查看類別和危害分類的機率。
 
-### Ejemplos de código
+### 程式碼範例
 
-En el siguiente fragmento de código, se muestra cómo establecer la configuración de seguridad en tu llamada a `GenerateContent`. Esto establece el umbral para la categoría de incitación al odio o a la violencia (`HARM_CATEGORY_HATE_SPEECH`). Si estableces esta categoría en `BLOCK_LOW_AND_ABOVE`, se bloqueará cualquier contenido que tenga una probabilidad baja o superior de ser incitación al odio o a la violencia. Para comprender la configuración del umbral, consulta [Filtrado de seguridad
-por solicitud](#safety-filtering-per-request).
+下列程式碼片段顯示如何在 `GenerateContent` 呼叫中設定安全設定。這會設定仇恨言論 (`HARM_CATEGORY_HATE_SPEECH`) 類別的門檻。將這類內容設為「封鎖」`BLOCK_LOW_AND_ABOVE`，系統就會封鎖任何仇恨言論機率偏高的內容。如要瞭解門檻設定，請參閱「[依要求進行安全篩選](#safety-filtering-per-request)」。
 
 ### Python
 
@@ -236,26 +226,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-## Próximos pasos
+## 後續步驟
 
-- Consulta la [referencia de la API](https://ai.google.dev/api?hl=es-419) para obtener más información sobre la API completa.
-- Revisa la [guía de seguridad](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=es-419) para obtener una descripción general de las consideraciones de seguridad
-  cuando desarrollas con LLMs.
-- Obtén más información sobre la evaluación de la probabilidad en comparación con la gravedad del equipo de [Jigsaw
-  team](https://developers.perspectiveapi.com/s/about-the-api-score).
-- Obtén más información sobre los productos que contribuyen a las soluciones de seguridad, como la
-  [API
-  de Perspective](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7).
-  \* Puedes usar estos parámetros de seguridad para crear un clasificador de toxicidad. Consulta el [ejemplo
-  de clasificación](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=es-419) para
-  comenzar.
+- 如要進一步瞭解完整 API，請參閱 [API 參考資料](https://ai.google.dev/api?hl=zh-tw)。
+- 如要瞭解使用 LLM 開發時應注意的安全事項，請參閱[安全指南](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-tw)。
+- 如要進一步瞭解如何評估機率與嚴重程度，請參閱 [Jigsaw 團隊](https://developers.perspectiveapi.com/s/about-the-api-score)的說明
+- 進一步瞭解有助於安全解決方案的產品，例如 [Perspective API](https://medium.com/jigsaw/reducing-toxicity-in-large-language-models-with-perspective-api-c31c39b7a4d7)。\* 您可以使用這些安全設定建立毒性分類器。如要開始使用，請參閱[分類範例](https://ai.google.dev/examples/train_text_classifier_embeddings?hl=zh-tw)。
 
-Enviar comentarios
+提供意見
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Última actualización: 2026-06-01 (UTC)
+上次更新時間：2026-06-01 (世界標準時間)。
 
-¿Quieres brindar más información?
+想進一步說明嗎？
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-01 (UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-01 (世界標準時間)。"],[],[]]

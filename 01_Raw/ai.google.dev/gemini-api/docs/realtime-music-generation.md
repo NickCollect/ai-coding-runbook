@@ -1,50 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=ja
-fetched_at: 2026-07-27T04:49:20.780239+00:00
-title: "Lyria RealTime \u3092\u4f7f\u7528\u3057\u305f\u30ea\u30a2\u30eb\u30bf\u30a4\u30e0\u306e\u97f3\u697d\u751f\u6210 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=it
+fetched_at: 2026-08-03T04:35:51.732711+00:00
+title: "Generazione di musica in tempo reale con Lyria RealTime \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-フィードバックを送信
+Invia feedback
 
-# Lyria RealTime を使用したリアルタイムの音楽生成
+# Generazione di musica in tempo reale con Lyria RealTime
 
-Gemini API は
-[Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=ja)を使用して、最先端のリアルタイム ストリーミング音楽
-生成モデルへのアクセスを提供します。デベロッパーは、ユーザーがインタラクティブに楽器の音楽を作成、継続的に操作、演奏できるアプリケーションを構築できます。
+L'API Gemini, che utilizza
+[Lyria RealTime](https://deepmind.google/technologies/lyria/realtime/?hl=it),
+fornisce l'accesso a un modello di generazione di musica in streaming in tempo reale all'avanguardia. Consente agli sviluppatori di creare applicazioni in cui gli utenti possono creare, controllare e riprodurre musica strumentale in modo interattivo.
 
-[Lyria RealTime の音楽生成では、WebSocket を使用して、永続的な双方向の
-低レイテンシ ストリーミング接続を使用します。](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)
+La generazione di musica con Lyria RealTime utilizza una connessione di streaming persistente, bidirezionale,
+a bassa latenza tramite
+[WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
-[[Lyria RealTime を使用して構築できるものを体験するには、Prompt DJ アプリまたは MIDI DJ アプリを使用して AI Studio
-で試してください。](https://aistudio.google.com/apps/bundled/promptdj?hl=ja)](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=ja)
+Per scoprire cosa puoi creare con Lyria RealTime, provalo in AI Studio
+utilizzando le app [Prompt DJ](https://aistudio.google.com/apps/bundled/promptdj?hl=it) o
+[MIDI DJ](https://aistudio.google.com/apps/bundled/promptdj-midi?hl=it).
 
-## 音楽の生成と操作
+## Generare e controllare la musica
 
-Lyria RealTime は、[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)
-を介して Websocket を使用してモデルとのリアルタイム通信を維持するという点で、Live API と同様に機能します。
+Lyria RealTime funziona in modo simile all'[API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it)
+in quanto utilizza i WebSocket per mantenere la comunicazione in tempo reale con il modello.
 
-次のコードは、音楽を生成する方法を示しています。
+Il seguente codice mostra come generare musica:
 
 ### Python
 
-この例では、`client.aio.live.music.connect()` を使用して Lyria RealTime セッションを初期化し、`session.set_weighted_prompts()` で最初のプロンプトを送信します。また、`session.set_music_generation_config` を使用して初期構成を設定し、`session.play()` を使用して音楽生成を開始し、受信した音声チャンクを処理するように `receive_audio()` を設定します。
+Questo esempio inizializza la sessione di Lyria RealTime utilizzando `client.aio.live.music.connect()`, quindi invia un prompt iniziale con `session.set_weighted_prompts()` insieme a una configurazione iniziale utilizzando `session.set_music_generation_config`, avvia la generazione di musica utilizzando `session.play()` e configura `receive_audio()` per elaborare i blocchi audio che riceve.
 
 ```
   import asyncio
   from google import genai
   from google.genai import types
 
-  client = genai.Client(http_options={'api_version': 'v1alpha'})
+  client = genai.Client(http_options={'api_version': 'v1beta'})
 
   async def main():
       async def receive_audio(session):
@@ -80,7 +82,7 @@ Lyria RealTime は、[Live API](https://ai.google.dev/gemini-api/docs/live-api?h
 
 ### JavaScript
 
-この例では、`client.live.music.connect()` を使用して Lyria RealTime セッションを初期化し、`session.setWeightedPrompts()` で最初のプロンプトを送信します。また、`session.setMusicGenerationConfig` を使用して初期構成を設定し、`session.play()` を使用して音楽生成を開始し、受信した音声チャンクを処理するように `onMessage` コールバックを設定します。
+Questo esempio inizializza la sessione di Lyria RealTime utilizzando `client.live.music.connect()`, quindi invia un prompt iniziale con `session.setWeightedPrompts()` insieme a una configurazione iniziale utilizzando `session.setMusicGenerationConfig`, avvia la generazione di musica utilizzando `session.play()` e configura un callback `onMessage` per elaborare i blocchi audio che riceve.
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -89,7 +91,7 @@ import { Buffer } from "buffer";
 
 const client = new GoogleGenAI({
   apiKey: GEMINI_API_KEY,
-    apiVersion: "v1alpha" ,
+    apiVersion: "v1beta" ,
 });
 
 async function main() {
@@ -136,17 +138,18 @@ async function main() {
 main().catch(console.error);
 ```
 
-`session.play()`、`session.pause()`、`session.stop()`、`session.reset_context()` を使用して、セッションを開始、一時停止、停止、リセットできます。
+Puoi quindi utilizzare `session.play()`, `session.pause()`, `session.stop()` e `session.reset_context()` per avviare, mettere in pausa, interrompere o reimpostare la sessione.
 
-## リアルタイムで音楽を操作する
+## Controllare la musica in tempo reale
 
-プロンプトを送信し、生成パラメータをリアルタイムで更新することで、音楽生成をリアルタイムで操作できます。
+Puoi controllare la generazione di musica in tempo reale inviando prompt e aggiornando i parametri di generazione in tempo reale.
 
-### Lyria RealTime にプロンプトを設定する
+### Prompt di Lyria RealTime
 
-ストリームがアクティブな間は、新しい `WeightedPrompt` メッセージをいつでも送信して、生成された音楽を変更できます。モデルは、新しい入力に基づいてスムーズに移行します。
+Mentre lo stream è attivo, puoi inviare nuovi messaggi `WeightedPrompt` in qualsiasi momento per modificare la musica generata. Il modello eseguirà una transizione graduale in base al nuovo input.
 
-プロンプトは、`text`（実際のプロンプト）と `weight` を含む適切な形式にする必要があります。`weight` には `0` 以外の任意の値を指定できます。通常は `1.0` から始めることをおすすめします。
+I prompt devono seguire il formato corretto con un `text` (il prompt effettivo) e un `weight`. Il `weight` può assumere qualsiasi valore tranne `0`. `1.0`
+è in genere un buon punto di partenza.
 
 ### Python
 
@@ -173,13 +176,13 @@ main().catch(console.error);
   });
 ```
 
-プロンプトを大幅に変更すると、モデルの移行が少し急になる可能性があるため、中間的な重み値をモデルに送信して、クロスフェードを実装することをおすすめします。
+Tieni presente che le transizioni del modello possono essere un po' brusche quando modifichi drasticamente i prompt, pertanto ti consigliamo di implementare una sorta di dissolvenza incrociata inviando al modello valori di peso intermedi.
 
-### 構成を更新する
+### Aggiorna la configurazione
 
-音楽生成パラメータをリアルタイムで更新することで、音楽生成を操作できます。パラメータを更新するだけでなく、構成全体を設定する必要があります。そうしないと、他のフィールドがデフォルト値にリセットされます。
+Puoi controllare la generazione di musica aggiornando i parametri di generazione di musica in tempo reale. Non puoi semplicemente aggiornare un parametro, devi impostare l'intera configurazione, altrimenti gli altri campi verranno reimpostati sui valori predefiniti.
 
-bpm またはスケールを更新すると、モデルが大幅に変更されるため、`reset_context()` を使用してコンテキストをリセットし、新しい構成を考慮に入れるようにモデルに指示する必要があります。ストリームは停止しませんが、移行は困難になります。他のパラメータでは必要ありません。
+Poiché l'aggiornamento del BPM o della scala è una modifica drastica per il modello, dovrai anche indicare di reimpostare il contesto utilizzando `reset_context()` per tenere conto della nuova configurazione. Lo stream non verrà interrotto, ma la transizione sarà difficile. Non è necessario farlo per gli altri parametri.
 
 ### Python
 
@@ -209,11 +212,11 @@ bpm またはスケールを更新すると、モデルが大幅に変更され�
   await session.reset_context();
 ```
 
-## Lyria RealTime のプロンプト ガイド
+## Guida ai prompt per Lyria RealTime
 
-Lyria RealTime にプロンプトを設定するために使用できるプロンプトの例を次に示します。
+Di seguito è riportato un elenco non esaustivo di prompt che puoi utilizzare per richiedere a Lyria RealTime:
 
-- 楽器: `303 Acid Bass, 808 Hip Hop Beat, Accordion, Alto Saxophone,
+- Strumenti: `303 Acid Bass, 808 Hip Hop Beat, Accordion, Alto Saxophone,
   Bagpipes, Balalaika Ensemble, Banjo, Bass Clarinet, Bongos, Boomy Bass,
   Bouzouki, Buchla Synths, Cello, Charango, Clavichord, Conga Drums,
   Didgeridoo, Dirty Synths, Djembe, Drumline, Dulcimer, Fiddle, Flamenco
@@ -224,7 +227,7 @@ Lyria RealTime にプロンプトを設定するために使用できるプロ�
   Guitar, Sitar, Slide Guitar, Smooth Pianos, Spacey Synths, Steel Drum, Synth
   Pads, Tabla, TR-909 Drum Machine, Trumpet, Tuba, Vibraphone, Viola Ensemble,
   Warm Acoustic Guitar, Woodwinds, ...`
-- 音楽ジャンル: `Acid Jazz, Afrobeat, Alternative Country, Baroque, Bengal Baul,
+- Genere musicale: `Acid Jazz, Afrobeat, Alternative Country, Baroque, Bengal Baul,
   Bhangra, Bluegrass, Blues Rock, Bossa Nova, Breakbeat, Celtic Folk, Chillout,
   Chiptune, Classic Rock, Contemporary R&B, Cumbia, Deep House, Disco Funk,
   Drum & Bass, Dubstep, EDM, Electro Swing, Funk Metal, G-funk, Garage Rock,
@@ -235,108 +238,112 @@ Lyria RealTime にプロンプトを設定するために使用できるプロ�
   Rock, Psytrance, R&B, Reggae, Reggaeton, Renaissance Music, Salsa, Shoegaze,
   Ska, Surf Rock, Synthpop, Techno, Trance, Trap Beat, Trip Hop, Vaporwave,
   Witch house, ...`
-- ムード/説明: `Acoustic Instruments, Ambient, Bright Tones, Chill,
+- Stato d'animo/Descrizione: `Acoustic Instruments, Ambient, Bright Tones, Chill,
   Crunchy Distortion, Danceable, Dreamy, Echo, Emotional, Ethereal Ambience,
   Experimental, Fat Beats, Funky, Glitchy Effects, Huge Drop, Live Performance,
   Lo-fi, Ominous Drone, Psychedelic, Rich Orchestration, Saturated Tones,
   Subdued Melody, Sustained Chords, Swirling Phasers, Tight Groove,
   Unsettling, Upbeat, Virtuoso, Weird Noises, ...`
 
-これらはほんの一例です。Lyria RealTime では、他にもさまざまなことができます。独自のプロンプトを試してみてください。
+Questi sono solo alcuni esempi, Lyria RealTime può fare molto di più. Prova i tuoi prompt.
 
-## ベスト プラクティス
+## Best practice
 
-- クライアント アプリケーションは、スムーズな再生を確保するために、堅牢な音声バッファリングを実装する必要があります。これにより、ネットワーク ジッターと生成レイテンシのわずかな変動に対応できます。
-- 効果的なプロンプト:
-  - わかりやすいラベルを付けます。ムード、ジャンル、楽器を表す形容詞を使用します。
-  - 反復処理を行い、徐々に操作します。プロンプトを完全に変更するのではなく、要素を追加または変更して、音楽をよりスムーズに変化させてみてください。
-  - `WeightedPrompt` の重みを調整して、新しいプロンプトが進行中の生成に与える影響の強さを調整します。
+- Le applicazioni client devono implementare un buffering audio robusto per garantire una riproduzione fluida. In questo modo si tiene conto del jitter di rete e delle lievi variazioni della latenza di generazione.
+- Prompt efficaci:
+  - Fornisci una descrizione dettagliata. Utilizza aggettivi che descrivono lo stato d'animo, il genere e la strumentazione.
+  - Esegui l'iterazione e il controllo in modo graduale. Anziché modificare completamente il prompt, prova ad aggiungere o modificare gli elementi per trasformare la musica in modo più fluido.
+  - Prova il peso su `WeightedPrompt` per influenzare la forza con cui un nuovo prompt influisce sulla generazione in corso.
 
-## 詳細な技術情報
+## Dettagli tecnici
 
-このセクションでは、Lyria RealTime の音楽生成の使用方法について詳しく説明します。
+Questa sezione descrive le specifiche di come utilizzare la generazione di musica con Lyria RealTime.
 
-### 仕様
+### Specifiche
 
-- 出力形式: RAW 16 ビット PCM 音声
-- サンプルレート: 48 kHz
-- チャンネル数: 2（ステレオ）
+- Formato di output: audio PCM a 16 bit non elaborato
+- Frequenza di campionamento: 48 kHz
+- Canali: 2 (stereo)
 
-### コントロール
+### Controlli
 
-音楽生成は、次のものを含むメッセージを送信することで、リアルタイムで影響を受ける可能性があります。
+La generazione di musica può essere influenzata in tempo reale inviando messaggi contenenti:
 
-- `WeightedPrompt`: 音楽のアイデア、ジャンル、楽器、ムード、特徴を表すテキスト文字列。複数のプロンプトを指定して、影響をブレンドすることもできます。Lyria RealTime に最適なプロンプトを設定する方法について詳しくは、[上記](#steer-music)をご覧ください。
-- `MusicGenerationConfig`: 音楽生成プロセスの構成。出力音声の特性に影響します。パラメータは次のとおりです。
-  - `guidance`:（浮動小数点）範囲: `[0.0, 6.0]`。デフォルト: `4.0`。
-    モデルがプロンプトにどの程度厳密に従うかを制御します。ガイダンスが高いほど、プロンプトへの準拠度は向上しますが、移行がより急になります。
-  - `bpm`:（整数）範囲: `[60, 200]`。
-    生成された音楽に必要な 1 分あたりのビート数を設定します。モデルが新しい bpm を考慮に入れるには、コンテキストを停止/再生またはリセットする必要があります。
-  - `density`:（浮動小数点）範囲: `[0.0, 1.0]`。
-    音符/音の密度を制御します。値が小さいほど音楽がまばらになり、値が大きいほど音楽が「忙しく」なります。
-  - `brightness`:（浮動小数点）範囲: `[0.0, 1.0]`。
-    音質を調整します。値が高いほど、音声が「明るく」なり、一般的に高周波が強調されます。
-  - `scale`:（列挙型）生成の音階（キーとモード）を設定します。SDK で提供される
-    [`Scale` 列挙値](#scale-enum)を使用します。モデルが新しいスケールを考慮に入れるには、コンテキストを停止/再生またはリセットする必要があります。
-  - `mute_bass`:（ブール値）デフォルト: `False`。
-    モデルが出力の低音を減らすかどうかを制御します。
-  - `mute_drums`:（ブール値）デフォルト: `False`。
-    モデルが出力のドラムを減らすかどうかを制御します。
-  - `only_bass_and_drums`:（ブール値）デフォルト: `False`。
-    低音とドラムのみを出力するようにモデルを操作します。
-  - `music_generation_mode`:（列挙型）音楽の `QUALITY`（デフォルト値）または `DIVERSITY` に焦点を当てるかどうかをモデルに示します。`VOCALIZATION` に設定して、モデルが別の楽器として発声（新しいプロンプトとして追加）を生成できるようにすることもできます。
-- `PlaybackControl`: 再生、一時停止、停止、コンテキストのリセットなど、再生の側面を制御するコマンド。
+- `WeightedPrompt`: una stringa di testo che descrive un'idea musicale, un genere, uno strumento, uno stato d'animo o una caratteristica. È possibile fornire più prompt per combinare le influenze. Per maggiori dettagli su come richiedere al meglio
+  Lyria RealTime, consulta la sezione [precedente](#steer-music).
+- `MusicGenerationConfig`: configurazione per il processo di generazione di musica, che influenza le caratteristiche dell'audio di output. I parametri includono:
+  - `guidance`: (float) intervallo: `[0.0, 6.0]`. Valore predefinito: `4.0`.
+    Controlla la rigorosità con cui il modello segue i prompt. Una guida più elevata migliora l'aderenza al prompt, ma rende le transizioni più brusche.
+  - `bpm`: (int) intervallo: `[60, 200]`.
+    Imposta i battiti al minuto che vuoi per la musica generata. Devi interrompere/riprodurre o reimpostare il contesto affinché il modello tenga conto del nuovo BPM.
+  - `density`: (float) intervallo: `[0.0, 1.0]`.
+    Controlla la densità delle note/dei suoni musicali. I valori più bassi producono musica più sparsa, mentre i valori più alti producono musica più "intensa".
+  - `brightness`: (float) intervallo: `[0.0, 1.0]`.
+    Regola la qualità tonale. I valori più alti producono audio con un suono più "brillante", in genere enfatizzando le frequenze più alte.
+  - `scale`: (Enum) imposta la scala musicale (chiave e modalità) per la generazione. Utilizza i
+    [`Scale` valori enum](#scale-enum) forniti dall'SDK. Devi interrompere/riprodurre o reimpostare il contesto affinché il modello tenga conto della nuova scala.
+  - `mute_bass`: (bool) valore predefinito: `False`.
+    Controlla se il modello riduce i bassi degli output.
+  - `mute_drums`: (bool) valore predefinito: `False`.
+    Controlla se il modello riduce la batteria degli output.
+  - `only_bass_and_drums`: (bool) valore predefinito: `False`.
+    Indica al modello di provare a generare solo bassi e batteria.
+  - `music_generation_mode`: (Enum) indica al modello se deve concentrarsi sulla `QUALITY` (valore predefinito) o sulla `DIVERSITY` della musica. Può anche essere impostato su `VOCALIZATION` per consentire al modello di generare vocalizzazioni come un altro strumento (aggiungile come nuovi prompt).
+- `PlaybackControl`: comandi per controllare gli aspetti della riproduzione, ad esempio riproduci, metti in pausa, interrompi o reimposta il contesto.
 
-`bpm`、`density`、`brightness`、`scale` に値を指定しない場合、モデルは最初のプロンプトに基づいて最適な値を決定します。
+Per `bpm`, `density`, `brightness` e `scale`, se non viene fornito alcun valore, il modello deciderà qual è il migliore in base ai prompt iniziali.
 
-`temperature`（0.0 ～ 3.0、デフォルト 1.1）、`top_k`（1 ～ 1,000、デフォルト 40）、`seed`（0 ～ 2,147,483,647、デフォルトでランダムに選択）などの従来のパラメータも、`MusicGenerationConfig` でカスタマイズできます。
+Anche i parametri più classici come `temperature` (da 0.0 a 3.0, valore predefinito 1.1), `top_k` (da 1 a 1000, valore predefinito 40) e `seed` (da 0 a 2.147.483.647, selezionato in modo casuale per impostazione predefinita) sono personalizzabili in `MusicGenerationConfig`.
 
-#### スケール列挙値
+#### Valori enum della scala
 
-モデルが受け入れられるスケール値は次のとおりです。
+Di seguito sono riportati tutti i valori della scala che il modello può accettare:
 
-| 列挙値 | スケール / キー |
+| Valore enum | Scala / chiave |
 | --- | --- |
-| `C_MAJOR_A_MINOR` | ハ長調 / イ短調 |
-| `D_FLAT_MAJOR_B_FLAT_MINOR` | 変ニ長調 / 変ロ短調 |
-| `D_MAJOR_B_MINOR` | ニ長調 / ロ短調 |
-| `E_FLAT_MAJOR_C_MINOR` | 変ホ長調 / ハ短調 |
-| `E_MAJOR_D_FLAT_MINOR` | ホ長調 / 嬰ハ短調/変ニ短調 |
-| `F_MAJOR_D_MINOR` | ヘ長調 / ニ短調 |
-| `G_FLAT_MAJOR_E_FLAT_MINOR` | 変ト長調 / 変ホ短調 |
-| `G_MAJOR_E_MINOR` | ト長調 / ホ短調 |
-| `A_FLAT_MAJOR_F_MINOR` | 変イ長調 / ヘ短調 |
-| `A_MAJOR_G_FLAT_MINOR` | イ長調 / 嬰ヘ短調/変ト短調 |
-| `B_FLAT_MAJOR_G_MINOR` | 変ロ長調 / ト短調 |
-| `B_MAJOR_A_FLAT_MINOR` | ロ長調 / 嬰ト短調/変イ短調 |
-| `SCALE_UNSPECIFIED` | デフォルト / モデルが決定 |
+| `C_MAJOR_A_MINOR` | Do maggiore / La minore |
+| `D_FLAT_MAJOR_B_FLAT_MINOR` | Re♭ maggiore / Si♭ minore |
+| `D_MAJOR_B_MINOR` | Re maggiore / Si minore |
+| `E_FLAT_MAJOR_C_MINOR` | Mi♭ maggiore / Do minore |
+| `E_MAJOR_D_FLAT_MINOR` | Mi maggiore / Do♯/Re♭ minore |
+| `F_MAJOR_D_MINOR` | Fa maggiore / Re minore |
+| `G_FLAT_MAJOR_E_FLAT_MINOR` | Sol♭ maggiore / Mi♭ minore |
+| `G_MAJOR_E_MINOR` | Sol maggiore / Mi minore |
+| `A_FLAT_MAJOR_F_MINOR` | La♭ maggiore / Fa minore |
+| `A_MAJOR_G_FLAT_MINOR` | La maggiore / Fa♯/Sol♭ minore |
+| `B_FLAT_MAJOR_G_MINOR` | Si♭ maggiore / Sol minore |
+| `B_MAJOR_A_FLAT_MINOR` | Si maggiore / Sol♯/La♭ minore |
+| `SCALE_UNSPECIFIED` | Valore predefinito / Il modello decide |
 
-モデルは演奏される音符をガイドできますが、相対キーを区別しません。したがって、各列挙型は相対的な長調と短調の両方に対応します。たとえば、`C_MAJOR_A_MINOR` はピアノのすべての白鍵に対応し、`F_MAJOR_D_MINOR` は変ロ以外のすべての白鍵に対応します。
+Il modello è in grado di guidare le note riprodotte, ma non distingue tra le chiavi relative. Pertanto, ogni enum corrisponde sia alla relativa maggiore che alla relativa minore. Ad esempio, `C_MAJOR_A_MINOR` corrisponderebbe a tutti i tasti bianchi di un pianoforte e `F_MAJOR_D_MINOR` a tutti i tasti bianchi tranne il Si♭.
 
-### 制限事項
+### Limitazioni
 
-- インストゥルメンタルのみ: モデルはインストゥルメンタル音楽のみを生成します。
-- 安全性: プロンプトは安全フィルタによってチェックされます。フィルタをトリガーするプロンプトは無視され、その場合は出力の `filtered_prompt` フィールドに説明が書き込まれます。
-- [ウォーターマーク: 出力音声には、責任ある AI の原則に従って識別用のウォーターマークが常に付加されます。](https://ai.google/responsibility/principles/?hl=ja)
+- Solo strumentale: il modello genera solo musica strumentale.
+- Sicurezza: i prompt vengono controllati dai filtri di sicurezza. I prompt che attivano i filtri verranno ignorati e nel campo `filtered_prompt` dell'output verrà scritta una spiegazione.
+- Filigrana: l'audio di output è sempre filigranato per l'identificazione in base ai nostri principi di AI responsabile
+  [responsabile](https://ai.google/responsibility/principles/?hl=it).
 
-## 次のステップ
+## Passaggi successivi
 
-- [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=ja) でフルソングとボーカル トラックを生成する。
-- 音楽の代わりに、
-  [TTS モデル](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja)を使用して複数話者の会話を生成する方法を学習する。
-- [[画像や動画を生成する方法を確認する。](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)](https://ai.google.dev/gemini-api/docs/video?hl=ja)
-- 音楽や音声を生成する代わりに、Gemini が音声ファイルを
-  [理解する](https://ai.google.dev/gemini-api/docs/audio?hl=ja)方法を確認する。
-- [Live API を使用して Gemini とリアルタイムで会話する。](https://ai.google.dev/gemini-api/docs/live-api?hl=ja)
+- Genera brani completi e tracce vocali con [Lyria 3](https://ai.google.dev/gemini-api/docs/music-generation?hl=it),
+- Anziché musica, scopri come generare conversazioni con più speaker utilizzando
+  i [modelli TTS](https://ai.google.dev/gemini-api/docs/speech-generation?hl=it),
+- Scopri come generare [immagini](https://ai.google.dev/gemini-api/docs/image-generation?hl=it) o [video](https://ai.google.dev/gemini-api/docs/video?hl=it),
+- Anziché generare musica o audio, scopri come Gemini può
+  [comprendere i file audio](https://ai.google.dev/gemini-api/docs/audio?hl=it),
+- Avvia una conversazione in tempo reale con Gemini utilizzando l'
+  [API Live](https://ai.google.dev/gemini-api/docs/live-api?hl=it).
 
-その他のコードサンプルとチュートリアルについては、[クックブック](https://github.com/google-gemini/cookbook)をご覧ください。
+Esplora il [ricettario](https://github.com/google-gemini/cookbook) per altri
+esempi di codice e tutorial.
 
-フィードバックを送信
+Invia feedback
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-最終更新日 2026-07-16 UTC。
+Ultimo aggiornamento 2026-07-28 UTC.
 
-ご意見をお聞かせください
+Vuoi dirci altro?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-16 UTC。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-28 UTC."],[],[]]

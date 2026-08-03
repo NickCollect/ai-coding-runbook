@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=ko
-fetched_at: 2026-07-27T04:48:40.179936+00:00
-title: "\ucf54\ub4dc \uc2e4\ud589 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=zh-TW
+fetched_at: 2026-08-03T04:37:00.297596+00:00
+title: "\u57f7\u884c\u7a0b\u5f0f\u78bc \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-의견 보내기
+提供意見
 
-# 코드 실행
+# 執行程式碼
 
-Gemini API는 모델이 Python 코드를 생성하고 실행할 수 있는 코드 실행 도구를 제공합니다. 그런 다음 모델은 최종 출력을 도출할 때까지 코드 실행 결과를 통해 반복적으로 학습할 수 있습니다. 코드 실행을 사용하여 코드 기반 추론의 이점을 활용하는 애플리케이션을 빌드할 수 있습니다. 예를 들어 코드 실행을 사용하여 방정식을 풀거나 텍스트를 처리할 수 있습니다. 코드 실행 환경에 포함된 [라이브러리](#supported-libraries)를 사용하여 더 전문적인 작업을 실행할 수도 있습니다.
+Gemini API 提供執行程式碼工具，可讓模型生成及執行 Python 程式碼。模型接著會根據程式碼執行結果反覆試驗學習，直到生成最終輸出內容。您可以使用程式碼執行功能，建構根據程式碼進行推論的應用程式。舉例來說，您可以使用執行程式碼功能解方程式或處理文字。您也可以使用程式碼執行環境中包含的[程式庫](#supported-libraries)，執行更專業的工作。
 
-Gemini는 Python으로만 코드를 실행할 수 있습니다. 다른 언어로 코드를 생성해 달라고 Gemini에 요청할 수는 있지만 모델이 코드 실행 도구를 사용하여 코드를 실행할 수는 없습니다.
+Gemini 只能執行 Python 程式碼。您仍可要求 Gemini 以其他語言生成程式碼，但模型無法使用程式碼執行工具執行程式碼。
 
-## 코드 실행 사용 설정
+## 啟用程式碼執行功能
 
-코드 실행을 사용 설정하려면 모델에서 코드 실행 도구를 구성하세요. 이를 통해 모델이 코드를 생성하고 실행할 수 있습니다.
+如要啟用執行程式碼功能，請在模型上設定程式碼執行工具。模型就能生成及執行程式碼。
 
 ### Python
 
@@ -36,7 +36,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents="What is the sum of the first 50 prime numbers? "
     "Generate and run code for the calculation, and make sure you get all 50.",
     config=types.GenerateContentConfig(
@@ -53,7 +53,7 @@ for part in response.candidates[0].content.parts:
         print(part.code_execution_result.output)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -61,7 +61,7 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({});
 
 let response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: [
     "What is the sum of the first 50 prime numbers? " +
       "Generate and run code for the calculation, and make sure you get all 50.",
@@ -115,7 +115,7 @@ func main() {
 
     result, _ := client.Models.GenerateContent(
         ctx,
-        "gemini-3.5-flash",
+        "gemini-3.6-flash",
         genai.Text("What is the sum of the first 50 prime numbers? " +
                   "Generate and run code for the calculation, and make sure you get all 50."),
         config,
@@ -130,7 +130,7 @@ func main() {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d ' {"tools": [{"code_execution": {}}],
@@ -143,7 +143,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-출력은 가독성을 위해 서식이 지정된 다음과 같이 표시될 수 있습니다.
+輸出內容可能如下所示 (已排版方便閱讀)：
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -192,27 +192,27 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-이 출력은 코드 실행을 사용할 때 모델이 반환하는 여러 콘텐츠 부분을 결합합니다.
+這項輸出內容結合了模型在使用執行程式碼功能時傳回的幾個內容部分：
 
-- `text`: 모델에서 생성된 인라인 텍스트
-- `executableCode`: 실행 목적으로 모델에서 생성된 코드
-- `codeExecutionResult`: 실행 가능한 코드의 결과
+- `text`：模型產生的內嵌文字
+- `executableCode`：模型產生的程式碼，可供執行
+- `codeExecutionResult`：可執行程式碼的結果
 
-이러한 부분의 이름 지정 규칙은 프로그래밍 언어에 따라 다릅니다.
+這些部分的命名慣例會因程式設計語言而異。
 
-## 이미지를 사용한 코드 실행 (Gemini 3)
+## 使用圖片執行程式碼 (Gemini 3)
 
-이제 Gemini 3 Flash 모델이 Python 코드를 작성하고 실행하여 이미지를 적극적으로 조작하고 검사할 수 있습니다.
+Gemini 3 Flash 模型現在可以撰寫及執行 Python 程式碼，主動操控及檢查圖片。
 
-**사용 사례**
+**用途**
 
-- **확대 및 검사**: 모델은 세부정보가 너무 작을 때(예: 멀리 있는 게이지를 읽는 경우) 이를 암시적으로 감지하고 더 높은 해상도로 영역을 잘라 다시 검사하는 코드를 작성합니다.
-- **시각적 수학**: 모델은 코드를 사용하여 다단계 계산을 실행할 수 있습니다 (예: 영수증의 항목 합계).
-- **이미지 주석**: 모델은 질문에 답하기 위해 이미지를 주석으로 달 수 있습니다(예: 관계를 보여주는 화살표를 그림).
+- **縮放及檢查**：模型會隱含偵測細節是否過小 (例如讀取遠處的儀表)，並編寫程式碼來裁剪及重新檢查該區域，以提高解析度。
+- **視覺數學**：模型可使用程式碼執行多步驟計算 (例如加總收據上的項目)。
+- **圖片註解**：模型可為圖片加上註解來回答問題，例如繪製箭頭來顯示關係。
 
-### 이미지를 사용한 코드 실행 사용 설정
+### 啟用圖片的程式碼執行功能
 
-이미지를 사용한 코드 실행은 Gemini 3 Flash에서 공식적으로 지원됩니다. 도구로서의 코드 실행과 사고를 모두 사용 설정하면 이 동작을 활성화할 수 있습니다.
+Gemini 3 Flash 正式支援使用圖片執行程式碼。如要啟用這項行為，請同時啟用「程式碼執行」工具和「思考」功能。
 
 ### Python
 
@@ -233,7 +233,7 @@ image = types.Part.from_bytes(
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents=[image, "Zoom into the expression pedals and tell me how many pedals are there?"],
     config=types.GenerateContentConfig(
         tools=[types.Tool(code_execution=types.ToolCodeExecution)]
@@ -252,7 +252,7 @@ for part in response.candidates[0].content.parts:
         display(Image.open(io.BytesIO(part.as_image().image_bytes)))
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 async function main() {
@@ -266,7 +266,7 @@ async function main() {
 
   // 2. Call the API with Code Execution enabled
   const result = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: [
       {
         inlineData: {
@@ -347,7 +347,7 @@ func main() {
     // 3. Generate Content
     result, err := client.Models.GenerateContent(
         ctx,
-        "gemini-3.5-flash",
+        "gemini-3.6-flash",
         []*genai.Content{
             {
                 Parts: []*genai.Part{
@@ -388,7 +388,7 @@ func main() {
 
 ```
 IMG_URL="https://goo.gle/instrument-img"
-MODEL="gemini-3.5-flash"
+MODEL="gemini-3.6-flash"
 
 MIME_TYPE=$(curl -sIL "$IMG_URL" | grep -i '^content-type:' | awk -F ': ' '{print $2}' | sed 's/\r$//' | head -n 1)
 if [[ -z "$MIME_TYPE" || ! "$MIME_TYPE" == image/* ]]; then
@@ -427,9 +427,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-## 채팅에서 코드 실행 사용
+## 在對話中使用執行程式碼功能
 
-채팅의 일부로 코드 실행을 사용할 수 있습니다.
+您也可以在對話中使用執行程式碼功能。
 
 ### Python
 
@@ -440,7 +440,7 @@ from google.genai import types
 client = genai.Client()
 
 chat = client.chats.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     config=types.GenerateContentConfig(
         tools=[types.Tool(code_execution=types.ToolCodeExecution)]
     ),
@@ -463,7 +463,7 @@ for part in response.candidates[0].content.parts:
         print(part.code_execution_result.output)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import {GoogleGenAI} from "@google/genai";
@@ -471,7 +471,7 @@ import {GoogleGenAI} from "@google/genai";
 const ai = new GoogleGenAI({});
 
 const chat = ai.chats.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   history: [
     {
       role: "user",
@@ -522,7 +522,7 @@ func main() {
 
     chat, _ := client.Chats.Create(
         ctx,
-        "gemini-3.5-flash",
+        "gemini-3.6-flash",
         config,
         nil,
     )
@@ -544,7 +544,7 @@ func main() {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d '{"tools": [{"code_execution": {}}],
@@ -587,73 +587,73 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }'
 ```
 
-## 입력/출력 (I/O)
+## 輸入/輸出 (I/O)
 
-코드 실행은 파일 입력과 그래프 출력을 지원합니다. 이러한 입력 및 출력 기능을 사용하면 CSV 파일과 텍스트 파일을 업로드하고 파일에 대해 질문하고 대답의 일부로 [Matplotlib](https://matplotlib.org/) 그래프를 생성할 수 있습니다. 출력 파일은 응답에 인라인 이미지로 반환됩니다.
+執行程式碼支援檔案輸入和圖表輸出。有了這些輸入和輸出功能，您就能上傳 CSV 和文字檔、詢問檔案相關問題，並在回覆中生成 [Matplotlib](https://matplotlib.org/) 圖表。輸出檔案會以內嵌圖片的形式傳回。
 
-### I/O 가격 책정
+### I/O 價格
 
-코드 실행 I/O를 사용하면 입력 토큰과 출력 토큰에 대한 요금이 청구됩니다.
+使用執行程式碼 I/O 時，系統會根據輸入和輸出權杖向您收費：
 
-**입력 토큰:**
+**輸入內容詞元：**
 
-- 사용자 프롬프트
+- 使用者提示詞
 
-**출력 토큰:**
+**輸出內容詞元：**
 
-- 모델에서 생성된 코드
-- 코드 환경의 코드 실행 출력
-- 사고 토큰
-- 모델에서 생성된 요약
+- 模型生成的程式碼
+- 程式碼環境中的程式碼執行輸出內容
+- 思考詞元
+- 模型生成的摘要
 
-### I/O 세부정보
+### I/O 詳細資料
 
-코드 실행 I/O를 사용할 때는 다음 기술 세부정보에 유의하세요.
+使用程式碼執行 I/O 時，請注意下列技術細節：
 
-- 코드 환경의 최대 런타임은 30초입니다.
-- 코드 환경에서 오류가 발생하면 모델이 코드 출력을 재생성할 수 있습니다. 이러한 상황은 최대 5번까지 발생할 수 있습니다.
-- 최대 파일 입력 크기는 모델 토큰 창에 의해 제한됩니다. AI Studio에서 최대 입력 파일 크기는 100만 토큰입니다 (지원되는 입력 유형의 텍스트 파일의 경우 약 2MB). 너무 큰 파일을 업로드하면 AI Studio에서 전송할 수 없습니다.
-- 코드 실행은 텍스트 및 CSV 파일에서 가장 잘 작동합니다.
-- 입력 파일은 `part.inlineData` 또는 `part.fileData` ([Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 통해 업로드됨)로 전달할 수 있으며 출력 파일은 항상 `part.inlineData`로 반환됩니다.
+- 程式碼環境的執行時間上限為 30 秒。
+- 如果程式碼環境產生錯誤，模型可能會決定重新生成程式碼輸出內容。最多可重複 5 次。
+- 檔案輸入大小上限取決於模型權杖視窗。在 AI Studio 中，輸入檔案大小上限為 100 萬個權杖 (支援的輸入類型文字檔約為 2 MB)。如果上傳的檔案過大，AI Studio 就不會允許傳送。
+- 執行程式碼功能最適合搭配文字和 CSV 檔案使用。
+- 輸入檔案可以 `part.inlineData` 或 `part.fileData` 格式傳遞 (透過 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳)，輸出檔案一律以 `part.inlineData` 格式傳回。
 
-## 결제
+## 帳單
 
-Gemini API에서 코드 실행을 사용 설정하는 데에는 추가 비용이 발생하지 않습니다.
-사용 중인 Gemini 모델에 따라 입력 및 출력 토큰의 현재 요율로 비용이 청구됩니다.
+啟用 Gemini API 的程式碼執行功能無須額外付費。
+系統會根據您使用的 Gemini 模型，以目前的輸入和輸出權杖費率計費。
 
-코드 실행의 청구에 대해 몇 가지 중요한 사항은 다음과 같습니다.
+以下是程式碼執行計費的其他注意事項：
 
-- 모델에 전달하는 입력 토큰에 대해서는 비용이 한 번만 청구되며, 모델에서 사용자에게 반환하는 최종 출력 토큰에 대해서는 비용이 청구됩니다.
-- 생성된 코드를 나타내는 토큰은 출력 토큰으로 계산됩니다. 생성된 코드에는 텍스트 및 멀티모달 출력(예: 이미지)이 포함될 수 있습니다.
-- 코드 실행 결과도 출력 토큰으로 집계됩니다.
+- 系統只會針對傳送至模型的輸入權杖向您收費一次，並針對模型傳回的最終輸出權杖向您收費。
+- 代表生成程式碼的權杖會計為輸出權杖。生成的程式碼可能包含文字和圖片等多模態輸出內容。
+- 執行程式碼的結果也會計為輸出權杖。
 
-결제 모델은 다음 다이어그램에 나와 있습니다.
+計費模式如下圖所示：
 
-![코드 실행 청구 모델](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=ko)
+![執行程式碼帳單模式](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=zh-tw)
 
-- 사용 중인 Gemini 모델에 따라 입력 및 출력 토큰의 현재 요율로 비용이 청구됩니다.
-- 응답을 생성할 때 Gemini에 코드 실행이 사용되는 경우 원본 프롬프트, 생성된 코드, 실행된 코드 결과가 *중간 토큰* 라벨로 표시되고 *입력 토큰*으로 청구됩니다.
-- 그런 후 Gemini가 요약을 생성하고 생성된 코드, 실행된 코드 결과, 최종 요약을 반환합니다. 이러한 토큰은 *출력 토큰*으로 청구됩니다.
-- Gemini API에는 API 응답에 중간 토큰 수가 포함되기 때문에 초기 프롬프트 이상으로 추가된 입력 토큰이 발생하는 이유를 알 수 있습니다.
+- 系統會根據您使用的 Gemini 模型，以目前的輸入和輸出權杖費率計費。
+- 如果 Gemini 在生成回覆時執行程式碼，系統會將原始提示、生成的程式碼和執行的程式碼結果標示為*中間權杖*，並以*輸入權杖*計費。
+- 接著生成摘要，並傳回生成的程式碼、執行程式碼的結果，以及最終摘要。這些會以*輸出權杖*計費。
+- Gemini API 會在 API 回應中提供中繼詞元數，讓您瞭解為何會收到超出初始提示詞的額外輸入詞元。
 
-## 제한사항
+## 限制
 
-- 모델은 코드를 생성 및 실행할 수만 있습니다. 미디어 파일과 같은 다른 아티팩트는 반환할 수 없습니다.
-- 일부 경우에 코드 실행을 사용 설정하면 모델 출력의 다른 영역(예: 스토리 작성)에서 성능이 저하될 수 있습니다.
-- 다양한 모델이 코드 실행을 성공적으로 사용하는 능력에는 약간의 차이가 있습니다.
+- 模型只能生成及執行程式碼，無法傳回其他構件，例如媒體檔案。
+- 在某些情況下，啟用執行程式碼功能可能會導致模型輸出內容的其他部分出現迴歸現象 (例如撰寫故事)。
+- 不同模型成功執行程式碼的能力有所差異。
 
-## 지원되는 도구 조합
+## 支援的工具組合
 
-코드 실행 도구를 [Google 검색을 사용한 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)과 결합하여 더 복잡한 사용 사례를 지원할 수 있습니다.
+執行程式碼工具可與[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)搭配使用，以支援更複雜的應用情境。
 
-Gemini 3 모델은 코드 실행과 같은 기본 제공 도구와 맞춤 도구(함수 호출)의 조합을 지원합니다. 도구 조합이 작동하려면 `id` 및 `thought_signature` 필드를 다시 전달해야 합니다. [도구 조합](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko) 페이지에서 자세히 알아보세요.
+Gemini 3 模型支援結合內建工具 (例如程式碼執行) 和自訂工具 (函式呼叫)。您必須傳回 `id` 和 `thought_signature` 欄位，工具組合才能運作。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
 
-## 지원되는 라이브러리
+## 支援的程式庫
 
-코드 실행 환경에는 다음 라이브러리가 포함됩니다.
+程式碼執行環境包含下列程式庫：
 
 - attrs
-- 체스
+- 棋子
 - contourpy
 - fpdf
 - geopandas
@@ -668,7 +668,7 @@ Gemini 3 모델은 코드 실행과 같은 기본 제공 도구와 맞춤 도구
 - numpy
 - opencv-python
 - openpyxl
-- 패키징
+- 包裝
 - pandas
 - pillow
 - protobuf
@@ -682,29 +682,29 @@ Gemini 3 모델은 코드 실행과 같은 기본 제공 도구와 맞춤 도구
 - scikit-learn
 - scipy
 - seaborn
-- 육
+- 六
 - striprtf
 - sympy
 - tabulate
-- tensorflow
+- TensorFlow
 - toolz
 - xlrd
 
-사용자의 고유 라이브러리는 설치할 수 없습니다.
+無法安裝自己的程式庫。
 
-## 다음 단계
+## 後續步驟
 
-- [코드 실행 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=ko)을 사용해 보세요.
-- 다른 Gemini API 도구 알아보기:
-  - [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)
-  - [Google 검색으로 그라운딩](https://ai.google.dev/gemini-api/docs/grounding?hl=ko)
+- 試試[執行程式碼 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=zh-tw)。
+- 瞭解其他 Gemini API 工具：
+  - [函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)
+  - [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)
 
-의견 보내기
+提供意見
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-최종 업데이트: 2026-06-24(UTC)
+上次更新時間：2026-07-30 (世界標準時間)。
 
-의견을 전달하고 싶나요?
+想進一步說明嗎？
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-24(UTC)"],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]

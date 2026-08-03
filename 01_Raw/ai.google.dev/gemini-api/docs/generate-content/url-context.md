@@ -1,34 +1,34 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/url-context?hl=he
-fetched_at: 2026-07-27T04:42:00.352802+00:00
-title: "\u05d4\u05d4\u05e7\u05e9\u05e8 \u05e9\u05dc \u05db\u05ea\u05d5\u05d1\u05ea \u05d4-URL \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/url-context?hl=zh-TW
+fetched_at: 2026-08-03T04:33:03.901382+00:00
+title: "\u7db2\u5740\u80cc\u666f\u8cc7\u8a0a \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-שליחת משוב
+提供意見
 
-# ההקשר של כתובת ה-URL
+# 網址背景資訊
 
-הכלי 'הקשר של כתובת URL' מאפשר לכם לספק למודלים הקשר נוסף בצורה של כתובות URL. אם תכללו כתובות URL בבקשה, המודל יוכל לגשת לתוכן מהדפים האלה (כל עוד כתובת ה-URL לא שייכת לסוג שמופיע [בקטע המגבלות](#limitations)) כדי לשפר את התשובה שלו.
+網址內容工具可讓您以網址形式，為模型提供額外內容。在要求中加入網址後，模型就會存取這些網頁的內容 (只要網址類型未列於[限制一節](#limitations))，藉此提供更完善的回覆。
 
-הכלי 'הקשר של כתובת URL' שימושי למשימות כמו:
+網址脈絡工具適用於下列工作：
 
-- **חילוץ נתונים**: שליפת מידע ספציפי כמו מחירים, שמות או ממצאים מרכזיים מכמה כתובות URL.
-- **השוואת מסמכים**: ניתוח של כמה דוחות, מאמרים או קובצי PDF כדי לזהות הבדלים ולעקוב אחרי מגמות.
-- **סינתזה ויצירת תוכן**: שילוב מידע מכמה כתובות URL של מקורות כדי ליצור סיכומים מדויקים, פוסטים בבלוג או דוחות.
-- **ניתוח קוד ומסמכים**: אפשר להפנות למאגר GitHub או למסמכים טכניים כדי לקבל הסבר על קוד, ליצור הוראות הגדרה או לקבל תשובות לשאלות.
+- **擷取資料**：從多個網址擷取特定資訊，例如價格、名稱或重要發現。
+- **比較文件**：分析多份報表、文章或 PDF，找出差異並追蹤趨勢。
+- **統整及建立內容**：整合多個來源網址的資訊，生成準確的摘要、網誌文章或報告。
+- **分析程式碼和文件**：指向 GitHub 存放區或技術文件，說明程式碼、生成設定操作說明或回答問題。
 
-בדוגמה הבאה אפשר לראות איך משווים בין שני מתכונים מאתרים שונים.
+以下範例說明如何比較不同網站的兩道食譜。
 
 ### Python
 
@@ -37,7 +37,7 @@ from google import genai
 from google.genai.types import Tool, GenerateContentConfig
 
 client = genai.Client()
-model_id = "gemini-3.5-flash"
+model_id = "gemini-3.6-flash"
 
 tools = [
   {"url_context": {}},
@@ -70,7 +70,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: [
         "Compare the ingredients and cooking times from the recipes at https://www.foodnetwork.com/recipes/ina-garten/perfect-roast-chicken-recipe-1940592 and https://www.allrecipes.com/recipe/21151/simple-whole-roast-chicken/",
     ],
@@ -90,7 +90,7 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -111,20 +111,19 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 cat result.json
 ```
 
-## איך זה עובד
+## 運作方式
 
-הכלי 'הקשר כתובת ה-URL' משתמש בתהליך אחזור דו-שלבי כדי לאזן בין מהירות, עלות וגישה לנתונים עדכניים. כשמספקים כתובת URL, הכלי מנסה קודם לשלוף את התוכן ממטמון אינדקס פנימי. הוא פועל כמטמון שעבר אופטימיזציה גבוהה. אם כתובת URL לא זמינה באינדקס (למשל, אם מדובר בדף חדש מאוד), הכלי יבצע באופן אוטומטי אחזור של הגרסה הפעילה.
-הכלי ניגש ישירות לכתובת ה-URL כדי לאחזר את התוכן שלה בזמן אמת.
+網址內容工具採用兩步驟的擷取程序，兼顧速度、成本和最新資料存取權。提供網址後，這項工具會先嘗試從內部索引快取擷取內容。這可做為經過高度最佳化的快取。如果網址未編入索引 (例如網頁剛發布)，工具會自動改為即時擷取。這項工具會直接存取網址，即時擷取內容。
 
-## שילוב עם כלים אחרים
+## 與其他工具搭配使用
 
-אפשר לשלב את הכלי להקשר של כתובת URL עם כלים אחרים כדי ליצור תהליכי עבודה יעילים יותר.
+您可以將網址內容工具與其他工具結合，建立功能更強大的工作流程。
 
-[מודלים של Gemini 3](#supported-models) תומכים בשילוב של כלים מובנים (כמו הקשר של כתובת URL) עם כלים מותאמים אישית (הפעלת פונקציות). מידע נוסף זמין בדף [שילובים של כלים](https://ai.google.dev/gemini-api/docs/tool-combination?hl=he).
+[Gemini 3 模型](#supported-models)支援結合內建工具 (例如網址背景資訊) 和自訂工具 (函式呼叫)。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
 
-### עיגון בנתונים באמצעות חיפוש
+### 以搜尋結果為基準
 
-אם מפעילים גם את ההגדרה 'הקשר של כתובת URL' וגם את ההגדרה [עיגון באמצעות חיפוש Google](https://ai.google.dev/gemini-api/docs/grounding?hl=he), המודל יכול להשתמש ביכולות החיפוש שלו כדי למצוא מידע רלוונטי באינטרנט, ואז להשתמש בכלי 'הקשר של כתובת URL' כדי לקבל הבנה מעמיקה יותר של הדפים שהוא מוצא. הגישה הזו יעילה במיוחד להנחיות שדורשות חיפוש רחב וניתוח מעמיק של דפים ספציפיים.
+同時啟用網址背景資訊和 [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)後，模型就能使用搜尋功能在網路上尋找相關資訊，然後使用網址背景資訊工具深入瞭解找到的網頁。這種做法非常適合需要廣泛搜尋，並深入分析特定網頁的提示。
 
 ### Python
 
@@ -133,7 +132,7 @@ from google import genai
 from google.genai.types import Tool, GenerateContentConfig, GoogleSearch, UrlContext
 
 client = genai.Client()
-model_id = "gemini-3.5-flash"
+model_id = "gemini-3.6-flash"
 
 tools = [
       {"url_context": {}},
@@ -163,7 +162,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: [
         "Give me three day events schedule based on YOUR_URL. Also let me know what needs to taken care of considering weather and commute.",
     ],
@@ -185,7 +184,7 @@ await main();
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -209,11 +208,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 cat result.json
 ```
 
-## הסבר על התשובה
+## 瞭解回覆內容
 
-כשהמודל משתמש בכלי ההקשר של כתובת ה-URL, התשובה כוללת אובייקט `url_context_metadata`. באובייקט הזה מפורטות כתובות ה-URL שהמודל אחזר מהן תוכן, והסטטוס של כל ניסיון אחזור. המידע הזה שימושי לאימות ולניפוי באגים.
+模型使用網址內容工具時，回應會包含 `url_context_metadata` 物件。這個物件會列出模型擷取內容的網址，以及每次擷取嘗試的狀態，有助於驗證和偵錯。
 
-זוהי דוגמה לחלק הזה של התגובה (השמטנו חלקים מהתגובה כדי שהיא תהיה קצרה יותר):
+以下是回應中該部分的範例 (為簡潔起見，部分回應已省略)：
 
 ```
 {
@@ -245,15 +244,15 @@ cat result.json
 }
 ```
 
-לפרטים מלאים על האובייקט הזה , אפשר לעיין ב[הפניית API של `UrlContextMetadata`](https://ai.google.dev/api/generate-content?hl=he#UrlContextMetadata).
+如要進一步瞭解這個物件，請參閱 [`UrlContextMetadata` API 參考資料](https://ai.google.dev/api/generate-content?hl=zh-tw#UrlContextMetadata)。
 
-### בדיקות אבטחה
+### 安全檢查
 
-המערכת מבצעת בדיקה של ניהול התוכן בכתובת ה-URL כדי לוודא שהיא עומדת בתקני הבטיחות. אם כתובת ה-URL שסיפקתם תיכשל בבדיקה הזו, תקבלו הודעת שגיאה `url_retrieval_status` עם קוד `URL_RETRIEVAL_STATUS_UNSAFE`.
+系統會對網址執行內容審查檢查，確認是否符合安全標準。如果提供的網址未通過這項檢查，您會收到 `url_retrieval_status` 的 `URL_RETRIEVAL_STATUS_UNSAFE`。
 
-### ספירת הטוקנים
+### 符記數量
 
-התוכן שאוחזר מכתובות ה-URL שציינתם בהנחיה נספר כחלק מאסימוני הקלט. אפשר לראות את מספר הטוקנים של ההנחיה והשימוש בכלים באובייקט [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=he#UsageMetadata) של פלט המודל. דוגמה לפלט:
+系統會將從提示中指定網址擷取的內容，計為輸入權杖的一部分。您可以在模型輸出的 [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=zh-tw#UsageMetadata) 物件中，查看提示詞的詞元數和工具用量。以下是輸出範例：
 
 ```
 'usage_metadata': {
@@ -269,62 +268,61 @@ cat result.json
   }
 ```
 
-המחיר לכל טוקן תלוי במודל שבו משתמשים. פרטים נוספים זמינים בדף [התמחור](https://ai.google.dev/gemini-api/docs/pricing?hl=he).
+每個權杖的價格取決於使用的模型，詳情請參閱[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)頁面。
 
-## מודלים נתמכים
+## 支援的模型
 
-| מודל | ההקשר של כתובת ה-URL |
+| 模型 | 網址背景資訊 |
 | --- | --- |
-| ‫[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=he) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/generate-content/gemini-3.1-pro-preview?hl=he) | ✔️ |
-| ‫[Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he) | ✔️ |
-| [תצוגה מקדימה של Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=he) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/generate-content/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
 
-## שיטות מומלצות
+## 最佳做法
 
-- **צריך לספק כתובות URL ספציפיות**: כדי לקבל את התוצאות הטובות ביותר, צריך לספק כתובות URL ישירות לתוכן שרוצים שהמודל ינתח. המודל יאחזר תוכן רק מכתובות ה-URL שתספקו, ולא תוכן מקישורים מוטמעים.
-- **בודקים את הנגישות**: מוודאים שכתובות ה-URL שציינתם לא מובילות לדפים שנדרשת בהם התחברות או שהם נמצאים מאחורי חומת תשלום.
-- **שימוש בכתובת ה-URL המלאה**: צריך לציין את כתובת ה-URL המלאה, כולל הפרוטוקול (למשל, https://www.google.com ולא רק google.com).
+- **提供具體網址**：為獲得最佳結果，請提供您希望模型分析的內容的直接網址。模型只會從您提供的網址擷取內容，不會從巢狀連結擷取任何內容。
+- **檢查存取方式**：確認提供的網址不會導向需要登入或位於付費牆後的網頁。
+- **使用完整網址**：請提供完整網址，包括通訊協定 (例如 https://www.google.com，而不是只有 google.com)。
 
-## מגבלות
+## 限制
 
-- קריאה לפונקציה: שימוש בכלי (הקשר של כתובת URL, עיגון באמצעות חיפוש Google וכו')
-  עם קריאה לפונקציה לא נתמך כרגע.
-- מגבלת בקשות: הכלי יכול לעבד עד 20 כתובות URL לכל בקשה.
-- גודל התוכן של כתובת URL: הגודל המקסימלי של תוכן שאוחזר מכתובת URL יחידה הוא 34MB.
-- נגישות לכולם: כתובות ה-URL צריכות להיות נגישות לכולם באינטרנט.
-  אין תמיכה בכתובות localhost (לדוגמה, localhost,‏ 127.0.0.1), ברשתות פרטיות ובשירותי מנהור (לדוגמה, ngrok,‏ pinggy).
-- ‫Gemini API בלבד: הקשר של כתובת ה-URL זמין רק ב-Gemini API, ולא דרך Gemini Enterprise Agent Platform.
+- 函式呼叫：目前不支援使用函式呼叫工具 (網址背景資訊、以 Google 搜尋強化事實基礎等)。
+- 要求限制：這項工具每次最多可處理 20 個網址。
+- 網址內容大小：從單一網址擷取的內容大小上限為 34 MB。
+- 公開存取：網址必須可在網路上公開存取。
+  系統不支援本機主機位址 (例如 localhost、127.0.0.1)、私人網路和通道服務 (例如 ngrok、pinggy)。
 
-### סוגי תוכן נתמכים ולא נתמכים
+### 支援及不支援的內容類型
 
-הכלי יכול לחלץ תוכן מכתובות URL עם סוגי התוכן הבאים:
+這項工具可從下列內容類型的網址中擷取內容：
 
-- טקסט (text/html, application/json, text/plain, text/xml, text/css,
-  text/javascript , text/csv, text/rtf)
-- תמונה (image/png, ‏ image/jpeg, ‏ image/bmp, ‏ image/webp)
-- ‫PDF (application/pdf)
+- 文字 (text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf)
+- 圖片 (image/png、image/jpeg、image/bmp、image/webp)
+- PDF (application/pdf)
 
-סוגי התוכן הבאים **לא** נתמכים:
+系統「不」支援下列內容類型：
 
-- תוכן שזמין רק לאחר תשלום
-- סרטונים ב-YouTube (במאמר בנושא [הבנת סרטונים](https://ai.google.dev/gemini-api/docs/video-understanding?hl=he#youtube) מוסבר איך לעבד כתובות URL של סרטונים ב-YouTube)
-- קבצים ב-Google Workspace, כמו מסמכים או גיליונות אלקטרוניים של Google
-- קובצי וידאו ואודיו
+- 付費牆內容
+- YouTube 影片 (請參閱[影片理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#youtube)，瞭解如何處理 YouTube 網址)
+- Google Workspace 檔案，例如 Google 文件或試算表
+- 影片和音訊檔案
 
-## המאמרים הבאים
+## 後續步驟
 
-- אפשר לעיין ב[אוסף הפתרונות של הקשר כתובת ה-URL](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=he#url-context) כדי לראות דוגמאות נוספות.
+- 如需更多範例，請參閱 [URL context cookbook](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=zh-tw#url-context)。
 
-שליחת משוב
+提供意見
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-עדכון אחרון: 2026-06-23 (שעון UTC).
+上次更新時間：2026-07-31 (世界標準時間)。
 
-רוצה לתת לנו משוב?
+想進一步說明嗎？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-06-23 (שעון UTC)."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-31 (世界標準時間)。"],[],[]]

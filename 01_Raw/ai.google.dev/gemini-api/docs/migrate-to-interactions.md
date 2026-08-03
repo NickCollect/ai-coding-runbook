@@ -1,43 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=ar
-fetched_at: 2026-07-27T04:34:42.359092+00:00
-title: "\u0646\u0642\u0644 \u0627\u0644\u0628\u064a\u0627\u0646\u0627\u062a \u0625\u0644\u0649 Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-interactions?hl=th
+fetched_at: 2026-08-03T04:27:38.310134+00:00
+title: "\u0e01\u0e32\u0e23\u0e22\u0e49\u0e32\u0e22\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e44\u0e1b\u0e22\u0e31\u0e07 Interactions API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-إرسال ملاحظات
+ส่งความคิดเห็น
 
-# نقل البيانات إلى Interactions API
+# การย้ายข้อมูลไปยัง Interactions API
 
-يساعدك هذا الدليل في نقل البيانات من واجهة برمجة التطبيقات `generateContent` إلى Interactions API.
+คู่มือนี้จะช่วยคุณย้ายข้อมูลจาก `generateContent` API ไปยัง Interactions API
 
-تُعدّ Interactions API أبسط وأفضل طريقة للتصميم باستخدام نماذج Gemini وبرامجها. مع أنّ `generateContent` ستظل متاحة بالكامل، ننصح باستخدام Interactions API في جميع عمليات التطوير الجديدة.
+Interactions API เป็นวิธีที่ง่ายที่สุดและดีที่สุดในการสร้างด้วยโมเดลและเอเจนต์ Gemini แม้ว่าเราจะยังคงให้การสนับสนุน `generateContent` อย่างเต็มที่ แต่ขอแนะนำให้ใช้ Interactions API สำหรับการพัฒนาใหม่ทั้งหมด
 
-### لماذا يجب نقل البيانات؟
+### เหตุผลที่ควรย้ายข้อมูล
 
-‫Interactions API هي أبسط وأفضل طريقة للتصميم باستخدام نماذج Gemini وبرامج Gemini:
+Interactions API เป็นวิธีที่ง่ายที่สุดและดีที่สุดในการสร้างด้วยโมเดลและเอเจนต์ของ Gemini
 
-- **إدارة السجلّ من جهة الخادم**: تبسيط مسارات المحادثات المتعددة الأدوار من خلال `previous_interaction_id` يسمح الخادم بالحالة تلقائيًا (`store=true`)، ولكن يمكنك اختيار السلوك غير المرتبط بحالة من خلال ضبط `store=false`.
-- **خطوات التنفيذ القابلة للمراقبة**: تسهّل الخطوات المكتوبة تصحيح الأخطاء في التدفقات المعقّدة وعرض واجهة المستخدم للأحداث الوسيطة (مثل الأفكار أو أدوات البحث).
-- **استخدام الأدوات وسير العمل المستند إلى الوكلاء**: إتاحة استخدام الأدوات المتعدّدة الخطوات وتنظيمها وعمليات الاستدلال المعقّدة من خلال خطوات التنفيذ المكتوبة
-- **المهام الطويلة والمهام التي يتم تنفيذها في الخلفية**: تتيح هذه الميزة تفويض العمليات التي تستغرق وقتًا طويلاً، مثل Deep Think وDeep Research، إلى العمليات التي يتم تنفيذها في الخلفية باستخدام `background=true`.
+- **การจัดการประวัติฝั่งเซิร์ฟเวอร์**: ลดความซับซ้อนของโฟลว์แบบหลายรอบผ่าน `previous_interaction_id` เซิร์ฟเวอร์จะเปิดใช้สถานะโดยค่าเริ่มต้น (`store=true`) แต่คุณเลือกใช้ลักษณะการทำงานแบบไม่มีสถานะได้โดยการตั้งค่า `store=false`
+- **ขั้นตอนการดำเนินการที่สังเกตได้**: ขั้นตอนที่พิมพ์ทำให้การแก้ไขข้อบกพร่องของโฟลว์ที่ซับซ้อนเป็นเรื่องง่าย และแสดงผล UI สำหรับเหตุการณ์ระดับกลาง (เช่น ความคิดหรือวิดเจ็ตการค้นหา)
+- **การใช้เครื่องมือและเวิร์กโฟลว์แบบเป็น Agent**: รองรับการใช้เครื่องมือแบบหลายขั้นตอน การจัดการเป็นกลุ่ม และการให้เหตุผลที่ซับซ้อนผ่านขั้นตอนการดำเนินการที่พิมพ์
+- **งานที่ทำอยู่เบื้องหลังซึ่งใช้เวลานาน**: รองรับการส่งต่อการดำเนินการที่ใช้เวลานาน เช่น Deep Think และ Deep Research ไปยังกระบวนการเบื้องหลังโดยใช้ `background=true`
 
-## الإدخال/الإخراج الأساسي
+## อินพุต/เอาต์พุตพื้นฐาน
 
-يوضّح هذا القسم كيفية نقل طلب بسيط لإنشاء نص.
+ส่วนนี้แสดงวิธีเปลี่ยนคำขอการสร้างข้อความอย่างง่าย
 
-### قبل (`generateContent`)
+### ก่อน (`generateContent`)
 
-إنّ واجهة برمجة التطبيقات `generateContent` لا تحتفظ بأي حالة وتعرض الردّ مباشرةً. يغلّف بنية الرد الناتج في قائمة `candidates`، يحتوي كل منها على `content` مع قائمة `parts` ليتم تحليلها.
+`generateContent` API ไม่มีการเก็บสถานะและจะแสดงการตอบกลับโดยตรง โครงสร้างการตอบกลับจะรวมเอาต์พุตไว้ในรายการของ `candidates` ซึ่งแต่ละรายการจะมี `content` ที่มีรายการของ `parts` เพื่อแยกวิเคราะห์
 
 ### Python
 
@@ -105,11 +105,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-تعرض Interactions API مورد تفاعل مخزّنًا مع `steps`مخطط زمني. على الرغم من أنّه يمكنك فحص مصفوفة `steps` يدويًا للعثور على الأحداث الوسيطة، توفّر حِزم تطوير البرامج (SDK) من Google GenAI خصائص ملائمة مباشرةً في عنصر `Interaction` الذي يتم عرضه للوصول إلى الناتج النهائي.
+Interaction API จะแสดงผลแหล่งข้อมูลการโต้ตอบที่จัดเก็บไว้พร้อม`steps`
+ไทม์ไลน์ แม้ว่าคุณจะตรวจสอบอาร์เรย์ `steps` ด้วยตนเองเพื่อค้นหาเหตุการณ์ระดับกลางได้ แต่ Google GenAI SDK มีพร็อพเพอร์ตี้ที่สะดวก
+ในออบเจ็กต์ `Interaction` ที่ส่งคืนโดยตรงเพื่อให้เข้าถึงเอาต์พุตสุดท้ายได้
 
-إنّ أكثر خاصية ملائمة شيوعًا هي **`.output_text`** (سلسلة)، والتي تستخرج تلقائيًا وتدمج كتل `TextContent` متتالية في نهاية ردّ النموذج. على الرغم من أنّ هذه الطريقة فعّالة تمامًا للحصول على ردود بسيطة،
-إلا أنّها لا تتضمّن فقرات نصية سابقة مفصولة بمحتوى غير نصي (مثل
-الأفكار أو الصور أو الصوت أو طلبات استخدام الأدوات). بالنسبة إلى الردود المعقّدة أو المتداخلة المتعدّدة الوسائط، عليك تكرار `steps` يدويًا بدلاً من ذلك.
+พร็อพเพอร์ตี้ความสะดวกที่พบบ่อยที่สุดคือ **`.output_text`** (String) ซึ่งจะ
+แยกและรวมบล็อก `TextContent` ที่ต่อเนื่องกันโดยอัตโนมัติที่
+ส่วนท้ายของการตอบกลับของโมเดล แม้ว่าวิธีนี้จะใช้ได้ดีกับคำตอบง่ายๆ
+แต่ก็ไม่ได้รวมบล็อกข้อความก่อนหน้าซึ่งคั่นด้วยเนื้อหาที่ไม่ใช่ข้อความ (เช่น
+ความคิด รูปภาพ เสียง หรือการเรียกใช้เครื่องมือ) สำหรับคำตอบแบบมัลติโมดอลที่ซับซ้อนหรือสลับกัน คุณต้องวนซ้ำผ่าน `steps` ด้วยตนเองแทน
 
 ### Python
 
@@ -119,7 +123,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash", input="Tell me a joke."
+    model="gemini-3.6-flash", input="Tell me a joke."
 )
 
 print(interaction.output_text)
@@ -133,7 +137,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 let interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Tell me a joke.'
 });
 
@@ -148,7 +152,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Tell me a joke."
 }'
 
@@ -181,17 +185,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## المحادثات المتعدّدة الجولات
+## การสนทนาแบบหลายรอบ
 
-تخزّن Interactions API التفاعلات تلقائيًا، ما يتيح إدارة الحالة من جهة الخادم للمحادثات المتعدّدة الجولات.
+Interactions API จะจัดเก็บการโต้ตอบโดยค่าเริ่มต้น ซึ่งช่วยให้การจัดการสถานะฝั่งเซิร์ฟเวอร์สำหรับการสนทนาแบบหลายรอบ
 
-### قبل (`generateContent`)
+### ก่อน (`generateContent`)
 
-في `generateContent`، عليك إدارة سجلّ المحادثات يدويًا باستخدام مصفوفة `contents` أو أداة مساعدة للمحادثة من جهة العميل.
+ใน `generateContent` คุณต้องจัดการประวัติการสนทนาด้วยตนเองโดยใช้อาร์เรย์ `contents` หรือตัวช่วยแชทฝั่งไคลเอ็นต์
 
 ### Python
 
-**استخدام أداة مساعدة الدردشة (يُنصح به)**
+**ใช้แชทช่วย (แนะนำ)**
 
 ```
 from google import genai
@@ -206,7 +210,7 @@ response2 = chat.send_message("What is my name?")
 print(response2.text)
 ```
 
-**إدارة السجلّ يدويًا**
+**การจัดการประวัติด้วยตนเอง**
 
 ```
 from google import genai
@@ -234,7 +238,7 @@ print(response.text)
 
 ### JavaScript
 
-**استخدام أداة مساعدة الدردشة (يُنصح به)**
+**ใช้แชทช่วย (แนะนำ)**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -249,7 +253,7 @@ response = await chat.sendMessage({ message: 'What is my name?' });
 console.log(response.text);
 ```
 
-**إدارة السجلّ يدويًا**
+**การจัดการประวัติด้วยตนเอง**
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -301,9 +305,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (واجهة Interactions API)
+### After (Interactions API)
 
-تتولّى Interactions API إدارة الحالة على الخادم. يمكنك مواصلة المحادثة من خلال الإشارة إلى `previous_interaction_id`.
+Interactions API จะจัดการสถานะในเซิร์ฟเวอร์ คุณสนทนาต่อได้โดยอ้างอิงถึง `previous_interaction_id`
 
 ### Python
 
@@ -313,12 +317,12 @@ from google import genai
 client = genai.Client()
 
 interaction1 = client.interactions.create(
-    model="gemini-3.5-flash", input="Hi, my name is Phil."
+    model="gemini-3.6-flash", input="Hi, my name is Phil."
 )
 print("Response 1:", interaction1.output_text)
 
 interaction2 = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     previous_interaction_id=interaction1.id,
     input="What is my name?",
 )
@@ -333,13 +337,13 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 let interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Hi, my name is Phil.'
 });
 console.log("Response 1:", interaction.output_text);
 
 interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     previous_interaction_id: interaction.id,
     input: 'What is my name?'
 });
@@ -354,7 +358,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Hi, my name is Phil."
 }'
 
@@ -363,7 +367,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "previous_interaction_id": "int_123",
     "input": "What is my name?"
 }'
@@ -396,13 +400,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## إدخالات متعددة الوسائط
+## อินพุตหลายรูปแบบ
 
-تتيح كلتا واجهتَي برمجة التطبيقات إدخال بيانات متعددة الوسائط (نصوص وصور وفيديوهات وما إلى ذلك).
+ทั้ง 2 API รองรับอินพุตหลายรูปแบบ (ข้อความ รูปภาพ วิดีโอ ฯลฯ)
 
-### قبل (`generateContent`)
+### ก่อน (`generateContent`)
 
-في `generateContent`، يمكنك تمرير قائمة `parts` ضمن مصفوفة `contents`. تعرض الاستجابة الناتج في `parts` للمرشّح الأول.
+ใน `generateContent` คุณจะส่งรายการ `parts` ภายในอาร์เรย์ `contents` การตอบกลับจะแสดงเอาต์พุตใน `parts` ของผู้สมัครคนแรก
 
 ### Python
 
@@ -490,9 +494,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (واجهة Interactions API)
+### After (Interactions API)
 
-في Interactions API، يمكنك تمرير مصفوفة إلى الحقل `input`. يمكنك استرداد محتوى الإخراج من خلال العثور على الخطوة `model_output` في المخطط الزمني.
+ใน Interactions API คุณจะส่งอาร์เรย์ไปยังฟิลด์ `input` คุณดึงเนื้อหาเอาต์พุตได้โดยค้นหา`model_output`ในไทม์ไลน์
 
 ### Python
 
@@ -507,7 +511,7 @@ with open("sample.jpg", "rb") as f:
 image_b64 = base64.b64encode(image_bytes).decode("utf-8")
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {
             "type": "image",
@@ -531,7 +535,7 @@ const client = new GoogleGenAI({});
 const imageBytes = fs.readFileSync('sample.jpg').toString('base64');
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: [
         {
             type: 'image',
@@ -555,7 +559,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
         {
             "type": "image",
@@ -602,13 +606,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## ناتج منظَّم
+## เอาต์พุตที่มีโครงสร้าง
 
-لجعل النموذج يعرض JSON مطابقًا لمخطط معيّن، اضبط تنسيق الرد.
+หากต้องการให้โมเดลแสดงผล JSON ที่ตรงกับสคีมาที่เฉพาะเจาะจง ให้กำหนดค่ารูปแบบการตอบกลับ
 
-### قبل (`generateContent`)
+### ก่อน (`generateContent`)
 
-في `generateContent`، يمكنك ضبط تنسيق الإخراج باستخدام الحقلَين `response_mime_type` و`response_schema` المضمّنَين في العنصر `config` (أو `generationConfig`).
+ใน `generateContent` คุณจะกำหนดค่ารูปแบบเอาต์พุตโดยใช้ฟิลด์ `response_mime_type` และ `response_schema` ที่ซ้อนอยู่ภายในออบเจ็กต์ `config` (หรือ `generationConfig`)
 
 ### Python
 
@@ -708,9 +712,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (واجهة Interactions API)
+### After (Interactions API)
 
-في Interactions API، يتم نقل عناصر التحكّم في تنسيق الإخراج إلى مصفوفة `response_format` على أعلى مستوى.
+ใน Interactions API การควบคุมรูปแบบเอาต์พุตจะย้ายไปอยู่ที่อาร์เรย์ `response_format` ระดับบนสุด
 
 ### Python
 
@@ -725,7 +729,7 @@ class Recipe(BaseModel):
     ingredients: list[str]
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Give me a recipe for chocolate chip cookies.",
     response_format=[
         {
@@ -747,7 +751,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Give me a recipe for chocolate chip cookies.',
     response_format: [
         {
@@ -778,7 +782,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Give me a recipe for chocolate chip cookies.",
     "response_format": [
         {
@@ -822,13 +826,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## إنشاء محتوى متعدد الوسائط
+## การสร้างแบบหลายรูปแบบ
 
-عند إنشاء محتوى بتنسيقات أخرى غير النص (مثل الصور أو الصوت)، يكمن الاختلاف الأساسي في طريقة تنظيم الوسائط التي تم إنشاؤها في الرد.
+เมื่อสร้างเนื้อหาในรูปแบบอื่นๆ นอกเหนือจากข้อความ (เช่น รูปภาพหรือเสียง) ความแตกต่างหลักคือวิธีที่คำตอบจัดโครงสร้างสื่อที่สร้างขึ้น
 
-### قبل (`generateContent`)
+### ก่อน (`generateContent`)
 
-في `generateContent`، يعرض الردّ الوسائط التي تم إنشاؤها مباشرةً في `parts` للمرشّح، وعادةً ما تكون على شكل بيانات base64 في `inlineData`.
+ใน `generateContent` คำตอบจะแสดงสื่อที่สร้างขึ้นโดยตรงใน `parts` ของผู้สมัคร โดยปกติจะเป็นข้อมูล base64 ใน `inlineData`
 
 ```
 # Response structure concept
@@ -853,9 +857,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-### After (واجهة Interactions API)
+### After (Interactions API)
 
-في Interactions API، تظهر الوسائط التي تم إنشاؤها كعناصر مميّزة ضمن مصفوفة `content` في خطوة `model_output` في المخطّط الزمني، مع الحفاظ على التسلسل الزمني للتفاعل.
+ใน Interactions API สื่อที่สร้างขึ้นจะปรากฏเป็นรายการที่แตกต่างกันภายใน`content`อาร์เรย์ของ`model_output`ขั้นตอนในไทม์ไลน์ ซึ่งจะรักษาลำดับเวลาของการโต้ตอบไว้
 
 ```
 # Response structure concept
@@ -881,15 +885,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-يساعد ذلك في الحفاظ على اتساق تحليل الردود مع طريقة التعامل مع المدخلات ومخرجات النصوص، فكل شيء يمثّل خطوة في المخطط الزمني.
+วิธีนี้จะช่วยให้การแยกวิเคราะห์การตอบกลับสอดคล้องกับวิธีจัดการอินพุตและเอาต์พุตข้อความ ซึ่งทุกอย่างจะเป็นขั้นตอนในไทม์ไลน์
 
-## الأدوات من جهة الخادم
+## เครื่องมือฝั่งเซิร์ฟเวอร์
 
-يتوافق Gemini مع أدوات مضمّنة من جهة الخادم، مثل ميزة تحديد مصدر المعلومات الخاصة بـ "بحث Google". ويكمن الاختلاف الأساسي في كيفية تمثيل الردّ لتنفيذ الأداة.
+Gemini รองรับเครื่องมือฝั่งเซิร์ฟเวอร์ในตัว เช่น การอ้างอิงข้อมูลของ Google Search ความแตกต่างหลักคือวิธีที่คำตอบแสดงการดำเนินการของเครื่องมือ
 
-### قبل (`generateContent`)
+### ก่อน (`generateContent`)
 
-في `generateContent`، تكون أدوات جانب الخادم غير شفافة إلى حد كبير. يمكنك تفعيل الأداة والحصول على إجابة نهائية باستخدام عنصر `groundingMetadata` منفصل. الأهم من ذلك أنّ الاقتباسات ليست مضمّنة، بل `groundingSupports` تستخدم فهارس الأحرف لربط مقاطع النص بالمصادر على الويب في `groundingChunks`.
+ใน `generateContent` เครื่องมือฝั่งเซิร์ฟเวอร์ส่วนใหญ่จะทำงานแบบไม่โปร่งใส คุณเปิดใช้เครื่องมือและรับคำตอบสุดท้ายพร้อม`groundingMetadata`ออบเจ็กต์แยกต่างหาก ที่สำคัญคือ การอ้างอิงไม่ได้อยู่ในบรรทัด `groundingSupports` ใช้ดัชนีอักขระเพื่อแมปข้อความกลับไปยังแหล่งที่มาบนเว็บใน `groundingChunks`
 
 ### Python
 
@@ -997,11 +1001,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (واجهة Interactions API)
+### After (Interactions API)
 
-في Interactions API، توفّر الأدوات من جهة الخادم شفافية كاملة للمخطط الزمني. تسجّل واجهة برمجة التطبيقات الطلب والنتيجة كتنفيذين منفصلين `steps` (`google_search_call` و`google_search_result`)، ما يوضّح البيانات التي استردّها النموذج بالضبط.
+ใน Interactions API เครื่องมือฝั่งเซิร์ฟเวอร์จะให้ความโปร่งใสของไทม์ไลน์ทั้งหมด API จะบันทึกการเรียกและผลลัพธ์เป็นการดำเนินการที่แตกต่างกัน `steps` (`google_search_call` และ `google_search_result`) ซึ่งจะแสดงข้อมูลที่โมเดลดึงมาอย่างชัดเจน
 
-بالإضافة إلى ذلك، تعرض واجهة برمجة التطبيقات الاقتباسات **ضمن النص**. بدلاً من ربط الفهارس من عنصر بيانات وصفية منفصل، يحتوي عنصر النص ضمن الخطوة `model_output` على مصفوفة `annotations` خاصة به ترتبط مباشرةً بالمصدر.
+นอกจากนี้ API ยังแสดงการอ้างอิง**ในบรรทัด**ด้วย รายการข้อความภายใน`model_output` ขั้นตอนจะมีอาร์เรย์ `annotations` ของตัวเองที่ลิงก์ไปยังแหล่งที่มาโดยตรงแทนที่จะแมปดัชนีจากออบเจ็กต์ข้อมูลเมตาแยกต่างหาก
 
 ### Python
 
@@ -1011,7 +1015,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Who won Euro 2024?",
     tools=[{"type": "google_search"}],
 )
@@ -1034,7 +1038,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Who won Euro 2024?',
     tools: [{ type: 'google_search' }]
 });
@@ -1061,7 +1065,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Who won Euro 2024?",
     "tools": [{"type": "google_search"}]
 }'
@@ -1112,13 +1116,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## استدعاء الدالة
+## การเรียกใช้ฟังก์ชัน
 
-تم أيضًا تغيير بنية طلبات الدوال ونتائجها لتتلاءم مع مخطط "الخطوات".
+นอกจากนี้ โครงสร้างของการเรียกใช้ฟังก์ชันและผลลัพธ์ยังเปลี่ยนไปเพื่อให้เข้ากับสคีมาขั้นตอนด้วย
 
-### قبل (`generateContent`)
+### ก่อน (`generateContent`)
 
-في `generateContent`، يعرض الردّ طلبات الدوال ضمن المرشّحين.\* {Python}
+ใน `generateContent` คำตอบจะแสดงการเรียกใช้ฟังก์ชันภายในผู้สมัคร\* {Python}
 
 ```
 ```python
@@ -1252,9 +1256,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 }
 ```
 
-### After (واجهة Interactions API)
+### After (Interactions API)
 
-أصبحت عمليات استدعاء الأدوات ونتائجها خطوات منفصلة في المخطط الزمني.
+ตอนนี้การเรียกใช้เครื่องมือและผลลัพธ์เป็นขั้นตอนที่แยกกันในไทม์ไลน์แล้ว
 
 ### Python
 
@@ -1276,7 +1280,7 @@ weather_tool = {
 }
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="What's the weather in Boston?",
     tools=[weather_tool],
 )
@@ -1288,7 +1292,7 @@ for step in interaction.steps:
         result = "52°F and rain"
 
         interaction = client.interactions.create(
-            model="gemini-3.5-flash",
+            model="gemini-3.6-flash",
             previous_interaction_id=interaction.id,
             input=[
                 {
@@ -1323,7 +1327,7 @@ const weatherTool = {
 };
 
 const interaction = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: "What's the weather in Boston?",
     tools: [weatherTool]
 });
@@ -1335,7 +1339,7 @@ for (const step of interaction.steps) {
         const result = "52°F and rain";
 
         const nextInteraction = await client.interactions.create({
-            model: 'gemini-3.5-flash',
+            model: 'gemini-3.6-flash',
             previous_interaction_id: interaction.id,
             input: [
                 {
@@ -1360,7 +1364,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "What's the weather in Boston?",
     "tools": [{
         "type": "function",
@@ -1403,7 +1407,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "previous_interaction_id": "int_001",
     "input": {
         "type": "function_result",
@@ -1439,15 +1443,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 }
 ```
 
-## البث
+## สตรีมมิง
 
-أحد الاختلافات الرئيسية في البث هو أنّ Interactions API تستخدم نقطة النهاية نفسها مع `"stream": true` في نص الطلب، بينما كانت واجهة `generateContent` API تتطلّب استدعاء نقطة نهاية مخصّصة (`:streamGenerateContent`).
+ความแตกต่างที่สำคัญในการสตรีมคือ Interactions API ใช้ปลายทางเดียวกันกับ `"stream": true` ในเนื้อหาคำขอ ในขณะที่ `generateContent` API ต้องเรียกปลายทางเฉพาะ (`:streamGenerateContent`)
 
-بالإضافة إلى ذلك، تستخدم أحداث البث الآن أنواعًا متخصصة لمراقبة دورة حياة التفاعل وتتبُّع خطوات التنفيذ على طول المخطط الزمني.
+นอกจากนี้ ตอนนี้กิจกรรมการสตรีมยังใช้ประเภทเฉพาะเพื่อตรวจสอบวงจรการโต้ตอบและติดตามขั้นตอนการดำเนินการตามไทม์ไลน์ด้วย
 
-### قبل (`generateContentStream`)
+### ก่อน (`generateContentStream`)
 
-باستخدام `generateContent`، يمكنك استهلاك مجموعة من أجزاء الردود.
+เมื่อใช้ `generateContent` คุณจะใช้สตรีมของก้อนการตอบกลับ
 
 ### Python
 
@@ -1505,9 +1509,9 @@ event: content.stop
 data: {"event_type": "content.stop", "index": 1}
 ```
 
-### After (واجهة Interactions API)
+### After (Interactions API)
 
-في Interactions API، تستخدم ميزة البث أحداثًا يتم إرسالها من الخادم (SSE) وأنواعًا متخصّصة من دلتا لتمثيل خطوات التنفيذ أثناء حدوثها.
+ใน Interactions API การสตรีมจะใช้เหตุการณ์ที่เซิร์ฟเวอร์ส่ง (SSE) และประเภทเดลต้าเฉพาะเพื่อแสดงขั้นตอนการดำเนินการตามที่เกิดขึ้น
 
 ### Python
 
@@ -1517,7 +1521,7 @@ from google import genai
 client = genai.Client()
 
 stream = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Tell me a story",
     stream=True,
 )
@@ -1538,7 +1542,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: 'Tell me a story',
     stream: true,
 });
@@ -1556,7 +1560,7 @@ for await (const event of stream) {
 
 ### REST
 
-# Example SSE stream output
+# เอาต์พุตสตรีม SSE ตัวอย่าง
 **event: interaction.created
 data: {"type": "interaction.created", "interaction": {"id": "int\_xyz", "status": "created"}}
 event: interaction.in\_progress
@@ -1577,13 +1581,13 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int\_xyz", "status": "completed", "usage": {"prompt\_tokens": 10, "completion\_tokens": 5, "total\_tokens": 15}}}**
 ```
 
-### أدوات البث المباشر واستدعاء الدوال
+### เครื่องมือการสตรีมและการเรียกฟังก์ชัน
 
-لقد تغيّرت طريقة عمل الأدوات في البث بشكل كبير من `generateContent` لتوفير تحكّم أكثر دقة وإمكانية وصول أكبر.
+ลักษณะการทำงานของเครื่องมือในสตรีมเปลี่ยนไปอย่างมากจาก `generateContent` เพื่อให้การควบคุมและการเข้าถึงที่ละเอียดยิ่งขึ้น
 
-#### قبل (`generateContent`)
+#### ก่อน (`generateContent`)
 
-باستخدام `generateContent`، تصل عمليات استدعاء الدوال التي يتم نقلها بالبث كاملةً في جزء واحد. لم يكن بإمكانك رؤية الوسيطات التي يتم إنشاؤها في الوقت الفعلي، لذا كان المعالج يتحقّق ببساطة من اكتمال العنصر `functionCall`.
+เมื่อใช้ `generateContent` ฟังก์ชันการโทรแบบสตรีมมิงจะมาถึงอย่างสมบูรณ์ในก้อนเดียว คุณไม่สามารถดูอาร์กิวเมนต์ที่สร้างขึ้นแบบเรียลไทม์ได้ ตัวแฮนเดิลจึงเพียงตรวจสอบออบเจ็กต์ `functionCall` ที่สมบูรณ์
 
 ### Python
 
@@ -1647,9 +1651,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5
 {"candidates": [{"content": {"parts": [{"functionCall": {"name": "get_weather", "args": {"location": "Boston, MA"}}}]}}]}
 ```
 
-#### After (واجهة Interactions API)
+#### After (Interactions API)
 
-تبث واجهة برمجة التطبيقات Interactions API وسيطات استدعاء الدوال حرفًا بحرف كأحداث `arguments`. تتضمّن دورة حياة الأداة بأكملها سلسلة من الخطوات المميّزة، وهي: التفكير، والطلب، والنتيجة، والإخراج.
+Interactions API จะสตรีมอาร์กิวเมนต์การเรียกฟังก์ชันทีละอักขระเป็นเหตุการณ์ `arguments` วงจรทั้งหมดของเครื่องมือ ซึ่งประกอบด้วยความคิด การเรียกใช้ ผลลัพธ์ และเอาต์พุต จะทำงานเป็นชุดขั้นตอนที่แตกต่างกัน
 
 ### Python
 
@@ -1659,7 +1663,7 @@ from google import genai
 client = genai.Client()
 
 stream = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="What's the weather in Boston?",
     tools=[get_weather_tool],
     stream=True,
@@ -1686,7 +1690,7 @@ import { GoogleGenAI } from '@google/genai';
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-    model: 'gemini-3.5-flash',
+    model: 'gemini-3.6-flash',
     input: "What's the weather in Boston?",
     tools: [getWeatherTool],
     stream: true,
@@ -1717,7 +1721,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta2/interactions" \
 -H "Content-Type: application/json" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "What is the weather in Boston?",
     "tools": [{"type": "function", "name": "get_weather", "parameters": {"type": "object", "properties": {"location": {"type": "string"}}}}],
     "stream": true
@@ -1794,12 +1798,12 @@ event: interaction.completed
 data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 256, "completion_tokens": 128, "total_tokens": 384}}}
 ```
 
-إرسال ملاحظات
+ส่งความคิดเห็น
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-تاريخ التعديل الأخير: 2026-07-08 (حسب التوقيت العالمي المتفَّق عليه)
+อัปเดตล่าสุด 2026-07-30 UTC
 
-هل تريد مشاركة ملاحظاتك معنا؟
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-08 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

@@ -1,66 +1,64 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=vi
-fetched_at: 2026-07-27T04:41:37.327601+00:00
-title: "L\u01b0u ng\u1eef c\u1ea3nh v\u00e0o b\u1ed9 nh\u1edb \u0111\u1ec7m \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=tr
+fetched_at: 2026-08-03T04:31:09.531045+00:00
+title: "Ba\u011flam\u0131 \u00f6nbelle\u011fe alma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-# Lưu ngữ cảnh vào bộ nhớ đệm
+# Bağlamı önbelleğe alma
 
-Trong quy trình AI thông thường, bạn có thể truyền đi truyền lại các mã thông báo đầu vào giống nhau cho một mô hình. Gemini API cung cấp 2 cơ chế lưu vào bộ nhớ đệm:
+Tipik bir yapay zeka iş akışında, aynı giriş jetonlarını bir modele tekrar tekrar iletebilirsiniz. Gemini API iki farklı önbelleğe alma mekanizması sunar:
 
-- Lưu vào bộ nhớ đệm ngầm ẩn (tự động bật trên Gemini 2.5 và các mô hình mới hơn, không đảm bảo tiết kiệm chi phí)
-- Lưu vào bộ nhớ đệm rõ ràng (có thể bật theo cách thủ công trên hầu hết các mô hình, đảm bảo tiết kiệm chi phí)
+- Örtülü önbelleğe alma (Gemini 2.5 ve daha yeni modellerde otomatik olarak etkinleştirilir, maliyet tasarrufu garantisi yoktur)
+- Açık önbelleğe alma (Çoğu modelde manuel olarak etkinleştirilebilir, maliyet tasarrufu garantisi)
 
-Tính năng lưu vào bộ nhớ đệm rõ ràng hữu ích trong trường hợp bạn muốn đảm bảo tiết kiệm chi phí, nhưng cần thêm một số công việc cho nhà phát triển.
+Açık önbelleğe alma, maliyet tasarrufu sağlamak istediğiniz ancak geliştiricinin biraz daha fazla çalışması gereken durumlarda faydalıdır.
 
-## Lưu vào bộ nhớ đệm ngầm ẩn
+## Örtülü önbelleğe alma
 
-Tính năng lưu vào bộ nhớ đệm ngầm ẩn được bật theo mặc định cho tất cả các mô hình Gemini 2.5 và mới hơn. Chúng tôi tự động chuyển khoản tiết kiệm chi phí nếu yêu cầu của bạn truy cập vào bộ nhớ đệm. Bạn không cần làm gì để bật tính năng này. Số lượng mã thông báo đầu vào tối thiểu để lưu vào bộ nhớ đệm theo bối cảnh được liệt kê trong bảng sau cho từng mô hình:
+Örtülü önbelleğe alma, tüm Gemini 2.5 ve daha yeni modeller için varsayılan olarak etkindir. İsteğiniz önbelleklere isabet ederse maliyet tasarruflarını otomatik olarak aktarırız. Bu özelliği etkinleştirmek için herhangi bir işlem yapmanız gerekmez. Bağlam önbelleğe alma için minimum giriş jetonu sayısı, her model için aşağıdaki tabloda listelenmiştir:
 
-| Mô hình | Giới hạn mã thông báo tối thiểu |
+| Model | Minimum jeton sınırı |
 | --- | --- |
 | Gemini 3.5 Flash | 4096 |
-| Bản xem trước Gemini 3.1 Pro | 4096 |
+| Gemini 3.1 Pro Önizlemesi | 4096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-Cách tăng cơ hội truy cập vào bộ nhớ đệm ngầm ẩn:
+Örtülü önbellek isabeti olasılığını artırmak için:
 
-- Thử đặt nội dung lớn và phổ biến ở đầu lời nhắc
-- Thử gửi yêu cầu có tiền tố tương tự trong một khoảng thời gian ngắn
+- Büyük ve yaygın içerikleri isteminizin başına eklemeyi deneyin.
+- Kısa süre içinde benzer öneklere sahip istekler göndermeye çalışmak
 
-Bạn có thể xem số lượng mã thông báo đã truy cập vào bộ nhớ đệm trong trường `usage_metadata` của đối tượng phản hồi.
+Yanıt nesnesinin `usage_metadata` alanında, önbellek isabeti olan jetonların sayısını görebilirsiniz.
 
-## Lưu vào bộ nhớ đệm rõ ràng
+## Açık önbelleğe alma
 
-Khi sử dụng tính năng lưu vào bộ nhớ đệm rõ ràng của Gemini API, bạn có thể truyền một số nội dung vào mô hình một lần, lưu mã thông báo đầu vào vào bộ nhớ đệm, sau đó tham chiếu đến các mã thông báo đã lưu vào bộ nhớ đệm cho các yêu cầu tiếp theo. Ở một số lượng nhất định, việc sử dụng mã thông báo đã lưu vào bộ nhớ đệm sẽ có chi phí thấp hơn so với việc truyền cùng một tập hợp mã thông báo nhiều lần.
+Gemini API'nin açık önbelleğe alma özelliğini kullanarak bazı içerikleri modele bir kez iletebilir, giriş jetonlarını önbelleğe alabilir ve ardından sonraki istekler için önbelleğe alınmış jetonlara başvurabilirsiniz. Belirli hacimlerde, önbelleğe alınmış jetonları kullanmak, aynı jeton gövdesini tekrar tekrar iletmekten daha düşük maliyetlidir.
 
-Khi lưu một tập hợp mã thông báo vào bộ nhớ đệm, bạn có thể chọn thời gian tồn tại của bộ nhớ đệm trước khi các mã thông báo tự động bị xoá. Thời gian lưu vào bộ nhớ đệm này được gọi là *thời gian tồn tại* (TTL). Nếu bạn không đặt thời gian này, TTL sẽ mặc định là 1 giờ. Chi phí lưu vào bộ nhớ đệm phụ thuộc vào kích thước mã thông báo đầu vào và thời gian bạn muốn các mã thông báo tồn tại.
+Bir dizi jetonu önbelleğe aldığınızda, jetonlar otomatik olarak silinmeden önce önbelleğin ne kadar süreyle var olmasını istediğinizi seçebilirsiniz. Bu önbelleğe alma süresine *geçerlilik süresi* (TTL) adı verilir. Ayarlanmazsa TTL varsayılan olarak 1 saat olur. Önbelleğe alma maliyeti, giriş jetonu boyutuna ve jetonların ne kadar süreyle kalıcı olmasını istediğinize bağlıdır.
 
-Phần này giả định rằng bạn đã cài đặt Gemini SDK (hoặc đã cài đặt curl)
-và đã định cấu hình khoá API, như trong
-[hướng dẫn Bắt đầu](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi).
+Bu bölümde, bir Gemini SDK'sını yüklediğiniz (veya curl'ü yüklediğiniz) ve [Başlangıç kılavuzunda](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr) gösterildiği gibi bir API anahtarı yapılandırdığınız varsayılır.
 
-### Tạo nội dung bằng bộ nhớ đệm
+### Önbelleği kullanarak içerik oluşturma
 
 ### Python
 
-Ví dụ sau đây trình bày cách tạo nội dung bằng hướng dẫn hệ thống và tệp video đã lưu vào bộ nhớ đệm.
+Aşağıdaki örnekte, önbelleğe alınmış bir sistem talimatı ve video dosyası kullanarak nasıl içerik oluşturulacağı gösterilmektedir.
 
-### Video
+### Videolar
 
 ```
 import os
@@ -89,7 +87,7 @@ while video_file.state.name == 'PROCESSING':
 
 print(f'Video processing complete: {video_file.uri}')
 
-model='models/gemini-3.5-flash'
+model='models/gemini-3.6-flash'
 
 # Create a cache with a 5 minute TTL (300 seconds)
 cache = client.caches.create(
@@ -119,7 +117,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### PDF
+### PDF'ler
 
 ```
 from google import genai
@@ -139,7 +137,7 @@ document = client.files.upload(
   config=dict(mime_type='application/pdf')
 )
 
-model_name = "gemini-3.5-flash"
+model_name = "gemini-3.6-flash"
 system_instruction = "You are an expert analyzing transcripts."
 
 # Create a cached content object
@@ -167,7 +165,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-Ví dụ sau đây trình bày cách tạo nội dung bằng hướng dẫn hệ thống và tệp văn bản đã lưu vào bộ nhớ đệm.
+Aşağıdaki örnekte, önbelleğe alınmış bir sistem talimatı ve bir metin dosyası kullanarak nasıl içerik oluşturulacağı gösterilmektedir.
 
 ```
 import {
@@ -185,7 +183,7 @@ async function main() {
   });
   console.log("Uploaded file name:", doc.name);
 
-  const modelName = "gemini-3.5-flash";
+  const modelName = "gemini-3.6-flash";
   const cache = await ai.caches.create({
     model: modelName,
     config: {
@@ -208,7 +206,7 @@ await main();
 
 ### Go
 
-Ví dụ sau đây trình bày cách tạo nội dung bằng bộ nhớ đệm.
+Aşağıdaki örnekte, önbellek kullanarak nasıl içerik oluşturulacağı gösterilmektedir.
 
 ```
 package main
@@ -231,7 +229,7 @@ func main() {
         log.Fatal(err)
     }
 
-    modelName := "gemini-3.5-flash"
+    modelName := "gemini-3.6-flash"
     document, err := client.Files.UploadFromPath(
         ctx,
         "media/a11.txt",
@@ -278,14 +276,14 @@ func main() {
 
 ### REST
 
-Ví dụ sau đây trình bày cách tạo bộ nhớ đệm rồi sử dụng bộ nhớ đệm đó để tạo nội dung.
+Aşağıdaki örnekte, nasıl önbellek oluşturulacağı ve ardından içerik oluşturmak için nasıl kullanılacağı gösterilmektedir.
 
-### Video
+### Videolar
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
 echo '{
-  "model": "models/gemini-3.5-flash",
+  "model": "models/gemini-3.6-flash",
   "contents":[
     {
       "parts":[
@@ -316,7 +314,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/cachedContents?ke
 
 CACHE_NAME=$(cat cache.json | grep '"name":' | cut -d '"' -f 4 | head -n 1)
 
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -d '{
       "contents": [
@@ -331,14 +329,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
     }'
 ```
 
-### PDF
+### PDF'ler
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
 DISPLAY_NAME="A11_Mission_Report"
 SYSTEM_INSTRUCTION="You are an expert at analyzing transcripts."
 PROMPT="Please summarize this transcript"
-MODEL="models/gemini-3.5-flash"
+MODEL="models/gemini-3.6-flash"
 TTL="300s"
 
 # Download the PDF
@@ -429,22 +427,20 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Liệt kê bộ nhớ đệm
+### Önbellekleri listeleme
 
-Bạn không thể truy xuất hoặc xem nội dung đã lưu vào bộ nhớ đệm, nhưng có thể truy xuất
-siêu dữ liệu bộ nhớ đệm (`name`, `model`, `display_name`, `usage_metadata`,
-`create_time`, `update_time` và `expire_time`).
+Önbelleğe alınmış içerikleri almak veya görüntülemek mümkün değildir ancak önbellek meta verilerini (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time` ve `expire_time`) alabilirsiniz.
 
 ### Python
 
-Để liệt kê siêu dữ liệu cho tất cả bộ nhớ đệm đã tải lên, hãy sử dụng `CachedContent.list()`:
+Yüklenen tüm önbelleklerin meta verilerini listelemek için `CachedContent.list()` kullanın:
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Để tìm nạp siêu dữ liệu cho một đối tượng bộ nhớ đệm, nếu bạn biết tên của đối tượng đó, hãy sử dụng `get`:
+Adını biliyorsanız bir önbellek nesnesinin meta verilerini getirmek için `get` kullanın:
 
 ```
 client.caches.get(name=name)
@@ -452,7 +448,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Để liệt kê siêu dữ liệu cho tất cả bộ nhớ đệm đã tải lên, hãy sử dụng `GoogleGenAI.caches.list()`:
+Yüklenen tüm önbelleklerin meta verilerini listelemek için `GoogleGenAI.caches.list()` kullanın:
 
 ```
 console.log("My caches:");
@@ -469,7 +465,7 @@ while (true) {
 
 ### Go
 
-Ví dụ sau đây liệt kê tất cả bộ nhớ đệm.
+Aşağıdaki örnekte tüm önbellekler listelenmektedir.
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -482,7 +478,7 @@ for _, item := range caches {
 }
 ```
 
-Ví dụ sau đây liệt kê bộ nhớ đệm bằng kích thước trang là 2.
+Aşağıdaki örnekte, sayfa boyutu 2 olan önbellekler listelenmektedir.
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -515,13 +511,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Cập nhật bộ nhớ đệm
+### Önbelleği güncelleme
 
-Bạn có thể đặt `ttl` hoặc `expire_time` mới cho bộ nhớ đệm. Bạn không thể thay đổi bất kỳ thông tin nào khác về bộ nhớ đệm.
+Önbellek için yeni bir `ttl` veya `expire_time` ayarlayabilirsiniz. Önbellekle ilgili başka bir şeyin değiştirilmesi desteklenmez.
 
 ### Python
 
-Ví dụ sau đây trình bày cách cập nhật `ttl` của bộ nhớ đệm bằng `client.caches.update()`.
+Aşağıdaki örnekte, `client.caches.update()` kullanılarak bir önbelleğin `ttl` değerinin nasıl güncelleneceği gösterilmektedir.
 
 ```
 from google import genai
@@ -535,10 +531,7 @@ client.caches.update(
 )
 ```
 
-Để đặt thời gian hết hạn, hệ thống sẽ chấp nhận đối tượng `datetime` hoặc chuỗi ngày giờ ở định dạng ISO (`dt.isoformat()`, chẳng hạn như
-`2025-01-27T16:02:36.473528+00:00`). Thời gian của bạn phải bao gồm múi giờ
-(`datetime.utcnow()` không đính kèm múi giờ,
-`datetime.now(datetime.timezone.utc)` có đính kèm múi giờ).
+Süre sonunu ayarlamak için `datetime` nesnesi veya ISO biçimli bir tarih/saat dizesi (`dt.isoformat()`, örneğin `2025-01-27T16:02:36.473528+00:00`) kabul edilir. Zamanınız bir saat dilimi içermelidir (`datetime.utcnow()` saat dilimi eklemez, `datetime.now(datetime.timezone.utc)` saat dilimi ekler).
 
 ```
 from google import genai
@@ -558,7 +551,7 @@ client.caches.update(
 
 ### JavaScript
 
-Ví dụ sau đây trình bày cách cập nhật `ttl` của bộ nhớ đệm bằng `GoogleGenAI.caches.update()`.
+Aşağıdaki örnekte, `GoogleGenAI.caches.update()` kullanılarak bir önbelleğin `ttl` değerinin nasıl güncelleneceği gösterilmektedir.
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -571,7 +564,7 @@ console.log("After update (TTL):", updatedCache);
 
 ### Go
 
-Ví dụ sau đây trình bày cách cập nhật `TTL` của bộ nhớ đệm.
+Aşağıdaki örnekte, bir önbelleğin `TTL` değerinin nasıl güncelleneceği gösterilmektedir.
 
 ```
 // Update the TTL (2 hours).
@@ -587,7 +580,7 @@ fmt.Println(cache)
 
 ### REST
 
-Ví dụ sau đây trình bày cách cập nhật `ttl` của bộ nhớ đệm.
+Aşağıdaki örnekte, bir önbelleğin `ttl` değerinin nasıl güncelleneceği gösterilmektedir.
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -595,9 +588,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Xoá bộ nhớ đệm
+### Önbelleği silme
 
-Dịch vụ lưu vào bộ nhớ đệm cung cấp thao tác xoá để xoá nội dung khỏi bộ nhớ đệm theo cách thủ công. Ví dụ sau đây trình bày cách xoá bộ nhớ đệm:
+Önbelleğe alma hizmeti, içeriği önbellekten manuel olarak kaldırmak için silme işlemi sağlar. Aşağıdaki örnekte önbelleğin nasıl silineceği gösterilmektedir:
 
 ### Python
 
@@ -627,49 +620,44 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### Lưu vào bộ nhớ đệm rõ ràng bằng thư viện OpenAI
+### OpenAI kitaplığını kullanarak açık önbelleğe alma
 
-Nếu đang sử dụng [thư viện OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=vi), bạn có thể bật
-tính năng lưu vào bộ nhớ đệm rõ ràng bằng cách sử dụng thuộc tính `cached_content` trên
-[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=vi#extra-body).
+[OpenAI kitaplığı](https://ai.google.dev/gemini-api/docs/openai?hl=tr) kullanıyorsanız [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=tr#extra-body) üzerinde `cached_content` özelliğini kullanarak açık önbelleğe almayı etkinleştirebilirsiniz.
 
-## Trường hợp nên sử dụng tính năng lưu vào bộ nhớ đệm rõ ràng
+## Açık önbelleğe alma ne zaman kullanılır?
 
-Tính năng lưu vào bộ nhớ đệm theo bối cảnh đặc biệt phù hợp với các trường hợp mà một bối cảnh ban đầu đáng kể được các yêu cầu ngắn hơn tham chiếu nhiều lần. Hãy cân nhắc sử dụng tính năng lưu vào bộ nhớ đệm theo bối cảnh cho các trường hợp sử dụng như:
+Bağlamı önbelleğe alma, özellikle önemli bir ilk bağlamın daha kısa istekler tarafından tekrar tekrar referans alındığı senaryolar için uygundur. Aşağıdaki gibi kullanım alanlarında bağlamı önbelleğe alma özelliğini kullanabilirsiniz:
 
-- Chatbot có hướng dẫn hệ thống mở rộng [system instructions](https://ai.google.dev/gemini-api/docs/system-instructions?hl=vi)
-- Phân tích lặp lại các tệp video dài
-- Truy vấn định kỳ đối với các tập hợp tài liệu lớn
-- Phân tích kho lưu trữ mã thường xuyên hoặc sửa lỗi
+- Kapsamlı [sistem talimatlarına](https://ai.google.dev/gemini-api/docs/system-instructions?hl=tr) sahip chatbot'lar
+- Uzun video dosyalarının tekrar tekrar analiz edilmesi
+- Büyük doküman kümelerine karşı yinelenen sorgular
+- Sık kod deposu analizi veya hata düzeltme
 
-### Cách tính năng lưu vào bộ nhớ đệm rõ ràng giúp giảm chi phí
+### Açıkça önbelleğe alma, maliyetleri nasıl azaltır?
 
-Tính năng lưu vào bộ nhớ đệm theo bối cảnh là một tính năng có tính phí được thiết kế để giảm chi phí. Việc tính phí dựa trên các yếu tố sau:
+Bağlam önbelleğe alma, maliyeti düşürmek için tasarlanmış ücretli bir özelliktir. Faturalandırma aşağıdaki faktörlere göre yapılır:
 
-1. **Số lượng mã thông báo trong bộ nhớ đệm:** Số lượng mã thông báo đầu vào được lưu vào bộ nhớ đệm, được tính phí với mức giảm khi được đưa vào các lời nhắc tiếp theo.
-2. **Thời gian lưu trữ:** Khoảng thời gian các mã thông báo được lưu vào bộ nhớ đệm (TTL), được tính phí dựa trên thời lượng TTL của số lượng mã thông báo được lưu vào bộ nhớ đệm. Không có giới hạn tối thiểu hoặc tối đa đối với TTL.
-3. **Các yếu tố khác:** Các khoản phí khác sẽ được áp dụng, chẳng hạn như đối với mã thông báo đầu vào và mã thông báo đầu ra không được lưu vào bộ nhớ đệm.
+1. **Önbelleğe alınan jeton sayısı:** Giriş jetonlarının sayısı önbelleğe alınır ve sonraki istemlere dahil edildiğinde daha düşük bir ücretle faturalandırılır.
+2. **Depolama süresi:** Önbelleğe alınan jetonların depolandığı süre (TTL). Önbelleğe alınan jeton sayısının TTL süresine göre faturalandırılır. TTL için minimum veya maksimum sınır yoktur.
+3. **Diğer faktörler:** Giriş ve çıkış jetonları gibi önbelleğe alınmamış jetonlar için diğer ücretler geçerlidir.
 
-Để biết thông tin chi tiết mới nhất về giá, hãy tham khảo trang [giá
-của Gemini API](https://ai.google.dev/pricing?hl=vi). Để tìm hiểu cách đếm mã thông báo, hãy xem [hướng dẫn
-về mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi).
+En güncel fiyatlandırma bilgileri için Gemini API [fiyatlandırma sayfasını](https://ai.google.dev/pricing?hl=tr) inceleyin. Jetonları nasıl sayacağınızı öğrenmek için [Jeton kılavuzuna](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) bakın.
 
-### Các yếu tố cần cân nhắc khác
+### Göz önünde bulundurulacak diğer noktalar
 
-Hãy lưu ý những điểm cần cân nhắc sau đây khi sử dụng tính năng lưu vào bộ nhớ đệm theo bối cảnh:
+Bağlam önbelleğe almayı kullanırken aşağıdaki hususları göz önünde bulundurun:
 
-- Số lượng mã thông báo đầu vào *tối thiểu* để lưu vào bộ nhớ đệm theo bối cảnh sẽ khác nhau tuỳ theo mô hình. Số lượng mã thông báo đầu vào *tối đa* cũng giống như số lượng mã thông báo tối đa cho mô hình đã cho. (Để biết thêm thông tin về cách đếm mã thông báo,
-  hãy xem [hướng dẫn về mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi)).
-- Mô hình không phân biệt giữa mã thông báo đã lưu vào bộ nhớ đệm và mã thông báo đầu vào thông thường. Nội dung đã lưu vào bộ nhớ đệm là tiền tố của lời nhắc.
-- Không có mức giá đặc biệt hoặc giới hạn sử dụng đối với tính năng lưu vào bộ nhớ đệm theo bối cảnh; các giới hạn về mức giá tiêu chuẩn cho `GenerateContent` sẽ được áp dụng và giới hạn mã thông báo bao gồm cả mã thông báo đã lưu vào bộ nhớ đệm.
-- Số lượng mã thông báo đã lưu vào bộ nhớ đệm được trả về trong `usage_metadata` từ các thao tác tạo, nhận và liệt kê của dịch vụ lưu vào bộ nhớ đệm, cũng như trong `GenerateContent` khi sử dụng bộ nhớ đệm.
+- Bağlam önbelleğe alma için *minimum* giriş jetonu sayısı modele göre değişir. *Maksimum*, belirli model için maksimum değerle aynıdır. (Jeton sayma hakkında daha fazla bilgi için [Jeton kılavuzu](https://ai.google.dev/gemini-api/docs/tokens?hl=tr)'na bakın).
+- Model, önbelleğe alınmış jetonlar ile normal giriş jetonları arasında herhangi bir ayrım yapmaz. Önbelleğe alınmış içerik, istemin önekidir.
+- Bağlam önbelleğe alma konusunda özel bir oran veya kullanım sınırı yoktur. `GenerateContent` için standart oran sınırları geçerlidir ve jeton sınırlarına önbelleğe alınmış jetonlar da dahildir.
+- Önbelleğe alınan jeton sayısı, önbellek hizmetinin oluşturma, alma ve listeleme işlemlerinden `usage_metadata` içinde, önbellek kullanılırken de `GenerateContent` içinde döndürülür.
 
-Gửi ý kiến phản hồi
+Geri bildirim gönderin
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-Cập nhật lần gần đây nhất: 2026-06-24 UTC.
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-24 UTC."],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

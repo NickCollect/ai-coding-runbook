@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko
-fetched_at: 2026-07-27T04:47:44.512257+00:00
+fetched_at: 2026-08-03T04:39:05.703615+00:00
 title: "\uad00\ub9ac \uc5d0\uc774\uc804\ud2b8 \ube60\ub978 \uc2dc\uc791 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ title: "\uad00\ub9ac \uc5d0\uc774\uc804\ud2b8 \ube60\ub978 \uc2dc\uc791 \u00a0|\
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
 - [홈](https://ai.google.dev/?hl=ko)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
@@ -25,7 +25,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 [Interactions API](https://ai.google.dev/gemini-api/docs?hl=ko)를 한 번 호출하면 Linux 샌드박스가 프로비저닝되고, 에이전트 루프가 실행되고, 결과가 반환됩니다. 다음 세 가지 매개변수를 정의합니다.
 
 - 미리 정의된 범용 관리형 에이전트의 현재 버전인 `agent`를 `"antigravity-preview-05-2026",`으로 전달합니다.
-- 새로운 샌드박스 환경을 프로비저닝하려면 `environment="remote"`를 정의합니다.
+- 새 샌드박스 환경을 프로비저닝하려면 `environment="remote"`를 정의합니다.
 - 에이전트가 수행할 작업을 정의하는 입력을 만듭니다.
 
 ### Python
@@ -132,14 +132,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 턴 1의 파일 (`fibonacci.txt`)은 턴 2에도 유지됩니다. 에이전트는 대화 컨텍스트도 유지합니다.
 
-다음과 같이 독립적으로 혼합하고 매칭할 수 있습니다.
+다음과 같이 독립적으로 혼합하고 일치시킬 수 있습니다.
 
-- **대화 삭제, 파일 유지:** `previous_interaction_id`를 생략하고 동일한 작업공간에서 새로운 대화를 위해 `environment`를 사용하여 환경 ID만 전달합니다.
+- **대화 삭제, 파일 유지:** `previous_interaction_id`를 생략하고 동일한 작업공간에서 새 대화를 위해 `environment`를 사용하여 환경 ID만 전달합니다.
 - **대화 유지, 새 작업공간:** `previous_interaction_id`를 전달하고 새 샌드박스에 `environment="remote"`를 설정합니다.
 
 ### 자동 컨텍스트 압축
 
-장기 실행 멀티턴 대화에서 추론 단계, 도구 호출, 대용량 파일 콘텐츠의 원시 기록은 빠르게 증가하여 상당한 컨텍스트 공간을 사용할 수 있습니다. 토큰 한도 오류를 방지하고 에이전트의 집중도를 유지 (컨텍스트 손상 방지)하기 위해 관리형 에이전트 API는 약 135,000개의 토큰에서 기본 컨텍스트 압축 단계를 제공합니다. 이 작업은 자동으로 진행되며
+장기 실행 멀티턴 대화에서 추론 단계, 도구 호출, 대용량 파일 콘텐츠의 원시 기록은 빠르게 증가하고 상당한 컨텍스트 공간을 사용할 수 있습니다. 토큰 한도 오류를 방지하고 에이전트의 집중을 유지하기 위해 (컨텍스트 손상 방지) 관리형 에이전트 API는 약 135,000개의 토큰에서 기본 컨텍스트 압축 단계를 제공합니다. 이 작업은 자동으로 진행되며
 
 ## 응답 스트리밍
 
@@ -161,6 +161,8 @@ stream = client.interactions.create(
 
 for event in stream:
     print(event)
+    if event.event_type == "step.stop" and event.usage:
+        print(event.usage)
 ```
 
 ### JavaScript
@@ -179,6 +181,9 @@ const stream = await client.interactions.create({
 
 for await (const event of stream) {
     console.log(event);
+    if (event.event_type === "step.stop" && event.usage) {
+        console.log(event.usage);
+    }
 }
 ```
 
@@ -196,7 +201,8 @@ curl -N -s -X POST "https://generativelanguage.googleapis.com/v1beta/interaction
 }'
 ```
 
-스트리밍은 증분 텍스트, 추론 토큰, 도구 호출 업데이트인 단계 델타의 반복 가능 항목을 반환합니다. [스트리밍 가이드에서 응답을 스트리밍하는 방법을 자세히 알아보세요.](https://ai.google.dev/gemini-api/docs/streaming?hl=ko)
+스트리밍은 증분 업데이트가 포함된 단계 델타를 반환합니다. 단계가 완료되면 `step.stop` 이벤트에 누적된 사용 통계가 포함됩니다. 자세한 내용은
+[스트리밍 가이드](https://ai.google.dev/gemini-api/docs/streaming?hl=ko)를 참고하세요.
 
 ## 환경에서 파일 다운로드
 
@@ -271,9 +277,9 @@ tar -xf snapshot.tar -C extracted_snapshot
 
 이전 단계에서는 기본 Antigravity 에이전트를 사용하고 인라인으로 맞춤설정했습니다. 구성 (안내, 기술, 모델 선택, 환경)을 반복한 후 재사용 가능한 관리형 에이전트로 저장할 수 있습니다. 이렇게 하면 구성을 반복하지 않고 ID로 호출할 수 있습니다.
 
-에이전트를 저장할 때 인라인 상호작용과의 아키텍처 대칭에 유의하세요. `interactions.create`에서와 마찬가지로 `base_agent: "antigravity-preview-05-2026"`을 지정하고 선택한 `model`로 `agent_config`를 전달할 수 있습니다. 또한 소스에서 또는 기존 환경을 포크하여 `base_environment`를 정의합니다. 에이전트는 모든 새 상호작용에 이 환경 및 모델 구성을 사용합니다.
+에이전트를 저장할 때 인라인 상호작용과의 아키텍처 대칭에 유의하세요. `base_agent: "antigravity-preview-05-2026"`을 지정하고 `interactions.create`에서와 마찬가지로 선택한 `model`로 `agent_config`를 전달할 수 있습니다. 또한 소스에서 또는 기존 환경을 포크하여 `base_environment`를 정의합니다. 에이전트는 모든 새 상호작용에 이 환경 및 모델 구성을 사용합니다.
 
-**소스에서:** 소스를 인라인으로 또는 GitHub 또는 Cloud Storage와 같은 다른 소스에서 정의합니다.
+**소스에서:** 소스를 인라인으로 또는 GitHub나 Cloud Storage와 같은 다른 소스에서 정의합니다.
 
 ### Python
 
@@ -423,8 +429,8 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 
 달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-최종 업데이트: 2026-07-21(UTC)
+최종 업데이트: 2026-07-30(UTC)
 
 의견을 전달하고 싶나요?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-21(UTC)"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]

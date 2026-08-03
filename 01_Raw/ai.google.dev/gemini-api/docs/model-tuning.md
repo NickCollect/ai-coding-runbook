@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/model-tuning?hl=pl
-fetched_at: 2026-07-27T04:37:29.428568+00:00
+fetched_at: 2026-08-03T04:29:03.156938+00:00
 title: "Dostrajanie przy u\u017cyciu interfejsu Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ title: "Dostrajanie przy u\u017cyciu interfejsu Gemini API \u00a0|\u00a0 Google 
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
 - [Strona główna](https://ai.google.dev/?hl=pl)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=pl)

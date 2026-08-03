@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/models/deep-research-preview-04-2026?hl=zh-CN
-fetched_at: 2026-07-27T04:37:41.013063+00:00
+fetched_at: 2026-08-03T04:35:25.853557+00:00
 title: "Deep Research \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ title: "Deep Research \u9884\u89c8\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
 - [首页](https://ai.google.dev/?hl=zh-cn)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)

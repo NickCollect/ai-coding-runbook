@@ -1,85 +1,85 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=he
-fetched_at: 2026-07-27T04:44:57.967263+00:00
-title: "\u05d0\u05d9\u05de\u05d5\u05ea \u05d1\u05d0\u05de\u05e6\u05e2\u05d5\u05ea \u05de\u05d3\u05e8\u05d9\u05da \u05dc\u05de\u05ea\u05d7\u05d9\u05dc\u05d9\u05dd \u05e9\u05dc OAuth \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/oauth?hl=fr
+fetched_at: 2026-08-03T04:40:28.276068+00:00
+title: "Guide de d\u00e9marrage\u00a0rapide de l'authentification avec OAuth \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-שליחת משוב
+Envoyer des commentaires
 
-# אימות באמצעות מדריך למתחילים של OAuth
+# Guide de démarrage rapide de l'authentification avec OAuth
 
-הדרך הכי קלה לבצע אימות ל-Gemini API היא להגדיר מפתח API, כמו שמתואר ב[מדריך לתחילת העבודה עם Gemini API](https://ai.google.dev/gemini-api/docs/get-started?hl=he). אם אתם צריכים אמצעי בקרה מחמירים יותר על הגישה, אתם יכולים להשתמש ב-OAuth במקום זאת. המדריך הזה יעזור לכם להגדיר אימות באמצעות OAuth.
+Le moyen le plus simple de s'authentifier auprès de l'API Gemini consiste à configurer une clé API, comme décrit dans le [guide de démarrage de l'API Gemini](https://ai.google.dev/gemini-api/docs/get-started?hl=fr). Si vous avez besoin de contrôles d'accès plus stricts, vous pouvez utiliser OAuth à la place. Ce guide vous aidera à configurer l'authentification avec OAuth.
 
-במדריך הזה נשתמש בגישה פשוטה לאימות, שמתאימה לסביבת בדיקה. בסביבת ייצור, מומלץ לקרוא על [אימות והרשאה](https://developers.google.com/workspace/guides/auth-overview?hl=he) לפני [שבוחרים את פרטי הגישה](https://developers.google.com/workspace/guides/create-credentials?hl=he#choose_the_access_credential_that_is_right_for_you) שמתאימים לאפליקציה שלכם.
+Ce guide utilise une approche d'authentification simplifiée qui convient à un environnement de test. Pour un environnement de production, renseignez-vous sur l'[authentification et l'autorisation](https://developers.google.com/workspace/guides/auth-overview?hl=fr) avant de [choisir les identifiants d'accès](https://developers.google.com/workspace/guides/create-credentials?hl=fr#choose_the_access_credential_that_is_right_for_you) qui conviennent à votre application.
 
-## מטרות
+## Objectifs
 
-- הגדרת פרויקט בענן ל-OAuth
-- הגדרה של Application Default Credentials
-- ניהול פרטי הכניסה בתוכנית במקום שימוש ב-`gcloud auth`
+- Configurer votre projet cloud pour OAuth
+- Configurer les identifiants par défaut de l'application
+- Gérer les identifiants dans votre programme au lieu d'utiliser `gcloud auth`
 
-## דרישות מוקדמות
+## Prérequis
 
-כדי להפעיל את המדריך למתחילים הזה, אתם צריכים:
+Pour exécuter ce guide de démarrage rapide, vous avez besoin des éléments suivants :
 
-- [פרויקט ב-Google Cloud](https://developers.google.com/workspace/guides/create-project?hl=he)
-- [התקנה מקומית של ה-CLI של gcloud](https://cloud.google.com/sdk/docs/install?hl=he)
+- [Un projet Google Cloud](https://developers.google.com/workspace/guides/create-project?hl=fr)
+- [Installation locale de la gcloud CLI](https://cloud.google.com/sdk/docs/install?hl=fr)
 
-## הגדרת הפרויקט בענן
+## Configurer votre projet Cloud
 
-כדי להשלים את המדריך למתחילים הזה, קודם צריך להגדיר את פרויקט הענן.
+Pour suivre ce guide de démarrage rapide, vous devez d'abord configurer votre projet Cloud.
 
-### 1. הפעלת ה-API
+### 1. Activer l'API
 
-לפני שאתם משתמשים בממשקי Google API, אתם צריכים להפעיל אותם בפרויקט ב-Google Cloud.
+Avant d'utiliser les API Google, vous devez les activer dans un projet Google Cloud.
 
-- במסוף Google Cloud, מפעילים את Google Generative Language API.
+- Dans la console Google Cloud, activez l'API Generative Language de Google.
 
-  [להפעלת ה-API](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=he)
+  [Activer l'API](https://console.cloud.google.com/flows/enableapi?apiid=generativelanguage.googleapis.com&hl=fr)
 
-### 2. מגדירים את מסך ההסכמה של OAuth
+### 2. Configurer l'écran d'autorisation OAuth
 
-בשלב הבא מגדירים את מסך ההסכמה ל-OAuth של הפרויקט ומוסיפים את עצמכם כמשתמש לבדיקה. אם כבר ביצעתם את השלב הזה בפרויקט בענן שלכם, אתם יכולים לדלג לקטע הבא.
+Ensuite, configurez l'écran de consentement OAuth du projet et ajoutez-vous en tant qu'utilisateur test. Si vous avez déjà effectué cette étape pour votre projet Cloud, passez à la section suivante.
 
-1. במסוף Google Cloud, לוחצים על **תפריט** > **פלטפורמת אימות של Google** > **סקירה כללית**.
+1. Dans la console Google Cloud, accédez à **Menu** > **Plate-forme Google Auth** > **Présentation**.
 
-   [מעבר לפלטפורמת האימות של Google](https://console.developers.google.com/auth/overview?hl=he)
-2. ממלאים את טופס הגדרת הפרויקט ומגדירים את סוג המשתמש ל**External** (חיצוני) בקטע **Audience** (קהל).
-3. ממלאים את שאר השדות בטופס, מאשרים את התנאים של המדיניות בנושא נתוני משתמשים ולוחצים על **יצירה**.
-4. כרגע אתם יכולים לדלג על הוספת היקפי הרשאות וללחוץ על **שמירה והמשך**. בעתיד, כשתיצרו אפליקציה לשימוש מחוץ לארגון שלכם ב-Google Workspace, תצטרכו להוסיף ולאמת את היקפי ההרשאות שהאפליקציה דורשת.
-5. הוספת משתמשי בדיקה:
+   [Accéder à la plate-forme Google Auth](https://console.developers.google.com/auth/overview?hl=fr)
+2. Remplissez le formulaire de configuration du projet et définissez le type d'utilisateur sur **Externe** dans la section **Audience**.
+3. Remplissez le reste du formulaire, acceptez les conditions du règlement sur les données utilisateur, puis cliquez sur **Créer**.
+4. Pour l'instant, vous pouvez ignorer l'ajout de niveaux d'accès et cliquer sur **Enregistrer et continuer**. À l'avenir, lorsque vous créerez une application à utiliser en dehors de votre organisation Google Workspace, vous devrez ajouter et valider les niveaux d'autorisation requis par votre application.
+5. Ajoutez des utilisateurs de test :
 
-   1. עוברים אל [דף הקהל](https://console.developers.google.com/auth/audience?hl=he) של פלטפורמת אימות Google.
-   2. בקטע **משתמשי בדיקה**, לוחצים על **הוספת משתמשים**.
-   3. מזינים את כתובת האימייל שלכם ושל משתמשים מורשים אחרים לבדיקה, ואז לוחצים על **שמירה**.
+   1. Accédez à la [page "Audience"](https://console.developers.google.com/auth/audience?hl=fr) de la plate-forme Google Auth.
+   2. Sous **Utilisateurs de test**, cliquez sur **Ajouter des utilisateurs**.
+   3. Saisissez votre adresse e-mail et celles des autres utilisateurs de test autorisés, puis cliquez sur **Enregistrer**.
 
-### 3. מאשרים את פרטי הכניסה של האפליקציה למחשב
+### 3. Autoriser les identifiants pour une application de bureau
 
-כדי לבצע אימות כמשתמש קצה ולגשת לנתוני משתמשים באפליקציה, צריך ליצור מזהה לקוח אחד או יותר ב-OAuth 2.0. מזהה הלקוח משמש לזיהוי של אפליקציה אחת בשרתי OAuth של Google. אם האפליקציה פועלת בכמה פלטפורמות, צריך ליצור מזהה לקוח נפרד לכל פלטפורמה.
+Pour vous authentifier en tant qu'utilisateur final et accéder aux données utilisateur dans votre application, vous devez créer un ou plusieurs ID client OAuth 2.0. Un ID client sert à identifier une application unique auprès des serveurs OAuth de Google. Si votre application s'exécute sur plusieurs plates-formes, vous devez créer un ID client distinct pour chacune d'elles.
 
-1. במסוף Google Cloud, לוחצים על **תפריט** > **פלטפורמת האימות של Google** > **לקוחות**.
+1. Dans la console Google Cloud, accédez à **Menu** > **Plate-forme Google Auth** > **Clients**.
 
-   [לדף Credentials](https://console.developers.google.com/auth/clients?hl=he)
-2. לוחצים על **Create Client**.
-3. לוחצים על **Application type** > **Desktop app**.
-4. בשדה **Name**, מקלידים שם לפרטי הכניסה. השם הזה מוצג רק במסוף Google Cloud.
-5. לוחצים על **יצירה**. מופיע מסך עם לקוח OAuth שנוצר, שבו מוצגים מזהה הלקוח וסוד הלקוח החדשים.
-6. לוחצים על **אישור**. פרטי הכניסה החדשים שנוצרו מופיעים בקטע **מזהי לקוח OAuth 2.0**.
-7. לוחצים על לחצן ההורדה כדי לשמור את קובץ ה-JSON. הוא יישמר בשם `client_secret_<identifier>.json`. משנים את השם שלו ל-`client_secret.json` ומעבירים אותו לספריית העבודה.
+   [Accéder à "Identifiants"](https://console.developers.google.com/auth/clients?hl=fr)
+2. Cliquez sur **Créer un client**.
+3. Cliquez sur **Type d'application** > **Application de bureau**.
+4. Dans le champ **Nom**, saisissez un nom pour l'identifiant. Ce nom n'apparaît que dans la console Google Cloud.
+5. Cliquez sur **Créer**. L'écran "Client OAuth créé" s'affiche, indiquant votre nouvel ID client et votre nouveau code secret de client.
+6. Cliquez sur **OK**. Les identifiants que vous venez de créer s'affichent sous **ID client OAuth 2.0**.
+7. Cliquez sur le bouton de téléchargement pour enregistrer le fichier JSON. Il sera enregistré sous le nom `client_secret_<identifier>.json`. Renommez-le `client_secret.json` et déplacez-le dans votre répertoire de travail.
 
-## הגדרת Application Default Credentials
+## Configurer les identifiants par défaut de l'application
 
-כדי להמיר את הקובץ `client_secret.json` לפרטי כניסה שניתן להשתמש בהם, מעבירים את המיקום שלו לארגומנט `--client-id-file` של הפקודה `gcloud auth application-default login`.
+Pour convertir le fichier `client_secret.json` en identifiants utilisables, transmettez son emplacement à l'argument `--client-id-file` de la commande `gcloud auth application-default login`.
 
 ```
 gcloud auth application-default login \
@@ -87,9 +87,9 @@ gcloud auth application-default login \
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ```
 
-ההגדרה הפשוטה של הפרויקט במדריך הזה מפעילה את תיבת הדו-שיח **"Google לא אימתה את האפליקציה הזו"**. זה מצב תקין, לוחצים על **"המשך"**.
+La configuration simplifiée du projet dans ce tutoriel déclenche une boîte de dialogue **Google n'a pas validé cette application**. C'est normal. Sélectionnez **Continuer**.
 
-הפעולה הזו מציבה את האסימון שמתקבל במיקום מוכר, כך שניתן לגשת אליו באמצעות `gcloud` או ספריות הלקוח.
+Le jeton obtenu est placé dans un emplacement connu afin qu'il puisse être accessible par `gcloud` ou les bibliothèques clientes.
 
 ```` ```
 gcloud auth application-default login   
@@ -100,11 +100,11 @@ gcloud auth application-default login
     --scopes='https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/generative-language.retriever'
 ``` ````
 
-אחרי שמגדירים את Application Default Credentials‏ (ADC), ספריות הלקוח ברוב השפות לא צריכות עזרה כדי למצוא אותן, או שהן צריכות עזרה מינימלית.
+Une fois que vous avez défini les identifiants par défaut de l'application (ADC), les bibliothèques clientes dans la plupart des langages ont besoin d'une aide minimale, voire aucune, pour les trouver.
 
 ### Curl
 
-הדרך הכי מהירה לבדוק שהיא פועלת היא להשתמש בה כדי לגשת ל-REST API באמצעות curl:
+Le moyen le plus rapide de vérifier que cela fonctionne consiste à l'utiliser pour accéder à l'API REST à l'aide de curl :
 
 ```
 access_token=$(gcloud auth application-default print-access-token)
@@ -117,13 +117,13 @@ curl -X GET https://generativelanguage.googleapis.com/v1/models \
 
 ### Python
 
-ב-Python, ספריות הלקוח אמורות למצוא את פרטי הכניסה באופן אוטומטי:
+En Python, les bibliothèques clientes devraient les trouver automatiquement :
 
 ```
 pip install google-genai
 ```
 
-סקריפט מינימלי לבדיקה יכול להיות:
+Voici un script minimal pour le tester :
 
 ```
 from google import genai
@@ -132,28 +132,28 @@ client = genai.Client()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-## השלבים הבאים
+## Étapes suivantes
 
-אם זה עובד, אפשר לנסות [אחזור סמנטי של נתוני הטקסט](https://ai.google.dev/docs/semantic_retriever?hl=he).
+Si cela fonctionne, vous pouvez essayer la [récupération sémantique sur vos données textuelles](https://ai.google.dev/docs/semantic_retriever?hl=fr).
 
-## ניהול פרטי הכניסה באופן עצמאי [Python]
+## Gérer vous-même les identifiants [Python]
 
-במקרים רבים, הפקודה `gcloud` לא תהיה זמינה ליצירת אסימון הגישה ממזהה הלקוח (`client_secret.json`). Google מספקת ספריות בשפות רבות כדי לאפשר לכם לנהל את התהליך הזה בתוך האפליקציה. בקטע הזה מוצג התהליך ב-Python. דוגמאות מקבילות לסוג הזה של הליך, בשפות אחרות, זמינות ב[מסמכי התיעוד של Drive API](https://developers.google.com/drive/api/quickstart/python?hl=he).
+Dans de nombreux cas, vous ne disposerez pas de la commande `gcloud` pour créer le jeton d'accès à partir de l'ID client (`client_secret.json`). Google fournit des bibliothèques dans de nombreux langages pour vous permettre de gérer ce processus dans votre application. Cette section illustre le processus en Python. Des exemples équivalents de ce type de procédure sont disponibles pour d'autres langages dans la [documentation de l'API Drive](https://developers.google.com/drive/api/quickstart/python?hl=fr).
 
-### 1. התקנת הספריות הנדרשות
+### 1. Installer les bibliothèques nécessaires
 
-מתקינים את ספריית הלקוח של Google ל-Python ואת ספריית הלקוח של Gemini.
+Installez la bibliothèque cliente Google pour Python et la bibliothèque cliente Gemini.
 
 ```
 pip install --upgrade -q google-api-python-client google-auth-httplib2 google-auth-oauthlib
 pip install google-genai
 ```
 
-### 2. כתיבה של מנהל פרטי הכניסה
+### 2. Écrire le gestionnaire d'identifiants
 
-כדי לצמצם את מספר הפעמים שצריך ללחוץ על מסכי ההרשאה, יוצרים קובץ בשם `load_creds.py` בספריית העבודה כדי לשמור במטמון קובץ `token.json` שאפשר לעשות בו שימוש חוזר בהמשך, או לרענן אותו אם הוא פג.
+Pour minimiser le nombre de clics nécessaires pour parcourir les écrans d'autorisation, créez un fichier appelé `load_creds.py` dans votre répertoire de travail pour mettre en cache un fichier `token.json` qu'il pourra réutiliser ultérieurement ou actualiser s'il expire.
 
-מתחילים עם הקוד הבא כדי להמיר את הקובץ `client_secret.json` לטוקן שאפשר להשתמש בו עם `genai.configure`:
+Commencez par le code suivant pour convertir le fichier `client_secret.json` en jeton utilisable avec `genai.configure` :
 
 ```
 import os.path
@@ -190,9 +190,9 @@ def load_creds():
     return creds
 ```
 
-### 3. כתיבת התוכנית
+### 3. Écrire votre programme
 
-עכשיו יוצרים את `script.py`:
+Créez maintenant votre `script.py` :
 
 ```
 import pprint
@@ -207,27 +207,27 @@ print()
 print('Available base models:', [m.name for m in client.models.list()])
 ```
 
-### 4. הפעלת התוכנית
+### 4. Exécuter votre programme
 
-בספריית העבודה, מריצים את הדוגמה:
+Dans votre répertoire de travail, exécutez l'exemple :
 
 ```
 python script.py
 ```
 
-בפעם הראשונה שמריצים את הסקריפט, נפתח חלון דפדפן ומופיעה בקשה לאשר גישה.
+La première fois que vous exécutez le script, il ouvre une fenêtre de navigateur et vous invite à autoriser l'accès.
 
-1. אם לא התחברתם לחשבון Google שלכם, תתבקשו להיכנס אליו. אם אתם מחוברים לכמה חשבונות, **חשוב לבחור את החשבון שהגדרתם כ'חשבון בדיקה' כשאתם מגדירים את הפרויקט.**
-2. פרטי ההרשאה מאוחסנים במערכת הקבצים, כך שבפעם הבאה שתריצו את הקוד לדוגמה, לא תתבקשו להעניק הרשאה.
+1. Si vous n'êtes pas encore connecté à votre compte Google, vous êtes invité à le faire. Si vous êtes connecté à plusieurs comptes, **assurez-vous de sélectionner celui que vous avez défini comme "Compte de test" lors de la configuration de votre projet**.
+2. Les informations d'autorisation sont stockées dans le système de fichiers. La prochaine fois que vous exécuterez l'exemple de code, vous ne serez pas invité à fournir une autorisation.
 
-הגדרת האימות בוצעה בהצלחה.
+Vous avez configuré l'authentification.
 
-שליחת משוב
+Envoyer des commentaires
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-עדכון אחרון: 2026-07-01 (שעון UTC).
+Dernière mise à jour le 2026/07/01 (UTC).
 
-רוצה לתת לנו משוב?
+Voulez-vous nous donner plus d'informations ?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-01 (שעון UTC)."],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/01 (UTC)."],[],[]]

@@ -1,69 +1,67 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=zh-CN
-fetched_at: 2026-07-27T04:44:50.463935+00:00
-title: "\u76d1\u63a7\u6ee5\u7528\u884c\u4e3a \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/usage-policies?hl=fr
+fetched_at: 2026-08-03T04:42:02.035130+00:00
+title: "Surveillance des utilisations abusives \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-发送反馈
+Envoyer des commentaires
 
-# 监控滥用行为
+# Surveillance des utilisations abusives
 
-Google 致力于以负责任的方式开发和使用 AI。为确保 Gemini API 的安全性和完整性，我们制定了这些政策指南。
-使用 Gemini API 即表示您同意以下指南、《[Gemini API
-附加服务条款](https://ai.google.dev/gemini-api/terms?hl=zh-cn)》和《生成式 AI [使用限制
-政策](https://policies.google.com/terms/generative-ai/use-policy?hl=zh-cn)》。
+Google s'engage à développer et à utiliser l'IA de manière responsable. Pour garantir la sécurité et l'intégrité de l'API Gemini, nous avons créé ces consignes.
+En utilisant l'API Gemini, vous acceptez les consignes suivantes, les [Conditions d'utilisation supplémentaires de l'API Gemini](https://ai.google.dev/gemini-api/terms?hl=fr) et le [Règlement sur les utilisations interdites de l'IA générative](https://policies.google.com/terms/generative-ai/use-policy?hl=fr).
 
-## 我们如何监控滥用行为
+## Comment nous surveillons les utilisations abusives
 
-Google 的信任与安全团队会综合运用自动化流程和人工流程来检测 Gemini API 和 Google AI Studio 中可能存在的滥用行为，以便执行我们的政策。
+L'équipe Google chargée de la fiabilité et de la sécurité utilise des processus automatisés et manuels pour détecter les utilisations abusives potentielles de l'API Gemini et de Google AI Studio afin d'appliquer nos règles.
 
-- **自动检测**： 自动化系统会扫描 API 使用情况，以检测是否存在违反《使用限制政策》的行为，例如宣扬仇恨言论、骚扰、色情内容和危险内容。
-- **人工检测**： 如果某个项目持续出现可疑活动，则可能会被标记为由获得授权的 Google 人员进行人工审核。
+- **Détection automatisée** : les systèmes automatisés analysent l'utilisation de l'API pour détecter les cas de non-respect de notre règlement sur les utilisations interdites, comme les contenus incitant à la haine, au harcèlement, à caractère sexuel explicite ou dangereux.
+- **Détection manuelle** : si un projet présente régulièrement une activité suspecte, il peut être signalé pour examen manuel par le personnel Google autorisé.
 
-## 我们如何处理数据
+## Comment nous traitons les données
 
-Google 会保留以下数据 55 天，以便检测和防范违反《使用限制政策》的行为，从而维护服务的安全，并进行任何必要的法律或监管披露：
+Google conserve les données suivantes pendant cinquante-cinq (55) jours afin de détecter et d'empêcher les cas de non-respect du règlement sur les utilisations interdites, de préserver la sécurité des Services et de fournir toute information légale ou réglementaire requise :
 
-- **提示**： 您向 API 提交的文本提示。
-- **背景信息**： 您在提示中提供的任何其他背景信息。
-- **输出**： Gemini API 生成的回答。
+- **Requêtes** : requêtes textuelles que vous envoyez à l'API.
+- **Informations contextuelles** : tout contexte supplémentaire que vous fournissez avec vos requêtes.
+- **Sortie** : réponses générées par l'API Gemini.
 
-## 我们如何调查潜在问题
+## Comment nous examinons les problèmes potentiels
 
-如果提示或模型输出被上述安全过滤器和滥用行为检测系统标记，获得授权的 Google 员工可能会评估被标记的内容，并根据预定义的指南和政策确认或更正分类或判定。只有获得授权的 Google 员工才能通过内部治理评估和审核管理平台访问数据以进行人工审核。记录数据以进行滥用行为监控时，这些数据仅用于执行政策和防范违反政策的行为。
-除了专门用于执行政策的 AI/机器学习模型之外，这些数据不会用于训练或微调任何其他 AI/机器学习模型。
+Lorsque des requêtes ou des sorties de modèle sont signalées par les filtres de sécurité et les systèmes de détection des utilisations abusives décrits ci-dessus, des employés Google autorisés peuvent évaluer le contenu signalé et confirmer ou corriger la classification ou la détermination en fonction de consignes et de règles prédéfinies. Seuls les employés Google autorisés peuvent accéder aux données pour les examiner manuellement, via une plate-forme interne d'évaluation de la gouvernance et de gestion des examens. Lorsque des données sont consignées pour la surveillance des utilisations abusives, elles sont utilisées uniquement pour faire respecter les règles et prévenir les cas de non-respect.
+Elles ne sont pas utilisées pour entraîner ni ajuster des modèles d'IA/ML, à l'exception de ceux utilisés spécifiquement pour l'application des règles.
 
-## 与您合作以确保政策合规性
+## Nous vous aidons à respecter nos règles
 
-如果您对 Gemini 的使用不符合我们的政策，我们可能会采取以下措施：
+Si votre utilisation de Gemini ne respecte pas nos règles, nous pouvons prendre les mesures suivantes :
 
-- **与您联系**： 我们可能会通过电子邮件与您联系，了解您的使用场景，并探讨如何让您的使用行为符合政策。
-- **临时使用限制**： 我们可能会限制您对 Gemini API 的访问权限，例如调整速率限制或更改回答特定请求的模型。
-- **临时暂停**： 我们可能会暂时暂停您对 Gemini API 的访问权限。
-- **关闭账号**： 作为最后的手段，对于严重违规行为，我们可能会永久关闭您对 Gemini API 和其他 Google 服务的访问权限。
+- **Nous contacter** : nous pouvons vous contacter par e-mail pour comprendre votre cas d'utilisation et trouver des moyens de rendre votre utilisation conforme.
+- **Limites d'utilisation temporaires** : nous pouvons limiter votre accès à l'API Gemini en ajustant les limites de fréquence ou en modifiant le modèle qui répond à une demande spécifique, par exemple.
+- **Suspension temporaire** : nous pouvons suspendre temporairement votre accès à l'API Gemini.
+- **Clôture du compte** : en dernier recours et en cas de non-respect grave, nous pouvons vous interdire définitivement l'accès à l'API Gemini et à d'autres services Google.
 
-如果我们因暂停或关停账号事宜与您联系，我们还会提供一个链接，供您提出申诉。
+Si nous vous contactons concernant une suspension ou une clôture de compte, nous vous fournirons également un lien vous permettant de faire appel.
 
-## 范围
+## Champ d'application
 
-这些政策指南适用于 Gemini API 和 AI Studio 的使用。
+Ces consignes s'appliquent à l'utilisation de l'API Gemini et d'AI Studio.
 
-发送反馈
+Envoyer des commentaires
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最后更新时间 (UTC)：2026-06-09。
+Dernière mise à jour le 2026/06/09 (UTC).
 
-需要向我们提供更多信息？
+Voulez-vous nous donner plus d'informations ?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-09。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/09 (UTC)."],[],[]]

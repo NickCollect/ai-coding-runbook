@@ -1,118 +1,109 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-key?hl=ar
-fetched_at: 2026-07-27T04:47:02.479178+00:00
-title: "\u0627\u0633\u062a\u062e\u062f\u0627\u0645 \u0645\u0641\u0627\u062a\u064a\u062d \u0648\u0627\u062c\u0647\u0629 \u0628\u0631\u0645\u062c\u0629 \u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0641\u064a Gemini \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-key?hl=tr
+fetched_at: 2026-08-03T04:36:03.877331+00:00
+title: "Gemini API anahtarlar\u0131n\u0131 kullanma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-# استخدام مفاتيح واجهة برمجة التطبيقات في Gemini
+# Gemini API anahtarlarını kullanma
 
-لاستخدام Gemini API، يجب المصادقة على طلباتكم. يمكنكم المصادقة باستخدام مفتاح واجهة برمجة تطبيقات عادي أو مفتاح تفويض.
+Gemini API'yi kullanmak için isteklerinizin kimliğini doğrulamanız gerekir. Standart veya yetkilendirme API anahtarı kullanarak kimliğinizi doğrulayabilirsiniz.
 
-[إنشاء مفتاح Gemini API أو الاطّلاع عليه](https://aistudio.google.com/apikey?hl=ar)
+[Gemini API anahtarı oluşturma veya görüntüleme](https://aistudio.google.com/apikey?hl=tr)
 
-## أنواع مفاتيح واجهة برمجة التطبيقات: عادية مقابل مفاتيح التفويض
+## API anahtarı türleri: standart ve yetkilendirme
 
-توفّر مفاتيح واجهة برمجة التطبيقات إمكانية الوصول إلى Gemini API، ولكن تختلف خصائص الأمان الخاصة بها. تنتقل Gemini API من استخدام مفاتيح واجهة برمجة التطبيقات العادية إلى مفاتيح التفويض لتحسين الأمان:
+API anahtarları, Gemini API'ye erişim sağlar ancak güvenlik özellikleri farklıdır. Gemini API, güvenliği artırmak için standart API anahtarlarından yetkilendirme anahtarlarına geçiş yapıyor:
 
-- **مفاتيح واجهة برمجة التطبيقات العادية**: تربط الطلبات بمشروع على Google Cloud لأغراض
-  الفوترة والحصص. لا تحدّد المفاتيح العادية المتصل، ما يحدّ من مستوى التفصيل في الأذونات وعناصر التحكّم في الوصول التي يمكنها دعمها.
-- **مفاتيح التفويض**: مرتبطة مباشرةً بحساب خدمة على Google Cloud. عند استخدام مفتاح تفويض، تتم معالجة طلباتكم ضمن هوية حساب الخدمة المرتبط هذا، ما يتيح التحكّم الدقيق في الوصول. تقتصر مفاتيح التفويض على Generative Language API (‏Gemini API) تلقائيًا وتوفّر فرضًا سريعًا للمفاتيح المسربة، ما يوقف بسرعة استخدام المفاتيح المسربة التي رصدتها أنظمتنا.
+- **Standart API anahtarları**: Faturalandırma ve kota amacıyla istekleri bir Google Cloud projesiyle ilişkilendirin. Standart anahtarlar arayanı tanımlamadığından destekleyebilecekleri izinlerin ve erişim denetiminin ayrıntı düzeyi sınırlıdır.
+- **Yetkilendirme (auth) anahtarları**: Doğrudan bir Google Cloud hizmet hesabına bağlıdır. Yetkilendirme anahtarı kullandığınızda istekleriniz, bu bağlı hizmet hesabının kimliği altında işlenir ve ayrıntılı erişim kontrolü sağlanır. Yetkilendirme anahtarları varsayılan olarak Generative Language API (Gemini API) ile sınırlıdır ve sistemlerimiz tarafından algılanan sızdırılmış anahtarların kullanımını hızlı bir şekilde durduran, hızlı etkili sızdırılmış anahtar zorunluluğu sağlar.
 
-لضمان الاستخدام الآمن، ستنتقل Gemini API من استخدام المفاتيح العادية إلى مفاتيح التفويض:
+Gemini API, güvenli kullanımı sağlamak için Standart anahtarlardan Kimlik Doğrulama anahtarlarına geçiş yapacak:
 
-- **مفاتيح المصادقة تلقائيًا**: يتم تلقائيًا إنشاء جميع مفاتيح واجهة برمجة التطبيقات الجديدة في Google AI Studio
-  كمفاتيح مصادقة.
-- **رفض المفاتيح غير المقيدة**: ترفض Gemini API الطلبات الواردة
-  من **المفاتيح العادية غير المقيدة**. تستمر المفاتيح العادية لواجهة برمجة التطبيقات التي تم تطبيق قيود صريحة عليها في العمل. يمنع هذا القيد الاستخدام غير المصرّح به للمفاتيح التي قد تتم مشاركتها علنًا أو ربطها بخدمات أخرى.
-- **في سبتمبر 2026**: سترفض Gemini API الطلبات الواردة من **المفاتيح
-  العادية**. يجب [نقل البيانات إلى مفاتيح التفويض](#migrate-to-auth-key)
-  قبل هذا التاريخ لتجنُّب انقطاع الخدمة. يُرجى التأكّد من نقل البيانات إلى مفاتيح التفويض قبل سبتمبر 2026.
+- **Varsayılan kimlik doğrulama anahtarları**: Google AI Studio'da oluşturulan tüm yeni API anahtarları otomatik olarak kimlik doğrulama anahtarı olarak oluşturulur.
+- **Kısıtlanmamış anahtarlar reddedildi**: Gemini API, **kısıtlanmamış standart anahtarlardan** gelen istekleri reddeder. Açık kısıtlamalar uygulanmış standart API anahtarları çalışmaya devam eder. Bu kısıtlama, herkese açık olarak paylaşılan veya diğer hizmetlere bağlanan anahtarların yetkisiz kullanımını engeller.
+- **Eylül 2026'da**: Gemini API, **standart anahtarlardan** gelen istekleri reddedecek. Hizmet kesintisi yaşamamak için bu tarihten önce [kimlik doğrulama anahtarlarına geçiş yapmanız](#migrate-to-auth-key) gerekir. Eylül 2026'dan önce kimlik doğrulama anahtarlarına geçiş yapmayı unutmayın.
 
-## إدارة مفاتيح واجهة برمجة التطبيقات في Google AI Studio
+## Google AI Studio'da API anahtarlarını yönetme
 
-يمكنكم إدارة مشاريعكم ومفاتيحكم مباشرةً في [Google AI Studio](https://aistudio.google.com/apikey?hl=ar).
+Projelerinizi ve anahtarlarınızı doğrudan [Google AI Studio](https://aistudio.google.com/apikey?hl=tr)'da yönetebilirsiniz.
 
-### مشاريع Google Cloud
+### Google Cloud projeleri
 
-يرتبط كل مفتاح من Gemini API بمشروع على [Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ar).
-تُدير مشاريع Google Cloud الفوترة والمتعاونين والأذونات. يوفّر Google AI Studio واجهة بسيطة للوصول إلى هذه المشاريع.
+Her Gemini API anahtarı bir [Google Cloud projesiyle](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=tr) ilişkilendirilir.
+Google Cloud projeleri faturalandırmayı, ortak çalışanları ve izinleri yönetir. Google AI Studio, bu projelere erişmek için basit bir arayüz sunar.
 
-- **المشروع التلقائي**: إذا كنتم مستخدمين جددًا، ينشئ Google AI Studio تلقائيًا
-  مشروعًا تلقائيًا على Google Cloud ومفتاح واجهة برمجة تطبيقات بعد قبول
-  بنود الخدمة. يمكنكم إعادة تسمية هذا المشروع من خلال الانتقال إلى طريقة عرض **المشاريع** في لوحة البيانات.
-- **المشاريع الحالية**: إذا كان لديكم حساب على Google Cloud، لا ينشئ AI
-  Studio مشروعًا تلقائيًا. بدلاً من ذلك، يجب استيراد مشاريعكم الحالية.
+- **Varsayılan proje**: Yeni bir kullanıcıysanız Google AI Studio, Hizmet Şartları'nı kabul ettikten sonra otomatik olarak varsayılan bir Google Cloud projesi ve API anahtarı oluşturur. Kontrol panelinizdeki **Projeler** görünümüne giderek bu projeyi yeniden adlandırabilirsiniz.
+- **Mevcut projeler**: Google Cloud hesabınız varsa AI Studio varsayılan bir proje oluşturmaz. Bunun yerine mevcut projelerinizi içe aktarmanız gerekir.
 
-### استيراد المشاريع
+### Projeleri içe aktarma
 
-تلقائيًا، لا يعرض Google AI Studio جميع مشاريعكم على Google Cloud. يجب استيراد المشاريع التي تريدون استخدامها:
+Google AI Studio, varsayılan olarak Google Cloud projelerinizin tümünü göstermez. Kullanmak istediğiniz projeleri içe aktarmanız gerekir:
 
-1. انتقِلوا إلى [Google AI Studio](https://aistudio.google.com?hl=ar).
-2. افتحوا **لوحة البيانات** من اللوحة اليمنى وانقروا على **المشاريع**.
-3. انقروا على الزرّ **استيراد المشاريع**.
-4. ابحثوا عن مشروع Google Cloud الذي تريدون استيراده واختاروه، ثم انقروا على **استيراد**.
-5. بعد الاستيراد، انتقِلوا إلى صفحة **مفاتيح واجهة برمجة التطبيقات** في لوحة البيانات لإنشاء مفتاح في هذا المشروع.
+1. [Google AI Studio](https://aistudio.google.com?hl=tr)'ya gidin.
+2. Soldaki panelden **Kontrol Paneli**'ni açın ve **Projeler**'i seçin.
+3. **Projeleri içe aktar** düğmesini tıklayın.
+4. İçe aktarmak istediğiniz Google Cloud projesini arayıp seçin ve **İçe aktar**'ı tıklayın.
+5. İçe aktarma işlemi tamamlandıktan sonra kontrol panelindeki **API Anahtarları** sayfasına giderek ilgili projede anahtar oluşturun.
 
-### تحديد مشاكل أذونات إنشاء المفاتيح وحلّها
+### Anahtar oluşturma izinleriyle ilgili sorunları giderme
 
-إذا كان الزرّ **إنشاء مفتاح واجهة برمجة تطبيقات** غير متاح وعرض الرسالة:
-*"ليس لديكم الإذن بإنشاء مفتاح في هذا المشروع"*، فهذا يعني أنّه ليس لديكم
-أذونات "إدارة الهوية وإمكانية الوصول" المطلوبة.
+**API anahtarı oluştur** düğmesi kullanılamıyorsa ve şu mesajı gösteriyorsa:
+*"Bu projede anahtar oluşturma izniniz yok"*, gerekli IAM izinlerine sahip değilsinizdir.
 
-اطلبوا من مشرف مشروع Google Cloud أو مشرف المؤسسة منحكم دورًا يحتوي على الأذونات التالية (مثل دور "محرِّر المشروع"):
+Google Cloud projenizin veya kuruluş yöneticinizin size aşağıdaki izinleri içeren bir rol (ör. Proje Düzenleyicisi) vermesini isteyin:
 
-- `resourcemanager.projects.get`: يسمح لـ AI Studio بالتحقّق من المشروع.
-- `apikeys.keys.create`: يسمح بإنشاء المفتاح.
-- `serviceusage.services.enable`: يضمن تفعيل Generative Language API.
-- `iam.serviceAccounts.create`: مطلوب لإنشاء حساب الخدمة المرتبط.
-- `iam.serviceAccountApiKeyBindings.create`: يربط حساب الخدمة بمفتاح واجهة برمجة التطبيقات.
+- `resourcemanager.projects.get`: AI Studio'nun projeyi doğrulamasını sağlar.
+- `apikeys.keys.create`: Anahtar oluşturmaya izin verir.
+- `serviceusage.services.enable`: Generative Language API'nin etkinleştirilmesini sağlar.
+- `iam.serviceAccounts.create`: Bağlı hizmet hesabını oluşturmak için gereklidir.
+- `iam.serviceAccountApiKeyBindings.create`: Hizmet hesabını API anahtarına bağlar.
 
-إذا لم تتمكنوا من الحصول على إذن وصول إداري، يمكنكم إنشاء مشروع جديد على Google Cloud غير مرتبط بمؤسسة لإنشاء مفاتيحكم.
+Yönetim erişimi alamıyorsanız anahtarlarınızı oluşturmak için bir kuruluşla ilişkilendirilmemiş yeni bir Google Cloud projesi oluşturabilirsiniz.
 
-## إعداد البيئة
+## Ortamınızı kurma
 
-بعد الحصول على مفتاح، اضبطوا بيئتكم لاستخدامه بأمان في تطبيقاتكم.
+Anahtarınız olduğunda ortamınızı, uygulamalarınızda güvenli bir şekilde kullanacak şekilde yapılandırın.
 
-### استخدام متغيّرات البيئة (مُقترَح)
+### Ortam değişkenlerini kullanın (önerilir)
 
-اضبطوا متغيّر البيئة `GEMINI_API_KEY` أو `GOOGLE_API_KEY`. ترصد مكتبات برامج Gemini API هذه المتغيّرات وتستخدمها تلقائيًا. إذا تم ضبط كليهما، تكون الأولوية لـ `GOOGLE_API_KEY`.
+`GEMINI_API_KEY` veya `GOOGLE_API_KEY` ortam değişkenini ayarlayın. Gemini API istemci kitaplıkları bu değişkenleri otomatik olarak algılar ve kullanır. İkisi de ayarlanırsa `GOOGLE_API_KEY` öncelikli olur.
 
-اختَروا نظام التشغيل لضبط المتغيّر:
+Değişkeni ayarlamak için işletim sisteminizi seçin:
 
-### ‫Linux/macOS - باش
+### Linux/macOS - Bash
 
-تحقّقوا مما إذا كان لديكم ملف إعداد باش:
+Bir bash yapılandırma dosyanızın olup olmadığını doğrulayın:
 
 ```
 ~/.bashrc
 ```
 
-إذا لم يكن لديكم ملف، أنشئوا ملفًا وافتحوه:
+Yoksa bir tane oluşturup açın:
 
 ```
 touch ~/.bashrc && open ~/.bashrc
 ```
 
-أضيفوا أمر التصدير في نهاية الملف:
+Dosyanın sonuna dışa aktarma komutunu ekleyin:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-احفظوا الملف، ثم طبّقوا التغييرات:
+Dosyayı kaydedin ve değişiklikleri uygulayın:
 
 ```
 source ~/.bashrc
@@ -120,25 +111,25 @@ source ~/.bashrc
 
 ### macOS - Zsh
 
-تحقّقوا مما إذا كان لديكم ملف إعداد zsh:
+zsh yapılandırma dosyanızın olup olmadığını doğrulayın:
 
 ```
 ~/.zshrc
 ```
 
-إذا لم يكن لديكم ملف، أنشئوا ملفًا وافتحوه:
+Yoksa bir tane oluşturup açın:
 
 ```
 touch ~/.zshrc && open ~/.zshrc
 ```
 
-أضيفوا أمر التصدير:
+Dışa aktarma komutunu ekleyin:
 
 ```
 export GEMINI_API_KEY=<YOUR_API_KEY_HERE>
 ```
 
-احفظوا الملف، ثم طبّقوا التغييرات:
+Dosyayı kaydedin ve değişiklikleri uygulayın:
 
 ```
 source ~/.zshrc
@@ -146,15 +137,15 @@ source ~/.zshrc
 
 ### Windows
 
-1. ابحثوا عن "متغيّرات البيئة" في شريط بحث Windows.
-2. انقروا على **متغيّرات البيئة** في مربّع الحوار "خصائص النظام".
-3. ضمن **متغيّرات المستخدم** أو **متغيّرات النظام** ، انقروا على **جديد...**.
-4. اضبطوا اسم المتغيّر على `GEMINI_API_KEY` والقيمة على مفتاح واجهة برمجة التطبيقات.
-5. انقروا على **موافق** للحفظ. افتحوا جلسة طرفية جديدة لتحميل المتغيّر.
+1. Windows arama çubuğunda "Environment Variables" (Ortam Değişkenleri) ifadesini arayın.
+2. Sistem Özellikleri iletişim kutusunda **Ortam Değişkenleri**'ni tıklayın.
+3. **Kullanıcı değişkenleri** veya **Sistem değişkenleri** altında **Yeni...** seçeneğini tıklayın.
+4. Değişken adını `GEMINI_API_KEY`, değeri ise API anahtarınız olarak ayarlayın.
+5. Kaydetmek için **Tamam**'ı tıklayın. Değişkeni yüklemek için yeni bir terminal oturumu açın.
 
-### توفير مفتاح واجهة برمجة التطبيقات بشكلٍ صريح في الرمز
+### API anahtarını kodda açıkça sağlama
 
-يمكنكم تمرير مفتاح واجهة برمجة التطبيقات بشكلٍ صريح عند تهيئة البرنامج. لا تفعلوا ذلك إلا إذا لم تتمكنوا من استخدام متغيّرات البيئة.
+İstemciyi başlatırken API anahtarını açıkça iletebilirsiniz. Yalnızca ortam değişkenlerini kullanamıyorsanız bu işlemi yapın.
 
 ### Python
 
@@ -164,7 +155,7 @@ from google import genai
 client = genai.Client(api_key="YOUR_API_KEY")
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents="Explain how AI works in a few words"
 )
 print(response.text)
@@ -179,7 +170,7 @@ const ai = new GoogleGenAI({ apiKey: "YOUR_API_KEY" });
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: "Explain how AI works in a few words",
   });
   console.log(response.text);
@@ -188,7 +179,7 @@ async function main() {
 main();
 ```
 
-### انتقال
+### Go
 
 ```
 package main
@@ -212,7 +203,7 @@ func main() {
 
     result, err := client.Models.GenerateContent(
         ctx,
-        "gemini-3.5-flash",
+        "gemini-3.6-flash",
         genai.Text("Explain how AI works in a few words"),
         nil,
     )
@@ -223,7 +214,7 @@ func main() {
 }
 ```
 
-### جافا
+### Java
 
 ```
 package com.example;
@@ -237,7 +228,7 @@ public class GenerateTextFromTextInput {
 
     GenerateContentResponse response =
         client.models.generateContent(
-            "gemini-3.5-flash",
+            "gemini-3.6-flash",
             "Explain how AI works in a few words",
             null);
 
@@ -246,10 +237,10 @@ public class GenerateTextFromTextInput {
 }
 ```
 
-### راحة
+### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent"       -H 'Content-Type: application/json'       -H "x-goog-api-key: YOUR_API_KEY"       -X POST       -d '{
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent"       -H 'Content-Type: application/json'       -H "x-goog-api-key: YOUR_API_KEY"       -X POST       -d '{
     "contents": [
       {
         "parts": [
@@ -262,108 +253,98 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-## الأمان وإدارة الأسرار
+## Güvenlik ve gizli anahtar yönetimi
 
-تعاملوا مع مفتاح Gemini API ككلمة مرور. إذا تم اختراقه، يمكن للآخرين استهلاك حصة مشروعكم وتحمّل رسوم فوترة غير متوقّعة والوصول إلى الموارد الخاصة.
+Gemini API anahtarınızı şifre gibi kullanın. Bu anahtarların güvenliği ihlal edilirse diğer kullanıcılar projenizin kotasını kullanabilir, beklenmedik faturalandırma ücretlerine neden olabilir ve özel kaynaklara erişebilir.
 
-### قواعد الأمان المهمة
+### Kritik güvenlik kuralları
 
-- **الحفاظ على سرية المفاتيح**: لا تُدخلوا أبدًا مفاتيح واجهة برمجة التطبيقات في أنظمة التحكّم بالمصدر
-  مثل Git.
-- **عدم عرض المفاتيح مطلقًا من جهة العميل في مرحلة الإنتاج**: لا تُضمّنوا مفاتيح واجهة برمجة التطبيقات
-  مباشرةً في تطبيقات الويب أو الأجهزة الجوّالة. يمكن للمستخدمين استخراج المفاتيح التي تم تجميعها في الرمز من جهة العميل. لتأمين التطبيقات من جهة العميل، شغّلوا خادمًا وكيلاً من جهة الخلفية لإجراء طلبات البيانات الفعلية من واجهة برمجة التطبيقات.
+- **Anahtarları gizli tutun**: API anahtarlarını asla Git gibi kaynak kontrol sistemlerine işlemeyin.
+- **Üretimde anahtarları asla istemci tarafında kullanmayın**: API anahtarlarını doğrudan web veya mobil uygulamalara sabit kodlamayın. İstemci tarafı kodunda derlenen anahtarlar kullanıcılar tarafından çıkarılabilir. İstemci tarafı uygulamaların güvenliğini sağlamak için gerçek API çağrılarını yapmak üzere bir arka uç proxy sunucusu çalıştırın.
 
-### أفضل ممارسات إدارة الأسرار
+### Gizli anahtar yönetimi için en iyi uygulamalar
 
-- **متغيّرات البيئة**: اقرأوا المفاتيح من متغيّرات البيئة بدلاً من
-  ملفات الإعداد.
-- **Secret Manager**: بالنسبة إلى مرحلة الإنتاج، خزّنوا مفاتيحكم في مخزن أسرار آمن
-  مثل [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=ar).
-- **تنبيهات الفوترة**: اضبطوا تنبيهات الفوترة في Google Cloud Console لـ
-  إعلامكم في حال ارتفاع الاستخدام أو التكاليف.
+- **Ortam değişkenleri**: Anahtarları yapılandırma dosyaları yerine ortam değişkenlerinden okuyun.
+- **Secret Manager**: Üretim için anahtarlarınızı [Google Cloud Secret Manager](https://cloud.google.com/secret-manager?hl=tr) gibi güvenli bir gizli anahtar deposunda saklayın.
+- **Faturalandırma uyarıları**: Kullanım veya maliyetlerde artış olması durumunda sizi bilgilendirmek için Google Cloud Console'da faturalandırma uyarıları ayarlayın.
 
-### قائمة التحقّق من الاستجابة في حال تسرُّب البيانات
+### Sızıntı yanıtı yapılacaklar listesi
 
-إذا كنتم تشكّون في تسرُّب مفتاح واجهة برمجة التطبيقات:
+API anahtarınızın sızdırıldığından şüpheleniyorsanız:
 
-1. **إنشاء مفتاح جديد**: أنشئوا مفتاحًا بديلاً في Google AI Studio أو
-   Cloud Console.
-2. **تحديث تطبيقكم**: انشروا الرمز باستخدام المفتاح الجديد.
-3. **إيقاف المفتاح الذي تم اختراقه أو حذفه**: أوقفوا المفتاح المسرب في
-   Cloud Console بعد التحقّق من المفتاح الجديد. لا تحذفوا المفتاح القديم إلى أن يصبح المفتاح الجديد نشطًا بالكامل لتجنُّب توقّف التطبيق عن العمل.
-4. **تدقيق الاستخدام**: اطّلِعوا على سجلّات الفوترة واستخدام واجهة برمجة التطبيقات في Google Cloud
-   Console لتحديد النشاط غير المصرّح به.
+1. **Yeni bir anahtar oluşturun**: Google AI Studio veya Cloud Console'da yedek bir anahtar oluşturun.
+2. **Uygulamanızı güncelleyin**: Kodunuzu yeni anahtarı kullanarak dağıtın.
+3. **Güvenliği ihlal edilmiş anahtarı devre dışı bırakın veya silin**: Yeni anahtar doğrulandıktan sonra sızdırılan anahtarı Cloud Console'da devre dışı bırakın. Uygulama kapalı kalma süresini önlemek için yeni anahtar tamamen etkinleşene kadar eski anahtarı silmeyin.
+4. **Kullanımı denetleme**: Yetkisiz etkinliği belirlemek için Google Cloud Console'da faturalandırma günlüklerini ve API kullanımını kontrol edin.
 
-## تقييد مفاتيحكم وتأمينها
+## Anahtarlarınızı kısıtlama ve güvenliğini sağlama
 
-تؤدي إضافة قيود إلى مفاتيح واجهة برمجة التطبيقات إلى تقليل الأضرار المحتملة في حال اختراق أحد المفاتيح.
+API anahtarlarınıza kısıtlamalar eklemek, bir anahtarın güvenliği ihlal edilirse oluşabilecek zararı en aza indirir.
 
-### تطبيق قيود على مصدر الطلب
+### İstek kaynağı kısıtlamaları uygulama
 
-تحدّ القيود المفروضة على المصدر عناوين IP أو المواقع الإلكترونية أو التطبيقات التي يمكنها استخدام مفتاحكم.
+Kaynak kısıtlamaları, anahtarınızı hangi IP adreslerinin, web sitelerinin veya uygulamaların kullanabileceğini sınırlar.
 
-1. انتقِلوا إلى صفحة [بيانات الاعتماد في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
-2. اختاروا مشروعكم، وانقروا على اسم مفتاح واجهة برمجة التطبيقات الذي تريدون تقييده.
-3. ضمن **قيود التطبيق** ، اختاروا **عناوين IP** (أو نوع القيد المناسب لبيئتكم).
-4. حدّدوا عناوين IP أو النطاقات المسموح بها، ثم انقروا على **حفظ**.
+1. [Google Cloud Console Kimlik Bilgileri sayfasına](https://console.cloud.google.com/apis/credentials?hl=tr) gidin.
+2. Projenizi seçin ve kısıtlamak istediğiniz API anahtarının adını tıklayın.
+3. **Uygulama kısıtlamaları** bölümünde **IP adresleri**'ni (veya ortamınız için uygun kısıtlama türünü) seçin.
+4. İzin verilen IP adreslerini veya aralıklarını belirtin, ardından **Kaydet**'i tıklayın.
 
-### تأمين المفاتيح العادية غير المقيدة لواجهة برمجة التطبيقات
+### Kısıtlanmamış standart API anahtarlarının güvenliğini sağlama
 
-لمواصلة استخدام Gemini API، يجب تأمين أي مفاتيح غير مقيدة.
+Gemini API'yi kullanmaya devam etmek için tüm sınırsız anahtarları güvenli hale getirmeniz gerekir.
 
-#### قصر استخدام المفتاح على Gemini API فقط من خلال AI Studio
+#### Anahtarı yalnızca AI Studio üzerinden Gemini API ile kısıtlama
 
-إذا كنتم تستخدمون المفتاح فقط لواجهة Gemini API، يمكنكم تأمينه مباشرةً في AI Studio:
+Anahtarı yalnızca Gemini API için kullanıyorsanız doğrudan AI Studio'da güvenli hale getirin:
 
-1. في صفحة **مفاتيح واجهة برمجة التطبيقات** في [Google AI Studio](https://aistudio.google.com/api-keys?hl=ar)، ابحثوا عن المفاتيح التي تحمل التصنيف
-   **غير مقيّد**.
-2. مرِّروا مؤشر الماوس فوق التصنيف وانقروا على **إضافة قيود** في مربّع الحوار.
-3. اختاروا **قصر الاستخدام على Gemini API فقط**.
-4. انقروا على **تقييد المفتاح** للتأكيد.
+1. [Google AI Studio](https://aistudio.google.com/api-keys?hl=tr)'daki **API Anahtarları** sayfasında, **Kısıtlanmamış** etiketiyle işaretlenmiş anahtarları bulun.
+2. Fareyle etiketin üzerine gelin ve iletişim kutusunda **Kısıtlama ekle**'yi tıklayın.
+3. **Yalnızca Gemini API ile kısıtla**'yı seçin.
+4. Onaylamak için **Anahtarı kısıtla**'yı tıklayın.
 
-#### قصر استخدام المفتاح على خدمات أخرى من خلال Google Cloud Console
+#### Google Cloud Console üzerinden anahtarı diğer hizmetler için kısıtlama
 
-إذا كان المفتاح تتم مشاركته مع Google APIs الأخرى (لا يُنصح بذلك)، يمكنكم تقييده في Cloud Console. **ملاحظة: ستفشل طلبات Gemini API التي تستخدم هذا المفتاح بعد تطبيق هذه القيود.**
+Anahtar diğer Google API'leriyle paylaşılıyorsa (önerilmez) Cloud Console'da kısıtlayın. **Not: Bu anahtar kullanılarak yapılan Gemini API istekleri, bu kısıtlamalar uygulandıktan sonra başarısız olur.**
 
-1. انتقِلوا إلى [صفحة بيانات الاعتماد في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
-2. اختاروا المشروع ومفتاح واجهة برمجة التطبيقات.
-3. ضمن **قيود واجهة برمجة التطبيقات**، اختاروا **تقييد المفتاح**.
-4. من القائمة المنسدلة، اختاروا واجهات برمجة التطبيقات التي تريدون أن يتمكّن هذا المفتاح من الوصول إليها. لا تختاروا **Generative Language API**.
-5. انقروا على **حفظ**. أنشئوا مفتاحًا منفصلاً ومقيّدًا في AI Studio لمواصلة استخدام Gemini API.
+1. [Google Cloud Console Kimlik Bilgileri sayfasını](https://console.cloud.google.com/apis/credentials?hl=tr) ziyaret edin.
+2. Projeyi ve API anahtarını seçin.
+3. **API kısıtlamaları** bölümünde **Anahtarı kısıtla**'yı seçin.
+4. Açılır listeden, bu anahtarın erişmesini istediğiniz API'leri seçin. **Generative Language API**'yi seçmeyin.
+5. **Kaydet**'i tıklayın. Gemini API'yi kullanmaya devam etmek için AI Studio'da ayrı ve kısıtlanmış bir anahtar oluşturun.
 
-### المفاتيح غير النشطة المحظورة
+### Etkin olmayan engellenen anahtarlar
 
-اعتبارًا من 7 مايو 2026، ستحظر Gemini API مفاتيح واجهة برمجة التطبيقات غير المقيدة التي لم يتم استخدامها لفترة طويلة. تعرض هذه المفاتيح العلامة **محظور** في AI Studio. يجب إنشاء مفتاح جديد أو استخدام مفتاح حالي مقيّد لمواصلة الاستخدام.
+7 Mayıs 2026'dan itibaren Gemini API, uzun süredir kullanılmayan sınırsız API anahtarlarını engeller. Bu anahtarlar, AI Studio'da **Engellendi** etiketini gösterir. Devam etmek için yeni bir anahtar oluşturmanız veya mevcut bir kısıtlanmış anahtarı kullanmanız gerekir.
 
-## نقل البيانات إلى مفتاح تفويض
+## Kimlik doğrulama anahtarına geçiş yapma
 
-اتّبِعوا الخطوات التالية لإنشاء مفتاح تفويض جديد لواجهة برمجة التطبيقات وتحديث تطبيقاتكم:
+Yeni bir kimlik doğrulama API anahtarı oluşturmak ve uygulamalarınızı güncellemek için aşağıdaki adımları uygulayın:
 
-1. انتقِلوا إلى صفحة [مفاتيح واجهة برمجة التطبيقات في AI Studio](https://aistudio.google.com/api-keys?hl=ar).
-2. تحقّقوا من عمود **نوع المفتاح** لتحديد أي مفاتيح مُدرَجة على أنّها **عادية**.
-3. انقروا على **إنشاء مفتاح واجهة برمجة تطبيقات** لإنشاء مفتاح جديد. يتم تلقائيًا إنشاء جميع المفاتيح الجديدة في AI Studio كمفاتيح تفويض.
-4. انسخوا مفتاح التفويض الجديد لواجهة برمجة التطبيقات.
-5. عدِّلوا الرمز البرمجي لتطبيقكم ومتغيّرات البيئة وأي إعدادات نشر لاستخدام مفتاح واجهة برمجة التطبيقات الجديد للمصادقة.
-6. اختبِروا تطبيقكم للتأكّد من أنّه يعمل بشكل صحيح باستخدام المفتاح الجديد.
-7. بعد التحقّق، احذفوا مفتاح الزيارات القديم أو ابطلوه لمنع إساءة استخدامه.
+1. [AI Studio API Anahtarları sayfasına](https://aistudio.google.com/api-keys?hl=tr) gidin.
+2. **Standart** olarak listelenen anahtarları belirlemek için **Anahtar Türü** sütununu kontrol edin.
+3. Yeni bir anahtar oluşturmak için **API anahtarı oluştur**'u tıklayın. AI Studio'da oluşturulan tüm yeni anahtarlar otomatik olarak kimlik doğrulama anahtarı olarak oluşturulur.
+4. Yeni kimlik doğrulama API anahtarını kopyalayın.
+5. Yeni kimlik doğrulama API anahtarını kullanmak için uygulama kodunuzu, ortam değişkenlerinizi ve tüm dağıtım yapılandırmalarınızı güncelleyin.
+6. Uygulamanızı test ederek yeni anahtarla doğru şekilde çalıştığını doğrulayın.
+7. Doğrulandıktan sonra, kötüye kullanımı önlemek için eski trafik anahtarınızı silin veya iptal edin.
 
-## القيود
+## Sınırlamalar
 
-يفرض Google AI Studio القيود التالية على إدارة المشاريع والمفاتيح:
+Google AI Studio, proje ve anahtar yönetimiyle ilgili aşağıdaki sınırlamaları uygular:
 
-- يمكنكم إنشاء 10 مشاريع كحد أقصى في كل مرة من صفحة **المشاريع** في Google AI Studio.
-- تعرض صفحتا **مفاتيح واجهة برمجة التطبيقات** و**المشاريع** 100 مفتاح و50 مشروعًا كحد أقصى.
-- لا يتم عرض سوى مفاتيح واجهة برمجة التطبيقات غير المقيدة أو المقيدة تحديدًا بـ Generative Language API (‏Gemini API).
+- Google AI Studio **Projeler** sayfasında tek seferde en fazla 10 proje oluşturabilirsiniz.
+- **API anahtarları** ve **Projeler** sayfalarında en fazla 100 anahtar ve 50 proje gösterilir.
+- Yalnızca kısıtlanmamış veya özellikle Generative Language API (Gemini API) ile kısıtlanmış API anahtarları gösterilir.
 
-لإدارة المشاريع المتقدّمة أو لتعديل المفاتيح التي تتضمّن قيودًا أخرى، استخدِموا
-صفحة [بيانات الاعتماد في Google Cloud Console](https://console.cloud.google.com/apis/credentials?hl=ar).
+Gelişmiş proje yönetimi veya anahtarları diğer kısıtlamalarla değiştirmek için [Google Cloud Console kimlik bilgileri sayfasını](https://console.cloud.google.com/apis/credentials?hl=tr) kullanın.
 
-إرسال ملاحظات
+Geri bildirim gönderin
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-تاريخ التعديل الأخير: 2026-07-16 (حسب التوقيت العالمي المتفَّق عليه)
+Son güncelleme tarihi: 2026-07-30 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-16 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]

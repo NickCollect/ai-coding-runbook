@@ -1,30 +1,30 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=pl
-fetched_at: 2026-07-27T04:50:41.843370+00:00
-title: "Rozdzielczo\u015b\u0107 multimedi\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/media-resolution?hl=pt-BR
+fetched_at: 2026-08-03T04:35:30.521727+00:00
+title: "Resolu\u00e7\u00e3o da m\u00eddia \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-Prześlij opinię
+Envie comentários
 
-# Rozdzielczość multimediów
+# Resolução da mídia
 
-Parametr `media_resolution` określa, jak interfejs Gemini API przetwarza dane multimedialne, takie jak obrazy, filmy i dokumenty PDF, poprzez określenie **maksymalnej liczby tokenów** przydzielonych na dane multimedialne. Dzięki temu możesz zrównoważyć jakość odpowiedzi z opóźnieniem i kosztem. Więcej informacji o różnych ustawieniach, wartościach domyślnych i ich odpowiednikach w tokenach znajdziesz w sekcji [Liczba tokenów](#token-counts).
+O parâmetro `media_resolution` controla como a API Gemini processa entradas de mídia, como imagens, vídeos e documentos PDF, determinando o **número máximo de tokens** alocados para entradas de mídia, permitindo equilibrar a qualidade da resposta com a latência e o custo. Para diferentes configurações, valores padrão e como eles correspondem a tokens, consulte a seção [Contagens de tokens](#token-counts).
 
-Możesz skonfigurować rozdzielczość multimediów dla poszczególnych obiektów multimedialnych (elementów treści) w żądaniu (tylko w Gemini 3).
+É possível configurar a resolução de mídia para objetos de mídia individuais (itens de conteúdo) na solicitação (somente no Gemini 3).
 
-## Rozdzielczość multimediów dla poszczególnych elementów treści (tylko w Gemini 3)
+## Resolução de mídia por item de conteúdo (somente no Gemini 3)
 
-Gemini 3 umożliwia ustawienie rozdzielczości multimediów dla poszczególnych obiektów multimedialnych w żądaniu, co pozwala na precyzyjną optymalizację wykorzystania tokenów. W jednym żądaniu możesz używać różnych poziomów rozdzielczości. Na przykład możesz użyć wysokiej rozdzielczości w przypadku złożonego diagramu i niskiej rozdzielczości w przypadku prostego obrazu kontekstowego.
+O Gemini 3 permite definir a resolução de mídia para objetos de mídia individuais na solicitação, oferecendo otimização refinada do uso de tokens. É possível misturar níveis de resolução em uma única solicitação. Por exemplo, usando alta resolução para um diagrama complexo e baixa resolução para uma imagem contextual simples.
 
 ### Python
 
@@ -36,7 +36,7 @@ client = genai.Client()
 myfile = client.files.upload(file="path/to/image.jpg")
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Describe this image:"},
         {
@@ -64,7 +64,7 @@ async function main() {
   });
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
       { type: "text", text: "Describe this image:" },
       {
@@ -89,7 +89,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Describe this image:"},
       {
@@ -102,69 +102,69 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Dostępne wartości rozdzielczości
+## Valores de resolução disponíveis
 
-Interfejs Gemini API definiuje te poziomy rozdzielczości multimediów:
+A API Gemini define os seguintes níveis de resolução de mídia:
 
-- `unspecified` (nieokreślona): ustawienie domyślne. Liczba tokenów na tym poziomie znacznie różni się w zależności od tego, czy używasz Gemini 3, czy wcześniejszych modeli Gemini.
-- `low` (niska): mniejsza liczba tokenów, co przekłada się na szybsze przetwarzanie i niższe koszty, ale mniejszą szczegółowość.
-- `medium` (średnia): równowaga między szczegółowością, kosztem i opóźnieniem.
-- `high` (wysoka): większa liczba tokenów, co zapewnia modelowi więcej szczegółów, ale wiąże się z większym opóźnieniem i kosztem.
-- `ultra_high` (bardzo wysoka) (tylko w przypadku poszczególnych elementów treści): największa liczba tokenów, wymagana w określonych przypadkach użycia, np. podczas korzystania z [komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl).
+- `unspecified`: a configuração padrão. A contagem de tokens para esse nível varia significativamente entre o Gemini 3 e os modelos anteriores.
+- `low`: contagem de tokens mais baixa, resultando em processamento mais rápido e custo menor, mas com menos detalhes.
+- `medium`: um equilíbrio entre detalhes, custo e latência.
+- `high`: contagem de tokens mais alta, fornecendo mais detalhes para o modelo trabalhar, à custa de maior latência e custo.
+- `ultra_high` (somente por item de conteúdo): contagem de tokens mais alta, necessária para casos de uso específicos, como [uso de computador](https://ai.google.dev/gemini-api/docs/computer-use?hl=pt-br).
 
-Pamiętaj, że w większości przypadków użycia optymalną skuteczność zapewnia ustawienie `high`.
+O `high` oferece o desempenho ideal para a maioria dos casos de uso.
 
-Dokładna liczba tokenów generowanych na każdym z tych poziomów zależy zarówno od **typu multimediów** (obraz, film, PDF), jak i **wersji modelu**.
+O número exato de tokens gerados para cada um desses níveis depende do **tipo de mídia** (imagem, vídeo, PDF) e da **versão do modelo**.
 
-## Liczba tokenów
+## Contagens de tokens
 
-W tabelach poniżej znajdziesz podsumowanie przybliżonej liczby tokenów dla każdej wartości `media_resolution` i typu multimediów w przypadku poszczególnych rodzin modeli.
+As tabelas abaixo resumem as contagens aproximadas de tokens para cada valor `media_resolution` e tipo de mídia por família de modelos.
 
-**Modele Gemini 3**
+**Modelos do Gemini 3**
 
-| MediaResolution | Obraz | Wideo | PDF |
+| MediaResolution | Imagem | Vídeo | PDF |
 | --- | --- | --- | --- |
-| `unspecified` (domyślna) | 1120 | 70 | 560 |
-| `low` | 280 | 70 | 280 + tekst natywny |
-| `medium` | 560 | 70 | 560 + tekst natywny |
-| `high` | 1120 | 280 | 1120 + tekst natywny |
-| `ultra_high` | 2240 | Nie dotyczy | Nie dotyczy |
+| `unspecified` (padrão) | 1120 | 70 | 560 |
+| `low` | 280 | 70 | 280 + texto nativo |
+| `medium` | 560 | 70 | 560 + texto nativo |
+| `high` | 1120 | 280 | 1120 + texto nativo |
+| `ultra_high` | 2240 | N/A | N/A |
 
-## Wybór odpowiedniej rozdzielczości
+## Como escolher a resolução certa
 
-- **Domyślna (`unspecified`):** zacznij od ustawienia domyślnego. Jest ono dostosowane do większości typowych przypadków użycia, aby zapewnić dobrą równowagę między jakością, opóźnieniem i kosztem.
-- **`low`:** używaj w sytuacjach, w których najważniejsze są koszt i opóźnienie, a szczegółowość jest mniej istotna.
-- **`medium` / `high`:** zwiększ rozdzielczość, gdy zadanie wymaga zrozumienia złożonych szczegółów w multimediach. Jest to często konieczne w przypadku złożonej analizy wizualnej, odczytywania wykresów lub zrozumienia obszernych dokumentów.
-- **`ultra_high`** – dostępne tylko w przypadku ustawienia dla poszczególnych elementów treści. Zalecane w określonych przypadkach użycia, np. podczas korzystania z komputera, lub gdy testy wykazują wyraźną poprawę w porównaniu z ustawieniem `high`.
-- **Sterowanie dla poszczególnych elementów treści (Gemini 3):** optymalizuje wykorzystanie tokenów. Na przykład w przypadku prompta z wieloma obrazami użyj ustawienia `high` w przypadku złożonego diagramu oraz `low` lub `medium` w przypadku prostszych obrazów kontekstowych.
+- **Padrão (`unspecified`):** comece com o padrão. Ele é ajustado para um bom equilíbrio de qualidade, latência e custo para a maioria dos casos de uso comuns.
+- **`low`:** use para cenários em que o custo e a latência são fundamentais e detalhes refinados são menos importantes.
+- **`medium` / `high`:** aumente a resolução quando a tarefa exigir a compreensão de detalhes complexos na mídia. Isso geralmente é necessário para análises visuais complexas, leitura de gráficos ou compreensão de documentos densos.
+- **`ultra_high`** : disponível apenas para a configuração por item de conteúdo. Recomendado para casos de uso específicos, como uso de computador ou quando os testes mostram uma melhoria clara em relação a `high`.
+- **Controle por item de conteúdo (Gemini 3)** : otimiza o uso de tokens. Por exemplo, em um comando com várias imagens, use `high` para um diagrama complexo e `low` ou `medium` para imagens contextuais mais simples.
 
-**Zalecane ustawienia**
+**Configurações recomendadas**
 
-Poniżej znajdziesz zalecane ustawienia rozdzielczości multimediów dla każdego obsługiwanego typu multimediów.
+A seguir, listamos as configurações de resolução de mídia recomendadas para cada tipo de mídia compatível.
 
-| Typ mediów | Zalecane ustawienie | Maks. liczba tokenów | Wytyczne dotyczące użytkowania |
+| Tipo de mídia | Configuração recomendada | Máximo de tokens | Orientação de uso |
 | --- | --- | --- | --- |
-| **Obrazy** | `high` | 1120 | Zalecane w przypadku większości zadań analizy obrazów, aby zapewnić maksymalną jakość. |
-| **Pliki PDF** | `medium` | 560 | Optymalne do zrozumienia dokumentu. Jakość zwykle osiąga poziom nasycenia przy ustawieniu `medium`. Zwiększenie do `high` rzadko poprawia wyniki OCR w przypadku standardowych dokumentów. |
-| **Wideo** (ogólne) | `low` (lub `medium`) | 70 (na klatkę) | **Uwaga:** w przypadku filmów ustawienia `low` i `medium` są traktowane identycznie (70 tokenów), aby zoptymalizować wykorzystanie kontekstu. Jest to wystarczające w przypadku większości zadań związanych z rozpoznawaniem działań i opisem. |
-| **Wideo** (z dużą ilością tekstu) | `high` | 280 (na klatkę) | Wymagane tylko wtedy, gdy przypadek użycia obejmuje odczytywanie gęstego tekstu (OCR) lub małych szczegółów w klatkach wideo. |
+| **Imagens** | `high` | 1120 | Recomendado para a maioria das tarefas de análise de imagens para garantir a máxima qualidade. |
+| **PDFs** | `medium` | 560 | Ideal para compreensão de documentos. A qualidade normalmente satura em `medium`. Aumentar para `high` raramente melhora os resultados de OCR para documentos padrão. |
+| **Vídeo** (geral) | `low` (ou `medium`) | 70 (por frame) | **Observação**:para vídeos, as configurações `low` e `medium` são tratadas de forma idêntica (70 tokens) para otimizar o uso do contexto. Isso é suficiente para a maioria das tarefas de reconhecimento e descrição de ações. |
+| **Vídeo** (com muito texto) | `high` | 280 (por frame) | Necessário apenas quando o caso de uso envolve a leitura de texto denso (OCR) ou pequenos detalhes em frames de vídeo. |
 
-Zawsze testuj i oceniaj wpływ różnych ustawień rozdzielczości na swoją aplikację, aby znaleźć najlepszy kompromis między jakością, opóźnieniem i kosztem.
+Sempre teste e avalie o impacto de diferentes configurações de resolução no aplicativo para encontrar o melhor equilíbrio entre qualidade, latência e custo.
 
-## Podsumowanie zgodności wersji
+## Resumo da compatibilidade de versões
 
-- Ustawienie `resolution` w przypadku poszczególnych elementów treści jest **dostępne tylko w modelach Gemini 3**.
+- A definição da `resolution` em itens de conteúdo individuais é **exclusiva dos modelos do Gemini 3**.
 
-## Dalsze kroki
+## Próximas etapas
 
-- Więcej informacji o możliwościach multimodalnych interfejsu Gemini API znajdziesz w przewodnikach dotyczących [rozumienia obrazów](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pl), [rozumienia filmów](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pl) i [rozumienia dokumentów](https://ai.google.dev/gemini-api/docs/document-processing?hl=pl).
+- Saiba mais sobre os recursos multimodais da API Gemini nos guias de [compreensão de imagens](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pt-br), [compreensão de vídeos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-br) e [compreensão de documentos](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br).
 
-Prześlij opinię
+Envie comentários
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-Ostatnia aktualizacja: 2026-07-06 UTC.
+Última atualização 2026-07-30 UTC.
 
-Chcesz przekazać coś jeszcze?
+Quer enviar seu feedback?
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-06 UTC."],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-30 UTC."],[],[]]

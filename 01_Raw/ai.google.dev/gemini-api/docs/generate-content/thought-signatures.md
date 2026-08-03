@@ -1,91 +1,87 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=tr
-fetched_at: 2026-07-27T04:39:38.428602+00:00
-title: "D\u00fc\u015f\u00fcnce \u0130mzalar\u0131 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/thought-signatures?hl=zh-CN
+fetched_at: 2026-08-03T04:30:25.742557+00:00
+title: "\u601d\u8def\u7b7e\u540d \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Geri bildirim gönderin
+发送反馈
 
-# Düşünce İmzaları
+# 思路签名
 
-Düşünce imzaları, modelin dahili düşünce sürecinin şifrelenmiş temsilleridir ve çok adımlı etkileşimlerde akıl yürütme bağlamını korumak için kullanılır.
-Düşünme modelleri (ör.Gemini 3 ve 2.5 serisi) kullanılırken API, yanıtın [content parts](https://ai.google.dev/api/caching?hl=tr#Part) (içerik bölümleri) içinde bir `thoughtSignature` alanı döndürebilir (ör. `text` veya `functionCall` bölümleri).
+思考签名是模型内部思考过程的加密表示形式，用于在多步互动中保留推理上下文。使用思维模型（例如 Gemini 3 和 2.5 系列）时，API 可能会在响应的 [content parts](https://ai.google.dev/api/caching?hl=zh-cn#Part)（例如 `text` 或 `functionCall` 部分）中返回 `thoughtSignature` 字段。
 
-Genel bir kural olarak, model yanıtında düşünce imzası alırsanız konuşma geçmişini bir sonraki turda gönderirken bu imzayı aynen iletmeniz gerekir.
-**Gemini 3 modellerini kullanırken işlev çağrısı sırasında düşünce imzalarını geri iletmeniz gerekir. Aksi takdirde doğrulama hatası alırsınız** (4xx durum kodu).
-Gemini 3 Flash için `minimal`
-[düşünme düzeyi](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#thinking-levels) ayarı kullanılırken de bu durum geçerlidir.
+一般来说，如果您在模型回答中收到思考签名，则应在下一轮对话中发送对话历史记录时，按原样将其传递回去。
+**使用 Gemini 3 模型时，您必须在函数调用期间传递回思维签名，否则会收到验证错误**（4xx 状态代码）。这包括使用 Gemini 3 Flash 的 `minimal`
+[思考级别](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#thinking-levels)设置时。
 
-## İşleyiş şekli
+## 运作方式
 
-Aşağıdaki grafik, Gemini API'deki [işlev çağrısı](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr) ile ilgili olarak "dönüş" ve "adım"ın anlamını görselleştirir. "Dönüş", kullanıcı ile model arasındaki sohbetteki tek ve eksiksiz bir etkileşimdir. "Adım", model tarafından gerçekleştirilen daha ayrıntılı bir işlem veya operasyondur. Genellikle bir dönüşü tamamlamak için daha büyük bir sürecin parçası olarak gerçekleştirilir.
+下图直观地展示了“轮次”和“步骤”的含义，它们与 Gemini API 中的[函数调用](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn)有关。“轮次”是指用户与模型之间一次完整的对话交流。“步骤”是指模型执行的更精细的操作，通常是完成一轮对话的较大流程的一部分。
 
-![İşlev çağrısı dönüşleri ve adımları diyagramı](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=tr)
+![函数调用对话轮次和步骤图](https://ai.google.dev/static/gemini-api/docs/images/fc-turns.png?hl=zh-cn)
 
-*Bu belgede, Gemini 3 modellerinde işlev çağrısının nasıl işleneceği ele alınmaktadır. 2.5 ile ilgili tutarsızlıklar için [model davranışı](#model-behavior) bölümüne bakın.*
+*本文档重点介绍如何处理 Gemini 3 模型的函数调用。如需了解与 2.5 之间的差异，请参阅[模型行为](#model-behavior)部分。*
 
-Gemini 3, işlev çağrısı içeren tüm model yanıtları (API'den gelen yanıtlar) için düşünce imzaları döndürür. Düşünce imzaları aşağıdaki durumlarda gösterilir:
+对于包含函数调用的所有模型回答（来自 API 的回答），Gemini 3 都会返回思考签名。在以下情况下，系统会显示想法签名：
 
-- [Paralel işlev](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#parallel_function_calling) çağrıları olduğunda, model yanıtı tarafından döndürülen ilk işlev çağrısı bölümünde düşünce imzası bulunur.
-- Sıralı işlev çağrıları (çok adımlı) olduğunda her işlev çağrısının bir imzası olur ve tüm imzaları geri iletmeniz gerekir.
-- İşlev çağrısı içermeyen model yanıtları, modelin döndürdüğü son kısımda düşünce imzası döndürür.
+- 如果存在[并行函数](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-cn#parallel_function_calling)调用，模型回答返回的第一个函数调用部分将包含思考签名。
+- 如果存在顺序函数调用（多步），每个函数调用都会有一个签名，您必须将所有签名都传递回去。
+- 不包含函数调用的模型响应会在模型返回的最后一部分中返回思考签名。
 
-Aşağıdaki tabloda, yukarıda bahsedilen imzalar kavramıyla birlikte dönüş ve adım tanımlarını birleştiren çok adımlı işlev çağrıları için bir görselleştirme sunulmaktadır:
+下表直观展示了多步函数调用，将对话轮次和步骤的定义与上文介绍的签名概念相结合：
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | 1 | 1 | `request1 = user_prompt` | `FC1 + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + (FC1 + signature) + FR1` | `FC2 + signature` | `FR2` |
-| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | Yok |
+| 1 | 3 | `request3 = request2 + (FC2 + signature) + FR2` | `text_output`  `(no FCs)` | 无 |
 
-## İşlev çağrısı bölümlerindeki imzalar
+## 函数调用部分中的签名
 
-Gemini bir `functionCall` oluşturduğunda, sonraki turda aracın çıktısını doğru şekilde işlemek için `thought_signature` kullanır.
+当 Gemini 生成 `functionCall` 时，它会依赖 `thought_signature` 在下一轮中正确处理工具的输出。
 
-- **Davranış**:
-  - **Tek İşlev Çağrısı**: `functionCall` bölümünde `thought_signature` yer alır.
-  - **Paralel İşlev Çağrıları**: Model, yanıtta paralel işlev çağrıları oluşturursa `thought_signature` **yalnızca ilk**
-    `functionCall` bölüme eklenir. Aynı yanıttaki sonraki `functionCall` bölümleri imza **içermez**.
-- **Şart: Görüşme geçmişini geri gönderirken bu imzayı, alındığı **tam** kısımda iade etmeniz gerekir**.
-- **Doğrulama**: Geçerli dönüşteki tüm işlev çağrıları için katı doğrulama uygulanır . (Yalnızca mevcut dönüş gereklidir; önceki dönüşler doğrulanmaz)
-  - API, standart içerik (ör. `text`) içeren en son **User** mesajını (mevcut dönüşün başlangıcı) bulmak için geçmişe (en yeni mesajdan en eski mesaja) gider. Bu işlem **be** `functionResponse` değildir.
-  - Bu belirli kullanım mesajından sonraki **tüm** model `functionCall` dönüşleri, dönüşün bir parçası olarak kabul edilir.
-  - **Mevcut dönüşteki **her adımın** **ilk** `functionCall` bölümü, `thought_signature` içermelidir.**
-  - Mevcut dönüşün herhangi bir adımında ilk `functionCall` bölüm için `thought_signature` karakterini atlarsanız istek 400 hatasıyla başarısız olur.
-- **Uygun imzalar döndürülmezse hata nasıl oluşur?**
-  - Gemini 3 modelleri: İmzaların eklenmemesi 400 hatasına neden olur. Metin şu biçimde olacaktır:
-    - `<index of contents array>` içerik bloğundaki `<Function Call>` işlev çağrısında `thought_signature` eksik. Örneğin, `1.` içerik bloğundaki *Function
-      call `FC1` ifadesinde `thought_signature` eksik.*
+- **行为**：
+  - **单个函数调用**：`functionCall` 部分将包含 `thought_signature`。
+  - **并行函数调用**：如果模型在回答中生成并行函数调用，则 `thought_signature` 仅附加到第一个 `functionCall` 部分。同一响应中的后续 `functionCall` 部分将**不**包含签名。
+- **要求**：在将对话记录发送回去时，您**必须**在收到此签名时所在的精确位置返回此签名。
+- **验证**：对当前回合中的所有函数调用强制执行严格验证。（仅需要当前轮次；我们不会验证之前的轮次）
+  - 该 API 会按时间顺序（从最新到最旧）查找包含标准内容（例如 `text`）的最新**用户**消息（即当前对话轮次的开始）。这不会是 `functionResponse`。**be**
+  - 在特定使用消息之后发生的所有**所有**模型 `functionCall` 回答都被视为回答的一部分。
+  - 当前轮次中**每个步骤**的**第一个** `functionCall` 部分**必须**包含其 `thought_signature`。
+  - 如果在当前轮次的任何步骤中省略了第一个 `functionCall` 部分所需的 `thought_signature`，请求将失败并显示 400 错误。
+- **如果未返回正确的签名，您将看到以下错误**
+  - Gemini 3 模型：如果未包含签名，将导致 400 错误。措辞将采用以下格式：
+    - `<index of contents array>` 内容块中的函数调用 `<Function Call>` 缺少 `thought_signature`。例如，*`1.` 内容块中的函数调用 `FC1` 缺少 `thought_signature`。*
 
-### Sıralı işlev çağrısı örneği
+### 顺序函数调用示例
 
-Bu bölümde, kullanıcının birden fazla görev gerektiren karmaşık bir soru sorduğu birden fazla işlev çağrısı örneği gösterilmektedir.
+本部分展示了一个多函数调用示例，其中用户提出了需要执行多项任务的复杂问题。
 
-Kullanıcının birden fazla görev gerektiren karmaşık bir soru sorduğu çok turlu bir işlev çağrısı örneğini inceleyelim: `"Check flight status for AA100 and
-book a taxi if delayed"`.
+我们来演练一个多轮函数调用示例，其中用户提出了一个需要执行多项任务的复杂问题：`"Check flight status for AA100 and
+book a taxi if delayed"`。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | 1 | 1 | `request1="Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
+以下代码展示了上表中的序列。
 
-**1. Tur, 1. Adım (Kullanıcı isteği)**
+**第 1 轮，第 1 步（用户请求）**
 
 ```
 {
@@ -140,7 +136,7 @@ Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 }
 ```
 
-**1. Tur, 1. Adım (Model yanıt)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -161,7 +157,7 @@ Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 }
 ```
 
-**1. dönüş, 2. adım (Kullanıcı yanıtı - Araç çıktılarını gönderme)** Bu kullanıcı dönüşü yalnızca `functionResponse` içerdiğinden (yeni metin yok) hâlâ 1. dönüşteyiz. `<Signature_A>` korunmalıdır.
+**第 1 轮，第 2 步（用户响应 - 发送工具输出）**由于此用户轮次仅包含 `functionResponse`（没有新文本），因此我们仍处于第 1 轮。我们必须保留 `<Signature_A>`。
 
 ```
 {
@@ -202,7 +198,7 @@ Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 }
 ```
 
-**1. Tur, 2. Adım (Model)** Model, önceki araç çıkışına göre taksi rezervasyonu yapmaya karar veriyor.
+**第 1 轮，第 2 步（模型）**模型现在根据上一个工具输出决定预订出租车。
 
 ```
 {
@@ -223,7 +219,7 @@ Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 }
 ```
 
-**1. tur, 3. adım (Kullanıcı - Araç çıktısı gönderme)** Taksi rezervasyonu onayını göndermek için bu döngüdeki **TÜM** işlev çağrılarına imza eklememiz gerekir (`<Signature A>` + `<Signature B>`).
+**第 1 轮，第 3 步（用户 - 发送工具输出）**如要发送出租车预订确认，我们必须包含此循环中所有函数调用的签名（`<Signature A>` + `<Signature B>`）。
 
 ```
 {
@@ -292,19 +288,18 @@ Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 }
 ```
 
-### Paralel işlev çağrısı örneği
+### 并行函数调用示例
 
-Kullanıcının modele doğrulama yaptığı yeri görmeyi istediği paralel işlev çağrısı örneğini inceleyelim.
-`"Check weather in Paris and London"`
+我们来看一个并行函数调用示例，其中用户要求`"Check weather in Paris and London"`，以了解模型在何处进行验证。
 
-| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | --- | --- | --- | --- | --- |
-| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1 ("Paris") + imza  FC2 ("London") | FR1 |
-| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  (FC yok) | Yok |
+| 1 | 1 | `request1="Check the weather in Paris and London"` | FC1（“巴黎”）+ 签名  FC2（“伦敦”） | FR1 |
+| 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | text\_output  （无 FC） | 无 |
 
-Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
+以下代码展示了上表中的序列。
 
-**1. Tur, 1. Adım (Kullanıcı isteği)**
+**第 1 轮，第 1 步（用户请求）**
 
 ```
 {
@@ -343,7 +338,7 @@ Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 }
 ```
 
-**1. Tur, 1. Adım (Model yanıt)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -371,7 +366,7 @@ Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 }
 ```
 
-**1. Tur, 2. Adım (Kullanıcı yanıtı - Araç çıktılarını gönderme)** İlk bölümdeki `<Signature_A>`, alındığı şekilde korunmalıdır.
+**第 1 轮，第 2 步（用户响应 - 发送工具输出）**我们必须完全按接收时的原样保留第一部分的 `<Signature_A>`。
 
 ```
 [
@@ -429,17 +424,17 @@ Aşağıdaki kod, yukarıdaki tablodaki sırayı gösterir.
 ]
 ```
 
-## `functionCall` dışındaki bölümlerdeki imzalar
+## 非 `functionCall` 部分中的签名
 
-Gemini, işlev çağrısı içermeyen bölümlerde yanıtın son kısmında `thought_signatures` da döndürebilir.
+Gemini 还可能会在不包含函数调用的回答的最后一部分中返回 `thought_signatures`。
 
-- **Davranış**: Model tarafından döndürülen son içerik bölümü (`text, inlineData…`), `thought_signature` içerebilir.
-- **Öneri**: Özellikle karmaşık talimatları takip etme veya simüle edilmiş aracı iş akışları için modelin yüksek kaliteli akıl yürütme özelliğini korumasını sağlamak amacıyla bu imzaların döndürülmesi **önerilir**.
-- **Doğrulama**: API, doğrulamayı katı bir şekilde **zorunlu kılmaz**. Bunları atladığınızda engelleme hatası almazsınız ancak performans düşebilir.
+- **行为**：模型返回的最后内容部分 (`text, inlineData…`) 可能包含 `thought_signature`。
+- **建议**：**建议**返回这些签名，以确保模型保持高质量的推理，特别是对于遵循复杂指令或模拟代理工作流的情况。
+- **验证**：API **不会**严格强制验证。如果您省略它们，不会收到阻塞性错误，但性能可能会下降。
 
-### Metin/Bağlam içi akıl yürütme (Doğrulama yok)
+### 文本/上下文推理（无验证）
 
-**1. Tur, 1. Adım (Model yanıt)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -453,7 +448,7 @@ Gemini, işlev çağrısı içermeyen bölümlerde yanıtın son kısmında `tho
 }
 ```
 
-**2. Tur, 1. Adım (Kullanıcı)**
+**第 2 轮，第 1 步（用户）**
 
 ```
 [
@@ -471,26 +466,26 @@ Gemini, işlev çağrısı içermeyen bölümlerde yanıtın son kısmında `tho
 ]
 ```
 
-## OpenAI uyumluluğu için imzalar
+## OpenAI 兼容性签名
 
-Aşağıdaki örneklerde, [OpenAI uyumluluğu](https://ai.google.dev/gemini-api/docs/openai?hl=tr) kullanılarak bir sohbet tamamlama API'si için düşünce imzalarının nasıl işleneceği gösterilmektedir.
+以下示例展示了如何使用 [OpenAI 兼容性](https://ai.google.dev/gemini-api/docs/openai?hl=zh-cn)来处理聊天补全 API 的思考签名。
 
-### Sıralı işlev çağrısı örneği
+### 顺序函数调用示例
 
-Bu, kullanıcının birden fazla görev gerektiren karmaşık bir soru sorduğu çoklu işlev çağrısı örneğidir.
+这是一个多函数调用示例，其中用户提出了需要执行多项任务的复杂问题。
 
-Kullanıcının `Check flight status for AA100 and book a taxi if delayed` diye sorduğu çok turlu bir işlev çağrısı örneğini inceleyelim. Kullanıcı, birden fazla görev gerektiren karmaşık bir soru sorduğunda ne olduğunu görebilirsiniz.
+我们来看一个多轮函数调用示例，其中用户提出 `Check flight status for AA100 and book a taxi if delayed`，您可以了解当用户提出需要执行多项任务的复杂问题时会发生什么情况。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | 1 | 1 | `request1 = "Check flight status for AA100 and book a taxi 2 hours before if delayed."` | `FC1 ("check_flight") + signature` | `FR1` |
 | 1 | 2 | `request2 = request1 + FC1 ("check_flight") + signature + FR1` | `FC2("book_taxi") + signature` | `FR2` |
 | 1 | 3 | `request3 = request2 + FC2 ("book_taxi") + signature + FR2` | `text_output`  `(no FCs)` | `None` |
 
-Aşağıdaki kod, verilen sırayı adım adım açıklar.
+以下代码会遍历给定的序列。
 
-**1. Tur, 1. Adım (Kullanıcı İsteği)**
+**第 1 轮，第 1 步（用户请求）**
 
 ```
 {
@@ -544,7 +539,7 @@ Aşağıdaki kod, verilen sırayı adım adım açıklar.
 }
 ```
 
-**1. Tur, 1. Adım (Model Yanıt)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -567,9 +562,9 @@ Aşağıdaki kod, verilen sırayı adım adım açıklar.
     }
 ```
 
-**1. Dönüş, 2. Adım (Kullanıcı Yanıtı - Araç Çıkışlarını Gönderme)**
+**第 1 轮，第 2 步（用户响应 - 发送工具输出）**
 
-Bu kullanıcı dönüşü yalnızca `functionResponse` içerdiğinden (yeni metin yok) hâlâ 1. dönüşteyiz ve `<Signature_A>` korunmalıdır.
+由于此用户轮次仅包含 `functionResponse`（没有新文本），因此我们仍处于第 1 轮，必须保留 `<Signature_A>`。
 
 ```
 "messages": [
@@ -604,9 +599,9 @@ Bu kullanıcı dönüşü yalnızca `functionResponse` içerdiğinden (yeni meti
   ]
 ```
 
-**1. Tur, 2. Adım (Model)**
+**第 1 轮，第 2 步（模型）**
 
-Model, önceki araç çıkışına göre taksi rezervasyonu yapmaya karar veriyor.
+模型现在根据上一个工具输出决定预订出租车。
 
 ```
 {
@@ -629,9 +624,9 @@ Model, önceki araç çıkışına göre taksi rezervasyonu yapmaya karar veriyo
 }
 ```
 
-**1. Tur, 3. Adım (Kullanıcı - Araç Çıktısı Gönderme)**
+**第 1 轮，第 3 步（用户 - 发送工具输出）**
 
-Taksi rezervasyonu onayını göndermek için bu döngüdeki TÜM işlev çağrıları (`<Signature A>` + `<Signature B>`) için imzalar eklememiz gerekir.
+如要发送出租车预订确认，我们必须包含此循环中所有函数调用的签名（`<Signature A>` + `<Signature B>`）。
 
 ```
 "messages": [
@@ -690,19 +685,19 @@ Taksi rezervasyonu onayını göndermek için bu döngüdeki TÜM işlev çağr�
   ]
 ```
 
-### Paralel işlev çağrısı örneği
+### 并行函数调用示例
 
-Kullanıcının `"Check weather in Paris and London"` diye sorduğu paralel işlev çağırma örneğini inceleyelim. Bu örnekte, modelin nerede doğrulama yaptığını görebilirsiniz.
+我们来看一个并行函数调用示例，其中用户要求 `"Check weather in Paris and London"`，您可以了解模型在何处进行验证。
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Dönüş** | **Step** | **Kullanıcı İsteği** | **Model Response** (Model Yanıtı) | **FunctionResponse** |
+| **轮次** | **Step** | **用户请求** | **模型回答** | **FunctionResponse** |
 | 1 | 1 | `request1="Check the weather in Paris and London"` | `FC1 ("Paris") + signature`  `FC2 ("London")` | `FR1` |
 | 1 | 2 | `request 2 = request1 + FC1 ("Paris") + signature + FC2 ("London")` | `text_output`  `(no FCs)` | `None` |
 
-Belirtilen sırayı izlemek için gereken kod aşağıda verilmiştir.
+以下是遍历给定序列的代码。
 
-**1. Tur, 1. Adım (Kullanıcı İsteği)**
+**第 1 轮，第 1 步（用户请求）**
 
 ```
 {
@@ -741,7 +736,7 @@ Belirtilen sırayı izlemek için gereken kod aşağıda verilmiştir.
 }
 ```
 
-**1. Tur, 1. Adım (Model Yanıt)**
+**第 1 轮，第 1 步（模型回答）**
 
 ```
 {
@@ -772,9 +767,9 @@ Belirtilen sırayı izlemek için gereken kod aşağıda verilmiştir.
 }
 ```
 
-**1. Dönüş, 2. Adım (Kullanıcı Yanıtı - Araç Çıkışlarını Gönderme)**
+**第 1 轮，第 2 步（用户响应 - 发送工具输出）**
 
-İlk bölümdeki `<Signature_A>` işaretini tam olarak aldığınız şekilde korumalısınız.
+您必须完全按接收时的原样保留第一部分的 `<Signature_A>`。
 
 ```
 "messages": [
@@ -823,40 +818,39 @@ Belirtilen sırayı izlemek için gereken kod aşağıda verilmiştir.
   ]
 ```
 
-## SSS
+## 常见问题解答
 
-1. **Geçerli dönüş ve adımda işlev çağrısı bölümü olan Gemini 3'e farklı bir modelden geçmiş nasıl aktarılır? API tarafından oluşturulmadığı için ilişkili düşünce imzası olmayan işlev çağrısı bölümleri sağlamam gerekiyor mu?**
+1. **如何将历史记录从其他模型转移到 Gemini 3，并在当前轮次和步骤中包含函数调用部分？我是否需要提供并非由 API 生成的函数调用部分，因此这些部分没有关联的思考签名？**
 
-   İsteğe özel işlev çağrısı bloklarının isteğe eklenmesi kesinlikle önerilmez.Ancak bu durumun kaçınılmaz olduğu durumlarda (ör. istemci tarafından deterministik olarak yürütülen işlev çağrıları ve yanıtları hakkında modele bilgi sağlama veya düşünce imzaları içermeyen farklı bir modelden izleme aktarma) doğrulamanın atlanması için düşünce imzası alanında `"context_engineering_is_the_way_to_go"` veya `"skip_thought_signature_validator"` değerlerinden birinin aşağıdaki sahte imzalarını ayarlayabilirsiniz.
-2. **İç içe geçmiş paralel işlev çağrıları ve yanıtları geri gönderiyorum ve API 400 döndürüyor. Neden?**
+   虽然强烈建议不要将自定义函数调用块注入到请求中，但在无法避免的情况下（例如，向模型提供有关由客户端确定性执行的函数调用和响应的信息，或者转移不包含思路签名的其他模型的轨迹），您可以在思路签名字段中设置以下虚拟签名 `"context_engineering_is_the_way_to_go"` 或 `"skip_thought_signature_validator"`，以跳过验证。
+2. **我发送了交错的并行函数调用和响应，但 API 返回了 400 错误。为什么？**
 
-   API, paralel işlev çağrıları "FC1 + imza, FC2" döndürdüğünde, beklenen kullanıcı yanıtı "FC1+ imza, FC2, FR1, FR2" olur. Bunları "FC1 + imza, FR1, FC2, FR2" şeklinde iç içe yerleştirirseniz API 400 hatası döndürür.
-3. **Yayın sırasında model, bulamadığım bir işlev çağrısı döndürmüyor. Bu durumda düşünce imzasını bulamıyorum**
+   当 API 返回并行函数调用“FC1 + 签名, FC2”时，预期的用户回答是“FC1 + 签名, FC2, FR1, FR2”。如果您以“FC1 + 签名、FR1、FC2、FR2”的方式交错放置它们，API 将返回 400 错误。
+3. **在流式传输过程中，如果模型未返回函数调用，我找不到思考签名**
 
-   Akış isteğiyle birlikte FC içermeyen bir model yanıtı sırasında model, düşünce imzasını boş metin içerikli bir bölümde döndürebilir. Model tarafından `finish_reason` döndürülene kadar isteğin tamamını ayrıştırmanız önerilir.
+   在模型回答不包含 FC 的流式传输请求期间，模型可能会在文本内容为空的部分中返回思考签名。建议解析整个请求，直到模型返回 `finish_reason`。
 
-## Farklı modeller için düşünce imzaları
+## 不同模型的思维签名
 
-[Gemini 3 modelleri](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-3) ve Gemini 2.5 modelleri
-işlev çağrılarında düşünce imzalarıyla farklı şekilde davranır:
+[Gemini 3 模型](https://ai.google.dev/gemini-api/docs/models?hl=zh-cn#gemini-3)和 Gemini 2.5 模型在函数调用中对思维签名有不同的行为：
 
-- Yanıt işlev çağrıları içeriyorsa,
-  - Gemini 3, her zaman ilk işlev çağrısı bölümünde imzaya sahip olur.
-    Bu parçanın iade edilmesi **zorunludur**.
-  - Gemini 2.5, ilk bölümde imzayı (türden bağımsız olarak) içerir. Bu parçayı iade etmek **isteğe bağlıdır**.
-- Yanıt içinde işlev çağrısı yoksa,
-  - Model bir düşünce oluşturursa Gemini 3, son bölümde imzayı gösterir.
-  - Gemini 2.5'in hiçbir bölümünde imza bulunmaz.
+- 如果响应中包含函数调用，则
+  - Gemini 3 将始终在第一个函数调用部分中包含签名。
+    必须退回该部件。
+  - Gemini 2.5 将在第一部分中包含签名（无论类型如何）。您可以选择是否退回该部分。
+- 如果响应中没有函数调用，则返回
+  - 如果模型生成了想法，Gemini 3 将在最后一部分添加签名。
+  - Gemini 2.5 不会在任何部分显示签名。
 
-Daha fazla karşılaştırma bilgisi için [Düşünme](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#signatures) sayfasına bakın.
-Gemini 3 Image modelleri için [Görüntü oluşturma](https://ai.google.dev/gemini-api/docs/image-generation?hl=tr#thinking-process) kılavuzunun düşünme süreci bölümüne bakın.
+如需了解更多比较详情，请参阅[思考](https://ai.google.dev/gemini-api/docs/thinking?hl=zh-cn#signatures)页面。
+对于 Gemini 3 Image 模型，请参阅[图片生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=zh-cn#thinking-process)指南的“思考过程”部分。
 
-Geri bildirim gönderin
+发送反馈
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Son güncelleme tarihi: 2026-06-22 UTC.
+最后更新时间 (UTC)：2026-07-30。
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+需要向我们提供更多信息？
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-06-22 UTC."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]

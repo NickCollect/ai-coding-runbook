@@ -1,29 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=ja
-fetched_at: 2026-07-27T04:37:58.059254+00:00
-title: "Gemini Deep Research \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/deep-research?hl=it
+fetched_at: 2026-08-03T04:33:44.045893+00:00
+title: "Agente Gemini Deep Research \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-フィードバックを送信
+Invia feedback
 
-# Gemini Deep Research エージェント
+# Agente Gemini Deep Research
 
-Gemini Deep Research エージェントは、複数ステップのリサーチタスクを自律的に計画、実行、統合します。Gemini を搭載し、複雑な情報環境をナビゲートして、引用付きの詳細なレポートを作成します。新機能により、エージェントと共同で計画を立てたり、MCP サーバーを使用して外部ツールに接続したり、可視化（グラフなど）を含めたり、ドキュメントを直接入力として提供したりできます。
+L'agente Gemini Deep Research pianifica, esegue e sintetizza autonomamente
+attività di ricerca in più fasi. Basato su Gemini, esplora paesaggi informativi complessi per produrre report dettagliati e citati. Le nuove
+funzionalità ti consentono di pianificare in collaborazione con l'agente, connetterti a
+strumenti esterni utilizzando i server MCP, includere
+visualizzazioni (come grafici e diagrammi) e fornire documenti direttamente
+come input.
 
-リサーチタスクには、反復的な検索と読み取りが含まれ、完了までに数分かかることがあります。エージェントを非同期で実行して結果をポーリングするか、更新をストリーミングするには、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)（`background=true`を設定）を使用する必要があります。詳細については、
-[長時間実行タスクの処理](#long-running-tasks)をご覧ください。
+Le attività di ricerca comportano la ricerca e la lettura iterative e possono richiedere diversi minuti per essere completate. Devi utilizzare l'[esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it) (imposta `background=true`)
+per eseguire l'agente in modo asincrono e cercare i risultati o trasmettere in streaming gli aggiornamenti. Per saperne di più, consulta [Gestione delle attività a lunga esecuzione](#long-running-tasks).
 
-次の例は、バックグラウンドでリサーチタスクを開始して結果をポーリングする方法を示しています。
+L'esempio seguente mostra come avviare un'attività di ricerca in background
+e eseguire il polling dei risultati.
 
 ### Python
 
@@ -98,20 +104,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## サポート対象のバージョン
+## Versioni supportate
 
-Deep Research エージェントには次の 2 つのバージョンがあります。
+L'agente Deep Research è disponibile in due versioni:
 
-- **Deep Research** （`deep-research-preview-04-2026`）: スピードと効率性を重視した設計で、クライアント UI にストリーミングで返送するのに最適です。
-- **Deep Research Max** （`deep-research-max-preview-04-2026`）: コンテキストの自動収集と統合を最大限に包括的に行います。
+- **Deep Research** (`deep-research-preview-04-2026`): progettato per velocità ed efficienza, ideale per essere trasmesso in streaming a una UI client.
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): massima completezza per la raccolta e la sintesi automatizzate del contesto.
 
-## 共同計画
+## Pianificazione collaborativa
 
-共同計画では、エージェントが作業を開始する前にリサーチプランを確認して改善できるため、実行前にリサーチの方向性を制御できます。有効にすると、エージェントはすぐに実行するのではなく、リサーチプランの候補を返します。その後、複数ターンのインタラクションを通じてプランを確認、変更、承認できます。
+La pianificazione collaborativa ti consente di controllare la direzione della ricerca prima che l'agente inizi il suo lavoro, permettendoti di rivedere e perfezionare il piano di ricerca prima dell'esecuzione. Se questa opzione è abilitata, l'agente restituisce un piano di ricerca proposto anziché
+eseguirlo immediatamente. Puoi quindi rivedere, modificare o approvare il piano tramite
+interazioni in più passaggi.
 
-### ステップ 1: プランをリクエストする
+### Passaggio 1: richiedi un piano
 
-最初のインタラクションで `collaborative_planning=True` を設定します。エージェントは完全なレポートではなく、リサーチプランを返します。
+Imposta `collaborative_planning=True` nella prima interazione. L'agente
+restituisce un piano di ricerca anziché un report completo.
 
 ### Python
 
@@ -177,9 +186,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### ステップ 2: プランを改善する（省略可）
+### Passaggio 2: perfeziona il piano (facoltativo)
 
-`previous_interaction_id` を使用して会話を続け、プランを反復処理します。`collaborative_planning=True` のままにして、計画モードを維持します。
+Utilizza `previous_interaction_id` per continuare la conversazione e perfezionare il piano. Mantieni `collaborative_planning=True` per rimanere in modalità
+pianificazione.
 
 ### Python
 
@@ -243,9 +253,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### ステップ 3: 承認して実行する
+### Passaggio 3: approva ed esegui
 
-`collaborative_planning=False` に設定（または省略）して、プランを承認し、リサーチを開始します。
+Imposta `collaborative_planning=False` (o omettilo) per approvare il piano e
+avviare la ricerca.
 
 ### Python
 
@@ -309,10 +320,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Visualization
+## Visualizzazione
 
-`visualization` が `"auto"` に設定されている場合、エージェントはグラフなどの視覚要素を生成して、リサーチ結果をサポートできます。生成された画像はレスポンス ステップに含まれ、`image` デルタとしてストリーミングされます。最適な結果を得るには、クエリで視覚要素を明示的にリクエストします（例: 「経時的な傾向を示すグラフを含める」、「市場シェアを比較するグラフを生成する」）。 `visualization` を
-`"auto"` に設定すると機能が有効になりますが、エージェントはプロンプトでリクエストされた場合にのみ視覚要素を生成します。
+Quando `visualization` è impostato su `"auto"`, l'agente può generare grafici e altri elementi visivi per supportare i risultati della ricerca.
+Le immagini generate sono incluse nei passaggi della risposta e vengono trasmesse in streaming come
+delta `image`. Per ottenere risultati ottimali, chiedi esplicitamente immagini nella tua
+query, ad esempio "Includi grafici che mostrano le tendenze nel tempo" o
+"Genera grafici che confrontano la quota di mercato". L'impostazione di `visualization` su
+`"auto"` attiva la funzionalità, ma l'agente genera immagini solo
+quando il prompt le richiede.
 
 ### Python
 
@@ -403,21 +419,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## サポートされるツール
+## Strumenti supportati
 
-Deep Research は、複数の組み込みツールと外部ツールをサポートしています。デフォルトでは（`tools` パラメータが指定されていない場合）、エージェントは Google 検索、URL コンテキスト、コード実行にアクセスできます。ツールを明示的に指定して、エージェントの機能を制限または拡張できます。
+Deep Research supporta più strumenti integrati ed esterni. Per impostazione predefinita
+(quando non viene fornito alcun parametro `tools`), l'agente ha accesso a Google
+Search, al contesto URL e all'esecuzione di codice. Puoi specificare
+in modo esplicito gli strumenti per limitare o estendere le funzionalità dell'agente.
 
-| ツール | Type 値 | 説明 |
+| Strumento | Tipo di valore | Descrizione |
 | --- | --- | --- |
-| Google 検索 | `google_search` | 公開ウェブを検索します。デフォルトで有効。 |
-| URL コンテキスト | `url_context` | ウェブページの内容を読み取って要約します。デフォルトで有効。 |
-| コードを実行する | `code_execution` | コードを実行して計算とデータ分析を行います。デフォルトで有効。 |
-| MCP サーバー | `mcp_server` | 外部ツールにアクセスするためにリモート MCP サーバーに接続します。 |
-| ファイル検索 | `file_search` | アップロードしたドキュメント コーパスを検索します。 |
+| Ricerca Google | `google_search` | Ricerca sul web pubblico. Abilitato per impostazione predefinita. |
+| Contesto URL | `url_context` | Leggere e riassumere i contenuti di una pagina web. Abilitato per impostazione predefinita. |
+| Esecuzione del codice | `code_execution` | Esegui il codice per eseguire calcoli e analisi dei dati. Abilitato per impostazione predefinita. |
+| Server MCP | `mcp_server` | Connettiti ai server MCP remoti per l'accesso a strumenti esterni. |
+| Ricerca file | `file_search` | Cerca nei corpora di documenti caricati. |
 
-### Google 検索
+### Ricerca Google
 
-Google 検索を唯一のツールとして明示的に有効にします。
+Abilita esplicitamente la Ricerca Google come unico strumento:
 
 ### Python
 
@@ -455,9 +474,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### URL コンテキスト
+### Contesto URL
 
-エージェントが特定のウェブページを読み取って要約できるようにします。
+Concedi all'agente la possibilità di leggere e riassumere pagine web specifiche:
 
 ### Python
 
@@ -495,9 +514,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### コードを実行する
+### Esecuzione del codice
 
-エージェントが計算とデータ分析のためにコードを実行できるようにします。
+Consenti all'agente di eseguire codice per calcoli e analisi dei dati:
 
 ### Python
 
@@ -535,21 +554,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### MCP サーバー
+### Server MCP
 
-リモート MCP サーバーに接続して、エージェントが外部ツールやサービスにアクセスできるようにします。
+Connettiti a server MCP remoti per consentire all'agente di accedere a strumenti e
+servizi esterni.
 
-ツール構成でサーバーの `name` と `url` を指定します。認証情報を渡して、エージェントが呼び出すことができるツールを制限することもできます。
+Fornisci il server `name` e `url` nella configurazione degli strumenti. Puoi anche
+trasferire le credenziali di autenticazione e limitare gli strumenti che l'agente può chiamare.
 
-| フィールド | 型 | 必須 / 省略可 | 説明 |
+| Campo | Tipo | Obbligatorio | Descrizione |
 | --- | --- | --- | --- |
-| `type` | `string` | はい | `"mcp_server"` を指定します。 |
-| `name` | `string` | いいえ | MCP サーバーの表示名。 |
-| `url` | `string` | いいえ | MCP サーバー エンドポイントの完全な URL。 |
-| `headers` | `object` | いいえ | サーバーへのリクエストごとに HTTP ヘッダーとして送信される Key-Value ペア（認証トークンなど）。 |
-| `allowed_tools` | `array` | いいえ | エージェントが呼び出すことができるサーバーのツールを制限します。 |
+| `type` | `string` | Sì | Deve essere `"mcp_server"`. |
+| `name` | `string` | No | Un nome visualizzato per il server MCP. |
+| `url` | `string` | No | L'URL completo dell'endpoint del server MCP. |
+| `headers` | `object` | No | Coppie chiave-valore inviate come intestazioni HTTP con ogni richiesta al server (ad esempio, token di autenticazione). |
+| `allowed_tools` | `array` | No | Limita gli strumenti del server che l'agente può chiamare. |
 
-#### 基本的な使用方法
+#### Utilizzo di base
 
 ### Python
 
@@ -608,9 +629,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-### ファイル検索
+### Ricerca file
 
-[ファイル検索ツールを使用して、エージェントが独自のデータにアクセスできるようにします。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
+Concedi all'agente l'accesso ai tuoi dati utilizzando lo strumento [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it).
 
 ### Python
 
@@ -662,13 +683,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 操作性と書式設定
+## Orientabilità e formattazione
 
-プロンプトで特定の書式設定手順を指定することで、エージェントの出力を操作できます。これにより、レポートを特定のセクションと
-サブセクションに構造化したり、データテーブルを含めたり、さまざまなユーザーに合わせてトーンを調整したりできます（例:
-「技術的」、「エグゼクティブ」、「カジュアル」）。
+Puoi controllare l'output dell'agente fornendo istruzioni di formattazione specifiche nel prompt. In questo modo puoi strutturare i report in sezioni e sottosezioni specifiche, includere tabelle di dati o regolare il tono per diversi segmenti di pubblico (ad es. "tecnico", "dirigenziale", "informale").
 
-入力テキストで目的の出力形式を明示的に定義します。
+Definisci esplicitamente il formato di output desiderato nel testo di input.
 
 ### Python
 
@@ -721,9 +740,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## マルチモーダル入力
+## Input multimodali
 
-Deep Research は、画像やドキュメント（PDF）などのマルチモーダル入力をサポートしており、エージェントは視覚的なコンテンツを分析し、提供された入力に基づいてウェブベースのリサーチを行うことができます。
+Deep Research supporta input multimodali, tra cui immagini e documenti (PDF), consentendo
+all'agente di analizzare i contenuti visivi e condurre ricerche basate sul web
+contestualizzate dagli input forniti.
 
 ### Python
 
@@ -829,10 +850,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 # -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### ドキュメントの理解
+### Document understanding
 
-ドキュメントの理解により、ドキュメントをマルチモーダル入力として直接渡すことができます。
-エージェントは提供されたドキュメントを分析し、その内容に基づいてリサーチを行います。
+La comprensione dei documenti consente di passare i documenti direttamente come input multimodali.
+L'agente analizza i
+documenti forniti e conduce ricerche basate sui loro contenuti.
 
 ### Python
 
@@ -893,30 +915,35 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 長時間実行タスクの処理
+## Gestione di attività di lunga durata
 
-Deep Research は、計画、検索、読み取り、書き込みを含む複数ステップのプロセスです。通常、このサイクルは同期 API 呼び出しの標準のタイムアウト上限を超えます。
+Deep Research è un processo in più passaggi che prevede pianificazione, ricerca, lettura
+e scrittura. Questo ciclo in genere supera i limiti di timeout standard delle
+chiamate API sincrone.
 
-エージェントは `background=True` を使用する必要があります。API は部分的な `Interaction` オブジェクトをすぐに返します。`id` プロパティを使用して、ポーリング用のインタラクションを取得できます。インタラクションの状態は `in_progress` から `completed` または `failed` に遷移します。バックグラウンド タスクの管理に関する包括的なガイドについては、[バックグラウンド実行](https://ai.google.dev/gemini-api/docs/background-execution?hl=ja)をご覧ください。
+Gli agenti sono tenuti a utilizzare `background=True`. L'API restituisce immediatamente un oggetto
+`Interaction` parziale. Puoi utilizzare la proprietà `id` per recuperare un'interazione per il polling. Lo stato dell'interazione passerà da
+`in_progress` a `completed` o `failed`. Per una guida completa alla gestione delle attività in background, consulta [Esecuzione in background](https://ai.google.dev/gemini-api/docs/background-execution?hl=it).
 
-### ストリーミング
+### Streaming
 
-Deep Research は、思考の要約、テキスト出力、生成された画像など、リサーチの進捗状況に関するリアルタイムの更新情報を受信するためのストリーミングをサポートしています。
-`stream=True` と `background=True` を設定する必要があります。
+Deep Research supporta lo streaming per ricevere aggiornamenti in tempo reale sull'avanzamento della ricerca, inclusi riepiloghi dei pensieri, output di testo e immagini generate.
+Devi impostare `stream=True` e `background=True`.
 
-中間的な推論ステップ（思考）と進捗状況の更新情報を受け取るには、
-`agent_config` で `thinking_summaries` を
-`"auto"` に設定して、**思考の要約** を有効にする必要があります。これがないと、ストリームは最終結果のみを提供する可能性があります。
+Per ricevere passaggi di ragionamento intermedi (pensieri) e aggiornamenti sullo stato di avanzamento,
+devi attivare i **riepiloghi del pensiero** impostando `thinking_summaries` su
+`"auto"` in `agent_config`. Senza questo, lo stream potrebbe fornire solo i risultati finali.
 
-#### ストリーム イベントタイプ
+#### Tipi di eventi di stream
 
-| イベントの種類 | Delta タイプ | 説明 |
+| Tipo di evento | Tipo di delta | Descrizione |
 | --- | --- | --- |
-| `step.delta` | `thought` | エージェントからの中間的な推論ステップ。 |
-| `step.delta` | `text` | 最終的なテキスト出力の一部。 |
-| `step.delta` | `image` | 生成された画像（base64 でエンコード）。 |
+| `step.delta` | `thought` | Passaggio di ragionamento intermedio dell'agente. |
+| `step.delta` | `text` | Parte dell'output di testo finale. |
+| `step.delta` | `image` | Un'immagine generata (con codifica base64). |
 
-次の例では、リサーチタスクを開始し、自動再接続でストリームを処理します。`interaction_id` と `last_event_id` をトラッキングすることで、接続が切断された場合（600 秒のタイムアウト後など）に、中断したところから再開できます。
+L'esempio seguente avvia un'attività di ricerca ed elabora lo stream con
+la riconnessione automatica. Monitora `interaction_id` e `last_event_id` in modo che, se la connessione si interrompe (ad esempio, dopo il timeout di 600 secondi), possa riprendere da dove era stata interrotta.
 
 ### Python
 
@@ -1037,9 +1064,12 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/INTER
 -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## フォローアップの質問とインタラクション
+## Domande aggiuntive e interazioni
 
-`previous_interaction_id` を使用すると、エージェントが最終レポートを返した後も会話を続けることができます。これにより、タスク全体を再開することなく、リサーチの特定のセクションについて説明、要約、詳細をリクエストできます。
+Puoi continuare la conversazione dopo che l'agente ha restituito il report finale
+utilizzando `previous_interaction_id`. In questo modo puoi chiedere chiarimenti,
+riepiloghi o approfondimenti su sezioni specifiche della ricerca senza
+dover ricominciare l'intera attività.
 
 ### Python
 
@@ -1082,28 +1112,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Gemini Deep Research エージェントを使用するケース
+## Quando utilizzare l'agente Gemini Deep Research
 
-Deep Research は単なるモデルではなく、**エージェント** です。レイテンシの低いチャットではなく、「アナリスト イン ア ボックス」のアプローチが必要なワークロードに最適です。
+Deep Research è un **agente**, non solo un modello. È più adatta ai workload
+che richiedono un approccio "analista in una scatola" anziché una chat a bassa latenza.
 
-| 機能 | 標準の Gemini モデル | Gemini Deep Research エージェント |
+| Funzionalità | Modelli Gemini standard | Agente Gemini Deep Research |
 | --- | --- | --- |
-| **レイテンシ** | 秒 | 分（非同期/バックグラウンド） |
-| **プロセス** | 生成 -> 出力 | 計画 -> 検索 -> 読み取り -> 反復 -> 出力 |
-| **出力** | 会話テキスト、コード、短い要約 | 詳細なレポート、長文分析、比較表 |
-| **最適なケース** | chatbot、抽出、クリエイティブ ライティング | 市場分析、デュー デリジェンス、文献レビュー、競合状況の把握 |
+| **Latenza** | Secondi | Minuti (asincrono/in background) |
+| **Procedura** | Genera -> Output | Pianificazione -> Ricerca -> Lettura -> Iterazione -> Output |
+| **Output** | Testo conversazionale, codice, riepiloghi brevi | Report dettagliati, analisi in formato lungo, tabelle comparative |
+| **Ideale per** | Chatbot, estrazione, scrittura creativa | Analisi di mercato, due diligence, revisioni della letteratura, panorama competitivo |
 
-## エージェントの構成
+## Configurazione dell'agente
 
-Deep Research は、`agent_config` パラメータを使用して動作を制御します。
-次のフィールドを含むディクショナリとして渡します。
+Deep Research utilizza il parametro `agent_config` per controllare il comportamento.
+Trasmettilo come dizionario con i seguenti campi:
 
-| フィールド | タイプ | デフォルト | 説明 |
+| Campo | Tipo | Predefinito | Descrizione |
 | --- | --- | --- | --- |
-| `type` | `string` | 必須 | `"deep-research"` を指定します。 |
-| `thinking_summaries` | `string` | `"none"` | ストリーミング中に中間的な推論ステップを受け取るには、`"auto"` に設定します。無効にするには、`"none"` に設定します。 |
-| `visualization` | `string` | `"auto"` | エージェントが生成したグラフや画像を有効にするには、`"auto"` に設定します。無効にするには、`"off"` に設定します。 |
-| `collaborative_planning` | `boolean` | `false` | リサーチを開始する前に複数ターンのプランレビューを有効にするには、`true` に設定します。 |
+| `type` | `string` | Obbligatorio | Deve essere `"deep-research"`. |
+| `thinking_summaries` | `string` | `"none"` | Imposta `"auto"` per ricevere i passaggi di ragionamento intermedi durante lo streaming. Imposta su `"none"` per disattivarlo. |
+| `visualization` | `string` | `"auto"` | Imposta `"auto"` per attivare grafici e immagini generati dall'agente. Imposta su `"off"` per disattivarlo. |
+| `collaborative_planning` | `boolean` | `false` | Imposta su `true` per attivare la revisione del piano in più turni prima dell'inizio della ricerca. |
 
 ### Python
 
@@ -1158,62 +1189,72 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## 提供状況と価格
+## Disponibilità e prezzi
 
-Gemini Deep Research エージェントには、Google AI Studio と Gemini API の Interactions API を使用してアクセスできます。
+Puoi accedere all'agente Gemini Deep Research utilizzando l'API Interactions in Google AI Studio e l'API Gemini.
 
-料金は、基盤となる Gemini モデルとエージェントが使用する特定のツールに基づく[従量課金制モデル](https://ai.google.dev/gemini-api/docs/pricing?hl=ja#pricing-for-agents)です。リクエストが 1 つの出力につながる標準のチャット リクエストとは異なり、Deep Research タスクはエージェント ワークフローです。1 つのリクエストで、計画、検索、読み取り、推論の自律的なループがトリガーされます。
+I prezzi seguono un [modello di pagamento a consumo](https://ai.google.dev/gemini-api/docs/pricing?hl=it#pricing-for-agents) basato sui modelli Gemini sottostanti e sugli strumenti specifici utilizzati dall'agente. A differenza delle richieste di chat standard, in cui una richiesta porta a un output, un'attività Deep Research è un flusso di lavoro agentico. Una singola richiesta attiva un ciclo autonomo di pianificazione, ricerca, lettura e ragionamento.
 
-### 推定費用
+### Costi stimati
 
-費用は、必要なリサーチの深さによって異なります。エージェントは、プロンプトに回答するために必要な読み取りと検索の量を自律的に決定します。
+I costi variano in base alla profondità della ricerca richiesta. L'agente determina autonomamente la quantità di lettura e ricerca necessaria per rispondere al prompt.
 
-- **Deep Research** （`deep-research-preview-04-2026`）: 適度な分析が必要な一般的なクエリの場合、エージェントは ~80 件の検索クエリ、~25 万個の入力トークン（~50 ～ 70% がキャッシュ）、~6 万個の出力トークンを使用する可能性があります。
-  - **合計（推定）:** 1 タスクあたり ~$1.00 ～$3.00
-- **Deep Research Max** （`deep-research-max-preview-04-2026`）: 競合状況の詳細な分析や広範なデュー デリジェンスの場合、エージェントは最大 ~160 件の検索クエリ、~90 万個の入力トークン（~50 ～ 70% がキャッシュ）、~8 万個の出力トークンを使用する可能性があります。
-  - **合計（推定）:** 1 タスクあたり ~$3.00 ～$7.00
+- **Deep Research** (`deep-research-preview-04-2026`): per una query tipica che richiede un'analisi moderata, l'agente potrebbe utilizzare circa 80 query di ricerca, circa 250.000 token di input (circa il 50-70% memorizzati nella cache) e circa 60.000 token di output.
+  - **Totale stimato:** 1-3 € per attività
+- **Deep Research Max** (`deep-research-max-preview-04-2026`): per un'analisi approfondita del panorama competitivo o una due diligence estesa, l'agente potrebbe utilizzare fino a circa 160 query di ricerca, circa 900.000 token di input (circa il 50-70% memorizzati nella cache) e circa 80.000 token di output.
+  - **Totale stimato:** 3-7 € per attività
 
-## 安全上の考慮事項
+## Considerazioni sulla sicurezza
 
-エージェントにウェブとプライベート ファイルへのアクセス権を付与する場合は、安全上のリスクを慎重に検討する必要があります。
+Concedere a un agente l'accesso al web e ai tuoi file privati richiede un'attenta
+valutazione dei rischi per la sicurezza.
 
-- **ファイルを使用したプロンプト インジェクション:** エージェントは、提供されたファイルの内容を読み取ります。アップロードされたドキュメント（PDF、テキスト ファイル）が信頼できるソースからのものであることを確認してください。悪意のあるファイルには、エージェントの出力を操作するように設計された隠しテキストが含まれている可能性があります。
-- **ウェブ コンテンツのリスク:** エージェントは公開ウェブを検索します。堅牢な安全フィルターを実装していますが、エージェントが悪意のあるウェブページに遭遇して処理するリスクがあります。レスポンスで提供される `citations` を確認して、ソースを検証することをおすすめします。
-- **データ漏洩:** エージェントにウェブの閲覧を許可している場合は、機密性の高い内部データの要約をリクエストする際に注意してください。
+- **Prompt injection tramite file**:l'agente legge i contenuti dei file
+  che fornisci. Assicurati che i documenti caricati (PDF, file di testo) provengano da
+  fonti attendibili. Un file dannoso potrebbe contenere testo nascosto progettato per
+  manipolare l'output dell'agente.
+- **Rischi dei contenuti web**:l'agente esegue ricerche sul web pubblico. Sebbene implementiamo
+  filtri di sicurezza robusti, esiste il rischio che l'agente possa incontrare ed
+  elaborare pagine web dannose. Ti consigliamo di esaminare le `citations` fornite
+  nella risposta per verificare le fonti.
+- **Esfiltrazione**:fai attenzione quando chiedi all'agente di riassumere dati interni sensibili se gli consenti anche di navigare sul web.
 
-## ベスト プラクティス
+## Best practice
 
-- **不明な情報をプロンプトでリクエストする:** エージェントに欠損データの処理方法を指示します。
-  たとえば、プロンプトに*「2025 年の具体的な数値が利用できない場合は、
-  推定するのではなく、予測または利用できないことを
-  明示的に示す」*を追加します。
-- **コンテキストを提供する:** 入力プロンプトで背景情報や制約を直接指定して、エージェントのリサーチをグラウンディングします。
-- **共同計画を使用する:** 複雑なクエリの場合は、共同計画を有効にして、実行前にリサーチプランを確認して改善します。
-- **マルチモーダル入力:** Deep Research エージェントはマルチモーダル入力をサポートしています。
-  費用が増加し、コンテキスト ウィンドウのオーバーフローのリスクが高まるため、慎重に使用してください。
+- **Richiedi sconosciuti**:indica all'agente come gestire i dati mancanti.
+  Ad esempio, aggiungi *"Se non sono disponibili cifre specifiche per il 2025,
+  indica esplicitamente che si tratta di proiezioni o che non sono disponibili anziché
+  stimarle"* al prompt.
+- **Fornisci contesto**:basa la ricerca dell'agente fornendo informazioni di base o vincoli direttamente nel prompt di input.
+- **Utilizza la pianificazione collaborativa**:per le query complesse, attiva la pianificazione collaborativa per rivedere e perfezionare il piano di ricerca prima dell'esecuzione.
+- **Input multimodali:** l'agente Deep Research supporta input multimodali.
+  Utilizza con cautela, in quanto aumenta i costi e il rischio di overflow della finestra contestuale.
 
-## 制限事項
+## Limitazioni
 
-- **カスタムツール:** 現在、カスタムの関数呼び出しツールを提供することはできませんが、Deep Research エージェントでリモート MCP（Model Context Protocol）サーバーを使用できます。
-- **構造化出力:** Deep Research エージェントは現在、構造化出力をサポートしていません。
-- **最大リサーチ時間:** Deep Research エージェントのリサーチ時間は最大 60 分です。ほとんどのタスクは 20 分以内に完了します。
-- **ストアの要件:** `background=True` を使用したエージェントの実行には `store=True` が必要です。
-- **Google 検索:** [Google
-  検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)はデフォルトで有効になっており、[グラウンディングされた結果には
-  特定の](https://ai.google.dev/gemini-api/terms?hl=ja#use-restrictions2)
-  制限が適用されます。
+- **Strumenti personalizzati**:al momento non puoi fornire strumenti di chiamata di funzioni personalizzati,
+  ma puoi utilizzare server MCP (Model Context Protocol) remoti con l'agente Deep Research.
+- **Output strutturato**:l'agente Deep Research attualmente
+  non supporta gli output strutturati.
+- **Tempo massimo di ricerca**:l'agente Deep Research ha un tempo massimo di ricerca di 60 minuti. La maggior parte delle attività dovrebbe essere completata entro 20 minuti.
+- **Requisito dello store**:l'esecuzione dell'agente utilizzando `background=True` richiede
+  `store=True`.
+- **Ricerca Google**:la [Ricerca
+  Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it) è attivata per
+  impostazione predefinita e ai risultati fondati si applicano [limitazioni
+  specifiche](https://ai.google.dev/gemini-api/terms?hl=it#use-restrictions2).
 
-## 次のステップ
+## Passaggi successivi
 
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の詳細について学習する。
-- [ファイル検索ツールを使用して独自のデータを使用する方法を学習する。](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
+- Scopri di più sull'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it).
+- Scopri come utilizzare i tuoi dati con lo strumento [Ricerca file](https://ai.google.dev/gemini-api/docs/file-search?hl=it).
 
-フィードバックを送信
+Invia feedback
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-最終更新日 2026-07-14 UTC。
+Ultimo aggiornamento 2026-07-14 UTC.
 
-ご意見をお聞かせください
+Vuoi dirci altro?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-14 UTC。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-14 UTC."],[],[]]

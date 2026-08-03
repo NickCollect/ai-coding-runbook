@@ -1,38 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=ja
-fetched_at: 2026-07-27T04:33:33.584765+00:00
-title: "Lyria 3 \u3067\u97f3\u697d\u3092\u751f\u6210\u3059\u308b \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/music-generation?hl=fr
+fetched_at: 2026-08-03T04:27:11.417074+00:00
+title: "G\u00e9n\u00e9rer de la musique avec Lyria\u00a03 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-フィードバックを送信
+Envoyer des commentaires
 
-# Lyria 3 で音楽を生成する
+# Générer de la musique avec Lyria 3
 
-Lyria 3 は、Gemini API を介して利用できる Google の音楽生成モデル ファミリーです。Lyria 3 を使用すると、テキスト プロンプトや画像から、高品質の 44.1 kHz ステレオ音声を生成できます。これらのモデルは、ボーカル、タイミングに合わせた歌詞、完全なインストゥルメンタル アレンジなど、構造的な一貫性を提供します。
+Lyria 3 est la famille de modèles de génération de musique de Google, disponible via l'API Gemini. Avec Lyria 3, vous pouvez générer de l'audio stéréo de haute qualité à 44, 1 kHz à partir de requêtes textuelles ou d'images. Ces modèles offrent une cohérence structurelle, y compris les voix, les paroles synchronisées et les arrangements instrumentaux complets.
 
-Lyria 3 ファミリーには次の 2 つのモデルが含まれています。
+La famille Lyria 3 comprend deux modèles :
 
-| モデル | モデル ID | 最適な用途 | 所要時間 | 出力 |
+| Modèle | ID du modèle | Application idéale | Durée | Sortie |
 | --- | --- | --- | --- | --- |
-| **Lyria 3 Clip** | `lyria-3-clip-preview` | 短いクリップ、ループ、プレビュー | 30 秒 | MP3 |
-| **Lyria 3 Pro** | `lyria-3-pro-preview` | A メロ、サビ、ブリッジのあるフルレングスの曲 | 数分（プロンプトで制御可能） | MP3 |
+| **Lyria 3 Clip** | `lyria-3-clip-preview` | Clips courts, boucles, aperçus | 30 secondes | MP3 |
+| **Lyria 3 Pro** | `lyria-3-pro-preview` | Chansons complètes avec des couplets, des refrains et des ponts | Quelques minutes (contrôlables via la requête) | MP3 |
 
-どちらのモデルも、標準の `generateContent` メソッドと新しい [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) を使用して使用できます。マルチモーダル入力（テキストと画像）をサポートし、**44.1 kHz の高忠実度ステレオ**音声を生成します。
+Les deux modèles peuvent être utilisés avec la méthode `generateContent` standard et la nouvelle [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr), qui accepte les entrées multimodales (texte et images) et produit de l'audio **stéréo haute fidélité à 44,1 kHz**.
 
-## 音楽クリップを生成する
+## Générer un extrait musical
 
-Lyria 3 Clip モデルは、常に **30 秒**のクリップを生成します。クリップを生成するには、テキスト プロンプトを使用して `generateContent` メソッドを呼び出します。レスポンスには、常に生成された歌詞と曲の構成が音声とともに含まれます。
+Le modèle Lyria 3 Clip génère toujours un extrait de **30 secondes**. Pour générer un extrait, appelez la méthode `generateContent` avec un prompt textuel. La réponse inclut toujours les paroles et la structure du morceau générées, ainsi que l'audio.
 
 ### Python
 
@@ -213,9 +213,9 @@ public class GenerateMusicClip {
 }
 ```
 
-## フルレングスの曲を生成する
+## Générer une chanson complète
 
-`lyria-3-pro-preview` モデルを使用して、数分間のフルレングスの曲を生成します。Pro モデルは音楽の構成を理解し、明確な A メロ、サビ、ブリッジを含む楽曲を作成できます。プロンプトで指定する（「2 分間の曲を作成して」など）か、[タイムスタンプ](#timing)を使用して構造を定義することで、長さに影響を与えることができます。
+Utilisez le modèle `lyria-3-pro-preview` pour générer des titres complets de quelques minutes. Le modèle Pro comprend la structure musicale et peut créer des compositions avec des couplets, des refrains et des ponts distincts. Vous pouvez influencer la durée en la spécifiant dans votre requête (par exemple, "crée une chanson de deux minutes") ou en utilisant des [codes temporels](#timing) pour définir la structure.
 
 ### Python
 
@@ -290,9 +290,9 @@ var response = await client.Models.GenerateContentAsync(
 );
 ```
 
-## 出力形式を選択する
+## Sélectionner un format de sortie
 
-デフォルトでは、Lyria 3 モデルは **MP3** 形式で音声を生成します。Lyria 3 Pro では、`generationConfig` で `response_format` を設定して、**WAV** 形式で出力をリクエストすることもできます。
+Par défaut, les modèles Lyria 3 génèrent de l'audio au format **MP3**. Pour Lyria 3 Pro, vous pouvez également demander le résultat au format **WAV** en définissant `response_format` dans `generationConfig`.
 
 ### Python
 
@@ -385,9 +385,9 @@ curl -s -X POST \
   }'
 ```
 
-## レスポンスをパースする
+## Analyser la réponse
 
-Lyria 3 からのレスポンスには複数のパートが含まれています。テキスト部分には、生成された歌詞または曲の構成の JSON 記述が含まれます。`inline_data` を含むパーツには音声バイトが含まれます。
+La réponse de Lyria 3 comporte plusieurs parties. Les parties textuelles contiennent les paroles générées ou une description JSON de la structure du morceau. Les parties avec `inline_data` contiennent les octets audio.
 
 ### Python
 
@@ -513,9 +513,9 @@ if (audioData != null) {
 curl ... | jq -r '.candidates[0].content.parts[] | select(.inlineData) | .inlineData.data' | base64 -d > output.mp3
 ```
 
-## 画像から音楽を生成する
+## Générer de la musique à partir d'images
 
-Lyria 3 はマルチモーダル入力をサポートしています。テキスト プロンプトとともに最大 **10 枚の画像**を提供すると、モデルは視覚的なコンテンツにインスピレーションを得た音楽を作曲します。
+Lyria 3 accepte les entrées multimodales. Vous pouvez fournir jusqu'à **10 images** en plus de votre prompt textuel. Le modèle composera de la musique inspirée du contenu visuel.
 
 ### Python
 
@@ -636,9 +636,9 @@ var response = await client.Models.GenerateContentAsync(
 
 ![](https://storage.googleapis.com/generativeai-downloads/images/desert_sunset.jpg)
 
-## カスタム歌詞を提供する
+## Fournir des paroles personnalisées
 
-独自の歌詞を書いて、プロンプトに含めることができます。`[Verse]`、`[Chorus]`、`[Bridge]` などのセクション タグを使用して、モデルが曲の構成を理解できるようにします。
+Vous pouvez écrire vos propres paroles et les inclure dans la requête. Utilisez des balises de section comme `[Verse]`, `[Chorus]` et `[Bridge]` pour aider le modèle à comprendre la structure du morceau :
 
 ### Python
 
@@ -817,9 +817,9 @@ curl -s -X POST \
 
 ](https://storage.googleapis.com/generativeai-downloads/songs/Neon%20Echoes_Lyrics.webm)
 
-## タイミングと構造を制御する
+## Contrôler le timing et la structure
 
-タイムスタンプを使用すると、曲の特定の瞬間に何が起こるかを正確に指定できます。これは、楽器の開始タイミング、歌詞の配信タイミング、曲の進行方法を制御するのに役立ちます。
+Vous pouvez spécifier exactement ce qui se passe à des moments précis de la chanson à l'aide de codes temporels. Cela permet de contrôler le moment où les instruments entrent en jeu, où les paroles sont diffusées et comment la chanson progresse :
 
 ### Python
 
@@ -934,9 +934,9 @@ curl -s -X POST \
   }'
 ```
 
-## インストゥルメンタル トラックを生成する
+## Générer des pistes instrumentales
 
-バックグラウンド ミュージック、ゲームのサウンドトラック、ボーカルを必要としないユースケースでは、モデルにインストゥルメンタルのみのトラックを生成するように指示できます。
+Pour la musique de fond, les bandes originales de jeux ou tout cas d'utilisation où les voix ne sont pas nécessaires, vous pouvez demander au modèle de produire des pistes instrumentales uniquement :
 
 ### Python
 
@@ -1006,9 +1006,9 @@ curl -s -X POST \
   }'
 ```
 
-## さまざまな言語で音楽を生成する
+## Générer de la musique dans différentes langues
 
-Lyria 3 は、プロンプトの言語で歌詞を生成します。フランス語の歌詞を含む曲を生成するには、プロンプトをフランス語で記述します。モデルは、言語に合わせて音声スタイルと発音を調整します。
+Lyria 3 génère des paroles dans la langue de votre requête. Pour générer une chanson avec des paroles en français, rédigez votre requête en français. Le modèle adapte son style vocal et sa prononciation à la langue.
 
 ### Python
 
@@ -1083,13 +1083,14 @@ curl -s -X POST \
   }'
 ```
 
-## モデル インテリジェンス
+## Intelligence du modèle
 
-Lyria 3 は、プロンプトに基づいてモデルが音楽構造（イントロ、ヴァース、コーラス、ブリッジなど）を推論するプロンプト プロセスを分析します。これはオーディオが生成される前に行われ、構造的な一貫性と音楽性が確保されます。
+Lyria 3 analyse le processus de votre requête, où le modèle raisonne à travers la structure musicale (intro, couplet, refrain, pont, etc.) en fonction de votre requête.
+Cela se produit avant la génération de l'audio et garantit la cohérence structurelle et la musicalité.
 
-## Interactions API
+## API Interactions
 
-Lyria 3 モデルは、Gemini モデルとエージェントを操作するための統合インターフェースである [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) で使用できます。複雑なマルチモーダル ユースケースの状態管理と長時間実行タスクを簡素化します。
+Vous pouvez utiliser les modèles Lyria 3 avec l'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr), une interface unifiée pour interagir avec les modèles et les agents Gemini. Il simplifie la gestion de l'état et des tâches de longue durée pour les cas d'utilisation multimodaux complexes.
 
 ### Python
 
@@ -1151,75 +1152,75 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## プロンプト ガイド
+## Guide sur les requêtes
 
-プロンプトは、「かわいい猫が水たまりを避けるフォークソング、女性ボーカルと雨の音」のような簡単なものでも、次のような詳細で構造化されたものでもかまいません。
+Votre requête peut être aussi simple que "une chanson folk sur des chats mignons qui évitent les flaques d'eau, avec des voix féminines et le bruit de la pluie", ou plus détaillée et structurée, comme :
 
-> ドライビング ビート、きらめくシンセサイザー、キャッチーでアンセムのようなコーラスが特徴の、1980 年代風のシンセポップ トラック。レトロフューチャリスティックな雰囲気で、80 年代のクラシックなポップ ヒットを彷彿とさせるような曲にしてください。現代的なプロダクションの磨きをかけてください。テンポはアップビートで踊りやすい、120 BPM 程度。明確なヴァースとコーラスの構成で、印象的なインストゥルメンタルのフックがある。歌詞はパーティーの準備をしているときの気持ちについてです。
+> Un morceau synth-pop des années 1980 avec un rythme entraînant, des synthétiseurs scintillants et un refrain accrocheur et entraînant. La chanson doit avoir une ambiance rétro-futuriste, rappelant les tubes pop classiques des années 80, avec une production moderne et soignée. Le tempo doit être entraînant et dansant, autour de 120 BPM, avec une structure couplet-refrain claire et un hook instrumental mémorable. Les paroles parlent du sentiment de se préparer pour une fête.
 
-単純なプロンプトと複雑なプロンプトの両方で、適切な出力を得ることができます。これらのヒントを試して、自分に最適な方法を見つけることをおすすめします。
+Les requêtes simples et complexes peuvent générer de bons résultats. Nous vous recommandons de tester ces conseils pour trouver ce qui vous convient le mieux.
 
-### ジャンル
+### Genre
 
-プロンプトの先頭に、ヒップホップ、ロック、ラップなど、希望する音楽のジャンルを指定します。ジャンルを組み合わせて指定できます。
+Commencez votre requête par le genre de musique que vous souhaitez, comme le hip-hop, le rock ou le rap. Vous pouvez spécifier plusieurs genres :
 
-- メタルとラップの融合
-- デスメタルとオペラの組み合わせ
-- 電子ドローン要素を含むクラシック音楽
-- モダンなエレクトロニック ダンス ミュージック（EDM）とユーロポップをミックス
+- Fusion de métal et de rap
+- Un mélange de death metal et d'opéra
+- Morceau classique avec des éléments de drone électronique
+- Musique électronique moderne pour danser (EDM) mélangée à de l'Europop
 
-時代を組み込むこともできます。
+Vous pouvez également inclure une ère :
 
-- 90 年代初頭のヒップホップ
-- 60 年代のフレンチ イエイエ ポップ
-- 80 年代のエレクトロニック実験
-- 2000 年代のメインストリーム ポップ
+- Hip-hop du début des années 90
+- Pop yé-yé française des années 60
+- Expérimentations électroniques des années 80
+- Pop mainstream des années 2000
 
-「ベルリン テクノ」や「ベイエリア ハイフィー」などの特定のジャンルや地域バリエーションをリクエストすると、モデルはその本質を捉えようとしますが、必ずしも正しく捉えられるとは限りません。
+Si vous demandez des genres ou des variantes régionales spécifiques, comme la "techno berlinoise" ou le "hyphy de la baie de San Francisco", le modèle tentera de capturer cette essence, mais il ne réussira pas toujours.
 
-### 楽器
+### Instruments
 
-デフォルトでは、Lyria 3 はジャンルに合った楽器とツールを使用して曲を作成します。指示的である必要はありません。
+Par défaut, Lyria 3 crée des titres avec les instruments et les outils que vous attendez pour le genre. Vous n'avez pas besoin d'être prescriptif.
 
-ただし、ダンス トラックにサックスを含めるには、リクエストする必要があります。サックスのソロをリクエストする場合は、次のようにプロンプトを入力する必要があります。
+Toutefois, un morceau de danse n'inclura pas de saxophone, sauf si vous le demandez. Pour obtenir un solo de saxophone, vous devez le demander :
 
-> ドライビング ビート、きらめくシンセサイザー、キャッチーでアンセムのようなコーラスが特徴のダンス トラック。ブリッジでサックスのソロが入るようにしてください。
+> Titre de danse avec un rythme entraînant, des synthétiseurs scintillants et un refrain accrocheur et hymne. Un solo de saxophone doit intervenir pendant le pont.
 
-プロンプトには、特定の楽器、その音、楽器同士の相互作用を含めることができます。この組み合わせを使用して、特定の雰囲気やテクスチャを作成できます。
+Votre requête peut inclure des instruments spécifiques, leur sonorité et la façon dont ils interagissent les uns avec les autres. Vous pouvez utiliser cette combinaison pour créer certaines ambiances ou textures :
 
-- 汚れた歪んだベースラインと、クリーンでキレのあるハイハットが対立している
-- 暖かくアナログなシンセサイザーのパッドが、ドライで親密なアコースティック ギターの下で盛り上がっていく
-- ファジーなギターの音が何層にも重なり、埋もれたような遠いボーカルが聞こえるサウンドウォール
+- Une ligne de basse sale et distordue qui se bat contre des charlestons clairs et nets
+- Pads de synthétiseur analogique chaleureux et gonflés sous une guitare acoustique sèche et intime
+- Mur de son créé par plusieurs couches de guitares saturées, avec des voix lointaines et enfouies
 
-### 曲の構成
+### Structure d'un titre
 
-プロンプトで曲の進行を概説できます。矢印またはリストを使用してフローを定義します。
+Vous pouvez décrire la progression d'un titre dans votre requête. Utilisez des flèches ou une liste pour définir le flux :
 
-- `[Intro]` -> `[Verse 1]` -> `[Chorus]` -> `[Verse 2]` -> `[Chorus]` ->
-  `[Bridge]` -> `[Outro]`
-- 静かなピアノのイントロから始まり、大きな音量のバースに移行し、静寂に落ち、コーラスで爆発します。
+- `[Intro]` -> `[Verse 1]` -> `[Chorus]` -> `[Verse 2]` -> `[Chorus]` ->
+  `[Bridge]` -> `[Outro]`
+- Commence par une introduction au piano calme, monte en puissance pour le couplet, retombe dans le silence, puis explose pour le refrain.
 
-これらのセクション間のエネルギー レベルの変化を指定することもできます。
+Vous pouvez également spécifier comment les niveaux d'énergie changent entre ces sections :
 
-- プリコーラスで緊張感を高め、コーラスの直前で静寂に落とす
-- 曲全体を通して徐々にクレッシェンドし、楽器を 1 つずつ追加して、混沌とした音の壁を築き上げる
-- ブリッジの後に突然停止し、アカペラのコーラスが続く
+- Créez de la tension dans le pré-refrain, puis passez au silence avant un refrain massif et explosif.
+- Crescendo progressif tout au long du morceau, ajoutant un instrument à la fois jusqu'à un mur de son chaotique
+- Arrêt soudain après le pont, suivi d'un refrain a cappella
 
-特定の時刻に何かを実行するよう指示することもできます。
+Vous pouvez également indiquer l'heure exacte à laquelle vous souhaitez qu'une action se produise :
 
-- 12 秒でドロップにビルド
-- 2 秒ごとに「何？」と言う
-- サビは 22 秒から始まります
+- Build to a drop at 12s
+- Quelqu'un dit "quoi" toutes les deux secondes
+- Le refrain commence à 22 s
 
-### 歌詞
+### Paroles
 
-ボーカルと歌詞はデフォルトで生成されます。独自の歌詞を指定したり、歌詞なし（またはインストゥルメンタル）をリクエストしたり、歌詞の生成を希望する方向に誘導したりできます。
+Les voix et les paroles sont générées par défaut. Vous pouvez fournir vos propres paroles, demander à ce qu'il n'y en ait pas (ou qu'il s'agisse d'un instrumental) ou orienter la génération de paroles dans la direction de votre choix.
 
-歌詞は、プロンプトの言語で作成されます。「歌詞をフランス語で書いて」など、別の言語で歌詞をリクエストすることもできます。
+Vos paroles seront dans la langue dans laquelle vous rédigez votre requête. Vous pouvez également demander à ce que les paroles soient dans une autre langue, par exemple "Écris les paroles en français".
 
-#### 独自の歌詞を使用する
+#### Utiliser vos propres paroles
 
-モデルに独自の歌詞を指定するには、プロンプトに「歌詞:」という接頭辞を付けて歌詞を含めます。
+Pour fournir vos propres paroles au modèle, incluez-les dans la requête avec le préfixe "Paroles :" :
 
 ```
 Lyrics:
@@ -1236,51 +1237,51 @@ Go with the flow
 ...
 ```
 
-曲の一部に、`[Intro]`、`[Verse 1]`、`[Pre-chorus]`、`[Chorus]`、`[Outro]` などのセクション タイトルをプレフィックスとして追加できます。
+Vous pouvez ajouter des titres de section comme `[Intro]`, `[Verse 1]`, `[Pre-chorus]`, `[Chorus]` et `[Outro]` au début de certaines parties du titre.
 
-エコーやバック シンガーのように、単語や行を繰り返したい場合は、「Let's go (go)」のように、かっこで囲みます。
+Si vous souhaitez qu'un mot ou une ligne soit répété, comme un écho ou par des choristes, vous pouvez l'inclure entre parenthèses : "Let's go (go)".
 
-#### 歌詞の作成をモデルに指示する
+#### Demander au modèle d'écrire des paroles
 
-Lyria 3 に歌詞を作成させる場合は、歌詞の内容に関する詳細をプロンプトに含めることをおすすめします。そうしないと、モデルは音楽プロンプトから被写体を推測する必要があり、ユーザーが望むものとは異なる可能性があります。
+Si vous souhaitez que Lyria 3 crée des paroles pour vous, il est préférable d'inclure dans votre requête des détails sur le thème des paroles. Sinon, le modèle devra déduire un sujet à partir de votre requête musicale, et il se peut que le résultat ne soit pas celui que vous souhaitez.
 
-> 歌詞は、失恋と失恋の痛みを歌っています。歌手は過去の恋愛と、そのときに感じた思い出を振り返っています。
+> Les paroles parlent d'un amour perdu et de la douleur d'un cœur brisé. La chanteuse se remémore une relation passée et les souvenirs qui lui reviennent en mémoire.
 
-コーラスを繰り返したい場合は、プロンプトでそのように指定するとよいでしょう。
+Si vous souhaitez un refrain qui se répète, demandez-le dans votre requête :
 
-> 歌詞は、失恋と失恋の痛みを歌っています。歌手は過去の恋愛と、そのときに感じた思い出を回想しています。力強いコーラスは、痛みを乗り越えて前進することに焦点を当てています。
+> Les paroles parlent d'un amour perdu et de la douleur d'un cœur brisé. La chanteuse se remémore une relation passée et les souvenirs qui lui reviennent en mémoire. Un refrain puissant se concentre sur le fait de surmonter la douleur et de passer à autre chose.
 
-Lyria 3 は、リクエストされた音楽のタイプに合わせて歌詞の構成を自動的に調整しますが、プロンプトでこの点を強調することもできます。次に例を示します。
+Lyria 3 orientera automatiquement la structure des paroles vers le type de musique que vous demandez, mais vous pouvez également le préciser dans votre requête. Exemple :
 
-> 同じエネルギッシュなフレーズを何度も繰り返す EDM トラック。
+> Un titre de musique électronique qui répète la même phrase énergique encore et encore.
 
-歌詞以外のボーカル効果を求めることもできます。たとえば、次のようにします。
+Vous pouvez également demander des effets vocaux qui ne sont pas strictement des paroles, par exemple :
 
-- 映画の「信じられない！」というセリフが曲全体にわたって繰り返されている
-- ドロップの直前に音がすべて止まり、「I don't know what I'm doing here」（ここで何をしているのかわからない）という小さな声が聞こえ、その後音楽がドロップする、ハイエナジーなテクノ トラック。
-- この曲は、90 年代の映画は今よりも優れていたという会話から始まります。その後、ポップソングに移行します。
+- Un sample répété d'un film dit "Je n'arrive pas à y croire !" tout au long du titre.
+- Un morceau de techno très énergique, juste avant le drop, le son s'arrête et une petite voix dit "Je ne sais pas ce que je fais ici", puis la musique reprend.
+- Le titre s'ouvre sur une conversation sur les films des années 90, qui seraient meilleurs que ceux d'aujourd'hui. Le titre se transforme ensuite en chanson pop.
 
-### ボーカル
+### Chant
 
-歌詞の表示方法をプロンプトで指定できます。最適な結果を得るには、性別、音色、音域をカバーする詳細な歌手のプロフィールを指定します。
+Vous pouvez indiquer comment vous souhaitez que les paroles soient fournies. Pour obtenir les meilleurs résultats, spécifiez un profil de chanteur détaillé, en indiquant le genre, le timbre et la tessiture.
 
-- **女性ソプラノ**: 透明感のあるクリスタルのような音色で、軽快で伸びのある音質。息の混じったエアリーなテクスチャで、口笛のような高音を出すことができます。
-- **女性アルト**: 豊かで温かみのあるハスキーな低音域。スモーキーな音色で、ボーカル フライのニュアンスがあり、ソウルフルで共鳴する。
-- **男性テノール**: 明るく、鋭く、エネルギッシュ。若々しい音色で、鼻にかかったようなわずかなエッジがあり、高いベルティング パワーでミックスを切り裂く。
-- **男性バリトン**: 深みがあり、チョコレートのような滑らかさ。心地よい歌声で、胸に響くような声。
-- **Weathered Rocker（男性）**: 90 年代のグランジを彷彿とさせる、ザラつきのある質感と砂利のような音色。感情の強さの上限を超えている。
+- **Soprano féminine** : timbre clair et cristallin, avec une qualité agile et aérienne. Capable d'atteindre des notes aiguës sifflantes avec une texture aérienne et haletante.
+- **Alto féminin** : registre grave riche, chaleureux et rauque. Timbre enfumé avec une touche de fry vocal, plein d'âme et résonnant.
+- **Ténor** : voix claire, perçante et énergique Timbre juvénile avec une légère nasalité, qui se démarque dans le mix avec une grande puissance de voix.
+- **Baryton masculin** : voix profonde, chocolatée et veloutée. Voix de poitrine résonnante avec un ton doux et mélodieux.
+- **Rockeur usé (homme)** : voix rauque et texturée avec un timbre graveleux, qui rappelle le grunge des années 90. Registre supérieur tendu pour l'intensité émotionnelle.
 
-### その他のプロンプト パラメータ
+### Autres paramètres de prompt
 
-これらのパラメータを含めて、プロンプトをさらに調整することもできます。
+Vous pouvez également inclure les paramètres suivants pour affiner davantage votre requête :
 
-- **キー/スケール**: 音楽のキーを指定します（例: 「ト長調」、「ニ短調」）。
-- **ムードと雰囲気**: 説明的な形容詞（「ノスタルジック」、「アグレッシブ」、「幽玄」、「夢のような」など）を使用します。
-- **再生時間**: クリップモデルは常に 30 秒のクリップを生成します。Pro モデルの場合は、プロンプトで希望する長さを指定するか（例: 「2 分間の曲を作成して」）、タイムスタンプを使用して長さを制御します。
+- **Tonalité/Gamme** : spécifiez une tonalité musicale (par exemple, "en sol majeur", "en ré mineur").
+- **Ambiance** : utilisez des adjectifs descriptifs (par exemple, "nostalgique", "agressif", "éthéré", "rêveur").
+- **Durée** : le modèle Clip produit toujours des extraits de 30 secondes. Pour le modèle Pro, spécifiez la durée souhaitée dans votre requête (par exemple, "crée une chanson de deux minutes") ou utilisez des codes temporels pour contrôler la durée.
 
-### プロンプトの例
+### Exemples de prompts
 
-効果的なプロンプトの例を次に示します。
+Voici quelques exemples de requêtes efficaces :
 
 - `"A 30-second lofi hip hop beat with dusty vinyl crackle, mellow Rhodes
   piano chords, a slow boom-bap drum pattern at 85 BPM, and a jazzy upright
@@ -1290,36 +1291,37 @@ Lyria 3 は、リクエストされた音楽のタイプに合わせて歌詞の
 - `"A dark, atmospheric trap beat at 140 BPM with heavy 808 bass, eerie synth
   pads, sharp hi-hats, and a haunting vocal sample. In D minor."`
 
-## ベスト プラクティス
+## Bonnes pratiques
 
-- **まず Clip でイテレーションを行います。**高速な `lyria-3-clip-preview` モデルを使用して、`lyria-3-pro-preview` でフルレングスの生成をコミットする前にプロンプトをテストします。
-- **具体的に記述しましょう。**曖昧なプロンプトでは、一般的な結果が生成されます。最適な出力を得るために、楽器、BPM、キー、ムード、構成について言及します。
-- **セクションタグを使用します。**`[Verse]`、`[Chorus]`、`[Bridge]` タグを使用すると、モデルが従うべき明確な構造が提供されます。
-- **歌詞と手順を分ける。**カスタム歌詞を提供する場合は、音楽の指示と明確に区別してください。
+- **Commencez par itérer avec Clip.** Utilisez le modèle `lyria-3-clip-preview` plus rapide pour tester des requêtes avant de vous engager dans une génération complète avec `lyria-3-pro-preview`.
+- **Soyez précis.** Les requêtes vagues génèrent des résultats génériques. Mentionne les instruments, le tempo, la tonalité, l'humeur et la structure pour obtenir le meilleur résultat.
+- **Utilisez des tags de section.** Les balises `[Verse]`, `[Chorus]` et `[Bridge]` fournissent au modèle une structure claire à suivre.
+- **Séparez les paroles des instructions.** Lorsque vous fournissez des paroles personnalisées, séparez-les clairement de vos instructions musicales.
 
-## 制限事項
+## Limites
 
-- **安全性**: すべてのプロンプトは安全フィルタによってチェックされます。フィルタをトリガーするプロンプトはブロックされます。これには、特定のアーティストの声や著作権で保護された歌詞の生成をリクエストするプロンプトが含まれます。
-- **透かし**: 生成されたすべての音声には、識別用の [SynthID オーディオ ウォーターマーク](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=ja)が含まれます。この透かしは人間の耳には聞こえず、リスニング体験に影響しません。
-- **マルチターン編集**: 音楽生成はシングルターン プロセスです。現在のバージョンの Lyria 3 では、複数のプロンプトを使用して生成されたクリップを繰り返し編集または調整することはできません。
-- **長さ**: クリップモデルは常に 30 秒のクリップを生成します。Pro モデルでは、数分間の曲が生成されます。正確な長さはプロンプトで調整できます。
-- **決定論**: 同じプロンプトでも、呼び出しごとに結果が異なる場合があります。
+- **Sécurité** : toutes les requêtes sont vérifiées par des filtres de sécurité. Les requêtes qui déclenchent les filtres seront bloquées. Cela inclut les requêtes demandant des voix d'artistes spécifiques ou la génération de paroles protégées par des droits d'auteur.
+- **Filigranes** : tous les contenus audio générés incluent un [filigrane audio SynthID](https://ai.google.dev/responsible/docs/safeguards/synthid?hl=fr) pour l'identification. Ce filigrane est imperceptible à l'oreille humaine et n'affecte pas l'expérience d'écoute.
+- **Édition avec chat multitour** : la génération de musique est un processus monotour.
+  L'édition itérative ou l'affinage d'un extrait généré à l'aide de plusieurs requêtes ne sont pas pris en charge dans la version actuelle de Lyria 3.
+- **Durée** : le modèle Clip génère toujours des extraits de 30 secondes. Le modèle Pro génère des titres qui durent quelques minutes. La durée exacte peut être influencée par votre requête.
+- **Déterminisme** : les résultats peuvent varier d'un appel à l'autre, même avec le même prompt.
 
-## 次のステップ
+## Étape suivante
 
-- Lyria 3 モデルの[料金](https://ai.google.dev/gemini-api/docs/generate-content/pricing?hl=ja)を確認する。
-- Lyria RealTime を使用して、[リアルタイムのストリーミング音楽生成](https://ai.google.dev/gemini-api/docs/generate-content/realtime-music-generation?hl=ja)をお試しください。
-- [TTS モデル](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=ja)を使用して複数の話者による会話を生成する。
-- [画像](https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=ja)や[動画](https://ai.google.dev/gemini-api/docs/generate-content/video?hl=ja)を生成する方法について説明します。
-- Gemini が[音声ファイルを理解する](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=ja)仕組みについて説明します。
-- [Live API](https://ai.google.dev/gemini-api/docs/generate-content/live?hl=ja) を使用して、Gemini とリアルタイムで会話できます。
+- Consultez les [tarifs](https://ai.google.dev/gemini-api/docs/generate-content/pricing?hl=fr) des modèles Lyria 3.
+- Essayez la [génération de musique en streaming et en temps réel](https://ai.google.dev/gemini-api/docs/generate-content/realtime-music-generation?hl=fr) avec Lyria RealTime.
+- Générez des conversations à plusieurs locuteurs avec les [modèles TTS](https://ai.google.dev/gemini-api/docs/generate-content/speech-generation?hl=fr).
+- Découvrez comment générer des [images](https://ai.google.dev/gemini-api/docs/generate-content/image-generation?hl=fr) ou des [vidéos](https://ai.google.dev/gemini-api/docs/generate-content/video?hl=fr).
+- Découvrez comment Gemini peut [comprendre les fichiers audio](https://ai.google.dev/gemini-api/docs/generate-content/audio?hl=fr),
+- Discutez en temps réel avec Gemini à l'aide de l'[API Live](https://ai.google.dev/gemini-api/docs/generate-content/live?hl=fr).
 
-フィードバックを送信
+Envoyer des commentaires
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最終更新日 2026-06-23 UTC。
+Dernière mise à jour le 2026/07/30 (UTC).
 
-ご意見をお聞かせください
+Voulez-vous nous donner plus d'informations ?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-23 UTC。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

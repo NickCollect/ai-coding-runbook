@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/nanobanana?hl=es-419
-fetched_at: 2026-06-29T05:34:17.604132+00:00
+fetched_at: 2026-08-03T04:39:53.995497+00:00
 title: "Nano Banana (generaci\u00f3n de im\u00e1genes) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-over
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
 - [Página principal](https://ai.google.dev/?hl=es-419)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)

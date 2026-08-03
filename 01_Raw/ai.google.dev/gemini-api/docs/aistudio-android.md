@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=hi
-fetched_at: 2026-07-27T04:44:54.123791+00:00
+fetched_at: 2026-08-03T04:39:54.169479+00:00
 title: "Google AI Studio \u092e\u0947\u0902 Android \u0910\u092a\u094d\u0932\u093f\u0915\u0947\u0936\u0928 \u092c\u0928\u093e\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ title: "Google AI Studio \u092e\u0947\u0902 Android \u0910\u092a\u094d\u0932\u09
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
 - [होम पेज](https://ai.google.dev/?hl=hi)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=hi)

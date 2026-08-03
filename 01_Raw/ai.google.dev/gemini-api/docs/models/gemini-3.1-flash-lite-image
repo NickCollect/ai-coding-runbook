@@ -1,61 +1,61 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ja
-fetched_at: 2026-07-27T04:33:51.765111+00:00
-title: "Gemini 3.1 Flash Lite Image \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite-image?hl=ko
+fetched_at: 2026-08-03T04:27:53.671025+00:00
+title: "Gemini 3.1 Flash Lite \uc774\ubbf8\uc9c0 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-フィードバックを送信
+의견 보내기
 
-# Gemini 3.1 Flash Lite Image
+# Gemini 3.1 Flash Lite 이미지
 
-**Nano Banana 2 Lite** は、画像生成ファミリーの効率化に特化したモデルとして設計されており、超低レイテンシで費用対効果の高い画像生成と編集を実現します。2 秒未満のレイテンシと TPU コンピューティング コストの大幅な削減を目標としており、大量のインタラクティブなデベロッパー ユースケースとリアルタイムのコンシューマー アプリケーションを可能にします。
+**Nano Banana 2 Lite**는 이미지 생성 제품군의 효율성 전문가로 설계되어 지연 시간이 매우 짧고 비용 효율적인 이미지 생성 및 편집을 제공합니다. 2초 미만의 지연 시간과 크게 감소된 TPU 컴퓨팅 비용을 타겟팅하는 이 모델은 대량의 대화형 개발자 사용 사례와 실시간 소비자 애플리케이션을 지원합니다.
 
-**主な機能:**
+**주요 기능:**
 
-- **エンドツーエンドのレイテンシが 2 秒未満**
-- Text -> Text + Image(s) と Image + Text -> Text + Image(s) をネイティブでサポートする**インターリーブ生成と編集** 。
-- 1K（1024x1024px）の**低解像度向けに最適化** 。
-- 標準形式を含む**14 個のアスペクト比** の個別のセットをサポート。
-- **高速なマルチターン ローカル編集** （色の入れ替え、ステッカーの作成、背景の調整）。
-- 元の Nano Banana の標準に準拠した高い文字揃えを維持。
-- 新しいアスペクト比 `1:1`、`3:2`、`2:3`、`3:4`、`4:3`、`4:5`、`5:4`、`9:16`、`16:9`、`21:9`。
-- サポートされている `image_size` 値: `1024px`（1K）。（注: 2K と 4K はサポートされていません）。
-- **SynthID（常時オン）+ C2PA** の透かし。
+- **2초 미만의 엔드투엔드 지연 시간**
+- 텍스트 -> 텍스트 + 이미지, 이미지 + 텍스트 -> 텍스트 + 이미지의 기본 지원을 통한 **인터리브 생성 및 편집**
+- 1K (1024x1024px)의 **낮은 해상도에 최적화**되어 있습니다.
+- 표준 형식을 비롯한 **14개의 가로세로 비율**을 지원합니다.
+- **빠른 멀티턴 로컬 수정** (색상 바꾸기, 스티커 만들기, 배경 조정)
+- 원래 Nano Banana 표준에 부합하는 높은 문자 정렬을 유지합니다.
+- 새로운 `1:1`, `3:2`, `2:3`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9` 화면 비율
+- 지원되는 `image_size` 값: `1024px` (1K) *(참고: 2K 및 4K는 지원되지 않음)*
+- **SynthID (상시 사용 설정) + C2PA** 워터마킹
 
-[Google AI Studio で試す](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=ja)
+[Google AI Studio에서 사용해 보기](https://aistudio.google.com?model=gemini-3.1-flash-lite-image&hl=ko)
 
-## ドキュメント
+## 문서
 
-機能の詳細については、[画像生成](https://ai.google.dev/gemini-api/docs/image-generation?hl=ja)のページをご覧ください。
+[이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko) 페이지에서 기능 및 기능에 대해 자세히 알아보세요.
 
 ## gemini-3.1-flash-lite-image
 
-| プロパティ | 説明 |
+| 속성 | 설명 |
 | --- | --- |
-| id\_cardモデルコード | `gemini-3.1-flash-lite-image` |
-| saveサポートされるデータタイプ | **入力**  テキストと画像  **出力**  画像とテキスト |
-| token\_autoトークンの上限[[\*](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)] | **入力トークンの上限**  65,536  **出力トークンの上限**  4,096 |
-| handyman機能 | **音声生成**  サポート対象外  **Batch API**  サポート対象  **キャッシュ保存**  サポート対象外  **コード実行**  サポート対象外  **ファイル検索**  サポート対象外  **関数呼び出し**  サポート対象  **Google マップによるグラウンディング**  サポート対象外  **Google 検索によるグラウンディング**  サポート対象外  **画像編集**  サポート対象  **画像生成**  サポート対象  **Live API**  サポート対象外  **検索によるグラウンディング**  サポート対象外  **構造化出力**  サポート対象外  **思考モード**  サポート対象（最小と最大）  **URL コンテキスト**  サポート対象外 |
-| 123バージョン | [詳細については、モデル バージョンのパターン](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja#model-versions)をご覧ください。  - Stable: `gemini-3.1-flash-lite-image` |
-| calendar\_month最新の更新 | 2026 年 6 月 |
-| id\_cardモデルカード | [モデルカード](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite-image/?hl=ja) |
+| id\_card모델 코드 | `gemini-3.1-flash-lite-image` |
+| save지원되는 데이터 유형 | **입력**  텍스트 및 이미지  **출력**  이미지 및 텍스트 |
+| token\_auto토큰 한도[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ko) | **입력 토큰 한도**  65,536  **출력 토큰 한도**  4,096 |
+| handyman기능 | **오디오 생성**  지원되지 않음  **Batch API**  지원됨  **캐싱**  지원되지 않음  **코드 실행**  지원되지 않음  **파일 검색**  지원되지 않음  **함수 호출**  지원됨  **Google 지도 그라운딩**  지원되지 않음  **Google 검색으로 그라운딩**  지원되지 않음  **이미지 수정**  지원됨  **이미지 생성**  지원됨  **Live API**  지원되지 않음  **검색 그라운딩**  지원되지 않음  **구조화된 출력**  지원되지 않음  **사고**  지원됨 (최소 및 높음)  **URL 컨텍스트**  지원되지 않음 |
+| 123버전 | 자세한 내용은 [모델 버전 패턴](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ko#model-versions)을 참고하세요.  - 안정화 버전: `gemini-3.1-flash-lite-image` |
+| calendar\_month최신 업데이트 | 2026년 6월 |
+| id\_card모델 카드 | [모델 카드](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite-image/?hl=ko) |
 
-フィードバックを送信
+의견 보내기
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-最終更新日 2026-07-21 UTC。
+최종 업데이트: 2026-07-21(UTC)
 
-ご意見をお聞かせください
+의견을 전달하고 싶나요?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-21 UTC。"],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-21(UTC)"],[],[]]

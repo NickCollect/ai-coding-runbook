@@ -1,36 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=ko
-fetched_at: 2026-07-27T04:44:26.273235+00:00
-title: "Gemini \ubc0f LlamaIndex\ub97c \uc0ac\uc6a9\ud55c \uc5f0\uad6c \uc5d0\uc774\uc804\ud2b8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=pl
+fetched_at: 2026-08-03T04:40:18.162587+00:00
+title: "Agent badawczy z\u00a0Gemini i\u00a0LlamaIndex \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-의견 보내기
+Prześlij opinię
 
-# Gemini 및 LlamaIndex를 사용한 연구 에이전트
+# Agent badawczy z Gemini i LlamaIndex
 
-LlamaIndex는 데이터에 연결된 LLM을 사용하여 지식 에이전트를 빌드하는 프레임워크입니다. 이 예시에서는 리서치 에이전트를 위한 멀티 에이전트 워크플로를 빌드하는 방법을 보여줍니다. LlamaIndex에서 [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
-는 에이전트 및 멀티 에이전트 시스템의 구성요소입니다.
+LlamaIndex to platforma do tworzenia agentów wiedzy przy użyciu dużych modeli językowych połączonych z Twoimi danymi. Ten przykład pokazuje, jak utworzyć przepływ pracy z wieloma agentami dla agenta badawczego. W LlamaIndex [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
+są podstawowymi elementami systemów agentów i systemów wieloagentowych.
 
-Gemini API 키가 필요합니다. 아직 키가 없다면 [Google AI Studio에서 키를 가져오세요](https://aistudio.google.com/apikey?hl=ko).
-먼저 필요한 모든 LlamaIndex 라이브러리를 설치합니다. LlamaIndex는 내부적으로 `google-genai` 패키지를 사용합니다.
+Potrzebujesz klucza interfejsu Gemini API. Jeśli jeszcze nie masz klucza, możesz go [uzyskać w Google AI Studio](https://aistudio.google.com/apikey?hl=pl).
+Najpierw zainstaluj wszystkie wymagane biblioteki LlamaIndex. LlamaIndex korzysta z pakietu `google-genai`.
 
 ```
 pip install llama-index llama-index-utils-workflow llama-index-llms-google-genai llama-index-tools-google
 ```
 
-## LlamaIndex에서 Gemini 설정
+## Konfigurowanie Gemini w LlamaIndex
 
-모든 LlamaIndex 에이전트의 엔진은 추론 및 텍스트 처리를 처리하는 LLM입니다. 이 예에서는 Gemini 3 Flash를 사용합니다. [API 키를 환경 변수로 설정](https://ai.google.dev/gemini-api/docs/api-key?hl=ko)해야 합니다.
+Silnikiem każdego agenta LlamaIndex jest model LLM, który zajmuje się rozumowaniem i przetwarzaniem tekstu. W tym przykładzie używamy Gemini 3 Flash. Upewnij się, że [klucz interfejsu API jest ustawiony jako zmienna środowiskowa](https://ai.google.dev/gemini-api/docs/api-key?hl=pl).
 
 ```
 import os
@@ -42,10 +42,11 @@ assert 'GEMINI_API_KEY' in os.environ
 llm = GoogleGenAI(model="gemini-3.5-flash")
 ```
 
-## 빌드 도구
+## Narzędzia do kompilacji
 
-에이전트는 도구를 사용하여 웹 검색이나 정보 저장과 같은 외부 세계와 상호작용합니다. [LlamaIndex의 도구](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)는 일반 Python 함수일 수도 있고 기존 `ToolSpecs`에서 가져올 수도 있습니다.
-Gemini에는 Google 검색을 사용하는 기본 제공 도구가 함께 제공되며, 여기서는 이 도구를 사용합니다.
+Agenty korzystają z narzędzi do interakcji ze światem zewnętrznym, np. do wyszukiwania informacji w internecie lub przechowywania danych. [Narzędzia w LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
+mogą być zwykłymi funkcjami Pythona lub importowane z wcześniej utworzonych `ToolSpecs`.
+Gemini ma wbudowane narzędzie do korzystania z wyszukiwarki Google, które jest tutaj używane.
 
 ```
 from google.genai import types
@@ -60,21 +61,21 @@ llm_with_search = GoogleGenAI(
 )
 ```
 
-이제 검색이 필요한 질문으로 LLM 인스턴스를 테스트합니다. 이 가이드에서는 실행 중인 이벤트 루프 (예: `python -m asyncio` 또는 Google Colab)를 가정합니다.
+Teraz przetestuj instancję LLM za pomocą zapytania, które wymaga wyszukiwania. W tym przewodniku zakładamy, że pętla zdarzeń jest uruchomiona (np. `python -m asyncio` lub Google Colab).
 
 ```
 response = await llm_with_search.acomplete("What's the weather like today in Biarritz?")
 print(response)
 ```
 
-리서치 에이전트는 Python 함수를 도구로 사용합니다. 이 작업을 실행하는 시스템을 구축하는 방법은 다양합니다. 이 예시에서는 다음을 사용합니다.
+Agent badawczy będzie używać funkcji Pythona jako narzędzi. Istnieje wiele sposobów na zbudowanie systemu, który będzie wykonywać to zadanie. W tym przykładzie użyjesz tych elementów:
 
-1. `search_web`는 Gemini와 Google 검색을 사용하여 지정된 주제에 관한 정보를 웹에서 검색합니다.
-2. `record_notes`는 다른 도구에서 사용할 수 있도록 웹에서 찾은 연구를 상태에 저장합니다.
-3. `write_report`은 `ResearchAgent`에서 찾은 정보를 사용하여 보고서를 작성합니다.
-4. `review_report`가 보고서를 검토하고 의견을 제공합니다.
+1. `search_web` korzysta z Gemini z wyszukiwarką Google, aby wyszukiwać w internecie informacje na dany temat.
+2. `record_notes` zapisuje wyniki wyszukiwania w internecie w stanie, aby inne narzędzia mogły z nich korzystać.
+3. `write_report` tworzy raport na podstawie informacji znalezionych przez `ResearchAgent`
+4. `review_report` sprawdza raport i przekazuje opinię.
 
-`Context` 클래스는 에이전트/도구 간에 상태를 전달하며 각 에이전트는 시스템의 현재 상태에 액세스할 수 있습니다.
+Klasa `Context` przekazuje stan między agentami i narzędziami, a każdy agent ma dostęp do bieżącego stanu systemu.
 
 ```
 from llama_index.core.workflow import Context
@@ -109,18 +110,18 @@ async def review_report(ctx: Context, review: str) -> str:
     return "Report reviewed."
 ```
 
-## 멀티 에이전트 어시스턴트 빌드
+## Tworzenie asystenta z wieloma agentami
 
-멀티 에이전트 시스템을 빌드하려면 에이전트와 에이전트의 상호작용을 정의해야 합니다.
-시스템에는 다음 세 가지 에이전트가 있습니다.
+Aby utworzyć system wieloagentowy, musisz zdefiniować agentów i ich interakcje.
+System będzie miał 3 agenty:
 
-1. `ResearchAgent`가 주어진 주제에 관한 정보를 웹에서 검색합니다.
-2. `WriteAgent`은 `ResearchAgent`에서 찾은 정보를 사용하여 보고서를 작성합니다.
-3. `ReviewAgent`가 보고서를 검토하고 의견을 제공합니다.
+1. `ResearchAgent` wyszukuje w internecie informacje na dany temat.
+2. `WriteAgent` pisze raport na podstawie informacji znalezionych przez `ResearchAgent`.
+3. `ReviewAgent` sprawdza raport i przekazuje opinię.
 
-이 예에서는 `AgentWorkflow` 클래스를 사용하여 이러한 에이전트를 순서대로 실행하는 멀티 에이전트 시스템을 만듭니다. 각 에이전트는 해야 할 일을 알려주고 다른 에이전트와 협력하는 방법을 제안하는 `system_prompt`를 사용합니다.
+W tym przykładzie do utworzenia systemu z wieloma agentami, którzy będą wykonywani po kolei, użyto klasy `AgentWorkflow`. Każdy agent otrzymuje `system_prompt`, które informuje go, co ma robić, i sugeruje, jak współpracować z innymi agentami.
 
-원하는 경우 `can_handoff_to`를 사용하여 멀티 에이전트 시스템이 대화할 수 있는 다른 에이전트를 지정하여 멀티 에이전트 시스템을 지원할 수 있습니다. 지정하지 않으면 멀티 에이전트 시스템이 자체적으로 이를 파악하려고 시도합니다.
+Opcjonalnie możesz pomóc systemowi wieloagentowemu, określając, z którymi innymi agentami może się komunikować, używając znaku `can_handoff_to` (w przeciwnym razie system spróbuje sam to ustalić).
 
 ```
 from llama_index.core.agent.workflow import (
@@ -170,7 +171,7 @@ review_agent = FunctionAgent(
 )
 ```
 
-에이전트가 정의되었으므로 이제 `AgentWorkflow`을 만들고 실행할 수 있습니다.
+Agenty zostały zdefiniowane. Teraz możesz utworzyć `AgentWorkflow` i ją uruchomić.
 
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
@@ -186,7 +187,7 @@ agent_workflow = AgentWorkflow(
 )
 ```
 
-워크플로를 실행하는 동안 이벤트, 도구 호출, 업데이트를 콘솔로 스트리밍할 수 있습니다.
+Podczas wykonywania przepływu pracy możesz przesyłać strumieniowo do konsoli zdarzenia, wywołania narzędzi i aktualizacje.
 
 ```
 from llama_index.core.agent.workflow import (
@@ -234,7 +235,7 @@ async for event in handler.stream_events():
         print(f"  With arguments: {event.tool_kwargs}")
 ```
 
-워크플로가 완료되면 보고서의 최종 출력과 검토 에이전트의 최종 검토 상태를 인쇄할 수 있습니다.
+Po zakończeniu procesu możesz wydrukować ostateczną wersję raportu, a także ostateczny stan weryfikacji od agenta weryfikującego.
 
 ```
 state = await handler.ctx.store.get("state")
@@ -242,24 +243,24 @@ print("Report Content:\n", state["report_content"])
 print("\n------------\nFinal Review:\n", state["review"])
 ```
 
-## 맞춤 워크플로로 더 많은 작업 수행
+## Więcej możliwości dzięki niestandardowym przepływom pracy
 
-`AgentWorkflow`는 멀티 에이전트 시스템을 시작하기에 좋은 방법입니다. 하지만 더 많은 제어가 필요한 경우 어떻게 해야 할까요? 처음부터 워크플로를 빌드할 수 있습니다. 자체 워크플로를 빌드해야 하는 몇 가지 이유는 다음과 같습니다.
+`AgentWorkflow` to świetny sposób na rozpoczęcie pracy z systemami wieloagentowymi. A co, jeśli potrzebujesz większej kontroli? Możesz utworzyć proces od podstaw. Oto kilka powodów, dla których warto utworzyć własny przepływ pracy:
 
-- **프로세스에 대한 더 많은 제어**: 에이전트가 따를 정확한 경로를 결정할 수 있습니다. 여기에는 루프 생성, 특정 시점에서 결정 내리기, 에이전트가 서로 다른 작업을 병렬로 수행하도록 하는 것이 포함됩니다.
-- **복잡한 데이터 사용**: 일반 텍스트를 넘어섭니다. 맞춤 워크플로를 사용하면 입력 및 출력에 JSON 객체나 맞춤 클래스와 같은 구조화된 데이터를 더 많이 사용할 수 있습니다.
-- **다양한 미디어 작업**: 텍스트뿐만 아니라 이미지, 오디오, 동영상도 이해하고 처리할 수 있는 에이전트를 빌드합니다.
-- **더 스마트한 계획**: 에이전트가 작업을 시작하기 전에 먼저 세부 계획을 만드는 워크플로를 설계할 수 있습니다. 이는 여러 단계가 필요한 복잡한 작업에 유용합니다.
-- **자기 수정 사용 설정**: 자체 작업을 검토할 수 있는 에이전트를 만듭니다. 출력이 충분하지 않으면 에이전트가 다시 시도하여 결과가 완벽해질 때까지 개선을 반복할 수 있습니다.
+- **Większa kontrola nad procesem:** możesz określić dokładną ścieżkę, którą będą podążać Twoi agenci. Możesz na przykład tworzyć pętle, podejmować decyzje w określonych momentach lub zlecać agentom równoległe wykonywanie różnych zadań.
+- **Używaj złożonych danych:** wyjdź poza zwykły tekst. Niestandardowe przepływy pracy umożliwiają używanie bardziej uporządkowanych danych, takich jak obiekty JSON lub klasy niestandardowe, jako danych wejściowych i wyjściowych.
+- **Praca z różnymi mediami:** twórz agentów, którzy rozumieją i przetwarzają nie tylko tekst, ale też obrazy, dźwięk i wideo.
+- **Inteligentniejsze planowanie:** możesz zaprojektować przepływ pracy, który najpierw tworzy szczegółowy plan, zanim agenci zaczną pracować. Jest to przydatne w przypadku złożonych zadań, które wymagają wykonania wielu czynności.
+- **Włączanie autokorekty:** tworzenie agentów, którzy mogą sprawdzać własną pracę. Jeśli wynik nie jest wystarczająco dobry, agent może spróbować ponownie, tworząc pętlę ulepszeń, aż rezultat będzie idealny.
 
-LlamaIndex Workflows에 대해 자세히 알아보려면 [LlamaIndex Workflows 문서](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)를 참고하세요.
+Więcej informacji o przepływach pracy LlamaIndex znajdziesz w [dokumentacji przepływów pracy LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
 
-의견 보내기
+Prześlij opinię
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-최종 업데이트: 2026-06-10(UTC)
+Ostatnia aktualizacja: 2026-06-10 UTC.
 
-의견을 전달하고 싶나요?
+Chcesz przekazać coś jeszcze?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-10(UTC)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-10 UTC."],[],[]]

@@ -1,74 +1,84 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=zh-CN
-fetched_at: 2026-07-27T04:33:24.395702+00:00
-title: "\u4f7f\u7528 Gemini \u548c Temporal \u6784\u5efa\u6301\u4e45\u578b AI \u667a\u80fd\u4f53 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/temporal-example?hl=fr
+fetched_at: 2026-08-03T04:28:12.152199+00:00
+title: "Agent d'IA durable avec Gemini et Temporal \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-发送反馈
+Envoyer des commentaires
 
-# 使用 Gemini 和 Temporal 构建持久型 AI 智能体
+# Agent d'IA durable avec Gemini et Temporal
 
-本教程将引导您构建一个 [ReAct 风格](https://arxiv.org/abs/2210.03629)的智能体循环，该循环使用 Gemini API 进行推理，并使用 [Temporal](https://temporal.io/) 实现耐用性。[GitHub](https://github.com/temporal-community/durable-react-agent-gemini) 上提供了本教程的完整源代码。
+Ce tutoriel vous explique comment créer une
+[boucle agentive de style ReAct](https://arxiv.org/abs/2210.03629) qui utilise l'
+API Gemini pour le raisonnement et [Temporal](https://temporal.io/) pour la durabilité.
+Le code source complet de ce tutoriel est disponible sur
+[GitHub](https://github.com/temporal-community/durable-react-agent-gemini).
 
-智能体可以调用工具，例如查找天气警报或对 IP 地址进行地理定位，并且会循环调用，直到有足够的信息来做出回答。
+L'agent peut appeler des outils, par exemple pour rechercher des alertes météo ou géolocaliser une adresse IP, et il effectue une boucle jusqu'à ce qu'il dispose de suffisamment d'informations pour répondre.
 
-与典型的代理演示不同的是，此演示具有**持久性**。每次 LLM 调用、每次工具调用和代理循环的每个步骤都会由 Temporal 持久保存。如果进程崩溃、网络中断或 API 超时，Temporal 会自动重试并从上次完成的步骤继续执行。不会丢失任何对话历史记录，也不会错误地重复任何工具调用。
+La différence avec une démonstration d'agent classique réside dans la **durabilité**. Chaque appel de LLM, chaque appel d'outil et chaque étape de la boucle agentive sont conservés par Temporal. En cas de plantage du processus, de perte de réseau ou d'expiration d'une API, Temporal effectue automatiquement une nouvelle tentative et reprend à partir de la dernière étape terminée. L'historique des conversations n'est pas perdu et aucun appel d'outil n'est répété par erreur.
 
-## 架构
+## Architecture
 
-该架构包含三个部分：
+L'architecture se compose de trois parties :
 
-- **工作流**：编排执行逻辑的智能体循环。
-- **活动**：Temporal 使之持久化的各个工作单元（LLM 调用、工具调用）。
-- **工作器**：执行工作流和活动的进程。
+- **Workflow** : boucle agentive qui orchestre la logique d'exécution.
+- **Activités** : unités de travail individuelles (appels de LLM, appels d'outils) que Temporal rend durables.
+- **Nœud de calcul** : processus qui exécute les workflows et les activités.
 
-在此示例中，您会将这三个部分全部放在一个文件 (`durable_agent_worker.py`) 中。在实际实现中，您会将其分开，以便获得各种部署和可伸缩性优势。您将把向代理提供提示的代码放在第二个文件 (`start_workflow.py`) 中。
+Dans cet exemple, vous allez placer ces trois éléments dans un seul fichier (`durable_agent_worker.py`). Dans une implémentation réelle, vous les séparerez pour bénéficier de divers avantages en termes de déploiement et d'évolutivité. Vous placerez le code qui fournit un prompt à l'agent dans un deuxième fichier (`start_workflow.py`).
 
-## 前提条件
+## Prérequis
 
-如需完成本指南，您需要：
+Pour suivre ce guide, vous aurez besoin des éléments suivants :
 
-- Gemini API 密钥。您可以在 [Google AI Studio](https://aistudio.google.com/apikey?hl=zh-cn) 中免费创建 API 密钥。
-- [Python](https://www.python.org/downloads/) 3.10 版或更高版本。
-- 用于运行本地开发服务器的 [Temporal CLI](https://docs.temporal.io/cli)。
+- Une clé API Gemini. Vous pouvez en créer une sans frais dans
+  [Google AI Studio](https://aistudio.google.com/apikey?hl=fr).
+- [Python](https://www.python.org/downloads/) version 3.10 ou ultérieure.
+- La [CLI Temporal](https://docs.temporal.io/cli) pour exécuter un serveur de développement
+  local.
 
-## 设置
+## Configuration
 
-开始之前，请确保您已在本地运行 [Temporal 开发服务器](https://docs.temporal.io/cli#start-dev-server)：
+Avant de commencer, assurez-vous qu'un
+[serveur de développement Temporal](https://docs.temporal.io/cli#start-dev-server)
+est en cours d'exécution localement :
 
 ```
 temporal server start-dev
 ```
 
-接下来，安装所需的依赖项：
+Ensuite, installez les dépendances requises :
 
 ```
 pip install temporalio google-genai httpx pydantic python-dotenv
 ```
 
-在项目目录中创建一个包含 Gemini API 密钥的 `.env` 文件。您可以从 [Google AI Studio](https://aistudio.google.com/apikey?hl=zh-cn) 获取 API 密钥。
+Créez un fichier `.env` dans le répertoire de votre projet avec votre clé API Gemini. Vous
+pouvez obtenir une clé API depuis
+[Google AI Studio](https://aistudio.google.com/apikey?hl=fr).
 
 ```
 echo "GOOGLE_API_KEY=your-api-key-here" > .env
 ```
 
-## 实现
+## Implémentation
 
-本教程的其余部分将从上到下逐步介绍 `durable_agent_worker.py`，逐步构建代理。创建文件并继续操作。
+Le reste de ce tutoriel décrit le fichier `durable_agent_worker.py` de haut en bas, en créant l'agent pièce par pièce. Créez le fichier et suivez les instructions.
 
-### 导入和沙盒设置
+### Importations et configuration du bac à sable
 
-首先定义必须预先定义的导入。`workflow.unsafe.imports_passed_through()` 块会告知 Temporal 的工作流沙盒允许某些模块不受限制地通过。这是必需的，因为多个库（尤其是 `urllib.request.Request` 的子类 `httpx`）使用的模式会被沙盒阻止。
+Commencez par les importations qui doivent être définies à l'avance. Le bloc `workflow.unsafe.imports_passed_through()` indique au bac à sable de workflow de Temporal de laisser passer certains modules sans restriction. Cela est nécessaire, car plusieurs bibliothèques (notamment `httpx`, qui sous-classe `urllib.request.Request`) utilisent des modèles que le bac à sable bloquerait autrement.
 
 ```
 from temporalio import workflow
@@ -83,9 +93,9 @@ with workflow.unsafe.imports_passed_through():
     from google.genai import types
 ```
 
-### 系统指令
+### Instructions système
 
-接下来，定义智能体的个性。系统指令会告知模型如何行动。此智能体已收到指令，在不需要任何工具的情况下以俳句形式回答问题。
+Définissez ensuite la personnalité de l'agent. Les instructions système indiquent au modèle comment se comporter. Cet agent est invité à répondre en haïkus lorsqu'aucun outil n'est nécessaire.
 
 ```
 SYSTEM_INSTRUCTIONS = """
@@ -96,9 +106,9 @@ If no tools are needed, respond in haikus.
 """
 ```
 
-### 工具定义
+### Définitions d'outils
 
-现在，定义智能体可以使用的工具。每个工具都是一个具有描述性文档字符串的异步函数。接受参数的工具使用 Pydantic 模型作为其唯一实参。这是 Temporal 最佳实践，可确保在您随着时间的推移添加可选字段时，活动签名保持稳定。
+Définissez maintenant les outils que l'agent peut utiliser. Chaque outil est une fonction asynchrone avec une chaîne de documentation descriptive. Les outils qui acceptent des paramètres utilisent un modèle Pydantic comme argument unique. Il s'agit d'une bonne pratique Temporal qui permet de maintenir la stabilité des signatures d'activité lorsque vous ajoutez des champs facultatifs au fil du temps.
 
 ```
 import json
@@ -127,7 +137,7 @@ async def get_weather_alerts(request: GetWeatherAlertsRequest) -> str:
         return json.dumps(response.json())
 ```
 
-接下来，定义 IP 地址地理定位工具：
+Définissez ensuite les outils de géolocalisation d'adresses IP :
 
 ```
 class GetLocationRequest(BaseModel):
@@ -156,9 +166,11 @@ async def get_location_info(request: GetLocationRequest) -> str:
         return f"{result['city']}, {result['regionName']}, {result['country']}"
 ```
 
-### 工具注册表
+### Registre d'outils
 
-接下来，创建一个将工具名称映射到处理函数的注册表。`get_tools()` 函数使用 `FunctionDeclaration.from_callable_with_api_option()` 从可调用对象生成与 Gemini 兼容的 `FunctionDeclaration` 对象。
+Créez ensuite un registre qui mappe les noms d'outils aux fonctions de gestion. La fonction
+`get_tools()` génère des objets `FunctionDeclaration` compatibles avec Gemini
+à partir des appelables à l'aide de `FunctionDeclaration.from_callable_with_api_option()`.
 
 ```
 from typing import Any, Awaitable, Callable
@@ -196,11 +208,11 @@ def get_tools() -> types.Tool:
     )
 ```
 
-### LLM 活动
+### Activité du LLM
 
-现在，定义调用 Gemini API 的 activity。`GeminiChatRequest` 和 `GeminiChatResponse` 数据类定义了协定。
+Définissez maintenant l'activité qui appelle l'API Gemini. Les classes de données `GeminiChatRequest` et `GeminiChatResponse` définissent le contrat.
 
-您将停用自动函数调用，以便将大语言模型调用和工具调用作为单独的任务来处理，从而提高智能体的持久性。您还将停用 SDK 的内置重试机制 (`attempts=1`)，因为 Temporal 会持久地处理重试。
+Vous allez désactiver l'appel de fonction automatique afin que l'appel de LLM et l'appel d'outil soient gérés comme des tâches distinctes, ce qui rendra votre agent plus durable. Vous allez également désactiver les nouvelles tentatives intégrées du SDK (`attempts=1`), car Temporal gère les nouvelles tentatives de manière durable.
 
 ```
 import os
@@ -276,11 +288,11 @@ async def generate_content(request: GeminiChatRequest) -> GeminiChatResponse:
     )
 ```
 
-### 动态工具活动
+### Activité d'outil dynamique
 
-接下来，定义执行工具的 activity。这使用了 Temporal 的动态 activity 功能：通过 `get_handler` 函数从工具注册表中获取工具处理程序（可调用对象）。这样一来，只需提供不同的工具和系统指令，即可定义不同的代理；实现代理循环的工作流无需更改。
+Définissez ensuite l'activité qui exécute les outils. Cette fonctionnalité utilise la fonctionnalité d'activité dynamique de Temporal : le gestionnaire d'outils (un appelable) est obtenu à partir du registre d'outils via la fonction `get_handler`. Cela permet de définir différents agents en fournissant simplement un ensemble d'outils et d'instructions système différents. Le workflow qui implémente la boucle agentive ne nécessite aucune modification.
 
-该 activity 会检查处理程序的签名，以确定如何传递实参。如果处理程序需要 Pydantic 模型，它会处理 Gemini 生成的嵌套输出格式（例如 `{"request": {"state": "CA"}}` 而不是扁平的 `{"state": "CA"}`）。
+L'activité inspecte la signature du gestionnaire pour déterminer comment transmettre les arguments. Si le gestionnaire attend un modèle Pydantic, il gère le format de sortie imbriqué généré par Gemini (par exemple, `{"request": {"state": "CA"}}` au lieu d'un format plat `{"state": "CA"}`).
 
 ```
 import inspect
@@ -320,11 +332,11 @@ async def dynamic_tool_activity(args: Sequence[RawValue]) -> dict:
     return result
 ```
 
-### 智能体循环工作流
+### Workflow de boucle agentive
 
-现在，您已具备完成代理构建的所有条件。`AgentWorkflow` 类实现了包含智能体循环的工作流。在该循环中，系统会通过 activity（使其持久化）调用 LLM，检查输出，如果 LLM 已选择某个工具，则通过 `dynamic_tool_activity` 调用该工具。
+Vous disposez maintenant de tous les éléments nécessaires pour terminer la création de l'agent. La classe `AgentWorkflow` implémente un workflow contenant la boucle de l'agent. Dans cette boucle, le LLM est appelé via une activité (ce qui le rend durable), la sortie est inspectée et, si un outil a été choisi par le LLM, il est appelé via `dynamic_tool_activity`.
 
-在这个简单的 ReAct 风格的代理中，一旦 LLM 选择不使用工具，循环就会被视为完成，并返回最终的 LLM 结果。
+Dans cet agent simple de style ReAct, une fois que le LLM choisit de ne pas utiliser d'outil, la boucle est considérée comme terminée et le résultat final du LLM est renvoyé.
 
 ```
 from datetime import timedelta
@@ -392,13 +404,13 @@ class AgentWorkflow:
         return result
 ```
 
-代理循环完全持久。如果代理工作器在多次循环迭代后崩溃，Temporal 将从其停止的位置继续运行，而无需重新调用已执行的 LLM 调用或工具调用。
+La boucle agentive est entièrement durable. Si le nœud de calcul de l'agent plante après plusieurs itérations dans la boucle, Temporal reprendra exactement là où il s'est arrêté sans avoir à appeler de nouveau les appels de LLM ou d'outils déjà exécutés.
 
-### 工作器启动
+### Démarrage du nœud de calcul
 
-最后，将所有设备连接在一起。虽然该代码以使其看起来像是在单个进程中运行的方式实现了必要的业务逻辑，但使用 Temporal 使其成为一个事件驱动型系统（具体来说，是事件源型系统），其中工作流和 activity 之间的通信通过 Temporal 提供的消息传递机制进行。
+Enfin, connectez tous les éléments. Bien que le code implémente la logique métier nécessaire de manière à ce qu'il semble s'exécuter dans un seul processus, l'utilisation de Temporal en fait un système basé sur les événements (plus précisément, basé sur la source d'événements) où la communication entre le workflow et les activités se fait via la messagerie fournie par Temporal.
 
-Temporal 工作器连接到 Temporal 服务，并充当工作流和 activity 任务的调度程序。工作器注册工作流和两个 activity，然后开始监听任务。
+Le nœud de calcul Temporal se connecte au service Temporal et sert de planificateur pour les tâches de workflow et d'activité. Le nœud de calcul enregistre le workflow et les deux activités, puis commence à écouter les tâches.
 
 ```
 import asyncio
@@ -437,9 +449,9 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## 客户端脚本
+## Script client
 
-创建客户端脚本 (`start_workflow.py`)。该脚本会提交查询并等待结果。请注意，它连接到代理工作器中引用的同一任务队列，`start_workflow` 脚本会将包含用户提示的工作流任务调度到该任务队列，从而启动代理的执行。
+Créez le script client (`start_workflow.py`). Il envoie une requête et attend le résultat. Notez qu'il se connecte à la même file d'attente de tâches que celle référencée dans le nœud de calcul de l'agent. Le script `start_workflow` distribue une tâche de workflow avec le prompt utilisateur à cette file d'attente de tâches, ce qui lance l'exécution de l'agent.
 
 ```
 import asyncio
@@ -469,29 +481,29 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
-## 运行代理
+## Exécuter l'agent
 
-如果尚未启动，请启动 Temporal 开发服务器：
+Si ce n'est pas déjà fait, démarrez le serveur de développement Temporal :
 
 ```
 temporal server start-dev
 ```
 
-在新终端窗口中，启动代理工作器：
+Dans une nouvelle fenêtre de terminal, démarrez le nœud de calcul de l'agent :
 
 ```
 python -m durable_agent_worker
 ```
 
-在第三个终端窗口中，向您的代理提交查询：
+Dans une troisième fenêtre de terminal, envoyez une requête à votre agent :
 
 ```
 python -m start_workflow "are there any weather alerts for where I am?"
 ```
 
-请注意终端中 `durable_agent_worker` 的输出，其中显示了代理循环每次迭代中发生的动作。LLM 能够通过调用其可用的各种工具来满足用户请求。您可以通过 Temporal 界面 (`http://localhost:8233/namespaces/default/workflows`) 查看已执行的步骤。
+Notez la sortie dans le terminal de `durable_agent_worker` qui affiche les actions qui se produisent à chaque itération de la boucle agentique. Le LLM est en mesure de répondre à la requête de l'utilisateur en appelant une série d'outils à sa disposition. Vous pouvez voir les étapes qui ont été exécutées via l'interface utilisateur Temporal à l'adresse `http://localhost:8233/namespaces/default/workflows`.
 
-尝试使用几个不同的提示，看看智能体如何推理和调用工具：
+Essayez quelques prompts différents pour voir le raisonnement de l'agent et les outils d'appel :
 
 ```
 python -m start_workflow "are there any weather alerts for New York?"
@@ -500,64 +512,63 @@ python -m start_workflow "what is my ip address?"
 python -m start_workflow "tell me a joke"
 ```
 
-最后一个提示不需要任何工具，因此智能体根据 `SYSTEM_INSTRUCTIONS` 以俳句的形式回答。
+Le dernier prompt ne nécessite aucun outil. L'agent répond donc en haïku en fonction de `SYSTEM_INSTRUCTIONS`.
 
-## 测试耐用性（可选）
+## Tester la durabilité (facultatif)
 
-基于 Temporal 构建可确保您的代理能够顺利应对故障。您可以使用两个不同的实验来测试这一点。
+La création sur Temporal garantit que votre agent survit aux échecs de manière transparente. Vous pouvez tester cela à l'aide de deux expériences distinctes.
 
-### 模拟网络中断
+### Simuler une panne de réseau
 
-在此测试中，您将暂时停用计算机的网络连接，提交工作流，观察 Temporal 自动重试，然后恢复网络以查看其恢复情况。
+Dans ce test, vous allez désactiver temporairement la connexion Internet de votre ordinateur, envoyer un workflow, regarder Temporal réessayer automatiquement, puis restaurer le réseau pour voir s'il récupère.
 
-1. 断开计算机与互联网的连接（例如，关闭 Wi-Fi）。
-2. 提交工作流：
+1. Déconnectez votre machine d'Internet (par exemple, désactivez le Wi-Fi).
+2. Envoyez un workflow :
 
    ```
    python -m start_workflow "tell me a joke"
    ```
-3. 检查 Temporal 界面 (`http://localhost:8233`)。您会看到 LLM 活动失败，而 Temporal 会在后台自动管理重试。
-4. 重新连接到互联网。
-5. 下一次自动重试将成功访问 Gemini API，并且您的终端将打印最终结果。
+3. Consultez l'interface utilisateur Temporal (`http://localhost:8233`). Vous verrez l'activité du LLM échouer et Temporal gérer automatiquement les nouvelles tentatives en arrière-plan.
+4. Reconnectez-vous à Internet.
+5. La prochaine nouvelle tentative automatisée atteindra l'API Gemini, et votre terminal affichera le résultat final.
 
-### 在工作器崩溃后继续运行
+### Survivre à un plantage du nœud de calcul
 
-在此测试中，您将在执行过程中终止工作器并重新启动它。Temporal 会重放工作流历史记录（事件源），并从上次完成的 activity 继续执行，已完成的 LLM 调用和工具调用不会重复执行。
+Dans ce test, vous arrêtez le nœud de calcul en cours d'exécution et le redémarrez. Temporal relit l'historique du workflow (source d'événements) et reprend à partir de la dernière activité terminée. Les appels de LLM et d'outils déjà terminés ne sont pas répétés.
 
-1. 为了给自己留出时间来终止 worker，请打开 `durable_agent_worker.py` 并暂时取消 `AgentWorkflow`
-   `run` 循环内的 `await asyncio.sleep(10)` 的注释。
-2. 重启工作器：
+1. Pour vous donner le temps d'arrêter le Worker, ouvrez `durable_agent_worker.py` et annulez temporairement la mise en commentaire de `await asyncio.sleep(10)` dans la boucle `run` de `AgentWorkflow`.
+2. Redémarrez le nœud de calcul :
 
    ```
    python -m durable_agent_worker
    ```
-3. 提交会触发多种工具的查询：
+3. Envoyez une requête qui déclenche plusieurs outils :
 
    ```
    python -m start_workflow "are there any weather alerts where I am?"
    ```
-4. 在完成之前随时终止工作器进程（在工作器终端中按 `Ctrl-C`，或者如果工作器在后台运行，则使用 `kill %1`）。
-5. 重启工作器：
+4. Arrêtez le processus de nœud de calcul à tout moment avant la fin (`Ctrl-C` dans le terminal du nœud de calcul ou à l'aide de `kill %1` si vous l'exécutez en arrière-plan).
+5. Redémarrez le nœud de calcul :
 
    ```
    python -m durable_agent_worker
    ```
 
-Temporal 会重放工作流历史记录。已完成的 LLM 调用和工具调用**不会**重新执行，其结果会立即从历史记录（事件日志）中重放。工作流成功完成。
+Temporal relit l'historique du workflow. Les appels de LLM et les appels d'outils déjà terminés ne sont **pas** réexécutés. Leurs résultats sont immédiatement relus à partir de l'historique (le journal des événements). Le workflow se termine correctement.
 
-## 更多资源
+## Autres ressources
 
-- [Temporal 文档](https://docs.temporal.io/)
-- [Temporal Python SDK](https://docs.temporal.io/develop/python)
-- [Google GenAI SDK](https://googleapis.github.io/python-genai/)
-- [本教程的源代码](https://github.com/temporal-community/durable-react-agent-gemini)
+- [Documentation Temporal](https://docs.temporal.io/)
+- [SDK Python Temporal](https://docs.temporal.io/develop/python)
+- [SDK Google GenAI](https://googleapis.github.io/python-genai/)
+- [Code source de ce tutoriel](https://github.com/temporal-community/durable-react-agent-gemini)
 
-发送反馈
+Envoyer des commentaires
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-最后更新时间 (UTC)：2026-06-22。
+Dernière mise à jour le 2026/06/22 (UTC).
 
-需要向我们提供更多信息？
+Voulez-vous nous donner plus d'informations ?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-22。"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/06/22 (UTC)."],[],[]]

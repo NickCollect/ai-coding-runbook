@@ -1,43 +1,42 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=de
-fetched_at: 2026-07-27T04:42:08.015677+00:00
-title: "Market Research Agent mit Gemini und dem AI\u00a0SDK von Vercel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/vercel-ai-sdk-example?hl=es-419
+fetched_at: 2026-08-03T04:33:59.787286+00:00
+title: "Agente de investigaci\u00f3n de mercado con Gemini y el SDK de IA de Vercel \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Feedback geben
+Enviar comentarios
 
-# Market Research Agent mit Gemini und dem AI SDK von Vercel
+# Agente de investigación de mercado con Gemini y el SDK de IA de Vercel
 
-Das [AI SDK von Vercel](https://ai-sdk.dev) ist eine leistungsstarke Open-Source-Bibliothek zum
-Erstellen von KI-gestützten Anwendungen, Benutzeroberflächen und Agenten in TypeScript.
+El [SDK de IA de Vercel](https://ai-sdk.dev) es una potente biblioteca de código abierto para compilar aplicaciones, interfaces de usuario y agentes potenciados por IA en TypeScript.
 
-In dieser Anleitung erfahren Sie, wie Sie eine Node.js-Anwendung mit TypeScript erstellen, die das AI SDK verwendet, um über den [Google Generative AI Provider](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) eine Verbindung zur Gemini API herzustellen und eine automatisierte Markttrendanalyse durchzuführen. Die fertige Anwendung kann Folgendes:
+En esta guía, se explica cómo compilar una aplicación de Node.js con TypeScript que usa el SDK de IA para conectarse con la API de Gemini a través del [proveedor de IA generativa de Google](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai) y realizar análisis automatizados de tendencias del mercado. La aplicación final hará lo siguiente:
 
-1. Gemini mit der Google Suche verwenden, um aktuelle Markttrends zu recherchieren.
-2. Strukturierte Daten aus der Recherche extrahieren, um Diagramme zu erstellen.
-3. Die Recherche und die Diagramme in einem professionellen HTML-Bericht zusammenfassen und als PDF speichern.
+1. Usa Gemini con la Búsqueda de Google para investigar las tendencias actuales del mercado.
+2. Extrae datos estructurados de la investigación para generar gráficos.
+3. Combina la investigación y los gráficos en un informe HTML profesional y guárdalo como PDF.
 
-## Vorbereitung
+## Requisitos previos
 
-Für diese Anleitung benötigen Sie Folgendes:
+Para completar esta guía, necesitarás lo siguiente:
 
-- Einen Gemini API-Schlüssel. Sie können ihn kostenlos in [Google AI Studio](https://aistudio.google.com/apikey?hl=de) erstellen.
-- [Node.js](https://nodejs.org/en/download), Version 18 oder höher.
-- Einen Paketmanager wie `npm`, `pnpm`, oder `yarn`.
+- Una clave de API de Gemini Puedes crear una gratis en [Google AI Studio](https://aistudio.google.com/apikey?hl=es-419).
+- [Node.js](https://nodejs.org/en/download) versión 18 o posterior
+- Un administrador de paquetes, como `npm`, `pnpm` o `yarn`
 
-## Anwendung einrichten
+## Cómo configurar tu aplicación
 
-Erstellen Sie zuerst ein neues Verzeichnis für Ihr Projekt und initialisieren Sie es.
+Primero, crea un directorio nuevo para tu proyecto y, luego, inicialízalo.
 
 ### npm
 
@@ -55,7 +54,7 @@ cd market-trend-app
 pnpm init
 ```
 
-### yarn
+### hilo
 
 ```
 mkdir market-trend-app
@@ -63,9 +62,9 @@ cd market-trend-app
 yarn init -y
 ```
 
-### Abhängigkeiten installieren
+### Instala dependencias
 
-Installieren Sie als Nächstes das AI SDK, den Google Generative AI Provider und andere erforderliche Abhängigkeiten.
+A continuación, instala el SDK de IA, el proveedor de IA generativa de Google y otras dependencias necesarias.
 
 ### npm
 
@@ -74,7 +73,7 @@ npm install ai @ai-sdk/google zod
 npm install -D @types/node tsx typescript && npx tsc --init
 ```
 
-Um einen TypeScript-Compilerfehler zu vermeiden, kommentieren Sie die folgende Zeile in der generierten `tsconfig.json`-Datei aus:
+Para evitar un error del compilador de TypeScript, comenta la siguiente línea en el archivo `tsconfig.json` generado:
 
 ```
 //"verbatimModuleSyntax": true,
@@ -87,22 +86,20 @@ pnpm add ai @ai-sdk/google zod
 pnpm add -D @types/node tsx typescript
 ```
 
-### yarn
+### hilo
 
 ```
 yarn add ai @ai-sdk/google zod
 yarn add -D @types/node tsx typescript && yarn tsc --init
 ```
 
-Um einen TypeScript-Compilerfehler zu vermeiden, kommentieren Sie die folgende Zeile in der generierten `tsconfig.json`-Datei aus:
+Para evitar un error del compilador de TypeScript, comenta la siguiente línea en el archivo `tsconfig.json` generado:
 
 ```
 //"verbatimModuleSyntax": true,
 ```
 
-Diese Anwendung verwendet auch die Drittanbieterpakete [Puppeteer](https://pptr.dev/)
-und [Chart.js](https://www.chartjs.org) zum Rendern von Diagrammen und
-zum Erstellen einer PDF-Datei:
+Esta aplicación también usará los paquetes de terceros [Puppeteer](https://pptr.dev/) y [Chart.js](https://www.chartjs.org) para renderizar gráficos y crear un PDF:
 
 ### npm
 
@@ -118,18 +115,18 @@ pnpm add puppeteer chart.js
 pnpm add -D @types/chart.js
 ```
 
-### yarn
+### hilo
 
 ```
 yarn add puppeteer chart.js
 yarn add -D @types/chart.js
 ```
 
-Für das `puppeteer`-Paket muss ein Skript ausgeführt werden, um den Chromium-Browser herunterzuladen. Ihr Paketmanager fordert möglicherweise eine Genehmigung an. Genehmigen Sie das Skript, wenn Sie dazu aufgefordert werden.
+El paquete `puppeteer` requiere que se ejecute una secuencia de comandos para descargar el navegador Chromium. Es posible que el administrador de paquetes te solicite aprobación, así que asegúrate de aprobar el script cuando se te solicite.
 
-### API-Schlüssel konfigurieren
+### Configura tu clave de API
 
-Legen Sie die Umgebungsvariable `GOOGLE_GENERATIVE_AI_API_KEY` mit Ihrem Gemini API-Schlüssel fest. Der Google Generative AI Provider sucht automatisch in dieser Umgebungsvariable nach Ihrem API-Schlüssel.
+Establece la variable de entorno `GOOGLE_GENERATIVE_AI_API_KEY` con tu clave de la API de Gemini. El proveedor de IA generativa de Google busca automáticamente tu clave de API en esta variable de entorno.
 
 ### macOS/Linux
 
@@ -137,17 +134,17 @@ Legen Sie die Umgebungsvariable `GOOGLE_GENERATIVE_AI_API_KEY` mit Ihrem Gemini 
 export GOOGLE_GENERATIVE_AI_API_KEY="YOUR_API_KEY_HERE"
 ```
 
-### Powershell
+### PowerShell
 
 ```
 setx GOOGLE_GENERATIVE_AI_API_KEY "YOUR_API_KEY_HERE"
 ```
 
-## Anwendung erstellen
+## Crea tu aplicación
 
-Erstellen wir nun die Hauptdatei für unsere Anwendung. Erstellen Sie in Ihrem Projektverzeichnis eine neue Datei mit dem Namen `main.ts`. Die Logik wird in dieser Datei Schritt für Schritt aufgebaut.
+Ahora, creemos el archivo principal de nuestra aplicación. Crea un archivo nuevo llamado `main.ts` en el directorio de tu proyecto. Compilarás la lógica en este archivo paso a paso.
 
-Fügen Sie der Datei `main.ts` den folgenden Code hinzu, um zu prüfen, ob alles richtig eingerichtet ist. In diesem einfachen Beispiel wird `generateText` verwendet, um eine einfache Antwort von Gemini zu erhalten.
+Para realizar una prueba rápida y asegurarte de que todo esté configurado correctamente, agrega el siguiente código a `main.ts`. En este ejemplo básico, se usa `generateText` para obtener una respuesta simple de Gemini.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -165,7 +162,7 @@ async function main() {
 main().catch(console.error);
 ```
 
-Bevor Sie weitere Komplexität hinzufügen, führen Sie dieses Skript aus, um zu prüfen, ob Ihre Umgebung richtig konfiguriert ist. Führen Sie in Ihrem Terminal den folgenden Befehl aus:
+Antes de agregar más complejidad, ejecuta esta secuencia de comandos para verificar que tu entorno esté configurado correctamente. Ejecuta el siguiente comando en la terminal:
 
 ### npm
 
@@ -179,20 +176,19 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yarn
+### hilo
 
 ```
 yarn tsc && node main.js
 ```
 
-Wenn alles richtig eingerichtet ist, wird die Antwort von Gemini in der Konsole ausgegeben.
+Si todo está configurado correctamente, verás la respuesta de Gemini impresa en la consola.
 
-## Marktforschung mit der Google Suche durchführen
+## Realiza una investigación de mercado con la Búsqueda de Google
 
-Wenn Sie aktuelle Informationen erhalten möchten, können Sie das
-[Google Search](https://ai.google.dev/gemini-api/docs/google-search?hl=de)-Tool für Gemini aktivieren. Wenn dieses Tool aktiv ist, kann das Modell im Web nach Antworten auf den Prompt suchen und gibt die verwendeten Quellen zurück.
+Para obtener información actualizada, puedes habilitar la herramienta [Búsqueda de Google](https://ai.google.dev/gemini-api/docs/google-search?hl=es-419) para Gemini. Cuando esta herramienta está activa, el modelo puede buscar en la Web para responder la instrucción y mostrará las fuentes que usó.
 
-Ersetzen Sie den Inhalt von `main.ts` durch den folgenden Code, um den ersten Schritt unserer Analyse auszuführen.
+Reemplaza el contenido de `main.ts` con el siguiente código para realizar el primer paso de nuestro análisis.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -218,13 +214,13 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Diagrammdaten extrahieren
+## Cómo extraer datos de gráficos
 
-Als Nächstes verarbeiten wir den Recherchetext, um strukturierte Daten zu extrahieren, die für Diagramme geeignet sind. Verwenden Sie die Funktion `generateObject` des AI SDK zusammen mit einem `zod`-Schema, um die genaue Datenstruktur zu definieren.
+A continuación, procesaremos el texto de investigación para extraer datos estructurados adecuados para los gráficos. Usa la función `generateObject` del SDK de IA junto con un esquema `zod` para definir la estructura de datos exacta.
 
-Erstellen Sie außerdem eine Hilfsfunktion, um diese strukturierten Daten in eine Konfiguration zu konvertieren, die `Chart.js` verstehen kann.
+También crea una función auxiliar para convertir estos datos estructurados en una configuración que `Chart.js` pueda comprender.
 
-Fügen Sie der Datei `main.ts` den folgenden Code hinzu. Beachten Sie die neuen Importe und den hinzugefügten Schritt 2.
+Agrega el siguiente código a `main.ts`. Observa las nuevas importaciones y el "Paso 2" agregado.
 
 ```
 import { google } from "@ai-sdk/google";
@@ -306,13 +302,12 @@ ${marketTrends}
 main().catch(console.error);
 ```
 
-## Abschlussbericht erstellen
+## Genera el informe final
 
-Im letzten Schritt weisen Sie Gemini an, als Experte für das Erstellen von Berichten zu fungieren.
-Geben Sie die Marktforschung, die Diagrammkonfigurationen und eine klare Anleitung zum Erstellen eines HTML-Berichts an. Verwenden Sie dann
-[Puppeteer](https://pptr.dev/), um diesen HTML-Code zu rendern und als PDF zu speichern.
+En el último paso, indícale a Gemini que actúe como un redactor experto de informes.
+Proporcionarle la investigación de mercado, las configuraciones de los gráficos y un conjunto claro de instrucciones para crear un informe HTML Luego, usa [Puppeteer](https://pptr.dev/) para renderizar este HTML y guardarlo como PDF.
 
-Fügen Sie den letzten `puppeteer`-Import und Schritt 3 der Datei `main.ts` hinzu.
+Agrega la importación final de `puppeteer` y "Paso 3" a tu archivo `main.ts`.
 
 ```
 // ... (imports from previous step)
@@ -373,9 +368,9 @@ async function main() {
 main().catch(console.error);
 ```
 
-## Führen Sie Ihre Anwendung aus
+## Ejecuta tu aplicación
 
-Sie können die Anwendung jetzt ausführen. Führen Sie im Terminal folgenden Befehl aus:
+Ya puedes ejecutar la aplicación. Ejecuta el siguiente comando en tu terminal:
 
 ### npm
 
@@ -389,33 +384,33 @@ npx tsc && node main.js
 pnpm tsx main.ts
 ```
 
-### yarn
+### hilo
 
 ```
 yarn tsc && node main.js
 ```
 
-Im Terminal wird eine Protokollierung angezeigt, während das Skript die einzelnen Schritte ausführt.
-Nach Abschluss wird in Ihrem Projektverzeichnis eine Datei `report.pdf` mit Ihrer Marktanalyse erstellt.
+Verás el registro en tu terminal a medida que la secuencia de comandos ejecute cada paso.
+Cuando se complete, se creará un archivo `report.pdf` que contendrá tu análisis de mercado en el directorio del proyecto.
 
-Unten sehen Sie die ersten beiden Seiten eines Beispiel-PDF-Berichts:
+A continuación, verás las dos primeras páginas de un informe en PDF de ejemplo:
 
-![Marktanalysebericht](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=de)
+![Informe de análisis de mercado](https://ai.google.dev/static/gemini-api/docs/images/market-research-pdf.jpg?hl=es-419)
 
-## Weitere Ressourcen
+## Más recursos
 
-Weitere Informationen zum Erstellen von Anwendungen mit Gemini und dem AI SDK finden Sie in den folgenden Ressourcen:
+Para obtener más información sobre cómo compilar con Gemini y el SDK de IA, explora estos recursos:
 
-- [AI SDK-Dokumentation](https://ai-sdk.dev/docs)
-- [AI SDK Google Generative AI-Dokumentation](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
-- [AI SDK-Kochbuch: Erste Schritte mit Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
+- [Documentos del SDK de IA](https://ai-sdk.dev/docs)
+- [Documentos sobre la IA generativa de Google del SDK de IA](https://ai-sdk.dev/providers/ai-sdk-providers/google-generative-ai)
+- [Recetario del SDK de IA: Comienza a usar Gemini](https://ai-sdk.dev/cookbook/guides/gemini)
 
-Feedback geben
+Enviar comentarios
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Zuletzt aktualisiert: 2026-05-19 (UTC).
+Última actualización: 2026-05-19 (UTC)
 
-Haben Sie Feedback für uns?
+¿Quieres brindar más información?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-19 (UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-05-19 (UTC)"],[],[]]

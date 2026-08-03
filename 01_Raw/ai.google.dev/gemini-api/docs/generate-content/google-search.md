@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=es-419
-fetched_at: 2026-07-27T04:42:36.147729+00:00
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/google-search?hl=id
+fetched_at: 2026-08-03T04:35:16.287070+00:00
 title: "Grounding with Google Search \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Página principal](https://ai.google.dev/?hl=es-419)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=es-419)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Enviar comentarios
+Kirim masukan
 
 # Grounding with Google Search
 
-La Fundamentación con la Búsqueda de Google conecta el modelo de Gemini con contenido web en tiempo real y funciona con todos los idiomas disponibles. Esto permite que Gemini proporcione respuestas más precisas y cite fuentes verificables más allá de su fecha límite de conocimiento.
+Grounding dengan Google Penelusuran menghubungkan model Gemini ke konten web real-time dan berfungsi dengan semua bahasa yang tersedia. Dengan fitur ini, Gemini dapat memberikan jawaban yang lebih akurat dan mengutip sumber yang dapat diverifikasi di luar batas informasinya.
 
-La fundamentación te ayuda a crear aplicaciones que pueden hacer lo siguiente:
+Grounding membantu Anda membangun aplikasi yang dapat:
 
-- **Aumenta la exactitud fáctica:** Reduce las alucinaciones del modelo basando las respuestas en información del mundo real.
-- **Acceder a información en tiempo real:** Responder preguntas sobre eventos y temas recientes
-- **Proporciona citas:** Genera confianza en los usuarios mostrando las fuentes de las afirmaciones del modelo.
+- **Meningkatkan akurasi faktual:** Mengurangi halusinasi model dengan mendasarkan respons pada informasi dunia nyata.
+- **Mengakses informasi real-time:** Menjawab pertanyaan tentang peristiwa dan topik terbaru.
+- **Memberikan kutipan:** Membangun kepercayaan pengguna dengan menampilkan sumber untuk klaim model.
 
 ### Python
 
@@ -44,7 +44,7 @@ config = types.GenerateContentConfig(
 )
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents="Who won the euro 2024?",
     config=config,
 )
@@ -68,7 +68,7 @@ const config = {
 };
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: "Who won the euro 2024?",
   config,
 });
@@ -79,7 +79,7 @@ console.log(response.text);
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H "Content-Type: application/json" \
   -X POST \
@@ -99,23 +99,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-Si quieres obtener más información, prueba el [notebook de la herramienta de búsqueda](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=es-419).
+Anda dapat mempelajari lebih lanjut dengan mencoba notebook [Alat penelusuran](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=id).
 
-## Cómo funciona la fundamentación con la Búsqueda de Google
+## Cara kerja grounding dengan Google Penelusuran
 
-Cuando habilitas la herramienta `google_search`, el modelo controla todo el flujo de trabajo de búsqueda, procesamiento y citación de información de forma automática.
+Saat Anda mengaktifkan alat `google_search`, model akan menangani seluruh alur kerja penelusuran, pemrosesan, dan pengutipan informasi secara otomatis.
 
-![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=es-419)
+![grounding-overview](https://ai.google.dev/static/gemini-api/docs/images/google-search-tool-overview.png?hl=id)
 
-1. **Instrucción del usuario:** Tu aplicación envía una instrucción del usuario a la API de Gemini con la herramienta `google_search` habilitada.
-2. **Análisis de instrucciones:** El modelo analiza la instrucción y determina si la Búsqueda de Google puede mejorar la respuesta.
-3. **Búsqueda de Google:** Si es necesario, el modelo genera y ejecuta automáticamente una o varias búsquedas.
-4. **Procesamiento de los resultados de la búsqueda:** El modelo procesa los resultados de la búsqueda, sintetiza la información y formula una respuesta.
-5. **Respuesta fundamentada:** La API devuelve una respuesta final y fácil de usar que se basa en los resultados de la búsqueda. Esta respuesta incluye la respuesta de texto del modelo y `groundingMetadata` con las búsquedas, los resultados web y las citas.
+1. **Perintah Pengguna:** Aplikasi Anda mengirimkan perintah pengguna ke Gemini API dengan alat `google_search` yang diaktifkan.
+2. **Analisis Perintah:** Model menganalisis perintah dan menentukan apakah Google Penelusuran dapat meningkatkan jawaban.
+3. **Google Penelusuran:** Jika diperlukan, model akan otomatis membuat satu atau beberapa kueri penelusuran dan menjalankannya.
+4. **Pemrosesan Hasil Penelusuran:** Model memproses hasil penelusuran, mensintesis informasi, dan merumuskan respons.
+5. **Respons yang Didasarkan:** API menampilkan respons akhir yang mudah digunakan dan didasarkan pada hasil penelusuran. Respons ini mencakup jawaban teks model dan `groundingMetadata` dengan kueri penelusuran, hasil web, dan kutipan.
 
-## Cómo comprender la respuesta de fundamentación
+## Memahami respons grounding
 
-Cuando una respuesta se fundamenta correctamente, incluye un campo `groundingMetadata`. Estos datos estructurados son esenciales para verificar las afirmaciones y crear una experiencia de citas enriquecida en tu aplicación.
+Jika respons berhasil didasarkan, respons akan menyertakan kolom `groundingMetadata`. Data terstruktur ini penting untuk memverifikasi klaim dan membangun pengalaman kutipan yang kaya di aplikasi Anda.
 
 ```
 {
@@ -131,11 +131,11 @@ Cuando una respuesta se fundamenta correctamente, incluye un campo `groundingMet
       },
       "groundingMetadata": {
         "webSearchQueries": [
-          "UEFA Euro 2024 winner",
-          "who won euro 2024"
+          "UEFA Euro 2024 winner"<;,
+          "who won euro 2024">;
         ],
         "searchEntryPoint": {
-          "renderedContent": "<!-- HTML and CSS for the search widget -->"
+          "renderedContent": "!-- HTML and CSS for the search widget --"
         },
         "groundingChunks": [
           {"web": {"uri": "https://vertexaisearch.cloud.google.com.....", "title": "aljazeera.com"}},
@@ -143,7 +143,7 @@ Cuando una respuesta se fundamenta correctamente, incluye un campo `groundingMet
         ],
         "groundingSupports": [
           {
-            "segment": {"startIndex": 0, "endIndex": 85, "text": "Spain won Euro 2024, defeatin..."},
+            "segment": {"startIndex": 0, "endIndex": 85, &quot;text": "Spain won Euro 2024, defeatin..."},
             "groundingChunkIndices": [0]
           },
           {
@@ -157,18 +157,20 @@ Cuando una respuesta se fundamenta correctamente, incluye un campo `groundingMet
 }
 ```
 
-La API de Gemini devuelve la siguiente información con `groundingMetadata`:
+Gemini API menampilkan informasi berikut dengan `groundingMetadata`:
 
-- `webSearchQueries` : Es un array de las búsquedas utilizadas. Esto es útil para depurar y comprender el proceso de razonamiento del modelo.
-- `searchEntryPoint` : Contiene el código HTML y CSS para renderizar las sugerencias de búsqueda requeridas. Los requisitos de uso completos se detallan en las [Condiciones del Servicio](https://ai.google.dev/gemini-api/terms?hl=es-419#grounding-with-google-search).
-- `groundingChunks` : Es un array de objetos que contiene las fuentes web (`uri` y `title`).
-- `groundingSupports` : Es un array de fragmentos para conectar la respuesta del modelo `text` a las fuentes en `groundingChunks`. Cada fragmento vincula un texto `segment` (definido por `startIndex` y `endIndex`) a uno o más `groundingChunkIndices`. Esta es la clave para crear citas intercaladas.
+- `webSearchQueries` : Array kueri penelusuran yang digunakan. Hal ini berguna untuk men-debug dan memahami proses penalaran model.
+- `searchEntryPoint` : Berisi HTML dan CSS untuk merender Saran Penelusuran yang diperlukan. Persyaratan penggunaan lengkap dijelaskan dalam [Persyaratan
+  Layanan](https://ai.google.dev/gemini-api/terms?hl=id#grounding-with-google-search).
+- `groundingChunks` : Array objek yang berisi sumber web (`uri` dan `title`).
+- `groundingSupports` : Array potongan untuk menghubungkan respons model `text` ke sumber di `groundingChunks`. Setiap potongan menautkan `segment` teks (ditentukan oleh `startIndex` dan `endIndex`) ke satu atau beberapa `groundingChunkIndices`. Hal ini merupakan kunci untuk membangun kutipan inline.
 
-La fundamentación con la Búsqueda de Google también se puede usar en combinación con la [herramienta de contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419) para fundamentar las respuestas en los datos públicos de la Web y en las URLs específicas que proporciones.
+Grounding dengan Google Penelusuran juga dapat digunakan bersama dengan alat konteks [URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id) untuk mendasarkan respons pada data web publik
+dan URL tertentu yang Anda berikan.
 
-## Cómo atribuir fuentes con citas intercaladas
+## Memberikan atribusi sumber dengan kutipan inline
 
-La API devuelve datos de citas estructurados, lo que te brinda un control completo sobre cómo mostrar las fuentes en tu interfaz de usuario. Puedes usar los campos `groundingSupports` y `groundingChunks` para vincular las declaraciones del modelo directamente a sus fuentes. A continuación, se muestra un patrón común para procesar los metadatos y crear una respuesta con citas intercaladas en las que se puede hacer clic.
+API menampilkan data kutipan terstruktur, sehingga Anda memiliki kontrol penuh atas cara menampilkan sumber di antarmuka pengguna. Anda dapat menggunakan kolom `groundingSupports` dan `groundingChunks` untuk menautkan pernyataan model langsung ke sumbernya. Berikut adalah pola umum untuk memproses metadata guna membuat respons dengan kutipan inline yang dapat diklik.
 
 ### Python
 
@@ -243,55 +245,65 @@ const textWithCitations = addCitations(response);
 console.log(textWithCitations);
 ```
 
-La nueva respuesta con citas intercaladas se verá de la siguiente manera:
+Respons baru dengan kutipan inline akan terlihat seperti ini:
 
 ```
 Spain won Euro 2024, defeating England 2-1 in the final.[1](https:/...), [2](https:/...), [4](https:/...), [5](https:/...) This victory marks Spain's record-breaking fourth European Championship title.[5]((https:/...), [2](https:/...), [3](https:/...), [4](https:/...)
 ```
 
-## Precios
+## Harga
 
-Cuando usas Fundamentación con la Búsqueda de Google con Gemini 3, se te factura el proyecto por cada búsqueda que el modelo decide ejecutar. Si el modelo decide ejecutar varias búsquedas para responder a una sola instrucción (por ejemplo, buscar `"UEFA Euro 2024 winner"` y `"Spain vs England Euro 2024 final
-score"` en la misma llamada a la API), esto se considera como dos usos facturables de la herramienta para esa solicitud. Para fines de facturación, ignoramos las búsquedas web vacías cuando contamos las búsquedas únicas. Este modelo de facturación solo se aplica a los modelos de Gemini 3. Cuando usas la fundamentación con la Búsqueda con modelos de Gemini 2.5 o anteriores, tu proyecto se factura por instrucción.
+Saat Anda menggunakan Grounding with Google Search dengan Gemini 3, project Anda akan ditagih untuk setiap kueri penelusuran yang diputuskan untuk dijalankan oleh model. Jika model memutuskan untuk
+menjalankan beberapa kueri penelusuran untuk menjawab satu perintah (misalnya,
+menelusuri `"UEFA Euro 2024 winner"` dan `"Spain vs England Euro 2024 final
+score"` dalam panggilan API yang sama), hal ini akan dihitung sebagai dua penggunaan alat yang dapat ditagih
+untuk permintaan tersebut. Untuk tujuan penagihan, kami mengabaikan kueri penelusuran web kosong saat menghitung kueri unik. Model penagihan ini hanya berlaku untuk model Gemini 3; saat Anda menggunakan grounding penelusuran dengan model Gemini 2.5 atau yang lebih lama, project Anda akan ditagih per perintah.
 
-Para obtener información detallada sobre los precios, consulta la [página de precios de la API de Gemini](https://ai.google.dev/gemini-api/docs/pricing?hl=es-419).
+Untuk mengetahui informasi harga mendetail, lihat halaman harga [Gemini API](https://ai.google.dev/gemini-api/docs/pricing?hl=id).
 
-## Modelos compatibles
+## Model yang didukung
 
-Puedes encontrar todas las capacidades en la página de [descripción general del modelo](https://ai.google.dev/gemini-api/docs/models?hl=es-419).
+Anda dapat menemukan kemampuan lengkap di halaman ringkasan [model
+overview](https://ai.google.dev/gemini-api/docs/models?hl=id).
 
-| Modelo | Fundamentación con la Búsqueda de Google |
+| Model | Grounding dengan Google Penelusuran |
 | --- | --- |
+| Gemini 3.6 Flash | ✔️ |
+| Gemini 3.5 Flash-Lite | ✔️ |
 | Gemini 3.5 Flash | ✔️ |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Versión preliminar de Gemini 3.1 Flash Image | ✔️ |
-| Versión preliminar de Gemini 3.1 Pro | ✔️ |
-| Versión preliminar de Gemini 3 Pro Image | ✔️ |
-| Versión preliminar de Gemini 3 Flash | ✔️ |
-| Versión preliminar de Gemini 3.1 Flash-Lite | ✔️ |
+| Pratinjau Gambar Gemini 3.1 Flash | ✔️ |
+| Pratinjau Gemini 3.1 Pro | ✔️ |
+| Pratinjau Gambar Gemini 3 Pro | ✔️ |
+| Pratinjau Gemini 3 Flash | ✔️ |
+| Pratinjau Gemini 3.1 Flash-Lite | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️ |
 
-## Combinaciones de herramientas compatibles
+## Kombinasi alat yang didukung
 
-Puedes usar la fundamentación con la Búsqueda de Google con otras herramientas, como la [ejecución de código](https://ai.google.dev/gemini-api/docs/code-execution?hl=es-419) y el [contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419), para potenciar casos de uso más complejos.
+Anda dapat menggunakan Grounding dengan Google Penelusuran dengan alat lain seperti
+[eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id) dan
+[konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id) untuk mendukung kasus penggunaan yang lebih kompleks.
 
-Los modelos de Gemini 3 admiten la combinación de herramientas integradas (como la Fundamentación con la Búsqueda de Google) con herramientas personalizadas (llamadas a funciones). Obtén más información en la página de [combinaciones de herramientas](https://ai.google.dev/gemini-api/docs/tool-combination?hl=es-419).
+Model Gemini 3 mendukung kombinasi alat bawaan (seperti Grounding dengan Google Penelusuran) dengan alat kustom (panggilan fungsi). Pelajari lebih lanjut di halaman
+[kombinasi alat](https://ai.google.dev/gemini-api/docs/tool-combination?hl=id).
 
-## ¿Qué sigue?
+## Langkah berikutnya
 
-- Prueba la [guía de soluciones de Fundamentación con la Búsqueda de Google en la API de Gemini](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=es-419).
-- Obtén más información sobre otras herramientas disponibles, como [Llamada a función](https://ai.google.dev/gemini-api/docs/function-calling?hl=es-419).
-- Obtén información para aumentar las instrucciones con URLs específicas usando la [herramienta de contexto de URL](https://ai.google.dev/gemini-api/docs/url-context?hl=es-419).
+- Coba [Grounding dengan Google Penelusuran di Gemini API
+  Buku Masakan](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Search_Grounding.ipynb?hl=id).
+- Pelajari alat lain yang tersedia, seperti [Panggilan Fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id).
+- Pelajari cara menambah perintah dengan URL tertentu menggunakan [alat konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id).
 
-Enviar comentarios
+Kirim masukan
 
-Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Última actualización: 2026-06-23 (UTC)
+Terakhir diperbarui pada 2026-07-30 UTC.
 
-¿Quieres brindar más información?
+Ada masukan untuk kami?
 
-[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-23 (UTC)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]

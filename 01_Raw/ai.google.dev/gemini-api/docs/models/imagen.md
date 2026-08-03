@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=zh-CN
-fetched_at: 2026-07-27T04:45:25.544696+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/imagen?hl=it
+fetched_at: 2026-08-03T04:40:47.540032+00:00
 title: "Imagen 4 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-发送反馈
+Invia feedback
 
 # Imagen 4
 
-一款用于高级视觉合成的高性能引擎，可提供精细的创意控制和逼真的输出效果。使用 Imagen 4 可完成专业品牌推广、复杂场景构图和高保真设计任务，这些任务需要精确的文本渲染和复杂的光照。
+Un motore ad alte prestazioni per la sintesi visiva avanzata, che offre un controllo creativo sofisticato e un output fotorealistico. Utilizza Imagen 4 per il branding professionale, la composizione di scene complesse e attività di progettazione ad alta fedeltà che richiedono un rendering preciso del testo e un'illuminazione complessa.
 
-[在 Google AI Studio 中试用](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=zh-cn)
+[Prova in Google AI Studio](https://aistudio.google.com?model=imagen-4.0-generate-001&hl=it)
 
-## 文档
+## Documentazione
 
-如需全面了解功能和特性，请访问 [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=zh-cn) 页面。
+Visita la pagina [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=it) per una copertura completa delle funzionalità.
 
 ## imagen-4.0-generate-001
 
-| 属性 | 说明 |
+| Proprietà | Descrizione |
 | --- | --- |
-| id\_card 模型代码 | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| 保存支持的数据类型 | **输入**  文字  **输出**  图片 |
-| token\_auto令牌限制[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn) | **输入 token 限制**  480 个 token（文本）  **输出图片**  1 至 4（Ultra/标准/快速） |
-| calendar\_month最新更新 | 2025 年 6 月 |
+| Codice modello id\_card | **API Gemini**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveTipi di dati supportati | **Ingresso**  Testo  **Output**  Immagini |
+| token\_autoLimiti dei token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=it) | **Limite di token di input**  480 token (testo)  **Immagini di output**  Da 1 a 4 (Ultra/Standard/Veloce) |
+| calendar\_monthUltimo aggiornamento | Giugno 2025 |
 
-发送反馈
+Invia feedback
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-最后更新时间 (UTC)：2026-06-15。
+Ultimo aggiornamento 2026-06-15 UTC.
 
-需要向我们提供更多信息？
+Vuoi dirci altro?
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-06-15。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-06-15 UTC."],[],[]]

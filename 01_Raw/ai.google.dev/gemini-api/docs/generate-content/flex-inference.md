@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/flex-inference?hl=th
-fetched_at: 2026-07-27T04:37:07.872263+00:00
+fetched_at: 2026-08-03T04:26:48.123625+00:00
 title: "\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e32\u0e19\u0e41\u0e1a\u0e1a\u0e22\u0e37\u0e14\u0e2b\u0e22\u0e38\u0e48\u0e19 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ title: "\u0e01\u0e32\u0e23\u0e2d\u0e19\u0e38\u0e21\u0e32\u0e19\u0e41\u0e1a\u0e1a
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
 - [หน้าแรก](https://ai.google.dev/?hl=th)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=th)
@@ -19,16 +19,13 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 # การอนุมานแบบยืดหยุ่น
 
-คำอธิบาย: ดูวิธีเพิ่มประสิทธิภาพค่าใช้จ่ายด้วยระดับการอนุมานแบบยืดหยุ่น
+คำอธิบาย: ดูวิธีเพิ่มประสิทธิภาพต้นทุนด้วยระดับการอนุมาน Flex
 
-Gemini Flex API เป็นระดับการอนุมานที่ช่วยลดต้นทุนได้ 50% เมื่อเทียบกับอัตรามาตรฐาน โดยแลกกับการตอบสนองที่แปรผันและความพร้อมใช้งาน
-ตามความพยายามอย่างเต็มที่ ออกแบบมาสำหรับภาระงานที่ยอมรับเวลาในการตอบสนองได้ซึ่งต้องมีการประมวลผลแบบ
-ซิงโครนัส แต่ไม่จำเป็นต้องมีประสิทธิภาพแบบเรียลไทม์ของ API มาตรฐาน
+Gemini Flex API เป็นระดับการอนุมานที่ช่วยลดต้นทุนได้ 50% เมื่อเทียบกับอัตรามาตรฐาน แลกกับการตอบสนองที่ผันแปรและความพร้อมใช้งานอย่างเต็มที่ โดยออกแบบมาสำหรับภาระงานที่ยอมรับการตอบสนองที่ล่าช้าได้ ซึ่งต้องมีการประมวลผลแบบซิงโครนัส แต่ไม่จำเป็นต้องมีประสิทธิภาพแบบเรียลไทม์ของ API มาตรฐาน
 
 ## วิธีใช้ Flex
 
-หากต้องการใช้ระดับ Flex ให้ระบุ `service_tier` เป็น `flex` ใน
-เนื้อหาคำขอ โดยค่าเริ่มต้น คำขอจะใช้ระดับมาตรฐานหากละเว้นช่องนี้
+หากต้องการใช้ระดับ Flex ให้ระบุ `service_tier` เป็น `flex` ในเนื้อหาของคำขอ โดยค่าเริ่มต้น คำขอจะใช้ระดับมาตรฐานหากละเว้นช่องนี้
 
 ### Python
 
@@ -39,7 +36,7 @@ client = genai.Client()
 
 try:
     response = client.models.generate_content(
-        model="gemini-3.5-flash",
+        model="gemini-3.6-flash",
         contents="Analyze this dataset for trends...",
         config={"service_tier": "flex"},
     )
@@ -58,7 +55,7 @@ const ai = new GoogleGenAI({});
 async function main() {
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-3.6-flash",
       contents: "Analyze this dataset for trends...",
       config: { serviceTier: "flex" },
     });
@@ -92,7 +89,7 @@ func main() {
 
     result, err := client.Models.GenerateContent(
         ctx,
-        "gemini-3.5-flash",
+        "gemini-3.6-flash",
         genai.Text("Analyze this dataset for trends..."),
         &genai.GenerateContentConfig{
             ServiceTier: "flex",
@@ -109,7 +106,7 @@ func main() {
 ### REST
 
 ```
-curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GEMINI_API_KEY" \
 -H "Content-Type: application/json" \
 -d '{
   "contents": [{
@@ -121,62 +118,63 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5
 
 ## วิธีการทำงานของการอนุมาน Flex
 
-การอนุมาน Gemini Flex ช่วยลดช่องว่างระหว่าง API มาตรฐานกับเวลาในการตอบกลับ 24 ชั่วโมงของ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th) โดยจะใช้ความสามารถในการประมวลผลในช่วงนอกเวลาทำการที่ "ลดขนาดได้" เพื่อมอบโซลูชันที่คุ้มค่าสำหรับงานที่ทำงานเบื้องหลังและเวิร์กโฟลว์แบบลำดับ
+การอนุมาน Gemini Flex ช่วยลดช่องว่างระหว่าง API มาตรฐานกับ API กลุ่มที่มีระยะเวลาดำเนินการ 24 ชั่วโมง
+ของ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th) โดยใช้ความสามารถในการประมวลผลนอกช่วงเวลาที่มีการใช้งานสูงสุด ซึ่งสามารถลดได้ เพื่อมอบโซลูชันที่คุ้มค่าสำหรับงานเบื้องหลังและเวิร์กโฟลว์แบบลำดับ
 
-| ฟีเจอร์ | พับ | ลำดับความสำคัญ | มาตรฐาน | กลุ่ม |
+| ฟีเจอร์ | Flex | รายการสำคัญ | มาตรฐาน | กลุ่ม |
 | --- | --- | --- | --- | --- |
-| **การกำหนดราคา** | ส่วนลด 50% | มากกว่ารุ่น Standard 75-100% | ตั๋วราคาเต็ม | ส่วนลด 50% |
-| **เวลาในการตอบสนอง** | นาที (เป้าหมาย 1-15 นาที) | ต่ำ (วินาที) | วินาทีถึงนาที | สูงสุด 24 ชั่วโมง |
-| **ความน่าเชื่อถือ** | ดีที่สุดเท่าที่ทำได้ (ลดภาระได้) | สูง (ไม่หลุดร่วง) | สูง / สูงปานกลาง | สูง (สำหรับปริมาณงาน) |
+| **การกำหนดราคา** | ส่วนลด 50% | มากกว่ามาตรฐาน 75-100% | ราคาเต็ม | ส่วนลด 50% |
+| **การตอบสนอง** | นาที (เป้าหมาย 1-15 นาที) | ต่ำ (วินาที) | วินาทีถึงนาที | สูงสุด 24 ชั่วโมง |
+| **ความเชื่อถือได้** | อย่างเต็มที่ (ลดได้) | สูง (ลดไม่ได้) | สูง / สูงปานกลาง | สูง (สำหรับปริมาณงาน) |
 | **อินเทอร์เฟซ** | แบบซิงโครนัส | แบบซิงโครนัส | แบบซิงโครนัส | แบบอะซิงโครนัส |
 
-### ประโยชน์สำคัญ
+### สิทธิประโยชน์สำคัญ
 
-- **ความคุ้มค่า**: ประหยัดค่าใช้จ่ายได้อย่างมากสำหรับการประเมินที่ไม่ใช่การผลิต เอเจนต์ที่ทำงานเบื้องหลัง และการเพิ่มคุณค่าของข้อมูล
-- **ใช้งานง่าย**: ไม่ต้องจัดการออบเจ็กต์แบบกลุ่ม รหัสงาน หรือการสำรวจ เพียงเพิ่มพารามิเตอร์เดียวลงในคำขอที่มีอยู่
-- **เวิร์กโฟลว์แบบซิงโครนัส**: เหมาะสำหรับเชน API แบบลำดับที่คำขอถัดไปขึ้นอยู่กับเอาต์พุตของคำขอก่อนหน้า ทำให้มีความยืดหยุ่นมากกว่า Batch สำหรับเวิร์กโฟลว์ของเอเจนต์
+- **ความคุ้มค่า**: ประหยัดค่าใช้จ่ายได้มากสำหรับการประเมินที่ไม่ใช่การใช้งานจริง, เอเจนต์เบื้องหลัง และการเพิ่มคุณค่าของข้อมูล
+- **ความยุ่งยากต่ำ**: ไม่จำเป็นต้องจัดการออบเจ็กต์กลุ่ม, รหัสงาน หรือการโพล เพียงเพิ่มพารามิเตอร์เดียวลงในคำขอที่มีอยู่
+- **เวิร์กโฟลว์แบบซิงโครนัส**: เหมาะอย่างยิ่งสำหรับเชน API แบบลำดับที่คำขอถัดไปขึ้นอยู่กับเอาต์พุตของคำขอก่อนหน้า ซึ่งทำให้มีความยืดหยุ่นมากกว่ากลุ่มสำหรับเวิร์กโฟลว์แบบเอเจนต์
 
 ### กรณีการใช้งาน
 
-- **การประเมินแบบออฟไลน์**: การเรียกใช้การทดสอบการถดถอยหรือลีดเดอร์บอร์ด "LLM ในฐานะผู้พิพากษา"
-- **ตัวแทนเบื้องหลัง**: งานตามลำดับ เช่น การอัปเดต CRM การสร้างโปรไฟล์ หรือการกลั่นกรองเนื้อหาที่ยอมรับความล่าช้าได้
-- **การวิจัยที่มีข้อจำกัดด้านงบประมาณ**: การทดลองทางวิชาการที่ต้องใช้โทเค็นจำนวนมากโดยมีงบประมาณจำกัด
+- **การประเมินแบบออฟไลน์**: การเรียกใช้การทดสอบการถดถอยหรือลีดเดอร์บอร์ด "LLM-as-a-judge"
+- **เอเจนต์เบื้องหลัง**: งานแบบลำดับ เช่น การอัปเดต CRM, การสร้างโปรไฟล์ หรือการกลั่นกรองเนื้อหาที่ยอมรับความล่าช้าได้เป็นนาที
+- **การวิจัยที่มีงบประมาณจำกัด**: การทดลองทางวิชาการที่ต้องใช้โทเค็นจำนวนมากโดยมีงบประมาณจำกัด
 
 ### ขีดจำกัดอัตรา
 
-การเข้าชมการอนุมานแบบยืดหยุ่นจะนับรวมใน[ขีดจำกัดอัตรา](https://aistudio.google.com/rate-limit?hl=th)ทั่วไปของคุณ โดยจะไม่มีขีดจำกัดอัตราเพิ่มเติมเหมือนกับ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)
+การเข้าชมการอนุมาน Flex จะนับรวมใน[ขีดจำกัดอัตรา](https://aistudio.google.com/rate-limit?hl=th)ทั่วไป โดยไม่มี
+ขีดจำกัดอัตราที่ขยายออกไปเหมือนกับ [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)
 
-### ความจุที่ลดลงได้
+### ความสามารถในการลด
 
-ระบบจะจัดการการเข้าชมแบบยืดหยุ่นด้วยลำดับความสำคัญต่ำกว่า หากมีการเข้าชมมาตรฐานเพิ่มขึ้นอย่างรวดเร็ว ระบบอาจขัดจังหวะหรือนำคำขอ Flex ออกเพื่อให้มั่นใจว่ามีทรัพยากรเพียงพอสำหรับผู้ใช้ที่มีลำดับความสำคัญสูง
-หากกำลังมองหาการอนุมานที่มีลำดับความสำคัญสูง ให้ดู[การอนุมานที่มีลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)
+ระบบจะถือว่าการเข้าชม Flex มีลำดับความสำคัญต่ำกว่า หากมีการเข้าชมมาตรฐานเพิ่มขึ้นอย่างรวดเร็ว ระบบอาจขัดจังหวะหรือนำคำขอ Flex ออกเพื่อให้มีความสามารถในการรองรับผู้ใช้ที่มีลำดับความสำคัญสูง หากต้องการการอนุมานที่มีลำดับความสำคัญสูง ให้ดู
+[การอนุมานที่มีลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)
 
 ### รหัสข้อผิดพลาด
 
-เมื่อความจุแบบยืดหยุ่นไม่พร้อมใช้งานหรือระบบมีปริมาณการใช้งานสูง API จะ
-แสดงรหัสข้อผิดพลาดมาตรฐาน
+เมื่อความสามารถในการรองรับ Flex ไม่พร้อมใช้งานหรือระบบมีการใช้งานหนาแน่น API จะแสดงรหัสข้อผิดพลาดมาตรฐานดังนี้
 
 - **503 ไม่พร้อมให้บริการ**: ขณะนี้ระบบมีผู้ใช้เต็มแล้ว
 - **429 มีคำขอมากเกินไป**: ขีดจำกัดอัตราหรือทรัพยากรหมด
 
-### ความรับผิดชอบของลูกค้า
+### ความรับผิดชอบของไคลเอ็นต์
 
-- **ไม่มีการสำรองข้อมูลฝั่งเซิร์ฟเวอร์**: เพื่อป้องกันการเรียกเก็บเงินที่ไม่คาดคิด ระบบจะไม่
-  อัปเกรดคำขอ Flex เป็นระดับมาตรฐานโดยอัตโนมัติหากความจุของ Flex เต็ม
-- **การลองใหม่**: คุณต้องใช้ตรรกะการลองใหม่ฝั่งไคลเอ็นต์ของคุณเองด้วย
+- **ไม่มีการย้อนกลับฝั่งเซิร์ฟเวอร์**: เพื่อป้องกันค่าใช้จ่ายที่ไม่คาดคิด ระบบจะไม่
+  ยกระดับคำขอ Flex เป็นระดับมาตรฐานโดยอัตโนมัติหากความสามารถในการรองรับ Flex
+  เต็ม
+- **การลองซ้ำ**: คุณต้องใช้ตรรกะการลองซ้ำฝั่งไคลเอ็นต์ของคุณเองด้วย
   Exponential Backoff
-- **การหมดเวลา**: เนื่องจากคำขอ Flex อาจอยู่ในคิว เราจึงแนะนำให้
-  เพิ่มการหมดเวลาฝั่งไคลเอ็นต์เป็น 10 นาทีขึ้นไปเพื่อหลีกเลี่ยงการปิด
-  การเชื่อมต่อก่อนเวลา
+- **ระยะหมดเวลา**: เนื่องจากคำขอ Flex อาจอยู่ในคิว เราจึงแนะนำให้
+  เพิ่มระยะหมดเวลาฝั่งไคลเอ็นต์เป็น 10 นาทีขึ้นไปเพื่อหลีกเลี่ยงการ
+  ปิดการเชื่อมต่อก่อนเวลา
 
 ## ปรับกรอบเวลาหมดเวลา
 
-คุณสามารถกำหนดค่าการหมดเวลาต่อคำขอสำหรับ REST API และไลบรารีของไคลเอ็นต์
-และการหมดเวลาทั่วโลกได้เมื่อใช้ไลบรารีของไคลเอ็นต์เท่านั้น
+คุณสามารถกำหนดค่าระยะหมดเวลาต่อคำขอสำหรับ REST API และไลบรารีของไคลเอ็นต์ รวมถึงระยะหมดเวลาส่วนกลางเมื่อใช้ไลบรารีของไคลเอ็นต์เท่านั้น
 
-ตรวจสอบเสมอว่าการหมดเวลาฝั่งไคลเอ็นต์ครอบคลุมช่วงเวลาที่เซิร์ฟเวอร์ตั้งใจรอ (เช่น 600 วินาทีขึ้นไปสำหรับคิวรอแบบยืดหยุ่น) SDK คาดหวังค่าการหมดเวลาเป็นมิลลิวินาที
+ตรวจสอบเสมอว่าระยะหมดเวลาฝั่งไคลเอ็นต์ครอบคลุมกรอบเวลาที่เซิร์ฟเวอร์รอได้ (เช่น 600 วินาทีขึ้นไปสำหรับคิวรอ Flex) SDK คาดหวังค่าหมดเวลาเป็นมิลลิวินาที
 
-### การหมดเวลาต่อคำขอ
+### ระยะหมดเวลาต่อคำขอ
 
 ### Python
 
@@ -187,7 +185,7 @@ client = genai.Client()
 
 try:
     response = client.models.generate_content(
-        model="gemini-3.5-flash",
+        model="gemini-3.6-flash",
         contents="why is the sky blue?",
         config={
             "service_tier": "flex",
@@ -200,7 +198,7 @@ except Exception as e:
 # Example with streaming
 try:
     response = client.models.generate_content_stream(
-        model="gemini-3.5-flash",
+        model="gemini-3.6-flash",
         contents=["List 5 ideas for a sci-fi movie."],
         config={
             "service_tier": "flex",
@@ -225,7 +223,7 @@ except Exception as e:
  async function main() {
      try {
          const response = await client.models.generateContent({
-             model: "gemini-3.5-flash",
+             model: "gemini-3.6-flash",
              contents: "why is the sky blue?",
              config: {
                serviceTier: "flex",
@@ -239,7 +237,7 @@ except Exception as e:
      // Example with streaming
      try {
          const response = await client.models.generateContentStream({
-             model: "gemini-3.5-flash",
+             model: "gemini-3.6-flash",
              contents: ["List 5 ideas for a sci-fi movie."],
              config: {
                  serviceTier: "flex",
@@ -285,7 +283,7 @@ func main() {
 
     _, err = client.Models.GenerateContent(
         timeoutCtx,
-        "gemini-3.5-flash",
+        "gemini-3.6-flash",
         genai.Text("why is the sky blue?"),
         &genai.GenerateContentConfig{
             ServiceTier: "flex",
@@ -301,7 +299,7 @@ func main() {
 
     iter := client.Models.GenerateContentStream(
         streamTimeoutCtx,
-        "gemini-3.5-flash",
+        "gemini-3.6-flash",
         genai.Text("List 5 ideas for a sci-fi movie."),
         &genai.GenerateContentConfig{
             ServiceTier: "flex",
@@ -323,19 +321,17 @@ func main() {
 
 ### REST
 
-เมื่อทำการเรียก REST คุณจะควบคุมการหมดเวลาได้โดยใช้ส่วนหัว HTTP
-และ`curl` ร่วมกัน
+เมื่อทำการเรียก REST คุณสามารถควบคุมระยะหมดเวลาได้โดยใช้ส่วนหัว HTTP และตัวเลือก `curl` ร่วมกันดังนี้
 
-- **`X-Server-Timeout` (ระยะหมดเวลาฝั่งเซิร์ฟเวอร์)**: ส่วนหัวนี้แนะนำระยะหมดเวลาที่ต้องการ (ค่าเริ่มต้นคือ 600 วินาที) ให้กับเซิร์ฟเวอร์ Gemini API เซิร์ฟเวอร์
-  จะพยายามปฏิบัติตามคำขอนี้ แต่ก็ไม่รับประกันว่าจะทำได้ ค่าควรเป็นวินาที
-- **`--max-time` ใน `curl` (การหมดเวลาฝั่งไคลเอ็นต์)**: ตัวเลือก `curl --max-time
-  <seconds>` จะกำหนดขีดจำกัดที่แน่นอนสำหรับเวลาทั้งหมด (เป็นวินาที) ที่ `curl`
-  จะรอให้การดำเนินการทั้งหมดเสร็จสมบูรณ์ นี่คือการป้องกันฝั่งไคลเอ็นต์
+- ส่วนหัว **`X-Server-Timeout` (ระยะหมดเวลาฝั่งเซิร์ฟเวอร์)**: ส่วนหัวนี้แนะนำระยะหมดเวลาที่ต้องการ (ค่าเริ่มต้น 600 วินาที) ให้กับเซิร์ฟเวอร์ Gemini API เซิร์ฟเวอร์จะพยายามปฏิบัติตามนี้ แต่ไม่รับประกัน ค่าควรเป็นวินาที
+- **`--max-time` ใน `curl` (ระยะหมดเวลาฝั่งไคลเอ็นต์)**: ตัวเลือก `curl --max-time
+  <seconds>` จะกำหนดขีดจำกัดสูงสุดของเวลาทั้งหมด (เป็นวินาที) ที่ `curl`
+  จะรอให้การดำเนินการทั้งหมดเสร็จสมบูรณ์ ซึ่งเป็นมาตรการป้องกันฝั่งไคลเอ็นต์
 
 ```
  # Set a server timeout hint of 120 seconds and a client-side curl timeout of 125 seconds.
  curl --max-time 125 \
-   -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
+   -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent?key=$GEMINI_API_KEY" \
    -H "Content-Type: application/json" \
    -H "X-Server-Timeout: 120" \
    -d '{
@@ -346,11 +342,9 @@ func main() {
  }'
 ```
 
-### การหมดเวลาทั่วโลก
+### ระยะหมดเวลาส่วนกลาง
 
-หากต้องการให้การเรียก API ทั้งหมดที่ทำผ่านอินสแตนซ์ `genai.Client` ที่เฉพาะเจาะจง
-(เฉพาะไลบรารีของไคลเอ็นต์) มีการหมดเวลาเริ่มต้น คุณสามารถกำหนดค่านี้ได้เมื่อ
-เริ่มต้นไคลเอ็นต์โดยใช้ `http_options` และ `genai.types.HttpOptions`
+หากต้องการให้การเรียก API ทั้งหมดที่ทำผ่านอินสแตนซ์ `genai.Client` ที่เฉพาะเจาะจง (ไลบรารีของไคลเอ็นต์เท่านั้น) มีระยะหมดเวลาเริ่มต้น คุณสามารถกำหนดค่านี้เมื่อเริ่มต้นไคลเอ็นต์โดยใช้ `http_options` และ `genai.types.HttpOptions`
 
 ### Python
 
@@ -367,7 +361,7 @@ client_with_global_timeout = genai.Client(
 try:
     # Calling generate_content using global timeout...
     response = client_with_global_timeout.models.generate_content(
-        model="gemini-3.5-flash",
+        model="gemini-3.6-flash",
         contents="Summarize the history of AI development since 2000.",
         config={"service_tier": "flex"},
     )
@@ -376,7 +370,7 @@ try:
     # A per-request timeout will *override* the global timeout for that specific call.
     shorter_timeout = 30000
     response = client_with_global_timeout.models.generate_content(
-        model="gemini-3.5-flash",
+        model="gemini-3.6-flash",
         contents="Provide a very brief definition of machine learning.",
         config={
             "service_tier": "flex",
@@ -407,7 +401,7 @@ async function main() {
     try {
         // Calling generate_content using global timeout...
         const response1 = await clientWithGlobalTimeout.models.generateContent({
-            model: "gemini-3.5-flash",
+            model: "gemini-3.6-flash",
             contents: "Summarize the history of AI development since 2000.",
             config: { serviceTier: "flex" },
         });
@@ -416,7 +410,7 @@ async function main() {
         // A per-request timeout will *override* the global timeout for that specific call.
         const shorterTimeout = 30000;
         const response2 = await clientWithGlobalTimeout.models.generateContent({
-            model: "gemini-3.5-flash",
+            model: "gemini-3.6-flash",
             contents: "Provide a very brief definition of machine learning.",
             config: {
                 serviceTier: "flex",
@@ -462,7 +456,7 @@ await main();
      }
      defer client.Close()
 
-     model := client.GenerativeModel("gemini-3.5-flash")
+     model := client.GenerativeModel("gemini-3.6-flash")
 
      // Go uses context for timeouts, not client options.
      // Set a default timeout for requests.
@@ -497,9 +491,9 @@ await main();
  }
 ```
 
-## ใช้การลองใหม่
+## ใช้การลองซ้ำ
 
-เนื่องจาก Flex สามารถลดขนาดได้และจะล้มเหลวพร้อมข้อผิดพลาด 503 ต่อไปนี้คือตัวอย่างการใช้ตรรกะการลองใหม่โดยไม่บังคับเพื่อดำเนินการต่อกับคำขอที่ไม่สำเร็จ
+เนื่องจาก Flex สามารถลดได้และล้มเหลวด้วยข้อผิดพลาด 503 ต่อไปนี้เป็นตัวอย่างของการใช้ตรรกะการลองซ้ำ (ไม่บังคับ) เพื่อดำเนินการต่อกับคำขอที่ล้มเหลว
 
 ### Python
 
@@ -513,7 +507,7 @@ def call_with_retry(max_retries=3, base_delay=5):
     for attempt in range(max_retries):
         try:
             return client.models.generate_content(
-                model="gemini-3.5-flash",
+                model="gemini-3.6-flash",
                 contents="Analyze this batch statement.",
                 config={"service_tier": "flex"},
             )
@@ -528,7 +522,7 @@ def call_with_retry(max_retries=3, base_delay=5):
                 # Fallback to standard on last strike (Optional)
                 print("Flex exhausted, falling back to Standard...")
                 return client.models.generate_content(
-                    model="gemini-3.5-flash",
+                    model="gemini-3.6-flash",
                     contents="Analyze this batch statement."
                 )
 
@@ -553,7 +547,7 @@ print(response.text)
      try {
        console.log(`Attempt ${attempt + 1}: Calling Flex tier...`);
        const response = await ai.models.generateContent({
-         model: "gemini-3.5-flash",
+         model: "gemini-3.6-flash",
          contents: "Analyze this batch statement.",
          config: { serviceTier: 'flex' },
        });
@@ -566,7 +560,7 @@ print(response.text)
        } else {
          console.log("Flex exhausted, falling back to Standard...");
          return await ai.models.generateContent({
-           model: "gemini-3.5-flash",
+           model: "gemini-3.6-flash",
            contents: "Analyze this batch statement.",
          });
        }
@@ -598,7 +592,7 @@ print(response.text)
  )
 
  func callWithRetry(ctx context.Context, client *genai.Client, maxRetries int, baseDelay time.Duration) (*genai.GenerateContentResponse, error) {
-     modelName := "gemini-3.5-flash"
+     modelName := "gemini-3.6-flash"
      content := genai.Text("Analyze this batch statement.")
      flexConfig := &genai.GenerateContentConfig{
          ServiceTier: "flex",
@@ -641,41 +635,43 @@ print(response.text)
  }
 ```
 
-## ราคา
+## การกำหนดราคา
 
-การอนุมานแบบยืดหยุ่นมีราคาอยู่ที่ 50% ของ [API มาตรฐาน](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
+การอนุมาน Flex มีราคาอยู่ที่ 50% ของ [API มาตรฐาน](https://ai.google.dev/gemini-api/docs/pricing?hl=th)
 และเรียกเก็บเงินต่อโทเค็น
 
 ## โมเดลที่รองรับ
 
-รุ่นต่อไปนี้รองรับการอนุมานแบบยืดหยุ่น
+โมเดลต่อไปนี้รองรับการอนุมาน Flex
 
-| รุ่น | การอนุมานแบบยืดหยุ่น |
+| โมเดล | การอนุมาน Flex |
 | --- | --- |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=th) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=th) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=th) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=th) | ✔️ |
 | [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=th) | ✔️ |
-| [ตัวอย่าง Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th) | ✔️ |
-| [ตัวอย่าง Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th) | ✔️ |
-| [ตัวอย่างรูปภาพ Gemini 3 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th) | ✔️ |
+| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=th) | ✔️ |
+| [Gemini 3 Flash Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=th) | ✔️ |
+| [Gemini 3 Pro Image Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3-pro-image-preview?hl=th) | ✔️ |
 | [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=th) | ✔️ |
 | [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=th) | ✔️ |
-| [รูปภาพ Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th) | ✔️ |
+| [Gemini 2.5 Flash Image](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-image?hl=th) | ✔️ |
 | [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=th) | ✔️ |
 
 ## ขั้นตอนถัดไป
 
-อ่านเกี่ยวกับตัวเลือก[การอนุมานและการเพิ่มประสิทธิภาพ](https://ai.google.dev/gemini-api/docs/optimization?hl=th)อื่นๆ ของ Gemini
+อ่านเกี่ยวกับตัวเลือก[การอนุมานและการเพิ่มประสิทธิภาพ](https://ai.google.dev/gemini-api/docs/optimization?hl=th)อื่นๆ ของ Gemini:
 
-- [การอนุมานลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)สำหรับเวลาในการตอบสนองต่ำมาก
-- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th) สำหรับการประมวลผลแบบไม่พร้อมกันภายใน 24 ชั่วโมง
-- [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th)เพื่อลดต้นทุนโทเค็นอินพุต
+- [การอนุมานที่มีลำดับความสำคัญ](https://ai.google.dev/gemini-api/docs/priority-inference?hl=th)สำหรับเวลาในการตอบสนองต่ำมาก
+- [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th) สำหรับการประมวลผลแบบอะซิงโครนัสภายใน 24 ชั่วโมง
+- [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) เพื่อลดต้นทุนโทเค็นอินพุต
 
 ส่งความคิดเห็น
 
 เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-อัปเดตล่าสุด 2026-06-23 UTC
+อัปเดตล่าสุด 2026-07-30 UTC
 
 หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-23 UTC"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

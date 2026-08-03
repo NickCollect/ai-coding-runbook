@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=vi
-fetched_at: 2026-07-27T04:48:15.408081+00:00
-title: "T\u1ea1o h\u00ecnh \u1ea3nh b\u1eb1ng Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=de
+fetched_at: 2026-08-03T04:38:45.895915+00:00
+title: "Bilder mit Imagen generieren \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-# Tạo hình ảnh bằng Imagen
+# Bilder mit Imagen generieren
 
-Imagen là mô hình tạo ảnh có độ trung thực cao của Google, có khả năng tạo ra hình ảnh chân thực và chất lượng cao từ câu lệnh văn bản. Tất cả hình ảnh được tạo đều có hình mờ SynthID. Để tìm hiểu thêm về các biến thể của mô hình Imagen hiện có, hãy xem phần [Các phiên bản mô hình](#model-versions).
+Imagen ist das High-Fidelity-Modell zur Bildgenerierung von Google, mit dem sich realistische und hochwertige Bilder aus Text-Prompts generieren lassen. Alle generierten Bilder enthalten ein SynthID-Wasserzeichen. Weitere Informationen zu den verfügbaren Imagen-Modellvarianten finden Sie im Abschnitt [Modellversionen](#model-versions).
 
-## Di chuyển sang Nano Banana
+## Migration zu Nano Banana
 
-Các mô hình Imagen sẽ ngừng hoạt động từ ngày 17 tháng 8 năm 2026. Bạn nên chuyển sang dùng Nano Banana để đáp ứng nhu cầu tạo hình ảnh.
+Imagen-Modelle sind veraltet und werden am 17. August 2026 eingestellt. Wir empfehlen, für die Bildgenerierung zu Nano Banana zu migrieren.
 
-Quá trình di chuyển bao gồm những thay đổi sau:
+Die Migration umfasst die folgenden Änderungen:
 
-- **Tên mô hình**: Sử dụng `gemini-2.5-flash-image` thay vì tên mô hình Imagen.
-- **Phương thức**: Sử dụng `client.models.generate_content` thay vì `client.models.generate_images`.
-- **Xử lý phản hồi**: Nano Banana trả về các phần nội dung (có thể bao gồm dữ liệu hình ảnh) thay vì một đối tượng phản hồi hình ảnh cụ thể.
+- **Modellname**: Verwenden Sie `gemini-2.5-flash-image` anstelle von Imagen-Modellnamen.
+- **Methode**: Verwenden Sie `client.models.generate_content` anstelle von `client.models.generate_images`.
+- **Antwortverarbeitung**: Nano Banana gibt Inhaltsabschnitte zurück, die möglicherweise Bilddaten enthalten, anstelle eines bestimmten Bildantwortobjekts.
 
-Hãy xem [Hướng dẫn tạo hình ảnh](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) để biết thêm thông tin chi tiết và ví dụ.
+Weitere Informationen und Beispiele finden Sie im [Leitfaden zur Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de).
 
-## Tạo hình ảnh bằng các mô hình Imagen
+## Bilder mit den Imagen-Modellen generieren
 
-Ví dụ này minh hoạ cách tạo hình ảnh bằng [mô hình Imagen](https://deepmind.google/technologies/imagen/?hl=vi):
+In diesem Beispiel wird gezeigt, wie Sie Bilder mit einem [Imagen-Modell](https://deepmind.google/technologies/imagen/?hl=de) generieren:
 
 ### Python
 
@@ -87,7 +87,7 @@ async function main() {
 main();
 ```
 
-### Go
+### Ok
 
 ```
 package main
@@ -144,363 +144,364 @@ curl -X POST \
       }'
 ```
 
-![Hình ảnh do AI tạo về một rô-bốt đang cầm ván trượt màu đỏ](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=vi)
+![KI-generiertes Bild eines Roboters, der ein rotes Skateboard hält](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=de)
 
-Hình ảnh do AI tạo về một robot đang cầm ván trượt màu đỏ
+KI-generiertes Bild eines Roboters, der ein rotes Skateboard hält
 
-### Cấu hình Imagen
+### Imagen-Konfiguration
 
-Hiện tại, Imagen chỉ hỗ trợ câu lệnh bằng tiếng Anh và các thông số sau:
+Imagen unterstützt derzeit nur Prompts in englischer Sprache und die folgenden Parameter:
 
-- `numberOfImages`: Số lượng hình ảnh cần tạo, từ 1 đến 4 (bao gồm cả 1 và 4).
-  Giá trị mặc định là 4.
-- `imageSize`: Kích thước của hình ảnh được tạo. Tính năng này chỉ được hỗ trợ cho các mô hình Chuẩn và Siêu. Giá trị được hỗ trợ là `1K` và `2K`.
-  Giá trị mặc định là `1K`.
-- `aspectRatio`: Thay đổi tỷ lệ khung hình của hình ảnh được tạo. Các giá trị được hỗ trợ là `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` và `"16:9"`. Giá trị mặc định là `"1:1"`.
-- `personGeneration`: Cho phép mô hình tạo hình ảnh về con người. Sau đây là các giá trị được hỗ trợ:
+- `numberOfImages`: Die Anzahl der zu generierenden Bilder, von 1 bis 4 (einschließlich).
+  Der Standardwert ist 4.
+- `imageSize`: Die Größe des generierten Bildes. Dies wird nur für die Modelle „Standard“ und „Ultra“ unterstützt. Die unterstützten Werte sind `1K` und `2K`.
+  Der Standardwert ist `1K`.
+- `aspectRatio`: Ändert das Seitenverhältnis des generierten Bildes. Unterstützte Werte sind `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` und `"16:9"`. Der Standardwert ist `"1:1"`.
+- `personGeneration`: Das Modell darf Bilder von Personen generieren. Folgende Werte werden unterstützt:
 
-  - `"dont_allow"`: Chặn việc tạo hình ảnh có người.
-  - `"allow_adult"`: Tạo hình ảnh về người lớn, nhưng không tạo hình ảnh về trẻ em. Đây là tuỳ chọn mặc định
-  - `"allow_all"`: Tạo hình ảnh có cả người lớn và trẻ em.
+  - `"dont_allow"`: Generierung von Bildern von Personen blockieren.
+  - `"allow_adult"`: Bilder von Erwachsenen, aber nicht von Kindern generieren. Das ist die Standardeinstellung.
+  - `"allow_all"`: Bilder generieren, auf denen Erwachsene und Kinder zu sehen sind.
 
-## Hướng dẫn về câu lệnh cho Imagen
+## Imagen-Leitfaden für Prompts
 
-Phần này trong hướng dẫn về Imagen cho bạn biết cách sửa đổi câu lệnh chuyển văn bản thành hình ảnh có thể tạo ra nhiều kết quả, cùng với ví dụ về những hình ảnh bạn có thể tạo.
+In diesem Abschnitt des Imagen-Leitfadens erfahren Sie, wie sich durch Ändern einer Text-zu-Bild-Eingabeaufforderung unterschiedliche Ergebnisse erzielen lassen. Außerdem finden Sie Beispiele für Bilder, die Sie erstellen können.
 
-### Kiến thức cơ bản về cách viết câu lệnh
+### Grundlagen zum Schreiben von Prompts
 
-Câu lệnh hiệu quả là câu lệnh có tính mô tả và rõ ràng, đồng thời sử dụng các từ khoá và đối tượng sửa đổi có ý nghĩa. Bắt đầu bằng cách nghĩ đến **chủ thể**, **bối cảnh** và **phong cách**.
+Ein guter Prompt ist beschreibend und klar und verwendet aussagekräftige Keywords und Modifikatoren. Beginnen Sie mit dem **Motiv**, dem **Kontext** und dem **Stil**.
 
-![Câu lệnh có chủ đề, bối cảnh và phong cách được nhấn mạnh](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=vi)
+![Eingabeaufforderung mit Akzent auf Motiv, Kontext und Stil](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=de)
 
-Văn bản trong hình ảnh: Một *bản phác thảo* (**phong cách**) về một *toà nhà chung cư hiện đại* (**đối tượng**) được bao quanh bởi *các toà nhà chọc trời* (**bối cảnh và nền**).
+Bildtext: Eine *Skizze* (**Stil**) eines *modernen Wohngebäudes* (**Motiv**) umgeben von *Wolkenkratzern* (**Kontext und Hintergrund**).
 
-1. **Chủ thể**: Điều đầu tiên bạn cần nghĩ đến khi đưa ra câu lệnh là *chủ thể*: đối tượng, người, động vật hoặc cảnh vật mà bạn muốn tạo hình ảnh.
-2. **Bối cảnh và nền:** *Nền hoặc bối cảnh* mà chủ thể sẽ được đặt vào cũng quan trọng không kém. Hãy thử đặt chủ thể của bạn vào nhiều phông nền. Ví dụ: một phòng chụp hình có phông nền trắng, ngoài trời hoặc môi trường trong nhà.
-3. **Phong cách:** Cuối cùng, hãy thêm phong cách hình ảnh mà bạn muốn. *Phong cách* có thể là phong cách chung (tranh vẽ, ảnh chụp, bản phác thảo) hoặc phong cách rất cụ thể (tranh vẽ bằng phấn màu, bản vẽ bằng than, hình ảnh 3D đẳng cự). Bạn cũng có thể kết hợp các kiểu.
+1. **Thema:** Das Erste, woran Sie bei jeder Eingabeaufforderung denken müssen, ist das *Motiv*. Das Objekt, eine Person, ein Tier oder eine Landschaft, von der Sie ein Bild möchten.
+2. **Kontext und Hintergrund:** Ebenso wichtig ist der *Hintergrund oder Kontext*, in dem das Motiv platziert wird. Platzieren Sie das Motiv vor verschiedenen Hintergründen. Zum Beispiel ein Studio mit weißem Hintergrund, im Freien oder in Gebäuden.
+3. **Stil:** Fügen Sie abschließend den Stil des gewünschten Bildes hinzu. *Stile* können allgemein (Malerei, Fotografie, Skizzen) oder sehr spezifisch sein (Pastel, Kohlezeichnung, isometrische 3D-Perspektive). Sie können auch Stile kombinieren.
 
-Sau khi viết phiên bản đầu tiên của câu lệnh, hãy tinh chỉnh câu lệnh bằng cách thêm nhiều chi tiết hơn cho đến khi bạn nhận được hình ảnh mà mình muốn. Việc lặp lại là rất quan trọng.
-Bắt đầu bằng cách xác định ý tưởng cốt lõi, sau đó tinh chỉnh và mở rộng ý tưởng cốt lõi đó cho đến khi hình ảnh được tạo gần với tầm nhìn của bạn.
+Nachdem Sie eine erste Version Ihres Prompts geschrieben haben, können Sie ihn verfeinern, indem Sie weitere Details hinzufügen, bis Sie das gewünschte Bild erhalten. Iteration ist wichtig.
+Beginnen Sie mit Ihrer Kernidee und verfeinern und erweitern Sie diese dann, bis das generierte Bild Ihrer Vorstellung entspricht.
 
 |  |  |  |
 | --- | --- | --- |
-| photorealistic sample image 1   Câu lệnh: Một công viên vào mùa xuân bên cạnh một hồ nước | photorealistic sample image 2   Câu lệnh: Một công viên vào mùa xuân bên cạnh một hồ nước, **mặt trời lặn bên kia hồ, giờ vàng** | hình ảnh mẫu giống thật 3   Câu lệnh: Một công viên vào mùa xuân bên cạnh một hồ nước, ***mặt trời lặn trên hồ, giờ vàng, hoa dại màu đỏ*** |
+| Fotorealistisches Beispielbild 1   Eingabeaufforderung: Ein Park im Frühling neben einem See | Fotorealistisches Beispielbild 2   Prompt: Ein Park im Frühling neben einem See, **die Sonne geht über dem See unter, goldene Stunde** | Fotorealistisches Beispielbild 3   Prompt: Ein Park im Frühling neben einem See, ***die Sonne geht über dem See unter, goldene Stunde, rote Wildblumen*** |
 
-Các mô hình Imagen có thể biến ý tưởng của bạn thành hình ảnh chi tiết, cho dù câu lệnh của bạn ngắn hay dài và chi tiết. Tinh chỉnh ý tưởng của bạn thông qua việc đưa ra câu lệnh lặp đi lặp lại, thêm chi tiết cho đến khi bạn đạt được kết quả hoàn hảo.
+Imagen-Modelle können Ihre Ideen in detaillierte Bilder umwandeln, unabhängig davon, ob Ihre Prompts kurz oder lang und detailliert sind. Verfeinern Sie Ihre Vision durch iterative Prompts und fügen Sie Details hinzu, bis Sie das perfekte Ergebnis erzielen.
 
 |  |  |
 | --- | --- |
-| Câu lệnh ngắn giúp bạn tạo hình ảnh một cách nhanh chóng.  Ví dụ về câu lệnh ngắn cho Imagen 4   Câu lệnh: ảnh cận cảnh một phụ nữ ở độ tuổi 20, ảnh đường phố, ảnh tĩnh trong phim, tông màu cam ấm dịu | Câu lệnh dài hơn cho phép bạn thêm thông tin chi tiết cụ thể và tạo hình ảnh.  Ví dụ về câu lệnh dài cho Imagen 4   Câu lệnh: bức ảnh quyến rũ về một phụ nữ ở độ tuổi 20 sử dụng phong cách chụp ảnh đường phố. Hình ảnh phải trông như một cảnh phim tĩnh với tông màu cam nhạt ấm áp. |
+| Mit kurzen Prompts können Sie schnell ein Bild generieren.  Beispiel für einen kurzen Prompt für Imagen 4   Prompt: Nahaufnahme einer Frau in ihren 20ern, Straßenfotografie, Standbild, gedeckte warme Orangetöne | Mit längeren Prompts können Sie spezifische Details hinzufügen und Ihr Bild erstellen.  Beispiel für einen langen Prompt für Imagen 4   Prompt: Beeindruckendes Foto einer Frau in ihren 20ern, das einen Straßenfotografie-Stil verwendet. Das Bild sollte wie ein Standfoto mit gedeckten, orangefarbenen, warmen Tönen aussehen. |
 
-Lời khuyên bổ sung về cách viết câu lệnh cho Imagen:
+Zusätzliche Tipps zum Verfassen von Prompts für Imagen:
 
-- **Sử dụng ngôn từ mô tả**: Sử dụng các tính từ và trạng từ chi tiết để mô tả rõ ràng cho Imagen.
-- **Cung cấp bối cảnh**: Nếu cần, hãy cung cấp thông tin cơ bản để hỗ trợ AI hiểu rõ hơn.
-- **Tham khảo các nghệ sĩ hoặc phong cách cụ thể**: Nếu bạn có một phong cách thẩm mỹ cụ thể, thì việc tham khảo các nghệ sĩ hoặc trào lưu nghệ thuật cụ thể có thể hữu ích.
-- **Sử dụng các công cụ thiết kế câu lệnh**: Cân nhắc việc khám phá các công cụ hoặc tài nguyên thiết kế câu lệnh để giúp bạn tinh chỉnh câu lệnh và đạt được kết quả tối ưu.
-- **Cải thiện các chi tiết trên khuôn mặt trong ảnh cá nhân và ảnh nhóm**: Chỉ định các chi tiết trên khuôn mặt làm tiêu điểm của bức ảnh (ví dụ: sử dụng từ "chân dung" trong câu lệnh).
+- **Beschreibende Sprache verwenden**: Verwenden Sie detaillierte Adjektive und Adverbien, um Imagen ein klares Bild zu vermitteln.
+- **Kontext bereitstellen**: Fügen Sie bei Bedarf Hintergrundinformationen hinzu, damit die KI die Aufgabe besser versteht.
+- **Auf bestimmte Künstler oder Stile verweisen**: Wenn Sie eine bestimmte Ästhetik im Sinn haben, kann es hilfreich sein, auf bestimmte Künstler oder Kunstrichtungen zu verweisen.
+- **Tools für Prompt Engineering verwenden**: Sie können Tools oder Ressourcen für Prompt Engineering nutzen, um Ihre Prompts zu optimieren und optimale Ergebnisse zu erzielen.
+- **Gesichtsdetails in Ihren persönlichen Fotos und Gruppenfotos optimieren**: Geben Sie Gesichtsdetails als Fokus des Fotos an (verwenden Sie z. B. das Wort „Porträt“ im Prompt).
 
-### Tạo văn bản trong hình ảnh
+### Text in Bildern generieren
 
-Các mô hình Imagen có thể thêm văn bản vào hình ảnh, mở ra nhiều khả năng sáng tạo hơn trong việc tạo hình ảnh. Hãy tham khảo hướng dẫn sau để khai thác tối đa tính năng này:
+Imagen-Modelle können Text in Bilder einfügen und so mehr kreative Möglichkeiten bei der Bilderstellung eröffnen. Mit den folgenden Tipps können Sie diese Funktion optimal nutzen:
 
-- **Lặp lại một cách tự tin**: Bạn có thể phải tạo lại hình ảnh cho đến khi đạt được kết quả mong muốn. Tính năng tích hợp văn bản của Imagen vẫn đang phát triển và đôi khi bạn cần thử nhiều lần để có kết quả tốt nhất.
-- **Ngắn gọn**: Giới hạn văn bản ở mức 25 ký tự trở xuống để tạo hình ảnh tối ưu.
-- **Nhiều cụm từ**: Thử nghiệm với hai hoặc ba cụm từ riêng biệt để cung cấp thêm thông tin. Tránh dùng quá 3 cụm từ để có bố cục rõ ràng hơn.
+- **Sicher iterieren**: Möglicherweise müssen Sie Bilder neu generieren, bis Sie das gewünschte Ergebnis erhalten. Die Textintegration von Imagen wird ständig weiterentwickelt. Manchmal sind mehrere Versuche erforderlich, um die besten Ergebnisse zu erzielen.
+- **Kurz fassen**: Der Text sollte maximal 25 Zeichen umfassen, damit er optimal generiert werden kann.
+- **Mehrere Formulierungen**: Testen Sie zwei oder drei unterschiedliche Formulierungen, um zusätzliche Informationen zu liefern. Verwenden Sie nicht mehr als drei Begriffe, um die Komposition übersichtlicher zu halten.
 
-  ![Ví dụ về văn bản do Imagen 4 tạo](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=vi)
+  ![Beispiel für die Textgenerierung mit Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=de)
 
-  Câu lệnh: Một áp phích có văn bản "Summerland" (Vùng đất mùa hè) bằng phông chữ in đậm làm tiêu đề, bên dưới văn bản này là khẩu hiệu "Mùa hè chưa bao giờ tuyệt vời đến thế"
-- **Vị trí theo hướng dẫn**: Mặc dù Imagen có thể cố gắng đặt văn bản theo chỉ dẫn, nhưng đôi khi sẽ có sự khác biệt. Tính năng này liên tục được cải thiện.
-- **Kiểu phông chữ truyền cảm hứng**: Chỉ định một kiểu phông chữ chung để ảnh hưởng một cách tinh tế đến các lựa chọn của Imagen. Đừng dựa vào việc sao chép phông chữ một cách chính xác, mà hãy mong đợi những cách diễn giải sáng tạo.
-- **Cỡ chữ**: Chỉ định cỡ chữ hoặc chỉ số chung về kích thước (ví dụ: *nhỏ*, *vừa*, *lớn*) để ảnh hưởng đến quá trình tạo cỡ chữ.
+  Prompt: Ein Poster mit dem Text „Summerland“ in fetter Schrift als Titel. Darunter der Slogan „Summer never felt so good“.
+- **Platzierung von Anleitungen**: Imagen kann versuchen, Text wie angegeben zu positionieren, aber es kann zu Abweichungen kommen. Diese Funktion wird kontinuierlich verbessert.
+- **Schriftstil für Inspiration**: Geben Sie einen allgemeinen Schriftstil an, um die Auswahl von Imagen subtil zu beeinflussen. Verlassen Sie sich nicht auf eine genaue Schriftartreplikation, sondern rechnen Sie mit kreativen Interpretationen.
+- **Schriftgröße**: Geben Sie eine Schriftgröße oder eine allgemeine Größenangabe (z. B. *klein*, *mittel*, *groß*) an, um die Generierung der Schriftgröße zu beeinflussen.
 
-### Tham số hoá câu lệnh
+### Prompt-Parametrisierung
 
-Để kiểm soát kết quả đầu ra tốt hơn, bạn có thể thấy việc tham số hoá dữ liệu đầu vào thành Imagen là hữu ích. Ví dụ: giả sử bạn muốn khách hàng có thể tạo biểu trưng cho doanh nghiệp của họ và bạn muốn đảm bảo rằng biểu trưng luôn được tạo trên nền có màu đơn sắc. Bạn cũng muốn giới hạn các lựa chọn mà khách hàng có thể chọn trong trình đơn.
+Um die Ausgaberesultate besser zu steuern, kann es hilfreich sein, die Eingaben in Imagen zu parametrisieren. Angenommen, Sie möchten, dass Ihre Kunden Logos für ihr Unternehmen generieren können, und Sie möchten sicherstellen, dass Logos immer auf einem einfarbigen Hintergrund generiert werden. Außerdem möchten Sie die Optionen einschränken, die der Kunde in einem Menü auswählen kann.
 
-Trong ví dụ này, bạn có thể tạo một câu lệnh có tham số tương tự như sau:
+In diesem Beispiel können Sie einen parametrisierten Prompt ähnlich dem folgenden erstellen:
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-Trong giao diện người dùng tuỳ chỉnh, khách hàng có thể nhập các tham số bằng một trình đơn và giá trị mà họ chọn sẽ điền vào câu lệnh mà Imagen nhận được.
+In Ihrer benutzerdefinierten Benutzeroberfläche kann der Kunde die Parameter über ein Menü eingeben. Der ausgewählte Wert wird dann in den Prompt eingefügt, den Imagen erhält.
 
-Ví dụ:
+Beispiel:
 
-1. Câu lệnh: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. Prompt: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![Ví dụ 1 về tham số hoá câu lệnh của Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=vi)
-2. Câu lệnh: `A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![Beispiel 1 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=de)
+2. Prompt: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![Ví dụ 2 về việc tham số hoá câu lệnh cho Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=vi)
-3. Câu lệnh: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![Beispiel 2 für die Parametrisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=de)
+3. Prompt: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![Ví dụ 3 về tham số hoá câu lệnh của Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=vi)
+   ![Beispiel 3 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=de)
 
-### Kỹ thuật viết câu lệnh nâng cao
+### Erweiterte Techniken zum Schreiben von Eingabeaufforderungen
 
-Hãy sử dụng các ví dụ sau để tạo câu lệnh cụ thể hơn dựa trên các thuộc tính như nội dung mô tả về nhiếp ảnh, hình dạng và chất liệu, các phong trào nghệ thuật trong lịch sử và các đối tượng sửa đổi chất lượng hình ảnh.
+Anhand der folgenden Beispiele können Sie anhand von Attributen wie Bilddeskriptoren, Formen und Materialien, historischen Kunstbewegungen und Bildqualitätsmodifikatoren spezifischere Prompts erstellen.
 
-#### Nhiếp ảnh
+#### Fotografie
 
-- Câu lệnh bao gồm: *"Một bức ảnh về..."*
+- Eingabeaufforderung enthält: *„Ein Foto von...”*
 
-Để sử dụng kiểu này, hãy bắt đầu bằng cách dùng các từ khoá cho Imagen biết rõ rằng bạn đang tìm kiếm một bức ảnh. Bắt đầu câu lệnh bằng *"Một bức ảnh về. . ."*. Ví dụ:
-
-|  |  |  |
-| --- | --- | --- |
-| photorealistic sample image 1   Câu lệnh: **Ảnh chụp** hạt cà phê trong bếp trên bề mặt gỗ | photorealistic sample image 2   Câu lệnh: **Ảnh chụp** một thanh sô cô la trên mặt bếp | hình ảnh mẫu giống thật 3   Câu lệnh: **Ảnh chụp** một toà nhà hiện đại có nước ở phía sau |
-
-Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
-
-##### Đối tượng sửa đổi nhiếp ảnh
-
-Trong các ví dụ sau, bạn có thể thấy một số tham số và giá trị sửa đổi dành riêng cho nhiếp ảnh. Bạn có thể kết hợp nhiều đối tượng sửa đổi để kiểm soát chính xác hơn.
-
-1. **Khoảng cách chụp của camera** – *Cận cảnh, chụp từ xa*
-
-   |  |  |
-   | --- | --- |
-   | ảnh mẫu chụp cận cảnh bằng camera   Câu lệnh: Ảnh **cận cảnh** hạt cà phê | hình ảnh mẫu của camera ở chế độ thu phóng   Câu lệnh: Ảnh **thu nhỏ** của một túi nhỏ đựng  hạt cà phê trong một căn bếp bừa bộn |
-2. **Vị trí camera** – *trên không, từ dưới lên*
-
-   |  |  |
-   | --- | --- |
-   | ảnh mẫu chụp từ trên không   Câu lệnh: **ảnh chụp từ trên không** về một thành phố đô thị có nhiều nhà cao tầng | hình ảnh mẫu về góc nhìn từ bên dưới   Câu lệnh: Ảnh chụp tán rừng với bầu trời xanh **từ dưới lên** |
-3. **Ánh sáng** – *tự nhiên, kịch tính, ấm áp, lạnh*
-
-   |  |  |
-   | --- | --- |
-   | hình ảnh mẫu ánh sáng tự nhiên   Câu lệnh: ảnh chụp trong studio về một chiếc ghế bành hiện đại, **ánh sáng tự nhiên** | hình ảnh mẫu ánh sáng kịch tính   Câu lệnh: ảnh chụp trong phòng thu về một chiếc ghế bành hiện đại, **ánh sáng kịch tính** |
-4. **Chế độ cài đặt camera** *– làm mờ chuyển động, tiêu điểm mềm, hiệu ứng bokeh, chân dung*
-
-   |  |  |
-   | --- | --- |
-   | hình ảnh mẫu làm mờ chuyển động   Câu lệnh: ảnh chụp một thành phố có các toà nhà chọc trời từ bên trong một chiếc ô tô với **hiệu ứng làm mờ chuyển động** | hình ảnh mẫu tiêu điểm mềm   Câu lệnh: **ảnh chụp tiêu điểm mềm** một cây cầu trong thành phố vào ban đêm |
-5. **Loại ống kính** – *35 mm, 50 mm, mắt cá, góc rộng, macro*
-
-   |  |  |
-   | --- | --- |
-   | hình ảnh mẫu chụp bằng ống kính macro   Câu lệnh: ảnh chụp một chiếc lá, **ống kính macro** | hình ảnh mẫu chụp bằng ống kính mắt cá   Câu lệnh: nhiếp ảnh đường phố, thành phố New York, **ống kính mắt cá** |
-6. **Loại phim** – *đen trắng, polaroid*
-
-   |  |  |
-   | --- | --- |
-   | hình ảnh mẫu về ảnh polaroid   Câu lệnh: **ảnh chân dung chụp bằng máy polaroid** của một chú chó đeo kính râm | ảnh mẫu đen trắng   Câu lệnh: **ảnh đen trắng** về một chú chó đeo kính râm |
-
-Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
-
-### Hình minh hoạ và nghệ thuật
-
-- Câu lệnh có: *"Một painting về..."*, *"Một sketch của..."*
-
-Phong cách nghệ thuật đa dạng từ phong cách đơn sắc như phác hoạ bằng bút chì, đến nghệ thuật số siêu thực. Ví dụ: các hình ảnh sau đây sử dụng cùng một câu lệnh nhưng có các kiểu khác nhau:
-
-*"Một [art style or creation technique] về chiếc xe sedan điện thể thao góc cạnh với các toà nhà chọc trời ở phía sau"*
+Um diesen Stil zu verwenden, beginnen Sie mit der Verwendung von Keywords, die Imagen klar mitteilen, dass Sie nach einem Foto suchen. Starten Sie die Eingabeaufforderungen mit *„Ein Foto von. . .”*. Beispiel:
 
 |  |  |  |
 | --- | --- | --- |
-| hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: **Bản vẽ kỹ thuật bằng bút chì** về một... | hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: Một **bức vẽ bằng chì than** về một... | hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: **Bức vẽ bằng bút chì màu** về một... |
+| Fotorealistisches Beispielbild 1   **Eingabeaufforderung:** Ein Foto von   Kaffeebohnen auf einer Holzoberfläche in einer Küche | Fotorealistisches Beispielbild 2   **Eingabeaufforderung:** Ein Foto von   einer Schokolade auf einem Küchentresen. | Fotorealistisches Beispielbild 3   Prompt: **Ein Foto eines** modernen Gebäudes mit Wasser im Hintergrund |
+
+Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
+
+##### Fotografische Modifikatotionen
+
+In den folgenden Beispielen sehen Sie mehrere fotospezifische Modifikatoren und Parameter. Sie können mehrere Modifikatoren kombinieren, um eine genauere Steuerung zu erreichen.
+
+1. **Kameranähe**: *aus der Nähe, von weit weg*
+
+   |  |  |
+   | --- | --- |
+   | Beispiel für Bild aus der Nähe   Eingabeaufforderung: Ein Foto von Kaffeebohnen **aus der Nähe** | Beispiel für herausgezoomtes Bild   Eingabeaufforderung: Ein **herausgezoomtes** Foto eines kleinen Beutels mit  Kaffeebohnen in einer unaufgeräumten Küche |
+2. **Kameraposition**: *Luftaufnahme, von unten*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für Luftaufnahme   Eingabeaufforderung: **Luftaufnahme** einer Stadt mit Wolkenkratzern | Beispielbild von unten   Eingabeaufforderung: Ein Foto eines Waldstamms mit blauem Himmel **von unten** |
+3. **Beleuchtung**: *natürlich, dramatisch, warm, kalt*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für natürliche Beleuchtung   Eingabeaufforderung: Studiofoto eines modernen Sessels, **natürliche Beleuchtung** | Beispielbild für dramatische Beleuchtung   Eingabeaufforderung: Studiofoto eines modernen Sessels, **dramatische Beleuchtung** |
+4. **Kameraeinstellungen**:  *Bewegungsunschärfe, Weichzeichnung, Bokeh, Hochformat*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für Bewegungsunschärfe   Prompt: Foto einer Stadt mit Wolkenkratzern aus dem Inneren eines Autos mit **Bewegungsunschärfe** | Beispielbild für Weichzeichnung   Prompt: **Weichzeichnung** eines Fotos einer Brücke in einer Stadt bei Nacht |
+5. **Objektive**: *35 mm, 50 mm, Fischauge, Weitwinkel, Makro*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für Makro   Eingabeaufforderung: Foto eines Blattes, **Makroobjektiv** | Beispielbild für Fischaugenobjektiv   Eingabeaufforderung: Straßenansicht, New York City, **Fischaugenobjektiv** |
+6. **Filmtypen**: *Schwarz-Weiß, Polaroid*
+
+   |  |  |
+   | --- | --- |
+   | Beispielbild für Polaroid   Prompt: Ein **Polaroid-Hochformatbild** eines Hundes mit Sonnenbrille | Beispielbild für Schwarz-Weiß-Foto   Eingabeaufforderung: **Schwarz-Weiß-Foto** eines Hundes mit Sonnenbrille |
+
+Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
+
+### Illustration und Kunst
+
+- Eingabeaufforderung enthält: *„Eine painting von...”*, *„Eine sketch von...”*
+
+Die Stile variieren von monochromen Stilen wie Bleistift bis hin zu hyperrealistischer digitaler Kunst. Die folgenden Bilder verwenden beispielsweise dieselbe Eingabeaufforderung mit unterschiedlichen Stilen:
+
+*„Eine [art style or creation technique] einer kantigen elektrischen Limousine mit Wolkenkratzern im Hintergrund“*
 
 |  |  |  |
 | --- | --- | --- |
-| hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: Một **bức tranh vẽ bằng phấn màu** về một... | hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: **Tranh kỹ thuật số** về một... | hình ảnh mẫu về tác phẩm nghệ thuật   Câu lệnh: Một **bức áp phích theo phong cách art deco** về một... |
-
-Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 2.
-
-##### Hình dạng và chất liệu
-
-- Câu lệnh có: *"...làm bằng..."*, *"...có hình dạng..."*
-
-Một trong những điểm mạnh của công nghệ này là bạn có thể tạo ra những hình ảnh mà nếu không có công nghệ này thì bạn khó hoặc không thể tạo được. Ví dụ: bạn có thể tạo lại biểu trưng công ty bằng nhiều chất liệu và kết cấu.
+| Beispielbilder für Kunst   Eingabeaufforderung: Eine **technische Bleistiftskizze** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **Kohlezeichnung** eines kantigen... | Beispielbilder für Kunst   Prompt: Eine **Farbstiftzeichnung** eines kantigen... |
 
 |  |  |  |
 | --- | --- | --- |
-| shapes and materials example image 1   Câu lệnh: một chiếc túi du lịch **làm bằng** phô mai | hình ảnh ví dụ 2 về hình dạng và chất liệu   Câu lệnh: ống neon **có hình dạng** của một con chim | hình ảnh ví dụ 3 về hình dạng và vật liệu   Câu lệnh: một chiếc ghế bành **làm bằng giấy**, ảnh chụp trong phòng chụp ảnh, phong cách origami |
+| Beispielbilder für Kunst   Eingabeaufforderung: Ein **Pastelbild** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **digitale Kunst** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Ein **Art-dèco-Poster** eines kantigen... |
 
-Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
+Bildquelle: Jedes Bild wurde mit dem Imagen 2-Modell über den entsprechenden Text-Prompt generiert.
 
-#### Tài liệu tham khảo về nghệ thuật trong lịch sử
+##### Formen und Materialien
 
-- Câu lệnh có chứa: *"...theo phong cách của..."*
+- Eingabeaufforderung: *„...aus...”*, *„...in Form von...”*
 
-Một số phong cách đã trở thành biểu tượng qua nhiều năm. Sau đây là một số ý tưởng về phong cách hội hoạ hoặc nghệ thuật trong lịch sử mà bạn có thể thử.
-
-*"Tạo hình ảnh theo phong cách của [art period or movement]
-: một trang trại gió"*
+Eine der Stärken dieser Technologie ist, dass Sie Bilder erstellen können, die andernfalls schwer oder unmöglich wären. Sie können beispielsweise Ihr Firmenlogo in verschiedenen Materialien und Texturen neu erstellen.
 
 |  |  |  |
 | --- | --- | --- |
-| hình ảnh ví dụ về trường phái ấn tượng   Câu lệnh: tạo một hình ảnh **theo phong cách *hội hoạ trường phái ấn tượng***: một trang trại gió | hình ảnh ví dụ về thời Phục hưng   Câu lệnh: tạo một hình ảnh **theo phong cách *tranh thời Phục hưng***: một trang trại gió | hình ảnh ví dụ về nghệ thuật đại chúng   Tạo hình ảnh: tạo một hình ảnh **theo phong cách *nghệ thuật đại chúng***: một trang trại điện gió |
+| Beispielbild 1 für Formen und Materialien   Eingabeaufforderung: Duffle Bag **aus** Käse | Beispielbild 2 für Formen und Materialien   Prompt: Neonröhren **in Form** eines Vogels | Beispielbild 3 für Formen und Materialien   Eingabeaufforderung: Ein Sessel **aus Papier**, Studiofoto, Origami-Stil |
 
-Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
+Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
 
-#### Các tham số sửa đổi chất lượng hình ảnh
+#### Bezüge auf historische Kunst
 
-Một số từ khoá có thể cho mô hình biết rằng bạn đang tìm kiếm một thành phần chất lượng cao. Sau đây là một số ví dụ về hệ số điều chỉnh chất lượng:
+- Eingabeaufforderung: *„...im Stil von...”*
 
-- **Đối tượng sửa đổi chung** – *chất lượng cao, đẹp, cách điệu*
-- **Ảnh** – *4K, HDR, ảnh chụp trong phòng chụp*
-- **Nghệ thuật, Hình minh hoạ** – *do chuyên gia tạo ra, chi tiết*
+Bestimmte Stile haben sich im Laufe der Jahre zu einem Mythos entwickelt. Im Folgenden finden Sie einige Ideen für historische Gemälde oder Kunststile, die Sie ausprobieren können.
 
-Sau đây là một vài ví dụ về câu lệnh không có công cụ sửa đổi chất lượng và câu lệnh tương tự có công cụ sửa đổi chất lượng.
+*„Bild generieren im Stil von [art period or movement]
+: ein Windpark“*
+
+|  |  |  |
+| --- | --- | --- |
+| Beispielbild für Impressionsismus   Prompt: Bild generieren **im Stil von *einem Gemälde des Impressionismus***: ein Windpark | Beispielbild für Renaissance   Prompt: generate an image **in the style of *a renaissance painting***: a wind farm | Beispielbild für Pop Art   Prompt: Bild generieren **im Stil von *Pop-Art***: ein Windpark |
+
+Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
+
+#### Modifikatoren für die Bildqualität
+
+Bestimmte Keywords können dem Modell mitteilen, dass Sie nach einem qualitativ hochwertigen Bild suchen. Beispiele für Qualitätsmodifikatoren:
+
+- **Allgemeine Modifikatoren**: *hohe Qualität, ansprechend, stilisiert*
+- **Fotos**: *4K, HDR, Studiofoto*
+- **Kunst, Illustration**: *von einem Profi, detailliert*
+
+Im Folgenden finden Sie einige Beispiele für Eingabeaufforderungen ohne Qualitätsmodifikatoren und die gleiche Aufforderung mit Qualitätsmodifikatoren.
 
 |  |  |
 | --- | --- |
-| ví dụ về hình ảnh bắp không có đối tượng sửa đổi   Câu lệnh (không có bộ sửa đổi chất lượng): ảnh chụp một cây ngô | hình ảnh mẫu về bắp có đối tượng sửa đổi   Câu lệnh (có bộ sửa đổi chất lượng): **Ảnh 4K HDR tuyệt đẹp**   về một cây ngô **do một   nhiếp ảnh gia chuyên nghiệp chụp** |
+| Getreide-Beispielbild ohne Modifikatoren   Eingabeaufforderung (keine Qualitätsmodifikatoren): Ein Foto von einem Getreidehalm | Getreide-Beispielbild mit Modifikatoren   Eingabeaufforderung (mit Qualitätsmodifikatoren): **Schönes 4K-**   Foto eines Getreidehalms **von einem  Profi-Fotografen aufgenommen** |
 
-Nguồn hình ảnh: Mỗi hình ảnh được tạo bằng câu lệnh văn bản tương ứng với mô hình Imagen 4.
+Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
 
-#### Tỷ lệ khung hình
+#### Seitenverhältnisse
 
-Tính năng tạo hình ảnh của Imagen cho phép bạn đặt 5 tỷ lệ khung hình riêng biệt cho hình ảnh.
+Mit der Imagen-Bildgenerierung können Sie fünf verschiedene Bild-Seitenverhältnisse festlegen.
 
-1. **Vuông** (1:1, mặc định) – Ảnh vuông tiêu chuẩn. Tỷ lệ khung hình này thường được dùng cho bài đăng trên mạng xã hội.
-2. **Toàn màn hình** (4:3) – Tỷ lệ khung hình này thường được dùng trong nội dung nghe nhìn hoặc phim.
-   Đây cũng là kích thước của hầu hết các TV cũ (không phải màn hình rộng) và máy ảnh định dạng trung bình. Tỷ lệ này chụp được nhiều cảnh hơn theo chiều ngang (so với tỷ lệ 1:1), khiến đây trở thành tỷ lệ khung hình ưu tiên cho nhiếp ảnh.
-
-   |  |  |
-   | --- | --- |
-   | ví dụ về tỷ lệ khung hình   Câu lệnh: cận cảnh ngón tay của một nhạc sĩ đang chơi đàn piano, phim đen trắng, cổ điển (tỷ lệ khung hình 4:3) | ví dụ về tỷ lệ khung hình   Câu lệnh: Bức ảnh chuyên nghiệp chụp khoai tây chiên trong phòng thu cho một nhà hàng cao cấp, theo phong cách của một tạp chí ẩm thực (tỷ lệ khung hình 4:3) |
-3. **Toàn màn hình dọc** (3:4) – Đây là tỷ lệ khung hình toàn màn hình được xoay 90 độ. Điều này cho phép bạn chụp cảnh theo chiều dọc nhiều hơn so với tỷ lệ khung hình 1:1.
+1. **Quadrat** (1:1, Standard) - Ein quadratisches Standardfoto. Typische Anwendungsfälle für dieses Seitenverhältnis sind Beiträge in sozialen Medien.
+2. **Vollbild** (4:3) - Dieses Seitenverhältnis wird häufig in Medien oder in Filmen verwendet.
+   Es bezeichnet auch die Abmessungen der meisten alten (Nicht-Breitbild-)Fernseher und Mittelformatkameras. Es erfasst horizontal mehr von der Szene (im Vergleich zu 1:1), dadurch gehört es zu den bevorzugten Seitenverhältnissen für die Fotografie.
 
    |  |  |
    | --- | --- |
-   | ví dụ về tỷ lệ khung hình   Câu lệnh: một người phụ nữ đang đi bộ đường dài, cận cảnh đôi ủng của cô ấy phản chiếu trong một vũng nước, những ngọn núi lớn ở phía sau, theo phong cách của một quảng cáo, góc quay ấn tượng (tỷ lệ khung hình 3:4) | ví dụ về tỷ lệ khung hình   Câu lệnh: ảnh chụp từ trên không về một dòng sông chảy qua một thung lũng huyền bí (tỷ lệ khung hình 3:4) |
-4. **Màn hình rộng** (16:9) – Tỷ lệ này đã thay thế tỷ lệ 4:3 và hiện là tỷ lệ khung hình phổ biến nhất cho TV, màn hình và màn hình điện thoại di động (chế độ ngang).
-   Hãy sử dụng tỷ lệ khung hình này khi bạn muốn chụp nhiều cảnh nền hơn (ví dụ: cảnh quan thiên nhiên).
+   | Seitenverhältnis-Beispiel   Prompt: Nahaufnahme der Finger eines Musikers, der Klavier spielt, Schwarz-Weiß-Film, Vintage (Seitenverhältnis 4:3) | Seitenverhältnis-Beispiel   Prompt: Ein professionelles Studiofoto von Pommes Frites für ein High-End-Restaurant im Stil einer Lebensmittelzeitschrift (Seitenverhältnis 4:3). |
+3. **Vollbild-Vollbild** (3:4) – Dies ist das um 90 Grad gedrehte Vollbild-Seitenverhältnis. So kann vertikal im Vergleich zum Seitenverhältnis 1:1 mehr von der Szene erfasst werden.
 
-   ![ví dụ về tỷ lệ khung hình](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=vi)
+   |  |  |
+   | --- | --- |
+   | Seitenverhältnis-Beispiel   Prompt: Eine Frau wandert, Nahaufnahme ihrer Stiefel, die sich in einer Pfütze spiegeln, große Berge im Hintergrund, im Stil einer Werbung, dramatische Blickwinkel (Seitenverhältnis 3:4) | Seitenverhältnis-Beispiel   Prompt: Luftaufnahme eines Flusses, der in einem mystischen Tal fließt (Seitenverhältnis 3:4) |
+4. **Breitbild** (16:9): Dieses Seitenverhältnis hat 4:3 ersetzt und ist heute das gängigste Seitenverhältnis für Fernseher, Monitore und Bildschirme von Smartphones (Querformat).
+   Verwenden Sie dieses Seitenverhältnis, wenn Sie mehr vom Hintergrund erfassen möchten (z. B. malerische Landschaften).
 
-   Câu lệnh: một người đàn ông mặc quần áo toàn màu trắng đang ngồi trên bãi biển, cận cảnh, ánh sáng khung giờ vàng (tỷ lệ khung hình 16:9)
-5. **Dọc** (9:16) – Tỷ lệ này là tỷ lệ màn hình rộng nhưng được xoay. Đây là một tỷ lệ khung hình tương đối mới và được các ứng dụng video ngắn (ví dụ: YouTube Shorts) ưa chuộng. Sử dụng chế độ này cho các đối tượng cao có hướng dọc mạnh mẽ, chẳng hạn như toà nhà, cây, thác nước hoặc các đối tượng tương tự khác.
+   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=de)
 
-   ![ví dụ về tỷ lệ khung hình](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=vi)
+   Prompt: Ein Mann ganz in weißer Kleidung, der am Strand sitzt, Nahaufnahme, Lichtverhältnisse einer goldenen Stunde (Seitenverhältnis 16:9)
+5. **Hochformat** (9:16): Dieses Seitenverhältnis entspricht dem Breitbild, aber gedreht. Dabei handelt es sich um ein relativ neues Seitenverhältnis, das in Kurzvideo-Apps beliebt ist (z. B. YouTube Shorts). Verwenden Sie es für hohe Objekte mit stark vertikalen Ausrichtungen wie Gebäude, Bäume, Wasserfälle oder ähnliche Objekte.
 
-   Câu lệnh: hình ảnh kỹ thuật số của một toà nhà chọc trời đồ sộ, hiện đại, hùng vĩ, hoành tráng với cảnh hoàng hôn tuyệt đẹp ở phía sau (tỷ lệ khung hình 9:16)
+   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=de)
 
-#### Hình ảnh chân thực
+   Prompt: ein digitales Rendering eines riesigen Wolkenkratzers, modern,
+   groß, monumental, mit einem schönen Sonnenuntergang im Hintergrund (Seitenverhältnis 9:16)
 
-Các phiên bản khác nhau của mô hình tạo hình ảnh có thể cung cấp cả đầu ra mang tính nghệ thuật và chân thực như ảnh chụp. Hãy sử dụng những từ ngữ sau trong câu lệnh để tạo ra kết quả chân thực hơn, dựa trên chủ đề mà bạn muốn tạo.
+#### Fotorealistische Bilder
 
-| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
+Verschiedene Versionen des Bildgenerierungsmodells können eine Mischung aus künstlerischer und fotorealistischer Ausgabe bieten. Verwenden Sie die folgende Formulierung in Prompts, um je nach dem zu generierenden Thema eine fotorealistischere Ausgabe zu generieren.
+
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
 | --- | --- | --- | --- |
-| Người (ảnh chân dung) | Prime, zoom | 24-35mm | phim đen trắng, phim noir, độ sâu trường ảnh, hai tông màu (nêu 2 màu) |
-| Thực phẩm, côn trùng, thực vật (vật thể, tĩnh vật) | Macro | 60-105mm | Độ chi tiết cao, lấy nét chính xác, ánh sáng được kiểm soát |
-| Thể thao, động vật hoang dã (chuyển động) | Thu phóng bằng ống kính chụp xa | 100-400mm | Tốc độ màn trập nhanh, theo dõi hành động hoặc chuyển động |
-| Thiên văn học, phong cảnh (góc rộng) | Ống kính góc rộng | 10-24mm | Thời gian phơi sáng lâu, tiêu cự sắc nét, phơi sáng lâu, nước hoặc mây mịn |
+| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
+| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
+| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
+| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
 
-##### Chân dung
+##### Porträts
 
-| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
 | --- | --- | --- | --- |
-| Người (ảnh chân dung) | Prime, zoom | 24-35mm | phim đen trắng, phim noir, độ sâu trường ảnh, hai tông màu (nêu 2 màu) |
+| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
 
-Dựa vào một số từ khoá trong bảng, Imagen có thể tạo ra những bức chân dung sau:
+Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Porträts generieren:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ví dụ về ảnh chân dung | ví dụ về ảnh chân dung | ví dụ về ảnh chân dung | ví dụ về ảnh chân dung |
+| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
 
-Câu lệnh: *Một phụ nữ, ảnh chân dung 35 mm, tông màu kép xanh dương và xám*  
-Mô hình: `imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| ví dụ về ảnh chân dung | ví dụ về ảnh chân dung | ví dụ về ảnh chân dung | ví dụ về ảnh chân dung |
-
-Câu lệnh: *Một phụ nữ, ảnh chân dung 35 mm, phim noir*  
-Người mẫu: `imagen-4.0-generate-001`
-
-##### Đồ vật
-
-| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
-| --- | --- | --- | --- |
-| Thực phẩm, côn trùng, thực vật (vật thể, tĩnh vật) | Macro | 60-105mm | Độ chi tiết cao, lấy nét chính xác, ánh sáng được kiểm soát |
-
-Bằng cách sử dụng một số từ khoá trong bảng, Imagen có thể tạo các hình ảnh đối tượng sau:
+Prompt: *Eine Frau, 35 mm Hochformat, blaue und graue Duotones*  
+Modell: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể |
+| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
 
-Câu lệnh: *lá của cây cầu nguyện, ống kính macro, 60mm*  
-Mô hình: `imagen-4.0-generate-001`
+Eingabeaufforderung: *Eine Frau, 35 mm Hochformat, Film Noir*  
+Modell: `imagen-4.0-generate-001`
+
+##### Objekte
+
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| --- | --- | --- | --- |
+| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
+
+Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Objektbilder generieren:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể | ví dụ về chụp ảnh vật thể |
+| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
 
-Câu lệnh: *một đĩa mì ống, ống kính macro 100 mm*  
-Mô hình: `imagen-4.0-generate-001`
-
-##### Chuyển động
-
-| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
-| --- | --- | --- | --- |
-| Thể thao, động vật hoang dã (chuyển động) | Thu phóng bằng ống kính chụp xa | 100-400mm | Tốc độ màn trập nhanh, theo dõi hành động hoặc chuyển động |
-
-Bằng cách sử dụng một số từ khoá trong bảng, Imagen có thể tạo ra những hình ảnh chuyển động sau:
+Eingabeaufforderung: *Blatt einer Gebetspflanze, Makroobjektiv, 60 mm*  
+Modell: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động |
+| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
 
-Câu lệnh: *một pha tiếp bóng thành công, tốc độ màn trập nhanh, theo dõi chuyển động*  
-Mô hình: `imagen-4.0-generate-001`
+Eingabeaufforderung: *Eine Nudelplatte, 100-mm-Makroobjektiv*  
+Modell: `imagen-4.0-generate-001`
+
+##### Bewegung
+
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| --- | --- | --- | --- |
+| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
+
+Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Bewegungsbilder generieren:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động | ví dụ về ảnh chuyển động |
+| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
 
-Câu lệnh: *Một chú hươu đang chạy trong rừng, tốc độ màn trập nhanh, theo dõi chuyển động*  
-Mô hình: `imagen-4.0-generate-001`
-
-##### Ống kính góc rộng
-
-| Trường hợp sử dụng | Loại ống kính | Tiêu cự | Thông tin chi tiết bổ sung |
-| --- | --- | --- | --- |
-| Thiên văn học, phong cảnh (góc rộng) | Ống kính góc rộng | 10-24mm | Thời gian phơi sáng lâu, tiêu cự sắc nét, phơi sáng lâu, nước hoặc mây mịn |
-
-Bằng cách sử dụng một số từ khoá trong bảng, Imagen có thể tạo ra những hình ảnh góc rộng sau đây:
+Prompt: *Ein erfolgreicher Touchdown, schnelle Belichtungszeit, Bewegungsverfolgung*  
+Modell: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng |
+| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
 
-Câu lệnh: *một dãy núi rộng lớn, phong cảnh góc rộng 10 mm*  
-Mô hình: `imagen-4.0-generate-001`
+Eingabeaufforderung: *Ein Reh läuft im Wald, schnelle Belichtungszeit, Bewegungsverfolgung*  
+Modell: `imagen-4.0-generate-001`
+
+##### Weitwinkel
+
+| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| --- | --- | --- | --- |
+| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
+
+Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Weitwinkelbilder generieren:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng | ví dụ về ảnh góc rộng |
+| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
 
-Câu lệnh: *một bức ảnh về mặt trăng, ảnh thiên văn, góc rộng 10 mm*  
-Mô hình: `imagen-4.0-generate-001`
+Eingabeaufforderung: *Großer Bergbereich, Querwinkel 10 mm*  
+Modell: `imagen-4.0-generate-001`
 
-## Phiên bản mô hình
+|  |  |  |  |
+| --- | --- | --- | --- |
+| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
 
-### Imagen 4 (Không dùng nữa)
+Prompt: *ein Foto des Mondes, Astrofotografie, Weitwinkel 10 mm*  
+Modell: `imagen-4.0-generate-001`
 
-| Thuộc tính | Mô tả |
+## Modellversionen
+
+### Imagen 4 (eingestellt)
+
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_cardMã kiểu máy | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveCác loại dữ liệu được hỗ trợ | **Input**  Văn bản  **Đầu ra**  Hình ảnh |
-| token\_autoGiới hạn mã thông báo[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) | **Giới hạn mã thông báo đầu vào**  480 token (văn bản)  **Hình ảnh đầu ra**  1 đến 4 (Ultra/Standard/Fast) |
-| calendar\_monthThông tin cập nhật mới nhất | Tháng 6 năm 2025 |
+| id\_cardModellcode | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveUnterstützte Datentypen | **Eingabe**  Text  **Ausgabe**  Bilder |
+| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  480 Tokens (Text)  **Ausgabe von Bildern**  1 bis 4 (Ultra/Standard/Schnell) |
+| calendar\_monthLetzte Aktualisierung | Juni 2025 |
 
-### Imagen 3
+### Imagen 3
 
-Mô hình Imagen 3 đã [tắt](https://ai.google.dev/gemini-api/docs/deprecations?hl=vi).
+Das Imagen 3-Modell wurde [eingestellt](https://ai.google.dev/gemini-api/docs/deprecations?hl=de).
 
-Gửi ý kiến phản hồi
+Feedback geben
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Cập nhật lần gần đây nhất: 2026-07-16 UTC.
+Zuletzt aktualisiert: 2026-07-16 (UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Haben Sie Feedback für uns?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-16 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-16 (UTC)."],[],[]]

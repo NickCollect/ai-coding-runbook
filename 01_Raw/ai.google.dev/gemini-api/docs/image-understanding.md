@@ -1,38 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=tr
-fetched_at: 2026-07-27T04:41:55.262389+00:00
-title: "G\u00f6r\u00fcnt\u00fc anlama \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko
+fetched_at: 2026-08-03T04:31:29.625828+00:00
+title: "\uc774\ubbf8\uc9c0 \uc774\ud574 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Geri bildirim gönderin
+의견 보내기
 
-# Görüntü anlama
+# 이미지 이해
 
-Gemini modelleri, baştan aşağı çok formatlı olacak şekilde tasarlanmıştır. Bu sayede, özel makine öğrenimi modelleri eğitmenize gerek kalmadan görüntü açıklaması, sınıflandırma ve görsel soru yanıtlama gibi çok çeşitli görüntü işleme ve bilgisayarla görme görevlerini yerine getirebilirsiniz.
+Gemini 모델은 처음부터 멀티모달로 빌드되어 전문 ML 모델을 학습시키지 않고도 이미지 캡셔닝, 분류, 시각적 질의 응답을 비롯한 다양한 이미지 처리 및 컴퓨터 비전 작업을 수행할 수 있습니다.
 
-Gemini modelleri, genel çok formatlı özelliklerinin yanı sıra ek eğitim sayesinde [nesne algılama](#object-detection) ve [segmentasyon](#segmentation) gibi belirli kullanım alanlarında **daha yüksek doğruluk** sunar.
+[[Gemini 모델은 일반적인 멀티모달 기능 외에도 추가 학습을 통해 객체 감지 및 세분화와 같은 특정 사용 사례에 대해
+**향상된 정확성**을 제공합니다.](#object-detection)](#segmentation)
 
-## Gemini'a görüntü aktarma
+## Gemini에 이미지 전달
 
-Gemini'a giriş olarak resim sağlamak için çeşitli yöntemler kullanabilirsiniz:
+다음과 같은 여러 가지 방법으로 Gemini에 이미지를 입력으로 제공할 수 있습니다.
 
-- [URL kullanarak resim iletme](#url-image): Herkese açık resimler için idealdir.
-- [Satır içi görüntü verilerini iletme](#inline-image): Base64 kodlu görüntü verileri için.
-- [File API'yi kullanarak resim yükleme](#upload-image): Daha büyük dosyalar veya resimleri birden çok istekte yeniden kullanmak için önerilir.
+- [URL을 사용하여 이미지 전달](#url-image): 공개적으로 액세스할 수 있는 이미지에 적합합니다.
+- [인라인 이미지 데이터 전달](#inline-image): base64로 인코딩된 이미지 데이터에 적합합니다.
+- [File API를 사용하여 이미지 업로드](#upload-image): 대용량 파일 또는 여러 요청에서 이미지를 재사용하는 데 권장됩니다.
 
-### URL kullanarak resim iletme
+### URL을 사용하여 이미지 전달
 
-[Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr)'yi kullanarak bir resim yükleyebilir ve isteğe iletebilirsiniz:
+[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 사용하여 이미지를 업로드하고 요청에 전달할 수 있습니다
+.
 
 ### Python
 
@@ -44,7 +46,7 @@ client = genai.Client()
 uploaded_file = client.files.upload(file="path/to/organ.jpg")
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Caption this image."},
         {
@@ -70,7 +72,7 @@ const uploadedFile = await client.files.upload({
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         {type: "text", text: "Caption this image."},
         {
@@ -91,7 +93,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Caption this image."},
       {
@@ -103,9 +105,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Satır içi görüntü verilerini iletme
+### 인라인 이미지 데이터 전달
 
-Görüntü verilerini base64 kodlu dizeler olarak sağlayabilirsiniz:
+이미지 데이터를 base64로 인코딩된 문자열로 제공할 수 있습니다.
 
 ### Python
 
@@ -119,7 +121,7 @@ with open('path/to/small-sample.jpg', 'rb') as f:
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Caption this image."},
         {
@@ -144,7 +146,7 @@ const base64ImageFile = fs.readFileSync("path/to/small-sample.jpg", {
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         {type: "text", text: "Caption this image."},
         {
@@ -172,7 +174,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Caption this image."},
       {
@@ -184,9 +186,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### File API'yi kullanarak resim yükleme
+### File API를 사용하여 이미지 업로드
 
-Büyük dosyalar için veya aynı resim dosyasını tekrar tekrar kullanabilmek için Files API'yi kullanın. [Files API kılavuzuna](https://ai.google.dev/gemini-api/docs/files?hl=tr) bakın.
+대용량 파일의 경우 또는 동일한 이미지 파일을 반복적으로 사용하려면 Files API를 사용하세요. [Files API 가이드](https://ai.google.dev/gemini-api/docs/files?hl=ko)를 참고하세요.
 
 ### Python
 
@@ -198,7 +200,7 @@ client = genai.Client()
 my_file = client.files.upload(file="path/to/sample.jpg")
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "Caption this image."},
         {
@@ -224,7 +226,7 @@ const myfile = await client.files.upload({
 });
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         {type: "text", text: "Caption this image."},
         {
@@ -247,7 +249,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Caption this image."},
       {
@@ -259,9 +261,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Birden fazla resimle istem oluşturma
+## 여러 이미지로 프롬프트
 
-`input` dizisine birden fazla resim nesnesi ekleyerek tek bir istemde birden fazla resim sağlayabilirsiniz:
+`input` 배열에 여러 이미지 객체를 포함하여 단일 프롬프트에 여러 이미지를 제공할 수 있습니다.
 
 ### Python
 
@@ -271,7 +273,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": "What is different between these two images?"},
         {
@@ -297,7 +299,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
         {type: "text", text: "What is different between these two images?"},
         {
@@ -322,7 +324,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "What is different between these two images?"},
       {
@@ -339,9 +341,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Nesne algılama
+## 객체 감지
 
-Modeller, bir görüntüdeki nesneleri algılayıp sınırlayıcı kutu koordinatlarını almak için eğitilir. Görüntü boyutlarına göre koordinatlar [0, 1000] aralığında ölçeklendirilir. Bu koordinatları orijinal resim boyutunuza göre ölçeklendirmeniz gerekir.
+모델은 이미지에서 객체를 감지하고 경계 상자 좌표를 가져오도록 학습됩니다. 이미지 크기를 기준으로 하는 좌표는 [0, 1000]으로 확장됩니다. 원래 이미지 크기에 따라 이러한 좌표를 축소해야 합니다.
 
 ### Python
 
@@ -363,7 +365,7 @@ class BoundingBoxes(BaseModel):
     boxes: List[BoundingBox]
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": prompt},
         {
@@ -401,7 +403,7 @@ const boundingBoxesSchema = z.object({
 });
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   input: [
     { type: "text", text: prompt },
     {
@@ -428,7 +430,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Detect the all of the prominent items in the image. The box_2d should be [ymin, xmin, ymax, xmax] normalized to 0-1000."},
       {
@@ -462,13 +464,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Daha fazla örnek için [Gemini Cookbook](https://github.com/google-gemini/cookbook)'u ziyaret edin.
+더 많은 예는 [Gemini Cookbook](https://github.com/google-gemini/cookbook)을 참고하세요.
 
-## Segmentasyon
+## 세분화
 
-Gemini modelleri yalnızca öğeleri algılamakla kalmaz, aynı zamanda bunları segmentlere ayırır ve kontur maskelerini sağlar.
+Gemini 모델은 항목을 감지할 뿐만 아니라 항목을 세분화하고 윤곽선 마스크를 제공합니다.
 
-Model, her öğenin bir segmentasyon maskesini temsil ettiği bir JSON listesi tahmin eder. Her öğe, 0 ile 1000 arasında normalleştirilmiş koordinatlara sahip `[ymin, xmin, ymax, xmax]` biçiminde bir sınırlayıcı kutu ("`box_2d`"), nesneyi tanımlayan bir etiket ("`label`") ve son olarak sınırlayıcı kutunun içindeki segmentasyon maskesini 0-1000'e normalleştirilmiş `[x, y]` koordinatlı bir çokgen olarak içerir.
+모델은 각 항목이 세분화 마스크를 나타내는 JSON 목록을 예측합니다. 각 항목에는 0~1000 사이의 정규화된 좌표가 있는 `[ymin, xmin, ymax, xmax]` 형식의 경계 상자('`box_2d`'), 객체를 식별하는 라벨('`label`'), 마지막으로 경계 상자 내의 세분화 마스크가 0~1000으로 정규화된 `[x, y]` 좌표의 다각형으로 포함됩니다.
 
 ### Python
 
@@ -496,7 +498,7 @@ class BoundingBoxes(BaseModel):
     boxes: List[BoundingBox]
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "text", "text": prompt},
         {
@@ -542,7 +544,7 @@ const boundingBoxesSchema = z.object({
 });
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   input: [
     { type: "text", text: prompt },
     {
@@ -572,7 +574,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": [
       {"type": "text", "text": "Give the segmentation masks for the wooden and glass items.\nOutput a JSON list of segmentation masks where each entry contains the 2D\nbounding box in the key \"box_2d\", the segmentation mask in key \"mask\", and\nthe text label in the key \"label\". Use descriptive labels."},
       {
@@ -609,13 +611,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Ahşap ve cam nesnelerin vurgulandığı, keklerin bulunduğu bir masa](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=tr)
+![컵케이크가 놓인 테이블, 목재 및 유리 물체가 강조 표시됨](https://ai.google.dev/static/gemini-api/docs/images/segmentation.jpg?hl=ko)
 
-Nesneler ve segmentasyon maskeleri içeren örnek bir segmentasyon çıkışı
+객체 및 세분화 마스크가 있는 세분화 출력 예시
 
-## Desteklenen görsel biçimleri
+## 지원되는 이미지 형식
 
-Gemini aşağıdaki resim biçimi MIME türlerini destekler:
+Gemini는 다음과 같은 이미지 형식 MIME 유형을 지원합니다.
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
@@ -623,61 +625,66 @@ Gemini aşağıdaki resim biçimi MIME türlerini destekler:
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-Diğer dosya giriş yöntemleri hakkında bilgi edinmek için [Dosya giriş yöntemleri](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=tr) kılavuzuna bakın.
+다른 파일 입력 방법에 관해 알아보려면
+[파일 입력 방법](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ko) 가이드를 참고하세요.
 
-## Özellikler
+## 기능
 
-Tüm Gemini model sürümleri çok formatlıdır ve görüntü açıklaması, görsel soru ve yanıtlama, görüntü sınıflandırma, nesne algılama ve segmentasyon dahil ancak bunlarla sınırlı olmamak üzere çok çeşitli görüntü işleme ve bilgisayarla görme görevlerinde kullanılabilir.
+모든 Gemini 모델 버전은 멀티모달이며 이미지 캡셔닝, 시각적 질의 응답, 이미지 분류, 객체 감지 및 세분화를 비롯한 다양한 이미지 처리 및 컴퓨터 비전 작업에 활용할 수 있습니다.
 
-Gemini, kalite ve performans gereksinimlerinize bağlı olarak özel makine öğrenimi modelleri kullanma ihtiyacını azaltabilir.
+Gemini는 품질 및 성능 요구사항에 따라 전문 ML 모델을 사용할 필요성을 줄일 수 있습니다.
 
-En yeni model sürümleri, özellikle [nesne algılama](#object-detection) ve [segmentasyon](#segmentation) gibi genel özelliklerin yanı sıra uzmanlık gerektiren görevlerin doğruluğunu artırmak için eğitilmiştir.
+최신 모델 버전은 향상된
+[객체 감지](#object-detection) 및 [세분화](#segmentation)와 같은 일반적인 기능 외에도
+전문 작업의 정확성을 개선하도록 특별히 학습됩니다.
 
-## Sınırlamalar ve temel teknik bilgiler
+## 제한사항 및 주요 기술 정보
 
-### Dosya sınırı
+### 파일 한도
 
-Gemini modelleri,istek başına en fazla 3.600 resim dosyasını destekler.
+Gemini 모델은 요청당 최대 3,600개의 이미지 파일을 지원합니다.
 
-### Jeton hesaplaması
+### 토큰 계산
 
-- Her iki boyut da <= 384 piksel ise 258 jeton.
-  Daha büyük resimler, her biri 258 jeton değerinde olan 768x768 piksellik bloklar halinde düzenlenir.
+- 두 측정기준이 모두 384픽셀 이하인 경우 258개의 토큰이 사용됩니다.
+  더 큰 이미지는 768x768픽셀 타일로 바둑판식으로 배열되며 각 타일에는 258개의 토큰이 사용됩니다.
 
-Döşeme sayısını hesaplamak için kullanılan yaklaşık formül şöyledir:
+타일 수를 계산하는 대략적인 공식은 다음과 같습니다.
 
-- Kırpma birimi boyutunu hesaplayın (yaklaşık olarak: `floor(min(width, height)` / 1,5).
-- Her boyutu kırpma birimi boyutuna bölün ve döşeme sayısını elde etmek için sonuçları çarpın.
+- 자르기 단위 크기를 계산합니다. 대략 `floor(min(width, height)` / 1.5)입니다.
+- 각 측정기준을 자르기 단위 크기로 나누고 곱하여 타일 수를 구합니다.
 
-Örneğin, 960x540 boyutlarındaki bir resmin kırpma birimi boyutu 360 olur. Her boyutu 360'a bölün. Döşeme sayısı 3 \* 2 = 6 olur.
+예를 들어 크기가 960x540인 이미지의 자르기 단위 크기는 360입니다. 각 측정기준을 360으로 나누면 타일 수는 3 \* 2 = 6입니다.
 
-### Medya çözünürlüğü
+### 미디어 해상도
 
-Gemini 3, `media_resolution` parametresiyle çok formatlı görüntü işleme üzerinde ayrıntılı kontrol sunar. `media_resolution` parametresi, **giriş resmi veya video karesi başına ayrılan maksimum jeton sayısını** belirler.
-Daha yüksek çözünürlükler, modelin ince metinleri okuma veya küçük ayrıntıları tanımlama becerisini artırır ancak jeton kullanımını ve gecikmeyi de artırır.
+Gemini 3는 `media_resolution` 파라미터를 통해 멀티모달 비전 처리에 대한 세밀한 제어 기능을 제공합니다. `media_resolution` 파라미터는 **입력 이미지 또는 동영상 프레임당 할당되는 최대 토큰 수** 를 결정합니다.
+해상도가 높을수록 모델이 작은 텍스트를 읽거나 세부 요소를 식별하는 능력을 향상시키지만, 토큰 사용량과 지연 시간이 증가합니다.
 
-## İpuçları ve en iyi uygulamalar
+## 팁 및 권장사항
 
-- Resimlerin doğru şekilde döndürüldüğünü doğrulayın.
-- Net ve bulanık olmayan resimler kullanın.
-- Metin içeren tek bir resim kullanırken metin istemini `input` dizisinde resmin *önüne* yerleştirin.
+- 이미지가 올바르게 회전되었는지 확인합니다.
+- 선명하고 흐릿하지 않은 이미지를 사용합니다.
+- 텍스트가 포함된 단일 이미지를 사용하는 경우 `input` 배열에서 이미지 *앞에* 텍스트 프롬프트를 배치합니다.
 
-## Sırada ne var?
+## 다음 단계
 
-Bu kılavuzda, resim dosyalarını nasıl yükleyeceğiniz ve resim girişlerinden nasıl metin çıkışları oluşturacağınız gösterilmektedir. Daha fazla bilgi edinmek için aşağıdaki kaynakları inceleyin:
+이 가이드에서는 이미지 파일을 업로드하고 이미지 입력에서 텍스트 출력을 생성하는 방법을 보여줍니다. 자세한 내용은 다음 리소스를 참고하세요.
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=tr): Gemini ile kullanılacak dosyaları yükleme ve yönetme hakkında daha fazla bilgi edinin.
-- [Sistem talimatları](https://ai.google.dev/gemini-api/docs/text-generation?hl=tr#system-instructions):
-  Sistem talimatları, modelin davranışını özel ihtiyaçlarınıza ve kullanım alanlarınıza göre yönlendirmenizi sağlar.
-- [Dosya istemi stratejileri](https://ai.google.dev/gemini-api/docs/files?hl=tr#prompt-guide): Gemini API, çok formatlı istem olarak da bilinen metin, resim, ses ve video verileriyle istem oluşturmayı destekler.
-- [Güvenlik yönergeleri](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=tr): Üretken yapay zeka modelleri bazen yanlış, taraflı veya rahatsız edici gibi beklenmedik çıktılar üretebilir. Bu tür çıkışlardan kaynaklanan zarar riskini sınırlamak için sonradan işleme ve insan değerlendirmesi gereklidir.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ko): Gemini에서 사용할 파일을 업로드하고 관리하는 방법을 자세히 알아보세요.
+- [시스템 안내](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko#system-instructions):
+  시스템 안내를 사용하면 특정 요구사항 및 사용 사례에 따라 모델의 동작을 조정할 수 있습니다.
+- [파일 프롬프트 전략](https://ai.google.dev/gemini-api/docs/files?hl=ko#prompt-guide): Gemini API는 멀티모달 프롬프트 사용이라고도 하는 텍스트, 이미지, 오디오, 동영상 데이터로 프롬프트를 지원합니다.
+- [안전 가이드](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ko): 생성형
+  AI 모델은 때때로 부정확하거나
+  편향되거나 불쾌감을 주는 출력과 같은 예기치 않은 출력을 생성합니다. 이러한 출력으로 인한 피해 위험을 제한하려면 후처리 및 인간 평가가 필수적입니다.
 
-Geri bildirim gönderin
+의견 보내기
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Son güncelleme tarihi: 2026-07-07 UTC.
+최종 업데이트: 2026-07-30(UTC)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+의견을 전달하고 싶나요?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-07 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]

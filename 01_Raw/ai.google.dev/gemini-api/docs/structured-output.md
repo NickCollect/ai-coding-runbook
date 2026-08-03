@@ -1,41 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=id
-fetched_at: 2026-07-27T04:46:33.645278+00:00
-title: "Output terstruktur \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ar
+fetched_at: 2026-08-03T04:42:24.056633+00:00
+title: "\u0627\u0644\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0645\u0646\u0638\u064e\u0651\u0645\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-Kirim masukan
+إرسال ملاحظات
 
-# Output terstruktur
+# النتائج المنظَّمة
 
-Anda dapat mengonfigurasi model Gemini untuk menghasilkan respons yang sesuai dengan Skema JSON yang disediakan. Hal ini memastikan hasil yang dapat diprediksi dan aman jenisnya, serta menyederhanakan ekstraksi data terstruktur dari teks tidak terstruktur.
+يمكنك ضبط نماذج Gemini لإنشاء ردود تتوافق مع مخطط JSON المقدَّم. يضمن ذلك الحصول على نتائج متوقّعة وآمنة من حيث النوع، كما يسهّل استخراج البيانات المنظَّمة من النصوص غير المنظَّمة.
 
-Penggunaan output terstruktur sangat ideal untuk:
+يُعدّ استخدام المُخرجات المنظَّمة مثاليًا للحالات التالية:
 
-- **Ekstraksi data:** Menarik informasi tertentu seperti nama dan tanggal dari teks.
-- **Klasifikasi terstruktur:** Mengklasifikasikan teks ke dalam kategori yang telah ditentukan.
-- **Alur kerja agen:** Menghasilkan input terstruktur untuk alat atau API.
+- **استخراج البيانات:** استخراج معلومات محدّدة، مثل الأسماء والتواريخ، من النص
+- **التصنيف المنظَّم:** تصنيف النص ضِمن فئات محدَّدة مسبقًا
+- **سير عمل الذكاء الاصطناعي الوكيل:** إنشاء مدخلات منظَّمة للأدوات أو واجهات برمجة التطبيقات
 
-Selain mendukung Skema JSON di REST API, Google GenAI SDK
-memungkinkan Anda menentukan skema menggunakan
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) dan
-[Zod](https://zod.dev/) (JavaScript).
+بالإضافة إلى إتاحة استخدام JSON Schema في واجهة REST API، تتيح حِزم تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي تحديد المخططات باستخدام [Pydantic](https://docs.pydantic.dev/latest/) (لغة Python) و[Zod](https://zod.dev/) (لغة JavaScript).
 
-## Contoh output terstruktur
+## أمثلة على الناتج المنظَّم
 
-### Pengekstrak Resep
+### أداة استخراج وصفات الطعام
 
-Contoh ini menunjukkan cara mengekstrak data terstruktur dari teks menggunakan jenis Skema JSON dasar seperti `object`, `array`, `string`, dan `integer`.
+يوضّح هذا المثال كيفية استخراج البيانات المنظَّمة من النص باستخدام أنواع JSON Schema الأساسية، مثل `object` و`array` و`string` و`integer`.
 
 ### Python
 
@@ -71,7 +68,7 @@ onto ungreased baking sheets and bake for 9 to 11 minutes.
 """
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -140,7 +137,7 @@ onto ungreased baking sheets and bake for 9 to 11 minutes.
 `;
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   input: prompt,
   response_format: {
     type: 'text',
@@ -160,7 +157,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "input": "Please extract the recipe from the following text.\nThe user wants to make delicious chocolate chip cookies.\nThey need 2 and 1/4 cups of all-purpose flour, 1 teaspoon of baking soda,\n1 teaspoon of salt, 1 cup of unsalted butter (softened), 3/4 cup of granulated sugar,\n3/4 cup of packed brown sugar, 1 teaspoon of vanilla extract, and 2 large eggs.\nFor the best part, they will need 2 cups of semisweet chocolate chips.\nFirst, preheat the oven to 375°F (190°C). Then, in a small bowl, whisk together the flour,\nbaking soda, and salt. In a large bowl, cream together the butter, granulated sugar, and brown sugar\nuntil light and fluffy. Beat in the vanilla and eggs, one at a time. Gradually beat in the dry\ningredients until just combined. Finally, stir in the chocolate chips. Drop by rounded tablespoons\nonto ungreased baking sheets and bake for 9 to 11 minutes.",
       "response_format": {
         "type": "text",
@@ -199,7 +196,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Contoh Respons:**
+**مثال على الرد:**
 
 ```
 {
@@ -227,9 +224,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Moderasi Konten
+### الإشراف على المحتوى
 
-Contoh ini menampilkan `anyOf` untuk skema bersyarat dan `enum` untuk klasifikasi, sehingga struktur output dapat bervariasi berdasarkan konten.
+يعرض هذا المثال `anyOf` للمخططات الشرطية و`enum` للتصنيف، ما يسمح بتغيير بنية الإخراج استنادًا إلى المحتوى.
 
 ### Python
 
@@ -257,7 +254,7 @@ Content: 'Congratulations! You''ve won a free cruise to the Bahamas. Click here 
 """
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -318,7 +315,7 @@ Content: 'Congratulations! You''ve won a free cruise to the Bahamas. Click here 
 `;
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   input: prompt,
   response_format: {
     type: 'text',
@@ -338,7 +335,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "input": "Please moderate the following content and provide a decision.\nContent: '\''Congratulations! You have won a free cruise to the Bahamas. Click here to claim your prize: www.definitely-not-a-scam.com'\''",
       "response_format": {
         "type": "text",
@@ -378,7 +375,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Contoh Respons:**
+**مثال على الرد:**
 
 ```
 {
@@ -389,9 +386,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### Struktur Rekursif
+### البُنى التكرارية
 
-Contoh ini mengilustrasikan cara menentukan skema rekursif seperti diagram organisasi.
+يوضّح هذا المثال كيفية تحديد مخطط تكراري، مثل مخطط تنظيمي.
 
 ### Python
 
@@ -417,7 +414,7 @@ The manager is Alice, who manages Bob and Charlie. Bob manages David.
 """
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -463,7 +460,7 @@ The manager is Alice, who manages Bob and Charlie. Bob manages David.
 `;
 
 const interaction = await client.interactions.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   input: prompt,
   response_format: {
     type: 'text',
@@ -483,7 +480,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "input": "Generate an organization chart for a small team.\nThe manager is Alice, who manages Bob and Charlie. Bob manages David.",
       "response_format": {
         "type": "text",
@@ -508,7 +505,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**Contoh Respons:**
+**مثال على الرد:**
 
 ```
 {
@@ -535,9 +532,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## Hasil streaming
+## نتائج البث
 
-Anda dapat melakukan streaming output terstruktur, sehingga Anda dapat mulai memproses respons saat respons tersebut dibuat. Potongan yang di-streaming adalah string JSON parsial yang valid yang dapat digabungkan untuk membentuk objek JSON akhir.
+يمكنك بث النتائج المنظَّمة، ما يتيح لك بدء معالجة الرد أثناء إنشائه. الأجزاء التي يتم بثها هي سلاسل JSON جزئية صالحة يمكن ربطها لتكوين عنصر JSON النهائي.
 
 ### Python
 
@@ -554,7 +551,7 @@ client = genai.Client()
 prompt = "The new UI is incredibly intuitive. Add a very long summary to test streaming!"
 
 stream = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=prompt,
     response_format={
         "type": "text",
@@ -590,7 +587,7 @@ const feedbackSchema = z.fromJSONSchema(feedbackJsonSchema);
 const client = new GoogleGenAI({});
 
 const stream = await client.interactions.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   input: "The new UI is incredibly intuitive. Add a very long summary!",
   response_format: {
     type: 'text',
@@ -616,7 +613,7 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "input": "The new UI is incredibly intuitive. Add a very long summary!",
       "response_format": {
         "type": "text",
@@ -634,14 +631,10 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## Output terstruktur dengan alat
+## مُخرجات منظَّمة باستخدام الأدوات
 
-Gemini 3 memungkinkan Anda menggabungkan Output Terstruktur dengan alat bawaan, termasuk
-[Grounding dengan Google Penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id),
-[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id),
-[Eksekusi Kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id),
-[Penelusuran File](https://ai.google.dev/gemini-api/docs/file-search?hl=id#structured-output), dan
-[Panggilan Fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id).
+يتيح لك Gemini 3 الجمع بين "النتائج المنظَّمة" والأدوات المضمّنة، بما في ذلك
+[تحديد المصدر من خلال "بحث Search"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) و[سياق عناوين URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) و[تطبيق الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و[البحث في الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar#structured-output) و[استدعاء الدالة](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
 
 ### Python
 
@@ -734,80 +727,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Dukungan skema JSON
+## التوافق مع مخطّط JSON
 
-Untuk membuat objek JSON, konfigurasikan `response_format` dengan objek (atau array yang berisi objek) berjenis `text` dan tetapkan `mime_type`-nya ke `application/json`. Skema harus disediakan di kolom `schema`.
+لإنشاء عنصر JSON، اضبط `response_format` باستخدام عنصر (أو مصفوفة تحتوي على عنصر) من النوع `text` واضبط `mime_type` على `application/json`. يجب تقديم المخطط في الحقل `schema`.
 
-Mode output terstruktur Gemini mendukung subset spesifikasi
-[Skema JSON](https://json-schema.org/).
+يتوافق وضع الإخراج المنظَّم في Gemini مع مجموعة فرعية من مواصفات
+[مخطّط JSON](https://json-schema.org/).
 
-Nilai `type` berikut didukung:
+في ما يلي القيم المسموح بها لـ `type`:
 
-- **`string`**: Untuk teks.
-- **`number`**: Untuk angka floating point.
-- **`integer`**: Untuk bilangan bulat.
-- **`boolean`**: Untuk nilai benar atau salah.
-- **`object`**: Untuk data terstruktur dengan key-value pair.
-- **`array`**: Untuk daftar item.
-- **`null`**: Untuk mengizinkan properti menjadi null, sertakan `"null"` dalam array jenis (misalnya, `{"type": ["string", "null"]}`).
+- **`string`**: للنص
+- **`number`**: للأرقام ذات الفاصلة العائمة
+- ‫**`integer`**: للأعداد الصحيحة
+- **`boolean`**: للقيم الصحيحة أو الخاطئة
+- **`object`**: للبيانات المنظَّمة التي تتضمّن أزواجًا من المفاتيح والقيم
+- **`array`**: تُستخدَم مع قوائم العناصر.
+- **`null`**: للسماح بأن تكون قيمة السمة فارغة، أدرِج `"null"` في مصفوفة النوع (مثل `{"type": ["string", "null"]}`).
 
-Properti deskriptif ini membantu memandu model:
+تساعد هذه الخصائص الوصفية في توجيه النموذج:
 
-- **`title`**: Deskripsi singkat properti.
-- **`description`**: Deskripsi properti yang lebih panjang dan lebih mendetail.
+- **`title`**: وصف مختصر لسمة.
+- ‫**`description`**: وصف أطول وأكثر تفصيلاً للمكان المخصّص للاستئجار
 
-### Properti khusus jenis
+### السمات الخاصة بأنواع محدّدة
 
-**Untuk nilai `object`:**
+**بالنسبة إلى قيم `object`:**
 
-- **`properties`**: Objek dengan setiap kunci adalah nama properti dan setiap nilai adalah skema untuk properti tersebut.
-- **`required`**: Array string yang mencantumkan properti mana yang wajib.
-- **`additionalProperties`**: Mengontrol apakah properti yang tidak tercantum di `properties` diizinkan. Dapat berupa boolean atau skema.
+- **`properties`**: عنصر يكون فيه كل مفتاح اسم خاصية وكل قيمة مخططًا لهذه الخاصية.
+- استبدِل **`required`** بمصفوفة من السلاسل التي تسرد السمات الإلزامية.
+- ‫**`additionalProperties`**: يتحكّم هذا الحقل في ما إذا كان مسموحًا بالسمات غير المدرَجة في `properties`. يمكن أن تكون قيمة منطقية أو مخططًا.
 
-**Untuk nilai `string`:**
+**بالنسبة إلى قيم `string`:**
 
-- **`enum`**: Mencantumkan kumpulan string yang mungkin untuk tugas klasifikasi.
-- **`format`**: Menentukan sintaksis untuk string, seperti `date-time`, `date`, `time`.
+- **`enum`**: تعرض هذه السمة مجموعة محدّدة من السلاسل المحتملة لمهام التصنيف.
+- **`format`**: تحدّد هذه السمة بنية السلسلة، مثل `date-time` أو `date` أو `time`.
 
-**Untuk nilai `number` dan `integer`:**
+**بالنسبة إلى القيمتَين `number` و`integer`:**
 
-- **`enum`**: Mencantumkan kumpulan nilai numerik yang mungkin.
-- **`minimum`**: Nilai inklusif minimum.
-- **`maximum`**: Nilai inklusif maksimum.
+- **`enum`**: تعرض مجموعة معيّنة من القيم الرقمية المحتملة.
+- ‫**`minimum`**: تمثّل الحد الأدنى للقيمة الشاملة.
+- ‫**`maximum`**: تمثّل الحدّ الأقصى للقيمة الشاملة.
 
-**Untuk nilai `array`:**
+**بالنسبة إلى قيم `array`:**
 
-- **`items`**: Menentukan skema untuk semua item dalam array.
-- **`prefixItems`**: Menentukan daftar skema untuk N item pertama, sehingga memungkinkan struktur seperti tuple.
-- **`minItems`**: Jumlah minimum item dalam array.
-- **`maxItems`**: Jumlah maksimum item dalam array.
+- ‫**`items`**: تحدّد هذه السمة المخطط لجميع العناصر في المصفوفة.
+- ‫**`prefixItems`**: تحدّد هذه الكلمة الرئيسية قائمة بمخططات أول N عناصر، ما يسمح بإنشاء بنى تشبه الصفوف.
+- ‫**`minItems`**: الحد الأدنى لعدد العناصر في المصفوفة
+- ‫**`maxItems`**: الحد الأقصى لعدد العناصر في المصفوفة
 
-## Output terstruktur versus panggilan fungsi
+## المخرجات المنظَّمة مقابل استدعاء الدوال
 
-| Fitur | Kasus Penggunaan Utama |
+| الميزة | حالة الاستخدام الأساسية |
 | --- | --- |
-| **Output Terstruktur** | **Memformat respons akhir.** Gunakan saat Anda menginginkan *jawaban* model dalam format tertentu. |
-| **Panggilan Fungsi** | **Mengambil tindakan selama percakapan.** Gunakan saat model perlu *meminta Anda* untuk melakukan tugas sebelum memberikan jawaban akhir. |
+| **المُخرجات المنظَّمة** | **تنسيق الردّ النهائي:** يجب استخدام هذه السمة عندما تريد أن تكون *إجابة* النموذج بتنسيق معيّن. |
+| **استدعاء الدوال** | **اتّخاذ إجراء أثناء المحادثة** يُستخدَم عندما يحتاج النموذج إلى *أن يطلب منك* تنفيذ مهمة قبل تقديم إجابة نهائية. |
 
-## Praktik terbaik
+## أفضل الممارسات
 
-- **Deskripsi yang jelas:** Gunakan kolom `description` untuk memandu model.
-- **Pengetikan yang kuat:** Gunakan jenis tertentu (`integer`, `string`, `enum`).
-- **Teknik perintah:** Nyatakan dengan jelas tindakan yang Anda inginkan dari model.
-- **Validasi:** Meskipun output adalah JSON yang benar secara sintaksis, selalu validasi nilai dalam aplikasi Anda.
-- **Penanganan error:** Terapkan penanganan error yang andal untuk output yang sesuai dengan skema tetapi salah secara semantik.
+- **أوصاف واضحة:** استخدِم الحقل `description` لتوجيه النموذج.
+- **الكتابة القوية:** استخدِم أنواعًا محدّدة (`integer` و`string` و`enum`).
+- **هندسة الطلبات:** حدِّد بوضوح ما تريد أن يفعله النموذج.
+- **التحقّق من الصحة:** على الرغم من أنّ الناتج هو JSON صحيح من الناحية النحوية، يجب دائمًا التحقّق من صحة القيم في تطبيقك.
+- **معالجة الأخطاء:** اتّخِذ إجراءات فعالة لمعالجة الأخطاء في النتائج التي تتوافق مع المخطط ولكنها غير صحيحة دلاليًا.
 
-## Batasan
+## القيود
 
-- **Subset skema:** Tidak semua fitur Skema JSON didukung.
-- **Kompleksitas skema:** Skema yang sangat besar atau sangat bertingkat mungkin akan ditolak.
+- **مجموعة فرعية من المخطط:** لا تتوفّر جميع ميزات JSON Schema.
+- **تعقيد المخطط:** قد يتم رفض المخططات الكبيرة جدًا أو المتداخلة بشكل كبير.
 
-Kirim masukan
+إرسال ملاحظات
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Terakhir diperbarui pada 2026-07-07 UTC.
+تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
 
-Ada masukan untuk kami?
+هل تريد مشاركة ملاحظاتك معنا؟
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-07 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

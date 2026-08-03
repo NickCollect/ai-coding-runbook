@@ -1,32 +1,33 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=he
-fetched_at: 2026-07-27T04:50:28.470245+00:00
-title: "\u05d4\u05e1\u05e7\u05ea \u05e2\u05d3\u05d9\u05e4\u05d5\u05ea \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/priority-inference?hl=zh-CN
+fetched_at: 2026-08-03T04:39:00.520477+00:00
+title: "\u4f18\u5148\u7ea7\u63a8\u7406 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-שליחת משוב
+发送反馈
 
-# הסקת עדיפות
+# 优先级推理
 
-תיאור: איך מבצעים אופטימיזציה של זמן האחזור באמצעות רמת ההסקה Priority ב-Interactions API
+说明：了解如何使用 Interactions API 中的 Priority 推理层级优化延迟时间
 
-‫Gemini Priority API הוא מסלול פרימיום להסקת מסקנות, שמיועד לעומסי עבודה קריטיים לעסק שדורשים זמן אחזור נמוך ואמינות גבוהה ביותר, במחיר פרימיום. תעבורת נתונים ברמת עדיפות גבוהה מקבלת עדיפות על פני תעבורת נתונים ב-API רגיל וברמת Flex.
+Gemini Priority API 是一种高级推理层级，专为需要更低延迟时间和最高可靠性的关键业务工作负载而设计，价格也相对较高。Priority
+层级的流量优先级高于标准 API 和 Flex 层级的流量。
 
-הסקת מסקנות לפי עדיפות זמינה בכל נקודות הקצה של Interactions API.
+Interactions API 端点均提供 Priority 推理。
 
-## איך משתמשים בעדיפות
+## 如何使用 Priority
 
-כדי להשתמש ברמת העדיפות Priority, מגדירים את השדה `service_tier` בבקשה לערך `priority`. אם השדה לא מצוין, רמת ברירת המחדל היא רגילה.
+如需使用 Priority 层级，请将请求中的 `service_tier` 字段设置为 `priority`。如果省略该字段，则默认层级为标准层级。
 
 ### Python
 
@@ -36,7 +37,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Triage this critical customer support ticket immediately.",
     service_tier='priority'
 )
@@ -52,7 +53,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
     const interaction = await ai.interactions.create({
-        model: "gemini-3.5-flash",
+        model: "gemini-3.6-flash",
         input: "Triage this critical customer support ticket immediately.",
         service_tier: "priority"
     });
@@ -69,81 +70,92 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "Content-Type: application/json" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Triage this critical customer support ticket immediately.",
     "service_tier": "priority"
   }'
 ```
 
-## איך פועל הסקת עדיפות
+## Priority 推理的工作原理
 
-הסקת עדיפות מפנה בקשות לתורים של מחשוב ברמת קריטיות גבוהה, ומציעה ביצועים מהירים וצפויים לאפליקציות שפונות למשתמשים. המנגנון העיקרי שלו הוא שדרוג לאחור בצד השרת לעיבוד רגיל של תנועה שחורגת מהמגבלות הדינמיות, כדי להבטיח את יציבות האפליקציה במקום לגרום לכשל בבקשה.
+Priority 推理会将请求路由到高关键性计算队列，为面向用户的应用提供可预测的快速性能。其主要机制是，对于超出动态限制的流量，优雅地在服务器端降级到标准处理，确保应用稳定性，而不是让请求失败。
 
-| תכונה | עדיפות | רגיל | שרירים של סלע | Batch |
+| 功能 | Priority | 标准版 | Flex | 批量 |
 | --- | --- | --- | --- | --- |
-| **תמחור** | ‫75% עד 100% יותר מבתוכנית Standard | מחיר מלא | הנחה של 50% | הנחה של 50% |
-| **זמן אחזור** | שניות | שניות לדקות | דקות (יעד של 15-1 דקות) | עד 24 שעות |
-| **אמינות** | גבוהה (לא נושרת) | גבוהה / בינונית-גבוהה | ללא התחייבות (ניתן להשמטה) | גבוהה (לתפוקה) |
-| **ממשק** | סינכרוני | סינכרוני | סינכרוני | אסינכרוני |
+| **价格** | 比标准层级高 75-100% | 全价 | 5 折 | 5 折 |
+| **延迟时间** | 秒 | 秒到分钟 | 分钟（目标 1-15 分钟） | 最长 24 小时 |
+| **可靠性** | 高（不可舍弃） | 高 / 中高 | 尽力而为（可舍弃） | 高（针对吞吐量） |
+| **接口** | 同步 | 同步 | 同步 | 异步 |
 
-### יתרונות עיקריים
+### 主要优势
 
-- **זמן אחזור נמוך**: מיועד לזמני תגובה של שנייה אחת עבור כלי AI אינטראקטיביים שפונים למשתמשים.
-- **מהימנות גבוהה**: התנועה מקבלת את רמת הקריטיות הגבוהה ביותר, והיא לא ניתנת להסרה.
-- **הורדה הדרגתית של רמת השירות**: אם יש עליות פתאומיות בתנועה שחורגות מהמגבלות הדינמיות, רמת השירות יורדת אוטומטית לרמה רגילה לצורך עיבוד, במקום שהעיבוד ייכשל, וכך נמנעים שיבושים בשירות.
-- **חיכוך נמוך**: משתמש באותה שיטה סינכרונית `create` כמו בתוכניות הרגילה והגמישה.
+- **低延迟时间**：专为交互式
+  面向用户的 AI 工具而设计，响应时间为秒级。
+- **高可靠性**：流量以最高关键性处理，且
+  严格不可舍弃。
+- **优雅降级**：超出动态限制的流量峰值会自动降级到标准层级进行处理，而不是失败，从而防止服务中断。
+- **低摩擦**：与
+  标准层级和 Flex 层级使用相同的同步 `create` 方法。
 
-### תרחישים לדוגמה
+### 使用场景
 
-עיבוד בעדיפות גבוהה הוא פתרון אידיאלי לתהליכי עבודה קריטיים לעסק, שבהם הביצועים והאמינות הם בעלי חשיבות עליונה.
+Priority 处理非常适合性能和可靠性至关重要的关键业务工作流。
 
-- **אפליקציות אינטראקטיביות מבוססות-AI**: צ'אטבוטים וטייסים וירטואליים לשירות לקוחות, שבהם המשתמשים משלמים מחיר פרימיום ומצפים לתשובות מהירות ועקביות.
-- **מנועי קבלת החלטות בזמן אמת**: מערכות שנדרשים בהן תוצאות מהימנות עם זמן אחזור נמוך, כמו תעדוף כרטיסים בשידור חי או זיהוי הונאות.
-- **תכונות ללקוחות פרימיום**: מפתחים שצריכים להבטיח יעדים גבוהים יותר למדידת רמת השירות (SLO) ללקוחות משלמים.
+- **交互式 AI 应用**：客户服务聊天机器人和副驾驶，其中
+  用户支付额外费用，并期望获得快速、一致的响应。
+- **实时决策引擎**：需要高度可靠、低延迟
+  结果的系统，例如实时工单分诊或欺诈检测。
+- **高级客户功能**：需要为付费客户保证更高服务
+  等级目标 (SLO) 的开发者。
 
-### הגבלות קצב
+### 速率限制
 
-לצריכה בעדיפות יש מגבלות קצב משלה, גם אם הצריכה נספרת במסגרת [מגבלות הקצב הכוללות של תנועה אינטראקטיבית](https://aistudio.google.com/rate-limit?hl=he). מגבלות ברירת המחדל על קצב העברת נתונים (rate limits) להסקת עדיפות הן **0.3x ממגבלת הקצב הרגילה לדגם או לרמת השירות**
+Priority 消耗量有自己的速率限制，即使消耗量计入
+[整体交互式流量速率限制](https://aistudio.google.com/rate-limit?hl=zh-cn)也是如此。Priority 推理的默认速率限制为**模型 / 层级的标准速率限制的 0.3 倍**
 
-### לוגיקה של שדרוג לאחור
+### 优雅降级逻辑
 
-אם יש עומס ומתרחשת חריגה ממגבלות העדיפות, הבקשות העודפות **משודרגות אוטומטית בצורה חלקה** לעיבוד רגיל במקום להיכשל עם שגיאה 503 או 429. בקשות ששודרגו לאחור יחויבו בתעריף הרגיל, ולא בתעריף הפרימיום של Priority.
+如果因拥塞而超出 Priority 限制，溢出请求会**自动且优雅地** 降级到标准处理，而不是因 503 或 429 错误而失败。降级的请求按标准费率计费，而不是按 Priority 高级费率计费。
 
-### באחריות הלקוח
+### 客户端责任
 
-- **מעקב אחר תגובות**: מפתחים צריכים לעקוב אחרי `x-gemini-service-tier`
-  הכותרת בתגובת ה-API כדי לזהות אם הבקשות משודרגות לעיתים קרובות ל`standard`.
-- **ניסיונות חוזרים**: הלקוחות צריכים להטמיע לוגיקה של ניסיונות חוזרים או השהיה מעריכית לפני ניסיון חוזר (exponential backoff) לשגיאות רגילות, כמו `DEADLINE_EXCEEDED`.
+- **响应监控**：开发者应监控 API 响应中的 `x-gemini-service-tier`
+  标头，以检测请求是否频繁降级到
+  `standard`。
+- **重试**：客户端必须为
+  标准错误（例如 `DEADLINE_EXCEEDED`）实现重试逻辑/指数退避算法。
 
-## תמחור
+## 价格
 
-המחיר של הסקת עדיפות גבוה ב-75% עד 100% מהמחיר של [ה-API הרגיל](https://ai.google.dev/gemini-api/docs/pricing?hl=he), והחיוב הוא לפי טוקן.
+Priority 推理的价格比[标准 API](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn) 高 75-100%，并按 token 计费。
 
-## מודלים נתמכים
+## 支持的模型
 
-המודלים הבאים תומכים בהסקת מסקנות בעדיפות גבוהה:
+以下模型支持 Priority 推理：
 
-| מודל | הסקת עדיפות |
+| 模型 | Priority 推理 |
 | --- | --- |
-| ‫[Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=he) | ✔️ |
-| ‫[Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=he) | ✔️ |
-| [Gemini 3.1 Pro Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=he) | ✔️ |
-| [תצוגה מקדימה של Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=he) | ✔️ |
-| ‫[Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=he) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
 
-## המאמרים הבאים
+## 后续步骤
 
-- [הסקת מסקנות גמישה](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he) לצורך הפחתת עלויות.
-- [טוקנים](https://ai.google.dev/gemini-api/docs/tokens?hl=he): הסבר על טוקנים.
+- [Flex 推理](https://ai.google.dev/gemini-api/docs/flex-inference?hl=zh-cn)，以降低费用。
+- [token](https://ai.google.dev/gemini-api/docs/tokens?hl=zh-cn)：了解 token。
 
-שליחת משוב
+发送反馈
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-עדכון אחרון: 2026-07-06 (שעון UTC).
+最后更新时间 (UTC)：2026-07-30。
 
-רוצה לתת לנו משוב?
+需要向我们提供更多信息？
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-06 (שעון UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]

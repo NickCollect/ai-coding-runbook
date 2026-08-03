@@ -1,43 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja
-fetched_at: 2026-07-27T04:38:29.063734+00:00
-title: "\u52d5\u753b\u7406\u89e3 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/video-understanding?hl=th
+fetched_at: 2026-08-03T04:31:24.417682+00:00
+title: "\u0e01\u0e32\u0e23\u0e17\u0e33\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e27\u0e34\u0e14\u0e35\u0e42\u0e2d \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-# 動画理解
+# การทำความเข้าใจวิดีโอ
 
-> 動画生成については、[Veo](https://ai.google.dev/gemini-api/docs/video?hl=ja) ガイドをご覧ください。
+> ดูข้อมูลเกี่ยวกับการสร้างวิดีโอได้ที่คู่มือ [Veo](https://ai.google.dev/gemini-api/docs/video?hl=th)
 
-Gemini モデルは動画を処理できるため、これまでドメイン固有のモデルが必要だった多くの最先端の開発者ユースケースを実現できます。Gemini のビジョン機能には、動画の説明、セグメント化、情報の抽出、動画コンテンツに関する質問への回答、動画内の特定のタイムスタンプの参照などがあります。
+โมเดล Gemini สามารถประมวลผลวิดีโอ ซึ่งช่วยให้นักพัฒนาแอปสามารถใช้กรณีการใช้งานที่ล้ำสมัยมากมายซึ่งในอดีตต้องใช้โมเดลเฉพาะโดเมน
+ความสามารถด้านการมองเห็นของ Gemini บางอย่าง ได้แก่ ความสามารถในการอธิบาย แบ่งส่วน และดึงข้อมูลจากวิดีโอ ตอบคำถามเกี่ยวกับเนื้อหาวิดีโอ และอ้างอิงการประทับเวลาที่เฉพาะเจาะจงภายในวิดีโอ
 
-Gemini に動画を入力するには、次の方法があります。
+คุณสามารถระบุวิดีโอเป็นอินพุตให้กับ Gemini ได้ด้วยวิธีต่อไปนี้
 
-| 入力方法 | 最大サイズ | おすすめの使用例 |
+| วิธีการป้อนข้อมูล | ขนาดสูงสุด | กรณีการใช้งานที่แนะนำ |
 | --- | --- | --- |
-| [File API](#upload-video) | 20 GB（有料）/ 2 GB（無料） | 大きなファイル（100 MB 以上）、長い動画（10 分以上）、再利用可能なファイル。 |
-| [Cloud Storage の登録](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja#registration) | 2 GB（ファイルごと、保存容量の制限なし） | 大きなファイル（100 MB 以上）、長い動画（10 分以上）、永続的で再利用可能なファイル。 |
-| [インライン データ](#inline-video) | 100 MB 未満 | 小さなファイル（100 MB 未満）、短い時間（1 分未満）、1 回限りの入力。 |
-| [YouTube の URL](#youtube) | なし | 公開 YouTube 動画。 |
+| [File API](#upload-video) | 20GB (แบบชำระเงิน) / 2GB (ฟรี) | ไฟล์ขนาดใหญ่ (100MB ขึ้นไป), วิดีโอแบบยาว (10 นาทีขึ้นไป), ไฟล์ที่ใช้ซ้ำได้ |
+| [การลงทะเบียน Cloud Storage](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=th#registration) | 2GB (ต่อไฟล์ ไม่จำกัดพื้นที่เก็บข้อมูล) | ไฟล์ขนาดใหญ่ (100MB ขึ้นไป), วิดีโอแบบยาว (10 นาทีขึ้นไป), ไฟล์ที่คงอยู่และใช้ซ้ำได้ |
+| [ข้อมูลแบบอินไลน์](#inline-video) | < 100MB | ไฟล์ขนาดเล็ก (<100MB), ระยะเวลาสั้น (<1 นาที), อินพุตแบบครั้งเดียว |
+| [URL ของ YouTube](#youtube) | ไม่มี | วิดีโอ YouTube สาธารณะ |
 
-> **注:** ほとんどのユースケースでは、特に 100 MB を超えるファイルの場合や、複数のリクエストでファイルを再利用する場合は、[File API](#upload-video) を使用することをおすすめします。
+> **หมายเหตุ:** เราขอแนะนำให้ใช้ [File API](#upload-video) สำหรับกรณีการใช้งานส่วนใหญ่ โดยเฉพาะอย่างยิ่งสำหรับไฟล์ที่มีขนาดใหญ่กว่า 100MB หรือเมื่อคุณต้องการใช้ไฟล์ซ้ำในคำขอหลายรายการ
 
-外部 URL の使用や Google Cloud に保存されたファイルの使用など、他のファイル入力方法については、[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
+[ดูข้อมูลเกี่ยวกับวิธีการป้อนข้อมูลไฟล์อื่นๆ เช่น การใช้ URL ภายนอกหรือไฟล์ที่จัดเก็บไว้ใน Google Cloud ได้ที่คู่มือวิธีการป้อนข้อมูลไฟล์](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=th)
 
-### 動画ファイルをアップロードする
+### อัปโหลดไฟล์วิดีโอ
 
-次のコードは、サンプル動画をダウンロードし、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) を使用してアップロードし、処理が完了するまで待機してから、アップロードされたファイル参照を使用して動画を要約します。
+โค้ดต่อไปนี้จะดาวน์โหลดวิดีโอตัวอย่าง อัปโหลดโดยใช้ [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th),
+รอให้ระบบประมวลผล และใช้ข้อมูลอ้างอิงไฟล์ที่อัปโหลดเพื่อ
+สรุปวิดีโอ
 
 ### Python
 
@@ -56,7 +59,7 @@ while not myfile.state or myfile.state.name != "ACTIVE":
     myfile = client.files.get(name=myfile.name)
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=[
         {"type": "video", "uri": myfile.uri, "mime_type": myfile.mime_type},
         {"type": "text", "text": "Summarize this video. Then create a quiz with an answer key based on the information in this video."}
@@ -94,7 +97,7 @@ async function main() {
   }
 
   const interaction = await ai.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: [
       { type: "video", uri: myfile.uri, mime_type: myfile.mimeType },
       { type: "text", text: "Summarize this video. Then create a quiz with an answer key based on the information in this video." }
@@ -164,7 +167,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "input": [
         {"type": "video", "uri": "'${file_uri}'", "mime_type": "'${MIME_TYPE}'"},
         {"type": "text", "text": "Summarize this video. Then create a quiz with an answer key based on the information in this video."}
@@ -174,15 +177,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 jq ".steps[].content[0].text" response.json
 ```
 
-リクエストの合計サイズ（ファイル、テキスト プロンプト、システム指示などを含む）が 20 MB を超える場合、動画の長さが長い場合、または複数のプロンプトで同じ動画を使用する場合は、常に Files API を使用します。File API は動画ファイル形式を直接受け入れます。
+ใช้ Files API เสมอเมื่อขนาดคำขอทั้งหมด (รวมถึงไฟล์ พรอมต์ข้อความ คำแนะนำของระบบ ฯลฯ) ใหญ่กว่า 20 MB ความยาววิดีโอมีความสำคัญ หรือหากคุณต้องการใช้วิดีโอเดียวกันในพรอมต์หลายรายการ
+File API ยอมรับรูปแบบไฟล์วิดีโอโดยตรง
 
-メディア ファイルの操作の詳細については、[Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja) をご覧ください。
+ดูข้อมูลเพิ่มเติมเกี่ยวกับการทำงานกับไฟล์สื่อได้ที่
+[Files API](https://ai.google.dev/gemini-api/docs/files?hl=th)
 
-### 動画データをインラインで渡す
+### ส่งข้อมูลวิดีโอแบบอินไลน์
 
-File API を使用して動画ファイルをアップロードする代わりに、リクエストで小さな動画を直接渡すことができます。これは、合計リクエスト サイズが 20 MB 未満の短い動画に適しています。
+คุณสามารถส่งวิดีโอขนาดเล็กโดยตรงในคำขอแทนการอัปโหลดไฟล์วิดีโอโดยใช้ File API วิธีนี้เหมาะสำหรับวิดีโอสั้นๆ ที่มีขนาดคำขอทั้งหมดไม่เกิน 20MB
 
-インライン動画データを提供する例を次に示します。
+ตัวอย่างการส่งข้อมูลวิดีโอแบบอินไลน์มีดังนี้
 
 ### Python
 
@@ -195,7 +200,7 @@ video_bytes = open(video_file_name, 'rb').read()
 
 client = genai.Client()
 interaction = client.interactions.create(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     input=[
         {"type": "text", "text": "Please summarize the video in 3 sentences."},
         {
@@ -220,7 +225,7 @@ const base64VideoFile = fs.readFileSync("path/to/small-sample.mp4", {
 });
 
 const interaction = await ai.interactions.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   input: [
     { type: "text", text: "Please summarize the video in 3 sentences." },
     {
@@ -248,7 +253,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "input": [
         {"type": "text", "text": "Please summarize the video in 3 sentences."},
         {
@@ -260,9 +265,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }' 2> /dev/null
 ```
 
-### YouTube の URL を渡す
+### ส่ง URL ของ YouTube
 
-次のように、リクエストの一部として YouTube の URL を Gemini API に直接渡すことができます。
+คุณสามารถส่ง URL ของ YouTube ไปยัง Gemini API ได้โดยตรงเป็นส่วนหนึ่งของคำขอตามวิธีต่อไปนี้
 
 ### Python
 
@@ -271,7 +276,7 @@ from google import genai
 
 client = genai.Client()
 interaction = client.interactions.create(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     input=[
         {"type": "text", "text": "Please summarize the video in 3 sentences."},
         {
@@ -291,7 +296,7 @@ import { GoogleGenAI } from "@google/genai";
 const ai = new GoogleGenAI({});
 
 const interaction = await ai.interactions.create({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   input: [
     { type: "text", text: "Please summarize the video in 3 sentences." },
     {
@@ -310,7 +315,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -d '{
-      "model": "gemini-3.5-flash",
+      "model": "gemini-3.6-flash",
       "input": [
         {"type": "text", "text": "Please summarize the video in 3 sentences."},
         {
@@ -321,16 +326,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }' 2> /dev/null
 ```
 
-**制限事項:**
+**ข้อจำกัด**
 
-- 無料プランでは、1 日に 8 時間を超える YouTube 動画をアップロードすることはできません。
-- 有料プランでは、動画の長さに基づく制限はありません。
-- Gemini 2.5 より前のモデルでは、リクエストごとに 1 つの動画しかアップロードできません。Gemini 2.5 以降のモデルでは、リクエストごとに最大 10 個の動画をアップロードできます。
-- アップロードできるのは公開動画のみです（非公開動画や限定公開動画はアップロードできません）。
+- สำหรับแพ็กเกจฟรี คุณจะอัปโหลดวิดีโอ YouTube ได้ไม่เกิน 8 ชั่วโมงต่อวัน
+- สำหรับแพ็กเกจแบบชำระเงิน จะไม่มีการจำกัดตามความยาววิดีโอ
+- สำหรับโมเดลก่อน Gemini 2.5 คุณจะอัปโหลดวิดีโอได้เพียง 1 รายการต่อคำขอ สำหรับโมเดล Gemini 2.5 และรุ่นที่ใหม่กว่า คุณจะอัปโหลดวิดีโอได้สูงสุด 10 รายการต่อคำขอ
+- คุณอัปโหลดได้เฉพาะวิดีโอสาธารณะ (ไม่ใช่ส่วนตัวหรือวิดีโอที่ไม่เป็นสาธารณะ)
 
-## コンテンツ内のタイムスタンプを参照する
+## อ้างอิงการประทับเวลาในเนื้อหา
 
-`MM:SS` 形式のタイムスタンプを使用して、動画内の特定の時点について質問できます。
+คุณสามารถถามคำถามเกี่ยวกับจุดที่เฉพาะเจาะจงในวิดีโอได้โดยใช้การประทับเวลาในรูปแบบ `MM:SS`
 
 ### Python
 
@@ -350,11 +355,11 @@ const prompt = "What are the examples given at 00:05 and 00:10 supposed to show 
 PROMPT="What are the examples given at 00:05 and 00:10 supposed to show us?"
 ```
 
-## 動画から詳細な分析情報を抽出する
+## ดึงข้อมูลเชิงลึกโดยละเอียดจากวิดีโอ
 
-Gemini モデルは、**音声と映像**の両方のストリームから情報を処理することで、動画コンテンツを理解する強力な機能を提供します。これにより、動画で何が起こっているかの説明を生成したり、動画の内容に関する質問に回答したりするなど、詳細な情報を抽出できます。
+โมเดล Gemini มีความสามารถอันทรงพลังในการทำความเข้าใจเนื้อหาวิดีโอโดยการประมวลผลข้อมูลจากทั้งสตรีม**เสียงและภาพ** ซึ่งช่วยให้คุณดึงรายละเอียดต่างๆ มากมาย รวมถึงสร้างคำอธิบายเกี่ยวกับสิ่งที่เกิดขึ้นในวิดีโอและตอบคำถามเกี่ยวกับเนื้อหาของวิดีโอ
 
-視覚的な説明の場合、モデルは **1 フレーム/秒**（FPS）のレートで動画をサンプリングします。このデフォルトのサンプリング レートはほとんどのコンテンツで適切に機能しますが、動きの速い動画やシーンの切り替えが速い動画では、詳細が欠落する可能性があります。
+สำหรับคำอธิบายภาพ โมเดลจะสุ่มตัวอย่างวิดีโอที่อัตรา **1 เฟรมต่อวินาที** (FPS) อัตราการสุ่มตัวอย่างเริ่มต้นนี้เหมาะกับเนื้อหาส่วนใหญ่ แต่โปรดทราบว่าอาจพลาดรายละเอียดในวิดีโอที่มีการเคลื่อนไหวอย่างรวดเร็วหรือมีการเปลี่ยนแปลงฉากอย่างรวดเร็ว
 
 ### Python
 
@@ -374,9 +379,9 @@ const prompt = "Describe the key events in this video, providing both audio and 
 PROMPT="Describe the key events in this video, providing both audio and visual details. Include timestamps for salient moments."
 ```
 
-## サポートされている動画形式
+## รูปแบบวิดีโอที่รองรับ
 
-Gemini は、次の動画形式の MIME タイプをサポートしています。
+Gemini รองรับ MIME ประเภทรูปแบบวิดีโอต่อไปนี้
 
 - `video/mp4`
 - `video/mpeg`
@@ -388,44 +393,54 @@ Gemini は、次の動画形式の MIME タイプをサポートしています�
 - `video/wmv`
 - `video/3gpp`
 
-## 動画に関する技術的な詳細
+## รายละเอียดทางเทคนิคเกี่ยวกับวิดีโอ
 
-- **サポートされているモデルとコンテキスト**: すべての Gemini で動画データを処理できます。
-  - 100 万個のコンテキスト ウィンドウを持つモデルは、デフォルトのメディア解像度で最大 1 時間、低メディア解像度で最大 3 時間の動画を処理できます。
-- **ファイル API の処理**: ファイル API を使用する場合、動画は 1 フレーム/秒（FPS）で保存され、音声は 1 Kbps（シングル チャンネル）で処理されます。タイムスタンプは 1 秒ごとに追加されます。
-  - これらのレートは、推論の改善のために今後変更される可能性があります。
-- **トークンの計算**: 動画の各秒は次のようにトークン化されます。
-  - 個々のフレーム（1 FPS でサンプリング）:
-    - `media_resolution` が低に設定されている場合、フレームはフレームあたり 66 個のトークンでトークン化されます。
-    - それ以外の場合、フレームはフレームあたり 258 個のトークンでトークン化されます。
-  - 音声: 1 秒あたり 32 トークン。
-  - メタデータも含まれます。
-  - 合計: デフォルトのメディア解像度では動画 1 秒あたり約 300 トークン、低メディア解像度では動画 1 秒あたり 100 トークン。
-- **メディアの解像度**: Gemini 3 では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。`media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数**を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。
+- **โมเดลและบริบทที่รองรับ**: Gemini ทุกรุ่นสามารถประมวลผลข้อมูลวิดีโอได้
+  - โมเดลที่มีหน้าต่างบริบท 1 ล้านโทเค็นสามารถประมวลผลวิดีโอที่มีความยาวสูงสุด 1 ชั่วโมงที่ความละเอียดสื่อเริ่มต้น หรือ 3 ชั่วโมงที่ความละเอียดสื่อต่ำ
+- **การประมวลผล File API**: เมื่อใช้ File API ระบบจะจัดเก็บวิดีโอที่ 1
+  เฟรมต่อวินาที (FPS) และประมวลผลเสียงที่ 1Kbps (ช่องเดียว)
+  ระบบจะเพิ่มการประทับเวลาทุกวินาที
+  - อัตราเหล่านี้อาจมีการเปลี่ยนแปลงในอนาคตเพื่อปรับปรุงการอนุมาน
+- **การคำนวณโทเค็น**: ระบบจะแปลงวิดีโอแต่ละวินาทีเป็นโทเค็นดังนี้
+  - เฟรมแต่ละเฟรม (สุ่มตัวอย่างที่ 1 FPS):
+    - หากตั้งค่า `media_resolution` เป็นต่ำ ระบบจะแปลงเฟรมเป็นโทเค็นที่ 66 โทเค็นต่อเฟรม
+    - ไม่เช่นนั้น ระบบจะแปลงเฟรมเป็นโทเค็นที่ 258 โทเค็นต่อเฟรม
+  - เสียง: 32 โทเค็นต่อวินาที
+  - รวมข้อมูลเมตาด้วย
+  - รวม: ประมาณ 300 โทเค็นต่อวินาทีของวิดีโอที่ความละเอียดสื่อเริ่มต้น หรือ 100 โทเค็นต่อวินาทีของวิดีโอที่ความละเอียดสื่อต่ำ
+- **ความละเอียดสื่อ**: Gemini 3 ขอแนะนำการควบคุมแบบละเอียดเกี่ยวกับการประมวลผลการมองเห็นแบบมัลติโมดัล
+  ด้วยพารามิเตอร์ `media_resolution` พารามิเตอร์ `media_resolution` จะกำหนด**จำนวนโทเค็นสูงสุดที่จัดสรรต่อรูปภาพอินพุตหรือเฟรมวิดีโอ**
+  ความละเอียดที่สูงขึ้นจะช่วยเพิ่มความสามารถของโมเดลในการอ่านข้อความขนาดเล็กหรือระบุรายละเอียดเล็กๆ แต่จะเพิ่มการใช้โทเค็นและเวลาในการตอบสนอง
 
-  トークンの計算の詳細については、[トークン](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)のガイドをご覧ください。
-- **タイムスタンプの形式**: プロンプト内で動画の特定の時点を参照する場合は、`MM:SS` 形式（例: 1 分 15 秒の場合は `01:15`）を使用します。
-- **ベスト プラクティス**:
+  ดูรายละเอียดเพิ่มเติมเกี่ยวกับการคำนวณโทเค็นได้ที่คู่มือ[โทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th)
+- **รูปแบบการประทับเวลา**: เมื่ออ้างอิงถึงช่วงเวลาที่เฉพาะเจาะจงในวิดีโอภายในพรอมต์ ให้ใช้รูปแบบ `MM:SS` (เช่น `01:15` สำหรับ 1 นาที 15 วินาที)
+- **แนวทางปฏิบัติแนะนำ**:
 
-  - 最適な結果を得るには、プロンプト リクエストごとに 1 つの動画のみを使用します。
-  - テキストと 1 つの動画を組み合わせる場合は、`input` 配列の動画部分の後にテキスト プロンプトを配置します。
-  - 1 FPS のサンプリング レートでは、高速なアクション シーケンスの詳細が失われる可能性があります。必要に応じて、そのようなクリップの速度を遅くすることを検討してください。
+  - ใช้เพียงวิดีโอเดียวต่อคำขอพรอมต์เพื่อให้ได้ผลลัพธ์ที่ดีที่สุด
+  - หากรวมข้อความและวิดีโอเดียว ให้วางพรอมต์ข้อความ *หลัง* ส่วนวิดีโอในอาร์เรย์ `input`
+  - โปรดทราบว่าลำดับการทำงานที่รวดเร็วอาจสูญเสียรายละเอียดเนื่องจากอัตราการสุ่มตัวอย่าง 1 FPS พิจารณาชะลอคลิปดังกล่าวหากจำเป็น
 
-## 次のステップ
+## ขั้นตอนถัดไป
 
-このガイドでは、動画ファイルをアップロードし、動画入力からテキスト出力を生成する方法について説明します。詳細については、次のリソースをご覧ください。
+คู่มือนี้แสดงวิธีอัปโหลดไฟล์วิดีโอและสร้างเอาต์พุตข้อความจากอินพุตวิดีโอ ดูข้อมูลเพิ่มเติมได้จากแหล่งข้อมูลต่อไปนี้
 
-- [システム指示](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions): システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja): Gemini で使用するファイルのアップロードと管理について説明します。
-- [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini API は、テキスト、画像、音声、動画データを使用したプロンプト（マルチモーダル プロンプトとも呼ばれます）をサポートしています。
-- [安全に関するガイダンス](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja): 生成 AI モデルは、不正確な出力、偏った出力、不適切な出力など、予期しない出力を生成することがあります。このような出力による危害のリスクを制限するには、後処理と人間による評価が不可欠です。
+- [คำแนะนำของระบบ](https://ai.google.dev/gemini-api/docs/text-generation?hl=th#system-instructions):
+  คำแนะนำของระบบช่วยให้คุณกำหนดลักษณะการทำงานของโมเดลตาม
+  ความต้องการและกรณีการใช้งานที่เฉพาะเจาะจง
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=th): ดูข้อมูลเพิ่มเติมเกี่ยวกับการอัปโหลดและจัดการ
+  ไฟล์เพื่อใช้กับ Gemini
+- [กลยุทธ์การเขียนพรอมต์ไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide): Gemini API รองรับการเขียนพรอมต์ด้วยข้อมูลข้อความ รูปภาพ เสียง และวิดีโอ หรือที่เรียกว่าการเขียนพรอมต์แบบหลายรูปแบบ
+- [คำแนะนำด้านความปลอดภัย](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=th): บางครั้งโมเดล Generative
+  AI จะสร้างเอาต์พุตที่ไม่คาดคิด เช่น เอาต์พุตที่ไม่ถูกต้อง
+  มีอคติ หรือไม่เหมาะสม การประมวลผลภายหลังและการประเมินโดยเจ้าหน้าที่เป็นสิ่งสำคัญในการ
+  จำกัดความเสี่ยงที่จะเกิดอันตรายจากเอาต์พุตดังกล่าว
 
-フィードバックを送信
+ส่งความคิดเห็น
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-最終更新日 2026-07-06 UTC。
+อัปเดตล่าสุด 2026-07-30 UTC
 
-ご意見をお聞かせください
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-06 UTC。"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

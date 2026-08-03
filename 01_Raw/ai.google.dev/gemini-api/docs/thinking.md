@@ -1,37 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=de
-fetched_at: 2026-07-27T04:42:47.883677+00:00
-title: "Gemini-Denken \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/thinking?hl=vi
+fetched_at: 2026-08-03T04:33:27.477625+00:00
+title: "T\u01b0 duy c\u1ee7a Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-Feedback geben
+Gửi ý kiến phản hồi
 
-# Gemini-Denken
+# Tư duy của Gemini
 
-Die [Modelle der Gemini 3- und 2.5-Serie](https://ai.google.dev/gemini-api/docs/models?hl=de) nutzen einen „Denkprozess“, der ihre Fähigkeiten zum logischen Denken und zur mehrstufigen Planung erheblich verbessert. Dadurch eignen sie sich hervorragend für komplexe Aufgaben wie Programmieren, fortgeschrittene Mathematik und Datenanalyse.
+[Các mô hình thuộc dòng Gemini 3 và 2.5](https://ai.google.dev/gemini-api/docs/models?hl=vi) sử dụng "quy trình tư duy" giúp cải thiện đáng kể khả năng suy luận và lập kế hoạch nhiều bước, nhờ đó, các mô hình này có hiệu quả cao đối với các tác vụ phức tạp như lập trình, toán học nâng cao và phân tích dữ liệu.
 
-Wenn Sie ein Denkmodell verwenden, überlegt Gemini intern, bevor es antwortet. Die Interactions API stellt diese Begründung über `thought`-Schritte bereit. Das sind spezielle Schritte, die chronologisch neben Funktionsaufrufen, Nutzereingaben oder Modellausgaben im `steps`-Array angezeigt werden.
+Khi bạn sử dụng mô hình tư duy, Gemini sẽ suy luận nội bộ trước khi trả lời. Interactions API cho thấy lý do này thông qua các bước `thought`, là các bước chuyên dụng xuất hiện theo trình tự thời gian cùng với các lệnh gọi hàm, dữ liệu đầu vào của người dùng hoặc dữ liệu đầu ra của mô hình trong mảng `steps`.
 
-Jeder Denkprozessschritt enthält zwei Felder:
+Mỗi bước suy nghĩ chứa 2 trường:
 
-| Feld | Erforderlich? | Beschreibung |
+| Trường | Bắt buộc | Mô tả |
 | --- | --- | --- |
-| `signature` | ✅ Ja | Eine verschlüsselte Darstellung des internen Entscheidungsstatus des Modells. Immer vorhanden, auch wenn das Modell nur minimalen Reasoning-Prozess durchführt. |
-| `summary` | ❌ Nein | Eine Reihe von Inhalten (Text und/oder Bilder), die die Begründung zusammenfassen. Kann je nach [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=de)-Konfiguration, der Menge der vom Modell durchgeführten Schlussfolgerungen oder dem Inhaltstyp leer sein (z. B. haben Bild-Latents möglicherweise keine Textzusammenfassungen). |
+| `signature` | ✅ Có | Một bản mã hoá biểu thị trạng thái suy luận nội bộ của mô hình. Luôn xuất hiện, ngay cả khi mô hình thực hiện suy luận tối thiểu. |
+| `summary` | ❌ Không | Một mảng nội dung (văn bản và/hoặc hình ảnh) tóm tắt lý do. Có thể trống tuỳ thuộc vào cấu hình [`thinking_summaries`](https://ai.google.dev/api/interactions-api?hl=vi), liệu mô hình có thực hiện đủ quy trình suy luận hay không hoặc loại nội dung (ví dụ: các thành phần tiềm ẩn của hình ảnh có thể không có bản tóm tắt bằng văn bản). |
 
-## Interaktionen mit dem Denkprozess
+## Tương tác với suy nghĩ
 
-Eine Interaktion mit einem Denkmodell zu starten, ähnelt jeder anderen Interaktionsanfrage. Geben Sie im Feld `model` eines der [Modelle mit Unterstützung für das Denken](#thinking-levels) an:
+Việc bắt đầu tương tác với một mô hình tư duy cũng tương tự như mọi yêu cầu tương tác khác. Chỉ định một trong các [mô hình có hỗ trợ tư duy](#thinking-levels) trong trường `model`:
 
 ### Python
 
@@ -41,7 +41,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Explain the concept of Occam's Razor and provide a simple, everyday example."
 )
 print(interaction.output_text)
@@ -55,7 +55,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "Explain the concept of Occam's Razor and provide a simple, everyday example."
 });
 console.log(interaction.output_text);
@@ -68,15 +68,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Explain the concept of Occam'\''s Razor and provide a simple example."
   }'
 ```
 
-## Zusammenfassungen der Gedanken
+## Tóm tắt suy nghĩ
 
-Zusammenfassungen der Überlegungen geben Einblick in den internen Prozess der Problemlösung des Modells.
-Standardmäßig wird nur die endgültige Ausgabe zurückgegeben. Sie können Gedankenzusammenfassungen mit `thinking_summaries` aktivieren:
+Bản tóm tắt suy nghĩ cung cấp thông tin chi tiết về quy trình suy luận nội bộ của mô hình.
+Theo mặc định, chỉ kết quả đầu ra cuối cùng được trả về. Bạn có thể bật tính năng tóm tắt suy nghĩ bằng `thinking_summaries`:
 
 ### Python
 
@@ -86,7 +86,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="What is the sum of the first 50 prime numbers?",
     generation_config={
         "thinking_summaries": "auto"
@@ -117,7 +117,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "What is the sum of the first 50 prime numbers?",
     generation_config: {
         thinking_summaries: "auto"
@@ -150,7 +150,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "What is the sum of the first 50 prime numbers?",
     "generation_config": {
       "thinking_summaries": "auto"
@@ -158,23 +158,23 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Ein Denkblock darf in diesen Fällen **nur eine Signatur ohne Zusammenfassung** enthalten:
+Khối suy nghĩ có thể **chỉ chứa chữ ký mà không có nội dung tóm tắt** trong những trường hợp sau:
 
-- Einfache Anfragen, bei denen das Modell nicht genügend Informationen berücksichtigt hat, um eine Zusammenfassung zu erstellen
-- `thinking_summaries: "none"`, in denen Zusammenfassungen explizit deaktiviert sind
-- Für bestimmte Arten von Gedankeninhalten, z. B. Bilder, sind möglicherweise keine Textzusammenfassungen verfügbar.
+- Các yêu cầu đơn giản, trong đó mô hình không suy luận đủ để tạo bản tóm tắt
+- `thinking_summaries: "none"`, trong đó tính năng tóm tắt bị tắt một cách rõ ràng
+- Một số loại nội dung trong suy nghĩ, chẳng hạn như hình ảnh, có thể không có bản tóm tắt bằng văn bản
 
-Ihr Code sollte immer Thought-Blöcke verarbeiten, in denen `summary` leer ist oder fehlt.
+Mã của bạn phải luôn xử lý các khối suy nghĩ khi `summary` trống hoặc không có.
 
-## Streaming mit Denken
+## Truyền phát trực tiếp có tư duy
 
-Streaming verwenden, um während der Generierung inkrementelle Zusammenfassungen zu erhalten.
-Gedankenblöcke werden über Server-Sent Events (SSE) mit zwei unterschiedlichen Deltatyps bereitgestellt:
+Sử dụng tính năng truyền trực tuyến để nhận bản tóm tắt gia tăng về ý tưởng trong quá trình tạo.
+Các khối suy nghĩ được phân phối bằng Sự kiện được gửi bởi máy chủ (SSE) với 2 loại delta riêng biệt:
 
-| Deltatyp | Enthält | Wann werden die Daten gesendet? |
+| Loại Delta | Chứa | Thời điểm gửi |
 | --- | --- | --- |
-| `thought_summary` | Zusammenfassungen in Text- oder Bildform | Ein oder mehrere Deltas mit inkrementeller Zusammenfassung |
-| `thought_signature` | Die kryptografische Signatur | das letzte Delta vor dem `step.stop` |
+| `thought_summary` | Nội dung tóm tắt bằng văn bản hoặc hình ảnh | Một hoặc nhiều delta có bản tóm tắt gia tăng |
+| `thought_signature` | Chữ ký mật mã | delta cuối cùng trước `step.stop` |
 
 ### Python
 
@@ -195,7 +195,7 @@ thoughts = ""
 answer = ""
 
 stream = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input=prompt,
     generation_config={
         "thinking_summaries": "auto"
@@ -235,7 +235,7 @@ let thoughts = "";
 let answer = "";
 
 const stream = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: prompt,
     generation_config: {
         thinking_summaries: "auto"
@@ -267,7 +267,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H 'Content-Type: application/json' \
   --no-buffer \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Alice, Bob, and Carol each live in a different house on the same street: red, green, and blue. Alice does not live in the red house. Bob does not live in the green house. Carol does not live in the red or green house. Which house does each person live in?",
     "generation_config": {
       "thinking_summaries": "auto"
@@ -276,11 +276,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Die Streaming-Antwort verwendet vom Server gesendete Ereignisse (SSE, Server-Sent Events) und besteht aus Schritten und Ereignissen, z. B.:
+Phản hồi truyền trực tuyến sử dụng Sự kiện được gửi bởi máy chủ (SSE) và bao gồm các bước và sự kiện, ví dụ:
 
 ```
 event: interaction.created
-data: {"interaction":{"id":"v1_xxx","status":"in_progress","object":"interaction","model":"gemini-3.5-flash"},"event_type":"interaction.created"}
+data: {"interaction":{"id":"v1_xxx","status":"in_progress","object":"interaction","model":"gemini-3.6-flash"},"event_type":"interaction.created"}
 
 event: step.start
 data: {"index":0,"step":{"signature":"","summary":[{"text":"**Evaluating the clues**\n\nI'm considering...","type":"text"}],"type":"thought"},"event_type":"step.start"}
@@ -307,20 +307,22 @@ event: done
 data: [DONE]
 ```
 
-## Kontrolliertes Denken
+## Tư duy kiểm soát
 
-Gemini-Modelle verwenden standardmäßig dynamisches Denken und passen den Aufwand für das Reasoning automatisch an die Komplexität der Anfrage an. Sie können dieses Verhalten mit dem Parameter `thinking_level` steuern.
+Theo mặc định, các mô hình Gemini tham gia vào quá trình tư duy linh hoạt bằng cách tự động điều chỉnh mức độ nỗ lực suy luận dựa trên độ phức tạp của yêu cầu. Bạn có thể kiểm soát hành vi này bằng cách sử dụng tham số `thinking_level`.
 
-| Modell | Standardüberlegung | Unterstützte Ebenen |
+| Mô hình | Tư duy mặc định | Các cấp độ được hỗ trợ |
 | --- | --- | --- |
-| gemini-3.1-pro-preview | Ein (hoch) | niedrig, mittel, hoch |
-| gemini-3.1-flash-lite-image | An (minimal) | minimal, hoch |
-| gemini-3-flash-preview | Ein (hoch) | minimal, niedrig, mittel, hoch |
-| gemini-3-pro-preview | Ein (hoch) | niedrig, hoch |
-| gemini-3.5-flash | An (mittel) | minimal, niedrig, mittel, hoch |
-| gemini-2.5-pro | An | niedrig, mittel, hoch |
-| gemini-2.5-flash | An | niedrig, mittel, hoch |
-| gemini-2.5-flash-lite | Aus | niedrig, mittel, hoch |
+| gemini-3.6-flash | Bật (trung bình) | tối thiểu, thấp, trung bình, cao |
+| gemini-3.5-flash-lite | Bật (tối thiểu) | tối thiểu, thấp, trung bình, cao |
+| gemini-3.1-pro-preview | Bật (cao) | thấp, trung bình, cao |
+| gemini-3.1-flash-lite-image | Bật (tối thiểu) | tối thiểu, cao |
+| gemini-3-flash-preview | Bật (cao) | tối thiểu, thấp, trung bình, cao |
+| gemini-3-pro-preview | Bật (cao) | thấp, cao |
+| gemini-3.5-flash | Bật (trung bình) | tối thiểu, thấp, trung bình, cao |
+| gemini-2.5-pro | Bật | thấp, trung bình, cao |
+| gemini-2.5-flash | Bật | thấp, trung bình, cao |
+| gemini-2.5-flash-lite | Tắt | thấp, trung bình, cao |
 
 ### Python
 
@@ -330,7 +332,7 @@ from google import genai
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     input="Provide a list of 3 famous physicists and their key contributions",
     generation_config={
         "thinking_level": "low"
@@ -347,7 +349,7 @@ import { GoogleGenAI } from "@google/genai";
 const client = new GoogleGenAI({});
 
 const interaction = await client.interactions.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     input: "Provide a list of 3 famous physicists and their key contributions",
     generation_config: {
         thinking_level: "low"
@@ -363,7 +365,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
-    "model": "gemini-3.5-flash",
+    "model": "gemini-3.6-flash",
     "input": "Provide a list of 3 famous physicists and their key contributions",
     "generation_config": {
       "thinking_level": "low"
@@ -371,27 +373,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Gedankensignaturen
+## Chữ ký của suy nghĩ
 
-Gedankensignaturen sind verschlüsselte Darstellungen der internen Argumentation des Modells. Sie müssen die Kontinuität der Argumentation über mehrere Interaktionen hinweg aufrechterhalten.
+Chữ ký suy nghĩ là biểu thị được mã hoá về quá trình suy luận nội bộ của mô hình. Chúng phải duy trì tính liên tục của suy luận trong các lượt tương tác nhiều lượt.
 
-Mit der Interactions API ist die Verarbeitung von Gedanken-Signaturen viel einfacher als mit der `generateContent` API.
+Interactions API giúp việc xử lý chữ ký tư duy trở nên đơn giản hơn nhiều so với `generateContent` API.
 
-### Statusbehafteter Modus (empfohlen)
+### Chế độ có trạng thái (Nên dùng)
 
-Wenn Sie die Interactions API standardmäßig im statusbehafteten Modus verwenden (indem Sie `store: true` festlegen und `previous_interaction_id` in nachfolgenden Zügen übergeben), verwaltet der Server automatisch den Unterhaltungsstatus, einschließlich aller Denkblöcke und Signaturen. In diesem Modus müssen Sie nichts in Bezug auf Signaturen unternehmen. Sie werden vollständig serverseitig verarbeitet.
+Theo mặc định, khi bạn sử dụng Interactions API ở chế độ có trạng thái (bằng cách đặt `store: true` và truyền `previous_interaction_id` trong các lượt tiếp theo), máy chủ sẽ tự động quản lý trạng thái cuộc trò chuyện, bao gồm tất cả các khối suy nghĩ và chữ ký. Ở chế độ này, bạn không cần làm gì liên quan đến chữ ký. Các yêu cầu này được xử lý hoàn toàn ở phía máy chủ.
 
-### Zustandsloser Modus
+### Chế độ không trạng thái
 
-Wenn Sie den Unterhaltungsstatus selbst verwalten (zustandsloser Modus) und bei jeder Anfrage den vollständigen Verlauf der Ein- und Ausgaben übergeben:
+Nếu bạn tự quản lý trạng thái cuộc trò chuyện (chế độ không trạng thái) và truyền toàn bộ nhật ký đầu vào và đầu ra trong mỗi yêu cầu:
 
-- Sie **MÜSSEN** immer alle `thought`-Blöcke genau so noch einmal senden, wie sie vom Modell empfangen wurden.
-- Sie sollten **KEINE** Denkblöcke aus dem Verlauf entfernen oder ändern, da sie die Signaturen enthalten, die das Modell für die weitere Argumentation benötigt.
-- Wenn Sie das Modell innerhalb einer Sitzung wechseln, sollten Sie die Denkblöcke des vorherigen Modells noch einmal senden. Das Backend verwaltet die Kompatibilität.
+- Bạn **PHẢI** luôn gửi lại tất cả các khối `thought` giống hệt như khi nhận được từ mô hình.
+- Bạn **KHÔNG** nên xoá hoặc sửa đổi các khối suy nghĩ trong nhật ký, vì chúng chứa chữ ký cần thiết để mô hình tiếp tục suy luận.
+- Khi chuyển đổi mô hình trong một phiên, bạn vẫn nên gửi lại các khối suy nghĩ của mô hình trước đó. Phần phụ trợ quản lý khả năng tương thích.
 
-## Preise
+## Giá
 
-Wenn der Thinking-Modus aktiviert ist, setzt sich der Preis für die Antwort aus der Summe der Ausgabe-Tokens und der Thinking-Tokens zusammen. Die Gesamtzahl der generierten Denk-Tokens finden Sie im Feld `total_thought_tokens`.
+Khi tính năng suy nghĩ được bật, giá của câu trả lời là tổng số mã thông báo đầu ra và mã thông báo suy nghĩ. Bạn có thể lấy tổng số mã thông báo tư duy đã tạo từ trường `total_thought_tokens`.
 
 ### Python
 
@@ -407,32 +409,32 @@ console.log(`Thoughts tokens: ${interaction.usage.total_thought_tokens}`);
 console.log(`Output tokens: ${interaction.usage.total_output_tokens}`);
 ```
 
-Denkmodelle generieren vollständige Gedanken, um die Qualität der endgültigen Antwort zu verbessern, und geben dann [Zusammenfassungen](#summaries) aus, um Einblicke in den Denkprozess zu geben. Die Preise basieren auf den vollständigen Thought-Tokens, die das Modell generieren muss, obwohl nur die Zusammenfassung von der API ausgegeben wird.
+Các mô hình tư duy tạo ra những suy nghĩ hoàn chỉnh để cải thiện chất lượng của câu trả lời cuối cùng, sau đó đưa ra [bản tóm tắt](#summaries) để cung cấp thông tin chi tiết về quy trình tư duy. Giá được tính dựa trên số lượng mã thông báo đầy đủ mà mô hình cần tạo, mặc dù API chỉ xuất ra bản tóm tắt.
 
-Weitere Informationen zu Tokens finden Sie im Leitfaden [Tokens zählen](https://ai.google.dev/gemini-api/docs/tokens?hl=de).
+Bạn có thể tìm hiểu thêm về mã thông báo trong hướng dẫn [Đếm mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi).
 
-## Best Practices
+## Các phương pháp hay nhất
 
-Wenn Sie diese Richtlinien beachten, können Sie Denkmodelle effizient einsetzen.
+Sử dụng các mô hình tư duy một cách hiệu quả bằng cách làm theo các nguyên tắc sau.
 
-- **Begründung überprüfen**: Analysieren Sie Zusammenfassungen der Gedankengänge, um Fehler zu verstehen und Prompts zu verbessern.
-- **Thinking-Budget steuern**: Weisen Sie das Modell an, bei langen Ausgaben weniger zu überlegen, um Tokens zu sparen.
-- **Einfache Aufgaben**: Verwenden Sie minimales oder geringes Denken für den Faktenabruf oder die Klassifizierung (z.B. „Wo wurde DeepMind gegründet?“).
-- **Aufgaben moderieren**: Verwenden Sie die Standardlogik, um Konzepte zu vergleichen oder kreative Argumentation zu nutzen (z.B. „Vergleiche Elektro- und Hybridautos“).
-- **Komplexe Aufgaben**: Verwenden Sie „Maximales Denken“ für anspruchsvolle Programmier-, Mathematik- oder mehrstufige Planungsaufgaben (z.B. AIME-Mathematikaufgaben lösen).
+- **Xem xét suy luận**: Phân tích bản tóm tắt suy nghĩ để hiểu rõ những điểm thất bại và cải thiện câu lệnh.
+- **Kiểm soát ngân sách suy nghĩ**: Yêu cầu mô hình suy nghĩ ít hơn đối với các đầu ra dài để tiết kiệm mã thông báo.
+- **Tác vụ đơn giản**: Sử dụng mức độ tư duy tối thiểu hoặc thấp để truy xuất hoặc phân loại thông tin (ví dụ: "DeepMind được thành lập ở đâu?").
+- **Nhiệm vụ vừa phải**: Sử dụng tư duy mặc định để so sánh các khái niệm hoặc suy luận sáng tạo (ví dụ: So sánh xe điện và xe hybrid).
+- **Nhiệm vụ phức tạp**: Sử dụng tối đa khả năng tư duy để lập trình nâng cao, giải toán hoặc lập kế hoạch nhiều bước (ví dụ: Giải các bài toán trong kỳ thi AIME).
 
-## Nächste Schritte
+## Bước tiếp theo
 
-- [Textgenerierung](https://ai.google.dev/gemini-api/docs/text-generation?hl=de): Einfache Textantworten
-- [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de): Verbindung zu Tools herstellen
-- [Leitfaden zu Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=de): Modellspezifische Funktionen
+- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi): Câu trả lời cơ bản bằng văn bản
+- [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi): Kết nối với các công cụ
+- [Hướng dẫn về Gemini 3](https://ai.google.dev/gemini-api/docs/gemini-3?hl=vi): Các tính năng dành riêng cho mô hình
 
-Feedback geben
+Gửi ý kiến phản hồi
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-Zuletzt aktualisiert: 2026-07-06 (UTC).
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-Haben Sie Feedback für uns?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-06 (UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

@@ -1,48 +1,39 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=ar
-fetched_at: 2026-07-27T04:33:45.448840+00:00
-title: "\u0625\u062f\u0627\u0631\u0629 \u0627\u0644\u062c\u0644\u0633\u0627\u062a \u0628\u0627\u0633\u062a\u062e\u062f\u0627\u0645 Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/session-management?hl=vi
+fetched_at: 2026-08-03T04:26:38.519775+00:00
+title: "Qu\u1ea3n l\u00fd phi\u00ean b\u1eb1ng Live API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-# إدارة الجلسات باستخدام Live API
+# Quản lý phiên bằng Live API
 
-في Live API، تشير الجلسة إلى اتصال مستمر يتم فيه بث الإدخال والإخراج بشكل مستمر عبر الاتصال نفسه (مزيد من المعلومات حول [طريقة عمله](https://ai.google.dev/gemini-api/docs/live?hl=ar)).
-يتيح تصميم الجلسة الفريد هذا وقت استجابة منخفضًا ويدعم ميزات فريدة، ولكن يمكن أن يطرح أيضًا تحديات، مثل حدود وقت الجلسة والإنهاء المبكر.
-يغطي هذا الدليل استراتيجيات للتغلّب على تحديات إدارة الجلسات التي يمكن أن تنشأ عند استخدام Live API.
+Trong Live API, phiên là một kết nối liên tục, trong đó dữ liệu đầu vào và đầu ra được truyền trực tuyến liên tục qua cùng một kết nối (đọc thêm về [cách hoạt động](https://ai.google.dev/gemini-api/docs/live?hl=vi)).
+Thiết kế phiên độc đáo này cho phép độ trễ thấp và hỗ trợ các tính năng độc đáo, nhưng cũng có thể gây ra các vấn đề, chẳng hạn như giới hạn thời gian phiên và chấm dứt sớm.
+Hướng dẫn này đề cập đến các chiến lược để khắc phục những thách thức về việc quản lý phiên có thể phát sinh khi sử dụng Live API.
 
-## مدة الجلسة
+## Thời gian tồn tại của phiên
 
-بدون ضغط، تقتصر الجلسات الصوتية فقط على 15 دقيقة، وتقتصر الجلسات الصوتية والمرئية على دقيقتَين. سيؤدي تجاوز هذه الحدود
-إلى إنهاء الجلسة (وبالتالي، الاتصال)، ولكن يمكنك استخدام
-[ضغط قدرة استيعاب](#context-window-compression) لتمديد الجلسات إلى
-مدة غير محدودة.
+Nếu không nén, các phiên chỉ có âm thanh sẽ bị giới hạn ở 15 phút và các phiên có cả âm thanh và video sẽ bị giới hạn ở 2 phút. Nếu vượt quá các giới hạn này, phiên sẽ kết thúc (và do đó, kết nối cũng kết thúc), nhưng bạn có thể sử dụng [tính năng nén cửa sổ ngữ cảnh](#context-window-compression) để kéo dài phiên đến một khoảng thời gian không giới hạn.
 
-تقتصر مدة الاتصال أيضًا على 10 دقائق تقريبًا. عند انتهاء الاتصال، تنتهي الجلسة أيضًا. في هذه الحالة، يمكنك
-ضبط جلسة واحدة لتظل نشطة على عدة اتصالات باستخدام
-[استئناف الجلسة](#session-resumption).
-ستتلقّى أيضًا رسالة [GoAway](#goaway-message) قبل انتهاء
-الاتصال، ما يتيح لك اتّخاذ إجراءات إضافية.
+Thời gian tồn tại của một kết nối cũng bị giới hạn, khoảng 10 phút. Khi kết nối chấm dứt, phiên cũng sẽ chấm dứt. Trong trường hợp này, bạn có thể định cấu hình một phiên duy nhất để duy trì hoạt động trên nhiều kết nối bằng cách sử dụng [tính năng tiếp tục phiên](#session-resumption).
+Bạn cũng sẽ nhận được [thông báo GoAway](#goaway-message) trước khi kết thúc kết nối, cho phép bạn thực hiện các hành động khác.
 
-## ضغط قدرة استيعاب السياق
+## Nén cửa sổ ngữ cảnh
 
-لإتاحة جلسات أطول وتجنُّب إنهاء الاتصال المفاجئ، يمكنك تفعيل ضغط قدرة الاستيعاب من خلال ضبط الحقل [contextWindowCompression](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) كجزء من إعداد الجلسة.
+Để cho phép các phiên dài hơn và tránh tình trạng kết nối bị chấm dứt đột ngột, bạn có thể bật tính năng nén cửa sổ ngữ cảnh bằng cách đặt trường [contextWindowCompression](https://ai.google.dev/api/live?hl=vi#BidiGenerateContentSetup.FIELDS.ContextWindowCompressionConfig.BidiGenerateContentSetup.context_window_compression) trong cấu hình phiên.
 
-في [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=ar#contextwindowcompressionconfig)، يمكنك ضبط آلية
-[النافذة المنزلقة](https://ai.google.dev/api/live?hl=ar#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window)
-و[عدد الرموز المميّزة](https://ai.google.dev/api/live?hl=ar#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens)
-التي تؤدي إلى الضغط.
+Trong [ContextWindowCompressionConfig](https://ai.google.dev/api/live?hl=vi#contextwindowcompressionconfig), bạn có thể định cấu hình [cơ chế cửa sổ trượt](https://ai.google.dev/api/live?hl=vi#ContextWindowCompressionConfig.FIELDS.ContextWindowCompressionConfig.SlidingWindow.ContextWindowCompressionConfig.sliding_window) và [số lượng mã thông báo](https://ai.google.dev/api/live?hl=vi#ContextWindowCompressionConfig.FIELDS.int64.ContextWindowCompressionConfig.trigger_tokens) kích hoạt tính năng nén.
 
 ### Python
 
@@ -69,15 +60,13 @@ const config = {
 };
 ```
 
-## استئناف الجلسة
+## Tiếp tục phiên
 
-لمنع إنهاء الجلسة عندما يعيد الخادم ضبط اتصال WebSocket
-، اضبط الحقل [sessionResumption](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption)
-ضمن [إعداد الإعداد](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentSetup).
+Để ngăn phiên kết thúc khi máy chủ định kỳ đặt lại kết nối WebSocket, hãy định cấu hình trường [sessionResumption](https://ai.google.dev/api/live?hl=vi#BidiGenerateContentSetup.FIELDS.SessionResumptionConfig.BidiGenerateContentSetup.session_resumption) trong [cấu hình thiết lập](https://ai.google.dev/api/live?hl=vi#BidiGenerateContentSetup).
 
-يؤدي تمرير هذا الإعداد إلى إرسال الخادم رسائل [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=ar#SessionResumptionUpdate)، التي يمكن استخدامها لاستئناف الجلسة من خلال تمرير آخر رمز مميّز للاستئناف كـ [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=ar#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) للاتصال اللاحق.
+Việc truyền cấu hình này khiến máy chủ gửi thông báo [SessionResumptionUpdate](https://ai.google.dev/api/live?hl=vi#SessionResumptionUpdate). Bạn có thể dùng thông báo này để tiếp tục phiên bằng cách truyền mã thông báo tiếp tục gần đây nhất làm [`SessionResumptionConfig.handle`](https://ai.google.dev/api/live?hl=vi#SessionResumptionConfig.FIELDS.string.SessionResumptionConfig.handle) của kết nối tiếp theo.
 
-تكون الرموز المميّزة للاستئناف صالحة لمدة ساعتَين بعد إنهاء الجلسات الأخيرة.
+Mã thông báo tiếp tục có hiệu lực trong 2 giờ sau khi phiên gần nhất kết thúc.
 
 ### Python
 
@@ -212,12 +201,9 @@ async function main() {
 main();
 ```
 
-## تلقّي رسالة قبل قطع اتصال الجلسة
+## Nhận được thông báo trước khi phiên kết nối bị ngắt
 
-يرسل الخادم رسالة [GoAway](https://ai.google.dev/api/live?hl=ar#GoAway) تشير إلى أنّ الاتصال الحالي
-سيتم إنهاؤه قريبًا. تتضمّن هذه الرسالة الحقل [timeLeft](https://ai.google.dev/api/live?hl=ar#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left)،
-الذي يشير إلى الوقت المتبقي ويسمح لك باتّخاذ إجراءات إضافية قبل
-إنهاء الاتصال كـ ABORTED.
+Máy chủ gửi thông báo [GoAway](https://ai.google.dev/api/live?hl=vi#GoAway) cho biết rằng kết nối hiện tại sẽ sớm bị chấm dứt. Thông báo này bao gồm [timeLeft](https://ai.google.dev/api/live?hl=vi#GoAway.FIELDS.google.protobuf.Duration.GoAway.time_left), cho biết thời gian còn lại và cho phép bạn thực hiện thêm hành động trước khi kết nối bị chấm dứt ở trạng thái ABORTED.
 
 ### Python
 
@@ -240,10 +226,9 @@ for (const turn of turns) {
 }
 ```
 
-## تلقّي رسالة عند اكتمال الإنشاء
+## Nhận thông báo khi quá trình tạo hoàn tất
 
-يرسل الخادم رسالة [generationComplete](https://ai.google.dev/api/live?hl=ar#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete)
-تشير إلى أنّ النموذج انتهى من إنشاء الردّ.
+Máy chủ gửi thông báo [generationComplete](https://ai.google.dev/api/live?hl=vi#BidiGenerateContentServerContent.FIELDS.bool.BidiGenerateContentServerContent.generation_complete) cho biết mô hình đã hoàn tất việc tạo câu trả lời.
 
 ### Python
 
@@ -265,19 +250,16 @@ for (const turn of turns) {
 }
 ```
 
-## الخطوات التالية
+## Bước tiếp theo
 
-يمكنك استكشاف المزيد من الطرق لاستخدام Live API في دليل
-[الإمكانات](https://ai.google.dev/gemini-api/docs/live?hl=ar) الكامل أو
-صفحة [استخدام الأدوات](https://ai.google.dev/gemini-api/docs/live-tools?hl=ar) أو
-[دليل Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=ar).
+Khám phá thêm các cách sử dụng Live API trong hướng dẫn đầy đủ về [Các chức năng](https://ai.google.dev/gemini-api/docs/live?hl=vi), trang [Cách sử dụng công cụ](https://ai.google.dev/gemini-api/docs/live-tools?hl=vi) hoặc [Sổ tay Live API](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=vi).
 
-إرسال ملاحظات
+Gửi ý kiến phản hồi
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-تاريخ التعديل الأخير: 2026-06-01 (حسب التوقيت العالمي المتفَّق عليه)
+Cập nhật lần gần đây nhất: 2026-06-01 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-01 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-06-01 UTC."],[],[]]

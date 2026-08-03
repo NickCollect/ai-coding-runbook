@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/generate-content/tokens?hl=th
-fetched_at: 2026-07-27T04:44:18.467800+00:00
+fetched_at: 2026-08-03T04:41:45.577322+00:00
 title: "\u0e17\u0e4d\u0e32\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43\u0e08\u0e41\u0e25\u0e30\u0e19\u0e31\u0e1a\u0e42\u0e17\u0e40\u0e04\u0e47\u0e19 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
@@ -8,7 +8,7 @@ title: "\u0e17\u0e4d\u0e32\u0e04\u0e27\u0e32\u0e21\u0e40\u0e02\u0e49\u0e32\u0e43
 
 ![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
 - [หน้าแรก](https://ai.google.dev/?hl=th)
 - [Gemini API](https://ai.google.dev/gemini-api?hl=th)
@@ -21,18 +21,18 @@ Google uses AI technology to translate content into your preferred language. AI 
 
 Gemini และโมเดล Generative AI อื่นๆ จะประมวลผลอินพุตและเอาต์พุตที่ระดับความละเอียดที่เรียกว่า *โทเค็น*
 
-**สำหรับโมเดล Gemini โทเค็นจะเทียบเท่ากับอักขระประมาณ 4 ตัว
-โทเค็น 100 รายการจะเท่ากับคำภาษาอังกฤษประมาณ 60-80 คำ**
+**สำหรับโมเดล Gemini โทเค็น 1 รายการจะเทียบเท่ากับอักขระประมาณ 4 ตัว
+และโทเค็น 100 รายการจะเทียบเท่ากับคำภาษาอังกฤษประมาณ 60-80 คำ**
 
 ## เกี่ยวกับโทเค็น
 
-โทเค็นอาจเป็นอักขระเดียว เช่น `z` หรือคำทั้งคำ เช่น `cat` คำยาวจะถูกแบ่งออกเป็นโทเค็นหลายรายการ ชุดโทเค็นทั้งหมดที่โมเดลใช้เรียกว่าคำศัพท์ และกระบวนการแยกข้อความออกเป็นโทเค็นเรียกว่า *การแยกโทเค็น*
+โทเค็นอาจเป็นอักขระตัวเดียว เช่น `z` หรือคำทั้งคำ เช่น `cat` โดยคำยาวๆ จะถูกแบ่งออกเป็นโทเค็นหลายรายการ ชุดโทเค็นทั้งหมดที่โมเดลใช้เรียกว่าคำศัพท์ และกระบวนการแยกข้อความออกเป็นโทเค็นเรียกว่า *การแยกโทเค็น*
 
 เมื่อเปิดใช้การเรียกเก็บเงิน [ต้นทุนของการเรียกใช้ Gemini API](https://ai.google.dev/pricing?hl=th) จะ
-พิจารณาจากจำนวนโทเค็นอินพุตและเอาต์พุตเป็นส่วนหนึ่ง ดังนั้นการรู้วิธี
+พิจารณาจากจำนวนโทเค็นอินพุตและเอาต์พุตเป็นส่วนหนึ่ง ดังนั้นการทราบวิธี
 นับโทเค็นจึงอาจเป็นประโยชน์
 
-คุณสามารถลองนับโทเค็นใน Colab ของเราได้
+คุณลองนับโทเค็นใน Colab ของเราได้
 
 |  |  |  |
 | --- | --- | --- |
@@ -42,7 +42,7 @@ Gemini และโมเดล Generative AI อื่นๆ จะประม
 
 อินพุตและเอาต์พุตทั้งหมดของ Gemini API จะได้รับการแยกโทเค็น ซึ่งรวมถึงข้อความ ไฟล์รูปภาพ และรูปแบบอื่นๆ ที่ไม่ใช่ข้อความ
 
-คุณสามารถนับโทเค็นได้ด้วยวิธีต่อไปนี้
+คุณนับโทเค็นได้ด้วยวิธีต่อไปนี้
 
 - **เรียกใช้ [`count_tokens`](https://ai.google.dev/api/rest/v1/models/countTokens?hl=th) ด้วยอินพุต
   ของคำขอ**  
@@ -53,9 +53,9 @@ Gemini และโมเดล Generative AI อื่นๆ จะประม
   *ทั้งอินพุตและเอาต์พุต*: `total_token_count`  
    นอกจากนี้ยังแสดงผลจำนวนโทเค็นของอินพุตและเอาต์พุตแยกกันด้วย ได้แก่ `prompt_token_count` (โทเค็นอินพุต) และ `candidates_token_count` (โทเค็นเอาต์พุต)
 
-  หากคุณใช้ [โมเดล
-  การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th) ระบบจะแสดงผลโทเค็นที่ใช้ระหว่างกระบวนการคิด
-  ใน `thoughts_token_count` และหากคุณใช้
+  หากคุณใช้โมเดล[การคิด
+  ระบบจะแสดงผลโทเค็นที่ใช้ในระหว่างกระบวนการคิด
+  ใน `thoughts_token_count`](https://ai.google.dev/gemini-api/docs/thinking?hl=th) และหากคุณใช้
   [การแคชบริบท](https://ai.google.dev/gemini-api/docs/caching?hl=th) จำนวนโทเค็นที่แคชไว้จะอยู่ใน `cached_content_token_count`
 
 ### นับโทเค็นข้อความ
@@ -77,12 +77,12 @@ client = genai.Client()
 prompt = "The quick brown fox jumps over the lazy dog."
 
 total_tokens = client.models.count_tokens(
-    model="gemini-3.5-flash", contents=prompt
+    model="gemini-3.6-flash", contents=prompt
 )
 print("total_tokens: ", total_tokens)
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash", contents=prompt
+    model="gemini-3.6-flash", contents=prompt
 )
 
 print(response.usage_metadata)
@@ -98,13 +98,13 @@ const prompt = "The quick brown fox jumps over the lazy dog.";
 
 async function main() {
   const countTokensResponse = await ai.models.countTokens({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: prompt,
   });
   console.log(countTokensResponse.totalTokens);
 
   const generateResponse = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: prompt,
   });
   console.log(generateResponse.usageMetadata);
@@ -123,13 +123,13 @@ client, err := genai.NewClient(ctx, nil)
 contents := []*genai.Content{
   genai.NewContentFromText(prompt, genai.RoleUser),
 }
-countResp, err := client.Models.CountTokens(ctx, "gemini-3.5-flash", contents, nil)
+countResp, err := client.Models.CountTokens(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
   return err
 }
 fmt.Println("total_tokens:", countResp.TotalTokens)
 
-response, err := client.Models.GenerateContent(ctx, "gemini-3.5-flash", contents, nil)
+response, err := client.Models.GenerateContent(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
   log.Fatal(err)
 }
@@ -151,7 +151,7 @@ fmt.Println(string(usageMetadata))
 - จำนวนโทเค็นสำหรับกระบวนการคิด (`thoughts_token_count`)
 - จำนวนโทเค็นทั้งหมดใน *ทั้งอินพุตและเอาต์พุต* (`total_token_count`)
 
-หากต้องการทราบว่าการสนทนาครั้งถัดไปจะมีขนาดเท่าใด คุณต้องเพิ่มการสนทนาครั้งถัดไปลงในประวัติเมื่อเรียกใช้ `count_tokens`
+หากต้องการทราบว่าการสนทนารอบถัดไปจะมีขนาดเท่าใด คุณต้องเพิ่มการสนทนาดังกล่าวลงในประวัติเมื่อเรียกใช้ `count_tokens`
 
 ### Python
 
@@ -162,7 +162,7 @@ from google.genai import types
 client = genai.Client()
 
 chat = client.chats.create(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     history=[
         types.Content(
             role="user", parts=[types.Part(text="Hi my name is Bob")]
@@ -173,7 +173,7 @@ chat = client.chats.create(
 
 print(
     client.models.count_tokens(
-        model="gemini-3.5-flash", contents=chat.get_history()
+        model="gemini-3.6-flash", contents=chat.get_history()
     )
 )
 
@@ -190,7 +190,7 @@ extra = types.UserContent(
     ]
 )
 history = [*chat.get_history(), extra]
-print(client.models.count_tokens(model="gemini-3.5-flash", contents=history))
+print(client.models.count_tokens(model="gemini-3.6-flash", contents=history))
 ```
 
 ### JavaScript
@@ -206,12 +206,12 @@ async function main() {
     { role: "model", parts: [{ text: "Hi Bob!" }] },
   ];
   const chat = ai.chats.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     history: history,
   });
 
   const countTokensResponse = await ai.models.countTokens({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: chat.getHistory(),
   });
   console.log(countTokensResponse.totalTokens);
@@ -227,7 +227,7 @@ async function main() {
   };
   const combinedHistory = [...chat.getHistory(), extraMessage];
   const combinedCountTokensResponse = await ai.models.countTokens({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: combinedHistory,
   });
   console.log(
@@ -249,12 +249,12 @@ history := []*genai.Content{
   {Role: genai.RoleUser, Parts: []*genai.Part({Text: "Hi my name is Bob"})},
   {Role: genai.RoleModel, Parts: []*genai.Part({Text: "Hi Bob!"})},
 }
-chat, err := client.Chats.Create(ctx, "gemini-3.5-flash", nil, history)
+chat, err := client.Chats.Create(ctx, "gemini-3.6-flash", nil, history)
 if err != nil {
   log.Fatal(err)
 }
 
-firstTokenResp, err := client.Models.CountTokens(ctx, "gemini-3.5-flash", chat.History(false), nil)
+firstTokenResp, err := client.Models.CountTokens(ctx, "gemini-3.6-flash", chat.History(false), nil)
 if err != nil {
   log.Fatal(err)
 }
@@ -270,24 +270,23 @@ extra := genai.NewContentFromText("What is the meaning of life?", genai.RoleUser
 hist := chat.History(false)
 hist = append(hist, extra)
 
-secondTokenResp, err := client.Models.CountTokens(ctx, "gemini-3.5-flash", hist, nil)
+secondTokenResp, err := client.Models.CountTokens(ctx, "gemini-3.6-flash", hist, nil)
 if err != nil {
   log.Fatal(err)
 }
 fmt.Println(secondTokenResp.TotalTokens)
 ```
 
-### นับโทเค็นแบบหลายรูปแบบ
+### นับโทเค็นหลายรูปแบบ
 
-อินพุตทั้งหมดของ Gemini API จะได้รับการแยกโทเค็น ซึ่งรวมถึงข้อความ ไฟล์รูปภาพ และรูปแบบอื่นๆ ที่ไม่ใช่ข้อความ โปรดทราบประเด็นสำคัญระดับสูงต่อไปนี้เกี่ยวกับการแยกโทเค็นของอินพุตแบบหลายรูปแบบระหว่างการประมวลผลโดย Gemini API
+อินพุตทั้งหมดของ Gemini API จะได้รับการแยกโทเค็น ซึ่งรวมถึงข้อความ ไฟล์รูปภาพ และรูปแบบอื่นๆ ที่ไม่ใช่ข้อความ โปรดทราบประเด็นสำคัญระดับสูงต่อไปนี้เกี่ยวกับการแยกโทเค็นของอินพุตหลายรูปแบบระหว่างการประมวลผลโดย Gemini API
 
-- อินพุตรูปภาพที่มีขนาดทั้ง 2 ด้าน <=384 พิกเซลจะนับเป็น 258 โทเค็น รูปภาพที่มีขนาดใหญ่กว่าในด้านใดด้านหนึ่งหรือทั้ง 2 ด้านจะถูกครอบตัดและปรับขนาดตามความจำเป็นให้เป็นไทล์ขนาด 768x768 พิกเซล โดยแต่ละไทล์จะนับเป็น 258 โทเค็น
-- ระบบจะแปลงไฟล์วิดีโอและไฟล์เสียงเป็นโทเค็นในอัตราคงที่ต่อไปนี้ วิดีโอที่ 263 โทเค็นต่อวินาที และเสียงที่ 32 โทเค็นต่อวินาที
+- อินพุตรูปภาพที่มีขนาดทั้ง 2 ด้าน <=384 พิกเซลจะนับเป็น 258 โทเค็น ส่วนรูปภาพที่มีขนาดใหญ่กว่าในด้านใดด้านหนึ่งหรือทั้ง 2 ด้านจะได้รับการครอบตัดและปรับขนาดตามความจำเป็นให้เป็นไทล์ขนาด 768x768 พิกเซล ซึ่งแต่ละไทล์จะนับเป็น 258 โทเค็น
+- ระบบจะแปลงไฟล์วิดีโอและเสียงเป็นโทเค็นในอัตราคงที่ต่อไปนี้ วิดีโอที่ 263 โทเค็นต่อวินาที และเสียงที่ 32 โทเค็นต่อวินาที
 
 #### ความละเอียดของสื่อ
 
-[โมเดล Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=th#gemini-3) มีการควบคุมแบบละเอียดในการประมวลผลการมองเห็นแบบ
-หลายรูปแบบด้วยพารามิเตอร์ `media_resolution` พารามิเตอร์ `media_resolution` จะกำหนด**จำนวนโทเค็นสูงสุดที่จัดสรรต่อรูปภาพอินพุตหรือเฟรมวิดีโอ**
+[โมเดล Gemini 3](https://ai.google.dev/gemini-api/docs/models?hl=th#gemini-3) มีการควบคุมการประมวลผลวิชันซิสเต็มหลายรูปแบบอย่างละเอียดด้วยพารามิเตอร์ `media_resolution` พารามิเตอร์ `media_resolution` จะกำหนด**จำนวนโทเค็นสูงสุดที่จัดสรรต่อรูปภาพอินพุตหรือเฟรมวิดีโอ**
 ความละเอียดที่สูงขึ้นจะช่วยเพิ่มความสามารถของโมเดลในการอ่านข้อความขนาดเล็กหรือระบุรายละเอียดเล็กๆ แต่จะเพิ่มการใช้โทเค็นและเวลาในการตอบสนอง
 
 ดูรายละเอียดเพิ่มเติมเกี่ยวกับพารามิเตอร์และวิธีที่พารามิเตอร์นี้อาจส่งผลต่อการคำนวณโทเค็นได้ที่
@@ -316,12 +315,12 @@ your_image_file = client.files.upload(file=media / "organ.jpg")
 
 print(
     client.models.count_tokens(
-        model="gemini-3.5-flash", contents=[prompt, your_image_file]
+        model="gemini-3.6-flash", contents=[prompt, your_image_file]
     )
 )
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash", contents=[prompt, your_image_file]
+    model="gemini-3.6-flash", contents=[prompt, your_image_file]
 )
 print(response.usage_metadata)
 ```
@@ -341,7 +340,7 @@ async function main() {
   });
 
   const countTokensResponse = await ai.models.countTokens({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: createUserContent([
       prompt,
       createPartFromUri(organ.uri, organ.mimeType),
@@ -350,7 +349,7 @@ async function main() {
   console.log(countTokensResponse.totalTokens);
 
   const generateResponse = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: createUserContent([
       prompt,
       createPartFromUri(organ.uri, organ.mimeType),
@@ -370,8 +369,8 @@ client, err := genai.NewClient(ctx, nil)
 
 file, err := client.Files.UploadFromPath(
   ctx, 
-  filepath.Join(getMedia(), "organ.jpg"), 
-  &genai.UploadFileConfig{
+  filepath.Join(getMedia(), "organ.jpg&q&uot;), 
+  genai.UploadFileConfig{
     MIMEType : "image/jpeg",
   },
 )
@@ -386,13 +385,13 @@ contents := []*genai.Content{
   genai.NewContentFromParts(parts, genai.RoleUser),
 }
 
-tokenResp, err := client.Models.CountTokens(ctx, "gemini-3.5-flash", contents, nil)
+tokenResp, err := client.Models.CountTokens(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
   log.Fatal(err)
 }
 fmt.Println("Multimodal image token count:", tokenResp.TotalTokens)
 
-response, err := client.Models.GenerateContent(ctx, "gemini-3.5-flash", contents, nil)
+response, err := client.Models.GenerateContent(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
   log.Fatal(err)
 }
@@ -417,12 +416,12 @@ your_image_file = PIL.Image.open(media / "organ.jpg")
 
 print(
     client.models.count_tokens(
-        model="gemini-3.5-flash", contents=[prompt, your_image_file]
+        model="gemini-3.6-flash", contents=[prompt, your_image_file]
     )
 )
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash", contents=[prompt, your_image_file]
+    model="gemini-3.6-flash", contents=[prompt, your_image_file]
 )
 print(response.usage_metadata)
 ```
@@ -445,13 +444,13 @@ const contents = createUserContent([
 
 async function main() {
   const countTokensResponse = await ai.models.countTokens({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: contents,
   });
   console.log(countTokensResponse.totalTokens);
 
   const generateResponse = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: contents,
   });
   console.log(generateResponse.usageMetadata);
@@ -471,9 +470,9 @@ if err != nil {
     log.Fatalf("Failed to read image file: %v", err)
 }
 parts := []*genai.Part{
-  genai.NewPartFromText("Tell me about this image"),
+  genai.NewPartFromText("Tell me about this image&qu&ot;),
   {
-        InlineData: &genai.Blob{
+        InlineData: genai.Blob{
               MIMEType: "image/jpeg",
               Data:     imageBytes,
         },
@@ -483,24 +482,24 @@ contents := []*genai.Content{
   genai.NewContentFromParts(parts, genai.RoleUser),
 }
 
-tokenResp, err := client.Models.CountTokens(ctx, "gemini-3.5-flash", contents, nil)
+tokenResp, err := client.Models.CountTokens(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
   log.Fatal(err)
 }
 fmt.Println("Multimodal image token count:", tokenResp.TotalTokens)
 
-response, err := client.Models.GenerateContent(ctx, "gemini-3.5-flash", contents, nil)
+response, err := client.Models.GenerateContent(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
   log.Fatal(err)
 }
-usageMetadata, err := json.MarshalIndent(response.UsageMetadata, "", "  ")
+usageMetadata, err := json.MarshalIndent(response.UsageMetadata, "&quot;, "  ")
 if err != nil {
   log.Fatal(err)
 }
 fmt.Println(string(usageMetadata))
 ```
 
-#### ไฟล์วิดีโอหรือไฟล์เสียง
+#### ไฟล์วิดีโอหรือเสียง
 
 ระบบจะแปลงเสียงและวิดีโอแต่ละรายการเป็นโทเค็นในอัตราคงที่ต่อไปนี้
 
@@ -533,12 +532,12 @@ while not your_file.state or your_file.state.name != "ACTIVE":
 
 print(
     client.models.count_tokens(
-        model="gemini-3.5-flash", contents=[prompt, your_file]
+        model="gemini-3.6-flash", contents=[prompt, your_file]
     )
 )
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash", contents=[prompt, your_file]
+    model="gemini-3.6-flash", contents=[prompt, your_file]
 )
 print(response.usage_metadata)
 ```
@@ -565,7 +564,7 @@ async function main() {
   }
 
   const countTokensResponse = await ai.models.countTokens({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: createUserContent([
       prompt,
       createPartFromUri(videoFile.uri, videoFile.mimeType),
@@ -574,7 +573,7 @@ async function main() {
   console.log(countTokensResponse.totalTokens);
 
   const generateResponse = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: createUserContent([
       prompt,
       createPartFromUri(videoFile.uri, videoFile.mimeType),
@@ -594,8 +593,8 @@ client, err := genai.NewClient(ctx, nil)
 
 file, err := client.Files.UploadFromPath(
   ctx,
-  filepath.Join(getMedia(), "Big_Buck_Bunny.mp4"),
-  &genai.UploadFileConfig{
+  filepath.Join(getMedia(), "Big_Buck_Bunny.mp4&&quot;),
+  genai.UploadFileConfig{
     MIMEType : "video/mp4",
   },
 )
@@ -622,12 +621,12 @@ contents := []*genai.Content{
   genai.NewContentFromParts(parts, genai.RoleUser),
 }
 
-tokenResp, err := client.Models.CountTokens(ctx, "gemini-3.5-flash", contents, nil)
+tokenResp, err := client.Models.CountTokens(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
   log.Fatal(err)
 }
 fmt.Println("Multimodal video/audio token count:", tokenResp.TotalTokens)
-response, err := client.Models.GenerateContent(ctx, "gemini-3.5-flash", contents, nil)
+response, err := client.Models.GenerateContent(ctx, "gemini-3.6-flash", contents, nil)
 if err != nil {
   log.Fatal(err)
 }
@@ -640,7 +639,7 @@ fmt.Println(string(usageMetadata))
 
 ### นับโทเค็นการคิด
 
-เมื่อเปิดใช้การคิด ราคาการตอบกลับจะเป็นผลรวมของโทเค็นเอาต์พุตและโทเค็นการคิด คุณสามารถดึงข้อมูลจำนวนโทเค็นการคิดทั้งหมดที่สร้างขึ้นจากช่อง `thoughtsTokenCount` (หรือเทียบเท่าใน SDK)
+เมื่อคุณเปิดใช้การคิด ราคาการตอบกลับจะเป็นผลรวมของโทเค็นเอาต์พุตและโทเค็นการคิด คุณสามารถดึงข้อมูลจำนวนโทเค็นการคิดทั้งหมดที่สร้างขึ้นจากช่อง `thoughtsTokenCount` (หรือเทียบเท่าใน SDK)
 
 ### Python
 
@@ -682,7 +681,7 @@ fmt.Println("Output tokens:", response.UsageMetadata.CandidatesTokenCount)
 from google import genai
 
 client = genai.Client()
-model_info = client.models.get(model="gemini-3.5-flash")
+model_info = client.models.get(model="gemini-3.6-flash")
 print(f"{model_info.input_token_limit=}")
 print(f"{model_info.output_token_limit=}")
 ```
@@ -695,7 +694,7 @@ import { GoogleGenAI } from '@google/genai';
 const ai = new GoogleGenAI({});
 
 async function main() {
-  const modelInfo = await ai.models.get({model: 'gemini-3.5-flash'});
+  const modelInfo = await ai.models.get({model: 'gemini-3.6-flash'});
   console.log(modelInfo.inputTokenLimit);
   console.log(modelInfo.outputTokenLimit);
 }
@@ -711,7 +710,7 @@ client, err := genai.NewClient(ctx, nil)
 if err != nil {
   log.Fatal(err)
 }
-modelInfo, err := client.ModelInfo(ctx, "models/gemini-3.5-flash")
+modelInfo, err := client.ModelInfo(ctx, "models/gemini-3.6-flash")
 if err != nil {
   log.Fatal(err)
 }
@@ -723,8 +722,8 @@ fmt.Println("output token limit:", modelInfo.OutputTokenLimit)
 
 เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-อัปเดตล่าสุด 2026-06-24 UTC
+อัปเดตล่าสุด 2026-07-30 UTC
 
 หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-24 UTC"],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

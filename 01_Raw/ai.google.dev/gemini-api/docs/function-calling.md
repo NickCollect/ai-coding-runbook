@@ -1,38 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=hi
-fetched_at: 2026-07-27T04:38:16.318462+00:00
-title: "Gemini API \u0915\u0940 \u092e\u0926\u0926 \u0938\u0947 \u092b\u093c\u0902\u0915\u094d\u0936\u0928 \u0915\u0949\u0932 \u0915\u0930\u0928\u093e \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=it
+fetched_at: 2026-08-03T04:34:12.901225+00:00
+title: "Chiamate di funzione con l'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-सुझाव भेजें
+Invia feedback
 
-# Gemini API की मदद से फ़ंक्शन कॉल करना
+# Chiamate di funzione con l'API Gemini
 
-फ़ंक्शन कॉलिंग की मदद से, मॉडल को बाहरी टूल और एपीआई से कनेक्ट किया जा सकता है.
-मॉडल, टेक्स्ट में जवाब जनरेट करने के बजाय, यह तय करता है कि किन फ़ंक्शन को कब कॉल करना है. साथ ही, असल दुनिया में होने वाली कार्रवाइयों को पूरा करने के लिए ज़रूरी पैरामीटर उपलब्ध कराता है.
-इससे मॉडल, नैचुरल लैंग्वेज और असल दुनिया में होने वाली कार्रवाइयों और डेटा के बीच पुल की तरह काम कर सकता है. फ़ंक्शन कॉलिंग का इस्तेमाल इन तीन मुख्य तरीकों से किया जा सकता है:
+La chiamata di funzione ti consente di collegare i modelli a strumenti e API esterni.
+Anziché generare risposte di testo, il modello determina quando chiamare funzioni specifiche e fornisce i parametri necessari per eseguire azioni nel mondo reale.
+In questo modo, il modello funge da ponte tra il linguaggio naturale e le azioni e i dati del mondo reale. La chiamata di funzione ha tre casi d'uso principali:
 
-- [**कार्रवाई करना:**](#meeting) एपीआई का इस्तेमाल करके, बाहरी सिस्टम से इंटरैक्ट करना. जैसे, अपॉइंटमेंट शेड्यूल करना, इनवॉइस बनाना, ईमेल भेजना या
-  स्मार्ट होम डिवाइसों को कंट्रोल करना.
-- [**जानकारी बढ़ाना:**](#weather) डेटाबेस, एपीआई, और नॉलेज बेस जैसे बाहरी सोर्स से जानकारी ऐक्सेस करना.
-- [**सुविधाएं बढ़ाना:**](#chart) कैलकुलेशन करने और
-  मॉडल की सीमाओं को बढ़ाने के लिए, बाहरी टूल का इस्तेमाल करना. जैसे, कैलकुलेटर का इस्तेमाल करना या चार्ट बनाना.
+- [**Eseguire azioni:**](#meeting) interagisci con sistemi esterni utilizzando le API, ad esempio
+  pianificando appuntamenti, creando fatture, inviando email o controllando i
+  dispositivi smart home.
+- [**Aumentare le conoscenze:**](#weather) accedi alle informazioni da fonti esterne come
+  database, API e knowledge base.
+- [**Estendere le funzionalità:**](#chart) utilizza strumenti esterni per eseguire calcoli ed
+  estendere i limiti del modello, ad esempio utilizzando una calcolatrice o creando
+  grafici.
 
-इन तरीकों के उदाहरण यहां देखे जा सकते हैं:
+Di seguito puoi sfogliare esempi di questi casi d'uso:
 
-### मीटिंग शेड्यूल करना
+### Pianificare una riunione
 
-इस उदाहरण में, किसी खास समय पर लोगों के साथ मीटिंग शेड्यूल करने वाले फ़ंक्शन को तय करने का तरीका दिखाया गया है. इससे मॉडल, उपयोगकर्ता के अनुरोधों को पार्स कर सकता है और बाहरी सिस्टम में कार्रवाइयां ट्रिगर करने के लिए, स्ट्रक्चर्ड आर्ग्युमेंट दिखा सकता है.
+Questo esempio mostra come definire una funzione che pianifica una riunione con i partecipanti a un'ora specifica, consentendo al modello di analizzare le richieste degli utenti e restituire argomenti strutturati per attivare azioni in sistemi esterni.
 
 ### Python
 
@@ -122,7 +125,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         "parameters": {
           "type": "object",
           "properties": {
-            "attendees": {"type": "array", "items": {"type": "string"}},
+            "attendees": {"type": "array", "items": {"type&quot;: "string"}},
             "date": {"type": "string"},
             "time": {"type": "string"},
             "topic": {"type": "string"}
@@ -133,9 +136,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### मौसम की जानकारी पाना
+### Visualizzare meteo
 
-इस उदाहरण में, किसी जगह के तापमान का डेटा पाने वाले फ़ंक्शन को तय करने का तरीका दिखाया गया है. इससे मॉडल, रीयल-टाइम या बाहरी जानकारी वाली क्वेरी के जवाब देने के लिए, बाहरी एपीआई को कॉल कर सकता है.
+Questo esempio mostra come definire una funzione che recupera i dati sulla temperatura per una località, consentendo al modello di chiamare API esterne per rispondere alle query che richiedono informazioni esterne o in tempo reale.
 
 ### Python
 
@@ -223,7 +226,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
       "name": "get_current_temperature",
       "description": "Gets the current temperature for a given location.",
       "parameters": {
-        "type": "object",
+        "type";: "object",
         "properties": {
           "location": {"type": "string", "description": "The city name"}
         },
@@ -233,9 +236,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### चार्ट बनाना
+### Creare un grafico
 
-इस उदाहरण में, स्ट्रक्चर्ड डेटा से बार चार्ट जनरेट करने वाले फ़ंक्शन को तय करने का तरीका दिखाया गया है. इससे यह पता चलता है कि मॉडल, कैलकुलेशन करने या विज़ुअल ऐसेट बनाने के लिए, बाहरी टूल का इस्तेमाल कैसे कर सकता है:
+Questo esempio mostra come definire una funzione che genera un grafico a barre da dati strutturati, dimostrando come il modello può utilizzare strumenti esterni per eseguire calcoli o creare asset visivi:
 
 ### Python
 
@@ -260,7 +263,7 @@ create_chart_function = {
 client = genai.Client()
 
 interaction = client.interactions.create(
-    model="gemini-3.6-flash",
+    model=";gemini-3.6-flash",
     input="Create a bar chart titled 'Quarterly Sales' with Q1: 50000, Q2: 75000, Q3: 60000.",
     tools=[create_chart_function],
 )
@@ -332,21 +335,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## फ़ंक्शन कॉलिंग की सुविधा कैसे काम करती है
+## Come funziona la chiamata di funzione
 
-![फ़ंक्शन कॉलिंग के बारे में खास जानकारी](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=hi)
+![Panoramica della chiamata di funzione](https://ai.google.dev/static/gemini-api/docs/images/function-calling-overview.png?hl=it)
 
-फ़ंक्शन कॉलिंग में, आपके ऐप्लिकेशन, मॉडल, और बाहरी फ़ंक्शन के बीच स्ट्रक्चर्ड इंटरैक्शन शामिल होता है:
+La chiamata di funzione prevede un'interazione strutturata tra l'applicazione, il modello e le funzioni esterne:
 
-1. **फ़ंक्शन का एलान तय करना:** मॉडल के लिए, फ़ंक्शन का नाम, पैरामीटर, और मकसद तय करना.
-2. **फ़ंक्शन के एलान के साथ एलएलएम को कॉल करना:** मॉडल को, फ़ंक्शन के एलान के साथ उपयोगकर्ता का प्रॉम्प्ट भेजना.
-3. **फ़ंक्शन का कोड चलाना (यह आपकी ज़िम्मेदारी है):** मॉडल, फ़ंक्शन को *नहीं*
-   चलाता. नाम और आर्ग्युमेंट एक्सट्रैक्ट करें और अपने ऐप्लिकेशन में चलाएं.
-4. **उपयोगकर्ता के लिए आसान जवाब बनाना:** उपयोगकर्ता के लिए आसान जवाब पाने के लिए, नतीजे को वापस मॉडल को भेजें.
+1. **Definisci la dichiarazione di funzione:** definisci il nome, i parametri e lo scopo della funzione per il modello.
+2. **Chiama l'LLM con le dichiarazioni di funzione:** invia il prompt dell'utente insieme alle dichiarazioni di funzione al modello.
+3. **Esegui il codice della funzione (di tua responsabilità):** il modello *non*
+   esegue la funzione stessa. Estrai il nome e gli argomenti ed esegui nell'applicazione.
+4. **Crea una risposta intuitiva:** invia il risultato al modello per una risposta finale e intuitiva.
 
-इस प्रोसेस को कई बार दोहराया जा सकता है. मॉडल, एक ही बार में कई फ़ंक्शन को कॉल कर सकता है. इसे [पैरलल फ़ंक्शन कॉलिंग](#parallel_function_calling) कहते हैं. साथ ही, मॉडल एक के बाद एक फ़ंक्शन को भी कॉल कर सकता है. इसे [कंपोज़िशनल फ़ंक्शन कॉलिंग](#compositional_function_calling) कहते हैं.
+Questa procedura può essere ripetuta più volte. Il modello supporta la chiamata di
+più funzioni in un singolo turno ([chiamata di funzione parallela](#parallel_function_calling)) e in sequenza ([chiamata di funzione compositiva](#compositional_function_calling)).
 
-### पहला चरण: फ़ंक्शन का एलान तय करना
+### Passaggio 1: definisci una dichiarazione di funzione
 
 ### Python
 
@@ -364,7 +368,7 @@ set_light_values_declaration = {
             },
             "color_temp": {
                 "type": "string",
-                "enum": ["daylight", "cool", "warm"],
+                "enum": ["daylight", "cool&>quot;, "warm"],
                 "description": "Color temperature",
             },
         },
@@ -372,7 +376,7 @@ set_light_values_declaration = {
     },
 }
 
-def set_light_values(brightness: int, color_temp: str) -> dict:
+def set_light_values(brightness: int, color_temp: str) - dict:
     """Set the brightness and color temperature of a room light."""
     return {"brightness": brightness, "colorTemperature": color_temp}
 ```
@@ -399,7 +403,7 @@ function setLightValues(brightness, color_temp) {
 }
 ```
 
-### दूसरा चरण: फ़ंक्शन के एलान के साथ मॉडल को कॉल करना
+### Passaggio 2: chiama il modello con le dichiarazioni di funzione
 
 ### Python
 
@@ -431,19 +435,19 @@ const interaction = await client.interactions.create({
   tools: [setLightValuesTool],
 });
 
-const fcStep = interaction.steps.find(s => s.type === 'function_call');
+const fcStep = in>teraction.steps.find(s = s.type === 'function_call');
 console.log(fcStep);
 ```
 
-मॉडल, `type`, `name`, और `arguments` के साथ `function_call` चरण दिखाता है:
+Il modello restituisce un passaggio `function_call` con `type`, `name` e `arguments`:
 
 ```
 type='function_call'
 name='set_light_values'
-arguments={'color_temp': 'warm', 'brightness': 25}
+arguments={'color_temp': &#39;warm', 'brightness': 25}
 ```
 
-### तीसरा चरण: फ़ंक्शन चलाना
+### Passaggio 3: esegui la funzione
 
 ### Python
 
@@ -467,7 +471,7 @@ if (fcStep.name === 'set_light_values') {
 }
 ```
 
-### चौथा चरण: नतीजे को वापस मॉडल को भेजना
+### Passaggio 4: invia il risultato al modello
 
 ### Python
 
@@ -507,13 +511,13 @@ const finalInteraction = await client.interactions.create({
 console.log(finalInteraction.output_text);
 ```
 
-### स्टेटलेस फ़ंक्शन कॉलिंग
+### Chiamata di funzione senza stato
 
-क्लाइंट साइड पर बातचीत के इतिहास को मैनेज करके और `store=false` सेट करके, स्टेटलेस मोड में भी फ़ंक्शन कॉलिंग का इस्तेमाल किया जा सकता है.
+Puoi anche utilizzare la chiamata di funzione in modalità senza stato gestendo la cronologia delle conversazioni sul lato client e impostando `store=false`.
 
-स्टेटलेस मोड में, आपको हर अगले अनुरोध के `input` फ़ील्ड में बातचीत का पूरा इतिहास पास करना होगा. इस इतिहास में ये चीज़ें शामिल होनी चाहिए: 1. `user_input` का शुरुआती चरण.
-2. पहले राउंड में मॉडल से जनरेट किए गए सभी चरण. इनमें `thought` और `function_call` चरण शामिल हैं. ये चरण, ठीक उसी तरह शामिल होने चाहिए जैसे मिले थे.
-3. `function_result` चरण. इसमें, आपके चलाए गए फ़ंक्शन का आउटपुट शामिल होता है.
+In modalità senza stato, devi passare la cronologia completa della conversazione nel campo `input` di ogni richiesta successiva. Questa cronologia deve includere: 1. Il passaggio `user_input` iniziale.
+2. Tutti i passaggi generati dal modello restituiti nel turno 1 (inclusi i passaggi `thought` e `function_call`) esattamente come ricevuti.
+3. Il passaggio `function_result` contenente l'output della funzione eseguita.
 
 ### Python
 
@@ -583,9 +587,9 @@ async function main() {
     tools: [setLightValuesTool],
   });
 
-  history.push(...interaction.steps);
+  history.push(...interaction.st>eps);
 
-  const fcStep = interaction.steps.find(s => s.type === 'function_call');
+  const fcStep = interaction.steps.find(s = s.type === 'function_call');
   let result;
   if (fcStep.name === 'set_light_values') {
     result = setLightValues(fcStep.arguments.brightness, fcStep.arguments.color_temp);
@@ -685,25 +689,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## फ़ंक्शन के एलान
+## Dichiarazioni di funzione
 
-फ़ंक्शन का एलान, टूल के तौर पर पास किया जाता है. इसमें ये चीज़ें शामिल होती हैं:
+Una dichiarazione di funzione viene passata come strumento e include:
 
-- `type` (स्ट्रिंग): कस्टम फ़ंक्शन के लिए, इसकी वैल्यू `"function"` होनी चाहिए.
-- `name` (स्ट्रिंग): फ़ंक्शन का यूनीक नाम. इसके लिए, अंडरस्कोर या कैमल केस का इस्तेमाल करें.
-- `description` (स्ट्रिंग): फ़ंक्शन के मकसद की साफ़ तौर पर जानकारी.
-- `parameters` (ऑब्जेक्ट): इनपुट पैरामीटर जिनकी ज़रूरत फ़ंक्शन को होती है.
-  - `type` (स्ट्रिंग): डेटा का सामान्य टाइप. जैसे, `object`.
-  - `properties` (ऑब्जेक्ट): टाइप और ब्यौरे के साथ अलग-अलग पैरामीटर.
-  - `required` (ऐरे): ज़रूरी पैरामीटर के नाम.
+- `type` (stringa): deve essere `"function"` per le funzioni personalizzate.
+- `name` (stringa): nome della funzione univoco (utilizza trattini bassi o camelCase).
+- `description` (stringa): spiegazione chiara dello scopo della funzione.
+- `parameters` (oggetto): parametri di input previsti dalla funzione.
+  - `type` (stringa): tipo di dati generale, ad esempio `object`.
+  - `properties` (oggetto): parametri individuali con tipo e descrizione.
+  - `required` (array): nomi dei parametri obbligatori.
 
-## थिंकिंग मॉडल के साथ फ़ंक्शन कॉलिंग
+## Chiamata di funzione con modelli di pensiero
 
-Gemini 3 सीरीज़ के मॉडल, इंटरनल ["थिंकिंग"](https://ai.google.dev/gemini-api/docs/thinking?hl=hi) प्रोसेस का इस्तेमाल करते हैं. इससे फ़ंक्शन कॉलिंग की सुविधा बेहतर होती है. एसडीके, आपके लिए [थॉट सिग्नेचर](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=hi) को अपने-आप मैनेज करते हैं.
+I modelli della serie Gemini 3 utilizzano un processo di ["pensiero"](https://ai.google.dev/gemini-api/docs/thinking?hl=it) interno che migliora la chiamata di funzione. Gli SDK gestiscono automaticamente le [firme di pensiero](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=it).
 
-## पैरलल फ़ंक्शन कॉलिंग
+## Chiamata di funzione parallela
 
-जब कई फ़ंक्शन एक-दूसरे पर निर्भर न हों, तो उन्हें एक साथ कॉल करें:
+Chiama più funzioni contemporaneamente quando sono indipendenti:
 
 ### Python
 
@@ -784,7 +788,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
           "type": "object",
           "properties": {
             "energetic": {"type": "boolean"},
-            "loud": {"type": "boolean"}
+            "loud": {"type": "boolean&quot;}
           },
           "required": ["energetic", "loud"]
         }
@@ -805,9 +809,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## कंपोज़िशनल फ़ंक्शन कॉलिंग
+## Chiamata di funzione compositiva
 
-मुश्किल अनुरोधों के लिए, एक के बाद एक कई फ़ंक्शन कॉल करें. जैसे, पहले जगह की जानकारी पाएं, फिर उस जगह के मौसम की जानकारी पाएं.
+Collega più chiamate di funzione per richieste complesse (ad es. recupera prima la località, poi le previsioni meteo per quella località).
 
 ### Python
 
@@ -945,7 +949,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
       },
       {
         "type": "function",
-        "name": "set_thermostat_temperature",
+        "name": "set_thermostat_temperature&quot;,
         "description": "Sets the thermostat to a desired temperature.",
         "parameters": {
           "type": "object",
@@ -959,14 +963,14 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## फ़ंक्शन कॉलिंग के मोड
+## Modalità di chiamata di funzione
 
-`generation_config` में `tool_choice` का इस्तेमाल करके, यह कंट्रोल करें कि मॉडल, टूल का इस्तेमाल कैसे करता है:
+Controlla il modo in cui il modello utilizza gli strumenti utilizzando `tool_choice` in `generation_config`:
 
-- `auto` (डिफ़ॉल्ट): मॉडल यह तय करता है कि किसी फ़ंक्शन को कॉल करना है या सीधे जवाब देना है.
-- `any`: मॉडल को हमेशा फ़ंक्शन कॉल का अनुमान लगाना होता है.
-- `none`: मॉडल को फ़ंक्शन कॉल करने की अनुमति नहीं होती.
-- `validated` (प्रीव्यू): मॉडल, फ़ंक्शन स्कीमा के पालन को पक्का करता है.
+- `auto` (predefinito): il modello decide se chiamare una funzione o rispondere direttamente.
+- `any`: il modello è vincolato a prevedere sempre una chiamata di funzione.
+- `none`: al modello è vietato effettuare chiamate di funzione.
+- `validated`: il modello garantisce la conformità dello schema della funzione.
 
 ### Python
 
@@ -975,7 +979,7 @@ generation_config = {
     "tool_choice": {
         "allowed_tools": {
             "mode": "any",
-            "tools": ["get_current_temperature"]
+            "tools&quot;: ["get_current_temperature"]
         }
     }
 }
@@ -988,7 +992,7 @@ const generation_config = {
   tool_choice: {
     allowed_tools: {
       mode: 'any',
-      tools: ['get_current_temperature']
+      tools: ['get_current_temperature';]
     }
   }
 };
@@ -1026,9 +1030,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## एक से ज़्यादा टूल का इस्तेमाल करना
+## Utilizzo di più strumenti
 
-एक ही अनुरोध में, बिल्ट-इन टूल को फ़ंक्शन कॉलिंग के साथ मिलाकर, एक से ज़्यादा टूल चालू किए जा सकते हैं. Gemini 3 मॉडल, Interactions में बिल्ट-इन टूल को फ़ंक्शन कॉलिंग के साथ मिलाकर इस्तेमाल कर सकते हैं. `previous_interaction_id` पास करने पर, बिल्ट-इन टूल का कॉन्टेक्स्ट अपने-आप सर्कुलेट हो जाता है.
+Puoi attivare più strumenti, combinando gli strumenti integrati con la chiamata di funzione nella stessa richiesta. I modelli Gemini 3 possono combinare gli strumenti integrati con la chiamata di funzione immediatamente nelle interazioni. Il passaggio di `previous_interaction_id` fa circolare automaticamente il contesto dello strumento integrato.
 
 ### Python
 
@@ -1177,7 +1181,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         "name": "get_weather",
         "description": "Gets the weather for a given location.",
         "parameters": {
-          "type": "object",
+          &quot;type": "object",
           "properties": {
             "location": {"type": "string", "description": "The city and state, e.g. San Francisco, CA"}
           },
@@ -1196,13 +1200,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## मल्टीमॉडल फ़ंक्शन के जवाब
+## Risposte di funzioni multimodali
 
-Gemini 3 सीरीज़ के मॉडल के लिए, फ़ंक्शन के जवाब के उन हिस्सों में मल्टीमॉडल कॉन्टेंट शामिल किया जा सकता है जिन्हें मॉडल को भेजा जाता है. मॉडल, ज़्यादा जानकारी वाला जवाब देने के लिए, अगले राउंड में इस मल्टीमॉडल कॉन्टेंट को प्रोसेस कर सकता है.
+Per i modelli della serie Gemini 3, puoi includere contenuti multimodali nelle parti di risposta della funzione che invii al modello. Il modello può elaborare questi contenuti multimodali nel turno successivo per produrre una risposta più informata.
 
-फ़ंक्शन के जवाब में मल्टीमॉडल डेटा शामिल करने के लिए, इसे `result` फ़ील्ड के `function_result` चरण में एक या उससे ज़्यादा कॉन्टेंट ब्लॉक के तौर पर शामिल करें. हर कॉन्टेंट ब्लॉक में, उसका `type` तय करना ज़रूरी है. जैसे, `"text"`, `"image"`.
+Per includere dati multimodali in una risposta della funzione, includili come uno o più blocchi di contenuti nel campo `result` del passaggio `function_result`. Ogni blocco di contenuti deve specificare il relativo `type` (ad es. `"text"`, `"image"`).
 
-यहां दिए गए उदाहरण में, इंटरैक्शन के दौरान मॉडल को इमेज डेटा वाला फ़ंक्शन का जवाब भेजने का तरीका दिखाया गया है:
+L'esempio seguente mostra come inviare una risposta della funzione contenente dati immagine al modello in un'interazione:
 
 ### Python
 
@@ -1250,7 +1254,7 @@ import { GoogleGenAI } from "@google/genai";
 
 const client = new GoogleGenAI({});
 
-const toolCall = interaction.steps.find(s => s.type === 'function_call');
+const toolCall = interaction.step>s.find(s = s.type === 'function_call');
 
 const base64ImageData = "BASE64_IMAGE_DATA";
 
@@ -1302,29 +1306,30 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## स्ट्रक्चर्ड आउटपुट के साथ फ़ंक्शन कॉलिंग
+## Chiamata di funzione con output strutturato
 
-Gemini 3 सीरीज़ के मॉडल के लिए, लगातार फ़ॉर्मैट किए गए जवाब पाने के लिए, फ़ंक्शन कॉलिंग को
-[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi) के साथ मिलाएं.
+Per i modelli della serie Gemini 3, combina la chiamata di funzione con
+[l'output strutturato](https://ai.google.dev/gemini-api/docs/structured-output?hl=it) per
+risposte con formattazione coerente.
 
-## रिमोट एमसीपी (मॉडल कॉन्टेक्स्ट प्रोटोकॉल)
+## MCP (Model Context Protocol) remoto
 
-Interactions API, रिमोट एमसीपी सर्वर से कनेक्ट करने की सुविधा देता है. इससे मॉडल को बाहरी टूल और सेवाओं का ऐक्सेस मिलता है. टूल के कॉन्फ़िगरेशन में, सर्वर का `name` और `url` दिया जाता है.
+L'API Interactions supporta la connessione ai server MCP remoti per consentire al modello di accedere a strumenti e servizi esterni. Fornisci il `name` e l'`url` del server nella configurazione degli strumenti.
 
-रिमोट एमसीपी का इस्तेमाल करते समय, इन बातों का ध्यान रखें:
+Quando utilizzi MCP remoto, tieni presente i seguenti vincoli:
 
-- **सर्वर के टाइप**: रिमोट एमसीपी, सिर्फ़ स्ट्रीम किए जा सकने वाले एचटीटीपी सर्वर के साथ काम करता है. एसएसई (सर्वर-सेंट इवेंट) सर्वर मौजूद नहीं हैं.
-- **नामकरण**: एमसीपी सर्वर के नामों में `-` वर्ण शामिल नहीं होना चाहिए. इसके बजाय, `snake_case` में सर्वर के नाम इस्तेमाल करें.
+- **Tipi di server**: MCP remoto funziona solo con i server HTTP in streaming. I server SSE (Server-Sent Events) non sono supportati.
+- **Denominazione**: i nomi dei server MCP non devono includere il carattere `-`. Utilizza invece i nomi dei server `snake_case`.
 
-| फ़ील्ड | टाइप | ज़रूरी है | ब्यौरा |
+| Campo | Tipo | Obbligatorio | Descrizione |
 | --- | --- | --- | --- |
-| `type` | `string` | हां | इसकी वैल्यू `"mcp_server"` होनी चाहिए. |
-| `name` | `string` | नहीं | एमसीपी सर्वर का डिसप्ले नेम. |
-| `url` | `string` | नहीं | एमसीपी सर्वर के एंडपॉइंट का पूरा यूआरएल. |
-| `headers` | `object` | नहीं | की-वैल्यू पेयर, जो सर्वर को हर अनुरोध के साथ एचटीटीपी हेडर के तौर पर भेजे जाते हैं. उदाहरण के लिए, पुष्टि करने वाले टोकन. |
-| `allowed_tools` | `array` | नहीं | यह तय करें कि एजेंट, सर्वर के किन टूल को कॉल कर सकता है. |
+| `type` | `string` | Sì | Deve essere `"mcp_server"`. |
+| `name` | `string` | No | Un nome visualizzato per il server MCP. |
+| `url` | `string` | No | L'URL completo dell'endpoint del server MCP. |
+| `headers` | `object` | No | Coppie chiave-valore inviate come intestazioni HTTP con ogni richiesta al server (ad esempio, token di autenticazione). |
+| `allowed_tools` | `array` | No | Limita gli strumenti del server che l'agente può chiamare. |
 
-### उदाहरण
+### Esempio
 
 ### Python
 
@@ -1340,7 +1345,7 @@ interaction = client.interactions.create(
         {
             "type": "mcp_server",
             "name": "weather",
-            "url": "https://gemini-api-demos.uc.r.appspot.com/mcp",
+            "url";: "https://gemini-api-demos.uc.r.appspot.com/mcp",
         }
     ]
 )
@@ -1378,16 +1383,16 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     "tools": [
         {
             "type": "mcp_server",
-            "name": "weather",
+            &quot;name": "weather",
             "url": "https://gemini-api-demos.uc.r.appspot.com/mcp"
         }
     ]
 }'
 ```
 
-## टूल कॉल स्ट्रीम करना
+## Chiamate allo strumento di streaming
 
-स्ट्रीमिंग के साथ टूल का इस्तेमाल करते समय, मॉडल, स्ट्रीम पर `step.delta` इवेंट की सीरीज़ के तौर पर फ़ंक्शन कॉल जनरेट करता है. `arguments` का इस्तेमाल करके, टूल के आर्ग्युमेंट को आंशिक आर्ग्युमेंट के तौर पर स्ट्रीम किया जा सकता है. इन्हें चलाने से पहले, आपको टूल के पूरे कॉल को फिर से बनाने के लिए, इन डेल्टा को इकट्ठा करना होगा.
+Quando utilizzi gli strumenti con lo streaming, il modello genera chiamate di funzione come sequenza di eventi `step.delta` nello stream. Gli argomenti dello strumento possono essere trasmessi in streaming come argomenti parziali utilizzando `arguments`. Devi aggregare questi delta per ricostruire le chiamate allo strumento complete prima di eseguirle.
 
 ### Python
 
@@ -1514,8 +1519,8 @@ for await (const event of stream) {
         } else if (event.delta.type === 'text') {
             process.stdout.write(event.delta.text);
         }
-    } else if (evType === 'interaction.completed' || evType === 'interaction.complete') {
-        toolCalls = Array.from(currentCalls.values()).map(call => ({
+    } else if (evT>ype === 'interaction.completed' || evType === 'interaction.complete') {
+        toolCalls = Array.from(currentCalls.values()).map(call = ({
             type: 'function_call',
             id: call.id,
             name: call.name,
@@ -1542,7 +1547,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
         "description": "Gets the weather for a given location.",
         "parameters": {
             "type": "object",
-            "properties": {
+            "properties&quot;: {
                 "location": {"type": "string", "description": "The city and state"}
             },
             "required": ["location"]
@@ -1552,42 +1557,42 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
 }'
 ```
 
-## सबसे सही तरीके
+## Best practice
 
-- **फ़ंक्शन और पैरामीटर के ब्यौरे:** साफ़ और सटीक जानकारी दें.
-- **नामकरण:** स्पेस या खास वर्णों के बिना, जानकारी देने वाले नामों का इस्तेमाल करें.
-- **टाइप तय करना:** खास टाइप (इंटीजर, स्ट्रिंग, enum) का इस्तेमाल करें.
-- **टूल चुनना:** ज़्यादा से ज़्यादा 10 से 20 टूल चालू रखें.
-- **प्रॉम्प्ट इंजीनियरिंग:** कॉन्टेक्स्ट और निर्देश दें.
-- **पुष्टि करना:** फ़ंक्शन कॉल चलाने से पहले, उनकी पुष्टि करें.
-- **गड़बड़ी ठीक करना:** गड़बड़ी ठीक करने की मज़बूत सुविधा लागू करें.
-- **सुरक्षा:** बाहरी एपीआई के लिए, पुष्टि करने का सही तरीका इस्तेमाल करें.
+- **Descrizioni di funzioni e parametri:** devono essere chiare e specifiche.
+- **Denominazione:** utilizza nomi descrittivi senza spazi o caratteri speciali.
+- **Digitazione forte:** utilizza tipi specifici (integer, stringa, enum).
+- **Selezione degli strumenti:** mantieni il set attivo a un massimo di 10-20 strumenti.
+- **Ingegneria dei prompt:** fornisci contesto e istruzioni.
+- **Convalida:** convalida le chiamate di funzione prima di eseguirle.
+- **Gestione degli errori:** implementa una gestione degli errori efficace.
+- **Sicurezza:** utilizza l'autenticazione appropriata per le API esterne.
 
-## टूल से पहले टेक्स्ट की ज़रूरी शर्तों को पूरा करने के वैकल्पिक तरीके
+## Soluzioni alternative per i requisiti di testo pre-strumento
 
-**समस्या:** अगर आपके प्रॉम्प्ट के लिए ज़रूरी है कि मॉडल, टूल कॉल करने से ठीक पहले स्ट्रक्चर्ड टेक्स्ट (एक्सएमएल, YAML, JSON वगैरह) जैसे, `<UPDATE>...</UPDATE>` आउटपुट करे, तो कभी-कभी टूल कॉल, `Malformed_Function_Call` के साथ फ़ेल हो सकता है.
+**Problema:** se il prompt richiede al modello di generare testo strutturato (XML, YAML, JSON e così via) (ad es. `<UPDATE>...</UPDATE>`) immediatamente prima di effettuare una chiamata allo strumento, la chiamata allo strumento potrebbe occasionalmente non riuscire con `Malformed_Function_Call`.
 
-**समाधान:** इस समस्या को हल करने के लिए, ये वैकल्पिक तरीके अपनाएं:
+**Soluzioni:** le seguenti soluzioni alternative risolvono questo problema:
 
-- **सुझाया गया तरीका:** मॉडल को निर्देश दें कि वह टूल से पहले के नोट, रॉ टेक्स्ट के बजाय, `update()` फ़ंक्शन कॉल में शामिल करे. इसकी जानकारी नीचे दी गई है.
-- मॉडल को निर्देश दें कि वह नोट को स्ट्रक्चर्ड टेक्स्ट के बजाय, मार्कडाउन हेडर (`# UPDATE`, `## PLAN`) के तौर पर लिखे.
-- मॉडल को टूल कॉल से पहले टेक्स्ट आउटपुट करने के लिए न कहें.
+- **CONSIGLIATO:** indica al modello di inserire le note pre-strumento all'interno di una chiamata di funzione `update()` dedicata anziché nel testo non elaborato (dettagli di seguito).
+- Indica al modello di scrivere le note come intestazioni Markdown (`# UPDATE`, `## PLAN`) anziché come testo strutturato.
+- Non richiedere al modello di generare testo prima delle chiamate allo strumento.
 
-### सुझाया गया वैकल्पिक तरीका: काम के नोट को खास फ़ंक्शन कॉल में रैप करना
+### Soluzione alternativa consigliata: racchiudi le note di lavoro in una chiamata di funzione dedicata
 
-मूल निर्देश के बजाय:
+Anziché l'istruzione originale:
 
 ```
-Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags within `<UPDATE>`.
+Before calling a tool, in every response you MUST first output a single `<UPDATE>` part as specified, don't skip this part or any of required sub-tags with<in `UP>DATE`.
 ```
 
-यह अपडेट किया गया निर्देश इस्तेमाल करें:
+Utilizza questa istruzione aggiornata:
 
 ```
 Before calling any other tool, in every response you MUST first call `update` with all required parameters (previous_step, plan, next_step, external).
 ```
 
-साथ ही, ग्राहक के अनुरोध में, पुराने `<UPDATE>` एक्सएमएल फ़ॉर्मैट के सभी रेफ़रंस अपडेट करें. इसके बाद, अपडेट फ़ंक्शन के लिए, फ़ंक्शन का एलान जोड़ें:
+Aggiorna tutti i riferimenti al vecchio formato XML `<UPDATE>` nella richiesta del cliente. Aggiungi poi la dichiarazione di funzione corrispondente per la funzione di aggiornamento:
 
 ```
 {
@@ -1609,7 +1614,7 @@ Before calling any other tool, in every response you MUST first call `update` wi
         "description": "Brief explanation of the immediate next action according to the plan."
       },
       "external": {
-        "type": "STRING",
+        ";type": "STRING",
         "description": "A short, plain-language note shown to the User about what you are ABOUT TO DO next."
       }
     },
@@ -1623,20 +1628,20 @@ Before calling any other tool, in every response you MUST first call `update` wi
 }
 ```
 
-इसके बाद, मॉडल एक ही चरण में दो कॉल करेगा: `update()` कॉल, जो स्ट्रक्चर्ड एक्सएमएल को बदलता है. दूसरा, वह फ़ंक्शन कॉल जिसे मॉडल करना चाहता है.
+Il modello effettuerà quindi due chiamate nello stesso passaggio: la chiamata `update()` che sostituisce l'XML strutturato e la chiamata di funzione effettiva che vuole effettuare.
 
-## नोट और सीमाएं
+## Note e limitazioni
 
-- OpenAPI स्कीमा के सिर्फ़ [सबसेट का इस्तेमाल किया जा सकता है](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=hi#FunctionDeclaration).
-- `any` मोड के लिए, एपीआई बहुत बड़े या डीपली नेस्ट किए गए स्कीमा को अस्वीकार कर सकता है.
-- Python में, पैरामीटर के टाइप सीमित हैं.
+- È supportato solo un [sottoinsieme dello schema OpenAPI](https://ai.google.dev/api/rest/v1beta/cachedContents?hl=it#FunctionDeclaration).
+- Per la modalità `any`, l'API potrebbe rifiutare schemi molto grandi o con nidificazione profonda.
+- I tipi di parametri supportati in Python sono limitati.
 
-सुझाव भेजें
+Invia feedback
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-आखिरी बार 2026-07-21 (UTC) को अपडेट किया गया.
+Ultimo aggiornamento 2026-07-30 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Vuoi dirci altro?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-21 (UTC) को अपडेट किया गया."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

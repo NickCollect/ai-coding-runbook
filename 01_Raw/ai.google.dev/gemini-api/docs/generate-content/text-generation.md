@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=pt-BR
-fetched_at: 2026-07-27T04:36:15.015616+00:00
-title: "Gera\u00e7\u00e3o de texto \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ja
+fetched_at: 2026-08-03T04:29:40.404186+00:00
+title: "\u30c6\u30ad\u30b9\u30c8\u751f\u6210 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envie comentários
+フィードバックを送信
 
-# Geração de texto
+# テキスト生成
 
-A API Gemini pode gerar saída de texto com base em entradas de texto, imagens, vídeo e áudio.
+Gemini API は、テキスト、画像、動画、音声の入力からテキスト出力を生成できます。
 
-Este é um exemplo básico:
+基本的な例を以下に示します。
 
 ### Python
 
@@ -31,7 +31,7 @@ from google import genai
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents="How does AI work?"
 )
 print(response.text)
@@ -46,7 +46,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: "How does AI work?",
   });
   console.log(response.text);
@@ -77,7 +77,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.5-flash",
+      "gemini-3.6-flash",
       genai.Text("Explain how AI works in a few words"),
       nil,
   )
@@ -98,7 +98,7 @@ public class GenerateContentWithTextInput {
     Client client = new Client();
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3.5-flash", "How does AI work?", null);
+        client.models.generateContent("gemini-3.6-flash", "How does AI work?", null);
 
     System.out.println(response.text());
   }
@@ -108,7 +108,7 @@ public class GenerateContentWithTextInput {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -143,7 +143,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -160,13 +160,11 @@ function main() {
 }
 ```
 
-## Pensando com o Gemini
+## Gemini で考える
 
-Os modelos do Gemini geralmente têm o ["pensamento"](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br) ativado por padrão
-o que permite que o modelo raciocine antes de responder a uma solicitação.
+Gemini モデルでは、多くの場合、デフォルトで[「思考」](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)が有効になっています。これにより、モデルはリクエストに応答する前に推論を行うことができます。
 
-Cada modelo oferece suporte a diferentes configurações de pensamento, o que permite controlar o custo, a latência e a inteligência. Para mais detalhes, consulte o
-[guia de pensamento](https://ai.google.dev/gemini-api/docs/thinking?hl=pt-br#set-budget).
+各モデルは、費用、レイテンシ、インテリジェンスを制御できるさまざまな思考構成をサポートしています。詳細については、[思考ガイド](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#set-budget)をご覧ください。
 
 ### Python
 
@@ -177,7 +175,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents="How does AI work?",
     config=types.GenerateContentConfig(
         thinking_config=types.ThinkingConfig(thinking_level="low")
@@ -195,7 +193,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: "How does AI work?",
     config: {
       thinkingConfig: {
@@ -233,7 +231,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.5-flash",
+      "gemini-3.6-flash",
       genai.Text("How does AI work?"),
       &genai.GenerateContentConfig{
         ThinkingConfig: &genai.ThinkingConfig{
@@ -266,7 +264,7 @@ public class GenerateContentWithThinkingConfig {
             .build();
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3.5-flash", "How does AI work?", config);
+        client.models.generateContent("gemini-3.6-flash", "How does AI work?", config);
 
     System.out.println(response.text());
   }
@@ -276,7 +274,7 @@ public class GenerateContentWithThinkingConfig {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -321,7 +319,7 @@ function main() {
     }
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -338,11 +336,9 @@ function main() {
 }
 ```
 
-## Instruções do sistema e outras configurações
+## システム指示とその他の設定
 
-Você pode orientar o comportamento dos modelos do Gemini com instruções do sistema. Para fazer isso,
-transmita um [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerationConfig)
-objeto.
+システム指示を使用して Gemini モデルの動作を制御できます。そのためには、[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを渡します。
 
 ### Python
 
@@ -353,7 +349,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     config=types.GenerateContentConfig(
         system_instruction="You are a cat. Your name is Neko."),
     contents="Hello there"
@@ -371,7 +367,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: "Hello there",
     config: {
       systemInstruction: "You are a cat. Your name is Neko.",
@@ -409,7 +405,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.5-flash",
+      "gemini-3.6-flash",
       genai.Text("Hello there"),
       config,
   )
@@ -439,7 +435,7 @@ public class GenerateContentWithSystemInstruction {
             .build();
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3.5-flash", "Hello there", config);
+        client.models.generateContent("gemini-3.6-flash", "Hello there", config);
 
     System.out.println(response.text());
   }
@@ -449,7 +445,7 @@ public class GenerateContentWithSystemInstruction {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -d '{
@@ -497,7 +493,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -514,9 +510,7 @@ function main() {
 }
 ```
 
-O [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerationConfig)
-objeto também permite substituir parâmetros de geração padrão, como
-[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerationConfig).
+[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを使用すると、[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) などのデフォルトの生成パラメータをオーバーライドすることもできます。
 
 ### Python
 
@@ -527,7 +521,7 @@ from google.genai import types
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents=["Explain how AI works"],
     config=types.GenerateContentConfig(
         max_output_tokens=1000
@@ -545,7 +539,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: "Explain how AI works",
     config: {
       maxOutputTokens: 1000,
@@ -584,7 +578,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
     ctx,
-    "gemini-3.5-flash",
+    "gemini-3.6-flash",
     genai.Text("What is the average size of a swallow?"),
     config,
   )
@@ -608,7 +602,7 @@ public class GenerateContentWithConfig {
     GenerateContentConfig config = GenerateContentConfig.builder().maxOutputTokens(1000).build();
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3.5-flash", "Explain how AI works", config);
+        client.models.generateContent("gemini-3.6-flash", "Explain how AI works", config);
 
     System.out.println(response.text());
   }
@@ -618,7 +612,7 @@ public class GenerateContentWithConfig {
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent \
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -665,7 +659,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -682,13 +676,11 @@ function main() {
 }
 ```
 
-Consulte [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerationConfig)
-na referência da API para conferir uma lista completa de parâmetros configuráveis e as
-descrições deles.
+構成可能なパラメータとその説明の完全なリストについては、API リファレンスの [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) をご覧ください。
 
-## Entradas multimodais
+## マルチモーダル入力
 
-A API Gemini oferece suporte a entradas multimodais, permitindo combinar texto com arquivos de mídia. O exemplo a seguir demonstra como fornecer uma imagem:
+Gemini API はマルチモーダル入力をサポートしているため、テキストとメディア ファイルを組み合わせることができます。次の例は、画像を提供する方法を示しています。
 
 ### Python
 
@@ -700,7 +692,7 @@ client = genai.Client()
 
 image = Image.open("/path/to/organ.png")
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents=[image, "Tell me about this instrument"]
 )
 print(response.text)
@@ -722,7 +714,7 @@ async function main() {
     file: "/path/to/organ.png",
   });
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: [
       createUserContent([
         "Tell me about this instrument",
@@ -775,7 +767,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.5-flash",
+      "gemini-3.6-flash",
       contents,
       nil,
   )
@@ -803,7 +795,7 @@ public class GenerateContentWithMultiModalInputs {
           Part.fromUri("/path/to/organ.jpg", "image/jpeg"));
 
     GenerateContentResponse response =
-        client.models.generateContent("gemini-3.5-flash", content, null);
+        client.models.generateContent("gemini-3.6-flash", content, null);
 
     System.out.println(response.text());
   }
@@ -842,7 +834,7 @@ cat > "$TEMP_JSON" << EOF
 }
 EOF
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -870,7 +862,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -896,17 +888,13 @@ function getImageData(url) {
 }
 ```
 
-Para métodos alternativos de fornecimento de imagens e processamento de imagens mais avançado,
-consulte nosso [guia de compreensão de imagens](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pt-br).
-A API também oferece suporte a [entradas e compreensão de](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br) [documentos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-br), [vídeos](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br) e
-áudios.
+画像を提供する別の方法や、より高度な画像処理については、[画像理解ガイド](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)をご覧ください。この API は、[ドキュメント](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)の入力と理解もサポートしています。
 
-## Respostas de streaming
+## ストリーミング レスポンス
 
-Por padrão, o modelo retorna uma resposta somente após a conclusão de todo o processo de geração.
+デフォルトでは、モデルは生成プロセス全体が完了した後にのみレスポンスを返します。
 
-Para interações mais fluidas, use o streaming para receber [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerateContentResponse) instâncias de forma incremental
-à medida que são geradas.
+よりスムーズなインタラクションを実現するには、ストリーミングを使用して、[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) インスタンスが生成されるたびに増分で受信します。
 
 ### Python
 
@@ -916,7 +904,7 @@ from google import genai
 client = genai.Client()
 
 response = client.models.generate_content_stream(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents=["Explain how AI works"]
 )
 for chunk in response:
@@ -932,7 +920,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const response = await ai.models.generateContentStream({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: "Explain how AI works",
   });
 
@@ -966,7 +954,7 @@ func main() {
 
   stream := client.Models.GenerateContentStream(
       ctx,
-      "gemini-3.5-flash",
+      "gemini-3.6-flash",
       genai.Text("Write a story about a magic backpack."),
       nil,
   )
@@ -992,7 +980,7 @@ public class GenerateContentStream {
 
     ResponseStream<GenerateContentResponse> responseStream =
       client.models.generateContentStream(
-          "gemini-3.5-flash", "Write a story about a magic backpack.", null);
+          "gemini-3.6-flash", "Write a story about a magic backpack.", null);
 
     for (GenerateContentResponse res : responseStream) {
       System.out.print(res.text());
@@ -1008,7 +996,7 @@ public class GenerateContentStream {
 ### REST
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent?alt=sse" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:streamGenerateContent?alt=sse" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   --no-buffer \
@@ -1043,7 +1031,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:streamGenerateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -1060,9 +1048,9 @@ function main() {
 }
 ```
 
-## Conversas com várias interações (chat)
+## マルチターンの会話（チャット）
 
-Nossos SDKs oferecem funcionalidade para coletar várias rodadas de comandos e respostas em um chat, oferecendo uma maneira fácil de acompanhar o histórico da conversa.
+SDK には、複数のプロンプトとレスポンスをチャットに収集する機能が用意されています。これにより、会話の履歴を簡単に追跡できます。
 
 ### Python
 
@@ -1070,7 +1058,7 @@ Nossos SDKs oferecem funcionalidade para coletar várias rodadas de comandos e r
 from google import genai
 
 client = genai.Client()
-chat = client.chats.create(model="gemini-3.5-flash")
+chat = client.chats.create(model="gemini-3.6-flash")
 
 response = chat.send_message("I have 2 dogs in my house.")
 print(response.text)
@@ -1092,7 +1080,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const chat = ai.chats.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     history: [
       {
         role: "user",
@@ -1144,7 +1132,7 @@ func main() {
       genai.NewContentFromText("Great to meet you. What would you like to know?", genai.RoleModel),
   }
 
-  chat, _ := client.Chats.Create(ctx, "gemini-3.5-flash", nil, history)
+  chat, _ := client.Chats.Create(ctx, "gemini-3.6-flash", nil, history)
   res, _ := chat.SendMessage(ctx, genai.Part{Text: "How many paws are in my house?"})
 
   if len(res.Candidates) > 0 {
@@ -1165,7 +1153,7 @@ public class MultiTurnConversation {
   public static void main(String[] args) {
 
     Client client = new Client();
-    Chat chatSession = client.chats.create("gemini-3.5-flash");
+    Chat chatSession = client.chats.create("gemini-3.6-flash");
 
     GenerateContentResponse response =
         chatSession.sendMessage("I have 2 dogs in my house.");
@@ -1188,7 +1176,7 @@ public class MultiTurnConversation {
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent \
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -1253,7 +1241,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -1270,7 +1258,7 @@ function main() {
 }
 ```
 
-O streaming também pode ser usado para conversas com várias interações.
+ストリーミングはマルチターンの会話にも使用できます。
 
 ### Python
 
@@ -1278,7 +1266,7 @@ O streaming também pode ser usado para conversas com várias interações.
 from google import genai
 
 client = genai.Client()
-chat = client.chats.create(model="gemini-3.5-flash")
+chat = client.chats.create(model="gemini-3.6-flash")
 
 response = chat.send_message_stream("I have 2 dogs in my house.")
 for chunk in response:
@@ -1302,7 +1290,7 @@ const ai = new GoogleGenAI({});
 
 async function main() {
   const chat = ai.chats.create({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     history: [
       {
         role: "user",
@@ -1360,7 +1348,7 @@ func main() {
       genai.NewContentFromText("Great to meet you. What would you like to know?", genai.RoleModel),
   }
 
-  chat, _ := client.Chats.Create(ctx, "gemini-3.5-flash", nil, history)
+  chat, _ := client.Chats.Create(ctx, "gemini-3.6-flash", nil, history)
   stream := chat.SendMessageStream(ctx, genai.Part{Text: "How many paws are in my house?"})
 
   for chunk, _ := range stream {
@@ -1382,7 +1370,7 @@ public class MultiTurnConversationWithStreaming {
   public static void main(String[] args) {
 
     Client client = new Client();
-    Chat chatSession = client.chats.create("gemini-3.5-flash");
+    Chat chatSession = client.chats.create("gemini-3.6-flash");
 
     ResponseStream<GenerateContentResponse> responseStream =
         chatSession.sendMessageStream("I have 2 dogs in my house.", null);
@@ -1407,7 +1395,7 @@ public class MultiTurnConversationWithStreaming {
 ### REST
 
 ```
-curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent?alt=sse \
+curl https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:streamGenerateContent?alt=sse \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -1472,7 +1460,7 @@ function main() {
     ],
   };
 
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:streamGenerateContent';
+  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:streamGenerateContent';
   const options = {
     method: 'POST',
     contentType: 'application/json',
@@ -1489,49 +1477,40 @@ function main() {
 }
 ```
 
-## Dicas de comandos
+## プロンプトに関するヒント
 
-Consulte nosso [guia de engenharia de comandos](https://ai.google.dev/gemini/docs/prompting-strategies?hl=pt-br) para
-sugestões sobre como aproveitar ao máximo o Gemini.
+Gemini を最大限に活用するための提案については、[プロンプト エンジニアリング ガイド](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ja)をご覧ください。
 
-## A seguir
+## 次のステップ
 
-- Teste o [Gemini no Google AI Studio](https://aistudio.google.com?hl=pt-br).
-- Faça experimentos com [saídas estruturadas](https://ai.google.dev/gemini-api/docs/structured-output?hl=pt-br) para
-  respostas semelhantes a JSON.
-- Conheça os recursos de compreensão de [imagens](https://ai.google.dev/gemini-api/docs/image-understanding?hl=pt-br),
-  [vídeos](https://ai.google.dev/gemini-api/docs/video-understanding?hl=pt-br), [áudios](https://ai.google.dev/gemini-api/docs/audio?hl=pt-br)
-  e [documentos](https://ai.google.dev/gemini-api/docs/document-processing?hl=pt-br) do Gemini.
-- Saiba mais sobre estratégias de comando de arquivos multimodais
-  .
+- [Google AI Studio で Gemini](https://aistudio.google.com?hl=ja) を試す。
+- JSON のようなレスポンスの[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を試す。
+- Gemini の[画像](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)、[ドキュメントの理解機能について説明します。](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)
+- マルチモーダル [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)について学習する。
 
-## Geração de conteúdo
+## コンテンツの生成
 
-Esse é o endpoint central para enviar comandos ao modelo. Há dois endpoints para gerar conteúdo. A principal diferença é como você recebe a resposta:
+これは、モデルにプロンプトを送信するための中央エンドポイントです。コンテンツを生成するエンドポイントは 2 つあります。主な違いは、レスポンスの受信方法です。
 
-- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=pt-br#method:-models.generatecontent)
-  (REST)**: recebe uma solicitação e fornece uma única resposta depois que o modelo termina toda a geração.
-- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=pt-br#method:-models.streamgeneratecontent)
-  (SSE)**: recebe a mesma solicitação, mas o modelo transmite blocos da resposta à medida que são gerados. Isso oferece uma melhor experiência do usuário para aplicativos interativos, porque permite mostrar resultados parciais imediatamente.
+- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=ja#method:-models.generatecontent)
+  (REST)**: リクエストを受信し、モデルが生成全体を完了した後に単一のレスポンスを提供します。
+- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=ja#method:-models.streamgeneratecontent)
+  (SSE)**: まったく同じリクエストを受信しますが、モデルはレスポンスのチャンクを生成するたびにストリーミングで返します。これにより、部分的な結果をすぐに表示できるため、インタラクティブ アプリケーションのユーザー エクスペリエンスが向上します。
 
-### Estrutura do corpo da solicitação
+### リクエスト本文の構造
 
-O [corpo da solicitação](https://ai.google.dev/api/generate-content?hl=pt-br#request-body) é um objeto JSON que é
-**idêntico** para os modos padrão e de streaming e é criado com alguns objetos principais:
+[リクエスト本文](https://ai.google.dev/api/generate-content?hl=ja#request-body)は、標準モードとストリーミング モードの両方で**同じ** JSON オブジェクトであり、いくつかのコア オブジェクトから構築されます。
 
-- [`Content`](https://ai.google.dev/api/caching?hl=pt-br#Content) objeto: representa uma única interação em uma
-  conversa.
-- [`Part`](https://ai.google.dev/api/caching?hl=pt-br#Part) objeto: um pedaço de dados em uma interação `Content`
-  (como texto ou uma imagem).
-- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=pt-br#Blob)): um contêiner para bytes de mídia brutos
-  e o tipo MIME deles.
+- [`Content`](https://ai.google.dev/api/caching?hl=ja#Content) オブジェクト: 会話の 1 ターンを表します。
+- [`Part`](https://ai.google.dev/api/caching?hl=ja#Part) オブジェクト: `Content` ターン内のデータ（テキストや画像など）。
+- `inline_data`（[`Blob`](https://ai.google.dev/api/caching?hl=ja#Blob)）: 未加工のメディア バイトとその MIME タイプのコンテナ。
 
-No nível mais alto, o corpo da solicitação contém um objeto `contents`, que é uma lista de objetos `Content`, cada um representando interações na conversa. Na maioria dos casos, para a geração de texto básica, você terá um único objeto `Content`, mas, se quiser manter o histórico da conversa, poderá usar vários objetos `Content`.
+最上位のレベルでは、リクエストの本文に `contents` オブジェクトが含まれます。これは `Content` オブジェクトのリストで、それぞれが会話のターンを表します。ほとんどの場合、基本的なテキスト生成では 1 つの `Content` オブジェクトを使用しますが、会話履歴を保持する場合は複数の `Content` オブジェクトを使用できます。
 
-O exemplo a seguir mostra um corpo de solicitação `generateContent` típico:
+一般的な `generateContent` リクエスト本文を次に示します。
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -1553,27 +1532,23 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Estrutura do corpo da resposta
+### レスポンスの本文の構造
 
-O [corpo da resposta](https://ai.google.dev/api/generate-content?hl=pt-br#response-body) é semelhante para ambos
-os modos de streaming e padrão, exceto pelo seguinte:
+[レスポンス本文](https://ai.google.dev/api/generate-content?hl=ja#response-body)は、ストリーミング モードと標準モードでほぼ同じですが、次の点が異なります。
 
-- Modo padrão: o corpo da resposta contém uma instância de
-  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerateContentResponse).
-- Modo de streaming: o corpo da resposta contém um fluxo de
-  [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=pt-br#v1beta.GenerateContentResponse)
-  instâncias.
+- 標準モード: レスポンスの本文には [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) のインスタンスが含まれます。
+- ストリーミング モード: レスポンスの本文には [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) インスタンスのストリームが含まれます。
 
-Em um nível alto, o corpo da resposta contém um objeto `candidates`, que é uma lista de objetos `Candidate`. O objeto `Candidate` contém um objeto `Content` que tem a resposta gerada retornada do modelo.
+レスポンスの本文には、`Candidate` オブジェクトのリストである `candidates` オブジェクトが含まれています。`Candidate` オブジェクトには、モデルから返された生成されたレスポンスを含む `Content` オブジェクトが含まれています。
 
-## Exemplos de API REST
+## REST API の例
 
-### Comando multimodal (texto e imagem)
+### マルチモーダル プロンプト（テキストと画像）
 
-Para fornecer texto e uma imagem em um comando, a matriz `parts` precisa conter dois objetos `Part`: um para o texto e outro para a imagem `inline_data`.
+プロンプトでテキストと画像の両方を指定するには、`parts` 配列に 2 つの `Part` オブジェクトを含める必要があります。1 つはテキスト用、もう 1 つは画像 `inline_data` 用です。
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -X POST \
@@ -1592,12 +1567,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Conversas com várias interações (chat)
+### マルチターンの会話（チャット）
 
-Para criar uma conversa com várias interações, defina a matriz `contents` com vários objetos `Content`. A API vai usar todo esse histórico como contexto para a próxima resposta. O `role` de cada objeto `Content` precisa alternar entre `user` e `model`.
+複数のターンを含む会話を構築するには、複数の `Content` オブジェクトを含む `contents` 配列を定義します。API は、この履歴全体を次のレスポンスのコンテキストとして使用します。各 `Content` オブジェクトの `role` は、`user` と `model` の間で交互に切り替わる必要があります。
 
 ```
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -1625,26 +1600,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }'
 ```
 
-### Pontos principais
+### 重要なポイント
 
-- `Content` é o envelope: é o contêiner de nível superior para uma interação de mensagem, seja do usuário ou do modelo.
-- `Part` permite a multimodalidade: use vários objetos `Part` em um único objeto `Content` para combinar diferentes tipos de dados (texto, imagem, URI de vídeo etc.).
-- Escolha seu método de dados:
-  - Para mídias pequenas e incorporadas diretamente (como a maioria das imagens), use um `Part` com `inline_data`.
-  - Para arquivos maiores ou que você quer reutilizar em várias solicitações, use a API File para fazer upload do arquivo e referenciá-lo com uma parte `file_data`.
-- Gerenciar o histórico da conversa: para aplicativos de chat que usam a API REST, crie
-  a matriz `contents` anexando objetos `Content` para cada interação,
-  alternando entre as funções `"user"` e `"model"`. Se você estiver usando um SDK, consulte a documentação dele para conferir a maneira recomendada de gerenciar o histórico da conversa.
+- `Content` はエンベロープです。ユーザーまたはモデルからのメッセージ ターンに対する最上位のコンテナです。
+- `Part` でマルチモダリティを有効にする: 1 つの `Content` オブジェクト内で複数の `Part` オブジェクトを使用して、さまざまな種類のデータ（テキスト、画像、動画 URI など）を組み合わせます。
+- データ方法を選択します。
+  - 直接埋め込まれた小さなメディア（ほとんどの画像など）の場合は、`inline_data` を含む `Part` を使用します。
+  - 大きなファイルやリクエスト間で再利用するファイルの場合は、File API を使用してファイルをアップロードし、`file_data` 部分で参照します。
+- 会話履歴を管理する: REST API を使用するチャット アプリケーションの場合は、各ターンの `Content` オブジェクトを追加して `contents` 配列を作成し、`"user"` ロールと `"model"` ロールを交互に指定します。SDK を使用している場合は、会話履歴を管理するおすすめの方法について SDK のドキュメントをご覧ください。
 
-## Exemplos de resposta
+## レスポンスの例
 
-Os exemplos a seguir mostram como esses componentes se unem para diferentes tipos de solicitações.
+次の例は、さまざまなタイプのリクエストでこれらのコンポーネントがどのように連携するかを示しています。
 
-### Resposta somente em texto
+### テキストのみのレスポンス
 
-Uma resposta de texto padrão consiste em uma matriz `candidates` com um ou mais objetos `content` que contêm a resposta do modelo.
+デフォルトのテキスト レスポンスは、モデルのレスポンスを含む 1 つ以上の `content` オブジェクトを含む `candidates` 配列で構成されます。
 
-Confira a seguir um exemplo de resposta **padrão**:
+**標準**レスポンスの例を次に示します。
 
 ```
 {
@@ -1665,7 +1638,7 @@ Confira a seguir um exemplo de resposta **padrão**:
 }
 ```
 
-A seguir, há uma série de respostas de **streaming**. Cada resposta contém um `responseId` que vincula a resposta completa:
+以下は、一連の**ストリーミング** レスポンスです。各レスポンスには、完全なレスポンスをまとめる `responseId` が含まれています。
 
 ```
 {
@@ -1685,7 +1658,7 @@ A seguir, há uma série de respostas de **streaming**. Cada resposta contém um
   "usageMetadata": {
     "promptTokenCount": ...
   },
-  "modelVersion": "gemini-3.5-flash",
+  "modelVersion": "gemini-3.6-flash",
   "responseId": "mAitaLmkHPPlz7IPvtfUqQ4"
 }
 
@@ -1708,49 +1681,42 @@ A seguir, há uma série de respostas de **streaming**. Cada resposta contém um
   "usageMetadata": {
     "promptTokenCount": ...
   }
-  "modelVersion": "gemini-3.5-flash",
+  "modelVersion": "gemini-3.6-flash",
   "responseId": "mAitaLmkHPPlz7IPvtfUqQ4"
 }
 ```
 
-## API Live (BidiGenerateContent) WebSockets
+## Live API（BidiGenerateContent）WebSockets API
 
-A API Live oferece uma API com estado baseada em WebSocket para streaming bidirecional, permitindo casos de uso de streaming em tempo real. Consulte o
-[guia da API Live](https://ai.google.dev/gemini-api/docs/live?hl=pt-br) e a [referência da API Live](https://ai.google.dev/api/live?hl=pt-br)
-para mais detalhes.
+Live API は、双方向ストリーミング用のステートフル WebSocket ベースの API を提供し、リアルタイム ストリーミングのユースケースを可能にします。詳しくは、[Live API ガイド](https://ai.google.dev/gemini-api/docs/live?hl=ja)と [Live API リファレンス](https://ai.google.dev/api/live?hl=ja)をご覧ください。
 
-## Modelos especializados
+## 特殊モデル
 
-Além da família de modelos do Gemini, a API Gemini oferece endpoints para
-modelos especializados, como o [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=pt-br),
-[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=pt-br) e
-[modelos de incorporação](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br). Consulte esses guias na seção Modelos.
+Gemini API は、Gemini モデル ファミリーに加えて、[Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja)、[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=ja)、[エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja) モデルなどの特殊なモデルのエンドポイントも提供します。これらのガイドは、[モデル] セクションで確認できます。
 
-## APIs da plataforma
+## プラットフォーム API
 
-O restante dos endpoints permite outros recursos para uso com os endpoints principais descritos até agora. Consulte os tópicos
-[Modo em lote](https://ai.google.dev/gemini-api/docs/batch-mode?hl=pt-br) e
-[API File](https://ai.google.dev/gemini-api/docs/files?hl=pt-br) na seção Guias para saber mais.
+残りのエンドポイントは、これまで説明したメイン エンドポイントで使用する追加機能を有効にします。詳しくは、ガイド セクションの[バッチモード](https://ai.google.dev/gemini-api/docs/batch-mode?hl=ja)と[ファイル API](https://ai.google.dev/gemini-api/docs/files?hl=ja)をご覧ください。
 
-## A seguir
+## 次のステップ
 
-Se você está começando, consulte os guias a seguir, que vão ajudar a entender o modelo de programação da API Gemini:
+初めてご利用になる場合は、次のガイドをご覧ください。Gemini API プログラミング モデルについて理解を深めることができます。
 
-- [Guia de introdução à API Gemini](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=pt-br)
-- [Guia do modelo do Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pt-br)
+- [Gemini API スタートガイド](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [Gemini モデルガイド](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja)
 
-Você também pode consultar os guias de recursos, que apresentam diferentes recursos da API Gemini e fornecem exemplos de código:
+さまざまな Gemini API の機能を紹介し、コード例を提供する機能ガイドもご覧ください。
 
-- [Geração de texto](https://ai.google.dev/gemini-api/docs/text-generation?hl=pt-br)
-- [Cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br)
-- [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings?hl=pt-br)
+- [テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja)
+- [コンテキストのキャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)
+- [エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja)
 
-Envie comentários
+フィードバックを送信
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Última atualização 2026-07-08 UTC.
+最終更新日 2026-07-30 UTC。
 
-Quer enviar seu feedback?
+ご意見をお聞かせください
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-07-08 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

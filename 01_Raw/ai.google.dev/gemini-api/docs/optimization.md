@@ -1,94 +1,91 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=pt-BR
-fetched_at: 2026-07-27T04:47:48.063149+00:00
-title: "Otimiza\u00e7\u00e3o e infer\u00eancia da API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/optimization?hl=he
+fetched_at: 2026-08-03T04:39:14.165216+00:00
+title: "\u05d0\u05d5\u05e4\u05d8\u05d9\u05de\u05d9\u05d6\u05e6\u05d9\u05d4 \u05d5\u05d4\u05e1\u05e7\u05ea \u05de\u05e1\u05e7\u05e0\u05d5\u05ea \u05d1-Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Envie comentários
+שליחת משוב
 
-# Otimização e inferência da API Gemini
+# אופטימיזציה והסקת מסקנות ב-Gemini API
 
-A API Gemini oferece vários mecanismos de otimização para ajudar você a equilibrar velocidade, custo e confiabilidade com base nas necessidades específicas da carga de trabalho.
-Se você estiver criando bots conversacionais em tempo real ou executando pipelines de processamento de dados off-line pesados, escolher o paradigma certo pode reduzir significativamente os custos ou aumentar a performance.
+‫Gemini API מציע מגוון מנגנוני אופטימיזציה שיעזרו לכם לאזן בין מהירות, עלות ומהימנות בהתאם לצרכים הספציפיים של עומס העבודה שלכם.
+בין אם אתם בונים בוטים לשיחות בזמן אמת או מפעילים צינורות לעיבוד נתונים אופליין, בחירה של פרדיגמה מתאימה יכולה להוביל לחיסכון משמעותי בעלויות או לשיפור הביצועים.
 
-| Recurso | Padrão | Flex | Prioridade | Lote | Armazenamento em cache |
+| תכונה | רגיל | Flex | עדיפות | Batch | שמירה במטמון |
 | --- | --- | --- | --- | --- | --- |
-| **Preços** | Preço total | 50% de desconto | 75% a 100% a mais do que o padrão | 50% de desconto | 90% de desconto + armazenamento de tokens proporcional |
-| **Latência** | Segundos a minutos | Minutos (1 a 15 min de destino) | Segundos | Até 24 horas | Tempo até o primeiro token mais rápido |
-| **Confiabilidade** | Alta / média-alta | Melhor esforço (descartável) | Alta (não descartável) | Alta (para capacidade de processamento) | N/A |
-| **Interface** | Síncrona | Síncrona | Síncrona | Assíncrona | Estado salvo |
-| **Melhor caso de uso** | Fluxos de trabalho de aplicativos gerais | Cadeias sequenciais não urgentes | Apps de produção voltados ao usuário | Conjuntos de dados massivos, avaliações off-line | Consultas recorrentes no mesmo arquivo |
+| **תמחור** | מחיר מלא | הנחה של 50% | ‫75% עד 100% יותר מהרגיל | הנחה של 50% | הנחה של 90% + אחסון יחסי של טוקנים |
+| **זמן אחזור** | שניות לדקות | דקות (יעד של 15-1 דקות) | שניות | עד 24 שעות | זמן מהיר יותר עד לקבלת הטוקן הראשון |
+| **אמינות** | גבוהה / בינונית-גבוהה | האיכות הטובה ביותר (ניתן להפחית את האיכות) | גבוהה (לא נושרת) | גבוהה (לתפוקה) | לא רלוונטי |
+| **ממשק** | סינכרוני | סינכרוני | סינכרוני | אסינכרוני | מצב שמור |
+| **תרחיש שימוש מומלץ** | תהליכי עבודה כלליים באפליקציה | שרשראות עוקבות לא דחופות | אפליקציות שפונות למשתמשים | מערכי נתונים גדולים, בדיקות אופליין | שאילתות חוזרות על אותו קובץ |
 
-## Níveis de serviço de inferência (síncrono)
+## רמות שירות של הסקת מסקנות (סינכרוני)
 
-É possível alternar entre o tráfego síncrono otimizado para confiabilidade e o otimizado para custos transmitindo o parâmetro `service_tier` nas chamadas de geração padrão.
+אפשר לעבור בין תנועה סינכרונית שעברה אופטימיזציה לאמינות לבין תנועה סינכרונית שעברה אופטימיזציה לעלות על ידי העברת הפרמטר `service_tier` בקריאות ליצירת דוחות רגילים.
 
-### Inferência padrão (padrão)
+### הסקת מסקנות רגילה (ברירת מחדל)
 
-O nível padrão é a opção padrão para geração de conteúdo sequencial.
-Ele oferece tempos de resposta normais sem prêmios extras ou filas pesadas.
+האפשרות 'רמה רגילה' היא ברירת המחדל ליצירת תוכן רציפה.
+הוא מספק זמני תגובה רגילים בלי תוספות פרימיום או תורים ארוכים.
 
-- **Confiabilidade**:criticidade padrão
-- **Preço**:preços padrão.
-- **Ideal para**:a maioria dos aplicativos interativos do dia a dia.
+- **אמינות:** קריטיות רגילה
+- **המחיר:** תמחור רגיל.
+- **מתאים במיוחד:** לרוב האפליקציות האינטראקטיביות לשימוש יומיומי.
 
-### Inferência de prioridade (otimizada para latência)
+### היקש לפי עדיפות (אופטימיזציה של זמן טעינה)
 
-[O processamento de](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pt-br)prioridade encaminha suas solicitações
-para filas de computação de alta criticidade.
-Esse tráfego é estritamente não descartável (nunca substituído por outros níveis) e oferece a maior confiabilidade. Se você exceder os limites de prioridade dinâmica, o sistema vai fazer o downgrade da solicitação para o processamento padrão em vez de falhar com um erro.
+[עדיפות](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he): בקשות שמוגדרות בעדיפות הזו מועברות לתורים של מחשוב ברמת קריטיות גבוהה.
+התנועה הזו לא ניתנת להעברה (לעולם לא תידחק על ידי רמות אחרות) ומציעה את רמת המהימנות הגבוהה ביותר. אם חורגים ממגבלות העדיפות הדינמית,
+המערכת תבצע הורדה הדרגתית של הבקשה לעיבוד רגיל במקום
+לגרום לכשל עם שגיאה.
 
-- **Confiabilidade**:maior criticidade
-- **Preço**:75% a 100% acima das taxas padrão.
-- **Ideal para**:chatbots de clientes, detecção de fraudes em tempo real e copilotos essenciais para os negócios.
+- **אמינות:** רמת הקריטיות הגבוהה ביותר
+- **מחיר:** 75% עד 100% מעל התעריפים הרגילים.
+- **הכי מתאים ל:** צ'אטבוטים לשירות לקוחות, זיהוי הונאות בזמן אמת וטייסים וירטואליים שחיוניים לעסק.
 
-### Inferência flexível (otimizada para custos)
+### הסקת מסקנות גמישה (אופטימיזציה של עלויות)
 
-[A inferência flexível](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pt-br) oferece um desconto de 50% em comparação com as taxas padrão, utilizando
-capacidade de computação oportunista fora do horário de pico. As solicitações são processadas de forma síncrona, o que significa que não é necessário reescrever o código para gerenciar objetos em lote.
-Como é um tráfego "descartável", as solicitações podem ser substituídas se o sistema tiver picos de tráfego padrão.
+‫[Flex inference](https://ai.google.dev/gemini-api/docs/flex-inference?hl=he) מציע הנחה של 50% בהשוואה לתעריפים הרגילים, באמצעות ניצול קיבולת מחשוב אופורטוניסטית מחוץ לשעות השיא. הבקשות מעובדות באופן סינכרוני, כלומר לא צריך לכתוב מחדש קוד כדי לנהל אובייקטים של אצווה.
+מכיוון שמדובר בתנועה שניתן להפחית, יכול להיות שהבקשות יידחו אם המערכת תיתקל בעליות חדות בתנועה.
 
-- **Confiabilidade**:criticidade não garantida e descartável
-- **Preço**:50% do preço padrão (cobrado por token).
-- **Ideal para**:fluxos de trabalho de agentes de várias etapas em que a chamada N+1 depende da saída da chamada N, atualizações de CRM em segundo plano e avaliações off-line.
+- **אמינות:** קריטיות לא מובטחת, ניתנת להסרה
+- **המחיר:** 50% מהתמחור הרגיל (החיוב הוא לכל טוקן).
+- **הבחירה המתאימה ביותר ל:** תהליכי עבודה מרובי שלבים שבהם שיחה N+1 תלויה בפלט של שיחה N, עדכוני CRM ברקע והערכות אופליין.
 
-## API Batch (em massa, assíncrona)
+## ‫Batch API (בכמות גדולה, אסינכרוני)
 
-[A API Batch](https://ai.google.dev/gemini-api/docs/batch-api?hl=pt-br) foi projetada para processar grandes volumes
-de solicitações de forma assíncrona a
-50% do custo padrão. É possível enviar solicitações como dicionários inline ou usando um arquivo de entrada JSONL (até 2 GB). Ele processa solicitações usando filas de capacidade de processamento em segundo plano com um tempo de resposta de 24 horas.
+‫[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=he) נועד לעבד נפחים גדולים של בקשות באופן אסינכרוני ב-50% מהעלות הרגילה. אפשר לשלוח בקשות כמילונים מוטבעים או באמצעות קובץ קלט JSONL (עד 2GB). הבקשות מעובדות באמצעות תורים של נתונים שמועברים ברקע, עם זמן טיפול משוער של 24 שעות.
 
-- **Confiabilidade**:descartável, mas com novas tentativas automatizadas de 24 horas e sistema de filas
-- **Preço**:50% do preço padrão.
-- **Ideal para**:pré-processamento de conjuntos de dados massivos, execução de conjuntos de testes de regressão periódicos e gerações de imagens ou incorporações de alto volume.
+- **מהימנות:** אפשר להסיר את ההרשאות, אבל המערכת תנסה לשלוח את ההודעה שוב באופן אוטומטי כל 24 שעות, והיא תתווסף לתור.
+- **המחיר:** 50% מהמחיר הרגיל.
+- **הכי מתאים ל:** עיבוד מוקדם של מערכי נתונים גדולים, הפעלת חבילות של בדיקות רגרסיה תקופתיות ויצירת תמונות או הטבעות בכמויות גדולות.
 
-## Armazenamento em cache de contexto (economia de entrada)
+## שמירת הקשר במטמון (חיסכון בקלט)
 
-[O armazenamento em cache de contexto](https://ai.google.dev/gemini-api/docs/caching?hl=pt-br) é usado quando um contexto inicial substancial
-é referenciado repetidamente por solicitações mais curtas.
+[שמירת הקשר במטמון](https://ai.google.dev/gemini-api/docs/caching?hl=he) משמשת כשבקשות קצרות יותר מפנות שוב ושוב להקשר ראשוני משמעותי.
 
-- **Armazenamento em cache implícito**:ativado automaticamente no Gemini 2.5 e em modelos mais recentes.
-  O sistema transmite economias de custos se a solicitação atingir caches atuais com base em prefixos de comandos comuns.
-- **Armazenamento em cache explícito**:é possível criar manualmente um objeto de cache com um tempo de vida (TTL) específico. Depois de criado, você se refere aos tokens armazenados em cache para solicitações subsequentes para evitar a transmissão repetida do mesmo payload do corpus.
-- **Preço**:cobrado com base na contagem de tokens de cache e na duração do armazenamento (TTL).
-- **Ideal para**:chatbots com instruções abrangentes do sistema, análise repetitiva de arquivos de vídeo longos ou consultas em grandes conjuntos de documentos.
+- **שמירה במטמון באופן מרומז:** מופעלת אוטומטית ב-Gemini 2.5 ובמודלים חדשים יותר.
+  המערכת מעבירה את החיסכון בעלויות אם הבקשה שלכם מגיעה למטמון קיים על סמך קידומות נפוצות של הנחיות.
+- **שמירה במטמון באופן מפורש:** אפשר ליצור באופן ידני אובייקט מטמון עם משך חיים (TTL) ספציפי. אחרי שיוצרים את האסימונים, מתייחסים לאסימונים שנשמרו במטמון בבקשות הבאות כדי להימנע מהעברת אותה מטען ייעודי חוזרת ונשנית.
+- **מחיר:** החיוב מבוסס על מספר אסימוני המטמון ומשך האחסון (TTL).
+- **הכי מתאים ל:** צ'אטבוטים עם הוראות מערכת מקיפות, ניתוח חוזר של קובצי וידאו ארוכים או שאילתות שמופנות למערכי מסמכים גדולים.
 
-Envie comentários
+שליחת משוב
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Última atualização 2026-04-29 UTC.
+עדכון אחרון: 2026-04-29 (שעון UTC).
 
-Quer enviar seu feedback?
+רוצה לתת לנו משוב?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-04-29 (שעון UTC)."],[],[]]

@@ -1,46 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=hi
-fetched_at: 2026-07-27T04:42:03.464244+00:00
-title: "\u0907\u092b\u093c\u0947\u092e\u0930\u0932 \u091f\u094b\u0915\u0928 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=ko
+fetched_at: 2026-08-03T04:30:29.310629+00:00
+title: "\uc784\uc2dc \ud1a0\ud070 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-सुझाव भेजें
+의견 보내기
 
-# इफ़ेमरल टोकन
+# 임시 토큰
 
-Ephemeral token, कम समय के लिए मान्य होने वाले ऐसे टोकन होते हैं जिनकी मदद से [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) के ज़रिए Gemini
-API को ऐक्सेस किया जा सकता है. इन्हें, सुरक्षा को बेहतर बनाने के लिए डिज़ाइन किया गया है. इनका इस्तेमाल, उपयोगकर्ता के डिवाइस से सीधे एपीआई से कनेक्ट करने पर किया जाता है. इसे
-[क्लाइंट-टू-सर्वर](https://ai.google.dev/gemini-api/docs/live?hl=hi#implementation-approach)
-लागू करने का तरीका कहा जाता है. मानक एपीआई पासकोड की तरह, ephemeral token को क्लाइंट-साइड ऐप्लिकेशन से निकाला जा सकता है. जैसे, वेब ब्राउज़र या मोबाइल ऐप्लिकेशन. हालांकि, ephemeral token की समयसीमा बहुत कम होती है और इन पर पाबंदियां लगाई जा सकती हैं. इसलिए, प्रोडक्शन एनवायरमेंट में सुरक्षा से जुड़े जोखिम काफ़ी कम हो जाते हैं. लाइव एपीआई को क्लाइंट-साइड ऐप्लिकेशन से सीधे ऐक्सेस करते समय, इनका इस्तेमाल करना चाहिए. इससे एपीआई पासकोड की सुरक्षा बेहतर होती है.
+임시 토큰은 [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)을 통해 Gemini API에 액세스하기 위한 단기 인증 토큰입니다. 사용자 기기에서 API로 직접 연결하는 경우 ([클라이언트-서버](https://ai.google.dev/gemini-api/docs/live?hl=ko#implementation-approach) 구현) 보안을 강화하도록 설계되었습니다. 표준 API 키와 마찬가지로 임시 토큰은 웹브라우저나 모바일 앱과 같은 클라이언트 측 애플리케이션에서 추출할 수 있습니다. 하지만 임시 토큰은 만료가 빠르고 제한될 수 있으므로 프로덕션 환경의 보안 위험을 크게 줄여줍니다. 클라이언트 측 애플리케이션에서 Live API에 직접 액세스하여 API 키 보안을 강화할 때 사용해야 합니다.
 
-## Ephemeral token कैसे काम करते हैं
+## 임시 토큰의 작동 방식
 
-यहां, ephemeral token के काम करने का तरीका बताया गया है:
+일회성 토큰의 작동 방식은 다음과 같습니다.
 
-1. आपका क्लाइंट (जैसे, वेब ऐप्लिकेशन) आपके बैकएंड से पुष्टि करता है.
-2. आपका बैकएंड, Gemini API की प्रोविज़निंग सेवा से ephemeral token का अनुरोध करता है.
-3. Gemini API, कम समय के लिए मान्य होने वाला टोकन जारी करता है.
-4. आपका बैकएंड, लाइव एपीआई से WebSocket कनेक्शन के लिए, क्लाइंट को टोकन भेजता है. इसके लिए, एपीआई पासकोड को ephemeral token से बदला जा सकता है.
-5. इसके बाद, क्लाइंट इस टोकन का इस्तेमाल, एपीआई पासकोड की तरह करता है.
+1. 클라이언트 (예: 웹 앱)가 백엔드로 인증합니다.
+2. 백엔드에서 Gemini API의 프로비저닝 서비스에 임시 토큰을 요청합니다.
+3. Gemini API에서 단기 토큰을 발급합니다.
+4. 백엔드는 Live API에 대한 WebSocket 연결을 위해 클라이언트에 토큰을 전송합니다. API 키를 일시적인 토큰으로 바꾸면 됩니다.
+5. 그러면 클라이언트가 토큰을 API 키인 것처럼 사용합니다.
 
-![कुछ समय के लिए इस्तेमाल किए जाने वाले टोकन के बारे में खास जानकारी](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=hi)
+![임시 토큰 개요](https://ai.google.dev/static/gemini-api/docs/images/Live_API_01.png?hl=ko)
 
-इससे सुरक्षा बेहतर होती है, क्योंकि टोकन को निकालने पर भी, यह कम समय के लिए मान्य होता है. वहीं, क्लाइंट-साइड पर डिप्लॉय किया गया एपीआई पासकोड, लंबे समय के लिए मान्य होता है. क्लाइंट, Gemini को सीधे डेटा भेजता है. इसलिए, इससे लेटेंसी भी बेहतर होती है. साथ ही, आपके बैकएंड को रीयल टाइम डेटा को प्रॉक्सी करने की ज़रूरत नहीं पड़ती.
+이렇게 하면 클라이언트 측에 배포된 수명이 긴 API 키와 달리 토큰이 추출되더라도 수명이 짧아 보안이 강화됩니다. 클라이언트가 데이터를 Gemini에 직접 전송하므로 지연 시간도 개선되고 백엔드에서 실시간 데이터를 프록시할 필요가 없습니다.
 
-## Ephemeral token बनाना
+## 임시 토큰 만들기
 
-यहां, Gemini से ephemeral token पाने का एक आसान उदाहरण दिया गया है.
-डिफ़ॉल्ट रूप से, आपके पास इस अनुरोध (`newSessionExpireTime`) से मिले टोकन का इस्तेमाल करके, लाइव एपीआई के नए सेशन शुरू करने के लिए एक मिनट और उस कनेक्शन पर मैसेज भेजने के लिए 30 मिनट (`expireTime`) होंगे.
+다음은 Gemini에서 임시 토큰을 가져오는 방법을 보여주는 간단한 예입니다.
+기본적으로 이 요청 (`newSessionExpireTime`)의 토큰을 사용하여 새 Live API 세션을 시작하는 데 1분이 주어지며, 해당 연결 (`expireTime`)을 통해 메시지를 전송하는 데 30분이 주어집니다.
 
 ### Python
 
@@ -64,7 +61,7 @@ token = client.auth_tokens.create(
 # You'll need to pass the value under token.name back to your client to use it
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -94,13 +91,10 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-`expireTime` की वैल्यू की सीमाओं, डिफ़ॉल्ट वैल्यू, और अन्य फ़ील्ड की खास जानकारी के लिए, [एपीआई का संदर्भ](https://ai.google.dev/api/live?hl=hi#ephemeral-auth-tokens) देखें.
-`expireTime` की समयसीमा के अंदर, आपको
-[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=hi#session-resumption) हर 10 मिनट में कॉल को फिर से कनेक्ट करने के लिए
-की ज़रूरत होगी. ऐसा, उसी टोकन से किया जा सकता है, भले ही
-`uses: 1` हो.
+`expireTime` 값 제약 조건, 기본값, 기타 필드 사양은 [API 참조](https://ai.google.dev/api/live?hl=ko#ephemeral-auth-tokens)를 참고하세요.
+`expireTime` 기간 내에 10분마다 통화를 다시 연결해야 합니다 (`uses: 1`인 경우에도 동일한 토큰으로 가능).[`sessionResumption`](https://ai.google.dev/gemini-api/docs/live-session?hl=ko#session-resumption)
 
-किसी खास कॉन्फ़िगरेशन के लिए, ephemeral token को लॉक भी किया जा सकता है. यह आपके ऐप्लिकेशन की सुरक्षा को बेहतर बनाने और सर्वर साइड पर अपने सिस्टम के निर्देशों को बनाए रखने में मददगार हो सकता है.
+일련의 구성에 임시 토큰을 잠글 수도 있습니다. 이는 애플리케이션의 보안을 더욱 개선하고 시스템 명령어를 서버 측에 유지하는 데 유용할 수 있습니다.
 
 ### Python
 
@@ -125,7 +119,7 @@ token = client.auth_tokens.create(
 # You'll need to pass the value under token.name back to your client to use it
 ```
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -169,17 +163,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/auth_tokens" \
   }'
 ```
 
-फ़ील्ड के सबसेट को भी लॉक किया जा सकता है. ज़्यादा जानकारी के लिए, [SDK टूल का दस्तावेज़](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)
-देखें.
+필드의 하위 집합을 잠글 수도 있습니다. 자세한 내용은 [SDK 문서](https://googleapis.github.io/python-genai/genai.html#genai.types.CreateAuthTokenConfig.lock_additional_fields)를 참고하세요.
 
-## Ephemeral token की मदद से, लाइव एपीआई से कनेक्ट करना
+## 임시 토큰으로 Live API에 연결
 
-Ephemeral token मिलने के बाद, इसका इस्तेमाल एपीआई पासकोड की तरह किया जा सकता है. हालांकि, ध्यान रखें कि यह सिर्फ़ लाइव एपीआई के लिए काम करता है. साथ ही, यह एपीआई के `v1beta` वर्शन के साथ ही काम करता है.
+임시 토큰이 있으면 API 키처럼 사용합니다. 단, Live API에서만 작동하며 API의 `v1beta` 버전에서만 작동합니다.
 
-[क्लाइंट-टू-सर्वर लागू करने के तरीके का इस्तेमाल करने वाले ऐप्लिकेशन
-को डिप्लॉय करने पर ही, ephemeral token का इस्तेमाल करने से फ़ायदा मिलता है.](https://ai.google.dev/gemini-api/docs/live?hl=hi#implementation-approach)
+임시 토큰 사용은 [클라이언트-서버 구현](https://ai.google.dev/gemini-api/docs/live?hl=ko#implementation-approach) 접근 방식을 따르는 애플리케이션을 배포할 때만 유용합니다.
 
-### JavaScript
+### 자바스크립트
 
 ```
 import { GoogleGenAI, Modality } from '@google/genai';
@@ -207,30 +199,29 @@ async function main() {
 main();
 ```
 
-ज़्यादा उदाहरणों के लिए, [लाइव एपीआई का इस्तेमाल शुरू करना](https://ai.google.dev/gemini-api/docs/live?hl=hi) लेख पढ़ें.
+자세한 예시는 [Live API 시작하기](https://ai.google.dev/gemini-api/docs/live?hl=ko)를 참고하세요.
 
-## सबसे सही तरीके
+## 권장사항
 
-- `expire_time` पैरामीटर का इस्तेमाल करके, समयसीमा कम सेट करें.
-- टोकन की समयसीमा खत्म हो जाती है. इसलिए, प्रोविज़निंग की प्रोसेस को फिर से शुरू करना पड़ता है.
-- अपने बैकएंड के लिए, सुरक्षित पुष्टि की सुविधा की पुष्टि करें. Ephemeral token की सुरक्षा, आपके बैकएंड की पुष्टि करने के तरीके जितनी ही होगी.
-- आम तौर पर, बैकएंड-टू-Gemini कनेक्शन के लिए, ephemeral token का इस्तेमाल न करें. ऐसा इसलिए, क्योंकि इस पाथ को आम तौर पर सुरक्षित माना जाता है.
+- `expire_time` 매개변수를 사용하여 짧은 만료 기간을 설정합니다.
+- 토큰이 만료되어 프로비저닝 프로세스를 다시 시작해야 합니다.
+- 자체 백엔드의 보안 인증을 확인합니다. 임시 토큰은 백엔드 인증 방법만큼만 안전합니다.
+- 일반적으로 이 경로가 안전한 것으로 간주되므로 백엔드-Gemini 연결에는 임시 토큰을 사용하지 않는 것이 좋습니다.
 
-## सीमाएं
+## 제한사항
 
-फ़िलहाल, ephemeral token सिर्फ़ [लाइव एपीआई](https://ai.google.dev/gemini-api/docs/live?hl=hi) के साथ काम करते हैं.
+현재 임시 토큰은 [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ko)와만 호환됩니다.
 
-## आगे क्या करना है
+## 다음 단계
 
-- ज़्यादा जानकारी के लिए, ephemeral token के बारे में लाइव एपीआई के [रेफ़रंस](https://ai.google.dev/api/live?hl=hi#ephemeral-auth-tokens)
-  पढ़ें.
+- 자세한 내용은 임시 토큰에 관한 Live API [참조](https://ai.google.dev/api/live?hl=ko#ephemeral-auth-tokens)를 참고하세요.
 
-सुझाव भेजें
+의견 보내기
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-आखिरी बार 2026-07-23 (UTC) को अपडेट किया गया.
+최종 업데이트: 2026-07-30(UTC)
 
-क्या आपको हमें और कुछ बताना है?
+의견을 전달하고 싶나요?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-23 (UTC) को अपडेट किया गया."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]

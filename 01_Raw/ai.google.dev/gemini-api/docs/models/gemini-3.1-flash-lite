@@ -1,45 +1,45 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ar
-fetched_at: 2026-07-27T04:43:22.085624+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi
+fetched_at: 2026-08-03T04:41:08.192775+00:00
 title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [होम पेज](https://ai.google.dev/?hl=hi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
 
-إرسال ملاحظات
+सुझाव भेजें
 
 # Gemini 3.1 Flash-Lite
 
-‫Gemini 3.1 Flash-Lite هو نموذج وسائط متعدّدة منخفض وقت الاستجابة وفعّال من حيث التكلفة، وهو محسّن للمهام المتكررة والخفيفة. يتوافق النموذج مع النصوص والصور والفيديوهات والمقاطع الصوتية وملفات PDF، وهو مصمّم لسير العمل الذي يتضمّن عددًا كبيرًا من الوكلاء، واستخراج البيانات البسيط، والتطبيقات التي تشكّل فيها مدة الاستجابة وتكلفة واجهة برمجة التطبيقات القيود الأساسية.
+Gemini 3.1 Flash-Lite, कम समय में जवाब देने वाला और किफ़ायती मल्टीमॉडल है. इसे बार-बार किए जाने वाले और कम समय में पूरे होने वाले कामों के लिए ऑप्टिमाइज़ किया गया है. यह मॉडल, टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF इनपुट के साथ काम करता है. इसे एजेंट के तौर पर काम करने वाले वर्कफ़्लो, डेटा निकालने के आसान तरीके, और उन ऐप्लिकेशन के लिए डिज़ाइन किया गया है जहां लेटेन्सी और एपीआई की लागत मुख्य बाधाएं हैं.
 
-[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=ar)
+[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=hi)
 
 ## gemini-3.1-flash-lite
 
-| الموقع | الوصف |
+| प्रॉपर्टी | ब्यौरा |
 | --- | --- |
-| رمز النموذج id\_card | `gemini-3.1-flash-lite` |
-| saveأنواع البيانات المتوافقة | **المدخلات**  النصوص والصور والفيديوهات والمحتوى الصوتي وملفات PDF  **الناتج**  نص |
-| token\_autoحدود الرموز المميزة[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=ar) | **الحدّ الأقصى لعدد الرموز المميزة التي يمكن إدخالها**  1,048,576  **الحدّ الأقصى لعدد الرموز المميزة الناتجة**  65,536 |
-| handymanالإمكانات | **[إنشاء الصوت](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ar)**  غير متاح  **[التخزين المؤقت](https://ai.google.dev/gemini-api/docs/caching?hl=ar)**  متاح  **[تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar)**  متاح  **[استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar)**  غير متاح  **[البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar)**  متاح  **[استدعاء الدوال](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar)**  متاح  **[استخدام "خرائط Google" كمصدر](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar)**  متاح  **[إنشاء الصور](https://ai.google.dev/gemini-api/docs/image-generation?hl=ar)**  غير متاح  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=ar)**  غير متاح  **[تحديد المصادر في "بحث Google"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar)**  متاح  **[المُخرجات المنظَّمة](https://ai.google.dev/gemini-api/docs/structured-output?hl=ar)**  متاح  **[التفكير](https://ai.google.dev/gemini-api/docs/thinking?hl=ar)**  متاح  **[سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar)**  متاح |
-| speedخيارات الاستهلاك | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ar)**  متاح  **[الاستدلال المرن](https://ai.google.dev/gemini-api/docs/flex-inference?hl=ar)**  متاح  **[استنتاج الأولوية](https://ai.google.dev/gemini-api/docs/priority-inference?hl=ar)**  متاح |
-| 123الإصدارات | يمكنك الاطّلاع على [أنماط إصدارات النماذج](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ar#model-versions) لمزيد من التفاصيل.  - `Stable: gemini-3.1-flash-lite` |
-| calendar\_monthآخر تعديل | مايو 2026 |
-| id\_cardبطاقة النموذج | [بطاقة النموذج](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=ar) |
+| id\_cardमॉडल कोड | `gemini-3.1-flash-lite` |
+| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF  **आउटपुट**  टेक्स्ट |
+| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
+| handymanसुविधाएँ | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम नहीं करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम करता है  **[कोड एक्ज़ीक्यूट करना](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम करता है  **[कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)**  काम नहीं करता है  **[फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम करता है  **[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम करता है  **[Google Maps की मदद से जवाब तैयार करना](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लेना](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम करता है  **[सोच-विचार](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम करता है  **[यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम करता है |
+| speedकॉन्टेंट देखने के विकल्प | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम करता है  **[फ़्लेक्स इन्फ़रेंस](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम करता है  **[प्राथमिकता का अनुमान लगाना](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम करता है |
+| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - `Stable: gemini-3.1-flash-lite` |
+| calendar\_monthनया अपडेट | मई 2026 |
+| id\_cardमॉडल कार्ड | [मॉडल कार्ड](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=hi) |
 
-## دليل مطوّري البرامج
+## डेवलपर गाइड
 
-يُعدّ Gemini 3.1 Flash-Lite الأفضل في التعامل مع المهام المباشرة على نطاق واسع. في ما يلي بعض حالات الاستخدام الأنسب لـ Gemini 3.1 Flash-Lite:
+Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े पैमाने पर हैंडल करने के लिए सबसे अच्छा मॉडल है. यहां Gemini 3.1 Flash-Lite के इस्तेमाल के कुछ उदाहरण दिए गए हैं:
 
-- **الترجمة**: ترجمة سريعة ورخيصة وبكميات كبيرة، مثل معالجة رسائل المحادثة والمراجعات وطلبات الدعم على نطاق واسع يمكنك استخدام تعليمات النظام لحصر الناتج على النص المترجَم فقط بدون أي تعليقات إضافية:
+- **अनुवाद**: तेज़ी से, कम लागत में, और बड़े पैमाने पर अनुवाद करना. जैसे, बड़े पैमाने पर चैट मैसेज, समीक्षाएं, और सहायता टिकट प्रोसेस करना. सिस्टम के निर्देशों का इस्तेमाल करके, जवाब को सिर्फ़ अनुवाद किए गए टेक्स्ट तक सीमित किया जा सकता है. इसमें कोई अतिरिक्त टिप्पणी शामिल नहीं होगी:
 
   ```
   from google import genai
@@ -57,9 +57,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **التحويل إلى نص**: يمكنك معالجة التسجيلات أو الملاحظات الصوتية أو أي محتوى صوتي آخر
-  تحتاج فيه إلى نص مكتوب بدون الحاجة إلى إنشاء
-  مسار منفصل لتحويل الصوت إلى نص. تتيح هذه الميزة إدخال وسائط متعددة، ما يتيح لك تمرير ملفات صوتية مباشرةً لتحويلها إلى نص:
+- **ट्रांसक्रिप्शन**: रिकॉर्डिंग, ऑडियो नोट या किसी भी ऑडियो कॉन्टेंट को प्रोसेस करें. इससे आपको टेक्स्ट ट्रांसक्रिप्ट मिलती है. इसके लिए, आपको स्पीच-टू-टेक्स्ट की अलग पाइपलाइन शुरू करने की ज़रूरत नहीं होती. इसमें मल्टीमॉडल इनपुट का इस्तेमाल किया जा सकता है. इसलिए, ट्रांसक्रिप्शन के लिए सीधे तौर पर ऑडियो फ़ाइलें पास की जा सकती हैं:
 
   ```
   from google import genai
@@ -79,7 +77,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **المهام الخفيفة المستندة إلى الوكلاء واستخراج البيانات**: استخراج الكيانات والتصنيف وعمليات معالجة البيانات الخفيفة المتوافقة مع إخراج JSON المنظَّم على سبيل المثال، استخراج بيانات منظَّمة من مراجعة من عميل على موقع للتجارة الإلكترونية:
+- **लाइटवेट एजेंटिक टास्क और डेटा निकालने की सुविधा**: इसमें स्ट्रक्चर्ड JSON आउटपुट के साथ, इकाई का पता लगाना, क्लासिफ़िकेशन, और लाइटवेट डेटा प्रोसेसिंग पाइपलाइन की सुविधा मिलती है. उदाहरण के लिए, ई-कॉमर्स प्लैटफ़ॉर्म पर खरीदार की समीक्षा से स्ट्रक्चर्ड डेटा निकालना:
 
   ```
   from google import genai
@@ -107,7 +105,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **معالجة المستندات وتلخيصها**: تحليل ملفات PDF وعرض ملخّصات موجزة، مثلاً لإنشاء مسار معالجة مستندات أو فرز الملفات الواردة بسرعة:
+- **दस्तावेज़ प्रोसेस करना और खास जानकारी देना**: PDF फ़ाइलों को पार्स करना और कम शब्दों में खास जानकारी देना. जैसे, दस्तावेज़ प्रोसेस करने की पाइपलाइन बनाना या आने वाली फ़ाइलों को तुरंत प्राथमिकता देना:
 
   ```
   from google import genai
@@ -134,7 +132,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **توجيه الطلبات إلى النماذج**: استخدِم نموذجًا منخفض الاستجابة والتكلفة كأداة تصنيف لتوجيه الطلبات إلى النموذج المناسب استنادًا إلى مدى تعقيد المهمة. هذا نمط حقيقي في مرحلة الإنتاج، إذ يستخدم [Gemini CLI](https://geminicli.com/docs/core/#model-fallback) مفتوح المصدر Flash-Lite لتصنيف مدى تعقيد المهام وتوجيهها إلى Flash أو Pro وفقًا لذلك.
+- **मॉडल राउटिंग**: कम समय में जवाब देने वाले और कम कीमत वाले मॉडल का इस्तेमाल क्लासिफ़ायर के तौर पर करें. यह मॉडल, टास्क की जटिलता के आधार पर क्वेरी को सही मॉडल पर भेजता है. यह प्रोडक्शन में इस्तेमाल होने वाला एक असली पैटर्न है. ओपन-सोर्स [Gemini CLI](https://geminicli.com/docs/core/#model-fallback), टास्क की मुश्किल को कैटगरी में बांटने के लिए Flash-Lite का इस्तेमाल करता है. इसके बाद, टास्क को Flash या Pro पर भेजता है.
 
   ```
   from google import genai
@@ -187,7 +185,7 @@ Google uses AI technology to translate content into your preferred language. AI 
 
   print(response.text)
   ```
-- **التفكير**: لتحسين دقة المهام التي تستفيد من الاستدلال خطوة بخطوة، اضبط إعدادات التفكير لكي يستهلك النموذج قدرًا إضافيًا من الموارد الحسابية في الاستدلال الداخلي قبل إنتاج الناتج النهائي:
+- **सोचना**: ऐसे टास्क के लिए, जिनमें सिलसिलेवार तरीके से तर्क करने से बेहतर नतीजे मिलते हैं, सोचने की सुविधा को कॉन्फ़िगर करें. इससे मॉडल, फ़ाइनल आउटपुट देने से पहले, तर्क करने के लिए ज़्यादा कंप्यूटिंग पावर का इस्तेमाल करेगा:
 
   ```
   from google import genai
@@ -206,12 +204,12 @@ Google uses AI technology to translate content into your preferred language. AI 
   print(response.text)
   ```
 
-إرسال ملاحظات
+सुझाव भेजें
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
 
-تاريخ التعديل الأخير: 2026-07-21 (حسب التوقيت العالمي المتفَّق عليه)
+आखिरी बार 2026-07-21 (UTC) को अपडेट किया गया.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+क्या आपको हमें और कुछ बताना है?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-21 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-21 (UTC) को अपडेट किया गया."],[],[]]

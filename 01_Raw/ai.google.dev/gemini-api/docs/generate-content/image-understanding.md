@@ -1,44 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=de
-fetched_at: 2026-07-27T04:41:49.670839+00:00
-title: "Bilder verstehen \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=zh-CN
+fetched_at: 2026-08-03T04:33:54.899095+00:00
+title: "\u56fe\u7247\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-Feedback geben
+发送反馈
 
-# Bilder verstehen
+# 图片理解
 
-Gemini-Modelle sind von Grund auf multimodal konzipiert und ermöglichen eine Vielzahl von Bildverarbeitungs- und Computer Vision-Aufgaben, darunter Bilduntertitelung, Klassifizierung und visuelle Frage-Antwort-Aufgaben, ohne dass spezielle ML-Modelle trainiert werden müssen.
+Gemini 模型从一开始就具有多模态特性，可解锁各种图片处理和计算机视觉任务，包括但不限于图片配文、分类和视觉问答，而无需训练专门的机器学习模型。
 
-Neben ihren allgemeinen multimodalen Funktionen bieten Gemini-Modelle durch zusätzliches
-Training eine
-**höhere Genauigkeit** für bestimmte Anwendungsfälle wie die [Objekterkennung](#object-detection).
+除了通用的多模态功能外，Gemini 模型还通过额外训练，针对特定使用场景（例如[对象检测](#object-detection)）提供
+**更高的准确率**。
 
-## Bilder an Gemini übergeben
+## 将图片传递给 Gemini
 
-Sie können Bilder auf zwei Arten als Eingabe für Gemini bereitstellen:
+您可以使用以下两种方法将图片作为输入提供给 Gemini：
 
-- [Inline-Bilddaten übergeben](#inline-image): Ideal für kleinere Dateien (Gesamtgröße der Anfrage
-  weniger als 20 MB, einschließlich Prompts).
-- [Bilder mit der File API hochladen](#upload-image): Empfohlen für größere Dateien oder für
-  die Wiederverwendung von Bildern in mehreren Anfragen.
+- [传递内嵌图片数据](#inline-image)：非常适合较小的文件（总请求
+  大小小于 20MB，包括提示）。
+- [使用 File API 上传图片](#upload-image)：建议用于较大的文件，或在
+  多个请求中重复使用图片。
 
-### Inline-Bilddaten übergeben
+### 传递内嵌图片数据
 
-Sie können Inline-Bilddaten in der Anfrage an `generateContent` übergeben. Sie können Bilddaten als Base64-codierte Strings bereitstellen oder lokale Dateien direkt lesen (je nach Sprache).
+您可以在对 `generateContent` 的请求中传递内嵌图片数据。您可以提供 Base64 编码的字符串形式的图片数据，也可以直接读取本地文件（具体取决于语言）。
 
-Im folgenden Beispiel wird gezeigt, wie Sie ein Bild aus einer lokalen Datei lesen und zur Verarbeitung an die `generateContent` API übergeben.
+以下示例展示了如何从本地文件读取图片并将其传递给 `generateContent` API 进行处理。
 
 ### Python
 
@@ -51,7 +50,7 @@ Im folgenden Beispiel wird gezeigt, wie Sie ein Bild aus einer lokalen Datei les
 
   client = genai.Client()
   response = client.models.generate_content(
-    model='gemini-3.5-flash',
+    model='gemini-3.6-flash',
     contents=[
       types.Part.from_bytes(
         data=image_bytes,
@@ -86,13 +85,13 @@ const contents = [
 ];
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: contents,
 });
 console.log(response.text);
 ```
 
-### Ok
+### Go
 
 ```
 bytes, _ := os.ReadFile("path/to/small-sample.jpg")
@@ -108,7 +107,7 @@ contents := []*genai.Content{
 
 result, _ := client.Models.GenerateContent(
   ctx,
-  "gemini-3.5-flash",
+  "gemini-3.6-flash",
   contents,
   nil,
 )
@@ -127,7 +126,7 @@ else
 B64FLAGS="-w0"
 fi
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
 -H "x-goog-api-key: $GEMINI_API_KEY" \
 -H 'Content-Type: application/json' \
 -X POST \
@@ -146,7 +145,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
 }' 2> /dev/null
 ```
 
-Sie können ein Bild auch von einer URL abrufen, in Byte konvertieren und an `generateContent` übergeben, wie in den folgenden Beispielen gezeigt.
+您还可以从网址提取图片，将其转换为字节，然后将其传递给 `generateContent`，如以下示例所示。
 
 ### Python
 
@@ -165,7 +164,7 @@ image = types.Part.from_bytes(
 client = genai.Client()
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents=["What is this image?", image],
 )
 
@@ -187,7 +186,7 @@ async function main() {
   const base64ImageData = Buffer.from(imageArrayBuffer).toString('base64');
 
   const result = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: [
     {
       inlineData: {
@@ -204,7 +203,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -241,7 +240,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
     ctx,
-    "gemini-3.5-flash",
+    "gemini-3.6-flash",
     contents,
     nil,
   )
@@ -269,7 +268,7 @@ else
   IMAGE_B64=$(curl -sL "$IMG_URL" | base64 -w0)
 fi
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -288,10 +287,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     }' 2> /dev/null
 ```
 
-### Bilder mit der File API hochladen
+### 使用 File API 上传图片
 
-Verwenden Sie die Files API für große Dateien oder um dieselbe Bilddatei wiederholt zu verwenden. Mit dem folgenden Code wird eine Bilddatei hochgeladen und dann in einem Aufruf von `generateContent` verwendet. Weitere Informationen und Beispiele finden Sie im [Leitfaden zur Files API](https://ai.google.dev/gemini-api/docs/files?hl=de)
-für.
+对于较大的文件，或者为了能够重复使用同一图片文件，请使用 Files API。以下代码会上传图片文件，然后在对 `generateContent` 的调用中使用该文件。如需了解
+更多信息和示例，请参阅[Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)。
 
 ### Python
 
@@ -303,7 +302,7 @@ client = genai.Client()
 my_file = client.files.upload(file="path/to/sample.jpg")
 
 response = client.models.generate_content(
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents=[my_file, "Caption this image."],
 )
 
@@ -328,7 +327,7 @@ async function main() {
   });
 
   const response = await ai.models.generateContent({
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: createUserContent([
       createPartFromUri(myfile.uri, myfile.mimeType),
       "Caption this image.",
@@ -340,7 +339,7 @@ async function main() {
 await main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -372,7 +371,7 @@ func main() {
 
   result, _ := client.Models.GenerateContent(
       ctx,
-      "gemini-3.5-flash",
+      "gemini-3.6-flash",
       contents,
       nil,
   )
@@ -418,7 +417,7 @@ file_uri=$(jq -r ".file.uri" file_info.json)
 echo file_uri=$file_uri
 
 # Now generate content using that file
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -436,9 +435,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Prompts mit mehreren Bildern
+## 使用多张图片进行提示
 
-Sie können mehrere Bilder in einem einzigen Prompt bereitstellen, indem Sie mehrere `Part`-Objekte für Bilder in das Array `contents` einfügen. Dabei kann es sich um eine Kombination aus Inline-Daten (lokale Dateien oder URLs) und File API-Referenzen handeln.
+您可以在单个提示中提供多张图片，方法是在 `contents` 数组中添加多个图片 `Part` 对象。这些对象可以是内嵌数据（本地文件或网址）和 File API 引用的组合。
 
 ### Python
 
@@ -460,7 +459,7 @@ with open(image2_path, 'rb') as f:
 # Create the prompt with text and multiple images
 response = client.models.generate_content(
 
-    model="gemini-3.5-flash",
+    model="gemini-3.6-flash",
     contents=[
         "What is different between these two images?",
         uploaded_file,  # Use the uploaded file reference
@@ -504,7 +503,7 @@ async function main() {
 
   const response = await ai.models.generateContent({
 
-    model: "gemini-3.5-flash",
+    model: "gemini-3.6-flash",
     contents: createUserContent([
       "What is different between these two images?",
       createPartFromUri(uploadedFile.uri, uploadedFile.mimeType),
@@ -522,7 +521,7 @@ async function main() {
 await main();
 ```
 
-### Ok
+### Go
 
 ```
 // Upload the first image
@@ -545,7 +544,7 @@ contents := []*genai.Content{
 
 result, _ := client.Models.GenerateContent(
   ctx,
-  "gemini-3.5-flash",
+  "gemini-3.6-flash",
   contents,
   nil,
 )
@@ -598,7 +597,7 @@ fi
 IMAGE2_BASE64=$(base64 $B64FLAGS $IMAGE2_PATH)
 
 # Now generate content using both images
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
     -H "x-goog-api-key: $GEMINI_API_KEY" \
     -H 'Content-Type: application/json' \
     -X POST \
@@ -623,9 +622,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## Objekterkennung
+## 对象检测
 
-Modelle werden trainiert, um Objekte in einem Bild zu erkennen und die Koordinaten des Begrenzungsrahmens zu ermitteln. Die Koordinaten werden im Verhältnis zu den Bildabmessungen auf [0, 1000] skaliert. Sie müssen diese Koordinaten anhand der ursprünglichen Bildgröße herunterskalieren.
+模型经过训练，可以检测图片中的对象并获取其边界框坐标。相对于图片尺寸的坐标会缩放为 [0, 1000]。您需要根据原始图片大小对这些坐标进行反缩放。
 
 ### Python
 
@@ -644,7 +643,7 @@ config = types.GenerateContentConfig(
   response_mime_type="application/json"
   )
 
-response = client.models.generate_content(model="gemini-3.5-flash",
+response = client.models.generate_content(model="gemini-3.6-flash",
                                           contents=[image, prompt],
                                           config=config
                                           )
@@ -676,7 +675,7 @@ const base64ImageFile = fs.readFileSync("/path/to/image.png", {
 });
 
 const response = await ai.models.generateContent({
-  model: "gemini-3.5-flash",
+  model: "gemini-3.6-flash",
   contents: [
     {
       inlineData: {
@@ -698,7 +697,7 @@ console.log(boundingBoxes);
 // const absX1 = (boundingBoxes[0].box_2d[1] / 1000) * imageWidth;
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -766,7 +765,7 @@ func main() {
 
   result, err := client.Models.GenerateContent(
     ctx,
-    "gemini-3.5-flash",
+    "gemini-3.6-flash",
     contents,
     config,
   )
@@ -805,7 +804,7 @@ else
   B64FLAGS="-w0"
 fi
 
-curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent" \
+curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
   -H "x-goog-api-key: $GEMINI_API_KEY" \
   -H 'Content-Type: application/json' \
   -X POST \
@@ -827,85 +826,86 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
   }' 2> /dev/null
 ```
 
-Weitere Beispiele finden Sie in den folgenden Notebooks im [Gemini Cookbook](https://github.com/google-gemini/cookbook):
+如需查看更多示例，请查看 [Gemini Cookbook](https://github.com/google-gemini/cookbook) 中的以下笔记本：
 
-- [Notebook zum räumlichen 2D-Verständnis](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=de)
-- [Experimentelles Notebook zum 3D-Pointing](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=de)
+- [2D 空间理解笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=zh-cn)
+- [实验性 3D 指向笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=zh-cn)
 
-## Unterstützte Bildformate
+## 支持的图片格式
 
-Gemini unterstützt die folgenden MIME-Typen für Bildformate:
+Gemini 支持以下图片格式 MIME 类型：
 
-- PNG – `image/png`
-- JPEG – `image/jpeg`
-- WEBP – `image/webp`
-- HEIC – `image/heic`
-- HEIF – `image/heif`
+- PNG - `image/png`
+- JPEG - `image/jpeg`
+- WEBP - `image/webp`
+- HEIC - `image/heic`
+- HEIF - `image/heif`
 
-Weitere Informationen zu anderen Methoden für die Dateieingabe finden Sie im
-[Leitfaden zu Methoden für die Dateieingabe](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=de).
+如需了解其他文件输入方法，请参阅
+[文件输入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-cn)指南。
 
-## Leistungsspektrum
+## 功能
 
-Alle Gemini-Modellversionen sind multimodal und können für eine Vielzahl von Bildverarbeitungs- und Computer Vision-Aufgaben verwendet werden, einschließlich, aber nicht beschränkt auf Bilduntertitelung, visuelle Frage-Antwort-Aufgaben, Bildklassifizierung und Objekterkennung.
+所有 Gemini 模型版本都是多模态的，可用于各种图片处理和计算机视觉任务，包括但不限于图片配文、视觉问答、图片分类和对象检测。
 
-Je nach Ihren Qualitäts- und Leistungsanforderungen kann Gemini die Notwendigkeit reduzieren, spezielle ML-Modelle zu verwenden.
+Gemini 可以减少对专用机器学习模型的需求，具体取决于您的质量和性能要求。
 
-Die neuesten Modellversionen wurden speziell trainiert, um die Genauigkeit bei
-speziellen Aufgaben zusätzlich zu allgemeinen Funktionen wie der verbesserten
-[Objekterkennung](#object-detection) zu verbessern.
+除了通用功能（例如增强的
+[对象检测](#object-detection)）之外，最新模型版本还经过专门训练，可提高
+专用任务的准确率。
 
-## Einschränkungen und wichtige technische Informationen
+## 限制和关键技术信息
 
-### Dateilimit
+### 文件限制
 
-Gemini-Modelle unterstützen maximal 3.600 Bilddateien pro Anfrage.
+Gemini 模型每个请求最多支持 3,600 个图片文件。
 
-### Tokenberechnung
+### token 计算
 
-- 258 Tokens, wenn beide Dimensionen <= 384 Pixel sind.
-  Größere Bilder werden in Kacheln mit 768 × 768 Pixel aufgeteilt, die jeweils 258 Tokens kosten.
+- 如果两个尺寸均小于或等于 384 像素，则为 258 个 token。
+  较大的图片会平铺到 768x768 像素的图块中，每个图块需要 258 个 token。
 
-Eine grobe Formel zur Berechnung der Anzahl der Kacheln lautet so:
+计算图块数量的粗略公式如下：
 
-- Berechnen Sie die Größe der Zuschneideeinheit, die ungefähr so aussieht: floor(min(Breite, Höhe) / 1,5).
-- Teilen Sie jede Dimension durch die Größe der Zuschneideeinheit und multiplizieren Sie die Ergebnisse, um die Anzahl der Kacheln zu erhalten.
+- 计算裁剪单元大小，大致为：floor(min(width, height) / 1.5)。
+- 将每个尺寸除以裁剪单元大小，然后将结果相乘，即可得到图块数量。
 
-Bei einem Bild mit den Abmessungen 960 × 540 beträgt die Größe der Zuschneideeinheit beispielsweise 360. Teilen Sie jede Dimension durch 360. Die Anzahl der Kacheln ist dann 3 × 2 = 6.
+例如，对于尺寸为 960x540 的图片，裁剪单元大小为 360。将每个尺寸除以 360，得到的图块数量为 3 \* 2 = 6。
 
-### Auflösung von Medien
+### 媒体分辨率
 
-Mit Gemini 3 wird mit dem Parameter `media_resolution` eine detaillierte Steuerung der multimodalen Bildverarbeitung eingeführt. Der Parameter `media_resolution` bestimmt die **maximale Anzahl von Tokens, die pro Eingabebild oder Video-Frame zugewiesen werden**.
-Höhere Auflösungen verbessern die Fähigkeit des Modells, feinen Text zu lesen oder kleine Details zu erkennen, erhöhen aber die Tokennutzung und die Latenz.
+Gemini 3 引入了对多模态视觉处理的精细控制，通过 `media_resolution` 参数实现。`media_resolution` 参数用于确定**为每个输入图片或视频帧分配的 token 数量上限** 。分辨率越高，模型读取精细文本或识别细小细节的能力就越强，但 token 用量和延迟也会增加。
 
-Weitere Informationen zum Parameter und zu den Auswirkungen auf die Tokenberechnung finden Sie im Leitfaden zur [Medienauflösung](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=de).
+如需详细了解该参数及其对 token 计算的影响，
+请参阅[媒体分辨率](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-cn)指南。
 
-## Tipps und Best Practices
+## 技巧和最佳做法
 
-- Prüfen Sie, ob die Bilder richtig gedreht sind.
-- Verwenden Sie klare, nicht verschwommene Bilder.
-- Wenn Sie ein einzelnes Bild mit Text verwenden, platzieren Sie den Prompt *nach* dem Bildteil im Array `contents`.
+- 验证图片是否正确旋转。
+- 使用清晰、不模糊的图片。
+- 如果使用包含文本的单张图片，请在 `contents` 数组中将文本提示放在图片部分之后。
 
-## Nächste Schritte
+## 后续步骤
 
-In diesem Leitfaden erfahren Sie, wie Sie Bilddateien hochladen und Textausgaben aus Bildeingaben generieren. Weitere Informationen finden Sie in den folgenden Ressourcen:
+本指南介绍了如何上传图片文件并根据图片输入生成文本输出。如需了解详情，请参阅以下资源：
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de): Weitere Informationen zum Hochladen und Verwalten von Dateien zur Verwendung mit Gemini
-- [Systemanweisungen](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#system-instructions):
-  Mit Systemanweisungen können Sie das Verhalten des Modells entsprechend Ihren
-  spezifischen Anforderungen und Anwendungsfällen steuern.
-- [Strategien für Prompts mit Dateien](https://ai.google.dev/gemini-api/docs/files?hl=de#prompt-guide): Die
-  Gemini API unterstützt Prompts mit Text-, Bild-, Audio- und Videodaten, auch
-  multimodale Prompts genannt.
-- [Sicherheitsleitfaden](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=de): Manchmal geben generative
-  KI-Modelle unerwartete Ausgaben aus, z. B. Ausgaben, die ungenau, voreingenommen oder anstößig sind. Nachbearbeitung und menschliche Bewertung sind unerlässlich, um das Risiko von Schäden durch solche Ausgaben zu begrenzen.
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)：详细了解如何上传和管理文件以供 Gemini 使用。
+- [系统说明](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)：
+  系统说明可让您根据
+  特定需求和使用情形来控制模型的行为。
+- [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)：
+  Gemini API 支持使用文本、图片、音频和视频数据进行提示，也
+  称为多模态提示。
+- [安全指南](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-cn)：生成式
+  AI 模型有时会产生意外输出，例如不准确、
+  有偏见或令人反感的输出。后处理和人工评估对于限制此类输出造成的危害风险至关重要。
 
-Feedback geben
+发送反馈
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-Zuletzt aktualisiert: 2026-06-24 (UTC).
+最后更新时间 (UTC)：2026-07-30。
 
-Haben Sie Feedback für uns?
+需要向我们提供更多信息？
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-24 (UTC)."],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]

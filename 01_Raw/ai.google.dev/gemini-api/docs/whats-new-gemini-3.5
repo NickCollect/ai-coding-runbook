@@ -1,44 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=tr
-fetched_at: 2026-07-27T04:46:57.945011+00:00
-title: "Gemini 3.5 Flash'teki yenilikler \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/whats-new-gemini-3.5?hl=ko
+fetched_at: 2026-08-03T04:39:10.205173+00:00
+title: "Gemini 3.5 Flash\uc758 \uc0c8\ub85c\uc6b4 \uae30\ub2a5 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-Google uses AI technology to translate content into your preferred language. AI translations can contain errors.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Geri bildirim gönderin
+의견 보내기
 
-# Gemini 3.5 Flash'teki yenilikler
+# Gemini 3.5 Flash의 새로운 기능
 
-[3.6 Flash ve 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/latest-model?hl=tr)
-[Bu sayfa](#)
+[3.6 Flash 및 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/latest-model?hl=ko)
+[이 페이지](#)
 
-Gemini 3.5 Flash, **genel kullanıma sunulmuş (GK)**, kararlı ve ölçeklendirilmiş üretim kullanımına hazırdır. En akıllı Flash modelimiz olan bu model, ajan tabanlı yürütme, kodlama ve uzun vadeli görevlerde ölçekli olarak sürekli en üst düzeyde performans sunar.
+Gemini 3.5 Flash는 **정식 버전 (GA)**으로 제공되며 안정적이고 확장된
+프로덕션 사용에 적합합니다. Google의 가장 지능적인 Flash 모델로서 에이전트형 실행, 코딩, 장기적 작업에서 확장된 최첨단 성능을 제공합니다.
 
-Bu kılavuzda, Gemini 3.5 Flash ile ilgili iyileştirmeler, API değişiklikleri ve taşıma yönergeleri hakkında genel bilgiler yer almaktadır.
+이 가이드에는 Gemini 3.5 Flash의 개선사항, API 변경사항, 마이그레이션 안내가 포함되어 있습니다.
 
-## Yeni model
+## 새 모델
 
-| Model | Model Kimliği | Açıklama |
+| 모델 | 모델 ID | 설명 |
 | --- | --- | --- |
-| Gemini 3.5 Flash | `gemini-3.5-flash` | Ajan tabanlı ve kodlama görevlerinde sürekli olarak üstün performans gösteren en akıllı modelimiz. |
+| Gemini 3.5 Flash | `gemini-3.5-flash` | 에이전트형 및 코딩 작업에서 지속적으로 최첨단 성능을 제공하는 Google의 가장 지능적인 모델입니다. |
 
-Gemini 3.5 Flash, 1 milyon jetonluk bağlam penceresini, 65 bin jetonluk maksimum çıkışı, düşünme özelliğini ve [Bilgisayar Kullanımı (Önizleme)](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) dahil olmak üzere Gemini 3 Flash ile aynı araç ve platform özelliklerini destekler.
+Gemini 3.5 Flash는 100만 토큰 컨텍스트 윈도우, 최대 65,000개의 출력 토큰, 사고, Gemini 3 Flash와 동일한 도구 및 플랫폼 기능(
+[컴퓨터 사용(프리뷰)](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko) 포함)을 지원합니다.
 
-Tüm özellikler için [modellere genel bakış](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=tr) başlıklı makaleyi inceleyin.
-Fiyatlandırma için [fiyatlandırma sayfasına](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#gemini-3.5-flash) bakın.
+전체 사양은 [모델 개요](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=ko)를 참조하세요.
+가격은 [가격 책정 페이지](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#gemini-3.5-flash)를 참조하세요.
 
-## Hızlı başlangıç kılavuzu
+## 빠른 시작
 
-Bu kılavuzdaki tüm örneklerde Etkileşimler API'si kullanılmaktadır. Ayrıca, GenerateContent API de desteklenir. Aynı yapılandırma seçenekleri ve öneriler geçerlidir.
+이 가이드의 모든 예시에는 Interactions API가 사용됩니다. GenerateContent API도 지원되며 동일한 구성 옵션과 권장사항이 적용됩니다.
 
 ### Python
 
@@ -84,39 +86,45 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Yenilikler
+## 새로운 소식
 
-- **Sürdürülebilir üstün performans:** En akıllı Flash modelimiz, büyük ölçekte ajan ve kodlama görevleri için optimize edilmiştir.
-- **Ajan tabanlı yürütme:** Alt ajan dağıtımı, sorun çözme ve büyük ölçekte hızlı ajan tabanlı döngüler.
-- **Kodlama:** Alternatif yolları test etmek ve çözümleri dinamik olarak keşfetmek için yinelemeli kodlama döngüleri, hızlı keşif ve prototipleme.
-- **Uzun vadeli:** Çok adımlı iş akışları ve araçların büyük ölçekte kullanımı.
-- **Düşünce koruma:** Model, çok aşamalı etkileşimlerde ara muhakemeyi otomatik olarak korur. API'de değişiklik yapılması gerekmez.
-- **Yeni varsayılan çaba düzeyi:** Varsayılan düşünme çabası `high` değerinden `medium` değerine değiştirildi. Ayrıntılar için [Yeni varsayılan çaba düzeyi](#default-effort-level) başlıklı makaleyi inceleyin.
-- **Geliştirilmiş `low` düşünme:** `low` artık daha az adım gerektiren kod ve aracı görevleri için önemli ölçüde iyileştirildi. Daha düşük gecikme süresi ve maliyetle yüksek kalite sunuyor.
-- **GA sürümü:** Ölçeklendirilmiş üretim kullanımı için kararlı model.
+- **지속적인 최첨단 성능:** 확장된 에이전트형 및 코딩 작업에 최적화된 Google의 가장 지능적인 Flash 모델입니다.
+- **에이전트형 실행:** 확장된 하위 에이전트 배포, 문제 해결, 신속한 에이전트형 루프
+- **코딩:** 대체 경로를 테스트하고 솔루션을 동적으로 탐색하기 위한 반복적인 코딩 주기, 신속한 탐색, 프로토타입 제작
+- **장기적:** 확장된 다단계 워크플로 및 도구 사용
+- **사고 보존:** 모델은 멀티턴 대화에서 중간 추론을 자동으로 유지합니다. API를 변경할 필요는 없습니다.
+- **새로운 기본 노력 수준:** 기본 사고 노력이 `high`에서 `medium`으로 변경되었습니다. 자세한 내용은 [새로운 기본 노력 수준](#default-effort-level)을 참조하세요.
+- **개선된 `low` 사고:** 단계가 적게 필요한 코드
+  및 에이전트형 작업에서 `low`가 크게 개선되어 지연 시간과 비용이 낮으면서도 높은 품질을 제공합니다.
+- **정식 버전 출시:** 확장된 프로덕션 사용을 위한 안정 모델입니다.
 
-### Doğru Flash modelini seçme
+### 적합한 Flash 모델 선택
 
-Gemini 3.5 Flash, en akıllı ve yetenekli Flash modelimizdir. Ancak farklı kullanım alanlarında farklı maliyet ve gecikme gereksinimleri olabilir.
+Gemini 3.5 Flash는 Google의 가장 지능적이고 강력한 Flash 모델입니다. 하지만 사용 사례마다 비용 및 지연 시간 요구사항이 다를 수 있습니다.
 
-- **Gemini 3.1 Flash-Lite**: 3.5 Flash'in gelişmiş akıl yürütme derinliğini gerektirmeyen, düşük maliyetli ve yüksek hacimli görevler için [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr)'ı kullanmanızı öneririz.
-  Verimlilik için optimize edilmiş, uzun vadeli ve kararlı bir modeldir. Daha fazla bilgi için [Flash-Lite geliştirici kılavuzuna](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr#developer_guide) bakın.
-- **Gemini 3 Flash Önizlemesi**: Genel kullanıma yönelik kararlılık ve gelişmiş akıl yürütme için 3.5 Flash'e geçmenizi önersek de [Gemini 3 Flash (Önizleme)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=tr), önizleme modeliyle test etmeye devam etmek isteyen geliştiriciler için kullanılabilir.
+- **Gemini 3.1 Flash-Lite**: 3.5
+  Flash의 고급 추론 깊이가 필요하지 않은 저렴한 비용의
+  대량 작업에는 [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko)를 사용하는 것이 좋습니다.
+  효율성에 최적화된 안정적인 장기 모델입니다. 자세한 내용은
+  [Flash-Lite 개발자 가이드](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko#developer_guide)
+  를 참조하세요.
+- **Gemini 3 Flash 프리뷰**: 정식 버전 안정성과 개선된 추론을 위해 3.5 Flash로 마이그레이션하는 것이 좋지만 프리뷰 모델로 계속 테스트하려는 개발자는 [Gemini 3 Flash (프리뷰)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=ko)를 계속 사용할 수 있습니다.
 
-## Davranış değişiklikleri
+## 동작 변경사항
 
-### Yeni varsayılan çaba düzeyi: `medium`
+### 새로운 기본 노력 수준: `medium`
 
-Gemini 3 Flash önizlemesinde `high` olan varsayılan düşünme çabası artık **`medium`** olarak değiştirildi. `medium` daha hızlı ve daha uygun maliyetli olmasının yanı sıra çok çeşitli görevlerde çok iyi sonuçlar verir. Karmaşık sorunlarda `high`, modeli daha derinlemesine düşünmeye teşvik eder.
+이제 기본 사고 노력이 Gemini 3
+Flash 프리뷰의 `high`에서 **`medium`**으로 변경되었습니다. `medium` 은 더 빠르고 비용 효율적이면서도 광범위한 작업에서 매우 좋은 결과를 제공합니다. 복잡한 문제의 경우 `high`를 사용하면 모델이 더 심층적으로 사고할 수 있습니다.
 
-| Çaba düzeyi | Ne zaman kullanılır? |
+| 노력 수준 | 용도 |
 | --- | --- |
-| `minimal` | Yanıt hızı için optimize edilmiştir. Sohbet benzeri kullanım alanları, hızlı bilgi yanıtları, daha basit araç çağrıları. |
-| `low` | Daha düşük gecikme süresi ve daha az adım gerektiren kod ve yapay zeka görevleri Biraz düşünme gerektiren analiz ve yazma görevleri için de uygundur. |
-| **`medium` (varsayılan)** | **Çoğu görev için en iyi kalite. Karmaşık kod ve aracı kullanım alanları için önerilir.** |
-| `high` | Modelin düşünme ve araç kullanma yeteneğini en üst düzeye çıkarır. Karmaşık muhakeme, zor matematik ve en zor kod veya aracı görevleri için idealdir. Genişletilmiş düşüncelere ve işlev çağrılarına olanak tanır. |
+| `minimal` | 응답 속도에 최적화되어 있습니다. 채팅과 유사한 사용 사례, 빠른 사실 기반 답변, 간단한 도구 호출 |
+| `low` | 지연 시간이 짧고 단계가 적게 필요한 코드 및 에이전트형 작업 사고가 필요한 분석 및 작성 작업에도 적합합니다. |
+| **`medium` (기본값)** | **대부분의 작업에 가장 적합한 품질입니다. 복잡한 코드 및 에이전트형 사용 사례에 권장됩니다.** |
+| `high` | 모델의 사고 및 도구 사용 능력을 극대화합니다. 복잡한 추론, 어려운 수학, 가장 어려운 코드 또는 에이전트 작업에 가장 적합합니다. 확장된 사고 및 함수 호출을 허용합니다. |
 
-Varsayılanı geçersiz kılmak için yapılandırmanızda `thinking_level` değerini ayarlayın:
+기본값을 재정의하려면 구성에서 `thinking_level`을 설정하세요.
 
 ### Python
 
@@ -165,40 +173,43 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Aşağıdaki tabloda, her model için hangi düşünce seviyelerinin desteklendiği gösterilmektedir:
+다음 표에는 모델별로 지원되는 사고 수준이 나와 있습니다.
 
-| Düşünme Düzeyi | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | Açıklama |
+| 사고 수준 | Gemini 3.5 Flash | Gemini 3.1 Pro | Gemini 3.1 Flash-Lite | Gemini 3 Flash | 설명 |
 | --- | --- | --- | --- | --- | --- |
-| **`minimal`** | Destekleniyor | Desteklenmiyor | Destekleniyor (Varsayılan) | Destekleniyor | Çoğu sorgu için "düşünme yok" ayarıyla eşleşir. `minimal`'nın düşünme özelliğinin devre dışı olduğunu garanti etmediğini unutmayın. Model, karmaşık görevler için çok az gerekçe sunabilir. |
-| **`low`** | Destekleniyor | Destekleniyor | Destekleniyor | Destekleniyor | Gecikmeyi ve maliyeti en aza indirir. |
-| **`medium`** | Destekleniyor (Varsayılan) | Destekleniyor | Destekleniyor | Destekleniyor | Çoğu görev için dengeli düşünme |
-| **`high`** | Desteklenir (Dinamik) | Destekleniyor (Varsayılan, Dinamik) | Desteklenir (Dinamik) | Destekleniyor (Varsayılan, Dinamik) | Akıl yürütme derinliğini en üst düzeye çıkarır. |
+| **`minimal`** | 지원됨 | 지원되지 않음 | 지원됨 (기본값) | 지원됨 | 대부분의 쿼리에 '사고 없음' 설정과 일치합니다. 참고: `minimal`은 사고가 사용 중지되었음을 보장하지 않으며 모델이 복잡한 작업에 대해 매우 최소한으로 추론할 수 있습니다. |
+| **`low`** | 지원됨 | 지원됨 | 지원됨 | 지원됨 | 지연 시간과 비용을 최소화합니다. |
+| **`medium`** | 지원됨 (기본값) | 지원됨 | 지원됨 | 지원됨 | 대부분의 작업에 균형 잡힌 사고를 제공합니다. |
+| **`high`** | 지원됨 (동적) | 지원됨 (기본값, 동적) | 지원됨 (동적) | 지원됨 (기본값, 동적) | 추론 깊이를 극대화합니다. |
 
-### Düşünce koruma
+### 사고 보존
 
-Model, çok aşamalı etkileşim sohbetlerindeki ara muhakemeyi otomatik olarak korur. Akıl yürütme bağlamı, görüşme geçmişinde yer aldığında taşınır. Bu sayede, yinelemeli hata ayıklama ve kod yeniden düzenleme gibi karmaşık çok adımlı görevlerde performans artar. API'de değişiklik yapılması gerekmez:
+모델은 멀티턴 대화에서 중간 추론을 자동으로 유지합니다. 대화 기록에 있는 경우 추론 컨텍스트가 전달되어 반복적인 디버깅 및 코드 리팩터링과 같은 복잡한 다단계 작업의 성능이 개선됩니다. API를 변경할 필요는 없습니다.
 
-- **Etkileşimler API'si**: Düşünceler otomatik olarak korunur. Davranışta
-  değişiklik yok.
-- **GenerateContent API**: Gemini 3.5 Flash'tan itibaren model, görüşme geçmişinde düşünce imzaları varsa önceki tüm dönüşlerdeki akıl yürütme bağlamını kullanır. Bunu etkinleştirmek için `contents` içinde tam ve değiştirilmemiş görüşme geçmişini ([düşünce imzaları](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr) dahil) iletin.
-  SDK'lar bunu otomatik olarak yapar.
+- **Interactions API**: 사고가 이미 자동으로 보존됩니다. 동작이 변경되지 않습니다.
+- **GenerateContent API**: Gemini 3.5 Flash부터 모델은 대화 기록에 사고 서명이 있는 경우 이전의 모든 턴에서
+  추론 컨텍스트를 사용합니다. [이 기능을 사용 설정하려면 수정되지 않은 전체 대화 기록 (사고 서명 포함)을 `contents`에서 전달하세요.](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ko)
+  SDK는 이 작업을 자동으로 처리합니다.
 
-## Gemini 3.x'teki parametre güncellemeleri ve en iyi uygulamalar
+## Gemini 3.x의 매개변수 업데이트 및 권장사항
 
-Gemini 3.5 Flash dahil olmak üzere **tüm Gemini 3.x modelleri** için aşağıdakiler geçerlidir.
+Gemini 3.5 Flash를 포함한 **모든 Gemini 3.x 모델**에 다음이 적용됩니다.
 
-- **`temperature`, `top_p`, `top_k`**: Varsayılan değerlerin değiştirilmemesini önemle tavsiye ederiz. Gemini 3'ün akıl yürütme özellikleri, varsayılan ayarlar için optimize edilmiştir.
-- `thinking_budget` yerine `thinking_level` kullanın.
-- **İşlev çağrısı yanıtı eşleştirme**: `id`, `name` ve yanıt sayısı önceki çağrılarla eşleşmelidir.
-- **Çok formatlı işlev yanıtları**: Çok formatlı içerik, işlev yanıtının dışında değil içinde yer almalıdır.
-- **İşlev yanıtlarındaki satır içi talimatlar**: Ayrı parçalar olarak değil, işlev yanıtı metnine eklenir.
-- **Gereksiz araç çağrılarını azaltma**: Düşünme seviyelerini düşürün veya sistem talimatlarıyla denemeler yaparak bağımsız iş akışlarındaki araç çağrılarını azaltın.
+- **`temperature`, `top_p`, `top_k`**: 기본값을 변경하지 않는 것이 좋습니다. Gemini 3의 추론 기능은 기본 설정에 최적화되어 있습니다.
+- `thinking_budget` 대신 `thinking_level`을 사용하세요.
+- **함수 호출 응답 일치**: `id`, `name`, 응답 개수
+  는 이전 호출과 일치해야 합니다.
+- **멀티모달 함수 응답**: 함수 응답 외부에 멀티모달 콘텐츠를 포함하지 말고
+  함수 응답 내부에 포함하세요.
+- **함수 응답의 인라인 안내**: 별도의 부분이 아닌 함수 응답
+  텍스트에 추가하세요.
+- **불필요한 도구 호출 줄이기**: 더 낮은 사고 수준을 사용하거나 시스템 안내를 실험하여 에이전트형 워크플로에서 도구 호출을 줄이세요.
 
-Kodunuzu nasıl güncelleyeceğinizi öğrenmek için aşağıdaki bölümlere bakın.
+코드를 업데이트하는 방법은 아래 섹션을 참조하세요.
 
-### Örnekleme parametreleri (artık önerilmiyor)
+### 샘플링 매개변수 (더 이상 권장되지 않음)
 
-`temperature`, `top_p` ve `top_k` artık tüm Gemini 3.x modelleri için önerilmemektedir. Gemini 3'ün muhakeme özellikleri, varsayılan ayarlar için optimize edilmiştir. **Bu parametreleri tüm isteklerden kaldırın.**
+`temperature`, `top_p`, `top_k`는 더 이상 모든 Gemini 3.x 모델에 권장되지 않습니다. Gemini 3의 추론 기능은 기본 설정에 최적화되어 있습니다. **모든 요청에서 이러한 매개변수를 삭제하세요.**
 
 ```
 # ⚠️ Remove these parameters (not recommended)
@@ -209,11 +220,11 @@ generation_config = {
 }
 ```
 
-Belirlenimi sağlamak için belirli kullanım alanınızla ilgili açık kurallar içeren bir sistem talimatı tanımlamanızı öneririz.
+결정론을 보장하려면 특정 사용 사례에 대한 명시적 규칙으로 시스템 안내를 정의하는 것이 좋습니다.
 
-### `thinking_budget` (artık önerilmiyor)
+### `thinking_budget` (더 이상 권장되지 않음)
 
-Ham sayısal `thinking_budget` parametresinin tüm Gemini 3.x modellerinde kullanılması artık önerilmiyor. Bunun yerine `thinking_level` dize sabit listesini kullanın.
+원시 숫자 `thinking_budget` 매개변수는 더 이상 모든 Gemini 3.x 모델에서 권장되지 않습니다. 대신 `thinking_level` 문자열 enum을 사용하세요.
 
 ```
 # ⚠️ Before (not recommended)
@@ -227,17 +238,17 @@ generation_config = {
 }
 ```
 
-Kullanılabilir değerler: `minimal`, `low`, `medium` (varsayılan) ve `high`.
+사용 가능한 값: `minimal`, `low`, `medium` (기본값), `high`
 
-### İşlev çağrısı: katı yanıt eşleştirme
+### 함수 호출: 엄격한 응답 일치
 
-Etkileşimler API'si, eşleşmeyen işlev yanıtları için zaten hata veriyor. GenerateContent API henüz hata vermiyor ancak eşleşmeyen yanıtlar, modelin çoğu durumda `finish_reason: STOP` ile boş yanıtlar döndürmesine neden oluyor. Her zaman aşağıdaki kurallara uyun:
+Interactions API는 이미 일치하지 않는 함수 응답에 오류를 발생시킵니다. GenerateContent API는 아직 오류를 발생시키지 않지만 응답이 일치하지 않으면 모델이 대부분의 경우 `finish_reason: STOP`으로 빈 응답을 반환합니다. 항상 다음 규칙을 따르세요.
 
-| Gereksinim | Ayrıntılar |
+| 요구사항 | 세부정보 |
 | --- | --- |
-| `id` içerir | Her `FunctionResponse`, ilgili `FunctionCall` öğesindeki `id` öğesini içermelidir. |
-| `name`. maç | Yanıtın `name` değeri, görüşmedeki `name` değeriyle eşleşmelidir. |
-| Eşleşme sayıları | Alınan her `FunctionCall` için tam olarak bir `FunctionResponse` döndürün. |
+| `id` 포함 | 모든 `FunctionResponse`에는 해당 `FunctionCall`의 `id`가 포함되어야 합니다. |
+| `name` 일치 | 응답의 `name`은 호출의 `name`과 일치해야 합니다. |
+| 개수 일치 | 수신된 각 `FunctionCall`에 대해 정확히 하나의 `FunctionResponse`를 반환합니다. |
 
 ### Python
 
@@ -292,9 +303,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Çok formatlı işlev yanıtları
+### 멀티모달 함수 응답
 
-Müşterilerin genellikle işlev yanıtı dışında resimler sağladığını görüyoruz. Bu durum, beklenmedik model davranışlarına (ör. düşünce sızıntısı) ve daha düşük kaliteli çıktılara neden olabilir. Bunun yerine [Multimodal Function Responses API dokümanlarındaki](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=tr#multimodal) öneriyi uygulayın ve modele gönderdiğiniz işlev yanıtı bölümlerine çok formatlı içerik ekleyin. Model, daha bilinçli bir yanıt üretmek için bu çok formatlı içeriği bir sonraki turda işleyebilir.
+클라이언트가 함수 응답 외부에서 이미지를 제공하는 경우가 많습니다. 이로 인해 예기치 않은 모델 동작 (예: 사고 유출)이 발생하고 출력 품질이 저하될 수 있습니다. 대신
+[멀티모달 함수 응답 API 문서](https://ai.google.dev/gemini-api/docs/function-calling?example=meeting&hl=ko#multimodal)
+의 권장사항을 따르고 모델에
+전송하는 함수 응답 부분에 멀티모달 콘텐츠를 포함하세요. 모델은 다음 차례에 이 멀티모달 콘텐츠를 처리하여 더 많은 정보를 바탕으로 응답을 생성할 수 있습니다.
 
 ### Python
 
@@ -344,9 +358,9 @@ const finalInteraction = await client.interactions.create({
 });
 ```
 
-### İşlev yanıtlarında satır içi talimatlar
+### 함수 응답의 인라인 안내
 
-Müşterilerin, işlev yanıtlarıyla birlikte ek talimatlar sağladığını sıklıkla görüyoruz. Bu talimatlar, sonraki `Parts` olarak değerlendirilir. Bu durum, modelin beklenmedik davranışlar sergilemesine (ör. düşünce sızıntısı) ve daha düşük kaliteli çıkışlar üretmesine neden olabilir. Bunun yerine, ek talimatları iki yeni satırla ayrılmış şekilde işlev yanıtı metninin sonuna ekleyin.
+클라이언트가 함수 응답과 함께 후속 `Parts`로 추가 안내를 제공하는 경우가 많습니다. 이로 인해 예기치 않은 모델 동작 (예: 사고 유출)이 발생하고 출력 품질이 저하될 수 있습니다. 대신 추가 안내를 두 개의 줄바꿈으로 구분하여 함수 응답 텍스트의 끝에 추가하세요.
 
 ### Python
 
@@ -386,102 +400,122 @@ const finalInteraction = await client.interactions.create({
 });
 ```
 
-### Gereksiz araç çağrılarını azaltma
+### 불필요한 도구 호출 줄이기
 
-Araç çağrıları aşırı kullanılıyorsa bu çağrıları en aza indirmenize yardımcı olacak iki teknik vardır:
+도구 호출을 과도하게 사용하는 경우 다음 두 가지 기법을 사용하면 도구 호출을 최소화할 수 있습니다.
 
-1. **Düşünme düzeyini azaltarak başlayın** (`medium`, `low` veya `minimal`):
-   Daha yüksek düşünme düzeyleri, modelin keşfetmek ve doğrulamak için daha fazla araç kullanmasını teşvik eder. Bu nedenle, düzeyi düşürmek araç çağrılarını azaltabilir.
-2. **Sistem talimatı ekleyin:** Düşünme düzeyi ayarlandıktan sonra aşırı kullanım devam ederse araç kullanımını kısıtlayan bir istem kullanmayı deneyin. Örneğin:
+1. **사고 수준을 낮추는 것부터 시작** (`medium`, `low`, `minimal`): 사고 수준이 높을수록 모델이 더 많은 도구를 사용하여 탐색하고 확인하므로 수준을 낮추면 도구 호출을 줄일 수 있습니다.
+2. **시스템 안내 추가:** 사고 수준을 조정한 후에도 과도한 사용이 계속되면 도구 사용을 제한하는 프롬프트를 고려하세요. 예를 들면 다음과 같습니다.
 
    ```
    You have a limited action budget of <n> tool calls. Use them efficiently.
    ```
 
-## Taşıma kontrol listesi
+## 마이그레이션 체크리스트
 
-**`google-genai` SDK'nın 2.0.0 veya sonraki bir sürümüne güncellemenizi önemle tavsiye ederiz.** Bu sürüm, Interactions API'de uyumluluğu bozan değişiklikler içerir. Ayrıntılar için [API'de yapılan ve geriye dönük uyumluluğu bozan değişikliklerle ilgili taşıma kılavuzuna](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=tr) bakın.
+**`google-genai` SDK v2.0.0 이상으로 업데이트하는 것이 좋습니다.** 이 버전에는 Interactions API에 브레이킹 체인지가 도입되었습니다. 자세한 내용은
+[브레이킹 체인지 마이그레이션 가이드](https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=ko)를 참조하세요.
 
-### Gemini 3 Flash önizlemesinden geçiş yapma
+### Gemini 3 Flash 프리뷰에서 마이그레이션
 
-- Model adını güncelleme: `gemini-3-flash-preview` → `gemini-3.5-flash`
-- Fiyatlandırmayı inceleyin. Gemini 3.5 Flash, Gemini 3 Flash
-  Preview'dan daha pahalıdır. Kullanım alanınız maliyete karşı çok hassassa [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=tr)'a geçmeyi düşünebilirsiniz. Ayrıntılar için [fiyatlandırma sayfasına](https://ai.google.dev/gemini-api/docs/pricing?hl=tr#gemini-3.5-flash) göz atın.
-- `temperature`, `top_p`, `top_k` öğelerini yapılandırmanızdan kaldırın (artık önerilmemektedir).
-- `thinking_budget` yerine `thinking_level` koyun.
-- Tüm `FunctionResponse` bölümlerine `id` ve eşleşen `name` değerlerini ekleyin.
-- İstemlerinizi test edin. Varsayılan çaba `high` → `medium` olarak değiştirildi. Kaliteyi, hızı ve maliyeti doğrulayın.
-- Düşünce koruma özelliği artık varsayılan olarak etkindir. Gerekçelendirme bağlamı, dönüşümler arasında aktarılır. Bu durum performansı artırır ancak jeton kullanımını yükseltebilir.
-- Gereksiz araç çağrılarını azaltın: Düşünme düzeyini azaltarak başlayın (`medium`, `low` veya `minimal`). Aşırı kullanım devam ederse araç kullanımını kısıtlamak için bir sistem talimatı ekleyin.
-- [Bilgisayar Kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) desteklenir.
+- 모델 이름 업데이트: `gemini-3-flash-preview` → `gemini-3.5-flash`
+- 가격 책정 검토 Gemini 3.5 Flash는 Gemini 3 Flash 프리뷰보다 비쌉니다. 사용 사례가 비용에 매우 민감한 경우
+  [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=ko)
+  로 마이그레이션하는 것이 좋습니다. 자세한 내용은 [가격 책정 페이지](https://ai.google.dev/gemini-api/docs/pricing?hl=ko#gemini-3.5-flash)를 참조하세요.
+- 구성에서 `temperature`, `top_p`, `top_k` 삭제 (더 이상 권장되지 않음)
+- `thinking_budget`을 `thinking_level`로 바꾸기
+- 모든 `FunctionResponse` 부분에 `id` 및 일치하는 `name` 추가
+- 프롬프트 테스트 기본 노력이 `high`에서 `medium`으로 변경되었습니다. 품질, 속도, 비용을 확인하세요.
+- 이제 사고 보존이 기본적으로 사용 설정되어 있습니다. 추론 컨텍스트가 턴 간에 전달되어 성능이 개선되지만 토큰 사용량이 증가할 수 있습니다.
+- 불필요한 도구 호출 줄이기: 사고 수준을 낮추는 것부터 시작(`medium`, `low`, `minimal`). 과도한 사용이 계속되면 도구 사용을 제한하는 시스템 안내를 추가합니다.
+- [컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko)이 지원됩니다.
 
-### Gemini 2.5'ten geçiş yapma
+### Gemini 2.5에서 마이그레이션
 
-Yukarıdakilerin tümüne ek olarak:
+위의 모든 작업과 함께 다음을 수행할 수 있습니다.
 
-- İstemleri basitleştirin. Muhakeme yapmaya zorlamak için zincirleme düşünce istem mühendisliği kullandıysanız bunun yerine daha basit istemlerle `thinking_level: "medium"` veya `"high"`'yi deneyin.
-- PDF ve medya iş yüklerini test edin. Yoğun doküman ayrıştırma için belirli bir davranışa güveniyorsanız doğruluğun devam etmesini sağlamak amacıyla `media_resolution_high` ayarını test edin. Varsayılan olarak Gemini 3'e geçiş yapmak, PDF'ler için jeton kullanımını artırabilir ancak videolar için azaltabilir. İstekler bağlam penceresini aşarsa `media_resolution` değerini açıkça azaltın. Ayrıntılar için [medya çözünürlüğü](https://ai.google.dev/gemini-api/docs/media-resolution?hl=tr) belgelerine bakın.
-- [Birleşik araç kullanımından](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) yararlanın.
-  Google Arama, URL bağlamı, kod yürütme ve özel işlevler aynı istekte kullanılabilir.
-- Çok formatlı işlev yanıtları kullanıyorsanız çok formatlı içeriği işlev yanıtı bölümlerinin içine taşıyın, yanına değil.
-- İşlev yanıtlarıyla satır içi talimatlar kullanılıyorsa bunları ayrı parçalar olarak değil, iki yeni satırla ayrılmış şekilde işlev yanıtı metnine ekleyin.
-- Görüntü segmentasyonu, Gemini 3.x'te desteklenmez. Segmentasyon iş yükleri için düşünme özelliği devre dışı bırakılmış Gemini 2.5 Flash'ı veya [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=tr)'yı kullanmaya devam edin.
-- Yapılandırmanızdan `candidate_count` öğesini kaldırın (Gemini 3.x'te desteklenmez)
+- 프롬프트 간소화 사고 체인 프롬프트 엔지니어링을 사용하여 추론을 강제한 경우 더 간단한 프롬프트로 `thinking_level: "medium"` 또는 `"high"`를 사용해 보세요.
+- PDF 및 미디어 워크로드 테스트 밀도 높은 문서 파싱을 위해 특정 동작에 의존하고 있었다면, 정확도를 유지하기 위해 `media_resolution_high` 설정을 테스트해 보세요. Gemini 3 기본값으로 마이그레이션하면 PDF의 토큰 사용량이 증가할 수 있지만 동영상의 토큰 사용량은 감소할 수 있습니다. 요청이 컨텍스트 윈도우를 초과하는 경우 `media_resolution`을 명시적으로 줄이세요. 자세한 내용은
+  [미디어 해상도](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko) 문서를
+  참조하세요.
+- [결합된 도구 사용 활용](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko)
+  Google 검색, URL 컨텍스트, 코드 실행, 커스텀 함수를 동일한 요청에서 사용할 수 있습니다.
+- 멀티모달 함수 응답을 사용하는 경우 멀티모달 콘텐츠를 함수 응답 부분 옆에 두지 말고 함수 응답 부분 내부에 배치하세요.
+- 함수 응답과 함께 인라인 안내를 사용하는 경우 별도의 부분이 아닌 두 개의 줄바꿈으로 구분하여 함수 응답 텍스트에 추가하세요.
+- Gemini 3.x에서는 이미지 분할이 지원되지 않습니다. 분할 워크로드의 경우 사고를 사용 중지한 상태로 Gemini 2.5 Flash를 계속 사용하세요.
+- 구성에서 `candidate_count` 삭제 (Gemini 3.x에서 지원되지 않음)
 
-## Gemini 3 ailesinin özellikleri
+## Gemini 3 제품군 기능
 
-Gemini 3.5 Flash, Bilgisayar Kullanımı da dahil olmak üzere Gemini 3 ailesinin tüm özelliklerini devralır.
-Gemini 3'te kullanıma sunulan ve devam eden özellikler:
+Gemini 3.5 Flash는 컴퓨터 사용을 포함한 모든 Gemini 3 제품군 기능을 상속합니다.
+Gemini 3에 도입된 기능은 다음과 같습니다.
 
-- [**Düşünme**](https://ai.google.dev/gemini-api/docs/thinking?hl=tr)**:** Şifrelenmiş
-  API çağrıları arasında muhakeme bağlamı korunur. Etkileşimler API'sinde otomatik, GenerateContent'te ise örtülüdür.
-- [**Araçlarla yapılandırılmış çıkışlar**](https://ai.google.dev/gemini-api/docs/structured-output?hl=tr)**:** JSON modunu yerleşik araçlarla (arama, URL bağlamı, kod yürütme, işlev çağrısı) birleştirin.
-- [**Çok formatlı işlev yanıtları**](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr#multimodal)**:** İşlev çağrısı sonuçlarında resim, ses ve diğer medya türlerini döndürün.
-- [**Görüntülerle kod yürütme**](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr#images)**:** Görüntüleri işleyen ve oluşturan kodları yürütün.
-- [**Birleşik araç kullanımı**](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr)**:** Aynı istekte yerleşik araçları ve özel işlev çağrılarını kullanın.
-- [**Medya çözünürlüğü**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=tr)**:**
-  Resim, video ve PDF girişleri için jeton dağıtımı üzerinde ayrıntılı kontrol.
-  Gemini 3 modelleri, karma doğruluklu istemler için içerik öğesi başına çözünürlük ayarlarını (`low`,
-  `medium`, `high`, `ultra_high`) destekler.
-- [**Düşünce imzaları**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=tr)**:**
-  Modelin dahili muhakemesinin şifrelenmiş temsilleri. Durum bilgisiz modda çok aşamalı etkileşim işlev çağrısı için gereklidir; Interactions API ve resmi SDK'lar tarafından otomatik olarak yönetilir.
+- [**사고**](https://ai.google.dev/gemini-api/docs/thinking?hl=ko)**:** API 호출 간에 보존되는 암호화된
+  추론 컨텍스트입니다. Interactions API에서 자동, GenerateContent에서 암시적
+- [**도구를 사용한 구조화된 출력**](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)**:** JSON 모드를
+  기본 제공 도구 (검색, URL 컨텍스트, 코드 실행, 함수 호출)와 결합합니다.
+- [**멀티모달 함수 응답**](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko#multimodal)**:** 함수 호출 결과에서
+  이미지, 오디오, 기타 미디어를 반환합니다.
+- [**이미지를 사용한 코드 실행**](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko#images)**:** 이미지를
+  처리하고 생성하는 코드를 실행합니다.
+- [****결합된 도구 사용****](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko): 동일한 요청에서 기본 제공 도구와
+  커스텀 함수 호출을 사용합니다.
+- [**미디어 해상도**](https://ai.google.dev/gemini-api/docs/media-resolution?hl=ko)**:**
+  이미지, 동영상, PDF 입력의 토큰 할당을 세부적으로 제어합니다.
+  Gemini 3 모델은 혼합 충실도 프롬프트에 대해 콘텐츠 항목별 해상도 설정 (`low`,
+  `medium`, `high`, `ultra_high`)을 지원합니다.
+- [**사고 서명**](https://ai.google.dev/gemini-api/docs/thought-signatures?hl=ko)**:**
+  모델의 내부 추론을 암호화하여 표현합니다. 상태 비저장 모드에서 멀티턴 함수 호출에 필요하며 Interactions API 및 공식 SDK에서 자동으로 관리합니다.
 
-## İstemlerle ilgili en iyi uygulamalar
+## 프롬프트 권장사항
 
-Gemini 3.x modelleri, akıl yürütme modelleridir. Bu nedenle istemlerinizi farklı şekilde yazmanız gerekir.
+Gemini 3.x 모델은 추론 모델이므로 프롬프트 작성 방식에도 변화가 필요합니다.
 
-- **Net talimatlar:** Kısa ve öz olun. Gemini 3.x, doğrudan ve net talimatlara en iyi şekilde yanıt verir. Eski modeller için tasarlanmış ayrıntılı veya karmaşık istem mühendisliği teknikleri, modelin aşırı analiz yapmasına neden olabilir.
-- **Çıkış ayrıntı düzeyi:** Gemini 3 ve 3.1 varsayılan olarak daha az ayrıntılıdır ve doğrudan, etkili yanıtları tercih eder. Kullanım alanınızda sohbet tonu gerekiyorsa isteminizde modeli açıkça yönlendirin (ör. "Bunu arkadaş canlısı ve konuşkan bir asistan gibi açıkla").
-- **Bağlam yönetimi:** Büyük veri kümeleriyle (ör. kitapların tamamı, kod tabanları veya uzun videolar) çalışırken verilerle ilgili bağlamdan sonra, istemin sonuna özel talimatlarınızı veya sorularınızı ekleyin. Sorunuza "Önceki bilgilere göre..." gibi bir ifadeyle başlayarak modelin muhakemesini sabitleyin.
+- **정확한 지시:** 간결하게 작성하세요. Gemini 3.x는 직접적이고 명확한 지시에 가장 잘 반응합니다. 이전 모델에서 사용되던 장황하거나 복잡한 프롬프트 엔지니어링 기법은 모델이 과분석을 유발할 수 있습니다.
+- **출력 장황도:** 기본적으로 Gemini 3 및 3.1은 덜 장황하며, 직접적이고 효율적인 답변을 선호합니다. 사용 사례에 대화형 톤이 필요한 경우 프롬프트에서 모델을 명시적으로 유도하세요 (예: '친근하고 말이 많은 조수처럼 설명해 주세요').
+- **컨텍스트 관리:** 전체 책, 코드베이스, 긴 동영상과 같은 대규모 데이터 세트로 작업할 때는 데이터 컨텍스트 뒤에 프롬프트 끝에 특정 안내 또는 질문을 배치하세요. '앞의 정보를 바탕으로...'와 같은 문구로 질문을 시작하여 모델의 추론을 고정하세요.
 
-İstem tasarımı stratejileri hakkında daha fazla bilgiyi [istem mühendisliği kılavuzunda](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr) bulabilirsiniz.
+프롬프트 설계 전략에 관한 자세한 내용은
+[프롬프트 엔지니어링 가이드](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ko)를 참조하세요.
 
-## Sınırlamalar
+## 제한사항
 
-- Görüntü segmentasyonu, Gemini 3.x'te desteklenmez. Segmentasyon iş yükleri için düşünme özelliği devre dışı bırakılmış Gemini 2.5 Flash'ı veya [Gemini Robotics-ER 1.6](https://ai.google.dev/gemini-api/docs/robotics-overview?hl=tr)'yı kullanmaya devam edin.
+- Gemini 3.x에서는 이미지 분할이 지원되지 않습니다. 분할 워크로드의 경우 사고를 사용 중지한 상태로 Gemini 2.5 Flash를 계속 사용하세요.
 
-## SSS
+## FAQ
 
-1. **Gemini 3.5 Flash'ın bilgi kesme tarihi nedir?** Gemini 3.5 Flash'ın
-   bilgi kesme tarihi Ocak 2025'tir. Daha güncel bilgiler için [Search Grounding](https://ai.google.dev/gemini-api/docs/google-search?hl=tr) aracını kullanın.
-2. **Bağlam penceresi sınırları nelerdir?** Gemini 3.5 Flash, 1 milyon parçalık giriş bağlamı penceresini ve 65 bin çıkış parçasına kadar olan verileri destekler.
-3. **Eski `thinking_budget` kodum çalışmaya devam eder mi?** Evet, `thinking_budget` geriye dönük uyumluluk için hâlâ desteklenmektedir ancak daha öngörülebilir bir performans için `thinking_level`'ye geçmenizi öneririz. Aynı istekte ikisini birden kullanmayın.
-4. **Gemini 3.5 Flash, Batch API'yi destekliyor mu?** Evet. Ayrıntılar için [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=tr) kılavuzuna bakın.
-5. **Bağlamı önbelleğe alma özelliği destekleniyor mu?** Evet, [bağlamı önbelleğe alma](https://ai.google.dev/gemini-api/docs/caching?hl=tr) desteklenir.
-6. **Hangi araçlar desteklenir?** Gemini 3.5 Flash; [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr), [Google Haritalar ile Temellendirme](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr), [Dosya Arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr), [Kod Yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr), [URL Bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr) ve [işlev çağırma](https://ai.google.dev/gemini-api/docs/function-calling?hl=tr)'yı ([birleşik araç kullanımı](https://ai.google.dev/gemini-api/docs/tool-combination?hl=tr) ve [bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) dahil) destekler.
+1. **Gemini 3.5 Flash의 지식 단절 시점은 언제인가요?** Gemini 3.5 Flash의 지식 단절 시점은 2025년 1월입니다. 최신 정보는
+   [검색 그라운딩](https://ai.google.dev/gemini-api/docs/google-search?hl=ko) 도구를 사용하세요.
+2. **컨텍스트 윈도우 한도는 어떻게 되나요?** Gemini 3.5 Flash는 최대 100만 토큰의 입력 컨텍스트 윈도우와 최대 65,000개의 출력 토큰을 지원합니다.
+3. **이전 `thinking_budget` 코드가 계속 작동하나요?** 예, `thinking_budget`은 이전 버전과의 호환성을 위해 계속 지원되지만 더 예측 가능한 성능을 위해 `thinking_level`로 마이그레이션하는 것이 좋습니다. 동일한 요청에서 두 가지를 모두 사용하지는 마세요.
+4. **Gemini 3.5 Flash는 Batch API를 지원하나요?** 예. 자세한 내용은
+   [Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=ko) 가이드를 참조하세요.
+5. **컨텍스트 캐싱이 지원되나요?** 예,
+   [컨텍스트 캐싱](https://ai.google.dev/gemini-api/docs/caching?hl=ko)이 지원됩니다.
+6. **지원되는 도구는 무엇인가요?** Gemini 3.5 Flash는
+   [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko),
+   [Google 지도 기반 그라운딩](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko),
+   [파일 검색](https://ai.google.dev/gemini-api/docs/file-search?hl=ko),
+   [코드 실행](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko),
+   [URL 컨텍스트](https://ai.google.dev/gemini-api/docs/url-context?hl=ko), 그리고
+   표준 [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko),
+   포함
+   [결합된 도구 사용](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko), 그리고
+   [컴퓨터 사용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko)을 지원합니다.
 
-## Sonraki adımlar
+## 다음 단계
 
-- İstem tasarımı stratejileri hakkında daha fazla bilgiyi [istem mühendisliği kılavuzunda](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=tr) bulabilirsiniz.
-- [Gemini 3 Cookbook](https://github.com/google-gemini/cookbook)'u kullanmaya başlayın
-- [Gemini API optimizasyonu ve çıkarımı](https://ai.google.dev/gemini-api/docs/optimization?hl=tr) hakkında bilgi edinin.
+- 프롬프트 설계 전략에 관한 자세한 내용은
+  [프롬프트 엔지니어링 가이드](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=ko)를 참조하세요.
+- [Gemini 3 Cookbook](https://github.com/google-gemini/cookbook) 시작하기
+- [Gemini API 최적화 및 추론](https://ai.google.dev/gemini-api/docs/optimization?hl=ko) 알아보기
 
-Geri bildirim gönderin
+의견 보내기
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Son güncelleme tarihi: 2026-07-23 UTC.
+최종 업데이트: 2026-07-30(UTC)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+의견을 전달하고 싶나요?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-23 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]
