@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/claude-personal-guidance
-fetched_at: 2026-07-27T04:31:52.521832+00:00
+fetched_at: 2026-08-03T04:25:02.031612+00:00
 title: "How people ask Claude for personal guidance \\ Anthropic"
 ---
 
@@ -26,7 +26,7 @@ There remain many open questions on what good guidance from AI really means or h
 
 ## **What kinds of guidance do people seek from Claude?**
 
-We sampled 1 million [claude.ai](http://claude.ai/redirect/website.v1.500a81d3-5a6c-46d7-b743-5c7aeb135d5e) conversations from March and April 2026 and filtered for unique users to get roughly 639,000 conversations. We then used a classifier to identify *personal guidance,* which we defined as conversations where people ask what *they specifically* should do in their personal lives—for example, questions that start with "Should I…?" or "What do I do about…?". We excluded questions that seek objective information or opinions in general terms.
+We sampled 1 million [claude.ai](http://claude.ai/redirect/website.v1.400db84d-3820-4f5d-9ff2-0de5ab7b78dd) conversations from March and April 2026 and filtered for unique users to get roughly 639,000 conversations. We then used a classifier to identify *personal guidance,* which we defined as conversations where people ask what *they specifically* should do in their personal lives—for example, questions that start with "Should I…?" or "What do I do about…?". We excluded questions that seek objective information or opinions in general terms.
 
 We categorized these roughly 38,000 conversations into nine domains, drawing from previous research on AI and guidance-giving: relationships, career, personal development, financial, legal, health and wellness, parenting, ethics, and spirituality (see [Appendix](https://cdn.sanity.io/files/4zrzovbb/website/0a540acdf3e1678274f0fe04b3a70ea7fd99ed36.pdf) for more information). This taxonomy covered 98% of the conversations we saw.
 
@@ -104,6 +104,12 @@ Available [here.](https://cdn.sanity.io/files/4zrzovbb/website/0a540acdf3e167827
 
 ## Related content
 
+### Discovering cryptographic weaknesses with Claude
+
+cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher.
+
+[Read more](https://www.anthropic.com/research/discovering-cryptographic-weaknesses)
+
 ### Project Pilot: Can AI control a drone?
 
 Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
@@ -113,7 +119,3 @@ Working with Andon Labs, we’ve developed a new series of evaluations that asse
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
-
-### Claude’s values across models and languages
-
-[Read more](https://www.anthropic.com/research/claude-values-models-languages)

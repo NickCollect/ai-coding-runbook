@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-best-practices
-fetched_at: 2026-07-20T04:31:25.889404+00:00
+fetched_at: 2026-08-03T04:25:00.207394+00:00
 title: "Best practices for Claude Code - Claude Code Docs"
 ---
 
@@ -370,7 +370,7 @@ During long sessions, Claude’s context window can fill with irrelevant convers
 - Use `/clear` frequently between tasks to reset the context window entirely
 - When auto compaction triggers, Claude summarizes what matters most, including code patterns, file states, and key decisions
 - For more control, run `/compact <instructions>`, like `/compact Focus on the API changes`
-- To compact only part of the conversation, use `Esc + Esc` or `/rewind`, select a message checkpoint, and choose **Summarize from here** or **Summarize up to here**. The first condenses messages from that point forward while keeping earlier context intact; the second condenses earlier messages while keeping recent ones in full. See [Restore vs. summarize](https://www.anthropic.com/docs/en/checkpointing#restore-vs-summarize).
+- To compact only part of the conversation, use `Esc + Esc` or `/rewind`, select a message checkpoint, and choose **Summarize from here** or **Summarize up to here**. The first condenses messages from that point forward while keeping earlier context intact; the second condenses earlier messages while keeping recent ones in full. See [the rewind menu’s summarize options](https://www.anthropic.com/docs/en/checkpointing#rewind-and-summarize).
 - Customize compaction behavior in CLAUDE.md with instructions like `"When compacting, always preserve the full list of modified files and any test commands"` to ensure critical context survives summarization
 - For quick questions that don’t need to stay in context, use [`/btw`](https://www.anthropic.com/docs/en/interactive-mode#side-questions-with-%2Fbtw). The answer appears in a dismissible overlay and never enters conversation history, so you can check a detail without growing context.
 

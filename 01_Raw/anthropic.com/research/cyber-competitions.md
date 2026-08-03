@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/cyber-competitions
-fetched_at: 2026-07-27T04:31:52.904226+00:00
+fetched_at: 2026-08-03T04:25:02.554937+00:00
 title: "Claude does cyber competitions \\ Anthropic"
 ---
 
@@ -54,9 +54,9 @@ The Airbnb competition, in which Claude solved nearly half of a multi-day compet
 
 ## Claude can make good use of autonomy and tools
 
-The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on [Claude.ai](http://claude.ai/redirect/website.v1.c608c0e6-4ceb-478a-92c5-84864fa81d9b); before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
+The HackTheBox competition also demonstrated the agentic capabilities of Claude. Once our researcher started the script late, he went back to moving into his apartment. Claude was solving challenges autonomously while the Anthropic human was moving boxes. This worked because it was not just a human-mediated chat on [Claude.ai](http://claude.ai/redirect/website.v1.70d7eaad-9122-40ba-a289-8a0351287ef6); before the competition we gave Claude tools that allowed it to autonomously read the challenge files and submit a flag once it thought it had the correct answer.
 
-In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with [Claude.ai](http://claude.ai/redirect/website.v1.c608c0e6-4ceb-478a-92c5-84864fa81d9b) to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.
+In fact, the trajectory of Claude’s performance from PicoCTF shows the value of these tools quite starkly. As Figure 2 illustrates, Claude’s slowest progress happened when one of our researchers was interacting with [Claude.ai](http://claude.ai/redirect/website.v1.70d7eaad-9122-40ba-a289-8a0351287ef6) to manually input information about challenges and converse with Claude about solving them. Far more effective were the periods of time when Claude was given access to Kali Linux, an open source operating system designed for cybersecurity workflows including penetration testing.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/1ac1e6bc9064e821eb8e239ef1cf5fc4a6687938-1740x946.png)
 
@@ -154,6 +154,12 @@ We thank Artem Petrov and Dmitrii Volkov from Palisade Research for providing da
 
 ## Related content
 
+### Discovering cryptographic weaknesses with Claude
+
+cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher.
+
+[Read more](https://www.anthropic.com/research/discovering-cryptographic-weaknesses)
+
 ### Project Pilot: Can AI control a drone?
 
 Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
@@ -163,10 +169,6 @@ Working with Andon Labs, we’ve developed a new series of evaluations that asse
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
-
-### Claude’s values across models and languages
-
-[Read more](https://www.anthropic.com/research/claude-values-models-languages)
 
 ## Subscribe to the Frontier Red Team newsletter
 

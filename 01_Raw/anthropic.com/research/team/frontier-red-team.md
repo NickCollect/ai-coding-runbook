@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/team/frontier-red-team
-fetched_at: 2026-07-27T04:31:56.278710+00:00
+fetched_at: 2026-08-03T04:25:06.148191+00:00
 title: "Frontier Red Team \\ Anthropic"
 ---
 
@@ -28,6 +28,9 @@ Search
 
 DateCategoryTitle
 
+- [Jul 28, 2026Frontier Red Team
+
+  Discovering cryptographic weaknesses with Claude](https://www.anthropic.com/research/discovering-cryptographic-weaknesses)
 - [Jul 24, 2026Frontier Red Team
 
   Project Pilot: Can AI control a drone?](https://www.anthropic.com/research/project-pilot)
@@ -55,8 +58,5 @@ DateCategoryTitle
 - [Mar 6, 2026Policy
 
   Partnering with Mozilla to improve Firefox’s security](https://www.anthropic.com/news/mozilla-firefox-security)
-- [Mar 6, 2026Frontier Red Team
-
-  Reverse engineering Claude's CVE-2026-2796 exploit](https://www.anthropic.com/research/exploit)
 
 [See more](#)

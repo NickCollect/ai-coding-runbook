@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/natural-language-autoencoders
-fetched_at: 2026-07-27T04:31:54.947531+00:00
+fetched_at: 2026-08-03T04:25:04.998544+00:00
 title: "Natural Language Autoencoders \\ Anthropic"
 ---
 
@@ -64,7 +64,7 @@ For example, in the blackmail test discussed above, we used NLAs to understand w
 
 Claude does not say it thinks it’s being tested in this transcript from our blackmail evaluation, but the NLA explanation reveals its suspicions.
 
-Extending this analysis to other evaluations, NLAs suggest that Claude suspects it’s being tested more often than it lets on. For instance, in a test of whether Claude takes destructive actions while writing code—for example, deleting important files—NLA explanations show signs of evaluation awareness 16% of the time, even though Claude never explicitly verbalizes this. Similarly, on the popular coding benchmark SWE-bench Verified, which we use to determine how capable Claude is, NLAs indicate that Claude is aware it is being evaluated on 26% of problems. In contrast, NLA explanations indicate evaluation awareness on less than 1% of real [claude.ai](http://claude.ai/redirect/website.v1.8f2e9b77-8e04-4421-8d50-3b074288fc4f) usage that opted in for training.
+Extending this analysis to other evaluations, NLAs suggest that Claude suspects it’s being tested more often than it lets on. For instance, in a test of whether Claude takes destructive actions while writing code—for example, deleting important files—NLA explanations show signs of evaluation awareness 16% of the time, even though Claude never explicitly verbalizes this. Similarly, on the popular coding benchmark SWE-bench Verified, which we use to determine how capable Claude is, NLAs indicate that Claude is aware it is being evaluated on 26% of problems. In contrast, NLA explanations indicate evaluation awareness on less than 1% of real [claude.ai](http://claude.ai/redirect/website.v1.e711caa1-d2b3-4472-9b73-550f7d9f4d49) usage that opted in for training.
 
 ![](https://www-cdn.anthropic.com/images/4zrzovbb/website/fc08005f32ff020f21e598cc72f58768af2bcc4f-1590x1170.png)
 
@@ -110,6 +110,12 @@ Find the [code](https://github.com/kitft/natural_language_autoencoders) on GitHu
 
 ## Related content
 
+### Discovering cryptographic weaknesses with Claude
+
+cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher.
+
+[Read more](https://www.anthropic.com/research/discovering-cryptographic-weaknesses)
+
 ### Project Pilot: Can AI control a drone?
 
 Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
@@ -119,7 +125,3 @@ Working with Andon Labs, we’ve developed a new series of evaluations that asse
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
-
-### Claude’s values across models and languages
-
-[Read more](https://www.anthropic.com/research/claude-values-models-languages)

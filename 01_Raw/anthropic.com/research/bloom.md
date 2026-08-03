@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/research/bloom
-fetched_at: 2026-07-27T04:31:52.073991+00:00
+fetched_at: 2026-08-03T04:25:01.754437+00:00
 title: "Introducing Bloom: an open source tool for automated behavioral evaluations \\ Anthropic"
 ---
 
@@ -45,7 +45,7 @@ Unlike fixed evaluation sets, Bloom produces different scenarios on each run whi
 
 Researchers can extensively configure Bloom's behavior, through choosing models for each stage, adjusting the interactions’ length and modality (i.e., whether to expose tools to the target model, whether to simulate a user), controlling how diverse the evaluation scenarios are, and specifying secondary scoring dimensions, like realism or elicitation difficulty.
 
-**Example outputs from all four stages of the Bloom evaluation pipeline can be viewed [here.](https://claude.ai/redirect/website.v1.6805d9a1-304b-4d6b-bfb6-913084c36d8b/public/artifacts/cbfddf51-ab0d-45a9-913b-163ae2dd4126)**
+**Example outputs from all four stages of the Bloom evaluation pipeline can be viewed [here.](https://claude.ai/redirect/website.v1.25e45e55-23a8-4005-8bee-5b506e2a9557/public/artifacts/cbfddf51-ab0d-45a9-913b-163ae2dd4126)**
 
 ## Validation and trust
 
@@ -98,6 +98,12 @@ Copy
 
 ## Related content
 
+### Discovering cryptographic weaknesses with Claude
+
+cryptographic algorithms. The first attack significantly weakens HAWK, a digital signature scheme that was built for a future world where quantum computers are able to break existing standards. The second identifies a new way to attack round-reduced AES, the most widely used symmetric cipher.
+
+[Read more](https://www.anthropic.com/research/discovering-cryptographic-weaknesses)
+
 ### Project Pilot: Can AI control a drone?
 
 Working with Andon Labs, we’ve developed a new series of evaluations that assess AI models’ ability to use a flying drone, culminating in a new benchmark: Drone-Bench.
@@ -107,7 +113,3 @@ Working with Andon Labs, we’ve developed a new series of evaluations that asse
 ### How Canada uses Claude: Findings from the Anthropic Economic Index
 
 [Read more](https://www.anthropic.com/research/how-canada-uses-claude)
-
-### Claude’s values across models and languages
-
-[Read more](https://www.anthropic.com/research/claude-values-models-languages)
