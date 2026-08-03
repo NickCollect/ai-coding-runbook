@@ -8,6 +8,7 @@ behaviour under test. Driver tests (`serve_connection`, `serve_one`,
 """
 
 import contextvars
+import logging
 from collections.abc import AsyncIterator, Mapping
 from contextlib import asynccontextmanager
 from dataclasses import dataclass, field, replace
@@ -25,6 +26,7 @@ from mcp_types import (
     INVALID_PARAMS,
     INVALID_REQUEST,
     LATEST_PROTOCOL_VERSION,
+    LOG_LEVEL_META_KEY,
     METHOD_NOT_FOUND,
     PROTOCOL_VERSION_META_KEY,
     SERVER_INFO_META_KEY,
@@ -38,6 +40,8 @@ from mcp_types import (
     InitializeRequestParams,
     JSONRPCRequest,
     ListToolsResult,
+    LoggingMessageNotification,
+    LoggingMessageNotificationParams,
     NotificationParams,
     PaginatedRequestParams,
     ProgressNotificationParams,
@@ -1760,19 +1764,45 @@ async def test_dual_era_loop_legacy_notifications_reach_the_loop_runner(server: 
 
 
 @pytest.mark.anyio
+async def test_dual_era_loop_a_notifications_meta_never_opens_the_log_gate(server: SrvT):
+    """The 2026 log-delivery opt-in is a request's `_meta`: an inbound notification
+    has no request to opt in, so a handler logging in response to one - even
+    with the log-level key in the notification's own `_meta` - sends nothing."""
+    logged = anyio.Event()
+
+    async def log_it(ctx: Ctx, params: NotificationParams | None) -> None:
+        await ctx.session.send_log_message("emergency", "no request opted in")  # pyright: ignore[reportDeprecated]
+        logged.set()
+
+    server.add_notification_handler("notifications/custom", NotificationParams, log_it)
+    async with dual_era_client(server) as (client, recorder):
+        await client.send_raw_request("tools/list", _modern_params())
+        meta = {**_modern_envelope(), LOG_LEVEL_META_KEY: "debug"}
+        await client.notify("notifications/custom", {"_meta": meta})
+        await logged.wait()
+    assert [method for method, _ in recorder.notifications] == []
+
+
+@pytest.mark.anyio
 async def test_dual_era_loop_modern_server_notifications_ride_the_pipe(server: SrvT):
     """A modern handler's standalone notification reaches the client over the
-    duplex stream - the notify-only outbound forwards it."""
+    duplex stream - the notify-only outbound forwards it. Change notifications
+    are the exception: at this era they reach clients only via
+    `subscriptions/listen` streams, so a bare one is dropped rather than sent
+    unrequested."""
 
     async def emit(ctx: Ctx, params: RequestParams | None) -> dict[str, Any]:
-        await ctx.session.send_tool_list_changed()
+        await ctx.session.send_tool_list_changed()  # dropped: an unrequested change notification
+        await ctx.session.send_notification(
+            LoggingMessageNotification(params=LoggingMessageNotificationParams(level="info", data="hi"))
+        )
         return {}
 
     server.add_request_handler("x/emit", RequestParams, emit)
     async with dual_era_client(server) as (client, recorder):
         await client.send_raw_request("x/emit", _modern_params())
         await recorder.notified.wait()
-    assert recorder.notifications[0][0] == "notifications/tools/list_changed"
+    assert [method for method, _ in recorder.notifications] == ["notifications/message"]
 
 
 @pytest.mark.anyio
@@ -1971,10 +2001,33 @@ def test_no_server_requests_dispatch_context_passes_an_already_denying_transport
 async def test_notify_only_outbound_forwards_notifications_and_refuses_requests():
     inner = _RecordingInnerDctx()
     outbound = NotifyOnlyOutbound(inner)
-    await outbound.notify("notifications/tools/list_changed", None)
-    assert inner.notifies == ["notifications/tools/list_changed"]
+    await outbound.notify("notifications/message", None)
+    assert inner.notifies == ["notifications/message"]
     with pytest.raises(NoBackChannelError):
         await outbound.send_raw_request("ping", None)
+
+
+@pytest.mark.anyio
+@pytest.mark.parametrize(
+    "method",
+    [
+        "notifications/tools/list_changed",
+        "notifications/prompts/list_changed",
+        "notifications/resources/list_changed",
+        "notifications/resources/updated",
+    ],
+)
+async def test_notify_only_outbound_drops_change_notifications(method: str, caplog: pytest.LogCaptureFixture):
+    """Spec: the server never sends a notification type a subscription did not
+    request. At the modern era change notifications reach a client only through
+    a `subscriptions/listen` stream, so a bare copy on the shared channel would
+    be an unrequested notification - the standalone channel drops it."""
+    inner = _RecordingInnerDctx()
+    outbound = NotifyOnlyOutbound(inner)
+    with caplog.at_level(logging.DEBUG, logger="mcp.server.connection"):
+        await outbound.notify(method, None)
+    assert inner.notifies == []
+    assert f"dropped {method}: delivered via subscriptions/listen at this era" in caplog.text
 
 
 @pytest.mark.anyio
