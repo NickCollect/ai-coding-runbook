@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/model-and-integration-management
-fetched_at: 2026-07-06T05:04:27.548368+00:00
+fetched_at: 2026-08-03T04:24:57.950756+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,22 @@ Your team can access multiple AI models and integrate Cursor with various servic
 
 Enterprise teams can control which AI models team members can use, [contact sales](https://cursor.com/contact-sales?source=docs-model-controls) to get access. This helps manage costs, ensure appropriate usage, and comply with organizational policies.
 
-Model access controls are configured through the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md). Navigate to Settings and look for "Model Access Control" (Enterprise only).
+Configure model access in two places:
+
+1. **Team Settings → Models** in the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) (Enterprise only). From Team Settings, open the **Model Providers** section to manage providers, models, defaults, and personal API key (BYOK) controls. This is the team baseline.
+2. **Organization → Groups → \[group] → Models**, when you use [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md#model-access). Use this to widen access for specific cohorts.
+
+### How team and group model access combine
+
+Cursor reconciles team and Organization Group model settings with a **most-permissive (union)** model. Neither layer fully overrides the other:
+
+- A model is allowed if the **team** or **any of the user's Organization Groups** allows it.
+- A group setting cannot make a model more restrictive than what another allowing source already grants. Groups are for widening access, not tightening it below an allow from the team or another group.
+- Put your strictest defaults on the **team**. Use Organization Groups only to grant additional models to selected cohorts.
+
+Personal API key (BYOK) controls remain on **Team Settings → Models** only. Organization Group Models settings do not configure BYOK.
+
+See [Organization Groups](https://cursor.com/docs/enterprise/organization-groups.md#how-group-and-team-settings-combine) and [How limits and permissions combine](https://cursor.com/docs/enterprise/organizations.md#how-limits-and-permissions-combine) for the full merge rules across settings.
 
 ### How enterprise model rollout works
 
@@ -26,7 +41,7 @@ See [Models](https://cursor.com/docs/models-and-pricing.md) for the current list
 
 Enterprise teams can prevent team members from using their own API keys with third-party providers (OpenAI, Anthropic, Azure, AWS Bedrock) in Cursor. All usage goes through Cursor's included models and usage pool.
 
-Configure this in the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) under Settings (Enterprise only).
+Configure this in the [team dashboard](https://cursor.com/docs/account/teams/dashboard.md) under **Team Settings → Models** (Enterprise only).
 
 ## MCP server trust management
 

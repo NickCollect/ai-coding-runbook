@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-07-13T04:25:37.967400+00:00
+fetched_at: 2026-08-03T04:24:57.760333+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,7 +35,7 @@ There are two main ways to configure the environment for your cloud agent:
 1. Let Cursor's agent set up its own environment from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments). After the agent is done, you will have the option to create a snapshot of its virtual machine that can be reused for future agents.
 2. Manually configure the environment with a Dockerfile. If you choose this option, you can specify the Dockerfile in a `.cursor/environment.json` file.
 
-Both options generate an environment, and also allow you to specify an update command that will be run before the agent starts to ensure that its dependencies are up to date (e.g. `npm install`, `pip install`, etc.).
+Both options generate an environment, and also allow you to specify an install script that will be run before the agent starts to ensure that its dependencies are up to date (e.g. `npm install`, `pip install`, etc.).
 
 ### Multi-repo environments
 
@@ -112,21 +112,23 @@ Each cloud agent runs on a default VM profile with limited memory and CPU. If yo
 
 Self-serve custom resource configuration is coming soon.
 
-## Update command
+## Install script
 
-When a new machine boots, Cursor starts from the base environment, then runs the `update` command (called `install` in `environment.json`).
+The install script was previously called the update script in the dashboard and docs.
 
-For most repos, the `update` script is `npm install`, `bazel build`, or a similar dependency setup command.
+When a new machine boots, Cursor starts from the base environment, then runs the install script (`install` in `environment.json`).
 
-### Update script idempotency
+For most repos, the install script is `npm install`, `bazel build`, or a similar dependency setup command.
 
-The `update` script must be idempotent. It can run more than once, and it may run on partially cached state.
+### Install script idempotency
+
+The install script must be idempotent. It can run more than once, and it may run on partially cached state.
 
 ### How caching works
 
-After `update` completes, if it took more than a few seconds to run, Cursor will take an internal checkpoint snapshot and will attempt to start future cloud agents from this checkpoint.
+After `install` completes, if it took more than a few seconds to run, Cursor will take an internal checkpoint snapshot and will attempt to start future cloud agents from this checkpoint.
 
-This is why `update` commands like `pnpm install` usually lead to fast startup - if dependencies changed, the command only needs to do incremental work.
+This is why install scripts like `pnpm install` usually lead to fast startup - if dependencies changed, the command only needs to do incremental work.
 
 Caching is best effort; you may see slower startup times on infrequently used repositories.
 
@@ -140,19 +142,19 @@ Cursor falls back when:
 - The snapshot is invalid or failed
 - You do not have access to the snapshot
 
-When fallback happens, Cursor keeps the rest of the environment configuration and swaps the image back to the default base image. The `update` command still runs, so dependency setup can repair the environment during startup.
+When fallback happens, Cursor keeps the rest of the environment configuration and swaps the image back to the default base image. The install script still runs, so dependency setup can repair the environment during startup.
 
 The agent view shows **Environment ready (with warnings)** and a warning banner explaining what happened. The warning stays visible in the conversation as an environment configuration issue card. Open setup from the warning to inspect or repair the environment.
 
 Cursor does not automatically switch to an older saved environment version. If you want to roll back the saved configuration, open the environment from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents), review **Version history**, and restore a previous version.
 
-### How to decide what to put in your `update` script
+### How to decide what to put in your install script
 
-There is a tradeoff between caching work in `update` and doing setup on demand during a run.
+There is a tradeoff between caching work in `install` and doing setup on demand during a run.
 
-Placing infrequently run or expensive commands (such as starting services or building docker images) in `update` can slow down startup time.
+Placing infrequently run or expensive commands (such as starting services or building docker images) in `install` can slow down startup time.
 
-A practical pattern is to run basic cached dependency updates (such as `pnpm install`) in your `update` script, then [adding instructions in AGENTS.md](https://cursor.com/docs/cloud-agent/setup.md#add-cloud-specific-instructions-to-agentsmd) so the agent can figure out which commands it needs to run for each specific task.
+A practical pattern is to run basic cached dependency updates (such as `pnpm install`) in your install script, then [adding instructions in AGENTS.md](https://cursor.com/docs/cloud-agent/setup.md#add-cloud-specific-instructions-to-agentsmd) so the agent can figure out which commands it needs to run for each specific task.
 
 ## Startup commands
 
@@ -380,7 +382,7 @@ Cloudflare Tunnel works in Cloud Agent VMs because `cloudflared` runs in userspa
 
 Use this pattern when a Cloud Agent needs to reach a private HTTP service in a VPC or intranet:
 
-- Install `cloudflared` in your environment Dockerfile or update script.
+- Install `cloudflared` in your environment Dockerfile or install script.
 - Run a `cloudflared` connector inside your private network.
 - Route an authenticated hostname, such as `vpc.example.com`, through the tunnel to the private origin.
 - Add that hostname to the Cloud Agent network allowlist if your environment uses restricted egress.

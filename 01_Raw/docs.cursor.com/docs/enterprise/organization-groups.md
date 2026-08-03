@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/organization-groups
-fetched_at: 2026-07-20T04:31:20.609165+00:00
+fetched_at: 2026-08-03T04:24:58.024308+00:00
 fetch_method: mintlify_md
 ---
 
@@ -117,7 +117,11 @@ Set a per-user monthly spend limit on the group. When a user belongs to multiple
 
 Use the **Models** tab to control which models group members can use. This suits controlled rollouts, approvals, and cohorts that need models not enabled for everyone.
 
-Model access is a union: access granted by the team or any of the user's groups applies. Set restrictive team defaults, then widen access per group.
+Model access is a **union** with the team setting: access is granted if the team or any of the user's groups allows it. Neither the team nor a group fully supersedes the other; the most permissive result wins. Set restrictive defaults on the team, then widen access per group. Groups cannot take away a model that the team (or another of the user's groups) already allows.
+
+Personal API key (BYOK) controls stay on the team's **Team Settings → Models** page. Group Models settings do not configure BYOK.
+
+See [Model and Integration Management](https://cursor.com/docs/enterprise/model-and-integration-management.md#how-team-and-group-model-access-combine) for the same priority rules from the team side.
 
 ### Auto-run and Smart Auto
 
@@ -200,7 +204,7 @@ A user's effective settings come from their team plus every group they belong to
 | Auto-review instructions | Group instructions replace team instructions for that user.                                                                                                               |
 | Team role                | Set by [group-to-team mappings](https://cursor.com/docs/enterprise/organization-groups.md#set-team-roles-from-mappings), not by the merge rules above.                    |
 
-Team-level restrictions still matter. If a user's team blocks a model a group setting relies on, that restriction can affect the user's experience. For a layered view that also includes per-user overrides and team directory groups, see [How limits and permissions combine](https://cursor.com/docs/enterprise/organizations.md#how-limits-and-permissions-combine).
+For model access specifically, neither the team nor a group fully supersedes the other: if either allows a model, the user can use it. Set the strictest baseline on the team, then widen with groups. For a layered view that also includes per-user overrides and team directory groups, see [How limits and permissions combine](https://cursor.com/docs/enterprise/organizations.md#how-limits-and-permissions-combine).
 
 ## Manage groups with the API
 

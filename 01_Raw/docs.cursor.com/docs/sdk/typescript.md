@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-07-27T04:31:49.925294+00:00
+fetched_at: 2026-08-03T04:24:59.532102+00:00
 fetch_method: mintlify_md
 ---
 
@@ -61,7 +61,7 @@ SDK runs follow the same pricing, request pools, and Privacy Mode rules as runs 
 
 Service account API keys bill to the team that owns the service account. User API keys bill to that user's plan.
 
-To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/typescript.md#token-usage).
+To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/typescript.md#token-usage). To fetch billed usage and dollar cost for a cloud agent's runs, see [`Agent.getUsage()`](https://cursor.com/docs/sdk/typescript.md#agentgetusage).
 
 ## Core concepts
 
@@ -85,7 +85,7 @@ The SDK requires Node.js 22.13 or later. It ships per-platform `@cursor/sdk-<os>
 
 Importing `@cursor/sdk` does not eagerly load the local agent stack. The local executor loads on the first local `acquire`, so cloud-only and type-only consumers don't pay the local import cost. The first local agent in a process pays a one-time import, then the module stays cached.
 
-The current package, `@cursor/sdk@1.0.23`, publishes self-contained `.d.ts` files, so types resolve without pulling in unpublished workspace packages. After upgrading, re-run your typecheck. Stream types such as `TurnEndedUpdate` resolve to real types instead of `any`.
+`@cursor/sdk` publishes self-contained `.d.ts` files, so types resolve without pulling in unpublished workspace packages. After upgrading, re-run your typecheck. Stream types such as `TurnEndedUpdate` resolve to real types instead of `any`.
 
 ## Quick start
 
@@ -169,33 +169,6 @@ These values are encrypted at rest, injected into the cloud agent's shell, and d
 
 For values that should only exist during a single run, pass them on `agent.send()` instead. See [Per-run environment variables](https://cursor.com/docs/sdk/typescript.md#per-run-environment-variables).
 
-### Agent metadata
-
-Use `cloud.metadata` to attach your own identifiers to a cloud agent when you create it. Metadata can link an agent to a user, tenant, workflow, or ticket in your system.
-
-```typescript
-const agent = await Agent.create({
-  apiKey: process.env.CURSOR_API_KEY!,
-  cloud: {
-    repos: [{ url: "https://github.com/your-org/your-repo" }],
-    metadata: {
-      end_user_id: "user-123",
-      ticket_id: "ENG-456",
-    },
-  },
-});
-
-const info = await Agent.get(agent.agentId);
-console.log(info.metadata?.end_user_id);
-```
-
-Metadata is available for cloud agents at creation time. You can attach up to 50 key-value pairs. Keys must be non-empty and no more than 255 characters. Values must be strings no larger than 4096 bytes. Empty string values are allowed, and an empty object is treated as no metadata.
-
-`Agent.list()` and `Agent.get()` return the persisted map on `SDKAgentInfo.metadata`. To change the metadata, create a new agent.
-
-If metadata isn't enabled for the API key's account, creating an agent with a
-non-empty map returns `403 feature_unavailable`.
-
 ### Model parameters
 
 Use `model.params` to pass per-model options such as reasoning effort. Parameter ids and values vary by model. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/typescript.md#cursormodelslist) to discover supported parameters and preset variants for your account.
@@ -219,6 +192,126 @@ const agent = await Agent.create({
   local: { cwd: process.cwd() },
 });
 ```
+
+### Cursor Router
+
+[Cursor Router](https://cursor.com/docs/cursor-router.md) selects a model for each Auto request. In the SDK, Router is the `auto-smart` model with an `optimize_for` parameter. It is available on Teams and Enterprise. Enterprise admins must enable Router for the team before `auto-smart` appears in the catalog.
+
+The Cursor SDK is an agent SDK, not a standalone model-inference or chat-completions API. Router picks models for Cursor agent runs that can reason over a workspace, call tools, run commands, and edit files. Cursor does not currently document a raw Router endpoint for arbitrary model calls.
+
+#### Select Cost, Balance, or Intelligence
+
+Pass `auto-smart` and set `optimize_for` explicitly:
+
+| Product label | SDK value      |
+| :------------ | :------------- |
+| Cost          | `cost`         |
+| Balance       | `balanced`     |
+| Intelligence  | `intelligence` |
+
+Use **Balance** in product copy. Use `balanced` only as the SDK wire value.
+
+```typescript
+import { Agent } from "@cursor/sdk";
+
+await using agent = await Agent.create({
+  apiKey: process.env.CURSOR_API_KEY!,
+  model: {
+    id: "auto-smart",
+    params: [{ id: "optimize_for", value: "balanced" }],
+  },
+  local: { cwd: process.cwd() },
+});
+
+const run = await agent.send("Find and fix the failing authentication test");
+const result = await run.wait();
+
+console.log(result.status);
+console.log(result.requestId);
+```
+
+Always pass `optimize_for`. Do not omit it and do not send a legacy `default` value; discovery through the catalog is the supported contract.
+
+#### Discover Router in the model catalog
+
+`Cursor.models.list()` returns the models, parameter definitions, and preset variants available to the API key's current account and team. Cursor Router appears as `auto-smart` when Router is available. Team administrators can disable Router or restrict which optimization modes members may select.
+
+Treat the catalog as the source of truth before hard-coding a selection:
+
+```typescript
+import { Cursor, type ModelSelection } from "@cursor/sdk";
+
+const models = await Cursor.models.list();
+const router = models.find((model) => model.id === "auto-smart");
+const optimizeFor = router?.parameters?.find(
+  (parameter) => parameter.id === "optimize_for",
+);
+
+if (!router || !optimizeFor) {
+  throw new Error(
+    "Cursor Router is not available for this API key. Verify that Router is enabled for the key's team.",
+  );
+}
+
+const requestedMode = "balanced";
+const allowedValues = new Set(
+  optimizeFor.values.map(({ value }) => value),
+);
+
+if (!allowedValues.has(requestedMode)) {
+  throw new Error(
+    `Router mode "${requestedMode}" is not enabled for this team.`,
+  );
+}
+
+const model: ModelSelection = {
+  id: router.id,
+  params: [{ id: optimizeFor.id, value: requestedMode }],
+};
+```
+
+#### Switch modes per run
+
+Override the model on `agent.send()` to change Router mode for a run:
+
+```typescript
+const run = await agent.send("Handle this complex migration", {
+  model: {
+    id: "auto-smart",
+    params: [{ id: "optimize_for", value: "intelligence" }],
+  },
+});
+```
+
+Per-run model overrides are sticky. Later sends without an override keep using the new selection. See [Per-run model override](https://cursor.com/docs/sdk/typescript.md#per-run-model-override).
+
+#### Model ids: `auto-smart`, `auto`, and `default`
+
+| Selection                                     | Meaning                                                                                                                                     |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| `auto-smart` with `optimize_for`              | Cursor Router. Use this when you want Cost, Balance, or Intelligence.                                                                       |
+| `{ id: "auto" }`                              | Server-selected Auto fallback when a specific model is missing from the catalog. Prefer `auto-smart` when you need an explicit Router mode. |
+| Omitting `optimize_for`, or sending `default` | Not a supported Router contract. Always discover allowed values and pass `cost`, `balanced`, or `intelligence`.                             |
+
+#### Billing and routing pool
+
+- **Cost** follows classic Auto behavior and bundled Auto pricing.
+- **Balance** and **Intelligence** use Cursor Router and bill at the routed model's rate under your plan or contract.
+- The underlying model can change between requests. Prefer a fixed model id when you need reproducible comparisons.
+- Enterprise model allowlists shape the routing pool. Blocking required models can disable Router.
+
+For current rates and the routing pool, see [Cursor Router](https://cursor.com/docs/cursor-router.md) and [Models & Pricing](https://cursor.com/docs/models-and-pricing.md).
+
+#### Troubleshooting missing Router
+
+If `auto-smart` is missing or an optimization mode is rejected:
+
+1. Call `Cursor.models.list()`.
+2. Confirm `auto-smart` is in the result.
+3. Confirm `optimize_for` includes the value you want (`cost`, `balanced`, or `intelligence`).
+4. Confirm Router is enabled for the team tied to the API key.
+5. If you belong to multiple teams, confirm the key is operating in the intended team context.
+6. Check team model-access policy if Router is unavailable or cannot choose a valid underlying model.
 
 ### SDKAgent
 
@@ -474,6 +567,8 @@ for await (const event of run.stream()) {
 }
 ```
 
+Token counts are what the runtime reports; they say nothing about cost. For billed usage and the dollar cost of a cloud agent's runs, call [`agent.getUsage()`](https://cursor.com/docs/sdk/typescript.md#agentgetusage).
+
 ### Run correlation with requestId
 
 Every `agent.send()` gets a platform-generated UUID, exposed as `requestId` on both the `Run` and the `RunResult`. Use it to tie a script or CI run to backend logs, analytics, and support threads instead of guessing from `agentId` alone.
@@ -544,7 +639,7 @@ await (await agent.send("Looks good, start building", { mode: "agent" })).wait()
 
 ### Streaming raw deltas
 
-`run.stream()` yields normalized `SDKMessage` events. For lower-level updates (per-token text, tool-call args streaming in, thinking deltas, step boundaries), pass `onDelta` and `onStep` callbacks to `send()`:
+`run.stream()` yields normalized `SDKMessage` events. For lower-level updates (per-token text, tool-call args streaming in, thinking deltas, nested task updates, step boundaries), pass `onDelta` and `onStep` callbacks to `send()`:
 
 ```typescript
 const run = await agent.send("Refactor the utils module", {
@@ -558,7 +653,7 @@ const run = await agent.send("Refactor the utils module", {
 });
 ```
 
-The callbacks are awaited before the next update is processed, so you can apply backpressure. `InteractionUpdate` covers `text-delta`, `thinking-delta`, `thinking-completed`, `tool-call-started`, `tool-call-completed`, `partial-tool-call`, `token-delta`, `step-started`, `step-completed`, `turn-ended`, and a handful of summary and shell-output deltas.
+The callbacks are awaited before the next update is processed, so you can apply backpressure. `InteractionUpdate` covers `text-delta`, `thinking-delta`, `thinking-completed`, `tool-call-started`, `tool-call-completed`, `tool-call-delta`, `partial-tool-call`, `token-delta`, `step-started`, `step-completed`, `turn-ended`, and a handful of summary and shell-output deltas.
 
 ### Per-send options
 
@@ -591,7 +686,12 @@ type SDKMessage =
   | SDKToolUseMessage
   | SDKStatusMessage
   | SDKTaskMessage
-  | SDKRequestMessage
+  | {
+      type: "request";
+      agent_id: string;
+      run_id: string;
+      request_id: string;
+    }
   | SDKUsageMessage;
 ```
 
@@ -676,13 +776,6 @@ interface SDKTaskMessage {
   text?: string;
 }
 
-interface SDKRequestMessage {
-  type: "request";
-  agent_id: string;
-  run_id: string;
-  request_id: string;
-}
-
 interface SDKUsageMessage {
   type: "usage";
   agent_id: string;
@@ -720,6 +813,7 @@ type InteractionUpdate =
   | ThinkingCompletedUpdate
   | ToolCallStartedUpdate
   | ToolCallCompletedUpdate
+  | ToolCallDeltaUpdate
   | PartialToolCallUpdate
   | TokenDeltaUpdate
   | StepStartedUpdate
@@ -770,6 +864,23 @@ interface ToolCallCompletedUpdate {
   toolCall: ToolCall;
   modelCallId: string;
 }
+
+interface ToolCallDeltaUpdate {
+  type: "tool-call-delta";
+  callId: string;
+  modelCallId: string;
+  taskUpdate: NestedTaskUpdate;
+}
+
+type NestedTaskUpdate =
+  | TextDeltaUpdate
+  | ToolCallStartedUpdate
+  | ToolCallCompletedUpdate
+  | ThinkingDeltaUpdate
+  | ThinkingCompletedUpdate
+  | PartialToolCallUpdate
+  | StepStartedUpdate
+  | StepCompletedUpdate;
 
 interface TokenDeltaUpdate {
   type: "token-delta";
@@ -822,7 +933,7 @@ interface ShellOutputDeltaUpdate {
 }
 ```
 
-`PartialToolCallUpdate` is emitted as the model streams arguments into a tool call before it commits. The same stability disclaimer that applies to `SDKToolUseMessage.args` applies here.
+`ToolCallDeltaUpdate` carries one level of nested interaction updates from a task or subagent tool call. `PartialToolCallUpdate` is emitted as the model streams arguments into a tool call before it commits. The same stability disclaimer that applies to `SDKToolUseMessage.args` applies here.
 
 ## Conversation types
 
@@ -992,6 +1103,55 @@ interface GetAgentMessagesOptions {
 
 Returns the stored user and assistant messages for a local agent.
 
+### Agent.getUsage()
+
+Fetch billed token usage and dollar cost for a cloud agent's runs. Call it on a handle, or statically by ID when you don't have one. Pass `runId` to restrict the result to a single run.
+
+```typescript
+agent.getUsage(options?: GetUsageOptions): Promise<AgentUsage>;
+function Agent.getUsage(
+  agentId: string,
+  options?: GetUsageOptions & { apiKey?: string }
+): Promise<AgentUsage>;
+
+interface GetUsageOptions {
+  runId?: string;
+}
+
+interface AgentUsage {
+  usage: TokenUsage;   // summed across `runs`
+  cost?: UsageCost;    // summed across `runs`
+  runs: RunUsage[];
+}
+
+interface RunUsage {
+  runId: string;
+  usage: TokenUsage;
+  cost?: UsageCost;
+}
+
+interface UsageCost {
+  rawCostCents: number;   // undiscounted model token cost; 0 for request-priced usage
+  chargedCents: number;   // amount charged, discounts and the Cursor Token Rate included
+}
+```
+
+```typescript
+const { usage, cost, runs } = await agent.getUsage();
+
+console.log(`tokens: ${usage.totalTokens}`);
+if (cost) {
+  console.log(`charged: $${(cost.chargedCents / 100).toFixed(2)}`);
+}
+for (const run of runs) {
+  console.log(run.runId, run.usage.totalTokens, run.cost?.chargedCents);
+}
+```
+
+Cost includes discounts and can take a moment to settle after a run ends; `cost` is absent until it does. `chargedCents` is `0` for plan-included, BYOK, and credit-grant usage.
+
+This is a different view than [Token usage](https://cursor.com/docs/sdk/typescript.md#token-usage): `run.usage` is the live token count for one run, while `getUsage()` is the billed record across the agent's runs. Cloud agents only for now; local agents throw a `ConfigurationError`.
+
 ### Cloud agent lifecycle
 
 Cloud agents stay in your team's workspace until you archive or delete them. `Agent.list({ runtime: "cloud" })` hides archived agents by default; pass `includeArchived: true` to see them. Filter by `prUrl` to find the agent that opened a specific pull request.
@@ -1034,7 +1194,6 @@ type SDKAgentInfo = {
       runtime: "cloud";
       env?: { type: "cloud" | "pool" | "machine"; name?: string };
       repos?: string[];
-      metadata?: Record<string, string>;
     }
 );
 ```
@@ -1052,16 +1211,18 @@ interface CursorConfigureOptions {
   local?: {
     store?: LocalAgentStore | null;
     useHttp1ForAgent?: boolean | null;
+    workspaceScanCacheTtlMs?: number | null;
   };
 }
 ```
 
 Set defaults for local agents that apply to later `Agent.*` calls. Fields on an individual call override these values; pass `null` to clear a previous default.
 
-| Option                   | Description                                                                                                                                                                                                                                                             |
-| :----------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `local.store`            | Default [local agent store](https://cursor.com/docs/sdk/typescript.md#local-agent-stores) when a call omits `local.store`. The SDK uses on-disk SQLite through Node's `node:sqlite`. Use `JsonlLocalAgentStore` or another store when you want to avoid SQLite storage. |
-| `local.useHttp1ForAgent` | Force local agent backend streams to use HTTP/1.1 with SSE instead of HTTP/2. Useful behind proxies or on fetch stacks that don't support HTTP/2.Bun defaults to HTTP/1.1 due to upstream HTTP/2 compatibility issues.                                                  |
+| Option                          | Description                                                                                                                                                                                                                                                                                                                                                                               |
+| :------------------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `local.store`                   | Default [local agent store](https://cursor.com/docs/sdk/typescript.md#local-agent-stores) when a call omits `local.store`. The SDK uses on-disk SQLite when the SQLite backend is available and falls back to `JsonlLocalAgentStore` otherwise.                                                                                                                                           |
+| `local.useHttp1ForAgent`        | Force local agent backend streams to use HTTP/1.1 with SSE instead of HTTP/2. Useful behind proxies or on fetch stacks that don't support HTTP/2.Bun defaults to HTTP/1.1 due to upstream HTTP/2 compatibility issues.                                                                                                                                                                    |
+| `local.workspaceScanCacheTtlMs` | How long the SDK reuses a workspace scan (rules, skills, `AGENTS.md`, ignore files), in milliseconds. Defaults to 20 seconds. Raise it in a long-lived host serving a checkout that only changes on deploy; the trade is freshness, since a rule added after the process started can go unseen for this long. The `CURSOR_RIPWALK_CACHE_TTL_MS` environment variable sets the same value. |
 
 ```typescript
 import { Cursor, JsonlLocalAgentStore } from "@cursor/sdk";
@@ -1123,7 +1284,9 @@ interface ModelVariant {
 }
 ```
 
-Use `Cursor.models.list()` to discover valid `model` ids and per-model `params` before calling `Agent.create()` or `agent.send()`. Parameters are model-specific. Common examples include reasoning effort.
+Use `Cursor.models.list()` to discover valid `model` ids and per-model `params` before calling `Agent.create()` or `agent.send()`. Parameters are model-specific. Common examples include reasoning effort and Cursor Router's `optimize_for` on `auto-smart`.
+
+The catalog is account- and team-specific. Cursor Router only appears as `auto-smart` when Router is available for the API key's team. See [Cursor Router](https://cursor.com/docs/sdk/typescript.md#cursor-router).
 
 ```typescript
 const models = await Cursor.models.list();
@@ -1158,7 +1321,7 @@ const agent = await Agent.create({
 #### Best practices
 
 - **Discover, don't hard-code.** Call `Cursor.models.list()` at startup (or once per process) and cache the result. Model ids and parameter shapes can change as new models ship.
-- **Pass parameters explicitly when the model expects them.** A model whose `parameters` array is non-empty is a parameterized model. Send the params you want; otherwise the run uses each parameter's first allowed value, which may not match what you intend.
+- **Pass parameters explicitly when the model expects them.** A model whose `parameters` array is non-empty is a parameterized model. Send the params you want; otherwise the run uses each parameter's first allowed value, which may not match what you intend. For Cursor Router, always pass `optimize_for` explicitly.
 - **Resolve by capability, not id.** If you want "the current default in fast mode" rather than a specific model, look it up:
 
   ```typescript
@@ -1172,10 +1335,13 @@ const agent = await Agent.create({
         id: composer.id,
         params: fastValue ? [{ id: "fast", value: fastValue }] : undefined,
       }
-    : { id: "auto" };
+    : {
+        id: "auto-smart",
+        params: [{ id: "optimize_for", value: "balanced" }],
+      };
   ```
 
-  Falling back to `{ id: "auto" }` when a target model isn't available keeps scripts working as the catalog evolves.
+  Prefer an explicit Router selection (`auto-smart` + `optimize_for`) when the target model is missing. Fall back to `{ id: "auto" }` only when you want server-selected Auto without choosing Cost, Balance, or Intelligence.
 
 ### Cursor.repositories.list()
 
@@ -1333,7 +1499,7 @@ Subagents can spawn their own subagents, within a nesting limit. When a subagent
 
 ## Custom tools
 
-Custom tools let you expose your own functions to the agent without standing up a separate MCP server. Pass them on `local.customTools` and the SDK registers them as an MCP server named `custom-user-tools`. The agent discovers and calls them through the same MCP path as any other server, under the same [permission gate](https://cursor.com/docs/agent/tools/terminal.md#run-mode). Custom tools reach [subagents](https://cursor.com/docs/sdk/typescript.md#subagents) (including nested ones) too.
+Custom tools let you expose your own functions to the agent without standing up a separate MCP server. Pass them on `local.customTools` and the SDK registers them as an MCP server named `custom-user-tools`. The agent discovers and calls them through the same MCP path as any other server. Deny rules and [sandbox](https://cursor.com/docs/sdk/typescript.md#sandbox-options) limits still apply, but custom tools skip interactive approval, so [sandboxed](https://cursor.com/docs/sdk/typescript.md#sandbox-options) and [auto-review](https://cursor.com/docs/sdk/typescript.md#auto-review) runs call them without prompting. Custom tools reach [subagents](https://cursor.com/docs/sdk/typescript.md#subagents) (including nested ones) too.
 
 Custom tools are local agents only. Passing `local.customTools` to a cloud agent throws a `ConfigurationError`.
 
@@ -1526,6 +1692,26 @@ await agent[Symbol.asyncDispose]();
 
 ## Agent lifecycle
 
+### Prewarm a local workspace
+
+Resolving a local workspace (rules, skills, MCP servers, ignore files) is the slowest part of a local agent's first turn, and on a large repo it can dominate it. By default that cost lands inside the first `send()`. A host that knows where its agents will run can pay it earlier with `prewarmLocalWorkspace()`:
+
+```typescript
+import { createAgentPlatform } from "@cursor/sdk";
+
+const platform = await createAgentPlatform();
+const release = await platform.prewarmLocalWorkspace({
+  apiKey: process.env.CURSOR_API_KEY!,
+  local: { cwd: "/srv/checkout", settingSources: ["project"] },
+});
+
+// The first send() against this workspace starts immediately.
+
+await release(); // on shutdown
+```
+
+Pass the same `AgentOptions` your agents will use; prewarming only helps sends whose workspace options match. Call the returned release function when the host shuts down.
+
 ### Reattach to an existing agent
 
 `Agent.resume(agentId)` returns a fresh handle to an agent that already exists. The runtime is auto-detected from the ID prefix (`bc-` is cloud, anything else is local), and conversation state is loaded from the cloud (cloud) or the local checkpoint store (local). This is how you continue work after a process restart, or how a different worker picks up an agent another process started.
@@ -1591,7 +1777,7 @@ Cloud SSE streams retain backlog for a window after the run starts, so a dispatc
 
 ## Local agent stores
 
-Local agents persist agent metadata, conversation checkpoints, runs, and run events to disk so that follow-ups and `Agent.resume()` survive process restarts. By default the SDK uses `SqliteLocalAgentStore`, an on-disk SQLite store under a state root in your home directory. You can swap in a different backend with `local.store`.
+Local agents persist agent metadata, conversation checkpoints, runs, and run events to disk so that follow-ups and `Agent.resume()` survive process restarts. By default the SDK uses on-disk SQLite when the SQLite backend is available and falls back to `JsonlLocalAgentStore` otherwise. You can swap in a different backend with `local.store`.
 
 The SDK ships two backends and lets you bring your own:
 
@@ -1708,7 +1894,6 @@ Config for local agents, passed as `local` on `Agent.create()`. Also exported as
 | `workOnCurrentBranch` | `boolean`                                                                                                   | `false`             | Push commits to the existing branch instead of a new one.                                                                                                                                                                                                                                                                                            |
 | `autoCreatePR`        | `boolean`                                                                                                   | `false`             | Open a PR when the run finishes.                                                                                                                                                                                                                                                                                                                     |
 | `skipReviewerRequest` | `boolean`                                                                                                   | `false`             | Skip requesting the calling user as a reviewer on the PR.                                                                                                                                                                                                                                                                                            |
-| `metadata`            | `Record<string, string>`                                                                                    |                     | Caller-defined identifiers attached when the agent is created. See [Agent metadata](https://cursor.com/docs/sdk/typescript.md#agent-metadata).                                                                                                                                                                                                       |
 
 ### AgentDefinition
 
@@ -1733,7 +1918,7 @@ interface ModelParameterValue {
 }
 ```
 
-`id` is the model identifier (for example, `"composer-2.5"`). `params` carries per-model parameters such as reasoning effort. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/typescript.md#cursormodelslist) to discover valid ids, parameter definitions, and preset variants for your account.
+`id` is the model identifier (for example, `"composer-2.5"` or `"auto-smart"`). `params` carries per-model parameters such as reasoning effort or Router's `optimize_for`. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/typescript.md#cursormodelslist) to discover valid ids, parameter definitions, and preset variants for your account. See [Cursor Router](https://cursor.com/docs/sdk/typescript.md#cursor-router) for the Router selection contract.
 
 ### McpServerConfig
 
@@ -1933,10 +2118,11 @@ Thrown when a `Run` operation isn't available on the current runtime. Use `run.s
 - Inline `mcpServers` are not persisted across `Agent.resume()`. Pass them again on resume if needed.
 - Custom tools (`local.customTools`), Auto-review (`local.autoReview`), and custom stores (`local.store`) are local agents only. Cloud agents reject `local.customTools` and persist server-side.
 - Artifact download is not implemented for local agents (`agent.listArtifacts()` returns an empty list and `agent.downloadArtifact()` throws).
+- `agent.getUsage()` is cloud agents only for now. Local agents throw `ConfigurationError`.
 - `local.settingSources` (and the file-based MCP / subagent paths it gates) does not apply to cloud agents. Cloud always loads `project` / `team` / `plugins`.
 - Hooks are file-based only (`.cursor/hooks.json`). No programmatic callbacks.
 - The SDK doesn't auto-discover credentials from a local Cursor app installation. Set `CURSOR_API_KEY` (or pass `apiKey`) explicitly.
-- Local mode requires Node.js 22.13 or later and platform sandbox-helper support. `SqliteLocalAgentStore` uses Node's `node:sqlite`; switch to `JsonlLocalAgentStore` or a custom `local.store` to avoid SQLite storage.
+- Local mode requires Node.js 22.13 or later and platform sandbox-helper support. The default store falls back to `JsonlLocalAgentStore` when the SQLite backend isn't available.
 
 
 ---

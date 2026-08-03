@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/grok-4-5
-fetched_at: 2026-07-27T04:31:49.737835+00:00
+fetched_at: 2026-08-03T04:24:59.253363+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,6 +12,12 @@ Grok 4.5 is a joint model from Cursor and SpaceXAI for long-running tasks across
 - Applies broad knowledge to software engineering, data science, finance, research, legal work, and other computer-based tasks.
 - Solves multistep tasks in under half the steps of comparable frontier models.
 
+## Effort levels
+
+Grok 4.5 supports three effort levels: high (the default), medium, and low. Higher effort gives the model more time to think through difficult tasks. Use high for the hardest work; drop to medium or low when you want faster, cheaper responses on simpler tasks.
+
+On the [Start plan](https://cursor.com/docs/models-and-pricing.md#start-india-only) (India only), Grok 4.5 is fixed at medium effort in non-fast mode. Effort switching and Fast mode are available on Pro and higher plans.
+
 ## Tools
 
 Grok 4.5 has access to all agent tools when used with Cursor, including:
@@ -22,7 +28,7 @@ Learn more about [how tools work](https://cursor.com/docs/agent/overview.md#tool
 
 Grok 4.5 is part of the [Cursor Models pool](https://cursor.com/docs/models-and-pricing.md#cursor-models) on individual and team plans. This pool also includes Composer 2.5.
 
-Included usage is doubled through July 21, 2026. Standard on-demand usage is priced at $2/M input tokens and $6/M output tokens. The Fast variant is priced at $4/M input tokens and $18/M output tokens. All prices are per million tokens.
+Standard on-demand usage is priced at $2/M input tokens and $6/M output tokens. The Fast variant is priced at $4/M input tokens and $18/M output tokens. All prices are per million tokens.
 
 
 ---

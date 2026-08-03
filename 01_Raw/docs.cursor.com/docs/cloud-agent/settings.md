@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/settings
-fetched_at: 2026-07-27T04:31:48.426316+00:00
+fetched_at: 2026-08-03T04:24:57.763297+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Open an environment to review:
 
 - The repositories it applies to
 - Whether it uses a snapshot or `.cursor/environment.json`
-- The update script that runs before an agent starts
+- The install script that runs before an agent starts
 - Runtime secrets and build secrets
 - Network access settings
 - Version history and setup runs

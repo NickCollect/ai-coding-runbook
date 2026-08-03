@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/dashboard
-fetched_at: 2026-07-27T04:31:47.704189+00:00
+fetched_at: 2026-08-03T04:24:56.843768+00:00
 fetch_method: mintlify_md
 ---
 
@@ -83,9 +83,11 @@ Access Cursor's REST API endpoints for programmatic integration. All API endpoin
 
 ### Model Access Control
 
-Control which AI models are available to team members. Set restrictions on
-specific models or model tiers to manage costs and ensure appropriate usage
-across your organization. Learn more in [Model and Integration Management](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control).
+Control which AI models are available to team members from **Team Settings →
+Models**. Organizations can also widen access per cohort from **Organization →
+Groups → Models**. Team and group model access combine as a union
+(most-permissive wins). Learn more in [Model and Integration
+Management](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control).
 
 ### Enhanced Spend Limits
 

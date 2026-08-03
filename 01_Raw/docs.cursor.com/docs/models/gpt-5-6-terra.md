@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/models/gpt-5-6-terra
-fetched_at: 2026-07-27T04:31:49.676321+00:00
+fetched_at: 2026-08-03T04:24:59.168890+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ GPT-5.6 Terra is the mid-tier model in OpenAI's GPT-5.6 family. It sits between 
 
 ## Strengths
 
-- Solid multi-step coding and tool use at roughly half Sol's per-token price.
+- Solid multi-step coding and tool use at well under Sol's per-token price.
 - Faster and cheaper than Sol for routine agent workflows.
 - Same GPT-5.6 family behavior: reasoning, tool calling, and agent loops.
 

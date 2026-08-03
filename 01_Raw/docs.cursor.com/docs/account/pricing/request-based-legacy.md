@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/pricing/request-based-legacy
-fetched_at: 2026-07-27T04:31:47.588378+00:00
+fetched_at: 2026-08-03T04:24:56.677910+00:00
 fetch_method: mintlify_md
 ---
 
@@ -66,6 +66,7 @@ A request represents a single message sent to most models, which includes your m
 | [GPT-5.6 Terra](https://openai.com/index/previewing-gpt-5-6-sol/)                             | OpenAI    | 272k            | -           | Agent, Thinking, Images | -        | Mid-tier GPT-5.6 variant between Sol and Luna; Agentic and reasoning capabilities; Fast mode is available at 2x pricing; Cache writes are billed at 1.25x the uncached input rate                                                                                                                                                                                                                                                             |
 | Grok 4.5                                                                                      | Cursor    | 256k            | -           | Agent, Thinking         | -        | Jointly trained by Cursor and SpaceXAI                                                                                                                                                                                                                                                                                                                                                                                                        |
 | Kimi K2.7 Code                                                                                | Moonshot  | 262k            | -           | Agent, Thinking, Images | 1        | Hidden by default                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| [Kimi K3](https://www.moonshot.ai)                                                            | Moonshot  | 200k            | 1M          | Agent, Thinking, Images | 1        | Hidden by default; Requires Max Mode on legacy request-based plans; Up to 1M tokens with extended context at the same per-token rates (no long-context surcharge); No separate cache-write fee                                                                                                                                                                                                                                                |
 
 ## Legacy customers
 

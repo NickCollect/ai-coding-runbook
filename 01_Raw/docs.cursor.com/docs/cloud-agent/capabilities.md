@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-07-20T04:31:20.042757+00:00
+fetched_at: 2026-08-03T04:24:57.672665+00:00
 fetch_method: mintlify_md
 ---
 
@@ -57,7 +57,7 @@ Stdio servers depend on the VM environment to execute. We cannot verify that a s
 
 ### Cursor Cloud MCP
 
-The Cursor Cloud MCP is a built-in diagnostics server available during Cloud Agent runs. It lets an agent inspect the current run, browse related runs in the same environment, and fetch transcripts, diff metadata, environment details, and setup logs without manually collecting links and files.
+The Cursor Cloud MCP is a built-in diagnostics server available during Cloud Agent runs. It lets an agent inspect the current run, browse related runs in the same environment, and fetch transcripts, diff metadata, environment details, run events, and setup logs without manually collecting links and files.
 
 Team admins can disable Cursor Cloud MCP for their team from **MCP Configuration** in [team settings](https://cursor.com/dashboard/settings). See [Team dashboard](https://cursor.com/docs/account/teams/dashboard.md#mcp-configuration) for more on MCP admin controls.
 
@@ -74,28 +74,42 @@ Even when listing runs in a shared environment, non-admins only see agents they 
 
 #### What you can inspect
 
-| Category      | Examples                                                                                                                          |
-| :------------ | :-------------------------------------------------------------------------------------------------------------------------------- |
-| Current run   | Run ID, URL, repo, branch, model, owner, lifecycle status, and where the run was started (Cursor, Slack, GitHub, API, and others) |
-| Related runs  | Other Cloud Agents in the same environment, or on the same repository when no saved environment is attached                       |
-| Environment   | Environment version, full environment config, dashboard URL, and effective egress network policy                                  |
-| Transcript    | Full user-agent conversation, including tool calls when available                                                                 |
-| Diff metadata | Whether the agent changed code, how much changed, and whether it opened a PR                                                      |
-| Setup logs    | Raw logs from environment setup and image-build steps                                                                             |
+| Category      | Examples                                                                                                                                                                                                                         |
+| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Current run   | Run ID, URL, repo, branch, model, owner, lifecycle status, and where the run was started (Cursor, Slack, GitHub, API, and others)                                                                                                |
+| Events        | Setup, pull request, artifact, and MCP authentication outcomes shown on the run dashboard. Use `get-events` for the current run, or `batch-fetch-details` with `include_events` for other runs. See the event kinds under Tools. |
+| Related runs  | Other Cloud Agents in the same environment, or on the same repository when no saved environment is attached                                                                                                                      |
+| Environment   | Environment version, full environment config, dashboard URL, and effective egress network policy                                                                                                                                 |
+| Transcript    | Full user-agent conversation, including tool calls when available                                                                                                                                                                |
+| Diff metadata | Whether the agent changed code, how much changed, and whether it opened a PR                                                                                                                                                     |
+| Setup logs    | Raw logs from environment setup and image-build steps                                                                                                                                                                            |
 
 #### Tools
 
 Depending on your MCP client, tool names may include a server prefix (for example, `cursor-cloud-run-info`). The underlying tools are:
 
-| Tool                  | Purpose                                                                                                                                                  |
-| :-------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `run-info`            | Get the current run's identity, metadata, and URL. Start here.                                                                                           |
-| `environment-info`    | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                           |
-| `list-cloud-agents`   | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, and archived state.               |
-| `batch-fetch-details` | Fetch details for specific run IDs (`bcId`s). Optionally include transcripts, diff metadata, setup logs, and environment info (up to 50 runs per batch). |
-| `get-automation`      | Get an automation's details like name and owner from its ID.                                                                                             |
+| Tool                  | Purpose                                                                                                                                                                                                                 |
+| :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `run-info`            | Get the current run's identity, metadata, and URL. Start here.                                                                                                                                                          |
+| `environment-info`    | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                                                                                          |
+| `get-events`          | List the current run's dashboard events, oldest first.                                                                                                                                                                  |
+| `list-cloud-agents`   | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, and archived state.                                                                              |
+| `batch-fetch-details` | Fetch details for specific run IDs (`bcId`s). Optionally include transcripts, diff metadata, setup logs, environment info, and run events via `include_events` (writes `events.json` per run; up to 50 runs per batch). |
+| `get-automation`      | Get an automation's details like name and owner from its ID.                                                                                                                                                            |
 
-A typical diagnostics flow is `run-info` → `environment-info` → `list-cloud-agents` → `batch-fetch-details`.
+Dashboard event `kind` values from `get-events` and from `batch-fetch-details` with `include_events` are:
+
+| `kind`               | Meaning                                                                          |
+| :------------------- | :------------------------------------------------------------------------------- |
+| `setup_started`      | Environment setup began.                                                         |
+| `setup_completed`    | Environment setup finished.                                                      |
+| `setup_failed`       | Environment setup failed.                                                        |
+| `pr_created`         | Pull request opened.                                                             |
+| `pr_creation_failed` | Pull request creation failed.                                                    |
+| `artifact_created`   | Walkthrough artifact uploaded.                                                   |
+| `mcp_auth_error`     | MCP server authentication failed; its tools were skipped, and the run continued. |
+
+A typical diagnostics flow is `run-info` → `get-events` → `environment-info` → `list-cloud-agents` → `batch-fetch-details` (set `include_events` when you need other runs' dashboard events).
 
 ## Fixing CI Failures
 

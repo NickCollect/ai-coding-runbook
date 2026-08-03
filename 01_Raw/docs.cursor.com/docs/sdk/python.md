@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-07-27T04:31:49.900135+00:00
+fetched_at: 2026-08-03T04:24:59.498786+00:00
 fetch_method: mintlify_md
 ---
 
@@ -38,7 +38,7 @@ export CURSOR_API_KEY="your-key"
 
 SDK runs follow the same pricing, request pools, and Privacy Mode rules as runs from the IDE and Cloud Agents. Spend shows up in your team's [usage dashboard](https://cursor.com/dashboard/usage) under the SDK tag.
 
-To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/python.md#token-usage).
+To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/python.md#token-usage). To fetch billed usage and dollar cost for a cloud agent's runs, see [`agent.get_usage()`](https://cursor.com/docs/sdk/python.md#agentget_usage).
 
 ## Core concepts
 
@@ -204,7 +204,7 @@ for the API key's account, creating an agent with a non-empty map returns
 
 ### Model parameters
 
-Use `ModelSelection.params` to pass per-model options such as reasoning effort. Parameter IDs and values vary by model. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/python.md#the-cursor-namespace) to discover supported parameters and preset variants for your account.
+Use `ModelSelection.params` to pass per-model options such as reasoning effort or Cursor Router's `optimize_for`. Parameter IDs and values vary by model. Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/python.md#the-cursor-namespace) to discover supported parameters and preset variants for your account.
 
 ```python
 from cursor_sdk import Agent, LocalAgentOptions, ModelParameterValue, ModelSelection
@@ -218,7 +218,133 @@ agent = Agent.create(
 )
 ```
 
-Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/python.md#the-cursor-namespace) to discover the parameter IDs and preset variants for a given model.
+Use [`Cursor.models.list()`](https://cursor.com/docs/sdk/python.md#the-cursor-namespace) to discover the parameter IDs and preset variants for a given model. See [Cursor Router](https://cursor.com/docs/sdk/python.md#cursor-router) for the `auto-smart` selection contract.
+
+### Cursor Router
+
+[Cursor Router](https://cursor.com/docs/cursor-router.md) selects a model for each Auto request. In the SDK, Router is the `auto-smart` model with an `optimize_for` parameter. It is available on Teams and Enterprise. Enterprise admins must enable Router for the team before `auto-smart` appears in the catalog.
+
+The Cursor SDK is an agent SDK, not a standalone model-inference or chat-completions API. Router picks models for Cursor agent runs that can reason over a workspace, call tools, run commands, and edit files. Cursor does not currently document a raw Router endpoint for arbitrary model calls.
+
+#### Select Cost, Balance, or Intelligence
+
+Pass `auto-smart` and set `optimize_for` explicitly:
+
+| Product label | SDK value      |
+| :------------ | :------------- |
+| Cost          | `cost`         |
+| Balance       | `balanced`     |
+| Intelligence  | `intelligence` |
+
+Use **Balance** in product copy. Use `balanced` only as the SDK wire value.
+
+```python
+import os
+
+from cursor_sdk import Agent, LocalAgentOptions, ModelParameterValue, ModelSelection
+
+with Agent.create(
+    model=ModelSelection(
+        id="auto-smart",
+        params=[ModelParameterValue(id="optimize_for", value="balanced")],
+    ),
+    local=LocalAgentOptions(cwd=os.getcwd()),
+) as agent:
+    run = agent.send("Find and fix the failing authentication test")
+    result = run.wait()
+
+    print(result.status)
+```
+
+Always pass `optimize_for`. Do not omit it and do not send a legacy `default` value; discovery through the catalog is the supported contract.
+
+#### Discover Router in the model catalog
+
+`Cursor.models.list()` returns the models, parameter definitions, and preset variants available to the API key's current account and team. Cursor Router appears as `auto-smart` when Router is available. Team administrators can disable Router or restrict which optimization modes members may select.
+
+Treat the catalog as the source of truth before hard-coding a selection:
+
+```python
+from cursor_sdk import Cursor, ModelParameterValue, ModelSelection
+
+models = Cursor.models.list()
+router = next((model for model in models if model.id == "auto-smart"), None)
+optimize_for = next(
+    (
+        parameter
+        for parameter in (router.parameters if router else [])
+        if parameter.id == "optimize_for"
+    ),
+    None,
+)
+
+if router is None or optimize_for is None:
+    raise RuntimeError(
+        "Cursor Router is not available for this API key. "
+        "Verify that Router is enabled for the key's team."
+    )
+
+requested_mode = "balanced"
+allowed_values = {entry.value for entry in optimize_for.values}
+
+if requested_mode not in allowed_values:
+    raise RuntimeError(
+        f'Router mode "{requested_mode}" is not enabled for this team.'
+    )
+
+model = ModelSelection(
+    id=router.id,
+    params=[ModelParameterValue(id=optimize_for.id, value=requested_mode)],
+)
+```
+
+#### Switch modes per run
+
+Override the model on `agent.send()` to change Router mode for a run:
+
+```python
+from cursor_sdk import ModelParameterValue, ModelSelection, SendOptions
+
+run = agent.send(
+    "Handle this complex migration",
+    SendOptions(
+        model=ModelSelection(
+            id="auto-smart",
+            params=[ModelParameterValue(id="optimize_for", value="intelligence")],
+        ),
+    ),
+)
+```
+
+Per-run model overrides are sticky. Later sends without an override keep using the new selection. See [Per-run model override](https://cursor.com/docs/sdk/python.md#per-run-model-override).
+
+#### Model ids: `auto-smart`, `auto`, and `default`
+
+| Selection                                     | Meaning                                                                                                                                     |
+| :-------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------ |
+| `auto-smart` with `optimize_for`              | Cursor Router. Use this when you want Cost, Balance, or Intelligence.                                                                       |
+| `ModelSelection(id="auto")`                   | Server-selected Auto fallback when a specific model is missing from the catalog. Prefer `auto-smart` when you need an explicit Router mode. |
+| Omitting `optimize_for`, or sending `default` | Not a supported Router contract. Always discover allowed values and pass `cost`, `balanced`, or `intelligence`.                             |
+
+#### Billing and routing pool
+
+- **Cost** follows classic Auto behavior and bundled Auto pricing.
+- **Balance** and **Intelligence** use Cursor Router and bill at the routed model's rate under your plan or contract.
+- The underlying model can change between requests. Prefer a fixed model id when you need reproducible comparisons.
+- Enterprise model allowlists shape the routing pool. Blocking required models can disable Router.
+
+For current rates and the routing pool, see [Cursor Router](https://cursor.com/docs/cursor-router.md) and [Models & Pricing](https://cursor.com/docs/models-and-pricing.md).
+
+#### Troubleshooting missing Router
+
+If `auto-smart` is missing or an optimization mode is rejected:
+
+1. Call `Cursor.models.list()`.
+2. Confirm `auto-smart` is in the result.
+3. Confirm `optimize_for` includes the value you want (`cost`, `balanced`, or `intelligence`).
+4. Confirm Router is enabled for the team tied to the API key.
+5. If you belong to multiple teams, confirm the key is operating in the intended team context.
+6. Check team model-access policy if Router is unavailable or cannot choose a valid underlying model.
 
 ### Raw dictionaries
 
@@ -601,6 +727,8 @@ Async equivalent: `async for message in run.messages()` and `await run.wait()`. 
 
 `TokenUsage` is exported from `cursor_sdk` (plus `to_token_usage` / `sum_token_usage` for advanced callers). Wire JSON is camelCase (`inputTokens`, …); the Python dataclasses use snake\_case.
 
+Token counts are what the runtime reports; they say nothing about cost. For billed usage and the dollar cost of a cloud agent's runs, call [`agent.get_usage()`](https://cursor.com/docs/sdk/python.md#agentget_usage).
+
 ### Reading text output
 
 `iter_text()` yields assistant text as it streams. `text()` returns the final terminal text, blocking on `wait()` if the run is still running.
@@ -761,7 +889,7 @@ They remain importable from `cursor_sdk` for backward compatibility, but new cod
 | `mode`            | `"agent" \| "plan"`                          | Per-send conversation mode override. If omitted on follow-ups, keeps the conversation's current mode.                                                                                                                                    |
 | `mcp_servers`     | `Mapping[str, McpServerConfig]`              | Inline MCP server definitions. Fully replaces creation-time servers for this run.                                                                                                                                                        |
 | `cloud.env_vars`  | `Mapping[str, str]`                          | Cloud agents only. [Per-run environment variables](https://cursor.com/docs/sdk/python.md#per-run-environment-variables) injected for this run and removed when it finishes. Overrides agent-scoped `env_vars` by name for this run only. |
-| `local.force`     | `bool`                                       | Local agents only. Defaults to `False`. Expire a stuck active run before starting this message. Cloud returns `409 agent_busy` server-side, so no equivalent is needed.                                                                  |
+| `local.force`     | `bool`                                       | Local agents only. Defaults to `None` (unset). Set `True` to expire a stuck active run before starting this message. Cloud returns `409 agent_busy` server-side, so no equivalent is needed.                                             |
 | `idempotency_key` | `str`                                        | Optional client-generated idempotency key for the send.                                                                                                                                                                                  |
 | `on_step`         | `Callable[[ConversationStep], Any]`          | Callback after each completed conversation step (text, thinking, or tool batch).                                                                                                                                                         |
 | `on_delta`        | `Callable[[InteractionUpdate], Any]`         | Callback per raw `InteractionUpdate`.                                                                                                                                                                                                    |
@@ -1029,6 +1157,43 @@ agent.delete()
 
 Async lifecycle methods use the same names and are awaitable.
 
+### agent.get\_usage()
+
+Fetch billed token usage and dollar cost for a cloud agent's runs. Pass `run_id` to restrict the result to a single run.
+
+```python
+usage = agent.get_usage()
+
+print(f"tokens: {usage.usage.total_tokens}")
+if usage.cost is not None:
+    print(f"charged: ${usage.cost.charged_cents / 100:.2f}")
+for run in usage.runs:
+    print(run.run_id, run.usage.total_tokens)
+```
+
+```python
+@dataclass(frozen=True)
+class AgentUsage:
+    usage: TokenUsage              # summed across `runs`
+    runs: Sequence[RunUsage] = ()
+    cost: UsageCost | None = None  # summed across `runs`
+
+@dataclass(frozen=True)
+class RunUsage:
+    run_id: str
+    usage: TokenUsage
+    cost: UsageCost | None = None
+
+@dataclass(frozen=True)
+class UsageCost:
+    raw_cost_cents: float  # undiscounted model token cost; 0 for request-priced usage
+    charged_cents: float   # amount charged, discounts and the Cursor Token Rate included
+```
+
+Cost includes discounts and can take a moment to settle after a run ends; `cost` is `None` until it does. `charged_cents` is `0.0` for plan-included, BYOK, and credit-grant usage.
+
+This is a different view than [Token usage](https://cursor.com/docs/sdk/python.md#token-usage): `run.usage` is the live token count for one run, while `get_usage()` is the billed record across the agent's runs. Cloud agents only for now; local agents raise `ConfigurationError`. On async agents, `await agent.get_usage()` matches. `AgentUsage`, `RunUsage`, and `UsageCost` are exported from `cursor_sdk`.
+
 ## The Cursor namespace
 
 Account-level and catalog reads. Sync methods take optional `api_key` and otherwise fall back to `CURSOR_API_KEY`.
@@ -1059,7 +1224,9 @@ models = await AsyncCursor.models.list(client=client)
 repositories = await AsyncCursor.repositories.list(client=client)
 ```
 
-Use `Cursor.models.list()` to discover valid model IDs and per-model parameters before calling `Agent.create()` or `agent.send()`. Parameters are model-specific. Common examples are reasoning effort and context window size.
+Use `Cursor.models.list()` to discover valid model IDs and per-model parameters before calling `Agent.create()` or `agent.send()`. Parameters are model-specific. Common examples are reasoning effort and Cursor Router's `optimize_for` on `auto-smart`.
+
+The catalog is account- and team-specific. Cursor Router only appears as `auto-smart` when Router is available for the API key's team. See [Cursor Router](https://cursor.com/docs/sdk/python.md#cursor-router).
 
 ```python
 models = Cursor.models.list()
@@ -1079,6 +1246,8 @@ print(composer.parameters if composer else [])
 ```
 
 Preset `variants` on each `SDKModel` already contain valid `params`, so you can copy them into a `ModelSelection`.
+
+Prefer an explicit Router selection (`auto-smart` + `optimize_for`) when a target model is missing and you want Cost, Balance, or Intelligence. Fall back to `ModelSelection(id="auto")` only when you want server-selected Auto without choosing a Router mode. For Cursor Router, always pass `optimize_for` explicitly.
 
 `Cursor.repositories.list()` returns the SCM repositories (GitHub, GitLab, Bitbucket, Azure DevOps, depending on what's connected) available for cloud agents on the calling account or team. Each item exposes a `url`. Use these to populate `CloudAgentOptions.repos`.
 
@@ -1336,18 +1505,18 @@ The Python SDK accepts helper dataclasses and raw dictionaries. Dataclasses use 
 
 ### AgentOptions
 
-| Property          | Type                                                 | Default                                                             | Description                                                                                                                            |
-| :---------------- | :--------------------------------------------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------- |
-| `model`           | `str \| ModelSelection \| Mapping[str, Any]`         | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/python.md#modelselection).                                            |
-| `api_key`         | `str`                                                | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                            |
-| `name`            | `str`                                                | Auto-generated                                                      | Human-readable agent name surfaced in `client.agents.list()` / `client.agents.get()`.                                                  |
-| `local`           | `LocalAgentOptions \| Mapping[str, Any]`             | `None`                                                              | Local agent config. Pass to create a local agent.                                                                                      |
-| `cloud`           | `CloudAgentOptions \| Mapping[str, Any]`             | `None`                                                              | Cloud agent config. Pass to create a cloud agent.                                                                                      |
-| `mcp_servers`     | `Mapping[str, McpServerConfig]`                      | `None`                                                              | Inline MCP server definitions.                                                                                                         |
-| `agents`          | `Mapping[str, AgentDefinition \| Mapping[str, Any]]` | `None`                                                              | Subagent definitions.                                                                                                                  |
-| `agent_id`        | `str`                                                | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                         |
-| `idempotency_key` | `str`                                                | Auto-generated for cloud                                            | Optional client-generated idempotency key. Cloud only.                                                                                 |
-| `mode`            | `"agent" \| "plan"`                                  | `"agent"`                                                           | Initial conversation mode for the agent's first run. See [Conversation mode](https://cursor.com/docs/sdk/python.md#conversation-mode). |
+| Property          | Type                                                 | Default                                                             | Description                                                                                                                                                                           |
+| :---------------- | :--------------------------------------------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `model`           | `str \| ModelSelection \| Mapping[str, Any]`         | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/python.md#modelselection).                                                                                           |
+| `api_key`         | `str`                                                | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                                                                           |
+| `name`            | `str`                                                | Auto-generated                                                      | Human-readable agent name surfaced in `client.agents.list()` / `client.agents.get()`.                                                                                                 |
+| `local`           | `LocalAgentOptions \| Mapping[str, Any]`             | `None`                                                              | Local agent config. Pass to create a local agent.                                                                                                                                     |
+| `cloud`           | `CloudAgentOptions \| Mapping[str, Any]`             | `None`                                                              | Cloud agent config. Pass to create a cloud agent.                                                                                                                                     |
+| `mcp_servers`     | `Mapping[str, McpServerConfig]`                      | `None`                                                              | Inline MCP server definitions.                                                                                                                                                        |
+| `agents`          | `Mapping[str, AgentDefinition \| Mapping[str, Any]]` | `None`                                                              | Subagent definitions.                                                                                                                                                                 |
+| `agent_id`        | `str`                                                | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                                                                        |
+| `idempotency_key` | `str`                                                | Auto-generated for cloud                                            | Optional client-generated idempotency key. Cloud only.                                                                                                                                |
+| `mode`            | `"agent" \| "plan"`                                  | `None`                                                              | Initial conversation mode for the agent's first run. When omitted, the server starts in agent mode. See [Conversation mode](https://cursor.com/docs/sdk/python.md#conversation-mode). |
 
 ### LocalAgentOptions
 
@@ -1362,23 +1531,23 @@ The Python SDK accepts helper dataclasses and raw dictionaries. Dataclasses use 
 
 ### CloudAgentOptions
 
-| Property                 | Type                                             | Default             | Description                                                                                                                                                                                |
-| :----------------------- | :----------------------------------------------- | :------------------ | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `env`                    | `CloudEnvironment \| Mapping[str, Any]`          | `{ type: "cloud" }` | Execution environment. `cloud` uses Cursor-hosted VMs; `pool` and `machine` target self-hosted workers you run.                                                                            |
-| `repos`                  | `Sequence[CloudRepository \| Mapping[str, Any]]` | `None`              | Repositories to clone into the VM. Omit `repos` and leave `env` at the default for a no-repo agent with an empty workspace. Pass `pr_url` on a repo to attach the agent to an existing PR. |
-| `work_on_current_branch` | `bool`                                           | `False`             | Push commits to the existing branch instead of a new one.                                                                                                                                  |
-| `auto_create_pr`         | `bool`                                           | `False`             | Open a PR when the run finishes.                                                                                                                                                           |
-| `skip_reviewer_request`  | `bool`                                           | `False`             | Skip requesting the calling user as a reviewer on the PR.                                                                                                                                  |
-| `env_vars`               | `Mapping[str, str]`                              | `None`              | Session-scoped environment variables for cloud agents.                                                                                                                                     |
+| Property                 | Type                                             | Default | Description                                                                                                                                                                |
+| :----------------------- | :----------------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `env`                    | `CloudEnvironment \| Mapping[str, Any]`          | `None`  | Execution environment. When omitted, the server uses Cursor-hosted cloud VMs. `pool` and `machine` target self-hosted workers you run.                                     |
+| `repos`                  | `Sequence[CloudRepository \| Mapping[str, Any]]` | `None`  | Repositories to clone into the VM. Omit both `repos` and `env` for a no-repo agent with an empty workspace. Pass `pr_url` on a repo to attach the agent to an existing PR. |
+| `work_on_current_branch` | `bool`                                           | `None`  | Push commits to the existing branch instead of a new one. The server treats an omitted value as `False`.                                                                   |
+| `auto_create_pr`         | `bool`                                           | `None`  | Open a PR when the run finishes. The server treats an omitted value as `False`.                                                                                            |
+| `skip_reviewer_request`  | `bool`                                           | `None`  | Skip requesting the calling user as a reviewer on the PR. The server treats an omitted value as `False`.                                                                   |
+| `env_vars`               | `Mapping[str, str]`                              | `None`  | Session-scoped environment variables for cloud agents.                                                                                                                     |
 
 ### AgentDefinition
 
-| Property      | Type                                                             | Default     | Description                                                                                      |
-| :------------ | :--------------------------------------------------------------- | :---------- | :----------------------------------------------------------------------------------------------- |
-| `description` | `str`                                                            | *required*  | When to use this subagent. Shown to the parent agent so it knows when to spawn.                  |
-| `prompt`      | `str`                                                            | *required*  | System prompt for the subagent.                                                                  |
-| `model`       | `str \| ModelSelection \| Mapping[str, Any] \| "inherit"`        | `"inherit"` | Model override. Pass `"inherit"` to use the parent's selection.                                  |
-| `mcp_servers` | `Sequence[str \| AgentDefinitionMcpServer \| Mapping[str, Any]]` | `None`      | MCP servers available to this subagent. Names reference servers from the parent's `mcp_servers`. |
+| Property      | Type                                                             | Default    | Description                                                                                      |
+| :------------ | :--------------------------------------------------------------- | :--------- | :----------------------------------------------------------------------------------------------- |
+| `description` | `str`                                                            | *required* | When to use this subagent. Shown to the parent agent so it knows when to spawn.                  |
+| `prompt`      | `str`                                                            | *required* | System prompt for the subagent.                                                                  |
+| `model`       | `str \| ModelSelection \| Mapping[str, Any] \| "inherit"`        | `None`     | Model override. `None` and `"inherit"` both use the parent's selection.                          |
+| `mcp_servers` | `Sequence[str \| AgentDefinitionMcpServer \| Mapping[str, Any]]` | `None`     | MCP servers available to this subagent. Names reference servers from the parent's `mcp_servers`. |
 
 ### CustomTool
 
@@ -1407,17 +1576,12 @@ class ModelParameterValue:
     value: str
 ```
 
-`id` is the model identifier (for example, `"composer-2.5"`). `params` carries per-model parameters such as reasoning effort. Use `Cursor.models.list()` to discover valid IDs, parameter definitions, and preset variants for your account.
+`id` is the model identifier (for example, `"composer-2.5"` or `"auto-smart"`). `params` carries per-model parameters such as reasoning effort or Router's `optimize_for`. Use `Cursor.models.list()` to discover valid IDs, parameter definitions, and preset variants for your account. See [Cursor Router](https://cursor.com/docs/sdk/python.md#cursor-router) for the Router selection contract.
 
 ### McpServerConfig
 
 ```python
-McpServerConfig = (
-    HttpMcpServerConfig
-    | SseMcpServerConfig
-    | StdioMcpServerConfig
-    | Mapping[str, Any]
-)
+from cursor_sdk.types import McpServerConfig
 
 @dataclass(frozen=True)
 class HttpMcpServerConfig:
@@ -1487,8 +1651,10 @@ Pass either a remote `url` or base64 `data` with a `mime_type`. `from_data()` ac
 
 ### SettingSource
 
+`SettingSource` is available from `cursor_sdk.types`.
+
 ```python
-SettingSource = Literal["project", "user", "team", "mdm", "plugins", "all"]
+from cursor_sdk.types import SettingSource
 ```
 
 Controls which on-disk settings layers a local agent loads. Cloud agents always load `project`, `team`, and `plugins` and ignore this field.
@@ -1550,7 +1716,7 @@ class CursorAgentError(Exception):
 | `APITimeoutError`              | Request timed out.                                                                                                      |
 | `InternalServerError`          | Cursor service returned a server error.                                                                                 |
 | `NotFoundError`                | Requested resource was not found.                                                                                       |
-| `UnknownAgentError`            | Agent was not found or cannot be read.                                                                                  |
+| `AgentNotFoundError`           | Agent does not exist or isn't visible under the current working directory.                                              |
 | `UnsupportedRunOperationError` | Run operation is not supported for the current run state.                                                               |
 
 ### Retrying with backoff
@@ -1644,6 +1810,7 @@ cursor-sdk-bridge --help
 - Tool-call payload schemas are intentionally not strongly typed.
 - Inline MCP servers are not persisted across `Agent.resume()`. Pass them again on resume if needed.
 - Custom tools (`local.custom_tools`) are local agents only.
+- `agent.get_usage()` is cloud agents only for now. Local agents raise `ConfigurationError`.
 - Artifact download is not implemented for local agents.
 - `local.setting_sources` (and the file-based MCP and subagent paths it gates) does not apply to cloud agents. Cloud always loads `project`, `team`, and `plugins`.
 - Hooks are file-based only (`.cursor/hooks.json`). No programmatic callbacks.

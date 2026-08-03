@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security
-fetched_at: 2026-07-27T04:31:48.394108+00:00
+fetched_at: 2026-08-03T04:24:57.675657+00:00
 fetch_method: mintlify_md
 ---
 
@@ -103,7 +103,7 @@ Cloud Agent activity is logged and attributable.
 - **Session logging.** Runs are logged, and team admins can review activity from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents).
 - **Attributed changes.** Every commit and pull request an agent creates is attributed and visible in your Git history, with signed, verified commits.
 - **Audit logs.** Authentication and admin events flow to your [audit logs](https://cursor.com/docs/enterprise/compliance-and-monitoring.md#audit-logs), which Enterprise teams can stream to a SIEM, webhook, or S3.
-- **Run diagnostics.** The built-in [Cursor Cloud MCP](https://cursor.com/docs/cloud-agent/capabilities.md#cursor-cloud-mcp) exposes transcripts, environment details, and setup logs for a run.
+- **Run diagnostics.** The built-in [Cursor Cloud MCP](https://cursor.com/docs/cloud-agent/capabilities.md#cursor-cloud-mcp) exposes transcripts, run events, environment details, and setup logs for a run.
 
 ## Data deletion
 

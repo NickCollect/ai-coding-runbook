@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/mobile
-fetched_at: 2026-07-20T04:31:20.068769+00:00
+fetched_at: 2026-08-03T04:24:57.671051+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,14 +10,14 @@ fetch_method: mintlify_md
 
 Cursor for iOS is in beta. Features may change before general availability.
 
-Cursor for iOS is a native mobile app for controlling agents running [in the cloud](https://cursor.com/docs/cloud-agent.md) and on your local computer. Start agents, follow their work in real time, and review and merge their pull requests from your iPhone. It runs on the same backend as [cursor.com/agents](https://cursor.com/agents) and the desktop Agents Window, so the agents you start on mobile show up everywhere you work.
+Cursor for iOS is a native mobile app for controlling agents running [in the cloud](https://cursor.com/docs/cloud-agent.md) and on your local computer. Start agents, follow their work in real time, and review and merge their pull requests from your iPhone or iPad. It runs on the same backend as [cursor.com/agents](https://cursor.com/agents) and the desktop Agents Window, so the agents you start on mobile show up everywhere you work.
 
 [https://apps.apple.com/app/cursor/id6767085653](https://apps.apple.com/app/cursor/id6767085653)
 
-The app runs on iPhone with iOS 26.0 or later, in English.
+The app runs on iPhone with iOS 26.0 or later and iPad with iPadOS 26.0 or later, in English.
 Android is planned.
 
-Cursor for iOS is available on the Pro, Pro+, Ultra, Teams, and Enterprise plans. Learn
+Cursor for iOS is available on the Start, Pro, Pro+, Ultra, Teams, and Enterprise plans. Learn
 more about [what's included](https://cursor.com/help/account-and-billing/pricing.md).
 
 ## Getting started
@@ -25,7 +25,7 @@ more about [what's included](https://cursor.com/help/account-and-billing/pricing
 ### Download the app
 
 Get [Cursor from the App Store](https://apps.apple.com/app/cursor/id6767085653) on your
-iPhone.
+iPhone or iPad.
 
 ### Open Cursor and sign in
 
@@ -55,7 +55,7 @@ You get the full cloud agent workflow from your pocket, not a stripped-down chat
 - **Use any model.** Choose any model available for cloud agents. Every run uses the model's maximum supported context window.
 - **Let agents run long.** Start a task, lock your phone, and check back later. Agents keep working in the cloud whether or not your device stays connected.
 - **Follow the work live.** Watch the chat stream as the agent codes, send follow-ups to a running agent, and tap a subagent card to read its child transcript.
-- **Review and merge pull requests.** Read full diffs, commits, deployments, and review threads. Then merge with squash, mark ready, update the branch, toggle auto-merge, publish, close, or hand a failing check back with Fix with Agent.
+- **Review and merge pull requests.** Read full diffs, commits, deployments, approvals, comments, and checks. Add or change reviewers, then ask an agent to resolve review comments or fix a failing check. You can also merge with squash, mark ready, update the branch, toggle auto-merge, publish, or close.
 - **Use your commands and automations.** Your slash commands, skills, and automations work the same on mobile as they do locally, in the CLI, and on the web.
 - **Enter Design Mode.** Attach photos, camera shots, or files, then point, click, and draw on images or front-end components to give agents visual direction.
 - **Use your voice.** Dictate instructions to agents for hands-free edits with live transcription.
@@ -63,6 +63,15 @@ You get the full cloud agent workflow from your pocket, not a stripped-down chat
 - **Stay in the loop.** Get a push notification when an agent finishes a turn, and track up to eight agents at once with Live Activities on the lock screen and Dynamic Island.
 
 The app is cache-first. It reads from local data so the inbox and conversations open fast, then syncs once your connection returns.
+
+## Use the iPad layout
+
+The iPad app uses the larger screen to keep more of an agent's work visible:
+
+- Keep chats in the sidebar while you follow several agents.
+- Open a review next to a chat.
+- Read file diffs at full width.
+- Attach a screenshot and tap a point to leave visual direction, or draw on the image with Apple Pencil.
 
 ## What lives on the web
 

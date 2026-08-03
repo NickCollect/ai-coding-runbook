@@ -1,8 +1,10 @@
 ---
 source_url: https://cursor.com/docs/models/kimi-k2-7-code
-fetched_at: 2026-07-27T04:31:49.740612+00:00
+fetched_at: 2026-08-03T04:24:59.320421+00:00
 fetch_method: mintlify_md
 ---
+
+We recommend using [Kimi K3](https://cursor.com/docs/models/kimi-k3.md) for new work. K2.7 Code remains available as a lower-cost Moonshot option.
 
 ## Tools
 
