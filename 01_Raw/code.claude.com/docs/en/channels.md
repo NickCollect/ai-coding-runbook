@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/channels
-fetched_at: 2026-07-27T04:31:47.601779+00:00
+fetched_at: 2026-08-10T03:07:47.905694+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,9 +46,12 @@ Each supported channel is a plugin that requires [Bun](https://bun.sh). For a ha
         /plugin install telegram@claude-plugins-official
         ```
 
-        If Claude Code reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`. If it reports that the plugin is not found in the marketplace, your local copy is outdated: refresh it with `/plugin marketplace update claude-plugins-official`. Then retry the install.
+        If the install fails, match the message Claude Code reports:
 
-        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. After installing, run `/reload-plugins` to activate the plugin's configure command.
+        * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+        * The plugin is not found in the marketplace: check the plugin name. Claude Code [refreshes a stale marketplace catalog and retries](/docs/en/discover-plugins#install-plugins) before reporting this, so if you turned off [marketplace auto-update](/docs/en/discover-plugins#configure-auto-updates), refresh manually with `/plugin marketplace update claude-plugins-official` and retry the install.
+
+        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to activate.`, run that command to activate the plugin's configure command.
       </Step>
 
       <Step title="Configure your token">
@@ -121,9 +124,12 @@ Each supported channel is a plugin that requires [Bun](https://bun.sh). For a ha
         /plugin install discord@claude-plugins-official
         ```
 
-        If Claude Code reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`. If it reports that the plugin is not found in the marketplace, your local copy is outdated: refresh it with `/plugin marketplace update claude-plugins-official`. Then retry the install.
+        If the install fails, match the message Claude Code reports:
 
-        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. After installing, run `/reload-plugins` to activate the plugin's configure command.
+        * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+        * The plugin is not found in the marketplace: check the plugin name. Claude Code [refreshes a stale marketplace catalog and retries](/docs/en/discover-plugins#install-plugins) before reporting this, so if you turned off [marketplace auto-update](/docs/en/discover-plugins#configure-auto-updates), refresh manually with `/plugin marketplace update claude-plugins-official` and retry the install.
+
+        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Check the install summary: if it reports `Run /reload-plugins to activate.`, run that command to activate the plugin's configure command.
       </Step>
 
       <Step title="Configure your token">
@@ -183,9 +189,12 @@ Each supported channel is a plugin that requires [Bun](https://bun.sh). For a ha
         /plugin install imessage@claude-plugins-official
         ```
 
-        If Claude Code reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`. If it reports that the plugin is not found in the marketplace, your local copy is outdated: refresh it with `/plugin marketplace update claude-plugins-official`. Then retry the install.
+        If the install fails, match the message Claude Code reports:
 
-        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Claude Code then suggests running `/reload-plugins`; you can skip that here, because restarting in the next step picks up the plugin.
+        * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+        * The plugin is not found in the marketplace: check the plugin name. Claude Code [refreshes a stale marketplace catalog and retries](/docs/en/discover-plugins#install-plugins) before reporting this, so if you turned off [marketplace auto-update](/docs/en/discover-plugins#configure-auto-updates), refresh manually with `/plugin marketplace update claude-plugins-official` and retry the install.
+
+        When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. If the install summary reports `Run /reload-plugins to activate.`, you can skip that here, because restarting in the next step picks up the plugin.
       </Step>
 
       <Step title="Restart with channels enabled">
@@ -237,9 +246,12 @@ To try the fakechat demo, you'll need:
     /plugin install fakechat@claude-plugins-official
     ```
 
-    If Claude Code reports `Marketplace "claude-plugins-official" not found`, add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`. If it reports that the plugin is not found in the marketplace, your local copy is outdated: refresh it with `/plugin marketplace update claude-plugins-official`. Then retry the install.
+    If the install fails, match the message Claude Code reports:
 
-    When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. Claude Code then suggests running `/reload-plugins`; you can skip that here, because restarting in the next step picks up the plugin.
+    * `Marketplace "claude-plugins-official" not found`: add the marketplace with `/plugin marketplace add anthropics/claude-plugins-official`, then retry the install.
+    * The plugin is not found in the marketplace: check the plugin name. Claude Code [refreshes a stale marketplace catalog and retries](/docs/en/discover-plugins#install-plugins) before reporting this, so if you turned off [marketplace auto-update](/docs/en/discover-plugins#configure-auto-updates), refresh manually with `/plugin marketplace update claude-plugins-official` and retry the install.
+
+    When the install asks for an installation scope, choose the user scope option so the plugin is available across all your projects. If the install summary reports `Run /reload-plugins to activate.`, you can skip that here, because restarting in the next step picks up the plugin.
   </Step>
 
   <Step title="Restart with the channel enabled">
@@ -267,7 +279,13 @@ To try the fakechat demo, you'll need:
   </Step>
 </Steps>
 
-If Claude hits a permission prompt while you're away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](/docs/en/channels-reference#relay-permission-prompts) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode) bypasses most prompts, but only use it in environments you trust. Explicit ask rules, connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools), and MCP tools marked [`requiresUserInteraction`](/docs/en/mcp#require-approval-for-a-specific-tool) still prompt.
+If Claude hits a permission prompt while you're away from the terminal, the session pauses until you respond. Channel servers that declare the [permission relay capability](/docs/en/channels-reference#relay-permission-prompts) can forward these prompts to you so you can approve or deny remotely. For unattended use, [`--dangerously-skip-permissions`](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode) bypasses most prompts, but only use it in environments you trust. Even then, these checks still prompt:
+
+* Explicit ask rules
+* Connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools)
+* MCP tools marked [`requiresUserInteraction`](/docs/en/mcp#require-approval-for-a-specific-tool)
+* Removals targeting `/` or your home directory
+* The [cross-session messaging safeguards](/docs/en/permission-modes#skip-all-checks-with-bypasspermissions-mode)
 
 When you run channels in non-interactive mode with `-p`, tools that need terminal input, such as multiple-choice questions and plan mode approval, are disabled so the session never stalls waiting for input.
 

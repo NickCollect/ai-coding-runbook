@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/overview
-fetched_at: 2026-08-03T04:25:06.164080+00:00
+fetched_at: 2026-08-10T03:07:54.701749+00:00
 fetch_method: mintlify_md
 ---
 
@@ -203,7 +203,7 @@ Here are some of the ways you can use Claude Code:
   <Accordion title="Schedule recurring tasks" icon="clock">
     Run Claude on a schedule to automate work that repeats: morning PR reviews, overnight CI failure analysis, weekly dependency audits, or syncing docs after PRs merge.
 
-    * [Routines](/docs/en/routines) run on Anthropic-managed infrastructure, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
+    * [Routines](/docs/en/routines) run in the cloud, so they keep running even when your computer is off. They can also trigger on API calls or GitHub events. Create them from the web, the Desktop app, or by running `/schedule` in the CLI.
     * [Desktop scheduled tasks](/docs/en/desktop-scheduled-tasks) run on your machine, with direct access to your local files and tools
     * [`/loop`](/docs/en/scheduled-tasks) repeats a prompt within a CLI session for quick polling
   </Accordion>

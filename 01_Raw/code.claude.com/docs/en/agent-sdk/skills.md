@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/skills
-fetched_at: 2026-08-03T04:24:58.905872+00:00
+fetched_at: 2026-08-10T03:07:46.434351+00:00
 fetch_method: mintlify_md
 ---
 
@@ -101,6 +101,15 @@ To enable only specific Skills, pass their names. Names match the `name` field i
   const options = { skills: ["pdf", "docx"] };
   ```
 </CodeGroup>
+
+The list takes exact Skill names only. In the TypeScript SDK, `query()` throws before starting the Claude Code process when a name can't work as an exact Skill name. In the Python SDK, `query()` raises `ValueError` in the same cases, for example:
+
+* An empty name
+* A name containing parentheses, commas, or control characters
+* A name padded with whitespace
+* A wildcard form such as a bare `*` or a `:*` suffix
+
+To enable every discovered Skill, pass `skills: "all"` rather than a wildcard.
 
 The `skills` option is a context filter, not a sandbox. Unlisted Skills are hidden from the model and rejected by the Skill tool, but their files remain on disk and are reachable through Read and Bash.
 

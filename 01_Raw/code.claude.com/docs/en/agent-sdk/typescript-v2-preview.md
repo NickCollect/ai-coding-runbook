@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/typescript-v2-preview
-fetched_at: 2026-08-03T04:25:00.084242+00:00
+fetched_at: 2026-08-10T03:07:47.053771+00:00
 fetch_method: mintlify_md
 ---
 
@@ -33,7 +33,7 @@ npm install @anthropic-ai/claude-agent-sdk@0.2
 ```
 
 <Note>
-  The SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don't need to install Claude Code separately.
+  The SDK bundles a native Claude Code binary for your platform as an optional dependency, so most installs need no separate Claude Code install. See the [quickstart's install note](/docs/en/agent-sdk/quickstart) for the installs that need one.
 </Note>
 
 ## Quick start

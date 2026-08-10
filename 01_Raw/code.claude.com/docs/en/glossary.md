@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/glossary
-fetched_at: 2026-08-03T04:25:03.661355+00:00
+fetched_at: 2026-08-10T03:07:51.917789+00:00
 fetch_method: mintlify_md
 ---
 
@@ -62,7 +62,7 @@ Learn more: [Eliminate prompts with auto mode](/docs/en/permission-modes#elimina
 
 ### Bare mode
 
-A startup flag, `--bare`, that skips auto-discovery of hooks, skills, plugins, MCP servers, auto memory, and CLAUDE.md. Only flags you pass explicitly take effect. Recommended for CI and scripted calls where you need identical behavior across machines regardless of local configuration.
+With `--bare`, Claude Code starts without loading hooks, skills, plugins, MCP servers, auto memory, or CLAUDE.md. Recommended for CI and scripted calls where you need the same result on every machine.
 
 Learn more: [Start faster with bare mode](/docs/en/headless#start-faster-with-bare-mode)
 
@@ -166,7 +166,7 @@ Learn more: [Get started with hooks](/docs/en/hooks-guide) · [Hooks reference](
 
 ### Managed settings
 
-Settings enforced org-wide by IT or DevOps, delivered from Anthropic's servers through the admin console or deployed to devices at an OS-level path outside `~/.claude`. User and project settings cannot override managed settings. Server-managed delivery applies on [eligible configurations](/docs/en/server-managed-settings#platform-availability); see [Security considerations](/docs/en/server-managed-settings#security-considerations). Use this for security policies, compliance requirements, or standardized tooling across a fleet.
+Settings enforced org-wide by IT or DevOps, delivered from Anthropic's servers through the admin console or deployed to devices at an OS-level path outside `~/.claude`. User and project settings cannot override managed settings, apart from the exceptions listed under [Settings precedence](/docs/en/settings#settings-precedence). Server-managed delivery applies on [eligible configurations](/docs/en/server-managed-settings#platform-availability); see [Security considerations](/docs/en/server-managed-settings#security-considerations). Use this for security policies, compliance requirements, or standardized tooling across a fleet.
 
 Learn more: [Server-managed settings](/docs/en/server-managed-settings) · [Settings files](/docs/en/settings#settings-files)
 
@@ -274,7 +274,7 @@ Learn more: [Work with sessions](/docs/en/how-claude-code-works#work-with-sessio
 
 ### Settings layers
 
-The hierarchy Claude Code reads configuration from, in precedence order from highest to lowest: [managed policy](#managed-settings), command-line arguments, local settings at `.claude/settings.local.json`, project settings at `.claude/settings.json`, then user settings at `~/.claude/settings.json`. Arrays merge across layers; scalars at a higher layer override lower ones.
+The hierarchy Claude Code reads configuration from, in precedence order from highest to lowest: [managed policy](#managed-settings), command-line arguments, local settings at `.claude/settings.local.json`, project settings at `.claude/settings.json`, then user settings at `~/.claude/settings.json`. Arrays merge across layers; scalars at a higher layer override lower ones, apart from the exceptions under [Settings precedence](/docs/en/settings#settings-precedence).
 
 Learn more: [Settings files](/docs/en/settings#settings-files)
 

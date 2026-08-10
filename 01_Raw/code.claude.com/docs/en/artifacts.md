@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/artifacts
-fetched_at: 2026-07-27T04:31:47.514718+00:00
+fetched_at: 2026-08-10T03:07:47.549877+00:00
 fetch_method: mintlify_md
 ---
 
@@ -94,8 +94,6 @@ An editor publishes new versions the same way you [update the artifact from anot
 
 ## Pull live data with MCP connectors
 
-{/* plan-availability: feature=artifact-mcp plans=pro,max,team,enterprise providers=anthropic */}
-
 An artifact can call [MCP connectors](/docs/en/mcp#use-mcp-servers-from-claude-ai) each time someone views it, so the page shows current data rather than a snapshot from the session that built it. Connector calls from artifacts are available on Pro, Max, Team, and Enterprise plans and require Claude Code v2.1.209 or later. On earlier versions, Claude publishes the page with whatever data the session gathered while building it.
 
 To create a connector-backed page, name the connector and the data you want in your prompt:
@@ -174,7 +172,7 @@ Turn this migration plan into a checklist artifact. Check items off as you compl
 
 ## Improve the visual design
 
-{/* min-version: 2.1.182 */}Claude applies a built-in design skill when it builds an artifact, so pages get a deliberate palette, typography, and layout without extra prompting. Requires Claude Code v2.1.182 or later. That skill also looks for an existing design system in your project before choosing its own. Design tokens are the named color, typography, and spacing values your design system reuses. To keep artifacts consistent with your product's branding, record them where Claude can find them, such as the project's [CLAUDE.md](/docs/en/memory) or a theme file in your repository:
+Claude applies a built-in design skill when it builds an artifact, so pages get a deliberate palette, typography, and layout without extra prompting. Requires Claude Code v2.1.182 or later. That skill also looks for an existing design system in your project before choosing its own. Design tokens are the named color, typography, and spacing values your design system reuses. To keep artifacts consistent with your product's branding, record them where Claude can find them, such as the project's [CLAUDE.md](/docs/en/memory) or a theme file in your repository:
 
 ```markdown theme={null}
 ## Design system

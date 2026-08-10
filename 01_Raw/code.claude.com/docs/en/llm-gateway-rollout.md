@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/llm-gateway-rollout
-fetched_at: 2026-07-27T04:31:49.388603+00:00
+fetched_at: 2026-08-10T03:07:53.613784+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,13 +35,13 @@ To complete the rollout, you'll need:
 Whichever product provides the gateway, it must:
 
 * **Accept a supported API format**: one of the formats in the [API formats table](/docs/en/llm-gateway-protocol#api-formats). The rollout steps below assume the Anthropic Messages API at `POST /v1/messages`, which most gateways serve
-* **Stream responses**: pass server-sent events through as they arrive instead of buffering the whole response
+* **Stream responses**: pass server-sent events through as they arrive, including keep-alive pings, instead of buffering the whole response; [streaming](/docs/en/llm-gateway-protocol#streaming) covers what buffering or stripped pings break
 * **Route Claude model names**: map each name developers use to an upstream model. Claude Code sends a model name such as `claude-sonnet-4-6` in each request; in most gateway products the mapping is a model list or routing table in the gateway's own configuration
 * **Forward headers and body unchanged**: pass `anthropic-beta`, `anthropic-version`, and the request body through in both directions; the [feature pass-through table](/docs/en/llm-gateway-protocol#feature-pass-through) maps each to the feature that breaks without it
 * **Return upstream errors unmodified**: Claude Code's automatic recovery matches on error wording, so wrapping errors in the gateway's own envelope breaks it
 * **Exempt the path from request-body WAF inspection**: Claude Code prompts carry source code and XML-style tags that match cross-site-scripting body rules; a WAF in front of the gateway returns `403` on real sessions while short test requests pass
 
-Optionally, serve `GET /v1/models` so Claude Code can populate the model picker from your gateway with [model discovery](/docs/en/llm-gateway-protocol#model-discovery). {/* min-version: 2.1.129 */}
+Optionally, serve `GET /v1/models` so Claude Code can populate the model picker from your gateway with [model discovery](/docs/en/llm-gateway-protocol#model-discovery).
 
 ## Rollout steps
 
@@ -195,7 +195,7 @@ Deliver the variables through the `env` block of a [managed settings file](/docs
 
 Add the conditional variables from the table to the same `env` block. A managed `ANTHROPIC_BASE_URL` is enforced and cannot be overridden by a developer's shell export, since Claude Code applies it over the process environment and lower-precedence settings.
 
-Do not include `forceLoginMethod` or `forceLoginOrgUUID` in managed settings alongside a gateway credential. On Claude Code v2.1.146 and later, either key, with any value, blocks `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, and `apiKeyHelper` at startup, so developers see `This machine's managed settings require a first-party login` and cannot proceed. {/* min-version: 2.1.146 */}
+Do not include `forceLoginMethod` or `forceLoginOrgUUID` in managed settings alongside a gateway credential. On Claude Code v2.1.146 and later, either key, with any value, blocks `ANTHROPIC_API_KEY`, `ANTHROPIC_AUTH_TOKEN`, and `apiKeyHelper` at startup, so developers see `This machine's managed settings require a first-party login` and cannot proceed.&#x20;
 
 [Server-managed settings](/docs/en/server-managed-settings#platform-availability) delivery requires a direct connection to `api.anthropic.com`, so it does not reach gateway-routed sessions. Gateway deployments use this file-based managed settings path, which enforces the same keys.
 

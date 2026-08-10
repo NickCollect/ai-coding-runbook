@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/slash-commands
-fetched_at: 2026-08-03T04:24:59.033650+00:00
+fetched_at: 2026-08-10T03:07:46.520080+00:00
 fetch_method: mintlify_md
 ---
 
@@ -218,10 +218,6 @@ The `/compact` command reduces the size of your conversation history by summariz
 The `/clear` command resets the conversation to an empty context, so subsequent prompts start with no prior conversation history. The previous conversation remains on disk and can be returned to by passing its session ID to the [`resume` option](/docs/en/agent-sdk/sessions#resume-by-id).
 
 This is useful in [streaming input mode](/docs/en/agent-sdk/streaming-vs-single-mode), where you send multiple prompts over a single connection. For one-shot `query()` calls, each call already starts with empty context, so sending `/clear` has no practical effect; start a new `query()` instead.
-
-<Note>
-  `/clear` in the SDK requires Claude Code v2.1.117 or later. In earlier versions it is omitted from `slash_commands`.
-</Note>
 
 ## Creating Custom Slash Commands
 

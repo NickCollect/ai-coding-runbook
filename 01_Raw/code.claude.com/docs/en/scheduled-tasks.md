@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/scheduled-tasks
-fetched_at: 2026-07-27T04:31:49.867659+00:00
+fetched_at: 2026-08-10T03:07:56.738330+00:00
 fetch_method: mintlify_md
 ---
 
@@ -14,23 +14,23 @@ fetch_method: mintlify_md
 
 Scheduled tasks let Claude re-run a prompt automatically on an interval. Use them to poll a deployment, babysit a PR, check back on a long-running build, or remind yourself to do something later in the session. To react to events as they happen instead of polling, see [Channels](/docs/en/channels): your CI can push the failure into the session directly. To keep the session working turn after turn until a condition is met rather than on an interval, see [`/goal`](/docs/en/goal).
 
-Tasks are session-scoped: they live in the current conversation and stop when you start a new one. Resuming with `--resume` or `--continue` brings back any task that hasn't [expired](#seven-day-expiry): a recurring task created within the last 7 days, or a one-shot whose scheduled time hasn't passed yet. For scheduling that survives independently of any session, use [Routines](/docs/en/routines) to create a routine on Anthropic-managed infrastructure, set up a [Desktop scheduled task](/docs/en/desktop-scheduled-tasks), or use [GitHub Actions](/docs/en/github-actions).
+Tasks are session-scoped: they live in the current conversation and stop when you start a new one. Resuming with `--resume` or `--continue` brings back any task that hasn't [expired](#seven-day-expiry): a recurring task created within the last 7 days, or a one-shot whose scheduled time hasn't passed yet. For scheduling that survives independently of any session, use [Routines](/docs/en/routines) to create a routine on the cloud, set up a [Desktop scheduled task](/docs/en/desktop-scheduled-tasks), or use [GitHub Actions](/docs/en/github-actions).
 
 ## Compare scheduling options
 
 Claude Code offers three ways to schedule recurring or one-off work:
 
-|                            | [Cloud](/docs/en/routines)          | [Desktop](/docs/en/desktop-scheduled-tasks) | [`/loop`](/docs/en/scheduled-tasks)      |
-| :------------------------- | :----------------------------- | :------------------------------------- | :---------------------------------- |
-| Runs on                    | Anthropic cloud                | Your machine                           | Your machine                        |
-| Requires machine on        | No                             | Yes                                    | Yes                                 |
-| Requires open session      | No                             | No                                     | Yes                                 |
-| Persistent across restarts | Yes                            | Yes                                    | Restored on `--resume` if unexpired |
-| Access to local files      | No (fresh clone)               | Yes                                    | Yes                                 |
-| MCP servers                | Connectors configured per task | [Config files](/docs/en/mcp) and connectors | Inherits from session               |
-| Permission prompts         | No (runs autonomously)         | Configurable per task                  | Inherits from session               |
-| Customizable schedule      | Via `/schedule` in the CLI     | Yes                                    | Yes                                 |
-| Minimum interval           | 1 hour                         | 1 minute                               | 1 minute                            |
+|                            | [Cloud](/docs/en/routines)               | [Desktop](/docs/en/desktop-scheduled-tasks) | [`/loop`](/docs/en/scheduled-tasks)      |
+| :------------------------- | :---------------------------------- | :------------------------------------- | :---------------------------------- |
+| Runs on                    | Cloud, Anthropic-managed by default | Your machine                           | Your machine                        |
+| Requires machine on        | No                                  | Yes                                    | Yes                                 |
+| Requires open session      | No                                  | No                                     | Yes                                 |
+| Persistent across restarts | Yes                                 | Yes                                    | Restored on `--resume` if unexpired |
+| Access to local files      | No (fresh clone)                    | Yes                                    | Yes                                 |
+| MCP servers                | Connectors configured per task      | [Config files](/docs/en/mcp) and connectors | Inherits from session               |
+| Permission prompts         | No (runs autonomously)              | Configurable per task                  | Inherits from session               |
+| Customizable schedule      | Via `/schedule` in the CLI          | Yes                                    | Yes                                 |
+| Minimum interval           | 1 hour                              | 1 minute                               | 1 minute                            |
 
 <Tip>
   Use **cloud tasks** for work that should run reliably without your machine. Use **Desktop tasks** when you need access to local files and tools. Use **`/loop`** for quick polling during a session.
@@ -46,7 +46,7 @@ The `/loop` [bundled skill](/docs/en/commands) is the quickest way to run a prom
 | Prompt only               | `/loop check the deploy`    | Your prompt runs at an [interval Claude chooses](#let-claude-choose-the-interval) each iteration              |
 | Interval only, or nothing | `/loop`                     | The [built-in maintenance prompt](#run-the-built-in-maintenance-prompt) runs, or your `loop.md` if one exists |
 
-You can also pass a skill as the prompt, for example `/loop 20m /review-pr 1234`, to re-run that skill each iteration. {/* min-version: 2.1.196 */}As of v2.1.196, a scheduled fire only runs skills that Claude is [allowed to invoke on its own](/docs/en/skills#control-who-invokes-a-skill). The following reach Claude as plain text instead of executing:
+You can also pass a skill as the prompt, for example `/loop 20m /review-pr 1234`, to re-run that skill each iteration. As of v2.1.196, a scheduled fire only runs skills that Claude is [allowed to invoke on its own](/docs/en/skills#control-who-invokes-a-skill). The following reach Claude as plain text instead of executing:
 
 * Built-in commands such as `/permissions`, `/model`, or `/clear`
 * Skills marked [`disable-model-invocation: true`](/docs/en/skills#frontmatter-reference), including the bundled `/verify` and `/code-review` skills.
@@ -219,11 +219,11 @@ Session-scoped scheduling has inherent constraints:
 
 * Tasks only fire while Claude Code is running and idle. Closing the terminal or letting the session exit stops them firing. [Backgrounding the session](/docs/en/agent-view#from-inside-a-session) carries `/loop` tasks over to a background session, which keeps running without a terminal.
 * No catch-up for missed fires. If a task's scheduled time passes while Claude is busy on a long-running request, it fires once when Claude becomes idle, not once per missed interval.
-* Starting a fresh conversation clears all session-scoped tasks. Resuming with `claude --resume` or `claude --continue` restores tasks that have not expired: recurring tasks within seven days of creation, and one-shot tasks whose scheduled time has not yet passed. Background Bash and monitor tasks are never restored on resume.
-* {/* min-version: 2.1.216 */}Claude Code stores the scheduled task list in the project's `.claude` directory, and scheduling a task fails with an error when that directory, or the task file inside it, is a symlink. Before v2.1.216, Claude Code wrote the file through the link.
+* Starting a fresh conversation clears all session-scoped tasks. Resuming with `claude --resume` or `claude --continue` restores recurring tasks that have not [expired](#seven-day-expiry) and one-shot tasks whose scheduled time has not yet passed. Background Bash and monitor tasks are never restored on resume.
+* Claude Code stores the scheduled task list in the project's `.claude` directory, and scheduling a task fails with an error when that directory, or the task file inside it, is a symlink. Before v2.1.216, Claude Code wrote the file through the link.
 
 For cron-driven automation that needs to run unattended:
 
-* [Routines](/docs/en/routines): run on Anthropic-managed infrastructure on a schedule, via API call, or on GitHub events
+* [Routines](/docs/en/routines): run in the cloud on a schedule, via API call, or on GitHub events
 * [GitHub Actions](/docs/en/github-actions): use a `schedule` trigger in CI
 * [Desktop scheduled tasks](/docs/en/desktop-scheduled-tasks): run locally on your machine

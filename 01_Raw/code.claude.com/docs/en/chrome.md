@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/chrome
-fetched_at: 2026-08-03T04:25:00.609825+00:00
+fetched_at: 2026-08-10T03:07:48.123331+00:00
 fetch_method: mintlify_md
 ---
 
@@ -277,7 +277,7 @@ On Windows, you may encounter:
 
 * **Named pipe conflicts (EADDRINUSE)**: if another process is using the same named pipe, restart Claude Code. Close any other Claude Code sessions that might be using Chrome.
 * **Native messaging host errors**: if the native messaging host crashes on startup, try reinstalling Claude Code to regenerate the host configuration.
-* **Setup pages fail to open**: {/* min-version: 2.1.211 */}update Claude Code. Before v2.1.211, the browser tab prompting you to connect the extension could fail to open on Windows.
+* **Setup pages fail to open**: update Claude Code. Before v2.1.211, the browser tab prompting you to connect the extension could fail to open on Windows.
 
 ### Common error messages
 

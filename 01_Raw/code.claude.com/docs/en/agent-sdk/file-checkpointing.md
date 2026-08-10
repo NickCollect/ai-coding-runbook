@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/agent-sdk/file-checkpointing
-fetched_at: 2026-08-03T04:24:58.124408+00:00
+fetched_at: 2026-08-10T03:07:45.265256+00:00
 fetch_method: mintlify_md
 ---
 
@@ -46,7 +46,7 @@ The checkpoint system tracks:
 * Files modified during the session
 * The original content of modified files
 
-When you rewind to a checkpoint, Claude Code deletes the files it created and restores the files it modified to their content at that point. {/* min-version: 2.1.216 */}Claude Code skips a tracked path that is a symlink, hard link, or other non-regular file. It also skips a tracked file whose parent directory no longer resolves to its checkpoint-time location, or whose backup it can't read safely. [`RewindFilesResult`](/docs/en/agent-sdk/typescript#rewindfilesresult) counts every skipped path in its `skippedLinks` field. Skipping requires Claude Code v2.1.216 or later; before v2.1.216, a rewind wrote and deleted through links at tracked paths.
+When you rewind to a checkpoint, Claude Code deletes the files it created and restores the files it modified to their content at that point. Claude Code skips a tracked path that is a symlink, hard link, or other non-regular file. It also skips a tracked file whose parent directory no longer resolves to its checkpoint-time location, or whose backup it can't read safely. [`RewindFilesResult`](/docs/en/agent-sdk/typescript#rewindfilesresult) counts every skipped path in its `skippedLinks` field. Skipping requires Claude Code v2.1.216 or later; before v2.1.216, a rewind wrote and deleted through links at tracked paths.
 
 ## Implement checkpointing
 
@@ -757,7 +757,7 @@ If `message.uuid` is `undefined` or missing, you're not receiving checkpoint UUI
 
 **Solution**: Add `extra_args={"replay-user-messages": None}` (Python) or `extraArgs: { 'replay-user-messages': null }` (TypeScript) to your options.
 
-### "No file checkpoint found for message" error
+### "No file checkpoint found for this message" error
 
 This error occurs when the checkpoint data doesn't exist for the specified user message UUID.
 

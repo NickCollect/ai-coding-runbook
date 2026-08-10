@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/terminal-config
-fetched_at: 2026-07-27T04:31:49.941611+00:00
+fetched_at: 2026-08-10T03:07:57.939036+00:00
 fetch_method: mintlify_md
 ---
 
@@ -53,7 +53,7 @@ Some Claude Code shortcuts use the Option key, such as Option+Enter for a newlin
 
     If you accepted Claude Code's first-run terminal setup prompt, this is already done. That prompt runs `/terminal-setup` for you, which enables Option as Meta and turns off the audible bell in your Apple Terminal profile.
 
-    {/* min-version: 2.1.211 */}In [screen reader mode](/docs/en/accessibility), `/terminal-setup` leaves the bell setting unchanged so the terminal bell stays audible. Before v2.1.211, `/terminal-setup` turned the bell off even in screen reader mode. If an earlier run turned the bell off, turn it back on under Settings → Profiles → Advanced → "Audible bell".
+    In [screen reader mode](/docs/en/accessibility), `/terminal-setup` leaves the bell setting unchanged so the terminal bell stays audible. Before v2.1.211, `/terminal-setup` turned the bell off even in screen reader mode. If an earlier run turned the bell off, turn it back on under Settings → Profiles → Advanced → "Audible bell".
   </Tab>
 
   <Tab title="iTerm2">
@@ -132,10 +132,6 @@ Use the `/theme` command, or the theme picker in `/config`, to choose a Claude C
 To customize what appears at the bottom of the interface, configure a [custom status line](/docs/en/statusline) that shows the current model, working directory, git branch, or other context.
 
 ### Create a custom theme
-
-<Note>
-  Custom themes require Claude Code v2.1.118 or later.
-</Note>
 
 In addition to the built-in presets, `/theme` lists any custom themes you have defined and any themes contributed by installed [plugins](/docs/en/plugins-reference#themes). Select **New custom theme…** at the end of the list to create one interactively: you name the theme, then pick individual color tokens to override. Press `Ctrl+E` while a custom theme is highlighted to edit it.
 
@@ -272,7 +268,7 @@ The reference below covers the tokens you can set in `overrides`. The interactiv
 
   Each [subagent](/docs/en/sub-agents) and parallel task is shown in one of eight named colors so you can tell them apart in the transcript. The token names follow the pattern `<color>_FOR_SUBAGENTS_ONLY`, where `<color>` is `red`, `blue`, `green`, `yellow`, `purple`, `orange`, `pink`, or `cyan`. Override these to change what each named color looks like. For example, a subagent with `color: blue` in its definition is drawn using the `blue_FOR_SUBAGENTS_ONLY` value.
 
-  The [`ultrathink`](/docs/en/model-config#use-ultrathink-for-one-off-deep-reasoning) and [`ultraplan`](/docs/en/ultraplan) keywords in the prompt input are rendered with a seven-color rainbow gradient. The token names follow the pattern `rainbow_<color>` and `rainbow_<color>_shimmer`, where `<color>` is `red`, `orange`, `yellow`, `green`, `blue`, `indigo`, or `violet`.
+  Claude Code renders the [`ultrathink`](/docs/en/model-config#use-ultrathink-for-one-off-deep-reasoning) keyword in the prompt input with a seven-color rainbow gradient. The token names follow the pattern `rainbow_<color>` and `rainbow_<color>_shimmer`, where `<color>` is `red`, `orange`, `yellow`, `green`, `blue`, `indigo`, or `violet`.
 </Accordion>
 
 ## Switch to fullscreen rendering
@@ -306,6 +302,13 @@ Run `/tui fullscreen` to switch and save the preference. Your conversation relau
 ## Paste large content
 
 When you paste more than 800 characters or more than two lines into the prompt, Claude Code collapses the input to a placeholder such as `[Pasted text #1 +120 lines]` so the input box stays usable. The full content is still sent to Claude when you submit.
+
+Claude Code keeps the collapsed content under `~/.claude/paste-cache/`, so when you recall a prompt from [command history](/docs/en/interactive-mode#command-history) and resubmit it, Claude Code sends the full pasted content again, including in a later session, until the cache file ages past `cleanupPeriodDays`.
+
+Claude Code deletes cache files older than [`cleanupPeriodDays`](/docs/en/settings#available-settings) at startup, so a recalled prompt can reference pasted text that no longer exists. When you submit such a prompt, Claude Code never sends the literal `[Pasted text #N]` string, and shows a notification naming the missing paste:
+
+* In a plain prompt with text remaining, Claude Code removes the placeholder and sends the remaining text.
+* In a [shell mode](/docs/en/interactive-mode#shell-mode-with-prefix) command or a `/` command, where the removal would change what runs, and in any prompt the removal leaves empty, Claude Code cancels the submission and keeps the original text in the input, with the placeholder still in it. Delete the placeholder or edit the command, then resubmit.
 
 The VS Code integrated terminal can drop characters from very large pastes before they reach Claude Code, so prefer file-based workflows there. For very large inputs such as entire files or long logs, write the content to a file and ask Claude to read it instead of pasting. This keeps the conversation transcript readable and lets Claude reference the file by path in later turns.
 

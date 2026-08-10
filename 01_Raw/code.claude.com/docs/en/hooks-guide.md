@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/hooks-guide
-fetched_at: 2026-08-03T04:25:05.727227+00:00
+fetched_at: 2026-08-10T03:07:52.305184+00:00
 fetch_method: mintlify_md
 ---
 
@@ -148,6 +148,16 @@ This hook uses the `Notification` event, which Claude Code fires when Claude is 
       }
     }
     ```
+
+    <Accordion title="If no notification appears">
+      `notify-send` needs a desktop notification daemon, which headless servers, SSH sessions, and most containers don't have. Test the command directly first:
+
+      ```bash theme={null}
+      notify-send 'Claude Code' 'test'
+      ```
+
+      If the command isn't found, install the `libnotify-bin` package on Debian and Ubuntu, or your distribution's equivalent.
+    </Accordion>
   </Tab>
 
   <Tab title="Windows (PowerShell)">
@@ -168,6 +178,10 @@ This hook uses the `Notification` event, which Claude Code fires when Claude is 
       }
     }
     ```
+
+    <Accordion title="If no dialog appears">
+      This command opens a dialog box rather than a notification in the corner of your screen, so the dialog can open behind your terminal window. Test the command directly in PowerShell first. If you run Claude Code inside WSL, `powershell.exe` must be available on your `PATH` through Windows interop.
+    </Accordion>
   </Tab>
 </Tabs>
 
@@ -214,7 +228,7 @@ This hook uses the `PostToolUse` event with an `Edit|Write` matcher, so it runs 
 
 To test the hook, ask Claude to add a line with single-quoted strings to a JavaScript file, then open the file: with Prettier's default settings, the hook rewrites them to double quotes.
 
-On Claude Code v2.1.191 or later you can also write the matcher as `Edit,Write`, since `|` and `,` are interchangeable list separators for tool-name matchers on those versions.
+When the hook succeeds, Claude Code shows nothing in the conversation. To confirm the hook ran, check that the edited file is reformatted, or see [Debug techniques](#debug-techniques).
 
 <Note>
   The Bash examples on this page use `jq` for JSON parsing. Install it with `brew install jq` on macOS, `apt-get install jq` on Debian and Ubuntu, or see [`jq` downloads](https://jqlang.org/download/).
@@ -236,6 +250,9 @@ This example uses a separate script file that the hook calls. The script checks 
 
     INPUT=$(cat)
     FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
+
+    # Normalize Windows backslash separators so the patterns below match
+    FILE_PATH="${FILE_PATH//\\//}"
 
     PROTECTED_PATTERNS=(".env" "package-lock.json" ".git/")
 
@@ -450,7 +467,7 @@ Keep the matcher as narrow as possible. Matching on `.*` or leaving the matcher 
 
 ## How hooks work
 
-Claude Code fires hook events at specific points in its lifecycle. When an event fires, Claude Code runs all matching hooks in parallel and deduplicates identical hook commands automatically. The table below shows each event and when it triggers:
+Claude Code fires hook events at specific points in its lifecycle. When an event fires, Claude Code runs all matching hooks in parallel; see [Hook handler fields](/docs/en/hooks#hook-handler-fields) for how duplicate handlers are treated. The table below shows each event and when it triggers:
 
 | Event                 | When it fires                                                                                                                                          |
 | :-------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -574,7 +591,9 @@ The exit code determines what happens next:
 
 * **Exit 0**: the hook reports no objection and the action proceeds normally. For a `PreToolUse` hook this doesn't approve the tool call: the normal [permission flow](/docs/en/permissions) still applies. For `UserPromptSubmit`, `UserPromptExpansion`, and `SessionStart` hooks, anything you write to stdout is added to Claude's context.
 * **Exit 2**: Claude Code blocks the action. Write a reason to stderr, and Claude receives it as feedback so it can adjust. Some events can't be blocked: for `SessionStart`, `Setup`, `Notification`, and others, exit 2 shows stderr to the user and execution continues. See [exit code 2 behavior per event](/docs/en/hooks#exit-code-2-behavior-per-event) for the full list.
-* **Any other exit code**: the action proceeds. The transcript shows a `<hook name> hook error` notice followed by the first line of stderr; the full stderr goes to the [debug log](/docs/en/hooks#debug-hooks).
+* **Any other exit code**: the action proceeds
+  * The transcript shows a `<hook name> hook error` notice, then the first line of stderr prefixed with `Failed with non-blocking status code:`
+  * To capture the full stderr, enable [debug logging](/docs/en/hooks#debug-hooks) with `claude --debug` or by running `/debug` mid-session
 
 #### Structured JSON output
 
@@ -603,8 +622,6 @@ With `"deny"`, Claude Code cancels the tool call and feeds `permissionDecisionRe
 * `"ask"`: show the permission prompt to the user as normal
 
 A fourth value, `"defer"`, is available in [non-interactive mode](/docs/en/headless) with the `-p` flag. It exits the process with the tool call preserved so an Agent SDK wrapper can collect input and resume. See [Defer a tool call for later](/docs/en/hooks#defer-a-tool-call-for-later) in the reference.
-
-Returning `"allow"` skips the interactive prompt but doesn't override [permission rules](/docs/en/permissions#manage-permissions). If a deny rule matches the tool call, the call is blocked even when your hook returns `"allow"`. If an ask rule matches, the user is still prompted, and so are connector tools [your organization set to `ask`](/docs/en/mcp#organization-controls-on-connector-tools) and MCP tools marked [`requiresUserInteraction`](/docs/en/mcp#require-approval-for-a-specific-tool). This means deny rules from any settings scope, including [managed settings](/docs/en/settings#settings-files), always take precedence over hook approvals.
 
 Other events use different decision patterns. For example, `PostToolUse` and `Stop` hooks use a top-level `decision: "block"` field, while `PermissionRequest` uses `hookSpecificOutput.decision.behavior`. See the [summary table](/docs/en/hooks#decision-control) in the reference for a full breakdown by event.
 
@@ -642,10 +659,10 @@ Without a matcher, a hook fires on every occurrence of its event. Matchers let y
 }
 ```
 
-The `"Edit|Write"` matcher fires only when Claude uses the `Edit` or `Write` tool, not when it uses `Bash`, `Read`, or any other tool. {/* min-version: 2.1.191 */}On Claude Code v2.1.191 or later, a comma separates alternatives the same way, so `"Edit, Write"` is equivalent. See [Matcher patterns](/docs/en/hooks#matcher-patterns) for how plain names and regular expressions are evaluated.
+The `"Edit|Write"` matcher fires only when Claude uses the `Edit` or `Write` tool, not when it uses `Bash`, `Read`, or any other tool. On Claude Code v2.1.191 or later, a comma separates alternatives the same way, so `"Edit, Write"` is equivalent. See [Matcher patterns](/docs/en/hooks#matcher-patterns) for how plain names and regular expressions are evaluated.
 
 <Note>
-  Claude can also create or modify files by running shell commands through the `Bash` tool. If your hook must see every file change, such as for compliance scanning or audit logging, add a [`Stop`](/docs/en/hooks#stop) hook that scans the working tree once per turn. For per-call coverage instead, also match `Bash` and have your script list modified and untracked files with `git status --porcelain`.
+  Claude can also create or modify files by running shell commands. If your hook must see every file change, such as for compliance scanning or audit logging, add a [`Stop`](/docs/en/hooks#stop) hook that scans the working tree once per turn. For per-call coverage instead, also match `Bash|PowerShell` and have your script list modified and untracked files with `git status --porcelain`. The [PowerShell hook input section](/docs/en/hooks#powershell) explains why matching `Bash` alone is not enough.
 </Note>
 
 Each event type matches on a specific field:
@@ -661,6 +678,7 @@ Each event type matches on a specific field:
 | `PreCompact`, `PostCompact`                                                                                                                                     | what triggered compaction                                             | `manual`, `auto`                                                                                                                                                                    |
 | `SubagentStop`                                                                                                                                                  | agent type                                                            | same values as `SubagentStart`                                                                                                                                                      |
 | `ConfigChange`                                                                                                                                                  | configuration source                                                  | `user_settings`, `project_settings`, `local_settings`, `policy_settings`, `skills`                                                                                                  |
+| `DirectoryAdded`                                                                                                                                                | how the directory was added                                           | `slash_command`, `register_repo_root`                                                                                                                                               |
 | `StopFailure`                                                                                                                                                   | error type                                                            | `rate_limit`, `overloaded`, `authentication_failed`, `oauth_org_not_allowed`, `billing_error`, `invalid_request`, `model_not_found`, `server_error`, `max_output_tokens`, `unknown` |
 | `InstructionsLoaded`                                                                                                                                            | load reason                                                           | `session_start`, `nested_traversal`, `path_glob_match`, `include`, `compact`                                                                                                        |
 | `Elicitation`                                                                                                                                                   | MCP server name                                                       | your configured MCP server names                                                                                                                                                    |
@@ -812,7 +830,7 @@ The model's only job is to return a yes/no decision as JSON:
 * `"ok": true`: the action proceeds
 * `"ok": false`: what happens depends on the event:
   * `Stop` and `SubagentStop`: the `reason` is fed back to Claude so it keeps working
-  * `PreToolUse`: the tool call is denied; by default the turn ends and the deny `reason` appears in the chat as a warning line. Set `continueOnBlock: true` on the hook to instead return the `reason` to Claude as the tool error, so it can adjust and continue. {/* min-version: 2.1.210 */}Before v2.1.210, the deny `reason` was returned to Claude as the tool error and the turn continued
+  * `PreToolUse`: the tool call is denied; by default the turn ends and the deny `reason` appears in the chat as a warning line. Set `continueOnBlock: true` on the hook to instead return the `reason` to Claude as the tool error, so it can adjust and continue. Before v2.1.210, the deny `reason` was returned to Claude as the tool error and the turn continued
   * `PostToolUse`: by default the turn ends and the `reason` appears in the chat as a warning line. Set `continueOnBlock: true` to feed the `reason` back to Claude and continue the turn instead
   * `PostToolBatch`, `UserPromptSubmit`, and `UserPromptExpansion`: the turn ends and the `reason` appears in the chat as a warning line
 
@@ -982,7 +1000,7 @@ If your hook legitimately needs more than eight iterations to converge, raise th
 
 Claude Code shows a JSON parsing error even though your hook script outputs valid JSON.
 
-When Claude Code runs a shell-form command hook, one without `args`, it spawns `sh -c` on macOS and Linux or Git Bash on Windows by default. This shell is non-interactive, but Git Bash and some configurations, such as `BASH_ENV` pointing at `~/.bashrc`, still source your profile. If that profile contains unconditional `echo` statements, the output gets prepended to your hook's JSON:
+When Claude Code runs a shell-form command hook, one without `args`, it spawns `sh -c` on macOS and Linux, Git Bash on Windows, or PowerShell when Git Bash isn't installed by default. This shell is non-interactive, but Git Bash and some configurations, such as `BASH_ENV` pointing at `~/.bashrc`, still source your profile. If that profile contains unconditional `echo` statements, the output gets prepended to your hook's JSON:
 
 ```text theme={null}
 Shell ready on arm64
@@ -1002,7 +1020,12 @@ The `$-` variable contains shell flags, and `i` means interactive. Hooks run in 
 
 ### Debug techniques
 
-The transcript view, toggled with `Ctrl+O`, shows a one-line summary for each hook that fired: success is silent, blocking errors show stderr, and non-blocking errors show a `<hook name> hook error` notice followed by the first line of stderr.
+Press `Ctrl+O` to open the transcript view to check the outcome of a hook run:
+
+* After a successful run, where the hook exited 0, you see nothing
+  * To confirm a hook ran, check for its effect, like a reformatted file, or turn on debug logging as described below and trigger the hook again
+* After a blocking error, where the hook exited 2 and Claude Code stopped the action, you see the hook's stderr
+* After a non-blocking error, where the hook exited with any other code and the action proceeded, you see a `<hook name> hook error` notice followed by the first line of stderr, prefixed with `Failed with non-blocking status code:`
 
 For full execution details including which hooks matched, their exit codes, stdout, and stderr, read the debug log. Start Claude Code with `claude --debug-file /tmp/claude.log` to write to a known path, then `tail -f /tmp/claude.log` in another terminal. If you started without that flag, run `/debug` mid-session to enable logging and find the log path.
 
