@@ -2,10 +2,14 @@ import { RFC1738 } from './formats';
 import type { DefaultEncoder, Format } from './types';
 import { isArray } from '../utils/values';
 
-export let has = (obj: object, key: PropertyKey): boolean => (
-  (has = (Object as any).hasOwn ?? Function.prototype.call.bind(Object.prototype.hasOwnProperty)),
-  has(obj, key)
-);
+let cachedHas: ((obj: object, key: PropertyKey) => boolean) | undefined;
+
+export const has = (obj: object, key: PropertyKey): boolean => {
+  const resolvedHas: (obj: object, key: PropertyKey) => boolean =
+    cachedHas ?? (Object as any).hasOwn ?? Function.prototype.call.bind(Object.prototype.hasOwnProperty);
+  cachedHas = resolvedHas;
+  return resolvedHas(obj, key);
+};
 
 const hex_table = /* @__PURE__ */ (() => {
   const array = [];
@@ -214,7 +218,7 @@ export const encode: (
 
 export function compact(value: any) {
   const queue = [{ obj: { o: value }, prop: 'o' }];
-  const refs = [];
+  const refs: object[] = [];
 
   for (let i = 0; i < queue.length; ++i) {
     const item = queue[i];
@@ -225,7 +229,7 @@ export function compact(value: any) {
     for (let j = 0; j < keys.length; ++j) {
       const key = keys[j]!;
       const val = obj[key];
-      if (typeof val === 'object' && val !== null && refs.indexOf(val) === -1) {
+      if (typeof val === 'object' && val !== null && !refs.includes(val)) {
         queue.push({ obj: obj, prop: key });
         refs.push(val);
       }

@@ -265,7 +265,7 @@ async function main() {
       args.skip[idx] = (projectName + '').toLowerCase();
     });
 
-    projectNames = projectNames.filter((projectName) => (args.skip as string[]).indexOf(projectName) < 0);
+    projectNames = projectNames.filter((projectName) => !(args.skip as string[]).includes(projectName));
 
     args.skip.forEach((projectName) => {
       projectNamesSet.delete(projectName as any);
@@ -289,10 +289,12 @@ async function main() {
 
   // For some reason `yargs` doesn't pick up the positional args correctly
   const projectsToRun = (
-    args.projects?.length ? args.projects
-    : positionalArgs.length ?
-      positionalArgs.filter((n) => typeof n === 'string' && (projectNamesSet as Set<string>).has(n))
-    : projectNames) as typeof projectNames;
+    args.projects?.length
+      ? args.projects
+      : positionalArgs.length
+        ? positionalArgs.filter((n) => typeof n === 'string' && (projectNamesSet as Set<string>).has(n))
+        : projectNames
+  ) as typeof projectNames;
   console.error(`running projects: ${projectsToRun}`);
 
   const failed: typeof projectNames = [];
@@ -362,8 +364,8 @@ async function main() {
       const queue = [...projectsToRun];
       const runningProjects = new Set();
 
-      const cursorLeft = '\x1B[G';
-      const eraseLine = '\x1B[2K';
+      const cursorLeft = '\u001B[G';
+      const eraseLine = '\u001B[2K';
 
       let progressDisplayed = false;
       function clearProgress() {
@@ -454,30 +456,31 @@ async function main() {
       clearInterval(progressInterval);
       clearProgress();
     } else {
-      for (const project of projectsToRun) {
+      const runProject = async (project: (typeof projectsToRun)[number]): Promise<void> => {
         const fn = projectRunners[project];
+        console.error('\n');
+        console.error(banner(`▶️ ${project}`));
+        console.error('\n');
 
-        await withChdir(path.join(rootDir, 'ecosystem-tests', project), async () => {
+        try {
+          await withRetry(fn, project, state.retry, state.retryDelay);
           console.error('\n');
-          console.error(banner(`▶️ ${project}`));
-          console.error('\n');
-
-          try {
-            await withRetry(fn, project, state.retry, state.retryDelay);
-            console.error('\n');
-            console.error(`✅ ${project}`);
-          } catch (err) {
-            if (err && (err as any).shortMessage) {
-              console.error((err as any).shortMessage);
-            } else {
-              console.error(err);
-            }
-            console.error('\n');
-            console.error(`❌ ${project}`);
-            failed.push(project);
+          console.error(`✅ ${project}`);
+        } catch (err) {
+          if (err && (err as any).shortMessage) {
+            console.error((err as any).shortMessage);
+          } else {
+            console.error(err);
           }
           console.error('\n');
-        });
+          console.error(`❌ ${project}`);
+          failed.push(project);
+        }
+        console.error('\n');
+      };
+
+      for (const project of projectsToRun) {
+        await withChdir(path.join(rootDir, 'ecosystem-tests', project), runProject.bind(undefined, project));
       }
     }
   } finally {
@@ -594,7 +597,9 @@ async function installPackage() {
   try {
     // Ensure that there is a clean node_modules folder.
     await run('rm', ['-rf', `./node_modules`]);
-  } catch (err) {}
+  } catch (err) {
+    // Best-effort cleanup; installation below can continue.
+  }
 
   const packFile = getPackFile();
   await fs.copyFile(packFile, `./${TAR_NAME}`);

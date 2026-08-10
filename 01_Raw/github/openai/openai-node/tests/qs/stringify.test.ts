@@ -35,7 +35,7 @@ describe('stringify()', function () {
   });
 
   test('stringifies bigints', function () {
-    var three = BigInt(3);
+    var three = 3n;
     // @ts-expect-error
     var encodeWithN = function (value, defaultEncoder, charset) {
       var result = defaultEncoder(value, defaultEncoder, charset);
@@ -1231,8 +1231,7 @@ describe('stringify()', function () {
   // TODO(rob)
   test('skips properties that are part of the object prototype', function () {
     // st.intercept(Object.prototype, 'crash', { value: 'test' });
-    // @ts-expect-error
-    Object.prototype.crash = 'test';
+    Reflect.set(Object.prototype, 'crash', 'test');
 
     // st.equal(stringify({ a: 'b' }), 'a=b');
     // st.equal(stringify({ a: { b: 'c' } }), 'a%5Bb%5D=c');
@@ -1656,7 +1655,7 @@ describe('stringify()', function () {
 
     var mutatedDate = new Date();
     mutatedDate.toISOString = function () {
-      throw new SyntaxError();
+      throw new SyntaxError('Invalid date serialization');
     };
     // st['throws'](function () {
     // 	mutatedDate.toISOString();
@@ -1959,7 +1958,7 @@ describe('stringify()', function () {
       if (type === 'value') {
         return defaultEncoder(str, defaultEncoder, charset, type).toUpperCase();
       }
-      throw 'this should never happen! type: ' + type;
+      throw new Error('this should never happen! type: ' + type);
     };
 
     // st.deepEqual(stringify({ KeY: 'vAlUe' }, { encoder: encoder }), 'key=VALUE');

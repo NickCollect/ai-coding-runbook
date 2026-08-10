@@ -1,6 +1,5 @@
 import { vi } from 'vitest';
-import { AzureOpenAI } from 'openai';
-import { APIUserAbortError } from 'openai';
+import { AzureOpenAI, APIUserAbortError } from 'openai';
 import { type Response, RequestInit, RequestInfo } from 'openai/internal/builtin-types';
 
 const defaultFetch = fetch;
@@ -649,8 +648,8 @@ describe('retries', () => {
     let count = 0;
     const testFetch = async (url: RequestInfo, { signal }: RequestInit = {}): Promise<Response> => {
       if (count++ === 0) {
-        return new Promise(
-          (resolve, reject) => signal?.addEventListener('abort', () => reject(new Error('timed out'))),
+        return new Promise((resolve, reject) =>
+          signal?.addEventListener('abort', () => reject(new Error('timed out'))),
         );
       }
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });

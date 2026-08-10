@@ -39,7 +39,7 @@ export class EventEmitter<EventTypes extends Record<string, (...args: any) => an
     const listeners = this.#listeners[event];
     if (!listeners) return this;
     const index = listeners.findIndex((l) => l.listener === listener);
-    if (index >= 0) listeners.splice(index, 1);
+    if (index !== -1) listeners.splice(index, 1);
     return this;
   }
 
@@ -69,9 +69,11 @@ export class EventEmitter<EventTypes extends Record<string, (...args: any) => an
   emitted<Event extends keyof EventTypes>(
     event: Event,
   ): Promise<
-    EventParameters<EventTypes, Event> extends [infer Param] ? Param
-    : EventParameters<EventTypes, Event> extends [] ? void
-    : EventParameters<EventTypes, Event>
+    EventParameters<EventTypes, Event> extends [infer Param]
+      ? Param
+      : EventParameters<EventTypes, Event> extends []
+        ? void
+        : EventParameters<EventTypes, Event>
   > {
     return new Promise((resolve, reject) => {
       const onError = (error: unknown) => {

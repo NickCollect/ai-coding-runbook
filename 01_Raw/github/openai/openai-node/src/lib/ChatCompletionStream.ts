@@ -381,10 +381,11 @@ export class ChatCompletionStream<ParsedT = null>
         name: toolCallSnapshot.function.name,
         index: toolCallIndex,
         arguments: toolCallSnapshot.function.arguments,
-        parsed_arguments:
-          isAutoParsableTool(inputTool) ? inputTool.$parseRaw(toolCallSnapshot.function.arguments)
-          : inputTool?.function.strict ? JSON.parse(toolCallSnapshot.function.arguments)
-          : null,
+        parsed_arguments: isAutoParsableTool(inputTool)
+          ? inputTool.$parseRaw(toolCallSnapshot.function.arguments)
+          : inputTool?.function.strict
+            ? JSON.parse(toolCallSnapshot.function.arguments)
+            : null,
       });
     } else {
       assertNever(toolCallSnapshot.type);
@@ -529,10 +530,12 @@ export class ChatCompletionStream<ParsedT = null>
     let snapshot = this.#currentChatCompletionSnapshot;
     const { choices, ...rest } = chunk;
     if (!snapshot) {
-      snapshot = this.#currentChatCompletionSnapshot = {
+      const newSnapshot: ChatCompletionSnapshot = {
         ...rest,
         choices: [],
       };
+      this.#currentChatCompletionSnapshot = newSnapshot;
+      snapshot = newSnapshot;
     } else if (chunk.id) {
       Object.assign(snapshot, rest);
     }
@@ -540,12 +543,14 @@ export class ChatCompletionStream<ParsedT = null>
     for (const { delta, finish_reason, index, logprobs = null, ...other } of chunk.choices) {
       let choice = snapshot.choices[index];
       if (!choice) {
-        choice = snapshot.choices[index] = { finish_reason, index, message: {}, logprobs, ...other };
+        const newChoice = { finish_reason, index, message: {}, logprobs, ...other };
+        snapshot.choices[index] = newChoice;
+        choice = newChoice;
       }
 
       if (logprobs) {
         if (!choice.logprobs) {
-          choice.logprobs = Object.assign({}, logprobs);
+          choice.logprobs = { ...logprobs };
         } else {
           const { content, refusal, ...rest } = logprobs;
           assertIsEmpty(rest);

@@ -33,10 +33,11 @@ type ZodTypeLike = (
   parse?: (data: unknown) => unknown;
 };
 
-type InferZodType<T extends ZodTypeLike> =
-  T extends { _output: infer Output } ? Output
-  : T extends { _zod: { output: infer Output } } ? Output
-  : never;
+type InferZodType<T extends ZodTypeLike> = T extends { _output: infer Output }
+  ? Output
+  : T extends { _zod: { output: infer Output } }
+    ? Output
+    : never;
 
 type ZodSchemaDefinitions = Record<string, ZodTypeLike>;
 
@@ -91,8 +92,10 @@ function escapeSchemaDefinitionRefs<T extends object>(
 }
 
 function getZodV3RootName(name: string, schemaDefinitions: ZodSchemaDefinitions | undefined): string {
+  if (!schemaDefinitions) return name;
+
   let rootName = name;
-  while (schemaDefinitions && Object.prototype.hasOwnProperty.call(schemaDefinitions, rootName)) {
+  while (Object.prototype.hasOwnProperty.call(schemaDefinitions, rootName)) {
     rootName = `${rootName}_root`;
   }
   return rootName;
@@ -109,9 +112,9 @@ function zodV3ToJsonSchema(
     nameStrategy: 'duplicate-ref',
     $refStrategy: 'extract-to-root',
     nullableStrategy: 'property',
-    ...(options.schemaDefinitions ?
-      { definitions: options.schemaDefinitions as unknown as Record<string, z3.ZodType> }
-    : undefined),
+    ...(options.schemaDefinitions
+      ? { definitions: options.schemaDefinitions as unknown as Record<string, z3.ZodType> }
+      : undefined),
   });
 
   return escapeSchemaDefinitionRefs(jsonSchema, options.schemaDefinitions);
@@ -239,9 +242,8 @@ export function zodResponseFormat<ZodInput extends ZodTypeLike>(
         ...responseFormatProps,
         name,
         strict: true,
-        schema:
-          isZodV4(zodSchema) ?
-            zodV4ToJsonSchema(zodSchema, { schemaDefinitions })
+        schema: isZodV4(zodSchema)
+          ? zodV4ToJsonSchema(zodSchema, { schemaDefinitions })
           : zodV3ToJsonSchema(zodSchema, { name, schemaDefinitions }),
       },
     },
@@ -291,9 +293,8 @@ export function zodFunction<Parameters extends ZodTypeLike>(options: {
       type: 'function',
       function: {
         name: options.name,
-        parameters:
-          isZodV4(zodSchema) ?
-            zodV4ToJsonSchema(zodSchema)
+        parameters: isZodV4(zodSchema)
+          ? zodV4ToJsonSchema(zodSchema)
           : zodV3ToJsonSchema(zodSchema, { name: options.name }),
         strict: true,
         ...(options.description ? { description: options.description } : undefined),
@@ -322,9 +323,8 @@ export function zodResponsesFunction<Parameters extends ZodTypeLike>(options: {
     {
       type: 'function',
       name: options.name,
-      parameters:
-        isZodV4(zodSchema) ?
-          zodV4ToJsonSchema(zodSchema)
+      parameters: isZodV4(zodSchema)
+        ? zodV4ToJsonSchema(zodSchema)
         : zodV3ToJsonSchema(zodSchema, { name: options.name }),
       strict: true,
       ...(options.description ? { description: options.description } : undefined),
@@ -355,9 +355,8 @@ export function zodRealtimeFunction<Parameters extends ZodTypeLike>(options: {
   return {
     type: 'function',
     name: options.name,
-    parameters:
-      isZodV4(zodSchema) ?
-        zodV4ToNonStrictJsonSchema(zodSchema)
+    parameters: isZodV4(zodSchema)
+      ? zodV4ToNonStrictJsonSchema(zodSchema)
       : zodV3ToNonStrictJsonSchema(zodSchema, { name: options.name }),
     ...(options.description ? { description: options.description } : undefined),
   };

@@ -47,6 +47,8 @@ use crate::facts::AnalyticsJsonRpcError;
 use crate::facts::AppInvocation;
 use crate::facts::AppMentionedInput;
 use crate::facts::AppUsedInput;
+use crate::facts::CodeModeToolCallFact;
+use crate::facts::CodeModeToolCallStatus;
 use crate::facts::CodexCompactionEvent;
 use crate::facts::CodexErrKind;
 use crate::facts::CompactionImplementation;
@@ -820,6 +822,7 @@ fn sample_initialize_fact(connection_id: u64) -> AnalyticsFact {
                 request_attestation: false,
                 opt_out_notification_methods: None,
                 mcp_server_openai_form_elicitation: false,
+                extensions: None,
             }),
         },
         product_client_id: DEFAULT_ORIGINATOR.to_string(),
@@ -1665,6 +1668,10 @@ fn command_execution_event_serializes_expected_shape() {
                 session_id: "session-thread-1".to_string(),
                 turn_id: "turn-1".to_string(),
                 item_id: "item-1".to_string(),
+                cell_id: None,
+                parent_call_id: None,
+                originating_response_id: None,
+                subsequent_response_id: None,
                 app_server_client: CodexAppServerClientMetadata {
                     product_client_id: "codex_tui".to_string(),
                     client_name: Some("codex-tui".to_string()),
@@ -1717,6 +1724,10 @@ fn command_execution_event_serializes_expected_shape() {
                 "session_id": "session-thread-1",
                 "turn_id": "turn-1",
                 "item_id": "item-1",
+                "cell_id": null,
+                "parent_call_id": null,
+                "originating_response_id": null,
+                "subsequent_response_id": null,
                 "app_server_client": {
                     "product_client_id": "codex_tui",
                     "client_name": "codex-tui",
@@ -1873,6 +1884,7 @@ async fn initialize_caches_client_and_thread_lifecycle_publishes_once_initialize
                         request_attestation: false,
                         opt_out_notification_methods: None,
                         mcp_server_openai_form_elicitation: false,
+                        extensions: None,
                     }),
                 },
                 product_client_id: DEFAULT_ORIGINATOR.to_string(),
@@ -2178,6 +2190,7 @@ async fn compaction_event_ingests_custom_fact() {
                         request_attestation: false,
                         opt_out_notification_methods: None,
                         mcp_server_openai_form_elicitation: false,
+                        extensions: None,
                     }),
                 },
                 product_client_id: DEFAULT_ORIGINATOR.to_string(),
@@ -2309,6 +2322,7 @@ async fn guardian_review_event_ingests_custom_fact_with_optional_target_item() {
                         request_attestation: false,
                         opt_out_notification_methods: None,
                         mcp_server_openai_form_elicitation: false,
+                        extensions: None,
                     }),
                 },
                 product_client_id: DEFAULT_ORIGINATOR.to_string(),
@@ -2632,6 +2646,110 @@ async fn command_execution_approval_response_publishes_user_review_event() {
     assert_eq!(payload[0]["event_params"]["started_at_ms"], 1_000);
     assert_eq!(payload[0]["event_params"]["completed_at_ms"], 1_042);
     assert_eq!(payload[0]["event_params"]["duration_ms"], 42);
+}
+
+async fn ingest_code_mode_facts(
+    reducer: &mut AnalyticsReducer,
+    events: &mut Vec<TrackEventRequest>,
+    facts: impl IntoIterator<Item = CodeModeToolCallFact>,
+) {
+    for fact in facts {
+        reducer
+            .ingest(
+                AnalyticsFact::Custom(CustomAnalyticsFact::CodeModeToolCall(fact)),
+                events,
+            )
+            .await;
+    }
+}
+
+fn sampling_response(
+    turn_id: &str,
+    response_id: &str,
+    tool_call_ids: &[&str],
+) -> CodeModeToolCallFact {
+    CodeModeToolCallFact::SamplingResponseCompleted {
+        thread_id: "thread-1".into(),
+        turn_id: turn_id.into(),
+        response_id: response_id.into(),
+        tool_call_ids: tool_call_ids.iter().map(|id| (*id).into()).collect(),
+    }
+}
+
+#[tokio::test]
+async fn code_mode_exec_wait_and_child_events_share_cell_and_response_ids() {
+    let mut reducer = AnalyticsReducer::default();
+    let mut events = Vec::new();
+    ingest_review_prerequisites(&mut reducer, &mut events).await;
+
+    let completed =
+        |turn_id: &str, call_id: &str, tool_name: &str| CodeModeToolCallFact::Completed {
+            thread_id: "thread-1".into(),
+            turn_id: turn_id.into(),
+            call_id: call_id.into(),
+            cell_id: Some("cell-1".into()),
+            tool_name: tool_name.into(),
+            started_at_ms: 1_000,
+            completed_at_ms: 1_010,
+            status: CodeModeToolCallStatus::Completed,
+        };
+    ingest_code_mode_facts(
+        &mut reducer,
+        &mut events,
+        [
+            sampling_response("turn-1", "resp-a", &["exec-1"]),
+            CodeModeToolCallFact::CellStarted {
+                thread_id: "thread-1".into(),
+                turn_id: "turn-1".into(),
+                call_id: "exec-1".into(),
+                cell_id: "cell-1".into(),
+            },
+            CodeModeToolCallFact::ChildStarted {
+                thread_id: "thread-1".into(),
+                turn_id: "turn-1".into(),
+                call_id: "child-1".into(),
+                cell_id: "cell-1".into(),
+            },
+            completed("turn-1", "exec-1", "exec"),
+        ],
+    )
+    .await;
+    ingest_completed_command_execution_item(&mut reducer, &mut events, "thread-1", "child-1").await;
+    assert!(events.is_empty());
+
+    ingest_code_mode_facts(
+        &mut reducer,
+        &mut events,
+        [
+            sampling_response("turn-1", "resp-b", &[]),
+            sampling_response("turn-2", "resp-c", &["wait-1"]),
+            completed("turn-2", "wait-1", "wait"),
+            sampling_response("turn-2", "resp-d", &[]),
+        ],
+    )
+    .await;
+
+    let actual = events
+        .iter()
+        .map(|event| {
+            let event = serde_json::to_value(event).expect("serialize tool event");
+            serde_json::json!({
+                "item": event["event_params"]["item_id"],
+                "cell": event["event_params"]["cell_id"],
+                "parent": event["event_params"]["parent_call_id"],
+                "origin": event["event_params"]["originating_response_id"],
+                "subsequent": event["event_params"]["subsequent_response_id"],
+            })
+        })
+        .collect::<Vec<_>>();
+    assert_eq!(
+        actual,
+        vec![
+            serde_json::json!({"item":"exec-1","cell":"cell-1","parent":null,"origin":"resp-a","subsequent":"resp-b"}),
+            serde_json::json!({"item":"child-1","cell":"cell-1","parent":"exec-1","origin":"resp-a","subsequent":"resp-b"}),
+            serde_json::json!({"item":"wait-1","cell":"cell-1","parent":"exec-1","origin":"resp-c","subsequent":"resp-d"}),
+        ]
+    );
 }
 
 #[tokio::test]
@@ -4668,6 +4786,7 @@ async fn turn_event_counts_completed_tool_items() {
             status: "completed".to_string(),
             revised_prompt: None,
             result: "ok".to_string(),
+            transparent_background: None,
             saved_path: None,
         }),
     ];
@@ -5261,6 +5380,7 @@ fn sample_plugin_metadata() -> PluginTelemetryMetadata {
         capability_summary: Some(PluginCapabilitySummary {
             config_name: "sample@test".to_string(),
             display_name: "sample".to_string(),
+            plugin_namespace: None,
             description: None,
             has_skills: true,
             mcp_server_names: vec!["mcp-1".to_string(), "mcp-2".to_string()],

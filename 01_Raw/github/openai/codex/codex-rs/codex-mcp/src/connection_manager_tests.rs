@@ -36,6 +36,7 @@ use codex_exec_server_test_support::environment_manager_without_environments;
 use codex_login::AuthHeaders;
 use codex_login::CodexAuth;
 use codex_protocol::ToolName;
+use codex_protocol::mcp::ClientMcpExtensions;
 use codex_protocol::mcp::McpServerInfo;
 use codex_protocol::models::PermissionProfile;
 use codex_protocol::protocol::GranularApprovalConfig;
@@ -114,6 +115,8 @@ impl McpConnectionSet {
                 connection: Arc::new(McpServerConnection {
                     identity: None,
                     client,
+                    startup_trigger: None,
+                    _diagnostics_guard: LIVE_CONNECTIONS.track(),
                 }),
                 metadata: McpServerMetadata {
                     environment_id: String::new(),
@@ -124,6 +127,7 @@ impl McpConnectionSet {
                     tool_approval_modes: HashMap::new(),
                 },
                 tool_timeout: None,
+                catalog_item_limit: crate::pagination::MAX_MCP_CATALOG_ITEMS,
             },
         );
     }
@@ -387,6 +391,7 @@ async fn legacy_tool_catalog_does_not_follow_pagination_cursor() -> anyhow::Resu
         "test",
         &client,
         Some(Duration::from_secs(5)),
+        crate::pagination::MAX_MCP_CATALOG_ITEMS,
         /*server_instructions*/ None,
     )
     .await?;
@@ -1288,6 +1293,82 @@ fn codex_apps_env_bearer_token_bypasses_shared_tools_cache() {
 }
 
 #[tokio::test]
+async fn codex_apps_extension_does_not_share_host_owned_tools_cache() -> anyhow::Result<()> {
+    let codex_home = tempdir()?;
+    let cache_key = ConnectorRuntimeContextKey::personal(
+        /*account_id*/ None, /*chatgpt_user_id*/ None,
+    );
+    let codex_apps_tools_cache = ConnectorRuntimeManager::<ToolInfo>::default();
+    let cache_context =
+        codex_apps_tools_cache.context(codex_home.path().to_path_buf(), cache_key.clone());
+    store_current_tools(
+        &cache_context,
+        vec![create_test_tool(
+            CODEX_APPS_MCP_SERVER_NAME,
+            "calendar_create_event",
+        )],
+    );
+
+    let server_config: McpServerConfig =
+        serde_json::from_value(serde_json::json!({ "url": "http://127.0.0.1:1" }))?;
+    let mut config = crate::mcp::tests::test_mcp_config(codex_home.path().to_path_buf());
+    let mut catalog = crate::ResolvedMcpCatalog::builder();
+    catalog.register(crate::McpServerRegistration::from_extension(
+        CODEX_APPS_MCP_SERVER_NAME.to_string(),
+        "test-extension",
+        /*contribution_order*/ 0,
+        server_config.clone(),
+    ));
+    config.mcp_server_catalog = catalog.build();
+
+    let startup_cancellation_token = CancellationToken::new();
+    startup_cancellation_token.cancel();
+    let manager = McpConnectionSet::new(
+        /*previous*/ None,
+        McpPublicationGate::already_published(),
+        McpRuntimeInput {
+            startup_policy: McpStartupPolicy::Eager,
+            config: Arc::new(config),
+            plugins_available: false,
+            ready_selected_capability_roots: Vec::new(),
+            mcp_servers: HashMap::from([(
+                CODEX_APPS_MCP_SERVER_NAME.to_string(),
+                EffectiveMcpServer::configured(server_config),
+            )]),
+            submit_id: "cache-ownership-test".to_string(),
+            tx_event: None,
+            startup_cancellation_token,
+            runtime_context: McpRuntimeContext::new(
+                Arc::new(environment_manager_without_environments()),
+                codex_home.path().to_path_buf(),
+            ),
+            codex_apps_tools_cache,
+            tool_catalog_cache: McpToolCatalogCache::default(),
+            codex_apps_tools_cache_key: cache_key,
+            client_mcp_extensions: ClientMcpExtensions::default(),
+            auth: None,
+            codex_apps_auth_manager: None,
+            elicitation_reviewer: None,
+            elicitation_lifecycle: None,
+        },
+        ElicitationRequestRouter::default(),
+    )
+    .await;
+
+    let client = manager.test_client(CODEX_APPS_MCP_SERVER_NAME);
+    assert!(
+        client.codex_apps_tools_cache_context.is_none(),
+        "an extension must not receive the host-owned Apps cache"
+    );
+    assert!(
+        !client.has_cached_tools(),
+        "an extension must not expose cached host-owned Apps tools"
+    );
+
+    Ok(())
+}
+
+#[tokio::test]
 async fn list_all_tools_uses_shared_codex_apps_cache_while_client_is_pending() {
     let codex_home = tempdir().expect("tempdir");
     let cache_context = create_codex_apps_tools_cache_context(
@@ -1550,13 +1631,16 @@ async fn tool_catalog_cache_sanitizes_tools_and_tracks_environment_generation() 
                 &runtime_context,
                 Some(environment),
                 &ElicitationCapability::default(),
-                /*supports_openai_form_elicitation*/ false,
+                &ClientMcpExtensions::default(),
             )
             .expect("cache context")
     };
     let first_environment = resolve_environment();
     let first_environment_weak = Arc::downgrade(&first_environment);
     let first_context = cache_context(&first_environment);
+    first_context.publish_if_newest(first_context.begin_fetch(), &[]);
+    assert!(!first_context.has_tools());
+
     let mut tool = create_test_tool("docs", "search");
     tool.tool.annotations = Some(rmcp::model::ToolAnnotations::new().read_only(true));
     first_context.publish_if_newest(first_context.begin_fetch(), &[tool]);
@@ -1610,7 +1694,7 @@ fn tool_catalog_cache_bypasses_remote_sourced_environment_variables() {
                 &runtime_context,
                 /*resolved_environment*/ None,
                 &ElicitationCapability::default(),
-                /*supports_openai_form_elicitation*/ false,
+                &ClientMcpExtensions::default(),
             )
             .is_none()
     );
@@ -1833,6 +1917,7 @@ async fn capture_binding_skips_pending_optional_servers_after_one_shared_startup
     }
 
     let manager = Arc::new(manager);
+    assert_eq!(manager.stable_catalog_revision().await, None);
     let binding = tokio::time::timeout(Duration::from_millis(1500), capture_binding(&manager))
         .await
         .expect("all optional servers should share a single startup grace");
@@ -1875,6 +1960,39 @@ async fn capture_binding_skips_pending_optional_servers_after_one_shared_startup
     assert!(binding.is_err(), "explicitly requested servers must wait");
 }
 
+#[tokio::test]
+async fn stable_catalog_revision_ignores_terminal_optional_server_failures() {
+    let approval_policy = Constrained::allow_any(AskForApproval::OnRequest);
+    let permission_profile = Constrained::allow_any(PermissionProfile::default());
+    let mut manager = McpConnectionSet::new_uninitialized(
+        &approval_policy,
+        &permission_profile,
+        /*prefix_mcp_tool_names*/ true,
+    );
+    let ready = create_ready_async_managed_client(vec![create_test_tool("ready", "echo")]).await;
+    assert!(ready.client().await.is_ok());
+    let mut failed = ready.clone();
+    manager.insert_test_client("ready", ready);
+    failed.client = futures::future::ready::<Result<ManagedClient, StartupOutcomeError>>(Err(
+        StartupOutcomeError::Failed {
+            error: "optional startup failed".to_string(),
+            is_authentication_required: false,
+        },
+    ))
+    .boxed()
+    .shared();
+    assert!(failed.client().await.is_err());
+    manager.insert_test_client("failed", failed);
+
+    assert_eq!(manager.stable_catalog_revision().await, Some(0));
+    manager.required_servers.push("failed".to_string());
+    assert_eq!(manager.stable_catalog_revision().await, None);
+    manager.required_servers.clear();
+
+    let binding = capture_binding(&Arc::new(manager)).await;
+    assert!(binding.prepare_call("ready", "echo").is_some());
+}
+
 #[tokio::test(start_paused = true)]
 async fn capture_binding_shares_optional_startup_grace_across_connection_sets() {
     let approval_policy = Constrained::allow_any(AskForApproval::OnRequest);
@@ -1894,7 +2012,7 @@ async fn capture_binding_shares_optional_startup_grace_across_connection_sets() 
             &runtime_context,
             /*resolved_environment*/ None,
             &ElicitationCapability::default(),
-            /*supports_openai_form_elicitation*/ false,
+            &ClientMcpExtensions::default(),
         )
         .expect("shared pending MCP catalog");
 
@@ -1950,12 +2068,10 @@ async fn capture_binding_shares_optional_startup_grace_across_connection_sets() 
         deadline_after_publication,
         "publishing a catalog must not install a stale startup deadline"
     );
-    let cached = tokio::time::timeout(
-        Duration::from_millis(1),
-        capture_binding(&create_connection_set()),
-    )
-    .await
-    .expect("cached tools should be immediately available to later threads");
+    let cached_manager = create_connection_set();
+    let cached = tokio::time::timeout(Duration::from_millis(1), capture_binding(&cached_manager))
+        .await
+        .expect("cached tools should be immediately available to later threads");
     assert_eq!(
         cached
             .tools()
@@ -1967,12 +2083,9 @@ async fn capture_binding_shares_optional_startup_grace_across_connection_sets() 
 
     tokio::time::advance(Duration::from_secs(30 * 60 + 1)).await;
     assert!(
-        tokio::time::timeout(
-            Duration::from_millis(1),
-            capture_binding(&create_connection_set()),
-        )
-        .await
-        .is_err(),
+        tokio::time::timeout(Duration::from_millis(1), capture_binding(&cached_manager))
+            .await
+            .is_err(),
         "an expired catalog should receive a fresh startup grace"
     );
 
@@ -2441,6 +2554,7 @@ async fn list_all_tools_reconnects_failed_codex_apps_startup_and_reuses_client()
     };
     let manager = Arc::new(manager);
 
+    assert_eq!(manager.stable_catalog_revision().await, None);
     let reconnect_finished_wait = reconnect_finished.notified();
     let tools = manager.list_all_tools().await;
     assert!(tools.is_empty());
@@ -2455,6 +2569,7 @@ async fn list_all_tools_reconnects_failed_codex_apps_startup_and_reuses_client()
         vec!["drive_search"]
     );
     assert_eq!(attempts.load(std::sync::atomic::Ordering::SeqCst), 1);
+    assert_eq!(manager.stable_catalog_revision().await, Some(0));
 
     let step = capture_binding(&manager).await;
     let prepared = step
@@ -2918,7 +3033,7 @@ async fn executor_owned_chatgpt_mcp_accepts_only_safe_explicit_authorization() -
                 Some(&hosted_auth),
                 /*codex_apps_cache_identity*/ None,
                 ElicitationCapability::default(),
-                /*supports_openai_form_elicitation*/ false,
+                ClientMcpExtensions::default(),
             )
         };
         let direct_keyring_identity = connection_identity(AuthKeyringBackendKind::Direct);
@@ -2956,6 +3071,7 @@ async fn executor_owned_chatgpt_mcp_accepts_only_safe_explicit_authorization() -
             /*previous*/ None,
             McpPublicationGate::already_published(),
             McpRuntimeInput {
+                startup_policy: McpStartupPolicy::Eager,
                 config: Arc::new(runtime_config.clone()),
                 plugins_available: false,
                 ready_selected_capability_roots: Vec::new(),
@@ -2969,7 +3085,7 @@ async fn executor_owned_chatgpt_mcp_accepts_only_safe_explicit_authorization() -
                 codex_apps_tools_cache_key: ConnectorRuntimeContextKey::personal(
                     /*account_id*/ None, /*chatgpt_user_id*/ None,
                 ),
-                supports_openai_form_elicitation: false,
+                client_mcp_extensions: ClientMcpExtensions::default(),
                 auth: Some(hosted_auth.clone()),
                 codex_apps_auth_manager: None,
                 elicitation_reviewer: None,
@@ -3021,6 +3137,7 @@ async fn no_local_runtime_fails_local_stdio_but_keeps_local_http_server() {
                 enabled: true,
                 required: false,
                 supports_parallel_tool_calls: false,
+                omit_tools_from: None,
                 disabled_reason: None,
                 startup_timeout_sec: None,
                 tool_timeout_sec: None,
@@ -3047,6 +3164,7 @@ async fn no_local_runtime_fails_local_stdio_but_keeps_local_http_server() {
                 enabled: true,
                 required: false,
                 supports_parallel_tool_calls: false,
+                omit_tools_from: None,
                 disabled_reason: None,
                 startup_timeout_sec: None,
                 tool_timeout_sec: None,
@@ -3066,6 +3184,7 @@ async fn no_local_runtime_fails_local_stdio_but_keeps_local_http_server() {
         /*previous*/ None,
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(crate::mcp::tests::test_mcp_config(
                 codex_home.path().to_path_buf(),
             )),
@@ -3084,7 +3203,7 @@ async fn no_local_runtime_fails_local_stdio_but_keeps_local_http_server() {
             codex_apps_tools_cache_key: ConnectorRuntimeContextKey::personal(
                 /*account_id*/ None, /*chatgpt_user_id*/ None,
             ),
-            supports_openai_form_elicitation: false,
+            client_mcp_extensions: ClientMcpExtensions::default(),
             auth: None,
             codex_apps_auth_manager: None,
             elicitation_reviewer: None,
@@ -3161,6 +3280,7 @@ fn mcp_init_error_display_prompts_for_github_pat() {
         enabled: true,
         required: false,
         supports_parallel_tool_calls: false,
+        omit_tools_from: None,
         disabled_reason: None,
         startup_timeout_sec: None,
         tool_timeout_sec: None,
@@ -3186,15 +3306,33 @@ fn mcp_init_error_display_prompts_for_github_pat() {
 #[test]
 fn mcp_init_error_display_prompts_for_login_when_auth_required() {
     let server_name = "example";
-    let err: StartupOutcomeError = anyhow::anyhow!("Auth required for server").into();
-
-    let display = mcp_init_error_display(server_name, /*config*/ None, &err);
-
     let expected = format!(
         "The {server_name} MCP server is not logged in. Run `codex mcp login {server_name}`."
     );
+    let executor_config: McpServerConfig = serde_json::from_value(serde_json::json!({
+        "url": "https://example.com/mcp",
+        "environment_id": "executor-1",
+    }))
+    .expect("executor MCP configuration should deserialize");
 
-    assert_eq!(expected, display);
+    for error in [
+        anyhow::anyhow!("Auth required for server").into(),
+        StartupOutcomeError::Failed {
+            error: "OAuth refresh token was rejected: invalid_grant".to_string(),
+            is_authentication_required: true,
+        },
+    ] {
+        let display = mcp_init_error_display(server_name, /*config*/ None, &error);
+        assert_eq!(expected, display);
+
+        let executor_display = mcp_init_error_display(server_name, Some(&executor_config), &error);
+        assert_eq!(
+            format!(
+                "The {server_name} MCP server is not logged in. Use your client's MCP OAuth sign-in flow."
+            ),
+            executor_display
+        );
+    }
 }
 
 #[test]
@@ -3221,7 +3359,12 @@ fn mcp_startup_failure_reason_requires_existing_oauth_and_auth_failure() {
         ),
         (Some(McpAuthState::Unsupported), true, None),
         (Some(McpAuthState::BearerToken), true, None),
-        (Some(McpAuthState::OAuth), true, None),
+        (
+            Some(McpAuthState::OAuth),
+            true,
+            Some(McpStartupFailureReason::ReauthenticationRequired),
+        ),
+        (Some(McpAuthState::OAuth), false, None),
         (None, true, None),
     ] {
         let error = StartupOutcomeError::Failed {
@@ -3252,6 +3395,7 @@ fn mcp_init_error_display_reports_generic_errors() {
         enabled: true,
         required: false,
         supports_parallel_tool_calls: false,
+        omit_tools_from: None,
         disabled_reason: None,
         startup_timeout_sec: None,
         tool_timeout_sec: None,
@@ -3303,6 +3447,7 @@ fn reusable_server_config(url: &str) -> McpServerConfig {
         enabled: true,
         required: false,
         supports_parallel_tool_calls: false,
+        omit_tools_from: None,
         disabled_reason: None,
         startup_timeout_sec: None,
         tool_timeout_sec: None,
@@ -3340,7 +3485,7 @@ fn reusable_server_identity(
         /*auth*/ None,
         /*codex_apps_cache_identity*/ None,
         ElicitationCapability::default(),
-        /*supports_openai_form_elicitation*/ false,
+        ClientMcpExtensions::default(),
     )
 }
 
@@ -3363,10 +3508,13 @@ async fn manager_with_reusable_ready_server(
             connection: Arc::new(McpServerConnection {
                 identity: Some(reusable_server_identity(config, runtime_context)),
                 client: create_ready_async_managed_client(tools).await,
+                startup_trigger: None,
+                _diagnostics_guard: LIVE_CONNECTIONS.track(),
             }),
             metadata: McpServerMetadata::from(&server),
             tool_filter: ToolFilter::from_config(config),
             tool_timeout: Some(config.tool_timeout_sec.unwrap_or(DEFAULT_TOOL_TIMEOUT)),
+            catalog_item_limit: crate::pagination::MAX_MCP_CATALOG_ITEMS,
         },
     );
     manager
@@ -3383,6 +3531,7 @@ async fn reconcile_reusable_server(
         Some(previous),
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(crate::mcp::tests::test_mcp_config(
                 codex_home.path().to_path_buf(),
             )),
@@ -3401,7 +3550,7 @@ async fn reconcile_reusable_server(
             codex_apps_tools_cache_key: ConnectorRuntimeContextKey::personal(
                 /*account_id*/ None, /*chatgpt_user_id*/ None,
             ),
-            supports_openai_form_elicitation: false,
+            client_mcp_extensions: ClientMcpExtensions::default(),
             auth: None,
             codex_apps_auth_manager: None,
             elicitation_reviewer: None,
@@ -3455,6 +3604,7 @@ async fn reconciliation_reuses_connection_without_relisting_regular_tools() -> a
         /*codex_apps_refresh_trigger*/ "test",
         &client,
         /*timeout*/ None,
+        crate::pagination::MAX_MCP_CATALOG_ITEMS,
         initialize.instructions.as_deref(),
     )
     .await?;
@@ -3492,10 +3642,13 @@ async fn reconciliation_reuses_connection_without_relisting_regular_tools() -> a
                     startup_reconnect: None,
                     cancel_token: CancellationToken::new(),
                 },
+                startup_trigger: None,
+                _diagnostics_guard: LIVE_CONNECTIONS.track(),
             }),
             metadata: McpServerMetadata::from(&server),
             tool_filter: ToolFilter::from_config(&config),
             tool_timeout: Some(config.tool_timeout_sec.unwrap_or(DEFAULT_TOOL_TIMEOUT)),
+            catalog_item_limit: crate::pagination::MAX_MCP_CATALOG_ITEMS,
         },
     );
     let previous = Arc::new(previous);
@@ -3604,6 +3757,7 @@ async fn reconciliation_replaces_connection_when_protocol_mode_changes() {
         Some(&previous),
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(mcp_config),
             plugins_available: false,
             ready_selected_capability_roots: Vec::new(),
@@ -3620,7 +3774,7 @@ async fn reconciliation_replaces_connection_when_protocol_mode_changes() {
             codex_apps_tools_cache_key: ConnectorRuntimeContextKey::personal(
                 /*account_id*/ None, /*chatgpt_user_id*/ None,
             ),
-            supports_openai_form_elicitation: false,
+            client_mcp_extensions: ClientMcpExtensions::default(),
             auth: None,
             codex_apps_auth_manager: None,
             elicitation_reviewer: None,
@@ -3661,6 +3815,7 @@ async fn reconciliation_reuses_legacy_stdio_server_when_modern_protocol_is_enabl
         Some(&previous),
         McpPublicationGate::already_published(),
         McpRuntimeInput {
+            startup_policy: McpStartupPolicy::Eager,
             config: Arc::new(mcp_config),
             plugins_available: false,
             ready_selected_capability_roots: Vec::new(),
@@ -3677,7 +3832,7 @@ async fn reconciliation_reuses_legacy_stdio_server_when_modern_protocol_is_enabl
             codex_apps_tools_cache_key: ConnectorRuntimeContextKey::personal(
                 /*account_id*/ None, /*chatgpt_user_id*/ None,
             ),
-            supports_openai_form_elicitation: false,
+            client_mcp_extensions: ClientMcpExtensions::default(),
             auth: None,
             codex_apps_auth_manager: None,
             elicitation_reviewer: None,
@@ -3795,6 +3950,8 @@ async fn reconciliation_replaces_closed_connections() -> anyhow::Result<()> {
             startup_reconnect: None,
             cancel_token: CancellationToken::new(),
         },
+        startup_trigger: None,
+        _diagnostics_guard: LIVE_CONNECTIONS.track(),
     });
 
     assert!(!client.is_closed().await);
@@ -3863,7 +4020,7 @@ async fn connection_identity_distinguishes_accounts_with_the_same_token() -> any
             Some(auth),
             /*codex_apps_cache_identity*/ None,
             ElicitationCapability::default(),
-            /*supports_openai_form_elicitation*/ false,
+            ClientMcpExtensions::default(),
         )
     };
 
@@ -3914,7 +4071,7 @@ async fn connection_identity_distinguishes_agent_account_runtime_and_task() -> a
             Some(auth),
             /*codex_apps_cache_identity*/ None,
             ElicitationCapability::default(),
-            /*supports_openai_form_elicitation*/ false,
+            ClientMcpExtensions::default(),
         )
     };
     let previous_identity = connection_identity(&previous_auth);

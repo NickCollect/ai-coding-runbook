@@ -49,10 +49,9 @@ export abstract class OpenAIRealtimeEmitter extends EventEmitter<RealtimeEvents>
   protected _onError(event: null, message: string, cause: any): void;
   protected _onError(event: ErrorEvent, message?: string | undefined): void;
   protected _onError(event: ErrorEvent | null, message?: string | undefined, cause?: any): void {
-    message =
-      event?.error ?
-        `${event.error.message} code=${event.error.code} param=${event.error.param} type=${event.error.type} event_id=${event.error.event_id}`
-      : message ?? 'unknown error';
+    message = event?.error
+      ? `${event.error.message} code=${event.error.code} param=${event.error.param} type=${event.error.type} event_id=${event.error.event_id}`
+      : (message ?? 'unknown error');
 
     if (!this._hasListener('error')) {
       const error = new OpenAIRealtimeError(
@@ -120,12 +119,10 @@ export function buildRealtimeURL(
     }
     url.searchParams.set('api-version', client.apiVersion);
     url.searchParams.set('deployment', config.model!);
+  } else if (hasCallID) {
+    url.searchParams.set('call_id', config.callID!);
   } else {
-    if (hasCallID) {
-      url.searchParams.set('call_id', config.callID!);
-    } else {
-      url.searchParams.set('model', config.model!);
-    }
+    url.searchParams.set('model', config.model!);
   }
   return url;
 }

@@ -17,9 +17,9 @@ async function runTests() {
     if (!pre) {
       pre = document.createElement('pre');
       pre.id = 'results';
-      document.body.appendChild(pre);
+      document.body.append(pre);
     }
-    pre.innerText = JSON.stringify(results, null, 2);
+    pre.textContent = JSON.stringify(results, null, 2);
   }
   for (const { path, run, timeout } of tests) {
     console.log('running', ...path);
@@ -73,7 +73,7 @@ function it(description, run, timeout = 60000) {
  * @returns {{
  *   toEqual: (expected: any) => void;
  *   toBeSimilarTo: (comparedTo: string, expectedDistance: number) => void;
- * }}
+ * }} Matchers for validating the received value.
  */
 function expect(received) {
   return {

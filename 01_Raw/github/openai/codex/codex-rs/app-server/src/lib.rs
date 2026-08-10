@@ -4,7 +4,6 @@
 use codex_arg0::Arg0DispatchPaths;
 use codex_code_mode::CodeModeSessionProvider;
 use codex_code_mode::WebSocketCodeModeSessionProvider;
-use codex_config::ConfigLayerStackOrdering;
 use codex_config::LoaderOverrides;
 use codex_config::NoopThreadConfigLoader;
 use codex_config::RemoteThreadConfigLoader;
@@ -112,6 +111,7 @@ mod mcp_refresh;
 mod message_processor;
 mod models;
 mod models_refresh_worker;
+mod otel_reloader;
 mod outgoing_message;
 mod request_processors;
 mod request_serialization;
@@ -355,10 +355,7 @@ fn app_text_range(range: &CoreTextRange) -> AppTextRange {
 fn project_config_warning(config: &Config) -> Option<ConfigWarningNotification> {
     let mut disabled_folders = Vec::new();
 
-    for layer in config.config_layer_stack.get_layers(
-        ConfigLayerStackOrdering::LowestPrecedenceFirst,
-        /*include_disabled*/ true,
-    ) {
+    for layer in config.config_layer_stack.all_layers_low_to_high() {
         let ConfigLayerSource::Project { dot_codex_folder } = &layer.name else {
             continue;
         };
@@ -441,6 +438,7 @@ pub struct AppServerRuntimeOptions {
     pub plugin_startup_tasks: PluginStartupTasks,
     pub remote_control_startup_mode: RemoteControlStartupMode,
     pub install_shutdown_signal_handler: bool,
+    pub psp: bool,
 }
 
 impl Default for AppServerRuntimeOptions {
@@ -450,6 +448,7 @@ impl Default for AppServerRuntimeOptions {
             plugin_startup_tasks: PluginStartupTasks::Start,
             remote_control_startup_mode: RemoteControlStartupMode::ResolvePersisted,
             install_shutdown_signal_handler: true,
+            psp: false,
         }
     }
 }
@@ -490,7 +489,7 @@ pub async fn run_main_with_transport_options(
         arg0_paths.codex_linux_sandbox_exe.clone(),
     )?;
     let ignore_user_config = loader_overrides.ignore_user_config;
-    let config_manager = ConfigManager::new(
+    let mut config_manager = ConfigManager::new(
         codex_home.to_path_buf(),
         cli_kv_overrides.clone(),
         loader_overrides,
@@ -499,6 +498,7 @@ pub async fn run_main_with_transport_options(
         arg0_paths.clone(),
         Arc::new(NoopThreadConfigLoader),
     );
+    config_manager.psp = runtime_options.psp;
     match config_manager
         .load_latest_config(/*fallback_cwd*/ None)
         .await
@@ -543,6 +543,7 @@ pub async fn run_main_with_transport_options(
             })?
         }
     };
+    config.auth_config().validate()?;
     let code_mode_session_provider: Option<Arc<dyn CodeModeSessionProvider>> =
         match &runtime_options.code_mode_host_transport {
             CodeModeHostTransport::Local => None,
@@ -667,15 +668,13 @@ pub async fn run_main_with_transport_options(
     let log_db_layer = log_db
         .clone()
         .map(|layer| layer.with_filter(log_db::default_filter()));
-    let otel_logger_layer = otel.as_ref().and_then(|o| o.logger_layer());
-    let otel_tracing_layer = otel.as_ref().and_then(|o| o.tracing_layer());
+    let (otel_layers, otel_logger_reload_handle) = otel_reloader::layers(otel.as_ref());
     let _ = tracing_subscriber::registry()
         .with(stderr_fmt)
         .with(feedback_layer)
         .with(feedback_metadata_layer)
         .with(log_db_layer)
-        .with(otel_logger_layer)
-        .with(otel_tracing_layer)
+        .with(otel_layers)
         .try_init();
     for warning in &config_warnings {
         match &warning.details {
@@ -815,6 +814,15 @@ pub async fn run_main_with_transport_options(
         }
     }
     transport_accept_handles.push(remote_control_accept_handle);
+
+    let otel_reloader_handle = otel_reloader::spawn(
+        otel,
+        otel_logger_reload_handle,
+        config_manager.clone(),
+        Arc::clone(&auth_manager),
+        default_analytics_enabled,
+        transport_shutdown_token.clone(),
+    );
 
     let outbound_handle = tokio::spawn(async move {
         let mut outbound_connections = HashMap::<ConnectionId, OutboundConnectionState>::new();
@@ -1176,12 +1184,9 @@ pub async fn run_main_with_transport_options(
     let _ = outbound_handle.await;
 
     transport_shutdown_token.cancel();
+    let _ = otel_reloader_handle.await;
     for handle in transport_accept_handles {
         let _ = handle.await;
-    }
-
-    if let Some(otel) = otel {
-        otel.shutdown();
     }
 
     Ok(())

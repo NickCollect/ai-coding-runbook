@@ -21,7 +21,7 @@ export const zodPatterns = {
   /**
    * `a-z` was added to replicate /i flag
    */
-  email: /^(?!\.)(?!.*\.\.)([a-zA-Z0-9_'+\-\.]*)[a-zA-Z0-9_+-]@([a-zA-Z0-9][a-zA-Z0-9\-]*\.)+[a-zA-Z]{2,}$/,
+  email: /^(?!\.)(?!.*\.\.)([a-zA-Z0-9_'+\-.]*)[a-zA-Z0-9_+-]@([a-zA-Z0-9][a-zA-Z0-9-]*\.)+[a-zA-Z]{2,}$/,
   /**
    * Constructed a valid Unicode RegExp
    *
@@ -35,7 +35,8 @@ export const zodPatterns = {
    */
   emoji: () => {
     if (emojiRegex === undefined) {
-      emojiRegex = RegExp('^(\\p{Extended_Pictographic}|\\p{Emoji_Component})+$', 'u');
+      const emojiPattern = '^(\\p{Extended_Pictographic}|\\p{Emoji_Component})+$';
+      emojiRegex = RegExp(emojiPattern, 'u');
     }
     return emojiRegex;
   },
@@ -219,6 +220,7 @@ export function parseStringDef(def: ZodStringDef, refs: Refs): JsonSchema7String
         }
         case 'nanoid': {
           addPattern(res, zodPatterns.nanoid, check.message, refs);
+          break;
         }
         case 'toLowerCase':
         case 'toUpperCase':
@@ -341,7 +343,7 @@ const processRegExp = (regexOrFunction: RegExp | (() => RegExp), refs: Refs): st
 
     if (flags.i) {
       if (inCharGroup) {
-        if (source[i].match(/[a-z]/)) {
+        if (/[a-z]/.test(source[i])) {
           if (inCharRange) {
             pattern += source[i];
             pattern += `${source[i - 2]}-${source[i]}`.toUpperCase();
@@ -354,7 +356,7 @@ const processRegExp = (regexOrFunction: RegExp | (() => RegExp), refs: Refs): st
           }
           continue;
         }
-      } else if (source[i].match(/[a-z]/)) {
+      } else if (/[a-z]/.test(source[i])) {
         pattern += `[${source[i]}${source[i].toUpperCase()}]`;
         continue;
       }

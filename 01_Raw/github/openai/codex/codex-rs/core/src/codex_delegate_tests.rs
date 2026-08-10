@@ -201,6 +201,7 @@ async fn run_codex_thread_interactive_respects_pre_cancelled_spawn() {
         crate::session::tests::make_session_and_context_with_rx().await;
     let cancel_token = CancellationToken::new();
     cancel_token.cancel();
+    let parent_environments = parent_ctx.environments.clone();
 
     let result = timeout(
         Duration::from_secs(/*secs*/ 1),
@@ -210,6 +211,7 @@ async fn run_codex_thread_interactive_respects_pre_cancelled_spawn() {
             Arc::clone(&parent_session.services.models_manager),
             parent_session,
             parent_ctx,
+            parent_environments,
             cancel_token,
             SubAgentSource::Review,
             /*initial_history*/ None,
@@ -430,7 +432,8 @@ async fn handle_exec_approval_uses_call_id_for_guardian_review_and_approval_id_f
     let mut config = (*parent_ctx.config).clone();
     config.approvals_reviewer = ApprovalsReviewer::AutoReview;
     parent_ctx.config = Arc::new(config);
-    parent_ctx
+    Arc::make_mut(&mut parent_ctx.config)
+        .permissions
         .approval_policy
         .set(AskForApproval::OnRequest)
         .expect("set on-request policy");
@@ -553,7 +556,8 @@ async fn delegated_mcp_guardian_abort_returns_synthetic_decline_answer() {
     let mut config = (*parent_ctx.config).clone();
     config.approvals_reviewer = ApprovalsReviewer::AutoReview;
     parent_ctx.config = Arc::new(config);
-    parent_ctx
+    Arc::make_mut(&mut parent_ctx.config)
+        .permissions
         .approval_policy
         .set(AskForApproval::OnRequest)
         .expect("set on-request policy");

@@ -170,10 +170,7 @@ export function toStrictJsonSchema(schema: JSONSchema): JSONSchema {
   return strictSchema;
 }
 
-function stripUndefinedSchemaKeywords(
-  schema: JSONSchemaDefinition,
-  visited: Set<JSONSchema> = new Set(),
-): void {
+function stripUndefinedSchemaKeywords(schema: JSONSchemaDefinition, visited = new Set<JSONSchema>()): void {
   if (typeof schema === 'boolean' || !isObject(schema) || visited.has(schema)) {
     return;
   }
@@ -493,8 +490,8 @@ function rewriteLocalRefsIntoPromotedRootAnyOfBranch(
       }
     }
 
-    return promotedParts.length === 0 ?
-        '#'
+    return promotedParts.length === 0
+      ? '#'
       : '#/' + promotedParts.map(encodeJSONPointerTokenForURIFragment).join('/');
   };
 
@@ -557,11 +554,7 @@ function normalizeSingletonTypeArrays(schema: JSONSchemaDefinition): void {
   });
 }
 
-function isNullable(
-  schema: JSONSchemaDefinition,
-  root: JSONSchema,
-  seenRefs: Set<string> = new Set(),
-): boolean {
+function isNullable(schema: JSONSchemaDefinition, root: JSONSchema, seenRefs = new Set<string>()): boolean {
   if (typeof schema === 'boolean') {
     return schema;
   }
@@ -883,7 +876,7 @@ export function resolveLocalRef(root: JSONSchema, ref: string): JSONSchemaDefini
   // forEachJSONSchemaChild so every accepted target is normalized before we
   // advertise the result as strict.
   let resolved: unknown = root;
-  for (let index = 0; index < parts.length; ) {
+  for (let index = 0; index < parts.length;) {
     if (!isObject(resolved)) {
       return undefined;
     }
@@ -940,7 +933,7 @@ function isSchemaDefinition(value: unknown): value is JSONSchemaDefinition {
 function isObjectOnlySchema(
   schema: JSONSchemaDefinition,
   root: JSONSchema,
-  seenRefs: Set<string> = new Set(),
+  seenRefs = new Set<string>(),
 ): boolean {
   if (typeof schema === 'boolean' || !isObject(schema)) {
     return false;
@@ -969,8 +962,8 @@ function isObjectOnlySchema(
     }
 
     const branch = schema.allOf[0];
-    return branch !== undefined && branch !== true && branch !== false ?
-        isObjectOnlySchema(branch, root, seenRefs)
+    return branch !== undefined && branch !== true && branch !== false
+      ? isObjectOnlySchema(branch, root, seenRefs)
       : false;
   }
 
@@ -983,7 +976,7 @@ function isObjectOnlySchema(
 function isArrayOnlySchema(
   schema: JSONSchemaDefinition,
   root: JSONSchema,
-  seenRefs: Set<string> = new Set(),
+  seenRefs = new Set<string>(),
 ): boolean {
   if (typeof schema === 'boolean' || !isObject(schema)) {
     return false;
@@ -1012,8 +1005,8 @@ function isArrayOnlySchema(
     }
 
     const branch = schema.allOf[0];
-    return branch !== undefined && branch !== true && branch !== false ?
-        isArrayOnlySchema(branch, root, seenRefs)
+    return branch !== undefined && branch !== true && branch !== false
+      ? isArrayOnlySchema(branch, root, seenRefs)
       : false;
   }
 
@@ -1289,9 +1282,9 @@ function rewriteLocalRefsIntoFilteredAnyOfBranches(root: JSONSchema): void {
 
     for (const [index, part] of originalParts.entries()) {
       const resolvedRecord =
-        typeof resolved === 'object' && resolved !== null && !Array.isArray(resolved) ?
-          (resolved as Record<string, unknown>)
-        : undefined;
+        typeof resolved === 'object' && resolved !== null && !Array.isArray(resolved)
+          ? (resolved as Record<string, unknown>)
+          : undefined;
       if (
         part === 'anyOf' &&
         index < originalParts.length - 1 &&
@@ -1606,7 +1599,7 @@ function normalizeObjectAllOfBranches(
   schema: JSONSchemaDefinition,
   path: string[],
   root: JSONSchema,
-  normalizing: Set<JSONSchema> = new Set(),
+  normalizing = new Set<JSONSchema>(),
 ): void {
   if (typeof schema === 'boolean' || !isObject(schema)) {
     return;
@@ -1688,7 +1681,7 @@ function mergeObjectAllOf(
   jsonSchema: JSONSchema,
   path: string[],
   root: JSONSchema,
-  normalizing: Set<JSONSchema> = new Set(),
+  normalizing = new Set<JSONSchema>(),
 ): boolean {
   const allOf = jsonSchema.allOf;
   if (!Array.isArray(allOf) || allOf.length === 0) {
@@ -1899,14 +1892,14 @@ function mergeObjectAllOf(
   // excluded by another closed branch are discarded, while required excluded
   // properties remain unrepresentable and fail closed.
   const allowedClosedProperties =
-    closedPropertySets.length === 0 ?
-      undefined
-    : closedPropertySets
-        .slice(1)
-        .reduce(
-          (allowed, keys) => new Set([...allowed].filter((key) => keys.has(key))),
-          new Set(closedPropertySets[0]),
-        );
+    closedPropertySets.length === 0
+      ? undefined
+      : closedPropertySets
+          .slice(1)
+          .reduce(
+            (allowed, keys) => new Set([...allowed].filter((key) => keys.has(key))),
+            new Set(closedPropertySets[0]),
+          );
   const excludesRequiredProperty =
     allowedClosedProperties !== undefined &&
     [...mergedRequired].some((key) => !allowedClosedProperties.has(key));

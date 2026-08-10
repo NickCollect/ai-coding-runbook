@@ -62,10 +62,13 @@ type StandardSchemaLike<Input = unknown, Output = Input> = {
   };
 };
 
-type InferStandardOutput<Schema extends StandardSchemaLike> =
-  [NonNullable<Schema['~standard']['types']>] extends [never] ? unknown
-  : NonNullable<Schema['~standard']['types']> extends { readonly output: infer Output } ? Output
-  : unknown;
+type InferStandardOutput<Schema extends StandardSchemaLike> = [
+  NonNullable<Schema['~standard']['types']>,
+] extends [never]
+  ? unknown
+  : NonNullable<Schema['~standard']['types']> extends { readonly output: infer Output }
+    ? Output
+    : unknown;
 
 type StandardSchemaJSONSchemaProps = {
   /**
@@ -312,7 +315,7 @@ function areMutuallyExclusive(left: unknown, right: unknown, root: JSONSchema): 
 function resolveLocalRefForExclusivity(
   schema: unknown,
   root: JSONSchema,
-  seenRefs: Set<string> = new Set(),
+  seenRefs = new Set<string>(),
 ): unknown | undefined {
   if (!schema || typeof schema !== 'object' || Array.isArray(schema)) return schema;
 

@@ -63,6 +63,7 @@ pub(crate) struct TrackEventsRequest {
 pub(crate) enum TrackEventRequest {
     SkillInvocation(SkillInvocationEventRequest),
     ThreadInitialized(ThreadInitializedEvent),
+    ThreadArchive(ThreadArchiveEvent),
     GuardianReview(Box<GuardianReviewEventRequest>),
     AppMentioned(CodexAppMentionedEventRequest),
     AppUsed(CodexAppUsedEventRequest),
@@ -185,6 +186,26 @@ pub(crate) struct ThreadInitializedEventParams {
 pub(crate) struct ThreadInitializedEvent {
     pub(crate) event_type: &'static str,
     pub(crate) event_params: ThreadInitializedEventParams,
+}
+
+#[derive(Clone, Copy, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub(crate) enum ThreadArchiveAction {
+    Archived,
+    Unarchived,
+}
+
+#[derive(Serialize)]
+pub(crate) struct ThreadArchiveEventParams {
+    pub(crate) thread_id: String,
+    pub(crate) action: ThreadArchiveAction,
+    pub(crate) occurred_at_ms: u64,
+}
+
+#[derive(Serialize)]
+pub(crate) struct ThreadArchiveEvent {
+    pub(crate) event_type: &'static str,
+    pub(crate) event_params: ThreadArchiveEventParams,
 }
 
 #[derive(Serialize)]
@@ -539,6 +560,10 @@ pub(crate) struct CodexToolItemEventBase {
     /// App-server ThreadItem.id. For tool-originated items this generally
     /// corresponds to the originating core call_id.
     pub(crate) item_id: String,
+    pub(crate) cell_id: Option<String>,
+    pub(crate) parent_call_id: Option<String>,
+    pub(crate) originating_response_id: Option<String>,
+    pub(crate) subsequent_response_id: Option<String>,
     pub(crate) app_server_client: CodexAppServerClientMetadata,
     pub(crate) runtime: CodexRuntimeMetadata,
     pub(crate) thread_source: Option<ThreadSource>,

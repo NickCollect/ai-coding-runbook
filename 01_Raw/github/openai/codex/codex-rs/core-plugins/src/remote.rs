@@ -1,4 +1,5 @@
 use crate::app_mcp_routing::apply_app_mcp_routing_policy;
+use crate::error_subtype::http_status_sub_error_type;
 use crate::http_client_selector::HttpClientSelector;
 use crate::loader::plugin_app_declarations_from_value;
 use crate::store::PLUGINS_CACHE_DIR;
@@ -458,6 +459,36 @@ pub enum RemotePluginCatalogError {
     CacheRemove(String),
 }
 
+impl RemotePluginCatalogError {
+    /// Stable low-cardinality detail for plugin-install failure telemetry.
+    pub fn sub_error_type(&self) -> Option<String> {
+        match self {
+            Self::UnexpectedStatus { status, .. } => {
+                Some(http_status_sub_error_type(*status).to_string())
+            }
+            Self::AuthRequired
+            | Self::UnsupportedAuthMode
+            | Self::AuthToken(_)
+            | Self::Request { .. }
+            | Self::Decode { .. }
+            | Self::InvalidBaseUrl(_)
+            | Self::InvalidBaseUrlPath
+            | Self::UnknownMarketplace { .. }
+            | Self::UnexpectedPluginId { .. }
+            | Self::UnexpectedSkillName { .. }
+            | Self::UnexpectedEnabledState { .. }
+            | Self::InvalidPluginPath { .. }
+            | Self::PluginShareCheckoutNotAvailable { .. }
+            | Self::Archive { .. }
+            | Self::ArchiveJoin(_)
+            | Self::ArchiveTooLarge { .. }
+            | Self::MissingUploadEtag
+            | Self::UnexpectedResponse(_)
+            | Self::CacheRemove(_) => None,
+        }
+    }
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Deserialize, Serialize)]
 pub enum RemotePluginScope {
     #[serde(rename = "GLOBAL")]
@@ -466,6 +497,12 @@ pub enum RemotePluginScope {
     User,
     #[serde(rename = "WORKSPACE")]
     Workspace,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum RemoteInstalledPluginScope {
+    All,
+    Single(RemotePluginScope),
 }
 
 impl RemotePluginScope {
@@ -1162,28 +1199,16 @@ pub(crate) async fn fetch_remote_installed_plugins(
     auth: Option<&CodexAuth>,
 ) -> Result<Vec<RemoteInstalledPlugin>, RemotePluginCatalogError> {
     let auth = ensure_chatgpt_auth(auth)?;
-    let global = async {
-        let scope = RemotePluginScope::Global;
-        let installed_plugins = fetch_installed_plugins_for_scope(config, auth, scope).await?;
-        Ok::<_, RemotePluginCatalogError>((scope, installed_plugins))
-    };
-    let workspace = async {
-        let scope = RemotePluginScope::Workspace;
-        let installed_plugins = fetch_installed_plugins_for_scope(config, auth, scope).await?;
-        Ok::<_, RemotePluginCatalogError>((scope, installed_plugins))
-    };
-    let user = async {
-        let scope = RemotePluginScope::User;
-        let installed_plugins = fetch_installed_plugins_for_scope(config, auth, scope).await?;
-        Ok::<_, RemotePluginCatalogError>((scope, installed_plugins))
-    };
-
-    let (global, workspace, user) = tokio::try_join!(global, workspace, user)?;
-    let mut installed_plugins = [global, workspace, user]
-        .into_iter()
-        .flat_map(|(_scope, plugins)| plugins)
-        .map(|plugin| remote_installed_plugin_to_cache_entry(&plugin))
-        .collect::<Result<Vec<_>, _>>()?;
+    let mut installed_plugins = fetch_installed_plugins(
+        config,
+        auth,
+        RemoteInstalledPluginScope::All,
+        /*include_download_urls*/ false,
+    )
+    .await?
+    .into_iter()
+    .map(|plugin| remote_installed_plugin_to_cache_entry(&plugin))
+    .collect::<Result<Vec<_>, _>>()?;
     installed_plugins.sort_by(|left, right| {
         left.marketplace_name
             .cmp(&right.marketplace_name)
@@ -1524,6 +1549,7 @@ pub async fn resolve_remote_plugin_uninstall_target(
     let fallback_capability_summary = PluginCapabilitySummary {
         config_name: plugin_id.as_key(),
         display_name: plugin.release.display_name,
+        plugin_namespace: Some(plugin_id.plugin_name.clone()),
         description: prompt_safe_plugin_description(Some(&plugin.release.description)),
         has_skills: !plugin.release.skills.is_empty(),
         mcp_server_names,
@@ -1988,16 +2014,19 @@ async fn fetch_installed_plugins_for_scope(
     auth: &CodexAuth,
     scope: RemotePluginScope,
 ) -> Result<Vec<RemotePluginInstalledItem>, RemotePluginCatalogError> {
-    fetch_installed_plugins_for_scope_with_download_url(
-        config, auth, scope, /*include_download_urls*/ false,
+    fetch_installed_plugins(
+        config,
+        auth,
+        RemoteInstalledPluginScope::Single(scope),
+        /*include_download_urls*/ false,
     )
     .await
 }
 
-async fn fetch_installed_plugins_for_scope_with_download_url(
+async fn fetch_installed_plugins(
     config: &RemotePluginServiceConfig,
     auth: &CodexAuth,
-    scope: RemotePluginScope,
+    scope: RemoteInstalledPluginScope,
     include_download_urls: bool,
 ) -> Result<Vec<RemotePluginInstalledItem>, RemotePluginCatalogError> {
     let mut plugins = Vec::new();
@@ -2065,15 +2094,23 @@ async fn get_remote_shared_workspace_plugins_page(
 async fn get_remote_plugin_installed_page(
     config: &RemotePluginServiceConfig,
     auth: &CodexAuth,
-    scope: RemotePluginScope,
+    scope: RemoteInstalledPluginScope,
     page_token: Option<&str>,
     include_download_urls: bool,
 ) -> Result<RemotePluginInstalledResponse, RemotePluginCatalogError> {
     let base_url = config.chatgpt_base_url.trim_end_matches('/');
     let mut url = Url::parse(&format!("{base_url}/ps/plugins/installed"))
         .map_err(RemotePluginCatalogError::InvalidBaseUrl)?;
-    url.query_pairs_mut()
-        .append_pair("scope", scope.api_value());
+    match scope {
+        RemoteInstalledPluginScope::All => {
+            url.query_pairs_mut()
+                .append_pair("limit", &REMOTE_PLUGIN_LIST_PAGE_LIMIT.to_string());
+        }
+        RemoteInstalledPluginScope::Single(scope) => {
+            url.query_pairs_mut()
+                .append_pair("scope", scope.api_value());
+        }
+    }
     if include_download_urls {
         url.query_pairs_mut()
             .append_pair("includeDownloadUrls", "true");

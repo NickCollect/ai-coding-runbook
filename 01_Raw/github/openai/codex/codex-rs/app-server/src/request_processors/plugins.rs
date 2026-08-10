@@ -12,6 +12,7 @@ use codex_core_plugins::OPENAI_CURATED_MARKETPLACE_NAME;
 use codex_core_plugins::PluginListBackgroundTaskOptions;
 use codex_core_plugins::is_openai_curated_marketplace_name;
 use codex_core_plugins::loader::load_configured_plugin_mcp_servers;
+use codex_core_plugins::manifest::is_agent_plugin_manifest;
 use codex_core_plugins::remote::REMOTE_CREATED_BY_ME_MARKETPLACE_NAME;
 use codex_core_plugins::remote::REMOTE_GLOBAL_MARKETPLACE_NAME;
 use codex_core_plugins::remote::REMOTE_WORKSPACE_MARKETPLACE_NAME;
@@ -32,9 +33,18 @@ use codex_plugin::PluginId;
 use codex_plugin::PluginTelemetryMetadata;
 use codex_protocol::auth::AuthMode as DomainAuthMode;
 use codex_rmcp_client::OAuthDiscoveryTimeout;
+use codex_rmcp_client::StreamableHttpRedirectMode;
 use codex_rmcp_client::perform_oauth_login_silent;
 
 mod search;
+
+fn plugin_redirect_mode(plugin_root: &Path) -> StreamableHttpRedirectMode {
+    if is_agent_plugin_manifest(plugin_root) {
+        StreamableHttpRedirectMode::AgentPluginV1
+    } else {
+        StreamableHttpRedirectMode::Legacy
+    }
+}
 
 #[derive(Clone)]
 pub(crate) struct PluginRequestProcessor {
@@ -1540,8 +1550,14 @@ impl PluginRequestProcessor {
         )
         .await;
         if !plugin_mcp_servers.is_empty() {
-            self.start_plugin_mcp_oauth_logins(&config, &result.plugin_id, plugin_mcp_servers)
-                .await;
+            let redirect_mode = plugin_redirect_mode(result.installed_path.as_path());
+            self.start_plugin_mcp_oauth_logins(
+                &config,
+                &result.plugin_id,
+                plugin_mcp_servers,
+                redirect_mode,
+            )
+            .await;
         }
 
         let plugin_app_declarations = load_plugin_apps(result.installed_path.as_path()).await;
@@ -1585,12 +1601,13 @@ impl PluginRequestProcessor {
             .await
             .map_err(|err| {
                 let error_type = remote_plugin_catalog_error_type(&err);
+                let sub_error_type = err.sub_error_type();
                 self.track_plugin_install_failed_for_remote_plugin(
                     &remote_plugin_id,
                     &remote_marketplace_name,
                     /*plugin_id*/ None,
                     error_type,
-                    /*sub_error_type*/ None,
+                    sub_error_type,
                     err.to_string(),
                 );
                 remote_plugin_catalog_error_to_jsonrpc(
@@ -1607,14 +1624,29 @@ impl PluginRequestProcessor {
             ))
         })?;
         if remote_detail.summary.availability == PluginAvailability::DisabledByAdmin {
-            return Err(invalid_request(format!(
-                "remote plugin {remote_plugin_id} is disabled by admin"
-            )));
+            let error_message = format!("remote plugin {remote_plugin_id} is disabled by admin");
+            self.track_plugin_install_failed_for_remote_plugin(
+                &remote_plugin_id,
+                &actual_remote_marketplace_name,
+                Some(&resolved_plugin_id),
+                "remote_plugin_not_available",
+                Some("disabled_by_admin".to_string()),
+                error_message.clone(),
+            );
+            return Err(invalid_request(error_message));
         }
         if remote_detail.summary.install_policy == PluginInstallPolicy::NotAvailable {
-            return Err(invalid_request(format!(
-                "remote plugin {remote_plugin_id} is not available for install"
-            )));
+            let error_message =
+                format!("remote plugin {remote_plugin_id} is not available for install");
+            self.track_plugin_install_failed_for_remote_plugin(
+                &remote_plugin_id,
+                &actual_remote_marketplace_name,
+                Some(&resolved_plugin_id),
+                "remote_plugin_not_available",
+                Some("install_policy_not_available".to_string()),
+                error_message.clone(),
+            );
+            return Err(invalid_request(error_message));
         }
         // Direct install writes the same cache tree that installed-plugin sync
         // prunes before the backend installed snapshot can include this plugin.
@@ -1678,12 +1710,13 @@ impl PluginRequestProcessor {
         .await
         .map_err(|err| {
             let error_type = remote_plugin_catalog_error_type(&err);
+            let sub_error_type = err.sub_error_type();
             self.track_plugin_install_failed_for_remote_plugin(
                 &remote_plugin_id,
                 &actual_remote_marketplace_name,
                 Some(&result.plugin_id),
                 error_type,
-                /*sub_error_type*/ None,
+                sub_error_type,
                 err.to_string(),
             );
             remote_plugin_catalog_error_to_jsonrpc(err, "install remote plugin")
@@ -1717,8 +1750,14 @@ impl PluginRequestProcessor {
         )
         .await;
         if !plugin_mcp_servers.is_empty() {
-            self.start_plugin_mcp_oauth_logins(&config, &result.plugin_id, plugin_mcp_servers)
-                .await;
+            let redirect_mode = plugin_redirect_mode(result.installed_path.as_path());
+            self.start_plugin_mcp_oauth_logins(
+                &config,
+                &result.plugin_id,
+                plugin_mcp_servers,
+                redirect_mode,
+            )
+            .await;
         }
 
         let is_chatgpt_auth = auth.as_ref().is_some_and(CodexAuth::is_chatgpt_auth);
@@ -1869,6 +1908,7 @@ impl PluginRequestProcessor {
         config: &Config,
         plugin_id: &PluginId,
         mut plugin_mcp_servers: HashMap<String, McpServerConfig>,
+        redirect_mode: StreamableHttpRedirectMode,
     ) {
         let plugin_id = plugin_id.as_key();
         config.apply_plugin_mcp_server_requirements(&plugin_id, &mut plugin_mcp_servers);
@@ -1900,6 +1940,7 @@ impl PluginRequestProcessor {
                 &server.transport,
                 Arc::clone(&http_client),
                 OAuthDiscoveryTimeout::LOCAL,
+                redirect_mode,
             )
             .await;
             let oauth_config = match login_support {
@@ -1944,6 +1985,7 @@ impl PluginRequestProcessor {
                     callback_port,
                     callback_url.as_deref(),
                     Arc::clone(&http_client),
+                    redirect_mode,
                 )
                 .await;
 
@@ -1962,6 +2004,7 @@ impl PluginRequestProcessor {
                             callback_port,
                             callback_url.as_deref(),
                             http_client,
+                            redirect_mode,
                         )
                         .await
                     }

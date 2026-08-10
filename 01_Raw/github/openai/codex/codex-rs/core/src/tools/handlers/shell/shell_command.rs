@@ -6,6 +6,7 @@ use codex_utils_absolute_path::AbsolutePathBuf;
 use crate::exec::ExecCapturePolicy;
 use crate::exec::ExecParams;
 use crate::exec_env::create_env;
+use crate::exec_env::inject_apply_patch_env;
 use crate::exec_env::inject_permission_profile_env;
 use crate::function_tool::FunctionCallError;
 use crate::maybe_emit_implicit_skill_invocation;
@@ -91,21 +92,22 @@ impl ShellCommandHandler {
         turn_context: &TurnContext,
         turn_environment: &TurnEnvironment,
         cwd: AbsolutePathBuf,
-        allow_login_shell: bool,
     ) -> Result<ExecParams, FunctionCallError> {
         let session_shell = session.user_shell();
         let shell = turn_environment
             .shell
             .as_ref()
             .unwrap_or(session_shell.as_ref());
-        let use_login_shell = Self::resolve_use_login_shell(params.login, allow_login_shell)?;
+        let use_login_shell =
+            Self::resolve_use_login_shell(params.login, turn_environment.config.allow_login_shell)?;
         let command = Self::base_command(shell, &params.command, use_login_shell);
 
         let mut env = create_env(
             &turn_context.config.permissions.shell_environment_policy,
             Some(session.thread_id),
         );
-        let active_permission_profile = turn_context.config.permissions.active_permission_profile();
+        inject_apply_patch_env(&mut env, &turn_context.config.features);
+        let active_permission_profile = turn_environment.active_permission_profile();
         inject_permission_profile_env(&mut env, active_permission_profile.as_ref());
         let sandbox_permissions = resolve_sandbox_permissions(
             params.sandbox_permissions,
@@ -214,7 +216,6 @@ impl ShellCommandHandler {
             turn.as_ref(),
             &turn_environment,
             cwd,
-            turn.config.permissions.allow_login_shell,
         )?;
         let shell_type = Some(
             turn_environment
@@ -231,7 +232,7 @@ impl ShellCommandHandler {
             additional_permissions: params.additional_permissions.clone(),
             prefix_rule,
             session,
-            turn,
+            step_context,
             turn_environment,
             tracker,
             call_id,

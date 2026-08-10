@@ -1,14 +1,11 @@
-import { OpenAIError } from './error';
+import { OpenAIError, APIError } from './error';
 import { type ReadableStream } from '../internal/shim-types';
-import { makeReadableStream } from '../internal/shims';
+import { makeReadableStream, ReadableStreamToAsyncIterable } from '../internal/shims';
 import { findDoubleNewlineIndex, LineDecoder } from '../internal/decoders/line';
-import { ReadableStreamToAsyncIterable } from '../internal/shims';
 import { isAbortError } from '../internal/errors';
 import { encodeUTF8 } from '../internal/utils/bytes';
 import { loggerFor } from '../internal/utils/log';
 import type { OpenAI } from '../client';
-
-import { APIError } from './error';
 
 type Bytes = string | ArrayBuffer | Uint8Array | null | undefined;
 
@@ -218,12 +215,11 @@ export class Stream<Item> implements AsyncIterable<Item> {
    * which can be turned back into a Stream with `Stream.fromReadableStream()`.
    */
   toReadableStream(): ReadableStream {
-    const self = this;
     let iter: AsyncIterator<Item>;
 
     return makeReadableStream({
-      async start() {
-        iter = self[Symbol.asyncIterator]();
+      start: async () => {
+        iter = this[Symbol.asyncIterator]();
       },
       async pull(ctrl: any) {
         try {
@@ -281,6 +277,8 @@ export async function* _iterSSEMessages(
 /**
  * Given an async iterable iterator, iterates over it and yields full
  * SSE chunks, i.e. yields when a double new-line is encountered.
+ *
+ * @yields {Uint8Array} A complete SSE chunk.
  */
 async function* iterSSEChunks(iterator: AsyncIterableIterator<Bytes>): AsyncGenerator<Uint8Array> {
   let data = new Uint8Array();
@@ -291,11 +289,13 @@ async function* iterSSEChunks(iterator: AsyncIterableIterator<Bytes>): AsyncGene
     }
 
     const binaryChunk =
-      chunk instanceof ArrayBuffer ? new Uint8Array(chunk)
-      : typeof chunk === 'string' ? encodeUTF8(chunk)
-      : chunk;
+      chunk instanceof ArrayBuffer
+        ? new Uint8Array(chunk)
+        : typeof chunk === 'string'
+          ? encodeUTF8(chunk)
+          : chunk;
 
-    let newData = new Uint8Array(data.length + binaryChunk.length);
+    const newData = new Uint8Array(data.length + binaryChunk.length);
     newData.set(data);
     newData.set(binaryChunk, data.length);
     data = newData;
@@ -314,11 +314,10 @@ async function* iterSSEChunks(iterator: AsyncIterableIterator<Bytes>): AsyncGene
 
 class SSEDecoder {
   private data: string[];
-  private event: string | null;
+  private event: string | null = null;
   private chunks: string[];
 
   constructor() {
-    this.event = null;
     this.data = [];
     this.chunks = [];
   }
@@ -351,7 +350,8 @@ class SSEDecoder {
       return null;
     }
 
-    let [fieldname, _, value] = partition(line, ':');
+    const [fieldname, , initialValue] = partition(line, ':');
+    let value = initialValue;
 
     if (value.startsWith(' ')) {
       value = value.substring(1);

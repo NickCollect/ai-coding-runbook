@@ -962,6 +962,65 @@ async fn turn_start_tracks_thread_originator_in_analytics() -> Result<()> {
     Ok(())
 }
 
+#[tokio::test(flavor = "multi_thread", worker_threads = 2)]
+async fn code_mode_exec_emits_correlated_production_analytics() -> Result<()> {
+    let server = responses::start_mock_server().await;
+    let _responses = responses::mount_sse_sequence(
+        &server,
+        vec![
+            responses::sse(vec![
+                responses::ev_response_created("resp-1"),
+                responses::ev_custom_tool_call("exec-1", "exec", "text('analytics');"),
+                responses::ev_completed("resp-1"),
+            ]),
+            responses::sse(vec![responses::ev_completed("resp-2")]),
+        ],
+    )
+    .await;
+    let codex_home = TempDir::new()?;
+    MockResponsesConfig::new(&server.uri())
+        .enable_feature(Feature::CodeModeOnly)
+        .with_root_config(&format!("chatgpt_base_url = \"{}\"", server.uri()))
+        .write(codex_home.path())?;
+    mount_analytics_capture(&server, codex_home.path()).await?;
+
+    let mut app_server = TestAppServer::builder()
+        .with_codex_home(codex_home.path())
+        .without_managed_config()
+        .build_initialized()
+        .await?;
+    let params = ThreadStartParams::default();
+    let thread = app_server.start_thread(params).await?;
+    app_server
+        .start_turn_and_wait_for_completion(TurnStartParams {
+            thread_id: thread.thread.id,
+            input: vec![V2UserInput::Text {
+                text: "run exec".to_string(),
+                text_elements: Vec::new(),
+            }],
+            ..Default::default()
+        })
+        .await?;
+
+    let event = wait_for_analytics_event(
+        &server,
+        DEFAULT_READ_TIMEOUT,
+        "codex_dynamic_tool_call_event",
+    )
+    .await?;
+    assert_eq!(
+        json!({
+            "tool": event["event_params"]["tool_name"],
+            "origin": event["event_params"]["originating_response_id"],
+            "subsequent": event["event_params"]["subsequent_response_id"],
+            "hasCell": event["event_params"]["cell_id"].as_str().is_some(),
+        }),
+        json!({"tool":"exec","origin":"resp-1","subsequent":"resp-2","hasCell":true})
+    );
+
+    Ok(())
+}
+
 #[tokio::test(flavor = "multi_thread", worker_threads = 4)]
 async fn turn_profile_tracks_blocking_tool_and_follow_up_sampling() -> Result<()> {
     let responses = vec![
@@ -1985,16 +2044,24 @@ async fn turn_start_exec_approval_toggle_v2() -> Result<()> {
 
     let tmp = TempDir::new()?;
     let codex_home = tmp.path().to_path_buf();
+    let bearer_token = "example_bearer_token_1234567890";
+    let first_shell_command = vec![
+        "python3".to_string(),
+        "-c".to_string(),
+        "import sys; print(sys.argv[1].endswith('7890'))".to_string(),
+        format!("Authorization: Bearer {bearer_token}"),
+    ];
+    let expected_approval_command = format_with_current_shell_display(&shlex::try_join(
+        first_shell_command.iter().map(String::as_str),
+    )?);
+    let expected_display_command =
+        expected_approval_command.replace(bearer_token, "[REDACTED_SECRET]");
 
     // Mock server: first turn requests a shell call (elicitation), then completes.
     // Second turn same, but we'll set approval_policy=never to avoid elicitation.
     let responses = vec![
         create_shell_command_sse_response(
-            vec![
-                "python3".to_string(),
-                "-c".to_string(),
-                "print(42)".to_string(),
-            ],
+            first_shell_command,
             /*workdir*/ None,
             Some(5000),
             "call1",
@@ -2065,6 +2132,10 @@ async fn turn_start_exec_approval_toggle_v2() -> Result<()> {
         params.environment_id.as_deref(),
         Some(expected_environment_id.as_str())
     );
+    assert_eq!(
+        params.command.as_deref(),
+        Some(expected_approval_command.as_str())
+    );
     let resolved_request_id = request_id.clone();
 
     // Approve and wait for task completion
@@ -2076,12 +2147,32 @@ async fn turn_start_exec_approval_toggle_v2() -> Result<()> {
     )
     .await?;
     let mut saw_resolved = false;
+    let mut saw_completed_command = false;
     loop {
         let message = timeout(DEFAULT_READ_TIMEOUT, mcp.read_next_message()).await??;
         let JSONRPCMessage::Notification(notification) = message else {
             continue;
         };
         match notification.method.as_str() {
+            "item/completed" => {
+                let completed: ItemCompletedNotification =
+                    serde_json::from_value(notification.params.expect("item/completed params"))?;
+                match completed.item {
+                    ThreadItem::CommandExecution {
+                        id,
+                        command,
+                        exit_code,
+                        aggregated_output,
+                        ..
+                    } if id == "call1" => {
+                        assert_eq!(command, expected_display_command);
+                        assert_eq!(exit_code, Some(0));
+                        assert!(aggregated_output.is_some_and(|output| output.contains("True")));
+                        saw_completed_command = true;
+                    }
+                    _ => {}
+                }
+            }
             "serverRequest/resolved" => {
                 let resolved: ServerRequestResolvedNotification = serde_json::from_value(
                     notification
@@ -2095,6 +2186,7 @@ async fn turn_start_exec_approval_toggle_v2() -> Result<()> {
             }
             "turn/completed" => {
                 assert!(saw_resolved, "serverRequest/resolved should arrive first");
+                assert!(saw_completed_command, "expected completed command item");
                 break;
             }
             _ => {}
@@ -2168,14 +2260,22 @@ async fn run_turn_start_exec_approval_rejection_v2(
 
     let tmp = TempDir::new()?;
     let codex_home = tmp.path().to_path_buf();
+    let bearer_token = "example_bearer_token_1234567890";
+    let shell_command = vec![
+        "python3".to_string(),
+        "-c".to_string(),
+        "print(42)".to_string(),
+        format!("Authorization: Bearer {bearer_token}"),
+    ];
+    let expected_approval_command = format_with_current_shell_display(&shlex::try_join(
+        shell_command.iter().map(String::as_str),
+    )?);
+    let expected_display_command =
+        expected_approval_command.replace(bearer_token, "[REDACTED_SECRET]");
 
     let responses = vec![
         create_shell_command_sse_response(
-            vec![
-                "python3".to_string(),
-                "-c".to_string(),
-                "print(42)".to_string(),
-            ],
+            shell_command,
             /*workdir*/ None,
             Some(5000),
             "call-decline",
@@ -2223,11 +2323,22 @@ async fn run_turn_start_exec_approval_rejection_v2(
         }
     })
     .await??;
-    let ThreadItem::CommandExecution { id, status, .. } = started_command_execution else {
+    let ThreadItem::CommandExecution {
+        id,
+        status,
+        command,
+        command_actions,
+        ..
+    } = started_command_execution
+    else {
         unreachable!("loop ensures we break on command execution items");
     };
     assert_eq!(id, "call-decline");
     assert_eq!(status, CommandExecutionStatus::InProgress);
+    assert_eq!(command, expected_display_command);
+    let displayed_actions = serde_json::to_string(&command_actions)?;
+    assert!(displayed_actions.contains("[REDACTED_SECRET]"));
+    assert!(!displayed_actions.contains(bearer_token));
 
     let server_req = timeout(
         DEFAULT_READ_TIMEOUT,
@@ -2240,6 +2351,12 @@ async fn run_turn_start_exec_approval_rejection_v2(
     assert_eq!(params.item_id, "call-decline");
     assert_eq!(params.thread_id, thread.id);
     assert_eq!(params.turn_id, turn.id);
+    assert_eq!(
+        params.command.as_deref(),
+        Some(expected_approval_command.as_str())
+    );
+    let approval_actions = serde_json::to_string(&params.command_actions)?;
+    assert!(approval_actions.contains(bearer_token));
 
     mcp.send_response(request_id, approval_response).await?;
 
@@ -2256,6 +2373,8 @@ async fn run_turn_start_exec_approval_rejection_v2(
     let ThreadItem::CommandExecution {
         id,
         status,
+        command,
+        command_actions,
         exit_code,
         aggregated_output,
         ..
@@ -2265,6 +2384,10 @@ async fn run_turn_start_exec_approval_rejection_v2(
     };
     assert_eq!(id, "call-decline");
     assert_eq!(status, expected_status);
+    assert_eq!(command, expected_display_command);
+    let displayed_actions = serde_json::to_string(&command_actions)?;
+    assert!(displayed_actions.contains("[REDACTED_SECRET]"));
+    assert!(!displayed_actions.contains(bearer_token));
     assert!(exit_code.is_none());
     assert!(aggregated_output.is_none());
 

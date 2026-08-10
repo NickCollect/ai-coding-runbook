@@ -3115,8 +3115,16 @@
           "description": "Opt into receiving experimental API methods and fields.",
           "type": "boolean"
         },
+        "extensions": {
+          "additionalProperties": true,
+          "description": "MCP extension settings declared by the app-server client.",
+          "type": [
+            "object",
+            "null"
+          ]
+        },
         "mcpServerOpenaiFormElicitation": {
-          "description": "Allow downstream MCP servers to request OpenAI extended form elicitations.",
+          "description": "Legacy opt-in for the `openai/form` MCP extension.\n\nNew clients should declare `openai/form` in [`Self::extensions`].",
           "type": "boolean"
         },
         "optOutNotificationMethods": {
@@ -7377,6 +7385,29 @@
         ],
         "type": "string"
       },
+      "AutoReviewRequirements": {
+        "properties": {
+          "ignoreRules": {
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          },
+          "requiredOnModels": {
+            "items": {
+              "type": "string"
+            },
+            "type": [
+              "array",
+              "null"
+            ]
+          }
+        },
+        "type": "object"
+      },
       "BrowserUseRequirements": {
         "properties": {
           "disableAutoReview": {
@@ -8783,6 +8814,16 @@
               "null"
             ]
           },
+          "autoReview": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/v2/AutoReviewRequirements"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "browserUse": {
             "anyOf": [
               {
@@ -9059,6 +9100,49 @@
               "type"
             ],
             "title": "CommandConfiguredHookHandler",
+            "type": "object"
+          },
+          {
+            "properties": {
+              "input": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "server": {
+                "type": "string"
+              },
+              "statusMessage": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "timeoutSec": {
+                "format": "uint64",
+                "minimum": 0.0,
+                "type": [
+                  "integer",
+                  "null"
+                ]
+              },
+              "tool": {
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "mcp_tool"
+                ],
+                "title": "McpToolConfiguredHookHandlerType",
+                "type": "string"
+              }
+            },
+            "required": [
+              "input",
+              "server",
+              "tool",
+              "type"
+            ],
+            "title": "McpToolConfiguredHookHandler",
             "type": "object"
           },
           {
@@ -11710,6 +11794,14 @@
           "eventName": {
             "$ref": "#/definitions/v2/HookEventName"
           },
+          "executionMode": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/v2/HookExecutionMode"
+              }
+            ],
+            "default": "sync"
+          },
           "handlerType": {
             "$ref": "#/definitions/v2/HookHandlerType"
           },
@@ -13532,6 +13624,24 @@
           "model": {
             "type": "string"
           },
+          "modelSpecialty": {
+            "default": null,
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "multiAgentVersion": {
+            "anyOf": [
+              {
+                "$ref": "#/definitions/v2/MultiAgentVersion"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Multi-agent runtime declared by this model, when available."
+          },
           "serviceTiers": {
             "default": [],
             "items": {
@@ -13865,6 +13975,15 @@
             "type": "object"
           }
         ]
+      },
+      "MultiAgentVersion": {
+        "description": "Multi-agent runtime supported by a model.",
+        "enum": [
+          "disabled",
+          "v1",
+          "v2"
+        ],
+        "type": "string"
       },
       "NetworkAccess": {
         "enum": [
@@ -17661,6 +17780,52 @@
         "title": "SendAddCreditsNudgeEmailResponse",
         "type": "object"
       },
+      "ServerDiagnosticsGauge": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "format": "uint64",
+            "minimum": 0.0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ],
+        "type": "object"
+      },
+      "ServerDiagnosticsProcess": {
+        "properties": {
+          "id": {
+            "format": "uint32",
+            "minimum": 0.0,
+            "type": "integer"
+          },
+          "physicalFootprintBytes": {
+            "format": "uint64",
+            "minimum": 0.0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "residentMemoryBytes": {
+            "format": "uint64",
+            "minimum": 0.0,
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
       "ServerRequestResolvedNotification": {
         "$schema": "http://json-schema.org/draft-07/schema#",
         "properties": {
@@ -19763,6 +19928,13 @@
               },
               "status": {
                 "type": "string"
+              },
+              "transparentBackground": {
+                "default": null,
+                "type": [
+                  "boolean",
+                  "null"
+                ]
               },
               "type": {
                 "enum": [

@@ -98,7 +98,7 @@ export function parseResponse<
     },
   );
 
-  const parsed: Omit<ParsedResponse<ParsedT>, 'output_parsed'> = Object.assign({}, response, { output });
+  const parsed: Omit<ParsedResponse<ParsedT>, 'output_parsed'> = { ...response, output };
   if (needsOutputText(response, parsed)) {
     addOutputText(parsed);
   }
@@ -221,10 +221,11 @@ function parseToolCall<Params extends ResponseCreateParamsBase>(
   return {
     ...toolCall,
     ...toolCall,
-    parsed_arguments:
-      isAutoParsableTool(inputTool) ? inputTool.$parseRaw(toolCall.arguments)
-      : inputTool?.strict ? JSON.parse(toolCall.arguments)
-      : null,
+    parsed_arguments: isAutoParsableTool(inputTool)
+      ? inputTool.$parseRaw(toolCall.arguments)
+      : inputTool?.strict
+        ? JSON.parse(toolCall.arguments)
+        : null,
   };
 }
 

@@ -2009,6 +2009,7 @@ dependencies = [
  "codex-connectors",
  "codex-core",
  "codex-core-plugins",
+ "codex-diagnostics",
  "codex-exec-server",
  "codex-extension-api",
  "codex-external-agent-migration",
@@ -2035,6 +2036,7 @@ dependencies = [
  "codex-otel",
  "codex-plugin",
  "codex-protocol",
+ "codex-queue-extension",
  "codex-rmcp-client",
  "codex-rollout",
  "codex-sandboxing",
@@ -2141,6 +2143,7 @@ dependencies = [
  "codex-experimental-api-macros",
  "codex-extension-items",
  "codex-protocol",
+ "codex-secrets",
  "codex-shell-command",
  "codex-utils-absolute-path",
  "codex-utils-cargo-bin",
@@ -2341,6 +2344,7 @@ dependencies = [
  "codex-connectors",
  "codex-core",
  "codex-git-utils",
+ "codex-http-client",
  "codex-login",
  "codex-model-provider",
  "codex-plugin",
@@ -2403,6 +2407,7 @@ dependencies = [
  "codex-state",
  "codex-stdio-to-uds",
  "codex-terminal-detection",
+ "codex-thread-store",
  "codex-tui",
  "codex-utils-absolute-path",
  "codex-utils-cargo-bin",
@@ -2564,13 +2569,17 @@ dependencies = [
  "codex-utils-cargo-bin",
  "futures",
  "pretty_assertions",
+ "prost",
  "serde_json",
  "tempfile",
  "tokio",
+ "tokio-stream",
  "tokio-tungstenite",
  "tokio-util",
+ "tonic",
  "tracing",
  "tracing-subscriber",
+ "uuid",
 ]
 
 [[package]]
@@ -2578,11 +2587,17 @@ name = "codex-code-mode-protocol"
 version = "0.0.0"
 dependencies = [
  "codex-protocol",
+ "glob",
  "pretty_assertions",
+ "prost",
+ "protoc-bin-vendored",
  "serde",
  "serde_json",
  "tokio",
  "tokio-util",
+ "tonic",
+ "tonic-prost",
+ "tonic-prost-build",
 ]
 
 [[package]]
@@ -2720,7 +2735,7 @@ dependencies = [
  "codex-connectors",
  "codex-context-fragments",
  "codex-core-plugins",
- "codex-core-skills",
+ "codex-diagnostics",
  "codex-exec-server",
  "codex-exec-server-test-support",
  "codex-execpolicy",
@@ -2761,6 +2776,7 @@ dependencies = [
  "codex-thread-store",
  "codex-tools",
  "codex-utils-absolute-path",
+ "codex-utils-audio",
  "codex-utils-cache",
  "codex-utils-cargo-bin",
  "codex-utils-home-dir",
@@ -2802,7 +2818,6 @@ dependencies = [
  "sha1 0.10.6",
  "shlex",
  "similar",
- "symphonia",
  "tempfile",
  "test-case",
  "test-log",
@@ -2857,7 +2872,6 @@ dependencies = [
  "codex-app-server-protocol",
  "codex-config",
  "codex-connectors",
- "codex-core-skills",
  "codex-exec-server",
  "codex-exec-server-test-support",
  "codex-git-utils",
@@ -2902,36 +2916,11 @@ dependencies = [
 ]
 
 [[package]]
-name = "codex-core-skills"
+name = "codex-diagnostics"
 version = "0.0.0"
 dependencies = [
- "anyhow",
- "codex-analytics",
- "codex-config",
- "codex-context-fragments",
- "codex-exec-server",
- "codex-login",
- "codex-model-provider",
- "codex-otel",
- "codex-protocol",
- "codex-shell-command",
- "codex-skills",
- "codex-utils-absolute-path",
- "codex-utils-path-uri",
- "codex-utils-plugins",
- "dirs",
- "dunce",
- "futures",
+ "libc",
  "pretty_assertions",
- "serde",
- "serde_json",
- "serde_yaml",
- "shlex",
- "tempfile",
- "tokio",
- "toml 0.9.11+spec-1.1.0",
- "tracing",
- "zip",
 ]
 
 [[package]]
@@ -2991,6 +2980,7 @@ dependencies = [
  "bytes",
  "clatter",
  "codex-api",
+ "codex-config",
  "codex-exec-server-protocol",
  "codex-exec-server-test-support",
  "codex-file-system",
@@ -3001,11 +2991,13 @@ dependencies = [
  "codex-sandboxing",
  "codex-test-binary-support",
  "codex-utils-absolute-path",
+ "codex-utils-home-dir",
  "codex-utils-path-uri",
  "codex-utils-pty",
  "codex-utils-rustls-provider",
  "codex-websocket-client",
  "ctor 0.6.3",
+ "dirs",
  "futures",
  "http 1.4.0",
  "libc",
@@ -3095,6 +3087,7 @@ dependencies = [
  "codex-protocol",
  "codex-tools",
  "codex-utils-absolute-path",
+ "codex-utils-path-uri",
  "pretty_assertions",
  "serde_json",
  "tokio",
@@ -3161,6 +3154,7 @@ dependencies = [
  "anyhow",
  "codex-login",
  "codex-protocol",
+ "log",
  "mime_guess",
  "pretty_assertions",
  "sentry",
@@ -3230,6 +3224,7 @@ dependencies = [
  "codex-protocol",
  "codex-utils-absolute-path",
  "codex-utils-path-uri",
+ "codex-utils-pty",
  "futures",
  "gix",
  "once_cell",
@@ -3293,12 +3288,14 @@ name = "codex-hooks"
 version = "0.0.0"
 dependencies = [
  "anyhow",
+ "async-channel",
  "chrono",
  "codex-config",
  "codex-plugin",
  "codex-protocol",
  "codex-utils-absolute-path",
  "codex-utils-output-truncation",
+ "codex-utils-pty",
  "futures",
  "pretty_assertions",
  "regex",
@@ -3479,6 +3476,7 @@ dependencies = [
  "codex-async-utils",
  "codex-config",
  "codex-connectors",
+ "codex-diagnostics",
  "codex-exec-server",
  "codex-exec-server-test-support",
  "codex-login",
@@ -3879,6 +3877,27 @@ dependencies = [
 ]
 
 [[package]]
+name = "codex-queue-extension"
+version = "0.0.0"
+dependencies = [
+ "anyhow",
+ "codex-core",
+ "codex-extension-api",
+ "codex-protocol",
+ "codex-state",
+ "codex-thread-store",
+ "codex-utils-absolute-path",
+ "core_test_support",
+ "pretty_assertions",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.18",
+ "tokio",
+ "tracing",
+ "uuid",
+]
+
+[[package]]
 name = "codex-response-debug-context"
 version = "0.0.0"
 dependencies = [
@@ -4082,17 +4101,23 @@ name = "codex-skills"
 version = "0.0.0"
 dependencies = [
  "codex-protocol",
+ "codex-shell-command",
  "codex-utils-absolute-path",
  "codex-utils-path-uri",
  "include_dir",
+ "pretty_assertions",
+ "serde",
+ "serde_yaml",
+ "shlex",
  "thiserror 2.0.18",
+ "tracing",
 ]
 
 [[package]]
 name = "codex-skills-extension"
 version = "0.0.0"
 dependencies = [
- "codex-core-skills",
+ "codex-config",
  "codex-exec-server",
  "codex-extension-api",
  "codex-mcp",
@@ -4102,15 +4127,23 @@ dependencies = [
  "codex-skills",
  "codex-tools",
  "codex-utils-absolute-path",
+ "codex-utils-cargo-bin",
  "codex-utils-path-uri",
+ "codex-utils-plugins",
  "codex-utils-string",
+ "dirs",
+ "dunce",
  "futures",
+ "insta",
  "opentelemetry_sdk",
  "pretty_assertions",
  "schemars 0.8.22",
  "serde",
  "serde_json",
+ "serde_yaml",
+ "tempfile",
  "tokio",
+ "toml 0.9.11+spec-1.1.0",
  "tracing",
  "url",
 ]
@@ -4191,6 +4224,7 @@ dependencies = [
  "codex-state",
  "codex-utils-absolute-path",
  "codex-utils-path",
+ "codex-utils-path-uri",
  "futures",
  "pretty_assertions",
  "pulldown-cmark",
@@ -4209,6 +4243,7 @@ dependencies = [
 name = "codex-tools"
 version = "0.0.0"
 dependencies = [
+ "bitflags 2.13.1",
  "codex-code-mode",
  "codex-connectors",
  "codex-extension-items",
@@ -4373,6 +4408,20 @@ name = "codex-utils-approval-presets"
 version = "0.0.0"
 dependencies = [
  "codex-protocol",
+]
+
+[[package]]
+name = "codex-utils-audio"
+version = "0.0.0"
+dependencies = [
+ "base64 0.22.1",
+ "codex-protocol",
+ "codex-utils-cache",
+ "codex-utils-string",
+ "pretty_assertions",
+ "symphonia",
+ "thiserror 2.0.18",
+ "tracing",
 ]
 
 [[package]]
@@ -4649,6 +4698,21 @@ dependencies = [
  "tracing-appender",
  "windows 0.58.0",
  "windows-sys 0.52.0",
+]
+
+[[package]]
+name = "codex-workload-identity"
+version = "0.0.0"
+dependencies = [
+ "codex-http-client",
+ "pretty_assertions",
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror 2.0.18",
+ "tokio",
+ "url",
+ "wiremock",
 ]
 
 [[package]]
@@ -10648,6 +10712,70 @@ checksum = "8991c4cbdb8bc5b11f0b074ffe286c30e523de90fee5ba8132f1399f23cb3dd7"
 dependencies = [
  "prost",
 ]
+
+[[package]]
+name = "protoc-bin-vendored"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d1c381df33c98266b5f08186583660090a4ffa0889e76c7e9a5e175f645a67fa"
+dependencies = [
+ "protoc-bin-vendored-linux-aarch_64",
+ "protoc-bin-vendored-linux-ppcle_64",
+ "protoc-bin-vendored-linux-s390_64",
+ "protoc-bin-vendored-linux-x86_32",
+ "protoc-bin-vendored-linux-x86_64",
+ "protoc-bin-vendored-macos-aarch_64",
+ "protoc-bin-vendored-macos-x86_64",
+ "protoc-bin-vendored-win32",
+]
+
+[[package]]
+name = "protoc-bin-vendored-linux-aarch_64"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c350df4d49b5b9e3ca79f7e646fde2377b199e13cfa87320308397e1f37e1a4c"
+
+[[package]]
+name = "protoc-bin-vendored-linux-ppcle_64"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a55a63e6c7244f19b5c6393f025017eb5d793fd5467823a099740a7a4222440c"
+
+[[package]]
+name = "protoc-bin-vendored-linux-s390_64"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1dba5565db4288e935d5330a07c264a4ee8e4a5b4a4e6f4e83fad824cc32f3b0"
+
+[[package]]
+name = "protoc-bin-vendored-linux-x86_32"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8854774b24ee28b7868cd71dccaae8e02a2365e67a4a87a6cd11ee6cdbdf9cf5"
+
+[[package]]
+name = "protoc-bin-vendored-linux-x86_64"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b38b07546580df720fa464ce124c4b03630a6fb83e05c336fea2a241df7e5d78"
+
+[[package]]
+name = "protoc-bin-vendored-macos-aarch_64"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "89278a9926ce312e51f1d999fee8825d324d603213344a9a706daa009f1d8092"
+
+[[package]]
+name = "protoc-bin-vendored-macos-x86_64"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "81745feda7ccfb9471d7a4de888f0652e806d5795b61480605d4943176299756"
+
+[[package]]
+name = "protoc-bin-vendored-win32"
+version = "3.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "95067976aca6421a523e491fce939a3e65249bac4b977adee0ee9771568e8aa3"
 
 [[package]]
 name = "psl"

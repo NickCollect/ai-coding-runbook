@@ -44,9 +44,17 @@ export class EventStream<EventTypes extends BaseEvents> {
     // Unfortunately if we call `executor()` immediately we get runtime errors about
     // references to `this` before the `super()` constructor call returns.
     setTimeout(() => {
+      let failed = false;
+
       Promise.resolve()
         .then(executor)
+        .catch((error) => {
+          failed = true;
+          this.#handleError(error);
+        })
         .then(() => {
+          if (failed) return;
+
           try {
             this._emitFinal();
           } catch (error) {
@@ -54,7 +62,7 @@ export class EventStream<EventTypes extends BaseEvents> {
             return;
           }
           this._emit('end');
-        }, this.#handleError.bind(this));
+        });
     }, 0);
   }
 
@@ -123,7 +131,7 @@ export class EventStream<EventTypes extends BaseEvents> {
     const listeners = this.#listeners[event];
     if (!listeners) return this;
     const index = listeners.findIndex((l) => l.listener === listener);
-    if (index >= 0) listeners.splice(index, 1);
+    if (index !== -1) listeners.splice(index, 1);
     return this;
   }
 
@@ -153,9 +161,11 @@ export class EventStream<EventTypes extends BaseEvents> {
   emitted<Event extends keyof EventTypes>(
     event: Event,
   ): Promise<
-    EventParameters<EventTypes, Event> extends [infer Param] ? Param
-    : EventParameters<EventTypes, Event> extends [] ? void
-    : EventParameters<EventTypes, Event>
+    EventParameters<EventTypes, Event> extends [infer Param]
+      ? Param
+      : EventParameters<EventTypes, Event> extends []
+        ? void
+        : EventParameters<EventTypes, Event>
   > {
     return new Promise((resolve, reject) => {
       this.#catchingPromiseCreated = true;

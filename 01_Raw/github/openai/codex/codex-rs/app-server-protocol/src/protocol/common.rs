@@ -478,6 +478,14 @@ client_request_definitions! {
         response: v1::InitializeResponse,
     },
 
+    #[experimental("server/diagnostics")]
+    /// Read content-free, process-local diagnostics.
+    ServerDiagnostics => "server/diagnostics" {
+        params: v2::ServerDiagnosticsParams,
+        serialization: None,
+        response: v2::ServerDiagnosticsResponse,
+    },
+
     /// NEW APIs
     // Thread lifecycle
     // Uses `inspect_params` because only some fields are experimental.
@@ -1171,7 +1179,7 @@ client_request_definitions! {
     },
     ExternalAgentConfigDetect => "externalAgentConfig/detect" {
         params: v2::ExternalAgentConfigDetectParams,
-        serialization: global("config"),
+        serialization: global("external-agent-detect"),
         response: v2::ExternalAgentConfigDetectResponse,
     },
     ExternalAgentConfigImport => "externalAgentConfig/import" {
@@ -2472,6 +2480,12 @@ mod tests {
                         "thread/started".to_string(),
                         "item/agentMessage/delta".to_string(),
                     ]),
+                    extensions: Some(std::collections::HashMap::from([(
+                        "io.modelcontextprotocol/ui".to_string(),
+                        json!({
+                            "mimeTypes": ["text/html;profile=mcp-app"],
+                        }),
+                    )])),
                 }),
             },
         };
@@ -2493,7 +2507,12 @@ mod tests {
                         "optOutNotificationMethods": [
                             "thread/started",
                             "item/agentMessage/delta"
-                        ]
+                        ],
+                        "extensions": {
+                            "io.modelcontextprotocol/ui": {
+                                "mimeTypes": ["text/html;profile=mcp-app"]
+                            }
+                        }
                     }
                 }
             }),
@@ -2520,7 +2539,12 @@ mod tests {
                     "optOutNotificationMethods": [
                         "thread/started",
                         "item/agentMessage/delta"
-                    ]
+                    ],
+                    "extensions": {
+                        "io.modelcontextprotocol/ui": {
+                            "mimeTypes": ["text/html;profile=mcp-app"]
+                        }
+                    }
                 }
             }
         }))?;
@@ -2543,6 +2567,12 @@ mod tests {
                             "thread/started".to_string(),
                             "item/agentMessage/delta".to_string(),
                         ]),
+                        extensions: Some(std::collections::HashMap::from([(
+                            "io.modelcontextprotocol/ui".to_string(),
+                            json!({
+                                "mimeTypes": ["text/html;profile=mcp-app"],
+                            }),
+                        )])),
                     }),
                 },
             }
