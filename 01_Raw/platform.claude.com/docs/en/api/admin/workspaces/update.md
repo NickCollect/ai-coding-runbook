@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/update
-fetched_at: 2026-07-20T04:31:24.341171+00:00
+fetched_at: 2026-08-10T03:07:51.134616+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,19 +20,27 @@ Update Workspace
 
   Data residency configuration for the workspace.
 
-  - `allowed_inference_geos: optional array of string or "unrestricted"`
+  - `allowed_inference_geos: optional array of "global" or "us" or "unrestricted"`
 
     Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
-    - `array of string`
+    - `array of "global" or "us"`
+
+      - `"global"`
+
+      - `"us"`
 
     - `"unrestricted"`
 
       - `"unrestricted"`
 
-  - `default_inference_geo: optional string`
+  - `default_inference_geo: optional "global" or "us"`
 
     Default inference geo applied when requests omit the parameter. Must be a member of allowed_inference_geos unless allowed_inference_geos is `"unrestricted"`.
+
+    - `"global"`
+
+    - `"us"`
 
 - `external_key_id: optional string`
 

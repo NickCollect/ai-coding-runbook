@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/claude-platform-on-aws
-fetched_at: 2026-07-27T04:31:48.721358+00:00
+fetched_at: 2026-08-10T03:07:43.277123+00:00
 fetch_method: mintlify_md
 ---
 
@@ -548,7 +548,7 @@ Claude Platform on AWS uses Claude API endpoints directly, which means you get f
 * **Prompt caching:** Cache tools, system prompts, and message history to reduce latency and cost. All prompt caching capabilities (5-minute TTL, 1-hour TTL, and automatic caching) are available.
 * **Files API:** Upload and reference files across requests.
 * **Customer-managed encryption keys (CMEK):** [CMEK](/docs/en/manage-claude/cmek) is available with [AWS KMS](/docs/en/manage-claude/cmek-aws-kms) keys only. Google Cloud KMS and Azure Key Vault keys cannot be registered. Create, validate, and attach keys in the [Claude Console](#using-the-claude-console). The `external_keys` Admin API endpoints are not currently available. The key must be in the same AWS region as the workspace it is attached to.
-* **Compliance API:** The [Compliance API](/docs/en/manage-claude/compliance-api) is available. Access is authorized through AWS IAM.
+* **Compliance API:** The [Compliance API](/docs/en/manage-claude/compliance-api) is available. Access is authorized through the AWS IAM [`ListComplianceActivities` action](/docs/en/api/claude-platform-on-aws-iam-actions#compliance).
 
 See the [comparison table](#claude-platform-on-aws-vs-amazon-bedrock) for feature-availability differences from Amazon Bedrock.
 
@@ -801,7 +801,7 @@ The **Through AWS gateway** column indicates whether the page reads and writes d
 | --------------------- | ------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Usage**             | Yes           | No                  | View token usage by model, workspace, and dimension. Data can take a few minutes to appear after a request.                                           |
 | **Cost**              | Yes           | No                  | View cost breakdowns by model and workspace. AWS Cost Explorer shows the aggregated [Claude Consumption Unit (CCU)](#billing) line item.              |
-| **Limits**            | Yes           | No                  | View rate limits (read-only). Tier increases go through your Anthropic account representative; see [Rate limits and quotas](#rate-limits-and-quotas). |
+| **Rate limits**       | Yes           | No                  | View rate limits (read-only). Tier increases go through your Anthropic account representative; see [Rate limits and quotas](#rate-limits-and-quotas). |
 | **Workspaces**        | Yes           | No                  | View per-region workspaces (read-only).                                                                                                               |
 | **Files**             | Yes           | Yes                 | View and manage uploaded files.                                                                                                                       |
 | **Skills**            | Yes           | Yes                 | View and manage Agent Skills.                                                                                                                         |
@@ -825,9 +825,9 @@ The Claude Console does not support organization switching for Claude Platform o
 
 Organizations on Claude Platform on AWS are placed on the Start tier. Anthropic manages rate limits directly, not through AWS quota systems.
 
-Organizations on Claude Platform on AWS do not move between usage tiers automatically. Usage-based tier advancement applies to first-party Claude API organizations, not to organizations billed through AWS Marketplace. The self-service **Request rate limit increase** flow in the Claude Console is also not available: the Limits page directs you to your Anthropic account representative instead.
+Organizations on Claude Platform on AWS do not move between usage tiers automatically. Usage-based tier advancement applies to first-party Claude API organizations, not to organizations billed through AWS Marketplace. The self-service **Request rate limit increase** flow in the Claude Console is also not available: the Rate limits page directs you to your Anthropic account representative instead.
 
-To request higher limits, contact your Anthropic account representative or [support](https://support.claude.com). Include the following in your request:
+To request higher limits, contact your Anthropic account representative or [Anthropic support](https://support.claude.com). Include the following in your request:
 
 * The models you need raised
 * Peak input tokens per minute and output tokens per minute for each model (not daily totals)
@@ -847,14 +847,14 @@ The Start, Build, and Scale usage tiers each carry a monthly spend cap; see [the
 
 You can also set your own monthly spend limit to cap what your organization spends:
 
-* **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit. On Claude Platform on AWS, spend limits are managed on the Billing page rather than the Limits page.
-* **Workspace spend limits:** Set monthly spend limits for individual workspaces from each workspace's limits settings.
+* **Organization spend limit:** Go to [Settings > Billing](/settings/billing) in the [Claude Console](#using-the-claude-console) to set a monthly spend limit.
+* **Workspace spend limits:** Set monthly spend limits for individual workspaces from each workspace's **Spend limits** settings.
 
 The spend limits you set are soft limits: spend is calculated at list prices and can take about two hours to reflect recent usage.
 
 ## Monitoring and logging
 
-AWS CloudTrail can capture all requests to Claude Platform on AWS. Workspace, vault, and webhook operations are logged as Management events by default. Inference, batch, file, skill, model, user profile, and Claude Managed Agents operations (other than vaults and webhooks) are classified as Data events and require explicit data event logging configuration, which incurs additional CloudTrail charges. See the [IAM actions reference](/docs/en/api/claude-platform-on-aws-iam-actions#route-to-action-mapping) for the full event type classification and the [AWS CloudTrail documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for configuration details.
+AWS CloudTrail can capture all requests to Claude Platform on AWS. Workspace, compliance, vault, and webhook operations are logged as Management events by default. Inference, batch, file, skill, model, user profile, and Claude Managed Agents operations (other than vaults and webhooks) are classified as Data events and require explicit data event logging configuration, which incurs additional CloudTrail charges. See the [IAM actions reference](/docs/en/api/claude-platform-on-aws-iam-actions#route-to-action-mapping) for the full event type classification and the [AWS CloudTrail documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for configuration details.
 
 ### Request IDs
 

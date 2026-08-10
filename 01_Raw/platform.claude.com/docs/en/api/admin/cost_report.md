@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/cost_report
-fetched_at: 2026-07-06T05:04:34.057782+00:00
+fetched_at: 2026-08-10T03:07:51.730715+00:00
 fetch_method: mintlify_md
 ---
 
@@ -99,10 +99,15 @@ Get Cost Report
 
         Description of the cost item. `null` if not grouping by description.
 
-      - `inference_geo: string`
+      - `inference_geo: "global" or "not_available" or "us"`
 
-        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+        InferenceGeo values extended with NOT_AVAILABLE for filtering usage data.
+
+        - `"global"`
+
+        - `"not_available"`
+
+        - `"us"`
 
       - `model: string`
 
@@ -179,7 +184,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
     }
   ],
   "has_more": true,
-  "next_page": "2019-12-27T18:11:19.117Z"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -231,10 +236,15 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         Description of the cost item. `null` if not grouping by description.
 
-      - `inference_geo: string`
+      - `inference_geo: "global" or "not_available" or "us"`
 
-        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+        InferenceGeo values extended with NOT_AVAILABLE for filtering usage data.
+
+        - `"global"`
+
+        - `"not_available"`
+
+        - `"us"`
 
       - `model: string`
 

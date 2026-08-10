@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/overview
-fetched_at: 2026-07-27T04:31:51.375481+00:00
+fetched_at: 2026-08-10T03:07:46.478452+00:00
 fetch_method: mintlify_md
 ---
 
@@ -41,7 +41,7 @@ The Claude API includes the following APIs:
 * **[Files API](/docs/en/api/beta/files/upload)**: Upload and manage files for use across multiple API calls (`POST /v1/files`, `GET /v1/files`)
 * **[Skills API](/docs/en/api/skills/create-skill)**: Create and manage custom agent skills (`POST /v1/skills`, `GET /v1/skills`)
 * **[Agents API](/docs/en/managed-agents/agent-setup)**: Define reusable, versioned agent configurations for Claude Managed Agents (`POST /v1/agents`, `GET /v1/agents`)
-* **[Sessions API](/docs/en/managed-agents/sessions)**: Run stateful agent sessions in managed cloud sandboxes (`POST /v1/sessions`, `GET /v1/sessions/{id}/stream`)
+* **[Sessions API](/docs/en/managed-agents/sessions)**: Run stateful agent sessions in managed cloud sandboxes (`POST /v1/sessions`, `GET /v1/sessions/{id}/events/stream`)
 * **[Environments API](/docs/en/managed-agents/environments)**: Configure sandbox templates for agent sessions (`POST /v1/environments`, `GET /v1/environments`)
 
 For the complete API reference with all endpoints, parameters, and response schemas, explore the API reference pages listed in the navigation. To access beta features, see [Beta headers](/docs/en/api/beta-headers).
@@ -165,7 +165,7 @@ The API enforces rate limits and spend limits to prevent misuse and manage capac
 * **Spend limits**: Maximum monthly cost for API usage
 * **Rate limits**: Maximum number of requests per minute (RPM) and tokens per minute (TPM)
 
-You can view your organization's current limits in the [Console](/settings/limits). For higher limits, use **Request rate limit increase** on the [Limits](/settings/limits) page.
+You can view your rate limits on the [Rate limits](/settings/limits) page and your spend limits on the [Billing](/settings/billing) page in the Console. For higher rate limits or a higher monthly spend cap, use **Request rate limit increase** on the Rate limits page.
 
 For detailed information about limits, tiers, and the token bucket algorithm used for rate limiting, see [Rate limits](/docs/en/api/rate-limits).
 

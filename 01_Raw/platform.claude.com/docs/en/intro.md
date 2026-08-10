@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/intro
-fetched_at: 2026-07-27T04:31:46.519570+00:00
+fetched_at: 2026-08-10T03:07:40.891272+00:00
 fetch_method: mintlify_md
 ---
 
@@ -45,6 +45,12 @@ Follow these steps to go from zero to a working Claude integration.
     Set up your environment, install an SDK, and send your first message to Claude.
 
     [Go to the quickstart](/docs/en/get-started)
+  </Step>
+
+  <Step title="Secure your credentials">
+    Set an expiration when you create your API key. Keep the key out of source control, client-side code, and prompts. Check whether your workload can use Workload Identity Federation instead of a static key.
+
+    [Read the authentication guide](/docs/en/manage-claude/authentication)
   </Step>
 
   <Step title="Understand the Messages API">

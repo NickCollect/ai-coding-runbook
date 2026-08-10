@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/api-and-data-retention
-fetched_at: 2026-07-27T04:31:49.890905+00:00
+fetched_at: 2026-08-10T03:07:44.690390+00:00
 fetch_method: mintlify_md
 ---
 
@@ -22,7 +22,7 @@ Different APIs and features have different storage needs. Where a feature does n
 * Only what is technically necessary for the feature to work is retained. Conversation content (your prompts and Claude's outputs) is not retained by default; the exception is [Covered Models](#model-specific-data-retention-requirements), which require 30-day retention.
 * Retained data is purged on the shortest practical time to live (TTL), and Anthropic aims to give customers control over how long data is retained. What is held, and the retention duration where a specific TTL applies, is documented on each feature's page.
 
-Several retention models sit outside the ZDR and HIPAA arrangements described on this page. Data accessible through the [Compliance API](/docs/en/manage-claude/compliance-api) follows its own retention model, the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) retains data for 6 years, and chat, file, and project content from claude.ai follows your organization's retention policy set in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls).
+Several retention models sit outside the ZDR and HIPAA arrangements described on this page. Data accessible through the [Compliance API](/docs/en/manage-claude/compliance-api) follows its own retention model: the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) and [remote session transcripts](/docs/en/manage-claude/compliance-content-data#retrieve-remote-sessions) retain data for 6 years, and chat, file, and project content from claude.ai follows your organization's retention policy set in [claude.ai > Organization settings > Data and privacy](https://claude.ai/admin-settings/data-privacy-controls).
 
 ## Zero data retention (ZDR)
 

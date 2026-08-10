@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/handling-stop-reasons
-fetched_at: 2026-07-27T04:31:46.655364+00:00
+fetched_at: 2026-08-10T03:07:41.090681+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1917,7 +1917,7 @@ Claude declined to generate a response. Safety classifiers return this stop reas
 </CodeGroup>
 
 <Tip>
-  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 (deprecated; see [Model deprecations](/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
+  If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1 (retired, except on Bedrock and Google Cloud; see [Model deprecations](/docs/en/about-claude/model-deprecations)), you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 </Tip>
 
 On a refusal, the `stop_details` object identifies the policy category that triggered it. The categories and the full refusal response shape are covered on [Refusals and fallback](/docs/en/build-with-claude/refusals-and-fallback#refusal-response). `stop_details` is `null` for all stop reasons other than `refusal`.

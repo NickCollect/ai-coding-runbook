@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/github
-fetched_at: 2026-07-27T04:31:49.058946+00:00
+fetched_at: 2026-08-10T03:07:43.908835+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ GitHub repositories are cached, so future sessions that use the same repository 
 
 ## GitHub MCP and session resources
 
-First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no auth token:
+First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no authentication token:
 
 <CodeGroup defaultLanguage="CLI">
   ```bash curl
@@ -112,7 +112,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   var agent = await client.Beta.Agents.Create(new()
   {
       Name = "Code Reviewer",
-      Model = new("claude-opus-5"),
+      Model = BetaManagedAgentsModel.ClaudeOpus5,
       System = "You are a code review assistant with access to GitHub.",
       McpServers =
       [
@@ -137,7 +137,7 @@ First, create an agent that declares the GitHub MCP server. The agent definition
   agent, err := client.Beta.Agents.New(ctx, anthropic.BetaAgentNewParams{
   	Name: "Code Reviewer",
   	Model: anthropic.BetaManagedAgentsModelConfigParams{
-  		ID: "claude-opus-5",
+  		ID: anthropic.BetaManagedAgentsModelClaudeOpus5,
   	},
   	System: anthropic.String("You are a code review assistant with access to GitHub."),
   	MCPServers: []anthropic.BetaManagedAgentsURLMCPServerParams{
@@ -384,6 +384,8 @@ Then create a session that mounts the GitHub repository:
 </CodeGroup>
 
 The `resources[].authorization_token` authenticates the repository clone operation and is not echoed in API responses.
+
+Mounting a repository also loads any skills stored in its root `.claude/skills` directory. Skills are discovered once per session, from the repository state checked out at session start. See [Load skills from a GitHub repository](/docs/en/managed-agents/skills#load-skills-from-a-github-repository).
 
 ## Token permissions
 

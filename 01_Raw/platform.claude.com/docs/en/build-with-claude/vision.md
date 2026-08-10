@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/vision
-fetched_at: 2026-07-27T04:31:48.107156+00:00
+fetched_at: 2026-08-10T03:07:42.733203+00:00
 fetch_method: mintlify_md
 ---
 
@@ -72,8 +72,8 @@ On the API, provide images to Claude as `image` content blocks using one of thre
   ```
 
   ```bash CLI
-  curl -sSo ./image.jpg \
-    https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
+  curl -sSo ./vision-example.jpg \
+    https://platform.claude.com/docs/images/vision-example.jpg
 
   ant messages create <<'YAML'
   model: claude-opus-5
@@ -85,7 +85,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
           source:
             type: base64
             media_type: image/jpeg
-            data: "@./image.jpg"
+            data: "@./vision-example.jpg"
         - type: text
           text: Describe this image.
   YAML
@@ -317,7 +317,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
               "type": "image",
               "source": {
                 "type": "url",
-                "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+                "url": "https://platform.claude.com/docs/images/vision-example.jpg"
               }
             },
             {
@@ -340,7 +340,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
         - type: image
           source:
             type: url
-            url: https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
+            url: https://platform.claude.com/docs/images/vision-example.jpg
         - type: text
           text: Describe this image.
   YAML
@@ -359,7 +359,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
                       "type": "image",
                       "source": {
                           "type": "url",
-                          "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                          "url": "https://platform.claude.com/docs/images/vision-example.jpg",
                       },
                   },
                   {"type": "text", "text": "Describe this image."},
@@ -386,7 +386,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
             type: "image",
             source: {
               type: "url",
-              url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+              url: "https://platform.claude.com/docs/images/vision-example.jpg"
             }
           },
           {
@@ -422,7 +422,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
                   new ContentBlockParam(new ImageBlockParam(
                       new ImageBlockParamSource(new UrlImageSource()
                       {
-                          Url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                          Url = "https://platform.claude.com/docs/images/vision-example.jpg",
                       })
                   )),
                   new ContentBlockParam(new TextBlockParam("Describe this image.")),
@@ -443,7 +443,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
   			anthropic.NewImageBlock(anthropic.URLImageSourceParam{
-  				URL: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+  				URL: "https://platform.claude.com/docs/images/vision-example.jpg",
   			}),
   			anthropic.NewTextBlock("Describe this image."),
   		),
@@ -464,9 +464,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
       ImageBlockParam.builder()
         .source(
           UrlImageSource.builder()
-            .url(
-              "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
-            )
+            .url("https://platform.claude.com/docs/images/vision-example.jpg")
             .build()
         )
         .build()
@@ -498,7 +496,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
                       'type' => 'image',
                       'source' => [
                           'type' => 'url',
-                          'url' => 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg',
+                          'url' => 'https://platform.claude.com/docs/images/vision-example.jpg',
                       ],
                   ],
                   ['type' => 'text', 'text' => 'Describe this image.'],
@@ -525,7 +523,7 @@ On the API, provide images to Claude as `image` content blocks using one of thre
             type: "image",
             source: {
               type: "url",
-              url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+              url: "https://platform.claude.com/docs/images/vision-example.jpg"
             }
           },
           { type: "text", text: "Describe this image." }
@@ -549,11 +547,11 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 <CodeGroup>
   ```bash cURL
   # First, upload your image to the Files API
-  curl -X POST https://api.anthropic.com/v1/files \
+  FILE_ID=$(curl -sS -X POST https://api.anthropic.com/v1/files \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: files-api-2025-04-14" \
-    -F "file=@image.jpg"
+    -F "file=@vision-example.jpg" | jq -r '.id')
 
   # Then use the returned file_id in your message
   curl https://api.anthropic.com/v1/messages \
@@ -561,37 +559,39 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
     -H "anthropic-version: 2023-06-01" \
     -H "anthropic-beta: files-api-2025-04-14" \
     -H "content-type: application/json" \
-    -d '{
-      "model": "claude-opus-5",
-      "max_tokens": 1024,
-      "messages": [
-        {
-          "role": "user",
-          "content": [
-            {
-              "type": "image",
-              "source": {
-                "type": "file",
-                "file_id": "file_abc123"
-              }
-            },
-            {
-              "type": "text",
-              "text": "Describe this image."
+    -d @- <<EOF
+  {
+    "model": "claude-opus-5",
+    "max_tokens": 1024,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "source": {
+              "type": "file",
+              "file_id": "$FILE_ID"
             }
-          ]
-        }
-      ]
-    }'
+          },
+          {
+            "type": "text",
+            "text": "Describe this image."
+          }
+        ]
+      }
+    ]
+  }
+  EOF
   ```
 
   ```bash CLI
-  curl -sSo image.jpg \
-    https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg
+  curl -sSo vision-example.jpg \
+    https://platform.claude.com/docs/images/vision-example.jpg
 
   # First, upload your image to the Files API
   FILE_ID=$(ant beta:files upload \
-    --file ./image.jpg \
+    --file ./vision-example.jpg \
     --transform id --raw-output)
 
   # Then use the returned file_id in your message
@@ -616,8 +616,8 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
   client = anthropic.Anthropic()
 
   # Upload the image file
-  with open("image.jpg", "rb") as f:
-      file_upload = client.beta.files.upload(file=("image.jpg", f, "image/jpeg"))
+  with open("vision-example.jpg", "rb") as f:
+      file_upload = client.beta.files.upload(file=("vision-example.jpg", f, "image/jpeg"))
 
   # Use the uploaded file in a message
   message = client.beta.messages.create(
@@ -649,7 +649,9 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 
   // Upload the image file
   const fileUpload = await anthropic.beta.files.upload({
-    file: await toFile(fs.createReadStream("image.jpg"), undefined, { type: "image/jpeg" })
+    file: await toFile(fs.createReadStream("vision-example.jpg"), undefined, {
+      type: "image/jpeg"
+    })
   });
 
   // Use the uploaded file in a message
@@ -687,7 +689,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 
   // Upload the image file
   var fileUpload = await client.Beta.Files.Upload(
-      new FileUploadParams { File = File.OpenRead("image.jpg") });
+      new FileUploadParams { File = File.OpenRead("vision-example.jpg") });
 
   // Use the uploaded file in a message
   var response = await client.Beta.Messages.Create(
@@ -721,7 +723,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
   client := anthropic.NewClient()
 
   // Upload the image file
-  file, err := os.Open("image.jpg")
+  file, err := os.Open("vision-example.jpg")
   if err != nil {
   	log.Fatal(err)
   }
@@ -768,7 +770,9 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
         .beta()
         .files()
         .upload(
-          FileUploadParams.builder().file(Files.newInputStream(Path.of("image.jpg"))).build()
+          FileUploadParams.builder()
+            .file(Files.newInputStream(Path.of("vision-example.jpg")))
+            .build()
         );
 
       // Use the uploaded file in a message
@@ -796,7 +800,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 
   // Upload the image file
   $fileUpload = $client->beta->files->upload(
-      file: fopen('image.jpg', 'r'),
+      file: fopen('vision-example.jpg', 'r'),
   );
 
   // Use the uploaded file in a message
@@ -826,7 +830,7 @@ For images you'll use repeatedly or when you want to avoid encoding overhead, us
 
   # Upload the image file
   file_upload = client.beta.files.upload(
-    file: File.open("image.jpg", "rb")
+    file: File.open("vision-example.jpg", "rb")
   )
 
   # Use the uploaded file in a message

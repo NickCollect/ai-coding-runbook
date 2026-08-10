@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/data-residency
-fetched_at: 2026-07-27T04:31:49.803192+00:00
+fetched_at: 2026-08-10T03:07:44.712357+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Data residency controls let you manage where your data is processed and stored. 
 * **Workspace geo:** Controls where data is stored at rest and where endpoint processing (such as image transcoding and code execution) happens. Configured at the workspace level in the [Claude Console](https://platform.claude.com).
 
 <Note>
-  [Claude Managed Agents](/docs/en/managed-agents/overview) does not support the `inference_geo` parameter, but respects the Workspace geo configured in Console. With [self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes), tool execution and the sandbox filesystem stay on infrastructure you control.
+  [Claude Managed Agents](/docs/en/managed-agents/overview) supports geographic pinning at the agent level: `inference_geo` on an [agent's model configuration](/docs/en/managed-agents/agent-setup) pins the geography that serves model requests for sessions running that agent, with per-session overrides at session create. Agents without a pin follow the workspace's default inference geo on each request. Managed Agents also respects the Workspace geo configured in Console, and with [self-hosted sandboxes](/docs/en/managed-agents/self-hosted-sandboxes), tool execution and the sandbox filesystem stay on infrastructure you control.
 </Note>
 
 ## Inference geo
@@ -37,18 +37,18 @@ The `inference_geo` parameter controls where model inference runs for a specific
 <CodeGroup>
   ```bash cURL
   curl https://api.anthropic.com/v1/messages \
-      --header "x-api-key: $ANTHROPIC_API_KEY" \
-      --header "anthropic-version: 2023-06-01" \
-      --header "content-type: application/json" \
-      --data '{
-          "model": "claude-opus-5",
-          "max_tokens": 1024,
-          "inference_geo": "us",
-          "messages": [{
-              "role": "user",
-              "content": "Summarize the key points of this document."
-          }]
-      }'
+    -H "x-api-key: $ANTHROPIC_API_KEY" \
+    -H "anthropic-version: 2023-06-01" \
+    -H "content-type: application/json" \
+    -d '{
+      "model": "claude-opus-5",
+      "max_tokens": 1024,
+      "inference_geo": "us",
+      "messages": [{
+        "role": "user",
+        "content": "Summarize the key points of this document."
+      }]
+    }'
   ```
 
   ```bash CLI
@@ -246,7 +246,7 @@ These settings can be configured through the Console or the [Admin API](/docs/en
 
 ## Workspace geo
 
-Workspace geo is set when you create a workspace and can't be changed afterwards. Currently, `"us"` is the only available workspace geo.
+Workspace geo is set when you create a workspace and can't be changed afterward. Currently, `"us"` is the only available workspace geo.
 
 To set workspace geo, create a new workspace in the [Console](https://platform.claude.com):
 
@@ -255,7 +255,7 @@ To set workspace geo, create a new workspace in the [Console](https://platform.c
 3. Select the workspace geo.
 
 <Note>
-  **Claude Platform on AWS:** Workspace geo is not configurable. Workspaces are provisioned through the AWS Console, and the Claude Console Workspaces page is read-only. Claude Managed Agents sessions on this platform run with an effective Workspace geo of `"us"`, which is currently the only available workspace geo. See [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) for data residency considerations specific to that platform.
+  **Claude Platform on AWS:** Workspace geo is not configurable. Claude Managed Agents sessions on this platform run with an effective Workspace geo of `"us"`, which is currently the only available workspace geo. See [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws) for data residency considerations specific to that platform.
 </Note>
 
 ## Pricing
@@ -267,6 +267,8 @@ Data residency pricing varies by model generation:
 * **Older models:** Don't support `inference_geo` (see [Model availability](#model-availability)); standard pricing applies. Requests that include the parameter return a 400 error.
 
 This pricing applies to the Claude API (first-party) and Claude Platform on AWS. On Claude in Microsoft Foundry, the same 1.1x multiplier applies to deployments hosted on Azure that use the US Data Zone Standard deployment type. Partner-operated platforms (Bedrock and Google Cloud) have their own regional pricing. See [Data residency pricing](/docs/en/about-claude/pricing#data-residency-pricing) for details.
+
+The same multiplier applies to [Claude Managed Agents](/docs/en/managed-agents/overview): when an agent's [model configuration](/docs/en/managed-agents/agent-setup) pins `inference_geo` to `"us"`, model requests in sessions running that agent are priced at 1.1x the standard rate.
 
 <Note>
   If you have a [Priority Tier](/docs/en/api/service-tiers) commitment, the 1.1x multiplier for US-only inference also affects how tokens are counted against your Priority Tier capacity. Each token consumed with `inference_geo: "us"` draws down 1.1 tokens from your committed TPM, consistent with how other pricing multipliers (such as prompt caching) affect burndown rates.

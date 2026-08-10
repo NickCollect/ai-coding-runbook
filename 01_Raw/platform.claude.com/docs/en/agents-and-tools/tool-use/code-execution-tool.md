@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool
-fetched_at: 2026-07-27T04:31:47.441415+00:00
+fetched_at: 2026-08-10T03:07:41.980368+00:00
 fetch_method: mintlify_md
 ---
 
@@ -28,20 +28,19 @@ Code execution also powers dynamic filtering in the [web search](/docs/en/agents
 
 The code execution tool is available on the following models:
 
-| Model                                                                                                                       | Tool versions                                                                   |
-| --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| Claude Opus 5 (claude-opus-5)                                                                                               | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Fable 5 (claude-fable-5)                                                                                             | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Mythos 5 (claude-mythos-5)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Sonnet 5 (claude-sonnet-5)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.8 (claude-opus-4-8)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.7 (claude-opus-4-7)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.6 (claude-opus-4-6)                                                                                           | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Sonnet 4.6 (claude-sonnet-4-6)                                                                                       | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.5 (claude-opus-4-5-20251101)                                                                                  | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)                                                                              | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Haiku 4.5 (claude-haiku-4-5-20251001)                                                                                | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
-| Claude Opus 4.1 (claude-opus-4-1-20250805) (deprecated, see [Model deprecations](/docs/en/about-claude/model-deprecations)) | `code_execution_20250825`                                                       |
+| Model                                          | Tool versions                                                                   |
+| ---------------------------------------------- | ------------------------------------------------------------------------------- |
+| Claude Opus 5 (claude-opus-5)                  | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Fable 5 (claude-fable-5)                | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Mythos 5 (claude-mythos-5)              | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Sonnet 5 (claude-sonnet-5)              | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.8 (claude-opus-4-8)              | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.7 (claude-opus-4-7)              | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.6 (claude-opus-4-6)              | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Sonnet 4.6 (claude-sonnet-4-6)          | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Opus 4.5 (claude-opus-4-5-20251101)     | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
+| Claude Haiku 4.5 (claude-haiku-4-5-20251001)   | `code_execution_20250825`, `code_execution_20260120`, `code_execution_20260521` |
 
 Each tool version builds on the previous one:
 

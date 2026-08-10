@@ -1,12 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/about-claude/glossary
-fetched_at: 2026-07-27T04:31:50.637821+00:00
+fetched_at: 2026-08-10T03:07:45.563749+00:00
 fetch_method: mintlify_md
 ---
 
 # Glossary
 
-These concepts are not unique to Anthropic’s language models, but this page presents a brief summary of key terms.
+These concepts are not unique to Claude. This page presents a brief summary of key terms.
 
 ---
 
@@ -22,7 +22,7 @@ Fine-tuning is the process of further training a pretrained language model using
 
 ## HHH
 
-These three H's represent Anthropic's goals in ensuring that Claude is beneficial to society:
+HHH (helpful, honest, harmless) is a research framework that informs how Claude is trained to be beneficial to society. It is distinct from the Claude product tagline, "AI assistant for life and work."
 
 * A **helpful** AI will attempt to perform the task or answer the question posed to the best of its abilities, providing relevant and useful information.
 * An **honest** AI will give accurate information, and not hallucinate or confabulate. It will acknowledge its limitations and uncertainties when appropriate.
@@ -34,7 +34,7 @@ Latency, in the context of generative AI and large language models, refers to th
 
 ## LLM
 
-Large language models (LLMs) are AI language models with many parameters that are capable of performing a variety of surprisingly useful tasks. These models are trained on vast amounts of text data and can generate human-like text, answer questions, summarize information, and more. Claude is a conversational assistant based on a large language model that has been fine-tuned and trained using RLHF to be more helpful, honest, and harmless.
+Large language models (LLMs) are AI language models with many parameters that are capable of performing a variety of surprisingly useful tasks. These models are trained on vast amounts of text data and can generate human-like text, answer questions, summarize information, and more. Claude, an AI assistant for life and work built by Anthropic, is based on a large language model that has been fine-tuned and trained using RLHF.
 
 ## MCP (Model Context Protocol)
 

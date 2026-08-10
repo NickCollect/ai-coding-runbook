@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/usage_report/retrieve_claude_code
-fetched_at: 2026-07-20T04:31:25.282187+00:00
+fetched_at: 2026-08-10T03:07:51.747617+00:00
 fetch_method: mintlify_md
 ---
 
@@ -37,7 +37,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
       The user or API key that performed the Claude Code actions.
 
-      - `ClaudeCodeUserActor object { email_address, type }`
+      - `UserActor object { email_address, type }`
 
         - `email_address: string`
 
@@ -47,7 +47,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
           - `"user_actor"`
 
-      - `ClaudeCodeAPIActor object { api_key_name, type }`
+      - `APIActor object { api_key_name, type }`
 
         - `api_key_name: string`
 
@@ -95,7 +95,8 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
     - `date: string`
 
-      UTC date for the usage metrics in YYYY-MM-DD format.
+      UTC day the usage metrics cover, as an RFC 3339 timestamp at midnight UTC
+      (for example `2025-08-08T00:00:00Z`).
 
     - `model_breakdown: array of object { estimated_cost, model, tokens }`
 
@@ -208,7 +209,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
             "amount": 186,
             "currency": "USD"
           },
-          "model": "claude-sonnet-4-20250514",
+          "model": "claude-opus-4-8",
           "tokens": {
             "cache_creation": 2340,
             "cache_read": 8790,
@@ -221,7 +222,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
             "amount": 42,
             "currency": "USD"
           },
-          "model": "claude-3-5-haiku-20241022",
+          "model": "claude-sonnet-5",
           "tokens": {
             "cache_creation": 890,
             "cache_read": 3420,

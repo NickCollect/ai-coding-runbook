@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces
-fetched_at: 2026-07-20T04:31:24.301657+00:00
+fetched_at: 2026-08-10T03:07:51.030475+00:00
 fetch_method: mintlify_md
 ---
 
@@ -30,23 +30,33 @@ Create Workspace
 
   Data residency configuration for the workspace. If omitted, defaults to workspace_geo=`"us"`, allowed_inference_geos=`"unrestricted"`, and default_inference_geo=`"global"`.
 
-  - `allowed_inference_geos: optional array of string or "unrestricted"`
+  - `allowed_inference_geos: optional array of "global" or "us" or "unrestricted"`
 
     Permitted inference geo values. Defaults to 'unrestricted' if omitted, which allows all geos. Use the string 'unrestricted' to allow all geos, or a list of specific geos.
 
-    - `array of string`
+    - `array of "global" or "us"`
+
+      - `"global"`
+
+      - `"us"`
 
     - `"unrestricted"`
 
       - `"unrestricted"`
 
-  - `default_inference_geo: optional string`
+  - `default_inference_geo: optional "global" or "us"`
 
     Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of allowed_inference_geos unless allowed_inference_geos is `"unrestricted"`.
 
-  - `workspace_geo: optional string`
+    - `"global"`
+
+    - `"us"`
+
+  - `workspace_geo: optional "us"`
 
     Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
+
+    - `"us"`
 
 - `external_key_id: optional string`
 
@@ -471,19 +481,27 @@ Update Workspace
 
   Data residency configuration for the workspace.
 
-  - `allowed_inference_geos: optional array of string or "unrestricted"`
+  - `allowed_inference_geos: optional array of "global" or "us" or "unrestricted"`
 
     Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
-    - `array of string`
+    - `array of "global" or "us"`
+
+      - `"global"`
+
+      - `"us"`
 
     - `"unrestricted"`
 
       - `"unrestricted"`
 
-  - `default_inference_geo: optional string`
+  - `default_inference_geo: optional "global" or "us"`
 
     Default inference geo applied when requests omit the parameter. Must be a member of allowed_inference_geos unless allowed_inference_geos is `"unrestricted"`.
+
+    - `"global"`
+
+    - `"us"`
 
 - `external_key_id: optional string`
 
@@ -1239,7 +1257,7 @@ are not listed; use `GET /v1/organizations/rate_limits` to see those.
 
 ### Returns
 
-- `data: array of object { group_type, limits, models, type }`
+- `data: array of object { group_type, limits, models, 3 more }`
 
   Rate-limit entries for the workspace, one per group that has at least one override.
 
@@ -1279,11 +1297,19 @@ are not listed; use `GET /v1/organizations/rate_limits` to see those.
 
     Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
+  - `rate_limit_id: string`
+
+    The `id` of the RateLimit group this override applies to.
+
   - `type: "workspace_rate_limit"`
 
     Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
     - `"workspace_rate_limit"`
+
+  - `workspace_id: string`
+
+    ID of the Workspace this override applies to.
 
 - `next_page: string`
 
@@ -1314,7 +1340,9 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
       "models": [
         "string"
       ],
-      "type": "workspace_rate_limit"
+      "rate_limit_id": "rate_limit_id",
+      "type": "workspace_rate_limit",
+      "workspace_id": "workspace_id"
     }
   ],
   "next_page": "next_page"
@@ -1327,7 +1355,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 
 - `RateLimitListResponse object { data, next_page }`
 
-  - `data: array of object { group_type, limits, models, type }`
+  - `data: array of object { group_type, limits, models, 3 more }`
 
     Rate-limit entries for the workspace, one per group that has at least one override.
 
@@ -1367,11 +1395,19 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 
       Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
+    - `rate_limit_id: string`
+
+      The `id` of the RateLimit group this override applies to.
+
     - `type: "workspace_rate_limit"`
 
       Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
       - `"workspace_rate_limit"`
+
+    - `workspace_id: string`
+
+      ID of the Workspace this override applies to.
 
   - `next_page: string`
 

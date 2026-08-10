@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/citations
-fetched_at: 2026-07-27T04:31:46.756094+00:00
+fetched_at: 2026-08-10T03:07:41.239232+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,11 +8,11 @@ fetch_method: mintlify_md
 
 Ground Claude's responses in your source documents. Citations return the exact passages that support each claim, so you can verify answers and surface sources to your users.
 
----
+## Compatibility
+- [ZDR](/docs/en/manage-claude/api-and-data-retention): eligible (excludes [Covered Models](/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements))
+- Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
 
-<Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
-</Note>
+---
 
 Claude can provide detailed citations when answering questions about documents, helping you track and verify the sources behind each response.
 

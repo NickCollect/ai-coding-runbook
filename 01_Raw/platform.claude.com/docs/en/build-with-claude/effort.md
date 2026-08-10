@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/effort
-fetched_at: 2026-07-27T04:31:46.633365+00:00
+fetched_at: 2026-08-10T03:07:41.092264+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,17 +8,14 @@ fetch_method: mintlify_md
 
 Control how many tokens Claude uses when responding with the effort parameter, trading off between response thoroughness and token efficiency.
 
+## Compatibility
+- [ZDR](/docs/en/manage-claude/api-and-data-retention): eligible (excludes [Covered Models](/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements))
+- Supported models: `claude-fable-5`, `claude-mythos-5`, `claude-mythos-preview`, `claude-opus-5`, `claude-opus-4-8`, `claude-opus-4-7`, `claude-opus-4-6`, `claude-sonnet-5`, `claude-sonnet-4-6`, `claude-opus-4-5-20251101`
+- Platforms: Claude API, Claude Platform on AWS, Amazon Bedrock, Google Cloud, Microsoft Foundry
+
 ---
 
-<Note>
-  For how zero data retention (ZDR) applies to this feature, see [API and data retention](/docs/en/manage-claude/api-and-data-retention).
-</Note>
-
-The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on the following models with no beta header required.
-
-<Note>
-  The effort parameter is supported by Claude Fable 5, [Claude Mythos 5](https://anthropic.com/glasswing), Claude Opus 5, Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5, Claude Sonnet 4.6, and Claude Opus 4.5.
-</Note>
+The effort parameter lets you control how many tokens Claude spends when responding to requests. You can trade off between response thoroughness and token efficiency with a single model. The effort parameter is available on all supported models with no beta header required.
 
 <Tip>
   For how effort interacts with thinking and which control to reach for, see [Thinking and effort](/docs/en/build-with-claude/thinking#thinking-and-effort). Where adaptive thinking is available, effort is the recommended way to control thinking depth.
@@ -145,16 +142,12 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
 
   ```bash CLI
   ant messages create \
+    --model claude-opus-5 \
+    --max-tokens 4096 \
+    --output-config '{effort: medium}' \
+    --message '{role: user, content: "Analyze the trade-offs between microservices and monolithic architectures"}' \
     --transform 'content.#(type=="text").text' \
-    --raw-output <<'YAML'
-  model: claude-opus-5
-  max_tokens: 4096
-  messages:
-    - role: user
-      content: Analyze the trade-offs between microservices and monolithic architectures
-  output_config:
-    effort: medium
-  YAML
+    --raw-output
   ```
 
   ```python Python
@@ -207,7 +200,12 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
   {
       Model = Model.ClaudeOpus5,
       MaxTokens = 4096,
-      Messages = [new() { Role = Role.User, Content = "Analyze the trade-offs between microservices and monolithic architectures" }],
+      Messages = [
+          new() {
+              Role = Role.User,
+              Content = "Analyze the trade-offs between microservices and monolithic architectures"
+          }
+      ],
       OutputConfig = new OutputConfig
       {
           Effort = Effort.Medium
@@ -242,21 +240,25 @@ Reduce effort if a task completes but takes longer than necessary, or if you wan
   ```
 
   ```java Java
-  AnthropicClient client = AnthropicOkHttpClient.fromEnv();
+  import com.anthropic.models.messages.OutputConfig;
 
-  MessageCreateParams params = MessageCreateParams.builder()
-      .model(Model.CLAUDE_OPUS_5)
-      .maxTokens(4096L)
-      .addUserMessage("Analyze the trade-offs between microservices and monolithic architectures")
-      .outputConfig(OutputConfig.builder()
-          .effort(OutputConfig.Effort.MEDIUM)
-          .build())
-      .build();
+  void main() {
+      AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
-  Message response = client.messages().create(params);
-  response.content().stream()
-      .flatMap(block -> block.text().stream())
-      .forEach(textBlock -> IO.println(textBlock.text()));
+      MessageCreateParams params = MessageCreateParams.builder()
+          .model(Model.CLAUDE_OPUS_5)
+          .maxTokens(4096L)
+          .addUserMessage("Analyze the trade-offs between microservices and monolithic architectures")
+          .outputConfig(OutputConfig.builder()
+              .effort(OutputConfig.Effort.MEDIUM)
+              .build())
+          .build();
+
+      Message response = client.messages().create(params);
+      response.content().stream()
+          .flatMap(block -> block.text().stream())
+          .forEach(textBlock -> IO.println(textBlock.text()));
+  }
   ```
 
   ```php PHP

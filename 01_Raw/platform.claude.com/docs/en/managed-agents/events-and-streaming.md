@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/events-and-streaming
-fetched_at: 2026-07-27T04:31:49.078837+00:00
+fetched_at: 2026-08-10T03:07:43.816790+00:00
 fetch_method: mintlify_md
 ---
 
@@ -20,7 +20,7 @@ Communication with Claude Managed Agents is event-based. You send user events to
 
 Events flow in two directions.
 
-* **User events** and **system events** are what you send to the agent: `user.*` events kick off a session and steer it as it progresses; `system.message` appends system-level context that applies to the accompanying turn and all subsequent turns.
+* **User events** and **system events** are what you send to the agent: `user.*` events start a session and steer it as it progresses; `system.message` appends system-level context that applies to the accompanying turn and all subsequent turns.
 * **Session events**, **span events**, and **agent events** are sent to you for observability into your session state and agent progress. Stream connections that opt in also receive [event deltas](#event-deltas).
 
 Session, span, agent, user, and system event type strings follow a `{domain}.{action}` naming convention. The stream-only delta preview events (`event_start`, `event_delta`) are the exception. See [Event types](/docs/en/managed-agents/reference#event-types) in the reference for the full catalog.
@@ -1050,7 +1050,7 @@ Every persisted event includes a `processed_at` timestamp set when the event fin
       ```
 
       ```php PHP
-      // Filtering events by type is not currently available in the PHP SDK.
+      // In PHP, pass the types you want on EventListParams; see the Anthropic PHP SDK.
       ```
 
       ```ruby Ruby
@@ -1111,7 +1111,7 @@ Unlike persisted events, `event_start` and `event_delta` have no `id` or `proces
 
 ### Accumulate and reconcile
 
-Every SDK that supports event deltas includes an accumulator helper that keys the preview by the event's `id` and handles the `index` bookkeeping for you (event deltas are not currently available in the PHP SDK; see the PHP tabs that follow). The manual pattern also works in every language when you need custom bookkeeping: apply it to the generated event types.
+Every SDK that supports event deltas includes an accumulator helper that handles the `index` bookkeeping for you. The Go, Java, Ruby, and C# helpers also key the accumulating preview by the event's `id`; with the Python, TypeScript, and PHP helpers you keep that map yourself and fold each delta into the entry for its `id`. The manual pattern also works in every language when you need custom bookkeeping: apply it to the generated event types.
 
 In the manual pattern, treat the preview as a scratch buffer and the buffered event as the record. Key the buffer by `(event_id, index)`. Reconcile per model request: a turn opens with a single `session.status_running` event, then on a turn that completes normally each model request produces, in order, `span.model_request_start`, `event_start`, the `event_delta` events, the buffered `agent.message`, and finally [`span.model_request_end`](/docs/en/managed-agents/reference#event-types) (in the Span events tab). On the wire, this is the previewed portion of that sequence, interleaved with the connection's other buffered events:
 
@@ -1127,11 +1127,11 @@ The `event_delta` line repeats once per text fragment. Process each event as it 
 1. On `event_start`, note the announced `id`. The identifiers always line up: `event_start.event.id`, every `event_delta.event_id`, and the buffered `agent.message`'s `id` are the same value.
 2. On each `event_delta`, append `delta.content.text` to the entry at `(event_id, delta.index)` and render the running text. The first delta for an `index` creates that entry.
 3. When the buffered `agent.message` arrives, match it by `id`, discard the accumulated preview, and render the message's content instead.
-4. On `span.model_request_end`, close any preview that has not been reconciled by its buffered event. No more deltas are coming for it. If the turn errors or is interrupted, the buffered event may never arrive; `span.model_request_end` still does.
+4. On `span.model_request_end`, close any preview that has not been reconciled by its buffered event. No more deltas are coming for it. If the turn errors or is interrupted, the buffered event might never arrive; `span.model_request_end` still does.
 
 Guarantees the pattern relies on:
 
-* Concatenating a preview's deltas in arrival order, keyed by `(event_id, index)`, gives a prefix of `content[index].text` in the buffered event (a prefix, not necessarily the whole text, because deltas may be shed under load).
+* Concatenating a preview's deltas in arrival order, keyed by `(event_id, index)`, gives a prefix of `content[index].text` in the buffered event (a prefix, not necessarily the whole text, because deltas might be shed under load).
 * A connection emits at most one `event_start` per `event_id`, and the buffered event is the last thing that connection delivers for that `id`.
 
 <CodeGroup>
@@ -1494,7 +1494,7 @@ Guarantees the pattern relies on:
   ```
 
   ```php PHP
-  // Event deltas are not currently available in the PHP SDK.
+  // In PHP, set eventDeltas on EventStreamParams and accumulate with Anthropic\Lib\Sessions\EventAccumulator.
   ```
 
   ```ruby Ruby
@@ -1814,7 +1814,7 @@ The preview events themselves don't change. `event_start` and `event_delta` have
   ```
 
   ```php PHP
-  // Previewing session thread events is not currently available in the PHP SDK.
+  // In PHP, set eventDeltas on the thread EventStreamParams and accumulate with Anthropic\Lib\Sessions\EventAccumulator.
   ```
 
   ```ruby Ruby
@@ -1854,7 +1854,7 @@ The read loop exits on [`session.thread_status_idle`](/docs/en/managed-agents/re
 
 Previews are tuned for responsiveness. Build against these constraints:
 
-* **Best effort:** Under load, the server may shed deltas for an event. When it does, you receive a contiguous prefix of the text and then no further deltas for that event. The buffered `agent.message` still arrives complete. Never treat an accumulated preview as final.
+* **Best effort:** Under load, the server might shed deltas for an event. When it does, you receive a contiguous prefix of the text and then no further deltas for that event. The buffered `agent.message` still arrives complete. Never treat an accumulated preview as final.
 * **No replay on reconnect:** Deltas are delivered only to the connection that opted in, while it is open. This applies to the session-level stream and to each session thread stream alike, and a connection opened after a model request started receives no deltas for that in-flight event. If the stream drops, follow the [reconnect procedure](#integrating-events) in the Streaming events tab: reopen the stream and list the event history. The history includes any buffered events emitted while you were disconnected, including the `agent.message` your preview was waiting for. There is no way to re-request missed deltas.
 * **One thread, text only:** Previews cover assistant text on the thread the connection is reading. Tool use, tool results, MCP results, and activity on any other [session thread](/docs/en/managed-agents/multiagent-orchestration) are never previewed on that connection.
 * **Start-only `agent.thinking`:** An `agent.thinking` preview emits only the `event_start` as a signal that a thinking block has started; no `event_delta` events follow it.
@@ -2550,6 +2550,20 @@ To resume a session, send a `user.message` event to it as usual:
   ```
 </CodeGroup>
 
+### Reaching a session budget
+
+A session created with a [budget](/docs/en/managed-agents/budgets) pauses instead of overspending. When the session's tracked list cost reaches the cap, the platform pauses each thread before its next model request, and the session goes idle with a `stop_reason` of `budget_reached` rather than terminating. The request that carried the total past the cap runs to completion, so the `list_cost` reported by the `session.usage` snapshot can read [at or a fraction past the cap](/docs/en/managed-agents/budgets#when-a-session-reaches-its-budget). On the stream, the pause arrives as three events, in order:
+
+1. `session.thread_status_idle` with `stop_reason: budget_reached`, for each thread as it pauses.
+2. `session.usage`, a snapshot of the session's cumulative usage and tracked list cost.
+3. `session.status_idle` with `stop_reason: budget_reached`. The `session.usage` event always immediately precedes this idle.
+
+A thread whose final request both crosses the cap and completes its turn reports `end_turn` on its own `session.thread_status_idle` event while the session still reports `budget_reached`; key on the session-level `stop_reason` to detect the pause.
+
+While the session is at its cap, it accepts only the events that settle work already in flight: `user.tool_confirmation`, `user.tool_result`, `user.custom_tool_result`, and `user.interrupt`. Any event that would start new work, including `user.message`, is rejected with a 400 error naming that list. When a session has both a thread waiting on a tool ask and a thread paused at the cap, the session-level `stop_reason` is `requires_action`, not `budget_reached`: settling the ask doesn't trigger a model request, so respond to it as usual.
+
+No event resumes a session paused at its cap. Instead, update the session's budget: changing the cap to any value above the consumed list cost, or removing the budget by updating the session with `"budget": null`, resumes the paused work automatically. See [Session budgets](/docs/en/managed-agents/budgets) for how list cost is tracked and the full budget update semantics.
+
 ### Sending system messages
 
 <Note>
@@ -2706,7 +2720,7 @@ While the session is idle with `stop_reason: requires_action`, a `system.message
 
 ### Tracking usage
 
-The session object includes a `usage` field with cumulative token statistics. Fetch the session after it goes idle to read the latest totals, and use them to track costs, enforce budgets, or monitor consumption.
+The session object includes a `usage` field with the session's cumulative usage: token counts, server tool use, active time, and the tracked list cost. Fetch the session after it goes idle to read the latest totals.
 
 ```json
 {
@@ -2719,6 +2733,15 @@ The session object includes a `usage` field with cumulative token statistics. Fe
     "cache_creation": {
       "ephemeral_5m_input_tokens": 2000,
       "ephemeral_1h_input_tokens": 0
+    },
+    "list_cost": {
+      "amount": "187",
+      "currency": "USD"
+    },
+    "active_seconds": 342.5,
+    "server_tool_use": {
+      "web_search_requests": 3,
+      "web_fetch_requests": 0
     }
   }
 }
@@ -2726,9 +2749,15 @@ The session object includes a `usage` field with cumulative token statistics. Fe
 
 `input_tokens` reports uncached input tokens and `output_tokens` reports total output tokens across all model calls in the session. The `cache_read_input_tokens` field reports tokens read from the prompt cache, and the `cache_creation` object breaks down cache-creation tokens by cache lifetime (`ephemeral_5m_input_tokens` and `ephemeral_1h_input_tokens`). Cache entries use a 5-minute TTL by default, so back-to-back turns within that window benefit from cache reads, which reduce per-token cost.
 
+`list_cost` is the session's cumulative consumption priced at public list rates, as a whole number of cents in a string, with a currency code. `active_seconds` is the cumulative time during which the session had at least one thread running; overlapping activity from concurrent threads is counted once, unlike the `active_seconds` in the session's `stats` object, which sums each thread's own active time. This deduplicated figure is the duration the session's runtime cost is priced on. `server_tool_use` counts server-executed tool requests for pricing: web search requests are priced into list cost per request, and web fetch requests carry no per-request charge and aren't metered, so `web_fetch_requests` reads `0`. Each [session thread](/docs/en/managed-agents/multiagent-orchestration)'s own `usage` carries `list_cost` and `active_seconds` too. Per-thread figures are rounded independently and exclude the session's running-time cost, so they don't sum exactly to the session's `list_cost`; the session figure is the authoritative one.
+
+You don't have to poll the session to observe these totals. The `session.usage` event carries the same cumulative snapshot (the `usage` object, plus the session's `budget`, which is `null` when the session has none) on the session stream and in the event history. It is emitted on idle transitions rather than on a timer: the session emits one immediately before it goes idle, whatever the stop reason, and one when a thread pauses at a [session budget](/docs/en/managed-agents/budgets). A stream reader therefore sees the final cost of a turn, or of the work that hit a budget, without an extra fetch.
+
+To enforce a spend limit, set a [session budget](/docs/en/managed-agents/budgets) rather than polling usage and stopping the session yourself. The platform prices the session's consumption continuously and pauses each thread before its next model request once the session's list cost reaches the cap; see [Reaching a session budget](#reaching-a-session-budget) for what that looks like on the stream.
+
 ## Console observability
 
-The Console provides a visual timeline view of your agent sessions. Navigate to the Claude Managed Agents section in the Console to see:
+The Claude Console provides a visual timeline view of your agent sessions. Navigate to the Claude Managed Agents section in the Console to see:
 
 * **Session list:** All sessions with their status, creation time, and agent
 * **Tracing view:** A chronological view of events (content, timestamps, token usage) within a session. Tracing views are only accessible to Developers and Admins.

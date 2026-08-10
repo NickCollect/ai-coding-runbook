@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-api-access
-fetched_at: 2026-07-13T04:25:39.410657+00:00
+fetched_at: 2026-08-10T03:07:44.997703+00:00
 fetch_method: mintlify_md
 ---
 
@@ -11,7 +11,7 @@ Enable the Compliance API for your organization, then create a Compliance Access
 ---
 
 <Note>
-  Claude Enterprise organizations have self-service access to the full API. Claude Console organizations are enabled on request; contact your account team. This page describes how to enable the Compliance API and create API keys.
+  Claude Enterprise organizations and eligible standalone Claude Console organizations have self-service access to the Compliance API. This page describes how to enable the Compliance API for your organization and create API keys.
 </Note>
 
 <Check>
@@ -22,12 +22,12 @@ The Compliance API uses two key types, and which one you create depends on which
 
 ## Which key do you need?
 
-| Key type                                       | Created in                                                                                | Used for                                                                                         | Works with the Compliance API? |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------ |
-| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)    | Activity Feed, chats, files, projects, users, organization metadata, and organization settings   | Yes (all endpoints)            |
-| **Admin API key** (`sk-ant-admin01-...`)       | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys) | The [Admin API](/docs/en/manage-claude/admin-api) and the Compliance API Activity Feed           | Activity Feed only             |
-| **Analytics API key**                          | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)    | The Claude Enterprise Analytics API (see [Analytics APIs](/docs/en/manage-claude/analytics-api)) | No                             |
-| **Claude API key** (`sk-ant-api03-...`)        | [Claude Console > Settings > API keys](https://platform.claude.com/settings/keys)         | Calling Claude models through the [Claude API](/docs/en/api/overview)                            | No                             |
+| Key type                                       | Created in                                                                                | Used for                                                                                                               | Works with the Compliance API? |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| **Compliance Access Key** (`sk-ant-api01-...`) | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)    | Activity Feed, chats, files, projects, Cowork remote sessions, users, organization metadata, and organization settings | Yes (all endpoints)            |
+| **Admin API key** (`sk-ant-admin01-...`)       | [Claude Console > Settings > Admin keys](https://platform.claude.com/settings/admin-keys) | The [Admin API](/docs/en/manage-claude/admin-api) and the Compliance API Activity Feed                                 | Activity Feed only             |
+| **Analytics API key**                          | [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access)    | The Claude Enterprise Analytics API (see [Analytics APIs](/docs/en/manage-claude/analytics-api))                       | No                             |
+| **Claude API key** (`sk-ant-api03-...`)        | [Claude Console > Settings > API keys](https://platform.claude.com/settings/keys)         | Calling Claude models through the [Claude API](/docs/en/api/overview)                                                  | No                             |
 
 A Claude Enterprise tenant has one **parent organization** that centralizes identity, SSO, and SCIM for every workload organization beneath it. These workload organizations are the parent's **linked organizations**.
 
@@ -40,15 +40,22 @@ A Claude Enterprise tenant has one **parent organization** that centralizes iden
 Setup is one flow: enable the Compliance API for your organization, then create a Compliance Access Key in claude.ai. A Claude Console organization instead [creates an Admin API key](#create-an-admin-api-key) after enablement; Admin API keys reach the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) only.
 
 <Warning>
-  A Compliance Access Key with `read:compliance_user_data` can read every chat, file, and project in every linked organization, including content the primary owner has not seen. A key with `delete:compliance_user_data` can permanently delete that content. Treat Compliance Access Keys like production database credentials: store them in a secrets manager, never in source control or SIEM forwarder configuration.
+  A Compliance Access Key with `read:compliance_user_data` can read every chat, file, project, and Cowork session transcript in every linked organization, including content the primary owner has not seen. A key with `delete:compliance_user_data` can permanently delete chats, files, and projects. Treat Compliance Access Keys like production database credentials: store them in a secrets manager, never in source control or SIEM forwarder configuration.
 </Warning>
 
 <Steps>
   <Step title="Enable the Compliance API">
-    How you enable the Compliance API depends on which Claude product your organization uses. In either case, enablement happens at the parent organization level and cascades to every linked organization.
+    Where you enable the Compliance API depends on how your organization is set up:
 
-    * **Claude Enterprise (`claude.ai`):** Enablement is self-service.
-    * **Claude Console (`platform.claude.com`):** Enablement is on request: contact your Anthropic account team.
+    * **Claude Enterprise organizations:** The primary owner enables the Compliance API at [claude.ai > Organization settings > API](https://claude.ai/admin-settings/api-access). Enablement happens at the parent organization level and cascades to every linked organization, both claude.ai and Claude Console.
+    * **Standalone Claude Console organizations:** An organization admin turns on the **Compliance API** toggle at [Claude Console > Settings > Security](https://platform.claude.com/settings/security). Enablement is self-service for eligible organizations, and the change takes effect immediately. If the **Compliance API** section is not visible, you do not have the admin role, your organization is linked to a parent organization (the Compliance API is enabled from the parent organization instead), or your organization is not eligible for self-service enablement; contact your account team or [Anthropic support](https://support.claude.com) if you are not sure which applies.
+    * **Claude Console organizations linked to a parent organization:** There is nothing to turn on in Claude Console. Ask the primary owner of your parent organization to enable the Compliance API in claude.ai, or contact your account team.
+
+    <Warning>
+      **Turning the Compliance API off stops activity recording.** An organization admin can turn the Compliance API off at any time with the same **Compliance API** toggle that turns it on. While the Compliance API is off, no activity events are recorded for your organization, so the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) receives no new events. If your organization is enrolled in [Access Transparency](/docs/en/manage-claude/access-transparency), turning the Compliance API off also stops Access Transparency event delivery. Activity that is not recorded while the Compliance API is off cannot be recovered later. Turning the Compliance API back on resumes recording from that point forward; activity that was already recorded is not deleted.
+    </Warning>
+
+    A standalone Claude Console organization uses Admin API keys rather than Compliance Access Keys: after enablement, skip the remaining steps and [create a new Admin API key](#create-an-admin-api-key) instead. The remaining steps provision Compliance Access Keys, which are available only to organizations that are part of a Claude Enterprise tenant.
   </Step>
 
   <Step title="Decide the key's scope">
@@ -74,7 +81,7 @@ Setup is one flow: enable the Compliance API for your organization, then create 
     | Scope                         | Grants                                                                                                                                                                                                                    |
     | ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
     | `read:compliance_activities`  | Read the Activity Feed. A key covering the parent organization reads events for the parent organization and all linked organizations.                                                                                     |
-    | `read:compliance_user_data`   | Read user chats, messages, files, projects, organization users, and group members                                                                                                                                         |
+    | `read:compliance_user_data`   | Read user chats, messages, files, projects, Cowork remote sessions and their transcripts, organization users, and group members                                                                                           |
     | `delete:compliance_user_data` | Delete user chats, files, and projects                                                                                                                                                                                    |
     | `read:compliance_org_data`    | Read organization metadata (names, types, roles, and groups) and the effective settings in force for organizations under the parent organization. User listings and group membership require `read:compliance_user_data`. |
 
@@ -114,7 +121,7 @@ export ANTHROPIC_ADMIN_KEY=sk-ant-admin01-...
 
 The distinct variable name keeps the Admin API key from overwriting a Compliance Access Key if you provision both. The cURL examples in this guide read the key from `$ANTHROPIC_COMPLIANCE_ACCESS_KEY`; substitute `$ANTHROPIC_ADMIN_KEY` when calling the [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) with an Admin API key.
 
-Admin API keys carry the `read:compliance_activities` scope only when the Compliance API was enabled for the organization before the key was created; see [Set up the Compliance API](#set-up-the-compliance-api). They cannot be granted any other Compliance API scope, so calls to any endpoint other than the Activity Feed return [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden).
+Admin API keys carry the `read:compliance_activities` scope only if the Compliance API was enabled for the organization at the time the key was created; see [Set up the Compliance API](#set-up-the-compliance-api). They cannot be granted any other Compliance API scope, so calls to any endpoint other than the Activity Feed return [403 Forbidden](/docs/en/manage-claude/compliance-errors#403-forbidden).
 
 For the same key's role in managing your Claude Console organization, see [Admin API](/docs/en/manage-claude/admin-api).
 
@@ -160,6 +167,6 @@ If a Compliance Access Key leaks, delete it immediately, audit the [Activity Fee
   </Card>
 
   <Card title="Retrieve and delete chats, files, and projects" href="/docs/en/manage-claude/compliance-content-data">
-    Use a Compliance Access Key with `read:compliance_user_data` to retrieve claude.ai content, and `delete:compliance_user_data` to delete it.
+    Use a Compliance Access Key with `read:compliance_user_data` to retrieve claude.ai content, including Cowork session transcripts, and `delete:compliance_user_data` to delete chats, files, and projects.
   </Card>
 </CardGroup>

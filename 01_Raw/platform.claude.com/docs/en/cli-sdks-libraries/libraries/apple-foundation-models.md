@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/cli-sdks-libraries/libraries/apple-foundation-models
-fetched_at: 2026-07-27T04:31:51.383338+00:00
+fetched_at: 2026-08-10T03:07:46.330061+00:00
 fetch_method: mintlify_md
 ---
 
@@ -12,7 +12,7 @@ Use Claude on Apple platforms through the Foundation Models framework with the C
 
 [Claude for Foundation Models](https://github.com/anthropics/ClaudeForFoundationModels) is a Swift package that makes Claude available as a server-side language model in Apple's [Foundation Models](https://developer.apple.com/documentation/foundationmodels) framework. The package conforms Claude to the framework's `LanguageModel` protocol, so you drive it with the same `LanguageModelSession` API you use for Apple's on-device model: `respond(to:)`, streaming, guided generation, and tool calling all work the same way.
 
-Requests go directly from your app to the Claude API; Apple is not in the request path and does not see prompts or responses. Usage is billed to your Anthropic account at [standard API pricing](/docs/en/about-claude/pricing). Your app decides when to use Claude and when to use Apple's on-device model: pass whichever model you want to each session.
+Requests go directly from your app to the Claude API; Apple is not in the request path and does not see prompts or responses. Usage is billed to your Anthropic account at [standard API pricing](/docs/en/about-claude/pricing), so your organization needs an available credit balance or an active billing method. Your app decides when to use Claude and when to use Apple's on-device model: pass whichever model you want to each session.
 
 <Note>
   **Beta.** This package targets the Foundation Models server-side language model API introduced in the OS 27 betas. APIs might change before general availability.
@@ -107,19 +107,39 @@ Apple's on-device model is fast, private, and available offline, but it is sized
 
 ## Authentication
 
-Set the credential with the `auth:` parameter.
+Set the credential with the `auth:` parameter. Use `.appAttest` to ship without a back end, `.proxied` to route requests through your own back end, or `.apiKey` to iterate during development.
 
-### API key (development)
+### App Attest
 
-Pass an API key directly while developing:
+Each installation of your app uses Apple's [App Attest](https://developer.apple.com/documentation/devicecheck/establishing-your-app-s-integrity) service to prove that it is a genuine, unmodified build of the app you registered. Anthropic then issues the device a short-lived access token that bills usage to your workspace. The app ships no API key, and there is no proxy for you to operate.
+
+App Attest authentication is available only when your app calls the Claude API directly. It is not available through Amazon Bedrock, Google Cloud, or Microsoft Foundry.
+
+To ship without running a back end, use `.appAttest`:
 
 ```swift
-ClaudeLanguageModel(name: .sonnet5, auth: .apiKey("YOUR_API_KEY"))
+ClaudeLanguageModel(
+  name: .sonnet5,
+  auth: .appAttest(clientID: "clid_...")
+)
 ```
 
-<Warning>
-  A key bundled into an app is extractable from the shipping binary, and anyone who extracts it can make requests billed to your account. Use `.apiKey` for development only, and switch to a proxy before release.
-</Warning>
+<Note>
+  App Attest requires a physical device. The Simulator, and hardware without a Secure Enclave, cannot perform App Attest. Use `.apiKey` while iterating in the Simulator, and `.appAttest` when running on a device.
+</Note>
+
+To set up App Attest, you need your Apple Developer Team ID and the admin, owner, or primary owner role in your organization. Configure your Xcode project and register your app in the [Claude Console](https://platform.claude.com/):
+
+1. In Xcode, add the **App Attest** capability to your app target under **Signing & Capabilities**.
+2. In your workspace's settings in the Claude Console, open **App integrations**.
+3. Click **Create app integration** and enter a name, your Apple Developer Team ID, and one or more bundle IDs (up to 32).
+4. Copy the client ID (`clid_...`) from the integration's **Overview** tab and pass it to your app's Claude configuration.
+
+The first time your app uses Claude on a device, the app requests a challenge from Anthropic, attests the device with Apple's `DCAppAttestService`, and exchanges the verified attestation for an access token. The Claude for Foundation Models package runs this flow automatically and requests new tokens as they expire; there is no attestation code for you to write.
+
+Tokens are scoped to your workspace, expire after one hour, and authorize only [Messages API](/docs/en/api/messages/create) calls. They carry no end-user identity: App Attest identifies your app, not the person using it, so handle any per-user logic in your app.
+
+To stop a compromised or retired app, revoke its integration: in your workspace's settings in the Claude Console, open **App integrations**, select the integration, and click **Revoke**, then confirm. Revoking an integration revokes its outstanding tokens, and its registered devices can no longer request new ones. Revocation is permanent, so create a new app integration to restore access.
 
 ### Proxy (production)
 
@@ -134,6 +154,18 @@ ClaudeLanguageModel(
 ```
 
 Your proxy receives standard [Messages API](/docs/en/api/messages/create) requests, attaches the `x-api-key` header, and forwards them to `https://api.anthropic.com`.
+
+### API key (development)
+
+Pass an API key directly while developing:
+
+```swift
+ClaudeLanguageModel(name: .sonnet5, auth: .apiKey("YOUR_API_KEY"))
+```
+
+<Warning>
+  A key bundled into an app is extractable from the shipping binary, and anyone who extracts it can make requests billed to your account. Use `.apiKey` for development only, and switch to App Attest or a proxy before release.
+</Warning>
 
 ## Streaming
 

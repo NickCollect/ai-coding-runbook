@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rate_limits/list
-fetched_at: 2026-07-06T05:04:35.106186+00:00
+fetched_at: 2026-08-10T03:07:52.468354+00:00
 fetch_method: mintlify_md
 ---
 
@@ -42,9 +42,13 @@ and contains the set of limiter values that apply to it.
 
 ### Returns
 
-- `data: array of object { group_type, limits, models, type }`
+- `data: array of object { id, group_type, limits, 2 more }`
 
   Rate-limit entries for the organization, one per group.
+
+  - `id: string`
+
+    Stable identifier for this rate-limit group within the organization.
 
   - `group_type: "batch" or "files" or "model_group" or 3 more`
 
@@ -102,6 +106,7 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
 {
   "data": [
     {
+      "id": "id",
       "group_type": "batch",
       "limits": [
         {

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin
-fetched_at: 2026-07-27T04:31:55.270259+00:00
+fetched_at: 2026-08-10T03:07:50.449164+00:00
 fetch_method: mintlify_md
 ---
 
@@ -2308,23 +2308,33 @@ Create Workspace
 
   Data residency configuration for the workspace. If omitted, defaults to workspace_geo=`"us"`, allowed_inference_geos=`"unrestricted"`, and default_inference_geo=`"global"`.
 
-  - `allowed_inference_geos: optional array of string or "unrestricted"`
+  - `allowed_inference_geos: optional array of "global" or "us" or "unrestricted"`
 
     Permitted inference geo values. Defaults to 'unrestricted' if omitted, which allows all geos. Use the string 'unrestricted' to allow all geos, or a list of specific geos.
 
-    - `array of string`
+    - `array of "global" or "us"`
+
+      - `"global"`
+
+      - `"us"`
 
     - `"unrestricted"`
 
       - `"unrestricted"`
 
-  - `default_inference_geo: optional string`
+  - `default_inference_geo: optional "global" or "us"`
 
     Default inference geo applied when requests omit the parameter. Defaults to 'global' if omitted. Must be a member of allowed_inference_geos unless allowed_inference_geos is `"unrestricted"`.
 
-  - `workspace_geo: optional string`
+    - `"global"`
+
+    - `"us"`
+
+  - `workspace_geo: optional "us"`
 
     Geographic region for workspace data storage. Immutable after creation. Defaults to 'us' if omitted.
+
+    - `"us"`
 
 - `external_key_id: optional string`
 
@@ -2749,19 +2759,27 @@ Update Workspace
 
   Data residency configuration for the workspace.
 
-  - `allowed_inference_geos: optional array of string or "unrestricted"`
+  - `allowed_inference_geos: optional array of "global" or "us" or "unrestricted"`
 
     Permitted inference geo values. Use 'unrestricted' to allow all geos, or a list of specific geos.
 
-    - `array of string`
+    - `array of "global" or "us"`
+
+      - `"global"`
+
+      - `"us"`
 
     - `"unrestricted"`
 
       - `"unrestricted"`
 
-  - `default_inference_geo: optional string`
+  - `default_inference_geo: optional "global" or "us"`
 
     Default inference geo applied when requests omit the parameter. Must be a member of allowed_inference_geos unless allowed_inference_geos is `"unrestricted"`.
+
+    - `"global"`
+
+    - `"us"`
 
 - `external_key_id: optional string`
 
@@ -3517,7 +3535,7 @@ are not listed; use `GET /v1/organizations/rate_limits` to see those.
 
 ### Returns
 
-- `data: array of object { group_type, limits, models, type }`
+- `data: array of object { group_type, limits, models, 3 more }`
 
   Rate-limit entries for the workspace, one per group that has at least one override.
 
@@ -3557,11 +3575,19 @@ are not listed; use `GET /v1/organizations/rate_limits` to see those.
 
     Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
+  - `rate_limit_id: string`
+
+    The `id` of the RateLimit group this override applies to.
+
   - `type: "workspace_rate_limit"`
 
     Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
     - `"workspace_rate_limit"`
+
+  - `workspace_id: string`
+
+    ID of the Workspace this override applies to.
 
 - `next_page: string`
 
@@ -3592,7 +3618,9 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
       "models": [
         "string"
       ],
-      "type": "workspace_rate_limit"
+      "rate_limit_id": "rate_limit_id",
+      "type": "workspace_rate_limit",
+      "workspace_id": "workspace_id"
     }
   ],
   "next_page": "next_page"
@@ -3605,7 +3633,7 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 
 - `RateLimitListResponse object { data, next_page }`
 
-  - `data: array of object { group_type, limits, models, type }`
+  - `data: array of object { group_type, limits, models, 3 more }`
 
     Rate-limit entries for the workspace, one per group that has at least one override.
 
@@ -3645,11 +3673,19 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 
       Model names this entry's limits apply to, including aliases. `null` when `group_type` is not `"model_group"`.
 
+    - `rate_limit_id: string`
+
+      The `id` of the RateLimit group this override applies to.
+
     - `type: "workspace_rate_limit"`
 
       Object type. Always `workspace_rate_limit` for workspace rate-limit entries.
 
       - `"workspace_rate_limit"`
+
+    - `workspace_id: string`
+
+      ID of the Workspace this override applies to.
 
   - `next_page: string`
 
@@ -6002,10 +6038,15 @@ Get Messages Usage Report
 
         - `"200k-1M"`
 
-      - `inference_geo: string`
+      - `inference_geo: "global" or "not_available" or "us"`
 
-        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+        InferenceGeo values extended with NOT_AVAILABLE for filtering usage data.
+
+        - `"global"`
+
+        - `"not_available"`
+
+        - `"us"`
 
       - `model: string`
 
@@ -6104,7 +6145,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/messages \
     }
   ],
   "has_more": true,
-  "next_page": "2019-12-27T18:11:19.117Z"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -6141,7 +6182,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
       The user or API key that performed the Claude Code actions.
 
-      - `ClaudeCodeUserActor object { email_address, type }`
+      - `UserActor object { email_address, type }`
 
         - `email_address: string`
 
@@ -6151,7 +6192,7 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
           - `"user_actor"`
 
-      - `ClaudeCodeAPIActor object { api_key_name, type }`
+      - `APIActor object { api_key_name, type }`
 
         - `api_key_name: string`
 
@@ -6199,7 +6240,8 @@ Enables organizations to analyze developer productivity and build custom dashboa
 
     - `date: string`
 
-      UTC date for the usage metrics in YYYY-MM-DD format.
+      UTC day the usage metrics cover, as an RFC 3339 timestamp at midnight UTC
+      (for example `2025-08-08T00:00:00Z`).
 
     - `model_breakdown: array of object { estimated_cost, model, tokens }`
 
@@ -6312,7 +6354,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
             "amount": 186,
             "currency": "USD"
           },
-          "model": "claude-sonnet-4-20250514",
+          "model": "claude-opus-4-8",
           "tokens": {
             "cache_creation": 2340,
             "cache_read": 8790,
@@ -6325,7 +6367,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
             "amount": 42,
             "currency": "USD"
           },
-          "model": "claude-3-5-haiku-20241022",
+          "model": "claude-sonnet-5",
           "tokens": {
             "cache_creation": 890,
             "cache_read": 3420,
@@ -6376,7 +6418,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
       The user or API key that performed the Claude Code actions.
 
-      - `ClaudeCodeUserActor object { email_address, type }`
+      - `UserActor object { email_address, type }`
 
         - `email_address: string`
 
@@ -6386,7 +6428,7 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
           - `"user_actor"`
 
-      - `ClaudeCodeAPIActor object { api_key_name, type }`
+      - `APIActor object { api_key_name, type }`
 
         - `api_key_name: string`
 
@@ -6434,7 +6476,8 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
     - `date: string`
 
-      UTC date for the usage metrics in YYYY-MM-DD format.
+      UTC day the usage metrics cover, as an RFC 3339 timestamp at midnight UTC
+      (for example `2025-08-08T00:00:00Z`).
 
     - `model_breakdown: array of object { estimated_cost, model, tokens }`
 
@@ -6558,10 +6601,15 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 
         - `"200k-1M"`
 
-      - `inference_geo: string`
+      - `inference_geo: "global" or "not_available" or "us"`
 
-        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+        InferenceGeo values extended with NOT_AVAILABLE for filtering usage data.
+
+        - `"global"`
+
+        - `"not_available"`
+
+        - `"us"`
 
       - `model: string`
 
@@ -6714,10 +6762,15 @@ Get Cost Report
 
         Description of the cost item. `null` if not grouping by description.
 
-      - `inference_geo: string`
+      - `inference_geo: "global" or "not_available" or "us"`
 
-        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+        InferenceGeo values extended with NOT_AVAILABLE for filtering usage data.
+
+        - `"global"`
+
+        - `"not_available"`
+
+        - `"us"`
 
       - `model: string`
 
@@ -6794,7 +6847,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
     }
   ],
   "has_more": true,
-  "next_page": "2019-12-27T18:11:19.117Z"
+  "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
 }
 ```
 
@@ -6846,10 +6899,15 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         Description of the cost item. `null` if not grouping by description.
 
-      - `inference_geo: string`
+      - `inference_geo: "global" or "not_available" or "us"`
 
-        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
-        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
+        InferenceGeo values extended with NOT_AVAILABLE for filtering usage data.
+
+        - `"global"`
+
+        - `"not_available"`
+
+        - `"us"`
 
       - `model: string`
 
@@ -6905,8 +6963,9 @@ Returns one entry per day in [starting_date, ending_date). Data is
 typically available with a 1-day lag and may be revised by a few percent
 over the following days: when ending_date is omitted it defaults to the
 most recent available day + 1, so the last entry covers the most recent
-available day. Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+available day. The series can be scoped to an RBAC group via
+filter[]=rbac_group_id:<id>. Available to organizations on a Claude
+Enterprise plan. Requires an API key with the `read:analytics` scope.
 
 ### Query Parameters
 
@@ -7222,7 +7281,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
 ### Analytics User
 
-- `AnalyticsUser object { id, email_address }`
+- `AnalyticsUser object { id, email_address, type }`
 
   User identifier.
 
@@ -7234,29 +7293,35 @@ curl https://api.anthropic.com/v1/organizations/analytics/summaries \
 
     Email address of the user
 
+  - `type: optional "user"`
+
+    Object type. Always `user`.
+
+    - `"user"`
+
 ### Analytics User Actor
 
-- `AnalyticsUserActor object { user_id, deleted, email, 2 more }`
+- `AnalyticsUserActor object { deleted, email, name, 2 more }`
+
+  - `deleted: boolean`
+
+    True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+  - `email: string`
+
+    The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+  - `name: string`
+
+    The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+  - `type: "user_actor"`
+
+    - `"user_actor"`
 
   - `user_id: string`
 
     Tagged user ID.
-
-  - `deleted: optional boolean`
-
-    True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-  - `email: optional string`
-
-    The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-  - `name: optional string`
-
-    The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-  - `type: optional "user_actor"`
-
-    - `"user_actor"`
 
 ### Connector Office Product Metrics
 
@@ -7363,7 +7428,7 @@ key with the `read:analytics` scope.
 
   End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
-- `group_by: optional array of "context_window" or "inference_geo" or "model" or 3 more`
+- `group_by: optional array of "context_window" or "inference_geo" or "model" or 4 more`
 
   Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
@@ -7376,6 +7441,8 @@ key with the `read:analytics` scope.
   - `"product"`
 
   - `"rbac_group_id"`
+
+  - `"slack_channel_id"`
 
   - `"speed"`
 
@@ -7409,6 +7476,10 @@ key with the `read:analytics` scope.
 
   Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
+- `slack_channel_ids: optional array of string`
+
+  Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
 - `speeds: optional array of "fast" or "standard"`
 
   Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
@@ -7429,7 +7500,7 @@ key with the `read:analytics` scope.
 
     - `ending_at: string`
 
-    - `results: array of object { cache_creation, cache_read_input_tokens, context_window, 9 more }`
+    - `results: array of object { cache_creation, cache_read_input_tokens, context_window, 10 more }`
 
       - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
 
@@ -7480,6 +7551,10 @@ key with the `read:analytics` scope.
         - `web_search_requests: number`
 
           The number of web search requests made.
+
+      - `slack_channel_id: string`
+
+        Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
 
       - `speed: "fast" or "standard"`
 
@@ -7537,6 +7612,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/usage_report \
           "server_tool_use": {
             "web_search_requests": 10
           },
+          "slack_channel_id": "C0123ABCDEF",
           "speed": "fast",
           "uncached_input_tokens": 0
         }
@@ -7597,7 +7673,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   If true, omit rows for deleted accounts. Pages may return fewer than `limit` rows when deleted users were filtered.
 
-- `group_by: optional array of "context_window" or "inference_geo" or "model" or 3 more`
+- `group_by: optional array of "context_window" or "inference_geo" or "model" or 4 more`
 
   Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/usage_report` endpoint. `limit` bounds (actor × time bucket × dimension) rows — with dimensions or `bucket_width` present, one actor may span several rows.
 
@@ -7610,6 +7686,8 @@ organizations on a Claude Enterprise plan. Requires an API key with the
   - `"product"`
 
   - `"rbac_group_id"`
+
+  - `"slack_channel_id"`
 
   - `"speed"`
 
@@ -7663,6 +7741,10 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
+- `slack_channel_ids: optional array of string`
+
+  Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
 - `speeds: optional array of "fast" or "standard"`
 
   Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
@@ -7679,29 +7761,29 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `UserUsage object { data, data_refreshed_at, has_more, 2 more }`
 
-  - `data: array of object { actor, cache_creation, cache_read_input_tokens, 13 more }`
+  - `data: array of object { actor, cache_creation, cache_read_input_tokens, 14 more }`
 
     - `actor: AnalyticsUserActor`
+
+      - `deleted: boolean`
+
+        True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+      - `email: string`
+
+        The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+      - `name: string`
+
+        The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
 
       - `user_id: string`
 
         Tagged user ID.
-
-      - `deleted: optional boolean`
-
-        True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-      - `email: optional string`
-
-        The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-      - `name: optional string`
-
-        The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
 
     - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
 
@@ -7755,6 +7837,10 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
         The number of web search requests made.
 
+    - `slack_channel_id: string`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
     - `speed: "fast" or "standard"`
 
       - `"fast"`
@@ -7798,11 +7884,11 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
   "data": [
     {
       "actor": {
-        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt",
         "deleted": true,
         "email": "jane@example.com",
         "name": "Jane Smith",
-        "type": "user_actor"
+        "type": "user_actor",
+        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt"
       },
       "cache_creation": {
         "ephemeral_1h_input_tokens": 1000,
@@ -7820,6 +7906,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
       "server_tool_use": {
         "web_search_requests": 10
       },
+      "slack_channel_id": "C0123ABCDEF",
       "speed": "fast",
       "starting_at": "2019-12-27T18:11:19.117Z",
       "total_tokens": 5377000,
@@ -7843,7 +7930,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
 
     - `ending_at: string`
 
-    - `results: array of object { cache_creation, cache_read_input_tokens, context_window, 9 more }`
+    - `results: array of object { cache_creation, cache_read_input_tokens, context_window, 10 more }`
 
       - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
 
@@ -7895,6 +7982,10 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
 
           The number of web search requests made.
 
+      - `slack_channel_id: string`
+
+        Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
       - `speed: "fast" or "standard"`
 
         - `"fast"`
@@ -7923,29 +8014,29 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
 
 - `UserUsage object { data, data_refreshed_at, has_more, 2 more }`
 
-  - `data: array of object { actor, cache_creation, cache_read_input_tokens, 13 more }`
+  - `data: array of object { actor, cache_creation, cache_read_input_tokens, 14 more }`
 
     - `actor: AnalyticsUserActor`
+
+      - `deleted: boolean`
+
+        True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+      - `email: string`
+
+        The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+      - `name: string`
+
+        The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
 
       - `user_id: string`
 
         Tagged user ID.
-
-      - `deleted: optional boolean`
-
-        True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-      - `email: optional string`
-
-        The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-      - `name: optional string`
-
-        The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
 
     - `cache_creation: object { ephemeral_1h_input_tokens, ephemeral_5m_input_tokens }`
 
@@ -7998,6 +8089,10 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_usage_report \
       - `web_search_requests: number`
 
         The number of web search requests made.
+
+    - `slack_channel_id: string`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
 
     - `speed: "fast" or "standard"`
 
@@ -8068,7 +8163,7 @@ Requires an API key with the `read:analytics` scope.
 
   End of range, exclusive. When omitted, defaults to the earlier of now and `starting_at` + 31 days. The range may span at most 31 days.
 
-- `group_by: optional array of "context_window" or "cost_type" or "inference_geo" or 5 more`
+- `group_by: optional array of "context_window" or "cost_type" or "inference_geo" or 6 more`
 
   Dimensions to break each time bucket out by. Defaults to no grouping (one total per bucket). Each bucket reports at most its top 100 groups; a group beyond that cap has no row in that bucket (there is no remainder row), so grouped buckets are not exhaustive when a dimension has more than 100 distinct values.
 
@@ -8083,6 +8178,8 @@ Requires an API key with the `read:analytics` scope.
   - `"product"`
 
   - `"rbac_group_id"`
+
+  - `"slack_channel_id"`
 
   - `"speed"`
 
@@ -8118,6 +8215,10 @@ Requires an API key with the `read:analytics` scope.
 
   Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
+- `slack_channel_ids: optional array of string`
+
+  Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
 - `speeds: optional array of "fast" or "standard"`
 
   Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
@@ -8138,7 +8239,7 @@ Requires an API key with the `read:analytics` scope.
 
     - `ending_at: string`
 
-    - `results: array of object { amount, context_window, cost_type, 9 more }`
+    - `results: array of object { amount, context_window, cost_type, 10 more }`
 
       - `amount: string`
 
@@ -8187,6 +8288,10 @@ Requires an API key with the `read:analytics` scope.
       - `requests: number`
 
         Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+      - `slack_channel_id: string`
+
+        Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
 
       - `speed: "fast" or "standard"`
 
@@ -8249,6 +8354,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/cost_report \
           "product": "product",
           "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
           "requests": 0,
+          "slack_channel_id": "C0123ABCDEF",
           "speed": "fast",
           "token_type": "cache_creation.ephemeral_1h_input_tokens"
         }
@@ -8309,7 +8415,7 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   If true, omit rows for deleted accounts. Pages may return fewer than `limit` rows when deleted users were filtered.
 
-- `group_by: optional array of "context_window" or "cost_type" or "inference_geo" or 5 more`
+- `group_by: optional array of "context_window" or "cost_type" or "inference_geo" or 6 more`
 
   Break each actor's row out by the given dimensions. Accepts the same values as the bucketed `/cost_report` endpoint. The `product`, `model`, `context_window`, `inference_geo`, and `speed` dimensions — and the time bucket, when `bucket_width` is set — count toward `limit`. `cost_type` and `token_type` do not: `cost_type` returns one row per cost component (tokens, web search, code execution); `token_type` returns one row per token type, each with `cost_type: "tokens"`; combining both returns the per-token-type rows plus the web-search and code-execution rows. A page can therefore contain more rows than `limit` when `cost_type` or `token_type` is requested.
 
@@ -8324,6 +8430,8 @@ organizations on a Claude Enterprise plan. Requires an API key with the
   - `"product"`
 
   - `"rbac_group_id"`
+
+  - `"slack_channel_id"`
 
   - `"speed"`
 
@@ -8375,6 +8483,10 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
   Filter to usage attributed to specific RBAC groups. Accepts tagged RBAC group IDs (`rbac_group_...`) or bare group UUIDs. A row matches when the user belonged to any of the listed groups on the (UTC) day the usage occurred; usage with no group attribution never matches.
 
+- `slack_channel_ids: optional array of string`
+
+  Filter to usage originating from specific Slack channels. Use `group_by[]=slack_channel_id` to break out per-channel values.
+
 - `speeds: optional array of "fast" or "standard"`
 
   Filter to fast or standard inference mode. Use `group_by[]=speed` to break out per-mode values.
@@ -8391,29 +8503,29 @@ organizations on a Claude Enterprise plan. Requires an API key with the
 
 - `UserCost object { data, data_refreshed_at, has_more, 2 more }`
 
-  - `data: array of object { actor, amount, context_window, 12 more }`
+  - `data: array of object { actor, amount, context_window, 13 more }`
 
     - `actor: AnalyticsUserActor`
+
+      - `deleted: boolean`
+
+        True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+      - `email: string`
+
+        The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+      - `name: string`
+
+        The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
 
       - `user_id: string`
 
         Tagged user ID.
-
-      - `deleted: optional boolean`
-
-        True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-      - `email: optional string`
-
-        The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-      - `name: optional string`
-
-        The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
 
     - `amount: string`
 
@@ -8464,6 +8576,10 @@ organizations on a Claude Enterprise plan. Requires an API key with the
     - `requests: number`
 
       Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
+
+    - `slack_channel_id: string`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
 
     - `speed: "fast" or "standard"`
 
@@ -8514,11 +8630,11 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
   "data": [
     {
       "actor": {
-        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt",
         "deleted": true,
         "email": "jane@example.com",
         "name": "Jane Smith",
-        "type": "user_actor"
+        "type": "user_actor",
+        "user_id": "user_01AbCdEfGhIjKlMnOpQrSt"
       },
       "amount": "41280.000000",
       "context_window": "0-200k",
@@ -8531,6 +8647,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
       "product": "product",
       "rbac_group_id": "rbac_group_012rppKaSVsmTo6NqRDXQXNF",
       "requests": 128,
+      "slack_channel_id": "C0123ABCDEF",
       "speed": "fast",
       "starting_at": "2019-12-27T18:11:19.117Z",
       "token_type": "cache_creation.ephemeral_1h_input_tokens"
@@ -8553,7 +8670,7 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
 
     - `ending_at: string`
 
-    - `results: array of object { amount, context_window, cost_type, 9 more }`
+    - `results: array of object { amount, context_window, cost_type, 10 more }`
 
       - `amount: string`
 
@@ -8603,6 +8720,10 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
 
         Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
 
+      - `slack_channel_id: string`
+
+        Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
       - `speed: "fast" or "standard"`
 
         - `"fast"`
@@ -8641,29 +8762,29 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
 
 - `UserCost object { data, data_refreshed_at, has_more, 2 more }`
 
-  - `data: array of object { actor, amount, context_window, 12 more }`
+  - `data: array of object { actor, amount, context_window, 13 more }`
 
     - `actor: AnalyticsUserActor`
+
+      - `deleted: boolean`
+
+        True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
+
+      - `email: string`
+
+        The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
+
+      - `name: string`
+
+        The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
+
+      - `type: "user_actor"`
+
+        - `"user_actor"`
 
       - `user_id: string`
 
         Tagged user ID.
-
-      - `deleted: optional boolean`
-
-        True if the account has been deleted. `name` is `"Deleted User"` and `email` is null in that case; the `user_id` is still populated for reconciliation.
-
-      - `email: optional string`
-
-        The user's email address. Null when unavailable or when the account has been deleted (check `deleted`).
-
-      - `name: optional string`
-
-        The user's name. Returns `"Deleted User"` when the account has been deleted (`deleted: true`). Null when unavailable.
-
-      - `type: optional "user_actor"`
-
-        - `"user_actor"`
 
     - `amount: string`
 
@@ -8715,6 +8836,10 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
 
       Number of API requests in this row's scope. Null when `group_by` includes `cost_type` or `token_type` (the count has no per-component attribution; read it from the ungrouped response). For sandbox / code-execution events, this counts execution spans rather than HTTP requests (these rows surface with `product: null`).
 
+    - `slack_channel_id: string`
+
+      Slack channel the usage originated from. Populated only when `slack_channel_id` is in `group_by[]`; null for usage outside Slack (and for rows recorded before channel attribution was enabled).
+
     - `speed: "fast" or "standard"`
 
       - `"fast"`
@@ -8758,8 +8883,10 @@ curl https://api.anthropic.com/v1/organizations/analytics/user_cost_report \
 Get per-user activity for a given day, with cursor-based pagination.
 
 Returns activity metrics for each user in the organization, sorted by email
-address. Available to organizations on a Claude Enterprise plan. Requires
-an API key with the `read:analytics` scope.
+address. Use group_by[] for per-RBAC-group aggregates, or filter[] to
+scope results to specific members, groups, or a chat project. Available
+to organizations on a Claude Enterprise plan. Requires an API key with
+the `read:analytics` scope.
 
 ### Query Parameters
 
@@ -8773,11 +8900,13 @@ an API key with the `read:analytics` scope.
 
 - `filter: optional array of string`
 
-  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac_group_id accepts the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: project_id, rbac_group_id, user_id. Value forms: project_id takes a tagged project id (claude_proj_...) and scopes each member's row to their claude.ai chat activity within that project (it cannot be combined with group_by[] or an rbac_group_id filter); rbac_group_id takes the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user_id takes a tagged user id (user_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-- `group_by: optional array of string`
+- `group_by: optional array of "rbac_group_id"`
 
-  Dimensions to break results out by, e.g. group_by[]=rbac_group_id. Supported dimensions vary by endpoint; an unsupported dimension returns 400. Grouped responses paginate like ungrouped ones via next_page. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+  Dimensions to break results out by (e.g. group_by[]=rbac_group_id). Supported on this endpoint: rbac_group_id. Rows are already per-member, so the one supported grouping aggregates them per RBAC group instead. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next_page; an unsupported dimension returns 400. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+  - `"rbac_group_id"`
 
 - `limit: optional number`
 
@@ -9111,6 +9240,12 @@ an API key with the `read:analytics` scope.
 
         Email address of the user
 
+      - `type: optional "user"`
+
+        Object type. Always `user`.
+
+        - `"user"`
+
   - `next_page: string`
 
     Opaque cursor for the next page, or null if no more results
@@ -9244,7 +9379,8 @@ curl https://api.anthropic.com/v1/organizations/analytics/users \
       "rbac_group_name": "rbac_group_name",
       "user": {
         "id": "id",
-        "email_address": "email_address"
+        "email_address": "email_address",
+        "type": "user"
       }
     }
   ],
@@ -9562,6 +9698,12 @@ curl https://api.anthropic.com/v1/organizations/analytics/users \
 
         Email address of the user
 
+      - `type: optional "user"`
+
+        Object type. Always `user`.
+
+        - `"user"`
+
   - `next_page: string`
 
     Opaque cursor for the next page, or null if no more results
@@ -9575,8 +9717,11 @@ curl https://api.anthropic.com/v1/organizations/analytics/users \
 Get per-skill usage for a given day, with cursor-based pagination.
 
 Returns skill usage metrics for the organization, sorted by skill name.
-Available to organizations on a Claude Enterprise plan. Requires an API
-key with the `read:analytics` scope.
+Use group_by[] to break usage out per member, per RBAC group, or per
+product surface, and filter[] to scope results; the parameter
+descriptions list the supported dimensions. Available to organizations
+on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ### Query Parameters
 
@@ -9590,11 +9735,17 @@ key with the `read:analytics` scope.
 
 - `filter: optional array of string`
 
-  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac_group_id accepts the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: product, rbac_group_id, share_status, skill_name, user_id. Value forms: product is one of chat, claude_code, cowork, or office_agent; rbac_group_id takes the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); share_status is one of organization, private, or public; skill_name matches case-insensitively; user_id takes a tagged user id (user_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-- `group_by: optional array of string`
+- `group_by: optional array of "product" or "rbac_group_id" or "user_id"`
 
-  Dimensions to break results out by, e.g. group_by[]=rbac_group_id. Supported dimensions vary by endpoint; an unsupported dimension returns 400. Grouped responses paginate like ungrouped ones via next_page. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+  Dimensions to break results out by (e.g. group_by[]=user_id). Supported on this endpoint: product, rbac_group_id, user_id. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next_page; an unsupported dimension returns 400. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+  - `"product"`
+
+  - `"rbac_group_id"`
+
+  - `"user_id"`
 
 - `limit: optional number`
 
@@ -9917,8 +10068,11 @@ Get per-connector usage for a given day, with cursor-based pagination.
 Returns connector usage metrics for the organization, sorted by connector
 name. Connector names are normalized from their various sources — for
 example, "Atlassian MCP server" and "mcp-atlassian" both appear as
-"atlassian". Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+"atlassian". Use group_by[] to break usage out per member, per RBAC
+group, or per product surface, and filter[] to scope results; the
+parameter descriptions list the supported dimensions. Available to
+organizations on a Claude Enterprise plan. Requires an API key with the
+`read:analytics` scope.
 
 ### Query Parameters
 
@@ -9932,11 +10086,17 @@ Requires an API key with the `read:analytics` scope.
 
 - `filter: optional array of string`
 
-  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac_group_id accepts the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: connector_name, product, rbac_group_id, user_id. Value forms: connector_name matches case-insensitively, and a display name such as 'GitHub MCP' also matches its normalized stored form ('github'); product is one of chat, claude_code, cowork, or office_agent; rbac_group_id takes the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user_id takes a tagged user id (user_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-- `group_by: optional array of string`
+- `group_by: optional array of "product" or "rbac_group_id" or "user_id"`
 
-  Dimensions to break results out by, e.g. group_by[]=rbac_group_id. Supported dimensions vary by endpoint; an unsupported dimension returns 400. Grouped responses paginate like ungrouped ones via next_page. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+  Dimensions to break results out by (e.g. group_by[]=user_id). Supported on this endpoint: product, rbac_group_id, user_id. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next_page; an unsupported dimension returns 400. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+  - `"product"`
+
+  - `"rbac_group_id"`
+
+  - `"user_id"`
 
 - `limit: optional number`
 
@@ -10217,8 +10377,10 @@ curl https://api.anthropic.com/v1/organizations/analytics/connectors \
 Get per-project activity for a given day, with cursor-based pagination.
 
 Returns activity metrics for each project in the organization, sorted by
-project ID. Available to organizations on a Claude Enterprise plan.
-Requires an API key with the `read:analytics` scope.
+project ID. Use group_by[] to break projects out per member or per RBAC
+group, and filter[] to scope results; the parameter descriptions list the
+supported dimensions. Available to organizations on a Claude Enterprise
+plan. Requires an API key with the `read:analytics` scope.
 
 ### Query Parameters
 
@@ -10232,11 +10394,15 @@ Requires an API key with the `read:analytics` scope.
 
 - `filter: optional array of string`
 
-  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac_group_id accepts the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: project_id, rbac_group_id, user_id. Value forms: project_id takes a tagged project id (claude_proj_...); rbac_group_id takes the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user_id takes a tagged user id (user_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-- `group_by: optional array of string`
+- `group_by: optional array of "rbac_group_id" or "user_id"`
 
-  Dimensions to break results out by, e.g. group_by[]=rbac_group_id. Supported dimensions vary by endpoint; an unsupported dimension returns 400. Grouped responses paginate like ungrouped ones via next_page. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+  Dimensions to break results out by (e.g. group_by[]=user_id). Supported on this endpoint: rbac_group_id, user_id. Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next_page; an unsupported dimension returns 400. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+  - `"rbac_group_id"`
+
+  - `"user_id"`
 
 - `limit: optional number`
 
@@ -10302,6 +10468,12 @@ Requires an API key with the `read:analytics` scope.
 
         Email address of the user
 
+      - `type: optional "user"`
+
+        Object type. Always `user`.
+
+        - `"user"`
+
     - `distinct_conversation_count: optional number`
 
       Number of distinct conversations in the project. Null on aggregated rows where a distinct count cannot be computed.
@@ -10347,7 +10519,8 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
       "created_at": "created_at",
       "created_by": {
         "id": "id",
-        "email_address": "email_address"
+        "email_address": "email_address",
+        "type": "user"
       },
       "distinct_conversation_count": 0,
       "product": "product",
@@ -10402,6 +10575,12 @@ curl https://api.anthropic.com/v1/organizations/analytics/apps/chat/projects \
 
         Email address of the user
 
+      - `type: optional "user"`
+
+        Object type. Always `user`.
+
+        - `"user"`
+
     - `distinct_conversation_count: optional number`
 
       Number of distinct conversations in the project. Null on aggregated rows where a distinct count cannot be computed.
@@ -10439,7 +10618,10 @@ Code, sorted by plugin name. The `plugin_name` value `third-party` is
 an aggregate bucket, not a plugin: it collects plugin activity, from
 either surface, for which the reporting client did not provide a plugin
 name — so an organization's own plugins can contribute both to their own
-named rows and to this bucket. Requires an API key with the
+named rows and to this bucket. Use group_by[] to break usage out per
+member, per RBAC group, or per product surface (Cowork / Claude Code),
+and filter[] to scope results; the parameter descriptions list the
+supported dimensions. Requires an API key with the
 `read:analytics` scope. `starting_date` / `ending_date` select
 range-rollup mode like /skills.
 
@@ -10455,11 +10637,17 @@ range-rollup mode like /skills.
 
 - `filter: optional array of string`
 
-  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac_group_id accepts the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: plugin_name, product, rbac_group_id, user_id. Value forms: plugin_name matches case-insensitively; product is claude_code or cowork (the only surfaces with plugin attribution); rbac_group_id takes the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user_id takes a tagged user id (user_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-- `group_by: optional array of string`
+- `group_by: optional array of "product" or "rbac_group_id" or "user_id"`
 
-  Dimensions to break results out by, e.g. group_by[]=rbac_group_id. Supported dimensions vary by endpoint; an unsupported dimension returns 400. Grouped responses paginate like ungrouped ones via next_page. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+  Dimensions to break results out by (e.g. group_by[]=user_id). Supported on this endpoint: product, rbac_group_id, user_id. On this endpoint product takes the values claude_code or cowork only (the surfaces with plugin attribution). Grouped rows carry the requested dimension values as additional fields and paginate like ungrouped responses via next_page; an unsupported dimension returns 400. rbac_group_id attributes a user to every group they held at any point during each covered UTC day, so grouped rows are not an exclusive partition and can sum above org-level totals. At most 100 entries.
+
+  - `"product"`
+
+  - `"rbac_group_id"`
+
+  - `"user_id"`
 
 - `limit: optional number`
 
@@ -10659,8 +10847,9 @@ curl https://api.anthropic.com/v1/organizations/analytics/plugins \
 Get artifact-creation activity for a given day, broken out by MIME type.
 
 Returns the full (artifact_type, is_shared) cube for the organization;
-`next_page` is null except for grouped queries, which paginate. Requires
-an API key with the `read:analytics` scope.
+`next_page` is null except for grouped queries, which paginate. The cube
+can be broken out per member or per RBAC group via group_by[], and scoped
+via filter[]. Requires an API key with the `read:analytics` scope.
 
 ### Query Parameters
 
@@ -10670,11 +10859,15 @@ an API key with the `read:analytics` scope.
 
 - `filter: optional array of string`
 
-  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Unsupported dimensions return 400. rbac_group_id accepts the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution). At most 100 entries.
+  Filters as 'dimension:value', e.g. filter[]=rbac_group_id:<id>. Repeat the param for OR within a dimension and across dimensions for AND. Supported dimensions on this endpoint: artifact_type, is_shared, rbac_group_id, user_id. Value forms: artifact_type is a canonical artifact MIME type (e.g. text/markdown) or 'other'; is_shared is 'true' or 'false'; rbac_group_id takes the tagged id (rbac_group_..., as emitted in responses and by the spend-limits API) or a bare group UUID, and matches users who held the group at any point during each covered UTC day (time-of-usage attribution); user_id takes a tagged user id (user_...), as emitted in responses. An unsupported dimension returns 400. At most 100 entries.
 
-- `group_by: optional array of string`
+- `group_by: optional array of "rbac_group_id" or "user_id"`
 
   Dimensions to break results out by: user_id and/or rbac_group_id. The ungrouped artifact-type cube is finite and returned in full; grouped queries multiply the cube and paginate via next_page. rbac_group_id attributes a user to every group they held at any point during the requested UTC day, so grouped rows are not an exclusive partition. At most 100 entries.
+
+  - `"rbac_group_id"`
+
+  - `"user_id"`
 
 - `limit: optional number`
 
@@ -12945,9 +13138,13 @@ and contains the set of limiter values that apply to it.
 
 ### Returns
 
-- `data: array of object { group_type, limits, models, type }`
+- `data: array of object { id, group_type, limits, 2 more }`
 
   Rate-limit entries for the organization, one per group.
+
+  - `id: string`
+
+    Stable identifier for this rate-limit group within the organization.
 
   - `group_type: "batch" or "files" or "model_group" or 3 more`
 
@@ -13005,6 +13202,7 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
 {
   "data": [
     {
+      "id": "id",
       "group_type": "batch",
       "limits": [
         {
@@ -13028,9 +13226,13 @@ curl https://api.anthropic.com/v1/organizations/rate_limits \
 
 - `RateLimitListResponse object { data, next_page }`
 
-  - `data: array of object { group_type, limits, models, type }`
+  - `data: array of object { id, group_type, limits, 2 more }`
 
     Rate-limit entries for the organization, one per group.
+
+    - `id: string`
+
+      Stable identifier for this rate-limit group within the organization.
 
     - `group_type: "batch" or "files" or "model_group" or 3 more`
 

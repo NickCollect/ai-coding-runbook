@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/build-with-claude/working-with-messages
-fetched_at: 2026-07-27T04:31:46.530154+00:00
+fetched_at: 2026-08-10T03:07:40.992660+00:00
 fetch_method: mintlify_md
 ---
 
@@ -515,7 +515,7 @@ Claude can read both text and images in requests. You can supply images using th
   #!/bin/sh
 
   # Option 1: Base64-encoded image
-  IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+  IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
   IMAGE_MEDIA_TYPE="image/jpeg"
   IMAGE_BASE64=$(curl "$IMAGE_URL" | base64 | tr -d '\n')
 
@@ -552,7 +552,7 @@ Claude can read both text and images in requests. You can supply images using th
         {"role": "user", "content": [
           {"type": "image", "source": {
             "type": "url",
-            "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+            "url": "https://platform.claude.com/docs/images/vision-example.jpg"
           }},
           {"type": "text", "text": "What is in the above image?"}
         ]}
@@ -561,10 +561,10 @@ Claude can read both text and images in requests. You can supply images using th
   ```
 
   ```bash CLI
-  IMAGE_URL="https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+  IMAGE_URL="https://platform.claude.com/docs/images/vision-example.jpg"
 
   # Option 1: Base64-encoded image (CLI auto-encodes binary @file refs)
-  curl -s "$IMAGE_URL" -o ./ant.jpg
+  curl -s "$IMAGE_URL" -o ./vision-example.jpg
 
   ant messages create <<'YAML'
   model: claude-opus-5
@@ -576,7 +576,7 @@ Claude can read both text and images in requests. You can supply images using th
           source:
             type: base64
             media_type: image/jpeg
-            data: "@./ant.jpg"
+            data: "@./vision-example.jpg"
         - type: text
           text: What is in the above image?
   YAML
@@ -602,7 +602,7 @@ Claude can read both text and images in requests. You can supply images using th
   import httpx
 
   # Option 1: Base64-encoded image
-  image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+  image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
   image_media_type = "image/jpeg"
   image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
@@ -640,7 +640,7 @@ Claude can read both text and images in requests. You can supply images using th
                       "type": "image",
                       "source": {
                           "type": "url",
-                          "url": "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+                          "url": "https://platform.claude.com/docs/images/vision-example.jpg",
                       },
                   },
                   {"type": "text", "text": "What is in the above image?"},
@@ -655,8 +655,7 @@ Claude can read both text and images in requests. You can supply images using th
   const anthropic = new Anthropic();
 
   // Option 1: Base64-encoded image
-  const imageUrl =
-    "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+  const imageUrl = "https://platform.claude.com/docs/images/vision-example.jpg";
   const imageMediaType = "image/jpeg";
   const imageArrayBuffer = await (await fetch(imageUrl)).arrayBuffer();
   const imageData = Buffer.from(imageArrayBuffer).toString("base64");
@@ -698,7 +697,7 @@ Claude can read both text and images in requests. You can supply images using th
             type: "image",
             source: {
               type: "url",
-              url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+              url: "https://platform.claude.com/docs/images/vision-example.jpg"
             }
           },
           {
@@ -721,7 +720,7 @@ Claude can read both text and images in requests. You can supply images using th
   AnthropicClient client = new();
 
   // Option 1: Base64-encoded image
-  string imageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+  string imageUrl = "https://platform.claude.com/docs/images/vision-example.jpg";
 
   using HttpClient httpClient = new();
   byte[] imageBytes = await httpClient.GetByteArrayAsync(imageUrl);
@@ -769,7 +768,7 @@ Claude can read both text and images in requests. You can supply images using th
                   new ContentBlockParam(new ImageBlockParam(
                       new ImageBlockParamSource(new UrlImageSource()
                       {
-                          Url = new Uri("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"),
+                          Url = "https://platform.claude.com/docs/images/vision-example.jpg",
                       })
                   )),
                   new ContentBlockParam(new TextBlockParam("What is in the above image?")),
@@ -786,7 +785,7 @@ Claude can read both text and images in requests. You can supply images using th
   client := anthropic.NewClient()
 
   // Option 1: Base64-encoded image
-  imageURL := "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+  imageURL := "https://platform.claude.com/docs/images/vision-example.jpg"
 
   req, err := http.NewRequest("GET", imageURL, nil)
   if err != nil {
@@ -828,7 +827,7 @@ Claude can read both text and images in requests. You can supply images using th
   	Messages: []anthropic.MessageParam{
   		anthropic.NewUserMessage(
   			anthropic.NewImageBlock(anthropic.URLImageSourceParam{
-  				URL: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg",
+  				URL: "https://platform.claude.com/docs/images/vision-example.jpg",
   			}),
   			anthropic.NewTextBlock("What is in the above image?"),
   		),
@@ -844,7 +843,7 @@ Claude can read both text and images in requests. You can supply images using th
   AnthropicClient client = AnthropicOkHttpClient.fromEnv();
 
   // Option 1: Base64-encoded image
-  String imageUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg";
+  String imageUrl = "https://platform.claude.com/docs/images/vision-example.jpg";
 
   HttpClient httpClient = HttpClient.newHttpClient();
   HttpRequest request = HttpRequest.newBuilder().uri(URI.create(imageUrl)).build();
@@ -878,7 +877,7 @@ Claude can read both text and images in requests. You can supply images using th
       ContentBlockParam.ofImage(
           ImageBlockParam.builder()
               .source(UrlImageSource.builder()
-                  .url("https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg")
+                  .url("https://platform.claude.com/docs/images/vision-example.jpg")
                   .build())
               .build()),
       ContentBlockParam.ofText(
@@ -900,7 +899,7 @@ Claude can read both text and images in requests. You can supply images using th
   $client = new Client();
 
   // Option 1: Base64-encoded image
-  $image_url = 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg';
+  $image_url = 'https://platform.claude.com/docs/images/vision-example.jpg';
   $image_media_type = "image/jpeg";
   $image_data = base64_encode(file_get_contents($image_url));
 
@@ -940,7 +939,7 @@ Claude can read both text and images in requests. You can supply images using th
                       'type' => 'image',
                       'source' => [
                           'type' => 'url',
-                          'url' => 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg',
+                          'url' => 'https://platform.claude.com/docs/images/vision-example.jpg',
                       ],
                   ],
                   [
@@ -962,7 +961,7 @@ Claude can read both text and images in requests. You can supply images using th
   client = Anthropic::Client.new
 
   # Option 1: Base64-encoded image
-  image_url = "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+  image_url = "https://platform.claude.com/docs/images/vision-example.jpg"
   image_media_type = "image/jpeg"
   image_data = Base64.strict_encode64(Net::HTTP.get(URI(image_url)))
 
@@ -1003,7 +1002,7 @@ Claude can read both text and images in requests. You can supply images using th
             type: "image",
             source: {
               type: "url",
-              url: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Camponotus_flavomarginatus_ant.jpg"
+              url: "https://platform.claude.com/docs/images/vision-example.jpg"
             }
           },
           {
@@ -1020,21 +1019,21 @@ Claude can read both text and images in requests. You can supply images using th
 
 ```json Output
 {
-  "id": "msg_01EcyWo6m4hyW8KHs2y2pei5",
+  "id": "msg_011CdKmWtV3oFx1C5yUbf5CY",
   "type": "message",
   "role": "assistant",
   "content": [
     {
       "type": "text",
-      "text": "This image shows an ant, specifically a close-up view of an ant. The ant is shown in detail, with its distinct head, antennae, and legs clearly visible. The image is focused on capturing the intricate details and features of the ant, likely taken with a macro lens to get an extreme close-up perspective."
+      "text": "This image is a beautiful minimalist/flat-design illustration of a sunset landscape. Here's what it contains:\n\n**Sky & Sun:**\n- A warm gradient sky transitioning from golden-yellow at the top to deep orange toward the horizon\n- A large pale yellow sun positioned in the upper-right area\n\n**Birds:**\n- Three small silhouetted birds flying in the upper-left portion of the sky, depicted as simple \"M\" or \"v\" shapes\n\n**Mountains:**\n- Multiple layered mountain peaks in purple and maroon tones\n- The mountains overlap to create depth, with varying shades of dusty purple and deep burgundy\n\n**Water:**\n- A dark purple body of water at the bottom of the image\n- A reflection of the sun shown as horizontal cream/peach colored lines in the center-bottom area\n\nThe overall style is clean, geometric, and uses a warm sunset color palette (oranges, yellows, purples, and maroons), giving it a peaceful, serene aesthetic typical of modern vector/flat design artwork."
     }
   ],
   "model": "claude-opus-5",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
-    "input_tokens": 1551,
-    "output_tokens": 71
+    "input_tokens": 1030,
+    "output_tokens": 350
   }
 }
 ```

@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/release-notes/overview
-fetched_at: 2026-07-27T04:31:51.682851+00:00
+fetched_at: 2026-08-10T03:07:46.874193+00:00
 fetch_method: mintlify_md
 ---
 
@@ -15,6 +15,23 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 
   For updates to Claude Code, see the [complete CHANGELOG.md](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) in the `claude-code` repository.
 </Tip>
+
+### August 7, 2026
+
+* You can now set a budget on a Claude Managed Agents session: a hard cap on the session's spend, priced at public list rates. A session that reaches its budget pauses with the `budget_reached` stop reason instead of starting new model requests; changing or removing the budget resumes it. Deployments accept the same budget and apply it to each session they start. See [Session budgets](/docs/en/managed-agents/budgets).
+* You can now give a Claude Managed Agents session an advisor: a model at least as capable as the agent's own that the session's primary thread can consult mid-turn for strategic guidance. Configure it as a `{"type": "advisor"}` entry in the agent's multiagent roster, naming the `model` to consult. See [Give the session an advisor](/docs/en/managed-agents/multiagent-orchestration#give-the-session-an-advisor).
+* You can now control where model inference runs for a Claude Managed Agents agent. Set `inference_geo` inside the `model` object when you [create the agent](/docs/en/managed-agents/agent-setup#create-an-agent), or override it for a single session. See [Data residency](/docs/en/manage-claude/data-residency) for the available geos and pricing.
+* Claude Managed Agents sessions can now [load skills from a GitHub repository](/docs/en/managed-agents/skills#load-skills-from-a-github-repository). When a session [mounts a repository](/docs/en/managed-agents/github), any skills in its root `.claude/skills` directory are discovered automatically at session start and available to the agent for that session.
+
+### August 5, 2026
+
+* **Inference hooks** are now in beta for Claude Enterprise organizations. Point Claude at your organization's AI security server, and each governed prompt across claude.ai, Cowork, and Claude Code is held for the server's allow or deny verdict before inference proceeds. Requests are signed, failure handling is configurable, and every denial is recorded in the compliance [Activity Feed](/docs/en/manage-claude/compliance-activity-feed). See [Inference hooks](/docs/en/manage-claude/inference-hooks).
+
+- We've retired the Claude Opus 4.1 model (`claude-opus-4-1-20250805`). All requests to this model will now return an error. We recommend upgrading to [Claude Opus 5](/docs/en/about-claude/models/overview#latest-models-comparison). Researchers can request ongoing access through the [External Researcher Access Program](https://support.claude.com/en/articles/9125743-what-is-the-external-researcher-access-program).
+
+### August 1, 2026
+
+* [Dreams](/docs/en/managed-agents/dreams) (research preview) now supports Claude Opus 5. See [Supported models](/docs/en/managed-agents/dreams#limits).
 
 ### July 24, 2026
 
@@ -117,6 +134,7 @@ Updates to the Claude Platform, including the Claude API, client SDKs, and the C
 * Claude Fable 5 requires 30-day data retention and is not available under zero data retention. See [Model-specific data retention requirements](/docs/en/manage-claude/api-and-data-retention#model-specific-data-retention-requirements).
 * Claude Managed Agents now supports [scheduled deployments](/docs/en/managed-agents/scheduled-deployments), letting you run sessions on a cron schedule without managing your own scheduler.
 * Claude Managed Agents vaults now support [environment variable credentials](/docs/en/managed-agents/vaults#add-a-credential), so you can securely inject secrets into the agent's sandbox for CLIs, SDKs, and other services that authenticate through environment variables.
+* The [Compliance API](/docs/en/manage-claude/compliance-api) [Activity Feed](/docs/en/manage-claude/compliance-activity-feed) (`GET /v1/compliance/activities`) is now available on [Claude Platform on AWS](/docs/en/build-with-claude/claude-platform-on-aws). See [IAM actions for Claude Platform on AWS](/docs/en/api/claude-platform-on-aws-iam-actions#compliance) for the `ListComplianceActivities` action that authorizes it.
 * The `session.thread_*` webhook events now include a `session_thread_id` field identifying the multiagent thread that triggered the event.
 * We've released a [Swift package](/docs/en/cli-sdks-libraries/libraries/apple-foundation-models) in beta that adds Claude as a server-side `LanguageModel` in Apple's Foundation Models framework. Call Claude through the same `LanguageModelSession` API as Apple's on-device model on iOS 27, macOS 27, visionOS 27, and watchOS 27 (beta).
 

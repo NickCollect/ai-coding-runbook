@@ -1,6 +1,6 @@
 ---
 source_url: https://platform.claude.com/docs/en/manage-claude/compliance-activity-feed
-fetched_at: 2026-07-27T04:31:50.043723+00:00
+fetched_at: 2026-08-10T03:07:44.962331+00:00
 fetch_method: mintlify_md
 ---
 
@@ -77,15 +77,16 @@ Activities are returned newest first, with ties in `created_at` broken by activi
 
 The Compliance API uses two pagination schemes depending on the endpoint family:
 
-| Endpoint family                                                                                     | Sort order        | Scheme     | Parameters                                                  |
-| --------------------------------------------------------------------------------------------------- | ----------------- | ---------- | ----------------------------------------------------------- |
-| Activities                                                                                          | Newest first      | Cursor     | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
-| Chats and chat messages                                                                             | Oldest first      | Cursor     | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
-| Organizations, projects, project attachments, users, roles, role permissions, groups, group members | Endpoint-specific | Page token | `page` (returned as `next_page`)                            |
+| Endpoint family                                                                                     | Sort order                                              | Scheme     | Parameters                                                  |
+| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------- | ---------- | ----------------------------------------------------------- |
+| Activities                                                                                          | Newest first                                            | Cursor     | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
+| Chats and chat messages                                                                             | Oldest first                                            | Cursor     | `after_id`, `before_id` (returned as `first_id`, `last_id`) |
+| Organizations, projects, project attachments, users, roles, role permissions, groups, group members | Endpoint-specific                                       | Page token | `page` (returned as `next_page`)                            |
+| Remote sessions and session messages                                                                | Sessions newest first; messages oldest first by default | Page token | `page` (returned as `next_page`)                            |
 
 Files do not paginate: they are retrieved individually by ID.
 
-Pagination cursors and page tokens are opaque strings: pass them back unchanged. Their internal format is not stable, and parsing them will break without notice. Only one of `after_id` or `before_id` may be set in each request, and both schemes return `has_more` so you know when to stop.
+Pagination cursors and page tokens are opaque strings: pass them back unchanged. Their internal format is not stable, and parsing them will break without notice. Only one of `after_id` or `before_id` may be set in each request, and both schemes return `has_more` so you know when to stop. The remote session endpoints are the exception: they return `next_page` without `has_more`, so stop when `next_page` is `null`.
 
 To page through activities:
 
