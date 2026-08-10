@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/python
-fetched_at: 2026-08-03T04:24:59.498786+00:00
+fetched_at: 2026-08-10T03:07:42.092381+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 The `cursor-sdk` package lets you call Cursor's agent from your own Python code. The same agent that runs in the Cursor IDE, CLI, and web app is scriptable from Python with sync and async clients, typed dataclasses, and ordinary iteration for streams and pages. Run the `/sdk` skill inside Cursor to get started.
 
-For the REST API, see the [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints.md).
+For the REST API, see the [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints.md). For other languages, see the [SDK Bridge](https://cursor.com/docs/sdk/bridge.md).
 
 ## Overview
 
@@ -38,7 +38,7 @@ export CURSOR_API_KEY="your-key"
 
 SDK runs follow the same pricing, request pools, and Privacy Mode rules as runs from the IDE and Cloud Agents. Spend shows up in your team's [usage dashboard](https://cursor.com/dashboard/usage) under the SDK tag.
 
-To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/python.md#token-usage). To fetch billed usage and dollar cost for a cloud agent's runs, see [`agent.get_usage()`](https://cursor.com/docs/sdk/python.md#agentget_usage).
+To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/python.md#token-usage). To fetch billed usage and dollar cost for an agent's runs, see [`agent.get_usage()`](https://cursor.com/docs/sdk/python.md#agentget_usage).
 
 ## Core concepts
 
@@ -177,30 +177,28 @@ For values that should only exist during a single run, pass them on `agent.send(
 
 ### Agent metadata
 
-Use a raw `cloud` mapping to attach your own identifiers to a cloud agent when you create it. Metadata can link an agent to a user, tenant, workflow, or ticket in your system.
+Attach your own identifiers to a cloud agent when you create it. Metadata can link an agent to a user, tenant, workflow, or ticket in your system, and is read back on `SDKAgentInfo.metadata` from `client.agents.get()` and `client.agents.list()`.
 
 ```python
-from cursor_sdk import Agent
+from cursor_sdk import Agent, CloudAgentOptions, CloudRepository
 
 with Agent.create(
     model="composer-2.5",
-    cloud={
-        "repos": [{"url": "https://github.com/your-org/your-repo"}],
-        "metadata": {
+    cloud=CloudAgentOptions(
+        repos=[CloudRepository(url="https://github.com/your-org/your-repo")],
+        metadata={
             "end_user_id": "user-123",
             "ticket_id": "ENG-456",
         },
-    },
+    ),
 ) as agent:
     print(agent.agent_id)
 ```
 
 Metadata is available for cloud agents at creation time. You can attach up to 50 key-value pairs. Keys must be non-empty and no more than 255 characters. Values must be strings no larger than 4096 bytes. Empty string values are allowed, and an empty mapping is treated as no metadata.
 
-The typed `CloudAgentOptions` and `SDKAgentInfo` classes don't expose metadata
-yet. Pass it through a raw mapping as shown above. If metadata isn't enabled
-for the API key's account, creating an agent with a non-empty map returns
-`403 feature_unavailable`.
+If metadata isn't enabled for the API key's account, creating an agent with a
+non-empty map returns `403 feature_unavailable`.
 
 ### Model parameters
 
@@ -511,27 +509,6 @@ async with await AsyncClient.launch_bridge(
 
 `DefaultHttpxClient` and `DefaultAsyncHttpxClient` keep the SDK's default timeout and redirect behavior. Plain `httpx.Client` and `httpx.AsyncClient` use httpx defaults instead.
 
-### Connecting to a running bridge
-
-If you already have a bridge endpoint (for example, a sidecar managed by your platform), use `connect(...)` to attach without spawning a new process:
-
-```python
-from cursor_sdk import CursorClient, LocalAgentOptions
-
-with CursorClient.connect(
-    base_url="http://127.0.0.1:8765",
-    auth_token="bridge_token",
-) as client:
-    with client.agents.create(
-        model="composer-2.5",
-        api_key="crsr_key",
-        local=LocalAgentOptions(cwd="."),
-    ) as agent:
-        ...
-```
-
-Async equivalent uses `AsyncClient.connect(...)` and `await client.aclose()`. Both forms default to `allow_api_key_env_fallback=False`; pass `api_key=` on each call or opt into env fallback when constructing the client.
-
 ### Configuring timeouts and retries
 
 Both clients expose `with_options(...)`, which returns a shallow copy that shares connection settings and overrides defaults:
@@ -727,7 +704,7 @@ Async equivalent: `async for message in run.messages()` and `await run.wait()`. 
 
 `TokenUsage` is exported from `cursor_sdk` (plus `to_token_usage` / `sum_token_usage` for advanced callers). Wire JSON is camelCase (`inputTokens`, …); the Python dataclasses use snake\_case.
 
-Token counts are what the runtime reports; they say nothing about cost. For billed usage and the dollar cost of a cloud agent's runs, call [`agent.get_usage()`](https://cursor.com/docs/sdk/python.md#agentget_usage).
+Token counts are what the runtime reports; they say nothing about cost. For billed usage and the dollar cost of an agent's runs, call [`agent.get_usage()`](https://cursor.com/docs/sdk/python.md#agentget_usage).
 
 ### Reading text output
 
@@ -1051,18 +1028,6 @@ await run.wait()
 
 `agent.model` is `None` on resume unless you pass `model` again. Inline MCP servers are not persisted across resume; they often carry secrets and live in memory only. Pass them again on resume, or use file-based MCP config (`.cursor/mcp.json` plus `local.setting_sources`) for servers that should survive.
 
-When you resume a cloud agent through a caller-supplied bridge (`CursorClient.connect(...)` or `AsyncClient.connect(...)`), the SDK requires an explicit `api_key` so the bridge can authenticate downstream agent calls. Pass it through `AgentOptions`:
-
-```python
-from cursor_sdk import AgentOptions
-
-agent = Agent.resume(
-    "bc-abc123",
-    AgentOptions(api_key="crsr_key"),
-    client=client,
-)
-```
-
 ### Local persistence
 
 Local agents persist conversation state and run metadata through the bridge, so follow-ups and `Agent.resume()` survive a process restart. The bridge keeps this under a per-workspace state root on disk by default. Cloud agents persist server-side, so resuming a cloud agent from anywhere returns the same conversation.
@@ -1130,6 +1095,7 @@ class SDKAgentInfo:
     cwd: str = ""
     env: CloudEnvironment | None = None
     repos: Sequence[str] = ()
+    metadata: Mapping[str, str] = {}  # from CloudAgentOptions.metadata; empty for local agents
 ```
 
 ### Cloud agent lifecycle
@@ -1159,7 +1125,7 @@ Async lifecycle methods use the same names and are awaitable.
 
 ### agent.get\_usage()
 
-Fetch billed token usage and dollar cost for a cloud agent's runs. Pass `run_id` to restrict the result to a single run.
+Fetch billed token usage and dollar cost for an agent's runs. Cloud agents return a per-run breakdown; local agents return a per-turn breakdown. Pass `run_id` to restrict the result to one entry: for cloud agents a `run-<uuid>` run ID, for local agents an ID from a previous `get_usage().runs[].run_id`.
 
 ```python
 usage = agent.get_usage()
@@ -1192,7 +1158,7 @@ class UsageCost:
 
 Cost includes discounts and can take a moment to settle after a run ends; `cost` is `None` until it does. `charged_cents` is `0.0` for plan-included, BYOK, and credit-grant usage.
 
-This is a different view than [Token usage](https://cursor.com/docs/sdk/python.md#token-usage): `run.usage` is the live token count for one run, while `get_usage()` is the billed record across the agent's runs. Cloud agents only for now; local agents raise `ConfigurationError`. On async agents, `await agent.get_usage()` matches. `AgentUsage`, `RunUsage`, and `UsageCost` are exported from `cursor_sdk`.
+This is a different view from [Token usage](https://cursor.com/docs/sdk/python.md#token-usage): `run.usage` is the live token count for one run, while `get_usage()` is the billed record across the agent's runs. On async agents, `await agent.get_usage()` matches. `AgentUsage`, `RunUsage`, and `UsageCost` are exported from `cursor_sdk`.
 
 ## The Cursor namespace
 
@@ -1380,6 +1346,37 @@ Subagents committed to the repo at `.cursor/agents/*.md` (with `name`, `descript
 
 Subagents can spawn their own subagents, within a nesting limit. When a subagent uses the `Agent` tool, it reaches the same subagent executor the parent has, so a parent can delegate to a subagent that delegates further. Each level sees the same set of named subagents. The top-level agent and its direct subagents can launch subagents, but a subagent launched by another subagent can't launch further ones.
 
+## Restricting the toolset
+
+`tools` allowlists the built-in tools offered to the model; `disallowed_tools` removes tools and keeps the rest, including tools added to the platform after your SDK version was released. Both are local agents only for now, and neither persists on the agent: pass them again on resume to keep the restriction.
+
+```python
+from cursor_sdk import Agent, AgentOptions, LocalAgentOptions
+
+# Read-only agent: only these tools are offered.
+reader = Agent.create(
+    AgentOptions(
+        model="composer-2.5",
+        tools=["read", "grep", "glob", "ls"],
+        local=LocalAgentOptions(cwd="."),
+    )
+)
+
+# Everything except shell access.
+no_shell = Agent.create(
+    AgentOptions(
+        model="composer-2.5",
+        disallowed_tools=["shell"],
+        local=LocalAgentOptions(cwd="."),
+    )
+)
+```
+
+- Omitting `tools` offers the standard toolset for the selected model; `tools=[]` offers no built-in tools, so the model can only respond with text.
+- Both fields accept public names (`"read"`, `"edit"`, `"task"`, `"webSearch"`, ...) and the capability groups `"shell"` and `"mcp"`. Unknown names raise `BadRequestError` at creation.
+- Deny wins: a tool must be in `tools` (when set) and not in `disallowed_tools` to be offered.
+- Disallowing `"mcp"` also removes [custom tools](https://cursor.com/docs/sdk/python.md#custom-tools). Disallowing `"task"` prevents [subagents](https://cursor.com/docs/sdk/python.md#subagents); otherwise subagents keep their own curated toolsets.
+
 ## Custom tools
 
 Custom tools let you expose Python functions to local agents without standing up a separate MCP server. Pass them on `LocalAgentOptions.custom_tools`.
@@ -1505,40 +1502,45 @@ The Python SDK accepts helper dataclasses and raw dictionaries. Dataclasses use 
 
 ### AgentOptions
 
-| Property          | Type                                                 | Default                                                             | Description                                                                                                                                                                           |
-| :---------------- | :--------------------------------------------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `model`           | `str \| ModelSelection \| Mapping[str, Any]`         | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/python.md#modelselection).                                                                                           |
-| `api_key`         | `str`                                                | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                                                                           |
-| `name`            | `str`                                                | Auto-generated                                                      | Human-readable agent name surfaced in `client.agents.list()` / `client.agents.get()`.                                                                                                 |
-| `local`           | `LocalAgentOptions \| Mapping[str, Any]`             | `None`                                                              | Local agent config. Pass to create a local agent.                                                                                                                                     |
-| `cloud`           | `CloudAgentOptions \| Mapping[str, Any]`             | `None`                                                              | Cloud agent config. Pass to create a cloud agent.                                                                                                                                     |
-| `mcp_servers`     | `Mapping[str, McpServerConfig]`                      | `None`                                                              | Inline MCP server definitions.                                                                                                                                                        |
-| `agents`          | `Mapping[str, AgentDefinition \| Mapping[str, Any]]` | `None`                                                              | Subagent definitions.                                                                                                                                                                 |
-| `agent_id`        | `str`                                                | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                                                                        |
-| `idempotency_key` | `str`                                                | Auto-generated for cloud                                            | Optional client-generated idempotency key. Cloud only.                                                                                                                                |
-| `mode`            | `"agent" \| "plan"`                                  | `None`                                                              | Initial conversation mode for the agent's first run. When omitted, the server starts in agent mode. See [Conversation mode](https://cursor.com/docs/sdk/python.md#conversation-mode). |
+| Property           | Type                                                 | Default                                                             | Description                                                                                                                                                                           |
+| :----------------- | :--------------------------------------------------- | :------------------------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `model`            | `str \| ModelSelection \| Mapping[str, Any]`         | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/python.md#modelselection).                                                                                           |
+| `api_key`          | `str`                                                | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                                                                           |
+| `name`             | `str`                                                | Auto-generated                                                      | Human-readable agent name surfaced in `client.agents.list()` / `client.agents.get()`.                                                                                                 |
+| `local`            | `LocalAgentOptions \| Mapping[str, Any]`             | `None`                                                              | Local agent config. Pass to create a local agent.                                                                                                                                     |
+| `cloud`            | `CloudAgentOptions \| Mapping[str, Any]`             | `None`                                                              | Cloud agent config. Pass to create a cloud agent.                                                                                                                                     |
+| `mcp_servers`      | `Mapping[str, McpServerConfig]`                      | `None`                                                              | Inline MCP server definitions.                                                                                                                                                        |
+| `agents`           | `Mapping[str, AgentDefinition \| Mapping[str, Any]]` | `None`                                                              | Subagent definitions.                                                                                                                                                                 |
+| `tools`            | `Sequence[str]`                                      | Default toolset                                                     | Only the listed built-in tools are offered to the model. `[]` means no built-in tools; the model can only respond with text. Local agents only.                                       |
+| `disallowed_tools` | `Sequence[str]`                                      | `None`                                                              | Removes the listed built-in tools; everything else stays available. Deny wins when combined with `tools`. Local agents only.                                                          |
+| `agent_id`         | `str`                                                | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                                                                        |
+| `idempotency_key`  | `str`                                                | Auto-generated for cloud                                            | Optional client-generated idempotency key. Cloud only.                                                                                                                                |
+| `mode`             | `"agent" \| "plan"`                                  | `None`                                                              | Initial conversation mode for the agent's first run. When omitted, the server starts in agent mode. See [Conversation mode](https://cursor.com/docs/sdk/python.md#conversation-mode). |
 
 ### LocalAgentOptions
 
-| Property          | Type                                                 | Default | Description                                                                                 |
-| :---------------- | :--------------------------------------------------- | :------ | :------------------------------------------------------------------------------------------ |
-| `cwd`             | `str \| os.PathLike \| Sequence[str \| os.PathLike]` | `None`  | Workspace path or paths.                                                                    |
-| `setting_sources` | `Sequence[SettingSource]`                            | `None`  | Ambient settings layers: `"project"`, `"user"`, `"team"`, `"mdm"`, `"plugins"`, or `"all"`. |
-| `sandbox_options` | `SandboxOptions \| Mapping[str, Any]`                | `None`  | Local sandbox options.                                                                      |
-| `store`           | `LocalAgentStoreConfig \| Mapping[str, Any]`         | `None`  | Local store config passed to the bridge.                                                    |
-| `auto_review`     | `bool`                                               | `None`  | Route local tool calls through Auto-review when the connected backend supports it.          |
-| `custom_tools`    | `Mapping[str, CustomTool \| Mapping[str, Any]]`      | `None`  | [Custom tools](https://cursor.com/docs/sdk/python.md#custom-tools) exposed to local agents. |
+| Property          | Type                                            | Default | Description                                                                                                                         |
+| :---------------- | :---------------------------------------------- | :------ | :---------------------------------------------------------------------------------------------------------------------------------- |
+| `cwd`             | `str \| os.PathLike`                            | `None`  | Primary working directory. Multi-entry lists are rejected; use `dirs` for multi-root.                                               |
+| `dirs`            | `Sequence[str \| os.PathLike]`                  | `None`  | Additional workspace folders for multi-root setups. Merged with `cwd` so rules, skills, and workspace context load from every path. |
+| `setting_sources` | `Sequence[SettingSource]`                       | `None`  | Ambient settings layers: `"project"`, `"user"`, `"team"`, `"mdm"`, `"plugins"`, or `"all"`.                                         |
+| `sandbox_options` | `SandboxOptions \| Mapping[str, Any]`           | `None`  | Local sandbox options.                                                                                                              |
+| `store`           | `LocalAgentStoreConfig \| Mapping[str, Any]`    | `None`  | Local store config passed to the bridge.                                                                                            |
+| `auto_review`     | `bool`                                          | `None`  | Route local tool calls through Auto-review when the connected backend supports it.                                                  |
+| `custom_tools`    | `Mapping[str, CustomTool \| Mapping[str, Any]]` | `None`  | [Custom tools](https://cursor.com/docs/sdk/python.md#custom-tools) exposed to local agents.                                         |
 
 ### CloudAgentOptions
 
-| Property                 | Type                                             | Default | Description                                                                                                                                                                |
-| :----------------------- | :----------------------------------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `env`                    | `CloudEnvironment \| Mapping[str, Any]`          | `None`  | Execution environment. When omitted, the server uses Cursor-hosted cloud VMs. `pool` and `machine` target self-hosted workers you run.                                     |
-| `repos`                  | `Sequence[CloudRepository \| Mapping[str, Any]]` | `None`  | Repositories to clone into the VM. Omit both `repos` and `env` for a no-repo agent with an empty workspace. Pass `pr_url` on a repo to attach the agent to an existing PR. |
-| `work_on_current_branch` | `bool`                                           | `None`  | Push commits to the existing branch instead of a new one. The server treats an omitted value as `False`.                                                                   |
-| `auto_create_pr`         | `bool`                                           | `None`  | Open a PR when the run finishes. The server treats an omitted value as `False`.                                                                                            |
-| `skip_reviewer_request`  | `bool`                                           | `None`  | Skip requesting the calling user as a reviewer on the PR. The server treats an omitted value as `False`.                                                                   |
-| `env_vars`               | `Mapping[str, str]`                              | `None`  | Session-scoped environment variables for cloud agents.                                                                                                                     |
+| Property                    | Type                                             | Default                                                | Description                                                                                                                                                                |
+| :-------------------------- | :----------------------------------------------- | :----------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `env`                       | `CloudEnvironment \| Mapping[str, Any]`          | `None`                                                 | Execution environment. When omitted, the server uses Cursor-hosted cloud VMs. `pool` and `machine` target self-hosted workers you run.                                     |
+| `repos`                     | `Sequence[CloudRepository \| Mapping[str, Any]]` | `None`                                                 | Repositories to clone into the VM. Omit both `repos` and `env` for a no-repo agent with an empty workspace. Pass `pr_url` on a repo to attach the agent to an existing PR. |
+| `work_on_current_branch`    | `bool`                                           | `None`                                                 | Push commits to the existing branch instead of a new one. The server treats an omitted value as `False`.                                                                   |
+| `auto_create_pr`            | `bool`                                           | `None`                                                 | Open a PR when the run finishes. The server treats an omitted value as `False`.                                                                                            |
+| `open_as_cursor_github_app` | `bool`                                           | `True` for service-account keys, `False` for user keys | Open PRs as the Cursor GitHub App instead of the API key's owner. The resolved value is echoed on create, get, and list.                                                   |
+| `skip_reviewer_request`     | `bool`                                           | `None`                                                 | Skip requesting the calling user as a reviewer on the PR. The server treats an omitted value as `False`.                                                                   |
+| `env_vars`                  | `Mapping[str, str]`                              | `None`                                                 | Session-scoped environment variables for cloud agents.                                                                                                                     |
+| `metadata`                  | `Mapping[str, str]`                              | `None`                                                 | Caller-owned string tags persisted on the cloud agent. See [Agent metadata](https://cursor.com/docs/sdk/python.md#agent-metadata).                                         |
 
 ### AgentDefinition
 
@@ -1809,8 +1811,7 @@ cursor-sdk-bridge --help
 
 - Tool-call payload schemas are intentionally not strongly typed.
 - Inline MCP servers are not persisted across `Agent.resume()`. Pass them again on resume if needed.
-- Custom tools (`local.custom_tools`) are local agents only.
-- `agent.get_usage()` is cloud agents only for now. Local agents raise `ConfigurationError`.
+- Custom tools (`local.custom_tools`) and toolset restrictions (`tools`, `disallowed_tools`) are local agents only. The restrictions don't persist on the agent; pass them again on resume.
 - Artifact download is not implemented for local agents.
 - `local.setting_sources` (and the file-based MCP and subagent paths it gates) does not apply to cloud agents. Cloud always loads `project`, `team`, and `plugins`.
 - Hooks are file-based only (`.cursor/hooks.json`). No programmatic callbacks.

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/security
-fetched_at: 2026-08-03T04:24:57.675657+00:00
+fetched_at: 2026-08-10T03:07:40.416926+00:00
 fetch_method: mintlify_md
 ---
 
@@ -8,7 +8,7 @@ fetch_method: mintlify_md
 
 This page explains how Cloud Agents are built and secured. It walks through what happens when an agent runs, how access is granted, where the code and data live, how they're isolated and encrypted, and what controls you have over each stage. It answers the questions that come up when a team evaluates Cloud Agents against its security requirements.
 
-For the configuration reference, including secret types, network access modes, and egress IP ranges, see [Secrets & Network](https://cursor.com/docs/cloud-agent/security-network.md). This page explains the model behind those controls; that page tells you how to set them.
+For the configuration reference, including secret types, network access modes, and egress IP ranges, see [Secrets & Network](https://cursor.com/docs/cloud-agent/security-network.md). For federating a VM into AWS, GCP, Azure, or a custom verifier without long-lived keys, see [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md). This page explains the model behind those controls; those pages tell you how to set them.
 
 This is a companion to Cursor's broader security material. See the [Trust Center](https://trust.cursor.com/) for certifications, subprocessors, and architecture, and the [Security and Privacy Hardening](https://cursor.com/docs/enterprise/security-hardening.md) reference for the controls you own across all of Cursor. Cursor is SOC 2 Type 2 compliant and commits to at-least-annual penetration testing by reputable third parties.
 
@@ -88,13 +88,13 @@ For deeper defense, pair these with [hooks](https://cursor.com/docs/hooks.md) to
 
 ## Risk considerations
 
-| Risk                                | Mitigation                                                                                                                                                                                              |
-| :---------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **Full codebase in the cloud**      | Isolated per-agent VMs, AES-256 encryption, and automatic VM and snapshot deletion on lifecycle timers.                                                                                                 |
-| **Third-party or insider access**   | No Cursor employee access to code in agent VMs, with monitored access attempts. VMs run in a separate AWS account from other Cursor services.                                                           |
-| **Agent autonomy**                  | Scope bounded by the repository and the triggering user's access. External reach is limited to configured tools and terminal commands, gated by network egress controls and reviewed through draft PRs. |
-| **Network access and exfiltration** | Internet access is on by default but can be restricted to allowlisted domains, down to allowlist-only, and locked org-wide.                                                                             |
-| **Secret exposure**                 | Encrypted secret storage, redacted runtime secrets kept out of the model, and build-only secrets scoped to the Docker build.                                                                            |
+| Risk                                | Mitigation                                                                                                                                                                                                                    |
+| :---------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Full codebase in the cloud**      | Isolated per-agent VMs, AES-256 encryption, and automatic VM and snapshot deletion on lifecycle timers.                                                                                                                       |
+| **Third-party or insider access**   | No Cursor employee access to code in agent VMs, with monitored access attempts. VMs run in a separate AWS account from other Cursor services.                                                                                 |
+| **Agent autonomy**                  | Scope bounded by the repository and the triggering user's access. External reach is limited to configured tools and terminal commands, gated by network egress controls and reviewed through draft PRs.                       |
+| **Network access and exfiltration** | Internet access is on by default but can be restricted to allowlisted domains, down to allowlist-only, and locked org-wide.                                                                                                   |
+| **Secret exposure**                 | Encrypted secret storage, redacted runtime secrets kept out of the model, build-only secrets scoped to the Docker build, and [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md) for short-lived cloud federation. |
 
 ## Auditability
 
@@ -135,7 +135,7 @@ Yes. Cloud Agents can only reach repositories you authorize through your Git pro
 
 ### Can a Cloud Agent read secrets and credentials?
 
-Configure secrets through the Secrets tab in your dashboard. They're encrypted at rest with KMS, encrypted in transit, and injected as environment variables at runtime. Mark sensitive values as [Runtime Secrets](https://cursor.com/docs/cloud-agent/security-network.md#runtime-secrets) to keep them out of the transcript, tool output, and commits. As a matter of practice, keep secrets out of the repository; if sensitive files must live there, add them to [`.cursorignore`](https://cursor.com/docs/reference/ignore-file.md).
+Configure secrets through the Secrets tab in your dashboard. They're encrypted at rest with KMS, encrypted in transit, and injected as environment variables at runtime. Mark sensitive values as [Runtime Secrets](https://cursor.com/docs/cloud-agent/security-network.md#runtime-secrets) to keep them out of the transcript, tool output, and commits. As a matter of practice, keep secrets out of the repository; if sensitive files must live there, add them to [`.cursorignore`](https://cursor.com/docs/reference/ignore-file.md). For cloud roles, mint [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md) from the VM instead of storing long-lived access keys.
 
 ### Can we audit Cloud Agent activity?
 
@@ -148,6 +148,7 @@ Archive an agent from the dashboard, or use the [Delete Agent API](https://curso
 ## Related pages
 
 - [Secrets & Network](https://cursor.com/docs/cloud-agent/security-network.md) for secret types, network access modes, egress IP ranges, and signed commits.
+- [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md) for short-lived JWTs and cloud federation.
 - [Privacy and Data Governance](https://cursor.com/docs/enterprise/privacy-and-data-governance.md) for data flows, Privacy Mode, and encryption.
 - [Security and Privacy Hardening](https://cursor.com/docs/enterprise/security-hardening.md) for the controls you configure across Cursor.
 - [Trust Center](https://trust.cursor.com/) for certifications, subprocessors, and architecture.

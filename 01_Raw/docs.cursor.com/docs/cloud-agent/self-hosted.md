@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/self-hosted
-fetched_at: 2026-07-20T04:31:20.152761+00:00
+fetched_at: 2026-08-10T03:07:40.514994+00:00
 fetch_method: mintlify_md
 ---
 
@@ -25,7 +25,7 @@ You don't need to own the compute to keep agents inside your security perimeter.
 - **Cloudflare Tunnel.** An outbound-only tunnel for reaching a private origin when PrivateLink isn't practical.
 - **Tailscale or a similar client.** Userspace networking inside the agent environment for services in your VPC or intranet.
 
-See [Private connectivity](https://cursor.com/docs/enterprise/private-connectivity.md) for AWS PrivateLink and Cloudflare Tunnel setup, and [Cloud Agent security and network](https://cursor.com/docs/cloud-agent/security-network.md#private-network-access) for private network access and Tailscale.
+See [Private connectivity](https://cursor.com/docs/cloud-agent/private-connectivity.md) for AWS PrivateLink and Cloudflare Tunnel setup, and [Cloud Agent security and network](https://cursor.com/docs/cloud-agent/security-network.md#private-network-access) for private network access and Tailscale.
 
 ## Guardrails and policies you control
 
@@ -50,7 +50,7 @@ Need to run agents on your own infrastructure for a regulated or complex setup? 
 
 - [Cloud Agents overview](https://cursor.com/docs/cloud-agent.md) for how managed agents work.
 - [Cloud Agent setup](https://cursor.com/docs/cloud-agent/setup.md) to configure environments, secrets, and network access.
-- [Private connectivity](https://cursor.com/docs/enterprise/private-connectivity.md) for AWS PrivateLink and Cloudflare Tunnel.
+- [Private connectivity](https://cursor.com/docs/cloud-agent/private-connectivity.md) for AWS PrivateLink and Cloudflare Tunnel.
 - [Cloud Agent security and network](https://cursor.com/docs/cloud-agent/security-network.md) for the security and retention model.
 
 ### Bring Cloud Agents to your enterprise

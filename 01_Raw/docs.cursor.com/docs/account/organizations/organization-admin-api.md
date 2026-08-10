@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/account/organizations/organization-admin-api
-fetched_at: 2026-07-27T04:31:47.592625+00:00
+fetched_at: 2026-08-10T03:07:39.415832+00:00
 fetch_method: mintlify_md
 ---
 
 # Organization API
 
-The Organization API lets you perform actions that apply across teams linked to an organization, such as moving users between those teams, reporting on pooled usage across teams, and managing organization groups. It uses an **Organization API key** and the same HTTP patterns as the [team Admin API](https://cursor.com/docs/account/teams/admin-api.md).
+The Organization API lets you perform actions that apply across teams linked to an organization, such as moving users between those teams, reporting on pooled usage across teams, managing organization groups, and reading or updating model access. It uses an **Organization API key** and the same HTTP patterns as the [team Admin API](https://cursor.com/docs/account/teams/admin-api.md).
 
 - The Organization API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication) with your API key as the username.
 - For details on creating API keys, authentication methods, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
@@ -30,14 +30,16 @@ Use a **Team API key** when calling team-level endpoints under `/teams/*` (for e
 
 Every Organization API key carries exactly one scope. A route runs only when the key's scope covers it, and broader scopes include everything narrower scopes allow.
 
-| Scope          | Access                                                                                     | Example routes                                                                                                                                       |
-| -------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `members:read` | Read-only access to organization membership.                                               | `GET /organizations/members`                                                                                                                         |
-| `members:*`    | Read and write access to membership and groups. Includes everything `members:read` allows. | `GET /organizations/members`, `POST /organizations/team-memberships/sync`, all `/organizations/groups` routes                                        |
-| `usage:*`      | Read access to pooled usage and reporting.                                                 | `POST /organizations/pooled-usage`, `POST /organizations/filtered-usage-events`, `POST /organizations/daily-usage-data`, `POST /organizations/spend` |
-| `admin:*`      | Full access to every organization route.                                                   | All of the above                                                                                                                                     |
+| Scope          | Access                                                                                     | Example routes                                                                                                                                                                    |
+| -------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `members:read` | Read-only access to organization membership.                                               | `GET /organizations/members`                                                                                                                                                      |
+| `members:*`    | Read and write access to membership and groups. Includes everything `members:read` allows. | `GET /organizations/members`, `POST /organizations/team-memberships/sync`, all `/organizations/groups` routes                                                                     |
+| `usage:*`      | Read access to pooled usage and reporting.                                                 | `POST /organizations/pooled-usage`, `POST /organizations/filtered-usage-events`, `POST /organizations/daily-usage-data`, `POST /organizations/spend`                              |
+| `models:read`  | Read-only access to model-access configuration and provider inventories.                   | `GET /organizations/teams/model-access/configuration`, `GET /organizations/teams/{teamId}/model-access/configuration`, `GET /organizations/teams/{teamId}/model-access/providers` |
+| `models:*`     | Read and write access to model access. Includes everything `models:read` allows.           | All model-access routes, including bulk provider/model toggles                                                                                                                    |
+| `admin:*`      | Full access to every organization route.                                                   | All of the above                                                                                                                                                                  |
 
-Pick the narrowest scope for the job. Use `members:read` for read-only integrations that list members but never change membership. You can select the `members:read` scope when you create an Organization API key in the dashboard.
+Pick the narrowest scope for the job. Use `members:read` for read-only integrations that list members but never change membership. Use `models:read` or `models:*` for model-access automation without granting full admin. You can select these scopes when you create an Organization API key in the dashboard.
 
 ### How should I pass an Organization API key?
 
@@ -859,6 +861,335 @@ curl -X POST https://api.cursor.com/organizations/spend \
   }
 }
 ```
+
+## Model access
+
+Model access routes are in preview and may change. Paths, response fields, and error behavior can shift before general availability.
+
+Read and update [model access](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) policy for teams linked to the organization. These routes match the team [model access](https://cursor.com/docs/account/teams/admin-api.md#model-access) API, scoped to linked teams.
+
+Use the list and per-team GETs to catch configuration drift. Align teams with configuration PUTs plus provider/model toggles. There is no org-level copy endpoint or policy fingerprint.
+
+Numeric `teamId` values come from routes such as [`GET /organizations/members`](https://cursor.com/docs/account/organizations/organization-admin-api.md#list-organization-members).
+
+- **Availability**: Enterprise organizations. Target teams must have model access control enabled.
+- **Authentication**: Organization API key (Basic auth). Reads require **`models:read`**. Writes require **`models:*`**. Keys with **`admin:*`** work for both. **`members:*`**, **`usage:*`**, and **`read:*`** keys cannot call these routes.
+- **Team containment**: Every `teamId` must be linked to the organization. On single-team routes, unknown or unlinked teams return **404**. On bulk routes, unlinked teams are HTTP 200 error rows.
+- **Configuration first**: Provider and model writes return **409** while that team is still `unrestricted` (or `legacy`). Create a custom policy with `PUT /organizations/teams/{teamId}/model-access/configuration` first. The first PUT seeds catalog defaults; it does not clone another team's on/off map.
+- **Bulk toggles**: Bulk routes accept up to 100 `teamIds` and return HTTP 200 with per-row `status`, `successCount`, and `errorCount` (same shape as [`/organizations/team-memberships/sync`](https://cursor.com/docs/account/organizations/organization-admin-api.md#sync-organization-team-memberships)).
+- **Rate limits**: 20 requests per minute. Writes appear in team audit logs as `team_settings` events. See [rate limits and best practices](https://cursor.com/docs/api.md#rate-limits).
+
+### List Model Access Configuration
+
+/organizations/teams/model-access/configuration
+
+List model-access configuration for linked teams. Use this to find unrestricted vs custom policy drift. For on/off drift, `GET` each team's providers and compare.
+
+If a linked team does not have model access control enabled, that row is still HTTP 200 and includes `errorMessage` instead of `state` / defaults. Per-team GET and write routes for that team return **403**.
+
+#### Query parameters
+
+`page` number
+
+Page number (1-indexed).
+
+`pageSize` number
+
+Results per page.
+
+`teamIds` string
+
+Optional comma-separated team IDs, for example `7,8,9`.
+
+```bash
+curl -X GET "https://api.cursor.com/organizations/teams/model-access/configuration?page=1&pageSize=50" \
+  -u YOUR_ORGANIZATION_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "teams": [
+    {
+      "teamId": 7,
+      "teamName": "Platform",
+      "state": "custom",
+      "newProviderDefault": "disabled",
+      "newModelDefault": "enabled"
+    },
+    {
+      "teamId": 8,
+      "teamName": "Mobile",
+      "state": "custom",
+      "newProviderDefault": "disabled",
+      "newModelDefault": "enabled"
+    },
+    {
+      "teamId": 9,
+      "teamName": "Data",
+      "state": "unrestricted",
+      "newProviderDefault": null,
+      "newModelDefault": null
+    },
+    {
+      "teamId": 10,
+      "teamName": "Research",
+      "errorMessage": "Model access control is not available for this team"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "pageSize": 50,
+    "totalCount": 4,
+    "totalPages": 1,
+    "hasNextPage": false,
+    "hasPreviousPage": false
+  }
+}
+```
+
+### Get Team Model Access Configuration
+
+/organizations/teams/:teamId/model-access/configuration
+
+Get configuration for one linked team.
+
+#### Parameters
+
+`teamId` number Required
+
+Integer ID of a team linked to the organization.
+
+```bash
+curl -X GET https://api.cursor.com/organizations/teams/7/model-access/configuration \
+  -u YOUR_ORGANIZATION_API_KEY:
+```
+
+### Update Team Model Access Configuration
+
+/organizations/teams/:teamId/model-access/configuration
+
+Create or update configuration for one linked team. Same body and seeding behavior as the team route.
+
+#### Parameters
+
+`teamId` number Required
+
+Integer ID of a team linked to the organization.
+
+#### Request body
+
+`newProviderDefault` string Required
+
+`enabled` or `disabled`.
+
+`newModelDefault` string Required
+
+`enabled` or `disabled`.
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/configuration \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "newProviderDefault": "disabled",
+    "newModelDefault": "enabled"
+  }'
+```
+
+### Get Team Model Access Providers
+
+/organizations/teams/:teamId/model-access/providers
+
+List providers and models for one linked team.
+
+#### Parameters
+
+`teamId` number Required
+
+Integer ID of a team linked to the organization.
+
+```bash
+curl -X GET https://api.cursor.com/organizations/teams/7/model-access/providers \
+  -u YOUR_ORGANIZATION_API_KEY:
+```
+
+### Update Team Model Access Provider
+
+/organizations/teams/:teamId/model-access/providers/:provider
+
+Enable or disable a provider on one linked team.
+
+#### Parameters
+
+`teamId` number Required
+
+Integer ID of a team linked to the organization.
+
+`provider` string Required
+
+Catalog provider id (for example `openai`).
+
+#### Request body
+
+`enabled` boolean Required
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/providers/openai \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": false}'
+```
+
+### Update Team Model Access Model
+
+/organizations/teams/:teamId/model-access/providers/:provider/models/:model
+
+Enable or disable a model on one linked team.
+
+#### Parameters
+
+`teamId` number Required
+
+Integer ID of a team linked to the organization.
+
+`provider` string Required
+
+Catalog provider id (for example `anthropic`).
+
+`model` string Required
+
+Catalog model id (for example `claude-opus-4-6`).
+
+#### Request body
+
+`enabled` boolean Required
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/7/model-access/providers/anthropic/models/claude-opus-4-6 \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": false}'
+```
+
+### Bulk Update Model Access Provider
+
+/organizations/teams/model-access/providers/:provider
+
+Enable or disable a provider on many linked teams. Up to 100 `teamIds` per request.
+
+#### Parameters
+
+`provider` string Required
+
+Catalog provider id (for example `openai`).
+
+#### Request body
+
+`enabled` boolean Required
+
+`teamIds` number\[] Required
+
+Linked team IDs to update. Maximum 100 per request.
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/model-access/providers/openai \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "teamIds": [7, 8, 9],
+    "enabled": false
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "results": [
+    { "teamId": 7, "status": "success" },
+    { "teamId": 8, "status": "success" },
+    {
+      "teamId": 9,
+      "status": "error",
+      "errorMessage": "Team has no model access policy. Create one with PUT /teams/model-access/configuration, or enable model access in Team Settings → Models."
+    }
+  ],
+  "successCount": 2,
+  "errorCount": 1
+}
+```
+
+### Bulk Update Model Access Model
+
+/organizations/teams/model-access/providers/:provider/models/:model
+
+Enable or disable a model on many linked teams. Up to 100 `teamIds` per request.
+
+#### Parameters
+
+`provider` string Required
+
+Catalog provider id (for example `anthropic`).
+
+`model` string Required
+
+Catalog model id (for example `claude-opus-4-6`).
+
+#### Request body
+
+`enabled` boolean Required
+
+`teamIds` number\[] Required
+
+Linked team IDs to update. Maximum 100 per request.
+
+```bash
+curl -X PUT https://api.cursor.com/organizations/teams/model-access/providers/anthropic/models/claude-opus-4-6 \
+  -u YOUR_ORGANIZATION_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "teamIds": [7, 8, 9],
+    "enabled": false
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "results": [
+    { "teamId": 7, "status": "success" },
+    { "teamId": 8, "status": "success" },
+    {
+      "teamId": 9,
+      "status": "error",
+      "errorMessage": "Team has no model access policy. Create one with PUT /teams/model-access/configuration, or enable model access in Team Settings → Models."
+    }
+  ],
+  "successCount": 2,
+  "errorCount": 1
+}
+```
+
+### Errors
+
+Error bodies use:
+
+```json
+{ "code": "error", "message": "…" }
+```
+
+| Status | When                                                                                        |
+| ------ | ------------------------------------------------------------------------------------------- |
+| `401`  | Bad key, or missing `models:read` / `models:*` (or `admin:*`)                               |
+| `403`  | Model access control is not available for that team (single-team routes)                    |
+| `404`  | Team is not linked to the organization (single-team routes)                                 |
+| `409`  | Provider or model write while that team's `state` is `unrestricted` or `legacy`             |
+| `400`  | Unknown provider or model id, invalid body, or a Smart Auto required model would be blocked |
+
+Bulk org routes return HTTP 200 with per-row `status` instead of failing the whole request. Unlinked teams and public errors such as missing configuration appear as `status: "error"` rows. Unexpected server failures still fail the whole request. The list route also returns HTTP 200 with an `errorMessage` row when a linked team cannot load configuration.
 
 ## Organization Groups
 

@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/integrations/github
-fetched_at: 2026-06-22T06:23:25.476321+00:00
+fetched_at: 2026-08-10T03:07:40.996452+00:00
 fetch_method: mintlify_md
 ---
 
@@ -98,7 +98,7 @@ If your organization uses IdP-defined allowlists in GitHub or otherwise cannot u
 
 ## Advanced networking
 
-Self-hosted instances support multiple connection methods beyond IP whitelisting. For setup details and supported private networking options, see [Private Connectivity](https://cursor.com/docs/enterprise/private-connectivity.md).
+Self-hosted instances support multiple connection methods beyond IP whitelisting. For setup details and supported private networking options, see [Private Connectivity](https://cursor.com/docs/cloud-agent/private-connectivity.md).
 
 ### AWS PrivateLink
 

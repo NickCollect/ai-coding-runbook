@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/capabilities
-fetched_at: 2026-08-03T04:24:57.672665+00:00
+fetched_at: 2026-08-10T03:07:40.353389+00:00
 fetch_method: mintlify_md
 ---
 
@@ -88,14 +88,21 @@ Even when listing runs in a shared environment, non-admins only see agents they 
 
 Depending on your MCP client, tool names may include a server prefix (for example, `cursor-cloud-run-info`). The underlying tools are:
 
-| Tool                  | Purpose                                                                                                                                                                                                                 |
-| :-------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `run-info`            | Get the current run's identity, metadata, and URL. Start here.                                                                                                                                                          |
-| `environment-info`    | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                                                                                          |
-| `get-events`          | List the current run's dashboard events, oldest first.                                                                                                                                                                  |
-| `list-cloud-agents`   | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, and archived state.                                                                              |
-| `batch-fetch-details` | Fetch details for specific run IDs (`bcId`s). Optionally include transcripts, diff metadata, setup logs, environment info, and run events via `include_events` (writes `events.json` per run; up to 50 runs per batch). |
-| `get-automation`      | Get an automation's details like name and owner from its ID.                                                                                                                                                            |
+| Tool                                | Purpose                                                                                                                                                                                                                 |
+| :---------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `run-info`                          | Get the current run's identity, metadata, and URL. Start here.                                                                                                                                                          |
+| `environment-info`                  | Get the current run's environment version, config, dashboard URL, and effective egress policy.                                                                                                                          |
+| `get-events`                        | List the current run's dashboard events, oldest first.                                                                                                                                                                  |
+| `list-cloud-agents`                 | Browse Cloud Agent runs visible to you in this environment. Filter by source, status, date, code changes, PR creation, and archived state.                                                                              |
+| `batch-fetch-details`               | Fetch details for specific run IDs (`bcId`s). Optionally include transcripts, diff metadata, setup logs, environment info, and run events via `include_events` (writes `events.json` per run; up to 50 runs per batch). |
+| `get-automation`                    | Get an automation's details like name and owner from its ID.                                                                                                                                                            |
+| `list-environment-builds`           | List recent [Builds](https://cursor.com/docs/cloud-agent/builds.md) for the current environment and inspect their status.                                                                                               |
+| `environment-build-logs`            | Download the install and setup logs for a Build.                                                                                                                                                                        |
+| `trigger-environment-build`         | Run a test Build with the current configuration or proposed install and start commands.                                                                                                                                 |
+| `propose-environment-json`          | Present install and start commands for you to review before saving the environment.                                                                                                                                     |
+| `take-environment-snapshot`         | Snapshot a machine after the agent verifies its environment setup.                                                                                                                                                      |
+| `check-environment-snapshot`        | Check whether an environment snapshot is ready.                                                                                                                                                                         |
+| `request-environment-setup-actions` | Request user actions that block environment setup, such as adding a secret.                                                                                                                                             |
 
 Dashboard event `kind` values from `get-events` and from `batch-fetch-details` with `include_events` are:
 
@@ -129,6 +136,10 @@ To disable this feature on a specific Cloud Agent PR, you can comment `@cursor a
 If you want cloud agents to fix CI failures in your own PRs, you can simply ask them by tagging Cursor in a comment as normal. For example, `@cursor please fix the CI failures`, or `@cursor fix the CI lint check failure`.
 
 Automatically fixing CI failures is currently only available on Teams; support for non-Teams accounts is coming soon. In the meantime, if you want similar behavior, you can ask the cloud agent explicitly to monitor and fix CI failures on the PR.
+
+## OIDC identity tokens
+
+Cursor-managed Cloud Agent VMs can mint short-lived OIDC JWTs from a local socket. Use them to assume cloud roles or call internal APIs without storing long-lived keys. See [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md).
 
 
 ---

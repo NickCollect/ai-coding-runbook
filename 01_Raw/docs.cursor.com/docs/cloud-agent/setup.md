@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/setup
-fetched_at: 2026-08-03T04:24:57.760333+00:00
+fetched_at: 2026-08-10T03:07:40.552540+00:00
 fetch_method: mintlify_md
 ---
 
@@ -24,7 +24,7 @@ Agents are only as capable as the environments they run in. An agent that can wr
 
 To take engineering tasks from start to finish, cloud agents need a configured development environment with all the repositories, tools, dependencies, and context to stay autonomous and productive.
 
-Development environments also make agent sessions faster because cloud agents start with the tools installed instead of setting up from scratch every time.
+Development environments also make agent sessions faster. [Builds](https://cursor.com/docs/cloud-agent/builds.md) prepare repositories, tools, and dependencies in the background so agents start from a ready-to-use machine.
 
 Environment setup is the most important step to improve the effectiveness of your cloud agents.
 
@@ -32,10 +32,10 @@ Environment setup is the most important step to improve the effectiveness of you
 
 There are two main ways to configure the environment for your cloud agent:
 
-1. Let Cursor's agent set up its own environment from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments). After the agent is done, you will have the option to create a snapshot of its virtual machine that can be reused for future agents.
+1. Let Cursor's agent set up its own environment from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments). The agent installs dependencies, verifies the environment, and creates its first Build.
 2. Manually configure the environment with a Dockerfile. If you choose this option, you can specify the Dockerfile in a `.cursor/environment.json` file.
 
-Both options generate an environment, and also allow you to specify an install script that will be run before the agent starts to ensure that its dependencies are up to date (e.g. `npm install`, `pip install`, etc.).
+Both options let you specify an install script. Cursor runs it while creating a Build so dependencies are ready before an agent starts.
 
 ### Multi-repo environments
 
@@ -63,11 +63,11 @@ You will be asked to connect your GitHub, GitLab, Azure DevOps, or Bitbucket acc
 
 Then, you provide Cursor with the environment variables and secrets it will need to install dependencies and run the code.
 
-As the agent works, you can watch its progress in a shared terminal session while it handles setup tasks like installing dependencies. After Cursor has installed dependencies and verified the code is working, you can save a snapshot of its virtual machine.
+As the agent works, you can watch its progress in a shared terminal session while it handles setup tasks like installing dependencies. Cursor saves the environment after it verifies the code and completes a successful Build.
 
 ![Cloud environment setup in a shared terminal session](https://ptht05hbb1ssoooe.public.blob.vercel-storage.com/assets/changelog/cloud-environment-setup.png)
 
-The snapshot is reusable, so future cloud agents start up faster and can test changes by running your software. Commit the configuration to `.cursor/environment.json` so your whole team benefits.
+Future Cloud Agents start from the active Build and can test changes by running your software. Commit the configuration to `.cursor/environment.json` so your whole team benefits.
 
 ### Manual setup with Dockerfile (advanced)
 
@@ -116,49 +116,38 @@ Self-serve custom resource configuration is coming soon.
 
 The install script was previously called the update script in the dashboard and docs.
 
-When a new machine boots, Cursor starts from the base environment, then runs the install script (`install` in `environment.json`).
+Cursor runs the install script (`install` in `environment.json`) when it creates a [Build](https://cursor.com/docs/cloud-agent/builds.md). The script completes in the background instead of delaying each agent start.
 
-For most repos, the install script is `npm install`, `bazel build`, or a similar dependency setup command.
+Use `install` for work Cursor can prepare ahead of time. Examples include installing dependencies, generating code, compiling artifacts, and warming disk caches.
 
 ### Install script idempotency
 
-The install script must be idempotent. It can run more than once, and it may run on partially cached state.
+The install script must be idempotent. It runs for every Build and may run on
+previously prepared disk state.
 
-### How caching works
+### How Builds use the install script
 
-After `install` completes, if it took more than a few seconds to run, Cursor will take an internal checkpoint snapshot and will attempt to start future cloud agents from this checkpoint.
+Cursor starts from the environment's base image, clones its repositories, and runs `install` to completion. A successful Build captures the resulting disk state and becomes active. New agents start from the active Build.
 
-This is why install scripts like `pnpm install` usually lead to fast startup - if dependencies changed, the command only needs to do incremental work.
+Make the script complete. Expensive setup belongs in `install` because it runs before an agent request instead of during startup. Commands such as `pnpm install` can still reuse prepared state and only update changed dependencies.
 
-Caching is best effort; you may see slower startup times on infrequently used repositories.
+Builds preserve disk state only. Running processes, exported shell variables, and in-memory caches don't continue into an agent run. Start services with `start` or `terminals`.
 
 ### Environment configuration recovery
 
-Agents no longer hard fail when Cursor can recover from an environment configuration issue. Saved environments often start from a snapshot. If the requested snapshot cannot be used, Cursor falls back to the default base image and warns you.
+A failed Build doesn't replace the active Build. Agents continue to start from the most recent successful environment while you inspect the failure and create a replacement.
 
-Cursor falls back when:
-
-- The snapshot expired after inactivity
-- The snapshot is invalid or failed
-- You do not have access to the snapshot
-
-When fallback happens, Cursor keeps the rest of the environment configuration and swaps the image back to the default base image. The install script still runs, so dependency setup can repair the environment during startup.
-
-The agent view shows **Environment ready (with warnings)** and a warning banner explaining what happened. The warning stays visible in the conversation as an environment configuration issue card. Open setup from the warning to inspect or repair the environment.
-
-Cursor does not automatically switch to an older saved environment version. If you want to roll back the saved configuration, open the environment from the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents), review **Version history**, and restore a previous version.
+Open the environment's **Builds** tab to inspect logs, start an agent from the failed Build, or select another successful Build. See [Cloud Agent Builds](https://cursor.com/docs/cloud-agent/builds.md) for Build controls and debugging.
 
 ### How to decide what to put in your install script
 
-There is a tradeoff between caching work in `install` and doing setup on demand during a run.
+Put every repeatable preparation step in `install`. Include full dependency installation, code generation, artifact compilation, and other work that writes reusable results to disk.
 
-Placing infrequently run or expensive commands (such as starting services or building docker images) in `install` can slow down startup time.
-
-A practical pattern is to run basic cached dependency updates (such as `pnpm install`) in your install script, then [adding instructions in AGENTS.md](https://cursor.com/docs/cloud-agent/setup.md#add-cloud-specific-instructions-to-agentsmd) so the agent can figure out which commands it needs to run for each specific task.
+Keep long-running processes out of `install`. Put Docker, databases, tunnels, and dev servers in startup commands. You can also [add instructions in AGENTS.md](https://cursor.com/docs/cloud-agent/setup.md#add-cloud-specific-instructions-to-agentsmd) for services an agent only needs for specific tasks.
 
 ## Startup commands
 
-After `install`, the machine starts and runs the `start` command, then any configured `terminals`. Use this to start processes that should stay alive while the agent runs.
+After an agent boots from a Build, Cursor runs the `start` command and then any configured `terminals`. Use these for processes that should stay alive while the agent runs.
 
 You can skip `start` in many repos. If your environment depends on Docker, add `sudo service docker start` in `start`.
 
@@ -180,7 +169,7 @@ In order to fully run and test code like a human developer, Cloud agents often n
 
 The easiest way to manage secrets is through [cursor.com](https://cursor.com/dashboard/cloud-agents). These are exposed to the cloud agent as environment variables.
 
-For more about the different types of secrets, see our [Secrets documentation](https://cursor.com/docs/cloud-agent/security-network.md#secret-protection).
+For more about the different types of secrets, see our [Secrets documentation](https://cursor.com/docs/cloud-agent/security-network.md#secret-protection). To grant cloud-role access without long-lived keys, see [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md).
 
 ### Environment-scoped secrets
 
@@ -252,11 +241,13 @@ The AWS CLI and AWS SDKs that use the default credential chain pick up this prof
 Cursor assumes the role with STS credentials that expire after 1 hour.
 When the agent wakes, Cursor refreshes credentials that are missing, invalid, or within 15 minutes of expiration.
 
+To federate with AWS STS `AssumeRoleWithWebIdentity`, or with GCP, Azure, or another OIDC verifier, mint [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md) from the agent VM instead of storing long-lived cloud keys.
+
 ## Configuration in code with environment.json
 
 If you prefer to keep your environment configuration defined in code, you can commit a `.cursor/environment.json` to your repository.
 
-Cloud agents will use the configuration at the commit they start from, so to test a new configuration, you can commit and push the change to a new branch, and start a cloud agent from that branch.
+Builds use the configuration from the environment's default branch. For feature branch changes, commit and push the configuration, then start an agent on the branch. Cursor checks out the requested branch on top of the active Build, and the agent can rerun the install command when the branch changes dependencies.
 
 Sample `environment.json` using a snapshot-based config (the snapshot ID is accessible from the environments page of the dashboard):
 

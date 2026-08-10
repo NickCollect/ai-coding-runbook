@@ -1,0 +1,151 @@
+---
+source_url: https://cursor.com/docs/cloud-agent/builds
+fetched_at: 2026-08-10T03:07:40.355034+00:00
+fetch_method: mintlify_md
+---
+
+# Cloud Agent Builds
+
+Builds prepare your Cloud Agent environment in the background. Each agent starts from a pre-built machine with your repositories, tools, and dependencies ready.
+
+With Builds, you get:
+
+- **Faster starts**: Clone, install, and dependency work happen ahead of time, so agents boot from a ready environment instead of waiting on every start.
+- **Reliable starts**: Agents always start from the latest successful Build. A failed install or bad config doesn't replace the working one.
+- **Observable environments**: You can see every Build, inspect its logs and commits, and trace which Build each agent used.
+
+## Opt an existing environment into Builds
+
+New environments use Builds by default. To enable Builds for an existing environment:
+
+1. Open **Environments** in the [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents#environments).
+2. Select an environment and open its **Builds** tab.
+3. Choose one of these setup paths:
+   - Select **Run setup agent** to let an agent inspect your environment, test a Build, and propose any needed changes.
+   - Select **Enable Builds** to enable Builds and create one with your current configuration.
+4. Confirm the first Build succeeds before using it for agent runs.
+
+The setup agent checks which commands should run during a Build and which need to run when an agent starts. For dashboard-managed environments, it proposes an updated configuration for you to review and save. For environments defined in `.cursor/environment.json`, it can open a pull request with the changes.
+
+You can select **Test build** from the Builds tab to test your configuration without enabling Builds for all agent runs. The setup agent doesn't enable Builds for you. Select **Enable Builds** when you're ready.
+
+## How Builds work
+
+A Build is a bootable snapshot of a prepared Cloud Agent environment. Cursor creates Builds ahead of agent runs and keeps the latest successful one ready to start.
+
+Each Build follows this lifecycle:
+
+1. **Trigger**: A Build starts on a schedule, after you save an environment version, from a manual request, or at an agent's request.
+2. **Prepare**: Cursor starts from your base image, clones every repository in the environment at its default branch, and runs the `install` command to completion.
+3. **Snapshot**: Cursor saves the machine's disk state with the environment version and exact commit SHA for each repository.
+4. **Activate**: A successful Build becomes active.
+5. **Start agents**: New agents, automations, and code reviews start from the active Build.
+
+Cursor keeps pre-warmed copies of active Builds ready. This removes repository cloning and dependency installation from the agent startup path.
+
+If a new Build fails, agents continue to use the last successful Build. A broken dependency update, install command, or Dockerfile doesn't replace the active environment.
+
+## What runs during a Build and an agent start
+
+Use each environment command for a distinct phase:
+
+| Command     | When it runs                   | Use it for                                                                             |
+| :---------- | :----------------------------- | :------------------------------------------------------------------------------------- |
+| `install`   | During each Build              | Installing dependencies, generating code, compiling artifacts, and warming disk caches |
+| `start`     | At the start of each agent run | Starting Docker, databases, tunnels, and other services                                |
+| `terminals` | At the start of each agent run | Starting app processes in `tmux` terminals shared with the agent                       |
+
+Make `install` complete and idempotent. It can run repeatedly and may run on top of previously prepared disk state. Commands such as `npm install`, `pnpm install`, and `pip install` already support this pattern.
+
+Builds preserve disk state only. Running processes, shell exports, and
+in-memory caches stop when Cursor snapshots the machine. Put services and
+other session-specific work in `start` or `terminals`.
+
+Your existing environment inputs still apply. Builds use saved snapshots, `.cursor/environment.json`, Dockerfiles, install and startup commands, secrets, and network settings.
+
+## How Builds handle Git state
+
+A Build records the commit checked out for each repository when it runs.
+
+- **Default branch runs** start from the commit recorded in the active Build. Scheduled Builds refresh that commit in the background. When **Update stale builds** is on and a Build is older than your **Staleness threshold**, agents pull the latest default-branch code at start. When that setting is off, agents use the Build's recorded commit as-is. The default threshold is 24 hours. Set it to `0` to always pull.
+- **Feature branch runs** start from the active Build's prepared disk, then Cursor checks out the requested branch. The source code matches the branch you selected while reusing dependencies from the Build.
+- **Multi-repo environments** record one commit per repository and prepare the complete workspace together.
+
+If a feature branch changes dependencies, the agent receives your environment context and install command so it can refresh the environment before testing.
+
+## How secrets work with Builds
+
+Builds can access team and environment secrets. Use these for private package registries, artifact stores, and other credentials required by `install`.
+
+User secrets are added only when an agent starts. They aren't available during Builds and don't become part of a shared snapshot.
+
+Saving environment configuration or changing its secrets triggers a new Build.
+
+## Manage Builds
+
+Open an environment's **Builds** tab to:
+
+- See every Build's type, status, and start time
+- Open a Build to inspect its details and logs
+- Select **Trigger build** (or **Test build** when Builds are off) to run a Build on demand
+- Activate a draft Build or deactivate a Build
+- Cancel an in-progress Build
+- Start an agent from a specific Build
+- Configure **Update stale builds** and the **Staleness threshold**
+
+Every agent run records the Build it started from. Use this provenance to compare environment behavior with the exact configuration and repository commits in the Build.
+
+## Debug a Build
+
+Open a failed Build to inspect its events and logs. Agents continue to start from the active successful Build while you diagnose the failure.
+
+For an exact reproduction, start an agent from the failed Build. The agent opens the machine in its failed state, where it can inspect logs, update the environment, run a test Build, and verify the result.
+
+You can also ask a Cloud Agent to inspect and manage Builds through the built-in [Cursor Cloud MCP](https://cursor.com/docs/cloud-agent/capabilities.md#cursor-cloud-mcp). For example:
+
+```text
+Inspect the latest failed Build for this environment. Fix the environment
+configuration, run a test Build, and verify it before proposing the final
+install and start commands.
+```
+
+## Build behavior reference
+
+### Which Build does an agent use?
+
+By default, an agent uses the latest successful active Build for its environment.
+
+You can also start an agent from a specific Build when testing or debugging.
+
+### What happens before the first successful Build?
+
+Agents use the standard environment startup flow until the first Build completes successfully. A failed Build doesn't interrupt existing agent workflows.
+
+### How fresh is the source code?
+
+Feature branch runs check out the requested branch after the Build starts. Default branch runs begin at the commit recorded by the active Build. If **Update stale builds** is on and the Build is older than your **Staleness threshold**, agents pull the latest default-branch code at start.
+
+### Do Builds replace snapshots or Dockerfiles?
+
+No. A saved snapshot or Dockerfile defines the base machine used to create a Build. Cursor then clones the repositories, runs `install`, and creates a fresh bootable snapshot.
+
+### Do Builds support multiple repositories?
+
+Yes. One Build prepares all repositories in the environment and records the commit used for each one.
+
+### Do Builds cost extra?
+
+No. Builds are included with Cloud Agents.
+
+## Related
+
+- [Cloud Environment Setup](https://cursor.com/docs/cloud-agent/setup.md)
+- [Cloud Agent capabilities](https://cursor.com/docs/cloud-agent/capabilities.md)
+- [Cloud Agents settings](https://cursor.com/docs/cloud-agent/settings.md)
+
+
+---
+
+## Sitemap
+
+[Overview of all docs pages](/llms.txt)

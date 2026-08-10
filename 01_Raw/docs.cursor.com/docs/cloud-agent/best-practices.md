@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/cloud-agent/best-practices
-fetched_at: 2026-07-06T05:04:27.184984+00:00
+fetched_at: 2026-08-10T03:07:40.295952+00:00
 fetch_method: mintlify_md
 ---
 
@@ -16,7 +16,7 @@ Use [Cloud agent setup](https://cursor.com/docs/cloud-agent/setup.md) so that Cu
 
 Before running a Cloud Agent, verify these prerequisites:
 
-- **Secrets**: Make sure the agent has access to required secrets (API keys, database credentials, etc.) through the [Secrets tab](https://cursor.com/dashboard/cloud-agents) in your dashboard.
+- **Secrets**: Make sure the agent has access to required secrets (API keys, database credentials, etc.) through the [Secrets tab](https://cursor.com/dashboard/cloud-agents) in your dashboard. For cloud roles, prefer [OIDC tokens](https://cursor.com/docs/cloud-agent/identity.md) over long-lived access keys.
 - **Egress controls**: If you have [network access](https://cursor.com/docs/cloud-agent/security-network.md) restrictions enabled, ensure all URLs your local development requires are whitelisted.
 - **Local testability**: Your repo should be set up to run well locally without requiring external services that cannot be reached from a VM. If it is hard for a human developer to test locally, it will also be hard for an agent.
 

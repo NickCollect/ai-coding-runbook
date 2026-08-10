@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/enterprise/privacy-and-data-governance
-fetched_at: 2026-07-20T04:31:20.531018+00:00
+fetched_at: 2026-08-10T03:07:40.918487+00:00
 fetch_method: mintlify_md
 ---
 
@@ -166,7 +166,7 @@ Some functionality depends on external services or on infrastructure Cursor does
 - **Codebase indexing** — If your codebase is stored outside of the US, we cannot guarantee US-only indexing.
 - **Bring your own key (BYOK)** — US data residency is not supported for BYOK.
 - **Custom models** — A custom model reached via an OpenAI-compatible base URL override or a third-party gateway carries the region of that gateway or model, which may not be in the US.
-- **MCPs and external integrations** — `@Web`, `@Docs`, and user-configured MCPs or connectors are separate services, each with its own region.
+- **MCPs and external integrations** — `@Web` and user-configured MCPs or connectors are separate services, each with its own region.
 - **Bugbot / code review** — Runs against your repository's infrastructure, so its region depends on where your repositories are located.
 - **Shared links** — If a link is shared outside a US-only team, US-only residency can't be guaranteed for the recipient.
 - **Slack- or web-triggered Cloud Agents** — The region of the issuing command can't be guaranteed.

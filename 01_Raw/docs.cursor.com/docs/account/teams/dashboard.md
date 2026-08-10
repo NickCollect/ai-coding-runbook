@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/account/teams/dashboard
-fetched_at: 2026-08-03T04:24:56.843768+00:00
+fetched_at: 2026-08-10T03:07:39.622806+00:00
 fetch_method: mintlify_md
 ---
 
@@ -153,11 +153,13 @@ Connect Cursor with your favorite tools and services. Configure integrations wit
 
 Monitor and manage cloud agents running in your workspace. View agent status, logs, and resource usage. See [Cloud Agent settings](https://cursor.com/docs/cloud-agent/settings.md) for configuration details.
 
-## Bugbot
+## Automations
 
-Access automated bug detection and fixing capabilities. Bugbot helps identify and resolve common issues in your codebase automatically.
+Use [Automations](https://cursor.com/automations) to create recurring cloud agents and configure Cursor-managed agents:
 
-![Bugbot code review](/docs-static/images/account/team/bugbot.png)
+- [Bugbot](https://cursor.com/docs/bugbot.md)
+- [Security Agents](https://cursor.com/docs/security-agents.md)
+- [PR Routing & Approval](https://cursor.com/docs/approval-agents.md)
 
 ## Active Directory Management
 

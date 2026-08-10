@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/reference/plugins
-fetched_at: 2026-07-27T04:31:49.816853+00:00
+fetched_at: 2026-08-10T03:07:42.039351+00:00
 fetch_method: mintlify_md
 ---
 
@@ -10,14 +10,42 @@ Reference documentation for building, structuring, and submitting Cursor plugins
 
 If you're starting from scratch, use the [plugin template repository](https://github.com/cursor/plugin-template).
 
+## Supported plugin formats
+
+Cursor loads plugins in two formats, identified by their manifest location:
+
+| Format                                                     | Manifest location                | Components                                                     |
+| :--------------------------------------------------------- | :------------------------------- | :------------------------------------------------------------- |
+| [Agent Plugins](https://agent-plugins.org) (open standard) | `plugin.json` at the plugin root | Skills, MCP servers                                            |
+| Cursor Plugins                                             | `.cursor-plugin/plugin.json`     | Skills, MCP servers, rules, agents, commands, hooks, variables |
+
+A plugin that conforms to the [Agent Plugins specification](https://github.com/agentplugins/agent-plugins-spec) loads in Cursor without changes. The rest of this reference documents the Cursor plugin format, which is developed in parallel with the standard and supports the full set of Cursor components.
+
 ## Plugin structure
 
 A plugin is a directory with a manifest file and your plugin assets:
 
+### Agent Plugin
+
+```text
+my-plugin/
+├── plugin.json            # Required: Agent Plugins manifest
+├── skills/                # Agent Skills
+│   └── code-reviewer/
+│       └── SKILL.md
+└── mcp.json               # MCP server definitions
+```
+
+The Agent Plugins standard defines portable skills and MCP servers. See the
+[Agent Plugins authoring guide](https://agent-plugins.org/plugin-authors) for
+the full package and schema reference.
+
+### Cursor Plugin
+
 ```text
 my-plugin/
 ├── .cursor-plugin/
-│   └── plugin.json        # Required: plugin manifest
+│   └── plugin.json        # Required: Cursor Plugin manifest
 ├── rules/                 # Cursor rules (.mdc files)
 │   ├── coding-standards.mdc
 │   └── review-checklist.mdc
@@ -38,9 +66,12 @@ my-plugin/
 └── README.md
 ```
 
-## Plugin manifest
+## Cursor Plugin manifest
 
-Every plugin requires a `.cursor-plugin/plugin.json` manifest file.
+Every Cursor Plugin requires a `.cursor-plugin/plugin.json` manifest file. The
+sections below document Cursor Plugin fields, components, and marketplace
+features. For a root Agent Plugins manifest, use the
+[standard's manifest reference](https://agent-plugins.org/plugin-authors/manifest).
 
 ### Required fields
 
@@ -124,7 +155,7 @@ Do not put secret values in the plugin repo. In `mcp.json` and other plugin conf
 
 The top level must be `{ "type": "object", "properties": { ... } }`. Only a fixed set of JSON Schema keywords is accepted (`type`, `title`, `description`, `default`, `enum`, `const`, `properties`, `required`, `items`, and common length/numeric constraints).
 
-## Component discovery
+## Cursor Plugin component discovery
 
 When the manifest does not specify explicit paths for a component type, the parser uses **automatic folder-based discovery**:
 
@@ -302,9 +333,32 @@ For full documentation, see [Hooks](https://cursor.com/docs/hooks.md).
 
 ## MCP servers
 
-The `mcp.json` file at the plugin root is detected automatically. You only need to specify the `mcpServers` field in `plugin.json` if using a custom path or inline config.
+Both formats place `mcp.json` at the plugin root. Agent Plugins use the
+standard's schema and declare each server's transport. Cursor Plugins can use
+Cursor variables and infer the transport from `command` or `url`.
 
-The MCP config file should contain server entries under a `mcpServers` key:
+### Agent Plugin
+
+```json title="mcp.json"
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "code-review": {
+      "type": "stdio",
+      "command": "./bin/code-review",
+      "cwd": "${PLUGIN_ROOT}"
+    }
+  }
+}
+```
+
+See the [Agent Plugins MCP reference](https://agent-plugins.org/plugin-authors/mcp-servers)
+for supported transports, paths, and data directories.
+
+### Cursor Plugin
+
+Cursor Plugins discover `mcp.json` automatically. Specify `mcpServers` in
+`.cursor-plugin/plugin.json` only when using a custom path or inline config.
 
 ```json title="mcp.json"
 {
@@ -343,7 +397,7 @@ https://raw.githubusercontent.com/acme/plugins/abc123/my-plugin/assets/logo.svg
 
 Absolute GitHub user content URLs (starting with `http://` or `https://`) are also accepted.
 
-## Multi-plugin repositories
+## Cursor multi-plugin repositories
 
 A single Git repository can contain multiple plugins using a **marketplace manifest**. Place it at `.cursor-plugin/marketplace.json` in the repository root.
 
@@ -444,7 +498,8 @@ Plugins are reviewed by the Cursor team. To submit:
 
 ### Create your plugin
 
-Follow this reference's structure. Make sure your plugin has a valid `.cursor-plugin/plugin.json` manifest.
+Add a valid root `plugin.json` for an Agent Plugin or
+`.cursor-plugin/plugin.json` for a Cursor Plugin.
 
 ### Host in a Git repository
 
@@ -456,16 +511,17 @@ Go to [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) a
 
 ### Submission checklist
 
-- Plugin has a valid `.cursor-plugin/plugin.json` manifest
+- Plugin has a valid root `plugin.json` or `.cursor-plugin/plugin.json` manifest
 - `name` is unique, lowercase, kebab-case (e.g., `my-awesome-plugin`)
 - `description` clearly explains the plugin's purpose
-- All rules, skills, agents, and commands have proper frontmatter metadata
+- All included components have valid files and frontmatter
 - Logo is committed to the repo and referenced by relative path (if provided)
 - `README.md` documents usage and any configuration
-- If using `variables`, the schema is valid and every `${VAR}` in `mcp.json` has a matching property
+- Agent Plugins conform to the [Agent Plugins schemas](https://agent-plugins.org/schemas)
+- Cursor Plugins using variables declare every `${VAR}` from `mcp.json` in the manifest schema
 - All paths in manifest are relative and valid (no `..`, no absolute paths)
 - Plugin has been tested locally
-- For multi-plugin repos: `.cursor-plugin/marketplace.json` is at the repo root with unique plugin names
+- Cursor multi-plugin repositories have `.cursor-plugin/marketplace.json` at the repo root with unique plugin names
 
 
 ---

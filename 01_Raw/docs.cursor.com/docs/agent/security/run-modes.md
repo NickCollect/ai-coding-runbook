@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/agent/security/run-modes
-fetched_at: 2026-06-29T05:25:13.235264+00:00
+fetched_at: 2026-08-10T03:07:39.901624+00:00
 fetch_method: mintlify_md
 ---
 
@@ -35,6 +35,14 @@ When the classifier blocks a call, Cursor can try another approach. If the agent
 ### Auto-review is not a security boundary
 
 The classifier can make mistakes. It can allow a call you would have blocked, or block a call you would have allowed.
+
+### Auto-review classifier requirements
+
+Auto-review's classifier runs on a small Cursor-managed model. Today that is [Claude 4.5 Haiku](https://cursor.com/docs/models/claude-4-5-haiku.md) or [GPT-5.4 Mini](https://cursor.com/docs/models/gpt-5-4-mini.md).
+
+Enterprise [model access controls](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) apply. Auto-review is available when at least one of those models is allowed for the team. Blocking all of them disables Auto-review in **Settings > Agents > Approvals & Execution**, even when team Run Modes includes it. Members then use Allowlist instead.
+
+If Auto-review is grayed out, enable those models in [Team Settings → Models](https://cursor.com/dashboard/team-settings/models), fully quit and reopen Cursor, then check Approvals & Execution again.
 
 ### Configuring Auto-review
 
@@ -307,7 +315,7 @@ Run Modes and sandboxing are not the only safety controls. These protections can
 
 Admins can override which modes are available for their users, as well as configure the sandbox networking rules for terminal commands, and more. All of these settings are available in the web dashboard.
 
-Team settings take precedence over individual and project configuration. Use them when you want a consistent baseline for everyone.
+Team settings take precedence over individual and project configuration. Use them when you want a consistent baseline for everyone. If you enable Auto-review for the team, keep one of the [models the classifier needs](https://cursor.com/docs/agent/security/run-modes.md#auto-review-model-requirements) allowed under [model access control](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control).
 
 ## Changelog
 

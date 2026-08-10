@@ -1,12 +1,12 @@
 ---
 source_url: https://cursor.com/docs/account/teams/admin-api
-fetched_at: 2026-07-27T04:31:47.666367+00:00
+fetched_at: 2026-08-10T03:07:39.543914+00:00
 fetch_method: mintlify_md
 ---
 
 # Admin API
 
-The Admin API lets you programmatically access your team's data, including member information, usage metrics, and spending details.
+The Admin API lets you programmatically access your team's data, including member information, usage metrics, spending details, and model access.
 
 - The Admin API uses [Basic Authentication](https://cursor.com/docs/api.md#basic-authentication) with your API key as the username.
 - For details on creating API keys, authentication methods, rate limits, and best practices, see the [API Overview](https://cursor.com/docs/api.md).
@@ -547,6 +547,7 @@ Each object in `usageEvents` contains:
 - `serviceAccountName` string | undefined - Display name of the service account that made the request. Omitted for human user events.
 - `cloudAgentId` string | undefined - ID of the cloud agent run attributed to this event. Omitted for events outside cloud agents.
 - `automationId` string | undefined - UUID of the automation attributed to this event. Omitted for events outside automations.
+- `conversationId` string | undefined - ID of the conversation (agent session) that generated this event. Use it to attribute spend to a session or as a join key with other sources that expose conversation IDs, such as the [AI Code Tracking API](https://cursor.com/docs/account/teams/ai-code-tracking-api.md). Omitted for events without an associated conversation.
 - `model` string - AI model used for the request
 - `kind` string - Billing category (e.g., `Usage-based`, `Included in Business`)
 - `maxMode` boolean - Whether the request used max mode
@@ -593,6 +594,7 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
     {
       "timestamp": "1750979225854",
       "userEmail": "developer@company.com",
+      "conversationId": "8f2e4a1b-6c3d-4e5f-9a7b-2d1c8e6f4a3b",
       "model": "claude-4.5-sonnet",
       "kind": "Usage-based",
       "maxMode": true,
@@ -613,6 +615,7 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
     {
       "timestamp": "1750979173824",
       "userEmail": "developer@company.com",
+      "conversationId": "8f2e4a1b-6c3d-4e5f-9a7b-2d1c8e6f4a3b",
       "model": "claude-4.5-sonnet",
       "kind": "Usage-based",
       "maxMode": true,
@@ -684,6 +687,7 @@ curl -X POST https://api.cursor.com/teams/filtered-usage-events \
       "userEmail": "agent-runner@company.com",
       "serviceAccountId": "sa_abc123",
       "serviceAccountName": "Nightly CI Agent",
+      "conversationId": "3b9d7c2e-1f4a-4b8c-a6d5-e9f0a2b4c6d8",
       "model": "claude-4.5-sonnet",
       "kind": "Usage-based",
       "maxMode": true,
@@ -1377,6 +1381,244 @@ curl -X DELETE https://api.cursor.com/teams/groups/group_PDSPmvukpYgZEDXsoNirw3C
   }
 }
 ```
+
+## Model access
+
+Model access routes are in preview and may change. Paths, response fields, and error behavior can shift before general availability.
+
+Read and update the team's [model access](https://cursor.com/docs/enterprise/model-and-integration-management.md#model-access-control) policy: whether a custom policy is on, defaults for new providers and models, and per-provider / per-model toggles.
+
+These routes return the **team baseline**. Organization Groups can still widen access for some members; group allowlists are not part of this API. Effort, reasoning, and personal API key (BYOK) controls stay in the dashboard.
+
+For org-wide reads and bulk toggles across linked teams, see the [Organization API model access](https://cursor.com/docs/account/organizations/organization-admin-api.md#model-access) routes.
+
+- **Availability**: Teams with model access control enabled
+- **Authentication**: Team API key (Basic auth) with the **`admin:*`** scope.
+- **Provider and model IDs**: Path segments are catalog ids such as `anthropic` and `claude-opus-4-6`, not display names. GET responses include display names.
+- **Configuration first**: Provider and model writes return **409** while `state` is `unrestricted` (or `legacy`). The first `PUT /teams/model-access/configuration` on an unrestricted team turns policy on and seeds the current catalog (same idea as the first save on the Models page). Later configuration PUTs update defaults only and leave existing toggles in place.
+- **Clearing policy**: There is no API to clear a team back to unrestricted. Use the dashboard if you need that.
+- **Rate limits**: 20 requests per minute. Writes appear in team audit logs as `team_settings` events. See [rate limits and best practices](https://cursor.com/docs/api.md#rate-limits).
+
+### Get Model Access Configuration
+
+/teams/model-access/configuration
+
+Return whether the team has a custom model-access policy and the defaults for newly seen providers and models.
+
+#### Response Fields
+
+`teamId` number
+
+Integer team ID implied by the API key.
+
+`state` string
+
+One of `unrestricted`, `custom`, or `legacy`.
+
+`newProviderDefault` string | null
+
+`enabled` or `disabled` when `state` is `custom`. Otherwise `null`.
+
+`newModelDefault` string | null
+
+`enabled` or `disabled` when `state` is `custom`. Otherwise `null`.
+
+```bash
+curl -X GET https://api.cursor.com/teams/model-access/configuration \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "teamId": 7,
+  "state": "unrestricted",
+  "newProviderDefault": null,
+  "newModelDefault": null
+}
+```
+
+### Update Model Access Configuration
+
+/teams/model-access/configuration
+
+Set defaults for new providers and models. The first call on an unrestricted team creates a custom policy and seeds catalog entries. Later calls update defaults only and leave existing toggles in place.
+
+#### Request body
+
+`newProviderDefault` string Required
+
+`enabled` or `disabled`.
+
+`newModelDefault` string Required
+
+`enabled` or `disabled`.
+
+```bash
+curl -X PUT https://api.cursor.com/teams/model-access/configuration \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{
+    "newProviderDefault": "disabled",
+    "newModelDefault": "enabled"
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "teamId": 7,
+  "state": "custom",
+  "newProviderDefault": "disabled",
+  "newModelDefault": "enabled"
+}
+```
+
+### List Model Access Providers
+
+/teams/model-access/providers
+
+List catalog providers and models with resolved enabled flags. When `state` is not `custom`, `providers` is an empty array.
+
+```bash
+curl -X GET https://api.cursor.com/teams/model-access/providers \
+  -u YOUR_API_KEY:
+```
+
+**Response:**
+
+```json
+{
+  "teamId": 7,
+  "state": "custom",
+  "providers": [
+    {
+      "id": "anthropic",
+      "displayName": "Anthropic",
+      "enabled": true,
+      "models": [
+        {
+          "id": "claude-sonnet-4-6",
+          "displayName": "Sonnet 4.6",
+          "enabled": true
+        },
+        {
+          "id": "claude-opus-4-6",
+          "displayName": "Opus 4.6",
+          "enabled": false
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "displayName": "OpenAI",
+      "enabled": true,
+      "models": [
+        {
+          "id": "gpt-5.4",
+          "displayName": "GPT-5.4",
+          "enabled": true
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Update Model Access Provider
+
+/teams/model-access/providers/:provider
+
+Enable or disable a provider. Returns **409** when the team is still `unrestricted` or `legacy`.
+
+#### Parameters
+
+`provider` string Required
+
+Catalog provider id (for example `openai` or `anthropic`).
+
+#### Request body
+
+`enabled` boolean Required
+
+```bash
+curl -X PUT https://api.cursor.com/teams/model-access/providers/openai \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": false}'
+```
+
+### List Models for a Provider
+
+/teams/model-access/providers/:provider/models
+
+List models for one provider with resolved enabled flags. Returns **409** when the team does not have a custom policy.
+
+#### Parameters
+
+`provider` string Required
+
+Catalog provider id (for example `anthropic`).
+
+```bash
+curl -X GET https://api.cursor.com/teams/model-access/providers/anthropic/models \
+  -u YOUR_API_KEY:
+```
+
+### Update Model Access Model
+
+/teams/model-access/providers/:provider/models/:model
+
+Enable or disable a single model. Returns **409** when the team is still `unrestricted` or `legacy`.
+
+#### Parameters
+
+`provider` string Required
+
+Catalog provider id (for example `anthropic`).
+
+`model` string Required
+
+Catalog model id (for example `claude-opus-4-6`).
+
+#### Request body
+
+`enabled` boolean Required
+
+```bash
+curl -X PUT https://api.cursor.com/teams/model-access/providers/anthropic/models/claude-opus-4-6 \
+  -u YOUR_API_KEY: \
+  -H "Content-Type: application/json" \
+  -d '{"enabled": false}'
+```
+
+**Response:**
+
+```json
+{
+  "id": "claude-opus-4-6",
+  "displayName": "Opus 4.6",
+  "enabled": false,
+  "provider": "anthropic"
+}
+```
+
+### Errors
+
+Error bodies use:
+
+```json
+{ "code": "error", "message": "…" }
+```
+
+| Status | When                                                                                        |
+| ------ | ------------------------------------------------------------------------------------------- |
+| `401`  | Bad key, or missing `admin:*`                                                               |
+| `403`  | Model access control is not available for that team                                         |
+| `409`  | Provider or model write while `state` is `unrestricted` or `legacy`                         |
+| `400`  | Unknown provider or model id, invalid body, or a Smart Auto required model would be blocked |
 
 
 ---

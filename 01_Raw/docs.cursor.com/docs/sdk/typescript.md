@@ -1,6 +1,6 @@
 ---
 source_url: https://cursor.com/docs/sdk/typescript
-fetched_at: 2026-08-03T04:24:59.532102+00:00
+fetched_at: 2026-08-10T03:07:42.103987+00:00
 fetch_method: mintlify_md
 ---
 
@@ -40,11 +40,11 @@ Cursor environment. The model itself is hosted in either case.
 
 Runtime is picked by which key you pass to `Agent.create()` (`local` or `cloud`). Use the same `CURSOR_API_KEY` for either.
 
-For the REST API, see the [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints.md).
+For the REST API, see the [Cloud Agents API](https://cursor.com/docs/cloud-agent/api/endpoints.md). For other languages, see the [SDK Bridge](https://cursor.com/docs/sdk/bridge.md).
 
 ## Authentication
 
-Set `CURSOR_API_KEY` (or pass `apiKey`) before creating an agent.
+Set `CURSOR_API_KEY` (or pass `apiKey`) before creating an agent. For interactive hosts without a pre-provisioned key, [`Cursor.auth.login()`](https://cursor.com/docs/sdk/typescript.md#cursorauth) mints and stores one through a browser login.
 
 The SDK accepts user API keys and service account API keys for both local and cloud runs. Team Admin API keys are not yet supported.
 
@@ -61,7 +61,7 @@ SDK runs follow the same pricing, request pools, and Privacy Mode rules as runs 
 
 Service account API keys bill to the team that owns the service account. User API keys bill to that user's plan.
 
-To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/typescript.md#token-usage). To fetch billed usage and dollar cost for a cloud agent's runs, see [`Agent.getUsage()`](https://cursor.com/docs/sdk/typescript.md#agentgetusage).
+To read per-run token counts in code, see [Token usage](https://cursor.com/docs/sdk/typescript.md#token-usage). To fetch billed usage and dollar cost for an agent's runs, see [`Agent.getUsage()`](https://cursor.com/docs/sdk/typescript.md#agentgetusage).
 
 ## Core concepts
 
@@ -567,7 +567,7 @@ for await (const event of run.stream()) {
 }
 ```
 
-Token counts are what the runtime reports; they say nothing about cost. For billed usage and the dollar cost of a cloud agent's runs, call [`agent.getUsage()`](https://cursor.com/docs/sdk/typescript.md#agentgetusage).
+Token counts are what the runtime reports; they say nothing about cost. For billed usage and the dollar cost of an agent's runs, call [`agent.getUsage()`](https://cursor.com/docs/sdk/typescript.md#agentgetusage).
 
 ### Run correlation with requestId
 
@@ -1105,7 +1105,7 @@ Returns the stored user and assistant messages for a local agent.
 
 ### Agent.getUsage()
 
-Fetch billed token usage and dollar cost for a cloud agent's runs. Call it on a handle, or statically by ID when you don't have one. Pass `runId` to restrict the result to a single run.
+Fetch billed token usage and dollar cost for an agent's runs. Call it on a handle, or statically by ID when you don't have one. Cloud agents return a per-run breakdown; local agents return a per-turn breakdown. Pass `runId` to restrict the result to one entry: for cloud agents a `run-<uuid>` run ID, for local agents an ID from a previous `getUsage().runs[].runId`.
 
 ```typescript
 agent.getUsage(options?: GetUsageOptions): Promise<AgentUsage>;
@@ -1150,7 +1150,7 @@ for (const run of runs) {
 
 Cost includes discounts and can take a moment to settle after a run ends; `cost` is absent until it does. `chargedCents` is `0` for plan-included, BYOK, and credit-grant usage.
 
-This is a different view than [Token usage](https://cursor.com/docs/sdk/typescript.md#token-usage): `run.usage` is the live token count for one run, while `getUsage()` is the billed record across the agent's runs. Cloud agents only for now; local agents throw a `ConfigurationError`.
+This is a different view from [Token usage](https://cursor.com/docs/sdk/typescript.md#token-usage): `run.usage` is the live token count for one run, while `getUsage()` is the billed record across the agent's runs.
 
 ### Cloud agent lifecycle
 
@@ -1200,7 +1200,33 @@ type SDKAgentInfo = {
 
 ## The Cursor namespace
 
-Account-level reads, catalog reads, and process-wide SDK configuration. The read methods take an optional `{ apiKey }` and otherwise fall back to `CURSOR_API_KEY`.
+Account-level reads, catalog reads, and process-wide SDK configuration. The read methods take an optional `{ apiKey }` and otherwise fall back to `CURSOR_API_KEY`, then to a stored [browser login](https://cursor.com/docs/sdk/typescript.md#cursorauth).
+
+### Cursor.auth
+
+Interactive login for hosts without a pre-provisioned API key. `Cursor.auth.login()` opens the Cursor website's login page in a browser, waits for completion, and mints a user API key (90 days by default) stored in `~/.cursor/sdk/auth.json`. After login, `Agent.create()`, `Cursor.me()`, and the other reads work without `apiKey` or `CURSOR_API_KEY`.
+
+```typescript
+import { Cursor } from "@cursor/sdk";
+
+await Cursor.auth.login();
+
+const status = await Cursor.auth.status();
+// { status: "logged-in", ... } | { status: "logged-out" }
+
+await Cursor.auth.logout();
+```
+
+| Option        | Description                                                                                                                                                                              |
+| :------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `openBrowser` | `true` (default) opens the system browser when that is likely to work; `false` never opens one; a function is a custom opener. Skipped in SSH sessions or when `NO_OPEN_BROWSER` is set. |
+| `onLoginUrl`  | Called with the login URL before waiting, so the host can display it. When omitted and no browser opened, the URL is written to stderr.                                                  |
+| `signal`      | `AbortSignal` that cancels the wait; `login` then throws an `AuthenticationError`.                                                                                                       |
+| `store`       | Where to persist the credentials. Defaults to `~/.cursor/sdk/auth.json`; pass `null` to only receive the key in the result.                                                              |
+| `apiKeyName`  | Display name of the minted key in the dashboard's API-keys list.                                                                                                                         |
+| `apiKeyTtlMs` | Lifetime of the minted key in milliseconds. Defaults to 90 days.                                                                                                                         |
+
+Credential resolution order everywhere in the SDK: explicit `apiKey`, then `CURSOR_API_KEY`, then the stored login. The stored login does not read credentials from a local Cursor app installation; it only holds keys minted by `Cursor.auth.login()`.
 
 ### Cursor.configure()
 
@@ -1496,6 +1522,33 @@ Subagents committed to the repo at `.cursor/agents/*.md` (with `name`, `descript
 ### Nested subagents
 
 Subagents can spawn their own subagents, within a nesting limit. When a subagent uses the `Agent` tool, the SDK hands it the same subagent executor the parent has, so a parent can delegate to a subagent that delegates further. Each level reaches the same set of named subagents and [custom tools](https://cursor.com/docs/sdk/typescript.md#custom-tools). The top-level agent and its direct subagents can launch subagents, but a subagent launched by another subagent can't launch further ones.
+
+## Restricting the toolset
+
+`tools` allowlists the built-in tools offered to the model; `disallowedTools` removes tools and keeps the rest, including tools added to the platform after your SDK version was released. Both are local agents only for now, and neither persists on the agent: pass them again on `Agent.resume()` to keep the restriction for follow-up runs.
+
+```typescript
+// Read-only agent: only these tools are offered.
+const reader = await Agent.create({
+  apiKey: process.env.CURSOR_API_KEY!,
+  model: { id: "composer-2.5" },
+  tools: ["read", "grep", "glob", "ls"],
+  local: { cwd: process.cwd() },
+});
+
+// Everything except shell access.
+const noShell = await Agent.create({
+  apiKey: process.env.CURSOR_API_KEY!,
+  model: { id: "composer-2.5" },
+  disallowedTools: ["shell"],
+  local: { cwd: process.cwd() },
+});
+```
+
+- `tools: undefined` (default) offers the standard toolset for the selected model; `tools: []` offers no built-in tools, so the model can only respond with text.
+- Both fields accept the `ToolName` union: public names (`"read"`, `"edit"`, `"task"`, `"webSearch"`, ...), the capability groups `"shell"` and `"mcp"`, and raw proto tool names. Unknown names throw a `ConfigurationError` at `Agent.create()` / `Agent.resume()`.
+- Deny wins: a tool must be in `tools` (when set) and not in `disallowedTools` to be offered.
+- Disallowing `"mcp"` also removes [custom tools](https://cursor.com/docs/sdk/typescript.md#custom-tools). Disallowing `"task"` prevents [subagents](https://cursor.com/docs/sdk/typescript.md#subagents); otherwise subagents keep their own curated toolsets.
 
 ## Custom tools
 
@@ -1858,42 +1911,46 @@ The substores mirror the default SQLite tables: `agents` holds one row per agent
 
 ### AgentOptions
 
-| Property         | Type                              | Default                                                             | Description                                                                                                                                |
-| :--------------- | :-------------------------------- | :------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------------------------------------------- |
-| `model`          | `ModelSelection`                  | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/typescript.md#modelselection).                                            |
-| `apiKey`         | `string`                          | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                                |
-| `name`           | `string`                          | Auto-generated                                                      | Human-readable agent name returned as `name` in `Agent.list()` / `Agent.get()`.                                                            |
-| `local`          | `LocalAgentOptions`               |                                                                     | Local agent config. See [`LocalAgentOptions`](https://cursor.com/docs/sdk/typescript.md#localagentoptions).                                |
-| `cloud`          | `CloudOptions`                    |                                                                     | Cloud agent config.                                                                                                                        |
-| `mcpServers`     | `Record<string, McpServerConfig>` |                                                                     | Inline MCP server definitions.                                                                                                             |
-| `agents`         | `Record<string, AgentDefinition>` |                                                                     | Subagent definitions.                                                                                                                      |
-| `agentId`        | `string`                          | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                             |
-| `idempotencyKey` | `string`                          | Auto-generated for cloud                                            | Optional client-generated idempotency key. Cloud only.                                                                                     |
-| `mode`           | `"agent" \| "plan"`               | `"agent"`                                                           | Initial conversation mode for the agent's first run. See [Conversation mode](https://cursor.com/docs/sdk/typescript.md#conversation-mode). |
+| Property          | Type                              | Default                                                             | Description                                                                                                                                                                                          |
+| :---------------- | :-------------------------------- | :------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `model`           | `ModelSelection`                  | Required for local; cloud falls back to the server-resolved default | Model to use. See [`ModelSelection`](https://cursor.com/docs/sdk/typescript.md#modelselection).                                                                                                      |
+| `apiKey`          | `string`                          | `CURSOR_API_KEY` env                                                | User API key or service account key. Team Admin keys are not yet supported.                                                                                                                          |
+| `name`            | `string`                          | Auto-generated                                                      | Human-readable agent name returned as `name` in `Agent.list()` / `Agent.get()`.                                                                                                                      |
+| `local`           | `LocalAgentOptions`               |                                                                     | Local agent config. See [`LocalAgentOptions`](https://cursor.com/docs/sdk/typescript.md#localagentoptions).                                                                                          |
+| `cloud`           | `CloudOptions`                    |                                                                     | Cloud agent config.                                                                                                                                                                                  |
+| `mcpServers`      | `Record<string, McpServerConfig>` |                                                                     | Inline MCP server definitions.                                                                                                                                                                       |
+| `agents`          | `Record<string, AgentDefinition>` |                                                                     | Subagent definitions.                                                                                                                                                                                |
+| `tools`           | `ToolName[]`                      | Default toolset                                                     | [Restrict the toolset](https://cursor.com/docs/sdk/typescript.md#restricting-the-toolset): only the listed built-in tools are offered to the model. `[]` means no built-in tools. Local agents only. |
+| `disallowedTools` | `ToolName[]`                      |                                                                     | [Remove tools](https://cursor.com/docs/sdk/typescript.md#restricting-the-toolset) from the toolset; everything else stays available. Deny wins when combined with `tools`. Local agents only.        |
+| `agentId`         | `string`                          | Auto-generated                                                      | Durable agent ID. Pass to keep a stable ID across invocations.                                                                                                                                       |
+| `idempotencyKey`  | `string`                          | Auto-generated for cloud                                            | Optional client-generated idempotency key. Cloud only.                                                                                                                                               |
+| `mode`            | `"agent" \| "plan"`               | `"agent"`                                                           | Initial conversation mode for the agent's first run. See [Conversation mode](https://cursor.com/docs/sdk/typescript.md#conversation-mode).                                                           |
 
 ### LocalAgentOptions
 
 Config for local agents, passed as `local` on `Agent.create()`. Also exported as a standalone type for `Partial<LocalAgentOptions>`.
 
-| Property             | Type                            | Default              | Description                                                                                                               |
-| :------------------- | :------------------------------ | :------------------- | :------------------------------------------------------------------------------------------------------------------------ |
-| `cwd`                | `string \| string[]`            |                      | Workspace path or paths.                                                                                                  |
-| `settingSources`     | `SettingSource[]`               |                      | Ambient settings layers to load: `"project"`, `"user"`, `"team"`, `"mdm"`, `"plugins"`, or `"all"`.                       |
-| `sandboxOptions`     | `{ enabled: boolean }`          | `{ enabled: false }` | [Sandbox](https://cursor.com/docs/sdk/typescript.md#sandbox-options) config.                                              |
-| `autoReview`         | `boolean`                       | `false`              | Route local tool calls through [Auto-review](https://cursor.com/docs/sdk/typescript.md#auto-review).                      |
-| `customTools`        | `Record<string, SDKCustomTool>` |                      | [Custom tools](https://cursor.com/docs/sdk/typescript.md#custom-tools) exposed as the `custom-user-tools` MCP server.     |
-| `store`              | `LocalAgentStore`               | SDK default store    | [Local agent store](https://cursor.com/docs/sdk/typescript.md#local-agent-stores) backing persistence.                    |
-| `enableAgentRetries` | `boolean`                       | `true`               | Enable transport and stall auto-retry for local agent runs. Set `false` to surface transport errors on the first failure. |
+| Property             | Type                            | Default              | Description                                                                                                                                              |
+| :------------------- | :------------------------------ | :------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cwd`                | `string`                        |                      | Primary working directory for the default shell and agent-store scoping.                                                                                 |
+| `dirs`               | `string[]`                      |                      | Additional workspace folders for multi-root setups. Merged with `cwd` (duplicates dropped) so rules, skills, and workspace context load from every path. |
+| `settingSources`     | `SettingSource[]`               |                      | Ambient settings layers to load: `"project"`, `"user"`, `"team"`, `"mdm"`, `"plugins"`, or `"all"`.                                                      |
+| `sandboxOptions`     | `{ enabled: boolean }`          | `{ enabled: false }` | [Sandbox](https://cursor.com/docs/sdk/typescript.md#sandbox-options) config.                                                                             |
+| `autoReview`         | `boolean`                       | `false`              | Route local tool calls through [Auto-review](https://cursor.com/docs/sdk/typescript.md#auto-review).                                                     |
+| `customTools`        | `Record<string, SDKCustomTool>` |                      | [Custom tools](https://cursor.com/docs/sdk/typescript.md#custom-tools) exposed as the `custom-user-tools` MCP server.                                    |
+| `store`              | `LocalAgentStore`               | SDK default store    | [Local agent store](https://cursor.com/docs/sdk/typescript.md#local-agent-stores) backing persistence.                                                   |
+| `enableAgentRetries` | `boolean`                       | `true`               | Enable transport and stall auto-retry for local agent runs. Set `false` to surface transport errors on the first failure.                                |
 
 ### CloudOptions
 
-| Property              | Type                                                                                                        | Default             | Description                                                                                                                                                                                                                                                                                                                                          |
-| :-------------------- | :---------------------------------------------------------------------------------------------------------- | :------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `env`                 | `{ type: "cloud"; name?: string } \| { type: "pool"; name?: string } \| { type: "machine"; name?: string }` | `{ type: "cloud" }` | Execution environment target. `cloud` uses Cursor-hosted VMs; set `name` to use a saved Cursor-hosted environment. `pool` and `machine` route to self-hosted workers you run. Omit `repos` and leave `env` at the default for a no-repo agent with an empty workspace. Named Cursor-hosted environments and explicit `repos` are mutually exclusive. |
-| `repos`               | `Array<{ url: string; startingRef?: string; prUrl?: string }>`                                              |                     | Repositories to clone into the VM. Pass one entry for a single-repo agent, or up to 20 for a multi-repo agent. Mutually exclusive with a named `env.name` for Cursor-hosted environments. Pass `prUrl` to attach the agent to an existing PR.                                                                                                        |
-| `workOnCurrentBranch` | `boolean`                                                                                                   | `false`             | Push commits to the existing branch instead of a new one.                                                                                                                                                                                                                                                                                            |
-| `autoCreatePR`        | `boolean`                                                                                                   | `false`             | Open a PR when the run finishes.                                                                                                                                                                                                                                                                                                                     |
-| `skipReviewerRequest` | `boolean`                                                                                                   | `false`             | Skip requesting the calling user as a reviewer on the PR.                                                                                                                                                                                                                                                                                            |
+| Property                | Type                                                                                                        | Default                                                | Description                                                                                                                                                                                                                                                                                                                                          |
+| :---------------------- | :---------------------------------------------------------------------------------------------------------- | :----------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `env`                   | `{ type: "cloud"; name?: string } \| { type: "pool"; name?: string } \| { type: "machine"; name?: string }` | `{ type: "cloud" }`                                    | Execution environment target. `cloud` uses Cursor-hosted VMs; set `name` to use a saved Cursor-hosted environment. `pool` and `machine` route to self-hosted workers you run. Omit `repos` and leave `env` at the default for a no-repo agent with an empty workspace. Named Cursor-hosted environments and explicit `repos` are mutually exclusive. |
+| `repos`                 | `Array<{ url: string; startingRef?: string; prUrl?: string }>`                                              |                                                        | Repositories to clone into the VM. Pass one entry for a single-repo agent, or up to 20 for a multi-repo agent. Mutually exclusive with a named `env.name` for Cursor-hosted environments. Pass `prUrl` to attach the agent to an existing PR.                                                                                                        |
+| `workOnCurrentBranch`   | `boolean`                                                                                                   | `false`                                                | Push commits to the existing branch instead of a new one.                                                                                                                                                                                                                                                                                            |
+| `autoCreatePR`          | `boolean`                                                                                                   | `false`                                                | Open a PR when the run finishes.                                                                                                                                                                                                                                                                                                                     |
+| `openAsCursorGithubApp` | `boolean`                                                                                                   | `true` for service-account keys, `false` for user keys | Open PRs as the Cursor GitHub App instead of the API key's owner. The resolved value is echoed on create, get, and list.                                                                                                                                                                                                                             |
+| `skipReviewerRequest`   | `boolean`                                                                                                   | `false`                                                | Skip requesting the calling user as a reviewer on the PR.                                                                                                                                                                                                                                                                                            |
 
 ### AgentDefinition
 
@@ -2116,12 +2173,12 @@ Thrown when a `Run` operation isn't available on the current runtime. Use `run.s
 ## Known limitations
 
 - Inline `mcpServers` are not persisted across `Agent.resume()`. Pass them again on resume if needed.
-- Custom tools (`local.customTools`), Auto-review (`local.autoReview`), and custom stores (`local.store`) are local agents only. Cloud agents reject `local.customTools` and persist server-side.
+- Custom tools (`local.customTools`), Auto-review (`local.autoReview`), custom stores (`local.store`), and toolset restrictions (`tools`, `disallowedTools`) are local agents only. Cloud agents reject `local.customTools` and persist server-side.
+- `tools` and `disallowedTools` are not persisted on the agent. Pass them again on `Agent.resume()` to keep the restriction.
 - Artifact download is not implemented for local agents (`agent.listArtifacts()` returns an empty list and `agent.downloadArtifact()` throws).
-- `agent.getUsage()` is cloud agents only for now. Local agents throw `ConfigurationError`.
 - `local.settingSources` (and the file-based MCP / subagent paths it gates) does not apply to cloud agents. Cloud always loads `project` / `team` / `plugins`.
 - Hooks are file-based only (`.cursor/hooks.json`). No programmatic callbacks.
-- The SDK doesn't auto-discover credentials from a local Cursor app installation. Set `CURSOR_API_KEY` (or pass `apiKey`) explicitly.
+- The SDK doesn't auto-discover credentials from a local Cursor app installation. Set `CURSOR_API_KEY` (or pass `apiKey`) explicitly, or mint a key with [`Cursor.auth.login()`](https://cursor.com/docs/sdk/typescript.md#cursorauth).
 - Local mode requires Node.js 22.13 or later and platform sandbox-helper support. The default store falls back to `JsonlLocalAgentStore` when the SQLite backend isn't available.
 
 
