@@ -1,48 +1,51 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=zh-TW
-fetched_at: 2026-08-03T04:39:17.448798+00:00
-title: "Veo 3.1 Lite \u9810\u5148\u767c\u5e03\u7248 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-lite-generate-preview?hl=pt-BR
+fetched_at: 2026-08-10T03:21:41.411497+00:00
+title: "Pr\u00e9-lan\u00e7amento do Veo 3.1 Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Página inicial](https://ai.google.dev/?hl=pt-br)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
 
-提供意見
+Envie comentários
 
-# Veo 3.1 Lite 預先發布版
+# Pré-lançamento do Veo 3.1 Lite
 
-Veo 3.1 Lite 預先發布版是高效率的影片模型，專為開發人員設計，可生成高保真度的影片、編輯影片，以及控制電影效果。這項服務採用最先進的 Veo 3.1 模型，為創作者和企業提供可擴充的程式化介面，讓專業級影片 AI 技術普及化。
+O pré-lançamento do Veo 3.1 Lite é um modelo de vídeo de alta eficiência e focado em desenvolvedores que oferece geração, edição e controle cinematográfico de vídeos de alta fidelidade. Ele usa o modelo de ponta Veo 3.1 para democratizar a IA de vídeo de nível profissional, oferecendo uma interface escalonável e programável para criadores de conteúdo e empresas.
 
-[在 Google AI Studio 中試用](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=zh-tw)
+[Testar no Google AI Studio](https://aistudio.google.com?model=veo-3.1-lite-generate-preview&hl=pt-br)
 
-## 說明文件
+## Documentação
 
-Veo 3.1 Lite 為開發人員和企業提供最實惠的價格，協助他們大規模建構大量影片應用程式和工作流程。如要瞭解詳情，並與其他 Veo 3.1 型號比較，請前往「[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw#veo-3.1)」頁面。
+O Veo 3.1 Lite oferece os melhores preços para desenvolvedores e empresas que criam
+aplicativos e fluxos de trabalho de vídeo de alto volume em escala. Acesse a página [Preços](https://ai.google.dev/gemini-api/docs/pricing?hl=pt-br#veo-3.1) para mais detalhes e uma comparação com outros modelos do Veo 3.1.
 
-如要全面瞭解功能與能力，請前往[影片生成](https://ai.google.dev/gemini-api/docs/video?hl=zh-tw)頁面。請注意，Veo 3.1 Lite 預先發布版不支援[4K 輸出](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=zh-tw#resolution)或[擴充功能](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=zh-tw#extending_veo_videos)。
+Acesse a página [Geração de vídeo](https://ai.google.dev/gemini-api/docs/video?hl=pt-br) para conferir todos os recursos e funcionalidades. A prévia do Veo 3.1 Lite não é compatível com
+[saídas 4K](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=pt-br#resolution) ou
+[extensões](https://ai.google.dev/gemini-api/docs/video?example=dialogue&hl=pt-br#extending_veo_videos).
 
 ## veo-3.1-lite-generate-preview
 
-| 屬性 | 說明 |
+| Propriedade | Descrição |
 | --- | --- |
-| id\_card 模型代碼 | **Gemini API**  `veo-3.1-lite-generate-preview` |
-| save支援的資料類型 | **輸入功率**  文字、圖片  **輸出內容**  有聲影片 |
-| token\_auto 限制 | **文字輸入**  1,024 個權杖  **輸出影片**  1 |
-| calendar\_month最新更新 | 2026 年 3 月 |
+| Código do modelo id\_card | **API Gemini**  `veo-3.1-lite-generate-preview` |
+| saveTipos de dados aceitos | **Entrada**  Texto, imagem  **Saída**  Vídeo com áudio |
+| Limites de token\_auto | **Entrada de texto**  1.024 tokens  **Vídeo de saída**  1 |
+| calendar\_monthÚltima atualização | Março de 2026 |
 
-提供意見
+Envie comentários
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
 
-上次更新時間：2026-04-29 (世界標準時間)。
+Última atualização 2026-04-29 UTC.
 
-想進一步說明嗎？
+Quer enviar seu feedback?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-04-29 (世界標準時間)。"],[],[]]
+[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-04-29 UTC."],[],[]]

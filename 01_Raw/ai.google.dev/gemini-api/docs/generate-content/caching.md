@@ -1,64 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=tr
-fetched_at: 2026-08-03T04:31:09.531045+00:00
-title: "Ba\u011flam\u0131 \u00f6nbelle\u011fe alma \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=th
+fetched_at: 2026-08-10T03:11:09.674716+00:00
+title: "\u0e01\u0e32\u0e23\u0e41\u0e04\u0e0a\u0e1a\u0e23\u0e34\u0e1a\u0e17 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Geri bildirim gönderin
+ส่งความคิดเห็น
 
-# Bağlamı önbelleğe alma
+# การแคชบริบท
 
-Tipik bir yapay zeka iş akışında, aynı giriş jetonlarını bir modele tekrar tekrar iletebilirsiniz. Gemini API iki farklı önbelleğe alma mekanizması sunar:
+ในเวิร์กโฟลว์ AI ทั่วไป คุณอาจส่งโทเค็นอินพุตเดียวกันซ้ำๆ ไปยังโมเดล Gemini API มีกลไกการแคช 2 แบบดังนี้
 
-- Örtülü önbelleğe alma (Gemini 2.5 ve daha yeni modellerde otomatik olarak etkinleştirilir, maliyet tasarrufu garantisi yoktur)
-- Açık önbelleğe alma (Çoğu modelde manuel olarak etkinleştirilebilir, maliyet tasarrufu garantisi)
+- การแคชแบบไม่เจาะจง (เปิดใช้โดยอัตโนมัติในโมเดล Gemini 2.5 และใหม่กว่า ไม่รับประกันการประหยัดค่าใช้จ่าย)
+- การแคชแบบเจาะจง (เปิดใช้ด้วยตนเองในโมเดลส่วนใหญ่ได้ รับประกันการประหยัดค่าใช้จ่าย)
 
-Açık önbelleğe alma, maliyet tasarrufu sağlamak istediğiniz ancak geliştiricinin biraz daha fazla çalışması gereken durumlarda faydalıdır.
+การแคชแบบเจาะจงมีประโยชน์ในกรณีที่คุณต้องการรับประกันการประหยัดค่าใช้จ่าย แต่ต้องมีงานเพิ่มเติมสำหรับนักพัฒนาแอป
 
-## Örtülü önbelleğe alma
+## การแคชแบบไม่เจาะจง
 
-Örtülü önbelleğe alma, tüm Gemini 2.5 ve daha yeni modeller için varsayılan olarak etkindir. İsteğiniz önbelleklere isabet ederse maliyet tasarruflarını otomatik olarak aktarırız. Bu özelliği etkinleştirmek için herhangi bir işlem yapmanız gerekmez. Bağlam önbelleğe alma için minimum giriş jetonu sayısı, her model için aşağıdaki tabloda listelenmiştir:
+การแคชแบบไม่เจาะจงจะเปิดใช้โดยค่าเริ่มต้นสำหรับโมเดล Gemini 2.5 และใหม่กว่าทั้งหมด เราจะส่งต่อการประหยัดค่าใช้จ่ายโดยอัตโนมัติหากคำขอของคุณตรงกับแคช คุณไม่จำเป็นต้องดำเนินการใดๆ เพื่อเปิดใช้ฟีเจอร์นี้ จำนวนโทเค็นอินพุตขั้นต่ำสำหรับการแคชบริบทแสดงอยู่ในตารางต่อไปนี้สำหรับแต่ละโมเดล
 
-| Model | Minimum jeton sınırı |
+| รุ่น | ขีดจำกัดโทเค็นขั้นต่ำ |
 | --- | --- |
 | Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro Önizlemesi | 4096 |
+| Gemini 3.1 Pro Preview | 4096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-Örtülü önbellek isabeti olasılığını artırmak için:
+วิธีเพิ่มโอกาสที่จะพบแคชแบบไม่เจาะจง
 
-- Büyük ve yaygın içerikleri isteminizin başına eklemeyi deneyin.
-- Kısa süre içinde benzer öneklere sahip istekler göndermeye çalışmak
+- ลองวางเนื้อหาขนาดใหญ่และเนื้อหาทั่วไปไว้ที่จุดเริ่มต้นของพรอมต์
+- ลองส่งคำขอที่มีคำนำหน้าที่คล้ายกันภายในระยะเวลาสั้นๆ
 
-Yanıt nesnesinin `usage_metadata` alanında, önbellek isabeti olan jetonların sayısını görebilirsiniz.
+คุณสามารถดูจำนวนโทเค็นที่แคชทำงานได้ในช่อง `usage_metadata` ของออบเจ็กต์การตอบกลับ
 
-## Açık önbelleğe alma
+## การแคชแบบเจาะจง
 
-Gemini API'nin açık önbelleğe alma özelliğini kullanarak bazı içerikleri modele bir kez iletebilir, giriş jetonlarını önbelleğe alabilir ve ardından sonraki istekler için önbelleğe alınmış jetonlara başvurabilirsiniz. Belirli hacimlerde, önbelleğe alınmış jetonları kullanmak, aynı jeton gövdesini tekrar tekrar iletmekten daha düşük maliyetlidir.
+การใช้ฟีเจอร์การแคชแบบเจาะจงของ Gemini API ช่วยให้คุณส่งเนื้อหาบางส่วนไปยังโมเดลได้ครั้งเดียว แคชโทเค็นอินพุต แล้วอ้างอิงโทเค็นที่แคชไว้สำหรับคำขอที่ตามมา เมื่อมีปริมาณการใช้งานถึงระดับหนึ่ง การใช้โทเค็นที่แคชไว้จะมีค่าใช้จ่ายต่ำกว่าการส่งโทเค็นชุดเดียวกันซ้ำๆ
 
-Bir dizi jetonu önbelleğe aldığınızda, jetonlar otomatik olarak silinmeden önce önbelleğin ne kadar süreyle var olmasını istediğinizi seçebilirsiniz. Bu önbelleğe alma süresine *geçerlilik süresi* (TTL) adı verilir. Ayarlanmazsa TTL varsayılan olarak 1 saat olur. Önbelleğe alma maliyeti, giriş jetonu boyutuna ve jetonların ne kadar süreyle kalıcı olmasını istediğinize bağlıdır.
+เมื่อแคชชุดโทเค็น คุณสามารถเลือกระยะเวลาที่ต้องการให้แคชอยู่ก่อนที่ระบบจะลบโทเค็นโดยอัตโนมัติ ระยะเวลาการแคชนี้เรียกว่า *Time to Live* (TTL) หากไม่ได้ตั้งค่า TTL จะมีค่าเริ่มต้นเป็น 1 ชั่วโมง ค่าใช้จ่ายในการแคชขึ้นอยู่กับขนาดโทเค็นอินพุตและระยะเวลาที่คุณต้องการให้โทเค็นอยู่
 
-Bu bölümde, bir Gemini SDK'sını yüklediğiniz (veya curl'ü yüklediğiniz) ve [Başlangıç kılavuzunda](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=tr) gösterildiği gibi bir API anahtarı yapılandırdığınız varsayılır.
+ส่วนนี้จะถือว่าคุณได้ติดตั้ง Gemini SDK (หรือติดตั้ง curl)
+และกำหนดค่าคีย์ API แล้วตามที่แสดงใน
+[คู่มือเริ่มต้นใช้งาน](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=th)
 
-### Önbelleği kullanarak içerik oluşturma
+### สร้างเนื้อหาโดยใช้แคช
 
 ### Python
 
-Aşağıdaki örnekte, önbelleğe alınmış bir sistem talimatı ve video dosyası kullanarak nasıl içerik oluşturulacağı gösterilmektedir.
+ตัวอย่างต่อไปนี้แสดงวิธีสร้างเนื้อหาโดยใช้คำแนะนำระบบและไฟล์วิดีโอที่แคชไว้
 
-### Videolar
+### วิดีโอ
 
 ```
 import os
@@ -117,7 +119,7 @@ print(response.usage_metadata)
 print(response.text)
 ```
 
-### PDF'ler
+### PDF
 
 ```
 from google import genai
@@ -165,7 +167,7 @@ print('\n\n', response.text)
 
 ### JavaScript
 
-Aşağıdaki örnekte, önbelleğe alınmış bir sistem talimatı ve bir metin dosyası kullanarak nasıl içerik oluşturulacağı gösterilmektedir.
+ตัวอย่างต่อไปนี้แสดงวิธีสร้างเนื้อหาโดยใช้คำแนะนำระบบและไฟล์ข้อความที่แคชไว้
 
 ```
 import {
@@ -206,7 +208,7 @@ await main();
 
 ### Go
 
-Aşağıdaki örnekte, önbellek kullanarak nasıl içerik oluşturulacağı gösterilmektedir.
+ตัวอย่างต่อไปนี้แสดงวิธีสร้างเนื้อหาโดยใช้แคช
 
 ```
 package main
@@ -276,9 +278,9 @@ func main() {
 
 ### REST
 
-Aşağıdaki örnekte, nasıl önbellek oluşturulacağı ve ardından içerik oluşturmak için nasıl kullanılacağı gösterilmektedir.
+ตัวอย่างต่อไปนี้แสดงวิธีสร้างแคชแล้วใช้แคชเพื่อสร้างเนื้อหา
 
-### Videolar
+### วิดีโอ
 
 ```
 wget https://storage.googleapis.com/generativeai-downloads/data/a11.txt
@@ -329,7 +331,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
     }'
 ```
 
-### PDF'ler
+### PDF
 
 ```
 DOC_URL="https://sma.nasa.gov/SignificantIncidents/assets/a11_missionreport.pdf"
@@ -427,20 +429,22 @@ cat response.json
 echo jq ".candidates[].content.parts[].text" response.json
 ```
 
-### Önbellekleri listeleme
+### แสดงรายการแคช
 
-Önbelleğe alınmış içerikleri almak veya görüntülemek mümkün değildir ancak önbellek meta verilerini (`name`, `model`, `display_name`, `usage_metadata`, `create_time`, `update_time` ve `expire_time`) alabilirsiniz.
+คุณไม่สามารถดึงหรือดูเนื้อหาที่แคชไว้ได้ แต่สามารถดึง
+ข้อมูลเมตาของแคช (`name`, `model`, `display_name`, `usage_metadata`,
+`create_time`, `update_time` และ `expire_time`)
 
 ### Python
 
-Yüklenen tüm önbelleklerin meta verilerini listelemek için `CachedContent.list()` kullanın:
+หากต้องการแสดงข้อมูลเมตาสำหรับแคชที่อัปโหลดทั้งหมด ให้ใช้ `CachedContent.list()`
 
 ```
 for cache in client.caches.list():
   print(cache)
 ```
 
-Adını biliyorsanız bir önbellek nesnesinin meta verilerini getirmek için `get` kullanın:
+หากต้องการดึงข้อมูลเมตาสำหรับออบเจ็กต์แคชรายการเดียว ให้ใช้ `get` หากทราบชื่อ
 
 ```
 client.caches.get(name=name)
@@ -448,7 +452,7 @@ client.caches.get(name=name)
 
 ### JavaScript
 
-Yüklenen tüm önbelleklerin meta verilerini listelemek için `GoogleGenAI.caches.list()` kullanın:
+หากต้องการแสดงข้อมูลเมตาสำหรับแคชที่อัปโหลดทั้งหมด ให้ใช้ `GoogleGenAI.caches.list()`
 
 ```
 console.log("My caches:");
@@ -465,7 +469,7 @@ while (true) {
 
 ### Go
 
-Aşağıdaki örnekte tüm önbellekler listelenmektedir.
+ตัวอย่างต่อไปนี้แสดงรายการแคชทั้งหมด
 
 ```
 caches, err := client.Caches.All(ctx)
@@ -478,7 +482,7 @@ for _, item := range caches {
 }
 ```
 
-Aşağıdaki örnekte, sayfa boyutu 2 olan önbellekler listelenmektedir.
+ตัวอย่างต่อไปนี้แสดงรายการแคชโดยใช้ขนาดหน้า 2
 
 ```
 page, err := client.Caches.List(ctx, &genai.ListCachedContentsConfig{PageSize: 2})
@@ -511,13 +515,13 @@ for {
 curl "https://generativelanguage.googleapis.com/v1beta/cachedContents?key=$GEMINI_API_KEY"
 ```
 
-### Önbelleği güncelleme
+### อัปเดตแคช
 
-Önbellek için yeni bir `ttl` veya `expire_time` ayarlayabilirsiniz. Önbellekle ilgili başka bir şeyin değiştirilmesi desteklenmez.
+คุณสามารถตั้งค่า `ttl` หรือ `expire_time` ใหม่สำหรับแคช ระบบไม่รองรับการเปลี่ยนแปลงอื่นๆ เกี่ยวกับแคช
 
 ### Python
 
-Aşağıdaki örnekte, `client.caches.update()` kullanılarak bir önbelleğin `ttl` değerinin nasıl güncelleneceği gösterilmektedir.
+ตัวอย่างต่อไปนี้แสดงวิธีอัปเดต `ttl` ของแคชโดยใช้ `client.caches.update()`
 
 ```
 from google import genai
@@ -531,7 +535,10 @@ client.caches.update(
 )
 ```
 
-Süre sonunu ayarlamak için `datetime` nesnesi veya ISO biçimli bir tarih/saat dizesi (`dt.isoformat()`, örneğin `2025-01-27T16:02:36.473528+00:00`) kabul edilir. Zamanınız bir saat dilimi içermelidir (`datetime.utcnow()` saat dilimi eklemez, `datetime.now(datetime.timezone.utc)` saat dilimi ekler).
+หากต้องการตั้งเวลาหมดอายุ ระบบจะยอมรับออบเจ็กต์ `datetime` หรือสตริง datetime ที่จัดรูปแบบ ISO (`dt.isoformat()`, เช่น
+`2025-01-27T16:02:36.473528+00:00`) เวลาของคุณต้องมีเขตเวลา
+(`datetime.utcnow()` จะไม่แนบเขตเวลา แต่
+`datetime.now(datetime.timezone.utc)` จะแนบเขตเวลา)
 
 ```
 from google import genai
@@ -551,7 +558,7 @@ client.caches.update(
 
 ### JavaScript
 
-Aşağıdaki örnekte, `GoogleGenAI.caches.update()` kullanılarak bir önbelleğin `ttl` değerinin nasıl güncelleneceği gösterilmektedir.
+ตัวอย่างต่อไปนี้แสดงวิธีอัปเดต `ttl` ของแคชโดยใช้ `GoogleGenAI.caches.update()`
 
 ```
 const ttl = `${2 * 3600}s`; // 2 hours in seconds
@@ -564,7 +571,7 @@ console.log("After update (TTL):", updatedCache);
 
 ### Go
 
-Aşağıdaki örnekte, bir önbelleğin `TTL` değerinin nasıl güncelleneceği gösterilmektedir.
+ตัวอย่างต่อไปนี้แสดงวิธีอัปเดต `TTL` ของแคช
 
 ```
 // Update the TTL (2 hours).
@@ -580,7 +587,7 @@ fmt.Println(cache)
 
 ### REST
 
-Aşağıdaki örnekte, bir önbelleğin `ttl` değerinin nasıl güncelleneceği gösterilmektedir.
+ตัวอย่างต่อไปนี้แสดงวิธีอัปเดต `ttl` ของแคช
 
 ```
 curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY" \
@@ -588,9 +595,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=
 -d '{"ttl": "600s"}'
 ```
 
-### Önbelleği silme
+### ลบแคช
 
-Önbelleğe alma hizmeti, içeriği önbellekten manuel olarak kaldırmak için silme işlemi sağlar. Aşağıdaki örnekte önbelleğin nasıl silineceği gösterilmektedir:
+บริการแคชมีการดำเนินการลบเพื่อนำเนื้อหาออกจากแคชด้วยตนเอง ตัวอย่างต่อไปนี้แสดงวิธีลบแคช
 
 ### Python
 
@@ -620,44 +627,49 @@ fmt.Println("Cache deleted:", cache.Name)
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/$CACHE_NAME?key=$GEMINI_API_KEY"
 ```
 
-### OpenAI kitaplığını kullanarak açık önbelleğe alma
+### การแคชแบบเจาะจงโดยใช้ไลบรารี OpenAI
 
-[OpenAI kitaplığı](https://ai.google.dev/gemini-api/docs/openai?hl=tr) kullanıyorsanız [`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=tr#extra-body) üzerinde `cached_content` özelliğini kullanarak açık önbelleğe almayı etkinleştirebilirsiniz.
+หากคุณใช้[ไลบรารี OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th) คุณสามารถเปิดใช้
+การแคชแบบเจาะจงได้โดยใช้พร็อพเพอร์ตี้ `cached_content` ใน
+[`extra_body`](https://ai.google.dev/gemini-api/docs/openai?hl=th#extra-body)
 
-## Açık önbelleğe alma ne zaman kullanılır?
+## กรณีที่ควรใช้การแคชแบบเจาะจง
 
-Bağlamı önbelleğe alma, özellikle önemli bir ilk bağlamın daha kısa istekler tarafından tekrar tekrar referans alındığı senaryolar için uygundur. Aşağıdaki gibi kullanım alanlarında bağlamı önbelleğe alma özelliğini kullanabilirsiniz:
+การแคชบริบทเหมาะอย่างยิ่งสำหรับสถานการณ์ที่คำขอสั้นๆ อ้างอิงบริบทเริ่มต้นขนาดใหญ่ซ้ำๆ ลองใช้การแคชบริบทสำหรับกรณีการใช้งานต่อไปนี้
 
-- Kapsamlı [sistem talimatlarına](https://ai.google.dev/gemini-api/docs/system-instructions?hl=tr) sahip chatbot'lar
-- Uzun video dosyalarının tekrar tekrar analiz edilmesi
-- Büyük doküman kümelerine karşı yinelenen sorgular
-- Sık kod deposu analizi veya hata düzeltme
+- แชทบ็อตที่มี[คำแนะนำระบบ](https://ai.google.dev/gemini-api/docs/system-instructions?hl=th)ที่ครอบคลุม
+- การวิเคราะห์ไฟล์วิดีโอขนาดยาวซ้ำๆ
+- การค้นหาชุดเอกสารขนาดใหญ่ที่เกิดขึ้นซ้ำๆ
+- การวิเคราะห์ที่เก็บโค้ดหรือการแก้ไขข้อบกพร่องบ่อยๆ
 
-### Açıkça önbelleğe alma, maliyetleri nasıl azaltır?
+### วิธีที่การแคชแบบเจาะจงช่วยลดค่าใช้จ่าย
 
-Bağlam önbelleğe alma, maliyeti düşürmek için tasarlanmış ücretli bir özelliktir. Faturalandırma aşağıdaki faktörlere göre yapılır:
+การแคชบริบทเป็นฟีเจอร์แบบชำระเงินที่ออกแบบมาเพื่อลดค่าใช้จ่าย การเรียกเก็บเงินจะพิจารณาจากปัจจัยต่อไปนี้
 
-1. **Önbelleğe alınan jeton sayısı:** Giriş jetonlarının sayısı önbelleğe alınır ve sonraki istemlere dahil edildiğinde daha düşük bir ücretle faturalandırılır.
-2. **Depolama süresi:** Önbelleğe alınan jetonların depolandığı süre (TTL). Önbelleğe alınan jeton sayısının TTL süresine göre faturalandırılır. TTL için minimum veya maksimum sınır yoktur.
-3. **Diğer faktörler:** Giriş ve çıkış jetonları gibi önbelleğe alınmamış jetonlar için diğer ücretler geçerlidir.
+1. **จำนวนโทเค็นแคช:** จำนวนโทเค็นอินพุตที่แคชไว้ ซึ่งจะเรียกเก็บเงินในอัตราที่ลดลงเมื่อรวมอยู่ในพรอมต์ที่ตามมา
+2. **ระยะเวลาการจัดเก็บ:** ระยะเวลาที่จัดเก็บโทเค็นที่แคชไว้ (TTL) ซึ่งจะเรียกเก็บเงินตามระยะเวลา TTL ของจำนวนโทเค็นที่แคชไว้ ไม่มีขีดจำกัดขั้นต่ำหรือสูงสุดสำหรับ TTL
+3. **ปัจจัยอื่นๆ:** ระบบจะเรียกเก็บค่าใช้จ่ายอื่นๆ เช่น โทเค็นอินพุตและโทเค็นเอาต์พุตที่ไม่ได้แคชไว้
 
-En güncel fiyatlandırma bilgileri için Gemini API [fiyatlandırma sayfasını](https://ai.google.dev/pricing?hl=tr) inceleyin. Jetonları nasıl sayacağınızı öğrenmek için [Jeton kılavuzuna](https://ai.google.dev/gemini-api/docs/tokens?hl=tr) bakın.
+โปรดดูรายละเอียดราคาล่าสุดในหน้าการกำหนดราคา Gemini API [pricing
+page](https://ai.google.dev/pricing?hl=th) ดูวิธีนับโทเค็นได้ที่[คู่มือ
+โทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th)
 
-### Göz önünde bulundurulacak diğer noktalar
+### ข้อควรพิจารณาเพิ่มเติม
 
-Bağlam önbelleğe almayı kullanırken aşağıdaki hususları göz önünde bulundurun:
+โปรดคำนึงถึงข้อควรพิจารณาต่อไปนี้เมื่อใช้การแคชบริบท
 
-- Bağlam önbelleğe alma için *minimum* giriş jetonu sayısı modele göre değişir. *Maksimum*, belirli model için maksimum değerle aynıdır. (Jeton sayma hakkında daha fazla bilgi için [Jeton kılavuzu](https://ai.google.dev/gemini-api/docs/tokens?hl=tr)'na bakın).
-- Model, önbelleğe alınmış jetonlar ile normal giriş jetonları arasında herhangi bir ayrım yapmaz. Önbelleğe alınmış içerik, istemin önekidir.
-- Bağlam önbelleğe alma konusunda özel bir oran veya kullanım sınırı yoktur. `GenerateContent` için standart oran sınırları geçerlidir ve jeton sınırlarına önbelleğe alınmış jetonlar da dahildir.
-- Önbelleğe alınan jeton sayısı, önbellek hizmetinin oluşturma, alma ve listeleme işlemlerinden `usage_metadata` içinde, önbellek kullanılırken de `GenerateContent` içinde döndürülür.
+- จำนวนโทเค็นอินพุต *ขั้นต่ำ* สำหรับการแคชบริบทจะแตกต่างกันไปตามโมเดล *สูงสุด* จะเท่ากับค่าสูงสุดสำหรับโมเดลที่กำหนด (ดูข้อมูลเพิ่มเติมเกี่ยวกับการนับโทเค็นได้ที่
+  ดู[คู่มือโทเค็น](https://ai.google.dev/gemini-api/docs/tokens?hl=th))
+- โมเดลจะไม่แยกความแตกต่างระหว่างโทเค็นที่แคชไว้กับโทเค็นอินพุตปกติ เนื้อหาที่แคชไว้จะเป็นคำนำหน้าของพรอมต์
+- ไม่มีอัตราพิเศษหรือขีดจำกัดการใช้งานสำหรับการแคชบริบท โดยจะใช้ขีดจำกัดอัตรามาตรฐานสำหรับ `GenerateContent` และขีดจำกัดโทเค็นจะรวมโทเค็นที่แคชไว้
+- ระบบจะแสดงจำนวนโทเค็นที่แคชไว้ใน `usage_metadata` จากการดำเนินการสร้าง รับ และแสดงรายการของบริการแคช รวมถึงใน `GenerateContent` เมื่อใช้แคช
 
-Geri bildirim gönderin
+ส่งความคิดเห็น
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+อัปเดตล่าสุด 2026-07-30 UTC
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

@@ -1,87 +1,84 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=th
-fetched_at: 2026-08-03T04:39:57.795482+00:00
-title: "\u0e40\u0e27\u0e2d\u0e23\u0e4c\u0e0a\u0e31\u0e19\u0e15\u0e31\u0e27\u0e2d\u0e22\u0e48\u0e32\u0e07\u0e02\u0e2d\u0e07 Gemini 3.1 Flash Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=id
+fetched_at: 2026-08-10T03:22:31.622275+00:00
+title: "Pratinjau Langsung Gemini 3.1 Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-ส่งความคิดเห็น
+Kirim masukan
 
-# เวอร์ชันตัวอย่างของ Gemini 3.1 Flash Live
+# Pratinjau Langsung Gemini 3.1 Flash
 
-Gemini 3.1 Flash Live Preview เป็นโมเดลเสียงต่อเสียงที่มีเวลาในการตอบสนองต่ำ ซึ่งได้รับการเพิ่มประสิทธิภาพสำหรับบทสนทนาแบบเรียลไทม์และแอปพลิเคชัน AI ที่เน้นเสียงเป็นหลัก โดยมีความสามารถในการตรวจจับความแตกต่างของเสียง ความแม่นยำเชิงตัวเลข และการรับรู้แบบมัลติโมดัล
+Pratinjau Langsung Gemini 3.1 Flash adalah model audio-ke-audio latensi rendah kami yang dioptimalkan untuk dialog real-time dan aplikasi AI berbasis suara dengan deteksi nuansa akustik, presisi numerik, dan kesadaran multimodal.
 
-[ลองใช้ใน Google AI Studio](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=th)
+[Coba di Google AI Studio](https://aistudio.google.com/live?model=gemini-3.1-flash-live-preview&hl=id)
 
-## เอกสารประกอบ
+## Dokumentasi
 
-ดูคู่มือ [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th) เพื่อดูฟีเจอร์และความสามารถทั้งหมด
+Buka panduan [Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id) untuk mengetahui cakupan lengkap fitur dan kemampuan.
 
 ## gemini-3.1-flash-live-preview
 
-| พร็อพเพอร์ตี้ | คำอธิบาย |
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardรหัสโมเดล | `gemini-3.1-flash-live-preview` |
-| saveประเภทข้อมูลที่รองรับ | **อินพุต**  ข้อความ รูปภาพ เสียง วิดีโอ  **เอาต์พุต**  ข้อความและเสียง |
-| token\_autoขีดจำกัดโทเค็น[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=th) | **ขีดจำกัดโทเค็นอินพุต**  131,072  **ขีดจำกัดโทเค็นเอาต์พุต**  65,536 |
-| handymanความสามารถ | **[การสร้างเสียง](https://ai.google.dev/gemini-api/docs/speech-generation?hl=th)**  สิ่งที่ทำได้  **[การแคช](https://ai.google.dev/gemini-api/docs/caching?hl=th)**  ไม่รองรับ  **[การเรียกใช้โค้ด](https://ai.google.dev/gemini-api/docs/code-execution?hl=th)**  ไม่รองรับ  **[การค้นหาไฟล์](https://ai.google.dev/gemini-api/docs/file-search?hl=th)**  สิ่งที่ทำไม่ได้  **[การเรียกฟังก์ชัน](https://ai.google.dev/gemini-api/docs/function-calling?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลกับ Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=th)**  ไม่รองรับ  **[การสร้างรูปภาพ](https://ai.google.dev/gemini-api/docs/image-generation?hl=th)**  ไม่รองรับ  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=th)**  สิ่งที่ทำได้  **[การเชื่อมต่อแหล่งข้อมูลของ Search](https://ai.google.dev/gemini-api/docs/google-search?hl=th)**  สิ่งที่ทำได้  **[เอาต์พุตที่มีโครงสร้าง](https://ai.google.dev/gemini-api/docs/structured-output?hl=th)**  ไม่รองรับ  **[การคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th)**  สิ่งที่ทำได้  **[บริบท URL](https://ai.google.dev/gemini-api/docs/url-context?hl=th)**  ไม่รองรับ |
-| speedตัวเลือกการใช้งาน | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=th)**  ไม่รองรับ |
-| 123เวอร์ชัน | อ่าน[รูปแบบเวอร์ชันของโมเดล](https://ai.google.dev/gemini-api/docs/models/gemini?hl=th#model-versions)เพื่อดูรายละเอียดเพิ่มเติม  - ตัวอย่าง: `gemini-3.1-flash-live-preview` |
-| calendar\_monthการอัปเดตล่าสุด | มีนาคม 2026 |
-| id\_cardการ์ดโมเดล | [การ์ดโมเดล](https://deepmind.google/models/model-cards/gemini-3-1-flash-audio/?hl=th) |
+| Kode model id\_card | `gemini-3.1-flash-live-preview` |
+| saveJenis data yang didukung | **Input**  Teks, gambar, audio, video  **Output**  Teks dan audio |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  131.072  **Batas token output**  65.536 |
+| handymanKemampuan | **[Pembuatan audio](https://ai.google.dev/gemini-api/docs/speech-generation?hl=id)**  Didukung  **[Caching](https://ai.google.dev/gemini-api/docs/caching?hl=id)**  Tidak didukung  **[Eksekusi kode](https://ai.google.dev/gemini-api/docs/code-execution?hl=id)**  Tidak didukung  **[Penelusuran file](https://ai.google.dev/gemini-api/docs/file-search?hl=id)**  Tidak Didukung  **[Pemanggilan fungsi](https://ai.google.dev/gemini-api/docs/function-calling?hl=id)**  Didukung  **[Melakukan grounding dengan Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=id)**  Tidak didukung  **[Pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id)**  Tidak didukung  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=id)**  Didukung  **[Grounding penelusuran](https://ai.google.dev/gemini-api/docs/google-search?hl=id)**  Didukung  **[Output terstruktur](https://ai.google.dev/gemini-api/docs/structured-output?hl=id)**  Tidak didukung  **[Penalaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id)**  Didukung  **[Konteks URL](https://ai.google.dev/gemini-api/docs/url-context?hl=id)**  Tidak didukung |
+| speedOpsi pemakaian | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=id)**  Tidak didukung |
+| Versi 123 | Baca [pola versi model](https://ai.google.dev/gemini-api/docs/models/gemini?hl=id#model-versions) untuk mengetahui detail selengkapnya.  - Pratinjau: `gemini-3.1-flash-live-preview` |
+| calendar\_monthPembaruan terbaru | Maret 2026 |
+| Kartu model id\_card | [Kartu model](https://deepmind.google/models/model-cards/gemini-3-1-flash-audio/?hl=id) |
 
-## การย้ายข้อมูลจาก Gemini 2.5 Flash Live
+## Bermigrasi dari Gemini 2.5 Flash Live
 
-Gemini 3.1 Flash Live Preview ได้รับการเพิ่มประสิทธิภาพสำหรับบทสนทนาแบบเรียลไทม์ที่มีเวลาในการตอบสนองต่ำ
-เมื่อย้ายข้อมูลจาก `gemini-2.5-flash-native-audio-preview-12-2025` โปรดคำนึงถึงสิ่งต่อไปนี้
+Pratinjau Langsung Gemini 3.1 Flash dioptimalkan untuk dialog real-time dengan latensi rendah.
+Saat bermigrasi dari `gemini-2.5-flash-native-audio-preview-12-2025`, pertimbangkan hal berikut:
 
-- **สตริงโมเดล**: อัปเดตสตริงโมเดลจาก
-  `gemini-2.5-flash-native-audio-preview-12-2025` เป็น
-  `gemini-3.1-flash-live-preview`
-- **การกำหนดค่าการคิด**: Gemini 3.1 ใช้ `thinkingLevel` (โดยมีการตั้งค่า
-  เช่น `minimal`, `low`, `medium`, และ `high`) แทน `thinkingBudget`
-  ค่าเริ่มต้นคือ `minimal` เพื่อเพิ่มประสิทธิภาพให้มีเวลาในการตอบสนองต่ำที่สุด ดู
-  [ระดับและงบประมาณการคิด](https://ai.google.dev/gemini-api/docs/thinking?hl=th#levels-budgets)
-- **เหตุการณ์ของเซิร์ฟเวอร์**: ตอนนี้เหตุการณ์
-  [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=th#bidigeneratecontentservercontent)
-  รายการเดียวสามารถมีเนื้อหาหลายส่วนพร้อมกันได้ (เช่น
-  เสียงและข้อความถอดเสียง) อัปเดตโค้ดเพื่อประมวลผลทุกส่วนในแต่ละเหตุการณ์เพื่อหลีกเลี่ยงการพลาดเนื้อหา
-- **เนื้อหาของไคลเอ็นต์**: `send_client_content` รองรับสำหรับการเริ่มต้น
-  ประวัติบริบทเริ่มต้นเท่านั้น (ต้องตั้งค่า
-  [`initial_history_in_client_content`](https://ai.google.dev/api/live?hl=th#HistoryConfig) ใน
-  [`history_config`](https://ai.google.dev/api/live?hl=th#BidiGenerateContentSetup)) ใช้
-  [`send_realtime_input`](https://ai.google.dev/api/live?hl=th#bidigeneratecontentrealtimeinput) เพื่อส่ง
-  การอัปเดตข้อความระหว่างการสนทนา ดู
-  [การอัปเดตเนื้อหาแบบเพิ่มทีละส่วน](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#incremental-updates)
-- **การครอบคลุมการสนทนา**: ค่าเริ่มต้นคือ
-  [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=th#turncoverage) แทน
-  `TURN_INCLUDES_ONLY_ACTIVITY` ตอนนี้การสนทนาของโมเดลรวมถึงกิจกรรมเสียงที่ตรวจพบและเฟรมวิดีโอทั้งหมด หากแอปพลิเคชันของคุณส่งสตรีมเฟรมวิดีโออย่างต่อเนื่องในปัจจุบัน คุณอาจต้องการอัปเดตแอปพลิเคชันให้ส่งเฟรมวิดีโอเฉพาะเมื่อมีกิจกรรมเสียงเพื่อหลีกเลี่ยงค่าใช้จ่ายเพิ่มเติม
-- **การเรียกฟังก์ชันแบบอะซิงโครนัส**: ยังไม่รองรับ การเรียกฟังก์ชันรองรับเฉพาะแบบซิงโครนัสเท่านั้น โมเดลจะไม่เริ่มตอบกลับจนกว่าคุณจะส่งการตอบกลับของเครื่องมือ ดู
-  [การเรียกใช้ฟังก์ชันแบบไม่พร้อมกัน](https://ai.google.dev/gemini-api/docs/live-tools?hl=th#async-function-calling)
-- **เสียงเชิงรุกและบทสนทนาเชิงอารมณ์**: ฟีเจอร์เหล่านี้ยังไม่
-  รองรับใน Gemini 3.1 Flash Live นำการกำหนดค่าสำหรับฟีเจอร์เหล่านี้ออกจากโค้ด ดู
-  [เสียงเชิงรุก](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#proactive-audio)และ
-  [บทสนทนาเชิงอารมณ์](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#affective-dialog)
+- **String model**: Perbarui string model Anda dari
+  `gemini-2.5-flash-native-audio-preview-12-2025` menjadi
+  `gemini-3.1-flash-live-preview`.
+- **Konfigurasi pemikiran**: Gemini 3.1 menggunakan `thinkingLevel` (dengan setelan seperti `minimal`, `low`, `medium`, dan `high`) dan bukan `thinkingBudget`.
+  Defaultnya adalah `minimal` untuk mengoptimalkan latensi terendah. Lihat
+  [Memikirkan tingkat dan anggaran](https://ai.google.dev/gemini-api/docs/thinking?hl=id#levels-budgets).
+- **Peristiwa server**: Satu peristiwa
+  [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=id#bidigeneratecontentservercontent)
+  kini dapat berisi beberapa bagian konten secara bersamaan (misalnya,
+  chunk audio dan transkrip). Perbarui kode Anda untuk memproses semua bagian dalam setiap
+  peristiwa untuk menghindari konten yang hilang.
+- **Konten klien**: `send_client_content` hanya didukung untuk mengisi histori konteks awal (memerlukan setelan
+  [`initial_history_in_client_content`](https://ai.google.dev/api/live?hl=id#HistoryConfig) di
+  [`history_config`](https://ai.google.dev/api/live?hl=id#BidiGenerateContentSetup)). Gunakan
+  [`send_realtime_input`](https://ai.google.dev/api/live?hl=id#bidigeneratecontentrealtimeinput) untuk mengirim
+  pembaruan teks selama percakapan. Lihat
+  [Update konten inkremental](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#incremental-updates).
+- **Cakupan belokan**: Defaultnya adalah
+  [`TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO`](https://ai.google.dev/api/live?hl=id#turncoverage), bukan
+  `TURN_INCLUDES_ONLY_ACTIVITY`. Giliran model kini mencakup aktivitas audio yang terdeteksi dan semua frame video. Jika aplikasi Anda saat ini mengirimkan aliran frame video yang konstan, Anda mungkin ingin memperbarui aplikasi agar hanya mengirimkan frame video saat ada aktivitas audio untuk menghindari biaya tambahan.
+- **Pemanggilan fungsi asinkron**: Belum didukung. Panggilan fungsi hanya bersifat sinkron. Model tidak akan mulai merespons hingga Anda mengirimkan respons alat. Lihat
+  [Panggilan fungsi asinkron](https://ai.google.dev/gemini-api/docs/live-tools?hl=id#async-function-calling).
+- **Audio proaktif dan dialog afektif**: Fitur ini belum didukung di Gemini 3.1 Flash Live. Hapus semua konfigurasi untuk fitur ini dari kode Anda. Lihat bagian
+  [Audio proaktif](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#proactive-audio) dan
+  [Dialog afektif](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#affective-dialog).
 
-ดูการเปรียบเทียบฟีเจอร์แบบละเอียดได้ที่
-[ตารางการเปรียบเทียบโมเดล](https://ai.google.dev/gemini-api/docs/live-guide?hl=th#model-comparison)ใน
-คู่มือความสามารถ
+Untuk perbandingan fitur mendetail, lihat tabel
+[Perbandingan model](https://ai.google.dev/gemini-api/docs/live-guide?hl=id#model-comparison) dalam panduan kemampuan.
 
-ส่งความคิดเห็น
+Kirim masukan
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-อัปเดตล่าสุด 2026-07-21 UTC
+Terakhir diperbarui pada 2026-07-21 UTC.
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+Ada masukan untuk kami?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-21 UTC"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-21 UTC."],[],[]]

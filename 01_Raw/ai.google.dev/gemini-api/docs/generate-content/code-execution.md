@@ -1,31 +1,31 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=zh-TW
-fetched_at: 2026-08-03T04:37:00.297596+00:00
-title: "\u57f7\u884c\u7a0b\u5f0f\u78bc \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/code-execution?hl=vi
+fetched_at: 2026-08-10T03:19:02.277788+00:00
+title: "Th\u1ef1c thi m\u00e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-# 執行程式碼
+# Thực thi mã
 
-Gemini API 提供執行程式碼工具，可讓模型生成及執行 Python 程式碼。模型接著會根據程式碼執行結果反覆試驗學習，直到生成最終輸出內容。您可以使用程式碼執行功能，建構根據程式碼進行推論的應用程式。舉例來說，您可以使用執行程式碼功能解方程式或處理文字。您也可以使用程式碼執行環境中包含的[程式庫](#supported-libraries)，執行更專業的工作。
+Gemini API cung cấp một công cụ thực thi mã cho phép mô hình tạo và chạy mã Python. Sau đó, mô hình có thể học lặp đi lặp lại từ kết quả thực thi mã cho đến khi đạt được kết quả cuối cùng. Bạn có thể sử dụng tính năng thực thi mã để tạo các ứng dụng có lợi từ hoạt động suy luận dựa trên mã. Ví dụ: bạn có thể sử dụng tính năng thực thi mã để giải phương trình hoặc xử lý văn bản. Bạn cũng có thể sử dụng [các thư viện](#supported-libraries) có trong môi trường thực thi mã để thực hiện các tác vụ chuyên biệt hơn.
 
-Gemini 只能執行 Python 程式碼。您仍可要求 Gemini 以其他語言生成程式碼，但模型無法使用程式碼執行工具執行程式碼。
+Gemini chỉ có thể thực thi mã bằng Python. Bạn vẫn có thể yêu cầu Gemini tạo mã bằng một ngôn ngữ khác, nhưng mô hình không thể sử dụng công cụ thực thi mã để kích hoạt mã đó.
 
-## 啟用程式碼執行功能
+## Bật tính năng thực thi mã
 
-如要啟用執行程式碼功能，請在模型上設定程式碼執行工具。模型就能生成及執行程式碼。
+Để bật tính năng thực thi mã, hãy định cấu hình công cụ thực thi mã trên mô hình. Điều này cho phép mô hình tạo và chạy mã.
 
 ### Python
 
@@ -143,7 +143,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }'
 ```
 
-輸出內容可能如下所示 (已排版方便閱讀)：
+Đầu ra có thể có dạng như sau (đã được định dạng để dễ đọc):
 
 ```
 Okay, I need to calculate the sum of the first 50 prime numbers. Here's how I'll
@@ -192,27 +192,27 @@ sum_of_primes=5117
 The sum of the first 50 prime numbers is 5117.
 ```
 
-這項輸出內容結合了模型在使用執行程式碼功能時傳回的幾個內容部分：
+Đầu ra này kết hợp một số phần nội dung mà mô hình trả về khi sử dụng tính năng thực thi mã:
 
-- `text`：模型產生的內嵌文字
-- `executableCode`：模型產生的程式碼，可供執行
-- `codeExecutionResult`：可執行程式碼的結果
+- `text`: Văn bản cùng dòng do mô hình tạo
+- `executableCode`: Mã do mô hình tạo ra để thực thi
+- `codeExecutionResult`: Kết quả của mã thực thi
 
-這些部分的命名慣例會因程式設計語言而異。
+Quy ước đặt tên cho các phần này sẽ khác nhau tuỳ theo ngôn ngữ lập trình.
 
-## 使用圖片執行程式碼 (Gemini 3)
+## Thực thi mã với hình ảnh (Gemini 3)
 
-Gemini 3 Flash 模型現在可以撰寫及執行 Python 程式碼，主動操控及檢查圖片。
+Giờ đây, mô hình Gemini 3 Flash có thể viết và thực thi mã Python để chủ động thao tác và kiểm tra hình ảnh.
 
-**用途**
+**Trường hợp sử dụng**
 
-- **縮放及檢查**：模型會隱含偵測細節是否過小 (例如讀取遠處的儀表)，並編寫程式碼來裁剪及重新檢查該區域，以提高解析度。
-- **視覺數學**：模型可使用程式碼執行多步驟計算 (例如加總收據上的項目)。
-- **圖片註解**：模型可為圖片加上註解來回答問題，例如繪製箭頭來顯示關係。
+- **Thu phóng và kiểm tra**: Mô hình này tự động phát hiện khi các chi tiết quá nhỏ (ví dụ: đọc một đồng hồ đo ở xa) và viết mã để cắt cũng như kiểm tra lại khu vực ở độ phân giải cao hơn.
+- **Phép tính trực quan**: Mô hình có thể chạy các phép tính nhiều bước bằng mã (ví dụ: cộng các mục hàng trên biên nhận).
+- **Chú thích hình ảnh**: Mô hình có thể chú thích hình ảnh để trả lời câu hỏi, chẳng hạn như vẽ mũi tên để cho thấy mối quan hệ.
 
-### 啟用圖片的程式碼執行功能
+### Bật tính năng Thực thi mã bằng hình ảnh
 
-Gemini 3 Flash 正式支援使用圖片執行程式碼。如要啟用這項行為，請同時啟用「程式碼執行」工具和「思考」功能。
+Tính năng Thực thi mã với hình ảnh được hỗ trợ chính thức trong Gemini 3 Flash. Bạn có thể kích hoạt hành vi này bằng cách bật cả tính năng Thực thi mã như một công cụ và Tư duy.
 
 ### Python
 
@@ -427,9 +427,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/$MODEL:generateCon
     }'
 ```
 
-## 在對話中使用執行程式碼功能
+## Sử dụng tính năng thực thi mã trong cuộc trò chuyện
 
-您也可以在對話中使用執行程式碼功能。
+Bạn cũng có thể sử dụng tính năng thực thi mã trong cuộc trò chuyện.
 
 ### Python
 
@@ -587,73 +587,73 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }'
 ```
 
-## 輸入/輸出 (I/O)
+## Đầu vào/đầu ra (I/O)
 
-執行程式碼支援檔案輸入和圖表輸出。有了這些輸入和輸出功能，您就能上傳 CSV 和文字檔、詢問檔案相關問題，並在回覆中生成 [Matplotlib](https://matplotlib.org/) 圖表。輸出檔案會以內嵌圖片的形式傳回。
+Tính năng thực thi mã hỗ trợ dữ liệu đầu vào là tệp và dữ liệu đầu ra là biểu đồ. Bằng cách sử dụng các khả năng đầu vào và đầu ra này, bạn có thể tải tệp CSV và tệp văn bản lên, đặt câu hỏi về các tệp và nhận được các biểu đồ [Matplotlib](https://matplotlib.org/) được tạo trong phần phản hồi. Các tệp đầu ra được trả về dưới dạng hình ảnh cùng dòng trong câu trả lời.
 
-### I/O 價格
+### Giá I/O
 
-使用執行程式碼 I/O 時，系統會根據輸入和輸出權杖向您收費：
+Khi sử dụng I/O thực thi mã, bạn sẽ bị tính phí cho mã thông báo đầu vào và mã thông báo đầu ra:
 
-**輸入內容詞元：**
+**Mã thông báo đầu vào:**
 
-- 使用者提示詞
+- Câu lệnh của người dùng
 
-**輸出內容詞元：**
+**Mã thông báo đầu ra:**
 
-- 模型生成的程式碼
-- 程式碼環境中的程式碼執行輸出內容
-- 思考詞元
-- 模型生成的摘要
+- Mã do mô hình tạo
+- Kết quả thực thi mã trong môi trường mã
+- Mã thông báo tư duy
+- Bản tóm tắt do mô hình tạo
 
-### I/O 詳細資料
+### Thông tin chi tiết về I/O
 
-使用程式碼執行 I/O 時，請注意下列技術細節：
+Khi bạn làm việc với I/O thực thi mã, hãy lưu ý đến các thông tin kỹ thuật sau:
 
-- 程式碼環境的執行時間上限為 30 秒。
-- 如果程式碼環境產生錯誤，模型可能會決定重新生成程式碼輸出內容。最多可重複 5 次。
-- 檔案輸入大小上限取決於模型權杖視窗。在 AI Studio 中，輸入檔案大小上限為 100 萬個權杖 (支援的輸入類型文字檔約為 2 MB)。如果上傳的檔案過大，AI Studio 就不會允許傳送。
-- 執行程式碼功能最適合搭配文字和 CSV 檔案使用。
-- 輸入檔案可以 `part.inlineData` 或 `part.fileData` 格式傳遞 (透過 [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-tw) 上傳)，輸出檔案一律以 `part.inlineData` 格式傳回。
+- Thời gian chạy tối đa của môi trường mã là 30 giây.
+- Nếu môi trường mã tạo ra lỗi, mô hình có thể quyết định tạo lại đầu ra mã. Điều này có thể xảy ra tối đa 5 lần.
+- Kích thước tối đa của tệp đầu vào bị giới hạn bởi cửa sổ mã thông báo của mô hình. Trong AI Studio, kích thước tệp đầu vào tối đa là 1 triệu mã thông báo (khoảng 2 MB đối với tệp văn bản thuộc các loại đầu vào được hỗ trợ). Nếu bạn tải một tệp quá lớn lên, AI Studio sẽ không cho phép bạn gửi tệp đó.
+- Tính năng thực thi mã hoạt động hiệu quả nhất với tệp văn bản và tệp CSV.
+- Bạn có thể truyền tệp đầu vào trong `part.inlineData` hoặc `part.fileData` (được tải lên thông qua [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi)) và tệp đầu ra luôn được trả về dưới dạng `part.inlineData`.
 
-## 帳單
+## Thanh toán
 
-啟用 Gemini API 的程式碼執行功能無須額外付費。
-系統會根據您使用的 Gemini 模型，以目前的輸入和輸出權杖費率計費。
+Bạn không phải trả thêm phí khi bật tính năng thực thi mã từ Gemini API.
+Bạn sẽ bị tính phí theo mức giá hiện tại của mã thông báo đầu vào và đầu ra dựa trên mô hình Gemini mà bạn đang sử dụng.
 
-以下是程式碼執行計費的其他注意事項：
+Sau đây là một số thông tin khác bạn cần biết về việc tính phí thực thi mã:
 
-- 系統只會針對傳送至模型的輸入權杖向您收費一次，並針對模型傳回的最終輸出權杖向您收費。
-- 代表生成程式碼的權杖會計為輸出權杖。生成的程式碼可能包含文字和圖片等多模態輸出內容。
-- 執行程式碼的結果也會計為輸出權杖。
+- Bạn chỉ bị tính phí một lần cho các mã thông báo đầu vào mà bạn truyền đến mô hình và bạn sẽ bị tính phí cho các mã thông báo đầu ra cuối cùng mà mô hình trả về cho bạn.
+- Các mã thông báo đại diện cho mã được tạo sẽ được tính là mã thông báo đầu ra. Mã được tạo có thể bao gồm văn bản và kết quả đầu ra đa phương thức như hình ảnh.
+- Kết quả thực thi mã cũng được tính là mã thông báo đầu ra.
 
-計費模式如下圖所示：
+Mô hình thanh toán được minh hoạ trong sơ đồ sau:
 
-![執行程式碼帳單模式](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=zh-tw)
+![mô hình thanh toán khi thực thi mã](https://ai.google.dev/static/gemini-api/docs/images/code-execution-diagram.png?hl=vi)
 
-- 系統會根據您使用的 Gemini 模型，以目前的輸入和輸出權杖費率計費。
-- 如果 Gemini 在生成回覆時執行程式碼，系統會將原始提示、生成的程式碼和執行的程式碼結果標示為*中間權杖*，並以*輸入權杖*計費。
-- 接著生成摘要，並傳回生成的程式碼、執行程式碼的結果，以及最終摘要。這些會以*輸出權杖*計費。
-- Gemini API 會在 API 回應中提供中繼詞元數，讓您瞭解為何會收到超出初始提示詞的額外輸入詞元。
+- Bạn sẽ bị tính phí theo mức giá hiện tại của mã thông báo đầu vào và đầu ra dựa trên mô hình Gemini mà bạn đang sử dụng.
+- Nếu Gemini sử dụng tính năng thực thi mã khi tạo câu trả lời cho bạn, thì câu lệnh ban đầu, mã được tạo và kết quả của mã đã thực thi sẽ được gắn nhãn là *mã thông báo trung gian* và được tính phí là *mã thông báo đầu vào*.
+- Sau đó, Gemini sẽ tạo bản tóm tắt và trả về mã đã tạo, kết quả của mã đã thực thi và bản tóm tắt cuối cùng. Các mã thông báo này được tính phí dưới dạng *mã thông báo đầu ra*.
+- Gemini API bao gồm số token trung gian trong phản hồi của API, nhờ đó bạn biết lý do nhận được token đầu vào bổ sung ngoài câu lệnh ban đầu.
 
-## 限制
+## Các điểm hạn chế
 
-- 模型只能生成及執行程式碼，無法傳回其他構件，例如媒體檔案。
-- 在某些情況下，啟用執行程式碼功能可能會導致模型輸出內容的其他部分出現迴歸現象 (例如撰寫故事)。
-- 不同模型成功執行程式碼的能力有所差異。
+- Mô hình này chỉ có thể tạo và thực thi mã. Phương thức này không thể trả về các cấu phần phần mềm khác như tệp nội dung nghe nhìn.
+- Trong một số trường hợp, việc bật tính năng thực thi mã có thể dẫn đến sự hồi quy ở các khía cạnh khác của đầu ra của mô hình (ví dụ: viết một câu chuyện).
+- Khả năng sử dụng thành công tính năng thực thi mã của các mô hình có sự khác biệt.
 
-## 支援的工具組合
+## Các cách kết hợp công cụ được hỗ trợ
 
-執行程式碼工具可與[以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/google-search?hl=zh-tw)搭配使用，以支援更複雜的應用情境。
+Bạn có thể kết hợp công cụ thực thi mã với tính năng [Neo bám vào Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) để hỗ trợ các trường hợp sử dụng phức tạp hơn.
 
-Gemini 3 模型支援結合內建工具 (例如程式碼執行) 和自訂工具 (函式呼叫)。您必須傳回 `id` 和 `thought_signature` 欄位，工具組合才能運作。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
+Các mô hình Gemini 3 hỗ trợ việc kết hợp các công cụ tích hợp (như Thực thi mã) với các công cụ tuỳ chỉnh (gọi hàm). Bạn phải truyền lại các trường `id` và `thought_signature` để tổ hợp công cụ hoạt động. Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
 
-## 支援的程式庫
+## Các thư viện được hỗ trợ
 
-程式碼執行環境包含下列程式庫：
+Môi trường thực thi mã bao gồm các thư viện sau:
 
 - attrs
-- 棋子
+- cờ vua
 - contourpy
 - fpdf
 - geopandas
@@ -668,9 +668,9 @@ Gemini 3 模型支援結合內建工具 (例如程式碼執行) 和自訂工具 
 - numpy
 - opencv-python
 - openpyxl
-- 包裝
-- pandas
-- pillow
+- đóng gói ứng dụng
+- gấu trúc
+- cái gối
 - protobuf
 - pylatex
 - pyparsing
@@ -682,29 +682,29 @@ Gemini 3 模型支援結合內建工具 (例如程式碼執行) 和自訂工具 
 - scikit-learn
 - scipy
 - seaborn
-- 六
+- sáu
 - striprtf
 - sympy
-- tabulate
-- TensorFlow
+- lập bảng
+- tensorflow
 - toolz
 - xlrd
 
-無法安裝自己的程式庫。
+Bạn không thể cài đặt thư viện của riêng mình.
 
-## 後續步驟
+## Bước tiếp theo
 
-- 試試[執行程式碼 Colab](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=zh-tw)。
-- 瞭解其他 Gemini API 工具：
-  - [函式呼叫](https://ai.google.dev/gemini-api/docs/function-calling?hl=zh-tw)
-  - [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)
+- Hãy thử [Colab thực thi mã](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Code_Execution.ipynb?hl=vi).
+- Tìm hiểu về các công cụ khác của Gemini API:
+  - [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi)
+  - [Neo bám vào Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/grounding?hl=vi)
 
-提供意見
+Gửi ý kiến phản hồi
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-上次更新時間：2026-07-30 (世界標準時間)。
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-想進一步說明嗎？
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

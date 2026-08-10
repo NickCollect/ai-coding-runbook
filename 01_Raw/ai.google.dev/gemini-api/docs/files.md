@@ -1,39 +1,37 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/files?hl=it
-fetched_at: 2026-08-03T04:40:55.535226+00:00
-title: "API Files \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/files?hl=th
+fetched_at: 2026-08-10T03:09:32.779397+00:00
+title: "API \u0e02\u0e2d\u0e07\u0e44\u0e1f\u0e25\u0e4c \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=th)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [หน้าแรก](https://ai.google.dev/?hl=th)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
+- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
 
-Invia feedback
+ส่งความคิดเห็น
 
-# API Files
+# API ของไฟล์
 
-Gemini può gestire contemporaneamente vari tipi di dati di input, tra cui testo, immagini e audio.
+Gemini สามารถจัดการข้อมูลอินพุตประเภทต่างๆ ได้พร้อมกัน ซึ่งรวมถึงข้อความ รูปภาพ และเสียง
 
-Questa guida mostra come utilizzare i file multimediali utilizzando l'API Files. Le
-operazioni di base sono le stesse per file audio, immagini, video, documenti e
-altri tipi di file supportati.
+คู่มือนี้จะแสดงวิธีทำงานกับไฟล์สื่อโดยใช้ Files API
+การดำเนินการพื้นฐานจะเหมือนกันสำหรับไฟล์เสียง รูปภาพ วิดีโอ เอกสาร และ
+ไฟล์ประเภทอื่นๆ ที่รองรับ
 
-Per indicazioni sui prompt dei file, consulta la sezione [Guida ai prompt dei file](https://ai.google.dev/gemini-api/docs/files?hl=it#prompt-guide).
+ดูคำแนะนำในการใช้พรอมต์สำหรับไฟล์ได้ที่ส่วน[คู่มือการใช้พรอมต์สำหรับไฟล์](https://ai.google.dev/gemini-api/docs/files?hl=th#prompt-guide)
 
-## Carica un file
+## อัปโหลดไฟล์
 
-Puoi utilizzare l'API Files per caricare un file multimediale. Utilizza sempre l'API Files quando
-le dimensioni totali della richiesta (inclusi i file, il prompt testuale, le istruzioni di sistema,
-ecc.) sono superiori a 100 MB. Per i file PDF, il limite è 50 MB.
+คุณใช้ Files API เพื่ออัปโหลดไฟล์สื่อได้ ใช้ Files API เสมอเมื่อขนาดคำขอทั้งหมด (รวมถึงไฟล์ พรอมต์ข้อความ คำสั่งของระบบ ฯลฯ) มีขนาดใหญ่กว่า 100 MB สำหรับไฟล์ PDF จะมีขีดจำกัดอยู่ที่ 50 MB
 
-Il seguente codice carica un file e lo utilizza in una chiamata a
-`interactions.create`.
+โค้ดต่อไปนี้จะอัปโหลดไฟล์ แล้วใช้ไฟล์ในการเรียกไปยัง
+`interactions.create`
 
 ### Python
 
@@ -166,9 +164,9 @@ echo
 jq ".outputs[] | select(.type == \"text\") | .text" response.json
 ```
 
-## Recuperare i metadati di un file
+## รับข้อมูลเมตาของไฟล์
 
-Puoi verificare che l'API abbia archiviato correttamente il file caricato e recuperare i relativi metadati chiamando `files.get`.
+คุณสามารถยืนยันว่า API จัดเก็บไฟล์ที่อัปโหลดเรียบร้อยแล้วและรับข้อมูลเมตาของไฟล์ได้โดยการเรียก `files.get`
 
 ### Python
 
@@ -236,9 +234,9 @@ file_uri=$(jq -r ".uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## Elencare i file caricati
+## แสดงรายการไฟล์ที่อัปโหลด
 
-Il seguente codice recupera un elenco di tutti i file caricati:
+โค้ดต่อไปนี้จะรับรายการไฟล์ทั้งหมดที่อัปโหลด
 
 ### Python
 
@@ -291,9 +289,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Eliminare i file caricati
+## ลบไฟล์ที่อัปโหลด
 
-I file vengono eliminati automaticamente dopo 48 ore. Puoi anche eliminare manualmente un file caricato:
+ระบบจะลบไฟล์โดยอัตโนมัติหลังจากผ่านไป 48 ชั่วโมง นอกจากนี้ คุณยังลบไฟล์ที่อัปโหลดด้วยตนเองได้โดยทำดังนี้
 
 ### Python
 
@@ -345,233 +343,221 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/$name \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Informazioni sull'utilizzo
+## ข้อมูลการใช้งาน
 
-Puoi utilizzare l'API Files per caricare e interagire con i file multimediali. L'API Files
-consente di archiviare fino a 20 GB di file per progetto, con una dimensione massima
-di 2 GB per file. I file vengono archiviati per 48 ore. Durante questo periodo, puoi
-utilizzare l'API per ottenere i metadati dei file, ma non puoi scaricarli.
-L'API Files è disponibile senza costi in tutte le regioni in cui è disponibile l'API Gemini.
+คุณใช้ Files API เพื่ออัปโหลดและโต้ตอบกับไฟล์สื่อได้ Files API
+ช่วยให้คุณจัดเก็บไฟล์ได้สูงสุด 20 GB ต่อโปรเจ็กต์ โดยแต่ละไฟล์ต้องมีขนาดไม่เกิน 2 GB
+ระบบจะจัดเก็บไฟล์ไว้เป็นเวลา 48 ชั่วโมง ในระหว่างนั้น คุณจะ
+ใช้ API เพื่อรับข้อมูลเมตาเกี่ยวกับไฟล์ได้ แต่จะดาวน์โหลดไฟล์ไม่ได้
+Files API พร้อมให้บริการโดยไม่มีค่าใช้จ่ายในทุกภูมิภาคที่มี Gemini API พร้อมให้บริการ
 
-## Strategie di richiesta di file
+## กลยุทธ์การแจ้งไฟล์
 
-Questa sezione fornisce indicazioni e best practice per l'utilizzo di file multimediali con
-prompt per l'API Gemini.
+ส่วนนี้จะให้คำแนะนำและแนวทางปฏิบัติแนะนำในการใช้ไฟล์สื่อกับ
+พรอมต์สำหรับ Gemini API
 
-La possibilità di utilizzare vari tipi di dati nei prompt offre maggiore
-flessibilità in termini di attività che puoi svolgere con l'API Gemini. Ad
-esempio, puoi inviare al modello la foto di un pasto delizioso e chiedergli di scrivere
-un breve post del blog sul pasto.
+การใช้ข้อมูลประเภทต่างๆ ในพรอมต์จะช่วยให้คุณมีความยืดหยุ่นมากขึ้นในแง่ของงานที่สามารถจัดการได้ด้วย Gemini API ตัวอย่างเช่น คุณสามารถส่งรูปภาพอาหารแสนอร่อยให้โมเดลและขอให้โมเดลเขียนบล็อกสั้นๆ เกี่ยวกับอาหารนั้น
 
 |  |  |
 | --- | --- |
-| **Prompt** | **Risposta** |
-| Scrivi un breve post del blog coinvolgente basato su questa immagine. Deve includere una descrizione del pasto nella foto e parlare del mio percorso di preparazione dei pasti.   Cookie | Preparare i pasti in anticipo è un ottimo modo per risparmiare tempo e denaro e può anche aiutarti a mangiare in modo più sano. Questo pasto è un ottimo esempio di piatto sano e delizioso che può essere preparato in anticipo.  Questo pasto include riso integrale, verdure arrosto e pollo teriyaki. Il riso integrale è un carboidrato sano e complesso che ti darà energia costante. Le verdure arrosto sono un ottimo modo per assumere la dose giornaliera di vitamine e minerali, mentre il pollo teriyaki è un'opzione deliziosa e ricca di proteine.  Anche questo pasto è semplice da preparare. Cuoci il riso integrale, arrostisci le verdure e prepara il pollo teriyaki. Una volta cotto tutto, dividi il cibo in contenitori per la preparazione dei pasti e conservali in frigorifero. Così potrai prendere un contenitore e andare via nelle mattine più frenetiche.  Se stai cercando un pasto sano e delizioso che puoi preparare in anticipo, questa è un'ottima opzione. È ricco di nutrienti e sapore e ti farà sentire sazio e soddisfatto.  Brindiamo a una preparazione dei pasti sana e deliziosa. |
+| **พรอมต์** | **การตอบกลับ** |
+| เขียนบล็อกโพสต์สั้นๆ ที่น่าสนใจจากรูปภาพนี้ โดยควร มีคำอธิบายเกี่ยวกับอาหารในรูปภาพและพูดถึงเส้นทางการ เตรียมอาหารของฉัน   คุกกี้ | การเตรียมอาหารล่วงหน้าเป็นวิธีที่ยอดเยี่ยมในการประหยัดเวลาและเงิน รวมถึงยังช่วยให้คุณกินอาหารที่ดีต่อสุขภาพมากขึ้นได้ด้วย มื้ออาหารนี้เป็นตัวอย่างที่ดีของมื้ออาหารเพื่อสุขภาพ และอร่อยที่เตรียมไว้ล่วงหน้าได้  มื้อนี้มีข้าวกล้อง ผักย่าง และไก่เทริยากิ ข้าวกล้องเป็นคาร์โบไฮเดรตเชิงซ้อนที่มีประโยชน์ต่อสุขภาพ ซึ่งจะช่วยให้คุณมี พลังงานอย่างต่อเนื่อง ผักย่างเป็นวิธีที่ยอดเยี่ยมในการรับวิตามินและแร่ธาตุในแต่ละวัน ส่วนไก่เทอริยากิก็เป็นตัวเลือกที่อร่อยและ มีโปรตีนสูง  นอกจากนี้ อาหารมื้อนี้ยังเตรียมได้ง่ายๆ อีกด้วย เพียงแค่หุงข้าวกล้อง คั่วผัก และทำไก่เทอริยากิ เมื่อปรุงอาหารทุกอย่างเสร็จแล้ว ให้แบ่งอาหารใส่ภาชนะสำหรับเตรียมอาหารและเก็บไว้ในตู้เย็น จากนั้นก็หยิบกล่องใส่อาหารแล้วออกไปทำงานในเช้าวันที่เร่งรีบได้เลย  หากคุณกำลังมองหามื้ออาหารเพื่อสุขภาพที่อร่อยและ เตรียมไว้ล่วงหน้าได้ มื้อนี้เป็นตัวเลือกที่ยอดเยี่ยม อัดแน่นไปด้วย สารอาหารและรสชาติ และจะช่วยให้คุณรู้สึกอิ่มและพึงพอใจ  ขอให้คุณเตรียมอาหารได้อย่างอร่อยและดีต่อสุขภาพ |
 
-Se hai difficoltà a ottenere l'output che desideri dai prompt che utilizzano
-file multimediali, esistono alcune strategie che possono aiutarti a ottenere i risultati
-che desideri. Le sezioni seguenti forniscono approcci di progettazione e suggerimenti per la risoluzione dei problemi
-per migliorare i prompt che utilizzano input multimodali.
+หากพบปัญหาในการรับเอาต์พุตที่ต้องการจากพรอมต์ที่ใช้ไฟล์สื่อ
+คุณสามารถใช้กลยุทธ์บางอย่างเพื่อช่วยให้ได้ผลลัพธ์ที่ต้องการ
+ส่วนต่อไปนี้จะอธิบายแนวทางการออกแบบและเคล็ดลับในการแก้ปัญหา
+เพื่อปรับปรุงพรอมต์ที่ใช้ข้อมูลหลายรูปแบบ
 
-Puoi migliorare i prompt multimodali seguendo queste best practice:
+คุณปรับปรุงพรอมต์มัลติโมดัลได้โดยทำตามแนวทางปฏิบัติแนะนำต่อไปนี้
 
-- ### [Principi fondamentali della progettazione dei prompt](#specific-instructions)
+- ### [ข้อมูลพื้นฐานเกี่ยวกับการออกแบบพรอมต์](#specific-instructions)
 
-  - **Fornisci istruzioni specifiche**: crea istruzioni chiare e concise che lascino poco spazio a interpretazioni errate.
-  - **Aggiungi alcuni esempi al prompt**:utilizza esempi few-shot realistici per illustrare ciò che vuoi ottenere.
-  - **Suddividi l'attività passo passo**: dividi le attività complesse in sotto-obiettivi gestibili, guidando il modello nel processo.
-  - **Specifica il formato di output**: nel prompt, chiedi che l'output sia nel formato che preferisci, ad esempio Markdown, JSON, HTML e altri.
-  - **Inserisci prima l'immagine per i prompt con una sola immagine**: anche se Gemini può gestire input di immagini e prompt testuali in qualsiasi ordine, per i prompt contenenti una sola immagine, potrebbe funzionare meglio se l'immagine (o il video) viene inserita prima del prompt testuale. Tuttavia, per i prompt che richiedono che le immagini siano altamente intercalate con i testi per avere un senso, utilizza l'ordine più naturale.
-- ### [Risoluzione dei problemi relativi al prompt multimodale](#troubleshooting)
+  - **ระบุคำสั่งอย่างชัดเจน**: สร้างคำสั่งที่ชัดเจนและกระชับซึ่งมีโอกาสน้อยที่จะเกิดการตีความผิด
+  - **เพิ่มตัวอย่าง 2-3 รายการลงในพรอมต์:** ใช้ตัวอย่างแบบ Few-Shot ที่สมจริงเพื่อแสดงให้เห็นสิ่งที่คุณต้องการทำให้สำเร็จ
+  - **แบ่งงานออกเป็นขั้นตอน**: แบ่งงานที่ซับซ้อนออกเป็นเป้าหมายย่อยที่จัดการได้ เพื่อนำโมเดลผ่านกระบวนการ
+  - **ระบุรูปแบบเอาต์พุต**: ในพรอมต์ ให้ขอเอาต์พุตในรูปแบบที่ต้องการ เช่น Markdown, JSON, HTML และอื่นๆ
+  - **วางรูปภาพไว้ก่อนสำหรับพรอมต์ที่มีรูปภาพเดียว**: แม้ว่า Gemini จะจัดการอินพุตรูปภาพและข้อความได้ทุกรูปแบบ แต่สำหรับพรอมต์ที่มีรูปภาพเดียว การวางรูปภาพ (หรือวิดีโอ) ไว้ก่อนพรอมต์ข้อความอาจช่วยให้ได้ผลลัพธ์ที่ดีกว่า อย่างไรก็ตาม สำหรับพรอมต์ที่ต้องสลับรูปภาพกับข้อความอย่างมากเพื่อให้เข้าใจได้ ให้ใช้ลำดับที่ดูเป็นธรรมชาติที่สุด
+- ### [การแก้ปัญหาพรอมต์แบบมัลติโมดอล](#troubleshooting)
 
-  - **Se il modello non estrae informazioni dalla parte pertinente dell'immagine**:fornisci suggerimenti sugli aspetti dell'immagine da cui vuoi che il prompt estragga informazioni.
-  - **Se l'output del modello è troppo generico (non abbastanza personalizzato in base all'input di immagine/video):** all'inizio del prompt, prova a chiedere al modello di descrivere l'immagine o le immagini o il video prima di fornire l'istruzione dell'attività oppure prova a chiedere al modello di fare riferimento a ciò che è presente nell'immagine.
-  - **Per risolvere il problema relativo alla parte non riuscita**:chiedi al modello di descrivere l'immagine o di spiegare il suo ragionamento per valutare la comprensione iniziale del modello.
-  - **Se il prompt genera contenuti di allucinazione**:prova a ridurre l'impostazione della temperatura o a chiedere al modello descrizioni più brevi, in modo che sia meno probabile che estrapoli ulteriori dettagli.
-  - **Ottimizzazione dei parametri di campionamento**:sperimenta diverse impostazioni di temperatura e selezioni top-k per regolare la creatività del modello.
+  - **หากโมเดลไม่ได้ดึงข้อมูลจากส่วนที่เกี่ยวข้องของรูปภาพ** ให้บอกใบ้ว่าคุณต้องการให้พรอมต์ดึงข้อมูลจากส่วนใดของรูปภาพ
+  - **หากเอาต์พุตโมเดลเป็นแบบทั่วไปมากเกินไป (ไม่ปรับให้เข้ากับอินพุตรูปภาพ/วิดีโอมากพอ):** ที่จุดเริ่มต้นของพรอมต์ ให้ลองขอให้โมเดลอธิบายรูปภาพหรือวิดีโอก่อนที่จะให้คำสั่งงาน หรือลองขอให้โมเดลอ้างอิงถึงสิ่งที่อยู่ในรูปภาพ
+  - **หากต้องการแก้ปัญหาว่าส่วนใดล้มเหลว** ให้ขอให้โมเดลอธิบายรูปภาพ หรือขอให้โมเดลอธิบายเหตุผลเพื่อวัดความเข้าใจเริ่มต้นของโมเดล
+  - **หากพรอมต์ทำให้เกิดเนื้อหาที่โมเดลแต่งขึ้น** ให้ลองลดการตั้งค่าอุณหภูมิหรือขอให้โมเดลอธิบายสั้นลง เพื่อลดโอกาสที่โมเดลจะคาดการณ์รายละเอียดเพิ่มเติม
+  - **การปรับพารามิเตอร์การสุ่มตัวอย่าง:** ทดลองใช้การตั้งค่าอุณหภูมิและการเลือกแบบ Top-k ที่แตกต่างกันเพื่อปรับความคิดสร้างสรรค์ของโมเดล
 
-### Fornisci istruzioni specifiche
+### ระบุคำสั่งให้ชัดเจน
 
-I prompt hanno più successo quando sono chiari e dettagliati. Se hai in mente un output specifico, è meglio includere questo requisito nel prompt per assicurarti di ottenere l'output che desideri.
+พรอมต์จะประสบความสำเร็จมากที่สุดเมื่อมีความชัดเจนและละเอียด หากคุณมีผลลัพธ์ที่เฉพาะเจาะจงในใจ
+ควรระบุข้อกำหนดนั้นในพรอมต์
+เพื่อให้มั่นใจว่าคุณจะได้รับผลลัพธ์ที่ต้องการ
 
-Per questa immagine di un tabellone di un aeroporto, chiedere al modello di "descrivere questa
-immagine" potrebbe generare una descrizione generica. Se hai bisogno che il modello analizzi
-l'ora e la città dall'immagine, puoi includere la richiesta direttamente nel
-prompt.
+สำหรับรูปภาพกระดานในสนามบินนี้ การขอให้โมเดล "อธิบายรูปภาพนี้" อาจสร้างคำอธิบายทั่วไป หากต้องการให้โมเดลแยกวิเคราะห์
+เวลาและเมืองจากรูปภาพ คุณสามารถใส่คำขอนั้นลงในพรอมต์ได้โดยตรง
 
-| Prompt | Risposta del modello |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Descrivi questa immagine. | L'immagine mostra un tabellone degli arrivi e delle partenze di un aeroporto. |
+| อธิบายรูปภาพนี้ | รูปภาพแสดงตารางเที่ยวบินขาเข้าและขาออกของสนามบิน |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Orario di viaggio Analizza l'ora e la città dal tabellone dell'aeroporto mostrato in questa immagine in un elenco. | - 10:50 Mosca - 11:05 Edimburgo - 11:05 Londra - 11:10 Bucarest - 11:30 Kiev - 11:35 Dublino - 11:45 East Midlands - 12:15 Sofia - 12:30 Londra - 12:30 Newcastle - 12:40 San Pietroburgo - 12:40 Londra - 12:45 Manchester |
+| ตารางเวลาการเดินทาง แยกวิเคราะห์เวลาและเมืองจากบอร์ดสนามบินที่แสดงในรูปภาพนี้เป็นรายการ | - 10:50 มอสโก - 11:05 เอดินบะระ - 11:05 ลอนดอน - 11:10 บูคาเรสต์ - 11:30 น. เคียฟ - 11:35 ดับลิน - 11:45 อีสต์มิดแลนส์ - 12:15 โซเฟีย - 12:30 ลอนดอน - 12:30 น. นิวคาสเซิล - 12:40 เซนต์ปีเตอร์สเบิร์ก - 12:40 ลอนดอน - 12:45 แมนเชสเตอร์ |
 
-### Aggiungi alcuni esempi
+### เพิ่มตัวอย่าง
 
-Il modello Gemini può accettare più input che può utilizzare come esempi per
-comprendere l'output che vuoi. L'aggiunta di questi esempi può aiutare il modello
-a identificare i pattern e applicare la relazione tra le immagini e
-le risposte fornite al nuovo esempio. Questo metodo è anche chiamato apprendimento "few-shot".
+โมเดล Gemini รับอินพุตได้หลายรายการ ซึ่งสามารถใช้เป็นตัวอย่างเพื่อ
+ทำความเข้าใจเอาต์พุตที่คุณต้องการ การเพิ่มตัวอย่างเหล่านี้จะช่วยให้โมเดล
+ระบุรูปแบบและใช้ความสัมพันธ์ระหว่างรูปภาพและ
+คำตอบที่ระบุกับตัวอย่างใหม่ได้ หรือที่เรียกว่าการเรียนรู้แบบ "Few-Shot"
 
-Nell'esempio seguente, l'output iniziale è scritto sotto forma di frase
-e contiene anche il paese (Brasile). Supponiamo che tu voglia l'output in un
-formato o stile diverso e che tu voglia solo la città, non il paese. L'aggiunta di esempi
-few-shot al prompt può indirizzare il modello a rispondere nel modo che
-preferisci.
+ในตัวอย่างต่อไปนี้ เอาต์พุตเริ่มต้นจะเขียนในรูปแบบประโยค
+และมีประเทศ (บราซิล) ด้วย สมมติว่าคุณต้องการเอาต์พุตใน
+รูปแบบหรือสไตล์อื่น และต้องการเฉพาะเมือง ไม่ใช่ประเทศ การเพิ่มตัวอย่างแบบ Few-Shot ลงในพรอมต์จะช่วยให้โมเดลตอบสนองในแบบที่คุณต้องการ
 
-| **Prompt** | **Risposta del modello** |
+| **พรอมต์** | **คำตอบของโมเดล** |
 | --- | --- |
-| Orario di viaggio Determina la città insieme al punto di riferimento. | Il punto di riferimento è la statua del Cristo Redentore a Rio de Janeiro, in Brasile. |
+| ตารางเวลาการเดินทาง ระบุเมืองพร้อมกับสถานที่สำคัญ | สถานที่สำคัญคือรูปปั้นพระคริสต์ผู้ไถ่ในรีโอเดจาเนโร ประเทศบราซิล |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Determina la città insieme al punto di riferimento. colosseo | città: Roma, monumento: il Colosseo. |
-| Città proibita | città: Pechino, punto di riferimento: Città Proibita |
-| forbidden-city | città: Rio de Janeiro, punto di riferimento: statua del Cristo Redentore |
+| ระบุเมืองพร้อมกับสถานที่สำคัญ โคลอสเซียม | เมือง: โรม, สถานที่สำคัญ: โคลอสเซียม |
+| นครต้องห้าม | เมือง: ปักกิ่ง, สถานที่สำคัญ: พระราชวังต้องห้าม |
+| forbidden-city | เมือง: รีโอเดจาเนโร, สถานที่สำคัญ: รูปปั้นพระคริสต์ผู้ไถ่ |
 
-### Analizza passo passo
+### ดูรายละเอียดทีละขั้นตอน
 
-Per attività complesse come quelle che richiedono sia la comprensione visiva sia il ragionamento, può essere utile suddividere l'attività in passaggi più piccoli e semplici. In alternativa, potrebbe essere efficace anche se
-chiedi direttamente al modello di "pensare passo dopo passo" nel prompt.
+สำหรับงานที่ซับซ้อน เช่น งานที่ต้องใช้ทั้งความเข้าใจด้านภาพและการให้เหตุผล การแบ่งงานออกเป็นขั้นตอนย่อยๆ ที่ตรงไปตรงมามากขึ้นอาจเป็นประโยชน์ หรือคุณอาจขอให้โมเดล "คิดทีละขั้นตอน" ในพรอมต์โดยตรงก็ได้
 
-| Prompt | Risposta del modello |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Quando finirà la carta igienica? | A breve, ti rimarranno solo 3 rotoli. |
+| กระดาษชำระจะหมดเมื่อใด | คุณจะเหลือรีลเพียง 3 รายการในเร็วๆ นี้ |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| 1. Per prima cosa, conta quanti rotoli di carta igienica sono presenti in questa immagine. 2. Poi, determina la quantità di carta igienica che una persona media utilizza al giorno. 3. Calcola per quanto tempo dureranno questi rotoli di carta igienica. | 1. In questa immagine ci sono tre rotoli di carta igienica. 2. Una persona media utilizza circa 20 fogli di carta igienica al giorno. 3. Se ogni rotolo contiene 200 fogli, ogni rotolo durerà circa 10 giorni. Pertanto, i tre rotoli dureranno circa un mese. |
+| 1. ก่อนอื่น ให้นับม้วนกระดาษชำระในรูปภาพนี้ 2. จากนั้นให้พิจารณาว่าโดยทั่วไปแล้วคนเราใช้กระดาษชำระวันละเท่าไร 3. คำนวณว่ากระดาษชำระม้วนเหล่านี้จะใช้ได้นานเท่าใด | 1. มีม้วนกระดาษชำระ 3 ม้วนในรูปภาพนี้ 2. โดยทั่วไปแล้ว คนเราใช้กระดาษชำระประมาณ 20 แผ่นต่อวัน 3. หากกระดาษชำระแต่ละม้วนมี 200 แผ่น กระดาษชำระแต่ละม้วนจะใช้ได้ประมาณ 10 วัน ดังนั้น ฟิล์ม 3 ม้วนจะใช้งานได้ประมาณ 1 เดือน |
 
-I problemi di matematica o altri tipi di problemi con enunciato sono ottimi candidati per chiedere al modello di pensare passo dopo passo.
+โจทย์คณิตศาสตร์หรือโจทย์ประเภทอื่นๆ เป็นตัวเลือกที่ยอดเยี่ยมในการขอให้โมเดลคิดแบบทีละขั้นตอน
 
-| **Prompt** | **Risposta** |
+| **พรอมต์** | **การตอบกลับ** |
 | --- | --- |
-| Qual è il quarto termine della sequenza? | -135 |
+| พจน์ที่ 4 ในลำดับคืออะไร | -135 |
 
-La risposta del modello non è corretta. Alcuni modi per migliorare questo aspetto sono chiedere
-al modello di analizzare il problema prima di rispondere al prompt.
+คำตอบจากโมเดลไม่ถูกต้อง วิธีปรับปรุงเรื่องนี้คือการขอให้โมเดลแยกวิเคราะห์ปัญหา
+ก่อนตอบพรอมต์
 
-| **Prompt** | **Risposta** |
+| **พรอมต์** | **การตอบกลับ** |
 | --- | --- |
-| Analizza prima la formula nell'immagine.  Quindi, in base alla formula, rispondi alla domanda "Qual è il quarto termine della sequenza?". | *Fai clic per espandere il risultato* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Sostituisci n = 4 nella formula: $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Non conosciamo il valore di b(3), quindi sostituiamo n = 3 nella formula: $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Non conosciamo il valore di b(2), quindi sostituiamo n = 2 nella formula: $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Sappiamo che il valore di b(1) è 15, quindi sostituiscilo nella formula: $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Ora che conosciamo il valore di b(2), sostituiscilo nella formula per b(3): $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Ora che conosciamo il valore di b(3), sostituiscilo nella formula per b(4): $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Pertanto, il quarto termine della sequenza è -405. |
+| แยกวิเคราะห์สูตรในรูปภาพก่อน  จากนั้นตอบคำถาม "พจน์ที่ 4 ในลำดับคืออะไร" โดยอิงตามสูตร | *คลิกเพื่อขยายผลลัพธ์* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. แทนที่ n = 4 ในสูตร $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. เราไม่ทราบค่าของ b(3) ดังนั้นให้แทนค่า n = 3 ลงในสูตร $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. เราไม่ทราบค่าของ b(2) จึงแทนค่า n = 2 ลงในสูตร $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. เรารู้ว่าค่าของ b(1) คือ 15 ดังนั้นให้แทนค่าลงในสูตร $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. ตอนนี้เราทราบค่าของ b(2) แล้ว ให้แทนค่าลงในสูตรสำหรับ b(3) ดังนี้ $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. ตอนนี้เราทราบค่าของ b(3) แล้ว ให้แทนค่าลงในสูตรสำหรับ b(4) ดังนี้ $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   ดังนั้น พจน์ที่ 4 ในลำดับคือ -405 |
 
-La risposta del modello è corretta. Per renderla ancora più snella,
-puoi chiedere al modello di procedere passo dopo passo.
+คำตอบของโมเดลนี้ถูกต้องแล้ว แต่หากต้องการให้คำตอบมีประสิทธิภาพมากยิ่งขึ้น
+คุณสามารถขอให้โมเดลคิดทีละขั้นตอนได้
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Qual è il quarto termine della sequenza? Pensa passo dopo passo. | Il primo termine è 15.  Il secondo termine è b(1) \* (-3) = 15 \* (-3) = -45.  Il terzo termine è b(2) \* (-3) = -45 \* (-3) = 135.  Il quarto termine è b(3) \* (-3) = 135 \* (-3) = -405. |
+| พจน์ที่ 4 ในลำดับคืออะไร คิดทีละขั้นตอน | โดยพจน์แรกคือ 15  พจน์ที่ 2 คือ b(1) \* (-3) = 15 \* (-3) = -45  พจน์ที่ 3 คือ b(2) \* (-3) = -45 \* (-3) = 135  พจน์ที่ 4 คือ b(3) \* (-3) = 135 \* (-3) = -405 |
 
-### Specifica il formato di output
+### ระบุรูปแบบเอาต์พุต
 
-Un problema comune è la necessità che l'output del modello sia in un determinato formato
-(ad es. Markdown, JSON, HTML), soprattutto se l'output del modello deve
-essere inserito in un'attività downstream. Puoi provare a produrre output in questo formato
-chiedendo al modello di farlo all'interno del prompt. Di seguito sono riportati due
-esempi:
+ปัญหาที่พบบ่อยคือความจำเป็นที่เอาต์พุตของโมเดลต้องอยู่ในรูปแบบที่แน่นอน
+(เช่น มาร์กดาวน์, JSON, HTML) โดยเฉพาะอย่างยิ่งหากงานดาวน์สตรีมต้อง
+รับข้อมูลเอาต์พุตของโมเดล คุณลองสร้างเอาต์พุตในรูปแบบนั้นได้
+โดยสั่งให้โมเดลทำเช่นนั้นภายในพรอมต์ ตัวอย่าง 2 รายการมีดังนี้
 
-| Prompt | Risposta del modello |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Analizza la tabella in questa immagine nel formato Markdown | ```none | Materia | Stato | Tempo | Data di inizio | Scadenza | | ------- | ------ | ---- | ---------- | ------ | | Matematica | Completato | 1,5 ore | 29/11/2023 | 1/12/2023 | | Geografia | Completato | 30 minuti | 2/12/2023 | 4/12/2023 | | Fisica | In corso | 2 ore | 3/12/2023 | 5/12/2023 | | Biologia | Non iniziato | 6 ore | 2/11/2016 | 6/12/2023 | ``` |
+| แยกวิเคราะห์ตารางในรูปภาพนี้เป็นรูปแบบ Markdown | ```none | วิชา | สถานะ | เวลา | วันที่เริ่มต้น | ครบกำหนด | | ------- | ------ | ---- | ---------- | ------ | | คณิตศาสตร์ | เสร็จแล้ว | 1.5 ชม. | 29/11/2023 | 1/12/2023 | | ภูมิศาสตร์ | เสร็จแล้ว | 30 นาที | 2/12/2023 | 4/12/2023 | | ฟิสิกส์ | กำลังดำเนินการ | 2 ชม. | 3/12/2023 | 5/12/2023 | | ชีววิทยา | ยังไม่เริ่ม | 6 ชม. | 2/11/2016 | 6/12/2023 | ``` |
 
-| **Prompt** | **Risposta del modello** |
+| **พรอมต์** | **คำตอบของโมเดล** |
 | --- | --- |
-| Fornisci un elenco di tutti i seguenti attributi:  ingredienti, tipo di cucina, vegetariano o meno, in formato JSON | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
+| ระบุรายการแอตทริบิวต์ต่อไปนี้ทั้งหมด  ส่วนผสม ประเภทอาหาร มังสวิรัติหรือไม่ ในรูปแบบ JSON | ```json { "ingredients": [ "rice", "shrimp", "clams", "mussels", "peas", "tomatoes", "onions", "garlic", "olive oil", "paprika", "salt", "pepper" ], "type of cuisine": "Spanish", "vegetarian": false } ``` |
 
-### Inserisci prima l'immagine per i prompt con una sola immagine
+### วางรูปภาพไว้ก่อนสำหรับพรอมต์แบบรูปภาพเดียว
 
-Sebbene Gemini possa interpretare immagini e testo in qualsiasi ordine all'interno di un prompt, inserire
-una singola immagine prima del prompt testuale potrebbe portare a risultati migliori.
-Negli esempi seguenti, noterai che l'immagine viene prima del testo in
-ogni prompt.
+แม้ว่า Gemini จะตีความรูปภาพและข้อความในพรอมต์ได้ตามลำดับใดก็ได้ แต่การวาง
+รูปภาพเดี่ยวไว้ก่อนพรอมต์ข้อความอาจให้ผลลัพธ์ที่ดีกว่า
+ในตัวอย่างต่อไปนี้ คุณจะเห็นว่ารูปภาพจะมาก่อนข้อความในแต่ละพรอมต์
 
-### Risolvere i problemi relativi al prompt multimodale
+### การแก้ปัญหาพรอมต์มัลติโมดัล
 
-Potresti dover risolvere i problemi relativi al prompt se non ricevi una risposta utile. Ecco alcune strategie che puoi provare.
+คุณอาจต้องแก้ปัญหาพรอมต์หากไม่ได้รับคำตอบที่เป็นประโยชน์
+คุณลองใช้กลยุทธ์ต่อไปนี้ได้
 
-#### Se il modello non estrae informazioni dalla parte pertinente dell'immagine
+#### หากโมเดลไม่ได้ดึงข้อมูลจากส่วนที่เกี่ยวข้องของรูปภาพ
 
-Per ottenere una risposta più specifica, puoi indicare gli aspetti dell'immagine
-da cui vuoi che il prompt estragga le informazioni per elaborare la risposta.
+หากต้องการคำตอบที่เจาะจงมากขึ้น คุณสามารถระบุลักษณะของรูปภาพ
+ที่ต้องการให้พรอมต์ดึงข้อมูลมาใช้ในการตอบกลับได้
 
-| Prompt | Risposta del modello |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Per quanti giorni dureranno questi pannolini per un bambino? | I pannolini dureranno 198 giorni prima di esaurirsi. |
+| ผ้าอ้อมเหล่านี้จะใช้ได้นานกี่วันสำหรับทารก | ผ้าอ้อมจะใช้ได้ 198 วันก่อนที่จะหมด |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Per quanto tempo dureranno questi pannolini prima che finiscano?  Utilizza il peso indicato sulla confezione per determinare l'età del bambino e il numero totale di pannolini nella confezione.  Dividi il numero totale per il numero di pannolini che il bambino usa al giorno. | La confezione contiene 198 pannolini. La scatola indica che i pannolini sono per un bambino di peso compreso tra 10 e 17 kg.  Il bambino medio in questa fascia di peso ha probabilmente un'età compresa tra 1 e 2 anni.  Un bambino di 2 anni in genere usa 6 pannolini al giorno, quindi i pannolini dureranno circa 33 giorni (198/6). |
+| ผ้าอ้อมเหล่านี้จะใช้ได้นานเท่าไรก่อนจะหมด  ใช้น้ำหนักที่แสดงบนกล่องเพื่อกำหนดอายุของเด็ก และใช้จำนวนผ้าอ้อมทั้งหมดในกล่อง  นำจำนวนทั้งหมดมาหารด้วยจำนวนผ้าอ้อมที่เด็กใช้ต่อวัน | กล่องนี้มีผ้าอ้อม 198 ชิ้น กล่องระบุว่าผ้าอ้อมเหมาะสำหรับเด็กที่มีน้ำหนัก 22-37 ปอนด์  เด็กที่มีน้ำหนักในช่วงนี้โดยเฉลี่ยจะมีอายุระหว่าง 1-2 ปี  โดยปกติแล้วเด็กอายุ 2 ขวบจะใช้ผ้าอ้อม 6 ผืนต่อวัน ดังนั้นผ้าอ้อมจะใช้ได้ประมาณ 33 วัน (198/6) |
 
-#### Se l'output del modello è troppo generico e non sufficientemente personalizzato in base all'input dell'immagine
+#### หากเอาต์พุตโมเดลเป็นแบบทั่วไปมากเกินไปและไม่ปรับให้เข้ากับอินพุตรูปภาพ
 
-Per aiutare il modello a personalizzare la risposta in base alle immagini, prova a chiedergli di descriverle prima di eseguire il compito di ragionamento.
+หากต้องการช่วยให้โมเดลปรับแต่งคำตอบให้เหมาะกับรูปภาพ ให้ลองขอให้โมเดลอธิบายรูปภาพก่อนที่จะดำเนินการให้เหตุผล
 
-| Prompt | Risposta del modello |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Cosa hanno in comune queste immagini? | Tutte e quattro le immagini sono esempi di fotografia paesaggistica. |
+| รูปภาพเหล่านี้มีอะไรที่เหมือนกัน | รูปภาพทั้ง 4 รูปเป็นตัวอย่างของการถ่ายภาพทิวทัศน์ |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Per prima cosa, descrivi in dettaglio i contenuti di ogni immagine. Che cosa hanno in comune queste immagini? | La prima immagine mostra una persona che prepara una valigia. La seconda immagine mostra un corridoio vuoto in un centro commerciale. La terza immagine mostra un rotolo di carta igienica. La quarta immagine mostra un mare scuro e tempestoso.  Il punto in comune tra queste immagini è che sono tutti esempi di spazi liminali. Gli spazi liminali sono luoghi o situazioni che si trovano tra due altri luoghi o situazioni. Sono spesso caratterizzati da un senso di incertezza o ambiguità.  La prima immagine mostra la persona tra la casa e il viaggio. La seconda immagine mostra il corridoio tra due negozi. La terza immagine è di carta igienica, che può rappresentare un bagno. Il bagno è uno spazio di transizione tra la sfera privata e quella pubblica. È un luogo in cui ci prepariamo a entrare o uscire dal mondo esterno.  La quarta immagine mostra il mare in una condizione intermedia tra calma e tempesta.  Gli spazi liminali possono essere sia entusiasmanti che inquietanti. Possono essere un luogo di nuovi inizi o di fine. Possono essere un luogo di riflessione o di azione. |
+| ก่อนอื่น ให้อธิบายสิ่งที่อยู่ในแต่ละภาพโดยละเอียด รูปภาพเหล่านี้มีอะไรที่เหมือนกัน | รูปภาพแรกแสดงภาพคนกำลังจัดกระเป๋าเดินทาง ภาพที่ 2 แสดงทางเดินที่ว่างเปล่าในห้างสรรพสินค้า ภาพที่ 3 แสดงม้วนกระดาษชำระ รูปภาพที่ 4 แสดงทะเลที่มืดครึ้มและมีพายุ  ความเหมือนกันของภาพเหล่านี้คือเป็นตัวอย่างของพื้นที่กึ่งกลาง พื้นที่กึ่งกลางคือสถานที่หรือสถานการณ์ที่อยู่ระหว่างสถานที่หรือสถานการณ์อื่นๆ 2 แห่ง โดยมักมีลักษณะของความไม่แน่นอนหรือความคลุมเครือ  ภาพแรกแสดงให้เห็นว่าบุคคลดังกล่าวอยู่บ้านและเดินทาง ภาพที่ 2 แสดงทางเดินระหว่างร้านค้า 2 ร้าน ภาพที่ 3 เป็นกระดาษชำระ ซึ่งแสดงถึงห้องน้ำ ห้องน้ำเป็นพื้นที่เปลี่ยนผ่านระหว่างพื้นที่ส่วนตัว และพื้นที่สาธารณะ เป็นสถานที่ที่เราเตรียมตัวเพื่อเข้าหรือออกจากโลกภายนอก  ภาพที่ 4 แสดงให้เห็นทะเลที่อยู่ระหว่างความสงบกับความปั่นป่วน  พื้นที่กึ่งกลางอาจทั้งน่าตื่นเต้นและน่ากังวล ซึ่งอาจเป็นจุดเริ่มต้นใหม่หรือจุดสิ้นสุดก็ได้ ซึ่งอาจเป็นที่ที่ใช้ไตร่ตรองหรือที่ที่ใช้ลงมือทำ |
 
-Puoi anche provare a chiedere esplicitamente al modello di fare riferimento a ciò che è presente nell'immagine.
+นอกจากนี้ คุณยังลองถามโมเดลอย่างชัดเจนให้ดูสิ่งที่อยู่ในรูปภาพได้ด้วย
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Cosa hanno in comune queste immagini? Fai riferimento al contenuto delle immagini nella risposta. | Tutte le immagini sono correlate ai viaggi. La prima immagine mostra una persona che prepara una valigia, la seconda mostra un corridoio vuoto in un centro commerciale, la terza mostra una pila di carta igienica e la quarta mostra un mare scuro e tempestoso.  Queste immagini sono tutte correlate ai viaggi perché sono tutte cose che le persone hanno bisogno o usano quando viaggiano. La prima immagine mostra una persona che prepara una valigia, un'attività che si svolge prima di un viaggio. La seconda immagine mostra un corridoio vuoto in un centro commerciale, un luogo in cui le persone vanno spesso per comprare cose per i loro viaggi. La terza immagine mostra una pila di carta igienica, un oggetto che le persone usano spesso quando sono in viaggio. La quarta immagine mostra un mare scuro e tempestoso, che è qualcosa che le persone incontrano spesso quando viaggiano. |
+| รูปภาพเหล่านี้มีอะไรที่เหมือนกัน อ้างอิงสิ่งที่อยู่ในรูปภาพในคำตอบ | รูปภาพทั้งหมดเกี่ยวข้องกับการท่องเที่ยว ภาพแรกแสดงภาพคนกำลังจัดกระเป๋าเดินทาง ภาพที่ 2 แสดงภาพทางเดินที่ว่างเปล่าในห้างสรรพสินค้า ภาพที่ 3 แสดงภาพกระดาษชำระที่วางซ้อนกัน และภาพที่ 4 แสดงภาพทะเลที่มืดครึ้มและมีพายุ  รูปภาพเหล่านี้เกี่ยวข้องกับการเดินทางทั้งหมดเนื่องจากเป็นสิ่งที่ผู้คนต้องการหรือใช้เมื่อ เดินทาง รูปภาพแรกแสดงให้เห็นบุคคลกำลังจัดกระเป๋าเดินทาง ซึ่งเป็น สิ่งที่ผู้คนทำเมื่อจะเดินทาง รูปภาพที่ 2 แสดงทางเดินที่ว่างเปล่าในห้างสรรพสินค้า ซึ่งเป็นสถานที่ที่ผู้คน มักจะไปซื้อของสำหรับการเดินทาง รูปภาพที่ 3 แสดงกองกระดาษชำระ ซึ่งเป็นสิ่งที่ผู้คนมักใช้เมื่อเดินทาง รูปภาพที่ 4 แสดงทะเลที่มืดครึ้มและมีพายุ ซึ่งเป็น สิ่งที่ผู้คนมักพบเจอเมื่อเดินทาง |
 
-Gli stessi suggerimenti valgono per l'output creativo delle immagini. Nel seguente esempio con
-il coniglio, chiedere esplicitamente al modello di includere aspetti dell'immagine può
-migliorare l'output.
+เคล็ดลับเดียวกันนี้ใช้ได้กับผลงานครีเอทีฟโฆษณาจากรูปภาพด้วย ในตัวอย่างต่อไปนี้ที่มี
+กระต่าย การขอให้โมเดลรวมแง่มุมจากรูปภาพอย่างชัดเจนจะ
+ปรับปรุงเอาต์พุตได้
 
-| Prompt | Risposta del modello |
+| พรอมต์ | คำตอบของโมเดล |
 | --- | --- |
-| Puoi scrivermi una poesia su questa immagine? | Coniglietto, così morbido e marrone,  che salta nel campo, su e giù.  Le tue orecchie così lunghe, la tua coda così piccola,  Sei la creatura più carina di tutte.  Mangi l'erba, così verde e dolce,  E scappi via quando mi vedi.  Ma sarò sempre tuo amico,  Coniglietto, fino alla fine. |
+| ช่วยแต่งกลอนเกี่ยวกับรูปภาพนี้ให้หน่อยได้ไหม | กระต่ายน้อยตัวนุ่มสีน้ำตาล  กระโดดโลดเต้นไปทั่วทุ่ง  หูยาว หางสั้น  เจ้าเป็นสัตว์ที่น่ารักที่สุดในบรรดาสัตว์ทั้งหมด  เจ้าแทะหญ้าเขียวหวาน  แล้วกระโดดหนีเมื่อเห็นฉัน  แต่ฉันจะเป็นเพื่อนของเธอเสมอ  กระต่ายน้อย จนกว่าจะถึงวันสุดท้าย |
 
-| **Prompt aggiornato** | **Risposta migliorata** |
+| **พรอมต์ที่อัปเดตแล้ว** | **การตอบสนองที่ดียิ่งขึ้น** |
 | --- | --- |
-| Puoi scrivermi una poesia descrittiva e drammatica su questa immagine e includere la posizione? | Coniglietto sul prato verde,  Orecchie lunghe e attente.  Che cosa vedi laggiù,  In lontananza, dove fissi lo sguardo?  È il blu dell'oceano,  che brilla alla luce del sole?  O le onde che si infrangono e ruggiscono,  Un ritmo che adori?  Coniglietto, dimmi la verità,  Cosa cattura così tanto la tua attenzione?  È la brezza salmastra,  O i gridi dei gabbiani che ti piacciono?  Forse è la vastità di tutto,  Un mondo così grande e piccolo.  Un luogo dove i sogni possono vagare,  E le avventure possono essere seminate.  Coniglietto, mi chiedo cosa sogni,  mentre siedi sull'erba, così sereno.  Desideri esplorare le profondità,  O rimanere sulla terraferma, dove puoi saltare?  Qualunque cosa sia, piccolo coniglietto,  mantieni viva quella scintilla di meraviglia.  Nei tuoi sogni e nelle tue aspirazioni,  C'è un mondo che aspetta la tua creazione. |
+| ช่วยแต่งกลอนที่บรรยายและน่าทึ่งเกี่ยวกับรูปภาพนี้พร้อมระบุสถานที่ได้ไหม | กระต่ายน้อยบนทุ่งหญ้าเขียว  หูยาวเฟื้อยน่ารัก  คุณเห็นอะไรที่นั่น  ในระยะไกลที่คุณจ้องมอง  เป็นสีครามของมหาสมุทร  ส่องประกายในแสงแดดไหม  หรือคลื่นที่ซัดสาดและคำราม  จังหวะที่คุณชื่นชอบ  กระต่ายน้อยบอกฉันหน่อย  อะไรที่ดึงดูดความสนใจของเธอ  ลมทะเลเค็ม  หรือเสียงร้องของนกนางนวลที่ทำให้เพลิน  อาจเป็นเพราะความกว้างใหญ่ของทุกสิ่ง  โลกที่ทั้งใหญ่และเล็ก  ที่ซึ่งความฝันจะโลดแล่น  และเรื่องราวผจญภัยจะเริ่มต้นขึ้น  กระต่ายน้อย ฉันสงสัยว่าเธอฝันถึงอะไร  ขณะนั่งอยู่บนหญ้าอย่างเงียบสงบ  คุณอยากสำรวจใต้ทะเลลึก  หรือจะอยู่บนบกที่กระโดดโลดเต้นได้  ไม่ว่าจะเป็นอะไรก็ตาม เจ้ากระต่ายน้อย  จงรักษาประกายแห่งความสงสัยให้ส่องสว่างต่อไป  เพราะในความฝันและความปรารถนา  มีโลกที่รอให้คุณสร้างสรรค์ |
 
-#### Risoluzione dei problemi relativi alla parte del prompt non riuscita
+#### การแก้ปัญหาว่าส่วนใดของพรอมต์ไม่สำเร็จ
 
-Può essere difficile capire se un prompt non è riuscito perché il modello
-non ha **compreso l'immagine** fin dall'inizio o se ha compreso l'immagine
-ma non ha eseguito i **passaggi di ragionamento** corretti in seguito.
-Per distinguere tra questi motivi, chiedi al modello di descrivere il contenuto dell'immagine.
+การทราบว่าพรอมต์ล้มเหลวเนื่องจากโมเดล**ไม่เข้าใจรูปภาพ**ตั้งแต่แรก หรือโมเดลเข้าใจรูปภาพแต่ไม่ได้ทำ**ขั้นตอนการให้เหตุผล**ที่ถูกต้องในภายหลังอาจเป็นเรื่องยาก
+หากต้องการแยกแยะเหตุผลเหล่านั้น ให้ขอให้โมเดลอธิบายสิ่งที่อยู่ในรูปภาพ
 
-Nell'esempio seguente, se il modello risponde con uno snack che sembra sorprendente
-se abbinato al tè (ad es. popcorn), puoi prima risolvere il problema per determinare
-se il modello ha riconosciuto correttamente che l'immagine contiene tè.
+ในตัวอย่างต่อไปนี้ หากโมเดลตอบกลับด้วยของว่างที่ดูน่าประหลาดใจเมื่อจับคู่กับชา (เช่น ป๊อปคอร์น) คุณสามารถแก้ปัญหาเบื้องต้นเพื่อพิจารณาว่าโมเดลจดจำได้อย่างถูกต้องว่ารูปภาพมีชาหรือไม่
 
-| Prompt | Richiesta di risoluzione dei problemi |
+| พรอมต์ | พรอมต์สำหรับการแก้ปัญหา |
 | --- | --- |
-| Qual è uno snack che posso preparare in un minuto e che si abbini bene a questo? | Descrivi i contenuti di questa immagine. |
+| ฉันจะทำของว่างอะไรใน 1 นาทีที่เข้ากันได้ดีกับสิ่งนี้ | อธิบายสิ่งที่อยู่ในรูปภาพนี้ |
 
-Un'altra strategia è chiedere al modello di spiegare il suo ragionamento. In questo modo puoi
-restringere la parte del ragionamento che non ha funzionato, se presente.
+อีกกลยุทธ์หนึ่งคือการขอให้โมเดลอธิบายเหตุผล ซึ่งจะช่วยให้คุณ
+จำกัดส่วนของการให้เหตุผลที่ผิดพลาดได้ หากมี
 
-| Prompt | Richiesta di risoluzione dei problemi |
+| พรอมต์ | พรอมต์สำหรับการแก้ปัญหา |
 | --- | --- |
-| Qual è uno snack che posso preparare in un minuto e che si abbini bene a questo? | Qual è uno spuntino che posso preparare in 1 minuto e che si abbini bene a questo? Spiega perché. |
+| มีของว่างอะไรที่ฉันทำได้ใน 1 นาทีและกินกับสิ่งนี้ได้บ้าง | มีของว่างอะไรที่ฉันทำได้ใน 1 นาทีและกินกับสิ่งนี้ได้บ้าง โปรดให้เหตุผล |
 
-## Passaggi successivi
+## ขั้นตอนถัดไป
 
-- Prova a scrivere i tuoi prompt multimodali utilizzando [Google AI
-  Studio](http://aistudio.google.com?hl=it).
-- Per informazioni sull'utilizzo dell'API Gemini Files per
-  caricare file multimediali e includerli nei prompt, consulta le guide
-  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=it), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=it) e
-  [Elaborazione dei documenti](https://ai.google.dev/gemini-api/docs/document-processing?hl=it).
-- Per ulteriori indicazioni sulla progettazione dei prompt, ad esempio sulla regolazione dei parametri di campionamento, consulta la pagina
-  [Strategie per i prompt](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=it).
+- ลองเขียนพรอมต์มัลติโมดัลของคุณเองโดยใช้ [Google AI
+  Studio](http://aistudio.google.com?hl=th)
+- ดูข้อมูลเกี่ยวกับการใช้ Gemini Files API สำหรับ
+  การอัปโหลดไฟล์สื่อและการรวมไฟล์เหล่านั้นไว้ในพรอมต์ได้ที่คำแนะนำเกี่ยวกับ
+  [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=th), [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=th) และ
+  [การประมวลผลเอกสาร](https://ai.google.dev/gemini-api/docs/document-processing?hl=th)
+- ดูคำแนะนำเพิ่มเติมเกี่ยวกับการออกแบบพรอมต์ เช่น การปรับพารามิเตอร์การสุ่มตัวอย่าง ได้ที่หน้า[กลยุทธ์พรอมต์](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=th)
 
-Invia feedback
+ส่งความคิดเห็น
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
 
-Ultimo aggiornamento 2026-07-30 UTC.
+อัปเดตล่าสุด 2026-07-30 UTC
 
-Vuoi dirci altro?
+หากต้องการบอกให้เราทราบเพิ่มเติม
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]
+[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-07-30 UTC"],[],[]]

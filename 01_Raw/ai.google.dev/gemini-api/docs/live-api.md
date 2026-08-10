@@ -1,127 +1,132 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=ja
-fetched_at: 2026-08-03T04:38:41.382322+00:00
-title: "Gemini Live API \u306e\u6982\u8981 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api?hl=es-419
+fetched_at: 2026-08-10T03:11:17.027723+00:00
+title: "Descripci\u00f3n general de la API de Gemini Live \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-フィードバックを送信
+Enviar comentarios
 
-# Gemini Live API の概要
+# Descripción general de la API de Gemini Live
 
-Live API を使用すると、Gemini と音声とビジョンによるやり取りを低レイテンシかつリアルタイムで行うことができます。音声、画像、テキストの連続ストリームを処理して、人間のような音声による応答を即座に提供し、ユーザーに自然な会話体験を提供します。
+La API de Live permite interacciones de voz y visión en tiempo real con baja latencia con Gemini. Procesa flujos continuos de audio, imágenes y texto para brindar respuestas habladas inmediatas y similares a las humanas, lo que crea una experiencia conversacional natural para tus usuarios.
 
-![Live API の概要](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=ja)
+![Descripción general de la API de Live](https://ai.google.dev/static/gemini-api/docs/images/live-api-overview.png?hl=es-419)
 
-[Google AI Studio で Live API を試すmic](https://aistudio.google.com/live?hl=ja)
-[GitHub からサンプルアプリのクローンを作成するcode](https://github.com/google-gemini/gemini-live-api-examples)
-[コーディング エージェントのスキルを使用するterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=ja)
+[Probar la API en vivo en Google AI Studiomic](https://aistudio.google.com/live?hl=es-419)
+[Clonar apps de ejemplo desde GitHubcode](https://github.com/google-gemini/gemini-live-api-examples)
+[Usar habilidades de agentes de programaciónterminal](https://ai.google.dev/gemini-api/docs/coding-agents?hl=es-419)
 
-## ユースケース
+## Casos de uso
 
-Live API を使用して、次のようなさまざまな業界向けのリアルタイム音声エージェントを構築できます。
+La API de Live se puede usar para compilar agentes de voz en tiempo real para una variedad de industrias, incluidas las siguientes:
 
-- **e コマースと小売業:** パーソナライズされたおすすめを提供するショッピング アシスタントや、お客様の問題を解決するサポート エージェント。
-- **ゲーム:** インタラクティブなノンプレーヤー キャラクター（NPC）、ゲーム内ヘルプ アシスタント、ゲーム内コンテンツのリアルタイム翻訳。
-- **次世代インターフェース:** ロボット工学、スマート グラス、車両における音声と動画対応のエクスペリエンス。
-- **ヘルスケア:** 患者のサポートと教育のための健康コンパニオン。
-- **金融サービス:** 資産管理と投資ガイダンスのための AI アドバイザー。
-- **教育:** パーソナライズされた指導とフィードバックを提供する AI メンターと学習コンパニオン。
-- **翻訳とローカライズ:** 発話された会話をリアルタイムで低レイテンシで翻訳し、多言語でのシームレスなコミュニケーションを実現します。
+- **Comercio electrónico y venta minorista:** Asistentes de compras que ofrecen recomendaciones personalizadas y agentes de asistencia que resuelven los problemas de los clientes.
+- **Juegos:** Personajes controlados por la máquina (NPC) interactivos, asistentes de ayuda en el juego y traducción en tiempo real del contenido del juego
+- **Interfaces de nueva generación:** Experiencias habilitadas para voz y video en robótica, anteojos inteligentes y vehículos
+- **Cuidado de la salud:** Compañeros de salud para la asistencia y educación de los pacientes
+- **Servicios financieros:** Asesores de IA para la administración de patrimonio y la orientación sobre inversiones
+- **Educación:** Mentores y compañeros de aprendizaje basados en IA que brindan instrucción y comentarios personalizados.
+- **Traducción y localización:** Traducción en tiempo real y de baja latencia de conversaciones habladas, lo que permite una comunicación multilingüe fluida.
 
-## 主な機能
+## Características clave
 
-Live API は、堅牢な音声エージェントを構築するための包括的な機能セットを提供します。
+La API de Live ofrece un conjunto integral de funciones para crear agentes de voz sólidos:
 
-- [**多言語サポート**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#supported-languages): 70 の言語で会話できます。
-- [**割り込み**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#interruptions): ユーザーは、応答性の高いインタラクションのために、いつでもモデルを中断できます。
-- [**ツールの使用**](https://ai.google.dev/gemini-api/docs/live-tools?hl=ja): 関数呼び出しや Google 検索などのツールを統合して、動的なやり取りを実現します。
-- [**音声文字変換**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#audio-transcription): ユーザー入力とモデル出力の両方のテキスト文字変換を提供します。
-- [**プロアクティブ音声**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#proactive-audio): モデルが応答するタイミングやコンテキストを制御できます。
-- [**アフェクティブ ダイアログ**](https://ai.google.dev/gemini-api/docs/live-guide?hl=ja#affective-dialog): ユーザーの入力表現に合わせて、回答のスタイルとトーンを調整します。
-- [**リアルタイム翻訳**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=ja):
-  70 以上の言語で音声をリアルタイムに翻訳します。
+- [**Compatibilidad con varios idiomas**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#supported-languages):
+  Conversa en 70 idiomas compatibles.
+- [**Interrupción**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#interruptions):
+  Los usuarios pueden interrumpir el modelo en cualquier momento para tener interacciones responsivas.
+- [**Uso de herramientas**](https://ai.google.dev/gemini-api/docs/live-tools?hl=es-419):
+  Integra herramientas como llamadas a funciones y la Búsqueda de Google para interacciones dinámicas.
+- [**Transcripciones de audio**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#audio-transcription):
+  Proporciona transcripciones de texto de la entrada del usuario y el resultado del modelo.
+- [**Audio proactivo**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#proactive-audio):
+  Te permite controlar cuándo responde el modelo y en qué contextos.
+- [**Diálogo afectivo**](https://ai.google.dev/gemini-api/docs/live-guide?hl=es-419#affective-dialog):
+  Adapta el estilo y el tono de la respuesta para que coincidan con la expresión de entrada del usuario.
+- [**Traducción instantánea**](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=es-419): Traducción de voz a voz en tiempo real en más de 70 idiomas
 
-## 技術仕様
+## Especificaciones técnicas
 
-次の表に、Live API の技術仕様の概要を示します。
+En la siguiente tabla, se describen las especificaciones técnicas de la API de Live:
 
-| カテゴリ | 詳細 |
+| Categoría | Detalles |
 | --- | --- |
-| 入力モダリティ | 音声（RAW 16 ビット PCM 音声、16kHz、リトル エンディアン）、画像（JPEG <= 1FPS）、テキスト |
-| 出力モダリティ | 音声（RAW 16 ビット PCM 音声、24kHz、リトル エンディアン） |
-| プロトコル | ステートフル WebSocket 接続（WSS） |
+| Modalidades de entrada | Audio (audio PCM sin procesar de 16 bits, 16 kHz, little-endian), imágenes (JPEG <= 1 FPS), texto |
+| Modalidades de salida | Audio (audio PCM sin procesar de 16 bits, 24 kHz, little-endian) |
+| Protocolo | Conexión de WebSocket con estado (WSS) |
 
-## 実装アプローチを選択する
+## Elige un enfoque de implementación
 
-Live API と統合する際は、次のいずれかの実装方法を選択する必要があります。
+Cuando realices la integración con la API de Live, deberás elegir uno de los siguientes enfoques de implementación:
 
-- **サーバー間**: バックエンドが [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) を使用して Live API に接続します。通常、クライアントはストリーム データ（音声、動画、テキスト）をサーバーに送信し、サーバーはそれを Live API に転送します。
-- **クライアントからサーバーへ**: フロントエンド コードが [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) を使用して Live API に直接接続し、バックエンドをバイパスしてデータをストリーミングします。
+- **Servidor a servidor**: Tu backend se conecta a la API de Live con [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API). Por lo general, tu cliente envía datos de transmisión (audio, video, texto) a tu servidor, que luego los reenvía a la API de Live.
+- **Cliente a servidor**: Tu código de frontend se conecta directamente a la API de Live con [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) para transmitir datos, lo que omite tu backend.
 
-## 始める
+## Comenzar
 
-開発環境に一致するガイドを選択してください。
+Selecciona la guía que coincida con tu entorno de desarrollo:
 
-サーバー間
+De servidor a servidor
 
-### [GenAI SDK のチュートリアル](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=ja)
+### [Instructivo del SDK de IA generativa](https://ai.google.dev/gemini-api/docs/live-api/get-started-sdk?hl=es-419)
 
-GenAI SDK を使用して Gemini Live API に接続し、Python バックエンドでリアルタイムのマルチモーダル アプリケーションを構築します。
+Conéctate a la API de Gemini Live con el SDK de GenAI para compilar una aplicación multimodal en tiempo real con un backend de Python.
 
-クライアントからサーバーへ
+Cliente a servidor
 
-### [WebSocket のチュートリアル](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=ja)
+### [Tutorial de WebSocket](https://ai.google.dev/gemini-api/docs/live-api/get-started-websocket?hl=es-419)
 
-WebSocket を使用して Gemini Live API に接続し、JavaScript フロントエンドとエフェメラル トークンを使用してリアルタイムのマルチモーダル アプリケーションを構築します。
+Conéctate a la API de Gemini Live con WebSockets para crear una aplicación multimodal en tiempo real con un frontend de JavaScript y tokens efímeros.
 
-Agent Development Kit
+Kit de desarrollo de agentes
 
-### [ADK のチュートリアル](https://google.github.io/adk-docs/streaming/)
+### [Instructivo de ADK](https://google.github.io/adk-docs/streaming/)
 
-エージェントを作成し、Agent Development Kit（ADK）ストリーミングを使用して音声と動画の通信を有効にします。
+Crea un agente y usa la transmisión del Kit de desarrollo de agentes (ADK) para habilitar la comunicación por voz y video.
 
-## パートナーとの統合
+## Integraciones a socios
 
-リアルタイムの音声アプリと動画アプリの開発を効率化するには、WebRTC または WebSocket 経由で Gemini Live API をサポートするサードパーティ統合を使用します。
+Para optimizar el desarrollo de apps de audio y video en tiempo real, puedes usar una integración de terceros que admita la API de Gemini Live a través de WebRTC o WebSockets.
 
 [LiveKit
 
-LiveKit エージェントで Gemini Live API を使用します。](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
-[Pipecat by Daily
+Usa la API de Gemini Live con los agentes de LiveKit.](https://docs.livekit.io/agents/models/realtime/plugins/gemini/)
+[Pipecat de Daily
 
-Gemini Live と Pipecat を使用してリアルタイムの AI チャットボットを作成します。](https://docs.pipecat.ai/guides/features/gemini-live)
-[Software Mansion の Fishjam
+Crea un chatbot de IA en tiempo real con Gemini Live y Pipecat.](https://docs.pipecat.ai/guides/features/gemini-live)
+[Fishjam de Software Mansion
 
-Fishjam を使用して、ライブ動画と音声のストリーミング アプリケーションを作成します。](https://docs.fishjam.io/tutorials/gemini-live-integration)
-[Stream による Vision エージェント
+Crea aplicaciones de transmisión de audio y video en vivo con Fishjam.](https://docs.fishjam.io/tutorials/gemini-live-integration)
+[Agentes de Vision por transmisión
 
-Vision エージェントを使用して、リアルタイムの音声と動画の AI アプリケーションを構築します。](https://visionagents.ai/integrations/gemini)
+Crea aplicaciones de IA de voz y video en tiempo real con Vision Agents.](https://visionagents.ai/integrations/gemini)
 [Voximplant
 
-Voximplant を使用して、インバウンド通話とアウトバウンド通話を Live API に接続します。](https://voximplant.com/products/gemini-client)
+Conecta llamadas entrantes y salientes a la API de Live con Voximplant.](https://voximplant.com/products/gemini-client)
 [Agora
 
-Agora を使用してリアルタイムの会話型 AI アプリケーションを構築します。](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
-[Firebase AI SDK
+Crea aplicaciones de IA conversacional en tiempo real con Agora.](https://docs.agora.io/en/conversational-ai/models/mllm/gemini)
+[SDK de Firebase AI
 
-Firebase AI Logic を使用して Gemini Live API を使ってみましょう。](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=ja)
+Comienza a usar la API de Gemini Live con Firebase AI Logic.](https://firebase.google.com/docs/ai-logic/live-api?api=dev&hl=es-419)
 
-フィードバックを送信
+Enviar comentarios
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-最終更新日 2026-06-12 UTC。
+Última actualización: 2026-06-12 (UTC)
 
-ご意見をお聞かせください
+¿Quieres brindar más información?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-12 UTC。"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-12 (UTC)"],[],[]]

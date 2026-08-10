@@ -1,38 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=ar
-fetched_at: 2026-08-03T04:42:24.056633+00:00
-title: "\u0627\u0644\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0645\u0646\u0638\u064e\u0651\u0645\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/structured-output?hl=pl
+fetched_at: 2026-08-10T03:25:12.569044+00:00
+title: "Dane wyj\u015bciowe uporz\u0105dkowane \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-إرسال ملاحظات
+Prześlij opinię
 
-# النتائج المنظَّمة
+# Dane wyjściowe uporządkowane
 
-يمكنك ضبط نماذج Gemini لإنشاء ردود تتوافق مع مخطط JSON المقدَّم. يضمن ذلك الحصول على نتائج متوقّعة وآمنة من حيث النوع، كما يسهّل استخراج البيانات المنظَّمة من النصوص غير المنظَّمة.
+Modele Gemini możesz skonfigurować tak, aby generowały odpowiedzi zgodne z podanym schematem JSON. Dzięki temu uzyskasz przewidywalne i bezpieczne typowo wyniki oraz uprościsz wyodrębnianie uporządkowanych danych z nieuporządkowanego tekstu.
 
-يُعدّ استخدام المُخرجات المنظَّمة مثاليًا للحالات التالية:
+Używanie uporządkowanych danych wyjściowych jest idealne w tych przypadkach:
 
-- **استخراج البيانات:** استخراج معلومات محدّدة، مثل الأسماء والتواريخ، من النص
-- **التصنيف المنظَّم:** تصنيف النص ضِمن فئات محدَّدة مسبقًا
-- **سير عمل الذكاء الاصطناعي الوكيل:** إنشاء مدخلات منظَّمة للأدوات أو واجهات برمجة التطبيقات
+- **Wyodrębnianie danych:** wyodrębnianie z tekstu konkretnych informacji, takich jak imiona i nazwiska oraz daty.
+- **Uporządkowana klasyfikacja:** klasyfikowanie tekstu według wstępnie zdefiniowanych kategorii.
+- **Przepływy pracy agenta:** generowanie uporządkowanych danych wejściowych dla narzędzi lub interfejsów API.
 
-بالإضافة إلى إتاحة استخدام JSON Schema في واجهة REST API، تتيح حِزم تطوير البرامج (SDK) من Google للذكاء الاصطناعي التوليدي تحديد المخططات باستخدام [Pydantic](https://docs.pydantic.dev/latest/) (لغة Python) و[Zod](https://zod.dev/) (لغة JavaScript).
+Oprócz obsługi schematu JSON w interfejsie REST API, pakiety SDK Google GenAI
+umożliwiają definiowanie schematów za pomocą
+[Pydantic](https://docs.pydantic.dev/latest/) (Python) i
+[Zod](https://zod.dev/) (JavaScript).
 
-## أمثلة على الناتج المنظَّم
+## Przykłady uporządkowanych danych wyjściowych
 
-### أداة استخراج وصفات الطعام
+### Ekstraktor przepisów
 
-يوضّح هذا المثال كيفية استخراج البيانات المنظَّمة من النص باستخدام أنواع JSON Schema الأساسية، مثل `object` و`array` و`string` و`integer`.
+Ten przykład pokazuje, jak wyodrębniać uporządkowane dane z tekstu za pomocą podstawowych typów schematu JSON, takich jak `object`, `array`, `string` i `integer`.
 
 ### Python
 
@@ -196,7 +199,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**مثال على الرد:**
+**Przykładowa odpowiedź:**
 
 ```
 {
@@ -224,9 +227,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### الإشراف على المحتوى
+### Moderacja treści
 
-يعرض هذا المثال `anyOf` للمخططات الشرطية و`enum` للتصنيف، ما يسمح بتغيير بنية الإخراج استنادًا إلى المحتوى.
+Ten przykład pokazuje, jak używać `anyOf` w przypadku schematów warunkowych i `enum` w przypadku klasyfikacji, co pozwala na zmianę struktury danych wyjściowych w zależności od treści.
 
 ### Python
 
@@ -375,7 +378,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**مثال على الرد:**
+**Przykładowa odpowiedź:**
 
 ```
 {
@@ -386,9 +389,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-### البُنى التكرارية
+### Struktury rekurencyjne
 
-يوضّح هذا المثال كيفية تحديد مخطط تكراري، مثل مخطط تنظيمي.
+Ten przykład pokazuje, jak zdefiniować schemat rekurencyjny, np. schemat organizacyjny.
 
 ### Python
 
@@ -505,7 +508,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
     }'
 ```
 
-**مثال على الرد:**
+**Przykładowa odpowiedź:**
 
 ```
 {
@@ -532,9 +535,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-## نتائج البث
+## Strumieniowanie wyników
 
-يمكنك بث النتائج المنظَّمة، ما يتيح لك بدء معالجة الرد أثناء إنشائه. الأجزاء التي يتم بثها هي سلاسل JSON جزئية صالحة يمكن ربطها لتكوين عنصر JSON النهائي.
+Możesz strumieniować uporządkowane dane wyjściowe, co pozwala na rozpoczęcie przetwarzania odpowiedzi w trakcie jej generowania. Strumieniowane fragmenty są prawidłowymi częściowymi ciągami JSON, które można połączyć, aby utworzyć ostateczny obiekt JSON.
 
 ### Python
 
@@ -631,10 +634,14 @@ curl -N -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
     }'
 ```
 
-## مُخرجات منظَّمة باستخدام الأدوات
+## Uporządkowane dane wyjściowe z narzędziami
 
-يتيح لك Gemini 3 الجمع بين "النتائج المنظَّمة" والأدوات المضمّنة، بما في ذلك
-[تحديد المصدر من خلال "بحث Search"](https://ai.google.dev/gemini-api/docs/google-search?hl=ar) و[سياق عناوين URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar) و[تطبيق الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar) و[البحث في الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar#structured-output) و[استدعاء الدالة](https://ai.google.dev/gemini-api/docs/function-calling?hl=ar).
+Gemini 3 umożliwia łączenie uporządkowanych danych wyjściowych z wbudowanymi narzędziami, takimi jak
+[powiązanie ze źródłami informacji przy użyciu wyszukiwarki Google](https://ai.google.dev/gemini-api/docs/google-search?hl=pl),
+[kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl),
+[wykonanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl),
+[File Search](https://ai.google.dev/gemini-api/docs/file-search?hl=pl#structured-output), i
+[wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl).
 
 ### Python
 
@@ -727,80 +734,80 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## التوافق مع مخطّط JSON
+## Obsługa schematu JSON
 
-لإنشاء عنصر JSON، اضبط `response_format` باستخدام عنصر (أو مصفوفة تحتوي على عنصر) من النوع `text` واضبط `mime_type` على `application/json`. يجب تقديم المخطط في الحقل `schema`.
+Aby wygenerować obiekt JSON, skonfiguruj `response_format` za pomocą obiektu (lub tablicy zawierającej obiekt) typu `text` i ustaw jego `mime_type` na `application/json`. Schemat należy podać w polu `schema`.
 
-يتوافق وضع الإخراج المنظَّم في Gemini مع مجموعة فرعية من مواصفات
-[مخطّط JSON](https://json-schema.org/).
+Tryb uporządkowanych danych wyjściowych Gemini obsługuje podzbiór specyfikacji
+[schematu JSON](https://json-schema.org/).
 
-في ما يلي القيم المسموح بها لـ `type`:
+Obsługiwane są te wartości `type`:
 
-- **`string`**: للنص
-- **`number`**: للأرقام ذات الفاصلة العائمة
-- ‫**`integer`**: للأعداد الصحيحة
-- **`boolean`**: للقيم الصحيحة أو الخاطئة
-- **`object`**: للبيانات المنظَّمة التي تتضمّن أزواجًا من المفاتيح والقيم
-- **`array`**: تُستخدَم مع قوائم العناصر.
-- **`null`**: للسماح بأن تكون قيمة السمة فارغة، أدرِج `"null"` في مصفوفة النوع (مثل `{"type": ["string", "null"]}`).
+- **`string`**: w przypadku tekstu.
+- **`number`**: w przypadku liczb zmiennoprzecinkowych.
+- **`integer`**: w przypadku liczb całkowitych.
+- **`boolean`**: w przypadku wartości true lub false.
+- **`object`**: w przypadku uporządkowanych danych z parami klucz-wartość.
+- **`array`**: w przypadku list elementów.
+- **`null`**: aby zezwolić na wartość null właściwości, dodaj `"null"` do tablicy typów (np. `{"type": ["string", "null"]}`).
 
-تساعد هذه الخصائص الوصفية في توجيه النموذج:
+Te właściwości opisowe pomagają modelowi:
 
-- **`title`**: وصف مختصر لسمة.
-- ‫**`description`**: وصف أطول وأكثر تفصيلاً للمكان المخصّص للاستئجار
+- **`title`**: krótki opis właściwości.
+- **`description`**: dłuższy i bardziej szczegółowy opis właściwości.
 
-### السمات الخاصة بأنواع محدّدة
+### Właściwości specyficzne dla typu
 
-**بالنسبة إلى قيم `object`:**
+**W przypadku wartości `object`:**
 
-- **`properties`**: عنصر يكون فيه كل مفتاح اسم خاصية وكل قيمة مخططًا لهذه الخاصية.
-- استبدِل **`required`** بمصفوفة من السلاسل التي تسرد السمات الإلزامية.
-- ‫**`additionalProperties`**: يتحكّم هذا الحقل في ما إذا كان مسموحًا بالسمات غير المدرَجة في `properties`. يمكن أن تكون قيمة منطقية أو مخططًا.
+- **`properties`**: obiekt, w którym każdy klucz jest nazwą właściwości, a każda wartość jest schematem tej właściwości.
+- **`required`**: tablica ciągów znaków, która zawiera listę właściwości obowiązkowych.
+- **`additionalProperties`**: określa, czy właściwości nieuwzględnione w `properties` są dozwolone. Może to być wartość logiczna lub schemat.
 
-**بالنسبة إلى قيم `string`:**
+**W przypadku wartości `string`:**
 
-- **`enum`**: تعرض هذه السمة مجموعة محدّدة من السلاسل المحتملة لمهام التصنيف.
-- **`format`**: تحدّد هذه السمة بنية السلسلة، مثل `date-time` أو `date` أو `time`.
+- **`enum`**: zawiera listę konkretnych możliwych ciągów znaków w przypadku zadań klasyfikacji.
+- **`format`**: określa składnię ciągu znaków, np. `date-time`, `date`, `time`.
 
-**بالنسبة إلى القيمتَين `number` و`integer`:**
+**W przypadku wartości `number` i `integer`:**
 
-- **`enum`**: تعرض مجموعة معيّنة من القيم الرقمية المحتملة.
-- ‫**`minimum`**: تمثّل الحد الأدنى للقيمة الشاملة.
-- ‫**`maximum`**: تمثّل الحدّ الأقصى للقيمة الشاملة.
+- **`enum`**: zawiera listę konkretnych możliwych wartości liczbowych.
+- **`minimum`**: minimalna wartość włącznie.
+- **`maximum`**: maksymalna wartość włącznie.
 
-**بالنسبة إلى قيم `array`:**
+**W przypadku wartości `array` values:**
 
-- ‫**`items`**: تحدّد هذه السمة المخطط لجميع العناصر في المصفوفة.
-- ‫**`prefixItems`**: تحدّد هذه الكلمة الرئيسية قائمة بمخططات أول N عناصر، ما يسمح بإنشاء بنى تشبه الصفوف.
-- ‫**`minItems`**: الحد الأدنى لعدد العناصر في المصفوفة
-- ‫**`maxItems`**: الحد الأقصى لعدد العناصر في المصفوفة
+- **`items`**: określa schemat wszystkich elementów w tablicy.
+- **`prefixItems`**: określa listę schematów dla pierwszych N elementów, co umożliwia tworzenie struktur podobnych do krotek.
+- **`minItems`**: minimalna liczba elementów w tablicy.
+- **`maxItems`**: maksymalna liczba elementów w tablicy.
 
-## المخرجات المنظَّمة مقابل استدعاء الدوال
+## Uporządkowane dane wyjściowe a wywoływanie funkcji
 
-| الميزة | حالة الاستخدام الأساسية |
+| Funkcja | Główny przypadek użycia |
 | --- | --- |
-| **المُخرجات المنظَّمة** | **تنسيق الردّ النهائي:** يجب استخدام هذه السمة عندما تريد أن تكون *إجابة* النموذج بتنسيق معيّن. |
-| **استدعاء الدوال** | **اتّخاذ إجراء أثناء المحادثة** يُستخدَم عندما يحتاج النموذج إلى *أن يطلب منك* تنفيذ مهمة قبل تقديم إجابة نهائية. |
+| **Uporządkowane dane wyjściowe** | **Formatowanie ostatecznej odpowiedzi.** Używaj, gdy chcesz, aby *odpowiedź* modelu miała określony format. |
+| **Wywoływanie funkcji** | **Podejmowanie działań podczas rozmowy.** Używaj, gdy model musi *poprosić Cię* o wykonanie zadania przed udzieleniem ostatecznej odpowiedzi. |
 
-## أفضل الممارسات
+## Sprawdzone metody
 
-- **أوصاف واضحة:** استخدِم الحقل `description` لتوجيه النموذج.
-- **الكتابة القوية:** استخدِم أنواعًا محدّدة (`integer` و`string` و`enum`).
-- **هندسة الطلبات:** حدِّد بوضوح ما تريد أن يفعله النموذج.
-- **التحقّق من الصحة:** على الرغم من أنّ الناتج هو JSON صحيح من الناحية النحوية، يجب دائمًا التحقّق من صحة القيم في تطبيقك.
-- **معالجة الأخطاء:** اتّخِذ إجراءات فعالة لمعالجة الأخطاء في النتائج التي تتوافق مع المخطط ولكنها غير صحيحة دلاليًا.
+- **Jasne opisy:** używaj pola `description`, aby kierować modelem.
+- **Ścisłe typowanie:** używaj konkretnych typów (`integer`, `string`, `enum`).
+- **Inżynieria promptów:** jasno określ, co ma zrobić model.
+- **Weryfikacja:** chociaż dane wyjściowe są syntaktycznie poprawnym kodem JSON, zawsze sprawdzaj wartości w swojej aplikacji.
+- **Obsługa błędów:** zaimplementuj niezawodną obsługę błędów w przypadku danych wyjściowych zgodnych ze schematem, ale niepoprawnych semantycznie.
 
-## القيود
+## Ograniczenia
 
-- **مجموعة فرعية من المخطط:** لا تتوفّر جميع ميزات JSON Schema.
-- **تعقيد المخطط:** قد يتم رفض المخططات الكبيرة جدًا أو المتداخلة بشكل كبير.
+- **Podzbiór schematu:** nie wszystkie funkcje schematu JSON są obsługiwane.
+- **Złożoność schematu:** bardzo duże lub głęboko zagnieżdżone schematy mogą zostać odrzucone.
 
-إرسال ملاحظات
+Prześlij opinię
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Chcesz przekazać coś jeszcze?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

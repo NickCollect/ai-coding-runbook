@@ -1,41 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=pt-BR
-fetched_at: 2026-08-03T04:40:44.547218+00:00
-title: "API Gemini Developer x plataforma de agentes do Gemini Enterprise \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/migrate-to-cloud?hl=ko
+fetched_at: 2026-08-10T03:15:34.332209+00:00
+title: "Gemini Developer API\uc640 Gemini Enterprise Agent Platform \ube44\uad50 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-A [API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pt-br) já está disponível para todos os usuários. Recomendamos usar essa API para acessar todos os recursos e modelos mais recentes.
+이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pt-br)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
 
-O Google usa tecnologia de IA na tradução de conteúdos para seu idioma de preferência. As traduções com IA podem ter erros.
+Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
 
-- [Página inicial](https://ai.google.dev/?hl=pt-br)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pt-br)
-- [Documentos](https://ai.google.dev/gemini-api/docs?hl=pt-br)
+- [홈](https://ai.google.dev/?hl=ko)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
+- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
 
-Envie comentários
+의견 보내기
 
-# API Gemini Developer x plataforma de agentes do Gemini Enterprise
+# Gemini Developer API와 Gemini Enterprise Agent Platform 비교
 
-Ao desenvolver soluções de IA generativa com o Gemini, o Google oferece dois produtos de API: a [API Gemini Developer](https://ai.google.dev/gemini-api/docs?hl=pt-br) e a [API Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=pt-br).
+Gemini로 생성형 AI 솔루션을 개발할 때 Google에서는 [Gemini Developer API](https://ai.google.dev/gemini-api/docs?hl=ko)와 [Gemini Enterprise Agent Platform API](https://cloud.google.com/gemini-enterprise-agent-platform/overview?hl=ko)라는 두 가지 API 제품을 제공합니다.
 
-A API Gemini Developer oferece o caminho mais rápido para criar, produzir e dimensionar aplicativos com tecnologia do Gemini. A maioria dos desenvolvedores deve usar a API Gemini Developer, a menos que haja necessidade de controles empresariais específicos.
+Gemini Developer API는 Gemini 기반 애플리케이션을 빌드, 프로덕션화, 확장하는 가장 빠른 방법을 제공합니다. 특정 엔터프라이즈 컨트롤이 필요한 경우가 아니라면 대부분의 개발자는 Gemini 개발자 API를 사용해야 합니다.
 
-A plataforma de agentes do Gemini Enterprise oferece um ecossistema abrangente de recursos e serviços prontos para empresas
-para criar e implantar aplicativos de IA generativa com tecnologia do Google Cloud Platform.
+Gemini Enterprise Agent Platform은 Google Cloud Platform에서 지원하는 생성형 AI 애플리케이션을 빌드하고 배포하기 위한 엔터프라이즈 지원 기능 및 서비스의 포괄적인 생태계를 제공합니다.
 
-Recentemente, simplificamos a migração entre esses serviços. Agora, a API Gemini Developer e a API Gemini Enterprise Agent Platform podem ser acessadas pelo [SDK de IA Generativa do Google](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) unificado.
+최근 이러한 서비스 간의 마이그레이션이 간소화되었습니다. 이제 통합된 [Google 생성형 AI SDK](https://ai.google.dev/gemini-api/docs/libraries?hl=ko)를 통해 Gemini Developer API와 Gemini Enterprise Agent Platform API에 모두 액세스할 수 있습니다.
 
-## Comparação de código
+## 코드 비교
 
-Esta página tem comparações de código lado a lado entre os guias de início rápido da API Gemini Developer e da plataforma de agentes do Gemini Enterprise para geração de texto.
+이 페이지에는 텍스트 생성을 위한 Gemini Developer API와 Gemini Enterprise Agent Platform 빠른 시작의 코드 비교가 나란히 표시되어 있습니다.
 
 ### Python
 
-Você pode acessar a API Gemini Developer e os serviços da plataforma de agentes do Gemini Enterprise usando a biblioteca `google-genai`. Consulte a página [Bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) para instruções sobre como instalar `google-genai`.
+`google-genai` 라이브러리를 통해 Gemini Developer API와 Gemini Enterprise Agent Platform 서비스에 모두 액세스할 수 있습니다. `google-genai` 설치 방법에 대한 안내는 [라이브러리](https://ai.google.dev/gemini-api/docs/libraries?hl=ko) 페이지를 참고하세요.
 
-### API Gemini Developer
+### Gemini Developer API
 
 ```
 from google import genai
@@ -48,7 +47,7 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### API Gemini Enterprise Agent Platform
+### Gemini Enterprise Agent Platform API
 
 ```
 from google import genai
@@ -63,12 +62,11 @@ response = client.models.generate_content(
 print(response.text)
 ```
 
-### JavaScript e TypeScript
+### JavaScript 및 TypeScript
 
-Você pode acessar os serviços da API Gemini Developer e da plataforma de agentes do Gemini Enterprise usando a biblioteca `@google/genai`. Consulte a página [bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) para instruções sobre como
-instalar `@google/genai`.
+`@google/genai` 라이브러리를 통해 Gemini Developer API와 Gemini Enterprise Agent Platform 서비스에 모두 액세스할 수 있습니다. `@google/genai` 설치 방법에 대한 안내는 [라이브러리](https://ai.google.dev/gemini-api/docs/libraries?hl=ko) 페이지를 참고하세요.
 
-### API Gemini Developer
+### Gemini Developer API
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -86,7 +84,7 @@ async function main() {
 main();
 ```
 
-### API Gemini Enterprise Agent Platform
+### Gemini Enterprise Agent Platform API
 
 ```
 import { GoogleGenAI } from '@google/genai';
@@ -109,10 +107,9 @@ main();
 
 ### Go
 
-Você pode acessar os serviços da API Gemini Developer e da plataforma de agentes do Gemini Enterprise usando a biblioteca `google.golang.org/genai`. Consulte a página [bibliotecas](https://ai.google.dev/gemini-api/docs/libraries?hl=pt-br) para instruções sobre como
-instalar `google.golang.org/genai`.
+`google.golang.org/genai` 라이브러리를 통해 Gemini Developer API와 Gemini Enterprise Agent Platform 서비스에 모두 액세스할 수 있습니다. `google.golang.org/genai` 설치 방법에 대한 안내는 [라이브러리](https://ai.google.dev/gemini-api/docs/libraries?hl=ko) 페이지를 참고하세요.
 
-### API Gemini Developer
+### Gemini Developer API
 
 ```
 import (
@@ -139,7 +136,7 @@ func main() {
 }
 ```
 
-### API Gemini Enterprise Agent Platform
+### Gemini Enterprise Agent Platform API
 
 ```
 import (
@@ -171,43 +168,41 @@ func main() {
 }
 ```
 
-### Outros casos de uso e plataformas
+### 기타 사용 사례 및 플랫폼
 
-Consulte os guias específicos de casos de uso na [documentação da API Gemini Developer](https://ai.google.dev/gemini-api/docs?hl=pt-br) e na [documentação da plataforma de agentes do Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=pt-br) para outras plataformas e casos de uso.
+다른 플랫폼 및 사용 사례는 [Gemini 개발자 API 문서](https://ai.google.dev/gemini-api/docs?hl=ko) 및 [Gemini Enterprise Agent Platform 문서](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=ko)의 사용 사례별 가이드를 참고하세요.
 
-## Considerações sobre a migração
+## 마이그레이션 고려사항
 
-Ao migrar:
+마이그레이션 시 다음 사항에 유의하세요.
 
-- Você precisa usar contas de serviço do Google Cloud para autenticar. Consulte a [documentação da plataforma de agentes do Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=pt-br) para mais informações.
-- É possível usar seu projeto atual do Google Cloud (o mesmo usado para gerar a chave de API) ou [criar um novo projeto do Google Cloud](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=pt-br).
-- As regiões compatíveis podem ser diferentes entre a API Gemini Developer e a API da plataforma de agentes do Gemini Enterprise. Confira a lista de
-  [regiões compatíveis com IA generativa no Google Cloud](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=pt-br).
-- Todos os modelos criados no Google AI Studio precisam ser treinados novamente na plataforma de agentes do Gemini Enterprise.
+- 인증하려면 Google Cloud 서비스 계정을 사용해야 합니다. 자세한 내용은 [Gemini Enterprise Agent Platform 문서](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/overview?hl=ko)를 참고하세요.
+- 기존 Google Cloud 프로젝트(API 키를 생성하는 데 사용한 동일한 프로젝트)를 사용하거나 [새 Google Cloud 프로젝트를 만들](https://cloud.google.com/resource-manager/docs/creating-managing-projects?hl=ko) 수 있습니다.
+- 지원되는 리전은 Gemini Developer API와 Gemini Enterprise Agent Platform API 간에 다를 수 있습니다. [Google Cloud의 생성형 AI가 지원되는 리전](https://cloud.google.com/gemini-enterprise-agent-platform/generative-ai/docs/learn/locations-genai?hl=ko) 목록을 참고하세요.
+- Google AI Studio에서 만든 모든 모델은 Gemini Enterprise Agent Platform에서 재학습을 거쳐야 합니다.
 
-Se você não precisar mais usar sua chave de API Gemini para a API Gemini Developer,
-siga as práticas recomendadas de segurança e exclua a chave.
+Gemini Developer API에 Gemini API 키를 더 이상 사용할 필요가 없으면 보안 권장사항에 따라 삭제합니다.
 
-Para excluir uma chave de API:
+API 키를 삭제하는 방법은 다음과 같습니다.
 
-1. Abra a página
-   [Credenciais da API Google Cloud](https://console.cloud.google.com/apis/credentials?hl=pt-br).
-2. Encontre a chave de API que você quer excluir e clique no ícone **Ações**.
-3. Selecione **Excluir chave de API**.
-4. No modal **Excluir credencial**, selecione **Excluir**.
+1. [Google Cloud API 사용자 인증 정보](https://console.cloud.google.com/apis/credentials?hl=ko) 페이지를 엽니다.
+2. 삭제할 API 키를 찾아 **작업** 아이콘을 클릭합니다.
+3. **API 키 삭제**를 선택합니다.
+4. **사용자 인증 정보 삭제** 모달에서 **삭제**를 선택합니다.
 
-   A remoção de uma chave de API leva alguns minutos para ser propagada. Após o término da propagação, todo tráfego que usar a chave de API excluída será recusado.
+   API 키 삭제가 반영되기까지 몇 분 정도 걸립니다. 키 삭제가
+   완료되면, 삭제된 API 키를 사용하는 모든 트래픽이 거부됩니다.
 
-## Próximas etapas
+## 다음 단계
 
-- Confira a [visão geral da IA generativa na plataforma de agentes do Gemini Enterprise](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=pt-br) para saber mais sobre as soluções de IA generativa nessa plataforma.
+- Gemini Enterprise Agent Platform의 생성형 AI 솔루션에 대해 자세히 알아보려면 [Gemini Enterprise Agent Platform의 생성형 AI 개요](https://docs.cloud.google.com/gemini-enterprise-agent-platform/overview?hl=ko)를 참고하세요.
 
-Envie comentários
+의견 보내기
 
-Exceto em caso de indicação contrária, o conteúdo desta página é licenciado de acordo com a [Licença de atribuição 4.0 do Creative Commons](https://creativecommons.org/licenses/by/4.0/), e as amostras de código são licenciadas de acordo com a [Licença Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para mais detalhes, consulte as [políticas do site do Google Developers](https://developers.google.com/site-policies?hl=pt-br). Java é uma marca registrada da Oracle e/ou afiliadas.
+달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
 
-Última atualização 2026-06-22 UTC.
+최종 업데이트: 2026-06-22(UTC)
 
-Quer enviar seu feedback?
+의견을 전달하고 싶나요?
 
-[[["Fácil de entender","easyToUnderstand","thumb-up"],["Meu problema foi resolvido","solvedMyProblem","thumb-up"],["Outro","otherUp","thumb-up"]],[["Não contém as informações de que eu preciso","missingTheInformationINeed","thumb-down"],["Muito complicado / etapas demais","tooComplicatedTooManySteps","thumb-down"],["Desatualizado","outOfDate","thumb-down"],["Problema na tradução","translationIssue","thumb-down"],["Problema com as amostras / o código","samplesCodeIssue","thumb-down"],["Outro","otherDown","thumb-down"]],["Última atualização 2026-06-22 UTC."],[],[]]
+[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-06-22(UTC)"],[],[]]

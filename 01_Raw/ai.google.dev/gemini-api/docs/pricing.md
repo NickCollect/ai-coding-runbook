@@ -1,1132 +1,1188 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=tr
-fetched_at: 2026-08-03T04:31:54.753007+00:00
-title: "Gemini Developer API fiyatland\u0131rmas\u0131 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/pricing?hl=ar
+fetched_at: 2026-08-10T03:14:05.686855+00:00
+title: "\u0623\u0633\u0639\u0627\u0631 Gemini Developer API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
+- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
 
-# Gemini Developer API fiyatlandırması
+# أسعار Gemini Developer API
 
-Cömert sınırlamalarla ücretsiz olarak geliştirmeye başlayın, ardından üretime hazır uygulamalarınız için ön ödemeli ve kullandıkça öde fiyatlandırmasıyla ölçeğinizi artırın.
+يمكنك البدء في إنشاء التطبيقات مجانًا مع حدود سخية، ثم توسيع نطاقها باستخدام
+الأسعار المدفوعة مسبقًا ثم الأسعار حسب الاستخدام لتطبيقاتك الجاهزة للإنتاج.
 
-### Ücretsiz
+### مجانًا
 
-Gemini API'yi kullanmaya başlayan geliştiriciler ve küçük projeler için.
+هذه الحزمة مخصّصة للمطوّرين والمشروعات الصغيرة التي تريد بدء استخدام Gemini API.
 
-- check\_circleBelirli modellere sınırlı erişim
-- check\_circleÜcretsiz giriş ve çıkış jetonları
-- check\_circleGoogle AI Studio erişimi
-- check\_circleÜrünlerimizi iyileştirmek için kullanılan içerikler[\*](https://ai.google.dev/gemini-api/terms?hl=tr)
+- check\_circleإمكانية وصول محدودة إلى نماذج معيّنة
+- check\_circleرموز مميّزة مجانية للإدخال والإخراج
+- check\_circleإمكانية الوصول إلى Google AI Studio
+- check\_circleالمحتوى المستخدَم لتحسين منتجاتنا[\*](https://ai.google.dev/gemini-api/terms?hl=ar)
 
-[Ücretsiz kullanmaya başlayın](https://aistudio.google.com?hl=tr)
+[تجربة مجانية](https://aistudio.google.com?hl=ar)
 
-### Ücretli
+### مدفوع
 
-Daha yüksek hacimler ve ileri seviye özellikler gerektiren üretim uygulamaları için.
+للتطبيقات المتاحة للجميع والتي تتطلّب أحجامًا أكبر وميزات متقدّمة
 
-- check\_circleÜretim dağıtımları için daha yüksek sıklık sınırları
-- check\_circleBağlamı önbelleğe alma özelliğine erişim
-- check\_circleToplu API (%50 maliyet düşüşü)
-- check\_circleGoogle'ın en gelişmiş modellerine erişim
-- check\_circleİçerik, ürünlerimizi iyileştirmek için **kullanılmaz**[\*](https://ai.google.dev/gemini-api/terms?hl=tr)
+- check\_circleسقف أعلى للاستخدام في عمليات النشر في مرحلة الإنتاج
+- check\_circleالوصول إلى التخزين المؤقت للسياق
+- check\_circleواجهة برمجة التطبيقات المجمّعة (تخفيض التكلفة بنسبة% 50)
+- check\_circleالوصول إلى نماذج Google الأكثر تقدّمًا
+- check\_circleالمحتوى **غير** مستخدَم لتحسين منتجاتنا[\*](https://ai.google.dev/gemini-api/terms?hl=ar)
 
-[Hesabı ücretli sürüme yükseltme](https://aistudio.google.com/api-keys?hl=tr)
+[الترقية إلى حساب مدفوع](https://aistudio.google.com/api-keys?hl=ar)
 
-### Kurumsal
+### للمؤسسات
 
-Güvenlik, destek ve uygunluk konusunda özel ihtiyaçları olan büyük ölçekli dağıtımlar için [Gemini Enterprise Agent Platform](https://cloud.google.com/gemini-enterprise-agent-platform?hl=tr) tarafından desteklenir.
+عمليات نشر واسعة النطاق مع احتياجات مخصّصة للأمان والدعم والامتثال، تستند إلى [منصة وكيل Gemini Enterprise](https://cloud.google.com/gemini-enterprise-agent-platform?hl=ar)
 
-- check\_circleÜcretli plandaki tüm özelliklere ek olarak aşağıdakilere isteğe bağlı erişim:
-- check\_circleÖzel destek kanalları
-- check\_circleGelişmiş güvenlik ve uygunluk
-- check\_circleTemel hazırlığı yapılmış işleme hızı
-- check\_circleHacme dayalı indirimler (kullanıma göre)
-- check\_circleMLOps, Model Garden ve daha fazlası
+- check\_circleجميع الميزات في الإصدار المدفوع، بالإضافة إلى إمكانية الوصول الاختياري إلى:
+- check\_circleقنوات الدعم المخصّصة
+- check\_circleالأمان والامتثال المتقدّمان
+- check\_circleسرعة معالجة البيانات المتوفّرة
+- check\_circleخصومات مستندة إلى الحجم (استنادًا إلى الاستخدام)
+- check\_circleعمليات تعلّم الآلة وModel Garden والمزيد
 
-[Satış Ekibiyle İletişime Geçin](https://cloud.google.com/contact?hl=tr)
+[التواصل مع فريق المبيعات](https://cloud.google.com/contact?hl=ar)
 
 ## Gemini 3.6 Flash
 
 *`gemini-3.6-flash`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-3.6-flash&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-3.6-flash&hl=ar)
 
-Hız için tasarlanmış en akıllı modelimiz. Yeni nesil zekayı üstün arama ve temellendirme özellikleriyle birleştirir.
+نموذجنا الأكثر ذكاءً والمصمَّم للعمل بسرعة، إذ يجمع بين الذكاء المتقدّم
+والبحث والتأسيس الفائقَين.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 1,50 ABD doları |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 7,50 TL |
-| Bağlamı önbelleğe alma fiyatı | Ücretsiz | Saatlik 0,15 ABD doları 1,00 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫1.50 دولار أمريكي |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $7.50 |
+| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.15 دولار أمريكي 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,75 ABD doları |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 3,75 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.075 $1.00 / 1.000.000 jeton başına saat (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫3.75 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.075 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,75 ABD doları |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 3,75 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.075 $1.00 / 1.000.000 jeton başına saat (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫3.75 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.075 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 2,70 ABD doları |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 13,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Ücretsiz | $0.27 $1.00 / 1.000.000 jeton başına saat (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫2.70 دولار أمريكي |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $13.50 |
+| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.27 $1.00 / 1,000,000 رمز مميّز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Müşteriler tarafından Gemini'a gönderilen istekler, Google Arama'ya bir veya daha fazla sorgu gönderilmesine neden olabilir. Yapılan her bir arama sorgusu için sizden ödeme alınır.
+\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
 
 ## Gemini 3.5 Flash
 
 *`gemini-3.5-flash`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-3.5-flash&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-3.5-flash&hl=ar)
 
-Hız için tasarlanmış en akıllı modelimiz. Yeni nesil zekayı üstün arama ve temellendirme özellikleriyle birleştirir.
+نموذجنا الأكثر ذكاءً والمصمَّم للعمل بسرعة، إذ يجمع بين الذكاء المتقدّم
+والبحث والتأسيس الفائقَين.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 1,50 ABD doları |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 9 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Ücretsiz | Saatlik 0,15 ABD doları 1,00 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫1.50 دولار أمريكي |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 9.00 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.15 دولار أمريكي 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,75 ABD doları |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 4,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.075 $1.00 / 1.000.000 jeton başına saat (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫4.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.075 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,75 ABD doları |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 4,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.08 $1.00 / 1.000.000 jeton başına saat (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫4.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.08 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 2,70 ABD doları |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 16,20 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Ücretsiz | $0.27 $1.00 / 1.000.000 jeton başına saat (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫2.70 دولار أمريكي |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $16.20 |
+| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.27 $1.00 / 1,000,000 رمز مميّز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Müşteriler tarafından Gemini'a gönderilen istekler, Google Arama'ya bir veya daha fazla sorgu gönderilmesine neden olabilir. Yapılan her bir arama sorgusu için sizden ödeme alınır.
+\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
 
-## Gemini 3.5 Live Translate
+## ‫Gemini 3.5 Live Translate
 
 *`gemini-3.5-live-translate-preview`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-live-translate-preview&hl=ar)
 
-70'ten fazla dili destekleyen, düşük gecikme süreli ve anında konuşmadan konuşmaya çeviri modelimiz.
+نموذج ترجمة الكلام في الوقت الفعلي وبزمن استجابة منخفض، ويتوافق مع أكثر من 70 لغة.
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 3,50 ABD doları veya 0,0053 ABD doları/dakika\* (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 21,00 ABD doları veya 0,0315 ABD doları/dakika\* (ses) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫3.50 دولار أمريكي أو 0.0053 دولار أمريكي في الدقيقة\* (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫21.00 دولار أمريكي أو 0.0315 دولار أمريكي/دقيقة\* (صوت) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Faturalandırma, toplam giriş ve çıkış ses jetonu tüketimine göre yapılır.Saniyede 25 jeton hızında hesaplanır ve dakikada yaklaşık 0, 0368 ABD doları efektif fiyata karşılık gelir.
+\* تستند الفوترة إلى إجمالي استهلاك الرموز الصوتية المدخلة والمخرجة، ويتم احتسابها بمعدل 25 رمزًا صوتيًا في الثانية الواحدة من الصوت، ما يعادل سعرًا فعليًا يبلغ حوالي 0.0368 دولار أمريكي في الدقيقة.
 
 ## Gemini 3.5 Flash-Lite
 
 *`gemini-3.5-flash-lite`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.5-flash-lite&hl=ar)
 
-Yüksek hacimli temsilci görevleri, çeviri ve basit veri işleme için optimize edilmiş, en uygun maliyetli GA modelimiz.
+هذا النموذج هو الأكثر فعالية من حيث التكلفة في GA، وهو محسّن لتنفيذ المهام التي تتطلب عددًا كبيرًا من الوكلاء، والترجمة، ومعالجة البيانات البسيطة.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,30 ABD doları (metin / resim / video / ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 2,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.03 $1.00 / 1.000.000 jeton başına saatlik (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | 0.30 دولار أمريكي (نص / صورة / فيديو / صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫2.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.03 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,15 ABD doları (metin / resim / video / ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 1,25 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | Saatlik 1.000.000 jeton başına 0,02 ABD doları 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.15 دولار أمريكي (نص أو صورة أو فيديو أو مقطع صوتي) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 1.25 دولارًا أمريكيًا (أو ما يعادلها بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.02 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,15 ABD doları (metin / resim / video / ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 1,25 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | Saatlik 1.000.000 jeton başına 0,02 ABD doları 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.15 دولار أمريكي (نص أو صورة أو فيديو أو مقطع صوتي) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 1.25 دولارًا أمريكيًا (أو ما يعادلها بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.02 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,54 ABD doları (metin / resim / video / ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 4,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.05 $1.00 / 1.000.000 jeton başına saatlik (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | $0.54 (نص / صورة / فيديو / صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫4.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.05 $1.00 / 1,000,000 رمز مميّز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Gemini 3.1 Flash-Lite
 
 *`gemini-3.1-flash-lite`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=ar)
 
-Yüksek hacimli ajan tabanlı görevler, çeviri ve basit veri işleme için optimize edilmiş, en uygun maliyetli modelimiz.
+هذا النموذج هو الأكثر فعالية من حيث التكلفة، وهو محسّن لتنفيذ المهام التي تتطلب عددًا كبيرًا من وكلاء الذكاء الاصطناعي والترجمة ومعالجة البيانات البسيطة.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,25 ABD doları (metin / resim / video) 0,50 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 1,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,025 ABD doları (metin/resim/video) 0,05 ABD doları (ses) Saat başına 1.000.000 jeton için 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.25 دولار أمريكي (نص / صورة / فيديو) 0.50 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫1.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.025 دولار أمريكي (نص/صورة/فيديو) ‫0.05 دولار أمريكي (صوت) ‫1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,125 ABD doları (metin / resim / video) 0,25 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 0,75 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,0125 ABD doları (metin / resim / video) 0,025 ABD doları (ses) Saat başına 0,50 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.125 دولار أمريكي (نص / صورة / فيديو) 0.25 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.0125 دولار أمريكي (نص/صورة/فيديو) 0.025 دولار أمريكي (صوت) 0.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,125 ABD doları (metin / resim / video) 0,25 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 0,75 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,0125 ABD doları (metin / resim / video) 0,025 ABD doları (ses) Saat başına 0,50 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.125 دولار أمريكي (نص / صورة / فيديو) 0.25 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 0.75 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.0125 دولار أمريكي (نص/صورة/فيديو) 0.025 دولار أمريكي (صوت) 0.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,45 ABD doları (metin / resim / video) 0,90 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 2,70 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,045 ABD doları (metin / resim / video) 0,09 ABD doları (ses) saatte 1,80 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.45 دولار أمريكي (نص أو صورة أو فيديو) 0.90 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫2.70 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.045 دولار أمريكي (نص / صورة / فيديو) ‫0.09 دولار أمريكي (صوت) ‫1.80 دولار أمريكي / مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Müşteriler tarafından Gemini'a gönderilen istekler, Google Arama'ya bir veya daha fazla sorgu gönderilmesine neden olabilir. Yapılan her bir arama sorgusu için sizden ödeme alınır.
+\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
 
-## Gemini Omni Flash Önizlemesi
+## معاينة Gemini Omni Flash
 
 *`gemini-omni-flash-preview`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-omni-flash-preview&hl=ar)
 
-Gemini API'nin ücretli katmanındaki geliştiricilerin kullanımına sunulan yeni nesil video üretme ve düzenleme modelimiz.
+جيلنا التالي من نماذج إنشاء الفيديوهات وتعديلها، وهو متاح للمطوّرين في المستوى المدفوع من Gemini API.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 1,50 ABD doları (metin / resim / video / ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 9,00 ABD doları (metin) 17,50 ABD doları (video)\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫1.50 دولار أمريكي (نص / صورة / فيديو / صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫9.00 دولار أمريكي (نص) ‫17.50 دولار أمريكي (فيديو)\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Faturalandırma, toplam çıkış jetonu tüketimine göre yapılır. Bu tüketim,720p çözünürlükteki videonun her saniyesi için 5.792 jeton oranıyla hesaplanır. Standart fiyatlandırma kapsamında bu, saniye başına yaklaşık 0,10 ABD doları efektif fiyata karşılık gelir.
+\* تستند الفوترة إلى إجمالي استهلاك الرموز المميزة للردّ، ويتم احتسابها بمعدل 5,792 رمزًا مميزًا في الثانية الواحدة من فيديو بدقة 720 بكسل. في إطار "الأسعار العادية"، يعادل ذلك سعرًا فعليًا يبلغ حوالي 0.10 دولار أمريكي في الثانية.
 
-## Gemini 3.1 Pro Önizlemesi
+## معاينة Gemini 3.1 Pro
 
-*`gemini-3.1-pro-preview` ve `gemini-3.1-pro-preview-customtools`*
+‫*`gemini-3.1-pro-preview` و`gemini-3.1-pro-preview-customtools`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-pro-preview&hl=ar)
 
-Çok modlu anlama, ajan tabanlı yetenekler ve sezgisel kodlama konusunda dünyanın en iyi model ailesinde yapılan en son performans, zeka ve kullanılabilirlik iyileştirmeleri.
+أحدث التحسينات على الأداء والذكاء وسهولة الاستخدام في أفضل سلسلة نماذج في العالم من حيث فهم المحتوى المتعدّد الوسائط وإمكانات بالذكاء الاصطناعي الوكيل والبرمجة الحدسية
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 2 ABD doları, istemler <= 200.000 jeton 4 ABD doları, istemler > 200.000 jeton |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 12 ABD doları, istemler <= 200 bin jeton 18 ABD doları, istemler > 200 bin |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 200.000 jetondan az istem: 0,20 ABD doları 200.000 jetondan fazla istem: 0,40 ABD doları Saat başına 1.000.000 jeton için 4,50 ABD doları (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫2.00 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫4.00 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫12.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫18.00 دولار أمريكي، الطلبات > 200 ألف |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.20 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫0.40 دولار أمريكي، الطلبات > 200 ألف رمز مميّز ‫4.50 دولار أمريكي لكل مليون رمز مميّز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 1 ABD doları, istemler <= 200.000 jeton 2 ABD doları, istemler > 200.000 jeton |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 6 ABD doları, istemler <= 200 bin jeton 9 ABD doları, istemler > 200 bin |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | *Standart ile aynı*  200.000 jetondan az istem için 0,20 ABD doları 200.000 jetondan fazla istem için 0,40 ABD doları Saatte 4,50 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫2.00 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫6.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫9.00 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | *مثل Standard*  0.20 دولار أمريكي، طلبات تتضمّن <= 200 ألف رمز مميز 0.40 دولار أمريكي، طلبات تتضمّن > 200 ألف رمز مميز 4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 1 ABD doları, istemler <= 200.000 jeton 2 ABD doları, istemler > 200.000 jeton |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 6 ABD doları, istemler <= 200 bin jeton 9 ABD doları, istemler > 200 bin |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | *Standart ile aynı*  200.000 jetondan az istem için 0,20 ABD doları 200.000 jetondan fazla istem için 0,40 ABD doları Saatte 4,50 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫2.00 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫6.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫9.00 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | *مثل Standard*  0.20 دولار أمريكي، طلبات تتضمّن <= 200 ألف رمز مميز 0.40 دولار أمريكي، طلبات تتضمّن > 200 ألف رمز مميز 4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 3,60 ABD doları, istemler <= 200.000 parça 7,20 ABD doları, istemler > 200.000 parça |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 21,60 ABD doları, istemler <= 200 bin parça 32,40 ABD doları, istemler > 200 bin |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,36 ABD doları, istemler <= 200.000 jeton 0,72 ABD doları, istemler > 200.000 Saat başına 8,10 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫3.60 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫7.20 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫21.60 دولار أمريكي، طلبات <= 200 ألف رمز مميّز ‫32.40 دولار أمريكي، طلبات > 200 ألف |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.36 دولار أمريكي، طلبات تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫0.72 دولار أمريكي، طلبات تتضمّن أكثر من 200 ألف رمز مميّز ‫8.10 دولار أمريكي لكل مليون رمز مميّز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Müşteriler tarafından Gemini'a gönderilen istekler, Google Arama'ya bir veya daha fazla sorgu gönderilmesine neden olabilir. Yapılan her bir arama sorgusu için sizden ödeme alınır.
+\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
 
-## Gemini 3.1 Flash Live Preview
+## معاينة مباشرة في Gemini 3.1 Flash
 
 *`gemini-3.1-flash-live-preview`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-live-preview&hl=ar)
 
-Akustik nüans algılama, sayısal hassasiyet ve çok formatlı farkındalık ile gerçek zamanlı diyalog için optimize edilmiş, düşük gecikmeli, ses-ses modelimiz.
+نموذجنا الصوتي الذي يتضمّن زمن انتقال منخفضًا والمحسّن للحوار في الوقت الفعلي مع رصد الفروق الدقيقة الصوتية والدقة الرقمية والوعي المتعدّد الوسائط.
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,75 ABD doları (metin) 3,00 ABD doları veya 0,005 ABD doları/dakika (ses) 1,00 ABD doları veya 0,002 ABD doları/dakika (resim/video) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 4,50 ABD doları (metin) 12,00 ABD doları veya 0,018 ABD doları/dakika (ses) |
-| Google Arama ile temellendirme\* | Destekleniyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.75 دولار أمريكي (نص) ‫3.00 دولار أمريكي أو 0.005 دولار أمريكي للدقيقة (صوت) ‫1.00 دولار أمريكي أو 0.002 دولار أمريكي للدقيقة (صورة/فيديو) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫4.50 دولار أمريكي (نص) ‫12.00 دولار أمريكي أو 0.018 دولار أمريكي/دقيقة (صوت) |
+| تحديد المصدر من خلال "بحث Google"\* | متاح | ‫5,000 طلب بحث مجاني شهريًا (يتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Müşteriler tarafından Gemini'a gönderilen istekler, Google Arama'ya bir veya daha fazla sorgu gönderilmesine neden olabilir. Yapılan her bir arama sorgusu için sizden ödeme alınır.
+\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
 
-## Gemini 3.1 Flash Görüntü (Nano Banana 2) 🍌
+## ‫Gemini 3.1 Flash Image (‫Nano Banana 2) 🍌
 
 *`gemini-3.1-flash-image`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-image&hl=ar)
 
-Hız ve verimlilik için tasarlanan Gemini 3.1 Flash görüntü üretme modeli, hızlı ve etkileşimli yanıtlar ile yüksek gönderim hacmi için etkilidir.
+تم تصميم نموذج إنشاء الصور Gemini 3.1 Flash ليكون سريعًا وفعّالاً، وهو مناسب للحصول على ردود تفاعلية سريعة ومعدّل أعلى لنقل البيانات.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,50 ABD doları (metin/resim) |
-| Çıkış fiyatı | Kullanılamıyor | 3 ABD doları (metin ve düşünme)  60 ABD doları (resimler)  0,5 bin resim başına 0,045 ABD dolarına eşdeğer\*  1 bin resim başına 0,067 ABD doları\*, 2 bin resim başına 0,101 ABD doları\*, ve 4 bin resim başına 0,151 ABD doları\*. |
-| Google Web ve Görsel Arama ile Temellendirme\*\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından metin ve resim tabanlı temellendirme için 1.000 arama sorgusu başına 14 ABD doları. |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.50 دولار أمريكي (نص/صورة) |
+| سعر المنتج | غير متوفر | ‫3 دولار أمريكي (النص والتفكير)  ‫60.00 دولار أمريكي (الصور)  أي ما يعادل 0.045 دولار أمريكي لكل صورة بدقة 0.5K\*  ‫0.067 دولار أمريكي لكل صورة بدقة 1K\*، ‫0.101 دولار أمريكي لكل صورة بدقة 2K\*، ‫0.151 دولار أمريكي لكل صورة بدقة 4K\* |
+| تحديد المصدر من خلال "بحث الويب من Google" و"بحث الصور من Google"\*\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث مستند إلى النص والصورة |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,25 ABD doları (metin, resim) |
-| Çıkış fiyatı | Kullanılamıyor | 1,50 ABD doları (metin ve düşünme)  30,00 ABD doları (resimler)  0,5 bin resim başına 0,022 ABD dolarına eşdeğer\*  1 bin resim başına 0,034 ABD doları\*,  2 bin resim başına 0,050 ABD doları\*,  ve 4 bin resim başına 0,076 ABD doları\*. |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.25 دولار أمريكي (نص وصورة) |
+| سعر المنتج | غير متوفر | ‫1.50 دولار أمريكي (النص والتفكير)  ‫30.00 دولار أمريكي (الصور)  أي ما يعادل 0.022 دولار أمريكي لكل صورة بدقة 0.5K\*  و0.034 دولار أمريكي لكل صورة بدقة 1K\*  و0.050 دولار أمريكي لكل صورة بدقة 2K\*  و0.076 دولار أمريكي لكل صورة بدقة 4K\*. |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Resim çıktısı, 1.000.000 jeton başına 60 ABD doları olarak fiyatlandırılır.
-0,5K (512 piksel) çözünürlükteki çıktı resimleri 747 jeton kullanır ve resim başına 0,045 ABD dolarına eşdeğerdir. 1K (1024x1024 piksel) çözünürlükteki çıkış resimleri 1.120 jeton kullanır ve resim başına 0,067 ABD dolarına eşittir. 2K (2048x2048 piksel) çözünürlükte çıkış resimleri 1.680 jeton tüketir ve resim başına 0,101 ABD dolarına eşittir. 4K (4096x4096 piksel) çözünürlükteki çıkış resimleri 2.520 jeton tüketir ve resim başına 0,151 ABD dolarına eşdeğerdir.
+\* يبلغ سعر مخرجات الصور 60 دولارًا أمريكيًا لكل مليون رمز مميّز.
+تستهلك الصور الناتجة بدقة 0.5K (512 بكسل) 747 رمزًا مميزًا، أي ما يعادل 0.045 دولار أمريكي لكل صورة. تستهلك الصور الناتجة بدقة 1K (1024x1024 بكسل) 1120 رمزًا مميزًا، وتساوي 0.067 دولار أمريكي لكل صورة. تستهلك الصور الناتجة بدقة 2K (2048x2048 بكسل) 1680 رمزًا مميزًا،
+وتساوي 0.101 دولار أمريكي لكل صورة. تستهلك صور الإخراج بدقة 4K (4096x4096 بكسل) 2520 رمزًا مميزًا، وتساوي 0.151 دولار أمريكي لكل صورة.
 
-\*\* Müşteriler tarafından Gemini'a gönderilen istekler, Google Arama'ya bir veya daha fazla sorgu gönderilmesine neden olabilir. Yapılan her bir arama sorgusu için sizden ödeme alınır. Google Arama ile Temellendirme tarafından sağlanan alınan bağlam (metin veya resimler) giriş jetonları olarak ücretlendirilmez.
+\*\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه. لا يتم تحصيل رسوم مقابل السياق الذي يتم استرجاعه (نص أو صور) والمقدَّم من خلال ميزة Grounding with Google Search، وذلك باعتباره رموزًا مميزة للإدخال.
 
-## Gemini 3.1 Flash Lite Görüntüsü (Nano Banana 2 Lite) 🍌
+## ‫Gemini 3.1 Flash Lite Image (Nano Banana 2 Lite) 🍌
 
 *`gemini-3.1-flash-lite-image`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite-image&hl=ar)
 
-Görüntü üretme ailesinin verimlilik uzmanı olarak tasarlanan Gemini 3.1 Flash Lite Image modeli, ultra düşük gecikme süresi ve uygun maliyetli görüntü üretme ve düzenleme için tasarlanmıştır.
+تم تصميم نموذج Gemini 3.1‎ Flash Lite Image ليكون متخصصًا في الكفاءة ضمن مجموعة نماذج إنشاء الصور، وهو يهدف إلى توفير وقت استجابة فائق السرعة وإنشاء الصور وتعديلها بطريقة فعالة من حيث التكلفة.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,25 ABD doları (metin/resim/video) |
-| Çıkış fiyatı | Kullanılamıyor | 1,50 ABD doları (metin ve düşünme)  30,00 ABD doları (resimler)  1.000 çözünürlüklü resim başına 0,0336 ABD dolarına eşdeğer\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.25 دولار أمريكي (نص/صورة/فيديو) |
+| سعر المنتج | غير متوفر | ‫1.50 دولار أمريكي (نص وتفكير)  ‫30.00 دولار أمريكي (صور)  أي ما يعادل 0.0336 دولار أمريكي لكل صورة بدقة 1000 بكسل\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,125 ABD doları (metin/resim/video) |
-| Çıkış fiyatı | Kullanılamıyor | 0,75 ABD doları (metin ve düşünme)  15,00 ABD doları (resimler)  1.000 çözünürlüklü resim başına 0,0168 ABD dolarına eşdeğerdir.\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.125 دولار أمريكي (نص/صورة/فيديو) |
+| سعر المنتج | غير متوفر | $0.75 (النص والتفكير)  $15.00 (الصور)  أي ما يعادل $0.0168 لكل صورة بدقة 1000 بكسل\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Görüntü çıktısının fiyatı 1.000.000 jeton başına 30 ABD dolarıdır. 1K (1024x1024 piksel) çözünürlükteki çıkış resimleri 1.120 jeton kullanır ve resim başına 0,0336 ABD dolarına eşittir.
+\* يبلغ سعر مخرجات الصور 30 دولارًا أمريكيًا لكل مليون رمز مميّز. تستهلك الصور الناتجة بدقة 1K (1024x1024 بكسل) 1120 رمزًا مميزًا، أي ما يعادل 0.0336 دولار أمريكي لكل صورة.
 
-## Gemini 3.1 Flash TTS Önizlemesi
+## معاينة ميزة "تحويل النص إلى كلام" في Gemini 3.1 Flash
 
 *`gemini-3.1-flash-tts-preview`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-tts-preview&hl=ar)
 
-Fiyat-performans, düşük gecikme süresi ve kontrol edilebilir konuşma üretimi için optimize edilmiş 3.1 Flash Text-to-Speech ses modelimiz.
+‫3.1 Flash Text-to-Speech هو نموذج صوتي لتحويل النص إلى كلام تم تحسينه لتقديم أداء جيد مقابل السعر،
+ووقت استجابة منخفض، وإمكانية التحكّم في إنشاء الكلام.
 
-Önizleme modelleri, kararlı hale gelmeden önce değişebilir ve daha kısıtlayıcı hız sınırlarına sahip olabilir.
+قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 1,00 TL (metin) |
-| Çıkış fiyatı | Ücretsiz | 20,00 TL (ses) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫$1.00 (نص) |
+| سعر المنتج | بدون أي تكلفة | ‫$20.00 (محتوى صوتي) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,50 ABD doları (metin) |
-| Çıkış fiyatı | Kullanılamıyor | 10,00 ABD doları (sesli) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.50 دولار أمريكي (نص) |
+| سعر المنتج | غير متوفر | ‫$10.00 (محتوى صوتي) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Ses jetonları, saniyede 25 jetona karşılık gelir.
+\* تتوافق الرموز المميزة الصوتية مع 25 رمزًا مميزًا لكل ثانية من الصوت.
 
-## Gemini 3 Flash Önizlemesi
+## معاينة Gemini 3 Flash
 
 *`gemini-3-flash-preview`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-3-flash-preview&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-3-flash-preview&hl=ar)
 
-Hız için tasarlanmış en akıllı modelimiz. Yeni nesil zekayı üstün arama ve temellendirme özellikleriyle birleştirir.
+نموذجنا الأكثر ذكاءً والمصمَّم للعمل بسرعة، إذ يجمع بين الذكاء المتقدّم
+والبحث والتأسيس الفائقَين.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,50 ABD doları (metin / resim / video) 1,00 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 3,00 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Ücretsiz | 0,05 ABD doları (metin/resim/video) 0,10 ABD doları (ses) Saat başına 1.000.000 jeton için 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.50 دولار أمريكي (نص / صورة / فيديو) 1.00 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $3,00 |
+| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.05 دولار أمريكي (نص/صورة/فيديو) 0.10 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميّز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,25 ABD doları (metin / resim / video) 0,50 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 1,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | *Standart ile aynı*  0,05 ABD doları (metin/resim/video)  0,10 ABD doları (ses)  saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.25 دولار أمريكي (نص / صورة / فيديو) 0.50 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫1.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | *السعر نفسه كما في Standard*  ‫0.05 دولار أمريكي (نص/صورة/فيديو)  ‫0.10 دولار أمريكي (صوت)  ‫1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,25 ABD doları (metin / resim / video) 0,50 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 1,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | *Standart ile aynı*  0,05 ABD doları (metin/resim/video)  0,10 ABD doları (ses)  saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istek (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.25 دولار أمريكي (نص / صورة / فيديو) 0.50 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫1.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | *السعر نفسه كما في Standard*  ‫0.05 دولار أمريكي (نص/صورة/فيديو)  ‫0.10 دولار أمريكي (صوت)  ‫1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب شهريًا (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,90 ABD doları (metin / resim / video) 1,80 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 5,40 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Ücretsiz | 0,09 ABD doları (metin/resim/video) 0,18 ABD doları (ses) saatte 1.800.000 jeton başına 1,80 ABD doları (depolama fiyatı) |
-| Google Arama ile temellendirme\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.90 دولار أمريكي (نص / صورة / فيديو) 1.80 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫5.40 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.09 دولار أمريكي (نص/صورة/فيديو) ‫0.18 دولار أمريكي (صوت) ‫1.80 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Google"\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫5,000 طلب في الشهر (مجانًا، تتم مشاركتها على Gemini 3)، ثم 14 دولار أمريكي لكل 1,000 طلب بحث |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Müşteriler tarafından Gemini'a gönderilen istekler, Google Arama'ya bir veya daha fazla sorgu gönderilmesine neden olabilir. Yapılan her bir arama sorgusu için sizden ödeme alınır.
+\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر إلى &quot;بحث Google&quot;. سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
 
-## Gemini 3 Pro Image (Nano Banana Pro) 🍌
+## صورة Gemini 3 Pro (‫Nano Banana Pro) 🍌
 
 *`gemini-3-pro-image`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3-pro-image&hl=ar)
 
-Hız, esneklik ve bağlamsal anlayış için optimize edilmiş yerel görüntü üretme modelimiz. **Metin girişi ve çıkışı**, [Gemini 3.1 Pro](#gemini-3.1-pro-preview) ile aynı şekilde fiyatlandırılır.
+نموذجنا الأصلي لإنشاء الصور، وهو نموذج محسّن من حيث السرعة والمرونة والفهم السياقي. يتم تسعير **إدخال النصوص وإخراجها** بالسعر نفسه الذي يتم به تسعير [Gemini 3.1 Pro](#gemini-3.1-pro-preview).
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 2,00 ABD doları (metin/resim),  resim başına 0,0011 ABD dolarına eşdeğerdir\* |
-| Çıkış fiyatı | Kullanılamıyor | 12,00 ABD doları (metin ve düşünce)  120,00 ABD doları (resimler)  1.000/2.000 resim başına 0,134 ABD dolarına\*\*  ve 4.000 resim başına 0,24 ABD dolarına\*\* eşdeğerdir. |
-| Google Arama ile Temellendirme\*\*\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫2.00 دولار أمريكي (نص/صورة)،  أي ما يعادل 0.0011 دولار أمريكي لكل صورة\* |
+| سعر المنتج | غير متوفر | ‫12.00 دولار أمريكي (نص وتفكير)  ‫120.00 دولار أمريكي (صور)  أي ما يعادل 0.134 دولار أمريكي لكل صورة بدقة 1000/2000 بكسل\*\*  و0.24 دولار أمريكي لكل صورة بدقة 4000 بكسل\*\* |
+| تحديد المصدر من خلال "بحث Google"\*\*\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 1,00 ABD doları (metin), 0,0006 ABD doları (resim)\* |
-| Çıkış fiyatı | Kullanılamıyor | 6,00 ABD doları (metin ve düşünme)  1.000/2.000 resim başına 0,067 ABD doları\*\*  4.000 resim başına 0,12 ABD doları\*\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي (نص)، ‫0.0006 دولار أمريكي (صورة)\* |
+| سعر المنتج | غير متوفر | ‫6.00 دولار أمريكي (النص والتفكير)  ‫0.067 دولار أمريكي لكل صورة بدقة 1000/2000 بكسل\*\*  ‫0.12 دولار أمريكي لكل صورة بدقة 4000 بكسل\*\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 1,00 ABD doları (metin), 0,0006 ABD doları (resim)\* |
-| Çıkış fiyatı | Kullanılamıyor | 6,00 ABD doları (metin ve düşünme)  1.000/2.000 resim başına 0,067 ABD doları\*\*  4.000 resim başına 0,12 ABD doları\*\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي (نص)، ‫0.0006 دولار أمريكي (صورة)\* |
+| سعر المنتج | غير متوفر | ‫6.00 دولار أمريكي (النص والتفكير)  ‫0.067 دولار أمريكي لكل صورة بدقة 1000/2000 بكسل\*\*  ‫0.12 دولار أمريكي لكل صورة بدقة 4000 بكسل\*\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 3,60 TL (metin/resim) |
-| Çıkış fiyatı | Kullanılamıyor | 21,60 ABD doları (metin ve düşünce)  216,00 ABD doları (resimler) |
-| Google Arama ile Temellendirme\*\*\* | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Gemini 3'te paylaşılır), ardından 1.000 arama sorgusu için 14 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫3.60 دولار أمريكي (نص/صورة) |
+| سعر المنتج | غير متوفر | ‫21.60 دولار أمريكي (النصوص والتفكير)  ‫216.00 دولار أمريكي (الصور) |
+| تحديد المصدر من خلال "بحث Google"\*\*\* | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-\* Görüntü girişi 560 jeton veya görüntü başına 0,0011 ABD doları olarak ayarlanır.
+\* تم ضبط إدخال الصور على 560 رمزًا مميزًا أو 0.0011 دولار أمريكي لكل صورة.
 
-\*\* Görüntü çıkışı, 1.000.000 jeton başına 120 ABD doları olarak fiyatlandırılır. 1024x1024 piksel (1K) ile 2048x2048 piksel (2K) arasındaki çıkış resimleri 1.120 jeton tüketir ve resim başına 0,134 ABD dolarına eşittir. 4096x4096 piksele (4K) kadar olan çıkış resimleri 2.000 jeton tüketir ve resim başına 0,24 ABD dolarına eş değerdir.
+\*\* تبلغ تكلفة إنتاج الصور 120 دولارًا أمريكيًا لكل مليون رمز مميّز. تستهلك الصور الناتجة التي تتراوح دقتها بين 1024×1024 بكسل (1K) و2048×2048 بكسل (2K) 1120 رمزًا مميزًا،
+وتساوي تكلفتها 0.134 دولار أمريكي لكل صورة. تستهلك الصور الناتجة التي تصل دقتها إلى 4096x4096 بكسل (4K) 2000 رمز مميز، وتبلغ تكلفتها 0.24 دولار أمريكي لكل صورة.
 
-\*\*\* Müşteriler tarafından Gemini'a gönderilen istekler, Google Arama'ya bir veya daha fazla sorgu gönderilmesine neden olabilir. Yapılan her bir arama sorgusu için sizden ödeme alınır.
+\*\*\* قد يؤدي الطلب الذي يرسله العميل إلى Gemini إلى إنشاء طلب بحث واحد أو أكثر في "بحث Google". سيتم تحصيل رسوم منك مقابل كل طلب بحث فردي يتم إجراؤه.
 
 ## Gemini 2.5 Pro
 
 *`gemini-2.5-pro`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-2.5-pro&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-pro&hl=ar)
 
-Kodlama ve karmaşık akıl yürütme görevlerinde üstün performans gösteren, son teknoloji ürünü çok amaçlı modelimiz.
+نموذجنا المتطوّر المتعدّد الأغراض الذي يتفوّق في الترميز ومهام الاستدلال المعقّدة.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 1,25 ABD doları, istemler <= 200 bin parça 2,50 ABD doları, istemler > 200 bin parça |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 10,00 ABD doları, istemler <= 200.000 jeton 15,00 ABD doları, istemler > 200.000 |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.125, istemler <= 200.000 jeton $0.25, istemler > 200.000 $4.50 / 1.000.000 jeton/saat (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | 10.000 RPD (ücretsiz), ardından 1.000 temellendirilmiş istem için 25 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫1.25 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫2.50 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫10.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫15.00 دولار أمريكي، الطلبات > 200 ألف |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.125 دولار أمريكي، الطلبات <= 200 ألف رمز مميز ‫0.25 دولار أمريكي، الطلبات > 200 ألف رمز مميز ‫4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫10,000 طلب في الدقيقة (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب أساسي |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,625 ABD doları, istemler <= 200 bin parça 1,25 ABD doları, istemler > 200 bin parça |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 5 ABD doları, istemler <= 200.000 jeton 7,50 ABD doları, istemler > 200.000 |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.125, istemler <= 200.000 jeton $0.25, istemler > 200.000 $4.50 / 1.000.000 jeton/saat (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.625 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫1.25 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫5.00 دولار أمريكي، الطلبات <= 200 ألف رمز ‫7.50 دولار أمريكي، الطلبات > 200 ألف |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.125 دولار أمريكي، الطلبات <= 200 ألف رمز مميز ‫0.25 دولار أمريكي، الطلبات > 200 ألف رمز مميز ‫4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,625 ABD doları, istemler <= 200 bin parça 1,25 ABD doları, istemler > 200 bin parça |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 5 ABD doları, istemler <= 200.000 jeton 7,50 ABD doları, istemler > 200.000 |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0.125, istemler <= 200.000 jeton $0.25, istemler > 200.000 $4.50 / 1.000.000 jeton/saat (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.625 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫1.25 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫5.00 دولار أمريكي، الطلبات <= 200 ألف رمز ‫7.50 دولار أمريكي، الطلبات > 200 ألف |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.125 دولار أمريكي، الطلبات <= 200 ألف رمز مميز ‫0.25 دولار أمريكي، الطلبات > 200 ألف رمز مميز ‫4.50 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 2,25 ABD doları, istemler <= 200 bin parça 4,50 ABD doları, istemler > 200 bin parça |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 18 ABD doları, istemler <= 200.000 jeton 27 ABD doları, istemler > 200.000 |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | $0,225, istemler <= 200.000 jeton $0,45, istemler > 200.000 Saat başına 8,10 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | 10.000 RPD (ücretsiz), ardından 1.000 temellendirilmiş istem için 25 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫2.25 دولار أمريكي، الطلبات التي تتضمّن أقل من أو يساوي 200 ألف رمز مميّز ‫4.50 دولار أمريكي، الطلبات التي تتضمّن أكثر من 200 ألف رمز مميّز |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫18.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميز ‫27.00 دولار أمريكي، الطلبات > 200 ألف |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.225 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز 0.45 دولار أمريكي، الطلبات > 200 ألف رمز مميّز 8.10 دولار أمريكي لكل مليون رمز مميّز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | ‫10,000 طلب في الدقيقة (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب أساسي |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Gemini 2.5 Flash
 
 *`gemini-2.5-flash`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-2.5-flash&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash&hl=ar)
 
-1 milyon parçalık bağlam penceresini destekleyen ve düşünme bütçeleri olan ilk karma akıl yürütme modelimiz.
+أول نموذج استدلال هجين لدينا يتيح قدرة استيعاب مليون رمز مميّز ويوفّر ميزانيات للتفكير.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,30 ABD doları (metin / resim / video) 1,00 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 2,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,03 ABD doları (metin/resim/video) 0,1 ABD doları (ses) saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | 500 RPD'ye kadar ücretsiz (Flash-Lite RPD ile paylaşılan sınır) | 1.500 RPD (ücretsiz, Flash-Lite RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | 500 RPD | 1.500 RPD (ücretsiz), ardından 25 ABD doları / 1.000 temellendirilmiş istem |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | $0.30 (نص / صورة / فيديو) $1.00 (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫2.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.03 دولار أمريكي (نص / صورة / فيديو) 0.1 دولار أمريكي (صوت) 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | بدون أي تكلفة، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash-Lite RPD) | ‫1,500 طلب في الدقيقة (مجانًا، الحدّ الأقصى مشترك مع Flash-Lite RPD)، ثم 35 دولار أمريكي لكل 1,000 طلب أساسي |
+| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,15 ABD doları (metin / resim / video) 0,50 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 1,25 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,03 ABD doları (metin/resim/video) 0,1 ABD doları (ses) saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz, Flash-Lite RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.15 دولار أمريكي (نص أو صورة أو فيديو) ‫0.50 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 1.25 دولارًا أمريكيًا (أو ما يعادلها بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.03 دولار أمريكي (نص / صورة / فيديو) 0.1 دولار أمريكي (صوت) 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجانًا، الحدّ الأقصى مشترك مع Flash-Lite RPD)، ثم 35 دولار أمريكي لكل 1,000 طلب أساسي |
+| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,15 ABD doları (metin / resim / video) 0,50 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 1,25 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,03 ABD doları (metin/resim/video) 0,1 ABD doları (ses) saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz, Flash-Lite RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.15 دولار أمريكي (نص أو صورة أو فيديو) ‫0.50 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 1.25 دولارًا أمريكيًا (أو ما يعادلها بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.03 دولار أمريكي (نص / صورة / فيديو) 0.1 دولار أمريكي (صوت) 1.00 دولار أمريكي / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجانًا، الحدّ الأقصى مشترك مع Flash-Lite RPD)، ثم 35 دولار أمريكي لكل 1,000 طلب أساسي |
+| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,54 ABD doları (metin / resim / video) 1,80 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 4,50 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,054 ABD doları (metin / resim / video) 0,18 ABD doları (ses) saatte 1,80 ABD doları / 1.000.000 jeton (depolama fiyatı) |
-| Google Arama ile Temellendirme | 500 RPD'ye kadar ücretsiz (Flash-Lite RPD ile paylaşılan sınır) | 1.500 RPD (ücretsiz, Flash-Lite RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | 500 RPD | 1.500 RPD (ücretsiz), ardından 25 ABD doları / 1.000 temellendirilmiş istem |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.54 دولار أمريكي (نص / صورة / فيديو) 1.80 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫4.50 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.054 دولار أمريكي (نص / صورة / فيديو) 0.18 دولار أمريكي (صوت) 1.80 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | بدون أي تكلفة، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash-Lite RPD) | ‫1,500 طلب في الدقيقة (مجانًا، الحدّ الأقصى مشترك مع Flash-Lite RPD)، ثم 35 دولار أمريكي لكل 1,000 طلب أساسي |
+| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Gemini 2.5 Flash-Lite
 
 *`gemini-2.5-flash-lite`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite&hl=ar)
 
-Büyük ölçekli kullanım için tasarlanan en küçük ve en uygun maliyetli modelimiz.
+هذا النموذج هو الأصغر والأكثر فعالية من حيث التكلفة، وهو مصمّم للاستخدام على نطاق واسع.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı (metin, resim, video) | Ücretsiz | 0,10 ABD doları (metin / resim / video) 0,30 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 0,40 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,01 ABD doları (metin/resim/video) 0,03 ABD doları (ses) saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | 500 RPD'ye kadar ücretsiz (Flash RPD ile paylaşılan sınır) | 1.500 RPD (ücretsiz, Flash RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | 500 RPD | 1.500 RPD (ücretsiz), ardından 25 ABD doları / 1.000 temellendirilmiş istem |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال (نص أو صورة أو فيديو) | بدون أي تكلفة | ‫0.10 دولار أمريكي (نص أو صورة أو فيديو) ‫0.30 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 0.40 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | بدون رسوم، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash RPD) | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
+| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı (metin, resim, video) | Kullanılamıyor | 0,05 ABD doları (metin / resim / video) 0,15 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 0,20 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,01 ABD doları (metin/resim/video) 0,03 ABD doları (ses) saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz, Flash RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال (نص أو صورة أو فيديو) | غير متوفر | ‫0.05 دولار أمريكي (نص أو صورة أو فيديو) ‫0.15 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
+| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı (metin, resim, video) | Kullanılamıyor | 0,05 ABD doları (metin / resim / video) 0,15 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 0,20 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,01 ABD doları (metin/resim/video) 0,03 ABD doları (ses) saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz, Flash RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال (نص أو صورة أو فيديو) | غير متوفر | ‫0.05 دولار أمريكي (نص أو صورة أو فيديو) ‫0.15 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
+| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı (metin, resim, video) | Ücretsiz | 0,18 ABD doları (metin / resim / video) 0,54 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 0,72 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,018 ABD doları (metin/resim/video) 0,054 ABD doları (ses) saatte 1.000.000 jeton başına 1,80 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | 500 RPD'ye kadar ücretsiz (Flash RPD ile paylaşılan sınır) | 1.500 RPD (ücretsiz, Flash RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | 500 RPD | 1.500 RPD (ücretsiz), ardından 25 ABD doları / 1.000 temellendirilmiş istem |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال (نص أو صورة أو فيديو) | بدون أي تكلفة | ‫0.18 دولار أمريكي (نص أو صورة أو فيديو) 0.54 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $0.72 |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.018 دولار أمريكي (نص/صورة/فيديو) ‫0.054 دولار أمريكي (صوت) ‫1.80 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | بدون رسوم، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash RPD) | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
+| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-## Gemini 2.5 Flash-Lite Önizlemesi
+## إصدار Gemini 2.5 Flash-Lite التجريبي
 
 *`gemini-2.5-flash-lite-preview-09-2025`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-lite-preview-09-2025&hl=ar)
 
-Maliyet verimliliği, yüksek gönderim hacmi ve yüksek kalite için optimize edilmiş Gemini 2.5 Flash Lite'a dayalı en yeni model.
+أحدث نموذج يستند إلى Gemini 2.5 Flash lite، وهو محسّن من أجل الفعالية من حيث التكلفة، ومعدّل أعلى لنقل البيانات، والجودة العالية.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı (metin, resim, video) | Ücretsiz | 0,10 ABD doları (metin / resim / video) 0,30 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 0,40 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,01 ABD doları (metin/resim/video) 0,03 ABD doları (ses) saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | 500 RPD'ye kadar ücretsiz (Flash RPD ile paylaşılan sınır) | 1.500 RPD (ücretsiz, Flash RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال (نص أو صورة أو فيديو) | بدون أي تكلفة | ‫0.10 دولار أمريكي (نص أو صورة أو فيديو) ‫0.30 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | 0.40 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | بدون رسوم، ما يصل إلى 500 RPD (الحدّ الأقصى مشترك مع Flash RPD) | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı (metin, resim, video) | Kullanılamıyor | 0,05 ABD doları (metin / resim / video) 0,15 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 0,20 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,01 ABD doları (metin/resim/video) 0,03 ABD doları (ses) saatte 1.000.000 jeton başına 1,00 ABD doları (depolama fiyatı) |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz, Flash RPD ile paylaşılan sınır), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال (نص أو صورة أو فيديو) | غير متوفر | ‫0.05 دولار أمريكي (نص أو صورة أو فيديو) ‫0.15 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.01 دولار أمريكي (نص/صورة/فيديو) 0.03 دولار أمريكي (صوت) 1.00 دولار أمريكي لكل مليون رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب بحث في اليوم (مجانًا، الحدّ الأقصى مشترك مع Flash RPD)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب بحث مستند إلى بيانات واقعية |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Gemini 2.5 Flash Native Audio (Live API)
 
 *`gemini-2.5-flash-native-audio-preview-12-2025`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/app/live?hl=tr#gemini-2.5-flash-native-audio-preview-12-2025)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/app/live?hl=ar#gemini-2.5-flash-native-audio-preview-12-2025)
 
-Daha iyi hız, ses doğallığı, ayrıntı ve ruh hali ile daha yüksek kaliteli ses çıkışları için optimize edilmiş [Live API](https://ai.google.dev/gemini-api/docs/live?hl=tr) yerel ses modellerimiz.
+نماذج الصوت الأصلية في [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ar) محسّنة لإنتاج مخرجات صوتية بجودة أعلى، مع تحسين السرعة الطبيعية للكلام، ومستوى الإسهاب، والمزاج.
 
-Önizleme modelleri, kararlı hale gelmeden önce değişebilir ve daha kısıtlayıcı hız sınırlarına sahip olabilir.
+قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,50 ABD doları (metin) 3,00 ABD doları (ses / video) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 2,00 ABD doları (metin) 12,00 ABD doları (ses) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.50 دولار أمريكي (نص) 3.00 دولار أمريكي (صوت / فيديو) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | ‫$2.00 (نص) $12.00 (صوت) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-## Gemini 2.5 Flash Görüntü (Nano Banana) 🍌
+## ‫Gemini 2.5 Flash Image (Nano Banana) 🍌
 
 *`gemini-2.5-flash-image`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-2.5-flash-image&hl=ar)
 
-Hız, esneklik ve bağlamsal anlayış için optimize edilmiş yerel görüntü üretme modelimiz. Metin girişi ve çıkışı, [2,5 Flash](#gemini-2.5-flash) ile aynı şekilde fiyatlandırılır.
+نموذجنا الأصلي لإنشاء الصور، وهو نموذج محسّن من حيث السرعة والمرونة والفهم السياقي. يتم تسعير إدخال النص وإخراجه بالسعر نفسه المحدّد في
+[‫2.5 Flash](#gemini-2.5-flash).
 
-Önizleme modelleri, kararlı hale gelmeden önce değişebilir ve daha kısıtlayıcı hız sınırlarına sahip olabilir.
+قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,30 ABD doları (metin / resim) |
-| Çıkış fiyatı | Kullanılamıyor | Resim başına 0,039 ABD doları\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.30 دولار أمريكي (نص / صورة) |
+| سعر المنتج | غير متوفر | ‫0.039 دولار أمريكي لكل صورة\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,15 ABD doları (metin / resim) |
-| Çıkış fiyatı | Kullanılamıyor | Görüntü başına 0,0195 ABD doları\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | 0.15 دولار أمريكي (نص / صورة) |
+| سعر المنتج | غير متوفر | ‫0.0195 دولار أمريكي لكل صورة\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Yaratıcılığınızı
+### التعبير
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,15 ABD doları (metin / resim) |
-| Çıkış fiyatı | Kullanılamıyor | Görüntü başına 0,0195 ABD doları\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | 0.15 دولار أمريكي (نص / صورة) |
+| سعر المنتج | غير متوفر | ‫0.0195 دولار أمريكي لكل صورة\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Öncelik
+### الأولوية
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,54 ABD doları (metin / resim) |
-| Çıkış fiyatı | Kullanılamıyor | Resim başına 0,0702 ABD doları\* |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | $0.54 (نص / صورة) |
+| سعر المنتج | غير متوفر | ‫0.0702 دولار أمريكي لكل صورة\* |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-[\*] Görüntü çıktısı, 1.000.000 jeton başına 30 ABD doları olarak fiyatlandırılır. 1024x1024 piksele kadar olan çıkış resimleri 1.290 jeton tüketir ve resim başına 0,039 ABD dolarına eşdeğerdir.
+[\*] يبلغ سعر ناتج الصور 30 دولارًا أمريكيًا لكل مليون رمز مميز. تستهلك الصور الناتجة التي تصل دقتها إلى 1024x1024 بكسل 1290 رمزًا مميزًا، وتساوي 0.039 دولار أمريكي لكل صورة.
 
 ## Gemini 2.5 Flash Preview TTS
 
 *`gemini-2.5-flash-preview-tts`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/generate-speech?hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/generate-speech?hl=ar)
 
-Fiyat-performans, düşük gecikme süresi ve kontrol edilebilir konuşma üretimi için optimize edilmiş 2.5 Flash metin okuma ses modelimiz.
+نموذج تحويل النص إلى صوت 2.5 Flash، وهو نموذج صوتي محسّن من حيث السعر والأداء،
+ويتميّز بوقت استجابة منخفض وإمكانية التحكّم في عملية إنشاء الكلام.
 
-Önizleme modelleri, kararlı hale gelmeden önce değişebilir ve daha kısıtlayıcı hız sınırlarına sahip olabilir.
+قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,50 ABD doları (metin) |
-| Çıkış fiyatı | Ücretsiz | 10,00 ABD doları (sesli) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.50 دولار أمريكي (نص) |
+| سعر المنتج | بدون أي تكلفة | ‫$10.00 (محتوى صوتي) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,25 ABD doları (metin) |
-| Çıkış fiyatı | Kullanılamıyor | 5 TL (ses) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | $0.25 (text) |
+| سعر المنتج | غير متوفر | $5.00 (محتوى صوتي) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-## Gemini 2.5 Pro Önizleme TTS
+## Gemini 2.5 Pro Preview TTS
 
 *`gemini-2.5-pro-preview-tts`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/generate-speech?hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/generate-speech?hl=ar)
 
-2.5 Pro metin okuma ses modelimiz, daha doğal çıkışlar ve daha kolay yönlendirilen istemler için güçlü ve düşük gecikmeli konuşma üretimi amacıyla optimize edilmiştir.
+تم تحسين نموذج الصوت "تحويل النص إلى كلام" 2.5‎ Pro لإنشاء كلام قوي وبزمن استجابة منخفض، ما يتيح الحصول على نتائج أكثر طبيعية وتوجيه الطلبات بسهولة أكبر.
 
-Önizleme modelleri, kararlı hale gelmeden önce değişebilir ve daha kısıtlayıcı hız sınırlarına sahip olabilir.
+قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 1,00 TL (metin) |
-| Çıkış fiyatı | Kullanılamıyor | 20,00 TL (ses) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫$1.00 (نص) |
+| سعر المنتج | غير متوفر | ‫$20.00 (محتوى صوتي) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,50 ABD doları (metin) |
-| Çıkış fiyatı | Kullanılamıyor | 10,00 ABD doları (sesli) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.50 دولار أمريكي (نص) |
+| سعر المنتج | غير متوفر | ‫$10.00 (محتوى صوتي) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Gemini 2.0 Flash
 
 *`gemini-2.0-flash`*
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,10 ABD doları (metin / resim / video) 0,70 ABD doları (ses) |
-| Çıkış fiyatı | Ücretsiz | 0,40 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Ücretsiz | 0,025 ABD doları / 1.000.000 jeton (metin/resim/video) 0,175 ABD doları / 1.000.000 jeton (ses) |
-| Bağlamı önbelleğe alma (depolama) | Kullanılamıyor | Saat başına 1.000.000 jeton için 1,00 ABD doları |
-| Görüntü üretme fiyatlandırması | Kullanılamıyor ([kapatıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr#gemini-2.0-models)) | Kullanılamıyor ([kapatıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr#gemini-2.0-models)) |
-| İnce ayarlar fiyatı | Kullanılamıyor | Kullanılamıyor |
-| Google Arama ile Temellendirme | 500 RPD'ye kadar ücretsiz | 1.500 RPD (ücretsiz), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | 500 RPD | 1.500 RPD (ücretsiz), ardından 25 ABD doları / 1.000 temellendirilmiş istem |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.10 دولار أمريكي (نص أو صورة أو فيديو) ‫0.70 دولار أمريكي (صوت) |
+| سعر المنتج | بدون أي تكلفة | 0.40 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | ‫0.025 دولار أمريكي لكل مليون رمز مميز (نص/صورة/فيديو) 0.175 دولار أمريكي لكل مليون رمز مميز (صوت) |
+| التخزين المؤقت للسياق (مساحة التخزين) | غير متوفر | ‫1.00 دولار أمريكي / 1,000,000 رمز مميّز في الساعة |
+| أسعار إنشاء الصور | غير متوفرة ([تم إيقافها](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#gemini-2.0-models)) | غير متوفرة ([تم إيقافها](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#gemini-2.0-models)) |
+| سعر الضبط | غير متوفر | غير متوفر |
+| تحديد المصدر من خلال "بحث Search" | بدون أي تكلفة، وبحد أقصى 500 RPD | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | ‫500 روبية باكستانية | ‫1,500 طلب في اليوم (مجانًا)، ثم 25 دولارًا أمريكيًا لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,05 ABD doları (metin / resim / video) 0,35 ABD doları (ses) |
-| Çıkış fiyatı | Kullanılamıyor | 0,20 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | 0,025 ABD doları / 1.000.000 jeton (metin/resim/video) 0,175 ABD doları / 1.000.000 jeton (ses) |
-| Bağlamı önbelleğe alma (depolama) | Kullanılamıyor | Saat başına 1.000.000 jeton için 1,00 ABD doları |
-| Görüntü üretme fiyatlandırması | Kullanılamıyor ([kapatıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr#gemini-2.0-models)) | Kullanılamıyor ([kapatıldı](https://ai.google.dev/gemini-api/docs/deprecations?hl=tr#gemini-2.0-models)) |
-| İnce ayarlar fiyatı | Kullanılamıyor | Kullanılamıyor |
-| Google Arama ile Temellendirme | Kullanılamıyor | 1.500 RPD (ücretsiz), ardından 1.000 temellendirilmiş istem için 35 ABD doları |
-| Google Haritalar ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.05 دولار أمريكي (نص / صورة / فيديو) 0.35 دولار أمريكي (صوت) |
+| سعر المنتج | غير متوفر | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.025 دولار أمريكي لكل مليون رمز مميز (نص/صورة/فيديو) 0.175 دولار أمريكي لكل مليون رمز مميز (صوت) |
+| التخزين المؤقت للسياق (مساحة التخزين) | غير متوفر | ‫1.00 دولار أمريكي / 1,000,000 رمز مميّز في الساعة |
+| أسعار إنشاء الصور | غير متوفرة ([تم إيقافها](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#gemini-2.0-models)) | غير متوفرة ([تم إيقافها](https://ai.google.dev/gemini-api/docs/deprecations?hl=ar#gemini-2.0-models)) |
+| سعر الضبط | غير متوفر | غير متوفر |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫1,500 طلب في الدقيقة (مجاني)، ثم 35 دولارًا أمريكيًا لكل 1,000 طلب |
+| استخدام "خرائط Google" كمصدر | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-[\*] Görüntü çıktısı, 1.000.000 jeton başına 30 ABD doları olarak fiyatlandırılır. 1024x1024 piksele kadar olan çıkış resimleri 1.290 jeton tüketir ve resim başına 0,039 ABD dolarına eşdeğerdir.
+[\*] يبلغ سعر ناتج الصور 30 دولارًا أمريكيًا لكل مليون رمز مميز. تستهلك الصور الناتجة التي تصل دقتها إلى 1024x1024 بكسل 1290 رمزًا مميزًا، وتساوي 0.039 دولار أمريكي لكل صورة.
 
 ## Gemini 2.0 Flash-Lite
 
 *`gemini-2.0-flash-lite`*
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,075 ABD doları |
-| Çıkış fiyatı | Ücretsiz | 0,30 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | Kullanılamıyor |
-| Bağlamı önbelleğe alma (depolama) | Kullanılamıyor | Kullanılamıyor |
-| İnce ayarlar fiyatı | Kullanılamıyor | Kullanılamıyor |
-| Google Arama ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.075 دولار أمريكي |
+| سعر المنتج | بدون أي تكلفة | $0.30 |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | غير متوفر |
+| التخزين المؤقت للسياق (مساحة التخزين) | غير متوفر | غير متوفر |
+| سعر الضبط | غير متوفر | غير متوفر |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,0375 ABD doları |
-| Çıkış fiyatı | Kullanılamıyor | 0,15 ABD doları |
-| Bağlamı önbelleğe alma fiyatı | Kullanılamıyor | Kullanılamıyor |
-| Bağlamı önbelleğe alma (depolama) | Kullanılamıyor | Kullanılamıyor |
-| İnce ayarlar fiyatı | Kullanılamıyor | Kullanılamıyor |
-| Google Arama ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.0375 دولار أمريكي |
+| سعر المنتج | غير متوفر | ‫0.15 دولار أمريكي |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | غير متوفر |
+| التخزين المؤقت للسياق (مساحة التخزين) | غير متوفر | غير متوفر |
+| سعر الضبط | غير متوفر | غير متوفر |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Imagen 4
 
-*`imagen-4.0-generate-001`, `imagen-4.0-ultra-generate-001`, `imagen-4.0-fast-generate-001`*
+‫*`imagen-4.0-generate-001` و`imagen-4.0-ultra-generate-001` و`imagen-4.0-fast-generate-001`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com/generate-image?hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com/generate-image?hl=ar)
 
-En yeni görüntü üretme modelimiz. Metin oluşturma özelliği önemli ölçüde iyileştirildi ve genel görüntü kalitesi daha iyi hale getirildi.
+أحدث نموذج لإنشاء الصور، وهو يقدّم عرضًا أفضل بكثير للنصوص
+ويحسّن جودة الصور بشكل عام.
 
-Önizleme modelleri, kararlı hale gelmeden önce değişebilir ve daha kısıtlayıcı hız sınırlarına sahip olabilir.
+قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
 
-|  | Ücretsiz Katman | Ücretli katman, görüntü başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل صورة بالدولار الأمريكي |
 | --- | --- | --- |
-| Imagen 4 Fast görüntü fiyatı | Kullanılamıyor | 0,02 ABD doları |
-| Imagen 4 Standart resim fiyatı | Kullanılamıyor | 0,04 ABD doları |
-| Imagen 4 Ultra görüntü fiyatı | Kullanılamıyor | 0,06 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الصورة في Imagen 4 Fast | غير متوفر | $0.02 |
+| سعر الصورة العادية في Imagen 4 | غير متوفر | $0.04 |
+| سعر صورة Imagen 4 Ultra | غير متوفر | $0.06 |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Veo 3.1
 
-*`veo-3.1-generate-preview`, `veo-3.1-fast-generate-preview`, `veo-3.1-lite-generate-preview`*
+‫*`veo-3.1-generate-preview` و`veo-3.1-fast-generate-preview` و`veo-3.1-lite-generate-preview`*
 
-[Veo 3.1'i deneyin](https://deepmind.google/models/veo/?hl=tr)
+[تجربة Veo 3.1](https://deepmind.google/models/veo/?hl=ar)
 
-Gemini API'nin ücretli katmanındaki geliştiricilerin kullanımına sunulan en yeni video üretme modelimiz.
+أحدث نموذج لدينا لإنشاء الفيديوهات، وهو متاح للمطوّرين ضمن
+الفئة المدفوعة من Gemini API.
 
-Önizleme modelleri, kararlı hale gelmeden önce değişebilir ve daha kısıtlayıcı hız sınırlarına sahip olabilir.
+قد تتغيّر نماذج المعاينة قبل أن تصبح ثابتة، وقد تتضمّن حدودًا أكثر صرامة بشأن عدد الطلبات المسموح بها.
 
-|  | Ücretsiz Katman | Ücretli katman, saniye başına ABD doları cinsinden |
+|  | الفئة المجانية | المستوى المدفوع، لكل ثانية بالدولار الأمريكي |
 | --- | --- | --- |
-| Sesli Veo 3.1 Standard video fiyatı (varsayılan) | Kullanılamıyor | 0,40 ABD doları (720p ve 1080p) 0,60 ABD doları (4K) |
-| Sesli Veo 3.1 Fast video fiyatı (varsayılan) | Kullanılamıyor | 0,10 ABD doları (720p) 0,12 ABD doları (1080p) 0,30 ABD doları (4K) |
-| Sesli Veo 3.1 Lite videosu fiyatı (varsayılan) | Kullanılamıyor | 0,05 ABD doları (720p) 0,08 ABD doları (1080p) (4K çıkış desteklenmez) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر فيديو Veo 3.1 Standard مع صوت (الإعداد التلقائي) | غير متوفر | ‫0.40 دولار أمريكي (720p و1080p) 0.60 دولار أمريكي (4k) |
+| سعر فيديو Veo 3.1 Fast مع صوت (تلقائي) | غير متوفر | ‫0.10 دولار أمريكي (720p) ‫0.12 دولار أمريكي (1080p) ‫0.30 دولار أمريكي (4k) |
+| سعر فيديو Veo 3.1 Lite مع صوت (الإعداد التلقائي) | غير متوفر | ‫0.05 دولار أمريكي (720p) 0.08 دولار أمريكي (1080p) (لا تتوفّر دقة 4k) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Veo 3
 
-*`veo-3.0-generate-001`, `veo-3.0-fast-generate-001`*
+*`veo-3.0-generate-001`، `veo-3.0-fast-generate-001`*
 
-[Veo 3'ü deneyin](https://deepmind.google/models/veo/?hl=tr)
+[تجربة Veo 3](https://deepmind.google/models/veo/?hl=ar)
 
-Gemini API'nin ücretli katmanındaki geliştiricilerin kullanımına sunulan kararlı video üretme modelimiz.
+نموذجنا الثابت لإنشاء الفيديوهات، وهو متاح للمطوّرين في الفئة المدفوعة من Gemini API.
 
-|  | Ücretsiz Katman | Ücretli katman, saniye başına ABD doları cinsinden |
+|  | الفئة المجانية | المستوى المدفوع، لكل ثانية بالدولار الأمريكي |
 | --- | --- | --- |
-| Veo 3 Standart sesli video fiyatı (varsayılan) | Kullanılamıyor | 0,40 ABD doları |
-| Sesli Veo 3 Fast video fiyatı (varsayılan) | Kullanılamıyor | 0,10 ABD doları (720p) 0,12 ABD doları (1080p) 0,30 ABD doları (4K) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر فيديو Veo 3 Standard مع صوت (الإعداد التلقائي) | غير متوفر | 0.40 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| سعر فيديو Veo 3 Fast مع صوت (الإعداد التلقائي) | غير متوفر | ‫0.10 دولار أمريكي (720p) ‫0.12 دولار أمريكي (1080p) ‫0.30 دولار أمريكي (4k) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Veo 2
 
 *`veo-2.0-generate-001`*
 
-[API'yi deneyin](https://ai.google.dev/gemini-api/docs/video?hl=tr)
+[تجربة واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/video?hl=ar)
 
-Geliştiriciler, Gemini API'nin ücretli katmanında son teknoloji ürünü video üretim modelimizi kullanabilir.
+نموذجنا المتقدّم لإنشاء الفيديوهات، والمتوفّر للمطوّرين ضمن الفئة المدفوعة من Gemini API
 
-|  | Ücretsiz Katman | Ücretli katman, saniye başına ABD doları cinsinden |
+|  | الفئة المجانية | المستوى المدفوع، لكل ثانية بالدولار الأمريكي |
 | --- | --- | --- |
-| Video fiyatı | Kullanılamıyor | 0,35 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الفيديو | غير متوفر | 0.35 دولار أمريكي (أو ما يعادله بالعملة المحلية) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-## Lyria 3
+## ‫Lyria 3
 
-*`lyria-3-clip-preview` ve `lyria-3-pro-preview`*
+‫*`lyria-3-clip-preview` و`lyria-3-pro-preview`*
 
-Google'ın müzik üretme modelleri ailesi. Önizleme modelleri, kararlı hale gelmeden önce değişebilir ve daha kısıtlayıcı sıklık sınırlarına sahip olabilir.
+مجموعة نماذج إنشاء الموسيقى من Google قد تتغيّر نماذج المعاينة قبل أن تصبح مستقرة، وقد يكون لها حدود معدّل استخدام أكثر صرامة.
 
-|  | Ücretsiz Katman | Ücretli katman, istek başına (ABD doları) |
+|  | الفئة المجانية | الفئة المدفوعة، لكل طلب بالدولار الأمريكي |
 | --- | --- | --- |
-| Lyria 3 Clip Preview (30s) | Kullanılamıyor | Şarkı başına 0,04 ABD doları |
-| Lyria 3 Pro Önizlemesi (Tam Şarkı) | Kullanılamıyor | Şarkı başına 0,08 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| معاينة مقطع Lyria 3 (30 ثانية) | غير متوفر | 0.04 دولار أمريكي لكل أغنية |
+| معاينة Lyria 3 Pro (أغنية كاملة) | غير متوفر | $0.08 لكل أغنية |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Gemini Embedding 2
 
 *`gemini-embedding-2`*
 
-[API'yi deneyin](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr)
+[تجربة واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar)
 
-Metin, resim, video, ses ve PDF'leri birleşik bir yerleştirme alanına eşleyen ilk çok formatlı yerleştirme modelimiz.
+أول نموذج تضمين متعدد الوسائط يربط النصوص والصور والفيديوهات والمقاطع الصوتية وملفات PDF بمساحة تضمين موحّدة.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Metin girişi fiyatı | Ücretsiz | 0,20 ABD doları |
-| Görüntü girişi fiyatı | Ücretsiz | 0,45 ABD doları (resim başına 0,00012 ABD doları) |
-| Ses girişi fiyatı | Ücretsiz | 6,50 ABD doları (saniye başına 0,00016 ABD doları) |
-| Video girişi fiyatı | Ücretsiz | 12,00 ABD doları (kare başına 0,00079 ABD doları) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال النصي | بدون أي تكلفة | 0,20 دولار أمريكي (أو ما يعادل هذا المبلغ بالعملة المحلية) |
+| سعر إدخال الصورة | بدون أي تكلفة | ‫0.45 دولار أمريكي (0.00012 دولار أمريكي لكل صورة) |
+| سعر إدخال الصوت | بدون أي تكلفة | ‫6.50 دولار أمريكي (0.00016 دولار أمريكي في الثانية) |
+| سعر إدخال الفيديو | بدون أي تكلفة | ‫12.00 دولار أمريكي (0.00079 دولار أمريكي لكل إطار) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Metin girişi fiyatı | Kullanılamıyor | 0,10 ABD doları |
-| Görüntü girişi fiyatı | Kullanılamıyor | 0,225 ABD doları (resim başına 0,00006 ABD doları) |
-| Ses girişi fiyatı | Kullanılamıyor | 3,25 ABD doları (saniyede 0,00008 ABD doları) |
-| Video girişi fiyatı | Kullanılamıyor | 6,00 ABD doları (kare başına 0,000395 ABD doları) |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال النصي | غير متوفر | ‫0.10 دولار أمريكي |
+| سعر إدخال الصورة | غير متوفر | ‫0.225 دولار أمريكي (0.00006 دولار أمريكي لكل صورة) |
+| سعر إدخال الصوت | غير متوفر | ‫3.25 دولار أمريكي (0.00008 دولار أمريكي في الثانية) |
+| سعر إدخال الفيديو | غير متوفر | ‫6.00 دولار أمريكي (0.000395 دولار أمريكي لكل إطار) |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-## Gemini Yerleştirme
+## تضمين Gemini
 
 *`gemini-embedding-001`*
 
-[API'yi deneyin](https://ai.google.dev/gemini-api/docs/embeddings?hl=tr)
+[تجربة واجهة برمجة التطبيقات](https://ai.google.dev/gemini-api/docs/embeddings?hl=ar)
 
-Yalnızca metin içeren kullanım alanları için Gemini Embeddings modelimiz, Gemini API'nin ücretsiz ve ücretli katmanlarındaki geliştiricilerin kullanımına sunulmuştur.
+نموذج Gemini Embeddings لحالات الاستخدام التي تتضمّن النصوص فقط، وهو متاح للمطوّرين في المستويَين المجاني والمدفوع من Gemini API.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 0,15 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫0.15 دولار أمريكي |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,075 ABD doları |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.075 دولار أمريكي |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-## Gemini Robotics-ER 1.6 Önizlemesi
+## ‫Gemini Robotics ER 2 Preview
+
+*`gemini-robotics-er-2-preview`*
+
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-preview&hl=ar)
+
+‫Gemini Robotics ER 2، وهو اختصار لعبارة Gemini Robotics Embodied Reasoning 2، هو نقطة نهاية لنموذج رؤية ولغة تتيح للروبوتات فهم بيئاتها بدقة، ما يتيح التنسيق بين الروبوتات، وفهم تقدّم الفيديو، والتعاون بين الروبوتات المتعدّدة، والاستدلال المكاني المتقدّم.
+
+### خطة "الرزمة العادية"
+
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+| --- | --- | --- |
+| سعر الإدخال | بدون أي تكلفة | ‫2.00 دولار أمريكي (نص / صورة / فيديو / ملف صوتي) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $10.00 |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.20 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+
+### مجمّعة
+
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+| --- | --- | --- |
+| سعر الإدخال | غير متوفر | ‫1.00 دولار أمريكي (نص أو صورة أو فيديو أو مقطع صوتي) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | $5.00 |
+| سعر التخزين المؤقت حسب السياق | غير متوفر | ‫0.10 $1.00 / 1,000,000 رمز مميز في الساعة (سعر التخزين) |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+
+## Gemini Robotics ER 2 Streaming Preview
+
+*`gemini-robotics-er-2-streaming-preview`*
+
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-2-streaming-preview&hl=ar)
+
+‫Gemini Robotics ER 2 Streaming هو نقطة نهاية لنموذج رؤية ولغة خاص بالروبوتات، وهو محسّن لبث النصوص في الوقت الفعلي باستخدام Live API. يقبل هذا النموذج إدخال النصوص والصور والفيديوهات والمقاطع الصوتية، ويتيح بث البيانات في اتجاهين مع إمكانية استدعاء الدوال.
+
+### خطة "الرزمة العادية"
+
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
+| --- | --- | --- |
+| سعر الإدخال | بدون أي تكلفة | ‫2.00 دولار أمريكي (نص أو صورة أو فيديو أو ملف صوتي) |
+| سعر المنتج | بدون أي تكلفة | $10.00 |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
+
+## معاينة Gemini Robotics ER 1.6
 
 *`gemini-robotics-er-1.6-preview`*
 
-[Google AI Studio'da deneyin](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=tr)
+[تجربة الميزة في Google AI Studio](https://aistudio.google.com?model=gemini-robotics-er-1.6-preview&hl=ar)
 
-Gemini Robotics-ER (Gemini Robotics-Embodied Reasoning), robotların fiziksel dünyayı anlama ve etkileşim kurma becerilerini geliştiren bir düşünme modelidir.
+‫Gemini Robotics ER، أي Gemini Robotics-Embodied Reasoning، هو نموذج مفكّر يعزّز قدرات الروبوتات على فهم العالم المادي والتفاعل معه.
 
-### Standart
+### خطة "الرزمة العادية"
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | 1,00 ABD doları (metin / resim / video) 2,00 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Ücretsiz | 5 TL |
-| Google Arama ile Temellendirme | Kullanılamıyor | Ayda 5.000 istem (ücretsiz, Flash ile paylaşılan sınır), ardından metin ve resim tabanlı temellendirme için 1.000 arama sorgusu başına 14 ABD doları. |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | ‫1.00 دولار أمريكي (نص / صورة / فيديو) ‫2.00 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | بدون أي تكلفة | $5.00 |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-### Toplu
+### مجمّعة
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 0,50 ABD doları (metin / resim / video) 1,00 ABD doları (ses) |
-| Çıkış fiyatı (düşünme jetonları dahil) | Kullanılamıyor | 2,50 ABD doları |
-| Google Arama ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫0.50 دولار أمريكي (نص / صورة / فيديو) 1.00 دولار أمريكي (صوت) |
+| سعر الناتج (يشمل الرموز المميزة للتفكير) | غير متوفر | ‫2.50 دولار أمريكي |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | ‫5,000 طلب بحث مجاني شهريًا (تتم مشاركتها بين جميع طُرز Gemini 3.x)، ثم 14 دولار أمريكي لكل 1,000 طلب |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-## Gemini 2.5 Bilgisayar Kullanımı Önizlemesi
+## معاينة ميزة "استخدام الكمبيوتر" في Gemini 2.5
 
 *`gemini-2.5-computer-use-preview-10-2025`*
 
-Görevleri otomatikleştiren tarayıcı kontrolü aracıları oluşturmak için optimize edilmiş Bilgisayar Kullanımı modelimiz.
+نموذج &quot;استخدام الكمبيوتر&quot; المحسَّن لإنشاء وكلاء التحكّم في المتصفّح الذين يؤتمتون المهام.
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Kullanılamıyor | 1,25 ABD doları, istemler <= 200 bin parça 2,50 ABD doları, istemler > 200 bin parça |
-| Çıkış fiyatı | Kullanılamıyor | 10,00 ABD doları, istemler <= 200.000 jeton 15,00 ABD doları, istemler > 200.000 |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | غير متوفر | ‫1.25 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز 2.50 دولار أمريكي، الطلبات > 200 ألف رمز مميّز |
+| سعر المنتج | غير متوفر | ‫10.00 دولار أمريكي، الطلبات <= 200 ألف رمز مميّز ‫15.00 دولار أمريكي، الطلبات > 200 ألف |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
 ## Gemma 4
 
-Gemini modellerimizi destekleyen aynı teknolojiyle geliştirilen, hafif, son teknoloji açık modelimiz.
+‫Gemma هو نموذج مفتوح وخفيف ومتطوّر تم إنشاؤه بالاستناد إلى التكنولوجيا نفسها التي استُخدمَت لإنشاء نماذج Gemini.
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| Giriş fiyatı | Ücretsiz | Kullanılamıyor |
-| Çıkış fiyatı | Ücretsiz | Kullanılamıyor |
-| Bağlamı önbelleğe alma fiyatı | Ücretsiz | Kullanılamıyor |
-| Bağlamı önbelleğe alma (depolama) | Ücretsiz | Kullanılamıyor |
-| İnce ayarlar fiyatı | Kullanılamıyor | Kullanılamıyor |
-| Google Arama ile Temellendirme | Kullanılamıyor | Kullanılamıyor |
-| Ürünlerimizi iyileştirmek için kullanılır. | [Evet](https://ai.google.dev/gemini-api/terms?hl=tr) | [Hayır](https://ai.google.dev/gemini-api/terms?hl=tr) |
+| سعر الإدخال | بدون أي تكلفة | غير متوفر |
+| سعر المنتج | بدون أي تكلفة | غير متوفر |
+| سعر التخزين المؤقت حسب السياق | بدون أي تكلفة | غير متوفر |
+| التخزين المؤقت للسياق (مساحة التخزين) | بدون أي تكلفة | غير متوفر |
+| سعر الضبط | غير متوفر | غير متوفر |
+| تحديد المصدر من خلال "بحث Search" | غير متوفر | غير متوفر |
+| تُستخدَم لتحسين منتجاتنا | [نعم](https://ai.google.dev/gemini-api/terms?hl=ar) | [لا](https://ai.google.dev/gemini-api/terms?hl=ar) |
 
-## Araçların fiyatlandırması
+## أسعار الأدوات
 
-Araçlar, kendi fiyatlarıyla fiyatlandırılır ve bunları kullanan modele uygulanır.
-Her modelde hangi araçların kullanılabildiğini öğrenmek için [Modeller](https://ai.google.dev/gemini-api/docs/models?hl=tr) sayfasını inceleyin.
+يتم تحديد أسعار الأدوات وفقًا لمعدّلاتها الخاصة، ويتم تطبيقها على النموذج الذي يستخدمها.
+راجِع صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar) لمعرفة الأدوات المتاحة لكل نموذج.
 
-|  | Ücretsiz Katman | Ücretli katman, 1 milyon jeton başına ABD doları cinsinden |
+|  | الفئة المجانية | الفئة المدفوعة، لكل مليون رمز مميّز بالدولار الأمريكي |
 | --- | --- | --- |
-| [Google Arama](https://ai.google.dev/gemini-api/docs/google-search?hl=tr#pricing) | 500 RPD ücretsiz (sınır, Flash ve Flash-Lite için geçerlidir). Pro'da kullanılamaz. | Gemini 2.5 modelleri:  1.500 RPD ücretsiz (Flash ve Flash-Lite için ortak sınır). Ardından 1.000 temellendirilmiş istem için 35 ABD doları   Gemini 3 modelleri:  Ayda 5.000 istem (ücretsiz), ardından 1.000 arama sorgusu için 14 ABD doları |
-| [Google Haritalar](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=tr#pricing_and_rate_limits) | 500 RPD Pro sürümünde kullanılamaz. | 1.500 RPD ücretsiz (Flash ve Flash-Lite için ortak sınır) Pro için 10.000 RPD ücretsiz. Ardından 25 ABD doları / 1.000 temellendirilmiş istem |
-| [Kod yürütme](https://ai.google.dev/gemini-api/docs/code-execution?hl=tr#billing) | Ücretsiz | Kod yürütme, seçilen modelin standart jeton ücretleri üzerinden faturalandırılır. Maliyetler yalnızca aracın kullanımına göre belirlenir. Oturum çalışma süresi için ücret alınmaz. Oluşturulan kod ve yürütme sonuçları, oluşturulduklarında **çıkış jetonları**, model bunları yinelemeli muhakeme sürecinin bir parçası olarak kullandığında ise **giriş jetonları** olarak faturalandırılır. |
-| [URL bağlamı](https://ai.google.dev/gemini-api/docs/url-context?hl=tr#limitations) | Ücretsiz | Model fiyatlandırmasına göre giriş jetonları olarak ücretlendirilir. |
-| [Bilgisayar kullanımı](https://ai.google.dev/gemini-api/docs/computer-use?hl=tr) | Kullanılamıyor | Model fiyatlandırmasına göre normal jetonlar olarak ücretlendirilir (ör. standart [Gemini 3.5 Flash](#gemini-3.6-flash) fiyatlandırması). Eski model ücretleri için [Gemini 2.5 Bilgisayar Kullanımı Önizlemesi](#gemini-2.5-computer-use-preview-10-2025) fiyatlandırma tablosuna bakın. |
-| [Dosya arama](https://ai.google.dev/gemini-api/docs/file-search?hl=tr#pricing) | Ücretsiz | [Yerleştirmeler](#gemini-embedding) için 1 milyon jeton başına 0,15 ABD doları ücret alınır.  Alınan doküman jetonları, model fiyatlandırmasına göre normal jetonlar olarak ücretlendirilir. |
-| [Özel Araçlar uç noktası (Gemini 3.1 Pro Önizlemesi)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=tr) | Kullanılamıyor | [Gemini 3.1 Pro Önizleme](#gemini-3.1-pro-preview) fiyatlandırmasıyla aynıdır. |
+| [بحث Google](https://ai.google.dev/gemini-api/docs/google-search?hl=ar#pricing) | ‫500 طلب في الدقيقة مجانًا (يتم مشاركة الحدّ الأقصى بين Flash وFlash-Lite). لا يتوفّر هذا الخيار في Pro. | نماذج Gemini 2.5:  1,500 طلب في اليوم مجانًا (يتم تطبيق الحدّ على Flash وFlash-Lite). بعد ذلك، 35 دولار أمريكي لكل 1,000 طلب استنادًا إلى بيانات خارجية   نماذج Gemini 3:  5,000 طلب بحث مجاني في الشهر (يتم تطبيق الحدّ على جميع نماذج Gemini)، ثم 14 دولار أمريكي لكل 1,000 طلب. |
+| [خرائط Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ar#pricing_and_rate_limits) | ‫500 RPD غير متوفّر في Pro. | ‫1,500 طلب في اليوم مجانًا (الحدّ الأقصى مشترك بين Flash وFlash-Lite) ‫10,000 طلب في اليوم مجانًا لمستخدمي Pro ثم 25 دولار أمريكي لكل 1,000 طلب |
+| [تنفيذ الرموز البرمجية](https://ai.google.dev/gemini-api/docs/code-execution?hl=ar#billing) | بدون أي تكلفة | يتم تحصيل رسوم تنفيذ الرمز البرمجي وفقًا لأسعار الرموز المميزة العادية للنموذج المحدّد. يتم تحديد التكاليف استنادًا إلى معدّل استخدام الأداة فقط، ولا يتم تحصيل أي رسوم مقابل مدة تشغيل الجلسة. يتم تحصيل رسوم مقابل الرمز الذي تم إنشاؤه ونتائج التنفيذ باعتبارهما **رموزًا مميزة للناتج** عند إنشائهما، وباعتبارهما **رموزًا مميزة للمدخلات** عندما يستخدمهما النموذج كجزء من عملية الاستدلال التكراري. |
+| [سياق عنوان URL](https://ai.google.dev/gemini-api/docs/url-context?hl=ar#limitations) | بدون أي تكلفة | يتم تحصيل الرسوم كرموز مميّزة للإدخال لكل نموذج تسعير. |
+| [استخدام الكمبيوتر](https://ai.google.dev/gemini-api/docs/computer-use?hl=ar) | غير متوفر | يتم تحصيل الرسوم كرموز عادية وفقًا لأسعار كل نموذج (مثل أسعار [Gemini 3.5 Flash](#gemini-3.6-flash) العادية). راجِع جدول أسعار [النسخة الحصرية من Gemini 2.5 لاستخدام الكمبيوتر](#gemini-2.5-computer-use-preview-10-2025) لمعرفة أسعار النموذج القديم. |
+| [البحث عن الملفات](https://ai.google.dev/gemini-api/docs/file-search?hl=ar#pricing) | بدون أي تكلفة | يتم تحصيل رسوم مقابل [عمليات التضمين](#gemini-embedding) بقيمة 0.15 دولار أمريكي لكل مليون رمز مميز. يتم تحصيل رسوم مقابل الرموز المميزة للمستندات التي تم استرجاعها كرموز مميزة عادية وفقًا لأسعار النموذج. |
+| [نقطة نهاية "الأدوات المخصّصة" (إصدار تجريبي من Gemini 3.1 Pro)](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview?hl=ar) | غير متوفر | الأسعار نفسها المحدّدة في [معاينة Gemini 3.1 Pro](#gemini-3.1-pro-preview) |
 
-## Temsilciler için fiyatlandırma
+## أسعار الوكلاء
 
-Aracı kullanım maliyetleri, temel jeton tüketimine ve araçların kullanımına göre hesaplanır.
+يتم احتساب تكاليف استخدام الوكيل استنادًا إلى استهلاك الرموز الأساسية واستخدام الأدوات.
 
-|  | Model | Araçlar |
+|  | الطراز | الأدوات |
 | --- | --- | --- |
-| [Gemini Deep Research Agent](https://ai.google.dev/gemini-api/docs/deep-research?hl=tr) | Tüm model çıkarımı, giriş, çıkış ve aracı döngüleri sırasında oluşturulan ara giriş / nedenlendirme jetonları dahil olmak üzere standart Gemini liste fiyatları üzerinden ücretlendirilir. | Araç kullanım ücretleri, mevcut fiyatlandırma yapısına göre uygulanır. Search Grounding (alınan jetonlar hariç) ile Url\_context / File Search (alınan jetonlar diğer tüm araçlara dahildir) arasındaki standart ayrımlar korunur. |
-| [Gemini API'de yönetilen ajanlar](https://ai.google.dev/gemini-api/docs/agents?hl=tr) | Tüm model çıkarımı, giriş, çıkış ve aracı döngüleri sırasında oluşturulan ara giriş / nedenlendirme jetonları dahil olmak üzere standart Gemini liste fiyatları üzerinden ücretlendirilir. ([Fiyatlandırma ayrıntılarına](https://ai.google.dev/gemini-api/docs/agents?hl=tr#pricing) bakın). | Önizleme döneminde ortam bilgi işlem (CPU, bellek, korumalı alan yürütme) için fatura kesilmez. |
-| [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=tr) | Tüm model çıkarımı, giriş, çıkış ve aracı döngüleri sırasında oluşturulan ara giriş / nedenlendirme jetonları dahil olmak üzere standart Gemini liste fiyatları üzerinden ücretlendirilir. ([Fiyatlandırma ayrıntılarına](https://ai.google.dev/gemini-api/docs/agents?hl=tr#pricing) bakın). | Önizleme döneminde ortam bilgi işlem (CPU, bellek, korumalı alan yürütme) için fatura kesilmez. |
+| [وكيل Deep Research من Gemini](https://ai.google.dev/gemini-api/docs/deep-research?hl=ar) | يتم تحصيل رسوم عن جميع عمليات استنتاج النماذج وفقًا للأسعار العادية لقائمة Gemini، بما في ذلك رموز الإدخال والإخراج والرموز الوسيطة للإدخال / الاستدلال التي يتم إنشاؤها أثناء الحلقات المستندة إلى الوكيل. | تنطبق رسوم استخدام الأداة على كل بنية تسعير حالية، مع الحفاظ على الفروق المعيارية بين ميزة "الاستناد إلى البحث" (الرموز المميزة التي تم استرجاعها مستبعدة) وميزة Url\_context / File Search (الرموز المميزة التي تم استرجاعها مضمّنة في جميع الأدوات الأخرى). |
+| [الوكلاء المُدارون في Gemini API](https://ai.google.dev/gemini-api/docs/agents?hl=ar) | يتم تحصيل رسوم عن جميع عمليات استنتاج النماذج وفقًا للأسعار العادية لقائمة Gemini، بما في ذلك رموز الإدخال والإخراج والرموز الوسيطة للإدخال / الاستدلال التي يتم إنشاؤها أثناء الحلقات المستندة إلى الوكيل. (اطّلِع على [تفاصيل الأسعار](https://ai.google.dev/gemini-api/docs/agents?hl=ar#pricing)). | لا يتم تحصيل رسوم مقابل حوسبة البيئة (وحدة المعالجة المركزية والذاكرة وتنفيذ وضع الحماية) خلال فترة المعاينة. |
+| [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar) | يتم تحصيل رسوم عن جميع عمليات استنتاج النماذج وفقًا للأسعار العادية لقائمة Gemini، بما في ذلك رموز الإدخال والإخراج والرموز الوسيطة للإدخال / الاستدلال التي يتم إنشاؤها أثناء الحلقات المستندة إلى الوكيل. (اطّلِع على [تفاصيل الأسعار](https://ai.google.dev/gemini-api/docs/agents?hl=ar#pricing)). | لا يتم تحصيل رسوم مقابل حوسبة البيئة (وحدة المعالجة المركزية والذاكرة وتنفيذ وضع الحماية) خلال فترة المعاينة. |
 
-## Notlar
+## ملاحظات
 
-- **Doküman jetonu faturalandırması:** `DOCUMENT` biçimindeki (ör. PDF'ler) jetonlar, resim jetonu oranı üzerinden faturalandırılır. API yanıtlarında bu jetonlar, `promptTokensDetails` içinde `DOCUMENT` biçiminde görünür.
-- Google AI Studio'nun kullanımı, [kullanılabilir tüm bölgelerde](https://ai.google.dev/gemini-api/docs/available-regions?hl=tr) ücretsizdir. Ayrıntılar için [Faturalandırmayla ilgili SSS](https://ai.google.dev/gemini-api/docs/billing?hl=tr) bölümüne bakın.
-- Fiyatlar, burada listelenen fiyatlardan ve Gemini Enterprise Agent Platform'da sunulan fiyatlardan farklı olabilir. Gemini Enterprise Agent Platform fiyatları için [Gemini Enterprise Agent Platform fiyatlandırma sayfasını](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=tr) inceleyin.
-- Maliyetleri optimize etmek için [dinamik alma](https://ai.google.dev/gemini-api/docs/grounding?hl=tr) kullanıyorsanız Google Arama ile Temellendirme için yalnızca yanıtlarında web'den en az bir temellendirme destek URL'si içeren istekler ücretlendirilir.
-  Gemini'ın maliyeti her zaman geçerlidir. Sıklık sınırları değişebilir.
+- **الفوترة المستندة إلى الرموز المميزة للمستندات:** يتم تحصيل رسوم الرموز المميزة الخاصة بالوسائط `DOCUMENT` (مثل ملفات PDF) وفقًا لأسعار الرموز المميزة للصور. في الردود من واجهة برمجة التطبيقات، تظهر هذه الرموز المميزة ضمن `DOCUMENT` modality في `promptTokensDetails`.
+- إنّ استخدام Google AI Studio مجاني في جميع [المناطق التي يتوفّر فيها](https://ai.google.dev/gemini-api/docs/available-regions?hl=ar). لمعرفة التفاصيل، يُرجى الاطّلاع على [الأسئلة الشائعة حول الفوترة](https://ai.google.dev/gemini-api/docs/billing?hl=ar).
+- قد تختلف الأسعار عن الأسعار المذكورة هنا والأسعار المعروضة على &quot;منصة Gemini Enterprise Agent&quot;. للاطّلاع على أسعار Gemini Enterprise Agent Platform، يُرجى الانتقال إلى [صفحة أسعار Gemini Enterprise Agent Platform](https://cloud.google.com/products/gemini-enterprise-agent-platform?hl=ar).
+- إذا كنت تستخدم [الاسترجاع الديناميكي](https://ai.google.dev/gemini-api/docs/grounding?hl=ar) لتحسين التكاليف، لن يتم تحصيل رسوم منك مقابل ميزة "الاستناد إلى معلومات من Google Search" إلا إذا كانت الردود تتضمّن عنوان URL واحدًا على الأقل من الويب يقدّم معلومات أساسية.
+  تُطبَّق دائمًا تكاليف استخدام Gemini. تخضع حدود المعدّل للتغيير.
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
 
-Son güncelleme tarihi: 2026-07-30 UTC.
+تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-30 UTC."],[],[]]
+[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]

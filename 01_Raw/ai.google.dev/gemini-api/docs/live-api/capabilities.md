@@ -1,51 +1,53 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=ja
-fetched_at: 2026-08-03T04:31:47.302470+00:00
-title: "Live API \u6a5f\u80fd\u30ac\u30a4\u30c9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/live-api/capabilities?hl=tr
+fetched_at: 2026-08-10T03:23:11.741426+00:00
+title: "Live API \u00f6zellikleri k\u0131lavuzu \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Ana Sayfa](https://ai.google.dev/?hl=tr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
+- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
 
-フィードバックを送信
+Geri bildirim gönderin
 
-# Live API 機能ガイド
+# Live API özellikleri kılavuzu
 
-これは、Live API で利用可能な機能と構成について説明する包括的なガイドです。概要と一般的なユースケースのサンプルコードについては、[Live API を使ってみる](https://ai.google.dev/gemini-api/docs/live?hl=ja)をご覧ください。
+Bu kapsamlı kılavuzda, Live API ile kullanılabilen özellikler ve yapılandırmalar ele alınmaktadır.
+Genel bakış ve yaygın kullanım alanlarına ilişkin örnek kod için [Live API'yi kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live?hl=tr) sayfasına bakın.
 
-## 始める前に
+## Başlamadan önce
 
-- **コアコンセプトを理解する:** まだ読んでいない場合は、まず [Live API を使ってみる](https://ai.google.dev/gemini-api/docs/live?hl=ja) ページをご覧ください。ここでは、Live API の基本原則、仕組み、さまざまな[実装方法](https://ai.google.dev/gemini-api/docs/live?hl=ja#implementation-approach)について説明します。
-- **AI Studio で Live API を試す:** 構築を開始する前に、[Google AI Studio](https://aistudio.google.com/app/live?hl=ja) で Live API を試してみることをおすすめします。Google AI Studio で Live API を使用するには、[**ストリーム**] を選択します。
+- **Temel kavramlar hakkında bilgi edinin:** Henüz yapmadıysanız önce [Live API'yi kullanmaya başlama](https://ai.google.dev/gemini-api/docs/live?hl=tr)  sayfasını okuyun.
+  Bu doküman, Canlı API'nin temel ilkeleri, nasıl çalıştığı ve farklı [uygulama yaklaşımları](https://ai.google.dev/gemini-api/docs/live?hl=tr#implementation-approach) hakkında bilgi verir.
+- **Live API'yi AI Studio'da deneyin:** Uygulama geliştirmeye başlamadan önce Live API'yi [Google AI Studio](https://aistudio.google.com/app/live?hl=tr)'da denemeniz faydalı olabilir. Google AI Studio'da Live API'yi kullanmak için **Stream**'i (Yayın) seçin.
 
-## モデル比較
+## Model karşılaştırma
 
-次の表に、[Gemini 3.1 Flash Live プレビュー版](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ja)モデルと [Gemini 2.5 Flash Live プレビュー版](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=ja)モデルの主な違いをまとめます。
+Aşağıdaki tabloda, [Gemini 3.1 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=tr) ve [Gemini 2.5 Flash Live Preview](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-native-audio-preview-12-2025?hl=tr) modelleri arasındaki temel farklılıklar özetlenmiştir:
 
-| 機能 | Gemini 3.1 Flash Live プレビュー | Gemini 2.5 Flash ライブ プレビュー |
+| Özellik | Gemini 3.1 Flash Live Preview | Gemini 2.5 Flash Live Preview |
 | --- | --- | --- |
-| **[思考](#native-audio-output-thinking)** | `thinkingLevel` を使用して、`minimal`、`low`、`medium`、`high` などの設定で思考の深さを制御します。デフォルトは `minimal` で、レイテンシを最小限に抑えるように最適化されます。[思考レベルと予算](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#levels-budgets)をご覧ください。 | `thinkingBudget` を使用して思考トークンの数を設定します。動的な思考はデフォルトで有効になっています。無効にするには、`thinkingBudget` を `0` に設定します。[思考レベルと予算](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#levels-budgets)をご覧ください。 |
-| **[レスポンスの受信](https://ai.google.dev/api/live?hl=ja#bidigeneratecontentservercontent)** | 1 つのサーバー イベントに複数のコンテンツ部分（`inlineData` と文字起こしなど）を同時に含めることができます。コンテンツの欠落を防ぐため、コードが各イベントのすべての部分を処理するようにしてください。 | 各サーバー イベントにはコンテンツ部分が 1 つだけ含まれます。パーツは個別のイベントで配信されます。 |
-| **[クライアント コンテンツ](#incremental-updates)** | `send_client_content` は、初期コンテキスト履歴のシード処理でのみサポートされます（セッション構成で `initial_history_in_client_content` を設定する必要があります）。会話中にテキスト更新を送信するには、代わりに `send_realtime_input` を使用します。 | `send_client_content` は、会話全体でサポートされており、増分コンテンツ更新の送信とコンテキストの確立に使用されます。 |
-| **[カバレッジをオンにする](https://ai.google.dev/api/live?hl=ja#turncoverage)** | デフォルトは `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO` です。モデルのターンには、検出された音声アクティビティとすべての動画フレームが含まれます。 | デフォルトは `TURN_INCLUDES_ONLY_ACTIVITY` です。モデルのターンには、検出されたアクティビティのみが含まれます。 |
-| **[カスタム VAD](#disable-automatic-vad)**（`activity_start`/`activity_end`） | サポート対象。自動 VAD を無効にし、`activityStart` メッセージと `activityEnd` メッセージを手動で送信して、ターンの境界を制御します。 | サポート対象。自動 VAD を無効にし、`activityStart` メッセージと `activityEnd` メッセージを手動で送信して、ターンの境界を制御します。 |
-| **[VAD の自動構成](#configure-automatic-vad)** | サポート対象。`start_of_speech_sensitivity`、`end_of_speech_sensitivity`、`prefix_padding_ms`、`silence_duration_ms` などのパラメータを構成します。 | サポート対象。`start_of_speech_sensitivity`、`end_of_speech_sensitivity`、`prefix_padding_ms`、`silence_duration_ms` などのパラメータを構成します。 |
-| **[非同期関数呼び出し](https://ai.google.dev/gemini-api/docs/live-tools?hl=ja#async-function-calling)**（`behavior: NON_BLOCKING`） | 対象外。関数呼び出しは順次のみです。ツール応答を送信するまで、モデルは応答を開始しません。 | サポート対象。関数宣言で `behavior` を `NON_BLOCKING` に設定すると、関数が実行されている間もモデルがインタラクションを継続できます。`scheduling` パラメータ（`INTERRUPT`、`WHEN_IDLE`、`SILENT`）を使用して、モデルがレスポンスを処理する方法を制御します。 |
-| **[プロアクティブ音声](#proactive-audio)** | サポート対象外 | サポート対象。有効にすると、入力コンテンツが関連性のない場合、モデルは応答しないことを事前に決定できます。`proactivity` 構成で `proactive_audio` を `true` に設定します（`v1beta` が必要です）。 |
-| **[アフェクティブ ダイアログ](#affective-dialog)** | サポート対象外 | サポート対象。モデルは、入力の表現と口調に合わせて回答のスタイルを調整します。セッション構成で `enable_affective_dialog` を `true` に設定します（`v1beta` が必要です）。 |
+| **[Düşünme](#native-audio-output-thinking)** | `minimal`, `low`, `medium` ve `high` gibi ayarları kullanarak düşünce derinliğini kontrol etmek için `thinkingLevel`'ı kullanır. En düşük gecikme süresi için optimizasyon amacıyla varsayılan olarak `minimal` seçilir. [Düşünme seviyeleri ve bütçeler](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#levels-budgets) başlıklı makaleyi inceleyin. | Düşünme parçalarının sayısını ayarlamak için `thinkingBudget` kullanılır. Dinamik düşünme özelliği varsayılan olarak etkindir. Devre dışı bırakmak için `thinkingBudget` değerini `0` olarak ayarlayın. [Düşünme seviyeleri ve bütçeler](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#levels-budgets) başlıklı makaleyi inceleyin. |
+| **[Yanıt alma](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentservercontent)** | Tek bir sunucu etkinliği aynı anda birden fazla içerik bölümü (ör. `inlineData` ve transkript) içerebilir. İçeriklerin eksik kalmaması için kodunuzun her etkinlikteki tüm bölümleri işlediğinden emin olun. | Her sunucu etkinliği yalnızca bir içerik bölümü içerir. Parçalar ayrı etkinlikler halinde yayınlanır. |
+| **[Müşteri içeriği](#incremental-updates)** | `send_client_content` yalnızca ilk bağlam geçmişini başlatmak için desteklenir (oturum yapılandırmasında `initial_history_in_client_content` ayarının yapılması gerekir). Görüşme sırasında metin güncellemeleri göndermek için bunun yerine `send_realtime_input` simgesini kullanın. | `send_client_content`, artımlı içerik güncellemeleri göndermek ve bağlam oluşturmak için görüşme boyunca desteklenir. |
+| **[Dönüş kapsamı](https://ai.google.dev/api/live?hl=tr#turncoverage)** | Varsayılan olarak `TURN_INCLUDES_AUDIO_ACTIVITY_AND_ALL_VIDEO` değerine ayarlanır. Modelin dönüşü, algılanan ses etkinliğini ve tüm video karelerini içerir. | Varsayılan olarak `TURN_INCLUDES_ONLY_ACTIVITY` değerine ayarlanır. Modelin yanıtı yalnızca algılanan etkinliği içerir. |
+| **[Özel VAD](#disable-automatic-vad)** (`activity_start`/`activity_end`) | Desteklenir. Dönüşüm sınırlarını kontrol etmek için otomatik VAD'yi devre dışı bırakın ve `activityStart` ile `activityEnd` mesajlarını manuel olarak gönderin. | Desteklenir. Dönüşüm sınırlarını kontrol etmek için otomatik VAD'yi devre dışı bırakın ve `activityStart` ile `activityEnd` mesajlarını manuel olarak gönderin. |
+| **[Otomatik VAD yapılandırması](#configure-automatic-vad)** | Desteklenir. `start_of_speech_sensitivity`, `end_of_speech_sensitivity`, `prefix_padding_ms` ve `silence_duration_ms` gibi parametreleri yapılandırın. | Desteklenir. `start_of_speech_sensitivity`, `end_of_speech_sensitivity`, `prefix_padding_ms` ve `silence_duration_ms` gibi parametreleri yapılandırın. |
+| **[Eşzamansız işlev çağrısı](https://ai.google.dev/gemini-api/docs/live-tools?hl=tr#async-function-calling)** (`behavior: NON_BLOCKING`) | Desteklenmez. İşlev çağrıları yalnızca sıralı olarak yapılabilir. Model, araç yanıtını gönderene kadar yanıt vermeye başlamaz. | Desteklenir. İşlev çalışırken modelin etkileşime devam etmesine izin vermek için işlev tanımlamasında `behavior` değerini `NON_BLOCKING` olarak ayarlayın. `scheduling` parametresiyle (`INTERRUPT`, `WHEN_IDLE` veya `SILENT`) modelin yanıtları nasıl işleyeceğini kontrol edin. |
+| **[Proaktif ses](#proactive-audio)** | Desteklenmiyor | Desteklenir. Etkinleştirildiğinde model, giriş içeriği alakalı değilse yanıt vermemeye proaktif olarak karar verebilir. `proactivity` yapılandırmasında `proactive_audio` değerini `true` olarak ayarlayın (`v1beta` gerektirir). |
+| **[Duygusal diyalog](#affective-dialog)** (Affective dialogue) | Desteklenmiyor | Desteklenir. Model, yanıt stilini girişin ifadesine ve üslubuna uyacak şekilde uyarlar. Oturum yapılandırmasında `enable_affective_dialog` değerini `true` olarak ayarlayın (`v1beta` gerektirir). |
 
-Gemini 2.5 Flash Live から Gemini 3.1 Flash Live に移行するには、[移行ガイド](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ja#migrating)をご覧ください。
+Gemini 2.5 Flash Live'dan Gemini 3.1 Flash Live'a geçiş yapmak için [taşıma kılavuzuna](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=tr#migrating) bakın.
 
-## 接続を確立する
+## Bağlantı kurma
 
-次の例は、API キーを使用して接続を作成する方法を示しています。
+Aşağıdaki örnekte, API anahtarıyla nasıl bağlantı oluşturulacağı gösterilmektedir:
 
 ### Python
 
@@ -106,13 +108,13 @@ async function main() {
 main();
 ```
 
-## インタラクション モダリティ
+## Etkileşim biçimleri
 
-以降のセクションでは、Live API で使用可能なさまざまな入出力モダリティの例とコンテキストについて説明します。
+Aşağıdaki bölümlerde, Canlı API'de bulunan farklı giriş ve çıkış biçimleriyle ilgili örnekler ve destekleyici bağlamlar verilmiştir.
 
-### 音声を送信する
+### Ses gönderme
 
-音声は RAW PCM データ（RAW 16 ビット PCM 音声、16 kHz、リトル エンディアン）として送信する必要があります。
+Ses, ham PCM verileri (ham 16 bit PCM ses, 16 kHz, little-endian) olarak gönderilmelidir.
 
 ### Python
 
@@ -138,13 +140,13 @@ session.sendRealtimeInput({
 });
 ```
 
-### オーディオ形式
+### Ses biçimleri
 
-Live API の音声データは常に RAW、リトル エンディアン、16 ビット PCM です。オーディオ出力は常に 24 kHz のサンプルレートを使用します。入力音声はネイティブで 16 kHz ですが、必要に応じて Live API がリサンプリングするため、任意のサンプルレートを送信できます。入力音声のサンプルレートを伝えるには、音声を含む各 [Blob](https://ai.google.dev/api/caching?hl=ja#Blob) の MIME タイプを `audio/pcm;rate=16000` などの値に設定します。
+Live API'deki ses verileri her zaman ham, little-endian ve 16 bit PCM'dir. Ses çıkışında her zaman 24 kHz örnekleme hızı kullanılır. Giriş sesi, doğal olarak 16 kHz'dir ancak gerekirse Live API yeniden örnekleme yapacağından herhangi bir örnekleme hızı gönderilebilir. Giriş sesinin örnekleme hızını iletmek için ses içeren her [Blob](https://ai.google.dev/api/caching?hl=tr#Blob)'un MIME türünü `audio/pcm;rate=16000` gibi bir değere ayarlayın.
 
-### 音声を受信する
+### Ses alma
 
-モデルの音声応答は、データのチャンクとして受信されます。
+Modelin sesli yanıtları veri parçaları olarak alınır.
 
 ### Python
 
@@ -172,9 +174,9 @@ if (content?.modelTurn?.parts) {
 }
 ```
 
-### テキストを送信しています
+### Kısa mesaj gönderiliyor
 
-テキストは、`send_realtime_input`（Python）または `sendRealtimeInput`（JavaScript）を使用して送信できます。
+Metin, `send_realtime_input` (Python) veya `sendRealtimeInput` (JavaScript) kullanılarak gönderilebilir.
 
 ### Python
 
@@ -190,9 +192,9 @@ session.sendRealtimeInput({
 });
 ```
 
-### 動画を送信しています
+### Video gönderiliyor
 
-動画フレームは、特定のフレームレート（最大 1 フレーム / 秒）で個々の画像（JPEG や PNG など）として送信されます。
+Video kareleri, belirli bir kare hızında (saniyede en fazla 1 kare) ayrı resimler (ör. JPEG veya PNG) olarak gönderilir.
 
 ### Python
 
@@ -218,9 +220,9 @@ session.sendRealtimeInput({
 });
 ```
 
-#### コンテンツの増分更新
+#### Artımlı içerik güncellemeleri
 
-増分更新を使用して、テキスト入力の送信、セッション コンテキストの確立、セッション コンテキストの復元を行います。コンテキストが短い場合は、ターンバイターンのインタラクションを送信して、イベントの正確なシーケンスを表すことができます。
+Metin girişi göndermek, oturum bağlamı oluşturmak veya oturum bağlamını geri yüklemek için artımlı güncellemeleri kullanın. Kısa bağlamlar için, etkinliklerin tam sırasını temsil etmek üzere adım adım etkileşimler gönderebilirsiniz:
 
 ### Python
 
@@ -252,13 +254,13 @@ inputTurns = [{ "role": "user", "parts": [{ "text": "What is the capital of Germ
 session.sendClientContent({ turns: inputTurns, turnComplete: true })
 ```
 
-コンテキストが長い場合は、1 つのメッセージの概要を提供して、後続のインタラクション用にコンテキスト ウィンドウを空けておくことをおすすめします。セッション コンテキストを読み込む別の方法については、[セッションの再開](https://ai.google.dev/gemini-api/docs/live-session?hl=ja#session-resumption)をご覧ください。
+Daha uzun bağlamlarda, sonraki etkileşimler için bağlam penceresini boşaltmak amacıyla tek bir ileti özeti sağlamanız önerilir. Oturum bağlamını yüklemenin başka bir yöntemi için [Oturum Devam Ettirme](https://ai.google.dev/gemini-api/docs/live-session?hl=tr#session-resumption)'ye bakın.
 
-### 音声文字起こし
+### Sesten dönüştürülen metinler
 
-モデルのレスポンスに加えて、オーディオ出力と音声入力の両方の文字起こしを受け取ることもできます。
+Model yanıtının yanı sıra hem ses çıkışının hem de ses girişinin transkriptlerini alabilirsiniz.
 
-モデルのオーディオ出力の文字起こしを有効にするには、セットアップ構成で `output_audio_transcription` を送信します。音声文字変換の言語は、モデルのレスポンスから推測されます。
+Modelin ses çıkışının metne dönüştürülmesini etkinleştirmek için kurulum yapılandırmasında `output_audio_transcription` gönderin. Metne dönüştürme dili, modelin yanıtından çıkarılır.
 
 ### Python
 
@@ -376,7 +378,7 @@ async function main() {
 main();
 ```
 
-モデルの音声入力の文字起こしを有効にするには、セットアップ構成で `input_audio_transcription` を送信します。
+Modelin ses girişinin metne dönüştürülmesini etkinleştirmek için kurulum yapılandırmasında `input_audio_transcription` gönderin.
 
 ### Python
 
@@ -521,11 +523,11 @@ async function main() {
 main();
 ```
 
-### 音声と言語を変更する
+### Sesi ve dili değiştirme
 
-[ネイティブ オーディオ出力](#native-audio-output)モデルは、[テキスト読み上げ（TTS）](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ja#voices)モデルで利用可能な音声のいずれかをサポートします。[AI Studio](https://aistudio.google.com/app/live?hl=ja) で、すべての音声を聞くことができます。
+[Yerel ses çıkışı](#native-audio-output) modelleri, [Text-to-Speech (TTS)](https://ai.google.dev/gemini-api/docs/speech-generation?hl=tr#voices) modellerimiz için kullanılabilen tüm sesleri destekler. Tüm sesleri [AI Studio](https://aistudio.google.com/app/live?hl=tr)'da dinleyebilirsiniz.
 
-音声を指定するには、セッション構成の一部として `speechConfig` オブジェクト内に音声名を設定します。
+Bir ses belirtmek için oturum yapılandırmasının bir parçası olarak `speechConfig` nesnesinde ses adını ayarlayın:
 
 ### Python
 
@@ -547,15 +549,16 @@ const config = {
 };
 ```
 
-Live API は[複数の言語](#supported-languages)をサポートしています。[ネイティブ オーディオ出力](#native-audio-output)モデルは、適切な言語を自動的に選択し、言語コードの明示的な設定をサポートしていません。
+Live API [birden fazla dili](#supported-languages) destekler.
+[Yerel ses çıkışı](#native-audio-output) modelleri, uygun dili otomatik olarak seçer ve dil kodunun açıkça ayarlanmasını desteklemez.
 
-## ネイティブ オーディオ機能
+## Doğal ses özellikleri
 
-最新のモデルには[ネイティブ オーディオ出力](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=ja)が搭載されており、自然でリアルな音声を提供し、多言語対応のパフォーマンスを向上させます。
+En yeni modellerimizde [doğal ses çıkışı](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-live-preview?hl=tr) özelliği bulunur. Bu özellik, doğal ve gerçekçi sesler üretir ve çok dilli performansı iyileştirir.
 
-### 思考モード
+### Düşünen
 
-Gemini 3.1 モデルは、`thinkingLevel` を使用して思考の深さを制御します。設定には、`minimal`、`low`、`medium`、`high` などがあります。デフォルトは `minimal` で、レイテンシを最小限に抑えるように最適化されています。Gemini 2.5 モデルでは、代わりに `thinkingBudget` を使用して思考トークンの数を設定します。レベルと予算の詳細については、[レベルと予算の考え方](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#levels-budgets)をご覧ください。
+Gemini 3.1 modelleri, düşünce derinliğini kontrol etmek için `thinkingLevel` kullanır. `minimal`, `low`, `medium` ve `high` gibi ayarlar vardır. En düşük gecikme süresi için varsayılan ayar `minimal`'dır. Gemini 2.5 modelleri, düşünme parçalarının sayısını ayarlamak için `thinkingBudget` kullanır. Seviyeler ve bütçeler hakkında daha fazla bilgi için [Seviyeler ve bütçeler hakkında düşünceler](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#levels-budgets) başlıklı makaleyi inceleyin.
 
 ### Python
 
@@ -600,7 +603,7 @@ async function main() {
 main();
 ```
 
-また、構成で `includeThoughts` を `true` に設定すると、思考の要約を有効にできます。詳しくは、[思考の要約](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#summaries)をご覧ください。
+Ayrıca, yapılandırmanızda `includeThoughts` seçeneğini `true` olarak ayarlayarak düşünce özetlerini etkinleştirebilirsiniz. Daha fazla bilgi için [düşünce özetleri](https://ai.google.dev/gemini-api/docs/thinking?hl=tr#summaries) bölümüne bakın:
 
 ### Python
 
@@ -629,11 +632,11 @@ const config = {
 };
 ```
 
-### アフェクティブ ダイアログ
+### Moda uygun diyalog
 
-この機能を使用すると、Gemini は入力された表現と口調に応じて回答スタイルを調整できます。
+Bu özellik, Gemini'ın yanıt stilini giriş ifadesine ve tonuna göre uyarlamasını sağlar.
 
-アフェクティブ ダイアログを使用するには、セットアップ メッセージで API バージョンを `v1beta` に設定し、`enable_affective_dialog` を `true` に設定します。
+Duygusal diyaloğu kullanmak için API sürümünü `v1beta` olarak ayarlayın ve kurulum mesajında `enable_affective_dialog` değerini `true` olarak ayarlayın:
 
 ### Python
 
@@ -657,11 +660,11 @@ const config = {
 };
 ```
 
-### コンテキストに応じた音声にのみ対応
+### Proaktif ses
 
-この機能を有効にすると、コンテンツが関連性のない場合、Gemini は応答しないことを事前に判断できます。
+Bu özellik etkinleştirildiğinde Gemini, içerik alakalı değilse yanıt vermemeye proaktif olarak karar verebilir.
 
-これを使用するには、API バージョンを `v1beta` に設定し、セットアップ メッセージの `proactivity` フィールドを構成して、`proactive_audio` を `true` に設定します。
+Kullanmak için API sürümünü `v1beta` olarak ayarlayın, kurulum mesajında `proactivity` alanını yapılandırın ve `proactive_audio` değerini `true` olarak ayarlayın:
 
 ### Python
 
@@ -685,19 +688,19 @@ const config = {
 }
 ```
 
-## ライブ翻訳
+## Canlı çeviri
 
-Live API は、会話のリアルタイムかつ低レイテンシの翻訳をサポートします。この機能を使用すると、リアルタイムの音声翻訳アプリケーションを構築できます。
+Live API, sözlü sohbetlerin gerçek zamanlı ve düşük gecikmeli çevirisini destekler. Bu özellik, anlık sesli çeviri uygulamaları oluşturmanıza olanak tanır.
 
-詳細と例については、[リアルタイム翻訳ガイド](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=ja)をご覧ください。
+Daha fazla bilgi ve örnek için [Canlı Çeviri kılavuzuna](https://ai.google.dev/gemini-api/docs/live-api/live-translate?hl=tr) bakın.
 
-## 音声検出（VAD）
+## Ses Etkinliği Algılama (VAD)
 
-音声検出（VAD）により、モデルは人が話しているときを認識できます。これは、ユーザーがいつでもモデルを中断できるようにするため、自然な会話を作成するうえで不可欠です。
+Ses Etkinliği Algılama (VAD), modelin bir kişinin konuştuğu zamanı tanımasını sağlar. Bu, kullanıcının modeli istediği zaman kesmesine olanak tanıdığı için doğal sohbetler oluşturmak açısından önemlidir.
 
-VAD が中断を検出すると、進行中の生成はキャンセルされ、破棄されます。クライアントにすでに送信された情報だけがセッション履歴に保持されます。その後、サーバーは中断を報告する [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=ja#bidigeneratecontentservercontent) メッセージを送信します。
+VAD bir kesinti algıladığında devam eden oluşturma işlemi iptal edilir ve silinir. Yalnızca istemciye gönderilmiş olan bilgiler oturum geçmişinde saklanır. Ardından sunucu, kesintiyi bildirmek için [`BidiGenerateContentServerContent`](https://ai.google.dev/api/live?hl=tr#bidigeneratecontentservercontent) mesajı gönderir.
 
-Gemini サーバーは、保留中の関数呼び出しを破棄し、キャンセルされた呼び出しの ID を記載した `BidiGenerateContentServerContent` メッセージを送信します。
+Gemini sunucusu, bekleyen işlev çağrılarını siler ve iptal edilen çağrıların kimliklerini içeren bir `BidiGenerateContentServerContent` mesajı gönderir.
 
 ### Python
 
@@ -725,11 +728,12 @@ for (const turn of turns) {
 }
 ```
 
-### 自動 VAD
+### Otomatik VAD
 
-デフォルトでは、モデルは連続した音声入力ストリームに対して VAD を自動的に実行します。VAD は、[セットアップ構成](https://ai.google.dev/api/live?hl=ja#BidiGenerateContentSetup)の [`realtimeInputConfig.automaticActivityDetection`](https://ai.google.dev/api/live?hl=ja#RealtimeInputConfig.AutomaticActivityDetection) フィールドで構成できます。
+Model, varsayılan olarak sürekli bir ses girişi akışında otomatik olarak VAD gerçekleştirir. VAD, [`realtimeInputConfig.automaticActivityDetection`](https://ai.google.dev/api/live?hl=tr#RealtimeInputConfig.AutomaticActivityDetection)
+[kurulum yapılandırması](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentSetup) alanı ile yapılandırılabilir.
 
-音声ストリームが 1 秒以上一時停止すると（たとえば、ユーザーがマイクをオフにした場合）、キャッシュに保存された音声をフラッシュするために [`audioStreamEnd`](https://ai.google.dev/api/live?hl=ja#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) イベントが送信されます。クライアントはいつでも音声データの送信を再開できます。
+Ses akışı bir saniyeden uzun süre duraklatıldığında (örneğin, kullanıcı mikrofonu kapattığı için) önbelleğe alınan sesleri temizlemek için bir [`audioStreamEnd`](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentRealtimeInput.FIELDS.bool.BidiGenerateContentRealtimeInput.audio_stream_end) etkinliği gönderilmelidir. İstemci, ses verilerini göndermeye istediği zaman devam edebilir.
 
 ### Python
 
@@ -865,11 +869,11 @@ async function main() {
 main();
 ```
 
-`send_realtime_input` を使用すると、API は VAD に基づいて音声に自動的に応答します。`send_client_content` はメッセージをモデル コンテキストに順序どおりに追加しますが、`send_realtime_input` は決定論的な順序を犠牲にして応答性を最適化します。
+`send_realtime_input` ile API, VAD'ye göre sesli yanıtlara otomatik olarak yanıt verir. `send_client_content`, iletileri model bağlamına sırayla eklerken `send_realtime_input`, deterministik sıralama pahasına yanıt verme hızı için optimize edilmiştir.
 
-### VAD の自動構成
+### Otomatik VAD yapılandırması
 
-VAD アクティビティをより詳細に制御するには、次のパラメータを構成します。詳細については、[API リファレンス](https://ai.google.dev/api/live?hl=ja#automaticactivitydetection)をご覧ください。
+VAD etkinliği üzerinde daha fazla kontrol sahibi olmak için aşağıdaki parametreleri yapılandırabilirsiniz. Daha fazla bilgi için [API referansına](https://ai.google.dev/api/live?hl=tr#automaticactivitydetection) bakın.
 
 ### Python
 
@@ -909,9 +913,9 @@ const config = {
 };
 ```
 
-### 自動 VAD を無効にする
+### Otomatik VAD'yi devre dışı bırakma
 
-また、セットアップ メッセージで `realtimeInputConfig.automaticActivityDetection.disabled` を `true` に設定することで、自動 VAD を無効にすることもできます。この構成では、クライアントがユーザーの音声の検出と、適切なタイミングでの [`activityStart`](https://ai.google.dev/api/live?hl=ja#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start) メッセージと [`activityEnd`](https://ai.google.dev/api/live?hl=ja#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end) メッセージの送信を行います。この構成では `audioStreamEnd` は送信されません。代わりに、ストリームの中断は `activityEnd` メッセージでマークされます。
+Alternatif olarak, kurulum mesajında `realtimeInputConfig.automaticActivityDetection.disabled` değeri `true` olarak ayarlanarak otomatik VAD devre dışı bırakılabilir. Bu yapılandırmada, istemci kullanıcı konuşmasını algılamaktan ve uygun zamanlarda [`activityStart`](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityStart.BidiGenerateContentRealtimeInput.activity_start) ve [`activityEnd`](https://ai.google.dev/api/live?hl=tr#BidiGenerateContentRealtimeInput.FIELDS.BidiGenerateContentRealtimeInput.ActivityEnd.BidiGenerateContentRealtimeInput.activity_end) mesajlarını göndermekten sorumludur. Bu yapılandırmada `audioStreamEnd` gönderilmez. Bunun yerine, akışta meydana gelen kesintiler `activityEnd` mesajıyla işaretlenir.
 
 ### Python
 
@@ -958,33 +962,34 @@ session.sendRealtimeInput(
 session.sendRealtimeInput({ activityEnd: {} })
 ```
 
-### VAD パラメータとその品質への影響について
+### VAD parametrelerini ve bunların kalite üzerindeki etkisini anlama
 
-自動 VAD を使用する場合、次の 2 つのキー パラメータによって、音声が発話ターンに分割されてモデルに送信される方法が制御されます。
+Otomatik VAD kullanılırken sesin modele gönderilmeden önce konuşma dönüşlerine nasıl bölüneceğini kontrol eden iki temel parametre vardır:
 
-- **`prefixPaddingMs`**: 発話が検出される*前*に含める音声の量。この「ルックバック」により、VAD がトリガーされる前に始まる可能性のある最初の音節など、音声の開始全体をモデルでキャプチャできます。`0` の値を使用すると、単語の先頭が切り捨てられることがあります。
-- **`silenceDurationMs`**: 発話ターンを終了する前にサーバーが無音状態で待機する時間。これにより、システムが文中の自然な一時停止（思考、呼吸、句の境界など）をどの程度許容するかが決まります。
+- **`prefixPaddingMs`**: Konuşma algılanmadan *önce* eklenecek ses miktarı. Bu "geriye bakma" özelliği, modelin konuşmanın başlangıcını (VAD tetiklenmeden önce başlayabilen ilk hece dahil) tam olarak yakalamasını sağlar. `0` değeri, kelimelerin başlangıcının kırpılmasına neden olabilir.
+- **`silenceDurationMs`**: Sunucunun, konuşma sırasını sonlandırmadan önce sessizlik boyunca ne kadar bekleyeceği. Bu değer, sistemin cümle ortasındaki doğal duraksamalara (ör. düşünme, nefes alma veya cümle sınırları) ne kadar toleranslı olduğunu belirler.
 
-#### `silenceDurationMs` が音質に与える影響
+#### `silenceDurationMs`'nın ses kalitesi üzerindeki etkisi
 
-`silenceDurationMs` 値は、モデルが処理のために受け取る音声チャンクのサイズと完全性に直接影響します。
+`silenceDurationMs` değeri, modelin işleme için aldığı ses parçalarının boyutunu ve eksiksizliğini doğrudan etkiler:
 
-- **推奨（500 ～ 800 ミリ秒）:** 適切なバランスが取れています。モデルは、レイテンシを妥当な範囲に抑えながら、コンテキストが豊富な完全な音声チャンクを受け取ります。サーバーの内部デフォルトは約 800 ミリ秒です。
-- **低すぎる（100 ～ 200 ミリ秒など）:** システムが自然な一時停止中に音声ターンを終了し、1 つの発話が複数の小さな音声フラグメントに分割されます。モデルはこれらのフラグメントを個別に受信するため、フラグメント間のコンテキストが失われ、文字起こしとレスポンスの品質が低下します。
-- **高すぎる（2,000 ミリ秒以上など）:** ユーザーが話すのをやめてからシステムが応答するまでの時間が長くなり、モデルが応答するまでのレイテンシが長くなります。
+- **Önerilen (500 ms-800 ms):** İyi bir denge sağlar. Model, gecikmeyi makul düzeyde tutarken bağlam açısından zengin ve eksiksiz ses parçaları alır. Sunucunun dahili varsayılan değeri yaklaşık 800 ms'dir.
+- **Çok düşük (ör. 100 ms-200 ms):** Sistem, doğal duraklamalar sırasında konuşma dönüşlerini sonlandırarak tek bir ifadeyi birden fazla küçük ses parçasına böler. Model bu parçaları ayrı ayrı alır. Bu durumda, parçalar arası bağlam kaybolur ve transkripsiyon ile yanıt kalitesi düşer.
+- **Çok yüksek (ör.2000 ms+):** Sistem, kullanıcı konuşmayı bıraktıktan sonra uzun süre bekler. Bu durum, model yanıt vermeden önce algılanan gecikmeyi artırır.
 
-#### 手動（クライアントサイド）VAD のベスト プラクティス
+#### Manuel (istemci tarafı) VAD ile ilgili en iyi uygulamalar
 
-自動 VAD を無効にして、独自のクライアントサイド音声検出から `activityStart`/`activityEnd` シグナルを管理する場合、サーバーの組み込み音声バッファリング メカニズムはバイパスされます。これは次のことを意味します。
+Otomatik VAD'yi devre dışı bıraktığınızda ve `activityStart`/`activityEnd` sinyallerini kendi istemci tarafı ses algılama özelliğinizden yönettiğinizde, sunucunun yerleşik ses arabelleğe alma mekanizmalarının atlandığını unutmayın. Bunun anlamı şudur:
 
-1. **音声前のバッファなし:** サーバーは、検出された音声の開始前に音声を付加しなくなりました。クライアントは、`activityStart` を送信する前に十分な音声コンテキストを含める必要があります。
-2. **無音許容値なし:** サーバーは、追加の待機なしで `activityEnd` シグナルに即座に対応します。クライアントサイドの VAD でアグレッシブな発話終了しきい値（200 ミリ秒の無音など）を使用すると、自然な一時停止中に発話が文の途中で途切れることがあります。
+1. **Konuşma öncesi arabellek yok:** Sunucu artık algılanan konuşma başlangıcından önce ses eklemiyor. Müşteriniz, `activityStart` göndermeden önce yeterli ses bağlamı eklemelidir.
+2. **Sessizliğe tolerans yok:** Sunucu, `activityEnd` sinyalinize ek bekleme olmadan anında yanıt verir. İstemci tarafındaki VAD'niz agresif bir konuşma sonu eşiği kullanıyorsa (ör. 200 ms sessizlik), konuşma doğal duraklamalar sırasında cümlenin ortasında kesilebilir.
 
-手動 VAD で音質を維持するには、クライアントの音声アクティビティ検出器で発話終了の無音しきい値を **500 ミリ秒**以上に設定します。この値より低いしきい値では、音声が断片化し、音声文字変換とモデルのレスポンスの品質が低下することがよくあります。
+Manuel VAD ile ses kalitesini korumak için istemcinizin ses etkinliği algılayıcısında en az **500 ms**'lik bir konuşma sonu sessizlik eşiği kullanın.
+Bu değerin altındaki eşikler genellikle transkripsiyon ve model yanıt kalitesini düşüren parçalanmış seslere neden olur.
 
-## トークン数
+## Jeton sayısı
 
-消費されたトークンの合計数は、返されたサーバー メッセージの [usageMetadata](https://ai.google.dev/api/live?hl=ja#usagemetadata) フィールドで確認できます。
+Tüketilen jetonların toplam sayısını, döndürülen sunucu mesajının [usageMetadata](https://ai.google.dev/api/live?hl=tr#usagemetadata) alanında bulabilirsiniz.
 
 ### Python
 
@@ -1018,9 +1023,9 @@ for (const turn of turns) {
 }
 ```
 
-## メディアの解像度
+## Medya çözünürlüğü
 
-入力メディアのメディア解像度を指定するには、セッション構成の一部として `mediaResolution` フィールドを設定します。
+Oturum yapılandırmasının bir parçası olarak `mediaResolution` alanını ayarlayarak giriş medyası için medya çözünürlüğünü belirtebilirsiniz:
 
 ### Python
 
@@ -1044,98 +1049,99 @@ const config = {
 };
 ```
 
-## 制限事項
+## Sınırlamalar
 
-プロジェクトを計画する際は、Live API の次の制限事項を考慮してください。
+Projenizi planlarken Canlı API'nin aşağıdaki sınırlamalarını göz önünde bulundurun.
 
-### 応答のモダリティ
+### Yanıt biçimleri
 
-ネイティブ音声モデルは `AUDIO` 応答モダリティのみをサポートします。モデルのレスポンスをテキストとして取得する必要がある場合は、[出力音声の文字起こし](#audio-transcription)機能を使用します。
+Yerel ses modelleri yalnızca `AUDIO` yanıt biçimini destekler. Model yanıtını metin olarak almak istiyorsanız [çıkış sesini metne dönüştürme](#audio-transcription) özelliğini kullanın.
 
-### クライアント認証
+### İstemci kimlik doğrulaması
 
-Live API は、デフォルトでサーバー間認証のみを提供します。[クライアント / サーバー アプローチ](https://ai.google.dev/gemini-api/docs/live?hl=ja#implementation-approach)を使用して Live API アプリケーションを実装する場合は、[エフェメラル トークン](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=ja)を使用してセキュリティ リスクを軽減する必要があります。
+Live API, varsayılan olarak yalnızca sunucudan sunucuya kimlik doğrulama sağlar. Live API uygulamanızı [istemciden sunucuya yaklaşımı](https://ai.google.dev/gemini-api/docs/live?hl=tr#implementation-approach) kullanarak uyguluyorsanız güvenlik risklerini azaltmak için [geçici jetonlar](https://ai.google.dev/gemini-api/docs/ephemeral-tokens?hl=tr) kullanmanız gerekir.
 
-### セッション継続期間
+### Oturum süresi
 
-音声のみのセッションは 15 分に制限され、音声と動画のセッションは 2 分に制限されます。ただし、セッション継続時間を無制限に延長するために、さまざまな[セッション管理手法](https://ai.google.dev/gemini-api/docs/live-session?hl=ja)を構成できます。
+Yalnızca sesli oturumlar 15 dakika, sesli ve görüntülü oturumlar ise 2 dakika ile sınırlıdır.
+Ancak oturum süresinin sınırsız uzatılması için farklı [oturum yönetimi teknikleri](https://ai.google.dev/gemini-api/docs/live-session?hl=tr) yapılandırabilirsiniz.
 
-### コンテキスト ウィンドウ
+### Bağlam penceresi
 
-セッションのコンテキスト ウィンドウの上限は次のとおりです。
+Bir oturumun bağlam penceresi sınırı şöyledir:
 
-- [ネイティブ オーディオ出力](#native-audio-output)モデルの 128,000 トークン
-- 他の Live API モデルの 32,000 トークン
+- [Yerel ses çıkışı](#native-audio-output) modelleri için 128.000 jeton
+- Diğer Live API modelleri için 32.000 jeton
 
-## サポートされている言語
+## Desteklenen diller
 
-Live API は、次の 97 言語をサポートしています。
+Live API aşağıdaki 97 dili destekler.
 
-| 言語 | BCP-47 コード | 言語 | BCP-47 コード |
+| Dil | BCP-47 Kodu | Dil | BCP-47 Kodu |
 | --- | --- | --- | --- |
-| アフリカーンス語 | `af` | ラトビア語 | `lv` |
-| アカン語 | `ak` | リトアニア語 | `lt` |
-| アルバニア語 | `sq` | マケドニア語 | `mk` |
-| アムハラ語 | `am` | マレー語 | `ms` |
-| アラビア語 | `ar` | マラヤーラム語 | `ml` |
-| アルメニア語 | `hy` | マルタ語 | `mt` |
-| アッサム語 | `as` | マオリ語 | `mi` |
-| アゼルバイジャン語 | `az` | マラーティー語 | `mr` |
-| バスク語 | `eu` | モンゴル語 | `mn` |
-| ベラルーシ語 | `be` | ネパール語 | `ne` |
-| ベンガル語 | `bn` | ノルウェー語 | `no` |
-| ボスニア語 | `bs` | オディア語 | `or` |
-| ブルガリア語 | `bg` | オロモ語 | `om` |
-| ビルマ語 | `my` | パシュト語 | `ps` |
-| カタルーニャ語 | `ca` | ペルシャ語 | `fa` |
-| セブアノ語 | `ceb` | ポーランド語 | `pl` |
-| 中国語 | `zh` | ポルトガル語 | `pt` |
-| クロアチア語 | `hr` | パンジャブ語 | `pa` |
-| チェコ語 | `cs` | ケチュア語 | `qu` |
-| デンマーク語 | `da` | ルーマニア語 | `ro` |
-| オランダ語 | `nl` | ロマンシュ語 | `rm` |
-| 英語 | `en` | ロシア語 | `ru` |
-| エストニア語 | `et` | セルビア語 | `sr` |
-| フェロー語 | `fo` | シンド語 | `sd` |
-| フィリピン語 | `fil` | シンハラ語 | `si` |
-| フィンランド語 | `fi` | スロバキア語 | `sk` |
-| フランス語 | `fr` | スロベニア語 | `sl` |
-| ガリシア語 | `gl` | ソマリ語 | `so` |
-| ジョージア語 | `ka` | 南ソト語 | `st` |
-| ドイツ語 | `de` | スペイン語 | `es` |
-| ギリシャ語 | `el` | スワヒリ語 | `sw` |
-| グジャラート語 | `gu` | スウェーデン語 | `sv` |
-| ハウサ語 | `ha` | タジク語 | `tg` |
-| ヘブライ語 | `iw` | タミル語 | `ta` |
-| ヒンディー語 | `hi` | テルグ語 | `te` |
-| ハンガリー語 | `hu` | タイ語 | `th` |
-| アイスランド語 | `is` | ツワナ語 | `tn` |
-| インドネシア語 | `id` | トルコ語 | `tr` |
-| アイルランド語 | `ga` | トルクメン語 | `tk` |
-| イタリア語 | `it` | ウクライナ語 | `uk` |
-| 日本語 | `ja` | ウルドゥー語 | `ur` |
-| カンナダ語 | `kn` | ウズベク語 | `uz` |
-| カザフ語 | `kk` | ベトナム語 | `vi` |
-| クメール語 | `km` | ウェールズ語 | `cy` |
-| キニヤルワンダ語 | `rw` | 西フリジア語 | `fy` |
-| 韓国語 | `ko` | ウォロフ語 | `wo` |
-| クルド語 | `ku` | ヨルバ語 | `yo` |
-| キルギス語 | `ky` | ズールー語 | `zu` |
-| ラオ語 | `lo` |  |  |
+| Afrikaanca | `af` | Letonca | `lv` |
+| Akan | `ak` | Litvanca | `lt` |
+| Arnavutça | `sq` | Makedonca | `mk` |
+| Amharca | `am` | Malayca | `ms` |
+| Arapça | `ar` | Malayalamca | `ml` |
+| Ermenice | `hy` | Maltaca | `mt` |
+| Assamca | `as` | Maori | `mi` |
+| Azerice | `az` | Marathi | `mr` |
+| Baskça | `eu` | Moğolca | `mn` |
+| Belarusça | `be` | Nepalce | `ne` |
+| Bengalce | `bn` | Norveççe | `no` |
+| Boşnakça | `bs` | Oriya | `or` |
+| Bulgarca | `bg` | Oromca | `om` |
+| Burmaca | `my` | Peştuca | `ps` |
+| Katalanca | `ca` | Farsça | `fa` |
+| Sabuanca | `ceb` | Lehçe | `pl` |
+| Çince | `zh` | Portekizce | `pt` |
+| Hırvatça | `hr` | Pencapça | `pa` |
+| Çekya | `cs` | Keçuva dili | `qu` |
+| Danca | `da` | Rumence | `ro` |
+| Felemenkçe | `nl` | Romanşça | `rm` |
+| İngilizce | `en` | Rusça | `ru` |
+| Estonca | `et` | Sırpça | `sr` |
+| Faroese | `fo` | Sindice | `sd` |
+| Filipince | `fil` | Seylanca | `si` |
+| Fince | `fi` | Slovakça | `sk` |
+| Fransızca | `fr` | Slovence | `sl` |
+| Galiçyaca | `gl` | Somalice | `so` |
+| Gürcüce | `ka` | Güney Sotho dili | `st` |
+| Almanca | `de` | İspanyolca | `es` |
+| Greek | `el` | Swahili | `sw` |
+| Güceratça | `gu` | İsveççe | `sv` |
+| Hausaca | `ha` | Tacikçe | `tg` |
+| İbranice | `iw` | Tamilce | `ta` |
+| Hintçe | `hi` | Telugu dili | `te` |
+| Macarca | `hu` | Tayca | `th` |
+| İzlandaca | `is` | Tsvana | `tn` |
+| Endonezce | `id` | Türkçe | `tr` |
+| İrlandaca | `ga` | Türkmence | `tk` |
+| İtalyanca | `it` | Ukraynaca | `uk` |
+| Japonca | `ja` | Urduca | `ur` |
+| Kannada | `kn` | Özbekçe | `uz` |
+| Kazakça | `kk` | Vietnamca | `vi` |
+| Kmerce | `km` | Galce | `cy` |
+| Ruandaca | `rw` | Batı Frizcesi | `fy` |
+| Korece | `ko` | Wolof dili | `wo` |
+| Kürtçe | `ku` | Yorubaca | `yo` |
+| Kırgızca | `ky` | Zulu | `zu` |
+| Laoca | `lo` |  |  |
 
-## 次のステップ
+## Sırada ne var?
 
-- Live API を効果的に使用するための重要な情報については、[ツールの使用](https://ai.google.dev/gemini-api/docs/live-tools?hl=ja)ガイドと[セッション管理](https://ai.google.dev/gemini-api/docs/live-session?hl=ja)ガイドをご覧ください。
-- [Google AI Studio](https://aistudio.google.com/app/live?hl=ja) で Live API をお試しください。
-- Live API モデルの詳細については、モデルページの [Gemini 2.5 Flash ネイティブ音声](https://ai.google.dev/gemini-api/docs/models?hl=ja#gemini-2.5-flash-native-audio)をご覧ください。
-- [Live API クックブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=ja)、[Live API Tools クックブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=ja)、[Live API スタートガイド スクリプト](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py)で、他の例も試してみてください。
+- Canlı API'yi etkili bir şekilde kullanmayla ilgili temel bilgiler için [Araç Kullanımı](https://ai.google.dev/gemini-api/docs/live-tools?hl=tr) ve [Oturum Yönetimi](https://ai.google.dev/gemini-api/docs/live-session?hl=tr) kılavuzlarını okuyun.
+- Live API'yi [Google AI Studio](https://aistudio.google.com/app/live?hl=tr)'da deneyin.
+- Live API modelleri hakkında daha fazla bilgi için Modeller sayfasındaki [Gemini 2.5 Flash Native Audio](https://ai.google.dev/gemini-api/docs/models?hl=tr#gemini-2.5-flash-native-audio) bölümüne bakın.
+- [Live API çözüm kitabında](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.ipynb?hl=tr), [Live API Tools çözüm kitabında](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI_tools.ipynb?hl=tr) ve [Live API'yi kullanmaya başlama komut dosyasında](https://github.com/google-gemini/cookbook/blob/main/quickstarts/Get_started_LiveAPI.py) daha fazla örnek deneyin.
 
-フィードバックを送信
+Geri bildirim gönderin
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
 
-最終更新日 2026-07-31 UTC。
+Son güncelleme tarihi: 2026-07-31 UTC.
 
-ご意見をお聞かせください
+Bize geri bildirimde bulunmak mı istiyorsunuz?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-31 UTC。"],[],[]]
+[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-31 UTC."],[],[]]

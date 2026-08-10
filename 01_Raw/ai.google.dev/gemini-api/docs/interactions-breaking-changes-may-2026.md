@@ -1,45 +1,43 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=tr
-fetched_at: 2026-08-03T04:34:32.321080+00:00
-title: "Etkile\u015fimler API'si: \u00d6nemli de\u011fi\u015fiklikler i\u00e7in ta\u015f\u0131ma k\u0131lavuzu (May\u0131s 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/interactions-breaking-changes-may-2026?hl=es-419
+fetched_at: 2026-08-10T03:23:00.613850+00:00
+title: "API de Interactions: Gu\u00eda de migraci\u00f3n de cambios rotundos (mayo de 2026) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Etkileşimler API'si](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=tr) artık genel kullanıma sunulmuştur. En yeni özelliklere ve modellere erişmek için bu API'yi kullanmanızı öneririz.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=tr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google, içerikleri tercih ettiğiniz dile çevirmek için yapay zeka teknolojisini kullanır. Yapay zeka çevirilerinde hata olabilir.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Ana Sayfa](https://ai.google.dev/?hl=tr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=tr)
-- [Dokümanlar](https://ai.google.dev/gemini-api/docs?hl=tr)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Geri bildirim gönderin
+Enviar comentarios
 
-# Etkileşimler API'si: Önemli değişiklikler için taşıma kılavuzu (Mayıs 2026)
+# API de Interactions: Guía de migración de cambios rotundos (mayo de 2026)
 
-`v1beta` Etkileşimler API'sinde, API şeklini yeniden yapılandırarak uçuş ortasında yönlendirme ve eşzamansız araç çağrıları gibi gelecekteki özellikleri destekleyen, uyumluluğu bozan değişiklikler yapılıyor. Bu sayfada, nelerin değiştiği açıklanmakta ve geçiş yapmanıza yardımcı olmak için öncesi ve sonrası kod örnekleri verilmektedir. İki değişiklik kategorisi vardır:
+La API de `v1beta` Interactions presenta cambios rotundos que reestructuran la forma de la API para admitir capacidades futuras, como la dirección durante el vuelo y las llamadas a herramientas asíncronas. En esta página, se explica qué cambiará y se proporcionan ejemplos de código antes y después para ayudarte con la migración. Existen dos categorías de cambios:
 
-1. [**Adımlar şeması**](#steps-schema): `steps` dizisi, `outputs` dizisinin yerini alarak her etkileşim dönüşünün yapılandırılmış bir zaman çizelgesini sunar.
-2. [**Çıkış biçimi yapılandırması**](#output-format-config): Yeni bir polimorfik
-   `response_format`, tüm çıkış biçimi kontrollerini birleştirir ve kaldırır
-   `response_mime_type`.
+1. [**Esquema de pasos**](#steps-schema): Un nuevo array `steps` reemplaza el array `outputs` y proporciona una cronología estructurada de cada turno de interacción.
+2. [**Configuración del formato de salida**](#output-format-config): Un nuevo `response_format` polimórfico consolida todos los controles de formato de salida y quita `response_mime_type`.
 
-Entegrasyonunuzu güncellemek için [Yeni şemaya nasıl geçilir?](#how-to-migrate) başlıklı makaledeki adımları uygulayın.
+Sigue los pasos que se indican en [Cómo migrar al nuevo esquema](#how-to-migrate) para actualizar tu integración.
 
-## Temel değişiklik: `outputs` ile `steps` arasındaki fark
+## Cambio principal: De `outputs` a `steps`
 
-Yeni şema, `outputs` dizisini `steps` dizisiyle değiştirir.
+El esquema nuevo reemplaza el array `outputs` por un array `steps`.
 
-- **Eski**: Yanıtlarda yalnızca modelin oluşturduğu içeriği içeren düz bir `outputs` dizisi döndürülüyordu.
-- **Yeni şema**: Yanıtlarda, tür ayırıcıları içeren yapılandırılmış adımları içeren bir `steps` dizisi döndürülür.
+- **Heredado**: Las respuestas devolvían un array `outputs` simple que contenía solo el contenido generado por el modelo.
+- **Nuevo esquema**: Las respuestas devuelven un array `steps` que contiene pasos estructurados con discriminadores de tipo.
 
-`POST /interactions` yalnızca çıkış adımlarını döndürür. `GET /interactions/{id}`
-İlk `user_input` adımı da dahil olmak üzere adım zaman çizelgesinin tamamını döndürür.
+`POST /interactions` solo devuelve pasos de salida. `GET /interactions/{id}`
+devuelve el cronograma completo de pasos, incluido el paso inicial `user_input`.
 
-### Temel giriş/çıkış (tekli)
+### Entrada y salida básicas (unarias)
 
-#### Önce (eski)
+#### Antes (heredado)
 
 ### Python
 
@@ -91,7 +89,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Sonra (yeni şema)
+#### Después (esquema nuevo)
 
 ### Python
 
@@ -173,11 +171,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### İşlev çağırma
+### Llamada a función
 
-İstek yapısı değişmeden kalır ancak yanıt, düz içerik yerine yapılandırılmış adımlar kullanır.`outputs`
+La estructura de la solicitud no cambia, pero la respuesta reemplaza el contenido `outputs` plano por pasos estructurados.
 
-#### Önce (eski)
+#### Antes (heredado)
 
 ### Python
 
@@ -222,7 +220,7 @@ for (const output of interaction.outputs) {
 }
 ```
 
-#### Sonra (yeni şema)
+#### Después (esquema nuevo)
 
 ### Python
 
@@ -270,11 +268,11 @@ for (const step of interaction.steps) {
 }
 ```
 
-### Sunucu tarafı araçlar
+### Herramientas del servidor
 
-Sunucu tarafı araçlar (ör. Google Arama veya Kod Yürütme) artık `steps` dizisinde belirli adım türleri oluşturuyor. Eski şema bu işlemleri `outputs` dizisindeki belirli içerik türleri olarak döndürürken yeni şema bunları `steps` dizisine taşır. Aşağıdaki örneklerde Google Arama kullanılmaktadır.
+Las herramientas del servidor (como la Búsqueda de Google o la Ejecución de código) ahora generan tipos de pasos específicos en el array `steps`. Si bien el esquema heredado devolvía estas operaciones como tipos de contenido específicos dentro del array `outputs`, el nuevo esquema las mueve al array `steps`. En los siguientes ejemplos, se usa la Búsqueda de Google.
 
-#### Önce (eski)
+#### Antes (heredado)
 
 ### Python
 
@@ -348,7 +346,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-#### Sonra (yeni şema)
+#### Después (esquema nuevo)
 
 ### Python
 
@@ -432,11 +430,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 }
 ```
 
-### Canlı Yayın
+### Transmisión
 
-Yayın, yeni etkinlik türleri sunar:
+La transmisión expone nuevos tipos de eventos:
 
-#### Yeni etkinlik türleri
+#### Nuevos tipos de eventos
 
 - `interaction.created`
 - `interaction.completed`
@@ -446,22 +444,22 @@ Yayın, yeni etkinlik türleri sunar:
 - `step.delta`
 - `step.stop`
 
-#### Desteği sonlandırılmış etkinlik türleri
+#### Tipos de eventos obsoletos
 
-Aşağıdaki eski etkinlik türlerinin yerini yukarıda listelenen yeni etkinlikler almıştır:
+Los siguientes tipos de eventos heredados se reemplazan por los nuevos eventos que se mencionaron anteriormente:
 
 - `interaction.start` → `interaction.created`
 - `content.start` → `step.start`
 - `content.delta` → `step.delta`
 - `content.stop` → `step.stop`
 - `interaction.complete` → `interaction.completed`
-- `interaction.status_update` → `interaction.in_progress`, `interaction.requires_action` vb. ile değiştirildi.
+- `interaction.status_update` → reemplazado por `interaction.in_progress`, `interaction.requires_action`, etcétera
 
-**Akışla işlev çağrıları**: İşlev çağrısıyla akışı kullandığınızda `step.start` etkinliği işlev adını, `step.delta` etkinlikleri ise bağımsız değişkenleri kısmi JSON dizeleri olarak (`arguments_delta` kullanarak) aktarır. Tam bağımsız değişkenleri almak için bu deltaları biriktirmeniz gerekir. Bu, işlev çağrısı nesnesinin tamamını tek seferde aldığınız tekli çağrılardan farklıdır.
+**Llamadas a funciones de transmisión**: Cuando usas la transmisión con la llamada a función, el evento `step.start` entrega el nombre de la función y los eventos `step.delta` transmiten los argumentos como cadenas JSON parciales (con `arguments_delta`). Debes acumular estos deltas para obtener los argumentos completos. Esto difiere de las llamadas unarias, en las que recibes el objeto de llamada a la función completo de una vez.
 
-#### Örnekler
+#### Ejemplos
 
-##### Önce (Eski)
+##### Antes (heredado)
 
 ### Python
 
@@ -528,7 +526,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
 // data: {"id": "int_123", "status": "done", "usage": {"total_tokens": 42}}
 ```
 
-##### Sonra (Yeni Şema)
+##### Después (esquema nuevo)
 
 ### Python
 
@@ -605,29 +603,29 @@ for await (const event of stream) {
  // data: {"type": "interaction.completed", "interaction": {"id": "int_xyz", "status": "completed", "usage": {"prompt_tokens": 10, "completion_tokens": 5, "total_tokens": 15}}} // NEW: Dedicated completion event
 ```
 
-### Durum Bilgisiz Görüşme Geçmişi
+### Historial de conversaciones sin estado
 
-İstemci tarafında (durum bilgisi içermeyen kullanım) görüşme geçmişini manuel olarak yönetiyorsanız önceki dönüşleri nasıl bir araya getirdiğinizi güncellemeniz gerekir.
+Si administras el historial de conversaciones de forma manual en el cliente (caso de uso sin estado), debes actualizar la forma en que encadenas los turnos anteriores.
 
-- **Eski**: Geliştiriciler genellikle yanıtlardan `outputs` dizisini toplar ve sonraki dönüşte `input` alanında geri gönderirdi.
-- **Yeni şema**: Artık yanıttan `steps` dizisini toplamanız ve bunu bir sonraki isteğin `input` alanına iletmeniz, yeni kullanıcı dönüşünüzü `user_input` adımı olarak eklemeniz gerekir.
+- **Legado**: Los desarrolladores solían recopilar el array `outputs` de las respuestas y enviarlo de vuelta en el campo `input` en el siguiente turno.
+- **Nuevo esquema**: Ahora debes recopilar el array `steps` de la respuesta y pasarlo en el campo `input` de la próxima solicitud, agregando tu nuevo turno de usuario como un paso `user_input`.
 
-## Çıkış biçimi yapılandırması: `response_format` değişiklik
+## Configuración del formato de resultado: cambios en `response_format`
 
-Güncellenen API, tüm çıkış biçimi kontrollerini birleşik ve polimorfik bir `response_format` alanında birleştirir. Bu, çıkış yapılandırmasını üst düzeyde merkezileştirir ve `generation_config`'nın model davranışına (ör. sıcaklık, top\_p ve düşünme) odaklanmasını sağlar.
+La API actualizada consolida todos los controles de formato de salida en un campo `response_format` polimórfico unificado. Esto centraliza la configuración de salida en el nivel superior y mantiene `generation_config` enfocado en el comportamiento del modelo (como la temperatura, top\_p y el pensamiento).
 
-### Önemli değişiklikler
+### Cambios clave
 
-- **API, `response_mime_type` öğesini kaldırır.** Artık `response_format` içindeki biçim girişi başına MIME türünü belirtebilirsiniz.
-- **`response_format` artık polimorfik bir nesne (veya dizi).** Her girişin bir `type` ayrıştırıcısı (`text`, `audio`, `image`) ve türe özgü alanları vardır. Birden fazla çıkış biçimi isteğinde bulunmak için bir biçim girişleri dizisi iletin.
-- **`image_config`, `generation_config` konumundan `response_format` konumuna taşınıyor.**
-  Artık `aspect_ratio` ve `image_size` gibi görüntü çıkışı ayarlarını `"type": "image"` ile birlikte `response_format` girişinde belirtiyorsunuz.
+- **La API quita `response_mime_type`.** Ahora especificas el tipo de MIME por entrada de formato dentro de `response_format`.
+- **`response_format` ahora es un objeto polimórfico (o array).** Cada entrada tiene un discriminador `type` (`text`, `audio`, `image`) y campos específicos del tipo. Para solicitar varias modalidades de salida, pasa un array de entradas de formato.
+- **`image_config` se mueve de `generation_config` a `response_format`.**
+  Ahora puedes especificar la configuración de salida de la imagen, como `aspect_ratio` y `image_size`, en una entrada `response_format` con `"type": "image"`.
 
-### Yapılandırılmış çıkış (JSON)
+### Resultados estructurados (JSON)
 
-Yeni şema, `response_mime_type` alanını kaldırır. Bunun yerine, MIME türünü ve JSON şemasını `response_format` nesnesinin içinde `"type": "text"` ile belirtin.
+El esquema nuevo quita el campo `response_mime_type`. En su lugar, especifica el tipo de MIME y el esquema JSON dentro de un objeto `response_format` con `"type": "text"`.
 
-#### Önce (eski)
+#### Antes (heredado)
 
 ### Python
 
@@ -683,7 +681,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Sonra (yeni şema)
+#### Después (esquema nuevo)
 
 ### Python
 
@@ -754,11 +752,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Resim yapılandırması
+### Configuración de la imagen
 
-Yeni şema, `image_config` öğesini `generation_config` öğesinden kaldırır. Artık görüntü çıkışı ayarlarını `response_format` ile `"type": "image"` girişinde belirtiyorsunuz.
+El nuevo esquema quita `image_config` de `generation_config`. Ahora puedes especificar la configuración de salida de la imagen en una entrada `response_format` con `"type": "image"`.
 
-#### Önce (eski)
+#### Antes (heredado)
 
 ### Python
 
@@ -807,7 +805,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Sonra (yeni şema)
+#### Después (esquema nuevo)
 
 ### Python
 
@@ -860,11 +858,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-### Ses yapılandırması
+### Configuración de audio
 
-Yeni şema, `response_modalities: ["audio"]` yerine `"type": "audio"` değerine sahip bir `response_format` girişi kullanır.
+El esquema nuevo reemplaza `response_modalities: ["audio"]` por una entrada `response_format` de `"type": "audio"`.
 
-#### Önce (eski)
+#### Antes (heredado)
 
 ### Python
 
@@ -913,7 +911,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-#### Sonra (yeni şema)
+#### Después (esquema nuevo)
 
 ### Python
 
@@ -972,51 +970,51 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?key=
   }'
 ```
 
-Birden fazla çıkış biçimi (ör. metin ve ses birlikte) istemek için tek bir nesne yerine `response_format`'ya biçim girişlerinden oluşan bir dizi iletin.
+Para solicitar varias modalidades de salida (por ejemplo, texto y audio juntos), pasa un array de entradas de formato a `response_format` en lugar de un solo objeto.
 
-## Yeni şemaya nasıl geçilir?
+## Cómo migrar al nuevo esquema
 
-### SDK kullanıcıları
+### Usuarios del SDK
 
-En son SDK sürümüne (Python ≥2.0.0, JavaScript ≥2.0.0) yükseltin. SDK, yanıtları okuma şeklinizi güncellemenin dışında herhangi bir kod değişikliği yapmanıza gerek kalmadan sizi otomatik olarak yeni şemaya kaydeder (yukarıdaki örneklere bakın). Bu SDK sürümlerinde yalnızca yeni şemanın desteklendiğini unutmayın. Eski SDK sürümleri (Python 1.x.x, JavaScript 1.x.x), eski şema **8 Haziran 2026**'da kaldırılana kadar çalışmaya devam edecek.
+Actualiza a la versión más reciente del SDK (Python ≥2.0.0, JavaScript ≥2.0.0). El SDK te habilita automáticamente para usar el nuevo esquema. No se necesitan cambios de código más allá de actualizar la forma en que lees las respuestas (consulta los ejemplos anteriores). Ten en cuenta que solo se admite el esquema nuevo en estas versiones del SDK. Las versiones anteriores del SDK (Python 1.x.x, JavaScript 1.x.x) seguirán funcionando hasta que se quite el esquema heredado el **8 de junio de 2026**.
 
-### REST API kullanıcıları
+### Usuarios de la API de REST
 
-Yeni şemayı hemen etkinleştirmek için isteklerinize `Api-Revision: 2026-05-20` üstbilgisini ekleyin. **26 Mayıs**'tan sonra yeni şema, tüm istekler için varsayılan şema haline gelir. API'nin eski şemayı kalıcı olarak kaldıracağı **8 Haziran**'a kadar `Api-Revision: 2026-05-07` ile geçici olarak kapsam dışında kalabilirsiniz.
+Agrega el encabezado `Api-Revision: 2026-05-20` a tus solicitudes para habilitar el nuevo esquema ahora. Después del **26 de mayo**, el esquema nuevo se convertirá en el predeterminado para todas las solicitudes. Puedes inhabilitar temporalmente la API con `Api-Revision: 2026-05-07` hasta el **8 de junio**, fecha en la que la API quitará de forma permanente el esquema heredado.
 
-### Zaman çizelgesi
+### Cronograma
 
-| Tarih | Faz | SDK kullanıcıları | REST API kullanıcıları |
+| Fecha | Fase | Usuarios del SDK | Usuarios de la API de REST |
 | --- | --- | --- | --- |
-| **7 Mayıs** | Etkinleştir | Yeni SDK sürümü kullanıma sunuldu (Python ≥2.0.0, JS ≥2.0.0). Yeni şemayı otomatik olarak almak için yükseltin. | Etkinleştirmek için `Api-Revision: 2026-05-20` üstbilgisini ekleyin. Varsayılan olarak eski sürüm kalır. |
-| **26 Mayıs** | Varsayılan çevirme | Daha önce yükselttiyseniz herhangi bir işlem yapmanız gerekmez. Eski SDK'lar (Python 1.x.x, JS 1.x.x) çalışmaya devam eder ancak eski yanıtlar döndürür. | Yeni şema artık varsayılan olarak ayarlanmıştır. Kapsam dışında kalmayı seçmek için `Api-Revision: 2026-05-07` üstbilgisini gönderin. |
-| **8 Haziran** | Gün batımı | Python 1.x.x ve JS 1.x.x SDK sürümleri, Etkileşimler API çağrıları için çalışmayacak. | Etkileşimler API'si için eski şema kaldırıldı. `Api-Revision` üstbilgisi yoksayıldı. |
+| **7 de mayo** | Habilitar | Hay una nueva versión del SDK disponible (Python ≥2.0.0, JS ≥2.0.0). Actualiza tu cuenta para obtener el nuevo esquema automáticamente. | Agrega el encabezado `Api-Revision: 2026-05-20` para habilitar la opción. El valor predeterminado sigue siendo el heredado. |
+| **26 de mayo** | Volteo predeterminado | No es necesario que realices ninguna acción si ya realizaste la actualización. Los SDKs anteriores (Python 1.x.x, JS 1.x.x) aún funcionan, pero devuelven respuestas heredadas. | El nuevo esquema ahora es el predeterminado. Envía el encabezado `Api-Revision: 2026-05-07` para dejar de participar. |
+| **8 de junio** | Atardecer | Las versiones 1.x.x de los SDKs de Python y JS dejarán de funcionar para las llamadas a la API de Interactions. | Se quitó el esquema heredado de la API de Interactions. Se ignoró el encabezado `Api-Revision`. |
 
-## Taşıma Denetim Listesi
+## Lista de tareas para la migración
 
-### Adımlar şeması (`steps`)
+### Esquema de pasos (`steps`)
 
-- Kodu, yanıt içeriğini `outputs` yerine `steps` dizisinden okuyacak şekilde güncelleyin. [Örnekleri inceleyin](#basic-unary).
-- Kodunuzun hem `user_input` hem de `model_output` adım türlerini işlediğini doğrulayın. [Örnekleri inceleyin](#basic-unary).
-- (İşlev Çağırma) `steps` dizisindeki `function_call` adımlarını bulmak için kodu güncelleyin. [Örnekleri inceleyin](#function-calling).
-- (Sunucu Tarafı Araçlar) Kodu, araca özgü adımları (ör. `google_search_call`, `google_search_result`) işleyecek şekilde güncelleyin. [Örnekleri inceleyin](#server-side-tools).
-- (Durum Bilgisiz Geçmiş) Geçmiş yönetimini, sonraki isteğin `input` alanında `steps` dizisini iletecek şekilde güncelleyin. [Ayrıntıları göster](#stateless-history).
-- (Yalnızca akış) İstemciyi yeni SSE etkinlik türlerini (`interaction.created`, `step.delta` vb.) dinleyecek şekilde güncelleyin. [Örnekleri inceleyin](#streaming).
+- Actualiza el código para leer el contenido de la respuesta del array `steps` en lugar de `outputs`. [Consulta ejemplos](#basic-unary).
+- Verifica que tu código controle los tipos de pasos `user_input` y `model_output`. [Consulta ejemplos](#basic-unary).
+- (Llamada a función) Actualiza el código para encontrar los pasos de `function_call` en el array `steps`. [Consulta ejemplos](#function-calling).
+- (Herramientas del servidor) Actualiza el código para controlar los pasos específicos de la herramienta (p.ej., `google_search_call`, `google_search_result`). [Consulta ejemplos](#server-side-tools).
+- (Historial sin estado) Actualiza la administración del historial para pasar el array `steps` en el campo `input` de la próxima solicitud. [Consulta los detalles](#stateless-history).
+- (Solo para transmisión) Actualiza el cliente para que escuche los nuevos tipos de eventos de SSE (`interaction.created`, `step.delta`, etc.). [Consulta ejemplos](#streaming).
 
-### Çıkış biçimi yapılandırması (`response_format`)
+### Configuración del formato de salida (`response_format`)
 
-- `response_mime_type` değerini `response_format` içindeki bir `mime_type` alanı ile değiştirin. [Örnekleri inceleyin](#structured-output).
-- Mevcut `response_format` JSON şemanızı `{"type": "text", "schema": ...}` nesnesi içine alın. [Örnekleri inceleyin](#structured-output).
-- (Görüntü Üretme) `image_config`, `generation_config` öğesinden `response_format` içindeki `{"type": "image", ...}` girişine taşındı. [Örnekleri inceleyin](#image-config).
-- (Konuşma Üretimi) `response_modalities=["audio"]` yerine `response_format`'deki `{"type": "audio"}` girişini kullanın. [Örnekleri inceleyin](#audio-config).
-- (Çok formatlı) Birden fazla çıkış biçimi istenirken `response_format` öğesini tek bir nesneden diziye dönüştürün.
+- Reemplaza `response_mime_type` por un campo `mime_type` dentro de `response_format`. [Consulta ejemplos](#structured-output).
+- Encapsula tu esquema JSON `response_format` existente dentro de un objeto `{"type": "text", "schema": ...}`. [Consulta ejemplos](#structured-output).
+- (Generación de imágenes) Mueve `image_config` de `generation_config` a una entrada `{"type": "image", ...}` en `response_format`. [Consulta ejemplos](#image-config).
+- (Generación de voz) Reemplaza `response_modalities=["audio"]` por una entrada `{"type": "audio"}` en `response_format`. [Consulta ejemplos](#audio-config).
+- (Multimodal) Convierte `response_format` de un solo objeto a un array cuando se solicitan varias modalidades de salida.
 
-Geri bildirim gönderin
+Enviar comentarios
 
-Aksi belirtilmediği sürece bu sayfanın içeriği [Creative Commons Atıf 4.0 Lisansı](https://creativecommons.org/licenses/by/4.0/) altında ve kod örnekleri [Apache 2.0 Lisansı](https://www.apache.org/licenses/LICENSE-2.0) altında lisanslanmıştır. Ayrıntılı bilgi için [Google Developers Site Politikaları](https://developers.google.com/site-policies?hl=tr)'na göz atın. Java, Oracle ve/veya satış ortaklarının tescilli ticari markasıdır.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Son güncelleme tarihi: 2026-07-07 UTC.
+Última actualización: 2026-07-07 (UTC)
 
-Bize geri bildirimde bulunmak mı istiyorsunuz?
+¿Quieres brindar más información?
 
-[[["Anlaması kolay","easyToUnderstand","thumb-up"],["Sorunumu çözdü","solvedMyProblem","thumb-up"],["Diğer","otherUp","thumb-up"]],[["İhtiyacım olan bilgiler yok","missingTheInformationINeed","thumb-down"],["Çok karmaşık / çok fazla adım var","tooComplicatedTooManySteps","thumb-down"],["Güncel değil","outOfDate","thumb-down"],["Çeviri sorunu","translationIssue","thumb-down"],["Örnek veya kod sorunu","samplesCodeIssue","thumb-down"],["Diğer","otherDown","thumb-down"]],["Son güncelleme tarihi: 2026-07-07 UTC."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-07 (UTC)"],[],[]]

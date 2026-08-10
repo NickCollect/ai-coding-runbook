@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/speech-generation?hl=it
-fetched_at: 2026-08-03T04:32:13.570533+00:00
+fetched_at: 2026-08-10T03:19:55.229786+00:00
 title: "Generazione di sintesi vocale (TTS) \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

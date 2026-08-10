@@ -1,43 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=zh-CN
-fetched_at: 2026-08-03T04:33:54.899095+00:00
-title: "\u56fe\u7247\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/image-understanding?hl=ja
+fetched_at: 2026-08-10T03:23:19.610147+00:00
+title: "\u753b\u50cf\u306e\u7406\u89e3 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [首页](https://ai.google.dev/?hl=zh-cn)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
-- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-发送反馈
+フィードバックを送信
 
-# 图片理解
+# 画像の理解
 
-Gemini 模型从一开始就具有多模态特性，可解锁各种图片处理和计算机视觉任务，包括但不限于图片配文、分类和视觉问答，而无需训练专门的机器学习模型。
+Gemini モデルは、マルチモーダル AI として一から構築されています。そのため、画像キャプション、分類、視覚的な質問応答など、さまざまな画像処理タスクやコンピュータ ビジョン タスクを、専用の ML モデルをトレーニングすることなく実行できます。
 
-除了通用的多模态功能外，Gemini 模型还通过额外训练，针对特定使用场景（例如[对象检测](#object-detection)）提供
-**更高的准确率**。
+Gemini モデルは、一般的なマルチモーダル機能に加えて、追加のトレーニングにより、[オブジェクト検出](#object-detection)などの特定のユースケースで**精度が向上**しています。
 
-## 将图片传递给 Gemini
+## Gemini に画像を渡す
 
-您可以使用以下两种方法将图片作为输入提供给 Gemini：
+Gemini に画像を渡す方法は 2 つあります。
 
-- [传递内嵌图片数据](#inline-image)：非常适合较小的文件（总请求
-  大小小于 20MB，包括提示）。
-- [使用 File API 上传图片](#upload-image)：建议用于较大的文件，或在
-  多个请求中重复使用图片。
+- [インライン画像データを渡す](#inline-image): 小さいファイル（プロンプトを含む合計リクエスト サイズが 20 MB 未満）に最適です。
+- [File API を使用して画像をアップロードする](#upload-image): 大きなファイルや、複数のリクエストで画像を再利用する場合におすすめします。
 
-### 传递内嵌图片数据
+### インライン画像データを渡す
 
-您可以在对 `generateContent` 的请求中传递内嵌图片数据。您可以提供 Base64 编码的字符串形式的图片数据，也可以直接读取本地文件（具体取决于语言）。
+`generateContent` へのリクエストでインライン画像データを渡すことができます。画像データは、Base64 エンコード文字列として提供するか、ローカルファイルを直接読み取って提供できます（言語によって異なります）。
 
-以下示例展示了如何从本地文件读取图片并将其传递给 `generateContent` API 进行处理。
+次の例は、ローカル ファイルから画像を読み取り、処理のために `generateContent` API に渡す方法を示しています。
 
 ### Python
 
@@ -145,7 +142,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }' 2> /dev/null
 ```
 
-您还可以从网址提取图片，将其转换为字节，然后将其传递给 `generateContent`，如以下示例所示。
+次の例に示すように、URL から画像を取得してバイトに変換し、`generateContent` に渡すこともできます。
 
 ### Python
 
@@ -287,10 +284,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }' 2> /dev/null
 ```
 
-### 使用 File API 上传图片
+### File API を使用して画像をアップロードする
 
-对于较大的文件，或者为了能够重复使用同一图片文件，请使用 Files API。以下代码会上传图片文件，然后在对 `generateContent` 的调用中使用该文件。如需了解
-更多信息和示例，请参阅[Files API 指南](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)。
+大きなファイルの場合や、同じ画像ファイルを繰り返し使用できるようにするには、Files API を使用します。次のコードは、画像ファイルをアップロードし、`generateContent` の呼び出しでそのファイルを使用します。詳細と例については、[Files API ガイド](https://ai.google.dev/gemini-api/docs/files?hl=ja)をご覧ください。
 
 ### Python
 
@@ -435,9 +431,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 使用多张图片进行提示
+## 複数の画像を使用したプロンプト
 
-您可以在单个提示中提供多张图片，方法是在 `contents` 数组中添加多个图片 `Part` 对象。这些对象可以是内嵌数据（本地文件或网址）和 File API 引用的组合。
+`contents` 配列に複数の画像 `Part` オブジェクトを含めることで、1 つのプロンプトで複数の画像を指定できます。インライン データ（ローカル ファイルまたは URL）と File API 参照を混在させることができます。
 
 ### Python
 
@@ -622,9 +618,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## 对象检测
+## オブジェクト検出
 
-模型经过训练，可以检测图片中的对象并获取其边界框坐标。相对于图片尺寸的坐标会缩放为 [0, 1000]。您需要根据原始图片大小对这些坐标进行反缩放。
+モデルは、画像内のオブジェクトを検出し、その境界ボックスの座標を取得するようにトレーニングされます。画像の寸法を基準とした座標は、[0, 1000] にスケーリングされます。元の画像サイズに基づいて、これらの座標をスケールダウンする必要があります。
 
 ### Python
 
@@ -826,14 +822,14 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }' 2> /dev/null
 ```
 
-如需查看更多示例，请查看 [Gemini Cookbook](https://github.com/google-gemini/cookbook) 中的以下笔记本：
+その他の例については、[Gemini クックブック](https://github.com/google-gemini/cookbook)の次のノートブックをご覧ください。
 
-- [2D 空间理解笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=zh-cn)
-- [实验性 3D 指向笔记本](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=zh-cn)
+- [2D 空間認識ノートブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Spatial_understanding.ipynb?hl=ja)
+- [試験運用版の 3D ポインティング ノートブック](https://colab.research.google.com/github/google-gemini/cookbook/blob/main/examples/Spatial_understanding_3d.ipynb?hl=ja)
 
-## 支持的图片格式
+## サポートされている画像形式
 
-Gemini 支持以下图片格式 MIME 类型：
+Gemini は、次の画像形式の MIME タイプをサポートしています。
 
 - PNG - `image/png`
 - JPEG - `image/jpeg`
@@ -841,71 +837,60 @@ Gemini 支持以下图片格式 MIME 类型：
 - HEIC - `image/heic`
 - HEIF - `image/heif`
 
-如需了解其他文件输入方法，请参阅
-[文件输入方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=zh-cn)指南。
+その他のファイル入力方法については、[ファイル入力方法](https://ai.google.dev/gemini-api/docs/file-input-methods?hl=ja)ガイドをご覧ください。
 
-## 功能
+## 機能
 
-所有 Gemini 模型版本都是多模态的，可用于各种图片处理和计算机视觉任务，包括但不限于图片配文、视觉问答、图片分类和对象检测。
+すべての Gemini モデル バージョンはマルチモーダルであり、画像キャプション、Visual Question & Answering、画像分類、オブジェクト検出など、幅広い画像処理タスクやコンピュータ ビジョン タスクで使用できます。
 
-Gemini 可以减少对专用机器学习模型的需求，具体取决于您的质量和性能要求。
+Gemini を使用すると、品質とパフォーマンスの要件に応じて、特殊な ML モデルを使用する必要性が軽減されます。
 
-除了通用功能（例如增强的
-[对象检测](#object-detection)）之外，最新模型版本还经过专门训练，可提高
-专用任务的准确率。
+最新のモデル バージョンは、汎用機能に加えて、[オブジェクト検出](#object-detection)の強化など、専門的なタスクの精度を向上させるために特別にトレーニングされています。
 
-## 限制和关键技术信息
+## 制限事項と主な技術情報
 
-### 文件限制
+### ファイルの上限
 
-Gemini 模型每个请求最多支持 3,600 个图片文件。
+Gemini モデルは、リクエストあたり最大 3,600 個の画像ファイルをサポートしています。
 
-### token 计算
+### トークンの計算
 
-- 如果两个尺寸均小于或等于 384 像素，则为 258 个 token。
-  较大的图片会平铺到 768x768 像素的图块中，每个图块需要 258 个 token。
+- 両方の寸法が 384 ピクセル以下の場合、258 個のトークン。大きな画像は 768x768 ピクセルのタイルに分割され、それぞれ 258 個のトークンを消費します。
 
-计算图块数量的粗略公式如下：
+タイルの数を計算するおおよその式は次のとおりです。
 
-- 计算裁剪单元大小，大致为：floor(min(width, height) / 1.5)。
-- 将每个尺寸除以裁剪单元大小，然后将结果相乘，即可得到图块数量。
+- 切り抜き単位のサイズを計算します。これはおおよそ floor(min(width, height) / 1.5) です。
+- 各ディメンションをクロップ単位サイズで割り、乗算してタイルの数を取得します。
 
-例如，对于尺寸为 960x540 的图片，裁剪单元大小为 360。将每个尺寸除以 360，得到的图块数量为 3 \* 2 = 6。
+たとえば、960x540 のサイズの画像の場合、切り抜き単位のサイズは 360 になります。各ディメンションを 360 で割ると、タイルの数は 3 × 2 = 6 になります。
 
-### 媒体分辨率
+### メディアの解像度
 
-Gemini 3 引入了对多模态视觉处理的精细控制，通过 `media_resolution` 参数实现。`media_resolution` 参数用于确定**为每个输入图片或视频帧分配的 token 数量上限** 。分辨率越高，模型读取精细文本或识别细小细节的能力就越强，但 token 用量和延迟也会增加。
+Gemini 3 では、`media_resolution` パラメータを使用して、マルチモーダル ビジョン処理をきめ細かく制御できます。`media_resolution` パラメータは、**入力画像または動画フレームごとに割り当てられるトークンの最大数**を決定します。解像度が高いほど、モデルが細かいテキストを読み取ったり、小さな詳細を識別する能力が向上しますが、トークンの使用量とレイテンシが増加します。
 
-如需详细了解该参数及其对 token 计算的影响，
-请参阅[媒体分辨率](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=zh-cn)指南。
+パラメータとそのトークン計算への影響について詳しくは、[メディアの解像度](https://ai.google.dev/gemini-api/docs/generate-content/media-resolution?hl=ja)ガイドをご覧ください。
 
-## 技巧和最佳做法
+## おすすめの方法やお役立ち情報
 
-- 验证图片是否正确旋转。
-- 使用清晰、不模糊的图片。
-- 如果使用包含文本的单张图片，请在 `contents` 数组中将文本提示放在图片部分之后。
+- 画像が正しく回転することを確認します。
+- 鮮明でぼやけていない画像を使用します。
+- テキストを含む 1 つの画像を使用する場合は、`contents` 配列の画像部分の後にテキスト プロンプトを配置します。
 
-## 后续步骤
+## 次のステップ
 
-本指南介绍了如何上传图片文件并根据图片输入生成文本输出。如需了解详情，请参阅以下资源：
+このガイドでは、画像ファイルをアップロードし、画像入力からテキスト出力を生成する方法について説明します。詳細については、次のリソースをご覧ください。
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn)：详细了解如何上传和管理文件以供 Gemini 使用。
-- [系统说明](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-cn#system-instructions)：
-  系统说明可让您根据
-  特定需求和使用情形来控制模型的行为。
-- [文件提示策略](https://ai.google.dev/gemini-api/docs/files?hl=zh-cn#prompt-guide)：
-  Gemini API 支持使用文本、图片、音频和视频数据进行提示，也
-  称为多模态提示。
-- [安全指南](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=zh-cn)：生成式
-  AI 模型有时会产生意外输出，例如不准确、
-  有偏见或令人反感的输出。后处理和人工评估对于限制此类输出造成的危害风险至关重要。
+- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=ja): Gemini で使用するファイルのアップロードと管理について説明します。
+- [システム指示](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja#system-instructions): システム指示を使用すると、特定のニーズやユースケースに基づいてモデルの動作を制御できます。
+- [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide): Gemini API は、テキスト、画像、音声、動画データによるプロンプト（マルチモーダル プロンプトとも呼ばれます）をサポートしています。
+- [安全に関するガイダンス](https://ai.google.dev/gemini-api/docs/safety-guidance?hl=ja): 生成 AI モデルは、不正確、偏見がある、不快な出力など、予期しない出力を生成することがあります。このような出力による危害のリスクを軽減するには、後処理と人間による評価が不可欠です。
 
-发送反馈
+フィードバックを送信
 
-如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-最后更新时间 (UTC)：2026-07-30。
+最終更新日 2026-07-30 UTC。
 
-需要向我们提供更多信息？
+ご意見をお聞かせください
 
-[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-30。"],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

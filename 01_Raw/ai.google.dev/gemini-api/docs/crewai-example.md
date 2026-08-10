@@ -1,45 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=id
-fetched_at: 2026-08-03T04:41:38.114536+00:00
-title: "Analisis dukungan pelanggan dengan Gemini dan CrewAI \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/crewai-example?hl=zh-TW
+fetched_at: 2026-08-10T03:13:02.112481+00:00
+title: "\u4f7f\u7528 Gemini \u548c CrewAI \u5206\u6790\u9867\u5ba2\u670d\u52d9 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=id)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
 
-Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
+Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
 
-- [Beranda](https://ai.google.dev/?hl=id)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
-- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
+- [首頁](https://ai.google.dev/?hl=zh-tw)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
+- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
 
-Kirim masukan
+提供意見
 
-# Analisis dukungan pelanggan dengan Gemini dan CrewAI
+# 使用 Gemini 和 CrewAI 分析顧客服務
 
-[CrewAI](https://docs.crewai.com/introduction) adalah framework untuk mengatur
-agen AI otonom yang berkolaborasi untuk mencapai sasaran yang kompleks. Framework ini memungkinkan Anda
-menentukan agen dengan menentukan peran, sasaran, dan latar belakang, lalu menentukan tugas
-untuk agen tersebut.
+[CrewAI](https://docs.crewai.com/introduction) 是一個框架，可自動化調度管理自主 AI 代理，讓這些代理互相合作，達成複雜目標。您可以指定角色、目標和背景故事來定義代理，然後為這些代理定義工作。
 
-Contoh ini menunjukkan cara membuat sistem multi-agen untuk menganalisis data dukungan pelanggan guna mengidentifikasi masalah dan mengusulkan peningkatan proses menggunakan Gemini 3 Flash, yang menghasilkan laporan yang ditujukan untuk dibaca oleh Chief Operating Officer (COO).
+這個範例說明如何建構多代理程式系統，分析客戶服務資料以找出問題，並使用 Gemini 3 Flash 提出流程改善建議，然後生成一份報告，供營運長 (COO) 閱讀。
 
-Panduan ini akan menunjukkan cara membuat "kru" agen AI yang dapat melakukan tugas berikut:
+本指南將說明如何建立 AI 代理「團隊」，執行下列工作：
 
-1. Mengambil dan menganalisis data dukungan pelanggan (disimulasikan dalam contoh ini).
-2. Mengidentifikasi masalah berulang dan hambatan proses.
-3. Menyarankan peningkatan yang dapat ditindaklanjuti.
-4. Mengumpulkan temuan ke dalam laporan ringkas yang sesuai untuk COO.
+1. 擷取及分析客戶服務資料 (本範例中為模擬資料)。
+2. 找出重複發生的問題和程序瓶頸。
+3. 建議可行的改善措施。
+4. 將調查結果彙整成簡明扼要的報告，方便營運長閱讀。
 
-Anda memerlukan kunci Gemini API. Jika belum memilikinya, Anda bisa [mendapatkannya di
-Google AI Studio](https://aistudio.google.com/apikey?hl=id).
+您需要 Gemini API 金鑰。如果還沒有金鑰，可以[在 Google AI Studio 取得](https://aistudio.google.com/apikey?hl=zh-tw)。
 
 ```
 pip install "crewai[tools]"
 ```
 
-Tetapkan kunci Gemini API Anda sebagai variabel lingkungan bernama `GEMINI_API_KEY`, lalu konfigurasi CrewAI untuk menggunakan model Gemini.
+將 Gemini API 金鑰設為名為 `GEMINI_API_KEY` 的環境變數，然後將 CrewAI 設定為使用 Gemini 模型。
 
 ```
 import os
@@ -54,14 +50,13 @@ gemini_llm = LLM(
 )
 ```
 
-## Menentukan komponen
+## 定義元件
 
-Buat aplikasi CrewAI menggunakan **Alat**, **Agen**, **Tugas**, dan
-**Kru** itu sendiri. Bagian berikut menjelaskan setiap komponen ini.
+使用**工具**、**代理**、**工作**和 **Crew** 本身，建構 CrewAI 應用程式。以下各節將說明這些元件。
 
-### Alat
+### 工具
 
-Alat adalah kemampuan yang dapat digunakan agen untuk berinteraksi dengan dunia luar atau melakukan tindakan tertentu. Di sini, Anda menentukan alat placeholder untuk menyimulasikan pengambilan data dukungan pelanggan. Dalam aplikasi sebenarnya, Anda akan terhubung ke database, API, atau sistem file. Untuk mengetahui informasi selengkapnya tentang alat, lihat panduan alat [CrewAI](https://docs.crewai.com/concepts/tools).
+工具是代理可用的功能，可與外部世界互動或執行特定動作。您可以在這裡定義預留位置工具，模擬擷取客戶服務資料。在實際應用程式中，您會連線至資料庫、API 或檔案系統。如要進一步瞭解工具，請參閱 [CrewAI 工具指南](https://docs.crewai.com/concepts/tools)。
 
 ```
 from crewai.tools import BaseTool
@@ -91,9 +86,9 @@ class CustomerSupportDataTool(BaseTool):
 support_data_tool = CustomerSupportDataTool()
 ```
 
-### Agen
+### 代理
 
-Agen adalah pekerja AI individual di kru Anda. Setiap agen memiliki `role`, `goal`, `backstory`, `llm` yang ditetapkan, dan `tools` opsional. Untuk mengetahui informasi selengkapnya tentang agen, lihat [panduan agen CrewAI](https://docs.crewai.com/concepts/agents).
+代理是團隊中的個別 AI 工作者，每個代理程式都有特定的 `role`、`goal`、`backstory`、指派的 `llm` 和選用的 `tools`。如要進一步瞭解代理程式，請參閱 [CrewAI 代理程式指南](https://docs.crewai.com/concepts/agents)。
 
 ```
 from crewai import Agent
@@ -140,9 +135,9 @@ report_writer = Agent(
 )
 ```
 
-### Tugas
+### 工作
 
-Tugas menentukan penugasan spesifik untuk agen. Setiap tugas memiliki `description`, `expected_output`, dan ditetapkan ke `agent`. Tugas dijalankan secara berurutan secara default dan menyertakan konteks tugas sebelumnya. Untuk mengetahui informasi selengkapnya tentang tugas, lihat [panduan tugas CrewAI](https://docs.crewai.com/concepts/tasks).
+工作會定義代理的具體指派事項。每項工作都有 `description`、`expected_output`，並指派給 `agent`。工作預設會依序執行，並包含先前工作的脈絡資訊。如要進一步瞭解工作，請參閱 [CrewAI 工作指南](https://docs.crewai.com/concepts/tasks)。
 
 ```
 from crewai import Task
@@ -201,9 +196,9 @@ Ensure the report is easy to understand, focuses on actionable insights, and is 
 )
 ```
 
-### Crew
+### 工作人員
 
-`Crew` menggabungkan agen dan tugas, menentukan proses alur kerja (seperti "berurutan").
+`Crew` 會將代理和工作整合在一起，定義工作流程程序 (例如「循序」)。
 
 ```
 from crewai import Crew, Process
@@ -216,9 +211,9 @@ support_analysis_crew = Crew(
 )
 ```
 
-## Menjalankan kru
+## Run the crew
 
-Terakhir, mulai eksekusi kru dengan input yang diperlukan.
+最後，使用任何必要輸入內容啟動團隊執行作業。
 
 ```
 # Start the crew's work
@@ -232,19 +227,17 @@ print("--- Final Report for COO ---")
 print(result)
 ```
 
-Skrip kini akan dijalankan. `Data Analyst` akan menggunakan alat, `Process
-Optimizer` akan menganalisis temuan, dan `Report Writer` akan menyusun
-laporan akhir, yang kemudian dicetak ke konsol. Setelan `verbose=True` akan menampilkan proses pemikiran dan tindakan mendetail dari setiap agen.
+指令碼現在會執行。`Data Analyst` 會使用這項工具，`Process
+Optimizer` 會分析結果，`Report Writer` 則會編譯最終報告，然後將報告列印到控制台。`verbose=True`設定會顯示每位代理程式的詳細思考過程和動作。
 
-Untuk mempelajari CrewAI lebih lanjut, lihat [CrewAI
-pengantar](https://docs.crewai.com/introduction).
+如要進一步瞭解 CrewAI，請參閱 [CrewAI 簡介](https://docs.crewai.com/introduction)。
 
-Kirim masukan
+提供意見
 
-Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
+除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
 
-Terakhir diperbarui pada 2026-06-10 UTC.
+上次更新時間：2026-06-10 (世界標準時間)。
 
-Ada masukan untuk kami?
+想進一步說明嗎？
 
-[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-06-10 UTC."],[],[]]
+[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-06-10 (世界標準時間)。"],[],[]]

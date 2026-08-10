@@ -1,46 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-errors?hl=vi
-fetched_at: 2026-08-03T04:32:52.586683+00:00
-title: "L\u1ed7i API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/api-errors?hl=he
+fetched_at: 2026-08-10T03:17:51.111860+00:00
+title: "\u05e9\u05d2\u05d9\u05d0\u05d5\u05ea API \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-# Lỗi API
+# שגיאות API
 
-Trang này cung cấp thông tin tham khảo về các mã lỗi phụ trợ do API `GenerateContent` trả về, mô tả định dạng phản hồi lỗi gRPC và cung cấp các bước khắc phục sự cố.
+בדף הזה מפורטים קודי השגיאה של הבק-אנד שמוחזרים על ידי `GenerateContent` API, מוסבר פורמט התגובה של שגיאת gRPC ומפורטים שלבים לפתרון בעיות.
 
-## Mã lỗi HTTP
+## קודי שגיאה של HTTP
 
-Bảng sau đây liệt kê các mã lỗi phổ biến ở phần phụ trợ, giải thích nguyên nhân gây ra các lỗi đó và các giải pháp được đề xuất:
+בטבלה הבאה מפורטים קודי שגיאה נפוצים של ה-Backend, הסברים לגבי הסיבות לשגיאות ופתרונות מומלצים:
 
 |  |  |  |  |  |
 | --- | --- | --- | --- | --- |
-| **Mã HTTP** | **Trạng thái** | **Nội dung mô tả** | **Ví dụ** | **Giải pháp** |
-| 400 | INVALID\_ARGUMENT | Nội dung yêu cầu có định dạng không chính xác. | Có lỗi chính tả hoặc thiếu trường bắt buộc trong yêu cầu của bạn. | Hãy tham khảo [tài liệu tham khảo API](https://ai.google.dev/api?hl=vi) để biết định dạng yêu cầu, ví dụ và các phiên bản được hỗ trợ. Việc sử dụng các tính năng của phiên bản API mới hơn với một điểm cuối cũ hơn có thể gây ra lỗi. |
-| 400 | FAILED\_PRECONDITION | Bậc miễn phí của Gemini API chưa được cung cấp ở quốc gia của bạn. Vui lòng bật tính năng thanh toán cho dự án của bạn trong Google AI Studio. | Bạn đang đưa ra yêu cầu ở một khu vực không được hỗ trợ cấp miễn phí và bạn chưa bật tính năng thanh toán cho dự án của mình trong Google AI Studio. | Để sử dụng Gemini API, bạn cần thiết lập một gói có tính phí bằng [Google AI Studio](https://aistudio.google.com/apikey?hl=vi). |
-| 403 | PERMISSION\_DENIED | Khoá API của bạn không có các quyền cần thiết. | Bạn đang sử dụng sai khoá API; bạn đang cố gắng sử dụng một mô hình đã điều chỉnh mà không trải qua quy trình [xác thực thích hợp](https://ai.google.dev/gemini-api/docs/model-tuning?hl=vi). | Kiểm tra để đảm bảo bạn đã đặt khoá API và có quyền truy cập phù hợp. Đồng thời, hãy nhớ thực hiện quy trình xác thực thích hợp để sử dụng các mô hình được điều chỉnh. |
-| 404 | NOT\_FOUND | Không tìm thấy tài nguyên được yêu cầu. | Không tìm thấy tệp hình ảnh, âm thanh hoặc video được đề cập trong yêu cầu của bạn. | Kiểm tra xem tất cả các tham số trong yêu cầu của bạn có hợp lệ cho phiên bản API của bạn hay không. |
-| 429 | RESOURCE\_EXHAUSTED | Bạn đã vượt quá một trong các giới hạn tần suất yêu cầu của API (RPM, TPM, RPD, mức chi tiêu, v.v.). | Bạn đang gửi quá nhiều yêu cầu, sử dụng quá nhiều mã thông báo hoặc vượt quá hạn mức dựa trên mức chi tiêu cho lịch sử thanh toán và cấp của tài khoản. | Xác minh rằng bạn đang nằm trong [giới hạn về tốc độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi) của mô hình. Đợi một lát rồi thử lại. Giảm tốc độ hoặc kích thước của các yêu cầu. [Yêu cầu tăng giới hạn tốc độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi#request-rate-limit-increase) nếu cần. |
-| 499 | ĐÃ HỦY | Thao tác đã bị huỷ, thường là do người gọi. | Ứng dụng đã đóng kết nối trước khi API có thể hoàn tất việc phản hồi. | Kiểm tra xem máy khách hoặc cơ sở hạ tầng mạng của bạn có đóng kết nối quá sớm hay không (ví dụ: do hết thời gian chờ ở phía máy khách). |
-| 500 | NỘI BỘ | Đã xảy ra lỗi không mong muốn với Google. | Bối cảnh đầu vào của bạn quá dài. | Kiểm tra [trang trạng thái của Gemini API](https://aistudio.google.com/status?hl=vi) để biết mọi sự cố đang diễn ra. Giảm ngữ cảnh đầu vào hoặc tạm thời chuyển sang một mô hình khác (ví dụ: từ Gemini 2.5 Pro sang Gemini 2.5 Flash) để xem có hiệu quả không. Hoặc đợi một lát rồi thử lại yêu cầu. Nếu vấn đề vẫn tiếp diễn sau khi bạn thử lại, vui lòng báo cáo vấn đề đó bằng nút **Gửi ý kiến phản hồi** trong Google AI Studio. |
-| 503 | KHÔNG CÓ | Dịch vụ có thể tạm thời bị quá tải hoặc không hoạt động. | Dịch vụ này tạm thời hết dung lượng. | Kiểm tra [trang trạng thái của Gemini API](https://aistudio.google.com/status?hl=vi) để biết mọi sự cố đang diễn ra. Tạm thời chuyển sang một mô hình khác (ví dụ: từ Gemini 2.5 Pro sang Gemini 2.5 Flash) để xem vấn đề có được giải quyết hay không. Hoặc đợi một lát rồi thử lại yêu cầu. Nếu vấn đề vẫn tiếp diễn sau khi bạn thử lại, vui lòng báo cáo vấn đề đó bằng nút **Gửi ý kiến phản hồi** trong Google AI Studio. |
-| 504 | DEADLINE\_EXCEEDED | Dịch vụ không thể hoàn tất quá trình xử lý trong thời hạn. | Câu lệnh (hoặc bối cảnh) của bạn quá lớn nên không thể xử lý kịp thời. | Đặt "thời gian chờ" dài hơn trong yêu cầu của ứng dụng để tránh lỗi này. |
+| **קוד HTTP** | **סטטוס** | **תיאור** | **דוגמה** | **המוצר** |
+| 400 | INVALID\_ARGUMENT | גוף הבקשה לא תקין. | יש שגיאת הקלדה או שדה חובה חסר בבקשה. | ב[הפניית ה-API](https://ai.google.dev/api?hl=he) אפשר למצוא מידע על פורמט הבקשות, דוגמאות וגרסאות נתמכות. שימוש בתכונות מגרסת API חדשה יותר עם נקודת קצה ישנה יותר עלול לגרום לשגיאות. |
+| 400 | FAILED\_PRECONDITION | השימוש ב-Gemini API בחינם לא זמין במדינה שלך. צריך להפעיל את החיוב בפרויקט ב-Google AI Studio. | אתם שולחים בקשה באזור שבו לא נתמך מסלול חינמי, ולא הפעלתם חיוב בפרויקט שלכם ב-Google AI Studio. | כדי להשתמש ב-Gemini API, תצטרכו להגדיר תוכנית בתשלום באמצעות [Google AI Studio](https://aistudio.google.com/apikey?hl=he). |
+| 403 | PERMISSION\_DENIED | למפתח ה-API שלכם אין את ההרשאות הנדרשות. | אתם משתמשים במפתח API שגוי. אתם מנסים להשתמש במודל שעבר התאמה בלי לעבור [אימות תקין](https://ai.google.dev/gemini-api/docs/model-tuning?hl=he). | בודקים שמפתח ה-API מוגדר ושיש לו את הגישה הנכונה. כדי להשתמש במודלים שעברו התאמה אישית, חשוב לוודא שאתם עוברים אימות תקין. |
+| 404 | NOT\_FOUND | המשאב המבוקש לא נמצא. | לא נמצא קובץ תמונה, אודיו או וידאו שההפניה אליו מופיעה בבקשה. | בודקים אם כל הפרמטרים בבקשה תקפים לגרסת ה-API שלכם. |
+| 429 | RESOURCE\_EXHAUSTED | חרגתם מאחת ממגבלות הקצב של ה-API (RPM,‏ TPM,‏ RPD, הוצאות וכו'). | אתם שולחים יותר מדי בקשות, משתמשים ביותר מדי טוקנים או חורגים מהמגבלות שמבוססות על הוצאות בהיסטוריית החיובים ובדרגה של החשבון. | מוודאים שאתם עומדים ב[מגבלות הקצב](https://ai.google.dev/gemini-api/docs/rate-limits?hl=he) של המודל. מחכים קצת ומנסים שוב. צריך להקטין את הקצב או את הגודל של הבקשות. במקרה הצורך, [מבקשים להגדיל את מגבלת קצב הבקשות](https://ai.google.dev/gemini-api/docs/rate-limits?hl=he#request-rate-limit-increase). |
+| 499 | בוטלה | הפעולה בוטלה, בדרך כלל על ידי המתקשר. | הלקוח סגר את החיבור לפני שה-API סיים להגיב. | בודקים אם הלקוח או תשתית הרשת סוגרים את החיבור לפני הזמן (למשל, בגלל זמן קצוב לתפוגה בצד הלקוח). |
+| 500 | פנימי | קרתה שגיאה לא צפויה בצד של Google. | הקשר של הקלט ארוך מדי. | כדאי לבדוק את [דף הסטטוס של Gemini API](https://aistudio.google.com/status?hl=he) כדי לראות אם יש תקריות שמתרחשות כרגע. כדאי לצמצם את הקשר של הקלט או לעבור זמנית למודל אחר (למשל מ-Gemini 2.5 Pro ל-Gemini 2.5 Flash) ולבדוק אם זה עוזר. אפשר גם להמתין קצת ולנסות שוב לשלוח את הבקשה. אם הבעיה נמשכת אחרי שמנסים שוב, אפשר לדווח עליה באמצעות הכפתור **שליחת משוב** ב-Google AI Studio. |
+| 503 | UNAVAILABLE | יכול להיות שהשירות עמוס מדי או מושבת באופן זמני. | השירות לא זמין באופן זמני בגלל חוסר קיבולת. | כדאי לבדוק את [דף הסטטוס של Gemini API](https://aistudio.google.com/status?hl=he) כדי לראות אם יש תקריות שמתרחשות כרגע. עוברים באופן זמני למודל אחר (למשל מ-Gemini 2.5 Pro ל-Gemini 2.5 Flash) ובודקים אם זה עובד. אפשר גם להמתין קצת ולנסות שוב לשלוח את הבקשה. אם הבעיה נמשכת אחרי שמנסים שוב, אפשר לדווח עליה באמצעות הכפתור **שליחת משוב** ב-Google AI Studio. |
+| 504 | DEADLINE\_EXCEEDED | השירות לא יכול לסיים את העיבוד עד למועד האחרון. | ההנחיה (או ההקשר) גדולה מדי לעיבוד בזמן. | כדי להימנע מהשגיאה הזו, צריך להגדיר ערך גבוה יותר של 'זמן קצוב לתפוגה' בבקשת הלקוח. |
 
-## Định dạng phản hồi lỗi
+## פורמט של תגובת שגיאה
 
-Khi yêu cầu `GenerateContent` không thành công, API sẽ đặt mã trạng thái HTTP (chẳng hạn như `400 Bad Request`, `403 Forbidden` hoặc `429 Too Many Requests`) và trả về một phần nội dung phản hồi JSON chứa thông tin chi tiết về trạng thái gRPC:
+כשבקשת `GenerateContent` נכשלת, ה-API מגדיר את קוד הסטטוס של HTTP (למשל `400 Bad Request`, `403 Forbidden` או `429 Too Many Requests`) ומחזיר גוף תגובה בפורמט JSON שמכיל פרטי סטטוס של gRPC:
 
 ```
 {
@@ -67,24 +67,24 @@ Khi yêu cầu `GenerateContent` không thành công, API sẽ đặt mã trạn
 }
 ```
 
-| Trường | Loại | Mô tả |
+| שדה | סוג | תיאור |
 | --- | --- | --- |
-| `code` | số nguyên | Mã trạng thái HTTP. |
-| `message` | chuỗi | Nội dung mô tả lỗi mà con người có thể đọc được. |
-| `status` | chuỗi | Mã trạng thái gRPC trong `SCREAMING_CASE`. |
-| `details` | mảng | Ngữ cảnh bổ sung về lỗi, chẳng hạn như `ErrorInfo` hoặc `LocalizedMessage`. |
+| `code` | מספר שלם | קוד הסטטוס של HTTP. |
+| `message` | מחרוזת | תיאור של השגיאה שכתוב בצורה שקריאה לאנשים. |
+| `status` | מחרוזת | קוד הסטטוס של gRPC ב-`SCREAMING_CASE`. |
+| `details` | מערך | הקשר נוסף של השגיאה, כמו `ErrorInfo` או `LocalizedMessage`. |
 
-## Bước tiếp theo
+## המאמרים הבאים
 
-- [Khắc phục sự cố về API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=vi): Giải quyết các vấn đề thường gặp và các trường hợp lỗi.
-- [Hạn mức về tốc độ](https://ai.google.dev/gemini-api/docs/rate-limits?hl=vi): Tìm hiểu về hạn mức yêu cầu và cách xử lý hạn mức.
+- [פתרון בעיות ב-API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=he): פתרון בעיות נפוצות ותרחישי שגיאה.
+- [מגבלות קצב](https://ai.google.dev/gemini-api/docs/rate-limits?hl=he): מידע על מגבלות בקשות וטיפול במכסות.
 
-Gửi ý kiến phản hồi
+שליחת משוב
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+עדכון אחרון: 2026-07-30 (שעון UTC).
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+רוצה לתת לנו משוב?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]

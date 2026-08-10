@@ -1,78 +1,78 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=hi
-fetched_at: 2026-08-03T04:26:34.423118+00:00
-title: "\u090f\u092a\u0940\u0906\u0908 \u0938\u0947 \u091c\u0941\u0921\u093c\u0940 \u0917\u0921\u093c\u092c\u0921\u093c\u093f\u092f\u093e\u0902 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-errors?hl=pl
+fetched_at: 2026-08-10T03:20:28.302682+00:00
+title: "B\u0142\u0119dy interfejsu API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-सुझाव भेजें
+Prześlij opinię
 
-# एपीआई से जुड़ी गड़बड़ियां
+# Błędy interfejsu API
 
-इस पेज पर, Interactions API वाली गड़बड़ियों के सभी कोड के बारे में जानकारी दी गई है. साथ ही, गड़बड़ी के जवाब के फ़ॉर्मैट के बारे में बताया गया है. इसके अलावा, यह भी बताया गया है कि एपीआई, अनुरोध के अलग-अलग टाइप के लिए गड़बड़ियों की जानकारी कैसे देता है.
+Ta strona zawiera informacje o wszystkich kodach błędów interfejsu Interactions API, opisuje format odpowiedzi na błędy i wyjaśnia, jak interfejs API dostarcza błędy w przypadku różnych typów żądań.
 
-## स्टैंडर्ड एपीआई के गड़बड़ी कोड
+## Standardowe kody błędów interfejsu API
 
-अनुरोध के लेवल पर होने वाली ये सामान्य गड़बड़ियां, स्टैंडर्ड एचटीटीपी स्टेटस कोड से मेल खाती हैं.
-गड़बड़ियों को प्रोग्राम के हिसाब से ठीक करने के लिए, अपने ऐप्लिकेशन लॉजिक में `code` फ़ील्ड का इस्तेमाल करें.
+Te ogólne kody błędów na poziomie żądania odpowiadają standardowym kodom stanu HTTP.
+Aby programowo obsługiwać błędy, użyj pola `code` w logice aplikacji.
 
-| कोड | एचटीटीपी स्टेटस | ब्यौरा | सुझाई गई कार्रवाई |
+| Kod | Stan HTTP | Opis | Zalecane działanie |
 | --- | --- | --- | --- |
-| `invalid_request` | 400 खराब अनुरोध | अनुरोध गलत है या इसमें अमान्य पैरामीटर शामिल हैं. | [एपीआई का संदर्भ](https://ai.google.dev/api/interactions-api?hl=hi) के हिसाब से अपने इनपुट की जांच करें. |
-| `parameter_unknown` | 400 खराब अनुरोध | अनुरोध में ऐसा पैरामीटर शामिल है जिसके बारे में जानकारी नहीं है. | जिस पैरामीटर की पहचान नहीं हो पाई है उसे हटाएं और फिर से कोशिश करें. |
-| `authentication` | 401 कोड वाली गड़बड़ी: अनुमति नहीं है | एपीआई पासकोड मौजूद नहीं है या अमान्य है. | अपने [एपीआई पासकोड](https://ai.google.dev/gemini-api/docs/api-key?hl=hi) की पुष्टि करें. |
-| `permission_denied` | 403 निषिद्ध | आपकी एपीआई पासकोड के पास इस संसाधन के लिए अनुमति नहीं है. | अपनी एपीआई कुंजी की अनुमतियों और प्रोजेक्ट के ऐक्सेस की जांच करें. |
-| `not_found` | पेज नहीं मिला | अनुरोध किया गया संसाधन नहीं मिला. | संसाधन के पाथ और पैरामीटर की पुष्टि करें. |
-| `model_not_found` | पेज नहीं मिला | बताया गया मॉडल नहीं मिला. | मॉडल के नाम की पुष्टि करें या किसी दूसरे मॉडल पर वापस जाएं. |
-| `rate_limit_exceeded` | 429 कई बार अनुरोध किया गया | आपने हर मिनट या हर सेकंड के अनुरोध या टोकन की सीमा पार कर ली है. | इंतज़ार करें और एक्स्पोनेंशियल बैकऑफ़ के साथ फिर से कोशिश करें. |
-| `quota_exceeded` | 429 कई बार अनुरोध किया गया | आपने एक दिन में मैसेज को मंज़ूरी देने की तय सीमा पूरी कर ली है. | कोटा रीसेट होने का इंतज़ार करें या कोटा बढ़ाने का अनुरोध करें. |
-| `cancelled` | 499 अनुरोध की प्रोसेस होने के दौरान क्लाइंट ने कनेक्शन बंद कर दिया | क्लाइंट ने अनुरोध पूरा होने से पहले ही उसे रद्द कर दिया. | कुछ करने की ज़रूरत नहीं है. आम तौर पर, इसका मतलब है कि क्लाइंट डिसकनेक्ट हो गया है. |
-| `api_error` | 500 सर्वर में गड़बड़ी | सर्वर पर अचानक कोई गड़बड़ी हुई. | अनुरोध को फिर से भेजें. अगर समस्या बनी रहती है, तो सहायता टीम से संपर्क करें. |
-| `service_unavailable` | 503 कोड वाली गड़बड़ी: सेवा उपलब्ध नहीं है | यह सेवा कुछ समय के लिए उपलब्ध नहीं है या इस पर बहुत ज़्यादा लोड है. | इंतज़ार करें और एक्स्पोनेंशियल बैकऑफ़ के साथ फिर से कोशिश करें. |
+| `invalid_request` | 400 Nieprawidłowe żądanie | Żądanie jest nieprawidłowe lub zawiera nieprawidłowe parametry. | Sprawdź dane wejściowe w [dokumentacji API](https://ai.google.dev/api/interactions-api?hl=pl). |
+| `parameter_unknown` | 400 Nieprawidłowe żądanie | Żądanie zawiera nieznany parametr. | Usuń nierozpoznany parametr i spróbuj ponownie. |
+| `authentication` | 401 Brak autoryzacji | Brakujący lub nieprawidłowy klucz interfejsu API. | [Sprawdź kl0}ucz interfejsu API](https://ai.google.dev/gemini-api/docs/api-key?hl=pl). |
+| `permission_denied` | 403 Dostęp zabroniony | Twój klucz interfejsu API nie ma uprawnień do tego zasobu. | Sprawdź uprawnienia klucza interfejsu API i dostęp do projektu. |
+| `not_found` | 404 Nie znaleziono | Nie znaleziono żądanego zasobu. | Sprawdź ścieżkę zasobu i parametry. |
+| `model_not_found` | 404 Nie znaleziono | Nie znaleziono określonego modelu. | Sprawdź nazwę modelu lub użyj innego modelu. |
+| `rate_limit_exceeded` | 429 Zbyt wiele żądań | Przekroczono limit żądań lub tokenów na minutę lub sekundę. | Poczekaj i spróbuj ponownie ze wzrastającym czasem do ponowienia. |
+| `quota_exceeded` | 429 Zbyt wiele żądań | Przekroczono dzienny limit. | Poczekaj, aż limit się zresetuje, lub poproś o jego zwiększenie. |
+| `cancelled` | 499 Klient zamknął żądanie | Klient anulował żądanie przed jego zakończeniem. | Nie musisz niczego robić. Zwykle oznacza to, że klient się rozłączył. |
+| `api_error` | 500 Wewnętrzny błąd serwera | Na serwerze wystąpił nieoczekiwany błąd. | Ponów próbę. Jeśli problem się powtórzy, skontaktuj się z zespołem pomocy. |
+| `service_unavailable` | 503 Usługa niedostępna | Usługa jest tymczasowo przeciążona lub niedostępna. | Poczekaj i spróbuj ponownie ze wzrastającym czasem do ponowienia. |
 
-## जनरेट किए गए कोड ब्लॉक किए गए
+## Kody zablokowanej generacji
 
-इन गड़बड़ी कोड से पता चलता है कि नीति, सुरक्षा या कॉन्टेंट पर पाबंदियों की वजह से, मॉडल का आउटपुट ब्लॉक कर दिया गया है. इनमें से कोई कोड मिलने पर, अपने इनपुट में बदलाव करें और फिर से कोशिश करें.
+Te kody błędów wskazują, że dane wyjściowe modelu zostały zablokowane przez ograniczenia dotyczące zasad, bezpieczeństwa lub ograniczenia treści. Gdy otrzymasz jeden z tych kodów, zmodyfikuj dane wejściowe i spróbuj ponownie.
 
-| कोड | ब्यौरा |
+| Kod | Opis |
 | --- | --- |
-| `safety` | सुरक्षा से जुड़े उल्लंघनों (नुकसान पहुंचाने वाला कॉन्टेंट) की वजह से अनुरोध को ब्लॉक कर दिया गया. |
-| `recitation` | कॉपीराइट या कविता पढ़ने से जुड़ी पाबंदियों की वजह से, अनुरोध को ब्लॉक कर दिया गया है. |
-| `language` | अनुरोध को ऐसी भाषा में भेजा गया है जो उपलब्ध नहीं है. |
-| `prohibited_content` | पाबंदी वाले कॉन्टेंट से जुड़े दिशा-निर्देशों के उल्लंघन की वजह से, अनुरोध को ब्लॉक कर दिया गया है. |
-| `spii` | व्यक्तिगत पहचान ज़ाहिर करने वाली संवेदनशील जानकारी से जुड़ी पाबंदियों की वजह से, अनुरोध को ब्लॉक कर दिया गया. |
-| `blocklist` | ब्लॉकलिस्ट में शामिल पाबंदी वाले शब्दों की वजह से अनुरोध ब्लॉक कर दिया गया. |
-| `image_safety` | सुरक्षा से जुड़े उल्लंघन की वजह से, इमेज जनरेट करने की सुविधा ब्लॉक कर दी गई है. |
-| `image_prohibited_content` | पाबंदी वाले कॉन्टेंट से जुड़े दिशा-निर्देशों का उल्लंघन होने की वजह से, इमेज जनरेट करने की सुविधा ब्लॉक कर दी गई है. |
-| `image_recitation` | कॉपीराइट या कविता पढ़ने से जुड़ी पाबंदियों की वजह से, इमेज जनरेट नहीं की जा सकती. |
-| `image_other` | इमेज जनरेट करने की सुविधा को कुछ वजहों से ब्लॉक कर दिया गया है. |
-| `content_blocked` | नीति से जुड़ी किसी वजह से अनुरोध को ब्लॉक कर दिया गया है. |
+| `safety` | Żądanie zostało zablokowane z powodu naruszenia zasad bezpieczeństwa (szkodliwe treści). |
+| `recitation` | Żądanie zostało zablokowane z powodu ograniczeń dotyczących praw autorskich lub recytacji. |
+| `language` | Żądanie zostało zablokowane z powodu nieobsługiwanego języka. |
+| `prohibited_content` | Żądanie zostało zablokowane z powodu wytycznych dotyczących niedozwolonych treści. |
+| `spii` | Żądanie zostało zablokowane z powodu ograniczeń dotyczących informacji poufnych umożliwiających identyfikację. |
+| `blocklist` | Żądanie zostało zablokowane z powodu niedozwolonych terminów na liście zablokowanych. |
+| `image_safety` | Generowanie obrazu zostało zablokowane z powodu naruszenia zasad bezpieczeństwa. |
+| `image_prohibited_content` | Generowanie obrazu zostało zablokowane z powodu wytycznych dotyczących niedozwolonych treści. |
+| `image_recitation` | Generowanie obrazu zostało zablokowane z powodu ograniczeń dotyczących praw autorskich lub recytacji. |
+| `image_other` | Generowanie obrazu zostało zablokowane z nieokreślonych powodów. |
+| `content_blocked` | Żądanie zostało zablokowane z nieokreślonego powodu związanego z zasadami. |
 
-## जनरेट करने से जुड़ी गड़बड़ी के कोड
+## Kody błędów generowania
 
-इन गड़बड़ी कोड से पता चलता है कि मॉडल के जनरेट किए गए आउटपुट में कोई स्ट्रक्चरल समस्या है. जैसे, फ़ंक्शन कॉल का गलत फ़ॉर्मैट या टूल कॉल का एलान न किया जाना.
+Te kody błędów wskazują na problem strukturalny z wygenerowanymi danymi wyjściowymi modelu (np. nieprawidłowe wywołanie funkcji lub niezadeklarowane wywołanie narzędzia).
 
-| कोड | ब्यौरा |
+| Kod | Opis |
 | --- | --- |
-| `malformed_function_call` | मॉडल ने एक ऐसा फ़ंक्शन कॉल जनरेट किया है जिसे पार्स नहीं किया जा सका. |
-| `malformed_tool_call` | मॉडल ने एक ऐसा टूल कॉल जनरेट किया है जिसे पार्स नहीं किया जा सका. |
-| `unexpected_tool_call` | मॉडल ने ऐसे टूल को कॉल किया है जिसके बारे में अनुरोध में नहीं बताया गया था. |
-| `no_image` | मॉडल, इमेज जनरेट नहीं कर सका. |
-| `too_many_tool_calls` | मॉडल ने तय सीमा से ज़्यादा टूल कॉल जनरेट किए. |
-| `missing_thought_signature` | जवाब में, ज़रूरी थॉट सिग्नेचर मौजूद नहीं है. |
+| `malformed_function_call` | Model wygenerował wywołanie funkcji, którego nie udało się przeanalizować. |
+| `malformed_tool_call` | Model wygenerował wywołanie narzędzia, którego nie udało się przeanalizować. |
+| `unexpected_tool_call` | Model wywołał narzędzie, które nie zostało zadeklarowane w żądaniu. |
+| `no_image` | Model nie był w stanie wygenerować obrazu. |
+| `too_many_tool_calls` | Model wygenerował więcej wywołań narzędzi niż jest to dozwolone. |
+| `missing_thought_signature` | W odpowiedzi brakuje wymaganej sygnatury. |
 
-## गड़बड़ी के जवाब का फ़ॉर्मैट
+## Format odpowiedzi na błędy
 
-Interactions API से मिलने वाली सभी गड़बड़ियों में, `error` ऑब्जेक्ट दिखता है. इसमें `code` और `message` शामिल होता है. उदाहरण के लिए, इस्तेमाल नहीं किया जा सकने वाला टूल टाइप पास करने पर, यह नतीजा मिलता है:
+Wszystkie błędy z interfejsu Interactions API zwracają obiekt `error` zawierający `code` i `message`. Na przykład przekazanie nieobsługiwanego typu narzędzia zwraca:
 
 ```
 {
@@ -83,18 +83,18 @@ Interactions API से मिलने वाली सभी गड़बड�
 }
 ```
 
-| फ़ील्ड | टाइप | ब्यौरा |
+| Pole | Typ | Opis |
 | --- | --- | --- |
-| `code` | स्ट्रिंग | `snake_case` में मशीन के पढ़ने लायक गड़बड़ी का कोड. |
-| `message` | स्ट्रिंग | इस स्ट्रिंग में, गड़बड़ी के बारे में ऐसी जानकारी होती है जिसे कोई भी व्यक्ति आसानी से पढ़ सकता है. |
+| `code` | tekst | Kod błędu w formacie `snake_case`. |
+| `message` | tekst | Zrozumiały dla człowieka opis tego, co poszło nie tak. |
 
-## गड़बड़ियों की जानकारी कैसे दी जाती है
+## Jak są dostarczane błędy
 
-एपीआई, गड़बड़ियों को अलग-अलग तरीके से दिखाता है. यह इस बात पर निर्भर करता है कि आपने स्टैंडर्ड एचटीटीपी अनुरोध किया है या स्ट्रीमिंग (एसएसई) अनुरोध.
+Interfejs API dostarcza błędy w różny sposób w zależności od tego, czy wysyłasz standardowe żądanie HTTP, czy żądanie przesyłania strumieniowego (SSE).
 
-### स्टैंडर्ड एचटीटीपी अनुरोध
+### Standardowe żądania HTTP
 
-स्टैंडर्ड (नॉन-स्ट्रीमिंग) अनुरोधों के लिए, एपीआई एचटीटीपी रिस्पॉन्स स्टेटस कोड (जैसे, `400 Bad Request`, `401 Unauthorized` या `429 Too Many Requests`) सेट करता है. साथ ही, JSON रिस्पॉन्स बॉडी में `error` ऑब्जेक्ट दिखाता है:
+W przypadku standardowych (niestrumieniowych) żądań interfejs API ustawia kod stanu odpowiedzi HTTP (np. `400 Bad Request`, `401 Unauthorized`, lub `429 Too Many Requests`) i zwraca obiekt `error` w treści odpowiedzi JSON:
 
 ```
 {
@@ -105,9 +105,9 @@ Interactions API से मिलने वाली सभी गड़बड�
 }
 ```
 
-### स्ट्रीमिंग (एसएसई) के अनुरोध
+### Żądania przesyłania strumieniowego (SSE)
 
-स्ट्रीमिंग के अनुरोधों (`stream: true`) के लिए, एपीआई, सर्वर-सेंट इवेंट (एसएसई) स्ट्रीम पर गड़बड़ी वाले इवेंट भेजता है. इसमें `event_type` को `"error"` पर सेट किया जाता है. `error` फ़ील्ड में, `code` और `message` का एक जैसा स्ट्रक्चर होता है:
+W przypadku żądań przesyłania strumieniowego (`stream: true`) interfejs API wysyła zdarzenia błędów w strumieniu Server-Sent Events (SSE) z ustawionym parametrem `event_type` na wartość `"error"`. Pole `error` zawiera tę samą strukturę `code` i `message`:
 
 ```
 {
@@ -119,19 +119,19 @@ Interactions API से मिलने वाली सभी गड़बड�
 }
 ```
 
-एसएसई इवेंट के पूरे स्कीमा के लिए, [Interactions API का रेफ़रंस](https://ai.google.dev/api/interactions-api?hl=hi) देखें.
+Pełny schemat zdarzeń SSE znajdziesz w dokumentacji interfejsu [Interactions API](https://ai.google.dev/api/interactions-api?hl=pl).
 
-## आगे क्या करना है
+## Co dalej?
 
-- [एपीआई से जुड़ी समस्याएं हल करना](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=hi): सामान्य समस्याएं और गड़बड़ी के उदाहरण हल करें.
-- [दर की सीमाएं](https://ai.google.dev/gemini-api/docs/rate-limits?hl=hi): अनुरोध की सीमाओं और कोटा को मैनेज करने के बारे में जानें.
+- [Rozwiązywanie problemów z interfejsem API](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=pl): rozwiązywanie typowych problemów i scenariuszy błędów.
+- [Limity](https://ai.google.dev/gemini-api/docs/rate-limits?hl=pl): informacje o limitach żądań i obsłudze limitów.
 
-सुझाव भेजें
+Prześlij opinię
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया.
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Chcesz przekazać coś jeszcze?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-30 (UTC) को अपडेट किया गया."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

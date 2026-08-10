@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=ja
-fetched_at: 2026-08-03T04:29:40.404186+00:00
-title: "\u30c6\u30ad\u30b9\u30c8\u751f\u6210 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/text-generation?hl=vi
+fetched_at: 2026-08-10T03:09:04.621656+00:00
+title: "T\u1ea1o v\u0103n b\u1ea3n \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# テキスト生成
+# Tạo văn bản
 
-Gemini API は、テキスト、画像、動画、音声の入力からテキスト出力を生成できます。
+Gemini API có thể tạo đầu ra là văn bản từ văn bản, hình ảnh, video và âm thanh đầu vào.
 
-基本的な例を以下に示します。
+Sau đây là một ví dụ cơ bản:
 
 ### Python
 
@@ -160,11 +160,11 @@ function main() {
 }
 ```
 
-## Gemini で考える
+## Suy nghĩ cùng Gemini
 
-Gemini モデルでは、多くの場合、デフォルトで[「思考」](https://ai.google.dev/gemini-api/docs/thinking?hl=ja)が有効になっています。これにより、モデルはリクエストに応答する前に推論を行うことができます。
+Các mô hình Gemini thường được bật tính năng ["tư duy"](https://ai.google.dev/gemini-api/docs/thinking?hl=vi) theo mặc định. Tính năng này cho phép mô hình suy luận trước khi trả lời một yêu cầu.
 
-各モデルは、費用、レイテンシ、インテリジェンスを制御できるさまざまな思考構成をサポートしています。詳細については、[思考ガイド](https://ai.google.dev/gemini-api/docs/thinking?hl=ja#set-budget)をご覧ください。
+Mỗi mô hình hỗ trợ các cấu hình tư duy khác nhau, giúp bạn kiểm soát chi phí, độ trễ và mức độ thông minh. Để biết thêm thông tin, hãy xem [hướng dẫn tư duy](https://ai.google.dev/gemini-api/docs/thinking?hl=vi#set-budget).
 
 ### Python
 
@@ -336,9 +336,9 @@ function main() {
 }
 ```
 
-## システム指示とその他の設定
+## Hướng dẫn hệ thống và các cấu hình khác
 
-システム指示を使用して Gemini モデルの動作を制御できます。そのためには、[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを渡します。
+Bạn có thể hướng dẫn hành vi của các mô hình Gemini bằng chỉ dẫn hệ thống. Để làm như vậy, hãy truyền một đối tượng [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerationConfig).
 
 ### Python
 
@@ -510,7 +510,7 @@ function main() {
 }
 ```
 
-[`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) オブジェクトを使用すると、[`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) などのデフォルトの生成パラメータをオーバーライドすることもできます。
+Đối tượng [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerationConfig) cũng cho phép bạn ghi đè các tham số tạo mặc định, chẳng hạn như [`max_output_tokens`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerationConfig).
 
 ### Python
 
@@ -676,11 +676,11 @@ function main() {
 }
 ```
 
-構成可能なパラメータとその説明の完全なリストについては、API リファレンスの [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerationConfig) をご覧ください。
+Hãy tham khảo [`GenerateContentConfig`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerationConfig) trong tài liệu tham khảo API của chúng tôi để xem danh sách đầy đủ các tham số có thể định cấu hình và nội dung mô tả của các tham số đó.
 
-## マルチモーダル入力
+## Thông tin đầu vào đa phương thức
 
-Gemini API はマルチモーダル入力をサポートしているため、テキストとメディア ファイルを組み合わせることができます。次の例は、画像を提供する方法を示しています。
+Gemini API hỗ trợ dữ liệu đầu vào đa phương thức, cho phép bạn kết hợp văn bản với các tệp nội dung nghe nhìn. Ví dụ sau đây minh hoạ cách cung cấp hình ảnh:
 
 ### Python
 
@@ -888,13 +888,14 @@ function getImageData(url) {
 }
 ```
 
-画像を提供する別の方法や、より高度な画像処理については、[画像理解ガイド](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)をご覧ください。この API は、[ドキュメント](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)の入力と理解もサポートしています。
+Để biết các phương thức thay thế để cung cấp hình ảnh và quy trình xử lý hình ảnh nâng cao hơn, hãy xem [hướng dẫn về việc hiểu hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi).
+API này cũng hỗ trợ các đầu vào và thông tin [văn bản](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi) và [âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi).
 
-## ストリーミング レスポンス
+## Hiện câu trả lời theo thời gian thực
 
-デフォルトでは、モデルは生成プロセス全体が完了した後にのみレスポンスを返します。
+Theo mặc định, mô hình chỉ trả về câu trả lời sau khi toàn bộ quy trình tạo hoàn tất.
 
-よりスムーズなインタラクションを実現するには、ストリーミングを使用して、[`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) インスタンスが生成されるたびに増分で受信します。
+Để có các hoạt động tương tác mượt mà hơn, hãy sử dụng tính năng truyền phát trực tiếp để nhận các thực thể [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerateContentResponse) theo gia số khi chúng được tạo.
 
 ### Python
 
@@ -1048,9 +1049,9 @@ function main() {
 }
 ```
 
-## マルチターンの会話（チャット）
+## Cuộc trò chuyện nhiều lượt (chat)
 
-SDK には、複数のプロンプトとレスポンスをチャットに収集する機能が用意されています。これにより、会話の履歴を簡単に追跡できます。
+Các SDK của chúng tôi cung cấp chức năng thu thập nhiều vòng lời nhắc và câu trả lời vào một cuộc trò chuyện, giúp bạn dễ dàng theo dõi nhật ký trò chuyện.
 
 ### Python
 
@@ -1258,7 +1259,7 @@ function main() {
 }
 ```
 
-ストリーミングはマルチターンの会話にも使用できます。
+Bạn cũng có thể dùng tính năng truyền trực tuyến cho các cuộc trò chuyện nhiều lượt.
 
 ### Python
 
@@ -1477,37 +1478,38 @@ function main() {
 }
 ```
 
-## プロンプトに関するヒント
+## Mẹo tạo câu lệnh
 
-Gemini を最大限に活用するための提案については、[プロンプト エンジニアリング ガイド](https://ai.google.dev/gemini/docs/prompting-strategies?hl=ja)をご覧ください。
+Tham khảo [hướng dẫn về thiết kế câu lệnh](https://ai.google.dev/gemini/docs/prompting-strategies?hl=vi) của chúng tôi để biết các đề xuất về cách khai thác tối đa Gemini.
 
-## 次のステップ
+## Bước tiếp theo
 
-- [Google AI Studio で Gemini](https://aistudio.google.com?hl=ja) を試す。
-- JSON のようなレスポンスの[構造化出力](https://ai.google.dev/gemini-api/docs/structured-output?hl=ja)を試す。
-- Gemini の[画像](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ja)、[動画](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ja)、[音声](https://ai.google.dev/gemini-api/docs/audio?hl=ja)、[ドキュメントの理解機能について説明します。](https://ai.google.dev/gemini-api/docs/document-processing?hl=ja)
-- マルチモーダル [ファイル プロンプト戦略](https://ai.google.dev/gemini-api/docs/files?hl=ja#prompt-guide)について学習する。
+- Dùng thử [Gemini trong Google AI Studio](https://aistudio.google.com?hl=vi).
+- Thử nghiệm với [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi) cho các phản hồi tương tự như JSON.
+- Khám phá các khả năng hiểu [hình ảnh](https://ai.google.dev/gemini-api/docs/image-understanding?hl=vi), [video](https://ai.google.dev/gemini-api/docs/video-understanding?hl=vi), [âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và [tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi) của Gemini.
+- Tìm hiểu về [các chiến lược đưa ra câu lệnh bằng tệp đa phương thức](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
 
-## コンテンツの生成
+## Tạo nội dung
 
-これは、モデルにプロンプトを送信するための中央エンドポイントです。コンテンツを生成するエンドポイントは 2 つあります。主な違いは、レスポンスの受信方法です。
+Đây là điểm cuối trung tâm để gửi câu lệnh đến mô hình. Có 2 điểm cuối để tạo nội dung, điểm khác biệt chính là cách bạn nhận phản hồi:
 
-- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=ja#method:-models.generatecontent)
-  (REST)**: リクエストを受信し、モデルが生成全体を完了した後に単一のレスポンスを提供します。
-- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=ja#method:-models.streamgeneratecontent)
-  (SSE)**: まったく同じリクエストを受信しますが、モデルはレスポンスのチャンクを生成するたびにストリーミングで返します。これにより、部分的な結果をすぐに表示できるため、インタラクティブ アプリケーションのユーザー エクスペリエンスが向上します。
+- **[`generateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.generatecontent)
+  (REST)**:
+  Nhận một yêu cầu và cung cấp một phản hồi duy nhất sau khi mô hình hoàn tất toàn bộ quá trình tạo.
+- **[`streamGenerateContent`](https://ai.google.dev/api/generate-content?hl=vi#method:-models.streamgeneratecontent)
+  (SSE)**: Nhận chính xác cùng một yêu cầu, nhưng mô hình sẽ truyền trực tuyến các đoạn phản hồi khi chúng được tạo. Điều này giúp cải thiện trải nghiệm người dùng cho các ứng dụng tương tác vì cho phép bạn hiển thị ngay kết quả một phần.
 
-### リクエスト本文の構造
+### Cấu trúc nội dung yêu cầu
 
-[リクエスト本文](https://ai.google.dev/api/generate-content?hl=ja#request-body)は、標準モードとストリーミング モードの両方で**同じ** JSON オブジェクトであり、いくつかのコア オブジェクトから構築されます。
+[Nội dung yêu cầu](https://ai.google.dev/api/generate-content?hl=vi#request-body) là một đối tượng JSON **giống hệt nhau** đối với cả chế độ tiêu chuẩn và chế độ truyền phát trực tiếp, đồng thời được tạo từ một số đối tượng cốt lõi:
 
-- [`Content`](https://ai.google.dev/api/caching?hl=ja#Content) オブジェクト: 会話の 1 ターンを表します。
-- [`Part`](https://ai.google.dev/api/caching?hl=ja#Part) オブジェクト: `Content` ターン内のデータ（テキストや画像など）。
-- `inline_data`（[`Blob`](https://ai.google.dev/api/caching?hl=ja#Blob)）: 未加工のメディア バイトとその MIME タイプのコンテナ。
+- Đối tượng [`Content`](https://ai.google.dev/api/caching?hl=vi#Content): Đại diện cho một lượt trong cuộc trò chuyện.
+- Đối tượng [`Part`](https://ai.google.dev/api/caching?hl=vi#Part): Một phần dữ liệu trong lượt `Content` (chẳng hạn như văn bản hoặc hình ảnh).
+- `inline_data` ([`Blob`](https://ai.google.dev/api/caching?hl=vi#Blob)): Vùng chứa cho các byte nội dung nghe nhìn thô và loại MIME của chúng.
 
-最上位のレベルでは、リクエストの本文に `contents` オブジェクトが含まれます。これは `Content` オブジェクトのリストで、それぞれが会話のターンを表します。ほとんどの場合、基本的なテキスト生成では 1 つの `Content` オブジェクトを使用しますが、会話履歴を保持する場合は複数の `Content` オブジェクトを使用できます。
+Ở cấp cao nhất, phần nội dung yêu cầu chứa một đối tượng `contents`, đây là danh sách các đối tượng `Content`, mỗi đối tượng đại diện cho lượt trong cuộc trò chuyện. Trong hầu hết các trường hợp, để tạo văn bản cơ bản, bạn sẽ có một đối tượng `Content` duy nhất, nhưng nếu muốn duy trì nhật ký trò chuyện, bạn có thể sử dụng nhiều đối tượng `Content`.
 
-一般的な `generateContent` リクエスト本文を次に示します。
+Sau đây là nội dung yêu cầu `generateContent` điển hình:
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1532,20 +1534,20 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### レスポンスの本文の構造
+### Cấu trúc nội dung phản hồi
 
-[レスポンス本文](https://ai.google.dev/api/generate-content?hl=ja#response-body)は、ストリーミング モードと標準モードでほぼ同じですが、次の点が異なります。
+[Nội dung phản hồi](https://ai.google.dev/api/generate-content?hl=vi#response-body) tương tự cho cả chế độ phát trực tuyến và chế độ tiêu chuẩn, ngoại trừ những điểm sau:
 
-- 標準モード: レスポンスの本文には [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) のインスタンスが含まれます。
-- ストリーミング モード: レスポンスの本文には [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=ja#v1beta.GenerateContentResponse) インスタンスのストリームが含まれます。
+- Chế độ chuẩn: Nội dung phản hồi chứa một phiên bản của [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerateContentResponse).
+- Chế độ truyền phát trực tiếp: Nội dung phản hồi chứa một luồng các thực thể [`GenerateContentResponse`](https://ai.google.dev/api/generate-content?hl=vi#v1beta.GenerateContentResponse).
 
-レスポンスの本文には、`Candidate` オブジェクトのリストである `candidates` オブジェクトが含まれています。`Candidate` オブジェクトには、モデルから返された生成されたレスポンスを含む `Content` オブジェクトが含まれています。
+Nhìn chung, phần nội dung phản hồi chứa một đối tượng `candidates`, là danh sách các đối tượng `Candidate`. Đối tượng `Candidate` chứa một đối tượng `Content` có phản hồi được tạo do mô hình trả về.
 
-## REST API の例
+## Ví dụ về API REST
 
-### マルチモーダル プロンプト（テキストと画像）
+### Câu lệnh đa phương thức (văn bản và hình ảnh)
 
-プロンプトでテキストと画像の両方を指定するには、`parts` 配列に 2 つの `Part` オブジェクトを含める必要があります。1 つはテキスト用、もう 1 つは画像 `inline_data` 用です。
+Để cung cấp cả văn bản và hình ảnh trong một câu lệnh, mảng `parts` phải chứa hai đối tượng `Part`: một cho văn bản và một cho hình ảnh `inline_data`.
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1567,9 +1569,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### マルチターンの会話（チャット）
+### Cuộc trò chuyện nhiều lượt (chat)
 
-複数のターンを含む会話を構築するには、複数の `Content` オブジェクトを含む `contents` 配列を定義します。API は、この履歴全体を次のレスポンスのコンテキストとして使用します。各 `Content` オブジェクトの `role` は、`user` と `model` の間で交互に切り替わる必要があります。
+Để tạo một cuộc trò chuyện có nhiều lượt, bạn hãy xác định mảng `contents` bằng nhiều đối tượng `Content`. API sẽ sử dụng toàn bộ nhật ký này làm bối cảnh cho phản hồi tiếp theo. `role` cho mỗi đối tượng `Content` phải luân phiên giữa `user` và `model`.
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent" \
@@ -1600,24 +1602,24 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-### 重要なポイント
+### Những điểm chính cần ghi nhớ
 
-- `Content` はエンベロープです。ユーザーまたはモデルからのメッセージ ターンに対する最上位のコンテナです。
-- `Part` でマルチモダリティを有効にする: 1 つの `Content` オブジェクト内で複数の `Part` オブジェクトを使用して、さまざまな種類のデータ（テキスト、画像、動画 URI など）を組み合わせます。
-- データ方法を選択します。
-  - 直接埋め込まれた小さなメディア（ほとんどの画像など）の場合は、`inline_data` を含む `Part` を使用します。
-  - 大きなファイルやリクエスト間で再利用するファイルの場合は、File API を使用してファイルをアップロードし、`file_data` 部分で参照します。
-- 会話履歴を管理する: REST API を使用するチャット アプリケーションの場合は、各ターンの `Content` オブジェクトを追加して `contents` 配列を作成し、`"user"` ロールと `"model"` ロールを交互に指定します。SDK を使用している場合は、会話履歴を管理するおすすめの方法について SDK のドキュメントをご覧ください。
+- `Content` là phong bì: Đây là vùng chứa cấp cao nhất cho một lượt tương tác trong tin nhắn, cho dù đó là từ người dùng hay mô hình.
+- `Part` cho phép đa phương thức: Sử dụng nhiều đối tượng `Part` trong một đối tượng `Content` để kết hợp nhiều loại dữ liệu (văn bản, hình ảnh, URI video, v.v.).
+- Chọn phương thức dữ liệu:
+  - Đối với nội dung nghe nhìn nhỏ, được nhúng trực tiếp (như hầu hết hình ảnh), hãy sử dụng `Part` với `inline_data`.
+  - Đối với các tệp lớn hơn hoặc tệp mà bạn muốn sử dụng lại trên các yêu cầu, hãy sử dụng File API để tải tệp lên và tham chiếu tệp đó bằng một phần `file_data`.
+- Quản lý nhật ký trò chuyện: Đối với các ứng dụng trò chuyện sử dụng REST API, hãy tạo mảng `contents` bằng cách thêm các đối tượng `Content` cho mỗi lượt, luân phiên giữa các vai trò `"user"` và `"model"`. Nếu bạn đang sử dụng một SDK, hãy tham khảo tài liệu SDK để biết cách quản lý nhật ký cuộc trò chuyện được đề xuất.
 
-## レスポンスの例
+## Ví dụ về phản hồi
 
-次の例は、さまざまなタイプのリクエストでこれらのコンポーネントがどのように連携するかを示しています。
+Các ví dụ sau đây cho thấy cách các thành phần này kết hợp với nhau cho nhiều loại yêu cầu.
 
-### テキストのみのレスポンス
+### Câu trả lời chỉ có văn bản
 
-デフォルトのテキスト レスポンスは、モデルのレスポンスを含む 1 つ以上の `content` オブジェクトを含む `candidates` 配列で構成されます。
+Phản hồi văn bản mặc định bao gồm một mảng `candidates` có một hoặc nhiều đối tượng `content` chứa phản hồi của mô hình.
 
-**標準**レスポンスの例を次に示します。
+Sau đây là ví dụ về một phản hồi **chuẩn**:
 
 ```
 {
@@ -1638,7 +1640,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-以下は、一連の**ストリーミング** レスポンスです。各レスポンスには、完全なレスポンスをまとめる `responseId` が含まれています。
+Sau đây là chuỗi các phản hồi **truyền trực tuyến**. Mỗi phản hồi chứa một `responseId` liên kết toàn bộ phản hồi với nhau:
 
 ```
 {
@@ -1686,37 +1688,37 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-## Live API（BidiGenerateContent）WebSockets API
+## Live API (BidiGenerateContent) WebSockets API
 
-Live API は、双方向ストリーミング用のステートフル WebSocket ベースの API を提供し、リアルタイム ストリーミングのユースケースを可能にします。詳しくは、[Live API ガイド](https://ai.google.dev/gemini-api/docs/live?hl=ja)と [Live API リファレンス](https://ai.google.dev/api/live?hl=ja)をご覧ください。
+Live API cung cấp một API dựa trên WebSocket có trạng thái để truyền trực tuyến hai chiều nhằm hỗ trợ các trường hợp sử dụng truyền trực tuyến theo thời gian thực. Bạn có thể xem [hướng dẫn về Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi) và [tài liệu tham khảo API Live](https://ai.google.dev/api/live?hl=vi) để biết thêm thông tin chi tiết.
 
-## 特殊モデル
+## Mô hình chuyên biệt
 
-Gemini API は、Gemini モデル ファミリーに加えて、[Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=ja)、[Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=ja)、[エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja) モデルなどの特殊なモデルのエンドポイントも提供します。これらのガイドは、[モデル] セクションで確認できます。
+Ngoài nhóm mô hình của Gemini, Gemini API còn cung cấp các điểm cuối cho các mô hình chuyên biệt như [Imagen](https://ai.google.dev/gemini-api/docs/imagen?hl=vi), [Lyria](https://ai.google.dev/gemini-api/docs/music-generation?hl=vi) và các mô hình [nhúng](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi). Bạn có thể xem các hướng dẫn này trong phần Mô hình.
 
-## プラットフォーム API
+## Platform API
 
-残りのエンドポイントは、これまで説明したメイン エンドポイントで使用する追加機能を有効にします。詳しくは、ガイド セクションの[バッチモード](https://ai.google.dev/gemini-api/docs/batch-mode?hl=ja)と[ファイル API](https://ai.google.dev/gemini-api/docs/files?hl=ja)をご覧ください。
+Các điểm cuối còn lại cho phép bạn sử dụng các chức năng bổ sung với các điểm cuối chính đã mô tả cho đến nay. Hãy xem các chủ đề [Chế độ hàng loạt](https://ai.google.dev/gemini-api/docs/batch-mode?hl=vi) và [File API](https://ai.google.dev/gemini-api/docs/files?hl=vi) trong phần Hướng dẫn để tìm hiểu thêm.
 
-## 次のステップ
+## Bước tiếp theo
 
-初めてご利用になる場合は、次のガイドをご覧ください。Gemini API プログラミング モデルについて理解を深めることができます。
+Nếu bạn mới bắt đầu, hãy tham khảo các hướng dẫn sau đây để hiểu rõ mô hình lập trình Gemini API:
 
-- [Gemini API スタートガイド](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [Gemini モデルガイド](https://ai.google.dev/gemini-api/docs/models/gemini?hl=ja)
+- [Hướng dẫn bắt đầu sử dụng Gemini API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Hướng dẫn về mô hình Gemini](https://ai.google.dev/gemini-api/docs/models/gemini?hl=vi)
 
-さまざまな Gemini API の機能を紹介し、コード例を提供する機能ガイドもご覧ください。
+Bạn cũng có thể xem hướng dẫn về các chức năng. Hướng dẫn này giới thiệu các tính năng của Gemini API và cung cấp ví dụ về mã:
 
-- [テキスト生成](https://ai.google.dev/gemini-api/docs/text-generation?hl=ja)
-- [コンテキストのキャッシュ保存](https://ai.google.dev/gemini-api/docs/caching?hl=ja)
-- [エンベディング](https://ai.google.dev/gemini-api/docs/embeddings?hl=ja)
+- [Tạo văn bản](https://ai.google.dev/gemini-api/docs/text-generation?hl=vi)
+- [Lưu ngữ cảnh vào bộ nhớ đệm](https://ai.google.dev/gemini-api/docs/caching?hl=vi)
+- [Vectơ nhúng](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-07-30 UTC。
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

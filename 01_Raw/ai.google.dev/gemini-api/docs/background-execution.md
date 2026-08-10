@@ -1,32 +1,32 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=ar
-fetched_at: 2026-08-03T04:40:14.785792+00:00
-title: "\u0627\u0644\u062a\u0646\u0641\u064a\u0630 \u0641\u064a \u0627\u0644\u062e\u0644\u0641\u064a\u0629 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/background-execution?hl=id
+fetched_at: 2026-08-10T03:16:39.534607+00:00
+title: "Eksekusi latar belakang \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-إرسال ملاحظات
+Kirim masukan
 
-# التنفيذ في الخلفية
+# Eksekusi latar belakang
 
-بالنسبة إلى المهام التي تستغرق وقتًا طويلاً، مثل البحث المعمّق أو الاستدلال المعقّد أو عمليات التنفيذ المتعدّدة الخطوات للوكيل، يمكن أن تؤدي مهلات انتهاء الاتصال إلى مقاطعة طلبات HTTP العادية (التي يتم إغلاقها عادةً بعد 60 ثانية). توفّر [واجهة برمجة التطبيقات Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) ميزة **التنفيذ في الخلفية** لتشغيل هذه المهام بشكل غير متزامن.
+Untuk tugas yang berjalan lama seperti riset mendalam, penalaran kompleks, atau eksekusi agen multi-langkah, waktu tunggu koneksi dapat mengganggu permintaan HTTP standar (yang biasanya ditutup setelah 60 detik). [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) menyediakan **eksekusi latar belakang** untuk menjalankan tugas ini secara asinkron.
 
-للسماح بتنفيذ التفاعل إلى أن يكمل المهمة على الخادم، اضبط `"background": true` عند إنشاء التفاعل. تعرض واجهة برمجة التطبيقات على الفور معرّف تفاعل، ويمكن لتطبيقات العميل استخدامه للتحقّق من الحالة أو تقدّم البث أو إعادة الاتصال ببث تم قطع اتصاله.
+Agar interaksi berjalan hingga menyelesaikan tugas di server, tetapkan `"background": true` saat membuat interaksi. API akan segera menampilkan ID interaksi, yang dapat digunakan aplikasi klien untuk melakukan polling status, memproses streaming, atau menghubungkan kembali ke streaming yang terputus.
 
-تتوفّر ميزة التنفيذ في الخلفية لنماذج Gemini العادية (مثل `gemini-3.6-flash` و`gemini-3.1-pro-preview`) و"الوكلاء المُدارون" (مثل `antigravity-preview-05-2026`).
+Eksekusi di latar belakang didukung untuk model Gemini standar (seperti `gemini-3.6-flash` dan `gemini-3.1-pro-preview`) dan Agen Terkelola (seperti `antigravity-preview-05-2026`).
 
-## إنشاء تفاعل في الخلفية
+## Membuat interaksi latar belakang
 
-لبدء تفاعل في الخلفية، اضبط المَعلمة `background` على `true` عند إنشاء المورد.
+Untuk memulai interaksi latar belakang, tetapkan parameter `background` ke `true` saat membuat resource.
 
 ### Python
 
@@ -72,31 +72,31 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## طريقة عمل التنفيذ في الخلفية
+## Cara kerja eksekusi latar belakang
 
-عند إنشاء تفاعل في الخلفية، يتم تنفيذ المهمة بشكل غير متزامن على الخادم. تنتقل عملية التفاعل خلال حالات تنفيذ مختلفة:
+Saat Anda membuat interaksi latar belakang, tugas akan berjalan secara asinkron di server. Interaksi bertransisi melalui berbagai status eksekusi:
 
-- ‫`in_progress`: ينفّذ الخادم التفاعل بشكل نشط (مثل تشغيل الرمز أو البحث).
-- `requires_action`: تم إيقاف التفاعل مؤقتًا وينتظر إدخال العميل (مثل تأكيد تنفيذ أداة أو الإجابة عن سؤال).
-- `completed`: اكتمل التفاعل بنجاح وأصبح الناتج متاحًا.
-- ‫`failed`: حدث خطأ أثناء التنفيذ (مثل تعذُّر استخدام الأداة أو تجاوز حدود المعدّل).
-- ‫`cancelled`: أوقف طلب عميل عملية التنفيذ.
+- `in_progress`: Server sedang aktif menjalankan interaksi (seperti menjalankan kode atau melakukan riset).
+- `requires_action`: Interaksi telah dijeda dan menunggu input klien (seperti mengonfirmasi eksekusi alat atau menjawab pertanyaan).
+- `completed`: Interaksi berhasil diselesaikan dan output tersedia.
+- `failed`: Terjadi error selama eksekusi (seperti kegagalan alat atau batas kecepatan).
+- `cancelled`: Permintaan klien menghentikan eksekusi.
 
-### حالات الاستخدام
+### Kasus penggunaan
 
-استخدِم التنفيذ في الخلفية في الحالات التالية:
+Gunakan eksekusi latar belakang untuk:
 
-- **عمليات تنفيذ الوكيل:** المهام التي تتطلّب تطبيق الرموز البرمجية أو تصفّح الويب أو تنسيق الوكلاء الفرعيين (مثل `antigravity-preview-05-2026`).
-- **البحث العميق:** يتم تنفيذه باستخدام `deep-research-preview-04-2026` أو `deep-research-max-preview-04-2026`، ويستغرق عدة دقائق.
-- **الاستدلال الطويل:** المهام التي تتجاوز فيها خطوات تفكير النموذج حدود اتصال HTTP العادية.
+- **Eksekusi agen:** Tugas yang memerlukan eksekusi kode, penjelajahan web, atau orkestrasi sub-agen (seperti `antigravity-preview-05-2026`).
+- **Deep Research:** Berjalan menggunakan `deep-research-preview-04-2026` atau `deep-research-max-preview-04-2026` yang memerlukan waktu beberapa menit.
+- **Penalaran panjang:** Tugas yang langkah-langkah pemikiran model melebihi batas koneksi HTTP standar.
 
-## استرداد النتائج
+## Mengambil hasil
 
-يمكنك الحصول على نتائج التفاعل في الخلفية باستخدام **الاستقصاء** أو **البث**.
+Dapatkan hasil interaksi latar belakang menggunakan **polling** atau **streaming**.
 
-### نمط الاستطلاع (لا يسبب الحظر)
+### Pola polling (tidak memblokir)
 
-تتحقّق عملية الاقتراع من حالة التفاعل بشكل دوري باستخدام طلبات GET غير الحظر إلى أن تصل إلى حالة نهائية.
+Polling memeriksa status interaksi secara berkala menggunakan permintaan GET non-blocking hingga mencapai status terminal.
 
 ### Python
 
@@ -147,9 +147,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YOUR_
   -H "Api-Revision: 2026-05-20"
 ```
 
-### نمط البث
+### Pola streaming
 
-إذا أدّى انقطاع الشبكة إلى قطع البث، يمكن استئنافه من آخر حدث تم تلقّيه. يحتوي كل تغيير على `event_id` فريد في حمولته. يؤدي تمرير هذا المعرّف كـ `last_event_id` إلى استئناف البث من هذا الحدث.
+Jika gangguan jaringan menghentikan streaming, streaming dapat dilanjutkan dari peristiwa terakhir yang diterima. Setiap delta berisi `event_id` unik dalam payload-nya. Meneruskan ID ini sebagai `last_event_id` akan melanjutkan streaming dari peristiwa tersebut.
 
 ### Python
 
@@ -240,14 +240,14 @@ curl -N -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## محادثات مترابطة
+## Percakapan multi-giliran
 
-يمكن ربط التفاعلات اللاحقة بمحادثة في الخلفية باستخدام `previous_interaction_id`، مع مراعاة القيود التالية:
+Interaksi berikutnya dapat dirangkai ke percakapan latar belakang menggunakan `previous_interaction_id`, dengan tunduk pada batasan berikut:
 
-1. **يتم حظر عمليات التنفيذ النشطة:** يؤدي ربط تفاعل لاحق بتفاعل يحمل الحالة `in_progress` إلى عرض الخطأ `400 Bad Request`. انتظِر إلى أن يصل التفاعل إلى الحالة `completed` قبل بدء التفاعل التالي.
-2. **مَعلمة البيئة الخاصة بـ "الوكلاء المُدارون":** عند ربط التفاعلات بـ "الوكلاء المُدارون" (مثل `antigravity-preview-05-2026`)، يجب أن تتضمّن الطلبات كلاً من `previous_interaction_id` و`environment`.
+1. **Eksekusi aktif diblokir:** Merangkai interaksi berikutnya dengan interaksi yang berstatus `in_progress` akan menampilkan error `400 Bad Request`. Tunggu hingga interaksi mencapai status `completed` sebelum memulai interaksi berikutnya.
+2. **Parameter Lingkungan untuk Agen Terkelola:** Saat merangkai interaksi untuk Agen Terkelola (seperti `antigravity-preview-05-2026`), permintaan harus menyertakan `previous_interaction_id` dan `environment`.
 
-توضّح الأمثلة التالية كيفية ربط التفاعلات:
+Contoh berikut menunjukkan cara merangkai interaksi:
 
 ### Python
 
@@ -335,12 +335,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## الإلغاء والحذف
+## Pembatalan dan penghapusan
 
-التحكّم في عمليات التنفيذ الجارية وإدارة مساحة التخزين باستخدام طلبات الإلغاء والحذف:
+Mengontrol eksekusi yang sedang berjalan dan mengelola penyimpanan menggunakan permintaan pembatalan dan penghapusan:
 
-- **إلغاء (`POST /interactions/{id}/cancel`):** لإيقاف المهمة الجارية تتغيّر الحالة إلى `cancelled`. يمكن أن تؤدي إجراءات التنظيف على الخادم إلى تأخير بسيط قبل تعديل الحالة في طلبات GET.
-- **حذف (`DELETE /interactions/{id}`):** يؤدي إلى إزالة سجلّات التفاعل من الخادم. تعرض طلبات GET اللاحقة الخطأ `404 Not Found`.
+- **Batalkan (`POST /interactions/{id}/cancel`):** Menghentikan tugas yang sedang berjalan. Status akan berubah menjadi `cancelled`. Tindakan pembersihan di server dapat menyebabkan sedikit penundaan sebelum status diperbarui dalam permintaan GET.
+- **Hapus (`DELETE /interactions/{id}`):** Menghapus catatan interaksi dari server. Permintaan GET berikutnya akan menampilkan error `404 Not Found`.
 
 ### Python
 
@@ -384,18 +384,18 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/interactions/YO
   -H "Api-Revision: 2026-05-20"
 ```
 
-## الخطوات التالية
+## Langkah berikutnya
 
-- اطّلِع على [نظرة عامة على Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) للتعرّف على إدارة الجلسات والحالات.
-- راجِع دليل [التفاعلات أثناء البث](https://ai.google.dev/gemini-api/docs/streaming?hl=ar) للاطّلاع على تفاصيل حول آخر الأخبار عن الأحداث في الوقت الفعلي.
-- استكشِف [دليل البدء السريع الخاص بالوكلاء المُدارين](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar) لإنشاء وكلاء محادثة مترابطة مع الاحتفاظ بالحالة.
+- Baca [Ringkasan Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) untuk memahami pengelolaan sesi dan status.
+- Lihat panduan [Interaksi streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=id) untuk mengetahui detail tentang update peristiwa real-time.
+- Pelajari [Panduan memulai agen terkelola](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=id) untuk membangun agen multi-turn stateful.
 
-إرسال ملاحظات
+Kirim masukan
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
+Terakhir diperbarui pada 2026-07-30 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Ada masukan untuk kami?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]

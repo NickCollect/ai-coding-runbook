@@ -1,49 +1,52 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/caching?hl=zh-TW
-fetched_at: 2026-08-03T04:27:13.955203+00:00
-title: "\u8108\u7d61\u5feb\u53d6 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/caching?hl=it
+fetched_at: 2026-08-10T03:23:52.208370+00:00
+title: "Memorizzazione nella cache del contesto \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-提供意見
+Invia feedback
 
-# 脈絡快取
+# Memorizzazione nella cache del contesto
 
-在典型的 AI 工作流程中，您可能會重複將相同的輸入權杖傳遞至模型。Gemini API 提供隱含快取功能，可提升效能並降低成本。
+In un flusso di lavoro AI tipico, potresti passare gli stessi token di input più e più volte a un modello. L'API Gemini offre la memorizzazione nella cache implicita per ottimizzare prestazioni e costi.
 
-## 隱含快取
+## Memorizzazione nella cache implicita
 
-所有 Gemini 2.5 以上版本模型都會預設啟用隱式快取功能。這項功能支援[有狀態](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#multi-turn-conversations) (使用 `previous_interaction_id`) 和[無狀態](https://ai.google.dev/gemini-api/docs/text-generation?hl=zh-tw#stateless-conversations)對話模式。如果要求命中快取，我們會自動轉移節省的費用。這項功能會自動啟用，您無需採取任何行動。下表列出各模型進行內容快取時的最低輸入詞元數：
+La memorizzazione nella cache implicita è abilitata per impostazione predefinita per tutti i modelli Gemini 2.5 e versioni successive. È
+supportata sia per le modalità di conversazione [stateful](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#multi-turn-conversations) (utilizzando `previous_interaction_id`)
+sia per quelle [stateless](https://ai.google.dev/gemini-api/docs/text-generation?hl=it#stateless-conversations).
+Se la tua richiesta raggiunge le cache, trasferiamo automaticamente i risparmi sui costi. Non devi fare nulla per abilitare questa funzionalità. Il conteggio minimo dei token di input per la memorizzazione nella cache del contesto è elencato nella tabella seguente per ogni modello:
 
-| 模型 | 詞元數量下限 |
+| Modello | Limite minimo di token |
 | --- | --- |
 | Gemini 3.5 Flash | 4096 |
-| Gemini 3.1 Pro 預先發布版 | 4096 |
+| Gemini 3.1 Pro (anteprima) | 4096 |
 | Gemini 2.5 Flash | 2048 |
 | Gemini 2.5 Pro | 2048 |
 
-如要提高隱含快取命中的機率，請採取下列行動：
+Per aumentare la probabilità di un successo della cache implicita:
 
-- 請嘗試在提示開頭放入大型和常見內容
-- 嘗試在短時間內傳送具有相似前置字串的要求
+- Prova a inserire contenuti di grandi dimensioni e comuni all'inizio del prompt
+- Prova a inviare richieste con prefisso simile in un breve periodo di tempo
 
-您可以在回應物件的 `usage.total_cached_tokens` (Python 和 JavaScript) 欄位中，查看快取命中次數。
+Puoi visualizzare il numero di token che sono stati hit della cache nel campo `usage.total_cached_tokens` (Python e JavaScript) dell'oggetto di risposta.
 
-提供意見
+Invia feedback
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-上次更新時間：2026-07-30 (世界標準時間)。
+Ultimo aggiornamento 2026-07-30 UTC.
 
-想進一步說明嗎？
+Vuoi dirci altro?
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-30 (世界標準時間)。"],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

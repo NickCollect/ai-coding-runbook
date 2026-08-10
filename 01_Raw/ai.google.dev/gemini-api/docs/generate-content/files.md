@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=he
-fetched_at: 2026-08-03T04:27:51.325304+00:00
-title: "\u05de\u05de\u05e9\u05e7 API \u05e9\u05dc \u05e7\u05d1\u05e6\u05d9\u05dd \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/files?hl=vi
+fetched_at: 2026-08-10T03:12:14.963872+00:00
+title: "API T\u1ec7p \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=he)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [דף הבית](https://ai.google.dev/?hl=he)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=he)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=he)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-# ממשק API של קבצים
+# API Tệp
 
-‫Gemini יכול לעבד סוגים שונים של נתוני קלט, כולל טקסט, תמונות ואודיו, בו-זמנית.
+Gemini có thể xử lý nhiều loại dữ liệu đầu vào, bao gồm văn bản, hình ảnh và âm thanh cùng một lúc.
 
-במדריך הזה מוסבר איך לעבוד עם קובצי מדיה באמצעות Files API. הפעולות הבסיסיות זהות לקובצי אודיו, תמונות, סרטונים, מסמכים וסוגי קבצים נתמכים אחרים.
+Hướng dẫn này trình bày cách xử lý các tệp nội dung nghe nhìn bằng Files API. Các thao tác cơ bản đều giống nhau đối với tệp âm thanh, hình ảnh, video, tài liệu và các loại tệp được hỗ trợ khác.
 
-להנחיות לגבי כתיבת פרומפטים לקבצים, עיין בקטע [מדריך לכתיבת פרומפטים לקבצים](https://ai.google.dev/gemini-api/docs/files?hl=he#prompt-guide).
+Để biết hướng dẫn về câu lệnh cho tệp, hãy xem phần [Hướng dẫn về câu lệnh cho tệp](https://ai.google.dev/gemini-api/docs/files?hl=vi#prompt-guide).
 
-## העלאת קובץ
+## Tải tệp lên
 
-אפשר להשתמש ב-Files API כדי להעלות קובץ מדיה. תמיד צריך להשתמש ב-Files API כשגודל הבקשה הכולל (כולל הקבצים, פרומפט טקסטואלי, הוראות המערכת וכו') גדול מ-100 MB. לקובצי PDF, המגבלה היא 50 MB.
+Bạn có thể dùng Files API để tải một tệp đa phương tiện lên. Luôn sử dụng Files API khi tổng kích thước yêu cầu (bao gồm cả tệp, câu lệnh văn bản, hướng dẫn hệ thống, v.v.) lớn hơn 100 MB. Đối với tệp PDF, giới hạn là 50 MB.
 
-בדוגמת הקוד הבאה, קובץ מועלה ואז נעשה בו שימוש בקריאה ל-`generateContent`.
+Đoạn mã sau đây tải một tệp lên rồi dùng tệp đó trong một lệnh gọi đến `generateContent`.
 
 ### Python
 
@@ -156,9 +156,9 @@ echo
 jq ".candidates[].content.parts[].text" response.json
 ```
 
-## אחזור מטא-נתונים של קובץ
+## Lấy siêu dữ liệu cho một tệp
 
-כדי לוודא שה-API שמר בהצלחה את הקובץ שהועלה ולקבל את המטא-נתונים שלו, אפשר לקרוא ל-`files.get`.
+Bạn có thể xác minh rằng API đã lưu trữ thành công tệp được tải lên và nhận siêu dữ liệu của tệp đó bằng cách gọi `files.get`.
 
 ### Python
 
@@ -226,9 +226,9 @@ file_uri=$(jq ".file.uri" file_info.json)
 echo file_uri=$file_uri
 ```
 
-## הצגת רשימת הקבצים שהועלו
+## Liệt kê các tệp đã tải lên
 
-הקוד הבא מקבל רשימה של כל הקבצים שהועלו:
+Đoạn mã sau đây sẽ lấy danh sách tất cả các tệp đã tải lên:
 
 ### Python
 
@@ -281,9 +281,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/files" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## מחיקת קבצים שהועלו
+## Xoá tệp đã tải lên
 
-הקבצים נמחקים אוטומטית אחרי 48 שעות. אפשר גם למחוק קובץ שהועלה באופן ידני:
+Các tệp sẽ tự động bị xoá sau 48 giờ. Bạn cũng có thể xoá tệp đã tải lên theo cách thủ công:
 
 ### Python
 
@@ -335,191 +335,191 @@ curl --request "DELETE" https://generativelanguage.googleapis.com/v1beta/files/$
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## נתוני שימוש
+## Thông tin về việc sử dụng
 
-אפשר להשתמש ב-Files API כדי להעלות קובצי מדיה ולבצע פעולות שונות בקבצים האלה. באמצעות Files API אפשר לאחסן עד 20 GB של קבצים לכל פרויקט, עם גודל מקסימלי של 2 GB לכל קובץ. הקבצים מאוחסנים למשך 48 שעות. במהלך התקופה הזו, אפשר להשתמש ב-API כדי לקבל מטא-נתונים על הקבצים, אבל אי אפשר להוריד את הקבצים.
-‫Files API זמין בחינם בכל האזורים שבהם Gemini API זמין.
+Bạn có thể dùng Files API để tải lên và tương tác với các tệp đa phương tiện. Files API cho phép bạn lưu trữ tối đa 20 GB tệp cho mỗi dự án, với kích thước tối đa cho mỗi tệp là 2 GB. Các tệp được lưu trữ trong 48 giờ. Trong thời gian đó, bạn có thể dùng API để lấy siêu dữ liệu về các tệp, nhưng không thể tải các tệp xuống.
+Files API được cung cấp miễn phí ở mọi khu vực có Gemini API.
 
-## שיטות להצגת הנחיות לקבצים
+## Chiến lược nhắc nhở về tệp
 
-בקטע הזה מפורטות הנחיות ושיטות מומלצות לשימוש בקובצי מדיה בהנחיות ל-Gemini API.
+Phần này cung cấp hướng dẫn và các phương pháp hay nhất để sử dụng tệp đa phương tiện với câu lệnh cho Gemini API.
 
-היכולת להשתמש בסוגים שונים של נתונים בפרומפטים מאפשרת לכם גמישות רבה יותר מבחינת המשימות שאתם יכולים לבצע באמצעות Gemini API. לדוגמה, אתם יכולים לשלוח למודל תמונה של ארוחה טעימה ולבקש ממנו לכתוב פוסט קצר בבלוג על הארוחה.
+Việc có thể sử dụng nhiều loại dữ liệu trong câu lệnh giúp bạn linh hoạt hơn về những nhiệm vụ mà bạn có thể giải quyết bằng Gemini API. Ví dụ: bạn có thể gửi cho mô hình một bức ảnh về một bữa ăn ngon và yêu cầu mô hình viết một bài đăng ngắn trên blog về bữa ăn đó.
 
 |  |  |
 | --- | --- |
-| **פרומפט** | **תשובה** |
-| תכתוב פוסט קצר ומעניין לבלוג על סמך התמונה הזו. הוא צריך לכלול תיאור של הארוחה בתמונה ולספר על התהליך שלי בהכנת ארוחות מראש.   קובצי Cookie | הכנת ארוחות מראש היא דרך מצוינת לחסוך זמן וכסף, והיא גם יכולה לעזור לכם לאכול בריא יותר. הארוחה הזו היא דוגמה מצוינת לארוחה בריאה וטעימה שאפשר להכין בקלות מראש.  ארוחה שכוללת אורז מלא, ירקות צלויים ועוף טריאקי. האורז החום הוא פחמימה בריאה ומורכבת שתספק לכם אנרגיה לאורך זמן. הירקות הצלויים הם דרך מצוינת לקבל את המינון היומי של ויטמינים ומינרלים, והעוף טריאקי הוא אפשרות טעימה ועשירה בחלבון.  גם את הארוחה הזו קל מאוד להכין. פשוט מבשלים את האורז המלא, צולים את הירקות ומבשלים את העוף בטריאקי. אחרי שהכול מבושל, מחלקים את האוכל לקופסאות ומאחסנים במקרר. אז תוכלו לקחת קופסה ולצאת לדרך בבקרים העמוסים!  אם אתם מחפשים ארוחה בריאה וטעימה שאפשר להכין בקלות מראש, הארוחה הזו היא בחירה מצוינת. הוא עשיר בחומרי הזנה ובטעם, ואין ספק שהוא ישאיר אתכם שבעים ומרוצים.  שיהיה לכם תיאבון בריא וטעים! |
+| **Câu lệnh** | **Đáp** |
+| Viết một bài đăng ngắn gọn và hấp dẫn trên blog dựa trên bức ảnh này. Nội dung đó phải có phần mô tả về bữa ăn trong ảnh và nói về hành trình chuẩn bị bữa ăn của tôi.   Bánh quy | Chuẩn bị sẵn bữa ăn là một cách hiệu quả để tiết kiệm thời gian và tiền bạc, đồng thời giúp bạn ăn uống lành mạnh hơn. Bữa ăn này là một ví dụ điển hình về bữa ăn lành mạnh và ngon miệng mà bạn có thể dễ dàng chuẩn bị trước.  Bữa ăn này có cơm gạo lứt, rau củ nướng và gà sốt teriyaki. Gạo lứt là một loại cacbohydrat phức tạp và lành mạnh, giúp bạn có năng lượng bền bỉ. Rau củ nướng là một cách tuyệt vời để bổ sung vitamin và khoáng chất hằng ngày, còn món gà teriyaki là một lựa chọn ngon miệng và giàu protein.  Món ăn này cũng rất dễ chế biến. Bạn chỉ cần nấu gạo lứt, nướng rau và nấu món gà sốt teriyaki. Sau khi nấu xong, hãy chia thức ăn vào các hộp đựng và bảo quản trong tủ lạnh. Sau đó, bạn có thể lấy hộp đựng và đi làm vào những buổi sáng bận rộn!  Nếu bạn đang tìm một bữa ăn lành mạnh và ngon miệng mà có thể dễ dàng chuẩn bị trước, thì đây là một lựa chọn tuyệt vời. Món ăn này giàu dinh dưỡng và hương vị, chắc chắn sẽ giúp bạn cảm thấy no và hài lòng.  Chúc bạn chuẩn bị được những bữa ăn lành mạnh và ngon miệng! |
 
-אם אתם מתקשים לקבל את הפלט הרצוי מהנחיות שמשתמשות בקובצי מדיה, יש כמה אסטרטגיות שיכולות לעזור לכם לקבל את התוצאות הרצויות. בקטעים הבאים מפורטות גישות עיצוב וטיפים לפתרון בעיות שיעזרו לכם לשפר הנחיות שמשתמשות בקלט מולטי-מודאלי.
+Nếu gặp khó khăn khi nhận được kết quả mong muốn từ những câu lệnh sử dụng tệp đa phương tiện, bạn có thể áp dụng một số chiến lược để đạt được kết quả mong muốn. Các phần sau đây cung cấp các phương pháp thiết kế và mẹo khắc phục sự cố để cải thiện câu lệnh sử dụng dữ liệu đầu vào đa phương thức.
 
-כדי לשפר את ההנחיות המולטימודאליות, כדאי לפעול לפי השיטות המומלצות הבאות:
+Bạn có thể cải thiện câu lệnh đa phương thức bằng cách làm theo các phương pháp hay nhất sau:
 
-- ### [מידע בסיסי על תכנון הנחיות](#specific-instructions)
+- ### [Kiến thức cơ bản về thiết kế câu lệnh](#specific-instructions)
 
-  - **הוראות ספציפיות:** חשוב לנסח הוראות ברורות ותמציתיות, שלא משאירות מקום לפרשנות מוטעית.
-  - **להוסיף כמה דוגמאות להנחיה:** כדאי להשתמש בדוגמאות ריאליסטיות כדי להמחיש את מה שרוצים להשיג.
-  - **פירוט שלב אחר שלב**: חלוקת משימות מורכבות למשימות משנה קלות לניהול, והנחיית המודל בתהליך.
-  - **מציינים את פורמט הפלט**: בהנחיה, מבקשים שהפלט יהיה בפורמט הרצוי, כמו markdown, ‏ JSON, ‏ HTML ועוד.
-  - **בפרומפטים עם תמונה אחת, כדאי להוסיף את התמונה לפני הטקסט**: Gemini יכול לעבד קלט של תמונה וטקסט בכל סדר, אבל בפרומפטים עם תמונה אחת, יכול להיות שהביצועים יהיו טובים יותר אם התמונה (או הסרטון) תופיע לפני הפרומפט הטקסטואלי. עם זאת, בהנחיות שבהן צריך לשלב תמונות עם טקסטים בצורה הדוקה כדי שההנחיה תהיה הגיונית, כדאי להשתמש בסדר הכי טבעי.
-- ### [פתרון בעיות בפרומפט מולטי-מודאלי](#troubleshooting)
+  - **Đưa ra chỉ dẫn cụ thể**: Soạn thảo chỉ dẫn rõ ràng và ngắn gọn để giảm thiểu khả năng hiểu sai.
+  - **Thêm một vài ví dụ vào câu lệnh:** Sử dụng một vài ví dụ thực tế để minh hoạ những gì bạn muốn đạt được.
+  - **Chia nhỏ thành từng bước**: Chia các việc phức tạp thành những mục tiêu phụ dễ quản lý, hướng dẫn mô hình thực hiện quy trình.
+  - **Chỉ định định dạng đầu ra**: Trong câu lệnh, hãy yêu cầu đầu ra ở định dạng bạn muốn, chẳng hạn như markdown, JSON, HTML, v.v.
+  - **Đặt hình ảnh lên trước đối với câu lệnh có một hình ảnh**: Mặc dù Gemini có thể xử lý dữ liệu đầu vào là hình ảnh và văn bản theo bất kỳ thứ tự nào, nhưng đối với câu lệnh có một hình ảnh, Gemini có thể hoạt động hiệu quả hơn nếu hình ảnh (hoặc video) đó được đặt trước câu lệnh văn bản. Tuy nhiên, đối với những câu lệnh yêu cầu hình ảnh phải được xen kẽ với văn bản để có ý nghĩa, hãy sử dụng bất kỳ thứ tự nào tự nhiên nhất.
+- ### [Khắc phục sự cố về câu lệnh đa phương thức](#troubleshooting)
 
-  - **אם המודל לא שואב מידע מהחלק הרלוונטי בתמונה:** כדאי להוסיף רמזים לגבי ההיבטים של התמונה שמהם אתם רוצים שההנחיה תשלוף מידע.
-  - **אם התוצאה של המודל גנרית מדי (לא מותאמת מספיק לקלט של התמונה או הסרטון):** בתחילת ההנחיה, כדאי לבקש מהמודל לתאר את התמונות או הסרטון לפני שמספקים את הוראות המשימה, או לבקש מהמודל להתייחס למה שמופיע בתמונה.
-  - **כדי לפתור בעיות בחלק מסוים:** מבקשים מהמודל לתאר את התמונה או להסביר את ההיגיון שלו, כדי להעריך את ההבנה הראשונית של המודל.
-  - **אם הפרומפט שלכם מוביל לתוכן הזייתי:** נסו להפחית את הגדרת רמת האקראיות או לבקש מהמודל תיאורים קצרים יותר, כדי שהסיכוי שהוא יסיק פרטים נוספים יהיה נמוך יותר.
-  - **כוונון הפרמטרים של הדגימה:** כדאי להתנסות בהגדרות שונות של רמת האקראיות ובבחירות שונות של Top-K כדי לשנות את רמת הקריאייטיביות של המודל.
+  - **Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh:** Đưa ra gợi ý về những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin.
+  - **Nếu đầu ra của mô hình quá chung chung (không đủ phù hợp với đầu vào là hình ảnh/video):** Khi bắt đầu câu lệnh, hãy thử yêu cầu mô hình mô tả(các) hình ảnh hoặc video trước khi đưa ra hướng dẫn về nhiệm vụ, hoặc thử yêu cầu mô hình tham khảo nội dung trong hình ảnh.
+  - **Cách khắc phục sự cố về phần bị lỗi:** Yêu cầu mô hình mô tả hình ảnh hoặc giải thích lý do để đánh giá mức độ hiểu biết ban đầu của mô hình.
+  - **Nếu câu lệnh của bạn tạo ra nội dung ảo:** Hãy thử giảm chế độ cài đặt nhiệt độ hoặc yêu cầu mô hình cung cấp nội dung mô tả ngắn hơn để mô hình ít có khả năng suy đoán thêm chi tiết.
+  - **Điều chỉnh các tham số lấy mẫu:** Thử nghiệm với các chế độ cài đặt nhiệt độ và lựa chọn top-k khác nhau để điều chỉnh khả năng sáng tạo của mô hình.
 
-### הוראות ספציפיות
+### Đưa ra hướng dẫn cụ thể
 
-ההנחיות הכי יעילות הן אלה שברורות ומפורטות. אם יש לכם פלט ספציפי בראש, עדיף לכלול את הדרישה הזו בהנחיה כדי לוודא שתקבלו את הפלט הרצוי.
+Câu lệnh sẽ hiệu quả nhất khi rõ ràng và chi tiết. Nếu bạn có một kết quả cụ thể trong đầu, thì tốt hơn là bạn nên đưa yêu cầu đó vào câu lệnh để đảm bảo bạn nhận được kết quả mình muốn.
 
-למשל, אם תבקשו מהמודל רק "לתאר את התמונה הזו" של לוח מידע בשדה תעופה, יכול להיות שתקבלו תיאור כללי. אם אתם רוצים שהמודל ינתח את השעה והעיר שמופיעות בתמונה, אתם יכולים לכלול את הבקשה הזו ישירות בהנחיה.
+Đối với hình ảnh này về một bảng thông tin tại sân bay, nếu bạn chỉ yêu cầu mô hình "mô tả hình ảnh này", thì mô hình có thể tạo ra một nội dung mô tả chung chung. Nếu cần mô hình phân tích thời gian và thành phố trong hình ảnh, bạn có thể đưa yêu cầu đó trực tiếp vào câu lệnh.
 
-| פרומפט | תשובה מהמודל |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| מה מופיע בתמונה? | תמונה של לוח טיסות נכנסות ויוצאות בשדה תעופה. |
+| Mô tả hình ảnh này. | Hình ảnh cho thấy bảng thông tin chuyến bay hạ cánh và khởi hành tại sân bay. |
 
-| **פרומפט מעודכן** | **תשובה משופרת** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| לוח זמנים לנסיעות Parse the time and city from the airport board shown in this image into a list. | - ‫10:50 מוסקבה - ‫11:05 אדינבורו - ‫11:05 לונדון - ‫11:10 בוקרשט - ‫11:30 קייב - ‫11:35 דבלין - ‫11:45 איסט מידלנדס - ‫12:15 סופיה - 12:30 London - ‫12:30 ניוקאסל - ‫12:40 סנט פטרסבורג - ‫12:40 לונדון - ‫12:45 מנצ'סטר |
+| Lịch trình du lịch Phân tích thời gian và thành phố từ bảng thông tin tại sân bay xuất hiện trong hình ảnh này thành một danh sách. | - 10:50 Moscow - 11:05 Edinburgh - 11:05 London - 11:10 Bucharest - 11:30 Kiev - 11:35 Dublin - 11:45 Đông Midlands - 12:15 Sofia - 12:30 London - 12:30 Newcastle - 12:40 St Petersburg - 12:40 London - 12:45 Manchester |
 
-### הוספת כמה דוגמאות
+### Thêm một vài ví dụ
 
-מודל Gemini יכול לקבל כמה קלטים שאפשר להשתמש בהם כדוגמאות כדי להבין את הפלט שאתם רוצים. הוספת הדוגמאות האלה יכולה לעזור למודל לזהות את הדפוסים ולהחיל את הקשר בין התמונות והתשובות שצוינו על הדוגמה החדשה. השיטה הזו נקראת גם למידה עם מעט דוגמאות.
+Mô hình Gemini có thể chấp nhận nhiều dữ liệu đầu vào mà mô hình có thể dùng làm ví dụ để hiểu được đầu ra bạn muốn. Việc thêm những ví dụ này có thể giúp mô hình xác định các mẫu và áp dụng mối quan hệ giữa hình ảnh và câu trả lời đã cho vào ví dụ mới. Đây cũng được gọi là học "từ một vài dữ liệu".
 
-בדוגמה שלמטה, הפלט הראשוני כתוב בצורת משפט, והוא כולל גם את המדינה (ברזיל). נניח שאתם רוצים שהפלט יהיה בפורמט או בסגנון אחר, ושהוא יכלול רק את שם העיר ולא את שם המדינה. הוספה של פרומפט עם כמה דוגמאות (few-shot) להנחיה יכולה לעזור למודל להגיב בצורה הרצויה.
+Trong ví dụ bên dưới, kết quả ban đầu được viết dưới dạng câu và cũng chứa quốc gia (Brazil). Giả sử bạn muốn đầu ra ở một định dạng hoặc kiểu khác và bạn chỉ muốn có thành phố chứ không phải quốc gia. Việc đặt câu lệnh kèm một vài ví dụ vào câu lệnh có thể định hướng mô hình phản hồi theo cách bạn muốn.
 
-| **פרומפט** | **תשובה מהמודל** |
+| **Câu lệnh** | **Phản hồi của mô hình** |
 | --- | --- |
-| לוח זמנים לנסיעות צריך לציין את העיר שבה נמצא ציון הדרך. | האתר המפורסם הוא פסל ישו הגואל בריו דה ז'ניירו, ברזיל. |
+| Lịch trình du lịch Xác định thành phố cùng với địa danh. | Địa danh này là tượng Chúa Kitô Cứu thế ở Rio de Janeiro, Brazil. |
 
-| **פרומפט מעודכן** | **תשובה משופרת** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| מזהים את העיר שבה נמצא ציון הדרך. קולוסיאום | ‫city: Rome, landmark: the Colosseum. |
-| העיר האסורה | city: Beijing, landmark: Forbidden City |
-| forbidden-city | city: Rio de Janeiro, landmark: Christ the Redeemer statue |
+| Xác định thành phố cùng với địa danh. đấu trường La Mã | thành phố: Rome, địa danh: Đấu trường La Mã. |
+| Tử Cấm Thành | thành phố: Bắc Kinh, địa danh: Tử Cấm Thành |
+| tử cấm thành | thành phố: Rio de Janeiro, địa danh: Tượng Chúa Kitô Cứu thế |
 
-### תסביר לי את זה שלב אחרי שלב
+### Phân tích từng bước
 
-במשימות מורכבות שדורשות גם הבנה חזותית וגם חשיבה רציונלית, כדאי לפצל את המשימה לשלבים קטנים ופשוטים יותר. אפשרות נוספת היא לבקש מהמודל ישירות בהנחיה 'לחשוב שלב אחרי שלב'.
+Đối với những tác vụ phức tạp như những tác vụ đòi hỏi cả khả năng hiểu biết trực quan và suy luận, bạn nên chia tác vụ thành các bước nhỏ hơn và đơn giản hơn. Ngoài ra, bạn cũng có thể yêu cầu trực tiếp mô hình "suy nghĩ từng bước" trong câu lệnh của mình để đạt được hiệu quả.
 
-| פרומפט | תשובה מהמודל |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| מתי ייגמר לי נייר הטואלט? | עוד מעט יישארו לכם רק 3 גלגולים. |
+| Khi nào tôi sẽ hết giấy vệ sinh? | Bạn chỉ còn 3 lượt quay. |
 
-| **פרומפט מעודכן** | **תשובה משופרת** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| 1. קודם כל, תספור כמה גלילי נייר טואלט יש בתמונה הזו.  2. אחר כך, צריך לקבוע כמה נייר טואלט אדם ממוצע משתמש ביום.  3. תחשב כמה זמן יספיקו גלילי נייר הטואלט האלה. | 1. בתמונה הזו יש 3 גלילי נייר טואלט.  ‫2. אדם ממוצע משתמש בכ-20 פיסות נייר טואלט ביום.  ‫3. אם כל גליל מכיל 200 דפים, כל גליל יספיק לכ-10 ימים. לכן, 3 הגלילות יספיקו בערך לחודש. |
+| 1. Trước tiên, hãy đếm xem có bao nhiêu cuộn giấy vệ sinh trong bức ảnh này.  2. Sau đó, hãy xác định lượng giấy vệ sinh mà một người thường dùng mỗi ngày.  3. Tính toán thời gian sử dụng hết số giấy vệ sinh này. | 1. Có 3 cuộn giấy vệ sinh trong bức ảnh này.  2. Một người thường dùng khoảng 20 tờ giấy vệ sinh mỗi ngày.  3. Nếu mỗi cuộn có 200 tờ, thì mỗi cuộn sẽ dùng được khoảng 10 ngày. Do đó, 3 cuộn giấy sẽ dùng được khoảng một tháng. |
 
-בעיות מתמטיות או סוגים אחרים של בעיות מילוליות הן דוגמאות מצוינות לשאלות שבהן כדאי לבקש מהמודל לחשוב שלב אחר שלב.
+Các bài toán hoặc các loại bài toán có lời văn khác là những lựa chọn phù hợp để yêu cầu mô hình suy nghĩ từng bước.
 
-| **פרומפט** | **תשובה** |
+| **Câu lệnh** | **Đáp** |
 | --- | --- |
-| מהו האיבר הרביעי בסדרה? | -135 |
+| Số hạng thứ 4 trong dãy số là bao nhiêu? | -135 |
 
-התשובה מהמודל שגויה. כדי לשפר את התשובה, אפשר לבקש מהמודל לנתח את הבעיה לפני שהוא עונה על ההנחיה.
+Câu trả lời của mô hình không chính xác. Một số cách để cải thiện vấn đề này là yêu cầu mô hình phân tích vấn đề trước khi trả lời câu lệnh.
 
-| **פרומפט** | **תשובה** |
+| **Câu lệnh** | **Đáp** |
 | --- | --- |
-| קודם מנתחים את הנוסחה שבתמונה.  לאחר מכן, על סמך הנוסחה, ענה על השאלה 'מה האיבר הרביעי בסדרה?'. | *כדי להרחיב את התוצאה, לוחצים עליה* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. מציבים n = 4 בנוסחה:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. אנחנו לא יודעים את הערך של b(3), לכן נציב n = 3 בנוסחה:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. אנחנו לא יודעים את הערך של b(2), אז נציב n = 2 בנוסחה:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. אנחנו יודעים שהערך של b(1) הוא 15, אז נציב אותו בנוסחה:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. עכשיו, אחרי שיש לנו את הערך של b(2), נציב אותו בנוסחה של b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. עכשיו אנחנו יודעים את הערך של b(3), אז נציב אותו בנוסחה של b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   לכן, האיבר הרביעי בסדרה הוא ‎-405. |
+| Trước tiên, hãy phân tích cú pháp công thức trong hình ảnh.  Sau đó, dựa vào công thức, hãy trả lời câu hỏi "số hạng thứ 4 trong dãy số là gì?". | *Nhấp để mở rộng kết quả* $$ b(n) = b(n-1) \* (-3) $$  $$ b(1) = 15 $$   1. Thay n = 4 vào công thức:  $$ b(4) = b(4-1) \* (-3) $$  $$ b(4) = b(3) \* (-3) $$ 2. Chúng ta không biết giá trị của b(3), vì vậy hãy thay n = 3 vào công thức:  $$ b(3) = b(3-1) \* (-3) $$  $$ b(3) = b(2) \* (-3) $$ 3. Chúng ta không biết giá trị của b(2), nên hãy thay n = 2 vào công thức:  $$ b(2) = b(2-1) \* (-3) $$  $$ b(2) = b(1) \* (-3) $$ 4. Chúng ta biết giá trị của b(1) là 15, vì vậy hãy thay thế giá trị này vào công thức:  $$ b(2) = 15 \* (-3) $$  $$ b(2) = -45 $$ 5. Bây giờ, chúng ta đã biết giá trị của b(2), hãy thay thế giá trị đó vào công thức cho b(3):  $$ b(3) = b(2) \* (-3) $$  $$ b(3) = -45 \* (-3) $$  $$ b(3) = 135 $$ 6. Giờ đây, khi đã biết giá trị của b(3), hãy thay thế giá trị đó vào công thức cho b(4):  $$ b(4) = b(3) \* (-3) $$  $$ b(4) = 135 \* (-3) $$  $$ b(4) = -405 $$   Do đó, số hạng thứ 4 trong dãy số là -405. |
 
-התשובה הזו של המודל נכונה. כדי שהתשובה תהיה תמציתית יותר, אפשר לבקש מהמודל לחשוב שלב אחרי שלב.
+Phản hồi này của mô hình là chính xác. Giờ đây, để phản hồi hiệu quả hơn nữa, bạn có thể yêu cầu mô hình suy nghĩ từng bước.
 
-| **פרומפט מעודכן** | **תשובה משופרת** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| מהו האיבר הרביעי בסדרה? תחשוב שלב אחרי שלב. | האיבר הראשון הוא 15.  האיבר השני הוא b(1) \* (-3) = 15 \* (-3) = -45.  האיבר השלישי הוא b(2) \* (-3) = -45 \* (-3) = 135.  האיבר הרביעי הוא b(3) \* (-3) = 135 \* (-3) = -405. |
+| Số hạng thứ 4 trong dãy số là bao nhiêu? Hãy suy nghĩ từng bước. | Số hạng đầu tiên là 15.  Số hạng thứ hai là b(1) \* (-3) = 15 \* (-3) = -45.  Số hạng thứ ba là b(2) \* (-3) = -45 \* (-3) = 135.  Số hạng thứ tư là b(3) \* (-3) = 135 \* (-3) = -405. |
 
-### ציון פורמט הפלט
+### Chỉ định định dạng đầu ra
 
-בעיה נפוצה היא הצורך שהפלט של המודל יהיה בפורמט מסוים (למשל, Markdown,‏ JSON,‏ HTML), במיוחד אם צריך להזין את הפלט של המודל למשימה בהמשך. אפשר לנסות ליצור פלט בפורמט הזה על ידי הנחיית המודל לעשות זאת בהנחיה. למטה מופיעות שתי דוגמאות:
+Một vấn đề thường gặp là nhu cầu về đầu ra của mô hình ở một định dạng nhất định (ví dụ: markdown, JSON, HTML), đặc biệt nếu đầu ra của mô hình cần được một tác vụ hạ nguồn tiếp nhận. Bạn có thể thử tạo kết quả ở định dạng đó bằng cách hướng dẫn mô hình làm như vậy trong câu lệnh. Dưới đây là hai ví dụ:
 
-| פרומפט | תשובה מהמודל |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| מנתח את הטבלה בתמונה הזו לפורמט Markdown | | נושא | סטטוס | שעה | תאריך התחלה | תאריך יעד |  | ------- | ------ | ---- | ---------- | ------ |  | מתמטיקה | בוצע | שעה וחצי | 29/11/2023 | 1/12/2023 |  | מיקום גיאוגרפי | בוצע | 30 דקות | 2/12/2023 | 4/12/2023 |  | פיזיקה | בתהליך | שעתיים | 3/12/2023 | 5/12/2023 |  | ביולוגיה | לא התחיל | 6 שעות | 2/11/2016 | 6/12/2023 | |
+| Phân tích bảng trong hình ảnh này thành định dạng markdown | | Chủ đề | Trạng thái | Thời gian | Ngày bắt đầu | Đến hạn |  | ------- | ------ | ---- | ---------- | ------ |  | Toán học | Đã hoàn thành | 1,5 giờ | 29/11/2023 | 1/12/2023 |  | Địa lý | Đã hoàn tất | 30 phút | 2/12/2023 | 4/12/2023 |  | Vật lý | Đang tiến hành | 2 giờ | 3/12/2023 | 5/12/2023 |  | Sinh học | Chưa bắt đầu | 6 giờ | 2/11/2016 | 6/12/2023 | |
 
-| **פרומפט** | **תשובה מהמודל** |
+| **Câu lệnh** | **Phản hồi của mô hình** |
 | --- | --- |
-| צריך לציין את כל המאפיינים הבאים:  רכיבים, סוג המטבח, צמחוני או לא, בפורמט JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
+| Cung cấp danh sách tất cả các thuộc tính sau:  thành phần, loại món ăn, có phải là món chay hay không, ở định dạng JSON | ```` ```json ````  `{`  `"ingredients": [`  `"rice",`  `"shrimp",`  `"clams",`  `"mussels",`  `"peas",`  `"tomatoes",`  `"onions",`  `"garlic",`  `"olive oil",`  `"paprika",`  `"salt",`  `"pepper"`  `],`  `"type of cuisine": "Spanish",`  `"vegetarian": false`  `}`  ```` ``` ```` |
 
-### כשמזינים הנחיות ליצירת תמונה אחת, כדאי להזין את התמונה קודם
+### Đặt hình ảnh lên trước cho câu lệnh một hình ảnh
 
-‫Gemini יכול לפרש תמונה וטקסט בכל סדר בפרומפט, אבל יכול להיות שמיקום של תמונה אחת לפני פרומפט טקסטואלי יוביל לתוצאות טובות יותר.
-בדוגמאות הבאות, אפשר לראות שהתמונה מופיעה לפני הטקסט בכל הנחיה.
+Mặc dù Gemini có thể diễn giải hình ảnh và văn bản theo bất kỳ thứ tự nào trong câu lệnh, nhưng việc đặt một hình ảnh duy nhất trước câu lệnh văn bản có thể mang lại kết quả tốt hơn.
+Trong các mẫu sau, bạn sẽ nhận thấy hình ảnh xuất hiện trước văn bản trong mỗi câu lệnh.
 
-### פתרון בעיות בפרומפטים מולטי-מודאליים
+### Khắc phục sự cố với câu lệnh đa phương thức
 
-אם התשובה שקיבלתם לא מועילה, יכול להיות שתצטרכו לפתור בעיות בהנחיה. הנה כמה אסטרטגיות שאפשר לנסות.
+Bạn có thể cần khắc phục sự cố về câu lệnh nếu không nhận được phản hồi hữu ích. Bạn có thể thử một số chiến lược sau.
 
-#### אם המודל לא שואב מידע מהחלק הרלוונטי בתמונה
+#### Nếu mô hình không lấy thông tin từ phần liên quan của hình ảnh
 
-כדי לקבל תשובה ספציפית יותר, אפשר לציין אילו היבטים של התמונה רוצים שההנחיה תתייחס אליהם כדי להשיב.
+Để nhận được câu trả lời cụ thể hơn, bạn có thể chỉ ra những khía cạnh của hình ảnh mà bạn muốn câu lệnh lấy thông tin để đưa ra câu trả lời.
 
-| פרומפט | תשובה מהמודל |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| כמה ימים יספיקו חיתולים לתינוק? | החיתולים יספיקו ל-198 ימים לפני שיגמרו. |
+| Những chiếc tã này sẽ dùng được bao nhiêu ngày cho một em bé? | Số tã này sẽ dùng được trong 198 ngày. |
 
-| **פרומפט מעודכן** | **תשובה משופרת** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| כמה זמן יספיקו החיתולים האלה עד שאצטרך לקנות חדשים?  משתמשים במשקל שמופיע על האריזה כדי לקבוע את גיל הילד, ומשתמשים במספר הכולל של החיתולים באריזה.  מחלקים את המספר הכולל במספר החיתולים שהילד או הילדה משתמשים בהם ביום. | הקופסה מכילה 198 חיתולים. על הקופסה מצוין שהחיתולים מיועדים לילדים במשקל 10-17 ק"ג.  הגיל הממוצע של ילדים בטווח המשקל הזה הוא בדרך כלל בין שנה לשנתיים.  ילד בן שנתיים משתמש בדרך כלל ב-6 חיתולים ביום, ולכן החיתולים יספיקו לכ-33 ימים (198/6). |
+| Tôi có thể dùng hết số tã này trong bao lâu?  Dùng trọng lượng ghi trên hộp để xác định độ tuổi của trẻ và dùng tổng số tã trong hộp.  Chia tổng số tã cho số lượng tã mà trẻ dùng mỗi ngày. | Hộp này có 198 chiếc tã. Trên hộp ghi rằng tã dành cho trẻ nặng từ 10 đến 17 kg.  Trẻ em trung bình trong khoảng cân nặng này có thể từ 1 đến 2 tuổi.  Một đứa trẻ 2 tuổi thường dùng 6 chiếc tã mỗi ngày, do đó, số tã này sẽ dùng được khoảng 33 ngày (198/6). |
 
-#### אם הפלט של המודל גנרי מדי ולא מותאם מספיק לקלט של התמונה
+#### Nếu đầu ra của mô hình quá chung chung và không đủ phù hợp với dữ liệu đầu vào là hình ảnh
 
-כדי לעזור למודל להתאים את התשובה שלו לתמונות, כדאי לבקש ממנו לתאר את התמונות לפני שהוא מבצע את משימת החשיבה הרציונלית.
+Để giúp mô hình điều chỉnh câu trả lời cho (các) hình ảnh, hãy thử yêu cầu mô hình mô tả (các) hình ảnh trước khi thực hiện nhiệm vụ suy luận.
 
-| פרומפט | תשובה מהמודל |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| מה המשותף לתמונות האלה? | כל ארבע התמונות הן דוגמאות לצילום נוף. |
+| Điểm chung giữa những hình ảnh này là gì? | Cả 4 hình ảnh đều là ví dụ về ảnh phong cảnh. |
 
-| **פרומפט מעודכן** | **תשובה משופרת** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| קודם כל, תתאר בפירוט את מה שרואים בכל תמונה. מה המשותף לתמונות האלה? | בתמונה הראשונה רואים אדם אורז מזוודה. בתמונה השנייה מוצג מסדרון ריק בקניון. בתמונה השלישית מוצג גליל נייר טואלט. בתמונה הרביעית מוצג ים סוער וכהה.  המשותף לכל התמונות האלה הוא שהן דוגמאות למרחבים לימינליים. מרחבים לימינליים הם מקומות או מצבים שנמצאים בין שני מקומות או מצבים אחרים. לרוב הן מתאפיינות בתחושת חוסר ודאות או דו-משמעות.  התמונה הראשונה מראה את האדם כשהוא בבית וכשהוא בטיול. בתמונה השנייה מוצג המסדרון שבין שתי חנויות. התמונה השלישית היא של נייר טואלט, שיכול לייצג חדר אמבטיה. חדר אמבטיה הוא מרחב מעבר בין תחום פרטי לתחום ציבורי. זה מקום שבו אנחנו מתכוננים להיכנס לעולם החיצוני או לצאת ממנו.  בתמונה הרביעית מוצג הים, פעם רגוע ופעם סוער.  מרחבים לימינליים יכולים להיות מרגשים ומטרידים בו-זמנית. הם יכולים להיות מקום של התחלות חדשות או מקום של סיומים. הם יכולים להיות מקום למחשבה או מקום לפעולה. |
+| Trước tiên, hãy mô tả chi tiết nội dung trong từng hình ảnh. Điểm chung của những hình ảnh này là gì? | Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm. Hình ảnh thứ ba cho thấy một cuộn giấy vệ sinh. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố.  Điểm chung giữa những hình ảnh này là chúng đều là ví dụ về không gian trung gian. Không gian trung gian là những nơi hoặc tình huống nằm giữa hai nơi hoặc tình huống khác. Chúng thường có đặc điểm là mang lại cảm giác không chắc chắn hoặc mơ hồ.  Hình ảnh đầu tiên cho thấy người ở giữa đang ở nhà và đang đi du lịch. Hình ảnh thứ hai cho thấy hành lang giữa hai cửa hàng. Hình ảnh thứ ba là giấy vệ sinh, có thể tượng trưng cho phòng tắm. Phòng tắm là không gian chuyển tiếp giữa khu vực riêng tư và khu vực công cộng. Đó là nơi chúng ta chuẩn bị bước vào hoặc rời khỏi thế giới bên ngoài.  Hình ảnh thứ tư cho thấy biển ở trạng thái giữa bình lặng và bão tố.  Không gian liminal có thể vừa thú vị vừa bất an. Chúng có thể là nơi bắt đầu hoặc kết thúc. Đó có thể là nơi để suy ngẫm hoặc nơi để hành động. |
 
-אפשר גם לנסות לבקש מהמודל להתייחס למה שרואים בתמונה.
+Bạn cũng có thể thử yêu cầu mô hình tham khảo nội dung trong hình ảnh một cách rõ ràng.
 
-| **פרומפט מעודכן** | **תשובה משופרת** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| מה המשותף לתמונות האלה? התשובה תתייחס למה שרואים בתמונות. | כל התמונות קשורות לנסיעות. בתמונה הראשונה רואים אדם אורז מזוודה, בתמונה השנייה רואים מסדרון ריק בקניון, בתמונה השלישית רואים ערימה של נייר טואלט ובתמונה הרביעית רואים ים סוער וחשוך.  כל התמונות האלה קשורות לנסיעות כי הן מציגות דברים שאנשים צריכים או משתמשים בהם כשהם נוסעים. התמונה הראשונה מציגה אדם אורז מזוודה, שזה משהו שאנשים עושים כשהם נוסעים לטיול. בתמונה השנייה מוצג מסדרון ריק בקניון, שהוא מקום שאנשים בדרך כלל הולכים אליו כדי לקנות דברים לנסיעות שלהם. בתמונה השלישית מוצגת ערימה של נייר טואלט, שזה משהו שאנשים משתמשים בו לעיתים קרובות כשהם נוסעים. בתמונה הרביעית מוצג ים סוער וחשוך, שזה משהו שאנשים נתקלים בו לעיתים קרובות כשהם נוסעים. |
+| Điểm chung của những hình ảnh này là gì? Tham khảo nội dung trong hình ảnh trong câu trả lời của bạn. | Tất cả hình ảnh đều liên quan đến du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali, hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, hình ảnh thứ ba cho thấy một chồng giấy vệ sinh và hình ảnh thứ tư cho thấy một vùng biển tối tăm và giông bão.  Tất cả hình ảnh này đều liên quan đến du lịch vì đây đều là những thứ mà mọi người cần hoặc sử dụng khi đi du lịch. Hình ảnh đầu tiên cho thấy một người đang đóng gói hành lý vào vali. Đây là việc mà mọi người thường làm khi đi du lịch. Hình ảnh thứ hai cho thấy một hành lang trống trong trung tâm mua sắm, nơi mọi người thường đến để mua đồ cho chuyến đi của mình. Hình ảnh thứ ba cho thấy một chồng giấy vệ sinh. Đây là thứ mà mọi người thường dùng khi đi du lịch. Hình ảnh thứ tư cho thấy một vùng biển tối tăm và bão tố. Đây là điều mà mọi người thường gặp phải khi đi du lịch. |
 
-אותם טיפים רלוונטיים גם ליצירת קריאייטיב מתמונות. בדוגמה הבאה עם הארנב, בקשה מפורשת מהמודל לכלול היבטים מהתמונה יכולה לשפר את הפלט.
+Những mẹo tương tự cũng áp dụng cho kết quả sáng tạo từ hình ảnh. Trong ví dụ sau đây về chú thỏ, việc yêu cầu rõ ràng mô hình đưa các khía cạnh trong hình ảnh vào có thể cải thiện kết quả.
 
-| פרומפט | תשובה מהמודל |
+| Câu lệnh | Câu trả lời của mô hình |
 | --- | --- |
-| תכתוב שיר על התמונה הזו? | ארנב קטן, רך וחום,  קופץ בשדה, למעלה ולמטה.  האוזניים שלך כל כך ארוכות, הזנב שלך כל כך קטן,  אתה היצור הכי חמוד מכולם.  אתה מכרסם את העשב, כל כך ירוק ומתוק,  ואז קופץ כשאתה רואה אותי.  But I'll always be your friend,  Little bunny, until the very end. |
+| Bạn có thể viết cho tôi một bài thơ về hình ảnh này không? | Chú thỏ nhỏ, mềm mại và có màu nâu,  Nhảy qua cánh đồng, lên và xuống.  Tai dài, đuôi nhỏ,  Bạn là sinh vật đáng yêu nhất trong tất cả.  Bạn gặm cỏ, cỏ xanh và ngọt,  Và nhảy đi khi thấy tôi.  Nhưng tôi sẽ luôn là bạn của bạn,  Chú thỏ nhỏ, cho đến tận cùng. |
 
-| **פרומפט מעודכן** | **תשובה משופרת** |
+| **Câu lệnh mới** | **Cải thiện phản hồi** |
 | --- | --- |
-| תכתוב לי שיר תיאורי ודרמטי על התמונה הזו, ותציין את המיקום. | ארנב קטן על הדשא הירוק,  אוזניים ארוכות, חדות כל כך.  מה אתה רואה שם,  במרחק, לאן אתה בוהה?  Is it the ocean blue,  Sparkling in the sun's hue?  Or the waves that crash and roar,  A rhythm that you adore?  ארנב קטן, תגיד לי את האמת,  מה כל כך מושך את תשומת הלב שלך?  Is it the salty breeze,  Or the seagulls' cries that please?  אולי זה הגודל של הכול,  עולם כל כך גדול וקטן.  מקום שבו חלומות יכולים להתגשם,  ושבו אפשר לצאת להרפתקאות.  ארנב קטן, מעניין על מה אתה חולם,  כשאתה יושב על הדשא, כל כך רגוע.  האם תרצה לחקור את המעמקים,  או להישאר על היבשה, שבה תוכל לקפוץ?  לא משנה מה זה, ארנב קטן,  שמור על ניצוץ התמיהה הזה בוער בעוצמה.  כי בחלומות ובשאיפות שלך,  יש עולם שמחכה ליצירה שלך. |
+| Bạn có thể viết cho tôi một bài thơ giàu hình ảnh và kịch tính về thông tin về hình ảnh này, đồng thời cho biết vị trí không? | Chú thỏ nhỏ trên bãi cỏ xanh,  Đôi tai dài, thính nhạy.  Bạn thấy gì ở nơi đó,  Ở nơi xa xăm mà bạn đang nhìn chằm chằm?  Có phải là màu xanh dương của đại dương,  Lấp lánh dưới ánh mặt trời?  Hay tiếng sóng vỗ và gầm gừ,  Một nhịp điệu mà bạn yêu thích?  Thỏ con ơi, hãy nói thật cho ta hay,  Điều gì khiến con chú ý đến vậy?  Là làn gió mặn,  Hay tiếng hải âu kêu vang?  Có lẽ là do sự rộng lớn của tất cả,  Một thế giới vừa rộng lớn vừa nhỏ bé.  Một nơi mà những giấc mơ có thể bay bổng,  Và những cuộc phiêu lưu có thể nảy mầm.  Thỏ con ơi, ta tự hỏi giấc mơ của con là gì,  Khi con ngồi trên cỏ, thật thanh bình.  Bạn có khao khát khám phá biển sâu,  Hay ở trên đất liền, nơi bạn có thể nhảy?  Dù là gì đi chăng nữa, thỏ con ơi,  Hãy giữ cho ngọn lửa tò mò luôn cháy sáng.  Trong những ước mơ và khát vọng của bạn,  Có một thế giới đang chờ bạn sáng tạo. |
 
-#### פתרון בעיות שקשורות לחלקים בפרומפט שנכשלו
+#### Khắc phục sự cố về phần nào của câu lệnh không hoạt động
 
-יכול להיות שקשה לדעת אם ההנחיה נכשלה כי המודל **לא הבין את התמונה** מלכתחילה, או שהוא הבין את התמונה אבל לא ביצע את **שלבי הנימוק** הנכונים לאחר מכן.
-כדי להבחין בין הסיבות האלה, אפשר לבקש מהמודל לתאר מה יש בתמונה.
+Bạn khó có thể biết liệu một câu lệnh có thất bại là do mô hình không **hiểu được hình ảnh** ngay từ đầu hay là do mô hình hiểu được hình ảnh nhưng không thực hiện đúng **các bước suy luận** sau đó.
+Để phân biệt những lý do đó, hãy yêu cầu mô hình mô tả nội dung trong hình ảnh.
 
-בדוגמה הבאה, אם המודל מציע חטיף שנראה מפתיע כשמשלבים אותו עם תה (למשל, פופקורן), אפשר קודם לפתור את הבעיה כדי לקבוע אם המודל זיהה נכון שהתמונה מכילה תה.
+Trong ví dụ sau, nếu mô hình phản hồi bằng một món ăn nhẹ có vẻ bất ngờ khi kết hợp với trà (ví dụ: bỏng ngô), trước tiên, bạn có thể khắc phục sự cố để xác định xem mô hình có nhận dạng chính xác rằng hình ảnh có chứa trà hay không.
 
-| פרומפט | פרומפט לפתרון בעיות |
+| Câu lệnh | Lời nhắc để khắc phục sự cố |
 | --- | --- |
-| איזה נשנוש אפשר להכין בדקה שיתאים לזה? | מה רואים בתמונה? |
+| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Mô tả nội dung trong hình ảnh này. |
 
-אסטרטגיה נוספת היא לבקש מהמודל להסביר את ההיגיון שלו. כך תוכלו להבין אם יש חלק בהסבר שלא עובד, ואם כן, איזה חלק.
+Một chiến lược khác là yêu cầu mô hình giải thích lý do. Điều này có thể giúp bạn thu hẹp phạm vi để xác định phần nào trong quá trình suy luận bị lỗi (nếu có).
 
-| פרומפט | פרומפט לפתרון בעיות |
+| Câu lệnh | Lời nhắc để khắc phục sự cố |
 | --- | --- |
-| איזה נשנוש אפשר להכין בדקה שיתאים לזה? | איזה נשנוש אפשר להכין בדקה שיתאים לזה? תסביר למה. |
+| Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? | Tôi có thể làm món ăn nhẹ nào trong 1 phút để ăn kèm với món này? Vui lòng giải thích lý do. |
 
-## המאמרים הבאים
+## Bước tiếp theo
 
-- אתם יכולים לנסות לכתוב הנחיות מולטימודאליות משלכם באמצעות [Google AI Studio](http://aistudio.google.com?hl=he).
-- מידע על שימוש ב-Gemini Files API להעלאת קובצי מדיה ולצירוף שלהם להנחיות זמין במדריכים בנושא [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=he),‏ [Audio](https://ai.google.dev/gemini-api/docs/audio?hl=he) ו[עיבוד מסמכים](https://ai.google.dev/gemini-api/docs/document-processing?hl=he).
-- הנחיות נוספות לעיצוב הנחיות, כמו כוונון פרמטרים של דגימה, זמינות בדף [אסטרטגיות להנחיות](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=he).
+- Hãy thử viết câu lệnh đa phương thức của riêng bạn bằng [Google AI Studio](http://aistudio.google.com?hl=vi).
+- Để biết thông tin về cách sử dụng Gemini Files API để tải tệp đa phương tiện lên và đưa tệp đó vào câu lệnh, hãy xem hướng dẫn về [Vision](https://ai.google.dev/gemini-api/docs/vision?hl=vi), [Xử lý âm thanh](https://ai.google.dev/gemini-api/docs/audio?hl=vi) và [Xử lý tài liệu](https://ai.google.dev/gemini-api/docs/document-processing?hl=vi).
+- Để biết thêm hướng dẫn về cách thiết kế câu lệnh, chẳng hạn như điều chỉnh các thông số lấy mẫu, hãy xem trang [Chiến lược tạo câu lệnh](https://ai.google.dev/gemini-api/docs/prompting-strategies?hl=vi).
 
-שליחת משוב
+Gửi ý kiến phản hồi
 
-אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-עדכון אחרון: 2026-07-30 (שעון UTC).
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-רוצה לתת לנו משוב?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-30 (שעון UTC)."],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

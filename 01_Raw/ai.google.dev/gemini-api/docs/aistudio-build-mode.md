@@ -1,178 +1,178 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ko
-fetched_at: 2026-08-03T04:40:01.526746+00:00
-title: "Google AI Studio\uc5d0\uc11c \uc571 \ube4c\ub4dc \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=vi
+fetched_at: 2026-08-10T03:27:19.524913+00:00
+title: "T\u1ea1o \u1ee9ng d\u1ee5ng trong Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-# Google AI Studio에서 앱 빌드
+# Tạo ứng dụng trong Google AI Studio
 
-이 페이지에서는 Google AI Studio를 사용하여 [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko), [Live API](https://ai.google.dev/gemini-api/docs/live?hl=ko)와 같은 Gemini의 최신 기능을 테스트하는 앱을 빠르게 빌드하거나 '바이브 코딩'하고 배포하는 방법을 설명합니다. Google AI Studio는 자연어 프롬프트를 통해 풀 스택 런타임으로 **웹 앱**을 빌드하고 Kotlin 및 Jetpack Compose로 **네이티브 Android 앱**을 빌드하는 것을 지원합니다.
+Trang này mô tả cách sử dụng Google AI Studio để nhanh chóng tạo (hoặc "vibe code") và triển khai các ứng dụng thử nghiệm những tính năng mới nhất của Gemini như [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=vi) và [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi). Google AI Studio hỗ trợ việc tạo **ứng dụng web** bằng thời gian chạy toàn ngăn xếp và **ứng dụng Android gốc** bằng Kotlin và Jetpack Compose – tất cả đều thông qua câu lệnh bằng ngôn ngữ tự nhiên.
 
-## 시작하기
+## Bắt đầu
 
-Google AI Studio의 [빌드 모드](https://aistudio.google.com/apps?hl=ko)에서 바이브 코딩을 시작하세요. 다음과 같은 몇 가지 방법으로 빌드를 시작할 수 있습니다.
+Bắt đầu lập trình theo cảm hứng trong [Chế độ tạo](https://aistudio.google.com/apps?hl=vi) của Google AI Studio. Bạn có thể bắt đầu xây dựng theo một số cách:
 
-- **프롬프트로 시작**: 빌드 모드에서 입력 상자를 사용하여 빌드하려는 항목을 설명합니다. AI 칩을 선택하여 이미지 생성 또는 Google 지도 데이터와 같은 특정 기능을 프롬프트에 추가합니다. 음성 텍스트 변환 버튼을 사용하여 원하는 내용을 말할 수도 있습니다.
-- **'I'm Feeling Lucky' 버튼**: 창의적인 아이디어가 필요하면 'I'm Feeling Lucky' 버튼을 사용하세요. Gemini가 프로젝트 아이디어가 포함된 프롬프트를 생성하여 시작할 수 있도록 도와줍니다.
-- **갤러리에서 프로젝트 리믹스**: [앱 갤러리](https://aistudio.google.com/apps?source=showcase&hl=ko)에서 프로젝트를 열고 **앱 복사**를 선택합니다.
-- **GitHub에서 프로젝트 가져오기**: 빌드 모드에서 프롬프트 입력란의 **파일 추가** (+ 아이콘) 메뉴에서 **GitHub에서 가져오기**를 선택하여 기존 코드를 가져옵니다.
+- **Bắt đầu bằng một câu lệnh**: Ở chế độ Tạo, hãy dùng hộp nhập để nhập nội dung mô tả về những gì bạn muốn tạo. Chọn AI Chips để thêm các tính năng cụ thể như tạo hình ảnh hoặc dữ liệu của Google Maps vào câu lệnh. Bạn thậm chí có thể nói nội dung mình muốn bằng nút chuyển lời nói thành văn bản.
+- **Nút "Xem trang đầu tiên tìm được"**: Nếu cần khơi nguồn sáng tạo, hãy dùng nút "Xem trang đầu tiên tìm được" và Gemini sẽ tạo một câu lệnh kèm theo ý tưởng dự án để giúp bạn bắt đầu.
+- **Phối lại một dự án trong thư viện**: Mở một dự án trong [Thư viện ứng dụng](https://aistudio.google.com/apps?source=showcase&hl=vi) rồi chọn **Sao chép ứng dụng**.
+- **Nhập một dự án từ GitHub**: Ở chế độ Build (Xây dựng), hãy chọn **Import from GitHub** (Nhập từ GitHub) trong trình đơn **Add files** (Thêm tệp) (+ biểu tượng) trong hộp nhập lời nhắc để nhập mã hiện có.
 
-프롬프트를 실행하면 필요한 코드와 파일이 생성되고 앱의 실시간 미리보기가 오른쪽에 표시됩니다.
+Sau khi chạy câu lệnh, bạn sẽ thấy mã và các tệp cần thiết được tạo, đồng thời bản xem trước trực tiếp của ứng dụng sẽ xuất hiện ở bên phải.
 
-## 무엇이 생성되나요?
+## Nội dung nào được tạo?
 
-프롬프트를 실행하면 AI Studio에서 완전한 애플리케이션을 만듭니다. 플랫폼 선택기를 사용하여 **웹 앱** 또는 **네이티브 Android 앱**을 빌드할 수 있습니다.
+Khi bạn chạy câu lệnh, AI Studio sẽ tạo một ứng dụng hoàn chỉnh. Bạn có thể chọn tạo **ứng dụng web** hoặc **ứng dụng Android gốc** bằng cách sử dụng bộ chọn nền tảng.
 
-**웹 앱** (기본값)의 경우 AI Studio는 다음을 포함하는 풀 스택 환경을 만듭니다.
+Đối với **ứng dụng web** (mặc định), AI Studio sẽ tạo một môi trường toàn ngăn xếp bao gồm:
 
-- **클라이언트 측**: 웹 프런트엔드 (기본값은 React)
-- **서버 측**: 보안 API 호출, 데이터베이스 연결, npm 패키지 사용을 허용하는 Node.js 런타임입니다.
+- **Phía máy khách**: giao diện người dùng web (React là giao diện mặc định).
+- **Phía máy chủ**: một thời gian chạy Node.js cho phép thực hiện các lệnh gọi API bảo mật, kết nối cơ sở dữ liệu và sử dụng gói npm.
 
-**Android 앱**의 경우 AI Studio는 브라우저 기반 에뮬레이터에서 미리 보고, 실제 기기에 설치하고, 테스트를 위해 Play 스토어에 게시할 수 있는 Kotlin 및 Jetpack Compose 프로젝트를 생성합니다. [Android 앱 빌드에 대해 자세히 알아보기](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ko)
+Đối với **các ứng dụng Android**, AI Studio tạo một dự án Kotlin và Jetpack Compose mà bạn có thể xem trước trong trình mô phỏng dựa trên trình duyệt, cài đặt trên thiết bị thực và xuất bản lên Cửa hàng Play để kiểm thử. [Tìm hiểu thêm về cách tạo ứng dụng Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=vi).
 
-오른쪽 미리보기 창에서 **코드** 탭을 선택하면 생성된 코드를 볼 수 있습니다. **Antigravity Agent**는 스택 전반에서 여러 파일을 지능적으로 관리하여 변경사항이 올바르게 전파되도록 합니다.
+Bạn có thể xem mã được tạo bằng cách chọn thẻ **Mã** trong ngăn xem trước bên phải. **Antigravity Agent** quản lý một cách thông minh nhiều tệp trên ngăn xếp của bạn, đảm bảo các thay đổi được truyền tải chính xác.
 
-### Antigravity 에이전트
+### Tác nhân Antigravity
 
-**Antigravity Agent**는 [Google Antigravity](https://antigravity.google?hl=ko)의 주요 AI 기능이며, 이제 에이전트 하네스의 핵심 구성요소가 Google AI Studio의 빌드 모드 환경을 지원합니다. 전체 프로젝트의 컨텍스트를 유지하고, 여러 파일을 관리하고, 복잡한 명령어를 이해하여 강력한 풀 스택 애플리케이션을 빌드함으로써 단순한 코드 생성을 넘어섭니다.
+**Antigravity Agent** là chức năng AI chính trong [Google Antigravity](https://antigravity.google?hl=vi) và hiện là các thành phần cốt lõi của bộ công cụ tác nhân, hỗ trợ trải nghiệm Chế độ tạo trong Google AI Studio. Gemini Advanced không chỉ tạo mã đơn giản mà còn duy trì ngữ cảnh của toàn bộ dự án, quản lý nhiều tệp và hiểu các chỉ dẫn phức tạp để tạo các ứng dụng toàn diện, mạnh mẽ.
 
-주요 기능은 다음과 같습니다.
+Các chức năng chính bao gồm:
 
-- **컨텍스트 인식**: 이전 프롬프트 및 파일 상태의 컨텍스트를 유지합니다.
-- **다중 파일 관리**: 여러 파일 간의 종속 항목을 처리합니다.
-- **검증된 실행**: 코드 업데이트를 검증하여 할루시네이션을 줄입니다.
+- **Nhận biết bối cảnh**: duy trì bối cảnh của các câu lệnh trước đó và trạng thái tệp.
+- **Quản lý nhiều tệp**: xử lý các phần phụ thuộc trên nhiều tệp.
+- **Thực thi đã xác minh**: xác minh nội dung cập nhật mã để giảm hiện tượng ảo giác.
 
-## 풀 스택 기능
+## Khả năng full-stack
 
-Google AI Studio를 사용하면 최신 웹 생태계의 강력한 기능을 활용하여 클라이언트 측 프로토타입 이상의 것을 빌드할 수 있습니다.
+Google AI Studio khai thác sức mạnh của hệ sinh thái web hiện đại, cho phép bạn tạo nhiều nguyên mẫu hơn là chỉ nguyên mẫu phía máy khách.
 
-- **서버 측 런타임 및 npm**: npm 패키지의 방대한 라이브러리를 사용합니다. 에이전트가 앱에 필요한 패키지 (예: 데이터 시각화 또는 API 클라이언트를 위한 특정 라이브러리)를 자동으로 식별하고 설치합니다. 원하는 경우 특정 패키지를 요청할 수도 있습니다.
-- **보안 비밀 관리**: **설정** 메뉴에 API 키와 보안 비밀을 안전하게 저장합니다. 이러한 값은 서버 측 코드에서 액세스할 수 있으므로 클라이언트 측 노출로부터 안전하게 보호됩니다.
-- **멀티플레이어**: AI Studio 내에서 직접 실시간 공동작업 환경을 빌드합니다. 서버 측 런타임은 사용자가 서로 상호작용하는 데 필요한 상태와 연결을 관리합니다.
-- **Firebase Firestore 및 인증**: Firestore 데이터베이스 (영구 데이터 스토리지) 및 Firebase 인증 (로그인 흐름, 특히 'Google로 로그인')을 비롯한 Firebase를 자동으로 프로비저닝하고 설정합니다.
-  에이전트는 전체 설정 프로세스를 처리하고 앱에서 이러한 서비스의 코드까지 작성합니다.
-- **Google Workspace 통합**: 앱을 Gmail, Sheets, Docs, Drive, Calendar 등의 Google Workspace API에 연결합니다. AI Studio는 모든 OAuth 구성을 자동으로 처리합니다.
+- **Thời gian chạy phía máy chủ và npm**: sử dụng thư viện rộng lớn gồm các gói npm. Tác nhân sẽ tự động xác định và cài đặt các gói khi cần cho ứng dụng của bạn (ví dụ: các thư viện cụ thể để trực quan hoá dữ liệu hoặc ứng dụng API). Bạn cũng có thể yêu cầu các gói cụ thể nếu muốn.
+- **Quản lý bí mật**: lưu trữ an toàn các khoá API và bí mật trong trình đơn **Settings** (Cài đặt). Bạn có thể truy cập vào các khoá này trong mã phía máy chủ, giúp bảo vệ chúng khỏi bị lộ ở phía máy khách.
+- **Nhiều người chơi**: xây dựng trải nghiệm cộng tác theo thời gian thực ngay trong AI Studio. Thời gian chạy phía máy chủ quản lý trạng thái và các kết nối cần thiết để người dùng tương tác với nhau.
+- **Firebase Firestore và Xác thực**: tự động cung cấp và thiết lập Firebase, bao gồm cả cơ sở dữ liệu Firestore (lưu trữ dữ liệu liên tục) và Xác thực Firebase (quy trình đăng nhập, cụ thể là "Đăng nhập bằng Google").
+  Tác nhân này xử lý toàn bộ quy trình thiết lập và thậm chí viết mã trong ứng dụng của bạn cho các dịch vụ này.
+- **Tích hợp Google Workspace**: Kết nối ứng dụng của bạn với các API của Google Workspace như Gmail, Trang tính, Tài liệu, Drive, Lịch và nhiều API khác. AI Studio sẽ tự động xử lý mọi cấu hình OAuth.
 
-[전체 스택 앱 개발에 대해 자세히 알아보기](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ko)
+[Tìm hiểu thêm về cách phát triển ứng dụng full-stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=vi)
 
-### Android 앱
+### Ứng dụng Android
 
-Kotlin과 Jetpack Compose를 사용하여 네이티브 Android 앱을 빌드할 수도 있습니다.
-브라우저 기반 Android 에뮬레이터에서 앱을 미리 보고, 브라우저에서 ADB를 사용하여 실제 기기에 설치하고, 내부 테스트를 위해 Play 스토어에 게시합니다.
+Bạn cũng có thể tạo ứng dụng Android gốc bằng Kotlin và Jetpack Compose.
+Xem trước ứng dụng của bạn trong trình mô phỏng Android dựa trên trình duyệt, cài đặt ứng dụng trên một thiết bị thực bằng ADB trong trình duyệt và xuất bản lên Cửa hàng Play để kiểm thử nội bộ.
 
-[Android 앱 빌드에 대해 자세히 알아보기](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ko)
+[Tìm hiểu thêm về cách tạo ứng dụng Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=vi)
 
-## 계속 빌드하세요
+## Tiếp tục xây dựng
 
-Google AI Studio에서 애플리케이션의 초기 코드를 생성하면 다음과 같이 계속해서 코드를 개선할 수 있습니다.
+Sau khi Google AI Studio tạo mã ban đầu cho ứng dụng của bạn, bạn có thể tiếp tục tinh chỉnh mã đó:
 
-### Google AI Studio에서 빌드
+### Tạo trong Google AI Studio
 
-- **Gemini로 반복**: **빌드 모드**의 채팅 패널을 사용하여 Gemini에게 수정, 새 기능 추가, 스타일 변경을 요청합니다.
-- **코드를 직접 수정**: 미리보기 패널에서 **코드 탭**을 열어 실시간으로 수정합니다.
+- **Lặp lại với Gemini**: Sử dụng bảng trò chuyện ở **Chế độ tạo** để yêu cầu Gemini sửa đổi, thêm tính năng mới hoặc thay đổi kiểu.
+- **Chỉnh sửa mã trực tiếp**: Mở **thẻ Mã** trong bảng xem trước để chỉnh sửa trực tiếp.
 
-### 외부에서 개발
+### Phát triển bên ngoài
 
-고급 워크플로의 경우 코드를 내보내고 원하는 환경에서 작업할 수 있습니다.
+Đối với các quy trình làm việc nâng cao hơn, bạn có thể xuất mã và làm việc trong môi trường mà bạn muốn:
 
-- **로컬에서 다운로드 및 개발**: 생성된 코드를 **ZIP 파일**로 내보내고 코드 편집기로 가져옵니다.
-- **GitHub에 푸시**: 코드를 **GitHub 저장소**에 푸시하여 기존 개발 및 배포 프로세스와 통합합니다.
+- **Tải xuống và phát triển cục bộ**: Xuất mã đã tạo dưới dạng **tệp ZIP** rồi nhập mã đó vào trình chỉnh sửa mã của bạn.
+- **Đẩy lên GitHub**: Tích hợp mã với các quy trình phát triển và triển khai hiện có bằng cách đẩy mã đó lên một **kho lưu trữ GitHub**.
 
-## 주요 특징
+## Các tính năng chính
 
-Google AI Studio에는 빌드 프로세스를 직관적이고 시각적으로 만들어 주는 여러 기능이 포함되어 있습니다.
+Google AI Studio có một số tính năng giúp quá trình xây dựng trở nên trực quan và dễ hiểu:
 
-- **풀 스택 앱 생성 및 반복**: 프롬프트 하나로 풀 스택 앱을 만들고 채팅 또는 **주석 모드**를 통해 반복합니다. 주석 모드를 사용하면 앱 UI의 어느 부분을 강조 표시하고 원하는 변경사항을 설명할 수 있습니다.
-- **앱 공유 및 배포**: 다른 사용자와 창작물을 공유하여 공동작업하거나 내 작품을 선보일 수 있습니다. 공유 시 API 호출은 사용량 한도에 포함됩니다. 유료 모델을 사용하는 경우 비용이 부과될 수 있습니다. 그런 다음 앱이 준비되면 Cloud Run에 배포합니다.
-- **앱 갤러리**: 앱 갤러리는 프로젝트 아이디어의 시각적 라이브러리를 제공합니다.
-  Gemini로 할 수 있는 작업을 둘러보고, 애플리케이션을 즉시 미리 보고, 나만의 애플리케이션으로 리믹스할 수 있습니다.
+- **Tạo và lặp lại các ứng dụng toàn diện**: Tạo các ứng dụng toàn diện chỉ bằng một câu lệnh và lặp lại thông qua chế độ trò chuyện hoặc **chú thích**. Chế độ chú thích cho phép bạn làm nổi bật mọi phần trên giao diện người dùng của ứng dụng và mô tả thay đổi bạn muốn.
+- **Chia sẻ và triển khai ứng dụng**: Bạn có thể chia sẻ các tác phẩm của mình với người khác để cộng tác hoặc giới thiệu tác phẩm. Khi chia sẻ, các lệnh gọi API sẽ được tính vào hạn mức sử dụng của bạn. Nếu bạn sử dụng các mô hình có tính phí, bạn có thể phải trả phí. Sau đó, khi ứng dụng của bạn đã sẵn sàng, hãy triển khai lên Cloud Run.
+- **Thư viện ứng dụng**: Thư viện ứng dụng cung cấp một thư viện trực quan về các ý tưởng dự án.
+  Bạn có thể khám phá những tính năng của Gemini, xem trước các ứng dụng ngay lập tức và kết hợp chúng để tạo ra ứng dụng của riêng mình.
 
-## 앱 배포 또는 보관처리
+## Triển khai hoặc lưu trữ ứng dụng
 
-애플리케이션이 준비되면 다음 방법으로 배포할 수 있습니다.
+Sau khi ứng dụng đã sẵn sàng, bạn có thể triển khai ứng dụng đó:
 
-- **Cloud Run**: 애플리케이션을 확장 가능한 서비스로 배포합니다.
-  사용량에 따라 [Google Cloud Run](https://cloud.google.com/run?hl=ko) 가격이 적용될 수 있습니다. 배포에 대해 자세히 알아보려면 [Google AI Studio에서 배포](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ko)를 참고하세요.
-- **GitHub**: 프로젝트를 GitHub 저장소로 내보냅니다.
+- **Cloud Run**: triển khai ứng dụng của bạn dưới dạng một dịch vụ có khả năng mở rộng.
+  Bạn có thể phải trả phí cho [Google Cloud Run](https://cloud.google.com/run?hl=vi) dựa trên mức sử dụng. Để tìm hiểu thêm về quy trình triển khai, hãy xem bài viết [Triển khai từ Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=vi).
+- **GitHub**: xuất dự án của bạn sang kho lưu trữ GitHub.
 
-## 제한사항
+## Các điểm hạn chế
 
-이 섹션에는 Google AI Studio의 빌드 모드에 적용되는 현재 제한사항이 나와 있습니다.
+Phần này liệt kê các hạn chế hiện tại của chế độ tạo trong Google AI Studio.
 
-### API 키 관리
+### Quản lý khoá API
 
-Gemini API를 사용하는 새 앱을 만들면 AI Studio에서 앱의 서버 측 환경에 Gemini API 키를 비밀로 자동 구성합니다.
-**Secrets** 패널에서 이 키를 확인하고 관리할 수 있습니다.
+Khi bạn tạo một ứng dụng mới sử dụng Gemini API, AI Studio sẽ tự động định cấu hình khoá Gemini API của bạn dưới dạng một bí mật trong môi trường phía máy chủ của ứng dụng.
+Bạn có thể xem và quản lý khoá này trong bảng điều khiển **Bí mật**.
 
-- **자동 설정**: `GEMINI_API_KEY`이 자동으로 설정되므로 빌드를 시작하기 위해 수동으로 구성할 필요가 없습니다.
-- **서버 측 전용**: API 키는 서버 측 런타임에 삽입되며 클라이언트 측 코드에는 포함되지 않습니다.
-- **기존 앱**: 2026년 5월 14일 이전에 빌드된 앱의 경우 다음에 앱의 Gemini 기능을 수정할 때 에이전트가 Gemini API 통합을 권장되는 서버 측 접근 방식으로 자동 업그레이드합니다.
+- **Thiết lập tự động**: `GEMINI_API_KEY` được thiết lập cho bạn – bạn không cần định cấu hình theo cách thủ công để bắt đầu tạo.
+- **Chỉ phía máy chủ**: Khoá API được chèn vào thời gian chạy phía máy chủ và không bao giờ được đưa vào mã phía máy khách.
+- **Các ứng dụng hiện có**: Đối với những ứng dụng được tạo trước ngày 14 tháng 5 năm 2026, tác nhân sẽ tự động nâng cấp quy trình tích hợp Gemini API của bạn lên phương pháp phía máy chủ được đề xuất vào lần tiếp theo bạn sửa đổi các tính năng Gemini của ứng dụng.
 
-### Google AI Studio 외부 배포
+### Triển khai bên ngoài Google AI Studio
 
-- **Cloud Run**: AI Studio에서 Cloud Run에 배포하면 API 키가 서버 측 환경에 안전하게 포함됩니다. 배포된 앱은 모든 사용자의 Gemini API 호출에 API 키를 사용합니다.
-- **ZIP 다운로드**: 다른 곳에서 실행하기 위해 앱을 ZIP 파일로 다운로드하는 경우 호스팅 환경에서 `GEMINI_API_KEY` 환경 변수를 설정해야 합니다. 앱의 Gemini API 호출은 서버 측 코드에서 이루어지므로 키가 최종 사용자에게 노출되지 않습니다.
+- **Cloud Run**: Khi bạn triển khai lên Cloud Run từ AI Studio, khoá API của bạn sẽ được đưa vào một cách an toàn trong môi trường phía máy chủ. Ứng dụng đã triển khai sẽ dùng khoá API của bạn cho tất cả các lệnh gọi Gemini API của người dùng.
+- **Tải tệp ZIP xuống**: Nếu tải ứng dụng xuống dưới dạng tệp ZIP để chạy ở nơi khác, bạn sẽ cần thiết lập biến môi trường `GEMINI_API_KEY` trong môi trường lưu trữ. Vì các lệnh gọi Gemini API của ứng dụng được thực hiện từ mã phía máy chủ, nên khoá này không được hiển thị cho người dùng cuối.
 
-### 앱 공유 시 오류
+### Lỗi khi chia sẻ ứng dụng
 
-앱을 공유했는데 최종 사용자가 공유 URL을 사용할 때 **403 액세스 제한됨** 오류가 발생한다면 다음 중 한 가지 이유 때문일 수 있습니다.
+Nếu bạn chia sẻ ứng dụng của mình và người dùng cuối gặp phải lỗi **403 Access Restricted** (Truy cập bị hạn chế) khi sử dụng URL được chia sẻ, thì có thể là do một trong những nguyên nhân sau:
 
-- **브라우저 확장 프로그램**: Privacy Badger와 같은 개인 정보 보호 확장 프로그램이 앱을 차단할 수 있습니다. 오류를 방지하려면 확장 프로그램을 사용 중지하세요.
-- **빌드 문제**: 현재 코드에 문제가 있을 수 있습니다. 상담사에게 '현재 코드의 빌드 문제를 수정'하라고 프롬프트한 다음 URL을 다시 공유합니다.
+- **Tiện ích trên trình duyệt**: các tiện ích bảo vệ quyền riêng tư như Privacy Badger có thể đang chặn ứng dụng. Hãy tắt tiện ích này để tránh gặp lỗi.
+- **Vấn đề về bản dựng**: có thể có vấn đề với mã hiện tại. Yêu cầu tác nhân "khắc phục mọi vấn đề về bản dựng bằng mã hiện tại", sau đó chia sẻ lại URL.
 
-## FAQ
+## Câu hỏi thường gặp
 
-### AI Studio에서 빌드란 무엇인가요?
+### Build trong AI Studio là gì?
 
-AI Studio Build는 간단한 프롬프트에서 Gemini를 사용하여 프로덕션 준비가 완료된 AI 기반 애플리케이션으로 전환할 수 있도록 설계된 플랫폼입니다. 프롬프트로 만들고 싶은 것을 설명하면 Gemini가 앱을 생성해 줍니다. 갤러리를 둘러보며 Gemini API로 할 수 있는 작업을 확인하고 앱을 리믹스하여 나만의 앱을 만들 수도 있습니다.
+AI Studio Build là một nền tảng được thiết kế để đưa bạn từ một câu lệnh đơn giản đến một ứng dụng dựa trên AI, sẵn sàng phát hành bằng Gemini. Mô tả nội dung bạn muốn tạo bằng một câu lệnh và Gemini sẽ tạo một ứng dụng cho bạn. Bạn cũng có thể khám phá thư viện của chúng tôi để xem những việc có thể làm với Gemini API và phối lại các ứng dụng để tạo ra ứng dụng của riêng mình.
 
-### Build는 내 Gemini API 키를 어떻게 처리하나요?
+### Build xử lý khoá Gemini API của tôi như thế nào?
 
-Gemini API를 사용하는 앱을 만들면 AI Studio에서 Gemini API 키를 서버 측 비밀로 자동 설정합니다. 앱의 Gemini API 호출은 이 키를 사용하여 서버 측 코드에서 이루어지므로 브라우저에 노출되지 않습니다. 설정의 **보안 비밀** 패널에서 API 키를 확인할 수 있습니다.
+Khi bạn tạo một ứng dụng sử dụng Gemini API, AI Studio sẽ tự động thiết lập khoá Gemini API của bạn dưới dạng một bí mật phía máy chủ. Các lệnh gọi Gemini API của ứng dụng được thực hiện từ mã phía máy chủ bằng khoá này, vì vậy, khoá này sẽ không bao giờ xuất hiện trong trình duyệt. Bạn có thể xem khoá API trong bảng **Bí mật** trong phần Cài đặt.
 
-### 앱을 공유할 때 API 키가 노출되나요?
+### Khoá API của tôi có bị lộ khi chia sẻ ứng dụng không?
 
-아니요. API 키는 서버 측 보안 비밀로 저장되며 클라이언트 측 코드에는 포함되지 않습니다. 앱을 공유하면 다른 사용자가 앱을 사용할 수 있지만 API 키는 볼 수 없습니다.
+Không. Khoá API của bạn được lưu trữ dưới dạng một bí mật phía máy chủ và không bao giờ được đưa vào mã phía máy khách. Khi bạn chia sẻ ứng dụng, những người dùng khác có thể sử dụng ứng dụng đó nhưng không thể xem khoá API của bạn.
 
-다른 사용자와 앱을 공유하면 API 호출이 사용량 한도에 포함됩니다.
-유료 모델을 사용하는 경우 비용이 부과될 수 있습니다. 앱에 비용이 발생할 수 있는 경우 설정 중에 그리고 공유하기 전에 AI Studio에서 미리 알려줍니다.
+Khi bạn chia sẻ ứng dụng của mình với người khác, các lệnh gọi API sẽ được tính vào hạn mức sử dụng của bạn.
+Nếu bạn sử dụng các mô hình có tính phí, bạn có thể phải trả phí. AI Studio sẽ thông báo cho bạn trong quá trình thiết lập và trước khi bạn chia sẻ nếu ứng dụng của bạn có thể phát sinh chi phí.
 
-### 내 앱을 볼 수 있는 사용자
+### Những người có thể thấy ứng dụng của tôi
 
-기본적으로 앱은 비공개입니다. 다른 사용자가 앱을 사용할 수 있도록 앱을 공유할 수 있습니다. 앱을 공유한 사용자는 앱의 코드를 보고 자신의 용도에 맞게 포크할 수 있습니다. 수정 권한으로 앱을 공유하면 다른 사용자가 앱의 코드를 수정할 수 있습니다.
+Theo mặc định, ứng dụng của bạn sẽ ở chế độ riêng tư. Bạn có thể chia sẻ ứng dụng của mình với những người dùng khác để cho phép họ sử dụng ứng dụng đó. Những người dùng mà bạn chia sẻ ứng dụng có thể xem mã của ứng dụng và phân nhánh mã đó cho mục đích riêng của họ. Nếu bạn chia sẻ ứng dụng của mình với quyền chỉnh sửa, thì những người dùng khác có thể chỉnh sửa mã của ứng dụng.
 
-### AI Studio 외부에서 앱을 실행할 수 있나요?
+### Tôi có thể chạy các ứng dụng bên ngoài AI Studio không?
 
-예. AI Studio에서 [Cloud Run](https://cloud.google.com/run?hl=ko)에 앱을 배포할 수 있습니다. 그러면 서버 측 환경에 API 키가 안전하게 구성된 공개 URL이 앱에 제공됩니다. 앱을 ZIP 파일로 다운로드하여 다른 곳에 호스팅할 수도 있습니다. 호스팅 환경에서 `GEMINI_API_KEY` 환경 변수를 설정해야 합니다. Gemini API 호출은 서버 측 코드에서 이루어지므로 키가 안전하게 유지됩니다.
+Có. Bạn có thể triển khai ứng dụng của mình lên [Cloud Run](https://cloud.google.com/run?hl=vi) từ AI Studio. Việc này sẽ cung cấp cho ứng dụng của bạn một URL công khai với khoá API được định cấu hình an toàn trong môi trường phía máy chủ. Bạn cũng có thể tải ứng dụng xuống dưới dạng tệp ZIP và lưu trữ ở nơi khác. Bạn sẽ cần đặt biến môi trường `GEMINI_API_KEY` trong môi trường lưu trữ của mình. Vì các lệnh gọi Gemini API được thực hiện từ mã phía máy chủ, nên khoá của bạn vẫn an toàn.
 
-배포 옵션에 대해 자세히 알아보려면 [Google AI Studio에서 배포](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=ko)를 참고하세요.
+Để tìm hiểu thêm về các lựa chọn triển khai, hãy xem phần [Triển khai từ Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=vi).
 
-### 내 도구로 로컬에서 앱을 개발한 다음 여기에 공유할 수 있나요?
+### Tôi có thể phát triển ứng dụng trên thiết bị của mình bằng các công cụ riêng rồi chia sẻ chúng tại đây không?
 
-이 기능은 아직 사용할 수 없습니다. 앞으로 더 많은 앱 사용 사례를 지원할 수 있기를 기대합니다. 구체적인 의견이 있으면 의견을 보내주세요.
+Chức năng này hiện chưa hoạt động. Chúng tôi rất vui khi có thể hỗ trợ nhiều trường hợp sử dụng hơn cho các ứng dụng trong tương lai. Vui lòng cân nhắc gửi ý kiến phản hồi cho chúng tôi nếu bạn có ý tưởng cụ thể.
 
-### 앱에서 데이터베이스나 기타 스토리지를 어떻게 사용할 수 있나요?
+### Làm cách nào để sử dụng cơ sở dữ liệu hoặc bộ nhớ khác với các ứng dụng của tôi?
 
-AI Studio 앱은 Cloud Run 컨테이너에서 실행되는 표준 앱입니다. 동적 IP 범위에서 액세스를 차단하는 방화벽이 없는 한 네트워크를 통해 연결할 수 있는 모든 스토리지 솔루션을 사용할 수 있습니다.
+Các ứng dụng AI Studio là những ứng dụng tiêu chuẩn chạy trong một vùng chứa Cloud Run. Bạn có thể sử dụng bất kỳ giải pháp lưu trữ nào mà bạn có thể kết nối qua mạng, miễn là không có tường lửa ngăn chặn quyền truy cập từ dải IP động.
 
-향후 스토리지에 대한 직접 지원을 추가할 예정이며, AI Studio 내에서 직접 구성할 수 있습니다.
+Chúng tôi đang nỗ lực bổ sung tính năng hỗ trợ trực tiếp cho bộ nhớ trong tương lai. Bạn sẽ có thể định cấu hình bộ nhớ trực tiếp trong AI Studio.
 
-### 마이크, 웹캠, 기타 Navigator API에 액세스하려면 어떻게 해야 하나요?
+### Làm cách nào để truy cập vào micrô, webcam và các API Navigator khác?
 
-시청자가 앱의 웹캠 또는 기타 기기 사용을 인식할 수 있도록 앱이 이러한 [Navigator API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)에 액세스하기 전에 추가 확인이 필요합니다.
-앱 제작자는 앱의 `metadata.json` 파일에 이러한 권한 요청을 추가할 수 있습니다. 예를 들면 다음과 같습니다.
+Để đảm bảo người xem biết về việc một ứng dụng sử dụng webcam hoặc các thiết bị khác của họ, chúng tôi yêu cầu họ xác nhận thêm trước khi ứng dụng có thể truy cập vào [các API Navigator](https://developer.mozilla.org/en-US/docs/Web/API/Navigator) này.
+Nhà sáng tạo ứng dụng có thể thêm các yêu cầu cấp quyền này vào tệp `metadata.json` của ứng dụng. Ví dụ:
 
 ```
 {
@@ -190,57 +190,57 @@ AI Studio 앱은 Cloud Run 컨테이너에서 실행되는 표준 앱입니다. 
 }
 ```
 
-`requestFramePermissions`에 지원되는 값은 표준 [정책 제어 기능](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md)의 하위 집합입니다.
+Các giá trị được hỗ trợ cho `requestFramePermissions` là một phần trong số các [tính năng tiêu chuẩn chịu sự kiểm soát của chính sách](https://github.com/w3c/webappsec-permissions-policy/blob/main/features.md).
 
-### 앱과 함께 GitHub를 사용하려면 어떻게 해야 하나요?
+### Làm cách nào để sử dụng GitHub với các ứng dụng của tôi?
 
-AI Studio의 GitHub 통합을 사용하면 GitHub에서 기존 프로젝트를 가져와 빌드를 시작하거나 프로젝트를 GitHub 저장소로 내보내 최신 변경사항을 커밋할 수 있습니다.
+Tính năng tích hợp GitHub của AI Studio cho phép bạn nhập một dự án hiện có từ GitHub để bắt đầu tạo hoặc xuất dự án sang một kho lưu trữ GitHub và xác nhận các thay đổi mới nhất.
 
-### 다른 사용자에게 내 앱에 대한 수정 액세스 권한을 부여할 수 있나요?
+### Tôi có thể cấp cho người dùng khác quyền chỉnh sửa ứng dụng của tôi không?
 
-이 기능은 아직 지원되지 않지만 곧 지원될 예정입니다.
+Tính năng này hiện chưa được hỗ trợ nhưng sẽ sớm ra mắt.
 
-### 내 앱이 정책 위반으로 신고된 이유는 무엇인가요?
+### Tại sao ứng dụng của tôi bị gắn cờ do vi phạm chính sách?
 
-Google에는 앱이 Google 정책을 준수하는지 자동으로 검토하는 시스템이 있습니다. 앱이 정책을 위반하는 것으로 확인되면 AI Studio에서 삭제됩니다. 정책 위반에는 다음이 포함되나 이에 국한되지 않습니다.
+Chúng tôi có các hệ thống tự động xem xét ứng dụng để đảm bảo ứng dụng tuân thủ chính sách của chúng tôi. Nếu chúng tôi phát hiện thấy một ứng dụng vi phạm chính sách của chúng tôi, thì ứng dụng đó sẽ bị xoá khỏi AI Studio. Các lỗi vi phạm chính sách có thể bao gồm nhưng không giới hạn ở những lỗi sau:
 
-- 멀웨어, 피싱 또는 명의 도용이 포함된 앱
-- 아동 성적 학대 이미지 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 괴롭힘 방지 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 증오심 표현 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 인신매매 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 음란물 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 폭력 및 유혈 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
-- 유해하거나 위험한 정책을 위반하는 콘텐츠를 표시하거나 배포하는 앱
+- Ứng dụng chứa phần mềm độc hại, nội dung lừa đảo hoặc mạo danh
+- Ứng dụng hiển thị hoặc phát tán nội dung vi phạm chính sách về hình ảnh xâm hại tình dục trẻ em
+- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về hành vi quấy rối
+- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về lời nói hận thù
+- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về buôn người
+- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về nội dung khiêu dâm
+- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về bạo lực và cảnh đẫm máu
+- Ứng dụng hiển thị hoặc phân phối nội dung vi phạm chính sách về nội dung gây hại hoặc nguy hiểm
 
-앱이 정책 위반으로 신고되었는데 오류라고 생각되면 이의신청을 제출할 수 있습니다. Google 정책을 반복적으로 위반하면 AI Studio 액세스가 해지될 수 있습니다.
+Nếu ứng dụng của bạn bị gắn cờ do vi phạm chính sách và bạn cho rằng đó là do nhầm lẫn, thì bạn có thể gửi đơn kháng nghị. Việc nhiều lần vi phạm chính sách của chúng tôi có thể khiến bạn bị chấm dứt quyền truy cập vào AI Studio.
 
-### 앱 개발자로서의 책임은 무엇인가요?
+### Tôi có trách nhiệm gì với tư cách là nhà phát triển ứng dụng?
 
-애플리케이션 소유자는 애플리케이션의 동작과 처리하는 모든 데이터에 대한 책임이 있습니다. 여기에는 다음이 포함됩니다.
+Xin lưu ý rằng, với tư cách là chủ sở hữu ứng dụng, bạn chịu trách nhiệm về hành vi của ứng dụng và mọi dữ liệu mà ứng dụng xử lý. Nội dung như vậy bao gồm:
 
-- **법규 준수 및 서드 파티 권리:** 앱이 모든 관련 법규를 준수하고 지식 재산권 및 개인 정보 보호 권리를 포함한 타인의 권리를 침해하지 않도록 합니다.
-- **콘텐츠 모니터링:** 앱에서 사용하는 다른 서비스에는 추가 약관 준수가 적용될 수 있습니다. 예를 들어 Firestore에 적용되는 [Google Cloud 서비스 약관](https://cloud.google.com/terms?hl=ko)에 따라 서드 파티 콘텐츠를 호스팅하는 고객은 금지된 콘텐츠 (예: 불법 콘텐츠)를 정의하는 정책을 게시하고 해당 불법 콘텐츠의 존재 여부를 모니터링해야 합니다.
-- **안전한 구현:** 애플리케이션이 오용되지 않도록 필요한 보호 조치와 조정 도구를 구현합니다.
+- **Tuân thủ pháp luật và tôn trọng quyền của bên thứ ba:** Đảm bảo ứng dụng của bạn tuân thủ tất cả luật và quy định hiện hành, đồng thời không vi phạm quyền của người khác, bao gồm cả quyền sở hữu trí tuệ và quyền riêng tư.
+- **Giám sát nội dung:** Việc tuân thủ các điều khoản bổ sung có thể áp dụng cho các dịch vụ khác mà ứng dụng của bạn sử dụng. Ví dụ: [Điều khoản dịch vụ của Google Cloud](https://cloud.google.com/terms?hl=vi) (áp dụng cho Firestore) yêu cầu những khách hàng lưu trữ nội dung của bên thứ ba phải xuất bản các chính sách xác định nội dung bị cấm (ví dụ: nội dung bất hợp pháp) và giám sát sự xuất hiện của nội dung bất hợp pháp đó.
+- **Triển khai an toàn:** Triển khai các biện pháp bảo vệ và công cụ kiểm duyệt cần thiết để ngăn chặn việc sử dụng sai mục đích ứng dụng của bạn.
 
-서비스 약관의 [사용 제한](https://ai.google.dev/gemini-api/terms?hl=ko#use-restrictions)을 확인하세요.
+Lưu ý [các hạn chế về việc sử dụng](https://ai.google.dev/gemini-api/terms?hl=vi#use-restrictions) trong Điều khoản dịch vụ.
 
-### AI Studio의 앱 갤러리에 있는 앱에는 어떤 약관이 적용되나요?
+### Những điều khoản nào áp dụng cho các ứng dụng trong thư viện ứng dụng của AI Studio?
 
-별도로 명시되지 않는 한 [Gemini API 추가 서비스 약관](https://ai.google.dev/gemini-api/terms?hl=ko)은 AI Studio의 앱 갤러리에 표시된 앱 사용에 적용됩니다.
+[Điều khoản dịch vụ bổ sung của Gemini API](https://ai.google.dev/gemini-api/terms?hl=vi) áp dụng cho việc sử dụng các ứng dụng xuất hiện trong thư viện ứng dụng của AI Studio, trừ phi có quy định khác.
 
-## 다음 단계
+## Bước tiếp theo
 
-- [풀 스택 앱 개발](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ko) (웹)
-- [Android 앱 빌드](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ko)
-- [앱 갤러리](https://aistudio.google.com/apps?source=showcase&hl=ko)의 예시를 참고하세요.
+- [Phát triển ứng dụng Full-Stack](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=vi) (web)
+- [Tạo ứng dụng Android](https://ai.google.dev/gemini-api/docs/aistudio-android?hl=vi)
+- Xem các ví dụ trong [Thư viện ứng dụng](https://aistudio.google.com/apps?source=showcase&hl=vi).
 
-의견 보내기
+Gửi ý kiến phản hồi
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-최종 업데이트: 2026-07-14(UTC)
+Cập nhật lần gần đây nhất: 2026-07-14 UTC.
 
-의견을 전달하고 싶나요?
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-14(UTC)"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-14 UTC."],[],[]]

@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=hi
-fetched_at: 2026-08-03T04:41:08.192775+00:00
-title: "Gemini 3.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=pl
+fetched_at: 2026-08-10T03:17:25.579669+00:00
+title: "Gemini\u00a03.1 Flash-Lite \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-सुझाव भेजें
+Prześlij opinię
 
-# Gemini 3.1 Flash-Lite
+# Gemini 3.1 Flash-Lite
 
-Gemini 3.1 Flash-Lite, कम समय में जवाब देने वाला और किफ़ायती मल्टीमॉडल है. इसे बार-बार किए जाने वाले और कम समय में पूरे होने वाले कामों के लिए ऑप्टिमाइज़ किया गया है. यह मॉडल, टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF इनपुट के साथ काम करता है. इसे एजेंट के तौर पर काम करने वाले वर्कफ़्लो, डेटा निकालने के आसान तरीके, और उन ऐप्लिकेशन के लिए डिज़ाइन किया गया है जहां लेटेन्सी और एपीआई की लागत मुख्य बाधाएं हैं.
+Gemini 3.1 Flash-Lite to multimodalny model o krótkim czasie oczekiwania i niskich kosztach, zoptymalizowany pod kątem zadań o wysokiej częstotliwości i niewielkiej złożoności. Model obsługuje dane wejściowe w postaci tekstu, obrazu, filmu, dźwięku i pliku PDF. Jest przeznaczony do obsługi dużych ilości zadań wykonywanych przez agentów, prostego wyodrębniania danych i aplikacji, w których głównymi ograniczeniami są czas oczekiwania i koszt interfejsu API.
 
-[Google AI Studio में आज़माएं](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=hi)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com/prompts/new_chat?model=gemini-3.1-flash-lite&hl=pl)
 
 ## gemini-3.1-flash-lite
 
-| प्रॉपर्टी | ब्यौरा |
+| Właściwość | Opis |
 | --- | --- |
-| id\_cardमॉडल कोड | `gemini-3.1-flash-lite` |
-| saveके साथ इस्तेमाल किए जा सकने वाले डेटा टाइप | **इनपुट**  टेक्स्ट, इमेज, वीडियो, ऑडियो, और PDF  **आउटपुट**  टेक्स्ट |
-| token\_autoटोकन की सीमाएं[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=hi) | **इनपुट टोकन की सीमा**  1,048,576  **आउटपुट टोकन की सीमा**  65,536 |
-| handymanसुविधाएँ | **[ऑडियो जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/speech-generation?hl=hi)**  काम नहीं करता है  **[कैश मेमोरी में सेव होना](https://ai.google.dev/gemini-api/docs/caching?hl=hi)**  काम करता है  **[कोड एक्ज़ीक्यूट करना](https://ai.google.dev/gemini-api/docs/code-execution?hl=hi)**  काम करता है  **[कंप्यूटर का इस्तेमाल](https://ai.google.dev/gemini-api/docs/computer-use?hl=hi)**  काम नहीं करता है  **[फ़ाइल खोजना](https://ai.google.dev/gemini-api/docs/file-search?hl=hi)**  काम करता है  **[फ़ंक्शन कॉलिंग](https://ai.google.dev/gemini-api/docs/function-calling?hl=hi)**  काम करता है  **[Google Maps की मदद से जवाब तैयार करना](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=hi)**  काम करता है  **[इमेज जनरेट करने की सुविधा](https://ai.google.dev/gemini-api/docs/image-generation?hl=hi)**  काम नहीं करता है  **[Live API](https://ai.google.dev/gemini-api/docs/live-api?hl=hi)**  काम नहीं करता है  **[भरोसेमंद स्रोतों से जानकारी लेना](https://ai.google.dev/gemini-api/docs/google-search?hl=hi)**  काम करता है  **[स्ट्रक्चर्ड आउटपुट](https://ai.google.dev/gemini-api/docs/structured-output?hl=hi)**  काम करता है  **[सोच-विचार](https://ai.google.dev/gemini-api/docs/thinking?hl=hi)**  काम करता है  **[यूआरएल का कॉन्टेक्स्ट](https://ai.google.dev/gemini-api/docs/url-context?hl=hi)**  काम करता है |
-| speedकॉन्टेंट देखने के विकल्प | **[Batch API](https://ai.google.dev/gemini-api/docs/batch-api?hl=hi)**  काम करता है  **[फ़्लेक्स इन्फ़रेंस](https://ai.google.dev/gemini-api/docs/flex-inference?hl=hi)**  काम करता है  **[प्राथमिकता का अनुमान लगाना](https://ai.google.dev/gemini-api/docs/priority-inference?hl=hi)**  काम करता है |
-| 123वर्शन | ज़्यादा जानकारी के लिए, [मॉडल वर्शन के पैटर्न](https://ai.google.dev/gemini-api/docs/models/gemini?hl=hi#model-versions) पढ़ें.  - `Stable: gemini-3.1-flash-lite` |
-| calendar\_monthनया अपडेट | मई 2026 |
-| id\_cardमॉडल कार्ड | [मॉडल कार्ड](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=hi) |
+| id\_cardKod modelu | `gemini-3.1-flash-lite` |
+| saveObsługiwane typy danych | **Dane wejściowe**  Tekst, obraz, film, dźwięk i PDF  **Dane wyjściowe**  Tekst |
+| token\_autoLimity tokenów[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=pl) | **Limit tokenów wejściowych**  1 048 576  **Limit tokenów wyjściowych**  65 536 |
+| handymanMożliwości | **[Generowanie dźwięku](https://ai.google.dev/gemini-api/docs/speech-generation?hl=pl)**  Nieobsługiwane  **[Zapisywanie w pamięci podręcznej](https://ai.google.dev/gemini-api/docs/caching?hl=pl)**  Obsługiwane  **[Wykonywanie kodu](https://ai.google.dev/gemini-api/docs/code-execution?hl=pl)**  Obsługiwane  **[Korzystanie z komputera](https://ai.google.dev/gemini-api/docs/computer-use?hl=pl)**  Nieobsługiwane  **[Wyszukiwanie plików](https://ai.google.dev/gemini-api/docs/file-search?hl=pl)**  Obsługiwane  **[Wywoływanie funkcji](https://ai.google.dev/gemini-api/docs/function-calling?hl=pl)**  Obsługiwane  **[Powiązanie ze źródłami informacji przy użyciu Map Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=pl)**  Obsługiwane  **[Generowanie obrazów](https://ai.google.dev/gemini-api/docs/image-generation?hl=pl)**  Nieobsługiwane  **[Interfejs API na żywo](https://ai.google.dev/gemini-api/docs/live-api?hl=pl)**  Nieobsługiwane  **[Szukaj groundingu](https://ai.google.dev/gemini-api/docs/google-search?hl=pl)**  Obsługiwane  **[Ustrukturyzowane dane wyjściowe](https://ai.google.dev/gemini-api/docs/structured-output?hl=pl)**  Obsługiwane  **[Myślenie](https://ai.google.dev/gemini-api/docs/thinking?hl=pl)**  Obsługiwane  **[Kontekst adresu URL](https://ai.google.dev/gemini-api/docs/url-context?hl=pl)**  Obsługiwane |
+| speedOpcje wykorzystania | **[Interfejs API do przetwarzania zbiorczego](https://ai.google.dev/gemini-api/docs/batch-api?hl=pl)**  Obsługiwane  **[Wnioskowanie Flex](https://ai.google.dev/gemini-api/docs/flex-inference?hl=pl)**  Obsługiwane  **[Wnioskowanie priorytetowe](https://ai.google.dev/gemini-api/docs/priority-inference?hl=pl)**  Obsługiwane |
+| 123Wersje | Więcej informacji znajdziesz w artykule [Wzorce wersji modelu](https://ai.google.dev/gemini-api/docs/models/gemini?hl=pl#model-versions).  - `Stable: gemini-3.1-flash-lite` |
+| calendar\_monthOstatnia aktualizacja | Maj 2026 r. |
+| id\_cardKarta modelu | [Karta modelu](https://deepmind.google/models/model-cards/gemini-3-1-flash-lite/?hl=pl) |
 
-## डेवलपर गाइड
+## Przewodnik dla programistów
 
-Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े पैमाने पर हैंडल करने के लिए सबसे अच्छा मॉडल है. यहां Gemini 3.1 Flash-Lite के इस्तेमाल के कुछ उदाहरण दिए गए हैं:
+Gemini 3.1 Flash-Lite najlepiej radzi sobie z prostymi zadaniami na dużą skalę. Oto kilka przypadków użycia, w których Gemini 3.1 Flash-Lite sprawdzi się najlepiej:
 
-- **अनुवाद**: तेज़ी से, कम लागत में, और बड़े पैमाने पर अनुवाद करना. जैसे, बड़े पैमाने पर चैट मैसेज, समीक्षाएं, और सहायता टिकट प्रोसेस करना. सिस्टम के निर्देशों का इस्तेमाल करके, जवाब को सिर्फ़ अनुवाद किए गए टेक्स्ट तक सीमित किया जा सकता है. इसमें कोई अतिरिक्त टिप्पणी शामिल नहीं होगी:
+- **Tłumaczenie**: szybkie, tanie i masowe tłumaczenie, np. przetwarzanie na dużą skalę
+  wiadomości na czacie, opinii i zgłoszeń. Za pomocą instrukcji systemowych możesz ograniczyć dane wyjściowe do przetłumaczonego tekstu bez dodatkowych komentarzy:
 
   ```
   from google import genai
@@ -57,7 +58,9 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **ट्रांसक्रिप्शन**: रिकॉर्डिंग, ऑडियो नोट या किसी भी ऑडियो कॉन्टेंट को प्रोसेस करें. इससे आपको टेक्स्ट ट्रांसक्रिप्ट मिलती है. इसके लिए, आपको स्पीच-टू-टेक्स्ट की अलग पाइपलाइन शुरू करने की ज़रूरत नहीं होती. इसमें मल्टीमॉडल इनपुट का इस्तेमाल किया जा सकता है. इसलिए, ट्रांसक्रिप्शन के लिए सीधे तौर पर ऑडियो फ़ाइलें पास की जा सकती हैं:
+- **Transkrypcja**: przetwarzaj nagrania, notatki głosowe lub dowolne treści audio
+  w których potrzebujesz transkrypcji tekstowej, bez konieczności uruchamiania osobnego
+  potoku przetwarzania mowy na tekst. Model obsługuje dane wejściowe w wielu formatach, dzięki czemu możesz bezpośrednio przekazywać pliki audio do transkrypcji:
 
   ```
   from google import genai
@@ -77,7 +80,9 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **लाइटवेट एजेंटिक टास्क और डेटा निकालने की सुविधा**: इसमें स्ट्रक्चर्ड JSON आउटपुट के साथ, इकाई का पता लगाना, क्लासिफ़िकेशन, और लाइटवेट डेटा प्रोसेसिंग पाइपलाइन की सुविधा मिलती है. उदाहरण के लिए, ई-कॉमर्स प्लैटफ़ॉर्म पर खरीदार की समीक्षा से स्ट्रक्चर्ड डेटा निकालना:
+- **Proste zadania wykonywane przez agentów i wyodrębnianie danych**: wyodrębnianie encji,
+  klasyfikacja i proste potoki przetwarzania danych obsługiwane przez
+  ustrukturyzowane dane wyjściowe w formacie JSON. Na przykład wyodrębnianie danych strukturalnych z opinii klienta w e-commerce:
 
   ```
   from google import genai
@@ -105,7 +110,9 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **दस्तावेज़ प्रोसेस करना और खास जानकारी देना**: PDF फ़ाइलों को पार्स करना और कम शब्दों में खास जानकारी देना. जैसे, दस्तावेज़ प्रोसेस करने की पाइपलाइन बनाना या आने वाली फ़ाइलों को तुरंत प्राथमिकता देना:
+- **Przetwarzanie i podsumowywanie dokumentów**: analizuj pliki PDF i zwracaj zwięzłe
+  podsumowania, np. do tworzenia potoku przetwarzania dokumentów lub szybkiego
+  sortowania przychodzących plików:
 
   ```
   from google import genai
@@ -132,7 +139,10 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **मॉडल राउटिंग**: कम समय में जवाब देने वाले और कम कीमत वाले मॉडल का इस्तेमाल क्लासिफ़ायर के तौर पर करें. यह मॉडल, टास्क की जटिलता के आधार पर क्वेरी को सही मॉडल पर भेजता है. यह प्रोडक्शन में इस्तेमाल होने वाला एक असली पैटर्न है. ओपन-सोर्स [Gemini CLI](https://geminicli.com/docs/core/#model-fallback), टास्क की मुश्किल को कैटगरी में बांटने के लिए Flash-Lite का इस्तेमाल करता है. इसके बाद, टास्क को Flash या Pro पर भेजता है.
+- **Routing modelu**: używaj modelu o krótkim czasie oczekiwania i niskich kosztach jako klasyfikatora, który
+  kieruje zapytania do odpowiedniego modelu na podstawie złożoności zadania. Jest to
+  rzeczywisty wzorzec w środowisku produkcyjnym – interfejs wiersza poleceń [Gemini](https://geminicli.com/docs/core/#model-fallback) o otwartym kodzie źródłowym używa modelu Flash-Lite do
+  klasyfikowania złożoności zadań i kierowania ich odpowiednio do modeli Flash lub Pro.
 
   ```
   from google import genai
@@ -185,7 +195,9 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
 
   print(response.text)
   ```
-- **सोचना**: ऐसे टास्क के लिए, जिनमें सिलसिलेवार तरीके से तर्क करने से बेहतर नतीजे मिलते हैं, सोचने की सुविधा को कॉन्फ़िगर करें. इससे मॉडल, फ़ाइनल आउटपुट देने से पहले, तर्क करने के लिए ज़्यादा कंप्यूटिंग पावर का इस्तेमाल करेगा:
+- **Myślenie**: aby zwiększyć dokładność zadań, które wymagają rozumowania krok po kroku
+  , skonfiguruj myślenie tak, aby model poświęcał dodatkowe zasoby obliczeniowe na
+  wewnętrzne rozumowanie przed wygenerowaniem ostatecznych danych wyjściowych:
 
   ```
   from google import genai
@@ -204,12 +216,12 @@ Gemini 3.1 Flash-Lite, सामान्य टास्क को बड़े
   print(response.text)
   ```
 
-सुझाव भेजें
+Prześlij opinię
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-आखिरी बार 2026-07-21 (UTC) को अपडेट किया गया.
+Ostatnia aktualizacja: 2026-07-21 UTC.
 
-क्या आपको हमें और कुछ बताना है?
+Chcesz przekazać coś jeszcze?
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-07-21 (UTC) को अपडेट किया गया."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-21 UTC."],[],[]]

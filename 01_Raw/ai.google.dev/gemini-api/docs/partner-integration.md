@@ -1,181 +1,143 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=th
-fetched_at: 2026-08-03T04:42:37.943904+00:00
-title: "\u0e01\u0e32\u0e23\u0e1c\u0e2a\u0e32\u0e19\u0e23\u0e27\u0e21\u0e1e\u0e32\u0e23\u0e4c\u0e17\u0e40\u0e19\u0e2d\u0e23\u0e4c\u0e41\u0e25\u0e30\u0e2b\u0e49\u0e2d\u0e07\u0e2a\u0e21\u0e38\u0e14 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/partner-integration?hl=es-419
+fetched_at: 2026-08-10T03:10:24.657493+00:00
+title: "Integraciones de socios y bibliotecas \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-ตอนนี้ [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=th) พร้อมให้บริการแก่ผู้ใช้ทั่วไปแล้ว เราขอแนะนำให้ใช้ API นี้เพื่อเข้าถึงฟีเจอร์และโมเดลล่าสุดทั้งหมด
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=th)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google ใช้เทคโนโลยี AI เพื่อแปลเนื้อหาเป็นภาษาที่คุณต้องการ การแปลโดย AI อาจมีข้อผิดพลาด
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [หน้าแรก](https://ai.google.dev/?hl=th)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=th)
-- [เอกสาร](https://ai.google.dev/gemini-api/docs?hl=th)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-# การผสานรวมพาร์ทเนอร์และห้องสมุด
+# Integraciones de socios y bibliotecas
 
-คู่มือนี้จะอธิบายกลยุทธ์ด้านสถาปัตยกรรมสำหรับการสร้างไลบรารี แพลตฟอร์ม
-และเกตเวย์บน Gemini API โดยจะอธิบายรายละเอียดข้อแลกเปลี่ยนทางเทคนิค
-ระหว่างการใช้ GenAI SDK อย่างเป็นทางการ, Direct API (REST/gRPC) และ
-เลเยอร์ความเข้ากันได้ของ OpenAI
+En esta guía, se describen las estrategias de arquitectura para compilar bibliotecas, plataformas y puertas de enlace sobre la API de Gemini. Detalla las compensaciones técnicas entre el uso de los SDKs oficiales de IA generativa, la API directa (REST/gRPC) y la capa de compatibilidad con OpenAI.
 
-ใช้คู่มือนี้หากคุณกำลังสร้างเครื่องมือสำหรับนักพัฒนาซอฟต์แวร์รายอื่น เช่น
-เฟรมเวิร์กโอเพนซอร์ส เกตเวย์ขององค์กร หรือผู้รวบรวม SaaS และต้องการ
-เพิ่มประสิทธิภาพเพื่อความสะอาดของทรัพยากร Dependency ขนาดของแพ็กเกจ หรือความเท่าเทียมของฟีเจอร์
+Usa esta guía si compilas herramientas para otros desarrolladores, como frameworks de código abierto, puertas de enlace empresariales o agregadores de SaaS, y necesitas optimizar la higiene de las dependencias, el tamaño del paquete o la paridad de funciones.
 
-## การผสานรวมกับพาร์ทเนอร์คืออะไร
+## ¿Qué es la integración de socios?
 
-พาร์ทเนอร์คือทุกคนที่สร้างการผสานรวมระหว่าง Gemini API กับนักพัฒนาซอฟต์แวร์ที่เป็นผู้ใช้ปลายทาง
-เราจัดหมวดหมู่พาร์ทเนอร์เป็น 4 รูปแบบ การระบุว่าคุณตรงกับข้อใดมากที่สุดจะช่วยให้คุณเลือกเส้นทางการผสานรวมที่เหมาะสมได้
+Un socio es cualquier persona que cree una integración entre la API de Gemini y los desarrolladores de usuarios finales. Categorizamos a los socios en cuatro arquetipos. Identificar con cuál te identificas más te ayudará a elegir la ruta de integración adecuada.
 
-#### กรอบระบบนิเวศ
+#### Marco del ecosistema
 
-- **คุณคือใคร:** ผู้ดูแลเฟรมเวิร์กโอเพนซอร์ส (เช่น LangChain,
-  LlamaIndex, Spring AI) หรือไคลเอ็นต์เฉพาะภาษา
-- **เป้าหมาย:** ความเข้ากันได้ในวงกว้าง คุณต้องการให้ไลบรารีทำงานในสภาพแวดล้อมใดก็ได้ที่ผู้ใช้เลือกโดยไม่บังคับให้เกิดความขัดแย้ง
+- **Quién eres:** Mantenedor de un framework de código abierto (p. ej., LangChain, LlamaIndex, Spring AI) o clientes específicos del idioma
+- **Tu objetivo:** Amplia compatibilidad. Quieres que tu biblioteca funcione en cualquier entorno que elija el usuario sin forzar conflictos.
 
-#### แพลตฟอร์มรันไทม์และแพลตฟอร์ม Edge
+#### Plataforma de tiempo de ejecución y de borde
 
-- **คุณคือใคร:** แพลตฟอร์ม SaaS, AI Gateway หรือผู้ให้บริการโครงสร้างพื้นฐานระบบคลาวด์ (เช่น Vercel, Cloudflare, Zapier) ที่มีการดำเนินการโค้ดใน
-  สภาพแวดล้อมที่จำกัด
-- **เป้าหมายของคุณ:** ประสิทธิภาพ คุณต้องมีเวลาในการตอบสนองต่ำ ขนาดแพ็กเกจเล็กที่สุด และ
-  การเริ่มแอปแบบ Cold Start ที่รวดเร็ว
+- **Quién eres:** Plataformas de SaaS, puertas de enlace de IA o proveedores de infraestructura en la nube (p.ej., Vercel, Cloudflare, Zapier) en los que la ejecución de código se realiza en entornos restringidos.
+- **Tu objetivo:** Rendimiento Necesitas baja latencia, un tamaño de paquete mínimo y rápidos inicios en frío.
 
-#### ผู้รวบรวมข้อมูล
+#### Agregador
 
-- **คุณคือใคร:** แพลตฟอร์ม พร็อกซี หรือ "Model Gardens" ภายในที่
-  ปรับการเข้าถึงให้เป็นมาตรฐานในผู้ให้บริการ LLM ที่แตกต่างกันหลายราย (เช่น OpenAI
-  Anthropic, Google) ให้เป็นอินเทอร์เฟซเดียว
-- **เป้าหมาย:** ความสามารถในการพกพาและความสม่ำเสมอ
+- **Quién eres:** Plataformas, proxies o "Model Gardens" internos que normalizan el acceso a muchos proveedores diferentes de LLM (p.ej., OpenAI, Anthropic, Google) en una sola interfaz.
+- **Tu objetivo:** Portabilidad y uniformidad.
 
-#### เกตเวย์ขององค์กร
+#### Puerta de enlace empresarial
 
-- **คุณคือใคร:** ทีมวิศวกรรมแพลตฟอร์มภายในของบริษัทขนาดใหญ่
-  ที่สร้าง "เส้นทางทอง" สำหรับนักพัฒนาซอฟต์แวร์ภายในหลายร้อยคน
-- **เป้าหมายของคุณ:** การกำหนดมาตรฐาน การกำกับดูแล และการตรวจสอบสิทธิ์แบบรวม
+- **Quién eres:** Equipos internos de ingeniería de plataformas en grandes empresas que crean "rutas doradas" para cientos de desarrolladores internos.
+- **Tu objetivo:** Estandarización, administración y autenticación unificada.
 
-## เปรียบเทียบข้อมูลโดยย่อ
+## Comparación rápida
 
-**แนวทางปฏิบัติแนะนำระดับโลก:** พาร์ทเนอร์ทุกรายต้องส่งส่วนหัว [`x-goog-api-client`](#client-id) ไม่ว่าเส้นทางที่เลือกจะเป็นเส้นทางใดก็ตาม
+**Práctica recomendada global:** Todos los socios deben enviar el [encabezado `x-goog-api-client`](#client-id), independientemente de la ruta elegida.
 
-| หากคุณ | เส้นทางที่แนะนำ | ประโยชน์หลัก | การแลกเปลี่ยนที่สำคัญ | แนวทางปฏิบัติแนะนำ |
+| Si eres… | Ruta recomendada | Beneficio clave | Compensación clave | Práctica recomendada |
 | --- | --- | --- | --- | --- |
-| **กรอบการทำงานของระบบนิเวศและเกตเวย์ระดับองค์กร** | **[Google GenAI SDK](#genai-sdk)** | **ความเท่าเทียมและความเร็วของแพลตฟอร์ม Agent ของ Gemini Enterprise** การจัดการในตัวสำหรับประเภท การตรวจสอบสิทธิ์ และฟีเจอร์ที่ซับซ้อน (เช่น การอัปโหลดไฟล์) ย้ายข้อมูลไปยัง Google Cloud ได้อย่างราบรื่น | **น้ำหนักการขึ้นต่อกัน** การอ้างอิงแบบทรานซิทีฟอาจมีความซับซ้อนและอยู่นอกเหนือการควบคุมของคุณ จำกัดเฉพาะภาษาที่รองรับ (Python/Node/Go/Java) | **ล็อกเวอร์ชัน** ปักหมุดเวอร์ชัน SDK ในอิมเมจพื้นฐานภายในเพื่อให้มั่นใจถึงความเสถียรในทีมต่างๆ |
-| **กรอบระบบนิเวศ, แพลตฟอร์ม Edge และผู้รวบรวม** | **[Direct API](#rest)**  *(REST / gRPC)* | **ไม่มีทรัพยากร Dependency** คุณควบคุมไคลเอ็นต์ HTTP และขนาดแพ็กเกจที่แน่นอนได้ สิทธิ์เข้าถึงฟีเจอร์ API และโมเดลทั้งหมดโดยสมบูรณ์ | **ค่าใช้จ่ายของนักพัฒนาซอฟต์แวร์สูง** โครงสร้าง JSON สามารถซ้อนกันได้หลายชั้น และต้องมีการตรวจสอบความถูกต้องและการตรวจสอบประเภทด้วยตนเองอย่างเข้มงวด | **ใช้ข้อกำหนด OpenAPI** สร้างประเภทโดยอัตโนมัติโดยใช้ข้อกำหนดอย่างเป็นทางการของเราแทนการเขียนด้วยตนเอง |
-| **ผู้รวบรวมที่ใช้ SDK ของ OpenAI ซึ่งต้องใช้เวิร์กโฟลว์แบบข้อความเท่านั้น**  *(เพิ่มประสิทธิภาพเพื่อความสามารถในการพกพาแบบเดิม)* | **[ความเข้ากันได้กับ OpenAI](#openai)** | **การถ่ายโอนได้ทันที** นำโค้ดหรือไลบรารีที่มีอยู่ซึ่งเข้ากันได้กับ OpenAI มาใช้ซ้ำ | **เพดานฟีเจอร์** ฟีเจอร์เฉพาะรุ่น (วิดีโอเนทีฟ การแคช) อาจไม่พร้อมใช้งาน | **แผนการย้ายข้อมูล** ใช้เพื่อการตรวจสอบอย่างรวดเร็ว แต่ควรวางแผนที่จะอัปเกรดเป็น Direct API เพื่อใช้ฟีเจอร์ API อย่างเต็มรูปแบบ |
+| **Puerta de enlace empresarial, framework del ecosistema** | **[SDK de IA generativa de Google](#genai-sdk)** | **Paridad y velocidad de Gemini Enterprise Agent Platform.** Control integrado para tipos, autenticación y funciones complejas (p. ej., cargas de archivos) Migración sin interrupciones a Google Cloud | **Peso de la dependencia:** Las dependencias transitivas pueden ser complejas y estar fuera de tu control. Se limita a los lenguajes compatibles (Python/Node/Go/Java). | **Bloquea versiones.** Fija las versiones del SDK en tus imágenes base internas para garantizar la estabilidad en todos los equipos. |
+| **Framework del ecosistema, plataformas perimetrales y agregadores** | **[API directa](#rest)**  *(REST / gRPC)* | **Sin dependencias.** Controlas el cliente HTTP y el tamaño exacto del paquete. Acceso completo a todas las funciones de la API y el modelo. | **Sobrecarga alta para el desarrollador** Las estructuras JSON pueden estar profundamente anidadas y requieren una validación manual y una verificación de tipos estrictas. | **Usa especificaciones de OpenAPI.** Automatiza la generación de tipos con nuestras especificaciones oficiales en lugar de escribirlas a mano. |
+| **Agregador que usa los SDKs de OpenAI que solo requieren flujos de trabajo basados en texto**  *(Optimización para la portabilidad heredada)* | **[Compatibilidad con OpenAI](#openai)** | **Portabilidad instantánea.** Reutiliza código o bibliotecas existentes compatibles con OpenAI. | **Límite de funciones:** Es posible que no estén disponibles las funciones específicas del modelo (video nativo, almacenamiento en caché). | **Plan de migración.** Úsala para la validación rápida, pero planifica actualizar a la API directa para obtener la función completa de la API. |
 
-## การผสานรวม Google GenAI SDK
+## Integración del SDK de IA generativa de Google
 
-สำหรับเฟรมเวิร์ก การใช้ [GenAI SDK ของ Google](https://ai.google.dev/gemini-api/docs/libraries?hl=th)
-มักเป็นวิธีที่ง่ายที่สุด เนื่องจากมีโค้ดน้อยที่สุดในภาษาที่รองรับ
+En el caso de los frameworks, implementar el [SDK de IA generativa de Google](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419) suele ser la ruta más sencilla, ya que requiere la menor cantidad de líneas de código en los lenguajes admitidos.
 
-สำหรับทีมแพลตฟอร์มภายใน สิ่งที่คุณต้องส่งมอบเป็นหลักมักจะเป็น "เส้นทางทอง"
-ที่ช่วยให้วิศวกรผลิตภัณฑ์ทำงานได้อย่างรวดเร็วในขณะที่ปฏิบัติตามนโยบายด้านความปลอดภัย
+En el caso de los equipos internos de la plataforma, el principal producto entregable suele ser una "ruta dorada" que permite a los ingenieros de productos avanzar rápido y, al mismo tiempo, cumplir con las políticas de seguridad.
 
-**สิทธิประโยชน์**
+**Beneficios:**
 
-- **อินเทอร์เฟซแบบรวมสำหรับการย้ายข้อมูลแพลตฟอร์ม Agent ของ Gemini Enterprise:** นักพัฒนาซอฟต์แวร์ภายในมักจะสร้างต้นแบบโดยใช้คีย์ API (Gemini API) และนำไปใช้งานในแพลตฟอร์ม Agent ของ Gemini Enterprise (IAM) เพื่อให้เป็นไปตามข้อกำหนดการผลิต SDK จะสรุปความแตกต่างในการตรวจสอบสิทธิ์เหล่านี้
-  ในทำนองเดียวกันสำหรับเฟรมเวิร์ก คุณสามารถใช้ Codepath เดียวและรองรับผู้ใช้ 2 กลุ่มได้
-- **ตัวช่วยฝั่งไคลเอ็นต์:** SDK มีเครื่องมือที่ช่วยลด
-  โค้ดมาตรฐานสำหรับงานที่ซับซ้อน
-  - *ตัวอย่าง:* รองรับ`PIL`ออบเจ็กต์รูปภาพในพรอมต์โดยตรง
-    การเรียกใช้ฟังก์ชันอัตโนมัติ และประเภทที่ครอบคลุม
-- **การเข้าถึงฟีเจอร์ตั้งแต่วันแรก:** ฟีเจอร์ใหม่ของ API จะพร้อมใช้งานเมื่อเปิดตัวผ่าน SDK
-- **การรองรับการสร้างโค้ดที่ดียิ่งขึ้น:** การติดตั้ง SDK ในเครื่องจะแสดงคำจำกัดความประเภท
-  และสตริงเอกสารต่อผู้ช่วยการเขียนโค้ด (เช่น Cursor, Copilot)
-  บริบทนี้ช่วยปรับปรุงความแม่นยำในการสร้างโค้ดเมื่อเทียบกับการสร้างคำขอ REST ดิบ
+- **Interfaz unificada para la migración de Gemini Enterprise Agent Platform:** Los desarrolladores internos suelen crear prototipos con claves de API (API de Gemini) y realizar implementaciones en Gemini Enterprise Agent Platform (IAM) para cumplir con los requisitos de producción. El SDK abstrae estas diferencias de autenticación.
+  Del mismo modo, para los frameworks, puedes implementar una ruta de código y admitir dos conjuntos de usuarios.
+- **Asistentes del cliente:** El SDK incluye utilidades idiomáticas que reducen el código repetitivo para tareas complejas.
+  - *Ejemplos:* Compatibilidad con objetos de imagen `PIL` directamente en las instrucciones, llamadas a funciones automáticas y tipos integrales.
+- **Acceso a las funciones el día del lanzamiento:** Las nuevas funciones de la API están disponibles en el momento del lanzamiento a través de los SDKs.
+- **Mejor compatibilidad con la generación de código:** La instalación local del SDK expone definiciones de tipos y cadenas de documentación a los asistentes de programación (p.ej., Cursor y Copilot).
+  Este contexto mejora la precisión de la generación de código en comparación con la generación de solicitudes REST sin procesar.
 
-**ข้อแลกเปลี่ยน:**
+**La compensación:**
 
-- **น้ำหนักและความซับซ้อนของ Dependency:** SDK มี Dependency ของตัวเอง
-  ซึ่งอาจเพิ่มขนาดของ Bundle และความเสี่ยงในห่วงโซ่อุปทาน
-- **การกำหนดเวอร์ชัน:** ฟีเจอร์ใหม่ของ API มักจะเชื่อมโยงกับ SDK เวอร์ชันขั้นต่ำ
-  คุณอาจต้องพุชการอัปเดตไปยังผู้ใช้เพื่อให้เข้าถึงฟีเจอร์หรือโมเดลใหม่ๆ
-  ซึ่งในบางกรณีอาจต้องมีการเปลี่ยนแปลงในทรัพยากร Dependency แบบทรานซิทีฟที่
-  ส่งผลต่อผู้ใช้
-- **ข้อจำกัดของโปรโตคอล:** SDK รองรับเฉพาะ HTTPS สำหรับ API หลักและ
-  WebSocket (WSS) สำหรับ Live API โดยไม่รองรับ gRPC เมื่อใช้ไคลเอ็นต์ SDK ระดับสูง
-- **การรองรับภาษา:** SDK รองรับภาษาเวอร์ชัน*ปัจจุบัน* หากต้องการรองรับเวอร์ชันที่สิ้นสุดการสนับสนุนแล้ว (เช่น Python 3.9) คุณจะต้องดูแลรักษา
-  การแยกสาขา
+- **Peso y complejidad de las dependencias:** Los SDKs tienen sus propias dependencias, lo que puede aumentar el tamaño del paquete y el riesgo de la cadena de suministro.
+- **Control de versiones:** Las nuevas funciones de la API suelen estar vinculadas a versiones mínimas del SDK.
+  Es posible que debas enviar actualizaciones a los usuarios para que accedan a funciones o modelos nuevos, lo que, en algunos casos, puede requerir cambios en las dependencias transitivas que afecten a tus usuarios.
+- **Límites de protocolo:** Los SDKs solo admiten HTTPS para la API principal y WebSockets (WSS) para la API de Live. gRPC no se admite con los clientes de SDK de alto nivel.
+- **Compatibilidad con idiomas:** Los SDKs admiten versiones de idiomas *actuales*. Si necesitas admitir versiones EOL (p.ej., Python 3.9), deberás mantener una bifurcación.
 
-**แนวทางปฏิบัติแนะนำ:**
+**Práctica recomendada:**
 
-- **ล็อกเวอร์ชัน:** ปักหมุดเวอร์ชัน SDK ในอิมเมจพื้นฐานภายในเพื่อ
-  ให้มั่นใจถึงความเสถียรในทีมต่างๆ
+- **Bloquea las versiones:** Fija la versión del SDK en tus imágenes base internas para garantizar la estabilidad en todos los equipos.
 
-## การผสานรวม API โดยตรง
+## Integración directa con la API
 
-หากคุณเผยแพร่ไลบรารีแก่นักพัฒนาแอปหลายพันคน, เรียกใช้ใน
-สภาพแวดล้อมที่มีข้อจำกัด หรือสร้างตัวรวบรวมที่ต้องใช้ฟีเจอร์ใหม่ล่าสุดของ Gemini คุณอาจต้องผสานรวมกับ API โดยตรงโดยใช้ REST หรือ gRPC
+Si distribuyes una biblioteca a miles de desarrolladores, ejecutas en un entorno restringido o compilas un agregador que requiere las funciones de vanguardia de Gemini, es posible que debas realizar la integración directamente con la API a través de REST o gRPC.
 
-**สิทธิประโยชน์**
+**Beneficios:**
 
-- **การเข้าถึงฟีเจอร์ทั้งหมด:** การใช้ API โดยตรงจะเปิดใช้ฟีเจอร์เฉพาะของ Gemini เช่น การอัปโหลดไปยัง File API, การสร้างแคชเนื้อหา และการใช้ Live API แบบ 2 ทาง ซึ่งแตกต่างจากเลเยอร์ความเข้ากันได้ของ OpenAI
-- **การพึ่งพาอาศัยกันน้อยที่สุด:** ในสภาพแวดล้อมที่การพึ่งพาอาศัยกันมีความละเอียดอ่อนเนื่องจากขนาดหรือต้นทุนการตรวจสอบ การใช้ API โดยตรงผ่านไลบรารีมาตรฐาน เช่น `fetch` หรือผ่าน Wrapper เช่น `httpx` จะช่วยให้ไลบรารีของคุณมีขนาดเล็กอยู่เสมอ
-- **ไม่ขึ้นอยู่กับภาษา:** นี่เป็นเส้นทางเดียวสำหรับภาษาที่ SDK ไม่ครอบคลุม เช่น Rust, PHP และ Ruby เนื่องจากไม่มีข้อจำกัดด้านภาษา
-- **ประสิทธิภาพ:** Direct API ไม่มีค่าใช้จ่ายในการเริ่มต้นใช้งาน ซึ่งช่วยลด Cold Start ในฟังก์ชันแบบ Serverless
+- **Acceso completo a las funciones:** A diferencia de la capa de compatibilidad con OpenAI, usar la API directamente habilita funciones específicas de Gemini, como la carga en la API de File, la creación de almacenamiento en caché de contenido y el uso de la API de Live bidireccional.
+- **Dependencias mínimas:** En un entorno en el que las dependencias son sensibles debido al tamaño o a los costos de auditoría. Usar la API directamente a través de una biblioteca estándar como `fetch` o a través de un wrapper como `httpx` garantiza que tu biblioteca siga siendo ligera.
+- **Independiente del lenguaje:** Esta es la única ruta para los lenguajes que no cubren los SDKs, como Rust, PHP y Ruby, ya que no hay restricciones de lenguaje.
+- **Rendimiento:** La API de Direct no tiene sobrecarga de inicialización, lo que minimiza los inicios en frío en las funciones sin servidores.
 
-**ข้อแลกเปลี่ยน:**
+**La compensación:**
 
-- **การติดตั้งใช้งานแพลตฟอร์ม Agent ของ Gemini Enterprise ด้วยตนเอง:** การใช้ API โดยตรงจะ
-  ไม่จัดการความแตกต่างในการตรวจสอบสิทธิ์ระหว่าง AI
-  Studio (คีย์ API) กับแพลตฟอร์ม Agent ของ Gemini Enterprise (IAM) โดยอัตโนมัติ ซึ่งแตกต่างจาก SDK คุณต้องใช้ตัวแฮนเดิลการตรวจสอบสิทธิ์แยกต่างหากหากต้องการรองรับทั้ง 2 สภาพแวดล้อม
-- **ไม่มีประเภทหรือตัวช่วยดั้งเดิม:** คุณจะไม่ได้รับการเติมโค้ดหรือการตรวจสอบขณะคอมไพล์สำหรับออบเจ็กต์คำขอ เว้นแต่คุณจะติดตั้งใช้งานด้วยตนเอง ไม่มี "ตัวช่วย" ไคลเอ็นต์ (เช่น ตัวแปลงฟังก์ชันเป็นสคีมา) ดังนั้นคุณต้องเขียนตรรกะนี้ด้วยตนเอง
+- **Implementación manual de Gemini Enterprise Agent Platform:** A diferencia del SDK, usar la API directamente no controla automáticamente las diferencias de autenticación entre AI Studio (clave de API) y Gemini Enterprise Agent Platform (IAM). Debes implementar controladores de autenticación separados si deseas admitir ambos entornos.
+- **Sin tipos ni asistentes nativos:** No obtienes finalizaciones de código ni verificaciones en tiempo de compilación para los objetos de solicitud, a menos que los implementes por tu cuenta. No hay "ayudantes" del cliente (p.ej., convertidores de funciones a esquemas), por lo que debes escribir esta lógica de forma manual.
 
-**แนวทางปฏิบัติแนะนำ**
+**Práctica recomendada**
 
-เราแสดงข้อกำหนดที่เครื่องอ่านได้ซึ่งคุณสามารถใช้เพื่อสร้างคำจำกัดความของประเภทสำหรับไลบรารี ซึ่งช่วยให้คุณไม่ต้องเขียนด้วยตนเอง ดาวน์โหลดข้อกำหนดในระหว่างกระบวนการบิลด์ สร้างประเภท และจัดส่งโค้ดที่คอมไพล์แล้ว
+Exponemos una especificación legible por máquina que puedes usar para generar definiciones de tipos para tu biblioteca, lo que te ahorra tener que escribirlas a mano. Descarga la especificación durante el proceso de compilación, genera los tipos y envía el código compilado.
 
-- **ปลายทาง:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
+- **Extremo:** `https://generativelanguage.googleapis.com/$discovery/OPENAPI3_0`
 
-## การผสานรวม OpenAI SDK
+## Integración del SDK de OpenAI
 
-หากคุณเป็นแพลตฟอร์มที่ให้ความสำคัญกับสคีมาแบบรวม (OpenAI Chat
-Completions) มากกว่าฟีเจอร์เฉพาะโมเดล นี่คือเส้นทางที่เร็วที่สุดสำหรับคุณ
+Si eres una plataforma que prioriza un esquema unificado (finalizaciones de chat de OpenAI) por sobre las funciones específicas del modelo, esta es la ruta más rápida.
 
-**สิทธิประโยชน์**
+**Beneficios:**
 
-- **ราบรื่น:** คุณมักจะเพิ่มการรองรับ Gemini ได้โดยการเปลี่ยน `baseURL`
-  และ `apiKey` ซึ่งเป็นวิธีที่รวดเร็วในการผสานรวมการติดตั้งใช้งาน "Bring Your Own Key"
-  โดยเพิ่มการรองรับ Gemini โดยไม่ต้องเขียนโค้ดใหม่
-- **ข้อจำกัด:** เราขอแนะนำเส้นทางนี้เฉพาะในกรณีที่คุณถูกจำกัดให้ใช้
-  OpenAI SDK และไม่จำเป็นต้องใช้ฟีเจอร์ขั้นสูงของ Gemini เช่น File API
-  หรือการเพิ่มการรองรับเครื่องมือต่างๆ เช่น การเชื่อมต่อแหล่งข้อมูลกับ Google Search ด้วยตนเอง
+- **Baja fricción:** A menudo, puedes agregar compatibilidad con Gemini cambiando `baseURL` y `apiKey`. Esta es una forma rápida de integrar implementaciones de "Aporta tu propia clave", lo que permite agregar compatibilidad con Gemini sin escribir código nuevo.
+- **Restricciones:** Esta ruta solo se recomienda si estás limitado al SDK de OpenAI y no necesitas funciones avanzadas de Gemini, como la API de File, o agregar manualmente compatibilidad con herramientas como la fundamentación con la Búsqueda de Google.
 
-**ข้อแลกเปลี่ยน:**
+**La compensación:**
 
-- **ข้อจำกัดของฟีเจอร์:** เลเยอร์ความเข้ากันได้มีข้อจำกัดสำหรับ
-  ความสามารถหลักของ Gemini เครื่องมือฝั่งเซิร์ฟเวอร์ที่ใช้ได้จะแตกต่างกันไปในแต่ละแพลตฟอร์ม และอาจต้องมีการจัดการด้วยตนเองเพื่อให้ทำงานร่วมกับเครื่องมือ Gemini API ได้
-- **ค่าใช้จ่ายในการแปล:** เนื่องจากสคีมาของ OpenAI ไม่ได้
-  แมปกับสถาปัตยกรรมของ Gemini แบบ 1:1 การใช้เลเยอร์ความเข้ากันได้
-  จึงทำให้เกิดความซับซ้อนบางอย่างที่ต้องใช้การติดตั้งใช้งานเพิ่มเติมเพื่อ
-  แก้ไข เช่น การแมปเครื่องมือ "ค้นหา" ของผู้ใช้กับเครื่องมือแพลตฟอร์มที่เหมาะสม
-  หากคุณต้องการการจัดการเคสพิเศษจำนวนมาก การใช้ SDK หรือ API เฉพาะสำหรับแต่ละแพลตฟอร์มอาจมีประโยชน์มากกว่า
+- **Limitaciones de las funciones:** La capa de compatibilidad proporciona limitaciones a las capacidades principales de Gemini. Las herramientas disponibles del servidor difieren entre las plataformas y pueden requerir un manejo manual para trabajar con las herramientas de la API de Gemini.
+- **Sobrecarga de traducción:** Debido a que el esquema de OpenAI no se asigna 1:1 a la arquitectura de Gemini, depender de la capa de compatibilidad introduce algunas complejidades que requieren trabajo de implementación adicional para resolver, como asignar una herramienta de "búsqueda" del usuario a la herramienta de plataforma correcta.
+  Si necesitas una gran cantidad de casos especiales, puede ser más valioso usar un SDK o una API dedicados para cada plataforma.
 
-**แนวทางปฏิบัติแนะนำ**
+**Práctica recomendada**
 
-หากเป็นไปได้ ให้ผสานรวมกับ Gemini API โดยตรง อย่างไรก็ตาม เพื่อให้มีความเข้ากันได้สูงสุด
-โปรดพิจารณาใช้ไลบรารีที่รู้จักผู้ให้บริการต่างๆ และ
-จัดการการแมปเครื่องมือและข้อความให้คุณได้
+Siempre que sea posible, intégrate directamente con la API de Gemini. Sin embargo, para lograr la máxima compatibilidad, considera usar una biblioteca que conozca los diferentes proveedores y pueda controlar la asignación de herramientas y mensajes por ti.
 
-## แนวทางปฏิบัติแนะนำสำหรับพาร์ทเนอร์ทุกราย: การระบุไคลเอ็นต์
+## Práctica recomendada para todos los socios: identificación del cliente
 
-เมื่อเรียกใช้ Gemini API ในฐานะแพลตฟอร์มหรือไลบรารี คุณต้องระบุไคลเอ็นต์โดยใช้ส่วนหัว `x-goog-api-client`
+Cuando realices llamadas a la API de Gemini como plataforma o biblioteca, debes identificar tu cliente con el encabezado `x-goog-api-client`.
 
-ซึ่งจะช่วยให้ Google ระบุกลุ่มการเข้าชมที่เฉพาะเจาะจงของคุณได้ และหากคลังของคุณสร้างรูปแบบข้อผิดพลาดที่เฉพาะเจาะจง เราจะติดต่อเพื่อช่วยคุณแก้ไขข้อบกพร่อง
+Esto le permite a Google identificar tus segmentos de tráfico específicos y, si tu biblioteca produce un patrón de error específico, podemos comunicarnos contigo para ayudarte a depurar.
 
-ใช้รูปแบบ `company-product/version` (เช่น `acme-framework/1.2.0`)
+Usa el formato `company-product/version` (p.ej., `acme-framework/1.2.0`).
 
-### ตัวอย่างการติดตั้งใช้งาน
+### Ejemplos de implementación
 
-### SDK สำหรับ GenAI
+### SDK de IA generativa
 
-เมื่อระบุไคลเอ็นต์ API แล้ว SDK จะเพิ่มส่วนหัวที่กำหนดเอง
-ลงในส่วนหัวภายในโดยอัตโนมัติ
+Cuando proporcionas el cliente de API, el SDK agrega automáticamente tu encabezado personalizado a sus encabezados internos.
 
 ```
 from google import genai
@@ -190,7 +152,7 @@ client = genai.Client(
 )
 ```
 
-### Direct API (REST)
+### API directa (REST)
 
 ```
 curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key=$GEMINI_API_KEY" \
@@ -199,7 +161,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:g
     -d '{...}'
 ```
 
-### OpenAI SDK
+### SDK de OpenAI
 
 ```
 from openai import OpenAI
@@ -213,19 +175,18 @@ client = OpenAI(
 )
 ```
 
-## ขั้นตอนถัดไป
+## Próximos pasos
 
-- ไปที่[ภาพรวมของไลบรารี](https://ai.google.dev/gemini-api/docs/libraries?hl=th)เพื่อดูข้อมูลเกี่ยวกับ
-  SDK ของ GenAI
-- เรียกดู[เอกสารอ้างอิง API](https://ai.google.dev/api?hl=th)
-- อ่าน[คู่มือความเข้ากันได้ของ OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=th)
+- Visita la [descripción general de la biblioteca](https://ai.google.dev/gemini-api/docs/libraries?hl=es-419) para obtener información sobre los SDKs de IA generativa.
+- Explora la [referencia de la API](https://ai.google.dev/api?hl=es-419)
+- Lee la [guía de compatibilidad de OpenAI](https://ai.google.dev/gemini-api/docs/openai?hl=es-419)
 
-ส่งความคิดเห็น
+Enviar comentarios
 
-เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้[ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0](https://creativecommons.org/licenses/by/4.0/) และตัวอย่างโค้ดได้รับอนุญาตภายใต้[ใบอนุญาต Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0) เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่[นโยบายเว็บไซต์ Google Developers](https://developers.google.com/site-policies?hl=th) Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-อัปเดตล่าสุด 2026-06-22 UTC
+Última actualización: 2026-06-22 (UTC)
 
-หากต้องการบอกให้เราทราบเพิ่มเติม
+¿Quieres brindar más información?
 
-[[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-06-22 UTC"],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-06-22 (UTC)"],[],[]]

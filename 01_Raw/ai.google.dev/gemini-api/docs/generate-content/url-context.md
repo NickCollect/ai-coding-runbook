@@ -1,34 +1,36 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/url-context?hl=zh-TW
-fetched_at: 2026-08-03T04:33:03.901382+00:00
-title: "\u7db2\u5740\u80cc\u666f\u8cc7\u8a0a \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/url-context?hl=zh-CN
+fetched_at: 2026-08-10T03:16:58.509144+00:00
+title: "\u7f51\u5740\u4e0a\u4e0b\u6587 \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-tw) 現已正式發布。建議使用這個 API，存取所有最新功能和模型。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=zh-cn) 现已正式发布。我们建议使用此 API 来访问所有最新功能和模型。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=zh-tw)
+![](https://ai.google.dev/_static/images/translated.svg?hl=zh-cn)
 
-Google 會運用 AI 技術將內容翻譯成你偏好的語言，但可能會出錯。
+Google 会使用 AI 技术将内容翻译成您偏好的语言。AI 翻译可能包含错误。
 
-- [首頁](https://ai.google.dev/?hl=zh-tw)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-tw)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-tw)
-- [文件](https://ai.google.dev/gemini-api/docs?hl=zh-tw)
+- [首页](https://ai.google.dev/?hl=zh-cn)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=zh-cn)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=zh-cn)
+- [文档](https://ai.google.dev/gemini-api/docs?hl=zh-cn)
 
-提供意見
+发送反馈
 
-# 網址背景資訊
+# 网址上下文
 
-網址內容工具可讓您以網址形式，為模型提供額外內容。在要求中加入網址後，模型就會存取這些網頁的內容 (只要網址類型未列於[限制一節](#limitations))，藉此提供更完善的回覆。
+[借助网址上下文工具，您可以网址的形式为模型提供额外的上下文。通过在请求中添加网址，模型将访问这些网页中的内容（只要不是限制部分中列出的网址类型），以便为响应提供信息并提升响应效果。](#limitations)
 
-網址脈絡工具適用於下列工作：
+网址上下文工具适用于以下任务：
 
-- **擷取資料**：從多個網址擷取特定資訊，例如價格、名稱或重要發現。
-- **比較文件**：分析多份報表、文章或 PDF，找出差異並追蹤趨勢。
-- **統整及建立內容**：整合多個來源網址的資訊，生成準確的摘要、網誌文章或報告。
-- **分析程式碼和文件**：指向 GitHub 存放區或技術文件，說明程式碼、生成設定操作說明或回答問題。
+- **提取数据**：从多个网址中提取特定信息，例如价格、名称或主要
+  发现。
+- **比较文档**：分析多个报告、文章或 PDF，以
+  找出差异并跟踪趋势。
+- **综合和创建内容** ：整合来自多个来源网址的信息，以生成准确的摘要、博文或报告。
+- **分析代码和文档** ：指向 GitHub 代码库或技术文档，以解释代码、生成设置说明或回答问题。
 
-以下範例說明如何比較不同網站的兩道食譜。
+以下示例展示了如何比较来自不同网站的两个食谱。
 
 ### Python
 
@@ -111,19 +113,26 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 cat result.json
 ```
 
-## 運作方式
+## 运作方式
 
-網址內容工具採用兩步驟的擷取程序，兼顧速度、成本和最新資料存取權。提供網址後，這項工具會先嘗試從內部索引快取擷取內容。這可做為經過高度最佳化的快取。如果網址未編入索引 (例如網頁剛發布)，工具會自動改為即時擷取。這項工具會直接存取網址，即時擷取內容。
+网址上下文工具使用两步检索流程来平衡速度、费用和对最新数据的访问。当您提供网址时，该工具会先尝试从内部索引缓存中提取内容。这相当于一个高度优化的缓存。如果索引中没有网址（例如，如果它是非常新的网页），该工具会自动回退以执行实时提取。
+这样可以直接访问网址，以实时检索其内容。
 
-## 與其他工具搭配使用
+## 与其他工具结合使用
 
-您可以將網址內容工具與其他工具結合，建立功能更強大的工作流程。
+您可以将网址上下文工具与其他工具结合使用，以创建更强大的工作流。
 
-[Gemini 3 模型](#supported-models)支援結合內建工具 (例如網址背景資訊) 和自訂工具 (函式呼叫)。詳情請參閱「[工具組合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-tw)」頁面。
+[Gemini 3 模型](#supported-models)支持将内置工具
+（例如网址上下文）与自定义工具（函数调用）结合使用。如需了解详情，请参阅
+[工具组合](https://ai.google.dev/gemini-api/docs/tool-combination?hl=zh-cn)页面。
 
-### 以搜尋結果為基準
+### 依托搜索进行接地
 
-同時啟用網址背景資訊和 [以 Google 搜尋強化事實基礎](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-tw)後，模型就能使用搜尋功能在網路上尋找相關資訊，然後使用網址背景資訊工具深入瞭解找到的網頁。這種做法非常適合需要廣泛搜尋，並深入分析特定網頁的提示。
+如果同时启用了网址上下文和
+[“依托 Google 搜索进行接地”](https://ai.google.dev/gemini-api/docs/grounding?hl=zh-cn)，
+模型可以使用其搜索功能在线查找
+相关信息，然后使用网址上下文工具更深入地了解
+找到的网页。对于既需要广泛搜索又需要对特定网页进行深入分析的提示，这种方法非常有效。
 
 ### Python
 
@@ -208,11 +217,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 cat result.json
 ```
 
-## 瞭解回覆內容
+## 了解响应
 
-模型使用網址內容工具時，回應會包含 `url_context_metadata` 物件。這個物件會列出模型擷取內容的網址，以及每次擷取嘗試的狀態，有助於驗證和偵錯。
+当模型使用网址上下文工具时，响应会包含一个 `url_context_metadata` 对象。此对象列出了模型从中检索内容的网址以及每次检索尝试的状态，这有助于进行验证和调试。
 
-以下是回應中該部分的範例 (為簡潔起見，部分回應已省略)：
+以下是响应的该部分的示例（为简洁起见，省略了部分响应）：
 
 ```
 {
@@ -244,15 +253,18 @@ cat result.json
 }
 ```
 
-如要進一步瞭解這個物件，請參閱 [`UrlContextMetadata` API 參考資料](https://ai.google.dev/api/generate-content?hl=zh-tw#UrlContextMetadata)。
+如需详细了解此对象，请参阅
+[`UrlContextMetadata` API 参考文档](https://ai.google.dev/api/generate-content?hl=zh-cn#UrlContextMetadata)。
 
-### 安全檢查
+### 安全检查
 
-系統會對網址執行內容審查檢查，確認是否符合安全標準。如果提供的網址未通過這項檢查，您會收到 `url_retrieval_status` 的 `URL_RETRIEVAL_STATUS_UNSAFE`。
+系统会对网址执行内容审核检查，以确认其符合安全标准。如果您提供的网址未通过此检查，您将获得 `url_retrieval_status`（值为 `URL_RETRIEVAL_STATUS_UNSAFE`）。
 
-### 符記數量
+### Token 数量
 
-系統會將從提示中指定網址擷取的內容，計為輸入權杖的一部分。您可以在模型輸出的 [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=zh-tw#UsageMetadata) 物件中，查看提示詞的詞元數和工具用量。以下是輸出範例：
+从您在提示中指定的网址检索到的内容将计入输入 token。您可以在模型输出的 [`usage_metadata`](https://ai.google.dev/api/generate-content?hl=zh-cn#UsageMetadata)
+对象中查看提示和
+工具用量的 token 数量。以下是输出示例：
 
 ```
 'usage_metadata': {
@@ -268,61 +280,67 @@ cat result.json
   }
 ```
 
-每個權杖的價格取決於使用的模型，詳情請參閱[定價](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-tw)頁面。
+每个 token 的价格取决于所使用的模型，详情请参阅
+[价格](https://ai.google.dev/gemini-api/docs/pricing?hl=zh-cn)页面。
 
-## 支援的模型
+## 支持的模型
 
-| 模型 | 網址背景資訊 |
+| 模型 | 网址上下文 |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Pro 預先發布版](https://ai.google.dev/gemini-api/docs/generate-content/gemini-3.1-pro-preview?hl=zh-tw) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-tw) | ✔️ |
-| [Gemini 3 Flash 預先發布版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-tw) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-tw) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Pro 预览版](https://ai.google.dev/gemini-api/docs/generate-content/gemini-3.1-pro-preview?hl=zh-cn) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=zh-cn) | ✔️ |
+| [Gemini 3 Flash 预览版](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash?hl=zh-cn) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=zh-cn) | ✔️ |
 
 ## 最佳做法
 
-- **提供具體網址**：為獲得最佳結果，請提供您希望模型分析的內容的直接網址。模型只會從您提供的網址擷取內容，不會從巢狀連結擷取任何內容。
-- **檢查存取方式**：確認提供的網址不會導向需要登入或位於付費牆後的網頁。
-- **使用完整網址**：請提供完整網址，包括通訊協定 (例如 https://www.google.com，而不是只有 google.com)。
+- **提供具体网址**：为获得最佳效果，请提供指向您希望模型分析的
+  内容的直接网址。模型只会从您提供的网址中检索内容，而不会从任何嵌套链接中检索内容。
+- **检查可访问性**：验证您提供的网址不会指向
+  需要登录或位于付费墙后的网页。
+- **使用完整网址**：提供完整网址，包括协议
+  （例如，https://www.google.com，而不是仅 google.com）。
 
 ## 限制
 
-- 函式呼叫：目前不支援使用函式呼叫工具 (網址背景資訊、以 Google 搜尋強化事實基礎等)。
-- 要求限制：這項工具每次最多可處理 20 個網址。
-- 網址內容大小：從單一網址擷取的內容大小上限為 34 MB。
-- 公開存取：網址必須可在網路上公開存取。
-  系統不支援本機主機位址 (例如 localhost、127.0.0.1)、私人網路和通道服務 (例如 ngrok、pinggy)。
+- 函数调用：目前不支持将工具（网址上下文、“依托 Google 搜索进行接地”等）与函数调用结合使用。
+- 请求限制：该工具每次请求最多可处理 20 个网址。
+- 网址内容大小：从单个网址检索到的内容的大小上限为 34MB。
+- 公开可访问性：网址必须可在网络上公开访问。
+  不支持本地主机地址（例如 localhost、127.0.0.1）、专用网络和隧道服务（例如 ngrok、pinggy）。
 
-### 支援及不支援的內容類型
+### 支持和不支持的内容类型
 
-這項工具可從下列內容類型的網址中擷取內容：
+该工具可以从具有以下内容类型的网址中提取内容：
 
-- 文字 (text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf)
-- 圖片 (image/png、image/jpeg、image/bmp、image/webp)
+- 文本 (text/html、application/json、text/plain、text/xml、text/css、text/javascript、text/csv、text/rtf)
+- 图片 (image/png、image/jpeg、image/bmp、image/webp)
 - PDF (application/pdf)
 
-系統「不」支援下列內容類型：
+**不** 支持以下内容类型：
 
-- 付費牆內容
-- YouTube 影片 (請參閱[影片理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-tw#youtube)，瞭解如何處理 YouTube 網址)
-- Google Workspace 檔案，例如 Google 文件或試算表
-- 影片和音訊檔案
+- 付费内容
+- YouTube 视频（如需了解如何处理 YouTube 网址，请参阅
+  [视频理解](https://ai.google.dev/gemini-api/docs/video-understanding?hl=zh-cn#youtube)）
+- Google Workspace 文件，例如 Google 文档或电子表格
+- 视频和音频文件
 
-## 後續步驟
+## 后续步骤
 
-- 如需更多範例，請參閱 [URL context cookbook](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=zh-tw#url-context)。
+- 如需查看更多示例，请参阅[网址上下文 Cookbook](https://colab.sandbox.google.com/github/google-gemini/cookbook/blob/main/quickstarts/Grounding.ipynb?hl=zh-cn#url-context)
+  。
 
-提供意見
+发送反馈
 
-除非另有註明，否則本頁面中的內容是採用[創用 CC 姓名標示 4.0 授權](https://creativecommons.org/licenses/by/4.0/)，程式碼範例則為[阿帕契 2.0 授權](https://www.apache.org/licenses/LICENSE-2.0)。詳情請參閱《[Google Developers 網站政策](https://developers.google.com/site-policies?hl=zh-tw)》。Java 是 Oracle 和/或其關聯企業的註冊商標。
+如未另行说明，那么本页面中的内容已根据[知识共享署名 4.0 许可](https://creativecommons.org/licenses/by/4.0/)获得了许可，并且代码示例已根据 [Apache 2.0 许可](https://www.apache.org/licenses/LICENSE-2.0)获得了许可。有关详情，请参阅 [Google 开发者网站政策](https://developers.google.com/site-policies?hl=zh-cn)。Java 是 Oracle 和/或其关联公司的注册商标。
 
-上次更新時間：2026-07-31 (世界標準時間)。
+最后更新时间 (UTC)：2026-07-31。
 
-想進一步說明嗎？
+需要向我们提供更多信息？
 
-[[["容易理解","easyToUnderstand","thumb-up"],["確實解決了我的問題","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["缺少我需要的資訊","missingTheInformationINeed","thumb-down"],["過於複雜/步驟過多","tooComplicatedTooManySteps","thumb-down"],["過時","outOfDate","thumb-down"],["翻譯問題","translationIssue","thumb-down"],["示例/程式碼問題","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["上次更新時間：2026-07-31 (世界標準時間)。"],[],[]]
+[[["易于理解","easyToUnderstand","thumb-up"],["解决了我的问题","solvedMyProblem","thumb-up"],["其他","otherUp","thumb-up"]],[["没有我需要的信息","missingTheInformationINeed","thumb-down"],["太复杂/步骤太多","tooComplicatedTooManySteps","thumb-down"],["内容需要更新","outOfDate","thumb-down"],["翻译问题","translationIssue","thumb-down"],["示例/代码问题","samplesCodeIssue","thumb-down"],["其他","otherDown","thumb-down"]],["最后更新时间 (UTC)：2026-07-31。"],[],[]]

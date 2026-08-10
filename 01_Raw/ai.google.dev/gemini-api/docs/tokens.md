@@ -1,45 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=ar
-fetched_at: 2026-08-03T04:27:45.391831+00:00
-title: "\u0641\u0647\u0645 \u0627\u0644\u0631\u0645\u0648\u0632 \u0627\u0644\u0645\u0645\u064a\u0651\u0632\u0629 \u0648\u0639\u062f\u0651\u0647\u0627 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/tokens?hl=pl
+fetched_at: 2026-08-10T03:23:35.617003+00:00
+title: "Zrozumienie i liczenie token\u00f3w \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-إرسال ملاحظات
+Prześlij opinię
 
-# فهم الرموز المميّزة وعدّها
+# Zrozumienie i liczenie tokenów
 
-تعالج Gemini ونماذج الذكاء الاصطناعي التوليدي الأخرى المدخلات والمخرجات بمستوى تفصيلي يُعرف باسم *الرمز المميز*.
+Gemini i inne modele generatywnej AI przetwarzają dane wejściowe i wyjściowe z dokładnością do *tokena*.
 
-**في نماذج Gemini، يعادل الرمز المميز الواحد حوالي 4 أحرف.
-يساوي 100 رمز مميز حوالي 60 إلى 80 كلمة إنجليزية.**
+**W przypadku modeli Gemini token odpowiada około 4 znakom.
+100 tokenów to około 60–80 słów w języku angielskim.**
 
-## لمحة عن الرموز المميزة
+## Informacje o tokenach
 
-يمكن أن تكون الرموز المميزة أحرفًا مفردة مثل `z` أو كلمات كاملة مثل `cat`. يتم تقسيم الكلمات الطويلة إلى عدة رموز مميزة. تُعرف مجموعة جميع الرموز المميزة التي يستخدمها النموذج باسم المفردات، وتُعرف عملية تقسيم النص إلى رموز مميزة باسم *التقسيم إلى رموز مميزة*.
+Tokeny mogą być pojedynczymi znakami, np. `z`, lub całymi słowami, np. `cat`. Długie słowa są dzielone na kilka tokenów. Zbiór wszystkich tokenów używanych przez model nazywa się słownikiem, a proces dzielenia tekstu na tokeny – *tokenizacją*.
 
-عند تفعيل الفوترة، يتم تحديد [تكلفة طلب البيانات من Gemini API](https://ai.google.dev/pricing?hl=ar) جزئيًا من خلال عدد الرموز المميزة للإدخال والإخراج، لذا قد يكون من المفيد معرفة كيفية عدّ الرموز المميزة.
+Gdy płatności są włączone, [koszt wywołania Gemini API](https://ai.google.dev/pricing?hl=pl) jest
+częściowo określany przez liczbę tokenów wejściowych i wyjściowych, dlatego warto wiedzieć, jak je
+zliczać.
 
-## عدد الرموز المميّزة
+## Zliczanie tokenów
 
-يتم تحويل جميع البيانات المدخلة إلى واجهة Gemini API والناتجة عنها إلى رموز مميزة، بما في ذلك النصوص وملفات الصور وغيرها من الوسائط غير النصية.
+Wszystkie dane wejściowe i wyjściowe z Gemini API są tokenizowane, w tym tekst, pliki graficzne i inne formaty nietekstowe.
 
-يمكنك احتساب الرموز المميزة بالطرق التالية:
+Tokeny możesz zliczać na te sposoby:
 
-- **استدعاء الدالة `count_tokens` مع إدخال الطلب** تعرض هذه الدالة إجمالي عدد الرموز المميزة *في الإدخال فقط*. يجب إجراء هذه المكالمة قبل إرسال أي بيانات
-  للتحقّق من حجم طلباتك.
-- **استخدِم `usage` في ردّك على التفاعل.** تعرض هذه السمة عدد الرموز المميزة للإدخال (`total_input_tokens`) والإخراج (`total_output_tokens`) والتفكير (`total_thought_tokens`) والمحتوى المخزّن مؤقتًا (`total_cached_tokens`) واستخدام الأدوات (`total_tool_use_tokens`) والإجمالي (`total_tokens`).
+- **Wywołaj funkcję `count_tokens` z danymi wejściowymi żądania.** Zwraca łączną liczbę tokenów *tylko w danych wejściowych*. Wykonaj to wywołanie przed wysłaniem danych wejściowych, aby sprawdzić rozmiar żądań.
+- **Użyj parametru `usage` w odpowiedzi na interakcję.** Zwraca liczbę tokenów dla danych wejściowych (`total_input_tokens`), wyjściowych (`total_output_tokens`), myślenia (`total_thought_tokens`), treści z pamięci podręcznej (`total_cached_tokens`), użycia narzędzia (`total_tool_use_tokens`) i łączną liczbę tokenów (`total_tokens`).
 
-### احتساب الرموز المميّزة للنص
+### Zliczanie tokenów tekstowych
 
 ### Python
 
@@ -99,9 +100,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
   -d '{"contents": [{"parts": [{"text": "The quick brown fox."}]}]}'
 ```
 
-### عدّ الرموز المميّزة في المحادثات المترابطة
+### Zliczanie tokenów wieloetapowych
 
-احتساب الرموز المميزة في سجلّ المحادثات باستخدام `previous_interaction_id`:
+Zliczaj tokeny w historii rozmów za pomocą parametru `previous_interaction_id`:
 
 ### Python
 
@@ -147,16 +148,16 @@ console.log(`Input tokens: ${interaction2.usage.total_input_tokens}`);
 console.log(`Output tokens: ${interaction2.usage.total_output_tokens}`);
 ```
 
-### احتساب الرموز المميّزة المتعددة الوسائط
+### Zliczanie tokenów multimodalnych
 
-يتم تحويل جميع البيانات المُدخلة إلى Gemini API إلى رموز مميزة، بما في ذلك الصور والفيديوهات والمحتوى الصوتي.
-في ما يلي النقاط الرئيسية حول عملية الترميز:
+Wszystkie dane wejściowe do Gemini API są tokenizowane, w tym obrazy, filmy i dźwięk.
+Najważniejsze informacje o tokenizacji:
 
-- **الصور**: يتم احتساب الصور التي يبلغ حجمها 384 بكسل أو أقل في كلا البُعدين على أنّها 258 رمزًا مميزًا. يتم تقسيم الصور الأكبر حجمًا إلى مربّعات بحجم 768x768 بكسل، ويتم احتساب كل مربّع على أنّه 258 رمزًا مميزًا.
-- **الفيديو**: 263 رمزًا مميزًا في الثانية
-- **الصوت**: 32 رمزًا مميزًا في الثانية
+- **Obrazy**: obrazy o wymiarach ≤384 pikseli w obu wymiarach są liczone jako 258 tokenów. Większe obrazy są dzielone na kafelki o wymiarach 768 x 768 pikseli, z których każdy jest liczony jako 258 tokenów.
+- **Film**: 263 tokeny na sekundę
+- **Dźwięk**: 32 tokeny na sekundę
 
-#### رموز الصور المميزة
+#### Tokeny obrazów
 
 ### Python
 
@@ -202,7 +203,7 @@ const countResponse = await client.models.countTokens({
 console.log(countResponse.totalTokens);
 ```
 
-**مثال على البيانات المضمّنة:**
+**Przykład danych wbudowanych:**
 
 ### Python
 
@@ -227,7 +228,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### رموز الفيديو المميّزة
+#### Tokeny filmów
 
 ### Python
 
@@ -260,7 +261,7 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-#### الرموز الصوتية
+#### Tokeny dźwięku
 
 ### Python
 
@@ -286,9 +287,9 @@ interaction = client.interactions.create(
 print(interaction.usage)
 ```
 
-### احتساب الرموز المميزة لتعليمات النظام
+### Zliczanie tokenów instrukcji systemowych
 
-يتم احتساب تعليمات النظام كجزء من الرموز المميزة للإدخال:
+Instrukcje systemowe są liczone jako część tokenów wejściowych:
 
 ### Python
 
@@ -304,9 +305,9 @@ interaction = client.interactions.create(
 print(f"Input tokens: {interaction.usage.total_input_tokens}")
 ```
 
-### رموز مميّزة لأداة الاحتساب
+### Zliczanie tokenów narzędzi
 
-يتم أيضًا احتساب الأدوات (الدوال، وتنفيذ التعليمات البرمجية، و"بحث Google"):
+Narzędzia (funkcje, wykonywanie kodu, wyszukiwarka Google) są również zliczane:
 
 ### Python
 
@@ -336,11 +337,11 @@ print(f"Input tokens: {interaction.usage.total_input_tokens}")
 print(f"Tool use tokens: {interaction.usage.total_tool_use_tokens}")
 ```
 
-## قدرة الاستيعاب
+## Okno kontekstu
 
-لكل نموذج من نماذج Gemini حدّ أقصى لعدد الرموز المميزة التي يمكنه معالجتها. تحدّد نافذة السياق الحدّ الأقصى المسموح به لعدد الرموز المميزة في كل من الطلب والرد.
+Każdy model Gemini ma maksymalną liczbę tokenów, które może przetworzyć. Okno kontekstu określa łączny limit tokenów wejściowych i wyjściowych.
 
-### الحصول على حجم قدرة الاستيعاب آليًا
+### Programowe pobieranie rozmiaru okna kontekstu
 
 ### Python
 
@@ -360,20 +361,20 @@ console.log(`Input token limit: ${modelInfo.inputTokenLimit}`);
 console.log(`Output token limit: ${modelInfo.outputTokenLimit}`);
 ```
 
-يمكنك الاطّلاع على أحجام قدرة الاستيعاب في صفحة [النماذج](https://ai.google.dev/gemini-api/docs/models?hl=ar).
+Rozmiary okien kontekstu znajdziesz na stronie [modeli](https://ai.google.dev/gemini-api/docs/models?hl=pl).
 
-## الخطوات التالية
+## Co dalej?
 
-- [إنشاء النصوص](https://ai.google.dev/gemini-api/docs/text-generation?hl=ar): الأساسيات
-- [التخزين المؤقت](https://ai.google.dev/gemini-api/docs/caching?hl=ar): خفض التكاليف باستخدام التخزين المؤقت
-- [الأسعار](https://ai.google.dev/gemini-api/docs/pricing?hl=ar): التعرّف على التكاليف
+- [Generowanie tekstu](https://ai.google.dev/gemini-api/docs/text-generation?hl=pl): podstawy generowania
+- [Pamięć podręczna](https://ai.google.dev/gemini-api/docs/caching?hl=pl): zmniejszanie kosztów dzięki pamięci podręcznej
+- [Ceny](https://ai.google.dev/gemini-api/docs/pricing?hl=pl): informacje o kosztach
 
-إرسال ملاحظات
+Prześlij opinię
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
+Ostatnia aktualizacja: 2026-07-30 UTC.
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Chcesz przekazać coś jeszcze?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-07-30 UTC."],[],[]]

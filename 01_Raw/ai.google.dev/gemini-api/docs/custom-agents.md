@@ -1,35 +1,35 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=ar
-fetched_at: 2026-08-03T04:42:07.552463+00:00
-title: "\u0625\u0646\u0634\u0627\u0621 \u0648\u0643\u0644\u0627\u0621 \u0645\u064f\u062f\u0627\u0631\u064a\u0646 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/custom-agents?hl=fr
+fetched_at: 2026-08-10T03:26:09.414310+00:00
+title: "Cr\u00e9er des agents g\u00e9r\u00e9s \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Accueil](https://ai.google.dev/?hl=fr)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
+- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
 
-إرسال ملاحظات
+Envoyer des commentaires
 
-# إنشاء وكلاء مُدارين
+# Créer des agents gérés
 
-تتيح لك الوكلاء المُدارون على Gemini API توسيع نطاق وكيل Antigravity باستخدام تعليماتك ومهاراتك وبياناتك. يمكنك [تخصيص الوكيل بشكل مضمّن](#customize-inline) في وقت التفاعل، أو [حفظ الإعداد](#save-agent) كوكيل مُدار يمكنك استدعاؤه باستخدام المعرّف.
+Les agents gérés de l'API Gemini vous permettent d'étendre l'agent Antigravity avec vos propres instructions, compétences et données. Vous pouvez [personnaliser l'agent de manière intégrée](#customize-inline) au moment de l'interaction ou [enregistrer la configuration](#save-agent) en tant qu'agent géré que vous appelez par ID.
 
-## تخصيص وكيل Antigravity
+## Personnaliser l'agent Antigravity
 
-أسرع طريقة لإنشاء وكيل مخصّص هي تمرير إعداداتك مضمّنةً أثناء إنشاء تفاعل جديد بدون الحاجة إلى إجراء خطوة التسجيل. يمكنك توسيع نطاق عمل الوكيل بعدة طرق رئيسية:
+Le moyen le plus rapide de créer un agent personnalisé consiste à transmettre votre configuration de manière intégrée lors de la création d'une interaction, sans aucune étape d'enregistrement requise. Vous pouvez étendre l'agent de plusieurs manières clés :
 
-- **[اختيار النموذج](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar#model-selection)**: اختَر نموذج Gemini الأساسي من خلال `agent_config` (يكون النموذج التلقائي هو **Gemini 3.6 Flash**).
-- **تعليمات النظام**: يمكنك تمرير نص مضمّن من خلال `system_instruction` لتحديد السلوك.
-- **الأدوات**: يمكنك إلغاء الأدوات التلقائية (تنفيذ الرمز البرمجي، والبحث، وسياق عنوان URL)، أو تسجيل خوادم MCP عن بُعد، أو تحديد وظائف مخصّصة (استدعاء الوظائف).
-- **الملفات والمهارات**: يمكنك تحميل ملفات مثل `AGENTS.md` و`SKILL.md` في البيئة.
+- **[Sélection du modèle](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#model-selection)** : choisissez le modèle Gemini sous-jacent via `agent_config` (par défaut, **Gemini 3.6 Flash**).
+- **Instructions système** : transmettez du texte intégré via `system_instruction` pour façonner le comportement.
+- **Outils** : remplacez les outils par défaut (exécution de code, recherche, contexte d'URL), enregistrez des serveurs MCP distants ou définissez des fonctions personnalisées (appel de fonction).
+- **Fichiers et compétences** : montez des fichiers tels que `AGENTS.md` et `SKILL.md` dans l'environnement.
 
-في ما يلي مثال على تمرير المَعلمات الثلاث كلها في السطر:
+Voici un exemple de transmission des trois éléments de manière intégrée :
 
 ### Python
 
@@ -121,22 +121,22 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-يتم تحديد كل شيء في وقت التفاعل. ليس عليك تسجيل أي شيء أولاً. توفر أداة Antigravity Agent بيئة التشغيل (تنفيذ الرموز البرمجية وإدارة الملفات والوصول إلى الويب) وطبقات الإعدادات في الأعلى.
+Tout est défini au moment de l'interaction. Il n'est pas nécessaire d'enregistrer quoi que ce soit au préalable. Le harnais de l'agent Antigravity fournit l'environnement d'exécution (exécution de code, gestion de fichiers, accès Web) et vos couches de configuration par-dessus.
 
-### الأدوات وتعليمات النظام
+### Outils et instructions système
 
-يمكنك تخصيص سلوك الوكيل وإمكاناته لتفاعل معيّن باستخدام المَعلمتَين `system_instruction` و`tools`.
+Vous pouvez personnaliser le comportement et les capacités de l'agent pour une interaction spécifique à l'aide des paramètres `system_instruction` et `tools`.
 
-- **تعليمات النظام**: استخدِم المَعلمة `system_instruction` لتمرير نص مضمّن يحدّد سلوك الوكيل. هذه الميزة مثالية لإجراء تعديلات سريعة تريد تغييرها لكل مكالمة. تكون `system_instruction` و`AGENTS.md` ترافقيتَين، أي أنّهما تسريان معًا عند توفّرهما.
-- **الأدوات**: بشكلٍ تلقائي، يمكن لوكيل Antigravity الوصول إلى `code_execution` و`google_search` و`url_context`. يمكنك تجاوز هذه القائمة من خلال تمرير المَعلمة `tools` في وقت التفاعل. يمكنك أيضًا تسجيل [خوادم MCP عن بُعد](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar#mcp-servers) أو تحديد [دوال مخصّصة (استدعاء الدوال)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar#function-calling) لربط الوكيل بواجهات برمجة التطبيقات وقواعد البيانات الخاصة بك. للاطّلاع على التفاصيل الكاملة حول الأدوات المتاحة، يُرجى الانتقال إلى [Antigravity Agent: الأدوات المتوافقة](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar#supported-tools).
+- **Instructions système** : utilisez le paramètre `system_instruction` pour transmettre du texte intégré qui façonne le comportement de l'agent. C'est idéal pour les ajustements rapides que vous souhaitez modifier par appel. `system_instruction` et `AGENTS.md` sont additifs. Les deux s'appliquent lorsqu'ils sont présents.
+- **Outils** : par défaut, l'agent Antigravity a accès à `code_execution`, `google_search` et `url_context`. Vous pouvez remplacer cette liste en transmettant le paramètre `tools` au moment de l'interaction. Vous pouvez également enregistrer des [serveurs MCP distants](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#mcp-servers) ou définir des [fonctions personnalisées (appel de fonction)](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#function-calling) pour connecter l'agent à vos propres API et bases de données. Pour obtenir des informations complètes sur les outils disponibles, consultez [Agent Antigravity : outils compatibles](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#supported-tools).
 
-### التخصيص المستند إلى الملفات
+### Personnalisation basée sur des fichiers
 
-#### بنية دليل الوكيل
+#### Structure du répertoire de l'agent
 
-على الرغم من أنّه يمكنك تمرير الإعدادات مضمّنة، ننصحك بتنظيم ملفات البرنامج في دليل منظَّم. يسهّل ذلك إدارة الملفات والتحكّم في إصداراتها وتثبيتها في بيئة الوكيل.
+Bien que vous puissiez transmettre la configuration de manière intégrée, nous vous recommandons d'organiser les fichiers de votre agent dans un répertoire structuré. Cela facilite la gestion, le contrôle des versions et le montage dans l'environnement de l'agent.
 
-يبدو دليل مشروع الوكيل النموذجي على النحو التالي:
+Un répertoire de projet d'agent type se présente comme suit :
 
 ```
 my-agent/
@@ -147,13 +147,13 @@ my-agent/
 └── workspace/       # Initial data files and knowledge
 ```
 
-يفحص وقت تشغيل Antigravity `.agents/` (وجذر البيئة) بحثًا عن هذه الملفات.
+L'environnement d'exécution Antigravity analyse `.agents/` (et la racine de l'environnement) pour ces fichiers.
 
 #### AGENTS.md
 
-يحمّل الوكيل تلقائيًا `.agents/AGENTS.md` (أو `/.agents/AGENTS.md`) من البيئة كتعليمات نظام عند بدء التشغيل. استخدِم `AGENTS.md` لتعريفات الشخصيات الطويلة والإرشادات المفصّلة والتعليمات التي تريد التحكّم في إصدارها إلى جانب الرمز البرمجي.
+L'agent charge automatiquement `.agents/AGENTS.md` (ou `/.agents/AGENTS.md`) à partir de l'environnement en tant qu'instructions système au démarrage. Utilisez `AGENTS.md` pour les définitions de persona longues, les consignes détaillées et les instructions dont vous souhaitez contrôler les versions avec votre code.
 
-تثبيت `AGENTS.md` باستخدام مصدر مضمّن:
+Montez un `AGENTS.md` à l'aide d'une source intégrée :
 
 ### Python
 
@@ -230,9 +230,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### المهارات: SKILL.md
+#### Compétences : SKILL.md
 
-المهارات هي ملفات توسّع إمكانات الوكيل. ضَعها تحت `.agents/skills/<skill-name>/SKILL.md`، وسيتعرّف عليها نظام التوصيل تلقائيًا ويسجّلها.
+Les compétences sont des fichiers qui étendent les capacités de l'agent. Placez-les sous `.agents/skills/<skill-name>/SKILL.md`. Le harnais les détecte et les enregistre automatiquement.
 
 ```
 .agents/
@@ -242,7 +242,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
         └── SKILL.md
 ```
 
-تثبيت مهارة باستخدام مصدر مضمّن:
+Montez une compétence à l'aide d'une source intégrée :
 
 ### Python
 
@@ -319,17 +319,17 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-يتم تلقائيًا اكتشاف المهارات المحمَّلة من `.agents/skills/` و`/.agents/skills/`.
+Les compétences chargées à partir de `.agents/skills/` et `/.agents/skills/` sont toutes deux détectées automatiquement.
 
-## إنشاء وكيل مُدار
+## Créer un agent géré
 
-بعد تكرار عملية الإعداد، يمكنك إنشاء الإعداد كبرنامج وكيل مُدار باستخدام `agents.create`. يتيح لك ذلك استدعاء "الوكيل" حسب المعرّف بدون تكرار عملية الإعداد في كل مرة.
+Une fois que vous avez itéré sur votre configuration, vous pouvez la créer en tant qu'agent géré avec `agents.create`. Cela vous permet d'appeler l'agent par ID sans répéter la configuration à chaque fois.
 
-يجب أن يكون `id` الذي تحدّده عند إنشاء وكيل مُدار فريدًا لمشروعك ويجب ألا يبدأ بالبادئات المحجوزة (مثل `google-` و`gemini-`). اطّلِع على [قيود رقم تعريف الوكيل](#agent-id-restrictions) للحصول على القائمة الكاملة بالبادئات المحظورة.
+Le `id` que vous spécifiez lors de la création d'un agent géré doit être unique à votre projet et ne doit pas commencer par des préfixes réservés (par exemple, `google-`, `gemini-`). Pour obtenir la liste complète des préfixes restreints, consultez [Restrictions concernant les ID d'agent](#agent-id-restrictions).
 
-### من المصادر
+### À partir de sources
 
-حدِّد `base_agent` و`id` و`agent_config` و`system_instruction` و`base_environment` مع المصادر. توفّر المنصة بيئة اختبار جديدة تتضمّن ملفاتك في كل عملية استدعاء. راجِع [البيئات](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar) لمعرفة أنواع المصادر المتاحة (Git وGCS والمضمّنة).
+Spécifiez `base_agent`, `id`, `agent_config`, `system_instruction` et `base_environment` avec des sources. La plate-forme provisionne un bac à sable frais avec vos fichiers à chaque appel. Pour connaître les types de sources disponibles (Git, GCS, intégrées), consultez [Environnements](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr).
 
 ### Python
 
@@ -448,9 +448,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
 }'
 ```
 
-### من بيئة حالية (تشعّب)
+### À partir d'un environnement existant (fork)
 
-كرِّر استخدام وكيل Antigravity الأساسي إلى أن تصبح البيئة مناسبة (تثبيت الحِزم، ووضع الملفات في مكانها)، ثم أنشئ نسخة من الوكيل في وكيل مُدار.
+Itérez avec l'agent Antigravity de base jusqu'à ce que l'environnement soit correct (packages installés, fichiers en place), puis créez-en un fork dans un agent géré.
 
 ### Python
 
@@ -514,11 +514,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### مع قواعد الشبكة
+### Avec des règles de réseau
 
-يمكنك حظر الوصول الخارجي أو إدخال بيانات الاعتماد عند حفظ وكيل مُدار. للاطّلاع على مخطط قائمة السماح الكامل وأنماط بيانات الاعتماد وأحرف البدل، يُرجى الانتقال إلى [البيئات: إعدادات الشبكة](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar#network-configuration).
+Vous pouvez verrouiller l'accès sortant ou injecter des identifiants lorsque vous enregistrez un agent géré. Pour obtenir le schéma complet de la liste d'autorisation, les modèles d'identifiants et les caractères génériques, consultez [Environnements : configuration réseau](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr#network-configuration).
 
-ينشئ المثال التالي وكيلاً `issue-resolver` يمكنه الوصول إلى GitHub وPyPI فقط، مع إدخال بيانات الاعتماد الخاصة بـ GitHub:
+L'exemple suivant crée un agent `issue-resolver` qui ne peut accéder qu'à GitHub et PyPI, avec des identifiants injectés pour GitHub :
 
 ### Python
 
@@ -628,9 +628,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/agents" \
   }'
 ```
 
-## استدعاء الوكيل
+## Appeler l'agent
 
-اتّصِل بالوكيل المُدار باستخدام رقم تعريف الوكيل من خلال إنشاء تفاعل جديد. يؤدي كل استدعاء إلى إنشاء نسخة من البيئة الأساسية، لذا تبدأ كل عملية تشغيل بشكل نظيف.
+Appelez votre agent géré avec votre ID d'agent en créant une interaction. Chaque appel crée un fork de l'environnement de base, de sorte que chaque exécution démarre de manière propre.
 
 ### Python
 
@@ -669,15 +669,15 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-للمحادثات المترابطة والبث، يُرجى الاطّلاع على [البدء السريع](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar). تنطبق أنماط `previous_interaction_id` و`environment` نفسها على البرامج التي يديرها المشرف.
+Pour les conversations multitours et le streaming, consultez le [guide de démarrage rapide](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr). Les mêmes modèles `previous_interaction_id` et `environment` s'appliquent aux agents gérés.
 
-تتيح الوكلاء المُدارين أيضًا تنفيذ العمليات في الخلفية وإلغاءها. للحصول على التفاصيل وأمثلة الرموز، يُرجى الاطّلاع على [Antigravity Agent: Background execution](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar#background-execution).
+Les agents gérés sont également compatibles avec l'exécution et l'annulation en arrière-plan. Pour obtenir des informations et des exemples de code, consultez [Agent Antigravity : exécution en arrière-plan](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr#background-execution).
 
-## تجاوز الإعدادات عند الاستدعاء
+## Remplacer la configuration lors de l'appel
 
-يمكنك إلغاء إعدادات الشبكة التلقائية `system_instruction` و`tools` و`environment` الخاصة بالوكيل عند إنشاء تفاعل. يتيح لك ذلك تعديل سلوك الوكيل أو إمكاناته أو بيانات اعتماده لتنفيذ عملية معيّنة بدون تغيير تعريف الوكيل المخزّن.
+Vous pouvez remplacer la configuration réseau par défaut de l'agent `system_instruction`, `tools` et `environment` lorsque vous créez une interaction. Cela vous permet de modifier le comportement, les capacités ou les identifiants de l'agent pour une exécution spécifique sans modifier la définition de l'agent stockée.
 
-### تجاوز تعليمات النظام وأدواته
+### Remplacer les instructions système et les outils
 
 ### Python
 
@@ -721,9 +721,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### تجاوز إعدادات الشبكة (تحديث بيانات الاعتماد)
+### Remplacer la configuration réseau (actualiser les identifiants)
 
-إذا كان وكيلك المُدار يتضمّن بيانات اعتماد الشبكة في `base_environment`، يمكنك تجاهلها عند الاستدعاء لتجديد الرموز المميزة المنتهية الصلاحية أو تدوير مفاتيح واجهة برمجة التطبيقات. مرِّر عنصر `environment` مع إعداد `network` جديد. تحلّ قواعد الشبكة الجديدة محلّ القواعد السابقة بشكل كامل في ما يتعلّق بهذا التفاعل. يتم الاحتفاظ بمصادر البيئة الأساسية (الملفات والمستودعات).
+Si votre agent géré a des identifiants réseau intégrés à son `base_environment`, vous pouvez les remplacer au moment de l'appel pour actualiser les jetons expirés ou faire pivoter les clés API. Transmettez un objet `environment` avec une nouvelle configuration `network`. Les nouvelles règles de réseau remplacent entièrement les précédentes pour cette interaction. Les sources de l'environnement de base (fichiers, dépôts) sont conservées.
 
 ### Python
 
@@ -803,11 +803,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## إدارة الوكلاء
+## Gérer les agents
 
-يمكنك إدراج الوكلاء والحصول عليهم وحذفهم.
+Vous pouvez lister, obtenir et supprimer des agents.
 
-### وكلاء القائمة
+### Répertorier des agents
 
 ### Python
 
@@ -835,7 +835,7 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### الحصول على وكيل
+### Obtenir un agent
 
 ### Python
 
@@ -858,9 +858,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/agents/data-analys
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### حذف وكيل
+### Supprimer un agent
 
-يؤدي الحذف إلى إزالة الإعدادات. لا تتأثر البيئات والتفاعلات الحالية التي أنشأها الوكيل.
+La suppression supprime la configuration. Les environnements et les interactions existants créés par l'agent ne sont pas affectés.
 
 ### Python
 
@@ -881,24 +881,24 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## مرجع تعريف الوكيل
+## Documentation de référence sur la définition de l'agent
 
-| الحقل | النوع | مطلوب | الوصف |
+| Champ | Type | Obligatoire | Description |
 | --- | --- | --- | --- |
-| `id` | سلسلة | نعم | المعرّف الفريد للوكيل ضمن مشروع Google Cloud يُستخدَم لتفعيل الوكيل. يجب عدم استخدام البادئات المحجوزة. اطّلِع على [قيود معرّف الوكيل](#agent-id-restrictions). |
-| `description` | سلسلة | لا | وصف الوكيل يمكن لشخص عادي قراءته |
-| `base_agent` | سلسلة | نعم | معرّف الوكيل الأساسي (مثلاً، `antigravity-preview-05-2026`) |
-| `agent_config` | عنصر | لا | إعدادات الوكيل الأساسي، بما في ذلك اختيار النموذج (`{"type": "antigravity", "model": "gemini-3.6-flash"}`). يتم ضبط القيمة التلقائية على `gemini-3.6-flash` في حال عدم تحديدها. لا يمكن إلغاؤها في وقت التفاعل مع الوكلاء المحدّدين. |
-| `system_instruction` | سلسلة | لا | طلب النظام الذي يحدّد السلوك والشخصية |
-| `tools` | صفيف | لا | الأدوات التي يمكن للوكيل استخدامها في حال عدم تحديدها، يتم ضبطها تلقائيًا على `code_execution` و`google_search` و`url_context`. تشمل الأدوات المتوافقة `code_execution` و`google_search` و`url_context` و`mcp_server` وتعريفات `function` المخصّصة. |
-| `base_environment` | سلسلة أو عنصر | لا | `"remote"` أو `environment_id` أو عنصر إعدادات يتضمّن `sources` و`network` الاطّلاع على البيئات |
+| `id` | chaîne | Oui | Identifiant unique de l'agent dans le projet Google Cloud. Utilisé pour appeler l'agent. Ne doit pas utiliser de préfixes réservés. Consultez [Restrictions concernant les ID d'agent](#agent-id-restrictions). |
+| `description` | chaîne | Non | Description de l'agent lisible par l'humain. |
+| `base_agent` | chaîne | Oui | ID de l'agent de base (par exemple, `antigravity-preview-05-2026`). |
+| `agent_config` | objet | Non | Configuration de l'agent de base, y compris la sélection du modèle (`{"type": "antigravity", "model": "gemini-3.6-flash"}`). Par défaut, `gemini-3.6-flash` est utilisé s'il est omis. Ne peut pas être remplacé au moment de l'interaction pour les agents nommés. |
+| `system_instruction` | chaîne | Non | Invite système définissant le comportement et le persona. |
+| `tools` | tableau | Non | Outils que l'agent peut utiliser. S'il est omis, les valeurs par défaut sont `code_execution`, `google_search` et `url_context`. Les outils compatibles incluent `code_execution`, `google_search`, `url_context`, `mcp_server` et les définitions `function` personnalisées. |
+| `base_environment` | chaîne ou objet | Non | `"remote"`, un `environment_id`, ou un objet de configuration avec `sources` et `network`. Consultez Environnements. |
 
-### القيود المفروضة على رقم تعريف الوكيل
+### Restrictions concernant les ID d'agent
 
-عند إنشاء وكيل مُدار، يجب أن يلتزم `id` الذي تحدّده بالقواعد التالية:
+Lorsque vous créez un agent géré, l'`id` que vous spécifiez doit respecter les règles suivantes :
 
-- ويجب أن يكون فريدًا لمشروعك على Google Cloud.
-- يجب **ألا** يبدأ بأي من البادئات المحجوزة التالية (غير حساسة لحالة الأحرف)، وإلا ستتعذّر عملية الإنشاء:
+- Il doit être unique à votre projet Google Cloud.
+- Il **ne doit pas** commencer par l'un des préfixes réservés suivants (non sensible à la casse), sinon la création échouera :
   - `antigravity-`
   - `veo-`
   - `omni-`
@@ -916,35 +916,35 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/agents/data-ana
   - `nest-`
   - `kaggle-`
 
-## سير عمل التكرار
+## Workflow d'itération
 
-1. **إنشاء نموذج أولي** باستخدام وكيل Antigravity الأساسي تمرير تعليمات النظام ومصادر البيئة مضمّنة اختبار التعليمات والمهارات وإعداد البيئة بشكل تفاعلي
-2. **تثبيت** البيئة ثبِّت الحِزم، واربط المصادر، وتأكَّد من أنّ كل شيء يعمل.
-3. **الاستمرار** كوكيل مُدار من خلال إنشاء وكيل جديد، إما من المصادر أو من خلال إنشاء نسخة من البيئة.
-4. **عدِّل** تعريف الوكيل. تغيير تعليمات النظام أو تبديل المهارات أو إضافة مصادر سيتم استخدام الإعدادات الجديدة في عملية الاستدعاء التالية.
+1. **Créez un prototype** avec l'agent Antigravity de base. Transmettez les instructions système et les sources d'environnement de manière intégrée. Testez les instructions, les compétences et la configuration de l'environnement de manière interactive.
+2. **Stabilisez** l'environnement. Installez des packages, montez des sources et vérifiez que tout fonctionne.
+3. **Persistez** en tant qu'agent géré en créant un agent, à partir de sources ou en créant un fork de l'environnement.
+4. **Mettez à jour** la définition de l'agent. Modifiez les instructions système, échangez des compétences ou ajoutez des sources. Le prochain appel récupère la nouvelle configuration.
 
-## القيود
+## Limites
 
-- **حالة المعاينة**: الوكلاء المُدارون في مرحلة المعاينة. قد تتغيّر الميزات والمخططات.
-- **الوكيل الأساسي والنماذج**: يُسمح بالقيمة `antigravity-preview-05-2026` فقط كقيمة `base_agent`. خيارات النماذج المتوافقة في `agent_config` هي `gemini-3.5-flash` و`gemini-3.6-flash` (الإعداد التلقائي) و`gemini-3.5-flash-lite`. بالنسبة إلى الوكلاء المحدّدين، لا يمكن تجاهل النموذج في وقت التفاعل.
-- **عدم توفّر ميزة التحكم بالإصدارات**: لا تتوفّر ميزة التحكم بإصدارات الوكيل والعودة إلى الإصدار السابق بعد.
-- **عدم إمكانية إنشاء وكلاء فرعيين متداخلين**: لا تتوفّر بعد إمكانية تفويض وكيل فرعي.
-- يمكنك الحصول على ما يصل إلى 1,000 وكيل مُدار.
+- **État de la version preview** : les agents gérés sont en version preview. Les fonctionnalités et les schémas peuvent changer.
+- **Agent de base et modèles** : seul `antigravity-preview-05-2026` est compatible en tant que `base_agent`. Les options de modèle compatibles dans `agent_config` sont `gemini-3.5-flash`, `gemini-3.6-flash` (par défaut) et `gemini-3.5-flash-lite`. Pour les agents nommés, le modèle ne peut pas être remplacé au moment de l'interaction.
+- **Aucune gestion des versions** : la gestion des versions et la restauration de l'agent ne sont pas encore disponibles.
+- **Aucune imbrication de sous-agents** : la délégation de sous-agents n'est pas encore compatible.
+- Vous pouvez avoir jusqu'à 1 000 agents gérés.
 
-## الخطوات التالية
+## Étape suivante
 
-- [نظرة عامة على الوكلاء](https://ai.google.dev/gemini-api/docs/agents?hl=ar): تعرَّف على المفاهيم الأساسية للوكلاء المُدارين.
-- [البدء السريع](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ar): ابدأ إنشاء محادثات مترابطة وبث المحتوى.
-- [Antigravity Agent](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ar): استكشاف الإمكانات والأدوات والأسعار للوكيل التلقائي
-- [بيئات الوكيل](https://ai.google.dev/gemini-api/docs/agent-environment?hl=ar): يمكنك ضبط بيئات الاختبار المعزولة والمصادر والشبكات.
-- [Managed Agents API على "منصة الوكلاء"](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=ar): لإنشاء الوكلاء المُدارين مع إدارة مؤسسية مدمجة.
+- [Présentation des agents](https://ai.google.dev/gemini-api/docs/agents?hl=fr) : découvrez les concepts de base des agents gérés.
+- [Guide de démarrage rapide](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=fr) : commencez à créer des conversations multitours et du streaming.
+- [Agent Antigravity](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=fr) : découvrez les capacités, les outils et les tarifs de l'agent par défaut.
+- [Environnements d'agent](https://ai.google.dev/gemini-api/docs/agent-environment?hl=fr) : configurez des bacs à sable, des sources et la mise en réseau.
+- [API Agents gérés sur Agent Platform](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/managed-agents?hl=fr) : pour créer des agents avec une gouvernance organisationnelle intégrée.
 
-إرسال ملاحظات
+Envoyer des commentaires
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
 
-تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)
+Dernière mise à jour le 2026/07/30 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Voulez-vous nous donner plus d'informations ?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-07-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]

@@ -1,27 +1,27 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=ja
-fetched_at: 2026-08-03T04:35:44.339627+00:00
-title: "\u7d44\u307f\u8fbc\u307f\u30c4\u30fc\u30eb\u3068\u95a2\u6570\u547c\u3073\u51fa\u3057\u3092\u7d44\u307f\u5408\u308f\u305b\u308b \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/tool-combination?hl=vi
+fetched_at: 2026-08-10T03:25:45.467476+00:00
+title: "K\u1ebft h\u1ee3p c\u00e1c c\u00f4ng c\u1ee5 t\u00edch h\u1ee3p v\u00e0 t\u00ednh n\u0103ng g\u1ecdi h\u00e0m \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
+![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
 
-Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
+Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
 
-- [ホーム](https://ai.google.dev/?hl=ja)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
-- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
+- [Trang chủ](https://ai.google.dev/?hl=vi)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
+- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-# 組み込みツールと関数呼び出しを組み合わせる
+# Kết hợp các công cụ tích hợp và tính năng gọi hàm
 
-Gemini では、ツール呼び出しのコンテキスト履歴を保持して公開することで、`google_search` などの[組み込みツール](https://ai.google.dev/gemini-api/docs/tools?hl=ja)と[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)（カスタムツールとも呼ばれます）を 1 回の生成で組み合わせることができます。組み込みツールとカスタムツールの組み合わせにより、複雑なエージェント ワークフローが可能になります。たとえば、モデルは特定のビジネス ロジックを呼び出す前に、リアルタイムのウェブデータに基づいてグラウンディングできます。
+Gemini cho phép kết hợp [các công cụ tích hợp](https://ai.google.dev/gemini-api/docs/tools?hl=vi), chẳng hạn như `google_search` và [lệnh gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) (còn gọi là *công cụ tuỳ chỉnh*) trong một lần tạo bằng cách duy trì và hiển thị nhật ký ngữ cảnh của các lệnh gọi công cụ. Các tổ hợp công cụ tích hợp và tuỳ chỉnh cho phép các quy trình làm việc phức tạp, dựa trên tác nhân, trong đó chẳng hạn như mô hình có thể tự căn cứ vào dữ liệu web theo thời gian thực trước khi gọi logic kinh doanh cụ thể của bạn.
 
-`google_search` とカスタム関数 `getWeather` を使用して、組み込みツールとカスタムツールの組み合わせを有効にする例を次に示します。
+Dưới đây là ví dụ cho phép kết hợp các công cụ tích hợp và tuỳ chỉnh bằng `google_search` và hàm tuỳ chỉnh `getWeather`:
 
 ### Python
 
@@ -388,53 +388,52 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6
 }'
 ```
 
-## 仕組み
+## Cách hoạt động
 
-Gemini 3 モデルは、*ツール コンテキストの循環*を使用して、組み込みツールとカスタムツールの組み合わせを可能にします。ツール コンテキストの循環により、組み込みツールのコンテキストを保持して公開し、ターンごとに同じ呼び出しでカスタムツールと共有できます。
+Các mô hình Gemini 3 sử dụng *vòng tuần hoàn ngữ cảnh công cụ* để cho phép kết hợp các công cụ tuỳ chỉnh và công cụ tích hợp. Tính năng lưu thông ngữ cảnh công cụ giúp duy trì và hiển thị ngữ cảnh của các công cụ tích hợp, đồng thời chia sẻ ngữ cảnh đó với các công cụ tuỳ chỉnh trong cùng một lệnh gọi từ lượt này sang lượt khác.
 
-### ツールの組み合わせを有効にする
+### Bật tính năng kết hợp công cụ
 
-- ツール コンテキストの循環を有効にするには、`include_server_side_tool_invocations` フラグを `true` に設定する必要があります。
-- [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja#function-declarations) と、使用する組み込みツールを含めて、組み合わせの動作をトリガーします。
-  - `function_declarations` を含めない場合でも、フラグが設定されていれば、ツール コンテキストの循環は、含まれている組み込みツールに対して機能します。
+- Bạn phải đặt cờ `include_server_side_tool_invocations` thành `true` để bật tính năng lưu thông bối cảnh công cụ.
+- Bao gồm [`function_declarations`](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi#function-declarations), cùng với các công cụ tích hợp mà bạn muốn sử dụng, để kích hoạt hành vi kết hợp.
+  - Nếu bạn không thêm `function_declarations`, hoạt động lưu thông bối cảnh công cụ vẫn sẽ tác động đến các công cụ tích hợp sẵn được thêm, miễn là bạn đặt cờ này.
 
-### API の戻り値のパーツ
+### API trả về các phần
 
-API は、1 つのレスポンスで、組み込みツール呼び出しの `toolCall` 部分と `toolResponse` 部分を返します。関数（カスタムツール）呼び出しの場合、API は `functionCall` 呼び出し部分を返します。ユーザーは次のターンで `functionResponse` 部分を提供します。
+Trong một phản hồi duy nhất, API sẽ trả về các phần `toolCall` và `toolResponse` cho lệnh gọi công cụ tích hợp. Đối với lệnh gọi hàm (công cụ tuỳ chỉnh), API sẽ trả về phần lệnh gọi `functionCall`, mà người dùng cung cấp phần `functionResponse` trong lượt tiếp theo.
 
-- `toolCall` と `toolResponse`: API は、サーバーサイドで実行されるツールのコンテキストと、その実行結果を次のターンで保持するために、これらの部分を返します。
-- `functionCall` と `functionResponse`: API は関数呼び出しをユーザーに送信して入力させ、ユーザーは関数レスポンスで結果を返します（これらの部分は Gemini API のすべての[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)に共通であり、ツール組み合わせ機能に固有のものではありません）。
-- （[コード実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)ツールのみ）
-  `executableCode` と `codeExecutionResult`:
-  コード実行ツールを使用する場合、API は `functionCall` と `functionResponse` の代わりに、`executableCode`（実行されるモデルによって生成されたコード）と `codeExecutionResult`（実行可能コードの結果）を返します。
+- `toolCall` và `toolResponse`: API trả về những phần này để duy trì ngữ cảnh về những công cụ được chạy ở phía máy chủ và kết quả thực thi của chúng cho lượt tiếp theo.
+- `functionCall` và `functionResponse`: API gửi lệnh gọi hàm cho người dùng để điền thông tin, rồi người dùng gửi kết quả trở lại trong phản hồi hàm (những phần này là tiêu chuẩn đối với tất cả [lệnh gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) trong Gemini API, không chỉ dành riêng cho tính năng kết hợp công cụ).
+- (Chỉ công cụ [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi)) `executableCode` và `codeExecutionResult`: Khi sử dụng công cụ Thực thi mã, thay vì `functionCall` và `functionResponse`, API sẽ trả về `executableCode` (mã do mô hình tạo ra nhằm mục đích thực thi) và `codeExecutionResult` (kết quả của mã thực thi).
 
-コンテキストを維持し、ツールの組み合わせを有効にするには、各ターンで、すべての[フィールド](#critical-fields)を含むすべての部分をモデルに返す必要があります。
+Bạn phải trả về tất cả các phần, bao gồm cả tất cả [các trường](#critical-fields) mà chúng chứa, cho mô hình ở mỗi lượt để duy trì ngữ cảnh và cho phép kết hợp các công cụ.
 
-### 返された部品の重要なフィールド
+### Các trường quan trọng trong các phần được trả về
 
-[API から返される特定の部分](#api-returns-parts)には、`id`、`tool_type`、`thought_signature` フィールドが含まれます。これらのフィールドは、ツールのコンテキストを維持するために重要です（したがって、ツールの組み合わせにとっても重要です）。後続のリクエストでは、*レスポンスで指定されたとおり*にすべての部分を返す必要があります。
+Một số [phần do API trả về](#api-returns-parts) sẽ bao gồm các trường `id`, `tool_type` và `thought_signature`. Những trường này rất quan trọng để duy trì ngữ cảnh của công cụ (do đó, rất quan trọng đối với việc kết hợp các công cụ); bạn cần trả về tất cả các phần *như trong phản hồi* trong các yêu cầu tiếp theo.
 
-- `id`: 呼び出しをレスポンスにマッピングする一意の識別子。`id` は、ツールのコンテキストの循環に関係なく、**すべての関数呼び出しレスポンスで設定**されます。関数呼び出しで API が提供するのと同じ `id` を関数レスポンスで提供する*必要があります*。組み込みツールは、ツール呼び出しとツール レスポンスの間で `id` を自動的に共有します。
-  - すべてのツール関連部分に存在: `toolCall`、`toolResponse`、`functionCall`、`functionResponse`、`executableCode`、`codeExecutionResult`
-- `tool_type`: 使用されている特定のツールを識別します。リテラルの組み込みツール（`URL_CONTEXT` など）または関数（`getWeather` など）の名前。
-  - `toolCall` パーツと `toolResponse` パーツにあります。
-- `thought_signature`: **API によって返される各部分**に埋め込まれた実際の暗号化コンテキスト。思考シグネチャがないとコンテキストを再構築できません。すべてのターンのすべての部分の思考シグネチャを返さないと、モデルはエラーを返します。
-  - *すべての*パーツにあります。
+- `id`: Giá trị nhận dạng duy nhất liên kết một lệnh gọi với phản hồi của lệnh gọi đó. `id` được **đặt trên tất cả các phản hồi lệnh gọi hàm**, bất kể việc lưu thông ngữ cảnh công cụ.
+  Bạn *phải* cung cấp cùng một `id` trong phản hồi của hàm mà API cung cấp trong lệnh gọi hàm. Các công cụ tích hợp sẽ tự động chia sẻ `id` giữa lệnh gọi công cụ và phản hồi công cụ.
+  - Có trong tất cả các phần liên quan đến công cụ: `toolCall`, `toolResponse`, `functionCall`, `functionResponse`, `executableCode`, `codeExecutionResult`
+- `tool_type`: Xác định công cụ cụ thể đang được sử dụng; công cụ hoặc tên hàm (ví dụ: `URL_CONTEXT`) hoặc tên hàm (ví dụ: `getWeather`) theo nghĩa đen được tích hợp sẵn.
+  - Có trong `toolCall` và `toolResponse`.
+- `thought_signature`: Ngữ cảnh thực tế đã mã hoá được nhúng trong **mỗi phần do API trả về**. Không thể tái tạo ngữ cảnh nếu không có chữ ký tư duy; nếu bạn không trả về chữ ký tư duy cho tất cả các phần trong mỗi lượt, mô hình sẽ gặp lỗi.
+  - Có ở *tất cả* các bộ phận.
 
-### ツール固有のデータ
+### Dữ liệu dành riêng cho công cụ
 
-一部の組み込みツールは、ツールタイプに固有のユーザーに表示されるデータ引数を返します。
+Một số công cụ tích hợp trả về các đối số dữ liệu mà người dùng có thể thấy, dành riêng cho loại công cụ.
 
-| ツール | ユーザーに表示されるツール呼び出し引数（ある場合） | ユーザーに表示されるツール レスポンス（ある場合） |
+| Công cụ | Đối số gọi công cụ mà người dùng nhìn thấy (nếu có) | Phản hồi của công cụ mà người dùng nhìn thấy (nếu có) |
 | --- | --- | --- |
 | **GOOGLE\_SEARCH** | `queries` | `search_suggestions` |
 | **GOOGLE\_MAPS** | `queries` | `places` `google_maps_widget_context_token` |
-| **URL\_CONTEXT** | `urls` ブラウジングする URL | `urls_metadata` `retrieved_url`: 閲覧した URL `url_retrieval_status`: 閲覧ステータス |
-| **FILE\_SEARCH** | なし | なし |
+| **URL\_CONTEXT** | `urls` URL cần duyệt xem | `urls_metadata` `retrieved_url`: Các URL đã duyệt qua `url_retrieval_status`: Trạng thái duyệt qua |
+| **FILE\_SEARCH** | Không có | Không có |
 
-## ツール組み合わせリクエスト構造の例
+## Ví dụ về cấu trúc yêu cầu kết hợp công cụ
 
-次のリクエスト構造は、「米国最北端の都市はどこですか？」というプロンプトのリクエスト構造を示しています。今日の天気はどうですか？」組み込みの Gemini ツール `google_search` と `code_execution`、カスタム関数 `get_weather` の 3 つのツールを組み合わせたものです。
+Cấu trúc yêu cầu sau đây cho thấy cấu trúc yêu cầu của câu lệnh: "Thành phố cực bắc ở Hoa Kỳ là thành phố nào? Thời tiết ở đó hôm nay thế nào?". Công cụ này kết hợp 3 công cụ: các công cụ tích hợp của Gemini `google_search` và `code_execution`, cùng một hàm tuỳ chỉnh `get_weather`.
 
 ```
 {
@@ -503,48 +502,49 @@ API は、1 つのレスポンスで、組み込みツール呼び出しの `too
 }
 ```
 
-## トークンと料金
+## Mã thông báo và giá
 
-リクエストの `toolCall` 部分と `toolResponse` 部分は `prompt_token_count` にカウントされます。これらの中間ツールステップは表示され、ユーザーに返されるため、会話履歴の一部となります。これは*リクエスト*の場合のみであり、*レスポンス*には適用されません。
+Xin lưu ý rằng các phần `toolCall` và `toolResponse` trong yêu cầu được tính vào `prompt_token_count`. Vì các bước công cụ trung gian này hiện có thể nhìn thấy và được trả về cho bạn, nên chúng là một phần của nhật ký trò chuyện. Đây chỉ là trường hợp đối với *yêu cầu*, chứ không phải *phản hồi*.
 
-Google 検索ツールはこのルールの例外です。Google 検索では、クエリレベルで独自の料金モデルがすでに適用されているため、トークンが二重に課金されることはありません（[料金](https://ai.google.dev/gemini-api/docs/pricing?hl=ja)ページを参照）。
+Công cụ Google Tìm kiếm là một trường hợp ngoại lệ đối với quy tắc này. Google Tìm kiếm đã áp dụng mô hình định giá riêng ở cấp truy vấn, vì vậy, các mã thông báo sẽ không bị tính phí gấp đôi (xem trang [Định giá](https://ai.google.dev/gemini-api/docs/pricing?hl=vi)).
 
-詳細については、[トークン](https://ai.google.dev/gemini-api/docs/tokens?hl=ja)のページをご覧ください。
+Hãy đọc trang [Mã thông báo](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) để biết thêm thông tin.
 
-## 制限事項
+## Các điểm hạn chế
 
-- `include_server_side_tool_invocations` フラグが有効の場合、デフォルトは `VALIDATED` モード（`AUTO` モードは対象外）
-- `google_search` などの組み込みツールは、位置情報と現在時刻の情報に依存しています。そのため、`system_instruction` または `function_declaration.description` に矛盾する位置情報と時刻情報が含まれていると、ツールを組み合わせた機能が正常に動作しないことがあります。
+- Mặc định ở chế độ `VALIDATED` (chế độ `AUTO` không được hỗ trợ) khi bật cờ `include_server_side_tool_invocations`
+- Các công cụ tích hợp như `google_search` dựa vào thông tin vị trí và thời gian hiện tại. Vì vậy, nếu `system_instruction` hoặc `function_declaration.description` của bạn có thông tin vị trí và thời gian mâu thuẫn, thì tính năng kết hợp công cụ có thể không hoạt động hiệu quả.
 
-## サポートされているツール
+## Các công cụ được hỗ trợ
 
-標準のツール コンテキストの循環は、サーバーサイド（組み込み）ツールに適用されます。Code Execution もサーバーサイド ツールですが、コンテキスト循環のための独自の組み込みソリューションがあります。コンピュータ使用と関数呼び出しはクライアントサイドのツールであり、コンテキスト循環の組み込みソリューションも備えています。
+Hoạt động lưu thông bối cảnh công cụ tiêu chuẩn áp dụng cho các công cụ phía máy chủ (được tích hợp sẵn).
+Thực thi mã cũng là một công cụ phía máy chủ, nhưng có giải pháp tích hợp riêng để lưu hành bối cảnh. Computer Use và function calling là các công cụ phía máy khách, đồng thời có các giải pháp tích hợp để lưu chuyển ngữ cảnh.
 
-| ツール | 実行側 | コンテキストの循環のサポート |
+| Công cụ | Bên thực thi | Hỗ trợ lưu thông theo bối cảnh |
 | --- | --- | --- |
-| [Google 検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja) | サーバー側 | サポート対象 |
-| [Google マップ](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja) | サーバー側 | サポート対象 |
-| [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja) | サーバー側 | サポート対象 |
-| [ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja) | サーバー側 | サポート対象 |
-| [コードの実行](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja) | サーバー側 | サポート対象（内蔵、`executableCode` と `codeExecutionResult` の部品を使用） |
-| [コンピュータの使用](https://ai.google.dev/gemini-api/docs/computer-use?hl=ja) | クライアントサイド | サポート対象（内蔵、`functionCall` と `functionResponse` の部品を使用） |
-| [カスタム関数](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja) | クライアントサイド | サポート対象（内蔵、`functionCall` と `functionResponse` の部品を使用） |
+| [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi) | Phía máy chủ | Được hỗ trợ |
+| [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi) | Phía máy chủ | Được hỗ trợ |
+| [Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi) | Phía máy chủ | Được hỗ trợ |
+| [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi) | Phía máy chủ | Được hỗ trợ |
+| [Thực thi mã](https://ai.google.dev/gemini-api/docs/code-execution?hl=vi) | Phía máy chủ | Được hỗ trợ (tích hợp sẵn, sử dụng các phần `executableCode` và `codeExecutionResult`) |
+| [Sử dụng máy tính](https://ai.google.dev/gemini-api/docs/computer-use?hl=vi) | Phía máy khách | Được hỗ trợ (tích hợp sẵn, sử dụng các phần `functionCall` và `functionResponse`) |
+| [Hàm tuỳ chỉnh](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) | Phía máy khách | Được hỗ trợ (tích hợp sẵn, sử dụng các phần `functionCall` và `functionResponse`) |
 
-## 次のステップ
+## Bước tiếp theo
 
-- Gemini API の[関数呼び出し](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)の詳細を確認する。
-- サポートされているツールを確認します。
-  - [Google 検索](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)
-  - [Google マップ](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ja)
-  - [URL コンテキスト](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)
-  - [ファイル検索](https://ai.google.dev/gemini-api/docs/file-search?hl=ja)
+- Tìm hiểu thêm về tính năng [Gọi hàm](https://ai.google.dev/gemini-api/docs/function-calling?hl=vi) trong Gemini API.
+- Khám phá các công cụ được hỗ trợ:
+  - [Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi)
+  - [Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=vi)
+  - [Bối cảnh URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi)
+  - [Tìm kiếm tệp](https://ai.google.dev/gemini-api/docs/file-search?hl=vi)
 
-フィードバックを送信
+Gửi ý kiến phản hồi
 
-特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
+Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
 
-最終更新日 2026-07-30 UTC。
+Cập nhật lần gần đây nhất: 2026-07-30 UTC.
 
-ご意見をお聞かせください
+Bạn muốn chia sẻ thêm với chúng tôi?
 
-[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]
+[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]

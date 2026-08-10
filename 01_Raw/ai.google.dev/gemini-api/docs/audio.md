@@ -1,24 +1,24 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/audio?hl=de
-fetched_at: 2026-08-03T04:40:06.201453+00:00
-title: "Audioinhalte verstehen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/audio?hl=es-419
+fetched_at: 2026-08-10T03:13:49.316959+00:00
+title: "Comprensi\u00f3n de audio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+La [API de Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=es-419) ya está disponible de forma general. Te recomendamos que uses esta API para acceder a todos los modelos y funciones más recientes.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=es-419)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google utiliza tecnología de IA para traducir contenido a tu idioma preferido. Las traducciones realizadas con IA pueden contener errores.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Página principal](https://ai.google.dev/?hl=es-419)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=es-419)
+- [Documentos](https://ai.google.dev/gemini-api/docs?hl=es-419)
 
-Feedback geben
+Enviar comentarios
 
-# Audioinhalte verstehen
+# Comprensión de audio
 
-Gemini kann Audioeingaben analysieren und Textantworten generieren.
+Gemini puede analizar la entrada de audio y generar respuestas de texto.
 
 ### Python
 
@@ -90,26 +90,26 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Übersicht
+## Descripción general
 
-Gemini kann Audioeingaben analysieren und verstehen und Textantworten generieren. Dadurch sind folgende Anwendungsfälle möglich:
+Gemini puede analizar y comprender la entrada de audio, y generar respuestas de texto, lo que permite casos de uso como los siguientes:
 
-- Audioinhalte beschreiben, zusammenfassen oder Fragen dazu beantworten
-- Transkription und Übersetzung (Sprache zu Text)
-- Sprecherbestimmung (verschiedene Sprecher identifizieren)
-- Erkennung von Emotionen in Sprache und Musik
-- Bestimmte Segmente mit Zeitstempeln analysieren
+- Describe, resume o responde preguntas sobre el contenido de audio
+- Transcripción y traducción (voz a texto)
+- Identificación de interlocutores (identificación de diferentes interlocutores)
+- Detección de emociones en el habla y la música
+- Análisis de segmentos específicos con marcas de tiempo
 
-Informationen zu Sprach- und Videointeraktionen in Echtzeit finden Sie in der
-[Live API](https://ai.google.dev/gemini-api/docs/live?hl=de).
-Für spezielle Modelle für die Umwandlung von Sprache in Text mit Unterstützung für die Echtzeit-Transkription,
-verwenden Sie die [Google Cloud Speech-to-Text API](https://cloud.google.com/speech-to-text?hl=de).
+Para obtener interacciones de voz y video en tiempo real, consulta la
+[API de Live](https://ai.google.dev/gemini-api/docs/live?hl=es-419).
+Para obtener modelos dedicados de voz a texto con compatibilidad para la transcripción en tiempo real,
+usa la [API de Google Cloud Speech-to-Text](https://cloud.google.com/speech-to-text?hl=es-419).
 
-## Sprache zu Text transkribieren
+## Transcribe voz a texto
 
-In diesem Beispiel wird gezeigt, wie Sie Sprache mit
-Zeitstempeln, Sprecherbestimmung und Emotionserkennung mithilfe
-[strukturierter Ausgaben](https://ai.google.dev/gemini-api/docs/structured-output?hl=de)transkribieren, übersetzen und zusammenfassen.
+En este ejemplo, se muestra cómo transcribir, traducir y resumir el habla con
+marcas de tiempo, identificación de interlocutores y detección de emociones mediante
+[resultados estructurados](https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419).
 
 ### Python
 
@@ -267,18 +267,18 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-![Eine mehrsprachige Audio-Transkriptions-Gemini-App](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=de)
+![Una app de Gemini para la transcripción de audio en varios idiomas](https://ai.google.dev/static/gemini-api/docs/images/audio_understanding_demo.gif?hl=es-419)
 
-## Eingabeaudio
+## Audio de entrada
 
-Sie können Audiodaten auf folgende Arten bereitstellen:
+Puedes proporcionar datos de audio de las siguientes maneras:
 
-- [Laden Sie eine Audiodatei hoch](#upload-audio), bevor Sie eine Anfrage senden.
-- [Übergeben Sie Inline-Audiodaten](#inline-audio) mit der Anfrage.
+- [Sube un archivo de audio](#upload-audio) antes de realizar una solicitud.
+- [Pasa los datos de audio intercalados](#inline-audio) con la solicitud.
 
-### Audiodatei hochladen
+### Cómo subir un archivo de audio
 
-Verwenden Sie die [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de) für Dateien, die größer als 20 MB sind.
+Usa la [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419) para archivos de más de 20 MB.
 
 ### Python
 
@@ -349,9 +349,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Audiodaten inline übergeben
+### Pasa datos de audio intercalados
 
-Für kleine Audiodateien mit einer Gesamtgröße von weniger als 20 MB:
+Para archivos de audio pequeños con un tamaño total de solicitud inferior a 20 MB:
 
 ### Python
 
@@ -431,13 +431,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Hinweise zu Inline-Audiodaten:
-\* Die maximale Anfragengröße beträgt insgesamt 20 MB (einschließlich Prompts und aller Dateien).
-\* Wenn Sie die Datei wiederverwenden möchten, [laden Sie sie](#upload-audio) stattdessen hoch.
+Notas sobre los datos de audio intercalados:
+\* El tamaño máximo de la solicitud es de 20 MB en total (incluidas las instrucciones y todos los archivos).
+\* Para volver a usarlo, [sube el archivo](#upload-audio).
 
-## Transkript erstellen
+## Obtén una transcripción
 
-Wenn Sie ein Transkript erstellen möchten, fordern Sie es im Prompt an:
+Para obtener una transcripción, solicítala en la instrucción:
 
 ### Python
 
@@ -473,9 +473,9 @@ const interaction = await client.interactions.create({
 console.log(interaction.output_text);
 ```
 
-## Auf Zeitstempel verweisen
+## Consulta las marcas de tiempo
 
-Verwenden Sie das Format `MM:SS`, um auf bestimmte Abschnitte zu verweisen:
+Usa el formato `MM:SS` para hacer referencia a secciones específicas:
 
 ### Python
 
@@ -505,9 +505,9 @@ const interaction = await client.interactions.create({
 });
 ```
 
-## Tokens zählen
+## Cuenta tokens
 
-So zählen Sie Tokens in einer Audiodatei:
+Cuenta tokens en un archivo de audio:
 
 ### Python
 
@@ -531,37 +531,37 @@ const response = await client.models.countTokens({
 console.log(response.totalTokens);
 ```
 
-## Unterstützte Audioformate
+## Formatos de audio compatibles
 
-- WAV – `audio/wav`
-- MP3 – `audio/mp3`
-- AIFF – `audio/aiff`
-- AAC – `audio/aac`
-- OGG Vorbis – `audio/ogg`
-- FLAC – `audio/flac`
+- WAV - `audio/wav`
+- MP3 - `audio/mp3`
+- AIFF - `audio/aiff`
+- AAC - `audio/aac`
+- OGG Vorbis - `audio/ogg`
+- FLAC - `audio/flac`
 
-## Technische Details zu Audio
+## Detalles técnicos sobre el audio
 
-- **Tokens**: 32 Tokens pro Sekunde Audio (1 Minute = 1.920 Tokens)
-- **Nicht-Sprache**: Gemini versteht Geräusche, die keine Sprache sind (Vogelgesang, Sirenen usw.).
-- **Maximale Länge**: 9,5 Stunden Audio pro Prompt
-- **Auflösung**: Auf 16 kbit/s heruntergesampelt
-- **Kanäle**: Mehrkanal-Audio wird zu einem einzelnen Kanal kombiniert.
+- **Tokens**: 32 tokens por segundo de audio (1 minuto = 1,920 tokens)
+- **No verbal**: Gemini comprende los sonidos no verbales (canto de pájaros, sirenas, etcétera).
+- **Duración máxima**: 9.5 horas de audio por instrucción
+- **Resolución**: Submuestreado a 16 Kbps
+- **Canales**: Audio multicanal combinado en un solo canal
 
-## Nächste Schritte
+## ¿Qué sigue?
 
-- [Files API](https://ai.google.dev/gemini-api/docs/files?hl=de): Audiodateien hochladen und verwalten
-- [Systemanweisungen](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#system-instructions):
-  Modellverhalten anpassen
-- [Strukturierte Ausgabe](https://ai.google.dev/gemini-api/docs/structured-output?hl=de):
-  Transkriptionsergebnisse im JSON-Format abrufen
+- [API de Files](https://ai.google.dev/gemini-api/docs/files?hl=es-419): Sube y administra archivos de audio
+- [Instrucciones del sistema](https://ai.google.dev/gemini-api/docs/text-generation?hl=es-419#system-instructions):
+  Personaliza el comportamiento del modelo
+- [Resultado estructurado](https://ai.google.dev/gemini-api/docs/structured-output?hl=es-419):
+  Obtén resultados de transcripción en formato JSON
 
-Feedback geben
+Enviar comentarios
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Salvo que se indique lo contrario, el contenido de esta página está sujeto a la [licencia Atribución 4.0 de Creative Commons](https://creativecommons.org/licenses/by/4.0/), y los ejemplos de código están sujetos a la [licencia Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Para obtener más información, consulta las [políticas del sitio de Google Developers](https://developers.google.com/site-policies?hl=es-419). Java es una marca registrada de Oracle o sus afiliados.
 
-Zuletzt aktualisiert: 2026-07-30 (UTC).
+Última actualización: 2026-07-30 (UTC)
 
-Haben Sie Feedback für uns?
+¿Quieres brindar más información?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]
+[[["Fácil de comprender","easyToUnderstand","thumb-up"],["Resolvió mi problema","solvedMyProblem","thumb-up"],["Otro","otherUp","thumb-up"]],[["Falta la información que necesito","missingTheInformationINeed","thumb-down"],["Muy complicado o demasiados pasos","tooComplicatedTooManySteps","thumb-down"],["Desactualizado","outOfDate","thumb-down"],["Problema de traducción","translationIssue","thumb-down"],["Problema con las muestras o los códigos","samplesCodeIssue","thumb-down"],["Otro","otherDown","thumb-down"]],["Última actualización: 2026-07-30 (UTC)"],[],[]]

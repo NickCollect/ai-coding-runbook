@@ -1,138 +1,139 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=de
-fetched_at: 2026-08-03T04:29:58.735451+00:00
-title: "KI-Agenten in AI\u00a0Studio Playground \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=it
+fetched_at: 2026-08-10T03:24:11.169253+00:00
+title: "Agent in AI Studio Playground \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Feedback geben
+Invia feedback
 
-# KI-Agenten in AI Studio Playground
+# Agent in AI Studio Playground
 
-Google AI Studio Playground bietet eine visuelle Oberfläche, mit der Sie Prototypen erstellen und lernen können, wie Sie verwaltete Agents entwickeln, ohne API-Aufrufe erstellen und schreiben zu müssen.
+Google AI Studio Playground fornisce un'interfaccia visiva per creare prototipi e imparare a creare agenti gestiti senza dover creare e scrivere chiamate API.
 
-Rufen Sie dazu in der Navigationsleiste von Google AI Studio den Tab **Playground** auf und stellen Sie den Schalter auf **Agents**.
+Per iniziare, vai alla scheda **Playground** nel pannello di navigazione di Google AI Studio e attiva/disattiva l'opzione **Agenti**.
 
-## Vordefinierte Vorlagen
+## Modelli predefiniti
 
-Auf dem Tab **Agents** (KI-Agenten) finden Sie eine Reihe von Vorlagen, mit denen der Antigravity-Basis-KI-Agent durch Festlegen von Tool- und Umgebungskonfigurationen vorkonfiguriert wird. Alle Vorlagen sind Open Source und werden im Repository [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/) veröffentlicht. Wenn Sie sich diese Vorlagen ansehen, können Sie lernen, wie Sie Ihren eigenen verwalteten Agent erstellen und strukturieren.
+La scheda **Agenti** contiene una serie di modelli che preconfigurano l'agente Antigravity di base impostando le configurazioni di strumenti e ambiente. Tutti i modelli sono open source e pubblicati nel
+repository [google-gemini/gemini-managed-agents-templates](https://github.com/google-gemini/gemini-managed-agents-templates/). Esplorare questi modelli è un ottimo modo per imparare a creare e strutturare il tuo agente gestito.
 
-Wenn Sie beispielsweise die Vorlage „KI‑Radio“ auswählen, werden alle zulässigen Tools aktiviert und eine spezielle `AGENTS.md`-Datei sowie Skills für die Produktion von Radiosendungen verknüpft. Sie können diese Einstellungen in der Playground-Benutzeroberfläche im Bereich **Environment** (Umgebung) aufrufen, indem Sie auf die Schaltfläche **Sources** (Quellen) klicken.
+Ad esempio, quando scegli il modello AI Radio, vengono abilitati tutti gli strumenti consentiti e viene collegato un file `AGENTS.md` specializzato e le competenze per la produzione di programmi radiofonici. Puoi visualizzare queste impostazioni nell'interfaccia utente di Playground nella sezione **Ambiente** facendo clic sul pulsante **Origini**.
 
-## Toolkonfiguration
+## Configurazione dello strumento
 
-In den Agent-Einstellungen im Playground können Sie den Zugriff auf die folgenden integrierten Tools aktivieren oder deaktivieren:
+Nelle impostazioni dell'agente in Playground, puoi attivare/disattivare l'accesso ai seguenti strumenti integrati:
 
-- **Google Suche**:Auf das öffentliche Web zugreifen, um Echtzeitinformationen zu erhalten.
-- **URL-Kontext**:Textinhalte bestimmter Webseiten-URLs abrufen und parsen.
-- **Codeausführung**:Bash- und Python-Befehle direkt in der isolierten Sandbox-Umgebung ausführen.
-- **Dateisystemtools**:Dateien im Arbeitsbereich lesen, schreiben, auflisten und löschen.
+- **Ricerca Google**:accedi al web aperto per informazioni in tempo reale.
+- **Contesto URL**:recupera e analizza il contenuto testuale di URL di pagine web specifiche.
+- **Esecuzione del codice**:esegui comandi Bash e Python direttamente nell'ambiente sandbox isolato.
+- **Strumenti del file system**:leggi, scrivi, elenca ed elimina i file all'interno dell'area di lavoro.
 
-## Umgebung konfigurieren
+## Configurazione dell'ambiente
 
-Verwaltete Agents werden in einer sicheren, kurzlebigen Linux-Sandbox (der Umgebung) ausgeführt, die den Arbeitsbereich und die Tools bereitstellt, die sie für ihre Arbeit benötigen. Weitere Informationen finden Sie im Leitfaden zur [verwalteten Agent-Umgebung](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de).
+Gli agenti gestiti vengono eseguiti in una sandbox Linux effimera e sicura (l'ambiente) che fornisce l'area di lavoro e gli strumenti necessari per il loro funzionamento. Per saperne di più, consulta la guida all'ambiente degli agenti gestiti [managed agent environment](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it).
 
-### Agent-Verhalten steuern
+### Controllo del comportamento dell'agente
 
-Das Verhalten, die Persona und die Funktionen des Agenten werden hauptsächlich durch die Dateien in seiner Umgebung bestimmt. Der Agent erkennt und lädt Konfigurationen automatisch aus einem speziellen `.agents`-Ordner:
+Il comportamento, la personalità e le funzionalità dell'agente sono determinati principalmente dai file presenti nel suo ambiente. L'agente rileva e carica automaticamente le configurazioni da una cartella `.agents` speciale:
 
-- **`AGENTS.md`**: Vorgegeben im Kontext des Agenten, um Systemanweisungen und Persona zu definieren.
-- **`SKILL.md`**: Diese Dateien befinden sich in den jeweiligen Skill-Ordnern (z.B. `.agents/skills/my-skill/SKILL.md`), um bestimmte Funktionen und Workflows zu definieren.
+- **`AGENTS.md`**: precaricato nel contesto dell'agente per definire le istruzioni di sistema e la personalità.
+- **`SKILL.md`**: si trova nelle rispettive cartelle delle competenze (ad es. `.agents/skills/my-skill/SKILL.md`) per definire funzionalità e workflow specifici.
 
-### Umgebung bereitstellen
+### Provisioning dell'ambiente
 
-Sie können die vom Agent verwendete Umgebung konfigurieren, indem Sie Dateien in die Umgebung einbinden, bevor Sie eine Sitzung starten. Sie können entweder eine neue Umgebung erstellen, indem Sie Quellen einbinden, oder eine vorherige Umgebung wiederherstellen:
+Puoi configurare l'ambiente da utilizzare dall'agente montando i file nell'ambiente prima di avviare una sessione. Puoi creare un nuovo ambiente montando le origini o ripristinarne uno precedente:
 
-- **So erstellen Sie eine neue Umgebung**: Klicken Sie im Bereich „Umgebungseinstellungen“ auf **Quellen hinzufügen** und wählen Sie einen der folgenden Quelltypen aus:
+- **Per creare un nuovo ambiente**, fai clic su **Aggiungi origini** nel riquadro delle impostazioni dell'ambiente e scegli tra i seguenti tipi di origine:
 
-| Quelltyp | Beschreibung | Bereitstellungspfad |
+| Tipo di origine | Descrizione | Percorso di montaggio |
 | --- | --- | --- |
-| **Inline-Dateien** | Konfigurationsdateien, Mock-Datasets oder Utility-Scripts (bis zu 100 KB) können direkt in die Playground-Benutzeroberfläche geschrieben oder eingefügt werden. | Benutzerdefinierter Zielpfad (z.B. `/workspace/scripts/parser.py`). |
-| **Google Cloud Storage** | Einen öffentlichen oder privaten Cloud Storage-Bucket einbinden  Für private Buckets ist ein standardmäßiges OAuth 2.0-Inhabertoken erforderlich. Weitere Informationen finden Sie unter [Private Quellen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#private-sources). | Ordnet einen GCS-Bucket-Pfad (z.B. `gs://your-bucket-name/data/`) einem Workspace-Verzeichnis (z.B. `/workspace/data/`) zu. |
-| **GitHub-Repositories** | Öffentliche oder private Codebases klonen  Für private Repositories ist die Standardauthentifizierung mit Ihrem persönlichen GitHub-Zugriffstoken (Personal Access Token, PAT) erforderlich. Weitere Informationen finden Sie unter [Private Quellen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#private-sources). | Direkt in `/workspace/` geklont (in der Regel unter `/workspace/<repo-name>`). |
+| **File in linea** | Scrivi o incolla file di configurazione, set di dati simulati o script di utilità (fino a 100 KB) direttamente nell'interfaccia utente di Playground. | Percorso di destinazione definito dall'utente (ad es. `/workspace/scripts/parser.py`). |
+| **Google Cloud Storage** | Monta un bucket Cloud Storage pubblico o privato.  I bucket privati richiedono un token di supporto OAuth 2.0 standard. Per saperne di più, consulta [Origini private](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#private-sources). | Mappa un percorso del bucket GCS (ad es. `gs://your-bucket-name/data/`) a una directory dell'area di lavoro (ad es. `/workspace/data/`). |
+| **Repository GitHub** | Clona codebase pubblici o privati.  I repository privati richiedono l'autenticazione di base con il token di accesso personale (PAT) di GitHub. Per saperne di più, consulta [Origini private](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#private-sources). | Clonato direttamente in `/workspace/` (in genere in `/workspace/<repo-name>`). |
 
-- **Wenn Sie eine frühere Umgebung wiederherstellen möchten**, können Sie [eine vorhandene Umgebungs-ID wiederverwenden](#reusing-an-existing-environment-id), um ihren genauen Status zu klonen und zu forken.
+- **Per ripristinare un ambiente precedente**, puoi [riutilizzare un ID ambiente esistente](#reusing-an-existing-environment-id) per clonare e creare una copia esatta del suo stato.
 
-### Vorhandene Umgebungs-ID wiederverwenden
+### Riutilizzo di un ID ambiente esistente
 
-Wenn Sie bereits eine Sandbox-Umgebung eingerichtet haben, müssen Sie nicht von vorn beginnen. So verwenden Sie eine vorhandene Umgebung:
+Se hai già dedicato del tempo alla configurazione di un ambiente sandbox, non devi ricominciare da zero. Per utilizzare un ambiente esistente:
 
-1. Rufen Sie in AI Studio den Bereich „Umgebungen“ auf und stellen Sie **Typ** auf **Vorhanden** um.
-2. Geben Sie die **Umgebungs-ID** ein, z. B. `env_abc123`.
+1. Vai al riquadro Ambienti in AI Studio e imposta **Tipo** su **Esistente**.
+2. Inserisci l'**ID ambiente** (ad es. `env_abc123`)
 
-Weitere Informationen finden Sie unter [Umgebung konfigurieren](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de#configure-an-environment). Sie können die Umgebungs-ID der aktuellen Sitzung auch auf dem Tab „Umgebung“ in der Benutzeroberfläche abrufen.
+Per saperne di più, consulta [Configurare un ambiente](https://ai.google.dev/gemini-api/docs/agent-environment?hl=it#configure-an-environment). Puoi anche recuperare l'ID ambiente della sessione corrente dalla scheda Ambiente nell'interfaccia utente.
 
-Sobald Sie Ihre erste Nachricht an den Agent senden, ist die Umgebungskonfiguration für diese Sitzung festgelegt. Sie können keine neuen Quellen einbinden oder die Zulassungsliste für das Netzwerk ändern, während die Interaktion aktiv ausgeführt wird.
+Una volta inviato il primo messaggio all'agente, la configurazione dell'ambiente diventa fissa per quella sessione. Non puoi montare nuove origini o modificare la lista consentita di rete mentre l'interazione è in esecuzione.
 
-## Umgebung herunterladen
+## Scarica l'ambiente
 
-Nachdem eine Umgebung erstellt wurde, können Sie den Umgebungs-Snapshot jederzeit über die Schaltfläche **Herunterladen** in den Umgebungseinstellungen des AI Studio Playgrounds herunterladen, um Umgebungsdateien als Tarball abzurufen.
+Una volta creato un ambiente, puoi scaricare lo snapshot dell'ambiente in qualsiasi momento utilizzando il pulsante **Scarica** nelle impostazioni dell'ambiente di AI Studio Playground per recuperare i file dell'ambiente come file tar.
 
-## Sicherheit und Kostenverwaltung
+## Sicurezza e gestione dei costi
 
-### Tokenverbrauch verwalten
+### Gestione del consumo di token
 
-Im Gegensatz zu einer Standard-Chatanfrage, die eine einzelne Ausgabe erzeugt, führt der Antigravity-Agent einen autonomen Workflow aus. Es plant, führt Code aus, beobachtet Ergebnisse und wiederholt den Vorgang. Das bedeutet, dass ein einzelner Prompt zu einem unbegrenzten Tokenverbrauch führen kann.
+A differenza di una richiesta di chat standard che produce un singolo output, l'agente Antigravity esegue un workflow autonomo. Pianifica, esegue il codice, osserva i risultati e itera. Ciò significa che un singolo prompt può comportare un consumo illimitato di token.
 
-Um die Kosten zu verwalten, **geben Sie in Ihren Prompts klare Beendigungskriterien an und begrenzen Sie die Aufgaben für den Agenten**. Ein gutes Beispiel ist der Prompt: *Überprüfe die Pull-Anfrage und stoppe, sobald du die Markdown-Zusammenfassung erstellt hast.
-Versuchen Sie nicht, die Korrektur selbst zu schreiben.*
+Per gestire i costi, **fornisci criteri di terminazione chiari nei prompt e limita le attività dell'agente**. Un buon esempio potrebbe essere un prompt come *Esamina la richiesta di pull e interrompi l'operazione dopo aver generato il riepilogo in Markdown.
+Non tentare di scrivere la correzione da solo*.
 
-### Zusätzliche Kosten
+### Costi aggiuntivi
 
-Standardmäßig haben alle Agent-Vorlagen im Playground Zugriff auf den Gemini API-Dienst und können API-Aufrufe aus der Umgebung ausführen, um Anfragen zu bearbeiten. Dabei können zusätzliche Kosten anfallen, die nicht im Tokenverbrauch berücksichtigt werden.
+Per impostazione predefinita, tutti i modelli di agenti in Playground hanno accesso al servizio API Gemini e possono effettuare chiamate API dall'ambiente per soddisfare le richieste. Questi potrebbero comportare costi aggiuntivi che non verranno visualizzati nel consumo di token.
 
-Wenn Sie andere externe Dienste hinzufügen, können für den Agenten zusätzliche Kosten anfallen, da er diese Dienste in Ihrem Namen aufruft.
+Allo stesso modo, se aggiungi altri servizi esterni, l'agente potrebbe comportare costi aggiuntivi chiamando questi servizi per tuo conto.
 
-### Zulassungsliste für Netzwerke
+### Lista consentita di rete
 
-Standardmäßig werden in AI Studio alle ausgehenden Netzwerkanfragen aus der Sandbox-Umgebung Ihres Agents streng kontrolliert und eingeschränkt, um die Sicherheit zu gewährleisten. Damit Ihr Agent externe APIs, Webservices oder Paketmanager erreichen kann, müssen Sie diese explizit deklarieren:
+Per impostazione predefinita, in AI Studio tutte le richieste di rete in uscita dall'ambiente sandbox dell'agente sono strettamente controllate e limitate per garantire la sicurezza. Per concedere all'agente la possibilità di raggiungere API esterne, servizi web o gestori di pacchetti, devi dichiararli esplicitamente:
 
-1. Rufen Sie in AI Studio das Feld „Umgebungen“ auf.
-2. Klicken Sie neben **Netzwerk** auf die Schaltfläche **Regeln**.
-3. Klicken Sie im Bereich **Netzwerkkonfiguration** auf **Zur Zulassungsliste hinzufügen** und geben Sie die entsprechenden Details ein:
-   - **Domainbeschränkung**:Nur auf die bestimmten Domains oder Platzhaltermuster, die der Liste hinzugefügt wurden, kann über die virtuelle Maschine des Agents zugegriffen werden. Sie können beispielsweise genaue Domains wie `api.github.com` oder allgemeine Muster wie `*.googleapis.com` eingeben.
-   - **HTTP-Header und Token-Injection hinzufügen**:Mit der Option **HTTP-Header hinzufügen** können Sie erforderliche Anmeldedaten (z. B. ein API-Token) für eine bestimmte Domain sicher einfügen. Diese Anmeldedaten werden sicher über einen Egress-Proxy weitergeleitet und niemals direkt als Rohtext in der Agent-Sandbox offengelegt.
+1. Vai al riquadro Ambienti in AI Studio.
+2. Seleziona il pulsante **Regole** accanto a **Rete**.
+3. Nel riquadro **Configurazione di rete**, fai clic su **Aggiungi alla lista consentita** e inserisci i dettagli pertinenti:
+   - **Limitazione del dominio**:solo i domini specifici o i pattern con caratteri jolly aggiunti all'elenco possono essere accessibili dalla macchina virtuale dell'agente. Ad esempio, puoi inserire domini esatti come `api.github.com` o pattern ampi come `*.googleapis.com`.
+   - **Aggiungi intestazione HTTP e inserimento di token**:utilizza l'opzione **Aggiungi intestazione HTTP** per inserire in modo sicuro le credenziali richieste (ad esempio un token API) per un dominio specifico. Queste credenziali vengono trasmesse in modo sicuro tramite un proxy di uscita e non vengono mai esposte direttamente come testo non elaborato all'interno della sandbox dell'agente.
 
-Seien Sie immer vorsichtig, wenn Sie Domains auf die Zulassungsliste setzen. Wenn Sie dem Agent Zugriff auf authentifizierte Dienste gewähren, kann er in Ihrem Namen handeln. Wenn Sie das nicht sorgfältig überwachen, kann das zu unbeabsichtigten Aktionen führen.
+Presta sempre attenzione quando aggiungi domini alla lista consentita. Concedere all'agente l'accesso ai servizi autenticati significa che può agire per tuo conto, il che potrebbe comportare azioni indesiderate se non viene monitorato attentamente.
 
-### Best Practices für Anmeldedaten
+### Best practice per le credenziali
 
-Wenn für Ihren Workflow eine Authentifizierung des Agenten bei externen Diensten erforderlich ist, sind Sie für die Bereitstellung und den Umfang dieser Anmeldedaten verantwortlich. Befolgen Sie diese Richtlinien, um das Risiko zu verringern:
+Se il tuo workflow richiede che l'agente si autentichi con servizi esterni, è tua responsabilità eseguire il provisioning e definire l'ambito di queste credenziali. Segui queste linee guida per ridurre i rischi:
 
-- **Anmeldedaten mit geringsten Berechtigungen verwenden**:Erstellen Sie Dienstkonten oder API-Schlüssel mit nur den Berechtigungen, die Ihr Agent benötigt. Vermeiden Sie die Übergabe von Anmeldedaten mit umfassendem oder administrativem Zugriff.
-- **Kurzlebige Tokens bevorzugen**:Verwenden Sie nach Möglichkeit zeitlich begrenzte Anmeldedaten oder Tokens, die ablaufen, anstatt langlebiger API-Schlüssel.
-- **Vollzugriff annehmen**:Der Agent kann alle Anmeldedaten verwenden, auf die er Zugriff hat, um die von Ihnen erteilte Aufgabe auszuführen. Geben Sie nur Anmeldedaten an, deren vollständigen Zugriffsbereich Sie gewähren möchten.
-- **Anmeldedaten regelmäßig rotieren**:Behandeln Sie Anmeldedaten, die für den Agenten freigegeben wurden, genauso wie alle anderen programmatischen Anmeldedaten. Rotieren Sie sie regelmäßig.
+- **Utilizza credenziali con privilegi minimi**:crea account di servizio o chiavi API con solo le autorizzazioni di cui ha bisogno l'agente. Evita di passare credenziali con accesso amministrativo o ampio.
+- **Preferisci i token di breve durata**:ove possibile, utilizza credenziali o token a tempo limitato che scadono anziché chiavi API di lunga durata.
+- **Supponi l'accesso completo**:l'agente può utilizzare qualsiasi credenziale a cui ha accesso per completare l'attività che gli hai assegnato. Fornisci solo le credenziali di cui sei disposto a concedere l'ambito di accesso completo.
+- **Ruota regolarmente le credenziali**:tratta le credenziali condivise con l'agente allo stesso modo di qualsiasi credenziale programmatica; ruotale a intervalli regolari.
 
-### Verbindung zu externen Tools und APIs herstellen
+### Connessione di strumenti e API esterni
 
-Sie können externe Tools und APIs (z. B. Model Context Protocol-/MCP-Server) verbinden, um die Funktionen des Agenten zu erweitern. Dabei gilt:
+Puoi connettere strumenti e API esterni (come i server Model Context Protocol / MCP) per estendere le funzionalità dell'agente. Quando lo fai:
 
-- Verbinden Sie nur Tools von Quellen, denen Sie vertrauen. Ein böswilliges oder schlecht geschriebenes Tool kann Daten offenlegen oder unbeabsichtigte Aktionen ausführen.
-- Konfigurieren Sie Tools mit den für Ihren Anwendungsfall erforderlichen Mindestberechtigungen. Wenn ein Tool den schreibgeschützten Modus unterstützt, sollten Sie diesen bevorzugen, es sei denn, Schreibvorgänge sind unbedingt erforderlich.
-- Bevor Sie ein Tool mit einer Produktionsdatenquelle verbinden, sollten Sie es mit Beispiel- oder synthetischen Daten testen, um zu prüfen, ob der Agent es wie erwartet verwendet.
+- Collega solo gli strumenti provenienti da origini attendibili. Uno strumento dannoso o scritto male potrebbe esporre i dati o eseguire azioni indesiderate.
+- Configura gli strumenti con le autorizzazioni minime richieste per il tuo caso d'uso. Se uno strumento supporta la modalità di sola lettura, preferiscila a meno che le scritture non siano strettamente necessarie.
+- Prima di connettere uno strumento a un'origine dati di produzione, testalo con dati di esempio o sintetici per verificare che l'agente lo utilizzi come previsto.
 
-### Menschliche Aufsicht
+### Supervisione umana
 
-KI-Agenten können mehrstufige Workflows mit einem hohen Maß an Autonomie planen, begründen und ausführen. Das ist zwar leistungsstark, bedeutet aber auch, dass Sie für eine angemessene Aufsicht sorgen müssen, insbesondere bei Aufgaben, die Daten ändern oder mit externen Systemen interagieren.
+Gli agenti possono ragionare, pianificare ed eseguire workflow in più passaggi con un elevato grado di autonomia. Sebbene questa funzionalità sia potente, è necessario applicare una supervisione adeguata, soprattutto per le attività che modificano i dati o interagiscono con sistemi esterni.
 
-Prüfen Sie immer kritische Ausgaben wie generierten Code, Datentransformationen oder Konfigurationsänderungen, bevor Sie sie bereitstellen.
+Verifica sempre gli output critici, come il codice generato, le trasformazioni dei dati o le modifiche alla configurazione, prima di eseguirne il deployment.
 
-Feedback geben
+Invia feedback
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Zuletzt aktualisiert: 2026-05-20 (UTC).
+Ultimo aggiornamento 2026-05-20 UTC.
 
-Haben Sie Feedback für uns?
+Vuoi dirci altro?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-20 (UTC)."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-20 UTC."],[],[]]

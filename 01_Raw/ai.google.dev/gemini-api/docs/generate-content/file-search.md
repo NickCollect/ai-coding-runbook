@@ -1,31 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/file-search?hl=vi
-fetched_at: 2026-08-03T04:42:48.715970+00:00
-title: "T\u00ecm ki\u1ebfm t\u1ec7p \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/file-search?hl=it
+fetched_at: 2026-08-10T03:17:06.716705+00:00
+title: "Ricerca file \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=vi) hiện đã được phát hành rộng rãi. Bạn nên sử dụng API này để truy cập vào tất cả các tính năng và mô hình mới nhất.
+L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=vi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=it)
 
-Google sử dụng công nghệ AI để dịch nội dung sang ngôn ngữ bạn ưu tiên. Bản dịch bằng AI có thể có lỗi.
+Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
 
-- [Trang chủ](https://ai.google.dev/?hl=vi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=vi)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=vi)
-- [Tài liệu](https://ai.google.dev/gemini-api/docs?hl=vi)
+- [Home page](https://ai.google.dev/?hl=it)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=it)
+- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
 
-Gửi ý kiến phản hồi
+Invia feedback
 
-# Tìm kiếm tệp
+# Ricerca file
 
-Gemini API cho phép tính năng Tạo sinh tăng cường truy xuất ("RAG") thông qua công cụ Tìm kiếm tệp. Tính năng Tìm kiếm tệp nhập, chia thành khối và lập chỉ mục dữ liệu của bạn để cho phép truy xuất nhanh thông tin liên quan dựa trên một câu lệnh được cung cấp. Sau đó, thông tin được truy xuất này sẽ được dùng làm bối cảnh cho mô hình, cho phép mô hình cung cấp câu trả lời chính xác và phù hợp hơn. Tính năng tìm kiếm tệp cũng có thể cung cấp các chức năng đa phương thức với các vectơ nhúng văn bản được `gemini-embedding-001` hỗ trợ và vectơ nhúng hình ảnh/đa phương thức được `gemini-embedding-2` hỗ trợ.
+L'API Gemini consente la generazione Retrieval-Augmented Generation ("RAG") tramite lo strumento di ricerca file. La ricerca di file importa, suddivide e indicizza i tuoi dati per
+consentire il recupero rapido di informazioni pertinenti in base a un prompt fornito. Queste
+informazioni recuperate vengono quindi utilizzate come contesto per il modello, consentendogli di
+fornire risposte più accurate e pertinenti. La ricerca di file è anche in grado di
+fornire funzionalità multimodali con incorporamenti di testo supportati da
+`gemini-embedding-001` e incorporamenti di immagini/multimodali supportati da `gemini-embedding-2`.
 
-Bạn có thể lưu trữ tệp và tạo các mục nhúng miễn phí tại thời điểm truy vấn, đồng thời chỉ phải trả phí khi tạo các mục nhúng trong lần đầu tiên lập chỉ mục tệp và chi phí mã thông báo đầu vào / đầu ra của mô hình Gemini thông thường. Mô hình thanh toán mới này giúp Công cụ tìm kiếm tệp dễ dàng hơn và tiết kiệm chi phí hơn khi xây dựng và mở rộng quy mô. Hãy xem phần [định giá](#pricing) để biết thông tin chi tiết.
+L'archiviazione dei file e la generazione di incorporamenti al momento della query sono senza costi e pagherai
+solo per la creazione di incorporamenti quando indicizzi per la prima volta i file e per il normale costo dei token di input / output del modello Gemini. Questo nuovo paradigma di fatturazione rende lo strumento di ricerca dei file più semplice ed economico da creare e scalare. Per i dettagli, consulta la sezione
+[Prezzi](#pricing).
 
-## Tải trực tiếp lên kho lưu trữ Tìm kiếm tệp
+## Caricare direttamente nello store di File Search
 
-Ví dụ này cho biết cách tải trực tiếp một tệp lên [kho lưu trữ tìm kiếm tệp](https://ai.google.dev/api/file-search/file-search-stores?hl=vi#method:-media.uploadtofilesearchstore):
+Questo esempio mostra come caricare direttamente un file nell'[archivio di ricerca dei file](https://ai.google.dev/api/file-search/file-search-stores?hl=it#method:-media.uploadtofilesearchstore):
 
 ### Python
 
@@ -122,11 +129,11 @@ async function run() {
 run();
 ```
 
-Hãy xem Tài liệu tham khảo API [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=vi#method:-media.uploadtofilesearchstore) để biết thêm thông tin.
+Per ulteriori informazioni, consulta il riferimento API per [`uploadToFileSearchStore`](https://ai.google.dev/api/file-search/file-search-stores?hl=it#method:-media.uploadtofilesearchstore).
 
-## Nhập tệp
+## Importazione di file
 
-Ngoài ra, bạn có thể tải một tệp hiện có lên và [nhập tệp đó vào kho lưu trữ tìm kiếm tệp](https://ai.google.dev/api/file-search/file-search-stores?hl=vi#method:-filesearchstores.importfile):
+In alternativa, puoi caricare un file esistente e [importarlo nell'archivio di ricerca dei file](https://ai.google.dev/api/file-search/file-search-stores?hl=it#method:-filesearchstores.importfile):
 
 ### Python
 
@@ -224,11 +231,14 @@ async function run() {
 run();
 ```
 
-Hãy xem Tài liệu tham khảo API [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=vi#method:-filesearchstores.importfile) để biết thêm thông tin.
+Per ulteriori informazioni, consulta il riferimento API per [`importFile`](https://ai.google.dev/api/file-search/file-search-stores?hl=it#method:-filesearchstores.importfile).
 
-## Cấu hình phân đoạn
+## Configurazione del chunking
 
-Khi bạn nhập một tệp vào một kho lưu trữ Tìm kiếm tệp, tệp đó sẽ tự động được chia thành các đoạn, được nhúng, lập chỉ mục và tải lên kho lưu trữ Tìm kiếm tệp của bạn. Nếu cần kiểm soát thêm về chiến lược phân đoạn, bạn có thể chỉ định chế độ cài đặt [`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=vi#request-body_5) để đặt số lượng mã thông báo tối đa cho mỗi đoạn và số lượng mã thông báo trùng lặp tối đa.
+Quando importi un file in un archivio di ricerca file, questo viene suddiviso automaticamente
+in blocchi, incorporato, indicizzato e caricato nell'archivio di ricerca file. Se
+hai bisogno di un maggiore controllo sulla strategia di suddivisione in blocchi, puoi specificare un'impostazione
+[`chunking_config`](https://ai.google.dev/api/file-search/file-search-stores?hl=it#request-body_5) per impostare un numero massimo di token per blocco e un numero massimo di token sovrapposti.
 
 ### Python
 
@@ -287,35 +297,62 @@ while (!operation.done) {
 console.log("Custom chunking complete.");
 ```
 
-Để sử dụng công cụ Tìm kiếm tệp, hãy truyền công cụ này dưới dạng một công cụ cho phương thức `generateContent`, như trong ví dụ [Tải lên](#upload) và [Nhập](#importing-files).
+Per utilizzare il tuo datastore di ricerca file, passalo come strumento al metodo `generateContent`, come mostrato negli esempi di [caricamento](#upload) e [importazione](#importing-files).
 
-## Cách hoạt động
+## Come funziona
 
-Tính năng Tìm kiếm tệp sử dụng một kỹ thuật gọi là tìm kiếm ngữ nghĩa để tìm thông tin liên quan đến câu lệnh của người dùng. Không giống như tìm kiếm dựa trên từ khoá thông thường, tìm kiếm ngữ nghĩa hiểu được ý nghĩa và bối cảnh của cụm từ tìm kiếm.
+La ricerca di file utilizza una tecnica chiamata ricerca semantica per trovare informazioni pertinenti
+al prompt dell'utente. A differenza della ricerca standard basata su parole chiave, la ricerca semantica
+comprende il significato e il contesto della query.
 
-Khi bạn nhập một tệp, tệp đó sẽ được chuyển đổi thành các biểu diễn bằng số gọi là [embedding](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi) (mã nhúng), giúp nắm bắt ý nghĩa ngữ nghĩa của nội dung được tải lên. Các vectơ nhúng này được lưu trữ trong một cơ sở dữ liệu Tìm kiếm tệp chuyên biệt.
-Khi bạn đưa ra một câu hỏi, câu hỏi đó cũng sẽ được chuyển đổi thành một vectơ nhúng. Sau đó, hệ thống sẽ thực hiện một thao tác Tìm kiếm tệp để tìm các đoạn tài liệu tương tự và phù hợp nhất trong kho lưu trữ Tìm kiếm tệp.
+Quando importi un file, questo viene convertito in rappresentazioni numeriche chiamate
+[embedding](https://ai.google.dev/gemini-api/docs/embeddings?hl=it), che acquisiscono il significato semantico
+dei contenuti caricati. Questi embedding vengono archiviati in un database di ricerca file specializzato.
+Quando esegui una query, viene convertita anche in un embedding. Il sistema
+esegue quindi una ricerca di file per trovare i blocchi di documenti più simili e pertinenti
+nell'archivio della ricerca di file.
 
-Không có Thời gian tồn tại (TTL) cho các mục nhúng; các mục này sẽ tồn tại cho đến khi bị xoá theo cách thủ công hoặc khi mô hình không còn được dùng nữa. Tuy nhiên, các tệp sẽ bị xoá sau 48 giờ.
+Non esiste un Time To Live (TTL) per gli incorporamenti;
+rimangono visibili finché non vengono eliminati manualmente o quando il modello viene ritirato. I file,
+tuttavia, vengono eliminati dopo 48 ore.
 
-Sau đây là thông tin chi tiết về quy trình sử dụng API Tìm kiếm tệp `uploadToFileSearchStore`:
+Di seguito è riportata una suddivisione della procedura per l'utilizzo dell'API File Search
+`uploadToFileSearchStore`:
 
-1. **Tạo một kho lưu trữ Tìm kiếm tệp**: Kho lưu trữ Tìm kiếm tệp chứa dữ liệu đã xử lý từ các tệp của bạn. Đây là vùng chứa liên tục cho các mục nhúng mà tính năng tìm kiếm ngữ nghĩa sẽ hoạt động.
-2. **Tải tệp lên và nhập vào một kho lưu trữ Tìm kiếm tệp**: Tải đồng thời một tệp lên và nhập kết quả vào kho lưu trữ Tìm kiếm tệp. Thao tác này sẽ tạo một đối tượng `File` tạm thời, là một tham chiếu đến tài liệu thô của bạn. Sau đó, dữ liệu đó sẽ được chia thành các khối, chuyển đổi thành các thành phần nhúng Tìm kiếm tệp và được lập chỉ mục. Đối tượng `File` sẽ bị xoá sau 48 giờ, trong khi dữ liệu được nhập vào kho lưu trữ Tìm kiếm tệp sẽ được lưu trữ vô thời hạn cho đến khi bạn chọn xoá dữ liệu đó.
-3. **Truy vấn bằng tính năng Tìm kiếm tệp**: Cuối cùng, bạn sử dụng công cụ `FileSearch` trong lệnh gọi `generateContent`. Trong cấu hình công cụ, bạn chỉ định một `FileSearchRetrievalResource`, trỏ đến `FileSearchStore` mà bạn muốn tìm kiếm. Điều này yêu cầu mô hình thực hiện một tìm kiếm ngữ nghĩa trên Kho lưu trữ tìm kiếm tệp cụ thể đó để tìm thông tin liên quan nhằm đưa ra câu trả lời.
+1. **Crea un datastore di ricerca file**: un datastore di ricerca file contiene i dati elaborati
+   dai tuoi file. È il contenitore persistente per gli embedding su cui
+   opererà la ricerca semantica.
+2. **Caricare un file e importarlo in un archivio di ricerca file**: carica contemporaneamente
+   un file e importa i risultati nell'archivio di ricerca file. Viene creato un
+   oggetto `File` temporaneo, che è un riferimento al documento non elaborato. Questi dati vengono
+   poi suddivisi in blocchi, convertiti in embedding di File Search e indicizzati. L'oggetto `File`
+   viene eliminato dopo 48 ore, mentre i dati importati nell'archivio di ricerca dei file
+   vengono archiviati a tempo indeterminato finché non decidi di eliminarli.
+3. **Query con la ricerca di file**: infine, utilizzi lo strumento `FileSearch` in una chiamata `generateContent`. Nella configurazione dello strumento, specifichi un
+   `FileSearchRetrievalResource`, che punta al `FileSearchStore` che vuoi
+   cercare. In questo modo, il modello esegue una ricerca semantica in quell'archivio specifico di ricerca di file per trovare informazioni pertinenti su cui basare la risposta.
 
-![Quy trình lập chỉ mục và truy vấn của tính năng Tìm kiếm tệp](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=vi)
+![Il processo di indicizzazione ed esecuzione di query di Ricerca file](https://ai.google.dev/static/gemini-api/docs/images/File-search.png?hl=it)
 
-Quy trình lập chỉ mục và truy vấn của tính năng Tìm kiếm tệp
+Il processo di indicizzazione e query di Ricerca file
 
-Trong sơ đồ này, đường nét đứt từ *Documents* (Tài liệu) đến *Embedding model* (Mô hình nhúng) (sử dụng [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=vi)) biểu thị API `uploadToFileSearchStore` (bỏ qua *File storage* (Bộ nhớ tệp)).
-Nếu không, việc sử dụng [Files API](https://ai.google.dev/gemini-api/docs/files?hl=vi) để tạo riêng rồi nhập tệp sẽ chuyển quy trình lập chỉ mục từ *Documents* sang *File storage* rồi đến *Embedding model*.
+In questo diagramma, la linea tratteggiata da *Documenti* a *Modello di incorporamento*
+(utilizzando [`gemini-embedding-001`](https://ai.google.dev/gemini-api/docs/embeddings?hl=it))
+rappresenta l'API `uploadToFileSearchStore` (ignorando *Archiviazione file*).
+In caso contrario, l'utilizzo dell'[API Files](https://ai.google.dev/gemini-api/docs/files?hl=it) per creare
+e poi importare separatamente i file sposta il processo di indicizzazione da *Documenti* a
+*Spazio di archiviazione file* e poi al *modello di incorporamento*.
 
-## Tìm kiếm trong các tệp
+## Negozi di ricerca file
 
-Kho lưu trữ Tìm kiếm tệp là một vùng chứa cho các vectơ nhúng tài liệu của bạn. Mặc dù các tệp thô được tải lên thông qua File API sẽ bị xoá sau 48 giờ, nhưng dữ liệu được nhập vào một kho lưu trữ Tìm kiếm tệp sẽ được lưu trữ vô thời hạn cho đến khi bạn xoá theo cách thủ công. Bạn có thể tạo nhiều kho lưu trữ Tìm kiếm tệp để sắp xếp tài liệu. API `FileSearchStore` cho phép bạn tạo, liệt kê, nhận và xoá để quản lý các kho lưu trữ tìm kiếm tệp. Tên cửa hàng Tìm kiếm tệp có phạm vi trên toàn cầu.
+Un archivio di ricerca file è un contenitore per gli incorporamenti dei documenti. Mentre i file non elaborati
+caricati tramite l'API File vengono eliminati dopo 48 ore, i dati importati in
+un archivio di ricerca file vengono archiviati a tempo indeterminato finché non li elimini manualmente. Puoi
+creare più archivi di ricerca file per organizzare i tuoi documenti. L'API
+`FileSearchStore` consente di creare, elencare, ottenere ed eliminare per gestire i tuoi archivi di ricerca
+di file. I nomi degli store di Ricerca file hanno ambito globale.
 
-Sau đây là một số ví dụ về cách quản lý các cửa hàng trong tính năng Tìm kiếm tệp:
+Ecco alcuni esempi di come gestire i negozi di Ricerca file:
 
 ### Python
 
@@ -374,9 +411,12 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_search-store-123?key=${GEMINI_API_KEY}"
 ```
 
-## Tài liệu về tính năng Tìm kiếm tệp
+## Documenti di ricerca file
 
-Bạn có thể quản lý từng tài liệu trong kho lưu trữ tệp bằng API [File Search Documents](https://ai.google.dev/api/file-search/documents?hl=vi) để `list` từng tài liệu trong kho lưu trữ tìm kiếm tệp, `get` thông tin về một tài liệu và `delete` một tài liệu theo tên.
+Puoi gestire i singoli documenti nei tuoi archivi di file con l'API
+[File Search Documents](https://ai.google.dev/api/file-search/documents?hl=it) per `list` ogni documento
+in un archivio di ricerca di file, `get` informazioni su un documento e `delete` un
+documento per nome.
 
 ### Python
 
@@ -419,9 +459,10 @@ curl "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_
 curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/fileSearchStores/my-file_search-store-123/documents/my_doc?key=${GEMINI_API_KEY}"
 ```
 
-## Siêu dữ liệu của tệp
+## File di metadati
 
-Bạn có thể thêm siêu dữ liệu tuỳ chỉnh vào tệp để lọc tệp hoặc cung cấp thêm bối cảnh. Siêu dữ liệu là một tập hợp các cặp khoá-giá trị.
+Puoi aggiungere metadati personalizzati ai tuoi file per filtrarli o fornire
+un contesto aggiuntivo. I metadati sono un insieme di coppie chiave-valore.
 
 ### Python
 
@@ -451,7 +492,8 @@ let operation = await ai.fileSearchStores.importFile({
 });
 ```
 
-Điều này sẽ hữu ích khi bạn có nhiều tài liệu trong một kho lưu trữ Tìm kiếm tệp và chỉ muốn tìm kiếm một số tài liệu trong số đó.
+È utile quando hai più documenti in un archivio di ricerca file e vuoi
+cercare solo un sottoinsieme.
 
 ### Python
 
@@ -516,15 +558,18 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 cat response.json
 ```
 
-Bạn có thể xem hướng dẫn về cách triển khai cú pháp bộ lọc danh sách cho `metadata_filter` tại [google.aip.dev/160](https://google.aip.dev/160)
+Le indicazioni per l'implementazione della sintassi dei filtri di elenco per `metadata_filter` sono disponibili
+all'indirizzo [google.aip.dev/160](https://google.aip.dev/160)
 
-## Tìm kiếm tệp đa phương thức
+## Ricerca multimodale di file
 
-Tính năng Tìm kiếm tệp đa phương thức cho phép bạn nhúng và tìm kiếm hình ảnh một cách tự nhiên, từ đó tạo ra các ứng dụng RAG đa phương thức phong phú.
+La ricerca file multimodale consente di incorporare e cercare in modo nativo le immagini,
+consentendo applicazioni RAG multimodali avanzate.
 
-### Định cấu hình mô hình nhúng
+### Configura il modello di embedding
 
-Khi tạo `FileSearchStore`, bạn phải ghi đè mô hình nhúng chỉ có văn bản mặc định để sử dụng mô hình đa phương thức. Sử dụng `models/gemini-embedding-2` để xử lý cả văn bản và hình ảnh.
+Quando crei un `FileSearchStore`, devi sostituire il modello di incorporamento predefinito solo testuale per utilizzare un modello multimodale. Utilizza `models/gemini-embedding-2` per
+elaborare sia testo che immagini.
 
 ### Python
 
@@ -559,20 +604,24 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/fileSearchStores?
     }'
 ```
 
-### Tải hình ảnh lên
+### Carica immagini
 
-Sau khi tạo kho lưu trữ bằng mô hình nhúng đa phương thức, bạn có thể tải trực tiếp các tệp hình ảnh lên bằng cách sử dụng cùng một API tải lên được mô tả trong phần [Tải trực tiếp lên kho lưu trữ Tìm kiếm tệp](#upload) hoặc [Nhập tệp](#importing-files).
+Dopo aver creato l'archivio con un modello di incorporamento multimodale, puoi caricare
+i file immagine direttamente utilizzando le stesse API di caricamento descritte in
+[Caricamento diretto nell'archivio di ricerca file](#upload) o [Importazione di file](#importing-files).
 
-**Yêu cầu đối với tệp hình ảnh:**
+**Requisiti dei file immagine:**
 
-- Tệp hình ảnh phải có độ phân giải tối đa là 4K x 4K pixel.
-- Các định dạng được hỗ trợ là PNG, JPEG.
+- I file immagine devono avere una risoluzione massima di 4000 x 4000 pixel.
+- I formati supportati sono PNG e JPEG.
 
-## Trích dẫn
+## Citazioni
 
-Khi bạn sử dụng tính năng Tìm kiếm tệp, câu trả lời của mô hình có thể bao gồm các trích dẫn nêu rõ những phần nào trong tài liệu bạn tải lên được dùng để tạo câu trả lời. Điều này giúp ích cho việc kiểm chứng và xác minh.
+Quando utilizzi la ricerca di file, la risposta del modello potrebbe includere citazioni che
+specificano quali parti dei documenti caricati sono state utilizzate per generare la
+risposta. Ciò favorisce la verifica dei fatti.
 
-Bạn có thể truy cập thông tin trích dẫn thông qua thuộc tính `grounding_metadata` của phản hồi.
+Puoi accedere alle informazioni sulle citazioni tramite l'attributo `grounding_metadata` della risposta.
 
 ### Python
 
@@ -586,12 +635,14 @@ print(response.candidates[0].grounding_metadata)
 console.log(JSON.stringify(response.candidates?.[0]?.groundingMetadata, null, 2));
 ```
 
-Để biết thông tin chi tiết về cấu trúc của siêu dữ liệu cơ sở, hãy xem các ví dụ trong [Sổ tay Tìm kiếm tệp](https://github.com/google-gemini/cookbook/blob/main/quickstarts/File_Search.ipynb) hoặc [phần cơ sở của tài liệu Cơ sở với Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi#attributing_sources_with_inline_citations).
+Per informazioni dettagliate sulla struttura dei metadati di grounding, consulta gli esempi nel [cookbook di Ricerca file](https://github.com/google-gemini/cookbook/blob/main/quickstarts/File_Search.ipynb) o la [sezione sul grounding della documentazione di Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it#attributing_sources_with_inline_citations).
 
-### Số trang
+### Numeri di pagina
 
-Khi bạn sử dụng tính năng Tìm kiếm tệp với những tài liệu có trang (chẳng hạn như tệp PDF), câu trả lời của mô hình có thể bao gồm số trang nơi thông tin được tìm thấy.
-Bạn có thể truy cập vào thông tin này thông qua thuộc tính `page_number` của `retrieved_context`.
+Quando utilizzi la ricerca file con documenti che hanno pagine (come i PDF), la
+risposta del modello può includere il numero di pagina in cui sono state trovate le informazioni.
+Puoi accedere a queste informazioni tramite l'attributo `page_number` di
+`retrieved_context`.
 
 ### Python
 
@@ -613,11 +664,15 @@ for (const chunk of groundingMetadata.groundingChunks) {
 }
 ```
 
-### Trích dẫn nội dung nghe nhìn
+### Citazioni di contenuti multimediali
 
-Khi mô hình tham chiếu một khối hình ảnh trong quá trình tạo, API sẽ trả về một trích dẫn trong siêu dữ liệu cơ sở, bao gồm cả `media_id`. Bạn có thể sử dụng mã nhận dạng này để tải chính xác đoạn hình ảnh mà mô hình đã tham chiếu. `media_id` này vẫn tồn tại trong nhiều lệnh gọi tìm kiếm, cho phép bạn truy xuất cùng một hình ảnh một cách đáng tin cậy hoặc lưu vào bộ nhớ đệm bằng mã nhận dạng.
+Quando il modello fa riferimento a un blocco di immagini durante la generazione, l'API restituisce una
+citazione nei metadati di fondatezza che include un `media_id`. Puoi utilizzare questo
+ID per scaricare il blocco di immagini esatto a cui fa riferimento il modello. Questo `media_id` è
+persistente in più chiamate di ricerca, il che ti consente di recuperare in modo affidabile
+la stessa immagine o memorizzarla nella cache utilizzando l'ID.
 
-Đoạn mã sau đây là một ví dụ về phản hồi REST:
+Il seguente snippet è un esempio di risposta REST:
 
 ```
 "groundingMetadata": {
@@ -633,7 +688,8 @@ Khi mô hình tham chiếu một khối hình ảnh trong quá trình tạo, API
 }
 ```
 
-Các đoạn mã sau đây minh hoạ cách truy xuất `media_id` và tải nội dung nghe nhìn xuống:
+I seguenti snippet di codice mostrano come recuperare `media_id` e
+scaricare i contenuti multimediali:
 
 ### Python
 
@@ -669,9 +725,12 @@ curl -X GET "https://generativelanguage.googleapis.com/v1/fileSearchStores/my-st
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Siêu dữ liệu tuỳ chỉnh trong dữ liệu cơ sở
+## Metadati personalizzati nei dati di grounding
 
-Nếu đã thêm siêu dữ liệu tuỳ chỉnh vào tệp, bạn có thể truy cập vào siêu dữ liệu cơ sở của phản hồi của mô hình. Điều này hữu ích cho việc truyền thêm ngữ cảnh (chẳng hạn như URL, số trang hoặc tác giả) từ tài liệu nguồn sang logic ứng dụng của bạn. Mỗi `grounding_chunk` trong `retrieved_context` chứa siêu dữ liệu tuỳ chỉnh này.
+Se hai aggiunto metadati personalizzati ai tuoi file, puoi accedervi nei
+metadati di base della risposta del modello. Questo è utile per passare
+ulteriore contesto (come URL, numeri di pagina o autori) dai documenti di origine
+alla logica dell'applicazione. Ogni `grounding_chunk` in `retrieved_context` contiene questi metadati personalizzati.
 
 ### Python
 
@@ -764,9 +823,10 @@ groundingMetadata.groundingChunks.forEach((chunk) => {
 }
 ```
 
-## Đầu ra có cấu trúc
+## Output strutturato
 
-Bắt đầu từ các mô hình Gemini 3, bạn có thể kết hợp công cụ tìm kiếm tệp với [đầu ra có cấu trúc](https://ai.google.dev/gemini-api/docs/structured-output?hl=vi).
+A partire dai modelli Gemini 3, puoi combinare lo strumento di ricerca dei file con
+[output strutturati](https://ai.google.dev/gemini-api/docs/structured-output?hl=it).
 
 ### Python
 
@@ -864,30 +924,31 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
   }'
 ```
 
-## Mô hình được hỗ trợ
+## Modelli supportati
 
-Các mô hình sau đây hỗ trợ tính năng Tìm kiếm tệp:
+I seguenti modelli supportano la ricerca di file:
 
-| Mô hình | Tìm kiếm tệp |
+| Modello | Ricerca file |
 | --- | --- |
-| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=vi) | ✔️ |
-| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=vi) | ✔️ |
-| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=vi) | ✔️ |
-| [Bản dùng thử Gemini 3.1 Pro](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=vi) | ✔️ |
-| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=vi) | ✔️ |
-| [Bản dùng thử Gemini 3 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=vi) | ✔️ |
-| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=vi) | ✔️ |
-| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=vi) | ✔️ |
+| [Gemini 3.6 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.6-flash?hl=it) | ✔️ |
+| [Gemini 3.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite?hl=it) | ✔️ |
+| [Gemini 3.5 Flash](https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash?hl=it) | ✔️ |
+| [Gemini 3.1 Pro (anteprima)](https://ai.google.dev/gemini-api/docs/gemini-3.1-pro-preview?hl=it) | ✔️ |
+| [Gemini 3.1 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite?hl=it) | ✔️ |
+| [Gemini 3 Flash (anteprima)](https://ai.google.dev/gemini-api/docs/models/gemini-3-flash-preview?hl=it) | ✔️ |
+| [Gemini 2.5 Pro](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-pro?hl=it) | ✔️ |
+| [Gemini 2.5 Flash-Lite](https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite?hl=it) | ✔️ |
 
-## Các tổ hợp công cụ được hỗ trợ
+## Combinazioni di strumenti supportate
 
-Các mô hình Gemini 3 hỗ trợ kết hợp các công cụ tích hợp (như Tìm kiếm tệp) với các công cụ tuỳ chỉnh (gọi hàm). Tìm hiểu thêm trên trang [các tổ hợp công cụ](https://ai.google.dev/gemini-api/docs/tool-combination?hl=vi).
+I modelli Gemini 3 supportano la combinazione di strumenti integrati (come la ricerca di file) con strumenti personalizzati (chiamata di funzione). Scopri di più nella pagina
+[Combinazioni di strumenti](https://ai.google.dev/gemini-api/docs/tool-combination?hl=it).
 
-## Các loại tệp được hỗ trợ
+## Tipi di file supportati
 
-Tính năng Tìm kiếm tệp hỗ trợ nhiều định dạng tệp, được liệt kê trong các phần sau.
+La ricerca di file supporta un'ampia gamma di formati di file, elencati nelle sezioni seguenti.
 
-### Các loại tệp ứng dụng
+### Tipi di file dell'applicazione
 
 - `application/dart`
 - `application/ecmascript`
@@ -920,7 +981,7 @@ Tính năng Tìm kiếm tệp hỗ trợ nhiều định dạng tệp, được 
 - `application/xml`
 - `application/zip`
 
-### Loại tệp văn bản
+### Tipi di file di testo
 
 - `text/1d-interleaved-parityfec`
 - `text/RED`
@@ -1079,40 +1140,41 @@ Tính năng Tìm kiếm tệp hỗ trợ nhiều định dạng tệp, được 
 - `text/xml-external-parsed-entity`
 - `text/yaml`
 
-## Các điểm hạn chế
+## Limitazioni
 
-- **Live API:** File Search không được hỗ trợ trong [Live API](https://ai.google.dev/gemini-api/docs/live?hl=vi).
-- **Không tương thích với các công cụ:** Hiện tại, bạn không thể kết hợp tính năng Tìm kiếm tệp với các công cụ khác như [Neo bám vào Google Tìm kiếm](https://ai.google.dev/gemini-api/docs/google-search?hl=vi), [Bối cảnh từ URL](https://ai.google.dev/gemini-api/docs/url-context?hl=vi), v. v.
+- **API Live**:la ricerca di file non è supportata nell'[API Live](https://ai.google.dev/gemini-api/docs/live?hl=it).
+- **Incompatibilità degli strumenti**:al momento, la ricerca di file non può essere combinata con altri strumenti come [Grounding con la Ricerca Google](https://ai.google.dev/gemini-api/docs/google-search?hl=it), [Contesto URL](https://ai.google.dev/gemini-api/docs/url-context?hl=it) e così via.
 
-### Giới hạn số lượng yêu cầu
+### Limiti di frequenza
 
-File Search API có các giới hạn sau để đảm bảo tính ổn định của dịch vụ:
+L'API File Search presenta i seguenti limiti per garantire la stabilità del servizio:
 
-- **Kích thước tệp tối đa / giới hạn cho mỗi tài liệu**: 100 MB
-- **Tổng kích thước của bộ nhớ Tìm kiếm tệp dự án** (dựa trên cấp người dùng):
-  - **Miễn phí**: 1 GB
-  - **Cấp 1**: 10 GB
-  - **Bậc 2**: 100 GB
-  - **Bậc 3**: 1 TB
-- **Đề xuất**: Giới hạn kích thước của mỗi kho lưu trữ Tìm kiếm tệp ở mức dưới 20 GB để đảm bảo độ trễ truy xuất tối ưu.
+- **Dimensioni massime del file / limite per documento**: 100 MB
+- **Dimensioni totali degli archivi di ricerca dei file di progetto** (in base al livello utente):
+  - **Senza costi**: 1 GB
+  - **Livello 1**: 10 GB
+  - **Livello 2**: 100 GB
+  - **Livello 3**: 1 TB
+- **Suggerimento**: limita le dimensioni di ogni datastore di ricerca file a meno di 20 GB per garantire latenze di recupero ottimali.
 
-## Giá
+## Prezzi
 
-- Bạn sẽ bị tính phí cho các mục nhúng tại thời điểm lập chỉ mục dựa trên [mức giá hiện tại cho mục nhúng](https://ai.google.dev/gemini-api/docs/pricing?hl=vi#gemini-embedding-2).
-- Dịch vụ lưu trữ không tính phí.
-- Bạn không mất phí khi sử dụng tính năng nhúng thời gian truy vấn.
-- Các mã thông báo tài liệu đã truy xuất sẽ bị tính phí như [mã thông báo ngữ cảnh](https://ai.google.dev/gemini-api/docs/tokens?hl=vi) thông thường.
+- L'addebito per gli incorporamenti avviene al momento dell'indicizzazione in base ai [prezzi degli incorporamenti](https://ai.google.dev/gemini-api/docs/pricing?hl=it#gemini-embedding-2) esistenti.
+- Il deposito è senza costi.
+- Gli embedding al momento della query non prevedono costi.
+- I token del documento recuperati vengono addebitati come
+  [token di contesto](https://ai.google.dev/gemini-api/docs/tokens?hl=it) normali.
 
-## Bước tiếp theo
+## Passaggi successivi
 
-- Truy cập vào tài liệu tham khảo API cho [File Search Stores](https://ai.google.dev/api/file-search/file-search-stores?hl=vi) và [Documents](https://ai.google.dev/api/file-search/documents?hl=vi) (Tài liệu) của File Search.
+- Visita il riferimento API per [File Search Stores](https://ai.google.dev/api/file-search/file-search-stores?hl=it) e File Search [Documents](https://ai.google.dev/api/file-search/documents?hl=it).
 
-Gửi ý kiến phản hồi
+Invia feedback
 
-Trừ phi có lưu ý khác, nội dung của trang này được cấp phép theo [Giấy phép ghi nhận tác giả 4.0 của Creative Commons](https://creativecommons.org/licenses/by/4.0/) và các mẫu mã lập trình được cấp phép theo [Giấy phép Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Để biết thông tin chi tiết, vui lòng tham khảo [Chính sách trang web của Google Developers](https://developers.google.com/site-policies?hl=vi). Java là nhãn hiệu đã đăng ký của Oracle và/hoặc các đơn vị liên kết với Oracle.
+Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
 
-Cập nhật lần gần đây nhất: 2026-07-30 UTC.
+Ultimo aggiornamento 2026-07-30 UTC.
 
-Bạn muốn chia sẻ thêm với chúng tôi?
+Vuoi dirci altro?
 
-[[["Dễ hiểu","easyToUnderstand","thumb-up"],["Giúp tôi giải quyết được vấn đề","solvedMyProblem","thumb-up"],["Khác","otherUp","thumb-up"]],[["Thiếu thông tin tôi cần","missingTheInformationINeed","thumb-down"],["Quá phức tạp/quá nhiều bước","tooComplicatedTooManySteps","thumb-down"],["Đã lỗi thời","outOfDate","thumb-down"],["Vấn đề về bản dịch","translationIssue","thumb-down"],["Vấn đề về mẫu/mã","samplesCodeIssue","thumb-down"],["Khác","otherDown","thumb-down"]],["Cập nhật lần gần đây nhất: 2026-07-30 UTC."],[],[]]
+[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-07-30 UTC."],[],[]]

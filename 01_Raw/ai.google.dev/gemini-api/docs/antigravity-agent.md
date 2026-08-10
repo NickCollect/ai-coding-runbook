@@ -1,26 +1,26 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de
-fetched_at: 2026-08-03T04:35:00.174752+00:00
-title: "Antigravity-Agent \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=id
+fetched_at: 2026-08-10T03:15:02.514641+00:00
+title: "Agen Antigravitasi \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Feedback geben
+Kirim masukan
 
-# Antigravity-Agent
+# Agen Antigravitasi
 
-Der Antigravity-Agent ist ein verwalteter Mehrzweck-Agent in der Gemini API. Mit einem einzigen API-Aufruf erhalten Sie einen Agenten, der in Ihrer eigenen sicheren Linux-Sandbox, die von Google gehostet wird, Schlussfolgerungen zieht, Code ausführt, Dateien verwaltet und im Web surft.
+Agen Antigravity adalah agen terkelola tujuan umum di Gemini API. Satu panggilan API memberi Anda agen yang dapat melakukan penalaran, mengeksekusi kode, mengelola file, dan menjelajahi web di dalam sandbox Linux aman Anda sendiri, yang dihosting oleh Google.
 
-Es basiert auf Gemini 3.6 Flash und verwendet dieselbe Harness wie die Antigravity IDE. Sie können das zugrunde liegende Gemini-Modell mit `agent_config` konfigurieren. Über die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) und [Google AI Studio](https://aistudio.google.com?hl=de) verfügbar.
+Gemini Code Assist didukung oleh Gemini 3.6 Flash dan menggunakan harness yang sama dengan Antigravity IDE. Anda dapat mengonfigurasi model Gemini yang mendasarinya menggunakan `agent_config`. Tersedia melalui [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) dan [Google AI Studio](https://aistudio.google.com?hl=id).
 
 ### Python
 
@@ -67,33 +67,33 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Leistungsspektrum
+## Kemampuan
 
-Bei jedem Aufruf kann eine Linux-Sandbox bereitgestellt und ein Tool-Nutzungszyklus gestartet werden. Der Agent plant, handelt, beobachtet die Ergebnisse und wiederholt den Vorgang, bis die Aufgabe erledigt ist.
+Setiap panggilan dapat menyediakan sandbox Linux dan memulai loop penggunaan alat. Agen merencanakan, bertindak, mengamati hasil, dan mengulangi hingga tugas selesai.
 
-- **Code-Ausführung**:Bash-, Python- und Node.js-Befehle ausführen. Pakete installieren, Tests ausführen, Apps erstellen
-- **Dateiverwaltung**:Dateien in der Sandbox lesen, schreiben, bearbeiten, suchen und auflisten. Dateien bleiben über Interaktionen hinweg erhalten.
-- **Webzugriff**:Google Suche und Abrufen von URLs für Daten.
-- **Kontextverdichtung**:Automatische Kontextverdichtung (wird bei etwa 135.000 Tokens ausgelöst), um lange Mehrfachdialog-Sitzungen zu unterstützen, ohne dass der Kontext verloren geht oder Tokenlimits erreicht werden.
+- **Eksekusi kode:** Jalankan perintah Bash, Python, dan Node.js. Menginstal paket, menjalankan pengujian, membangun aplikasi.
+- **Pengelolaan file:** Membaca, menulis, mengedit, menelusuri, dan mencantumkan file di sandbox. File tetap ada di seluruh interaksi.
+- **Akses web:** Google Penelusuran dan pengambilan URL untuk data.
+- **Pemadatan konteks:** Pemadatan konteks otomatis (dipicu pada ~135 ribu token) untuk mendukung sesi multi-turn yang berjalan lama tanpa kehilangan konteks atau mencapai batas token.
 
-Informationen zur Verwendung in mehreren Durchgängen und zum Streaming finden Sie in der [Kurzanleitung](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de).
+Lihat [Panduan memulai](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=id) untuk penggunaan dan streaming multi-giliran.
 
-## Unterstützte Tools
+## Alat yang didukung
 
-Standardmäßig hat der Agent Zugriff auf `code_execution`, `google_search` und `url_context`. Dateisystemtools werden automatisch aktiviert, wenn Sie den Parameter `environment` angeben. Sie können auch **benutzerdefinierte Funktionen** definieren, um den Agent mit Ihren eigenen APIs und Tools zu verbinden. Sie müssen den Parameter `tools` nur angeben, wenn Sie den Standardsatz anpassen oder einschränken oder benutzerdefinierte Funktionen hinzufügen möchten.
+Secara default, agen memiliki akses ke `code_execution`, `google_search`, dan `url_context`. Alat sistem file diaktifkan secara otomatis saat Anda menentukan parameter `environment`. Anda juga dapat menentukan **fungsi kustom** untuk menghubungkan agen ke API dan alat Anda sendiri. Anda hanya perlu menentukan parameter `tools` saat menyesuaikan atau membatasi set default, atau saat menambahkan fungsi kustom.
 
-| Tool | Typwert | Beschreibung |
+| Alat | Nilai jenis | Deskripsi |
 | --- | --- | --- |
-| Codeausführung | `code_execution` | Shell-Befehle (Bash, Python, Node) mit stdout/stderr-Erfassung ausführen. |
-| Google Suche | `google_search` | Im öffentlichen Web suchen |
-| URL-Kontext | `url_context` | Webseiten abrufen und lesen |
-| Dateisystem | *(über `environment` aktiviert)* | Dateien in der Sandbox lesen, schreiben, bearbeiten, suchen und auflisten Das System aktiviert diese Tools automatisch, wenn Sie `environment` festlegen. |
-| Benutzerdefinierte Funktionen | `function` | Definieren Sie benutzerdefinierte Funktionen, die der Agent ausführen kann. [Weitere Informationen](#function-calling) |
-| Remote-MCP-Server | `mcp_server` | Externe MCP-Server (Model Context Protocol) als Tools registrieren [Weitere Informationen](#mcp-servers) |
+| Eksekusi Kode | `code_execution` | Jalankan perintah shell (bash, Python, Node) dengan pengambilan stdout/stderr. |
+| Google Penelusuran | `google_search` | Telusuri web publik. |
+| Konteks URL | `url_context` | Mengambil dan membaca halaman web. |
+| Filesystem | *(diaktifkan melalui `environment`)* | Membaca, menulis, mengedit, menelusuri, dan mencantumkan file di sandbox. Sistem mengaktifkan alat ini secara otomatis saat Anda menyetel `environment`. |
+| Fungsi Kustom | `function` | Tentukan fungsi kustom yang dapat diminta agen untuk dieksekusi. Lihat [Pemanggilan fungsi](#function-calling). |
+| Server MCP Jarak Jauh | `mcp_server` | Mendaftarkan server Model Context Protocol (MCP) eksternal sebagai alat. Lihat [server MCP](#mcp-servers). |
 
-Sie können die Ausführung von `code_execution`- und `filesystem`-Tools direkt in der Remote-Sandbox mit synchronen [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=de) abfangen und validieren.
+Anda dapat mencegat dan memvalidasi eksekusi alat `code_execution` dan `filesystem` langsung di dalam sandbox jarak jauh menggunakan [Hook](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=id) sinkron.
 
-Wenn Sie den Agent auf bestimmte Tools beschränken möchten, übergeben Sie nur die benötigten:
+Untuk membatasi agen ke alat tertentu, teruskan hanya alat yang Anda butuhkan:
 
 ### Python
 
@@ -152,9 +152,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }'
 ```
 
-## Multimodale Eingabe
+## Input Multimodal
 
-Der Antigravity-Agent unterstützt multimodale Eingaben. Derzeit werden nur `text`- und `image`-Eingaben unterstützt. Bilder müssen als Inline-Base64-codierte Strings (`data`) angegeben werden.
+Agen Antigravity mendukung input multimodal. Saat ini, hanya input `text` dan `image` yang didukung. Gambar harus diberikan sebagai string berenkode base64 inline (`data`).
 
 ### Python
 
@@ -227,11 +227,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }"
 ```
 
-## Funktionsaufrufe
+## Panggilan fungsi
 
-Mit Funktionsaufrufen können Sie den Antigravity-Agenten mit externen APIs und Datenbanken verbinden, indem Sie benutzerdefinierte Tools definieren, die der Agent aufrufen kann. Allgemeine Konzepte finden Sie unter [Funktionsaufrufe mit der Gemini API](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=de).
+Panggilan fungsi memungkinkan Anda menghubungkan agen Antigravity ke API dan database eksternal dengan menentukan alat kustom yang dapat dipanggil agen. Untuk mengetahui konsep umumnya, lihat [Panggilan fungsi dengan Gemini API](https://ai.google.dev/gemini-api/docs/interactions/function-calling?hl=id).
 
-Das folgende Beispiel zeigt eine Interaktion mit zwei Zügen. Der Agent fordert zuerst einen benutzerdefinierten `get_weather`-Funktionsaufruf an. Der Client führt ihn aus und gibt das Ergebnis im zweiten Zug zurück.
+Contoh berikut menunjukkan interaksi 2 putaran. Agen pertama-tama meminta panggilan fungsi `get_weather` kustom, dan klien mengeksekusinya serta menampilkan hasilnya pada giliran kedua.
 
 ### Python
 
@@ -445,19 +445,19 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-## MCP-Server
+## Server MCP
 
-Sie können den Antigravity-Agent mit externen Tools verbinden, indem Sie Remote-MCP-Server (Model Context Protocol) registrieren. Der Agent unterstützt Remote-MCP-Server über streamfähiges HTTP.
+Anda dapat menghubungkan agen Antigravity ke alat eksternal dengan mendaftarkan server Model Context Protocol (MCP) jarak jauh. Agen mendukung server MCP jarak jauh melalui HTTP yang dapat di-streaming.
 
-Wenn Sie einen MCP-Server registrieren, müssen Sie die folgenden Felder im `tools`-Array angeben:
+Saat mendaftarkan server MCP, Anda harus menentukan kolom berikut dalam array `tools`:
 
-| Feld | Typ | Erforderlich | Beschreibung |
+| Kolom | Jenis | Wajib diisi | Deskripsi |
 | --- | --- | --- | --- |
-| `type` | String | Ja | Muss `"mcp_server"` lauten. |
-| `name` | String | Ja | Eine eindeutige Kennung für den Server. Muss ausschließlich aus Kleinbuchstaben und alphanumerischen Zeichen bestehen (entsprechend `^[a-z0-9_-]+$`). |
-| `url` | String | Ja | Die Endpunkt-URL des Remote-MCP-Servers. |
-| `headers` | Objekt | Nein | Benutzerdefinierte Header (z.B. zur Authentifizierung), die mit Anfragen gesendet werden. |
-| `allowed_tools` | Array | Nein | Liste der Toolnamen, die ausgeführt werden dürfen. Wenn weggelassen, sind alle Tools zulässig. |
+| `type` | string | Ya | Harus berupa `"mcp_server"`. |
+| `name` | string | Ya | ID unik untuk server. Harus huruf kecil dan alfanumerik (cocok dengan `^[a-z0-9_-]+$`). |
+| `url` | string | Ya | URL endpoint server MCP jarak jauh. |
+| `headers` | objek | Tidak | Header kustom (misalnya, autentikasi) yang dikirim dengan permintaan. |
+| `allowed_tools` | array | Tidak | Daftar nama alat yang diizinkan untuk dieksekusi. Jika tidak disertakan, semua alat diizinkan. |
 
 ### Python
 
@@ -520,11 +520,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-## Modellauswahl
+## Pemilihan model
 
-Für `antigravity-preview-05-2026` ist das Standardmodell **Gemini 3.6 Flash** (`gemini-3.6-flash`). Wenn Sie `agent_config` weglassen, wird standardmäßig `gemini-3.6-flash` verwendet.
+Untuk `antigravity-preview-05-2026`, model defaultnya adalah **Gemini 3.6 Flash** (`gemini-3.6-flash`). Jika Anda tidak menyertakan `agent_config`, agen akan menggunakan `gemini-3.6-flash` sebagai default.
 
-Sie können das zugrunde liegende Gemini-Modell mit `agent_config` konfigurieren, um es für Geschwindigkeit, Kosten oder logische Schlussfolgerungen zu optimieren.
+Anda dapat mengonfigurasi model Gemini yang mendasarinya menggunakan `agent_config` untuk mengoptimalkan kecepatan, biaya, atau kemampuan penalaran.
 
 ### Python
 
@@ -583,25 +583,25 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-Folgende Werte werden für `agent_config.model` unterstützt:
+Nilai yang didukung untuk `agent_config.model` adalah:
 
-| Modell | Wert in `agent_config.model` | Beschreibung |
+| Model | Nilai dalam `agent_config.model` | Deskripsi |
 | --- | --- | --- |
-| **Gemini 3.6 Flash** (Standard) | `gemini-3.6-flash` | Standardmodell für logisches Denken, Programmieren und die Verwendung von Tools. |
-| **Gemini 3.5 Flash** | `gemini-3.5-flash` | Flash-Modell der vorherigen Generation für allgemeine agentische Workflows. |
-| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | Leichtgewichtiges Modell, das für Aufgaben mit niedriger Latenz und kostensensitive Aufgaben optimiert ist. |
+| **Gemini 3.6 Flash** (default) | `gemini-3.6-flash` | Model seimbang default untuk penalaran, coding, dan penggunaan alat. |
+| **Gemini 3.5 Flash** | `gemini-3.5-flash` | Model Flash generasi sebelumnya untuk alur kerja agentic umum. |
+| **Gemini 3.5 Flash-Lite** | `gemini-3.5-flash-lite` | Model ringan yang dioptimalkan untuk tugas-tugas yang sensitif terhadap biaya dan latensi rendah. |
 
-Wenn Sie einen verwalteten Agenten mit `agents.create` erstellen, konfigurieren Sie das Modell auf genau dieselbe Weise, indem Sie `base_agent` und `agent_config` übergeben. Hinweis: Sie können das Modell bei der Interaktion nicht für einen verwalteten Agenten überschreiben, der mit `agents.create` erstellt wurde. Das Modell ist auf die Einstellungen festgelegt, die beim Erstellen des Agents festgelegt wurden. So wird ein vorhersehbares Verhalten beim Aufrufen von Tools, eine konsistente Fehlersuche und die Einhaltung von Sicherheitsgrenzen gewährleistet.
+Saat membuat agen terkelola dengan `agents.create`, Anda mengonfigurasi model dengan cara yang sama persis dengan meneruskan `base_agent` dan `agent_config`. Perhatikan bahwa Anda tidak dapat mengganti model pada waktu interaksi untuk agen terkelola yang dibuat dengan `agents.create`. Model dikunci ke setelan yang ditetapkan saat agen dibuat. Hal ini memastikan perilaku panggilan alat yang dapat diprediksi, proses debug yang konsisten, dan kepatuhan terhadap batas keamanan.
 
-## Agent anpassen
+## Menyesuaikan agen
 
-Sie können den Antigravity-Agent erweitern, indem Sie seine Anweisungen, Tools und Umgebung anpassen. Der Agent unterstützt einen dateisystemnativen Ansatz für die Anpassung: Sie können Dateien wie `AGENTS.md` für Anweisungen und Skills unter `.agents/skills/` direkt in die Sandbox einbinden oder die Konfiguration zur Interaktionszeit inline übergeben. Sie können Ihre Konfiguration direkt bearbeiten und sie dann als verwalteten Agenten speichern, wenn Sie fertig sind.
+Anda dapat memperluas agen Antigravity dengan menyesuaikan petunjuk, alat, dan lingkungannya. Agen mendukung pendekatan native sistem file untuk penyesuaian: Anda dapat memuat file seperti `AGENTS.md` untuk petunjuk dan kemampuan di `.agents/skills/` langsung ke sandbox, atau meneruskan konfigurasi inline pada waktu interaksi. Anda dapat melakukan iterasi pada konfigurasi secara inline, lalu menyimpannya sebagai agen terkelola saat sudah siap.
 
-Ausführliche Informationen zum Erstellen benutzerdefinierter KI-Agenten finden Sie unter [Verwaltete KI-Agenten erstellen](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de).
+Untuk mengetahui detail lengkap tentang cara membuat agen kustom, lihat [Membangun Agen Terkelola](https://ai.google.dev/gemini-api/docs/custom-agents?hl=id).
 
-## Ausführung im Hintergrund
+## Eksekusi latar belakang
 
-Agent-Tasks, die mehrstufige Problemlösung, Code-Ausführung oder Dateioperationen umfassen, können mehrere Minuten dauern. Verwenden Sie `background=True`, um die Interaktion asynchron auszuführen. Die API gibt sofort eine Interaktions-ID zurück, die Sie abfragen, bis der Status `completed` oder `failed` ist.
+Tugas agen yang melibatkan penalaran multi-langkah, eksekusi kode, atau operasi file dapat memerlukan waktu beberapa menit untuk diselesaikan. Gunakan `background=True` untuk menjalankan interaksi secara asinkron. API akan langsung menampilkan ID interaksi yang Anda polling hingga statusnya `completed` atau `failed`.
 
 ### Python
 
@@ -683,9 +683,9 @@ curl -s -X GET "https://generativelanguage.googleapis.com/v1beta/interactions/$I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-Für die Ausführung im Hintergrund ist `store=True` erforderlich. Dies ist die Standardeinstellung. Informationen zu Echtzeit-Fortschrittsaktualisierungen während der Hintergrundausführung finden Sie unter [Hintergrundinteraktionen streamen](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=de#streaming-background).
+Eksekusi latar belakang memerlukan `store=True`, yang merupakan setelan default. Untuk update progres real-time selama eksekusi latar belakang, lihat [Streaming interaksi latar belakang](https://ai.google.dev/gemini-api/docs/interactions/streaming?hl=id#streaming-background).
 
-Sie können eine laufende Hintergrundinteraktion mit der Methode `cancel` abbrechen.
+Anda dapat membatalkan interaksi latar belakang yang sedang berjalan menggunakan metode `cancel`.
 
 ### Python
 
@@ -706,9 +706,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions/INTE
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-**Mehrfachdialog mit Hintergrundausführung**
+**Multi-turn dengan eksekusi latar belakang**
 
-Wenn bei einer Hintergrundinteraktion zustandsbehaftete Tools (z. B. die Codeausführung in einer Sandbox) verwendet werden, verwenden Sie die `environment_id` aus der abgeschlossenen Interaktion, um in derselben Umgebung fortzufahren. So kann der KI-Agent mit allen Dateien und dem gesamten Status dort weitermachen, wo er aufgehört hat.
+Jika interaksi latar belakang melibatkan alat stateful (seperti eksekusi kode di sandbox), gunakan `environment_id` dari interaksi yang telah selesai untuk melanjutkan di lingkungan yang sama. Tindakan ini memastikan agen melanjutkan dari tempat terakhir kali berhenti dengan semua file dan status tetap utuh.
 
 ### Python
 
@@ -820,25 +820,25 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }"
 ```
 
-## Umgebungen
+## Lingkungan
 
-Bei jedem Aufruf wird eine Linux-Sandbox erstellt oder wiederverwendet. Der Parameter `environment` kann drei Formen annehmen:
+Setiap panggilan membuat atau menggunakan kembali sandbox Linux. Parameter `environment` memiliki tiga bentuk:
 
-| Formular | Beschreibung |
+| Formulir | Deskripsi |
 | --- | --- |
-| `"remote"` | Stellen Sie eine neue Sandbox mit Standardeinstellungen bereit. |
-| `"env_abc123"` | Eine vorhandene Umgebung anhand der ID wiederverwenden, wobei alle Dateien und der Status beibehalten werden. |
-| `{...}` | Vollständige `EnvironmentConfig` mit benutzerdefinierten Quellen und Netzwerkregeln. |
+| `"remote"` | Sediakan sandbox baru dengan setelan default. |
+| `"env_abc123"` | Menggunakan kembali lingkungan yang ada berdasarkan ID, dengan mempertahankan semua file dan status. |
+| `{...}` | Penuh `EnvironmentConfig` dengan sumber dan aturan jaringan kustom. |
 
-Weitere Informationen zu Quellen (Git, GCS, Inline), Netzwerken, Lebenszyklus und Ressourcenlimits finden Sie unter [Umgebungen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de).
+Lihat [Environments](https://ai.google.dev/gemini-api/docs/agent-environment?hl=id) untuk mengetahui detail tentang sumber (Git, GCS, inline), jaringan, siklus proses, dan batas resource.
 
-## Trigger
+## Pemicu
 
-Mit Triggern können Sie einen Agent so planen, dass er automatisch nach einem Cron-Zeitplan ausgeführt wird. Ein Trigger verknüpft einen Agent, eine Umgebung, einen Prompt und einen Zeitplan zu einer persistenten Ressource, die ohne manuellen Eingriff ausgelöst wird. Bei jeder Ausführung wird dieselbe Umgebung wiederverwendet. Dateien, die in einem Lauf erstellt werden, bleiben also erhalten und sind für den nächsten Lauf sichtbar.
+Pemicu memungkinkan Anda menjadwalkan agen untuk berjalan secara otomatis sesuai jadwal cron. Pemicu mengikat agen, lingkungan, perintah, dan jadwal ke dalam resource persisten yang diaktifkan tanpa intervensi manual. Setiap eksekusi menggunakan kembali lingkungan yang sama, sehingga file yang dibuat dalam satu eksekusi akan tetap ada dan terlihat oleh eksekusi berikutnya.
 
-### Trigger erstellen
+### Buat pemicu
 
-Erstellen Sie einen Trigger, indem Sie einen Cronjob-Zeitplan, eine Zeitzone und die Interaktionskonfiguration angeben. Der Trigger beginnt im Status `active` und wird bei der nächsten passenden Cron-Zeit ausgelöst. Speichern Sie die zurückgegebene `id`, um den Trigger in nachfolgenden Aufrufen zu verwalten.
+Buat pemicu dengan menentukan jadwal cron, zona waktu, dan konfigurasi interaksi. Pemicu dimulai dalam status `active` dan akan diaktifkan pada waktu cron yang cocok berikutnya. Simpan `id` yang ditampilkan untuk mengelola pemicu dalam panggilan berikutnya.
 
 ### Python
 
@@ -944,29 +944,29 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers" \
   }'
 ```
 
-Die `CreateTrigger`-Anfrage akzeptiert die folgenden Felder:
+Permintaan `CreateTrigger` menerima kolom berikut:
 
-| Feld | Typ | Erforderlich | Beschreibung |
+| Kolom | Jenis | Wajib diisi | Deskripsi |
 | --- | --- | --- | --- |
-| `schedule` | String | Ja | Cron-Ausdruck (z.B. `0 * * * *` für stündlich, `0 9 * * 1-5` für Wochentagmorgens). |
-| `time_zone` | String | Ja | IANA-Zeitzone (z.B. `UTC`, `America/Argentina/Buenos_Aires`). |
-| `display_name` | String | Nein | Für Menschen lesbarer Name des Triggers. |
-| `max_consecutive_failures` | integer | Nein | Maximale Anzahl von Fehlern, bevor der Trigger automatisch pausiert wird. Standard: 5. |
-| `execution_timeout_seconds` | integer | Nein | Zeitlimit pro Ausführung in Sekunden. Standardwert: 600 |
-| `interaction` | Objekt | Ja | Ein `CreateInteractionRequest`, das den KI-Agenten, die Eingabe, die Tools und die Umgebung definiert. |
+| `schedule` | string | Ya | Ekspresi cron (misalnya, `0 * * * *` untuk setiap jam, `0 9 * * 1-5` untuk pagi hari pada hari kerja). |
+| `time_zone` | string | Ya | Zona waktu IANA (misalnya, `UTC`, `America/Argentina/Buenos_Aires`). |
+| `display_name` | string | Tidak | Nama pemicu yang dapat dibaca manusia. |
+| `max_consecutive_failures` | bilangan bulat | Tidak | Jumlah kegagalan maksimum sebelum pemicu dijeda secara otomatis. Default: 5. |
+| `execution_timeout_seconds` | bilangan bulat | Tidak | Waktu tunggu per eksekusi dalam detik. Default: 600. |
+| `interaction` | objek | Ya | `CreateInteractionRequest` yang menentukan agen, input, alat, dan lingkungan. |
 
-Die Antwort umfasst die folgenden Schlüsselfelder:
+Respons mencakup kolom kunci berikut:
 
-| Feld | Typ | Beschreibung |
+| Kolom | Jenis | Deskripsi |
 | --- | --- | --- |
-| `id` | String | Eindeutige Kennung für den Trigger. Verwenden Sie diese in allen nachfolgenden Vorgängen. |
-| `status` | String | Aktueller Status: `active`, `paused` oder `disabled`. |
-| `next_run_time` | String | ISO 8601-Zeitstempel der nächsten geplanten Ausführung. |
-| `consecutive_failure_count` | integer | Anzahl der aufeinanderfolgenden fehlgeschlagenen Ausführungen seit dem letzten Erfolg. |
+| `id` | string | ID unik untuk pemicu. Gunakan ini di semua operasi berikutnya. |
+| `status` | string | Status saat ini: `active`, `paused`, atau `disabled`. |
+| `next_run_time` | string | Stempel waktu ISO 8601 untuk eksekusi terjadwal berikutnya. |
+| `consecutive_failure_count` | bilangan bulat | Jumlah eksekusi gagal berturut-turut sejak keberhasilan terakhir. |
 
-### Trigger auflisten
+### Mencantumkan pemicu
 
-Alle Trigger abrufen, die mit Ihrem Projekt verknüpft sind.
+Mengambil semua pemicu yang terkait dengan project Anda.
 
 ### Python
 
@@ -992,9 +992,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers" \
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Trigger erhalten
+### Mendapatkan pemicu
 
-Ruft die vollständige Konfiguration und den aktuellen Status eines einzelnen Triggers ab.
+Mengambil konfigurasi lengkap dan status saat ini dari satu pemicu.
 
 ### Python
 
@@ -1019,9 +1019,9 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Pausieren und fortsetzen
+### Jeda dan lanjutkan
 
-Sie können einen Trigger pausieren, um geplante Ausführungen zu beenden, und ihn fortsetzen, um den Zeitplan zu reaktivieren. Das Pausieren hat keine Auswirkungen auf manuelle Ausführungen.
+Anda dapat menjeda pemicu untuk menghentikan eksekusi terjadwal, dan melanjutkannya untuk mengaktifkan kembali jadwal. Menjeda tidak memengaruhi eksekusi manual.
 
 ### Python
 
@@ -1059,9 +1059,9 @@ curl -X PATCH "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER
   -d '{"status": "active"}'
 ```
 
-### Trigger löschen
+### Menghapus pemicu
 
-Trigger endgültig entfernen Der bisherige Ausführungsverlauf wird nicht gelöscht.
+Menghapus pemicu secara permanen. Histori eksekusi sebelumnya tidak dihapus.
 
 ### Python
 
@@ -1082,9 +1082,9 @@ curl -X DELETE "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGE
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Trigger sofort ausführen
+### Menjalankan pemicu secara langsung
 
-Sie können einen Trigger bei Bedarf auslösen, ohne auf den nächsten geplanten Zeitpunkt warten zu müssen. Das funktioniert auch dann, wenn der Trigger pausiert ist.
+Aktifkan pemicu sesuai permintaan tanpa menunggu waktu yang dijadwalkan berikutnya. Hal ini berfungsi meskipun pemicu dijeda.
 
 ### Python
 
@@ -1105,9 +1105,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-### Ausführungen auflisten
+### Mencantumkan eksekusi
 
-Ausführungsverlauf für einen Trigger ansehen Jede Ausführung enthält eine `status`, Zeitstempel, eine `interaction_id`, mit der Sie die vollständige Interaktionsausgabe abrufen können, und eine `environment_id`, die bestätigt, dass alle Ausführungen dieselbe Sandbox verwenden.
+Melihat histori eksekusi untuk pemicu. Setiap eksekusi mencakup `status`, stempel waktu, `interaction_id` yang dapat Anda gunakan untuk mengambil output interaksi lengkap, dan `environment_id` yang mengonfirmasi bahwa semua proses berbagi sandbox yang sama.
 
 ### Python
 
@@ -1141,20 +1141,27 @@ curl -X GET "https://generativelanguage.googleapis.com/v1beta/triggers/TRIGGER_I
   -H "x-goog-api-key: $GEMINI_API_KEY"
 ```
 
-## Verfügbarkeit und Preisgestaltung
+## Ketersediaan dan harga
 
-Der Antigravity-Agent ist in der Vorabversion über die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) in Google AI Studio und die Gemini API für Projekte mit kostenlosem und kostenpflichtigem Abo verfügbar.
+Agen Antigravity tersedia dalam pratinjau melalui
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) di Google AI Studio
+dan Gemini API untuk project paket gratis dan paket berbayar.
 
-Die Preise basieren auf einem [Pay-as-you-go-Modell](https://ai.google.dev/gemini-api/docs/pricing?hl=de#pricing-for-agents), das auf den zugrunde liegenden Gemini-Modelltokens und den vom Agent verwendeten Tools basiert. Im Gegensatz zu einer Standard-Chatanfrage, die eine einzelne Ausgabe erzeugt, ist eine Antigravity-Interaktion ein agentenbasierter Workflow. Eine einzelne Anfrage löst einen autonomen Zyklus aus, der aus Schlussfolgerungen, Ausführung von Tools, Ausführung von Code und Dateiverwaltung besteht. Projekte der kostenlosen Stufe haben ein kostenloses Ratenlimit und Nutzungskontingent.
+Harga mengikuti [model bayar sesuai penggunaan](https://ai.google.dev/gemini-api/docs/pricing?hl=id#pricing-for-agents)
+berdasarkan token model Gemini yang mendasarinya dan alat yang digunakan agen. Tidak seperti permintaan chat standar yang menghasilkan satu output, interaksi Antigravity adalah alur kerja berbasis agen. Satu permintaan memicu loop penalaran, eksekusi alat, menjalankan kode, dan pengelolaan file yang otonom. Project tingkat gratis mencakup batas frekuensi dan kuota penggunaan gratis.
 
-Antigravity-Interaktionen werden in autonomen Schleifen mit mehreren Zügen ausgeführt und können eine erhebliche Anzahl von Tokens verbrauchen. Legen Sie [Budgetkontrollen](#budget-controls) für Ihre Anfrage fest, um die Tokennutzung zu begrenzen. Sie können den Fortschritt auch in Echtzeit mit [SSE-Streaming](https://ai.google.dev/gemini-api/docs/streaming?hl=de) verfolgen oder laufende Anfragen abbrechen.
+Interaksi antigravitasi menjalankan loop otonom multi-turn dan dapat menggunakan token dalam jumlah besar. Tetapkan [kontrol anggaran](#budget-controls) pada permintaan Anda untuk membatasi penggunaan token. Anda juga dapat memantau progres secara real time dengan
+[streaming SSE](https://ai.google.dev/gemini-api/docs/streaming?hl=id), atau membatalkan permintaan yang sedang berjalan.
 
-### Budgetkontrollen
+### Kontrol anggaran
 
-Zusätzlich zur [Modellauswahl](#model-selection) können Sie `max_total_tokens` in `agent_config` (mit `"type": "antigravity"`) festlegen, um die Gesamtzahl der Tokens (Eingabe + Ausgabe + Thinking-Modus) zu begrenzen, die für eine Interaktion verwendet werden können.
-Zwischengespeicherte Tokens werden nicht auf dieses Limit angerechnet. Wenn der Agent das Limit erreicht, wird die Interaktion beendet und mit `status: "incomplete"` zurückgegeben. Das Limit ist eine Schätzung. Die tatsächliche Nutzung kann es geringfügig überschreiten, je nachdem, wann der Agent das Budget zwischen den Schritten prüft.
+Selain [pemilihan model](#model-selection), tetapkan `max_total_tokens` di dalam `agent_config` (dengan `"type": "antigravity"`) untuk membatasi
+total jumlah token (input + output + penalaran) yang dapat digunakan oleh interaksi.
+Token yang di-cache tidak diperhitungkan dalam batas ini. Saat agen mencapai batas, interaksi akan berhenti dan kembali dengan `status: "incomplete"`. Batas ini adalah upaya terbaik:
+penggunaan sebenarnya mungkin sedikit melebihi batas tersebut, bergantung pada waktu saat agen memeriksa anggaran
+di antara langkah-langkah.
 
-Legen Sie das Budget für die Interaktionsanfrage in `agent_config` zusammen mit `agent` und `input` fest.
+Tetapkan anggaran pada permintaan interaksi di `agent_config` bersama dengan `agent` dan `input`.
 
 ### Python
 
@@ -1240,9 +1247,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-#### Unvollständige Interaktion fortsetzen
+#### Melanjutkan interaksi yang belum selesai
 
-Wenn bei einer Interaktion `status: "incomplete"` zurückgegeben wird, bleiben die Arbeit und der Kontext des Agenten erhalten. Senden Sie eine neue Interaktion, die sich auf die ursprüngliche Interaktion `id` und `environment_id` bezieht, um dort fortzufahren, wo sie aufgehört hat. Die neue Interaktion erhält ein eigenes `max_total_tokens`-Budget.
+Saat interaksi menampilkan `status: "incomplete"`, tugas dan konteks agen
+dipertahankan. Kirim interaksi baru yang mereferensikan interaksi asli `id` dan
+`environment_id` untuk melanjutkan dari tempat terakhir. Interaksi baru mendapatkan anggaran
+`max_total_tokens` sendiri.
 
 ### Python
 
@@ -1295,48 +1305,48 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### Geschätzte Kosten
+### Perkiraan biaya
 
-Die Kosten variieren je nach Komplexität der Aufgabe. Der Agent bestimmt autonom, wie viele Tool-Aufrufe, Codeausführungen und Dateivorgänge erforderlich sind. Die folgenden Schätzungen basieren auf Läufen.
+Biaya bervariasi berdasarkan kompleksitas tugas. Agen secara mandiri menentukan jumlah panggilan alat, eksekusi kode, dan operasi file yang diperlukan. Estimasi berikut didasarkan pada proses.
 
-| Aufgabenkategorie | Eingabetokens | Ausgabetokens | Normalpreis |
+| Kategori tugas | Token input | Token output | Biaya standar |
 | --- | --- | --- | --- |
-| **Recherche und Informationssynthese** | 100.000–500.000 | 10.000–40.000 | 0,30 $ bis 1,00 $ |
-| **Dokument- und Inhaltserstellung** | 100.000–500.000 | 15.000–50.000 | 0,30 $ bis 1,30 $ |
-| **Prozess- und Systemdesign** | 100.000–400.000 | 10.000–30.000 | 0,25 $ bis 0,80 $ |
-| **Datenverarbeitung und -analyse** | 300.000–3 Mio. | 30.000–150.000 | 0,70 $ bis 3,25 $ |
+| **Riset & sintesis informasi** | 100 ribu–500 ribu | 10.000–40.000 | Rp4.500–Rp15.000 |
+| **Pembuatan dokumen & konten** | 100 ribu–500 ribu | 15 ribu–50 ribu | Rp4.500–Rp19.500 |
+| **Desain proses & sistem** | 100 ribu–400 ribu | 10.000–30.000 | Rp3.500–Rp11.000 |
+| **Pemrosesan & analisis data** | 300 ribu–3 juta | 30.000–150.000 | Rp10.000–Rp45.000 |
 
-In der Regel werden 50–70% der Eingabetokens im Cache gespeichert. Bei komplexen Agent-Workflows mit vielen Tool-Aufrufen können sich in einer einzelnen Interaktion 3 bis 5 Millionen Tokens ansammeln, was Kosten von bis zu 5 $ verursacht.
+50–70% token input biasanya di-cache. Alur kerja kompleks dengan banyak panggilan alat dapat mengakumulasi 3–5 juta token dalam satu interaksi, dengan biaya hingga sekitar$5.
 
-**Umgebungsberechnung** (CPU, Arbeitsspeicher, Sandbox-Ausführung) wird während des Vorschauzeitraums **nicht in Rechnung gestellt**.
+**Komputasi lingkungan** (CPU, memori, eksekusi sandbox) **tidak ditagih** selama periode pratinjau.
 
-## Beschränkungen
+## Batasan
 
-- **Status der Vorabversion**:Der Antigravity-Agent und die Interactions API. Funktionen und Schemas können sich ändern.
-- **Nicht unterstützte Generierungskonfiguration**:Die folgenden Parameter werden nicht unterstützt und geben einen 400-Fehler zurück: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
-- **Strukturierte Ausgabe**:Der Antigravity-Agent unterstützt keine strukturierte Ausgabe.
-- **Nicht verfügbare Tools**:`file_search`, `computer_use` und `google_maps` werden noch nicht unterstützt.
-- **Einschränkungen für Remote-MCP:** Der Transport von Server-Sent Events (SSE) wird nicht unterstützt. Verwenden Sie Streamable HTTP. Außerdem muss der Server `name` ausschließlich aus Kleinbuchstaben und alphanumerischen Zeichen bestehen. Bei Verwendung von Großbuchstaben wird ein allgemeiner `400 Bad Request`-Fehler ausgelöst.
-- **Dateisystemtool**:Derzeit ist kein Dateisystemtool verfügbar. Sie ist Teil der `environment`.
-- **Store-Anforderung**:Für die Agent-Ausführung mit `background=True` ist `store=True` erforderlich.
-- **Funktionsaufrufe nur im zustandsbehafteten Modus**:Funktionsaufrufe werden nur im zustandsbehafteten Modus unterstützt. Sie müssen `previous_interaction_id` verwenden, um den Zug fortzusetzen. Das manuelle Rekonstruieren des Verlaufs (statusloser Modus) wird nicht unterstützt.
-- **Nicht unterstützte multimodale Typen**: Audio-, Video- und Dokumenteingaben werden derzeit nicht unterstützt. Es sind nur Text und Bild zulässig.
+- **Status pratinjau:** Agen Antigravity dan Interactions API. Fitur dan skema dapat berubah.
+- **Konfigurasi pembuatan yang tidak didukung:** Parameter berikut tidak didukung dan menampilkan error 400: `temperature`, `top_p`, `top_k`, `stop_sequences`, `max_output_tokens`.
+- **Output terstruktur:** Agen Antigravity tidak mendukung output terstruktur.
+- **Alat yang tidak tersedia:** `file_search`, `computer_use`, dan `google_maps` belum didukung.
+- **Batasan MCP jarak jauh:** Transpor Peristiwa yang Dikirim Server (SSE) tidak didukung (gunakan HTTP yang Dapat Di-stream). Selain itu, server `name` harus berupa huruf kecil dan alfanumerik (menggunakan huruf besar akan memicu error `400 Bad Request` umum).
+- **Alat sistem file:** Saat ini tidak ada alat sistem file. Ini adalah bagian dari `environment`.
+- **Persyaratan penyimpanan:** Eksekusi agen menggunakan `background=True` memerlukan `store=True`.
+- **Panggilan fungsi hanya stateful:** Panggilan fungsi hanya didukung dalam mode stateful. Anda harus menggunakan `previous_interaction_id` untuk melanjutkan giliran; merekonstruksi histori secara manual (mode stateless) tidak didukung.
+- **Jenis multimodal yang tidak didukung.** Input audio, video, dan dokumen saat ini tidak didukung. Hanya teks dan gambar yang diizinkan.
 
-## Nächste Schritte
+## Langkah berikutnya
 
-- [Kurzanleitung](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de): Mehrfachdialoge und Streaming.
-- [Benutzerdefinierte KI-Agenten erstellen](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de): benutzerdefinierte Anweisungen, Skills und das Speichern von KI-Agenten.
-- [Umgebungen](https://ai.google.dev/gemini-api/docs/agent-environment?hl=de): Sandbox-Konfiguration, Quellen, Netzwerk.
-- [Hooks](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=de): Erzwingen Sie Sicherheitsgates und die Validierung von Nebeneffekten in der Sandbox.
-- [Deep Research-Agent](https://ai.google.dev/gemini-api/docs/deep-research?hl=de): Rechercheaufgaben in Langform.
-- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de): die zugrunde liegende API.
+- [Panduan memulai](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=id): percakapan multi-turn dan streaming.
+- [Membangun Agen Kustom](https://ai.google.dev/gemini-api/docs/custom-agents?hl=id): petunjuk kustom, keterampilan, dan menyimpan agen.
+- [Lingkungan](https://ai.google.dev/gemini-api/docs/agent-environment?hl=id): konfigurasi sandbox, sumber, jaringan.
+- [Hook](https://ai.google.dev/gemini-api/docs/agent-hooks?hl=id): menerapkan gerbang keamanan dan validasi efek samping di dalam sandbox.
+- [Agen Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=id): tugas riset panjang.
+- [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id): API yang mendasarinya.
 
-Feedback geben
+Kirim masukan
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Zuletzt aktualisiert: 2026-07-30 (UTC).
+Terakhir diperbarui pada 2026-07-30 UTC.
 
-Haben Sie Feedback für uns?
+Ada masukan untuk kami?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-30 UTC."],[],[]]

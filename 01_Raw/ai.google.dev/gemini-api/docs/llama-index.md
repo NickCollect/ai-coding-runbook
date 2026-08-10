@@ -1,36 +1,38 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=pl
-fetched_at: 2026-08-03T04:40:18.162587+00:00
-title: "Agent badawczy z\u00a0Gemini i\u00a0LlamaIndex \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/llama-index?hl=ja
+fetched_at: 2026-08-10T03:10:29.842069+00:00
+title: "Gemini \u3068 LlamaIndex \u3092\u4f7f\u7528\u3057\u305f\u30ea\u30b5\u30fc\u30c1 \u30a8\u30fc\u30b8\u30a7\u30f3\u30c8 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Strona główna](https://ai.google.dev/?hl=pl)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
-- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Prześlij opinię
+フィードバックを送信
 
-# Agent badawczy z Gemini i LlamaIndex
+# Gemini と LlamaIndex を使用したリサーチ エージェント
 
-LlamaIndex to platforma do tworzenia agentów wiedzy przy użyciu dużych modeli językowych połączonych z Twoimi danymi. Ten przykład pokazuje, jak utworzyć przepływ pracy z wieloma agentami dla agenta badawczego. W LlamaIndex [`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
-są podstawowymi elementami systemów agentów i systemów wieloagentowych.
+LlamaIndex は、データに接続された LLM を使用してナレッジ エージェントを構築するためのフレームワークです。この例では、リサーチ エージェント用のマルチエージェント ワークフローを構築する方法を示します。LlamaIndex では、[`Workflows`](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)
+はエージェント システムとマルチエージェント システムの構成要素です。
 
-Potrzebujesz klucza interfejsu Gemini API. Jeśli jeszcze nie masz klucza, możesz go [uzyskać w Google AI Studio](https://aistudio.google.com/apikey?hl=pl).
-Najpierw zainstaluj wszystkie wymagane biblioteki LlamaIndex. LlamaIndex korzysta z pakietu `google-genai`.
+Gemini API キーが必要です。キーがない場合は、Google AI Studio で
+[取得できます](https://aistudio.google.com/apikey?hl=ja)。
+まず、必要な LlamaIndex ライブラリをすべてインストールします。LlamaIndex は、内部で `google-genai` パッケージを使用します。
 
 ```
 pip install llama-index llama-index-utils-workflow llama-index-llms-google-genai llama-index-tools-google
 ```
 
-## Konfigurowanie Gemini w LlamaIndex
+## LlamaIndex で Gemini を設定する
 
-Silnikiem każdego agenta LlamaIndex jest model LLM, który zajmuje się rozumowaniem i przetwarzaniem tekstu. W tym przykładzie używamy Gemini 3 Flash. Upewnij się, że [klucz interfejsu API jest ustawiony jako zmienna środowiskowa](https://ai.google.dev/gemini-api/docs/api-key?hl=pl).
+LlamaIndex エージェントのエンジンは、推論とテキスト処理を処理する LLM です。この例では、Gemini 3 Flash を使用します。API キーを環境変数として[設定してください
+。](https://ai.google.dev/gemini-api/docs/api-key?hl=ja)
 
 ```
 import os
@@ -42,11 +44,11 @@ assert 'GEMINI_API_KEY' in os.environ
 llm = GoogleGenAI(model="gemini-3.5-flash")
 ```
 
-## Narzędzia do kompilacji
+## ビルドツール
 
-Agenty korzystają z narzędzi do interakcji ze światem zewnętrznym, np. do wyszukiwania informacji w internecie lub przechowywania danych. [Narzędzia w LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
-mogą być zwykłymi funkcjami Pythona lub importowane z wcześniej utworzonych `ToolSpecs`.
-Gemini ma wbudowane narzędzie do korzystania z wyszukiwarki Google, które jest tutaj używane.
+エージェントはツールを使用して、ウェブの検索や情報の保存など、外部の世界とやり取りします。[LlamaIndex のツール](https://docs.llamaindex.ai/en/stable/module_guides/deploying/agents/tools/)
+は、通常の Python 関数にすることも、既存の `ToolSpecs` からインポートすることもできます。
+Gemini には、Google 検索を使用するための組み込みツールが用意されています。ここでは、このツールを使用します。
 
 ```
 from google.genai import types
@@ -61,21 +63,21 @@ llm_with_search = GoogleGenAI(
 )
 ```
 
-Teraz przetestuj instancję LLM za pomocą zapytania, które wymaga wyszukiwania. W tym przewodniku zakładamy, że pętla zdarzeń jest uruchomiona (np. `python -m asyncio` lub Google Colab).
+検索が必要なクエリを使用して、LLM インスタンスをテストします。このガイドでは、実行中のイベント ループ（`python -m asyncio` や Google Colab など）を想定しています。
 
 ```
 response = await llm_with_search.acomplete("What's the weather like today in Biarritz?")
 print(response)
 ```
 
-Agent badawczy będzie używać funkcji Pythona jako narzędzi. Istnieje wiele sposobów na zbudowanie systemu, który będzie wykonywać to zadanie. W tym przykładzie użyjesz tych elementów:
+リサーチ エージェントは、Python 関数をツールとして使用します。このタスクを実行するシステムを構築する方法はたくさんあります。この例では、次のものを使用します。
 
-1. `search_web` korzysta z Gemini z wyszukiwarką Google, aby wyszukiwać w internecie informacje na dany temat.
-2. `record_notes` zapisuje wyniki wyszukiwania w internecie w stanie, aby inne narzędzia mogły z nich korzystać.
-3. `write_report` tworzy raport na podstawie informacji znalezionych przez `ResearchAgent`
-4. `review_report` sprawdza raport i przekazuje opinię.
+1. `search_web` は、Gemini と Google 検索を使用して、指定されたトピックに関する情報をウェブで検索します。
+2. `record_notes` は、ウェブで見つかった調査結果を状態に保存して、他のツールで使用できるようにします。
+3. `write_report` は、`ResearchAgent` が見つけた情報を使用してレポートを作成します。
+4. `review_report` はレポートを確認し、フィードバックを提供します。
 
-Klasa `Context` przekazuje stan między agentami i narzędziami, a każdy agent ma dostęp do bieżącego stanu systemu.
+`Context` クラスは、エージェントとツールの間で状態を渡します。各エージェントは、システムの現在の状態にアクセスできます。
 
 ```
 from llama_index.core.workflow import Context
@@ -110,18 +112,18 @@ async def review_report(ctx: Context, review: str) -> str:
     return "Report reviewed."
 ```
 
-## Tworzenie asystenta z wieloma agentami
+## マルチエージェント アシスタントを構築する
 
-Aby utworzyć system wieloagentowy, musisz zdefiniować agentów i ich interakcje.
-System będzie miał 3 agenty:
+マルチエージェント システムを構築するには、エージェントとそのインタラクションを定義します。
+システムには 3 つのエージェントがあります。
 
-1. `ResearchAgent` wyszukuje w internecie informacje na dany temat.
-2. `WriteAgent` pisze raport na podstawie informacji znalezionych przez `ResearchAgent`.
-3. `ReviewAgent` sprawdza raport i przekazuje opinię.
+1. `ResearchAgent` は、指定されたトピックに関する情報をウェブで検索します。
+2. `WriteAgent` は、`ResearchAgent` が見つけた情報を使用してレポートを作成します。
+3. `ReviewAgent` はレポートを確認し、フィードバックを提供します。
 
-W tym przykładzie do utworzenia systemu z wieloma agentami, którzy będą wykonywani po kolei, użyto klasy `AgentWorkflow`. Każdy agent otrzymuje `system_prompt`, które informuje go, co ma robić, i sugeruje, jak współpracować z innymi agentami.
+この例では、`AgentWorkflow` クラスを使用して、これらのエージェントを順番に実行するマルチエージェント システムを作成します。各エージェントは、実行する内容を指示する `system_prompt` を受け取り、他のエージェントとの連携方法を提案します。
 
-Opcjonalnie możesz pomóc systemowi wieloagentowemu, określając, z którymi innymi agentami może się komunikować, używając znaku `can_handoff_to` (w przeciwnym razie system spróbuje sam to ustalić).
+必要に応じて、`can_handoff_to` を使用して、マルチエージェント システムが通信できる他のエージェントを指定できます（指定しない場合、システムは独自に判断しようとします）。
 
 ```
 from llama_index.core.agent.workflow import (
@@ -171,7 +173,7 @@ review_agent = FunctionAgent(
 )
 ```
 
-Agenty zostały zdefiniowane. Teraz możesz utworzyć `AgentWorkflow` i ją uruchomić.
+エージェントが定義されたので、`AgentWorkflow` を作成して実行できます。
 
 ```
 from llama_index.core.agent.workflow import AgentWorkflow
@@ -187,7 +189,7 @@ agent_workflow = AgentWorkflow(
 )
 ```
 
-Podczas wykonywania przepływu pracy możesz przesyłać strumieniowo do konsoli zdarzenia, wywołania narzędzi i aktualizacje.
+ワークフローの実行中に、イベント、ツール呼び出し、更新をコンソールにストリーミングできます。
 
 ```
 from llama_index.core.agent.workflow import (
@@ -235,7 +237,7 @@ async for event in handler.stream_events():
         print(f"  With arguments: {event.tool_kwargs}")
 ```
 
-Po zakończeniu procesu możesz wydrukować ostateczną wersję raportu, a także ostateczny stan weryfikacji od agenta weryfikującego.
+ワークフローが完了したら、レポートの最終出力と、レビュー エージェントからの最終レビューの状態を出力できます。
 
 ```
 state = await handler.ctx.store.get("state")
@@ -243,24 +245,26 @@ print("Report Content:\n", state["report_content"])
 print("\n------------\nFinal Review:\n", state["review"])
 ```
 
-## Więcej możliwości dzięki niestandardowym przepływom pracy
+## カスタム ワークフローでさらに活用する
 
-`AgentWorkflow` to świetny sposób na rozpoczęcie pracy z systemami wieloagentowymi. A co, jeśli potrzebujesz większej kontroli? Możesz utworzyć proces od podstaw. Oto kilka powodów, dla których warto utworzyć własny przepływ pracy:
+`AgentWorkflow` は、マルチエージェント システムを始めるのに最適な方法です。ただし、より詳細な制御が必要な場合はどうすればよいでしょうか。 ワークフローを最初から構築できます。独自のワークフローを構築する理由としては、次のようなものがあります。
 
-- **Większa kontrola nad procesem:** możesz określić dokładną ścieżkę, którą będą podążać Twoi agenci. Możesz na przykład tworzyć pętle, podejmować decyzje w określonych momentach lub zlecać agentom równoległe wykonywanie różnych zadań.
-- **Używaj złożonych danych:** wyjdź poza zwykły tekst. Niestandardowe przepływy pracy umożliwiają używanie bardziej uporządkowanych danych, takich jak obiekty JSON lub klasy niestandardowe, jako danych wejściowych i wyjściowych.
-- **Praca z różnymi mediami:** twórz agentów, którzy rozumieją i przetwarzają nie tylko tekst, ale też obrazy, dźwięk i wideo.
-- **Inteligentniejsze planowanie:** możesz zaprojektować przepływ pracy, który najpierw tworzy szczegółowy plan, zanim agenci zaczną pracować. Jest to przydatne w przypadku złożonych zadań, które wymagają wykonania wielu czynności.
-- **Włączanie autokorekty:** tworzenie agentów, którzy mogą sprawdzać własną pracę. Jeśli wynik nie jest wystarczająco dobry, agent może spróbować ponownie, tworząc pętlę ulepszeń, aż rezultat będzie idealny.
+- **プロセスをより詳細に制御する**: エージェントがたどる正確なパスを決定できます。これには、ループの作成、特定の時点での意思決定、エージェントが異なるタスクを並行して実行することが含まれます。
+- **複雑なデータを使用する**: プレーン テキストを超えて、カスタム ワークフローでは、入力と出力に JSON オブジェクトやカスタム クラスなど、より構造化されたデータを使用できます。
+- **さまざまなメディアを扱う**: テキストだけでなく、画像、音声、動画も理解して処理できるエージェントを構築します。
+- **よりスマートな計画**: エージェントが作業を開始する前に
+  詳細な計画を作成するワークフローを設計できます。これは、複数のステップを必要とする複雑なタスクに便利です。
+- **自己修正を有効にする**: 自分の作業を確認できるエージェントを作成します。出力が十分でない場合、エージェントは結果が完璧になるまで改善を繰り返します。
 
-Więcej informacji o przepływach pracy LlamaIndex znajdziesz w [dokumentacji przepływów pracy LlamaIndex](https://docs.llamaindex.ai/en/stable/module_guides/workflow/).
+LlamaIndex Workflows の詳細については、[LlamaIndex Workflows
+ドキュメント](https://docs.llamaindex.ai/en/stable/module_guides/workflow/)をご覧ください。
 
-Prześlij opinię
+フィードバックを送信
 
-O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Ostatnia aktualizacja: 2026-06-10 UTC.
+最終更新日 2026-06-10 UTC。
 
-Chcesz przekazać coś jeszcze?
+ご意見をお聞かせください
 
-[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-06-10 UTC."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-06-10 UTC。"],[],[]]

@@ -1,47 +1,47 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=fr
-fetched_at: 2026-08-03T04:35:47.445461+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/veo-3.1-generate-preview?hl=pl
+fetched_at: 2026-08-10T03:12:05.062143+00:00
 title: "Veo\u00a03.1 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Interfejs Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=pl) jest już ogólnie dostępny. Zalecamy korzystanie z tego interfejsu API, aby mieć dostęp do wszystkich najnowszych funkcji i modeli.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=pl)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google używa technologii AI do tłumaczenia treści na Twój preferowany język. Tłumaczenia wygenerowane przez AI mogą zawierać błędy.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [Strona główna](https://ai.google.dev/?hl=pl)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=pl)
+- [Dokumenty](https://ai.google.dev/gemini-api/docs?hl=pl)
 
-Envoyer des commentaires
+Prześlij opinię
 
 # Veo 3.1
 
-Un moteur cinématographique de pointe conçu pour la narration créative haut de gamme et la production vidéo expérimentale. Veo 3.1 est idéal pour une sortie 4K de qualité professionnelle, une génération audio synchronisée en mode natif et des mouvements de caméra complexes qui nécessitent le plus haut niveau de cohérence temporelle et de contrôle artistique.
+Najnowocześniejszy silnik filmowy zaprojektowany z myślą o zaawansowanym opowiadaniu historii
+i eksperymentalnej produkcji wideo. Veo 3.1 najlepiej sprawdza się w przypadku profesjonalnych filmów w rozdzielczości 4K, natywnie zsynchronizowanego generowania dźwięku i złożonych ruchów kamery, które wymagają najwyższego poziomu spójności czasowej i kontroli artystycznej.
 
-[Essayer dans Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=fr)
+[Wypróbuj w Google AI Studio](https://aistudio.google.com?model=veo-3.1-generate-preview&hl=pl)
 
-## Documentation
+## Dokumentacja
 
-Consultez la page [Génération de vidéos](https://ai.google.dev/gemini-api/docs/video?hl=fr) pour obtenir une couverture complète des
-fonctionnalités.
+Więcej informacji o funkcjach i możliwościach znajdziesz na stronie [Generowanie filmów](https://ai.google.dev/gemini-api/docs/video?hl=pl).
 
 ## veo-3.1-generate-preview
 
-| Propriété | Description |
+| Właściwość | Opis |
 | --- | --- |
-| Code id\_cardModel | **API Gemini**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
-| Types de données save acceptés | **Entrée**  Texte, image  **Résultat**  Vidéo avec audio |
-| token\_autoLimits | **Entrée de texte**  1 024 jetons  **Vidéo de sortie**  1 |
-| calendar\_monthDernière mise à jour | Janvier 2026 |
+| id\_cardKod modelu | **Gemini API**  `veo-3.1-generate-preview`  `veo-3.1-fast-generate-preview` |
+| saveObsługiwane typy danych | **Wejście**  Tekst, obraz  **Dane wyjściowe**  Film z dźwiękiem |
+| Limity token\_auto | **Wpisywanie tekstu**  1024 tokeny  **Film wyjściowy**  1 |
+| calendar\_monthOstatnia aktualizacja | Styczeń 2026 |
 
-Envoyer des commentaires
+Prześlij opinię
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+O ile nie stwierdzono inaczej, treść tej strony jest objęta [licencją Creative Commons – uznanie autorstwa 4.0](https://creativecommons.org/licenses/by/4.0/), a fragmenty kodu są dostępne na [licencji Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Szczegółowe informacje na ten temat zawierają [zasady dotyczące witryny Google Developers](https://developers.google.com/site-policies?hl=pl). Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.
 
-Dernière mise à jour le 2026/04/29 (UTC).
+Ostatnia aktualizacja: 2026-04-29 UTC.
 
-Voulez-vous nous donner plus d'informations ?
+Chcesz przekazać coś jeszcze?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/04/29 (UTC)."],[],[]]
+[[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2026-04-29 UTC."],[],[]]

@@ -1,66 +1,66 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=ko
-fetched_at: 2026-08-03T04:39:42.226145+00:00
-title: "\uc2dc\uc791\ud558\uae30 \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/get-started?hl=de
+fetched_at: 2026-08-10T03:22:05.431440+00:00
+title: "Erste Schritte \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-이제 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)가 정식 버전으로 출시되었습니다. 이 API를 사용하여 모든 최신 기능과 모델에 액세스하는 것이 좋습니다.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ko)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google은 AI 기술을 사용하여 콘텐츠를 사용자의 기본 언어로 번역합니다. AI 번역에는 오류가 있을 수 있습니다.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [홈](https://ai.google.dev/?hl=ko)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ko)
-- [문서](https://ai.google.dev/gemini-api/docs?hl=ko)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-의견 보내기
+Feedback geben
 
-# 시작하기
+# Erste Schritte
 
-이 가이드에서는 [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)를 사용하여 Gemini API를 시작하는 방법을 설명합니다. 1분 이내에 첫 번째 API 호출을 하고 텍스트 생성, 멀티모달 이해, 이미지 생성, 구조화된 출력, 도구, 함수 호출, 에이전트, 백그라운드 실행을 살펴봅니다.
+In diesem Leitfaden erfahren Sie, wie Sie mit der Gemini API und der [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) beginnen. Sie führen Ihren ersten API-Aufruf in weniger als einer Minute aus und lernen die Textgenerierung, das multimodale Verständnis, die Bildgenerierung, die strukturierte Ausgabe, Tools, Funktionsaufrufe, Agents und die Hintergrundausführung kennen.
 
-Interactions API는 [Python](https://github.com/googleapis/python-genai) 및 [JavaScript](https://github.com/googleapis/js-genai) SDK와 REST를 통해 사용할 수 있습니다.
+Die Interactions API ist über die [Python](https://github.com/googleapis/python-genai)- und [JavaScript](https://github.com/googleapis/js-genai)-SDKs sowie über REST verfügbar.
 
-## 1. API 키 가져오기
+## 1. API-Schlüssel anfordern
 
-Gemini API를 사용하려면 요청을 인증하고, 보안 한도를 적용하고, 계정의 사용량을 추적하는 API 키가 있어야 합니다.
+Wenn Sie die Gemini API verwenden möchten, benötigen Sie einen API-Schlüssel, um Ihre Anfragen zu authentifizieren, Sicherheitslimits durchzusetzen und die Nutzung Ihres Kontos zu verfolgen.
 
-- Google AI Studio는 신규 사용자를 위해 프로젝트와 API 키를 자동으로 생성합니다.
-  [API 키 페이지](https://aistudio.google.com/api-keys?hl=ko)에서 복사할 수 있습니다.
-- 새 키가 필요한 경우 AI Studio에서 **API 키 만들기**를 클릭하고 대화상자에 따라 새 키-프로젝트 쌍을 추가합니다.
+- In Google AI Studio werden für neue Nutzer automatisch ein Projekt und ein API-Schlüssel erstellt.
+  Sie können ihn auf der Seite [API-Schlüssel](https://aistudio.google.com/api-keys?hl=de) kopieren.
+- Wenn Sie einen neuen Schlüssel benötigen, klicken Sie in AI Studio auf **API-Schlüssel erstellen** und folgen Sie dem Dialogfeld, um ein neues Schlüssel-Projekt-Paar hinzuzufügen.
 
-[Gemini API 키 만들기](https://aistudio.google.com/apikey?hl=ko)
+[Gemini API-Schlüssel erstellen](https://aistudio.google.com/apikey?hl=de)
 
-키를 환경 변수로 설정합니다.
+Legen Sie Ihren Schlüssel als Umgebungsvariable fest:
 
 ```
 export GEMINI_API_KEY="YOUR_API_KEY"
 ```
 
-### 유료 등급으로 업그레이드
+### Upgrade auf die kostenpflichtige Stufe durchführen
 
-유료 등급으로 업그레이드하면 비율 제한이 증가하며 Cloud Billing을 설정해야 합니다.
+Wenn Sie auf die kostenpflichtige Stufe upgraden, werden Ihre Ratenbegrenzungen erhöht. Außerdem müssen Sie Cloud Billing einrichten.
 
-- AI Studio [API 키](https://aistudio.google.com/api-keys?hl=ko) 또는 [프로젝트](https://aistudio.google.com/projects?hl=ko) 페이지에서 **결제 설정**을 클릭합니다.
-- Cloud Billing 대화상자에 따라 결제 계정을 만들거나 연결하고, 지급 수단을 추가하고, 유료 크레딧으로 최소 10달러 (또는 해당 통화)를 선불합니다.
-- [Google AI Studio](https://aistudio.google.com/usage?hl=ko)의 **대시보드** > **사용량**에서 API 사용량을 확인합니다.
+- Klicken Sie auf den Seiten [API-Schlüssel](https://aistudio.google.com/api-keys?hl=de) oder [Projekte](https://aistudio.google.com/projects?hl=de) von AI Studio auf **Abrechnung einrichten**.
+- Folgen Sie dem Cloud-Abrechnungsdialogfeld, um ein Rechnungskonto zu erstellen oder zu verknüpfen, eine Zahlungsmethode hinzuzufügen und mindestens 10 $ (oder den entsprechenden Betrag in Ihrer Landeswährung) als Prepaid-Guthaben hinzuzufügen.
+- Ihre API-Nutzung können Sie in [Google AI Studio](https://aistudio.google.com/usage?hl=de) unter **Dashboard** > **Nutzung** einsehen.
 
-자세한 내용은 [결제 페이지](https://ai.google.dev/gemini-api/docs/billing?hl=ko)를 참고하세요.
+Weitere Informationen finden Sie auf der [Abrechnungsseite](https://ai.google.dev/gemini-api/docs/billing?hl=de).
 
-## 2. SDK 설치 및 첫 번째 호출 만들기
+## 2. SDK installieren und ersten Aufruf ausführen
 
-SDK를 설치하고 단일 API 호출로 텍스트를 생성합니다.
+Installieren Sie das SDK und generieren Sie Text mit einem einzigen API-Aufruf.
 
 ### Python
 
-SDK를 설치합니다.
+Installieren Sie das SDK:
 
 ```
 pip install -U google-genai
 ```
 
-클라이언트를 초기화하고 요청을 합니다.
+Client initialisieren und Anfrage stellen:
 
 ```
 from google import genai
@@ -74,15 +74,15 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
-SDK를 설치합니다.
+Installieren Sie das SDK:
 
 ```
 npm install @google/genai
 ```
 
-클라이언트를 초기화하고 요청을 합니다.
+Client initialisieren und Anfrage stellen:
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -108,7 +108,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**대답:**
+**Antwort**
 
 ```
 {
@@ -140,13 +140,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-REST를 사용하면 API는 메타데이터, 사용 통계, 턴의 단계별 기록이 포함된 전체 `Interaction` 리소스를 반환합니다.
+Bei Verwendung von REST gibt die API die vollständige `Interaction`-Ressource mit Metadaten, Nutzungsstatistiken und dem detaillierten Verlauf des Zuges zurück.
 
-SDK는 전체 응답을 노출하는 동시에 최종 출력에 직접 액세스할 수 있는 `interaction.output_text`, `interaction.output_image`과 같은 편의 속성도 제공합니다. [상호작용 개요](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ko)에서 응답 구조에 대해 자세히 알아보거나 [텍스트 생성 가이드](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko)에서 시스템 안내 및 생성 구성에 대해 자세히 알아보세요.
+Die SDKs machen zwar die vollständige Antwort verfügbar, bieten aber auch praktische Eigenschaften wie `interaction.output_text` und `interaction.output_image`, um direkt auf die endgültigen Ausgaben zuzugreifen. Weitere Informationen zur Antwortstruktur finden Sie in der [Übersicht über Interaktionen](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de). Details zu Systemanweisungen und der Generierungskonfiguration finden Sie im [Leitfaden zur Textgenerierung](https://ai.google.dev/gemini-api/docs/text-generation?hl=de).
 
-## 3. 대답 스트리밍
+## 3. Antwort streamen
 
-더 원활한 상호작용을 위해 대답이 생성되는 대로 스트리밍하세요. 각 `step.delta` 이벤트는 즉시 표시할 수 있는 텍스트 청크를 제공합니다.
+Um die Interaktion flüssiger zu gestalten, können Sie die Antwort streamen, während sie generiert wird. Bei jedem `step.delta`-Ereignis wird ein Textblock geliefert, den Sie sofort anzeigen können.
 
 ### Python
 
@@ -164,7 +164,7 @@ for event in stream:
     print(event)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -196,9 +196,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions?alt=
   }'
 ```
 
-스트리밍 시 서버는 서버 전송 이벤트 (SSE) 스트림으로 응답합니다. 각 이벤트에는 유형과 JSON 데이터가 포함됩니다.
+Beim Streaming antwortet der Server mit einem Stream von Server-Sent Events (SSE). Jedes Ereignis enthält einen Typ und JSON-Daten.
 
-**대답:**
+**Antwort**
 
 ```
 event: interaction.created
@@ -229,18 +229,18 @@ event: interaction.completed
 data: {"interaction":{"id":"v1_Chd...","status":"completed","usage":{"total_tokens":197}},"event_type":"interaction.completed"}
 ```
 
-스트리밍 이벤트 및 델타 유형 처리에 관한 자세한 내용은 [스트리밍 상호작용 가이드](https://ai.google.dev/gemini-api/docs/streaming?hl=ko)를 참고하세요.
+Eine detaillierte Beschreibung der Verarbeitung von Streaming-Ereignissen und ‑Deltatypen finden Sie in der [Anleitung zu Streaming-Interaktionen](https://ai.google.dev/gemini-api/docs/streaming?hl=de).
 
-## 4. 멀티턴 대화
+## 4. Unterhaltungen über mehrere Themen
 
-Interactions API는 다음 두 가지 접근 방식으로 멀티턴 대화를 지원합니다.
+Die Interactions API unterstützt Mehrfachdialog-Unterhaltungen mit zwei Ansätzen:
 
-- **상태 저장 (권장)**: `previous_interaction_id`를 사용하여 서버에서 대화를 계속합니다. 서버에서 기록을 관리하고 캐싱을 최적화해야 하는 대부분의 채팅 및 에이전트 워크플로에 적합합니다.
-- **스테이트리스**: 각 요청에서 이전 턴 (중간 모델 사고 및 도구 단계 포함)을 모두 전달하여 클라이언트에서 대화 기록을 관리합니다.
+- **Zustandsbehaftet (empfohlen)**: Setzen Sie eine Unterhaltung auf dem Server mit `previous_interaction_id` fort. Ideal für die meisten Chat- und Agentic-Workflows, bei denen der Server den Verlauf verwalten und das Caching optimieren soll.
+- **Zustandslos**: Verwalten Sie den Unterhaltungsverlauf auf dem Client, indem Sie alle vorherigen Turns (einschließlich der Zwischenschritte für das Modell und das Tool) in jeder Anfrage übergeben.
 
-### 상태 저장 (권장)
+### Zustandsbehaftet (empfohlen)
 
-`previous_interaction_id`를 전달하여 상호작용을 연결합니다. 서버에서 전체 대화 기록을 관리합니다.
+Ketten Sie Interaktionen, indem Sie `previous_interaction_id` übergeben. Der Server verwaltet den gesamten Unterhaltungsverlauf für Sie.
 
 ### Python
 
@@ -264,7 +264,7 @@ interaction2 = client.interactions.create(
 print("Response 2:", interaction2.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -310,9 +310,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 스테이트리스(Stateless)
+### Zustandslos
 
-클라이언트 측에서 `store=false`를 설정하고 대화 기록을 관리합니다. 모델에서 생성된 모든 단계 (`thought` 및 `function_call` 단계 포함)를 수신된 그대로 유지하고 다시 전송해야 합니다.
+`store=false` festlegen und den Unterhaltungsverlauf clientseitig verwalten. Sie müssen alle vom Modell generierten Schritte (einschließlich `thought`- und `function_call`-Schritte) genau so beibehalten und noch einmal senden, wie Sie sie erhalten haben.
 
 ### Python
 
@@ -351,7 +351,7 @@ interaction2 = client.interactions.create(
 print("Response 2:", interaction2.steps[-1].content[0].text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -424,7 +424,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**대답:**
+**Antwort**
 
 ```
 {
@@ -451,11 +451,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-두 번째 상호작용에서는 새로운 단계만 포함하지만 이전 턴의 컨텍스트에 기반한 완전한 응답 객체를 반환합니다. [멀티턴 대화 가이드](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko#multi-turn-conversations)에서 상태 유지에 대해 자세히 알아보거나 클라이언트 측 기록 관리를 위해 [스테이트리스 모드](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko#stateless-conversations)를 살펴보세요.
+Bei der zweiten Interaktion wird ein vollständiges Antwortobjekt zurückgegeben, das nur die neuen Schritte enthält, aber auf dem Kontext des vorherigen Turns basiert. Weitere Informationen zum Beibehalten des Status finden Sie im [Leitfaden für Mehrfachdialoge](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#multi-turn-conversations). Informationen zur clientseitigen Verlaufsverwaltung finden Sie unter [Zustandsloser Modus](https://ai.google.dev/gemini-api/docs/text-generation?hl=de#stateless-conversations).
 
-## 5. 멀티모달 이해
+## 5. Multimodales Verstehen
 
-Gemini 모델은 이미지, 오디오, 동영상, 문서를 기본적으로 이해합니다. 단일 요청에서 텍스트와 함께 미디어를 전달합니다.
+Gemini-Modelle können Bilder, Audio, Video und Dokumente nativ verstehen. Media zusammen mit Text in einer einzigen Anfrage übergeben.
 
 ### Python
 
@@ -489,7 +489,7 @@ interaction = client.interactions.create(
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import fs from "fs";
@@ -547,7 +547,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
   }'
 ```
 
-**대답:**
+**Antwort**
 
 ```
 {
@@ -572,27 +572,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions"   -
 }
 ```
 
-[이미지 이해 가이드](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko)에서 이미지, 동영상, 오디오 파일을 전달하는 방법을 알아보세요.
+Informationen zum Übergeben von Bildern, Videos und Audiodateien finden Sie im [Leitfaden zum Bildverständnis](https://ai.google.dev/gemini-api/docs/image-understanding?hl=de).
 
 [hearing
 
-오디오 이해
+Verständnis von Audioinhalten
 
-오디오 파일의 스크립트를 작성하거나, 요약하거나, 오디오 파일에 관한 질문에 답변합니다.](https://ai.google.dev/gemini-api/docs/audio?hl=ko)
+Audioinhalte transkribieren, zusammenfassen oder Fragen dazu beantworten lassen](https://ai.google.dev/gemini-api/docs/audio?hl=de)
 [videocam
 
-동영상 이해
+Videos verstehen
 
-동영상 콘텐츠를 분석하고, 이벤트를 찾고, 동작을 설명합니다.](https://ai.google.dev/gemini-api/docs/video-understanding?hl=ko)
+Videoinhalte analysieren, Ereignisse lokalisieren und Aktionen beschreiben](https://ai.google.dev/gemini-api/docs/video-understanding?hl=de)
 [description
 
-문서 처리
+Dokumentverarbeitung
 
-PDF 및 기타 문서 형식에서 정보를 추출합니다.](https://ai.google.dev/gemini-api/docs/document-processing?hl=ko)
+Informationen aus PDFs und anderen Dokumentformaten extrahieren](https://ai.google.dev/gemini-api/docs/document-processing?hl=de)
 
-## 6. 멀티모달 생성
+## 6. Multimodale Generierung
 
-Gemini는 [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko) 이미지 모델을 사용하여 기본적으로 이미지를 생성할 수 있습니다.
+Gemini kann Bilder nativ mit den Bildmodellen [Nano Banana](https://ai.google.dev/gemini-api/docs/image-generation?hl=de) generieren.
 
 ### Python
 
@@ -611,7 +611,7 @@ with open("generated_image.png", "wb") as f:
     f.write(base64.b64decode(interaction.output_image.data))
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -645,7 +645,7 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
   }'
 ```
 
-**대답:**
+**Antwort**
 
 ```
 {
@@ -668,22 +668,22 @@ curl -s -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" 
 }
 ```
 
-모델이 이미지를 생성하면 `steps` 배열 내 단계와 `output_image` 편의 속성을 통해 base64로 인코딩된 이미지 데이터를 반환합니다. [이미지 생성 가이드](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko)에서 가로세로 비율, 이미지 편집, 참조에 대해 알아보세요.
+Wenn das Modell ein Bild generiert, gibt es die base64-codierten Bilddaten in einem Schritt im `steps`-Array sowie über die Convenience-Property `output_image` zurück. Im [Leitfaden zur Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de) finden Sie Informationen zu Seitenverhältnissen, Bildbearbeitung und Referenzen.
 
 [record\_voice\_over
 
-음성 생성
+Sprachgenerierung
 
-Gemini 3.1 Flash TTS로 표현력이 풍부한 다중 화자 음성을 생성하세요.](https://ai.google.dev/gemini-api/docs/speech-generation?hl=ko)
+Mit Gemini 3.1 Flash TTS ausdrucksstarke Sprache mit mehreren Sprechern generieren](https://ai.google.dev/gemini-api/docs/speech-generation?hl=de)
 [music\_note
 
-음악 생성
+Musikgenerierung
 
-Lyria 3로 클립과 전체 길이 노래를 만드세요.](https://ai.google.dev/gemini-api/docs/music-generation?hl=ko)
+Mit Lyria 3 lassen sich Clips und vollständige Songs erstellen.](https://ai.google.dev/gemini-api/docs/music-generation?hl=de)
 
-## 7. 구조화된 출력 사용
+## 7. Strukturierte Ausgabe verwenden
 
-정의한 스키마와 일치하는 JSON을 반환하도록 모델을 구성합니다. 구조화된 출력은 [Pydantic](https://docs.pydantic.dev/latest/) (Python) 및 [Zod](https://zod.dev/) (JavaScript)와 함께 작동합니다.
+Konfigurieren Sie das Modell so, dass es JSON zurückgibt, das einem von Ihnen definierten Schema entspricht. Die strukturierte Ausgabe funktioniert mit [Pydantic](https://docs.pydantic.dev/latest/) (Python) und [Zod](https://zod.dev/) (JavaScript).
 
 ### Python
 
@@ -713,7 +713,7 @@ recipe = Recipe.model_validate_json(interaction.output_text)
 print(recipe)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -786,7 +786,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**대답:**
+**Antwort**
 
 ```
 {
@@ -808,11 +808,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-출력 텍스트 블록에는 요청된 스키마를 정확하게 준수하는 유효한 JSON 문자열이 포함되어 있습니다. 더 복잡한 구조와 재귀 스키마를 정의하는 방법을 알아보려면 [구조화된 출력 가이드](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko)를 참고하세요.
+Der Ausgabetextblock enthält einen gültigen JSON-String, der genau dem angeforderten Schema entspricht. Informationen zum Definieren komplexerer Strukturen und rekursiver Schemas finden Sie im [Leitfaden zur strukturierten Ausgabe](https://ai.google.dev/gemini-api/docs/structured-output?hl=de).
 
-## 8. 도구 사용하기
+## 8. Tools verwenden
 
-Google 검색을 사용하여 모델의 대답을 실시간 정보에 그라운딩합니다. API는 자동으로 검색하고, 결과를 처리하고, 인용을 반환합니다.
+Die Antwort des Modells mit Echtzeitinformationen aus der Google Suche fundieren. Die API sucht automatisch, verarbeitet Ergebnisse und gibt Zitationen zurück.
 
 ### Python
 
@@ -840,7 +840,7 @@ for step in interaction.steps:
                         print(f"  [{annotation.title}]({annotation.url})")
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -885,7 +885,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-**대답:**
+**Antwort**
 
 ```
 {
@@ -935,41 +935,41 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-검색 단계는 상호작용 기록에 자세히 설명되어 있으며 최종 출력에는 웹 소스를 가리키는 인라인 인용이 포함됩니다.
+Die Suchschritte werden im Interaktionsverlauf detailliert beschrieben und die endgültige Ausgabe enthält Inline-Zitationen, die auf Webquellen verweisen.
 
-[Google 검색 그라운딩 가이드](https://ai.google.dev/gemini-api/docs/google-search?hl=ko)에서 검색 인용을 추출하는 방법을 알아보거나 [도구 조합 가이드](https://ai.google.dev/gemini-api/docs/tool-combination?hl=ko)에서 여러 도구를 결합하는 방법을 알아보세요.
+Informationen zum Extrahieren von Suchzitaten finden Sie in der [Anleitung zur Fundierung mit der Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de). Informationen zum Kombinieren mehrerer Tools finden Sie in der [Anleitung zur Kombination von Tools](https://ai.google.dev/gemini-api/docs/tool-combination?hl=de).
 
 [code
 
-코드 실행
+Code-Ausführung
 
-안전한 샌드박스 Borg 환경에서 Python 코드를 실행합니다.](https://ai.google.dev/gemini-api/docs/code-execution?hl=ko)
+Python-Code in einer sicheren Sandbox-Borg-Umgebung ausführen](https://ai.google.dev/gemini-api/docs/code-execution?hl=de)
 [link
 
-URL 컨텍스트
+URL-Kontext
 
-웹페이지 콘텐츠에서 대답을 그라운딩하기 위해 공개 웹 URL을 직접 전달합니다.](https://ai.google.dev/gemini-api/docs/url-context?hl=ko)
+Sie können öffentliche Web-URLs direkt übergeben, um Antworten auf Webseiteninhalten zu fundieren.](https://ai.google.dev/gemini-api/docs/url-context?hl=de)
 [search
 
-파일 검색
+Dateisuche
 
-업로드된 문서와 미디어 파일을 색인화하고 검색합니다.](https://ai.google.dev/gemini-api/docs/file-search?hl=ko)
+Hochgeladene Dokumente und Mediendateien indexieren und durchsuchen](https://ai.google.dev/gemini-api/docs/file-search?hl=de)
 [map
 
-Google 지도
+Google Maps
 
-실제 지리 공간 및 위치 데이터를 기반으로 대답을 그라운딩합니다.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=ko)
+Antworten mit realen raumbezogenen Daten und Standortdaten fundieren.](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=de)
 [computer
 
-컴퓨터 사용
+Computernutzung
 
-브라우저 자동화 및 화면 상호작용](https://ai.google.dev/gemini-api/docs/computer-use?hl=ko)
+Browserautomatisierung und Bildschirminteraktion.](https://ai.google.dev/gemini-api/docs/computer-use?hl=de)
 
-## 9. 자체 함수 호출
+## 9. Eigene Funktionen aufrufen
 
-함수 호출을 사용하면 모델을 코드에 연결할 수 있습니다. 함수의 이름과 매개변수를 선언하면 모델이 호출 시기를 결정하고 구조화된 인수를 반환하며, 개발자는 이를 로컬에서 실행하고 결과를 다시 전송합니다.
+Mit Funktionsaufrufen können Sie das Modell mit Ihrem Code verbinden. Sie deklarieren den Namen und die Parameter einer Funktion, das Modell entscheidet, wann sie aufgerufen wird, und gibt strukturierte Argumente zurück. Sie führen sie lokal aus und senden das Ergebnis zurück.
 
-### 상태 저장 (권장)
+### Zustandsbehaftet (empfohlen)
 
 ### Python
 
@@ -1033,7 +1033,7 @@ while True:
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1154,13 +1154,13 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-### 스테이트리스(Stateless)
+### Zustandslos
 
-클라이언트 측에서 대화 기록을 관리하고 `store=false`를 설정하여 상태 비저장 모드에서 함수 호출을 사용할 수도 있습니다. 스테이트리스(Stateless) 모드에서는 각 후속 요청의 `input` 필드에 대화의 전체 기록을 전달해야 합니다. 이 기록에는 다음이 포함되어야 합니다.
+Sie können Funktionsaufrufe auch im statuslosen Modus verwenden, indem Sie den Unterhaltungsverlauf clientseitig verwalten und `store=false` festlegen. Im zustandslosen Modus müssen Sie den vollständigen Verlauf der Unterhaltung im Feld `input` jeder nachfolgenden Anfrage übergeben. Dieser Verlauf muss Folgendes enthalten:
 
-1. 초기 `user_input` 단계입니다.
-2. 턴 1에서 반환된 모든 모델 생성 단계 (`thought` 및 `function_call` 단계 포함)가 수신된 그대로입니다.
-3. 실행된 함수의 출력이 포함된 `function_result` 단계
+1. Der erste Schritt `user_input`.
+2. Alle vom Modell generierten Schritte, die in Turn 1 zurückgegeben werden (einschließlich der Schritte `thought` und `function_call`), werden genau so zurückgegeben, wie sie empfangen wurden.
+3. Der `function_result`-Schritt, der die Ausgabe Ihrer ausgeführten Funktion enthält.
 
 ### Python
 
@@ -1228,7 +1228,7 @@ while True:
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1368,9 +1368,9 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }"
 ```
 
-**대답:**
+**Antwort**
 
-1턴에서 모델은 상태가 `requires_action`이고 `function_call` 단계가 포함된 응답을 반환합니다.
+In Runde 1 gibt das Modell eine Antwort mit dem Status `requires_action` und dem Schritt `function_call` zurück:
 
 ```
 {
@@ -1391,7 +1391,7 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-함수를 로컬로 실행하고 결과를 제출하면 (2번째 턴) 최종 완료된 상호작용이 반환됩니다.
+Nachdem Sie die Funktion lokal ausgeführt und das Ergebnis eingereicht haben (Turn 2), wird die endgültige abgeschlossene Interaktion zurückgegeben:
 
 ```
 {
@@ -1421,11 +1421,11 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
 }
 ```
 
-병렬 함수 호출 또는 함수 선택 모드와 같은 고급 기능은 [함수 호출 가이드](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko)를 참고하세요.
+Informationen zu erweiterten Funktionen wie parallele Funktionsaufrufe oder Modi für die Funktionsauswahl finden Sie im [Leitfaden für Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de).
 
-## 10. 관리 에이전트 실행
+## 10. Verwalteten Agent ausführen
 
-관리형 에이전트는 코드 실행 및 파일 관리와 같은 도구에 액세스할 수 있는 원격 샌드박스에서 실행됩니다. `model` 대신 `agent`를 전달하고 `environment="remote"`를 설정합니다.
+Verwaltete Agents werden in einer Remote-Sandbox mit Zugriff auf Tools wie Codeausführung und Dateiverwaltung ausgeführt. Übergeben Sie ein `agent` anstelle eines `model` und legen Sie `environment="remote"` fest.
 
 ### Python
 
@@ -1443,7 +1443,7 @@ print(f"Environment: {interaction.environment_id}")
 print(interaction.output_text)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1472,27 +1472,27 @@ curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
   }'
 ```
 
-자체 안내, 기술, 데이터 소스를 사용하여 [맞춤 에이전트](https://ai.google.dev/gemini-api/docs/custom-agents?hl=ko)를 정의하고 저장할 수도 있습니다.
+Sie können auch [benutzerdefinierte Agents](https://ai.google.dev/gemini-api/docs/custom-agents?hl=de) mit eigenen Anweisungen, Skills und Datenquellen definieren und speichern.
 
 [rocket\_launch
 
-빠른 시작
+Kurzanleitung
 
-첫 번째 에이전트 통화를 하고, 응답을 스트리밍하고, 맞춤 에이전트를 빌드합니다.](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko)
+Ersten Agent-Aufruf starten, Antworten streamen und benutzerdefinierten Agenten erstellen](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de)
 [smart\_toy
 
-Antigravity 에이전트
+Antigravity-Agent
 
-기본 에이전트의 기능, 도구, 멀티모달 입력, 가격 책정](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=ko)
+Funktionen, Tools, multimodale Eingabe und Preise für den Standard-Agenten.](https://ai.google.dev/gemini-api/docs/antigravity-agent?hl=de)
 [experiment
 
-AI Studio의 에이전트
+KI-Agenten in AI Studio
 
-코드를 작성하지 않고 에이전트의 프로토타입을 제작할 수 있는 시각적 플레이그라운드입니다.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=ko)
+Visuelle Umgebung zum Erstellen von Agent-Prototypen ohne Code.](https://ai.google.dev/gemini-api/docs/aistudio-agents?hl=de)
 
-## 11. 백그라운드에서 작업 실행
+## 11. Aufgaben im Hintergrund ausführen
 
-`background=True`를 설정하여 긴 작업을 비동기적으로 실행합니다. `interactions.get()`로 결과를 폴링합니다. 자세한 내용은 [백그라운드 실행 가이드](https://ai.google.dev/gemini-api/docs/background-execution?hl=ko)를 참고하세요.
+Legen Sie `background=True` fest, um lange Aufgaben asynchron auszuführen. Rufen Sie `interactions.get()` auf, um die Ergebnisse abzufragen. Weitere Informationen finden Sie im [Leitfaden zur Ausführung im Hintergrund](https://ai.google.dev/gemini-api/docs/background-execution?hl=de).
 
 ### Python
 
@@ -1523,7 +1523,7 @@ while True:
     time.sleep(5)
 ```
 
-### 자바스크립트
+### JavaScript
 
 ```
 import { GoogleGenAI } from "@google/genai";
@@ -1587,9 +1587,9 @@ while true; do
 done
 ```
 
-**대답:**
+**Antwort**
 
-초기 응답은 상태 `in_progress`로 즉시 반환됩니다.
+Die erste Antwort wird sofort mit dem Status `in_progress` zurückgegeben:
 
 ```
 {
@@ -1600,7 +1600,7 @@ done
 }
 ```
 
-백그라운드 작업이 완전히 실행되면 상호작용 상태를 확인하여 다음을 반환합니다.
+Nachdem die Hintergrundaufgabe vollständig ausgeführt wurde, wird beim Prüfen des Interaktionsstatus Folgendes zurückgegeben:
 
 ```
 {
@@ -1622,27 +1622,27 @@ done
 }
 ```
 
-[백그라운드 실행 가이드](https://ai.google.dev/gemini-api/docs/background-execution?hl=ko)에서 모델과 에이전트를 비동기적으로 실행하는 방법을 알아보세요.
+Informationen zum asynchronen Ausführen von Modellen und Agents finden Sie im [Leitfaden zur Hintergrundausführung](https://ai.google.dev/gemini-api/docs/background-execution?hl=de).
 
-## 다음 단계
+## Nächste Schritte
 
-- [백그라운드 실행](https://ai.google.dev/gemini-api/docs/background-execution?hl=ko): 장기 실행 작업을 비동기식으로 실행하고 상태를 관리합니다.
-- [텍스트 생성](https://ai.google.dev/gemini-api/docs/text-generation?hl=ko): 시스템 요청 사항, 생성 구성, 고급 텍스트 패턴
-- [이미지 생성](https://ai.google.dev/gemini-api/docs/image-generation?hl=ko): 가로세로 비율, 이미지 수정, 스타일 참조
-- [이미지 이해](https://ai.google.dev/gemini-api/docs/image-understanding?hl=ko): 분류, 객체 감지, 시각적 Q&A
-- [생각하기](https://ai.google.dev/gemini-api/docs/thinking?hl=ko): 복잡한 작업에 생각의 사슬 추론을 사용합니다.
-- [함수 호출](https://ai.google.dev/gemini-api/docs/function-calling?hl=ko): 병렬, 구성, 제한된 함수 모드
-- [Google 검색](https://ai.google.dev/gemini-api/docs/google-search?hl=ko): 그라운딩, 인용, 추천 검색어
-- [관리 에이전트](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=ko): 코드 실행 및 파일 관리가 포함된 사전 빌드된 에이전트입니다.
-- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=ko): 계획 및 합성을 통한 자율적인 다단계 연구
-- [구조화된 출력](https://ai.google.dev/gemini-api/docs/structured-output?hl=ko): JSON 스키마, 열거형, 재귀 유형 정의
+- [Hintergrundausführung](https://ai.google.dev/gemini-api/docs/background-execution?hl=de): Führen Sie lang andauernde Aufgaben asynchron aus und verwalten Sie den Status.
+- [Textgenerierung](https://ai.google.dev/gemini-api/docs/text-generation?hl=de): Systemanweisungen, Generierungskonfiguration und erweiterte Textmuster.
+- [Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de): Seitenverhältnisse, Bildbearbeitung und Stilreferenzen.
+- [Bildverständnis](https://ai.google.dev/gemini-api/docs/image-understanding?hl=de): Klassifizierung, Objekterkennung und visuelle Fragen und Antworten.
+- [Denken](https://ai.google.dev/gemini-api/docs/thinking?hl=de): Verwenden Sie die Chain-of-Thought-Methode für komplexe Aufgaben.
+- [Funktionsaufrufe](https://ai.google.dev/gemini-api/docs/function-calling?hl=de): Parallele, zusammengesetzte und eingeschränkte Funktionsmodi.
+- [Google Suche](https://ai.google.dev/gemini-api/docs/google-search?hl=de): Fundierung, Zitationen und Suchvorschläge.
+- [Verwaltete KI-Agenten](https://ai.google.dev/gemini-api/docs/managed-agents-quickstart?hl=de): Vordefinierte Agents mit Code-Ausführung und Dateiverwaltung.
+- [Deep Research](https://ai.google.dev/gemini-api/docs/deep-research?hl=de): Autonome mehrstufige Recherche mit Planung und Synthese.
+- [Strukturierte Ausgabe](https://ai.google.dev/gemini-api/docs/structured-output?hl=de): JSON-Schemas, Enums und rekursive Typdefinitionen.
 
-의견 보내기
+Feedback geben
 
-달리 명시되지 않는 한 이 페이지의 콘텐츠에는 [Creative Commons Attribution 4.0 라이선스](https://creativecommons.org/licenses/by/4.0/)에 따라 라이선스가 부여되며, 코드 샘플에는 [Apache 2.0 라이선스](https://www.apache.org/licenses/LICENSE-2.0)에 따라 라이선스가 부여됩니다. 자세한 내용은 [Google Developers 사이트 정책](https://developers.google.com/site-policies?hl=ko)을 참조하세요. 자바는 Oracle 및/또는 Oracle 계열사의 등록 상표입니다.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-최종 업데이트: 2026-07-30(UTC)
+Zuletzt aktualisiert: 2026-07-30 (UTC).
 
-의견을 전달하고 싶나요?
+Haben Sie Feedback für uns?
 
-[[["이해하기 쉬움","easyToUnderstand","thumb-up"],["문제가 해결됨","solvedMyProblem","thumb-up"],["기타","otherUp","thumb-up"]],[["필요한 정보가 없음","missingTheInformationINeed","thumb-down"],["너무 복잡함/단계 수가 너무 많음","tooComplicatedTooManySteps","thumb-down"],["오래됨","outOfDate","thumb-down"],["번역 문제","translationIssue","thumb-down"],["샘플/코드 문제","samplesCodeIssue","thumb-down"],["기타","otherDown","thumb-down"]],["최종 업데이트: 2026-07-30(UTC)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-30 (UTC)."],[],[]]

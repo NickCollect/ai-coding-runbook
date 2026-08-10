@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/function-calling?hl=it
-fetched_at: 2026-08-03T04:34:12.901225+00:00
+fetched_at: 2026-08-10T03:20:25.304622+00:00
 title: "Chiamate di funzione con l'API Gemini \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

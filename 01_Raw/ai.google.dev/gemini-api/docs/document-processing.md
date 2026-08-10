@@ -1,6 +1,6 @@
 ---
 source_url: https://ai.google.dev/gemini-api/docs/document-processing?hl=pl
-fetched_at: 2026-08-03T04:32:49.218176+00:00
+fetched_at: 2026-08-10T03:25:26.139460+00:00
 title: "rozumienie dokument\u00f3w; \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 

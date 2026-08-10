@@ -1,198 +1,167 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=it
-fetched_at: 2026-08-03T04:26:42.429441+00:00
-title: "Sviluppare app full-stack in Google AI Studio \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=de
+fetched_at: 2026-08-10T03:09:35.917164+00:00
+title: "Full-Stack-Apps in Google\u00a0AI Studio entwickeln \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'API [Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=it) è ora disponibile a livello generale. Ti consigliamo di utilizzare questa API per accedere a tutti i modelli e a tutte le funzionalità più recenti.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=it)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-Google utilizza la tecnologia AI per tradurre i contenuti nella tua lingua preferita. Le traduzioni generate dall'AI potrebbero contenere errori.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [Home page](https://ai.google.dev/?hl=it)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=it)
-- [Documenti](https://ai.google.dev/gemini-api/docs?hl=it)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-Invia feedback
+Feedback geben
 
-# Sviluppare app full-stack in Google AI Studio
+# Full-Stack-Apps in Google AI Studio entwickeln
 
-Google AI Studio ora supporta lo sviluppo full-stack, consentendoti di creare
-applicazioni che vanno oltre i prototipi lato client. Con un runtime lato server, puoi gestire i segreti, connetterti ad API esterne e creare esperienze multiplayer in tempo reale.
+Google AI Studio unterstützt jetzt die Full-Stack-Entwicklung. So können Sie Anwendungen erstellen, die über clientseitige Prototypen hinausgehen. Mit einer serverseitigen Laufzeit können Sie Secrets verwalten, eine Verbindung zu externen APIs herstellen und Echtzeit-Multiplayer-Erlebnisse entwickeln.
 
-## Runtime lato server
+## Serverseitige Laufzeit
 
-Le applicazioni Google AI Studio ora possono includere un componente lato server (Node.js).
-In questo modo potrai:
+Google AI Studio-Anwendungen können jetzt eine serverseitige Komponente (Node.js) enthalten.
+Damit können Sie
 
-- **Esegui logica lato server**: esegui codice che non deve essere esposto al client.
-- **Accedere ai pacchetti npm**: l'[agente antigravità](https://antigravity.google/docs/agent?hl=it)
-  può installare e utilizzare pacchetti del vasto ecosistema npm.
-- **Gestisci i secret**: utilizza in modo sicuro chiavi API e credenziali.
+- **Serverseitige Logik ausführen**: Führen Sie Code aus, der nicht für den Client sichtbar sein soll.
+- **Auf npm-Pakete zugreifen**: Der [Antigravity-Agent](https://antigravity.google/docs/agent?hl=de) kann Pakete aus dem umfangreichen npm-Ökosystem installieren und verwenden.
+- **Secrets verwalten**: API-Schlüssel und Anmeldedaten sicher verwenden.
 
-### Utilizzare i pacchetti npm
+### npm-Pakete verwenden
 
-Non devi eseguire manualmente `npm install`. Basta chiedere all'agente di aggiungere una funzionalità che richiede un pacchetto e l'agente gestirà l'installazione e l'importazione.
+Sie müssen `npm install` nicht manuell ausführen. Bitten Sie den Agent einfach, Funktionen hinzuzufügen, für die ein Paket erforderlich ist. Er kümmert sich dann um die Installation und den Import.
 
-**Esempio**: > "Utilizza `axios` per recuperare i dati dall'API esterna."
+**Beispiel**: > „Verwende `axios`, um Daten aus der externen API abzurufen.“
 
-## Gestire i secret in modo sicuro
+## Secrets sicher verwalten
 
-Con la gestione del codice e dei secret lato server, ora puoi creare app che interagiscono con il mondo.
+Mit serverseitigem Code und der Verwaltung von Secrets können Sie jetzt Apps entwickeln, die mit der Welt interagieren.
 
-### Chiave API Gemini
+### Gemini API-Schlüssel
 
-Quando crei una nuova app che utilizza l'API Gemini, AI Studio configura automaticamente la tua `GEMINI_API_KEY` come secret lato server, senza richiedere alcuna configurazione manuale. Puoi visualizzare questa chiave nel riquadro **Secret** delle Impostazioni. Le chiamate all'API Gemini della tua app vengono effettuate dal codice lato server utilizzando questa chiave, quindi non viene mai esposta nel browser.
+Wenn Sie eine neue App erstellen, die die Gemini API verwendet, konfiguriert AI Studio Ihren `GEMINI_API_KEY` automatisch als serverseitiges Secret. Eine manuelle Einrichtung ist nicht erforderlich. Sie können diesen Schlüssel in den Einstellungen im Bereich **Secrets** aufrufen. Die Gemini API-Aufrufe Ihrer App werden mit diesem Schlüssel über serverseitigen Code ausgeführt. Er wird also nie im Browser angezeigt.
 
-### Chiavi API di terze parti
+### API-Schlüssel von Drittanbietern
 
-Per altri servizi, puoi aggiungere le chiavi API manualmente:
+Bei anderen Diensten können Sie API-Schlüssel manuell hinzufügen:
 
-- **API di terze parti**: connettiti a servizi come Stripe, SendGrid o API REST personalizzate.
-- **Database**: connettiti a database esterni (ad es. tramite Supabase, Firebase o MongoDB Atlas) per conservare i dati oltre la sessione.
+- **Drittanbieter-APIs**: Stellen Sie eine Verbindung zu Diensten wie Stripe, SendGrid oder benutzerdefinierten REST-APIs her.
+- **Datenbanken**: Stellen Sie eine Verbindung zu externen Datenbanken her (z.B. über Supabase, Firebase oder MongoDB Atlas), um Daten über die Sitzung hinaus zu speichern.
 
-Quando crei app reali, spesso devi connetterti a servizi di terze parti
-(come Twilio, Slack o database) che richiedono chiavi API. Puoi aggiungere le chiavi
-manualmente seguendo questi passaggi:
+Wenn Sie Apps für die reale Welt entwickeln, müssen Sie oft eine Verbindung zu Drittanbieterdiensten wie Twilio, Slack oder Datenbanken herstellen, für die API-Schlüssel erforderlich sind. Sie können Schlüssel manuell hinzufügen. Gehen Sie dazu so vor:
 
-1. **Aggiungi un secret**: vai al menu **Impostazioni** in Google AI Studio e cerca la sezione Secret.
-2. **Memorizza la chiave**: aggiungi qui le tue chiavi API o i tuoi token segreti.
-3. **Accesso nel codice**: l'agente può scrivere codice lato server che accede a questi
-   segreti in modo sicuro (in genere tramite variabili di ambiente), assicurandosi che non vengano
-   mai esposti al browser lato client.
+1. **Secret hinzufügen**: Rufen Sie in Google AI Studio das Menü **Einstellungen** auf und suchen Sie nach dem Bereich „Secrets“.
+2. **Schlüssel speichern**: Fügen Sie hier Ihre API-Schlüssel oder geheimen Tokens hinzu.
+3. **Zugriff im Code**: Der Agent kann serverseitigen Code schreiben, der sicher auf diese vertraulichen Informationen zugreift (in der Regel über Umgebungsvariablen). So wird sichergestellt, dass sie niemals im clientseitigen Browser offengelegt werden.
 
-Se necessario, l'agente
-mostrerà anche una scheda nella chat che ti chiede di aggiungere le chiavi ogni volta che è necessario un nuovo secret
-o quando viene rilevata una nuova chiave nelle variabili di ambiente del progetto.
+Bei Bedarf wird im Chat auch eine Karte angezeigt, in der Sie aufgefordert werden, Schlüssel hinzuzufügen, wenn ein neues Secret erforderlich ist oder wenn in den Umgebungsvariablen des Projekts ein neuer Schlüssel erkannt wird.
 
-### Integrazione di Firebase per database e autenticazione
+### Firebase-Integration für Datenbank und Authentifizierung
 
-Google AI Studio ora semplifica l'aggiunta di un database o dell'autenticazione alla tua
-app tramite un'
-[integrazione di Firebase](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=it).
-L'agente Antigravity può eseguire il provisioning e configurare automaticamente i seguenti servizi:
+Mit Google AI Studio können Sie Ihrer App jetzt ganz einfach eine Datenbank oder Authentifizierung über eine [Firebase-Integration](https://firebase.google.com/docs/ai-assistance/ai-studio-integration?hl=de) hinzufügen.
+Der Antigravity-Agent kann die folgenden Dienste automatisch für Sie bereitstellen und einrichten:
 
-- **Database Firestore**: un database cloud NoSQL flessibile e scalabile per archiviare
-  e sincronizzare i dati per lo sviluppo lato client e lato server.
-- **Firebase Authentication**: consente agli utenti di accedere in modo sicuro alla tua
-  applicazione utilizzando i flussi "Accedi con Google".
+- **Firestore-Datenbank**: Eine flexible, skalierbare NoSQL-Cloud-Datenbank zum Speichern und Synchronisieren von Daten für die client- und serverseitige Entwicklung.
+- **Firebase Authentication**: Ermöglichen Sie Ihren Nutzern, sich sicher in Ihrer Anwendung anzumelden, indem Sie die Abläufe für „Mit Google anmelden“ verwenden.
 
-Basta chiedere all'agente di "aggiungere un database alla mia app" o di "configurare Google Sign-in".
-L'agente gestirà la configurazione e la generazione del codice necessarie.
+Bitten Sie den Agenten einfach, „meiner App eine Datenbank hinzuzufügen“ oder „Google-Anmeldung einzurichten“. Er übernimmt dann die erforderliche Konfiguration und Codegenerierung für Sie.
 
-Firebase ti consente di iniziare senza costi e, se vuoi, di eseguire lo scale-up con un account a pagamento
-quando hai bisogno di una quota maggiore o di utilizzare funzionalità a pagamento.
+Mit Firebase können Sie kostenlos starten und optional mit einem kostenpflichtigen Konto skalieren, wenn Sie mehr Kontingent benötigen oder kostenpflichtige Funktionen nutzen möchten.
 
-## API Google Workspace
+## Google Workspace APIs
 
-Google AI Studio ti consente di creare app che si connettono alle API Google Workspace, in modo che i tuoi utenti possano lavorare con i loro dati reali: email, fogli di lavoro, documenti, eventi di calendario e altro ancora, tutto all'interno della tua app. Non è più necessario configurare un progetto Google Cloud, configurare OAuth o gestire manualmente l'API.
+Mit Google AI Studio können Sie Apps erstellen, die eine Verbindung zu Google Workspace-APIs herstellen, damit Ihre Nutzer in Ihrer App mit ihren echten Daten arbeiten können: E-Mails, Tabellen, Dokumente, Kalendertermine und mehr. Sie müssen kein Google Cloud-Projekt mehr einrichten, OAuth konfigurieren oder Ihre API manuell verwalten.
 
-### Come funziona
+### Funktionsweise
 
-Puoi aggiungere un'integrazione di Workspace in due modi:
+Sie haben zwei Möglichkeiten, eine Workspace-Integration hinzuzufügen:
 
-- **Descrivilo nel riquadro della chat**: basta dire all'agente cosa vuoi nel riquadro della chat in basso. Ad esempio, *"Crea un tracker delle spese che registri le ricevute nel mio foglio Google"* o *"Crea una dashboard che riepiloghi i miei messaggi Gmail non letti"*.
-- **Seleziona dal riquadro delle integrazioni**: apri il riquadro **Integrazioni** nella barra laterale destra della modalità di creazione e attiva l'app Workspace che vuoi connettere.
+- **Im Chatfeld beschreiben**: Teilen Sie dem Agent einfach im Chatfeld unten mit, was Sie möchten. Beispiele: *„Erstelle einen Ausgaben-Tracker, der Belege in meiner Google-Tabelle protokolliert.“* oder *„Erstelle ein Dashboard, das meine ungelesenen Gmail-Nachrichten zusammenfasst.“*
+- **Über den Bereich „Integrationen“ auswählen**: Öffnen Sie im Build-Modus in der rechten Seitenleiste den Bereich **Integrationen** und aktivieren Sie die Workspace-App, die Sie verbinden möchten.
 
-Quando aggiungi un'app Workspace, AI Studio esegue automaticamente le seguenti operazioni:
+Wenn Sie eine Workspace-App hinzufügen, wird in AI Studio automatisch Folgendes ausgeführt:
 
-1. Collega l'API Google necessaria per la tua app.
-2. Genera il codice lato server per chiamare l'API.
-3. Aggiunge un flusso sicuro di "Accedi con Google" in modo che gli utenti finali della tua app possano autorizzare l'accesso ai propri dati.
+1. Verbindet die erforderliche Google API für Ihre App.
+2. Generiert den serverseitigen Code zum Aufrufen der API.
+3. Fügt einen sicheren „Über Google anmelden“-Ablauf hinzu, damit Endnutzer Ihrer App den Zugriff auf ihre eigenen Daten autorisieren können.
 
-### App supportate
+### Unterstützte Apps
 
-Sono disponibili le seguenti app Google Workspace:
+Die folgenden Google Workspace-Apps sind verfügbar:
 
-| App | Cosa puoi creare |
+| App | Was Sie erstellen können |
 | --- | --- |
-| Google Calendar | Leggere, creare e gestire eventi e calendari |
-| Google Chat | Leggere e interagire con conversazioni e spazi di gruppo |
-| Documenti Google | Creare, leggere, aggiornare e formattare documenti |
-| Google Drive | Organizzare, cercare e gestire file e cartelle |
-| Moduli Google | Creare sondaggi, aggiornare le domande e recuperare le risposte |
-| Gmail | Leggere, inviare e gestire i contenuti delle email |
-| Google Keep | Gestire note, elenchi e allegati |
-| Google Meet | Pianificare e gestire le videochiamate |
-| Contatti | Sincronizzare e gestire i contatti |
-| Fogli Google | Leggere, scrivere e formattare i dati del foglio di lavoro |
-| Presentazioni Google | Creare e modificare presentazioni |
-| Google Tasks | Creare, gestire e organizzare le attività |
+| Google Kalender | Termine und Kalender lesen, erstellen und verwalten |
+| Google Chat | Unterhaltungen und Gruppenbereiche lesen und mit ihnen interagieren |
+| Google Docs | Dokumente erstellen, lesen, aktualisieren und formatieren |
+| Google Drive | Dateien und Ordner organisieren, suchen und verwalten |
+| Google Formulare | Umfragen erstellen, Fragen aktualisieren und Antworten abrufen |
+| Gmail | E‑Mail-Inhalte lesen, senden und verwalten |
+| Google Notizen | Notizen, Listen und Anhänge verwalten |
+| Google Meet | Videoanrufe planen und verwalten |
+| Kontakte | Kontakte synchronisieren und verwalten |
+| Google Sheets | Tabellendaten lesen, schreiben und formatieren |
+| Google Präsentationen | Präsentationen erstellen und bearbeiten |
+| Google Tasks | Aufgaben erstellen, verwalten und organisieren |
 
-### Autenticazione e autorizzazioni
+### Authentifizierung und Berechtigungen
 
-In qualità di builder, non devi configurare i client OAuth, gestire le credenziali
-o configurare un progetto Google Cloud. AI Studio gestisce tutto questo per te.
+Als Ersteller müssen Sie keine OAuth-Clients konfigurieren, Anmeldedaten verwalten oder ein Google Cloud-Projekt einrichten. AI Studio übernimmt das alles für Sie.
 
-Le app con le API Workspace integrate utilizzano "Accedi con Google" per autenticare
-gli utenti finali. Quando un utente apre la tua app, gli viene chiesto di accedere e concedere
-le autorizzazioni specifiche di cui la tua app ha bisogno (ad esempio, l'accesso in sola lettura al
-calendario o la possibilità di modificare un foglio di lavoro). La tua app accede solo ai dati della persona che la utilizza. Ogni utente autorizza l'accesso al proprio account.
+Apps, in die Workspace APIs integriert sind, verwenden „Über Google anmelden“, um Endnutzer zu authentifizieren. Wenn ein Nutzer Ihre App öffnet, wird er aufgefordert, sich anzumelden und die spezifischen Berechtigungen zu erteilen, die Ihre App benötigt, z. B. schreibgeschützter Zugriff auf seinen Kalender oder die Möglichkeit, eine Tabelle zu bearbeiten. Ihre App greift nur auf die Daten der Person zu, die sie verwendet. Jeder Nutzer autorisiert den Zugriff auf sein eigenes Konto.
 
-### Prompt di esempio
+### Beispiele für Prompts
 
-Ecco alcune idee per iniziare a utilizzare le integrazioni di Workspace:
+Hier sind einige Ideen für den Einstieg in Workspace-Integrationen:
 
-- *"Crea un'app che legga il mio Google Calendar e crei bozze di email di preparazione in
-  Gmail per ogni riunione".*
-- *"Crea uno strumento che prenda un documento Google e generi un riepilogo di 5 slide
-  in Presentazioni Google."*
-- *"Crea un monitoraggio delle spese in cui carico una ricevuta, Gemini estrae i
-  dettagli e registra una nuova riga nel mio Foglio Google."*
+- *„Erstelle eine App, die meinen Google-Kalender liest und für jede Besprechung Vorbereitungs-E‑Mails in Gmail entwirft.“*
+- *„Erstelle ein Tool, das ein Google-Dokument nimmt und daraus eine Zusammenfassungspräsentation mit fünf Folien in Google Präsentationen generiert.“*
+- *„Erstelle eine Ausgabenübersicht, in die ich einen Beleg hochlade. Gemini extrahiert die Details und fügt eine neue Zeile in mein Google-Tabellenblatt ein.“*
 
-### Configura OAuth
+### OAuth einrichten
 
-Un caso d'uso chiave per la gestione dei secret è la configurazione di OAuth per connettersi ad altri
-siti web o app. Quando il prompt include istruzioni su come connettersi a un'app di terze parti che richiede l'autenticazione OAuth, l'agente fornirà istruzioni su come configurare OAuth per l'applicazione. Queste istruzioni
-includeranno gli URL di callback necessari per configurare l'applicazione OAuth.
-Puoi trovare gli URL di callback anche nella sezione **Integrazioni** nel pannello Impostazioni.
+Ein wichtiger Anwendungsfall für die Verwaltung von Secrets ist die Einrichtung von OAuth, um eine Verbindung zu anderen Websites oder Apps herzustellen. Wenn Ihr Prompt Anweisungen zum Herstellen einer Verbindung zu einer Drittanbieter-App enthält, für die eine OAuth-Authentifizierung erforderlich ist, gibt der Agent Anweisungen zum Einrichten von OAuth für diese Anwendung. Diese Anleitung enthält die erforderlichen Callback-URLs zum Konfigurieren Ihrer OAuth-Anwendung.
+Sie finden die Callback-URLs auch im Bereich „Einstellungen“ unter **Integrationen**.
 
-## Creare esperienze multigiocatore
+## Mehrspielerfunktionen entwickeln
 
-Il runtime full-stack attiva le funzionalità di collaborazione in tempo reale.
+Die Full-Stack-Laufzeit ermöglicht Funktionen für die Zusammenarbeit in Echtzeit.
 
-- **Stato in tempo reale**: puoi chiedere all'agente di creare funzionalità come "una chat live", "una lavagna collaborativa" o "un gioco multiplayer".
-- **Sessioni sincronizzate**: il server gestisce lo stato, consentendo a più utenti
-  di interagire con la stessa istanza dell'applicazione in tempo reale.
+- **Echtzeitstatus**: Sie können den Agent bitten, Funktionen wie „ein Live-Chat“, „ein gemeinsames Whiteboard“ oder „ein Mehrspielerspiel“ zu erstellen.
+- **Synchronisierte Sitzungen**: Der Server verwaltet den Status, sodass mehrere Nutzer in Echtzeit mit derselben Anwendungsinstanz interagieren können.
 
-**Esempio di prompt**: > "Crea un gioco multiplayer in cui i giocatori possono vedere i cursori
-degli altri."
+**Beispiel-Prompt**: > „Mache daraus ein Multiplayer-Spiel, in dem die Spieler die Cursor der anderen sehen können.“
 
-### Suggerimenti per testare le app multiplayer
+### Tipps zum Testen von Apps im Mehrspielermodus
 
-Puoi testare la modalità multigiocatore in due modi prima di eseguire il deployment dell'app.
+Sie haben zwei Möglichkeiten, den Mehrspielermodus zu testen, bevor Sie Ihre App bereitstellen.
 
-1. Apri l'app in modalità di creazione di Google AI Studio in più schede. Quando
-   sviluppi in modalità Build, la tua app si trova in un container di sviluppo. L'apertura dell'app in più schede ti consentirà di simulare più giocatori che utilizzano la tua app.
-2. Condividi l'app con altri utilizzando il menu **Condividi** in alto a destra.
-   Poi utilizza l'**URL condiviso** della scheda **Integrazioni**
-   del menu **Condividi** per utilizzare l'app con i giocatori con cui l'hai condivisa.
+1. Öffnen Sie Ihre App im Build-Modus von Google AI Studio auf mehreren Tabs. Wenn Sie im Build-Modus entwickeln, befindet sich Ihre App in einem Entwicklercontainer. Wenn Sie die App in mehreren Tabs öffnen, können Sie mehrere Spieler simulieren, die Ihre App verwenden.
+2. Teilen Sie die App mit anderen über das Menü **Teilen** oben rechts.
+   Verwenden Sie dann die **freigegebene URL** auf dem Tab **Integrationen** des Menüs **Teilen**, um die App mit den Spielern zu verwenden, mit denen Sie Ihre App geteilt haben.
 
-## Best practice
+## Best Practices
 
-- **Chiamate API Gemini**: il tuo `GEMINI_API_KEY` viene configurato automaticamente come
-  secret lato server. Esegui chiamate all'API Gemini dal codice lato server utilizzando
-  questa chiave. Puoi visualizzarlo nel riquadro **Secret**.
-- **Sicurezza dei secret**: utilizza sempre Secret Manager per le chiavi sensibili.
-  Non codificarli mai nei file.
-- **Separazione delle responsabilità**: mantieni la logica dell'interfaccia utente nel framework lato client
-  (React/Angular) e la logica di business/gestione dei dati lato server.
-- **Gestione degli errori**: assicurati che il codice lato server gestisca in modo efficace gli errori
-  delle chiamate API esterne per evitare arresti anomali dell'app.
+- **Gemini API-Aufrufe**: Ihr `GEMINI_API_KEY` wird automatisch als serverseitiges Secret konfiguriert. Führen Sie Gemini API-Aufrufe über Ihren serverseitigen Code mit diesem Schlüssel aus. Sie können sie im Bereich **Secrets** aufrufen.
+- **Sicherheit von Secrets**: Verwenden Sie für vertrauliche Schlüssel immer den Secrets Manager.
+  Sie dürfen niemals in Ihren Dateien hartcodiert werden.
+- **Trennung von Belangen**: Die UI-Logik sollte im clientseitigen Framework (React/Angular) und die Geschäftslogik/Datenverarbeitung auf dem Server erfolgen.
+- **Fehlerbehandlung**: Achten Sie darauf, dass Ihr serverseitiger Code Fehler aus externen API-Aufrufen robust behandelt, um Abstürze der App zu verhindern.
 
-## Passaggi successivi
+## Wie geht es weiter?
 
-- [Creare app in Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=it)
-- [Deployment da Google AI Studio](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=it)
-- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=it)
+- [Apps in Google AI Studio entwickeln](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=de)
+- [Über Google AI Studio bereitstellen](https://ai.google.dev/gemini-api/docs/aistudio-deploying?hl=de)
+- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=de)
 
-Invia feedback
+Feedback geben
 
-Salvo quando diversamente specificato, i contenuti di questa pagina sono concessi in base alla [licenza Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), mentre gli esempi di codice sono concessi in base alla [licenza Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Per ulteriori dettagli, consulta le [norme del sito di Google Developers](https://developers.google.com/site-policies?hl=it). Java è un marchio registrato di Oracle e/o delle sue consociate.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-Ultimo aggiornamento 2026-05-19 UTC.
+Zuletzt aktualisiert: 2026-05-19 (UTC).
 
-Vuoi dirci altro?
+Haben Sie Feedback für uns?
 
-[[["Facile da capire","easyToUnderstand","thumb-up"],["Il problema è stato risolto","solvedMyProblem","thumb-up"],["Altra","otherUp","thumb-up"]],[["Mancano le informazioni di cui ho bisogno","missingTheInformationINeed","thumb-down"],["Troppo complicato/troppi passaggi","tooComplicatedTooManySteps","thumb-down"],["Obsoleti","outOfDate","thumb-down"],["Problema di traduzione","translationIssue","thumb-down"],["Problema relativo a esempi/codice","samplesCodeIssue","thumb-down"],["Altra","otherDown","thumb-down"]],["Ultimo aggiornamento 2026-05-19 UTC."],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-05-19 (UTC)."],[],[]]

@@ -1,135 +1,149 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=hi
-fetched_at: 2026-08-03T04:39:54.169479+00:00
-title: "Google AI Studio \u092e\u0947\u0902 Android \u0910\u092a\u094d\u0932\u093f\u0915\u0947\u0936\u0928 \u092c\u0928\u093e\u0928\u093e \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/aistudio-android?hl=ja
+fetched_at: 2026-08-10T03:18:00.465974+00:00
+title: "Google AI Studio \u3067 Android \u30a2\u30d7\u30ea\u3092\u69cb\u7bc9\u3059\u308b \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=hi) अब सामान्य तौर पर उपलब्ध है. हमारा सुझाव है कि सभी नई सुविधाओं और मॉडल का ऐक्सेस पाने के लिए, इस एपीआई का इस्तेमाल करें.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=hi)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google आपकी पसंदीदा भाषा में कॉन्टेंट का अनुवाद करने के लिए, एआई टेक्नोलॉजी का इस्तेमाल करता है. एआई से मिले अनुवादों में गलतियां हो सकती हैं.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [होम पेज](https://ai.google.dev/?hl=hi)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=hi)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=hi)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-सुझाव भेजें
+フィードバックを送信
 
-# Google AI Studio में Android ऐप्लिकेशन बनाना
+# Google AI Studio で Android アプリを構築する
 
-Google AI Studio की मदद से, नैचुरल लैंग्वेज वाले प्रॉम्प्ट का इस्तेमाल करके नेटिव Android ऐप्लिकेशन बनाए जा सकते हैं. आपको जिस तरह का ऐप्लिकेशन चाहिए उसके बारे में बताएं. इसके बाद, [Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=hi#antigravity-agent), Kotlin और [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=hi) का पूरा प्रोजेक्ट जनरेट करता है. अपने ब्राउज़र से, ब्राउज़र पर आधारित Android एम्युलेटर में अपने ऐप्लिकेशन का पूर्वावलोकन किया जा सकता है. साथ ही, इसे किसी फ़िज़िकल डिवाइस पर इंस्टॉल किया जा सकता है और टेस्टिंग के लिए पब्लिश किया जा सकता है.
+Google AI Studio を使用すると、自然言語プロンプトからネイティブ Android アプリを構築できます。必要なアプリについて説明すると、
+[Antigravity Agent](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja#antigravity-agent)
+が完全な Kotlin プロジェクトと[Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=ja)
+プロジェクトを生成します。ブラウザから、ブラウザベースの Android エミュレータでアプリをプレビューしたり、実機にインストールしたり、テスト用に公開したりできます。
 
-## अपनी प्रोफ़ाइल बनाना शुरू करें
+## 始める
 
-Android ऐप्लिकेशन बनाना शुरू करने के लिए:
+Android アプリの構築を開始する手順は次のとおりです。
 
-1. बाईं ओर मौजूद नेविगेशन पैनल का इस्तेमाल करके, Google AI Studio में [बिल्ड मोड](https://aistudio.google.com/apps?hl=hi) पर जाएं.
-2. प्लैटफ़ॉर्म पिकर से **Android** चुनें.
-3. आपको जिस तरह का ऐप्लिकेशन बनाना है उसके बारे में बताने के लिए, प्रॉम्प्ट डालें. उदाहरण के लिए, *"लोकल स्टोरेज की सुविधा वाला, रोज़ के टास्क ट्रैक करने वाला ऐप्लिकेशन बनाओ"* या *"एक सामान्य कैल्क्यूलेटर बनाओ"*.
-4. एजेंट, प्रोजेक्ट जनरेट करता है और उसे ब्राउज़र पर आधारित Android एम्युलेटर में लॉन्च करता है.
+1. 左側のナビゲーション パネルを使用して、Google AI Studio の [[ビルド] モード](https://aistudio.google.com/apps?hl=ja)に移動します。
+2. プラットフォーム ピッカーから [**Android**] を選択します。
+3. 構築するアプリの説明を入力します（例: *「ローカル ストレージを使用して毎日のタスク トラッカーを作成する」* または *「シンプルな電卓を作成する」*）。
+4. エージェントがプロジェクトを生成し、ブラウザベースの Android エミュレータで起動します。
 
-इसके बाद, चैट पैनल का इस्तेमाल करके अपने ऐप्लिकेशन को बेहतर बनाया जा सकता है. यह ठीक वैसा ही होगा जैसा वेब पर किया जाता है. यह एजेंट, आपके Android प्रोजेक्ट की सभी फ़ाइलों को मैनेज करता है. साथ ही, कोडबेस में बदलावों को लागू करता है.
+チャットパネルを使用して、ウェブと同じようにアプリを反復処理できます。エージェントは Android プロジェクト内のすべてのファイルを管理し、コードベース全体に変更を反映します。
 
-## ब्राउज़र पर आधारित Android Emulator
+## ブラウザベースの Android エミュレータ
 
-Android एम्युलेटर पूरी तरह से क्लाउड में चलता है और आपके ब्राउज़र पर स्ट्रीम होता है.
-आपको Android SDK, Android Studio या लोकल एम्युलेटर इंस्टॉल करने की ज़रूरत नहीं है.
+Android エミュレータはクラウドで完全に実行され、ブラウザにストリーミングされます。
+Android SDK、Android Studio、ローカル エミュレータをインストールする必要はありません。
 
-एम्युलेटर में ये सुविधाएं मिलती हैं:
+エミュレータには次の機能があります。
 
-- **Pixel जैसे डिवाइस का सिम्युलेशन**: किसी असली डिवाइस की तरह, अपने ऐप्लिकेशन पर टैप करें, स्क्रोल करें, और उसके साथ इंटरैक्ट करें.
-- **स्क्रीन घुमाने की सुविधा**: पोर्ट्रेट और लैंडस्केप ओरिएंटेशन के बीच टॉगल करें.
-- **लाइव झलक**: जब एजेंट कोड में बदलाव करता है, तो ऐप्लिकेशन फिर से बनता है और एम्युलेटर अपने-आप रीफ़्रेश हो जाता है.
+- **Pixel のようなデバイスのシミュレーション**: 実機と同じように、アプリをタップ、スクロール、操作できます。
+- **回転のサポート**: 縦向きと横向きを切り替えます。
+- **ライブプレビュー**: エージェントがコードを変更すると、アプリが再ビルドされ、
+  エミュレータが自動的に更新されます。
 
-### एम्युलेटर की सीमाएं
+### エミュレータの制限事項
 
-ब्राउज़र पर आधारित एम्युलेटर में, हार्डवेयर की सभी सुविधाएं काम नहीं करती हैं. ये सुविधाएं, एम्युलेटर में उपलब्ध नहीं हैं:
+ブラウザベースのエミュレータは、すべてのハードウェア機能をサポートしていません。エミュレータでは次の機能は使用できません。
 
-- कैमरा और फ़ोटो कैप्चर करने की सुविधा
-- एनएफ़सी और ब्लूटूथ
-- जीपीएस (जगह की जानकारी सिम्युलेट की गई है)
-- Google Play services (Google साइन-इन, Maps, और Play services की अन्य सुविधाएं असली डिवाइस पर काम करती हैं, लेकिन एम्युलेटर में नहीं)
+- カメラと写真のキャプチャ
+- NFC と Bluetooth
+- GPS（位置情報はシミュレートされます）
+- Google Play 開発者サービス（Google ログイン、マップ、その他の Google Play 開発者サービスの機能は、実機では動作しますが、エミュレータでは動作しません）
 
-## ADB की सुविधा वाले डिवाइस पर इंस्टॉल करना
+## ADB を使用してデバイスにインストールする
 
-बनाए गए APK को सीधे तौर पर, किसी ऐसे Android डिवाइस पर इंस्टॉल किया जा सकता है जो यूएसबी के ज़रिए आपके कंप्यूटर से कनेक्ट हो. यह ब्राउज़र के ज़रिए आपके डिवाइस से कम्यूनिकेट करने के लिए, [WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=hi) का इस्तेमाल करता है. ADB को स्थानीय तौर पर इंस्टॉल करने की ज़रूरत नहीं है.
+ビルドした APK は、USB でパソコンに接続された実機の Android デバイスに直接インストールできます。これには、
+[WebUSB](https://developer.chrome.com/docs/capabilities/usb?hl=ja) を
+使用してブラウザ経由でデバイスと通信します。ローカル ADB のインストールは不要です。
 
-### ज़रूरी शर्तें
+### 前提条件
 
-- WebUSB के साथ काम करने वाला Chrome या Edge ब्राउज़र.
-- Android डिवाइस पर [डेवलपर के लिए सेटिंग और टूल और यूएसबी डीबग करने की सुविधा](https://developer.android.com/studio/debug/dev-options?hl=hi) चालू होनी चाहिए.
-- आपके डिवाइस को कंप्यूटर से कनेक्ट करने वाली यूएसबी केबल.
+- WebUSB をサポートする Chrome または Edge ブラウザ。
+- [[デベロッパー向けオプション] と [USB デバッグ](https://developer.android.com/studio/debug/dev-options?hl=ja)]
+  が有効になっている Android デバイス。
+- デバイスをパソコンに接続する USB ケーブル。
 
-### अपने डिवाइस पर ऐप्लिकेशन इंस्टॉल करना
+### デバイスにアプリをインストールする
 
-1. झलक दिखाने वाले पैनल में, **डिवाइस पर इंस्टॉल करें** पर क्लिक करें.
-2. ब्राउज़र के यूएसबी डिवाइस पिकर से, अपना Android डिवाइस चुनें.
-3. एपीके को आपके डिवाइस पर ट्रांसफ़र करके इंस्टॉल कर दिया जाता है.
-4. ऐप्लिकेशन अपने-आप लॉन्च हो जाता है.
+1. プレビュー パネルで [**Install on Device**] をクリックします。
+2. ブラウザの USB デバイス ピッカーから Android デバイスを選択します。
+3. APK が転送され、デバイスにインストールされます。
+4. アプリが自動的に起動します。
 
-## Play Store पर पब्लिश करना
+## Google Play ストアに公開する
 
-अपने Android ऐप्लिकेशन को [Google Play Console](https://play.google.com/console?hl=hi) के इंटरनल टेस्टिंग ट्रैक पर पब्लिश किया जा सकता है. इससे, ऐप्लिकेशन को ज़्यादा से ज़्यादा 100 टेस्टर के साथ शेयर किया जा सकता है.
+Android アプリを
+[Google Play Console](https://play.google.com/console?hl=ja) の内部
+テストトラックに公開して、最大 100 人のテスターにアプリを配布できます。
 
-### ज़रूरी शर्तें
+### 前提条件
 
-- [Google Play डेवलपर खाता](https://play.google.com/console/signup?hl=hi) (इसके लिए, रजिस्ट्रेशन के लिए एक बार में 25 डॉलर का शुल्क देना होगा).
-- Play Console में डेवलपर प्रोफ़ाइल पूरी की गई हो.
+- [Google Play デベロッパー アカウント](https://play.google.com/console/signup?hl=ja)
+  （1 回限りの登録料 25 ドルが必要です）。
+- Google Play Console でデベロッパー プロファイルが完成していること。
 
-### ऐप्लिकेशन पब्लिश करना
+### アプリを公開する
 
-1. Google AI Studio में **सेटिंग > पब्लिश करें** खोलें.
-2. **Play Store पर पब्लिश करें** पर क्लिक करें.
-3. अपने Google Play डेवलपर खाते से पुष्टि करें.
-4. AI Studio, APK पर हस्ताक्षर करता है, ऐप्लिकेशन की लिस्टिंग बनाता है (या नया वर्शन अपलोड करता है),
-   और उसे इंटरनल टेस्टिंग ट्रैक पर पब्लिश करता है.
-5. आपको एक लिंक मिलता है, जिसे टेस्टर के साथ शेयर किया जा सकता है.
+1. Google AI Studio で **[Settings] > [Publish]** を開きます。
+2. [**Google Play ストアに公開**] をクリックします。
+3. Google Play デベロッパー アカウントで認証します。
+4. AI Studio が APK に署名し、アプリの掲載情報を作成（または新しいバージョンをアップロード）して、内部テストトラックに公開します。
+5. テスターと共有するリンクが届きます。
 
-AI Studio, मैनेज किए गए कीस्टोर का इस्तेमाल करके, APK साइनिंग को अपने-आप मैनेज करता है. Play Console में जाकर, ऐप्लिकेशन की लिस्टिंग (आइकॉन, स्क्रीनशॉट, जानकारी) को बाद में भी अपनी पसंद के मुताबिक बनाया जा सकता है.
+AI Studio は、マネージド キーストアを使用して APK の署名を自動的に管理します。アプリの掲載情報（アイコン、スクリーンショット、説明）は、後で Google Play Console でカスタマイズできます。
 
-## क्या जनरेट किया गया है
+## 生成されるもの
 
-Android ऐप्लिकेशन बनाने पर, एजेंट एक स्टैंडर्ड Gradle-आधारित प्रोजेक्ट जनरेट करता है. इसका स्ट्रक्चर इस तरह होता है:
+Android アプリをビルドすると、エージェントは次の構造で標準の Gradle ベースのプロジェクトを生成します。
 
-- **बिल्ड कॉन्फ़िगरेशन**: Kotlin DSL का इस्तेमाल करके `build.gradle.kts` फ़ाइलें (प्रोजेक्ट और ऐप्लिकेशन लेवल).
-- **यूज़र इंटरफ़ेस (यूआई) लेयर**: [Material 3](https://m3.material.io/) थीमिंग वाले [Jetpack Compose](https://developer.android.com/develop/ui/compose?hl=hi) कॉम्पोनेंट.
-- **आर्किटेक्चर**: ViewModels और डेटा क्लास के साथ सिंगल-ऐक्टिविटी आर्किटेक्चर.
-- **संसाधन**: `AndroidManifest.xml`, ड्रॉएबल, स्ट्रिंग, और अन्य Android संसाधन.
+- **ビルド構成**: `build.gradle.kts` ファイル（プロジェクト レベルとアプリレベル）
+  Kotlin DSL を使用。
+- **UI レイヤ**: [マテリアル デザイン 3](https://developer.android.com/develop/ui/compose?hl=ja) のテーマ設定を使用した [Jetpack Compose](https://m3.material.io/)
+  コンポーネント。
+- **アーキテクチャ**: ViewModel とデータ
+  クラスを使用した単一アクティビティ アーキテクチャ。
+- **リソース**: `AndroidManifest.xml`、ドローアブル、文字列、その他の Android
+  リソース。
 
-यह एजेंट, Gradle डिपेंडेंसी को अपने-आप मैनेज करता है. साथ ही, ज़रूरत के हिसाब से Maven और Google रिपॉज़िटरी से पैकेज जोड़ता है.
+エージェントは Gradle の依存関係を自動的に管理し、必要に応じて Maven リポジトリと Google リポジトリからパッケージを追加します。
 
-झलक वाले पैनल में मौजूद **कोड** टैब का इस्तेमाल करके, जनरेट किए गए कोड को देखा और उसमें बदलाव किया जा सकता है. Android Studio में डेवलपमेंट जारी रखने के लिए, प्रोजेक्ट को **ZIP फ़ाइल** के तौर पर डाउनलोड करें.
+生成されたコードは、プレビュー パネルの [**Code**] タブで表示、編集できます。Android Studio で開発を続行するには、プロジェクトを**ZIP ファイル** としてダウンロードします。
 
-## सीमाएं
+## 制限事項
 
-AI Studio में Android ऐप्लिकेशन बनाने से जुड़ी ये सीमाएं हैं:
+AI Studio での Android アプリのビルドには、次の制限があります。
 
-### प्लैटफ़ॉर्म से जुड़ी सीमाएं
+### プラットフォームの制限
 
-- **सिर्फ़ क्लाइंट-साइड**: Android ऐप्लिकेशन में सर्वर-साइड कॉम्पोनेंट शामिल नहीं होता.
-  सर्वर रनटाइम की ज़रूरत वाली सुविधाएं (जैसे, सीक्रेट मैनेजमेंट, मल्टीप्लेयर, Firebase, Google Workspace API) उपलब्ध नहीं हैं.
-- **सिंगल-ऐक्टिविटी आर्किटेक्चर**: सिर्फ़ सिंगल-ऐक्टिविटी और सिंगल-मॉड्यूल वाले प्रोजेक्ट काम करते हैं.
-- **सिर्फ़ Jetpack Compose**: ऐप्लिकेशन, Kotlin और Jetpack Compose का इस्तेमाल करते हैं. Java और XML लेआउट इस्तेमाल नहीं किए जा सकते.
-- **कोई NDK या नेटिव कोड नहीं**: C और C++ कोड काम नहीं करता.
-- **Wear OS या Android TV पर काम नहीं करता**: यह सिर्फ़ फ़ोन और टैबलेट पर काम करता है.
+- **クライアントサイドのみ**: Android アプリにはサーバーサイド コンポーネントが含まれていません。サーバー ランタイムを必要とする機能（シークレット管理、マルチプレイヤー、Firebase、Google Workspace API）は使用できません。
+- **単一アクティビティ アーキテクチャ**: 単一アクティビティ、単一モジュール
+  プロジェクトのみがサポートされています。
+- **Jetpack Compose のみ**: アプリは Kotlin と Jetpack Compose を使用します。Java と XML レイアウトはサポートされていません。
+- **NDK またはネイティブ コードなし**: C コードと C++ コードはサポートされていません。
+- **Wear OS または Android TV なし**: スマートフォンとタブレットのフォーム ファクタのみが
+  サポートされています。
 
-### एक्सपोर्ट करने से जुड़ी सीमाएं
+### エクスポートの制限事項
 
-- **सिर्फ़ ZIP फ़ाइल डाउनलोड करें**: प्रोजेक्ट को ZIP फ़ाइल के तौर पर डाउनलोड किया जा सकता है. GitHub पर एक्सपोर्ट करने की सुविधा, अभी Android प्रोजेक्ट के लिए उपलब्ध नहीं है.
+- **ZIP ダウンロードのみ**: プロジェクトを ZIP ファイルとしてダウンロードできます。Android プロジェクトでは、GitHub エクスポートはまだ使用できません。
 
-## आगे क्या करना है
+## 次のステップ
 
-- [Google AI Studio में ऐप्लिकेशन बनाना](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=hi)
-- [फ़ुल-स्टैक ऐप्लिकेशन डेवलप करना](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=hi) (वेब)
-- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=hi) में उदाहरण देखें.
+- [Google AI Studio でアプリをビルドする](https://ai.google.dev/gemini-api/docs/aistudio-build-mode?hl=ja)
+- [フルスタック アプリの開発](https://ai.google.dev/gemini-api/docs/aistudio-fullstack?hl=ja)（ウェブ）
+- [App Gallery](https://aistudio.google.com/apps?source=showcase&hl=ja) で例を見る。
 
-सुझाव भेजें
+フィードバックを送信
 
-जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) के तहत और कोड के नमूनों को [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, [Google Developers साइट नीतियां](https://developers.google.com/site-policies?hl=hi) देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया.
+最終更新日 2026-05-19 UTC。
 
-क्या आपको हमें और कुछ बताना है?
+ご意見をお聞かせください
 
-[[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2026-05-19 (UTC) को अपडेट किया गया."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-05-19 UTC。"],[],[]]

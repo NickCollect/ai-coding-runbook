@@ -1,42 +1,41 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=fr
-fetched_at: 2026-08-03T04:41:53.375361+00:00
-title: "Sorties structur\u00e9es \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/generate-content/structured-output?hl=ja
+fetched_at: 2026-08-10T03:16:12.877690+00:00
+title: "\u69cb\u9020\u5316\u51fa\u529b \u00a0|\u00a0 Gemini Generate Content API (Legacy) \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ja) の一般提供を開始しました。この API を使用して、最新の機能とモデルにアクセスすることをおすすめします。
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=ja)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+Google は AI 技術を使用して、コンテンツをご希望の言語に翻訳しています。AI 翻訳には誤りが含まれる場合があります。
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=fr)
-- [Docs](https://ai.google.dev/gemini-api/docs?hl=fr)
+- [ホーム](https://ai.google.dev/?hl=ja)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=ja)
+- [Generate Content API](https://ai.google.dev/gemini-api/docs/generate-content/get-started?hl=ja)
+- [ドキュメント](https://ai.google.dev/gemini-api/docs?hl=ja)
 
-Envoyer des commentaires
+フィードバックを送信
 
-# Sorties structurées
+# 構造化出力
 
-Vous pouvez configurer les modèles Gemini pour générer des réponses conformes à un schéma JSON fourni. Cela garantit des résultats prévisibles et sécurisés, et simplifie l'extraction de données structurées à partir de texte non structuré.
+Gemini モデルを構成して、指定された JSON スキーマに準拠したレスポンスを生成できます。これにより、予測可能でタイプセーフな結果が得られ、非構造化テキストから構造化データを簡単に抽出できます。
 
-L'utilisation de sorties structurées est idéale pour :
+構造化出力の使用は、次のような場合に最適です。
 
-- **Extraction de données** : extraire des informations spécifiques, comme des noms et des dates, à partir d'un texte.
-- **Classification structurée** : classer le texte dans des catégories prédéfinies.
-- **Workflows d'agent** : générer des entrées structurées pour des outils ou des API.
+- **データ抽出:** テキストから名前や日付などの特定の情報を抽出します。
+- **構造化分類:** テキストを事前定義されたカテゴリに分類します。
+- **エージェント ワークフロー:** ツールまたは API の構造化入力を生成します。
 
-En plus de la prise en charge du schéma JSON dans l'API REST, les SDK GenAI de Google
-facilitent la définition de schémas à l'aide de
-[Pydantic](https://docs.pydantic.dev/latest/) (Python) et
-[Zod](https://zod.dev/) (JavaScript).
+[[Google GenAI SDK は、REST API での JSON スキーマのサポートに加えて、
+Pydantic](https://docs.pydantic.dev/latest/)（Python）と
+Zod](https://zod.dev/)（JavaScript）を使用してスキーマを簡単に定義できます。
 
-## Exemples de sorties structurées
+## 構造化出力の例
 
-### Extracteur de recettes
+### レシピ エクストラクタ
 
-Cet exemple montre comment extraire des données structurées à partir de texte à l'aide de types de schéma JSON de base tels que `object`, `array`, `string` et `integer`.
+この例では、`object`、`array`、`string`、`integer` などの基本的な JSON スキーマタイプを使用して、テキストから構造化データを抽出する方法を示します。
 
 ### Python
 
@@ -267,7 +266,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }'
 ```
 
-**Exemple de réponse :**
+**レスポンスの例:**
 
 ```
 {
@@ -322,9 +321,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-### Modération de contenus
+### コンテンツの管理
 
-Cet exemple présente `anyOf` pour les schémas conditionnels et `enum` pour la classification, ce qui permet à la structure de sortie de varier en fonction du contenu.
+この例では、条件付きスキーマに `anyOf` を、分類に `enum` を使用して、コンテンツに応じて出力構造を変更する方法を示します。
 
 ### Python
 
@@ -551,9 +550,9 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-### Structures récursives
+### 再帰的構造
 
-Cet exemple montre comment définir un schéma récursif, tel qu'un organigramme.
+この例では、組織図などの再帰的スキーマを定義する方法を示します。
 
 ### Python
 
@@ -716,7 +715,7 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
     }'
 ```
 
-**Exemple de réponse :**
+**レスポンスの例:**
 
 ```
 {
@@ -743,11 +742,11 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:g
 }
 ```
 
-## Streaming
+## ストリーミング
 
-Vous pouvez diffuser des sorties structurées, ce qui vous permet de commencer à traiter la réponse pendant sa génération, sans avoir à attendre la fin de la sortie complète. Cela peut améliorer les performances perçues de votre application.
+構造化出力をストリーミングできます。これにより、出力全体が完了するのを待たずに、生成されたレスポンスの処理を開始できます。これにより、アプリケーションの体感パフォーマンスを向上させることができます。
 
-Les blocs diffusés seront des chaînes JSON partielles valides, qui pourront être concaténées pour former l'objet JSON final et complet.
+ストリーミングされたチャンクは有効な部分的な JSON 文字列であり、連結して最終的な完全な JSON オブジェクトを形成できます。
 
 ### Python
 
@@ -803,14 +802,9 @@ for await (const chunk of stream) {
 }
 ```
 
-## Sorties structurées avec des outils
+## ツールを使用した構造化出力
 
-Gemini 3 vous permet de combiner des sorties structurées avec des outils intégrés, y compris
-[l'ancrage avec la recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr),
-[le contexte de l'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr),
-[l'exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr),
-[la recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr#structured-output), et
-[l'appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr).
+[[[[[Gemini 3 では、構造化出力を、Google 検索によるグラウンディング、URL コンテキスト、コード実行、ファイル検索、関数呼び出しなどの組み込みツールと組み合わせることができます。](https://ai.google.dev/gemini-api/docs/google-search?hl=ja)](https://ai.google.dev/gemini-api/docs/url-context?hl=ja)](https://ai.google.dev/gemini-api/docs/code-execution?hl=ja)](https://ai.google.dev/gemini-api/docs/file-search?hl=ja#structured-output)](https://ai.google.dev/gemini-api/docs/function-calling?hl=ja)
 
 ### Python
 
@@ -915,101 +909,101 @@ curl "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-pre
   }'
 ```
 
-## Prise en charge du schéma JSON
+## JSON スキーマのサポート
 
-Pour générer un objet JSON, définissez `response_format` dans la configuration de génération. Le schéma doit être un [schéma JSON](https://json-schema.org/) valide qui décrit le format de sortie souhaité.
+JSON オブジェクトを生成するには、生成構成で `response_format` を設定します。スキーマは、目的の出力形式を記述する有効な [JSON スキーマ](https://json-schema.org/)である必要があります。
 
-Le modèle génère ensuite une réponse qui est une chaîne JSON syntaxiquement valide correspondant au schéma fourni. Lorsque vous utilisez des sorties structurées, le modèle génère des sorties dans le même ordre que les clés du schéma.
+モデルは、指定されたスキーマに一致する構文的に有効な JSON 文字列であるレスポンスを生成します。構造化出力を使用しているときは、スキーマ内のキーと同じ順序で出力を生成します。
 
-Le mode de sortie structurée de Gemini est compatible avec un sous-ensemble de la spécification du schéma [JSON](https://json-schema.org).
+Gemini の構造化出力モードは、[JSON スキーマ](https://json-schema.org)仕様のサブセットをサポートしています。
 
-Les valeurs suivantes de `type` sont acceptées :
+`type` の次の値がサポートされています。
 
-- **`string`**: pour le texte.
-- **`number`**: pour les nombres à virgule flottante.
-- **`integer`**: pour les nombres entiers.
-- **`boolean`**: pour les valeurs "true/false".
-- **`object`**: pour les données structurées avec des paires clé-valeur.
-- **`array`**: pour les listes d'éléments.
-- **`null`** : pour autoriser une propriété à être nulle, incluez `"null"` dans le tableau de types (par exemple, `{"type": ["string", "null"]}`).
+- **`string`**: テキストの場合。
+- **`number`**: 浮動小数点数の場合。
+- **`integer`**: 整数の場合。
+- **`boolean`**: true/false 値の場合。
+- **`object`**: Key-Value ペアを含む構造化データの場合。
+- **`array`**: 項目のリストの場合。
+- **`null`**: プロパティを null にできるようにするには、タイプ配列に `"null"` を含めます（例: `{"type": ["string", "null"]}`）。
 
-Ces propriétés descriptives aident à guider le modèle :
+これらの説明プロパティは、モデルのガイドに役立ちます。
 
-- **`title`**: brève description d'une propriété.
-- **`description`**: description plus longue et plus détaillée d'une propriété.
+- **`title`**: プロパティの簡単な説明。
+- **`description`**: プロパティの詳細な説明。
 
-### Propriétés spécifiques au type
+### タイプ固有のプロパティ
 
-**Pour les valeurs `object` :**
+**`object` 値の場合:**
 
-- **`properties`**: objet dans lequel chaque clé est un nom de propriété et chaque valeur est un schéma pour cette propriété.
-- **`required`**: tableau de chaînes listant les propriétés obligatoires.
-- **`additionalProperties`**: contrôle si les propriétés non listées dans `properties` sont autorisées. Peut être une valeur booléenne ou un schéma.
+- **`properties`**: 各キーがプロパティ名で、各値がそのプロパティのスキーマであるオブジェクト。
+- **`required`**: 必須プロパティを一覧表示する文字列の配列。
+- **`additionalProperties`**: `properties` にリストされていないプロパティを許可するかどうかを制御します。ブール値またはスキーマを指定できます。
 
-**Pour les valeurs `string` :**
+**`string` 値の場合:**
 
-- **`enum`**: liste un ensemble spécifique de chaînes possibles pour les tâches de classification.
-- **`format`** : spécifie une syntaxe pour la chaîne, telle que `date-time`, `date` ou `time`.
+- **`enum`**: 分類タスクに使用できる特定の文字列のセットを一覧表示します。
+- **`format`**: 文字列の構文（`date-time`、`date`、`time` など）を指定します。
 
-**Pour les valeurs `number` et `integer` :**
+**`number` 値と `integer` 値の場合:**
 
-- **`enum`**: liste un ensemble spécifique de valeurs numériques possibles.
-- **`minimum`**: valeur inclusive minimale.
-- **`maximum`**: valeur inclusive maximale.
+- **`enum`**: 使用できる特定の数値のセットを一覧表示します。
+- **`minimum`**: 最小値（包括的）。
+- **`maximum`**: 最大値（包括的）。
 
-**Pour les valeurs `array` :**
+**`array` 値の場合:**
 
-- **`items`**: définit le schéma de tous les éléments du tableau.
-- **`prefixItems`**: définit une liste de schémas pour les N premiers éléments, ce qui permet des structures de type tuple.
-- **`minItems`**: nombre minimal d'éléments dans le tableau.
-- **`maxItems`**: nombre maximal d'éléments dans le tableau.
+- **`items`**: 配列内のすべての項目のスキーマを定義します。
+- **`prefixItems`**: 最初の N 個の項目のスキーマのリストを定義し、タプルに似た構造を可能にします。
+- **`minItems`**: 配列内の項目の最小数。
+- **`maxItems`**: 配列内の項目の最大数。
 
-## Modèles compatibles
+## モデルサポート
 
-Les modèles suivants sont compatibles avec les sorties structurées :
+次のモデルは構造化出力をサポートしています。
 
-| Modèle | Sorties structurées |
+| モデル | 構造化出力 |
 | --- | --- |
 | Gemini 3.1 Flash-Lite | ✔️ |
-| Preview Gemini 3.1 Pro | ✔️ |
+| Gemini 3.1 Pro プレビュー版 | ✔️ |
 | Gemini 3.5 Flash | ✔️ |
-| Preview Gemini 3.1 Flash-Lite | ✔️ |
+| Gemini 3.1 Flash-Lite プレビュー版 | ✔️ |
 | Gemini 2.5 Pro | ✔️ |
 | Gemini 2.5 Flash | ✔️ |
 | Gemini 2.5 Flash-Lite | ✔️ |
 | Gemini 2.0 Flash | ✔️\* |
 | Gemini 2.0 Flash-Lite | ✔️\* |
 
-*\* Notez que Gemini 2.0 nécessite une liste `propertyOrdering` explicite dans l'entrée JSON pour définir la structure préférée. Vous trouverez un exemple dans ce [guide](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb).*
+*\* Gemini 2.0 では、優先する構造を定義するために、JSON 入力内に明示的な `propertyOrdering` リストが必要です。例については、こちらの[クックブック](https://github.com/google-gemini/cookbook/blob/main/examples/Pdf_structured_outputs_on_invoices_and_forms.ipynb)をご覧ください。*
 
-## Sorties structurées ou appel de fonction
+## 構造化出力と関数呼び出し
 
-Les sorties structurées et l'appel de fonction utilisent des schémas JSON, mais ils ont des objectifs différents :
+構造化出力と関数呼び出しはどちらも JSON スキーマを使用しますが、目的が異なります。
 
-| Fonctionnalité | Cas d'utilisation principal |
+| 機能 | 主なユースケース |
 | --- | --- |
-| **Sorties structurées** | **Mettre en forme la réponse finale à l'utilisateur.** Utilisez cette option lorsque vous souhaitez que la *réponse* du modèle soit dans un format spécifique (par exemple, extraire des données d'un document pour les enregistrer dans une base de données). |
-| **Appel de fonction** | **Effectuer une action pendant la conversation.** Utilisez cette option lorsque le modèle doit *vous demander* d'effectuer une tâche (par exemple, "obtenir la météo actuelle") avant de pouvoir fournir une réponse finale. |
+| **構造化出力** | **ユーザーへの最終的なレスポンスのフォーマット。**モデルの回答を特定の形式にする場合（ドキュメントからデータを抽出してデータベースに保存する場合など）に使用します。 |
+| **関数呼び出し** | **会話中のアクションの実行。**最終的な回答を提供するために、モデルがタスクの実行をユーザーに依頼する必要がある場合（「現在の天気を取得する」など）に使用します。 |
 
-## Bonnes pratiques
+## ベスト プラクティス
 
-- **Descriptions claires** : utilisez le champ `description` de votre schéma pour fournir des instructions claires au modèle sur ce que représente chaque propriété. Ceci est essentiel pour guider la sortie du modèle.
-- **Typage fort** : utilisez des types spécifiques (`integer`, `string`, `enum`) chaque fois que cela est possible. Si un paramètre comporte un ensemble limité de valeurs valides, utilisez un `enum`.
-- **Ingénierie des prompts** : indiquez clairement dans votre prompt ce que vous souhaitez que le modèle fasse. Par exemple, "Extrayez les informations suivantes du texte..." ou "Classez ces commentaires en fonction du schéma fourni...".
-- **Validation** : bien que la sortie structurée garantisse un JSON syntaxiquement correct, elle ne garantit pas que les valeurs sont sémantiquement correctes. Validez toujours la sortie finale dans le code de votre application avant de l'utiliser.
-- **Gestion des erreurs** : implémentez une gestion des erreurs robuste dans votre application pour gérer de manière optimale les cas où la sortie du modèle, bien que conforme au schéma, ne répond pas aux exigences de votre logique métier.
+- **明確な説明:** スキーマの `description` フィールドを使用して、各プロパティが表す内容について明確な手順をモデルに提供します。これは、モデルの出力をガイドするうえで重要です。
+- **厳密な型指定:** できる限り具体的なタイプ（`integer`、`string`、`enum`）を使用します。パラメータに有効な値のセットが限られている場合は、`enum` を使用します。
+- **プロンプト エンジニアリング:** プロンプトで、モデルに実行してほしいことを明確に記述します。たとえば、「テキストから次の情報を抽出してください」や「提供されたスキーマに従ってこのフィードバックを分類してください」などです。
+- **検証:** 構造化出力では構文的に正しい JSON が保証されますが、値が意味的に正しいことは保証されません。最終的な出力は、使用する前に必ずアプリケーション コードで検証してください。
+- **エラー処理:** モデルの出力がスキーマに準拠していても、ビジネス ロジックの要件を満たしていない場合を適切に処理するために、アプリケーションに堅牢なエラー処理を実装します。
 
-## Limites
+## 制限事項
 
-- **Sous-ensemble de schémas** : toutes les fonctionnalités de la spécification du schéma JSON ne sont pas prises en charge. Le modèle ignore les propriétés non compatibles.
-- **Complexité des schémas** : l'API peut rejeter les schémas très volumineux ou profondément imbriqués. Si vous rencontrez des erreurs, essayez de simplifier votre schéma en raccourcissant les noms de propriétés, en réduisant l'imbrication ou en limitant le nombre de contraintes.
+- **スキーマのサブセット:** JSON スキーマ仕様のすべての機能がサポートされているわけではありません。サポートされていないプロパティは無視されます。
+- **スキーマの複雑さ:** API は、非常に大きいスキーマやネストが深いスキーマを拒否する場合があります。エラーが発生した場合は、プロパティ名を短くしたり、ネストを減らしたり、制約の数を制限したりして、スキーマを簡略化してみてください。
 
-Envoyer des commentaires
+フィードバックを送信
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+特に記載のない限り、このページのコンテンツは[クリエイティブ・コモンズの表示 4.0 ライセンス](https://creativecommons.org/licenses/by/4.0/)により使用許諾されます。コードサンプルは [Apache 2.0 ライセンス](https://www.apache.org/licenses/LICENSE-2.0)により使用許諾されます。詳しくは、[Google Developers サイトのポリシー](https://developers.google.com/site-policies?hl=ja)をご覧ください。Java は Oracle および関連会社の登録商標です。
 
-Dernière mise à jour le 2026/07/30 (UTC).
+最終更新日 2026-07-30 UTC。
 
-Voulez-vous nous donner plus d'informations ?
+ご意見をお聞かせください
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/30 (UTC)."],[],[]]
+[[["わかりやすい","easyToUnderstand","thumb-up"],["問題の解決に役立った","solvedMyProblem","thumb-up"],["その他","otherUp","thumb-up"]],[["必要な情報がない","missingTheInformationINeed","thumb-down"],["複雑すぎる / 手順が多すぎる","tooComplicatedTooManySteps","thumb-down"],["最新ではない","outOfDate","thumb-down"],["翻訳に関する問題","translationIssue","thumb-down"],["サンプル / コードに問題がある","samplesCodeIssue","thumb-down"],["その他","otherDown","thumb-down"]],["最終更新日 2026-07-30 UTC。"],[],[]]

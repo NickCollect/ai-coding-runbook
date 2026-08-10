@@ -1,68 +1,68 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=fr
-fetched_at: 2026-08-03T04:28:51.166750+00:00
-title: "Pr\u00e9sentation des versions de l'API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/api-versions?hl=he
+fetched_at: 2026-08-10T03:09:23.480556+00:00
+title: "\u05d4\u05e1\u05d1\u05e8 \u05e2\u05dc \u05d2\u05e8\u05e1\u05d0\u05d5\u05ea API \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-L'[API Interactions](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=fr) est désormais en disponibilité générale. Nous vous recommandons d'utiliser cette API pour accéder à toutes les dernières fonctionnalités et tous les derniers modèles.
+‫[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=he) זמין עכשיו לכלל המשתמשים. מומלץ להשתמש ב-API הזה כדי לקבל גישה לכל התכונות והמודלים העדכניים.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=fr)
+![](https://ai.google.dev/_static/images/translated.svg?hl=he)
 
-Google utilise la technologie IA pour traduire le contenu dans votre langue préférée. Les traductions générées par IA peuvent contenir des erreurs.
+‫Google משתמשת בטכנולוגיית AI כדי לתרגם תוכן לשפה המועדפת עליך. בתרגומים כאלו עשויות להיות שגיאות.
 
-- [Accueil](https://ai.google.dev/?hl=fr)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=fr)
-- [Documentation de référence de l'API](https://ai.google.dev/api?hl=fr)
+- [דף הבית](https://ai.google.dev/?hl=he)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=he)
+- [הפניית API](https://ai.google.dev/api?hl=he)
 
-Envoyer des commentaires
+שליחת משוב
 
-# Présentation des versions de l'API
+# הסבר על גרסאות API
 
-Ce document offre une vue d'ensemble des différences entre les versions `v1` et `v1beta` de l'API Gemini.
+במסמך הזה מפורטת סקירה כללית של ההבדלים בין גרסאות `v1` ו-`v1beta` של Gemini API.
 
-- **v1** : version stable de l'API. Les fonctionnalités de la version stable sont entièrement prises en charge pendant toute la durée de vie de la version majeure. En cas de modifications incompatibles, une nouvelle version majeure de l'API sera créée et la version existante sera abandonnée après un délai raisonnable.
-  Des modifications non destructives peuvent être apportées à l'API sans modifier la version majeure. L'**API Interactions** et ses principales fonctionnalités sont généralement disponibles dans `v1`.
-- **v1beta** : cette version inclut des fonctionnalités et des capacités préliminaires en cours de développement. Bien que les fonctionnalités de `v1beta` puissent être modifiées à mesure que nous les affinons en fonction des commentaires, elles vous permettent d'essayer de nouvelles fonctionnalités avant qu'elles ne soient promues à la version stable.
+- ‫**v1**: גרסה יציבה של ה-API. התכונות בגרסה היציבה נתמכות באופן מלא במהלך מחזור החיים של הגרסה הראשית. אם יש שינויים שעלולים לשבור את התאימות לאחור, ניצור גרסה ראשית חדשה של ה-API והגרסה הקיימת תוצא משימוש אחרי תקופה סבירה.
+  יכול להיות שיוכנסו שינויים שלא ישפיעו על התפקוד של ממשק ה-API בלי לשנות את הגרסה הראשית. ‫**Interactions API** והתכונות העיקריות שלו זמינים בדרך כלל ב-`v1`.
+- ‫**v1beta**: הגרסה הזו כוללת תכונות ויכולות מוקדמות שנמצאות בפיתוח פעיל. יכול להיות שנבצע שינויים בתכונות ב-`v1beta` כדי לשפר אותן על סמך המשוב שנקבל, אבל תוכלו לנסות יכולות חדשות לפני שהן יהפכו ליציבות.
 
-## Compatibilité des fonctionnalités
+## תמיכה ביכולות ובתכונות
 
-Le tableau suivant détaille la disponibilité des fonctionnalités dans `v1` (DG) et `v1beta` (bêta). Les outils et les fonctionnalités de l'API Core s'appliquent à l'API Interactions et à `generateContent`, sauf indication contraire :
+בטבלה הבאה מפורטת הזמינות של היכולות ב-`v1` (GA) וב-`v1beta` (בטא). היכולות והכלים העיקריים של API חלים על Interactions API ועל `generateContent` אלא אם צוין אחרת:
 
-| Fonctionnalité | v1 | v1beta |
+| תכונה | v1 | v1beta |
 | --- | --- | --- |
-| **Fonctionnalités principales de l'API** |  |  |
-| [API Interactions](https://ai.google.dev/gemini-api/docs/get-started?hl=fr) |  |  |
-| [Appel de fonction](https://ai.google.dev/gemini-api/docs/function-calling?hl=fr) |  |  |
-| [Sortie structurée](https://ai.google.dev/gemini-api/docs/structured-output?hl=fr) |  |  |
-| [Réflexion / Raisonnement](https://ai.google.dev/gemini-api/docs/thinking?hl=fr) |  |  |
-| [Instructions système](https://ai.google.dev/gemini-api/docs/system-instructions?hl=fr) |  |  |
-| [Sortie audio (configuration vocale)](https://ai.google.dev/gemini-api/docs/audio?hl=fr) |  |  |
-| [Niveau de service (Priorité / Flex)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=fr) |  |  |
-| **Outils** |  |  |
-| [Outil d'exécution de code](https://ai.google.dev/gemini-api/docs/code-execution?hl=fr) |  |  |
-| [Ancrage avec la recherche Google](https://ai.google.dev/gemini-api/docs/google-search?hl=fr) |  |  |
-| [Ancrage Google Maps](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=fr) |  |  |
-| [Outil de contexte d'URL](https://ai.google.dev/gemini-api/docs/url-context?hl=fr) |  |  |
-| [Outil de recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr) |  |  |
-| [Outil d'utilisation de l'ordinateur](https://ai.google.dev/gemini-api/docs/computer-use?hl=fr) |  |  |
-| [Outil Serveurs MCP](https://ai.google.dev/gemini-api/docs/eap/remote_mcp?hl=fr) |  |  |
-| **API en temps réel** |  |  |
-| [API Live (WebSockets)](https://ai.google.dev/gemini-api/docs/live-api?hl=fr) |  |  |
-| [API Live Music](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=fr) |  |  |
-| [Jetons éphémères (API Live)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=fr) |  |  |
-| **API de la plate-forme** |  |  |
-| [API Models](https://ai.google.dev/gemini-api/docs/models?hl=fr) |  |  |
-| [Route du service de fichiers](https://ai.google.dev/gemini-api/docs/files?hl=fr) |  |  |
-| [Route de stockage de la recherche de fichiers](https://ai.google.dev/gemini-api/docs/file-search?hl=fr) |  |  |
-| [API Agents](https://ai.google.dev/gemini-api/docs/agents?hl=fr) |  |  |
-| [API Webhooks](https://ai.google.dev/gemini-api/docs/webhooks?hl=fr) |  |  |
-| [Mise en cache du contexte](https://ai.google.dev/gemini-api/docs/caching?hl=fr) |  |  |
+| **יכולות הליבה של ה-API** |  |  |
+| [Interactions API](https://ai.google.dev/gemini-api/docs/get-started?hl=he) |  |  |
+| [בקשה להפעלת פונקציה](https://ai.google.dev/gemini-api/docs/function-calling?hl=he) |  |  |
+| [פלט מובנה](https://ai.google.dev/gemini-api/docs/structured-output?hl=he) |  |  |
+| [חשיבה / חשיבה רציונלית](https://ai.google.dev/gemini-api/docs/thinking?hl=he) |  |  |
+| [הוראות מערכת](https://ai.google.dev/gemini-api/docs/system-instructions?hl=he) |  |  |
+| [פלט אודיו (הגדרות דיבור)](https://ai.google.dev/gemini-api/docs/audio?hl=he) |  |  |
+| [רמת השירות (עדיפות / Flex)](https://ai.google.dev/gemini-api/docs/priority-inference?hl=he) |  |  |
+| **כלים** |  |  |
+| [כלי להרצת קוד](https://ai.google.dev/gemini-api/docs/code-execution?hl=he) |  |  |
+| [הארקה בחיפוש Google](https://ai.google.dev/gemini-api/docs/google-search?hl=he) |  |  |
+| [הארקה של מפות Google](https://ai.google.dev/gemini-api/docs/maps-grounding?hl=he) |  |  |
+| [הכלי לניתוח הקשר של כתובת URL](https://ai.google.dev/gemini-api/docs/url-context?hl=he) |  |  |
+| [כלי לחיפוש קבצים](https://ai.google.dev/gemini-api/docs/file-search?hl=he) |  |  |
+| [כלי לשימוש במחשב](https://ai.google.dev/gemini-api/docs/computer-use?hl=he) |  |  |
+| [כלי שרתי MCP](https://ai.google.dev/gemini-api/docs/eap/remote_mcp?hl=he) |  |  |
+| **ממשקי API בזמן אמת** |  |  |
+| ‫[Live API (WebSockets)](https://ai.google.dev/gemini-api/docs/live-api?hl=he) |  |  |
+| [Live Music API](https://ai.google.dev/gemini-api/docs/realtime-music-generation?hl=he) |  |  |
+| [טוקנים זמניים (Live API)](https://ai.google.dev/gemini-api/docs/live-api/ephemeral-tokens?hl=he) |  |  |
+| **Platform APIs** |  |  |
+| [Models API](https://ai.google.dev/gemini-api/docs/models?hl=he) |  |  |
+| [Files Service Route](https://ai.google.dev/gemini-api/docs/files?hl=he) |  |  |
+| [File Search Stores Route](https://ai.google.dev/gemini-api/docs/file-search?hl=he) |  |  |
+| ‫[Agents API](https://ai.google.dev/gemini-api/docs/agents?hl=he) |  |  |
+| [Webhooks API](https://ai.google.dev/gemini-api/docs/webhooks?hl=he) |  |  |
+| [Context Caching](https://ai.google.dev/gemini-api/docs/caching?hl=he) |  |  |
 
-- : compatible
+- ‫ – נתמך
 
-## Configurer la version de l'API dans un SDK
+## הגדרת גרסת API ב-SDK
 
-Les SDK de l'API Gemini sont définis par défaut sur `v1beta`, mais vous pouvez spécifier explicitement les versions en définissant la version de l'API, comme indiqué dans l'exemple de code suivant :
+ערכות ה-SDK של Gemini API מוגדרות כברירת מחדל לגרסה `v1beta`, אבל אפשר לציין גרסאות באופן מפורש על ידי הגדרת גרסת ה-API כמו בדוגמת הקוד הבאה:
 
 ### Python
 
@@ -111,12 +111,12 @@ curl -X POST "https://generativelanguage.googleapis.com/v1/interactions" \
   }'
 ```
 
-Envoyer des commentaires
+שליחת משוב
 
-Sauf indication contraire, le contenu de cette page est régi par une licence [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), et les échantillons de code sont régis par une licence [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Pour en savoir plus, consultez les [Règles du site Google Developers](https://developers.google.com/site-policies?hl=fr). Java est une marque déposée d'Oracle et/ou de ses sociétés affiliées.
+אלא אם צוין אחרת, התוכן של דף זה הוא ברישיון [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) ודוגמאות הקוד הן ברישיון [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). לפרטים, ניתן לעיין ב[מדיניות האתר Google Developers‏](https://developers.google.com/site-policies?hl=he).‏ Java הוא סימן מסחרי רשום של חברת Oracle ו/או של השותפים העצמאיים שלה.
 
-Dernière mise à jour le 2026/07/28 (UTC).
+עדכון אחרון: 2026-07-28 (שעון UTC).
 
-Voulez-vous nous donner plus d'informations ?
+רוצה לתת לנו משוב?
 
-[[["Facile à comprendre","easyToUnderstand","thumb-up"],["J'ai pu résoudre mon problème","solvedMyProblem","thumb-up"],["Autre","otherUp","thumb-up"]],[["Il n'y a pas l'information dont j'ai besoin","missingTheInformationINeed","thumb-down"],["Trop compliqué/Trop d'étapes","tooComplicatedTooManySteps","thumb-down"],["Obsolète","outOfDate","thumb-down"],["Problème de traduction","translationIssue","thumb-down"],["Mauvais exemple/Erreur de code","samplesCodeIssue","thumb-down"],["Autre","otherDown","thumb-down"]],["Dernière mise à jour le 2026/07/28 (UTC)."],[],[]]
+[[["התוכן קל להבנה","easyToUnderstand","thumb-up"],["התוכן עזר לי לפתור בעיה","solvedMyProblem","thumb-up"],["סיבה אחרת","otherUp","thumb-up"]],[["חסרים לי מידע או פרטים","missingTheInformationINeed","thumb-down"],["התוכן מורכב מדי או עם יותר מדי שלבים","tooComplicatedTooManySteps","thumb-down"],["התוכן לא עדכני","outOfDate","thumb-down"],["בעיה בתרגום","translationIssue","thumb-down"],["בעיה בדוגמאות/בקוד","samplesCodeIssue","thumb-down"],["סיבה אחרת","otherDown","thumb-down"]],["עדכון אחרון: 2026-07-28 (שעון UTC)."],[],[]]

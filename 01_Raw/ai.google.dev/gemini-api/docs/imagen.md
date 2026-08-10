@@ -1,40 +1,40 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=de
-fetched_at: 2026-08-03T04:38:45.895915+00:00
-title: "Bilder mit Imagen generieren \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
+source_url: https://ai.google.dev/gemini-api/docs/imagen?hl=id
+fetched_at: 2026-08-10T03:10:05.001813+00:00
+title: "Membuat gambar menggunakan Imagen \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
+[Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=id) kini tersedia secara umum. Sebaiknya gunakan API ini untuk mengakses semua fitur dan model terbaru.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=de)
+![](https://ai.google.dev/_static/images/translated.svg?hl=id)
 
-Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
+Google menggunakan teknologi AI untuk menerjemahkan konten ke dalam bahasa pilihan Anda. Terjemahan AI mungkin mengandung kesalahan.
 
-- [Startseite](https://ai.google.dev/?hl=de)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
-- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
+- [Beranda](https://ai.google.dev/?hl=id)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=id)
+- [Dokumen](https://ai.google.dev/gemini-api/docs?hl=id)
 
-Feedback geben
+Kirim masukan
 
-# Bilder mit Imagen generieren
+# Membuat gambar menggunakan Imagen
 
-Imagen ist das High-Fidelity-Modell zur Bildgenerierung von Google, mit dem sich realistische und hochwertige Bilder aus Text-Prompts generieren lassen. Alle generierten Bilder enthalten ein SynthID-Wasserzeichen. Weitere Informationen zu den verfügbaren Imagen-Modellvarianten finden Sie im Abschnitt [Modellversionen](#model-versions).
+Imagen adalah model pembuatan gambar fidelitas tinggi Google, yang mampu menghasilkan gambar realistis dan berkualitas tinggi dari perintah teks. Semua gambar yang dihasilkan menyertakan watermark SynthID. Untuk mempelajari lebih lanjut varian model Imagen yang tersedia, lihat bagian [Versi model](#model-versions).
 
-## Migration zu Nano Banana
+## Migrasi ke Nano Banana
 
-Imagen-Modelle sind veraltet und werden am 17. August 2026 eingestellt. Wir empfehlen, für die Bildgenerierung zu Nano Banana zu migrieren.
+Model Imagen tidak digunakan lagi dan akan dihentikan pada 17 Agustus 2026. Sebaiknya Anda bermigrasi ke Nano Banana untuk memenuhi kebutuhan pembuatan gambar Anda.
 
-Die Migration umfasst die folgenden Änderungen:
+Migrasi melibatkan perubahan berikut:
 
-- **Modellname**: Verwenden Sie `gemini-2.5-flash-image` anstelle von Imagen-Modellnamen.
-- **Methode**: Verwenden Sie `client.models.generate_content` anstelle von `client.models.generate_images`.
-- **Antwortverarbeitung**: Nano Banana gibt Inhaltsabschnitte zurück, die möglicherweise Bilddaten enthalten, anstelle eines bestimmten Bildantwortobjekts.
+- **Nama model**: Gunakan `gemini-2.5-flash-image`, bukan nama model Imagen.
+- **Metode**: Gunakan `client.models.generate_content`, bukan `client.models.generate_images`.
+- **Penanganan respons**: Nano Banana menampilkan bagian konten, yang dapat mencakup data gambar, bukan objek respons gambar tertentu.
 
-Weitere Informationen und Beispiele finden Sie im [Leitfaden zur Bildgenerierung](https://ai.google.dev/gemini-api/docs/image-generation?hl=de).
+Lihat [Panduan pembuatan gambar](https://ai.google.dev/gemini-api/docs/image-generation?hl=id) untuk mengetahui detail dan contoh selengkapnya.
 
-## Bilder mit den Imagen-Modellen generieren
+## Membuat gambar menggunakan model Imagen
 
-In diesem Beispiel wird gezeigt, wie Sie Bilder mit einem [Imagen-Modell](https://deepmind.google/technologies/imagen/?hl=de) generieren:
+Contoh ini menunjukkan pembuatan gambar dengan [model Imagen](https://deepmind.google/technologies/imagen/?hl=id):
 
 ### Python
 
@@ -87,7 +87,7 @@ async function main() {
 main();
 ```
 
-### Ok
+### Go
 
 ```
 package main
@@ -144,364 +144,395 @@ curl -X POST \
       }'
 ```
 
-![KI-generiertes Bild eines Roboters, der ein rotes Skateboard hält](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=de)
+![Gambar buatan AI dari robot yang memegang papan seluncur merah](https://ai.google.dev/static/gemini-api/docs/images/robot-skateboard.png?hl=id)
 
-KI-generiertes Bild eines Roboters, der ein rotes Skateboard hält
+Gambar buatan AI dari robot yang memegang papan seluncur merah
 
-### Imagen-Konfiguration
+### Konfigurasi Imagen
 
-Imagen unterstützt derzeit nur Prompts in englischer Sprache und die folgenden Parameter:
+Saat ini, Imagen hanya mendukung perintah dalam bahasa Inggris dan parameter berikut:
 
-- `numberOfImages`: Die Anzahl der zu generierenden Bilder, von 1 bis 4 (einschließlich).
-  Der Standardwert ist 4.
-- `imageSize`: Die Größe des generierten Bildes. Dies wird nur für die Modelle „Standard“ und „Ultra“ unterstützt. Die unterstützten Werte sind `1K` und `2K`.
-  Der Standardwert ist `1K`.
-- `aspectRatio`: Ändert das Seitenverhältnis des generierten Bildes. Unterstützte Werte sind `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"` und `"16:9"`. Der Standardwert ist `"1:1"`.
-- `personGeneration`: Das Modell darf Bilder von Personen generieren. Folgende Werte werden unterstützt:
+- `numberOfImages`: Jumlah gambar yang akan dibuat, dari 1 hingga 4 (inklusif).
+  Defaultnya adalah 4.
+- `imageSize`: Ukuran gambar yang dihasilkan. Fitur ini hanya didukung untuk model Standard dan Ultra. Nilai yang didukung adalah `1K` dan `2K`.
+  Default-nya adalah `1K`.
+- `aspectRatio`: Mengubah rasio aspek gambar yang dihasilkan. Nilai
+  yang didukung adalah `"1:1"`, `"3:4"`, `"4:3"`, `"9:16"`, dan `"16:9"`. Defaultnya adalah
+  `"1:1"`.
+- `personGeneration`: Mengizinkan model membuat gambar orang. Nilai berikut didukung:
 
-  - `"dont_allow"`: Generierung von Bildern von Personen blockieren.
-  - `"allow_adult"`: Bilder von Erwachsenen, aber nicht von Kindern generieren. Das ist die Standardeinstellung.
-  - `"allow_all"`: Bilder generieren, auf denen Erwachsene und Kinder zu sehen sind.
+  - `"dont_allow"`: Memblokir pembuatan gambar orang.
+  - `"allow_adult"`: Menghasilkan gambar orang dewasa, tetapi bukan anak-anak. Ini adalah
+    defaultnya.
+  - `"allow_all"`: Buat gambar yang menyertakan orang dewasa dan anak-anak.
 
-## Imagen-Leitfaden für Prompts
+## Panduan perintah Imagen
 
-In diesem Abschnitt des Imagen-Leitfadens erfahren Sie, wie sich durch Ändern einer Text-zu-Bild-Eingabeaufforderung unterschiedliche Ergebnisse erzielen lassen. Außerdem finden Sie Beispiele für Bilder, die Sie erstellen können.
+Bagian panduan Imagen ini menunjukkan cara memodifikasi perintah text-to-image
+dapat menghasilkan hasil yang berbeda, beserta contoh gambar yang dapat Anda buat.
 
-### Grundlagen zum Schreiben von Prompts
+### Dasar-dasar penulisan perintah
 
-Ein guter Prompt ist beschreibend und klar und verwendet aussagekräftige Keywords und Modifikatoren. Beginnen Sie mit dem **Motiv**, dem **Kontext** und dem **Stil**.
+Perintah yang baik bersifat deskriptif dan jelas, serta menggunakan kata kunci dan pengubah yang bermakna. Mulailah dengan memikirkan **subjek**, **konteks**, dan **gaya** Anda.
 
-![Eingabeaufforderung mit Akzent auf Motiv, Kontext und Stil](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=de)
+![Perintah dengan subjek, konteks, dan gaya yang ditekankan](https://ai.google.dev/static/gemini-api/docs/images/imagen/style-subject-context.png?hl=id)
 
-Bildtext: Eine *Skizze* (**Stil**) eines *modernen Wohngebäudes* (**Motiv**) umgeben von *Wolkenkratzern* (**Kontext und Hintergrund**).
+Teks gambar: *Sketsa* (**gaya**) dari *gedung apartemen modern*
+(**subjek**) dikelilingi *pilar* (**konteks dan latar belakang**).
 
-1. **Thema:** Das Erste, woran Sie bei jeder Eingabeaufforderung denken müssen, ist das *Motiv*. Das Objekt, eine Person, ein Tier oder eine Landschaft, von der Sie ein Bild möchten.
-2. **Kontext und Hintergrund:** Ebenso wichtig ist der *Hintergrund oder Kontext*, in dem das Motiv platziert wird. Platzieren Sie das Motiv vor verschiedenen Hintergründen. Zum Beispiel ein Studio mit weißem Hintergrund, im Freien oder in Gebäuden.
-3. **Stil:** Fügen Sie abschließend den Stil des gewünschten Bildes hinzu. *Stile* können allgemein (Malerei, Fotografie, Skizzen) oder sehr spezifisch sein (Pastel, Kohlezeichnung, isometrische 3D-Perspektive). Sie können auch Stile kombinieren.
+1. **Subjek**: Hal pertama yang harus dipikirkan dengan perintah apa pun adalah
+   *subjek*: objek, orang, hewan, atau pemandangan yang Anda inginkan gambarnya.
+2. **Konteks dan latar belakang:** Sama pentingnya adalah *latar belakang atau konteks*
+   tempat subjek akan ditempatkan. Coba tempatkan subjek di berbagai
+   latar belakang. Misalnya, studio dengan latar belakang putih, di luar ruangan, atau
+   di dalam ruangan.
+3. **Gaya:** Terakhir, tambahkan gaya gambar yang Anda inginkan. *Gaya* dapat bersifat umum
+   (lukisan, foto, sketsa) atau yang sangat spesifik (lukisan pastel, gambar arang, 3D isometrik). Anda juga dapat menggabungkan gaya.
 
-Nachdem Sie eine erste Version Ihres Prompts geschrieben haben, können Sie ihn verfeinern, indem Sie weitere Details hinzufügen, bis Sie das gewünschte Bild erhalten. Iteration ist wichtig.
-Beginnen Sie mit Ihrer Kernidee und verfeinern und erweitern Sie diese dann, bis das generierte Bild Ihrer Vorstellung entspricht.
+Setelah menulis versi pertama perintah, perbaiki perintah dengan menambahkan
+lebih banyak detail hingga Anda mendapatkan gambar yang diinginkan. Iterasi penting.
+Mulailah dengan menentukan ide inti Anda, lalu sempurnakan dan kembangkan ide inti tersebut hingga gambar yang dihasilkan mendekati visi Anda.
 
 |  |  |  |
 | --- | --- | --- |
-| Fotorealistisches Beispielbild 1   Eingabeaufforderung: Ein Park im Frühling neben einem See | Fotorealistisches Beispielbild 2   Prompt: Ein Park im Frühling neben einem See, **die Sonne geht über dem See unter, goldene Stunde** | Fotorealistisches Beispielbild 3   Prompt: Ein Park im Frühling neben einem See, ***die Sonne geht über dem See unter, goldene Stunde, rote Wildblumen*** |
+| contoh gambar fotorealistik 1   Perintah: Taman di musim semi di samping danau | gambar contoh fotorealistik 2   Perintah: Taman di musim semi di samping danau, **matahari terbenam di seberang danau, golden hour** | gambar contoh fotorealistik 3   Perintah: Taman di musim semi di samping danau, ***matahari terbenam di seberang danau, golden hour, bunga liar merah*** |
 
-Imagen-Modelle können Ihre Ideen in detaillierte Bilder umwandeln, unabhängig davon, ob Ihre Prompts kurz oder lang und detailliert sind. Verfeinern Sie Ihre Vision durch iterative Prompts und fügen Sie Details hinzu, bis Sie das perfekte Ergebnis erzielen.
+Model Imagen dapat mengubah ide Anda menjadi gambar yang mendetail, baik perintah Anda singkat maupun panjang dan mendetail. Sempurnakan visi Anda melalui perintah berulang, tambahkan detail hingga Anda mendapatkan hasil yang sempurna.
 
 |  |  |
 | --- | --- |
-| Mit kurzen Prompts können Sie schnell ein Bild generieren.  Beispiel für einen kurzen Prompt für Imagen 4   Prompt: Nahaufnahme einer Frau in ihren 20ern, Straßenfotografie, Standbild, gedeckte warme Orangetöne | Mit längeren Prompts können Sie spezifische Details hinzufügen und Ihr Bild erstellen.  Beispiel für einen langen Prompt für Imagen 4   Prompt: Beeindruckendes Foto einer Frau in ihren 20ern, das einen Straßenfotografie-Stil verwendet. Das Bild sollte wie ein Standfoto mit gedeckten, orangefarbenen, warmen Tönen aussehen. |
+| Perintah singkat memungkinkan Anda membuat gambar dengan cepat.  Contoh perintah singkat Imagen 4   Perintah: foto close-up seorang wanita berusia 20-an, fotografi jalanan, cuplikan film, nuansa hangat oranye lembut | Dengan perintah yang lebih panjang, Anda dapat menambahkan detail spesifik dan membuat gambar.  Contoh perintah panjang Imagen 4   Perintah: foto memukau seorang wanita berusia 20-an yang menggunakan gaya fotografi jalanan. Gambar harus terlihat seperti cuplikan film dengan warna hangat oranye yang lembut. |
 
-Zusätzliche Tipps zum Verfassen von Prompts für Imagen:
+Saran tambahan untuk penulisan perintah Imagen:
 
-- **Beschreibende Sprache verwenden**: Verwenden Sie detaillierte Adjektive und Adverbien, um Imagen ein klares Bild zu vermitteln.
-- **Kontext bereitstellen**: Fügen Sie bei Bedarf Hintergrundinformationen hinzu, damit die KI die Aufgabe besser versteht.
-- **Auf bestimmte Künstler oder Stile verweisen**: Wenn Sie eine bestimmte Ästhetik im Sinn haben, kann es hilfreich sein, auf bestimmte Künstler oder Kunstrichtungen zu verweisen.
-- **Tools für Prompt Engineering verwenden**: Sie können Tools oder Ressourcen für Prompt Engineering nutzen, um Ihre Prompts zu optimieren und optimale Ergebnisse zu erzielen.
-- **Gesichtsdetails in Ihren persönlichen Fotos und Gruppenfotos optimieren**: Geben Sie Gesichtsdetails als Fokus des Fotos an (verwenden Sie z. B. das Wort „Porträt“ im Prompt).
+- **Gunakan bahasa deskriptif**: Gunakan kata sifat dan kata keterangan yang mendetail untuk
+  menggambarkan dengan jelas kepada Imagen.
+- **Berikan konteks**: Jika perlu, sertakan informasi latar belakang untuk membantu AI memahami.
+- **Merujuk pada artis atau gaya tertentu**: Jika Anda memiliki estetika tertentu, merujuk pada artis atau gerakan seni tertentu dapat membantu.
+- **Gunakan alat rekayasa perintah**: Pertimbangkan untuk mempelajari alat atau referensi rekayasa perintah untuk membantu Anda menyempurnakan perintah dan mendapatkan hasil yang optimal.
+- **Meningkatkan kualitas detail wajah dalam gambar pribadi dan grup Anda**: Tentukan detail wajah sebagai fokus foto (misalnya, gunakan kata "potret" dalam perintah).
 
-### Text in Bildern generieren
+### Membuat teks dalam gambar
 
-Imagen-Modelle können Text in Bilder einfügen und so mehr kreative Möglichkeiten bei der Bilderstellung eröffnen. Mit den folgenden Tipps können Sie diese Funktion optimal nutzen:
+Model Imagen dapat menambahkan teks ke dalam gambar, sehingga membuka lebih banyak kemungkinan pembuatan gambar yang kreatif. Gunakan panduan berikut untuk mendapatkan hasil maksimal dari fitur ini:
 
-- **Sicher iterieren**: Möglicherweise müssen Sie Bilder neu generieren, bis Sie das gewünschte Ergebnis erhalten. Die Textintegration von Imagen wird ständig weiterentwickelt. Manchmal sind mehrere Versuche erforderlich, um die besten Ergebnisse zu erzielen.
-- **Kurz fassen**: Der Text sollte maximal 25 Zeichen umfassen, damit er optimal generiert werden kann.
-- **Mehrere Formulierungen**: Testen Sie zwei oder drei unterschiedliche Formulierungen, um zusätzliche Informationen zu liefern. Verwenden Sie nicht mehr als drei Begriffe, um die Komposition übersichtlicher zu halten.
+- **Lakukan iterasi dengan percaya diri**: Anda mungkin harus membuat ulang gambar hingga Anda mendapatkan tampilan yang diinginkan. Integrasi teks Imagen masih
+  berkembang, dan terkadang beberapa upaya akan memberikan hasil terbaik.
+- **Buat teks singkat**: Batasi teks hingga 25 karakter atau kurang untuk generasi yang optimal.
+- **Beberapa frasa**: Bereksperimenlah dengan dua atau tiga frasa berbeda untuk memberikan informasi tambahan. Hindari penggunaan lebih dari tiga frasa untuk komposisi yang lebih bersih.
 
-  ![Beispiel für die Textgenerierung mit Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=de)
+  ![Contoh teks yang dihasilkan Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_generate-text.png?hl=id)
 
-  Prompt: Ein Poster mit dem Text „Summerland“ in fetter Schrift als Titel. Darunter der Slogan „Summer never felt so good“.
-- **Platzierung von Anleitungen**: Imagen kann versuchen, Text wie angegeben zu positionieren, aber es kann zu Abweichungen kommen. Diese Funktion wird kontinuierlich verbessert.
-- **Schriftstil für Inspiration**: Geben Sie einen allgemeinen Schriftstil an, um die Auswahl von Imagen subtil zu beeinflussen. Verlassen Sie sich nicht auf eine genaue Schriftartreplikation, sondern rechnen Sie mit kreativen Interpretationen.
-- **Schriftgröße**: Geben Sie eine Schriftgröße oder eine allgemeine Größenangabe (z. B. *klein*, *mittel*, *groß*) an, um die Generierung der Schriftgröße zu beeinflussen.
+  Perintah: Poster dengan teks "Summerland" dalam font tebal sebagai
+  judul, di bawah teks ini terdapat slogan "Summer never felt so good"
+- **Penempatan Panduan**: Meskipun Imagen dapat mencoba memosisikan teks sesuai arahan, terkadang ada variasi. Fitur ini terus ditingkatkan.
+- **Gaya font Inspire**: Tentukan gaya font umum untuk memengaruhi pilihan Imagen secara halus. Jangan mengandalkan replikasi font yang presisi, tetapi harapkan interpretasi kreatif.
+- **Ukuran font**: Tentukan ukuran font atau indikasi ukuran umum (misalnya, *kecil*, *sedang*, *besar*) untuk memengaruhi pembuatan ukuran font.
 
-### Prompt-Parametrisierung
+### Parameterisasi perintah
 
-Um die Ausgaberesultate besser zu steuern, kann es hilfreich sein, die Eingaben in Imagen zu parametrisieren. Angenommen, Sie möchten, dass Ihre Kunden Logos für ihr Unternehmen generieren können, und Sie möchten sicherstellen, dass Logos immer auf einem einfarbigen Hintergrund generiert werden. Außerdem möchten Sie die Optionen einschränken, die der Kunde in einem Menü auswählen kann.
+Untuk mengontrol hasil output dengan lebih baik, Anda mungkin merasa terbantu dengan memparameterisasi
+input ke Imagen. Misalnya, Anda ingin pelanggan dapat membuat logo untuk bisnis mereka, dan Anda ingin memastikan logo selalu dibuat dengan latar belakang warna solid. Anda
+juga ingin membatasi opsi yang dapat dipilih klien dari menu.
 
-In diesem Beispiel können Sie einen parametrisierten Prompt ähnlich dem folgenden erstellen:
+Dalam contoh ini, Anda dapat membuat perintah berparameter yang mirip dengan
+berikut:
 
 ```
 A {logo_style} logo for a {company_area} company on a solid color background. Include the text {company_name}.
 ```
 
-In Ihrer benutzerdefinierten Benutzeroberfläche kann der Kunde die Parameter über ein Menü eingeben. Der ausgewählte Wert wird dann in den Prompt eingefügt, den Imagen erhält.
+Di antarmuka pengguna kustom Anda, pelanggan dapat memasukkan parameter menggunakan
+menu, dan nilai yang dipilihnya akan mengisi perintah yang diterima Imagen.
 
-Beispiel:
+Contoh:
 
-1. Prompt: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
+1. Perintah: `A minimalist logo for a health care company on a solid color background. Include the text Journey.`
 
-   ![Beispiel 1 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=de)
-2. Prompt: `A modern logo for a software company on a solid color background. Include the text Silo.`
+   ![Contoh 1 parameterisasi perintah Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_healthcare.png?hl=id)
+2. Perintah: `A modern logo for a software company on a solid color background. Include the text Silo.`
 
-   ![Beispiel 2 für die Parametrisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=de)
-3. Prompt: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
+   ![Contoh parameterisasi perintah Imagen 4 2](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_software.png?hl=id)
+3. Perintah: `A traditional logo for a baking company on a solid color background. Include the text Seed.`
 
-   ![Beispiel 3 für die Parameterisierung von Prompts für Imagen 4](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=de)
+   ![Contoh parameterisasi perintah Imagen 4 3](https://ai.google.dev/static/gemini-api/docs/images/imagen/imagen3_prompt-param_baking.png?hl=id)
 
-### Erweiterte Techniken zum Schreiben von Eingabeaufforderungen
+### Teknik penulisan perintah lanjutan
 
-Anhand der folgenden Beispiele können Sie anhand von Attributen wie Bilddeskriptoren, Formen und Materialien, historischen Kunstbewegungen und Bildqualitätsmodifikatoren spezifischere Prompts erstellen.
+Gunakan contoh berikut untuk membuat perintah yang lebih spesifik berdasarkan atribut
+seperti deskripsi fotografi, bentuk dan bahan, gerakan seni
+historis, dan pengubah kualitas gambar.
 
-#### Fotografie
+#### Fotografi
 
-- Eingabeaufforderung enthält: *„Ein Foto von...”*
+- Perintah menyertakan: *"Foto..."*
 
-Um diesen Stil zu verwenden, beginnen Sie mit der Verwendung von Keywords, die Imagen klar mitteilen, dass Sie nach einem Foto suchen. Starten Sie die Eingabeaufforderungen mit *„Ein Foto von. . .”*. Beispiel:
-
-|  |  |  |
-| --- | --- | --- |
-| Fotorealistisches Beispielbild 1   **Eingabeaufforderung:** Ein Foto von   Kaffeebohnen auf einer Holzoberfläche in einer Küche | Fotorealistisches Beispielbild 2   **Eingabeaufforderung:** Ein Foto von   einer Schokolade auf einem Küchentresen. | Fotorealistisches Beispielbild 3   Prompt: **Ein Foto eines** modernen Gebäudes mit Wasser im Hintergrund |
-
-Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
-
-##### Fotografische Modifikatotionen
-
-In den folgenden Beispielen sehen Sie mehrere fotospezifische Modifikatoren und Parameter. Sie können mehrere Modifikatoren kombinieren, um eine genauere Steuerung zu erreichen.
-
-1. **Kameranähe**: *aus der Nähe, von weit weg*
-
-   |  |  |
-   | --- | --- |
-   | Beispiel für Bild aus der Nähe   Eingabeaufforderung: Ein Foto von Kaffeebohnen **aus der Nähe** | Beispiel für herausgezoomtes Bild   Eingabeaufforderung: Ein **herausgezoomtes** Foto eines kleinen Beutels mit  Kaffeebohnen in einer unaufgeräumten Küche |
-2. **Kameraposition**: *Luftaufnahme, von unten*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Luftaufnahme   Eingabeaufforderung: **Luftaufnahme** einer Stadt mit Wolkenkratzern | Beispielbild von unten   Eingabeaufforderung: Ein Foto eines Waldstamms mit blauem Himmel **von unten** |
-3. **Beleuchtung**: *natürlich, dramatisch, warm, kalt*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für natürliche Beleuchtung   Eingabeaufforderung: Studiofoto eines modernen Sessels, **natürliche Beleuchtung** | Beispielbild für dramatische Beleuchtung   Eingabeaufforderung: Studiofoto eines modernen Sessels, **dramatische Beleuchtung** |
-4. **Kameraeinstellungen**:  *Bewegungsunschärfe, Weichzeichnung, Bokeh, Hochformat*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Bewegungsunschärfe   Prompt: Foto einer Stadt mit Wolkenkratzern aus dem Inneren eines Autos mit **Bewegungsunschärfe** | Beispielbild für Weichzeichnung   Prompt: **Weichzeichnung** eines Fotos einer Brücke in einer Stadt bei Nacht |
-5. **Objektive**: *35 mm, 50 mm, Fischauge, Weitwinkel, Makro*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Makro   Eingabeaufforderung: Foto eines Blattes, **Makroobjektiv** | Beispielbild für Fischaugenobjektiv   Eingabeaufforderung: Straßenansicht, New York City, **Fischaugenobjektiv** |
-6. **Filmtypen**: *Schwarz-Weiß, Polaroid*
-
-   |  |  |
-   | --- | --- |
-   | Beispielbild für Polaroid   Prompt: Ein **Polaroid-Hochformatbild** eines Hundes mit Sonnenbrille | Beispielbild für Schwarz-Weiß-Foto   Eingabeaufforderung: **Schwarz-Weiß-Foto** eines Hundes mit Sonnenbrille |
-
-Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
-
-### Illustration und Kunst
-
-- Eingabeaufforderung enthält: *„Eine painting von...”*, *„Eine sketch von...”*
-
-Die Stile variieren von monochromen Stilen wie Bleistift bis hin zu hyperrealistischer digitaler Kunst. Die folgenden Bilder verwenden beispielsweise dieselbe Eingabeaufforderung mit unterschiedlichen Stilen:
-
-*„Eine [art style or creation technique] einer kantigen elektrischen Limousine mit Wolkenkratzern im Hintergrund“*
+Untuk menggunakan gaya ini, mulai dengan menggunakan kata kunci yang dengan jelas memberi tahu
+Imagen bahwa Anda mencari foto. Mulailah perintah Anda dengan *"Foto. . ."*. Misalnya:
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbilder für Kunst   Eingabeaufforderung: Eine **technische Bleistiftskizze** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **Kohlezeichnung** eines kantigen... | Beispielbilder für Kunst   Prompt: Eine **Farbstiftzeichnung** eines kantigen... |
+| contoh gambar fotorealistik 1   Perintah: **Foto** biji kopi di dapur pada permukaan kayu | gambar contoh fotorealistik 2   Perintah: **Foto** cokelat batangan di meja dapur | gambar contoh fotorealistik 3   Perintah: **Foto** bangunan modern dengan latar belakang air |
+
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+
+##### Pengubah fotografi
+
+Pada contoh berikut, Anda dapat melihat beberapa pengubah dan parameter khusus fotografi. Anda dapat menggabungkan beberapa pengubah untuk kontrol yang lebih akurat.
+
+1. **Kedekatan Kamera** - *Jarak dekat, diambil dari jarak jauh*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh kamera jarak dekat   Perintah: Foto **jarak dekat** biji kopi | gambar contoh kamera yang diperkecil   Perintah: Foto **diperkecil** sekantong kecil biji kopi  di dapur yang berantakan |
+2. **Posisi Kamera** - *dari atas, dari bawah*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh foto dari atas   Perintah: **foto dari atas** kota dengan gedung pencakar langit | contoh gambar tampilan dari bawah   Perintah: Foto kanopi hutan dengan langit biru **dari bawah** |
+3. **Pencahayaan** - *alami, dramatis, hangat, dingin*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh pencahayaan alami   Perintah: foto studio kursi berlengan modern, **cahaya alami** | gambar contoh pencahayaan dramatis   Perintah: foto studio kursi berlengan modern, **cahaya dramatis** |
+4. **Setelan Kamera** *- motion blur, soft focus, bokeh, potret*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh motion blur   Perintah: foto kota dengan gedung pencakar langit dari dalam mobil dengan **motion blur** | gambar contoh soft focus   Perintah: Foto **soft focus** jembatan di kota perkotaan pada malam hari |
+5. **Jenis lensa** - *35 mm, 50 mm, mata ikan, sudut lebar, makro*
+
+   |  |  |
+   | --- | --- |
+   | gambar contoh lensa makro   Perintah: foto daun, **lensa makro** | gambar contoh lensa mata ikan   Perintah: fotografi jalanan, kota new york, **lensa mata ikan** |
+6. **Jenis film** - *hitam dan putih, polaroid*
+
+   |  |  |
+   | --- | --- |
+   | gambar sampel foto polaroid   Perintah: **potret polaroid** yang memakai kacamata hitam | gambar contoh foto hitam putih   Perintah: **foto hitam putih** yang memakai kacamata hitam |
+
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+
+### Ilustrasi dan seni
+
+- Perintah menyertakan: *"painting dari..."*, *"sketch dari..."*
+
+Gaya seni bervariasi mulai dari gaya monokrom seperti sketsa pensil, hingga seni digital
+yang sangat realistis. Misalnya, gambar berikut menggunakan perintah yang sama dengan
+gaya yang berbeda:
+
+*"[art style or creation technique] sedan listrik sporty bersudut dengan
+pencakar langit di latar belakang"*
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbilder für Kunst   Eingabeaufforderung: Ein **Pastelbild** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Eine **digitale Kunst** eines kantigen... | Beispielbilder für Kunst   Eingabeaufforderung: Ein **Art-dèco-Poster** eines kantigen... |
-
-Bildquelle: Jedes Bild wurde mit dem Imagen 2-Modell über den entsprechenden Text-Prompt generiert.
-
-##### Formen und Materialien
-
-- Eingabeaufforderung: *„...aus...”*, *„...in Form von...”*
-
-Eine der Stärken dieser Technologie ist, dass Sie Bilder erstellen können, die andernfalls schwer oder unmöglich wären. Sie können beispielsweise Ihr Firmenlogo in verschiedenen Materialien und Texturen neu erstellen.
+| gambar contoh karya seni   Perintah: **Gambar dengan teknik pensil** dari sebuah sudut... | gambar contoh karya seni   Perintah: **Gambar arang** dari sudut... | gambar contoh karya seni   Perintah: **Gambar pensil warna** dari sudut... |
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbild 1 für Formen und Materialien   Eingabeaufforderung: Duffle Bag **aus** Käse | Beispielbild 2 für Formen und Materialien   Prompt: Neonröhren **in Form** eines Vogels | Beispielbild 3 für Formen und Materialien   Eingabeaufforderung: Ein Sessel **aus Papier**, Studiofoto, Origami-Stil |
+| gambar contoh karya seni   Perintah: **Lukisan pastel** dari sebuah sudut... | gambar contoh karya seni   Perintah: **Seni digital** dari sudut... | gambar contoh karya seni   Perintah: **Art deco (poster)** dari sudut... |
 
-Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 2.
 
-#### Bezüge auf historische Kunst
+##### Bentuk dan bahan
 
-- Eingabeaufforderung: *„...im Stil von...”*
+- Perintah mencakup: *"...terbuat dari..."*, *"...dalam bentuk..."*
 
-Bestimmte Stile haben sich im Laufe der Jahre zu einem Mythos entwickelt. Im Folgenden finden Sie einige Ideen für historische Gemälde oder Kunststile, die Sie ausprobieren können.
-
-*„Bild generieren im Stil von [art period or movement]
-: ein Windpark“*
+Salah satu keunggulan teknologi ini adalah Anda dapat membuat citra yang
+sulit atau tidak mungkin dilakukan. Misalnya, Anda dapat membuat ulang
+logo perusahaan dengan bahan dan tekstur yang berbeda.
 
 |  |  |  |
 | --- | --- | --- |
-| Beispielbild für Impressionsismus   Prompt: Bild generieren **im Stil von *einem Gemälde des Impressionismus***: ein Windpark | Beispielbild für Renaissance   Prompt: generate an image **in the style of *a renaissance painting***: a wind farm | Beispielbild für Pop Art   Prompt: Bild generieren **im Stil von *Pop-Art***: ein Windpark |
+| contoh gambar bentuk dan bahan 1   Perintah: tas wol **terbuat dari** keju | contoh gambar bentuk dan bahan 2   Perintah: tabung neon **dalam bentuk** burung | contoh gambar 3 bentuk dan bahan 3   Perintah: kursi berlengan **terbuat dari kertas**, foto studio, gaya origami |
 
-Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
 
-#### Modifikatoren für die Bildqualität
+#### Referensi seni bersejarah
 
-Bestimmte Keywords können dem Modell mitteilen, dass Sie nach einem qualitativ hochwertigen Bild suchen. Beispiele für Qualitätsmodifikatoren:
+- Perintah mencakup: *"...dalam gaya..."*
 
-- **Allgemeine Modifikatoren**: *hohe Qualität, ansprechend, stilisiert*
-- **Fotos**: *4K, HDR, Studiofoto*
-- **Kunst, Illustration**: *von einem Profi, detailliert*
+Gaya tertentu telah menjadi ikon selama bertahun-tahun. Berikut adalah beberapa ide
+lukisan sejarah atau gaya seni yang dapat Anda coba.
 
-Im Folgenden finden Sie einige Beispiele für Eingabeaufforderungen ohne Qualitätsmodifikatoren und die gleiche Aufforderung mit Qualitätsmodifikatoren.
+*"buat gambar dengan gaya [art period or movement]
+: ladang kincir angin"*
+
+|  |  |  |
+| --- | --- | --- |
+| gambar contoh impresionisme   Perintah: buat gambar **dengan gaya *lukisan impresionis***: ladang kincir angin | gambar contoh renaisans   Perintah: buat gambar **dengan gaya *lukisan renaisans***: ladang kincir angin | gambar contoh seni pop   Perintah: buat gambar **dengan gaya *seni pop***: ladang kincir angin |
+
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
+
+#### Pengubah kualitas gambar
+
+Kata kunci tertentu dapat memberi tahu model bahwa Anda mencari aset berkualitas tinggi. Contoh pengubah kualitas mencakup hal berikut:
+
+- **Pengubah Umum** - *berkualitas tinggi, indah, bergaya*
+- **Foto** - *4K, HDR, Foto Studio*
+- **Seni, Ilustrasi** - *oleh profesional, mendetail*
+
+Berikut adalah beberapa contoh perintah tanpa pengubah kualitas dan
+perintah yang sama dengan pengubah kualitas.
 
 |  |  |
 | --- | --- |
-| Getreide-Beispielbild ohne Modifikatoren   Eingabeaufforderung (keine Qualitätsmodifikatoren): Ein Foto von einem Getreidehalm | Getreide-Beispielbild mit Modifikatoren   Eingabeaufforderung (mit Qualitätsmodifikatoren): **Schönes 4K-**   Foto eines Getreidehalms **von einem  Profi-Fotografen aufgenommen** |
+| gambar contoh jagung tanpa pengubah   Perintah (tanpa pengubah kualitas): foto batang jagung | gambar contoh jagung dengan pengubah   Perintah (dengan pengubah kualitas): **Foto 4k HDR yang indah**   dari sebuah foto batang jagung **diambil oleh   fotografer profesional** |
 
-Bildquelle: Jedes Bild wurde mit dem Imagen 4-Modell anhand des entsprechenden Text-Prompts generiert.
+Sumber gambar: Setiap gambar dibuat menggunakan perintah teks yang sesuai dengan model Imagen 4.
 
-#### Seitenverhältnisse
+#### Rasio aspek
 
-Mit der Imagen-Bildgenerierung können Sie fünf verschiedene Bild-Seitenverhältnisse festlegen.
+Pembuatan gambar Imagen memungkinkan Anda menetapkan lima rasio aspek gambar yang berbeda.
 
-1. **Quadrat** (1:1, Standard) - Ein quadratisches Standardfoto. Typische Anwendungsfälle für dieses Seitenverhältnis sind Beiträge in sozialen Medien.
-2. **Vollbild** (4:3) - Dieses Seitenverhältnis wird häufig in Medien oder in Filmen verwendet.
-   Es bezeichnet auch die Abmessungen der meisten alten (Nicht-Breitbild-)Fernseher und Mittelformatkameras. Es erfasst horizontal mehr von der Szene (im Vergleich zu 1:1), dadurch gehört es zu den bevorzugten Seitenverhältnissen für die Fotografie.
-
-   |  |  |
-   | --- | --- |
-   | Seitenverhältnis-Beispiel   Prompt: Nahaufnahme der Finger eines Musikers, der Klavier spielt, Schwarz-Weiß-Film, Vintage (Seitenverhältnis 4:3) | Seitenverhältnis-Beispiel   Prompt: Ein professionelles Studiofoto von Pommes Frites für ein High-End-Restaurant im Stil einer Lebensmittelzeitschrift (Seitenverhältnis 4:3). |
-3. **Vollbild-Vollbild** (3:4) – Dies ist das um 90 Grad gedrehte Vollbild-Seitenverhältnis. So kann vertikal im Vergleich zum Seitenverhältnis 1:1 mehr von der Szene erfasst werden.
+1. **Persegi** (1:1, default) - Foto persegi standar. Penggunaan umum untuk rasio aspek ini mencakup postingan media sosial.
+2. **Layar penuh** (4:3) - Rasio aspek ini umumnya digunakan dalam media atau film.
+   Ukuran ini juga merupakan dimensi sebagian besar TV lama (non-layar lebar) dan kamera format
+   sedang. Rasio ini menangkap lebih banyak pemandangan secara horizontal (dibandingkan dengan 1:1),
+   sehingga menjadi rasio aspek pilihan untuk fotografi.
 
    |  |  |
    | --- | --- |
-   | Seitenverhältnis-Beispiel   Prompt: Eine Frau wandert, Nahaufnahme ihrer Stiefel, die sich in einer Pfütze spiegeln, große Berge im Hintergrund, im Stil einer Werbung, dramatische Blickwinkel (Seitenverhältnis 3:4) | Seitenverhältnis-Beispiel   Prompt: Luftaufnahme eines Flusses, der in einem mystischen Tal fließt (Seitenverhältnis 3:4) |
-4. **Breitbild** (16:9): Dieses Seitenverhältnis hat 4:3 ersetzt und ist heute das gängigste Seitenverhältnis für Fernseher, Monitore und Bildschirme von Smartphones (Querformat).
-   Verwenden Sie dieses Seitenverhältnis, wenn Sie mehr vom Hintergrund erfassen möchten (z. B. malerische Landschaften).
+   | contoh rasio aspek   Perintah: close up jari seorang musisi sedang bermain piano, film hitam putih, vintage (rasio aspek 4:3) | contoh rasio aspek   Perintah: Foto studio profesional kentang goreng untuk restoran kelas atas, dengan gaya majalah makanan (rasio aspek 4:3) |
+3. **Layar penuh potret** (3:4) - Ini adalah rasio aspek layar penuh yang diputar 90 derajat. Hal ini memungkinkan Anda merekam lebih banyak bagian pemandangan secara vertikal dibandingkan dengan rasio aspek 1:1.
 
-   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=de)
+   |  |  |
+   | --- | --- |
+   | contoh rasio aspek   Perintah: seorang wanita sedang mendaki, close-up sepatu botnya terpantul di genangan air, pegunungan besar di latar belakang, dengan gaya iklan, sudut dramatis (rasio aspek 3:4) | contoh rasio aspek   Perintah: foto dari atas sungai yang mengalir ke atas lembah mistis (rasio aspek 3:4) |
+4. **Layar lebar** (16:9) - Rasio ini telah menggantikan 4:3 dan kini menjadi rasio aspek yang paling umum untuk TV, monitor, dan layar ponsel (lanskap).
+   Gunakan rasio aspek ini jika Anda ingin mengambil lebih banyak latar belakang (misalnya, pemandangan indah).
 
-   Prompt: Ein Mann ganz in weißer Kleidung, der am Strand sitzt, Nahaufnahme, Lichtverhältnisse einer goldenen Stunde (Seitenverhältnis 16:9)
-5. **Hochformat** (9:16): Dieses Seitenverhältnis entspricht dem Breitbild, aber gedreht. Dabei handelt es sich um ein relativ neues Seitenverhältnis, das in Kurzvideo-Apps beliebt ist (z. B. YouTube Shorts). Verwenden Sie es für hohe Objekte mit stark vertikalen Ausrichtungen wie Gebäude, Bäume, Wasserfälle oder ähnliche Objekte.
+   ![contoh rasio aspek](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_16-9_man.png?hl=id)
 
-   ![Seitenverhältnis-Beispiel](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=de)
+   Perintah: seorang pria yang mengenakan pakaian serba putih sedang duduk di pantai, close up, pencahayaan golden hour (rasio aspek 16:9)
+5. **Potret** (9:16) - Rasio ini adalah layar lebar yang diputar. Rasio aspek ini relatif baru dan telah dipopulerkan oleh aplikasi video pendek (misalnya, YouTube Shorts). Gunakan ini untuk objek tinggi dengan orientasi vertikal yang kuat seperti bangunan, pohon, air terjun, atau objek serupa lainnya.
 
-   Prompt: ein digitales Rendering eines riesigen Wolkenkratzers, modern,
-   groß, monumental, mit einem schönen Sonnenuntergang im Hintergrund (Seitenverhältnis 9:16)
+   ![contoh rasio aspek](https://ai.google.dev/static/gemini-api/docs/images/imagen/aspect-ratios_9-16_skyscraper.png?hl=id)
 
-#### Fotorealistische Bilder
+   Perintah: rendering digital gedung pencakar langit besar, modern,
+   megah, epik dengan latar belakang matahari terbenam yang indah (rasio aspek 9:16)
 
-Verschiedene Versionen des Bildgenerierungsmodells können eine Mischung aus künstlerischer und fotorealistischer Ausgabe bieten. Verwenden Sie die folgende Formulierung in Prompts, um je nach dem zu generierenden Thema eine fotorealistischere Ausgabe zu generieren.
+#### Gambar fotorealistik
 
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+Model pembuatan gambar
+yang berbeda mungkin menawarkan campuran output artistik dan fotorealistik. Gunakan kata-kata berikut dalam perintah untuk menghasilkan output yang lebih fotorealistik, berdasarkan subjek yang ingin Anda buat.
+
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
 | --- | --- | --- | --- |
-| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
-| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
-| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
-| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
+| Orang (potret) | Tanda petik, zoom | 24-35mm | film hitam putih, Film noir, Kedalaman bidang, duoton (sebutkan dua warna) |
+| Makanan, serangga, tanaman (objek, still life) | Makro | 60-105mm | Detail tinggi, fokus yang presisi, pencahayaan yang terkontrol |
+| Olahraga, satwa liar (gerakan) | Zoom telefoto | 100-400mm | Kecepatan shutter cepat, Pelacakan tindakan atau gerakan |
+| Astronomi, lanskap (sudut lebar) | Sudut lebar | 10-24mm | Waktu eksposur panjang, fokus tajam, eksposur panjang, air atau awan yang halus |
 
-##### Porträts
+##### Potret
 
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
 | --- | --- | --- | --- |
-| Personen (Hochformat) | Prime, Zoom | 24-35mm | Schwarz-Weiß-Film, Film Noir, Tiefenschärfe, Duotone (erwähnt zwei Farben) |
+| Orang (potret) | Tanda petik, zoom | 24-35mm | film hitam putih, Film noir, Kedalaman bidang, duoton (sebutkan dua warna) |
 
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Porträts generieren:
+Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat potret berikut:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
+| contoh fotografi potret | contoh fotografi potret | contoh fotografi potret | contoh fotografi potret |
 
-Prompt: *Eine Frau, 35 mm Hochformat, blaue und graue Duotones*  
-Modell: `imagen-4.0-generate-001`
-
-|  |  |  |  |
-| --- | --- | --- | --- |
-| Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos | Beispiel für Porträtfotos |
-
-Eingabeaufforderung: *Eine Frau, 35 mm Hochformat, Film Noir*  
-Modell: `imagen-4.0-generate-001`
-
-##### Objekte
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Essen, Insekten, Pflanzen (Objekte, Stilleben) | Makro | 60-105mm | Hohe Details, präzise Fokussierung, kontrollierte Beleuchtung |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Objektbilder generieren:
+Perintah: *Potret wanita, 35 mm, duoton biru dan abu-abu*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
+| contoh fotografi potret | contoh fotografi potret | contoh fotografi potret | contoh fotografi potret |
 
-Eingabeaufforderung: *Blatt einer Gebetspflanze, Makroobjektiv, 60 mm*  
-Modell: `imagen-4.0-generate-001`
+Perintah: *Potret wanita 35 mm, film noir*  
+Model: `imagen-4.0-generate-001`
+
+##### Objek
+
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
+| --- | --- | --- | --- |
+| Makanan, serangga, tanaman (objek, still life) | Makro | 60-105mm | Detail tinggi, fokus yang presisi, pencahayaan yang terkontrol |
+
+Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar objek berikut:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie | Beispiel für Objektfotografie |
+| contoh fotografi objek | contoh fotografi objek | contoh fotografi objek | contoh fotografi objek |
 
-Eingabeaufforderung: *Eine Nudelplatte, 100-mm-Makroobjektiv*  
-Modell: `imagen-4.0-generate-001`
-
-##### Bewegung
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Sport, Tiere (Bewegung) | Telefotozoom | 100-400mm | Schnelle Belichtungszeit, Aktions- oder Bewegungsverfolgung |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Bewegungsbilder generieren:
+Perintah: *daun tanaman prayer, lensa makro, 60 mm*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
+| contoh fotografi objek | contoh fotografi objek | contoh fotografi objek | contoh fotografi objek |
 
-Prompt: *Ein erfolgreicher Touchdown, schnelle Belichtungszeit, Bewegungsverfolgung*  
-Modell: `imagen-4.0-generate-001`
+Perintah: *sepiring pasta, lensa Makro 100 mm*  
+Model: `imagen-4.0-generate-001`
+
+##### Gerakan
+
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
+| --- | --- | --- | --- |
+| Olahraga, satwa liar (gerakan) | Zoom telefoto | 100-400mm | Kecepatan shutter cepat, Pelacakan tindakan atau gerakan |
+
+Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar bergerak berikut:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild | Beispiel für Fotos mit Bewegtbild |
+| contoh fotografi motion | contoh fotografi motion | contoh fotografi motion | contoh fotografi motion |
 
-Eingabeaufforderung: *Ein Reh läuft im Wald, schnelle Belichtungszeit, Bewegungsverfolgung*  
-Modell: `imagen-4.0-generate-001`
-
-##### Weitwinkel
-
-| Anwendungsfall | Linsentyp | Brennweiten | Weitere Informationen |
-| --- | --- | --- | --- |
-| Astronomisch, Landschaft (Weitwinkel) | Weitwinkel | 10-24mm | Langzeitbelichtung, scharfe Fokussierung, Langzeitbelichtung, glattes Wasser oder Wolken |
-
-Mit mehreren Suchbegriffen aus der Tabelle kann Imagen die folgenden Weitwinkelbilder generieren:
+Perintah: *touchdown kemenangan, kecepatan shutter cepat, pelacakan gerakan*  
+Model: `imagen-4.0-generate-001`
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
+| contoh fotografi motion | contoh fotografi motion | contoh fotografi motion | contoh fotografi motion |
 
-Eingabeaufforderung: *Großer Bergbereich, Querwinkel 10 mm*  
-Modell: `imagen-4.0-generate-001`
+Perintah: *Seekor rusa berlari di hutan, kecepatan shutter cepat, pelacakan gerakan*  
+Model: `imagen-4.0-generate-001`
+
+##### Sudut lebar
+
+| Kasus penggunaan | Jenis lensa | Panjang fokal | Detail tambahan |
+| --- | --- | --- | --- |
+| Astronomi, lanskap (sudut lebar) | Sudut lebar | 10-24mm | Waktu eksposur panjang, fokus tajam, eksposur panjang, air atau awan yang halus |
+
+Dengan menggunakan beberapa kata kunci dari tabel, Imagen dapat membuat gambar sudut lebar berikut:
 
 |  |  |  |  |
 | --- | --- | --- | --- |
-| Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie | Beispiel für Weitwinkelfotografie |
+| contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar |
 
-Prompt: *ein Foto des Mondes, Astrofotografie, Weitwinkel 10 mm*  
-Modell: `imagen-4.0-generate-001`
+Perintah: *pegunungan yang luas, lanskap sudut lebar 10 mm*  
+Model: `imagen-4.0-generate-001`
 
-## Modellversionen
+|  |  |  |  |
+| --- | --- | --- | --- |
+| contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar | contoh fotografi sudut lebar |
 
-### Imagen 4 (eingestellt)
+Perintah: *foto bulan, fotografi astro, sudut lebar 10 mm*  
+Model: `imagen-4.0-generate-001`
 
-| Attribut | Beschreibung |
+## Versi model
+
+### Imagen 4 (Tidak digunakan lagi)
+
+| Properti | Deskripsi |
 | --- | --- |
-| id\_cardModellcode | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
-| saveUnterstützte Datentypen | **Eingabe**  Text  **Ausgabe**  Bilder |
-| token\_autoToken-Limits[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=de) | **Eingabetokenlimit**  480 Tokens (Text)  **Ausgabe von Bildern**  1 bis 4 (Ultra/Standard/Schnell) |
-| calendar\_monthLetzte Aktualisierung | Juni 2025 |
+| Kode model id\_card | **Gemini API**  `imagen-4.0-generate-001`  `imagen-4.0-ultra-generate-001`  `imagen-4.0-fast-generate-001` |
+| saveJenis data yang didukung | **Input**  Teks  **Output**  Gambar |
+| token\_autoBatas token[[\*]](https://ai.google.dev/gemini-api/docs/tokens?hl=id) | **Batas token input**  480 token (teks)  **Output gambar**  1 hingga 4 (Ultra/Standard/Cepat) |
+| calendar\_monthPembaruan terbaru | Juni 2025 |
 
-### Imagen 3
+### Imagen 3
 
-Das Imagen 3-Modell wurde [eingestellt](https://ai.google.dev/gemini-api/docs/deprecations?hl=de).
+Model Imagen 3 telah [dinonaktifkan](https://ai.google.dev/gemini-api/docs/deprecations?hl=id).
 
-Feedback geben
+Kirim masukan
 
-Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
+Kecuali dinyatakan lain, konten di halaman ini dilisensikan berdasarkan [Lisensi Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/), sedangkan contoh kode dilisensikan berdasarkan [Lisensi Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0). Untuk mengetahui informasi selengkapnya, lihat [Kebijakan Situs Google Developers](https://developers.google.com/site-policies?hl=id). Java adalah merek dagang terdaftar dari Oracle dan/atau afiliasinya.
 
-Zuletzt aktualisiert: 2026-07-16 (UTC).
+Terakhir diperbarui pada 2026-07-16 UTC.
 
-Haben Sie Feedback für uns?
+Ada masukan untuk kami?
 
-[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-07-16 (UTC)."],[],[]]
+[[["Mudah dipahami","easyToUnderstand","thumb-up"],["Memecahkan masalah saya","solvedMyProblem","thumb-up"],["Lainnya","otherUp","thumb-up"]],[["Informasi yang saya butuhkan tidak ada","missingTheInformationINeed","thumb-down"],["Terlalu rumit/langkahnya terlalu banyak","tooComplicatedTooManySteps","thumb-down"],["Sudah usang","outOfDate","thumb-down"],["Masalah terjemahan","translationIssue","thumb-down"],["Masalah kode / contoh","samplesCodeIssue","thumb-down"],["Lainnya","otherDown","thumb-down"]],["Terakhir diperbarui pada 2026-07-16 UTC."],[],[]]

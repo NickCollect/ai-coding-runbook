@@ -1,47 +1,46 @@
 ---
-source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=ar
-fetched_at: 2026-08-03T04:36:07.327260+00:00
+source_url: https://ai.google.dev/gemini-api/docs/models/gemini-omni-flash?hl=de
+fetched_at: 2026-08-10T03:21:18.234307+00:00
 title: "Gemini Omni Flash \u00a0|\u00a0 Gemini API \u00a0|\u00a0 Google AI for Developers"
 ---
 
-أصبحت [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=ar) متاحة الآن للجميع. ننصحك باستخدام واجهة برمجة التطبيقات هذه للوصول إلى جميع أحدث الميزات والنماذج.
+Die [Interactions API](https://ai.google.dev/gemini-api/docs/interactions-overview?hl=de) ist jetzt allgemein verfügbar. Wir empfehlen, diese API zu verwenden, um auf alle aktuellen Funktionen und Modelle zuzugreifen.
 
-![](https://ai.google.dev/_static/images/translated.svg?hl=ar)
+![](https://ai.google.dev/_static/images/translated.svg?hl=de)
 
-تستخدم Google تكنولوجيا الذكاء الاصطناعي لترجمة المحتوى إلى لغتك المفضّلة، وقد تتضمّن بعض الأخطاء.
+Google verwendet KI-Technologie, um Inhalte in Ihre bevorzugte Sprache zu übersetzen. KI-Übersetzungen können Fehler enthalten.
 
-- [الصفحة الرئيسية](https://ai.google.dev/?hl=ar)
-- [Gemini API](https://ai.google.dev/gemini-api?hl=ar)
-- [المستندات](https://ai.google.dev/gemini-api/docs?hl=ar)
+- [Startseite](https://ai.google.dev/?hl=de)
+- [Gemini API](https://ai.google.dev/gemini-api?hl=de)
+- [Dokumentation](https://ai.google.dev/gemini-api/docs?hl=de)
 
-إرسال ملاحظات
+Feedback geben
 
 # Gemini Omni Flash
 
-‫Gemini Omni Flash هو نموذج تجريبي مصمّم لإنشاء الفيديوهات وتعديلها بسرعة وبأسلوب محادثة. يتميّز هذا النموذج بتحويل النصوص والصور إلى فيديوهات، ويتيح لك تحسين الفيديوهات التي تم إنشاؤها وتعديلها من خلال محادثات باللغة الطبيعية باستخدام Interactions API.
+Gemini Omni Flash ist ein Vorabmodell, das für die schnelle, dialogorientierte Videogenerierung und ‑bearbeitung entwickelt wurde. Sie eignet sich hervorragend, um Text und Bilder in Videos umzuwandeln. Außerdem können Sie generierte Videos über Konversationen in natürlicher Sprache mithilfe der Interactions API optimieren und bearbeiten.
 
-[تجربة النموذج في Google AI Studio](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=ar)
+[In Google AI Studio ausprobieren](https://aistudio.google.com?model=gemini-omni-flash-preview&hl=de)
 
-## الوثائق
+## Dokumentation
 
-يُرجى الانتقال إلى صفحة [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=ar)
-للاطّلاع على تغطية كاملة للميزات والإمكانات.
+Auf der Seite [Gemini Omni Flash](https://ai.google.dev/gemini-api/docs/omni?hl=de) finden Sie eine vollständige Übersicht über die Funktionen.
 
 ## gemini-omni-flash-preview
 
-| الموقع | الوصف |
+| Attribut | Beschreibung |
 | --- | --- |
-| id\_cardرمز النموذج | ‫**Gemini API**  `gemini-omni-flash-preview` |
-| saveأنواع البيانات المتوافقة | **الإدخال**  نص أو صورة أو فيديو (بمدة تصل إلى 10 ثوانٍ للتعديل)  **الناتج**  فيديو |
-| token\_autoالحدود | **قدرة الاستيعاب**  1,048,576 رمزًا مميزًا  **الفيديو الناتج**  من 3 ثوانٍ إلى 10 ثوانٍ (720p، 24 لقطة في الثانية) |
-| calendar\_monthآخر تعديل | يونيو 2026 |
+| id\_cardModellcode | **Gemini API**  `gemini-omni-flash-preview` |
+| saveUnterstützte Datentypen | **Eingabe**  Text, Bild, Video (bis zu 10 Sekunden für die Bearbeitung)  **Ausgabe**  Video |
+| token\_auto-Limits | **Kontextfenster**  1.048.576 Tokens  **Ausgabe-Video**  3–10 Sekunden (720p, 24 FPS) |
+| calendar\_monthLetzte Aktualisierung | Juni 2026 |
 
-إرسال ملاحظات
+Feedback geben
 
-إنّ محتوى هذه الصفحة مرخّص بموجب [ترخيص Creative Commons Attribution 4.0‏](https://creativecommons.org/licenses/by/4.0/) ما لم يُنصّ على خلاف ذلك، ونماذج الرموز مرخّصة بموجب [ترخيص Apache 2.0‏](https://www.apache.org/licenses/LICENSE-2.0). للاطّلاع على التفاصيل، يُرجى مراجعة [سياسات موقع Google Developers‏](https://developers.google.com/site-policies?hl=ar). إنّ Java هي علامة تجارية مسجَّلة لشركة Oracle و/أو شركائها التابعين.
+Sofern nicht anders angegeben, sind die Inhalte dieser Seite unter der [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/) und Codebeispiele unter der [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0) lizenziert. Weitere Informationen finden Sie in den [Websiterichtlinien von Google Developers](https://developers.google.com/site-policies?hl=de). Java ist eine eingetragene Marke von Oracle und/oder seinen Partnern.
 
-تاريخ التعديل الأخير: 2026-06-30 (حسب التوقيت العالمي المتفَّق عليه)
+Zuletzt aktualisiert: 2026-06-30 (UTC).
 
-هل تريد مشاركة ملاحظاتك معنا؟
+Haben Sie Feedback für uns?
 
-[[["يسهُل فهم المحتوى.","easyToUnderstand","thumb-up"],["ساعَدني المحتوى في حلّ مشكلتي.","solvedMyProblem","thumb-up"],["غير ذلك","otherUp","thumb-up"]],[["لا يحتوي على المعلومات التي أحتاج إليها.","missingTheInformationINeed","thumb-down"],["الخطوات معقدة للغاية / كثيرة جدًا.","tooComplicatedTooManySteps","thumb-down"],["المحتوى قديم.","outOfDate","thumb-down"],["ثمة مشكلة في الترجمة.","translationIssue","thumb-down"],["مشكلة في العيّنات / التعليمات البرمجية","samplesCodeIssue","thumb-down"],["غير ذلك","otherDown","thumb-down"]],["تاريخ التعديل الأخير: 2026-06-30 (حسب التوقيت العالمي المتفَّق عليه)"],[],[]]
+[[["Leicht verständlich","easyToUnderstand","thumb-up"],["Mein Problem wurde gelöst","solvedMyProblem","thumb-up"],["Sonstiges","otherUp","thumb-up"]],[["Benötigte Informationen nicht gefunden","missingTheInformationINeed","thumb-down"],["Zu umständlich/zu viele Schritte","tooComplicatedTooManySteps","thumb-down"],["Nicht mehr aktuell","outOfDate","thumb-down"],["Problem mit der Übersetzung","translationIssue","thumb-down"],["Problem mit Beispielen/Code","samplesCodeIssue","thumb-down"],["Sonstiges","otherDown","thumb-down"]],["Zuletzt aktualisiert: 2026-06-30 (UTC)."],[],[]]
