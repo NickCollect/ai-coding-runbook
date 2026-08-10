@@ -1,6 +1,6 @@
 ---
 source_url: https://www.anthropic.com/engineering/claude-code-best-practices
-fetched_at: 2026-08-03T04:25:00.207394+00:00
+fetched_at: 2026-08-10T03:07:38.295552+00:00
 title: "Best practices for Claude Code - Claude Code Docs"
 ---
 
@@ -53,7 +53,7 @@ The recommended workflow has four phases:
 
 Explore
 
-Enter plan mode. Claude reads files and answers questions without making changes.
+Enter plan mode by pressing `Shift+Tab` until the status bar shows `⏸ plan mode on`, or start the session with `claude --permission-mode plan`. Claude reads files and answers questions without making changes.
 
 claude (plan mode)
 
@@ -81,7 +81,7 @@ Press `Ctrl+G` to open the plan in your text editor for direct editing before Cl
 
 Implement
 
-Switch out of plan mode and let Claude code, verifying against its plan.
+Switch out of plan mode by approving the plan or pressing `Shift+Tab`, then let Claude code, verifying against its plan.
 
 claude (default mode)
 
@@ -215,7 +215,7 @@ Claude is also effective at learning CLI tools it doesn’t already know. Try pr
 
 ### [​](#connect-mcp-servers) Connect MCP servers
 
-Run `claude mcp add` to connect external tools like Notion, Figma, or your database.
+Run `claude mcp add` with a server name and URL or command to connect external tools like Notion, Figma, or your database. For example: `claude mcp add --transport http notion https://mcp.notion.com/mcp`.
 
 With [MCP servers](https://www.anthropic.com/docs/en/mcp), you can ask Claude to implement features from issue trackers, query databases, analyze monitoring data, integrate designs from Figma, and automate workflows.
 
@@ -441,7 +441,7 @@ Pick the parallel approach that fits how much coordination you want to do yourse
 
 - [Worktrees](https://www.anthropic.com/docs/en/worktrees): run separate CLI sessions in isolated git checkouts so edits don’t collide
 - [Desktop app](https://www.anthropic.com/docs/en/desktop#work-in-parallel-with-sessions): manage multiple local sessions visually, each in its own worktree
-- [Claude Code on the web](https://www.anthropic.com/docs/en/claude-code-on-the-web): run sessions on Anthropic-managed cloud infrastructure in isolated VMs
+- [Claude Code on the web](https://www.anthropic.com/docs/en/claude-code-on-the-web): run sessions in the cloud, on Anthropic-managed infrastructure by default
 - [Agent teams](https://www.anthropic.com/docs/en/agent-teams): automated coordination of multiple sessions with shared tasks, messaging, and a team lead
 
 Beyond parallelizing work, multiple sessions enable quality-focused workflows. A fresh context improves code review since Claude won’t be biased toward code it just wrote.
@@ -465,7 +465,7 @@ For large migrations or analyses, you can distribute work across many parallel C
 
 Generate a task list
 
-Have Claude list all files that need migrating (e.g., `list all 2,000 Python files that need migrating`)
+Have Claude write the list of files that need migrating to a file, so the loop in the next step can read it, with a prompt like `list all 2,000 Python files that need migrating and save the list to files.txt`
 
 2
 
@@ -555,7 +555,5 @@ Over time, you’ll develop intuition that no guide can capture. You’ll know w
 Was this page helpful?
 
 YesNo
-
-[Prompt library](https://www.anthropic.com/docs/en/prompt-library)[Overview](https://www.anthropic.com/docs/en/platforms)
 
 ⌘I
