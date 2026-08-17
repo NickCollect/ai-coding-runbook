@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/federation_issuers/create
-fetched_at: 2026-06-22T06:23:32.221693+00:00
+fetched_at: 2026-08-17T02:15:23.693600+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create Federation Issuer
+url: https://platform.claude.com/docs/en/api/admin/federation_issuers/create
 ---
 
 ## Create Federation Issuer
@@ -41,7 +46,7 @@ accepted.
 
   Slug identifier (lowercase, digits, hyphens). Unique within the organization; a duplicate name returns 409.
 
-- `check_jti: optional boolean`
+- `check_jti: optional boolean or null`
 
   Whether the jwt-bearer exchange enforces JTI single-use (replay protection) for tokens from this issuer. Defaults to true. Applies only to assertions carrying a `jti` claim; tokens without one are accepted without single-use enforcement.
 
@@ -57,11 +62,11 @@ accepted.
 
       - `"discovery"`
 
-    - `ca_cert_pem: optional string`
+    - `ca_cert_pem: optional string or null`
 
       Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
-    - `discovery_base: optional string`
+    - `discovery_base: optional string or null`
 
       Set when the discovery URL differs from `issuer_url`.
 
@@ -77,7 +82,7 @@ accepted.
 
       JWKS endpoint.
 
-    - `ca_cert_pem: optional string`
+    - `ca_cert_pem: optional string or null`
 
       Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
@@ -93,7 +98,7 @@ accepted.
 
       - `"inline"`
 
-- `max_jwt_lifetime_seconds: optional number`
+- `max_jwt_lifetime_seconds: optional number or null`
 
   Maximum allowed iat→exp spread for assertions from this issuer (1-176400 seconds, i.e. up to 49h). Defaults to 3600 (1h). Assertions must carry both `iat` and `exp`; a missing `iat` is rejected.
 
@@ -110,11 +115,11 @@ accepted.
 
     Tagged ID of the federation issuer.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     If set, all rules referencing this issuer reject token exchange.
 
-  - `archived_by_actor_id: string`
+  - `archived_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that archived this issuer.
 
@@ -126,7 +131,7 @@ accepted.
 
     When this issuer was created.
 
-  - `created_by_actor_id: string`
+  - `created_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that created this issuer.
 
@@ -146,11 +151,11 @@ accepted.
 
         - `"discovery"`
 
-      - `ca_cert_pem: optional string`
+      - `ca_cert_pem: optional string or null`
 
         Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
-      - `discovery_base: optional string`
+      - `discovery_base: optional string or null`
 
         Set when the discovery URL differs from `issuer_url`.
 
@@ -166,7 +171,7 @@ accepted.
 
         JWKS endpoint.
 
-      - `ca_cert_pem: optional string`
+      - `ca_cert_pem: optional string or null`
 
         Optional custom CA (PEM) for TLS verification of the JWKS fetch.
 
@@ -182,7 +187,7 @@ accepted.
 
         - `"inline"`
 
-  - `jwks_polling_disabled_at: string`
+  - `jwks_polling_disabled_at: string or null`
 
     If set, Anthropic's JWKS poller has paused polling for this issuer after repeated fetch failures. Re-enable by sending `jwks_polling_disabled: false` via the issuer update endpoint (POST) once the upstream JWKS endpoint is fixed. An OAuth caller cannot send this when the issuer backs a rule with any scope other than `workspace:developer` or `workspace:inference`; use a Console session.
 
@@ -194,7 +199,7 @@ accepted.
 
     Admin-chosen slug identifier.
 
-  - `poll_status: object { consecutive_failures, last_fetched_at, next_poll_at }`
+  - `poll_status: object { consecutive_failures, last_fetched_at, next_poll_at }  or null`
 
     Status of automatic JWKS polling for a federation issuer.
 
@@ -206,11 +211,11 @@ accepted.
 
       Consecutive fetch failures since the last success.
 
-    - `last_fetched_at: string`
+    - `last_fetched_at: string or null`
 
       When the last successful fetch completed.
 
-    - `next_poll_at: string`
+    - `next_poll_at: string or null`
 
       When the next fetch is scheduled. Null if paused.
 
@@ -222,7 +227,7 @@ accepted.
 
     When this issuer was last updated.
 
-  - `updated_by_actor_id: string`
+  - `updated_by_actor_id: string or null`
 
     Tagged ID (`user_`/`svac_`) of the actor that last updated this issuer.
 

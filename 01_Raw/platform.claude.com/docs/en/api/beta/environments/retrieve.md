@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/retrieve
-fetched_at: 2026-07-27T04:31:52.570069+00:00
+fetched_at: 2026-08-17T02:15:19.651406+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Environment
+url: https://platform.claude.com/docs/en/api/beta/environments/retrieve
 ---
 
 ## Get Environment
@@ -22,7 +27,7 @@ Retrieve a specific environment by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -88,6 +93,8 @@ Retrieve a specific environment by ID.
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaEnvironment object { id, archived_at, config, 7 more }`
@@ -98,7 +105,7 @@ Retrieve a specific environment by ID.
 
     Environment identifier (e.g., 'env_...')
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 

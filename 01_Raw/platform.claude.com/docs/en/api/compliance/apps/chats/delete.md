@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/delete
-fetched_at: 2026-05-25T05:15:56.510342+00:00
+fetched_at: 2026-08-17T02:15:24.665814+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete chat
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/delete
 ---
 
 ## Delete chat

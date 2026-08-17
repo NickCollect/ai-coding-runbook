@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/update
-fetched_at: 2026-07-27T04:31:54.003507+00:00
+fetched_at: 2026-08-17T02:15:20.850361+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update a memory store
+url: https://platform.claude.com/docs/en/api/beta/memory_stores/update
 ---
 
 ## Update a memory store
@@ -22,7 +27,7 @@ Update a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -88,17 +93,19 @@ Update a memory store
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
-- `description: optional string`
+- `description: optional string or null`
 
   New description for the store, up to 1024 characters. Pass an empty string to clear it.
 
-- `metadata: optional map[string]`
+- `metadata: optional map[string] or null`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-- `name: optional string`
+- `name: optional string or null`
 
   New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
 
@@ -128,7 +135,7 @@ Update a memory store
 
     A timestamp in RFC 3339 format
 
-  - `archived_at: optional string`
+  - `archived_at: optional string or null`
 
     A timestamp in RFC 3339 format
 

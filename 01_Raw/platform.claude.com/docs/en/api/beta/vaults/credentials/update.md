@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/update
-fetched_at: 2026-07-27T04:31:53.837867+00:00
+fetched_at: 2026-08-17T02:15:20.714545+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update Credential
+url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/update
 ---
 
 ## Update Credential
@@ -24,7 +29,7 @@ Update Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -90,6 +95,8 @@ Update Credential
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
 - `auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
@@ -104,23 +111,23 @@ Update Credential
 
       - `"mcp_oauth"`
 
-    - `access_token: optional string`
+    - `access_token: optional string or null`
 
       Updated OAuth access token.
 
-    - `expires_at: optional string`
+    - `expires_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `refresh: optional BetaManagedAgentsMCPOAuthRefreshUpdateParams`
+    - `refresh: optional BetaManagedAgentsMCPOAuthRefreshUpdateParams or null`
 
       Parameters for updating OAuth refresh token configuration.
 
-      - `refresh_token: optional string`
+      - `refresh_token: optional string or null`
 
         Updated OAuth refresh token.
 
-      - `scope: optional string`
+      - `scope: optional string or null`
 
         Updated OAuth scope for the refresh request.
 
@@ -136,7 +143,7 @@ Update Credential
 
             - `"client_secret_basic"`
 
-          - `client_secret: optional string`
+          - `client_secret: optional string or null`
 
             Updated OAuth client secret.
 
@@ -148,7 +155,7 @@ Update Credential
 
             - `"client_secret_post"`
 
-          - `client_secret: optional string`
+          - `client_secret: optional string or null`
 
             Updated OAuth client secret.
 
@@ -160,7 +167,7 @@ Update Credential
 
       - `"static_bearer"`
 
-    - `token: optional string`
+    - `token: optional string or null`
 
       Updated static bearer token value.
 
@@ -184,7 +191,7 @@ Update Credential
 
         Substitute when the placeholder appears in a request header value.
 
-    - `networking: optional BetaManagedAgentsCredentialNetworkingParams`
+    - `networking: optional BetaManagedAgentsCredentialNetworkingParams or null`
 
       Updated networking scope. Full replacement.
 
@@ -208,15 +215,15 @@ Update Credential
 
           - `"limited"`
 
-    - `secret_value: optional string`
+    - `secret_value: optional string or null`
 
       Updated secret value.
 
-- `display_name: optional string`
+- `display_name: optional string or null`
 
   Updated human-readable name for the credential. 1-255 characters.
 
-- `metadata: optional map[string]`
+- `metadata: optional map[string] or null`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
@@ -230,7 +237,7 @@ Update Credential
 
     Unique identifier for the credential.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -250,11 +257,11 @@ Update Credential
 
         - `"mcp_oauth"`
 
-      - `expires_at: optional string`
+      - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -294,11 +301,11 @@ Update Credential
 
               - `"client_secret_post"`
 
-        - `resource: optional string`
+        - `resource: optional string or null`
 
           OAuth resource indicator.
 
-        - `scope: optional string`
+        - `scope: optional string or null`
 
           OAuth scope for the refresh request.
 
@@ -382,7 +389,7 @@ Update Credential
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional string`
+  - `display_name: optional string or null`
 
     Human-readable name for the credential.
 

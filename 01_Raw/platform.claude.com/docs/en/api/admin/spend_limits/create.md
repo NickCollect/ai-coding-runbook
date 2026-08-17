@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/create
-fetched_at: 2026-07-06T05:04:34.715271+00:00
+fetched_at: 2026-08-17T02:15:23.322539+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Set Spend Limit
+url: https://platform.claude.com/docs/en/api/admin/spend_limits/create
 ---
 
 ## Set Spend Limit
@@ -16,7 +21,9 @@ group, and organization-level defaults are configured in claude.ai.
 
 ### Body Parameters
 
-- `amount: string`
+- `amount: string or null`
+
+  Limit amount as a non-negative integer decimal string in the minor unit of the organization's billing currency (cents for USD): "50000" is $500.00. `null` sets an explicit no-limit override for this scope and `period` only — each period resolves independently, so caps for other periods still apply.
 
 - `scope: object { type, user_id }`
 
@@ -40,11 +47,15 @@ group, and organization-level defaults are configured in claude.ai.
 
   - `id: string`
 
-  - `amount: string`
+  - `amount: string or null`
+
+    Limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD): "50000" is $500.00. `null` means no numeric cap is configured at this scope — see the effective report for whether a limit applies.
 
   - `created_at: string`
 
   - `currency: string`
+
+    ISO 4217 code of the organization's billing currency; the unit for `amount`.
 
   - `period: "daily" or "monthly" or "weekly"`
 

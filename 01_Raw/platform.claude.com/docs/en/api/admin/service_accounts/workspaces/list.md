@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/service_accounts/workspaces/list
-fetched_at: 2026-07-06T05:04:35.403404+00:00
+fetched_at: 2026-08-17T02:15:23.640481+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Workspaces For Service Account
+url: https://platform.claude.com/docs/en/api/admin/service_accounts/workspaces/list
 ---
 
 ## List Workspaces For Service Account
@@ -48,11 +53,11 @@ empty list.
 
 - `data: array of object { created_by_actor_id, implicit, service_account_id, 3 more }`
 
-  - `created_by_actor_id: string`
+  - `created_by_actor_id: string or null`
 
     Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-  - `implicit: boolean`
+  - `implicit: boolean or null`
 
     True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace_user and cannot be removed.
 
@@ -82,7 +87,7 @@ empty list.
 
     - `"workspace_user"`
 
-- `next_page: string`
+- `next_page: string or null`
 
   Opaque cursor for the next page, or null if no more results.
 

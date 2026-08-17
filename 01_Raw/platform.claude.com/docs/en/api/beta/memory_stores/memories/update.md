@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/update
-fetched_at: 2026-07-27T04:31:54.215778+00:00
+fetched_at: 2026-08-17T02:15:21.062120+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update a memory
+url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/update
 ---
 
 ## Update a memory
@@ -34,7 +39,7 @@ Update a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -100,13 +105,15 @@ Update a memory
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
-- `content: optional string`
+- `content: optional string or null`
 
   New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
 
-- `path: optional string`
+- `path: optional string or null`
 
   New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
 
@@ -164,7 +171,7 @@ Update a memory
 
     A timestamp in RFC 3339 format
 
-  - `content: optional string`
+  - `content: optional string or null`
 
     The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 

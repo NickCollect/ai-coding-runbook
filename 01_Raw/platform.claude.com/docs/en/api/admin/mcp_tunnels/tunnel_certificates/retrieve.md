@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/tunnel_certificates/retrieve
-fetched_at: 2026-07-06T05:04:36.290545+00:00
+fetched_at: 2026-08-17T02:15:24.096929+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Tunnel Certificate
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/tunnel_certificates/retrieve
 ---
 
 ## Get Tunnel Certificate
@@ -36,7 +41,7 @@ Retrieve a single certificate registered on a tunnel by ID.
 
   ID of the Tunnel Certificate.
 
-- `archived_at: string`
+- `archived_at: string or null`
 
   RFC 3339 datetime string indicating when the certificate was archived, or
   `null` if it is not archived.
@@ -45,7 +50,7 @@ Retrieve a single certificate registered on a tunnel by ID.
 
   RFC 3339 datetime string indicating when the certificate was registered.
 
-- `expires_at: string`
+- `expires_at: string or null`
 
   RFC 3339 datetime string indicating when the certificate expires, or
   `null` if it does not expire.

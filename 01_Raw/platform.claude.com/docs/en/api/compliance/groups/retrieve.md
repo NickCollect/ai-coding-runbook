@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/groups/retrieve
-fetched_at: 2026-06-29T05:25:21.026272+00:00
+fetched_at: 2026-08-17T02:15:24.581120+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Compliance Group
+url: https://platform.claude.com/docs/en/api/compliance/groups/retrieve
 ---
 
 ## Get Compliance Group
@@ -26,7 +31,7 @@ Get Compliance Group
 
   Group identifier (tagged ID)
 
-- `created_at: string`
+- `created_at: string or null`
 
   Group creation timestamp (ISO 8601)
 
@@ -38,7 +43,7 @@ Get Compliance Group
 
   Group name
 
-- `roles: array of string`
+- `roles: array of string or null`
 
   Role IDs assigned to this group.
 
@@ -46,7 +51,7 @@ Get Compliance Group
 
   How the group was created ('direct' or 'scim')
 
-- `updated_at: string`
+- `updated_at: string or null`
 
   Group last-updated timestamp (ISO 8601)
 

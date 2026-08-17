@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/list
-fetched_at: 2026-06-29T05:25:20.723485+00:00
+fetched_at: 2026-08-17T02:15:24.220898+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List organizations
+url: https://platform.claude.com/docs/en/api/compliance/organizations/list
 ---
 
 ## List organizations
@@ -50,7 +55,7 @@ Returns organizations sorted by creation date in ascending order. Use
 
   Whether more records exist beyond the current result set
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Token to retrieve the next page. Use this as the 'page' parameter in your next request
 

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/create
-fetched_at: 2026-07-20T04:31:23.996542+00:00
+fetched_at: 2026-08-17T02:15:22.207219+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Add RBAC Group Member
+url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/create
 ---
 
 ## Add RBAC Group Member

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/roles/retrieve
-fetched_at: 2026-06-29T05:25:20.838817+00:00
+fetched_at: 2026-08-17T02:15:24.359047+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Compliance Role
+url: https://platform.claude.com/docs/en/api/compliance/organizations/roles/retrieve
 ---
 
 ## Get Compliance Role
@@ -30,7 +35,7 @@ Get Compliance Role
 
   Role identifier (tagged ID)
 
-- `created_at: string`
+- `created_at: string or null`
 
   Role creation timestamp (ISO 8601)
 
@@ -42,7 +47,7 @@ Get Compliance Role
 
   Role name
 
-- `updated_at: string`
+- `updated_at: string or null`
 
   Role last-updated timestamp (ISO 8601)
 

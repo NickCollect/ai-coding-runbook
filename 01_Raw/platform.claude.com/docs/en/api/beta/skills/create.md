@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/create
-fetched_at: 2026-07-27T04:31:54.388939+00:00
+fetched_at: 2026-08-17T02:15:21.259328+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create Skill
+url: https://platform.claude.com/docs/en/api/beta/skills/create
 ---
 
 ## Create Skill
@@ -18,7 +23,7 @@ Create Skill
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -84,6 +89,8 @@ Create Skill
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `id: string`
@@ -96,13 +103,13 @@ Create Skill
 
   ISO 8601 timestamp of when the skill was created.
 
-- `display_title: string`
+- `display_title: string or null`
 
   Display title for the skill.
 
   This is a human-readable label that is not included in the prompt sent to the model.
 
-- `latest_version: string`
+- `latest_version: string or null`
 
   The latest version identifier for the skill.
 

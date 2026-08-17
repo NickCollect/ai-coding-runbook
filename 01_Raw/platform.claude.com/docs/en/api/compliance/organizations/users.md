@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/organizations/users
-fetched_at: 2026-06-29T05:25:20.760896+00:00
+fetched_at: 2026-08-17T02:15:24.265388+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Users
+url: https://platform.claude.com/docs/en/api/compliance/organizations/users
 ---
 
 # Users
@@ -80,7 +85,7 @@ List current user members of an organization.
 
   Whether more records exist beyond the current result set
 
-- `next_page: string`
+- `next_page: string or null`
 
   Token to retrieve the next page. Use this as the 'page' parameter in your next request
 

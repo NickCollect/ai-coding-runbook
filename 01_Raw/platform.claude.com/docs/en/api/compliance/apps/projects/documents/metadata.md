@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/metadata
-fetched_at: 2026-06-29T05:25:21.673904+00:00
+fetched_at: 2026-08-17T02:15:25.028426+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get project document metadata
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/metadata
 ---
 
 ## Get project document metadata
@@ -57,13 +62,13 @@ consumer can dedupe or match hashes without downloading every document.
 
   Size in bytes of the document content (UTF-8 encoded)
 
-- `user: object { id, email_address }`
+- `user: object { id, email_address }  or null`
 
   The user who created a project or project document.
 
   Fields that reference this type are null when the creator's account has
-  been deleted or the creator is no longer a member of any organization
-  under the parent organization.
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
   - `id: string`
 

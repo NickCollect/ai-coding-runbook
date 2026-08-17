@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/list
-fetched_at: 2026-07-27T04:31:54.987230+00:00
+fetched_at: 2026-08-17T02:15:21.700812+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Tunnels
+url: https://platform.claude.com/docs/en/api/beta/tunnels/list
 ---
 
 ## List Tunnels
@@ -34,7 +39,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -100,6 +105,8 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: array of BetaTunnel`
@@ -110,7 +117,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     Unique identifier for the tunnel, prefixed with `tnl_`.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -118,7 +125,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     A timestamp in RFC 3339 format
 
-  - `display_name: string`
+  - `display_name: string or null`
 
     Human-readable name for the tunnel (1-255 characters). Null if unset.
 
@@ -130,7 +137,7 @@ Lists tunnels. Results are ordered by creation time, newest first; archived tunn
 
     - `"tunnel"`
 
-- `next_page: string`
+- `next_page: string or null`
 
   Pagination cursor for the next page, or null if no more results.
 

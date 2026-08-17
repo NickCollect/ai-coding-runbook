@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/list
-fetched_at: 2026-07-27T04:31:54.190919+00:00
+fetched_at: 2026-08-17T02:15:21.085203+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List memory versions
+url: https://platform.claude.com/docs/en/api/beta/memory_stores/memory_versions/list
 ---
 
 ## List memory versions
@@ -70,7 +75,7 @@ List memory versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -136,6 +141,8 @@ List memory versions
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: optional array of BetaManagedAgentsMemoryVersion`
@@ -172,15 +179,15 @@ List memory versions
 
     - `"memory_version"`
 
-  - `content: optional string`
+  - `content: optional string or null`
 
     The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-  - `content_sha256: optional string`
+  - `content_sha256: optional string or null`
 
     Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-  - `content_size_bytes: optional number`
+  - `content_size_bytes: optional number or null`
 
     Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
@@ -224,11 +231,11 @@ List memory versions
 
         ID of the user who performed the write (a `user_...` value).
 
-  - `path: optional string`
+  - `path: optional string or null`
 
     The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-  - `redacted_at: optional string`
+  - `redacted_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
@@ -236,7 +243,7 @@ List memory versions
 
     Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](/docs/en/api/sessions-retrieve).
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page (a `page_...` value), or `null` if there are no more results. Pass as `page` on the next request.
 

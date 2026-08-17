@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/delete
-fetched_at: 2026-06-08T05:25:08.848289+00:00
+fetched_at: 2026-08-17T02:15:25.031163+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete project document
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/documents/delete
 ---
 
 ## Delete project document

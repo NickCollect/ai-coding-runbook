@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/generated_files/retrieve
-fetched_at: 2026-06-22T06:23:34.109875+00:00
+fetched_at: 2026-08-17T02:15:24.809882+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Claude-generated file metadata
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/generated_files/retrieve
 ---
 
 ## Get Claude-generated file metadata
@@ -32,7 +37,7 @@ Use the sibling `/content` endpoint to download the bytes.
 
   The chat this generated file belongs to
 
-- `created_at: string`
+- `created_at: string or null`
 
   File creation timestamp, when available
 
@@ -40,15 +45,15 @@ Use the sibling `/content` endpoint to download the bytes.
 
   Display name of the generated file
 
-- `md5: string`
+- `md5: string or null`
 
   Lowercase hex MD5 of the stored file. Null when no stored hash is available. The sibling `/content` endpoint also sets a `Content-MD5` header (base64 per RFC 1864) computed over the exact served bytes.
 
-- `mime_type: string`
+- `mime_type: string or null`
 
   MIME type of the stored file, when available
 
-- `size_bytes: number`
+- `size_bytes: number or null`
 
   Size in bytes of the stored file, when available
 

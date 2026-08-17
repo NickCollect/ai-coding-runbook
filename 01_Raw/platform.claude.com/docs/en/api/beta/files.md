@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files
-fetched_at: 2026-07-27T04:31:54.333675+00:00
+fetched_at: 2026-08-17T02:15:21.188159+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Files
+url: https://platform.claude.com/docs/en/api/beta/files
 ---
 
 # Files
@@ -20,7 +25,7 @@ Upload File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -86,6 +91,8 @@ Upload File
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `FileMetadata object { id, created_at, filename, 5 more }`
@@ -124,7 +131,7 @@ Upload File
 
     Whether the file can be downloaded.
 
-  - `scope: optional BetaFileScope`
+  - `scope: optional BetaFileScope or null`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -201,7 +208,7 @@ List Files
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -267,6 +274,8 @@ List Files
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: array of FileMetadata`
@@ -307,7 +316,7 @@ List Files
 
     Whether the file can be downloaded.
 
-  - `scope: optional BetaFileScope`
+  - `scope: optional BetaFileScope or null`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -321,7 +330,7 @@ List Files
 
       - `"session"`
 
-- `first_id: optional string`
+- `first_id: optional string or null`
 
   ID of the first file in this page of results.
 
@@ -329,7 +338,7 @@ List Files
 
   Whether there are more results available.
 
-- `last_id: optional string`
+- `last_id: optional string or null`
 
   ID of the last file in this page of results.
 
@@ -387,7 +396,7 @@ Download File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -452,6 +461,8 @@ Download File
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Example
 
@@ -482,7 +493,7 @@ Get File Metadata
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -547,6 +558,8 @@ Get File Metadata
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -586,7 +599,7 @@ Get File Metadata
 
     Whether the file can be downloaded.
 
-  - `scope: optional BetaFileScope`
+  - `scope: optional BetaFileScope or null`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -647,7 +660,7 @@ Delete File
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -712,6 +725,8 @@ Delete File
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -818,7 +833,7 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 
     Whether the file can be downloaded.
 
-  - `scope: optional BetaFileScope`
+  - `scope: optional BetaFileScope or null`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 

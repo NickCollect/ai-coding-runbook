@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/list
-fetched_at: 2026-07-06T05:04:36.019891+00:00
+fetched_at: 2026-08-17T02:15:23.984582+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Tunnels
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/list
 ---
 
 ## List Tunnels
@@ -53,7 +58,7 @@ archived tunnels are excluded unless `include_archived` is set.
 
     ID of the Tunnel.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     RFC 3339 datetime string indicating when the Tunnel was archived, or
     `null` if it is not archived.
@@ -62,7 +67,7 @@ archived tunnels are excluded unless `include_archived` is set.
 
     RFC 3339 datetime string indicating when the Tunnel was created.
 
-  - `display_name: string`
+  - `display_name: string or null`
 
     Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
 
@@ -78,12 +83,12 @@ archived tunnels are excluded unless `include_archived` is set.
 
     - `"tunnel"`
 
-  - `workspace_id: string`
+  - `workspace_id: string or null`
 
     ID of the Workspace this Tunnel belongs to, or `null` for the default
     Workspace. Immutable after creation.
 
-- `next_page: string`
+- `next_page: string or null`
 
   Opaque cursor for the next page, or `null` if there are no more results.
 

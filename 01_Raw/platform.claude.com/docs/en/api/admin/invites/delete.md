@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/invites/delete
-fetched_at: 2026-07-20T04:31:23.567710+00:00
+fetched_at: 2026-08-17T02:15:21.994684+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete Invite
+url: https://platform.claude.com/docs/en/api/admin/invites/delete
 ---
 
 ## Delete Invite

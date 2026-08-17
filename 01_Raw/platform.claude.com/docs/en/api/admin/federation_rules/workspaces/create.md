@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/federation_rules/workspaces/create
-fetched_at: 2026-06-22T06:23:32.639928+00:00
+fetched_at: 2026-08-17T02:15:23.952855+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Add Federation Rule Workspace
+url: https://platform.claude.com/docs/en/api/admin/federation_rules/workspaces/create
 ---
 
 ## Add Federation Rule Workspace
@@ -45,7 +50,7 @@ scopes require a Console session. Admin API keys are not accepted.
 
   When this workspace was enabled for the rule.
 
-- `created_by_actor_id: string`
+- `created_by_actor_id: string or null`
 
   Tagged ID (`user_...` or `svac_...`) of the actor that enabled this workspace for the rule, if known.
 
@@ -61,7 +66,7 @@ scopes require a Console session. Admin API keys are not accepted.
 
   Tagged ID of the workspace this rule is enabled for.
 
-- `workspace_name: string`
+- `workspace_name: string or null`
 
   Workspace display name. Populated when listing; null in the enable response.
 

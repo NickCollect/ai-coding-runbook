@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/dreams/create
-fetched_at: 2026-07-27T04:31:54.829738+00:00
+fetched_at: 2026-08-17T02:15:21.592843+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create a Dream
+url: https://platform.claude.com/docs/en/api/beta/dreams/create
 ---
 
 ## Create a Dream
@@ -18,7 +23,7 @@ Create a Dream
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -84,6 +89,8 @@ Create a Dream
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
 - `inputs: array of BetaDreamInput`
@@ -122,7 +129,7 @@ Create a Dream
 
       Model identifier, e.g. "claude-opus-4-7". 1-256 characters.
 
-    - `speed: optional "standard" or "fast"`
+    - `speed: optional "standard" or "fast" or null`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -130,7 +137,7 @@ Create a Dream
 
       - `"fast"`
 
-- `instructions: optional string`
+- `instructions: optional string or null`
 
 ### Returns
 
@@ -140,7 +147,7 @@ Create a Dream
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -148,11 +155,11 @@ Create a Dream
 
     A timestamp in RFC 3339 format
 
-  - `ended_at: string`
+  - `ended_at: string or null`
 
     A timestamp in RFC 3339 format
 
-  - `error: BetaDreamError`
+  - `error: BetaDreamError or null`
 
     Failure detail for a Dream whose `status` is `failed`.
 
@@ -182,7 +189,7 @@ Create a Dream
 
         - `"sessions"`
 
-  - `instructions: string`
+  - `instructions: string or null`
 
   - `model: BetaDreamModelConfig`
 
@@ -208,7 +215,7 @@ Create a Dream
 
       - `"memory_store"`
 
-  - `session_id: string`
+  - `session_id: string or null`
 
   - `status: BetaDreamStatus`
 

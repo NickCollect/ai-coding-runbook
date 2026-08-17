@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/reveal_token
-fetched_at: 2026-07-27T04:31:55.009947+00:00
+fetched_at: 2026-08-17T02:15:21.739735+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Reveal Tunnel Token
+url: https://platform.claude.com/docs/en/api/beta/tunnels/reveal_token
 ---
 
 ## Reveal Tunnel Token
@@ -24,7 +29,7 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -89,6 +94,8 @@ Reveals a tunnel's connector token. The value is fetched live on each call; Anth
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

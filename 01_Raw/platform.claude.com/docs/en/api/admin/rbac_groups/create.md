@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rbac_groups/create
-fetched_at: 2026-07-20T04:31:23.834562+00:00
+fetched_at: 2026-08-17T02:15:22.143058+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create RBAC Group
+url: https://platform.claude.com/docs/en/api/admin/rbac_groups/create
 ---
 
 ## Create RBAC Group
@@ -42,7 +47,7 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
     Name of the RBAC Group. Not uniqueness-enforced.
 
-  - `roles: array of string`
+  - `roles: array of string or null`
 
     RBAC Role IDs attached to this RBAC Group. Role attachment is managed in the admin settings and is read-only on this API. `null` means role data was temporarily unavailable — retry to distinguish from an empty list.
 

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/spend_limits/list_effective
-fetched_at: 2026-07-06T05:04:34.784975+00:00
+fetched_at: 2026-08-17T02:15:23.323257+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Effective Spend Limits
+url: https://platform.claude.com/docs/en/api/admin/spend_limits/list_effective
 ---
 
 ## List Effective Spend Limits
@@ -36,9 +41,9 @@ Paginates by member, so a member's periods never split across pages.
 
     - `deleted: boolean`
 
-    - `email_address: string`
+    - `email_address: string or null`
 
-    - `name: string`
+    - `name: string or null`
 
     - `type: "user_actor"`
 
@@ -46,9 +51,13 @@ Paginates by member, so a member's periods never split across pages.
 
     - `user_id: string`
 
-  - `amount: string`
+  - `amount: string or null`
+
+    Effective limit amount as a non-negative integer decimal string in the minor unit of `currency` (cents for USD). `null` means no limit applies for this row's `period` — each period resolves independently, so another period may still cap this member.
 
   - `currency: string`
+
+    ISO 4217 code of the organization's billing currency; the unit for `amount` and `period_to_date_spend`.
 
   - `period: "daily" or "monthly" or "weekly"`
 
@@ -59,6 +68,8 @@ Paginates by member, so a member's periods never split across pages.
     - `"weekly"`
 
   - `period_to_date_spend: string`
+
+    The member's spend so far in the current period, as a non-negative decimal string in the minor unit of `currency` (cents for USD). May carry fractional minor units up to three decimal places (e.g. `"12050.5"`) — metered usage is not rounded to whole cents. Reads as `"0"` when the spend reading is temporarily unavailable.
 
   - `scope: object { type, user_id }`
 
@@ -110,7 +121,7 @@ Paginates by member, so a member's periods never split across pages.
 
   - `spend_limit_id: string`
 
-- `next_page: string`
+- `next_page: string or null`
 
 ### Example
 
@@ -136,7 +147,7 @@ curl https://api.anthropic.com/v1/organizations/spend_limits/effective \
       "amount": "50000",
       "currency": "USD",
       "period": "monthly",
-      "period_to_date_spend": "period_to_date_spend",
+      "period_to_date_spend": "12050.5",
       "scope": {
         "type": "user",
         "user_id": "user_id"

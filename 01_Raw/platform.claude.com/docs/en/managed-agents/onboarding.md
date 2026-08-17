@@ -1,19 +1,19 @@
 ---
 source_url: https://platform.claude.com/docs/en/managed-agents/onboarding
-fetched_at: 2026-07-13T04:25:38.362679+00:00
+fetched_at: 2026-08-17T02:15:15.978269+00:00
 fetch_method: mintlify_md
 ---
 
-# Prototype in Console
-
-Create and test agents visually in Console without writing API calls.
-
+---
+title: Build in Console
+url: https://platform.claude.com/docs/en/managed-agents/onboarding
+description: Create, test, and iterate on agents visually in Console, then run them from your code with the API.
 ---
 
 [Console](https://platform.claude.com/workspaces/default/agent-quickstart/) provides a visual interface for creating and configuring agents. It lets you iterate on configuration interactively before writing code.
 
 <Note>
-  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](/docs/en/api/beta-headers#endpoint-specific-headers).
+  Managed Agents API requests require the `managed-agents-2026-04-01` beta header, except memory store endpoints, which use `agent-memory-2026-07-22` instead. The SDK sets the correct beta header automatically. See [Beta headers](https://platform.claude.com/docs/en/api/beta-headers#endpoint-specific-headers).
 </Note>
 
 ## How to build an agent
@@ -31,15 +31,15 @@ As you configure, Console shows the equivalent API request so you can copy it in
 
 Console includes an inline session runner. After configuring your agent, you can start a test session directly, send messages, and watch the event stream without leaving the page. This is the fastest way to check that your system prompt and tool selection produce the behavior you expect.
 
-## From prototype to code
+## From Console to your codebase
 
 Once your agent works as expected:
 
-1. Copy the agent ID and [environment ID](/docs/en/managed-agents/environments) from Console.
-2. Reference them in your code when [creating sessions](/docs/en/managed-agents/sessions):
+1. Copy the agent ID and [environment ID](https://platform.claude.com/docs/en/managed-agents/environments) from Console.
+2. Reference them in your code when [creating sessions](https://platform.claude.com/docs/en/managed-agents/sessions):
 
 <CodeGroup defaultLanguage="CLI">
-  ```bash curl
+  ```bash cURL
   session=$(curl -fsSL https://api.anthropic.com/v1/sessions \
     -H "x-api-key: $ANTHROPIC_API_KEY" \
     -H "anthropic-version: 2023-06-01" \

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/completions/create
-fetched_at: 2026-07-27T04:31:51.668724+00:00
+fetched_at: 2026-08-17T02:15:18.860799+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create a Text Completion
+url: https://platform.claude.com/docs/en/api/completions/create
 ---
 
 ## Create a Text Completion
@@ -22,7 +27,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -88,6 +93,8 @@ Future models and features will not be compatible with Text Completions. See our
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
 - `max_tokens_to_sample: number`
@@ -102,7 +109,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
+  - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 12 more`
 
     The model that will complete your prompt.
 
@@ -168,14 +175,6 @@ Future models and features will not be compatible with Text Completions. See our
 
       High-performance model for agents and coding
 
-    - `"claude-opus-4-1"`
-
-      Powerful intelligence for long-running agents and coding
-
-    - `"claude-opus-4-1-20250805"`
-
-      Powerful intelligence for long-running agents and coding
-
   - `string`
 
 - `prompt: string`
@@ -202,7 +201,7 @@ Future models and features will not be compatible with Text Completions. See our
 
   An object describing metadata about the request.
 
-  - `user_id: optional string`
+  - `user_id: optional string or null`
 
     An external identifier for the user who is associated with the request.
 
@@ -266,7 +265,7 @@ Future models and features will not be compatible with Text Completions. See our
 
     See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 14 more`
+    - `"claude-sonnet-5" or "claude-fable-5" or "claude-mythos-5" or 12 more`
 
       The model that will complete your prompt.
 
@@ -332,17 +331,9 @@ Future models and features will not be compatible with Text Completions. See our
 
         High-performance model for agents and coding
 
-      - `"claude-opus-4-1"`
-
-        Powerful intelligence for long-running agents and coding
-
-      - `"claude-opus-4-1-20250805"`
-
-        Powerful intelligence for long-running agents and coding
-
     - `string`
 
-  - `stop_reason: string`
+  - `stop_reason: string or null`
 
     The reason that we stopped.
 
@@ -370,7 +361,7 @@ curl https://api.anthropic.com/v1/complete \
     -d '{
           "max_tokens_to_sample": 256,
           "model": "claude-2.1",
-          "prompt": "\\n\\nHuman: Hello, world!\\n\\nAssistant:",
+          "prompt": "\n\nHuman: Hello, world!\n\nAssistant:",
           "temperature": 1,
           "top_k": 5,
           "top_p": 0.7

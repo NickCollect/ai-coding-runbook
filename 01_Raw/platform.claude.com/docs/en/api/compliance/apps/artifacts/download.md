@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/artifacts/download
-fetched_at: 2026-05-25T05:15:57.049123+00:00
+fetched_at: 2026-08-17T02:15:25.070739+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Download artifact content
+url: https://platform.claude.com/docs/en/api/compliance/apps/artifacts/download
 ---
 
 ## Download artifact content

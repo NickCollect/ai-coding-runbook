@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/retrieve
-fetched_at: 2026-07-06T05:04:36.086756+00:00
+fetched_at: 2026-08-17T02:15:23.975461+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Tunnel
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/retrieve
 ---
 
 ## Get Tunnel
@@ -32,7 +37,7 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   ID of the Tunnel.
 
-- `archived_at: string`
+- `archived_at: string or null`
 
   RFC 3339 datetime string indicating when the Tunnel was archived, or
   `null` if it is not archived.
@@ -41,7 +46,7 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   RFC 3339 datetime string indicating when the Tunnel was created.
 
-- `display_name: string`
+- `display_name: string or null`
 
   Human-readable name for the Tunnel (1–255 characters), or `null` if unset.
 
@@ -57,7 +62,7 @@ Retrieve a single tunnel in the caller's organization by ID.
 
   - `"tunnel"`
 
-- `workspace_id: string`
+- `workspace_id: string or null`
 
   ID of the Workspace this Tunnel belongs to, or `null` for the default
   Workspace. Immutable after creation.

@@ -1,13 +1,13 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/supported-regions
-fetched_at: 2026-07-27T04:31:51.582301+00:00
+fetched_at: 2026-08-17T02:15:18.805409+00:00
 fetch_method: mintlify_md
 ---
 
-# Supported regions
-
-Here are the countries, regions, and territories we can currently support access from:
-
+---
+title: Supported regions
+url: https://platform.claude.com/docs/en/api/supported-regions
+description: "Here are the countries, regions, and territories we can currently support access from:"
 ---
 
 * Albania

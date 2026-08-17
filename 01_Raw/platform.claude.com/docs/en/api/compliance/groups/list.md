@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/groups/list
-fetched_at: 2026-06-29T05:25:20.999541+00:00
+fetched_at: 2026-08-17T02:15:24.538256+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Compliance Groups
+url: https://platform.claude.com/docs/en/api/compliance/groups/list
 ---
 
 ## List Compliance Groups
@@ -38,7 +43,7 @@ List Compliance Groups
 
     Group identifier (tagged ID)
 
-  - `created_at: string`
+  - `created_at: string or null`
 
     Group creation timestamp (ISO 8601)
 
@@ -50,7 +55,7 @@ List Compliance Groups
 
     Group name
 
-  - `roles: array of string`
+  - `roles: array of string or null`
 
     Role IDs assigned to this group.
 
@@ -58,7 +63,7 @@ List Compliance Groups
 
     How the group was created ('direct' or 'scim')
 
-  - `updated_at: string`
+  - `updated_at: string or null`
 
     Group last-updated timestamp (ISO 8601)
 
@@ -66,7 +71,7 @@ List Compliance Groups
 
   Whether more records exist beyond the current result set
 
-- `next_page: string`
+- `next_page: string or null`
 
   Token to retrieve the next page. Use this as the 'page' parameter in your next request
 

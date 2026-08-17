@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/external_keys/delete
-fetched_at: 2026-07-20T04:31:25.137303+00:00
+fetched_at: 2026-08-17T02:15:22.841215+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete External Key
+url: https://platform.claude.com/docs/en/api/admin/external_keys/delete
 ---
 
 ## Delete External Key

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/sessions/resources/delete
-fetched_at: 2026-07-27T04:31:53.165648+00:00
+fetched_at: 2026-08-17T02:15:20.142572+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete Session Resource
+url: https://platform.claude.com/docs/en/api/beta/sessions/resources/delete
 ---
 
 ## Delete Session Resource
@@ -24,7 +29,7 @@ Delete Session Resource
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -89,6 +94,8 @@ Delete Session Resource
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 

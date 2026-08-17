@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/list
-fetched_at: 2026-07-20T04:31:23.995147+00:00
+fetched_at: 2026-08-17T02:15:22.212001+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List RBAC Group Members
+url: https://platform.claude.com/docs/en/api/admin/rbac_groups/members/list
 ---
 
 ## List RBAC Group Members
@@ -70,7 +75,7 @@ The RBAC Groups API is in beta and available to Claude Enterprise organizations 
 
   Indicates if there are more results in the requested page direction.
 
-- `next_page: string`
+- `next_page: string or null`
 
   Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 

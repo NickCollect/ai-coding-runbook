@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/archive
-fetched_at: 2026-07-20T04:31:24.452578+00:00
+fetched_at: 2026-08-17T02:15:22.475154+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Archive Workspace
+url: https://platform.claude.com/docs/en/api/admin/workspaces/archive
 ---
 
 ## Archive Workspace
@@ -22,7 +27,7 @@ Archive Workspace
 
     ID of the Workspace.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     RFC 3339 datetime string indicating when the Workspace was archived, or `null` if the Workspace is not archived.
 
@@ -65,7 +70,7 @@ Archive Workspace
 
     Hex color code representing the Workspace in the Anthropic Console.
 
-  - `external_key_id: string`
+  - `external_key_id: string or null`
 
     ID of the customer-managed encryption key (CMEK) configuration to use for this
     Workspace. Setting this field requires CMEK to be enabled for your

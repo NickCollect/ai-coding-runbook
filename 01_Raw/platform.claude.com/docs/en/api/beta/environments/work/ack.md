@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/ack
-fetched_at: 2026-07-27T04:31:52.720163+00:00
+fetched_at: 2026-08-17T02:15:19.792231+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Acknowledge Work
+url: https://platform.claude.com/docs/en/api/beta/environments/work/ack
 ---
 
 ## Acknowledge Work
@@ -26,7 +31,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -92,6 +97,8 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaSelfHostedWork object { id, acknowledged_at, created_at, 10 more }`
@@ -106,7 +113,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     Work identifier (e.g., 'work_...')
 
-  - `acknowledged_at: string`
+  - `acknowledged_at: string or null`
 
     RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
@@ -132,7 +139,7 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     Environment identifier this work belongs to (e.g., `env_...`)
 
-  - `latest_heartbeat_at: string`
+  - `latest_heartbeat_at: string or null`
 
     RFC 3339 timestamp of the most recent heartbeat
 
@@ -140,11 +147,11 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     User-provided metadata key-value pairs associated with this work item
 
-  - `secret: string`
+  - `secret: string or null`
 
     Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-  - `started_at: string`
+  - `started_at: string or null`
 
     RFC 3339 timestamp when work execution started
 
@@ -162,11 +169,11 @@ Acknowledge receipt of a work item, transitioning it from 'queued' to 'starting'
 
     - `"stopped"`
 
-  - `stop_requested_at: string`
+  - `stop_requested_at: string or null`
 
     RFC 3339 timestamp when stop was requested
 
-  - `stopped_at: string`
+  - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
 

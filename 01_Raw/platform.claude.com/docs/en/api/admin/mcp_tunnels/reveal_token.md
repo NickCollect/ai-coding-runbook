@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/reveal_token
-fetched_at: 2026-07-06T05:04:36.071307+00:00
+fetched_at: 2026-08-17T02:15:23.988115+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Reveal Tunnel Token
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/reveal_token
 ---
 
 ## Reveal Tunnel Token

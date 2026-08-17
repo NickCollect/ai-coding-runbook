@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/members/update
-fetched_at: 2026-07-06T05:04:33.259136+00:00
+fetched_at: 2026-08-17T02:15:22.522480+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update Workspace Member
+url: https://platform.claude.com/docs/en/api/admin/workspaces/members/update
 ---
 
 ## Update Workspace Member

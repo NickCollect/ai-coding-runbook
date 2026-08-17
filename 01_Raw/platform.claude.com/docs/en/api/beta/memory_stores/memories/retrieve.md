@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/retrieve
-fetched_at: 2026-07-27T04:31:54.085679+00:00
+fetched_at: 2026-08-17T02:15:21.016275+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Retrieve a memory
+url: https://platform.claude.com/docs/en/api/beta/memory_stores/memories/retrieve
 ---
 
 ## Retrieve a memory
@@ -34,7 +39,7 @@ Retrieve a memory
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -100,6 +105,8 @@ Retrieve a memory
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsMemory object { id, content_sha256, content_size_bytes, 7 more }`
@@ -142,7 +149,7 @@ Retrieve a memory
 
     A timestamp in RFC 3339 format
 
-  - `content: optional string`
+  - `content: optional string or null`
 
     The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 

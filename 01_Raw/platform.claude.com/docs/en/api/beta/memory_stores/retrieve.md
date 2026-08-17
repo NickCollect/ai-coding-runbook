@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/retrieve
-fetched_at: 2026-07-27T04:31:54.037746+00:00
+fetched_at: 2026-08-17T02:15:20.895471+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Retrieve a memory store
+url: https://platform.claude.com/docs/en/api/beta/memory_stores/retrieve
 ---
 
 ## Retrieve a memory store
@@ -22,7 +27,7 @@ Retrieve a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -88,6 +93,8 @@ Retrieve a memory store
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsMemoryStore object { id, created_at, name, 5 more }`
@@ -114,7 +121,7 @@ Retrieve a memory store
 
     A timestamp in RFC 3339 format
 
-  - `archived_at: optional string`
+  - `archived_at: optional string or null`
 
     A timestamp in RFC 3339 format
 

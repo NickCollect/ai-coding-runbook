@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/organizations
-fetched_at: 2026-06-15T06:17:50.440087+00:00
+fetched_at: 2026-08-17T02:15:21.877384+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Organizations
+url: https://platform.claude.com/docs/en/api/admin/organizations
 ---
 
 # Organizations

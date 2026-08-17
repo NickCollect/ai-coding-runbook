@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/update
-fetched_at: 2026-07-27T04:31:53.702366+00:00
+fetched_at: 2026-08-17T02:15:20.582848+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update Vault
+url: https://platform.claude.com/docs/en/api/beta/vaults/update
 ---
 
 ## Update Vault
@@ -22,7 +27,7 @@ Update Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -88,13 +93,15 @@ Update Vault
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
-- `display_name: optional string`
+- `display_name: optional string or null`
 
   Updated human-readable name for the vault. 1-255 characters.
 
-- `metadata: optional map[string]`
+- `metadata: optional map[string] or null`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
@@ -108,7 +115,7 @@ Update Vault
 
     Unique identifier for the vault.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 

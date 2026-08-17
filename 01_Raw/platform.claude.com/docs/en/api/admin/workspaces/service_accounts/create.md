@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/workspaces/service_accounts/create
-fetched_at: 2026-07-06T05:04:33.392253+00:00
+fetched_at: 2026-08-17T02:15:22.602192+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create Service Account Workspace Member
+url: https://platform.claude.com/docs/en/api/admin/workspaces/service_accounts/create
 ---
 
 ## Create Service Account Workspace Member
@@ -54,11 +59,11 @@ Console session; Admin API keys are not accepted.
 
 ### Returns
 
-- `created_by_actor_id: string`
+- `created_by_actor_id: string or null`
 
   Tagged ID (`user_...`/`svac_...`) of the actor who created this membership.
 
-- `implicit: boolean`
+- `implicit: boolean or null`
 
   True when this is the implicit default-workspace membership every service account has when no explicit membership exists. Implicit memberships have role workspace_user and cannot be removed.
 

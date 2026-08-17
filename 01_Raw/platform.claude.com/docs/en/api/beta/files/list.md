@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/files/list
-fetched_at: 2026-07-27T04:31:54.314063+00:00
+fetched_at: 2026-08-17T02:15:21.164579+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Files
+url: https://platform.claude.com/docs/en/api/beta/files/list
 ---
 
 ## List Files
@@ -38,7 +43,7 @@ List Files
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -104,6 +109,8 @@ List Files
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: array of FileMetadata`
@@ -144,7 +151,7 @@ List Files
 
     Whether the file can be downloaded.
 
-  - `scope: optional BetaFileScope`
+  - `scope: optional BetaFileScope or null`
 
     The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -158,7 +165,7 @@ List Files
 
       - `"session"`
 
-- `first_id: optional string`
+- `first_id: optional string or null`
 
   ID of the first file in this page of results.
 
@@ -166,7 +173,7 @@ List Files
 
   Whether there are more results available.
 
-- `last_id: optional string`
+- `last_id: optional string or null`
 
   ID of the last file in this page of results.
 

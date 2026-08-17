@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/groups
-fetched_at: 2026-06-29T05:25:20.943666+00:00
+fetched_at: 2026-08-17T02:15:24.501491+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Groups
+url: https://platform.claude.com/docs/en/api/compliance/groups
 ---
 
 # Groups
@@ -40,7 +45,7 @@ List Compliance Groups
 
     Group identifier (tagged ID)
 
-  - `created_at: string`
+  - `created_at: string or null`
 
     Group creation timestamp (ISO 8601)
 
@@ -52,7 +57,7 @@ List Compliance Groups
 
     Group name
 
-  - `roles: array of string`
+  - `roles: array of string or null`
 
     Role IDs assigned to this group.
 
@@ -60,7 +65,7 @@ List Compliance Groups
 
     How the group was created ('direct' or 'scim')
 
-  - `updated_at: string`
+  - `updated_at: string or null`
 
     Group last-updated timestamp (ISO 8601)
 
@@ -68,7 +73,7 @@ List Compliance Groups
 
   Whether more records exist beyond the current result set
 
-- `next_page: string`
+- `next_page: string or null`
 
   Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
@@ -124,7 +129,7 @@ Get Compliance Group
 
   Group identifier (tagged ID)
 
-- `created_at: string`
+- `created_at: string or null`
 
   Group creation timestamp (ISO 8601)
 
@@ -136,7 +141,7 @@ Get Compliance Group
 
   Group name
 
-- `roles: array of string`
+- `roles: array of string or null`
 
   Role IDs assigned to this group.
 
@@ -144,7 +149,7 @@ Get Compliance Group
 
   How the group was created ('direct' or 'scim')
 
-- `updated_at: string`
+- `updated_at: string or null`
 
   Group last-updated timestamp (ISO 8601)
 
@@ -184,7 +189,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
 
     Group identifier (tagged ID)
 
-  - `created_at: string`
+  - `created_at: string or null`
 
     Group creation timestamp (ISO 8601)
 
@@ -196,7 +201,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
 
     Group name
 
-  - `roles: array of string`
+  - `roles: array of string or null`
 
     Role IDs assigned to this group.
 
@@ -204,7 +209,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
 
     How the group was created ('direct' or 'scim')
 
-  - `updated_at: string`
+  - `updated_at: string or null`
 
     Group last-updated timestamp (ISO 8601)
 
@@ -218,7 +223,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
 
     Group identifier (tagged ID)
 
-  - `created_at: string`
+  - `created_at: string or null`
 
     Group creation timestamp (ISO 8601)
 
@@ -230,7 +235,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
 
     Group name
 
-  - `roles: array of string`
+  - `roles: array of string or null`
 
     Role IDs assigned to this group.
 
@@ -238,7 +243,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
 
     How the group was created ('direct' or 'scim')
 
-  - `updated_at: string`
+  - `updated_at: string or null`
 
     Group last-updated timestamp (ISO 8601)
 
@@ -276,7 +281,7 @@ List Compliance Group Members
 
   List of group members
 
-  - `created_at: string`
+  - `created_at: string or null`
 
     Membership creation timestamp (ISO 8601)
 
@@ -284,7 +289,7 @@ List Compliance Group Members
 
     Member email address
 
-  - `updated_at: string`
+  - `updated_at: string or null`
 
     Membership last-updated timestamp (ISO 8601)
 
@@ -296,7 +301,7 @@ List Compliance Group Members
 
   Whether more records exist beyond the current result set
 
-- `next_page: string`
+- `next_page: string or null`
 
   Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
@@ -332,7 +337,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
 
   Group member for compliance responses.
 
-  - `created_at: string`
+  - `created_at: string or null`
 
     Membership creation timestamp (ISO 8601)
 
@@ -340,7 +345,7 @@ curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID/members \
 
     Member email address
 
-  - `updated_at: string`
+  - `updated_at: string or null`
 
     Membership last-updated timestamp (ISO 8601)
 

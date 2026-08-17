@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/memory_stores/create
-fetched_at: 2026-07-27T04:31:53.939157+00:00
+fetched_at: 2026-08-17T02:15:20.778916+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Create a memory store
+url: https://platform.claude.com/docs/en/api/beta/memory_stores/create
 ---
 
 ## Create a memory store
@@ -18,7 +23,7 @@ Create a memory store
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -84,6 +89,8 @@ Create a memory store
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
 - `name: string`
@@ -124,7 +131,7 @@ Create a memory store
 
     A timestamp in RFC 3339 format
 
-  - `archived_at: optional string`
+  - `archived_at: optional string or null`
 
     A timestamp in RFC 3339 format
 

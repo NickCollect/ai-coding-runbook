@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/users/retrieve
-fetched_at: 2026-07-20T04:31:23.694074+00:00
+fetched_at: 2026-08-17T02:15:22.018220+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get User
+url: https://platform.claude.com/docs/en/api/admin/users/retrieve
 ---
 
 ## Get User

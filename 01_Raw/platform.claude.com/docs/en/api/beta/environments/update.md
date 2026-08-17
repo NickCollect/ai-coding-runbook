@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/update
-fetched_at: 2026-07-27T04:31:52.599307+00:00
+fetched_at: 2026-08-17T02:15:19.686491+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update Environment
+url: https://platform.claude.com/docs/en/api/beta/environments/update
 ---
 
 ## Update Environment
@@ -22,7 +27,7 @@ Update an existing environment's configuration.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -88,9 +93,11 @@ Update an existing environment's configuration.
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
-- `config: optional BetaCloudConfigParams or BetaSelfHostedConfigParams`
+- `config: optional BetaCloudConfigParams or BetaSelfHostedConfigParams or null`
 
   Updated environment configuration
 
@@ -107,7 +114,7 @@ Update an existing environment's configuration.
 
       - `"cloud"`
 
-    - `networking: optional BetaUnrestrictedNetwork or BetaLimitedNetworkParams`
+    - `networking: optional BetaUnrestrictedNetwork or BetaLimitedNetworkParams or null`
 
       Network configuration policy. Omit on update to preserve the existing value.
 
@@ -134,45 +141,45 @@ Update an existing environment's configuration.
 
           - `"limited"`
 
-        - `allow_mcp_servers: optional boolean`
+        - `allow_mcp_servers: optional boolean or null`
 
           Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-        - `allow_package_managers: optional boolean`
+        - `allow_package_managers: optional boolean or null`
 
           Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-        - `allowed_hosts: optional array of string`
+        - `allowed_hosts: optional array of string or null`
 
           Specifies domains the container can reach.
 
-    - `packages: optional BetaPackagesParams`
+    - `packages: optional BetaPackagesParams or null`
 
       Specify packages (and optionally their versions) available in this environment.
 
       When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-      - `apt: optional array of string`
+      - `apt: optional array of string or null`
 
         Ubuntu/Debian packages to install
 
-      - `cargo: optional array of string`
+      - `cargo: optional array of string or null`
 
         Rust packages to install
 
-      - `gem: optional array of string`
+      - `gem: optional array of string or null`
 
         Ruby packages to install
 
-      - `go: optional array of string`
+      - `go: optional array of string or null`
 
         Go packages to install
 
-      - `npm: optional array of string`
+      - `npm: optional array of string or null`
 
         Node.js packages to install
 
-      - `pip: optional array of string`
+      - `pip: optional array of string or null`
 
         Python packages to install
 
@@ -192,7 +199,7 @@ Update an existing environment's configuration.
 
       - `"self_hosted"`
 
-- `description: optional string`
+- `description: optional string or null`
 
   Updated description of the environment
 
@@ -200,11 +207,11 @@ Update an existing environment's configuration.
 
   User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-- `name: optional string`
+- `name: optional string or null`
 
   Updated name for the environment
 
-- `scope: optional "organization" or "account"`
+- `scope: optional "organization" or "account" or null`
 
   The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
@@ -222,7 +229,7 @@ Update an existing environment's configuration.
 
     Environment identifier (e.g., 'env_...')
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     RFC 3339 timestamp when environment was archived, or null if not archived
 

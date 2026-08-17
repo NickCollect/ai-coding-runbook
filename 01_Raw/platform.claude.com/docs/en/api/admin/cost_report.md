@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/cost_report
-fetched_at: 2026-08-10T03:07:51.730715+00:00
+fetched_at: 2026-08-17T02:15:22.916432+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Cost Report
+url: https://platform.claude.com/docs/en/api/admin/cost_report
 ---
 
 # Cost Report
@@ -59,6 +64,8 @@ Get Cost Report
 
   - `data: array of object { ending_at, results, starting_at }`
 
+    List of time buckets for this page, oldest first: one per `bucket_width` interval, including intervals with no costs (their `results` list is empty). A page holds at most `limit` buckets.
+
     - `ending_at: string`
 
       End of the time bucket (exclusive) in RFC 3339 format.
@@ -71,7 +78,7 @@ Get Cost Report
 
         Cost amount in lowest currency units (e.g. cents) as a decimal string. For example, `"123.45"` in `"USD"` represents `$1.23`.
 
-      - `context_window: "0-200k" or "200k-1M"`
+      - `context_window: "0-200k" or "200k-1M" or null`
 
         Input context window used. `null` if not grouping by description or for non-token costs.
 
@@ -79,7 +86,7 @@ Get Cost Report
 
         - `"200k-1M"`
 
-      - `cost_type: "code_execution" or "session_usage" or "tokens" or "web_search"`
+      - `cost_type: "code_execution" or "session_usage" or "tokens" or "web_search" or null`
 
         Type of cost. `null` if not grouping by description.
 
@@ -95,13 +102,14 @@ Get Cost Report
 
         Currency code for the cost amount. Currently always `"USD"`.
 
-      - `description: string`
+      - `description: string or null`
 
         Description of the cost item. `null` if not grouping by description.
 
-      - `inference_geo: "global" or "not_available" or "us"`
+      - `inference_geo: "global" or "not_available" or "us" or null`
 
-        InferenceGeo values extended with NOT_AVAILABLE for filtering usage data.
+        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
 
         - `"global"`
 
@@ -109,11 +117,11 @@ Get Cost Report
 
         - `"us"`
 
-      - `model: string`
+      - `model: string or null`
 
         Model name used. `null` if not grouping by description or for non-token costs.
 
-      - `service_tier: "batch" or "standard"`
+      - `service_tier: "batch" or "standard" or null`
 
         Service tier used. `null` if not grouping by description or for non-token costs.
 
@@ -121,7 +129,7 @@ Get Cost Report
 
         - `"standard"`
 
-      - `token_type: "cache_creation.ephemeral_1h_input_tokens" or "cache_creation.ephemeral_5m_input_tokens" or "cache_read_input_tokens" or 2 more`
+      - `token_type: "cache_creation.ephemeral_1h_input_tokens" or "cache_creation.ephemeral_5m_input_tokens" or "cache_read_input_tokens" or 2 more or null`
 
         Type of token. `null` if not grouping by description or for non-token costs.
 
@@ -135,7 +143,7 @@ Get Cost Report
 
         - `"uncached_input_tokens"`
 
-      - `workspace_id: string`
+      - `workspace_id: string or null`
 
         ID of the Workspace this cost is associated with. `null` if not grouping by workspace or for the default workspace.
 
@@ -147,9 +155,9 @@ Get Cost Report
 
     Indicates if there are more results.
 
-  - `next_page: string`
+  - `next_page: string or null`
 
-    Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+    Opaque cursor for the next page, or `null` when `has_more` is false. Pass it as the `page` parameter in the next request.
 
 ### Example
 
@@ -196,6 +204,8 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
   - `data: array of object { ending_at, results, starting_at }`
 
+    List of time buckets for this page, oldest first: one per `bucket_width` interval, including intervals with no costs (their `results` list is empty). A page holds at most `limit` buckets.
+
     - `ending_at: string`
 
       End of the time bucket (exclusive) in RFC 3339 format.
@@ -208,7 +218,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         Cost amount in lowest currency units (e.g. cents) as a decimal string. For example, `"123.45"` in `"USD"` represents `$1.23`.
 
-      - `context_window: "0-200k" or "200k-1M"`
+      - `context_window: "0-200k" or "200k-1M" or null`
 
         Input context window used. `null` if not grouping by description or for non-token costs.
 
@@ -216,7 +226,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         - `"200k-1M"`
 
-      - `cost_type: "code_execution" or "session_usage" or "tokens" or "web_search"`
+      - `cost_type: "code_execution" or "session_usage" or "tokens" or "web_search" or null`
 
         Type of cost. `null` if not grouping by description.
 
@@ -232,13 +242,14 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         Currency code for the cost amount. Currently always `"USD"`.
 
-      - `description: string`
+      - `description: string or null`
 
         Description of the cost item. `null` if not grouping by description.
 
-      - `inference_geo: "global" or "not_available" or "us"`
+      - `inference_geo: "global" or "not_available" or "us" or null`
 
-        InferenceGeo values extended with NOT_AVAILABLE for filtering usage data.
+        Inference geo used matching requests' `inference_geo` parameter if set, otherwise the workspace's `default_inference_geo`.
+        For models that do not support specifying `inference_geo` the value is `"not_available"`. Always `null` if not grouping by inference geo.
 
         - `"global"`
 
@@ -246,11 +257,11 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         - `"us"`
 
-      - `model: string`
+      - `model: string or null`
 
         Model name used. `null` if not grouping by description or for non-token costs.
 
-      - `service_tier: "batch" or "standard"`
+      - `service_tier: "batch" or "standard" or null`
 
         Service tier used. `null` if not grouping by description or for non-token costs.
 
@@ -258,7 +269,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         - `"standard"`
 
-      - `token_type: "cache_creation.ephemeral_1h_input_tokens" or "cache_creation.ephemeral_5m_input_tokens" or "cache_read_input_tokens" or 2 more`
+      - `token_type: "cache_creation.ephemeral_1h_input_tokens" or "cache_creation.ephemeral_5m_input_tokens" or "cache_read_input_tokens" or 2 more or null`
 
         Type of token. `null` if not grouping by description or for non-token costs.
 
@@ -272,7 +283,7 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
         - `"uncached_input_tokens"`
 
-      - `workspace_id: string`
+      - `workspace_id: string or null`
 
         ID of the Workspace this cost is associated with. `null` if not grouping by workspace or for the default workspace.
 
@@ -284,6 +295,6 @@ curl https://api.anthropic.com/v1/organizations/cost_report \
 
     Indicates if there are more results.
 
-  - `next_page: string`
+  - `next_page: string or null`
 
-    Token to provide in as `page` in the subsequent request to retrieve the next page of data.
+    Opaque cursor for the next page, or `null` when `has_more` is false. Pass it as the `page` parameter in the next request.

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/rotate_token
-fetched_at: 2026-07-27T04:31:55.018063+00:00
+fetched_at: 2026-08-17T02:15:21.744604+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Rotate Tunnel Token
+url: https://platform.claude.com/docs/en/api/beta/tunnels/rotate_token
 ---
 
 ## Rotate Tunnel Token
@@ -24,7 +29,7 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -90,9 +95,11 @@ Rotates a tunnel's connector token. Rotation invalidates the current token for n
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
-- `reason: optional string`
+- `reason: optional string or null`
 
   Optional free-text reason for the rotation, recorded for audit.
 

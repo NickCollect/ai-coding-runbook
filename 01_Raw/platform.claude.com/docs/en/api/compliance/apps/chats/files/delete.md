@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/delete
-fetched_at: 2026-05-25T05:15:56.827067+00:00
+fetched_at: 2026-08-17T02:15:24.745384+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Delete file
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/delete
 ---
 
 ## Delete file

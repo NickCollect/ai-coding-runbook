@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/rotate_token
-fetched_at: 2026-07-06T05:04:36.218179+00:00
+fetched_at: 2026-08-17T02:15:24.026891+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Rotate Tunnel Token
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/rotate_token
 ---
 
 ## Rotate Tunnel Token
@@ -32,7 +37,7 @@ restarted after rotation must use the new value. An optional
 
 ### Body Parameters
 
-- `reason: optional string`
+- `reason: optional string or null`
 
   Optional free-text reason for the rotation, recorded for audit.
 

@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/code/artifacts/retrieve_version
-fetched_at: 2026-07-13T04:25:45.116785+00:00
+fetched_at: 2026-08-17T02:15:25.325975+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Download Code Artifact Version Content
+url: https://platform.claude.com/docs/en/api/compliance/code/artifacts/retrieve_version
 ---
 
 ## Download Code Artifact Version Content

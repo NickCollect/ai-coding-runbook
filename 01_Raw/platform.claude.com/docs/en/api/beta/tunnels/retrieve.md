@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/tunnels/retrieve
-fetched_at: 2026-07-27T04:31:54.950013+00:00
+fetched_at: 2026-08-17T02:15:21.668220+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Tunnel
+url: https://platform.claude.com/docs/en/api/beta/tunnels/retrieve
 ---
 
 ## Get Tunnel
@@ -24,7 +29,7 @@ Fetches a tunnel by ID.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -90,6 +95,8 @@ Fetches a tunnel by ID.
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaTunnel object { id, archived_at, created_at, 3 more }`
@@ -100,7 +107,7 @@ Fetches a tunnel by ID.
 
     Unique identifier for the tunnel, prefixed with `tnl_`.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -108,7 +115,7 @@ Fetches a tunnel by ID.
 
     A timestamp in RFC 3339 format
 
-  - `display_name: string`
+  - `display_name: string or null`
 
     Human-readable name for the tunnel (1-255 characters). Null if unset.
 

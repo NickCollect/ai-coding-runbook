@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rbac_roles/permissions
-fetched_at: 2026-07-20T04:31:24.201007+00:00
+fetched_at: 2026-08-17T02:15:22.309966+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Permissions
+url: https://platform.claude.com/docs/en/api/admin/rbac_roles/permissions
 ---
 
 # Permissions
@@ -157,7 +162,7 @@ The RBAC Roles API is in beta and available to Claude Enterprise organizations o
 
   Indicates whether there are more results beyond this page.
 
-- `next_page: string`
+- `next_page: string or null`
 
   Opaque cursor for the next page. Pass as the `page` parameter on the next
   request.

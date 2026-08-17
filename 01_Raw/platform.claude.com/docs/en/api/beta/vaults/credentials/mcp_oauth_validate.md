@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/mcp_oauth_validate
-fetched_at: 2026-07-27T04:31:53.899897+00:00
+fetched_at: 2026-08-17T02:15:20.777388+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Validate Credential
+url: https://platform.claude.com/docs/en/api/beta/vaults/credentials/mcp_oauth_validate
 ---
 
 ## Validate Credential
@@ -24,7 +29,7 @@ Validate Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -90,6 +95,8 @@ Validate Credential
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsCredentialValidation object { credential_id, has_refresh_token, mcp_probe, 5 more }`
@@ -104,11 +111,11 @@ Validate Credential
 
     Whether the credential has a refresh token configured.
 
-  - `mcp_probe: BetaManagedAgentsMCPProbe`
+  - `mcp_probe: BetaManagedAgentsMCPProbe or null`
 
     The failing step of an MCP validation probe.
 
-    - `http_response: BetaManagedAgentsRefreshHTTPResponse`
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse or null`
 
       An HTTP response captured during a credential validation probe.
 
@@ -132,11 +139,11 @@ Validate Credential
 
       The MCP method that failed (for example `initialize` or `tools/list`).
 
-  - `refresh: BetaManagedAgentsRefreshObject`
+  - `refresh: BetaManagedAgentsRefreshObject or null`
 
     Outcome of a refresh-token exchange attempted during credential validation.
 
-    - `http_response: BetaManagedAgentsRefreshHTTPResponse`
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse or null`
 
       An HTTP response captured during a credential validation probe.
 

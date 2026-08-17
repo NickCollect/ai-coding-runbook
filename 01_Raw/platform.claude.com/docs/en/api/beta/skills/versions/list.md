@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/skills/versions/list
-fetched_at: 2026-07-27T04:31:54.538357+00:00
+fetched_at: 2026-08-17T02:15:21.382198+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Skill Versions
+url: https://platform.claude.com/docs/en/api/beta/skills/versions/list
 ---
 
 ## List Skill Versions
@@ -38,7 +43,7 @@ List Skill Versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -104,6 +109,8 @@ List Skill Versions
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: array of object { id, created_at, description, 5 more }`
@@ -158,7 +165,7 @@ List Skill Versions
 
   Indicates if there are more results in the requested page direction.
 
-- `next_page: string`
+- `next_page: string or null`
 
   Token to provide in as `page` in the subsequent request to retrieve the next page of data.
 

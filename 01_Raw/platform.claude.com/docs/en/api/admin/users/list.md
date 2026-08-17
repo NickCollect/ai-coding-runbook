@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/users/list
-fetched_at: 2026-07-20T04:31:23.695059+00:00
+fetched_at: 2026-08-17T02:15:22.047621+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: List Users
+url: https://platform.claude.com/docs/en/api/admin/users/list
 ---
 
 ## List Users
@@ -29,6 +34,12 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
   Number of items to return per page.
 
   Defaults to `20`. Ranges from `1` to `1000`.
+
+- `roles: optional array of string`
+
+  Filter to items whose `role` equals one of the supplied values. Repeatable; values are OR'ed together.
+
+  Accepted values depend on the organization type: Console and API organizations accept `user`, `developer`, `billing`, `admin`, and `claude_code_user`; Claude Enterprise organizations (beta) accept `user`, `owner`, `primary_owner`, `membership_admin`, and `managed`.
 
 ### Returns
 
@@ -80,7 +91,7 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
     - `"user"`
 
-- `first_id: string`
+- `first_id: string or null`
 
   First ID in the `data` list. Can be used as the `before_id` for the previous page.
 
@@ -88,7 +99,7 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
   Indicates if there are more results in the requested page direction.
 
-- `last_id: string`
+- `last_id: string or null`
 
   Last ID in the `data` list. Can be used as the `after_id` for the next page.
 

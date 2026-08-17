@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/vaults
-fetched_at: 2026-07-27T04:31:53.603966+00:00
+fetched_at: 2026-08-17T02:15:20.527351+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Vaults
+url: https://platform.claude.com/docs/en/api/beta/vaults
 ---
 
 # Vaults
@@ -20,7 +25,7 @@ Create Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -86,6 +91,8 @@ Create Vault
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
 - `display_name: string`
@@ -106,7 +113,7 @@ Create Vault
 
     Unique identifier for the vault.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -190,7 +197,7 @@ List Vaults
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -256,6 +263,8 @@ List Vaults
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: optional array of BetaManagedAgentsVault`
@@ -266,7 +275,7 @@ List Vaults
 
     Unique identifier for the vault.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -290,7 +299,7 @@ List Vaults
 
     A timestamp in RFC 3339 format
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Pagination token for the next page, or null if no more results.
 
@@ -342,7 +351,7 @@ Get Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -408,6 +417,8 @@ Get Vault
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsVault object { id, archived_at, created_at, 4 more }`
@@ -418,7 +429,7 @@ Get Vault
 
     Unique identifier for the vault.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -485,7 +496,7 @@ Update Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -551,13 +562,15 @@ Update Vault
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
-- `display_name: optional string`
+- `display_name: optional string or null`
 
   Updated human-readable name for the vault. 1-255 characters.
 
-- `metadata: optional map[string]`
+- `metadata: optional map[string] or null`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
@@ -571,7 +584,7 @@ Update Vault
 
     Unique identifier for the vault.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -645,7 +658,7 @@ Delete Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -710,6 +723,8 @@ Delete Vault
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -762,7 +777,7 @@ Archive Vault
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -828,6 +843,8 @@ Archive Vault
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsVault object { id, archived_at, created_at, 4 more }`
@@ -838,7 +855,7 @@ Archive Vault
 
     Unique identifier for the vault.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -914,7 +931,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/archive \
 
     Unique identifier for the vault.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -958,7 +975,7 @@ Create Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1024,6 +1041,8 @@ Create Credential
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
 - `auth: BetaManagedAgentsMCPOAuthCreateParams or BetaManagedAgentsStaticBearerCreateParams or BetaManagedAgentsEnvironmentVariableCreateParams`
@@ -1046,11 +1065,11 @@ Create Credential
 
       - `"mcp_oauth"`
 
-    - `expires_at: optional string`
+    - `expires_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `refresh: optional BetaManagedAgentsMCPOAuthRefreshParams`
+    - `refresh: optional BetaManagedAgentsMCPOAuthRefreshParams or null`
 
       OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -1102,11 +1121,11 @@ Create Credential
 
             - `"client_secret_post"`
 
-      - `resource: optional string`
+      - `resource: optional string or null`
 
         OAuth resource indicator.
 
-      - `scope: optional string`
+      - `scope: optional string or null`
 
         OAuth scope for the refresh request.
 
@@ -1178,7 +1197,7 @@ Create Credential
 
         Substitute when the placeholder appears in a request header value.
 
-- `display_name: optional string`
+- `display_name: optional string or null`
 
   Human-readable name for the credential. Up to 255 characters.
 
@@ -1196,7 +1215,7 @@ Create Credential
 
     Unique identifier for the credential.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -1216,11 +1235,11 @@ Create Credential
 
         - `"mcp_oauth"`
 
-      - `expires_at: optional string`
+      - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -1260,11 +1279,11 @@ Create Credential
 
               - `"client_secret_post"`
 
-        - `resource: optional string`
+        - `resource: optional string or null`
 
           OAuth resource indicator.
 
-        - `scope: optional string`
+        - `scope: optional string or null`
 
           OAuth scope for the refresh request.
 
@@ -1348,7 +1367,7 @@ Create Credential
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional string`
+  - `display_name: optional string or null`
 
     Human-readable name for the credential.
 
@@ -1426,7 +1445,7 @@ List Credentials
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1492,6 +1511,8 @@ List Credentials
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: optional array of BetaManagedAgentsCredential`
@@ -1502,7 +1523,7 @@ List Credentials
 
     Unique identifier for the credential.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -1522,11 +1543,11 @@ List Credentials
 
         - `"mcp_oauth"`
 
-      - `expires_at: optional string`
+      - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -1566,11 +1587,11 @@ List Credentials
 
               - `"client_secret_post"`
 
-        - `resource: optional string`
+        - `resource: optional string or null`
 
           OAuth resource indicator.
 
-        - `scope: optional string`
+        - `scope: optional string or null`
 
           OAuth scope for the refresh request.
 
@@ -1654,11 +1675,11 @@ List Credentials
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional string`
+  - `display_name: optional string or null`
 
     Human-readable name for the credential.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Pagination token for the next page, or null if no more results.
 
@@ -1717,7 +1738,7 @@ Get Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1783,6 +1804,8 @@ Get Credential
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
@@ -1793,7 +1816,7 @@ Get Credential
 
     Unique identifier for the credential.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -1813,11 +1836,11 @@ Get Credential
 
         - `"mcp_oauth"`
 
-      - `expires_at: optional string`
+      - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -1857,11 +1880,11 @@ Get Credential
 
               - `"client_secret_post"`
 
-        - `resource: optional string`
+        - `resource: optional string or null`
 
           OAuth resource indicator.
 
-        - `scope: optional string`
+        - `scope: optional string or null`
 
           OAuth scope for the refresh request.
 
@@ -1945,7 +1968,7 @@ Get Credential
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional string`
+  - `display_name: optional string or null`
 
     Human-readable name for the credential.
 
@@ -1999,7 +2022,7 @@ Update Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2065,6 +2088,8 @@ Update Credential
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
 - `auth: optional BetaManagedAgentsMCPOAuthUpdateParams or BetaManagedAgentsStaticBearerUpdateParams or BetaManagedAgentsEnvironmentVariableUpdateParams`
@@ -2079,23 +2104,23 @@ Update Credential
 
       - `"mcp_oauth"`
 
-    - `access_token: optional string`
+    - `access_token: optional string or null`
 
       Updated OAuth access token.
 
-    - `expires_at: optional string`
+    - `expires_at: optional string or null`
 
       A timestamp in RFC 3339 format
 
-    - `refresh: optional BetaManagedAgentsMCPOAuthRefreshUpdateParams`
+    - `refresh: optional BetaManagedAgentsMCPOAuthRefreshUpdateParams or null`
 
       Parameters for updating OAuth refresh token configuration.
 
-      - `refresh_token: optional string`
+      - `refresh_token: optional string or null`
 
         Updated OAuth refresh token.
 
-      - `scope: optional string`
+      - `scope: optional string or null`
 
         Updated OAuth scope for the refresh request.
 
@@ -2111,7 +2136,7 @@ Update Credential
 
             - `"client_secret_basic"`
 
-          - `client_secret: optional string`
+          - `client_secret: optional string or null`
 
             Updated OAuth client secret.
 
@@ -2123,7 +2148,7 @@ Update Credential
 
             - `"client_secret_post"`
 
-          - `client_secret: optional string`
+          - `client_secret: optional string or null`
 
             Updated OAuth client secret.
 
@@ -2135,7 +2160,7 @@ Update Credential
 
       - `"static_bearer"`
 
-    - `token: optional string`
+    - `token: optional string or null`
 
       Updated static bearer token value.
 
@@ -2159,7 +2184,7 @@ Update Credential
 
         Substitute when the placeholder appears in a request header value.
 
-    - `networking: optional BetaManagedAgentsCredentialNetworkingParams`
+    - `networking: optional BetaManagedAgentsCredentialNetworkingParams or null`
 
       Updated networking scope. Full replacement.
 
@@ -2183,15 +2208,15 @@ Update Credential
 
           - `"limited"`
 
-    - `secret_value: optional string`
+    - `secret_value: optional string or null`
 
       Updated secret value.
 
-- `display_name: optional string`
+- `display_name: optional string or null`
 
   Updated human-readable name for the credential. 1-255 characters.
 
-- `metadata: optional map[string]`
+- `metadata: optional map[string] or null`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
@@ -2205,7 +2230,7 @@ Update Credential
 
     Unique identifier for the credential.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -2225,11 +2250,11 @@ Update Credential
 
         - `"mcp_oauth"`
 
-      - `expires_at: optional string`
+      - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -2269,11 +2294,11 @@ Update Credential
 
               - `"client_secret_post"`
 
-        - `resource: optional string`
+        - `resource: optional string or null`
 
           OAuth resource indicator.
 
-        - `scope: optional string`
+        - `scope: optional string or null`
 
           OAuth scope for the refresh request.
 
@@ -2357,7 +2382,7 @@ Update Credential
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional string`
+  - `display_name: optional string or null`
 
     Human-readable name for the credential.
 
@@ -2418,7 +2443,7 @@ Delete Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2483,6 +2508,8 @@ Delete Credential
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Returns
 
@@ -2537,7 +2564,7 @@ Archive Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2603,6 +2630,8 @@ Archive Credential
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsCredential object { id, archived_at, auth, 6 more }`
@@ -2613,7 +2642,7 @@ Archive Credential
 
     Unique identifier for the credential.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -2633,11 +2662,11 @@ Archive Credential
 
         - `"mcp_oauth"`
 
-      - `expires_at: optional string`
+      - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -2677,11 +2706,11 @@ Archive Credential
 
               - `"client_secret_post"`
 
-        - `resource: optional string`
+        - `resource: optional string or null`
 
           OAuth resource indicator.
 
-        - `scope: optional string`
+        - `scope: optional string or null`
 
           OAuth scope for the refresh request.
 
@@ -2765,7 +2794,7 @@ Archive Credential
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional string`
+  - `display_name: optional string or null`
 
     Human-readable name for the credential.
 
@@ -2820,7 +2849,7 @@ Validate Credential
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2886,6 +2915,8 @@ Validate Credential
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsCredentialValidation object { credential_id, has_refresh_token, mcp_probe, 5 more }`
@@ -2900,11 +2931,11 @@ Validate Credential
 
     Whether the credential has a refresh token configured.
 
-  - `mcp_probe: BetaManagedAgentsMCPProbe`
+  - `mcp_probe: BetaManagedAgentsMCPProbe or null`
 
     The failing step of an MCP validation probe.
 
-    - `http_response: BetaManagedAgentsRefreshHTTPResponse`
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse or null`
 
       An HTTP response captured during a credential validation probe.
 
@@ -2928,11 +2959,11 @@ Validate Credential
 
       The MCP method that failed (for example `initialize` or `tools/list`).
 
-  - `refresh: BetaManagedAgentsRefreshObject`
+  - `refresh: BetaManagedAgentsRefreshObject or null`
 
     Outcome of a refresh-token exchange attempted during credential validation.
 
-    - `http_response: BetaManagedAgentsRefreshHTTPResponse`
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse or null`
 
       An HTTP response captured during a credential validation probe.
 
@@ -3023,7 +3054,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Unique identifier for the credential.
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -3043,11 +3074,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         - `"mcp_oauth"`
 
-      - `expires_at: optional string`
+      - `expires_at: optional string or null`
 
         A timestamp in RFC 3339 format
 
-      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+      - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
         OAuth refresh token configuration returned in credential responses.
 
@@ -3087,11 +3118,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
               - `"client_secret_post"`
 
-        - `resource: optional string`
+        - `resource: optional string or null`
 
           OAuth resource indicator.
 
-        - `scope: optional string`
+        - `scope: optional string or null`
 
           OAuth scope for the refresh request.
 
@@ -3175,7 +3206,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Identifier of the vault this credential belongs to.
 
-  - `display_name: optional string`
+  - `display_name: optional string or null`
 
     Human-readable name for the credential.
 
@@ -3219,11 +3250,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     Whether the credential has a refresh token configured.
 
-  - `mcp_probe: BetaManagedAgentsMCPProbe`
+  - `mcp_probe: BetaManagedAgentsMCPProbe or null`
 
     The failing step of an MCP validation probe.
 
-    - `http_response: BetaManagedAgentsRefreshHTTPResponse`
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse or null`
 
       An HTTP response captured during a credential validation probe.
 
@@ -3247,11 +3278,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       The MCP method that failed (for example `initialize` or `tools/list`).
 
-  - `refresh: BetaManagedAgentsRefreshObject`
+  - `refresh: BetaManagedAgentsRefreshObject or null`
 
     Outcome of a refresh-token exchange attempted during credential validation.
 
-    - `http_response: BetaManagedAgentsRefreshHTTPResponse`
+    - `http_response: BetaManagedAgentsRefreshHTTPResponse or null`
 
       An HTTP response captured during a credential validation probe.
 
@@ -3441,7 +3472,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
       Substitute when the placeholder appears in a request header value.
 
-  - `networking: optional BetaManagedAgentsCredentialNetworkingParams`
+  - `networking: optional BetaManagedAgentsCredentialNetworkingParams or null`
 
     Updated networking scope. Full replacement.
 
@@ -3465,7 +3496,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         - `"limited"`
 
-  - `secret_value: optional string`
+  - `secret_value: optional string or null`
 
     Updated secret value.
 
@@ -3553,11 +3584,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     - `"mcp_oauth"`
 
-  - `expires_at: optional string`
+  - `expires_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
-  - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse`
+  - `refresh: optional BetaManagedAgentsMCPOAuthRefreshResponse or null`
 
     OAuth refresh token configuration returned in credential responses.
 
@@ -3597,11 +3628,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           - `"client_secret_post"`
 
-    - `resource: optional string`
+    - `resource: optional string or null`
 
       OAuth resource indicator.
 
-    - `scope: optional string`
+    - `scope: optional string or null`
 
       OAuth scope for the refresh request.
 
@@ -3623,11 +3654,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     - `"mcp_oauth"`
 
-  - `expires_at: optional string`
+  - `expires_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
-  - `refresh: optional BetaManagedAgentsMCPOAuthRefreshParams`
+  - `refresh: optional BetaManagedAgentsMCPOAuthRefreshParams or null`
 
     OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -3679,11 +3710,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           - `"client_secret_post"`
 
-    - `resource: optional string`
+    - `resource: optional string or null`
 
       OAuth resource indicator.
 
-    - `scope: optional string`
+    - `scope: optional string or null`
 
       OAuth scope for the refresh request.
 
@@ -3741,11 +3772,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         - `"client_secret_post"`
 
-  - `resource: optional string`
+  - `resource: optional string or null`
 
     OAuth resource indicator.
 
-  - `scope: optional string`
+  - `scope: optional string or null`
 
     OAuth scope for the refresh request.
 
@@ -3791,11 +3822,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         - `"client_secret_post"`
 
-  - `resource: optional string`
+  - `resource: optional string or null`
 
     OAuth resource indicator.
 
-  - `scope: optional string`
+  - `scope: optional string or null`
 
     OAuth scope for the refresh request.
 
@@ -3805,11 +3836,11 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   Parameters for updating OAuth refresh token configuration.
 
-  - `refresh_token: optional string`
+  - `refresh_token: optional string or null`
 
     Updated OAuth refresh token.
 
-  - `scope: optional string`
+  - `scope: optional string or null`
 
     Updated OAuth scope for the refresh request.
 
@@ -3825,7 +3856,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         - `"client_secret_basic"`
 
-      - `client_secret: optional string`
+      - `client_secret: optional string or null`
 
         Updated OAuth client secret.
 
@@ -3837,7 +3868,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
         - `"client_secret_post"`
 
-      - `client_secret: optional string`
+      - `client_secret: optional string or null`
 
         Updated OAuth client secret.
 
@@ -3851,23 +3882,23 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     - `"mcp_oauth"`
 
-  - `access_token: optional string`
+  - `access_token: optional string or null`
 
     Updated OAuth access token.
 
-  - `expires_at: optional string`
+  - `expires_at: optional string or null`
 
     A timestamp in RFC 3339 format
 
-  - `refresh: optional BetaManagedAgentsMCPOAuthRefreshUpdateParams`
+  - `refresh: optional BetaManagedAgentsMCPOAuthRefreshUpdateParams or null`
 
     Parameters for updating OAuth refresh token configuration.
 
-    - `refresh_token: optional string`
+    - `refresh_token: optional string or null`
 
       Updated OAuth refresh token.
 
-    - `scope: optional string`
+    - `scope: optional string or null`
 
       Updated OAuth scope for the refresh request.
 
@@ -3883,7 +3914,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           - `"client_secret_basic"`
 
-        - `client_secret: optional string`
+        - `client_secret: optional string or null`
 
           Updated OAuth client secret.
 
@@ -3895,7 +3926,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
           - `"client_secret_post"`
 
-        - `client_secret: optional string`
+        - `client_secret: optional string or null`
 
           Updated OAuth client secret.
 
@@ -3905,7 +3936,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   The failing step of an MCP validation probe.
 
-  - `http_response: BetaManagedAgentsRefreshHTTPResponse`
+  - `http_response: BetaManagedAgentsRefreshHTTPResponse or null`
 
     An HTTP response captured during a credential validation probe.
 
@@ -3957,7 +3988,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
   Outcome of a refresh-token exchange attempted during credential validation.
 
-  - `http_response: BetaManagedAgentsRefreshHTTPResponse`
+  - `http_response: BetaManagedAgentsRefreshHTTPResponse or null`
 
     An HTTP response captured during a credential validation probe.
 
@@ -4031,7 +4062,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     - `"static_bearer"`
 
-  - `token: optional string`
+  - `token: optional string or null`
 
     Updated static bearer token value.
 
@@ -4069,7 +4100,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     - `"client_secret_basic"`
 
-  - `client_secret: optional string`
+  - `client_secret: optional string or null`
 
     Updated OAuth client secret.
 
@@ -4127,7 +4158,7 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/mc
 
     - `"client_secret_post"`
 
-  - `client_secret: optional string`
+  - `client_secret: optional string or null`
 
     Updated OAuth client secret.
 

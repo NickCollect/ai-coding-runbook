@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/invites/retrieve
-fetched_at: 2026-07-20T04:31:23.560047+00:00
+fetched_at: 2026-08-17T02:15:21.953085+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Invite
+url: https://platform.claude.com/docs/en/api/admin/invites/retrieve
 ---
 
 ## Get Invite
@@ -24,7 +29,7 @@ For Claude Enterprise organizations, this endpoint's availability is in beta.
 
     ID of the Invite.
 
-  - `accepted_at: string`
+  - `accepted_at: string or null`
 
     RFC 3339 datetime string indicating when the Invite was accepted, or null.
 

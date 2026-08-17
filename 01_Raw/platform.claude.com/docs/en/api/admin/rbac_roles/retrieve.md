@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/rbac_roles/retrieve
-fetched_at: 2026-07-20T04:31:24.136170+00:00
+fetched_at: 2026-08-17T02:15:22.282785+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get RBAC Role
+url: https://platform.claude.com/docs/en/api/admin/rbac_roles/retrieve
 ---
 
 ## Get RBAC Role

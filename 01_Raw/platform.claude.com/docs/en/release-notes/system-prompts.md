@@ -1,16 +1,16 @@
 ---
 source_url: https://platform.claude.com/docs/en/release-notes/system-prompts
-fetched_at: 2026-07-27T04:31:51.022593+00:00
+fetched_at: 2026-08-17T02:15:18.298710+00:00
 fetch_method: mintlify_md
 ---
 
-# System Prompts
-
-See updates to the core system prompts on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
-
+---
+title: System Prompts
+url: https://platform.claude.com/docs/en/release-notes/system-prompts
+description: See updates to the core system prompts on [claude.ai](https://claude.ai) and the [Claude iOS app](https://anthropic.com/ios) and [Claude Android app](https://anthropic.com/android).
 ---
 
-Claude's web interface ([claude.ai](https://claude.ai)) and mobile apps use a system prompt to provide up-to-date information, such as the current date, to Claude at the start of every conversation. The system prompt also encourages certain behaviors, such as always providing code snippets in Markdown. This prompt is periodically updated to improve Claude's responses. These system prompt updates do not apply to the Claude API. Where a model has multiple dated entries below, updates between versions are bolded. Starting with the Claude 4.6 generation, each model ID is a [single fixed snapshot](/docs/en/about-claude/models/model-ids-and-versions), so those models have one entry.
+Claude's web interface ([claude.ai](https://claude.ai)) and mobile apps use a system prompt to provide up-to-date information, such as the current date, to Claude at the start of every conversation. The system prompt also encourages certain behaviors, such as always providing code snippets in Markdown. This prompt is periodically updated to improve Claude's responses. These system prompt updates do not apply to the Claude API. Where a model has multiple dated entries below, updates between versions are bolded. Starting with the Claude 4.6 generation, each model ID is a [single fixed snapshot](https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions), so those models have one entry.
 
 ## Claude Opus 5
 

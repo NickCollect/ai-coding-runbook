@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/environments/work/update
-fetched_at: 2026-07-27T04:31:52.801610+00:00
+fetched_at: 2026-08-17T02:15:19.852912+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Update Work Item
+url: https://platform.claude.com/docs/en/api/beta/environments/work/update
 ---
 
 ## Update Work Item
@@ -26,7 +31,7 @@ Update work item metadata with merge semantics.
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -92,6 +97,8 @@ Update work item metadata with merge semantics.
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
 - `metadata: map[string]`
@@ -112,7 +119,7 @@ Update work item metadata with merge semantics.
 
     Work identifier (e.g., 'work_...')
 
-  - `acknowledged_at: string`
+  - `acknowledged_at: string or null`
 
     RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
@@ -138,7 +145,7 @@ Update work item metadata with merge semantics.
 
     Environment identifier this work belongs to (e.g., `env_...`)
 
-  - `latest_heartbeat_at: string`
+  - `latest_heartbeat_at: string or null`
 
     RFC 3339 timestamp of the most recent heartbeat
 
@@ -146,11 +153,11 @@ Update work item metadata with merge semantics.
 
     User-provided metadata key-value pairs associated with this work item
 
-  - `secret: string`
+  - `secret: string or null`
 
     Credential payload used by the environment worker to execute this work item. May be populated when polling for work; null on all other retrieval paths.
 
-  - `started_at: string`
+  - `started_at: string or null`
 
     RFC 3339 timestamp when work execution started
 
@@ -168,11 +175,11 @@ Update work item metadata with merge semantics.
 
     - `"stopped"`
 
-  - `stop_requested_at: string`
+  - `stop_requested_at: string or null`
 
     RFC 3339 timestamp when stop was requested
 
-  - `stopped_at: string`
+  - `stopped_at: string or null`
 
     RFC 3339 timestamp when work execution stopped
 

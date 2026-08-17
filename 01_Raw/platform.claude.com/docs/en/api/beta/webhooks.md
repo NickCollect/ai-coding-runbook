@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/webhooks
-fetched_at: 2026-07-27T04:31:55.146354+00:00
+fetched_at: 2026-08-17T02:15:21.854971+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Webhooks
+url: https://platform.claude.com/docs/en/api/beta/webhooks
 ---
 
 # Webhooks
@@ -924,6 +929,20 @@ fetch_method: mintlify_md
 
       - `workspace_id: string`
 
+    - `BetaWebhookSessionBudgetReachedEventData object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.budget_reached"`
+
+        - `"session.budget_reached"`
+
+      - `workspace_id: string`
+
   - `type: "event"`
 
     Object type. Always `event` for webhook payloads.
@@ -932,7 +951,7 @@ fetch_method: mintlify_md
 
 ### Beta Webhook Event Data
 
-- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 40 more`
+- `BetaWebhookEventData = BetaWebhookSessionCreatedEventData or BetaWebhookSessionPendingEventData or BetaWebhookSessionRunningEventData or 41 more`
 
   - `BetaWebhookSessionCreatedEventData object { id, organization_id, type, workspace_id }`
 
@@ -1564,6 +1583,20 @@ fetch_method: mintlify_md
 
     - `workspace_id: string`
 
+  - `BetaWebhookSessionBudgetReachedEventData object { id, organization_id, type, workspace_id }`
+
+    - `id: string`
+
+      ID of the session that triggered the event.
+
+    - `organization_id: string`
+
+    - `type: "session.budget_reached"`
+
+      - `"session.budget_reached"`
+
+    - `workspace_id: string`
+
 ### Beta Webhook Memory Store Archived Event Data
 
 - `BetaWebhookMemoryStoreArchivedEventData object { id, organization_id, type, workspace_id }`
@@ -1625,6 +1658,22 @@ fetch_method: mintlify_md
   - `type: "session.archived"`
 
     - `"session.archived"`
+
+  - `workspace_id: string`
+
+### Beta Webhook Session Budget Reached Event Data
+
+- `BetaWebhookSessionBudgetReachedEventData object { id, organization_id, type, workspace_id }`
+
+  - `id: string`
+
+    ID of the session that triggered the event.
+
+  - `organization_id: string`
+
+  - `type: "session.budget_reached"`
+
+    - `"session.budget_reached"`
 
   - `workspace_id: string`
 
@@ -2649,6 +2698,20 @@ fetch_method: mintlify_md
       - `type: "memory_store.deleted"`
 
         - `"memory_store.deleted"`
+
+      - `workspace_id: string`
+
+    - `BetaWebhookSessionBudgetReachedEventData object { id, organization_id, type, workspace_id }`
+
+      - `id: string`
+
+        ID of the session that triggered the event.
+
+      - `organization_id: string`
+
+      - `type: "session.budget_reached"`
+
+        - `"session.budget_reached"`
 
       - `workspace_id: string`
 

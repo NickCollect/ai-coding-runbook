@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/download
-fetched_at: 2026-05-25T05:15:56.730834+00:00
+fetched_at: 2026-08-17T02:15:24.741501+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Download file content
+url: https://platform.claude.com/docs/en/api/compliance/apps/chats/files/download
 ---
 
 ## Download file content

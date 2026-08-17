@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects/retrieve
-fetched_at: 2026-06-29T05:25:21.467324+00:00
+fetched_at: 2026-08-17T02:15:24.897594+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get project details
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects/retrieve
 ---
 
 ## Get project details
@@ -38,7 +43,7 @@ Get detailed information for a specific project.
 
   Project creation timestamp
 
-- `deleted_at: string`
+- `deleted_at: string or null`
 
   Timestamp when the project was deleted by an end user, or null otherwise
 
@@ -70,13 +75,13 @@ Get detailed information for a specific project.
 
   Project last update timestamp
 
-- `user: object { id, email_address }`
+- `user: object { id, email_address }  or null`
 
   The user who created a project or project document.
 
   Fields that reference this type are null when the creator's account has
-  been deleted or the creator is no longer a member of any organization
-  under the parent organization.
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
   - `id: string`
 

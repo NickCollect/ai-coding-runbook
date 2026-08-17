@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta/agents
-fetched_at: 2026-07-27T04:31:52.355514+00:00
+fetched_at: 2026-08-17T02:15:19.471790+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Agents
+url: https://platform.claude.com/docs/en/api/beta/agents
 ---
 
 # Agents
@@ -20,7 +25,7 @@ Create Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -85,6 +90,8 @@ Create Agent
     - `"fallback-credit-2026-07-01"`
 
     - `"agent-memory-2026-07-22"`
+
+    - `"mid-conversation-tool-changes-2026-07-01"`
 
 ### Body Parameters
 
@@ -158,7 +165,7 @@ Create Agent
 
     - `string`
 
-  - `BetaManagedAgentsModelConfigParams object { id, effort, speed }`
+  - `BetaManagedAgentsModelConfigParams object { id, effort, inference_geo, speed }`
 
     An object that defines additional configuration control over model use
 
@@ -168,7 +175,7 @@ Create Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more`
+    - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more or null`
 
       How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -226,7 +233,11 @@ Create Agent
 
           - `"max"`
 
-    - `speed: optional "standard" or "fast"`
+    - `inference_geo: optional string or null`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
+    - `speed: optional "standard" or "fast" or null`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -238,7 +249,7 @@ Create Agent
 
   Human-readable name for the agent.
 
-- `description: optional string`
+- `description: optional string or null`
 
   Description of what the agent does.
 
@@ -262,7 +273,7 @@ Create Agent
 
   Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-- `multiagent: optional BetaManagedAgentsMultiagentParams`
+- `multiagent: optional BetaManagedAgentsMultiagentParams or null`
 
   A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
@@ -296,6 +307,18 @@ Create Agent
 
         - `"self"`
 
+    - `BetaManagedAgentsAdvisorParams object { model, type }`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+      - `model: string`
+
+        A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+      - `type: "advisor"`
+
+        - `"advisor"`
+
   - `type: "coordinator"`
 
     - `"coordinator"`
@@ -316,7 +339,7 @@ Create Agent
 
       - `"anthropic"`
 
-    - `version: optional string`
+    - `version: optional string or null`
 
       Version to pin. Defaults to latest if omitted.
 
@@ -332,11 +355,11 @@ Create Agent
 
       - `"custom"`
 
-    - `version: optional string`
+    - `version: optional string or null`
 
       Version to pin. Defaults to latest if omitted.
 
-- `system: optional string`
+- `system: optional string or null`
 
   System prompt for the agent.
 
@@ -376,11 +399,11 @@ Create Agent
 
         - `"web_search"`
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -400,15 +423,15 @@ Create Agent
 
             - `"always_ask"`
 
-    - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams`
+    - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams or null`
 
       Default configuration for all tools in a toolset.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -440,11 +463,11 @@ Create Agent
 
         Name of the MCP tool to configure. 1-128 characters.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether this tool is enabled. Overrides the `default_config` setting.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -456,15 +479,15 @@ Create Agent
 
           Tool calls require user confirmation before execution.
 
-    - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams`
+    - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams or null`
 
       Default configuration for all tools from an MCP server.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether tools are enabled by default. Defaults to true if not specified.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -482,7 +505,7 @@ Create Agent
 
     - `description: string`
 
-      Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+      Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
     - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -492,9 +515,9 @@ Create Agent
 
         - `"object"`
 
-      - `properties: optional map[unknown]`
+      - `properties: optional map[unknown] or null`
 
-      - `required: optional array of string`
+      - `required: optional array of string or null`
 
     - `name: string`
 
@@ -512,7 +535,7 @@ Create Agent
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -520,7 +543,7 @@ Create Agent
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -648,6 +671,10 @@ Create Agent
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -656,21 +683,37 @@ Create Agent
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: array of BetaManagedAgentsAgentReference`
+    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: string`
+      - `BetaManagedAgentsAgentReference object { id, type, version }`
 
-      - `type: "agent"`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"`
+        - `id: string`
 
-      - `version: number`
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `BetaManagedAgentsAdvisor object { model, type }`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: string`
+
+          The advisor model id.
+
+        - `type: "advisor"`
+
+          - `"advisor"`
 
     - `type: "coordinator"`
 
@@ -704,7 +747,7 @@ Create Agent
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -834,9 +877,9 @@ Create Agent
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -864,20 +907,20 @@ curl https://api.anthropic.com/v1/agents \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d "{
-          \"model\": \"claude-sonnet-4-6\",
-          \"name\": \"My First Agent\",
-          \"description\": \"A general-purpose starter agent.\",
-          \"metadata\": {
-            \"foo\": \"bar\"
+    -d '{
+          "model": "claude-sonnet-4-6",
+          "name": "My First Agent",
+          "description": "A general-purpose starter agent.",
+          "metadata": {
+            "foo": "bar"
           },
-          \"system\": \"You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.\",
-          \"tools\": [
+          "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user'\''s task end to end.",
+          "tools": [
             {
-              \"type\": \"agent_toolset_20260401\"
+              "type": "agent_toolset_20260401"
             }
           ]
-        }"
+        }'
 ```
 
 #### Response
@@ -903,6 +946,7 @@ curl https://api.anthropic.com/v1/agents \
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -991,7 +1035,7 @@ List Agents
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1057,6 +1101,8 @@ List Agents
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: array of BetaManagedAgentsAgent`
@@ -1065,7 +1111,7 @@ List Agents
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -1073,7 +1119,7 @@ List Agents
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -1201,6 +1247,10 @@ List Agents
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1209,21 +1259,37 @@ List Agents
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: array of BetaManagedAgentsAgentReference`
+    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: string`
+      - `BetaManagedAgentsAgentReference object { id, type, version }`
 
-      - `type: "agent"`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"`
+        - `id: string`
 
-      - `version: number`
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `BetaManagedAgentsAdvisor object { model, type }`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: string`
+
+          The advisor model id.
+
+        - `type: "advisor"`
+
+          - `"advisor"`
 
     - `type: "coordinator"`
 
@@ -1257,7 +1323,7 @@ List Agents
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -1387,9 +1453,9 @@ List Agents
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -1409,7 +1475,7 @@ List Agents
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page. Null when no more results.
 
@@ -1447,6 +1513,7 @@ curl https://api.anthropic.com/v1/agents \
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {
@@ -1526,7 +1593,7 @@ Get Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -1592,6 +1659,8 @@ Get Agent
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsAgent object { id, archived_at, created_at, 12 more }`
@@ -1600,7 +1669,7 @@ Get Agent
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -1608,7 +1677,7 @@ Get Agent
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -1736,6 +1805,10 @@ Get Agent
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -1744,21 +1817,37 @@ Get Agent
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: array of BetaManagedAgentsAgentReference`
+    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: string`
+      - `BetaManagedAgentsAgentReference object { id, type, version }`
 
-      - `type: "agent"`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"`
+        - `id: string`
 
-      - `version: number`
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `BetaManagedAgentsAdvisor object { model, type }`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: string`
+
+          The advisor model id.
+
+        - `type: "advisor"`
+
+          - `"advisor"`
 
     - `type: "coordinator"`
 
@@ -1792,7 +1881,7 @@ Get Agent
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -1922,9 +2011,9 @@ Get Agent
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -1976,6 +2065,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID \
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -2046,7 +2136,7 @@ Update Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -2112,13 +2202,15 @@ Update Agent
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Body Parameters
 
-- `description: optional string`
+- `description: optional string or null`
 
   Description. Omit to preserve; send empty string or null to clear.
 
-- `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams`
+- `mcp_servers: optional array of BetaManagedAgentsURLMCPServerParams or null`
 
   MCP servers. Full replacement. Omit to preserve; send empty array or `null` to clear. Names must be unique. Maximum 20. Every server must be referenced by an `mcp_toolset` in the agent's resulting `tools`; unreferenced servers are rejected. See the [MCP connector guide](https://platform.claude.com/docs/en/managed-agents/mcp-connector).
 
@@ -2134,7 +2226,7 @@ Update Agent
 
     Endpoint URL for the MCP server.
 
-- `metadata: optional map[string]`
+- `metadata: optional map[string] or null`
 
   Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
@@ -2208,7 +2300,7 @@ Update Agent
 
     - `string`
 
-  - `BetaManagedAgentsModelConfigParams object { id, effort, speed }`
+  - `BetaManagedAgentsModelConfigParams object { id, effort, inference_geo, speed }`
 
     An object that defines additional configuration control over model use
 
@@ -2218,7 +2310,7 @@ Update Agent
 
       See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-    - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more`
+    - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more or null`
 
       How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -2276,7 +2368,11 @@ Update Agent
 
           - `"max"`
 
-    - `speed: optional "standard" or "fast"`
+    - `inference_geo: optional string or null`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
+    - `speed: optional "standard" or "fast" or null`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -2284,7 +2380,7 @@ Update Agent
 
       - `"fast"`
 
-- `multiagent: optional BetaManagedAgentsMultiagentParams`
+- `multiagent: optional BetaManagedAgentsMultiagentParams or null`
 
   A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
@@ -2318,6 +2414,18 @@ Update Agent
 
         - `"self"`
 
+    - `BetaManagedAgentsAdvisorParams object { model, type }`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+      - `model: string`
+
+        A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+      - `type: "advisor"`
+
+        - `"advisor"`
+
   - `type: "coordinator"`
 
     - `"coordinator"`
@@ -2326,7 +2434,7 @@ Update Agent
 
   Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
-- `skills: optional array of BetaManagedAgentsSkillParams`
+- `skills: optional array of BetaManagedAgentsSkillParams or null`
 
   Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
@@ -2342,7 +2450,7 @@ Update Agent
 
       - `"anthropic"`
 
-    - `version: optional string`
+    - `version: optional string or null`
 
       Version to pin. Defaults to latest if omitted.
 
@@ -2358,15 +2466,15 @@ Update Agent
 
       - `"custom"`
 
-    - `version: optional string`
+    - `version: optional string or null`
 
       Version to pin. Defaults to latest if omitted.
 
-- `system: optional string`
+- `system: optional string or null`
 
   System prompt. Omit to preserve; send empty string or null to clear.
 
-- `tools: optional array of BetaManagedAgentsAgentToolset20260401Params or BetaManagedAgentsMCPToolsetParams or BetaManagedAgentsCustomToolParams`
+- `tools: optional array of BetaManagedAgentsAgentToolset20260401Params or BetaManagedAgentsMCPToolsetParams or BetaManagedAgentsCustomToolParams or null`
 
   Tool configurations available to the agent. Full replacement. Omit to preserve; send empty array or null to clear. Maximum of 128 tools across all toolsets allowed.
 
@@ -2402,11 +2510,11 @@ Update Agent
 
         - `"web_search"`
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -2426,15 +2534,15 @@ Update Agent
 
             - `"always_ask"`
 
-    - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams`
+    - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams or null`
 
       Default configuration for all tools in a toolset.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -2466,11 +2574,11 @@ Update Agent
 
         Name of the MCP tool to configure. 1-128 characters.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether this tool is enabled. Overrides the `default_config` setting.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -2482,15 +2590,15 @@ Update Agent
 
           Tool calls require user confirmation before execution.
 
-    - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams`
+    - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams or null`
 
       Default configuration for all tools from an MCP server.
 
-      - `enabled: optional boolean`
+      - `enabled: optional boolean or null`
 
         Whether tools are enabled by default. Defaults to true if not specified.
 
-      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+      - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
         Permission policy for tool execution.
 
@@ -2508,7 +2616,7 @@ Update Agent
 
     - `description: string`
 
-      Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+      Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
     - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -2518,9 +2626,9 @@ Update Agent
 
         - `"object"`
 
-      - `properties: optional map[unknown]`
+      - `properties: optional map[unknown] or null`
 
-      - `required: optional array of string`
+      - `required: optional array of string or null`
 
     - `name: string`
 
@@ -2542,7 +2650,7 @@ Update Agent
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -2550,7 +2658,7 @@ Update Agent
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -2678,6 +2786,10 @@ Update Agent
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -2686,21 +2798,37 @@ Update Agent
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: array of BetaManagedAgentsAgentReference`
+    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: string`
+      - `BetaManagedAgentsAgentReference object { id, type, version }`
 
-      - `type: "agent"`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"`
+        - `id: string`
 
-      - `version: number`
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `BetaManagedAgentsAdvisor object { model, type }`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: string`
+
+          The advisor model id.
+
+        - `type: "advisor"`
+
+          - `"advisor"`
 
     - `type: "coordinator"`
 
@@ -2734,7 +2862,7 @@ Update Agent
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -2864,9 +2992,9 @@ Update Agent
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -2894,11 +3022,11 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID \
     -H 'anthropic-version: 2023-06-01' \
     -H 'anthropic-beta: managed-agents-2026-04-01' \
     -H "X-Api-Key: $ANTHROPIC_API_KEY" \
-    -d "{
-          \"description\": \"updated\",
-          \"system\": \"You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user's task end to end.\",
-          \"version\": 1
-        }"
+    -d '{
+          "description": "updated",
+          "system": "You are a general-purpose agent that can research, write code, run commands, and use connected tools to complete the user'\''s task end to end.",
+          "version": 1
+        }'
 ```
 
 #### Response
@@ -2924,6 +3052,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID \
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -2994,7 +3123,7 @@ Archive Agent
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -3060,6 +3189,8 @@ Archive Agent
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `BetaManagedAgentsAgent object { id, archived_at, created_at, 12 more }`
@@ -3068,7 +3199,7 @@ Archive Agent
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -3076,7 +3207,7 @@ Archive Agent
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -3204,6 +3335,10 @@ Archive Agent
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -3212,21 +3347,37 @@ Archive Agent
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: array of BetaManagedAgentsAgentReference`
+    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: string`
+      - `BetaManagedAgentsAgentReference object { id, type, version }`
 
-      - `type: "agent"`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"`
+        - `id: string`
 
-      - `version: number`
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `BetaManagedAgentsAdvisor object { model, type }`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: string`
+
+          The advisor model id.
+
+        - `type: "advisor"`
+
+          - `"advisor"`
 
     - `type: "coordinator"`
 
@@ -3260,7 +3411,7 @@ Archive Agent
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -3390,9 +3541,9 @@ Archive Agent
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -3445,6 +3596,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
     "effort": {
       "type": "low"
     },
+    "inference_geo": "inference_geo",
     "speed": "standard"
   },
   "multiagent": {
@@ -3499,6 +3651,20 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
 ## Domain Types
 
+### Beta Managed Agents Advisor
+
+- `BetaManagedAgentsAdvisor object { model, type }`
+
+  Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+  - `model: string`
+
+    The advisor model id.
+
+  - `type: "advisor"`
+
+    - `"advisor"`
+
 ### Beta Managed Agents Agent
 
 - `BetaManagedAgentsAgent object { id, archived_at, created_at, 12 more }`
@@ -3507,7 +3673,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -3515,7 +3681,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -3643,6 +3809,10 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -3651,21 +3821,37 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: array of BetaManagedAgentsAgentReference`
+    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: string`
+      - `BetaManagedAgentsAgentReference object { id, type, version }`
 
-      - `type: "agent"`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"`
+        - `id: string`
 
-      - `version: number`
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `BetaManagedAgentsAdvisor object { model, type }`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: string`
+
+          The advisor model id.
+
+        - `type: "advisor"`
+
+          - `"advisor"`
 
     - `type: "coordinator"`
 
@@ -3699,7 +3885,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -3829,9 +4015,9 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -3939,11 +4125,11 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     - `"web_search"`
 
-  - `enabled: optional boolean`
+  - `enabled: optional boolean or null`
 
     Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-  - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+  - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
     Permission policy for tool execution.
 
@@ -3997,11 +4183,11 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
   Default configuration for all tools in a toolset.
 
-  - `enabled: optional boolean`
+  - `enabled: optional boolean or null`
 
     Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-  - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+  - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
     Permission policy for tool execution.
 
@@ -4208,11 +4394,11 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `"web_search"`
 
-    - `enabled: optional boolean`
+    - `enabled: optional boolean or null`
 
       Whether this tool is enabled and available to Claude. Overrides the default_config setting.
 
-    - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+    - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
       Permission policy for tool execution.
 
@@ -4232,15 +4418,15 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
           - `"always_ask"`
 
-  - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams`
+  - `default_config: optional BetaManagedAgentsAgentToolsetDefaultConfigParams or null`
 
     Default configuration for all tools in a toolset.
 
-    - `enabled: optional boolean`
+    - `enabled: optional boolean or null`
 
       Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-    - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+    - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
       Permission policy for tool execution.
 
@@ -4333,7 +4519,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     - `"anthropic"`
 
-  - `version: optional string`
+  - `version: optional string or null`
 
     Version to pin. Defaults to latest if omitted.
 
@@ -4365,7 +4551,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     - `"custom"`
 
-  - `version: optional string`
+  - `version: optional string or null`
 
     Version to pin. Defaults to latest if omitted.
 
@@ -4385,9 +4571,9 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `"object"`
 
-    - `properties: optional map[unknown]`
+    - `properties: optional map[unknown] or null`
 
-    - `required: optional array of string`
+    - `required: optional array of string or null`
 
   - `name: string`
 
@@ -4405,9 +4591,9 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     - `"object"`
 
-  - `properties: optional map[unknown]`
+  - `properties: optional map[unknown] or null`
 
-  - `required: optional array of string`
+  - `required: optional array of string or null`
 
 ### Beta Managed Agents Custom Tool Params
 
@@ -4417,7 +4603,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
   - `description: string`
 
-    Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-4096 characters.
+    Description of what the tool does, shown to the agent to help it decide when to use the tool.
 
   - `input_schema: BetaManagedAgentsCustomToolInputSchema`
 
@@ -4427,9 +4613,9 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `"object"`
 
-    - `properties: optional map[unknown]`
+    - `properties: optional map[unknown] or null`
 
-    - `required: optional array of string`
+    - `required: optional array of string or null`
 
   - `name: string`
 
@@ -4543,11 +4729,11 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     Name of the MCP tool to configure. 1-128 characters.
 
-  - `enabled: optional boolean`
+  - `enabled: optional boolean or null`
 
     Whether this tool is enabled. Overrides the `default_config` setting.
 
-  - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+  - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
     Permission policy for tool execution.
 
@@ -4655,11 +4841,11 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
   Default configuration for all tools from an MCP server.
 
-  - `enabled: optional boolean`
+  - `enabled: optional boolean or null`
 
     Whether tools are enabled by default. Defaults to true if not specified.
 
-  - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+  - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
     Permission policy for tool execution.
 
@@ -4701,11 +4887,11 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       Name of the MCP tool to configure. 1-128 characters.
 
-    - `enabled: optional boolean`
+    - `enabled: optional boolean or null`
 
       Whether this tool is enabled. Overrides the `default_config` setting.
 
-    - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+    - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
       Permission policy for tool execution.
 
@@ -4725,15 +4911,15 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
           - `"always_ask"`
 
-  - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams`
+  - `default_config: optional BetaManagedAgentsMCPToolsetDefaultConfigParams or null`
 
     Default configuration for all tools from an MCP server.
 
-    - `enabled: optional boolean`
+    - `enabled: optional boolean or null`
 
       Whether tools are enabled by default. Defaults to true if not specified.
 
-    - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy`
+    - `permission_policy: optional BetaManagedAgentsAlwaysAllowPolicy or BetaManagedAgentsAlwaysAskPolicy or null`
 
       Permission policy for tool execution.
 
@@ -4815,7 +5001,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
 ### Beta Managed Agents Model Config
 
-- `BetaManagedAgentsModelConfig object { id, effort, speed }`
+- `BetaManagedAgentsModelConfig object { id, effort, inference_geo, speed }`
 
   Model identifier and configuration.
 
@@ -4929,6 +5115,10 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
         - `"max"`
 
+  - `inference_geo: optional string`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
   - `speed: optional "standard" or "fast"`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -4939,7 +5129,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
 ### Beta Managed Agents Model Config Params
 
-- `BetaManagedAgentsModelConfigParams object { id, effort, speed }`
+- `BetaManagedAgentsModelConfigParams object { id, effort, inference_geo, speed }`
 
   An object that defines additional configuration control over model use
 
@@ -5009,7 +5199,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
     - `string`
 
-  - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more`
+  - `effort: optional "low" or "medium" or "high" or 2 more or BetaManagedAgentsEffortLow or BetaManagedAgentsEffortMedium or 3 more or null`
 
     How hard Claude works on each inference call. Accepts a bare level string (`"high"`) or `{"type": "high"}`. On create, omitting it resolves the per-model default; on update, omitting it leaves the stored value unchanged.
 
@@ -5067,7 +5257,11 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
         - `"max"`
 
-  - `speed: optional "standard" or "fast"`
+  - `inference_geo: optional string or null`
+
+    Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo. On update, `model` is whole-object replacement — omitting inference_geo clears it.
+
+  - `speed: optional "standard" or "fast" or null`
 
     Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
@@ -5081,17 +5275,33 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
   Resolved coordinator topology with a concrete agent roster.
 
-  - `agents: array of BetaManagedAgentsAgentReference`
+  - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
     Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-    - `id: string`
+    - `BetaManagedAgentsAgentReference object { id, type, version }`
 
-    - `type: "agent"`
+      A resolved agent reference with a concrete version.
 
-      - `"agent"`
+      - `id: string`
 
-    - `version: number`
+      - `type: "agent"`
+
+        - `"agent"`
+
+      - `version: number`
+
+    - `BetaManagedAgentsAdvisor object { model, type }`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+      - `model: string`
+
+        The advisor model id.
+
+      - `type: "advisor"`
+
+        - `"advisor"`
 
   - `type: "coordinator"`
 
@@ -5133,6 +5343,18 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
         - `"self"`
 
+    - `BetaManagedAgentsAdvisorParams object { model, type }`
+
+      Platform advisor roster entry: a model the session's primary thread may consult mid-turn. At most one per roster; the entry occupies the roster name `anthropic.advisor`.
+
+      - `model: string`
+
+        A Claude model id. The model must be permitted as an advisor for this agent's model — see the sessions/threads/advisor spec.
+
+      - `type: "advisor"`
+
+        - `"advisor"`
+
   - `type: "coordinator"`
 
     - `"coordinator"`
@@ -5155,7 +5377,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
   - `id: string`
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -5281,6 +5503,10 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -5317,7 +5543,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -5447,9 +5673,9 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -5481,7 +5707,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `"anthropic"`
 
-    - `version: optional string`
+    - `version: optional string or null`
 
       Version to pin. Defaults to latest if omitted.
 
@@ -5497,7 +5723,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 
       - `"custom"`
 
-    - `version: optional string`
+    - `version: optional string or null`
 
       Version to pin. Defaults to latest if omitted.
 
@@ -5549,7 +5775,7 @@ List Agent Versions
 
   - `string`
 
-  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 29 more`
+  - `"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 30 more`
 
     - `"message-batches-2024-09-24"`
 
@@ -5615,6 +5841,8 @@ List Agent Versions
 
     - `"agent-memory-2026-07-22"`
 
+    - `"mid-conversation-tool-changes-2026-07-01"`
+
 ### Returns
 
 - `data: array of BetaManagedAgentsAgent`
@@ -5623,7 +5851,7 @@ List Agent Versions
 
   - `id: string`
 
-  - `archived_at: string`
+  - `archived_at: string or null`
 
     A timestamp in RFC 3339 format
 
@@ -5631,7 +5859,7 @@ List Agent Versions
 
     A timestamp in RFC 3339 format
 
-  - `description: string`
+  - `description: string or null`
 
   - `mcp_servers: array of BetaManagedAgentsMCPServerURLDefinition`
 
@@ -5759,6 +5987,10 @@ List Agent Versions
 
           - `"max"`
 
+    - `inference_geo: optional string`
+
+      Geographic region for model inference. When unset, requests fall through to the workspace's default_inference_geo.
+
     - `speed: optional "standard" or "fast"`
 
       Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
@@ -5767,21 +5999,37 @@ List Agent Versions
 
       - `"fast"`
 
-  - `multiagent: BetaManagedAgentsMultiagent`
+  - `multiagent: BetaManagedAgentsMultiagent or null`
 
     Resolved coordinator topology with a concrete agent roster.
 
-    - `agents: array of BetaManagedAgentsAgentReference`
+    - `agents: array of BetaManagedAgentsAgentReference or BetaManagedAgentsAdvisor`
 
       Agents the coordinator may spawn as session threads, each resolved to a specific version.
 
-      - `id: string`
+      - `BetaManagedAgentsAgentReference object { id, type, version }`
 
-      - `type: "agent"`
+        A resolved agent reference with a concrete version.
 
-        - `"agent"`
+        - `id: string`
 
-      - `version: number`
+        - `type: "agent"`
+
+          - `"agent"`
+
+        - `version: number`
+
+      - `BetaManagedAgentsAdvisor object { model, type }`
+
+        Platform advisor roster entry: a model the session's primary thread may consult mid-turn.
+
+        - `model: string`
+
+          The advisor model id.
+
+        - `type: "advisor"`
+
+          - `"advisor"`
 
     - `type: "coordinator"`
 
@@ -5815,7 +6063,7 @@ List Agent Versions
 
       - `version: string`
 
-  - `system: string`
+  - `system: string or null`
 
   - `tools: array of BetaManagedAgentsAgentToolset20260401 or BetaManagedAgentsMCPToolset or BetaManagedAgentsCustomTool`
 
@@ -5945,9 +6193,9 @@ List Agent Versions
 
           - `"object"`
 
-        - `properties: optional map[unknown]`
+        - `properties: optional map[unknown] or null`
 
-        - `required: optional array of string`
+        - `required: optional array of string or null`
 
       - `name: string`
 
@@ -5967,7 +6215,7 @@ List Agent Versions
 
     The agent's current version. Starts at 1 and increments when the agent is modified.
 
-- `next_page: optional string`
+- `next_page: optional string or null`
 
   Opaque cursor for the next page. Null when no more results.
 
@@ -6005,6 +6253,7 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/versions \
         "effort": {
           "type": "low"
         },
+        "inference_geo": "inference_geo",
         "speed": "standard"
       },
       "multiagent": {

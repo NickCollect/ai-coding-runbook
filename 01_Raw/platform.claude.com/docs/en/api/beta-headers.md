@@ -1,19 +1,19 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/beta-headers
-fetched_at: 2026-07-27T04:31:51.389716+00:00
+fetched_at: 2026-08-17T02:15:18.633484+00:00
 fetch_method: mintlify_md
 ---
 
-# Beta headers
-
-Access experimental features before general availability with the `anthropic-beta` header or the SDKs' `betas` parameter.
-
+---
+title: Beta headers
+url: https://platform.claude.com/docs/en/api/beta-headers
+description: Access experimental features before general availability with the `anthropic-beta` header or the SDKs' `betas` parameter.
 ---
 
 Beta headers allow you to access experimental features and new model capabilities before they become part of the standard API.
 
 <Info>
-  Each [client SDK](/docs/en/cli-sdks-libraries/overview) exposes a `beta` namespace for calling the API with beta features enabled.
+  Each [client SDK](https://platform.claude.com/docs/en/cli-sdks-libraries/overview) exposes a `beta` namespace for calling the API with beta features enabled.
 </Info>
 
 ## How to use beta headers
@@ -28,7 +28,7 @@ anthropic-beta: BETA_FEATURE_NAME
 content-type: application/json
 ```
 
-Each feature's documentation states the exact beta name to send. The [API overview](/docs/en/api/overview) lists the APIs currently in beta.
+Each feature's documentation states the exact beta name to send. The [API overview](https://platform.claude.com/docs/en/api/overview) lists the APIs currently in beta.
 
 The following examples show the same request with cURL, the `ant` CLI, and the SDKs. The SDKs take beta names in the `betas` parameter and send the `anthropic-beta` header for you:
 
@@ -186,7 +186,7 @@ Some beta APIs are scoped to specific endpoints and require a feature-specific b
 | `/v1/tunnels`                                    | `mcp-tunnels-2026-06-22`    |
 | `/v1/memory_stores` and sub-resources            | `agent-memory-2026-07-22`   |
 
-The SDKs' `beta` namespaces add these headers automatically. Add them yourself only when making raw HTTP requests. See the [Managed Agents overview](/docs/en/managed-agents/overview), [Using agent memory](/docs/en/managed-agents/memory), and the [MCP tunnels reference](/docs/en/agents-and-tools/mcp-tunnels/reference#tunnels-api) for details.
+The SDKs' `beta` namespaces add these headers automatically. Add them yourself only when making raw HTTP requests. See the [Managed Agents overview](https://platform.claude.com/docs/en/managed-agents/overview), [Using agent memory](https://platform.claude.com/docs/en/managed-agents/memory), and the [MCP tunnels reference](https://platform.claude.com/docs/en/agents-and-tools/mcp-tunnels/reference#tunnels-api) for details.
 
 Endpoint-specific headers that apply to the same endpoint aren't always combinable. On memory store endpoints, `agent-memory-2026-07-22` replaces `managed-agents-2026-04-01`: sending both on the same request returns a `400` error. The client SDKs send the correct header for each endpoint automatically.
 
@@ -211,16 +211,16 @@ If you use an invalid beta name, or a beta your organization doesn't have access
 
 ## Getting help
 
-For updates to beta features, see the [release notes](/docs/en/release-notes/overview). For help with production issues, contact [support](https://support.claude.com/).
+For updates to beta features, see the [release notes](https://platform.claude.com/docs/en/release-notes/overview). For help with production issues, contact [support](https://support.claude.com/).
 
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Errors" icon="info" href="/docs/en/api/errors">
+  <Card title="Errors" icon="info" href="https://platform.claude.com/docs/en/api/errors">
     Understand the HTTP status codes, error response shape, and request IDs the Claude API returns, and handle errors with the SDKs' typed exceptions.
   </Card>
 
-  <Card title="API overview" icon="compass" href="/docs/en/api/overview">
+  <Card title="API overview" icon="compass" href="https://platform.claude.com/docs/en/api/overview">
     Explore the Claude API's features, including the APIs currently in beta.
   </Card>
 </CardGroup>

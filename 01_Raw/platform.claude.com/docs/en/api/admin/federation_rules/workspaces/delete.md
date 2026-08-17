@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/federation_rules/workspaces/delete
-fetched_at: 2026-06-22T06:23:32.671917+00:00
+fetched_at: 2026-08-17T02:15:23.925839+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Remove Federation Rule Workspace
+url: https://platform.claude.com/docs/en/api/admin/federation_rules/workspaces/delete
 ---
 
 ## Remove Federation Rule Workspace

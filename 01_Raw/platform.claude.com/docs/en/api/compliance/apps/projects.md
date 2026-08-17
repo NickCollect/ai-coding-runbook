@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/compliance/apps/projects
-fetched_at: 2026-06-29T05:25:21.431338+00:00
+fetched_at: 2026-08-17T02:15:24.829318+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Projects
+url: https://platform.claude.com/docs/en/api/compliance/apps/projects
 ---
 
 # Projects
@@ -85,7 +90,7 @@ are sorted chronologically (time ascending) by created_at.
 
     Project creation timestamp
 
-  - `deleted_at: string`
+  - `deleted_at: string or null`
 
     Timestamp when the project was deleted by an end user, or null otherwise
 
@@ -109,13 +114,13 @@ are sorted chronologically (time ascending) by created_at.
 
     Project last update timestamp
 
-  - `user: object { id, email_address }`
+  - `user: object { id, email_address }  or null`
 
     The user who created a project or project document.
 
     Fields that reference this type are null when the creator's account has
-    been deleted or the creator is no longer a member of any organization
-    under the parent organization.
+    been deleted or the creator is no longer a member of an organization the
+    key may read.
 
     - `id: string`
 
@@ -129,7 +134,7 @@ are sorted chronologically (time ascending) by created_at.
 
   Whether more records exist beyond the current result set
 
-- `next_page: string`
+- `next_page: string or null`
 
   Token to retrieve the next page. Use this as the 'page' parameter in your next request
 
@@ -198,7 +203,7 @@ Get detailed information for a specific project.
 
   Project creation timestamp
 
-- `deleted_at: string`
+- `deleted_at: string or null`
 
   Timestamp when the project was deleted by an end user, or null otherwise
 
@@ -230,13 +235,13 @@ Get detailed information for a specific project.
 
   Project last update timestamp
 
-- `user: object { id, email_address }`
+- `user: object { id, email_address }  or null`
 
   The user who created a project or project document.
 
   Fields that reference this type are null when the creator's account has
-  been deleted or the creator is no longer a member of any organization
-  under the parent organization.
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
   - `id: string`
 
@@ -346,7 +351,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
     Project creation timestamp
 
-  - `deleted_at: string`
+  - `deleted_at: string or null`
 
     Timestamp when the project was deleted by an end user, or null otherwise
 
@@ -370,13 +375,13 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
     Project last update timestamp
 
-  - `user: object { id, email_address }`
+  - `user: object { id, email_address }  or null`
 
     The user who created a project or project document.
 
     Fields that reference this type are null when the creator's account has
-    been deleted or the creator is no longer a member of any organization
-    under the parent organization.
+    been deleted or the creator is no longer a member of an organization the
+    key may read.
 
     - `id: string`
 
@@ -408,7 +413,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
     Project creation timestamp
 
-  - `deleted_at: string`
+  - `deleted_at: string or null`
 
     Timestamp when the project was deleted by an end user, or null otherwise
 
@@ -440,13 +445,13 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID \
 
     Project last update timestamp
 
-  - `user: object { id, email_address }`
+  - `user: object { id, email_address }  or null`
 
     The user who created a project or project document.
 
     Fields that reference this type are null when the creator's account has
-    been deleted or the creator is no longer a member of any organization
-    under the parent organization.
+    been deleted or the creator is no longer a member of an organization the
+    key may read.
 
     - `id: string`
 
@@ -531,7 +536,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       Display name of the file (e.g., 'document.pdf')
 
-    - `md5: string`
+    - `md5: string or null`
 
       Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
@@ -539,7 +544,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
 
-    - `size_bytes: number`
+    - `size_bytes: number or null`
 
       Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
@@ -577,7 +582,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
       - `"project_doc"`
 
-    - `updated_at: string`
+    - `updated_at: string or null`
 
       Last-modified timestamp of the document. Reserved for future use — currently always null.
 
@@ -585,7 +590,7 @@ GET /v1/compliance/apps/projects/documents/{claude_proj_doc_id} endpoint.
 
   Whether more records exist beyond the current result set
 
-- `next_page: string`
+- `next_page: string or null`
 
   To get the next page, use the 'next_page' from the current response as the 'page' in your next request
 
@@ -640,7 +645,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
       Display name of the file (e.g., 'document.pdf')
 
-    - `md5: string`
+    - `md5: string or null`
 
       Lowercase hex MD5 of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
@@ -648,7 +653,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
       MIME type of the file's preferred downloadable variant when one is recorded, else 'application/octet-stream'. Use the per-file `/metadata` endpoint for the authoritative value.
 
-    - `size_bytes: number`
+    - `size_bytes: number or null`
 
       Size in bytes of the file's preferred downloadable variant, when recorded. Null otherwise. Use the per-file `/metadata` endpoint for the authoritative value.
 
@@ -686,7 +691,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachmen
 
       - `"project_doc"`
 
-    - `updated_at: string`
+    - `updated_at: string or null`
 
       Last-modified timestamp of the document. Reserved for future use — currently always null.
 
@@ -755,7 +760,7 @@ role.
 
       - `"user"`
 
-    - `user_id: string`
+    - `user_id: string or null`
 
       Identifier of the user granted access (tagged ID), or null if their account has since been deleted
 
@@ -853,7 +858,7 @@ role.
 
   Whether more records exist beyond the current result set
 
-- `next_page: string`
+- `next_page: string or null`
 
   To get the next page, use the 'next_page' from the current response as the 'page' in your next request
 
@@ -915,7 +920,7 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/collabora
 
       - `"user"`
 
-    - `user_id: string`
+    - `user_id: string or null`
 
       Identifier of the user granted access (tagged ID), or null if their account has since been deleted
 
@@ -1045,13 +1050,13 @@ Get detailed information for a specific project document.
 
   Document filename
 
-- `user: object { id, email_address }`
+- `user: object { id, email_address }  or null`
 
   The user who created a project or project document.
 
   Fields that reference this type are null when the creator's account has
-  been deleted or the creator is no longer a member of any organization
-  under the parent organization.
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
   - `id: string`
 
@@ -1136,13 +1141,13 @@ consumer can dedupe or match hashes without downloading every document.
 
   Size in bytes of the document content (UTF-8 encoded)
 
-- `user: object { id, email_address }`
+- `user: object { id, email_address }  or null`
 
   The user who created a project or project document.
 
   Fields that reference this type are null when the creator's account has
-  been deleted or the creator is no longer a member of any organization
-  under the parent organization.
+  been deleted or the creator is no longer a member of an organization the
+  key may read.
 
   - `id: string`
 
@@ -1248,13 +1253,13 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
     Document filename
 
-  - `user: object { id, email_address }`
+  - `user: object { id, email_address }  or null`
 
     The user who created a project or project document.
 
     Fields that reference this type are null when the creator's account has
-    been deleted or the creator is no longer a member of any organization
-    under the parent organization.
+    been deleted or the creator is no longer a member of an organization the
+    key may read.
 
     - `id: string`
 
@@ -1303,13 +1308,13 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 
     Size in bytes of the document content (UTF-8 encoded)
 
-  - `user: object { id, email_address }`
+  - `user: object { id, email_address }  or null`
 
     The user who created a project or project document.
 
     Fields that reference this type are null when the creator's account has
-    been deleted or the creator is no longer a member of any organization
-    under the parent organization.
+    been deleted or the creator is no longer a member of an organization the
+    key may read.
 
     - `id: string`
 

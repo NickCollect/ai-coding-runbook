@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/analytics/retrieve_summaries
-fetched_at: 2026-08-10T03:07:51.827684+00:00
+fetched_at: 2026-08-17T02:15:22.957137+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Get Activity Summaries
+url: https://platform.claude.com/docs/en/api/admin/analytics/retrieve_summaries
 ---
 
 ## Get Activity Summaries
@@ -40,7 +45,7 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
   - `summaries: array of object { assigned_seat_count, cowork_daily_active_user_count, cowork_monthly_active_user_count, 26 more }`
 
-    - `assigned_seat_count: number`
+    - `assigned_seat_count: number or null`
 
       Number of seats currently assigned to members. Null when the response is scoped to an RBAC group — seat assignment is org-wide and has no per-group analogue.
 
@@ -60,9 +65,9 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
       Number of users with token consumption on the requested day
 
-    - `daily_adoption_rate: number`
+    - `daily_adoption_rate: number or null`
 
-      Percentage of assigned seats with activity on the requested day (DAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
+      Percentage of assigned seats with activity on the requested day (`DAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC group.
 
     - `ending_at: string`
 
@@ -72,11 +77,11 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
       Number of users with token consumption in the 30-day rolling window
 
-    - `monthly_adoption_rate: number`
+    - `monthly_adoption_rate: number or null`
 
-      Percentage of assigned seats with activity in the 30-day rolling window (MAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
+      Percentage of assigned seats with activity in the 30-day rolling window (`MAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC group.
 
-    - `pending_invite_count: number`
+    - `pending_invite_count: number or null`
 
       Number of pending invitations to join the organization. Null when the response is scoped to an RBAC group.
 
@@ -88,71 +93,71 @@ Enterprise plan. Requires an API key with the `read:analytics` scope.
 
       Number of users with token consumption in the 7-day rolling window
 
-    - `weekly_adoption_rate: number`
+    - `weekly_adoption_rate: number or null`
 
-      Percentage of assigned seats with activity in the 7-day rolling window (WAU / assigned_seat_count * 100). Null when the response is scoped to an RBAC group.
+      Percentage of assigned seats with activity in the 7-day rolling window (`WAU / assigned_seat_count * 100`). Null when the response is scoped to an RBAC group.
 
-    - `chat_daily_active_user_count: optional number`
+    - `chat_daily_active_user_count: optional number or null`
 
       Number of users with claude.ai (chat) activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `chat_monthly_active_user_count: optional number`
+    - `chat_monthly_active_user_count: optional number or null`
 
       Number of users with claude.ai (chat) activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `chat_weekly_active_user_count: optional number`
+    - `chat_weekly_active_user_count: optional number or null`
 
       Number of users with claude.ai (chat) activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `claude_code_daily_active_user_count: optional number`
+    - `claude_code_daily_active_user_count: optional number or null`
 
       Number of users with Claude Code activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `claude_code_monthly_active_user_count: optional number`
+    - `claude_code_monthly_active_user_count: optional number or null`
 
       Number of users with Claude Code activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `claude_code_weekly_active_user_count: optional number`
+    - `claude_code_weekly_active_user_count: optional number or null`
 
       Number of users with Claude Code activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `claude_design_daily_active_user_count: optional number`
+    - `claude_design_daily_active_user_count: optional number or null`
 
       Number of users with Claude Design activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `claude_design_monthly_active_user_count: optional number`
+    - `claude_design_monthly_active_user_count: optional number or null`
 
       Number of users with Claude Design activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `claude_design_weekly_active_user_count: optional number`
+    - `claude_design_weekly_active_user_count: optional number or null`
 
       Number of users with Claude Design activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `office_agent_daily_active_user_count: optional number`
+    - `office_agent_daily_active_user_count: optional number or null`
 
       Number of users with Claude in Office activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `office_agent_monthly_active_user_count: optional number`
+    - `office_agent_monthly_active_user_count: optional number or null`
 
       Number of users with Claude in Office activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `office_agent_weekly_active_user_count: optional number`
+    - `office_agent_weekly_active_user_count: optional number or null`
 
       Number of users with Claude in Office activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `science_daily_active_user_count: optional number`
+    - `science_daily_active_user_count: optional number or null`
 
       Number of users with Claude Science activity on the requested day. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `science_entitled_user_count: optional number`
+    - `science_entitled_user_count: optional number or null`
 
       Number of users with a Claude Science seat entitlement (per-seat RBAC) at the time of the daily snapshot. The funnel top; independent of the org-level Claude Science toggle. Null when the response is scoped to an RBAC group — entitlement is org-wide and has no per-group analogue. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `science_monthly_active_user_count: optional number`
+    - `science_monthly_active_user_count: optional number or null`
 
       Number of users with Claude Science activity in the 30-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 
-    - `science_weekly_active_user_count: optional number`
+    - `science_weekly_active_user_count: optional number or null`
 
       Number of users with Claude Science activity in the 7-day rolling window. Omitted from the response while the per-product breakdown is not enabled for this organization.
 

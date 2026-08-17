@@ -1,7 +1,12 @@
 ---
 source_url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/tunnel_certificates/archive
-fetched_at: 2026-07-06T05:04:36.356263+00:00
+fetched_at: 2026-08-17T02:15:24.142004+00:00
 fetch_method: mintlify_md
+---
+
+---
+title: Archive Tunnel Certificate
+url: https://platform.claude.com/docs/en/api/admin/mcp_tunnels/tunnel_certificates/archive
 ---
 
 ## Archive Tunnel Certificate
@@ -40,7 +45,7 @@ certificate is added.
 
   ID of the Tunnel Certificate.
 
-- `archived_at: string`
+- `archived_at: string or null`
 
   RFC 3339 datetime string indicating when the certificate was archived, or
   `null` if it is not archived.
@@ -49,7 +54,7 @@ certificate is added.
 
   RFC 3339 datetime string indicating when the certificate was registered.
 
-- `expires_at: string`
+- `expires_at: string or null`
 
   RFC 3339 datetime string indicating when the certificate expires, or
   `null` if it does not expire.
