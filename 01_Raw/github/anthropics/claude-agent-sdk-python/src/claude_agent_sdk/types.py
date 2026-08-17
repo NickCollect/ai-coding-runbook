@@ -1015,6 +1015,81 @@ AssistantMessageError = Literal[
 ]
 
 
+MessageOriginKind = Literal[
+    "human",
+    "channel",
+    "peer",
+    "task-notification",
+    "coordinator",
+    "unclassified",
+    "observer",
+    "auto-continuation",
+    "observer-activity",
+]
+"""Known values of ``MessageOrigin["kind"]``. Newer CLI versions may emit
+kinds not listed here; treat anything unrecognized as "not human"."""
+
+TaskNotificationOriginSubkind = Literal["scheduled-trigger", "peer-send-message"]
+"""Values of ``MessageOrigin["subkind"]`` for ``kind == "task-notification"``."""
+
+# Functional syntax because ``from`` is a keyword.
+MessageOrigin = TypedDict(
+    "MessageOrigin",
+    {
+        # Discriminator. See MessageOriginKind.
+        "kind": Required[MessageOriginKind],
+        # kind == "channel": name of the MCP server the message arrived on.
+        "server": str,
+        # kind == "peer" / "observer": sender address. Sender-asserted — use it
+        # for reply routing / display, never as proof of identity.
+        "from": str,
+        # kind == "peer": sender display name, already normalized by the CLI
+        # (control characters stripped, trimmed, length-capped).
+        "name": str,
+        # kind == "peer": the sender's host-openable session id, if its host
+        # provided one. A navigation target only.
+        "fromSession": str,
+        # kind == "peer" / "observer": task id of the in-process background
+        # subagent that sent this message. Absent for cross-session peers.
+        "senderTaskId": str,
+        # kind == "peer": decoded message body with the peer envelope stripped
+        # (byte-exact with what the model saw). Render this instead of
+        # re-parsing the message text.
+        "body": str,
+        # kind == "peer": kernel-verified pid of the process that connected to
+        # this session's local messaging socket (the *connecting* process —
+        # for relayed traffic that is the relay). Absent when unverifiable.
+        "verifiedPeerPid": int,
+        # kind == "task-notification": present when the delivery is the fired
+        # prompt of a scheduled task ("scheduled-trigger") or a message sent
+        # from another of the user's sessions ("peer-send-message"). Absent for
+        # ordinary background-task notifications.
+        "subkind": TaskNotificationOriginSubkind,
+    },
+    total=False,
+)
+"""Provenance of a user-role message, and — on a :class:`ResultMessage` — of
+the message that triggered that turn.
+
+In streaming-input mode a single connection interleaves the turns you send
+with turns the session injects on its own (background-task notifications,
+scheduled-task prompts, MCP channel messages, messages relayed from peer
+sessions, ...). ``origin`` tells them apart, e.g. to decide whether a
+:class:`ResultMessage` answers *your* prompt::
+
+    if result.origin is None or result.origin["kind"] == "human":
+        ...  # a turn this application submitted
+
+Only ``kind`` is always present; the remaining keys depend on ``kind`` as
+noted on each field. ``None``/absent means the CLI did not attribute the
+message: prompts you send through :func:`query` or
+:meth:`ClaudeSDKClient.query` arrive that way unless you stamp
+``"origin": {"kind": "human"}`` on the message dict yourself (only the
+``human`` kind is honored from an SDK host). The dict is passed through from
+the CLI as-is and may carry additional undocumented keys.
+"""
+
+
 @dataclass
 class UserMessage:
     """User message."""
@@ -1023,6 +1098,11 @@ class UserMessage:
     uuid: str | None = None
     parent_tool_use_id: str | None = None
     tool_use_result: dict[str, Any] | None = None
+    origin: MessageOrigin | None = None
+    """Provenance of this message — see :class:`MessageOrigin`. ``None`` when
+    the CLI did not attribute it. Populated on injected turns (task
+    notifications, channel/peer messages, ...) and on user messages the CLI
+    replays; tool-result messages never carry it."""
 
 
 @dataclass
@@ -1258,6 +1338,12 @@ class ResultMessage:
     versions, or a result that bypassed the query loop such as a local
     slash command). Mirrors the TypeScript SDK's
     ``SDKResultMessage.terminal_reason``."""
+    origin: MessageOrigin | None = None
+    """Origin of the user message that triggered this turn — see
+    :class:`MessageOrigin`. Lets a streaming-input consumer distinguish the
+    result of its own prompt (``None``, or ``{"kind": "human"}`` if it stamped
+    that) from results of injected turns such as background-task
+    notifications (``{"kind": "task-notification"}``)."""
 
 
 @dataclass
@@ -1318,6 +1404,33 @@ class RateLimitEvent:
 
 
 @dataclass
+class ConversationResetMessage:
+    """Emitted when the session's conversation is replaced without ending the
+    connection — e.g. after ``/clear`` or any other flow that discards the
+    transcript mid-session.
+
+    In streaming input mode a single connection can carry many user turns, and
+    a reset clears the conversation history *and* zeroes the running totals
+    reported on subsequent :class:`ResultMessage` objects (e.g.
+    ``total_cost_usd``). If you accumulate those totals across a long-lived
+    session, snapshot them when this message arrives.
+
+    Attributes:
+        new_conversation_id: Opaque identifier for the fresh conversation, for
+            UIs to key an empty transcript on (and discard any cached session
+            title). This is *not* the ``session_id`` of subsequent messages —
+            read that from the next message.
+        uuid: Unique ID of this message.
+        session_id: ID of the session that was reset (the outgoing session;
+            messages after the reset carry a new ``session_id``).
+    """
+
+    new_conversation_id: str
+    uuid: str
+    session_id: str
+
+
+@dataclass
 class HookEventMessage(SystemMessage):
     """Hook event emitted by the CLI when ``include_hook_events`` is enabled.
 
@@ -1358,6 +1471,7 @@ Message = (
     | ResultMessage
     | StreamEvent
     | RateLimitEvent
+    | ConversationResetMessage
 )
 
 
@@ -1980,6 +2094,44 @@ class ClaudeAgentOptions:
     fork_session: bool = False
     """When true, resumed sessions fork to a new session ID rather than
     continuing the previous session. Use with ``resume``."""
+
+    resume_session_at: str | None = None
+    """When resuming, only load the conversation up to and including the
+    message with this UUID. Use with ``resume`` (and usually ``fork_session``)
+    to branch from an earlier point in the conversation.
+
+    Accepts any transcript-entry UUID — typically an ``AssistantMessage.uuid``
+    observed live, or a ``SessionMessage.uuid`` from
+    :func:`get_session_messages`. See ``resume_drops_turn`` for guidance on
+    choosing the fork point. For an offline copy truncated at a message
+    (without resuming), see :func:`fork_session`.
+    """
+
+    resume_drops_turn: str | None = None
+    """With ``resume_session_at``: the UUID of the user prompt whose turn this
+    truncating resume intends to discard.
+
+    When set, the CLI validates at load time that every transcript entry after
+    the ``resume_session_at`` point is attributable to that turn, and refuses
+    the resume otherwise — e.g. when the discarded range contains a queued
+    user message or task notification the session absorbed mid-turn that the
+    caller had not yet observed. A refusal surfaces as an exception raised
+    from :func:`query` / :class:`ClaudeSDKClient` (currently a
+    ``ProcessError``) whose message contains
+    ``Resume rejected by --resume-drops-turn:`` — match on that text. Treat it
+    as deterministic: clear the pending fork target and resume plainly rather
+    than retrying the same request. Leave unset to keep the unvalidated
+    truncation behavior.
+
+    Rule of thumb: set ``resume_session_at`` to the *last* transcript entry of
+    the turn you are keeping (whatever its type), and ``resume_drops_turn`` to
+    the prompt UUID of the turn immediately after it (e.g. the next
+    ``SessionMessage`` of ``type == "user"`` from :func:`get_session_messages`,
+    or the ``uuid`` you supplied on a streamed user message). Note that with
+    structured output (``output_format``) or end-turn MCP tools, a kept turn
+    ends on entries *after* its last assistant message, so forking at the
+    assistant UUID is refused by design.
+    """
 
     agents: dict[str, AgentDefinition] | None = None
     """Programmatically define custom subagents invokable via the Agent tool.
