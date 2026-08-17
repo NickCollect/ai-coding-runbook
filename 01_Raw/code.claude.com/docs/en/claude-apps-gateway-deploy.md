@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/claude-apps-gateway-deploy
-fetched_at: 2026-08-10T03:07:48.463558+00:00
+fetched_at: 2026-08-17T02:15:22.139076+00:00
 fetch_method: mintlify_md
 ---
 
@@ -45,8 +45,6 @@ A few providers handle email and group claims differently:
 * **Microsoft Entra ID**: `issuer` = `https://login.microsoftonline.com/<tenant-id>/v2.0`. Entra emits group Object IDs rather than names, so use the GUIDs in `managed.policies.match.groups`, or use App Roles for human-readable names. If your tenant emits roles under `roles` instead of `groups`, set `oidc.groups_claim: roles`.
 * **Google Workspace**: `issuer` = `https://accounts.google.com`. Google's id\_token doesn't carry groups. To use group-based `allowed_groups` or `managed.policies` with Google as the IdP, configure [`oidc.google_groups`](/docs/en/claude-apps-gateway-config#oidc), which looks up each user's groups through the Admin SDK Directory API using a service account with domain-wide delegation. Without it, use `oidc.allowed_email_domains` for membership gating and `managed.policies.match.email_domain` for policy assignment. Google also ignores the standard `offline_access` scope. For refresh tokens, set `oidc.scopes: [openid, profile, email]` and `oidc.extra_auth_params: { access_type: offline, prompt: consent }`.
 
-For support with an identity provider not covered above, see [Troubleshooting](#troubleshooting).
-
 <Warning>
   Refresh tokens let the gateway renew a developer's session silently, without sending the developer back to the browser. They also drive deprovisioning, because when the IdP disables a user, the next refresh fails and the session ends within `ttl_hours`. The gateway requests `offline_access` by default to get a refresh token. If your IdP requires explicit consent for offline access, configure the OAuth client to allow it.
 
@@ -55,18 +53,23 @@ For support with an identity provider not covered above, see [Troubleshooting](#
 
 ## Deployment
 
-The gateway is a single Linux binary. It scales horizontally because replicas are stateless and Postgres is the shared coordination layer. Run it however you run stateless services in your environment. The rest of this section states what the image needs, with short notes for Kubernetes and Cloud Run.
-
-The gateway is designed to run inside your network, because it holds your upstream credential and acts as the single egress point for inference. It can run anywhere your developers and your IdP can reach over HTTPS; treat it like any other service holding a production credential.
+The gateway is a single stateless Linux binary that coordinates through Postgres, so deploy it the way you deploy any other stateless service in your environment. Keep it inside your network, where your developers and IdP can reach it over HTTPS, and treat it like any service holding a production credential.
 
 A few decisions shape the deployment beyond where it runs:
 
-* **Cost**: there is no separate license or per-seat fee for the gateway; it's part of the `claude` binary. You pay for inference through your existing cloud or Anthropic commitment, plus the compute for the container and your telemetry collector.
-* **Bypass**: the gateway doesn't enforce that the only route to a model goes through it. A developer with their own credential can still call the provider directly, so closing that path is a network policy decision, for example blocking egress to `api.anthropic.com` except from the gateway. Blocking that egress also breaks the [WebFetch domain safety check](/docs/en/data-usage#webfetch-domain-safety-check), which calls `api.anthropic.com` from each developer's machine; set `skipWebFetchPreflight: true` in the managed policy to disable it.
-* **Multiple gateways**: each gateway is a separate deployment with its own config. The CLI stores its trust fingerprint and credentials per gateway hostname, so different teams can connect to different gateways without conflict. To serve multiple OIDC issuers, run separate instances.
-* **Serverless**: Cloud Run works; set `min-instances: 1` to avoid cold OIDC discovery. Lambda and Cloud Functions don't, because the gateway is a long-running HTTP server.
+* **Cost**: no separate license or per-seat fee. The gateway is part of the `claude` binary, so you pay for inference through your existing commitment, plus the compute it runs on.
+* **Bypass**: the gateway doesn't enforce that the only route to a model goes through it. A developer with their own credential can still call the provider directly, so closing that path is a network policy decision, for example blocking egress to `api.anthropic.com` except from the gateway. Blocking that egress also breaks the [WebFetch domain safety check](/docs/en/data-usage#webfetch-domain-safety-check), which calls `api.anthropic.com` from each developer's machine. Set `skipWebFetchPreflight: true` in the managed policy to disable it.
+* **Multiple gateways**: each is a separate deployment with its own config, and the CLI stores trust and credentials per gateway hostname, so teams can use different gateways without conflict. To serve multiple OIDC issuers, run separate instances.
+* **Serverless**: Cloud Run works if you set `min-instances: 1` to avoid cold OIDC discovery. Lambda and Cloud Functions don't work, because the gateway is a long-running HTTP server.
 
-Every production topology here puts an L7 proxy, such as an Ingress, Cloud Run's front end, or an ALB, in front of plain-HTTP replicas. Set [`listen.trusted_proxies`](/docs/en/claude-apps-gateway-config#listen) to the proxy's source ranges so the gateway reads client IPs from `X-Forwarded-For`. The gateway honors the header only when the TCP peer is trusted; the [Google Cloud](/docs/en/claude-apps-gateway-on-gcp) and [AWS](/docs/en/claude-apps-gateway-on-aws) worked examples have concrete values per topology. Without trusted proxies, every request appears to come from the proxy's IP, which collapses per-IP rate limits into one shared bucket and records the proxy's IP in audit events.
+Every production topology here puts an L7 proxy, such as an Ingress, Cloud Run's front end, or an ALB, in front of plain-HTTP replicas. Set [`listen.trusted_proxies`](/docs/en/claude-apps-gateway-config#listen) to the proxy's source ranges so the gateway reads client IPs from `X-Forwarded-For`. The gateway honors the header only when the TCP peer is trusted. The [Google Cloud](/docs/en/claude-apps-gateway-on-gcp) and [AWS](/docs/en/claude-apps-gateway-on-aws) worked examples have concrete values per topology. Without trusted proxies, every request appears to come from the proxy's IP, which collapses per-IP rate limits into one shared bucket and records the proxy's IP in audit events.
+
+Give the proxy any idle timeout longer than the gateway's keepalive interval, which depends on the upstream:
+
+* On every upstream except `provider: anthropic`, the gateway writes an SSE `ping` once a stream has been silent for about 15 seconds.
+* On `provider: anthropic`, the gateway passes the response through unchanged, including the Anthropic API's own pings.
+
+A default such as the ALB's 60 seconds is enough to keep a quiet stream open. The [AWS worked example](/docs/en/claude-apps-gateway-on-aws#troubleshooting) raises it to an hour anyway, and its troubleshooting row covers gateways older than v2.1.229, which sent nothing during quiet periods on the upstreams that now get pings.
 
 ### Container image
 
@@ -94,11 +97,7 @@ Run the gateway as a Deployment, like any stateless service:
 
 For a complete worked example on AWS, covering ECS Fargate or EKS, Amazon RDS, and AWS Secrets Manager, see [Deploy on AWS](/docs/en/claude-apps-gateway-on-aws).
 
-<Note>
-  **Workload identity**
-
-  Prefer the platform's workload identity over static keys: IRSA on EKS for Amazon Bedrock and for Claude Platform on AWS, Workload Identity on GKE for Google Cloud's Agent Platform, and workload identity on AKS for Microsoft Foundry. Set `auth: {}` in the upstream block, or `use_azure_ad: true` for Microsoft Foundry, and the gateway picks up the pod's identity through that provider's default credential chain. For a cross-cloud pairing, such as an Amazon Bedrock upstream on GKE, set explicit credentials in the upstream's `auth` block instead. The [`upstreams` reference](/docs/en/claude-apps-gateway-config#upstreams) has per-platform setup details.
-</Note>
+Prefer the platform's workload identity over static keys; the [`upstreams` reference](/docs/en/claude-apps-gateway-config#upstreams) has per-platform setup details. For a cross-cloud pairing, such as an Amazon Bedrock upstream on GKE, set explicit credentials in the upstream's `auth` block instead.
 
 ### Cloud Run
 
@@ -109,9 +108,7 @@ Configure the service as follows:
 * Mount the config as a secret volume
 * Set `min-instances: 1` to avoid a cold OIDC discovery on first request
 
-<Note>
-  For a complete worked example on Google Cloud, covering Cloud Run or GKE, Cloud SQL, and Secret Manager, see [Deploy on Google Cloud](/docs/en/claude-apps-gateway-on-gcp).
-</Note>
+For a complete worked example on Google Cloud, covering Cloud Run or GKE, Cloud SQL, and Secret Manager, see [Deploy on Google Cloud](/docs/en/claude-apps-gateway-on-gcp).
 
 ### Push the gateway URL to developer machines
 
@@ -138,8 +135,6 @@ The gateway writes two streams to stderr, both JSON-friendly:
 The gateway serves `GET /healthz` as a liveness probe and `GET /readyz` as a readiness probe; `/readyz` verifies the store is reachable. Both are exempt from `access_control.allow_cidrs`, so probes keep working on a locked-down listener.
 
 The OAuth discovery document at `/.well-known/oauth-authorization-server` also returns `200` only after config load, OIDC discovery, upstream client construction, and Postgres migration all succeed, so it doubles as an end-to-end boot check.
-
-A running gateway also serves a description of the paths and request shapes it accepts at `<public_url>/protocol`, matched to the version you're running. The contents aren't stable across releases.
 
 ### Outage behavior
 
@@ -212,7 +207,7 @@ If you add your own egress controls, the gateway must reach the metadata server 
 
 Two threats are out of scope because they are your infrastructure to secure:
 
-* **A compromised gateway host**: the host both holds the upstream credential and distributes [managed settings](/docs/en/claude-apps-gateway-config#managed) to every connected developer, so control over the gateway's configuration is comparable to control over your MDM. The CLI's one-time approval dialog for shell-capable settings limits silent changes but doesn't replace host security.
+* **A compromised gateway host**: the host both holds the upstream credential and distributes [managed settings](/docs/en/claude-apps-gateway-config#managed) to every connected developer, so control over the gateway's configuration is comparable to control over your MDM. The CLI's [approval dialog](/docs/en/server-managed-settings#approval-memory) for shell-capable settings limits silent changes but doesn't replace host security.
 * **A malicious OIDC provider**: the provider signs the id\_tokens the gateway trusts, so it can assert any identity. Vetting and securing your IdP is your responsibility.
 
 ### User-code brute-force resistance
@@ -224,7 +219,7 @@ The gateway applies per-IP rate limits on the device-grant endpoints, configurab
 ### Compliance posture
 
 * **Data residency**: the gateway's own data plane sends nothing to Anthropic unless the Anthropic API is a configured upstream; when it is, your existing data-handling agreement applies to the inference path. Telemetry, audit, identity, and settings go only to the destinations you configure.
-* **Host-process traffic**: the host process is the Claude Code CLI, which can send startup analytics and update checks to Anthropic. For strict-egress deployments, set `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1` in the gateway's container environment.
+* **Host-process traffic**: the host process is the Claude Code CLI. `claude gateway` runs under the same third-party rules as Amazon Bedrock and Google Cloud's Agent Platform deployments and sends nothing to Anthropic. Before v2.1.227, the host process sent startup telemetry such as product version and platform, which setting `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1` in the container environment turned off. Those releases also sent one `HEAD` request at boot, with no body or credentials, to `/api/hello` on `https://api.anthropic.com`, or on `ANTHROPIC_BASE_URL` when the environment set it, unless the environment also set a proxy variable such as `HTTPS_PROXY` or an mTLS client certificate. They ignored the response, so blocking that request at the egress firewall didn't affect the gateway.
 * **Client analytics**: the CLI disables its own usage analytics while signed in to a gateway, and error reporting is off by default on third-party API surfaces.
 * **Client machines**: developers' CLIs still send WebFetch hostname checks and version checks to Anthropic unless `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1` and `skipWebFetchPreflight: true` are set. See [data usage](/docs/en/data-usage).
 * **Survey ratings**: the gateway credential disables the Anthropic-bound rating sink, so ratings aren't sent to Anthropic.
@@ -254,7 +249,7 @@ The gateway's stderr includes the audit event stream, the audit log records deve
 | CLI `/login`: `Could not resolve gateway host <host>`                                                                                                                       | The machine can't resolve the gateway's internal DNS name, typically because it isn't on the corporate network                                                                                                                                                                                                                 | Have the developer connect to your network or VPN, then retry `/login`                                                                                                                                                                                                                                                                                                                                                                  |
 | Boot exits with a config validation error naming `store.postgres_url`                                                                                                       | No Postgres configured; the gateway requires Postgres                                                                                                                                                                                                                                                                          | Set `store.postgres_url`. For local development, use a throwaway container: `docker run --rm -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust postgres`.                                                                                                                                                                                                                                                                                 |
 | Boot exits: `requires the native binary`                                                                                                                                    | Running under Node instead of the native binary                                                                                                                                                                                                                                                                                | Install Claude Code with one of the [standalone install methods](/docs/en/setup)                                                                                                                                                                                                                                                                                                                                                             |
-| Boot exits with an OIDC discovery error after `config.load`                                                                                                                 | `oidc.issuer` unreachable, or TLS chain not trusted                                                                                                                                                                                                                                                                            | Check the issuer is reachable from the pod and serves `/.well-known/openid-configuration`. Set `ca_cert_pem` for private PKI.                                                                                                                                                                                                                                                                                                           |
+| Boot exits with an OIDC discovery error after `config.load`                                                                                                                 | `oidc.issuer` unreachable, or TLS chain not trusted                                                                                                                                                                                                                                                                            | Check the issuer is reachable from the pod and serves `/.well-known/openid-configuration`. Set `ca_cert_pem` for private PKI. If the pod reaches the IdP only through a forward proxy, set [`oidc.use_proxy: true`](/docs/en/claude-apps-gateway-config#idp-requests-through-a-forward-proxy); on versions before v2.1.227, give the pod a direct route to each of the IdP's endpoints instead.                                              |
 | Boot exits with a Postgres permission error                                                                                                                                 | The database role lacks DDL rights on its schema                                                                                                                                                                                                                                                                               | Grant the role `CREATE` on the gateway's schema so it can create and alter its tables at boot                                                                                                                                                                                                                                                                                                                                           |
 | `/oauth/callback` shows "Sign-in could not be completed"                                                                                                                    | Email domain rejected, id\_token validation failed, or `email_verified` is explicitly `false`, which the gateway always rejects with no override                                                                                                                                                                               | Check `allowed_email_domains` and that the IdP returns a verified `email` claim. For `email_verified: false`, fix the IdP-side verification. If your IdP emits email under a different claim name, set `oidc.email_claim`.                                                                                                                                                                                                              |
 | Log: `token exchange failed: id_token missing email claim`                                                                                                                  | The IdP isn't including `email` in the id\_token by default. This rejection fires only when `allowed_email_domains` is set; without it, a missing email mints a session with no email                                                                                                                                          | Configure the IdP to emit `email` in the id\_token. Okta: add `email` to a custom authorization server's ID-token claims. Entra: add `email` as an optional claim on the app registration. PingFederate: enable an OpenID Connect Policy that emits `email`. If the IdP serves `email` from the userinfo endpoint but won't include it in the id\_token, such as the Okta org authorization server, set `oidc.userinfo_fallback: true`. |

@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/mcp-quickstart
-fetched_at: 2026-08-10T03:07:53.896535+00:00
+fetched_at: 2026-08-17T02:15:26.931743+00:00
 fetch_method: mintlify_md
 ---
 
@@ -89,7 +89,7 @@ The steps are the same for any server: add it, check the connection status, then
       You don't normally need to name a server in your prompt, since Claude chooses relevant tools on its own. Naming it here guarantees the demonstration goes through the new server rather than another tool, such as web fetch, that could answer the same question.
     </Info>
 
-    The first time Claude calls the server, it asks for permission to use the new tool. Approve it to continue. The tool call in Claude's output is labeled with the server name, which is how you confirm the answer came from the MCP server rather than Claude's built-in knowledge.
+    If Claude Code asks for permission the first time Claude calls the server, approve it. The tool call in Claude's output is labeled with the server name, which is how you confirm the answer came from the MCP server rather than Claude's built-in knowledge.
   </Step>
 
   <Step title="Remove the server">

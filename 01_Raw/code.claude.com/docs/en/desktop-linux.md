@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/desktop-linux
-fetched_at: 2026-08-10T03:07:50.472250+00:00
+fetched_at: 2026-08-17T02:15:24.114327+00:00
 fetch_method: mintlify_md
 ---
 
@@ -13,10 +13,10 @@ fetch_method: mintlify_md
 > Install and update the Claude desktop app on Ubuntu and Debian
 
 <Note>
-  Linux support for the Claude desktop app is in beta. The Chat, Cowork, and Code tabs are all available.
+  Linux support for the Claude desktop app is in beta.
 </Note>
 
-The desktop app on Linux gives you the same Chat, Cowork, and Claude Code experience as macOS and Windows: parallel sessions, visual diff review, an integrated terminal and editor, and live app preview. See [Use Claude Code Desktop](/docs/en/desktop) for the full feature reference.
+The desktop app on Linux gives you the same Chat, Cowork, and Claude Code experience as on macOS and Windows: parallel sessions, visual diff review, an integrated terminal and editor, and live app preview. See [Use Claude Code Desktop](/docs/en/desktop) for the feature reference.
 
 ## Requirements
 

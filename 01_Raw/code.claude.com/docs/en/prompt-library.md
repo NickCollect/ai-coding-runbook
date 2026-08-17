@@ -1,6 +1,6 @@
 ---
 source_url: https://code.claude.com/docs/en/prompt-library
-fetched_at: 2026-08-03T04:25:06.570664+00:00
+fetched_at: 2026-08-17T02:15:28.614989+00:00
 fetch_method: mintlify_md
 ---
 
@@ -1156,7 +1156,7 @@ export const text = {
   "implement-from-a-screenshot": {
     title: "Implement from a screenshot and self-check",
     teaches: "This gives Claude a verification loop: it renders, compares against the source image, and iterates without you pointing out each gap.",
-    next: "Use `/goal` to keep Claude iterating until the screenshots match"
+    next: "Use `/goal` to keep Claude iterating toward matching screenshots"
   },
   "follow-an-existing-pattern": {
     title: "Follow an existing pattern",
@@ -1196,7 +1196,7 @@ export const text = {
   "fill-gaps-from-a": {
     title: "Fill gaps from a coverage report",
     teaches: "Point at the coverage report instead of guessing what's untested. Claude reads the actual numbers and writes tests for the files that need them most.",
-    next: "Set this as a `/goal` so Claude keeps writing tests until coverage hits the target"
+    next: "Set this as a `/goal` so Claude keeps writing tests toward the coverage target"
   },
   "port-code-between-languages": {
     title: "Port code to another language",
@@ -1213,7 +1213,7 @@ export const text = {
   "optimize-against-a-measurable": {
     title: "Optimize against a measurable target",
     teaches: "Stating the metric and target gives Claude a clear definition of done.",
-    next: "Set this as a `/goal` so Claude keeps measuring and iterating until it hits the number"
+    next: "Set this as a `/goal` so Claude keeps measuring and iterating toward the number"
   },
   "fix-a-precise-visual": {
     title: "Fix a precise visual bug",
